@@ -217,6 +217,50 @@ The corpus **requires** ratification (INVARIANT Ω-010; GOV-04; GOV-03; LAW CM-0
 
 ---
 
+## 11A. EXTERNAL EXECUTION SUPPORT PROGRAM (EES-001)
+
+*(Cross-program navigation pointer. This section records the existence and location of a separate, downstream **support** program. It authorizes, performs, and creates nothing; it exercises no authority and alters no determination of the Constitutional Consolidation Program.)*
+
+The **External Execution Support Program (EES-001)** is a distinct, support-only program that succeeds the Constitutional Consolidation Program and the Constituent Authority Program Series. It exists to support future **external** actors who may seek to establish, validate, recognize, certify, and operationalize a legitimate constituent authority consistent with the corpus determinations. It holds **no** constituent, ratification, governance, or execution authority and **cannot** authorize EC-1 (see Section 11 and §11 of the Closure Report).
+
+### Program Registry Entry
+
+| Attribute | Value |
+|-----------|-------|
+| Program ID | **EES-001** |
+| Program Name | External Execution Support Program |
+| Status | **ACTIVE** |
+| Classification | Support Program |
+| Authority | NONE |
+| Governance Authority | NONE |
+| Constituent Authority | NONE |
+| Execution Authority | NONE |
+| Branch | `external-execution-support-program` |
+| Charter Artifact | `02-MASTER/UCOS-Ω∞-EXTERNAL-EXECUTION-SUPPORT-PROGRAM-CHARTER.md` |
+
+### EES Artifact Index
+
+| Artifact | Purpose | Status |
+|----------|---------|--------|
+| `02-MASTER/UCOS-Ω∞-EXTERNAL-EXECUTION-SUPPORT-PROGRAM-CHARTER.md` | Foundational charter for the EES-series; defines support-only mandate, scope, principles (EP-001…EP-010), success criteria (SC-001…006), and risks (PR-001…008). | ACTIVE |
+
+### Traceability References
+
+EES-001 is downstream of, and traceable back to, the following prior determinations. These references are navigational only; none of the referenced determinations is altered.
+
+| Traceability Link | Target | Relationship |
+|-------------------|--------|--------------|
+| Constitutional Consolidation Closure | `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-CONSOLIDATION-CLOSURE-REPORT.md` | Predecessor determination — established that constituent authority is absent/non-derivable and that an external constituent act (EC-1) is required. EES-001 supports (does not perform) that external act. |
+| CA-001 | Constituent Authority Program Series (external/prior) | Determined establishment is externally executable. |
+| CA-002 | Constituent Authority Program Series (external/prior) | Determined validation is objectively definable. |
+| CA-003 | Constituent Authority Program Series (external/prior) | Determined certification requirements are identifiable. |
+| CA-004 | Constituent Authority Program Series (external/prior) | Determined internal readiness is complete. |
+| CA-005 | Constituent Authority Program Series (external/prior) | Determined remaining dependencies are external. |
+
+*Note: CA-001…CA-005 are the determinations of the Constituent Authority Program Series referenced in the EES-001 charter background. They are recorded here as logical traceability targets; no CA-series artifact is present in, created by, or modified within this repository.*
+
+---
+
 ## 12. PROGRAM CLOSURE STATEMENT
 
 The Constitutional Consolidation Program is complete.
