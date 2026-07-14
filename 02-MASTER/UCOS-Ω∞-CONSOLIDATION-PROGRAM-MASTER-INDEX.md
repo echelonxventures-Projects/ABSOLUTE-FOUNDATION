@@ -240,9 +240,10 @@ The **External Execution Support Program (EES-001)** is a distinct, support-only
 
 ### EES Artifact Index
 
-| Artifact | Purpose | Status |
-|----------|---------|--------|
-| `02-MASTER/UCOS-Ω∞-EXTERNAL-EXECUTION-SUPPORT-PROGRAM-CHARTER.md` | Foundational charter for the EES-series; defines support-only mandate, scope, principles (EP-001…EP-010), success criteria (SC-001…006), and risks (PR-001…008). | ACTIVE |
+| Artifact | Ref | Purpose | Status |
+|----------|-----|---------|--------|
+| `02-MASTER/UCOS-Ω∞-EXTERNAL-EXECUTION-SUPPORT-PROGRAM-CHARTER.md` | EES-001 | Foundational charter for the EES-series; defines support-only mandate, scope, principles (EP-001…EP-010), success criteria (SC-001…006), and risks (PR-001…008). | ACTIVE |
+| `02-MASTER/UCOS-Ω∞-EXTERNAL-ACTOR-QUALIFICATION-FRAMEWORK.md` | EES-002 | Qualification-only framework defining external-actor qualification principles (EQP-001…010), criteria (mandatory EQC-M-01…08 / supporting EQC-S-01…04), disqualification conditions (EDQ-001…008), evidence requirements, readiness states (RQ-0…RQ-4), risk model (EQR-001…008), and traceability. Determination: qualification objectively definable and non-constitutive (Option 1 — Complete). | ACTIVE |
 
 ### Traceability References
 
@@ -251,11 +252,11 @@ EES-001 is downstream of, and traceable back to, the following prior determinati
 | Traceability Link | Target | Relationship |
 |-------------------|--------|--------------|
 | Constitutional Consolidation Closure | `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-CONSOLIDATION-CLOSURE-REPORT.md` | Predecessor determination — established that constituent authority is absent/non-derivable and that an external constituent act (EC-1) is required. EES-001 supports (does not perform) that external act. |
-| CA-001 | Constituent Authority Program Series (external/prior) | Determined establishment is externally executable. |
-| CA-002 | Constituent Authority Program Series (external/prior) | Determined validation is objectively definable. |
-| CA-003 | Constituent Authority Program Series (external/prior) | Determined certification requirements are identifiable. |
-| CA-004 | Constituent Authority Program Series (external/prior) | Determined internal readiness is complete. |
-| CA-005 | Constituent Authority Program Series (external/prior) | Determined remaining dependencies are external. |
+| CA-001 | Constituent Authority Discovery (external/prior) | Determined establishment is externally executable. |
+| CA-002 | Constituent Authority Establishment Design (external/prior) | Determined validation is objectively definable. |
+| CA-003 | Constituent Authority Validation Framework (external/prior) | Determined certification requirements are identifiable. |
+| CA-004 | External Execution Readiness Package (external/prior) | Determined internal readiness is complete. |
+| CA-005 | CA-Series Closure Report (external/prior) | Determined remaining dependencies are external. |
 
 *Note: CA-001…CA-005 are the determinations of the Constituent Authority Program Series referenced in the EES-001 charter background. They are recorded here as logical traceability targets; no CA-series artifact is present in, created by, or modified within this repository.*
 
