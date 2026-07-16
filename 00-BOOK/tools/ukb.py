@@ -620,9 +620,12 @@ def _iter_files():
 # ledger — append-only Universal ID + page allocation
 # ---------------------------------------------------------------------------
 def load_ledger():
+    # `by_execution` (EXEC-REG-001) is an append-only map of execution KEY ->
+    # {execution_id, first_seen} sharing the ONE identity authority (category_seq).
+    # Additive to the ledger; a legacy ledger lacking it gets it on next load.
     return _load_json(LEDGER_PATH, {"version": 1, "by_path": {}, "page_cursor": 0,
                                     "category_seq": {}, "discovered_volumes": {},
-                                    "volume_seq": 0})
+                                    "volume_seq": 0, "by_execution": {}})
 
 
 def allocate(ledger, relpath, category, page_count):
@@ -1001,6 +1004,10 @@ DIMENSION_STATUS = {
     "production": "NOT_STARTED",
     "operational": "NOT_STARTED",
     "release": "NOT_STARTED",
+    # EXEC-REG-001 (RUNTIME-006) DOMAIN-C execution dimension baseline. Append-only;
+    # rolled up automatically by the execution-register connector when executions
+    # exist. NEVER a DOMAIN-B/roadmap projection (STATUS-001 §2).
+    "execution": "NOT_STARTED",
     "portfolio": "IN_PROGRESS",
 }
 
@@ -1502,13 +1509,20 @@ def cmd_validate(args):
         print("jsonschema not installed — ran structural checks only "
               "(pip install jsonschema for full schema validation).")
 
+    # EXEC-REG-001: the execution register's structural integrity is part of the
+    # atomic transaction's validation (register.sh §7 Phase 5). Vacuous ([],0) when
+    # the register is empty/absent, so this never fails a corpus without executions.
+    exec_problems, exec_count = validate_executions()
+    problems += exec_problems
+
     if problems:
         print(f"\nVALIDATION FAILED — {len(problems)} problem(s):")
         for p in problems[:50]:
             print("  -", p)
         sys.exit(1)
     print(f"\nVALIDATION PASSED — {len(arts)} artifacts, append-only page ledger intact, "
-          f"referential integrity OK.")
+          f"referential integrity OK; {exec_count} execution(s) — forward-only "
+          f"append-only lifecycle intact.")
 
 
 def _enforcement_audit(record):
@@ -1627,6 +1641,282 @@ def cmd_enforce(args):
           f"can silently enter the corpus.")
 
 
+# ---------------------------------------------------------------------------
+# EXEC-REG-001 — UCOS AUTONOMOUS EXECUTION REGISTER (RUNTIME EXTENSION)
+#
+# Realizes RUNTIME-006 (Universal Execution Architecture) as a record-only,
+# append-only, evidence-derived, NON-CONSTITUTIVE runtime register of execution
+# INSTANCES. Execution identities are minted from the SAME append-only Universal
+# Identity ledger authority as every other Universal Entity (allocate_execution
+# reuses ledger["category_seq"]); there is no second identity scheme (EXL-02).
+# The lifecycle engine enforces the forward-only RUNTIME-006 D7 lifecycle
+# (EXL-07/10). The register is NOT a runtime engine (EXL-23; authorized reading:
+# deterministic repository machinery is permitted) — it selects no technology and
+# executes nothing; it RECORDS the typed, identified, bounded, lineage-linked
+# behavioral progression of foundation constructs. Registration state is kept
+# synchronized by the same atomic transaction as every other register
+# (register.sh: ukb validate Phase 5, ukbx sync Phase 2, ukbx certify Phase 8).
+# ---------------------------------------------------------------------------
+EXECUTIONS_PATH = os.path.join(DATA_DIR, C.EXECUTION_STORE_FILE)
+
+_SECRET_HINTS = ("password=", "secret=", "api_key=", "apikey=", "token=ghp_",
+                 "-----begin", "aws_secret_access_key")
+
+
+def _secret_free_text(text) -> bool:
+    """RR-07 guard: reject obvious secret material from execution content."""
+    low = str(text).lower()
+    return not any(h in low for h in _SECRET_HINTS)
+
+
+def _exec_cycle(graph):
+    """Return a node on a cycle in the execution-dependency graph, else None
+    (EXL-17 requires acyclic, downward-only, closed dependencies)."""
+    WHITE, GREY, BLACK = 0, 1, 2
+    color = {n: WHITE for n in graph}
+
+    def dfs(u):
+        color[u] = GREY
+        for v in graph.get(u, []):
+            if color.get(v, WHITE) == GREY:
+                return True
+            if color.get(v, WHITE) == WHITE and dfs(v):
+                return True
+        color[u] = BLACK
+        return False
+
+    for n in list(graph):
+        if color[n] == WHITE and dfs(n):
+            return n
+    return None
+
+
+def allocate_execution(ledger, exec_key):
+    """Mint (or return) an append-only Universal execution identity for exec_key.
+    Reuses the ONE identity authority (the id-ledger category_seq counter) and the
+    UCOS-<CATEGORY>-NNNNNN convention; keyed by a stable execution key so
+    re-declaration is idempotent. Executions are NOT paginated (Universal Pages
+    index the book's documents, not runtime instances). Append-only: an allocated
+    execution id is never reused, renumbered, or reordered (P4; EXL-02)."""
+    ledger.setdefault("by_execution", {})
+    entry = ledger["by_execution"].get(exec_key)
+    if entry:
+        return entry["execution_id"]
+    cat = C.EXECUTION_CATEGORY
+    seq = ledger["category_seq"].get(cat, 0) + 1
+    ledger["category_seq"][cat] = seq
+    eid = f"UCOS-{cat}-{seq:06d}"
+    ledger["by_execution"][exec_key] = {"execution_id": eid, "first_seen": _now()}
+    return eid
+
+
+def _exec_load():
+    return _load_json(EXECUTIONS_PATH, {
+        "generated_at": None,
+        "generator_version": C.GENERATOR_VERSION,
+        "standard": "RUNTIME-006 Universal Execution Architecture "
+                    "(record-only; append-only; non-constitutive)",
+        "count": 0, "executions": {}})
+
+
+def _exec_save(doc):
+    doc["count"] = len(doc.get("executions", {}))
+    doc["generated_at"] = _now()
+    _dump_json(EXECUTIONS_PATH, doc)
+
+
+def _exec_subject_index():
+    """(uid_set, native->uid) over the registered artifact registry so an
+    execution subject may be given as either a Universal ID or a native ID and is
+    resolved to the ONE registered identity — never fabricated (EXL-02)."""
+    arts = _load_artifacts()
+    uids = {a["universal_id"] for a in arts}
+    native = {a["native_id"]: a["universal_id"] for a in arts if a.get("native_id")}
+    return uids, native
+
+
+def validate_executions():
+    """Structural integrity of the execution register (RUNTIME-006 conformance).
+    Returns (problems, count). An absent/empty register is vacuously valid ([],0)."""
+    if not os.path.exists(EXECUTIONS_PATH):
+        return [], 0
+    doc = _exec_load()
+    execs = doc.get("executions", {})
+    ledger = load_ledger()
+    minted = {v["execution_id"] for v in ledger.get("by_execution", {}).values()}
+    try:
+        uids, _native = _exec_subject_index()
+    except SystemExit:
+        uids = set()
+    problems = []
+    dep_graph = {}
+    for eid, r in execs.items():
+        if r.get("execution_id") != eid:
+            problems.append(f"{eid}: record execution_id mismatch ({r.get('execution_id')})")
+        if eid not in minted:
+            problems.append(f"{eid}: not minted from the id-ledger identity authority (EXL-02)")
+        if r.get("lifecycle_state") not in C.EXECUTION_LIFECYCLE:
+            problems.append(f"{eid}: illegal lifecycle_state {r.get('lifecycle_state')}")
+        if r.get("type") not in C.EXECUTION_TYPES:
+            problems.append(f"{eid}: illegal type {r.get('type')}")
+        if r.get("category") not in C.EXECUTION_CATEGORIES:
+            problems.append(f"{eid}: illegal category {r.get('category')}")
+        trs = r.get("transitions", [])
+        if [t.get("seq") for t in trs] != list(range(1, len(trs) + 1)):
+            problems.append(f"{eid}: transition seq not monotonic append-only")
+        if trs:
+            if trs[0].get("from") is not None or trs[0].get("to") != C.EXECUTION_INITIAL_STATE:
+                problems.append(f"{eid}: first transition must be →{C.EXECUTION_INITIAL_STATE}")
+            for a, b in zip(trs, trs[1:]):
+                if b.get("from") != a.get("to"):
+                    problems.append(f"{eid}: transition #{b.get('seq')} from-state discontinuity")
+                if b.get("to") not in C.EXECUTION_TRANSITIONS.get(a.get("to"), ()):
+                    problems.append(f"{eid}: illegal transition {a.get('to')} → {b.get('to')} "
+                                    f"(forward-only; EXL-07/10)")
+            if trs[-1].get("to") != r.get("lifecycle_state"):
+                problems.append(f"{eid}: lifecycle_state disagrees with last transition")
+        subj = r.get("subject_universal_id")
+        if subj and uids and subj not in uids:
+            problems.append(f"{eid}: subject {subj} does not resolve to a registered artifact")
+        deps = r.get("dependencies", [])
+        for d in deps:
+            if d not in execs:
+                problems.append(f"{eid}: dependency {d} does not resolve to a registered execution")
+        dep_graph[eid] = [d for d in deps if d in execs]
+        blob = json.dumps({"n": r.get("name"), "c": r.get("context"),
+                           "b": r.get("boundary"), "t": [t.get("note") for t in trs]})
+        if not _secret_free_text(blob):
+            problems.append(f"{eid}: secret-bearing content rejected (RR-07)")
+    cyc = _exec_cycle(dep_graph)
+    if cyc:
+        problems.append(f"execution dependency cycle via {cyc} (EXL-17 requires acyclic)")
+    return problems, len(execs)
+
+
+def _exec_declare(args):
+    if not args.key or not args.name:
+        sys.exit("exec declare requires --key and --name")
+    etype = args.type or C.EXECUTION_DEFAULT_TYPE
+    ecat = args.category or C.EXECUTION_DEFAULT_CATEGORY
+    if etype not in C.EXECUTION_TYPES:
+        sys.exit(f"invalid --type {etype}; one of {C.EXECUTION_TYPES}")
+    if ecat not in C.EXECUTION_CATEGORIES:
+        sys.exit(f"invalid --category {ecat}; one of {C.EXECUTION_CATEGORIES}")
+    subject = None
+    if args.subject:
+        uids, native = _exec_subject_index()
+        subject = args.subject if args.subject in uids else native.get(args.subject)
+        if not subject:
+            sys.exit(f"subject does not resolve to a registered artifact: {args.subject} "
+                     "(no fabrication; declare against a real Universal/native ID; EXL-02)")
+    for blob in (args.name, args.context, args.start, args.terminal, args.note):
+        if blob and not _secret_free_text(blob):
+            sys.exit("declaration content appears to contain a secret; rejected (RR-07)")
+    deps = sorted(set(args.depends or []))
+    ledger = load_ledger()
+    doc = _exec_load()
+    for d in deps:
+        if d not in doc["executions"]:
+            sys.exit(f"execution dependency does not resolve: {d} "
+                     "(declare dependencies first; EXL-17 closed/acyclic)")
+    eid = allocate_execution(ledger, args.key)
+    if eid in doc["executions"]:
+        _dump_json(LEDGER_PATH, ledger)          # idempotent re-declare — no-op
+        print(f"execution already declared: {eid} (idempotent no-op)")
+        return
+    now = _now()
+    doc["executions"][eid] = {
+        "execution_id": eid, "execution_key": args.key, "name": args.name,
+        "type": etype, "category": ecat,
+        "subject_universal_id": subject,
+        "context": args.context or None,
+        "boundary": {"start_condition": args.start or None,
+                     "terminal_condition": args.terminal or None},
+        "dependencies": deps,
+        "lifecycle_state": C.EXECUTION_INITIAL_STATE,
+        "transitions": [{"seq": 1, "from": None, "to": C.EXECUTION_INITIAL_STATE,
+                         "at": now, "note": args.note or "declared"}],
+        "first_seen": now, "last_transition_at": now, "last_transition_seq": 1,
+    }
+    _dump_json(LEDGER_PATH, ledger)
+    _exec_save(doc)
+    print(f"declared {eid}  [{etype}/{ecat}] subject={subject or '—'} state=declared")
+
+
+def _exec_transition(args, target):
+    if not args.id:
+        sys.exit("exec transition requires --id")
+    if target not in C.EXECUTION_LIFECYCLE:
+        sys.exit(f"invalid target state: {target}")
+    if args.note and not _secret_free_text(args.note):
+        sys.exit("transition note appears to contain a secret; rejected (RR-07)")
+    doc = _exec_load()
+    rec = doc["executions"].get(args.id)
+    if not rec:
+        sys.exit(f"unknown execution: {args.id}")
+    cur = rec["lifecycle_state"]
+    if cur == target:
+        print(f"{args.id} already in state {target} (idempotent no-op)")
+        return
+    if target not in C.EXECUTION_TRANSITIONS.get(cur, ()):
+        allowed = C.EXECUTION_TRANSITIONS.get(cur, ())
+        sys.exit(f"illegal transition {cur} → {target} (forward-only; "
+                 f"legal: {allowed or 'none — terminal'}; RUNTIME-006 EXL-07/10)")
+    seq = rec["last_transition_seq"] + 1
+    now = _now()
+    rec["transitions"].append({"seq": seq, "from": cur, "to": target,
+                               "at": now, "note": args.note or target})
+    rec["lifecycle_state"] = target
+    rec["last_transition_at"] = now
+    rec["last_transition_seq"] = seq
+    _exec_save(doc)
+    print(f"{args.id}  {cur} → {target}  (transition #{seq})")
+
+
+def cmd_exec(args):
+    """EXEC-REG-001 execution register CLI (RUNTIME-006)."""
+    op = args.op
+    if op == "declare":
+        return _exec_declare(args)
+    if op == "list":
+        doc = _exec_load()
+        rows = list(doc["executions"].values())
+        if getattr(args, "state", None):
+            rows = [r for r in rows if r["lifecycle_state"] == args.state]
+        if getattr(args, "subject", None):
+            rows = [r for r in rows if r.get("subject_universal_id") == args.subject]
+        for r in sorted(rows, key=lambda r: r["execution_id"]):
+            print(f"{r['execution_id']}  {r['lifecycle_state']:10s} "
+                  f"[{r['type']}/{r['category']}] subject={r.get('subject_universal_id') or '—'}  {r['name']}")
+        print(f"\n{len(rows)} execution(s).")
+        return
+    if op == "show":
+        doc = _exec_load()
+        rec = doc["executions"].get(args.id)
+        if not rec:
+            sys.exit(f"unknown execution: {args.id}")
+        print(json.dumps(rec, ensure_ascii=False, indent=2))
+        return
+    if op == "validate":
+        problems, count = validate_executions()
+        if problems:
+            print(f"EXECUTION REGISTER VALIDATION FAILED — {len(problems)} problem(s):")
+            for p in problems[:50]:
+                print("  -", p)
+            sys.exit(1)
+        print(f"EXECUTION REGISTER VALIDATION PASSED — {count} execution(s); minted from "
+              f"the id-ledger authority; forward-only append-only lifecycle; acyclic "
+              f"dependencies; subjects resolve; secret-free.")
+        return
+    verb_to_state = {"transition": getattr(args, "to", None), "activate": "active",
+                     "suspend": "suspended", "resume": "active",
+                     "complete": "completed", "terminate": "terminated"}
+    target = verb_to_state.get(op)
+    if not target:
+        sys.exit(f"unknown exec op: {op}")
+    return _exec_transition(args, target)
+
+
 def main():
     ap = argparse.ArgumentParser(prog="ukb", description="UCOS Ω∞ Universal Master Knowledge Book engine.")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -1654,10 +1944,29 @@ def main():
     ep.add_argument("--strict", action="store_true",
                     help="Also fail on artifacts left in the OTHER/MISC classification fallback.")
 
+    xp = sub.add_parser("exec", help="EXEC-REG-001 execution register (RUNTIME-006): declare / "
+                        "transition / activate / suspend / resume / complete / terminate / "
+                        "list / show / validate execution instances.")
+    xp.add_argument("op", choices=["declare", "transition", "activate", "suspend", "resume",
+                                   "complete", "terminate", "list", "show", "validate"])
+    xp.add_argument("--id", help="Execution Universal ID (UCOS-EXEC-NNNNNN).")
+    xp.add_argument("--key", help="Stable execution key (idempotent declaration key).")
+    xp.add_argument("--name", help="Human-readable execution name.")
+    xp.add_argument("--type", help=f"Execution type: {', '.join(C.EXECUTION_TYPES)}.")
+    xp.add_argument("--category", help=f"Execution category: {', '.join(C.EXECUTION_CATEGORIES)}.")
+    xp.add_argument("--subject", help="Subject artifact (Universal or native ID) the execution progresses.")
+    xp.add_argument("--context", help="Bounded execution context (scope).")
+    xp.add_argument("--start", help="Explicit start condition (boundary).")
+    xp.add_argument("--terminal", help="Explicit terminal condition (boundary).")
+    xp.add_argument("--to", help="Target lifecycle state for `transition`.")
+    xp.add_argument("--note", help="Transition/declaration note (recorded, secret-free).")
+    xp.add_argument("--depends", nargs="*", help="Execution dependencies (existing UCOS-EXEC-* ids).")
+    xp.add_argument("--state", help="Filter `list` by lifecycle state.")
+
     args = ap.parse_args()
     {"build": cmd_build, "search": cmd_search, "trace": cmd_trace,
      "evolve": cmd_evolve, "stats": cmd_stats, "validate": cmd_validate,
-     "enforce": cmd_enforce}[args.cmd](args)
+     "enforce": cmd_enforce, "exec": cmd_exec}[args.cmd](args)
 
 
 if __name__ == "__main__":

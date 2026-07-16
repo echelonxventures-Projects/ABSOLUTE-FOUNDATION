@@ -30,13 +30,18 @@ SOURCES = {
     # Sources are pluggable (UMB-012 §4; AUTH-INF-001 CR-INF-003); this is an
     # append-only addition to the open source set — no existing source changed.
     "GIT",
+    # EXEC-REG-001 (RUNTIME-006): the append-only execution register is a LIVE,
+    # credential-free DOMAIN-C source. Append-only addition to the open source set.
+    "EXECUTION",
 }
 
 DIMENSIONS = [
     "architecture", "implementation", "build", "unit_testing",
     "integration_testing", "functional_testing", "performance_testing",
     "security", "certification", "deployment", "production", "operational",
-    "release", "incident", "quality", "portfolio",
+    # EXEC-REG-001 (RUNTIME-006) DOMAIN-C runtime dimension. Append-only; no
+    # existing dimension is renamed or reordered.
+    "release", "execution", "incident", "quality", "portfolio",
 ]
 
 # Blocking-view order: least-advanced state with members wins (risk never hidden).

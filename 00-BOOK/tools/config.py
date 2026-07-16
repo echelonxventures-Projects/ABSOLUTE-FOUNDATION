@@ -1036,3 +1036,77 @@ CERT_EVIDENCE_FILE = "certification.json"
 
 # Human-navigable certification report (generated markdown under REGISTRIES/).
 CERT_REPORT_FILE = "CERTIFICATION-REGISTRY.md"
+
+
+
+# ===========================================================================
+# EXEC-REG-001 — UCOS AUTONOMOUS EXECUTION REGISTER (RUNTIME EXTENSION)
+#               (append-only).
+#
+# DATA ONLY. Realizes RUNTIME-006 (Universal Execution Architecture) as a
+# record-only, append-only, evidence-derived, NON-CONSTITUTIVE runtime register
+# of execution INSTANCES. It hard-codes NO execution, subject, or limit; it
+# declares only the identity namespace, the store file name, the forward-only
+# lifecycle model (RUNTIME-006 D7 / EXL-07/10), the orthogonal RUNTIME-006 D5
+# facets, and the DOMAIN-C signal mapping. It modifies no rule/chain/root/volume/
+# metadata/relationship/enforcement/sync/intel/cert block above (REG-AUTO-001
+# L4/L5; UCI-001 CP-3/CP-6; AUTH-INF-001 infinite expansion). Execution identity
+# is minted from the ONE Universal Identity ledger authority (id-ledger.json
+# category_seq via ukb.py::allocate_execution) — NOT a second identity scheme
+# (RUNTIME-006 EXL-02). The register is not a runtime engine (EXL-23; the
+# authorized interpretation: deterministic repository machinery is permitted).
+# ===========================================================================
+
+# Identity namespace for execution INSTANCES (minted UCOS-EXEC-NNNNNN from the
+# shared append-only category_seq counter; never a second authority; append-only).
+EXECUTION_CATEGORY = "EXEC"
+
+# Append-only execution register store (runtime overlay under the already-excluded
+# DATA/; regenerated deterministically; never an artifact and never self-registered).
+EXECUTION_STORE_FILE = "executions.json"
+
+# RUNTIME-006 D7 lifecycle (forward-only). suspended/resumed cycle WITHIN the
+# active phase (EXL-07); completed/terminated are terminal (EXL-10). No backward
+# transition exists.
+EXECUTION_LIFECYCLE = ("declared", "active", "suspended", "completed", "terminated")
+EXECUTION_INITIAL_STATE = "declared"
+EXECUTION_TERMINAL_STATES = ("completed", "terminated")
+
+# Legal forward-only transitions (RUNTIME-006 D7 / EXL-07/10). Any transition
+# outside this map is rejected (fail-closed); a self-transition to the current
+# state is an idempotent no-op.
+EXECUTION_TRANSITIONS = {
+    "declared":   ("active", "terminated"),
+    "active":     ("suspended", "completed", "terminated"),
+    "suspended":  ("active", "terminated"),
+    "completed":  (),
+    "terminated": (),
+}
+
+# RUNTIME-006 D5 orthogonal facets (membership by ENG-004-style typing; RXL-01/03).
+EXECUTION_TYPES = ("atomic", "composite", "recurring", "conditional")
+EXECUTION_CATEGORIES = ("primitive-behavior", "workflow-step", "agent-driven", "orchestrated")
+EXECUTION_DEFAULT_TYPE = "atomic"
+EXECUTION_DEFAULT_CATEGORY = "primitive-behavior"
+
+# The DOMAIN-C twin/control-tower dimension executions roll up to (STATUS-001 §1;
+# NEVER projected onto DOMAIN-A/B/D/E — §2 non-projection law). Append-only.
+EXECUTION_DIMENSION = "execution"
+
+# Lifecycle -> signal-state mapping. Targets are members of
+# connectors.base.STATE_ORDER so the blocking-view roll-up places them
+# deterministically. `terminated` maps to BLOCKED so a non-successful terminal
+# execution surfaces as risk (never hidden), mirroring the blocking-view semantics.
+EXECUTION_STATE_TO_SIGNAL = {
+    "declared":   "PLANNED",
+    "active":     "IN_PROGRESS",
+    "suspended":  "STALE",
+    "completed":  "COMPLETE",
+    "terminated": "BLOCKED",
+}
+
+# Append the execution integrity domain to the certification runtime (append-only;
+# a new criterion is a new domain, never a rewrite — CR-INF-007). Registration/
+# runtime certification only; artifact-level DOMAIN-D certification stays separate
+# and evidence-based (STATUS-001).
+CERT_INTEGRITY_DOMAINS = CERT_INTEGRITY_DOMAINS + ("execution",)

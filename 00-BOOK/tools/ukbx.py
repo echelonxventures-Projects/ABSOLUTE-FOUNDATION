@@ -1108,8 +1108,54 @@ def _certify_domains():
          "detail": f"exists({root}) cited {len(smoke.get('citations', []))} ids"},
     ])
 
+    # 10) EXECUTION-REGISTER INTEGRITY (EXEC-REG-001 / RUNTIME-006) — execution
+    #     instances minted from the ONE identity authority (EXL-02); forward-only
+    #     append-only lifecycle (EXL-07/10); subjects + dependencies resolve
+    #     (referential integrity); dependency graph acyclic (EXL-17). DOMAIN-C
+    #     record-only; never a DOMAIN-B/roadmap projection (STATUS-001 §2). An
+    #     empty/absent register passes vacuously.
+    execs = _load(os.path.join(DATA_DIR, C.EXECUTION_STORE_FILE),
+                  {"executions": {}}).get("executions", {})
+    minted = {v["execution_id"] for v in ledger.get("by_execution", {}).values()}
+    unminted = sorted(e for e in execs if e not in minted)
+    bad_lifecycle = []
+    bad_ref = []
+    edep = {}
+    for e, r in execs.items():
+        if r.get("lifecycle_state") not in C.EXECUTION_LIFECYCLE:
+            bad_lifecycle.append(e)
+            continue
+        trs = r.get("transitions", [])
+        if [t.get("seq") for t in trs] != list(range(1, len(trs) + 1)):
+            bad_lifecycle.append(e)
+        else:
+            for a, b in zip(trs, trs[1:]):
+                if b.get("to") not in C.EXECUTION_TRANSITIONS.get(a.get("to"), ()):
+                    bad_lifecycle.append(e)
+                    break
+            if trs and trs[-1].get("to") != r.get("lifecycle_state"):
+                bad_lifecycle.append(e)
+        subj = r.get("subject_universal_id")
+        if subj and subj not in by_uid:
+            bad_ref.append(f"{e}:subject")
+        for d in r.get("dependencies", []):
+            if d not in execs:
+                bad_ref.append(f"{e}->{d}")
+        edep[e] = [d for d in r.get("dependencies", []) if d in execs]
+    ecyc = _has_cycle(edep)
+    dom("execution", [
+        {"name": "every execution minted from the id-ledger identity authority (EXL-02)",
+         "pass": not unminted, "detail": unminted[:5] or f"{len(execs)} executions ledgered"},
+        {"name": "forward-only append-only lifecycle (RUNTIME-006 EXL-07/10)",
+         "pass": not bad_lifecycle, "detail": sorted(set(bad_lifecycle))[:5] or "forward-only, append-only"},
+        {"name": "subjects + dependencies resolve (referential integrity)",
+         "pass": not bad_ref, "detail": bad_ref[:5] or "all resolve"},
+        {"name": "execution dependency graph acyclic (EXL-17)",
+         "pass": not ecyc, "detail": "acyclic" if not ecyc else f"cycle via {ecyc}"},
+    ])
+
     return D, {"artifacts": len(arts), "edges": len(rels), "change_events": len(ce),
-               "signals": len(sigs), "lineage_nodes": len(ln)}
+               "signals": len(sigs), "lineage_nodes": len(ln), "executions": len(execs)}
 
 
 def _write_cert_report(cert):
