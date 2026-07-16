@@ -1,0 +1,5 @@
+# UCOS Ω∞ — machinery transients (UMB-IMP-001). The registration re-entrancy lock
+# is created/removed by register.sh and must never be committed or seen as drift.
+00-BOOK/tools/.register.lock
+__pycache__/
+*.pyc

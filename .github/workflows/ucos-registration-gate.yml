@@ -1,0 +1,35 @@
+name: UCOS Registration & Enforcement Gate
+
+# REG-AUTO-001 §16.3 / UMB-IMP-001 gate 3 — the authoritative backstop, independent
+# of any local environment. On every push / pull request it runs the Atomic
+# Registration Transaction with its pre/post enforcement gates and the drift gate.
+# A non-zero exit blocks the merge, so no unregistered, unclassified, invalid, or
+# unsynchronized artifact can enter a protected branch. Fully config-driven
+# (register.sh + config.py); no program/volume/family is enumerated here.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  registration-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install optional validators
+        run: pip install jsonschema || true
+
+      - name: Pre-registration enforcement gate (UMB-IMP-001)
+        run: python3 00-BOOK/tools/ukb.py enforce --pre
+
+      - name: Atomic Registration Transaction + drift gate (REG-AUTO-001 / UMB-IMP-001)
+        run: bash 00-BOOK/tools/register.sh --guard

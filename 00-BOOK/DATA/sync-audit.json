@@ -1,0 +1,645 @@
+{
+  "version": 1,
+  "runs": [
+    {
+      "at": "2026-07-16T03:12:48+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 5,
+      "per_connector": [
+        {
+          "connector": "github-actions",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:05:00Z",
+          "cursor_after": "2026-07-15T08:05:00Z"
+        },
+        {
+          "connector": "kubernetes",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:33:00Z",
+          "cursor_after": "2026-07-15T08:33:00Z"
+        },
+        {
+          "connector": "prometheus",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:22:00Z",
+          "cursor_after": "2026-07-15T08:22:00Z"
+        },
+        {
+          "connector": "sonarqube",
+          "status": "OK",
+          "events": 2,
+          "new_signals": 2,
+          "duplicates": 0,
+          "cursor_before": null,
+          "cursor_after": "2026-07-15T08:44:00Z"
+        },
+        {
+          "connector": "trivy",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:12:00Z",
+          "cursor_after": "2026-07-15T08:12:00Z"
+        }
+      ],
+      "new_signals": 2,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 1
+    },
+    {
+      "at": "2026-07-16T03:13:02+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 5,
+      "per_connector": [
+        {
+          "connector": "github-actions",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:05:00Z",
+          "cursor_after": "2026-07-15T08:05:00Z"
+        },
+        {
+          "connector": "kubernetes",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:33:00Z",
+          "cursor_after": "2026-07-15T08:33:00Z"
+        },
+        {
+          "connector": "prometheus",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:22:00Z",
+          "cursor_after": "2026-07-15T08:22:00Z"
+        },
+        {
+          "connector": "sonarqube",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:44:00Z",
+          "cursor_after": "2026-07-15T08:44:00Z"
+        },
+        {
+          "connector": "trivy",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:12:00Z",
+          "cursor_after": "2026-07-15T08:12:00Z"
+        }
+      ],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 2
+    },
+    {
+      "at": "2026-07-16T03:13:02+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 0,
+      "per_connector": [],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 3
+    },
+    {
+      "at": "2026-07-16T03:13:51+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "recovery-probe",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 1,
+      "per_connector": [
+        {
+          "connector": "recovery-probe",
+          "status": "RECOVERED",
+          "error": "RuntimeError: simulated upstream outage",
+          "cursor_before": null,
+          "cursor_after": null
+        }
+      ],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [
+        "recovery-probe"
+      ],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 4
+    },
+    {
+      "at": "2026-07-16T03:16:38+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 0,
+      "per_connector": [],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 5
+    },
+    {
+      "at": "2026-07-16T03:29:06+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 4,
+      "per_connector": [
+        {
+          "connector": "github-actions",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:05:00Z",
+          "cursor_after": "2026-07-15T08:05:00Z"
+        },
+        {
+          "connector": "kubernetes",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:33:00Z",
+          "cursor_after": "2026-07-15T08:33:00Z"
+        },
+        {
+          "connector": "prometheus",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:22:00Z",
+          "cursor_after": "2026-07-15T08:22:00Z"
+        },
+        {
+          "connector": "trivy",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:12:00Z",
+          "cursor_after": "2026-07-15T08:12:00Z"
+        }
+      ],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 6
+    },
+    {
+      "at": "2026-07-16T03:32:21+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 0,
+      "per_connector": [],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 7
+    },
+    {
+      "at": "2026-07-16T03:43:15+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 5,
+      "per_connector": [
+        {
+          "connector": "github-actions",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:05:00Z",
+          "cursor_after": "2026-07-15T08:05:00Z"
+        },
+        {
+          "connector": "kubernetes",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:33:00Z",
+          "cursor_after": "2026-07-15T08:33:00Z"
+        },
+        {
+          "connector": "prometheus",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:22:00Z",
+          "cursor_after": "2026-07-15T08:22:00Z"
+        },
+        {
+          "connector": "sonarqube",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:44:00Z",
+          "cursor_after": "2026-07-15T08:44:00Z"
+        },
+        {
+          "connector": "trivy",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:12:00Z",
+          "cursor_after": "2026-07-15T08:12:00Z"
+        }
+      ],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 8
+    },
+    {
+      "at": "2026-07-16T03:50:59+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 0,
+      "per_connector": [],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 9
+    },
+    {
+      "at": "2026-07-16T03:57:47+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 5,
+      "per_connector": [
+        {
+          "connector": "github-actions",
+          "status": "OK",
+          "events": 2,
+          "new_signals": 0,
+          "duplicates": 4,
+          "cursor_before": null,
+          "cursor_after": "2026-07-15T08:05:00Z"
+        },
+        {
+          "connector": "kubernetes",
+          "status": "OK",
+          "events": 2,
+          "new_signals": 0,
+          "duplicates": 2,
+          "cursor_before": null,
+          "cursor_after": "2026-07-15T08:33:00Z"
+        },
+        {
+          "connector": "prometheus",
+          "status": "OK",
+          "events": 2,
+          "new_signals": 0,
+          "duplicates": 4,
+          "cursor_before": null,
+          "cursor_after": "2026-07-15T08:22:00Z"
+        },
+        {
+          "connector": "sonarqube",
+          "status": "OK",
+          "events": 2,
+          "new_signals": 0,
+          "duplicates": 2,
+          "cursor_before": null,
+          "cursor_after": "2026-07-15T08:44:00Z"
+        },
+        {
+          "connector": "trivy",
+          "status": "OK",
+          "events": 2,
+          "new_signals": 0,
+          "duplicates": 2,
+          "cursor_before": null,
+          "cursor_after": "2026-07-15T08:12:00Z"
+        }
+      ],
+      "new_signals": 0,
+      "duplicates": 14,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 28,
+      "seq": 10
+    },
+    {
+      "at": "2026-07-16T04:01:28+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 0,
+      "per_connector": [],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 11
+    }
+  ],
+  "generated_at": "2026-07-16T04:01:28+00:00"
+}

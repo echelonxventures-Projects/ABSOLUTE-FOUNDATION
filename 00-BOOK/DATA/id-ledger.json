@@ -1,0 +1,5379 @@
+{
+  "version": 1,
+  "by_path": {
+    "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md": {
+      "universal_id": "UCOS-BOOK-000000",
+      "category": "BOOK",
+      "page_start": 1,
+      "page_count": 10,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-BOOK/SCHEMAS/artifact.schema.json": {
+      "universal_id": "UCOS-REG-000001",
+      "category": "REG",
+      "page_start": 11,
+      "page_count": 3,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-BOOK/SCHEMAS/control-tower.schema.json": {
+      "universal_id": "UCOS-REG-000002",
+      "category": "REG",
+      "page_start": 14,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-BOOK/SCHEMAS/page.schema.json": {
+      "universal_id": "UCOS-REG-000003",
+      "category": "REG",
+      "page_start": 15,
+      "page_count": 2,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-BOOK/SCHEMAS/relationship.schema.json": {
+      "universal_id": "UCOS-REG-000004",
+      "category": "REG",
+      "page_start": 17,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-BOOK/SCHEMAS/status.schema.json": {
+      "universal_id": "UCOS-REG-000005",
+      "category": "REG",
+      "page_start": 18,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-BOOK/SCHEMAS/volume.schema.json": {
+      "universal_id": "UCOS-REG-000006",
+      "category": "REG",
+      "page_start": 19,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE-MANIFEST/SOURCE-FILES.txt": {
+      "universal_id": "UCOS-SRC-000001",
+      "category": "SRC",
+      "page_start": 20,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE-MANIFEST/SOURCE-HASHES.txt": {
+      "universal_id": "UCOS-SRC-000002",
+      "category": "SRC",
+      "page_start": 21,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/ARCHITECTURE/Final Architechture.docx": {
+      "universal_id": "UCOS-ARCH-000001",
+      "category": "ARCH",
+      "page_start": 22,
+      "page_count": 11,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/ARCHITECTURE/UCOS Ω∞ - Universal Platform.docx": {
+      "universal_id": "UCOS-ARCH-000002",
+      "category": "ARCH",
+      "page_start": 33,
+      "page_count": 1294,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/CONSTITUTIONS/UCOS Ω.docx": {
+      "universal_id": "UCOS-CON-000001",
+      "category": "CON",
+      "page_start": 1327,
+      "page_count": 10,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx": {
+      "universal_id": "UCOS-CON-000002",
+      "category": "CON",
+      "page_start": 1337,
+      "page_count": 294,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/CONSTITUTIONS/UCOS Ω∞ UNIVERSAL REALITY COMPILER CONSTITUTION.docx": {
+      "universal_id": "UCOS-CON-000003",
+      "category": "CON",
+      "page_start": 1631,
+      "page_count": 10,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/CONSTITUTIONS/Universal Commerce Compiler Constitution.docx": {
+      "universal_id": "UCOS-CON-000004",
+      "category": "CON",
+      "page_start": 1641,
+      "page_count": 17,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx": {
+      "universal_id": "UCOS-CON-000005",
+      "category": "CON",
+      "page_start": 1658,
+      "page_count": 1298,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-020-050).docx": {
+      "universal_id": "UCOS-CON-000006",
+      "category": "CON",
+      "page_start": 2956,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-002(Phase-020-024-Time-001-160).docx": {
+      "universal_id": "UCOS-CON-000007",
+      "category": "CON",
+      "page_start": 2962,
+      "page_count": 910,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-003(Phase-024-time-161- 211 to 50).docx": {
+      "universal_id": "UCOS-CON-000008",
+      "category": "CON",
+      "page_start": 3872,
+      "page_count": 214,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/VISION/Missing 1.docx": {
+      "universal_id": "UCOS-VSN-000001",
+      "category": "VSN",
+      "page_start": 4086,
+      "page_count": 9,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/VISION/Missing 2.docx": {
+      "universal_id": "UCOS-VSN-000002",
+      "category": "VSN",
+      "page_start": 4095,
+      "page_count": 9,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-SOURCE/VISION/Missing 3.docx": {
+      "universal_id": "UCOS-VSN-000003",
+      "category": "VSN",
+      "page_start": 4104,
+      "page_count": 9,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "01-WORKING/AUTHORITY-REGISTER.md": {
+      "universal_id": "UCOS-CON-000009",
+      "category": "CON",
+      "page_start": 4113,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "01-WORKING/CONSOLIDATION-MATRIX.md": {
+      "universal_id": "UCOS-CON-000010",
+      "category": "CON",
+      "page_start": 4114,
+      "page_count": 2,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "01-WORKING/DUPLICATE-REGISTER.md": {
+      "universal_id": "UCOS-CON-000011",
+      "category": "CON",
+      "page_start": 4116,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "01-WORKING/LAW-REGISTER.md": {
+      "universal_id": "UCOS-CON-000012",
+      "category": "CON",
+      "page_start": 4117,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "01-WORKING/MISSION.md": {
+      "universal_id": "UCOS-CON-000013",
+      "category": "CON",
+      "page_start": 4122,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "01-WORKING/ONTOLOGY-REGISTER.md": {
+      "universal_id": "UCOS-CON-000014",
+      "category": "CON",
+      "page_start": 4123,
+      "page_count": 2,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "01-WORKING/SUPERSESSION-REGISTER.md": {
+      "universal_id": "UCOS-CON-000015",
+      "category": "CON",
+      "page_start": 4125,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md": {
+      "universal_id": "UCOS-IDX-000001",
+      "category": "IDX",
+      "page_start": 4126,
+      "page_count": 12,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-CONSTITUENT-AUTHORITY-DETERMINATION-REPORT.md": {
+      "universal_id": "UCOS-CON-000016",
+      "category": "CON",
+      "page_start": 4138,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-ADJUDICATION-RECORD.md": {
+      "universal_id": "UCOS-CON-000017",
+      "category": "CON",
+      "page_start": 4143,
+      "page_count": 7,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-CONSOLIDATION-CLOSURE-REPORT.md": {
+      "universal_id": "UCOS-CON-000018",
+      "category": "CON",
+      "page_start": 4150,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md": {
+      "universal_id": "UCOS-CON-000019",
+      "category": "CON",
+      "page_start": 4154,
+      "page_count": 9,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-GOVERNANCE-GAP-REPORT.md": {
+      "universal_id": "UCOS-CON-000020",
+      "category": "CON",
+      "page_start": 4163,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-RATIFICATION-REPORT.md": {
+      "universal_id": "UCOS-CON-000021",
+      "category": "CON",
+      "page_start": 4168,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-READINESS-CERTIFICATION.md": {
+      "universal_id": "UCOS-CON-000022",
+      "category": "CON",
+      "page_start": 4173,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-REMEDIATION-PACKAGE.md": {
+      "universal_id": "UCOS-CON-000023",
+      "category": "CON",
+      "page_start": 4177,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-EXTERNAL-ACTOR-QUALIFICATION-FRAMEWORK.md": {
+      "universal_id": "UCOS-EES-000001",
+      "category": "EES",
+      "page_start": 4183,
+      "page_count": 7,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-EXTERNAL-EXECUTION-SUPPORT-PROGRAM-CHARTER.md": {
+      "universal_id": "UCOS-EES-000002",
+      "category": "EES",
+      "page_start": 4190,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-IMPLEMENTATION-GOVERNANCE-BASELINE.md": {
+      "universal_id": "UCOS-IMP-000001",
+      "category": "IMP",
+      "page_start": 4194,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-IMPLEMENTATION-MASTER-PLAN.md": {
+      "universal_id": "UCOS-IMP-000002",
+      "category": "IMP",
+      "page_start": 4198,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-IMPLEMENTATION-PROGRAM-TRACKER.md": {
+      "universal_id": "UCOS-IMP-000003",
+      "category": "IMP",
+      "page_start": 4203,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-STAKEHOLDER-HANDOFF-BRIEF.md": {
+      "universal_id": "UCOS-CON-000024",
+      "category": "CON",
+      "page_start": 4208,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-TECHNOLOGY-CONSTITUTION.md": {
+      "universal_id": "UCOS-IMP-000004",
+      "category": "IMP",
+      "page_start": 4212,
+      "page_count": 7,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-AGENT-CONSTRUCTION-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000003",
+      "category": "ARCH",
+      "page_start": 4219,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-AI-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000004",
+      "category": "ARCH",
+      "page_start": 4224,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-API-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000005",
+      "category": "ARCH",
+      "page_start": 4228,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-APPLICATION-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000006",
+      "category": "ARCH",
+      "page_start": 4232,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-BCDR-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000007",
+      "category": "ARCH",
+      "page_start": 4236,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-CAPABILITY-CATALOG.md": {
+      "universal_id": "UCOS-ARCH-000008",
+      "category": "ARCH",
+      "page_start": 4240,
+      "page_count": 50,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-CERTIFICATION-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000009",
+      "category": "ARCH",
+      "page_start": 4290,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-COMPONENT-CATALOG.md": {
+      "universal_id": "UCOS-ARCH-000010",
+      "category": "ARCH",
+      "page_start": 4294,
+      "page_count": 61,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-DATA-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000011",
+      "category": "ARCH",
+      "page_start": 4355,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-DOMAIN-CATALOG.md": {
+      "universal_id": "UCOS-ARCH-000012",
+      "category": "ARCH",
+      "page_start": 4359,
+      "page_count": 22,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-EVENT-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000013",
+      "category": "ARCH",
+      "page_start": 4381,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-IMPLEMENTATION-MODEL-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000014",
+      "category": "ARCH",
+      "page_start": 4385,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-INFRASTRUCTURE-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000015",
+      "category": "ARCH",
+      "page_start": 4390,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-INTEGRATION-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000016",
+      "category": "ARCH",
+      "page_start": 4394,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-OBSERVABILITY-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000017",
+      "category": "ARCH",
+      "page_start": 4398,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-OPERATIONS-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000018",
+      "category": "ARCH",
+      "page_start": 4402,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-SECURITY-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000019",
+      "category": "ARCH",
+      "page_start": 4406,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-SERVICE-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000020",
+      "category": "ARCH",
+      "page_start": 4410,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-TESTING-QUALITY-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000021",
+      "category": "ARCH",
+      "page_start": 4414,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-UNIVERSE-CATALOG.md": {
+      "universal_id": "UCOS-ARCH-000022",
+      "category": "ARCH",
+      "page_start": 4418,
+      "page_count": 7,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-WORKFLOW-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000023",
+      "category": "ARCH",
+      "page_start": 4425,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-API-CATALOG.md": {
+      "universal_id": "UCOS-CAT-000001",
+      "category": "CAT",
+      "page_start": 4429,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-APPLICATION-CATALOG.md": {
+      "universal_id": "UCOS-CAT-000002",
+      "category": "CAT",
+      "page_start": 4435,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-DATA-CATALOG.md": {
+      "universal_id": "UCOS-CAT-000003",
+      "category": "CAT",
+      "page_start": 4441,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-EVENT-CATALOG.md": {
+      "universal_id": "UCOS-CAT-000004",
+      "category": "CAT",
+      "page_start": 4446,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-RUNTIME-CATALOG-CONSTITUTION.md": {
+      "universal_id": "UCOS-CAT-000005",
+      "category": "CAT",
+      "page_start": 4452,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-SERVICE-CATALOG.md": {
+      "universal_id": "UCOS-CAT-000006",
+      "category": "CAT",
+      "page_start": 4457,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-WORKFLOW-CATALOG.md": {
+      "universal_id": "UCOS-CAT-000007",
+      "category": "CAT",
+      "page_start": 4463,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-API-ARCHITECTURE.md": {
+      "universal_id": "UCOS-REF-000001",
+      "category": "REF",
+      "page_start": 4469,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-APPLICATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-REF-000002",
+      "category": "REF",
+      "page_start": 4475,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-ARCHITECTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-ARCH-000024",
+      "category": "ARCH",
+      "page_start": 4481,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-DATA-ARCHITECTURE.md": {
+      "universal_id": "UCOS-REF-000003",
+      "category": "REF",
+      "page_start": 4486,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-EVENT-ARCHITECTURE.md": {
+      "universal_id": "UCOS-REF-000004",
+      "category": "REF",
+      "page_start": 4492,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-SERVICE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-REF-000005",
+      "category": "REF",
+      "page_start": 4498,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-WORKFLOW-ARCHITECTURE.md": {
+      "universal_id": "UCOS-REF-000006",
+      "category": "REF",
+      "page_start": 4504,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "05-GENERATION/UCOS-Ω∞-UNIVERSAL-API-GENERATION-FRAMEWORK.md": {
+      "universal_id": "UCOS-GEN-000001",
+      "category": "GEN",
+      "page_start": 4510,
+      "page_count": 7,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "05-GENERATION/UCOS-Ω∞-UNIVERSAL-APPLICATION-GENERATION-FRAMEWORK.md": {
+      "universal_id": "UCOS-GEN-000002",
+      "category": "GEN",
+      "page_start": 4517,
+      "page_count": 7,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "05-GENERATION/UCOS-Ω∞-UNIVERSAL-DATA-GENERATION-FRAMEWORK.md": {
+      "universal_id": "UCOS-GEN-000003",
+      "category": "GEN",
+      "page_start": 4524,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "05-GENERATION/UCOS-Ω∞-UNIVERSAL-EVENT-GENERATION-FRAMEWORK.md": {
+      "universal_id": "UCOS-GEN-000004",
+      "category": "GEN",
+      "page_start": 4532,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "05-GENERATION/UCOS-Ω∞-UNIVERSAL-GENERATION-FRAMEWORK-CONSTITUTION.md": {
+      "universal_id": "UCOS-GEN-000005",
+      "category": "GEN",
+      "page_start": 4540,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "05-GENERATION/UCOS-Ω∞-UNIVERSAL-SERVICE-GENERATION-FRAMEWORK.md": {
+      "universal_id": "UCOS-GEN-000006",
+      "category": "GEN",
+      "page_start": 4545,
+      "page_count": 7,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "05-GENERATION/UCOS-Ω∞-UNIVERSAL-WORKFLOW-GENERATION-FRAMEWORK.md": {
+      "universal_id": "UCOS-GEN-000007",
+      "category": "GEN",
+      "page_start": 4552,
+      "page_count": 7,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-AI-PLATFORM.md": {
+      "universal_id": "UCOS-IMP-000005",
+      "category": "IMP",
+      "page_start": 4559,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-API-PLATFORM.md": {
+      "universal_id": "UCOS-IMP-000006",
+      "category": "IMP",
+      "page_start": 4564,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-APPLICATION-FACTORY.md": {
+      "universal_id": "UCOS-IMP-000007",
+      "category": "IMP",
+      "page_start": 4569,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-ECOSYSTEM-PLATFORM.md": {
+      "universal_id": "UCOS-IMP-000008",
+      "category": "IMP",
+      "page_start": 4574,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-FOUNDATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-IMP-000009",
+      "category": "IMP",
+      "page_start": 4579,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-IDENTITY-PLATFORM.md": {
+      "universal_id": "UCOS-IMP-000010",
+      "category": "IMP",
+      "page_start": 4584,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-KNOWLEDGE-GRAPH-ENGINE.md": {
+      "universal_id": "UCOS-IMP-000011",
+      "category": "IMP",
+      "page_start": 4589,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-ONTOLOGY-PLATFORM.md": {
+      "universal_id": "UCOS-IMP-000012",
+      "category": "IMP",
+      "page_start": 4594,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-PRODUCTION-PLATFORM.md": {
+      "universal_id": "UCOS-IMP-000013",
+      "category": "IMP",
+      "page_start": 4599,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-REGISTRY-PLATFORM.md": {
+      "universal_id": "UCOS-IMP-000014",
+      "category": "IMP",
+      "page_start": 4604,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-REPOSITORY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-IMP-000015",
+      "category": "IMP",
+      "page_start": 4610,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-RUNTIME-PLATFORM.md": {
+      "universal_id": "UCOS-IMP-000016",
+      "category": "IMP",
+      "page_start": 4615,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-UNIVERSAL-COMPILER.md": {
+      "universal_id": "UCOS-IMP-000017",
+      "category": "IMP",
+      "page_start": 4620,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "06-IMPLEMENTATION/UCOS-Ω∞-WORKFLOW-PLATFORM.md": {
+      "universal_id": "UCOS-IMP-000018",
+      "category": "IMP",
+      "page_start": 4625,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "07-ENGINEERING/ENG-GOV-003-ENGINEERING-FOUNDATION-FREEZE-DETERMINATION.md": {
+      "universal_id": "UCOS-ENG-000001",
+      "category": "ENG",
+      "page_start": 4630,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "07-ENGINEERING/UCOS-Ω∞-ENGINEERING-FOUNDATION-COMPLETION-ENG-005-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-ENG-000002",
+      "category": "ENG",
+      "page_start": 4635,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "07-ENGINEERING/UCOS-Ω∞-ENGINEERING-PROGRAM-MASTER-INDEX.md": {
+      "universal_id": "UCOS-ENG-000003",
+      "category": "ENG",
+      "page_start": 4640,
+      "page_count": 14,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "07-ENGINEERING/UCOS-Ω∞-ENGINEERING-ROADMAP-RECONCILIATION-DETERMINATION.md": {
+      "universal_id": "UCOS-ENG-000004",
+      "category": "ENG",
+      "page_start": 4654,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-IDENTITY-SYSTEM-MASTER-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ENG-000005",
+      "category": "ENG",
+      "page_start": 4660,
+      "page_count": 21,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-OBJECT-SYSTEM-MASTER-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ENG-000006",
+      "category": "ENG",
+      "page_start": 4681,
+      "page_count": 17,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-RELATIONSHIP-REFERENCE-SYSTEM-MASTER-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ENG-000007",
+      "category": "ENG",
+      "page_start": 4698,
+      "page_count": 41,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-TYPE-SYSTEM-MASTER-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ENG-000008",
+      "category": "ENG",
+      "page_start": 4739,
+      "page_count": 42,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-VALUE-SYSTEM-MASTER-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ENG-000009",
+      "category": "ENG",
+      "page_start": 4781,
+      "page_count": 23,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-001-UNIVERSAL-RUNTIME-CONSTITUTION.md": {
+      "universal_id": "UCOS-RUN-000001",
+      "category": "RUN",
+      "page_start": 4804,
+      "page_count": 9,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-002-UNIVERSAL-RUNTIME-THEORY.md": {
+      "universal_id": "UCOS-RUN-000002",
+      "category": "RUN",
+      "page_start": 4813,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-003-UNIVERSAL-RUNTIME-ONTOLOGY.md": {
+      "universal_id": "UCOS-RUN-000003",
+      "category": "RUN",
+      "page_start": 4821,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-004-UNIVERSAL-RUNTIME-TAXONOMY.md": {
+      "universal_id": "UCOS-RUN-000004",
+      "category": "RUN",
+      "page_start": 4829,
+      "page_count": 7,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-005-UNIVERSAL-RUNTIME-META-MODEL.md": {
+      "universal_id": "UCOS-RUN-000005",
+      "category": "RUN",
+      "page_start": 4836,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-006-UNIVERSAL-EXECUTION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-RUN-000006",
+      "category": "RUN",
+      "page_start": 4844,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-007-UNIVERSAL-STATE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-RUN-000007",
+      "category": "RUN",
+      "page_start": 4852,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-008-UNIVERSAL-EVENT-ARCHITECTURE.md": {
+      "universal_id": "UCOS-RUN-000008",
+      "category": "RUN",
+      "page_start": 4860,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-009-UNIVERSAL-WORKFLOW-ARCHITECTURE.md": {
+      "universal_id": "UCOS-RUN-000009",
+      "category": "RUN",
+      "page_start": 4868,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-010-UNIVERSAL-POLICY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-RUN-000010",
+      "category": "RUN",
+      "page_start": 4876,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-011-UNIVERSAL-AGENT-ARCHITECTURE.md": {
+      "universal_id": "UCOS-RUN-000011",
+      "category": "RUN",
+      "page_start": 4884,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-012-UNIVERSAL-CONTEXT-ARCHITECTURE.md": {
+      "universal_id": "UCOS-RUN-000012",
+      "category": "RUN",
+      "page_start": 4892,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-013-UNIVERSAL-ORCHESTRATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-RUN-000013",
+      "category": "RUN",
+      "page_start": 4900,
+      "page_count": 8,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-014-UNIVERSAL-RUNTIME-INTEGRATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-RUN-000014",
+      "category": "RUN",
+      "page_start": 4908,
+      "page_count": 9,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-GOV-001-RUNTIME-FOUNDATION-FREEZE-DETERMINATION.md": {
+      "universal_id": "UCOS-RUN-000015",
+      "category": "RUN",
+      "page_start": 4917,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-GOV-002-RUNTIME-PROGRAM-CERTIFICATION-DETERMINATION.md": {
+      "universal_id": "UCOS-RUN-000016",
+      "category": "RUN",
+      "page_start": 4923,
+      "page_count": 6,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-GOV-003-RUNTIME-PROGRAM-FREEZE-DETERMINATION.md": {
+      "universal_id": "UCOS-RUN-000017",
+      "category": "RUN",
+      "page_start": 4929,
+      "page_count": 4,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "08-RUNTIME/RUNTIME-REG-001-RL-F2-RUNTIME-PROGRAM-MASTER-REGISTRY.md": {
+      "universal_id": "UCOS-RUN-000018",
+      "category": "RUN",
+      "page_start": 4933,
+      "page_count": 5,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "99-FREEZE/FREEZE-NOTICE.md": {
+      "universal_id": "UCOS-FRZ-000001",
+      "category": "FRZ",
+      "page_start": 4938,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "99-FREEZE/SOURCE-FILES.txt": {
+      "universal_id": "UCOS-FRZ-000002",
+      "category": "FRZ",
+      "page_start": 4939,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "99-FREEZE/SOURCE-HASHES.txt": {
+      "universal_id": "UCOS-FRZ-000003",
+      "category": "FRZ",
+      "page_start": 4940,
+      "page_count": 1,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "UCOS Ω∞ MASTER END-TO-END PROGRAM.docx": {
+      "universal_id": "UCOS-MISC-000001",
+      "category": "MISC",
+      "page_start": 4941,
+      "page_count": 10,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "UCOS-Consolidation Plan.docx": {
+      "universal_id": "UCOS-MISC-000002",
+      "category": "MISC",
+      "page_start": 4951,
+      "page_count": 14,
+      "first_seen": "2026-07-15T02:26:52+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-000-ADVANCEMENT-PROGRAM-MASTER-INDEX.md": {
+      "universal_id": "UCOS-ADV-000001",
+      "category": "ADV",
+      "page_start": 4965,
+      "page_count": 4,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-001-REAL-TIME-CONNECTOR-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000002",
+      "category": "ADV",
+      "page_start": 4969,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-002-REPOSITORY-INTELLIGENCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000003",
+      "category": "ADV",
+      "page_start": 4971,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-003-IMPLEMENTATION-TRACEABILITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000004",
+      "category": "ADV",
+      "page_start": 4973,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-004-TESTING-INTELLIGENCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000005",
+      "category": "ADV",
+      "page_start": 4975,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-005-SECURITY-INTELLIGENCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000006",
+      "category": "ADV",
+      "page_start": 4977,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-006-DEPLOYMENT-INTELLIGENCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000007",
+      "category": "ADV",
+      "page_start": 4979,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-007-PRODUCTION-INTELLIGENCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000008",
+      "category": "ADV",
+      "page_start": 4981,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-008-UI-UX-DIGITAL-TWIN-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000009",
+      "category": "ADV",
+      "page_start": 4982,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-009-UNIVERSAL-PUBLICATION-ENGINE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000010",
+      "category": "ADV",
+      "page_start": 4984,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-010-NAVIGATION-PORTAL-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000011",
+      "category": "ADV",
+      "page_start": 4986,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-011-ENTERPRISE-SEARCH-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000012",
+      "category": "ADV",
+      "page_start": 4987,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-012-CONTROL-TOWER-AUTOMATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000013",
+      "category": "ADV",
+      "page_start": 4988,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-013-AI-KNOWLEDGE-LAYER-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000014",
+      "category": "ADV",
+      "page_start": 4990,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-014-DIGITAL-TWIN-CERTIFICATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-ADV-000015",
+      "category": "ADV",
+      "page_start": 4991,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-015-COMPLETE-REPOSITORY-STRUCTURE.md": {
+      "universal_id": "UCOS-ADV-000016",
+      "category": "ADV",
+      "page_start": 4992,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-016-IMPLEMENTATION-ROADMAP.md": {
+      "universal_id": "UCOS-ADV-000017",
+      "category": "ADV",
+      "page_start": 4994,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-017-DEPENDENCY-GRAPH.md": {
+      "universal_id": "UCOS-ADV-000018",
+      "category": "ADV",
+      "page_start": 4995,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-018-MIGRATION-PLAN.md": {
+      "universal_id": "UCOS-ADV-000019",
+      "category": "ADV",
+      "page_start": 4997,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/build.schema.json": {
+      "universal_id": "UCOS-REG-000007",
+      "category": "REG",
+      "page_start": 4998,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/connector.schema.json": {
+      "universal_id": "UCOS-REG-000008",
+      "category": "REG",
+      "page_start": 4999,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/deployment.schema.json": {
+      "universal_id": "UCOS-REG-000009",
+      "category": "REG",
+      "page_start": 5000,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/environment.schema.json": {
+      "universal_id": "UCOS-REG-000010",
+      "category": "REG",
+      "page_start": 5001,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/export-job.schema.json": {
+      "universal_id": "UCOS-REG-000011",
+      "category": "REG",
+      "page_start": 5002,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/finding.schema.json": {
+      "universal_id": "UCOS-REG-000012",
+      "category": "REG",
+      "page_start": 5003,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/flow.schema.json": {
+      "universal_id": "UCOS-REG-000013",
+      "category": "REG",
+      "page_start": 5004,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/journey.schema.json": {
+      "universal_id": "UCOS-REG-000014",
+      "category": "REG",
+      "page_start": 5005,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/production-service.schema.json": {
+      "universal_id": "UCOS-REG-000015",
+      "category": "REG",
+      "page_start": 5006,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/repository.schema.json": {
+      "universal_id": "UCOS-REG-000016",
+      "category": "REG",
+      "page_start": 5007,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/signal.schema.json": {
+      "universal_id": "UCOS-REG-000017",
+      "category": "REG",
+      "page_start": 5008,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/test.schema.json": {
+      "universal_id": "UCOS-REG-000018",
+      "category": "REG",
+      "page_start": 5009,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/SCHEMAS/ui-artifact.schema.json": {
+      "universal_id": "UCOS-REG-000019",
+      "category": "REG",
+      "page_start": 5010,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "~$OS Ω∞ MASTER END-TO-END PROGRAM.docx": {
+      "universal_id": "UCOS-MISC-000003",
+      "category": "MISC",
+      "page_start": 5011,
+      "page_count": 1,
+      "first_seen": "2026-07-15T04:26:54+00:00"
+    },
+    "00-BOOK/ADVANCEMENT/UKB-ADV-019-FINAL-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-ADV-000020",
+      "category": "ADV",
+      "page_start": 5012,
+      "page_count": 2,
+      "first_seen": "2026-07-15T04:29:01+00:00"
+    },
+    "02-MASTER/UCOS-Ω∞-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md": {
+      "universal_id": "UCOS-MISC-000004",
+      "category": "MISC",
+      "page_start": 5014,
+      "page_count": 8,
+      "first_seen": "2026-07-15T06:33:18+00:00"
+    },
+    "09-PLATFORM/PLATFORM-001-UNIVERSAL-PLATFORM-CONSTITUTION.md": {
+      "universal_id": "UCOS-PLT-000001",
+      "category": "PLT",
+      "page_start": 5022,
+      "page_count": 5,
+      "first_seen": "2026-07-15T06:33:18+00:00"
+    },
+    "09-PLATFORM/PLATFORM-002-UNIVERSAL-PLATFORM-THEORY.md": {
+      "universal_id": "UCOS-PLT-000002",
+      "category": "PLT",
+      "page_start": 5027,
+      "page_count": 3,
+      "first_seen": "2026-07-15T06:33:18+00:00"
+    },
+    "09-PLATFORM/PLATFORM-003-UNIVERSAL-PLATFORM-ONTOLOGY.md": {
+      "universal_id": "UCOS-PLT-000003",
+      "category": "PLT",
+      "page_start": 5030,
+      "page_count": 5,
+      "first_seen": "2026-07-15T06:33:18+00:00"
+    },
+    "09-PLATFORM/PLATFORM-004-UNIVERSAL-PLATFORM-TAXONOMY.md": {
+      "universal_id": "UCOS-PLT-000004",
+      "category": "PLT",
+      "page_start": 5035,
+      "page_count": 4,
+      "first_seen": "2026-07-15T06:33:18+00:00"
+    },
+    "09-PLATFORM/PLATFORM-005-UNIVERSAL-PLATFORM-META-MODEL.md": {
+      "universal_id": "UCOS-PLT-000005",
+      "category": "PLT",
+      "page_start": 5039,
+      "page_count": 4,
+      "first_seen": "2026-07-15T06:33:18+00:00"
+    },
+    "09-PLATFORM/PLATFORM-FOUNDATION-PACKAGE-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000006",
+      "category": "PLT",
+      "page_start": 5043,
+      "page_count": 3,
+      "first_seen": "2026-07-15T06:33:18+00:00"
+    },
+    "09-PLATFORM/PLATFORM-GOV-000-PLATFORM-FOUNDATION-PROGRAM-ESTABLISHMENT-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000007",
+      "category": "PLT",
+      "page_start": 5046,
+      "page_count": 7,
+      "first_seen": "2026-07-15T06:33:18+00:00"
+    },
+    "09-PLATFORM/PLATFORM-006-UNIVERSAL-PLATFORM-CAPABILITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-PLT-000008",
+      "category": "PLT",
+      "page_start": 5053,
+      "page_count": 4,
+      "first_seen": "2026-07-15T07:56:54+00:00"
+    },
+    "09-PLATFORM/PLATFORM-007-UNIVERSAL-PLATFORM-COMPONENT-ARCHITECTURE.md": {
+      "universal_id": "UCOS-PLT-000009",
+      "category": "PLT",
+      "page_start": 5057,
+      "page_count": 4,
+      "first_seen": "2026-07-15T07:58:18+00:00"
+    },
+    "09-PLATFORM/PLATFORM-008-UNIVERSAL-PLATFORM-SERVICE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-PLT-000010",
+      "category": "PLT",
+      "page_start": 5061,
+      "page_count": 4,
+      "first_seen": "2026-07-15T08:00:03+00:00"
+    },
+    "09-PLATFORM/PLATFORM-009-UNIVERSAL-PLATFORM-EXPERIENCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-PLT-000011",
+      "category": "PLT",
+      "page_start": 5065,
+      "page_count": 4,
+      "first_seen": "2026-07-15T08:01:42+00:00"
+    },
+    "09-PLATFORM/PLATFORM-010-UNIVERSAL-PLATFORM-COMPOSITION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-PLT-000012",
+      "category": "PLT",
+      "page_start": 5069,
+      "page_count": 4,
+      "first_seen": "2026-07-15T08:03:07+00:00"
+    },
+    "09-PLATFORM/PLATFORM-011-UNIVERSAL-PLATFORM-INTEGRATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-PLT-000013",
+      "category": "PLT",
+      "page_start": 5073,
+      "page_count": 4,
+      "first_seen": "2026-07-15T08:04:52+00:00"
+    },
+    "09-PLATFORM/PLATFORM-012-UNIVERSAL-PLATFORM-RUNTIME-ARCHITECTURE.md": {
+      "universal_id": "UCOS-PLT-000014",
+      "category": "PLT",
+      "page_start": 5077,
+      "page_count": 4,
+      "first_seen": "2026-07-15T08:06:38+00:00"
+    },
+    "09-PLATFORM/PLATFORM-013-UNIVERSAL-PLATFORM-DEPLOYMENT-ARCHITECTURE.md": {
+      "universal_id": "UCOS-PLT-000015",
+      "category": "PLT",
+      "page_start": 5081,
+      "page_count": 4,
+      "first_seen": "2026-07-15T08:08:26+00:00"
+    },
+    "09-PLATFORM/PLATFORM-014-UNIVERSAL-PLATFORM-REFERENCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-PLT-000016",
+      "category": "PLT",
+      "page_start": 5085,
+      "page_count": 4,
+      "first_seen": "2026-07-15T08:10:11+00:00"
+    },
+    "09-PLATFORM/PLATFORM-015-PLATFORM-FOUNDATION-FREEZE-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000017",
+      "category": "PLT",
+      "page_start": 5089,
+      "page_count": 2,
+      "first_seen": "2026-07-15T08:17:29+00:00"
+    },
+    "09-PLATFORM/PLATFORM-016-PLATFORM-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000018",
+      "category": "PLT",
+      "page_start": 5091,
+      "page_count": 2,
+      "first_seen": "2026-07-15T08:18:21+00:00"
+    },
+    "09-PLATFORM/PLATFORM-017-PLATFORM-COMPLETION-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000019",
+      "category": "PLT",
+      "page_start": 5093,
+      "page_count": 2,
+      "first_seen": "2026-07-15T08:19:24+00:00"
+    },
+    "09-PLATFORM/PLATFORM-018-PLATFORM-MASTER-REGISTRY.md": {
+      "universal_id": "UCOS-PLT-000020",
+      "category": "PLT",
+      "page_start": 5095,
+      "page_count": 3,
+      "first_seen": "2026-07-15T08:20:41+00:00"
+    },
+    "10-DATA/DATA-GOV-000-UNIVERSAL-DATA-PROGRAM-ESTABLISHMENT-DETERMINATION.md": {
+      "universal_id": "UCOS-DAT-000001",
+      "category": "DAT",
+      "page_start": 5098,
+      "page_count": 6,
+      "first_seen": "2026-07-15T09:10:57+00:00"
+    },
+    "10-DATA/DATA-001-UNIVERSAL-DATA-CONSTITUTION.md": {
+      "universal_id": "UCOS-DAT-000002",
+      "category": "DAT",
+      "page_start": 5104,
+      "page_count": 6,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-002-UNIVERSAL-DATA-THEORY.md": {
+      "universal_id": "UCOS-DAT-000003",
+      "category": "DAT",
+      "page_start": 5110,
+      "page_count": 3,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-003-UNIVERSAL-DATA-ONTOLOGY.md": {
+      "universal_id": "UCOS-DAT-000004",
+      "category": "DAT",
+      "page_start": 5113,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md": {
+      "universal_id": "UCOS-DAT-000005",
+      "category": "DAT",
+      "page_start": 5117,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-005-UNIVERSAL-DATA-META-MODEL.md": {
+      "universal_id": "UCOS-DAT-000006",
+      "category": "DAT",
+      "page_start": 5121,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-006-UNIVERSAL-DATA-ENTITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-DAT-000007",
+      "category": "DAT",
+      "page_start": 5125,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-007-UNIVERSAL-DATA-ATTRIBUTE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-DAT-000008",
+      "category": "DAT",
+      "page_start": 5129,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-008-UNIVERSAL-DATA-RELATIONSHIP-ARCHITECTURE.md": {
+      "universal_id": "UCOS-DAT-000009",
+      "category": "DAT",
+      "page_start": 5133,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-009-UNIVERSAL-DATA-SCHEMA-ARCHITECTURE.md": {
+      "universal_id": "UCOS-DAT-000010",
+      "category": "DAT",
+      "page_start": 5137,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-010-UNIVERSAL-DATA-STORAGE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-DAT-000011",
+      "category": "DAT",
+      "page_start": 5141,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-011-UNIVERSAL-DATA-LIFECYCLE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-DAT-000012",
+      "category": "DAT",
+      "page_start": 5145,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-012-UNIVERSAL-DATA-GOVERNANCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-DAT-000013",
+      "category": "DAT",
+      "page_start": 5149,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-013-UNIVERSAL-DATA-QUALITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-DAT-000014",
+      "category": "DAT",
+      "page_start": 5153,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-014-UNIVERSAL-DATA-SECURITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-DAT-000015",
+      "category": "DAT",
+      "page_start": 5157,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-015-DATA-FOUNDATION-FREEZE-DETERMINATION.md": {
+      "universal_id": "UCOS-DAT-000016",
+      "category": "DAT",
+      "page_start": 5161,
+      "page_count": 2,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-016-DATA-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-DAT-000017",
+      "category": "DAT",
+      "page_start": 5163,
+      "page_count": 3,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-017-DATA-COMPLETION-DETERMINATION.md": {
+      "universal_id": "UCOS-DAT-000018",
+      "category": "DAT",
+      "page_start": 5166,
+      "page_count": 2,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "10-DATA/DATA-018-DATA-MASTER-REGISTRY.md": {
+      "universal_id": "UCOS-DAT-000019",
+      "category": "DAT",
+      "page_start": 5168,
+      "page_count": 4,
+      "first_seen": "2026-07-15T09:57:16+00:00"
+    },
+    "11-SERVICE/SERVICE-001-UNIVERSAL-SERVICE-CONSTITUTION.md": {
+      "universal_id": "UCOS-SVC-000001",
+      "category": "SVC",
+      "page_start": 5172,
+      "page_count": 6,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-002-UNIVERSAL-SERVICE-THEORY.md": {
+      "universal_id": "UCOS-SVC-000002",
+      "category": "SVC",
+      "page_start": 5178,
+      "page_count": 3,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-003-UNIVERSAL-SERVICE-ONTOLOGY.md": {
+      "universal_id": "UCOS-SVC-000003",
+      "category": "SVC",
+      "page_start": 5181,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-004-UNIVERSAL-SERVICE-TAXONOMY.md": {
+      "universal_id": "UCOS-SVC-000004",
+      "category": "SVC",
+      "page_start": 5185,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-005-UNIVERSAL-SERVICE-META-MODEL.md": {
+      "universal_id": "UCOS-SVC-000005",
+      "category": "SVC",
+      "page_start": 5189,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-006-UNIVERSAL-SERVICE-CAPABILITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-SVC-000006",
+      "category": "SVC",
+      "page_start": 5193,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-007-UNIVERSAL-SERVICE-CONTRACT-ARCHITECTURE.md": {
+      "universal_id": "UCOS-SVC-000007",
+      "category": "SVC",
+      "page_start": 5197,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-008-UNIVERSAL-SERVICE-INTERFACE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-SVC-000008",
+      "category": "SVC",
+      "page_start": 5201,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-009-UNIVERSAL-SERVICE-OPERATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-SVC-000009",
+      "category": "SVC",
+      "page_start": 5205,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-010-UNIVERSAL-SERVICE-COMPOSITION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-SVC-000010",
+      "category": "SVC",
+      "page_start": 5209,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-011-UNIVERSAL-SERVICE-ORCHESTRATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-SVC-000011",
+      "category": "SVC",
+      "page_start": 5213,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-012-UNIVERSAL-SERVICE-EXECUTION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-SVC-000012",
+      "category": "SVC",
+      "page_start": 5217,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-013-UNIVERSAL-SERVICE-POLICY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-SVC-000013",
+      "category": "SVC",
+      "page_start": 5221,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-014-UNIVERSAL-SERVICE-SECURITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-SVC-000014",
+      "category": "SVC",
+      "page_start": 5225,
+      "page_count": 5,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-015-SERVICE-FOUNDATION-FREEZE-DETERMINATION.md": {
+      "universal_id": "UCOS-SVC-000015",
+      "category": "SVC",
+      "page_start": 5230,
+      "page_count": 2,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-016-SERVICE-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-SVC-000016",
+      "category": "SVC",
+      "page_start": 5232,
+      "page_count": 3,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-017-SERVICE-COMPLETION-DETERMINATION.md": {
+      "universal_id": "UCOS-SVC-000017",
+      "category": "SVC",
+      "page_start": 5235,
+      "page_count": 2,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-018-SERVICE-MASTER-REGISTRY.md": {
+      "universal_id": "UCOS-SVC-000018",
+      "category": "SVC",
+      "page_start": 5237,
+      "page_count": 4,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "11-SERVICE/SERVICE-GOV-000-UNIVERSAL-SERVICE-PROGRAM-ESTABLISHMENT-DETERMINATION.md": {
+      "universal_id": "UCOS-SVC-000019",
+      "category": "SVC",
+      "page_start": 5241,
+      "page_count": 6,
+      "first_seen": "2026-07-15T10:46:33+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-000-MASTER-BOOK-ARCHITECTURE-MASTER-INDEX.md": {
+      "universal_id": "UCOS-UMB-000001",
+      "category": "UMB",
+      "page_start": 5247,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-001-MASTER-BOOK-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000002",
+      "category": "UMB",
+      "page_start": 5251,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-002-DIGITAL-TWIN-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000003",
+      "category": "UMB",
+      "page_start": 5253,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-003-IDENTITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000004",
+      "category": "UMB",
+      "page_start": 5255,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-004-NOMENCLATURE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000005",
+      "category": "UMB",
+      "page_start": 5257,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000006",
+      "category": "UMB",
+      "page_start": 5259,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000007",
+      "category": "UMB",
+      "page_start": 5261,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-007-TRACEABILITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000008",
+      "category": "UMB",
+      "page_start": 5263,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-008-CHANGE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000009",
+      "category": "UMB",
+      "page_start": 5265,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-009-VERSION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000010",
+      "category": "UMB",
+      "page_start": 5267,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-010-LINEAGE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000011",
+      "category": "UMB",
+      "page_start": 5269,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-011-PUBLICATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000012",
+      "category": "UMB",
+      "page_start": 5271,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-012-SYNCHRONIZATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000013",
+      "category": "UMB",
+      "page_start": 5273,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-013-SEARCH-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000014",
+      "category": "UMB",
+      "page_start": 5275,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-014-AI-KNOWLEDGE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000015",
+      "category": "UMB",
+      "page_start": 5277,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-015-SECURITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000016",
+      "category": "UMB",
+      "page_start": 5279,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-016-CONTROL-TOWER-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000017",
+      "category": "UMB",
+      "page_start": 5281,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-017-CERTIFICATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000018",
+      "category": "UMB",
+      "page_start": 5283,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-018-RUNTIME-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000019",
+      "category": "UMB",
+      "page_start": 5285,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-019-OPERATIONAL-ARCHITECTURE.md": {
+      "universal_id": "UCOS-UMB-000020",
+      "category": "UMB",
+      "page_start": 5287,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-020-SUCCESS-CRITERIA-AND-UNIVERSAL-PARTICIPATION-DEMONSTRATION.md": {
+      "universal_id": "UCOS-UMB-000021",
+      "category": "UMB",
+      "page_start": 5289,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-001-UNIVERSAL-APPLICATION-CONSTITUTION.md": {
+      "universal_id": "UCOS-MISC-000005",
+      "category": "MISC",
+      "page_start": 5291,
+      "page_count": 6,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-002-UNIVERSAL-APPLICATION-THEORY.md": {
+      "universal_id": "UCOS-MISC-000006",
+      "category": "MISC",
+      "page_start": 5297,
+      "page_count": 3,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-003-UNIVERSAL-APPLICATION-ONTOLOGY.md": {
+      "universal_id": "UCOS-MISC-000007",
+      "category": "MISC",
+      "page_start": 5300,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-004-UNIVERSAL-APPLICATION-TAXONOMY.md": {
+      "universal_id": "UCOS-MISC-000008",
+      "category": "MISC",
+      "page_start": 5304,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md": {
+      "universal_id": "UCOS-MISC-000009",
+      "category": "MISC",
+      "page_start": 5308,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-006-UNIVERSAL-APPLICATION-CAPABILITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000010",
+      "category": "MISC",
+      "page_start": 5312,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-007-UNIVERSAL-APPLICATION-MODULE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000011",
+      "category": "MISC",
+      "page_start": 5316,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-008-UNIVERSAL-APPLICATION-FEATURE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000012",
+      "category": "MISC",
+      "page_start": 5320,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-009-UNIVERSAL-APPLICATION-WORKFLOW-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000013",
+      "category": "MISC",
+      "page_start": 5324,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-010-UNIVERSAL-APPLICATION-INTERACTION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000014",
+      "category": "MISC",
+      "page_start": 5328,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-011-UNIVERSAL-APPLICATION-STATE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000015",
+      "category": "MISC",
+      "page_start": 5332,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-012-UNIVERSAL-APPLICATION-COMPOSITION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000016",
+      "category": "MISC",
+      "page_start": 5336,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-013-UNIVERSAL-APPLICATION-SECURITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000017",
+      "category": "MISC",
+      "page_start": 5340,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-014-UNIVERSAL-APPLICATION-GOVERNANCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000018",
+      "category": "MISC",
+      "page_start": 5344,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-015-APPLICATION-FOUNDATION-FREEZE-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000019",
+      "category": "MISC",
+      "page_start": 5348,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-016-APPLICATION-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000020",
+      "category": "MISC",
+      "page_start": 5350,
+      "page_count": 3,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-017-APPLICATION-COMPLETION-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000021",
+      "category": "MISC",
+      "page_start": 5353,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-018-APPLICATION-MASTER-REGISTRY.md": {
+      "universal_id": "UCOS-MISC-000022",
+      "category": "MISC",
+      "page_start": 5355,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-GOV-000-UNIVERSAL-APPLICATION-PROGRAM-ESTABLISHMENT-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000023",
+      "category": "MISC",
+      "page_start": 5359,
+      "page_count": 6,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-GOV-999-UNIVERSAL-APPLICATION-PROGRAM-FINAL-CERTIFICATION-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000024",
+      "category": "MISC",
+      "page_start": 5365,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-GOV-EVOL-001-UNIVERSAL-APPLICATION-PROGRAM-EVOLUTION-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000025",
+      "category": "MISC",
+      "page_start": 5369,
+      "page_count": 3,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "12-APPLICATION/APPLICATION-GOV-INF-001-UNIVERSAL-APPLICATION-PROGRAM-INFINITE-EVOLUTION-INTERPRETATION-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000026",
+      "category": "MISC",
+      "page_start": 5372,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-001-UNIVERSAL-INFRASTRUCTURE-CONSTITUTION.md": {
+      "universal_id": "UCOS-MISC-000027",
+      "category": "MISC",
+      "page_start": 5376,
+      "page_count": 6,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-002-UNIVERSAL-INFRASTRUCTURE-THEORY.md": {
+      "universal_id": "UCOS-MISC-000028",
+      "category": "MISC",
+      "page_start": 5382,
+      "page_count": 3,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-003-UNIVERSAL-INFRASTRUCTURE-ONTOLOGY.md": {
+      "universal_id": "UCOS-MISC-000029",
+      "category": "MISC",
+      "page_start": 5385,
+      "page_count": 3,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-004-UNIVERSAL-INFRASTRUCTURE-TAXONOMY.md": {
+      "universal_id": "UCOS-MISC-000030",
+      "category": "MISC",
+      "page_start": 5388,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-005-UNIVERSAL-INFRASTRUCTURE-META-MODEL.md": {
+      "universal_id": "UCOS-MISC-000031",
+      "category": "MISC",
+      "page_start": 5392,
+      "page_count": 4,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-006-UNIVERSAL-INFRASTRUCTURE-CAPABILITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000032",
+      "category": "MISC",
+      "page_start": 5396,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-007-UNIVERSAL-INFRASTRUCTURE-COMPUTE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000033",
+      "category": "MISC",
+      "page_start": 5398,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-008-UNIVERSAL-INFRASTRUCTURE-NETWORK-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000034",
+      "category": "MISC",
+      "page_start": 5400,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-009-UNIVERSAL-INFRASTRUCTURE-STORAGE-HOSTING-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000035",
+      "category": "MISC",
+      "page_start": 5402,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-010-UNIVERSAL-INFRASTRUCTURE-TOPOLOGY-AND-DISTRIBUTION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000036",
+      "category": "MISC",
+      "page_start": 5404,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-011-UNIVERSAL-INFRASTRUCTURE-ENVIRONMENT-AND-PROVISIONING-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000037",
+      "category": "MISC",
+      "page_start": 5406,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-012-UNIVERSAL-INFRASTRUCTURE-RESILIENCE-AND-AVAILABILITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000038",
+      "category": "MISC",
+      "page_start": 5408,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-013-UNIVERSAL-INFRASTRUCTURE-SECURITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000039",
+      "category": "MISC",
+      "page_start": 5410,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-014-UNIVERSAL-INFRASTRUCTURE-GOVERNANCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-MISC-000040",
+      "category": "MISC",
+      "page_start": 5412,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-015-INFRASTRUCTURE-FOUNDATION-FREEZE-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000041",
+      "category": "MISC",
+      "page_start": 5414,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-016-INFRASTRUCTURE-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000042",
+      "category": "MISC",
+      "page_start": 5416,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-017-INFRASTRUCTURE-COMPLETION-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000043",
+      "category": "MISC",
+      "page_start": 5418,
+      "page_count": 2,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-018-INFRASTRUCTURE-MASTER-REGISTRY.md": {
+      "universal_id": "UCOS-MISC-000044",
+      "category": "MISC",
+      "page_start": 5420,
+      "page_count": 3,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-EXEC-001-UNIVERSAL-INFRASTRUCTURE-PROGRAM-EXECUTION-AUTHORIZATION-CONTRACT.md": {
+      "universal_id": "UCOS-MISC-000045",
+      "category": "MISC",
+      "page_start": 5423,
+      "page_count": 5,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "13-INFRASTRUCTURE/INFRASTRUCTURE-GOV-000-UNIVERSAL-INFRASTRUCTURE-PROGRAM-ESTABLISHMENT-DETERMINATION.md": {
+      "universal_id": "UCOS-MISC-000046",
+      "category": "MISC",
+      "page_start": 5428,
+      "page_count": 7,
+      "first_seen": "2026-07-15T16:15:54+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-READINESS-001-MASTER-BOOK-IMPLEMENTATION-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-UMB-000022",
+      "category": "UMB",
+      "page_start": 5435,
+      "page_count": 6,
+      "first_seen": "2026-07-16T01:49:07+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-IMP-001-AUTOMATIC-REGISTRATION-AND-ENFORCEMENT-REALIZATION.md": {
+      "universal_id": "UCOS-UMB-000023",
+      "category": "UMB",
+      "page_start": 5441,
+      "page_count": 5,
+      "first_seen": "2026-07-16T01:54:45+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-IMP-002-TRACEABILITY-SPINE-AND-TYPED-KNOWLEDGE-GRAPH-REALIZATION.md": {
+      "universal_id": "UCOS-UMB-000024",
+      "category": "UMB",
+      "page_start": 5446,
+      "page_count": 5,
+      "first_seen": "2026-07-16T02:16:02+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-IMP-003-CHANGE-VERSION-AND-LINEAGE-INTELLIGENCE-REALIZATION.md": {
+      "universal_id": "UCOS-UMB-000025",
+      "category": "UMB",
+      "page_start": 5451,
+      "page_count": 6,
+      "first_seen": "2026-07-16T02:37:55+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-IMP-004-LIVE-CONNECTORS-AND-AUTO-SYNCHRONIZATION-REALIZATION.md": {
+      "universal_id": "UCOS-UMB-000026",
+      "category": "UMB",
+      "page_start": 5457,
+      "page_count": 4,
+      "first_seen": "2026-07-16T03:19:44+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-IMP-005-AI-KNOWLEDGE-AND-DIGITAL-TWIN-INTELLIGENCE-REALIZATION.md": {
+      "universal_id": "UCOS-UMB-000027",
+      "category": "UMB",
+      "page_start": 5461,
+      "page_count": 4,
+      "first_seen": "2026-07-16T03:25:03+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-IMP-006-DIGITAL-TWIN-CERTIFICATION-RUNTIME-REALIZATION.md": {
+      "universal_id": "UCOS-UMB-000028",
+      "category": "UMB",
+      "page_start": 5465,
+      "page_count": 4,
+      "first_seen": "2026-07-16T03:32:20+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-CERT-001-MASTER-BOOK-DIGITAL-TWIN-PROGRAM-CERTIFICATION-DETERMINATION.md": {
+      "universal_id": "UCOS-UMB-000029",
+      "category": "UMB",
+      "page_start": 5469,
+      "page_count": 5,
+      "first_seen": "2026-07-16T03:50:59+00:00"
+    }
+  },
+  "page_cursor": 5473,
+  "category_seq": {
+    "BOOK": 0,
+    "REG": 19,
+    "SRC": 2,
+    "ARCH": 24,
+    "CON": 24,
+    "VSN": 3,
+    "IDX": 1,
+    "EES": 2,
+    "IMP": 18,
+    "CAT": 7,
+    "REF": 6,
+    "GEN": 7,
+    "ENG": 9,
+    "RUN": 18,
+    "FRZ": 3,
+    "MISC": 46,
+    "ADV": 20,
+    "PLT": 20,
+    "DAT": 19,
+    "SVC": 19,
+    "UMB": 29
+  },
+  "discovered_volumes": {},
+  "volume_seq": 0,
+  "history": {
+    "UCOS-BOOK-000000": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "0294d2522a32595b644753ddef02c57d9c2cf43b4ef01948be4e1c5c797096b8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+        "name": "UCOS Ω∞ — UNIVERSAL MASTER KNOWLEDGE BOOK"
+      }
+    ],
+    "UCOS-REG-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "57366a909bb40a0fc2e98fd3f91ec4b8ab6c6e5b14f087f45d9e50b1237268fd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/artifact.schema.json",
+        "name": "Artifact.Schema"
+      }
+    ],
+    "UCOS-REG-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "21c7dffb4fd1f419ba8e329de8acb8b2437fa7e1d22b8034d5259d826512a455",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/control-tower.schema.json",
+        "name": "Control Tower.Schema"
+      }
+    ],
+    "UCOS-REG-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "8d986e92955744f4dda5fd096a25a7f005b57690078dcaf917e78db08330d1ef",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/page.schema.json",
+        "name": "Page.Schema"
+      }
+    ],
+    "UCOS-REG-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "1ac66805f68cb12069038610a31e382c244eb1284f9df9344132ba46f8146827",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/relationship.schema.json",
+        "name": "Relationship.Schema"
+      }
+    ],
+    "UCOS-REG-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "1055464be6c2c0f11ac0d659d35288fe596cebe93c367dc3f4c523a308e4b43d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/status.schema.json",
+        "name": "Status.Schema"
+      }
+    ],
+    "UCOS-REG-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "1cc44a3c77011bc2535fbcd4515cdb5103e89e7041dc5941867702a4c8def96b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/volume.schema.json",
+        "name": "Volume.Schema"
+      }
+    ],
+    "UCOS-SRC-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "b4e45034361308400bebd3826660597e032b3b94b43763d0a22922e3ac778142",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "00-SOURCE-MANIFEST/SOURCE-FILES.txt",
+        "name": "Source Files"
+      }
+    ],
+    "UCOS-SRC-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "ad9d7e0d775b02d91b02f0798f94f37b236bfeeb716acfd9bc13c0c0686ef949",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "00-SOURCE-MANIFEST/SOURCE-HASHES.txt",
+        "name": "Source Hashes"
+      }
+    ],
+    "UCOS-ARCH-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "687e576b714064eb3f1e1102dad371571bba47f33b898b89616358e80e758d9b",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/ARCHITECTURE/Final Architechture.docx",
+        "name": "Final Architechture"
+      }
+    ],
+    "UCOS-ARCH-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "719ba6fc78d9adc3f5714f2dd946f56a34e501469d97e757c66760671267ac93",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/ARCHITECTURE/UCOS Ω∞ - Universal Platform.docx",
+        "name": "Ucos Ω∞   Universal Platform"
+      }
+    ],
+    "UCOS-CON-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "0fdfcde01ffd2243b44b7d3128871ed39d78b2c672f222bdc836d04e28cb21a2",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/CONSTITUTIONS/UCOS Ω.docx",
+        "name": "Ucos Ω"
+      }
+    ],
+    "UCOS-CON-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "226fb0e0cf2e32374c1de76932da163c187d88ae07682a2aca1008aca5f62d24",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx",
+        "name": "Ucos Ω∞ Absolute Architectural Constitution"
+      }
+    ],
+    "UCOS-CON-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "97b7db34a1fd81a45e00d94b3633287f5f1e0b423e78df4efc4dc74662111aa8",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/CONSTITUTIONS/UCOS Ω∞ UNIVERSAL REALITY COMPILER CONSTITUTION.docx",
+        "name": "Ucos Ω∞ Universal Reality Compiler Constitution"
+      }
+    ],
+    "UCOS-CON-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "47126cc9ea1d0c44c7ed09ab9d1a37aad479150504a721991c8f15912bfafff0",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/CONSTITUTIONS/Universal Commerce Compiler Constitution.docx",
+        "name": "Universal Commerce Compiler Constitution"
+      }
+    ],
+    "UCOS-CON-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "f2830c9a2f916ae8123f43f6ddd4603e921ec3c96b68855a4dfd4abe068fd21c",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx",
+        "name": "Ucos Ω∞   Universal Civilization Operating System_Part 001(Phase 000 019)"
+      }
+    ],
+    "UCOS-CON-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "91f0602b82aec1c225b0109cccf5e84a3dc9d7ebabebfd495287da07053f23cf",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-020-050).docx",
+        "name": "Ucos Ω∞   Universal Civilization Operating System_Part 001(Phase 020 050)"
+      }
+    ],
+    "UCOS-CON-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "7a4f3d52f58565ba053273eabde87a96b5e74fa8468509cbca1094b233723ca1",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-002(Phase-020-024-Time-001-160).docx",
+        "name": "Ucos Ω∞   Universal Civilization Operating System_Part 002(Phase 020 024 Time 001 160)"
+      }
+    ],
+    "UCOS-CON-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "1a439055de93de9b26e519c4dc037ebbe47dcc93211e5469f60dfe0bfa494911",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-003(Phase-024-time-161- 211 to 50).docx",
+        "name": "Ucos Ω∞   Universal Civilization Operating System_Part 003(Phase 024 Time 161  211 To 50)"
+      }
+    ],
+    "UCOS-VSN-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "9c0c8519a8950f9e6608325a6518b5e646e94a7c02abc658437b38b480ecb306",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/VISION/Missing 1.docx",
+        "name": "Missing 1"
+      }
+    ],
+    "UCOS-VSN-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "92cdece095c5e8ffbb811fcaaa865cd6b03975fd5f5644499990fbd9ea191031",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/VISION/Missing 2.docx",
+        "name": "Missing 2"
+      }
+    ],
+    "UCOS-VSN-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "cef7ab6f44a278b924b41e74be02e9f65d1b70255dd58a782c8bfccbdc68eac5",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "00-SOURCE/VISION/Missing 3.docx",
+        "name": "Missing 3"
+      }
+    ],
+    "UCOS-CON-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "242f83d5b6b893f2e058dfc7b8118d8cf5885775c55d623f6dbf16b7545c1e84",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "01-WORKING/AUTHORITY-REGISTER.md",
+        "name": "UCOS Ω∞ AUTHORITY & GOVERNANCE REGISTER"
+      }
+    ],
+    "UCOS-CON-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "f83da6b1a0cdf2e51a3ca1ac27b667423bb5342d709fced703aa8b8bfd100bb0",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "01-WORKING/CONSOLIDATION-MATRIX.md",
+        "name": "UCOS Ω∞ CONSOLIDATION MATRIX"
+      }
+    ],
+    "UCOS-CON-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "56dcbe4ce6057a01783215f0c797e4c0c1e4177d058252b16339f51f4ae8b5cf",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "01-WORKING/DUPLICATE-REGISTER.md",
+        "name": "UCOS Ω∞ DUPLICATE REGISTER"
+      }
+    ],
+    "UCOS-CON-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "a49f0dad2094fc1f2a09f22b2ae8b7a65d42beea51dbb9a1419f93a67f40944d",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "01-WORKING/LAW-REGISTER.md",
+        "name": "UCOS Ω∞ LAW REGISTER"
+      }
+    ],
+    "UCOS-CON-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "339cfcbeae200faf67d3163dabe9daca57948fec47e621a9a02040eff22298ff",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "01-WORKING/MISSION.md",
+        "name": "Mission"
+      }
+    ],
+    "UCOS-CON-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "eafcae00d22b3523c5290418e1d0bf9aa1764c1af773647c5119dd17e537bef3",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "01-WORKING/ONTOLOGY-REGISTER.md",
+        "name": "UCOS Ω∞ ONTOLOGY REGISTER"
+      }
+    ],
+    "UCOS-CON-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "4f5a35b67772152ca33ce6adeeb2ee76b6a3d1545e94980827e04de28ef0bc3d",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "01-WORKING/SUPERSESSION-REGISTER.md",
+        "name": "UCOS Ω∞ SUPERSESSION REGISTER"
+      }
+    ],
+    "UCOS-IDX-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "46bb4e8178418f4a5dceaf998641874bd0148b5b5181e0a828cb3fc28dc89050",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSOLIDATION-PROGRAM-MASTER-INDEX.md",
+        "name": "UCOS Ω∞ CONSTITUTIONAL CONSOLIDATION PROGRAM — MASTER INDEX"
+      }
+    ],
+    "UCOS-CON-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "248a4a4b24a48ee191407ca2ae3c423ea9930804bcbc797f1d901fbdff6343bd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSTITUENT-AUTHORITY-DETERMINATION-REPORT.md",
+        "name": "UCOS Ω∞ CONSTITUENT AUTHORITY DETERMINATION REPORT"
+      }
+    ],
+    "UCOS-CON-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "6216f80555d8973a543e099db1dd3746d52253a51b61065398c2e28686ed331f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-ADJUDICATION-RECORD.md",
+        "name": "UCOS Ω∞ CONSTITUTIONAL ADJUDICATION RECORD"
+      }
+    ],
+    "UCOS-CON-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "4ef8cfa9244203e9bad2cf56eb5b5bc35fca33b4a2a7a5d500542da45dc62fdd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-CONSOLIDATION-CLOSURE-REPORT.md",
+        "name": "UCOS Ω∞ CONSTITUTIONAL CONSOLIDATION — CLOSURE REPORT"
+      }
+    ],
+    "UCOS-CON-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "4681ba70df124e0aae83f0e810bb9cabdbaec82db0ce1cfed1ba1a39002b98ad",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md",
+        "name": "UCOS Ω∞ CONSTITUTIONAL DECISION REGISTER"
+      }
+    ],
+    "UCOS-CON-000020": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "ee7a779dca3958c6d625b8dc2194f6073adb4900603d777dc05885b7fda084a7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-GOVERNANCE-GAP-REPORT.md",
+        "name": "UCOS Ω∞ CONSTITUTIONAL GOVERNANCE GAP REPORT"
+      }
+    ],
+    "UCOS-CON-000021": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "be99a8a04654c2cf064411dbc233e8a156b8fa983ed954ef02b677f24a153dad",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-RATIFICATION-REPORT.md",
+        "name": "UCOS Ω∞ CONSTITUTIONAL RATIFICATION REPORT"
+      }
+    ],
+    "UCOS-CON-000022": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "8e0399f5ddab723356492c3f2608f3e8a793d8a303f953288227103132de8d63",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-READINESS-CERTIFICATION.md",
+        "name": "UCOS Ω∞ CONSTITUTIONAL READINESS CERTIFICATION"
+      }
+    ],
+    "UCOS-CON-000023": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "2a9890480b06f5af17b0a526fd8f823ab587e5c9ca9f2d8903eaadac35c79a50",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-REMEDIATION-PACKAGE.md",
+        "name": "UCOS Ω∞ CONSTITUTIONAL REMEDIATION PACKAGE"
+      }
+    ],
+    "UCOS-EES-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "ffa42134af95e14941b79530c46e3f53f99d312521895057b89b19a219ada231",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-EXTERNAL-ACTOR-QUALIFICATION-FRAMEWORK.md",
+        "name": "UCOS Ω∞ — EXTERNAL ACTOR QUALIFICATION FRAMEWORK"
+      }
+    ],
+    "UCOS-EES-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "9aa1711c4608bc5b0663101dded97ae353fdf91ab86638a454ca72d880b7320a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-EXTERNAL-EXECUTION-SUPPORT-PROGRAM-CHARTER.md",
+        "name": "UCOS Ω∞ — EXTERNAL EXECUTION SUPPORT PROGRAM — PROGRAM CHARTER"
+      }
+    ],
+    "UCOS-IMP-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "3aa41d959d64c8b397f587b46fa7b8f0def8119f606885b961623caa891c9b8d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-IMPLEMENTATION-GOVERNANCE-BASELINE.md",
+        "name": "UCOS Ω∞ — IMPLEMENTATION GOVERNANCE BASELINE"
+      }
+    ],
+    "UCOS-IMP-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "0092c1f1796aa75b6da12e91308f0b928fe979c22af735a48387d72161762856",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-IMPLEMENTATION-MASTER-PLAN.md",
+        "name": "UCOS Ω∞ — IMPLEMENTATION MASTER PLAN"
+      }
+    ],
+    "UCOS-IMP-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "a180c51c8080f0663b08f34ca184661ac749050b396817732f3b7592ac98295f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-IMPLEMENTATION-PROGRAM-TRACKER.md",
+        "name": "UCOS Ω∞ — IMPLEMENTATION PROGRAM TRACKER"
+      }
+    ],
+    "UCOS-CON-000024": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "79abd14e5fc821009ca6af6f4f0420022124744fc144a8017efc5bdf02258732",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-STAKEHOLDER-HANDOFF-BRIEF.md",
+        "name": "UCOS Ω∞ — STAKEHOLDER HANDOFF BRIEF"
+      }
+    ],
+    "UCOS-IMP-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "d88b6de0dfedfe2b08cf5e49bfef04272fb9ae4e1d2eee7d6017749f46926375",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-TECHNOLOGY-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — TECHNOLOGY CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "05eb61bd7c761bec15580373783a75a16a0c9e15708a3cf4cec9f5009fc20707",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-AGENT-CONSTRUCTION-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL AGENT CONSTRUCTION CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "ac7970ceb740fed9fd1467aea20f5dac4aeace850c0a4fd1abe01ec850f0e8dc",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-AI-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL ARTIFICIAL INTELLIGENCE ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "27c0f80a5808498b19753a1b90394647b76790f0a998d2c9738a3dfe30ac27c7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-API-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL API ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "beb79e6673f480f583fe09a6264aebc9e944b08c793f5ffa42d7ba867501bd0c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-APPLICATION-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "78ad85d01e874eb1abbce71bfc47a547fc2d4ae94a15a58745fdd932fc4a1f7e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-BCDR-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL BUSINESS CONTINUITY & DISASTER RECOVERY ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "4f594724f14a7a00d6d92a6739fdd46e10ed4b019b96a6a50c958d66bf6c8921",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-CAPABILITY-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CAPABILITY CATALOG"
+      }
+    ],
+    "UCOS-ARCH-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "2a34a3dd6d37157426f04756a8aa50a1ae37a3331222baaee76404e494567518",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-CERTIFICATION-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CERTIFICATION ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "ee7436addc0b37076f7a698c820abcdd2d2447bf13ffb6c0288e716c12becd47",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-COMPONENT-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL COMPONENT CATALOG"
+      }
+    ],
+    "UCOS-ARCH-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "0db8ade34b6e2521350dd418e4f50c40cdae177e24c9dfd8919fee11034b2fd7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-DATA-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "9489ae8da17a835f16bf72b000d9320c5a52ff6a0cf2820ed0350d0ff880d638",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-DOMAIN-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DOMAIN CATALOG"
+      }
+    ],
+    "UCOS-ARCH-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "2537f23e3142a5d774bd10959406ca3b62113ee1a3168cdeedfb691916e8e2de",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-EVENT-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL EVENT ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "0c9636571ba58f58e39c529c667362b4775b49c5ca2447f558cf746a97b84775",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-IMPLEMENTATION-MODEL-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL IMPLEMENTATION MODEL CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "08a441337804c7e284c802fe59d5dfec3bdfc75e30b939b00505649d8f75e99b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-INFRASTRUCTURE-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "8cb463ec5fa3a56bd90cb1ade15577cefad1a43839c4506f2743dacb062b1c28",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-INTEGRATION-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INTEGRATION ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "f715544c3187d6fa3a76bd036d393af8f5b5adf074690acded11c4d649313df1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-OBSERVABILITY-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL OBSERVABILITY ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "4a9c8dadeb01c1a7304a17a40917b780231f5609a481264e58ce01f736a9cf08",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-OPERATIONS-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL OPERATIONS ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "edc489e5a33d16616fd9ba3ed2dfb4c6d29bf9d094a2c0e2133b3ad65c05ad75",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-SECURITY-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SECURITY ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000020": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "a7aeff4c2056078e74e8346682c5cb006077abbe51ea27df208b2e34204916de",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-SERVICE-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000021": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "514f813a18d98e97b31be9c52fb211d57f5ddc84ead080f6ebe4430273c12cd1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-TESTING-QUALITY-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL TESTING & QUALITY ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-ARCH-000022": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "f66d6734bcf9a7aeff8f796434349d593d9ef9bdd5baece9b1aef0160c2d300f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-UNIVERSE-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL UNIVERSE CATALOG"
+      }
+    ],
+    "UCOS-ARCH-000023": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "895080e1dc8b973bdb1323a1ba809ea6e15a9057ed3ddedc5761de971ea84220",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-WORKFLOW-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL WORKFLOW ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-CAT-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "a9f3614383f3f49077a05158a09517f07a39740e2f597f92440efed685d078e4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-API-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CANONICAL API CATALOG"
+      }
+    ],
+    "UCOS-CAT-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "781124d8c83b6452f8fd8bac3d6ffbef6fa56b332c31fa85913a170c0ec0ef73",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-APPLICATION-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CANONICAL APPLICATION CATALOG"
+      }
+    ],
+    "UCOS-CAT-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "622bf52725bbe8a165e00c10a03bf56b16750519bb25db18a403e2b9dc32afc0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-DATA-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CANONICAL DATA CATALOG"
+      }
+    ],
+    "UCOS-CAT-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "7a28eb6c9cddb84bf4fb342330969161c318f0dfd75c83768347646ac2d1a621",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-EVENT-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CANONICAL EVENT CATALOG"
+      }
+    ],
+    "UCOS-CAT-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "89bd2561435974cf68bc246264b26eb06f9b85444abe50afec1592949a425710",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-RUNTIME-CATALOG-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CANONICAL RUNTIME CATALOG CONSTITUTION"
+      }
+    ],
+    "UCOS-CAT-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "dc713d732219eaea08fbc84622a75ab85b276930b387808efbf6fe8fe5329216",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-SERVICE-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CANONICAL SERVICE CATALOG"
+      }
+    ],
+    "UCOS-CAT-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "695cc245bd637f524eb47fe5fbb9fd4f299ee66bcc8bda66a7cfb848c06cea14",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-WORKFLOW-CATALOG.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CANONICAL WORKFLOW CATALOG"
+      }
+    ],
+    "UCOS-REF-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "6c80591ad9a5ee01842751c0f35bdb33762904c8c7fda91bc4229604843c6e8f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-API-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL REFERENCE API ARCHITECTURE"
+      }
+    ],
+    "UCOS-REF-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "0d16c2a742a98438e0eebd4db363a8e6ddcaeb1169697db1c4cdd06f4af1707d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-APPLICATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL REFERENCE APPLICATION ARCHITECTURE"
+      }
+    ],
+    "UCOS-ARCH-000024": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "7f9d7d8b2feba4519933f9664a78c798693033663a39271b198ad64940790cad",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-ARCHITECTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL REFERENCE ARCHITECTURE CONSTITUTION"
+      }
+    ],
+    "UCOS-REF-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "9bd5a594abf9d540dd77ae68b142a8d26d3a67940acb884d1e06ef6f4a99a4b9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-DATA-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL REFERENCE DATA ARCHITECTURE"
+      }
+    ],
+    "UCOS-REF-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "e13a5ffb64d21bbb9a9dfd6499c9b78c6815b53c70fe738de9a9aeccc46208bd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-EVENT-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL REFERENCE EVENT ARCHITECTURE"
+      }
+    ],
+    "UCOS-REF-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "741bb514363de53f649fbeb4317ef35793765f72f7b4dfb7da7842932112eab3",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-SERVICE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL REFERENCE SERVICE ARCHITECTURE"
+      }
+    ],
+    "UCOS-REF-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "17df43522bb8866f3903ed15c8ce24f09cde3c89ca924386ab8892177a7a2888",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-WORKFLOW-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL REFERENCE WORKFLOW ARCHITECTURE"
+      }
+    ],
+    "UCOS-GEN-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "a31c5a3a1d7917001cb0956079487c968212f1201d2859161586f8c4fd524099",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "05-GENERATION/UCOS-Ω∞-UNIVERSAL-API-GENERATION-FRAMEWORK.md",
+        "name": "UCOS Ω∞ — UNIVERSAL API GENERATION FRAMEWORK"
+      }
+    ],
+    "UCOS-GEN-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "41f2dd5e2328f1c8fae137945015a777562511dca722ecfd0104a5ab69abaf51",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "05-GENERATION/UCOS-Ω∞-UNIVERSAL-APPLICATION-GENERATION-FRAMEWORK.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION GENERATION FRAMEWORK"
+      }
+    ],
+    "UCOS-GEN-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "3bb762bdb7925b01863c67ca44c735892de174f9a3d85ff03884c7087440071a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "05-GENERATION/UCOS-Ω∞-UNIVERSAL-DATA-GENERATION-FRAMEWORK.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA GENERATION FRAMEWORK"
+      }
+    ],
+    "UCOS-GEN-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "37c3d96ed193a3f8a2a0308df8754edaed98c37e10d4c8fdabf1ee470329403e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "05-GENERATION/UCOS-Ω∞-UNIVERSAL-EVENT-GENERATION-FRAMEWORK.md",
+        "name": "UCOS Ω∞ — UNIVERSAL EVENT GENERATION FRAMEWORK"
+      }
+    ],
+    "UCOS-GEN-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "e4fe38f5ddda4402b19cf50492f027a70aa4fa9bef223dec0dac4551196e930d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "05-GENERATION/UCOS-Ω∞-UNIVERSAL-GENERATION-FRAMEWORK-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL GENERATION FRAMEWORK CONSTITUTION"
+      }
+    ],
+    "UCOS-GEN-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "681959b00bd7e375e60ee81a1ca24638edfab93b13b176b202a321f49aa965ad",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "05-GENERATION/UCOS-Ω∞-UNIVERSAL-SERVICE-GENERATION-FRAMEWORK.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE GENERATION FRAMEWORK"
+      }
+    ],
+    "UCOS-GEN-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "ebe0a3060d6645168a82f564ab8770753d089f346c6bc7c138f307517fa31a07",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "05-GENERATION/UCOS-Ω∞-UNIVERSAL-WORKFLOW-GENERATION-FRAMEWORK.md",
+        "name": "UCOS Ω∞ — UNIVERSAL WORKFLOW GENERATION FRAMEWORK"
+      }
+    ],
+    "UCOS-IMP-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "d6a318ff4489715980e6544e8d7453794eaf4956e236370ba2562a021c889249",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-AI-PLATFORM.md",
+        "name": "UCOS Ω∞ — AI PLATFORM"
+      }
+    ],
+    "UCOS-IMP-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "e2b4bb68c16f0a999eaae9deadad85c568c3715693bbf091a9027099fd6a7516",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-API-PLATFORM.md",
+        "name": "UCOS Ω∞ — API PLATFORM"
+      }
+    ],
+    "UCOS-IMP-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "387da3a4f66ad870cc978f7b6f6183941a652460c2a55a2a47fa0b0f967e261a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-APPLICATION-FACTORY.md",
+        "name": "UCOS Ω∞ — APPLICATION FACTORY"
+      }
+    ],
+    "UCOS-IMP-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "7dea534f6be0f95f30666ff31dd14820bfdbc8c1e1ee53bb1ada9c767da819d9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-ECOSYSTEM-PLATFORM.md",
+        "name": "UCOS Ω∞ — ECOSYSTEM PLATFORM"
+      }
+    ],
+    "UCOS-IMP-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "2c85a7e7523592a3a7996039958cebc77a35b93655278b4234864d4d898c137e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-FOUNDATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — FOUNDATION ARCHITECTURE"
+      }
+    ],
+    "UCOS-IMP-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "d577b9739e0ed0b162fc089ea0f3aece58820d5bae1691b9b7a50d31a314b61b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-IDENTITY-PLATFORM.md",
+        "name": "UCOS Ω∞ — IDENTITY PLATFORM"
+      }
+    ],
+    "UCOS-IMP-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "9acb8b78310b02deb9bbf546a5f6740094347f341b05523ceeae69e4ed73f059",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-KNOWLEDGE-GRAPH-ENGINE.md",
+        "name": "UCOS Ω∞ — KNOWLEDGE GRAPH ENGINE"
+      }
+    ],
+    "UCOS-IMP-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "4ae7514c722c7ddc7f6b766e3da5c2db5b88b79d4c5078c7f5ea410e91fd8a9f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-ONTOLOGY-PLATFORM.md",
+        "name": "UCOS Ω∞ — ONTOLOGY PLATFORM"
+      }
+    ],
+    "UCOS-IMP-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "0fa94333015808e86322b3141b4bdf4363c333d8856e6e02fce091eb5ac0e2c1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-PRODUCTION-PLATFORM.md",
+        "name": "UCOS Ω∞ — PRODUCTION PLATFORM"
+      }
+    ],
+    "UCOS-IMP-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "acf7426f6a42b327a6eac9756bd71885b6e09343ef6ef32236011c276c15112a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-REGISTRY-PLATFORM.md",
+        "name": "UCOS Ω∞ — REGISTRY PLATFORM"
+      }
+    ],
+    "UCOS-IMP-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "cbdca9d832b421d62e5522eb1e47fcca5c35b51a6ef46803c778b5187cdc71fa",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-REPOSITORY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — REPOSITORY ARCHITECTURE"
+      }
+    ],
+    "UCOS-IMP-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "a14d02ae3f3aaf530e8971c6c83568644dcca8b43bab3570c185574aaaf7d7a7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-RUNTIME-PLATFORM.md",
+        "name": "UCOS Ω∞ — RUNTIME PLATFORM"
+      }
+    ],
+    "UCOS-IMP-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "35cc9f7642e9371ad180ec743340bb69dfd64be748c8f47ca082630fb699d792",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-UNIVERSAL-COMPILER.md",
+        "name": "UCOS Ω∞ — UNIVERSAL COMPILER"
+      }
+    ],
+    "UCOS-IMP-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "6a871bbc739d0637852a6937cf4fb4d8f4605f8376c0457aa2b5d56149909fed",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-WORKFLOW-PLATFORM.md",
+        "name": "UCOS Ω∞ — WORKFLOW PLATFORM"
+      }
+    ],
+    "UCOS-ENG-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "fdb58ae26af5858b395208b6957e70c6a674566ad873522665d992874500c66f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "07-ENGINEERING/ENG-GOV-003-ENGINEERING-FOUNDATION-FREEZE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — ENGINEERING FOUNDATION FREEZE DETERMINATION"
+      }
+    ],
+    "UCOS-ENG-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "f5169f1737c77bfd322c70c178082885dc59fffe505847a6592e6f8eff02f594",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "07-ENGINEERING/UCOS-Ω∞-ENGINEERING-FOUNDATION-COMPLETION-ENG-005-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — ENGINEERING FOUNDATION COMPLETION & ENG-005 READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-ENG-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "17950c9b6d76aa1ec15d009e98191cd7d14adb0eb538c8084a9a9beb09f4b00a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "07-ENGINEERING/UCOS-Ω∞-ENGINEERING-PROGRAM-MASTER-INDEX.md",
+        "name": "UCOS Ω∞ — ENGINEERING PROGRAM MASTER INDEX & EXECUTION CONSTITUTION"
+      }
+    ],
+    "UCOS-ENG-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "004e7d53f1249f2497699fa193f853c64a5b895b1f309d766225f749b9031381",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "07-ENGINEERING/UCOS-Ω∞-ENGINEERING-ROADMAP-RECONCILIATION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — ENGINEERING ROADMAP RECONCILIATION DETERMINATION"
+      }
+    ],
+    "UCOS-ENG-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "43a75216b3f475d3cb1d69e38e661e168849cf93ed6a91f10adef5b65c7254d6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-IDENTITY-SYSTEM-MASTER-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL IDENTITY SYSTEM (UIS) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ENG-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "3cfaded933016a18598aea1fcc173de90dc3c06a31ee57dce6c041d70e91b561",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-OBJECT-SYSTEM-MASTER-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL OBJECT SYSTEM (UOS) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ENG-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "dba10012e74ff38112bba7b2ae1cd59de8763c87fa9df0e4e9f183529dd19df4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-RELATIONSHIP-REFERENCE-SYSTEM-MASTER-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL RELATIONSHIP & REFERENCE SYSTEM (URRS) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ENG-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "a40c67443759dac74cdad5a1e631d613ff1fdc8167160f4c5e1da356f3fa6d44",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-TYPE-SYSTEM-MASTER-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL TYPE SYSTEM (UTS) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ENG-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "92685ff6e2ca8733f950a2e8d269c741e1e4e1566360f9112f9fcd7e1bcd67a7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-VALUE-SYSTEM-MASTER-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL VALUE SYSTEM (UVS) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "c963176af9b2b27bc2174f9ad852d432d52d04eee1591cee02157de678c4921e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-001-UNIVERSAL-RUNTIME-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL RUNTIME CONSTITUTION (URC) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "1b86324ace7e081aad74b4bc35df0b1eddba3bb4d9ee645184382330fc6a25ba",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-002-UNIVERSAL-RUNTIME-THEORY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL RUNTIME THEORY (URT) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "82db02f127195f053d8d24bc48d62db36bcd78ff4b62615d3e8af9fb2c3f770a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-003-UNIVERSAL-RUNTIME-ONTOLOGY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL RUNTIME ONTOLOGY (URO) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "a73fb10f55bcaedc8f2f230d91859cf70df3832df6917f1422a8f37ebc106486",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-004-UNIVERSAL-RUNTIME-TAXONOMY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL RUNTIME TAXONOMY (URX) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "7c11c425f15867425c26ac19ff771f0f762522fb81a9c289d4840beb45e706ab",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-005-UNIVERSAL-RUNTIME-META-MODEL.md",
+        "name": "UCOS Ω∞ — UNIVERSAL RUNTIME META-MODEL (URMM) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "0b030c812f418097b8b122a4f1d90c470ecb6007093174d74b2d65d6652cbe9d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-006-UNIVERSAL-EXECUTION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL EXECUTION ARCHITECTURE (UEA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "e772fcbbf13625aefc4d1edfdbcc7f1b493a95c6cd28155a0d9fc1c3e68de273",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-007-UNIVERSAL-STATE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL STATE ARCHITECTURE (USA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "ecf024f1b6bb4b82e300ed35bd9f994404007d1d3a108278bebae5bd5c9098b2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-008-UNIVERSAL-EVENT-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL EVENT ARCHITECTURE (UEvA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "4b3aac33bfbe801bbd4b441d080ad26be6cf4e72dc5894c7a534713d5c53c38c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-009-UNIVERSAL-WORKFLOW-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL WORKFLOW ARCHITECTURE (UWA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "ed2b471577aba92a515a5eca1c192e899ec01b405cff19162162d72298ba6870",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-010-UNIVERSAL-POLICY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL POLICY ARCHITECTURE (UPA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "d85ba603d2ed4ff5bb07391438c3a674b883342fe2236bb207e0be4a4350339d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-011-UNIVERSAL-AGENT-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL AGENT ARCHITECTURE (UAgA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "9c8f1937b9f2f417c7260504dde908de891d99cffb9f8265a83031d76706645e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-012-UNIVERSAL-CONTEXT-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CONTEXT ARCHITECTURE (UCtA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "5c5e0c9bc58b14184e742139556d1642ea2c13144a442e75a0c556bf2584b3ac",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-013-UNIVERSAL-ORCHESTRATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL ORCHESTRATION ARCHITECTURE (UOrA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "4cfa3c289fe2de88fc2c35dc5cacddb6db664dfe2448a90d01c557e9127e836a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-014-UNIVERSAL-RUNTIME-INTEGRATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL RUNTIME INTEGRATION ARCHITECTURE (URIA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-RUN-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "5afbef393b980bc05175f88e53470b43109c61b156bcc42b5165ac95c728f5a2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-GOV-001-RUNTIME-FOUNDATION-FREEZE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — RUNTIME FOUNDATION FREEZE DETERMINATION"
+      }
+    ],
+    "UCOS-RUN-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "c22459cbb7e270b4fa1cb2a60fe00ab35743df5ddf88cce17ae57fb3e44d3cd0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-GOV-002-RUNTIME-PROGRAM-CERTIFICATION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — RUNTIME PROGRAM CERTIFICATION DETERMINATION"
+      }
+    ],
+    "UCOS-RUN-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "777046ddcdb41aaf44465e3d09ecb266e2854fe37ea968759a240e39103bc1b8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-GOV-003-RUNTIME-PROGRAM-FREEZE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — RUNTIME PROGRAM FREEZE DETERMINATION"
+      }
+    ],
+    "UCOS-RUN-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "08ca453d283274754d164c37d685f0fad7aa822242b3f7daa29eb00c5bb15125",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "08-RUNTIME/RUNTIME-REG-001-RL-F2-RUNTIME-PROGRAM-MASTER-REGISTRY.md",
+        "name": "UCOS Ω∞ — RL-F2 RUNTIME PROGRAM MASTER REGISTRY AND FOUNDATION INDEX"
+      }
+    ],
+    "UCOS-FRZ-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "779e054ac7dee04ebb7f316e9b85421b154309e37c7e307afe88e6dc9f180c3a",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "99-FREEZE/FREEZE-NOTICE.md",
+        "name": "Freeze Notice"
+      }
+    ],
+    "UCOS-FRZ-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "b4e45034361308400bebd3826660597e032b3b94b43763d0a22922e3ac778142",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "99-FREEZE/SOURCE-FILES.txt",
+        "name": "Source Files"
+      }
+    ],
+    "UCOS-FRZ-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "ad9d7e0d775b02d91b02f0798f94f37b236bfeeb716acfd9bc13c0c0686ef949",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "99-FREEZE/SOURCE-HASHES.txt",
+        "name": "Source Hashes"
+      }
+    ],
+    "UCOS-MISC-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "f4cbaf43bf1fd371d982fb5c3ccaa1aaff066a77ad801ee660451422c5378e76",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "UCOS Ω∞ MASTER END-TO-END PROGRAM.docx",
+        "name": "Ucos Ω∞ Master End To End Program"
+      }
+    ],
+    "UCOS-MISC-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T02:26:52+00:00",
+        "content_hash": "8fa793fb1c4f9a09d5dd12f510ad439fddb003fc953c66583fed6e7a15600078",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "UCOS-Consolidation Plan.docx",
+        "name": "Ucos Consolidation Plan"
+      }
+    ],
+    "UCOS-ADV-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "dc05c5b3f0513d7f9f701a089dd4ce8bbd291f559c122ab8a2ffbd7d90ac150b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-000-ADVANCEMENT-PROGRAM-MASTER-INDEX.md",
+        "name": "UCOS Ω∞ — UKB ADVANCEMENT PROGRAM MASTER INDEX & DIGITAL-TWIN ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "310f568958ec1d29c60a06de0a2ee86867977e0c312392967f70491ccd2cbd28",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-001-REAL-TIME-CONNECTOR-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — REAL-TIME CONNECTOR LAYER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "9f9c4f77785add071621759926b2b7a38061641dda1274fa0ff1d3a51c59cbec",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-002-REPOSITORY-INTELLIGENCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — REPOSITORY INTELLIGENCE LAYER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "d2dd59014e96e46aa1f2e70d795eeafc9c265ab42beadbcd5fd433a5dafa5a1d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-003-IMPLEMENTATION-TRACEABILITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — IMPLEMENTATION TRACEABILITY ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "3e3cd214de246b65937abf017ad191fa29d84796e6c34b1d933d1f1533f6e2b8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-004-TESTING-INTELLIGENCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — TESTING INTELLIGENCE LAYER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "f629f6288a48db48c4e859d05bcc225f6d3bbfa704dd0fecc8ef6d16f6602463",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-005-SECURITY-INTELLIGENCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — SECURITY INTELLIGENCE LAYER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "04587667284430af0994d4d4551a5281afdf746f4082599aea9b074f8f1b3113",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-006-DEPLOYMENT-INTELLIGENCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — DEPLOYMENT INTELLIGENCE LAYER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "c925e6b2c5ec00effe6ede0ec2a49689d1fd58c1358b479b6c900f6b7b4e95dd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-007-PRODUCTION-INTELLIGENCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — PRODUCTION INTELLIGENCE LAYER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "2e068f3817982b7b37e98559b333f93e937b943d16810e8bb2bcb219d8cb8957",
+        "version": "semver of the screen",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-008-UI-UX-DIGITAL-TWIN-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UI / UX DIGITAL TWIN ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "aa997b165cc6fbd239b29b647771e76419dc9f4f8ec50c1db34038456a531bde",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-009-UNIVERSAL-PUBLICATION-ENGINE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PUBLICATION ENGINE ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "6623e54cf8eca45b5758b263d8d0a63d4c189eeadbaffda25052c23ef3dc4a1d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-010-NAVIGATION-PORTAL-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — NAVIGATION PORTAL ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "7b4789af8d606c2f47502bcb748364b9cda0f7633018518b568ae0b10372ff32",
+        "version": "version",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-011-ENTERPRISE-SEARCH-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — ENTERPRISE SEARCH ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "b25b0289f4be074d7bf618977212845dfc234ecaba213ca78c7c2d49b512b4d7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-012-CONTROL-TOWER-AUTOMATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — CONTROL TOWER AUTOMATION ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "378d489fe0ed45ec50f88569bec8c05ba5d6b780f615388860cb2d97e7ef9b42",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-013-AI-KNOWLEDGE-LAYER-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — AI KNOWLEDGE LAYER ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "00a9781bdebeae1a21f5bf28e09099eece2b926c3c1db78b85d5912ebb7a711c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-014-DIGITAL-TWIN-CERTIFICATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — DIGITAL TWIN CERTIFICATION ARCHITECTURE"
+      }
+    ],
+    "UCOS-ADV-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "604778ad2ab434d3d633c1acefd731a1e2d0e00f498fc7676b5352bf371bfea4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-015-COMPLETE-REPOSITORY-STRUCTURE.md",
+        "name": "UCOS Ω∞ — COMPLETE REPOSITORY STRUCTURE (ADVANCEMENT)"
+      }
+    ],
+    "UCOS-ADV-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "9cade2db277171dd4dd557796ac535cd73eb0f40ed862c009359b796fd089d4b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-016-IMPLEMENTATION-ROADMAP.md",
+        "name": "UCOS Ω∞ — UKB ADVANCEMENT IMPLEMENTATION ROADMAP"
+      }
+    ],
+    "UCOS-ADV-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "c3d3218fe7b804c8dad367ff53a6222ae03a9794ca26c81776892ebfdd9c67e9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-017-DEPENDENCY-GRAPH.md",
+        "name": "UCOS Ω∞ — UKB ADVANCEMENT DEPENDENCY GRAPH"
+      }
+    ],
+    "UCOS-ADV-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "011f975de4d450f3c963a60228b64d8b7ef9f1b0307f1a8a4bd4651548d69955",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-018-MIGRATION-PLAN.md",
+        "name": "UCOS Ω∞ — UKB ADVANCEMENT MIGRATION PLAN"
+      }
+    ],
+    "UCOS-REG-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "4872d633a5e7d5d2fb0399c3fa21aaeeb93ac190c90bb3cb56001bc9f08263ca",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/build.schema.json",
+        "name": "Build.Schema"
+      }
+    ],
+    "UCOS-REG-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "93498707daad63e7f6719899cc3af919958707c8fc3fdf5f26de7b3dc1935f61",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/connector.schema.json",
+        "name": "Connector.Schema"
+      }
+    ],
+    "UCOS-REG-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "ea7b126d7b21649b5891bcb08d3ad725d2cdae1308ae8515de7fc744acc4c23b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/deployment.schema.json",
+        "name": "Deployment.Schema"
+      }
+    ],
+    "UCOS-REG-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "c4724886a37d0154b128f59914d7fa65c5c9d44cf70b589b8c4344791ac1b9be",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/environment.schema.json",
+        "name": "Environment.Schema"
+      }
+    ],
+    "UCOS-REG-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "e39b325a5d9d010b5af12f16d70a81a3a208bf937364b1a70b62bb4087d0b9ee",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/export-job.schema.json",
+        "name": "Export Job.Schema"
+      }
+    ],
+    "UCOS-REG-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "0d6033f984981a9b5d2be2e2dc9860a46e6d5984b035e14cb4504cb1d9d45f3b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/finding.schema.json",
+        "name": "Finding.Schema"
+      }
+    ],
+    "UCOS-REG-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "3d61a2ede219d6eee3e40105bfc17d1acf4f6369c9651b6ed2f6df745a348d41",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/flow.schema.json",
+        "name": "Flow.Schema"
+      }
+    ],
+    "UCOS-REG-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "81e0b0af7e2615de6f7fbaa4a23808b4a2c644454f184a285d1c6ca3cd633a9a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/journey.schema.json",
+        "name": "Journey.Schema"
+      }
+    ],
+    "UCOS-REG-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "880053b53f7729401b37c1b6fd8365710e7cbe5266ef2956b4077ecde0b12e05",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/production-service.schema.json",
+        "name": "Production Service.Schema"
+      }
+    ],
+    "UCOS-REG-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "3e16f6c8349ed6d916cdbb263bdb44a5661f6a1f0ee16b16e2ba94eeaf7fe2d4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/repository.schema.json",
+        "name": "Repository.Schema"
+      }
+    ],
+    "UCOS-REG-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "8491cfcffa89e0f0a9c512084395ed5959784d1dcf08cd6d4a4ccd0922de5a15",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/signal.schema.json",
+        "name": "Signal.Schema"
+      }
+    ],
+    "UCOS-REG-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "cea9c4fe3b786887d26f2810ae7d9ac01f5cfcd2330974bd798406d732f6d605",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/test.schema.json",
+        "name": "Test.Schema"
+      }
+    ],
+    "UCOS-REG-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "a3d500349eed565582279427770cea539f43fd6f22eeb34a58d28c3f7801f681",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/ui-artifact.schema.json",
+        "name": "Ui Artifact.Schema"
+      }
+    ],
+    "UCOS-MISC-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:26:54+00:00",
+        "content_hash": "5f687ca6618107f28471ee34423900c7b3a5b4f31ae4cbb257fca80177b9a7ed",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "~$OS Ω∞ MASTER END-TO-END PROGRAM.docx",
+        "name": "~$Os Ω∞ Master End To End Program"
+      }
+    ],
+    "UCOS-ADV-000020": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T04:29:01+00:00",
+        "content_hash": "870e220eb8efc5b88ae6fa1e1e51a0d9cbdd9ba6b8af9d2f9e0f5f5b804210d0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/ADVANCEMENT/UKB-ADV-019-FINAL-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UKB ADVANCEMENT FINAL READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-MISC-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T06:33:18+00:00",
+        "content_hash": "7a9ce54e72a57915633db5e93ba8c31e7d44e7bc206d77f8c61e9c36a50b460a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL ARCHITECTURAL QUALITY CONSTITUTION"
+      }
+    ],
+    "UCOS-PLT-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T06:33:18+00:00",
+        "content_hash": "37c5733f67714879bbc5ec0e159c405b6d3d2a61d7b4392ffab78f1dd7beb446",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-001-UNIVERSAL-PLATFORM-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM CONSTITUTION (UPC) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T06:33:18+00:00",
+        "content_hash": "cbabe5eb2b5847816c1e40dd026216763c00cb32b24d7e1bcc0b4dc56f495807",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-002-UNIVERSAL-PLATFORM-THEORY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM THEORY (UPT) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T06:33:18+00:00",
+        "content_hash": "7f6cb7436a2daa5a4df10a653274a80d1852793075a7cd9cdb230cdcf9eefb58",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-003-UNIVERSAL-PLATFORM-ONTOLOGY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM ONTOLOGY (UPO) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T06:33:18+00:00",
+        "content_hash": "d8573502e9030fdf50d84e83ee7de716ad5ec4f2f5c12c49915cdcfd4be78e8f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-004-UNIVERSAL-PLATFORM-TAXONOMY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM TAXONOMY (UPX) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T06:33:18+00:00",
+        "content_hash": "e4cff56b173cf315ad6eefb87725713622ef19178d0a93f4e2c41dbb3329aa8e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-005-UNIVERSAL-PLATFORM-META-MODEL.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM META-MODEL (UPM) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T06:33:18+00:00",
+        "content_hash": "d252bb7716ee10549dcaf8abc348983886595e76c970b0b4b819ae0b3bd0db20",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-FOUNDATION-PACKAGE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — PLATFORM FOUNDATION PACKAGE DETERMINATION"
+      }
+    ],
+    "UCOS-PLT-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T06:33:18+00:00",
+        "content_hash": "155a9699bb6aca1c4d1678bb75ddbf7cff24a39358e445af284dd7b24ee0e9ea",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-GOV-000-PLATFORM-FOUNDATION-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
+        "name": "UCOS Ω∞ — PLATFORM FOUNDATION PROGRAM ESTABLISHMENT DETERMINATION"
+      }
+    ],
+    "UCOS-PLT-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T07:56:54+00:00",
+        "content_hash": "a8927a3d9aaf5eb01bec516bb5fc41eada9a94262da29615d0051abe77c03adb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-006-UNIVERSAL-PLATFORM-CAPABILITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM CAPABILITY ARCHITECTURE (UPCA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T07:58:18+00:00",
+        "content_hash": "f89ad3bcd2273d2c2d5d23ca7469d07a976c12efb6f8474d81f7634be57e1b13",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-007-UNIVERSAL-PLATFORM-COMPONENT-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM COMPONENT ARCHITECTURE (UPCM) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:00:03+00:00",
+        "content_hash": "38aae65380b5908d6d631c69a7bb72bc53e5f3d4df5ca2fb225e8c8a25f4ffc0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-008-UNIVERSAL-PLATFORM-SERVICE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM SERVICE ARCHITECTURE (UPSV) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:01:42+00:00",
+        "content_hash": "7651f7ced1454aa03a1c250b39b267ccfb0080f405028232fae3964221c15b24",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-009-UNIVERSAL-PLATFORM-EXPERIENCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM EXPERIENCE ARCHITECTURE (UPXP) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:03:07+00:00",
+        "content_hash": "816fdd4658a75c69b59fdd2bd8a0b7cb9890b6339e1f06e6c6a939a8cd1f4ee9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-010-UNIVERSAL-PLATFORM-COMPOSITION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM COMPOSITION ARCHITECTURE (UPCO) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:04:52+00:00",
+        "content_hash": "9ac67f4453bcbbc81dec3b56ed1951b9cbc9a383cb45ed90d79ff2187b9abcde",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-011-UNIVERSAL-PLATFORM-INTEGRATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM INTEGRATION ARCHITECTURE (UPIN) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:06:38+00:00",
+        "content_hash": "2b66a1e37f7cb0b059eaf6bb77f8ce857acbf993d79c09d2a23cdd33c18300e4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-012-UNIVERSAL-PLATFORM-RUNTIME-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM RUNTIME ARCHITECTURE (UPRT) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:08:26+00:00",
+        "content_hash": "f1981cebd606cfb380c7b4518720203d507f86e9f7d93de88b0e7011fabae35e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-013-UNIVERSAL-PLATFORM-DEPLOYMENT-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM DEPLOYMENT ARCHITECTURE (UPDP) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:10:11+00:00",
+        "content_hash": "4e12eefbfa9488bac6da935a03840387926d1ff79bb7c99eaec0d00521104094",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-014-UNIVERSAL-PLATFORM-REFERENCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM REFERENCE ARCHITECTURE (UPRF) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-PLT-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:17:29+00:00",
+        "content_hash": "f0a9f5a955949e602fb8fe372259503d5248accbc1ae30c555ce3e2b6afc3baf",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-015-PLATFORM-FOUNDATION-FREEZE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — PLATFORM FOUNDATION FREEZE DETERMINATION"
+      }
+    ],
+    "UCOS-PLT-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:18:21+00:00",
+        "content_hash": "27305738ba2a608f2418705f25b22521a1290f48fd20b08fae7f29cfac4357ba",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-016-PLATFORM-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — PLATFORM READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-PLT-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:19:24+00:00",
+        "content_hash": "f7162266ac889a8307c2aa4ee959b4c9ccf83b048b62a1dff715d988769b883e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-017-PLATFORM-COMPLETION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — PLATFORM COMPLETION DETERMINATION"
+      }
+    ],
+    "UCOS-PLT-000020": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T08:20:41+00:00",
+        "content_hash": "a4be96f656ed39e76611598e7650812e4616325ef00be9982482b86b315342fd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-018-PLATFORM-MASTER-REGISTRY.md",
+        "name": "UCOS Ω∞ — PLATFORM PROGRAM MASTER REGISTRY"
+      }
+    ],
+    "UCOS-DAT-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:10:57+00:00",
+        "content_hash": "52532f3d5608a152a546984a925b5016007294271f64e09c44e806d739f6ee62",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-GOV-000-UNIVERSAL-DATA-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA PROGRAM ESTABLISHMENT DETERMINATION"
+      }
+    ],
+    "UCOS-DAT-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "60005618744934231340a1807837704f0f6eb79557ecd0c12f73779662f15bf1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-001-UNIVERSAL-DATA-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA CONSTITUTION (UDC) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "f487acf83c743f0624c4d2476aa5070b521b32852eb45f49facc24a5bf80164a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-002-UNIVERSAL-DATA-THEORY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA THEORY (UDT) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "e8509a75e67b697c7091a09d7768725cd83c4c12e26360f73433ba24dea319a6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-003-UNIVERSAL-DATA-ONTOLOGY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA ONTOLOGY (UDO) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "ec6698181073448c50e913545071c4d09a85fdee5845363182fb0a3fb0eb7d46",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA TAXONOMY (UDX) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "6cee69ac522f6124be10e753c2b0c2c79a6671fe16da44575d28cae3ddf1da4f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-005-UNIVERSAL-DATA-META-MODEL.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA META-MODEL (UDM) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "20c7fd3b584eaaef2a7da8c78b62659ca0b2f846e93f069e0c80a8ffbd59573e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-006-UNIVERSAL-DATA-ENTITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA ENTITY ARCHITECTURE (UDEA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "a6fd2775e497fdf486e3fa871e1dc3ce16b41baac64314768083f509dcc41c45",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-007-UNIVERSAL-DATA-ATTRIBUTE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA ATTRIBUTE ARCHITECTURE (UDAA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "5c81e62674f7945e16543cf9b931fb058922dbc3b95b4d118bdc5ddb3cae5b89",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-008-UNIVERSAL-DATA-RELATIONSHIP-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA RELATIONSHIP ARCHITECTURE (UDRA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "4309492b91b6efab66af87df7dc2070e2a11b0238b9d94c1eae54ff146701fda",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-009-UNIVERSAL-DATA-SCHEMA-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA SCHEMA ARCHITECTURE (UDSA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "34d61b9ef46b278dedca7e9a01b79dd3946a84d09f1179b9fef134f0a22c2145",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-010-UNIVERSAL-DATA-STORAGE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA STORAGE ARCHITECTURE (UDTA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "d486ef3a15748430f28a152bd463686e1dad8cf12b265b89010ce882d888abc3",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-011-UNIVERSAL-DATA-LIFECYCLE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA LIFECYCLE ARCHITECTURE (UDLA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "aa69e2b4dcf89fa10d70f2292c4848174a95314de7b9fe545610c254884efa6c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-012-UNIVERSAL-DATA-GOVERNANCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA GOVERNANCE ARCHITECTURE (UDGA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "bc60a303a6fe72f346cd0c2dc17a16751b3dbe268e913a641589639e712d167b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-013-UNIVERSAL-DATA-QUALITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA QUALITY ARCHITECTURE (UDQA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "07fd2ee2dad9c9b6f00351118805313c9369d096558ab06c1a40cae5b649c0d7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-014-UNIVERSAL-DATA-SECURITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL DATA SECURITY ARCHITECTURE (UDZA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-DAT-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "040b0a41c5b9d6e751e933e0fcf3ff65da043527c565cb6dbd58ba1dec28c6b6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-015-DATA-FOUNDATION-FREEZE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — DATA FOUNDATION FREEZE DETERMINATION"
+      }
+    ],
+    "UCOS-DAT-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "f99246e4747234661078348c4789998626c9568ea05d4af881b9302fe11a7984",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-016-DATA-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — DATA READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-DAT-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "4855fa202a7b208b8371935b85df44aee2610dd6f32e521a39cf45a66476da4f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-017-DATA-COMPLETION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — DATA COMPLETION DETERMINATION"
+      }
+    ],
+    "UCOS-DAT-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T09:57:16+00:00",
+        "content_hash": "45e498cb699a8f1a14e871f87972503a5620871078e28c9478f925559860944f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "10-DATA/DATA-018-DATA-MASTER-REGISTRY.md",
+        "name": "UCOS Ω∞ — DATA PROGRAM MASTER REGISTRY"
+      }
+    ],
+    "UCOS-SVC-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "4fb152820978c616fc81078d30e4849f9ff4a42eca2bc6395a446cbc527d93a2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-001-UNIVERSAL-SERVICE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE CONSTITUTION (USC) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "d7614df0ffff95edb471d979b9adf82098c8cc11ed38ad360ea9dc769dea8404",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-002-UNIVERSAL-SERVICE-THEORY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE THEORY (UST) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "dd91018ff74da420a78e8d4e3ed7634b03c466165edb186001744c0565fc2928",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-003-UNIVERSAL-SERVICE-ONTOLOGY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE ONTOLOGY (USO) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "1c25d7dcbba54a795e0c1fa58c92ff237bdff1681c516bc93b1fc84b1e2940d2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-004-UNIVERSAL-SERVICE-TAXONOMY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE TAXONOMY (USX) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "9325417b768ce1ff716c73090aa04fdff91edacd1d4562550121ad279516b6d8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-005-UNIVERSAL-SERVICE-META-MODEL.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE META-MODEL (USM) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "1f127d3b0535a8cdc55483d3f93705c658245d10e38748b7577aa9bfdb967402",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-006-UNIVERSAL-SERVICE-CAPABILITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE CAPABILITY ARCHITECTURE (USCA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "9be42a6d5129b193be1f2473110c2d04b56eaad337c48abddf53603071f480ef",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-007-UNIVERSAL-SERVICE-CONTRACT-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE CONTRACT ARCHITECTURE (USKA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "340e654c4bb643c2cdf4e6bad3f39232d80187c3f8066a06147ed2249b3a5259",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-008-UNIVERSAL-SERVICE-INTERFACE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE INTERFACE ARCHITECTURE (USIA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "ef5b45a6bb6cac2f0b33948c34cf35b214aad4b3b5639c4188e2ef4edf47a8c8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-009-UNIVERSAL-SERVICE-OPERATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE OPERATION ARCHITECTURE (USOA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "0dec614b0d5be22737bf51d9e288b1e54b7a4f4cbace8d75f05c0512cd784b77",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-010-UNIVERSAL-SERVICE-COMPOSITION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE COMPOSITION ARCHITECTURE (USMA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "5104735006832bcf148f4aaca55c7aac3c1cd725ec10bd6850e9e9c755c89d4e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-011-UNIVERSAL-SERVICE-ORCHESTRATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE ORCHESTRATION ARCHITECTURE (USRA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "98a5c31ca3a00b3f75c0f4f3fb14b337e48d55ed69e038720340b0a660172c70",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-012-UNIVERSAL-SERVICE-EXECUTION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE EXECUTION ARCHITECTURE (USEA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "c90de5ef613d33925cc2b675d09c5bcd8268f3324cada40658cc4e0b9de75434",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-013-UNIVERSAL-SERVICE-POLICY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE POLICY ARCHITECTURE (USPA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "e8676f3032ec9affa1e7009b2a35274882e630c019f41d995a45281619e5a853",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-014-UNIVERSAL-SERVICE-SECURITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE SECURITY ARCHITECTURE (USSA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-SVC-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "a8fbffec57ef7a3c1a7b4b08366ee7854271e18cd1fdb258d01c63db547674cc",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-015-SERVICE-FOUNDATION-FREEZE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — SERVICE FOUNDATION FREEZE DETERMINATION"
+      }
+    ],
+    "UCOS-SVC-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "85e4884801b032185cd96fd54ad7a708caac07853ce667470431ebe8e430f130",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-016-SERVICE-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — SERVICE READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-SVC-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "a7a104b3d98a669d3e8ebc9e83f29b5df74fd051953517d11f4b6908855f2ef6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-017-SERVICE-COMPLETION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — SERVICE COMPLETION DETERMINATION"
+      }
+    ],
+    "UCOS-SVC-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "a718eb2e8d175e2d9f82d324ac88167e558dd703a7c26234e614ec4b4d326996",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-018-SERVICE-MASTER-REGISTRY.md",
+        "name": "UCOS Ω∞ — SERVICE PROGRAM MASTER REGISTRY"
+      }
+    ],
+    "UCOS-SVC-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T10:46:33+00:00",
+        "content_hash": "297c920070ce358b6c42a2ed877ae31b3c2150d9a121b8c4c535446cb46e6254",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "11-SERVICE/SERVICE-GOV-000-UNIVERSAL-SERVICE-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SERVICE PROGRAM ESTABLISHMENT DETERMINATION"
+      }
+    ],
+    "UCOS-UMB-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "be311c89359251973b832ae778be792ffcf509908cb5f82bdb668007c1ce6c43",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-000-MASTER-BOOK-ARCHITECTURE-MASTER-INDEX.md",
+        "name": "UCOS Ω∞ — UNIVERSAL MASTER BOOK ARCHITECTURE — MASTER INDEX & CONSTITUTIONAL REALIZATION ROOT"
+      }
+    ],
+    "UCOS-UMB-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "349339f4f8f28f5b43020c6023217b9f7819eaf2ce0ca803d26c22d1bf790594",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-001-MASTER-BOOK-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — MASTER BOOK ARCHITECTURE"
+      }
+    ],
+    "UCOS-UMB-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "6f4e3cc1296c586e0bc929c7245e404e4fae7745542b8b7da9b9671f5e289ba7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-002-DIGITAL-TWIN-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — DIGITAL TWIN ARCHITECTURE"
+      }
+    ],
+    "UCOS-UMB-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "0beeea427062f5d2757d13323d823a3235bacc9e09ae376edad9b36d5af914aa",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-003-IDENTITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — IDENTITY ARCHITECTURE (UNIVERSAL IDENTIFIER ENGINE)"
+      }
+    ],
+    "UCOS-UMB-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "69f1b319a0d6e6288744f88483bd67275e1163d683ea907527bcf68442715069",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-004-NOMENCLATURE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — NOMENCLATURE ARCHITECTURE (UNIVERSAL NOMENCLATURE ENGINE)"
+      }
+    ],
+    "UCOS-UMB-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "915c2ddb59bae3e21c752b549f17e677996798cf4451ccc47a987f52821f6bba",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — REGISTRY ARCHITECTURE (UNIVERSAL REGISTRY ROOT)"
+      }
+    ],
+    "UCOS-UMB-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "e630a879f4fd2f6ba62324a88e5d66255ae1378751da4522b67baf41c707ed1a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — KNOWLEDGE GRAPH ARCHITECTURE (UNIVERSAL GRAPH ROOTS)"
+      }
+    ],
+    "UCOS-UMB-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "b7590a91fd4d2f2142b37b21730cd7932f408cd2d33ae79ca8ad847b9ac6ad81",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-007-TRACEABILITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — TRACEABILITY ARCHITECTURE"
+      }
+    ],
+    "UCOS-UMB-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "af66ccf2a90cb215e99709362a398bca9aec8bfadbe6380f32d43cfa3694fb09",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-008-CHANGE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — CHANGE ARCHITECTURE (UNIVERSAL CHANGE INTELLIGENCE)"
+      }
+    ],
+    "UCOS-UMB-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "247c06cf985a9fb72ab54c666d0e5e4734e7590fe2589551f960229e9c90ab63",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-009-VERSION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — VERSION ARCHITECTURE"
+      }
+    ],
+    "UCOS-UMB-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "9bfc013df107db468fbb4d95b065bb89d47481a4e0225e55e03922b40d4444a4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-010-LINEAGE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — LINEAGE ARCHITECTURE (LINEAGE & EVOLUTION REGISTRIES)"
+      }
+    ],
+    "UCOS-UMB-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "d8dad54accc1f7a8fe007416d82d4c0a72dd314926f777424f7d714f3a2d42b3",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-011-PUBLICATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — PUBLICATION ARCHITECTURE (UNIVERSAL PUBLICATION ENGINE)"
+      }
+    ],
+    "UCOS-UMB-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "dcb22060298f13211e56a845a899d81c024231a1d01be1865a53db4f1e70e08a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-012-SYNCHRONIZATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — SYNCHRONIZATION ARCHITECTURE (UNIVERSAL SYNCHRONIZATION LAYER)"
+      }
+    ],
+    "UCOS-UMB-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "7033e9074a292394846fc37cf9b7124dc7960888356b8b9a469374951686274a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-013-SEARCH-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — SEARCH ARCHITECTURE (UNIVERSAL SEARCH & NAVIGATION)"
+      }
+    ],
+    "UCOS-UMB-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "49b0009d76ea6b6b468c2d611b5603dce871147503f9fb85c27a787eb438bba1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-014-AI-KNOWLEDGE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — AI KNOWLEDGE ARCHITECTURE (UNIVERSAL AI KNOWLEDGE LAYER)"
+      }
+    ],
+    "UCOS-UMB-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "c27b1741de837e68269e6f54dc7043971b3a6a7533732c61f2a2152171da336b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-015-SECURITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — SECURITY ARCHITECTURE (FIVE-ZONE MODEL)"
+      }
+    ],
+    "UCOS-UMB-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "0244bedeed791cd2012e5105b3cee133a1e5688088c034ea0d630554b1d928e4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-016-CONTROL-TOWER-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — CONTROL TOWER ARCHITECTURE (UNIVERSAL CONTROL TOWER)"
+      }
+    ],
+    "UCOS-UMB-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "2a768669fa1d6e4687994bb0686561c214ebfecc32d0bd009b07759e53efd1bd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-017-CERTIFICATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — CERTIFICATION ARCHITECTURE (DIGITAL TWIN CERTIFICATION)"
+      }
+    ],
+    "UCOS-UMB-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "b056a8243f98b89195ed252f85fb801889133201991eb2b50526cc505ca59419",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-018-RUNTIME-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — RUNTIME ARCHITECTURE (KNOWLEDGE-OS RUNTIME)"
+      }
+    ],
+    "UCOS-UMB-000020": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "90cfe466a7728bd24b7eea2f267e185690399b7ae763a0bb12bed3b0154f3c16",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-019-OPERATIONAL-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — OPERATIONAL ARCHITECTURE (KNOWLEDGE-OS OPERATIONS)"
+      }
+    ],
+    "UCOS-UMB-000021": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "1abd0dc8a489a895f53ddc67d00a6c1ad3a99d66a226f0d9d890838b45a19860",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-020-SUCCESS-CRITERIA-AND-UNIVERSAL-PARTICIPATION-DEMONSTRATION.md",
+        "name": "UCOS Ω∞ — SUCCESS CRITERIA & UNIVERSAL PARTICIPATION DEMONSTRATION"
+      }
+    ],
+    "UCOS-MISC-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "5943f35732c42d80f7908a393f6ce0af649ba001c694fe4a164b9e71989ae86e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-001-UNIVERSAL-APPLICATION-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION CONSTITUTION (UAC) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "7561ec9628c25adc194996e801b9c821d73c509cfaaf9ae56f79faad5488472d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-002-UNIVERSAL-APPLICATION-THEORY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION THEORY (UAT) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "8e3c09412d8b6d08671267cf38ea50083a70eca0eed993398402a901c06ded55",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-003-UNIVERSAL-APPLICATION-ONTOLOGY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION ONTOLOGY (UAO) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "84f3563aa3a13a6be494716b01f3c15341bbea129c42cb8529cb7f742c28d9a8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-004-UNIVERSAL-APPLICATION-TAXONOMY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION TAXONOMY (UAX) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "71e76fe48c00e2757e1dd0725e9f9e553b5eef3904ab41552d4659b75a50c7fe",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-005-UNIVERSAL-APPLICATION-META-MODEL.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION META-MODEL (UAM) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "7e2bab6e451efcfe53ac4c855464b72db69d7764433f64bc6b3cadf372e4a518",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-006-UNIVERSAL-APPLICATION-CAPABILITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION CAPABILITY ARCHITECTURE (UACA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "48a63cb0bf9e5dcdf5cda3d9ce1adee983a27b59120d8be79e9200ec19ce4915",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-007-UNIVERSAL-APPLICATION-MODULE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION MODULE ARCHITECTURE (UAMA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "d346e31fd3423acfc27005a7457749a1b498368a823e393a6e23e88f850f7bbb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-008-UNIVERSAL-APPLICATION-FEATURE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION FEATURE ARCHITECTURE (UAFA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "5e5850c069718ce648cf1858c13027f4f0428aa6a52342dc4d5cc0e5af7a7e49",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-009-UNIVERSAL-APPLICATION-WORKFLOW-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION WORKFLOW ARCHITECTURE (UAWA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "779dafc421213b944aa6c1a3b791af3c76f793c33d086d44af3d18d5eca2baae",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-010-UNIVERSAL-APPLICATION-INTERACTION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION INTERACTION ARCHITECTURE (UAIA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "c14bd1c0f69b1620812f2eef793b301f4c605bc2b0b4db571b6bfa2743f3e755",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-011-UNIVERSAL-APPLICATION-STATE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION STATE ARCHITECTURE (UASA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "771704026674d34608423dc5575db9b0b3fdaf0e29b192df0b4116b5dc68f516",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-012-UNIVERSAL-APPLICATION-COMPOSITION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION COMPOSITION ARCHITECTURE (UACpA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "505e91338bf378f65bec84dde765279f2619a9fa73a39f0ba0ff68eaab2dc786",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-013-UNIVERSAL-APPLICATION-SECURITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION SECURITY ARCHITECTURE (UASecA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "0986565c53e835d7772d72031529a7e257c3760fd2b3c302067fe009578703d2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-014-UNIVERSAL-APPLICATION-GOVERNANCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION GOVERNANCE ARCHITECTURE (UAGA) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "bc9e82d1b2527e132b606b0a5c8953f4d40afbe99b27a03314e44d456384dbac",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-015-APPLICATION-FOUNDATION-FREEZE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — APPLICATION FOUNDATION FREEZE DETERMINATION"
+      }
+    ],
+    "UCOS-MISC-000020": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "8b8d14d1edc5b40ed61b3465e76d00c1ea9d5d1117fc37ee6e0dd71ca1b835db",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-016-APPLICATION-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — APPLICATION READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-MISC-000021": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "16defdf8c6a1e310fbb48dd2163f6ca3f8428ba2f571d1bddd48848963d73034",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-017-APPLICATION-COMPLETION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — APPLICATION COMPLETION DETERMINATION"
+      }
+    ],
+    "UCOS-MISC-000022": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "98c45aef74dd855c884edd8460cf834ee2e8976021ea0fc6dd2c937dbe62ec0d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-018-APPLICATION-MASTER-REGISTRY.md",
+        "name": "UCOS Ω∞ — APPLICATION PROGRAM MASTER REGISTRY"
+      }
+    ],
+    "UCOS-MISC-000023": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "3d15e9a60a9d48904e217f276b616bd8acb9206a0099099cce95709be2d5c067",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-GOV-000-UNIVERSAL-APPLICATION-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION PROGRAM ESTABLISHMENT DETERMINATION"
+      }
+    ],
+    "UCOS-MISC-000024": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "c29ee0d01a09e20a1967e05caa4b4d79ba4f1b00e3934e9e5a6b5e42943dbc24",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-GOV-999-UNIVERSAL-APPLICATION-PROGRAM-FINAL-CERTIFICATION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION PROGRAM FINAL CERTIFICATION DETERMINATION"
+      }
+    ],
+    "UCOS-MISC-000025": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "39dbad3f2d3c5e7058b3b06f5b62061f2ef9df43571bc3c7e7d985259b61e9de",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-GOV-EVOL-001-UNIVERSAL-APPLICATION-PROGRAM-EVOLUTION-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION PROGRAM EVOLUTION READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-MISC-000026": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "853391d48d9e50f9f400afad1dd58b583e88afef6df66106ee5e31d4eb9bc11c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "12-APPLICATION/APPLICATION-GOV-INF-001-UNIVERSAL-APPLICATION-PROGRAM-INFINITE-EVOLUTION-INTERPRETATION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL APPLICATION PROGRAM INFINITE EVOLUTION INTERPRETATION DETERMINATION"
+      }
+    ],
+    "UCOS-MISC-000027": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "c672f506e394149d41410db579a3d5147be092d89eb01d1c1955743c605860bd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-001-UNIVERSAL-INFRASTRUCTURE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE CONSTITUTION (UIC) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000028": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "c99e501a31d20c57e10b30504fb902eecb74d61c6aa670e7dca5d37f358e3641",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-002-UNIVERSAL-INFRASTRUCTURE-THEORY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE THEORY (UIT) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000029": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "24115582970c8059d11e7a5d47109404bd91e907a4117f45652e6b099a6a1f70",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-003-UNIVERSAL-INFRASTRUCTURE-ONTOLOGY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE ONTOLOGY (UIO) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000030": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "cf93f7c4559edc088d89f0b69a495e61a61f0ce8f2183281dfe06fd7ab27a295",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-004-UNIVERSAL-INFRASTRUCTURE-TAXONOMY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE TAXONOMY (UITX) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000031": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "4cb993c9ed5d5feff8ae188943240f2bd92c14948a29e7eda89f494c8c6e61da",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-005-UNIVERSAL-INFRASTRUCTURE-META-MODEL.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE META-MODEL (UIMM) MASTER ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000032": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "0df54437be0b9cb9021d7279f754f4ae8401bff161f87df3a6e78181b5e12035",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-006-UNIVERSAL-INFRASTRUCTURE-CAPABILITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE CAPABILITY ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000033": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "c0370cbfd1777ae230b21ed0a15e39dcf381c5dfaf38dfb2e7c077f3ee14b153",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-007-UNIVERSAL-INFRASTRUCTURE-COMPUTE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE COMPUTE ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000034": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "e73487da3262c9e4c2a700ab877f5f2c1d81dc251d02e436d02c1eb64a42ff06",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-008-UNIVERSAL-INFRASTRUCTURE-NETWORK-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE NETWORK ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000035": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "a67abe85e556f109a7b0727180b3e7db587c93777627a76b067fe32a673f7123",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-009-UNIVERSAL-INFRASTRUCTURE-STORAGE-HOSTING-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE STORAGE-HOSTING ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000036": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "12d15f1ff3acec3e0d89afa0b399d3eddc367b200a035624a2c527ac3b8f2099",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-010-UNIVERSAL-INFRASTRUCTURE-TOPOLOGY-AND-DISTRIBUTION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE TOPOLOGY & DISTRIBUTION ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000037": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "60ea8eb9b521ba886bedfa354c9703d5902b74b405928b8ba507c00cbd77ddb8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-011-UNIVERSAL-INFRASTRUCTURE-ENVIRONMENT-AND-PROVISIONING-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE ENVIRONMENT & PROVISIONING ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000038": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "2354d302373bc26612d0e824c245bcff0526509044f18349dd58ee11c8ccf597",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-012-UNIVERSAL-INFRASTRUCTURE-RESILIENCE-AND-AVAILABILITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE RESILIENCE & AVAILABILITY ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000039": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "d77cc2efe7613019c32fe30712d419fcf1c991c1aa4688a663f520484be30662",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-013-UNIVERSAL-INFRASTRUCTURE-SECURITY-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE SECURITY ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000040": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "9ad54fde6561fcc52df9a2fbc3d2c95b716d7918d098f42628311c768ef38873",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-014-UNIVERSAL-INFRASTRUCTURE-GOVERNANCE-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE GOVERNANCE ARCHITECTURE"
+      }
+    ],
+    "UCOS-MISC-000041": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "861330b36beeb057697ac9f5321b358f371ef61d3b65d5c188831427a8e3c906",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-015-INFRASTRUCTURE-FOUNDATION-FREEZE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — INFRASTRUCTURE FOUNDATION FREEZE DETERMINATION (IF-1)"
+      }
+    ],
+    "UCOS-MISC-000042": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "9140074d12d3a08349ea1270934e83ebaa4c3a997cf891f4e0e3527bdd2ef1c8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-016-INFRASTRUCTURE-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — INFRASTRUCTURE READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-MISC-000043": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "2bdc50025bd3495726d44370786c8f29c3948dfa2dbd54d414e1425463578c76",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-017-INFRASTRUCTURE-COMPLETION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — INFRASTRUCTURE COMPLETION DETERMINATION (IF-2)"
+      }
+    ],
+    "UCOS-MISC-000044": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "4285b27d43acc53fb2a44b1cd46daee270e1bd61fd5636bc1065484699dce625",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-018-INFRASTRUCTURE-MASTER-REGISTRY.md",
+        "name": "UCOS Ω∞ — INFRASTRUCTURE MASTER REGISTRY (IF-3)"
+      }
+    ],
+    "UCOS-MISC-000045": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "69098171ea59f16ff971d39cf4995d924a68c8b6109cb6c03dfd01a25a37f1a0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-EXEC-001-UNIVERSAL-INFRASTRUCTURE-PROGRAM-EXECUTION-AUTHORIZATION-CONTRACT.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE PROGRAM EXECUTION AUTHORIZATION CONTRACT"
+      }
+    ],
+    "UCOS-MISC-000046": [
+      {
+        "seq": 1,
+        "at": "2026-07-15T16:15:54+00:00",
+        "content_hash": "6bc9f629d0a3dd41f4d6745e806a1c66a026250b37c168ba2a5e9149d118d8b1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "13-INFRASTRUCTURE/INFRASTRUCTURE-GOV-000-UNIVERSAL-INFRASTRUCTURE-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL INFRASTRUCTURE PROGRAM ESTABLISHMENT DETERMINATION"
+      }
+    ],
+    "UCOS-UMB-000022": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T01:49:07+00:00",
+        "content_hash": "af4b551745836b115f82eff4384f4ccb280ae52babaa77d5b2254a82b7e521b8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-READINESS-001-MASTER-BOOK-IMPLEMENTATION-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — MASTER BOOK IMPLEMENTATION READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-UMB-000023": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T01:54:45+00:00",
+        "content_hash": "85d939cf4090e6ce74bb290d078cee0b770823077cb6b66abadc3c7e82fd7f59",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-IMP-001-AUTOMATIC-REGISTRATION-AND-ENFORCEMENT-REALIZATION.md",
+        "name": "UCOS Ω∞ — UMB-IMP-001 · AUTOMATIC REGISTRATION AND ENFORCEMENT REALIZATION"
+      }
+    ],
+    "UCOS-UMB-000024": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T02:16:02+00:00",
+        "content_hash": "2d2039f876e9d0e9e18ef7dd90722b708084fa06251b45167be465eba0aa2932",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-IMP-002-TRACEABILITY-SPINE-AND-TYPED-KNOWLEDGE-GRAPH-REALIZATION.md",
+        "name": "UCOS Ω∞ — UMB-IMP-002 · TRACEABILITY SPINE AND TYPED KNOWLEDGE GRAPH REALIZATION"
+      }
+    ],
+    "UCOS-UMB-000025": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T02:37:55+00:00",
+        "content_hash": "8b881de876124aa41036bf820fcd8d9d4cc4ad777ce63f8c042bcc08be6831b7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-IMP-003-CHANGE-VERSION-AND-LINEAGE-INTELLIGENCE-REALIZATION.md",
+        "name": "UCOS Ω∞ — UMB-IMP-003 · CHANGE, VERSION, AND LINEAGE INTELLIGENCE REALIZATION"
+      }
+    ],
+    "UCOS-UMB-000026": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T03:19:44+00:00",
+        "content_hash": "00a48549a3eb9d173aa735e04113ce79857fe2d660a9f385c175479be900a047",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-IMP-004-LIVE-CONNECTORS-AND-AUTO-SYNCHRONIZATION-REALIZATION.md",
+        "name": "UCOS Ω∞ — UMB-IMP-004 · LIVE CONNECTORS AND AUTO SYNCHRONIZATION REALIZATION"
+      }
+    ],
+    "UCOS-UMB-000027": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T03:25:03+00:00",
+        "content_hash": "affd0c38b85ebe31bbd48a759fe51af4b3e98a63e9da5734a0ecd21f86ecd230",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-IMP-005-AI-KNOWLEDGE-AND-DIGITAL-TWIN-INTELLIGENCE-REALIZATION.md",
+        "name": "UCOS Ω∞ — UMB-IMP-005 · AI KNOWLEDGE AND DIGITAL TWIN INTELLIGENCE REALIZATION"
+      }
+    ],
+    "UCOS-UMB-000028": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T03:32:20+00:00",
+        "content_hash": "c91e57c9d5909d5345dd4084d02be632dab196ac005bd7a07b2c886e1db9019f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-IMP-006-DIGITAL-TWIN-CERTIFICATION-RUNTIME-REALIZATION.md",
+        "name": "UCOS Ω∞ — UMB-IMP-006 · DIGITAL TWIN CERTIFICATION RUNTIME REALIZATION"
+      }
+    ],
+    "UCOS-UMB-000029": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T03:50:59+00:00",
+        "content_hash": "1780ba3ccd8aa01e8331742a2c42cc95d1a28269776c4612c7db0d7ca949039d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-CERT-001-MASTER-BOOK-DIGITAL-TWIN-PROGRAM-CERTIFICATION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — MASTER BOOK · DIGITAL TWIN · PROGRAM CERTIFICATION DETERMINATION"
+      }
+    ]
+  }
+}
