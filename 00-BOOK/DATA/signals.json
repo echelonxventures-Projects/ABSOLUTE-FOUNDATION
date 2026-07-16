@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-16T04:19:11+00:00",
-  "signal_seq": 14,
-  "run_seq": 42,
+  "generated_at": "2026-07-16T04:57:18+00:00",
+  "signal_seq": 15,
+  "run_seq": 54,
   "seen_keys": [
     "github-actions|gha-1001#0",
     "github-actions|gha-1001#1",
@@ -16,7 +16,8 @@
     "trivy|trivy-2001#0",
     "trivy|trivy-2002#0",
     "sonarqube|sonar-5001#0",
-    "sonarqube|sonar-5002#0"
+    "sonarqube|sonar-5002#0",
+    "git-repository|master-book-under-version-control#0"
   ],
   "signals": [
     {
@@ -262,6 +263,23 @@
       },
       "connector": "sonarqube",
       "ingest_run": "URUN-000000012"
+    },
+    {
+      "signal_id": "USIG-000000015",
+      "subject_universal_id": "UCOS-BOOK-000000",
+      "subject_native_id": null,
+      "dimension": "implementation",
+      "state": "IMPLEMENTED",
+      "source": "GIT",
+      "as_of": "2026-07-16T09:56:37+05:30",
+      "evidence": "git:4a0f999",
+      "metrics": {
+        "head": "4a0f999",
+        "tracked_book_files": 46,
+        "version_controlled": true
+      },
+      "connector": "git-repository",
+      "ingest_run": "URUN-000000043"
     }
   ]
 }

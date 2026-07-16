@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T04:26:11+00:00",
+  "generated_at": "2026-07-16T05:00:40+00:00",
   "count": 23,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 49,
+      "artifact_count": 4,
       "page_range_start": 1,
-      "page_range_end": 5434,
+      "page_range_end": 5011,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -33,9 +33,9 @@
       "description": "Constitutional corpus, consolidation program, freeze, and registers.",
       "category": "CON",
       "status": "ACTIVE",
-      "artifact_count": 27,
+      "artifact_count": 29,
       "page_range_start": 1327,
-      "page_range_end": 4940,
+      "page_range_end": 4964,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-002"
     },
     {
@@ -45,9 +45,9 @@
       "description": "Universal architecture constitutions, catalogs, and engineering foundation.",
       "category": "ARCH",
       "status": "ACTIVE",
-      "artifact_count": 26,
+      "artifact_count": 27,
       "page_range_start": 22,
-      "page_range_end": 4803,
+      "page_range_end": 5021,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-003"
     },
     {
@@ -117,9 +117,9 @@
       "description": "Application architecture, catalog, reference, and generation.",
       "category": "APP",
       "status": "ACTIVE",
-      "artifact_count": 4,
+      "artifact_count": 26,
       "page_range_start": 4232,
-      "page_range_end": 4523,
+      "page_range_end": 5375,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-009"
     },
     {
@@ -129,9 +129,9 @@
       "description": "Infrastructure architecture.",
       "category": "INF",
       "status": "ACTIVE",
-      "artifact_count": 1,
+      "artifact_count": 21,
       "page_range_start": 4390,
-      "page_range_end": 4393,
+      "page_range_end": 5434,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-010"
     },
     {
@@ -273,9 +273,9 @@
       "description": "Universal Master Book Architecture Program: the complete future-state architecture of the UCOS Ω∞ Master Book as a continuously synchronized, infinitely scalable, infinitely extensible, infinitely traceable, self-evolving Universal Digital-Twin Knowledge Operating System — Master Book, Digital Twin, Identity, Nomenclature, Registry, Knowledge Graph, Traceability, Change, Version, Lineage, Publication, Synchronization, Search, AI Knowledge, Security, Control Tower, Certification, Runtime, and Operational architectures.",
       "category": "UMB",
       "status": "ACTIVE",
-      "artifact_count": 30,
+      "artifact_count": 31,
       "page_range_start": 5247,
-      "page_range_end": 5476,
+      "page_range_end": 5480,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-022"
     }
   ]

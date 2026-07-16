@@ -2086,9 +2086,16 @@
       "page_start": 5474,
       "page_count": 3,
       "first_seen": "2026-07-16T04:26:11+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-REMED-002-OPERATIONAL-DIGITAL-TWIN-RUNTIME-AUTHENTICITY-REMEDIATION.md": {
+      "universal_id": "UCOS-UMB-000031",
+      "category": "UMB",
+      "page_start": 5477,
+      "page_count": 4,
+      "first_seen": "2026-07-16T05:00:40+00:00"
     }
   },
-  "page_cursor": 5476,
+  "page_cursor": 5480,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -2110,7 +2117,7 @@
     "PLT": 20,
     "DAT": 19,
     "SVC": 19,
-    "UMB": 30
+    "UMB": 31
   },
   "discovered_volumes": {},
   "volume_seq": 0,
@@ -5391,6 +5398,26 @@
         "status": "ACTIVE",
         "path": "00-BOOK/MASTER-BOOK/UMB-REMED-001-CRITICAL-CERTIFICATION-FINDINGS-REMEDIATION-AND-CLOSURE.md",
         "name": "UCOS Ω∞ — MASTER BOOK · CRITICAL CERTIFICATION FINDINGS · REMEDIATION AND CLOSURE"
+      }
+    ],
+    "UCOS-UMB-000031": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T05:00:40+00:00",
+        "content_hash": "62867da4e09fa5fcfb8e15da835905d89184c7ff086bb76fc164188ce66bf0cc",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-REMED-002-OPERATIONAL-DIGITAL-TWIN-RUNTIME-AUTHENTICITY-REMEDIATION.md",
+        "name": "UCOS Ω∞ — MASTER BOOK · OPERATIONAL DIGITAL TWIN · RUNTIME AUTHENTICITY · REMEDIATION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-16T05:01:24+00:00",
+        "content_hash": "959c4334213b0587ca96b39bd32670ab0d37a28ca23f8995906607c3968d7b35",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-REMED-002-OPERATIONAL-DIGITAL-TWIN-RUNTIME-AUTHENTICITY-REMEDIATION.md",
+        "name": "UCOS Ω∞ — MASTER BOOK · OPERATIONAL DIGITAL TWIN · RUNTIME AUTHENTICITY · REMEDIATION"
       }
     ]
   }

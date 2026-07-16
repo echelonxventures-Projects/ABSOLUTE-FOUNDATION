@@ -3,7 +3,11 @@ UCOS Ω∞ Universal Master Knowledge Book (UKB) — Generator Configuration.
 
 This module is DATA ONLY. It declares:
 
-  * VOLUMES        — the 21 root volumes (append-only; never renumbered).
+  * VOLUMES        — the root volumes (append-only; never renumbered). The list
+                     grows by append (VOL-000…VOL-022 today after the VOL-021
+                     Digital-Twin and VOL-022 Master-Book additions); the emitted
+                     count is always derived from this list, never a fixed literal
+                     (UMB-REMED-002 F-5 documentation-drift closure).
   * CLASSIFY_RULES — ordered (regex, program, category, volume) rules that map
                      every repository file to a program, an identifier namespace
                      (category), and a thematic volume. First match wins.
@@ -177,6 +181,39 @@ CLASSIFY_RULES = [
     #     changes no existing mapping (REG-AUTO-001 / UCI-001). Routed to the
     #     existing SERVICE volume (VOL-008, category SVC); nothing is renumbered.
     (r"^11-SERVICE/", "SERVICE", "SVC", "VOL-008"),
+
+    # --- UMB-REMED-002 (F-6 CLASSIFICATION HYGIENE CLOSURE) — append-only. -------
+    #     These rules resolve the advisory-unclassified artifacts identified by
+    #     UMB-CERT-001 F-6. They add NEW coverage only (no prior CLASSIFY_RULES
+    #     rule matches these prefixes/names), so no existing classification is
+    #     changed and no Universal ID is renumbered (allocate() is keyed by path;
+    #     an already-allocated UID is returned verbatim regardless of category —
+    #     the append-only Identity invariant is preserved). Each maps to a volume
+    #     that ALREADY EXISTS; nothing is renumbered. They mirror the established
+    #     ^09-PLATFORM/ · ^10-DATA/ · ^11-SERVICE/ pattern for the next two
+    #     numbered program families whose rule was never appended.
+
+    # Application Architecture Program (PHASE-006) → existing APPLICATION volume
+    # (VOL-009, category APP). 22 artifacts (APPLICATION-001…018 + GOV-*).
+    (r"^12-APPLICATION/", "APPLICATION", "APP", "VOL-009"),
+
+    # Infrastructure Architecture Program (PHASE-007) → existing INFRASTRUCTURE
+    # volume (VOL-010, category INF). 20 artifacts (INFRASTRUCTURE-001…018 + GOV/EXEC).
+    (r"^13-INFRASTRUCTURE/", "INFRASTRUCTURE", "INF", "VOL-010"),
+
+    # Architectural-quality constitution (02-MASTER) — an ARCHITECTURE constitution
+    # whose name (…-ARCHITECTURAL-QUALITY-CONSTITUTION) is not caught by the
+    # `-ARCHITECTURE-CONSTITUTION` rule above. Routed to VOL-003 (ARCHITECTURE),
+    # consistent with its sibling 02-MASTER architecture constitutions. 1 artifact.
+    (r"ARCHITECTURAL-QUALITY-CONSTITUTION", "ARCH", "ARCH", "VOL-003"),
+
+    # Root-level planning binaries (repo-root *.docx: the master end-to-end program
+    # and consolidation plan) → CONSOLIDATION program (VOL-002). The negative
+    # lookahead deliberately EXCLUDES Microsoft Office owner/lock temp files
+    # (basename beginning "~$"), which are transient non-artifacts left
+    # intentionally undefined (UMB-REMED-002 F-6 determination) and recommended for
+    # exclusion rather than classification. Matched with re.search on the relpath.
+    (r"^(?!~\$)[^/]*\.docx$", "CONSOLIDATION", "CON", "VOL-002"),
 ]
 
 DEFAULT_CLASS = ("OTHER", "MISC", "VOL-000")

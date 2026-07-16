@@ -19,6 +19,8 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-FRZ-000001](UCOS-FRZ-000001.md) Freeze Notice
 - [UCOS-FRZ-000002](UCOS-FRZ-000002.md) Source Files
 - [UCOS-FRZ-000003](UCOS-FRZ-000003.md) Source Hashes
+- [UCOS-MISC-000001](UCOS-MISC-000001.md) Ucos Ω∞ Master End To End Program
+- [UCOS-MISC-000002](UCOS-MISC-000002.md) Ucos Consolidation Plan
 
 ## Backlinks (reverse)
 - [UCOS-CON-000021](UCOS-CON-000021.md) —Depends-On→
@@ -34,5 +36,7 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-FRZ-000001](UCOS-FRZ-000001.md) —Parent→
 - [UCOS-FRZ-000002](UCOS-FRZ-000002.md) —Parent→
 - [UCOS-FRZ-000003](UCOS-FRZ-000003.md) —Parent→
+- [UCOS-MISC-000001](UCOS-MISC-000001.md) —Parent→
+- [UCOS-MISC-000002](UCOS-MISC-000002.md) —Parent→
 
 Return: [Portal Index](index.md) · [Master Index](../UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)

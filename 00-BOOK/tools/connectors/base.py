@@ -25,6 +25,11 @@ import os
 SOURCES = {
     "MANUAL", "GITHUB", "GITHUB_ACTIONS", "JIRA", "SONARQUBE", "OWASP", "TRIVY",
     "PROMETHEUS", "GRAFANA", "OPENTELEMETRY", "KUBERNETES", "CLOUD",
+    # UMB-REMED-002 (F-2 runtime authenticity): local Git working tree / commit
+    # history is a LIVE, authoritative, credential-free source (no secret, RR-07).
+    # Sources are pluggable (UMB-012 §4; AUTH-INF-001 CR-INF-003); this is an
+    # append-only addition to the open source set — no existing source changed.
+    "GIT",
 }
 
 DIMENSIONS = [

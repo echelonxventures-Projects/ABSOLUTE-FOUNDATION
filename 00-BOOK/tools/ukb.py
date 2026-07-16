@@ -1111,8 +1111,12 @@ def write_volume_registry(volumes, art_list):
     by_vol = defaultdict(list)
     for a in art_list:
         by_vol[a["volume"]].append(a)
+    # UMB-REMED-002 (F-5 documentation drift): the volume count is DERIVED from
+    # the emitted volume set, never a hard-coded literal, so this authoritative
+    # generator string can never again drift from the append-only volume total
+    # (was the stale literal "21"; the system emits 23 after VOL-021/VOL-022).
     lines = ["# UCOS Ω∞ — VOLUME REGISTRY", "", _AUTOGEN, "",
-             "The 21 root volumes of the Universal Master Knowledge Book. Volumes are "
+             f"The {len(volumes)} root volumes of the Universal Master Knowledge Book. Volumes are "
              "permanent and append-only; unlimited future volumes may be appended.", "",
              "| Volume | Serial | Name | Category | Status | Artifacts | Page Range |",
              "|--------|--------|------|----------|--------|-----------|------------|"]

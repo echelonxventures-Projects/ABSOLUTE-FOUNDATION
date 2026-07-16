@@ -51,5 +51,6 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-ADV-000001](UCOS-
 - [UCOS-UMB-000018](UCOS-UMB-000018.md) —Traced-From→
 - [UCOS-UMB-000027](UCOS-UMB-000027.md) —Evolves-From-Inverse→
 - [UCOS-UMB-000030](UCOS-UMB-000030.md) —Consumes→
+- [UCOS-UMB-000031](UCOS-UMB-000031.md) —Consumes→
 
 Return: [Portal Index](index.md) · [Master Index](../UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)

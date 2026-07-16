@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-16T04:01:28+00:00",
+  "generated_at": "2026-07-16T04:57:06+00:00",
   "generator_version": "1.0.0-adv",
-  "signal_count": 14,
-  "subject_count": 7,
+  "signal_count": 15,
+  "subject_count": 8,
   "dimensions": {
     "build": {
       "status": "BLOCKED",
@@ -38,6 +38,11 @@
       "status": "BLOCKED",
       "signal_source": "SONARQUBE",
       "as_of": "2026-07-15T08:44:00Z"
+    },
+    "implementation": {
+      "status": "IMPLEMENTED",
+      "signal_source": "GIT",
+      "as_of": "2026-07-16T09:56:37+05:30"
     }
   },
   "subjects": {
@@ -151,6 +156,15 @@
         "as_of": "2026-07-15T08:44:00Z",
         "evidence": "sonarqube://project/identity-platform",
         "signal_id": "USIG-000000014"
+      }
+    },
+    "UCOS-BOOK-000000": {
+      "implementation": {
+        "state": "IMPLEMENTED",
+        "source": "GIT",
+        "as_of": "2026-07-16T09:56:37+05:30",
+        "evidence": "git:4a0f999",
+        "signal_id": "USIG-000000015"
       }
     }
   }
