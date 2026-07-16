@@ -70,7 +70,49 @@ def _load_json(path, default):
     return default
 
 
+def _stamp_eq_json(path, obj, stamp_keys=("generated_at",)):
+    """True if `path` already holds JSON equal to `obj` once each document's own
+    generation stamp is neutralized. Neutralizes the top-level stamp keys AND any
+    nested value equal to that same stamp (e.g. control-tower dimension `as_of`
+    baselines populated by the same generation clock). Real, content-derived
+    timestamps (signal `as_of`, change-event `at`) differ from the generation
+    stamp and are preserved, so genuine drift is still detected. Lets writers skip
+    no-op rewrites so regeneration is byte-stable when substantive content is
+    unchanged — required by the register.sh --guard drift gate (F-1) and the
+    UKB-ADV-INV-07 deterministic-reproducibility invariant."""
+    if not os.path.exists(path):
+        return False
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            old = json.load(fh)
+    except Exception:
+        return False
+    return _neutralize_stamps(old, stamp_keys) == _neutralize_stamps(obj, stamp_keys)
+
+
+def _neutralize_stamps(doc, stamp_keys):
+    stamps = set()
+    if isinstance(doc, dict):
+        for k in stamp_keys:
+            v = doc.get(k)
+            if v is not None:
+                stamps.add(v)
+
+    def walk(x):
+        if isinstance(x, dict):
+            return {k: walk(v) for k, v in x.items()}
+        if isinstance(x, list):
+            return [walk(v) for v in x]
+        if isinstance(x, str) and x in stamps:
+            return "<STAMP>"
+        return x
+
+    return walk(doc)
+
+
 def _dump_json(path, obj):
+    if _stamp_eq_json(path, obj):
+        return                                    # idempotent: only the stamp would change
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(obj, fh, ensure_ascii=False, indent=2)
@@ -972,6 +1014,11 @@ def build_control_tower(art_list, volumes, edges, ledger):
     prog_hist = defaultdict(Counter)
     for a in art_list:
         prog_hist[a["program"]][a["status"]] += 1
+    # One generation clock for this control-tower projection: the top-level stamp
+    # and every manual-baseline dimension `as_of` (which is generation metadata,
+    # not real event time) share it, so the idempotent writer can neutralize them
+    # as a single stamp and a no-op rebuild stays byte-stable (F-1 drift gate).
+    ts = _now()
 
     def rollup(counter):
         # lowest-progress state that still has members wins (blocking view)
@@ -991,8 +1038,24 @@ def build_control_tower(art_list, volumes, edges, ledger):
             "rollup_status": rollup(c),
         })
 
+    # Preserve any prior (possibly signal-enriched) dimension state so the
+    # foundation build does not regress dimensions that `ukbx twin` already
+    # populated from the signal ledger; only dimensions absent from the prior
+    # projection get a fresh MANUAL baseline. This keeps a no-op rebuild
+    # byte-stable under the idempotent writer (F-1 drift gate) instead of
+    # clobbering enriched `as_of`/status and forcing a churny rewrite.
+    prior = _load_json(CT_JSON_PATH, {})
+    prior_dims = prior.get("dimensions", {}) if isinstance(prior, dict) else {}
+    dimensions = {}
+    for k, v in DIMENSION_STATUS.items():
+        if k in prior_dims:
+            dimensions[k] = prior_dims[k]
+        else:
+            dimensions[k] = {"status": v, "signal_source": "MANUAL", "as_of": ts,
+                             "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."}
+
     return {
-        "generated_at": _now(),
+        "generated_at": ts,
         "generator_version": C.GENERATOR_VERSION,
         "portfolio": {
             "total_artifacts": len(art_list),
@@ -1003,9 +1066,7 @@ def build_control_tower(art_list, volumes, edges, ledger):
             "status_histogram": dict(hist),
         },
         "programs": programs,
-        "dimensions": {k: {"status": v, "signal_source": "MANUAL", "as_of": _now(),
-                           "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."}
-                       for k, v in DIMENSION_STATUS.items()},
+        "dimensions": dimensions,
     }
 
 
@@ -1195,10 +1256,30 @@ def write_change_registry(cl, by_uid):
     _write(os.path.join(REG_DIR, "CHANGE-VERSION-LINEAGE-REGISTRY.md"), lines)
 
 
+def _stamp_eq_text(path, text, markers=("**Generated:**", "*Generated ")):
+    """True if `path` already holds text equal to `text` ignoring only lines that
+    begin with a volatile generation-stamp marker. Enables byte-stable no-op
+    regeneration of the auto-generated registries and portal (F-1 drift gate)."""
+    if not os.path.exists(path):
+        return False
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            old = fh.read()
+    except Exception:
+        return False
+    strip = lambda s: "\n".join(
+        ln for ln in s.splitlines()
+        if not any(ln.lstrip().startswith(m) for m in markers))
+    return strip(old) == strip(text)
+
+
 def _write(path, lines):
+    text = "\n".join(lines)
+    if _stamp_eq_text(path, text):
+        return                                    # idempotent: only the stamp would change
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
-        fh.write("\n".join(lines))
+        fh.write(text)
 
 
 # ---------------------------------------------------------------------------

@@ -63,10 +63,47 @@ def _load(path, default):
 
 
 def _dump(path, obj):
+    if _stamp_eq_json(path, obj):
+        return                                    # idempotent: only the stamp would change
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(obj, fh, ensure_ascii=False, indent=2)
         fh.write("\n")
+
+
+def _stamp_eq_json(path, obj, stamp_keys=("generated_at",)):
+    """True if `path` already holds JSON equal to `obj` once each document's own
+    generation stamp (and any nested value equal to it) is neutralized — lets
+    writers skip no-op rewrites so regeneration is byte-stable (register.sh
+    --guard drift gate, F-1; UKB-ADV-INV-07 reproducibility)."""
+    if not os.path.exists(path):
+        return False
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            old = json.load(fh)
+    except Exception:
+        return False
+    return _neutralize_stamps(old, stamp_keys) == _neutralize_stamps(obj, stamp_keys)
+
+
+def _neutralize_stamps(doc, stamp_keys):
+    stamps = set()
+    if isinstance(doc, dict):
+        for k in stamp_keys:
+            v = doc.get(k)
+            if v is not None:
+                stamps.add(v)
+
+    def walk(x):
+        if isinstance(x, dict):
+            return {k: walk(v) for k, v in x.items()}
+        if isinstance(x, list):
+            return [walk(v) for v in x]
+        if isinstance(x, str) and x in stamps:
+            return "<STAMP>"
+        return x
+
+    return walk(doc)
 
 
 def _artifacts():
@@ -367,13 +404,20 @@ def _refresh_control_tower(twin):
     ct = _load(ct_path, None)
     if not ct:
         return None
+    now = _now()
     for dim, comp in twin["dimensions"].items():
         if dim in ct["dimensions"]:
             ct["dimensions"][dim]["status"] = comp["status"]
             ct["dimensions"][dim]["signal_source"] = comp["signal_source"]
             ct["dimensions"][dim]["as_of"] = comp["as_of"]
             ct["dimensions"][dim]["note"] = "Automated: computed from the append-only signal ledger (UKB-012)."
-    ct["generated_at"] = _now()
+    # Manual-baseline dimensions (no signal this run) carry only a generation
+    # stamp, not real event time; align them to the single generation clock so a
+    # no-op refresh neutralizes as one stamp and stays byte-stable (F-1 drift gate).
+    for dim, comp in ct["dimensions"].items():
+        if dim not in twin["dimensions"]:
+            comp["as_of"] = now
+    ct["generated_at"] = now
     _dump(ct_path, ct)
     return ct
 
@@ -603,9 +647,27 @@ def cmd_export(args):
 
 
 def _dump_text(path, text):
+    if _stamp_eq_text(path, text):
+        return                                    # idempotent: only the stamp would change
     os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
         fh.write(text + "\n")
+
+
+def _stamp_eq_text(path, text, markers=("**Generated:**", "*Generated ")):
+    """True if `path` already holds text equal to `text + \\n` ignoring only lines
+    beginning with a volatile generation-stamp marker (F-1 drift gate)."""
+    if not os.path.exists(path):
+        return False
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            old = fh.read()
+    except Exception:
+        return False
+    strip = lambda s: "\n".join(
+        ln for ln in s.splitlines()
+        if not any(ln.lstrip().startswith(m) for m in markers))
+    return strip(old) == strip(text + "\n")
 
 
 # ---------------------------------------------------------------------------

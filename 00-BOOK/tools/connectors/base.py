@@ -55,10 +55,49 @@ def _load(path, default):
 
 
 def _dump(path, obj):
+    if isinstance(obj, dict) and _stamp_eq_json(path, obj):
+        return                                    # idempotent: only the stamp would change
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(obj, fh, ensure_ascii=False, indent=2)
         fh.write("\n")
+
+
+def _stamp_eq_json(path, obj, stamp_keys=("generated_at",)):
+    """True if `path` already holds JSON equal to `obj` once each document's own
+    generation stamp (and any nested value equal to it) is neutralized, so a no-op
+    flush does not rewrite the signal ledger with a fresh wall-clock stamp (F-1
+    drift gate; UKB-ADV-INV-07 reproducibility)."""
+    if not os.path.exists(path):
+        return False
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            old = json.load(fh)
+    except Exception:
+        return False
+    if not isinstance(old, dict):
+        return old == obj
+    return _neutralize_stamps(old, stamp_keys) == _neutralize_stamps(obj, stamp_keys)
+
+
+def _neutralize_stamps(doc, stamp_keys):
+    stamps = set()
+    if isinstance(doc, dict):
+        for k in stamp_keys:
+            v = doc.get(k)
+            if v is not None:
+                stamps.add(v)
+
+    def walk(x):
+        if isinstance(x, dict):
+            return {k: walk(v) for k, v in x.items()}
+        if isinstance(x, list):
+            return [walk(v) for v in x]
+        if isinstance(x, str) and x in stamps:
+            return "<STAMP>"
+        return x
+
+    return walk(doc)
 
 
 # Trivial secret-pattern guard (SRC-08 / RR-07 defense). Rejects obvious secrets

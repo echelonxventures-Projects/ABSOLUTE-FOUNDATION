@@ -639,7 +639,81 @@
       "result": "PASS",
       "ledger_signal_total": 14,
       "seq": 11
+    },
+    {
+      "at": "2026-07-16T04:19:11+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 4,
+      "per_connector": [
+        {
+          "connector": "github-actions",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:05:00Z",
+          "cursor_after": "2026-07-15T08:05:00Z"
+        },
+        {
+          "connector": "kubernetes",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:33:00Z",
+          "cursor_after": "2026-07-15T08:33:00Z"
+        },
+        {
+          "connector": "prometheus",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:22:00Z",
+          "cursor_after": "2026-07-15T08:22:00Z"
+        },
+        {
+          "connector": "trivy",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:12:00Z",
+          "cursor_after": "2026-07-15T08:12:00Z"
+        }
+      ],
+      "new_signals": 0,
+      "duplicates": 0,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 14,
+      "seq": 12
     }
   ],
-  "generated_at": "2026-07-16T04:01:28+00:00"
+  "generated_at": "2026-07-16T04:19:11+00:00"
 }

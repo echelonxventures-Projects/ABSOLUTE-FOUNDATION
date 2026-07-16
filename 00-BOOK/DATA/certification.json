@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T04:01:28+00:00",
+  "generated_at": "2026-07-16T04:19:11+00:00",
   "generator_version": "1.0.0-adv",
   "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)",
   "verdict": "CERTIFIED",
@@ -137,7 +137,7 @@
         {
           "name": "synchronization audit present + last run PASS",
           "pass": true,
-          "detail": "last sync run #11 PASS"
+          "detail": "last sync run #12 PASS"
         }
       ]
     },
