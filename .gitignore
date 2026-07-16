@@ -1,0 +1,16 @@
+# UCOS Ω∞ — machinery transients (UMB-IMP-001). The registration re-entrancy lock
+# is created/removed by register.sh and must never be committed or seen as drift.
+00-BOOK/tools/.register.lock
+__pycache__/
+*.pyc
+
+
+# EC-1 engine (EPIC-001 Foundation) build / test transients.
+.ec1-venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
