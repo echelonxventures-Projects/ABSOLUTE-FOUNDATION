@@ -1,0 +1,59 @@
+# TASK-000002 — EC-1 Foundation CI pipeline.
+# Jobs: frozen-path guard (DP-03), lint (CD-01/CD-04), test+coverage (CD-02), build (DE-01).
+# Action versions are pinned to major tags (DE-04).
+name: EC-1 CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+jobs:
+  foundation:
+    name: Foundation (lint · test · build)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install (pinned dev dependencies)
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+
+      - name: Frozen-path guard (DP-03 — corpus is read-only)
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          if [ -z "$BASE" ]; then BASE="${{ github.event.before }}"; fi
+          if git rev-parse --verify --quiet "$BASE" >/dev/null; then
+            git diff --name-only "$BASE" HEAD | ec1-frozen-guard --stdin
+          else
+            echo "No resolvable base ref; skipping diff-based guard (no-op)."
+          fi
+
+      - name: Lint (ruff)
+        run: python -m ruff check engine
+
+      - name: Test + coverage gate (fail under 90%)
+        run: python -m pytest
+
+      - name: Build (wheel + sdist)
+        run: python -m pip install build==1.2.2 && python -m build
+
+      - name: Upload coverage artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+          if-no-files-found: ignore

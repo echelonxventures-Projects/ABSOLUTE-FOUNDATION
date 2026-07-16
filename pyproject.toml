@@ -1,0 +1,107 @@
+# UCOS Ω∞ — EC-1 Execution Engine (EPIC-001 Foundation)
+# TASK-000001: workspace + pinned dependencies (DE-04 pinned/vetted; TP-05 least-sufficient).
+# Runtime code uses the Python standard library only (TP-04 vendor-neutral core).
+# This project is additive engineering code; it never modifies the certified corpus
+# (00-BOOK, 00-SOURCE, 99-FREEZE are read-only — DP-03).
+
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ucos-ec1-engine"
+version = "0.1.0"
+description = "UCOS Ω∞ EC-1 Execution Engine — Foundation layer (IMP-001)."
+requires-python = ">=3.12"
+license = { text = "Proprietary" }
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest==8.3.4",
+  "pytest-cov==6.0.0",
+  "ruff==0.8.4",
+]
+
+[project.scripts]
+ec1-frozen-guard = "engine.foundation.guards.frozen_paths:main"
+ec1-determinism = "engine.determinism.reproduce:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["engine*", "ucos_platform*"]
+exclude = ["engine.tests*", "ucos_platform.tests*"]
+
+[tool.setuptools.package-data]
+"engine.determinism" = ["blueprints/*.json"]
+
+# --- TASK-000009: test + coverage configuration ---------------------------------
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["engine/tests", "ucos_platform/tests"]
+
+addopts = [
+  "-ra",
+  "--strict-markers",
+
+  "--cov=engine.foundation",
+  "--cov=engine.registry",
+  "--cov=engine.compiler",
+  "--cov=engine.determinism",
+  "--cov=engine.runtime",
+  "--cov=engine.factory",
+  "--cov=engine.validation",
+  "--cov=engine.certification",
+
+  "--cov=ucos_platform.foundation",
+  "--cov=ucos_platform.identity",
+
+  "--cov-report=term-missing",
+  "--cov-report=xml",
+  "--cov-fail-under=90",
+]
+
+[tool.coverage.run]
+branch = true
+
+source = [
+  "engine/foundation",
+  "engine/registry",
+  "engine/compiler",
+  "engine/determinism",
+  "engine/runtime",
+  "engine/factory",
+  "engine/validation",
+  "engine/certification",
+  "ucos_platform/foundation",
+  "ucos_platform/identity",
+]
+
+omit = [
+  "engine/tests/*",
+  "ucos_platform/tests/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
+
+exclude_lines = [
+  "pragma: no cover",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+]
+
+# --- Lint / secure-coding (CD-01 conventions, CD-04 secure coding) -------------
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S"]
+
+[tool.ruff.lint.per-file-ignores]
+"engine/tests/*" = ["S101", "S105", "S106"]
+"ucos_platform/tests/*" = ["S101", "S105", "S106"]
