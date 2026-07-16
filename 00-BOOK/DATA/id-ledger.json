@@ -2079,9 +2079,16 @@
       "page_start": 5469,
       "page_count": 5,
       "first_seen": "2026-07-16T03:50:59+00:00"
+    },
+    "00-BOOK/MASTER-BOOK/UMB-REMED-001-CRITICAL-CERTIFICATION-FINDINGS-REMEDIATION-AND-CLOSURE.md": {
+      "universal_id": "UCOS-UMB-000030",
+      "category": "UMB",
+      "page_start": 5474,
+      "page_count": 3,
+      "first_seen": "2026-07-16T04:26:11+00:00"
     }
   },
-  "page_cursor": 5473,
+  "page_cursor": 5476,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -2103,7 +2110,7 @@
     "PLT": 20,
     "DAT": 19,
     "SVC": 19,
-    "UMB": 29
+    "UMB": 30
   },
   "discovered_volumes": {},
   "volume_seq": 0,
@@ -5373,6 +5380,17 @@
         "status": "ACTIVE",
         "path": "00-BOOK/MASTER-BOOK/UMB-CERT-001-MASTER-BOOK-DIGITAL-TWIN-PROGRAM-CERTIFICATION-DETERMINATION.md",
         "name": "UCOS Ω∞ — MASTER BOOK · DIGITAL TWIN · PROGRAM CERTIFICATION DETERMINATION"
+      }
+    ],
+    "UCOS-UMB-000030": [
+      {
+        "seq": 1,
+        "at": "2026-07-16T04:26:11+00:00",
+        "content_hash": "b4ce8d036db1a6537427954c83d07f5bd75338199b078f757b7806773a8d4fed",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/MASTER-BOOK/UMB-REMED-001-CRITICAL-CERTIFICATION-FINDINGS-REMEDIATION-AND-CLOSURE.md",
+        "name": "UCOS Ω∞ — MASTER BOOK · CRITICAL CERTIFICATION FINDINGS · REMEDIATION AND CLOSURE"
       }
     ]
   }

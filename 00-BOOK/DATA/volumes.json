@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T04:01:27+00:00",
+  "generated_at": "2026-07-16T04:26:11+00:00",
   "count": 23,
   "volumes": [
     {
@@ -273,9 +273,9 @@
       "description": "Universal Master Book Architecture Program: the complete future-state architecture of the UCOS Ω∞ Master Book as a continuously synchronized, infinitely scalable, infinitely extensible, infinitely traceable, self-evolving Universal Digital-Twin Knowledge Operating System — Master Book, Digital Twin, Identity, Nomenclature, Registry, Knowledge Graph, Traceability, Change, Version, Lineage, Publication, Synchronization, Search, AI Knowledge, Security, Control Tower, Certification, Runtime, and Operational architectures.",
       "category": "UMB",
       "status": "ACTIVE",
-      "artifact_count": 29,
+      "artifact_count": 30,
       "page_range_start": 5247,
-      "page_range_end": 5473,
+      "page_range_end": 5476,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-022"
     }
   ]

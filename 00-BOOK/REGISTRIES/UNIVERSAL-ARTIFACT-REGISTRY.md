@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 297
+**Total artifacts:** 298
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -305,5 +305,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 295 | `UCOS-UMB-000027` | UCOS Ω∞ — UMB-IMP-005 · AI KNOWLEDGE AND DIGITAL TWIN INT… | UMB-IMP-005 | 022 | UPN-000005461–UPN-000005464 | ACTIVE | `UCOS-UMB-000001` | 0 | [↗](../../00-BOOK/MASTER-BOOK/UMB-IMP-005-AI-KNOWLEDGE-AND-DIGITAL-TWIN-INTELLIGENCE-REALIZATION.md) |
 | 296 | `UCOS-UMB-000028` | UCOS Ω∞ — UMB-IMP-006 · DIGITAL TWIN CERTIFICATION RUNTIM… | UMB-IMP-006 | 022 | UPN-000005465–UPN-000005468 | ACTIVE | `UCOS-UMB-000001` | 0 | [↗](../../00-BOOK/MASTER-BOOK/UMB-IMP-006-DIGITAL-TWIN-CERTIFICATION-RUNTIME-REALIZATION.md) |
 | 297 | `UCOS-UMB-000029` | UCOS Ω∞ — MASTER BOOK · DIGITAL TWIN · PROGRAM CERTIFICAT… | UMB-CERT-001 | 022 | UPN-000005469–UPN-000005473 | ACTIVE | `UCOS-UMB-000001` | 0 | [↗](../../00-BOOK/MASTER-BOOK/UMB-CERT-001-MASTER-BOOK-DIGITAL-TWIN-PROGRAM-CERTIFICATION-DETERMINATION.md) |
+| 298 | `UCOS-UMB-000030` | UCOS Ω∞ — MASTER BOOK · CRITICAL CERTIFICATION FINDINGS ·… | UMB-REMED-001 | 022 | UPN-000005474–UPN-000005476 | ACTIVE | `UCOS-UMB-000001` | 0 | [↗](../../00-BOOK/MASTER-BOOK/UMB-REMED-001-CRITICAL-CERTIFICATION-FINDINGS-REMEDIATION-AND-CLOSURE.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

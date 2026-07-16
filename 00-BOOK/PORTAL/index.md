@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-16T04:01:28+00:00 by ukbx portal. 297 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-16T04:26:11+00:00 by ukbx portal. 298 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -301,3 +301,4 @@
 | [UCOS-UMB-000027](UCOS-UMB-000027.md) | UCOS Ω∞ — UMB-IMP-005 · AI KNOWLEDGE AND DIGITAL TWIN INTELL | VOL-022 | ACTIVE |
 | [UCOS-UMB-000028](UCOS-UMB-000028.md) | UCOS Ω∞ — UMB-IMP-006 · DIGITAL TWIN CERTIFICATION RUNTIME R | VOL-022 | ACTIVE |
 | [UCOS-UMB-000029](UCOS-UMB-000029.md) | UCOS Ω∞ — MASTER BOOK · DIGITAL TWIN · PROGRAM CERTIFICATION | VOL-022 | ACTIVE |
+| [UCOS-UMB-000030](UCOS-UMB-000030.md) | UCOS Ω∞ — MASTER BOOK · CRITICAL CERTIFICATION FINDINGS · RE | VOL-022 | ACTIVE |
