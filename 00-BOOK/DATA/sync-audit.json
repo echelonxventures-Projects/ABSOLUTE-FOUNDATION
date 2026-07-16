@@ -899,7 +899,91 @@
       "result": "PASS",
       "ledger_signal_total": 15,
       "seq": 14
+    },
+    {
+      "at": "2026-07-16T05:13:50+00:00",
+      "generator_version": "1.0.0-adv",
+      "stages": [
+        "discover",
+        "monitor",
+        "detect",
+        "execute",
+        "verify",
+        "audit",
+        "recover"
+      ],
+      "discovered": [
+        "git-repository",
+        "github-actions",
+        "kubernetes",
+        "prometheus",
+        "sonarqube",
+        "trivy"
+      ],
+      "discovery_failures": [],
+      "connectors_run": 5,
+      "per_connector": [
+        {
+          "connector": "git-repository",
+          "status": "OK",
+          "events": 1,
+          "new_signals": 0,
+          "duplicates": 1,
+          "cursor_before": null,
+          "cursor_after": null
+        },
+        {
+          "connector": "github-actions",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:05:00Z",
+          "cursor_after": "2026-07-15T08:05:00Z"
+        },
+        {
+          "connector": "kubernetes",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:33:00Z",
+          "cursor_after": "2026-07-15T08:33:00Z"
+        },
+        {
+          "connector": "prometheus",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:22:00Z",
+          "cursor_after": "2026-07-15T08:22:00Z"
+        },
+        {
+          "connector": "trivy",
+          "status": "OK",
+          "events": 0,
+          "new_signals": 0,
+          "duplicates": 0,
+          "cursor_before": "2026-07-15T08:12:00Z",
+          "cursor_after": "2026-07-15T08:12:00Z"
+        }
+      ],
+      "new_signals": 0,
+      "duplicates": 1,
+      "recovered": [],
+      "verify": {
+        "subject_resolves": true,
+        "provenance_present": true,
+        "secret_free": true,
+        "cursor_monotonic": true,
+        "signal_ids_unique": true,
+        "subject_resolved_nonfallback": true
+      },
+      "result": "PASS",
+      "ledger_signal_total": 15,
+      "seq": 15
     }
   ],
-  "generated_at": "2026-07-16T04:57:18+00:00"
+  "generated_at": "2026-07-16T05:13:50+00:00"
 }
