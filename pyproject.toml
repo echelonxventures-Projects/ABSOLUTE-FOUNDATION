@@ -14,8 +14,6 @@ version = "0.1.0"
 description = "UCOS Ω∞ EC-1 Execution Engine — Foundation layer (IMP-001)."
 requires-python = ">=3.12"
 license = { text = "Proprietary" }
-# Runtime dependencies: none. Foundation is stdlib-only by constitutional intent
-# (TP-04 Vendor Neutrality of Core, TP-05 Least Sufficient Technology).
 dependencies = []
 
 [project.optional-dependencies]
@@ -26,27 +24,27 @@ dev = [
 ]
 
 [project.scripts]
-# TASK-000003: frozen-path guard is invocable as a CLI (used by CI + pre-commit).
 ec1-frozen-guard = "engine.foundation.guards.frozen_paths:main"
-# TASK-000033: determinism reproducibility gate (used by CI).
 ec1-determinism = "engine.determinism.reproduce:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["engine*", "platform*"]
-exclude = ["engine.tests*", "platform.tests*"]
+include = ["engine*", "ucos_platform*"]
+exclude = ["engine.tests*", "ucos_platform.tests*"]
 
 [tool.setuptools.package-data]
-# TASK-000032: ship the canonical BP-DATA reproducibility fixture with the wheel.
 "engine.determinism" = ["blueprints/*.json"]
 
 # --- TASK-000009: test + coverage configuration ---------------------------------
+
 [tool.pytest.ini_options]
 minversion = "8.0"
-testpaths = ["engine/tests", "platform/tests"]
+testpaths = ["engine/tests", "ucos_platform/tests"]
+
 addopts = [
   "-ra",
   "--strict-markers",
+
   "--cov=engine.foundation",
   "--cov=engine.registry",
   "--cov=engine.compiler",
@@ -55,8 +53,10 @@ addopts = [
   "--cov=engine.factory",
   "--cov=engine.validation",
   "--cov=engine.certification",
-  "--cov=platform.foundation",
-  "--cov=platform.identity",
+
+  "--cov=ucos_platform.foundation",
+  "--cov=ucos_platform.identity",
+
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -64,28 +64,44 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "platform/foundation", "platform/identity"]
-omit = ["engine/tests/*", "platform/tests/*"]
+
+source = [
+  "engine/foundation",
+  "engine/registry",
+  "engine/compiler",
+  "engine/determinism",
+  "engine/runtime",
+  "engine/factory",
+  "engine/validation",
+  "engine/certification",
+  "ucos_platform/foundation",
+  "ucos_platform/identity",
+]
+
+omit = [
+  "engine/tests/*",
+  "ucos_platform/tests/*",
+]
 
 [tool.coverage.report]
 show_missing = true
 fail_under = 90
+
 exclude_lines = [
   "pragma: no cover",
   "raise NotImplementedError",
   "if __name__ == .__main__.:",
 ]
 
-# --- Lint / secure-coding (CD-01 conventions, CD-04 secure coding) ---------------
+# --- Lint / secure-coding (CD-01 conventions, CD-04 secure coding) -------------
+
 [tool.ruff]
 line-length = 100
 target-version = "py312"
 
 [tool.ruff.lint]
-# E/F pycodestyle+pyflakes, I import-sort, B bugbear, UP pyupgrade, S bandit (security).
 select = ["E", "F", "I", "B", "UP", "S"]
 
 [tool.ruff.lint.per-file-ignores]
-# Tests may use assert (S101) and secret-like literals in fixtures (S105/S106).
 "engine/tests/*" = ["S101", "S105", "S106"]
-"platform/tests/*" = ["S101", "S105", "S106"]
+"ucos_platform/tests/*" = ["S101", "S105", "S106"]

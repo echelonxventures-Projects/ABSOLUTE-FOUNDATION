@@ -59,7 +59,7 @@ def test_environment_definition_is_stable(real_registry):
 # -- CI GATE BEHAVIOUR --------------------------------------------------------
 
 
-def test_ci_gate_passes_and_publishes_evidence(tmp_path):
+def test_ci_gate_passes_and_publishes_evidence(tmp_path, real_registry):
     exit_code = main(["BP-DATA-0001", "--evidence-dir", str(tmp_path / "ev")])
     assert exit_code == 0
     evidence = tmp_path / "ev" / "determinism-evidence.json"
@@ -109,7 +109,7 @@ def test_ci_gate_fails_on_divergence(tmp_path, monkeypatch):
     assert report["divergence_count"] == 1
 
 
-def test_ci_gate_uses_key_ref_when_env_present(tmp_path, monkeypatch):
+def test_ci_gate_uses_key_ref_when_env_present(tmp_path, monkeypatch, real_registry):
     monkeypatch.setenv("UCOS_DETERMINISM_KEY", "ci-signing-key")
     exit_code = main(["BP-DATA-0001", "--evidence-dir", str(tmp_path / "ev")])
     assert exit_code == 0
