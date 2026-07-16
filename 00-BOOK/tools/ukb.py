@@ -1048,8 +1048,9 @@ def build_control_tower(art_list, volumes, edges, ledger):
     prior_dims = prior.get("dimensions", {}) if isinstance(prior, dict) else {}
     dimensions = {}
     for k, v in DIMENSION_STATUS.items():
-        if k in prior_dims:
-            dimensions[k] = prior_dims[k]
+        pd = prior_dims.get(k)
+        if pd and pd.get("signal_source") not in (None, "MANUAL"):
+            dimensions[k] = pd                    # preserve signal-enriched state (real as_of)
         else:
             dimensions[k] = {"status": v, "signal_source": "MANUAL", "as_of": ts,
                              "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."}

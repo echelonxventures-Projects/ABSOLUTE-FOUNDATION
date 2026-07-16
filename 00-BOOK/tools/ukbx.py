@@ -191,6 +191,12 @@ def _sync_audit_append(record):
         last = doc["runs"][-1]
         if {k: last.get(k) for k in fp_keys} == fp and record.get("new_signals") == 0:
             return last["seq"]                    # unchanged no-op — no append
+    # A run in which no connector was due and nothing changed is a pure no-op
+    # (steady-state / CI re-run); do not grow the append-only log with empty
+    # runs, so a no-op transaction is byte-stable under the drift gate (F-1).
+    if (record.get("connectors_run") == 0 and record.get("new_signals") == 0
+            and record.get("result") == "PASS" and not record.get("recovered")):
+        return doc["runs"][-1]["seq"] if doc["runs"] else 0
     record["seq"] = (doc["runs"][-1]["seq"] + 1) if doc["runs"] else 1
     doc["runs"].append(record)
     doc["generated_at"] = _now()
