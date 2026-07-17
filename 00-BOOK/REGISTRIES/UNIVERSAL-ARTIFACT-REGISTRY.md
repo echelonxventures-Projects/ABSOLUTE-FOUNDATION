@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 337
+**Total artifacts:** 338
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -345,5 +345,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 335 | `UCOS-PLT-000034` | EC2-EPIC-005 — Project Management Runtime — Determination | EC2-EPIC-005 | 006 | UPN-000005628–UPN-000005634 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/project-management/EC2-EPIC-005-DETERMINATION.md) |
 | 336 | `UCOS-PLT-000035` | EC2-EPIC-005 — Project Management Runtime — Completion Re… | — | 006 | UPN-000005635–UPN-000005638 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/projects/EC2-EPIC-005-COMPLETION-REPORT.md) |
 | 337 | `UCOS-PLT-000036` | POST-EPIC-005-IMPLEMENTATION-STATUS-DETERMINATION | POST-EPIC-005 | 006 | UPN-000005639–UPN-000005644 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/POST-EPIC-005-IMPLEMENTATION-STATUS-DETERMINATION.md) |
+| 338 | `UCOS-PLT-000037` | EC2-EPIC-006 — Blueprint Catalog & Management — Determina… | EC2-EPIC-006 | 006 | UPN-000005645–UPN-000005653 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/blueprints/EC2-EPIC-006-DETERMINATION.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

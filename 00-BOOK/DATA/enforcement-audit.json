@@ -5514,6 +5514,46 @@
       "violations": [],
       "result": "PASS",
       "seq": 87
+    },
+    {
+      "generated_at": "2026-07-17T07:02:32+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 338,
+      "registered": 337,
+      "unregistered": [
+        "platform/blueprints/EC2-EPIC-006-DETERMINATION.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 88
+    },
+    {
+      "generated_at": "2026-07-17T07:02:33+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 338,
+      "registered": 338,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 89
     }
   ]
 }

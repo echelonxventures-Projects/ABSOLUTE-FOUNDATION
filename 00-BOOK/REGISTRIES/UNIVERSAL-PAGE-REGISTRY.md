@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 5644  ·  **Page cursor (next free):** UPN-000005645
+**Pages allocated:** 5653  ·  **Page cursor (next free):** UPN-000005654
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -345,5 +345,6 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000005628 | UPN-000005634 | 7 | `UCOS-PLT-000034` | 006 | EC2-EPIC-005 — Project Management Runtime — D… |
 | UPN-000005635 | UPN-000005638 | 4 | `UCOS-PLT-000035` | 006 | EC2-EPIC-005 — Project Management Runtime — C… |
 | UPN-000005639 | UPN-000005644 | 6 | `UCOS-PLT-000036` | 006 | POST-EPIC-005-IMPLEMENTATION-STATUS-DETERMINA… |
+| UPN-000005645 | UPN-000005653 | 9 | `UCOS-PLT-000037` | 006 | EC2-EPIC-006 — Blueprint Catalog & Management… |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

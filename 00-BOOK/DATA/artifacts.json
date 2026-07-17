@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-17T06:32:15+00:00",
+  "generated_at": "2026-07-17T07:02:32+00:00",
   "generator_version": "1.0.0",
-  "count": 337,
+  "count": 338,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -18520,6 +18520,45 @@
       "path": "platform/POST-EPIC-005-IMPLEMENTATION-STATUS-DETERMINATION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
       "content_hash": "9fa7a284c6b7497432124a0b23011c05f44b3daf2c9c5c7157fd3d3b112bbe50",
+      "traceability": {
+        "requirement": [],
+        "architecture": [],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-PLT-000037",
+      "native_id": "EC2-EPIC-006",
+      "name": "EC2-EPIC-006 — Blueprint Catalog & Management — Determination",
+      "description": "",
+      "category": "PLT",
+      "volume": "VOL-006",
+      "page_start": 5645,
+      "page_end": 5653,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-PLT-000007",
+      "dependencies": [],
+      "program": "PLATFORM",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "PLATFORM",
+        "PLT",
+        "VOL-006"
+      ],
+      "path": "platform/blueprints/EC2-EPIC-006-DETERMINATION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "f0a512c7c7e7612a7ce7c75c5d6fcf9b6fd20e6a27d1171caa1d7ad227887bf8",
       "traceability": {
         "requirement": [],
         "architecture": [],
