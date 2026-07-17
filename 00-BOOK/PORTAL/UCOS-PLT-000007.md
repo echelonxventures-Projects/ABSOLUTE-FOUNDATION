@@ -9,11 +9,23 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 
 ## Children (forward)
 - [UCOS-PLT-000001](UCOS-PLT-000001.md) UCOS Ω∞ — UNIVERSAL PLATFORM CONSTITUTION (UPC) MA
+- [UCOS-PLT-000021](UCOS-PLT-000021.md) EC2-CAP-ADMIN-001 — Administration Runtime — Compl
+- [UCOS-PLT-000022](UCOS-PLT-000022.md) EC2-EPIC-001 — Platform Foundation — Completion Re
+- [UCOS-PLT-000023](UCOS-PLT-000023.md) EC2-EPIC-002 — Identity Platform — Completion Repo
+- [UCOS-PLT-000024](UCOS-PLT-000024.md) EC2-EPIC-013 — Observability & Monitoring — Comple
+- [UCOS-PLT-000025](UCOS-PLT-000025.md) EC2-EPIC-003 — Portal & Navigation — Completion Re
+- [UCOS-PLT-000026](UCOS-PLT-000026.md) EC2-EPIC-004 — Workspace & Collaboration — Complet
 
 ## Backlinks (reverse)
 - [UCOS-PLT-000001](UCOS-PLT-000001.md) —Depends-On→
 - [UCOS-PLT-000001](UCOS-PLT-000001.md) —Parent→
 - [UCOS-RUN-000014](UCOS-RUN-000014.md) —Child→
+- [UCOS-PLT-000021](UCOS-PLT-000021.md) —Parent→
+- [UCOS-PLT-000022](UCOS-PLT-000022.md) —Parent→
+- [UCOS-PLT-000023](UCOS-PLT-000023.md) —Parent→
+- [UCOS-PLT-000024](UCOS-PLT-000024.md) —Parent→
+- [UCOS-PLT-000025](UCOS-PLT-000025.md) —Parent→
+- [UCOS-PLT-000026](UCOS-PLT-000026.md) —Parent→
 - [UCOS-PLT-000002](UCOS-PLT-000002.md) —Depends-On→
 - [UCOS-PLT-000003](UCOS-PLT-000003.md) —Depends-On→
 - [UCOS-PLT-000004](UCOS-PLT-000004.md) —Depends-On→

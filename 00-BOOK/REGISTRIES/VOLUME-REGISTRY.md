@@ -6,16 +6,16 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 4 | UPN-000000001–UPN-000005011 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 3 | UPN-000000001–UPN-000004653 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
-| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 29 | UPN-000001327–UPN-000004964 |
-| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 27 | UPN-000000022–UPN-000005021 |
+| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 30 | UPN-000001327–UPN-000005546 |
+| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 37 | UPN-000000022–UPN-000005575 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 4 | UPN-000004194–UPN-000004218 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
-| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 32 | UPN-000004559–UPN-000005097 |
+| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 39 | UPN-000004559–UPN-000005595 |
 | `VOL-007` | 7 | DATA | DAT | ACTIVE | 23 | UPN-000004355–UPN-000005171 |
 | `VOL-008` | 8 | SERVICE | SVC | ACTIVE | 23 | UPN-000004410–UPN-000005246 |
-| `VOL-009` | 9 | APPLICATION | APP | ACTIVE | 26 | UPN-000004232–UPN-000005375 |
+| `VOL-009` | 9 | APPLICATION | APP | ACTIVE | 28 | UPN-000004232–UPN-000005495 |
 | `VOL-010` | 10 | INFRASTRUCTURE | INF | ACTIVE | 21 | UPN-000004390–UPN-000005434 |
 | `VOL-011` | 11 | SECURITY | SEC | ACTIVE | 1 | UPN-000004406–UPN-000004409 |
 | `VOL-012` | 12 | TESTING | TST | ACTIVE | 1 | UPN-000004414–UPN-000004417 |
@@ -26,7 +26,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-017` | 17 | FACTORY | FAC | ACTIVE | 5 | UPN-000004510–UPN-000004573 |
 | `VOL-018` | 18 | REGISTRIES | REG | ACTIVE | 21 | UPN-000000011–UPN-000005010 |
 | `VOL-019` | 19 | CERTIFICATION | CRT | ACTIVE | 1 | UPN-000004290–UPN-000004293 |
-| `VOL-020` | 20 | CONTROL TOWER | CTL | ACTIVE | 2 | UPN-000004183–UPN-000004193 |
+| `VOL-020` | 20 | CONTROL TOWER | CTL | ACTIVE | 11 | UPN-000004183–UPN-000005599 |
 | `VOL-021` | 21 | DIGITAL TWIN | ADV | ACTIVE | 20 | UPN-000004965–UPN-000005013 |
 | `VOL-022` | 22 | MASTER BOOK ARCHITECTURE | UMB | ACTIVE | 31 | UPN-000005247–UPN-000005480 |
 
@@ -34,14 +34,13 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 4
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 3
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
 | `UCOS-BOOK-000000` | UCOS Ω∞ — UNIVERSAL MASTER KNOWLEDGE BOOK | UCOS-BOOK-000000 | ACTIVE |
 | `UCOS-IDX-000001` | UCOS Ω∞ CONSTITUTIONAL CONSOLIDATION PROGRAM — MASTER INDEX | — | ACTIVE |
 | `UCOS-ENG-000003` | UCOS Ω∞ — ENGINEERING PROGRAM MASTER INDEX & EXECUTION CONSTI… | ENG-000 | ACTIVE |
-| `UCOS-MISC-000003` | ~$Os Ω∞ Master End To End Program | — | FROZEN |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -57,7 +56,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-002 — CONSTITUTION <a id="vol-002"></a>
 
 *Constitutional corpus, consolidation program, freeze, and registers.*  \
-**Category:** CON · **Status:** ACTIVE · **Artifacts:** 29
+**Category:** CON · **Status:** ACTIVE · **Artifacts:** 30
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -90,11 +89,12 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-FRZ-000003` | Source Hashes | — | FROZEN |
 | `UCOS-MISC-000001` | Ucos Ω∞ Master End To End Program | — | FROZEN |
 | `UCOS-MISC-000002` | Ucos Consolidation Plan | — | FROZEN |
+| `UCOS-CON-000025` | Ucos Ω∞ Master Evolution Path   Plan | — | FROZEN |
 
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 
 *Universal architecture constitutions, catalogs, and engineering foundation.*  \
-**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 27
+**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 37
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -125,6 +125,16 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-ENG-000008` | UCOS Ω∞ — UNIVERSAL TYPE SYSTEM (UTS) MASTER ARCHITECTURE | ENG-004 | ACTIVE |
 | `UCOS-ENG-000009` | UCOS Ω∞ — UNIVERSAL VALUE SYSTEM (UVS) MASTER ARCHITECTURE | ENG-003 | ACTIVE |
 | `UCOS-MISC-000004` | UCOS Ω∞ — UNIVERSAL ARCHITECTURAL QUALITY CONSTITUTION | ARCH-QUALITY-001 | ACTIVE |
+| `UCOS-ADR-000001` | ADR-NNNN: <short decision title> | — | ACTIVE |
+| `UCOS-ADR-000002` | ADR-0001: EC-1 Foundation technology stack | — | ACTIVE |
+| `UCOS-ENG-000010` | EPIC-008 — Certification Layer — Completion Report | — | ACTIVE |
+| `UCOS-ENG-000011` | EPIC-003 — Universal Compiler Core — Completion Report | — | ACTIVE |
+| `UCOS-ENG-000012` | EPIC-004 — Determinism Framework — Completion Report | — | ACTIVE |
+| `UCOS-ENG-000013` | Bp Data 0001 | — | ACTIVE |
+| `UCOS-ENG-000014` | EPIC-006 — Factory Layer — Completion Report | — | ACTIVE |
+| `UCOS-ENG-000015` | EPIC-002 — Registry Adapter — Completion Report | — | ACTIVE |
+| `UCOS-ENG-000016` | EPIC-005 — Runtime Assembly — Completion Report | — | ACTIVE |
+| `UCOS-ENG-000017` | EPIC-007 — Validation Layer — Completion Report | — | ACTIVE |
 
 ### VOL-004 — IMPLEMENTATION <a id="vol-004"></a>
 
@@ -171,7 +181,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-006 — PLATFORM <a id="vol-006"></a>
 
 *Implementation platforms and engines.*  \
-**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 32
+**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 39
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -207,6 +217,13 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-PLT-000018` | UCOS Ω∞ — PLATFORM READINESS DETERMINATION | PLATFORM-016 | ACTIVE |
 | `UCOS-PLT-000019` | UCOS Ω∞ — PLATFORM COMPLETION DETERMINATION | PLATFORM-017 | ACTIVE |
 | `UCOS-PLT-000020` | UCOS Ω∞ — PLATFORM PROGRAM MASTER REGISTRY | PLATFORM-018 | ACTIVE |
+| `UCOS-IMP-000019` | UCOS EC-2 — PLATFORM REALIZATION PROGRAM | — | ACTIVE |
+| `UCOS-PLT-000021` | EC2-CAP-ADMIN-001 — Administration Runtime — Completion Report | — | ACTIVE |
+| `UCOS-PLT-000022` | EC2-EPIC-001 — Platform Foundation — Completion Report | — | ACTIVE |
+| `UCOS-PLT-000023` | EC2-EPIC-002 — Identity Platform — Completion Report | — | ACTIVE |
+| `UCOS-PLT-000024` | EC2-EPIC-013 — Observability & Monitoring — Completion Report | — | ACTIVE |
+| `UCOS-PLT-000025` | EC2-EPIC-003 — Portal & Navigation — Completion Report | — | ACTIVE |
+| `UCOS-PLT-000026` | EC2-EPIC-004 — Workspace & Collaboration — Completion Report | — | ACTIVE |
 
 ### VOL-007 — DATA <a id="vol-007"></a>
 
@@ -273,7 +290,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-009 — APPLICATION <a id="vol-009"></a>
 
 *Application architecture, catalog, reference, and generation.*  \
-**Category:** APP · **Status:** ACTIVE · **Artifacts:** 26
+**Category:** APP · **Status:** ACTIVE · **Artifacts:** 28
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -303,6 +320,8 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-MISC-000024` | UCOS Ω∞ — UNIVERSAL APPLICATION PROGRAM FINAL CERTIFICATION D… | APPLICATION-GOV-999 | ACTIVE |
 | `UCOS-MISC-000025` | UCOS Ω∞ — UNIVERSAL APPLICATION PROGRAM EVOLUTION READINESS D… | APPLICATION-GOV-EVOL-001 | ACTIVE |
 | `UCOS-MISC-000026` | UCOS Ω∞ — UNIVERSAL APPLICATION PROGRAM INFINITE EVOLUTION IN… | APPLICATION-GOV-INF-001 | ACTIVE |
+| `UCOS-APP-000001` | APP-001 — APPLICATION FOUNDATION CONSTITUTION | — | ACTIVE |
+| `UCOS-APP-000002` | APP-002 — UNIVERSAL APPLICATION REFERENCE ARCHITECTURE | — | ACTIVE |
 
 ### VOL-010 — INFRASTRUCTURE <a id="vol-010"></a>
 
@@ -436,12 +455,21 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-020 — CONTROL TOWER <a id="vol-020"></a>
 
 *Program control tower and external-execution support.*  \
-**Category:** CTL · **Status:** ACTIVE · **Artifacts:** 2
+**Category:** CTL · **Status:** ACTIVE · **Artifacts:** 11
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
 | `UCOS-EES-000001` | UCOS Ω∞ — EXTERNAL ACTOR QUALIFICATION FRAMEWORK | — | ACTIVE |
 | `UCOS-EES-000002` | UCOS Ω∞ — EXTERNAL EXECUTION SUPPORT PROGRAM — PROGRAM CHARTER | — | ACTIVE |
+| `UCOS-EXEC-000001` | UCOS-EXEC-001 — EC-2 EXECUTION ACTIVATION DETERMINATION | — | ACTIVE |
+| `UCOS-EXEC-000002` | UCOS-EXEC-002 — EC-2 NEXT-EPIC SEQUENCING DETERMINATION | — | ACTIVE |
+| `UCOS-EXEC-000003` | UCOS-EXEC-003 — EC2-EPIC-013 EXECUTION PACKAGE DETERMINATION | — | ACTIVE |
+| `UCOS-GOV-000001` | UCOS-GOV-001 — CORPUS AUTHORITY AND RECONCILIATION DETERMINATION | — | ACTIVE |
+| `UCOS-GOV-000002` | UCOS-GOV-002 — CONSTITUTION-TO-IMPLEMENTATION TRACEABILITY DE… | — | ACTIVE |
+| `UCOS-GOV-000003` | UCOS-GOV-003 — IMPLEMENTATION READINESS DETERMINATION | — | ACTIVE |
+| `UCOS-GOV-000004` | UCOS-GOV-004 — IMPLEMENTATION EXECUTION AUTHORIZATION DETERMI… | — | ACTIVE |
+| `UCOS-GOV-000005` | UCOS-GOV-005 — REPOSITORY GOVERNANCE RECONCILIATION DETERMINA… | — | ACTIVE |
+| `UCOS-GOV-000006` | UCOS-GOV-006 — REPOSITORY GOVERNANCE CORRECTION IMPLEMENTATIO… | — | ACTIVE |
 
 ### VOL-021 — DIGITAL TWIN <a id="vol-021"></a>
 

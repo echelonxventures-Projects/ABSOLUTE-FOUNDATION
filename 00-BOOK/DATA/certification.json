@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-16T05:13:51+00:00",
+  "generated_at": "2026-07-17T02:35:36+00:00",
   "generator_version": "1.0.0-adv",
   "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)",
   "verdict": "CERTIFIED",
-  "domains_total": 9,
-  "domains_passed": 9,
+  "domains_total": 10,
+  "domains_passed": 10,
   "domains": {
     "identity": {
       "pass": true,
@@ -12,7 +12,7 @@
         {
           "name": "no duplicate Universal IDs",
           "pass": true,
-          "detail": "299 unique"
+          "detail": "327 unique"
         },
         {
           "name": "no overlapping page ranges",
@@ -22,7 +22,7 @@
         {
           "name": "ledger page cursor >= max page",
           "pass": true,
-          "detail": "cursor=5480 max_end=5480"
+          "detail": "cursor=5599 max_end=5599"
         }
       ]
     },
@@ -32,7 +32,7 @@
         {
           "name": "every artifact present in id-ledger",
           "pass": true,
-          "detail": "299 artifacts ledgered"
+          "detail": "327 artifacts ledgered"
         },
         {
           "name": "every artifact carries name+volume+program",
@@ -67,7 +67,7 @@
         {
           "name": "no dangling edge endpoints",
           "pass": true,
-          "detail": "9950 edges resolve"
+          "detail": "10006 edges resolve"
         },
         {
           "name": "Depends-On graph acyclic",
@@ -82,7 +82,7 @@
         {
           "name": "every change event bound to a real subject",
           "pass": true,
-          "detail": "300 events node-bound"
+          "detail": "328 events node-bound"
         },
         {
           "name": "change ids unique",
@@ -92,7 +92,7 @@
         {
           "name": "snapshot history seq monotonic (append-only)",
           "pass": true,
-          "detail": "299 histories append-only"
+          "detail": "328 histories append-only"
         }
       ]
     },
@@ -102,7 +102,7 @@
         {
           "name": "current_version matches latest snapshot",
           "pass": true,
-          "detail": "299 version records consistent"
+          "detail": "327 version records consistent"
         }
       ]
     },
@@ -112,7 +112,7 @@
         {
           "name": "lineage endpoints resolve + ancestry acyclic",
           "pass": true,
-          "detail": "299 lineage nodes intact"
+          "detail": "327 lineage nodes intact"
         }
       ]
     },
@@ -137,7 +137,7 @@
         {
           "name": "synchronization audit present + last run PASS",
           "pass": true,
-          "detail": "last sync run #15 PASS"
+          "detail": "last sync run #16 PASS"
         }
       ]
     },
@@ -155,13 +155,39 @@
           "detail": "exists(UCOS-BOOK-000000) cited 1 ids"
         }
       ]
+    },
+    "execution": {
+      "pass": true,
+      "checks": [
+        {
+          "name": "every execution minted from the id-ledger identity authority (EXL-02)",
+          "pass": true,
+          "detail": "0 executions ledgered"
+        },
+        {
+          "name": "forward-only append-only lifecycle (RUNTIME-006 EXL-07/10)",
+          "pass": true,
+          "detail": "forward-only, append-only"
+        },
+        {
+          "name": "subjects + dependencies resolve (referential integrity)",
+          "pass": true,
+          "detail": "all resolve"
+        },
+        {
+          "name": "execution dependency graph acyclic (EXL-17)",
+          "pass": true,
+          "detail": "acyclic"
+        }
+      ]
     }
   },
   "scope": {
-    "artifacts": 299,
-    "edges": 9950,
-    "change_events": 300,
+    "artifacts": 327,
+    "edges": 10006,
+    "change_events": 328,
     "signals": 15,
-    "lineage_nodes": 299
+    "lineage_nodes": 327,
+    "executions": 0
   }
 }

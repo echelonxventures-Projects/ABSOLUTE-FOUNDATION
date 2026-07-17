@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T05:00:40+00:00",
+  "generated_at": "2026-07-17T02:35:35+00:00",
   "count": 23,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 4,
+      "artifact_count": 3,
       "page_range_start": 1,
-      "page_range_end": 5011,
+      "page_range_end": 4653,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -33,9 +33,9 @@
       "description": "Constitutional corpus, consolidation program, freeze, and registers.",
       "category": "CON",
       "status": "ACTIVE",
-      "artifact_count": 29,
+      "artifact_count": 30,
       "page_range_start": 1327,
-      "page_range_end": 4964,
+      "page_range_end": 5546,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-002"
     },
     {
@@ -45,9 +45,9 @@
       "description": "Universal architecture constitutions, catalogs, and engineering foundation.",
       "category": "ARCH",
       "status": "ACTIVE",
-      "artifact_count": 27,
+      "artifact_count": 37,
       "page_range_start": 22,
-      "page_range_end": 5021,
+      "page_range_end": 5575,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-003"
     },
     {
@@ -81,9 +81,9 @@
       "description": "Implementation platforms and engines.",
       "category": "PLT",
       "status": "ACTIVE",
-      "artifact_count": 32,
+      "artifact_count": 39,
       "page_range_start": 4559,
-      "page_range_end": 5097,
+      "page_range_end": 5595,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-006"
     },
     {
@@ -117,9 +117,9 @@
       "description": "Application architecture, catalog, reference, and generation.",
       "category": "APP",
       "status": "ACTIVE",
-      "artifact_count": 26,
+      "artifact_count": 28,
       "page_range_start": 4232,
-      "page_range_end": 5375,
+      "page_range_end": 5495,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-009"
     },
     {
@@ -249,9 +249,9 @@
       "description": "Program control tower and external-execution support.",
       "category": "CTL",
       "status": "ACTIVE",
-      "artifact_count": 2,
+      "artifact_count": 11,
       "page_range_start": 4183,
-      "page_range_end": 4193,
+      "page_range_end": 5599,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-020"
     },
     {

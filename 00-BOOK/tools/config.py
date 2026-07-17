@@ -214,9 +214,130 @@ CLASSIFY_RULES = [
     # intentionally undefined (UMB-REMED-002 F-6 determination) and recommended for
     # exclusion rather than classification. Matched with re.search on the relpath.
     (r"^(?!~\$)[^/]*\.docx$", "CONSOLIDATION", "CON", "VOL-002"),
+
+    # --- UCOS-GOV-006 (REPOSITORY GOVERNANCE CORRECTION) — first-class family
+    #     rules. Append-only; each adds NEW coverage only (no prior rule matches
+    #     these prefixes — the families were the genuine unclassified artifacts
+    #     isolated by GOV-005 CLASS-RC-1). No existing classification changes; no
+    #     Universal ID is renumbered (allocate() is path-keyed). Every category is
+    #     enumerated as a first-class artifact family (see ARTIFACT_FAMILIES) and
+    #     routed to a volume that ALREADY EXISTS — nothing is renumbered. These are
+    #     the intended stable namespaces; the deterministic path-derived catch-all
+    #     in ukb.py::classify() guarantees totality for every OTHER present/future
+    #     tree without a per-tree rule. -----------------------------------------
+
+    # Architecture Decision Records → ARCHITECTURE volume (VOL-003). ADRs are
+    # governed decision records (ADR-0001 is a CI prerequisite per GOV-003).
+    (r"^adr/", "ADR", "ADR", "VOL-003"),
+
+    # Governance determinations (02-MASTER/UCOS-GOV-NNN) → CONTROL TOWER volume
+    # (VOL-020). The highest-authority program-governance documents in the repo.
+    (r"^02-MASTER/UCOS-GOV-", "GOV", "GOV", "VOL-020"),
+
+    # Execution determinations (02-MASTER/UCOS-EXEC-NNN) → CONTROL TOWER volume
+    # (VOL-020). Execution determinations authorize implementation. The EXEC
+    # category shares the ONE append-only identity authority (id-ledger
+    # category_seq) with EXEC-REG-001 execution instances by design — the shared
+    # counter guarantees no Universal ID is ever duplicated across the two.
+    (r"^02-MASTER/UCOS-EXEC-", "EXEC", "EXEC", "VOL-020"),
+
+    # Application-foundation determinations (02-MASTER/APP-NNN) → APPLICATION
+    # volume (VOL-009), the single APP program spanning both 02-MASTER and
+    # 12-APPLICATION (category APP already exists for VOL-009).
+    (r"^02-MASTER/APP-", "APP", "APP", "VOL-009"),
+
+    # Engineering implementation documents (engine/**: epic completion reports +
+    # source fixtures/blueprints) → ARCHITECTURE/engineering volume (VOL-003),
+    # consistent with the 07-ENGINEERING program (category ENG). Broad prefix so
+    # the whole tree is total (completion reports AND blueprints/*.json).
+    (r"^engine/", "ENG", "ENG", "VOL-003"),
+
+    # Platform implementation documents (platform/**: EC2 epic completion reports)
+    # → PLATFORM volume (VOL-006, category PLT), consistent with the 09-PLATFORM
+    # program. Broad prefix so the whole tree is total.
+    (r"^platform/", "PLATFORM", "PLT", "VOL-006"),
 ]
 
 DEFAULT_CLASS = ("OTHER", "MISC", "VOL-000")
+
+# ===========================================================================
+# UCOS-GOV-006 — REPOSITORY GOVERNANCE MODEL COMPLETION (GOV-005 §5.3 / Part 4).
+#
+# DATA ONLY. Completes the governance taxonomy so that (a) every artifact family
+# is a FIRST-CLASS category, and (b) environment/generated outputs are FORMALLY
+# modelled as non-artifacts whose authoritative boundary is version control.
+# It hard-codes NO artifact name and NO manual registration/whitelist; it
+# documents the rule-based model the eligibility + classification engines
+# implement. Adding a future family is append-only.
+# ===========================================================================
+
+# --- Constitutional definition (GOV-005 §5.3) -------------------------------
+# A REPOSITORY ARTIFACT is a version-controlled (tracked or newly-authored,
+# un-ignored), human-authored corpus file of an included type. A GENERATED
+# ARTIFACT is a deterministically re-derivable output (registries, twin,
+# control-tower, portal, evidence) — regenerated, never hand-registered. An
+# ENVIRONMENT ARTIFACT is a build/cache/dependency/tooling output (venv,
+# *.egg-info, __pycache__, .pytest_cache, .ruff_cache, coverage). Only
+# REPOSITORY ARTIFACTS are eligible for registration; the other two classes are
+# bounded — and thereby excluded — by the ignore authority (.gitignore), NOT by
+# any hand-maintained path list.
+REPOSITORY_ARTIFACT_DEFINITION = (
+    "A repository artifact is a version-controlled (git-tracked or newly-authored "
+    "and un-ignored), human-authored corpus file whose extension is in "
+    "INCLUDE_EXTENSIONS and which is not part of the generator's own machinery or "
+    "generated output (EXCLUDE_DIR_PREFIXES). Generated and environment outputs "
+    "are non-artifacts, bounded by version control (.gitignore).")
+
+# Registration scope: what the engines register (eligible == this set).
+REGISTRATION_SCOPE = (
+    "version-controlled repository artifacts of an included type, minus the "
+    "generator's own machinery and generated outputs (corpus-internal excludes)")
+
+# Non-artifact scope: formally modelled classes that are NEVER registered. Each
+# is excluded automatically by the ignore authority (or the corpus-internal
+# excludes for generated corpus outputs) — no per-file exception, no whitelist.
+NON_ARTIFACT_SCOPE = {
+    "environment": "virtual-environments, dependency metadata, byte-code and test/"
+                   "lint caches, coverage (.ec1-venv/, *.egg-info/, __pycache__/, "
+                   ".pytest_cache/, .ruff_cache/, .coverage, coverage.xml) — ignored",
+    "generated":   "deterministically re-derivable outputs: the emitted registries, "
+                   "DATA/, CONTROL-TOWER/, PORTAL/, and generated evidence "
+                   "(determinism-evidence/) — corpus-internal excludes / ignored",
+    "transient":   "editor/office lock & owner files (~$*) and the registration "
+                   "re-entrancy lock — ignored",
+}
+
+# First-class artifact families (GOV-005 Part 4). Each maps a family to its
+# identifier-namespace CATEGORY and its thematic VOLUME (an EXISTING volume;
+# nothing is renumbered). This enumerates the taxonomy; the executable mapping
+# lives in CLASSIFY_RULES (curated families) + the deterministic path-derived
+# catch-all in ukb.py::classify() (totality for every other tree). Append-only:
+# a future family is a new entry, never a rewrite.
+ARTIFACT_FAMILIES = {
+    "APP":  {"category": "APP",  "volume": "VOL-009", "kind": "application-foundation",
+             "sources": ("^02-MASTER/APP-", "^12-APPLICATION/")},
+    "GOV":  {"category": "GOV",  "volume": "VOL-020", "kind": "governance-determination",
+             "sources": ("^02-MASTER/UCOS-GOV-",)},
+    "EXEC": {"category": "EXEC", "volume": "VOL-020", "kind": "execution-determination",
+             "sources": ("^02-MASTER/UCOS-EXEC-",)},
+    "ADR":  {"category": "ADR",  "volume": "VOL-003", "kind": "architecture-decision-record",
+             "sources": ("^adr/",)},
+    "ENG":  {"category": "ENG",  "volume": "VOL-003", "kind": "engineering-document/completion-report",
+             "sources": ("^engine/", "^07-ENGINEERING/")},
+    "PLT":  {"category": "PLT",  "volume": "VOL-006", "kind": "platform-document/completion-report",
+             "sources": ("^platform/", "^09-PLATFORM/")},
+}
+
+# --- Deterministic path-derived catch-all (GOV-005 §5.2) --------------------
+# Parameters for ukb.py::_derive_class_from_path. The catch-all removes the
+# OTHER/MISC dead-end: any tracked artifact unmatched by a curated rule and by
+# metadata is classified by its top-level directory / identifier prefix into a
+# REAL category, guaranteeing unclassified == 0 for every present and future tree
+# with no per-tree config. These are shape parameters only — no artifact, no tree.
+DERIVED_CATEGORY_MAXLEN = 12      # stable code width derived from the path token
+DERIVED_DEFAULT_CATEGORY = "REPO" # used only for a token that reduces to empty
+DERIVED_DEFAULT_VOLUME = "VOL-000"  # thematic home when no volume matches the code
+
 
 # ---------------------------------------------------------------------------
 # CHAINS — real dependency chains, as ordered filename substrings.

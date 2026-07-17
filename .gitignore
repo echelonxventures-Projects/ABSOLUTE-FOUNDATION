@@ -14,3 +14,12 @@ dist/
 .ruff_cache/
 .coverage
 coverage.xml
+
+# UCOS-GOV-006 (GOV-005 §5.1/§6.8) — formally declare generated evidence and
+# editor/office lock files as NON-ARTIFACTS bounded by version control. Generated
+# evidence is deterministically re-derivable output (regenerated each run), not a
+# registerable repository artifact; ~$ files are transient Office owner/lock temp
+# files. Declaring them here makes the intent explicit and keeps eligibility a
+# pure function of the tracked/un-ignored corpus for all future growth.
+determinism-evidence/
+~$*

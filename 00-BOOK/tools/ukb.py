@@ -319,17 +319,26 @@ _STATUS_EVENT_KIND = {"SUPERSEDED": "Superseded", "RETIRED": "Retired",
                       "DEPRECATED": "Deprecated"}
 
 
-def derive_change_events(ledger, git_map):
+def derive_change_events(ledger, git_map, registered_uids=None):
     """Derive change events from consecutive append-only ledger snapshots. Each
     event is bound to a subject Universal ID (a real graph node → graph-participating,
     no dangling endpoint) and carries evidence: snapshot seq, before/after values,
     and — when the file is tracked — the causing git commit. Deterministic: events
     are ordered by (at, subject, seq, kind) and numbered stably, so ids are stable
-    across rebuilds. Nothing is stored as a first-class artifact (UMB-008 §2/§3)."""
+    across rebuilds. Nothing is stored as a first-class artifact (UMB-008 §2/§3).
+
+    Referential integrity (UMB-017 C-05; GOV-005): the append-only snapshot history
+    may retain the UID of a path that is no longer a registered repository artifact
+    (e.g. a corrected false registration whose path the version-control eligibility
+    boundary now excludes). Such UIDs are NOT emitted as change-event subjects,
+    because a change event must bind to a real, currently-registered graph node —
+    never a dangling endpoint. The history itself is preserved (append-only)."""
     hist = ledger.get("history", {})
     term = set(C.CHANGE_TERMINAL_STATUSES)
     raw = []
     for uid, snaps in hist.items():
+        if registered_uids is not None and uid not in registered_uids:
+            continue                           # subject no longer a registered artifact
         for i, s in enumerate(snaps):
             prev = snaps[i - 1] if i > 0 else None
             evs = []
@@ -367,6 +376,8 @@ def derive_version_records(ledger, by_uid):
     hist = ledger.get("history", {})
     out = {}
     for uid, snaps in hist.items():
+        if uid not in by_uid:
+            continue                           # skip UIDs no longer registered (GOV-005)
         versions = []
         for s in snaps:
             v = s.get("version")
@@ -472,17 +483,44 @@ def _volume_for_category(category: str):
     return None
 
 
+def _derive_class_from_path(relpath: str):
+    """Deterministic path-derived classification (GOV-005 §5.2, CLASS-RC-1
+    correction). Replaces the OTHER/MISC dead-end with a REAL, path-derivable
+    category so classification is TOTAL: every tracked artifact — present or
+    future — resolves to a real (program, category, volume) even when no curated
+    CLASSIFY_RULE and no self-declared metadata matched. This is the structural
+    guarantee that `unclassified == 0` holds for any future tree with ZERO new
+    per-tree config (no artifact name, no manual list).
+
+    Derivation is pure and stable: the identifier namespace is taken from the
+    artifact's top-level directory segment (or, for a repo-root file, its
+    identifier/name stem), stripped of a leading `NN-` ordinal, upper-cased, and
+    reduced to a stable code. The thematic volume is an EXISTING volume whose
+    category equals that code when one exists, else the configured derived-catch
+    volume — nothing is renumbered."""
+    parts = relpath.split("/")
+    token = parts[0] if len(parts) > 1 else os.path.splitext(parts[0])[0]
+    token = re.sub(r"^\d+[-_.]?", "", token)                 # strip leading "07-" ordinal
+    code = re.sub(r"[^A-Za-z0-9]", "", token).upper()[:C.DERIVED_CATEGORY_MAXLEN]
+    code = code or C.DERIVED_DEFAULT_CATEGORY
+    volume = _volume_for_category(code) or C.DERIVED_DEFAULT_VOLUME
+    return code, code, volume
+
+
 def classify(relpath: str, abspath: str | None = None):
     """Resolve (program, category, volume) for an artifact.
 
-    Order (append-only, non-destructive):
+    Order (append-only, non-destructive, TOTAL — GOV-005 §5.2):
       1. Ordered CLASSIFY_RULES — existing families; unchanged, first match wins.
       2. Self-declared metadata — rescues any artifact that would otherwise fall
-         to DEFAULT_CLASS, so a NEW program/domain/family participates with zero
-         config edits (UMB-IMP-001; REG-AUTO-001 L4; UCI-001 CP-6).
-      3. DEFAULT_CLASS — last resort (surfaced by the classification gate).
+         to the derived catch-all, so a NEW program/domain/family participates
+         with zero config edits (UMB-IMP-001; REG-AUTO-001 L4; UCI-001 CP-6).
+      3. Deterministic path-derived catch-all — guarantees a REAL category for
+         every remaining tracked artifact (no OTHER/MISC dead-end; no per-tree
+         rule ever required to avoid an unclassified result).
     Metadata is consulted ONLY when no rule matches, so it never overrides or
-    changes a prior classification (append-only invariant).
+    changes a prior classification (append-only invariant). DEFAULT_CLASS is
+    retained only as an unreachable-for-tracked-artifacts final guard.
     """
     for pattern, program, category, volume in C.CLASSIFY_RULES:
         if re.search(pattern, relpath):
@@ -505,6 +543,11 @@ def classify(relpath: str, abspath: str | None = None):
             volume = vol if (vol and re.fullmatch(r"VOL-\d{3}", vol)) else \
                 (_volume_for_category(category) or C.METADATA_DEFAULT_VOLUME)
             return program, category, volume
+    # Deterministic, total catch-all — a real path-derived category, never the
+    # OTHER/MISC dead-end (GOV-005 §5.2). DEFAULT_CLASS below is now unreachable
+    # for any real relpath and kept only as a defensive final guard.
+    if relpath:
+        return _derive_class_from_path(relpath)
     return C.DEFAULT_CLASS
 
 
@@ -603,7 +646,49 @@ def sha256(abspath: str) -> str | None:
         return None
 
 
-def _iter_files():
+def _repo_artifact_paths():
+    """Return the REPOSITORY ARTIFACT BOUNDARY as declared by version control, or
+    None if git is unavailable (GOV-005 §5.1, ELIG-RC-1 correction).
+
+    The eligibility universe is derived from what the repository itself considers
+    to be part of the repository — never from raw environmental filesystem
+    contents. Concretely this is the union of git-tracked files and new
+    (not-yet-committed) files, with `.gitignore` (+ the standard exclude sources)
+    as the single authoritative non-artifact boundary:
+
+      * tracked files                     → repository artifacts (in scope);
+      * new, un-ignored files             → repository artifacts being authored
+                                            (in scope, so the enforcement gate
+                                            sees a document the instant it exists);
+      * ignored files (`.gitignore`)      → environment / build / cache /
+                                            generated outputs → automatically
+                                            excluded with ZERO hand-maintained
+                                            path list (venvs, *.egg-info,
+                                            .pytest_cache, .ruff_cache, coverage,
+                                            build/, dist/, __pycache__, and any
+                                            FUTURE ignored directory).
+
+    `git ls-files --cached --others --exclude-standard` is exactly this set. No
+    environment path is named here; the ignore authority is consulted instead of
+    contradicted (the previous os.walk denylist ignored `.gitignore` — the root
+    trigger of unbounded eligibility drift)."""
+    try:
+        import subprocess
+        out = subprocess.run(
+            ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+            cwd=REPO, capture_output=True, text=True, timeout=60)
+        if out.returncode != 0:
+            return None
+        return [p for p in out.stdout.split("\0") if p]
+    except Exception:
+        return None
+
+
+def _iter_files_walk():
+    """Filesystem-walk enumeration — used ONLY as a degraded fallback when git is
+    unavailable (e.g. an exported tree with no VCS). Retains the historical
+    denylist so the engine still functions off-VCS; inside a git work tree the
+    version-control boundary in _repo_artifact_paths() is authoritative."""
     for dirpath, dirnames, filenames in os.walk(REPO):
         dirnames.sort()
         for fn in sorted(filenames):
@@ -614,6 +699,35 @@ def _iter_files():
             if not rel.endswith(C.INCLUDE_EXTENSIONS):
                 continue
             yield abspath, rel
+
+
+def _iter_files():
+    """Enumerate eligible repository artifacts (deterministic, sorted order).
+
+    Eligibility = (repository artifact boundary from version control)
+                  ∩ INCLUDE_EXTENSIONS
+                  ∖ intentional corpus-internal excludes.
+
+    The corpus-internal EXCLUDE_DIR_PREFIXES are retained ON TOP of the VCS
+    boundary because they name the generator's OWN machinery and its GENERATED
+    outputs (tools/, DATA/, REGISTRIES/, CONTROL-TOWER/, VOLUMES/, PORTAL/) —
+    tracked files that must never be registered as artifacts (the registry must
+    not list itself). Everything else that version control considers part of the
+    repository, and carries a registerable extension, is eligible."""
+    paths = _repo_artifact_paths()
+    if paths is None:
+        yield from _iter_files_walk()
+        return
+    excl = tuple(C.EXCLUDE_DIR_PREFIXES)
+    for rel in sorted(paths):
+        if rel.startswith(excl):
+            continue
+        if not rel.endswith(C.INCLUDE_EXTENSIONS):
+            continue
+        abspath = os.path.join(REPO, rel)
+        if not os.path.isfile(abspath):
+            continue          # index entry with no working-tree file (e.g. staged delete)
+        yield abspath, rel
 
 
 # ---------------------------------------------------------------------------
@@ -903,7 +1017,7 @@ def cmd_build(args):
         commit = _git_last_commit(by_uid[uid]["path"])
         if commit:
             git_map[uid] = commit
-    change_events = derive_change_events(ledger, git_map)
+    change_events = derive_change_events(ledger, git_map, set(by_uid))
     version_records = derive_version_records(ledger, by_uid)
     lineage = derive_lineage(edges, by_uid, ledger)
     change_ledger = build_change_ledger(change_events, version_records, lineage)
@@ -1551,13 +1665,14 @@ def cmd_enforce(args):
     """UMB-IMP-001 enforcement gate. Guarantees no unregistered, unclassified, or
     invalid artifact silently enters the corpus (REG-AUTO-001 §16; STATUS-001 §5).
 
-    Modes:
+    The gate applies a SINGLE FIXED POLICY (GOV-005 §5.4): eligibility, validity,
+    classification, and registration are all enforced, so the result is a pure,
+    deterministic function of repository state. Modes:
       --pre   (pre-registration): validate every ELIGIBLE file that is not yet
               registered — it must be valid and classifiable BEFORE the transaction
               registers it. Fails closed on an invalid or unclassified new artifact.
       (post, default): after the transaction — asserts registration completeness
-              (count parity), validity, and reports classification. --strict also
-              fails on any artifact left in the OTHER/MISC fallback.
+              (count parity), validity, and classification for every eligible file.
     """
     default_program = C.DEFAULT_CLASS[0]
     eligible = list(_iter_files())                       # (abspath, rel)
@@ -1584,20 +1699,29 @@ def cmd_enforce(args):
             unregistered.append(rel)
 
     pre = getattr(args, "pre", False)
-    strict = getattr(args, "strict", False)
 
-    # In PRE mode only newly-created (unregistered) files are gated; already
-    # registered legacy artifacts are out of scope for the authoring gate.
+    # SINGLE FIXED GATE POLICY (GOV-005 §5.4, AUD-RC-1 correction). Classification
+    # is ALWAYS enforced — never conditional on an invocation flag — so the audit
+    # result is a PURE FUNCTION of repository state: identical repository contents
+    # always produce identical output. This is safe and deterministic because the
+    # total path-derived classifier (§5.2) drives `unclassified` to 0 structurally.
+    # The former `--strict` flag no longer changes the outcome (it is retained as
+    # an accepted no-op for backward compatibility; see argparse) — so running the
+    # gate with or without it yields byte-identical results. Combined with the
+    # version-control eligibility boundary (§5.1), the audit is also repeatable
+    # across environments (a present/absent venv, a fresh test run, or generated
+    # evidence can no longer perturb `eligible`).
     if pre:
+        # PRE: only NEWLY-created (unregistered) files are gated; already-registered
+        # legacy artifacts are out of scope for the authoring gate. A new artifact
+        # must be valid AND classifiable before the transaction registers it.
         pending = set(unregistered)
         hard = ([r for r in invalid if r in pending]
                 + [r for r in unclassified if r in pending])
         gate_label = "PRE-REGISTRATION"
     else:
-        # POST: every eligible file must be registered (parity) and valid.
-        hard = list(unregistered) + list(invalid)
-        if strict:
-            hard += list(unclassified)
+        # POST: every eligible file must be registered (parity), valid, and classified.
+        hard = list(unregistered) + list(invalid) + list(unclassified)
         gate_label = "POST-REGISTRATION"
 
     violations = sorted(set(hard))
@@ -1622,14 +1746,12 @@ def cmd_enforce(args):
     print(f"  eligible on-disk artifacts : {len(eligible)}")
     print(f"  registered (in registers)  : {len(registered)}")
     print(f"  unregistered eligible      : {len(unregistered)}")
-    print(f"  unclassified (OTHER/MISC)  : {len(unclassified)} "
-          f"({'ADVISORY' if not (strict or pre) else 'GATED'})")
+    print(f"  unclassified (OTHER/MISC)  : {len(unclassified)} (GATED)")
     print(f"  invalid (unreadable/empty) : {len(invalid)}")
     for r in unregistered[:10]:
         print(f"    UNREGISTERED  {r}")
-    if not pre and not strict and unclassified:
-        for r in unclassified[:10]:
-            print(f"    unclassified  {r}  (declare metadata or a CLASSIFY_RULE)")
+    for r in unclassified[:10]:
+        print(f"    unclassified  {r}  (declare metadata or a CLASSIFY_RULE)")
     print("-" * 60)
     if violations:
         print(f"ENFORCEMENT FAILED — {len(violations)} blocking violation(s); "
@@ -1942,7 +2064,9 @@ def main():
     ep.add_argument("--pre", action="store_true",
                     help="Pre-registration gate: gate only newly-created (unregistered) artifacts.")
     ep.add_argument("--strict", action="store_true",
-                    help="Also fail on artifacts left in the OTHER/MISC classification fallback.")
+                    help="DEPRECATED no-op (GOV-005 §5.4): classification is now always "
+                         "enforced under the single fixed gate policy. Accepted for "
+                         "backward compatibility; it no longer changes the audit result.")
 
     xp = sub.add_parser("exec", help="EXEC-REG-001 execution register (RUNTIME-006): declare / "
                         "transition / activate / suspend / resume / complete / terminate / "
