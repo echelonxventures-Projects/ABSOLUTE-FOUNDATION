@@ -5099,6 +5099,65 @@
       "violations": [],
       "result": "PASS",
       "seq": 66
+    },
+    {
+      "generated_at": "2026-07-17T04:16:51+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 330,
+      "registered": 329,
+      "unregistered": [
+        "platform/security/EC2-CAP-SEC-001-SEC-REG-CERTIFICATION-REPORT.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 67
+    },
+    {
+      "generated_at": "2026-07-17T04:16:52+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 330,
+      "registered": 330,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 68
+    },
+    {
+      "generated_at": "2026-07-17T04:17:16+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 330,
+      "registered": 330,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 69
     }
   ]
 }

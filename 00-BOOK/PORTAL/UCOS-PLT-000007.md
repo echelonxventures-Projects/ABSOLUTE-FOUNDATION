@@ -17,6 +17,7 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000026](UCOS-PLT-000026.md) EC2-EPIC-004 — Workspace & Collaboration — Complet
 - [UCOS-PLT-000027](UCOS-PLT-000027.md) EC2-CAP-SEC-001 — Security Runtime — Determination
 - [UCOS-PLT-000028](UCOS-PLT-000028.md) EC2-CAP-SEC-001 · SEC-INTEL — Security Intelligenc
+- [UCOS-PLT-000029](UCOS-PLT-000029.md) EC2-CAP-SEC-001 · SEC-REG — Security Registry Runt
 
 ## Backlinks (reverse)
 - [UCOS-PLT-000001](UCOS-PLT-000001.md) —Depends-On→
@@ -29,6 +30,7 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000025](UCOS-PLT-000025.md) —Parent→
 - [UCOS-PLT-000027](UCOS-PLT-000027.md) —Parent→
 - [UCOS-PLT-000028](UCOS-PLT-000028.md) —Parent→
+- [UCOS-PLT-000029](UCOS-PLT-000029.md) —Parent→
 - [UCOS-PLT-000026](UCOS-PLT-000026.md) —Parent→
 - [UCOS-PLT-000002](UCOS-PLT-000002.md) —Depends-On→
 - [UCOS-PLT-000003](UCOS-PLT-000003.md) —Depends-On→

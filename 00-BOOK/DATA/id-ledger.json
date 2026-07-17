@@ -2310,9 +2310,16 @@
       "page_start": 5607,
       "page_count": 3,
       "first_seen": "2026-07-17T04:03:57+00:00"
+    },
+    "platform/security/EC2-CAP-SEC-001-SEC-REG-CERTIFICATION-REPORT.md": {
+      "universal_id": "UCOS-PLT-000029",
+      "category": "PLT",
+      "page_start": 5610,
+      "page_count": 3,
+      "first_seen": "2026-07-17T04:16:51+00:00"
     }
   },
-  "page_cursor": 5609,
+  "page_cursor": 5612,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -2331,7 +2338,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 28,
+    "PLT": 29,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -5998,6 +6005,17 @@
         "status": "CERTIFIED",
         "path": "platform/security/EC2-CAP-SEC-001-SEC-INTEL-CERTIFICATION-REPORT.md",
         "name": "EC2-CAP-SEC-001 · SEC-INTEL — Security Intelligence Runtime — Certification Report"
+      }
+    ],
+    "UCOS-PLT-000029": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T04:16:51+00:00",
+        "content_hash": "2610f8f118a5f5011116803b664849c05ffdfaf07b87a09fd3f68fa0584fe136",
+        "version": "1.0.0",
+        "status": "CERTIFIED",
+        "path": "platform/security/EC2-CAP-SEC-001-SEC-REG-CERTIFICATION-REPORT.md",
+        "name": "EC2-CAP-SEC-001 · SEC-REG — Security Registry Runtime — Certification Report"
       }
     ]
   }
