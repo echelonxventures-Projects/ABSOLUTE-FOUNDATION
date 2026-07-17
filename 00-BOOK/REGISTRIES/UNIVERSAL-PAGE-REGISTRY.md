@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 5703  ·  **Page cursor (next free):** UPN-000005704
+**Pages allocated:** 5709  ·  **Page cursor (next free):** UPN-000005710
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -360,5 +360,7 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000005695 | UPN-000005697 | 3 | `UCOS-VERIFICATION-000001` | 000 | UCOS Ω∞ — Verification Runbook |
 | UPN-000005698 | UPN-000005701 | 4 | `UCOS-PLT-000046` | 006 | EC2-EPIC-011-DETERMINATION — Certification Co… |
 | UPN-000005702 | UPN-000005703 | 2 | `UCOS-PLT-000047` | 006 | EC2-EPIC-011 — Certification Console & Ledger… |
+| UPN-000005704 | UPN-000005707 | 4 | `UCOS-PLT-000048` | 006 | EC2-EPIC-012-DETERMINATION — Runtime Operations |
+| UPN-000005708 | UPN-000005709 | 2 | `UCOS-PLT-000049` | 006 | EC2-EPIC-012 — Runtime Operations — Completio… |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

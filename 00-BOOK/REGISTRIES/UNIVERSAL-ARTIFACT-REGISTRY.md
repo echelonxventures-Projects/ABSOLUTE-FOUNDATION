@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 352
+**Total artifacts:** 354
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -360,5 +360,7 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 350 | `UCOS-VERIFICATION-000001` | UCOS Ω∞ — Verification Runbook | — | 000 | UPN-000005695–UPN-000005697 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../VERIFICATION-RUNBOOK.md) |
 | 351 | `UCOS-PLT-000046` | EC2-EPIC-011-DETERMINATION — Certification Console & Ledger | EC2-EPIC-011 | 006 | UPN-000005698–UPN-000005701 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/certification/EC2-EPIC-011-DETERMINATION.md) |
 | 352 | `UCOS-PLT-000047` | EC2-EPIC-011 — Certification Console & Ledger — Completio… | — | 006 | UPN-000005702–UPN-000005703 | COMPLETE | `UCOS-PLT-000007` | 0 | [↗](../../platform/certification/EC2-EPIC-011-COMPLETION-REPORT.md) |
+| 353 | `UCOS-PLT-000048` | EC2-EPIC-012-DETERMINATION — Runtime Operations | EC2-EPIC-012 | 006 | UPN-000005704–UPN-000005707 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/runtime_operations/EC2-EPIC-012-DETERMINATION.md) |
+| 354 | `UCOS-PLT-000049` | EC2-EPIC-012 — Runtime Operations — Completion Report | — | 006 | UPN-000005708–UPN-000005709 | COMPLETE | `UCOS-PLT-000007` | 0 | [↗](../../platform/runtime_operations/EC2-EPIC-012-COMPLETION-REPORT.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

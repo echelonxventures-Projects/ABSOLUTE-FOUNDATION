@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-17T13:19:51+00:00 by ukbx portal. 352 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-17T14:42:24+00:00 by ukbx portal. 354 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -356,3 +356,5 @@
 | [UCOS-VERIFICATION-000001](UCOS-VERIFICATION-000001.md) | UCOS Ω∞ — Verification Runbook | VOL-000 | ACTIVE |
 | [UCOS-PLT-000046](UCOS-PLT-000046.md) | EC2-EPIC-011-DETERMINATION — Certification Console & Ledger | VOL-006 | ACTIVE |
 | [UCOS-PLT-000047](UCOS-PLT-000047.md) | EC2-EPIC-011 — Certification Console & Ledger — Completion R | VOL-006 | COMPLETE |
+| [UCOS-PLT-000048](UCOS-PLT-000048.md) | EC2-EPIC-012-DETERMINATION — Runtime Operations | VOL-006 | ACTIVE |
+| [UCOS-PLT-000049](UCOS-PLT-000049.md) | EC2-EPIC-012 — Runtime Operations — Completion Report | VOL-006 | COMPLETE |
