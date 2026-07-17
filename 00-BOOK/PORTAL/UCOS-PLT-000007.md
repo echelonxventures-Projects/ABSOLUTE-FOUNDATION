@@ -28,6 +28,8 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000037](UCOS-PLT-000037.md) EC2-EPIC-006 — Blueprint Catalog & Management — De
 - [UCOS-PLT-000038](UCOS-PLT-000038.md) EC2-EPIC-006 — Blueprint Catalog & Management — Co
 - [UCOS-PLT-000039](UCOS-PLT-000039.md) ZG-P-02 — Universe→Code Coverage Instrument — Comp
+- [UCOS-PLT-000040](UCOS-PLT-000040.md) EC2-EPIC-007-DETERMINATION — Generation Requests
+- [UCOS-PLT-000041](UCOS-PLT-000041.md) EC2-EPIC-007 — Generation Requests — Completion Re
 
 ## Backlinks (reverse)
 - [UCOS-PLT-000001](UCOS-PLT-000001.md) —Depends-On→
@@ -40,6 +42,8 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000037](UCOS-PLT-000037.md) —Parent→
 - [UCOS-PLT-000039](UCOS-PLT-000039.md) —Parent→
 - [UCOS-PLT-000022](UCOS-PLT-000022.md) —Parent→
+- [UCOS-PLT-000041](UCOS-PLT-000041.md) —Parent→
+- [UCOS-PLT-000040](UCOS-PLT-000040.md) —Parent→
 - [UCOS-PLT-000023](UCOS-PLT-000023.md) —Parent→
 - [UCOS-PLT-000024](UCOS-PLT-000024.md) —Parent→
 - [UCOS-PLT-000025](UCOS-PLT-000025.md) —Parent→

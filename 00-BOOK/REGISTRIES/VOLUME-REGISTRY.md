@@ -12,7 +12,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 37 | UPN-000000022–UPN-000005575 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 4 | UPN-000004194–UPN-000004218 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
-| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 52 | UPN-000004559–UPN-000005667 |
+| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 54 | UPN-000004559–UPN-000005677 |
 | `VOL-007` | 7 | DATA | DAT | ACTIVE | 23 | UPN-000004355–UPN-000005171 |
 | `VOL-008` | 8 | SERVICE | SVC | ACTIVE | 23 | UPN-000004410–UPN-000005246 |
 | `VOL-009` | 9 | APPLICATION | APP | ACTIVE | 28 | UPN-000004232–UPN-000005495 |
@@ -183,7 +183,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-006 — PLATFORM <a id="vol-006"></a>
 
 *Implementation platforms and engines.*  \
-**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 52
+**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 54
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -239,6 +239,8 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-PLT-000037` | EC2-EPIC-006 — Blueprint Catalog & Management — Determination | EC2-EPIC-006 | ACTIVE |
 | `UCOS-PLT-000038` | EC2-EPIC-006 — Blueprint Catalog & Management — Completion Re… | — | ACTIVE |
 | `UCOS-PLT-000039` | ZG-P-02 — Universe→Code Coverage Instrument — Completion Report | — | ACTIVE |
+| `UCOS-PLT-000040` | EC2-EPIC-007-DETERMINATION — Generation Requests | EC2-EPIC-007 | ACTIVE |
+| `UCOS-PLT-000041` | EC2-EPIC-007 — Generation Requests — Completion Report | — | ACTIVE |
 
 ### VOL-007 — DATA <a id="vol-007"></a>
 

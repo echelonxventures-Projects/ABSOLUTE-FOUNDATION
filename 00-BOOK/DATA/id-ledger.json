@@ -2401,9 +2401,23 @@
       "page_start": 5668,
       "page_count": 4,
       "first_seen": "2026-07-17T09:41:16+00:00"
+    },
+    "platform/generation/EC2-EPIC-007-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000040",
+      "category": "PLT",
+      "page_start": 5672,
+      "page_count": 2,
+      "first_seen": "2026-07-17T10:47:52+00:00"
+    },
+    "platform/generation/EC2-EPIC-007-COMPLETION-REPORT.md": {
+      "universal_id": "UCOS-PLT-000041",
+      "category": "PLT",
+      "page_start": 5674,
+      "page_count": 4,
+      "first_seen": "2026-07-17T10:49:16+00:00"
     }
   },
-  "page_cursor": 5671,
+  "page_cursor": 5677,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -2422,7 +2436,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 39,
+    "PLT": 41,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -6242,6 +6256,37 @@
         "status": "ACTIVE",
         "path": "02-MASTER/UCOS-Ω∞-ZG-CERT-001-ZERO-GAP-PROGRAM-CERTIFICATION-RECORD.md",
         "name": "UCOS Ω∞ — ZERO-GAP PROGRAM CERTIFICATION RECORD"
+      }
+    ],
+    "UCOS-PLT-000040": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T10:47:52+00:00",
+        "content_hash": "e2cee9e48d9cd8d619c5c77c3ff320b82557c2e09bb865b3430045e7bf397ba5",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/generation/EC2-EPIC-007-DETERMINATION.md",
+        "name": "EC2-EPIC-007-DETERMINATION — Generation Requests"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-17T10:49:17+00:00",
+        "content_hash": "edd0c8e7c65c918176a7dc87ad537ee980f85b87f17ff9e81a2de8a6a55a3dd7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/generation/EC2-EPIC-007-DETERMINATION.md",
+        "name": "EC2-EPIC-007-DETERMINATION — Generation Requests"
+      }
+    ],
+    "UCOS-PLT-000041": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T10:49:16+00:00",
+        "content_hash": "1393651d94164b4d2df48f51546ffc8ebbd0b9dc22693cb7ee0626d6770cbc92",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/generation/EC2-EPIC-007-COMPLETION-REPORT.md",
+        "name": "EC2-EPIC-007 — Generation Requests — Completion Report"
       }
     ]
   }

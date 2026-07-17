@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-17T09:41:17+00:00 by ukbx portal. 342 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-17T10:49:17+00:00 by ukbx portal. 344 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -346,3 +346,5 @@
 | [UCOS-PLT-000038](UCOS-PLT-000038.md) | EC2-EPIC-006 — Blueprint Catalog & Management — Completion R | VOL-006 | ACTIVE |
 | [UCOS-PLT-000039](UCOS-PLT-000039.md) | ZG-P-02 — Universe→Code Coverage Instrument — Completion Rep | VOL-006 | ACTIVE |
 | [UCOS-MASTER-000002](UCOS-MASTER-000002.md) | UCOS Ω∞ — ZERO-GAP PROGRAM CERTIFICATION RECORD | VOL-000 | ACTIVE |
+| [UCOS-PLT-000040](UCOS-PLT-000040.md) | EC2-EPIC-007-DETERMINATION — Generation Requests | VOL-006 | ACTIVE |
+| [UCOS-PLT-000041](UCOS-PLT-000041.md) | EC2-EPIC-007 — Generation Requests — Completion Report | VOL-006 | ACTIVE |

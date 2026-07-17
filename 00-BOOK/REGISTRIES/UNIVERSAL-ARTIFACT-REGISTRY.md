@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 342
+**Total artifacts:** 344
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -350,5 +350,7 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 340 | `UCOS-PLT-000038` | EC2-EPIC-006 — Blueprint Catalog & Management — Completio… | — | 006 | UPN-000005660–UPN-000005664 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/blueprints/EC2-EPIC-006-COMPLETION-REPORT.md) |
 | 341 | `UCOS-PLT-000039` | ZG-P-02 — Universe→Code Coverage Instrument — Completion … | — | 006 | UPN-000005665–UPN-000005667 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/coverage/ZG-P-02-COMPLETION-REPORT.md) |
 | 342 | `UCOS-MASTER-000002` | UCOS Ω∞ — ZERO-GAP PROGRAM CERTIFICATION RECORD | ZG-CERT-001 | 000 | UPN-000005668–UPN-000005671 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/UCOS-Ω∞-ZG-CERT-001-ZERO-GAP-PROGRAM-CERTIFICATION-RECORD.md) |
+| 343 | `UCOS-PLT-000040` | EC2-EPIC-007-DETERMINATION — Generation Requests | EC2-EPIC-007 | 006 | UPN-000005672–UPN-000005673 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/generation/EC2-EPIC-007-DETERMINATION.md) |
+| 344 | `UCOS-PLT-000041` | EC2-EPIC-007 — Generation Requests — Completion Report | — | 006 | UPN-000005674–UPN-000005677 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/generation/EC2-EPIC-007-COMPLETION-REPORT.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
