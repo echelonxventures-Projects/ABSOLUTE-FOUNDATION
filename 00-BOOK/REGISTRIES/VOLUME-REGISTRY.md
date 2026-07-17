@@ -6,13 +6,13 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 3 | UPN-000000001–UPN-000004653 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 5 | UPN-000000001–UPN-000005671 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 30 | UPN-000001327–UPN-000005546 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 37 | UPN-000000022–UPN-000005575 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 4 | UPN-000004194–UPN-000004218 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
-| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 50 | UPN-000004559–UPN-000005653 |
+| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 52 | UPN-000004559–UPN-000005667 |
 | `VOL-007` | 7 | DATA | DAT | ACTIVE | 23 | UPN-000004355–UPN-000005171 |
 | `VOL-008` | 8 | SERVICE | SVC | ACTIVE | 23 | UPN-000004410–UPN-000005246 |
 | `VOL-009` | 9 | APPLICATION | APP | ACTIVE | 28 | UPN-000004232–UPN-000005495 |
@@ -34,13 +34,15 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 3
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 5
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
 | `UCOS-BOOK-000000` | UCOS Ω∞ — UNIVERSAL MASTER KNOWLEDGE BOOK | UCOS-BOOK-000000 | ACTIVE |
 | `UCOS-IDX-000001` | UCOS Ω∞ CONSTITUTIONAL CONSOLIDATION PROGRAM — MASTER INDEX | — | ACTIVE |
 | `UCOS-ENG-000003` | UCOS Ω∞ — ENGINEERING PROGRAM MASTER INDEX & EXECUTION CONSTI… | ENG-000 | ACTIVE |
+| `UCOS-MASTER-000001` | UCOS Ω∞ — MASTER IMPLEMENTATION PLAN — ZERO-GAP COMPLETENESS … | MIP-ZG-001 | ACTIVE |
+| `UCOS-MASTER-000002` | UCOS Ω∞ — ZERO-GAP PROGRAM CERTIFICATION RECORD | ZG-CERT-001 | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -181,7 +183,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-006 — PLATFORM <a id="vol-006"></a>
 
 *Implementation platforms and engines.*  \
-**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 50
+**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 52
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -235,6 +237,8 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-PLT-000035` | EC2-EPIC-005 — Project Management Runtime — Completion Report | — | ACTIVE |
 | `UCOS-PLT-000036` | POST-EPIC-005-IMPLEMENTATION-STATUS-DETERMINATION | POST-EPIC-005 | ACTIVE |
 | `UCOS-PLT-000037` | EC2-EPIC-006 — Blueprint Catalog & Management — Determination | EC2-EPIC-006 | ACTIVE |
+| `UCOS-PLT-000038` | EC2-EPIC-006 — Blueprint Catalog & Management — Completion Re… | — | ACTIVE |
+| `UCOS-PLT-000039` | ZG-P-02 — Universe→Code Coverage Instrument — Completion Report | — | ACTIVE |
 
 ### VOL-007 — DATA <a id="vol-007"></a>
 

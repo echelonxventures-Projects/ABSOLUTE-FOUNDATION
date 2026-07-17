@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 338
+**Total artifacts:** 342
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -346,5 +346,9 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 336 | `UCOS-PLT-000035` | EC2-EPIC-005 — Project Management Runtime — Completion Re… | — | 006 | UPN-000005635–UPN-000005638 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/projects/EC2-EPIC-005-COMPLETION-REPORT.md) |
 | 337 | `UCOS-PLT-000036` | POST-EPIC-005-IMPLEMENTATION-STATUS-DETERMINATION | POST-EPIC-005 | 006 | UPN-000005639–UPN-000005644 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/POST-EPIC-005-IMPLEMENTATION-STATUS-DETERMINATION.md) |
 | 338 | `UCOS-PLT-000037` | EC2-EPIC-006 — Blueprint Catalog & Management — Determina… | EC2-EPIC-006 | 006 | UPN-000005645–UPN-000005653 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/blueprints/EC2-EPIC-006-DETERMINATION.md) |
+| 339 | `UCOS-MASTER-000001` | UCOS Ω∞ — MASTER IMPLEMENTATION PLAN — ZERO-GAP COMPLETEN… | MIP-ZG-001 | 000 | UPN-000005654–UPN-000005659 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/UCOS-Ω∞-MASTER-IMPLEMENTATION-PLAN-ZERO-GAP-COMPLETENESS-DETERMINATION.md) |
+| 340 | `UCOS-PLT-000038` | EC2-EPIC-006 — Blueprint Catalog & Management — Completio… | — | 006 | UPN-000005660–UPN-000005664 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/blueprints/EC2-EPIC-006-COMPLETION-REPORT.md) |
+| 341 | `UCOS-PLT-000039` | ZG-P-02 — Universe→Code Coverage Instrument — Completion … | — | 006 | UPN-000005665–UPN-000005667 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/coverage/ZG-P-02-COMPLETION-REPORT.md) |
+| 342 | `UCOS-MASTER-000002` | UCOS Ω∞ — ZERO-GAP PROGRAM CERTIFICATION RECORD | ZG-CERT-001 | 000 | UPN-000005668–UPN-000005671 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/UCOS-Ω∞-ZG-CERT-001-ZERO-GAP-PROGRAM-CERTIFICATION-RECORD.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

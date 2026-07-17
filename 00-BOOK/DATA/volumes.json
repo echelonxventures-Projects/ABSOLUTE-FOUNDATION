@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T07:02:32+00:00",
+  "generated_at": "2026-07-17T09:41:17+00:00",
   "count": 23,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 3,
+      "artifact_count": 5,
       "page_range_start": 1,
-      "page_range_end": 4653,
+      "page_range_end": 5671,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -81,9 +81,9 @@
       "description": "Implementation platforms and engines.",
       "category": "PLT",
       "status": "ACTIVE",
-      "artifact_count": 50,
+      "artifact_count": 52,
       "page_range_start": 4559,
-      "page_range_end": 5653,
+      "page_range_end": 5667,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-006"
     },
     {

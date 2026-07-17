@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-17T07:02:33+00:00 by ukbx portal. 338 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-17T09:41:17+00:00 by ukbx portal. 342 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -342,3 +342,7 @@
 | [UCOS-PLT-000035](UCOS-PLT-000035.md) | EC2-EPIC-005 — Project Management Runtime — Completion Repor | VOL-006 | ACTIVE |
 | [UCOS-PLT-000036](UCOS-PLT-000036.md) | POST-EPIC-005-IMPLEMENTATION-STATUS-DETERMINATION | VOL-006 | ACTIVE |
 | [UCOS-PLT-000037](UCOS-PLT-000037.md) | EC2-EPIC-006 — Blueprint Catalog & Management — Determinatio | VOL-006 | ACTIVE |
+| [UCOS-MASTER-000001](UCOS-MASTER-000001.md) | UCOS Ω∞ — MASTER IMPLEMENTATION PLAN — ZERO-GAP COMPLETENESS | VOL-000 | ACTIVE |
+| [UCOS-PLT-000038](UCOS-PLT-000038.md) | EC2-EPIC-006 — Blueprint Catalog & Management — Completion R | VOL-006 | ACTIVE |
+| [UCOS-PLT-000039](UCOS-PLT-000039.md) | ZG-P-02 — Universe→Code Coverage Instrument — Completion Rep | VOL-006 | ACTIVE |
+| [UCOS-MASTER-000002](UCOS-MASTER-000002.md) | UCOS Ω∞ — ZERO-GAP PROGRAM CERTIFICATION RECORD | VOL-000 | ACTIVE |
