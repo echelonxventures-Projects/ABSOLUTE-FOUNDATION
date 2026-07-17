@@ -7,10 +7,10 @@ category-prefixed ``code`` (``EC2-SEC-*``) and structured, non-secret ``context`
 failures are auditable (PL-02, IP-12) and machine-consumable.
 
 Scope note (mission boundary): this module ships the errors the implemented
-sub-capabilities need. Phase 1 (**SEC-CLASS**), Phase 2 (**SEC-INTEL**), and Phase 3
-(**SEC-REG**, Security Registry Runtime) are present; no error for a not-yet-implemented
-sub-capability (SEC-OBS / SEC-CERT / SEC-ZONE) is declared. Every error stores **no**
-secret value (SEC-04 / RR-07).
+sub-capabilities need. Phase 1 (**SEC-CLASS**), Phase 2 (**SEC-INTEL**), Phase 3
+(**SEC-REG**), and Phase 4 (**SEC-OBS**, Security Observability Runtime) are present;
+no error for a not-yet-implemented sub-capability (SEC-CERT / SEC-ZONE) is declared.
+Every error stores **no** secret value (SEC-04 / RR-07).
 """
 
 from __future__ import annotations
@@ -117,6 +117,29 @@ class RegistryValidationError(SecurityError):
     code = "EC2-SEC-REG-003"
 
 
+# --------------------------------------------------------------------------- #
+# SEC-OBS — Security Observability Runtime (Phase 4) error taxonomy.           #
+# --------------------------------------------------------------------------- #
+
+
+class SecurityObservabilityError(SecurityError):
+    """A security observability operation is malformed (fail-closed)."""
+
+    code = "EC2-SEC-OBS-001"
+
+
+class SecuritySignalError(SecurityError):
+    """A security signal is malformed or emitted on a non-``security`` dimension."""
+
+    code = "EC2-SEC-OBS-002"
+
+
+class SignalTraceabilityError(SecurityError):
+    """A security signal is not reverse-traceable to a finding/scan (UMB-015 §5; PL-02)."""
+
+    code = "EC2-SEC-OBS-003"
+
+
 __all__ = [
     "SecurityError",
     "SecurityClassificationError",
@@ -134,4 +157,8 @@ __all__ = [
     "SecurityRegistryError",
     "RegistryEntryError",
     "RegistryValidationError",
+    # SEC-OBS
+    "SecurityObservabilityError",
+    "SecuritySignalError",
+    "SignalTraceabilityError",
 ]

@@ -14,13 +14,17 @@ deterministically:
     * :func:`bootstrap_security_registry` — **SEC-REG** (Phase 3): builds the seven
       §17 record-only registries bound to the context event bus; publishes the
       SEC-REG contracts; emits ``security.registry.bootstrap.completed``.
+    * :func:`bootstrap_security_observability` — **SEC-OBS** (Phase 4): shapes the
+      ``security`` signal dimension + telemetry through the certified L8 Observability
+      Layer; publishes the SEC-OBS contracts; emits
+      ``security.observability.bootstrap.completed``.
 
 Each composition binds its service to the context event bus so every recorded action
 is a governed event the L8 Observability Layer can audit (PC-16).
 
-Scope guardrail: these compose **SEC-CLASS, SEC-INTEL, and SEC-REG only**. They start
-no server, open no socket, render no UI, write nothing to the certified corpus
-(DP-03), and implement no not-yet-authorized sub-capability (SEC-OBS / SEC-CERT /
+Scope guardrail: these compose **SEC-CLASS, SEC-INTEL, SEC-REG, and SEC-OBS only**.
+They start no server, open no socket, render no UI, write nothing to the certified
+corpus (DP-03), and implement no not-yet-authorized sub-capability (SEC-CERT /
 SEC-ZONE). They authorize, ratify, and enact nothing (RG-02 / AR-04).
 """
 
@@ -28,18 +32,25 @@ from __future__ import annotations
 
 from platform.foundation.services import ServiceDescriptor
 from platform.identity.service import AuthorizationService, bootstrap_identity
+from platform.observability.service import ObservabilityService, build_observability_service
 from platform.security.contracts import (
     SECURITY_CLASSIFICATION_CONTRACTS,
     SECURITY_INTELLIGENCE_CONTRACTS,
+    SECURITY_OBSERVABILITY_CONTRACTS,
     SECURITY_REGISTRY_CONTRACTS,
     default_security_classification_contracts,
     default_security_intelligence_contracts,
+    default_security_observability_contracts,
     default_security_registry_contracts,
 )
 from platform.security.errors import SecurityBootstrapError
 from platform.security.intelligence import (
     SecurityIntelligenceService,
     build_security_intelligence_service,
+)
+from platform.security.observability import (
+    SecurityObservabilityService,
+    build_security_observability_service,
 )
 from platform.security.registries import (
     SecurityRegistryService,
@@ -59,6 +70,9 @@ SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT = "security.intelligence.bootstrap.complet
 
 #: The event emitted when the Security Registry Runtime is composed.
 SECURITY_REGISTRY_BOOTSTRAP_EVENT = "security.registry.bootstrap.completed"
+
+#: The event emitted when the Security Observability Runtime is composed.
+SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT = "security.observability.bootstrap.completed"
 
 
 def bootstrap_security_classification(
@@ -220,6 +234,64 @@ def bootstrap_security_registry(
     return service
 
 
+def bootstrap_security_observability(
+    context: Any,
+    *,
+    observability: ObservabilityService | None = None,
+) -> SecurityObservabilityService:
+    """Compose the Security Observability Runtime onto a :class:`PlatformContext`.
+
+    Shapes the ``security`` signal dimension + telemetry **through** a certified L8
+    :class:`~platform.observability.service.ObservabilityService` (reused, never
+    duplicated). When ``observability`` is ``None`` a fresh L8 layer is composed via
+    the certified :func:`build_observability_service`; SEC-OBS defines no second
+    telemetry stack. Publishes the SEC-OBS contracts (contract-first, PL-05) and emits
+    a deterministic ``security.observability.bootstrap.completed`` event. Records only;
+    it authorizes/ratifies/enacts nothing (RG-02 / AR-04), stores no secret (SEC-04 /
+    RR-07), and writes nothing to the corpus (DP-03).
+
+    Raises:
+        SecurityBootstrapError: on any composition failure (fail-closed).
+    """
+    try:
+        obs = observability if observability is not None else build_observability_service()
+        service = build_security_observability_service(
+            observability=obs, events=context.events
+        )
+
+        contracts = {c.name: c for c in default_security_observability_contracts()}
+        for ref in SECURITY_OBSERVABILITY_CONTRACTS:
+            if ref.name in context.services:
+                continue
+            context.services.register(
+                ServiceDescriptor(
+                    name=ref.name,
+                    contract=contracts[ref.name],
+                    capabilities=("PC-12", "PC-16"),
+                    description=f"Security Observability Runtime service: {ref.name}.",
+                ),
+                provider=lambda svc=service: svc,
+            )
+    except SecurityBootstrapError:
+        raise
+    except Exception as exc:  # noqa: BLE001 — normalize into a fail-closed error
+        raise SecurityBootstrapError(
+            "security observability runtime bootstrap failed", detail=str(exc)
+        ) from exc
+
+    context.events.publish(
+        SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT,
+        source="platform.security.bootstrap",
+        subject=context.program_id,
+        payload={
+            "observability_contracts": [ref.name for ref in SECURITY_OBSERVABILITY_CONTRACTS],
+            "signal_dimension": "security",
+            "ledger_fingerprint": service.ledger.fingerprint(),
+        },
+    )
+    return service
+
+
 __all__ = [
     "SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT",
     "bootstrap_security_classification",
@@ -227,4 +299,6 @@ __all__ = [
     "bootstrap_security_intelligence",
     "SECURITY_REGISTRY_BOOTSTRAP_EVENT",
     "bootstrap_security_registry",
+    "SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT",
+    "bootstrap_security_observability",
 ]

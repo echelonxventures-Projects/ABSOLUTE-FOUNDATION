@@ -22,13 +22,19 @@ findings and stores **no** secret value (SEC-04 / RR-07; UKB-ADV-005 §6). Neith
 **ever** authorizes, ratifies, enacts, governs, overrides, or escalates authority
 (RG-02 / AR-04).
 
-The remaining Security Runtime sub-capabilities (SEC-OBS / SEC-CERT / SEC-ZONE) are
-later, separately-authorized phases and are **not** present.
-
 Phase 3 — **SEC-REG (Security Registry Runtime)** — realizes the seven constitutional
 §17 registries (Security · Identity · Threat · Risk · Evidence · Certification ·
 Trust) as append-only, record-only, attributed, queryable stores that never ratify or
 enact (RG-02 / RG-05); see :mod:`platform.security.registries`.
+
+Phase 4 — **SEC-OBS (Security Observability Runtime)** — emits the existing
+``security`` signal dimension and shapes security telemetry (metric/log/audit)
+**through** the certified L8 Observability Layer, preserving reverse-traceability to
+the finding/scan that raised each signal (§15; UMB-015 §5); it creates no new signal
+dimension and no second telemetry stack; see :mod:`platform.security.observability`.
+
+The remaining Security Runtime sub-capabilities (SEC-CERT / SEC-ZONE) are later,
+separately-authorized phases and are **not** present.
 
 Deliverables (SEC-CLASS + SEC-INTEL):
     * **errors** — the ``EC2-SEC-*`` error taxonomy over ``PlatformError``.
@@ -56,9 +62,11 @@ from __future__ import annotations
 from platform.security.bootstrap import (
     SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT,
     SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT,
+    SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT,
     SECURITY_REGISTRY_BOOTSTRAP_EVENT,
     bootstrap_security_classification,
     bootstrap_security_intelligence,
+    bootstrap_security_observability,
     bootstrap_security_registry,
 )
 from platform.security.classification import (
@@ -74,8 +82,11 @@ from platform.security.contracts import (
     SECURITY_CLASSIFICATION_CONTRACTS,
     SECURITY_INTELLIGENCE_CONTRACT_VERSION,
     SECURITY_INTELLIGENCE_CONTRACTS,
+    SECURITY_OBSERVABILITY_CONTRACT_VERSION,
+    SECURITY_OBSERVABILITY_CONTRACTS,
     SECURITY_REGISTRY_CONTRACT_VERSION,
     SECURITY_REGISTRY_CONTRACTS,
+    SECURITY_SIGNAL_DIMENSION,
     SUBJECT_LAYER_KINDS,
     SUBJECT_LAYER_SOURCE,
     ClassificationKind,
@@ -94,9 +105,11 @@ from platform.security.contracts import (
     all_subject_layers,
     default_security_classification_contracts,
     default_security_intelligence_contracts,
+    default_security_observability_contracts,
     default_security_registry_contracts,
     security_classification_contract,
     security_intelligence_contract,
+    security_observability_contract,
     security_registry_contract,
 )
 from platform.security.errors import (
@@ -112,8 +125,11 @@ from platform.security.errors import (
     SecurityContractError,
     SecurityError,
     SecurityFindingError,
+    SecurityObservabilityError,
     SecurityRegistryError,
     SecurityRollupError,
+    SecuritySignalError,
+    SignalTraceabilityError,
 )
 from platform.security.intelligence import (
     FINDING_RECORDED_EVENT,
@@ -127,6 +143,16 @@ from platform.security.intelligence import (
     build_security_intelligence_service,
     compute_rollup,
     scan_for_secret,
+)
+from platform.security.observability import (
+    SECURITY_SIGNAL_AUDIT_ACTION,
+    SECURITY_SIGNAL_EMITTED_EVENT,
+    SECURITY_SIGNAL_METRIC,
+    SecurityObservabilityEvidence,
+    SecurityObservabilityService,
+    SecuritySignal,
+    SignalLedger,
+    build_security_observability_service,
 )
 from platform.security.registries import (
     REGISTRY_RECORDED_EVENT,
@@ -179,6 +205,12 @@ __all__ = [
     "all_registry_kinds",
     "security_registry_contract",
     "default_security_registry_contracts",
+    # SEC-OBS
+    "SECURITY_OBSERVABILITY_CONTRACT_VERSION",
+    "SECURITY_OBSERVABILITY_CONTRACTS",
+    "SECURITY_SIGNAL_DIMENSION",
+    "security_observability_contract",
+    "default_security_observability_contracts",
     # classification
     "SecurityClassification",
     "ClassificationLedger",
@@ -202,6 +234,15 @@ __all__ = [
     "SecurityRegistryEvidence",
     "SecurityRegistryService",
     "build_security_registry_service",
+    # observability
+    "SECURITY_SIGNAL_EMITTED_EVENT",
+    "SECURITY_SIGNAL_METRIC",
+    "SECURITY_SIGNAL_AUDIT_ACTION",
+    "SecuritySignal",
+    "SignalLedger",
+    "SecurityObservabilityEvidence",
+    "SecurityObservabilityService",
+    "build_security_observability_service",
     # service
     "CLASSIFICATION_RECORDED_EVENT",
     "SecurityClassificationEvidence",
@@ -214,6 +255,8 @@ __all__ = [
     "bootstrap_security_intelligence",
     "SECURITY_REGISTRY_BOOTSTRAP_EVENT",
     "bootstrap_security_registry",
+    "SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT",
+    "bootstrap_security_observability",
     # errors
     "SecurityError",
     "SecurityClassificationError",
@@ -229,4 +272,7 @@ __all__ = [
     "SecurityRegistryError",
     "RegistryEntryError",
     "RegistryValidationError",
+    "SecurityObservabilityError",
+    "SecuritySignalError",
+    "SignalTraceabilityError",
 ]

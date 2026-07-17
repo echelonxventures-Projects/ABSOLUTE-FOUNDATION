@@ -143,3 +143,24 @@ def test_registry_entry_traces_backward_to_its_constitutional_source():
     trace = service.trace(RegistryKind.TRUST, e.entry_id)
     assert "§17" in trace["backward"]["source_ref"]
     assert trace["refs"] == ["UCOS-SFND-1"]
+
+
+def test_determination_authorizes_sec_obs():
+    text = _DETERMINATION.read_text(encoding="utf-8")
+    assert "SEC-OBS" in text
+    assert "Security Observability Runtime" in text
+
+
+def test_security_signal_is_reverse_traceable_to_its_finding():
+    # UMB-015 §5: every security event is reverse-traceable to the finding/scan.
+    from platform.security.contracts import FindingKind, RollupState, Severity
+    from platform.security.intelligence import build_security_intelligence_service
+    from platform.security.observability import build_security_observability_service
+
+    intel = build_security_intelligence_service()
+    f = intel.record_finding(
+        FindingKind.VULNERABILITY, "CVE-2026-7", severity=Severity.CRITICAL, affects=("UCOS-SVC-1",)
+    )
+    obs = build_security_observability_service()
+    sig = obs.emit_signal(RollupState.BLOCKED, "UCOS-SVC-1", traces_to=f.finding_id, emitted_at=1)
+    assert obs.trace(sig.signal_id)["traces_to"] == f.finding_id

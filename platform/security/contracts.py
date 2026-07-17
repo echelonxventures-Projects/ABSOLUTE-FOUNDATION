@@ -441,6 +441,62 @@ def default_security_registry_contracts() -> tuple[Contract, ...]:
     )
 
 
+# --------------------------------------------------------------------------- #
+# SEC-OBS — Security Observability vocabulary + contract surface (Phase 4).    #
+#                                                                              #
+# Emits the EXISTING ``security`` signal dimension + telemetry THROUGH the L8  #
+# Observability Layer (ARCH-SECURITY-001 §15; UMB-015 §5). It creates NO new   #
+# signal dimension and NO second telemetry stack (determination §9); it adds   #
+# only security-specific signal shaping and reverse-traceability.              #
+# --------------------------------------------------------------------------- #
+
+#: The semantic version of the Security Observability contract surface (AR-03/PL-05).
+SECURITY_OBSERVABILITY_CONTRACT_VERSION = "1.0.0"
+
+#: The **existing** canonical signal dimension emitted for security (no new dimension
+#: is created — the ``security`` dimension already exists in the corpus signal spine:
+#: ``00-BOOK/tools/connectors/base.py`` DIMENSIONS; ``ukb.py`` DOMAIN-D). Determination §9.
+SECURITY_SIGNAL_DIMENSION = "security"
+
+
+_SECURITY_OBSERVABILITY_CONTRACT_NAMES: tuple[tuple[str, str], ...] = (
+    (
+        "security.observability.signal",
+        "Emit the `security` signal dimension for a subject (reverse-traceable; record-only).",
+    ),
+    (
+        "security.observability.telemetry",
+        "Shape security telemetry (metric/log/audit) through the L8 Observability Layer.",
+    ),
+    (
+        "security.observability.evidence",
+        "Deterministic, content-addressed security-observability evidence (record-only).",
+    ),
+)
+
+#: Immutable references to the published SEC-OBS contracts (name + version).
+SECURITY_OBSERVABILITY_CONTRACTS: tuple[ContractRef, ...] = tuple(
+    ContractRef(name, SECURITY_OBSERVABILITY_CONTRACT_VERSION)
+    for name, _ in _SECURITY_OBSERVABILITY_CONTRACT_NAMES
+)
+
+
+def security_observability_contract(name: str, description: str = "") -> Contract:
+    """Build a versioned SEC-OBS :class:`Contract` at the observability contract version."""
+    try:
+        return platform_contract(name, SECURITY_OBSERVABILITY_CONTRACT_VERSION, description)
+    except PlatformContractError as exc:  # normalise into the security taxonomy
+        raise SecurityContractError(str(exc), name=name) from exc
+
+
+def default_security_observability_contracts() -> tuple[Contract, ...]:
+    """The published SEC-OBS contracts as concrete :class:`Contract` objects."""
+    return tuple(
+        security_observability_contract(name, description)
+        for name, description in _SECURITY_OBSERVABILITY_CONTRACT_NAMES
+    )
+
+
 __all__ = [
     "SECURITY_CLASSIFICATION_CONTRACT_VERSION",
     "ClassificationKind",
@@ -477,4 +533,10 @@ __all__ = [
     "SECURITY_REGISTRY_CONTRACTS",
     "security_registry_contract",
     "default_security_registry_contracts",
+    # SEC-OBS
+    "SECURITY_OBSERVABILITY_CONTRACT_VERSION",
+    "SECURITY_SIGNAL_DIMENSION",
+    "SECURITY_OBSERVABILITY_CONTRACTS",
+    "security_observability_contract",
+    "default_security_observability_contracts",
 ]

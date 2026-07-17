@@ -59,10 +59,9 @@ def test_evidence_is_deterministic_across_identical_runs():
 
 
 def test_only_unimplemented_phase_modules_are_absent():
-    # Phase discipline: SEC-CLASS (1), SEC-INTEL (2), SEC-REG (3) are present; the
-    # not-yet-authorized sub-capability modules are absent.
+    # Phase discipline: SEC-CLASS (1), SEC-INTEL (2), SEC-REG (3), SEC-OBS (4) are
+    # present; the not-yet-authorized sub-capability modules are absent.
     forbidden = {
-        "observability.py",
         "zones.py",
         "certification.py",
     }
@@ -79,10 +78,28 @@ def test_expected_modules_are_present():
         "service.py",
         "intelligence.py",
         "registries.py",
+        "observability.py",
         "bootstrap.py",
     }
     present = {p.name for p in _SECURITY_PKG.glob("*.py")}
     assert expected.issubset(present)
+
+
+def test_observability_reuses_the_certified_l8_layer_not_a_second_stack():
+    # SEC-OBS shapes telemetry through the certified L8 ObservabilityService; it
+    # defines no MetricRegistry / LogBuffer / AuditTrail of its own.
+    from platform.security import observability as obs_module
+
+    assert obs_module.ObservabilityService.__module__ == "platform.observability.service"
+    src = (_SECURITY_PKG / "observability.py").read_text(encoding="utf-8")
+    assert "class MetricRegistry" not in src
+    assert "class AuditTrail" not in src
+
+
+def test_observability_introduces_no_new_signal_dimension():
+    from platform.security.contracts import SECURITY_SIGNAL_DIMENSION
+
+    assert SECURITY_SIGNAL_DIMENSION == "security"
 
 
 def test_registry_runtime_reuses_certified_foundation_hashing():
