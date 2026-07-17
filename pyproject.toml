@@ -19,9 +19,15 @@ license = { text = "Proprietary" }
 dependencies = []
 
 [project.optional-dependencies]
+# Canonical verification toolchain — fully pinned (DE-04 pinned/vetted). These are
+# the exact versions the canonical verification entry point (verify.sh / make verify)
+# installs into the repository-standard virtualenv (.ec1-venv). `coverage` is pinned
+# explicitly rather than left to transitive resolution so that the coverage gate is
+# byte-for-byte reproducible across machines and CI. See ENVIRONMENT-SETUP.md.
 dev = [
   "pytest==8.3.4",
   "pytest-cov==6.0.0",
+  "coverage==7.15.2",
   "ruff==0.8.4",
 ]
 
@@ -62,7 +68,10 @@ addopts = [
   "--cov=platform.projects",
   "--cov=platform.blueprints",
   "--cov=platform.generation",
+  "--cov=platform.artifact_explorer",
+  "--cov=platform.execution_dashboard",
   "--cov=platform.coverage",
+  "--cov=platform.validation",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -70,7 +79,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/coverage"]
+source = ["engine/foundation", "engine/registry", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/validation"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

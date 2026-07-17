@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 5677  ·  **Page cursor (next free):** UPN-000005678
+**Pages allocated:** 5697  ·  **Page cursor (next free):** UPN-000005698
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -352,5 +352,11 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000005668 | UPN-000005671 | 4 | `UCOS-MASTER-000002` | 000 | UCOS Ω∞ — ZERO-GAP PROGRAM CERTIFICATION RECORD |
 | UPN-000005672 | UPN-000005673 | 2 | `UCOS-PLT-000040` | 006 | EC2-EPIC-007-DETERMINATION — Generation Requests |
 | UPN-000005674 | UPN-000005677 | 4 | `UCOS-PLT-000041` | 006 | EC2-EPIC-007 — Generation Requests — Completi… |
+| UPN-000005678 | UPN-000005681 | 4 | `UCOS-PLT-000042` | 006 | EC2-EPIC-010-DETERMINATION — Validation Console |
+| UPN-000005682 | UPN-000005683 | 2 | `UCOS-PLT-000043` | 006 | EC2-EPIC-008-COMPLETION-REPORT — Execution Da… |
+| UPN-000005684 | UPN-000005687 | 4 | `UCOS-PLT-000044` | 006 | EC2-EPIC-010 — Validation Console — Completio… |
+| UPN-000005688 | UPN-000005691 | 4 | `UCOS-PLT-000045` | 006 | EC2-EPIC-009 — Artifact Explorer — Completion… |
+| UPN-000005692 | UPN-000005694 | 3 | `UCOS-ENVIRONMENTS-000001` | 000 | UCOS Ω∞ — Environment Setup |
+| UPN-000005695 | UPN-000005697 | 3 | `UCOS-VERIFICATION-000001` | 000 | UCOS Ω∞ — Verification Runbook |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

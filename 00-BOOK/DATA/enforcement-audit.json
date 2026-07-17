@@ -5832,6 +5832,303 @@
       "violations": [],
       "result": "PASS",
       "seq": 103
+    },
+    {
+      "generated_at": "2026-07-17T11:11:53+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 345,
+      "registered": 344,
+      "unregistered": [
+        "platform/validation/EC2-EPIC-010-DETERMINATION.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 104
+    },
+    {
+      "generated_at": "2026-07-17T11:11:54+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 345,
+      "registered": 345,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 105
+    },
+    {
+      "generated_at": "2026-07-17T11:12:03+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 345,
+      "registered": 345,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 106
+    },
+    {
+      "generated_at": "2026-07-17T11:54:34+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 346,
+      "registered": 345,
+      "unregistered": [
+        "platform/execution_dashboard/EC2-EPIC-008-COMPLETION-REPORT.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 107
+    },
+    {
+      "generated_at": "2026-07-17T11:54:35+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 346,
+      "registered": 346,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 108
+    },
+    {
+      "generated_at": "2026-07-17T11:57:49+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 347,
+      "registered": 346,
+      "unregistered": [
+        "platform/validation/EC2-EPIC-010-COMPLETION-REPORT.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 109
+    },
+    {
+      "generated_at": "2026-07-17T11:57:50+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 347,
+      "registered": 347,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 110
+    },
+    {
+      "generated_at": "2026-07-17T12:01:04+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 348,
+      "registered": 347,
+      "unregistered": [
+        "platform/artifact_explorer/EC2-EPIC-009-COMPLETION-REPORT.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 111
+    },
+    {
+      "generated_at": "2026-07-17T12:01:05+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 348,
+      "registered": 348,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 112
+    },
+    {
+      "generated_at": "2026-07-17T12:07:26+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 348,
+      "registered": 348,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 113
+    },
+    {
+      "generated_at": "2026-07-17T12:14:10+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 349,
+      "registered": 348,
+      "unregistered": [
+        "ENVIRONMENT-SETUP.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 114
+    },
+    {
+      "generated_at": "2026-07-17T12:14:11+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 349,
+      "registered": 349,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 115
+    },
+    {
+      "generated_at": "2026-07-17T12:14:43+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 350,
+      "registered": 349,
+      "unregistered": [
+        "VERIFICATION-RUNBOOK.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 116
+    },
+    {
+      "generated_at": "2026-07-17T12:14:44+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 350,
+      "registered": 350,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 117
+    },
+    {
+      "generated_at": "2026-07-17T12:19:19+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 350,
+      "registered": 350,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 118
     }
   ]
 }

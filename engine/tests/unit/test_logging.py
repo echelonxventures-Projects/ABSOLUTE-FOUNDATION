@@ -88,3 +88,32 @@ def test_deterministic_sorted_keys(log_buffer):
     line = [line_ for line_ in log_buffer.getvalue().splitlines() if line_.strip()][-1]
     # sort_keys=True => top-level keys are ordered
     assert line.index('"level"') < line.index('"message"')
+
+
+def test_critical_level(log_buffer):
+    get_logger("test").critical("boom", code=500)
+    record = _last_record(log_buffer)
+    assert record["level"] == "CRITICAL"
+    assert record["message"] == "boom"
+    assert record["fields"]["code"] == 500
+
+
+def test_non_serializable_field_is_stringified(log_buffer):
+    class Widget:
+        def __str__(self) -> str:
+            return "widget-repr"
+
+    get_logger("test").info("obj", widget=Widget())
+    record = _last_record(log_buffer)
+    # json.dumps falls back to _json_default (str) for otherwise-unserialisable values
+    assert record["fields"]["widget"] == "widget-repr"
+
+
+def test_configure_logging_is_idempotent_without_force(log_buffer):
+    # The tree is already configured (by the fixture); a second call without
+    # force must return early and leave the existing handler untouched.
+    other = io.StringIO()
+    configure_logging(stream=other)
+    get_logger("test").info("still-original")
+    assert other.getvalue() == ""
+    assert "still-original" in log_buffer.getvalue()
