@@ -7,10 +7,10 @@ category-prefixed ``code`` (``EC2-SEC-*``) and structured, non-secret ``context`
 failures are auditable (PL-02, IP-12) and machine-consumable.
 
 Scope note (mission boundary): this module ships the errors the implemented
-sub-capabilities need. Phase 1 (**SEC-CLASS**), Phase 2 (**SEC-INTEL**), Phase 3
-(**SEC-REG**), and Phase 4 (**SEC-OBS**, Security Observability Runtime) are present;
-no error for a not-yet-implemented sub-capability (SEC-CERT / SEC-ZONE) is declared.
-Every error stores **no** secret value (SEC-04 / RR-07).
+sub-capabilities need. Phases 1–5 (**SEC-CLASS**, **SEC-INTEL**, **SEC-REG**,
+**SEC-OBS**, **SEC-CERT**) are present; no error for a not-yet-implemented
+sub-capability (SEC-ZONE) is declared. Every error stores **no** secret value
+(SEC-04 / RR-07).
 """
 
 from __future__ import annotations
@@ -140,6 +140,29 @@ class SignalTraceabilityError(SecurityError):
     code = "EC2-SEC-OBS-003"
 
 
+# --------------------------------------------------------------------------- #
+# SEC-CERT — Security Certification Runtime (Phase 5) error taxonomy.          #
+# --------------------------------------------------------------------------- #
+
+
+class SecurityCertificationError(SecurityError):
+    """A security certification record is malformed or violates non-constitutiveness."""
+
+    code = "EC2-SEC-CERT-001"
+
+
+class CertificationValidationError(SecurityError):
+    """A certification failed meta-validity (typed / identified / evidence-backed)."""
+
+    code = "EC2-SEC-CERT-002"
+
+
+class CertificationGapError(SecurityError):
+    """A security control lacks a required §19 facet (Gap Report; generation fails)."""
+
+    code = "EC2-SEC-CERT-003"
+
+
 __all__ = [
     "SecurityError",
     "SecurityClassificationError",
@@ -161,4 +184,8 @@ __all__ = [
     "SecurityObservabilityError",
     "SecuritySignalError",
     "SignalTraceabilityError",
+    # SEC-CERT
+    "SecurityCertificationError",
+    "CertificationValidationError",
+    "CertificationGapError",
 ]

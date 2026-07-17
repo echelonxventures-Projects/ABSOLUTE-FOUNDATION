@@ -497,6 +497,106 @@ def default_security_observability_contracts() -> tuple[Contract, ...]:
     )
 
 
+# --------------------------------------------------------------------------- #
+# SEC-CERT — Security Certification vocabulary + contract surface (Phase 5).   #
+#                                                                              #
+# Records the §18 security certification objects and the §19 control-facet     #
+# requirement. Record-only, immutable, evidence-backed, non-constitutive;      #
+# never inferred from source-asset coverage (STATUS-001 §2; determination §11).#
+# --------------------------------------------------------------------------- #
+
+#: The semantic version of the Security Certification contract surface (AR-03/PL-05).
+SECURITY_CERTIFICATION_CONTRACT_VERSION = "1.0.0"
+
+
+class CertificationClass(str, Enum):
+    """The seven security certification classes (ARCH-SECURITY-001 §18)."""
+
+    IDENTITY = "identity-certification"
+    SECURITY = "security-certification"
+    PRIVACY = "privacy-certification"
+    COMPLIANCE = "compliance-certification"
+    OPERATIONAL = "operational-certification"
+    TRUST = "trust-certification"
+    GOVERNANCE = "governance-certification"
+
+
+class CertificationDecision(str, Enum):
+    """A record-only, evidence-derived certification decision (fail-closed)."""
+
+    CERTIFIED = "CERTIFIED"
+    NOT_CERTIFIED = "NOT_CERTIFIED"
+
+
+class ControlFacet(str, Enum):
+    """The seven facets every security control must carry or generation fails (§19)."""
+
+    IDENTITY = "identity-model"
+    TRUST = "trust-model"
+    TRACEABILITY = "traceability"
+    TESTING = "testing"
+    OBSERVABILITY = "observability"
+    CERTIFICATION = "certification"
+    GOVERNANCE = "governance"
+
+
+#: The §19 required control facets — a control missing any of these fails generation
+#: and produces a Gap Report (ARCH-SECURITY-001 §19; determination §13.6).
+REQUIRED_CONTROL_FACETS: frozenset[ControlFacet] = frozenset(ControlFacet)
+
+
+def all_certification_classes() -> tuple[CertificationClass, ...]:
+    """Return every certification class in stable declaration order."""
+    return tuple(CertificationClass)
+
+
+def all_control_facets() -> tuple[ControlFacet, ...]:
+    """Return every control facet in stable declaration order."""
+    return tuple(ControlFacet)
+
+
+_SECURITY_CERTIFICATION_CONTRACT_NAMES: tuple[tuple[str, str], ...] = (
+    (
+        "security.certification.record",
+        "Record an evidence-backed §18 security certification (record-only; non-constitutive).",
+    ),
+    (
+        "security.certification.control",
+        "Evaluate a control's §19 facets; produce a Gap Report on any missing facet.",
+    ),
+    (
+        "security.certification.rollup",
+        "Roll recorded certifications into a deterministic program certification.",
+    ),
+    (
+        "security.certification.evidence",
+        "Deterministic, content-addressed security-certification evidence (record-only).",
+    ),
+)
+
+#: Immutable references to the published SEC-CERT contracts (name + version).
+SECURITY_CERTIFICATION_CONTRACTS: tuple[ContractRef, ...] = tuple(
+    ContractRef(name, SECURITY_CERTIFICATION_CONTRACT_VERSION)
+    for name, _ in _SECURITY_CERTIFICATION_CONTRACT_NAMES
+)
+
+
+def security_certification_contract(name: str, description: str = "") -> Contract:
+    """Build a versioned SEC-CERT :class:`Contract` at the certification contract version."""
+    try:
+        return platform_contract(name, SECURITY_CERTIFICATION_CONTRACT_VERSION, description)
+    except PlatformContractError as exc:  # normalise into the security taxonomy
+        raise SecurityContractError(str(exc), name=name) from exc
+
+
+def default_security_certification_contracts() -> tuple[Contract, ...]:
+    """The published SEC-CERT contracts as concrete :class:`Contract` objects."""
+    return tuple(
+        security_certification_contract(name, description)
+        for name, description in _SECURITY_CERTIFICATION_CONTRACT_NAMES
+    )
+
+
 __all__ = [
     "SECURITY_CLASSIFICATION_CONTRACT_VERSION",
     "ClassificationKind",
@@ -539,4 +639,15 @@ __all__ = [
     "SECURITY_OBSERVABILITY_CONTRACTS",
     "security_observability_contract",
     "default_security_observability_contracts",
+    # SEC-CERT
+    "SECURITY_CERTIFICATION_CONTRACT_VERSION",
+    "CertificationClass",
+    "CertificationDecision",
+    "ControlFacet",
+    "REQUIRED_CONTROL_FACETS",
+    "all_certification_classes",
+    "all_control_facets",
+    "SECURITY_CERTIFICATION_CONTRACTS",
+    "security_certification_contract",
+    "default_security_certification_contracts",
 ]

@@ -59,11 +59,10 @@ def test_evidence_is_deterministic_across_identical_runs():
 
 
 def test_only_unimplemented_phase_modules_are_absent():
-    # Phase discipline: SEC-CLASS (1), SEC-INTEL (2), SEC-REG (3), SEC-OBS (4) are
-    # present; the not-yet-authorized sub-capability modules are absent.
+    # Phase discipline: SEC-CLASS (1), SEC-INTEL (2), SEC-REG (3), SEC-OBS (4),
+    # SEC-CERT (5) are present; the not-yet-authorized module is absent.
     forbidden = {
         "zones.py",
-        "certification.py",
     }
     present = {p.name for p in _SECURITY_PKG.glob("*.py")}
     assert not (forbidden & present), f"future-phase modules present: {forbidden & present}"
@@ -79,10 +78,37 @@ def test_expected_modules_are_present():
         "intelligence.py",
         "registries.py",
         "observability.py",
+        "certification.py",
         "bootstrap.py",
     }
     present = {p.name for p in _SECURITY_PKG.glob("*.py")}
     assert expected.issubset(present)
+
+
+def test_certification_reuses_certified_foundation_hashing():
+    from platform.security import certification as certification_module
+
+    assert certification_module.content_hash.__module__ == "platform.foundation.contracts"
+
+
+def test_certification_is_evidence_backed_and_non_constitutive():
+    from platform.security.certification import build_security_certification_service
+    from platform.security.contracts import CertificationClass, CertificationDecision
+
+    service = build_security_certification_service()
+    # non-constitutive: no ratify/enact/authorize.
+    for forbidden in ("authorize", "grant", "ratify", "enact", "revoke", "override"):
+        assert not hasattr(service, forbidden)
+    # evidence-backed: a CERTIFIED decision without evidence is refused.
+    from platform.security.errors import SecurityCertificationError
+
+    import pytest
+
+    with pytest.raises(SecurityCertificationError):
+        service.certify(
+            CertificationClass.SECURITY, "UCOS-1", CertificationDecision.CERTIFIED,
+            basis="b", certified_at=1,
+        )
 
 
 def test_observability_reuses_the_certified_l8_layer_not_a_second_stack():

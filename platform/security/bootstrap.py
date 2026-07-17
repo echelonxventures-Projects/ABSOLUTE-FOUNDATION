@@ -18,14 +18,17 @@ deterministically:
       ``security`` signal dimension + telemetry through the certified L8 Observability
       Layer; publishes the SEC-OBS contracts; emits
       ``security.observability.bootstrap.completed``.
+    * :func:`bootstrap_security_certification` — **SEC-CERT** (Phase 5): builds the
+      record-only §18 certification runtime bound to the context event bus; publishes
+      the SEC-CERT contracts; emits ``security.certification.bootstrap.completed``.
 
 Each composition binds its service to the context event bus so every recorded action
 is a governed event the L8 Observability Layer can audit (PC-16).
 
-Scope guardrail: these compose **SEC-CLASS, SEC-INTEL, SEC-REG, and SEC-OBS only**.
-They start no server, open no socket, render no UI, write nothing to the certified
-corpus (DP-03), and implement no not-yet-authorized sub-capability (SEC-CERT /
-SEC-ZONE). They authorize, ratify, and enact nothing (RG-02 / AR-04).
+Scope guardrail: these compose **SEC-CLASS, SEC-INTEL, SEC-REG, SEC-OBS, and SEC-CERT
+only**. They start no server, open no socket, render no UI, write nothing to the
+certified corpus (DP-03), and implement no not-yet-authorized sub-capability
+(SEC-ZONE). They authorize, ratify, and enact nothing (RG-02 / AR-04).
 """
 
 from __future__ import annotations
@@ -33,11 +36,17 @@ from __future__ import annotations
 from platform.foundation.services import ServiceDescriptor
 from platform.identity.service import AuthorizationService, bootstrap_identity
 from platform.observability.service import ObservabilityService, build_observability_service
+from platform.security.certification import (
+    SecurityCertificationService,
+    build_security_certification_service,
+)
 from platform.security.contracts import (
+    SECURITY_CERTIFICATION_CONTRACTS,
     SECURITY_CLASSIFICATION_CONTRACTS,
     SECURITY_INTELLIGENCE_CONTRACTS,
     SECURITY_OBSERVABILITY_CONTRACTS,
     SECURITY_REGISTRY_CONTRACTS,
+    default_security_certification_contracts,
     default_security_classification_contracts,
     default_security_intelligence_contracts,
     default_security_observability_contracts,
@@ -73,6 +82,9 @@ SECURITY_REGISTRY_BOOTSTRAP_EVENT = "security.registry.bootstrap.completed"
 
 #: The event emitted when the Security Observability Runtime is composed.
 SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT = "security.observability.bootstrap.completed"
+
+#: The event emitted when the Security Certification Runtime is composed.
+SECURITY_CERTIFICATION_BOOTSTRAP_EVENT = "security.certification.bootstrap.completed"
 
 
 def bootstrap_security_classification(
@@ -292,6 +304,58 @@ def bootstrap_security_observability(
     return service
 
 
+def bootstrap_security_certification(
+    context: Any,
+) -> SecurityCertificationService:
+    """Compose the Security Certification Runtime onto a :class:`PlatformContext`.
+
+    Builds the :class:`~platform.security.certification.SecurityCertificationService`
+    bound to the context event bus (so every recorded certification is a governed event
+    the L8 Observability Layer can audit), publishes the SEC-CERT contracts
+    (contract-first, PL-05), and emits a deterministic
+    ``security.certification.bootstrap.completed`` event. Certification is record-only,
+    immutable, evidence-backed, and non-constitutive (STATUS-001 §2); it authorizes,
+    ratifies, and enacts nothing (RG-02 / AR-04), stores no secret (SEC-04 / RR-07), and
+    writes nothing to the corpus (DP-03).
+
+    Raises:
+        SecurityBootstrapError: on any composition failure (fail-closed).
+    """
+    try:
+        service = build_security_certification_service(events=context.events)
+
+        contracts = {c.name: c for c in default_security_certification_contracts()}
+        for ref in SECURITY_CERTIFICATION_CONTRACTS:
+            if ref.name in context.services:
+                continue
+            context.services.register(
+                ServiceDescriptor(
+                    name=ref.name,
+                    contract=contracts[ref.name],
+                    capabilities=("PC-02", "PC-16"),
+                    description=f"Security Certification Runtime service: {ref.name}.",
+                ),
+                provider=lambda svc=service: svc,
+            )
+    except SecurityBootstrapError:
+        raise
+    except Exception as exc:  # noqa: BLE001 — normalize into a fail-closed error
+        raise SecurityBootstrapError(
+            "security certification runtime bootstrap failed", detail=str(exc)
+        ) from exc
+
+    context.events.publish(
+        SECURITY_CERTIFICATION_BOOTSTRAP_EVENT,
+        source="platform.security.bootstrap",
+        subject=context.program_id,
+        payload={
+            "certification_contracts": [ref.name for ref in SECURITY_CERTIFICATION_CONTRACTS],
+            "ledger_fingerprint": service.ledger.fingerprint(),
+        },
+    )
+    return service
+
+
 __all__ = [
     "SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT",
     "bootstrap_security_classification",
@@ -301,4 +365,6 @@ __all__ = [
     "bootstrap_security_registry",
     "SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT",
     "bootstrap_security_observability",
+    "SECURITY_CERTIFICATION_BOOTSTRAP_EVENT",
+    "bootstrap_security_certification",
 ]

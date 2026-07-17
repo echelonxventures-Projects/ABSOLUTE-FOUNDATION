@@ -164,3 +164,23 @@ def test_security_signal_is_reverse_traceable_to_its_finding():
     obs = build_security_observability_service()
     sig = obs.emit_signal(RollupState.BLOCKED, "UCOS-SVC-1", traces_to=f.finding_id, emitted_at=1)
     assert obs.trace(sig.signal_id)["traces_to"] == f.finding_id
+
+
+def test_determination_authorizes_sec_cert():
+    text = _DETERMINATION.read_text(encoding="utf-8")
+    assert "SEC-CERT" in text
+    assert "Security Certification Runtime" in text
+
+
+def test_certification_traces_backward_to_section_18_and_cites_evidence():
+    from platform.security.certification import build_security_certification_service
+    from platform.security.contracts import CertificationClass, CertificationDecision
+
+    service = build_security_certification_service()
+    c = service.certify(
+        CertificationClass.SECURITY, "UCOS-CMP-1", CertificationDecision.CERTIFIED,
+        basis="rolled up from evidence", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+    )
+    trace = service.trace(c.certification_id)
+    assert trace["backward"]["source_ref"] == "ARCH-SECURITY-001 §18"
+    assert trace["evidence_refs"] == ["UCOS-SIEV-1"]

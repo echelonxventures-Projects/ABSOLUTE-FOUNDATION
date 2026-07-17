@@ -33,8 +33,14 @@ Phase 4 — **SEC-OBS (Security Observability Runtime)** — emits the existing
 the finding/scan that raised each signal (§15; UMB-015 §5); it creates no new signal
 dimension and no second telemetry stack; see :mod:`platform.security.observability`.
 
-The remaining Security Runtime sub-capabilities (SEC-CERT / SEC-ZONE) are later,
-separately-authorized phases and are **not** present.
+Phase 5 — **SEC-CERT (Security Certification Runtime)** — records the seven §18
+security certification objects, applies the §19 control-facet failure guard (producing
+a Gap Report on any missing facet), and rolls recorded certifications into a
+deterministic program certification; record-only, evidence-backed, non-constitutive
+(STATUS-001 §2); see :mod:`platform.security.certification`.
+
+The remaining Security Runtime sub-capability (SEC-ZONE) is a later,
+separately-authorized phase and is **not** present.
 
 Deliverables (SEC-CLASS + SEC-INTEL):
     * **errors** — the ``EC2-SEC-*`` error taxonomy over ``PlatformError``.
@@ -60,14 +66,28 @@ remain open.
 from __future__ import annotations
 
 from platform.security.bootstrap import (
+    SECURITY_CERTIFICATION_BOOTSTRAP_EVENT,
     SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT,
     SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT,
     SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT,
     SECURITY_REGISTRY_BOOTSTRAP_EVENT,
+    bootstrap_security_certification,
     bootstrap_security_classification,
     bootstrap_security_intelligence,
     bootstrap_security_observability,
     bootstrap_security_registry,
+)
+from platform.security.certification import (
+    CERTIFICATION_RECORDED_EVENT,
+    CertificationLedger,
+    GapReport,
+    ProgramCertification,
+    SecurityCertification,
+    SecurityCertificationEvidence,
+    SecurityCertificationService,
+    build_security_certification_service,
+    evaluate_control_facets,
+    roll_up_program,
 )
 from platform.security.classification import (
     ClassificationLedger,
@@ -78,6 +98,9 @@ from platform.security.contracts import (
     L7_BOUND_KINDS,
     OPEN_FINDING_STATES,
     REGISTRY_SOURCE,
+    REQUIRED_CONTROL_FACETS,
+    SECURITY_CERTIFICATION_CONTRACT_VERSION,
+    SECURITY_CERTIFICATION_CONTRACTS,
     SECURITY_CLASSIFICATION_CONTRACT_VERSION,
     SECURITY_CLASSIFICATION_CONTRACTS,
     SECURITY_INTELLIGENCE_CONTRACT_VERSION,
@@ -89,7 +112,10 @@ from platform.security.contracts import (
     SECURITY_SIGNAL_DIMENSION,
     SUBJECT_LAYER_KINDS,
     SUBJECT_LAYER_SOURCE,
+    CertificationClass,
+    CertificationDecision,
     ClassificationKind,
+    ControlFacet,
     EnforcementReference,
     FindingKind,
     FindingState,
@@ -97,22 +123,28 @@ from platform.security.contracts import (
     RollupState,
     Severity,
     SubjectLayer,
+    all_certification_classes,
     all_classification_kinds,
+    all_control_facets,
     all_finding_kinds,
     all_finding_states,
     all_registry_kinds,
     all_severities,
     all_subject_layers,
+    default_security_certification_contracts,
     default_security_classification_contracts,
     default_security_intelligence_contracts,
     default_security_observability_contracts,
     default_security_registry_contracts,
+    security_certification_contract,
     security_classification_contract,
     security_intelligence_contract,
     security_observability_contract,
     security_registry_contract,
 )
 from platform.security.errors import (
+    CertificationGapError,
+    CertificationValidationError,
     ClassificationBindingError,
     ClassificationValidationError,
     EnforcementReferenceError,
@@ -121,6 +153,7 @@ from platform.security.errors import (
     RegistryValidationError,
     SecretLeakError,
     SecurityBootstrapError,
+    SecurityCertificationError,
     SecurityClassificationError,
     SecurityContractError,
     SecurityError,
@@ -211,6 +244,17 @@ __all__ = [
     "SECURITY_SIGNAL_DIMENSION",
     "security_observability_contract",
     "default_security_observability_contracts",
+    # SEC-CERT
+    "SECURITY_CERTIFICATION_CONTRACT_VERSION",
+    "SECURITY_CERTIFICATION_CONTRACTS",
+    "CertificationClass",
+    "CertificationDecision",
+    "ControlFacet",
+    "REQUIRED_CONTROL_FACETS",
+    "all_certification_classes",
+    "all_control_facets",
+    "security_certification_contract",
+    "default_security_certification_contracts",
     # classification
     "SecurityClassification",
     "ClassificationLedger",
@@ -243,6 +287,17 @@ __all__ = [
     "SecurityObservabilityEvidence",
     "SecurityObservabilityService",
     "build_security_observability_service",
+    # certification
+    "CERTIFICATION_RECORDED_EVENT",
+    "GapReport",
+    "evaluate_control_facets",
+    "SecurityCertification",
+    "CertificationLedger",
+    "ProgramCertification",
+    "roll_up_program",
+    "SecurityCertificationEvidence",
+    "SecurityCertificationService",
+    "build_security_certification_service",
     # service
     "CLASSIFICATION_RECORDED_EVENT",
     "SecurityClassificationEvidence",
@@ -257,6 +312,8 @@ __all__ = [
     "bootstrap_security_registry",
     "SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT",
     "bootstrap_security_observability",
+    "SECURITY_CERTIFICATION_BOOTSTRAP_EVENT",
+    "bootstrap_security_certification",
     # errors
     "SecurityError",
     "SecurityClassificationError",
@@ -275,4 +332,7 @@ __all__ = [
     "SecurityObservabilityError",
     "SecuritySignalError",
     "SignalTraceabilityError",
+    "SecurityCertificationError",
+    "CertificationValidationError",
+    "CertificationGapError",
 ]
