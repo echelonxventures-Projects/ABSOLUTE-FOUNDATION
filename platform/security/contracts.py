@@ -1,0 +1,244 @@
+"""EC2-CAP-SEC-001 / SEC-CLASS — Security Classification contracts (Phase 1).
+
+The versioned contract surface and the immutable **core vocabulary** for the
+**Security Classification Runtime** (SEC-CLASS). SEC-CLASS is the constitutional
+"enforcement-by-reference seam": it binds the classification records defined by the
+four subject-layer security architectures to platform constructs and *records* the
+declared enforcement obligation as a **reference** to the existing, certified L7
+Identity decision point — it enacts nothing (ARCH-SECURITY-001 §4–§11; DATA-014
+DZA-01/03; SERVICE-014 SSE-03; APPLICATION-013 SEC-03/04; INFRASTRUCTURE-013
+ISEC-01/04).
+
+This module defines:
+
+    * :class:`ClassificationKind` — the six subject-layer classification record types
+      (Authentication / Authorization / Confidentiality / Integrity / Isolation /
+      Classification-Label), reused verbatim; no new kind is invented.
+    * :class:`SubjectLayer` — the four subject-layer security architectures that own
+      the vocabulary, each carrying its constitutional source reference for backward
+      traceability (ARCH-SECURITY-001 §14).
+    * :class:`EnforcementReference` — an immutable, content-addressed **reference** to
+      the L7 seam (a :class:`~platform.identity.contracts.CapabilityGroup` +
+      :class:`~platform.foundation.identity.Permission`). It records *what the L7
+      point would evaluate*; it performs no authorization (RG-02 / AR-04).
+    * the published SEC-CLASS contract surface (:data:`SECURITY_CLASSIFICATION_CONTRACTS`).
+
+All types are **immutable, typed, deterministic, and serializable**, hold no runtime
+state, and embed no secret material (SEC-04 / RR-07).
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from enum import Enum
+from platform.foundation.contracts import (
+    Contract,
+    ContractRef,
+    content_hash,
+    platform_contract,
+)
+from platform.foundation.errors import PlatformContractError
+from platform.foundation.identity import Permission
+from platform.identity.contracts import CapabilityGroup
+from platform.security.errors import EnforcementReferenceError, SecurityContractError
+from typing import Any
+
+#: The semantic version of the Security Classification contract surface (AR-03/PL-05).
+SECURITY_CLASSIFICATION_CONTRACT_VERSION = "1.0.0"
+
+
+class ClassificationKind(str, Enum):
+    """The subject-layer security classification record types (reused verbatim).
+
+    These are the evaluative, non-enforcing record types the four subject-layer
+    security architectures define: SERVICE-014 / APPLICATION-013 (Authentication,
+    Authorization, Confidentiality, Integrity), DATA-014 (Confidentiality, Integrity,
+    Classification-Label), and INFRASTRUCTURE-013 (Isolation). No new kind is
+    introduced (ARCH-SECURITY-001 §21).
+    """
+
+    AUTHENTICATION = "authentication-record"
+    AUTHORIZATION = "authorization-record"
+    CONFIDENTIALITY = "confidentiality-record"
+    INTEGRITY = "integrity-record"
+    ISOLATION = "isolation-facet"
+    CLASSIFICATION_LABEL = "classification-label"
+
+
+#: The classification kinds whose declared enforcement obligation resolves to the L7
+#: authorization seam (a CapabilityGroup + Permission). The remaining kinds are pure
+#: evaluative labels whose enforcement is a data/runtime reference, not the authz
+#: decision point — they carry no :class:`EnforcementReference`.
+L7_BOUND_KINDS: frozenset[ClassificationKind] = frozenset(
+    {ClassificationKind.AUTHENTICATION, ClassificationKind.AUTHORIZATION}
+)
+
+
+class SubjectLayer(str, Enum):
+    """The four subject-layer security architectures that own the classification vocabulary."""
+
+    DATA = "DATA-014"
+    SERVICE = "SERVICE-014"
+    APPLICATION = "APPLICATION-013"
+    INFRASTRUCTURE = "INFRASTRUCTURE-013"
+
+
+#: Backward-traceability: each subject layer's constitutional source reference
+#: (ARCH-SECURITY-001 §14 control/evidence traceability). Record-only mapping.
+SUBJECT_LAYER_SOURCE: dict[SubjectLayer, str] = {
+    SubjectLayer.DATA: "DATA-014/DZA-01 (classification, not enforcement)",
+    SubjectLayer.SERVICE: "SERVICE-014/SSE-03 (evaluative-only)",
+    SubjectLayer.APPLICATION: "APPLICATION-013/SEC-03 (evaluative-only)",
+    SubjectLayer.INFRASTRUCTURE: "INFRASTRUCTURE-013/ISEC-01 (evaluative, non-enforcing)",
+}
+
+#: The classification kinds each subject layer is permitted to originate (reused from
+#: the subject-layer taxonomies; DATA-014 DXH-10, SERVICE-014 SXH-10,
+#: APPLICATION-013 AXH-09, INFRASTRUCTURE-013 §2). Decidable membership.
+SUBJECT_LAYER_KINDS: dict[SubjectLayer, frozenset[ClassificationKind]] = {
+    SubjectLayer.DATA: frozenset(
+        {
+            ClassificationKind.CLASSIFICATION_LABEL,
+            ClassificationKind.CONFIDENTIALITY,
+            ClassificationKind.INTEGRITY,
+        }
+    ),
+    SubjectLayer.SERVICE: frozenset(
+        {
+            ClassificationKind.AUTHENTICATION,
+            ClassificationKind.AUTHORIZATION,
+            ClassificationKind.CONFIDENTIALITY,
+            ClassificationKind.INTEGRITY,
+        }
+    ),
+    SubjectLayer.APPLICATION: frozenset(
+        {
+            ClassificationKind.AUTHENTICATION,
+            ClassificationKind.AUTHORIZATION,
+            ClassificationKind.CONFIDENTIALITY,
+            ClassificationKind.INTEGRITY,
+        }
+    ),
+    SubjectLayer.INFRASTRUCTURE: frozenset(
+        {
+            ClassificationKind.ISOLATION,
+            ClassificationKind.AUTHENTICATION,
+            ClassificationKind.AUTHORIZATION,
+            ClassificationKind.CONFIDENTIALITY,
+            ClassificationKind.INTEGRITY,
+        }
+    ),
+}
+
+
+def all_classification_kinds() -> tuple[ClassificationKind, ...]:
+    """Return every classification kind in stable declaration order."""
+    return tuple(ClassificationKind)
+
+
+def all_subject_layers() -> tuple[SubjectLayer, ...]:
+    """Return every subject layer in stable declaration order."""
+    return tuple(SubjectLayer)
+
+
+@dataclass(frozen=True, slots=True)
+class EnforcementReference:
+    """An immutable **reference** to the existing L7 authorization seam.
+
+    Records *what the certified* :class:`~platform.identity.service.AuthorizationService`
+    *would evaluate* for a construct — a :class:`~platform.identity.contracts.CapabilityGroup`
+    and a :class:`~platform.foundation.identity.Permission`. This is a recorded
+    obligation only: SEC-CLASS **never** invokes authorization, grants access, or
+    enacts a decision (RG-02 / AR-04; determination §4.1/§4.3). The ``reference_id``
+    is content-addressed so an identical reference always yields the same id.
+    """
+
+    group: CapabilityGroup
+    permission: Permission
+    reference_id: str = ""
+
+    @classmethod
+    def create(cls, group: CapabilityGroup, permission: Permission) -> EnforcementReference:
+        """Build an enforcement reference, validating it resolves to real L7 vocabulary."""
+        if not isinstance(group, CapabilityGroup):
+            raise EnforcementReferenceError(
+                "enforcement reference group must be a CapabilityGroup (the L7 seam)"
+            )
+        if not isinstance(permission, Permission):
+            raise EnforcementReferenceError(
+                "enforcement reference permission must be a Permission",
+                group=group.value,
+            )
+        core = {"group": group.value, "permission": permission.value}
+        return cls(
+            group=group,
+            permission=permission,
+            reference_id=f"UCOS-SREF-{content_hash(core)[:16]}",
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "reference_id": self.reference_id,
+            "group": self.group.value,
+            "permission": self.permission.value,
+            "seam": "platform.identity.AuthorizationService",
+            "enacts": False,
+        }
+
+
+# --------------------------------------------------------------------------- #
+# The published SEC-CLASS contract surface.                                    #
+# --------------------------------------------------------------------------- #
+
+_SECURITY_CLASSIFICATION_CONTRACT_NAMES: tuple[tuple[str, str], ...] = (
+    (
+        "security.classification.record",
+        "Record an evaluative, non-enforcing security classification against a construct.",
+    ),
+    (
+        "security.classification.binding",
+        "Bind a classification to a construct; resolve its enforcement reference to L7.",
+    ),
+    (
+        "security.classification.evidence",
+        "Deterministic, content-addressed classification evidence (record-only report).",
+    ),
+)
+
+#: Immutable references to the published SEC-CLASS contracts (name + version).
+SECURITY_CLASSIFICATION_CONTRACTS: tuple[ContractRef, ...] = tuple(
+    ContractRef(name, SECURITY_CLASSIFICATION_CONTRACT_VERSION)
+    for name, _ in _SECURITY_CLASSIFICATION_CONTRACT_NAMES
+)
+
+
+def security_classification_contract(name: str, description: str = "") -> Contract:
+    """Build a versioned SEC-CLASS :class:`Contract` at the classification contract version."""
+    try:
+        return platform_contract(name, SECURITY_CLASSIFICATION_CONTRACT_VERSION, description)
+    except PlatformContractError as exc:  # normalise into the security taxonomy
+        raise SecurityContractError(str(exc), name=name) from exc
+
+
+def default_security_classification_contracts() -> tuple[Contract, ...]:
+    """The published SEC-CLASS contracts as concrete :class:`Contract` objects."""
+    return tuple(
+        security_classification_contract(name, description)
+        for name, description in _SECURITY_CLASSIFICATION_CONTRACT_NAMES
+    )
+
+
+__all__ = [
+    "SECURITY_CLASSIFICATION_CONTRACT_VERSION",
+    "ClassificationKind",
+    "L7_BOUND_KINDS",
+    "SubjectLayer",
+    "SUBJECT_LAYER_SOURCE",
+    "SUBJECT_LAYER_KINDS",
+    "all_classification_kinds",
+    "all_subject_layers",
+    "EnforcementReference",
+    "SECURITY_CLASSIFICATION_CONTRACTS",
+    "security_classification_contract",
+    "default_security_classification_contracts",
+]

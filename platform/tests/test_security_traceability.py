@@ -1,0 +1,95 @@
+"""EC2-CAP-SEC-001 / SEC-CLASS — traceability validation tests.
+
+Asserts complete requirement traceability: the determination artifact exists and
+authorizes SEC-CLASS; every SEC-CLASS responsibility (classify · record · trace ·
+validate · report) is realized; and every classification is reverse-traceable to its
+constitutional source and forward-traceable to the certified L7 seam
+(ARCH-SECURITY-001 §14).
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from platform.foundation.identity import Permission
+from platform.identity.contracts import CapabilityGroup
+from platform.security.contracts import (
+    SUBJECT_LAYER_SOURCE,
+    ClassificationKind,
+    EnforcementReference,
+    SubjectLayer,
+    all_subject_layers,
+)
+from platform.security.service import build_security_classification_service
+
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_DETERMINATION = _REPO_ROOT / "platform" / "security" / "EC2-CAP-SEC-001-DETERMINATION.md"
+
+
+def test_determination_artifact_exists():
+    assert _DETERMINATION.is_file()
+
+
+def test_determination_authorizes_sec_class():
+    text = _DETERMINATION.read_text(encoding="utf-8")
+    assert "SEC-CLASS" in text
+    assert "Security Classification Binding Runtime" in text
+    assert "READY FOR IMPLEMENTATION" in text
+
+
+def test_service_realizes_every_sec_class_responsibility():
+    service = build_security_classification_service()
+    # classify · record · trace · validate · report (mission responsibilities).
+    for responsibility in ("classify", "record", "trace", "validate", "validate_all", "report"):
+        assert callable(getattr(service, responsibility))
+
+
+def test_every_classification_traces_backward_to_a_constitutional_source():
+    for layer in all_subject_layers():
+        assert layer in SUBJECT_LAYER_SOURCE
+        assert SUBJECT_LAYER_SOURCE[layer]
+
+
+def test_recorded_classification_is_reverse_and_forward_traceable():
+    service = build_security_classification_service()
+    c = service.classify(
+        ClassificationKind.AUTHORIZATION,
+        SubjectLayer.SERVICE,
+        "UCOS-SVC-000001",
+        "required",
+        enforcement_ref=EnforcementReference.create(
+            CapabilityGroup.GENERATION_REQUESTS, Permission.EXECUTE
+        ),
+    )
+    trace = service.trace(c.classification_id)
+    # backward: constitution + originating layer
+    assert trace["backward"]["layer"] == "SERVICE-014"
+    assert "SERVICE-014" in trace["backward"]["constitution_ref"]
+    # subject: the classified construct
+    assert trace["subject"]["subject_ref"] == "UCOS-SVC-000001"
+    # forward: the certified L7 seam
+    assert trace["forward"]["seam"] == "platform.identity.AuthorizationService"
+
+
+def test_non_l7_classification_traces_backward_with_no_forward_enactment():
+    service = build_security_classification_service()
+    c = service.classify(
+        ClassificationKind.ISOLATION,
+        SubjectLayer.INFRASTRUCTURE,
+        "UCOS-INF-000001",
+        "isolated",
+    )
+    trace = service.trace(c.classification_id)
+    assert "INFRASTRUCTURE-013" in trace["backward"]["constitution_ref"]
+    assert trace["forward"] is None
+
+
+def test_evidence_report_carries_full_traceable_records():
+    service = build_security_classification_service()
+    service.classify(
+        ClassificationKind.CONFIDENTIALITY, SubjectLayer.DATA, "UCOS-DATA-000001", "restricted"
+    )
+    evidence = service.report()
+    assert evidence.classification_count == 1
+    record = evidence.classifications[0]
+    assert record["layer"] == "DATA-014"
+    assert record["constitution_ref"]
