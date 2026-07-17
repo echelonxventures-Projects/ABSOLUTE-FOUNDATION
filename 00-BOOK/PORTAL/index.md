@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-17T04:53:37+00:00 by ukbx portal. 333 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-17T06:17:07+00:00 by ukbx portal. 336 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -337,3 +337,6 @@
 | [UCOS-PLT-000030](UCOS-PLT-000030.md) | EC2-CAP-SEC-001 · SEC-OBS — Security Observability Runtime — | VOL-006 | CERTIFIED |
 | [UCOS-PLT-000031](UCOS-PLT-000031.md) | EC2-CAP-SEC-001 · SEC-CERT — Security Certification Runtime  | VOL-006 | CERTIFIED |
 | [UCOS-PLT-000032](UCOS-PLT-000032.md) | EC2-CAP-SEC-001 · SEC-ZONE — Zone & Control Posture Runtime  | VOL-006 | CERTIFIED |
+| [UCOS-PLT-000033](UCOS-PLT-000033.md) | EC2-IMPLEMENTATION-STATUS-DETERMINATION | VOL-006 | ACTIVE |
+| [UCOS-PLT-000034](UCOS-PLT-000034.md) | EC2-EPIC-005 — Project Management Runtime — Determination | VOL-006 | ACTIVE |
+| [UCOS-PLT-000035](UCOS-PLT-000035.md) | EC2-EPIC-005 — Project Management Runtime — Completion Repor | VOL-006 | ACTIVE |

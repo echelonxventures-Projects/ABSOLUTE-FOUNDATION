@@ -12,7 +12,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 37 | UPN-000000022–UPN-000005575 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 4 | UPN-000004194–UPN-000004218 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
-| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 45 | UPN-000004559–UPN-000005622 |
+| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 48 | UPN-000004559–UPN-000005638 |
 | `VOL-007` | 7 | DATA | DAT | ACTIVE | 23 | UPN-000004355–UPN-000005171 |
 | `VOL-008` | 8 | SERVICE | SVC | ACTIVE | 23 | UPN-000004410–UPN-000005246 |
 | `VOL-009` | 9 | APPLICATION | APP | ACTIVE | 28 | UPN-000004232–UPN-000005495 |
@@ -181,7 +181,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-006 — PLATFORM <a id="vol-006"></a>
 
 *Implementation platforms and engines.*  \
-**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 45
+**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 48
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -230,6 +230,9 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-PLT-000030` | EC2-CAP-SEC-001 · SEC-OBS — Security Observability Runtime — … | EC2-CAP-SEC-001 | CERTIFIED |
 | `UCOS-PLT-000031` | EC2-CAP-SEC-001 · SEC-CERT — Security Certification Runtime —… | EC2-CAP-SEC-001 | CERTIFIED |
 | `UCOS-PLT-000032` | EC2-CAP-SEC-001 · SEC-ZONE — Zone & Control Posture Runtime —… | EC2-CAP-SEC-001 | CERTIFIED |
+| `UCOS-PLT-000033` | EC2-IMPLEMENTATION-STATUS-DETERMINATION | EC2 | ACTIVE |
+| `UCOS-PLT-000034` | EC2-EPIC-005 — Project Management Runtime — Determination | EC2-EPIC-005 | ACTIVE |
+| `UCOS-PLT-000035` | EC2-EPIC-005 — Project Management Runtime — Completion Report | — | ACTIVE |
 
 ### VOL-007 — DATA <a id="vol-007"></a>
 

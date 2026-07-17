@@ -2338,9 +2338,30 @@
       "page_start": 5619,
       "page_count": 4,
       "first_seen": "2026-07-17T04:53:36+00:00"
+    },
+    "platform/EC2-IMPLEMENTATION-STATUS-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000033",
+      "category": "PLT",
+      "page_start": 5623,
+      "page_count": 5,
+      "first_seen": "2026-07-17T05:17:12+00:00"
+    },
+    "platform/project-management/EC2-EPIC-005-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000034",
+      "category": "PLT",
+      "page_start": 5628,
+      "page_count": 7,
+      "first_seen": "2026-07-17T05:24:24+00:00"
+    },
+    "platform/projects/EC2-EPIC-005-COMPLETION-REPORT.md": {
+      "universal_id": "UCOS-PLT-000035",
+      "category": "PLT",
+      "page_start": 5635,
+      "page_count": 4,
+      "first_seen": "2026-07-17T06:17:06+00:00"
     }
   },
-  "page_cursor": 5622,
+  "page_cursor": 5638,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -2359,7 +2380,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 32,
+    "PLT": 35,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -6070,6 +6091,39 @@
         "status": "CERTIFIED",
         "path": "platform/security/EC2-CAP-SEC-001-SEC-ZONE-CERTIFICATION-REPORT.md",
         "name": "EC2-CAP-SEC-001 · SEC-ZONE — Zone & Control Posture Runtime — Certification Report"
+      }
+    ],
+    "UCOS-PLT-000033": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T05:17:12+00:00",
+        "content_hash": "a699fa4068d5d3a04a3dc26f972f3771e0798ce90c82302e174ae70ec0241598",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/EC2-IMPLEMENTATION-STATUS-DETERMINATION.md",
+        "name": "EC2-IMPLEMENTATION-STATUS-DETERMINATION"
+      }
+    ],
+    "UCOS-PLT-000034": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T05:24:24+00:00",
+        "content_hash": "0d10d1dc028493608c46f8c6cf498d1d13d59fdaead9cba9d4544d88cbff4e4a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/project-management/EC2-EPIC-005-DETERMINATION.md",
+        "name": "EC2-EPIC-005 — Project Management Runtime — Determination"
+      }
+    ],
+    "UCOS-PLT-000035": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T06:17:06+00:00",
+        "content_hash": "e627be897073f3e12d1548c2526e6f215d98711fc72d98c9984f590c1983cbf9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/projects/EC2-EPIC-005-COMPLETION-REPORT.md",
+        "name": "EC2-EPIC-005 — Project Management Runtime — Completion Report"
       }
     ]
   }

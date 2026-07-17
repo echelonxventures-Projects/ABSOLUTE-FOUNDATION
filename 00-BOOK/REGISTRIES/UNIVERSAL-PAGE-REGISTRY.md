@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 5622  ·  **Page cursor (next free):** UPN-000005623
+**Pages allocated:** 5638  ·  **Page cursor (next free):** UPN-000005639
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -341,5 +341,8 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000005613 | UPN-000005615 | 3 | `UCOS-PLT-000030` | 006 | EC2-CAP-SEC-001 · SEC-OBS — Security Observab… |
 | UPN-000005616 | UPN-000005618 | 3 | `UCOS-PLT-000031` | 006 | EC2-CAP-SEC-001 · SEC-CERT — Security Certifi… |
 | UPN-000005619 | UPN-000005622 | 4 | `UCOS-PLT-000032` | 006 | EC2-CAP-SEC-001 · SEC-ZONE — Zone & Control P… |
+| UPN-000005623 | UPN-000005627 | 5 | `UCOS-PLT-000033` | 006 | EC2-IMPLEMENTATION-STATUS-DETERMINATION |
+| UPN-000005628 | UPN-000005634 | 7 | `UCOS-PLT-000034` | 006 | EC2-EPIC-005 — Project Management Runtime — D… |
+| UPN-000005635 | UPN-000005638 | 4 | `UCOS-PLT-000035` | 006 | EC2-EPIC-005 — Project Management Runtime — C… |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
