@@ -14,34 +14,48 @@
 | BRANCH | external-execution-support-program |
 | BASELINE DATE | 2026-07-14 |
 
-*This artifact is a progress-tracking instrument only. It records status; it creates no authority, alters no determination, and authorizes no EC-series step. It is a **living document**: statuses advance as implementation artifacts are separately authorized and delivered. At the IMP-000 baseline, no implementation artifact (IMP-001…IMP-014) has been created, so every artifact status is NOT STARTED. Governed by the Implementation Governance Baseline and the Technology Constitution.*
+*This artifact is a progress-tracking instrument only. It records status; it creates no authority, alters no determination, and authorizes no EC-series step. It is a **living document**: statuses advance as implementation artifacts are separately authorized and delivered. Governed by the Implementation Governance Baseline and the Technology Constitution.*
+
+> **RECONCILIATION NOTE — ZG-P-01 (authorized by ZG-D-01; source MIP-ZG-001 Follow-On Package).**
+> This Tracker was initialized at the IMP-000 baseline (**2026-07-14**) with every artifact status **NOT STARTED**, on the then-true premise that *no implementation artifact (IMP-001…IMP-014) had yet been created*. **That premise is now superseded by physical evidence:** IMP-001…IMP-014 exist under `06-IMPLEMENTATION/` and are recorded **ESTABLISHED — ACTIVE** in the Consolidation Master Index §11B. Per ZG-D-01, status is recorded on **three non-conflatable axes** and MUST NOT be collapsed into one field:
+> - **D1 · Artifact Status** — does the IMP-00x specification artifact physically exist and is it ACTIVE. *(Authoritative source: Master Index §11B + physical `06-IMPLEMENTATION/`.)*
+> - **D2 · Execution-Lane Status** — the IMP task-execution/authorization lane. Retained verbatim as **historical baseline**; this lane was never the realization mechanism (delivery routed to the ARCH→CAT→REF→GEN→EC-1→EC-2 spine).
+> - **D3 · Code-Realization Status** — actual build progress, **measured through EC-1 / EC-2 / TRACK-001 — never by this Tracker.**
+> The original baseline values are **preserved, not destroyed**: the D2 column below carries them, and the historical baseline dashboard is retained. This is a corrective reconciliation only — no new governance, status framework, or authority is created.
 
 ---
 
 ## 1. PROGRAM DASHBOARD
 
-| Metric | Value at baseline |
-|--------|-------------------|
-| Program phase | IMP-000 foundation established; IMP-001 not yet authorized |
-| Artifacts defined | 14 (IMP-001…IMP-014) |
-| Artifacts authorized | 0 |
-| Artifacts in progress | 0 |
-| Artifacts complete | 0 |
-| Overall completion | 0% |
-| Open external gates (EC-1…EC-6) | 6 (all open; block ratified-dependency artifacts only) |
-| Program health | GREEN (foundation in force; no blocked engineering work) |
+**Status is recorded on three non-conflatable axes (ZG-D-01):** **D1** Artifact Status · **D2** Execution-Lane Status (historical baseline) · **D3** Code-Realization Status (via EC-1/EC-2/TRACK-001).
 
-**Progress legend:** NOT STARTED · AUTHORIZED · IN PROGRESS · IN REVIEW · COMPLETE · BLOCKED (external gate).
+| Metric | Baseline (2026-07-14 · historical) | Reconciled (ZG-P-01) | Axis |
+|--------|------------------------------------|----------------------|------|
+| Program phase | IMP-000 foundation established; IMP-001 not yet authorized | IMP-000 foundation ACTIVE; IMP-001…IMP-014 artifacts **ESTABLISHED — ACTIVE** | D1 |
+| Artifacts defined | 14 (IMP-001…IMP-014) | 14 (IMP-001…IMP-014) | — |
+| Artifacts established (exist under `06-IMPLEMENTATION/`) | 0 | **14** | D1 |
+| D1 artifact-existence completion | 0% | **100% (14/14)** | D1 |
+| Execution-lane items authorized / in progress / complete | 0 / 0 / 0 | 0 / 0 / 0 — lane unused; realization routed to the delivery spine | D2 |
+| Code realization | not measured here | **PARTIAL** — see EC-2 / TRACK-001 (EC-2 ≈ 7/14 epics) | D3 |
+| Open external gates (EC-1…EC-6) | 6 (all open; finality only) | 6 (all open; finality only) | — |
+| Program health | GREEN (foundation in force; no blocked engineering work) | GREEN (artifacts established; code realization sequenced via EC-2) | — |
+
+**Progress legend (D2 execution lane):** NOT STARTED · AUTHORIZED · IN PROGRESS · IN REVIEW · COMPLETE · BLOCKED (external gate).
+**Artifact legend (D1):** ESTABLISHED — ACTIVE (artifact exists and is active) · (absent).
+**Realization legend (D3, by reference only):** measured in EC-1 / EC-2 via TRACK-001 — COMPLETE · PARTIAL · NOT STARTED / BLOCKED.
 
 ---
 
 ## 2. IMP-001 THROUGH IMP-014 — ARTIFACT RECORDS
 
+*Each record carries the three ZG-D-01 axes. **D1** is authoritative for artifact existence (cross-checked to Master Index §11B and physical `06-IMPLEMENTATION/`). **D2** preserves the historical baseline execution-lane value. **D3** is recorded by reference to EC-1/EC-2/TRACK-001 and is not measured in this Tracker.*
+
 ### IMP-001 — Foundation Architecture
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-000 baseline in force |
 | Risks | R-ARCH-DRIFT (inconsistent conventions across contributors) |
 | Deliverables | Architecture reference; layering/boundaries; ADR template + index; conventions catalog |
@@ -50,8 +64,9 @@
 ### IMP-002 — Repository Architecture
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-001 |
 | Risks | R-REPO-FREEZE (accidental write to frozen paths) |
 | Deliverables | Repository layout spec; versioning/branching standard; traceability directory map |
@@ -60,8 +75,9 @@
 ### IMP-003 — Ontology Platform
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-002 |
 | Risks | R-ONT-FLIP (RR-03: ontology root flips if supremacy reverses) |
 | Deliverables | Ontology schema; ontology service; ontology version register |
@@ -70,8 +86,9 @@
 ### IMP-004 — Registry Platform
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-003 |
 | Risks | R-ID-COLLISION (residual identifier collisions if concordance incomplete) |
 | Deliverables | Registry service; identifier/concordance store; query + audit APIs |
@@ -80,8 +97,9 @@
 ### IMP-005 — Identity Platform
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-004 |
 | Risks | R-CRED-LEAK (RR-07: credential leakage recurrence) |
 | Deliverables | Identity service; authentication subsystem; key/credential management |
@@ -90,8 +108,9 @@
 ### IMP-006 — Knowledge Graph Engine
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-005 |
 | Risks | R-PROV-LOSS (provenance edges dropped during ingestion) |
 | Deliverables | Graph engine; ingestion pipelines; provenance/traceability graph |
@@ -100,8 +119,9 @@
 ### IMP-007 — Universal Compiler
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-006 |
 | Risks | R-COMPILE-FINALITY (compiler emits artifacts asserting constitutional finality) |
 | Deliverables | Compiler toolchain; IR specification; validation rule set |
@@ -110,8 +130,9 @@
 ### IMP-008 — Runtime Platform
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-007 |
 | Risks | R-RUNTIME-ISO (isolation/sandbox escape) |
 | Deliverables | Runtime engine; execution/state model; observability instrumentation |
@@ -120,8 +141,9 @@
 ### IMP-009 — API Platform
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-008 |
 | Risks | R-OPEN-ENDPOINT (unauthenticated endpoint exposure) |
 | Deliverables | API gateway; versioned contracts; security integration |
@@ -130,8 +152,9 @@
 ### IMP-010 — Workflow Platform
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-008 (parallel with IMP-009, IMP-011) |
 | Risks | R-WF-AUTHACT (workflow automates a prohibited constituent/EC act) |
 | Deliverables | Workflow engine; definition schema; audit/compensation subsystem |
@@ -140,8 +163,9 @@
 ### IMP-011 — AI Platform
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-008 (parallel with IMP-009, IMP-010) |
 | Risks | R-AI-AUTH (agent assumes/fabricates authority — AUTH-06) |
 | Deliverables | AI service layer; agent-coordination framework; guardrail + evaluation subsystems |
@@ -150,8 +174,9 @@
 ### IMP-012 — Application Factory
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-009, IMP-010, IMP-011 |
 | Risks | R-GEN-DRIFT (generated apps drop provisional-boundary flags) |
 | Deliverables | Application factory toolchain; templates; generation pipeline |
@@ -160,8 +185,9 @@
 ### IMP-013 — Ecosystem Platform
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-012 |
 | Risks | R-SUPPLY-CHAIN (unvetted/unpinned dependency intake) |
 | Deliverables | Extension framework; dependency-governance rules; distribution mechanism |
@@ -170,8 +196,9 @@
 ### IMP-014 — Production Platform
 | Field | Value |
 |-------|-------|
-| Status | NOT STARTED |
-| Progress | 0% |
+| D1 · Artifact Status | ESTABLISHED — ACTIVE (exists under `06-IMPLEMENTATION/`; Master Index §11B) |
+| D2 · Execution-Lane Status | NOT STARTED — 0% (historical baseline; IMP task-execution lane, unused — realization routed to the delivery spine) |
+| D3 · Code-Realization Status | Measured via EC-1 / EC-2 / TRACK-001 (not this Tracker) |
 | Dependencies | IMP-013 |
 | Risks | R-PROD-FINALITY (production implies constitutional finality while EC-1 unmet) |
 | Deliverables | Deployment platform; operational runbooks; production security + reliability controls |
@@ -181,8 +208,10 @@
 
 ## 3. MILESTONE TRACKER
 
-| Milestone | Description | Predecessor | Status |
-|-----------|-------------|-------------|--------|
+*These milestones track the **D2 execution lane** and are preserved at their **historical baseline** values. They are not the artifact-existence axis: **D1 artifact establishment is COMPLETE — 14/14 IMP-001…IMP-014 ESTABLISHED — ACTIVE** (§2; Master Index §11B). Code-realization milestones (D3) are tracked in EC-2 / TRACK-001, not here.*
+
+| Milestone | Description | Predecessor | Status (D2 baseline) |
+|-----------|-------------|-------------|----------------------|
 | M-0 | IMP-000 governance foundation established | — | COMPLETE (this package) |
 | M-1 | Foundation + repository ready (IMP-001, IMP-002) | M-0 | NOT STARTED |
 | M-2 | Ontology/registry/identity core (IMP-003…005) | M-1 | NOT STARTED |
@@ -273,8 +302,8 @@
 
 | Attribute | Value |
 |-----------|-------|
-| Artifact Status | ACTIVE — living progress record initialized at baseline |
-| Artifacts tracked | 14 (IMP-001…IMP-014), all NOT STARTED |
+| Artifact Status | ACTIVE — living progress record; reconciled per ZG-D-01 (ZG-P-01) |
+| Artifacts tracked | 14 (IMP-001…IMP-014) — **D1 ESTABLISHED — ACTIVE (14/14)**; D2 execution-lane NOT STARTED (historical baseline, unused); D3 code-realization via EC-1/EC-2/TRACK-001 |
 | Authority | NONE |
 | Governance | NONE |
 | Constituent Power | NONE |
