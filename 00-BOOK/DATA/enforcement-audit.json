@@ -5000,6 +5000,46 @@
       "violations": [],
       "result": "PASS",
       "seq": 61
+    },
+    {
+      "generated_at": "2026-07-17T02:55:36+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 328,
+      "registered": 327,
+      "unregistered": [
+        "platform/security/EC2-CAP-SEC-001-DETERMINATION.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 62
+    },
+    {
+      "generated_at": "2026-07-17T02:55:37+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 328,
+      "registered": 328,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 63
     }
   ]
 }

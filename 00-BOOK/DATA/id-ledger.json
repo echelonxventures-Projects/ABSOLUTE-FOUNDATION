@@ -2296,9 +2296,16 @@
       "page_start": 5596,
       "page_count": 4,
       "first_seen": "2026-07-17T02:35:35+00:00"
+    },
+    "platform/security/EC2-CAP-SEC-001-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000027",
+      "category": "PLT",
+      "page_start": 5600,
+      "page_count": 7,
+      "first_seen": "2026-07-17T02:55:36+00:00"
     }
   },
-  "page_cursor": 5599,
+  "page_cursor": 5606,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -2317,7 +2324,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 26,
+    "PLT": 27,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -5953,6 +5960,26 @@
         "status": "ACTIVE",
         "path": "02-MASTER/UCOS-GOV-006-REPOSITORY-GOVERNANCE-CORRECTION-IMPLEMENTATION-REPORT.md",
         "name": "UCOS-GOV-006 — REPOSITORY GOVERNANCE CORRECTION IMPLEMENTATION REPORT"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-17T02:55:36+00:00",
+        "content_hash": "ccbf079d62f77c482008638bfa88988b35a93ac9bc18b7eae4ed487c48f7d0d3",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-GOV-006-REPOSITORY-GOVERNANCE-CORRECTION-IMPLEMENTATION-REPORT.md",
+        "name": "UCOS-GOV-006 — REPOSITORY GOVERNANCE CORRECTION IMPLEMENTATION REPORT"
+      }
+    ],
+    "UCOS-PLT-000027": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T02:55:36+00:00",
+        "content_hash": "ea1fb6641d0371347d3fc5e71bd434b477fdeba98bb2aa1e775883f8440eb264",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/security/EC2-CAP-SEC-001-DETERMINATION.md",
+        "name": "EC2-CAP-SEC-001 — Security Runtime — Determination"
       }
     ]
   }

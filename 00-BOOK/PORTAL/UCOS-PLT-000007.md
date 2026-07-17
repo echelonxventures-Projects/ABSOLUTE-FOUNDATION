@@ -15,6 +15,7 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000024](UCOS-PLT-000024.md) EC2-EPIC-013 — Observability & Monitoring — Comple
 - [UCOS-PLT-000025](UCOS-PLT-000025.md) EC2-EPIC-003 — Portal & Navigation — Completion Re
 - [UCOS-PLT-000026](UCOS-PLT-000026.md) EC2-EPIC-004 — Workspace & Collaboration — Complet
+- [UCOS-PLT-000027](UCOS-PLT-000027.md) EC2-CAP-SEC-001 — Security Runtime — Determination
 
 ## Backlinks (reverse)
 - [UCOS-PLT-000001](UCOS-PLT-000001.md) —Depends-On→
@@ -25,6 +26,7 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000023](UCOS-PLT-000023.md) —Parent→
 - [UCOS-PLT-000024](UCOS-PLT-000024.md) —Parent→
 - [UCOS-PLT-000025](UCOS-PLT-000025.md) —Parent→
+- [UCOS-PLT-000027](UCOS-PLT-000027.md) —Parent→
 - [UCOS-PLT-000026](UCOS-PLT-000026.md) —Parent→
 - [UCOS-PLT-000002](UCOS-PLT-000002.md) —Depends-On→
 - [UCOS-PLT-000003](UCOS-PLT-000003.md) —Depends-On→

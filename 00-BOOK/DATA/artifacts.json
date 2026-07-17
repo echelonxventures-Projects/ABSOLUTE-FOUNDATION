@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-17T02:37:18+00:00",
+  "generated_at": "2026-07-17T02:55:37+00:00",
   "generator_version": "1.0.0",
-  "count": 327,
+  "count": 328,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -18120,7 +18120,46 @@
       ],
       "path": "02-MASTER/UCOS-GOV-006-REPOSITORY-GOVERNANCE-CORRECTION-IMPLEMENTATION-REPORT.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "88737aba615580ec4e754e22d9dc1415242f92902dc189fae5706d8d4f5e7d64",
+      "content_hash": "ccbf079d62f77c482008638bfa88988b35a93ac9bc18b7eae4ed487c48f7d0d3",
+      "traceability": {
+        "requirement": [],
+        "architecture": [],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-PLT-000027",
+      "native_id": "EC2-CAP-SEC-001",
+      "name": "EC2-CAP-SEC-001 — Security Runtime — Determination",
+      "description": "",
+      "category": "PLT",
+      "volume": "VOL-006",
+      "page_start": 5600,
+      "page_end": 5606,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-PLT-000007",
+      "dependencies": [],
+      "program": "PLATFORM",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "PLATFORM",
+        "PLT",
+        "VOL-006"
+      ],
+      "path": "platform/security/EC2-CAP-SEC-001-DETERMINATION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "ea1fb6641d0371347d3fc5e71bd434b477fdeba98bb2aa1e775883f8440eb264",
       "traceability": {
         "requirement": [],
         "architecture": [],
