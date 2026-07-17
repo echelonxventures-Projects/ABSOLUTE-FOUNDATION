@@ -5474,6 +5474,46 @@
       "violations": [],
       "result": "PASS",
       "seq": 85
+    },
+    {
+      "generated_at": "2026-07-17T06:32:15+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 337,
+      "registered": 336,
+      "unregistered": [
+        "platform/POST-EPIC-005-IMPLEMENTATION-STATUS-DETERMINATION.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 86
+    },
+    {
+      "generated_at": "2026-07-17T06:32:16+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 337,
+      "registered": 337,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 87
     }
   ]
 }
