@@ -357,6 +357,90 @@ def default_security_intelligence_contracts() -> tuple[Contract, ...]:
     )
 
 
+# --------------------------------------------------------------------------- #
+# SEC-REG — Security Registry vocabulary + contract surface (Phase 3).         #
+#                                                                              #
+# The seven constitutional registries (ARCH-SECURITY-001 §17). Each is an      #
+# append-only, record-only, attributed, queryable store that NEVER ratifies or #
+# enacts (RG-02); every mutation is timestamped + attributed + queryable       #
+# (RG-05). No eighth registry is introduced (determination §8).                #
+# --------------------------------------------------------------------------- #
+
+#: The semantic version of the Security Registry contract surface (AR-03/PL-05).
+SECURITY_REGISTRY_CONTRACT_VERSION = "1.0.0"
+
+
+class RegistryKind(str, Enum):
+    """The seven constitutional security registries (ARCH-SECURITY-001 §17).
+
+    Reused verbatim from the constitution; no eighth registry is introduced
+    (determination §8). Each is record-only and non-enacting (RG-02).
+    """
+
+    SECURITY = "security-registry"
+    IDENTITY = "identity-registry"
+    THREAT = "threat-registry"
+    RISK = "risk-registry"
+    EVIDENCE = "evidence-registry"
+    CERTIFICATION = "certification-registry"
+    TRUST = "trust-registry"
+
+
+#: Backward-traceability: each registry's constitutional source + role (§17; §8 table).
+REGISTRY_SOURCE: dict[RegistryKind, str] = {
+    RegistryKind.SECURITY: "ARCH-SECURITY-001 §17 — security assets/controls/policies",
+    RegistryKind.IDENTITY: "ARCH-SECURITY-001 §17/§4 — identity/assurance (view over L7)",
+    RegistryKind.THREAT: "ARCH-SECURITY-001 §17/§11 — threat models, correlated findings",
+    RegistryKind.RISK: "ARCH-SECURITY-001 §17 — risk classifications, exception roll-ups",
+    RegistryKind.EVIDENCE: "ARCH-SECURITY-001 §17/§14 — pentest/compliance/audit evidence",
+    RegistryKind.CERTIFICATION: "ARCH-SECURITY-001 §17/§18 — security certification records",
+    RegistryKind.TRUST: "ARCH-SECURITY-001 §17/§7 — trust boundaries/anchors/chains",
+}
+
+
+def all_registry_kinds() -> tuple[RegistryKind, ...]:
+    """Return every registry kind in stable declaration order."""
+    return tuple(RegistryKind)
+
+
+_SECURITY_REGISTRY_CONTRACT_NAMES: tuple[tuple[str, str], ...] = (
+    (
+        "security.registry.record",
+        "Append an attributed, timestamped record into a §17 registry (never enacts).",
+    ),
+    (
+        "security.registry.query",
+        "Query a §17 registry by kind / record type / subject / reference (record-only).",
+    ),
+    (
+        "security.registry.evidence",
+        "Deterministic, content-addressed registry evidence over all seven registries.",
+    ),
+)
+
+#: Immutable references to the published SEC-REG contracts (name + version).
+SECURITY_REGISTRY_CONTRACTS: tuple[ContractRef, ...] = tuple(
+    ContractRef(name, SECURITY_REGISTRY_CONTRACT_VERSION)
+    for name, _ in _SECURITY_REGISTRY_CONTRACT_NAMES
+)
+
+
+def security_registry_contract(name: str, description: str = "") -> Contract:
+    """Build a versioned SEC-REG :class:`Contract` at the registry contract version."""
+    try:
+        return platform_contract(name, SECURITY_REGISTRY_CONTRACT_VERSION, description)
+    except PlatformContractError as exc:  # normalise into the security taxonomy
+        raise SecurityContractError(str(exc), name=name) from exc
+
+
+def default_security_registry_contracts() -> tuple[Contract, ...]:
+    """The published SEC-REG contracts as concrete :class:`Contract` objects."""
+    return tuple(
+        security_registry_contract(name, description)
+        for name, description in _SECURITY_REGISTRY_CONTRACT_NAMES
+    )
+
+
 __all__ = [
     "SECURITY_CLASSIFICATION_CONTRACT_VERSION",
     "ClassificationKind",
@@ -385,4 +469,12 @@ __all__ = [
     "SECURITY_INTELLIGENCE_CONTRACTS",
     "security_intelligence_contract",
     "default_security_intelligence_contracts",
+    # SEC-REG
+    "SECURITY_REGISTRY_CONTRACT_VERSION",
+    "RegistryKind",
+    "REGISTRY_SOURCE",
+    "all_registry_kinds",
+    "SECURITY_REGISTRY_CONTRACTS",
+    "security_registry_contract",
+    "default_security_registry_contracts",
 ]

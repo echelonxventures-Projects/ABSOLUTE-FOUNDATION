@@ -22,8 +22,13 @@ findings and stores **no** secret value (SEC-04 / RR-07; UKB-ADV-005 §6). Neith
 **ever** authorizes, ratifies, enacts, governs, overrides, or escalates authority
 (RG-02 / AR-04).
 
-The remaining Security Runtime sub-capabilities (SEC-REG / SEC-OBS / SEC-CERT /
-SEC-ZONE) are later, separately-authorized phases and are **not** present.
+The remaining Security Runtime sub-capabilities (SEC-OBS / SEC-CERT / SEC-ZONE) are
+later, separately-authorized phases and are **not** present.
+
+Phase 3 — **SEC-REG (Security Registry Runtime)** — realizes the seven constitutional
+§17 registries (Security · Identity · Threat · Risk · Evidence · Certification ·
+Trust) as append-only, record-only, attributed, queryable stores that never ratify or
+enact (RG-02 / RG-05); see :mod:`platform.security.registries`.
 
 Deliverables (SEC-CLASS + SEC-INTEL):
     * **errors** — the ``EC2-SEC-*`` error taxonomy over ``PlatformError``.
@@ -51,8 +56,10 @@ from __future__ import annotations
 from platform.security.bootstrap import (
     SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT,
     SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT,
+    SECURITY_REGISTRY_BOOTSTRAP_EVENT,
     bootstrap_security_classification,
     bootstrap_security_intelligence,
+    bootstrap_security_registry,
 )
 from platform.security.classification import (
     ClassificationLedger,
@@ -62,40 +69,50 @@ from platform.security.contracts import (
     BLOCKING_SEVERITIES,
     L7_BOUND_KINDS,
     OPEN_FINDING_STATES,
+    REGISTRY_SOURCE,
     SECURITY_CLASSIFICATION_CONTRACT_VERSION,
     SECURITY_CLASSIFICATION_CONTRACTS,
     SECURITY_INTELLIGENCE_CONTRACT_VERSION,
     SECURITY_INTELLIGENCE_CONTRACTS,
+    SECURITY_REGISTRY_CONTRACT_VERSION,
+    SECURITY_REGISTRY_CONTRACTS,
     SUBJECT_LAYER_KINDS,
     SUBJECT_LAYER_SOURCE,
     ClassificationKind,
     EnforcementReference,
     FindingKind,
     FindingState,
+    RegistryKind,
     RollupState,
     Severity,
     SubjectLayer,
     all_classification_kinds,
     all_finding_kinds,
     all_finding_states,
+    all_registry_kinds,
     all_severities,
     all_subject_layers,
     default_security_classification_contracts,
     default_security_intelligence_contracts,
+    default_security_registry_contracts,
     security_classification_contract,
     security_intelligence_contract,
+    security_registry_contract,
 )
 from platform.security.errors import (
     ClassificationBindingError,
     ClassificationValidationError,
     EnforcementReferenceError,
     FindingValidationError,
+    RegistryEntryError,
+    RegistryValidationError,
     SecretLeakError,
     SecurityBootstrapError,
     SecurityClassificationError,
     SecurityContractError,
     SecurityError,
     SecurityFindingError,
+    SecurityRegistryError,
     SecurityRollupError,
 )
 from platform.security.intelligence import (
@@ -110,6 +127,15 @@ from platform.security.intelligence import (
     build_security_intelligence_service,
     compute_rollup,
     scan_for_secret,
+)
+from platform.security.registries import (
+    REGISTRY_RECORDED_EVENT,
+    AppendOnlyRegistry,
+    RegistryEntry,
+    SecurityRegistryEvidence,
+    SecurityRegistryService,
+    SecurityRegistrySet,
+    build_security_registry_service,
 )
 from platform.security.service import (
     CLASSIFICATION_RECORDED_EVENT,
@@ -145,6 +171,14 @@ __all__ = [
     "all_finding_states",
     "security_intelligence_contract",
     "default_security_intelligence_contracts",
+    # SEC-REG
+    "SECURITY_REGISTRY_CONTRACT_VERSION",
+    "SECURITY_REGISTRY_CONTRACTS",
+    "RegistryKind",
+    "REGISTRY_SOURCE",
+    "all_registry_kinds",
+    "security_registry_contract",
+    "default_security_registry_contracts",
     # classification
     "SecurityClassification",
     "ClassificationLedger",
@@ -160,6 +194,14 @@ __all__ = [
     "SecurityIntelligenceEvidence",
     "SecurityIntelligenceService",
     "build_security_intelligence_service",
+    # registries
+    "REGISTRY_RECORDED_EVENT",
+    "RegistryEntry",
+    "AppendOnlyRegistry",
+    "SecurityRegistrySet",
+    "SecurityRegistryEvidence",
+    "SecurityRegistryService",
+    "build_security_registry_service",
     # service
     "CLASSIFICATION_RECORDED_EVENT",
     "SecurityClassificationEvidence",
@@ -170,6 +212,8 @@ __all__ = [
     "bootstrap_security_classification",
     "SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT",
     "bootstrap_security_intelligence",
+    "SECURITY_REGISTRY_BOOTSTRAP_EVENT",
+    "bootstrap_security_registry",
     # errors
     "SecurityError",
     "SecurityClassificationError",
@@ -182,4 +226,7 @@ __all__ = [
     "FindingValidationError",
     "SecretLeakError",
     "SecurityRollupError",
+    "SecurityRegistryError",
+    "RegistryEntryError",
+    "RegistryValidationError",
 ]

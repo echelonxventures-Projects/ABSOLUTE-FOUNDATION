@@ -7,10 +7,10 @@ category-prefixed ``code`` (``EC2-SEC-*``) and structured, non-secret ``context`
 failures are auditable (PL-02, IP-12) and machine-consumable.
 
 Scope note (mission boundary): this module ships the errors the implemented
-sub-capabilities need. Phase 1 (**SEC-CLASS**, Security Classification Runtime) and
-Phase 2 (**SEC-INTEL**, Security Intelligence Runtime) are present; no error for a
-not-yet-implemented sub-capability (SEC-REG / SEC-OBS / SEC-CERT / SEC-ZONE) is
-declared. Every error stores **no** secret value (SEC-04 / RR-07).
+sub-capabilities need. Phase 1 (**SEC-CLASS**), Phase 2 (**SEC-INTEL**), and Phase 3
+(**SEC-REG**, Security Registry Runtime) are present; no error for a not-yet-implemented
+sub-capability (SEC-OBS / SEC-CERT / SEC-ZONE) is declared. Every error stores **no**
+secret value (SEC-04 / RR-07).
 """
 
 from __future__ import annotations
@@ -94,6 +94,29 @@ class SecurityRollupError(SecurityError):
     code = "EC2-SEC-INTEL-004"
 
 
+# --------------------------------------------------------------------------- #
+# SEC-REG — Security Registry Runtime (Phase 3) error taxonomy.                #
+# --------------------------------------------------------------------------- #
+
+
+class SecurityRegistryError(SecurityError):
+    """A security registry operation is malformed or violates non-enactment (RG-02)."""
+
+    code = "EC2-SEC-REG-001"
+
+
+class RegistryEntryError(SecurityError):
+    """A registry entry is malformed (untyped / unattributed / not timestamped; RG-05)."""
+
+    code = "EC2-SEC-REG-002"
+
+
+class RegistryValidationError(SecurityError):
+    """A registry entry failed meta-validity (typed / identified / attributed / non-enacting)."""
+
+    code = "EC2-SEC-REG-003"
+
+
 __all__ = [
     "SecurityError",
     "SecurityClassificationError",
@@ -107,4 +130,8 @@ __all__ = [
     "FindingValidationError",
     "SecretLeakError",
     "SecurityRollupError",
+    # SEC-REG
+    "SecurityRegistryError",
+    "RegistryEntryError",
+    "RegistryValidationError",
 ]

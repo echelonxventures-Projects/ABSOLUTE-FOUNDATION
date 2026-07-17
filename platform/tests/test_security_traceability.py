@@ -123,3 +123,23 @@ def test_finding_traces_backward_to_the_schema_and_forward_to_affected_refs():
     trace = service.trace(f.finding_id)
     assert "finding.schema.json" in trace["backward"]["source_ref"]
     assert trace["affects"] == ["UCOS-SVC-000001"]
+
+
+def test_determination_authorizes_sec_reg():
+    text = _DETERMINATION.read_text(encoding="utf-8")
+    assert "SEC-REG" in text
+    assert "Security Registry Runtime" in text
+
+
+def test_registry_entry_traces_backward_to_its_constitutional_source():
+    from platform.security.contracts import RegistryKind
+    from platform.security.registries import build_security_registry_service
+
+    service = build_security_registry_service()
+    e = service.record(
+        RegistryKind.TRUST, "trust-anchor", "UCOS-INF-000001",
+        recorded_by="UCOS-PRIN-000001", recorded_at=1, refs=("UCOS-SFND-1",),
+    )
+    trace = service.trace(RegistryKind.TRUST, e.entry_id)
+    assert "§17" in trace["backward"]["source_ref"]
+    assert trace["refs"] == ["UCOS-SFND-1"]

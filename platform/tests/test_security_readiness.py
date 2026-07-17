@@ -59,10 +59,9 @@ def test_evidence_is_deterministic_across_identical_runs():
 
 
 def test_only_unimplemented_phase_modules_are_absent():
-    # Phase discipline: SEC-CLASS (Phase 1) and SEC-INTEL (Phase 2) are present; the
+    # Phase discipline: SEC-CLASS (1), SEC-INTEL (2), SEC-REG (3) are present; the
     # not-yet-authorized sub-capability modules are absent.
     forbidden = {
-        "registries.py",
         "observability.py",
         "zones.py",
         "certification.py",
@@ -79,10 +78,26 @@ def test_expected_modules_are_present():
         "classification.py",
         "service.py",
         "intelligence.py",
+        "registries.py",
         "bootstrap.py",
     }
     present = {p.name for p in _SECURITY_PKG.glob("*.py")}
     assert expected.issubset(present)
+
+
+def test_registry_runtime_reuses_certified_foundation_hashing():
+    from platform.security import registries as registries_module
+
+    assert registries_module.content_hash.__module__ == "platform.foundation.contracts"
+
+
+def test_registry_set_introduces_no_eighth_registry_and_no_enactment():
+    from platform.security.registries import SecurityRegistrySet, build_security_registry_service
+
+    assert len(SecurityRegistrySet().kinds) == 7
+    service = build_security_registry_service()
+    for forbidden in ("authorize", "grant", "ratify", "enact", "revoke", "override", "escalate"):
+        assert not hasattr(service, forbidden)
 
 
 def test_intelligence_reuses_certified_foundation_hashing():

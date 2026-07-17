@@ -11,13 +11,16 @@ deterministically:
     * :func:`bootstrap_security_intelligence` — **SEC-INTEL** (Phase 2): builds the
       record-only intelligence runtime bound to the context event bus; publishes the
       SEC-INTEL contracts; emits ``security.intelligence.bootstrap.completed``.
+    * :func:`bootstrap_security_registry` — **SEC-REG** (Phase 3): builds the seven
+      §17 record-only registries bound to the context event bus; publishes the
+      SEC-REG contracts; emits ``security.registry.bootstrap.completed``.
 
 Each composition binds its service to the context event bus so every recorded action
 is a governed event the L8 Observability Layer can audit (PC-16).
 
-Scope guardrail: these compose **SEC-CLASS and SEC-INTEL only**. They start no server,
-open no socket, render no UI, write nothing to the certified corpus (DP-03), and
-implement no not-yet-authorized sub-capability (SEC-REG / SEC-OBS / SEC-CERT /
+Scope guardrail: these compose **SEC-CLASS, SEC-INTEL, and SEC-REG only**. They start
+no server, open no socket, render no UI, write nothing to the certified corpus
+(DP-03), and implement no not-yet-authorized sub-capability (SEC-OBS / SEC-CERT /
 SEC-ZONE). They authorize, ratify, and enact nothing (RG-02 / AR-04).
 """
 
@@ -28,13 +31,19 @@ from platform.identity.service import AuthorizationService, bootstrap_identity
 from platform.security.contracts import (
     SECURITY_CLASSIFICATION_CONTRACTS,
     SECURITY_INTELLIGENCE_CONTRACTS,
+    SECURITY_REGISTRY_CONTRACTS,
     default_security_classification_contracts,
     default_security_intelligence_contracts,
+    default_security_registry_contracts,
 )
 from platform.security.errors import SecurityBootstrapError
 from platform.security.intelligence import (
     SecurityIntelligenceService,
     build_security_intelligence_service,
+)
+from platform.security.registries import (
+    SecurityRegistryService,
+    build_security_registry_service,
 )
 from platform.security.service import (
     SecurityClassificationService,
@@ -47,6 +56,9 @@ SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT = "security.classification.bootstrap.com
 
 #: The event emitted when the Security Intelligence Runtime is composed.
 SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT = "security.intelligence.bootstrap.completed"
+
+#: The event emitted when the Security Registry Runtime is composed.
+SECURITY_REGISTRY_BOOTSTRAP_EVENT = "security.registry.bootstrap.completed"
 
 
 def bootstrap_security_classification(
@@ -156,9 +168,63 @@ def bootstrap_security_intelligence(
     return service
 
 
+def bootstrap_security_registry(
+    context: Any,
+) -> SecurityRegistryService:
+    """Compose the Security Registry Runtime onto a :class:`PlatformContext`.
+
+    Builds the :class:`~platform.security.registries.SecurityRegistryService` bound to
+    the context event bus (so every recorded registry entry is a governed event the L8
+    Observability Layer can audit), publishes the SEC-REG contracts into the foundation
+    service registry (contract-first, PL-05), and emits a deterministic
+    ``security.registry.bootstrap.completed`` event. The seven §17 registries record
+    only; they ratify and enact nothing (RG-02 / AR-04), store no secret value
+    (SEC-04 / RR-07), and write nothing to the corpus (DP-03).
+
+    Raises:
+        SecurityBootstrapError: on any composition failure (fail-closed).
+    """
+    try:
+        service = build_security_registry_service(events=context.events)
+
+        contracts = {c.name: c for c in default_security_registry_contracts()}
+        for ref in SECURITY_REGISTRY_CONTRACTS:
+            if ref.name in context.services:
+                continue
+            context.services.register(
+                ServiceDescriptor(
+                    name=ref.name,
+                    contract=contracts[ref.name],
+                    capabilities=("PC-02", "PC-16"),
+                    description=f"Security Registry Runtime service: {ref.name}.",
+                ),
+                provider=lambda svc=service: svc,
+            )
+    except SecurityBootstrapError:
+        raise
+    except Exception as exc:  # noqa: BLE001 — normalize into a fail-closed error
+        raise SecurityBootstrapError(
+            "security registry runtime bootstrap failed", detail=str(exc)
+        ) from exc
+
+    context.events.publish(
+        SECURITY_REGISTRY_BOOTSTRAP_EVENT,
+        source="platform.security.bootstrap",
+        subject=context.program_id,
+        payload={
+            "registry_contracts": [ref.name for ref in SECURITY_REGISTRY_CONTRACTS],
+            "registry_count": len(service.registries.kinds),
+            "set_fingerprint": service.registries.fingerprint(),
+        },
+    )
+    return service
+
+
 __all__ = [
     "SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT",
     "bootstrap_security_classification",
     "SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT",
     "bootstrap_security_intelligence",
+    "SECURITY_REGISTRY_BOOTSTRAP_EVENT",
+    "bootstrap_security_registry",
 ]
