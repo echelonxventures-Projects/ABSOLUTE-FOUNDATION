@@ -6129,6 +6129,105 @@
       "violations": [],
       "result": "PASS",
       "seq": 118
+    },
+    {
+      "generated_at": "2026-07-17T13:19:06+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 351,
+      "registered": 350,
+      "unregistered": [
+        "platform/certification/EC2-EPIC-011-DETERMINATION.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 119
+    },
+    {
+      "generated_at": "2026-07-17T13:19:08+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 351,
+      "registered": 351,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 120
+    },
+    {
+      "generated_at": "2026-07-17T13:19:50+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 352,
+      "registered": 351,
+      "unregistered": [
+        "platform/certification/EC2-EPIC-011-COMPLETION-REPORT.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 121
+    },
+    {
+      "generated_at": "2026-07-17T13:19:51+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 352,
+      "registered": 352,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 122
+    },
+    {
+      "generated_at": "2026-07-17T13:20:35+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 352,
+      "registered": 352,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 123
     }
   ]
 }

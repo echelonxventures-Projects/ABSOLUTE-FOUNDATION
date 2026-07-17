@@ -2457,9 +2457,23 @@
       "page_start": 5695,
       "page_count": 3,
       "first_seen": "2026-07-17T12:14:43+00:00"
+    },
+    "platform/certification/EC2-EPIC-011-DETERMINATION.md": {
+      "universal_id": "UCOS-PLT-000046",
+      "category": "PLT",
+      "page_start": 5698,
+      "page_count": 4,
+      "first_seen": "2026-07-17T13:19:07+00:00"
+    },
+    "platform/certification/EC2-EPIC-011-COMPLETION-REPORT.md": {
+      "universal_id": "UCOS-PLT-000047",
+      "category": "PLT",
+      "page_start": 5702,
+      "page_count": 2,
+      "first_seen": "2026-07-17T13:19:50+00:00"
     }
   },
-  "page_cursor": 5697,
+  "page_cursor": 5703,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -2478,7 +2492,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 45,
+    "PLT": 47,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -6397,6 +6411,28 @@
         "status": "ACTIVE",
         "path": "VERIFICATION-RUNBOOK.md",
         "name": "UCOS Ω∞ — Verification Runbook"
+      }
+    ],
+    "UCOS-PLT-000046": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T13:19:07+00:00",
+        "content_hash": "b2442d810a1608162caa926f0a663b2cce2bd93b809084c3875832102680bdd3",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/certification/EC2-EPIC-011-DETERMINATION.md",
+        "name": "EC2-EPIC-011-DETERMINATION — Certification Console & Ledger"
+      }
+    ],
+    "UCOS-PLT-000047": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T13:19:50+00:00",
+        "content_hash": "58017b383c2e5ac54e540bf99dcdda385d24d7d9b6ac2da65a3163fc5771581f",
+        "version": "1.0.0",
+        "status": "COMPLETE",
+        "path": "platform/certification/EC2-EPIC-011-COMPLETION-REPORT.md",
+        "name": "EC2-EPIC-011 — Certification Console & Ledger — Completion Report"
       }
     ]
   }
