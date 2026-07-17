@@ -39,8 +39,12 @@ a Gap Report on any missing facet), and rolls recorded certifications into a
 deterministic program certification; record-only, evidence-backed, non-constitutive
 (STATUS-001 §2); see :mod:`platform.security.certification`.
 
-The remaining Security Runtime sub-capability (SEC-ZONE) is a later,
-separately-authorized phase and is **not** present.
+Phase 6 — **SEC-ZONE (Zone & Control Posture Runtime)** — records the posture of the
+UMB-015 five protection zones and seven controls (policy-configured, not compiled
+ceilings) and evaluates the zone mutation-direction invariant (UMB-INV-01); record-only;
+see :mod:`platform.security.zones`.
+
+All six record-only Security Runtime sub-capabilities are now present.
 
 Deliverables (SEC-CLASS + SEC-INTEL):
     * **errors** — the ``EC2-SEC-*`` error taxonomy over ``PlatformError``.
@@ -71,11 +75,13 @@ from platform.security.bootstrap import (
     SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT,
     SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT,
     SECURITY_REGISTRY_BOOTSTRAP_EVENT,
+    SECURITY_ZONE_BOOTSTRAP_EVENT,
     bootstrap_security_certification,
     bootstrap_security_classification,
     bootstrap_security_intelligence,
     bootstrap_security_observability,
     bootstrap_security_registry,
+    bootstrap_security_zone,
 )
 from platform.security.certification import (
     CERTIFICATION_RECORDED_EVENT,
@@ -95,6 +101,8 @@ from platform.security.classification import (
 )
 from platform.security.contracts import (
     BLOCKING_SEVERITIES,
+    CANON_ZONES,
+    CONTROL_MECHANISM,
     L7_BOUND_KINDS,
     OPEN_FINDING_STATES,
     REGISTRY_SOURCE,
@@ -110,8 +118,13 @@ from platform.security.contracts import (
     SECURITY_REGISTRY_CONTRACT_VERSION,
     SECURITY_REGISTRY_CONTRACTS,
     SECURITY_SIGNAL_DIMENSION,
+    SECURITY_ZONE_CONTRACT_VERSION,
+    SECURITY_ZONE_CONTRACTS,
     SUBJECT_LAYER_KINDS,
     SUBJECT_LAYER_SOURCE,
+    ZONE_DEFAULT_POSTURE,
+    ZONE_LEVEL,
+    ZONE_NAME,
     CertificationClass,
     CertificationDecision,
     ClassificationKind,
@@ -121,6 +134,8 @@ from platform.security.contracts import (
     FindingState,
     RegistryKind,
     RollupState,
+    SecurityControl,
+    SecurityZone,
     Severity,
     SubjectLayer,
     all_certification_classes,
@@ -129,6 +144,8 @@ from platform.security.contracts import (
     all_finding_kinds,
     all_finding_states,
     all_registry_kinds,
+    all_security_controls,
+    all_security_zones,
     all_severities,
     all_subject_layers,
     default_security_certification_contracts,
@@ -136,11 +153,13 @@ from platform.security.contracts import (
     default_security_intelligence_contracts,
     default_security_observability_contracts,
     default_security_registry_contracts,
+    default_security_zone_contracts,
     security_certification_contract,
     security_classification_contract,
     security_intelligence_contract,
     security_observability_contract,
     security_registry_contract,
+    security_zone_contract,
 )
 from platform.security.errors import (
     CertificationGapError,
@@ -162,7 +181,10 @@ from platform.security.errors import (
     SecurityRegistryError,
     SecurityRollupError,
     SecuritySignalError,
+    SecurityZoneError,
     SignalTraceabilityError,
+    ZoneMutationError,
+    ZonePostureError,
 )
 from platform.security.intelligence import (
     FINDING_RECORDED_EVENT,
@@ -201,6 +223,17 @@ from platform.security.service import (
     SecurityClassificationEvidence,
     SecurityClassificationService,
     build_security_classification_service,
+)
+from platform.security.zones import (
+    POSTURE_RECORDED_EVENT,
+    POSTURE_TARGET_CONTROL,
+    POSTURE_TARGET_ZONE,
+    PostureLedger,
+    PostureRecord,
+    SecurityZoneEvidence,
+    SecurityZoneService,
+    build_security_zone_service,
+    zone_may_mutate,
 )
 
 __all__ = [
@@ -255,6 +288,20 @@ __all__ = [
     "all_control_facets",
     "security_certification_contract",
     "default_security_certification_contracts",
+    # SEC-ZONE
+    "SECURITY_ZONE_CONTRACT_VERSION",
+    "SECURITY_ZONE_CONTRACTS",
+    "SecurityZone",
+    "SecurityControl",
+    "ZONE_LEVEL",
+    "ZONE_NAME",
+    "ZONE_DEFAULT_POSTURE",
+    "CANON_ZONES",
+    "CONTROL_MECHANISM",
+    "all_security_zones",
+    "all_security_controls",
+    "security_zone_contract",
+    "default_security_zone_contracts",
     # classification
     "SecurityClassification",
     "ClassificationLedger",
@@ -298,6 +345,16 @@ __all__ = [
     "SecurityCertificationEvidence",
     "SecurityCertificationService",
     "build_security_certification_service",
+    # zones
+    "POSTURE_RECORDED_EVENT",
+    "POSTURE_TARGET_ZONE",
+    "POSTURE_TARGET_CONTROL",
+    "zone_may_mutate",
+    "PostureRecord",
+    "PostureLedger",
+    "SecurityZoneEvidence",
+    "SecurityZoneService",
+    "build_security_zone_service",
     # service
     "CLASSIFICATION_RECORDED_EVENT",
     "SecurityClassificationEvidence",
@@ -314,6 +371,8 @@ __all__ = [
     "bootstrap_security_observability",
     "SECURITY_CERTIFICATION_BOOTSTRAP_EVENT",
     "bootstrap_security_certification",
+    "SECURITY_ZONE_BOOTSTRAP_EVENT",
+    "bootstrap_security_zone",
     # errors
     "SecurityError",
     "SecurityClassificationError",
@@ -335,4 +394,7 @@ __all__ = [
     "SecurityCertificationError",
     "CertificationValidationError",
     "CertificationGapError",
+    "SecurityZoneError",
+    "ZonePostureError",
+    "ZoneMutationError",
 ]

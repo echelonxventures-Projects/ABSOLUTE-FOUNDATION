@@ -597,6 +597,134 @@ def default_security_certification_contracts() -> tuple[Contract, ...]:
     )
 
 
+# --------------------------------------------------------------------------- #
+# SEC-ZONE — Zone & Control Posture vocabulary + contract surface (Phase 6).   #
+#                                                                              #
+# The UMB-015 five-zone / seven-control model. Zones and controls are POLICY   #
+# CONFIGURATION, not compiled ceilings (UMB-015 §4); a new zone/control is      #
+# incorporable additively. Posture evaluation is record-only (determination    #
+# §6.1). Security state is DOMAIN-D and never projected (UMB-015 §5).           #
+# --------------------------------------------------------------------------- #
+
+#: The semantic version of the Security Zone contract surface (AR-03/PL-05).
+SECURITY_ZONE_CONTRACT_VERSION = "1.0.0"
+
+
+class SecurityZone(str, Enum):
+    """The five UMB-015 protection zones (most → least privileged)."""
+
+    CORE = "ZONE-0"
+    GOVERNANCE = "ZONE-1"
+    ENGINEERING = "ZONE-2"
+    OPERATIONS = "ZONE-3"
+    CONSUMPTION = "ZONE-4"
+
+
+#: Zone privilege level (0 = most privileged / innermost; UMB-015 §1). Data-only.
+ZONE_LEVEL: dict[SecurityZone, int] = {
+    SecurityZone.CORE: 0,
+    SecurityZone.GOVERNANCE: 1,
+    SecurityZone.ENGINEERING: 2,
+    SecurityZone.OPERATIONS: 3,
+    SecurityZone.CONSUMPTION: 4,
+}
+
+#: Human-readable zone names (UMB-015 §1 table).
+ZONE_NAME: dict[SecurityZone, str] = {
+    SecurityZone.CORE: "UCOS CORE",
+    SecurityZone.GOVERNANCE: "GOVERNANCE",
+    SecurityZone.ENGINEERING: "ENGINEERING",
+    SecurityZone.OPERATIONS: "OPERATIONS",
+    SecurityZone.CONSUMPTION: "CONSUMPTION",
+}
+
+#: Default posture per zone (UMB-015 §1 table). Policy configuration, not a ceiling.
+ZONE_DEFAULT_POSTURE: dict[SecurityZone, str] = {
+    SecurityZone.CORE: "maximally protected; append-only; write only via transaction T",
+    SecurityZone.GOVERNANCE: "governed write; append-only; authority-neutral",
+    SecurityZone.ENGINEERING: "registered write via T; reviewed",
+    SecurityZone.OPERATIONS: "append-only signal write; connectors read-only against sources",
+    SecurityZone.CONSUMPTION: "read/derive only; never mutates canon",
+}
+
+#: The canonical canon zones that ZONE-3/ZONE-4 may never mutate (UMB-015 §1; UMB-INV-01).
+CANON_ZONES: frozenset[SecurityZone] = frozenset(
+    {SecurityZone.CORE, SecurityZone.GOVERNANCE, SecurityZone.ENGINEERING}
+)
+
+
+class SecurityControl(str, Enum):
+    """The seven UMB-015 controls (§2)."""
+
+    ACCESS = "access-control"
+    VISIBILITY = "visibility-control"
+    IDENTITY = "identity-control"
+    SYNCHRONIZATION = "synchronization-control"
+    PUBLICATION = "publication-control"
+    KNOWLEDGE = "knowledge-control"
+    AUDIT = "audit-control"
+
+
+#: The mechanism each control realizes (UMB-015 §2 table). Data-only.
+CONTROL_MECHANISM: dict[SecurityControl, str] = {
+    SecurityControl.ACCESS: "zone membership + write path (only T writes registers)",
+    SecurityControl.VISIBILITY: "projection scope per zone; sensitive facets by handle (RR-07)",
+    SecurityControl.IDENTITY: "every actor/change/signal attributed (UMB-003)",
+    SecurityControl.SYNCHRONIZATION: "three gates make create=register unskippable (REG-AUTO-001)",
+    SecurityControl.PUBLICATION: "exports dynamic, non-authoritative, source as_of (UMB-011)",
+    SecurityControl.KNOWLEDGE: "append-only; correction supersedes, never edits (UCI-001 CP-3)",
+    SecurityControl.AUDIT: "append-only signal + ID ledger + git = immutable audit trail",
+}
+
+
+def all_security_zones() -> tuple[SecurityZone, ...]:
+    """Return every security zone in stable (privilege) order."""
+    return tuple(SecurityZone)
+
+
+def all_security_controls() -> tuple[SecurityControl, ...]:
+    """Return every security control in stable declaration order."""
+    return tuple(SecurityControl)
+
+
+_SECURITY_ZONE_CONTRACT_NAMES: tuple[tuple[str, str], ...] = (
+    (
+        "security.zone.assess",
+        "Record an evaluative zone/control posture (policy-configured; record-only).",
+    ),
+    (
+        "security.zone.mutation",
+        "Evaluate a zone→zone mutation direction against UMB-INV-01 (decidable; enacts nothing).",
+    ),
+    (
+        "security.zone.evidence",
+        "Deterministic, content-addressed zone/control posture evidence (record-only).",
+    ),
+)
+
+#: Immutable references to the published SEC-ZONE contracts (name + version).
+SECURITY_ZONE_CONTRACTS: tuple[ContractRef, ...] = tuple(
+    ContractRef(name, SECURITY_ZONE_CONTRACT_VERSION)
+    for name, _ in _SECURITY_ZONE_CONTRACT_NAMES
+)
+
+
+def security_zone_contract(name: str, description: str = "") -> Contract:
+    """Build a versioned SEC-ZONE :class:`Contract` at the zone contract version."""
+    try:
+        return platform_contract(name, SECURITY_ZONE_CONTRACT_VERSION, description)
+    except PlatformContractError as exc:  # normalise into the security taxonomy
+        raise SecurityContractError(str(exc), name=name) from exc
+
+
+def default_security_zone_contracts() -> tuple[Contract, ...]:
+    """The published SEC-ZONE contracts as concrete :class:`Contract` objects."""
+    return tuple(
+        security_zone_contract(name, description)
+        for name, description in _SECURITY_ZONE_CONTRACT_NAMES
+    )
+
+
 __all__ = [
     "SECURITY_CLASSIFICATION_CONTRACT_VERSION",
     "ClassificationKind",
@@ -650,4 +778,18 @@ __all__ = [
     "SECURITY_CERTIFICATION_CONTRACTS",
     "security_certification_contract",
     "default_security_certification_contracts",
+    # SEC-ZONE
+    "SECURITY_ZONE_CONTRACT_VERSION",
+    "SecurityZone",
+    "ZONE_LEVEL",
+    "ZONE_NAME",
+    "ZONE_DEFAULT_POSTURE",
+    "CANON_ZONES",
+    "SecurityControl",
+    "CONTROL_MECHANISM",
+    "all_security_zones",
+    "all_security_controls",
+    "SECURITY_ZONE_CONTRACTS",
+    "security_zone_contract",
+    "default_security_zone_contracts",
 ]

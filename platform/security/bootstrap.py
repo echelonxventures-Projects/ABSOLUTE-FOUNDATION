@@ -21,14 +21,17 @@ deterministically:
     * :func:`bootstrap_security_certification` — **SEC-CERT** (Phase 5): builds the
       record-only §18 certification runtime bound to the context event bus; publishes
       the SEC-CERT contracts; emits ``security.certification.bootstrap.completed``.
+    * :func:`bootstrap_security_zone` — **SEC-ZONE** (Phase 6): builds the record-only
+      UMB-015 five-zone / seven-control posture runtime bound to the context event bus;
+      publishes the SEC-ZONE contracts; emits ``security.zone.bootstrap.completed``.
 
 Each composition binds its service to the context event bus so every recorded action
 is a governed event the L8 Observability Layer can audit (PC-16).
 
-Scope guardrail: these compose **SEC-CLASS, SEC-INTEL, SEC-REG, SEC-OBS, and SEC-CERT
-only**. They start no server, open no socket, render no UI, write nothing to the
-certified corpus (DP-03), and implement no not-yet-authorized sub-capability
-(SEC-ZONE). They authorize, ratify, and enact nothing (RG-02 / AR-04).
+Scope guardrail: these compose the six record-only Security Runtime sub-capabilities
+(**SEC-CLASS, SEC-INTEL, SEC-REG, SEC-OBS, SEC-CERT, SEC-ZONE**). They start no server,
+open no socket, render no UI, write nothing to the certified corpus (DP-03). They
+authorize, ratify, and enact nothing (RG-02 / AR-04).
 """
 
 from __future__ import annotations
@@ -46,11 +49,13 @@ from platform.security.contracts import (
     SECURITY_INTELLIGENCE_CONTRACTS,
     SECURITY_OBSERVABILITY_CONTRACTS,
     SECURITY_REGISTRY_CONTRACTS,
+    SECURITY_ZONE_CONTRACTS,
     default_security_certification_contracts,
     default_security_classification_contracts,
     default_security_intelligence_contracts,
     default_security_observability_contracts,
     default_security_registry_contracts,
+    default_security_zone_contracts,
 )
 from platform.security.errors import SecurityBootstrapError
 from platform.security.intelligence import (
@@ -69,6 +74,10 @@ from platform.security.service import (
     SecurityClassificationService,
     build_security_classification_service,
 )
+from platform.security.zones import (
+    SecurityZoneService,
+    build_security_zone_service,
+)
 from typing import Any
 
 #: The event emitted when the Security Classification Runtime is composed.
@@ -85,6 +94,9 @@ SECURITY_OBSERVABILITY_BOOTSTRAP_EVENT = "security.observability.bootstrap.compl
 
 #: The event emitted when the Security Certification Runtime is composed.
 SECURITY_CERTIFICATION_BOOTSTRAP_EVENT = "security.certification.bootstrap.completed"
+
+#: The event emitted when the Zone & Control Posture Runtime is composed.
+SECURITY_ZONE_BOOTSTRAP_EVENT = "security.zone.bootstrap.completed"
 
 
 def bootstrap_security_classification(
@@ -356,6 +368,59 @@ def bootstrap_security_certification(
     return service
 
 
+def bootstrap_security_zone(
+    context: Any,
+) -> SecurityZoneService:
+    """Compose the Zone & Control Posture Runtime onto a :class:`PlatformContext`.
+
+    Builds the :class:`~platform.security.zones.SecurityZoneService` bound to the
+    context event bus (so every recorded posture is a governed event the L8
+    Observability Layer can audit), publishes the SEC-ZONE contracts (contract-first,
+    PL-05), and emits a deterministic ``security.zone.bootstrap.completed`` event. Zones
+    and controls are policy configuration, not compiled ceilings (UMB-015 §4); posture
+    evaluation is record-only and authorizes/ratifies/enacts nothing (RG-02 / AR-04),
+    stores no secret (SEC-04 / RR-07), and writes nothing to the corpus (DP-03).
+
+    Raises:
+        SecurityBootstrapError: on any composition failure (fail-closed).
+    """
+    try:
+        service = build_security_zone_service(events=context.events)
+
+        contracts = {c.name: c for c in default_security_zone_contracts()}
+        for ref in SECURITY_ZONE_CONTRACTS:
+            if ref.name in context.services:
+                continue
+            context.services.register(
+                ServiceDescriptor(
+                    name=ref.name,
+                    contract=contracts[ref.name],
+                    capabilities=("PC-02", "PC-16"),
+                    description=f"Zone & Control Posture Runtime service: {ref.name}.",
+                ),
+                provider=lambda svc=service: svc,
+            )
+    except SecurityBootstrapError:
+        raise
+    except Exception as exc:  # noqa: BLE001 — normalize into a fail-closed error
+        raise SecurityBootstrapError(
+            "security zone runtime bootstrap failed", detail=str(exc)
+        ) from exc
+
+    context.events.publish(
+        SECURITY_ZONE_BOOTSTRAP_EVENT,
+        source="platform.security.bootstrap",
+        subject=context.program_id,
+        payload={
+            "zone_contracts": [ref.name for ref in SECURITY_ZONE_CONTRACTS],
+            "zone_count": len(service.zone_policies()),
+            "control_count": len(service.control_policies()),
+            "ledger_fingerprint": service.ledger.fingerprint(),
+        },
+    )
+    return service
+
+
 __all__ = [
     "SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT",
     "bootstrap_security_classification",
@@ -367,4 +432,6 @@ __all__ = [
     "bootstrap_security_observability",
     "SECURITY_CERTIFICATION_BOOTSTRAP_EVENT",
     "bootstrap_security_certification",
+    "SECURITY_ZONE_BOOTSTRAP_EVENT",
+    "bootstrap_security_zone",
 ]

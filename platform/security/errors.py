@@ -7,10 +7,9 @@ category-prefixed ``code`` (``EC2-SEC-*``) and structured, non-secret ``context`
 failures are auditable (PL-02, IP-12) and machine-consumable.
 
 Scope note (mission boundary): this module ships the errors the implemented
-sub-capabilities need. Phases 1–5 (**SEC-CLASS**, **SEC-INTEL**, **SEC-REG**,
-**SEC-OBS**, **SEC-CERT**) are present; no error for a not-yet-implemented
-sub-capability (SEC-ZONE) is declared. Every error stores **no** secret value
-(SEC-04 / RR-07).
+sub-capabilities need. All six sub-capabilities (**SEC-CLASS**, **SEC-INTEL**,
+**SEC-REG**, **SEC-OBS**, **SEC-CERT**, **SEC-ZONE**) are present. Every error stores
+**no** secret value (SEC-04 / RR-07).
 """
 
 from __future__ import annotations
@@ -163,6 +162,29 @@ class CertificationGapError(SecurityError):
     code = "EC2-SEC-CERT-003"
 
 
+# --------------------------------------------------------------------------- #
+# SEC-ZONE — Zone & Control Posture Runtime (Phase 6) error taxonomy.          #
+# --------------------------------------------------------------------------- #
+
+
+class SecurityZoneError(SecurityError):
+    """A zone/control posture operation is malformed (fail-closed)."""
+
+    code = "EC2-SEC-ZONE-001"
+
+
+class ZonePostureError(SecurityError):
+    """A zone/control posture record is malformed or violates non-enactment."""
+
+    code = "EC2-SEC-ZONE-002"
+
+
+class ZoneMutationError(SecurityError):
+    """A mutation-direction evaluation is malformed (UMB-015 §1 / UMB-INV-01)."""
+
+    code = "EC2-SEC-ZONE-003"
+
+
 __all__ = [
     "SecurityError",
     "SecurityClassificationError",
@@ -188,4 +210,8 @@ __all__ = [
     "SecurityCertificationError",
     "CertificationValidationError",
     "CertificationGapError",
+    # SEC-ZONE
+    "SecurityZoneError",
+    "ZonePostureError",
+    "ZoneMutationError",
 ]

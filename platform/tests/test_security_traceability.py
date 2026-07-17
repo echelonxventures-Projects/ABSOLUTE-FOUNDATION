@@ -184,3 +184,23 @@ def test_certification_traces_backward_to_section_18_and_cites_evidence():
     trace = service.trace(c.certification_id)
     assert trace["backward"]["source_ref"] == "ARCH-SECURITY-001 §18"
     assert trace["evidence_refs"] == ["UCOS-SIEV-1"]
+
+
+def test_determination_authorizes_sec_zone():
+    text = _DETERMINATION.read_text(encoding="utf-8")
+    assert "SEC-ZONE" in text
+    assert "Zone & Control Posture Runtime" in text
+
+
+def test_zone_posture_traces_backward_to_umb_015():
+    from platform.security.contracts import RollupState, SecurityZone
+    from platform.security.zones import build_security_zone_service
+
+    service = build_security_zone_service()
+    p = service.assess_zone(
+        SecurityZone.CORE, RollupState.APPROVED, rationale="append-only via T",
+        evaluated_at=1, evidence_refs=("UCOS-SREG-1",),
+    )
+    trace = service.trace(p.posture_id)
+    assert trace["backward"]["source_ref"] == "UMB-015 §1"
+    assert trace["evidence_refs"] == ["UCOS-SREG-1"]

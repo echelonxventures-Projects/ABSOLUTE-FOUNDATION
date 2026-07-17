@@ -58,14 +58,23 @@ def test_evidence_is_deterministic_across_identical_runs():
     assert build_fingerprint() == build_fingerprint()
 
 
-def test_only_unimplemented_phase_modules_are_absent():
-    # Phase discipline: SEC-CLASS (1), SEC-INTEL (2), SEC-REG (3), SEC-OBS (4),
-    # SEC-CERT (5) are present; the not-yet-authorized module is absent.
-    forbidden = {
+def test_all_six_sub_capability_modules_are_present():
+    # Phase discipline: all six record-only sub-capabilities are now present.
+    expected = {
+        "__init__.py",
+        "errors.py",
+        "contracts.py",
+        "classification.py",
+        "service.py",
+        "intelligence.py",
+        "registries.py",
+        "observability.py",
+        "certification.py",
         "zones.py",
+        "bootstrap.py",
     }
     present = {p.name for p in _SECURITY_PKG.glob("*.py")}
-    assert not (forbidden & present), f"future-phase modules present: {forbidden & present}"
+    assert expected.issubset(present)
 
 
 def test_expected_modules_are_present():
@@ -79,10 +88,38 @@ def test_expected_modules_are_present():
         "registries.py",
         "observability.py",
         "certification.py",
+        "zones.py",
         "bootstrap.py",
     }
     present = {p.name for p in _SECURITY_PKG.glob("*.py")}
     assert expected.issubset(present)
+
+
+def test_zone_runtime_reuses_certified_foundation_hashing():
+    from platform.security import zones as zones_module
+
+    assert zones_module.content_hash.__module__ == "platform.foundation.contracts"
+
+
+def test_zones_and_controls_are_policy_configured_not_compiled_ceilings():
+    # UMB-015 §4: a free-form future zone/control is recordable additively.
+    from platform.security.contracts import RollupState
+    from platform.security.zones import POSTURE_TARGET_ZONE, build_security_zone_service
+
+    service = build_security_zone_service()
+    future = service.assess(
+        POSTURE_TARGET_ZONE, "ZONE-99-FUTURE", RollupState.IN_PROGRESS,
+        rationale="future security model", evaluated_at=1,
+    )
+    assert future.target == "ZONE-99-FUTURE"
+
+
+def test_zone_posture_service_introduces_no_enforcement():
+    from platform.security.zones import build_security_zone_service
+
+    service = build_security_zone_service()
+    for forbidden in ("authorize", "grant", "ratify", "enact", "revoke", "override", "escalate"):
+        assert not hasattr(service, forbidden)
 
 
 def test_certification_reuses_certified_foundation_hashing():
