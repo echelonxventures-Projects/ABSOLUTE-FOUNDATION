@@ -1,4 +1,4 @@
-"""EC2-CAP-SEC-001 / SEC-CLASS — Security Runtime error taxonomy (Phase 1).
+"""EC2-CAP-SEC-001 — Security Runtime error taxonomy.
 
 The Security Runtime **reuses** the EC-2 Platform Foundation error discipline
 (:class:`~platform.foundation.errors.PlatformError`) additively — it does not fork or
@@ -6,10 +6,10 @@ modify it. Every security error is rooted in :class:`SecurityError`, carries a s
 category-prefixed ``code`` (``EC2-SEC-*``) and structured, non-secret ``context`` so
 failures are auditable (PL-02, IP-12) and machine-consumable.
 
-Scope note (mission boundary): this module ships only the errors the **SEC-CLASS**
-(Security Classification Runtime) sub-capability needs. The base
-:class:`SecurityError` is defined here because SEC-CLASS requires it; no error for a
-future sub-capability (SEC-INTEL / SEC-REG / SEC-OBS / SEC-CERT / SEC-ZONE) is
+Scope note (mission boundary): this module ships the errors the implemented
+sub-capabilities need. Phase 1 (**SEC-CLASS**, Security Classification Runtime) and
+Phase 2 (**SEC-INTEL**, Security Intelligence Runtime) are present; no error for a
+not-yet-implemented sub-capability (SEC-REG / SEC-OBS / SEC-CERT / SEC-ZONE) is
 declared. Every error stores **no** secret value (SEC-04 / RR-07).
 """
 
@@ -55,9 +55,43 @@ class SecurityContractError(SecurityError):
 
 
 class SecurityBootstrapError(SecurityError):
-    """The Security Classification Runtime could not be composed (fail-closed)."""
+    """A Security Runtime sub-capability could not be composed (fail-closed)."""
 
     code = "EC2-SEC-BOOTSTRAP-001"
+
+
+# --------------------------------------------------------------------------- #
+# SEC-INTEL — Security Intelligence Runtime (Phase 2) error taxonomy.          #
+# --------------------------------------------------------------------------- #
+
+
+class SecurityFindingError(SecurityError):
+    """A security finding record is malformed or violates non-enforcement."""
+
+    code = "EC2-SEC-INTEL-001"
+
+
+class FindingValidationError(SecurityError):
+    """A finding failed meta-validity (typed / identified / non-enforcing / kind-consistent)."""
+
+    code = "EC2-SEC-INTEL-002"
+
+
+class SecretLeakError(SecurityError):
+    """A secret pattern was detected in an ingested field (SEC-04 / RR-07; UKB-ADV-005 §6).
+
+    Raised only by low-level ingest guards that must fail closed; the higher-level
+    intelligence service instead **records a SECRET-LEAK finding referencing location
+    only** and never stores the secret value.
+    """
+
+    code = "EC2-SEC-INTEL-003"
+
+
+class SecurityRollupError(SecurityError):
+    """The evidence-derived security roll-up could not be computed (fail-closed)."""
+
+    code = "EC2-SEC-INTEL-004"
 
 
 __all__ = [
@@ -68,4 +102,9 @@ __all__ = [
     "ClassificationValidationError",
     "SecurityContractError",
     "SecurityBootstrapError",
+    # SEC-INTEL
+    "SecurityFindingError",
+    "FindingValidationError",
+    "SecretLeakError",
+    "SecurityRollupError",
 ]

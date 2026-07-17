@@ -58,10 +58,10 @@ def test_evidence_is_deterministic_across_identical_runs():
     assert build_fingerprint() == build_fingerprint()
 
 
-def test_only_sec_class_modules_are_present():
-    # Phase discipline: no future sub-capability modules exist in the package.
+def test_only_unimplemented_phase_modules_are_absent():
+    # Phase discipline: SEC-CLASS (Phase 1) and SEC-INTEL (Phase 2) are present; the
+    # not-yet-authorized sub-capability modules are absent.
     forbidden = {
-        "intelligence.py",
         "registries.py",
         "observability.py",
         "zones.py",
@@ -71,17 +71,46 @@ def test_only_sec_class_modules_are_present():
     assert not (forbidden & present), f"future-phase modules present: {forbidden & present}"
 
 
-def test_expected_sec_class_modules_are_present():
+def test_expected_modules_are_present():
     expected = {
         "__init__.py",
         "errors.py",
         "contracts.py",
         "classification.py",
         "service.py",
+        "intelligence.py",
         "bootstrap.py",
     }
     present = {p.name for p in _SECURITY_PKG.glob("*.py")}
     assert expected.issubset(present)
+
+
+def test_intelligence_reuses_certified_foundation_hashing():
+    # SEC-INTEL reuses the foundation content hash — it defines no new hashing.
+    from platform.security import intelligence as intelligence_module
+
+    assert intelligence_module.content_hash.__module__ == "platform.foundation.contracts"
+
+
+def test_intelligence_evidence_is_deterministic_across_identical_runs():
+    from platform.security.contracts import FindingKind, Severity
+    from platform.security.intelligence import build_security_intelligence_service
+
+    def build_fingerprint() -> str:
+        service = build_security_intelligence_service()
+        service.record_finding(FindingKind.VULNERABILITY, "CVE", severity=Severity.CRITICAL)
+        service.record_finding(FindingKind.CONTROL, "AC-2")
+        return service.report(now=42).fingerprint()
+
+    assert build_fingerprint() == build_fingerprint()
+
+
+def test_intelligence_introduces_no_enforcement_or_authority():
+    from platform.security.intelligence import build_security_intelligence_service
+
+    service = build_security_intelligence_service()
+    for forbidden in ("authorize", "grant", "ratify", "enact", "revoke", "override", "escalate"):
+        assert not hasattr(service, forbidden)
 
 
 def test_no_secret_material_module_is_introduced():

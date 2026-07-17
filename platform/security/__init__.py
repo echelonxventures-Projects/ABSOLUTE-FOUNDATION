@@ -8,29 +8,39 @@ Foundation / Identity / Observability layers: it consumes them only through publ
 contracts, modifies none, never writes to the certified corpus (DP-03), remains
 deterministic, and preserves every EC-1 certification.
 
-**This package currently ships only Phase 1 — SEC-CLASS (Security Classification
-Runtime)** — the constitutional "enforcement-by-reference seam". SEC-CLASS
-**classifies, records, traces, validates, and reports** the subject-layer security
-classification records (DATA-014 / SERVICE-014 / APPLICATION-013 / INFRASTRUCTURE-013)
-and resolves their declared enforcement obligation to the certified L7
+**This package ships Phase 1 — SEC-CLASS (Security Classification Runtime)** — the
+constitutional "enforcement-by-reference seam", and **Phase 2 — SEC-INTEL (Security
+Intelligence Runtime)** — the record-only findings/threats/controls/exceptions/
+pentest/compliance/audit intelligence surface with automatic evidence-derived roll-up
+(UKB-ADV-005; ``finding.schema.json``). SEC-CLASS **classifies, records, traces,
+validates, and reports** the subject-layer security classification records (DATA-014 /
+SERVICE-014 / APPLICATION-013 / INFRASTRUCTURE-013) and resolves their declared
+enforcement obligation to the certified L7
 :class:`~platform.identity.service.AuthorizationService` seam **by reference only**.
-It **never** authorizes, ratifies, enacts, governs, overrides, or escalates authority
+SEC-INTEL **records, correlates, rolls up, traces, validates, and reports** security
+findings and stores **no** secret value (SEC-04 / RR-07; UKB-ADV-005 §6). Neither
+**ever** authorizes, ratifies, enacts, governs, overrides, or escalates authority
 (RG-02 / AR-04).
 
-The remaining Security Runtime sub-capabilities (SEC-INTEL / SEC-REG / SEC-OBS /
-SEC-CERT / SEC-ZONE) are later, separately-authorized phases and are **not** present.
+The remaining Security Runtime sub-capabilities (SEC-REG / SEC-OBS / SEC-CERT /
+SEC-ZONE) are later, separately-authorized phases and are **not** present.
 
-Deliverables (SEC-CLASS):
+Deliverables (SEC-CLASS + SEC-INTEL):
     * **errors** — the ``EC2-SEC-*`` error taxonomy over ``PlatformError``.
     * **contracts** — the classification vocabulary (``ClassificationKind``,
-      ``SubjectLayer``, ``EnforcementReference``) and the published SEC-CLASS contract
-      surface.
+      ``SubjectLayer``, ``EnforcementReference``), the intelligence vocabulary
+      (``FindingKind``, ``Severity``, ``FindingState``, ``RollupState``), and the
+      published SEC-CLASS / SEC-INTEL contract surfaces.
     * **classification** — the immutable ``SecurityClassification`` record and the
       append-only ``ClassificationLedger``.
+    * **intelligence** — the immutable ``SecurityFinding`` record, the append-only
+      ``FindingLedger``, the evidence-derived ``compute_rollup``, and the
+      ``SecurityIntelligenceService`` + ``SecurityIntelligenceEvidence``.
     * **service** — the ``SecurityClassificationService`` composition root and
       ``SecurityClassificationEvidence``.
-    * **bootstrap** — ``bootstrap_security_classification`` (composes identity + the
-      classification runtime onto a ``PlatformContext``).
+    * **bootstrap** — ``bootstrap_security_classification`` and
+      ``bootstrap_security_intelligence`` (compose the runtimes onto a
+      ``PlatformContext``).
 
 This package carries no constitutional authority; the external gates (EC-1…EC-6)
 remain open.
@@ -40,34 +50,66 @@ from __future__ import annotations
 
 from platform.security.bootstrap import (
     SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT,
+    SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT,
     bootstrap_security_classification,
+    bootstrap_security_intelligence,
 )
 from platform.security.classification import (
     ClassificationLedger,
     SecurityClassification,
 )
 from platform.security.contracts import (
+    BLOCKING_SEVERITIES,
     L7_BOUND_KINDS,
+    OPEN_FINDING_STATES,
     SECURITY_CLASSIFICATION_CONTRACT_VERSION,
     SECURITY_CLASSIFICATION_CONTRACTS,
+    SECURITY_INTELLIGENCE_CONTRACT_VERSION,
+    SECURITY_INTELLIGENCE_CONTRACTS,
     SUBJECT_LAYER_KINDS,
     SUBJECT_LAYER_SOURCE,
     ClassificationKind,
     EnforcementReference,
+    FindingKind,
+    FindingState,
+    RollupState,
+    Severity,
     SubjectLayer,
     all_classification_kinds,
+    all_finding_kinds,
+    all_finding_states,
+    all_severities,
     all_subject_layers,
     default_security_classification_contracts,
+    default_security_intelligence_contracts,
     security_classification_contract,
+    security_intelligence_contract,
 )
 from platform.security.errors import (
     ClassificationBindingError,
     ClassificationValidationError,
     EnforcementReferenceError,
+    FindingValidationError,
+    SecretLeakError,
     SecurityBootstrapError,
     SecurityClassificationError,
     SecurityContractError,
     SecurityError,
+    SecurityFindingError,
+    SecurityRollupError,
+)
+from platform.security.intelligence import (
+    FINDING_RECORDED_EVENT,
+    ROLLUP_EVALUATED_EVENT,
+    SECRET_LEAK_IDENTIFIER,
+    FindingLedger,
+    SecurityFinding,
+    SecurityIntelligenceEvidence,
+    SecurityIntelligenceService,
+    SecurityRollup,
+    build_security_intelligence_service,
+    compute_rollup,
+    scan_for_secret,
 )
 from platform.security.service import (
     CLASSIFICATION_RECORDED_EVENT,
@@ -90,9 +132,34 @@ __all__ = [
     "all_subject_layers",
     "security_classification_contract",
     "default_security_classification_contracts",
+    "SECURITY_INTELLIGENCE_CONTRACT_VERSION",
+    "SECURITY_INTELLIGENCE_CONTRACTS",
+    "FindingKind",
+    "Severity",
+    "FindingState",
+    "RollupState",
+    "BLOCKING_SEVERITIES",
+    "OPEN_FINDING_STATES",
+    "all_finding_kinds",
+    "all_severities",
+    "all_finding_states",
+    "security_intelligence_contract",
+    "default_security_intelligence_contracts",
     # classification
     "SecurityClassification",
     "ClassificationLedger",
+    # intelligence
+    "FINDING_RECORDED_EVENT",
+    "ROLLUP_EVALUATED_EVENT",
+    "SECRET_LEAK_IDENTIFIER",
+    "SecurityFinding",
+    "FindingLedger",
+    "SecurityRollup",
+    "compute_rollup",
+    "scan_for_secret",
+    "SecurityIntelligenceEvidence",
+    "SecurityIntelligenceService",
+    "build_security_intelligence_service",
     # service
     "CLASSIFICATION_RECORDED_EVENT",
     "SecurityClassificationEvidence",
@@ -101,6 +168,8 @@ __all__ = [
     # bootstrap
     "SECURITY_CLASSIFICATION_BOOTSTRAP_EVENT",
     "bootstrap_security_classification",
+    "SECURITY_INTELLIGENCE_BOOTSTRAP_EVENT",
+    "bootstrap_security_intelligence",
     # errors
     "SecurityError",
     "SecurityClassificationError",
@@ -109,4 +178,8 @@ __all__ = [
     "ClassificationValidationError",
     "SecurityContractError",
     "SecurityBootstrapError",
+    "SecurityFindingError",
+    "FindingValidationError",
+    "SecretLeakError",
+    "SecurityRollupError",
 ]

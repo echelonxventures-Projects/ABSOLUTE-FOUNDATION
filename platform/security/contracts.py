@@ -228,6 +228,135 @@ def default_security_classification_contracts() -> tuple[Contract, ...]:
     )
 
 
+# --------------------------------------------------------------------------- #
+# SEC-INTEL — Security Intelligence vocabulary + contract surface (Phase 2).   #
+#                                                                              #
+# Reuses the physical finding schema vocabulary (00-BOOK/SCHEMAS/              #
+# finding.schema.json) and the UKB-ADV-005 entity/roll-up model **by           #
+# reference** — no new security entity model is invented (ARCH-SECURITY-001    #
+# §21). All types are immutable, typed, deterministic, and embed no secret.    #
+# --------------------------------------------------------------------------- #
+
+#: The semantic version of the Security Intelligence contract surface (AR-03/PL-05).
+SECURITY_INTELLIGENCE_CONTRACT_VERSION = "1.0.0"
+
+
+class FindingKind(str, Enum):
+    """The security-intelligence entity kinds (finding.schema.json ``finding_kind``).
+
+    Reused verbatim from the physical finding schema and UKB-ADV-005 §2; no new kind
+    is invented. Threat Models, Controls, Exceptions, PenTest / Compliance / Audit
+    evidence are all recorded as findings of the corresponding kind.
+    """
+
+    VULNERABILITY = "VULNERABILITY"
+    CONTROL = "CONTROL"
+    THREAT = "THREAT"
+    EXCEPTION = "EXCEPTION"
+    PENTEST = "PENTEST"
+    COMPLIANCE_EVIDENCE = "COMPLIANCE_EVIDENCE"
+    AUDIT_EVIDENCE = "AUDIT_EVIDENCE"
+
+
+class Severity(str, Enum):
+    """Finding severity (finding.schema.json ``severity`` enum)."""
+
+    CRITICAL = "CRITICAL"
+    HIGH = "HIGH"
+    MEDIUM = "MEDIUM"
+    LOW = "LOW"
+    INFO = "INFO"
+
+
+class FindingState(str, Enum):
+    """Finding lifecycle state (finding.schema.json ``state`` enum)."""
+
+    OPEN = "OPEN"
+    IN_PROGRESS = "IN_PROGRESS"
+    ACCEPTED = "ACCEPTED"
+    RESOLVED = "RESOLVED"
+    FALSE_POSITIVE = "FALSE_POSITIVE"
+
+
+class RollupState(str, Enum):
+    """The evidence-derived security roll-up state (UKB-ADV-005 §4).
+
+    A member of the corpus signal-state vocabulary so the security dimension rolls up
+    deterministically: ``BLOCKED`` (open CRITICAL/HIGH without a valid exception),
+    ``IN_PROGRESS`` (open MEDIUM within SLA / lower-severity open findings), or
+    ``APPROVED`` (no open findings). No status is entered by hand.
+    """
+
+    BLOCKED = "BLOCKED"
+    IN_PROGRESS = "IN_PROGRESS"
+    APPROVED = "APPROVED"
+
+
+#: The severities that drive a hard ``BLOCKED`` roll-up when open and un-excepted.
+BLOCKING_SEVERITIES: frozenset[Severity] = frozenset({Severity.CRITICAL, Severity.HIGH})
+
+#: The finding states that count as "open" for roll-up (still an active exposure).
+OPEN_FINDING_STATES: frozenset[FindingState] = frozenset(
+    {FindingState.OPEN, FindingState.IN_PROGRESS}
+)
+
+#: The finding-schema source reference (backward traceability; ARCH-SECURITY-001 §14).
+FINDING_SCHEMA_SOURCE = "00-BOOK/SCHEMAS/finding.schema.json (UKB-ADV-005 §2)"
+
+
+def all_finding_kinds() -> tuple[FindingKind, ...]:
+    """Return every finding kind in stable declaration order."""
+    return tuple(FindingKind)
+
+
+def all_severities() -> tuple[Severity, ...]:
+    """Return every severity in stable declaration order."""
+    return tuple(Severity)
+
+
+def all_finding_states() -> tuple[FindingState, ...]:
+    """Return every finding state in stable declaration order."""
+    return tuple(FindingState)
+
+
+_SECURITY_INTELLIGENCE_CONTRACT_NAMES: tuple[tuple[str, str], ...] = (
+    (
+        "security.intelligence.record",
+        "Record a security-intelligence finding (record-only; enacts nothing).",
+    ),
+    (
+        "security.intelligence.rollup",
+        "Evidence-derived security roll-up over recorded findings (deterministic).",
+    ),
+    (
+        "security.intelligence.evidence",
+        "Deterministic, content-addressed security-intelligence evidence (record-only).",
+    ),
+)
+
+#: Immutable references to the published SEC-INTEL contracts (name + version).
+SECURITY_INTELLIGENCE_CONTRACTS: tuple[ContractRef, ...] = tuple(
+    ContractRef(name, SECURITY_INTELLIGENCE_CONTRACT_VERSION)
+    for name, _ in _SECURITY_INTELLIGENCE_CONTRACT_NAMES
+)
+
+
+def security_intelligence_contract(name: str, description: str = "") -> Contract:
+    """Build a versioned SEC-INTEL :class:`Contract` at the intelligence contract version."""
+    try:
+        return platform_contract(name, SECURITY_INTELLIGENCE_CONTRACT_VERSION, description)
+    except PlatformContractError as exc:  # normalise into the security taxonomy
+        raise SecurityContractError(str(exc), name=name) from exc
+
+
+def default_security_intelligence_contracts() -> tuple[Contract, ...]:
+    """The published SEC-INTEL contracts as concrete :class:`Contract` objects."""
+    return tuple(
+        security_intelligence_contract(name, description)
+        for name, description in _SECURITY_INTELLIGENCE_CONTRACT_NAMES
+    )
+
+
 __all__ = [
     "SECURITY_CLASSIFICATION_CONTRACT_VERSION",
     "ClassificationKind",
@@ -241,4 +370,19 @@ __all__ = [
     "SECURITY_CLASSIFICATION_CONTRACTS",
     "security_classification_contract",
     "default_security_classification_contracts",
+    # SEC-INTEL
+    "SECURITY_INTELLIGENCE_CONTRACT_VERSION",
+    "FindingKind",
+    "Severity",
+    "FindingState",
+    "RollupState",
+    "BLOCKING_SEVERITIES",
+    "OPEN_FINDING_STATES",
+    "FINDING_SCHEMA_SOURCE",
+    "all_finding_kinds",
+    "all_severities",
+    "all_finding_states",
+    "SECURITY_INTELLIGENCE_CONTRACTS",
+    "security_intelligence_contract",
+    "default_security_intelligence_contracts",
 ]

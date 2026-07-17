@@ -93,3 +93,33 @@ def test_evidence_report_carries_full_traceable_records():
     record = evidence.classifications[0]
     assert record["layer"] == "DATA-014"
     assert record["constitution_ref"]
+
+
+def test_determination_authorizes_sec_intel():
+    text = _DETERMINATION.read_text(encoding="utf-8")
+    assert "SEC-INTEL" in text
+    assert "Security Intelligence Runtime" in text
+
+
+def test_intel_service_realizes_every_sec_intel_responsibility():
+    from platform.security.intelligence import build_security_intelligence_service
+
+    service = build_security_intelligence_service()
+    # record · rollup · trace · validate · report (mission responsibilities).
+    for responsibility in ("record_finding", "record", "rollup", "trace", "validate",
+                           "validate_all", "report"):
+        assert callable(getattr(service, responsibility))
+
+
+def test_finding_traces_backward_to_the_schema_and_forward_to_affected_refs():
+    from platform.security.contracts import FindingKind, Severity
+    from platform.security.intelligence import build_security_intelligence_service
+
+    service = build_security_intelligence_service()
+    f = service.record_finding(
+        FindingKind.VULNERABILITY, "CVE-2026-42", severity=Severity.HIGH,
+        identifier="CVE-2026-42", affects=("UCOS-SVC-000001",),
+    )
+    trace = service.trace(f.finding_id)
+    assert "finding.schema.json" in trace["backward"]["source_ref"]
+    assert trace["affects"] == ["UCOS-SVC-000001"]
