@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-17T04:28:34+00:00",
+  "generated_at": "2026-07-17T04:40:18+00:00",
   "generator_version": "1.0.0",
-  "count": 331,
+  "count": 332,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -18284,6 +18284,47 @@
         "architecture": [
           "UCOS-PLT-000029",
           "EC2-EPIC-013"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-PLT-000031",
+      "native_id": "EC2-CAP-SEC-001",
+      "name": "EC2-CAP-SEC-001 · SEC-CERT — Security Certification Runtime — Certification Report",
+      "description": "",
+      "category": "PLT",
+      "volume": "VOL-006",
+      "page_start": 5616,
+      "page_end": 5618,
+      "status": "CERTIFIED",
+      "version": "1.0.0",
+      "parent": "UCOS-PLT-000007",
+      "dependencies": [],
+      "program": "PLATFORM",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "PLATFORM",
+        "PLT",
+        "VOL-006"
+      ],
+      "path": "platform/security/EC2-CAP-SEC-001-SEC-CERT-CERTIFICATION-REPORT.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "dcbb4406c58cdfe3ee730b352e9ccc7c792de3da67a36034a642cb551fa2ffac",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-PLT-000029"
         ],
         "design": [],
         "implementation": [],
