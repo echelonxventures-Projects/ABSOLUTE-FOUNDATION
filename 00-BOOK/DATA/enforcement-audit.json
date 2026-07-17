@@ -5040,6 +5040,65 @@
       "violations": [],
       "result": "PASS",
       "seq": 63
+    },
+    {
+      "generated_at": "2026-07-17T04:03:57+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 329,
+      "registered": 328,
+      "unregistered": [
+        "platform/security/EC2-CAP-SEC-001-SEC-INTEL-CERTIFICATION-REPORT.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 64
+    },
+    {
+      "generated_at": "2026-07-17T04:03:58+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 329,
+      "registered": 329,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 65
+    },
+    {
+      "generated_at": "2026-07-17T04:06:17+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 329,
+      "registered": 329,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 66
     }
   ]
 }

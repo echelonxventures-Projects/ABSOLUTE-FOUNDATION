@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-17T02:55:37+00:00",
+  "generated_at": "2026-07-17T04:03:57+00:00",
   "generator_version": "1.0.0",
-  "count": 328,
+  "count": 329,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -18160,6 +18160,45 @@
       "path": "platform/security/EC2-CAP-SEC-001-DETERMINATION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
       "content_hash": "ea1fb6641d0371347d3fc5e71bd434b477fdeba98bb2aa1e775883f8440eb264",
+      "traceability": {
+        "requirement": [],
+        "architecture": [],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-PLT-000028",
+      "native_id": "EC2-CAP-SEC-001",
+      "name": "EC2-CAP-SEC-001 · SEC-INTEL — Security Intelligence Runtime — Certification Report",
+      "description": "",
+      "category": "PLT",
+      "volume": "VOL-006",
+      "page_start": 5607,
+      "page_end": 5609,
+      "status": "CERTIFIED",
+      "version": "1.0.0",
+      "parent": "UCOS-PLT-000007",
+      "dependencies": [],
+      "program": "PLATFORM",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "PLATFORM",
+        "PLT",
+        "VOL-006"
+      ],
+      "path": "platform/security/EC2-CAP-SEC-001-SEC-INTEL-CERTIFICATION-REPORT.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "35efd2bc3d54d7e4a0d09ba9a7a834afe3076b5e7bdd18332c1212a3e0cec086",
       "traceability": {
         "requirement": [],
         "architecture": [],

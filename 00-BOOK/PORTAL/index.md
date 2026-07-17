@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-17T02:55:37+00:00 by ukbx portal. 328 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-17T04:03:58+00:00 by ukbx portal. 329 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -332,3 +332,4 @@
 | [UCOS-PLT-000026](UCOS-PLT-000026.md) | EC2-EPIC-004 — Workspace & Collaboration — Completion Report | VOL-006 | ACTIVE |
 | [UCOS-GOV-000006](UCOS-GOV-000006.md) | UCOS-GOV-006 — REPOSITORY GOVERNANCE CORRECTION IMPLEMENTATI | VOL-020 | ACTIVE |
 | [UCOS-PLT-000027](UCOS-PLT-000027.md) | EC2-CAP-SEC-001 — Security Runtime — Determination | VOL-006 | ACTIVE |
+| [UCOS-PLT-000028](UCOS-PLT-000028.md) | EC2-CAP-SEC-001 · SEC-INTEL — Security Intelligence Runtime  | VOL-006 | CERTIFIED |

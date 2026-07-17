@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 328
+**Total artifacts:** 329
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -336,5 +336,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 326 | `UCOS-PLT-000026` | EC2-EPIC-004 — Workspace & Collaboration — Completion Report | — | 006 | UPN-000005593–UPN-000005595 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/workspace/EC2-EPIC-004-COMPLETION-REPORT.md) |
 | 327 | `UCOS-GOV-000006` | UCOS-GOV-006 — REPOSITORY GOVERNANCE CORRECTION IMPLEMENT… | — | 020 | UPN-000005596–UPN-000005599 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/UCOS-GOV-006-REPOSITORY-GOVERNANCE-CORRECTION-IMPLEMENTATION-REPORT.md) |
 | 328 | `UCOS-PLT-000027` | EC2-CAP-SEC-001 — Security Runtime — Determination | EC2-CAP-SEC-001 | 006 | UPN-000005600–UPN-000005606 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/security/EC2-CAP-SEC-001-DETERMINATION.md) |
+| 329 | `UCOS-PLT-000028` | EC2-CAP-SEC-001 · SEC-INTEL — Security Intelligence Runti… | EC2-CAP-SEC-001 | 006 | UPN-000005607–UPN-000005609 | CERTIFIED | `UCOS-PLT-000007` | 0 | [↗](../../platform/security/EC2-CAP-SEC-001-SEC-INTEL-CERTIFICATION-REPORT.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
