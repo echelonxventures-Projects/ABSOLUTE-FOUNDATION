@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-17T04:40:18+00:00 by ukbx portal. 332 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-17T04:53:37+00:00 by ukbx portal. 333 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -336,3 +336,4 @@
 | [UCOS-PLT-000029](UCOS-PLT-000029.md) | EC2-CAP-SEC-001 · SEC-REG — Security Registry Runtime — Cert | VOL-006 | CERTIFIED |
 | [UCOS-PLT-000030](UCOS-PLT-000030.md) | EC2-CAP-SEC-001 · SEC-OBS — Security Observability Runtime — | VOL-006 | CERTIFIED |
 | [UCOS-PLT-000031](UCOS-PLT-000031.md) | EC2-CAP-SEC-001 · SEC-CERT — Security Certification Runtime  | VOL-006 | CERTIFIED |
+| [UCOS-PLT-000032](UCOS-PLT-000032.md) | EC2-CAP-SEC-001 · SEC-ZONE — Zone & Control Posture Runtime  | VOL-006 | CERTIFIED |

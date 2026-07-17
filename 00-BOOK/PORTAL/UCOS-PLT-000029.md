@@ -12,8 +12,6 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 
 ## Backlinks (reverse)
 - [UCOS-PLT-000007](UCOS-PLT-000007.md) —Child→
-- [UCOS-PLT-000031](UCOS-PLT-000031.md) —Depends-On→
-- [UCOS-PLT-000028](UCOS-PLT-000028.md) —Depends-On→
-- [UCOS-PLT-000030](UCOS-PLT-000030.md) —Depends-On→
+- [UCOS-PLT-000032](UCOS-PLT-000032.md) —Required-By→
 
 Return: [Portal Index](index.md) · [Master Index](../UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)

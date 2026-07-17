@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 5618  ·  **Page cursor (next free):** UPN-000005619
+**Pages allocated:** 5622  ·  **Page cursor (next free):** UPN-000005623
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -340,5 +340,6 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000005610 | UPN-000005612 | 3 | `UCOS-PLT-000029` | 006 | EC2-CAP-SEC-001 · SEC-REG — Security Registry… |
 | UPN-000005613 | UPN-000005615 | 3 | `UCOS-PLT-000030` | 006 | EC2-CAP-SEC-001 · SEC-OBS — Security Observab… |
 | UPN-000005616 | UPN-000005618 | 3 | `UCOS-PLT-000031` | 006 | EC2-CAP-SEC-001 · SEC-CERT — Security Certifi… |
+| UPN-000005619 | UPN-000005622 | 4 | `UCOS-PLT-000032` | 006 | EC2-CAP-SEC-001 · SEC-ZONE — Zone & Control P… |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

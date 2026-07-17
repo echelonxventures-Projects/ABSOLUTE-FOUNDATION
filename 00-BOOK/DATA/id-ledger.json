@@ -2331,9 +2331,16 @@
       "page_start": 5616,
       "page_count": 3,
       "first_seen": "2026-07-17T04:40:18+00:00"
+    },
+    "platform/security/EC2-CAP-SEC-001-SEC-ZONE-CERTIFICATION-REPORT.md": {
+      "universal_id": "UCOS-PLT-000032",
+      "category": "PLT",
+      "page_start": 5619,
+      "page_count": 4,
+      "first_seen": "2026-07-17T04:53:36+00:00"
     }
   },
-  "page_cursor": 5618,
+  "page_cursor": 5622,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -2352,7 +2359,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 31,
+    "PLT": 32,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -6052,6 +6059,17 @@
         "status": "CERTIFIED",
         "path": "platform/security/EC2-CAP-SEC-001-SEC-CERT-CERTIFICATION-REPORT.md",
         "name": "EC2-CAP-SEC-001 · SEC-CERT — Security Certification Runtime — Certification Report"
+      }
+    ],
+    "UCOS-PLT-000032": [
+      {
+        "seq": 1,
+        "at": "2026-07-17T04:53:36+00:00",
+        "content_hash": "15cd680fa37797f34cd8288cda58df1069d9e8dfcfc9885c5344e7690f11688d",
+        "version": "1.0.0",
+        "status": "CERTIFIED",
+        "path": "platform/security/EC2-CAP-SEC-001-SEC-ZONE-CERTIFICATION-REPORT.md",
+        "name": "EC2-CAP-SEC-001 · SEC-ZONE — Zone & Control Posture Runtime — Certification Report"
       }
     ]
   }

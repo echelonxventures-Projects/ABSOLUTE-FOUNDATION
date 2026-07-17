@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 332
+**Total artifacts:** 333
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -340,5 +340,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 330 | `UCOS-PLT-000029` | EC2-CAP-SEC-001 · SEC-REG — Security Registry Runtime — C… | EC2-CAP-SEC-001 | 006 | UPN-000005610–UPN-000005612 | CERTIFIED | `UCOS-PLT-000007` | 0 | [↗](../../platform/security/EC2-CAP-SEC-001-SEC-REG-CERTIFICATION-REPORT.md) |
 | 331 | `UCOS-PLT-000030` | EC2-CAP-SEC-001 · SEC-OBS — Security Observability Runtim… | EC2-CAP-SEC-001 | 006 | UPN-000005613–UPN-000005615 | CERTIFIED | `UCOS-PLT-000007` | 0 | [↗](../../platform/security/EC2-CAP-SEC-001-SEC-OBS-CERTIFICATION-REPORT.md) |
 | 332 | `UCOS-PLT-000031` | EC2-CAP-SEC-001 · SEC-CERT — Security Certification Runti… | EC2-CAP-SEC-001 | 006 | UPN-000005616–UPN-000005618 | CERTIFIED | `UCOS-PLT-000007` | 0 | [↗](../../platform/security/EC2-CAP-SEC-001-SEC-CERT-CERTIFICATION-REPORT.md) |
+| 333 | `UCOS-PLT-000032` | EC2-CAP-SEC-001 · SEC-ZONE — Zone & Control Posture Runti… | EC2-CAP-SEC-001 | 006 | UPN-000005619–UPN-000005622 | CERTIFIED | `UCOS-PLT-000007` | 0 | [↗](../../platform/security/EC2-CAP-SEC-001-SEC-ZONE-CERTIFICATION-REPORT.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
