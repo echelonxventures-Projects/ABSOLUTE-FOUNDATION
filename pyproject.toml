@@ -61,6 +61,7 @@ addopts = [
   "--cov=platform.security",
   "--cov=platform.projects",
   "--cov=platform.blueprints",
+  "--cov=platform.coverage",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -68,7 +69,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints"]
+source = ["engine/foundation", "engine/registry", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/coverage"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]
