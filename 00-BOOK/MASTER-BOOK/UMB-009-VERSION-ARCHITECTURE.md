@@ -64,3 +64,17 @@ UMB-009 holds no constituent, governance, ratification, or EC-series authority a
 *Return: [UMB-000](UMB-000-MASTER-BOOK-ARCHITECTURE-MASTER-INDEX.md) · [UMB-008](UMB-008-CHANGE-ARCHITECTURE.md)*
 
 **END OF ARTIFACT — UMB-009 · ACTIVE · APPEND-ONLY · AUTHORITY-NEUTRAL**
+
+
+---
+
+## AIF CONFORMANCE (Owner Amendment — ACT-C1 · append-only)
+
+This architecture **REALIZES** the *Absolute Identity, Federation & Continuity Constitution (AIF)* — `UCOS-IMP-000024` (`02-MASTER/UCOS-Ω∞-ABSOLUTE-IDENTITY-FEDERATION-AND-CONTINUITY-CONSTITUTION.md`).
+
+- **Single authority (X-DUP resolution):** exactly **one identity authority**. The AIF **governs**; this Version Architecture **realizes** it and asserts no parallel or duplicate versioning authority.
+- **Realized laws:** AIF-L15 (declared-intent transitions), AIF-L16 (deterministic identity decision — a version is the same P2 with a new P1).
+- **Subordination:** append-only; adds no authority; rewrites no existing content; renumbers no section; modifies no frozen artifact; subordinate to the AIF and all superior constitutional authority.
+- **Traceability:** owner-side realization record referenced by AIF Part III (A/G-AUTH) and the AIF Traceability Register.
+
+*Owner amendment only — realizes AIF; creates no authority.*

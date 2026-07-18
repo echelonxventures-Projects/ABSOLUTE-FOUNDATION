@@ -73,3 +73,17 @@ UMB-005 holds no constituent, governance, ratification, or EC-series authority a
 *Return: [UMB-000](UMB-000-MASTER-BOOK-ARCHITECTURE-MASTER-INDEX.md) · [UMB-004](UMB-004-NOMENCLATURE-ARCHITECTURE.md)*
 
 **END OF ARTIFACT — UMB-005 · ACTIVE · APPEND-ONLY · AUTHORITY-NEUTRAL**
+
+
+---
+
+## AIF CONFORMANCE (Owner Amendment — ACT-C1 · append-only)
+
+This architecture **REALIZES** the *Absolute Identity, Federation & Continuity Constitution (AIF)* — `UCOS-IMP-000024` (`02-MASTER/UCOS-Ω∞-ABSOLUTE-IDENTITY-FEDERATION-AND-CONTINUITY-CONSTITUTION.md`).
+
+- **Single authority (X-DUP resolution):** exactly **one identity authority**. The AIF **governs**; this Registry Architecture **realizes** it and asserts no parallel or duplicate registration authority.
+- **Realized laws:** AIF-L01 (bifurcation of truth — the registry is DERIVED, never authoritative), AIF-L08 (Recorded Truth is the DAG ledger), AIF-L18 (derivation purity and version stamping).
+- **Subordination:** append-only; adds no authority; rewrites no existing content; renumbers no section; modifies no frozen artifact; subordinate to the AIF and all superior constitutional authority.
+- **Traceability:** owner-side realization record referenced by AIF Part III (A/G-AUTH) and the AIF Traceability Register.
+
+*Owner amendment only — realizes AIF; creates no authority.*

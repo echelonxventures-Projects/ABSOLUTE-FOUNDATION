@@ -1211,3 +1211,17 @@ Verify: **Registry Integrity · No Identity Modification · No Numbering Changes
 This artifact creates no authority, alters no determination, and authorizes no EC-series step. It establishes the permanent, implementation-independent engineering foundation of universal identity for UCOS Ω∞ — the theory, laws, ontology, meta-model, object model, and complete architecture by which every object receives one permanent, immutable, globally-unique, non-constitutive identity — consuming the constitutional corpus and the ARCH/CAT/REF/GEN/IMP families as immutable inputs, inventing no canonical identity, modifying no determination, embedding no secret, and conferring no authority. ENG-001 recommends ENG-002 (Universal Reference & Addressing Architecture) as the next engineering artifact; it creates no ENG-002 artifact.
 
 *This is the root engineering artifact of the UCOS Ω∞ Engineering Program. It is a design and architecture record only; it generates no production code, APIs, schemas, or databases, selects no technology, and modifies no `00-SOURCE/`, `99-FREEZE/`, or prior program artifact.*
+
+
+---
+
+## AIF CONFORMANCE (Owner Amendment — ACT-C1 · append-only)
+
+The Universal Identity System (UIS) **REALIZES** the *Absolute Identity, Federation & Continuity Constitution (AIF)* — `UCOS-IMP-000024` (`02-MASTER/UCOS-Ω∞-ABSOLUTE-IDENTITY-FEDERATION-AND-CONTINUITY-CONSTITUTION.md`).
+
+- **Single authority (X-DUP resolution):** the UIS is the **one identity authority's** engineering realization. The AIF **governs**; the UIS **realizes** it. There is no parallel or duplicate identity authority anywhere in the corpus.
+- **Realized laws:** AIF-L02 (opaque durable identity P2), AIF-L07 (authority-namespaced uniqueness), AIF-L09 (authority = serialization domain), AIF-L10 (genesis and trust; successor recognition), AIF-L11 (signed events, custody, notary, revocation).
+- **Subordination:** append-only; adds no authority; rewrites no existing content; renumbers no section; modifies no frozen artifact; subordinate to the AIF and all superior constitutional authority.
+- **Traceability:** owner-side realization record referenced by AIF Part III (A/G-AUTH) and the AIF Traceability Register.
+
+*Owner amendment only — realizes AIF; creates no authority.*
