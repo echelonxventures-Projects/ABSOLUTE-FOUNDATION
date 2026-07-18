@@ -23,7 +23,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          # Canonical toolchain series (DE-04 pinned/vetted). Matches ec1-ci.yml,
+          # determinism.yml, and the local doctor/verify environment so the
+          # determinism-sensitive registration + digital-twin transaction runs on
+          # the same interpreter everywhere.
+          python-version: "3.12"
 
       - name: Install optional validators
         run: pip install jsonschema || true

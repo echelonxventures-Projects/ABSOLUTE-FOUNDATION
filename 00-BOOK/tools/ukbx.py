@@ -144,6 +144,7 @@ def cmd_ingest(args):
         nctx = {"next_signal_id": ledger.next_signal_id, "ingest_run": run_id,
                 **ctx}
         consumed = []
+        conn_new = 0
         for ev in events:
             key = f"{name}|{ev.get('source_event_id')}"
             sigs = list(conn.normalize(ev, nctx))
@@ -156,11 +157,18 @@ def cmd_ingest(args):
                 ok = ledger.append(sig, idempotency_key=f"{key}#{i}")
                 if ok:
                     total_new += 1
+                    conn_new += 1
                     appended_any = True
                 else:
                     total_dup += 1
             if appended_any:
                 consumed.append(ev)
+        # Commit-time URUN allocation (UMB-REMED-001 F-4 / F-1 drift gate): advance
+        # run_seq only when this connector actually appended a new signal, so a
+        # no-op ingest leaves signals.json byte-identical. Committed id equals the
+        # run_id preview taken above (no intervening commit) — URUN stays gapless.
+        if conn_new:
+            ledger.commit_run()
         hw = conn.high_water(events)
         if hw:
             ledger.set_cursor(name, hw)
@@ -326,6 +334,14 @@ def cmd_sync(args):
                         cnew += 1; total_new += 1
                     else:
                         cdup += 1; total_dup += 1
+            # Commit-time URUN allocation (UMB-REMED-001 F-4 / F-1 drift gate):
+            # advance run_seq only when this pass actually produced a new signal,
+            # so a zero-new-signal run leaves signals.json byte-identical. The
+            # committed id equals the run_id preview taken above (no intervening
+            # commit), keeping the URUN sequence gapless and the stamped
+            # ingest_run values consistent.
+            if cnew:
+                ledger.commit_run()
             hw = conn.high_water(events)
             # cursor advances only forward (monotonic) — never regress on replay
             if hw and (cb is None or str(hw) >= str(cb)):

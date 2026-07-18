@@ -36,13 +36,27 @@ jobs:
           BASE="${{ github.event.pull_request.base.sha }}"
           if [ -z "$BASE" ]; then BASE="${{ github.event.before }}"; fi
           if git rev-parse --verify --quiet "$BASE" >/dev/null; then
-            git diff --name-only "$BASE" HEAD | ec1-frozen-guard --stdin
+            # DP-03 protects the certified CANON. The four generated register
+            # surfaces (00-BOOK/{DATA,REGISTRIES,CONTROL-TOWER,PORTAL}) are
+            # deterministically re-derivable machinery OUTPUT — declared out of
+            # scope by REG-AUTO-001 §2 and owned by the Atomic Registration
+            # Transaction, which legitimately regenerates and commits them (every
+            # `REG-AUTO-001: register …` commit touches them). Their integrity is
+            # enforced by register.sh --guard (the Registration Gate drift check,
+            # same four-subtree set), NOT by this frozen-path guard. Excluding
+            # them here reconciles this gate with the Registration Gate so a
+            # registration commit is not falsely flagged as a DP-03 violation,
+            # while the guard still protects 00-SOURCE/, 99-FREEZE/, and the
+            # authored 00-BOOK canon.
+            CHANGED="$(git diff --name-only "$BASE" HEAD \
+              | grep -vE '^00-BOOK/(DATA|REGISTRIES|CONTROL-TOWER|PORTAL)/' || true)"
+            printf '%s\n' "$CHANGED" | ec1-frozen-guard --stdin
           else
             echo "No resolvable base ref; skipping diff-based guard (no-op)."
           fi
 
       - name: Lint (ruff)
-        run: python -m ruff check engine
+        run: python -m ruff check engine platform
 
       - name: Test + coverage gate (fail under 90%)
         run: python -m pytest

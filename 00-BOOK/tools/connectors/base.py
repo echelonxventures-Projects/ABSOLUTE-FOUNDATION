@@ -176,6 +176,29 @@ class SignalLedger:
         return f"USIG-{self.doc['signal_seq'] + 1:09d}"
 
     def next_run_id(self) -> str:
+        """Non-committing PREVIEW of the run id a connector run would receive.
+
+        UMB-REMED-001 (F-4 / F-1 drift gate): mirrors ``next_signal_id``. The
+        durable, gapless URUN run id is allocated ONLY by ``commit_run()`` after
+        the run actually appends >=1 new signal (commit-time allocation), never
+        here. This preview does NOT advance ``run_seq``, so a zero-new-signal
+        (steady-state / CI) run consumes no run id and cannot mutate the guarded
+        signals.json: with ``run_seq`` unchanged and no new signals, the flushed
+        document neutralizes to the on-disk document (only the generation stamp
+        differs) and ``_dump`` skips the rewrite, keeping the append-only signal
+        ledger byte-identical under ``register.sh --guard`` and the determinism
+        gate (IMP-007 §5 / UKB-ADV-INV-07). A run that stamps signals with this
+        preview id then calls ``commit_run()`` before the next connector previews,
+        so the committed id equals the preview and the URUN sequence stays gapless."""
+        return f"URUN-{self.doc['run_seq'] + 1:09d}"
+
+    def commit_run(self) -> str:
+        """Commit-time allocation of a durable, gapless URUN run id.
+
+        Called only when a connector run has appended >=1 new signal, so
+        ``run_seq`` advances exactly once per signal-producing run and never on a
+        no-op. Returns the id, which equals the ``next_run_id()`` preview taken
+        at the start of that connector's pass (no intervening commit)."""
         self.doc["run_seq"] += 1
         return f"URUN-{self.doc['run_seq']:09d}"
 
