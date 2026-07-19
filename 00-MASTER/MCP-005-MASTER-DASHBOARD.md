@@ -105,6 +105,8 @@ Status classes: **NOT STARTED · ACTIVE · COMPLETE · FROZEN · DEPRECATED** (p
 
 | 2026-07-19 | **EC-3 Band 12 (Application) advanced to ~24% (MEP-03):** U03 (AMC-03 Universal Module) CERTIFIED (`UCOS-CERT-AMC-03-aee97c46c547be1b`); application suite 289 pass (91 U01 + 96 U02 + 102 U03) / 100% cov all 18 modules; freeze gate 2847 pass / 100% cov preserved. Band chain: Band 10 CERTIFIED-COMPLETE, Band 11 CERTIFIED-COMPLETE + FROZEN, Band 12 IN PROGRESS (~24%, U01+U02+U03 of 12). Certification gate remains PASSED (engineering scope). | EC3-B12-U03 — MEP-03 AMC-03 realization |
 
+| 2026-07-19 | **EC-3 Band 12 (Application) advanced to ~32% (MEP-03):** U04 (AMC-04 Universal Feature) CERTIFIED (`UCOS-CERT-AMC-04-131cf02cedaf8143`); application suite 401 pass (91 U01 + 96 U02 + 102 U03 + 112 U04) / 100% cov all 24 modules; freeze gate 2847 pass / 100% cov preserved. Realization interrupted post-certification and recovered per MCP-007 §05 (implementation + evidence reused). Band chain: Band 10 CERTIFIED-COMPLETE, Band 11 CERTIFIED-COMPLETE + FROZEN, Band 12 IN PROGRESS (~32%, U01+U02+U03+U04 of 12). Certification gate remains PASSED (engineering scope). | EC3-B12-U04 — MEP-03 AMC-04 realization |
+
 *Regenerate figures from the Control Tower before quoting; append here on each regeneration.*
 
 ---
