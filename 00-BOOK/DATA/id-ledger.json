@@ -4725,9 +4725,107 @@
       "page_start": 6979,
       "page_count": 3,
       "first_seen": "2026-07-19T10:18:57+00:00"
+    },
+    "service/EC3-B11-U13-COMPLETION-REPORT.md": {
+      "universal_id": "UCOS-SERVICE-000136",
+      "category": "SERVICE",
+      "page_start": 6982,
+      "page_count": 4,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/acceptance-decision.json": {
+      "universal_id": "UCOS-SERVICE-000137",
+      "category": "SERVICE",
+      "page_start": 6986,
+      "page_count": 1,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/cce-certification.json": {
+      "universal_id": "UCOS-SERVICE-000138",
+      "category": "SERVICE",
+      "page_start": 6987,
+      "page_count": 4,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/certification-evidence.json": {
+      "universal_id": "UCOS-SERVICE-000139",
+      "category": "SERVICE",
+      "page_start": 6991,
+      "page_count": 3,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/certification-ledger.json": {
+      "universal_id": "UCOS-SERVICE-000140",
+      "category": "SERVICE",
+      "page_start": 6994,
+      "page_count": 1,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/determinism.json": {
+      "universal_id": "UCOS-SERVICE-000141",
+      "category": "SERVICE",
+      "page_start": 6995,
+      "page_count": 1,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/freeze-baseline.json": {
+      "universal_id": "UCOS-SERVICE-000142",
+      "category": "SERVICE",
+      "page_start": 6996,
+      "page_count": 3,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/freeze-effects.json": {
+      "universal_id": "UCOS-SERVICE-000143",
+      "category": "SERVICE",
+      "page_start": 6999,
+      "page_count": 1,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/freeze-preconditions.json": {
+      "universal_id": "UCOS-SERVICE-000144",
+      "category": "SERVICE",
+      "page_start": 7000,
+      "page_count": 1,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/realization-evidence.json": {
+      "universal_id": "UCOS-SERVICE-000145",
+      "category": "SERVICE",
+      "page_start": 7001,
+      "page_count": 22,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/service-compliance.json": {
+      "universal_id": "UCOS-SERVICE-000146",
+      "category": "SERVICE",
+      "page_start": 7023,
+      "page_count": 2,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/traceability.json": {
+      "universal_id": "UCOS-SERVICE-000147",
+      "category": "SERVICE",
+      "page_start": 7025,
+      "page_count": 1,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/validation-evidence.json": {
+      "universal_id": "UCOS-SERVICE-000148",
+      "category": "SERVICE",
+      "page_start": 7026,
+      "page_count": 4,
+      "first_seen": "2026-07-19T10:49:07+00:00"
+    },
+    "service/_evidence/EC3-B11-U13/validation-report.json": {
+      "universal_id": "UCOS-SERVICE-000149",
+      "category": "SERVICE",
+      "page_start": 7030,
+      "page_count": 4,
+      "first_seen": "2026-07-19T10:49:07+00:00"
     }
   },
-  "page_cursor": 6981,
+  "page_cursor": 7033,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -4761,7 +4859,7 @@
     "DATA": 134,
     "MCP001MASTER": 1,
     "INTELLIGENCE": 11,
-    "SERVICE": 135
+    "SERVICE": 149
   },
   "discovered_volumes": {},
   "volume_seq": 0,
@@ -12350,6 +12448,160 @@
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "service/_evidence/EC3-B11-U12/validation-report.json",
+        "name": "Validation Report"
+      }
+    ],
+    "UCOS-SERVICE-000136": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "196754a53be8e3f0bc4204f117cab2007ea23d25770148e78853273baa65920a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/EC3-B11-U13-COMPLETION-REPORT.md",
+        "name": "EC3-B11-U13 — BAND-11 FREEZE — COMPLETION REPORT"
+      }
+    ],
+    "UCOS-SERVICE-000137": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "36a0849bdb51fde56d3e3c4258da2b86f04ecfa5b76ea898c656280abf4b090e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/acceptance-decision.json",
+        "name": "Acceptance Decision"
+      }
+    ],
+    "UCOS-SERVICE-000138": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "6bbce583c8053fe268f98da7184ffb6d979f6d268b75dd7afdb349ba9fc7ca3a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/cce-certification.json",
+        "name": "Cce Certification"
+      }
+    ],
+    "UCOS-SERVICE-000139": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "dfe7f8ee99136c66da26c79685c941a3f39a5348e05f17ebe4150096e36b84c7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/certification-evidence.json",
+        "name": "Certification Evidence"
+      }
+    ],
+    "UCOS-SERVICE-000140": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "14e1ee038803f38a767c83d54a88351437c0636ad8d9c1f3bf829132986d42b9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/certification-ledger.json",
+        "name": "Certification Ledger"
+      }
+    ],
+    "UCOS-SERVICE-000141": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "5db246b86a1fcc679598d8740eb242066324394b3db3fea9b2195d526d00eac4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/determinism.json",
+        "name": "Determinism"
+      }
+    ],
+    "UCOS-SERVICE-000142": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "e3d2483ec84608c85cbfc246851dea8c9858fc1d0b20dce598c9a85e66879d3d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/freeze-baseline.json",
+        "name": "Freeze Baseline"
+      }
+    ],
+    "UCOS-SERVICE-000143": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "cee741a8995e55ab3af4b2ee103c6aec5e44573829982e8de7163b3dcbbd71af",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/freeze-effects.json",
+        "name": "Freeze Effects"
+      }
+    ],
+    "UCOS-SERVICE-000144": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "e339efb032f3b7a7c5c26fef14043bfb9fd3877b8bd0d2332a2de9252c6dd817",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/freeze-preconditions.json",
+        "name": "Freeze Preconditions"
+      }
+    ],
+    "UCOS-SERVICE-000145": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "0c71203ea1cbec6cadfeeb2f1d5eda831fec23e9fb6f4c06cf5c230b04956bde",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/realization-evidence.json",
+        "name": "Realization Evidence"
+      }
+    ],
+    "UCOS-SERVICE-000146": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "490c6960ee06eb1c8b948b52ee4aca830292c5c4f4724e0c0280d2ff63ee2c7e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/service-compliance.json",
+        "name": "Service Compliance"
+      }
+    ],
+    "UCOS-SERVICE-000147": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "a8fbc4dc8a52690f7c240d6703f5b7a975caa3b5693f7f0c0d6459bdd1e8d7d3",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/traceability.json",
+        "name": "Traceability"
+      }
+    ],
+    "UCOS-SERVICE-000148": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "213eee1b47db7fa062e5d0277f4d109d9934c2b58f036283cd2b9ada3b336d45",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/validation-evidence.json",
+        "name": "Validation Evidence"
+      }
+    ],
+    "UCOS-SERVICE-000149": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T10:49:07+00:00",
+        "content_hash": "dfa1586a73a25a41a2d98167eae755b96c5e9265bb2f9e1070ba8065cf754b9d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U13/validation-report.json",
         "name": "Validation Report"
       }
     ]

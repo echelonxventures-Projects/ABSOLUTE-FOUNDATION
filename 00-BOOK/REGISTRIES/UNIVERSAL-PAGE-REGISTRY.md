@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 6981  ·  **Page cursor (next free):** UPN-000006982
+**Pages allocated:** 7033  ·  **Page cursor (next free):** UPN-000007034
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -668,5 +668,19 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000006974 | UPN-000006974 | 1 | `UCOS-SERVICE-000133` | 000 | Traceability |
 | UPN-000006975 | UPN-000006978 | 4 | `UCOS-SERVICE-000134` | 000 | Validation Evidence |
 | UPN-000006979 | UPN-000006981 | 3 | `UCOS-SERVICE-000135` | 000 | Validation Report |
+| UPN-000006982 | UPN-000006985 | 4 | `UCOS-SERVICE-000136` | 000 | EC3-B11-U13 — BAND-11 FREEZE — COMPLETION REPORT |
+| UPN-000006986 | UPN-000006986 | 1 | `UCOS-SERVICE-000137` | 000 | Acceptance Decision |
+| UPN-000006987 | UPN-000006990 | 4 | `UCOS-SERVICE-000138` | 000 | Cce Certification |
+| UPN-000006991 | UPN-000006993 | 3 | `UCOS-SERVICE-000139` | 000 | Certification Evidence |
+| UPN-000006994 | UPN-000006994 | 1 | `UCOS-SERVICE-000140` | 000 | Certification Ledger |
+| UPN-000006995 | UPN-000006995 | 1 | `UCOS-SERVICE-000141` | 000 | Determinism |
+| UPN-000006996 | UPN-000006998 | 3 | `UCOS-SERVICE-000142` | 000 | Freeze Baseline |
+| UPN-000006999 | UPN-000006999 | 1 | `UCOS-SERVICE-000143` | 000 | Freeze Effects |
+| UPN-000007000 | UPN-000007000 | 1 | `UCOS-SERVICE-000144` | 000 | Freeze Preconditions |
+| UPN-000007001 | UPN-000007022 | 22 | `UCOS-SERVICE-000145` | 000 | Realization Evidence |
+| UPN-000007023 | UPN-000007024 | 2 | `UCOS-SERVICE-000146` | 000 | Service Compliance |
+| UPN-000007025 | UPN-000007025 | 1 | `UCOS-SERVICE-000147` | 000 | Traceability |
+| UPN-000007026 | UPN-000007029 | 4 | `UCOS-SERVICE-000148` | 000 | Validation Evidence |
+| UPN-000007030 | UPN-000007033 | 4 | `UCOS-SERVICE-000149` | 000 | Validation Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
