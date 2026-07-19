@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-19T15:01:06+00:00 by ukbx portal. 730 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-19T15:56:35+00:00 by ukbx portal. 741 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -734,3 +734,14 @@
 | [UCOS-APPLICATION-000053](UCOS-APPLICATION-000053.md) | Traceability | VOL-000 | ACTIVE |
 | [UCOS-APPLICATION-000054](UCOS-APPLICATION-000054.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-APPLICATION-000055](UCOS-APPLICATION-000055.md) | Validation Report | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000056](UCOS-APPLICATION-000056.md) | EC3-B12-U06 — UNIVERSAL APPLICATION INTERACTION — REALIZATIO | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000057](UCOS-APPLICATION-000057.md) | Acceptance Decision | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000058](UCOS-APPLICATION-000058.md) | Application Compliance | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000059](UCOS-APPLICATION-000059.md) | Cce Certification | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000060](UCOS-APPLICATION-000060.md) | Certification Evidence | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000061](UCOS-APPLICATION-000061.md) | Certification Ledger | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000062](UCOS-APPLICATION-000062.md) | Determinism | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000063](UCOS-APPLICATION-000063.md) | Realization Evidence | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000064](UCOS-APPLICATION-000064.md) | Traceability | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000065](UCOS-APPLICATION-000065.md) | Validation Evidence | VOL-000 | ACTIVE |
+| [UCOS-APPLICATION-000066](UCOS-APPLICATION-000066.md) | Validation Report | VOL-000 | ACTIVE |
