@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 6537  ·  **Page cursor (next free):** UPN-000006538
+**Pages allocated:** 6578  ·  **Page cursor (next free):** UPN-000006579
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -555,5 +555,16 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000006530 | UPN-000006530 | 1 | `UCOS-SERVICE-000020` | 000 | Traceability |
 | UPN-000006531 | UPN-000006534 | 4 | `UCOS-SERVICE-000021` | 000 | Validation Evidence |
 | UPN-000006535 | UPN-000006537 | 3 | `UCOS-SERVICE-000022` | 000 | Validation Report |
+| UPN-000006538 | UPN-000006540 | 3 | `UCOS-SERVICE-000023` | 000 | EC3-B11-U03 — UNIVERSAL CONTRACT — REALIZATIO… |
+| UPN-000006541 | UPN-000006541 | 1 | `UCOS-SERVICE-000024` | 000 | Acceptance Decision |
+| UPN-000006542 | UPN-000006545 | 4 | `UCOS-SERVICE-000025` | 000 | Cce Certification |
+| UPN-000006546 | UPN-000006548 | 3 | `UCOS-SERVICE-000026` | 000 | Certification Evidence |
+| UPN-000006549 | UPN-000006549 | 1 | `UCOS-SERVICE-000027` | 000 | Certification Ledger |
+| UPN-000006550 | UPN-000006550 | 1 | `UCOS-SERVICE-000028` | 000 | Determinism |
+| UPN-000006551 | UPN-000006567 | 17 | `UCOS-SERVICE-000029` | 000 | Realization Evidence |
+| UPN-000006568 | UPN-000006569 | 2 | `UCOS-SERVICE-000030` | 000 | Service Compliance |
+| UPN-000006570 | UPN-000006570 | 1 | `UCOS-SERVICE-000031` | 000 | Traceability |
+| UPN-000006571 | UPN-000006574 | 4 | `UCOS-SERVICE-000032` | 000 | Validation Evidence |
+| UPN-000006575 | UPN-000006578 | 4 | `UCOS-SERVICE-000033` | 000 | Validation Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
