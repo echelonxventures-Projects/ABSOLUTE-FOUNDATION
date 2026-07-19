@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-19T10:49:07+00:00",
+  "generated_at": "2026-07-19T11:18:18+00:00",
   "generator_version": "1.0.0",
-  "count": 674,
+  "count": 675,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -31735,6 +31735,45 @@
       "path": "service/_evidence/EC3-B11-U13/validation-report.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
       "content_hash": "dfa1586a73a25a41a2d98167eae755b96c5e9265bb2f9e1070ba8065cf754b9d",
+      "traceability": {
+        "requirement": [],
+        "architecture": [],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-MASTER-000029",
+      "native_id": "EC-3-AP-4-BAND-12",
+      "name": "UCOS Ω∞ — EC-3 AP-4 BAND 12 (APPLICATION) EXECUTION-PACKAGE ADMISSION DETERMINATION",
+      "description": "",
+      "category": "MASTER",
+      "volume": "VOL-000",
+      "page_start": 7034,
+      "page_end": 7037,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "MASTER",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "MASTER",
+        "MASTER",
+        "VOL-000"
+      ],
+      "path": "02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "141dd402bccdd4a94551956518654de47f36633bfb8c5bc35969ce1291fb09e9",
       "traceability": {
         "requirement": [],
         "architecture": [],

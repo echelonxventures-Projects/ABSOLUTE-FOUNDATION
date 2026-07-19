@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 674
+**Total artifacts:** 675
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -682,5 +682,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 672 | `UCOS-SERVICE-000147` | Traceability | — | 000 | UPN-000007025–UPN-000007025 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U13/traceability.json) |
 | 673 | `UCOS-SERVICE-000148` | Validation Evidence | — | 000 | UPN-000007026–UPN-000007029 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U13/validation-evidence.json) |
 | 674 | `UCOS-SERVICE-000149` | Validation Report | — | 000 | UPN-000007030–UPN-000007033 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U13/validation-report.json) |
+| 675 | `UCOS-MASTER-000029` | UCOS Ω∞ — EC-3 AP-4 BAND 12 (APPLICATION) EXECUTION-PACKA… | EC-3-AP-4-BAND-12 | 000 | UPN-000007034–UPN-000007037 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

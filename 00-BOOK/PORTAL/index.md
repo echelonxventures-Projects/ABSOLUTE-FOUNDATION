@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-19T10:49:08+00:00 by ukbx portal. 674 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-19T11:18:19+00:00 by ukbx portal. 675 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -678,3 +678,4 @@
 | [UCOS-SERVICE-000147](UCOS-SERVICE-000147.md) | Traceability | VOL-000 | ACTIVE |
 | [UCOS-SERVICE-000148](UCOS-SERVICE-000148.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-SERVICE-000149](UCOS-SERVICE-000149.md) | Validation Report | VOL-000 | ACTIVE |
+| [UCOS-MASTER-000029](UCOS-MASTER-000029.md) | UCOS Ω∞ — EC-3 AP-4 BAND 12 (APPLICATION) EXECUTION-PACKAGE  | VOL-000 | ACTIVE |

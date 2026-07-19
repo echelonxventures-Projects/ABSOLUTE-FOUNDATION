@@ -9574,6 +9574,46 @@
       "violations": [],
       "result": "PASS",
       "seq": 276
+    },
+    {
+      "generated_at": "2026-07-19T11:18:18+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 675,
+      "registered": 674,
+      "unregistered": [
+        "02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 277
+    },
+    {
+      "generated_at": "2026-07-19T11:18:20+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 675,
+      "registered": 675,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 278
     }
   ]
 }
