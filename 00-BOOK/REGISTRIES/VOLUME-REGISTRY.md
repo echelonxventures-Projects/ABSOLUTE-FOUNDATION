@@ -6,7 +6,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 338 | UPN-000000001–UPN-000007122 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 349 | UPN-000000001–UPN-000007166 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 35 | UPN-000001327–UPN-000005766 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 38 | UPN-000000022–UPN-000005968 |
@@ -34,7 +34,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 338
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 349
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -376,6 +376,17 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-APPLICATION-000020` | Traceability | — | ACTIVE |
 | `UCOS-APPLICATION-000021` | Validation Evidence | — | ACTIVE |
 | `UCOS-APPLICATION-000022` | Validation Report | — | ACTIVE |
+| `UCOS-APPLICATION-000023` | EC3-B12-U03 — UNIVERSAL APPLICATION MODULE — REALIZATION COMP… | — | ACTIVE |
+| `UCOS-APPLICATION-000024` | Acceptance Decision | — | ACTIVE |
+| `UCOS-APPLICATION-000025` | Application Compliance | — | ACTIVE |
+| `UCOS-APPLICATION-000026` | Cce Certification | — | ACTIVE |
+| `UCOS-APPLICATION-000027` | Certification Evidence | — | ACTIVE |
+| `UCOS-APPLICATION-000028` | Certification Ledger | — | ACTIVE |
+| `UCOS-APPLICATION-000029` | Determinism | — | ACTIVE |
+| `UCOS-APPLICATION-000030` | Realization Evidence | — | ACTIVE |
+| `UCOS-APPLICATION-000031` | Traceability | — | ACTIVE |
+| `UCOS-APPLICATION-000032` | Validation Evidence | — | ACTIVE |
+| `UCOS-APPLICATION-000033` | Validation Report | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
