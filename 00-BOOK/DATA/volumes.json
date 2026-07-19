@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T08:17:16+00:00",
+  "generated_at": "2026-07-19T09:14:26+00:00",
   "count": 23,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 265,
+      "artifact_count": 276,
       "page_range_start": 1,
-      "page_range_end": 6839,
+      "page_range_end": 6883,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {

@@ -4473,9 +4473,86 @@
       "page_start": 6836,
       "page_count": 4,
       "first_seen": "2026-07-19T08:17:16+00:00"
+    },
+    "service/EC3-B11-U10-COMPLETION-REPORT.md": {
+      "universal_id": "UCOS-SERVICE-000100",
+      "category": "SERVICE",
+      "page_start": 6840,
+      "page_count": 4,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/acceptance-decision.json": {
+      "universal_id": "UCOS-SERVICE-000101",
+      "category": "SERVICE",
+      "page_start": 6844,
+      "page_count": 1,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/cce-certification.json": {
+      "universal_id": "UCOS-SERVICE-000102",
+      "category": "SERVICE",
+      "page_start": 6845,
+      "page_count": 4,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/certification-evidence.json": {
+      "universal_id": "UCOS-SERVICE-000103",
+      "category": "SERVICE",
+      "page_start": 6849,
+      "page_count": 3,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/certification-ledger.json": {
+      "universal_id": "UCOS-SERVICE-000104",
+      "category": "SERVICE",
+      "page_start": 6852,
+      "page_count": 1,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/determinism.json": {
+      "universal_id": "UCOS-SERVICE-000105",
+      "category": "SERVICE",
+      "page_start": 6853,
+      "page_count": 1,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/realization-evidence.json": {
+      "universal_id": "UCOS-SERVICE-000106",
+      "category": "SERVICE",
+      "page_start": 6854,
+      "page_count": 18,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/service-compliance.json": {
+      "universal_id": "UCOS-SERVICE-000107",
+      "category": "SERVICE",
+      "page_start": 6872,
+      "page_count": 2,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/traceability.json": {
+      "universal_id": "UCOS-SERVICE-000108",
+      "category": "SERVICE",
+      "page_start": 6874,
+      "page_count": 1,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/validation-evidence.json": {
+      "universal_id": "UCOS-SERVICE-000109",
+      "category": "SERVICE",
+      "page_start": 6875,
+      "page_count": 5,
+      "first_seen": "2026-07-19T09:14:25+00:00"
+    },
+    "service/_evidence/EC3-B11-U10/validation-report.json": {
+      "universal_id": "UCOS-SERVICE-000110",
+      "category": "SERVICE",
+      "page_start": 6880,
+      "page_count": 4,
+      "first_seen": "2026-07-19T09:14:25+00:00"
     }
   },
-  "page_cursor": 6839,
+  "page_cursor": 6883,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -4509,7 +4586,7 @@
     "DATA": 134,
     "MCP001MASTER": 1,
     "INTELLIGENCE": 11,
-    "SERVICE": 99
+    "SERVICE": 110
   },
   "discovered_volumes": {},
   "volume_seq": 0,
@@ -11702,6 +11779,127 @@
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "service/_evidence/EC3-B11-U09/validation-report.json",
+        "name": "Validation Report"
+      }
+    ],
+    "UCOS-SERVICE-000100": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "b857bde5f371a98bf6098b738be803029941f378eb1c819e0ee55a67c428f7f7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/EC3-B11-U10-COMPLETION-REPORT.md",
+        "name": "EC3-B11-U10 — UNIVERSAL SECURITY — REALIZATION COMPLETION REPORT"
+      }
+    ],
+    "UCOS-SERVICE-000101": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "ecbb5417b6067b8ced4d2b90c0d628916605f38a0da6ef8ae68404ae03b2ccf3",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/acceptance-decision.json",
+        "name": "Acceptance Decision"
+      }
+    ],
+    "UCOS-SERVICE-000102": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "85e001245eb6caf7cf792bd6ef9fc63bee48fa7a753c92417a9ef2bbc7fa6802",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/cce-certification.json",
+        "name": "Cce Certification"
+      }
+    ],
+    "UCOS-SERVICE-000103": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "659e4f2726d8e8c585a7022c3f70dc0cc281f53a2324a31d5742b3983cc337f0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/certification-evidence.json",
+        "name": "Certification Evidence"
+      }
+    ],
+    "UCOS-SERVICE-000104": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "ded5c7415b03db527f858b143a1cbe82d2cfdfe13890c3cbdad7a5b3d4c5819d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/certification-ledger.json",
+        "name": "Certification Ledger"
+      }
+    ],
+    "UCOS-SERVICE-000105": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "0e66d61a53776457c8388d9928239464cd771bf34e9e5e573aaadc37d520baca",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/determinism.json",
+        "name": "Determinism"
+      }
+    ],
+    "UCOS-SERVICE-000106": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "0821d3cc188ae099cbf160ffa87993febd3db4372cc95a7952dc4ef1ce7076a7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/realization-evidence.json",
+        "name": "Realization Evidence"
+      }
+    ],
+    "UCOS-SERVICE-000107": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "51acf1b17c012bae4d2bef18f29725ad50f90857c2f818fa03b7fb967524d6ec",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/service-compliance.json",
+        "name": "Service Compliance"
+      }
+    ],
+    "UCOS-SERVICE-000108": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "103da56a43905d8bbb49d85a1929714cdc45db1aa102fa68a72ffea79cc43f1c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/traceability.json",
+        "name": "Traceability"
+      }
+    ],
+    "UCOS-SERVICE-000109": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "80230fc703dd8b12a2f0c402105fca9ccd92576f184d8d4997f3aeee6116ce56",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/validation-evidence.json",
+        "name": "Validation Evidence"
+      }
+    ],
+    "UCOS-SERVICE-000110": [
+      {
+        "seq": 1,
+        "at": "2026-07-19T09:14:25+00:00",
+        "content_hash": "5fe2f966d74aafbef35e6dd82f98b8057da898b7f33ae308365915e4d8897442",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "service/_evidence/EC3-B11-U10/validation-report.json",
         "name": "Validation Report"
       }
     ]
