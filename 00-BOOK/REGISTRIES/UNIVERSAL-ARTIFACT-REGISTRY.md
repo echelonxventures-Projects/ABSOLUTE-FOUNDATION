@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 646
+**Total artifacts:** 660
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -654,5 +654,19 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 644 | `UCOS-SERVICE-000119` | Traceability | — | 000 | UPN-000006925–UPN-000006925 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U11/traceability.json) |
 | 645 | `UCOS-SERVICE-000120` | Validation Evidence | — | 000 | UPN-000006926–UPN-000006929 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U11/validation-evidence.json) |
 | 646 | `UCOS-SERVICE-000121` | Validation Report | — | 000 | UPN-000006930–UPN-000006933 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U11/validation-report.json) |
+| 647 | `UCOS-SERVICE-000122` | EC3-B11-U12 — BAND-11 REALIZATION CERTIFICATION & COMPLET… | — | 000 | UPN-000006934–UPN-000006937 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/EC3-B11-U12-COMPLETION-REPORT.md) |
+| 648 | `UCOS-SERVICE-000123` | Acceptance Decision | — | 000 | UPN-000006938–UPN-000006938 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/acceptance-decision.json) |
+| 649 | `UCOS-SERVICE-000124` | Capability Inventory | — | 000 | UPN-000006939–UPN-000006940 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/capability-inventory.json) |
+| 650 | `UCOS-SERVICE-000125` | Cce Certification | — | 000 | UPN-000006941–UPN-000006944 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/cce-certification.json) |
+| 651 | `UCOS-SERVICE-000126` | Certification Evidence | — | 000 | UPN-000006945–UPN-000006947 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/certification-evidence.json) |
+| 652 | `UCOS-SERVICE-000127` | Certification Ledger | — | 000 | UPN-000006948–UPN-000006948 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/certification-ledger.json) |
+| 653 | `UCOS-SERVICE-000128` | Completion Determination | — | 000 | UPN-000006949–UPN-000006949 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/completion-determination.json) |
+| 654 | `UCOS-SERVICE-000129` | Determinism | — | 000 | UPN-000006950–UPN-000006950 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/determinism.json) |
+| 655 | `UCOS-SERVICE-000130` | Readiness Determination | — | 000 | UPN-000006951–UPN-000006951 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/readiness-determination.json) |
+| 656 | `UCOS-SERVICE-000131` | Realization Evidence | — | 000 | UPN-000006952–UPN-000006971 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/realization-evidence.json) |
+| 657 | `UCOS-SERVICE-000132` | Service Compliance | — | 000 | UPN-000006972–UPN-000006973 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/service-compliance.json) |
+| 658 | `UCOS-SERVICE-000133` | Traceability | — | 000 | UPN-000006974–UPN-000006974 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/traceability.json) |
+| 659 | `UCOS-SERVICE-000134` | Validation Evidence | — | 000 | UPN-000006975–UPN-000006978 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/validation-evidence.json) |
+| 660 | `UCOS-SERVICE-000135` | Validation Report | — | 000 | UPN-000006979–UPN-000006981 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U12/validation-report.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

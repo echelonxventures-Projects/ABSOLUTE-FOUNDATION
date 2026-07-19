@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-19T09:47:02+00:00 by ukbx portal. 646 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-19T10:18:58+00:00 by ukbx portal. 660 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -650,3 +650,17 @@
 | [UCOS-SERVICE-000119](UCOS-SERVICE-000119.md) | Traceability | VOL-000 | ACTIVE |
 | [UCOS-SERVICE-000120](UCOS-SERVICE-000120.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-SERVICE-000121](UCOS-SERVICE-000121.md) | Validation Report | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000122](UCOS-SERVICE-000122.md) | EC3-B11-U12 — BAND-11 REALIZATION CERTIFICATION & COMPLETION | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000123](UCOS-SERVICE-000123.md) | Acceptance Decision | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000124](UCOS-SERVICE-000124.md) | Capability Inventory | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000125](UCOS-SERVICE-000125.md) | Cce Certification | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000126](UCOS-SERVICE-000126.md) | Certification Evidence | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000127](UCOS-SERVICE-000127.md) | Certification Ledger | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000128](UCOS-SERVICE-000128.md) | Completion Determination | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000129](UCOS-SERVICE-000129.md) | Determinism | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000130](UCOS-SERVICE-000130.md) | Readiness Determination | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000131](UCOS-SERVICE-000131.md) | Realization Evidence | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000132](UCOS-SERVICE-000132.md) | Service Compliance | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000133](UCOS-SERVICE-000133.md) | Traceability | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000134](UCOS-SERVICE-000134.md) | Validation Evidence | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000135](UCOS-SERVICE-000135.md) | Validation Report | VOL-000 | ACTIVE |

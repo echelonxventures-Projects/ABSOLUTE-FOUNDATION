@@ -6,7 +6,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 287 | UPN-000000001–UPN-000006933 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 301 | UPN-000000001–UPN-000006981 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 35 | UPN-000001327–UPN-000005766 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 38 | UPN-000000022–UPN-000005968 |
@@ -34,7 +34,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 287
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 301
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -325,6 +325,20 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-SERVICE-000119` | Traceability | — | ACTIVE |
 | `UCOS-SERVICE-000120` | Validation Evidence | — | ACTIVE |
 | `UCOS-SERVICE-000121` | Validation Report | — | ACTIVE |
+| `UCOS-SERVICE-000122` | EC3-B11-U12 — BAND-11 REALIZATION CERTIFICATION & COMPLETION … | — | ACTIVE |
+| `UCOS-SERVICE-000123` | Acceptance Decision | — | ACTIVE |
+| `UCOS-SERVICE-000124` | Capability Inventory | — | ACTIVE |
+| `UCOS-SERVICE-000125` | Cce Certification | — | ACTIVE |
+| `UCOS-SERVICE-000126` | Certification Evidence | — | ACTIVE |
+| `UCOS-SERVICE-000127` | Certification Ledger | — | ACTIVE |
+| `UCOS-SERVICE-000128` | Completion Determination | — | ACTIVE |
+| `UCOS-SERVICE-000129` | Determinism | — | ACTIVE |
+| `UCOS-SERVICE-000130` | Readiness Determination | — | ACTIVE |
+| `UCOS-SERVICE-000131` | Realization Evidence | — | ACTIVE |
+| `UCOS-SERVICE-000132` | Service Compliance | — | ACTIVE |
+| `UCOS-SERVICE-000133` | Traceability | — | ACTIVE |
+| `UCOS-SERVICE-000134` | Validation Evidence | — | ACTIVE |
+| `UCOS-SERVICE-000135` | Validation Report | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
