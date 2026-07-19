@@ -121,6 +121,8 @@ Entity …` (DMR-07), certified `UCOS-CERT-DMC-08-07e9db1834b26c10`.
 
 *Add an edge only when its evidence physically exists; append here as programs advance.*
 
+| 2026-07-19 | Recorded `EC3-B12-U01` (AMC-01 Universal Application) certified root edges: the Universal Application **delivers → Capability** (AMR-01, by ENG-005 reference), **identified-by → ENG-001/002** (AMR-10), **behaves-as → RL-F2** (AMR-11, by reference), **composed-as → PL-F2 PLATFORM-009** (AMR-12, by reference) — every reference edge resolves; founding graph acyclic (AMI-04); relationships within AMR-01…14 closure (AMI-02); reuse integrity over EL-1/RL-F2/PL-F2/DF-2/SF-2 (AMI-05). Full Vision→Certification chain closed (`UCOS-CERT-AMC-01-d998321c1b00d7ff`; application id `UCOS-APPLICATION-ucos.application.foundation-b93c1ea878f442ea`; evidence bundle `6c556837c2310fbf…`; No-Orphan lineage `AMC-01 → APPLICATION-005 → APPLICATION-001 → ARCH-APPLICATION-001 → 12-APPLICATION@b7e7657`). **Band 12 (Application) realization OPENED (MEP-03): first unit U01 CERTIFIED-COMPLETE; the Universal Application root is the closed intra-band dependency root for AMC-02…10.** | EC3-B12-U01 — MEP-03 AMC-01 realization |
+
 ---
 
 *END OF ARTIFACT — MCP-006 · MASTER TRACEABILITY · ACTIVE · LIVING · AUTHORITY = NONE (DERIVED TRUTH)*
