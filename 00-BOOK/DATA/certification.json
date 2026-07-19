@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T06:53:50+00:00",
+  "generated_at": "2026-07-19T07:19:00+00:00",
   "generator_version": "1.0.0-adv",
   "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)",
   "verdict": "CERTIFIED",
@@ -12,7 +12,7 @@
         {
           "name": "no duplicate Universal IDs",
           "pass": true,
-          "detail": "591 unique"
+          "detail": "602 unique"
         },
         {
           "name": "no overlapping page ranges",
@@ -22,7 +22,7 @@
         {
           "name": "ledger page cursor >= max page",
           "pass": true,
-          "detail": "cursor=6706 max_end=6706"
+          "detail": "cursor=6751 max_end=6751"
         }
       ]
     },
@@ -32,7 +32,7 @@
         {
           "name": "every artifact present in id-ledger",
           "pass": true,
-          "detail": "591 artifacts ledgered"
+          "detail": "602 artifacts ledgered"
         },
         {
           "name": "every artifact carries name+volume+program",
@@ -67,7 +67,7 @@
         {
           "name": "no dangling edge endpoints",
           "pass": true,
-          "detail": "10628 edges resolve"
+          "detail": "10650 edges resolve"
         },
         {
           "name": "Depends-On graph acyclic",
@@ -82,7 +82,7 @@
         {
           "name": "every change event bound to a real subject",
           "pass": true,
-          "detail": "609 events node-bound"
+          "detail": "620 events node-bound"
         },
         {
           "name": "change ids unique",
@@ -92,7 +92,7 @@
         {
           "name": "snapshot history seq monotonic (append-only)",
           "pass": true,
-          "detail": "606 histories append-only"
+          "detail": "617 histories append-only"
         }
       ]
     },
@@ -102,7 +102,7 @@
         {
           "name": "current_version matches latest snapshot",
           "pass": true,
-          "detail": "591 version records consistent"
+          "detail": "602 version records consistent"
         }
       ]
     },
@@ -112,7 +112,7 @@
         {
           "name": "lineage endpoints resolve + ancestry acyclic",
           "pass": true,
-          "detail": "591 lineage nodes intact"
+          "detail": "602 lineage nodes intact"
         }
       ]
     },
@@ -183,11 +183,11 @@
     }
   },
   "scope": {
-    "artifacts": 591,
-    "edges": 10628,
-    "change_events": 609,
+    "artifacts": 602,
+    "edges": 10650,
+    "change_events": 620,
     "signals": 15,
-    "lineage_nodes": 591,
+    "lineage_nodes": 602,
     "executions": 0
   }
 }

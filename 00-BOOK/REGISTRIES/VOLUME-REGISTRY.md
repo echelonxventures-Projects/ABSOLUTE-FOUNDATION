@@ -6,7 +6,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 232 | UPN-000000001–UPN-000006706 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 243 | UPN-000000001–UPN-000006751 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 35 | UPN-000001327–UPN-000005766 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 38 | UPN-000000022–UPN-000005968 |
@@ -34,7 +34,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 232
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 243
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -270,6 +270,17 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-SERVICE-000064` | Traceability | — | ACTIVE |
 | `UCOS-SERVICE-000065` | Validation Evidence | — | ACTIVE |
 | `UCOS-SERVICE-000066` | Validation Report | — | ACTIVE |
+| `UCOS-SERVICE-000067` | EC3-B11-U07 — UNIVERSAL ORCHESTRATION — REALIZATION COMPLETIO… | — | ACTIVE |
+| `UCOS-SERVICE-000068` | Acceptance Decision | — | ACTIVE |
+| `UCOS-SERVICE-000069` | Cce Certification | — | ACTIVE |
+| `UCOS-SERVICE-000070` | Certification Evidence | — | ACTIVE |
+| `UCOS-SERVICE-000071` | Certification Ledger | — | ACTIVE |
+| `UCOS-SERVICE-000072` | Determinism | — | ACTIVE |
+| `UCOS-SERVICE-000073` | Realization Evidence | — | ACTIVE |
+| `UCOS-SERVICE-000074` | Service Compliance | — | ACTIVE |
+| `UCOS-SERVICE-000075` | Traceability | — | ACTIVE |
+| `UCOS-SERVICE-000076` | Validation Evidence | — | ACTIVE |
+| `UCOS-SERVICE-000077` | Validation Report | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
