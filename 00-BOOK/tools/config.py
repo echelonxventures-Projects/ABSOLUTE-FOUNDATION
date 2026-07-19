@@ -672,7 +672,16 @@ CROSS_PROGRAM = [
 ]
 
 # ---------------------------------------------------------------------------
-# EXCLUSIONS — the generator's own machinery and generated outputs.
+# EXCLUSIONS — paths the generator must not register. Three distinct classes:
+#   (1) the generator's OWN machinery,
+#   (2) its GENERATED outputs (the registry must not list itself),
+#   (3) OPERATIONAL MEMORY — execution/coordination state, NOT repository corpus.
+# Repository Corpus is knowledge state; Operational Memory is execution state;
+# Generated Projections are derived state. Only Repository Corpus is registered
+# (UCOS-RECON-C1). Excluding a path is append-only-safe: any identifier already
+# allocated to a now-excluded path is RETAINED-BUT-RETIRED in the id-ledger
+# (never renumbered, never reused, never emitted) — see ukb.allocate() /
+# derive_change_events() (UMB-017 C-05).
 # ---------------------------------------------------------------------------
 EXCLUDE_DIR_PREFIXES = (
     ".git/",
@@ -685,6 +694,13 @@ EXCLUDE_DIR_PREFIXES = (
     "00-BOOK/VOLUMES/",
     # Appended by the UKB Advancement Program — generated navigation portal.
     "00-BOOK/PORTAL/",
+    # Operational Memory (UCOS-RECON-C1) — the Master Context System is execution
+    # state, not corpus: it must never consume permanent corpus identities, never
+    # appear in generated books, and never enter the portal unless explicitly
+    # projected. Covers the 00-MASTER/ subsystem and the root redirect pointer
+    # (a startswith() prefix that matches exactly that one operational-memory file).
+    "00-MASTER/",
+    "MCP-001-MASTER-CONTEXT-AND-EXECUTION-SYSTEM.md",
 )
 
 # Only these file extensions are registered as artifacts.

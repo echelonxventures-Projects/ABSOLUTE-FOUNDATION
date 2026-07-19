@@ -1,0 +1,67 @@
+{
+  "artifact_id": "UCOS-RIE-HEALTH",
+  "authority": "NONE (derived truth)",
+  "certification": {
+    "digital_twin_verdict": "CERTIFIED",
+    "domains": "10/10",
+    "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)"
+  },
+  "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
+  "code": {
+    "coverage_branch_pct": 100.0,
+    "coverage_line_pct": 100.0,
+    "roots": {
+      "engine": {
+        "loc": 10552,
+        "root": "engine",
+        "source_files": 75,
+        "test_files": 59,
+        "test_functions": 480
+      },
+      "platform": {
+        "loc": 49306,
+        "root": "platform",
+        "source_files": 202,
+        "test_files": 194,
+        "test_functions": 2141
+      }
+    },
+    "total_loc": 59858,
+    "total_tests": 2621
+  },
+  "content_hash": "a440990755335a35c840d7096f14b8c1dc0501746b051d54c3ee16b9dcc5d9cf",
+  "corpus": {
+    "artifacts": 424,
+    "edges": 10296,
+    "pages": 5968,
+    "status_histogram": {
+      "ACTIVE": 388,
+      "CERTIFIED": 5,
+      "COMPLETE": 3,
+      "FINAL": 9,
+      "FROZEN": 19
+    },
+    "volumes": 23
+  },
+  "evidence_state": {
+    "branch": "governance-reconciliation",
+    "evidence_files": {
+      "00-BOOK/DATA/artifacts.json": "3345690c5ec460291b25bffa7e5e890c7ad366e7a8d4796f933d51b4dce37245",
+      "00-BOOK/DATA/certification.json": "7c35b059c891c9ac1b7405ebaa9893ea21b5dab4cc613ebd1210d0ad6906d11f",
+      "00-BOOK/DATA/control-tower.json": "b7e54d1331aa8e08cdeb6b320224f227b5ed4a0e8a8f3a74e6f3adf3c2cbf560",
+      "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
+      "00-BOOK/DATA/volumes.json": "6876e6f171e2dce914f9966b7556d81cfb26c010cabae196930f1dd2fff3355c",
+      "coverage.xml": "ce6f5d101bb508e1e31afee04491b39df9b1f082d62690f4923efc0f894a6514"
+    },
+    "head": "5874ede"
+  },
+  "evidence_timestamp": "2026-07-18T13:37:42+00:00",
+  "health_flags": {
+    "corpus_present": true,
+    "coverage_full": true,
+    "twin_certified": true
+  },
+  "overall": "HEALTHY",
+  "producer": "UCOS-RIE-001 Repository Intelligence Engine v1.0.0",
+  "title": "Repository Health Report"
+}

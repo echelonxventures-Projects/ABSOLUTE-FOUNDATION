@@ -1,0 +1,104 @@
+{
+  "artifact_id": "UCOS-RIE-DEPENDENCY-GRAPH",
+  "authority": "NONE (derived truth)",
+  "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
+  "content_hash": "0e68398a574c843b34decfa6c2bff79de62c92d551a663c9341bb506ea470432",
+  "depends_on_acyclic": true,
+  "evidence_state": {
+    "branch": "governance-reconciliation",
+    "evidence_files": {
+      "00-BOOK/DATA/artifacts.json": "3345690c5ec460291b25bffa7e5e890c7ad366e7a8d4796f933d51b4dce37245",
+      "00-BOOK/DATA/certification.json": "7c35b059c891c9ac1b7405ebaa9893ea21b5dab4cc613ebd1210d0ad6906d11f",
+      "00-BOOK/DATA/control-tower.json": "b7e54d1331aa8e08cdeb6b320224f227b5ed4a0e8a8f3a74e6f3adf3c2cbf560",
+      "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
+      "00-BOOK/DATA/volumes.json": "6876e6f171e2dce914f9966b7556d81cfb26c010cabae196930f1dd2fff3355c",
+      "coverage.xml": "ce6f5d101bb508e1e31afee04491b39df9b1f082d62690f4923efc0f894a6514"
+    },
+    "head": "5874ede"
+  },
+  "evidence_timestamp": "2026-07-18T13:37:42+00:00",
+  "layered_architecture_bottom_up": [
+    "LAW Ω∞-000",
+    "MIP v2 (28 universes · 25 directives) + ARCH-001..004",
+    "UCGF + GOV-001..006",
+    "Domain constitutions (02-MASTER) + bands 03-13",
+    "CIOA spec → CCE spec",
+    "EC-1 engine/",
+    "EC-2 platform/ (composes EC-1)",
+    "UKB/UKBX + control-tower/twin/artifacts",
+    "MCS (00-MASTER)",
+    "[FUTURE] AEOS execution spine",
+    "[FUTURE] adapters + universal CLI"
+  ],
+  "producer": "UCOS-RIE-001 Repository Intelligence Engine v1.0.0",
+  "program_edge_count": 13,
+  "program_edges": [
+    {
+      "count": 1,
+      "from": "ARCH",
+      "to": "CAT"
+    },
+    {
+      "count": 1,
+      "from": "ARCH",
+      "to": "CONSOLIDATION"
+    },
+    {
+      "count": 1,
+      "from": "CAT",
+      "to": "ARCH"
+    },
+    {
+      "count": 1,
+      "from": "DATA",
+      "to": "PLATFORM"
+    },
+    {
+      "count": 1,
+      "from": "EES",
+      "to": "CONSOLIDATION"
+    },
+    {
+      "count": 1,
+      "from": "ENG",
+      "to": "ARCH"
+    },
+    {
+      "count": 1,
+      "from": "GEN",
+      "to": "REF"
+    },
+    {
+      "count": 1,
+      "from": "IMP",
+      "to": "CONSOLIDATION"
+    },
+    {
+      "count": 1,
+      "from": "PLATFORM",
+      "to": "RUN"
+    },
+    {
+      "count": 1,
+      "from": "REF",
+      "to": "ARCH"
+    },
+    {
+      "count": 1,
+      "from": "RUN",
+      "to": "ARCH"
+    },
+    {
+      "count": 1,
+      "from": "SERVICE",
+      "to": "DATA"
+    },
+    {
+      "count": 1,
+      "from": "UMB",
+      "to": "ADV"
+    }
+  ],
+  "title": "Dependency Intelligence Graph",
+  "total_corpus_edges": 10296
+}

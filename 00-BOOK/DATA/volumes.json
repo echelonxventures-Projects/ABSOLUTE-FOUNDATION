@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T04:07:00+00:00",
+  "generated_at": "2026-07-19T03:36:19+00:00",
   "count": 23,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 52,
+      "artifact_count": 177,
       "page_range_start": 1,
-      "page_range_end": 5916,
+      "page_range_end": 6496,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -45,9 +45,9 @@
       "description": "Universal architecture constitutions, catalogs, and engineering foundation.",
       "category": "ARCH",
       "status": "ACTIVE",
-      "artifact_count": 37,
+      "artifact_count": 38,
       "page_range_start": 22,
-      "page_range_end": 5575,
+      "page_range_end": 5968,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-003"
     },
     {
@@ -249,9 +249,9 @@
       "description": "Program control tower and external-execution support.",
       "category": "CTL",
       "status": "ACTIVE",
-      "artifact_count": 11,
+      "artifact_count": 12,
       "page_range_start": 4183,
-      "page_range_end": 5599,
+      "page_range_end": 5972,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-020"
     },
     {

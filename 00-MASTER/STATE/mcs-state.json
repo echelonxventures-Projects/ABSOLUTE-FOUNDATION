@@ -1,0 +1,39 @@
+{
+  "mcs_version": "1.0",
+  "authority": "NONE",
+  "captured_head": "5874ede",
+  "captured_utc": "2026-07-18T00:00:00Z",
+  "repository": {
+    "origin": "ABSOLUTE-FOUNDATION",
+    "branch": "governance-reconciliation",
+    "head": "5874ede",
+    "working_tree": "DIRTY",
+    "sync": { "ahead": 0, "behind": 0 }
+  },
+  "current": {
+    "program": "EC-3 Bands 10-13 Realization Program",
+    "phase": "Realization (post-EC-2-closure)",
+    "band": "Band 10 - Data (ARCH-DATA-001)",
+    "work_package": "EC-3 Band 10 (Data) Realization Mission (AP-2 ADMITTED)",
+    "capability": "Data foundation realization (meta-model / entity / schema)",
+    "capability_state": "ACTIVE",
+    "milestone": "Band 10 first realized units -> CCE-COMPLETE"
+  },
+  "blockers": [
+    {
+      "id": "B-RAT-11",
+      "description": "Constitutional finality (MEP-09 / DR-RAT-11): no ratification authority in frozen corpus; out-of-corpus act required",
+      "scope": "constitutional finality only",
+      "blocking": false
+    }
+  ],
+  "risks": [
+    { "id": "R-CI-STALE", "description": "CI build/unit/security signals dated 2026-07-15 predate current HEAD and EC-2 2,677-pass evidence", "mitigation": "MEP-08 CI signal refresh; reconcile signal date vs HEAD" },
+    { "id": "R-TREE-DIRTY", "description": "Uncommitted REG-AUTO-001 regeneration + new artifacts + this session's 00-MASTER subsystem", "mitigation": "Commit as logical capabilities (MEP-10 + MEP-07)" },
+    { "id": "R-BAND10", "description": "Band-10 realization risks per ARCH-DATA-001", "mitigation": "CCE-gated, additive-only, No-Orphan trace" }
+  ],
+  "next_authorized_capability": {
+    "mep_ref": "MEP-01",
+    "text": "Continue EC-3 Band 10 (Data) realization under ARCH-DATA-001 + 10-DATA/, CCE-gated, additive-only. Commit this session's 00-MASTER MCS subsystem (MEP-10) and pending REG-AUTO-001 surfaces (MEP-07) before/with the next logical capability."
+  }
+}
