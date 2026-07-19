@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 569
+**Total artifacts:** 580
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -577,5 +577,16 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 567 | `UCOS-SERVICE-000042` | Traceability | — | 000 | UPN-000006611–UPN-000006611 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U04/traceability.json) |
 | 568 | `UCOS-SERVICE-000043` | Validation Evidence | — | 000 | UPN-000006612–UPN-000006615 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U04/validation-evidence.json) |
 | 569 | `UCOS-SERVICE-000044` | Validation Report | — | 000 | UPN-000006616–UPN-000006619 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U04/validation-report.json) |
+| 570 | `UCOS-SERVICE-000045` | EC3-B11-U05 — UNIVERSAL OPERATION — REALIZATION COMPLETIO… | — | 000 | UPN-000006620–UPN-000006622 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/EC3-B11-U05-COMPLETION-REPORT.md) |
+| 571 | `UCOS-SERVICE-000046` | Acceptance Decision | — | 000 | UPN-000006623–UPN-000006623 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/acceptance-decision.json) |
+| 572 | `UCOS-SERVICE-000047` | Cce Certification | — | 000 | UPN-000006624–UPN-000006627 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/cce-certification.json) |
+| 573 | `UCOS-SERVICE-000048` | Certification Evidence | — | 000 | UPN-000006628–UPN-000006630 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/certification-evidence.json) |
+| 574 | `UCOS-SERVICE-000049` | Certification Ledger | — | 000 | UPN-000006631–UPN-000006631 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/certification-ledger.json) |
+| 575 | `UCOS-SERVICE-000050` | Determinism | — | 000 | UPN-000006632–UPN-000006632 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/determinism.json) |
+| 576 | `UCOS-SERVICE-000051` | Realization Evidence | — | 000 | UPN-000006633–UPN-000006651 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/realization-evidence.json) |
+| 577 | `UCOS-SERVICE-000052` | Service Compliance | — | 000 | UPN-000006652–UPN-000006653 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/service-compliance.json) |
+| 578 | `UCOS-SERVICE-000053` | Traceability | — | 000 | UPN-000006654–UPN-000006654 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/traceability.json) |
+| 579 | `UCOS-SERVICE-000054` | Validation Evidence | — | 000 | UPN-000006655–UPN-000006659 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/validation-evidence.json) |
+| 580 | `UCOS-SERVICE-000055` | Validation Report | — | 000 | UPN-000006660–UPN-000006663 | ACTIVE | `UCOS-SVC-000019` | 0 | [↗](../../service/_evidence/EC3-B11-U05/validation-report.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
