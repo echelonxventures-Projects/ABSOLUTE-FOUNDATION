@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-19T07:47:14+00:00 by ukbx portal. 613 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-19T08:17:17+00:00 by ukbx portal. 624 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -617,3 +617,14 @@
 | [UCOS-SERVICE-000086](UCOS-SERVICE-000086.md) | Traceability | VOL-000 | ACTIVE |
 | [UCOS-SERVICE-000087](UCOS-SERVICE-000087.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-SERVICE-000088](UCOS-SERVICE-000088.md) | Validation Report | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000089](UCOS-SERVICE-000089.md) | EC3-B11-U09 — UNIVERSAL POLICY — REALIZATION COMPLETION REPO | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000090](UCOS-SERVICE-000090.md) | Acceptance Decision | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000091](UCOS-SERVICE-000091.md) | Cce Certification | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000092](UCOS-SERVICE-000092.md) | Certification Evidence | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000093](UCOS-SERVICE-000093.md) | Certification Ledger | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000094](UCOS-SERVICE-000094.md) | Determinism | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000095](UCOS-SERVICE-000095.md) | Realization Evidence | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000096](UCOS-SERVICE-000096.md) | Service Compliance | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000097](UCOS-SERVICE-000097.md) | Traceability | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000098](UCOS-SERVICE-000098.md) | Validation Evidence | VOL-000 | ACTIVE |
+| [UCOS-SERVICE-000099](UCOS-SERVICE-000099.md) | Validation Report | VOL-000 | ACTIVE |
