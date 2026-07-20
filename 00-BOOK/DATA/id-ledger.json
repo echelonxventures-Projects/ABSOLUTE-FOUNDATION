@@ -5698,9 +5698,16 @@
       "page_start": 7537,
       "page_count": 6,
       "first_seen": "2026-07-20T07:06:27+00:00"
+    },
+    "02-MASTER/EC-3-B13-P01-BAND-13-INFRASTRUCTURE-MASTER-PROGRAM-CHARTER.md": {
+      "universal_id": "UCOS-MASTER-000032",
+      "category": "MASTER",
+      "page_start": 7543,
+      "page_count": 8,
+      "first_seen": "2026-07-20T07:29:53+00:00"
     }
   },
-  "page_cursor": 7542,
+  "page_cursor": 7550,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -5727,7 +5734,7 @@
     "EXEC": 4,
     "GOV": 6,
     "ADR": 3,
-    "MASTER": 31,
+    "MASTER": 32,
     "ENVIRONMENTS": 1,
     "VERIFICATION": 1,
     "UCOSOMEGAINF": 1,
@@ -14863,6 +14870,17 @@
         "status": "ACTIVE",
         "path": "02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md",
         "name": "UCOS Ω∞ — EC-3 AP-5 BAND 13 (INFRASTRUCTURE) EXECUTION-PACKAGE ADMISSION DETERMINATION"
+      }
+    ],
+    "UCOS-MASTER-000032": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T07:29:53+00:00",
+        "content_hash": "aeb646849a339178d55c256fb6bee42062e01212715bb160901a3c049d285f27",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/EC-3-B13-P01-BAND-13-INFRASTRUCTURE-MASTER-PROGRAM-CHARTER.md",
+        "name": "UCOS Ω∞ — EC-3 BAND 13 (INFRASTRUCTURE) MASTER PROGRAM CHARTER & MEP-04 IMPLEMENTATION ROADMAP"
       }
     ]
   }
