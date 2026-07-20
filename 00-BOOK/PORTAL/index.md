@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-20T10:00:51+00:00 by ukbx portal. 834 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-20T10:33:54+00:00 by ukbx portal. 845 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -838,3 +838,14 @@
 | [UCOS-INFRASTRUCTU-000031](UCOS-INFRASTRUCTU-000031.md) | Traceability | VOL-000 | ACTIVE |
 | [UCOS-INFRASTRUCTU-000032](UCOS-INFRASTRUCTU-000032.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-INFRASTRUCTU-000033](UCOS-INFRASTRUCTU-000033.md) | Validation Report | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000034](UCOS-INFRASTRUCTU-000034.md) | EC3-B13-U04 — UNIVERSAL INFRASTRUCTURE STORAGE-HOSTING — REA | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000035](UCOS-INFRASTRUCTU-000035.md) | Acceptance Decision | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000036](UCOS-INFRASTRUCTU-000036.md) | Cce Certification | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000037](UCOS-INFRASTRUCTU-000037.md) | Certification Evidence | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000038](UCOS-INFRASTRUCTU-000038.md) | Certification Ledger | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000039](UCOS-INFRASTRUCTU-000039.md) | Determinism | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000040](UCOS-INFRASTRUCTU-000040.md) | Infrastructure Compliance | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000041](UCOS-INFRASTRUCTU-000041.md) | Realization Evidence | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000042](UCOS-INFRASTRUCTU-000042.md) | Traceability | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000043](UCOS-INFRASTRUCTU-000043.md) | Validation Evidence | VOL-000 | ACTIVE |
+| [UCOS-INFRASTRUCTU-000044](UCOS-INFRASTRUCTU-000044.md) | Validation Report | VOL-000 | ACTIVE |

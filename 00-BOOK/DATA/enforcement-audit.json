@@ -10848,6 +10848,105 @@
       "violations": [],
       "result": "PASS",
       "seq": 333
+    },
+    {
+      "generated_at": "2026-07-20T10:31:42+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 844,
+      "registered": 834,
+      "unregistered": [
+        "infrastructure/_evidence/EC3-B13-U04/acceptance-decision.json",
+        "infrastructure/_evidence/EC3-B13-U04/cce-certification.json",
+        "infrastructure/_evidence/EC3-B13-U04/certification-evidence.json",
+        "infrastructure/_evidence/EC3-B13-U04/certification-ledger.json",
+        "infrastructure/_evidence/EC3-B13-U04/determinism.json",
+        "infrastructure/_evidence/EC3-B13-U04/infrastructure-compliance.json",
+        "infrastructure/_evidence/EC3-B13-U04/realization-evidence.json",
+        "infrastructure/_evidence/EC3-B13-U04/traceability.json",
+        "infrastructure/_evidence/EC3-B13-U04/validation-evidence.json",
+        "infrastructure/_evidence/EC3-B13-U04/validation-report.json"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 334
+    },
+    {
+      "generated_at": "2026-07-20T10:33:53+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 845,
+      "registered": 834,
+      "unregistered": [
+        "infrastructure/EC3-B13-U04-COMPLETION-REPORT.md",
+        "infrastructure/_evidence/EC3-B13-U04/acceptance-decision.json",
+        "infrastructure/_evidence/EC3-B13-U04/cce-certification.json",
+        "infrastructure/_evidence/EC3-B13-U04/certification-evidence.json",
+        "infrastructure/_evidence/EC3-B13-U04/certification-ledger.json",
+        "infrastructure/_evidence/EC3-B13-U04/determinism.json",
+        "infrastructure/_evidence/EC3-B13-U04/infrastructure-compliance.json",
+        "infrastructure/_evidence/EC3-B13-U04/realization-evidence.json",
+        "infrastructure/_evidence/EC3-B13-U04/traceability.json",
+        "infrastructure/_evidence/EC3-B13-U04/validation-evidence.json",
+        "infrastructure/_evidence/EC3-B13-U04/validation-report.json"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 335
+    },
+    {
+      "generated_at": "2026-07-20T10:33:55+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 845,
+      "registered": 845,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 336
+    },
+    {
+      "generated_at": "2026-07-20T10:39:52+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 845,
+      "registered": 845,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 337
     }
   ]
 }

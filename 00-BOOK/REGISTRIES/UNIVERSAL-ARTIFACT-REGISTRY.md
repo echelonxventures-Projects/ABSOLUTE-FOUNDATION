@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 834
+**Total artifacts:** 845
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -842,5 +842,16 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 832 | `UCOS-INFRASTRUCTU-000031` | Traceability | — | 000 | UPN-000007675–UPN-000007675 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U03/traceability.json) |
 | 833 | `UCOS-INFRASTRUCTU-000032` | Validation Evidence | — | 000 | UPN-000007676–UPN-000007679 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U03/validation-evidence.json) |
 | 834 | `UCOS-INFRASTRUCTU-000033` | Validation Report | — | 000 | UPN-000007680–UPN-000007683 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U03/validation-report.json) |
+| 835 | `UCOS-INFRASTRUCTU-000034` | EC3-B13-U04 — UNIVERSAL INFRASTRUCTURE STORAGE-HOSTING — … | — | 000 | UPN-000007684–UPN-000007687 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/EC3-B13-U04-COMPLETION-REPORT.md) |
+| 836 | `UCOS-INFRASTRUCTU-000035` | Acceptance Decision | — | 000 | UPN-000007688–UPN-000007688 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/acceptance-decision.json) |
+| 837 | `UCOS-INFRASTRUCTU-000036` | Cce Certification | — | 000 | UPN-000007689–UPN-000007692 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/cce-certification.json) |
+| 838 | `UCOS-INFRASTRUCTU-000037` | Certification Evidence | — | 000 | UPN-000007693–UPN-000007695 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/certification-evidence.json) |
+| 839 | `UCOS-INFRASTRUCTU-000038` | Certification Ledger | — | 000 | UPN-000007696–UPN-000007696 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/certification-ledger.json) |
+| 840 | `UCOS-INFRASTRUCTU-000039` | Determinism | — | 000 | UPN-000007697–UPN-000007697 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/determinism.json) |
+| 841 | `UCOS-INFRASTRUCTU-000040` | Infrastructure Compliance | — | 000 | UPN-000007698–UPN-000007699 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/infrastructure-compliance.json) |
+| 842 | `UCOS-INFRASTRUCTU-000041` | Realization Evidence | — | 000 | UPN-000007700–UPN-000007716 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/realization-evidence.json) |
+| 843 | `UCOS-INFRASTRUCTU-000042` | Traceability | — | 000 | UPN-000007717–UPN-000007717 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/traceability.json) |
+| 844 | `UCOS-INFRASTRUCTU-000043` | Validation Evidence | — | 000 | UPN-000007718–UPN-000007721 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/validation-evidence.json) |
+| 845 | `UCOS-INFRASTRUCTU-000044` | Validation Report | — | 000 | UPN-000007722–UPN-000007725 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U04/validation-report.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
