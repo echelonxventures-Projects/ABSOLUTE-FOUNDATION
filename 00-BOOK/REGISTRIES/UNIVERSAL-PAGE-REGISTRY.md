@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 7305  ·  **Page cursor (next free):** UPN-000007306
+**Pages allocated:** 7349  ·  **Page cursor (next free):** UPN-000007350
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -749,5 +749,16 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000007296 | UPN-000007296 | 1 | `UCOS-APPLICATION-000064` | 000 | Traceability |
 | UPN-000007297 | UPN-000007301 | 5 | `UCOS-APPLICATION-000065` | 000 | Validation Evidence |
 | UPN-000007302 | UPN-000007305 | 4 | `UCOS-APPLICATION-000066` | 000 | Validation Report |
+| UPN-000007306 | UPN-000007310 | 5 | `UCOS-APPLICATION-000067` | 000 | EC3-B12-U07 — UNIVERSAL APPLICATION STATE — R… |
+| UPN-000007311 | UPN-000007311 | 1 | `UCOS-APPLICATION-000068` | 000 | Acceptance Decision |
+| UPN-000007312 | UPN-000007313 | 2 | `UCOS-APPLICATION-000069` | 000 | Application Compliance |
+| UPN-000007314 | UPN-000007317 | 4 | `UCOS-APPLICATION-000070` | 000 | Cce Certification |
+| UPN-000007318 | UPN-000007320 | 3 | `UCOS-APPLICATION-000071` | 000 | Certification Evidence |
+| UPN-000007321 | UPN-000007321 | 1 | `UCOS-APPLICATION-000072` | 000 | Certification Ledger |
+| UPN-000007322 | UPN-000007322 | 1 | `UCOS-APPLICATION-000073` | 000 | Determinism |
+| UPN-000007323 | UPN-000007340 | 18 | `UCOS-APPLICATION-000074` | 000 | Realization Evidence |
+| UPN-000007341 | UPN-000007341 | 1 | `UCOS-APPLICATION-000075` | 000 | Traceability |
+| UPN-000007342 | UPN-000007345 | 4 | `UCOS-APPLICATION-000076` | 000 | Validation Evidence |
+| UPN-000007346 | UPN-000007349 | 4 | `UCOS-APPLICATION-000077` | 000 | Validation Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
