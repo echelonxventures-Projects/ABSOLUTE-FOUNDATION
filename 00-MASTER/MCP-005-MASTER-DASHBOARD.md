@@ -116,6 +116,9 @@ Status classes: **NOT STARTED · ACTIVE · COMPLETE · FROZEN · DEPRECATED** (p
 
 *Regenerate figures from the Control Tower before quoting; append here on each regeneration.*
 
+| 2026-07-20 | **EC-3 Band 12 (Application) advanced to ~80% (MEP-03):** U10 (AMC-10 Universal Application Governance) CERTIFIED (`UCOS-CERT-AMC-10-daa79bb6f252508a`); application suite 995 pass (91 U01 + 96 U02 + 102 U03 + 112 U04 + 117 U05 + 91 U06 + 93 U07 + 100 U08 + 96 U09 + 97 U10) / 100% cov all 60 modules; freeze gate 2847 pass / 100% cov preserved. **The concern set AMC-01…10 is now fully realized & CERTIFIED.** Band chain: Band 10 CERTIFIED-COMPLETE, Band 11 CERTIFIED-COMPLETE + FROZEN, Band 12 IN PROGRESS (~80%, U01…U10 of 12). Certification gate remains PASSED (engineering scope). | EC3-B12-U10 — MEP-03 AMC-10 realization |
+| 2026-07-20 | **EC-3 Band 12 (Application) advanced to ~88% (MEP-03):** U11 (UAM — Universal Application Meta-Model integration, APPLICATION-005) CERTIFIED (`UCOS-CERT-UAM-f9064ad729d4d090`; model id `UCOS-METAMODEL-ucos.application.metamodel.universal-2c2de069de3e71ff`); UAM suite 99 pass / 100% cov (645 stmts/130 br); full application suite 1094 pass (…+ 99 U11) / 100% cov all 66 modules; freeze gate 2847 pass / 100% cov preserved. **Integration unit (not a new concern; not AMC-11)** — integrates the ten CERTIFIED concern meta-classes AMC-01…10 + fourteen meta-relationships AMR-01…14; AMI-01…07 enforced fail-closed; material live re-realization of all ten members (cert ids match the committed U01…U10 ledger). Recovered per MCP-007 §05 (interrupted source reused). Band chain: Band 10 CERTIFIED-COMPLETE, Band 11 CERTIFIED-COMPLETE + FROZEN, Band 12 IN PROGRESS (~88%, U01…U11 of 12). Certification gate remains PASSED (engineering scope). | EC3-B12-U11 — MEP-03 UAM integration |
+
 ---
 
 *END OF ARTIFACT — MCP-005 · MASTER DASHBOARD · ACTIVE · LIVING · AUTHORITY = NONE (DERIVED TRUTH)*
