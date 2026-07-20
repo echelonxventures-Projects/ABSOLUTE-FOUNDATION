@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 7476  ·  **Page cursor (next free):** UPN-000007477
+**Pages allocated:** 7536  ·  **Page cursor (next free):** UPN-000007537
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -793,5 +793,18 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000007468 | UPN-000007468 | 1 | `UCOS-APPLICATION-000108` | 000 | Traceability |
 | UPN-000007469 | UPN-000007472 | 4 | `UCOS-APPLICATION-000109` | 000 | Validation Evidence |
 | UPN-000007473 | UPN-000007476 | 4 | `UCOS-APPLICATION-000110` | 000 | Validation Report |
+| UPN-000007477 | UPN-000007482 | 6 | `UCOS-MASTER-000030` | 000 | BUC-001R — BUSINESS UNIVERSE ARCHITECTURE REC… |
+| UPN-000007483 | UPN-000007488 | 6 | `UCOS-CON-000031` | 002 | UAM-001 — UNIVERSAL ARCHITECTURAL META MODEL … |
+| UPN-000007489 | UPN-000007491 | 3 | `UCOS-APPLICATION-000111` | 000 | EC3-B12-U11 — UNIVERSAL APPLICATION META-MODE… |
+| UPN-000007492 | UPN-000007492 | 1 | `UCOS-APPLICATION-000112` | 000 | Acceptance Decision |
+| UPN-000007493 | UPN-000007494 | 2 | `UCOS-APPLICATION-000113` | 000 | Application Compliance |
+| UPN-000007495 | UPN-000007498 | 4 | `UCOS-APPLICATION-000114` | 000 | Cce Certification |
+| UPN-000007499 | UPN-000007501 | 3 | `UCOS-APPLICATION-000115` | 000 | Certification Evidence |
+| UPN-000007502 | UPN-000007502 | 1 | `UCOS-APPLICATION-000116` | 000 | Certification Ledger |
+| UPN-000007503 | UPN-000007503 | 1 | `UCOS-APPLICATION-000117` | 000 | Determinism |
+| UPN-000007504 | UPN-000007527 | 24 | `UCOS-APPLICATION-000118` | 000 | Realization Evidence |
+| UPN-000007528 | UPN-000007528 | 1 | `UCOS-APPLICATION-000119` | 000 | Traceability |
+| UPN-000007529 | UPN-000007532 | 4 | `UCOS-APPLICATION-000120` | 000 | Validation Evidence |
+| UPN-000007533 | UPN-000007536 | 4 | `UCOS-APPLICATION-000121` | 000 | Validation Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

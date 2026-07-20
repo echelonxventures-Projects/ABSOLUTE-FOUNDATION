@@ -10285,6 +10285,155 @@
       "violations": [],
       "result": "PASS",
       "seq": 307
+    },
+    {
+      "generated_at": "2026-07-20T05:20:55+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 786,
+      "registered": 785,
+      "unregistered": [
+        "02-MASTER/BUC-001R-BUSINESS-UNIVERSE-ARCHITECTURE-RECONCILIATION-DETERMINATION.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 308
+    },
+    {
+      "generated_at": "2026-07-20T05:21:21+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 786,
+      "registered": 786,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 309
+    },
+    {
+      "generated_at": "2026-07-20T05:32:39+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 787,
+      "registered": 786,
+      "unregistered": [
+        "02-MASTER/UAM-001-UNIVERSAL-ARCHITECTURAL-META-MODEL-CONSTITUTIONAL-ARCHITECTURE-INHERITANCE-DETERMINATION.md"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 310
+    },
+    {
+      "generated_at": "2026-07-20T05:32:41+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 787,
+      "registered": 787,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 311
+    },
+    {
+      "generated_at": "2026-07-20T06:05:19+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 798,
+      "registered": 787,
+      "unregistered": [
+        "application/EC3-B12-U11-COMPLETION-REPORT.md",
+        "application/_evidence/EC3-B12-U11/acceptance-decision.json",
+        "application/_evidence/EC3-B12-U11/application-compliance.json",
+        "application/_evidence/EC3-B12-U11/cce-certification.json",
+        "application/_evidence/EC3-B12-U11/certification-evidence.json",
+        "application/_evidence/EC3-B12-U11/certification-ledger.json",
+        "application/_evidence/EC3-B12-U11/determinism.json",
+        "application/_evidence/EC3-B12-U11/realization-evidence.json",
+        "application/_evidence/EC3-B12-U11/traceability.json",
+        "application/_evidence/EC3-B12-U11/validation-evidence.json",
+        "application/_evidence/EC3-B12-U11/validation-report.json"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 312
+    },
+    {
+      "generated_at": "2026-07-20T06:05:21+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 798,
+      "registered": 798,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 313
+    },
+    {
+      "generated_at": "2026-07-20T06:11:30+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 798,
+      "registered": 798,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 314
     }
   ]
 }

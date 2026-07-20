@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 785
+**Total artifacts:** 798
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -793,5 +793,18 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 783 | `UCOS-APPLICATION-000108` | Traceability | — | 000 | UPN-000007468–UPN-000007468 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/traceability.json) |
 | 784 | `UCOS-APPLICATION-000109` | Validation Evidence | — | 000 | UPN-000007469–UPN-000007472 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/validation-evidence.json) |
 | 785 | `UCOS-APPLICATION-000110` | Validation Report | — | 000 | UPN-000007473–UPN-000007476 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/validation-report.json) |
+| 786 | `UCOS-MASTER-000030` | BUC-001R — BUSINESS UNIVERSE ARCHITECTURE RECONCILIATION … | — | 000 | UPN-000007477–UPN-000007482 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/BUC-001R-BUSINESS-UNIVERSE-ARCHITECTURE-RECONCILIATION-DETERMINATION.md) |
+| 787 | `UCOS-CON-000031` | UAM-001 — UNIVERSAL ARCHITECTURAL META MODEL · CONSTITUTI… | — | 002 | UPN-000007483–UPN-000007488 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../02-MASTER/UAM-001-UNIVERSAL-ARCHITECTURAL-META-MODEL-CONSTITUTIONAL-ARCHITECTURE-INHERITANCE-DETERMINATION.md) |
+| 788 | `UCOS-APPLICATION-000111` | EC3-B12-U11 — UNIVERSAL APPLICATION META-MODEL (UAM) — RE… | — | 000 | UPN-000007489–UPN-000007491 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/EC3-B12-U11-COMPLETION-REPORT.md) |
+| 789 | `UCOS-APPLICATION-000112` | Acceptance Decision | — | 000 | UPN-000007492–UPN-000007492 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/acceptance-decision.json) |
+| 790 | `UCOS-APPLICATION-000113` | Application Compliance | — | 000 | UPN-000007493–UPN-000007494 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/application-compliance.json) |
+| 791 | `UCOS-APPLICATION-000114` | Cce Certification | — | 000 | UPN-000007495–UPN-000007498 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/cce-certification.json) |
+| 792 | `UCOS-APPLICATION-000115` | Certification Evidence | — | 000 | UPN-000007499–UPN-000007501 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/certification-evidence.json) |
+| 793 | `UCOS-APPLICATION-000116` | Certification Ledger | — | 000 | UPN-000007502–UPN-000007502 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/certification-ledger.json) |
+| 794 | `UCOS-APPLICATION-000117` | Determinism | — | 000 | UPN-000007503–UPN-000007503 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/determinism.json) |
+| 795 | `UCOS-APPLICATION-000118` | Realization Evidence | — | 000 | UPN-000007504–UPN-000007527 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/realization-evidence.json) |
+| 796 | `UCOS-APPLICATION-000119` | Traceability | — | 000 | UPN-000007528–UPN-000007528 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/traceability.json) |
+| 797 | `UCOS-APPLICATION-000120` | Validation Evidence | — | 000 | UPN-000007529–UPN-000007532 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/validation-evidence.json) |
+| 798 | `UCOS-APPLICATION-000121` | Validation Report | — | 000 | UPN-000007533–UPN-000007536 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U11/validation-report.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
