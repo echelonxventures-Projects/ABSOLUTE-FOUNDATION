@@ -10235,6 +10235,56 @@
       "violations": [],
       "result": "PASS",
       "seq": 305
+    },
+    {
+      "generated_at": "2026-07-20T04:55:15+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 785,
+      "registered": 774,
+      "unregistered": [
+        "application/EC3-B12-U10-COMPLETION-REPORT.md",
+        "application/_evidence/EC3-B12-U10/acceptance-decision.json",
+        "application/_evidence/EC3-B12-U10/application-compliance.json",
+        "application/_evidence/EC3-B12-U10/cce-certification.json",
+        "application/_evidence/EC3-B12-U10/certification-evidence.json",
+        "application/_evidence/EC3-B12-U10/certification-ledger.json",
+        "application/_evidence/EC3-B12-U10/determinism.json",
+        "application/_evidence/EC3-B12-U10/realization-evidence.json",
+        "application/_evidence/EC3-B12-U10/traceability.json",
+        "application/_evidence/EC3-B12-U10/validation-evidence.json",
+        "application/_evidence/EC3-B12-U10/validation-report.json"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 306
+    },
+    {
+      "generated_at": "2026-07-20T04:55:17+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 785,
+      "registered": 785,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 307
     }
   ]
 }

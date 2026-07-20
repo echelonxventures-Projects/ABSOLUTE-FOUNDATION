@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 774
+**Total artifacts:** 785
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -782,5 +782,16 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 772 | `UCOS-APPLICATION-000097` | Traceability | — | 000 | UPN-000007426–UPN-000007426 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U09/traceability.json) |
 | 773 | `UCOS-APPLICATION-000098` | Validation Evidence | — | 000 | UPN-000007427–UPN-000007430 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U09/validation-evidence.json) |
 | 774 | `UCOS-APPLICATION-000099` | Validation Report | — | 000 | UPN-000007431–UPN-000007434 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U09/validation-report.json) |
+| 775 | `UCOS-APPLICATION-000100` | EC3-B12-U10 — UNIVERSAL APPLICATION GOVERNANCE — REALIZAT… | — | 000 | UPN-000007435–UPN-000007437 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/EC3-B12-U10-COMPLETION-REPORT.md) |
+| 776 | `UCOS-APPLICATION-000101` | Acceptance Decision | — | 000 | UPN-000007438–UPN-000007438 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/acceptance-decision.json) |
+| 777 | `UCOS-APPLICATION-000102` | Application Compliance | — | 000 | UPN-000007439–UPN-000007440 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/application-compliance.json) |
+| 778 | `UCOS-APPLICATION-000103` | Cce Certification | — | 000 | UPN-000007441–UPN-000007444 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/cce-certification.json) |
+| 779 | `UCOS-APPLICATION-000104` | Certification Evidence | — | 000 | UPN-000007445–UPN-000007447 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/certification-evidence.json) |
+| 780 | `UCOS-APPLICATION-000105` | Certification Ledger | — | 000 | UPN-000007448–UPN-000007448 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/certification-ledger.json) |
+| 781 | `UCOS-APPLICATION-000106` | Determinism | — | 000 | UPN-000007449–UPN-000007449 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/determinism.json) |
+| 782 | `UCOS-APPLICATION-000107` | Realization Evidence | — | 000 | UPN-000007450–UPN-000007467 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/realization-evidence.json) |
+| 783 | `UCOS-APPLICATION-000108` | Traceability | — | 000 | UPN-000007468–UPN-000007468 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/traceability.json) |
+| 784 | `UCOS-APPLICATION-000109` | Validation Evidence | — | 000 | UPN-000007469–UPN-000007472 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/validation-evidence.json) |
+| 785 | `UCOS-APPLICATION-000110` | Validation Report | — | 000 | UPN-000007473–UPN-000007476 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../application/_evidence/EC3-B12-U10/validation-report.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
