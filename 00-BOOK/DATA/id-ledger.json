@@ -5712,9 +5712,86 @@
       "page_start": 7551,
       "page_count": 7,
       "first_seen": "2026-07-20T08:03:33+00:00"
+    },
+    "infrastructure/EC3-B13-U01-COMPLETION-REPORT.md": {
+      "universal_id": "UCOS-INFRASTRUCTU-000001",
+      "category": "INFRASTRUCTU",
+      "page_start": 7558,
+      "page_count": 4,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/acceptance-decision.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000002",
+      "category": "INFRASTRUCTU",
+      "page_start": 7562,
+      "page_count": 1,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/cce-certification.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000003",
+      "category": "INFRASTRUCTU",
+      "page_start": 7563,
+      "page_count": 4,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/certification-evidence.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000004",
+      "category": "INFRASTRUCTU",
+      "page_start": 7567,
+      "page_count": 3,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/certification-ledger.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000005",
+      "category": "INFRASTRUCTU",
+      "page_start": 7570,
+      "page_count": 1,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/determinism.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000006",
+      "category": "INFRASTRUCTU",
+      "page_start": 7571,
+      "page_count": 1,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/infrastructure-compliance.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000007",
+      "category": "INFRASTRUCTU",
+      "page_start": 7572,
+      "page_count": 2,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/realization-evidence.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000008",
+      "category": "INFRASTRUCTU",
+      "page_start": 7574,
+      "page_count": 17,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/traceability.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000009",
+      "category": "INFRASTRUCTU",
+      "page_start": 7591,
+      "page_count": 1,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/validation-evidence.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000010",
+      "category": "INFRASTRUCTU",
+      "page_start": 7592,
+      "page_count": 4,
+      "first_seen": "2026-07-20T08:49:00+00:00"
+    },
+    "infrastructure/_evidence/EC3-B13-U01/validation-report.json": {
+      "universal_id": "UCOS-INFRASTRUCTU-000011",
+      "category": "INFRASTRUCTU",
+      "page_start": 7596,
+      "page_count": 4,
+      "first_seen": "2026-07-20T08:49:00+00:00"
     }
   },
-  "page_cursor": 7557,
+  "page_cursor": 7599,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -5749,7 +5826,8 @@
     "MCP001MASTER": 1,
     "INTELLIGENCE": 11,
     "SERVICE": 149,
-    "APPLICATION": 121
+    "APPLICATION": 121,
+    "INFRASTRUCTU": 11
   },
   "discovered_volumes": {},
   "volume_seq": 0,
@@ -14899,6 +14977,127 @@
         "status": "ACTIVE",
         "path": "02-MASTER/EC-3-B13-P02-UNIVERSAL-UNIVERSE-ARCHITECTURE-FRAMEWORK.md",
         "name": "UCOS Ω∞ — EC-3 B13-P02 · UNIVERSAL UNIVERSE ARCHITECTURE FRAMEWORK (UAF) · INFINITE UNIVERSE EXECUTION MODEL"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "ab9fcb2dfd2021d8c308d4455911936a1f85d66a467fb1e8184ac478d968e9e4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/EC3-B13-U01-COMPLETION-REPORT.md",
+        "name": "EC3-B13-U01 — UNIVERSAL INFRASTRUCTURE CAPABILITY — REALIZATION COMPLETION REPORT"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "4d105a7c3a49443e5f408ced0b2c83b12c08a1e25c84491fadd4e4b616c07a13",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/acceptance-decision.json",
+        "name": "Acceptance Decision"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "2aad59188e9743e75a0d1df0cf1b253f52a688b7294dc1d290a4420ce189b472",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/cce-certification.json",
+        "name": "Cce Certification"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "124c901b653f1d652db3a2e68d07689873c4cbf2f2c6860d9129c210b6850e23",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/certification-evidence.json",
+        "name": "Certification Evidence"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "7b12f6297a7a609415f0f181c4a57f4c40a57b8b7124608afcb99e8873751725",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/certification-ledger.json",
+        "name": "Certification Ledger"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "ab2ae48d1dcf623accab53ffa85bfc17ad19a8dd3c0d64b760c294a0e9c5925a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/determinism.json",
+        "name": "Determinism"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "2ffdd96fb24c5d9cd157536cb02b7aec918c117df168017eb3fd7c3b3b11b22c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/infrastructure-compliance.json",
+        "name": "Infrastructure Compliance"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "049945211d57ef89248960b0065279ce832b611116f32027acde33b64dfbe0cb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/realization-evidence.json",
+        "name": "Realization Evidence"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "9151ccf346f122e4ff9341251d9aa04fa7b633ae981f1b4e1294ed48f69f7f69",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/traceability.json",
+        "name": "Traceability"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "d3d6eeeeebd41f950145d5b621b2be4d3ba9940e82ce88e8bca13caef7cf4f40",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/validation-evidence.json",
+        "name": "Validation Evidence"
+      }
+    ],
+    "UCOS-INFRASTRUCTU-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T08:49:00+00:00",
+        "content_hash": "03761f051a5b41eb2e34be4f43c97b04aa2c2a1cf1d782f982a9bbdec4f81d59",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "infrastructure/_evidence/EC3-B13-U01/validation-report.json",
+        "name": "Validation Report"
       }
     ]
   }

@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 7557  ·  **Page cursor (next free):** UPN-000007558
+**Pages allocated:** 7599  ·  **Page cursor (next free):** UPN-000007600
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -809,5 +809,16 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000007537 | UPN-000007542 | 6 | `UCOS-MASTER-000031` | 000 | UCOS Ω∞ — EC-3 AP-5 BAND 13 (INFRASTRUCTURE) … |
 | UPN-000007543 | UPN-000007550 | 8 | `UCOS-MASTER-000032` | 000 | UCOS Ω∞ — EC-3 BAND 13 (INFRASTRUCTURE) MASTE… |
 | UPN-000007551 | UPN-000007557 | 7 | `UCOS-MASTER-000033` | 000 | UCOS Ω∞ — EC-3 B13-P02 · UNIVERSAL UNIVERSE A… |
+| UPN-000007558 | UPN-000007561 | 4 | `UCOS-INFRASTRUCTU-000001` | 000 | EC3-B13-U01 — UNIVERSAL INFRASTRUCTURE CAPABI… |
+| UPN-000007562 | UPN-000007562 | 1 | `UCOS-INFRASTRUCTU-000002` | 000 | Acceptance Decision |
+| UPN-000007563 | UPN-000007566 | 4 | `UCOS-INFRASTRUCTU-000003` | 000 | Cce Certification |
+| UPN-000007567 | UPN-000007569 | 3 | `UCOS-INFRASTRUCTU-000004` | 000 | Certification Evidence |
+| UPN-000007570 | UPN-000007570 | 1 | `UCOS-INFRASTRUCTU-000005` | 000 | Certification Ledger |
+| UPN-000007571 | UPN-000007571 | 1 | `UCOS-INFRASTRUCTU-000006` | 000 | Determinism |
+| UPN-000007572 | UPN-000007573 | 2 | `UCOS-INFRASTRUCTU-000007` | 000 | Infrastructure Compliance |
+| UPN-000007574 | UPN-000007590 | 17 | `UCOS-INFRASTRUCTU-000008` | 000 | Realization Evidence |
+| UPN-000007591 | UPN-000007591 | 1 | `UCOS-INFRASTRUCTU-000009` | 000 | Traceability |
+| UPN-000007592 | UPN-000007595 | 4 | `UCOS-INFRASTRUCTU-000010` | 000 | Validation Evidence |
+| UPN-000007596 | UPN-000007599 | 4 | `UCOS-INFRASTRUCTU-000011` | 000 | Validation Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

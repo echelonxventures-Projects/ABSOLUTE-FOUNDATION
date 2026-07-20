@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-20T08:05:31+00:00",
+  "generated_at": "2026-07-20T08:52:11+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 820,
-    "versioned_artifacts": 801,
-    "lineage_nodes": 801,
+    "change_events": 831,
+    "versioned_artifacts": 812,
+    "lineage_nodes": 812,
     "artifacts_with_predecessors": 5,
     "artifacts_with_successors": 5
   },
   "change_event_histogram": {
-    "Created": 801,
+    "Created": 812,
     "Modified": 19
   },
   "evolution_timeline": [
@@ -4931,6 +4931,72 @@
       "change_id": "UCHG-000000820",
       "at": "2026-07-20T08:03:33+00:00",
       "subject": "UCOS-MASTER-000033",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000821",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000822",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000002",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000823",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000003",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000824",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000004",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000825",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000005",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000826",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000006",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000827",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000007",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000828",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000008",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000829",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000009",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000830",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000010",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000831",
+      "at": "2026-07-20T08:49:00+00:00",
+      "subject": "UCOS-INFRASTRUCTU-000011",
       "kind": "Created"
     }
   ],
@@ -13130,6 +13196,116 @@
       "subject": "UCOS-MASTER-000033",
       "kind": "Created",
       "at": "2026-07-20T08:03:33+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000821",
+      "subject": "UCOS-INFRASTRUCTU-000001",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000822",
+      "subject": "UCOS-INFRASTRUCTU-000002",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000823",
+      "subject": "UCOS-INFRASTRUCTU-000003",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000824",
+      "subject": "UCOS-INFRASTRUCTU-000004",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000825",
+      "subject": "UCOS-INFRASTRUCTU-000005",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000826",
+      "subject": "UCOS-INFRASTRUCTU-000006",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000827",
+      "subject": "UCOS-INFRASTRUCTU-000007",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000828",
+      "subject": "UCOS-INFRASTRUCTU-000008",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000829",
+      "subject": "UCOS-INFRASTRUCTU-000009",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000830",
+      "subject": "UCOS-INFRASTRUCTU-000010",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000831",
+      "subject": "UCOS-INFRASTRUCTU-000011",
+      "kind": "Created",
+      "at": "2026-07-20T08:49:00+00:00",
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
@@ -24350,6 +24526,160 @@
           "snapshot_seq": 1
         }
       ]
+    },
+    "UCOS-INFRASTRUCTU-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "ab9fcb2dfd2021d8c308d4455911936a1f85d66a467fb1e8184ac478d968e9e4",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "ab9fcb2dfd2021d8c308d4455911936a1f85d66a467fb1e8184ac478d968e9e4",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000002": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "4d105a7c3a49443e5f408ced0b2c83b12c08a1e25c84491fadd4e4b616c07a13",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "4d105a7c3a49443e5f408ced0b2c83b12c08a1e25c84491fadd4e4b616c07a13",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000003": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "2aad59188e9743e75a0d1df0cf1b253f52a688b7294dc1d290a4420ce189b472",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "2aad59188e9743e75a0d1df0cf1b253f52a688b7294dc1d290a4420ce189b472",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000004": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "124c901b653f1d652db3a2e68d07689873c4cbf2f2c6860d9129c210b6850e23",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "124c901b653f1d652db3a2e68d07689873c4cbf2f2c6860d9129c210b6850e23",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000005": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "7b12f6297a7a609415f0f181c4a57f4c40a57b8b7124608afcb99e8873751725",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "7b12f6297a7a609415f0f181c4a57f4c40a57b8b7124608afcb99e8873751725",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000006": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "ab2ae48d1dcf623accab53ffa85bfc17ad19a8dd3c0d64b760c294a0e9c5925a",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "ab2ae48d1dcf623accab53ffa85bfc17ad19a8dd3c0d64b760c294a0e9c5925a",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000007": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "2ffdd96fb24c5d9cd157536cb02b7aec918c117df168017eb3fd7c3b3b11b22c",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "2ffdd96fb24c5d9cd157536cb02b7aec918c117df168017eb3fd7c3b3b11b22c",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000008": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "049945211d57ef89248960b0065279ce832b611116f32027acde33b64dfbe0cb",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "049945211d57ef89248960b0065279ce832b611116f32027acde33b64dfbe0cb",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000009": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "9151ccf346f122e4ff9341251d9aa04fa7b633ae981f1b4e1294ed48f69f7f69",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "9151ccf346f122e4ff9341251d9aa04fa7b633ae981f1b4e1294ed48f69f7f69",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000010": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "d3d6eeeeebd41f950145d5b621b2be4d3ba9940e82ce88e8bca13caef7cf4f40",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "d3d6eeeeebd41f950145d5b621b2be4d3ba9940e82ce88e8bca13caef7cf4f40",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-INFRASTRUCTU-000011": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "03761f051a5b41eb2e34be4f43c97b04aa2c2a1cf1d782f982a9bbdec4f81d59",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "03761f051a5b41eb2e34be4f43c97b04aa2c2a1cf1d782f982a9bbdec4f81d59",
+          "at": "2026-07-20T08:49:00+00:00",
+          "snapshot_seq": 1
+        }
+      ]
     }
   },
   "lineage": {
@@ -29308,6 +29638,94 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-ENG-000017"
+    },
+    "UCOS-INFRASTRUCTU-000001": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000001"
+    },
+    "UCOS-INFRASTRUCTU-000002": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000002"
+    },
+    "UCOS-INFRASTRUCTU-000003": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000003"
+    },
+    "UCOS-INFRASTRUCTU-000004": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000004"
+    },
+    "UCOS-INFRASTRUCTU-000005": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000005"
+    },
+    "UCOS-INFRASTRUCTU-000006": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000006"
+    },
+    "UCOS-INFRASTRUCTU-000007": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000007"
+    },
+    "UCOS-INFRASTRUCTU-000008": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000008"
+    },
+    "UCOS-INFRASTRUCTU-000009": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000009"
+    },
+    "UCOS-INFRASTRUCTU-000010": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000010"
+    },
+    "UCOS-INFRASTRUCTU-000011": {
+      "birth": "2026-07-20T08:49:00+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-INFRASTRUCTU-000011"
     },
     "UCOS-INTELLIGENCE-000001": {
       "birth": "2026-07-18T14:06:17+00:00",
