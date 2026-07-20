@@ -90,6 +90,7 @@
 | Date | Change | Reason |
 |------|--------|--------|
 | 2026-07-18 | MCP-004 established as MCS component 4 (constitutional + implementation/program decision index); added MCS-DEC-001 | Mission MCP-002 decomposition (migrated from root §04) |
+| 2026-07-20 | Indexed **EC3-B13-G01 = EC-3 AP-5 Band-13 (Infrastructure) admission determination** (`02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md`): governance-only (AUTHORITY = NONE) per-band admission decision — **BAND 13 ADMITTED · AP-5 SATISFIED · MEP-04 OPEN** (AP5-1…AP5-10 all PASS; the analog of AP-2/AP-3/AP-4). Recorded in its authoritative register (the determination artifact itself) + MCP-002/003/006. Non-blocking observations OBS-C (test-dir lint) + OBS-D (DR-RAT-11 finality) carried. Decision authorizes queue admission only; realization DEFERRED pending explicit authorization. | EC3-B13-G01 — MEP-04 admission (AP-5) |
 
 *Append-only. Index a decision here only after it is recorded in its authoritative register.*
 
