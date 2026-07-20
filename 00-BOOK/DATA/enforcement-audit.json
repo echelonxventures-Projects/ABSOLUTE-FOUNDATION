@@ -10947,6 +10947,75 @@
       "violations": [],
       "result": "PASS",
       "seq": 337
+    },
+    {
+      "generated_at": "2026-07-20T11:15:43+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 856,
+      "registered": 845,
+      "unregistered": [
+        "infrastructure/EC3-B13-U05-COMPLETION-REPORT.md",
+        "infrastructure/_evidence/EC3-B13-U05/acceptance-decision.json",
+        "infrastructure/_evidence/EC3-B13-U05/cce-certification.json",
+        "infrastructure/_evidence/EC3-B13-U05/certification-evidence.json",
+        "infrastructure/_evidence/EC3-B13-U05/certification-ledger.json",
+        "infrastructure/_evidence/EC3-B13-U05/determinism.json",
+        "infrastructure/_evidence/EC3-B13-U05/infrastructure-compliance.json",
+        "infrastructure/_evidence/EC3-B13-U05/realization-evidence.json",
+        "infrastructure/_evidence/EC3-B13-U05/traceability.json",
+        "infrastructure/_evidence/EC3-B13-U05/validation-evidence.json",
+        "infrastructure/_evidence/EC3-B13-U05/validation-report.json"
+      ],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 338
+    },
+    {
+      "generated_at": "2026-07-20T11:15:45+00:00",
+      "generator_version": "1.0.0",
+      "mode": "post",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 856,
+      "registered": 856,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 339
+    },
+    {
+      "generated_at": "2026-07-20T11:21:17+00:00",
+      "generator_version": "1.0.0",
+      "mode": "pre",
+      "gates": [
+        "eligibility",
+        "validity",
+        "classification",
+        "registration"
+      ],
+      "eligible": 856,
+      "registered": 856,
+      "unregistered": [],
+      "unclassified": [],
+      "invalid": [],
+      "violations": [],
+      "result": "PASS",
+      "seq": 340
     }
   ]
 }
