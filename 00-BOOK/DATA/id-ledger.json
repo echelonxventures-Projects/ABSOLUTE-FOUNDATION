@@ -5691,9 +5691,16 @@
       "page_start": 7533,
       "page_count": 4,
       "first_seen": "2026-07-20T06:05:19+00:00"
+    },
+    "02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md": {
+      "universal_id": "UCOS-MASTER-000031",
+      "category": "MASTER",
+      "page_start": 7537,
+      "page_count": 6,
+      "first_seen": "2026-07-20T07:06:27+00:00"
     }
   },
-  "page_cursor": 7536,
+  "page_cursor": 7542,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -5720,7 +5727,7 @@
     "EXEC": 4,
     "GOV": 6,
     "ADR": 3,
-    "MASTER": 30,
+    "MASTER": 31,
     "ENVIRONMENTS": 1,
     "VERIFICATION": 1,
     "UCOSOMEGAINF": 1,
@@ -14845,6 +14852,17 @@
         "status": "ACTIVE",
         "path": "application/_evidence/EC3-B12-U11/validation-report.json",
         "name": "Validation Report"
+      }
+    ],
+    "UCOS-MASTER-000031": [
+      {
+        "seq": 1,
+        "at": "2026-07-20T07:06:27+00:00",
+        "content_hash": "194c92fdbaaa279238e6369bedff75da7f23320d588c15d6eb358f5ea9f78ba9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — EC-3 AP-5 BAND 13 (INFRASTRUCTURE) EXECUTION-PACKAGE ADMISSION DETERMINATION"
       }
     ]
   }

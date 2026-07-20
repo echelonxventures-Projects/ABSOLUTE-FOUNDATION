@@ -6,7 +6,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 438 | UPN-000000001–UPN-000007536 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 439 | UPN-000000001–UPN-000007542 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 36 | UPN-000001327–UPN-000007488 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 38 | UPN-000000022–UPN-000005968 |
@@ -34,7 +34,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 438
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 439
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -476,6 +476,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-APPLICATION-000119` | Traceability | — | ACTIVE |
 | `UCOS-APPLICATION-000120` | Validation Evidence | — | ACTIVE |
 | `UCOS-APPLICATION-000121` | Validation Report | — | ACTIVE |
+| `UCOS-MASTER-000031` | UCOS Ω∞ — EC-3 AP-5 BAND 13 (INFRASTRUCTURE) EXECUTION-PACKAG… | EC-3-AP-5-BAND-13 | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
