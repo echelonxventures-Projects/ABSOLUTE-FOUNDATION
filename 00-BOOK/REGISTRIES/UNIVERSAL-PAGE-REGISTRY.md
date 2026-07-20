@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 7599  ·  **Page cursor (next free):** UPN-000007600
+**Pages allocated:** 7641  ·  **Page cursor (next free):** UPN-000007642
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -820,5 +820,16 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000007591 | UPN-000007591 | 1 | `UCOS-INFRASTRUCTU-000009` | 000 | Traceability |
 | UPN-000007592 | UPN-000007595 | 4 | `UCOS-INFRASTRUCTU-000010` | 000 | Validation Evidence |
 | UPN-000007596 | UPN-000007599 | 4 | `UCOS-INFRASTRUCTU-000011` | 000 | Validation Report |
+| UPN-000007600 | UPN-000007603 | 4 | `UCOS-INFRASTRUCTU-000012` | 000 | EC3-B13-U02 — UNIVERSAL INFRASTRUCTURE COMPUT… |
+| UPN-000007604 | UPN-000007604 | 1 | `UCOS-INFRASTRUCTU-000013` | 000 | Acceptance Decision |
+| UPN-000007605 | UPN-000007608 | 4 | `UCOS-INFRASTRUCTU-000014` | 000 | Cce Certification |
+| UPN-000007609 | UPN-000007611 | 3 | `UCOS-INFRASTRUCTU-000015` | 000 | Certification Evidence |
+| UPN-000007612 | UPN-000007612 | 1 | `UCOS-INFRASTRUCTU-000016` | 000 | Certification Ledger |
+| UPN-000007613 | UPN-000007613 | 1 | `UCOS-INFRASTRUCTU-000017` | 000 | Determinism |
+| UPN-000007614 | UPN-000007615 | 2 | `UCOS-INFRASTRUCTU-000018` | 000 | Infrastructure Compliance |
+| UPN-000007616 | UPN-000007632 | 17 | `UCOS-INFRASTRUCTU-000019` | 000 | Realization Evidence |
+| UPN-000007633 | UPN-000007633 | 1 | `UCOS-INFRASTRUCTU-000020` | 000 | Traceability |
+| UPN-000007634 | UPN-000007637 | 4 | `UCOS-INFRASTRUCTU-000021` | 000 | Validation Evidence |
+| UPN-000007638 | UPN-000007641 | 4 | `UCOS-INFRASTRUCTU-000022` | 000 | Validation Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

@@ -6,7 +6,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 452 | UPN-000000001–UPN-000007599 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 463 | UPN-000000001–UPN-000007641 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 36 | UPN-000001327–UPN-000007488 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 38 | UPN-000000022–UPN-000005968 |
@@ -34,7 +34,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 452
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 463
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -490,6 +490,17 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-INFRASTRUCTU-000009` | Traceability | — | ACTIVE |
 | `UCOS-INFRASTRUCTU-000010` | Validation Evidence | — | ACTIVE |
 | `UCOS-INFRASTRUCTU-000011` | Validation Report | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000012` | EC3-B13-U02 — UNIVERSAL INFRASTRUCTURE COMPUTE — REALIZATION … | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000013` | Acceptance Decision | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000014` | Cce Certification | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000015` | Certification Evidence | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000016` | Certification Ledger | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000017` | Determinism | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000018` | Infrastructure Compliance | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000019` | Realization Evidence | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000020` | Traceability | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000021` | Validation Evidence | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000022` | Validation Report | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
