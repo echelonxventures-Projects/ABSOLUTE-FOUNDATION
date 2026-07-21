@@ -6734,9 +6734,30 @@
       "page_start": 8448,
       "page_count": 4,
       "first_seen": "2026-07-21T14:19:36+00:00"
+    },
+    "00-CEP/STAGE-04-S4-09-INFRASTRUCTURE-014-GOVERNANCE-VALIDATION.md": {
+      "universal_id": "UCOS-CEP-000032",
+      "category": "CEP",
+      "page_start": 8452,
+      "page_count": 3,
+      "first_seen": "2026-07-21T14:51:20+00:00"
+    },
+    "00-CEP/STAGE-04-S4-10-INFRASTRUCTURE-014-GOVERNANCE-CERTIFICATION.md": {
+      "universal_id": "UCOS-CEP-000033",
+      "category": "CEP",
+      "page_start": 8455,
+      "page_count": 3,
+      "first_seen": "2026-07-21T14:52:31+00:00"
+    },
+    "00-CEP/STAGE-04-S4-11-INFRASTRUCTURE-014-GOVERNANCE-PROVISIONAL-RATIFICATION.md": {
+      "universal_id": "UCOS-CEP-000034",
+      "category": "CEP",
+      "page_start": 8458,
+      "page_count": 3,
+      "first_seen": "2026-07-21T14:53:45+00:00"
     }
   },
-  "page_cursor": 8451,
+  "page_cursor": 8460,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -6773,7 +6794,7 @@
     "SERVICE": 149,
     "APPLICATION": 121,
     "INFRASTRUCTU": 99,
-    "CEP": 31
+    "CEP": 34
   },
   "discovered_volumes": {},
   "volume_seq": 0,
@@ -17529,6 +17550,39 @@
         "status": "ACTIVE",
         "path": "infrastructure/_evidence/EC3-B13-U09/validation-report.json",
         "name": "Validation Report"
+      }
+    ],
+    "UCOS-CEP-000032": [
+      {
+        "seq": 1,
+        "at": "2026-07-21T14:51:20+00:00",
+        "content_hash": "e2234173e8915d1bb46227e0e60e9f7d0f4426c4c7daccb1aa93807e25c01e46",
+        "version": "1.0.0",
+        "status": "COMPLETE",
+        "path": "00-CEP/STAGE-04-S4-09-INFRASTRUCTURE-014-GOVERNANCE-VALIDATION.md",
+        "name": "UCOS Ω∞ — STAGE 04 · S4-09 — INFRASTRUCTURE-014 GOVERNANCE VALIDATION ATTESTATION"
+      }
+    ],
+    "UCOS-CEP-000033": [
+      {
+        "seq": 1,
+        "at": "2026-07-21T14:52:31+00:00",
+        "content_hash": "346983b508e4ebf64f319e704975d1d3924225274bfbd8c041348c389466f174",
+        "version": "1.0.0",
+        "status": "COMPLETE",
+        "path": "00-CEP/STAGE-04-S4-10-INFRASTRUCTURE-014-GOVERNANCE-CERTIFICATION.md",
+        "name": "UCOS Ω∞ — STAGE 04 · S4-10 — INFRASTRUCTURE-014 GOVERNANCE CERTIFICATION"
+      }
+    ],
+    "UCOS-CEP-000034": [
+      {
+        "seq": 1,
+        "at": "2026-07-21T14:53:45+00:00",
+        "content_hash": "fd0bafb2c8d184fe37a414e61dce4abb32691381f2d96cc521552b39a4059494",
+        "version": "1.0.0",
+        "status": "COMPLETE",
+        "path": "00-CEP/STAGE-04-S4-11-INFRASTRUCTURE-014-GOVERNANCE-PROVISIONAL-RATIFICATION.md",
+        "name": "UCOS Ω∞ — STAGE 04 · S4-11 — INFRASTRUCTURE-014 GOVERNANCE PROVISIONAL RATIFICATION"
       }
     ]
   }

@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 945
+**Total artifacts:** 948
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -953,5 +953,8 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 943 | `UCOS-INFRASTRUCTU-000097` | Traceability | — | 000 | UPN-000008443–UPN-000008443 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U09/traceability.json) |
 | 944 | `UCOS-INFRASTRUCTU-000098` | Validation Evidence | — | 000 | UPN-000008444–UPN-000008447 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U09/validation-evidence.json) |
 | 945 | `UCOS-INFRASTRUCTU-000099` | Validation Report | — | 000 | UPN-000008448–UPN-000008451 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U09/validation-report.json) |
+| 946 | `UCOS-CEP-000032` | UCOS Ω∞ — STAGE 04 · S4-09 — INFRASTRUCTURE-014 GOVERNANC… | CEP-STAGE-04-S4-09 | 000 | UPN-000008452–UPN-000008454 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../00-CEP/STAGE-04-S4-09-INFRASTRUCTURE-014-GOVERNANCE-VALIDATION.md) |
+| 947 | `UCOS-CEP-000033` | UCOS Ω∞ — STAGE 04 · S4-10 — INFRASTRUCTURE-014 GOVERNANC… | CEP-STAGE-04-S4-10 | 000 | UPN-000008455–UPN-000008457 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../00-CEP/STAGE-04-S4-10-INFRASTRUCTURE-014-GOVERNANCE-CERTIFICATION.md) |
+| 948 | `UCOS-CEP-000034` | UCOS Ω∞ — STAGE 04 · S4-11 — INFRASTRUCTURE-014 GOVERNANC… | CEP-STAGE-04-S4-11 | 000 | UPN-000008458–UPN-000008460 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../00-CEP/STAGE-04-S4-11-INFRASTRUCTURE-014-GOVERNANCE-PROVISIONAL-RATIFICATION.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
