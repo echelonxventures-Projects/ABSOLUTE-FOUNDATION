@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-21T16:24:19+00:00 by ukbx portal. 967 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-21T16:32:49+00:00 by ukbx portal. 968 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -971,3 +971,4 @@
 | [UCOS-INFRASTRUCTU-000116](UCOS-INFRASTRUCTU-000116.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-INFRASTRUCTU-000117](UCOS-INFRASTRUCTU-000117.md) | Validation Report | VOL-000 | ACTIVE |
 | [UCOS-SEC-000001](UCOS-SEC-000001.md) | UCOS Ω∞ — UNIVERSAL SECURITY PROGRAM ESTABLISHMENT DETERMINA | VOL-023 | ACTIVE |
+| [UCOS-SEC-000002](UCOS-SEC-000002.md) | UCOS Ω∞ — UNIVERSAL SECURITY CONSTITUTION | VOL-023 | ACTIVE |

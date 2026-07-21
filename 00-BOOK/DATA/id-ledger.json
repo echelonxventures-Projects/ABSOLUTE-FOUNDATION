@@ -6888,9 +6888,16 @@
       "page_start": 8900,
       "page_count": 4,
       "first_seen": "2026-07-21T16:24:17+00:00"
+    },
+    "14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md": {
+      "universal_id": "UCOS-SEC-000002",
+      "category": "SEC",
+      "page_start": 8904,
+      "page_count": 6,
+      "first_seen": "2026-07-21T16:32:48+00:00"
     }
   },
-  "page_cursor": 8903,
+  "page_cursor": 8909,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -6928,7 +6935,7 @@
     "APPLICATION": 121,
     "INFRASTRUCTU": 117,
     "CEP": 34,
-    "SEC": 1
+    "SEC": 2
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -17934,6 +17941,17 @@
         "status": "ACTIVE",
         "path": "14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
         "name": "UCOS Ω∞ — UNIVERSAL SECURITY PROGRAM ESTABLISHMENT DETERMINATION"
+      }
+    ],
+    "UCOS-SEC-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-21T16:32:48+00:00",
+        "content_hash": "166de8c9d754af30ef91af93b8cfea1694f0d28c36e6586879eecfe5f724963a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SECURITY CONSTITUTION"
       }
     ]
   }

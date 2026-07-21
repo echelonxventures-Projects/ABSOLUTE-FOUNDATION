@@ -29,7 +29,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-020` | 20 | CONTROL TOWER | CTL | ACTIVE | 12 | UPN-000004183–UPN-000005972 |
 | `VOL-021` | 21 | DIGITAL TWIN | ADV | ACTIVE | 20 | UPN-000004965–UPN-000005013 |
 | `VOL-022` | 22 | MASTER BOOK ARCHITECTURE | UMB | ACTIVE | 31 | UPN-000005247–UPN-000005480 |
-| `VOL-023` | 23 | SECURITY-GOVERNANCE | SEC | ACTIVE | 1 | UPN-000008900–UPN-000008903 |
+| `VOL-023` | 23 | SECURITY-GOVERNANCE | SEC | ACTIVE | 2 | UPN-000008900–UPN-000008909 |
 
 
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
@@ -1181,10 +1181,11 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-023 — SECURITY-GOVERNANCE <a id="vol-023"></a>
 
 *Auto-discovered volume (metadata-driven, UMB-IMP-001) first declared by 14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md.*  \
-**Category:** SEC · **Status:** ACTIVE · **Artifacts:** 1
+**Category:** SEC · **Status:** ACTIVE · **Artifacts:** 2
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
 | `UCOS-SEC-000001` | UCOS Ω∞ — UNIVERSAL SECURITY PROGRAM ESTABLISHMENT DETERMINATION | SECURITY-GOV-000 | ACTIVE |
+| `UCOS-SEC-000002` | UCOS Ω∞ — UNIVERSAL SECURITY CONSTITUTION | SECURITY-001 | ACTIVE |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
