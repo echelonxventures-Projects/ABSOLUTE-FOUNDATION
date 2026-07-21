@@ -4,6 +4,13 @@
 __pycache__/
 *.pyc
 
+# EC3 Phase-3 — runtime governance telemetry. The enforcement / synchronization /
+# certification audit logs are per-clone OPERATIONAL runtime state (not repository
+# artifacts). They live ONLY here, are written solely by
+# 00-BOOK/tools/governance_telemetry.py, and must never be tracked or seen as
+# drift. This is the permanent remediation for telemetry-induced non-determinism.
+.runtime/
+
 
 # EC-1 engine (EPIC-001 Foundation) build / test transients.
 .ec1-venv/

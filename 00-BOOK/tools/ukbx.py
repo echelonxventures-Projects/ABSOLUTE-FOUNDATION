@@ -40,6 +40,7 @@ PORTAL_DIR = os.path.join(BOOK_DIR, "PORTAL")
 
 sys.path.insert(0, HERE)
 import config as C  # noqa: E402
+import governance_telemetry as T  # noqa: E402  (the one runtime-telemetry authority)
 from connectors import base as B  # noqa: E402
 from connectors import REGISTRY, discover  # noqa: E402
 # UMB-IMP-004: Live Source Discovery. Dynamically discover every connector in the
@@ -63,6 +64,10 @@ def _load(path, default):
 
 
 def _dump(path, obj):
+    # Frozen-path invariant (EC3 Phase-3): audit telemetry may never be written
+    # under 00-BOOK/DATA — it belongs only in .runtime/governance/ via
+    # governance_telemetry.append_audit.
+    T.forbid_data_telemetry(path, DATA_DIR)
     if _stamp_eq_json(path, obj):
         return                                    # idempotent: only the stamp would change
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -188,34 +193,36 @@ def cmd_ingest(args):
 # SCHEDULING, and an append-only sync AUDIT log. Creates no new store or engine.
 # ---------------------------------------------------------------------------
 def _sync_audit_append(record):
-    """Append a sync run outcome to the append-only sync-audit log, de-duping a
-    consecutive no-op run of identical fingerprint so idempotent re-runs never
-    grow the file (drift-free under register.sh --guard). Operational log."""
-    path = os.path.join(DATA_DIR, C.SYNC_AUDIT_FILE)
-    doc = _load(path, {"version": 1, "runs": []})
+    """Record a sync-run outcome in the append-only runtime audit log via the
+    single telemetry authority (``.runtime/governance/sync-audit.json``).
+
+    A consecutive run with an identical fingerprint that added no new signals is a
+    no-op; a zero-work run (no connector due, nothing changed, PASS, nothing
+    recovered) is also a no-op — so idempotent CI/steady-state re-runs never grow
+    the log (drift-free under register.sh --guard). Operational telemetry."""
     fp_keys = ("result", "connectors_run", "new_signals", "recovered", "verify")
-    fp = {k: record.get(k) for k in fp_keys}
-    if doc["runs"]:
-        last = doc["runs"][-1]
-        if {k: last.get(k) for k in fp_keys} == fp and record.get("new_signals") == 0:
-            return last["seq"]                    # unchanged no-op — no append
-    # A run in which no connector was due and nothing changed is a pure no-op
-    # (steady-state / CI re-run); do not grow the append-only log with empty
-    # runs, so a no-op transaction is byte-stable under the drift gate (F-1).
-    if (record.get("connectors_run") == 0 and record.get("new_signals") == 0
-            and record.get("result") == "PASS" and not record.get("recovered")):
-        return doc["runs"][-1]["seq"] if doc["runs"] else 0
-    record["seq"] = (doc["runs"][-1]["seq"] + 1) if doc["runs"] else 1
-    doc["runs"].append(record)
-    doc["generated_at"] = _now()
-    _dump(path, doc)
-    return record["seq"]
+
+    def dedup(runs, rec):
+        if runs:
+            last = runs[-1]
+            if ({k: last.get(k) for k in fp_keys} == {k: rec.get(k) for k in fp_keys}
+                    and rec.get("new_signals") == 0):
+                return last["seq"]                # unchanged no-op — no append
+        # A run in which no connector was due and nothing changed is a pure no-op
+        # (steady-state / CI re-run); do not grow the append-only log with empty
+        # runs, so a no-op transaction is byte-stable under the drift gate (F-1).
+        if (rec.get("connectors_run") == 0 and rec.get("new_signals") == 0
+                and rec.get("result") == "PASS" and not rec.get("recovered")):
+            return runs[-1]["seq"] if runs else 0
+        return None
+
+    return T.append_audit(T.SYNC_AUDIT, record, dedup)
 
 
 def _sync_last_runs():
     """Return {connector_name: last_success_iso} from the sync-audit log, for
     cadence scheduling (`--due`). Empty if never run."""
-    doc = _load(os.path.join(DATA_DIR, C.SYNC_AUDIT_FILE), {"runs": []})
+    doc = T.load_audit(T.SYNC_AUDIT)
     last = {}
     for run in doc.get("runs", []):
         for c in run.get("per_connector", []):
@@ -804,7 +811,7 @@ def _intel_load():
         "signals": B.SignalLedger(DATA_DIR).signals,
         "twin": _load(os.path.join(DATA_DIR, "twin.json"), {"subjects": {}, "dimensions": {}}),
         "cert": _load(os.path.join(DATA_DIR, C.CERT_EVIDENCE_FILE), None),
-        "sync_audit": _load(os.path.join(DATA_DIR, C.SYNC_AUDIT_FILE), {"runs": []}),
+        "sync_audit": T.load_audit(T.SYNC_AUDIT),
     }
 
 
@@ -990,7 +997,7 @@ def _certify_domains():
                {"change_events": [], "version_records": {}, "lineage": {}})
     sledger = B.SignalLedger(DATA_DIR)
     twin, _ = _compute_twin()
-    sync_audit = _load(os.path.join(DATA_DIR, C.SYNC_AUDIT_FILE), {"runs": []})
+    sync_audit = T.load_audit(T.SYNC_AUDIT)
     root = "UCOS-BOOK-000000"
     D = {}
 
@@ -1107,7 +1114,7 @@ def _certify_domains():
         {"name": "every signal carries provenance", "pass": not no_prov, "detail": no_prov[:5] or "source+as_of present"},
         {"name": "no secret in signal evidence (RR-07)", "pass": not secretful, "detail": secretful[:5] or "secret-free"},
         {"name": "synchronization audit present + last run PASS", "pass": bool(last_sync) and last_sync.get("result") == "PASS",
-         "detail": (f"last sync run #{last_sync['seq']} {last_sync['result']}" if last_sync else "no sync audit yet")},
+         "detail": (f"last sync run {last_sync['result']}" if last_sync else "no sync audit yet")},
     ])
 
     # 9) TWIN-INTELLIGENCE INTEGRITY — dimensions computed; intel answerable+cited.
@@ -1206,24 +1213,26 @@ def _write_cert_report(cert):
 
 
 def _cert_audit_append(cert):
-    path = os.path.join(DATA_DIR, C.CERT_AUDIT_FILE)
-    doc = _load(path, {"version": 1, "runs": []})
-    fp = {"verdict": cert["verdict"],
-          "domains": {n: d["pass"] for n, d in cert["domains"].items()}}
-    if doc["runs"]:
-        last = doc["runs"][-1]
-        if {"verdict": last.get("verdict"), "domains": last.get("domains")} == fp:
-            return last["seq"]
-    seq = (doc["runs"][-1]["seq"] + 1) if doc["runs"] else 1
-    doc["runs"].append({"seq": seq, "at": cert["generated_at"],
-                        "generator_version": cert["generator_version"],
-                        "verdict": cert["verdict"],
-                        "domains_passed": cert["domains_passed"],
-                        "domains_total": cert["domains_total"],
-                        "domains": fp["domains"], "scope": cert["scope"]})
-    doc["generated_at"] = _now()
-    _dump(path, doc)
-    return seq
+    """Record a certification verdict in the append-only runtime audit log via the
+    single telemetry authority (``.runtime/governance/certification-audit.json``).
+    A consecutive run with an identical {verdict, per-domain pass} fingerprint is a
+    no-op so idempotent re-runs never grow the log. Operational telemetry."""
+    run = {"at": cert["generated_at"],
+           "generator_version": cert["generator_version"],
+           "verdict": cert["verdict"],
+           "domains_passed": cert["domains_passed"],
+           "domains_total": cert["domains_total"],
+           "domains": {n: d["pass"] for n, d in cert["domains"].items()},
+           "scope": cert["scope"]}
+
+    def dedup(runs, rec):
+        if runs:
+            last = runs[-1]
+            if last.get("verdict") == rec["verdict"] and last.get("domains") == rec["domains"]:
+                return last["seq"]
+        return None
+
+    return T.append_audit(T.CERT_AUDIT, run, dedup)
 
 
 def cmd_certify(args):
@@ -1252,7 +1261,7 @@ def cmd_certify(args):
                 print(f"          DEFECT: {c['name']} — {det}")
     print("-" * 64)
     print(f"  evidence : {os.path.relpath(os.path.join(DATA_DIR, C.CERT_EVIDENCE_FILE), REPO)}")
-    print(f"  audit    : {os.path.relpath(os.path.join(DATA_DIR, C.CERT_AUDIT_FILE), REPO)} (run #{seq})")
+    print(f"  audit    : {os.path.relpath(os.path.join(T.GOVERNANCE_DIR, T.CERT_AUDIT), REPO)} (run #{seq})")
     print(f"  report   : {os.path.relpath(os.path.join(REG_DIR, C.CERT_REPORT_FILE), REPO)}")
     print(f"RESULT: {verdict} (integrity domains {passed}/{len(domains)}) — "
           f"scope {scope['artifacts']} artifacts, {scope['signals']} signals, "

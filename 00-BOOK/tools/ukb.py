@@ -47,6 +47,7 @@ SCHEMA_DIR = os.path.join(BOOK_DIR, "SCHEMAS")
 
 sys.path.insert(0, HERE)
 import config as C  # noqa: E402
+import governance_telemetry as T  # noqa: E402  (the one runtime-telemetry authority)
 
 LEDGER_PATH = os.path.join(DATA_DIR, "id-ledger.json")
 ARTIFACTS_PATH = os.path.join(DATA_DIR, "artifacts.json")
@@ -111,6 +112,11 @@ def _neutralize_stamps(doc, stamp_keys):
 
 
 def _dump_json(path, obj):
+    # Frozen-path invariant (EC3 Phase-3): audit telemetry may never be written
+    # under 00-BOOK/DATA — it belongs only in .runtime/governance/ via
+    # governance_telemetry.append_audit. This makes accidental reintroduction of
+    # tracked, drift-producing telemetry impossible.
+    T.forbid_data_telemetry(path, DATA_DIR)
     if _stamp_eq_json(path, obj):
         return                                    # idempotent: only the stamp would change
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -1640,25 +1646,19 @@ def cmd_validate(args):
 
 
 def _enforcement_audit(record):
-    """Append an enforcement-gate outcome to the append-only audit log, de-duping
-    consecutive runs with identical content so idempotent re-runs never grow the
-    file (keeps register.sh --guard drift-free). Operational log, not a registry."""
-    path = os.path.join(DATA_DIR, C.ENFORCEMENT_AUDIT_FILE)
-    doc = _load_json(path, {"version": 1, "runs": []})
+    """Record an enforcement-gate outcome in the append-only runtime audit log via
+    the single telemetry authority (``.runtime/governance/enforcement-audit.json``).
+
+    Consecutive runs of the SAME mode with an identical content-fingerprint are
+    de-duplicated so idempotent re-runs never grow the log (register.sh --guard
+    drift-free; pre/post alternate every transaction). Operational telemetry, not
+    a registry — see governance_telemetry for the location/sequence lifecycle."""
     fp_keys = ("mode", "result", "eligible", "registered", "unregistered",
                "unclassified", "invalid", "violations")
-    fingerprint = {k: record.get(k) for k in fp_keys}
-    # Dedup against the most recent run of the SAME mode so idempotent re-runs
-    # (pre/post alternate every transaction) never grow the log — otherwise the
-    # log itself would be perpetual registration drift.
-    prior_same_mode = [r for r in doc["runs"] if r.get("mode") == record.get("mode")]
-    last = prior_same_mode[-1] if prior_same_mode else None
-    if last and {k: last.get(k) for k in fp_keys} == fingerprint:
-        return last["seq"]                       # unchanged — no-op append
-    record["seq"] = (doc["runs"][-1]["seq"] + 1) if doc["runs"] else 1
-    doc["runs"].append(record)
-    _dump_json(path, doc)
-    return record["seq"]
+    return T.append_audit(
+        T.ENFORCEMENT_AUDIT, record,
+        T.fingerprint_dedup(fp_keys, mode_key="mode"),
+    )
 
 
 def cmd_enforce(args):

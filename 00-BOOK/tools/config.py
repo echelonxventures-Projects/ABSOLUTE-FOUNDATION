@@ -786,10 +786,9 @@ METADATA_DEFAULT_VOLUME = "VOL-000"
 # ---------------------------------------------------------------------------
 ENFORCEMENT_GATES = ("eligibility", "validity", "classification", "registration")
 
-# Append-only audit log of enforcement-gate runs (operational log, not a registry).
-# Consecutive runs with identical content-fingerprints are de-duplicated so that
-# idempotent re-runs never grow the file (keeps register.sh --guard drift-free).
-ENFORCEMENT_AUDIT_FILE = "enforcement-audit.json"
+# The enforcement-gate audit log is runtime telemetry, not a registry. Its NAME,
+# LOCATION (.runtime/governance/), single writer, and sequence authority live in
+# 00-BOOK/tools/governance_telemetry.py (EC3 Phase-3) — never under 00-BOOK/DATA.
 
 # Minimum content bytes for an in-scope text artifact to pass the validity gate.
 MIN_ARTIFACT_BYTES = 1
@@ -1052,11 +1051,9 @@ LINEAGE_DESCENDANT_EDGE_TYPES = (
 # (like enforcement-audit.json), and roll-up remains the existing pure function.
 # ===========================================================================
 
-# Append-only operational log of synchronization runs (NOT a registry; lives in
-# already-excluded DATA/). Consecutive no-op runs with identical fingerprints are
-# de-duplicated so idempotent re-runs never grow the file (drift-free under
-# register.sh --guard), mirroring ENFORCEMENT_AUDIT_FILE.
-SYNC_AUDIT_FILE = "sync-audit.json"
+# The synchronization-run audit log is runtime telemetry, not a registry. Its
+# NAME, LOCATION (.runtime/governance/), single writer, and sequence authority
+# live in 00-BOOK/tools/governance_telemetry.py (EC3 Phase-3) — never in DATA/.
 
 # The synchronization pipeline stages proven per run (UMB-012 §3). Data-only
 # labels for the audit record; the mechanism lives in ukbx.py::cmd_sync.
@@ -1162,10 +1159,9 @@ CERT_INTEGRITY_DOMAINS = (
     "twin_intelligence",    # dimensions computed (not MANUAL); intel answerable
 )
 
-# Append-only certification audit trail (operational log; NOT a registry). Lives
-# in already-excluded DATA/. Consecutive identical-verdict runs are de-duplicated
-# like the enforcement/sync audit logs. Every entry is attributed + timestamped.
-CERT_AUDIT_FILE = "certification-audit.json"
+# The certification audit trail is runtime telemetry, not a registry. Its NAME,
+# LOCATION (.runtime/governance/), single writer, and sequence authority live in
+# 00-BOOK/tools/governance_telemetry.py (EC3 Phase-3) — never in DATA/.
 
 # Persisted certification evidence (derived view, regenerated each run — NOT an
 # authoritative store; like control-tower.json / change-ledger.json).

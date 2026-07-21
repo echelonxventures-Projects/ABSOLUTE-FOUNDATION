@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T00:16:19+00:00",
+  "generated_at": "2026-07-21T03:30:22+00:00",
   "generator_version": "1.0.0-adv",
   "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)",
   "verdict": "CERTIFIED",
@@ -12,7 +12,7 @@
         {
           "name": "no duplicate Universal IDs",
           "pass": true,
-          "detail": "868 unique"
+          "detail": "866 unique"
         },
         {
           "name": "no overlapping page ranges",
@@ -32,7 +32,7 @@
         {
           "name": "every artifact present in id-ledger",
           "pass": true,
-          "detail": "868 artifacts ledgered"
+          "detail": "866 artifacts ledgered"
         },
         {
           "name": "every artifact carries name+volume+program",
@@ -67,7 +67,7 @@
         {
           "name": "no dangling edge endpoints",
           "pass": true,
-          "detail": "11184 edges resolve"
+          "detail": "11180 edges resolve"
         },
         {
           "name": "Depends-On graph acyclic",
@@ -82,7 +82,7 @@
         {
           "name": "every change event bound to a real subject",
           "pass": true,
-          "detail": "887 events node-bound"
+          "detail": "885 events node-bound"
         },
         {
           "name": "change ids unique",
@@ -102,7 +102,7 @@
         {
           "name": "current_version matches latest snapshot",
           "pass": true,
-          "detail": "868 version records consistent"
+          "detail": "866 version records consistent"
         }
       ]
     },
@@ -112,7 +112,7 @@
         {
           "name": "lineage endpoints resolve + ancestry acyclic",
           "pass": true,
-          "detail": "868 lineage nodes intact"
+          "detail": "866 lineage nodes intact"
         }
       ]
     },
@@ -137,7 +137,7 @@
         {
           "name": "synchronization audit present + last run PASS",
           "pass": true,
-          "detail": "last sync run #22 PASS"
+          "detail": "last sync run PASS"
         }
       ]
     },
@@ -183,11 +183,11 @@
     }
   },
   "scope": {
-    "artifacts": 868,
-    "edges": 11184,
-    "change_events": 887,
+    "artifacts": 866,
+    "edges": 11180,
+    "change_events": 885,
     "signals": 15,
-    "lineage_nodes": 868,
+    "lineage_nodes": 866,
     "executions": 0
   }
 }
