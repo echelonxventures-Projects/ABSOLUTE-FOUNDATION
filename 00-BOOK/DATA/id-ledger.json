@@ -6881,9 +6881,16 @@
       "page_start": 8896,
       "page_count": 4,
       "first_seen": "2026-07-21T15:31:33+00:00"
+    },
+    "14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md": {
+      "universal_id": "UCOS-SEC-000001",
+      "category": "SEC",
+      "page_start": 8900,
+      "page_count": 4,
+      "first_seen": "2026-07-21T16:24:17+00:00"
     }
   },
-  "page_cursor": 8899,
+  "page_cursor": 8903,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -6920,10 +6927,19 @@
     "SERVICE": 149,
     "APPLICATION": 121,
     "INFRASTRUCTU": 117,
-    "CEP": 34
+    "CEP": 34,
+    "SEC": 1
   },
-  "discovered_volumes": {},
-  "volume_seq": 0,
+  "discovered_volumes": {
+    "VOL-023": {
+      "serial": 23,
+      "name": "SECURITY-GOVERNANCE",
+      "category": "SEC",
+      "description": "Auto-discovered volume (metadata-driven, UMB-IMP-001) first declared by 14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md.",
+      "first_seen": "2026-07-21T16:24:17+00:00"
+    }
+  },
+  "volume_seq": 1,
   "history": {
     "UCOS-BOOK-000000": [
       {
@@ -17907,6 +17923,17 @@
         "status": "ACTIVE",
         "path": "infrastructure/_evidence/EC3-B13-U10/validation-report.json",
         "name": "Validation Report"
+      }
+    ],
+    "UCOS-SEC-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-21T16:24:17+00:00",
+        "content_hash": "859126f132f3082e24157ce321ba07507ab666a197ceb13fbe3bab804b845671",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SECURITY PROGRAM ESTABLISHMENT DETERMINATION"
       }
     ]
   }

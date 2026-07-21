@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 966
+**Total artifacts:** 967
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -974,5 +974,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 964 | `UCOS-INFRASTRUCTU-000115` | Twin Sync | — | 000 | UPN-000008891–UPN-000008891 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U10/twin-sync.json) |
 | 965 | `UCOS-INFRASTRUCTU-000116` | Validation Evidence | — | 000 | UPN-000008892–UPN-000008895 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U10/validation-evidence.json) |
 | 966 | `UCOS-INFRASTRUCTU-000117` | Validation Report | — | 000 | UPN-000008896–UPN-000008899 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U10/validation-report.json) |
+| 967 | `UCOS-SEC-000001` | UCOS Ω∞ — UNIVERSAL SECURITY PROGRAM ESTABLISHMENT DETERM… | SECURITY-GOV-000 | 023 | UPN-000008900–UPN-000008903 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

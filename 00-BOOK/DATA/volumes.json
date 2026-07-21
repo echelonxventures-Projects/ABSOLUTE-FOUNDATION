@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-21T15:31:34+00:00",
-  "count": 23,
+  "generated_at": "2026-07-21T16:24:18+00:00",
+  "count": 24,
   "volumes": [
     {
       "volume_id": "VOL-000",
@@ -277,6 +277,19 @@
       "page_range_start": 5247,
       "page_range_end": 5480,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-022"
+    },
+    {
+      "volume_id": "VOL-023",
+      "serial": 23,
+      "name": "SECURITY-GOVERNANCE",
+      "description": "Auto-discovered volume (metadata-driven, UMB-IMP-001) first declared by 14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md.",
+      "category": "SEC",
+      "status": "ACTIVE",
+      "artifact_count": 1,
+      "page_range_start": 8900,
+      "page_range_end": 8903,
+      "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-023",
+      "discovered": true
     }
   ]
 }
