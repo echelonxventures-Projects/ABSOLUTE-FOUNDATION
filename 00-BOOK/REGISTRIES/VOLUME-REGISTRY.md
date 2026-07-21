@@ -6,7 +6,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 561 | UPN-000000001–UPN-000008343 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 562 | UPN-000000001–UPN-000008348 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 48 | UPN-000001327–UPN-000007992 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 38 | UPN-000000022–UPN-000005968 |
@@ -34,7 +34,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 561
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 562
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -599,6 +599,7 @@ The 23 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-MASTER-000035` | UCOS Ω∞ — TERMINAL-02 · T02-UED-001 · UNIVERSAL EXISTENCE FOU… | — | COMPLETE |
 | `UCOS-CEP-000030` | UCOS Ω∞ — STAGE 04 · S4-06 — INFRASTRUCTURE-013 SECURITY PROV… | CEP-STAGE-04-S4-06 | COMPLETE |
 | `UCOS-MASTER-000036` | UCOS Ω∞ — TERMINAL-04 · T04-TEE-001 · UNIVERSAL TRANSACTION &… | — | ACTIVE |
+| `UCOS-CEP-000031` | UCOS Ω∞ — STAGE 04 · S4-07 — INFRASTRUCTURE-014 GOVERNANCE FA… | CEP-STAGE-04-S4-07 | COMPLETE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 

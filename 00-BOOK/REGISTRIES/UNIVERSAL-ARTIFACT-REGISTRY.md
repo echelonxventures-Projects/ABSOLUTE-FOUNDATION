@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 933
+**Total artifacts:** 934
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -941,5 +941,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 931 | `UCOS-MASTER-000035` | UCOS Ω∞ — TERMINAL-02 · T02-UED-001 · UNIVERSAL EXISTENCE… | — | 000 | UPN-000008327–UPN-000008331 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/T02-UED-001-UNIVERSAL-EXISTENCE-FOUNDATION-DISCOVERY-INTELLIGENCE.md) |
 | 932 | `UCOS-CEP-000030` | UCOS Ω∞ — STAGE 04 · S4-06 — INFRASTRUCTURE-013 SECURITY … | CEP-STAGE-04-S4-06 | 000 | UPN-000008332–UPN-000008336 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../00-CEP/STAGE-04-S4-06-INFRASTRUCTURE-013-SECURITY-RATIFICATION-AND-INFRASTRUCTURE-014-NEXT-FRONTIER-DETERMINATION.md) |
 | 933 | `UCOS-MASTER-000036` | UCOS Ω∞ — TERMINAL-04 · T04-TEE-001 · UNIVERSAL TRANSACTI… | — | 000 | UPN-000008337–UPN-000008343 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/T04-TEE-001-UNIVERSAL-TRANSACTION-AND-ENTERPRISE-EXISTENCE-DISCOVERY-DETERMINATION.md) |
+| 934 | `UCOS-CEP-000031` | UCOS Ω∞ — STAGE 04 · S4-07 — INFRASTRUCTURE-014 GOVERNANC… | CEP-STAGE-04-S4-07 | 000 | UPN-000008344–UPN-000008348 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../00-CEP/STAGE-04-S4-07-INFRASTRUCTURE-014-GOVERNANCE-FACTORY-ADMISSION.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
