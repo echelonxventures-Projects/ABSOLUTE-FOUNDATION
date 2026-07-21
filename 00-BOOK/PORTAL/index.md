@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-21T00:16:18+00:00 by ukbx portal. 868 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-21T04:29:37+00:00 by ukbx portal. 866 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -789,8 +789,6 @@
 | [UCOS-APPLICATION-000108](UCOS-APPLICATION-000108.md) | Traceability | VOL-000 | ACTIVE |
 | [UCOS-APPLICATION-000109](UCOS-APPLICATION-000109.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-APPLICATION-000110](UCOS-APPLICATION-000110.md) | Validation Report | VOL-000 | ACTIVE |
-| [UCOS-MASTER-000030](UCOS-MASTER-000030.md) | BUC-001R — BUSINESS UNIVERSE ARCHITECTURE RECONCILIATION & G | VOL-000 | ACTIVE |
-| [UCOS-CON-000031](UCOS-CON-000031.md) | UAM-001 — UNIVERSAL ARCHITECTURAL META MODEL · CONSTITUTIONA | VOL-002 | ACTIVE |
 | [UCOS-APPLICATION-000111](UCOS-APPLICATION-000111.md) | EC3-B12-U11 — UNIVERSAL APPLICATION META-MODEL (UAM) — REALI | VOL-000 | ACTIVE |
 | [UCOS-APPLICATION-000112](UCOS-APPLICATION-000112.md) | Acceptance Decision | VOL-000 | ACTIVE |
 | [UCOS-APPLICATION-000113](UCOS-APPLICATION-000113.md) | Application Compliance | VOL-000 | ACTIVE |
