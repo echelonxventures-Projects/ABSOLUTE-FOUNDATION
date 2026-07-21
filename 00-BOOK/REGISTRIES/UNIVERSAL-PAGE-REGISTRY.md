@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 8212  ·  **Page cursor (next free):** UPN-000008213
+**Pages allocated:** 8314  ·  **Page cursor (next free):** UPN-000008315
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -925,5 +925,16 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000008201 | UPN-000008203 | 3 | `UCOS-INFRASTRUCTU-000077` | 000 | Validation Report |
 | UPN-000008204 | UPN-000008207 | 4 | `UCOS-CEP-000027` | 000 | UCOS Ω∞ — STAGE 04 · S4-02 — INFRASTRUCTURE-0… |
 | UPN-000008208 | UPN-000008212 | 5 | `UCOS-CEP-000028` | 000 | UCOS Ω∞ — STAGE 04 · S4-03 — INFRASTRUCTURE-0… |
+| UPN-000008213 | UPN-000008214 | 2 | `UCOS-INFRASTRUCTU-000078` | 000 | EC3-B13-U08 — UNIVERSAL INFRASTRUCTURE SECURI… |
+| UPN-000008215 | UPN-000008215 | 1 | `UCOS-INFRASTRUCTU-000079` | 000 | Acceptance Decision |
+| UPN-000008216 | UPN-000008219 | 4 | `UCOS-INFRASTRUCTU-000080` | 000 | Cce Certification |
+| UPN-000008220 | UPN-000008222 | 3 | `UCOS-INFRASTRUCTU-000081` | 000 | Certification Evidence |
+| UPN-000008223 | UPN-000008224 | 2 | `UCOS-INFRASTRUCTU-000082` | 000 | Certification Ledger |
+| UPN-000008225 | UPN-000008225 | 1 | `UCOS-INFRASTRUCTU-000083` | 000 | Determinism |
+| UPN-000008226 | UPN-000008226 | 1 | `UCOS-INFRASTRUCTU-000084` | 000 | Infrastructure Compliance |
+| UPN-000008227 | UPN-000008305 | 79 | `UCOS-INFRASTRUCTU-000085` | 000 | Realization Evidence |
+| UPN-000008306 | UPN-000008306 | 1 | `UCOS-INFRASTRUCTU-000086` | 000 | Traceability |
+| UPN-000008307 | UPN-000008310 | 4 | `UCOS-INFRASTRUCTU-000087` | 000 | Validation Evidence |
+| UPN-000008311 | UPN-000008314 | 4 | `UCOS-INFRASTRUCTU-000088` | 000 | Validation Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
