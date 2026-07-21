@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 8460  ·  **Page cursor (next free):** UPN-000008461
+**Pages allocated:** 8899  ·  **Page cursor (next free):** UPN-000008900
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -956,5 +956,23 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000008452 | UPN-000008454 | 3 | `UCOS-CEP-000032` | 000 | UCOS Ω∞ — STAGE 04 · S4-09 — INFRASTRUCTURE-0… |
 | UPN-000008455 | UPN-000008457 | 3 | `UCOS-CEP-000033` | 000 | UCOS Ω∞ — STAGE 04 · S4-10 — INFRASTRUCTURE-0… |
 | UPN-000008458 | UPN-000008460 | 3 | `UCOS-CEP-000034` | 000 | UCOS Ω∞ — STAGE 04 · S4-11 — INFRASTRUCTURE-0… |
+| UPN-000008461 | UPN-000008464 | 4 | `UCOS-INFRASTRUCTU-000100` | 000 | EC3-B13-U10 — UNIVERSAL INFRASTRUCTURE INTEGR… |
+| UPN-000008465 | UPN-000008465 | 1 | `UCOS-INFRASTRUCTU-000101` | 000 | Acceptance Decision |
+| UPN-000008466 | UPN-000008468 | 3 | `UCOS-INFRASTRUCTU-000102` | 000 | Capability Interaction Matrix |
+| UPN-000008469 | UPN-000008472 | 4 | `UCOS-INFRASTRUCTU-000103` | 000 | Cce Certification |
+| UPN-000008473 | UPN-000008475 | 3 | `UCOS-INFRASTRUCTU-000104` | 000 | Certification Evidence |
+| UPN-000008476 | UPN-000008480 | 5 | `UCOS-INFRASTRUCTU-000105` | 000 | Certification Ledger |
+| UPN-000008481 | UPN-000008484 | 4 | `UCOS-INFRASTRUCTU-000106` | 000 | Composition Model |
+| UPN-000008485 | UPN-000008491 | 7 | `UCOS-INFRASTRUCTU-000107` | 000 | Dependency Graph |
+| UPN-000008492 | UPN-000008492 | 1 | `UCOS-INFRASTRUCTU-000108` | 000 | Determinism |
+| UPN-000008493 | UPN-000008494 | 2 | `UCOS-INFRASTRUCTU-000109` | 000 | Infrastructure Compliance |
+| UPN-000008495 | UPN-000008496 | 2 | `UCOS-INFRASTRUCTU-000110` | 000 | Integration Architecture |
+| UPN-000008497 | UPN-000008502 | 6 | `UCOS-INFRASTRUCTU-000111` | 000 | Integration Registry |
+| UPN-000008503 | UPN-000008888 | 386 | `UCOS-INFRASTRUCTU-000112` | 000 | Realization Evidence |
+| UPN-000008889 | UPN-000008889 | 1 | `UCOS-INFRASTRUCTU-000113` | 000 | Repository Verification |
+| UPN-000008890 | UPN-000008890 | 1 | `UCOS-INFRASTRUCTU-000114` | 000 | Traceability |
+| UPN-000008891 | UPN-000008891 | 1 | `UCOS-INFRASTRUCTU-000115` | 000 | Twin Sync |
+| UPN-000008892 | UPN-000008895 | 4 | `UCOS-INFRASTRUCTU-000116` | 000 | Validation Evidence |
+| UPN-000008896 | UPN-000008899 | 4 | `UCOS-INFRASTRUCTU-000117` | 000 | Validation Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
