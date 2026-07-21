@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 969
+**Total artifacts:** 970
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -977,5 +977,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 967 | `UCOS-SEC-000001` | UCOS Ω∞ — UNIVERSAL SECURITY PROGRAM ESTABLISHMENT DETERM… | SECURITY-GOV-000 | 023 | UPN-000008900–UPN-000008903 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md) |
 | 968 | `UCOS-SEC-000002` | UCOS Ω∞ — UNIVERSAL SECURITY CONSTITUTION | SECURITY-001 | 023 | UPN-000008904–UPN-000008909 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md) |
 | 969 | `UCOS-SEC-000003` | UCOS Ω∞ — UNIVERSAL SECURITY THEORY | SECURITY-002 | 023 | UPN-000008910–UPN-000008915 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../14-SECURITY/SECURITY-002-UNIVERSAL-SECURITY-THEORY.md) |
+| 970 | `UCOS-SEC-000004` | UCOS Ω∞ — UNIVERSAL SECURITY ONTOLOGY | SECURITY-003 | 023 | UPN-000008916–UPN-000008920 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../14-SECURITY/SECURITY-003-UNIVERSAL-SECURITY-ONTOLOGY.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

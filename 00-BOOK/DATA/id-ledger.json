@@ -6902,9 +6902,16 @@
       "page_start": 8910,
       "page_count": 6,
       "first_seen": "2026-07-21T16:40:48+00:00"
+    },
+    "14-SECURITY/SECURITY-003-UNIVERSAL-SECURITY-ONTOLOGY.md": {
+      "universal_id": "UCOS-SEC-000004",
+      "category": "SEC",
+      "page_start": 8916,
+      "page_count": 5,
+      "first_seen": "2026-07-21T17:04:12+00:00"
     }
   },
-  "page_cursor": 8915,
+  "page_cursor": 8920,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -6942,7 +6949,7 @@
     "APPLICATION": 121,
     "INFRASTRUCTU": 117,
     "CEP": 34,
-    "SEC": 3
+    "SEC": 4
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -17970,6 +17977,26 @@
         "status": "ACTIVE",
         "path": "14-SECURITY/SECURITY-002-UNIVERSAL-SECURITY-THEORY.md",
         "name": "UCOS Ω∞ — UNIVERSAL SECURITY THEORY"
+      }
+    ],
+    "UCOS-SEC-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-21T17:04:12+00:00",
+        "content_hash": "8b700457b13d259c66f3a69da103fe46bc950372d850bedbc428a488ac717d86",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "14-SECURITY/SECURITY-003-UNIVERSAL-SECURITY-ONTOLOGY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SECURITY ONTOLOGY"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-21T17:36:52+00:00",
+        "content_hash": "3abf606db26a11806518a9d9f577528fc327107c7fadd3e1d31aa6439bc1a503",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "14-SECURITY/SECURITY-003-UNIVERSAL-SECURITY-ONTOLOGY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SECURITY ONTOLOGY"
       }
     ]
   }

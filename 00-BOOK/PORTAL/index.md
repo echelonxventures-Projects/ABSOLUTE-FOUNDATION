@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-21T16:40:49+00:00 by ukbx portal. 969 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-21T17:04:13+00:00 by ukbx portal. 970 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -973,3 +973,4 @@
 | [UCOS-SEC-000001](UCOS-SEC-000001.md) | UCOS Ω∞ — UNIVERSAL SECURITY PROGRAM ESTABLISHMENT DETERMINA | VOL-023 | ACTIVE |
 | [UCOS-SEC-000002](UCOS-SEC-000002.md) | UCOS Ω∞ — UNIVERSAL SECURITY CONSTITUTION | VOL-023 | ACTIVE |
 | [UCOS-SEC-000003](UCOS-SEC-000003.md) | UCOS Ω∞ — UNIVERSAL SECURITY THEORY | VOL-023 | ACTIVE |
+| [UCOS-SEC-000004](UCOS-SEC-000004.md) | UCOS Ω∞ — UNIVERSAL SECURITY ONTOLOGY | VOL-023 | ACTIVE |
