@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 8112  ·  **Page cursor (next free):** UPN-000008113
+**Pages allocated:** 8203  ·  **Page cursor (next free):** UPN-000008204
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -913,5 +913,15 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000008098 | UPN-000008102 | 5 | `UCOS-CEP-000024` | 000 | UCOS Ω∞ — STAGE 03 — FINAL REALIZATION RECONC… |
 | UPN-000008103 | UPN-000008107 | 5 | `UCOS-CEP-000025` | 000 | UCOS Ω∞ — STAGE 04 — FOUNDATION IMPLEMENTATIO… |
 | UPN-000008108 | UPN-000008112 | 5 | `UCOS-CEP-000026` | 000 | UCOS Ω∞ — STAGE 04 · S4-01 — IMPLEMENTATION F… |
+| UPN-000008113 | UPN-000008113 | 1 | `UCOS-INFRASTRUCTU-000068` | 000 | Acceptance Decision |
+| UPN-000008114 | UPN-000008117 | 4 | `UCOS-INFRASTRUCTU-000069` | 000 | Cce Certification |
+| UPN-000008118 | UPN-000008120 | 3 | `UCOS-INFRASTRUCTU-000070` | 000 | Certification Evidence |
+| UPN-000008121 | UPN-000008122 | 2 | `UCOS-INFRASTRUCTU-000071` | 000 | Certification Ledger |
+| UPN-000008123 | UPN-000008123 | 1 | `UCOS-INFRASTRUCTU-000072` | 000 | Determinism |
+| UPN-000008124 | UPN-000008124 | 1 | `UCOS-INFRASTRUCTU-000073` | 000 | Infrastructure Compliance |
+| UPN-000008125 | UPN-000008196 | 72 | `UCOS-INFRASTRUCTU-000074` | 000 | Realization Evidence |
+| UPN-000008197 | UPN-000008197 | 1 | `UCOS-INFRASTRUCTU-000075` | 000 | Traceability |
+| UPN-000008198 | UPN-000008200 | 3 | `UCOS-INFRASTRUCTU-000076` | 000 | Validation Evidence |
+| UPN-000008201 | UPN-000008203 | 3 | `UCOS-INFRASTRUCTU-000077` | 000 | Validation Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
