@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 928
+**Total artifacts:** 929
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -936,5 +936,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 926 | `UCOS-INFRASTRUCTU-000086` | Traceability | — | 000 | UPN-000008306–UPN-000008306 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U08/traceability.json) |
 | 927 | `UCOS-INFRASTRUCTU-000087` | Validation Evidence | — | 000 | UPN-000008307–UPN-000008310 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U08/validation-evidence.json) |
 | 928 | `UCOS-INFRASTRUCTU-000088` | Validation Report | — | 000 | UPN-000008311–UPN-000008314 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U08/validation-report.json) |
+| 929 | `UCOS-CEP-000029` | UCOS Ω∞ — STAGE 04 · S4-05 — INFRASTRUCTURE-013 SECURITY … | CEP-STAGE-04-S4-05 | 000 | UPN-000008315–UPN-000008318 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../00-CEP/STAGE-04-S4-05-SECURITY-VALIDATION-CERTIFICATION-FREEZE-READINESS.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

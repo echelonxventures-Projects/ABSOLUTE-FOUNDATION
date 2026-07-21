@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-21T12:22:01+00:00 by ukbx portal. 928 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-21T12:50:35+00:00 by ukbx portal. 929 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -932,3 +932,4 @@
 | [UCOS-INFRASTRUCTU-000086](UCOS-INFRASTRUCTU-000086.md) | Traceability | VOL-000 | ACTIVE |
 | [UCOS-INFRASTRUCTU-000087](UCOS-INFRASTRUCTU-000087.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-INFRASTRUCTU-000088](UCOS-INFRASTRUCTU-000088.md) | Validation Report | VOL-000 | ACTIVE |
+| [UCOS-CEP-000029](UCOS-CEP-000029.md) | UCOS Ω∞ — STAGE 04 · S4-05 — INFRASTRUCTURE-013 SECURITY VAL | VOL-000 | COMPLETE |
