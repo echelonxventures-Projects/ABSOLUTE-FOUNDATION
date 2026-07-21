@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 8203  ·  **Page cursor (next free):** UPN-000008204
+**Pages allocated:** 8207  ·  **Page cursor (next free):** UPN-000008208
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -923,5 +923,6 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000008197 | UPN-000008197 | 1 | `UCOS-INFRASTRUCTU-000075` | 000 | Traceability |
 | UPN-000008198 | UPN-000008200 | 3 | `UCOS-INFRASTRUCTU-000076` | 000 | Validation Evidence |
 | UPN-000008201 | UPN-000008203 | 3 | `UCOS-INFRASTRUCTU-000077` | 000 | Validation Report |
+| UPN-000008204 | UPN-000008207 | 4 | `UCOS-CEP-000027` | 000 | UCOS Ω∞ — STAGE 04 · S4-02 — INFRASTRUCTURE-0… |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
