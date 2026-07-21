@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T16:32:49+00:00",
+  "generated_at": "2026-07-21T16:40:48+00:00",
   "count": 24,
   "volumes": [
     {
@@ -285,9 +285,9 @@
       "description": "Auto-discovered volume (metadata-driven, UMB-IMP-001) first declared by 14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md.",
       "category": "SEC",
       "status": "ACTIVE",
-      "artifact_count": 2,
+      "artifact_count": 3,
       "page_range_start": 8900,
-      "page_range_end": 8909,
+      "page_range_end": 8915,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-023",
       "discovered": true
     }

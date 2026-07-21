@@ -6895,9 +6895,16 @@
       "page_start": 8904,
       "page_count": 6,
       "first_seen": "2026-07-21T16:32:48+00:00"
+    },
+    "14-SECURITY/SECURITY-002-UNIVERSAL-SECURITY-THEORY.md": {
+      "universal_id": "UCOS-SEC-000003",
+      "category": "SEC",
+      "page_start": 8910,
+      "page_count": 6,
+      "first_seen": "2026-07-21T16:40:48+00:00"
     }
   },
-  "page_cursor": 8909,
+  "page_cursor": 8915,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -6935,7 +6942,7 @@
     "APPLICATION": 121,
     "INFRASTRUCTU": 117,
     "CEP": 34,
-    "SEC": 2
+    "SEC": 3
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -17952,6 +17959,17 @@
         "status": "ACTIVE",
         "path": "14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md",
         "name": "UCOS Ω∞ — UNIVERSAL SECURITY CONSTITUTION"
+      }
+    ],
+    "UCOS-SEC-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-21T16:40:48+00:00",
+        "content_hash": "7f97627a9624da443951400cda525331e67e4a039eea95367a8bf03bd76adf09",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "14-SECURITY/SECURITY-002-UNIVERSAL-SECURITY-THEORY.md",
+        "name": "UCOS Ω∞ — UNIVERSAL SECURITY THEORY"
       }
     ]
   }
