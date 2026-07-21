@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-21T04:29:36+00:00",
+  "generated_at": "2026-07-21T11:06:09+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 885,
-    "versioned_artifacts": 866,
-    "lineage_nodes": 866,
+    "change_events": 924,
+    "versioned_artifacts": 905,
+    "lineage_nodes": 905,
     "artifacts_with_predecessors": 5,
     "artifacts_with_successors": 5
   },
   "change_event_histogram": {
-    "Created": 866,
+    "Created": 905,
     "Modified": 19
   },
   "evolution_timeline": [
@@ -5321,6 +5321,240 @@
       "change_id": "UCHG-000000885",
       "at": "2026-07-21T00:16:17+00:00",
       "subject": "UCOS-INFRASTRUCTU-000067",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000886",
+      "at": "2026-07-21T07:52:12+00:00",
+      "subject": "UCOS-CON-000032",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000887",
+      "at": "2026-07-21T07:55:54+00:00",
+      "subject": "UCOS-CON-000033",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000888",
+      "at": "2026-07-21T07:59:23+00:00",
+      "subject": "UCOS-CON-000034",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000889",
+      "at": "2026-07-21T08:02:47+00:00",
+      "subject": "UCOS-CON-000035",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000890",
+      "at": "2026-07-21T08:05:56+00:00",
+      "subject": "UCOS-CON-000036",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000891",
+      "at": "2026-07-21T08:09:39+00:00",
+      "subject": "UCOS-CON-000037",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000892",
+      "at": "2026-07-21T08:13:54+00:00",
+      "subject": "UCOS-CON-000038",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000893",
+      "at": "2026-07-21T08:19:16+00:00",
+      "subject": "UCOS-CON-000039",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000894",
+      "at": "2026-07-21T08:22:08+00:00",
+      "subject": "UCOS-CON-000040",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000895",
+      "at": "2026-07-21T08:25:28+00:00",
+      "subject": "UCOS-CON-000041",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000896",
+      "at": "2026-07-21T08:28:49+00:00",
+      "subject": "UCOS-CON-000042",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000897",
+      "at": "2026-07-21T08:32:54+00:00",
+      "subject": "UCOS-CON-000043",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000898",
+      "at": "2026-07-21T08:39:15+00:00",
+      "subject": "UCOS-CEP-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000899",
+      "at": "2026-07-21T08:43:15+00:00",
+      "subject": "UCOS-CON-000044",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000900",
+      "at": "2026-07-21T08:47:46+00:00",
+      "subject": "UCOS-CEP-000002",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000901",
+      "at": "2026-07-21T08:52:20+00:00",
+      "subject": "UCOS-CEP-000003",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000902",
+      "at": "2026-07-21T08:55:38+00:00",
+      "subject": "UCOS-CEP-000004",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000903",
+      "at": "2026-07-21T08:59:29+00:00",
+      "subject": "UCOS-CEP-000005",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000904",
+      "at": "2026-07-21T09:05:29+00:00",
+      "subject": "UCOS-CEP-000006",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000905",
+      "at": "2026-07-21T09:16:18+00:00",
+      "subject": "UCOS-CEP-000007",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000906",
+      "at": "2026-07-21T09:23:30+00:00",
+      "subject": "UCOS-CEP-000008",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000907",
+      "at": "2026-07-21T09:32:09+00:00",
+      "subject": "UCOS-CEP-000009",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000908",
+      "at": "2026-07-21T09:38:13+00:00",
+      "subject": "UCOS-CEP-000010",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000909",
+      "at": "2026-07-21T09:41:41+00:00",
+      "subject": "UCOS-CEP-000011",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000910",
+      "at": "2026-07-21T09:46:42+00:00",
+      "subject": "UCOS-CEP-000012",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000911",
+      "at": "2026-07-21T10:01:55+00:00",
+      "subject": "UCOS-CEP-000013",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000912",
+      "at": "2026-07-21T10:07:06+00:00",
+      "subject": "UCOS-CEP-000014",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000913",
+      "at": "2026-07-21T10:14:21+00:00",
+      "subject": "UCOS-CEP-000015",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000914",
+      "at": "2026-07-21T10:17:56+00:00",
+      "subject": "UCOS-CEP-000016",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000915",
+      "at": "2026-07-21T10:21:46+00:00",
+      "subject": "UCOS-CEP-000017",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000916",
+      "at": "2026-07-21T10:25:43+00:00",
+      "subject": "UCOS-CEP-000018",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000917",
+      "at": "2026-07-21T10:30:33+00:00",
+      "subject": "UCOS-CEP-000019",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000918",
+      "at": "2026-07-21T10:35:05+00:00",
+      "subject": "UCOS-CEP-000020",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000919",
+      "at": "2026-07-21T10:41:45+00:00",
+      "subject": "UCOS-CEP-000021",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000920",
+      "at": "2026-07-21T10:46:59+00:00",
+      "subject": "UCOS-CEP-000022",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000921",
+      "at": "2026-07-21T10:52:02+00:00",
+      "subject": "UCOS-CEP-000023",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000922",
+      "at": "2026-07-21T10:56:50+00:00",
+      "subject": "UCOS-CEP-000024",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000923",
+      "at": "2026-07-21T11:01:28+00:00",
+      "subject": "UCOS-CEP-000025",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000000924",
+      "at": "2026-07-21T11:06:08+00:00",
+      "subject": "UCOS-CEP-000026",
       "kind": "Created"
     }
   ],
@@ -14173,6 +14407,396 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000886",
+      "subject": "UCOS-CON-000032",
+      "kind": "Created",
+      "at": "2026-07-21T07:52:12+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000887",
+      "subject": "UCOS-CON-000033",
+      "kind": "Created",
+      "at": "2026-07-21T07:55:54+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000888",
+      "subject": "UCOS-CON-000034",
+      "kind": "Created",
+      "at": "2026-07-21T07:59:23+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000889",
+      "subject": "UCOS-CON-000035",
+      "kind": "Created",
+      "at": "2026-07-21T08:02:47+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000890",
+      "subject": "UCOS-CON-000036",
+      "kind": "Created",
+      "at": "2026-07-21T08:05:56+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000891",
+      "subject": "UCOS-CON-000037",
+      "kind": "Created",
+      "at": "2026-07-21T08:09:39+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000892",
+      "subject": "UCOS-CON-000038",
+      "kind": "Created",
+      "at": "2026-07-21T08:13:54+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000893",
+      "subject": "UCOS-CON-000039",
+      "kind": "Created",
+      "at": "2026-07-21T08:19:16+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000894",
+      "subject": "UCOS-CON-000040",
+      "kind": "Created",
+      "at": "2026-07-21T08:22:08+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000895",
+      "subject": "UCOS-CON-000041",
+      "kind": "Created",
+      "at": "2026-07-21T08:25:28+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000896",
+      "subject": "UCOS-CON-000042",
+      "kind": "Created",
+      "at": "2026-07-21T08:28:49+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "FROZEN",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000897",
+      "subject": "UCOS-CON-000043",
+      "kind": "Created",
+      "at": "2026-07-21T08:32:54+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000898",
+      "subject": "UCOS-CEP-000001",
+      "kind": "Created",
+      "at": "2026-07-21T08:39:15+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000899",
+      "subject": "UCOS-CON-000044",
+      "kind": "Created",
+      "at": "2026-07-21T08:43:15+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000900",
+      "subject": "UCOS-CEP-000002",
+      "kind": "Created",
+      "at": "2026-07-21T08:47:46+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000901",
+      "subject": "UCOS-CEP-000003",
+      "kind": "Created",
+      "at": "2026-07-21T08:52:20+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000902",
+      "subject": "UCOS-CEP-000004",
+      "kind": "Created",
+      "at": "2026-07-21T08:55:38+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000903",
+      "subject": "UCOS-CEP-000005",
+      "kind": "Created",
+      "at": "2026-07-21T08:59:29+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000904",
+      "subject": "UCOS-CEP-000006",
+      "kind": "Created",
+      "at": "2026-07-21T09:05:29+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000905",
+      "subject": "UCOS-CEP-000007",
+      "kind": "Created",
+      "at": "2026-07-21T09:16:18+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000906",
+      "subject": "UCOS-CEP-000008",
+      "kind": "Created",
+      "at": "2026-07-21T09:23:30+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000907",
+      "subject": "UCOS-CEP-000009",
+      "kind": "Created",
+      "at": "2026-07-21T09:32:09+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000908",
+      "subject": "UCOS-CEP-000010",
+      "kind": "Created",
+      "at": "2026-07-21T09:38:13+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000909",
+      "subject": "UCOS-CEP-000011",
+      "kind": "Created",
+      "at": "2026-07-21T09:41:41+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000910",
+      "subject": "UCOS-CEP-000012",
+      "kind": "Created",
+      "at": "2026-07-21T09:46:42+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000911",
+      "subject": "UCOS-CEP-000013",
+      "kind": "Created",
+      "at": "2026-07-21T10:01:55+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000912",
+      "subject": "UCOS-CEP-000014",
+      "kind": "Created",
+      "at": "2026-07-21T10:07:06+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000913",
+      "subject": "UCOS-CEP-000015",
+      "kind": "Created",
+      "at": "2026-07-21T10:14:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000914",
+      "subject": "UCOS-CEP-000016",
+      "kind": "Created",
+      "at": "2026-07-21T10:17:56+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000915",
+      "subject": "UCOS-CEP-000017",
+      "kind": "Created",
+      "at": "2026-07-21T10:21:46+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000916",
+      "subject": "UCOS-CEP-000018",
+      "kind": "Created",
+      "at": "2026-07-21T10:25:43+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000917",
+      "subject": "UCOS-CEP-000019",
+      "kind": "Created",
+      "at": "2026-07-21T10:30:33+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000918",
+      "subject": "UCOS-CEP-000020",
+      "kind": "Created",
+      "at": "2026-07-21T10:35:05+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000919",
+      "subject": "UCOS-CEP-000021",
+      "kind": "Created",
+      "at": "2026-07-21T10:41:45+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000920",
+      "subject": "UCOS-CEP-000022",
+      "kind": "Created",
+      "at": "2026-07-21T10:46:59+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000921",
+      "subject": "UCOS-CEP-000023",
+      "kind": "Created",
+      "at": "2026-07-21T10:52:02+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000922",
+      "subject": "UCOS-CEP-000024",
+      "kind": "Created",
+      "at": "2026-07-21T10:56:50+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000923",
+      "subject": "UCOS-CEP-000025",
+      "kind": "Created",
+      "at": "2026-07-21T11:01:28+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000000924",
+      "subject": "UCOS-CEP-000026",
+      "kind": "Created",
+      "at": "2026-07-21T11:06:08+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
       "commit": null
     }
   ],
@@ -26300,6 +26924,552 @@
           "snapshot_seq": 1
         }
       ]
+    },
+    "UCOS-CON-000032": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "c1b598b897f224550399820966e0d6a32b8e115db5ddf8a7160e50892a49553f",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "c1b598b897f224550399820966e0d6a32b8e115db5ddf8a7160e50892a49553f",
+          "at": "2026-07-21T07:52:12+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000033": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "d44ac1eca707cc7998885d1bd916d7116823c7df677ea118bcae034e75119301",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "d44ac1eca707cc7998885d1bd916d7116823c7df677ea118bcae034e75119301",
+          "at": "2026-07-21T07:55:54+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000034": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "cfb29d87524a389b8fdaed8edcd821bdf159e5ceb8d32d8682bcdda0c7830b37",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "cfb29d87524a389b8fdaed8edcd821bdf159e5ceb8d32d8682bcdda0c7830b37",
+          "at": "2026-07-21T07:59:23+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000035": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "956e02b1f095f31a58cb1907f730b97730cb56a3e7e6f147a46a3624be8eba29",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "956e02b1f095f31a58cb1907f730b97730cb56a3e7e6f147a46a3624be8eba29",
+          "at": "2026-07-21T08:02:47+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000036": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "1cdc63daa6699dd95e10e4f1e86d81fdb1e138701c8c1674b05514c9f416fc97",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "1cdc63daa6699dd95e10e4f1e86d81fdb1e138701c8c1674b05514c9f416fc97",
+          "at": "2026-07-21T08:05:56+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000037": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "baff1ab6ed903ade579793b1e7d44ee467fae2a2282a25431e60ab45fa01091f",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "baff1ab6ed903ade579793b1e7d44ee467fae2a2282a25431e60ab45fa01091f",
+          "at": "2026-07-21T08:09:39+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000038": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "48524217103d258942c557916c6f266ace454983ad94a9ca2f9322a9daa79e1e",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "48524217103d258942c557916c6f266ace454983ad94a9ca2f9322a9daa79e1e",
+          "at": "2026-07-21T08:13:54+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000039": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "8b31db6ac535912e29b3f69bed6e4ad788d5108b2cfeeca6c9671e45bfb71c98",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "8b31db6ac535912e29b3f69bed6e4ad788d5108b2cfeeca6c9671e45bfb71c98",
+          "at": "2026-07-21T08:19:16+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000040": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "08c25caeed43bb4773a5ea636bb5cf66b03057e284c084b1d56ac7ef757da8b1",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "08c25caeed43bb4773a5ea636bb5cf66b03057e284c084b1d56ac7ef757da8b1",
+          "at": "2026-07-21T08:22:08+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000041": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "86bd36e89e81c67f935ad511fe970ec71951d5f2801fb311bd1092c4d7122c0c",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "86bd36e89e81c67f935ad511fe970ec71951d5f2801fb311bd1092c4d7122c0c",
+          "at": "2026-07-21T08:25:28+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000042": {
+      "current_version": "1.0",
+      "first_version": "1.0",
+      "version_depth": 1,
+      "content_baseline": "87259b7248b424f35830f9443a0859a1cd04398bffe76c073e3428d13a549974",
+      "history": [
+        {
+          "version": "1.0",
+          "content_hash": "87259b7248b424f35830f9443a0859a1cd04398bffe76c073e3428d13a549974",
+          "at": "2026-07-21T08:28:49+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000043": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "75836f533566528b3762e2088d69e1613715e7d442756b01f20c0471531539ef",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "75836f533566528b3762e2088d69e1613715e7d442756b01f20c0471531539ef",
+          "at": "2026-07-21T08:32:54+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "d390925c5fca6a7599013008c7446409b96badfa245ae7ae3c639e272e321f30",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "d390925c5fca6a7599013008c7446409b96badfa245ae7ae3c639e272e321f30",
+          "at": "2026-07-21T08:39:15+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000044": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "86388c7bdd0ce8ba7d36d49fd8e8dc3d3cf256d34a6880dd10b25ae239ebd3c1",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "86388c7bdd0ce8ba7d36d49fd8e8dc3d3cf256d34a6880dd10b25ae239ebd3c1",
+          "at": "2026-07-21T08:43:15+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000002": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "8d7eb69efedf4940d0df45a5c7cf73e28dd07b4a0f8895c8756952ef515bdc2a",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "8d7eb69efedf4940d0df45a5c7cf73e28dd07b4a0f8895c8756952ef515bdc2a",
+          "at": "2026-07-21T08:47:46+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000003": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "123c7dd36bd6c76370537f7809d360dbd1879508300808afe4c1a3ad9569591c",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "123c7dd36bd6c76370537f7809d360dbd1879508300808afe4c1a3ad9569591c",
+          "at": "2026-07-21T08:52:20+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000004": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "9b71f99dae71d073aef37f62aa802401e17a6b14a47edc2cc03468b294ab7ad5",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "9b71f99dae71d073aef37f62aa802401e17a6b14a47edc2cc03468b294ab7ad5",
+          "at": "2026-07-21T08:55:38+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000005": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "ba54f00b9e7198f8a5e46eb6a0569835276d1c81dd08ff5d5bedb23677ce9c9c",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "ba54f00b9e7198f8a5e46eb6a0569835276d1c81dd08ff5d5bedb23677ce9c9c",
+          "at": "2026-07-21T08:59:29+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000006": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "c49fb2127b646b5b9da17036f7bda32170ae409dcc3f70e4580a423aab2db5cf",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "c49fb2127b646b5b9da17036f7bda32170ae409dcc3f70e4580a423aab2db5cf",
+          "at": "2026-07-21T09:05:29+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000007": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "479b834f5048c846779dbba4bff637387278bf1d6aaa59f57f1b03da2c3b62c0",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "479b834f5048c846779dbba4bff637387278bf1d6aaa59f57f1b03da2c3b62c0",
+          "at": "2026-07-21T09:16:18+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000008": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "3558fc222b3b9dd4b8694150a46f987f60f0202ae9b8f2b776cc61d2696e3505",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "3558fc222b3b9dd4b8694150a46f987f60f0202ae9b8f2b776cc61d2696e3505",
+          "at": "2026-07-21T09:23:30+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000009": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "c58d55dc420d946bc2f30fc7422cfaf9186480843b8985d31ea70467b73fcca1",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "c58d55dc420d946bc2f30fc7422cfaf9186480843b8985d31ea70467b73fcca1",
+          "at": "2026-07-21T09:32:09+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000010": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "1bb3e72362d7432ffa38983caf9f65e962bb40dc70918420be038c371a1af318",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "1bb3e72362d7432ffa38983caf9f65e962bb40dc70918420be038c371a1af318",
+          "at": "2026-07-21T09:38:13+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000011": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "d148e6a0a7afbec9e139ab6bc82208ef030499596bf44b09e25af1d8eecc012a",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "d148e6a0a7afbec9e139ab6bc82208ef030499596bf44b09e25af1d8eecc012a",
+          "at": "2026-07-21T09:41:41+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000012": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "3e8ea4b3b47a661c3c5dcae7eba69c77267530eb60e74f79b0585ff5abf757dc",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "3e8ea4b3b47a661c3c5dcae7eba69c77267530eb60e74f79b0585ff5abf757dc",
+          "at": "2026-07-21T09:46:42+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000013": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "82b55f6ffdbb00bccecc8741c7a1218da4e6ea95c5a5a00ade63c6e7aa18c15c",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "82b55f6ffdbb00bccecc8741c7a1218da4e6ea95c5a5a00ade63c6e7aa18c15c",
+          "at": "2026-07-21T10:01:55+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000014": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "e98f8f63d05118b3b13921f8ccd3d2d3e9e355d6010729f9ec6c9470d5b29998",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "e98f8f63d05118b3b13921f8ccd3d2d3e9e355d6010729f9ec6c9470d5b29998",
+          "at": "2026-07-21T10:07:06+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000015": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "ea0197de25b5c46a9a320e778d201d28caf2a73380cd1dfdc16fb3330396c5c1",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "ea0197de25b5c46a9a320e778d201d28caf2a73380cd1dfdc16fb3330396c5c1",
+          "at": "2026-07-21T10:14:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000016": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "104e66f0870d23c74fa99e45660406ea2f6cb1e0d639434763b9c274e954b804",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "104e66f0870d23c74fa99e45660406ea2f6cb1e0d639434763b9c274e954b804",
+          "at": "2026-07-21T10:17:56+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000017": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "d162d5354125df8e55b23e5aebcf825144a2ef220072aba0e06b222539d418d8",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "d162d5354125df8e55b23e5aebcf825144a2ef220072aba0e06b222539d418d8",
+          "at": "2026-07-21T10:21:46+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000018": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "7dc8312694da41afe5cf2868c9ef44b441d45422c80fc493172e47204cd48c4b",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "7dc8312694da41afe5cf2868c9ef44b441d45422c80fc493172e47204cd48c4b",
+          "at": "2026-07-21T10:25:43+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000019": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "4cc7e2ff479170007dcfe54fd7fbaf0bac8b74a385441ff80c6bff2594b755e6",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "4cc7e2ff479170007dcfe54fd7fbaf0bac8b74a385441ff80c6bff2594b755e6",
+          "at": "2026-07-21T10:30:33+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000020": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "a6749d47ecd0bd8410122c756c537021d48a23d1cc4a8a3c7c40f9a994f4dfd7",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "a6749d47ecd0bd8410122c756c537021d48a23d1cc4a8a3c7c40f9a994f4dfd7",
+          "at": "2026-07-21T10:35:05+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000021": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "c726b8be7b685d1f29e56311c48814a7ba38bc89ed472c3f9fc585eaf17c509d",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "c726b8be7b685d1f29e56311c48814a7ba38bc89ed472c3f9fc585eaf17c509d",
+          "at": "2026-07-21T10:41:45+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000022": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "6a65c523319667e962aa3c6bcdbfc7f590b684044c8918d4f68bc0bb1826202c",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "6a65c523319667e962aa3c6bcdbfc7f590b684044c8918d4f68bc0bb1826202c",
+          "at": "2026-07-21T10:46:59+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000023": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "53d16be66d91b5a39144590a4cd0b018925264ce7450f652d434012e429fdab0",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "53d16be66d91b5a39144590a4cd0b018925264ce7450f652d434012e429fdab0",
+          "at": "2026-07-21T10:52:02+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000024": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "2cfcd0a45fb5a89ea51ed454b16e76170cd5c11429b9e1c3ed705c7e311e6f52",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "2cfcd0a45fb5a89ea51ed454b16e76170cd5c11429b9e1c3ed705c7e311e6f52",
+          "at": "2026-07-21T10:56:50+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000025": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "0518a4b8bd91220ce91ad211c97bf83438545d3592f2e5d52de0bb35d0e97113",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "0518a4b8bd91220ce91ad211c97bf83438545d3592f2e5d52de0bb35d0e97113",
+          "at": "2026-07-21T11:01:28+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CEP-000026": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "e35148e5c4c0547a5971b3d5db776d600c33b8b5f99032b07684c7fe987f0081",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "e35148e5c4c0547a5971b3d5db776d600c33b8b5f99032b07684c7fe987f0081",
+          "at": "2026-07-21T11:06:08+00:00",
+          "snapshot_seq": 1
+        }
+      ]
     }
   },
   "lineage": {
@@ -26930,6 +28100,318 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-REG-000006"
+    },
+    "UCOS-CON-000032": {
+      "birth": "2026-07-21T07:52:12+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000032"
+    },
+    "UCOS-CON-000033": {
+      "birth": "2026-07-21T07:55:54+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000033"
+    },
+    "UCOS-CON-000034": {
+      "birth": "2026-07-21T07:59:23+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000034"
+    },
+    "UCOS-CON-000035": {
+      "birth": "2026-07-21T08:02:47+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000035"
+    },
+    "UCOS-CON-000036": {
+      "birth": "2026-07-21T08:05:56+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000036"
+    },
+    "UCOS-CON-000037": {
+      "birth": "2026-07-21T08:09:39+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000037"
+    },
+    "UCOS-CON-000038": {
+      "birth": "2026-07-21T08:13:54+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000038"
+    },
+    "UCOS-CON-000039": {
+      "birth": "2026-07-21T08:19:16+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000039"
+    },
+    "UCOS-CON-000040": {
+      "birth": "2026-07-21T08:22:08+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000040"
+    },
+    "UCOS-CON-000041": {
+      "birth": "2026-07-21T08:25:28+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000041"
+    },
+    "UCOS-CON-000042": {
+      "birth": "2026-07-21T08:28:49+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000042"
+    },
+    "UCOS-CON-000043": {
+      "birth": "2026-07-21T08:32:54+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000043"
+    },
+    "UCOS-CEP-000012": {
+      "birth": "2026-07-21T09:46:42+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000012"
+    },
+    "UCOS-CEP-000001": {
+      "birth": "2026-07-21T08:39:15+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000001"
+    },
+    "UCOS-CON-000044": {
+      "birth": "2026-07-21T08:43:15+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000044"
+    },
+    "UCOS-CEP-000002": {
+      "birth": "2026-07-21T08:47:46+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000002"
+    },
+    "UCOS-CEP-000003": {
+      "birth": "2026-07-21T08:52:20+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000003"
+    },
+    "UCOS-CEP-000004": {
+      "birth": "2026-07-21T08:55:38+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000004"
+    },
+    "UCOS-CEP-000005": {
+      "birth": "2026-07-21T08:59:29+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000005"
+    },
+    "UCOS-CEP-000006": {
+      "birth": "2026-07-21T09:05:29+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000006"
+    },
+    "UCOS-CEP-000007": {
+      "birth": "2026-07-21T09:16:18+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000007"
+    },
+    "UCOS-CEP-000008": {
+      "birth": "2026-07-21T09:23:30+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000008"
+    },
+    "UCOS-CEP-000009": {
+      "birth": "2026-07-21T09:32:09+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000009"
+    },
+    "UCOS-CEP-000010": {
+      "birth": "2026-07-21T09:38:13+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000010"
+    },
+    "UCOS-CEP-000011": {
+      "birth": "2026-07-21T09:41:41+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000011"
+    },
+    "UCOS-CEP-000024": {
+      "birth": "2026-07-21T10:56:50+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000024"
+    },
+    "UCOS-CEP-000013": {
+      "birth": "2026-07-21T10:01:55+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000013"
+    },
+    "UCOS-CEP-000014": {
+      "birth": "2026-07-21T10:07:06+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000014"
+    },
+    "UCOS-CEP-000015": {
+      "birth": "2026-07-21T10:14:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000015"
+    },
+    "UCOS-CEP-000016": {
+      "birth": "2026-07-21T10:17:56+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000016"
+    },
+    "UCOS-CEP-000017": {
+      "birth": "2026-07-21T10:21:46+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000017"
+    },
+    "UCOS-CEP-000018": {
+      "birth": "2026-07-21T10:25:43+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000018"
+    },
+    "UCOS-CEP-000019": {
+      "birth": "2026-07-21T10:30:33+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000019"
+    },
+    "UCOS-CEP-000020": {
+      "birth": "2026-07-21T10:35:05+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000020"
+    },
+    "UCOS-CEP-000021": {
+      "birth": "2026-07-21T10:41:45+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000021"
+    },
+    "UCOS-CEP-000022": {
+      "birth": "2026-07-21T10:46:59+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000022"
+    },
+    "UCOS-CEP-000023": {
+      "birth": "2026-07-21T10:52:02+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000023"
+    },
+    "UCOS-CEP-000025": {
+      "birth": "2026-07-21T11:01:28+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000025"
+    },
+    "UCOS-CEP-000026": {
+      "birth": "2026-07-21T11:06:08+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000026"
     },
     "UCOS-SRC-000001": {
       "birth": "2026-07-15T02:26:52+00:00",
