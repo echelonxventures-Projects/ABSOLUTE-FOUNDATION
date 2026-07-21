@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 929
+**Total artifacts:** 933
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -937,5 +937,9 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 927 | `UCOS-INFRASTRUCTU-000087` | Validation Evidence | — | 000 | UPN-000008307–UPN-000008310 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U08/validation-evidence.json) |
 | 928 | `UCOS-INFRASTRUCTU-000088` | Validation Report | — | 000 | UPN-000008311–UPN-000008314 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U08/validation-report.json) |
 | 929 | `UCOS-CEP-000029` | UCOS Ω∞ — STAGE 04 · S4-05 — INFRASTRUCTURE-013 SECURITY … | CEP-STAGE-04-S4-05 | 000 | UPN-000008315–UPN-000008318 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../00-CEP/STAGE-04-S4-05-SECURITY-VALIDATION-CERTIFICATION-FREEZE-READINESS.md) |
+| 930 | `UCOS-MASTER-000034` | UCOS Ω∞ — BUC-002 · BUSINESS CAPABILITY UNIVERSE REALIZAT… | — | 000 | UPN-000008319–UPN-000008326 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/BUC-002-BUSINESS-CAPABILITY-UNIVERSE-REALIZATION-PREPARATION-DETERMINATION.md) |
+| 931 | `UCOS-MASTER-000035` | UCOS Ω∞ — TERMINAL-02 · T02-UED-001 · UNIVERSAL EXISTENCE… | — | 000 | UPN-000008327–UPN-000008331 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/T02-UED-001-UNIVERSAL-EXISTENCE-FOUNDATION-DISCOVERY-INTELLIGENCE.md) |
+| 932 | `UCOS-CEP-000030` | UCOS Ω∞ — STAGE 04 · S4-06 — INFRASTRUCTURE-013 SECURITY … | CEP-STAGE-04-S4-06 | 000 | UPN-000008332–UPN-000008336 | COMPLETE | `UCOS-BOOK-000000` | 0 | [↗](../../00-CEP/STAGE-04-S4-06-INFRASTRUCTURE-013-SECURITY-RATIFICATION-AND-INFRASTRUCTURE-014-NEXT-FRONTIER-DETERMINATION.md) |
+| 933 | `UCOS-MASTER-000036` | UCOS Ω∞ — TERMINAL-04 · T04-TEE-001 · UNIVERSAL TRANSACTI… | — | 000 | UPN-000008337–UPN-000008343 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/T04-TEE-001-UNIVERSAL-TRANSACTION-AND-ENTERPRISE-EXISTENCE-DISCOVERY-DETERMINATION.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

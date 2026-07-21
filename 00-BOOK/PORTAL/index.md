@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-21T12:50:35+00:00 by ukbx portal. 929 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-21T13:33:57+00:00 by ukbx portal. 933 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -933,3 +933,7 @@
 | [UCOS-INFRASTRUCTU-000087](UCOS-INFRASTRUCTU-000087.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-INFRASTRUCTU-000088](UCOS-INFRASTRUCTU-000088.md) | Validation Report | VOL-000 | ACTIVE |
 | [UCOS-CEP-000029](UCOS-CEP-000029.md) | UCOS Ω∞ — STAGE 04 · S4-05 — INFRASTRUCTURE-013 SECURITY VAL | VOL-000 | COMPLETE |
+| [UCOS-MASTER-000034](UCOS-MASTER-000034.md) | UCOS Ω∞ — BUC-002 · BUSINESS CAPABILITY UNIVERSE REALIZATION | VOL-000 | ACTIVE |
+| [UCOS-MASTER-000035](UCOS-MASTER-000035.md) | UCOS Ω∞ — TERMINAL-02 · T02-UED-001 · UNIVERSAL EXISTENCE FO | VOL-000 | COMPLETE |
+| [UCOS-CEP-000030](UCOS-CEP-000030.md) | UCOS Ω∞ — STAGE 04 · S4-06 — INFRASTRUCTURE-013 SECURITY PRO | VOL-000 | COMPLETE |
+| [UCOS-MASTER-000036](UCOS-MASTER-000036.md) | UCOS Ω∞ — TERMINAL-04 · T04-TEE-001 · UNIVERSAL TRANSACTION  | VOL-000 | ACTIVE |
