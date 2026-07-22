@@ -70,9 +70,7 @@ def test_unresolvable_blueprint_raises(orchestrator):
         orchestrator.generate(FactoryRequest("BP-DATA-9999"))
 
 
-def test_classification_uses_document_metadata_when_unregistered(
-    orchestrator, compiler_registry
-):
+def test_classification_uses_document_metadata_when_unregistered(orchestrator, compiler_registry):
     # BP-DATA-0001 is NOT a registered artifact, so the document's declared
     # metadata drives classification (both paths are metadata-driven).
     assert compiler_registry.artifacts.find("BP-DATA-0001") is None

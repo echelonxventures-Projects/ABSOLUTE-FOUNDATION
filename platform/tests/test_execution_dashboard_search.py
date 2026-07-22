@@ -22,12 +22,33 @@ import pytest
 
 def _registry():
     reg = GenerationRequestRegistry()
-    reg.create("alpha", "UCOS-BLPR-1", "UCOS-WSPC-1", "arch@x", BlueprintFamily.DATA,
-               submitted_tick=1, tenant="acme")
-    reg.create("beta", "UCOS-BLPR-2", "UCOS-WSPC-1", "arch@x", BlueprintFamily.EVENT,
-               submitted_tick=2, tenant="acme")
-    reg.create("gamma", "UCOS-BLPR-3", "UCOS-WSPC-2", "arch@x", BlueprintFamily.DATA,
-               submitted_tick=3, tenant="beta")
+    reg.create(
+        "alpha",
+        "UCOS-BLPR-1",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.DATA,
+        submitted_tick=1,
+        tenant="acme",
+    )
+    reg.create(
+        "beta",
+        "UCOS-BLPR-2",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.EVENT,
+        submitted_tick=2,
+        tenant="acme",
+    )
+    reg.create(
+        "gamma",
+        "UCOS-BLPR-3",
+        "UCOS-WSPC-2",
+        "arch@x",
+        BlueprintFamily.DATA,
+        submitted_tick=3,
+        tenant="beta",
+    )
     return reg
 
 

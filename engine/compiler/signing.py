@@ -66,9 +66,9 @@ def _signing_payload(package: Package) -> bytes:
         "package_hash": package.package_hash,
         "algorithm": SIGNATURE_ALGORITHM,
     }
-    return json.dumps(
-        payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False
-    ).encode("utf-8")
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode(
+        "utf-8"
+    )
 
 
 def _build_sbom(package: Package) -> dict[str, Any]:

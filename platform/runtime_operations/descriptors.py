@@ -43,9 +43,7 @@ class DescriptorCatalog:
         environment: str | None = None,
     ) -> tuple[RuntimeOperationRecord, ...]:
         """Discover governed operations carrying descriptors, optionally scoped (stable order)."""
-        return self._registry.discover(
-            runtime_id=runtime_id, kind=kind, environment=environment
-        )
+        return self._registry.discover(runtime_id=runtime_id, kind=kind, environment=environment)
 
     def deployment_views(
         self, *, runtime_id: str | None = None
@@ -69,9 +67,7 @@ class DescriptorCatalog:
             )
         )
 
-    def inspect(
-        self, operation_id: str
-    ) -> DeploymentDescriptorView | RollbackDescriptorView:
+    def inspect(self, operation_id: str) -> DeploymentDescriptorView | RollbackDescriptorView:
         """Inspect a single operation's governing descriptor as a read view (fail-closed)."""
         record = self._registry.get(operation_id)
         if record.kind is RuntimeOperationKind.DEPLOY:

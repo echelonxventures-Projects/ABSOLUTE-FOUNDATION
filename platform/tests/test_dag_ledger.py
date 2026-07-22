@@ -120,9 +120,7 @@ def test_append_is_idempotent_by_event_hash():
     dag = EventDag()
     first = dag.append("a", "src", "s", payload={"x": 1})
     # Re-appending identical content with identical (empty) parents is a no-op.
-    again = DagEvent.create(
-        "a", "src", "s", payload={"x": 1}
-    )
+    again = DagEvent.create("a", "src", "s", payload={"x": 1})
     assert again.event_hash == first.event_hash
     dup = dag._append("a", "src", "s", parents=(), payload={"x": 1})
     assert dup.event_hash == first.event_hash
@@ -193,9 +191,7 @@ def test_merge_converges_branches():
     root = dag.append("root", "src", "s")
     left = dag.branch(root.event_hash, "left", "src", "s")
     right = dag.branch(root.event_hash, "right", "src", "s")
-    merged = dag.merge(
-        (left.event_hash, right.event_id), "merge", "src", "s", payload={"n": 1}
-    )
+    merged = dag.merge((left.event_hash, right.event_id), "merge", "src", "s", payload={"n": 1})
     assert merged.is_merge is True
     assert set(merged.parents) == {left.event_hash, right.event_hash}
     assert dag.heads == (merged.event_hash,)

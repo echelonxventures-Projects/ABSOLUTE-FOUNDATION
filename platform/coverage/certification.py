@@ -131,8 +131,7 @@ def assess(engine: CoverageEngine, *, strict: bool = True) -> CoverageCertificat
     verification = engine.verify()
 
     gaps = tuple(
-        f"{n.kind.value}:{n.ref}:{graph_a.status_of(n.node_id).value}"
-        for n in graph_a.gaps()
+        f"{n.kind.value}:{n.ref}:{graph_a.status_of(n.node_id).value}" for n in graph_a.gaps()
     )
     orphans = tuple(f"{n.kind.value}:{n.ref}" for n in graph_a.orphans())
     violations = tuple(verification.violations)

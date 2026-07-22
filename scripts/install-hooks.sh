@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+#
+# UCOS Ω∞ — Git hook installer (opt-in local automation).
+#
+#   ./scripts/install-hooks.sh          install the canonical pre-commit hook
+#   ./scripts/install-hooks.sh --uninstall  remove a hook previously installed here
+#
+# Installs a fast, additive pre-commit quality gate that reuses the SAME canonical
+# environment as verify.sh — it sources scripts/ucos-env.sh and runs the pinned
+# ruff (lint + format check) through the .ec1-venv interpreter by absolute path.
+# No new tooling, no venv activation, no dependency on PATH.
+#
+# The hook is intentionally the *fast* subset (lint + format-check, no test run) so
+# it does not slow every commit; run ./verify.sh for the full gate. Bypass a single
+# commit with `git commit --no-verify`.
+#
+# This script only writes into .git/hooks (a local, untracked location); it never
+# touches source, generated registers, or the certified corpus.
+
+set -euo pipefail
+cd "$(dirname "$0")/.."
+# shellcheck source=scripts/ucos-env.sh
+source "scripts/ucos-env.sh"
+
+UNINSTALL=0
+[ "${1:-}" = "--uninstall" ] && UNINSTALL=1
+
+GIT_DIR="$(git -C "$UCOS_REPO" rev-parse --git-dir 2>/dev/null || true)"
+[ -n "$GIT_DIR" ] || ucos_die "not a git repository: $UCOS_REPO"
+case "$GIT_DIR" in /*) : ;; *) GIT_DIR="$UCOS_REPO/$GIT_DIR" ;; esac
+HOOK_DIR="$GIT_DIR/hooks"
+HOOK="$HOOK_DIR/pre-commit"
+
+_MARK="# UCOS-MANAGED-HOOK"
+
+if [ "$UNINSTALL" = "1" ]; then
+  if [ -f "$HOOK" ] && grep -q "$_MARK" "$HOOK" 2>/dev/null; then
+    rm -f "$HOOK"
+    ucos_ok "Removed UCOS pre-commit hook -> $HOOK"
+  else
+    ucos_warn "No UCOS-managed pre-commit hook found at $HOOK (nothing to do)."
+  fi
+  exit 0
+fi
+
+mkdir -p "$HOOK_DIR"
+
+# Refuse to clobber a foreign, hand-authored hook.
+if [ -f "$HOOK" ] && ! grep -q "$_MARK" "$HOOK" 2>/dev/null; then
+  ucos_die "A non-UCOS pre-commit hook already exists at $HOOK; refusing to overwrite. Back it up or remove it first."
+fi
+
+cat > "$HOOK" <<'HOOK_EOF'
+#!/usr/bin/env bash
+# UCOS-MANAGED-HOOK — installed by scripts/install-hooks.sh. Do not edit by hand;
+# re-run the installer to update. Fast additive gate: ruff lint + format check via
+# the canonical .ec1-venv (no activation). Bypass with: git commit --no-verify
+set -euo pipefail
+repo="$(git rev-parse --show-toplevel)"
+cd "$repo"
+# shellcheck source=scripts/ucos-env.sh
+source "scripts/ucos-env.sh"
+ucos_ensure_venv >/dev/null || { ucos_err "pre-commit: environment not ready — run ./bootstrap.sh"; exit 1; }
+PY="$(ucos_venv_python)"
+ucos_log "pre-commit: ruff lint + format check (engine + platform)"
+"$PY" -m ruff check engine platform
+"$PY" -m ruff format --check engine platform
+ucos_ok "pre-commit: OK"
+HOOK_EOF
+
+chmod +x "$HOOK"
+ucos_ok "Installed UCOS pre-commit hook -> $HOOK"
+ucos_log "It runs: ruff lint + ruff format --check (via .ec1-venv, no activation)."
+ucos_log "Bypass a single commit with: git commit --no-verify"
+ucos_log "Uninstall with: ./scripts/install-hooks.sh --uninstall"

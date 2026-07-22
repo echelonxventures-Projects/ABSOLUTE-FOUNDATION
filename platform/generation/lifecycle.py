@@ -32,24 +32,16 @@ from typing import Any
 
 #: The legal state-machine edges: current status → the statuses it may transition to.
 _TRANSITIONS: dict[RequestStatus, frozenset[RequestStatus]] = {
-    RequestStatus.SUBMITTED: frozenset(
-        {RequestStatus.VALIDATING, RequestStatus.CANCELLED}
-    ),
+    RequestStatus.SUBMITTED: frozenset({RequestStatus.VALIDATING, RequestStatus.CANCELLED}),
     RequestStatus.VALIDATING: frozenset(
         {RequestStatus.APPROVED, RequestStatus.FAILED, RequestStatus.CANCELLED}
     ),
-    RequestStatus.APPROVED: frozenset(
-        {RequestStatus.QUEUED, RequestStatus.CANCELLED}
-    ),
-    RequestStatus.QUEUED: frozenset(
-        {RequestStatus.DISPATCHED, RequestStatus.CANCELLED}
-    ),
+    RequestStatus.APPROVED: frozenset({RequestStatus.QUEUED, RequestStatus.CANCELLED}),
+    RequestStatus.QUEUED: frozenset({RequestStatus.DISPATCHED, RequestStatus.CANCELLED}),
     RequestStatus.DISPATCHED: frozenset(
         {RequestStatus.RUNNING, RequestStatus.FAILED, RequestStatus.CANCELLED}
     ),
-    RequestStatus.RUNNING: frozenset(
-        {RequestStatus.COMPLETED, RequestStatus.FAILED}
-    ),
+    RequestStatus.RUNNING: frozenset({RequestStatus.COMPLETED, RequestStatus.FAILED}),
     RequestStatus.COMPLETED: frozenset(),
     RequestStatus.FAILED: frozenset(),
     RequestStatus.CANCELLED: frozenset(),

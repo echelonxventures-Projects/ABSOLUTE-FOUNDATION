@@ -70,9 +70,7 @@ class DependencyGraph:
 
     def dependents_of(self, node_id: str) -> tuple[str, ...]:
         self._require(node_id)
-        return tuple(
-            sorted(n.node_id for n in self._nodes.values() if node_id in n.depends_on)
-        )
+        return tuple(sorted(n.node_id for n in self._nodes.values() if node_id in n.depends_on))
 
     def validate(self) -> None:
         """Raise :class:`DependencyError` on any unknown dependency or cycle."""
@@ -126,9 +124,7 @@ class DependencyGraph:
                     ready.sort()
         if len(order) != len(self._nodes):
             unresolved = sorted(set(self._nodes) - set(order))
-            raise DependencyError(
-                "dependency graph contains a cycle", unresolved=unresolved
-            )
+            raise DependencyError("dependency graph contains a cycle", unresolved=unresolved)
         return tuple(order)
 
     def to_dict(self) -> dict[str, Any]:

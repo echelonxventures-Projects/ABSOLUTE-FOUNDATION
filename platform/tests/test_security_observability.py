@@ -49,11 +49,17 @@ import pytest
 
 def test_signal_is_on_the_existing_security_dimension_and_deterministic():
     a = SecuritySignal.create(
-        RollupState.BLOCKED, "UCOS-SVC-1", traces_to="UCOS-SFND-1", emitted_at=1,
+        RollupState.BLOCKED,
+        "UCOS-SVC-1",
+        traces_to="UCOS-SFND-1",
+        emitted_at=1,
         metrics={"blocking": 2},
     )
     b = SecuritySignal.create(
-        RollupState.BLOCKED, "UCOS-SVC-1", traces_to="UCOS-SFND-1", emitted_at=1,
+        RollupState.BLOCKED,
+        "UCOS-SVC-1",
+        traces_to="UCOS-SFND-1",
+        emitted_at=1,
         metrics={"blocking": 2},
     )
     assert a.signal_id == b.signal_id
@@ -80,7 +86,9 @@ def test_signal_requires_reverse_trace():
 def test_signal_rejects_bad_tick():
     with pytest.raises(SecuritySignalError):
         SecuritySignal.create(
-            RollupState.APPROVED, "UCOS-SVC-1", traces_to="UCOS-SFND-1",
+            RollupState.APPROVED,
+            "UCOS-SVC-1",
+            traces_to="UCOS-SFND-1",
             emitted_at="now",  # type: ignore[arg-type]
         )
 
@@ -88,7 +96,10 @@ def test_signal_rejects_bad_tick():
 def test_signal_rejects_non_int_metric_value():
     with pytest.raises(SecuritySignalError):
         SecuritySignal.create(
-            RollupState.APPROVED, "UCOS-SVC-1", traces_to="UCOS-SFND-1", emitted_at=1,
+            RollupState.APPROVED,
+            "UCOS-SVC-1",
+            traces_to="UCOS-SFND-1",
+            emitted_at=1,
             metrics={"x": "two"},  # type: ignore[dict-item]
         )
 
@@ -108,9 +119,12 @@ def test_signal_trace_and_dict():
     assert t["traces_to"] == "UCOS-SRUP-1"
     assert t["dimension"] == "security"
     assert sig.to_dict()["state"] == "IN_PROGRESS"
-    assert sig.fingerprint() == SecuritySignal.create(
-        RollupState.IN_PROGRESS, "UCOS-SVC-1", traces_to="UCOS-SRUP-1", emitted_at=3
-    ).fingerprint()
+    assert (
+        sig.fingerprint()
+        == SecuritySignal.create(
+            RollupState.IN_PROGRESS, "UCOS-SVC-1", traces_to="UCOS-SRUP-1", emitted_at=3
+        ).fingerprint()
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -143,8 +157,12 @@ def test_ledger_rejects_non_signal():
 def test_ledger_refuses_a_non_reverse_traceable_signal():
     # A directly-constructed signal that bypasses create() (no traces_to) is refused.
     bad = SecuritySignal(
-        dimension="security", state=RollupState.APPROVED, subject_ref="UCOS-SVC-1",
-        traces_to="", emitted_at=1, signal_id="UCOS-SSIG-bad",
+        dimension="security",
+        state=RollupState.APPROVED,
+        subject_ref="UCOS-SVC-1",
+        traces_to="",
+        emitted_at=1,
+        signal_id="UCOS-SSIG-bad",
     )
     with pytest.raises(SignalTraceabilityError):
         SignalLedger().record(bad)
@@ -178,14 +196,20 @@ def test_service_rejects_bad_ledger_and_events():
 def test_emit_signal_shapes_l8_telemetry():
     obs = build_security_observability_service()
     sig = obs.emit_signal(
-        RollupState.BLOCKED, "UCOS-SVC-1", traces_to="UCOS-SFND-1", emitted_at=1,
+        RollupState.BLOCKED,
+        "UCOS-SVC-1",
+        traces_to="UCOS-SFND-1",
+        emitted_at=1,
         metrics={"blocking": 1},
     )
     assert sig.signal_id in obs.ledger
     # telemetry flows THROUGH the L8 layer: metric + log + audit.
-    assert obs.observability.metrics.value_of(
-        SECURITY_SIGNAL_METRIC, dimension="security", state="BLOCKED"
-    ) == 1.0
+    assert (
+        obs.observability.metrics.value_of(
+            SECURITY_SIGNAL_METRIC, dimension="security", state="BLOCKED"
+        )
+        == 1.0
+    )
     assert len(obs.observability.audit) == 1
     assert obs.observability.audit.events[0].action == SECURITY_SIGNAL_AUDIT_ACTION
     assert obs.telemetered_count == 1

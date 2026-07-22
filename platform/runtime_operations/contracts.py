@@ -490,9 +490,7 @@ class RuntimeOperationRecord:
         if not isinstance(unit, RuntimeUnit):
             raise RuntimeOperationsContractError("record requires a RuntimeUnit")
         if not isinstance(certification, CertificationConsoleRecord):
-            raise RuntimeOperationsContractError(
-                "record requires a CertificationConsoleRecord"
-            )
+            raise RuntimeOperationsContractError("record requires a CertificationConsoleRecord")
         if not isinstance(owner_subject, str) or not owner_subject:
             raise RuntimeOperationsContractError("record owner_subject is required")
         if not isinstance(environment, str) or not environment:

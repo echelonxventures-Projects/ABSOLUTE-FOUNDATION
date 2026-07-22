@@ -66,9 +66,7 @@ class RegistrySource:
     def __init__(self, data_dir: str | Path | None = None) -> None:
         resolved = Path(data_dir).resolve() if data_dir is not None else default_data_dir()
         if not resolved.exists():
-            raise RegistrySourceError(
-                "registry data directory not found", data_dir=str(resolved)
-            )
+            raise RegistrySourceError("registry data directory not found", data_dir=str(resolved))
         if not resolved.is_dir():
             raise RegistrySourceError(
                 "registry data path is not a directory", data_dir=str(resolved)

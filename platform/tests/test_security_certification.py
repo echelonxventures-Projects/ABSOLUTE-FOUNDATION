@@ -46,12 +46,20 @@ import pytest
 
 def test_certified_record_is_deterministic_and_evidence_backed():
     a = SecurityCertification.create(
-        CertificationClass.SECURITY, "UCOS-CMP-1", CertificationDecision.CERTIFIED,
-        basis="rolled up from SEC-INTEL evidence", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+        CertificationClass.SECURITY,
+        "UCOS-CMP-1",
+        CertificationDecision.CERTIFIED,
+        basis="rolled up from SEC-INTEL evidence",
+        certified_at=1,
+        evidence_refs=("UCOS-SIEV-1",),
     )
     b = SecurityCertification.create(
-        CertificationClass.SECURITY, "UCOS-CMP-1", CertificationDecision.CERTIFIED,
-        basis="rolled up from SEC-INTEL evidence", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+        CertificationClass.SECURITY,
+        "UCOS-CMP-1",
+        CertificationDecision.CERTIFIED,
+        basis="rolled up from SEC-INTEL evidence",
+        certified_at=1,
+        evidence_refs=("UCOS-SIEV-1",),
     )
     assert a.certification_id == b.certification_id
     assert a.certification_id.startswith("UCOS-SCERT-")
@@ -62,15 +70,21 @@ def test_certified_record_is_deterministic_and_evidence_backed():
 def test_certified_requires_evidence_refs():
     with pytest.raises(SecurityCertificationError):
         SecurityCertification.create(
-            CertificationClass.SECURITY, "UCOS-CMP-1", CertificationDecision.CERTIFIED,
-            basis="no evidence cited", certified_at=1,
+            CertificationClass.SECURITY,
+            "UCOS-CMP-1",
+            CertificationDecision.CERTIFIED,
+            basis="no evidence cited",
+            certified_at=1,
         )
 
 
 def test_not_certified_may_omit_evidence():
     c = SecurityCertification.create(
-        CertificationClass.OPERATIONAL, "UCOS-CMP-2", CertificationDecision.NOT_CERTIFIED,
-        basis="facet gap", certified_at=1,
+        CertificationClass.OPERATIONAL,
+        "UCOS-CMP-2",
+        CertificationDecision.NOT_CERTIFIED,
+        basis="facet gap",
+        certified_at=1,
     )
     assert c.is_certified is False
 
@@ -85,7 +99,11 @@ def test_create_rejects_bad_class_decision_subject_basis_tick():
         )
     with pytest.raises(SecurityCertificationError):
         SecurityCertification.create(
-            CertificationClass.SECURITY, "UCOS-1", "CERTIFIED", basis="b", certified_at=1  # type: ignore[arg-type]
+            CertificationClass.SECURITY,
+            "UCOS-1",
+            "CERTIFIED",
+            basis="b",
+            certified_at=1,  # type: ignore[arg-type]
         )
     with pytest.raises(SecurityCertificationError):
         SecurityCertification.create(
@@ -100,15 +118,23 @@ def test_create_rejects_bad_class_decision_subject_basis_tick():
 def test_create_rejects_secret_in_evidence_ref():
     with pytest.raises(SecurityCertificationError):
         SecurityCertification.create(
-            CertificationClass.SECURITY, "UCOS-1", CertificationDecision.CERTIFIED,
-            basis="b", certified_at=1, evidence_refs=("password: supersecretvalue",),
+            CertificationClass.SECURITY,
+            "UCOS-1",
+            CertificationDecision.CERTIFIED,
+            basis="b",
+            certified_at=1,
+            evidence_refs=("password: supersecretvalue",),
         )
 
 
 def test_validate_trace_and_dict():
     c = SecurityCertification.create(
-        CertificationClass.TRUST, "UCOS-CMP-9", CertificationDecision.CERTIFIED,
-        basis="trust anchors verified", certified_at=2, evidence_refs=("UCOS-SREG-1",),
+        CertificationClass.TRUST,
+        "UCOS-CMP-9",
+        CertificationDecision.CERTIFIED,
+        basis="trust anchors verified",
+        certified_at=2,
+        evidence_refs=("UCOS-SREG-1",),
     )
     assert c.validate()["meta_valid"] is True
     t = c.trace()
@@ -120,9 +146,13 @@ def test_validate_trace_and_dict():
 
 def test_validate_fails_on_hand_built_uncited_certified_record():
     bad = SecurityCertification(
-        certification_class=CertificationClass.SECURITY, subject_ref="UCOS-1",
-        decision=CertificationDecision.CERTIFIED, basis="b", certified_at=1,
-        evidence_refs=(), certification_id="UCOS-SCERT-bad",
+        certification_class=CertificationClass.SECURITY,
+        subject_ref="UCOS-1",
+        decision=CertificationDecision.CERTIFIED,
+        basis="b",
+        certified_at=1,
+        evidence_refs=(),
+        certification_id="UCOS-SCERT-bad",
     )
     with pytest.raises(CertificationValidationError):
         bad.validate()
@@ -166,8 +196,12 @@ def test_evaluate_ignores_non_facet_members():
 def test_ledger_append_only_idempotent_and_queries():
     ledger = CertificationLedger()
     c = SecurityCertification.create(
-        CertificationClass.PRIVACY, "UCOS-DATA-1", CertificationDecision.CERTIFIED,
-        basis="pii classified", certified_at=1, evidence_refs=("UCOS-SCLS-1",),
+        CertificationClass.PRIVACY,
+        "UCOS-DATA-1",
+        CertificationDecision.CERTIFIED,
+        basis="pii classified",
+        certified_at=1,
+        evidence_refs=("UCOS-SCLS-1",),
     )
     ledger.record(c)
     ledger.record(c)
@@ -202,12 +236,20 @@ def test_rollup_empty_is_not_certified():
 def test_rollup_all_certified_is_certified():
     certs = (
         SecurityCertification.create(
-            CertificationClass.SECURITY, "UCOS-1", CertificationDecision.CERTIFIED,
-            basis="b", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+            CertificationClass.SECURITY,
+            "UCOS-1",
+            CertificationDecision.CERTIFIED,
+            basis="b",
+            certified_at=1,
+            evidence_refs=("UCOS-SIEV-1",),
         ),
         SecurityCertification.create(
-            CertificationClass.TRUST, "UCOS-2", CertificationDecision.CERTIFIED,
-            basis="b", certified_at=1, evidence_refs=("UCOS-SREG-1",),
+            CertificationClass.TRUST,
+            "UCOS-2",
+            CertificationDecision.CERTIFIED,
+            basis="b",
+            certified_at=1,
+            evidence_refs=("UCOS-SREG-1",),
         ),
     )
     prog = roll_up_program(certs)
@@ -220,12 +262,19 @@ def test_rollup_all_certified_is_certified():
 def test_rollup_any_not_certified_blocks():
     certs = (
         SecurityCertification.create(
-            CertificationClass.SECURITY, "UCOS-1", CertificationDecision.CERTIFIED,
-            basis="b", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+            CertificationClass.SECURITY,
+            "UCOS-1",
+            CertificationDecision.CERTIFIED,
+            basis="b",
+            certified_at=1,
+            evidence_refs=("UCOS-SIEV-1",),
         ),
         SecurityCertification.create(
-            CertificationClass.OPERATIONAL, "UCOS-2", CertificationDecision.NOT_CERTIFIED,
-            basis="gap", certified_at=1,
+            CertificationClass.OPERATIONAL,
+            "UCOS-2",
+            CertificationDecision.NOT_CERTIFIED,
+            basis="gap",
+            certified_at=1,
         ),
     )
     prog = roll_up_program(certs)
@@ -235,8 +284,11 @@ def test_rollup_any_not_certified_blocks():
 
 def test_program_certification_is_content_addressed():
     prog = ProgramCertification.create(
-        decision=CertificationDecision.CERTIFIED, certification_count=1, certified_count=1,
-        not_certified_count=0, covered_classes=("security-certification",),
+        decision=CertificationDecision.CERTIFIED,
+        certification_count=1,
+        certified_count=1,
+        not_certified_count=0,
+        covered_classes=("security-certification",),
     )
     assert prog.program_id.startswith("UCOS-SCPR-")
     assert prog.fingerprint() == prog.fingerprint()
@@ -258,8 +310,12 @@ def test_certify_records_and_emits_event():
     bus = EventBus()
     service = build_security_certification_service(events=bus)
     c = service.certify(
-        CertificationClass.SECURITY, "UCOS-CMP-1", CertificationDecision.CERTIFIED,
-        basis="b", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+        CertificationClass.SECURITY,
+        "UCOS-CMP-1",
+        CertificationDecision.CERTIFIED,
+        basis="b",
+        certified_at=1,
+        evidence_refs=("UCOS-SIEV-1",),
     )
     assert c.certification_id in service.ledger
     evs = bus.events_of(CERTIFICATION_RECORDED_EVENT)
@@ -270,8 +326,12 @@ def test_certify_records_and_emits_event():
 def test_certify_without_bus_and_record_prebuilt():
     service = build_security_certification_service()
     c = SecurityCertification.create(
-        CertificationClass.COMPLIANCE, "UCOS-CMP-2", CertificationDecision.CERTIFIED,
-        basis="b", certified_at=1, evidence_refs=("UCOS-SREG-1",),
+        CertificationClass.COMPLIANCE,
+        "UCOS-CMP-2",
+        CertificationDecision.CERTIFIED,
+        basis="b",
+        certified_at=1,
+        evidence_refs=("UCOS-SREG-1",),
     )
     assert service.record(c).certification_id in service.ledger
     with pytest.raises(SecurityCertificationError):
@@ -289,9 +349,7 @@ def test_certify_control_complete_records_certified():
 
 def test_certify_control_gap_records_not_certified_with_gap_ref():
     service = build_security_certification_service()
-    result = service.certify_control(
-        "UCOS-CMP-2", {ControlFacet.IDENTITY}, certified_at=1
-    )
+    result = service.certify_control("UCOS-CMP-2", {ControlFacet.IDENTITY}, certified_at=1)
     assert result["certified"] is False
     assert len(result["gap_report"]["missing_facets"]) == len(REQUIRED_CONTROL_FACETS) - 1
     assert result["certification"]["gap_ref"] == result["gap_report"]["gap_id"]
@@ -308,8 +366,12 @@ def test_certify_control_complete_without_explicit_evidence_uses_gap_id():
 def test_program_certification_trace_validate_report():
     service = build_security_certification_service()
     c = service.certify(
-        CertificationClass.SECURITY, "UCOS-CMP-1", CertificationDecision.CERTIFIED,
-        basis="b", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+        CertificationClass.SECURITY,
+        "UCOS-CMP-1",
+        CertificationDecision.CERTIFIED,
+        basis="b",
+        certified_at=1,
+        evidence_refs=("UCOS-SIEV-1",),
     )
     assert service.trace(c.certification_id)["certification_id"] == c.certification_id
     assert service.validate(c.certification_id)["meta_valid"] is True
@@ -332,8 +394,12 @@ def test_report_is_deterministic():
     def build() -> SecurityCertificationEvidence:
         service = build_security_certification_service()
         service.certify(
-            CertificationClass.SECURITY, "UCOS-CMP-1", CertificationDecision.CERTIFIED,
-            basis="b", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+            CertificationClass.SECURITY,
+            "UCOS-CMP-1",
+            CertificationDecision.CERTIFIED,
+            basis="b",
+            certified_at=1,
+            evidence_refs=("UCOS-SIEV-1",),
         )
         return service.report()
 
@@ -384,8 +450,12 @@ def test_bootstrapped_service_records_end_to_end():
     context = bootstrap_platform()
     service = bootstrap_security_certification(context)
     service.certify(
-        CertificationClass.SECURITY, "UCOS-CMP-1", CertificationDecision.CERTIFIED,
-        basis="b", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+        CertificationClass.SECURITY,
+        "UCOS-CMP-1",
+        CertificationDecision.CERTIFIED,
+        basis="b",
+        certified_at=1,
+        evidence_refs=("UCOS-SIEV-1",),
     )
     assert len(context.events.events_of(CERTIFICATION_RECORDED_EVENT)) == 1
 

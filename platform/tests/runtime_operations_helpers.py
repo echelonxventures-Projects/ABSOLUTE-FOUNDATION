@@ -146,9 +146,7 @@ def authorization_without_runtime_grant():
     """An AuthorizationService whose OPERATOR role has no ``runtime-operations`` grant."""
     from platform.identity.contracts import CapabilityGroup
 
-    definitions = [
-        d for d in default_role_definitions() if d.role is not Role.OPERATOR
-    ]
+    definitions = [d for d in default_role_definitions() if d.role is not Role.OPERATOR]
     grants = {
         g: grant
         for g, grant in _grants_for(Role.OPERATOR).items()

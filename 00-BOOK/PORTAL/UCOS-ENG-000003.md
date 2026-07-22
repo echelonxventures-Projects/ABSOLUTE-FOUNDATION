@@ -20,6 +20,7 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-ENG-000015](UCOS-ENG-000015.md) EPIC-002 — Registry Adapter — Completion Report
 - [UCOS-ENG-000016](UCOS-ENG-000016.md) EPIC-005 — Runtime Assembly — Completion Report
 - [UCOS-ENG-000017](UCOS-ENG-000017.md) EPIC-007 — Validation Layer — Completion Report
+- [UCOS-ENG-000018](UCOS-ENG-000018.md) EPIC-VAL-002 — Universal Repository Acceptance Eng
 
 ## Backlinks (reverse)
 - [UCOS-ENG-000005](UCOS-ENG-000005.md) —Depends-On→
@@ -28,6 +29,7 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-ENG-000001](UCOS-ENG-000001.md) —Parent→
 - [UCOS-ENG-000002](UCOS-ENG-000002.md) —Parent→
 - [UCOS-ENG-000004](UCOS-ENG-000004.md) —Parent→
+- [UCOS-ENG-000018](UCOS-ENG-000018.md) —Parent→
 - [UCOS-ENG-000010](UCOS-ENG-000010.md) —Parent→
 - [UCOS-ENG-000011](UCOS-ENG-000011.md) —Parent→
 - [UCOS-ENG-000012](UCOS-ENG-000012.md) —Parent→
@@ -146,6 +148,7 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-SEC-000002](UCOS-SEC-000002.md) —Depends-On→
 - [UCOS-SEC-000003](UCOS-SEC-000003.md) —Depends-On→
 - [UCOS-SEC-000004](UCOS-SEC-000004.md) —Depends-On→
+- [UCOS-SEC-000005](UCOS-SEC-000005.md) —Depends-On→
 - [UCOS-SEC-000001](UCOS-SEC-000001.md) —Depends-On→
 
 Return: [Portal Index](index.md) · [Master Index](../UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)

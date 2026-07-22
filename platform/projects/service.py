@@ -237,9 +237,7 @@ class ProjectService:
         if not isinstance(health_registry, HealthRegistry):
             raise ProjectServiceError("a valid HealthRegistry is required")
         if observability is not None and not isinstance(observability, ObservabilityService):
-            raise ProjectServiceError(
-                "observability must be an ObservabilityService when provided"
-            )
+            raise ProjectServiceError("observability must be an ObservabilityService when provided")
         if events is not None and not isinstance(events, EventBus):
             raise ProjectServiceError("events must be an EventBus when provided")
         self._registry = registry
@@ -317,9 +315,7 @@ class ProjectService:
             resource=slug,
         )
         if not decision.permitted:
-            raise ProjectAccessError(
-                "project creation denied", reason=decision.reason, slug=slug
-            )
+            raise ProjectAccessError("project creation denied", reason=decision.reason, slug=slug)
         principal = self._authorization.principals.get(decision.request.principal_id)
         if tenants_isolated(principal.tenant, workspace.tenant):
             raise ProjectAccessError(
@@ -377,9 +373,7 @@ class ProjectService:
 
     # -- selection / context ----------------------------------------------------
 
-    def select_project(
-        self, session_id: str, project_id: str, *, now: int
-    ) -> ProjectContext:
+    def select_project(self, session_id: str, project_id: str, *, now: int) -> ProjectContext:
         """Select a project and return its runtime context (fail-closed).
 
         Requires INSPECT (READ) access (identity + isolation). Raises

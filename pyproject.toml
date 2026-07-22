@@ -36,6 +36,13 @@ dev = [
 ec1-frozen-guard = "engine.foundation.guards.frozen_paths:main"
 # TASK-000033: determinism reproducibility gate (used by CI).
 ec1-determinism = "engine.determinism.reproduce:main"
+# EPIC-UKDA: Universal Knowledge & Decision Architecture CLI (Part 13).
+ucos-knowledge = "engine.knowledge.cli:main"
+# EPIC-UKDA-002: Universal Constitutional Knowledge Integration CLI.
+ucos-knowledge-integration = "engine.knowledge.integration.cli:main"
+# EPIC-PLAT-003: Repository Operations Automation — the one-command operational
+# verification entry point (Terminal T5), orchestrating the canonical engines/scripts.
+ucos-repo-ops = "platform.repository_operations.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -61,6 +68,9 @@ addopts = [
   "--cov=engine.factory",
   "--cov=engine.validation",
   "--cov=engine.certification",
+  "--cov=engine.acceptance",
+  "--cov=engine.governance",
+  "--cov=engine.knowledge",
   "--cov=platform.foundation",
   "--cov=platform.identity",
   "--cov=platform.administration",
@@ -74,6 +84,7 @@ addopts = [
   "--cov=platform.validation",
   "--cov=platform.certification",
   "--cov=platform.runtime_operations",
+  "--cov=platform.repository_operations",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -81,7 +92,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/validation", "platform/certification", "platform/runtime_operations"]
+source = ["engine/foundation", "engine/registry", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

@@ -51,8 +51,7 @@ DETERMINISM_CONTRACT = "engine.determinism.reproduce"
 DISPATCH_CONTRACTS: tuple[ContractRef, ...] = tuple(
     ref
     for ref in ENGINE_CONTRACTS
-    if ref.name
-    in {FACTORY_CONTRACT, COMPILER_CONTRACT, RUNTIME_CONTRACT, DETERMINISM_CONTRACT}
+    if ref.name in {FACTORY_CONTRACT, COMPILER_CONTRACT, RUNTIME_CONTRACT, DETERMINISM_CONTRACT}
 )
 
 #: The default execution target the dispatch boundary hands off to.
@@ -107,15 +106,11 @@ class DispatchRecord:
         if not isinstance(request_ref, str) or not request_ref:
             raise RequestDispatchError("dispatch requires a request_ref")
         if not isinstance(blueprint_ref, str) or not blueprint_ref:
-            raise RequestDispatchError(
-                "dispatch requires a blueprint_ref", request_ref=request_ref
-            )
+            raise RequestDispatchError("dispatch requires a blueprint_ref", request_ref=request_ref)
         if not isinstance(family, BlueprintFamily):
             raise RequestDispatchError("dispatch family must be a BlueprintFamily")
         if not isinstance(content_hash, str) or not content_hash:
-            raise RequestDispatchError(
-                "dispatch requires a content_hash", request_ref=request_ref
-            )
+            raise RequestDispatchError("dispatch requires a content_hash", request_ref=request_ref)
         if not isinstance(tick, int) or isinstance(tick, bool):
             raise RequestDispatchError("dispatch tick must be an int", request_ref=request_ref)
         if execution_target not in _ALLOWED_TARGETS:
@@ -222,9 +217,7 @@ class DispatchLedger:
         """Resolve the dispatch of a request (fail-closed on absent)."""
         dispatch = self._by_request.get(request_ref)
         if dispatch is None:
-            raise RequestDispatchError(
-                "no dispatch recorded for request", request_ref=request_ref
-            )
+            raise RequestDispatchError("no dispatch recorded for request", request_ref=request_ref)
         return dispatch
 
     def by_dispatch_id(self, dispatch_id: str) -> DispatchRecord:

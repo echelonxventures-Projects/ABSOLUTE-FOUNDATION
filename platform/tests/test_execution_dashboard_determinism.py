@@ -71,14 +71,16 @@ def _fingerprint_in_subprocess() -> str:
 
 def test_content_addressed_snapshot_ids_are_stable():
     reg = GenerationRequestRegistry()
-    a = reg.create("req", "UCOS-BLPR-1", "UCOS-WSPC-1", "dev@x", BlueprintFamily.DATA,
-                   submitted_tick=1)
+    a = reg.create(
+        "req", "UCOS-BLPR-1", "UCOS-WSPC-1", "dev@x", BlueprintFamily.DATA, submitted_tick=1
+    )
     snap_a = ExecutionSnapshot.from_request(
         a, derive_status(a, has_dispatch=False, has_provenance=False)
     )
     reg2 = GenerationRequestRegistry()
-    b = reg2.create("req", "UCOS-BLPR-1", "UCOS-WSPC-1", "dev@x", BlueprintFamily.DATA,
-                    submitted_tick=1)
+    b = reg2.create(
+        "req", "UCOS-BLPR-1", "UCOS-WSPC-1", "dev@x", BlueprintFamily.DATA, submitted_tick=1
+    )
     snap_b = ExecutionSnapshot.from_request(
         b, derive_status(b, has_dispatch=False, has_provenance=False)
     )

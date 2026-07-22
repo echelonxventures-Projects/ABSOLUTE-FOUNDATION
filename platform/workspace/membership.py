@@ -103,17 +103,13 @@ class MembershipRegistry:
     def workspaces_of(self, principal_id: str) -> tuple[str, ...]:
         """Every workspace id the principal is currently a member of (stable order)."""
         return tuple(
-            wid
-            for wid in sorted(self._by_workspace)
-            if principal_id in self._by_workspace[wid]
+            wid for wid in sorted(self._by_workspace) if principal_id in self._by_workspace[wid]
         )
 
     @property
     def workspace_ids(self) -> tuple[str, ...]:
         """Every workspace id that currently has at least one member (stable order)."""
-        return tuple(
-            wid for wid in sorted(self._by_workspace) if self._by_workspace[wid]
-        )
+        return tuple(wid for wid in sorted(self._by_workspace) if self._by_workspace[wid])
 
     @property
     def events(self) -> tuple[MembershipEvent, ...]:

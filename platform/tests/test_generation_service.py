@@ -152,7 +152,8 @@ def test_build_requires_authorization_and_workspaces():
         build_generation_request_service(authorization="nope", workspaces=WorkspaceRegistry())  # type: ignore[arg-type]
     with pytest.raises(RequestServiceError):
         build_generation_request_service(
-            authorization=build_authorization_service(), workspaces="nope"  # type: ignore[arg-type]
+            authorization=build_authorization_service(),
+            workspaces="nope",  # type: ignore[arg-type]
         )
 
 

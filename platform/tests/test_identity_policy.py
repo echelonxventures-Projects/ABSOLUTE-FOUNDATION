@@ -147,18 +147,14 @@ def test_scoped_principal_missing_own_tenant_denied():
 def test_partner_read_within_tenant_portal():
     pol = _policy()
     partner = Principal.create("prt", [Role.PARTNER], tenant="ws-1")
-    dec = pol.evaluate(
-        partner, _req(partner, CapabilityGroup.PORTAL_NAVIGATION, R, tenant="ws-1")
-    )
+    dec = pol.evaluate(partner, _req(partner, CapabilityGroup.PORTAL_NAVIGATION, R, tenant="ws-1"))
     assert dec.decision is Decision.PERMIT
 
 
 def test_integrator_denied_portal_no_grant():
     pol = _policy()
     integ = Principal.create("int", [Role.INTEGRATOR], tenant="ws-9")
-    dec = pol.evaluate(
-        integ, _req(integ, CapabilityGroup.PORTAL_NAVIGATION, R, tenant="ws-9")
-    )
+    dec = pol.evaluate(integ, _req(integ, CapabilityGroup.PORTAL_NAVIGATION, R, tenant="ws-9"))
     assert dec.decision is Decision.DENY
     assert dec.reason == "no-grant"
 
@@ -221,9 +217,7 @@ def test_named_policy_rule_validation():
 def test_custom_rule_passthrough_reaches_grant_check():
     # A custom rule returning None must not affect the built-in grant decision.
     passthrough = NamedPolicyRule(name="noop", rule=lambda p, r, e: None)
-    pol = PolicyEngine(
-        PermissionEngine(default_role_registry()), extra_rules=[passthrough]
-    )
+    pol = PolicyEngine(PermissionEngine(default_role_registry()), extra_rules=[passthrough])
     dev = Principal.create("dev", [Role.DEVELOPER])
     dec = pol.evaluate(dev, _req(dev, CapabilityGroup.GENERATION_REQUESTS, X))
     assert dec.decision is Decision.PERMIT

@@ -428,9 +428,7 @@ class EventDag:
             resolved = current
         else:
             resolved = _normalize_parents(parents)
-        return self._append(
-            event_type, source, subject, parents=resolved, payload=payload
-        )
+        return self._append(event_type, source, subject, parents=resolved, payload=payload)
 
     def branch(
         self,
@@ -476,9 +474,7 @@ class EventDag:
                 "merge requires at least two distinct parents",
                 parents=len(resolved),
             )
-        return self._append(
-            event_type, source, subject, parents=resolved, payload=payload
-        )
+        return self._append(event_type, source, subject, parents=resolved, payload=payload)
 
     # -- integrity ----------------------------------------------------------------
 

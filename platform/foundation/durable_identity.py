@@ -108,9 +108,7 @@ class AdmissionKey:
         try:
             return cls(authority_id=data["authority_id"], local_key=data["local_key"])
         except (KeyError, TypeError) as exc:
-            raise DurableIdentityError(
-                "admission key record is missing required fields"
-            ) from exc
+            raise DurableIdentityError("admission key record is missing required fields") from exc
 
 
 @dataclass(frozen=True, slots=True)
@@ -140,9 +138,7 @@ class DurableIdentity:
         never of content/order/path — so distinct keys are unique by construction and
         an identical key always yields an identical opaque (AIF-L02 / AIF-L07).
         """
-        digest = content_hash(
-            {"authority_id": authority_id, "local_key": local_key, "plane": "P2"}
-        )
+        digest = content_hash({"authority_id": authority_id, "local_key": local_key, "plane": "P2"})
         return digest[:P2_OPAQUE_HEX_LEN]
 
     @classmethod
@@ -299,8 +295,7 @@ class IdentityRegistry:
     def pending(self) -> tuple[IdentityMint, ...]:
         """The provisional (prepared, unsealed) mints, in a deterministic order."""
         return tuple(
-            IdentityMint(self._pending[r], MintState.PREPARED)
-            for r in sorted(self._pending)
+            IdentityMint(self._pending[r], MintState.PREPARED) for r in sorted(self._pending)
         )
 
     @property
@@ -323,13 +318,9 @@ class IdentityRegistry:
                 "admission key is retired and can never be re-minted", admission_key=ref
             )
         if ref in self._committed:
-            raise IdentityCollisionError(
-                "admission key is already sealed", admission_key=ref
-            )
+            raise IdentityCollisionError("admission key is already sealed", admission_key=ref)
         if ref in self._pending:
-            raise IdentityMintError(
-                "admission key already has a pending mint", admission_key=ref
-            )
+            raise IdentityMintError("admission key already has a pending mint", admission_key=ref)
         self._guard_opaque(identity)
         self._pending[ref] = identity
         _logger.info(
@@ -424,7 +415,7 @@ class IdentityRegistry:
 
     def resolve(self, ref: str) -> DurableIdentity:
         """Resolve a sealed identity by opaque value or full URN (fails closed)."""
-        opaque = ref[len(P2_URN_PREFIX):].split(":")[-1] if ref.startswith(P2_URN_PREFIX) else ref
+        opaque = ref[len(P2_URN_PREFIX) :].split(":")[-1] if ref.startswith(P2_URN_PREFIX) else ref
         key_ref = self._by_opaque.get(opaque)
         if key_ref is None:
             raise DurableIdentityError("no sealed identity for reference", ref=ref)
@@ -472,9 +463,7 @@ class IdentityRegistry:
         self._committed[ref] = identity
         self._by_opaque[identity.opaque] = ref
         self._order.append(ref)
-        _logger.info(
-            "foundation.durable_identity.adopted", admission_key=ref, urn=identity.urn
-        )
+        _logger.info("foundation.durable_identity.adopted", admission_key=ref, urn=identity.urn)
         return identity
 
     # -- integrity ----------------------------------------------------------------

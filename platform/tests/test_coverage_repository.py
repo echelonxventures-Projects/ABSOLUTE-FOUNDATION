@@ -25,6 +25,7 @@ _REAL_ROOT = Path(__file__).resolve().parents[2]
 # Pure helper tests                                                           #
 # --------------------------------------------------------------------------- #
 
+
 def test_parse_universe_rows_extracts_phase_and_skips_malformed():
     md = "\n".join(
         [
@@ -75,6 +76,7 @@ def test_discover_repo_root_finds_real_root_and_fails_closed(tmp_path):
 # --------------------------------------------------------------------------- #
 # Synthetic repository (full collect branch coverage)                         #
 # --------------------------------------------------------------------------- #
+
 
 def _write(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -159,14 +161,12 @@ def test_synthetic_repo_collect_exercises_all_branches(tmp_path):
     # knowledge implementation exists but has no epic (no completion report).
     assert (K.IMPLEMENTATION, "platform/knowledge") in refs
     assert not any(
-        e.source_ref == "platform/knowledge" and e.target_kind is K.EPIC
-        for e in graph.edges()
+        e.source_ref == "platform/knowledge" and e.target_kind is K.EPIC for e in graph.edges()
     )
     # compiler program exists but no implementation package matched.
     assert (K.PROGRAM, "06-IMPLEMENTATION/UCOS-COMPILER.md") in refs
     assert not any(
-        e.source_ref == "06-IMPLEMENTATION/UCOS-COMPILER.md"
-        and e.target_kind is K.IMPLEMENTATION
+        e.source_ref == "06-IMPLEMENTATION/UCOS-COMPILER.md" and e.target_kind is K.IMPLEMENTATION
         for e in graph.edges()
     )
     # deterministic.
@@ -201,6 +201,7 @@ def test_collect_without_impl_dir_yields_no_programs(tmp_path):
 # --------------------------------------------------------------------------- #
 # Real repository integration                                                 #
 # --------------------------------------------------------------------------- #
+
 
 def test_real_repository_parses_universe_catalog():
     src = RepositoryEvidenceSource()  # default: discover from __file__

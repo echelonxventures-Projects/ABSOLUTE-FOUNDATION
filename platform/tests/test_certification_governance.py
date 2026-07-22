@@ -100,8 +100,6 @@ def test_certification_ledger_is_append_only_policy_denies_mutation(permission):
     # regardless of any grant (§3.2 invariant ii) — the console can add no mutation path.
     auth = build_authorization_service()
     principal = Principal.create("admin@x", [Role.PLATFORM_ADMINISTRATOR])
-    decision = auth.authorize_principal(
-        principal, CapabilityGroup.CERTIFICATION_LEDGER, permission
-    )
+    decision = auth.authorize_principal(principal, CapabilityGroup.CERTIFICATION_LEDGER, permission)
     assert decision.permitted is False
     assert decision.reason == "certification-ledger-append-only"

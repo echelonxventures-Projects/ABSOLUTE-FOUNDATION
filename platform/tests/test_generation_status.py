@@ -48,9 +48,7 @@ def test_posture_maps_every_status():
 
 
 def test_derived_carries_execution_state_and_flags():
-    derived = derive_status(
-        _request(RequestStatus.RUNNING), has_dispatch=True, has_provenance=True
-    )
+    derived = derive_status(_request(RequestStatus.RUNNING), has_dispatch=True, has_provenance=True)
     assert derived.execution_state is ExecutionState.EXECUTING
     assert derived.is_dispatched is True
     assert derived.is_traceable is True

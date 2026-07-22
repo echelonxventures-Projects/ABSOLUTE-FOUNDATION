@@ -183,16 +183,12 @@ def from_dict(record: Mapping[str, Any]) -> BlueprintIR:
             version=str(_require(record, "version", at=at)),
             description=record.get("description") or "",
             certification=Certification(
-                status=CertificationStatus.coerce(
-                    _require(cert_raw, "status", at=at), context=at
-                ),
+                status=CertificationStatus.coerce(_require(cert_raw, "status", at=at), context=at),
                 evidence=cert_raw.get("evidence") or "",
             ),
             provenance=Provenance(
                 canonical_source=str(_require(prov_raw, "canonical_source", at=at)),
-                reference_architecture=str(
-                    _require(prov_raw, "reference_architecture", at=at)
-                ),
+                reference_architecture=str(_require(prov_raw, "reference_architecture", at=at)),
                 runtime_catalog=str(_require(prov_raw, "runtime_catalog", at=at)),
                 architecture_constitution=str(
                     _require(prov_raw, "architecture_constitution", at=at)

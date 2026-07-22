@@ -69,9 +69,7 @@ class BlueprintClassification:
     ) -> BlueprintClassification:
         """Record an EC-1 classification result read-only (fail-closed on malformed input)."""
         if not isinstance(blueprint_ref, str) or not blueprint_ref.strip():
-            raise BlueprintClassificationError(
-                "classification requires a non-empty blueprint_ref"
-            )
+            raise BlueprintClassificationError("classification requires a non-empty blueprint_ref")
         if not isinstance(family, BlueprintFamily):
             raise BlueprintClassificationError(
                 "classification family must be one of the six frozen BlueprintFamily members",
@@ -198,9 +196,7 @@ class ClassificationLedger:
     def to_dict(self) -> dict[str, Any]:
         return {
             "classification_count": len(self._by_blueprint),
-            "classifications": [
-                self._by_blueprint[ref].to_dict() for ref in self.blueprint_refs
-            ],
+            "classifications": [self._by_blueprint[ref].to_dict() for ref in self.blueprint_refs],
         }
 
     def fingerprint(self) -> str:

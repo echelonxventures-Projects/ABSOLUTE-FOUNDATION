@@ -162,8 +162,12 @@ class PostureRecord:
         if not isinstance(zone, SecurityZone):
             raise ZonePostureError("for_zone requires a SecurityZone")
         return cls.create(
-            POSTURE_TARGET_ZONE, zone.value, posture,
-            rationale=rationale, evaluated_at=evaluated_at, evidence_refs=evidence_refs,
+            POSTURE_TARGET_ZONE,
+            zone.value,
+            posture,
+            rationale=rationale,
+            evaluated_at=evaluated_at,
+            evidence_refs=evidence_refs,
         )
 
     @classmethod
@@ -180,8 +184,12 @@ class PostureRecord:
         if not isinstance(control, SecurityControl):
             raise ZonePostureError("for_control requires a SecurityControl")
         return cls.create(
-            POSTURE_TARGET_CONTROL, control.value, posture,
-            rationale=rationale, evaluated_at=evaluated_at, evidence_refs=evidence_refs,
+            POSTURE_TARGET_CONTROL,
+            control.value,
+            posture,
+            rationale=rationale,
+            evaluated_at=evaluated_at,
+            evidence_refs=evidence_refs,
         )
 
     def validate(self) -> dict[str, Any]:
@@ -377,8 +385,7 @@ class SecurityZoneService:
     def control_policies(self) -> tuple[dict[str, Any], ...]:
         """The canonical seven-control policy configuration (default; extensible)."""
         return tuple(
-            {"control": c.value, "mechanism": CONTROL_MECHANISM[c]}
-            for c in all_security_controls()
+            {"control": c.value, "mechanism": CONTROL_MECHANISM[c]} for c in all_security_controls()
         )
 
     # -- assess (record-only) ---------------------------------------------------
@@ -395,8 +402,12 @@ class SecurityZoneService:
     ) -> PostureRecord:
         """Record a posture against any target (canonical or free-form future one)."""
         record = PostureRecord.create(
-            target_kind, target, posture,
-            rationale=rationale, evaluated_at=evaluated_at, evidence_refs=evidence_refs,
+            target_kind,
+            target,
+            posture,
+            rationale=rationale,
+            evaluated_at=evaluated_at,
+            evidence_refs=evidence_refs,
         )
         recorded = self._ledger.record(record)
         self._emit(recorded)
@@ -413,7 +424,10 @@ class SecurityZoneService:
     ) -> PostureRecord:
         """Record a posture for a canonical zone."""
         record = PostureRecord.for_zone(
-            zone, posture, rationale=rationale, evaluated_at=evaluated_at,
+            zone,
+            posture,
+            rationale=rationale,
+            evaluated_at=evaluated_at,
             evidence_refs=evidence_refs,
         )
         recorded = self._ledger.record(record)
@@ -431,7 +445,10 @@ class SecurityZoneService:
     ) -> PostureRecord:
         """Record a posture for a canonical control."""
         record = PostureRecord.for_control(
-            control, posture, rationale=rationale, evaluated_at=evaluated_at,
+            control,
+            posture,
+            rationale=rationale,
+            evaluated_at=evaluated_at,
             evidence_refs=evidence_refs,
         )
         recorded = self._ledger.record(record)
@@ -466,12 +483,18 @@ class SecurityZoneService:
         canonical_zones = {z.value for z in all_security_zones()}
         canonical_controls = {c.value for c in all_security_controls()}
         zones_assessed = len(
-            {p.target for p in postures
-             if p.target_kind == POSTURE_TARGET_ZONE and p.target in canonical_zones}
+            {
+                p.target
+                for p in postures
+                if p.target_kind == POSTURE_TARGET_ZONE and p.target in canonical_zones
+            }
         )
         controls_assessed = len(
-            {p.target for p in postures
-             if p.target_kind == POSTURE_TARGET_CONTROL and p.target in canonical_controls}
+            {
+                p.target
+                for p in postures
+                if p.target_kind == POSTURE_TARGET_CONTROL and p.target in canonical_controls
+            }
         )
         posture_counts = tuple(
             (state.value, sum(1 for p in postures if p.posture is state)) for state in RollupState

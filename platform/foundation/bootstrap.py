@@ -150,9 +150,7 @@ def bootstrap_platform(
         except BootstrapError:
             raise
         except Exception as exc:  # noqa: BLE001 — normalize into a fail-closed error
-            raise BootstrapError(
-                "platform foundation bootstrap failed", detail=str(exc)
-            ) from exc
+            raise BootstrapError("platform foundation bootstrap failed", detail=str(exc)) from exc
 
         events.publish(
             BOOTSTRAP_EVENT,

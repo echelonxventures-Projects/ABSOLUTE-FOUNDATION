@@ -82,7 +82,6 @@ def test_entity_and_provenance_must_be_objects(data_blueprint):
         from_dict(broken2)
 
 
-
 def test_entity_attributes_must_be_a_list(data_blueprint):
     broken = dict(data_blueprint)
     broken["entity"] = dict(broken["entity"])

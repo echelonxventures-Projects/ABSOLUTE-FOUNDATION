@@ -273,13 +273,25 @@ def test_dashboard_view_rejects_bad_inputs():
         )
     with pytest.raises(DashboardViewError):
         DashboardView.create(
-            principal_id="p", tenant=None, summary="nope", snapshots=(snapshot,), trend=trend  # type: ignore[arg-type]
+            principal_id="p",
+            tenant=None,
+            summary="nope",
+            snapshots=(snapshot,),
+            trend=trend,  # type: ignore[arg-type]
         )
     with pytest.raises(DashboardViewError):
         DashboardView.create(
-            principal_id="p", tenant=None, summary=summary, snapshots=(snapshot,), trend="nope"  # type: ignore[arg-type]
+            principal_id="p",
+            tenant=None,
+            summary=summary,
+            snapshots=(snapshot,),
+            trend="nope",  # type: ignore[arg-type]
         )
     with pytest.raises(DashboardViewError):
         DashboardView.create(
-            principal_id="p", tenant=None, summary=summary, snapshots=("nope",), trend=trend  # type: ignore[list-item]
+            principal_id="p",
+            tenant=None,
+            summary=summary,
+            snapshots=("nope",),
+            trend=trend,  # type: ignore[list-item]
         )

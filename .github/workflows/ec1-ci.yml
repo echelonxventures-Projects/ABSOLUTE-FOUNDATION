@@ -12,6 +12,12 @@ on:
 permissions:
   contents: read
 
+# CI throughput: supersede in-flight runs for the same ref so a new push cancels a
+# stale one instead of queuing behind it. Pure run-scheduling — no gate/behavior change.
+concurrency:
+  group: ec1-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   foundation:
     name: Foundation (lint · test · build)

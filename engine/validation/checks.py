@@ -96,9 +96,7 @@ class SignatureCheck(ValidationCheck):
     def evaluate(self, subject: ValidationSubject) -> ValidationFinding:
         signature = subject.signature
         missing = [
-            key
-            for key in ("algorithm", "value", "payload_sha256")
-            if not signature.get(key)
+            key for key in ("algorithm", "value", "payload_sha256") if not signature.get(key)
         ]
         if missing:
             return self._failed("signature is incomplete", missing=missing)
@@ -150,9 +148,7 @@ class DependencyClosureCheck(ValidationCheck):
         roots = [e for e in closure if e.get("role") == "root"]
         if len(roots) != 1:
             return self._failed("closure must contain exactly one root", roots=len(roots))
-        unpinned = [
-            e.get("blueprint_id") for e in closure if not e.get("package_sha256")
-        ]
+        unpinned = [e.get("blueprint_id") for e in closure if not e.get("package_sha256")]
         if unpinned:
             return self._failed("closure members are not digest-pinned", unpinned=unpinned)
         if roots[0].get("package_sha256") != subject.package_sha256:

@@ -240,9 +240,7 @@ class ArtifactTrace:
             raise ArtifactTraceError("dispatch must be a DispatchRecord when provided")
         provenance_edge = provenance.trace_edge() if provenance is not None else None
         dispatch_edge = dispatch.handoff_edge() if dispatch is not None else None
-        is_traceable = (
-            provenance is not None and provenance.is_traceable and dispatch is not None
-        )
+        is_traceable = provenance is not None and provenance.is_traceable and dispatch is not None
         core = {
             "request_ref": request.request_id,
             "blueprint_ref": request.blueprint_ref,

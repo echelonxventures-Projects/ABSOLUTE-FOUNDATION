@@ -102,9 +102,7 @@ def test_ci_gate_fails_on_divergence(tmp_path, monkeypatch):
     exit_code = main(["BP-DATA-0001", "--evidence-dir", str(tmp_path / "ev")])
     assert exit_code == 1
     # divergence evidence is preserved (reproducibility_report.json)
-    report = json.loads(
-        (tmp_path / "ev" / "BP-DATA-0001-reproducibility_report.json").read_text()
-    )
+    report = json.loads((tmp_path / "ev" / "BP-DATA-0001-reproducibility_report.json").read_text())
     assert report["byte_identical"] is False
     assert report["divergence_count"] == 1
 

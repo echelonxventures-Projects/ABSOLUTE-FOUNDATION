@@ -42,7 +42,10 @@ def _healthy():
 def test_health_checks_are_all_critical():
     checks = runtime_operations_health_checks()
     assert {c.name for c in checks} == {
-        REGISTRY_CHECK, LEDGER_CHECK, FIDELITY_CHECK, REVERSIBILITY_CHECK
+        REGISTRY_CHECK,
+        LEDGER_CHECK,
+        FIDELITY_CHECK,
+        REVERSIBILITY_CHECK,
     }
     assert all(c.critical for c in checks)
 
@@ -71,8 +74,12 @@ def test_fidelity_fault_detected():
     # declared environment, so a fresh reproduction over the recorded environment diverges.
     divergent = _FACADE.deployment_descriptor(unit, environment="staging")
     record = RuntimeOperationRecord.create(
-        kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=certification_record(),
-        deployment=divergent, owner_subject="op@x", environment="production",
+        kind=RuntimeOperationKind.DEPLOY,
+        unit=unit,
+        certification=certification_record(),
+        deployment=divergent,
+        owner_subject="op@x",
+        environment="production",
     )
     registry.record(record)
     ledger.append(record)
@@ -87,8 +94,12 @@ def test_reversibility_fault_detected():
     unit = runtime_unit()
     irreversible = dataclasses.replace(_FACADE.rollback_descriptor(unit), reversible=False)
     record = RuntimeOperationRecord.create(
-        kind=RuntimeOperationKind.ROLLBACK, unit=unit, certification=certification_record(),
-        rollback=irreversible, owner_subject="op@x", environment="runtime",
+        kind=RuntimeOperationKind.ROLLBACK,
+        unit=unit,
+        certification=certification_record(),
+        rollback=irreversible,
+        owner_subject="op@x",
+        environment="runtime",
     )
     registry.record(record)
     ledger.append(record)

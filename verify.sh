@@ -35,14 +35,18 @@ PY="$(ucos_venv_python)"
 
 STAGES_RUN=()
 STAGES_FAIL=()
+STAGES_SECS=()
+VERIFY_START=$SECONDS
 run_stage() {
   local label="$1"; shift
   ucos_log "STAGE: ${label}"
   STAGES_RUN+=("$label")
+  local _start=$SECONDS
   set +e
   ( cd "$UCOS_REPO" && "$@" )
   local rc=$?
   set -e
+  STAGES_SECS+=("$((SECONDS - _start))")
   if [ "$rc" -ne 0 ]; then
     ucos_err "STAGE FAILED (exit $rc): ${label}"
     STAGES_FAIL+=("$label")
@@ -50,18 +54,27 @@ run_stage() {
   else
     ucos_ok "STAGE PASSED: ${label}"
   fi
+  # Always succeed: a non-failfast failure is recorded in STAGES_FAIL and reported
+  # by the final summary. Without this, run_stage would inherit the non-zero status
+  # of the short-circuited `[ FAILFAST = 1 ] && …` test and `set -e` would abort the
+  # run before the remaining stages and the summary — the exact opposite of the
+  # documented "run all stages, then summarize" contract.
+  return 0
 }
 
 summarize_and_exit() {
   printf '\n%s\n' "================ VERIFICATION SUMMARY ================" >&2
-  local s
-  for s in "${STAGES_RUN[@]}"; do
+  local i s dur
+  for i in "${!STAGES_RUN[@]}"; do
+    s="${STAGES_RUN[$i]}"
+    dur="${STAGES_SECS[$i]:-0}"
     if printf '%s\n' "${STAGES_FAIL[@]:-}" | grep -qxF "$s"; then
-      printf '  %sFAIL%s  %s\n' "$_UC_R" "$_UC_0" "$s" >&2
+      printf '  %sFAIL%s  %-44s %3ss\n' "$_UC_R" "$_UC_0" "$s" "$dur" >&2
     else
-      printf '  %sPASS%s  %s\n' "$_UC_G" "$_UC_0" "$s" >&2
+      printf '  %sPASS%s  %-44s %3ss\n' "$_UC_G" "$_UC_0" "$s" "$dur" >&2
     fi
   done
+  printf '  %-52s %3ss\n' "TOTAL (wall clock)" "$((SECONDS - VERIFY_START))" >&2
   printf '%s\n' "=====================================================" >&2
   if [ "${#STAGES_FAIL[@]}" -gt 0 ]; then
     ucos_err "VERIFICATION FAILED (${#STAGES_FAIL[@]} stage(s))."

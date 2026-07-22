@@ -157,9 +157,7 @@ class CoverageHealth:
         )
 
         for check, kind in _MISSING_KIND.items():
-            results[check] = (
-                gap_status if self.uncovered_of_kind(kind) else HealthStatus.HEALTHY
-            )
+            results[check] = gap_status if self.uncovered_of_kind(kind) else HealthStatus.HEALTHY
         results[MISSING_RUNTIME_CHECK] = (
             gap_status if self.code_assets_without_runtime() else HealthStatus.HEALTHY
         )

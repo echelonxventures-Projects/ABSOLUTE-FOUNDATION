@@ -131,9 +131,7 @@ class RuntimeAdmissionGuard:
         if not isinstance(unit, RuntimeUnit):
             raise RuntimeOperationsContractError("admission requires a RuntimeUnit")
         if not isinstance(certification, CertificationConsoleRecord):
-            raise RuntimeOperationsContractError(
-                "admission requires a CertificationConsoleRecord"
-            )
+            raise RuntimeOperationsContractError("admission requires a CertificationConsoleRecord")
         if not isinstance(kind, RuntimeOperationKind):
             raise RuntimeOperationsContractError("admission requires a RuntimeOperationKind")
         criteria: tuple[tuple[str, bool], ...] = (

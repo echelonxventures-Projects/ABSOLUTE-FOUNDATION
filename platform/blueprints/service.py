@@ -653,17 +653,13 @@ class BlueprintService:
 
     # -- selection / context ----------------------------------------------------
 
-    def select_blueprint(
-        self, session_id: str, blueprint_id: str, *, now: int
-    ) -> BlueprintContext:
+    def select_blueprint(self, session_id: str, blueprint_id: str, *, now: int) -> BlueprintContext:
         """Select a blueprint and return its runtime context (fail-closed).
 
         Requires INSPECT (READ) access (identity + isolation). Raises
         :class:`BlueprintAccessError` when access is denied.
         """
-        access = self.evaluate_access(
-            session_id, blueprint_id, BlueprintAction.INSPECT, now=now
-        )
+        access = self.evaluate_access(session_id, blueprint_id, BlueprintAction.INSPECT, now=now)
         if not access.granted:
             raise BlueprintAccessError(
                 "blueprint selection denied", reason=access.reason, blueprint_id=blueprint_id

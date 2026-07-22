@@ -309,9 +309,7 @@ class AdmissionBinder:
         self._by_name[new_logical_name] = renamed
         self._by_key[record.admission_key.render] = new_logical_name
         self._order[self._order.index(logical_name)] = new_logical_name
-        _logger.info(
-            "foundation.admission.renamed", old=logical_name, new=new_logical_name
-        )
+        _logger.info("foundation.admission.renamed", old=logical_name, new=new_logical_name)
         return renamed
 
     # -- resolution (fails closed — AIF-L16) --------------------------------------
@@ -355,12 +353,8 @@ class AdmissionBinder:
         """Clear a partition, restoring the authority to ACTIVE."""
         authority = self.authority(authority_id)
         if authority.status is not AuthorityStatus.PARTITIONED:
-            raise AuthorityBindingError(
-                "authority is not partitioned", authority_id=authority_id
-            )
-        restored = AdmissionAuthority(
-            authority_id=authority_id, parent_id=authority.parent_id
-        )
+            raise AuthorityBindingError("authority is not partitioned", authority_id=authority_id)
+        restored = AdmissionAuthority(authority_id=authority_id, parent_id=authority.parent_id)
         self._authorities[authority_id] = restored
         return restored
 
@@ -373,9 +367,7 @@ class AdmissionBinder:
             raise AuthorityBindingError(
                 "child authority already registered", authority_id=child_authority_id
             )
-        child = AdmissionAuthority(
-            authority_id=child_authority_id, parent_id=parent_authority_id
-        )
+        child = AdmissionAuthority(authority_id=child_authority_id, parent_id=parent_authority_id)
         self._authorities[child_authority_id] = child
         _logger.info(
             "foundation.admission.subnamespace_delegated",
@@ -401,9 +393,7 @@ class AdmissionBinder:
             raise AuthorityBindingError("authority migration requires a TrustEngine")
         old = self.authority(old_authority_id)
         if old.status is AuthorityStatus.MIGRATED:
-            raise AuthorityBindingError(
-                "authority already migrated", authority_id=old_authority_id
-            )
+            raise AuthorityBindingError("authority already migrated", authority_id=old_authority_id)
         self.authority(new_authority_id)  # successor must be registered
         self._trust.require_trusted(witness_key_id)
         statement = AuthorityMigration.statement(old_authority_id, new_authority_id)

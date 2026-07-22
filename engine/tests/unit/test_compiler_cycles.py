@@ -53,7 +53,6 @@ def test_edges_referencing_absent_nodes_are_materialised():
     assert set(order) == {"a", "b"}
 
 
-
 def test_detect_cycle_revisits_fully_explored_node():
     # Diamond DAG: after 'c' is fully explored (BLACK) via 'b', node 'a' re-encounters
     # it as its second neighbour. This exercises the "neighbour already BLACK" branch

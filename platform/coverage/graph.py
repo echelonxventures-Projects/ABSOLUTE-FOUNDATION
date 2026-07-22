@@ -126,13 +126,9 @@ class CoverageGraph:
         for nid, node in self._nodes.items():
             if node.kind is ROOT_KIND:
                 # A universe with no downstream edge is a structural orphan.
-                self._status[nid] = (
-                    down(nid) if self._children[nid] else CoverageStatus.ORPHANED
-                )
+                self._status[nid] = down(nid) if self._children[nid] else CoverageStatus.ORPHANED
             else:
-                self._status[nid] = (
-                    down(nid) if reaches_universe(nid) else CoverageStatus.ORPHANED
-                )
+                self._status[nid] = down(nid) if reaches_universe(nid) else CoverageStatus.ORPHANED
 
     # -- accessors --------------------------------------------------------------
 
@@ -184,9 +180,7 @@ class CoverageGraph:
 
     def orphans(self) -> tuple[CoverageNode, ...]:
         """Nodes with a structural lineage defect (ORPHANED)."""
-        return tuple(
-            n for n in self.nodes() if self._status[n.node_id] is CoverageStatus.ORPHANED
-        )
+        return tuple(n for n in self.nodes() if self._status[n.node_id] is CoverageStatus.ORPHANED)
 
     def orphan_code(self) -> tuple[CoverageNode, ...]:
         """Code/module/asset/runtime nodes with no lineage to a universe (fail-closed)."""
@@ -196,20 +190,14 @@ class CoverageGraph:
             CoverageNodeKind.RUNTIME_ASSET,
             CoverageNodeKind.EPIC,
         }
-        return tuple(
-            n
-            for n in self.orphans()
-            if n.kind in code_kinds
-        )
+        return tuple(n for n in self.orphans() if n.kind in code_kinds)
 
     def orphan_universes(self) -> tuple[CoverageNode, ...]:
         """Universe nodes with no downstream edge (ORPHANED)."""
         return tuple(n for n in self.orphans() if n.kind is ROOT_KIND)
 
     def covered(self) -> tuple[CoverageNode, ...]:
-        return tuple(
-            n for n in self.nodes() if self._status[n.node_id] is CoverageStatus.COVERED
-        )
+        return tuple(n for n in self.nodes() if self._status[n.node_id] is CoverageStatus.COVERED)
 
     def coverage_percentage(self, kind: CoverageNodeKind = ROOT_KIND) -> float:
         """Percentage of nodes of ``kind`` that are fully COVERED (0.0 when none exist)."""

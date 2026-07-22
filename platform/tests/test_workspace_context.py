@@ -60,9 +60,7 @@ def test_member_role_optional_defaults_to_none():
 
 def test_is_active_reflects_workspace_status():
     active = WorkspaceContext.create(_workspace(status=WorkspaceStatus.ACTIVE), _principal())
-    suspended = WorkspaceContext.create(
-        _workspace(status=WorkspaceStatus.SUSPENDED), _principal()
-    )
+    suspended = WorkspaceContext.create(_workspace(status=WorkspaceStatus.SUSPENDED), _principal())
     assert active.is_active is True
     assert suspended.is_active is False
 

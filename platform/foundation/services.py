@@ -92,9 +92,7 @@ class ServiceRegistry:
     ) -> ServiceDescriptor:
         """Register a service declaration and publish its contract (fail-closed)."""
         if descriptor.name in self._registrations:
-            raise ServiceRegistrationError(
-                "service already registered", name=descriptor.name
-            )
+            raise ServiceRegistrationError("service already registered", name=descriptor.name)
         # Publish the contract (reuses EC-1 versioning discipline; may raise).
         self._contracts.register(descriptor.contract)
         self._registrations[descriptor.name] = _Registration(
@@ -124,9 +122,7 @@ class ServiceRegistry:
         """Resolve a service instance via its provider (lazy, memoized)."""
         registration = self._require(name)
         if registration.provider is None:
-            raise ServiceResolutionError(
-                "service has no provider factory", name=name
-            )
+            raise ServiceResolutionError("service has no provider factory", name=name)
         if not registration._instance_box:
             registration._instance_box.append(registration.provider())
         return registration._instance_box[0]

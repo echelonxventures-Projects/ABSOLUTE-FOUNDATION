@@ -113,9 +113,7 @@ class CoverageRegistry:
                 edge.target_ref,
             )
             seen[key] = seen.get(key, 0) + 1
-        return tuple(
-            f"{k[0]}:{k[1]}->{k[2]}:{k[3]}" for k, n in sorted(seen.items()) if n > 1
-        )
+        return tuple(f"{k[0]}:{k[1]}->{k[2]}:{k[3]}" for k, n in sorted(seen.items()) if n > 1)
 
     def to_dict(self) -> dict[str, Any]:
         return {

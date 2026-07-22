@@ -115,9 +115,7 @@ def test_governance_violation_uncertified():
 def test_governance_violation_authority_and_disclosure():
     unit = runtime_unit()
     rec = _deploy_record(unit=unit)
-    broken = dataclasses.replace(
-        rec.deployment, disclosure={"authority": "OTHER"}
-    )
+    broken = dataclasses.replace(rec.deployment, disclosure={"authority": "OTHER"})
     tampered = dataclasses.replace(rec, deployment=broken)
     assessment = validate_governance(tampered)
     rules = {v.rule for v in assessment.violations}
@@ -149,9 +147,7 @@ def test_governance_violation_irreversible_rollback():
         owner_subject="op@x",
         environment="runtime",
     )
-    assert any(
-        v.rule == "reversible-when-rollback" for v in validate_governance(rec).violations
-    )
+    assert any(v.rule == "reversible-when-rollback" for v in validate_governance(rec).violations)
 
 
 def test_governance_rejects_non_record():

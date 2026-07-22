@@ -510,9 +510,7 @@ class CertificationConsoleService:
         )
         return view
 
-    def lineage_of(
-        self, session_id: str, record_id: str, *, now: int
-    ) -> CertificationLineageView:
+    def lineage_of(self, session_id: str, record_id: str, *, now: int) -> CertificationLineageView:
         """Render the ledger lineage for a record (requires VIEW_LINEAGE; fail-closed)."""
         access = self._require_access(
             session_id, record_id, CertificationAction.VIEW_LINEAGE, now=now

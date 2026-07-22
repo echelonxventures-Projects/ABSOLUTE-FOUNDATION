@@ -82,15 +82,11 @@ class ExplorerHealth:
 
     def orphaned_provenance(self) -> tuple[str, ...]:
         """Request ids that have provenance but are not registered (integrity faults)."""
-        return tuple(
-            ref for ref in self._provenance.request_refs if ref not in self._registry
-        )
+        return tuple(ref for ref in self._provenance.request_refs if ref not in self._registry)
 
     def orphaned_dispatches(self) -> tuple[str, ...]:
         """Request ids that have a dispatch but are not registered (integrity faults)."""
-        return tuple(
-            ref for ref in self._dispatch.request_refs if ref not in self._registry
-        )
+        return tuple(ref for ref in self._dispatch.request_refs if ref not in self._registry)
 
     def probe(self) -> dict[str, HealthStatus]:
         """Compute deterministic probe results for the explorer health checks."""
@@ -98,12 +94,8 @@ class ExplorerHealth:
         dispatch_ok = not self.orphaned_dispatches()
         return {
             REGISTRY_CHECK: HealthStatus.HEALTHY,
-            PROVENANCE_CHECK: (
-                HealthStatus.HEALTHY if provenance_ok else HealthStatus.UNHEALTHY
-            ),
-            DISPATCH_CHECK: (
-                HealthStatus.HEALTHY if dispatch_ok else HealthStatus.UNHEALTHY
-            ),
+            PROVENANCE_CHECK: (HealthStatus.HEALTHY if provenance_ok else HealthStatus.UNHEALTHY),
+            DISPATCH_CHECK: (HealthStatus.HEALTHY if dispatch_ok else HealthStatus.UNHEALTHY),
         }
 
     @property

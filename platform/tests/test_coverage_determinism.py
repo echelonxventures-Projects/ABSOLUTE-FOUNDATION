@@ -31,11 +31,7 @@ def _subprocess_fingerprint() -> str:
     )
     # Strip pytest-cov's subprocess-coverage startup hooks so the child is a clean,
     # independent interpreter (they otherwise error at child startup under coverage).
-    env = {
-        k: v
-        for k, v in os.environ.items()
-        if not k.startswith(("COV_CORE", "COVERAGE"))
-    }
+    env = {k: v for k, v in os.environ.items() if not k.startswith(("COV_CORE", "COVERAGE"))}
     env["PYTHONHASHSEED"] = "0"
     out = subprocess.run(  # noqa: S603 - constant script, trusted interpreter
         [sys.executable, "-c", script],

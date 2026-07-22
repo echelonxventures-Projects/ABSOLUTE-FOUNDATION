@@ -268,9 +268,7 @@ class CertificationConsoleLedger:
         )
         ancestors = tuple(e.certification_id for e in entries[: entry.sequence])
         target_ancestors = tuple(
-            e.certification_id
-            for e in entries[: entry.sequence]
-            if e.target_id == entry.target_id
+            e.certification_id for e in entries[: entry.sequence] if e.target_id == entry.target_id
         )
         return CertificationLineageView.create(
             certification_id=entry.certification_id,

@@ -149,9 +149,7 @@ class CoverageEngine:
 
     __slots__ = ("_source", "_registry")
 
-    def __init__(
-        self, source: EvidenceSource, *, registry: CoverageRegistry | None = None
-    ) -> None:
+    def __init__(self, source: EvidenceSource, *, registry: CoverageRegistry | None = None) -> None:
         if not isinstance(source, EvidenceSource):
             raise CoverageEngineError("CoverageEngine requires an EvidenceSource")
         if registry is not None and not isinstance(registry, CoverageRegistry):
@@ -236,9 +234,7 @@ class CoverageEngine:
         for kind in CoverageNodeKind:
             population = graph.nodes_of_kind(kind)
             covered = sum(
-                1
-                for n in population
-                if graph.status_of(n.node_id) is CoverageStatus.COVERED
+                1 for n in population if graph.status_of(n.node_id) is CoverageStatus.COVERED
             )
             by_kind[kind.value] = {
                 "total": len(population),
@@ -249,17 +245,13 @@ class CoverageEngine:
             "fingerprint": graph.fingerprint(),
             "node_count": len(graph),
             "edge_count": len(graph.edges()),
-            "universe_coverage_percentage": graph.coverage_percentage(
-                CoverageNodeKind.UNIVERSE
-            ),
+            "universe_coverage_percentage": graph.coverage_percentage(CoverageNodeKind.UNIVERSE),
             "by_kind": by_kind,
             "gaps": [
                 {"kind": n.kind.value, "ref": n.ref, "status": graph.status_of(n.node_id).value}
                 for n in graph.gaps()
             ],
-            "orphans": [
-                {"kind": n.kind.value, "ref": n.ref} for n in graph.orphans()
-            ],
+            "orphans": [{"kind": n.kind.value, "ref": n.ref} for n in graph.orphans()],
         }
 
 

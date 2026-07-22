@@ -135,9 +135,7 @@ def test_response_is_deterministic_and_serializable():
 
     auth = _auth()
     session = _session(auth, Role.PLATFORM_ADMINISTRATOR)
-    response = WorkspaceSearch(_seed_registry(), auth).search(
-        session.session_id, "acme", now=1
-    )
+    response = WorkspaceSearch(_seed_registry(), auth).search(session.session_id, "acme", now=1)
     d = response.to_dict()
     assert d["authorized"] is True
     assert d["result_count"] == len(response.results)

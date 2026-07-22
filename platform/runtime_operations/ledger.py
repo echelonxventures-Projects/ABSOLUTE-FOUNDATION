@@ -101,9 +101,7 @@ class RuntimeOperationLedgerView:
     @classmethod
     def from_entry(cls, entry: RuntimeOperationLedgerEntry) -> RuntimeOperationLedgerView:
         if not isinstance(entry, RuntimeOperationLedgerEntry):
-            raise RuntimeOperationLedgerError(
-                "RuntimeOperationLedgerView requires a ledger entry"
-            )
+            raise RuntimeOperationLedgerError("RuntimeOperationLedgerView requires a ledger entry")
         return cls(
             sequence=entry.sequence,
             operation_id=entry.operation_id,
@@ -331,15 +329,11 @@ class RuntimeOperationLedger:
         entries = self._entries
         parent = entries[entry.sequence - 1].operation_id if entry.sequence > 0 else None
         child = (
-            entries[entry.sequence + 1].operation_id
-            if entry.sequence + 1 < len(entries)
-            else None
+            entries[entry.sequence + 1].operation_id if entry.sequence + 1 < len(entries) else None
         )
         ancestors = tuple(e.operation_id for e in entries[: entry.sequence])
         runtime_ancestors = tuple(
-            e.operation_id
-            for e in entries[: entry.sequence]
-            if e.runtime_id == entry.runtime_id
+            e.operation_id for e in entries[: entry.sequence] if e.runtime_id == entry.runtime_id
         )
         return RuntimeOperationLineageView.create(
             operation_id=entry.operation_id,

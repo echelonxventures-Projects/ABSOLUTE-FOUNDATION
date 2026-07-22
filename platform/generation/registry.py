@@ -144,9 +144,7 @@ class GenerationRequestRegistry:
             requests = tuple(r for r in requests if r.blueprint_ref == blueprint_ref)
         return requests
 
-    def transition(
-        self, request_id: str, target: RequestStatus, *, tick: int
-    ) -> GenerationRequest:
+    def transition(self, request_id: str, target: RequestStatus, *, tick: int) -> GenerationRequest:
         """Apply a lifecycle transition (fail-closed) and record the event."""
         request = self.get(request_id)
         validate_transition(request.status, target)
@@ -163,9 +161,7 @@ class GenerationRequestRegistry:
         )
         return updated
 
-    def update_metadata(
-        self, request_id: str, metadata: RequestMetadata
-    ) -> GenerationRequest:
+    def update_metadata(self, request_id: str, metadata: RequestMetadata) -> GenerationRequest:
         """Replace a request's metadata immutably (the id/status are preserved)."""
         request = self.get(request_id)
         updated = request.with_metadata(metadata)

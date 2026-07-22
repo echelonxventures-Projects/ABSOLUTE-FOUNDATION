@@ -72,12 +72,22 @@ def test_empty_query_authorized_but_empty():
 def test_match_rank_and_isolation():
     auth, reg, search = _fixture()
     reg.create(
-        "alpha", "UCOS-BLPR-a", "UCOS-WSPC-1", "arch@x",
-        BlueprintFamily.DATA, submitted_tick=1, tenant="acme",
+        "alpha",
+        "UCOS-BLPR-a",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.DATA,
+        submitted_tick=1,
+        tenant="acme",
     )
     reg.create(
-        "beta", "UCOS-BLPR-b", "UCOS-WSPC-1", "arch@x",
-        BlueprintFamily.API, submitted_tick=2, tenant="beta",
+        "beta",
+        "UCOS-BLPR-b",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.API,
+        submitted_tick=2,
+        tenant="beta",
     )
     sess = _session(auth, subject="arch@x", tenant="acme")
     resp = search.search(sess.session_id, "alpha", now=1, tenant="acme")
@@ -92,8 +102,12 @@ def test_match_rank_and_isolation():
 def test_scoped_filters_family_and_status():
     auth, reg, search = _fixture()
     reg.create(
-        "dataflow", "UCOS-BLPR-a", "UCOS-WSPC-1", "arch@x",
-        BlueprintFamily.DATA, submitted_tick=1,
+        "dataflow",
+        "UCOS-BLPR-a",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.DATA,
+        submitted_tick=1,
     )
     sess = _session(auth)
     resp = search.search(sess.session_id, "data", now=1, family=BlueprintFamily.DATA)
@@ -110,19 +124,34 @@ def test_label_match_and_zero_score_and_isolation_skip():
     from platform.generation.metadata import RequestMetadata
 
     reg.create(
-        "opaque", "UCOS-BLPR-a", "UCOS-WSPC-1", "arch@x", BlueprintFamily.DATA,
-        submitted_tick=1, tenant="acme",
+        "opaque",
+        "UCOS-BLPR-a",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.DATA,
+        submitted_tick=1,
+        tenant="acme",
         metadata=RequestMetadata.create(labels=["priority"]),
     )
     # A same-tenant request that will score zero for the query token.
     reg.create(
-        "other", "UCOS-BLPR-b", "UCOS-WSPC-1", "arch@x", BlueprintFamily.DATA,
-        submitted_tick=2, tenant="acme",
+        "other",
+        "UCOS-BLPR-b",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.DATA,
+        submitted_tick=2,
+        tenant="acme",
     )
     # A cross-tenant request that must be isolation-skipped when scanned (tenant=None).
     reg.create(
-        "secret", "UCOS-BLPR-c", "UCOS-WSPC-1", "arch@x", BlueprintFamily.DATA,
-        submitted_tick=3, tenant="beta",
+        "secret",
+        "UCOS-BLPR-c",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.DATA,
+        submitted_tick=3,
+        tenant="beta",
     )
     sess = _session(auth, subject="arch@x", tenant="acme")
     resp = search.search(sess.session_id, "priority", now=1)  # tenant=None ⇒ scans all

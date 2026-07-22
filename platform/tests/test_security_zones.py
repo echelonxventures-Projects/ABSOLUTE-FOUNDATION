@@ -121,7 +121,11 @@ def test_posture_create_rejects_empty_target_and_rationale_and_bad_tick():
         PostureRecord.create(POSTURE_TARGET_ZONE, "ZONE-0", OK, rationale=" ", evaluated_at=1)
     with pytest.raises(ZonePostureError):
         PostureRecord.create(
-            POSTURE_TARGET_ZONE, "ZONE-0", "APPROVED", rationale="r", evaluated_at=1  # type: ignore[arg-type]
+            POSTURE_TARGET_ZONE,
+            "ZONE-0",
+            "APPROVED",
+            rationale="r",
+            evaluated_at=1,  # type: ignore[arg-type]
         )
     with pytest.raises(ZonePostureError):
         PostureRecord.create(POSTURE_TARGET_ZONE, "ZONE-0", OK, rationale="r", evaluated_at=True)
@@ -130,8 +134,11 @@ def test_posture_create_rejects_empty_target_and_rationale_and_bad_tick():
 def test_posture_create_rejects_secret():
     with pytest.raises(ZonePostureError):
         PostureRecord.create(
-            POSTURE_TARGET_ZONE, "ZONE-0", RollupState.APPROVED,
-            rationale="token=abcdef1234567890", evaluated_at=1,
+            POSTURE_TARGET_ZONE,
+            "ZONE-0",
+            RollupState.APPROVED,
+            rationale="token=abcdef1234567890",
+            evaluated_at=1,
         )
 
 
@@ -145,8 +152,11 @@ def test_for_zone_and_for_control_reject_bad_types():
 
 def test_posture_validate_trace_and_dict():
     p = PostureRecord.for_zone(
-        SecurityZone.OPERATIONS, RollupState.IN_PROGRESS, rationale="append-only signal write",
-        evaluated_at=2, evidence_refs=("UCOS-SSIG-1",),
+        SecurityZone.OPERATIONS,
+        RollupState.IN_PROGRESS,
+        rationale="append-only signal write",
+        evaluated_at=2,
+        evidence_refs=("UCOS-SSIG-1",),
     )
     assert p.validate()["meta_valid"] is True
     t = p.trace()
@@ -168,8 +178,12 @@ def test_posture_validate_trace_and_dict():
 def test_posture_validate_fails_on_hand_built_unidentified_record():
     # A directly-constructed record bypassing create() fails meta-validity.
     bad = PostureRecord(
-        target_kind=POSTURE_TARGET_ZONE, target="ZONE-0", posture=RollupState.APPROVED,
-        rationale="r", evaluated_at=1, posture_id="BAD-ID",
+        target_kind=POSTURE_TARGET_ZONE,
+        target="ZONE-0",
+        posture=RollupState.APPROVED,
+        rationale="r",
+        evaluated_at=1,
+        posture_id="BAD-ID",
     )
     with pytest.raises(ZonePostureError):
         bad.validate()
@@ -240,8 +254,11 @@ def test_assess_control_and_generic_assess_without_bus():
     )
     # generic assess against a free-form FUTURE target (policy-configured, not compiled).
     future = service.assess(
-        POSTURE_TARGET_ZONE, "ZONE-5-FUTURE", RollupState.IN_PROGRESS,
-        rationale="future zone", evaluated_at=1,
+        POSTURE_TARGET_ZONE,
+        "ZONE-5-FUTURE",
+        RollupState.IN_PROGRESS,
+        rationale="future zone",
+        evaluated_at=1,
     )
     assert future.target == "ZONE-5-FUTURE"
     assert len(service.ledger) == 2
@@ -257,9 +274,7 @@ def test_evaluate_mutation_through_service():
 
 def test_trace_validate_validate_all_and_report():
     service = build_security_zone_service()
-    p = service.assess_zone(
-        SecurityZone.CORE, RollupState.APPROVED, rationale="r", evaluated_at=1
-    )
+    p = service.assess_zone(SecurityZone.CORE, RollupState.APPROVED, rationale="r", evaluated_at=1)
     service.assess_control(
         SecurityControl.AUDIT, RollupState.APPROVED, rationale="r", evaluated_at=1
     )

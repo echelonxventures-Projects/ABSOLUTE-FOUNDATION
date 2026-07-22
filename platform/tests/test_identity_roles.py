@@ -178,7 +178,6 @@ def test_groups_returned_in_stable_order():
     assert list(groups) == sorted(groups, key=lambda g: list(CapabilityGroup).index(g))
 
 
-
 def test_registry_contains_and_len():
     reg = default_role_registry()
     assert Role.DEVELOPER in reg

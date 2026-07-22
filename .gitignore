@@ -30,3 +30,14 @@ coverage.xml
 # pure function of the tracked/un-ignored corpus for all future growth.
 determinism-evidence/
 ~$*
+
+
+# EPIC-UKDA (Universal Knowledge & Decision Architecture) — generated canonical
+# knowledge store + handbooks. The single authored-once source of this knowledge is
+# engine/knowledge/seed.py (tracked engineering code); the knowledge/ directory is
+# deterministically re-derivable output (`ucos-knowledge init` / `ucos-knowledge
+# docs`), i.e. a GENERATED ARTIFACT (GOV-005 §5.3) bounded by the ignore authority,
+# never hand-registered. Regenerated each run; must never be tracked or seen as drift.
+# Anchored with a leading slash so ONLY the repo-root store is ignored — the
+# engine/knowledge/ source package and its tests remain tracked.
+/knowledge/

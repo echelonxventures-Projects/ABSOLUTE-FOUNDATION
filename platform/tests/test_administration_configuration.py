@@ -23,9 +23,7 @@ def test_setting_is_content_addressed_by_scope_tenant_key():
     # value does not change identity; scope+tenant+key does.
     assert a.setting_id == b.setting_id
     assert a.setting_id.startswith("UCOS-ASET-")
-    c = AdministrativeSetting.create(
-        AdministrativeScope.TENANT, "retention", "30d", tenant="acme"
-    )
+    c = AdministrativeSetting.create(AdministrativeScope.TENANT, "retention", "30d", tenant="acme")
     assert c.setting_id != a.setting_id
 
 

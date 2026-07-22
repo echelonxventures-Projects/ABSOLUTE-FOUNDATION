@@ -119,9 +119,7 @@ class CompilerPipeline:
 
     # -- public API ------------------------------------------------------------
 
-    def compile(
-        self, sources: Iterable[Mapping[str, Any] | str | bytes]
-    ) -> BuildResult:
+    def compile(self, sources: Iterable[Mapping[str, Any] | str | bytes]) -> BuildResult:
         """Run the full pipeline over a build set; halt with a Gap Report on failure."""
         with trace("compiler.pipeline"):
             # Stage 1 — Parse (front-end admission).
@@ -135,17 +133,13 @@ class CompilerPipeline:
                 for ir in blueprints:
                     self._validator.validate(ir)
             except CompilerError as exc:
-                return self._halt(
-                    _StageFailure(Stage.VALIDATE, exc, _blueprint_id(exc)), order=()
-                )
+                return self._halt(_StageFailure(Stage.VALIDATE, exc, _blueprint_id(exc)), order=())
 
             # Stage 3 — Resolve (acyclic dependency graph + compile order).
             try:
                 resolved = self._resolver.resolve(blueprints)
             except CompilerError as exc:
-                return self._halt(
-                    _StageFailure(Stage.RESOLVE, exc, _blueprint_id(exc)), order=()
-                )
+                return self._halt(_StageFailure(Stage.RESOLVE, exc, _blueprint_id(exc)), order=())
 
             # Stages 4–8 — per blueprint in dependency order.
             by_id = {ir.blueprint_id: ir for ir in blueprints}
@@ -157,19 +151,13 @@ class CompilerPipeline:
                 except _StageFailure as failure:
                     return self._halt(failure, order=resolved.order, partial=results)
                 results.append(
-                    CompilationResult(
-                        blueprint_id=blueprint_id, success=True, published=published
-                    )
+                    CompilationResult(blueprint_id=blueprint_id, success=True, published=published)
                 )
 
         _logger.info("compiler.pipeline.succeeded", blueprints=len(results))
-        return BuildResult(
-            success=True, order=resolved.order, results=tuple(results)
-        )
+        return BuildResult(success=True, order=resolved.order, results=tuple(results))
 
-    def compile_one(
-        self, source: Mapping[str, Any] | str | bytes
-    ) -> CompilationResult:
+    def compile_one(self, source: Mapping[str, Any] | str | bytes) -> CompilationResult:
         """Compile a single self-contained blueprint and return its result."""
         build = self.compile([source])
         if build.results:
@@ -183,9 +171,7 @@ class CompilerPipeline:
 
     # -- internals -------------------------------------------------------------
 
-    def _parse_all(
-        self, sources: Iterable[Mapping[str, Any] | str | bytes]
-    ) -> list[BlueprintIR]:
+    def _parse_all(self, sources: Iterable[Mapping[str, Any] | str | bytes]) -> list[BlueprintIR]:
         blueprints: list[BlueprintIR] = []
         for source in sources:
             try:
@@ -211,9 +197,7 @@ class CompilerPipeline:
         except CompilerError as exc:
             raise _StageFailure(Stage.OPTIMIZE, exc, ir.blueprint_id) from exc
         try:
-            package = self._packager.package(
-                optimized, name=ir.name, version=ir.version
-            )
+            package = self._packager.package(optimized, name=ir.name, version=ir.version)
         except CompilerError as exc:
             raise _StageFailure(Stage.PACKAGE, exc, ir.blueprint_id) from exc
         try:
@@ -242,9 +226,7 @@ class CompilerPipeline:
             blueprint=failure.blueprint_id,
         )
         results = tuple(partial or ())
-        return BuildResult(
-            success=False, order=order, results=results, gap_report=report
-        )
+        return BuildResult(success=False, order=order, results=results, gap_report=report)
 
 
 class _StageFailure(Exception):

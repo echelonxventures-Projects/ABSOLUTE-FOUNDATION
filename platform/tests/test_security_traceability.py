@@ -106,8 +106,15 @@ def test_intel_service_realizes_every_sec_intel_responsibility():
 
     service = build_security_intelligence_service()
     # record · rollup · trace · validate · report (mission responsibilities).
-    for responsibility in ("record_finding", "record", "rollup", "trace", "validate",
-                           "validate_all", "report"):
+    for responsibility in (
+        "record_finding",
+        "record",
+        "rollup",
+        "trace",
+        "validate",
+        "validate_all",
+        "report",
+    ):
         assert callable(getattr(service, responsibility))
 
 
@@ -117,8 +124,11 @@ def test_finding_traces_backward_to_the_schema_and_forward_to_affected_refs():
 
     service = build_security_intelligence_service()
     f = service.record_finding(
-        FindingKind.VULNERABILITY, "CVE-2026-42", severity=Severity.HIGH,
-        identifier="CVE-2026-42", affects=("UCOS-SVC-000001",),
+        FindingKind.VULNERABILITY,
+        "CVE-2026-42",
+        severity=Severity.HIGH,
+        identifier="CVE-2026-42",
+        affects=("UCOS-SVC-000001",),
     )
     trace = service.trace(f.finding_id)
     assert "finding.schema.json" in trace["backward"]["source_ref"]
@@ -137,8 +147,12 @@ def test_registry_entry_traces_backward_to_its_constitutional_source():
 
     service = build_security_registry_service()
     e = service.record(
-        RegistryKind.TRUST, "trust-anchor", "UCOS-INF-000001",
-        recorded_by="UCOS-PRIN-000001", recorded_at=1, refs=("UCOS-SFND-1",),
+        RegistryKind.TRUST,
+        "trust-anchor",
+        "UCOS-INF-000001",
+        recorded_by="UCOS-PRIN-000001",
+        recorded_at=1,
+        refs=("UCOS-SFND-1",),
     )
     trace = service.trace(RegistryKind.TRUST, e.entry_id)
     assert "§17" in trace["backward"]["source_ref"]
@@ -178,8 +192,12 @@ def test_certification_traces_backward_to_section_18_and_cites_evidence():
 
     service = build_security_certification_service()
     c = service.certify(
-        CertificationClass.SECURITY, "UCOS-CMP-1", CertificationDecision.CERTIFIED,
-        basis="rolled up from evidence", certified_at=1, evidence_refs=("UCOS-SIEV-1",),
+        CertificationClass.SECURITY,
+        "UCOS-CMP-1",
+        CertificationDecision.CERTIFIED,
+        basis="rolled up from evidence",
+        certified_at=1,
+        evidence_refs=("UCOS-SIEV-1",),
     )
     trace = service.trace(c.certification_id)
     assert trace["backward"]["source_ref"] == "ARCH-SECURITY-001 §18"
@@ -198,8 +216,11 @@ def test_zone_posture_traces_backward_to_umb_015():
 
     service = build_security_zone_service()
     p = service.assess_zone(
-        SecurityZone.CORE, RollupState.APPROVED, rationale="append-only via T",
-        evaluated_at=1, evidence_refs=("UCOS-SREG-1",),
+        SecurityZone.CORE,
+        RollupState.APPROVED,
+        rationale="append-only via T",
+        evaluated_at=1,
+        evidence_refs=("UCOS-SREG-1",),
     )
     trace = service.trace(p.posture_id)
     assert trace["backward"]["source_ref"] == "UMB-015 §1"

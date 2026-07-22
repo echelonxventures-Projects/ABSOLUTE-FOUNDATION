@@ -157,9 +157,7 @@ class RuntimeFacade:
         """True iff re-generating the rollback descriptor reproduces ``descriptor`` (P6)."""
         if not isinstance(descriptor, RollbackDescriptor):
             raise RuntimeFidelityError("verify_rollback_fidelity requires a RollbackDescriptor")
-        reproduced = self.rollback_descriptor(
-            unit, previous=previous, environment=environment
-        )
+        reproduced = self.rollback_descriptor(unit, previous=previous, environment=environment)
         return content_hash(reproduced.to_dict()) == content_hash(descriptor.to_dict())
 
 

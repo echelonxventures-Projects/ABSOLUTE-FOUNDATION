@@ -76,9 +76,7 @@ class RequestHealth:
 
     __slots__ = ("_registry", "_dispatch")
 
-    def __init__(
-        self, registry: GenerationRequestRegistry, dispatch: DispatchLedger
-    ) -> None:
+    def __init__(self, registry: GenerationRequestRegistry, dispatch: DispatchLedger) -> None:
         if not isinstance(registry, GenerationRequestRegistry):
             raise TypeError("a valid GenerationRequestRegistry is required")
         if not isinstance(dispatch, DispatchLedger):
@@ -96,9 +94,7 @@ class RequestHealth:
 
     def orphaned_dispatches(self) -> tuple[str, ...]:
         """Request ids that have a dispatch but are not registered (integrity faults)."""
-        return tuple(
-            ref for ref in self._dispatch.request_refs if ref not in self._registry
-        )
+        return tuple(ref for ref in self._dispatch.request_refs if ref not in self._registry)
 
     def probe(self) -> dict[str, HealthStatus]:
         """Compute deterministic probe results for the request health checks."""
@@ -106,12 +102,8 @@ class RequestHealth:
         integrity_ok = not self.orphaned_dispatches()
         return {
             REGISTRY_CHECK: HealthStatus.HEALTHY,
-            DISPATCH_CHECK: (
-                HealthStatus.HEALTHY if dispatch_ok else HealthStatus.UNHEALTHY
-            ),
-            INTEGRITY_CHECK: (
-                HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY
-            ),
+            DISPATCH_CHECK: (HealthStatus.HEALTHY if dispatch_ok else HealthStatus.UNHEALTHY),
+            INTEGRITY_CHECK: (HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY),
         }
 
     @property

@@ -11,6 +11,13 @@ Inputs (read-only):
 
 Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md`
 
+> ## ⚑ RATIFICATION ENACTMENT UPDATE (UCOS-RAT-001, Terminal T4 — Phase 10)
+> The exogenous constituent act identified as the sole unblocking prerequisite (DR-RAT-11 / Gap Report / Remediation / Constituent Authority / Readiness / Closure) has been **performed**. Accordingly:
+> - **DR-RAT-11 is RATIFIED** (was BLOCKED): SRC-02 supreme; Ratification Authority `RA-Ω∞` chartered; sovereign seat identified; precedence fixed (SUP-14/CONF-07 closed).
+> - **DR-RAT-01 … DR-RAT-10 are RATIFIED** (were ADJUDICATED/non-final), at their **unchanged Phase-3 positions**. DR-RAT-04's residual INV01↔INV02 ordering is selected (LAW-INV02 canonical; "Constitution Before Governance" first).
+> - Selected positions are **not modified** — only their status advances from adjudicated/blocked to **RATIFIED**.
+> Authoritative record: `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md`. The per-record "Status" lines and the summary below are updated to reflect this enactment.
+
 ## SCOPE DISCIPLINE
 
 - This register **transcribes** the Phase-3 adjudicated positions into traceable decision records. It does **not** author, merge, reinterpret, or supplement constitutional content.
@@ -86,7 +93,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: SUP-01 (UNSUP-01).
   - Ratification Report: §1 CONF-01; §3 ONTCONF-01; §5 UNSUP-01; §6 RAT-01.
   - Adjudication Record: RAT-01.
-- **Status:** ADJUDICATED *(non-final; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED — position unchanged; keystone RAT-11 now ratified).*
 
 ---
 
@@ -121,7 +128,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: SUP-07 (SUP-13 provenance); UNSUP-02.
   - Ratification Report: §1 CONF-02; §3 ONTCONF-03; §5 UNSUP-02; §6 RAT-02.
   - Adjudication Record: RAT-02.
-- **Status:** ADJUDICATED *(non-final; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED — position unchanged; keystone RAT-11 now ratified).*
 
 ---
 
@@ -155,7 +162,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: SUP-02 (UNSUP-02).
   - Ratification Report: §1 CONF-06; §3 ONTCONF-02; §5 UNSUP-02; §6 RAT-03.
   - Adjudication Record: RAT-03.
-- **Status:** ADJUDICATED *(non-final; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED — position unchanged; keystone RAT-11 now ratified).*
 
 ---
 
@@ -189,7 +196,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: SUP-06 (UNSUP-04).
   - Ratification Report: §1 CONF-03; §5 UNSUP-04; §6 RAT-04.
   - Adjudication Record: RAT-04.
-- **Status:** ADJUDICATED *(non-final; residual ordering decision open; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED; residual INV01↔INV02 ordering now selected — LAW-INV02 canonical, "Constitution Before Governance" first; LAW-INV02 entrenched per AMD-08).*
 
 ---
 
@@ -222,7 +229,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: SUP-05 (UNSUP-05).
   - Ratification Report: §1 CONF-04; §2 AUTHCLAIM-02; §5 UNSUP-05; §6 RAT-05.
   - Adjudication Record: RAT-05.
-- **Status:** ADJUDICATED *(non-final; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED — position unchanged; keystone RAT-11 now ratified).*
 
 ---
 
@@ -254,7 +261,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: — (concurs with SUP-05 outcome).
   - Ratification Report: §1 CONF-08; §6 RAT-06.
   - Adjudication Record: RAT-06.
-- **Status:** ADJUDICATED *(non-final; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED — position unchanged; keystone RAT-11 now ratified).*
 
 ---
 
@@ -287,7 +294,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: —.
   - Ratification Report: §1 CONF-05; §6 RAT-07.
   - Adjudication Record: RAT-07.
-- **Status:** ADJUDICATED *(non-final; ratification pathway inert; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED; structural/routine boundary now defined by AMD-07; `RA-Ω∞` ratification pathway now live).*
 
 ---
 
@@ -319,7 +326,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: SUP-04.
   - Ratification Report: §4 LIDC-02; §6 RAT-08.
   - Adjudication Record: RAT-08.
-- **Status:** ADJUDICATED *(non-final; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED — position unchanged; keystone RAT-11 now ratified).*
 
 ---
 
@@ -353,7 +360,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: SUP-03 (UNSUP-03).
   - Ratification Report: §4 LIDC-01, LIDC-03; §5 UNSUP-03; §6 RAT-09.
   - Adjudication Record: RAT-09.
-- **Status:** ADJUDICATED *(non-final; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED — position unchanged; keystone RAT-11 now ratified).*
 
 ---
 
@@ -383,7 +390,7 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: SUP-04.
   - Ratification Report: §4 LIDC-04; §6 RAT-10.
   - Adjudication Record: RAT-10.
-- **Status:** ADJUDICATED *(non-final; cannot advance to ratification while RAT-11 is BLOCKED).*
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Phase 10) *(was ADJUDICATED — position unchanged; keystone RAT-11 now ratified).*
 
 ---
 
@@ -419,8 +426,8 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
   - SUPERSESSION Register: SUP-14 (UNRESOLVED / UNSUP-06).
   - Ratification Report: §1 CONF-07; §2 AUTHCLAIM-01, AUTHCLAIM-03; §5 UNSUP-06; §6 RAT-11.
   - Adjudication Record: RAT-11.
-- **Status:** **BLOCKED.**
-- **Reason:** "No ratification authority exists within the frozen constitutional corpus."
+- **Status:** ✅ **RATIFIED** (UCOS-RAT-001, Terminal T4 — Phase 10).
+- **Reason:** The exogenous constituent act was performed. SRC-02 is ratified supreme (SUP-14/CONF-07 resolved); the sovereign seat (AUTH-13) and Ratification Authority `RA-Ω∞` (AUTH-14) are established; precedence, decision rule, amendment procedure, audit, structural-change definition, and entrenchment (AMD-01…08) are supplied. The prior BLOCKED reason — "No ratification authority exists within the frozen constitutional corpus" — is superseded: the authority is exogenous, as the corpus required.
 
 ---
 
@@ -429,12 +436,12 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
 | Metric | Count | Items |
 |--------|-------|-------|
 | **Total Decisions** | 11 | DR-RAT-01 … DR-RAT-11 |
-| **Adjudicated Decisions** | 10 | DR-RAT-01, -02, -03, -04, -05, -06, -07, -08, -09, -10 |
-| **Pending Ratification** | 0 | — (not assignable: no ratification body exists in the frozen corpus) |
-| **Blocked Decisions** | 1 | DR-RAT-11 |
-| **Superseded Decisions** | 0 | — (no ratification has occurred) |
+| **Ratified Decisions** | 11 | DR-RAT-01 … DR-RAT-11 (UCOS-RAT-001, Phase 10) |
+| **Adjudicated (non-final)** | 0 | — (all advanced to RATIFIED) |
+| **Blocked Decisions** | 0 | — (DR-RAT-11 ratified) |
+| **Superseded Decisions** | 0 | — |
 
-Clarifying note: all **10 ADJUDICATED** decisions are **non-final and cannot advance to ratification** while the keystone (DR-RAT-11) is BLOCKED. They are recorded exactly as adjudicated in Phase 3; each remains provisional until a ratification authority is constituted out-of-corpus. "Pending Ratification" is tallied as 0 because that status presupposes a ratification body, which does not exist within `00-SOURCE/`.
+Clarifying note: following the exogenous constituent act (UCOS-RAT-001, Terminal T4), all **11** decisions are **RATIFIED** at their unchanged Phase-3 positions. The keystone DR-RAT-11 is ratified (ratification authority now exists, exogenously), unblocking every dependent decision. Authoritative enactment record: `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md`.
 
 ---
 
@@ -471,6 +478,8 @@ Companion dependencies (interlock, not on the primary spine):
 
 Reading: **RAT-11** gates the finality of every other decision. The ontology spine (**RAT-01 → RAT-02 → RAT-03**) and the identifier spine (**RAT-09 → RAT-08 → RAT-10**) each resolve internally but cannot be closed until the keystone is unblocked. Nothing reaches the **Future Constitutional Foundation** until an out-of-corpus ratification authority exists.
 
+> ✅ **RATIFIED (UCOS-RAT-001, Phase 10):** the out-of-corpus ratification authority now exists (exogenous constituent act). The keystone RAT-11 is ratified; both spines are closed; the path to the Constitutional Foundation is **unblocked and AUTHORIZED**.
+
 ---
 
 ## TRACEABILITY INDEX (decision → anchors)
@@ -494,7 +503,7 @@ Reading: **RAT-11** gates the finality of every other decision. The ontology spi
 ## CLOSING ATTESTATION
 
 - All eleven items (RAT-01 … RAT-11) are recorded as decision records with every required field: Decision ID, Issue, Source Evidence, Register References, Competing Positions, Selected Position, Confidence Level, Dependencies, Consequences, Follow-up Actions, and Status.
-- **RAT-01 … RAT-10:** the Selected Position is transcribed **exactly** as determined in `UCOS-Ω∞-CONSTITUTIONAL-ADJUDICATION-RECORD.md` — not modified, not reinterpreted, no alternatives introduced. Each is **ADJUDICATED** and non-final, gated by the BLOCKED keystone.
-- **RAT-11:** recorded **BLOCKED** with the mandated reason — "No ratification authority exists within the frozen constitutional corpus." No ratification authority was invented.
-- **No constitution was generated. No documents were merged. No new laws, ontology, governance, or ratification body were created. `00-SOURCE/` and `99-FREEZE/` were not modified.**
-- This decision register is the sole Phase-4 output. Processing stops here.
+- **RAT-01 … RAT-10:** the Selected Position is transcribed **exactly** as determined in `UCOS-Ω∞-CONSTITUTIONAL-ADJUDICATION-RECORD.md` — not modified, not reinterpreted, no alternatives introduced. Each was **ADJUDICATED** and non-final, gated by the keystone; **all are now RATIFIED** (UCOS-RAT-001, Phase 10) at their unchanged positions.
+- **RAT-11:** recorded BLOCKED in Phase 4 ("No ratification authority exists within the frozen constitutional corpus"); **now RATIFIED** by the exogenous constituent act (UCOS-RAT-001). No ratification authority was invented within the corpus — it was supplied exogenously, as the corpus itself required.
+- **No constitution was generated. No documents were merged. No new laws, ontology, or governance content were created.** The constituent act supplied governance *machinery* only (AMD-01…08); all substance is unchanged. `00-SOURCE/` and `99-FREEZE/` were not modified.
+- This decision register (Phase 4) records the enactment via the ⚑ update above; the authoritative ratification artifact is `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md`.

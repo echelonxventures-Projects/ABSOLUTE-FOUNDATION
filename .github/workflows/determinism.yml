@@ -16,6 +16,12 @@ on:
 permissions:
   contents: read
 
+# CI throughput: supersede in-flight runs for the same ref. Pure run-scheduling —
+# no change to the determinism gate behavior or evidence.
+concurrency:
+  group: ec1-determinism-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   determinism:
     name: Reproducibility (double-build · fail-on-divergence)

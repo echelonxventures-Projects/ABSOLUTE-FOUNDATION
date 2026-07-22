@@ -25,8 +25,14 @@ import pytest
 def _registry(*, count=2):
     reg = GenerationRequestRegistry()
     for i in range(count):
-        reg.create(f"req-{i}", "UCOS-BLPR-1", "UCOS-WSPC-1", "arch@x", BlueprintFamily.DATA,
-                   submitted_tick=i)
+        reg.create(
+            f"req-{i}",
+            "UCOS-BLPR-1",
+            "UCOS-WSPC-1",
+            "arch@x",
+            BlueprintFamily.DATA,
+            submitted_tick=i,
+        )
     return reg
 
 
@@ -71,13 +77,24 @@ def test_census_drift_drives_unhealthy(monkeypatch):
 def test_queue_drift_drives_unhealthy(monkeypatch):
     reg = _registry(count=1)
     health = DashboardHealth(reg)
+
     # Return a census whose non-queue counts still match the projection so only the
     # queue-integrity check trips.
     def _skewed(self):
-        base = {s: 0 for s in (
-            "submitted", "validating", "approved", "queued", "dispatched",
-            "running", "completed", "failed", "cancelled",
-        )}
+        base = {
+            s: 0
+            for s in (
+                "submitted",
+                "validating",
+                "approved",
+                "queued",
+                "dispatched",
+                "running",
+                "completed",
+                "failed",
+                "cancelled",
+            )
+        }
         base["submitted"] = 1
         base["queued"] = 7  # projection sees 0 QUEUED → drift
         return base

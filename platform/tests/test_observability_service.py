@@ -36,9 +36,9 @@ def test_telemetry_covers_100_percent_of_governed_actions():
     assert service.observed_fraction() == 1.0
     assert len(service.logs) == 10
     assert len(service.audit) == 10
-    assert service.metrics.value_of(
-        GOVERNED_ACTION_METRIC, event_type="generation.requested"
-    ) == 10.0
+    assert (
+        service.metrics.value_of(GOVERNED_ACTION_METRIC, event_type="generation.requested") == 10.0
+    )
     assert service.audit.verify() is True
 
 

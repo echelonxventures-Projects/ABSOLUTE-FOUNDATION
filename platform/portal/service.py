@@ -284,9 +284,7 @@ class PortalService:
         authorized navigation tree, the landing route, and the accessibility report.
         """
         admission = self._gateway.require_admission(session_id, now=now, tenant=tenant)
-        navigation = self._navigation.build(
-            self._visibility(session_id, now=now, tenant=tenant)
-        )
+        navigation = self._navigation.build(self._visibility(session_id, now=now, tenant=tenant))
         accessibility = self._navigation.accessibility_report()
         self._entries += 1
         self._emit_entered(admission)
@@ -365,15 +363,11 @@ class PortalService:
         """Health visibility (G1), gated on observability READ."""
         return self._require_observability().health(session_id, results, now=now, tenant=tenant)
 
-    def runtime(
-        self, session_id: str, *, now: int, tenant: str | None = None
-    ) -> dict[str, Any]:
+    def runtime(self, session_id: str, *, now: int, tenant: str | None = None) -> dict[str, Any]:
         """Runtime visibility (governed-action evidence), gated on observability READ."""
         return self._require_observability().runtime(session_id, now=now, tenant=tenant)
 
-    def monitoring(
-        self, session_id: str, *, now: int, tenant: str | None = None
-    ) -> dict[str, Any]:
+    def monitoring(self, session_id: str, *, now: int, tenant: str | None = None) -> dict[str, Any]:
         """Monitoring visibility (metric snapshot), gated on observability READ."""
         return self._require_observability().monitoring(session_id, now=now, tenant=tenant)
 
@@ -381,9 +375,7 @@ class PortalService:
 
     def evidence(self) -> PortalEvidence:
         """Produce deterministic Portal Evidence over the composed model."""
-        surfaces_fingerprint = content_hash(
-            [s.to_dict() for s in self._navigation.surfaces]
-        )
+        surfaces_fingerprint = content_hash([s.to_dict() for s in self._navigation.surfaces])
         return PortalEvidence.create(
             surfaces_fingerprint=surfaces_fingerprint,
             routes_fingerprint=self._router.fingerprint(),

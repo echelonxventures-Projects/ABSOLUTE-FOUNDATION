@@ -111,8 +111,12 @@ def test_validate_success_trace_and_dict():
 def test_validate_fails_on_hand_built_unattributed_entry():
     # A directly-constructed entry that bypasses create() fails meta-validity.
     bad = RegistryEntry(
-        registry=RegistryKind.SECURITY, record_type="x", subject_ref="s",
-        recorded_by="", recorded_at=1, entry_id="UCOS-SREG-bad",
+        registry=RegistryKind.SECURITY,
+        record_type="x",
+        subject_ref="s",
+        recorded_by="",
+        recorded_at=1,
+        entry_id="UCOS-SREG-bad",
     )
     with pytest.raises(RegistryValidationError):
         bad.validate()
@@ -154,11 +158,19 @@ def test_registry_get_missing_raises():
 def test_registry_queries():
     reg = AppendOnlyRegistry(RegistryKind.EVIDENCE)
     a = RegistryEntry.create(
-        RegistryKind.EVIDENCE, "pentest", "UCOS-SVC-1", recorded_by="p", recorded_at=1,
+        RegistryKind.EVIDENCE,
+        "pentest",
+        "UCOS-SVC-1",
+        recorded_by="p",
+        recorded_at=1,
         refs=("UCOS-SFND-1",),
     )
     b = RegistryEntry.create(
-        RegistryKind.EVIDENCE, "audit", "UCOS-SVC-2", recorded_by="p", recorded_at=2,
+        RegistryKind.EVIDENCE,
+        "audit",
+        "UCOS-SVC-2",
+        recorded_by="p",
+        recorded_at=2,
     )
     reg.record(a)
     reg.record(b)
@@ -225,15 +237,22 @@ def test_set_fingerprint_and_dict_deterministic():
 
 def test_evidence_is_content_addressed():
     ev = SecurityRegistryEvidence.create(
-        set_fingerprint="abc", total_entries=0, registry_counts=(("trust-registry", 0),),
+        set_fingerprint="abc",
+        total_entries=0,
+        registry_counts=(("trust-registry", 0),),
         registries=(),
     )
     assert ev.evidence_id.startswith("UCOS-SREV-")
     assert ev.to_dict()["total_entries"] == 0
-    assert ev.fingerprint() == SecurityRegistryEvidence.create(
-        set_fingerprint="abc", total_entries=0, registry_counts=(("trust-registry", 0),),
-        registries=(),
-    ).fingerprint()
+    assert (
+        ev.fingerprint()
+        == SecurityRegistryEvidence.create(
+            set_fingerprint="abc",
+            total_entries=0,
+            registry_counts=(("trust-registry", 0),),
+            registries=(),
+        ).fingerprint()
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -282,7 +301,11 @@ def test_service_record_entry_and_rejects_non_entry():
 def test_service_query_variants():
     service = build_security_registry_service()
     service.record(
-        RegistryKind.EVIDENCE, "pentest", "UCOS-SVC-1", recorded_by="p", recorded_at=1,
+        RegistryKind.EVIDENCE,
+        "pentest",
+        "UCOS-SVC-1",
+        recorded_by="p",
+        recorded_at=1,
         refs=("UCOS-SFND-1",),
     )
     service.record(RegistryKind.EVIDENCE, "audit", "UCOS-SVC-2", recorded_by="p", recorded_at=2)

@@ -117,14 +117,10 @@ def _counts_by_kind(
     associations: Iterable[BlueprintAssociation],
 ) -> tuple[tuple[str, int], ...]:
     """Deterministic per-kind association counts (every kind present, stable order)."""
-    tally: dict[BlueprintAssociationKind, int] = {
-        kind: 0 for kind in all_association_kinds()
-    }
+    tally: dict[BlueprintAssociationKind, int] = {kind: 0 for kind in all_association_kinds()}
     for association in associations:
         if not isinstance(association, BlueprintAssociation):
-            raise BlueprintStatusError(
-                "status derivation requires BlueprintAssociation records"
-            )
+            raise BlueprintStatusError("status derivation requires BlueprintAssociation records")
         tally[association.kind] += 1
     return tuple((kind.value, tally[kind]) for kind in all_association_kinds())
 

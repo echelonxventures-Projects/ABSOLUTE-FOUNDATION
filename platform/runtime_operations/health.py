@@ -107,9 +107,7 @@ class RuntimeOperationsHealth:
     def infidelic_operations(self) -> tuple[str, ...]:
         """Operation ids whose stored descriptor diverges from a fresh reproduction (P6)."""
         return tuple(
-            record.operation_id
-            for record in self._registry.all()
-            if not self._fidelity_ok(record)
+            record.operation_id for record in self._registry.all() if not self._fidelity_ok(record)
         )
 
     def irreversible_rollbacks(self) -> tuple[str, ...]:

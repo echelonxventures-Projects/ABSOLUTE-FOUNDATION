@@ -44,5 +44,6 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-SEC-000003](UCOS-
 - [UCOS-SVC-000017](UCOS-SVC-000017.md) —Required-By→
 - [UCOS-MISC-000022](UCOS-MISC-000022.md) —Required-By→
 - [UCOS-SEC-000004](UCOS-SEC-000004.md) —Depends-On→
+- [UCOS-SEC-000005](UCOS-SEC-000005.md) —Depends-On→
 
 Return: [Portal Index](index.md) · [Master Index](../UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)

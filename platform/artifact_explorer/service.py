@@ -409,9 +409,7 @@ class ArtifactExplorerService:
         """Return the artifact lineage (requires LINEAGE; fail-closed)."""
         access = self._require_access(session_id, request_ref, ExplorerAction.LINEAGE, now=now)
         request = self._registry.get(request_ref)
-        lineage = ArtifactLineage.from_request(
-            request, provenance=self._provenance_of(request_ref)
-        )
+        lineage = ArtifactLineage.from_request(request, provenance=self._provenance_of(request_ref))
         self._lineage_navigations += 1
         self._emit(
             ARTIFACT_LINEAGE_NAVIGATED_EVENT,
@@ -431,9 +429,7 @@ class ArtifactExplorerService:
         Consumes the certified :class:`RequestProvenance` by reference. Fail-closed when
         no provenance is recorded for the artifact.
         """
-        access = self._require_access(
-            session_id, request_ref, ExplorerAction.PROVENANCE, now=now
-        )
+        access = self._require_access(session_id, request_ref, ExplorerAction.PROVENANCE, now=now)
         record = self._provenance_of(request_ref)
         if record is None:
             raise ArtifactProvenanceError(
@@ -734,9 +730,7 @@ def build_artifact_explorer_service(
     request_registry = registry if registry is not None else GenerationRequestRegistry()
     dispatch_ledger = dispatch if dispatch is not None else DispatchLedger()
     provenance_ledger = provenance if provenance is not None else ProvenanceLedger()
-    search = ArtifactSearch(
-        request_registry, dispatch_ledger, provenance_ledger, authorization
-    )
+    search = ArtifactSearch(request_registry, dispatch_ledger, provenance_ledger, authorization)
     health = ExplorerHealth(request_registry, dispatch_ledger, provenance_ledger)
     health_registry = HealthRegistry()
     for check in artifact_explorer_health_checks():

@@ -118,9 +118,7 @@ def bootstrap_security_classification(
     """
     try:
         seam = authorization if authorization is not None else bootstrap_identity(context)
-        service = build_security_classification_service(
-            authorization=seam, events=context.events
-        )
+        service = build_security_classification_service(authorization=seam, events=context.events)
 
         contracts = {c.name: c for c in default_security_classification_contracts()}
         for ref in SECURITY_CLASSIFICATION_CONTRACTS:
@@ -279,9 +277,7 @@ def bootstrap_security_observability(
     """
     try:
         obs = observability if observability is not None else build_observability_service()
-        service = build_security_observability_service(
-            observability=obs, events=context.events
-        )
+        service = build_security_observability_service(observability=obs, events=context.events)
 
         contracts = {c.name: c for c in default_security_observability_contracts()}
         for ref in SECURITY_OBSERVABILITY_CONTRACTS:

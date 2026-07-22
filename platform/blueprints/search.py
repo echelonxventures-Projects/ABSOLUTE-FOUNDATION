@@ -94,9 +94,7 @@ class BlueprintSearch:
 
     __slots__ = ("_registry", "_authorization")
 
-    def __init__(
-        self, registry: BlueprintRegistry, authorization: AuthorizationService
-    ) -> None:
+    def __init__(self, registry: BlueprintRegistry, authorization: AuthorizationService) -> None:
         if not isinstance(registry, BlueprintRegistry):
             raise BlueprintSearchError("a valid BlueprintRegistry is required")
         if not isinstance(authorization, AuthorizationService):

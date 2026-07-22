@@ -55,9 +55,7 @@ class WorkspaceRegistry:
         metadata: WorkspaceMetadata | None = None,
     ) -> Workspace:
         """Build and register a new ACTIVE workspace (fail-closed on duplicate)."""
-        workspace = Workspace.create(
-            slug, name, owner_subject, tenant=tenant, metadata=metadata
-        )
+        workspace = Workspace.create(slug, name, owner_subject, tenant=tenant, metadata=metadata)
         return self.register(workspace)
 
     def __contains__(self, workspace_id: str) -> bool:
@@ -104,13 +102,9 @@ class WorkspaceRegistry:
         """
         if tenant is None:
             return self.all()
-        return tuple(
-            ws for ws in self.all() if ws.tenant == tenant or ws.tenant is None
-        )
+        return tuple(ws for ws in self.all() if ws.tenant == tenant or ws.tenant is None)
 
-    def transition(
-        self, workspace_id: str, target: WorkspaceStatus, *, tick: int
-    ) -> Workspace:
+    def transition(self, workspace_id: str, target: WorkspaceStatus, *, tick: int) -> Workspace:
         """Apply a lifecycle transition (fail-closed) and record the event."""
         workspace = self.get(workspace_id)
         validate_transition(workspace.status, target)

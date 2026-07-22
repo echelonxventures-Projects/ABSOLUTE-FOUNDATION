@@ -36,8 +36,12 @@ def _search(*, authorization=None):
     registry = GenerationRequestRegistry()
     dispatch = DispatchLedger()
     provenance = ProvenanceLedger()
-    return auth, registry, dispatch, provenance, ArtifactSearch(
-        registry, dispatch, provenance, auth
+    return (
+        auth,
+        registry,
+        dispatch,
+        provenance,
+        ArtifactSearch(registry, dispatch, provenance, auth),
     )
 
 
@@ -160,13 +164,19 @@ def test_from_request_search_response_rejects_bad_inputs():
     good = RequestSearchResponse.create("q", True, ())
     with pytest.raises(ArtifactSearchError):
         ArtifactSearchResponse.from_request_search_response(
-            "nope", dispatch=dispatch, provenance=provenance  # type: ignore[arg-type]
+            "nope",
+            dispatch=dispatch,
+            provenance=provenance,  # type: ignore[arg-type]
         )
     with pytest.raises(ArtifactSearchError):
         ArtifactSearchResponse.from_request_search_response(
-            good, dispatch="nope", provenance=provenance  # type: ignore[arg-type]
+            good,
+            dispatch="nope",
+            provenance=provenance,  # type: ignore[arg-type]
         )
     with pytest.raises(ArtifactSearchError):
         ArtifactSearchResponse.from_request_search_response(
-            good, dispatch=dispatch, provenance="nope"  # type: ignore[arg-type]
+            good,
+            dispatch=dispatch,
+            provenance="nope",  # type: ignore[arg-type]
         )

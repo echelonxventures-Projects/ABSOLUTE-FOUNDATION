@@ -36,9 +36,7 @@ def test_principal_is_content_addressed_and_deterministic():
 
 
 def test_principal_scope_and_attributes():
-    p = Principal.create(
-        "partner-1", [Role.PARTNER], tenant="ws-1", attributes={"org": "acme"}
-    )
+    p = Principal.create("partner-1", [Role.PARTNER], tenant="ws-1", attributes={"org": "acme"})
     assert p.is_scoped is True
     assert p.tenant == "ws-1"
     assert p.to_dict()["attributes"] == {"org": "acme"}

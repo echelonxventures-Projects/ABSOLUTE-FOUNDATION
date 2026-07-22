@@ -6,10 +6,10 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 594 | UPN-000000001–UPN-000008899 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 596 | UPN-000000001–UPN-000008930 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 48 | UPN-000001327–UPN-000007992 |
-| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 38 | UPN-000000022–UPN-000005968 |
+| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 39 | UPN-000000022–UPN-000008924 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 6 | UPN-000004194–UPN-000005924 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
 | `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 65 | UPN-000004559–UPN-000005829 |
@@ -29,13 +29,13 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-020` | 20 | CONTROL TOWER | CTL | ACTIVE | 12 | UPN-000004183–UPN-000005972 |
 | `VOL-021` | 21 | DIGITAL TWIN | ADV | ACTIVE | 20 | UPN-000004965–UPN-000005013 |
 | `VOL-022` | 22 | MASTER BOOK ARCHITECTURE | UMB | ACTIVE | 31 | UPN-000005247–UPN-000005480 |
-| `VOL-023` | 23 | SECURITY-GOVERNANCE | SEC | ACTIVE | 4 | UPN-000008900–UPN-000008920 |
+| `VOL-023` | 23 | SECURITY-GOVERNANCE | SEC | ACTIVE | 5 | UPN-000008900–UPN-000008934 |
 
 
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 594
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 596
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -633,6 +633,8 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-INFRASTRUCTU-000115` | Twin Sync | — | ACTIVE |
 | `UCOS-INFRASTRUCTU-000116` | Validation Evidence | — | ACTIVE |
 | `UCOS-INFRASTRUCTU-000117` | Validation Report | — | ACTIVE |
+| `UCOS-REPOOPERATIO-000001` | Repo Operations | — | ACTIVE |
+| `UCOS-MASTER-000037` | UCOS Ω∞ REPOSITORY RATIFICATION DETERMINATION | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -704,7 +706,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 
 *Universal architecture constitutions, catalogs, and engineering foundation.*  \
-**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 38
+**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 39
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -746,6 +748,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-ENG-000016` | EPIC-005 — Runtime Assembly — Completion Report | — | ACTIVE |
 | `UCOS-ENG-000017` | EPIC-007 — Validation Layer — Completion Report | — | ACTIVE |
 | `UCOS-ADR-000003` | ADR-0002 — UCOS Ω∞ AEOS-001 · PHASE-1 ARCHITECTURAL DETERMINA… | — | ACTIVE |
+| `UCOS-ENG-000018` | EPIC-VAL-002 — Universal Repository Acceptance Engine — Compl… | — | ACTIVE |
 
 ### VOL-004 — IMPLEMENTATION <a id="vol-004"></a>
 
@@ -1181,7 +1184,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-023 — SECURITY-GOVERNANCE <a id="vol-023"></a>
 
 *Auto-discovered volume (metadata-driven, UMB-IMP-001) first declared by 14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md.*  \
-**Category:** SEC · **Status:** ACTIVE · **Artifacts:** 4
+**Category:** SEC · **Status:** ACTIVE · **Artifacts:** 5
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -1189,5 +1192,6 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-SEC-000002` | UCOS Ω∞ — UNIVERSAL SECURITY CONSTITUTION | SECURITY-001 | ACTIVE |
 | `UCOS-SEC-000003` | UCOS Ω∞ — UNIVERSAL SECURITY THEORY | SECURITY-002 | ACTIVE |
 | `UCOS-SEC-000004` | UCOS Ω∞ — UNIVERSAL SECURITY ONTOLOGY | SECURITY-003 | ACTIVE |
+| `UCOS-SEC-000005` | UCOS Ω∞ — UNIVERSAL SECURITY TAXONOMY | SECURITY-004 | ACTIVE |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

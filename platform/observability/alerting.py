@@ -50,9 +50,7 @@ class AlertRule:
         try:
             return bool(self.predicate(observation))
         except Exception as exc:  # noqa: BLE001 — a faulty predicate must fail closed
-            raise AlertError(
-                "alert predicate raised", name=self.name, detail=str(exc)
-            ) from exc
+            raise AlertError("alert predicate raised", name=self.name, detail=str(exc)) from exc
 
 
 @dataclass(frozen=True, slots=True)

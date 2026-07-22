@@ -25,9 +25,12 @@ def test_create_normalizes_and_serializes():
     d = md.to_dict()
     assert d["labels"] == ["a", "b"]
     assert list(d["annotations"]) == ["k1", "k2"]
-    assert md.fingerprint() == ValidationRecordMetadata.create(
-        description="a note", labels=["a", "b"], annotations={"k1": "v1", "k2": "v2"}
-    ).fingerprint()
+    assert (
+        md.fingerprint()
+        == ValidationRecordMetadata.create(
+            description="a note", labels=["a", "b"], annotations={"k1": "v1", "k2": "v2"}
+        ).fingerprint()
+    )
 
 
 def test_empty_metadata_default():

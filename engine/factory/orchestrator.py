@@ -123,9 +123,7 @@ class GenerationOrchestrator:
                 detail=str(exc),
             ) from exc
 
-    def _classify(
-        self, blueprint_id: str, document: Mapping[str, Any]
-    ) -> BlueprintClassification:
+    def _classify(self, blueprint_id: str, document: Mapping[str, Any]) -> BlueprintClassification:
         """Classify from the registered artifact metadata if present, else the doc."""
         artifact = self._registry.artifacts.find(blueprint_id)
         if artifact is not None:

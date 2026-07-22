@@ -207,9 +207,7 @@ def test_discover_filters_by_status_and_family():
     sess = session(auth)
     queued = service.discover_artifacts(sess.session_id, now=1, status=RequestStatus.QUEUED)
     assert req.request_id in {s.request_ref for s in queued}
-    submitted = service.discover_artifacts(
-        sess.session_id, now=1, status=RequestStatus.SUBMITTED
-    )
+    submitted = service.discover_artifacts(sess.session_id, now=1, status=RequestStatus.SUBMITTED)
     assert req.request_id not in {s.request_ref for s in submitted}
     data = service.discover_artifacts(sess.session_id, now=1, family=BlueprintFamily.DATA)
     assert req.request_id in {s.request_ref for s in data}
@@ -354,9 +352,7 @@ def test_evaluate_access_rejects_bad_action_and_unknown_request():
     with pytest.raises(ArtifactServiceError):
         service.evaluate_access(sess.session_id, req.request_id, "lookup", now=1)  # type: ignore[arg-type]
     with pytest.raises(Exception):  # noqa: B017 - registry error for unknown request
-        service.evaluate_access(
-            sess.session_id, "UCOS-GREQ-missing", ExplorerAction.LOOKUP, now=1
-        )
+        service.evaluate_access(sess.session_id, "UCOS-GREQ-missing", ExplorerAction.LOOKUP, now=1)
 
 
 # --------------------------------------------------------------------------- #

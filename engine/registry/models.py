@@ -80,9 +80,7 @@ def _require(record: Mapping[str, Any], key: str, *, at: str) -> Any:
 
 def _as_str(value: Any, *, field_name: str, at: str) -> str:
     if not isinstance(value, str) or not value:
-        raise RegistryValidationError(
-            "expected a non-empty string", field=field_name, at=at
-        )
+        raise RegistryValidationError("expected a non-empty string", field=field_name, at=at)
     return value
 
 
@@ -96,9 +94,7 @@ def _as_str_list(value: Any, *, field_name: str, at: str) -> tuple[str, ...]:
     if value is None:
         return ()
     if not isinstance(value, list) or any(not isinstance(item, str) for item in value):
-        raise RegistryValidationError(
-            "expected an array of strings", field=field_name, at=at
-        )
+        raise RegistryValidationError("expected an array of strings", field=field_name, at=at)
     return tuple(value)
 
 
@@ -170,27 +166,17 @@ class Artifact:
         )
         native = record.get("native_id")
         if native is not None and not isinstance(native, str):
-            raise RegistryValidationError(
-                "native_id must be a string or null", at=uid
-            )
+            raise RegistryValidationError("native_id must be a string or null", at=uid)
         return cls(
             universal_id=uid,
             name=_as_str(_require(record, "name", at=uid), field_name="name", at=uid),
-            volume=_as_str(
-                _require(record, "volume", at=uid), field_name="volume", at=uid
-            ),
+            volume=_as_str(_require(record, "volume", at=uid), field_name="volume", at=uid),
             page_start=_as_int(
                 _require(record, "page_start", at=uid), field_name="page_start", at=uid
             ),
-            page_end=_as_int(
-                _require(record, "page_end", at=uid), field_name="page_end", at=uid
-            ),
-            status=LifecycleStatus.coerce(
-                _require(record, "status", at=uid), context=uid
-            ),
-            version=_as_str(
-                _require(record, "version", at=uid), field_name="version", at=uid
-            ),
+            page_end=_as_int(_require(record, "page_end", at=uid), field_name="page_end", at=uid),
+            status=LifecycleStatus.coerce(_require(record, "status", at=uid), context=uid),
+            version=_as_str(_require(record, "version", at=uid), field_name="version", at=uid),
             path=_as_str(_require(record, "path", at=uid), field_name="path", at=uid),
             native_id=native,
             description=record.get("description") or "",
@@ -230,20 +216,12 @@ class Relationship:
         )
         inverse = record.get("inverse_of")
         if inverse is not None and not isinstance(inverse, str):
-            raise RegistryValidationError(
-                "inverse_of must be a string or null", at=edge_id
-            )
+            raise RegistryValidationError("inverse_of must be a string or null", at=edge_id)
         return cls(
             edge_id=edge_id,
-            source=_as_str(
-                _require(record, "from", at=edge_id), field_name="from", at=edge_id
-            ),
-            target=_as_str(
-                _require(record, "to", at=edge_id), field_name="to", at=edge_id
-            ),
-            type=_as_str(
-                _require(record, "type", at=edge_id), field_name="type", at=edge_id
-            ),
+            source=_as_str(_require(record, "from", at=edge_id), field_name="from", at=edge_id),
+            target=_as_str(_require(record, "to", at=edge_id), field_name="to", at=edge_id),
+            type=_as_str(_require(record, "type", at=edge_id), field_name="type", at=edge_id),
             inverse_of=inverse,
             note=record.get("note") or "",
         )
@@ -281,16 +259,10 @@ class Volume:
             page_end = _as_int(page_end, field_name="page_range_end", at=vid)
         return cls(
             volume_id=vid,
-            serial=_as_int(
-                _require(record, "serial", at=vid), field_name="serial", at=vid
-            ),
+            serial=_as_int(_require(record, "serial", at=vid), field_name="serial", at=vid),
             name=_as_str(_require(record, "name", at=vid), field_name="name", at=vid),
-            category=_as_str(
-                _require(record, "category", at=vid), field_name="category", at=vid
-            ),
-            status=LifecycleStatus.coerce(
-                _require(record, "status", at=vid), context=vid
-            ),
+            category=_as_str(_require(record, "category", at=vid), field_name="category", at=vid),
+            status=LifecycleStatus.coerce(_require(record, "status", at=vid), context=vid),
             description=record.get("description") or "",
             artifact_count=record.get("artifact_count") or 0,
             page_range_start=page_start,

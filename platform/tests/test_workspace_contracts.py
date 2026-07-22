@@ -105,13 +105,14 @@ def test_workspace_member_validation():
 
 
 def test_metadata_normalization_and_validation():
-    md = WorkspaceMetadata.create(
-        description="d", labels=["a", "b"], annotations={"k": "v"}
-    )
+    md = WorkspaceMetadata.create(description="d", labels=["a", "b"], annotations={"k": "v"})
     assert md.has_label("a") and md.to_dict()["annotations"] == {"k": "v"}
-    assert md.fingerprint() == WorkspaceMetadata.create(
-        description="d", labels=["b", "a"], annotations={"k": "v"}
-    ).fingerprint()
+    assert (
+        md.fingerprint()
+        == WorkspaceMetadata.create(
+            description="d", labels=["b", "a"], annotations={"k": "v"}
+        ).fingerprint()
+    )
     assert EMPTY_METADATA.description == ""
     with pytest.raises(WorkspaceMetadataError):
         WorkspaceMetadata.create(description=123)  # type: ignore[arg-type]

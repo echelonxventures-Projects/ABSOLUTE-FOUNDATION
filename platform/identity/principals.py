@@ -74,9 +74,7 @@ class PrincipalRegistry:
         attributes: dict[str, Any] | None = None,
     ) -> Principal:
         """Create (content-addressed) and register a principal in one step."""
-        principal = Principal.create(
-            subject, roles, tenant=tenant, attributes=attributes
-        )
+        principal = Principal.create(subject, roles, tenant=tenant, attributes=attributes)
         return self.register(principal)
 
     def register_all(self, principals: Iterable[Principal]) -> None:

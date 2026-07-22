@@ -65,8 +65,11 @@ class GapReport:
     ) -> GapReport:
         missing = tuple(sorted(f.value for f in missing_facets))
         present = tuple(sorted(f.value for f in present_facets))
-        core = {"subject_ref": subject_ref, "missing_facets": list(missing),
-                "present_facets": list(present)}
+        core = {
+            "subject_ref": subject_ref,
+            "missing_facets": list(missing),
+            "present_facets": list(present),
+        }
         return cls(
             subject_ref=subject_ref,
             missing_facets=missing,
@@ -366,9 +369,7 @@ def roll_up_program(certifications: tuple[SecurityCertification, ...]) -> Progra
     """Roll recorded certifications into a deterministic program certification (pure)."""
     certified = sum(1 for c in certifications if c.is_certified)
     not_certified = sum(1 for c in certifications if not c.is_certified)
-    covered = tuple(
-        sorted({c.certification_class.value for c in certifications if c.is_certified})
-    )
+    covered = tuple(sorted({c.certification_class.value for c in certifications if c.is_certified}))
     if certifications and not_certified == 0:
         decision = CertificationDecision.CERTIFIED
     else:

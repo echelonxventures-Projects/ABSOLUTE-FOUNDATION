@@ -80,12 +80,18 @@ def test_result_for_unregistered_check_rejected():
 def test_report_is_deterministic_and_order_independent():
     reg = _registry()
     r1 = reg.report(
-        {"cache": HealthStatus.HEALTHY, "api-gateway": HealthStatus.HEALTHY,
-         "event-bus": HealthStatus.DEGRADED}
+        {
+            "cache": HealthStatus.HEALTHY,
+            "api-gateway": HealthStatus.HEALTHY,
+            "event-bus": HealthStatus.DEGRADED,
+        }
     )
     r2 = reg.report(
-        {"api-gateway": HealthStatus.HEALTHY, "event-bus": HealthStatus.DEGRADED,
-         "cache": HealthStatus.HEALTHY}
+        {
+            "api-gateway": HealthStatus.HEALTHY,
+            "event-bus": HealthStatus.DEGRADED,
+            "cache": HealthStatus.HEALTHY,
+        }
     )
     assert r1.fingerprint() == r2.fingerprint()
 
@@ -103,8 +109,10 @@ def test_health_result_and_check_validation():
 
 def test_health_report_create_direct():
     report = HealthReport.create(
-        (HealthResult.create("b", HealthStatus.HEALTHY),
-         HealthResult.create("a", HealthStatus.UNHEALTHY))
+        (
+            HealthResult.create("b", HealthStatus.HEALTHY),
+            HealthResult.create("a", HealthStatus.UNHEALTHY),
+        )
     )
     assert report.status is HealthStatus.UNHEALTHY
     # results sorted by name

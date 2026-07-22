@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T17:04:13+00:00",
+  "generated_at": "2026-07-22T05:17:21+00:00",
   "count": 24,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 594,
+      "artifact_count": 596,
       "page_range_start": 1,
-      "page_range_end": 8899,
+      "page_range_end": 8930,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -45,9 +45,9 @@
       "description": "Universal architecture constitutions, catalogs, and engineering foundation.",
       "category": "ARCH",
       "status": "ACTIVE",
-      "artifact_count": 38,
+      "artifact_count": 39,
       "page_range_start": 22,
-      "page_range_end": 5968,
+      "page_range_end": 8924,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-003"
     },
     {
@@ -285,9 +285,9 @@
       "description": "Auto-discovered volume (metadata-driven, UMB-IMP-001) first declared by 14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md.",
       "category": "SEC",
       "status": "ACTIVE",
-      "artifact_count": 4,
+      "artifact_count": 5,
       "page_range_start": 8900,
-      "page_range_end": 8920,
+      "page_range_end": 8934,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-023",
       "discovered": true
     }

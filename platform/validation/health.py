@@ -67,9 +67,7 @@ class ValidationHealth:
 
     __slots__ = ("_registry", "_facade")
 
-    def __init__(
-        self, registry: ValidationRecordRegistry, facade: ValidationFacade
-    ) -> None:
+    def __init__(self, registry: ValidationRecordRegistry, facade: ValidationFacade) -> None:
         if not isinstance(registry, ValidationRecordRegistry):
             raise TypeError("a valid ValidationRecordRegistry is required")
         if not isinstance(facade, ValidationFacade):
@@ -100,12 +98,8 @@ class ValidationHealth:
         evidence_ok = not self.inconsistent_evidence()
         return {
             REGISTRY_CHECK: HealthStatus.HEALTHY,
-            FIDELITY_CHECK: (
-                HealthStatus.HEALTHY if fidelity_ok else HealthStatus.UNHEALTHY
-            ),
-            EVIDENCE_CHECK: (
-                HealthStatus.HEALTHY if evidence_ok else HealthStatus.UNHEALTHY
-            ),
+            FIDELITY_CHECK: (HealthStatus.HEALTHY if fidelity_ok else HealthStatus.UNHEALTHY),
+            EVIDENCE_CHECK: (HealthStatus.HEALTHY if evidence_ok else HealthStatus.UNHEALTHY),
         }
 
     @property

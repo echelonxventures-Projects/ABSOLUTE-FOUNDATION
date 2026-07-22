@@ -55,8 +55,14 @@ def test_integrity_consistent(source):
 
 def _art(uid, **kw):
     base = {
-        "universal_id": uid, "name": uid, "volume": "VOL-000", "page_start": 1,
-        "page_end": 1, "status": "ACTIVE", "version": "1.0.0", "path": "p",
+        "universal_id": uid,
+        "name": uid,
+        "volume": "VOL-000",
+        "page_start": 1,
+        "page_end": 1,
+        "status": "ACTIVE",
+        "version": "1.0.0",
+        "path": "p",
     }
     base.update(kw)
     return Artifact.from_dict(base)
@@ -72,15 +78,28 @@ def test_integrity_detects_all_anomalies():
     graph = RelationshipGraph(
         [
             Relationship.from_dict(
-                {"edge_id": "UEDGE-1", "from": "UCOS-A-000001",
-                 "to": "UCOS-GHOST-000001", "type": "Depends-On"}
+                {
+                    "edge_id": "UEDGE-1",
+                    "from": "UCOS-A-000001",
+                    "to": "UCOS-GHOST-000001",
+                    "type": "Depends-On",
+                }
             )
         ]
     )
     volumes = VolumeRepository(
-        [Volume.from_dict(
-            {"volume_id": "VOL-000", "serial": 0, "name": "V", "category": "IDX",
-             "status": "ACTIVE", "artifact_count": 5})]
+        [
+            Volume.from_dict(
+                {
+                    "volume_id": "VOL-000",
+                    "serial": 0,
+                    "name": "V",
+                    "category": "IDX",
+                    "status": "ACTIVE",
+                    "artifact_count": 5,
+                }
+            )
+        ]
     )
     report = check_integrity(artifacts, graph, volumes)
     assert not report.is_consistent

@@ -303,9 +303,7 @@ class SecurityRegistrySet:
 
     def fingerprint(self) -> str:
         """A deterministic fingerprint over all seven registries in stable order."""
-        return content_hash(
-            [self._registries[kind].to_dict() for kind in all_registry_kinds()]
-        )
+        return content_hash([self._registries[kind].to_dict() for kind in all_registry_kinds()])
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -487,9 +485,7 @@ class SecurityRegistryService:
         )
 
 
-def build_security_registry_service(
-    *, events: EventBus | None = None
-) -> SecurityRegistryService:
+def build_security_registry_service(*, events: EventBus | None = None) -> SecurityRegistryService:
     """Default composition of the Security Registry Runtime (record-only)."""
     return SecurityRegistryService(registries=SecurityRegistrySet(), events=events)
 

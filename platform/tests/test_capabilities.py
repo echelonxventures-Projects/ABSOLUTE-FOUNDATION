@@ -23,9 +23,7 @@ def test_engine_capability_requires_contract():
 
 def test_platform_capability_forbids_contract():
     with pytest.raises(CapabilityError):
-        Capability(
-            "X", "x", CapabilityKind.PLATFORM, engine_contract=ContractRef("e", "1.0.0")
-        )
+        Capability("X", "x", CapabilityKind.PLATFORM, engine_contract=ContractRef("e", "1.0.0"))
 
 
 def test_capability_requires_id():

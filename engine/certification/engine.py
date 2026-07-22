@@ -113,9 +113,7 @@ class CertificationEngine:
                 if f.status.value == "fail" and not f.is_blocking_failure
             )
             status = (
-                CertificationStatus.NOT_CERTIFIED
-                if blocking
-                else CertificationStatus.CERTIFIED
+                CertificationStatus.NOT_CERTIFIED if blocking else CertificationStatus.CERTIFIED
             )
             record = CertificationRecord.create(
                 target_id=subject.target_id,

@@ -85,9 +85,7 @@ def test_inconsistent_evidence_drives_evidence_unhealthy():
     advisory_report, advisory_ev, _ = _surfaced(advisory_subject())
     # Fidelity holds (report matches subject) but the stored evidence is from a different
     # report → evidence-integrity check fails while fidelity passes.
-    reg.record(
-        _record(report=accepted_report, subject=accepted_subject(), evidence=advisory_ev)
-    )
+    reg.record(_record(report=accepted_report, subject=accepted_subject(), evidence=advisory_ev))
     health = ValidationHealth(reg, ValidationFacade())
     assert health.infidelic_records() == ()
     assert health.inconsistent_evidence()

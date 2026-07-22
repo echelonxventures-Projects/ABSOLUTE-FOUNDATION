@@ -151,9 +151,7 @@ class BlueprintProvenance:
         06-IMPLEMENTATION`` edge is materially present (link-4 PRESENT, not BREAK).
         """
         return bool(
-            self.generation_reference
-            and self.generation_artifact_id
-            and self.implementation_target
+            self.generation_reference and self.generation_artifact_id and self.implementation_target
         )
 
     def trace_edge(self) -> dict[str, Any]:

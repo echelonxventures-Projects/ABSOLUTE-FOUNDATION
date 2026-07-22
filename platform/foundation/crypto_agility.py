@@ -228,9 +228,7 @@ class AlgorithmRegistry:
     def active_algorithms(self) -> tuple[HashAlgorithm, ...]:
         """Active algorithms, strongest first (deterministic tie-break by name)."""
         active = [
-            self._algorithms[n]
-            for n in self._order
-            if self._status[n] is AlgorithmStatus.ACTIVE
+            self._algorithms[n] for n in self._order if self._status[n] is AlgorithmStatus.ACTIVE
         ]
         return tuple(sorted(active, key=lambda a: (-a.strength, a.name)))
 

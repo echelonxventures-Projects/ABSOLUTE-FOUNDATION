@@ -275,8 +275,7 @@ def workspace_contract(name: str, description: str = "") -> Contract:
 def default_workspace_contracts() -> tuple[Contract, ...]:
     """The published workspace contracts as concrete :class:`Contract` objects."""
     return tuple(
-        workspace_contract(name, description)
-        for name, description in _WORKSPACE_CONTRACT_NAMES
+        workspace_contract(name, description) for name, description in _WORKSPACE_CONTRACT_NAMES
     )
 
 

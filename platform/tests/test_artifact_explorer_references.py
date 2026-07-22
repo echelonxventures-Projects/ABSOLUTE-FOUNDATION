@@ -25,8 +25,14 @@ import pytest
 def _request(tenant=None):
     reg = GenerationRequestRegistry()
     return reg.create(
-        "artifact-1", "UCOS-BLPR-1", "UCOS-WSPC-1", "arch@x", BlueprintFamily.DATA,
-        submitted_tick=1, tenant=tenant, project_id="UCOS-PROJ-1",
+        "artifact-1",
+        "UCOS-BLPR-1",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.DATA,
+        submitted_tick=1,
+        tenant=tenant,
+        project_id="UCOS-PROJ-1",
     )
 
 
@@ -85,9 +91,12 @@ def test_reference_prefers_provenance_citations():
     assert ref.implementation_target == "platform/generation"
     assert ref.content_hash == "c0ffee"
     assert ref.to_dict()["reference_id"] == ref.reference_id
-    assert ref.fingerprint() == ArtifactReference.create(
-        req, dispatch=_dispatch(req), provenance=_provenance(req)
-    ).fingerprint()
+    assert (
+        ref.fingerprint()
+        == ArtifactReference.create(
+            req, dispatch=_dispatch(req), provenance=_provenance(req)
+        ).fingerprint()
+    )
 
 
 def test_reference_rejects_bad_inputs():
@@ -152,9 +161,12 @@ def test_view_full_projection_and_summary_roundtrip():
     direct = ArtifactSummary.from_request(req, has_dispatch=True, has_provenance=True)
     assert summary.summary_id == direct.summary_id
     assert view.to_dict()["reference"]["reference_id"] == view.reference.reference_id
-    assert view.fingerprint() == ArtifactView.from_request(
-        req, dispatch=_dispatch(req), provenance=_provenance(req)
-    ).fingerprint()
+    assert (
+        view.fingerprint()
+        == ArtifactView.from_request(
+            req, dispatch=_dispatch(req), provenance=_provenance(req)
+        ).fingerprint()
+    )
 
 
 def test_view_bare_request_is_partial():

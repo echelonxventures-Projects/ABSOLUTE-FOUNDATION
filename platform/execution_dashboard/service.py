@@ -320,9 +320,7 @@ class ExecutionDashboardService:
         status: RequestStatus | None = None,
     ) -> DashboardSummary:
         """Compose the dashboard summary (metrics+queue+health) (requires SUMMARIZE)."""
-        access = self._require_access(
-            session_id, DashboardAction.SUMMARIZE, now=now, tenant=tenant
-        )
+        access = self._require_access(session_id, DashboardAction.SUMMARIZE, now=now, tenant=tenant)
         principal = self._authorization.principals.get(access.principal_id)
         requests = self._scoped_requests(principal, tenant, workspace_id, project_id, status)
         summary = self._compose_summary(requests)
@@ -628,9 +626,7 @@ class ExecutionDashboardService:
             if not tenants_isolated(principal.tenant, request.tenant)
         )
 
-    def _scoped_events(
-        self, requests: tuple[GenerationRequest, ...]
-    ) -> tuple[RequestEvent, ...]:
+    def _scoped_events(self, requests: tuple[GenerationRequest, ...]) -> tuple[RequestEvent, ...]:
         """The lifecycle events belonging to the in-scope requests (ordered)."""
         visible = {request.request_id for request in requests}
         return tuple(e for e in self._generation.registry.events if e.request_id in visible)
@@ -639,14 +635,10 @@ class ExecutionDashboardService:
         derived = self._generation.status_of(request.request_id)
         return ExecutionSnapshot.from_request(request, derived)
 
-    def _snapshots(
-        self, requests: tuple[GenerationRequest, ...]
-    ) -> tuple[ExecutionSnapshot, ...]:
+    def _snapshots(self, requests: tuple[GenerationRequest, ...]) -> tuple[ExecutionSnapshot, ...]:
         return tuple(self._snapshot(request) for request in requests)
 
-    def _compose_summary(
-        self, requests: tuple[GenerationRequest, ...]
-    ) -> DashboardSummary:
+    def _compose_summary(self, requests: tuple[GenerationRequest, ...]) -> DashboardSummary:
         metrics = RequestMetrics.from_requests(requests)
         queue = QueueSummary.from_requests(requests)
         health = self._health_snapshot()

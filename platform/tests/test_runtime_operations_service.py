@@ -111,8 +111,16 @@ def test_build_requires_authorization():
 
 @pytest.mark.parametrize(
     "field",
-    ["registry", "planner", "descriptors", "ledger", "authorization", "search", "health",
-     "health_registry"],
+    [
+        "registry",
+        "planner",
+        "descriptors",
+        "ledger",
+        "authorization",
+        "search",
+        "health",
+        "health_registry",
+    ],
 )
 def test_service_rejects_each_invalid_required_component(field):
     auth = build_authorization_service()
@@ -178,7 +186,10 @@ def test_rollback_reversible_and_events():
     auth, service = service_fixture(events=events)
     sess = session(auth)
     rec = service.rollback(
-        sess.session_id, runtime_unit(), certification_record(), now=1,
+        sess.session_id,
+        runtime_unit(),
+        certification_record(),
+        now=1,
         previous=runtime_unit(pkg="b" * 64),
     )
     assert rec.kind is RuntimeOperationKind.ROLLBACK
@@ -427,7 +438,9 @@ def test_annotate_updates_metadata_only():
     auth, service = service_fixture()
     sess, rec = _deploy(auth, service)
     updated = service.annotate(
-        sess.session_id, rec.operation_id, RuntimeOperationMetadata.create(description="note"),
+        sess.session_id,
+        rec.operation_id,
+        RuntimeOperationMetadata.create(description="note"),
         now=2,
     )
     assert updated.metadata.description == "note"
@@ -491,9 +504,13 @@ def test_health_changed_event_emitted_on_induced_fault():
     unit = runtime_unit(runtime_id="UCOS-RUN-two-0123456789abcdef", blueprint="UCOS-BLPR-2")
     divergent = RuntimeFacade().deployment_descriptor(unit, environment="staging")
     infidelic = RuntimeOperationRecord.create(
-        kind=RuntimeOperationKind.DEPLOY, unit=unit,
+        kind=RuntimeOperationKind.DEPLOY,
+        unit=unit,
         certification=certification_record(),
-        deployment=divergent, owner_subject="admin@x", environment="production", tenant="acme",
+        deployment=divergent,
+        owner_subject="admin@x",
+        environment="production",
+        tenant="acme",
     )
     service.registry.record(infidelic)
     # A subsequent governed deploy re-probes health → UNHEALTHY → emits health.changed.

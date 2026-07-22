@@ -108,9 +108,7 @@ class CapabilityCatalog:
 
     def of_kind(self, kind: CapabilityKind) -> tuple[Capability, ...]:
         return tuple(
-            self._capabilities[cid]
-            for cid in self.ids
-            if self._capabilities[cid].kind is kind
+            self._capabilities[cid] for cid in self.ids if self._capabilities[cid].kind is kind
         )
 
     def validate(self) -> None:

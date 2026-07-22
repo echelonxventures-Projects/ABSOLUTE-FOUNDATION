@@ -129,10 +129,7 @@ class CertificationFinding:
 
     @property
     def is_blocking_failure(self) -> bool:
-        return (
-            self.status is CriterionStatus.FAIL
-            and self.severity is CriterionSeverity.BLOCKING
-        )
+        return self.status is CriterionStatus.FAIL and self.severity is CriterionSeverity.BLOCKING
 
     def to_dict(self) -> dict[str, Any]:
         return {

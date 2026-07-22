@@ -306,9 +306,7 @@ class GenerationRequestService:
         if not isinstance(health_registry, HealthRegistry):
             raise RequestServiceError("a valid HealthRegistry is required")
         if observability is not None and not isinstance(observability, ObservabilityService):
-            raise RequestServiceError(
-                "observability must be an ObservabilityService when provided"
-            )
+            raise RequestServiceError("observability must be an ObservabilityService when provided")
         if events is not None and not isinstance(events, EventBus):
             raise RequestServiceError("events must be an EventBus when provided")
         self._registry = registry
@@ -638,17 +636,13 @@ class GenerationRequestService:
 
     # -- selection / context ----------------------------------------------------
 
-    def select_request(
-        self, session_id: str, request_id: str, *, now: int
-    ) -> RequestContext:
+    def select_request(self, session_id: str, request_id: str, *, now: int) -> RequestContext:
         """Select a request and return its runtime context (fail-closed).
 
         Requires INSPECT (READ) access (identity + isolation). Raises
         :class:`RequestAccessError` when access is denied.
         """
-        access = self.evaluate_access(
-            session_id, request_id, RequestAction.INSPECT, now=now
-        )
+        access = self.evaluate_access(session_id, request_id, RequestAction.INSPECT, now=now)
         if not access.granted:
             raise RequestAccessError(
                 "generation request selection denied",
@@ -1004,9 +998,7 @@ def build_generation_request_service(
             "build_generation_request_service requires an AuthorizationService"
         )
     if not isinstance(workspaces, WorkspaceRegistry):
-        raise RequestServiceError(
-            "build_generation_request_service requires a WorkspaceRegistry"
-        )
+        raise RequestServiceError("build_generation_request_service requires a WorkspaceRegistry")
     request_registry = registry if registry is not None else GenerationRequestRegistry()
     dispatch_ledger = dispatch if dispatch is not None else DispatchLedger()
     provenance_ledger = provenance if provenance is not None else ProvenanceLedger()

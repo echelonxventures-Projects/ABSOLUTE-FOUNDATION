@@ -125,7 +125,6 @@ def test_unknown_role_fails_closed():
         eng.resolve(ops, CapabilityGroup.RUNTIME_OPERATIONS)
 
 
-
 def test_engine_exposes_role_registry():
     reg = default_role_registry()
     eng = PermissionEngine(reg)

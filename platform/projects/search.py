@@ -92,9 +92,7 @@ class ProjectSearch:
 
     __slots__ = ("_registry", "_authorization")
 
-    def __init__(
-        self, registry: ProjectRegistry, authorization: AuthorizationService
-    ) -> None:
+    def __init__(self, registry: ProjectRegistry, authorization: AuthorizationService) -> None:
         if not isinstance(registry, ProjectRegistry):
             raise ProjectSearchError("a valid ProjectRegistry is required")
         if not isinstance(authorization, AuthorizationService):

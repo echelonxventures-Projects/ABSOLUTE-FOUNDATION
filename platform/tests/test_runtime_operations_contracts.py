@@ -250,28 +250,48 @@ def test_record_create_rejects_bad_core_fields():
     cert = certification_record()
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind="deploy", unit=unit, certification=cert, deployment=deployment,  # type: ignore[arg-type]
-            owner_subject="o", environment="runtime",
+            kind="deploy",
+            unit=unit,
+            certification=cert,
+            deployment=deployment,  # type: ignore[arg-type]
+            owner_subject="o",
+            environment="runtime",
         )
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit="nope", certification=cert,  # type: ignore[arg-type]
-            deployment=deployment, owner_subject="o", environment="runtime",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit="nope",
+            certification=cert,  # type: ignore[arg-type]
+            deployment=deployment,
+            owner_subject="o",
+            environment="runtime",
         )
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit=unit, certification="nope",  # type: ignore[arg-type]
-            deployment=deployment, owner_subject="o", environment="runtime",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit=unit,
+            certification="nope",  # type: ignore[arg-type]
+            deployment=deployment,
+            owner_subject="o",
+            environment="runtime",
         )
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=cert,
-            deployment=deployment, owner_subject="", environment="runtime",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit=unit,
+            certification=cert,
+            deployment=deployment,
+            owner_subject="",
+            environment="runtime",
         )
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=cert,
-            deployment=deployment, owner_subject="o", environment="",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit=unit,
+            certification=cert,
+            deployment=deployment,
+            owner_subject="o",
+            environment="",
         )
 
 
@@ -282,26 +302,42 @@ def test_record_create_descriptor_consistency_branches():
     # deploy missing deployment
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=cert,
-            owner_subject="o", environment="runtime",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit=unit,
+            certification=cert,
+            owner_subject="o",
+            environment="runtime",
         )
     # deploy carrying a rollback
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=cert,
-            deployment=deployment, rollback=rb, owner_subject="o", environment="runtime",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit=unit,
+            certification=cert,
+            deployment=deployment,
+            rollback=rb,
+            owner_subject="o",
+            environment="runtime",
         )
     # rollback missing rollback
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.ROLLBACK, unit=unit, certification=cert,
-            owner_subject="o", environment="runtime",
+            kind=RuntimeOperationKind.ROLLBACK,
+            unit=unit,
+            certification=cert,
+            owner_subject="o",
+            environment="runtime",
         )
     # rollback carrying a deployment
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.ROLLBACK, unit=unit, certification=cert,
-            rollback=rb, deployment=deployment, owner_subject="o", environment="runtime",
+            kind=RuntimeOperationKind.ROLLBACK,
+            unit=unit,
+            certification=cert,
+            rollback=rb,
+            deployment=deployment,
+            owner_subject="o",
+            environment="runtime",
         )
 
 
@@ -311,8 +347,12 @@ def test_record_create_descriptor_unit_mismatch():
     other_deployment = _FACADE.deployment_descriptor(other_unit)
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=certification_record(),
-            deployment=other_deployment, owner_subject="o", environment="runtime",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit=unit,
+            certification=certification_record(),
+            deployment=other_deployment,
+            owner_subject="o",
+            environment="runtime",
         )
 
 
@@ -321,13 +361,22 @@ def test_record_create_rejects_bad_optional_fields():
     cert = certification_record()
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=cert,
-            deployment=deployment, owner_subject="o", environment="runtime", request_ref="",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit=unit,
+            certification=cert,
+            deployment=deployment,
+            owner_subject="o",
+            environment="runtime",
+            request_ref="",
         )
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=cert,
-            deployment=deployment, owner_subject="o", environment="runtime",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit=unit,
+            certification=cert,
+            deployment=deployment,
+            owner_subject="o",
+            environment="runtime",
             metadata="nope",  # type: ignore[arg-type]
         )
 
@@ -337,15 +386,24 @@ def test_record_create_rejects_bad_previous_unit():
     cert = certification_record()
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.ROLLBACK, unit=unit, certification=cert, rollback=rb,
-            owner_subject="o", environment="runtime", previous_unit="nope",  # type: ignore[arg-type]
+            kind=RuntimeOperationKind.ROLLBACK,
+            unit=unit,
+            certification=cert,
+            rollback=rb,
+            owner_subject="o",
+            environment="runtime",
+            previous_unit="nope",  # type: ignore[arg-type]
         )
     # deploy must not carry a previous unit
     _, deployment = _deploy_descriptor(unit=unit)
     with pytest.raises(RuntimeOperationsContractError):
         RuntimeOperationRecord.create(
-            kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=cert,
-            deployment=deployment, owner_subject="o", environment="runtime",
+            kind=RuntimeOperationKind.DEPLOY,
+            unit=unit,
+            certification=cert,
+            deployment=deployment,
+            owner_subject="o",
+            environment="runtime",
             previous_unit=runtime_unit(pkg="b" * 64),
         )
 

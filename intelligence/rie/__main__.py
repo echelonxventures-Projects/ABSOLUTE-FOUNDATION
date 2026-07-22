@@ -4,6 +4,7 @@
     python -m intelligence.rie verify     # prove deterministic regeneration
     python -m intelligence.rie snapshot   # print the compact intelligence snapshot
     python -m intelligence.rie answer      # answer the success-criteria questions
+    python -m intelligence.rie portal      # generate the Repository Intelligence Portal (DOC-003)
 """
 
 from __future__ import annotations
@@ -66,6 +67,23 @@ def _cmd_answer(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_portal(args: argparse.Namespace) -> int:
+    # Lazy import: the RIE core stays standard-library-only (TP-04); the portal view
+    # layer (which composes engine.acceptance) is only loaded when explicitly invoked.
+    from pathlib import Path as _Path
+
+    from intelligence.portal import RepositoryIntelligencePortal
+
+    eng = _engine(args)
+    portal = RepositoryIntelligencePortal(eng)
+    out_dir = _Path(args.out) if args.out else (eng.config.output_dir / "portal")
+    written = portal.write_all(out_dir)
+    print(f"RIE portal: generated {len(written)} pages under {out_dir}:")
+    for w in written:
+        print(f"  - {_Path(w).name}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="intelligence.rie", description="Repository Intelligence Engine")
     parser.add_argument("--repo", help="repository root (default: auto-resolve)")
@@ -74,6 +92,9 @@ def main(argv: list[str] | None = None) -> int:
                      ("snapshot", _cmd_snapshot), ("answer", _cmd_answer)):
         p = sub.add_parser(name)
         p.set_defaults(func=fn)
+    p_portal = sub.add_parser("portal", help="generate the Repository Intelligence Portal (DOC-003)")
+    p_portal.add_argument("--out", help="output directory (default: <repo>/intelligence/portal)")
+    p_portal.set_defaults(func=_cmd_portal)
     args = parser.parse_args(argv)
     return int(args.func(args))
 

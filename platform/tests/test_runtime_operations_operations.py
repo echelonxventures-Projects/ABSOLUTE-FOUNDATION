@@ -68,7 +68,9 @@ def test_plan_deploy():
 def test_plan_rollback_carries_reversibility_proof():
     planner = RuntimeOperationPlanner()
     plan = planner.plan_rollback(
-        runtime_unit(), certification_record(), owner_subject="op@x",
+        runtime_unit(),
+        certification_record(),
+        owner_subject="op@x",
         previous=runtime_unit(pkg="b" * 64),
     )
     assert plan.kind is RuntimeOperationKind.ROLLBACK

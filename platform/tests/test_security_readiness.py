@@ -108,8 +108,11 @@ def test_zones_and_controls_are_policy_configured_not_compiled_ceilings():
 
     service = build_security_zone_service()
     future = service.assess(
-        POSTURE_TARGET_ZONE, "ZONE-99-FUTURE", RollupState.IN_PROGRESS,
-        rationale="future security model", evaluated_at=1,
+        POSTURE_TARGET_ZONE,
+        "ZONE-99-FUTURE",
+        RollupState.IN_PROGRESS,
+        rationale="future security model",
+        evaluated_at=1,
     )
     assert future.target == "ZONE-99-FUTURE"
 
@@ -143,8 +146,11 @@ def test_certification_is_evidence_backed_and_non_constitutive():
 
     with pytest.raises(SecurityCertificationError):
         service.certify(
-            CertificationClass.SECURITY, "UCOS-1", CertificationDecision.CERTIFIED,
-            basis="b", certified_at=1,
+            CertificationClass.SECURITY,
+            "UCOS-1",
+            CertificationDecision.CERTIFIED,
+            basis="b",
+            certified_at=1,
         )
 
 

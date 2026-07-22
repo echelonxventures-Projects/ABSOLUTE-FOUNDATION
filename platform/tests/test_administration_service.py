@@ -137,8 +137,12 @@ def test_component_property_getters():
 # --------------------------------------------------------------------------- #
 
 
-def _target(scope=AdministrativeScope.PLATFORM, domain=AdministrativeDomain.CONFIGURATION,
-            identifier="platform", tenant=None):
+def _target(
+    scope=AdministrativeScope.PLATFORM,
+    domain=AdministrativeDomain.CONFIGURATION,
+    identifier="platform",
+    tenant=None,
+):
     return AdministrativeTarget.create(scope, domain, identifier, tenant=tenant)
 
 
@@ -329,8 +333,13 @@ def test_administrator_assigns_and_revokes_admins_with_events():
     auth, service = _service(events=events)
     session = _session(auth, Role.PLATFORM_ADMINISTRATOR, subject="admin@x")
     member = service.assign_administrator(
-        session.session_id, AdministrativeScope.TENANT, "acme", "UCOS-PRIN-x", "x@x",
-        now=1, tenant="acme",
+        session.session_id,
+        AdministrativeScope.TENANT,
+        "acme",
+        "UCOS-PRIN-x",
+        "x@x",
+        now=1,
+        tenant="acme",
     )
     assert member.principal_id == "UCOS-PRIN-x"
     revoked = service.revoke_administrator(
@@ -346,8 +355,13 @@ def test_assign_administrator_denied_cross_tenant():
     session = _session(auth, Role.PLATFORM_ADMINISTRATOR, subject="admin@x", tenant="acme")
     with pytest.raises(AdministrationAccessError):
         service.assign_administrator(
-            session.session_id, AdministrativeScope.TENANT, "beta", "UCOS-PRIN-x", "x@x",
-            now=1, tenant="beta",
+            session.session_id,
+            AdministrativeScope.TENANT,
+            "beta",
+            "UCOS-PRIN-x",
+            "x@x",
+            now=1,
+            tenant="beta",
         )
 
 
@@ -356,7 +370,11 @@ def test_assign_administrator_denied_for_unauthorized_role():
     session = _session(auth, Role.DEVELOPER, subject="dev@x")
     with pytest.raises(AdministrationAccessError):
         service.assign_administrator(
-            session.session_id, AdministrativeScope.PLATFORM, "platform", "UCOS-PRIN-x", "x@x",
+            session.session_id,
+            AdministrativeScope.PLATFORM,
+            "platform",
+            "UCOS-PRIN-x",
+            "x@x",
             now=1,
         )
 
@@ -384,8 +402,12 @@ def test_administrator_sets_and_reads_operational_state():
     auth, service = _service(events=events)
     session = _session(auth, Role.PLATFORM_ADMINISTRATOR, subject="admin@x")
     state = service.set_operational_state(
-        session.session_id, AdministrativeScope.TENANT, "acme", OperationalState.SUSPENDED,
-        now=1, tenant="acme",
+        session.session_id,
+        AdministrativeScope.TENANT,
+        "acme",
+        OperationalState.SUSPENDED,
+        now=1,
+        tenant="acme",
     )
     assert state is OperationalState.SUSPENDED
     read = service.operational_state(
@@ -402,9 +424,10 @@ def test_activation_uses_activate_action_and_reads_none_when_absent():
         session.session_id, AdministrativeScope.PLATFORM, "platform", OperationalState.ACTIVE, now=1
     )
     # An absent resource reads as None (authorized inspect, no stored state).
-    assert service.operational_state(
-        session.session_id, AdministrativeScope.PLATFORM, "other", now=2
-    ) is None
+    assert (
+        service.operational_state(session.session_id, AdministrativeScope.PLATFORM, "other", now=2)
+        is None
+    )
 
 
 def test_set_operational_state_rejects_bad_state():
@@ -412,7 +435,11 @@ def test_set_operational_state_rejects_bad_state():
     session = _session(auth, Role.PLATFORM_ADMINISTRATOR)
     with pytest.raises(AdministrationServiceError):
         service.set_operational_state(
-            session.session_id, AdministrativeScope.PLATFORM, "platform", "suspended", now=1  # type: ignore[arg-type]
+            session.session_id,
+            AdministrativeScope.PLATFORM,
+            "platform",
+            "suspended",
+            now=1,  # type: ignore[arg-type]
         )
 
 
@@ -421,8 +448,11 @@ def test_set_operational_state_denied_for_auditor():
     session = _session(auth, Role.AUDITOR, subject="aud@x")
     with pytest.raises(AdministrationAccessError):
         service.set_operational_state(
-            session.session_id, AdministrativeScope.PLATFORM, "platform",
-            OperationalState.SUSPENDED, now=1,
+            session.session_id,
+            AdministrativeScope.PLATFORM,
+            "platform",
+            OperationalState.SUSPENDED,
+            now=1,
         )
 
 
@@ -454,7 +484,11 @@ def test_evidence_is_deterministic_and_serializable():
         session = _session(auth, Role.PLATFORM_ADMINISTRATOR, subject="admin@x")
         service.set_configuration(session.session_id, AdministrativeScope.PLATFORM, "k", "v", now=1)
         service.assign_administrator(
-            session.session_id, AdministrativeScope.PLATFORM, "platform", "UCOS-PRIN-x", "x@x",
+            session.session_id,
+            AdministrativeScope.PLATFORM,
+            "platform",
+            "UCOS-PRIN-x",
+            "x@x",
             now=2,
         )
         return service.evidence().fingerprint()

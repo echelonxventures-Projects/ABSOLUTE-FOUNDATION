@@ -51,11 +51,15 @@ def test_identity_contract_requires_name():
 
 def test_access_request_is_content_addressed_and_deterministic():
     a = AccessRequest.create(
-        "UCOS-PRIN-x", frozenset({Role.DEVELOPER}), CapabilityGroup.GENERATION_REQUESTS,
+        "UCOS-PRIN-x",
+        frozenset({Role.DEVELOPER}),
+        CapabilityGroup.GENERATION_REQUESTS,
         Permission.EXECUTE,
     )
     b = AccessRequest.create(
-        "UCOS-PRIN-x", frozenset({Role.DEVELOPER}), CapabilityGroup.GENERATION_REQUESTS,
+        "UCOS-PRIN-x",
+        frozenset({Role.DEVELOPER}),
+        CapabilityGroup.GENERATION_REQUESTS,
         Permission.EXECUTE,
     )
     assert a.request_id == b.request_id
@@ -112,8 +116,12 @@ def test_access_decision_validation():
 
 def test_access_decision_to_dict_roundtrip_fields():
     req = AccessRequest.create(
-        "p", frozenset({Role.PARTNER}), CapabilityGroup.API_ACCESS, Permission.EXECUTE,
-        tenant="ws-1", resource="res-1",
+        "p",
+        frozenset({Role.PARTNER}),
+        CapabilityGroup.API_ACCESS,
+        Permission.EXECUTE,
+        tenant="ws-1",
+        resource="res-1",
     )
     dec = AccessDecision.create(
         req, Decision.PERMIT, "rbac-grant", obligations=frozenset({"tenant-scoped"})
@@ -123,7 +131,6 @@ def test_access_decision_to_dict_roundtrip_fields():
     assert d["obligations"] == ["tenant-scoped"]
     assert d["request"]["tenant"] == "ws-1"
     assert d["request"]["resource"] == "res-1"
-
 
 
 def test_identity_contract_normalises_platform_error(monkeypatch):

@@ -127,9 +127,7 @@ class BlueprintCatalog:
     ) -> tuple[CatalogEntry, ...]:
         """Every admissible catalog entry (optionally scoped), in stable (id) order."""
         result: list[CatalogEntry] = []
-        for blueprint in self._visible(
-            workspace_id=workspace_id, tenant=tenant, family=family
-        ):
+        for blueprint in self._visible(workspace_id=workspace_id, tenant=tenant, family=family):
             if self._provenance.has(blueprint.blueprint_id):
                 result.append(
                     CatalogEntry(

@@ -232,9 +232,7 @@ def test_commit_error_paths():
         reg.commit(stray)
     # committed mint disagrees with a sealed key on opaque
     reg.mint("A", "k2")
-    conflicting = IdentityMint(
-        DurableIdentity.adopt("A", "k2", _FAKE_OPAQUE), MintState.PREPARED
-    )
+    conflicting = IdentityMint(DurableIdentity.adopt("A", "k2", _FAKE_OPAQUE), MintState.PREPARED)
     with pytest.raises(IdentityCollisionError):
         reg.commit(conflicting)
 
@@ -243,9 +241,7 @@ def test_commit_disagrees_with_pending_fails_closed():
     reg = IdentityRegistry()
     reg.prepare("A", "k1")  # pending opaque == compute("A","k1")
     # A mint for the same ref but a different opaque disagrees with the pending one.
-    conflicting = IdentityMint(
-        DurableIdentity.adopt("A", "k1", _FAKE_OPAQUE), MintState.PREPARED
-    )
+    conflicting = IdentityMint(DurableIdentity.adopt("A", "k1", _FAKE_OPAQUE), MintState.PREPARED)
     with pytest.raises(IdentityCollisionError):
         reg.commit(conflicting)
 

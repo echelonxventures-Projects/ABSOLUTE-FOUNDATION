@@ -340,9 +340,7 @@ def _secret_env(unit: RuntimeUnit, name: str) -> list[dict[str, Any]]:
     return [
         {
             "name": binding.name,
-            "valueFrom": {
-                "secretKeyRef": {"name": f"{name}-secrets", "key": binding.name}
-            },
+            "valueFrom": {"secretKeyRef": {"name": f"{name}-secrets", "key": binding.name}},
         }
         for binding in unit.secrets
     ]
@@ -351,9 +349,7 @@ def _secret_env(unit: RuntimeUnit, name: str) -> list[dict[str, Any]]:
 def _ensure_deployable(unit: RuntimeUnit) -> None:
     """Refuse to generate a deployment for an unpinned or empty runtime unit (§8)."""
     if not unit.package_sha256:
-        raise DeploymentError(
-            "runtime unit has no pinned package hash", runtime_id=unit.runtime_id
-        )
+        raise DeploymentError("runtime unit has no pinned package hash", runtime_id=unit.runtime_id)
     if not unit.dependency_closure:
         raise DeploymentError(
             "runtime unit has an empty dependency closure", runtime_id=unit.runtime_id

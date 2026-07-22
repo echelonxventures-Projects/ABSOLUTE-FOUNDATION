@@ -116,9 +116,7 @@ class DerivationContract:
         known = set(names)
         for source in self.identity_sources:
             if source not in known:
-                raise DerivationError(
-                    "identity source is not a declared input", source=source
-                )
+                raise DerivationError("identity source is not a declared input", source=source)
         # Non-mixing (AIF-L20): a derived value may never seed identity determinism.
         for inp in self.inputs:
             if inp.name in self.identity_sources and inp.kind is InputKind.DERIVED:
@@ -130,9 +128,7 @@ class DerivationContract:
             if node not in known and node != self.output_name:
                 raise DerivationError("dependency references an unknown node", node=node)
             if depends_on not in known and depends_on != self.output_name:
-                raise DerivationError(
-                    "dependency references an unknown node", node=depends_on
-                )
+                raise DerivationError("dependency references an unknown node", node=depends_on)
 
     @property
     def input_names(self) -> tuple[str, ...]:

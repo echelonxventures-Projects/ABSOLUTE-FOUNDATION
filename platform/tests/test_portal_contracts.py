@@ -82,7 +82,10 @@ def test_surface_create_rejects_bad_inputs():
         PortalSurface.create("t", CapabilityGroup.API_ACCESS, PortalSection.MAIN, "rel")
     with pytest.raises(PortalContractError):
         PortalSurface.create(
-            "t", CapabilityGroup.API_ACCESS, PortalSection.MAIN, "/x",
+            "t",
+            CapabilityGroup.API_ACCESS,
+            PortalSection.MAIN,
+            "/x",
             required_permission="R",  # type: ignore[arg-type]
         )
 

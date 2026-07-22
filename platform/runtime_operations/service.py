@@ -528,9 +528,7 @@ class RuntimeOperationsService:
         self._metric_counter(
             METRIC_DEPLOYS if record.kind is RuntimeOperationKind.DEPLOY else METRIC_ROLLBACKS
         )
-        self._metric_histogram(
-            METRIC_CLOSURE_SIZE, float(len(record.unit.dependency_closure))
-        )
+        self._metric_histogram(METRIC_CLOSURE_SIZE, float(len(record.unit.dependency_closure)))
         self._emit_health_change()
         return record
 
@@ -1040,9 +1038,7 @@ def build_runtime_operations_service(
     operation_ledger = ledger if ledger is not None else RuntimeOperationLedger()
     descriptors = DescriptorCatalog(operation_registry)
     search = RuntimeOperationSearch(operation_registry, authorization)
-    health = RuntimeOperationsHealth(
-        operation_registry, operation_ledger, operation_planner.facade
-    )
+    health = RuntimeOperationsHealth(operation_registry, operation_ledger, operation_planner.facade)
     health_registry = HealthRegistry()
     for check in runtime_operations_health_checks():
         health_registry.register(check)

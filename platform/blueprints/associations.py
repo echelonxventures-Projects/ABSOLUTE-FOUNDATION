@@ -79,9 +79,7 @@ class BlueprintAssociation:
         if not isinstance(blueprint_id, str) or not blueprint_id:
             raise BlueprintAssociationError("association requires a blueprint_id")
         if not isinstance(kind, BlueprintAssociationKind):
-            raise BlueprintAssociationError(
-                "association kind must be a BlueprintAssociationKind"
-            )
+            raise BlueprintAssociationError("association kind must be a BlueprintAssociationKind")
         if not isinstance(ref_id, str) or not ref_id:
             raise BlueprintAssociationError(
                 "association requires a ref_id", blueprint_id=blueprint_id
@@ -197,9 +195,7 @@ class BlueprintAssociationRegistry:
     @property
     def blueprint_ids(self) -> tuple[str, ...]:
         """Every blueprint id that currently has at least one association (stable order)."""
-        return tuple(
-            bid for bid in sorted(self._by_blueprint) if self._by_blueprint[bid]
-        )
+        return tuple(bid for bid in sorted(self._by_blueprint) if self._by_blueprint[bid])
 
     @property
     def events(self) -> tuple[BlueprintAssociationEvent, ...]:
@@ -223,9 +219,7 @@ class BlueprintAssociationRegistry:
     def fingerprint(self) -> str:
         return content_hash(self.to_dict())
 
-    def _record(
-        self, association: BlueprintAssociation, action: str, tick: int
-    ) -> None:
+    def _record(self, association: BlueprintAssociation, action: str, tick: int) -> None:
         self._log.append(
             BlueprintAssociationEvent(
                 sequence=len(self._log),

@@ -171,9 +171,10 @@ def test_project_to_dict_and_fingerprint_roundtrip():
     assert d["workspace_id"] == "UCOS-WSPC-1"
     assert d["tenant"] == "acme"
     assert d["status"] == "active"
-    assert p.fingerprint() == Project.create(
-        "alpha", "Alpha", "UCOS-WSPC-1", "dev@x", tenant="acme"
-    ).fingerprint()
+    assert (
+        p.fingerprint()
+        == Project.create("alpha", "Alpha", "UCOS-WSPC-1", "dev@x", tenant="acme").fingerprint()
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -190,15 +191,22 @@ def test_association_id_is_content_addressed():
 
 def test_association_id_differs_by_project_kind_ref():
     base = ProjectAssociation.create("UCOS-PROJ-1", AssociationKind.BLUEPRINT, "BP-1")
-    assert base.association_id != ProjectAssociation.create(
-        "UCOS-PROJ-2", AssociationKind.BLUEPRINT, "BP-1"
-    ).association_id
-    assert base.association_id != ProjectAssociation.create(
-        "UCOS-PROJ-1", AssociationKind.REQUEST, "BP-1"
-    ).association_id
-    assert base.association_id != ProjectAssociation.create(
-        "UCOS-PROJ-1", AssociationKind.BLUEPRINT, "BP-2"
-    ).association_id
+    assert (
+        base.association_id
+        != ProjectAssociation.create(
+            "UCOS-PROJ-2", AssociationKind.BLUEPRINT, "BP-1"
+        ).association_id
+    )
+    assert (
+        base.association_id
+        != ProjectAssociation.create("UCOS-PROJ-1", AssociationKind.REQUEST, "BP-1").association_id
+    )
+    assert (
+        base.association_id
+        != ProjectAssociation.create(
+            "UCOS-PROJ-1", AssociationKind.BLUEPRINT, "BP-2"
+        ).association_id
+    )
 
 
 @pytest.mark.parametrize(
@@ -254,14 +262,15 @@ def test_project_contract_builder_validates():
 
 
 def test_metadata_create_normalizes_and_is_deterministic():
-    md = ProjectMetadata.create(
-        description="d", labels=["a", "b"], annotations={"k": "v"}
-    )
+    md = ProjectMetadata.create(description="d", labels=["a", "b"], annotations={"k": "v"})
     assert md.has_label("a")
     assert md.to_dict()["labels"] == ["a", "b"]
-    assert md.fingerprint() == ProjectMetadata.create(
-        description="d", labels=["b", "a"], annotations={"k": "v"}
-    ).fingerprint()
+    assert (
+        md.fingerprint()
+        == ProjectMetadata.create(
+            description="d", labels=["b", "a"], annotations={"k": "v"}
+        ).fingerprint()
+    )
 
 
 def test_metadata_empty_default():

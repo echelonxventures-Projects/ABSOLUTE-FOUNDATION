@@ -16,6 +16,29 @@ deterministic descriptors (§5), produces reversible checkpoint-based rollback
 
 Tasks: TASK-000034 (assembly engine), TASK-000035 (deployment + rollback),
 TASK-000036 (provisional-state disclosure), TASK-000037 (assembly validation).
+
+EPIC-006 (Universal Runtime Composition Engine) extends this package additively:
+it **composes existing, already-assembled** :class:`RuntimeUnit` "Universes" into a
+deterministic, bounded, acyclic :class:`RuntimeComposition` /
+:class:`RuntimeOrchestration` (RUNTIME-013). It reuses the assembly output, the
+compiler's cycle/topological primitives, the Foundation observability, and the
+EC-1 disclosure verbatim, and adds **no** duplicate assembly, dependency, or
+execution logic. Tasks: TASK-000038 (composition graph + dependency resolution),
+TASK-000039 (context + reference-frame resolution), TASK-000040 (execution
+planner), TASK-000041 (composition engine + dynamic composition), TASK-000042
+(runtime orchestration).
+
+EPIC-RTE-002 (Universal Runtime Execution Platform) extends this package further,
+additively, in the :mod:`engine.runtime.execution` subpackage: it models execution
+as a deterministic, resumable, observable state machine over an existing
+:class:`RuntimeComposition` and its recorded :class:`ExecutionPlan`. It reuses the
+composition, plan, graph, context, federation, disclosure, and Foundation
+observability capabilities **verbatim** and adds **no** duplicate runtime logic; it
+executes nothing and holds engineering-execution authority only. See
+:mod:`engine.runtime.execution` for its public API (scheduler, coordinator,
+lifecycle, monitoring, recovery, continuation, checkpointing, replay, rollback,
+isolation, federation, authorization, auditing, metrics, health, diagnostics,
+state, snapshot, persistence, and replay validation).
 """
 
 from __future__ import annotations
@@ -29,6 +52,21 @@ from engine.runtime.assembly import (
     SecretBinding,
     assemble,
     k8s_name,
+)
+from engine.runtime.composition import (
+    RUNTIME_COMPOSITION_FORMAT,
+    RuntimeComposer,
+    RuntimeComposition,
+    Universe,
+    compose,
+)
+from engine.runtime.context import (
+    DEFAULT_CONTEXT,
+    Federation,
+    ReferenceFrame,
+    RuntimeContext,
+    resolve_contexts,
+    resolve_reference_frames,
 )
 from engine.runtime.deploy import (
     ROLLBACK_STRATEGY,
@@ -49,14 +87,35 @@ from engine.runtime.disclosure import (
     require_disclosure,
 )
 from engine.runtime.errors import (
+    ContextResolutionError,
     DependencyClosureError,
     DeploymentError,
     DisclosureError,
+    ExecutionPlanError,
+    OrchestrationError,
     ProvenanceValidationError,
+    ReferenceFrameError,
     RuntimeAssemblyError,
+    RuntimeCompositionError,
+    RuntimeGraphError,
     SBOMValidationError,
     SecretExposureError,
     SignatureValidationError,
+)
+from engine.runtime.graph import DEPENDS_ON, RuntimeGraph
+from engine.runtime.orchestration import (
+    ORCHESTRATION_FORMAT,
+    RuntimeOrchestration,
+    orchestrate,
+    orchestration_of,
+)
+from engine.runtime.planner import (
+    COORDINATION_CLASSES,
+    DEFAULT_COORDINATION,
+    EXECUTION_PLAN_FORMAT,
+    ExecutionPlan,
+    PlanStep,
+    plan_execution,
 )
 
 __all__ = [
@@ -94,4 +153,40 @@ __all__ = [
     "SecretExposureError",
     "DisclosureError",
     "DeploymentError",
+    # ---- EPIC-006 — Universal Runtime Composition Engine ----
+    # graph
+    "RuntimeGraph",
+    "DEPENDS_ON",
+    # context + reference frames
+    "RuntimeContext",
+    "Federation",
+    "ReferenceFrame",
+    "resolve_contexts",
+    "resolve_reference_frames",
+    "DEFAULT_CONTEXT",
+    # execution planner
+    "ExecutionPlan",
+    "PlanStep",
+    "plan_execution",
+    "COORDINATION_CLASSES",
+    "DEFAULT_COORDINATION",
+    "EXECUTION_PLAN_FORMAT",
+    # composition + dynamic composition
+    "Universe",
+    "RuntimeComposition",
+    "compose",
+    "RuntimeComposer",
+    "RUNTIME_COMPOSITION_FORMAT",
+    # orchestration
+    "RuntimeOrchestration",
+    "orchestrate",
+    "orchestration_of",
+    "ORCHESTRATION_FORMAT",
+    # composition errors
+    "RuntimeCompositionError",
+    "RuntimeGraphError",
+    "ContextResolutionError",
+    "ReferenceFrameError",
+    "ExecutionPlanError",
+    "OrchestrationError",
 ]

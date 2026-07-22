@@ -51,9 +51,7 @@ class ProjectHealth:
 
     __slots__ = ("_registry", "_associations")
 
-    def __init__(
-        self, registry: ProjectRegistry, associations: AssociationRegistry
-    ) -> None:
+    def __init__(self, registry: ProjectRegistry, associations: AssociationRegistry) -> None:
         if not isinstance(registry, ProjectRegistry):
             raise TypeError("a valid ProjectRegistry is required")
         if not isinstance(associations, AssociationRegistry):
@@ -63,18 +61,14 @@ class ProjectHealth:
 
     def orphaned_association_projects(self) -> tuple[str, ...]:
         """Project ids that have associations but are not registered (integrity faults)."""
-        return tuple(
-            pid for pid in self._associations.project_ids if pid not in self._registry
-        )
+        return tuple(pid for pid in self._associations.project_ids if pid not in self._registry)
 
     def probe(self) -> dict[str, HealthStatus]:
         """Compute deterministic probe results for the project health checks."""
         integrity_ok = not self.orphaned_association_projects()
         return {
             REGISTRY_CHECK: HealthStatus.HEALTHY,
-            INTEGRITY_CHECK: (
-                HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY
-            ),
+            INTEGRITY_CHECK: (HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY),
         }
 
     @property

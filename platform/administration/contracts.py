@@ -229,8 +229,7 @@ _ADMINISTRATION_CONTRACT_NAMES: tuple[tuple[str, str], ...] = (
 
 #: Immutable references to the published administration contracts (name + version).
 ADMINISTRATION_CONTRACTS: tuple[ContractRef, ...] = tuple(
-    ContractRef(name, ADMINISTRATION_CONTRACT_VERSION)
-    for name, _ in _ADMINISTRATION_CONTRACT_NAMES
+    ContractRef(name, ADMINISTRATION_CONTRACT_VERSION) for name, _ in _ADMINISTRATION_CONTRACT_NAMES
 )
 
 

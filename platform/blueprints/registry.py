@@ -140,9 +140,7 @@ class BlueprintRegistry:
             blueprints = tuple(b for b in blueprints if b.status is status)
         return blueprints
 
-    def transition(
-        self, blueprint_id: str, target: BlueprintStatus, *, tick: int
-    ) -> Blueprint:
+    def transition(self, blueprint_id: str, target: BlueprintStatus, *, tick: int) -> Blueprint:
         """Apply a lifecycle transition (fail-closed) and record the event."""
         blueprint = self.get(blueprint_id)
         validate_transition(blueprint.status, target)
@@ -188,9 +186,7 @@ class BlueprintRegistry:
         """The current (head) version of a blueprint (fail-closed if never versioned)."""
         lineage = self._lineages.get(blueprint_id)
         if lineage is None:
-            raise BlueprintRegistryError(
-                "blueprint has no versions", blueprint_id=blueprint_id
-            )
+            raise BlueprintRegistryError("blueprint has no versions", blueprint_id=blueprint_id)
         return lineage.head()
 
     def version_count(self, blueprint_id: str) -> int:
@@ -207,9 +203,7 @@ class BlueprintRegistry:
         return {
             "blueprint_count": len(self._by_id),
             "blueprints": [self._by_id[bid].to_dict() for bid in self.ids],
-            "lineages": [
-                self._lineages[bid].to_dict() for bid in sorted(self._lineages)
-            ],
+            "lineages": [self._lineages[bid].to_dict() for bid in sorted(self._lineages)],
         }
 
     def fingerprint(self) -> str:

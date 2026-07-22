@@ -48,9 +48,7 @@ def bootstrap_workspace(
     auth = authorization if authorization is not None else bootstrap_identity(context)
     obs = observability if observability is not None else bootstrap_observability(context)
 
-    service = build_workspace_service(
-        authorization=auth, observability=obs, events=context.events
-    )
+    service = build_workspace_service(authorization=auth, observability=obs, events=context.events)
 
     # Cross-runtime health integration: register workspace checks into L8 (idempotent).
     for check in workspace_health_checks():

@@ -158,13 +158,17 @@ class PublishedPackage:
         _cross_check_hash(package_sha256, record, signature, root)
 
         artifacts_root = root / "artifacts"
-        artifact_files = tuple(
-            sorted(
-                p.relative_to(artifacts_root).as_posix()
-                for p in artifacts_root.rglob("*")
-                if p.is_file()
+        artifact_files = (
+            tuple(
+                sorted(
+                    p.relative_to(artifacts_root).as_posix()
+                    for p in artifacts_root.rglob("*")
+                    if p.is_file()
+                )
             )
-        ) if artifacts_root.is_dir() else ()
+            if artifacts_root.is_dir()
+            else ()
+        )
 
         return cls(
             blueprint_id=blueprint_id,
@@ -357,9 +361,7 @@ def _validate_provenance(package: PublishedPackage) -> tuple[str, ...]:
     return chain
 
 
-def _extract_chain(
-    payload: Mapping[str, Any], source: str, blueprint_id: str
-) -> tuple[str, ...]:
+def _extract_chain(payload: Mapping[str, Any], source: str, blueprint_id: str) -> tuple[str, ...]:
     provenance = payload.get("provenance")
     if not isinstance(provenance, Mapping):
         raise ProvenanceValidationError(
@@ -567,9 +569,7 @@ def _build_descriptor(
         "toolchain": manifest.get("toolchain", {}),
         "provenance": {
             "chain": list(provenance_chain),
-            "generation_framework": manifest.get("provenance", {}).get(
-                "generation_framework"
-            ),
+            "generation_framework": manifest.get("provenance", {}).get("generation_framework"),
         },
         "components": components,
         "configuration": {
@@ -598,9 +598,7 @@ def _signature_summary(package: PublishedPackage) -> dict[str, Any]:
 
 def _runtime_id(package: PublishedPackage, closure: tuple[ClosureEntry, ...]) -> str:
     """A deterministic, non-authoritative runtime identity (IMP-007 §5/§10)."""
-    closure_fingerprint = ";".join(
-        f"{e.blueprint_id}:{e.package_sha256}" for e in closure
-    )
+    closure_fingerprint = ";".join(f"{e.blueprint_id}:{e.package_sha256}" for e in closure)
     digest = hashlib.sha256(
         f"{package.artifact_id}:{package.package_sha256}:{closure_fingerprint}".encode()
     ).hexdigest()
@@ -614,9 +612,7 @@ def _runtime_id(package: PublishedPackage, closure: tuple[ClosureEntry, ...]) ->
 
 def _read_json(path: Path) -> dict[str, Any]:
     if not path.is_file():
-        raise RuntimeAssemblyError(
-            "published package is missing a required file", path=str(path)
-        )
+        raise RuntimeAssemblyError("published package is missing a required file", path=str(path))
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
@@ -624,9 +620,7 @@ def _read_json(path: Path) -> dict[str, Any]:
             "published package file is not valid JSON", path=str(path), detail=str(exc)
         ) from exc
     if not isinstance(data, dict):
-        raise RuntimeAssemblyError(
-            "published package file is not a JSON object", path=str(path)
-        )
+        raise RuntimeAssemblyError("published package file is not a JSON object", path=str(path))
     return data
 
 

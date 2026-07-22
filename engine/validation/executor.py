@@ -45,11 +45,7 @@ class ValidationEngine:
         """Evaluate every check over ``subject`` and aggregate a report."""
         with trace("validation.validate", target=subject.target_id):
             findings = tuple(check.evaluate(subject) for check in self._checks)
-            verdict = (
-                Verdict.FAIL
-                if any(f.is_blocking_failure for f in findings)
-                else Verdict.PASS
-            )
+            verdict = Verdict.FAIL if any(f.is_blocking_failure for f in findings) else Verdict.PASS
             report = ValidationReport(
                 target_id=subject.target_id,
                 blueprint_id=subject.blueprint_id,

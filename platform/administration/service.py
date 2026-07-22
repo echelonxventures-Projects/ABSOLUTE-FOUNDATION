@@ -243,9 +243,7 @@ class AdministrationService:
         if not isinstance(configuration, AdministrativeConfiguration):
             raise AdministrationServiceError("a valid AdministrativeConfiguration is required")
         if not isinstance(membership, AdministrativeMembershipRegistry):
-            raise AdministrationServiceError(
-                "a valid AdministrativeMembershipRegistry is required"
-            )
+            raise AdministrationServiceError("a valid AdministrativeMembershipRegistry is required")
         if not isinstance(authorization, AuthorizationService):
             raise AdministrationServiceError("a valid AuthorizationService is required")
         if not isinstance(audit, AdministrativeAuditLog):
@@ -443,13 +441,9 @@ class AdministrationService:
         target = AdministrativeTarget.create(
             scope, AdministrativeDomain.CONTEXT, identifier, tenant=tenant
         )
-        access = self._require_granted(
-            session_id, AdministrativeAction.INSPECT, target, now=now
-        )
+        access = self._require_granted(session_id, AdministrativeAction.INSPECT, target, now=now)
         principal = self._authorization.principals.get(access.principal_id)
-        context = AdministrativeContext.create(
-            principal, scope, access.actions, tenant=tenant
-        )
+        context = AdministrativeContext.create(principal, scope, access.actions, tenant=tenant)
         self._emit(
             ADMIN_CONTEXT_EVENT,
             subject=principal.principal_id,

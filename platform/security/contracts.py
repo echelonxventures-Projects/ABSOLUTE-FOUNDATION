@@ -704,8 +704,7 @@ _SECURITY_ZONE_CONTRACT_NAMES: tuple[tuple[str, str], ...] = (
 
 #: Immutable references to the published SEC-ZONE contracts (name + version).
 SECURITY_ZONE_CONTRACTS: tuple[ContractRef, ...] = tuple(
-    ContractRef(name, SECURITY_ZONE_CONTRACT_VERSION)
-    for name, _ in _SECURITY_ZONE_CONTRACT_NAMES
+    ContractRef(name, SECURITY_ZONE_CONTRACT_VERSION) for name, _ in _SECURITY_ZONE_CONTRACT_NAMES
 )
 
 

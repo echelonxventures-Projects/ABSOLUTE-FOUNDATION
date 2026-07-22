@@ -50,9 +50,7 @@ class RelationshipGraph:
     @classmethod
     def from_source(cls, source: RegistrySource) -> RelationshipGraph:
         """Build the graph from the read-only registry source."""
-        _envelope, records = source.read_document(
-            RELATIONSHIPS_FILE, root_key="relationships"
-        )
+        _envelope, records = source.read_document(RELATIONSHIPS_FILE, root_key="relationships")
         return cls(Relationship.from_dict(record) for record in records)
 
     # -- size / iteration ------------------------------------------------------

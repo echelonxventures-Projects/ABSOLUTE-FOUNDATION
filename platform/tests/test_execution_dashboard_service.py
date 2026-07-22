@@ -342,9 +342,7 @@ def test_evidence_and_health_report_deterministic():
 def test_to_dict_and_metrics_with_observability():
     events = bootstrap_platform().events
     observability = build_observability_service(events=events)
-    auth, workspaces, generation, dashboard = _stack(
-        events=events, observability=observability
-    )
+    auth, workspaces, generation, dashboard = _stack(events=events, observability=observability)
     _seed(auth, workspaces, generation, tenant="acme", drive="completed")
     viewer = _viewer(auth, tenant="acme")
     dashboard.view(viewer.session_id, now=8, tenant="acme")

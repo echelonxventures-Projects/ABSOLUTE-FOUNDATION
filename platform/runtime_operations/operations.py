@@ -267,9 +267,7 @@ class RuntimeOperationRegistry:
         """Resolve a record by id (fail-closed on absent)."""
         record = self._by_id.get(operation_id)
         if record is None:
-            raise RuntimeOperationRecordError(
-                "no such operation record", operation_id=operation_id
-            )
+            raise RuntimeOperationRecordError("no such operation record", operation_id=operation_id)
         return record
 
     @property

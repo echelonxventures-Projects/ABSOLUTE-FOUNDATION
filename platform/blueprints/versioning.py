@@ -182,9 +182,7 @@ class VersionLineage:
     def head(self) -> BlueprintVersion:
         """The current (non-superseded) head version (fail-closed on empty)."""
         if not self._versions:
-            raise BlueprintVersionError(
-                "lineage has no versions", blueprint_id=self._blueprint_id
-            )
+            raise BlueprintVersionError("lineage has no versions", blueprint_id=self._blueprint_id)
         return self._versions[-1]
 
     def append(

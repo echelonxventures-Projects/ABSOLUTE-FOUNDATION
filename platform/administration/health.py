@@ -77,9 +77,7 @@ class AdministrationHealth:
         integrity_ok = not self.inconsistent_members()
         return {
             CONFIGURATION_CHECK: HealthStatus.HEALTHY,
-            INTEGRITY_CHECK: (
-                HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY
-            ),
+            INTEGRITY_CHECK: (HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY),
         }
 
     @property

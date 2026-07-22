@@ -33,8 +33,13 @@ import pytest
 def _request():
     reg = GenerationRequestRegistry()
     return reg.create(
-        "artifact-1", "UCOS-BLPR-1", "UCOS-WSPC-1", "arch@x", BlueprintFamily.DATA,
-        submitted_tick=1, tenant="acme",
+        "artifact-1",
+        "UCOS-BLPR-1",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.DATA,
+        submitted_tick=1,
+        tenant="acme",
     )
 
 
@@ -102,9 +107,10 @@ def test_lineage_complete_with_provenance():
     assert edge["link"] == "artifact-lineage"
     assert edge["complete"] is True
     assert lineage.to_dict()["is_complete"] is True
-    assert lineage.fingerprint() == ArtifactLineage.from_request(
-        req, provenance=_provenance(req)
-    ).fingerprint()
+    assert (
+        lineage.fingerprint()
+        == ArtifactLineage.from_request(req, provenance=_provenance(req)).fingerprint()
+    )
 
 
 def test_lineage_partial_without_provenance():
@@ -139,9 +145,12 @@ def test_trace_full_when_provenance_and_dispatch_present():
     assert "engine.runtime.assemble" in trace.dispatch_edge["execution"]["engine_contracts"]
     assert trace.edge()["traceable"] is True
     assert trace.to_dict()["is_traceable"] is True
-    assert trace.fingerprint() == ArtifactTrace.from_parts(
-        req, provenance=_provenance(req), dispatch=_dispatch(req)
-    ).fingerprint()
+    assert (
+        trace.fingerprint()
+        == ArtifactTrace.from_parts(
+            req, provenance=_provenance(req), dispatch=_dispatch(req)
+        ).fingerprint()
+    )
 
 
 def test_trace_not_traceable_without_dispatch():

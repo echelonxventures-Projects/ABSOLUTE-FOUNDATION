@@ -24,12 +24,20 @@ def _registry_with_both():
     unit = runtime_unit()
     cert = certification_record()
     deploy = RuntimeOperationRecord.create(
-        kind=RuntimeOperationKind.DEPLOY, unit=unit, certification=cert,
-        deployment=_FACADE.deployment_descriptor(unit), owner_subject="op@x", environment="runtime",
+        kind=RuntimeOperationKind.DEPLOY,
+        unit=unit,
+        certification=cert,
+        deployment=_FACADE.deployment_descriptor(unit),
+        owner_subject="op@x",
+        environment="runtime",
     )
     rollback = RuntimeOperationRecord.create(
-        kind=RuntimeOperationKind.ROLLBACK, unit=unit, certification=cert,
-        rollback=_FACADE.rollback_descriptor(unit), owner_subject="op@x", environment="runtime",
+        kind=RuntimeOperationKind.ROLLBACK,
+        unit=unit,
+        certification=cert,
+        rollback=_FACADE.rollback_descriptor(unit),
+        owner_subject="op@x",
+        environment="runtime",
     )
     registry.record(deploy)
     registry.record(rollback)

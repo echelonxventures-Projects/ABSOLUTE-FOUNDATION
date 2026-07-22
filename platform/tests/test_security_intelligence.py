@@ -50,11 +50,15 @@ import pytest
 
 def test_create_vulnerability_finding_has_deterministic_id():
     a = SecurityFinding.create(
-        FindingKind.VULNERABILITY, "CVE-2026-1", severity=Severity.HIGH,
+        FindingKind.VULNERABILITY,
+        "CVE-2026-1",
+        severity=Severity.HIGH,
         affects=("UCOS-SVC-000001",),
     )
     b = SecurityFinding.create(
-        FindingKind.VULNERABILITY, "CVE-2026-1", severity=Severity.HIGH,
+        FindingKind.VULNERABILITY,
+        "CVE-2026-1",
+        severity=Severity.HIGH,
         affects=("UCOS-SVC-000001",),
     )
     assert a.finding_id == b.finding_id
@@ -110,9 +114,7 @@ def test_exception_requires_reference_approver_and_expiry():
 
 def test_non_exception_may_not_carry_exception_of():
     with pytest.raises(SecurityFindingError):
-        SecurityFinding.create(
-            FindingKind.VULNERABILITY, "x", exception_of="UCOS-SFND-abc"
-        )
+        SecurityFinding.create(FindingKind.VULNERABILITY, "x", exception_of="UCOS-SFND-abc")
 
 
 def test_valid_exception_is_time_boxed():
@@ -151,7 +153,10 @@ def test_control_is_not_an_exposure():
 
 def test_validate_success_and_trace():
     f = SecurityFinding.create(
-        FindingKind.VULNERABILITY, "CVE", severity=Severity.MEDIUM, identifier="CVE-2026-9",
+        FindingKind.VULNERABILITY,
+        "CVE",
+        severity=Severity.MEDIUM,
+        identifier="CVE-2026-9",
         affects=("UCOS-SVC-000001",),
     )
     v = f.validate()
@@ -176,9 +181,12 @@ def test_to_dict_and_fingerprint_roundtrip():
     d = f.to_dict()
     assert d["kind"] == "THREAT"
     assert d["non_enforcing"] is True
-    assert f.fingerprint() == SecurityFinding.create(
-        FindingKind.THREAT, "spoofing", severity=Severity.HIGH
-    ).fingerprint()
+    assert (
+        f.fingerprint()
+        == SecurityFinding.create(
+            FindingKind.THREAT, "spoofing", severity=Severity.HIGH
+        ).fingerprint()
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -240,8 +248,12 @@ def test_ledger_queries():
     )
     c = SecurityFinding.create(FindingKind.CONTROL, "AC-2")
     ex = SecurityFinding.create(
-        FindingKind.EXCEPTION, "accept", state=FindingState.ACCEPTED,
-        exception_of=v.finding_id, approver="ciso", expires=100,
+        FindingKind.EXCEPTION,
+        "accept",
+        state=FindingState.ACCEPTED,
+        exception_of=v.finding_id,
+        approver="ciso",
+        expires=100,
     )
     for f in (v, c, ex):
         ledger.record(f)
@@ -288,8 +300,12 @@ def test_rollup_approved_when_no_open_exposures():
 def test_rollup_valid_exception_suppresses_block():
     v = SecurityFinding.create(FindingKind.VULNERABILITY, "CVE", severity=Severity.CRITICAL)
     ex = SecurityFinding.create(
-        FindingKind.EXCEPTION, "accept", state=FindingState.ACCEPTED,
-        exception_of=v.finding_id, approver="ciso", expires=100,
+        FindingKind.EXCEPTION,
+        "accept",
+        state=FindingState.ACCEPTED,
+        exception_of=v.finding_id,
+        approver="ciso",
+        expires=100,
     )
     r = compute_rollup((v, ex), now=50)
     assert r.state is RollupState.IN_PROGRESS  # exposure open but excepted -> not blocking
@@ -300,8 +316,12 @@ def test_rollup_valid_exception_suppresses_block():
 def test_rollup_expired_exception_reverts_to_blocked():
     v = SecurityFinding.create(FindingKind.VULNERABILITY, "CVE", severity=Severity.CRITICAL)
     ex = SecurityFinding.create(
-        FindingKind.EXCEPTION, "accept", state=FindingState.ACCEPTED,
-        exception_of=v.finding_id, approver="ciso", expires=100,
+        FindingKind.EXCEPTION,
+        "accept",
+        state=FindingState.ACCEPTED,
+        exception_of=v.finding_id,
+        approver="ciso",
+        expires=100,
     )
     r = compute_rollup((v, ex), now=200)
     assert r.state is RollupState.BLOCKED
@@ -317,9 +337,7 @@ def test_rollup_requires_int_now():
 
 
 def test_rollup_is_deterministic():
-    findings = (
-        SecurityFinding.create(FindingKind.VULNERABILITY, "CVE", severity=Severity.HIGH),
-    )
+    findings = (SecurityFinding.create(FindingKind.VULNERABILITY, "CVE", severity=Severity.HIGH),)
     assert compute_rollup(findings, now=5).rollup_id == compute_rollup(findings, now=5).rollup_id
 
 
@@ -331,8 +349,14 @@ def test_rollup_to_dict_never_enacts():
 
 def test_security_rollup_create_is_content_addressed():
     r = SecurityRollup.create(
-        state=RollupState.APPROVED, evaluated_at=0, open_exposure_count=0, blocking_count=0,
-        in_progress_count=0, valid_exception_count=0, expired_exception_count=0, blocked_by=(),
+        state=RollupState.APPROVED,
+        evaluated_at=0,
+        open_exposure_count=0,
+        blocking_count=0,
+        in_progress_count=0,
+        valid_exception_count=0,
+        expired_exception_count=0,
+        blocked_by=(),
     )
     assert r.rollup_id.startswith("UCOS-SRUP-")
 

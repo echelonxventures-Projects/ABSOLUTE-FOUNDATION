@@ -26,9 +26,11 @@ import pytest
 
 
 def _seed(registry, *, tenant=None):
-    rec = RuntimeOperationPlanner().plan_deploy(
-        runtime_unit(), certification_record(), owner_subject="op@x", tenant=tenant
-    ).record
+    rec = (
+        RuntimeOperationPlanner()
+        .plan_deploy(runtime_unit(), certification_record(), owner_subject="op@x", tenant=tenant)
+        .record
+    )
     registry.record(rec)
     return rec
 
@@ -65,9 +67,7 @@ def test_empty_query_authorized_but_no_results():
     auth = build_authorization_service()
     registry = RuntimeOperationRegistry()
     _seed(registry)
-    resp = _search(auth, registry).search(
-        session(auth, role=Role.AUDITOR).session_id, "   ", now=1
-    )
+    resp = _search(auth, registry).search(session(auth, role=Role.AUDITOR).session_id, "   ", now=1)
     assert resp.authorized is True
     assert resp.results == ()
 
@@ -76,7 +76,9 @@ def test_search_rejects_non_string_query():
     auth = build_authorization_service()
     with pytest.raises(RuntimeOperationSearchError):
         _search(auth, RuntimeOperationRegistry()).search(
-            session(auth).session_id, 5, now=1  # type: ignore[arg-type]
+            session(auth).session_id,
+            5,
+            now=1,  # type: ignore[arg-type]
         )
 
 

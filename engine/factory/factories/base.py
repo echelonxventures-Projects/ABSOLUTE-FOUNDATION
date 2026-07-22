@@ -120,9 +120,7 @@ class BaseFactory:
     def capability(self) -> FactoryCapability:
         return self._descriptor.capability
 
-    def generate(
-        self, context: ExecutionContext, execution: FactoryExecution
-    ) -> FactoryResult:
+    def generate(self, context: ExecutionContext, execution: FactoryExecution) -> FactoryResult:
         """Delegate generation to the shared orchestrator execution path."""
         return execution.execute(context)
 

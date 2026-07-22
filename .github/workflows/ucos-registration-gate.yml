@@ -13,6 +13,13 @@ on:
   pull_request:
     branches: ["**"]
 
+# CI throughput: supersede in-flight runs for the same ref. Pure run-scheduling —
+# does NOT alter the registration/enforcement gate logic, which remains fully
+# config-driven (register.sh + config.py).
+concurrency:
+  group: ucos-registration-gate-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   registration-gate:
     runs-on: ubuntu-latest

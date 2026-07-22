@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 970
+**Total artifacts:** 974
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -978,5 +978,9 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 968 | `UCOS-SEC-000002` | UCOS Ω∞ — UNIVERSAL SECURITY CONSTITUTION | SECURITY-001 | 023 | UPN-000008904–UPN-000008909 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md) |
 | 969 | `UCOS-SEC-000003` | UCOS Ω∞ — UNIVERSAL SECURITY THEORY | SECURITY-002 | 023 | UPN-000008910–UPN-000008915 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../14-SECURITY/SECURITY-002-UNIVERSAL-SECURITY-THEORY.md) |
 | 970 | `UCOS-SEC-000004` | UCOS Ω∞ — UNIVERSAL SECURITY ONTOLOGY | SECURITY-003 | 023 | UPN-000008916–UPN-000008920 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../14-SECURITY/SECURITY-003-UNIVERSAL-SECURITY-ONTOLOGY.md) |
+| 971 | `UCOS-ENG-000018` | EPIC-VAL-002 — Universal Repository Acceptance Engine — C… | — | 003 | UPN-000008921–UPN-000008924 | ACTIVE | `UCOS-ENG-000003` | 0 | [↗](../../engine/acceptance/EPIC-VAL-002-COMPLETION-REPORT.md) |
+| 972 | `UCOS-REPOOPERATIO-000001` | Repo Operations | — | 000 | UPN-000008925–UPN-000008926 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../repo-operations.json) |
+| 973 | `UCOS-MASTER-000037` | UCOS Ω∞ REPOSITORY RATIFICATION DETERMINATION | — | 000 | UPN-000008927–UPN-000008930 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md) |
+| 974 | `UCOS-SEC-000005` | UCOS Ω∞ — UNIVERSAL SECURITY TAXONOMY | SECURITY-004 | 023 | UPN-000008931–UPN-000008934 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../14-SECURITY/SECURITY-004-UNIVERSAL-SECURITY-TAXONOMY.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

@@ -422,9 +422,7 @@ class TrustEngine:
         self._keys[child_key_id] = TrustKey(key_id=child_key_id, parent_key_id=parent_key_id)
         self._delegations[child_key_id] = delegation
         self._order.append(child_key_id)
-        _logger.info(
-            "foundation.trust.delegated", parent=parent_key_id, child=child_key_id
-        )
+        _logger.info("foundation.trust.delegated", parent=parent_key_id, child=child_key_id)
         return delegation
 
     def rotate(
@@ -465,9 +463,7 @@ class TrustEngine:
         statement = NotaryRecord.statement(sequence, witness_key_id, digest)
         signature = self._sign_statement(witness_key_id, statement)
         record = NotaryRecord(sequence, witness_key_id, digest, signature)
-        _logger.info(
-            "foundation.trust.notarized", sequence=sequence, witness=witness_key_id
-        )
+        _logger.info("foundation.trust.notarized", sequence=sequence, witness=witness_key_id)
         return record
 
     def revoke(self, key_id: str, reason: str, *, witness_key_id: str) -> Revocation:

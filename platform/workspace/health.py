@@ -61,18 +61,14 @@ class WorkspaceHealth:
 
     def orphaned_membership_workspaces(self) -> tuple[str, ...]:
         """Workspace ids that have members but are not registered (integrity faults)."""
-        return tuple(
-            wid for wid in self._membership.workspace_ids if wid not in self._registry
-        )
+        return tuple(wid for wid in self._membership.workspace_ids if wid not in self._registry)
 
     def probe(self) -> dict[str, HealthStatus]:
         """Compute deterministic probe results for the workspace health checks."""
         integrity_ok = not self.orphaned_membership_workspaces()
         return {
             REGISTRY_CHECK: HealthStatus.HEALTHY,
-            INTEGRITY_CHECK: (
-                HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY
-            ),
+            INTEGRITY_CHECK: (HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY),
         }
 
     @property

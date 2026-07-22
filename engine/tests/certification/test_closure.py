@@ -77,9 +77,7 @@ def test_acceptance_status_unknown_id_returns_none(certified_decision):
 def test_closure_raises_on_tampered_ledger(certified_decision):
     ledger = CertificationLedger()
     ledger.append(certified_decision.record)
-    tampered = CertificationLedgerEntry(
-        **{**ledger.entries[0].to_dict(), "entry_hash": "0" * 64}
-    )
+    tampered = CertificationLedgerEntry(**{**ledger.entries[0].to_dict(), "entry_hash": "0" * 64})
     ledger._entries[0] = tampered  # noqa: SLF001 — test reaches into internals
     with pytest.raises(ProgramClosureError):
         build_program_closure(ledger)

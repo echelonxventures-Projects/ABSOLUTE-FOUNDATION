@@ -99,9 +99,7 @@ class FactoryRegistry:
             )
         return factory
 
-    def has_factory(
-        self, blueprint_class: BlueprintFamily | BlueprintClassification | str
-    ) -> bool:
+    def has_factory(self, blueprint_class: BlueprintFamily | BlueprintClassification | str) -> bool:
         """True iff a factory is registered for ``blueprint_class``."""
         return _coerce_class(blueprint_class) in self._factories
 

@@ -186,9 +186,7 @@ def test_delegate_extends_trust_chain():
     chain = engine.verify_chain("child")
     assert [k.key_id for k in chain] == ["child", "genesis"]
     # The delegation signature verifies against the parent key.
-    assert engine.verify(
-        delegation.signature, Delegation.statement("genesis", "child")
-    )
+    assert engine.verify(delegation.signature, Delegation.statement("genesis", "child"))
 
 
 def test_delegate_error_paths():
@@ -244,9 +242,7 @@ def test_notarize_is_monotonic_and_signed():
     r2 = engine.notarize("digest-b", "genesis")
     assert (r1.sequence, r2.sequence) == (1, 2)
     assert isinstance(r1, NotaryRecord)
-    assert engine.verify(
-        r1.signature, NotaryRecord.statement(1, "genesis", "digest-a")
-    )
+    assert engine.verify(r1.signature, NotaryRecord.statement(1, "genesis", "digest-a"))
 
 
 def test_notarize_error_paths():

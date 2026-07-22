@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-21T17:04:13+00:00 by ukbx portal. 970 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-22T05:17:21+00:00 by ukbx portal. 974 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -974,3 +974,7 @@
 | [UCOS-SEC-000002](UCOS-SEC-000002.md) | UCOS Ω∞ — UNIVERSAL SECURITY CONSTITUTION | VOL-023 | ACTIVE |
 | [UCOS-SEC-000003](UCOS-SEC-000003.md) | UCOS Ω∞ — UNIVERSAL SECURITY THEORY | VOL-023 | ACTIVE |
 | [UCOS-SEC-000004](UCOS-SEC-000004.md) | UCOS Ω∞ — UNIVERSAL SECURITY ONTOLOGY | VOL-023 | ACTIVE |
+| [UCOS-ENG-000018](UCOS-ENG-000018.md) | EPIC-VAL-002 — Universal Repository Acceptance Engine — Comp | VOL-003 | ACTIVE |
+| [UCOS-REPOOPERATIO-000001](UCOS-REPOOPERATIO-000001.md) | Repo Operations | VOL-000 | ACTIVE |
+| [UCOS-MASTER-000037](UCOS-MASTER-000037.md) | UCOS Ω∞ REPOSITORY RATIFICATION DETERMINATION | VOL-000 | ACTIVE |
+| [UCOS-SEC-000005](UCOS-SEC-000005.md) | UCOS Ω∞ — UNIVERSAL SECURITY TAXONOMY | VOL-023 | ACTIVE |

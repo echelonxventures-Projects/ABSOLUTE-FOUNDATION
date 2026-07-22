@@ -34,9 +34,7 @@ class EvidenceBundle:
     edges: tuple[CoverageEdge, ...]
 
     @classmethod
-    def create(
-        cls, nodes: Iterable[CoverageNode], edges: Iterable[CoverageEdge]
-    ) -> EvidenceBundle:
+    def create(cls, nodes: Iterable[CoverageNode], edges: Iterable[CoverageEdge]) -> EvidenceBundle:
         """Build a normalized bundle: dedupe by id, order deterministically, fail-closed."""
         node_map: dict[str, CoverageNode] = {}
         for node in nodes:
@@ -89,9 +87,7 @@ class InMemoryEvidenceSource(EvidenceSource):
 
     __slots__ = ("_bundle",)
 
-    def __init__(
-        self, nodes: Iterable[CoverageNode], edges: Iterable[CoverageEdge]
-    ) -> None:
+    def __init__(self, nodes: Iterable[CoverageNode], edges: Iterable[CoverageEdge]) -> None:
         self._bundle = EvidenceBundle.create(nodes, edges)
 
     def collect(self) -> EvidenceBundle:

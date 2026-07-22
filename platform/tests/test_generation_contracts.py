@@ -226,14 +226,15 @@ def test_generation_request_contract_rejects_empty_name():
 
 
 def test_metadata_create_normalizes_and_fingerprints():
-    md = RequestMetadata.create(
-        description="d", labels=["a", "b"], annotations={"k": "v"}
-    )
+    md = RequestMetadata.create(description="d", labels=["a", "b"], annotations={"k": "v"})
     assert md.has_label("a")
     assert md.to_dict()["labels"] == ["a", "b"]
-    assert md.fingerprint() == RequestMetadata.create(
-        description="d", labels=["b", "a"], annotations={"k": "v"}
-    ).fingerprint()
+    assert (
+        md.fingerprint()
+        == RequestMetadata.create(
+            description="d", labels=["b", "a"], annotations={"k": "v"}
+        ).fingerprint()
+    )
 
 
 @pytest.mark.parametrize(

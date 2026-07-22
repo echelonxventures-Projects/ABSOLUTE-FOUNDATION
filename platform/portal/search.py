@@ -274,20 +274,35 @@ def default_search_index() -> SearchIndex:
     """
     return SearchIndex(
         [
-            SearchEntity.create(EntityKind.WORKSPACE, "Platform Core Workspace",
-                                keywords=("core", "platform")),
-            SearchEntity.create(EntityKind.PROJECT, "Realization Engine Project",
-                                keywords=("engine", "realization")),
-            SearchEntity.create(EntityKind.BLUEPRINT, "Service Blueprint",
-                                keywords=("service", "blueprint")),
-            SearchEntity.create(EntityKind.GENERATION_REQUEST, "Nightly Generation Request",
-                                keywords=("generation", "nightly")),
-            SearchEntity.create(EntityKind.ARTIFACT, "Signed Runtime Artifact",
-                                keywords=("artifact", "runtime", "signed")),
-            SearchEntity.create(EntityKind.VALIDATION_REPORT, "Acceptance Validation Report",
-                                keywords=("validation", "acceptance")),
-            SearchEntity.create(EntityKind.CERTIFICATION, "Program Certification Record",
-                                keywords=("certification", "program")),
+            SearchEntity.create(
+                EntityKind.WORKSPACE, "Platform Core Workspace", keywords=("core", "platform")
+            ),
+            SearchEntity.create(
+                EntityKind.PROJECT, "Realization Engine Project", keywords=("engine", "realization")
+            ),
+            SearchEntity.create(
+                EntityKind.BLUEPRINT, "Service Blueprint", keywords=("service", "blueprint")
+            ),
+            SearchEntity.create(
+                EntityKind.GENERATION_REQUEST,
+                "Nightly Generation Request",
+                keywords=("generation", "nightly"),
+            ),
+            SearchEntity.create(
+                EntityKind.ARTIFACT,
+                "Signed Runtime Artifact",
+                keywords=("artifact", "runtime", "signed"),
+            ),
+            SearchEntity.create(
+                EntityKind.VALIDATION_REPORT,
+                "Acceptance Validation Report",
+                keywords=("validation", "acceptance"),
+            ),
+            SearchEntity.create(
+                EntityKind.CERTIFICATION,
+                "Program Certification Record",
+                keywords=("certification", "program"),
+            ),
         ]
     )
 

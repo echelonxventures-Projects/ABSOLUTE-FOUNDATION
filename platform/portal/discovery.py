@@ -145,9 +145,7 @@ class ObservabilityView:
         service = self._require(session_id, now=now, tenant=tenant)
         return service.health_endpoint(results)
 
-    def runtime(
-        self, session_id: str, *, now: int, tenant: str | None = None
-    ) -> dict[str, Any]:
+    def runtime(self, session_id: str, *, now: int, tenant: str | None = None) -> dict[str, Any]:
         """Runtime visibility: governed-action count + observability evidence."""
         service = self._require(session_id, now=now, tenant=tenant)
         evidence = service.evidence()
@@ -158,9 +156,7 @@ class ObservabilityView:
             "evidence_id": evidence.evidence_id,
         }
 
-    def monitoring(
-        self, session_id: str, *, now: int, tenant: str | None = None
-    ) -> dict[str, Any]:
+    def monitoring(self, session_id: str, *, now: int, tenant: str | None = None) -> dict[str, Any]:
         """Monitoring visibility: the deterministic metric snapshot."""
         service = self._require(session_id, now=now, tenant=tenant)
         return service.metrics.snapshot()

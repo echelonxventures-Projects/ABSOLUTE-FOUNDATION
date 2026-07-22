@@ -188,9 +188,7 @@ class Project:
         if not isinstance(workspace_id, str) or not workspace_id:
             raise ProjectContractError("project requires a workspace_id", slug=normalized_slug)
         if not isinstance(owner_subject, str) or not owner_subject:
-            raise ProjectContractError(
-                "project owner_subject is required", slug=normalized_slug
-            )
+            raise ProjectContractError("project owner_subject is required", slug=normalized_slug)
         if not isinstance(status, ProjectStatus):
             raise ProjectContractError("project status must be a ProjectStatus")
         md = metadata if metadata is not None else EMPTY_METADATA
@@ -279,9 +277,7 @@ class ProjectAssociation:
     ref_id: str
 
     @classmethod
-    def create(
-        cls, project_id: str, kind: AssociationKind, ref_id: str
-    ) -> ProjectAssociation:
+    def create(cls, project_id: str, kind: AssociationKind, ref_id: str) -> ProjectAssociation:
         """Build an association with a deterministic, content-addressed id."""
         if not isinstance(project_id, str) or not project_id:
             raise ProjectContractError("association requires a project_id")

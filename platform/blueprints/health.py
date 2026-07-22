@@ -95,9 +95,7 @@ class BlueprintHealth:
 
     def orphaned_association_blueprints(self) -> tuple[str, ...]:
         """Blueprint ids that have associations but are not registered (integrity faults)."""
-        return tuple(
-            bid for bid in self._associations.blueprint_ids if bid not in self._registry
-        )
+        return tuple(bid for bid in self._associations.blueprint_ids if bid not in self._registry)
 
     def probe(self) -> dict[str, HealthStatus]:
         """Compute deterministic probe results for the blueprint health checks."""
@@ -105,12 +103,8 @@ class BlueprintHealth:
         integrity_ok = not self.orphaned_association_blueprints()
         return {
             REGISTRY_CHECK: HealthStatus.HEALTHY,
-            PROVENANCE_CHECK: (
-                HealthStatus.HEALTHY if provenance_ok else HealthStatus.UNHEALTHY
-            ),
-            INTEGRITY_CHECK: (
-                HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY
-            ),
+            PROVENANCE_CHECK: (HealthStatus.HEALTHY if provenance_ok else HealthStatus.UNHEALTHY),
+            INTEGRITY_CHECK: (HealthStatus.HEALTHY if integrity_ok else HealthStatus.UNHEALTHY),
         }
 
     @property

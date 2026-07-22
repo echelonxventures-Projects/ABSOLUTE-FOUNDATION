@@ -23,9 +23,11 @@ from platform.tests.runtime_operations_helpers import certification_record, runt
 
 def _record(runtime_id="UCOS-RUN-data-0123456789abcdef", blueprint="UCOS-BLPR-1", env="runtime"):
     unit = runtime_unit(runtime_id=runtime_id, blueprint=blueprint, environment=env)
-    return RuntimeOperationPlanner().plan_deploy(
-        unit, certification_record(), owner_subject="op@x"
-    ).record
+    return (
+        RuntimeOperationPlanner()
+        .plan_deploy(unit, certification_record(), owner_subject="op@x")
+        .record
+    )
 
 
 def test_empty_ledger():

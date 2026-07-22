@@ -29,15 +29,9 @@ from typing import Any
 
 #: The legal state-machine edges: current status → the statuses it may transition to.
 _TRANSITIONS: dict[BlueprintStatus, frozenset[BlueprintStatus]] = {
-    BlueprintStatus.DRAFT: frozenset(
-        {BlueprintStatus.VALIDATED, BlueprintStatus.RETIRED}
-    ),
-    BlueprintStatus.VALIDATED: frozenset(
-        {BlueprintStatus.CATALOGUED, BlueprintStatus.RETIRED}
-    ),
-    BlueprintStatus.CATALOGUED: frozenset(
-        {BlueprintStatus.SUPERSEDED, BlueprintStatus.RETIRED}
-    ),
+    BlueprintStatus.DRAFT: frozenset({BlueprintStatus.VALIDATED, BlueprintStatus.RETIRED}),
+    BlueprintStatus.VALIDATED: frozenset({BlueprintStatus.CATALOGUED, BlueprintStatus.RETIRED}),
+    BlueprintStatus.CATALOGUED: frozenset({BlueprintStatus.SUPERSEDED, BlueprintStatus.RETIRED}),
     BlueprintStatus.SUPERSEDED: frozenset({BlueprintStatus.RETIRED}),
     BlueprintStatus.RETIRED: frozenset(),
 }

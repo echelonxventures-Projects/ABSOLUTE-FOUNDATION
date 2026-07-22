@@ -110,9 +110,12 @@ def test_metadata_normalizes_and_is_content_addressed():
     )
     assert md.has_label("a")
     assert md.to_dict()["labels"] == ["a", "b"]
-    assert md.fingerprint() == CertificationRecordMetadata.create(
-        description="d", labels=["a", "b"], annotations={"k": "v"}
-    ).fingerprint()
+    assert (
+        md.fingerprint()
+        == CertificationRecordMetadata.create(
+            description="d", labels=["a", "b"], annotations={"k": "v"}
+        ).fingerprint()
+    )
     assert EMPTY_CERTIFICATION_METADATA.description == ""
 
 

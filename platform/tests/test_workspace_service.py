@@ -228,9 +228,7 @@ def test_evaluate_access_unknown_workspace_is_fail_closed():
     auth, service = _service()
     session = _session(auth, Role.DEVELOPER)
     with pytest.raises(WorkspaceRegistryError):
-        service.evaluate_access(
-            session.session_id, "UCOS-WSPC-missing", Permission.READ, now=1
-        )
+        service.evaluate_access(session.session_id, "UCOS-WSPC-missing", Permission.READ, now=1)
 
 
 def test_access_evaluation_is_emitted_as_governed_action():

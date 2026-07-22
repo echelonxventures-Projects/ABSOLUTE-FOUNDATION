@@ -255,17 +255,11 @@ class GenerationRequest:
         """Build a request with a deterministic, content-addressed ``request_id``."""
         normalized_slug = _require_slug(slug)
         if not isinstance(blueprint_ref, str) or not blueprint_ref:
-            raise RequestContractError(
-                "request requires a blueprint_ref", slug=normalized_slug
-            )
+            raise RequestContractError("request requires a blueprint_ref", slug=normalized_slug)
         if not isinstance(workspace_id, str) or not workspace_id:
-            raise RequestContractError(
-                "request requires a workspace_id", slug=normalized_slug
-            )
+            raise RequestContractError("request requires a workspace_id", slug=normalized_slug)
         if not isinstance(owner_subject, str) or not owner_subject:
-            raise RequestContractError(
-                "request owner_subject is required", slug=normalized_slug
-            )
+            raise RequestContractError("request owner_subject is required", slug=normalized_slug)
         if not isinstance(family, BlueprintFamily):
             raise RequestContractError("request family must be a BlueprintFamily")
         if not isinstance(status, RequestStatus):

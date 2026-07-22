@@ -193,8 +193,12 @@ class RepositoryEvidenceSource(EvidenceSource):
                 add_node(CoverageNodeKind.PHASE, phase, authority=_IMP_TRACKER)
                 phases.add(phase)
             add_edge(
-                CoverageNodeKind.UNIVERSE, uni, CoverageNodeKind.PHASE, phase,
-                authority=_UNIVERSE_CATALOG, evidence=f"{uni} Phase={phase}",
+                CoverageNodeKind.UNIVERSE,
+                uni,
+                CoverageNodeKind.PHASE,
+                phase,
+                authority=_UNIVERSE_CATALOG,
+                evidence=f"{uni} Phase={phase}",
             )
 
         # 2. Phase → Program (IMP name ↔ 06-IMPLEMENTATION document, by token overlap).
@@ -215,8 +219,12 @@ class RepositoryEvidenceSource(EvidenceSource):
             program_of_phase[phase] = program
             add_node(CoverageNodeKind.PROGRAM, program, authority=_IMP_TRACKER)
             add_edge(
-                CoverageNodeKind.PHASE, phase, CoverageNodeKind.PROGRAM, program,
-                authority=_IMP_TRACKER, evidence=f"{phase} '{name}' -> {program}",
+                CoverageNodeKind.PHASE,
+                phase,
+                CoverageNodeKind.PROGRAM,
+                program,
+                authority=_IMP_TRACKER,
+                evidence=f"{phase} '{name}' -> {program}",
             )
 
         # 3. Program → Implementation (code package, by token overlap), then the code chain.
@@ -238,8 +246,12 @@ class RepositoryEvidenceSource(EvidenceSource):
                 continue
             add_node(CoverageNodeKind.IMPLEMENTATION, package, authority=program)
             add_edge(
-                CoverageNodeKind.PROGRAM, program, CoverageNodeKind.IMPLEMENTATION, package,
-                authority=program, evidence=f"{program} -> {package}",
+                CoverageNodeKind.PROGRAM,
+                program,
+                CoverageNodeKind.IMPLEMENTATION,
+                package,
+                authority=program,
+                evidence=f"{program} -> {package}",
             )
             linked_packages.add(package)
 

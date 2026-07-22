@@ -198,14 +198,15 @@ def test_blueprint_flags_and_serialisation():
 
 
 def test_metadata_create_normalises_and_fingerprints():
-    md = BlueprintMetadata.create(
-        description="d", labels=["a", "b"], annotations={"k": "v"}
-    )
+    md = BlueprintMetadata.create(description="d", labels=["a", "b"], annotations={"k": "v"})
     assert md.has_label("a")
     assert md.to_dict()["labels"] == ["a", "b"]
-    assert md.fingerprint() == BlueprintMetadata.create(
-        description="d", labels=["b", "a"], annotations={"k": "v"}
-    ).fingerprint()
+    assert (
+        md.fingerprint()
+        == BlueprintMetadata.create(
+            description="d", labels=["b", "a"], annotations={"k": "v"}
+        ).fingerprint()
+    )
     assert EMPTY_METADATA.description == ""
 
 

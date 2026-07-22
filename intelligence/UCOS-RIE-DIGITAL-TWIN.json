@@ -5,26 +5,26 @@
   "certification_health": "HEALTHY-ENGINEERING",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
   "constitutional_finality": "BLOCKED (DR-RAT-11)",
-  "content_hash": "7a497b56a36d2468c6bfa95a50df16620b976b0226982ab852023963a15e1009",
+  "content_hash": "7847610d63c57f5e9e700224b8087dd03839ee1a1b5e537f5f5f28d1179b3f42",
   "deployment_readiness": "IN_PROGRESS",
-  "dimension_index_reconciled_pct": 40.0,
+  "dimension_index_reconciled_pct": 26.7,
   "evidence_state": {
     "branch": "governance-reconciliation",
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "3345690c5ec460291b25bffa7e5e890c7ad366e7a8d4796f933d51b4dce37245",
-      "00-BOOK/DATA/certification.json": "7c35b059c891c9ac1b7405ebaa9893ea21b5dab4cc613ebd1210d0ad6906d11f",
-      "00-BOOK/DATA/control-tower.json": "b7e54d1331aa8e08cdeb6b320224f227b5ed4a0e8a8f3a74e6f3adf3c2cbf560",
+      "00-BOOK/DATA/artifacts.json": "5499a5363d4a0273f1b2dd2edac8875dd198f78efcf1ae1459ea97b64705ddfc",
+      "00-BOOK/DATA/certification.json": "a93dc4a12c7d14e5318dc534205ca20453f73a48a38a51f1501055f2f618962a",
+      "00-BOOK/DATA/control-tower.json": "5909baa557cf556890a46b7194fb6528ccf7ef1f9bed221284f81254ac63057b",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "6876e6f171e2dce914f9966b7556d81cfb26c010cabae196930f1dd2fff3355c",
-      "coverage.xml": "ce6f5d101bb508e1e31afee04491b39df9b1f082d62690f4923efc0f894a6514"
+      "00-BOOK/DATA/volumes.json": "5eb4a93df9761c3db9e6bbadac3d670ed7902be1acd5f42438c36598c8e5d455",
+      "coverage.xml": "64f7b95e8e13301477e34d00cbb9ce3e0dc47346aa712c595046b606e431942a"
     },
-    "head": "5874ede"
+    "head": "081ecb0"
   },
-  "evidence_timestamp": "2026-07-18T13:37:42+00:00",
+  "evidence_timestamp": "2026-07-22T05:17:21+00:00",
   "execution_readiness": "SUBSTRATE-READY · SPINE-NOT-IMPLEMENTED",
   "note": "Projection view; EXTENDS 00-BOOK/DATA/twin.json — no second twin store.",
   "producer": "UCOS-RIE-001 Repository Intelligence Engine v1.0.0",
   "repository_health": "HEALTHY",
   "title": "Repository Digital Twin Snapshot",
-  "validation_health": "HEALTHY-UNIT · HIGHER-ORDER MISSING"
+  "validation_health": "PARTIAL"
 }

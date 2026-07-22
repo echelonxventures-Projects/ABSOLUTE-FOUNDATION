@@ -336,16 +336,12 @@ class WorkspaceService:
         if not decision.permitted:
             return ()
         return tuple(
-            ws
-            for ws in self._registry.discover(tenant)
-            if self._isolation.permits(principal, ws)
+            ws for ws in self._registry.discover(tenant) if self._isolation.permits(principal, ws)
         )
 
     # -- selection / context ----------------------------------------------------
 
-    def select_workspace(
-        self, session_id: str, workspace_id: str, *, now: int
-    ) -> WorkspaceContext:
+    def select_workspace(self, session_id: str, workspace_id: str, *, now: int) -> WorkspaceContext:
         """Select a workspace and return its runtime context (fail-closed).
 
         Requires READ access (identity + isolation + membership). Raises
@@ -542,9 +538,7 @@ class WorkspaceService:
 
     def _require_manager(self, session_id: str, workspace: Workspace, *, now: int):
         """Require the caller be a workspace OWNER or a platform administrator."""
-        access = self.evaluate_access(
-            session_id, workspace.workspace_id, Permission.READ, now=now
-        )
+        access = self.evaluate_access(session_id, workspace.workspace_id, Permission.READ, now=now)
         if not access.granted:
             raise WorkspaceAccessError(
                 "workspace management denied",

@@ -37,9 +37,7 @@ def accepted_subject(
         provenance_chain=(blueprint, target),
         signature={"algorithm": "ed25519", "value": "sig", "payload_sha256": pkg},
         sbom={"sbom_format": "cyclonedx", "components": [{"name": "x"}]},
-        dependency_closure=(
-            {"role": "root", "blueprint_id": blueprint, "package_sha256": pkg},
-        ),
+        dependency_closure=({"role": "root", "blueprint_id": blueprint, "package_sha256": pkg},),
         disclosure=build_disclosure(),
         package_sha256=pkg,
         image_reference=f"registry/img@sha256:{pkg}",
@@ -57,9 +55,7 @@ def advisory_subject(
         provenance_chain=(blueprint, target),
         signature={"algorithm": "ed25519", "value": "sig", "payload_sha256": pkg},
         sbom={"sbom_format": "cyclonedx", "components": [{"name": "x"}]},
-        dependency_closure=(
-            {"role": "root", "blueprint_id": blueprint, "package_sha256": pkg},
-        ),
+        dependency_closure=({"role": "root", "blueprint_id": blueprint, "package_sha256": pkg},),
         disclosure=build_disclosure(),
         package_sha256=pkg,
         image_reference=f"registry/img@sha256:{pkg}",
@@ -118,9 +114,7 @@ def authorization_with_validation_admin():
     grants = {
         CapabilityGroup.VALIDATION_EXPLORER: RoleGrant(
             group=CapabilityGroup.VALIDATION_EXPLORER,
-            permissions=frozenset(
-                {Permission.READ, Permission.CREATE, Permission.ADMINISTER}
-            ),
+            permissions=frozenset({Permission.READ, Permission.CREATE, Permission.ADMINISTER}),
         ),
     }
     definitions.append(RoleDefinition(role=Role.PLATFORM_ADMINISTRATOR, grants=grants))

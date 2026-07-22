@@ -16,7 +16,12 @@ def _principal():
 
 def test_context_binds_who_what_where():
     bp = Blueprint.create(
-        "bp", "n", "UCOS-WSPC-1", "arch@x", BlueprintFamily.DATA, project_id="UCOS-PROJ-1",
+        "bp",
+        "n",
+        "UCOS-WSPC-1",
+        "arch@x",
+        BlueprintFamily.DATA,
+        project_id="UCOS-PROJ-1",
         tenant="acme",
     ).with_status(BlueprintStatus.CATALOGUED)
     ctx = BlueprintContext.create(bp, _principal(), is_owner=True)

@@ -51,7 +51,10 @@ def test_root_must_have_no_parent_and_nonroot_must_have_parent():
         )
     with pytest.raises(BlueprintVersionError):
         BlueprintVersion.create(
-            blueprint_id="b", revision=1, content_hash="h", metadata="x"  # type: ignore[arg-type]
+            blueprint_id="b",
+            revision=1,
+            content_hash="h",
+            metadata="x",  # type: ignore[arg-type]
         )
 
 

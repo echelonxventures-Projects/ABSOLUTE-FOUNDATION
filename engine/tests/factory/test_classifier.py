@@ -112,9 +112,7 @@ def test_non_mapping_rejected():
 
 def test_blank_and_nonstring_fields_skft_to_next_source():
     # blank family + non-string id fall through to a usable tag
-    result = resolve_blueprint_class(
-        {"family": "  ", "blueprint_id": 123, "tags": ["BP-SERVICE"]}
-    )
+    result = resolve_blueprint_class({"family": "  ", "blueprint_id": 123, "tags": ["BP-SERVICE"]})
     assert result.blueprint_class is BlueprintFamily.SERVICE
     assert result.source == "tag"
 

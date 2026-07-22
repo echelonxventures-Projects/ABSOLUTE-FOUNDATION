@@ -51,9 +51,7 @@ def test_successors_predecessors_neighbors(graph):
         "UCOS-ENG-000001",
         "UCOS-BOOK-000000",
     }
-    assert graph.predecessors("UCOS-REG-000001", type="Depends-On") == (
-        "UCOS-ENG-000001",
-    )
+    assert graph.predecessors("UCOS-REG-000001", type="Depends-On") == ("UCOS-ENG-000001",)
     assert "UCOS-BOOK-000000" in graph.neighbors("UCOS-ENG-000001")
     # REG has both predecessors (BOOK, ENG) and a successor (BOOK), exercising
     # both directions of neighbors().
@@ -85,9 +83,7 @@ def test_parent_child_helpers(graph):
 
 
 def test_duplicate_edge_id_rejected():
-    edge = Relationship.from_dict(
-        {"edge_id": "UEDGE-1", "from": "A", "to": "B", "type": "Uses"}
-    )
+    edge = Relationship.from_dict({"edge_id": "UEDGE-1", "from": "A", "to": "B", "type": "Uses"})
     with pytest.raises(RegistryValidationError):
         RelationshipGraph([edge, edge])
 

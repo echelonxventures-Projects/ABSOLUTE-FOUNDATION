@@ -153,9 +153,7 @@ def test_surface_records_owner_and_emits_events():
 def test_surface_is_idempotent():
     auth, service = console_fixture()
     sess, rec = _surfaced(auth, service, tenant="acme")
-    again = service.surface_validation(
-        sess.session_id, accepted_subject(), now=2, tenant="acme"
-    )
+    again = service.surface_validation(sess.session_id, accepted_subject(), now=2, tenant="acme")
     assert again.record_id == rec.record_id
     assert len(service.registry) == 1
 

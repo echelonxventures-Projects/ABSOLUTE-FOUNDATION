@@ -107,14 +107,20 @@ def test_layer_must_originate_the_kind():
 def test_create_rejects_bad_kind():
     with pytest.raises(SecurityClassificationError):
         SecurityClassification.create(
-            "authorization-record", SubjectLayer.SERVICE, "x", "y"  # type: ignore[arg-type]
+            "authorization-record",
+            SubjectLayer.SERVICE,
+            "x",
+            "y",  # type: ignore[arg-type]
         )
 
 
 def test_create_rejects_bad_layer():
     with pytest.raises(SecurityClassificationError):
         SecurityClassification.create(
-            ClassificationKind.CONFIDENTIALITY, "DATA-014", "x", "y"  # type: ignore[arg-type]
+            ClassificationKind.CONFIDENTIALITY,
+            "DATA-014",
+            "x",
+            "y",  # type: ignore[arg-type]
         )
 
 

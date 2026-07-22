@@ -116,9 +116,7 @@ class ProjectRegistry:
             projects = tuple(p for p in projects if p.tenant == tenant or p.tenant is None)
         return projects
 
-    def transition(
-        self, project_id: str, target: ProjectStatus, *, tick: int
-    ) -> Project:
+    def transition(self, project_id: str, target: ProjectStatus, *, tick: int) -> Project:
         """Apply a lifecycle transition (fail-closed) and record the event."""
         project = self.get(project_id)
         validate_transition(project.status, target)

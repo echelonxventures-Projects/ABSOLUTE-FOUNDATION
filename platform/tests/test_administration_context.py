@@ -81,7 +81,9 @@ def test_context_rejects_bad_scope():
 def test_context_rejects_bad_actions():
     with pytest.raises(AdministrationContextError):
         AdministrativeContext.create(
-            _principal(), AdministrativeScope.PLATFORM, frozenset({"inspect"})  # type: ignore[arg-type]
+            _principal(),
+            AdministrativeScope.PLATFORM,
+            frozenset({"inspect"}),  # type: ignore[arg-type]
         )
 
 

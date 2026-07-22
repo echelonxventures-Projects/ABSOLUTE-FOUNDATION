@@ -203,9 +203,7 @@ class SessionRegistry:
         session = self.get(session_id)
         status = session.effective_status(now)
         if status is not SessionStatus.ACTIVE:
-            raise SessionError(
-                "session is not active", session_id=session_id, status=status.value
-            )
+            raise SessionError("session is not active", session_id=session_id, status=status.value)
         return session
 
     def revoke(self, session_id: str, *, tick: int) -> Session:
@@ -248,9 +246,7 @@ class SessionRegistry:
 
     def _record(self, session_id: str, status: SessionStatus, tick: int) -> None:
         self._log.append(
-            SessionEvent(
-                sequence=len(self._log), session_id=session_id, status=status, tick=tick
-            )
+            SessionEvent(sequence=len(self._log), session_id=session_id, status=status, tick=tick)
         )
 
     def to_dict(self) -> dict[str, Any]:

@@ -225,9 +225,7 @@ def validate_governance(record: RuntimeOperationRecord) -> GovernanceAssessment:
     disclosure = descriptor.disclosure
     violations: list[GovernanceViolation] = []
     if not record.certified:
-        violations.append(
-            GovernanceViolation("certified", "runtime unit is not CERTIFIED")
-        )
+        violations.append(GovernanceViolation("certified", "runtime unit is not CERTIFIED"))
     if descriptor.runtime_id != record.runtime_id:
         violations.append(
             GovernanceViolation(
@@ -243,9 +241,7 @@ def validate_governance(record: RuntimeOperationRecord) -> GovernanceAssessment:
         )
     if not disclosure_present(disclosure):
         violations.append(
-            GovernanceViolation(
-                "disclosure-present", "EC-1 provisional-state disclosure is absent"
-            )
+            GovernanceViolation("disclosure-present", "EC-1 provisional-state disclosure is absent")
         )
     if not record.unit.provenance_chain:
         violations.append(

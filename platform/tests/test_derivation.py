@@ -237,9 +237,7 @@ def test_derivation_respects_profile():
     engine = DerivationEngine()
     profile = CanonicalProfile("ucos-ccf/keep-ws", strip_trailing_whitespace=False)
     inp = DerivationInput.of("a", "raw   ", profile=profile)
-    contract = DerivationContract(
-        output_name="o", generator_version="gen/1.0.0", inputs=(inp,)
-    )
+    contract = DerivationContract(output_name="o", generator_version="gen/1.0.0", inputs=(inp,))
     result = engine.derive(contract, lambda v: v["a"], {"a": "raw   "}, profile=profile)
     assert result.output_digest == content_digest("raw   ", profile).value
 

@@ -90,10 +90,11 @@ _SURFACE_TABLE: dict[CapabilityGroup, tuple[str, PortalSection]] = {
     CapabilityGroup.VALIDATION_EXPLORER: ("Validation Explorer", PortalSection.MAIN),
     CapabilityGroup.CERTIFICATION_LEDGER: ("Certification & Ledger", PortalSection.GOVERNANCE),
     CapabilityGroup.RUNTIME_OPERATIONS: ("Runtime Operations", PortalSection.MAIN),
-    CapabilityGroup.MONITORING_OBSERVABILITY: (
-        "Monitoring & Health", PortalSection.OBSERVABILITY),
+    CapabilityGroup.MONITORING_OBSERVABILITY: ("Monitoring & Health", PortalSection.OBSERVABILITY),
     CapabilityGroup.ADMINISTRATION_POLICY: (
-        "Administration & Policy", PortalSection.ADMINISTRATION),
+        "Administration & Policy",
+        PortalSection.ADMINISTRATION,
+    ),
     CapabilityGroup.AUDIT_TRACEABILITY: ("Audit & Traceability", PortalSection.GOVERNANCE),
     CapabilityGroup.API_ACCESS: ("API Access", PortalSection.MAIN),
 }
@@ -146,9 +147,7 @@ class PortalSurface:
                 "portal surface path must be an absolute route", group=group.value
             )
         if not isinstance(required_permission, Permission):
-            raise PortalContractError(
-                "required_permission must be a Permission", group=group.value
-            )
+            raise PortalContractError("required_permission must be a Permission", group=group.value)
         core = {
             "title": title,
             "group": group.value,
@@ -190,9 +189,7 @@ def default_portal_surfaces() -> tuple[PortalSurface, ...]:
     surfaces: list[PortalSurface] = []
     for group in all_capability_groups():
         title, section = _SURFACE_TABLE[group]
-        surfaces.append(
-            PortalSurface.create(title, group, section, _surface_path(group))
-        )
+        surfaces.append(PortalSurface.create(title, group, section, _surface_path(group)))
     return tuple(surfaces)
 
 
@@ -271,9 +268,7 @@ def portal_contract(name: str, description: str = "") -> Contract:
 
 def default_portal_contracts() -> tuple[Contract, ...]:
     """The published portal contracts as concrete :class:`Contract` objects."""
-    return tuple(
-        portal_contract(name, description) for name, description in _PORTAL_CONTRACT_NAMES
-    )
+    return tuple(portal_contract(name, description) for name, description in _PORTAL_CONTRACT_NAMES)
 
 
 __all__ = [

@@ -125,9 +125,7 @@ class AssociationRegistry:
     @property
     def project_ids(self) -> tuple[str, ...]:
         """Every project id that currently has at least one association (stable order)."""
-        return tuple(
-            pid for pid in sorted(self._by_project) if self._by_project[pid]
-        )
+        return tuple(pid for pid in sorted(self._by_project) if self._by_project[pid])
 
     @property
     def events(self) -> tuple[AssociationEvent, ...]:
@@ -151,9 +149,7 @@ class AssociationRegistry:
     def fingerprint(self) -> str:
         return content_hash(self.to_dict())
 
-    def _record(
-        self, association: ProjectAssociation, action: str, tick: int
-    ) -> None:
+    def _record(self, association: ProjectAssociation, action: str, tick: int) -> None:
         self._log.append(
             AssociationEvent(
                 sequence=len(self._log),

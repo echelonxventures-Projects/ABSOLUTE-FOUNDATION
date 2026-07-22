@@ -95,9 +95,7 @@ class ContractRegistry:
             return versions[max(versions)]
         resolved = Version.parse(version) if isinstance(version, str) else version
         if resolved not in versions:
-            raise ContractViolation(
-                "no such contract version", name=name, version=str(resolved)
-            )
+            raise ContractViolation("no such contract version", name=name, version=str(resolved))
         return versions[resolved]
 
     def check_compatibility(self, name: str, required: str | Version) -> Contract:
@@ -106,9 +104,7 @@ class ContractRegistry:
         versions = self._by_name.get(name)
         if not versions:
             raise ContractViolation("no such contract", name=name)
-        candidates = [
-            versions[v] for v in versions if v.is_backward_compatible_with(needed)
-        ]
+        candidates = [versions[v] for v in versions if v.is_backward_compatible_with(needed)]
         if not candidates:
             raise ContractViolation(
                 "no backward-compatible version available",

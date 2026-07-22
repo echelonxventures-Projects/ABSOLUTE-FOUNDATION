@@ -144,8 +144,11 @@ def data_dir(tmp_path, sample_artifacts, sample_relationships, sample_volumes) -
     """Write a complete sample substrate to a temp dir and return its path."""
     (tmp_path / ARTIFACTS_FILE).write_text(
         json.dumps(
-            {"generated_at": "2026-07-16T00:00:00+00:00", "count": len(sample_artifacts),
-             "artifacts": sample_artifacts}
+            {
+                "generated_at": "2026-07-16T00:00:00+00:00",
+                "count": len(sample_artifacts),
+                "artifacts": sample_artifacts,
+            }
         ),
         encoding="utf-8",
     )
@@ -173,7 +176,6 @@ def real_data_dir() -> Path:
     if not path.is_dir():
         pytest.skip("00-BOOK/DATA registry substrate not present")
     return path
-
 
 
 # --------------------------------------------------------------------------- #
@@ -238,9 +240,7 @@ def compiler_data_dir(tmp_path, compiler_artifacts):
     (tmp_path / RELATIONSHIPS_FILE).write_text(
         json.dumps({"count": 0, "relationships": []}), encoding="utf-8"
     )
-    (tmp_path / VOLUMES_FILE).write_text(
-        json.dumps({"count": 0, "volumes": []}), encoding="utf-8"
-    )
+    (tmp_path / VOLUMES_FILE).write_text(json.dumps({"count": 0, "volumes": []}), encoding="utf-8")
     return tmp_path
 
 
@@ -277,12 +277,8 @@ def data_blueprint() -> dict:
                 },
                 {"name": "created_at", "data_type": "timestamp", "nullable": False},
             ],
-            "indexes": [
-                {"name": "ix_customer_email", "columns": ["email"], "unique": True}
-            ],
-            "relationships": [
-                {"name": "orders", "target": "BP-DATA-0002", "kind": "one_to_many"}
-            ],
+            "indexes": [{"name": "ix_customer_email", "columns": ["email"], "unique": True}],
+            "relationships": [{"name": "orders", "target": "BP-DATA-0002", "kind": "one_to_many"}],
         },
     }
 
@@ -308,7 +304,6 @@ def dependency_blueprint() -> dict:
             ],
         },
     }
-
 
 
 # --------------------------------------------------------------------------- #
@@ -347,12 +342,102 @@ def published_package(tmp_path, compiler_registry, data_blueprint, runtime_signe
 
 
 @pytest.fixture
-def dependency_published_package(
-    tmp_path, compiler_registry, dependency_blueprint, runtime_signer
-):
+def dependency_published_package(tmp_path, compiler_registry, dependency_blueprint, runtime_signer):
     """A second published package (BP-DATA-0002) usable as a dependency closure member."""
     output_dir = tmp_path / "published-dep"
     pipeline = CompilerPipeline(compiler_registry, signer=runtime_signer, output_dir=output_dir)
     result = pipeline.compile_one(dependency_blueprint)
     assert result.success and result.published is not None
     return result.published
+
+
+# --------------------------------------------------------------------------- #
+# EPIC-006 (Universal Runtime Composition) fixtures — a synthetic RuntimeUnit   #
+# factory so the composition graph/context/planner/composition/orchestration    #
+# layers can be exercised without re-compiling a package for every universe.     #
+# (The integration suite still composes *real* assembled units end to end.)      #
+# --------------------------------------------------------------------------- #
+
+import hashlib as _hashlib  # noqa: E402
+
+from engine.runtime.assembly import RuntimeUnit  # noqa: E402
+from engine.runtime.disclosure import build_disclosure  # noqa: E402
+
+
+@pytest.fixture
+def make_runtime_unit():
+    """Return a factory building a minimal, disclosed :class:`RuntimeUnit`.
+
+    The ``package_sha256`` is derived deterministically from the blueprint id, so
+    two units with the same id share a hash and two different ids never collide.
+    Pass ``disclosure=False`` to build a unit missing the EC-1 disclosure.
+    """
+
+    def _make(blueprint_id, *, disclosure=True):
+        sha = _hashlib.sha256(blueprint_id.encode()).hexdigest()
+        return RuntimeUnit(
+            runtime_id=f"UCOS-RUN-{blueprint_id}",
+            blueprint_id=blueprint_id,
+            artifact_id=f"UCOS-CMP-{blueprint_id}",
+            name=blueprint_id,
+            version="1.0.0",
+            package_sha256=sha,
+            provenance_chain=(blueprint_id,),
+            signature={"algorithm": "HMAC-SHA256"},
+            sbom={"sbom_format": "ucos-sbom/1.0.0", "components": [{"name": "x"}]},
+            dependency_closure=(),
+            secrets=(),
+            resources={},
+            descriptor={},
+            environment="runtime",
+            disclosure=build_disclosure() if disclosure else None,
+        )
+
+    return _make
+
+
+# --------------------------------------------------------------------------- #
+# EPIC-RTE-002 (Runtime Execution Platform) fixtures — deterministic           #
+# compositions built from synthetic, disclosed RuntimeUnits so the execution   #
+# scheduler/coordinator/lifecycle/observability layers can be exercised without #
+# re-compiling a package. Executes nothing — a recorded structure only.         #
+# --------------------------------------------------------------------------- #
+
+from engine.runtime.composition import Universe, compose  # noqa: E402
+from engine.runtime.context import Federation  # noqa: E402
+
+
+@pytest.fixture
+def make_composition(make_runtime_unit):
+    """Return a factory for a diamond composition A→{B,C}→D in one context.
+
+    ``coordination`` selects the recorded coordination class. The graph is a
+    diamond so concurrent scheduling yields multiple stages and >1 parallelism.
+    """
+
+    def _make(coordination="concurrent"):
+        a = Universe.of(make_runtime_unit("A"), context_id="ctx1")
+        b = Universe.of(make_runtime_unit("B"), context_id="ctx1", depends_on=["A"])
+        c = Universe.of(make_runtime_unit("C"), context_id="ctx1", depends_on=["A"])
+        d = Universe.of(make_runtime_unit("D"), context_id="ctx1", depends_on=["B", "C"])
+        return compose([a, b, c, d], coordination=coordination)
+
+    return _make
+
+
+@pytest.fixture
+def composition(make_composition):
+    """A ready-made concurrent diamond composition."""
+    return make_composition("concurrent")
+
+
+@pytest.fixture
+def federated_composition(make_runtime_unit):
+    """A two-context composition with an explicit cross-context federation.
+
+    ``A`` lives in ``ctx1``; ``B`` lives in ``ctx2`` and depends on ``A`` — a
+    cross-context dependency authorised by an explicit federation reference.
+    """
+    a = Universe.of(make_runtime_unit("A"), context_id="ctx1")
+    b = Universe.of(make_runtime_unit("B"), context_id="ctx2", depends_on=["A"])
+    return compose([a, b], coordination="sequential", federations=[Federation("B", "A")])

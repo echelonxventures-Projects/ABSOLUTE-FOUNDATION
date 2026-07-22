@@ -78,6 +78,19 @@ from engine.certification.evidence import (
     CertificationEvidence,
     build_certification_evidence,
 )
+from engine.certification.integrity import (
+    INTEGRITY_EVIDENCE_FORMAT,
+    INTEGRITY_REPORT_FORMAT,
+    CertificationRegister,
+    ConstitutionalIntegrityError,
+    DuplicateCertificationError,
+    IntegrityEvidence,
+    IntegrityFinding,
+    IntegrityReport,
+    build_integrity_evidence,
+    enforce_integrity,
+    verify_certification_integrity,
+)
 from engine.certification.ledger import (
     GENESIS_HASH,
     CertificationLedger,
@@ -116,6 +129,18 @@ __all__ = [
     "CertificationEvidence",
     "build_certification_evidence",
     "EVIDENCE_FORMAT",
+    # constitutional integrity (EPIC-008 strengthening)
+    "INTEGRITY_REPORT_FORMAT",
+    "INTEGRITY_EVIDENCE_FORMAT",
+    "CertificationRegister",
+    "verify_certification_integrity",
+    "enforce_integrity",
+    "IntegrityFinding",
+    "IntegrityReport",
+    "IntegrityEvidence",
+    "build_integrity_evidence",
+    "DuplicateCertificationError",
+    "ConstitutionalIntegrityError",
     # ledger
     "CertificationLedger",
     "CertificationLedgerEntry",

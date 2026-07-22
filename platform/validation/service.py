@@ -384,9 +384,7 @@ class ValidationConsoleService:
 
     # -- selection / inspection (record-scoped, audited) ------------------------
 
-    def select_validation(
-        self, session_id: str, record_id: str, *, now: int
-    ) -> ValidationContext:
+    def select_validation(self, session_id: str, record_id: str, *, now: int) -> ValidationContext:
         """Select a record and return its runtime context (requires INSPECT; fail-closed)."""
         access = self._require_access(session_id, record_id, ValidationAction.INSPECT, now=now)
         record = self._registry.get(record_id)
@@ -424,9 +422,7 @@ class ValidationConsoleService:
         )
         return reference
 
-    def view_decision(
-        self, session_id: str, record_id: str, *, now: int
-    ) -> ValidationDecisionView:
+    def view_decision(self, session_id: str, record_id: str, *, now: int) -> ValidationDecisionView:
         """Render the acceptance-decision view (requires VIEW_DECISION; fail-closed)."""
         access = self._require_access(
             session_id, record_id, ValidationAction.VIEW_DECISION, now=now

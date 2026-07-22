@@ -230,9 +230,7 @@ class Blueprint:
         if not isinstance(name, str) or not name:
             raise BlueprintContractError("blueprint name is required", slug=normalized_slug)
         if not isinstance(workspace_id, str) or not workspace_id:
-            raise BlueprintContractError(
-                "blueprint requires a workspace_id", slug=normalized_slug
-            )
+            raise BlueprintContractError("blueprint requires a workspace_id", slug=normalized_slug)
         if not isinstance(owner_subject, str) or not owner_subject:
             raise BlueprintContractError(
                 "blueprint owner_subject is required", slug=normalized_slug
@@ -361,8 +359,7 @@ def blueprint_contract(name: str, description: str = "") -> Contract:
 def default_blueprint_contracts() -> tuple[Contract, ...]:
     """The published blueprint contracts as concrete :class:`Contract` objects."""
     return tuple(
-        blueprint_contract(name, description)
-        for name, description in _BLUEPRINT_CONTRACT_NAMES
+        blueprint_contract(name, description) for name, description in _BLUEPRINT_CONTRACT_NAMES
     )
 
 

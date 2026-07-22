@@ -138,9 +138,7 @@ class AdministrativeMembershipRegistry:
         tenant: str | None = None,
     ) -> AdministrativeMember:
         """Assign a principal as administrator of a scope target (fail-closed on duplicate)."""
-        member = AdministrativeMember.create(
-            scope, target, principal_id, subject, tenant=tenant
-        )
+        member = AdministrativeMember.create(scope, target, principal_id, subject, tenant=tenant)
         if member.member_id in self._by_id:
             raise AdministrationMembershipError(
                 "principal is already an administrator of this target",
@@ -180,9 +178,7 @@ class AdministrativeMembershipRegistry:
             raise AdministrationMembershipError("a valid AdministrativeMember is required")
         self._by_id[member.member_id] = member
 
-    def is_administrator(
-        self, scope: AdministrativeScope, target: str, principal_id: str
-    ) -> bool:
+    def is_administrator(self, scope: AdministrativeScope, target: str, principal_id: str) -> bool:
         """True iff ``principal_id`` is an administrator of ``(scope, target)``."""
         probe = AdministrativeMember.create(scope, target, principal_id, "probe")
         return probe.member_id in self._by_id
@@ -193,11 +189,7 @@ class AdministrativeMembershipRegistry:
         """Every administrator of ``(scope, target)`` in stable (member-id) order."""
         if not isinstance(scope, AdministrativeScope):
             raise AdministrationMembershipError("scope must be an AdministrativeScope")
-        selected = [
-            m
-            for m in self._by_id.values()
-            if m.scope is scope and m.target == target
-        ]
+        selected = [m for m in self._by_id.values() if m.scope is scope and m.target == target]
         return tuple(sorted(selected, key=lambda m: m.member_id))
 
     def scopes_of(self, principal_id: str) -> tuple[AdministrativeMember, ...]:

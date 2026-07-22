@@ -11,13 +11,13 @@ Legend: **Authoritative Source** = source governing the definition per precedenc
 
 | ID | Element | Definition (verbatim / as extracted) | Sources | Authoritative | Notes |
 |----|---------|--------------------------------------|---------|---------------|-------|
-| ONT-01 | **BEING** ⚠ | "That Which Is." The ultimate source; nothing exists/known/governed/simulated/evolved/compiled outside Being; nothing supersedes Being. | SRC-01, SRC-02, SRC-03, SRC-05, SRC-06 | SRC-02 / SRC-03 | Absolute Axiom. SRC-07 omits Being as a layer, asserting the triad is topmost → conflict DUP-01. |
+| ONT-01 | **BEING** ⚠→✅ | "That Which Is." The ultimate source; nothing exists/known/governed/simulated/evolved/compiled outside Being; nothing supersedes Being. | SRC-01, SRC-02, SRC-03, SRC-05, SRC-06 | SRC-02 / SRC-03 | Absolute Axiom. ✅ **RATIFIED (UCOS-RAT-001 / RAT-01 / SUP-01): BEING = axiom-only (non-layer)** — supreme as axiom, not an addressable layer; the layered ontology begins at EXISTENCE. SRC-07's "no higher layer" satisfied without repudiation. |
 | ONT-02 | **EXISTENCE** | That which is; the first manifestation of Being. Root primitive. | all foundational sources | SRC-02 | Root primitive #1. |
 | ONT-03 | **RELATIONSHIP** | How existences connect; every existence participates in relationships. Root primitive. | all foundational sources | SRC-02 | Root primitive #2. |
 | ONT-04 | **TRANSFORMATION** | How relationships change; every relationship undergoes transformation. Root primitive. | all foundational sources | SRC-02 | Root primitive #3. |
-| ONT-05 | **SPACE-TIME** ⚠ | In SRC-01/09/10: a root-chain element ("BEING→EXISTENCE→SPACE-TIME→RELATIONSHIP→TRANSFORMATION"), with Ω-LAW-02 "Every Existence Occupies Space-Time." In SRC-02/03: **not** a root primitive; Space & Time are two axes of the Universal Coordinate Framework. | SRC-01, SRC-03, SRC-09, SRC-10 | SRC-03 (coordinate, not root) | Core conflict DUP-02 / SUP-02. |
+| ONT-05 | **SPACE-TIME** ⚠→✅ | In SRC-01/09/10: a root-chain element ("BEING→EXISTENCE→SPACE-TIME→RELATIONSHIP→TRANSFORMATION"), with Ω-LAW-02 "Every Existence Occupies Space-Time." In SRC-02/03: **not** a root primitive; Space & Time are two axes of the Universal Coordinate Framework. | SRC-01, SRC-03, SRC-09, SRC-10 | SRC-03 (coordinate, not root) | ✅ **RATIFIED (UCOS-RAT-001 / RAT-03 / SUP-02): coordinate, not root primitive.** Ω-LAW-02 retired as a root law (reframed as coordinate-applicability). 5-primitive chain superseded-on-arity. |
 
-**Root ontology chain — conflicting canonical forms:**
+**Root ontology chain — canonical form RATIFIED (UCOS-RAT-001 / RAT-02 / SUP-07): 4-primitive** — **BEING axiom** (non-layer) over **EXISTENCE → RELATIONSHIP → TRANSFORMATION**. The prior conflicting forms are resolved:
 - 5-primitive (SRC-01, SRC-09, SRC-10): BEING → EXISTENCE → SPACE-TIME → RELATIONSHIP → TRANSFORMATION.
 - 4-primitive (SRC-02, SRC-03, SRC-05, SRC-06): BEING → EXISTENCE → RELATIONSHIP → TRANSFORMATION.
 - 3-primitive triad (SRC-07): EXISTENCE → RELATIONSHIP → TRANSFORMATION ("no higher layer").
@@ -96,6 +96,6 @@ Single-source or domain-scoped ontologies, catalogued for completeness (not root
 ---
 
 ## CONFLICT SUMMARY (ontology)
-1. **ONT-01 BEING vs triad** — Is BEING the root axiom above EXISTENCE (SRC-01/02/03/05/06) or is EXISTENCE the topmost irreducible with "no higher layer" (SRC-07)? → DUP-01 / SUP-01.
-2. **ONT-05 SPACE-TIME** — root primitive (SRC-01/09/10) vs coordinate axis (SRC-02/03) → DUP-02 / SUP-02.
-Both are cross-referenced in DUPLICATE-REGISTER and resolved (with authoritative source + flag-for-ratification) in SUPERSESSION-REGISTER.
+1. **ONT-01 BEING vs triad** — ✅ **RESOLVED / RATIFIED (UCOS-RAT-001 / RAT-01 / SUP-01):** BEING = axiom-only (non-layer); layered ontology begins at EXISTENCE.
+2. **ONT-05 SPACE-TIME** — ✅ **RESOLVED / RATIFIED (UCOS-RAT-001 / RAT-03 / SUP-02):** coordinate axis, not a root primitive; Ω-LAW-02 retired as a root law.
+Both were cross-referenced in DUPLICATE-REGISTER and are now ratified in SUPERSESSION-REGISTER; the canonical root form is the 4-primitive chain beneath the BEING axiom (RAT-02 / SUP-07). See `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md`.
