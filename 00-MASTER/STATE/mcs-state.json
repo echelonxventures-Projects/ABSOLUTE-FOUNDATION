@@ -1,23 +1,23 @@
 {
   "mcs_version": "1.0",
   "authority": "NONE",
-  "captured_head": "5874ede",
-  "captured_utc": "2026-07-18T00:00:00Z",
+  "captured_head": "b1c1c7e",
+  "captured_utc": "2026-07-22T00:00:00Z",
   "repository": {
     "origin": "ABSOLUTE-FOUNDATION",
     "branch": "governance-reconciliation",
-    "head": "5874ede",
-    "working_tree": "DIRTY",
-    "sync": { "ahead": 0, "behind": 0 }
+    "head": "b1c1c7e",
+    "working_tree": "CLEAN",
+    "sync": { "ahead": 2, "behind": 0 }
   },
   "current": {
     "program": "EC-3 Bands 10-13 Realization Program",
     "phase": "Realization (post-EC-2-closure)",
-    "band": "Band 10 - Data (ARCH-DATA-001)",
-    "work_package": "EC-3 Band 10 (Data) Realization Mission (AP-2 ADMITTED)",
-    "capability": "Data foundation realization (meta-model / entity / schema)",
-    "capability_state": "ACTIVE",
-    "milestone": "Band 10 first realized units -> CCE-COMPLETE"
+    "band": "Band 13 - Infrastructure (ARCH-INFRASTRUCTURE-001)",
+    "work_package": "EC-3 Band 13 (Infrastructure) Realization Mission (MEP-04 OPEN; AP-5 ADMITTED)",
+    "capability": "STATE-SYNC-002 derived-state synchronization (state-sync only; U01-U10 CERTIFIED & COMPLETE)",
+    "capability_state": "SYNCHRONIZED",
+    "milestone": "MEP-04 OPEN - U01..U10 CERTIFIED & COMPLETE; remaining spine U11 band-cert -> U12 freeze"
   },
   "blockers": [
     {
@@ -29,11 +29,10 @@
   ],
   "risks": [
     { "id": "R-CI-STALE", "description": "CI build/unit/security signals dated 2026-07-15 predate current HEAD and EC-2 2,677-pass evidence", "mitigation": "MEP-08 CI signal refresh; reconcile signal date vs HEAD" },
-    { "id": "R-TREE-DIRTY", "description": "Uncommitted REG-AUTO-001 regeneration + new artifacts + this session's 00-MASTER subsystem", "mitigation": "Commit as logical capabilities (MEP-10 + MEP-07)" },
-    { "id": "R-BAND10", "description": "Band-10 realization risks per ARCH-DATA-001", "mitigation": "CCE-gated, additive-only, No-Orphan trace" }
+    { "id": "R-BAND13", "description": "Band-13 realization risks per ARCH-INFRASTRUCTURE-001", "mitigation": "CCE-gated, additive-only, No-Orphan trace; reuse frozen EC-1/data/service/application by reference" }
   ],
   "next_authorized_capability": {
-    "mep_ref": "MEP-01",
-    "text": "Continue EC-3 Band 10 (Data) realization under ARCH-DATA-001 + 10-DATA/, CCE-gated, additive-only. Commit this session's 00-MASTER MCS subsystem (MEP-10) and pending REG-AUTO-001 surfaces (MEP-07) before/with the next logical capability."
+    "mep_ref": "MEP-04",
+    "text": "DEFERRED - awaiting explicit authorization to begin EC3-B13-U11 (Band-13 Realization Certification & Completion), the certification-of-certifications referencing every unit certification U01..U10 by id (charter EC3-B13-P01 Stage 7). U01..U10 CERTIFIED & COMPLETE; U08/U09 PROVISIONALLY RATIFIED (S4-06/S4-11); U10 UIMM PROVISIONALLY RATIFIED (S4-12). PHASE-008 Universal Security domain founded (UCOS-SEC-000001..000004). STOP - do NOT begin EC3-B13-U11 without explicit authorization."
   }
 }
