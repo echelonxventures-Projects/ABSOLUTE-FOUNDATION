@@ -6,7 +6,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 597 | UPN-000000001–UPN-000008937 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 612 | UPN-000000001–UPN-000008988 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 48 | UPN-000001327–UPN-000007992 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 39 | UPN-000000022–UPN-000008924 |
@@ -35,7 +35,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 597
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 612
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -636,6 +636,21 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-REPOOPERATIO-000001` | Repo Operations | — | ACTIVE |
 | `UCOS-MASTER-000037` | UCOS Ω∞ REPOSITORY RATIFICATION DETERMINATION | — | ACTIVE |
 | `UCOS-CEP-000035` | UCOS Ω∞ — STAGE 04 · S4-12 — INFRASTRUCTURE-005 UIMM INTEGRAT… | CEP-STAGE-04-S4-12 | COMPLETE |
+| `UCOS-INFRASTRUCTU-000118` | EC3-B13-U11 — BAND-13 REALIZATION CERTIFICATION & COMPLETION … | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000119` | Acceptance Decision | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000120` | Band Completion | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000121` | Cce Certification | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000122` | Certification Evidence | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000123` | Certification Ledger | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000124` | Completion Determination | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000125` | Determinism | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000126` | Infrastructure Compliance | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000127` | Readiness Determination | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000128` | Realization Evidence | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000129` | Traceability | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000130` | Unit Inventory | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000131` | Validation Evidence | — | ACTIVE |
+| `UCOS-INFRASTRUCTU-000132` | Validation Report | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
