@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-22T05:42:51+00:00",
+  "generated_at": "2026-07-22T08:22:29+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1066,
-    "versioned_artifacts": 974,
-    "lineage_nodes": 974,
+    "change_events": 1067,
+    "versioned_artifacts": 975,
+    "lineage_nodes": 975,
     "artifacts_with_predecessors": 5,
     "artifacts_with_successors": 5
   },
   "change_event_histogram": {
-    "Created": 974,
+    "Created": 975,
     "Modified": 92
   },
   "evolution_timeline": [
@@ -6408,6 +6408,12 @@
       "at": "2026-07-22T05:42:51+00:00",
       "subject": "UCOS-INTELLIGENCE-000011",
       "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001067",
+      "at": "2026-07-22T08:22:28+00:00",
+      "subject": "UCOS-CEP-000035",
+      "kind": "Created"
     }
   ],
   "change_events": [
@@ -10729,12 +10735,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000433",
@@ -10744,12 +10745,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000434",
@@ -10759,12 +10755,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000435",
@@ -10774,12 +10765,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000436",
@@ -10789,12 +10775,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000437",
@@ -10804,12 +10785,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000438",
@@ -10819,12 +10795,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000439",
@@ -10834,12 +10805,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000440",
@@ -10849,12 +10815,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000441",
@@ -10864,12 +10825,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000442",
@@ -16389,12 +16345,7 @@
       "snapshot_seq": 2,
       "from": "654b041f14a36c0c58f0563285e0b07094abea47a7ae938864b771bf5f1ad7aa",
       "to": "64ed62899960c3801acce814a3474bb5e532054cbe622147171e2740c8d6725c",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000994",
@@ -16404,12 +16355,7 @@
       "snapshot_seq": 2,
       "from": "e6b510f353cc6b509df797e2d5177961c2937f01be1e6a8a421ca4084f791ffc",
       "to": "5e2323c677f55e1dfb576dee9e2e8de3b1a2fc0e1e6773c008dd76e6c4c4c64c",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000995",
@@ -16419,12 +16365,7 @@
       "snapshot_seq": 2,
       "from": "dfbca2a5c9872243835a2714466bf44d65cd95a04b99bf263bd1ba01033cfc19",
       "to": "f7fd35991a56cae7ce2726424a38b1613ac780968b68bcb829272f227ff3169c",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000996",
@@ -16434,12 +16375,7 @@
       "snapshot_seq": 2,
       "from": "c3b6f0bdb8b8fd6f063bed0bb028232d3705b37032828c172af6840453bbcbae",
       "to": "281bcc86139db7f3bd4d0b60d0ea760ef0209e90484a0b340da6c4e76d9662f5",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000997",
@@ -16449,12 +16385,7 @@
       "snapshot_seq": 2,
       "from": "6b4cf6c53de55629cf81e27c248100fd32eb7c5a0af7d7aa96da05faaf7f44a1",
       "to": "b634720dbec487e0eb769c86cdca697855371b82e6232340543b322998f86745",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000998",
@@ -16464,12 +16395,7 @@
       "snapshot_seq": 2,
       "from": "0d34dd766259ada947a937a9c717bb17561e5b19b13e62613fbe99c45690854d",
       "to": "f50760604644820d1840f1eea5b151dfb14332a972897f533889095883649e7d",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000999",
@@ -16479,12 +16405,7 @@
       "snapshot_seq": 2,
       "from": "0190796fb2d636174c1d4c53d438d7c9f93d61d474c8ab2904f51cabb8fc7655",
       "to": "04d8dd685c7cb046b66601d71328a24ecaf994da4c3e477d8e32642a5eb1a30e",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001000",
@@ -16494,12 +16415,7 @@
       "snapshot_seq": 2,
       "from": "79b2fda95b43defae6a57b8f89fcd907433ce158adb32588dceb56dbb5a8f4c0",
       "to": "f208004dd65227e2c75e741519a051c4b22354a0409b54014b15b343345f7de7",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001001",
@@ -16509,12 +16425,7 @@
       "snapshot_seq": 2,
       "from": "3e75974b40c98b49fbea592f04efdf6fe4f60416806350808d6118fe7b661003",
       "to": "3e8dbd6898a013ea52098211b56baae7aff78919fb3f4add36e71060e3ce8180",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001002",
@@ -16524,12 +16435,7 @@
       "snapshot_seq": 2,
       "from": "465c419a34dc3e7236921fc064f7a61c0159cbc7daeac75b1eef0fddbfdcbf0a",
       "to": "41191b5509e4c13e62bf73bf71e1f9a728649d43aff22f7926f2971755771911",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001003",
@@ -16539,12 +16445,7 @@
       "snapshot_seq": 3,
       "from": "64ed62899960c3801acce814a3474bb5e532054cbe622147171e2740c8d6725c",
       "to": "895945b1df94c5e7089604609b4d58f862d5195e93f64c7faea9c284852bc6cd",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001004",
@@ -16554,12 +16455,7 @@
       "snapshot_seq": 3,
       "from": "5e2323c677f55e1dfb576dee9e2e8de3b1a2fc0e1e6773c008dd76e6c4c4c64c",
       "to": "b84ea7329dd239b1ba2062ff746a1d183190b73993c03d941ac6235e1a742a31",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001005",
@@ -16569,12 +16465,7 @@
       "snapshot_seq": 3,
       "from": "f7fd35991a56cae7ce2726424a38b1613ac780968b68bcb829272f227ff3169c",
       "to": "97d9b840523325f71bd6ed2ed4b8c1f5148ceed689b3111910e6757f8c4f5f80",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001006",
@@ -16584,12 +16475,7 @@
       "snapshot_seq": 3,
       "from": "281bcc86139db7f3bd4d0b60d0ea760ef0209e90484a0b340da6c4e76d9662f5",
       "to": "6dc188de367db97bc30677ac904e20811b2f5a4e315c70f0645ca047948a08a0",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001007",
@@ -16599,12 +16485,7 @@
       "snapshot_seq": 3,
       "from": "b634720dbec487e0eb769c86cdca697855371b82e6232340543b322998f86745",
       "to": "6c2ea8e9d980119681b0f63ff47d7e33e5e1736ec671e857aeb8841ed09c8154",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001008",
@@ -16614,12 +16495,7 @@
       "snapshot_seq": 3,
       "from": "f50760604644820d1840f1eea5b151dfb14332a972897f533889095883649e7d",
       "to": "9cd8443e83c4d35e5aa6dacf698ca1c43d6fab35c19f5d07d82b97e0132eeb2c",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001009",
@@ -16629,12 +16505,7 @@
       "snapshot_seq": 3,
       "from": "04d8dd685c7cb046b66601d71328a24ecaf994da4c3e477d8e32642a5eb1a30e",
       "to": "3a378f4ddbb7e9567c12b0dbe956fdf709f53481a286aec6f3b7883e5f900744",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001010",
@@ -16644,12 +16515,7 @@
       "snapshot_seq": 3,
       "from": "f208004dd65227e2c75e741519a051c4b22354a0409b54014b15b343345f7de7",
       "to": "74a9a0efc7f43c8bcd208e19d2d5fcc6048f1aa47878658e7e8a6328ee721ceb",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001011",
@@ -16659,12 +16525,7 @@
       "snapshot_seq": 3,
       "from": "3e8dbd6898a013ea52098211b56baae7aff78919fb3f4add36e71060e3ce8180",
       "to": "f8a96b5270fd2569efc128c060d79d8f29d798d25921766a20bb093bf95c22ce",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001012",
@@ -16674,12 +16535,7 @@
       "snapshot_seq": 3,
       "from": "41191b5509e4c13e62bf73bf71e1f9a728649d43aff22f7926f2971755771911",
       "to": "735932fa0dd850ee28805b357fbfd0395b14a1b827b9f09114d65663a6fe7025",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001013",
@@ -16689,12 +16545,7 @@
       "snapshot_seq": 4,
       "from": "895945b1df94c5e7089604609b4d58f862d5195e93f64c7faea9c284852bc6cd",
       "to": "10fb61fcecbccdcd8056dbb7471a95f3afb2b5bc3994a4cf8eaa8f3f3a3dd0e2",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001014",
@@ -16704,12 +16555,7 @@
       "snapshot_seq": 4,
       "from": "b84ea7329dd239b1ba2062ff746a1d183190b73993c03d941ac6235e1a742a31",
       "to": "d1710119d72148bae2506f532fb222dffb7cda9f4942e8df9e76921cd9388172",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001015",
@@ -16719,12 +16565,7 @@
       "snapshot_seq": 4,
       "from": "97d9b840523325f71bd6ed2ed4b8c1f5148ceed689b3111910e6757f8c4f5f80",
       "to": "27d2fc591f623d64851cf6dacd828ffafe32536cfa469db41d887847ec77263a",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001016",
@@ -16734,12 +16575,7 @@
       "snapshot_seq": 4,
       "from": "6dc188de367db97bc30677ac904e20811b2f5a4e315c70f0645ca047948a08a0",
       "to": "a2a11be2285e8f6152e7daafe4d1d523a01734d069f36eea8d7e9d6d345e6a7e",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001017",
@@ -16749,12 +16585,7 @@
       "snapshot_seq": 4,
       "from": "6c2ea8e9d980119681b0f63ff47d7e33e5e1736ec671e857aeb8841ed09c8154",
       "to": "9aff05ce1880710d61a9fff8539ac5e7dc8e2dac4b8ac75b0552409e4da3fb13",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001018",
@@ -16764,12 +16595,7 @@
       "snapshot_seq": 4,
       "from": "9cd8443e83c4d35e5aa6dacf698ca1c43d6fab35c19f5d07d82b97e0132eeb2c",
       "to": "8f38cbd685163d146df305c3e2d0b41fde4f833042cea829f097f34994fdb655",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001019",
@@ -16779,12 +16605,7 @@
       "snapshot_seq": 4,
       "from": "3a378f4ddbb7e9567c12b0dbe956fdf709f53481a286aec6f3b7883e5f900744",
       "to": "0ad92dc85a6ee1c1693028375c27e41e6a0aee50594e7706b0aa4a7d010ae7e8",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001020",
@@ -16794,12 +16615,7 @@
       "snapshot_seq": 4,
       "from": "74a9a0efc7f43c8bcd208e19d2d5fcc6048f1aa47878658e7e8a6328ee721ceb",
       "to": "9d06b3a8e641ec6f8a9413bd9753c8b165bf1a6b027878ea11d14e81641947bd",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001021",
@@ -16809,12 +16625,7 @@
       "snapshot_seq": 4,
       "from": "f8a96b5270fd2569efc128c060d79d8f29d798d25921766a20bb093bf95c22ce",
       "to": "03f8e871c72def6ea96f0f00345b22fa76f5082cba310b057c11bd31d08b1412",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001022",
@@ -16824,12 +16635,7 @@
       "snapshot_seq": 4,
       "from": "735932fa0dd850ee28805b357fbfd0395b14a1b827b9f09114d65663a6fe7025",
       "to": "718bf9573b18a11d50d6076e1a2c097a8552d55a6ab98af957735306b27ed042",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001023",
@@ -16839,12 +16645,7 @@
       "snapshot_seq": 5,
       "from": "10fb61fcecbccdcd8056dbb7471a95f3afb2b5bc3994a4cf8eaa8f3f3a3dd0e2",
       "to": "63c9e866e6c9fc6128140e969eb88b9c6323201c18854a8e745b129b8c816e92",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001024",
@@ -16854,12 +16655,7 @@
       "snapshot_seq": 5,
       "from": "d1710119d72148bae2506f532fb222dffb7cda9f4942e8df9e76921cd9388172",
       "to": "ab1948fe4e32be4df525171c5a85b3d4d10ae18fe7ae4d4eb6e1c51bd719704d",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001025",
@@ -16869,12 +16665,7 @@
       "snapshot_seq": 5,
       "from": "27d2fc591f623d64851cf6dacd828ffafe32536cfa469db41d887847ec77263a",
       "to": "a2884b0152ed3ef4f1efc9fd38c620e7e0643983160714eb4118e10758f03f0c",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001026",
@@ -16884,12 +16675,7 @@
       "snapshot_seq": 5,
       "from": "a2a11be2285e8f6152e7daafe4d1d523a01734d069f36eea8d7e9d6d345e6a7e",
       "to": "3dac3c0ffbb611152e61d830452a1f08170f5221857ab514f7a9680dc79959ef",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001027",
@@ -16899,12 +16685,7 @@
       "snapshot_seq": 5,
       "from": "9aff05ce1880710d61a9fff8539ac5e7dc8e2dac4b8ac75b0552409e4da3fb13",
       "to": "8410eb8dc90f62d2b19c1c3c6673216a1ffebaf1ba3b26b731fd8eddb6aadf47",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001028",
@@ -16914,12 +16695,7 @@
       "snapshot_seq": 5,
       "from": "8f38cbd685163d146df305c3e2d0b41fde4f833042cea829f097f34994fdb655",
       "to": "e80c4aa9a8950c662ac6b2d3b2f0c79a4025349d6e6c8b2e566bdf7f1f695670",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001029",
@@ -16929,12 +16705,7 @@
       "snapshot_seq": 5,
       "from": "0ad92dc85a6ee1c1693028375c27e41e6a0aee50594e7706b0aa4a7d010ae7e8",
       "to": "831c71cfc780b9a6ed6f210ce081393e3c5e89d667a08037148879d4d79a7c67",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001030",
@@ -16944,12 +16715,7 @@
       "snapshot_seq": 5,
       "from": "9d06b3a8e641ec6f8a9413bd9753c8b165bf1a6b027878ea11d14e81641947bd",
       "to": "a608446b73c1eeb5935fceacb57fe492786663242e5f0f20d641450a4a5262a1",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001031",
@@ -16959,12 +16725,7 @@
       "snapshot_seq": 5,
       "from": "03f8e871c72def6ea96f0f00345b22fa76f5082cba310b057c11bd31d08b1412",
       "to": "9efbeef0686fe254db5cccd08cb73f50256d9200160f89e91585a0ebcefd2180",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001032",
@@ -16974,12 +16735,7 @@
       "snapshot_seq": 5,
       "from": "718bf9573b18a11d50d6076e1a2c097a8552d55a6ab98af957735306b27ed042",
       "to": "f52c0d741791b719e190609a2c4c15d3c69c86733e552dbbe06ff927f3d0de60",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001033",
@@ -16989,12 +16745,7 @@
       "snapshot_seq": 6,
       "from": "63c9e866e6c9fc6128140e969eb88b9c6323201c18854a8e745b129b8c816e92",
       "to": "86bc990511fefbcb2a1b3d27bd6fdcd6ea10a563ecffa653dffcd558b7ef9363",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001034",
@@ -17004,12 +16755,7 @@
       "snapshot_seq": 6,
       "from": "ab1948fe4e32be4df525171c5a85b3d4d10ae18fe7ae4d4eb6e1c51bd719704d",
       "to": "4eddc13475004816fb3a9b9a5cb6cc85f3f23b4af477546643ee2924e662173c",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001035",
@@ -17019,12 +16765,7 @@
       "snapshot_seq": 6,
       "from": "a2884b0152ed3ef4f1efc9fd38c620e7e0643983160714eb4118e10758f03f0c",
       "to": "a7751fe8b3c9a3bc60ea157cba49d204740ada54e184acb7e9e030ef75326911",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001036",
@@ -17034,12 +16775,7 @@
       "snapshot_seq": 6,
       "from": "3dac3c0ffbb611152e61d830452a1f08170f5221857ab514f7a9680dc79959ef",
       "to": "4307ef5b4c176c33f22b7a1b6648271641e796ad7e5109255a64c57e2ef9cfec",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001037",
@@ -17049,12 +16785,7 @@
       "snapshot_seq": 6,
       "from": "8410eb8dc90f62d2b19c1c3c6673216a1ffebaf1ba3b26b731fd8eddb6aadf47",
       "to": "70a6ffe89b60b7d5e4cb454bf2d838d3bbf9cf1a9f59e758313d169e319a76f3",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001038",
@@ -17064,12 +16795,7 @@
       "snapshot_seq": 6,
       "from": "e80c4aa9a8950c662ac6b2d3b2f0c79a4025349d6e6c8b2e566bdf7f1f695670",
       "to": "d1a28ce222f0a9a32afed507b176c5af89cbdd64bf21eed16e1caceb7ac24323",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001039",
@@ -17079,12 +16805,7 @@
       "snapshot_seq": 6,
       "from": "831c71cfc780b9a6ed6f210ce081393e3c5e89d667a08037148879d4d79a7c67",
       "to": "ec4bd99ba03c0298e94edaa8ef56874b40bb5ea37a6120586805c1c61744c026",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001040",
@@ -17094,12 +16815,7 @@
       "snapshot_seq": 6,
       "from": "a608446b73c1eeb5935fceacb57fe492786663242e5f0f20d641450a4a5262a1",
       "to": "ab37b3df952c4ff87590d2fb631fa245580e62cb407acd08767797af6a091fc0",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001041",
@@ -17109,12 +16825,7 @@
       "snapshot_seq": 6,
       "from": "9efbeef0686fe254db5cccd08cb73f50256d9200160f89e91585a0ebcefd2180",
       "to": "0d99ce102ea1cb94efa3c7f491ad6b407747c0011b768a78c20edb74b0f51c43",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001042",
@@ -17124,12 +16835,7 @@
       "snapshot_seq": 6,
       "from": "f52c0d741791b719e190609a2c4c15d3c69c86733e552dbbe06ff927f3d0de60",
       "to": "cac3d15b8f698f7c875159f2620ecd76306be770583e4782c1e938992545de99",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001043",
@@ -17279,12 +16985,7 @@
       "snapshot_seq": 7,
       "from": "86bc990511fefbcb2a1b3d27bd6fdcd6ea10a563ecffa653dffcd558b7ef9363",
       "to": "91a1489de472e0d1c33e8912fece20b3c89e7adc08f3961e1706945786f7e12e",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001058",
@@ -17294,12 +16995,7 @@
       "snapshot_seq": 7,
       "from": "4eddc13475004816fb3a9b9a5cb6cc85f3f23b4af477546643ee2924e662173c",
       "to": "a3a0a3632fffe933555ae8fbe83e3718129bc7aad28f692350304a60f2c428b7",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001059",
@@ -17309,12 +17005,7 @@
       "snapshot_seq": 7,
       "from": "a7751fe8b3c9a3bc60ea157cba49d204740ada54e184acb7e9e030ef75326911",
       "to": "a304fc98a1a9a64a50ef24c232cd32431c99fc3345560d40177f068a01de7b2b",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001060",
@@ -17324,12 +17015,7 @@
       "snapshot_seq": 7,
       "from": "4307ef5b4c176c33f22b7a1b6648271641e796ad7e5109255a64c57e2ef9cfec",
       "to": "b22ebeb5edcf67558a02ca3a5046406581072b174a1eea44b82305bf5c515829",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001061",
@@ -17339,12 +17025,7 @@
       "snapshot_seq": 7,
       "from": "70a6ffe89b60b7d5e4cb454bf2d838d3bbf9cf1a9f59e758313d169e319a76f3",
       "to": "096cd858472ae5d9114d1edc539810fd46fd8ebbcdf3275e27ea739ecf4af70a",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001062",
@@ -17354,12 +17035,7 @@
       "snapshot_seq": 7,
       "from": "d1a28ce222f0a9a32afed507b176c5af89cbdd64bf21eed16e1caceb7ac24323",
       "to": "6fe018f9b6b36ab26921515c43033ae7a7b511dd0879bdf8cbf8ce30fc55af5f",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001063",
@@ -17369,12 +17045,7 @@
       "snapshot_seq": 7,
       "from": "ec4bd99ba03c0298e94edaa8ef56874b40bb5ea37a6120586805c1c61744c026",
       "to": "f68632f814338f3fae49dc5c24299b278ebbeb0152413eaebff4fac4a556f58a",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001064",
@@ -17384,12 +17055,7 @@
       "snapshot_seq": 7,
       "from": "ab37b3df952c4ff87590d2fb631fa245580e62cb407acd08767797af6a091fc0",
       "to": "48f2b55e091e5472915d41efd34edd1b89671a8e3224dac2c65416c1f15dfa40",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001065",
@@ -17399,12 +17065,7 @@
       "snapshot_seq": 7,
       "from": "0d99ce102ea1cb94efa3c7f491ad6b407747c0011b768a78c20edb74b0f51c43",
       "to": "446a7065d2e6ce2760466299a4d0801bc98ad2c64b082d96c7da3515b935a7a2",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001066",
@@ -17414,12 +17075,17 @@
       "snapshot_seq": 7,
       "from": "cac3d15b8f698f7c875159f2620ecd76306be770583e4782c1e938992545de99",
       "to": "54c26952e461b5ce9423e1ebd0f8068558326ee72f5ae846e3d8cdbdfd9e5127",
-      "commit": {
-        "commit": "0ae1d671ae20",
-        "date": "2026-07-19T09:12:37+05:30",
-        "author": "Bipin Kumar",
-        "subject": "Synchronize UCOS registries, portal, and knowledge graph after EC3-B11-U01"
-      }
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001067",
+      "subject": "UCOS-CEP-000035",
+      "kind": "Created",
+      "at": "2026-07-22T08:22:28+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "COMPLETE",
+      "commit": null
     }
   ],
   "version_records": {
@@ -31058,6 +30724,20 @@
           "snapshot_seq": 1
         }
       ]
+    },
+    "UCOS-CEP-000035": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "93ddde8a64507b90cf061e40533d56ee159b4c6a41be2eeebc33c3248028a2ee",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "93ddde8a64507b90cf061e40533d56ee159b4c6a41be2eeebc33c3248028a2ee",
+          "at": "2026-07-22T08:22:28+00:00",
+          "snapshot_seq": 1
+        }
+      ]
     }
   },
   "lineage": {
@@ -32064,6 +31744,14 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-CEP-000034"
+    },
+    "UCOS-CEP-000035": {
+      "birth": "2026-07-22T08:22:28+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEP-000035"
     },
     "UCOS-SRC-000001": {
       "birth": "2026-07-15T02:26:52+00:00",

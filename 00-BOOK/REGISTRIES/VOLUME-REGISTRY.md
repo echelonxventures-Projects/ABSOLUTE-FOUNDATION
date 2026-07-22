@@ -6,7 +6,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 596 | UPN-000000001–UPN-000008930 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 597 | UPN-000000001–UPN-000008937 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 48 | UPN-000001327–UPN-000007992 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 39 | UPN-000000022–UPN-000008924 |
@@ -35,7 +35,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 596
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 597
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -635,6 +635,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-INFRASTRUCTU-000117` | Validation Report | — | ACTIVE |
 | `UCOS-REPOOPERATIO-000001` | Repo Operations | — | ACTIVE |
 | `UCOS-MASTER-000037` | UCOS Ω∞ REPOSITORY RATIFICATION DETERMINATION | — | ACTIVE |
+| `UCOS-CEP-000035` | UCOS Ω∞ — STAGE 04 · S4-12 — INFRASTRUCTURE-005 UIMM INTEGRAT… | CEP-STAGE-04-S4-12 | COMPLETE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 

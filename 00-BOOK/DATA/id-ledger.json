@@ -6937,9 +6937,16 @@
       "page_start": 8931,
       "page_count": 4,
       "first_seen": "2026-07-22T05:17:20+00:00"
+    },
+    "00-CEP/STAGE-04-S4-12-INFRASTRUCTURE-005-UIMM-INTEGRATION-PROVISIONAL-RATIFICATION.md": {
+      "universal_id": "UCOS-CEP-000035",
+      "category": "CEP",
+      "page_start": 8935,
+      "page_count": 3,
+      "first_seen": "2026-07-22T08:22:28+00:00"
     }
   },
-  "page_cursor": 8934,
+  "page_cursor": 8937,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -6976,7 +6983,7 @@
     "SERVICE": 149,
     "APPLICATION": 121,
     "INFRASTRUCTU": 117,
-    "CEP": 34,
+    "CEP": 35,
     "SEC": 5,
     "REPOOPERATIO": 1
   },
@@ -18718,6 +18725,17 @@
         "status": "ACTIVE",
         "path": "14-SECURITY/SECURITY-004-UNIVERSAL-SECURITY-TAXONOMY.md",
         "name": "UCOS Ω∞ — UNIVERSAL SECURITY TAXONOMY"
+      }
+    ],
+    "UCOS-CEP-000035": [
+      {
+        "seq": 1,
+        "at": "2026-07-22T08:22:28+00:00",
+        "content_hash": "93ddde8a64507b90cf061e40533d56ee159b4c6a41be2eeebc33c3248028a2ee",
+        "version": "1.0.0",
+        "status": "COMPLETE",
+        "path": "00-CEP/STAGE-04-S4-12-INFRASTRUCTURE-005-UIMM-INTEGRATION-PROVISIONAL-RATIFICATION.md",
+        "name": "UCOS Ω∞ — STAGE 04 · S4-12 — INFRASTRUCTURE-005 UIMM INTEGRATION PROVISIONAL RATIFICATION"
       }
     ]
   }
