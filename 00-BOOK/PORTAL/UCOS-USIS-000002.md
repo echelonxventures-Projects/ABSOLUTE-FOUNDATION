@@ -18,5 +18,6 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-USIS-000004](UCOS-USIS-000004.md) —Authorized-By→
 - [UCOS-USIS-000003](UCOS-USIS-000003.md) —Depends-On→
 - [UCOS-USIS-000003](UCOS-USIS-000003.md) —Authorized-By→
+- [UCOS-USIS-000005](UCOS-USIS-000005.md) —Authorized-By→
 
 Return: [Portal Index](index.md) · [Master Index](../UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)

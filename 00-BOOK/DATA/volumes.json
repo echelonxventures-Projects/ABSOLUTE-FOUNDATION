@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T14:02:18+00:00",
+  "generated_at": "2026-07-23T14:31:11+00:00",
   "count": 25,
   "volumes": [
     {
@@ -285,9 +285,9 @@
       "description": "Universal Science & Intelligence Substrate (USIS): the constitutional substrate beneath every scientific discipline and intelligence paradigm — 21 universes, Universal Science, Human Intelligence, Self-Evolution, and Data/Analytics/Algorithm/Model universes, the 24-tier Universal Capability Meta-Model, reasoning/learning/analytics/simulation runtime, grounding/explanation validation, and explainability/bounded-autonomy/reproducibility certification.",
       "category": "USIS",
       "status": "ACTIVE",
-      "artifact_count": 4,
+      "artifact_count": 5,
       "page_range_start": 9133,
-      "page_range_end": 9142,
+      "page_range_end": 9145,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-024"
     },
     {

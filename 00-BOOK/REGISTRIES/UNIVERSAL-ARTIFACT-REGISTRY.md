@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1005
+**Total artifacts:** 1006
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1013,5 +1013,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1003 | `UCOS-USIS-000002` | USIS-001 — Universal Science & Intelligence Substrate Con… | USIS-001 | 024 | UPN-000009135–UPN-000009136 | ACTIVE | `UCOS-USIS-000001` | 0 | [↗](../../15-UNIVERSAL-SCIENCE-INTELLIGENCE/00-CONSTITUTION/USIS-001-UNIVERSAL-SCIENCE-INTELLIGENCE-CONSTITUTION.md) |
 | 1004 | `UCOS-USIS-000003` | USIS-002 — Universal Science & Intelligence Universe Catalog | USIS-002 | 024 | UPN-000009137–UPN-000009139 | ACTIVE | `UCOS-USIS-000001` | 0 | [↗](../../15-UNIVERSAL-SCIENCE-INTELLIGENCE/06-UNIVERSES/USIS-002-UNIVERSE-CATALOG.md) |
 | 1005 | `UCOS-USIS-000004` | USIS-004 — Universal Capability Meta-Model | USIS-004 | 024 | UPN-000009140–UPN-000009142 | ACTIVE | `UCOS-USIS-000001` | 0 | [↗](../../15-UNIVERSAL-SCIENCE-INTELLIGENCE/05-META-MODEL/USIS-004-UNIVERSAL-CAPABILITY-META-MODEL.md) |
+| 1006 | `UCOS-USIS-000005` | USIS-003 — Universal Science Catalog | USIS-003 | 024 | UPN-000009143–UPN-000009145 | ACTIVE | `UCOS-USIS-000001` | 0 | [↗](../../15-UNIVERSAL-SCIENCE-INTELLIGENCE/07-SCIENCES/USIS-003-UNIVERSAL-SCIENCE-CATALOG.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

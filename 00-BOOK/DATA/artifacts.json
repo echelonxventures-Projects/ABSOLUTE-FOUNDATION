@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-23T14:02:18+00:00",
+  "generated_at": "2026-07-23T14:31:11+00:00",
   "generator_version": "1.0.0",
-  "count": 1005,
+  "count": 1006,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -44920,6 +44920,55 @@
           "UCOS-USIS-000003",
           "USIS-08",
           "UCIC-001"
+        ],
+        "design": [],
+        "implementation": [
+          "UCOS-USIS-000005"
+        ],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000005",
+      "native_id": "USIS-003",
+      "name": "USIS-003 — Universal Science Catalog",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9143,
+      "page_end": 9145,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/07-SCIENCES/USIS-003-UNIVERSAL-SCIENCE-CATALOG.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "309c75f8f80ca0c609ecb9ab3093307a7324fe1ca359b7a16242d30d391faf88",
+      "traceability": {
+        "requirement": [
+          "UCOS-USIS-000002",
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000004",
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000004"
         ],
         "design": [],
         "implementation": [],

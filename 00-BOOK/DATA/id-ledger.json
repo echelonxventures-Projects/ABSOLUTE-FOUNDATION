@@ -7175,9 +7175,16 @@
       "page_start": 9140,
       "page_count": 3,
       "first_seen": "2026-07-23T14:02:17+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/07-SCIENCES/USIS-003-UNIVERSAL-SCIENCE-CATALOG.md": {
+      "universal_id": "UCOS-USIS-000005",
+      "category": "USIS",
+      "page_start": 9143,
+      "page_count": 3,
+      "first_seen": "2026-07-23T14:31:10+00:00"
     }
   },
-  "page_cursor": 9142,
+  "page_cursor": 9145,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -7217,7 +7224,7 @@
     "CEP": 35,
     "SEC": 5,
     "REPOOPERATIO": 1,
-    "USIS": 4
+    "USIS": 5
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -19340,6 +19347,17 @@
         "status": "ACTIVE",
         "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/05-META-MODEL/USIS-004-UNIVERSAL-CAPABILITY-META-MODEL.md",
         "name": "USIS-004 — Universal Capability Meta-Model"
+      }
+    ],
+    "UCOS-USIS-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T14:31:10+00:00",
+        "content_hash": "309c75f8f80ca0c609ecb9ab3093307a7324fe1ca359b7a16242d30d391faf88",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/07-SCIENCES/USIS-003-UNIVERSAL-SCIENCE-CATALOG.md",
+        "name": "USIS-003 — Universal Science Catalog"
       }
     ]
   }
