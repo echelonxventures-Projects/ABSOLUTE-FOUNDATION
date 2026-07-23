@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 8988  ·  **Page cursor (next free):** UPN-000008989
+**Pages allocated:** 9000  ·  **Page cursor (next free):** UPN-000009001
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -998,5 +998,10 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000008980 | UPN-000008981 | 2 | `UCOS-INFRASTRUCTU-000130` | 000 | Unit Inventory |
 | UPN-000008982 | UPN-000008985 | 4 | `UCOS-INFRASTRUCTU-000131` | 000 | Validation Evidence |
 | UPN-000008986 | UPN-000008988 | 3 | `UCOS-INFRASTRUCTU-000132` | 000 | Validation Report |
+| UPN-000008989 | UPN-000008990 | 2 | `UCOS-MASTER-000038` | 000 | UNIVERSAL LAW CANONICAL-HOMING DETERMINATION … |
+| UPN-000008991 | UPN-000008993 | 3 | `UCOS-ENG-000019` | 003 | UCOS-EPIC-001 — Universal Registry Platform —… |
+| UPN-000008994 | UPN-000008995 | 2 | `UCOS-PLT-000050` | 006 | UCOS-EPIC-008 / Terminal T8 — Universal Porta… |
+| UPN-000008996 | UPN-000008997 | 2 | `UCOS-ENG-000020` | 003 | UCOS-EPIC-006 — Universal Certification Engin… |
+| UPN-000008998 | UPN-000009000 | 3 | `UCOS-ENG-000021` | 003 | UCOS-EPIC-002 — Universal Knowledge Graph — C… |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

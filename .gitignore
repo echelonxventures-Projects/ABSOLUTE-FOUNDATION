@@ -41,3 +41,21 @@ determinism-evidence/
 # Anchored with a leading slash so ONLY the repo-root store is ignored — the
 # engine/knowledge/ source package and its tests remain tracked.
 /knowledge/
+
+
+# UAKOS-CLOSURE-002 — deterministic engine OUTPUT (GOV-005 §5.3, re-derivable). The
+# authored sources (closure_engine.py / phase2_engine.py / phase3_engine.py + README /
+# CHARTER / CONSOLIDATION-PLAN / PHASE-002-README / PHASE-INTERFACE-CONTRACT) remain
+# tracked; the numbered reports and JSON state are regenerated each run (`make closure`
+# / `make closure-phase2` / `make closure-phase3`) and must never be tracked or seen as
+# drift. Mirrors the existing determinism-evidence/ and /knowledge/ generated-artifact policy.
+00-MASTER/UAKOS-CLOSURE-002/[0-9][0-9]-*.md
+00-MASTER/UAKOS-CLOSURE-002/closure.json
+00-MASTER/UAKOS-CLOSURE-002/phase2.json
+00-MASTER/UAKOS-CLOSURE-002/phase3.json
+
+# intelligence/die — RC-1 pre-sealing audit identified imports.py as an unverified
+# orphan (no __init__.py, no importers, no tests, not packaged/covered). Excluded from
+# the RC-1 baseline until it is wired + tested; ignored here so it is not sealed as
+# verified implementation and does not surface as drift.
+intelligence/die/

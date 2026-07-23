@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-22T10:44:58+00:00 by ukbx portal. 990 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-22T15:33:24+00:00 by ukbx portal. 995 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -994,3 +994,8 @@
 | [UCOS-INFRASTRUCTU-000130](UCOS-INFRASTRUCTU-000130.md) | Unit Inventory | VOL-000 | ACTIVE |
 | [UCOS-INFRASTRUCTU-000131](UCOS-INFRASTRUCTU-000131.md) | Validation Evidence | VOL-000 | ACTIVE |
 | [UCOS-INFRASTRUCTU-000132](UCOS-INFRASTRUCTU-000132.md) | Validation Report | VOL-000 | ACTIVE |
+| [UCOS-MASTER-000038](UCOS-MASTER-000038.md) | UNIVERSAL LAW CANONICAL-HOMING DETERMINATION — LAW Ω∞-008 &  | VOL-000 | ACTIVE |
+| [UCOS-ENG-000019](UCOS-ENG-000019.md) | UCOS-EPIC-001 — Universal Registry Platform — Completion Rep | VOL-003 | ACTIVE |
+| [UCOS-PLT-000050](UCOS-PLT-000050.md) | UCOS-EPIC-008 / Terminal T8 — Universal Portal — Completion  | VOL-006 | COMPLETE |
+| [UCOS-ENG-000020](UCOS-ENG-000020.md) | UCOS-EPIC-006 — Universal Certification Engine — Completion  | VOL-003 | COMPLETE |
+| [UCOS-ENG-000021](UCOS-ENG-000021.md) | UCOS-EPIC-002 — Universal Knowledge Graph — Completion Repor | VOL-003 | ACTIVE |

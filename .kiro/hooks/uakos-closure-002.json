@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "UAKOS-CLOSURE-002 Continuous Ingestion",
+      "trigger": "SessionStart",
+      "description": "Runs the repository closure workflow (fast repo-only pass) at session start so newly added knowledge is reconciled against Repository Truth and the closure determination is surfaced. Deterministic and idempotent; non-blocking.",
+      "action": {
+        "type": "command",
+        "command": "CLOSURE_SKIP_CORPUS=1 python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py 2>/dev/null | grep UAKOS-CLOSURE-002 || true",
+        "timeout": 120
+      }
+    }
+  ]
+}

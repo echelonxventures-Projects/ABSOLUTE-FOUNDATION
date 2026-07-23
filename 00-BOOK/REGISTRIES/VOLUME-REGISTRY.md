@@ -6,13 +6,13 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 612 | UPN-000000001–UPN-000008988 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 613 | UPN-000000001–UPN-000008990 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 48 | UPN-000001327–UPN-000007992 |
-| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 39 | UPN-000000022–UPN-000008924 |
+| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 42 | UPN-000000022–UPN-000009000 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 6 | UPN-000004194–UPN-000005924 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
-| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 65 | UPN-000004559–UPN-000005829 |
+| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 66 | UPN-000004559–UPN-000008995 |
 | `VOL-007` | 7 | DATA | DAT | ACTIVE | 23 | UPN-000004355–UPN-000005171 |
 | `VOL-008` | 8 | SERVICE | SVC | ACTIVE | 23 | UPN-000004410–UPN-000005246 |
 | `VOL-009` | 9 | APPLICATION | APP | ACTIVE | 28 | UPN-000004232–UPN-000005495 |
@@ -35,7 +35,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 612
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 613
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -651,6 +651,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-INFRASTRUCTU-000130` | Unit Inventory | — | ACTIVE |
 | `UCOS-INFRASTRUCTU-000131` | Validation Evidence | — | ACTIVE |
 | `UCOS-INFRASTRUCTU-000132` | Validation Report | — | ACTIVE |
+| `UCOS-MASTER-000038` | UNIVERSAL LAW CANONICAL-HOMING DETERMINATION — LAW Ω∞-008 & L… | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -722,7 +723,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 
 *Universal architecture constitutions, catalogs, and engineering foundation.*  \
-**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 39
+**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 42
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -765,6 +766,9 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-ENG-000017` | EPIC-007 — Validation Layer — Completion Report | — | ACTIVE |
 | `UCOS-ADR-000003` | ADR-0002 — UCOS Ω∞ AEOS-001 · PHASE-1 ARCHITECTURAL DETERMINA… | — | ACTIVE |
 | `UCOS-ENG-000018` | EPIC-VAL-002 — Universal Repository Acceptance Engine — Compl… | — | ACTIVE |
+| `UCOS-ENG-000019` | UCOS-EPIC-001 — Universal Registry Platform — Completion Report | — | ACTIVE |
+| `UCOS-ENG-000020` | UCOS-EPIC-006 — Universal Certification Engine — Completion R… | — | COMPLETE |
+| `UCOS-ENG-000021` | UCOS-EPIC-002 — Universal Knowledge Graph — Completion Report | — | ACTIVE |
 
 ### VOL-004 — IMPLEMENTATION <a id="vol-004"></a>
 
@@ -813,7 +817,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-006 — PLATFORM <a id="vol-006"></a>
 
 *Implementation platforms and engines.*  \
-**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 65
+**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 66
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -882,6 +886,7 @@ The 24 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-IMP-000020` | UCOS Ω∞ — BLUEPRINT CATALOG & MANAGEMENT IMPLEMENTATION | EC2-EPIC-006 | ACTIVE |
 | `UCOS-IMP-000021` | UCOS Ω∞ — EC3-B10-DATA-REALIZATION-PACKAGE-001 (DATUM FOUNDAT… | EC3-B10-DATA-REALIZATION-PACKAGE-001 | ACTIVE |
 | `UCOS-IMP-000022` | UCOS Ω∞ — EC3-B10-DATA-REALIZATION-PACKAGE-002 (ATTRIBUTE FOU… | EC3-B10-DATA-REALIZATION-PACKAGE-002 | ACTIVE |
+| `UCOS-PLT-000050` | UCOS-EPIC-008 / Terminal T8 — Universal Portal — Completion R… | UCOS-EPIC-008-T8 | COMPLETE |
 
 ### VOL-007 — DATA <a id="vol-007"></a>
 

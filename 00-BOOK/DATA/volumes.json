@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T10:44:58+00:00",
+  "generated_at": "2026-07-22T15:33:23+00:00",
   "count": 24,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 612,
+      "artifact_count": 613,
       "page_range_start": 1,
-      "page_range_end": 8988,
+      "page_range_end": 8990,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -45,9 +45,9 @@
       "description": "Universal architecture constitutions, catalogs, and engineering foundation.",
       "category": "ARCH",
       "status": "ACTIVE",
-      "artifact_count": 39,
+      "artifact_count": 42,
       "page_range_start": 22,
-      "page_range_end": 8924,
+      "page_range_end": 9000,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-003"
     },
     {
@@ -81,9 +81,9 @@
       "description": "Implementation platforms and engines.",
       "category": "PLT",
       "status": "ACTIVE",
-      "artifact_count": 65,
+      "artifact_count": 66,
       "page_range_start": 4559,
-      "page_range_end": 5829,
+      "page_range_end": 8995,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-006"
     },
     {

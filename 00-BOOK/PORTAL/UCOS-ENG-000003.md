@@ -21,6 +21,9 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-ENG-000016](UCOS-ENG-000016.md) EPIC-005 — Runtime Assembly — Completion Report
 - [UCOS-ENG-000017](UCOS-ENG-000017.md) EPIC-007 — Validation Layer — Completion Report
 - [UCOS-ENG-000018](UCOS-ENG-000018.md) EPIC-VAL-002 — Universal Repository Acceptance Eng
+- [UCOS-ENG-000019](UCOS-ENG-000019.md) UCOS-EPIC-001 — Universal Registry Platform — Comp
+- [UCOS-ENG-000020](UCOS-ENG-000020.md) UCOS-EPIC-006 — Universal Certification Engine — C
+- [UCOS-ENG-000021](UCOS-ENG-000021.md) UCOS-EPIC-002 — Universal Knowledge Graph — Comple
 
 ## Backlinks (reverse)
 - [UCOS-ENG-000005](UCOS-ENG-000005.md) —Depends-On→
@@ -35,8 +38,11 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-ENG-000012](UCOS-ENG-000012.md) —Parent→
 - [UCOS-ENG-000013](UCOS-ENG-000013.md) —Parent→
 - [UCOS-ENG-000014](UCOS-ENG-000014.md) —Parent→
+- [UCOS-ENG-000021](UCOS-ENG-000021.md) —Parent→
 - [UCOS-ENG-000015](UCOS-ENG-000015.md) —Parent→
+- [UCOS-ENG-000019](UCOS-ENG-000019.md) —Parent→
 - [UCOS-ENG-000016](UCOS-ENG-000016.md) —Parent→
+- [UCOS-ENG-000020](UCOS-ENG-000020.md) —Parent→
 - [UCOS-ENG-000017](UCOS-ENG-000017.md) —Parent→
 - [UCOS-ENG-000001](UCOS-ENG-000001.md) —Depends-On→
 - [UCOS-ENG-000002](UCOS-ENG-000002.md) —Depends-On→

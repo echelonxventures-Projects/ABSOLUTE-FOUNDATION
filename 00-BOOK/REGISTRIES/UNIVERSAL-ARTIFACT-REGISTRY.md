@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 990
+**Total artifacts:** 995
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -998,5 +998,10 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 988 | `UCOS-INFRASTRUCTU-000130` | Unit Inventory | — | 000 | UPN-000008980–UPN-000008981 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U11/unit-inventory.json) |
 | 989 | `UCOS-INFRASTRUCTU-000131` | Validation Evidence | — | 000 | UPN-000008982–UPN-000008985 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U11/validation-evidence.json) |
 | 990 | `UCOS-INFRASTRUCTU-000132` | Validation Report | — | 000 | UPN-000008986–UPN-000008988 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../infrastructure/_evidence/EC3-B13-U11/validation-report.json) |
+| 991 | `UCOS-MASTER-000038` | UNIVERSAL LAW CANONICAL-HOMING DETERMINATION — LAW Ω∞-008… | — | 000 | UPN-000008989–UPN-000008990 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/UAKOS-CL003-W1-UNIVERSAL-LAW-CANONICAL-HOMING-DETERMINATION.md) |
+| 992 | `UCOS-ENG-000019` | UCOS-EPIC-001 — Universal Registry Platform — Completion … | — | 003 | UPN-000008991–UPN-000008993 | ACTIVE | `UCOS-ENG-000003` | 0 | [↗](../../engine/registry/universal/UCOS-EPIC-001-UNIVERSAL-REGISTRY-PLATFORM-COMPLETION-REPORT.md) |
+| 993 | `UCOS-PLT-000050` | UCOS-EPIC-008 / Terminal T8 — Universal Portal — Completi… | UCOS-EPIC-008-T8 | 006 | UPN-000008994–UPN-000008995 | COMPLETE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_portal/UCOS-EPIC-008-T8-COMPLETION-REPORT.md) |
+| 994 | `UCOS-ENG-000020` | UCOS-EPIC-006 — Universal Certification Engine — Completi… | — | 003 | UPN-000008996–UPN-000008997 | COMPLETE | `UCOS-ENG-000003` | 0 | [↗](../../engine/universal_certification/UCOS-EPIC-006-COMPLETION-REPORT.md) |
+| 995 | `UCOS-ENG-000021` | UCOS-EPIC-002 — Universal Knowledge Graph — Completion Re… | — | 003 | UPN-000008998–UPN-000009000 | ACTIVE | `UCOS-ENG-000003` | 0 | [↗](../../engine/graph/UCOS-EPIC-002-KNOWLEDGE-GRAPH-COMPLETION-REPORT.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
