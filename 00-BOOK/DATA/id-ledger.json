@@ -7084,9 +7084,79 @@
       "page_start": 8998,
       "page_count": 3,
       "first_seen": "2026-07-22T15:33:23+00:00"
+    },
+    "04-REFERENCE/ARCHITECTURAL-SOURCES/README.md": {
+      "universal_id": "UCOS-REF-000007",
+      "category": "REF",
+      "page_start": 9001,
+      "page_count": 1,
+      "first_seen": "2026-07-23T06:39:49+00:00"
+    },
+    "04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS Ω∞ MASTER END-TO-END PROGRAM.docx": {
+      "universal_id": "UCOS-REF-000008",
+      "category": "REF",
+      "page_start": 9002,
+      "page_count": 10,
+      "first_seen": "2026-07-23T06:39:49+00:00"
+    },
+    "04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS Ω∞ MASTER EVOLUTION PATH - Plan.docx": {
+      "universal_id": "UCOS-REF-000009",
+      "category": "REF",
+      "page_start": 9012,
+      "page_count": 9,
+      "first_seen": "2026-07-23T06:39:49+00:00"
+    },
+    "04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS-Consolidation Plan.docx": {
+      "universal_id": "UCOS-REF-000010",
+      "category": "REF",
+      "page_start": 9021,
+      "page_count": 14,
+      "first_seen": "2026-07-23T06:39:49+00:00"
+    },
+    "04-REFERENCE/ChatGPT Chat.docx": {
+      "universal_id": "UCOS-REF-000011",
+      "category": "REF",
+      "page_start": 9035,
+      "page_count": 41,
+      "first_seen": "2026-07-23T06:39:49+00:00"
+    },
+    "04-REFERENCE/PHASE.docx": {
+      "universal_id": "UCOS-REF-000012",
+      "category": "REF",
+      "page_start": 9076,
+      "page_count": 17,
+      "first_seen": "2026-07-23T06:39:49+00:00"
+    },
+    "04-REFERENCE/UCOS Ω - references.docx": {
+      "universal_id": "UCOS-REF-000013",
+      "category": "REF",
+      "page_start": 9093,
+      "page_count": 20,
+      "first_seen": "2026-07-23T06:39:49+00:00"
+    },
+    "04-REFERENCE/UCOS Ω∞ MASTER IMPLEMENTATION PLAN v2.docx": {
+      "universal_id": "UCOS-REF-000014",
+      "category": "REF",
+      "page_start": 9113,
+      "page_count": 10,
+      "first_seen": "2026-07-23T06:39:49+00:00"
+    },
+    "04-REFERENCE/UNIVERSAL REALITY COMPILER CONSTITUTION.docx": {
+      "universal_id": "UCOS-REF-000015",
+      "category": "REF",
+      "page_start": 9123,
+      "page_count": 10,
+      "first_seen": "2026-07-23T06:39:49+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/USIS-GOV-000-UNIVERSAL-SCIENCE-INTELLIGENCE-PROGRAM-ESTABLISHMENT-DETERMINATION.md": {
+      "universal_id": "UCOS-USIS-000001",
+      "category": "USIS",
+      "page_start": 9133,
+      "page_count": 2,
+      "first_seen": "2026-07-23T11:00:27+00:00"
     }
   },
-  "page_cursor": 9000,
+  "page_cursor": 9134,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -7098,7 +7168,7 @@
     "EES": 2,
     "IMP": 24,
     "CAT": 7,
-    "REF": 6,
+    "REF": 15,
     "GEN": 7,
     "ENG": 21,
     "RUN": 18,
@@ -7125,7 +7195,8 @@
     "INFRASTRUCTU": 132,
     "CEP": 35,
     "SEC": 5,
-    "REPOOPERATIO": 1
+    "REPOOPERATIO": 1,
+    "USIS": 1
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -19096,6 +19167,125 @@
         "status": "ACTIVE",
         "path": "engine/graph/UCOS-EPIC-002-KNOWLEDGE-GRAPH-COMPLETION-REPORT.md",
         "name": "UCOS-EPIC-002 — Universal Knowledge Graph — Completion Report"
+      }
+    ],
+    "UCOS-REF-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T06:39:49+00:00",
+        "content_hash": "57f233650e742f7f004f18394b66516ed40530694fe2523aa6d96e59a113e5ed",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/ARCHITECTURAL-SOURCES/README.md",
+        "name": "Architectural Source Documents"
+      }
+    ],
+    "UCOS-REF-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T06:39:49+00:00",
+        "content_hash": "f4cbaf43bf1fd371d982fb5c3ccaa1aaff066a77ad801ee660451422c5378e76",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS Ω∞ MASTER END-TO-END PROGRAM.docx",
+        "name": "Ucos Ω∞ Master End To End Program"
+      }
+    ],
+    "UCOS-REF-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T06:39:49+00:00",
+        "content_hash": "828b268d4200874f5e64a9bb16cd7d8feb2683ab5e5fb622a65c343bb9e7a7c1",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS Ω∞ MASTER EVOLUTION PATH - Plan.docx",
+        "name": "Ucos Ω∞ Master Evolution Path   Plan"
+      }
+    ],
+    "UCOS-REF-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T06:39:49+00:00",
+        "content_hash": "8fa793fb1c4f9a09d5dd12f510ad439fddb003fc953c66583fed6e7a15600078",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS-Consolidation Plan.docx",
+        "name": "Ucos Consolidation Plan"
+      }
+    ],
+    "UCOS-REF-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T06:39:49+00:00",
+        "content_hash": "e92a893135027d23b50b24ea19c06edc65be86ef123625c2af812a4e9c67ed76",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "04-REFERENCE/ChatGPT Chat.docx",
+        "name": "Chatgpt Chat"
+      }
+    ],
+    "UCOS-REF-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T06:39:49+00:00",
+        "content_hash": "2d5f0285f004a421dbb19f7e45f731600103c3e8739cb40c71ef41209c44d6c6",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "04-REFERENCE/PHASE.docx",
+        "name": "Phase"
+      }
+    ],
+    "UCOS-REF-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T06:39:49+00:00",
+        "content_hash": "8b41989d19db115993f953d3497164ba63b8cb2f1df2d77fe63b4a6f80c8c66d",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "04-REFERENCE/UCOS Ω - references.docx",
+        "name": "Ucos Ω   References"
+      }
+    ],
+    "UCOS-REF-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T06:39:49+00:00",
+        "content_hash": "e0ba0c7c732ac8a0402f35d4311d9a5bba3f4c35ffa65bc225a2922a54a119c7",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "04-REFERENCE/UCOS Ω∞ MASTER IMPLEMENTATION PLAN v2.docx",
+        "name": "Ucos Ω∞ Master Implementation Plan V2"
+      }
+    ],
+    "UCOS-REF-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T06:39:49+00:00",
+        "content_hash": "e86f1b0c59d1b73f6006f08c445802fcdafb59bff99f4e1d506fcd7c9f005c8f",
+        "version": "1.0.0",
+        "status": "FROZEN",
+        "path": "04-REFERENCE/UNIVERSAL REALITY COMPILER CONSTITUTION.docx",
+        "name": "Universal Reality Compiler Constitution"
+      }
+    ],
+    "UCOS-USIS-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T11:00:27+00:00",
+        "content_hash": "b4706f4f8f676335e4656e5e17fc8ae78d6cbaa1808c23ffcbd2adacf7af8951",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/USIS-GOV-000-UNIVERSAL-SCIENCE-INTELLIGENCE-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
+        "name": "USIS-GOV-000 — Universal Science & Intelligence Substrate · Program Establishment Determination"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-23T11:28:22+00:00",
+        "content_hash": "cf64315b9c66510bf23fda282db044f266e859eccc274a610a0121499a27959c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/USIS-GOV-000-UNIVERSAL-SCIENCE-INTELLIGENCE-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
+        "name": "USIS-GOV-000 — Universal Science & Intelligence Substrate · Program Establishment Determination"
       }
     ]
   }

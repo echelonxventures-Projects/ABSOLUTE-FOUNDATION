@@ -8,10 +8,12 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - Source: [11-SERVICE/SERVICE-018-SERVICE-MASTER-REGISTRY.md](../../11-SERVICE/SERVICE-018-SERVICE-MASTER-REGISTRY.md)
 
 ## Children (forward)
-- (none)
+- [UCOS-USIS-000001](UCOS-USIS-000001.md) USIS-GOV-000 — Universal Science & Intelligence Su
 
 ## Backlinks (reverse)
 - [UCOS-SVC-000017](UCOS-SVC-000017.md) —Child→
+- [UCOS-USIS-000001](UCOS-USIS-000001.md) —Depends-On→
+- [UCOS-USIS-000001](UCOS-USIS-000001.md) —Parent→
 - [UCOS-SVC-000001](UCOS-SVC-000001.md) —Required-By→
 - [UCOS-SVC-000002](UCOS-SVC-000002.md) —Required-By→
 - [UCOS-SVC-000003](UCOS-SVC-000003.md) —Required-By→

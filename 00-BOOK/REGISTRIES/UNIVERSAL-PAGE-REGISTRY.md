@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 9000  ·  **Page cursor (next free):** UPN-000009001
+**Pages allocated:** 9134  ·  **Page cursor (next free):** UPN-000009135
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -139,8 +139,6 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000004938 | UPN-000004938 | 1 | `UCOS-FRZ-000001` | 002 | Freeze Notice |
 | UPN-000004939 | UPN-000004939 | 1 | `UCOS-FRZ-000002` | 002 | Source Files |
 | UPN-000004940 | UPN-000004940 | 1 | `UCOS-FRZ-000003` | 002 | Source Hashes |
-| UPN-000004941 | UPN-000004950 | 10 | `UCOS-MISC-000001` | 002 | Ucos Ω∞ Master End To End Program |
-| UPN-000004951 | UPN-000004964 | 14 | `UCOS-MISC-000002` | 002 | Ucos Consolidation Plan |
 | UPN-000004965 | UPN-000004968 | 4 | `UCOS-ADV-000001` | 021 | UCOS Ω∞ — UKB ADVANCEMENT PROGRAM MASTER INDE… |
 | UPN-000004969 | UPN-000004970 | 2 | `UCOS-ADV-000002` | 021 | UCOS Ω∞ — REAL-TIME CONNECTOR LAYER ARCHITECTURE |
 | UPN-000004971 | UPN-000004972 | 2 | `UCOS-ADV-000003` | 021 | UCOS Ω∞ — REPOSITORY INTELLIGENCE LAYER ARCHI… |
@@ -317,7 +315,6 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000005522 | UPN-000005525 | 4 | `UCOS-GOV-000004` | 020 | UCOS-GOV-004 — IMPLEMENTATION EXECUTION AUTHO… |
 | UPN-000005526 | UPN-000005530 | 5 | `UCOS-GOV-000005` | 020 | UCOS-GOV-005 — REPOSITORY GOVERNANCE RECONCIL… |
 | UPN-000005531 | UPN-000005537 | 7 | `UCOS-IMP-000019` | 006 | UCOS EC-2 — PLATFORM REALIZATION PROGRAM |
-| UPN-000005538 | UPN-000005546 | 9 | `UCOS-CON-000025` | 002 | Ucos Ω∞ Master Evolution Path   Plan |
 | UPN-000005547 | UPN-000005547 | 1 | `UCOS-ADR-000001` | 003 | ADR-NNNN: <short decision title> |
 | UPN-000005548 | UPN-000005548 | 1 | `UCOS-ADR-000002` | 003 | ADR-0001: EC-1 Foundation technology stack |
 | UPN-000005549 | UPN-000005553 | 5 | `UCOS-ENG-000010` | 003 | EPIC-008 — Certification Layer — Completion R… |
@@ -1003,5 +1000,15 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000008994 | UPN-000008995 | 2 | `UCOS-PLT-000050` | 006 | UCOS-EPIC-008 / Terminal T8 — Universal Porta… |
 | UPN-000008996 | UPN-000008997 | 2 | `UCOS-ENG-000020` | 003 | UCOS-EPIC-006 — Universal Certification Engin… |
 | UPN-000008998 | UPN-000009000 | 3 | `UCOS-ENG-000021` | 003 | UCOS-EPIC-002 — Universal Knowledge Graph — C… |
+| UPN-000009001 | UPN-000009001 | 1 | `UCOS-REF-000007` | 003 | Architectural Source Documents |
+| UPN-000009002 | UPN-000009011 | 10 | `UCOS-REF-000008` | 003 | Ucos Ω∞ Master End To End Program |
+| UPN-000009012 | UPN-000009020 | 9 | `UCOS-REF-000009` | 003 | Ucos Ω∞ Master Evolution Path   Plan |
+| UPN-000009021 | UPN-000009034 | 14 | `UCOS-REF-000010` | 003 | Ucos Consolidation Plan |
+| UPN-000009035 | UPN-000009075 | 41 | `UCOS-REF-000011` | 003 | Chatgpt Chat |
+| UPN-000009076 | UPN-000009092 | 17 | `UCOS-REF-000012` | 003 | Phase |
+| UPN-000009093 | UPN-000009112 | 20 | `UCOS-REF-000013` | 003 | Ucos Ω   References |
+| UPN-000009113 | UPN-000009122 | 10 | `UCOS-REF-000014` | 003 | Ucos Ω∞ Master Implementation Plan V2 |
+| UPN-000009123 | UPN-000009132 | 10 | `UCOS-REF-000015` | 003 | Universal Reality Compiler Constitution |
+| UPN-000009133 | UPN-000009134 | 2 | `UCOS-USIS-000001` | 024 | USIS-GOV-000 — Universal Science & Intelligen… |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

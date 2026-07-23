@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-22T15:33:23+00:00",
-  "count": 24,
+  "generated_at": "2026-07-23T11:28:22+00:00",
+  "count": 25,
   "volumes": [
     {
       "volume_id": "VOL-000",
@@ -33,7 +33,7 @@
       "description": "Constitutional corpus, consolidation program, freeze, and registers.",
       "category": "CON",
       "status": "ACTIVE",
-      "artifact_count": 48,
+      "artifact_count": 45,
       "page_range_start": 1327,
       "page_range_end": 7992,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-002"
@@ -45,9 +45,9 @@
       "description": "Universal architecture constitutions, catalogs, and engineering foundation.",
       "category": "ARCH",
       "status": "ACTIVE",
-      "artifact_count": 42,
+      "artifact_count": 51,
       "page_range_start": 22,
-      "page_range_end": 9000,
+      "page_range_end": 9132,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-003"
     },
     {
@@ -277,6 +277,18 @@
       "page_range_start": 5247,
       "page_range_end": 5480,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-022"
+    },
+    {
+      "volume_id": "VOL-024",
+      "serial": 24,
+      "name": "UNIVERSAL SCIENCE & INTELLIGENCE",
+      "description": "Universal Science & Intelligence Substrate (USIS): the constitutional substrate beneath every scientific discipline and intelligence paradigm — 21 universes, Universal Science, Human Intelligence, Self-Evolution, and Data/Analytics/Algorithm/Model universes, the 24-tier Universal Capability Meta-Model, reasoning/learning/analytics/simulation runtime, grounding/explanation validation, and explainability/bounded-autonomy/reproducibility certification.",
+      "category": "USIS",
+      "status": "ACTIVE",
+      "artifact_count": 1,
+      "page_range_start": 9133,
+      "page_range_end": 9134,
+      "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-024"
     },
     {
       "volume_id": "VOL-023",
