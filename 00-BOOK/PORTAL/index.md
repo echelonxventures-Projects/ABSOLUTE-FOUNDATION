@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-23T13:10:16+00:00 by ukbx portal. 1004 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-23T14:02:19+00:00 by ukbx portal. 1005 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1008,3 +1008,4 @@
 | [UCOS-USIS-000001](UCOS-USIS-000001.md) | USIS-GOV-000 — Universal Science & Intelligence Substrate ·  | VOL-024 | ACTIVE |
 | [UCOS-USIS-000002](UCOS-USIS-000002.md) | USIS-001 — Universal Science & Intelligence Substrate Consti | VOL-024 | ACTIVE |
 | [UCOS-USIS-000003](UCOS-USIS-000003.md) | USIS-002 — Universal Science & Intelligence Universe Catalog | VOL-024 | ACTIVE |
+| [UCOS-USIS-000004](UCOS-USIS-000004.md) | USIS-004 — Universal Capability Meta-Model | VOL-024 | ACTIVE |

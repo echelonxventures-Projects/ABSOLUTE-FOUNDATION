@@ -10,10 +10,12 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 ## Children (forward)
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) USIS-001 — Universal Science & Intelligence Substr
 - [UCOS-USIS-000003](UCOS-USIS-000003.md) USIS-002 — Universal Science & Intelligence Univer
+- [UCOS-USIS-000004](UCOS-USIS-000004.md) USIS-004 — Universal Capability Meta-Model
 
 ## Backlinks (reverse)
 - [UCOS-SVC-000018](UCOS-SVC-000018.md) —Child→
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) —Parent→
+- [UCOS-USIS-000004](UCOS-USIS-000004.md) —Parent→
 - [UCOS-USIS-000003](UCOS-USIS-000003.md) —Parent→
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) —Depends-On→
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) —Authorized-By→
