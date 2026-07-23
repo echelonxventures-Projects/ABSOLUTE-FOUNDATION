@@ -66,6 +66,11 @@ VOLUMES = [
     #     CR-INF-002/005). Holds the consolidated complete future-state architecture of the
     #     UCOS Ω∞ Master Book as a Universal Digital-Twin Knowledge Operating System. ------
     ("VOL-022", 22, "MASTER BOOK ARCHITECTURE", "UMB", "Universal Master Book Architecture Program: the complete future-state architecture of the UCOS Ω∞ Master Book as a continuously synchronized, infinitely scalable, infinitely extensible, infinitely traceable, self-evolving Universal Digital-Twin Knowledge Operating System — Master Book, Digital Twin, Identity, Nomenclature, Registry, Knowledge Graph, Traceability, Change, Version, Lineage, Publication, Synchronization, Search, AI Knowledge, Security, Control Tower, Certification, Runtime, and Operational architectures."),
+    # --- Appended by Wave 0 (UCOS-USIS-001 / EIP-018 — authorized; Phase 0.3).
+    #     Append-only; no existing volume above is renumbered or modified
+    #     (USIS-009 §1; UKB-INV-01/03). Thematic home for the Universal Science &
+    #     Intelligence substrate corpus (15-UNIVERSAL-SCIENCE-INTELLIGENCE/). -----
+    ("VOL-024", 24, "UNIVERSAL SCIENCE & INTELLIGENCE", "USIS", "Universal Science & Intelligence Substrate (USIS): the constitutional substrate beneath every scientific discipline and intelligence paradigm — 21 universes, Universal Science, Human Intelligence, Self-Evolution, and Data/Analytics/Algorithm/Model universes, the 24-tier Universal Capability Meta-Model, reasoning/learning/analytics/simulation runtime, grounding/explanation validation, and explainability/bounded-autonomy/reproducibility certification."),
 ]
 
 # ---------------------------------------------------------------------------
@@ -256,6 +261,18 @@ CLASSIFY_RULES = [
     # → PLATFORM volume (VOL-006, category PLT), consistent with the 09-PLATFORM
     # program. Broad prefix so the whole tree is total.
     (r"^platform/", "PLATFORM", "PLT", "VOL-006"),
+
+    # --- Universal Science & Intelligence Substrate (USIS / PHASE-EIP-018) —
+    #     append-only Wave-0 (Phase 0.3) coverage. No prior rule matches the
+    #     ^15-UNIVERSAL-SCIENCE-INTELLIGENCE/ prefix, so this adds NEW coverage
+    #     only and changes no existing classification (USIS-009 §1; REG-AUTO-001;
+    #     UKB-INV-02/03/07). Routed to the new thematic volume VOL-024 (category
+    #     USIS); nothing is renumbered. VOL-023 was already claimed by the
+    #     auto-discovered SECURITY-GOVERNANCE volume (14-SECURITY), so USIS takes
+    #     the next genuinely-free identifier VOL-024 (B1 collision correction).
+    #     Mirrors the ^09-PLATFORM/ … ^13-INFRASTRUCTURE/ first-class-family
+    #     pattern for the next numbered program tree.
+    (r"^15-UNIVERSAL-SCIENCE-INTELLIGENCE/", "USIS", "USIS", "VOL-024"),
 ]
 
 DEFAULT_CLASS = ("OTHER", "MISC", "VOL-000")
@@ -604,6 +621,20 @@ CHAINS = {
         "UMB-019-OPERATIONAL-ARCHITECTURE",
         "UMB-020-SUCCESS-CRITERIA-AND-UNIVERSAL-PARTICIPATION-DEMONSTRATION",
     ],
+    # --- Universal Science & Intelligence Substrate (USIS) dependency chain.
+    #     Appended by Wave 0 (Phase 0.3). Founded downward-only on the prior
+    #     program: the chain head USIS-GOV-000 Depends-On the SERVICE terminal via
+    #     CROSS_PROGRAM below (SERVICE is the last program with a defined CHAINS
+    #     terminal; the 12/13/14 trees are metadata-classified, not chained). The
+    #     USIS-GOV-000 corpus artifact additionally self-declares a DEPENDS-ON edge
+    #     to the SECURITY terminal per the USIS-012 founding position (metadata
+    #     self-declaration — the mechanism used by the 12/13/14 programs). Only the
+    #     establishment determination exists in Wave 0; USIS-001…021 append here in
+    #     numeric order as authored in Wave 1+ (no renumber). Each substring is a
+    #     unique basename so find_uid resolves it unambiguously.
+    "USIS": [
+        "USIS-GOV-000-UNIVERSAL-SCIENCE-INTELLIGENCE-PROGRAM-ESTABLISHMENT-DETERMINATION",
+    ],
 }
 
 # Program roots that additionally parent all non-chained members found in that
@@ -634,6 +665,10 @@ PROGRAM_ROOTS = {
     # Universal Master Book Architecture Program root — append-only. Non-chained
     # future UMB-* artifacts parent to the master index.
     "UMB": "UMB-000-MASTER-BOOK-ARCHITECTURE-MASTER-INDEX",
+    # Universal Science & Intelligence Substrate root — appended by Wave 0
+    # (Phase 0.3). Non-chained future USIS-* / USIS-U-* / USIS-SCI-* / USIS-DOM-*
+    # / USIS-CAP-* artifacts parent to the program-establishment determination.
+    "USIS": "USIS-GOV-000-UNIVERSAL-SCIENCE-INTELLIGENCE-PROGRAM-ESTABLISHMENT-DETERMINATION",
 }
 
 # Downstream ordering: each program root Depends-On the terminal of the prior.
@@ -669,6 +704,14 @@ CROSS_PROGRAM = [
     # (Digital-Twin) architecture it consolidates: its master index parents to the
     # BOOK root and Depends-On the ADV terminal (UKB-ADV-019). Append-only.
     ("UMB", "ADV"),
+    # Universal Science & Intelligence Substrate (USIS / EIP-018) is founded
+    # downward-only on the prior program: its chain head (USIS-GOV-000) Depends-On
+    # the SERVICE terminal (the last program with a defined CHAINS terminal in this
+    # config; the 12/13/14 trees are metadata-classified, not chained). The
+    # semantic founding edge to the SECURITY terminal (USIS-012 founding position)
+    # is carried by the USIS-GOV-000 artifact's own DEPENDS-ON metadata row. Both
+    # edges are downward and acyclic. Appended by Wave 0 (Phase 0.3).
+    ("USIS", "SERVICE"),
 ]
 
 # ---------------------------------------------------------------------------
