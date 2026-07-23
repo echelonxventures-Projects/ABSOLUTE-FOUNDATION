@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1003
+**Total artifacts:** 1004
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1011,5 +1011,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1001 | `UCOS-REF-000015` | Universal Reality Compiler Constitution | — | 003 | UPN-000009123–UPN-000009132 | FROZEN | `UCOS-ARCH-000024` | 0 | [↗](../../04-REFERENCE/UNIVERSAL REALITY COMPILER CONSTITUTION.docx) |
 | 1002 | `UCOS-USIS-000001` | USIS-GOV-000 — Universal Science & Intelligence Substrate… | USIS-GOV-000 | 024 | UPN-000009133–UPN-000009134 | ACTIVE | `UCOS-SVC-000018` | 1 | [↗](../../15-UNIVERSAL-SCIENCE-INTELLIGENCE/USIS-GOV-000-UNIVERSAL-SCIENCE-INTELLIGENCE-PROGRAM-ESTABLISHMENT-DETERMINATION.md) |
 | 1003 | `UCOS-USIS-000002` | USIS-001 — Universal Science & Intelligence Substrate Con… | USIS-001 | 024 | UPN-000009135–UPN-000009136 | ACTIVE | `UCOS-USIS-000001` | 0 | [↗](../../15-UNIVERSAL-SCIENCE-INTELLIGENCE/00-CONSTITUTION/USIS-001-UNIVERSAL-SCIENCE-INTELLIGENCE-CONSTITUTION.md) |
+| 1004 | `UCOS-USIS-000003` | USIS-002 — Universal Science & Intelligence Universe Catalog | USIS-002 | 024 | UPN-000009137–UPN-000009139 | ACTIVE | `UCOS-USIS-000001` | 0 | [↗](../../15-UNIVERSAL-SCIENCE-INTELLIGENCE/06-UNIVERSES/USIS-002-UNIVERSE-CATALOG.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

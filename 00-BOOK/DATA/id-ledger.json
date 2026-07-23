@@ -7161,9 +7161,16 @@
       "page_start": 9135,
       "page_count": 2,
       "first_seen": "2026-07-23T12:21:29+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/06-UNIVERSES/USIS-002-UNIVERSE-CATALOG.md": {
+      "universal_id": "UCOS-USIS-000003",
+      "category": "USIS",
+      "page_start": 9137,
+      "page_count": 3,
+      "first_seen": "2026-07-23T13:10:15+00:00"
     }
   },
-  "page_cursor": 9136,
+  "page_cursor": 9139,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -7203,7 +7210,7 @@
     "CEP": 35,
     "SEC": 5,
     "REPOOPERATIO": 1,
-    "USIS": 2
+    "USIS": 3
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -19304,6 +19311,17 @@
         "status": "ACTIVE",
         "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/00-CONSTITUTION/USIS-001-UNIVERSAL-SCIENCE-INTELLIGENCE-CONSTITUTION.md",
         "name": "USIS-001 — Universal Science & Intelligence Substrate Constitution"
+      }
+    ],
+    "UCOS-USIS-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T13:10:15+00:00",
+        "content_hash": "fc422c2a0869e0d3134339fa2a49b5e50dca729b50855b777ac847f677c820a9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/06-UNIVERSES/USIS-002-UNIVERSE-CATALOG.md",
+        "name": "USIS-002 — Universal Science & Intelligence Universe Catalog"
       }
     ]
   }

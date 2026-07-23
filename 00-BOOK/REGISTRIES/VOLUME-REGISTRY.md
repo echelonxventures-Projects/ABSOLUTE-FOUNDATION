@@ -29,7 +29,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-020` | 20 | CONTROL TOWER | CTL | ACTIVE | 12 | UPN-000004183–UPN-000005972 |
 | `VOL-021` | 21 | DIGITAL TWIN | ADV | ACTIVE | 20 | UPN-000004965–UPN-000005013 |
 | `VOL-022` | 22 | MASTER BOOK ARCHITECTURE | UMB | ACTIVE | 31 | UPN-000005247–UPN-000005480 |
-| `VOL-024` | 24 | UNIVERSAL SCIENCE & INTELLIGENCE | USIS | ACTIVE | 2 | UPN-000009133–UPN-000009136 |
+| `VOL-024` | 24 | UNIVERSAL SCIENCE & INTELLIGENCE | USIS | ACTIVE | 3 | UPN-000009133–UPN-000009139 |
 | `VOL-023` | 23 | SECURITY-GOVERNANCE | SEC | ACTIVE | 5 | UPN-000008900–UPN-000008934 |
 
 
@@ -1212,12 +1212,13 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-024 — UNIVERSAL SCIENCE & INTELLIGENCE <a id="vol-024"></a>
 
 *Universal Science & Intelligence Substrate (USIS): the constitutional substrate beneath every scientific discipline and intelligence paradigm — 21 universes, Universal Science, Human Intelligence, Self-Evolution, and Data/Analytics/Algorithm/Model universes, the 24-tier Universal Capability Meta-Model, reasoning/learning/analytics/simulation runtime, grounding/explanation validation, and explainability/bounded-autonomy/reproducibility certification.*  \
-**Category:** USIS · **Status:** ACTIVE · **Artifacts:** 2
+**Category:** USIS · **Status:** ACTIVE · **Artifacts:** 3
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
 | `UCOS-USIS-000001` | USIS-GOV-000 — Universal Science & Intelligence Substrate · P… | USIS-GOV-000 | ACTIVE |
 | `UCOS-USIS-000002` | USIS-001 — Universal Science & Intelligence Substrate Constit… | USIS-001 | ACTIVE |
+| `UCOS-USIS-000003` | USIS-002 — Universal Science & Intelligence Universe Catalog | USIS-002 | ACTIVE |
 
 ### VOL-023 — SECURITY-GOVERNANCE <a id="vol-023"></a>
 

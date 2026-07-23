@@ -9,12 +9,15 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 
 ## Children (forward)
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) USIS-001 — Universal Science & Intelligence Substr
+- [UCOS-USIS-000003](UCOS-USIS-000003.md) USIS-002 — Universal Science & Intelligence Univer
 
 ## Backlinks (reverse)
 - [UCOS-SVC-000018](UCOS-SVC-000018.md) —Child→
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) —Parent→
+- [UCOS-USIS-000003](UCOS-USIS-000003.md) —Parent→
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) —Depends-On→
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) —Authorized-By→
+- [UCOS-USIS-000003](UCOS-USIS-000003.md) —Authorized-By→
 - [UCOS-SEC-000001](UCOS-SEC-000001.md) —Required-By→
 
 Return: [Portal Index](index.md) · [Master Index](../UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)
