@@ -61,10 +61,10 @@ cd "$repo"
 # shellcheck source=scripts/ucos-env.sh
 source "scripts/ucos-env.sh"
 ucos_ensure_venv >/dev/null || { ucos_err "pre-commit: environment not ready — run ./bootstrap.sh"; exit 1; }
-PY="$(ucos_venv_python)"
 ucos_log "pre-commit: ruff lint + format check (engine + platform)"
-"$PY" -m ruff check engine platform
-"$PY" -m ruff format --check engine platform
+# SINGLE SOURCE OF TRUTH: the identical gate verify.sh Stage 1 runs (ucos_ruff_gate in
+# scripts/ucos-env.sh). No duplicated verification logic — verify.sh passes => this passes.
+ucos_ruff_gate
 ucos_ok "pre-commit: OK"
 HOOK_EOF
 

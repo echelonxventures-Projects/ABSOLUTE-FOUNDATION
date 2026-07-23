@@ -14,7 +14,7 @@
 #   make clean-venv    remove the disposable .ec1-venv (recreated on next bootstrap/verify)
 
 .DEFAULT_GOAL := help
-.PHONY: help bootstrap doctor verify verify-full lint test format format-check build clean clean-venv hooks repo-ops
+.PHONY: help bootstrap doctor verify verify-full lint test format format-check build clean clean-venv hooks repo-ops closure closure-gate closure-phase2 closure-phase2-gate closure-phase3 closure-phase3-gate
 
 VENV := .ec1-venv
 PY   := $(VENV)/bin/python
@@ -26,6 +26,12 @@ help:
 	@echo "  make verify        canonical verification (lint + tests/coverage + governance)"
 	@echo "  make verify-full   verify + full registration/drift gate"
 	@echo "  make repo-ops      complete repository operational verification (EPIC-PLAT-003)"
+	@echo "  make closure       regenerate UAKOS-CLOSURE-002 repository-closure artifacts"
+	@echo "  make closure-gate  fail-closed closure gate (non-zero exit while gaps remain)"
+	@echo "  make closure-phase2      regenerate PHASE-002 concept-graph reconciliation (outputs 20-35)"
+	@echo "  make closure-phase2-gate fail-closed PHASE-002 gate (non-zero exit while concept gaps remain)"
+	@echo "  make closure-phase3      regenerate PHASE-003 implementation planning (outputs 36-48)"
+	@echo "  make closure-phase3-gate fail-closed PHASE-003 gate (non-zero exit while repository NOT-CLOSED)"
 	@echo "  make lint          ruff lint only"
 	@echo "  make format        ruff format (rewrite engine + platform)"
 	@echo "  make format-check  ruff format --check (no writes; CI-style)"
@@ -52,6 +58,43 @@ verify-full:
 # repo-ops.sh, which self-heals the venv first (no parallel tooling).
 repo-ops:
 	@./repo-ops.sh
+
+# closure: UAKOS-CLOSURE-002 — regenerate the Vision-to-Repository closure artifacts
+# (source inventory, concept inventory, coverage/traceability matrices, gap register,
+# closure certificates). Deterministic, stdlib-only; never mutates the frozen corpus.
+# CLOSURE_SKIP_CORPUS=1 skips the external corpus scan for a fast repo-only pass.
+closure:
+	@python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py
+
+# closure-gate: fail-closed standing gate — exits non-zero while any constitutional
+# gap remains (conversation-only / upload-only / unhomed / duplicate / orphan).
+closure-gate:
+	@python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py --gate
+
+# closure-phase2: UAKOS-CLOSURE-002 · PHASE-002 — regenerate the concept-graph
+# reconciliation views (outputs 20-35 + phase2.json) by REUSING the Phase-001 model
+# (closure.json) and the canonical typed graph (00-BOOK/DATA/relationships.json).
+# Deterministic, stdlib-only; no re-extraction, no fabrication. Depends on `closure`.
+closure-phase2: closure
+	@python3 00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py
+
+# closure-phase2-gate: fail-closed standing gate for the concept layer — exits non-zero
+# while any concept remains unhomed / duplicated / orphaned.
+closure-phase2-gate: closure
+	@python3 00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py --gate
+
+# closure-phase3: UAKOS-CLOSURE-002 · PHASE-003 — regenerate the canonical implementation
+# PLANNING artifacts (outputs 36-48 + phase3.json). Consumes the frozen PHASE-002 baseline
+# (closure.json) and produces constitutional plans only — classification, destination, owner,
+# dependency DAG, waves, priority, contracts, enrichment execution plan, closure projection.
+# Planning only: never modifies Repository Truth, never implements automatically.
+closure-phase3: closure-phase2
+	@python3 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py
+
+# closure-phase3-gate: fail-closed — non-zero exit while the repository is NOT-CLOSED
+# (planning delivered, authorized execution still pending).
+closure-phase3-gate: closure-phase2
+	@python3 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py --gate
 
 # lint/test self-heal the venv first so they never hit "command not found".
 lint: bootstrap-quiet

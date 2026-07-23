@@ -84,8 +84,11 @@ summarize_and_exit() {
   exit 0
 }
 
-# --- Stage 1: lint (ruff) — CD-01 / CD-04 ----------------------------------------
-run_stage "ruff lint (engine + platform)" "$PY" -m ruff check engine platform
+# --- Stage 1: ruff quality gate (lint + format-check) — CD-01 / CD-04 ------------
+# Invokes the SINGLE-SOURCE-OF-TRUTH gate (ucos_ruff_gate in scripts/ucos-env.sh) so
+# this canonical path runs the IDENTICAL ruff gate as the pre-commit hook — closing the
+# drift that let verify.sh pass while pre-commit's `ruff format --check` failed.
+run_stage "ruff lint + format-check (engine + platform)" ucos_ruff_gate
 
 # --- Stage 2: tests + coverage gate — CD-02 (pytest addopts drive --cov ≥ 90%) ---
 # Running via the venv interpreter guarantees pytest-cov is present, so the --cov

@@ -40,9 +40,28 @@ ec1-determinism = "engine.determinism.reproduce:main"
 ucos-knowledge = "engine.knowledge.cli:main"
 # EPIC-UKDA-002: Universal Constitutional Knowledge Integration CLI.
 ucos-knowledge-integration = "engine.knowledge.integration.cli:main"
+# UCOS-EPIC-002 (Terminal T2): Universal Knowledge Graph over Registry Truth.
+ucos-knowledge-graph = "engine.graph.cli:main"
+# UCOS-EPIC-003: Universal Discovery Engine CLI (registry-driven discovery).
+ucos-discovery = "engine.discovery.cli:main"
 # EPIC-PLAT-003: Repository Operations Automation — the one-command operational
 # verification entry point (Terminal T5), orchestrating the canonical engines/scripts.
 ucos-repo-ops = "platform.repository_operations.cli:main"
+# UCOS-EPIC-004: Universal Measurement Engine (UCOS-UMA-001) — measures Registry Truth.
+ucos-measure = "platform.measurement.cli:main"
+# UCOS-EPIC-005: Universal Validation Engine (Terminal T5) — the one-command universal
+# validation entry point across architecture/implementation/dependency/registry/schema/
+# runtime/quality domains (fail-closed, evidence-producing, deterministic).
+ucos-validate = "platform.universal_validation.cli:main"
+# UCOS-EPIC-013: Continuous Validation Intelligence (Terminal T5) — expands validation
+# beyond static rule execution across cross-capability consistency, repository
+# completeness, contract/runtime/version compatibility, and architecture/governance
+# compliance, producing Validation Intelligence Reports, a Compatibility Engine verdict,
+# Compliance Reports, and content-addressed evidence.
+ucos-validate-intel = "platform.validation_intelligence.cli:main"
+# UCOS-EPIC-001: Universal Registry Platform — validate registrations against the
+# single registration authority and emit deterministic evidence (Terminal T1).
+ucos-registry = "engine.registry.universal.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -62,15 +81,18 @@ addopts = [
   "--strict-markers",
   "--cov=engine.foundation",
   "--cov=engine.registry",
+  "--cov=engine.discovery",
   "--cov=engine.compiler",
   "--cov=engine.determinism",
   "--cov=engine.runtime",
   "--cov=engine.factory",
   "--cov=engine.validation",
   "--cov=engine.certification",
+  "--cov=engine.universal_certification",
   "--cov=engine.acceptance",
   "--cov=engine.governance",
   "--cov=engine.knowledge",
+  "--cov=engine.graph",
   "--cov=platform.foundation",
   "--cov=platform.identity",
   "--cov=platform.administration",
@@ -81,10 +103,15 @@ addopts = [
   "--cov=platform.artifact_explorer",
   "--cov=platform.execution_dashboard",
   "--cov=platform.coverage",
+  "--cov=platform.measurement",
   "--cov=platform.validation",
   "--cov=platform.certification",
   "--cov=platform.runtime_operations",
   "--cov=platform.repository_operations",
+  "--cov=platform.universal_validation",
+  "--cov=platform.validation_intelligence",
+  "--cov=platform.universal_portal",
+  "--cov=platform.runtime_platform",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -92,7 +119,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

@@ -186,3 +186,19 @@ ucos_ensure_venv() {
     ucos_ok "Pinned toolchain installed."
   fi
 }
+
+
+# --- Canonical ruff quality gate (SINGLE SOURCE OF TRUTH) ------------------------
+# The lint + format-check gate that every fast verification path must run identically:
+#   * verify.sh   Stage 1 (the canonical gate)
+#   * the pre-commit hook installed by scripts/install-hooks.sh
+# Defining it here — the file both already source — guarantees the two paths can never
+# drift (the RC-1 gate-reconciliation invariant: "verify.sh passes => pre-commit passes").
+# Runs the pinned ruff via the venv interpreter by ABSOLUTE PATH (no activation, no PATH
+# dependency). ruff format --check is a NON-mutating check (it never rewrites files); use
+# `make format` to apply formatting.
+ucos_ruff_gate() {
+  local py; py="$(ucos_venv_python)"
+  "$py" -m ruff check engine platform
+  "$py" -m ruff format --check engine platform
+}
