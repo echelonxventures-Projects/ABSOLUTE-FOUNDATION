@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-23T11:29:39+00:00 by ukbx portal. 1002 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-23T12:21:30+00:00 by ukbx portal. 1003 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1006,3 +1006,4 @@
 | [UCOS-REF-000014](UCOS-REF-000014.md) | Ucos Ω∞ Master Implementation Plan V2 | VOL-003 | FROZEN |
 | [UCOS-REF-000015](UCOS-REF-000015.md) | Universal Reality Compiler Constitution | VOL-003 | FROZEN |
 | [UCOS-USIS-000001](UCOS-USIS-000001.md) | USIS-GOV-000 — Universal Science & Intelligence Substrate ·  | VOL-024 | ACTIVE |
+| [UCOS-USIS-000002](UCOS-USIS-000002.md) | USIS-001 — Universal Science & Intelligence Substrate Consti | VOL-024 | ACTIVE |

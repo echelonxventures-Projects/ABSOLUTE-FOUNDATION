@@ -7154,9 +7154,16 @@
       "page_start": 9133,
       "page_count": 2,
       "first_seen": "2026-07-23T11:00:27+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/00-CONSTITUTION/USIS-001-UNIVERSAL-SCIENCE-INTELLIGENCE-CONSTITUTION.md": {
+      "universal_id": "UCOS-USIS-000002",
+      "category": "USIS",
+      "page_start": 9135,
+      "page_count": 2,
+      "first_seen": "2026-07-23T12:21:29+00:00"
     }
   },
-  "page_cursor": 9134,
+  "page_cursor": 9136,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -7196,7 +7203,7 @@
     "CEP": 35,
     "SEC": 5,
     "REPOOPERATIO": 1,
-    "USIS": 1
+    "USIS": 2
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -19286,6 +19293,17 @@
         "status": "ACTIVE",
         "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/USIS-GOV-000-UNIVERSAL-SCIENCE-INTELLIGENCE-PROGRAM-ESTABLISHMENT-DETERMINATION.md",
         "name": "USIS-GOV-000 — Universal Science & Intelligence Substrate · Program Establishment Determination"
+      }
+    ],
+    "UCOS-USIS-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-23T12:21:29+00:00",
+        "content_hash": "690e91386c7f17c088bee14b001d448ba76298820f19f312fb5d7833689995ab",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/00-CONSTITUTION/USIS-001-UNIVERSAL-SCIENCE-INTELLIGENCE-CONSTITUTION.md",
+        "name": "USIS-001 — Universal Science & Intelligence Substrate Constitution"
       }
     ]
   }

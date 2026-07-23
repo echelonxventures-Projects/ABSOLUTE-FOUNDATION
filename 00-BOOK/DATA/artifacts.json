@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-23T11:28:22+00:00",
+  "generated_at": "2026-07-23T12:21:29+00:00",
   "generator_version": "1.0.0",
-  "count": 1002,
+  "count": 1003,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -44782,6 +44782,50 @@
         ],
         "architecture": [
           "UCOS-SEC-000001"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000002",
+      "native_id": "USIS-001",
+      "name": "USIS-001 — Universal Science & Intelligence Substrate Constitution",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9135,
+      "page_end": 9136,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/00-CONSTITUTION/USIS-001-UNIVERSAL-SCIENCE-INTELLIGENCE-CONSTITUTION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "690e91386c7f17c088bee14b001d448ba76298820f19f312fb5d7833689995ab",
+      "traceability": {
+        "requirement": [
+          "UCOS-USIS-000001",
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001"
         ],
         "design": [],
         "implementation": [],
