@@ -1,6 +1,6 @@
 # 06 — Certification Planning Register
 
-> PROGRAM **UAKOS PHASE-004** — Constitutional Implementation Planning · baseline `57d91b7` (branch `governance-reconciliation`) · consumes FREEZE A + FREEZE B + FREEZE C · AUTHORITY = **NONE (DERIVED / PLANNING)** · **READ-ONLY** · generated `2026-07-23T06:14:29Z` by `phase4_plan.py`.
+> PROGRAM **UAKOS PHASE-004** — Constitutional Implementation Planning · baseline `ab78f35` (branch `governance-reconciliation`) · consumes FREEZE A + FREEZE B + FREEZE C2 (PHASE-003R realization model) · AUTHORITY = **NONE (DERIVED / PLANNING)** · **READ-ONLY** · generated `2026-07-24T11:20:06Z` by `phase4_plan.py`.
 >
 > Certification gates, evidence, acceptance / completion / rollback criteria per unit type.
 >
@@ -24,4 +24,4 @@
 | IMPLEMENT | code-root artifact + passing validation | G1+G2+G5+G6 pass | unit remains SPECIFIED; no partial merge |
 | CERTIFY | UCOS-CERT evidence token issued | G5+G6+G8 pass | revert to PARTIALLY_IMPLEMENTED; evidence quarantined |
 
-Certification units in plan (WAITING_CERTIFICATION): **46**.
+Certification units in plan (WAITING_CERTIFICATION): **21**.

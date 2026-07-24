@@ -1,6 +1,6 @@
 # 10 — Universal Gap Dependency Graph (UGDG)
 
-> PROGRAM **UAKOS PHASE-004** — Constitutional Implementation Planning · baseline `57d91b7` (branch `governance-reconciliation`) · consumes FREEZE A + FREEZE B + FREEZE C · AUTHORITY = **NONE (DERIVED / PLANNING)** · **READ-ONLY** · generated `2026-07-23T06:14:29Z` by `phase4_plan.py`.
+> PROGRAM **UAKOS PHASE-004** — Constitutional Implementation Planning · baseline `ab78f35` (branch `governance-reconciliation`) · consumes FREEZE A + FREEZE B + FREEZE C2 (PHASE-003R realization model) · AUTHORITY = **NONE (DERIVED / PLANNING)** · **READ-ONLY** · generated `2026-07-24T11:20:06Z` by `phase4_plan.py`.
 >
 > The complete gap-execution DAG: wave nodes + precedence edges (machine model in `10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.json`).
 >
@@ -10,26 +10,20 @@
 
 | Wave (node) | Class | Units |
 |---|---|---|
-| 2 | CRITICAL / Implementation | 34 |
-| 3 | CRITICAL / Certification | 19 |
-| 4 | HIGH / Specification | 8 |
-| 5 | HIGH / Implementation | 55 |
-| 6 | HIGH / Certification | 22 |
-| 7 | MEDIUM / Specification | 20 |
-| 8 | MEDIUM / Implementation | 23 |
-| 9 | MEDIUM / Certification | 5 |
+| 2 | CRITICAL / Realization | 34 |
+| 3 | CRITICAL / Certification | 2 |
+| 5 | HIGH / Realization | 46 |
+| 6 | HIGH / Certification | 19 |
+| 8 | MEDIUM / Realization | 17 |
 
 ### Precedence edges (each wave gates the next)
 
 | From wave |  | To wave |
 |---|---|---|
-| CRITICAL / Implementation | → | CRITICAL / Certification |
-| CRITICAL / Certification | → | HIGH / Specification |
-| HIGH / Specification | → | HIGH / Implementation |
-| HIGH / Implementation | → | HIGH / Certification |
-| HIGH / Certification | → | MEDIUM / Specification |
-| MEDIUM / Specification | → | MEDIUM / Implementation |
-| MEDIUM / Implementation | → | MEDIUM / Certification |
+| CRITICAL / Realization | → | CRITICAL / Certification |
+| CRITICAL / Certification | → | HIGH / Realization |
+| HIGH / Realization | → | HIGH / Certification |
+| HIGH / Certification | → | MEDIUM / Realization |
 
 ### Acyclicity
 

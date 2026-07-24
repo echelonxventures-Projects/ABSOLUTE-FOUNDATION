@@ -5,8 +5,15 @@ READ-ONLY. Constructs the immutable Constitutional Implementation Execution
 Blueprint (FREEZE D) exclusively from the certified baselines:
     FREEZE A  = 00-MASTER/UAKOS-CLOSURE-002/closure.json      (certified knowledge)
     FREEZE B  = Phase-002 repository implementation status     (reproduced)
-    FREEZE C  = Phase-003 gap baseline                         (reproduced)
+    FREEZE C2 = PHASE-003R corrected realization model         (consumed via phase3r_engine.realize)
 plus the authoritative dependency graph (relationships.json) and provenance.json.
+
+ERP-005 reconciliation: the obsolete single-lifecycle FREEZE C (Phase-003) is no
+longer the realization source. Gap classification, unit types, waves, and readiness
+are derived from the AUTHORITATIVE PHASE-003R realization model (FREEZE C2), which
+assigns each object exactly one realization type/lifecycle with a lifecycle-scoped
+gap vocabulary (IMPLEMENTATION_GAP is valid ONLY for the SOFTWARE lifecycle;
+constitutional/governance objects carry RATIFICATION/ENFORCEMENT/GOVERNANCE gaps).
 
 It creates NO implementation, NO repository change, NO code. It only PLANS:
 WHAT (implementation units) / WHY (gap + criticality) / WHEN (waves) /
@@ -27,6 +34,7 @@ Reproduce:
 from __future__ import annotations
 
 import hashlib
+import importlib.util as _ilu
 import json
 import re
 import subprocess
@@ -47,6 +55,15 @@ CONCEPTS = {c["id"]: c for c in CLOSURE["concepts"]}
 PROV = {p["id"]: p for p in PB["provenance"]}
 NOW = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 BASE = {"commit": CLOSURE.get("baseline_commit"), "branch": CLOSURE.get("branch")}
+
+# ERP-005: load the AUTHORITATIVE PHASE-003R realization model (FREEZE C2) as the
+# single realization authority. Reused by path (the dir name is not import-safe);
+# no realization logic is duplicated here — realize()/TYPE_STREAM/TYPE_LIFECYCLE
+# are consumed directly from phase3r_engine.
+_P3R_PATH = REPO / "00-MASTER" / "UAKOS-PHASE-003R" / "phase3r_engine.py"
+_P3R_SPEC = _ilu.spec_from_file_location("phase3r_engine", _P3R_PATH)
+phase3r = _ilu.module_from_spec(_P3R_SPEC)
+_P3R_SPEC.loader.exec_module(phase3r)
 
 TEXT_EXT = {".md", ".txt", ".py", ".json", ".toml", ".sh", ".yml", ".yaml", ".cfg"}
 FAMILIES = [
@@ -87,9 +104,26 @@ CAPABILITY = {
     "00-MASTER": "Operational-Memory",
 }
 TIER_RANK = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3}
-GAP_RANK = {"SPECIFICATION_GAP": 0, "IMPLEMENTATION_GAP": 1, "CERTIFICATION_GAP": 2}
-GAP_UNIT_TYPE = {"SPECIFICATION_GAP": "SPECIFY", "IMPLEMENTATION_GAP": "IMPLEMENT",
-                 "CERTIFICATION_GAP": "CERTIFY"}
+# ERP-005: gap → wave phase (0 specify/define/propose · 1 realize/ratify/populate ·
+# 2 enforce/certify/validate), spanning the full PHASE-003R lifecycle-scoped gap
+# vocabulary. Preserves the tier×phase 3-slot wave structure.
+GAP_PHASE_RANK = {
+    "SPECIFICATION_GAP": 0, "GOVERNANCE_GAP": 0, "REGISTRATION_GAP": 0,
+    "DOCUMENTATION_GAP": 0, "TRACEABILITY_GAP": 0,
+    "RATIFICATION_GAP": 1, "IMPLEMENTATION_GAP": 1, "POPULATION_GAP": 1,
+    "ENFORCEMENT_GAP": 2, "CERTIFICATION_GAP": 2, "VALIDATION_GAP": 2,
+}
+PHASE_NAME = {0: "Specification", 1: "Realization", 2: "Certification"}
+# ERP-005: gap → realization action. Constitutional/governance realization is
+# RATIFY/ENFORCE/DETERMINE (not IMPLEMENT); knowledge is POPULATE/REGISTER.
+GAP_UNIT_TYPE = {
+    "SPECIFICATION_GAP": "SPECIFY", "IMPLEMENTATION_GAP": "IMPLEMENT",
+    "CERTIFICATION_GAP": "CERTIFY", "RATIFICATION_GAP": "RATIFY",
+    "ENFORCEMENT_GAP": "ENFORCE", "GOVERNANCE_GAP": "DETERMINE",
+    "POPULATION_GAP": "POPULATE", "REGISTRATION_GAP": "REGISTER",
+    "DOCUMENTATION_GAP": "DOCUMENT", "VALIDATION_GAP": "VALIDATE",
+    "TRACEABILITY_GAP": "TRACE",
+}
 
 
 def run(cmd):
@@ -245,25 +279,28 @@ def dep_graph_stats():
             "cycles": cyc_sorted[:5]}
 
 
-# ---- build implementation units -------------------------------------------------------
-def build_units(markers):
+# ---- build implementation units (ERP-005: from PHASE-003R FREEZE C2) ------------------
+def build_units():
     units = []
     for cid in sorted(CONCEPTS):
         c = CONCEPTS[cid]
-        st = status(cid, markers)
-        gap = classify_gap(cid, st)
+        # AUTHORITATIVE realization model (FREEZE C2): exactly one type/lifecycle/stream
+        # and a lifecycle-scoped corrected gap. Replaces the obsolete FREEZE C classify_gap.
+        rtype, lifecycle, stream, stage, gap, completion = phase3r.realize(cid)
         if gap == "NO_GAP":
-            continue  # no unit: complete or governance-terminal
+            continue  # complete or governance-terminal — no unit
         crit = CRIT_TIER.get(c["family"], "LOW")
         owner = (c.get("exact_homes") or c.get("def_homes") or [PROV[cid]["repository_home"]])[0] or "—"
         loc = owner.strip('"').split("/", 1)[0]
         cap = CAPABILITY.get(loc, "Other")
-        wave = TIER_RANK.get(crit, 3) * 3 + GAP_RANK.get(gap, 1) + 1
-        deferred = (st == "DEFERRED")
+        phase = GAP_PHASE_RANK.get(gap, 1)
+        wave = TIER_RANK.get(crit, 3) * 3 + phase + 1
+        deferred = (c["disposition"] == "DEFERRED")
         units.append({
             "cid": cid, "family": c["family"], "origin": origin_type(cid), "owner": owner,
-            "location": loc, "capability": cap, "status": st, "gap": gap,
+            "location": loc, "capability": cap, "status": stage, "gap": gap,
             "unit_type": GAP_UNIT_TYPE.get(gap, "IMPLEMENT"), "criticality": crit,
+            "realization_type": rtype, "lifecycle": lifecycle, "stream": stream,
             "wave": wave, "deferred": deferred,
             "in_code": bool(c.get("in_code")), "certified": bool(c.get("certified")),
             "spec": bool(c.get("in_spec") or c.get("in_constitution")),
@@ -275,9 +312,11 @@ def build_units(markers):
     return units
 
 
-# ---- readiness (Step 3) ----------------------------------------------------------------
+# ---- readiness (Step 3; ERP-005 stream-aware) -----------------------------------------
 def readiness(u, first_wave):
-    if u["deferred"]:
+    # Constitutional/governance realization is a ratification act, not autonomous
+    # engineering — it awaits the Constitutional Governance Authority (never auto-READY).
+    if u["deferred"] or u["stream"] == "Governance":
         return "WAITING_GOVERNANCE"
     if u["gap"] == "CERTIFICATION_GAP":
         return "WAITING_CERTIFICATION"
@@ -327,7 +366,7 @@ def fence(rows, header):
 def hdr(title, answers):
     return (f"# {title}\n\n"
             f"> PROGRAM **UAKOS PHASE-004** — Constitutional Implementation Planning · "
-            f"baseline `{BASE['commit']}` (branch `{BASE['branch']}`) · consumes FREEZE A + FREEZE B + FREEZE C · "
+            f"baseline `{BASE['commit']}` (branch `{BASE['branch']}`) · consumes FREEZE A + FREEZE B + FREEZE C2 (PHASE-003R realization model) · "
             f"AUTHORITY = **NONE (DERIVED / PLANNING)** · **READ-ONLY** · generated `{NOW}` by `phase4_plan.py`.\n>\n"
             f"> {answers}\n>\n"
             f"> Reproduce: `python3 00-MASTER/UAKOS-PHASE-004/phase4_plan.py`.\n\n")
@@ -338,8 +377,7 @@ def w(name, body):
 
 
 def main():
-    markers = scan_lifecycle()
-    units = build_units(markers)
+    units = build_units()
     N = len(units)
     waves_present = sorted({u["wave"] for u in units})
     first_wave = waves_present[0] if waves_present else 1
@@ -350,8 +388,7 @@ def main():
     WAVE_LABEL = {}
     for wv in waves_present:
         tier = [k for k, v in TIER_RANK.items() if v == (wv - 1) // 3][0]
-        gaptype = [k for k, v in GAP_RANK.items() if v == (wv - 1) % 3][0]
-        WAVE_LABEL[wv] = f"{tier} / {gaptype.replace('_GAP','').title()}"
+        WAVE_LABEL[wv] = f"{tier} / {PHASE_NAME[(wv - 1) % 3]}"
 
     by_wave = defaultdict(list)
     for u in units:
@@ -360,10 +397,9 @@ def main():
     # ---- 01 Implementation Unit Register
     b = hdr("01 — Implementation Unit Register",
             "One implementation unit per open constitutional gap (WHAT + WHERE + scope + evidence).")
+    ut_counts = Counter(u["unit_type"] for u in units)
     b += (f"- Open gaps → implementation units: **{N}** "
-          f"(IMPLEMENT={sum(1 for u in units if u['unit_type']=='IMPLEMENT')}, "
-          f"SPECIFY={sum(1 for u in units if u['unit_type']=='SPECIFY')}, "
-          f"CERTIFY={sum(1 for u in units if u['unit_type']=='CERTIFY')})\n"
+          f"({', '.join(f'{k}={ut_counts[k]}' for k in sorted(ut_counts))})\n"
           f"- NO_GAP objects (no unit required): **{len(CONCEPTS)-N}**\n\n"
           + fence([[u["unit_id"], u["cid"], u["unit_type"], u["family"], u["capability"],
                     u["owner"].split("/")[-1][:30], u["criticality"], u["gap"]] for u in units],
@@ -406,7 +442,7 @@ def main():
           "interface/contract seam before certification. No implementation unit in this plan sits on a cycle "
           "(disjoint id spaces).\n\n"
           "### Prerequisites\n\n"
-          "- Execution prerequisites: FREEZE A + FREEZE B + FREEZE C certified (met).\n"
+          "- Execution prerequisites: FREEZE A + FREEZE B + FREEZE C2 certified (met).\n"
           "- Validation prerequisites: per-unit validation plan (Register 05).\n"
           "- Certification prerequisites: per-unit certification gates (Register 06).")
     w("03-DEPENDENCY-RESOLUTION-REGISTER.md", b)
@@ -480,7 +516,7 @@ def main():
          "execution deferred to post-FREEZE-D"],
     ], ["Risk category", "Severity", "Evidence", "Mitigation"])
     b += (f"\n\n**Highest-risk concentration:** {crit_impl} CRITICAL-tier implementation units (Wave "
-          f"{TIER_RANK['CRITICAL']*3+GAP_RANK['IMPLEMENTATION_GAP']+1}) — the constitutional foundation that "
+          f"{TIER_RANK['CRITICAL']*3+GAP_PHASE_RANK['IMPLEMENTATION_GAP']+1}) — the constitutional foundation that "
           "gates all HIGH/MEDIUM work.")
     w("07-EXECUTION-RISK-REGISTER.md", b)
 
@@ -546,8 +582,7 @@ def main():
     b = hdr("11 — Master Constitutional Implementation Blueprint",
             "The single authoritative execution plan: WHAT · WHY · WHEN · WHERE · HOW · ORDER.")
     b += (f"## WHAT — {N} implementation units\n\n"
-          + fence([[t, sum(1 for u in units if u['unit_type'] == t)]
-                   for t in ("SPECIFY", "IMPLEMENT", "CERTIFY")], ["Unit type", "Units"])
+          + fence([[t, ut_counts[t]] for t in sorted(ut_counts)], ["Unit type", "Units"])
           + "\n\n## WHY — gap + constitutional criticality\n\n"
           + fence([[c, sum(1 for u in units if u["criticality"] == c)] for c in ("CRITICAL", "HIGH", "MEDIUM", "LOW")],
                   ["Criticality", "Units"])
@@ -562,7 +597,7 @@ def main():
           "Registers 05 (validation) and 06 (certification) define, per unit, the required validation, tests, "
           "evidence, gates (G1/G2/G5/G6/G8), and acceptance/completion/rollback criteria.\n\n"
           "## Governance\n\n"
-          "Execution originates exclusively from FREEZE A + FREEZE B + FREEZE C + FREEZE D. Every future "
+          "Execution originates exclusively from FREEZE A + FREEZE B + FREEZE C2 + FREEZE D. Every future "
           "implementation task references its Implementation Unit (Register 01) and preserves traceability to "
           "Knowledge Object → Gap → Validation Plan → Certification Plan.")
     w("11-MASTER-CONSTITUTIONAL-IMPLEMENTATION-BLUEPRINT.md", b)
@@ -578,11 +613,9 @@ def main():
     b = hdr("12 — Phase-004 Completion Report", "Determination, method, success criteria, FREEZE D certification.")
     b += (f"## Determination: **{'COMPLETE — PASS' if passed else 'INCOMPLETE'}**\n\n"
           f"| Dimension | Value |\n|---|---|\n"
-          f"| Open gaps (FREEZE C) | {N} |\n"
+          f"| Open gaps (FREEZE C2) | {N} |\n"
           f"| Implementation units | {N} |\n"
-          f"| — SPECIFY / IMPLEMENT / CERTIFY | {sum(1 for u in units if u['unit_type']=='SPECIFY')} / "
-          f"{sum(1 for u in units if u['unit_type']=='IMPLEMENT')} / "
-          f"{sum(1 for u in units if u['unit_type']=='CERTIFY')} |\n"
+          f"| — Unit types (corrected) | {', '.join(f'{k}={ut_counts[k]}' for k in sorted(ut_counts))} |\n"
           f"| Execution waves | {len(waves_present)} |\n"
           f"| READY (Wave {first_wave}) | {by_ready.get('READY',0)} |\n"
           f"| WAITING_DEPENDENCY | {by_ready.get('WAITING_DEPENDENCY',0)} |\n"
@@ -593,8 +626,9 @@ def main():
           f"| Critical path | {len(waves_present)} serial waves |\n"
           f"| FREEZE D seal (sha256) | `{seal}` |\n\n"
           "## Method\n\n"
-          "Consumed FREEZE A + FREEZE B + FREEZE C. Every open gap became exactly one Implementation Unit "
-          "(SPECIFY/IMPLEMENT/CERTIFY by gap type). Units were sequenced deterministically by constitutional "
+          "Consumed FREEZE A + FREEZE B + FREEZE C2 (PHASE-003R realization model). Every open gap became "
+          "exactly one Implementation Unit (realization action by corrected lifecycle-scoped gap type). Units "
+          "were sequenced deterministically by constitutional "
           "criticality tier × gap lifecycle into wave-layered execution, with validation, certification, "
           "readiness, risk, critical-path, and a wave-DAG UGDG derived from the same certified evidence. "
           "Ordering never violates the CLOSED dependency closure. Nothing implemented; nothing modified.\n\n"
@@ -624,7 +658,7 @@ def main():
           + (f"**FREEZE D is CERTIFIED and IMMUTABLE at seal `{seal}`.** The complete Constitutional "
              "Implementation Execution Blueprint (units, sequence, waves, dependency resolution, validation + "
              "certification planning, critical path, UGDG, master blueprint) is established. Implementation "
-             "execution SHALL originate exclusively from FREEZE A + FREEZE B + FREEZE C + FREEZE D. "
+             "execution SHALL originate exclusively from FREEZE A + FREEZE B + FREEZE C2 + FREEZE D. "
              "**Implementation execution may now commence under this plan.**" if passed
              else "**FREEZE D NOT established.**")
           + "\n\n_READ-ONLY: no implementation, code generation, repository modification, refactor, "

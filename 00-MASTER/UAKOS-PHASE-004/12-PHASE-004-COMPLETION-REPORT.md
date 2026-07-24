@@ -1,6 +1,6 @@
 # 12 — Phase-004 Completion Report
 
-> PROGRAM **UAKOS PHASE-004** — Constitutional Implementation Planning · baseline `57d91b7` (branch `governance-reconciliation`) · consumes FREEZE A + FREEZE B + FREEZE C · AUTHORITY = **NONE (DERIVED / PLANNING)** · **READ-ONLY** · generated `2026-07-23T06:14:29Z` by `phase4_plan.py`.
+> PROGRAM **UAKOS PHASE-004** — Constitutional Implementation Planning · baseline `ab78f35` (branch `governance-reconciliation`) · consumes FREEZE A + FREEZE B + FREEZE C2 (PHASE-003R realization model) · AUTHORITY = **NONE (DERIVED / PLANNING)** · **READ-ONLY** · generated `2026-07-24T11:20:06Z` by `phase4_plan.py`.
 >
 > Determination, method, success criteria, FREEZE D certification.
 >
@@ -10,22 +10,22 @@
 
 | Dimension | Value |
 |---|---|
-| Open gaps (FREEZE C) | 186 |
-| Implementation units | 186 |
-| — SPECIFY / IMPLEMENT / CERTIFY | 28 / 112 / 46 |
-| Execution waves | 8 |
-| READY (Wave 2) | 31 |
-| WAITING_DEPENDENCY | 64 |
-| WAITING_CERTIFICATION | 46 |
-| WAITING_GOVERNANCE | 20 |
-| PARTIALLY_READY | 25 |
+| Open gaps (FREEZE C2) | 118 |
+| Implementation units | 118 |
+| — Unit types (corrected) | CERTIFY=21, IMPLEMENT=47, POPULATE=7, RATIFY=43 |
+| Execution waves | 5 |
+| READY (Wave 2) | 3 |
+| WAITING_DEPENDENCY | 21 |
+| WAITING_CERTIFICATION | 21 |
+| WAITING_GOVERNANCE | 58 |
+| PARTIALLY_READY | 15 |
 | UGDG | wave-layered DAG, 0 cycles |
-| Critical path | 8 serial waves |
-| FREEZE D seal (sha256) | `d06df399dc08063fbd1832e7f3a417b88a7bd75025ddfc464e4e4a9fd138979b` |
+| Critical path | 5 serial waves |
+| FREEZE D seal (sha256) | `e71bed9f01e3739643638aa4295794010a8c29d14faef29b800a3f07c78e8996` |
 
 ## Method
 
-Consumed FREEZE A + FREEZE B + FREEZE C. Every open gap became exactly one Implementation Unit (SPECIFY/IMPLEMENT/CERTIFY by gap type). Units were sequenced deterministically by constitutional criticality tier × gap lifecycle into wave-layered execution, with validation, certification, readiness, risk, critical-path, and a wave-DAG UGDG derived from the same certified evidence. Ordering never violates the CLOSED dependency closure. Nothing implemented; nothing modified.
+Consumed FREEZE A + FREEZE B + FREEZE C2 (PHASE-003R realization model). Every open gap became exactly one Implementation Unit (realization action by corrected lifecycle-scoped gap type). Units were sequenced deterministically by constitutional criticality tier × gap lifecycle into wave-layered execution, with validation, certification, readiness, risk, critical-path, and a wave-DAG UGDG derived from the same certified evidence. Ordering never violates the CLOSED dependency closure. Nothing implemented; nothing modified.
 
 ## Outputs (12)
 
@@ -61,6 +61,6 @@ Consumed FREEZE A + FREEZE B + FREEZE C. Every open gap became exactly one Imple
 
 ## FREEZE D — Implementation Execution Blueprint
 
-**FREEZE D is CERTIFIED and IMMUTABLE at seal `d06df399dc08063fbd1832e7f3a417b88a7bd75025ddfc464e4e4a9fd138979b`.** The complete Constitutional Implementation Execution Blueprint (units, sequence, waves, dependency resolution, validation + certification planning, critical path, UGDG, master blueprint) is established. Implementation execution SHALL originate exclusively from FREEZE A + FREEZE B + FREEZE C + FREEZE D. **Implementation execution may now commence under this plan.**
+**FREEZE D is CERTIFIED and IMMUTABLE at seal `e71bed9f01e3739643638aa4295794010a8c29d14faef29b800a3f07c78e8996`.** The complete Constitutional Implementation Execution Blueprint (units, sequence, waves, dependency resolution, validation + certification planning, critical path, UGDG, master blueprint) is established. Implementation execution SHALL originate exclusively from FREEZE A + FREEZE B + FREEZE C2 + FREEZE D. **Implementation execution may now commence under this plan.**
 
 _READ-ONLY: no implementation, code generation, repository modification, refactor, constitution change, or new knowledge objects were produced._
