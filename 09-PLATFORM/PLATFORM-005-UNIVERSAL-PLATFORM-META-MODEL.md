@@ -267,3 +267,43 @@ The **Foundation Lifecycle** is the **§6 META-LIFECYCLE**, applied to the PMC-0
 W2-F4 → PMC-01 + PMR-01/02/04/06/07/09 + PMK-01…08 + PMX-01…04 + §8/§9 (this artifact); the Foundation-as-object also cited by PLATFORM-001 §18.1. W2-F5 → §6 + §11 PMG + PME-04 (this artifact) + IMP-001 §22 registry-first lifecycle (reference). Both cite **PLATFORM-005 §18** as the canonical meta-home of the Foundation Object Contract; neither creates a parallel owner, object model, registry, or ontology.
 
 **PLATFORM-005 §18 — FOUNDATION OBJECT CONTRACT + FOUNDATION LIFECYCLE — EXTEND COMPLETE · ADDITIVE · META-VALID · NO NEW OWNER.**
+
+
+
+---
+
+## SECTION 19 — RECURSIVE META-MODEL (ORTHOGONAL ROLES) ASSIMILATION ADDENDUM (REP-005 · WAVE-4)
+
+> **Provenance.** REP-005 Wave-4 · Recursive Meta-Model + Zero-Finite · Disposition **EXTEND** · Canonical owner **PLATFORM-005** (meta-model). Companion: **S2-03 §10** (Nucleus determination + recursive composition). Predecessors: REP-002 §17, REP-003 §18, REP-004 (`9fa847b`). Authorities: REP-001, AAP-001, IAC-001A–E, IAC-001D §05 (Reuse-First), Knowledge Once. **Additive** under **PME-01**; introduces **no ninth meta-class, no new founding relationship** (PME-02, PMI-01/02), **no new primitive** (PME-03), and **no role-exclusivity constraint**; confers no authority (PMI-07). Every construct remains META-VALID per §8.
+
+### 19.1 — Determination: architectural roles are orthogonal and non-exclusive
+
+REP-005 requires that a canonical object MAY **simultaneously** hold many architectural roles, with **no role exclusivity**. This is **already true of the meta-model** and is hereby made explicit: a **role** is the meta-class(es) a construct instantiates and the relationships it participates in — a construct is not partitioned into one exclusive kind. The Meta-Platform precedent (§17: a Platform whose members are Platforms) already demonstrated multi-role instantiation. No new construct is introduced; role orthogonality is a **reading of the existing PMC/PMR closure**, not a new rule.
+
+| Mission role | Realized by (existing meta-class / owner — reused) |
+|---|---|
+| **Foundation** | Foundation Object Contract §18 (PMC-01 object) |
+| **Nucleus** | recursive-container role §18 + S2-03 §10 (Foundation ∩ Universe) |
+| **Universe** | S2-03 + `ARCH-001` universe (by reference) |
+| **Registry** | `00-BOOK/REGISTRIES/*` + IMP-004 (by reference) |
+| **Catalog** | `03-CATALOGS/` + EC2-EPIC-006 (by reference) |
+| **Blueprint** | EC2-EPIC-006 Blueprint Catalog + GEN (by reference) |
+| **Platform** | PMC-01 Platform (this artifact) |
+| **Engine** | UNIVERSAL-COMPILER / APPLICATION-FACTORY / engine (by reference) |
+| **Capability** | PMC-02 Capability |
+| **Component** | PMC-03 Component |
+| **Service** | PMC-04 Service |
+| **Runtime** | PMR-08 `behaves-as` → frozen RL-F2 (by reference) |
+| **Realization** | EC-3 realization program / S3 (by reference) |
+
+**Orthogonality (binding).** These roles are **not mutually exclusive**: one canonical object (identified once — LAW-4/PMK-01) MAY instantiate several PMC meta-classes and participate in several PMR relationships simultaneously (e.g. a construct that is at once a Platform (PMC-01), a Registry, and a Universe). The meta-model imposes **no role-exclusivity constraint**, and none SHALL be introduced. Closure is preserved: every role still reduces to PMC-01…08 and PMR-01…09 (PMI-01/02) — orthogonality composes roles, it does not mint a ninth meta-class.
+
+### 19.2 — Zero Finite (REUSE; no finite catalog)
+
+The mission's Zero-Finite scope (unlimited Foundations/Nuclei/Universes/Domains/Registries/Catalogs/Platforms/Engines/Runtime-models/Deployment-models/Technology-stacks/Infrastructure/Databases/Programming-languages/Civilizations/Realizations/**future constructs**) is **already certified**: `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION` (16 axes CERTIFIED UNBOUNDED) + PLATFORM-001 §18.2 (REP-003) + additive extensibility (PME-01/UPL-14). **No finite catalog is introduced**; "future architectural constructs" are admitted additively by PME-01 without a ninth meta-class (PMI-01/02). The only bound is evidentiary legitimacy (register → validate → certify), which bounds validity, not scale.
+
+### 19.3 — Traceability
+
+Orthogonal roles → PMC-01…08 / PMR-01…09 / §17 (this artifact) + S2-03 §10 (Nucleus) + role owners (reference). Zero Finite → `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION` + PLATFORM-001 §18.2 + PME-01. All cite **PLATFORM-005 §19** as the canonical meta-home of the Recursive Meta-Model; none creates a parallel meta-model, role registry, finite catalog, or ninth meta-class.
+
+**PLATFORM-005 §19 — RECURSIVE META-MODEL (ORTHOGONAL ROLES) + ZERO FINITE — EXTEND COMPLETE · ADDITIVE · META-VALID · NO NEW META-CLASS, ROLE-EXCLUSIVITY, OR FINITE CATALOG.**

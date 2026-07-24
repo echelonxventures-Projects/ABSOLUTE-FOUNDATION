@@ -202,3 +202,67 @@ Current Universe (FROZEN identity)
 ---
 
 *END OF ARTIFACT — CEP-STAGE-02-S2-03 · UNIVERSE FOUNDATION BINDING · L3 · AUTHORITY = NONE (DERIVED TRUTH) · ARCH-001 & EL-1 UNMODIFIED · TRACEABLE TO CEP-000 … CEP-010*
+
+---
+
+## SECTION 10 — UNIVERSAL NUCLEUS & RECURSIVE COMPOSITION ASSIMILATION ADDENDUM (REP-005 · WAVE-4)
+
+> **Provenance.** REP-005 Wave-4 · Universal Foundation · Nucleus · Universe assimilation · Disposition **EXTEND** · Canonical owner **S2-03** (the designated *Nucleus↔Universe ownership binding* home per `03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX` / `04-REPOSITORY-GAP-ANALYSIS` GAP-1/GAP-2 / `05-CANONICAL-INTEGRATION-PLAN` N1/N2). Predecessors: REP-002 (`afd673f`), REP-003 (`c8229f5`), REP-004 (`9fa847b`). Authorities: REP-001, AAP-001, IAC-001A–E, IAC-001D §05 (Reuse-First), CEP-009 (evolution), Knowledge Once. This is an **additive, non-mutating binding** (AUTHORITY = NONE, derived-truth): it creates **no universe, no nucleus artifact, no new registry, no new identity/ontology**, renames nothing, and modifies no frozen artifact. Companion: **PLATFORM-005 §19** (Recursive Meta-Model roles). Subordinate to CEP-000…010, S2-01/S2-02, ARCH-001, EL-1; void to the extent of any conflict.
+
+### 10.1 — Reuse-First adjudication of the Nucleus (GAP-1 · Step 0 → EXTEND; NEW = 0)
+
+`05-CANONICAL-INTEGRATION-PLAN` Step 0 requires a Reuse-First adjudication before any Nucleus artifact is authored: *"if the Nucleus reduces to an existing concept, N1/N2 collapse to EXTEND and NEW count → 0."* REP-005's own constitution supplies the decisive evidence and the adjudication resolves to **EXTEND** — **CREATE is avoided (not constitutionally unavoidable)**:
+
+- A **Nucleus SHALL satisfy the Foundation Contract** — already owned: the **Foundation Object Contract, PLATFORM-005 §18** (Identifier…Lifecycle over PMC-01).
+- A **Nucleus SHALL be a constitutionally admissible Universe** — already owned: **this artifact (S2-03)** + `ARCH-001` universe catalog.
+- A **Nucleus SHALL be an unlimited recursive container** — already owned: containment relationship **PMR-07 / POR-07 `contains`** (PLATFORM-005/010) and the `Universe → Domain → Capability → Component → {Service, Application}` composition hierarchy (§2.4).
+- **Roles are orthogonal and non-exclusive** (REP-005 Recursive Meta-Model; PLATFORM-005 §19): a single canonical object MAY simultaneously be Foundation, Nucleus, and Universe. Nucleus is therefore a **role/contract**, not a new exclusive object type.
+
+**Determination.** The **Universal Nucleus** is the canonical name for a **recursive-container role at the intersection of the (owned) Foundation Contract and the (owned) Universe admissibility** — i.e. *a Foundation that is also an admissible Universe and contains unlimited constitutional objects*. It **reduces entirely to existing owners**; it is assimilated by **EXTEND** and confers no new primitive. GAP-1 and its dependent GAP-2 (Nucleus↔Universe binding) are hereby **closed by EXTEND**; the `NEW` count of the assimilation matrix becomes **0**. Minting a parallel "Nucleus" constitution/object is prohibited (Knowledge Once; LAW-4 Single Canonicity; S2-01 DP-2/DP-3).
+
+| Ownership question (REP-005 Constitutional Objective) | Resolution | Canonical owner (existing) |
+|---|---|---|
+| **Universal Foundation** | **KEEP/REUSE** | PLATFORM-001 §18 + PLATFORM-005 §18 + IMP-001 §22 (REP-003) |
+| **Universal Universe** | **KEEP/REUSE** | S2-03 (this artifact) + `ARCH-001` + USIS |
+| **Universal Nucleus** | **EXTEND** (Foundation ∩ Universe recursive-container role) | S2-03 §10 (this addendum) + PLATFORM-005 §18/§19 |
+
+### 10.2 — Foundation / Nucleus / Universe contracts (subsumption; all owned)
+
+The three contracts form a downward-only subsumption chain, each satisfied by existing guarantees (reuse):
+
+| Contract clause | Owner (existing, reused) |
+|---|---|
+| **Foundation** — complete · governable · certifiable · evolvable · composable · deployable · inherits higher guarantees · unlimited recursive composition | PLATFORM-005 §18 (object) + CEP-002/004/005/009 (govern/validate/certify/evolve) + PLATFORM-010 (compose) + PLATFORM-013 (deploy) + CEP-001 Addendum A (inherit) |
+| **Nucleus** — satisfies Foundation Contract · is an admissible Universe · contains unlimited Foundations/Nuclei/Universes/Registries/Catalogs/Blueprints/Engines/Realizations | §10.1 + PMR-07 `contains` + §10.3 registration (unlimited) |
+| **Universe** — satisfies Nucleus + Foundation Contracts · recursive/nested Universe composition · unlimited depth & breadth | S2-03 §2/§6/§8 + §10.4 + ARCH-001 hierarchy |
+
+Universe ⊑ Nucleus ⊑ Foundation (each satisfies the contract above it). No clause requires a construct not already owned.
+
+### 10.3 — Recursive Composition Law (acyclic, unbounded-depth containment)
+
+All nine containment relations the mission enumerates are the single owned relationship **`contains` (PMR-07 / POR-07)** applied across the orthogonal roles — no new relationship (PMI-02):
+
+```
+{Foundation, Nucleus, Universe}  --contains-->  {Foundation, Nucleus, Universe}   (unlimited depth)
+```
+
+| Relation | Realized by (existing) |
+|---|---|
+| Foundation/Nucleus/Universe **contains** Foundation/Nucleus/Universe (all 9) | PMR-07/POR-07 `contains` + §2.4 hierarchy + PLATFORM-010 §5 patterns |
+| **Unlimited recursive depth** | additive extensibility (UPL-14) + reduction guarantee (PLATFORM-010 §14) |
+
+**Recursion ≠ cycle (binding).** Recursive composition is **well-founded, acyclic, unbounded-depth nesting** — a construct never contains an ancestor transitively (PLATFORM-010 §7 W5; PMK-03; §6.3 program-level acyclic). This preserves **Zero Circular Dependencies** while permitting infinite depth. The founding graph is a DAG that may be arbitrarily deep and broad (Zero Finite), grounded in EL-1 + RL-F2 by the reduction guarantee.
+
+### 10.4 — Canonical Nucleus Registration (unlimited; seed illustrative only)
+
+Per the mission, Nuclei are **not enumerated**. Repository Truth already provides an **open, unbounded registration mechanism**: the append-only UKB Universal-ID ledger (R-SUB-1, §5.1) + the **deterministic path-derived classification catch-all** in `ukb.py::classify()` (config `CLASSIFY_RULES`) register **any** future object with no finite catalog and no per-object rule. Therefore **unlimited future Nuclei/Foundations/Universes** are registrable without constitutional redesign (S2-03 §5/§7; CEP-009 Art XVI Evolution Registry). Any concrete Nucleus (e.g. UCOS itself as the root Nucleus; the constitutional universes UNI-001…112 as universe-nuclei) is **illustrative, never exhaustive** — no finite Nucleus catalog is introduced.
+
+### 10.5 — Infinite Propagation (downward-only inheritance; REUSE)
+
+Every Foundation, Nucleus, and Universe **automatically inherits** the fourteen guarantees the mission lists, by the existing **downward-only constitutional inheritance** (CEP-001 Addendum A hierarchy; §2.4/§6.2 dependency chain): Universal Invariants (CEP-001 Art VII) · Universal First Principles (CEP-000) · Constitutional Foundation (CEP-000…010) · Constitutional Evolution (CEP-009) · Knowledge Once (LAW-4/RA-003) · Repository Truth (INV-1) · Zero Finite (03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION; PLATFORM-001 §18.2) · Infinite Extensibility (UPL-14) · Technology/Infrastructure/Database/Runtime agnosticism (UPL-13; IMP-001 §8) · Reasoning-paradigm agnosticism (CEP-009 Addendum A additive paradigms) · Governed Evolution (CEP-009). No propagation construct is created; inheritance is the existing acyclic downward dependency.
+
+### 10.6 — Traceability
+
+Nucleus → §10.1 (this artifact) + PLATFORM-005 §18/§19 + PMR-07. Universe (recursive) → §2/§6/§8 (this artifact) + ARCH-001. Recursive Composition Law → PMR-07/POR-07 + PLATFORM-010 §7/§14 + §6.3. Registration → §5/§7 + `ukb.py` catch-all + CEP-009 Art XVI. Propagation → CEP-001 Addendum A + §6.2. All cite **S2-03 §10** as the canonical home of the Nucleus determination and recursive composition; none creates a parallel universe, nucleus, registry, identity, ontology, or constitution.
+
+**S2-03 §10 — UNIVERSAL NUCLEUS + RECURSIVE COMPOSITION — EXTEND COMPLETE · ADDITIVE · NON-MUTATING · NUCLEUS RESOLVED BY REUSE (NEW = 0) · NO NEW OWNER, UNIVERSE, REGISTRY, OR CONTRACT.**
