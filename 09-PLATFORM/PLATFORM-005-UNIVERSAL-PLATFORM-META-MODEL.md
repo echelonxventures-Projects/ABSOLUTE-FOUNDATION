@@ -229,3 +229,41 @@ A Meta-Platform is a **Platform (PMC-01) whose contained/composed members are th
 Meta-Platform → PMC-01/PMR-07 (this artifact) → POE-01/POR-07 (PLATFORM-003) → PTH/UPL (PLATFORM-001/002) → METACLASS substrate (reference) → composed via PLATFORM-010. Downstream consumers cite PLATFORM-005 §17 as the canonical home of the Meta-Platform name.
 
 **PLATFORM-005 §17 — META-PLATFORM ASSIMILATION — EXTEND COMPLETE · ADDITIVE · META-VALID · NO NEW OWNER.**
+
+
+
+---
+
+## SECTION 18 — FOUNDATION OBJECT CONTRACT + FOUNDATION LIFECYCLE ASSIMILATION ADDENDUM (REP-003 · WAVE-2 · W2-F4 + W2-F5)
+
+> **Provenance.** REP-003 Wave-2 · Backlog **W2-F4** (*Foundation Object Contract*) and **W2-F5** (*Foundation Lifecycle*) · Disposition **EXTEND** · Canonical owner **PLATFORM-005**. Predecessor: REP-002 Wave-1 (commit `afd673f`, §17). Authorities: REP-001, AAP-001, IAC-001A–E, IAC-001D §05 (Reuse-First), Knowledge Once. **Additive** under **PME-01** (the meta-model grows additively; no renumber). Introduces **no ninth meta-class and no new founding relationship** (PME-02, PMI-01/02), **no new primitive** (PME-03), and **no duplicate object representation**; confers no authority (PMI-07). Every construct remains META-VALID per §8.
+
+### 18.1 — W2-F4 · Foundation Object Contract (one canonical object; no duplicate representation)
+
+The mission requires that **every Foundation SHALL be represented as one canonical object**. That canonical object already exists: a Foundation is an instance of meta-class **PMC-01 (Platform)** — an ENG-002 Object bearing an ENG-001 identity (PMK-01), classified by an ENG-004 type. The mission's eleven minimum-contract fields are therefore **not a new schema**; each **binds to an existing meta-construct** (reuse, never re-author):
+
+| Foundation Object Contract field | Realized by (existing meta-construct, reused) | Rule |
+|---|---|---|
+| **Identifier** | ENG-001 identity via ENG-002 object (PMR-09 `identified-by`) | PMK-01; UPL-04 |
+| **Purpose** | PMC-02 Capability set — *what the foundation can do* (`purpose-type`) | PMC-02 property |
+| **Capabilities** | PMC-02 Capability instances contained (POR-07) / composed (POR-04) | PMR-04/07 |
+| **Interfaces** | PMC-04 Service contracts (`exposes`, PMR-02) + PMC-05 Experience surfaces | PMK-04; UPL-08 |
+| **Dependencies** | PMR-04 `composes` / PMR-01 `realizes` edges (acyclic DAG) | PMK-03; PMX-02 |
+| **Policies** | PMC-08 Governance instances (evaluative, `governs` PMR-06) | PMK-07; UPL-12 |
+| **Constraints** | PMK-01…08 meta-constraints + PMX-01…04 composition rules | PMI-06 |
+| **Validation** | §8 META-VALIDATION (V1–V5) — decidable from records | §8; PTH-12 |
+| **Certification** | §9 META-CERTIFICATION (DOMAIN-D) | §9; STATUS-001 §1 |
+| **Version** | §6 lifecycle-state + supersession lineage (POS-01…05) | PME-04; UPL-14 |
+| **Lifecycle** | §6 META-LIFECYCLE (DECLARED→ACTIVE→DEPRECATED→SUPERSEDED→RETIRED) | §6; POV-08 |
+
+**No-duplication constraint (binding):** the Foundation Object is the **PMC-01 platform object** already owned here — **not** a parallel "Foundation" thing-model. A second object/identity scheme is prohibited (UPL-04/05, PMI-01, LAW USIS-02). The eleven fields are **views onto existing meta-properties**, closed under PMI-01/02.
+
+### 18.2 — W2-F5 · Foundation Lifecycle (reuse of the meta-lifecycle)
+
+The **Foundation Lifecycle** is the **§6 META-LIFECYCLE**, applied to the PMC-01 Foundation object — not a new lifecycle. It is **forward-only, recorded, event-emitting** (POV-08), with breaking change realized as **supersession** (new identity + recorded lineage), never in-place mutation (PME-04, UPL-14). It aligns 1:1 with the Registry-first lifecycle canonicalized at IMP-001 §22 (Registry→Model→Validate→Certify→Compose→Generate→Deploy) by reference: *Model* = instantiation of PMC-01 (§11 PMG-01); *Validate* = §8; *Certify* = §9; the composition/generation/deployment stages are owned by PLATFORM-010 / GEN / PLATFORM-013 (by reference).
+
+### 18.3 — Traceability
+
+W2-F4 → PMC-01 + PMR-01/02/04/06/07/09 + PMK-01…08 + PMX-01…04 + §8/§9 (this artifact); the Foundation-as-object also cited by PLATFORM-001 §18.1. W2-F5 → §6 + §11 PMG + PME-04 (this artifact) + IMP-001 §22 registry-first lifecycle (reference). Both cite **PLATFORM-005 §18** as the canonical meta-home of the Foundation Object Contract; neither creates a parallel owner, object model, registry, or ontology.
+
+**PLATFORM-005 §18 — FOUNDATION OBJECT CONTRACT + FOUNDATION LIFECYCLE — EXTEND COMPLETE · ADDITIVE · META-VALID · NO NEW OWNER.**

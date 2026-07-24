@@ -248,3 +248,44 @@ Declarative Composition adds **no new relationship**: it is POR-04 composition a
 B4 → PMC-06/POR-04 (this artifact) + APPLICATION-FACTORY (reference). B6 → §7/§5 (this artifact) + UNIVERSAL-COMPILER (reference) + MIP Part 6. Both cite PLATFORM-010 §18 as canonical home; neither creates a parallel owner, registry, or ontology.
 
 **PLATFORM-010 §18 — PLATFORM BUILDER + DECLARATIVE COMPOSITION — EXTEND COMPLETE · ADDITIVE · META-VALID · NO NEW OWNER.**
+
+
+
+---
+
+## SECTION 19 — PLATFORM COMPOSITION LIFECYCLE ASSIMILATION ADDENDUM (REP-003 · WAVE-2 · W2-F6…W2-F10)
+
+> **Provenance.** REP-003 Wave-2 · Backlog **W2-F6** (*Platform Blueprint*), **W2-F7** (*Platform Composition*), **W2-F8** (*Composition Validation*), **W2-F9** (*Dependency Resolution*), **W2-F10** (*Platform Assembly*) · Disposition **REUSE/EXTEND** · Canonical owner **PLATFORM-010**. Predecessor: REP-002 Wave-1 (commit `afd673f`, §18). Authorities: REP-001, AAP-001, IAC-001A–E, IAC-001D §05 (Reuse-First), Knowledge Once. **Additive** under **PCO-07** (new composition patterns append additively without renumber/invalidation). Introduces **no new root/meta-class/primitive/relationship** (PCO-04, PMI-01/02), selects no technology, confers no authority (PCO-08). Every construct remains META-VALID per PLATFORM-005 §8.
+
+### 19.1 — Determination: the five composition concerns are already owned here
+
+The Platform Composition group of REP-003 names **facets of the Composition already owned by this artifact** plus artifacts owned elsewhere and consumed **by reference**. None is a new construct:
+
+| REP-003 concern | Disposition | Realized by (existing, reused) | Rule |
+|---|---|---|---|
+| **W2-F7 Platform Composition** | **REUSE** | PLATFORM-010 whole (POE-06 / PMC-06 via POR-04); §5 patterns | PCO-01/04 |
+| **W2-F8 Composition Validation** | **REUSE** | §7 Well-Foundedness (W1–W5) + PLATFORM-005 §8 META-VALID (V1–V5) | PCO-01/09 |
+| **W2-F9 Dependency Resolution** | **EXTEND (§19.2)** | §7 POR-04 DAG + §14 reduction guarantee + UNIVERSAL-COMPILER (ref) | PCO-09 |
+| **W2-F10 Platform Assembly** | **REUSE** | §18.1 Platform Builder (composition + APPLICATION-FACTORY, ref) | PCO-04; Knowledge Once |
+| **W2-F6 Platform Blueprint** | **REUSE (§19.3)** | EC2-EPIC-006 Blueprint Catalog + GEN family (ref) | PCO-10 (INPUT) |
+
+### 19.2 — W2-F9 · Dependency Resolution (facet of well-foundedness; no new mechanism)
+
+Dependency Resolution is the **deterministic ordering of a composition's members over the POR-04 founding graph** — it is **§7 well-foundedness made operational**, not a new relationship. Resolution: (1) collect POR-04 `composes` / PMR-01 `realizes` edges; (2) assert the graph is a **DAG** (W1, PCO-C2); (3) topologically order members (downward-only, PCO-C5); (4) reduce to atomic constructs via the **§14 reduction guarantee**; (5) hand the resolved plan to the compiler. It adds **no edge outside POR-01…09** (PMI-02) and is **decidable from records** (PCO-09).
+
+| Resolution aspect | Realized by (existing, reused) | Rule |
+|---|---|---|
+| Acyclic dependency graph | **§7 (W1) / PCO-C2** | UPL-10 |
+| Topological / layered order | **§5 layering-composition (strict DAG) / PCO-C5** | PMK-03 |
+| Reduction to atomic members | **§14 reduction guarantee** | UPL-01 |
+| Deterministic resolution/planning | **UCOS-Ω∞-UNIVERSAL-COMPILER** (`06-IMPLEMENTATION/`) — reference only | PCO-10 |
+
+### 19.3 — W2-F6 · Platform Blueprint (REUSE; no second blueprint owner)
+
+A Platform is represented as a **declarative blueprint** using the **already-owned Blueprint architecture** — the **EC2-EPIC-006 Blueprint Catalog** (`06-IMPLEMENTATION/`, runtime `platform/blueprints/`) and the GEN generation framework — consumed **by reference (INPUT only, PCO-10)**. A blueprint is resolved through §18.2 Declarative Composition (`intent → resolve → validate → plan (POR-04 DAG) → compiler`) and assembled through §18.1 Platform Builder. **No second blueprint catalog, schema, or generator is created** (Knowledge Once; BP-LAW-001 Reuse-Never-Reinvent; PCO-04).
+
+### 19.4 — Traceability
+
+W2-F7 → PMC-06/POR-04 + §5 (this artifact). W2-F8 → §7 (this artifact) + PLATFORM-005 §8. W2-F9 → §7/§14 (this artifact) + UNIVERSAL-COMPILER (ref). W2-F10 → §18.1 + APPLICATION-FACTORY (ref). W2-F6 → EC2-EPIC-006 Blueprint Catalog + GEN (ref) + §18.2. All cite **PLATFORM-010 §19** as canonical composition home; none creates a parallel owner, registry, blueprint catalog, or ontology.
+
+**PLATFORM-010 §19 — PLATFORM COMPOSITION · VALIDATION · DEPENDENCY RESOLUTION · ASSEMBLY · BLUEPRINT — REUSE/EXTEND COMPLETE · ADDITIVE · META-VALID · NO NEW OWNER.**

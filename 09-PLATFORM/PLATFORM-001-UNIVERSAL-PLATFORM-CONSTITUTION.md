@@ -289,3 +289,51 @@ Platform certification is a **DOMAIN-D** judgment (STATUS-001 §1) recorded by a
 **Status.** ACTIVE. Any change is a controlled change via the ENG-000 custodian/Registrar; PLATFORM-001 confers no authority, selects no technology, introduces no primitive, and is subordinate to all higher instruments (void to the extent of any conflict).
 
 **PLATFORM-001 — UNIVERSAL PLATFORM CONSTITUTION — COMPLETE · ACTIVE · READY FOR PLATFORM-002.**
+
+
+
+---
+
+## SECTION 18 — UNIVERSAL FOUNDATION PLATFORM ASSIMILATION ADDENDUM (REP-003 · WAVE-2 · W2-F1 + W2-F12)
+
+> **Provenance.** REP-003 Wave-2 · Backlog **W2-F1** (*Universal Foundation Platform*) and **W2-F12** (*Composition Model unboundedness*) · Disposition **EXTEND** · Canonical owner **PLATFORM-001**. Predecessor: REP-002 Wave-1 (commit `afd673f`). Authorities: REP-001 (Repository Evolution Plan), AAP-001 (Architectural Assimilation), IAC-001A–E, IAC-001D §05 (Reuse-First), Knowledge Once (`UNIVERSAL-LAW-CANONICAL-HOMING`). This is an **additive** extension under **UPL-14** (Additive Extensibility) and **UPP-14**; it introduces **no new primitive** (UPL-01), **no new platform concept beyond the eight of §2.1**, **no parallel constitution or registry**, selects no technology (UPL-13), and confers no authority (UPL-15). Every statement remains subordinate to the frozen corpus (void to the extent of any conflict).
+
+### 18.1 — Determination: the UPC *is* the Universal (Constitutional) Foundation Platform
+
+"**Universal Foundation Platform**" is **not a new artifact or owner**. It is the canonical *name* for what this artifact already establishes: the **implementation-independent constitutional foundation from which all platforms are composed**. Per §4, Platform is *composition-over-behavior* — the root/capstone concept **Platform** (§2.1) is precisely "the integrated, governed composition of capabilities exposed as services through experiences." The **Universal Foundation Platform** is therefore the UPC itself operating as the **foundation-of-platforms**: a Platform (PMC-01, PLATFORM-005) whose contained/composed members (POR-07 `contains` / POR-04 `composes`) are themselves Platforms. UCOS is thus implemented **as** a Universal Constitutional Foundation Platform by reuse of the existing eight concepts and fifteen laws — **not** by a second foundation.
+
+| Foundation-Platform aspect | Realized by (existing, reused — by reference) | Rule |
+|---|---|---|
+| The constitutional foundation itself | **UPC (this artifact), §1–§17** — the platform constitution | UPL-01 (composition layer) |
+| A platform composed from the foundation | **Platform concept (§2.1) / PMC-01 / POR-07 contains** — PLATFORM-005 | UPL-10 well-foundedness |
+| Unlimited platforms assembled from one foundation | **UPP-14/UPL-14 additive extensibility** + **PLATFORM-010 composition** (by reference) | UPL-14 |
+| Engineering realization of the foundation | **IMP-001 Foundation Architecture §1 meta-model** (`06-IMPLEMENTATION/`) — reference only | Knowledge Once; no second foundation |
+| Meta-layer (platform-of-platforms) | **PLATFORM-005 §17 (Meta-Platform, REP-002)** — reference only | PMI-01/02 closure |
+
+**No-duplication constraint (binding):** there is **no second foundation platform, constitution, or platform-root**. The Universal Foundation Platform = the UPC (§1–§17) reused as the foundation-of-platforms, engineered by IMP-001 and composed by PLATFORM-010. Minting a parallel "Foundation Platform" constitution or root concept is prohibited (UPL-01/UPL-15, PMI-01/02, LAW USIS-02 Reuse-First).
+
+### 18.2 — W2-F12 · Composition Model unboundedness (constitutional confirmation, no new construct)
+
+The mission's eleven unbounded axes are **already legislated** and require **no new rule** — they are guaranteed by **UPL-14 (Additive Extensibility)**, the eight open concepts (§2.1), and the repository's `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION` (16 axes CERTIFIED UNBOUNDED). Confirmation binding (reuse-only):
+
+| Mission axis | Constitutional basis (existing) |
+|---|---|
+| Unlimited **Foundations** | UPL-14; §18.1 (foundation = reusable UPC); unboundedness axis 1/16 |
+| Unlimited **Platforms** | UPL-14; Platform concept §2.1 open set; PLATFORM-010 composition (axis 3) |
+| Unlimited **Domains** | ARCH universe/domain hierarchy (IMP-001 §1); axis 2 (hierarchy) |
+| Unlimited **Deployments** | PLATFORM-013 deployment architecture (by reference); axis 6 (distribution) |
+| Unlimited **Technology Stacks** | UPL-13 implementation independence (swappable); axis 8 (transformations) |
+| Unlimited **Infrastructure** | vendor-neutral abstraction (IMP-001 §8); axis 6 |
+| Unlimited **Databases** | UPL-13; ARCH-DATA / storage abstraction; axis 8 |
+| Unlimited **Runtime Models** | frozen RL-F2 referenced, parametric; axis 10 |
+| Unlimited **Clouds** | UPL-13 (no cloud selection); axis 6 |
+| Unlimited **Civilizations** | universe/reality model parametric (S2-03); axes 10/11 |
+| Unlimited **Realizations** | closure pathway admits any future realization; axes 15/16 |
+
+The **only** bound is evidentiary legitimacy (register → validate → certify), which bounds *validity*, not *scale* (unboundedness certification §4). No cardinality ceiling is introduced or implied.
+
+### 18.3 — Traceability
+
+W2-F1 → Platform concept §2.1 / §4 (this artifact) + PMC-01/POR-07 (PLATFORM-005) + IMP-001 §1 (engineering) + PLATFORM-005 §17 (meta-layer). W2-F12 → UPL-14/UPP-14 (this artifact) + `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION` (16 axes) + PLATFORM-010 composition (reference). Downstream consumers cite **PLATFORM-001 §18** as the canonical constitutional home of the Universal Foundation Platform name; neither item creates a parallel owner, constitution, registry, or ontology.
+
+**PLATFORM-001 §18 — UNIVERSAL FOUNDATION PLATFORM + COMPOSITION-MODEL UNBOUNDEDNESS — EXTEND COMPLETE · ADDITIVE · NON-CONSTITUTIVE · NO NEW OWNER.**

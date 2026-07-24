@@ -276,3 +276,50 @@ This artifact and every agent acting under it hold **no** constituent, governanc
 | Scope | UNIVERSAL IMPLEMENTATION FOUNDATION ARCHITECTURE ONLY |
 
 This artifact creates no authority, alters no determination, and authorizes no EC-series step. It establishes the cross-cutting technical foundation that every downstream implementation artifact (IMP-002…IMP-014) inherits — consuming the ARCH/CAT/REF/GEN families and IMP-000 as immutable inputs, creating no runtime business asset, modifying no canonical identity, introducing no new numbering scheme, and preserving the IMP-000 roadmap unchanged. IMP-001 authorizes IMP-002 (Repository Architecture) as the registered next artifact; it creates no IMP-002 artifact.
+
+---
+
+## SECTION 22 — UNIVERSAL FOUNDATION PLATFORM ENGINEERING ADDENDUM (REP-003 · WAVE-2 · W2-F1(eng) + W2-F2 + W2-F3 + W2-F11)
+
+> **Provenance.** REP-003 Wave-2 · Backlog **W2-F1** (*Universal Foundation Platform — engineering realization*), **W2-F2** (*Foundation Registry*), **W2-F3** (*Foundation Catalog*), **W2-F11** (*Registry-first lifecycle*) · Disposition **REUSE/EXTEND** · Canonical owner **IMP-001**. Constitutional home of the Universal Foundation Platform is **PLATFORM-001 §18**; this addendum records only the **engineering-execution** representation. Predecessor: REP-002 Wave-1 (commit `afd673f`). Authorities: REP-001, AAP-001, IAC-001A–E, IAC-001D §05 (Reuse-First), Knowledge Once. **Additive** and **record-only** (RG-02); introduces **no new numbering scheme, no new registry, no new authority** (§15/§18/§20, Authority Boundary). Fully subordinate to IMP-000 and to PLATFORM-001/005/010; void to the extent of any conflict.
+
+### 22.1 — W2-F1 (engineering) · Universal Foundation Platform
+
+The engineering realization of the Universal Foundation Platform is the **§1 Foundation Meta-Model** already established here (Universe→Domain→Capability→Component→Architecture→Catalog→Reference→Generation→**Foundation Architecture**→Implementation→Runtime). No new engineering foundation is created; the constitutional foundation (PLATFORM-001 §18) is realized by reference to this chain. The foundation is the **implementation anchor** (§1); every platform assembled from it inherits its layering (§4), dependency rules (§7), and ADR practice (§13).
+
+### 22.2 — W2-F2 · Foundation Registry (REUSE; already owned by §14)
+
+The **Foundation Registry** is **not new** — it is the first registry enumerated in **§14 REGISTRIES** ("Foundation Registry · Module Registry · Package Registry · …"). It is realized executably by reuse of the **Registry Platform (IMP-004)** substrate and indexed within the **Platform Master Registry (PLATFORM-018)** and the canonical `00-BOOK/REGISTRIES/*`. It records and never ratifies/enacts (RG-02); every mutation is timestamped, attributed, queryable (RG-05).
+
+| Foundation Registry aspect | Realized by (existing, reused — by reference) | Rule |
+|---|---|---|
+| Foundation index (elements established here) | **§14 Foundation Registry** (this artifact) | RG-02 |
+| Executable registry substrate | **IMP-004 Registry Platform** (`06-IMPLEMENTATION/`) | Knowledge Once; no second registry |
+| Program-level roll-up | **PLATFORM-018 Platform Master Registry** | append-only |
+| Canonical corpus registries | **`00-BOOK/REGISTRIES/*`** (artifact/page/graph/cert/lineage/volume) | REG-AUTO-001 |
+
+### 22.3 — W2-F3 · Foundation Catalog (REUSE; no new catalog owner)
+
+The **Foundation Catalog** is realized by the **existing canonical catalogs** — the CAT runtime catalog family (`03-CATALOGS/`) and the **EC2-EPIC-006 Blueprint Catalog** (`platform/blueprints/`, L6 read model) — consumed **by reference**. No new catalog, classification model, or identifier scheme is created (BP-LAW-001 Reuse-Never-Reinvent; §15 "introduce no undocumented technology"; Knowledge Once).
+
+### 22.4 — W2-F11 · Registry-first lifecycle (canonical stage→owner binding)
+
+The mission's canonical lifecycle **Registry → Model → Validate → Certify → Compose → Generate → Deploy** is **represented by reference** to existing owners; it introduces no new engine or stage:
+
+| Stage | Canonical owner (existing, reused) | Location |
+|---|---|---|
+| **Registry** | §14 Foundation Registry + IMP-004 Registry Platform + `00-BOOK/REGISTRIES/*` | this artifact; `06-IMPLEMENTATION/`; `00-BOOK/` |
+| **Model** | PLATFORM-005 meta-model (PMG-01 instantiation) + §1 meta-model chain | `09-PLATFORM/`; this artifact |
+| **Validate** | §11 Quality Foundation + PLATFORM-010 §7 + PLATFORM-005 §8 (META-VALID) | this artifact; `09-PLATFORM/` |
+| **Certify** | CEP-005 + CERTIFICATION-REGISTRY + PLATFORM-005 §9 | `00-CEP/`; `00-BOOK/REGISTRIES/` |
+| **Compose** | PLATFORM-010 (composition) + §18.1 builder | `09-PLATFORM/` |
+| **Generate** | GEN framework + UCOS-Ω∞-UNIVERSAL-COMPILER + APPLICATION-FACTORY | `05-GENERATION/`; `06-IMPLEMENTATION/` |
+| **Deploy** | PLATFORM-013 Deployment Architecture + RUNTIME (RL-F2) | `09-PLATFORM/`; frozen RL-F2 |
+
+This lifecycle is **registry-first by construction**: an element exists only when registered, then modelled, validated, certified, composed, generated, and deployed — the "bounded-only-by-evidence" discipline of `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION` §4. It reuses the existing implementation governance (IMG-001 waves; IEC-001 controller; IMP-000 master plan) without modification.
+
+### 22.5 — Traceability
+
+W2-F1(eng) → §1 (this artifact) ← PLATFORM-001 §18 (constitutional). W2-F2 → §14 (this artifact) + IMP-004 + PLATFORM-018 + `00-BOOK/REGISTRIES/*`. W2-F3 → `03-CATALOGS/` + EC2-EPIC-006 (ref). W2-F11 → the seven owners above (all pre-existing). All cite **IMP-001 §22** as the canonical engineering home; none creates a parallel owner, registry, catalog, constitution, or numbering scheme. Registration parity is preserved (record-only, additive).
+
+**IMP-001 §22 — UNIVERSAL FOUNDATION PLATFORM (ENGINEERING) · FOUNDATION REGISTRY · FOUNDATION CATALOG · REGISTRY-FIRST LIFECYCLE — REUSE/EXTEND COMPLETE · ADDITIVE · RECORD-ONLY · NO NEW OWNER.**
