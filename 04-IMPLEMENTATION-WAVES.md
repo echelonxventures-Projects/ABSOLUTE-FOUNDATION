@@ -86,3 +86,29 @@ Wave-01 ─gate─▶ Wave-02 ─gate─▶ Wave-03 ─gate─▶ Wave-04 ─gat
 
 ---
 *End of 04-IMPLEMENTATION-WAVES.md*
+
+
+
+---
+
+## 6 — ASSIMILATION SEQUENCING REFINEMENT (REP-002 · WAVE-1 · B7 / AAD-016)
+
+> **Provenance.** REP-002 Wave-1 · Backlog **B7** (Decision **AAD-016**, *Implementation Sequence Refinement*) · Disposition **EXTEND** · Canonical owner **IMG-001** (this artifact). Authorities: REP-001, AAP-001. **Additive**: this refinement **does not alter** the wave partition in §1–§5 (which remains authoritative); it prepends a deterministic **Assimilation Pre-Wave (W0-A)** that gates the reuse-first EXTEND backlog ahead of the constitutional Wave-01 roots.
+
+### 6.1 — Assimilation Pre-Wave (W0-A) — deterministic, reuse-first, additive-only
+
+| Order | Backlog | Decision | Owner (reuse) | Action | Depends on |
+|---|---|---|---|---|---|
+| W0-A.1 | B3 | AAD-001 Meta-Platform | PLATFORM-005 | EXTEND | METACLASS, PLATFORM-001 |
+| W0-A.2 | B4 | AAD-002 Platform Builder | PLATFORM-010 + APPLICATION-FACTORY | EXTEND | PLATFORM-010 |
+| W0-A.3 | B6 | AAD-014 Declarative Composition | PLATFORM-010 + UNIVERSAL-COMPILER | EXTEND | PLATFORM-010 |
+| W0-A.4 | B5 | AAD-010 Constitutional Reuse Gate | Context Assimilation Gate | EXTEND | Context Assimilation Gate |
+| W0-A.5 | B7 | AAD-016 Sequence Refinement | IMG-001 · IEC-001 · IMP-000 | EXTEND | — |
+
+**Excluded (by mission):** AAD-003/005 (Nucleus — pending constitutional determination) and AAD-018 (Execution Spine — separate program). These are **not** sequenced here.
+
+### 6.2 — Gating
+
+`W0-A (assimilation EXTENDs) ─gate─▶ Wave-01 (LAW roots) ─gate─▶ … ─gate─▶ Wave-05`. W0-A is additive-only (EXTEND of existing owners; zero new artifacts) and therefore introduces no dependency into the realization waves; §4 gating is unchanged. Determinism preserved: W0-A order is a pure function of backlog id.
+
+**§6 — ASSIMILATION SEQUENCING REFINEMENT — EXTEND COMPLETE · ADDITIVE · WAVE PARTITION UNCHANGED.**

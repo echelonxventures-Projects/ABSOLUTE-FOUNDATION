@@ -199,3 +199,33 @@ Upstream: PLATFORM-001/002/003/004, frozen EL-1 + RL-F2. Downstream: PLATFORM-00
 **Determination.** The Universal Platform Meta-Model is **ARCHITECTURALLY COMPLETE · CONSISTENT · CLOSED · TOTAL · CERTIFIABLE**. With PLATFORM-005 complete, the **Platform Foundation (PLATFORM-001…005) is COMPLETE and CONSISTENT and READY FOR PLATFORM-006 (Universal Platform Capability Architecture)** and for foundation-freeze consideration (PL-F1) under PLATFORM-GOV-001 (separately authorized; not created here).
 
 **PLATFORM-005 — UNIVERSAL PLATFORM META-MODEL — COMPLETE · ACTIVE · READY FOR PLATFORM-006.**
+
+
+
+---
+
+## SECTION 17 — META-PLATFORM ASSIMILATION ADDENDUM (REP-002 · WAVE-1 · B3 / AAD-001)
+
+> **Provenance.** REP-002 Wave-1 · Backlog **B3** (Decision **AAD-001**, *Meta-Platform architecture*) · Disposition **EXTEND** · Canonical owner **PLATFORM-005**. Authorities: REP-001 (Repository Evolution Plan), AAP-001 (Architectural Assimilation), IAC-001D §05 (Reuse-First), Knowledge Once (`UNIVERSAL-LAW-CANONICAL-HOMING`). This is an **additive** extension under **PME-01** (the meta-model grows additively; no renumber). It introduces **no ninth meta-class and no new founding relationship** (PME-02), **no new primitive** (PME-03), **no parallel Meta-Platform constitution**, and confers no authority (PMI-07).
+
+### 17.1 — Determination
+
+"**Meta-Platform**" is **not a new artifact**. It is the canonical *name* for the already-owned capability that this artifact (PLATFORM-005) establishes: the **model-of-platform-models** — the meta-layer from which every platform-of-platforms is instantiated. The Meta-Platform is therefore **owned here** and is realized by reuse of the existing meta-classes, meta-relationships, and meta-constraints; it is **not** a separate constitution.
+
+### 17.2 — Reuse binding (no duplication)
+
+| Meta-Platform aspect | Realized by (existing, reused) | Rule |
+|---|---|---|
+| Meta-classes of a platform-of-platforms | **PMC-01 (Platform) … PMC-08 (Governance)** — Section 3 | closure PMI-01 |
+| Composition of platforms into a Meta-Platform | **PMR-04 `composes` / PMR-07 `contains`** — Section 4 | acyclic (PMK-03) |
+| Meta-ontology substrate | **METACLASS family** (91, IMPLEMENTED) — reference only | Knowledge Once |
+| Platform composition mechanism | **PLATFORM-010 (PMC-06 Composition)** — by reference | PCO-04 single founding mechanism |
+| Meta-validation of a Meta-Platform | **Section 8 (META-VALID V1–V5)** unchanged | decidable (PMK) |
+
+A Meta-Platform is a **Platform (PMC-01) whose contained/composed members are themselves Platforms** — expressed entirely with the existing PMC/PMR/PMK sets. No new meta-construct is required; attempting to mint one is prohibited by PMI-01/02.
+
+### 17.3 — Traceability
+
+Meta-Platform → PMC-01/PMR-07 (this artifact) → POE-01/POR-07 (PLATFORM-003) → PTH/UPL (PLATFORM-001/002) → METACLASS substrate (reference) → composed via PLATFORM-010. Downstream consumers cite PLATFORM-005 §17 as the canonical home of the Meta-Platform name.
+
+**PLATFORM-005 §17 — META-PLATFORM ASSIMILATION — EXTEND COMPLETE · ADDITIVE · META-VALID · NO NEW OWNER.**

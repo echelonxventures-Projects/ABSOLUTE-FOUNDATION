@@ -100,3 +100,36 @@ The `06-WAVE1-READINESS` ledger (authored during Wave 0) is now **discharged**:
 
 Every readiness precondition except the explicit human "go" is satisfied. See
 `05` for the determination.
+
+
+
+---
+
+## 7 — CONSTITUTIONAL REUSE GATE (REP-002 · WAVE-1 · B5 / AAD-010)
+
+> **Provenance.** REP-002 Wave-1 · Backlog **B5** (Decision **AAD-010**, *Constitutional Reuse Gate*) · Disposition **EXTEND** · Canonical owner **Context Assimilation Gate** (this capability). Authorities: REP-001, AAP-001, IAC-001D §05, Knowledge Once. This **EXTENDS the existing Context Assimilation Gate**; it does **not create another gate**. Append-only per **LAW USIS-00 / -03** (integration by registration/append, never redesign).
+
+### 7.1 — Determination
+
+The **Constitutional Reuse Gate** is hereby made an **explicit, named facet of the existing Context Assimilation Gate** (§2–§6 above), not a parallel gate. It formalizes the reuse-first check that the Context Assimilation Gate already implies, binding it to the constitutional reuse laws.
+
+### 7.2 — Gate facet (reuse-first admission check)
+
+Before any Wave-1 (or later) capability is authored, created, or admitted, the Context Assimilation Gate SHALL evaluate the **Constitutional Reuse Gate** predicate — fail-closed, decidable, and ordered **Reuse → Extend → Merge → Supersede → Create (Create LAST):**
+
+| Step | Check | Governing law (reused, not restated) |
+|---|---|---|
+| R1 | Does a canonical owner/home already exist for the concept? | **LAW USIS-05** (canonical ownership / No-Orphan, GOV-001-T3); Knowledge Once |
+| R2 | If yes → **REUSE / EXTEND** the owner by reference; creation of a parallel artifact is **rejected** | **LAW USIS-02** (realization, not duplication); AAP-001 §04 |
+| R3 | Is the concept a new *name* for an owned capability? → **EXTEND/REFERENCE** the owner | Reuse-First (IAC-001D §05) |
+| R4 | Only if R1–R3 all fail → **CREATE**, constitutionally anchored, with recorded lineage | CEP-009 (Amendment/Evolution); Create-is-last |
+
+### 7.3 — Relationship to existing instruments (no duplication)
+
+The Constitutional Reuse Gate **consumes, does not re-author**: CEP-001 (Engineering Constitution reuse principles) and CEP-005 (Certification) by reference, LAW USIS-02 (Reuse-First), Part F invariant *"duplicate universe/catalog/ontology/taxonomy/registry = 0"*, and the AAP-001 assimilation dispositions. It adds **no new registry, ontology, or owner** — it is a decision facet of the one Context Assimilation Gate.
+
+### 7.4 — Traceability
+
+Constitutional Reuse Gate → Context Assimilation Gate (§2–§6, this capability) → LAW USIS-02/05 (USIS-001) → CEP-001/005 (reference) → REP-001/AAP-001 (assimilation authorities). Canonical home: this file, §7. Operational-memory status unchanged (not registered; excluded from corpus scan).
+
+**§7 — CONSTITUTIONAL REUSE GATE — EXTEND COMPLETE · APPEND-ONLY · ONE GATE (NO PARALLEL GATE) · NO NEW OWNER.**

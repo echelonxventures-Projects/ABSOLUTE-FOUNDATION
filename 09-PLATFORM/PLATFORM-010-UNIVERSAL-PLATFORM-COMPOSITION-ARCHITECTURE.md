@@ -206,3 +206,45 @@ Because founding composition is well-founded (§7), every platform construct **r
 **Determination.** The Universal Platform Composition Architecture is **ARCHITECTURALLY COMPLETE · CONSISTENT · META-VALID · CERTIFIABLE · READY FOR PLATFORM-011 (Universal Platform Integration Architecture)**.
 
 **PLATFORM-010 — UNIVERSAL PLATFORM COMPOSITION ARCHITECTURE — COMPLETE · ACTIVE · READY FOR PLATFORM-011.**
+
+
+
+---
+
+## SECTION 18 — ASSIMILATION ADDENDUM (REP-002 · WAVE-1 · B4 + B6)
+
+> **Provenance.** REP-002 Wave-1 · Backlog **B4** (Decision **AAD-002**, *Platform Builder*) and **B6** (Decision **AAD-014**, *Declarative Composition*) · Disposition **EXTEND** · Canonical owner **PLATFORM-010**. Authorities: REP-001, AAP-001, IAC-001D §05 (Reuse-First), Knowledge Once. **Additive** under **PCO-07** (new composition patterns append additively without renumber/invalidation). Introduces **no new root/meta-class/primitive/relationship** (PCO-04, PMI-01/02), selects no technology, confers no authority (PCO-08). Every construct remains META-VALID per PLATFORM-005 §8.
+
+### 18.1 — B4 · Platform Builder (EXTEND; references APPLICATION-FACTORY; no duplicate ownership)
+
+"**Platform Builder**" is **not a new artifact or owner**. It is the canonical name for the **act of composing a platform** — already owned here (PMC-06 Composition via POR-04/PMR-04) together with the generation/factory capability owned elsewhere. It is assimilated by **reference**, never re-authored:
+
+| Builder aspect | Realized by (existing, reused — by reference) | Rule |
+|---|---|---|
+| Well-founded combination of capabilities/components/services into a platform | **PCO-01…PCO-10 / §5 composition patterns (aggregation · orchestration · layering)** — this artifact | PCO-04 single founding mechanism |
+| Materialization/generation of the composed platform | **APPLICATION-FACTORY** (`UCOS-Ω∞-APPLICATION-FACTORY` · `UCOS-IMP-000007`, `06-IMPLEMENTATION/`) — reference only | Knowledge Once; no second factory |
+| Composite typing/identity | **PCO-02 / PCO-03 (reference-not-absorption)** | PMX-03/04 |
+| Coordination of a built platform | **§8 coordination binding → RUNTIME orchestration** (by reference) | PCO-05 |
+
+**No-duplication constraint (binding):** there is **no second builder/factory owner**. Platform-building = PLATFORM-010 composition **+** APPLICATION-FACTORY generation, composed by reference. Minting a parallel "Platform Builder" constitution or a second factory is prohibited (PCO-04, PMI-02, LAW USIS-02 Reuse-First).
+
+### 18.2 — B6 · Declarative Composition (EXTEND of Universal Composition)
+
+**Declarative Composition** is a **facet of the Composition owned here**, not a new composition kind. It fixes that a composition MAY be expressed **declaratively** — *what* is composed, not *how* — and resolved deterministically into a well-founded composition graph:
+
+`intent → resolve → validate (governance/META-VALID) → plan (POR-04 DAG) → hand to compiler`
+
+| Declarative aspect | Realized by (existing, reused) | Rule |
+|---|---|---|
+| Declarative resolution/planning | **UCOS-Ω∞-UNIVERSAL-COMPILER** (`06-IMPLEMENTATION/`) — reference only | PCO-10 reuse-labelling |
+| Well-formedness of the declared composition | **§7 Well-Foundedness (W1–W5)** unchanged | PCO-01/PCO-09 decidable |
+| Result closure | **PCO-06 (allowed meta-class)** | PMX-01 |
+| Constitutional grounding | MIP v2 **Part 6** (declarative composition principle) — by reference | higher instrument governs |
+
+Declarative Composition adds **no new relationship**: it is POR-04 composition authored declaratively. It is additive per PCO-07 and remains acyclic (PCO-C2).
+
+### 18.3 — Traceability
+
+B4 → PMC-06/POR-04 (this artifact) + APPLICATION-FACTORY (reference). B6 → §7/§5 (this artifact) + UNIVERSAL-COMPILER (reference) + MIP Part 6. Both cite PLATFORM-010 §18 as canonical home; neither creates a parallel owner, registry, or ontology.
+
+**PLATFORM-010 §18 — PLATFORM BUILDER + DECLARATIVE COMPOSITION — EXTEND COMPLETE · ADDITIVE · META-VALID · NO NEW OWNER.**

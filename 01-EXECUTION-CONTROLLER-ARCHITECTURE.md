@@ -108,3 +108,23 @@ Every arrow is a **derived** transition governed by C11 and logged by C12. There
 
 ---
 *End of 01-EXECUTION-CONTROLLER-ARCHITECTURE.md*
+
+
+
+---
+
+## 8 — ASSIMILATION SEQUENCING REFINEMENT (REP-002 · WAVE-1 · B7 / AAD-016)
+
+> **Provenance.** REP-002 Wave-1 · Backlog **B7** (Decision **AAD-016**, *Implementation Sequence Refinement*) · Disposition **EXTEND** · Canonical owner **IEC-001** (this artifact). Authorities: REP-001, AAP-001. **Additive**: preserves every guarantee in §1–§7 (selection remains a pure function of Repository Truth; no manual scheduling). This section only records how the controller treats the reuse-first **Assimilation Pre-Wave (W0-A)** defined in IMG-001 §6.
+
+### 8.1 — Controller treatment of assimilation EXTEND items
+
+- The Assimilation Pre-Wave (W0-A, IMG-001 §6) consists solely of **EXTEND of existing canonical owners** — additive-only, zero new artifacts. Such items carry disposition **EXTEND**, not **CREATE**, and are therefore **not** unrealized CKOs in the READY/BLOCKED selection set (C4/C6); they do not enter the Execution Queue as generation work.
+- The controller records W0-A completion as a **derived** precondition edge to Wave-01 (§4 control flow), consistent with **gate-before-effect** (C11) and logged by the Governance Ledger (C12). No manual arrow is introduced (§5 guarantees intact).
+- Determinism preserved: given the same baseline, W0-A is already satisfied (EXTENDs committed under REP-002), so `select(closure.json)` is unchanged.
+
+### 8.2 — Traceability
+
+IEC-001 §8 → IMG-001 §6 (W0-A) → REP-001/AAP-001. No change to the manifest binding (C2), READY predicates (C4), or determinism guarantees (§5).
+
+**§8 — ASSIMILATION SEQUENCING REFINEMENT — EXTEND COMPLETE · ADDITIVE · CONTROLLER GUARANTEES UNCHANGED.**

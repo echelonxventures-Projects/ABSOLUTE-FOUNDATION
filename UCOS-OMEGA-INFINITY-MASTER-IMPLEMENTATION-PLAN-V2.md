@@ -2758,3 +2758,28 @@ No open architectural gaps remain within the mandated scope. Identified cross-cu
 The UCOS Ω∞ MASTER IMPLEMENTATION PLAN v2 is hereby determined **architecturally complete, internally consistent, dependency-valid, governance-valid, composition-valid, implementation-valid, and infinitely extensible**, in conformance with LAW Ω∞-000 and the 25 constitutional directives. Constitutional governance, sovereign-universe architecture, autonomous-generation architecture, and reality-compiler architecture are preserved. This artifact supersedes MIP v1 and is subordinate to the frozen constitutional corpus; where any rule herein conflicts with a higher frozen instrument, the higher instrument governs.
 
 **END OF UCOS Ω∞ MASTER IMPLEMENTATION PLAN v2.**
+
+
+
+---
+
+# ASSIMILATION SEQUENCING REFINEMENT ADDENDUM (REP-002 · WAVE-1 · B7 / AAD-016)
+
+> **Provenance.** REP-002 Wave-1 · Backlog **B7** (Decision **AAD-016**, *Implementation Sequence Refinement*) · Disposition **EXTEND** · Canonical owner **IMP-000 (this Master Implementation Plan)**. Authorities: REP-001, AAP-001. **Append-only** per this artifact's EVOLUTION MODEL (extend-only; purpose may widen, never narrow). Subordinate to the frozen constitutional corpus and LAW Ω∞-000; where any statement here conflicts with a higher frozen instrument, the higher instrument governs and this statement is void to the extent of the conflict. This addendum **adds no Part, universe, directive, or owner** — it records a deterministic assimilation pre-wave by reference.
+
+## A.1 — Deterministic Assimilation Pre-Wave (reference)
+
+The refined deterministic sequence prepends a reuse-first **Assimilation Pre-Wave (W0-A)** ahead of the realization waves. W0-A is defined canonically in **IMG-001 §6** (execution waves) and consumed by **IEC-001 §8** (execution controller); it is **not** restated here (Knowledge Once). W0-A comprises only **EXTEND of existing canonical owners** — PLATFORM-005 (Meta-Platform), PLATFORM-010 (Platform Builder + Declarative Composition), the Context Assimilation Gate (Constitutional Reuse Gate), and the sequence owners — with **zero new artifacts** and Create reserved as the last option (Reuse-First, MIP Part 4 LAW P4-003 single canonical instance; Part 37 append-only).
+
+## A.2 — Conformance
+
+- **No duplication (Part 5 / §3 deduplication):** every W0-A item EXTENDS an existing owner; no parallel constitution/registry/ontology is created.
+- **Append-only growth (Part 37):** W0-A prepends without renumbering existing Parts or waves.
+- **Governance-valid (Part 9):** W0-A items are additive and pass the reuse-first admission facet (Constitutional Reuse Gate).
+- **Excluded:** Nucleus (AAD-003/005 — pending constitutional determination) and Execution Spine (AAD-018 — separate program) are **not** sequenced by this addendum.
+
+## A.3 — Traceability
+
+IMP-000 addendum → IMG-001 §6 (W0-A canonical) → IEC-001 §8 → REP-001/AAP-001. Master plan sequence ownership unchanged; realization Parts 1–50 unchanged.
+
+**MASTER PLAN ASSIMILATION ADDENDUM — EXTEND COMPLETE · APPEND-ONLY · NO NEW PART/UNIVERSE/OWNER.**
