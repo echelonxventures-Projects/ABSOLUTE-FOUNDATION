@@ -59,3 +59,16 @@ determinism-evidence/
 # the RC-1 baseline until it is wired + tested; ignored here so it is not sealed as
 # verified implementation and does not surface as drift.
 intelligence/die/
+
+
+# GPR-001 S1 (GOV-005 §5.3 / §5.1; closes GPA-001 G1/G3) — 00-MASTER program-lane
+# EXECUTION EVIDENCE and ENGINE JSON STATE are deterministically re-derivable engine
+# OUTPUT (per-run register/validate/certify/determinism logs + provenance / gap-graph
+# state), regenerated each run by their phase engines, never hand-registered. Declared
+# NON-ARTIFACTS bounded by the ignore authority — mirrors the determinism-evidence/,
+# /knowledge/, and UAKOS-CLOSURE-002 generated-artifact policy. Scoped to the 00-MASTER
+# program lane ONLY: the tracked data/_evidence/ canonical certification artifacts
+# (UCOS-DATA-*) are a distinct, registered family and are deliberately NOT matched here.
+00-MASTER/**/evidence/
+00-MASTER/UAKOS-PHASE-001B/provenance.json
+00-MASTER/UAKOS-PHASE-004/10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.json

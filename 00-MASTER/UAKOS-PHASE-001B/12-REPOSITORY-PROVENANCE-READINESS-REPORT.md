@@ -1,0 +1,31 @@
+# 12 — Repository Provenance Readiness Report
+
+> PROGRAM **UAKOS PHASE-001B** — Universal Constitutional Provenance Reconstruction · closure baseline `57d91b7` (branch `governance-reconciliation`) · AUTHORITY = **NONE (DERIVED / RECONSTRUCTED TRUTH)** · **READ-ONLY** · generated `2026-07-23T05:33:10Z` by `provenance_engine.py` + `emit_registers.py`.
+>
+> The single-page determination of whether the repository knowledge baseline now carries the reconstructed provenance required to attempt Phase-001A certification.
+>
+> Reproduce: `python3 00-MASTER/UAKOS-PHASE-001B/provenance_engine.py && python3 00-MASTER/UAKOS-PHASE-001B/emit_registers.py`.
+
+## Determination: **PROVENANCE RECONSTRUCTED — CERTIFICATION-READY WITH DISCLOSED SOURCE LIMITS**
+
+| Metric | Value |
+|---|---|
+| Knowledge objects | 431 |
+| Source-document provenance recovered | 85 (19.7%) |
+| — fully RECOVERED (page+section+para+text) | 25 |
+| — PARTIALLY_RECOVERED (page+para+text; heuristic/absent section) | 60 |
+| Repository-derived (origin = canonical home) | 346 (80.3%) |
+| Conversation-only | 0 |
+| NOT_RECOVERABLE (no source, no home) | 0 |
+| Source documents normalized + hashed | 21 |
+| Identifier families, all classified | 26 canonical (+unrecognized set disclosed) |
+
+## Findings
+
+1. **Every** knowledge object has an originating source and reproducible provenance: 85 trace to a frozen document (Document→Page→Section→Paragraph→Text); the remaining 346 trace to a repository canonical home with full repository/validation/certification evidence. **NOT_RECOVERABLE = 0**.
+2. The 21 sources are identity-pinned (SHA-256), extractable, and structurally reconstructed into a deterministic page/section/paragraph model. Native page metadata was proven unreliable and rejected in favour of the reproducible break-map.
+3. The dominant provenance gap is structural and expected: ~80% of canonical identifiers (METACLASS, BAND-UNIT, UCKO, ARCH, CEP, APPLICATION, …) were **engineered in the repository**, not transcribed from the uploaded documents — precisely the Phase-001A observation.
+
+## Verdict for Phase-001A
+
+**READY.** No knowledge object is NOT_RECOVERABLE; every object has a reproducible provenance chain rooted in either a frozen document or a repository canonical home, and the residual source-document gaps are fully disclosed and attributable to repository-minted identifiers and one empty source — not to missing reconstruction. Phase-001A may re-run its certification against this reconstructed evidence.

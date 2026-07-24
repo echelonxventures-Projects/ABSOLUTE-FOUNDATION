@@ -1,0 +1,36 @@
+# 06 — Execution Eligibility Register
+
+> PROGRAM **UAKOS PHASE-003R** — Universal Realization Model Determination · baseline `57d91b7` (branch `governance-reconciliation`) · corrects the Wave-002 category error · consumes FREEZE A–F (read-only) · AUTHORITY = **NONE (DERIVED)** · **READ-ONLY** · generated `2026-07-23T06:56:11Z` by `phase3r_engine.py`.
+>
+> Which realization types are eligible for which realization action. Only software-bearing types are eligible for software implementation.
+>
+> Reproduce: `python3 00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py`.
+
+| Realization type | Objects | SW-impl | Gov-ratify | Reg-populate | Doc-complete | Runtime-deploy | Certify | Validate |
+|---|---|---|---|---|---|---|---|---|
+| ADMISSION_GATE | 5 | · | ✓ | · | · | · | · | · |
+| APPLICATION | 21 | ✓ | · | · | · | ✓ | ✓ | ✓ |
+| ARCHITECTURE_SPECIFICATION | 22 | · | · | · | ✓ | · | · | · |
+| CONSTITUTIONAL_EVIDENCE_PRINCIPLE | 11 | · | ✓ | · | · | · | · | · |
+| CONSTITUTIONAL_EVOLUTION_PROPOSAL | 12 | · | ✓ | · | · | · | · | · |
+| CONSTITUTIONAL_FOUNDATION | 6 | · | ✓ | · | · | · | ✓ | · |
+| CONSTITUTIONAL_LAW | 21 | · | ✓ | · | · | · | · | · |
+| DATA_MODEL | 20 | ✓ | · | · | · | · | ✓ | ✓ |
+| EXECUTION_BAND_UNIT | 53 | · | · | ✓ | · | · | ✓ | ✓ |
+| GOVERNANCE_DECISION | 3 | · | ✓ | · | · | · | · | · |
+| GOVERNANCE_DETERMINATION | 18 | · | ✓ | · | · | · | · | · |
+| INFRASTRUCTURE_COMPONENT | 19 | ✓ | · | · | · | ✓ | ✓ | ✓ |
+| LIFECYCLE_PHASE | 9 | · | · | · | ✓ | · | · | · |
+| MASTER_CONTEXT_PROTOCOL | 9 | · | · | ✓ | · | · | · | · |
+| META_MODEL | 91 | · | · | ✓ | · | · | · | · |
+| ONTOLOGY | 24 | · | · | ✓ | · | · | · | · |
+| PLATFORM_COMPONENT | 19 | ✓ | · | · | · | ✓ | ✓ | ✓ |
+| PROGRAM_EPIC | 10 | · | · | · | ✓ | · | · | · |
+| RATIFICATION_DETERMINATION | 2 | · | ✓ | · | · | · | · | · |
+| RECONCILIATION_DETERMINATION | 4 | · | ✓ | · | · | · | · | · |
+| RUNTIME_COMPONENT | 16 | ✓ | · | · | · | ✓ | ✓ | ✓ |
+| SERVICE | 19 | ✓ | · | · | · | ✓ | ✓ | ✓ |
+| SOFTWARE_ENGINE | 17 | ✓ | · | · | · | · | ✓ | ✓ |
+
+- Software-implementation-eligible types: APPLICATION, DATA_MODEL, INFRASTRUCTURE_COMPONENT, PLATFORM_COMPONENT, RUNTIME_COMPONENT, SERVICE, SOFTWARE_ENGINE (**131** objects).
+- All other types complete via ratification / population / documentation — **not** code.

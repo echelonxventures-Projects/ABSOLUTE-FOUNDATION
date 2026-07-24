@@ -1,0 +1,16 @@
+# UCOS-IMPLEMENTATI-000007 — 04 — IMPLEMENTATION WAVES
+
+Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IMPLEMENTATI-000007](UCOS-IMPLEMENTATI-000007.md)
+
+- Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
+- Native: —  ·  Program: IMPLEMENTATI
+- Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
+- Source: [04-IMPLEMENTATION-WAVES.md](../../04-IMPLEMENTATION-WAVES.md)
+
+## Children (forward)
+- (none)
+
+## Backlinks (reverse)
+- [UCOS-BOOK-000000](UCOS-BOOK-000000.md) —Child→
+
+Return: [Portal Index](index.md) · [Master Index](../UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)

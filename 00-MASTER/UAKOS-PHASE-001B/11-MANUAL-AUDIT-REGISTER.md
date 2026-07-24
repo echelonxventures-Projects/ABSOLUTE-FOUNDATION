@@ -1,0 +1,241 @@
+# 11 — Manual Audit Register
+
+> PROGRAM **UAKOS PHASE-001B** — Universal Constitutional Provenance Reconstruction · closure baseline `57d91b7` (branch `governance-reconciliation`) · AUTHORITY = **NONE (DERIVED / RECONSTRUCTED TRUTH)** · **READ-ONLY** · generated `2026-07-23T05:33:10Z` by `provenance_engine.py` + `emit_registers.py`.
+>
+> Worked, end-to-end manual traces (Source → Page → Section → Paragraph → Knowledge Object → Repository Evidence → Validation → Certification) for a curated audit sample.
+>
+> Reproduce: `python3 00-MASTER/UAKOS-PHASE-001B/provenance_engine.py && python3 00-MASTER/UAKOS-PHASE-001B/emit_registers.py`.
+
+The following objects are traced link-by-link against `provenance.json` and `closure.json`:
+
+
+#### UCOS-COMP-000001  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2043** (render/explicit-break map)
+- **Section** → PHASE-002 COMPLETE / UCOS-COMP-000001
+- **Paragraph** → index **76904**
+- **Original text** → "UCOS-COMP-000001"
+- **Knowledge object** → `UCOS-COMP-000001` (disposition IMPLEMENTED)
+- **Repository evidence** → home `02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md`; **50** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=True
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001000  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2057** (render/explicit-break map)
+- **Section** → Stage 9 / 17. DOCUMENT STATUS / UCOS-COMP-001000
+- **Paragraph** → index **77638**
+- **Original text** → "UCOS-COMP-001000"
+- **Knowledge object** → `UCOS-COMP-001000` (disposition SPECIFIED)
+- **Repository evidence** → home `00-MASTER/UAKOS-CLOSURE-006/12-ARCHITECTURAL-GAP-REGISTER.md`; **2** repository files cite it
+- **Validation evidence** → constitution=False, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-001010  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2068** (render/explicit-break map)
+- **Section** → Stage 9 / 14. ONTOLOGY RUNTIME GENERATOR / UCOS-COMP-001010
+- **Paragraph** → index **78213**
+- **Original text** → "UCOS-COMP-001010"
+- **Knowledge object** → `UCOS-COMP-001010` (disposition SPECIFIED)
+- **Repository evidence** → home `00-MASTER/UAKOS-CLOSURE-006/12-ARCHITECTURAL-GAP-REGISTER.md`; **1** repository files cite it
+- **Validation evidence** → constitution=False, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### UCOS-COMP-009010  ·  family UCOS-COMP  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
+- **Page** → logical page **2212** (render/explicit-break map)
+- **Section** → Stage 9 / 14. UNIVERSAL CERTIFICATION ENGINE / UCOS-COMP-009010
+- **Paragraph** → index **84129**
+- **Original text** → "UCOS-COMP-009010"
+- **Knowledge object** → `UCOS-COMP-009010` (disposition SPECIFIED)
+- **Repository evidence** → home `00-MASTER/UAKOS-CLOSURE-006/02-KNOWLEDGE-REPRESENTATION-AUDIT.md`; **1** repository files cite it
+- **Validation evidence** → constitution=False, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### Ω∞-000  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ UNIVERSAL REALITY COMPILER CONSTITUTION.docx`
+- **Page** → logical page **8** (render/explicit-break map)
+- **Section** → LAW Ω∞-000
+- **Paragraph** → index **317**
+- **Original text** → "LAW Ω∞-000"
+- **Knowledge object** → `Ω∞-000` (disposition IMPLEMENTED)
+- **Repository evidence** → home `02-MASTER/EC-3-B13-P02-UNIVERSAL-UNIVERSE-ARCHITECTURE-FRAMEWORK.md`; **16** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=True
+- **Certification evidence** → certified=False
+
+#### Ω∞-001  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
+- **Page** → logical page **12** (render/explicit-break map)
+- **Section** → LAW Ω∞-001
+- **Paragraph** → index **475**
+- **Original text** → "LAW Ω∞-001"
+- **Knowledge object** → `Ω∞-001` (disposition SPECIFIED)
+- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **13** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### Ω∞-002  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
+- **Page** → logical page **12** (render/explicit-break map)
+- **Section** → LAW Ω∞-002
+- **Paragraph** → index **477**
+- **Original text** → "LAW Ω∞-002"
+- **Knowledge object** → `Ω∞-002` (disposition SPECIFIED)
+- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **5** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### Ω∞-003  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
+- **Page** → logical page **12** (render/explicit-break map)
+- **Section** → LAW Ω∞-003
+- **Paragraph** → index **479**
+- **Original text** → "LAW Ω∞-003"
+- **Knowledge object** → `Ω∞-003` (disposition SPECIFIED)
+- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **5** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### Ω∞-004  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
+- **Page** → logical page **12** (render/explicit-break map)
+- **Section** → LAW Ω∞-004
+- **Paragraph** → index **481**
+- **Original text** → "LAW Ω∞-004"
+- **Knowledge object** → `Ω∞-004` (disposition SPECIFIED)
+- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **5** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### Ω∞-005  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
+- **Page** → logical page **12** (render/explicit-break map)
+- **Section** → LAW Ω∞-005
+- **Paragraph** → index **483**
+- **Original text** → "LAW Ω∞-005"
+- **Knowledge object** → `Ω∞-005` (disposition SPECIFIED)
+- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **6** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### Ω∞-006  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
+- **Page** → logical page **12** (render/explicit-break map)
+- **Section** → LAW Ω∞-006
+- **Paragraph** → index **485**
+- **Original text** → "LAW Ω∞-006"
+- **Knowledge object** → `Ω∞-006` (disposition SPECIFIED)
+- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **4** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### Ω∞-007  ·  family LAW  ·  quality RECOVERED  ·  confidence HIGH
+
+- **Document** → `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ ABSOLUTE ARCHITECTURAL CONSTITUTION.docx`
+- **Page** → logical page **12** (render/explicit-break map)
+- **Section** → LAW Ω∞-007
+- **Paragraph** → index **487**
+- **Original text** → "LAW Ω∞-007"
+- **Knowledge object** → `Ω∞-007` (disposition SPECIFIED)
+- **Repository evidence** → home `02-MASTER/APP-001-APPLICATION-FOUNDATION-CONSTITUTION.md`; **7** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### DATA-001  ·  family DATA  ·  quality PARTIALLY_RECOVERED  ·  confidence MEDIUM
+
+- **Document** → `04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS Ω∞ MASTER END-TO-END PROGRAM.docx`
+- **Page** → logical page **4** (render/explicit-break map)
+- **Section** → PHASE-004 / DATA FOUNDATION
+- **Paragraph** → index **115**
+- **Original text** → "DATA-001 Constitution"
+- **Knowledge object** → `DATA-001` (disposition IMPLEMENTED)
+- **Repository evidence** → home `10-DATA/DATA-001-UNIVERSAL-DATA-CONSTITUTION.md`; **220** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=True
+- **Certification evidence** → certified=True
+
+#### DATA-002  ·  family DATA  ·  quality PARTIALLY_RECOVERED  ·  confidence MEDIUM
+
+- **Document** → `04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS Ω∞ MASTER END-TO-END PROGRAM.docx`
+- **Page** → logical page **4** (render/explicit-break map)
+- **Section** → PHASE-004 / DATA FOUNDATION
+- **Paragraph** → index **116**
+- **Original text** → "DATA-002 Theory"
+- **Knowledge object** → `DATA-002` (disposition DEFERRED)
+- **Repository evidence** → home `10-DATA/DATA-002-UNIVERSAL-DATA-THEORY.md`; **23** repository files cite it
+- **Validation evidence** → constitution=False, specification=True, implementation=False
+- **Certification evidence** → certified=False
+
+#### DATA-003  ·  family DATA  ·  quality PARTIALLY_RECOVERED  ·  confidence MEDIUM
+
+- **Document** → `04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS Ω∞ MASTER END-TO-END PROGRAM.docx`
+- **Page** → logical page **4** (render/explicit-break map)
+- **Section** → PHASE-004 / DATA FOUNDATION
+- **Paragraph** → index **117**
+- **Original text** → "DATA-003 Ontology"
+- **Knowledge object** → `DATA-003` (disposition IMPLEMENTED)
+- **Repository evidence** → home `10-DATA/DATA-003-UNIVERSAL-DATA-ONTOLOGY.md`; **30** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=True
+- **Certification evidence** → certified=False
+
+#### DATA-004  ·  family DATA  ·  quality PARTIALLY_RECOVERED  ·  confidence MEDIUM
+
+- **Document** → `04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS Ω∞ MASTER END-TO-END PROGRAM.docx`
+- **Page** → logical page **4** (render/explicit-break map)
+- **Section** → PHASE-004 / DATA FOUNDATION
+- **Paragraph** → index **118**
+- **Original text** → "DATA-004 Taxonomy"
+- **Knowledge object** → `DATA-004` (disposition IMPLEMENTED)
+- **Repository evidence** → home `10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md`; **46** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=True
+- **Certification evidence** → certified=False
+
+#### AF-3  ·  family FOUNDATION  ·  quality REPOSITORY_ONLY  ·  confidence REPOSITORY
+
+- **Document** → _no frozen-document origin_; originating source = repository canonical home
+- **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
+- **Knowledge object** → `AF-3` (disposition IMPLEMENTED)
+- **Repository evidence** → home `02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md`; **96** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=True
+- **Certification evidence** → certified=True
+
+#### AMC-01  ·  family METACLASS  ·  quality REPOSITORY_ONLY  ·  confidence REPOSITORY
+
+- **Document** → _no frozen-document origin_; originating source = repository canonical home
+- **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
+- **Knowledge object** → `AMC-01` (disposition IMPLEMENTED)
+- **Repository evidence** → home `02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md`; **107** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=True
+- **Certification evidence** → certified=True
+
+#### AMC-02  ·  family METACLASS  ·  quality REPOSITORY_ONLY  ·  confidence REPOSITORY
+
+- **Document** → _no frozen-document origin_; originating source = repository canonical home
+- **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
+- **Knowledge object** → `AMC-02` (disposition IMPLEMENTED)
+- **Repository evidence** → home `02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md`; **90** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=True
+- **Certification evidence** → certified=True
+
+#### AMC-03  ·  family METACLASS  ·  quality REPOSITORY_ONLY  ·  confidence REPOSITORY
+
+- **Document** → _no frozen-document origin_; originating source = repository canonical home
+- **Page/Section/Paragraph/Original text** → n/a (repository-minted identifier)
+- **Knowledge object** → `AMC-03` (disposition IMPLEMENTED)
+- **Repository evidence** → home `02-MASTER/EC-3-AP-4-BAND-12-ADMISSION-DETERMINATION.md`; **96** repository files cite it
+- **Validation evidence** → constitution=True, specification=True, implementation=True
+- **Certification evidence** → certified=True
+
+
+_These traces are reproducible: each field is a lookup into the two machine models. The RECOVERED rows demonstrate a complete Document→…→Certification chain; the REPOSITORY_ONLY rows demonstrate a complete chain minus the frozen-document origin (the disclosed gap)._

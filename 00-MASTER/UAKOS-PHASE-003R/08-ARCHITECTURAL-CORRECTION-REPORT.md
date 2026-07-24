@@ -1,0 +1,22 @@
+# 08 — Architectural Correction Report
+
+> PROGRAM **UAKOS PHASE-003R** — Universal Realization Model Determination · baseline `57d91b7` (branch `governance-reconciliation`) · corrects the Wave-002 category error · consumes FREEZE A–F (read-only) · AUTHORITY = **NONE (DERIVED)** · **READ-ONLY** · generated `2026-07-23T06:56:11Z` by `phase3r_engine.py`.
+>
+> The constitutional modeling defect, its evidence, and the correction.
+>
+> Reproduce: `python3 00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py`.
+
+## Defect
+
+The Phase-003 gap model applied a **single realization lifecycle** (specification → implementation → validation → certification) to all 431 objects, so any object lacking `in_code`/`certified` evidence was labelled `IMPLEMENTATION_GAP`. Wave-002 pre-execution verification exposed this: 20 constitutional laws (`Ω∞-001…020`), CEP principles, and governance determinations were scheduled for **software implementation**, which is a category error — a law is realized by ratification and enforcement, not code.
+
+## Correction
+
+- **23 realization types** across **6 lifecycles** replace the single lifecycle. Each type has its own completion criteria and valid gap vocabulary (Registers 01–03).
+- `IMPLEMENTATION_GAP` is now valid **only** for the SOFTWARE lifecycle: **112 → 47** objects.
+- **73** objects previously mislabelled implementation-gaps are reclassified to ratification/enforcement/population/governance gaps.
+- Execution splits into constitutional streams (Register 05); only **131** objects are software-eligible.
+
+## Consequence
+
+The Wave-002 halt was correct. Under the corrected model, the mislabelled Wave-002 objects require governance ratification / registry population — not code — and FREEZE C–F must be regenerated on the realization-stream model (Register 07). No freeze is overwritten; FREEZE C2 is a new version.
