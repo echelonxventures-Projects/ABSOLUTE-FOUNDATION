@@ -2,14 +2,19 @@
 """UAKOS PHASE-005 — Universal Constitutional Implementation Execution Governance.
 
 READ-ONLY. Establishes the governed-execution model (FREEZE E) over the certified
-FREEZE D execution blueprint. It reproduces the 186 implementation units
-deterministically from the certified baselines (identical logic to Phase-004),
+FREEZE D execution blueprint. It reproduces the implementation units deterministically
+from the AUTHORITATIVE PHASE-003R realization model (FREEZE C2, via phase3r_engine.realize),
 then layers: one Execution Authorization per unit (WHO/WHEN/gates/rollback),
 immutable Execution Packages, and validation / certification / rollback / risk
 governance. It creates nothing and modifies nothing.
 
+ERP-006 reconciliation: PHASE-005 no longer reproduces the obsolete single-lifecycle
+FREEZE C model. Lifecycle, gap class, unit type, executor authority, approval gates,
+and readiness are derived from PHASE-003R (FREEZE C2) — the SAME realization authority
+as PHASE-004 — so execution authorization and execution planning are one model.
+
 Consumes (does not modify):
-    FREEZE A  closure.json · FREEZE B/C/D reproduced from closure + provenance + relationships.
+    FREEZE A  closure.json · FREEZE C2 PHASE-003R realization model (phase3r_engine.realize).
 
 Reproduce:
     python3 00-MASTER/UAKOS-PHASE-005/phase5_gov.py
@@ -18,6 +23,7 @@ Reproduce:
 from __future__ import annotations
 
 import hashlib
+import importlib.util as _ilu
 import json
 import re
 import subprocess
@@ -36,6 +42,13 @@ CONCEPTS = {c["id"]: c for c in CLOSURE["concepts"]}
 PROV = {p["id"]: p for p in PB["provenance"]}
 NOW = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 BASE = {"commit": CLOSURE.get("baseline_commit"), "branch": CLOSURE.get("branch")}
+
+# ERP-006: load the AUTHORITATIVE PHASE-003R realization model (FREEZE C2) — the same
+# realization authority PHASE-004 consumes. Reused by path; no realization logic duplicated.
+_P3R_PATH = REPO / "00-MASTER" / "UAKOS-PHASE-003R" / "phase3r_engine.py"
+_P3R_SPEC = _ilu.spec_from_file_location("phase3r_engine", _P3R_PATH)
+phase3r = _ilu.module_from_spec(_P3R_SPEC)
+_P3R_SPEC.loader.exec_module(phase3r)
 
 TEXT_EXT = {".md", ".txt", ".py", ".json", ".toml", ".sh", ".yml", ".yaml", ".cfg"}
 FAMILIES = [
@@ -77,9 +90,21 @@ CAPABILITY = {
 CODE_CAPS = ("Applications", "Services", "Platform", "Infrastructure", "Data", "Runtime", "Engine",
              "Implementation", "Generation")
 TIER_RANK = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3}
-GAP_RANK = {"SPECIFICATION_GAP": 0, "IMPLEMENTATION_GAP": 1, "CERTIFICATION_GAP": 2}
-GAP_UNIT_TYPE = {"SPECIFICATION_GAP": "SPECIFY", "IMPLEMENTATION_GAP": "IMPLEMENT",
-                 "CERTIFICATION_GAP": "CERTIFY"}
+GAP_PHASE_RANK = {
+    "SPECIFICATION_GAP": 0, "GOVERNANCE_GAP": 0, "REGISTRATION_GAP": 0,
+    "DOCUMENTATION_GAP": 0, "TRACEABILITY_GAP": 0,
+    "RATIFICATION_GAP": 1, "IMPLEMENTATION_GAP": 1, "POPULATION_GAP": 1,
+    "ENFORCEMENT_GAP": 2, "CERTIFICATION_GAP": 2, "VALIDATION_GAP": 2,
+}
+PHASE_NAME = {0: "Specification", 1: "Realization", 2: "Certification"}
+GAP_UNIT_TYPE = {
+    "SPECIFICATION_GAP": "SPECIFY", "IMPLEMENTATION_GAP": "IMPLEMENT",
+    "CERTIFICATION_GAP": "CERTIFY", "RATIFICATION_GAP": "RATIFY",
+    "ENFORCEMENT_GAP": "ENFORCE", "GOVERNANCE_GAP": "DETERMINE",
+    "POPULATION_GAP": "POPULATE", "REGISTRATION_GAP": "REGISTER",
+    "DOCUMENTATION_GAP": "DOCUMENT", "VALIDATION_GAP": "VALIDATE",
+    "TRACEABILITY_GAP": "TRACE",
+}
 
 
 def run(cmd):
@@ -169,36 +194,37 @@ def classify_gap(cid, st):
     return missing[0]
 
 
-def executor_role(cap, unit_type, crit):
+def executor_role(cap, unit_type, crit, stream):
+    # ERP-006: executor authority derives from the PHASE-003R realization stream.
+    if stream == "Governance":
+        return "Constitutional Governance Authority"
     if unit_type == "CERTIFY":
         return "Constitutional Completeness Engine (CCE) + Certification Authority"
-    if cap in ("Governance/Constitutions",) or crit == "CRITICAL":
-        return "Constitutional Governance Authority"
-    if cap in CODE_CAPS:
-        return "Certified Implementation Engine (EC-1)"
-    if cap in ("Knowledge/Registries", "Operational-Memory"):
+    if stream in ("Knowledge", "Registry", "Documentation"):
         return "Knowledge Authority"
-    return "Certified Implementation Engine (EC-1)"
+    return "Certified Implementation Engine (EC-1)"  # Software / Infrastructure
 
 
-def build_units(markers):
+def build_units():
     units = []
     for cid in sorted(CONCEPTS):
         c = CONCEPTS[cid]
-        st = status(cid, markers)
-        gap = classify_gap(cid, st)
+        # AUTHORITATIVE realization model (FREEZE C2) — identical source to PHASE-004.
+        rtype, lifecycle, stream, stage, gap, completion = phase3r.realize(cid)
         if gap == "NO_GAP":
             continue
         crit = CRIT_TIER.get(c["family"], "LOW")
         owner = (c.get("exact_homes") or c.get("def_homes") or [PROV[cid]["repository_home"]])[0] or "—"
         loc = owner.strip('"').split("/", 1)[0]
         cap = CAPABILITY.get(loc, "Other")
-        wave = TIER_RANK.get(crit, 3) * 3 + GAP_RANK.get(gap, 1) + 1
+        wave = TIER_RANK.get(crit, 3) * 3 + GAP_PHASE_RANK.get(gap, 1) + 1
         utype = GAP_UNIT_TYPE.get(gap, "IMPLEMENT")
         units.append({
             "cid": cid, "family": c["family"], "owner": owner, "location": loc, "capability": cap,
-            "status": st, "gap": gap, "unit_type": utype, "criticality": crit, "wave": wave,
-            "deferred": st == "DEFERRED", "executor": executor_role(cap, utype, crit),
+            "status": stage, "gap": gap, "unit_type": utype, "criticality": crit, "wave": wave,
+            "realization_type": rtype, "lifecycle": lifecycle, "stream": stream,
+            "deferred": c["disposition"] == "DEFERRED",
+            "executor": executor_role(cap, utype, crit, stream),
         })
     units.sort(key=lambda u: (u["wave"], TIER_RANK.get(u["criticality"], 3), u["family"], u["cid"]))
     for i, u in enumerate(units, 1):
@@ -211,21 +237,53 @@ APPROVAL = {
     "SPECIFY": ["SPEC-AUTHOR-APPROVAL", "TRACEABILITY-APPROVAL"],
     "IMPLEMENT": ["DESIGN-APPROVAL", "IMPL-APPROVAL", "VALIDATION-APPROVAL"],
     "CERTIFY": ["EVIDENCE-APPROVAL", "CERTIFICATION-APPROVAL"],
+    "RATIFY": ["GOVERNANCE-RELEASE", "RATIFICATION-APPROVAL"],
+    "ENFORCE": ["GOVERNANCE-RELEASE", "ENFORCEMENT-APPROVAL"],
+    "DETERMINE": ["GOVERNANCE-DETERMINATION-APPROVAL"],
+    "POPULATE": ["REGISTRY-APPROVAL", "POPULATION-APPROVAL"],
+    "REGISTER": ["REGISTRY-APPROVAL"],
+    "DOCUMENT": ["DOC-APPROVAL", "TRACEABILITY-APPROVAL"],
+    "VALIDATE": ["VALIDATION-APPROVAL"],
+    "TRACE": ["TRACEABILITY-APPROVAL"],
 }
 VAL_GATES = {
     "SPECIFY": ["V-PRE:freeze-check", "V-POST:spec-lint+traceability"],
     "IMPLEMENT": ["V-PRE:freeze+prereq", "V-IN:unit-tests", "V-POST:integration+runtime+evidence"],
     "CERTIFY": ["V-PRE:regression", "V-POST:certification-evidence"],
+    "RATIFY": ["V-PRE:freeze+specified-check", "V-POST:ratification-conformance"],
+    "ENFORCE": ["V-PRE:ratified-check", "V-POST:enforcement-reference"],
+    "DETERMINE": ["V-PRE:freeze-check", "V-POST:determination-conformance"],
+    "POPULATE": ["V-PRE:registry-check", "V-POST:population-evidence"],
+    "REGISTER": ["V-PRE:definition-check", "V-POST:registration-evidence"],
+    "DOCUMENT": ["V-PRE:freeze-check", "V-POST:doc-lint+traceability"],
+    "VALIDATE": ["V-PRE:impl-check", "V-POST:validation-evidence"],
+    "TRACE": ["V-PRE:freeze-check", "V-POST:trace-conformance"],
 }
 CERT_GATES = {
     "SPECIFY": ["G1", "G5"],
     "IMPLEMENT": ["G1", "G2", "G5", "G6"],
     "CERTIFY": ["G5", "G6", "G8"],
+    "RATIFY": ["G1", "G5"],
+    "ENFORCE": ["G5", "G6"],
+    "DETERMINE": ["G1", "G5"],
+    "POPULATE": ["G5", "G6"],
+    "REGISTER": ["G5"],
+    "DOCUMENT": ["G1", "G5"],
+    "VALIDATE": ["G5", "G6"],
+    "TRACE": ["G5"],
 }
 ROLLBACK = {
     "SPECIFY": "Discard spec draft; object remains at prior state (no repo state change).",
     "IMPLEMENT": "Do not merge partial artifact; object remains SPECIFIED; revert branch.",
     "CERTIFY": "Revert to PARTIALLY_IMPLEMENTED; quarantine certification evidence.",
+    "RATIFY": "Revert to SPECIFIED; no ratification recorded (governance state unchanged).",
+    "ENFORCE": "Revert to RATIFIED; enforcement reference withdrawn.",
+    "DETERMINE": "Discard governance determination draft; object remains PROPOSED.",
+    "POPULATE": "Revert store to prior populated state; population evidence quarantined.",
+    "REGISTER": "Remove registry entry; Universal ID remains reserved (never reused).",
+    "DOCUMENT": "Discard documentation draft; object remains at prior state.",
+    "VALIDATE": "Revert to IMPLEMENTED; validation evidence quarantined.",
+    "TRACE": "Revert trace linkage; object remains at prior state.",
 }
 
 
@@ -243,7 +301,7 @@ def fence(rows, header):
 def hdr(title, answers):
     return (f"# {title}\n\n"
             f"> PROGRAM **UAKOS PHASE-005** — Constitutional Implementation Execution Governance · "
-            f"baseline `{BASE['commit']}` (branch `{BASE['branch']}`) · consumes FREEZE A+B+C+D · "
+            f"baseline `{BASE['commit']}` (branch `{BASE['branch']}`) · consumes FREEZE A+B+C2+D · "
             f"AUTHORITY = **NONE (DERIVED / GOVERNANCE)** · **READ-ONLY** · generated `{NOW}` by `phase5_gov.py`.\n>\n"
             f"> {answers}\n>\n> Reproduce: `python3 00-MASTER/UAKOS-PHASE-005/phase5_gov.py`.\n\n")
 
@@ -253,8 +311,7 @@ def w(name, body):
 
 
 def main():
-    markers = scan_lifecycle()
-    units = build_units(markers)
+    units = build_units()
     N = len(units)
     waves = sorted({u["wave"] for u in units})
     first_wave = waves[0]
@@ -267,7 +324,9 @@ def main():
         u["ea_id"] = "EA-" + u["unit_id"].split("-")[1]
         u["prereq"] = "none (Wave first)" if u["wave"] == first_wave else \
             f"all waves < {u['wave']} certified-complete"
-        u["approval_gates"] = (["GOVERNANCE-RELEASE"] if u["deferred"] else []) + APPROVAL[u["unit_type"]]
+        base_appr = APPROVAL[u["unit_type"]]
+        needs_gov = (u["deferred"] or u["stream"] == "Governance") and "GOVERNANCE-RELEASE" not in base_appr
+        u["approval_gates"] = (["GOVERNANCE-RELEASE"] if needs_gov else []) + base_appr
         u["val_gates"] = VAL_GATES[u["unit_type"]]
         u["cert_gates"] = CERT_GATES[u["unit_type"]]
         u["rollback"] = ROLLBACK[u["unit_type"]]
@@ -289,8 +348,7 @@ def main():
     WAVE_LABEL = {}
     for wv in waves:
         tier = [k for k, v in TIER_RANK.items() if v == (wv - 1) // 3][0]
-        gaptype = [k for k, v in GAP_RANK.items() if v == (wv - 1) % 3][0]
-        WAVE_LABEL[wv] = f"{tier} / {gaptype.replace('_GAP','').title()}"
+        WAVE_LABEL[wv] = f"{tier} / {PHASE_NAME[(wv - 1) % 3]}"
 
     # ---- 01 Execution Authorization Register
     b = hdr("01 — Execution Authorization Register",
@@ -343,7 +401,7 @@ def main():
          "integration/runtime results, ValidationEvidence", "all post gates PASS"],
     ], ["Phase", "Validation", "Evidence requirement", "Acceptance threshold"])
           + "\n\n### Validation gates by unit type\n\n"
-          + fence([[t, " | ".join(VAL_GATES[t])] for t in ("SPECIFY", "IMPLEMENT", "CERTIFY")],
+          + fence([[t, " | ".join(VAL_GATES[t])] for t in sorted({u['unit_type'] for u in units})],
                   ["Unit type", "Validation gate sequence"])
           + f"\n\nUnits requiring in-execution test validation (IMPLEMENT): "
           f"**{sum(1 for u in units if u['unit_type']=='IMPLEMENT')}**.")
@@ -383,7 +441,7 @@ def main():
     b += (fence(rows, ["Package", "Capability", "Wave", "Rollback trigger", "Rollback scope",
                        "Rollback evidence", "Rollback validation", "Rollback certification"])
           + "\n\n### Rollback strategy by unit type\n\n"
-          + fence([[t, ROLLBACK[t]] for t in ("SPECIFY", "IMPLEMENT", "CERTIFY")],
+          + fence([[t, ROLLBACK[t]] for t in sorted({u['unit_type'] for u in units})],
                   ["Unit type", "Rollback strategy"])
           + "\n\n_Rollback is package-atomic and evidence-based: no partial package is left in a "
           "half-executed state; the repository never advances past the last certified baseline on failure._")
@@ -460,7 +518,8 @@ def main():
           "### Authorized executors\n\n"
           + fence([[r, n] for r, n in by_exec.most_common()], ["Authorized executor", "Units"])
           + "\n\n## Method\n\n"
-          "Reproduced the 186 FREEZE-D units deterministically, issued one Execution Authorization per unit "
+          f"Reproduced the {N} FREEZE-D units from the PHASE-003R realization model (FREEZE C2), issued one "
+          "Execution Authorization per unit "
           "(executor role, prerequisites, approval/validation/certification gates, rollback), grouped units "
           "into immutable Execution Packages by wave × capability, and attached validation, certification, "
           "rollback, and risk governance. WHO/WHAT/WHEN/evidence/gates/rollback are all determined from "
@@ -485,7 +544,7 @@ def main():
           + "\n\n## FREEZE E — Implementation Execution Governance\n\n"
           + (f"**FREEZE E is CERTIFIED and IMMUTABLE at seal `{seal}`.** The governed execution model "
              "(execution authorizations, execution packages, validation/certification/rollback governance, "
-             "execution readiness) is established. Implementation SHALL NOT begin until FREEZE A+B+C+D+E are "
+             "execution readiness) is established. Implementation SHALL NOT begin until FREEZE A+B+C2+D+E are "
              "all certified — now satisfied. Every implementation commit SHALL reference its Implementation "
              "Unit, Execution Authorization, Execution Package, Validation Evidence, and Certification "
              "Evidence, and no implementation may bypass an Execution Authorization. "

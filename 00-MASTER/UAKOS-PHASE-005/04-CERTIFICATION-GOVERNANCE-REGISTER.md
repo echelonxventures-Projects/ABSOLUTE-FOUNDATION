@@ -1,6 +1,6 @@
 # 04 — Certification Governance Register
 
-> PROGRAM **UAKOS PHASE-005** — Constitutional Implementation Execution Governance · baseline `57d91b7` (branch `governance-reconciliation`) · consumes FREEZE A+B+C+D · AUTHORITY = **NONE (DERIVED / GOVERNANCE)** · **READ-ONLY** · generated `2026-07-23T06:26:34Z` by `phase5_gov.py`.
+> PROGRAM **UAKOS PHASE-005** — Constitutional Implementation Execution Governance · baseline `ab78f35` (branch `governance-reconciliation`) · consumes FREEZE A+B+C2+D · AUTHORITY = **NONE (DERIVED / GOVERNANCE)** · **READ-ONLY** · generated `2026-07-24T11:28:58Z` by `phase5_gov.py`.
 >
 > Certification gates, required evidence, approval rules, completion / failure / rollback criteria.
 >
@@ -21,4 +21,4 @@
 - **Failure criteria:** any gate FAIL → unit halts, package pauses, rollback triggered.
 - **Rollback criteria:** see Register 05; state reverts to the prior certified lifecycle state.
 
-CERTIFY authorizations (dual sign-off): **46**.
+CERTIFY authorizations (dual sign-off): **21**.

@@ -1,6 +1,6 @@
 # 03 — Validation Governance Register
 
-> PROGRAM **UAKOS PHASE-005** — Constitutional Implementation Execution Governance · baseline `57d91b7` (branch `governance-reconciliation`) · consumes FREEZE A+B+C+D · AUTHORITY = **NONE (DERIVED / GOVERNANCE)** · **READ-ONLY** · generated `2026-07-23T06:26:34Z` by `phase5_gov.py`.
+> PROGRAM **UAKOS PHASE-005** — Constitutional Implementation Execution Governance · baseline `ab78f35` (branch `governance-reconciliation`) · consumes FREEZE A+B+C2+D · AUTHORITY = **NONE (DERIVED / GOVERNANCE)** · **READ-ONLY** · generated `2026-07-24T11:28:58Z` by `phase5_gov.py`.
 >
 > Pre / in / post-execution validation, evidence requirements, acceptance thresholds.
 >
@@ -16,8 +16,9 @@
 
 | Unit type | Validation gate sequence |
 |---|---|
-| SPECIFY | V-PRE:freeze-check \| V-POST:spec-lint+traceability |
-| IMPLEMENT | V-PRE:freeze+prereq \| V-IN:unit-tests \| V-POST:integration+runtime+evidence |
 | CERTIFY | V-PRE:regression \| V-POST:certification-evidence |
+| IMPLEMENT | V-PRE:freeze+prereq \| V-IN:unit-tests \| V-POST:integration+runtime+evidence |
+| POPULATE | V-PRE:registry-check \| V-POST:population-evidence |
+| RATIFY | V-PRE:freeze+specified-check \| V-POST:ratification-conformance |
 
-Units requiring in-execution test validation (IMPLEMENT): **112**.
+Units requiring in-execution test validation (IMPLEMENT): **47**.
