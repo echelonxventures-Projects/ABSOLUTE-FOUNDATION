@@ -385,3 +385,49 @@ XXV.4 This instrument SHALL govern until amended or frozen under its own rules, 
 ---
 
 *END OF ARTIFACT — CEP-009 · CONSTITUTIONAL AMENDMENT & EVOLUTION CONSTITUTION · VERSION 1.0 · NORMATIVE · AMENDMENT & EVOLUTION ONLY · DERIVES FROM CEP-000 … CEP-008*
+
+---
+
+## ADDENDUM A — CONSTITUTIONAL EVOLUTION & LAYER-EVOLUTION ASSIMILATION (REP-004 · WAVE-3)
+
+> **Provenance.** REP-004 Wave-3 · Absolute Constitutional Architecture assimilation · Disposition **REUSE/EXTEND** · Canonical owner **CEP-009** (Constitutional Evolution Model). Companion: **CEP-001 Addendum A** (hierarchy/invariants/Layer Object/immutability). Predecessors: REP-002 (`afd673f`), REP-003 (`c8229f5`). Authorities: REP-001, AAP-001, IAC-001A–E, IAC-001D §05 (Reuse-First), CEP-000…CEP-008, Knowledge Once. This is an **additive amendment** under **Art IV.2 (additive)**; it is **non-mutating** — it alters **no** existing Article, evolution state (Art VI), classification (Art IV), or registry (Art XVI), and creates **no parallel evolution model, registry, or migration mechanism**. Subordinate to CEP-000…CEP-008; void to the extent of any conflict.
+
+### A.1 — Determination: the Constitutional Evolution Model is already owned here
+
+The mission's Constitutional-Evolution concepts are **facets of this instrument**, already legislated — none is new:
+
+| Constitutional-Evolution concept | Realized by (existing Article, reused) |
+|---|---|
+| **Constitutional Evolution Model** | **CEP-009 in whole** (P.1–P.5; Art I–XXV) |
+| **Registry-driven Evolution** | **Art XVI (Evolution Registry)** — single canonical, append-only, boot-reconciled |
+| **Versioned Architecture** | **Art XXIV (Versioning)** + CEP-001 Art XXV |
+| **Backward-compatible Evolution** | **Art VIII (Compatibility)** + **Art IX (Backward Compatibility)** + Art X (Forward) |
+| **Layer Evolution Rules** | **Art IV (classification)** + **Art XI (successor)** + **Art VI (state machine)** + **Art XV (lineage)** — see A.2 |
+
+### A.2 — Layer Evolution Rules (governed evolution of any layer; no new mechanism)
+
+Every layer-evolution operation the mission enumerates is **already expressible** through the existing change classification (Art IV), successor model (Art XI, no identity reuse), impact/compatibility (Art VII/VIII), state machine (Art VI), and acyclic lineage (Art XV.2). Each is **by governed evolution** — never a mutation, never a bypass of validation/certification/ratification (Art XXIII.5–7):
+
+| Layer-evolution operation | Governed realization (existing) | Constraints |
+|---|---|---|
+| **Add Layer** | **additive change (IV.2)** — new artifact/Layer Object; no existing artifact altered | INV-3 acyclic |
+| **Remove Layer** | **retiring change (IV.5 / Art XIV)** — historical availability preserved; never deleted | XIV.2 |
+| **Rename Layer** | **superseding change (IV.4)** — successor with new canonical identity + lineage; no identity reuse | XI.2 |
+| **Split Layer** | **superseding change (IV.4)** — one predecessor → multiple successors, each lineage-linked | XI.1/XV |
+| **Merge Layers** | **superseding change (IV.4)** — multiple predecessors → one successor referencing all via lineage | XV.1–XV.3 |
+| **Replace Layer** | **superseding change (IV.4)** — successor supersedes predecessor without mutating it | III.5 |
+| **Change Dependencies** | **corrective/superseding** with **impact assessment (Art VII)** + **compatibility (Art VIII)**; graph stays acyclic | XV.2 (no cycle) |
+| **Introduce new reasoning paradigms** | **additive change (IV.2)** — new artifact; no redesign/renumber of existing | IV.2 |
+| **Introduce new realization paradigms** | **additive change (IV.2)** — new artifact under the realization foundation | IV.2 |
+
+**Binding constraints (reused, not restated):** every operation preserves frozen truth (III.3, XXIII.1), establishes traceable lineage (XVIII), carries exactly one canonical amendment identity (XXIII.3), determines compatibility impact (XXIII.8), keeps deprecated/retired layers historically available (XXIII.9), and enables **infinite evolution without architectural destruction (XXIII.10)** — the constitutional guarantee that the whole hierarchy (CEP-001 Addendum A) can evolve unboundedly under governance while the Universal Invariants and this Evolution Model remain the immutable ground.
+
+### A.3 — Reuse confirmation (no duplication)
+
+There is **no second evolution model, evolution registry, migration mechanism, or versioning scheme**. Layer evolution = CEP-009 change classification + successor model applied to the artifact-object Layer (CEP-001 Addendum A.3), recorded once in the Evolution Registry (Art XVI) and the `CHANGE-VERSION-LINEAGE-REGISTRY` (S2-01 §6, one store). Minting a parallel evolution apparatus is prohibited (LAW-4; XVI.2; S2-01 DP-1/DP-6).
+
+### A.4 — Traceability
+
+Layer-evolution → Art IV/VI/VII/VIII/IX/XI/XIV/XV/XVI/XXIII (this artifact) ← CEP-001 Addendum A (hierarchy + Layer Object). Registry-driven → Art XVI + CHANGE-VERSION-LINEAGE-REGISTRY (reference). Versioned/backward-compatible → Art XXIV/VIII/IX + CEP-001 Art XXV. All cite **CEP-009 Addendum A** as the canonical home of the Layer-Evolution rules; none creates a parallel evolution model, registry, or constitution.
+
+**CEP-009 ADDENDUM A — CONSTITUTIONAL EVOLUTION & LAYER-EVOLUTION — REUSE/EXTEND COMPLETE · ADDITIVE · NON-MUTATING · NO NEW EVOLUTION MODEL, REGISTRY, OR CONSTITUTION.**

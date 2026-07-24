@@ -393,3 +393,78 @@ XXV.4 Every subordinate CEP instrument SHALL cite the Constitution version under
 ---
 
 *END OF ARTIFACT — CEP-001 · CONSTITUTIONAL ENGINEERING CONSTITUTION · VERSION 1.0 · NORMATIVE · SUPREME OPERATIONAL INSTRUMENT · DERIVES FROM CEP-000*
+
+---
+
+## ADDENDUM A — ABSOLUTE CONSTITUTIONAL ARCHITECTURE ASSIMILATION (REP-004 · WAVE-3)
+
+> **Provenance.** REP-004 Wave-3 · Absolute Constitutional Architecture assimilation · Disposition **EXTEND/REUSE** · Canonical owner **CEP-001** (Universal Invariants, First Principles/Laws, state model, single canonicity). Predecessors: REP-002 (commit `afd673f`), REP-003 (commit `c8229f5`). Authorities: REP-001, AAP-001, IAC-001A–E, IAC-001D §05 (Reuse-First), CEP-000, Knowledge Once. This is an **additive amendment** under **CEP-009 Art IV.2 (additive)** and the CEP-001 Art XV Amendment Model; it is **non-mutating** — it alters **no** existing Law (Art I), Invariant (Art VII), Article, or state (Art VIII), introduces **no** new authority (Art III, VI.1), selects **no** technology (VI.2), and creates **no parallel constitution, hierarchy, registry, or Layer Object model**. Where it would conflict with CEP-000 or any Article above, the higher instrument governs and this Addendum is void to the extent of the conflict.
+
+### A.1 — Determination: the Absolute Constitutional Architecture is already owned
+
+The "**Absolute Constitutional Architecture**" is **not a new artifact or parallel constitution**. It is the canonical *name* for the layered constitutional order that the CEP corpus (CEP-000…CEP-010) already legislates. Each hierarchy concept binds 1:1 to an existing owner (reuse, never re-authored):
+
+| Absolute-hierarchy concept | Canonical owner (existing, reused — by reference) | Basis |
+|---|---|---|
+| **Universal Invariants** | **CEP-001 Article VII (INV-1…8)** + Laws Art I (LAW-1…11) | this artifact |
+| **Universal First Principles** | **CEP-000** (Charter — WHY / Core Principles) + CEP-001 Art I Laws | CEP-000 §10 |
+| **Universal Constitutional Foundation** | **CEP-000…CEP-010** (the ratified constitutional corpus) | 00-CEP |
+| **Universal Formal Constitutional System** | **CEP-001** formal system: Laws (Art I), Invariants (Art VII), deterministic State Model (Art VIII), decidable gates (Art XXIII) | this artifact |
+| **Universal Knowledge Foundation** | **LAW-4 Single Canonicity / INV-2** + RA-003 Knowledge-Once + UKB (`00-BOOK/`) | this artifact; `00-MASTER/RA-003/` |
+| **Universal Intelligence Foundation** | **USIS** (`15-UNIVERSAL-SCIENCE-INTELLIGENCE/`; USIS-001…004, USIS-GOV-000) | `15-…/` |
+| **Universal Realization Foundation** | **CEP Stage-03 realization bindings** (S3-01…10) + S2-09 realization binding | `00-CEP/` |
+| **Universal Domain Foundations** | **ARCH domain families** + numbered programs (DATA/SERVICE/APPLICATION/INFRASTRUCTURE/SECURITY/PLATFORM) | family zones |
+| **Realizations** | **EC-3 Bands 10–13 realization program** + S3 realization frontier | `06-IMPLEMENTATION/`; `data/` `service/` `application/` `infrastructure/` |
+
+The hierarchy is **downward-only and acyclic** — a direct instance of **INV-3** (forward stage graph acyclic; every dependency documented) and **LAW-1 (Precedence)** over the **CEP-000 §5.5 tiers** (Constitutional → Program → Execution → Derived-Truth). No new hierarchy is minted.
+
+### A.2 — Hierarchy governance (represented through existing owners; no new registry)
+
+| Hierarchy-governance concept | Realized by (existing, reused) | Rule |
+|---|---|---|
+| **Hierarchy Registry / Layer Registry** | **`00-BOOK/REGISTRIES/UNIVERSAL-ARTIFACT-REGISTRY`** + Volume Registry + CEP-009 Evolution Registry (Art XVI) | one store per concern; DP-1 (S2-01) |
+| **Layer Object** | the **canonical artifact object** in the artifact registry (see A.3) | LAW-4 single canonicity |
+| **Parent Layer / Child Layer** | artifact `parent` / dependents + **CEP-000 §5.5 precedence** (downward-only) | LAW-1 |
+| **Dependency Rules / Constitutional Dependency Rule** | **INV-3** (acyclic; documented) + downward-only precedence (LAW-1); reverse/cyclic dependency PROHIBITED | INV-3; Art XXIII |
+| **Layer Validation** | **CEP-004** (validation gate; PASS/BLOCKED) | Art XI |
+| **Layer Certification** | **CEP-005** (attestation) + CERTIFICATION-REGISTRY | Art XII |
+
+No second registry, hierarchy, or owner is created; the binding to UCOS stores follows the S2-01 crosswalk (DP-1…DP-7).
+
+### A.3 — Layer Object Contract (one canonical object; no duplicate model)
+
+Every architectural layer **resolves to exactly one canonical object — the existing artifact object** recorded in `UNIVERSAL-ARTIFACT-REGISTRY` (`00-BOOK/DATA/artifacts.json`). The fourteen minimum-contract fields are **views onto existing fields/constructs**, never a new schema:
+
+| Layer Object Contract field | Realized by (existing artifact-object field / CEP construct) |
+|---|---|
+| **Identifier** | `universal_id` (append-only id-ledger) |
+| **Name** | `name` |
+| **Purpose** | `description` / `program` role |
+| **Parent** | `parent` |
+| **Children** | inverse of `parent` (dependents; derivable from the graph) |
+| **Dependencies** | `dependencies` (acyclic — INV-3) |
+| **Inheritance Rules** | downward-only precedence (LAW-1, CEP-000 §5.5) + `category`/`volume` classification (`config.py` CLASSIFY_RULES) |
+| **Capabilities** | program/meta-class capabilities (e.g. PLATFORM-005 PMC-02; ARCH capability catalog) — by reference |
+| **Interfaces** | declared contracts / `return_link` (service layers: PLATFORM-008 PMC-04 contracts) |
+| **Policies** | governance records (CEP-002; PMC-08 governance) — evaluative |
+| **Validation** | CEP-004 (`status` VALIDATED) |
+| **Certification** | CEP-005 (`status` CERTIFIED; `certification.json`) |
+| **Version** | `version` (Art XXV; CEP-009 Art XXIV) |
+| **Lifecycle** | `status` per the Art VIII state model (DRAFTED→…→FROZEN→SUPERSEDED) / CEP-009 Art VI |
+
+**No-duplication constraint (binding):** the Layer Object is the **artifact object already owned by the registry** — not a parallel "Layer" thing-model. Minting a second layer/object schema is prohibited by **LAW-4** and S2-01 DP-2/DP-3.
+
+### A.4 — Immutability determination (REUSE; equivalent guarantee already provided)
+
+The mission's immutability question is answered by existing law — **no new immutability construct is required**:
+
+- **Immutable ground (never evolves):** the **Universal Invariants** (Art VII, INV-1…8) and the **Constitutional Evolution Model** (CEP-009). These are the fixed points on which all governed change rests.
+- **Everything else evolves through constitutional governance:** every other layer/artifact is amendable via **CEP-009** successor evolution. Where an artifact is **frozen (CEP-007)**, its immutability is **supersession-only** — itself a facet of the Evolution Model (LAW-7 Preservation; Art XIV), not a separate immutability regime.
+
+Repository Truth therefore **already provides the equivalent guarantee** ("only Universal Invariants + Constitutional Evolution Model are immutable ground; all else evolves under governance"). Per the mission's REUSE directive, this is **confirmed, not duplicated**.
+
+### A.5 — Traceability
+
+Absolute hierarchy → Art VII/Art I + CEP-000 §5.5/§10 + CEP-009 (this addendum). Hierarchy governance → UNIVERSAL-ARTIFACT-REGISTRY + CEP-004/005 + S2-01 (reference). Layer Object → artifact object (`artifacts.json`) + Art VIII lifecycle. Immutability → Art VII + CEP-009 + CEP-007 (reference). All cite **CEP-001 Addendum A** as the canonical constitutional home of the Absolute Constitutional Architecture name; none creates a parallel constitution, hierarchy, registry, or Layer Object model. Layer evolution rules are homed at **CEP-009 Addendum A** (companion).
+
+**CEP-001 ADDENDUM A — ABSOLUTE CONSTITUTIONAL ARCHITECTURE — EXTEND/REUSE COMPLETE · ADDITIVE · NON-MUTATING · NO NEW OWNER, HIERARCHY, REGISTRY, OR LAYER-OBJECT MODEL.**
