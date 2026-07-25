@@ -7693,15 +7693,323 @@
       "page_start": 9341,
       "page_count": 31,
       "first_seen": "2026-07-24T10:53:15+00:00"
+    },
+    "IAC-001A/01-REPOSITORY-AUTHORITY-INVENTORY.md": {
+      "universal_id": "UCOS-IAC001A-000001",
+      "category": "IAC001A",
+      "page_start": 9372,
+      "page_count": 2,
+      "first_seen": "2026-07-24T12:34:51+00:00"
+    },
+    "IAC-001A/02-CANONICAL-ARTIFACTS.md": {
+      "universal_id": "UCOS-IAC001A-000002",
+      "category": "IAC001A",
+      "page_start": 9374,
+      "page_count": 2,
+      "first_seen": "2026-07-24T12:35:06+00:00"
+    },
+    "IAC-001A/03-DERIVED-ARTIFACTS.md": {
+      "universal_id": "UCOS-IAC001A-000003",
+      "category": "IAC001A",
+      "page_start": 9376,
+      "page_count": 1,
+      "first_seen": "2026-07-24T12:35:43+00:00"
+    },
+    "IAC-001A/04-GENERATED-ARTIFACTS.md": {
+      "universal_id": "UCOS-IAC001A-000004",
+      "category": "IAC001A",
+      "page_start": 9377,
+      "page_count": 1,
+      "first_seen": "2026-07-24T12:36:03+00:00"
+    },
+    "IAC-001A/05-NON-AUTHORITATIVE-ARTIFACTS.md": {
+      "universal_id": "UCOS-IAC001A-000005",
+      "category": "IAC001A",
+      "page_start": 9378,
+      "page_count": 1,
+      "first_seen": "2026-07-24T12:36:33+00:00"
+    },
+    "IAC-001A/06-AUTHORITY-CLASSIFICATION-MATRIX.md": {
+      "universal_id": "UCOS-IAC001A-000006",
+      "category": "IAC001A",
+      "page_start": 9379,
+      "page_count": 1,
+      "first_seen": "2026-07-24T12:37:02+00:00"
+    },
+    "IAC-001A/07-FINAL-DETERMINATION.md": {
+      "universal_id": "UCOS-IAC001A-000007",
+      "category": "IAC001A",
+      "page_start": 9380,
+      "page_count": 2,
+      "first_seen": "2026-07-24T12:37:51+00:00"
+    },
+    "IAC-001B/01-CANONICAL-KNOWLEDGE-INVENTORY.md": {
+      "universal_id": "UCOS-IAC001B-000001",
+      "category": "IAC001B",
+      "page_start": 9382,
+      "page_count": 2,
+      "first_seen": "2026-07-24T15:03:21+00:00"
+    },
+    "IAC-001B/02-KNOWLEDGE-ONCE-CERTIFICATION.md": {
+      "universal_id": "UCOS-IAC001B-000002",
+      "category": "IAC001B",
+      "page_start": 9384,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:03:41+00:00"
+    },
+    "IAC-001B/03-CANONICAL-OWNERSHIP.md": {
+      "universal_id": "UCOS-IAC001B-000003",
+      "category": "IAC001B",
+      "page_start": 9385,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:04:04+00:00"
+    },
+    "IAC-001B/04-KNOWLEDGE-CLASSIFICATION.md": {
+      "universal_id": "UCOS-IAC001B-000004",
+      "category": "IAC001B",
+      "page_start": 9386,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:04:21+00:00"
+    },
+    "IAC-001B/05-TRACEABILITY.md": {
+      "universal_id": "UCOS-IAC001B-000005",
+      "category": "IAC001B",
+      "page_start": 9387,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:04:44+00:00"
+    },
+    "IAC-001B/06-ORPHAN-DETERMINATION.md": {
+      "universal_id": "UCOS-IAC001B-000006",
+      "category": "IAC001B",
+      "page_start": 9388,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:05:00+00:00"
+    },
+    "IAC-001B/07-CONSTITUTIONAL-COVERAGE.md": {
+      "universal_id": "UCOS-CON-000048",
+      "category": "CON",
+      "page_start": 9389,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:05:22+00:00"
+    },
+    "IAC-001B/08-IMPLEMENTATION-DESTINATIONS.md": {
+      "universal_id": "UCOS-IAC001B-000007",
+      "category": "IAC001B",
+      "page_start": 9390,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:05:35+00:00"
+    },
+    "IAC-001B/09-FINAL-CERTIFICATION.md": {
+      "universal_id": "UCOS-IAC001B-000008",
+      "category": "IAC001B",
+      "page_start": 9391,
+      "page_count": 2,
+      "first_seen": "2026-07-24T15:06:09+00:00"
+    },
+    "IAC-001C/01-CANONICAL-RELATIONSHIP-INVENTORY.md": {
+      "universal_id": "UCOS-IAC001C-000001",
+      "category": "IAC001C",
+      "page_start": 9393,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:50:51+00:00"
+    },
+    "IAC-001C/02-RELATIONSHIP-MATRIX.md": {
+      "universal_id": "UCOS-IAC001C-000002",
+      "category": "IAC001C",
+      "page_start": 9394,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:51:01+00:00"
+    },
+    "IAC-001C/03-DEPENDENCY-GRAPH.md": {
+      "universal_id": "UCOS-IAC001C-000003",
+      "category": "IAC001C",
+      "page_start": 9395,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:51:34+00:00"
+    },
+    "IAC-001C/04-COMPOSITION-GRAPH.md": {
+      "universal_id": "UCOS-IAC001C-000004",
+      "category": "IAC001C",
+      "page_start": 9396,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:51:43+00:00"
+    },
+    "IAC-001C/06-TRACEABILITY-GRAPH.md": {
+      "universal_id": "UCOS-IAC001C-000005",
+      "category": "IAC001C",
+      "page_start": 9397,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:52:02+00:00"
+    },
+    "IAC-001C/05-REALIZATION-GRAPH.md": {
+      "universal_id": "UCOS-IAC001C-000006",
+      "category": "IAC001C",
+      "page_start": 9398,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:52:13+00:00"
+    },
+    "IAC-001C/08-IMPLEMENTATION-GRAPH.md": {
+      "universal_id": "UCOS-IAC001C-000007",
+      "category": "IAC001C",
+      "page_start": 9399,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:52:37+00:00"
+    },
+    "IAC-001C/07-ORPHAN-RELATIONSHIPS.md": {
+      "universal_id": "UCOS-IAC001C-000008",
+      "category": "IAC001C",
+      "page_start": 9400,
+      "page_count": 1,
+      "first_seen": "2026-07-24T15:52:46+00:00"
+    },
+    "IAC-001C/09-FINAL-CERTIFICATION.md": {
+      "universal_id": "UCOS-IAC001C-000009",
+      "category": "IAC001C",
+      "page_start": 9401,
+      "page_count": 2,
+      "first_seen": "2026-07-24T15:53:16+00:00"
+    },
+    "IAC-001D/01-CAPABILITY-INVENTORY.md": {
+      "universal_id": "UCOS-IAC001D-000001",
+      "category": "IAC001D",
+      "page_start": 9403,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:00:16+00:00"
+    },
+    "IAC-001D/02-CAPABILITY-OWNERSHIP.md": {
+      "universal_id": "UCOS-IAC001D-000002",
+      "category": "IAC001D",
+      "page_start": 9404,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:00:24+00:00"
+    },
+    "IAC-001D/03-CAPABILITY-COVERAGE-MATRIX.md": {
+      "universal_id": "UCOS-IAC001D-000003",
+      "category": "IAC001D",
+      "page_start": 9405,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:00:49+00:00"
+    },
+    "IAC-001D/04-CAPABILITY-GAP-REGISTER.md": {
+      "universal_id": "UCOS-IAC001D-000004",
+      "category": "IAC001D",
+      "page_start": 9406,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:01:01+00:00"
+    },
+    "IAC-001D/05-REUSE-ANALYSIS.md": {
+      "universal_id": "UCOS-IAC001D-000005",
+      "category": "IAC001D",
+      "page_start": 9407,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:01:24+00:00"
+    },
+    "IAC-001D/06-DUPLICATION-ANALYSIS.md": {
+      "universal_id": "UCOS-IAC001D-000006",
+      "category": "IAC001D",
+      "page_start": 9408,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:01:33+00:00"
+    },
+    "IAC-001D/07-CONSTITUTIONAL-COMPLETENESS.md": {
+      "universal_id": "UCOS-CON-000049",
+      "category": "CON",
+      "page_start": 9409,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:01:57+00:00"
+    },
+    "IAC-001D/08-IMPLEMENTATION-IMPACT.md": {
+      "universal_id": "UCOS-IAC001D-000007",
+      "category": "IAC001D",
+      "page_start": 9410,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:02:08+00:00"
+    },
+    "IAC-001D/09-FINAL-CERTIFICATION.md": {
+      "universal_id": "UCOS-IAC001D-000008",
+      "category": "IAC001D",
+      "page_start": 9411,
+      "page_count": 2,
+      "first_seen": "2026-07-24T16:02:35+00:00"
+    },
+    "IAC-001E/01-IMPLEMENTATION-AUTHORITY.md": {
+      "universal_id": "UCOS-IAC001E-000001",
+      "category": "IAC001E",
+      "page_start": 9413,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:09:09+00:00"
+    },
+    "IAC-001E/02-IMPLEMENTATION-DESTINATIONS.md": {
+      "universal_id": "UCOS-IAC001E-000002",
+      "category": "IAC001E",
+      "page_start": 9414,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:09:19+00:00"
+    },
+    "IAC-001E/03-IMPLEMENTATION-PREREQUISITES.md": {
+      "universal_id": "UCOS-IAC001E-000003",
+      "category": "IAC001E",
+      "page_start": 9415,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:09:44+00:00"
+    },
+    "IAC-001E/04-IMPLEMENTATION-BLOCKERS.md": {
+      "universal_id": "UCOS-IAC001E-000004",
+      "category": "IAC001E",
+      "page_start": 9416,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:09:56+00:00"
+    },
+    "IAC-001E/05-IMPLEMENTATION-GRAPH.md": {
+      "universal_id": "UCOS-IAC001E-000005",
+      "category": "IAC001E",
+      "page_start": 9417,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:10:18+00:00"
+    },
+    "IAC-001E/06-IMPLEMENTATION-GOVERNANCE.md": {
+      "universal_id": "UCOS-IAC001E-000006",
+      "category": "IAC001E",
+      "page_start": 9418,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:10:27+00:00"
+    },
+    "IAC-001E/08-AUTHORITY-EVIDENCE.md": {
+      "universal_id": "UCOS-IAC001E-000007",
+      "category": "IAC001E",
+      "page_start": 9419,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:11:03+00:00"
+    },
+    "IAC-001E/07-IMPLEMENTATION-READINESS.md": {
+      "universal_id": "UCOS-IAC001E-000008",
+      "category": "IAC001E",
+      "page_start": 9420,
+      "page_count": 1,
+      "first_seen": "2026-07-24T16:11:41+00:00"
+    },
+    "IAC-001E/09-FINAL-CERTIFICATION.md": {
+      "universal_id": "UCOS-IAC001E-000009",
+      "category": "IAC001E",
+      "page_start": 9421,
+      "page_count": 2,
+      "first_seen": "2026-07-24T16:11:41+00:00"
+    },
+    "platform/security/EC2-CAP-SEC-001-SEC-CLASS-CERTIFICATION-REPORT.md": {
+      "universal_id": "UCOS-PLT-000051",
+      "category": "PLT",
+      "page_start": 9423,
+      "page_count": 4,
+      "first_seen": "2026-07-25T03:06:54+00:00"
     }
   },
-  "page_cursor": 9371,
+  "page_cursor": 9426,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
     "SRC": 2,
     "ARCH": 24,
-    "CON": 47,
+    "CON": 49,
     "VSN": 3,
     "IDX": 1,
     "EES": 2,
@@ -7714,7 +8022,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 50,
+    "PLT": 51,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -7781,7 +8089,12 @@
     "REPOSITORYGA": 1,
     "CANONICALINT": 1,
     "DUPLICATIONA": 1,
-    "EXECUTIVESUM": 1
+    "EXECUTIVESUM": 1,
+    "IAC001A": 7,
+    "IAC001B": 8,
+    "IAC001C": 9,
+    "IAC001D": 8,
+    "IAC001E": 9
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -8912,6 +9225,15 @@
         "status": "ACTIVE",
         "path": "06-IMPLEMENTATION/UCOS-Ω∞-FOUNDATION-ARCHITECTURE.md",
         "name": "UCOS Ω∞ — FOUNDATION ARCHITECTURE"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "527cac42fde96ca2fe4a6dc3346dfdb7828091a7fd7891ed78ddcdce0b8df809",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-Ω∞-FOUNDATION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — FOUNDATION ARCHITECTURE"
       }
     ],
     "UCOS-IMP-000010": [
@@ -9768,6 +10090,15 @@
         "status": "ACTIVE",
         "path": "09-PLATFORM/PLATFORM-001-UNIVERSAL-PLATFORM-CONSTITUTION.md",
         "name": "UCOS Ω∞ — UNIVERSAL PLATFORM CONSTITUTION (UPC) MASTER ARCHITECTURE"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "465ea97f0912d7c8676b857c735a4ac876820f47cae6c347f7bb09154ece43a3",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-001-UNIVERSAL-PLATFORM-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM CONSTITUTION (UPC) MASTER ARCHITECTURE"
       }
     ],
     "UCOS-PLT-000002": [
@@ -9808,6 +10139,15 @@
         "seq": 1,
         "at": "2026-07-15T06:33:18+00:00",
         "content_hash": "e4cff56b173cf315ad6eefb87725713622ef19178d0a93f4e2c41dbb3329aa8e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-005-UNIVERSAL-PLATFORM-META-MODEL.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM META-MODEL (UPM) MASTER ARCHITECTURE"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "09f36fc56d66394b975b80dee76426acd9b7c50b2e3ae84c895a21f4946488d0",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "09-PLATFORM/PLATFORM-005-UNIVERSAL-PLATFORM-META-MODEL.md",
@@ -9885,6 +10225,15 @@
         "seq": 1,
         "at": "2026-07-15T08:03:07+00:00",
         "content_hash": "816fdd4658a75c69b59fdd2bd8a0b7cb9890b6339e1f06e6c6a939a8cd1f4ee9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-PLATFORM/PLATFORM-010-UNIVERSAL-PLATFORM-COMPOSITION-ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — UNIVERSAL PLATFORM COMPOSITION ARCHITECTURE (UPCO) MASTER ARCHITECTURE"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "2521a310001e3de5158017943231c0391387b515bb0c3084f525dd3fa158d923",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "09-PLATFORM/PLATFORM-010-UNIVERSAL-PLATFORM-COMPOSITION-ARCHITECTURE.md",
@@ -11920,6 +12269,15 @@
         "seq": 2,
         "at": "2026-07-17T16:38:36+00:00",
         "content_hash": "4d9b9e924bf39c04be95f48fc7a0fc00677b8294e4f6546008737e582e34ff39",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-OMEGA-INFINITY-MASTER-IMPLEMENTATION-PLAN-V2.md",
+        "name": "UCOS Ω∞ — MASTER IMPLEMENTATION PLAN v2 (THE UNIVERSAL REALITY COMPILER)"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "0fbbf76fdc4f8999dcbc195f8db82ff07974f8d8149d22a84a6ad0ce0598b77c",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "UCOS-OMEGA-INFINITY-MASTER-IMPLEMENTATION-PLAN-V2.md",
@@ -18337,6 +18695,15 @@
         "status": "FROZEN",
         "path": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL ENGINEERING CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "0e53dfc7535d0aac48573f3e139492ed46725a4b9d04398d0d86230c609b4dc9",
+        "version": "1.0",
+        "status": "FROZEN",
+        "path": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL ENGINEERING CONSTITUTION"
       }
     ],
     "UCOS-CON-000034": [
@@ -18425,6 +18792,15 @@
         "status": "FROZEN",
         "path": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL AMENDMENT & EVOLUTION CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "ef736a19eef0c2b20450d355e63e9bc257814414fd5c509ff915217c394a025c",
+        "version": "1.0",
+        "status": "FROZEN",
+        "path": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL AMENDMENT & EVOLUTION CONSTITUTION"
       }
     ],
     "UCOS-CON-000042": [
@@ -18487,6 +18863,15 @@
         "seq": 1,
         "at": "2026-07-21T08:52:20+00:00",
         "content_hash": "123c7dd36bd6c76370537f7809d360dbd1879508300808afe4c1a3ad9569591c",
+        "version": "1.0.0",
+        "status": "COMPLETE",
+        "path": "00-CEP/STAGE-02-S2-03-UNIVERSE-FOUNDATION-BINDING.md",
+        "name": "UCOS Ω∞ — STAGE 02 · S2-03 — UNIVERSE FOUNDATION BINDING"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "ee517ee53b48b748637f78ffb77cb1023c58538cdcc4cac94317b504725f6bf5",
         "version": "1.0.0",
         "status": "COMPLETE",
         "path": "00-CEP/STAGE-02-S2-03-UNIVERSE-FOUNDATION-BINDING.md",
@@ -20340,6 +20725,15 @@
         "status": "ACTIVE",
         "path": "04-IMPLEMENTATION-WAVES.md",
         "name": "04 — IMPLEMENTATION WAVES"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "f7d484bc9d56f4b832f188b50d0e558056f4a40aa835b5a71ca40af1b1dbb33a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-IMPLEMENTATION-WAVES.md",
+        "name": "04 — IMPLEMENTATION WAVES"
       }
     ],
     "UCOS-IMPLEMENTATI-000008": [
@@ -20413,6 +20807,15 @@
         "seq": 1,
         "at": "2026-07-23T18:10:16+00:00",
         "content_hash": "66ed7ab34157c1f4259b8ef2ca211fd540f7439e89fb67e24575d0ac72e7f09f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "01-EXECUTION-CONTROLLER-ARCHITECTURE.md",
+        "name": "01 — EXECUTION CONTROLLER ARCHITECTURE"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "3e66b19dcb703ea3326e61892ba809e5fc2f7e5e84d05613ac69e2d14a9a64c6",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "01-EXECUTION-CONTROLLER-ARCHITECTURE.md",
@@ -20736,6 +21139,490 @@
         "status": "FROZEN",
         "path": "04-REFERENCE/UCOS Ω.docx",
         "name": "Ucos Ω"
+      }
+    ],
+    "UCOS-IAC001A-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T12:34:51+00:00",
+        "content_hash": "d64cdc7d19b44131e796cd7eeac55e6edb4a1df28c5486bc41e5da4a05981848",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001A/01-REPOSITORY-AUTHORITY-INVENTORY.md",
+        "name": "01 — REPOSITORY AUTHORITY INVENTORY"
+      }
+    ],
+    "UCOS-IAC001A-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T12:35:06+00:00",
+        "content_hash": "06daed8c3e7e5f00162417a43ad930b8383cf065b4146f86782f2f46c2e317ab",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001A/02-CANONICAL-ARTIFACTS.md",
+        "name": "02 — CANONICAL ARTIFACTS"
+      }
+    ],
+    "UCOS-IAC001A-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T12:35:43+00:00",
+        "content_hash": "a4b4e2d5e384e193e7de65e039aaa37f0918369224de0646e6f227e0c4f6ce9c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001A/03-DERIVED-ARTIFACTS.md",
+        "name": "03 — DERIVED ARTIFACTS"
+      }
+    ],
+    "UCOS-IAC001A-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T12:36:03+00:00",
+        "content_hash": "2e6db229c818adf6c8562a60f302065ed275c3ff436b784a403c3e0b1b753ad2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001A/04-GENERATED-ARTIFACTS.md",
+        "name": "04 — GENERATED ARTIFACTS"
+      }
+    ],
+    "UCOS-IAC001A-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T12:36:33+00:00",
+        "content_hash": "b3f6bcf7c8f833a1f919a5a68e7d1f8c4c02011deea0b73af3e8e8c305883d75",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001A/05-NON-AUTHORITATIVE-ARTIFACTS.md",
+        "name": "05 — NON-AUTHORITATIVE ARTIFACTS"
+      }
+    ],
+    "UCOS-IAC001A-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T12:37:02+00:00",
+        "content_hash": "d5524eabcfcec4c257d060055fb97a0473cf81ec12a8d1be42763c856c157711",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001A/06-AUTHORITY-CLASSIFICATION-MATRIX.md",
+        "name": "06 — AUTHORITY CLASSIFICATION MATRIX"
+      }
+    ],
+    "UCOS-IAC001A-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T12:37:51+00:00",
+        "content_hash": "7a341249f41a5856fbe0c3dbb79f6dbc2a800295de67486237eb7d53cf211660",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001A/07-FINAL-DETERMINATION.md",
+        "name": "07 — FINAL DETERMINATION"
+      }
+    ],
+    "UCOS-IAC001B-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:03:21+00:00",
+        "content_hash": "3fdd36510cccf59c999ef2301f17ecd5941dc06bf0fceaeabe23658449496799",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001B/01-CANONICAL-KNOWLEDGE-INVENTORY.md",
+        "name": "01 — CANONICAL KNOWLEDGE INVENTORY"
+      }
+    ],
+    "UCOS-IAC001B-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:03:41+00:00",
+        "content_hash": "34eeaf1d0a29b86b07b0d5d5b1e8ea30b5fc4bebc444a9ab673405748496cd45",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001B/02-KNOWLEDGE-ONCE-CERTIFICATION.md",
+        "name": "02 — KNOWLEDGE ONCE CERTIFICATION"
+      }
+    ],
+    "UCOS-IAC001B-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:04:04+00:00",
+        "content_hash": "99c49c42768d1447091271b19ecc4959129800d9893eb60ab8f535bc109f2965",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001B/03-CANONICAL-OWNERSHIP.md",
+        "name": "03 — CANONICAL OWNERSHIP"
+      }
+    ],
+    "UCOS-IAC001B-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:04:21+00:00",
+        "content_hash": "6dc2717d3506a5f2e8b49676eeebef60dfac8d553772e4858d3d9b136b985c57",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001B/04-KNOWLEDGE-CLASSIFICATION.md",
+        "name": "04 — KNOWLEDGE CLASSIFICATION"
+      }
+    ],
+    "UCOS-IAC001B-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:04:44+00:00",
+        "content_hash": "5e9ad82e2936ce4e2f8001c0f5443fda71bbad303cccb5c3234babe9c314a9df",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001B/05-TRACEABILITY.md",
+        "name": "05 — TRACEABILITY"
+      }
+    ],
+    "UCOS-IAC001B-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:05:00+00:00",
+        "content_hash": "b3db1ef750d56e5531f481ffa2cbb2140fead24b0cae0c1cc2efc37e7ab262ee",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001B/06-ORPHAN-DETERMINATION.md",
+        "name": "06 — ORPHAN DETERMINATION"
+      }
+    ],
+    "UCOS-CON-000048": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:05:22+00:00",
+        "content_hash": "d4ce550b73af73a2d638af63f3522b1c483d6f885f59ac9a7bbe7fa4df2e1dd7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001B/07-CONSTITUTIONAL-COVERAGE.md",
+        "name": "07 — CONSTITUTIONAL COVERAGE"
+      }
+    ],
+    "UCOS-IAC001B-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:05:35+00:00",
+        "content_hash": "7659c26fb0eb7af516e2e78a36620ef97b38603dd2f80f5c4250043e531506cf",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001B/08-IMPLEMENTATION-DESTINATIONS.md",
+        "name": "08 — IMPLEMENTATION DESTINATIONS"
+      }
+    ],
+    "UCOS-IAC001B-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:06:09+00:00",
+        "content_hash": "e9ebbadc3d925126196abb5bd9ad8d0e43361b857757b5eee205b4f03d450dba",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001B/09-FINAL-CERTIFICATION.md",
+        "name": "09 — FINAL CERTIFICATION"
+      }
+    ],
+    "UCOS-IAC001C-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:50:51+00:00",
+        "content_hash": "d2c69aead457c4818961439c08153a05eb529790a8e861b2631e2bf4f202065a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001C/01-CANONICAL-RELATIONSHIP-INVENTORY.md",
+        "name": "01 — CANONICAL RELATIONSHIP INVENTORY"
+      }
+    ],
+    "UCOS-IAC001C-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:51:01+00:00",
+        "content_hash": "199c62c146ce29a25dc3323c8877f6cab30acb682ce08b8d4b58644234ccaff0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001C/02-RELATIONSHIP-MATRIX.md",
+        "name": "02 — RELATIONSHIP MATRIX"
+      }
+    ],
+    "UCOS-IAC001C-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:51:34+00:00",
+        "content_hash": "eb5b01634f801ba257ac6cc2da2da07040bc648533be1e20a257d3af288ba542",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001C/03-DEPENDENCY-GRAPH.md",
+        "name": "03 — DEPENDENCY GRAPH"
+      }
+    ],
+    "UCOS-IAC001C-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:51:43+00:00",
+        "content_hash": "991e6fce652044c0a2ccf46b9d15a5be7ee000153d7353ba633088af20ceb13b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001C/04-COMPOSITION-GRAPH.md",
+        "name": "04 — COMPOSITION GRAPH"
+      }
+    ],
+    "UCOS-IAC001C-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:52:02+00:00",
+        "content_hash": "e4670ef73656c5f295983bb7cbfef451787373b0d0cf6ad2f03f16e6d4a4aa39",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001C/06-TRACEABILITY-GRAPH.md",
+        "name": "06 — TRACEABILITY GRAPH"
+      }
+    ],
+    "UCOS-IAC001C-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:52:13+00:00",
+        "content_hash": "952119dc5c899d35005af853e75e0174ec08e020674972d5c87dc6d6a9539cde",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001C/05-REALIZATION-GRAPH.md",
+        "name": "05 — REALIZATION GRAPH"
+      }
+    ],
+    "UCOS-IAC001C-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:52:37+00:00",
+        "content_hash": "a72ee54a4dbbc166c98c082a465437dc328038cadd47e9716919358bca037020",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001C/08-IMPLEMENTATION-GRAPH.md",
+        "name": "08 — IMPLEMENTATION GRAPH"
+      }
+    ],
+    "UCOS-IAC001C-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:52:46+00:00",
+        "content_hash": "1ed915ec0c24c30b8e1c3af489111736b15123ec02ec10628fe2cc405771d966",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001C/07-ORPHAN-RELATIONSHIPS.md",
+        "name": "07 — ORPHAN RELATIONSHIPS"
+      }
+    ],
+    "UCOS-IAC001C-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T15:53:16+00:00",
+        "content_hash": "49690a3a97eb8b93bf9da43ebb993fb1fdcab282f6e0cda723f133954fe5a134",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001C/09-FINAL-CERTIFICATION.md",
+        "name": "09 — FINAL CERTIFICATION"
+      }
+    ],
+    "UCOS-IAC001D-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:00:16+00:00",
+        "content_hash": "de16f7592f2d07f3a7088c346bc6755fa7dbbb0f3f7b73df8ca6e010b488f5b4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001D/01-CAPABILITY-INVENTORY.md",
+        "name": "01 — CAPABILITY INVENTORY"
+      }
+    ],
+    "UCOS-IAC001D-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:00:24+00:00",
+        "content_hash": "9f033206e2c1f8b07d5e1fdcdec46909f0a9a7fcae217920e30f3b509123f34a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001D/02-CAPABILITY-OWNERSHIP.md",
+        "name": "02 — CAPABILITY OWNERSHIP"
+      }
+    ],
+    "UCOS-IAC001D-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:00:49+00:00",
+        "content_hash": "a2c5581e3c5e39dacdc2e9d2fa2ad4bf85119a01feeb14855ec044e6efb3c912",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001D/03-CAPABILITY-COVERAGE-MATRIX.md",
+        "name": "03 — CAPABILITY COVERAGE MATRIX"
+      }
+    ],
+    "UCOS-IAC001D-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:01:01+00:00",
+        "content_hash": "f2972a97007c9315705ec83738a404df48ece17107d9319ec2bdf12c7644d14d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001D/04-CAPABILITY-GAP-REGISTER.md",
+        "name": "04 — CAPABILITY GAP REGISTER"
+      }
+    ],
+    "UCOS-IAC001D-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:01:24+00:00",
+        "content_hash": "df186e039ef66211d30743e8f0fa1e14acb6a71d9f4a92029261b848a8595402",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001D/05-REUSE-ANALYSIS.md",
+        "name": "05 — REUSE ANALYSIS"
+      }
+    ],
+    "UCOS-IAC001D-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:01:33+00:00",
+        "content_hash": "6c8b90c07a75b41f1325c20aadf20bd72e3f69f405c37eb6fa28817e3d2de9a6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001D/06-DUPLICATION-ANALYSIS.md",
+        "name": "06 — DUPLICATION ANALYSIS"
+      }
+    ],
+    "UCOS-CON-000049": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:01:57+00:00",
+        "content_hash": "62c0a9da8bf570a0906ca6891735a18efb64559eaf5638bd5b986b54b62a9d4e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001D/07-CONSTITUTIONAL-COMPLETENESS.md",
+        "name": "07 — CONSTITUTIONAL COMPLETENESS"
+      }
+    ],
+    "UCOS-IAC001D-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:02:08+00:00",
+        "content_hash": "7b58303055b2022c461765cdab7d54afeec137fd6f0b5a6613bda2ab7b82f14f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001D/08-IMPLEMENTATION-IMPACT.md",
+        "name": "08 — IMPLEMENTATION IMPACT"
+      }
+    ],
+    "UCOS-IAC001D-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:02:35+00:00",
+        "content_hash": "159ae774e7b47f922f0593838dbbcab96ff1b08289479facb63407ef2016ad37",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001D/09-FINAL-CERTIFICATION.md",
+        "name": "09 — FINAL CERTIFICATION"
+      }
+    ],
+    "UCOS-IAC001E-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:09:09+00:00",
+        "content_hash": "9c5fe9cdc448593d89a9302ed8e997c52354673901ec83e4ec5878db4bc19a96",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001E/01-IMPLEMENTATION-AUTHORITY.md",
+        "name": "01 — IMPLEMENTATION AUTHORITY"
+      }
+    ],
+    "UCOS-IAC001E-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:09:19+00:00",
+        "content_hash": "208fc42faeb2b453b2e92a8b43d9d1fa3921c0cf0389b148d0cde5025fa26d71",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001E/02-IMPLEMENTATION-DESTINATIONS.md",
+        "name": "02 — IMPLEMENTATION DESTINATIONS"
+      }
+    ],
+    "UCOS-IAC001E-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:09:44+00:00",
+        "content_hash": "eb65cb24761205c5600d6be8705899874283808df4182427022cf9f7ab0a77cf",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001E/03-IMPLEMENTATION-PREREQUISITES.md",
+        "name": "03 — IMPLEMENTATION PREREQUISITES"
+      }
+    ],
+    "UCOS-IAC001E-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:09:56+00:00",
+        "content_hash": "17dfb59fe8ceccf11f4e352b77982d16b19b89ab7b8d50b1280d150928624d78",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001E/04-IMPLEMENTATION-BLOCKERS.md",
+        "name": "04 — IMPLEMENTATION BLOCKERS"
+      }
+    ],
+    "UCOS-IAC001E-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:10:18+00:00",
+        "content_hash": "b84bbbd55a96a163adfe045559ab1c3e7e712f0563556bbb69f56c7b8bbfb663",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001E/05-IMPLEMENTATION-GRAPH.md",
+        "name": "05 — IMPLEMENTATION GRAPH"
+      }
+    ],
+    "UCOS-IAC001E-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:10:27+00:00",
+        "content_hash": "c4e9bddc9a05e3d5e61379e318399af0767efd7716dc632278ab69a29440578f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001E/06-IMPLEMENTATION-GOVERNANCE.md",
+        "name": "06 — IMPLEMENTATION GOVERNANCE"
+      }
+    ],
+    "UCOS-IAC001E-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:11:03+00:00",
+        "content_hash": "4042cd252f5ffe2191a16a23551a6b4c441efe5744a7f0a05734796956a93f46",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001E/08-AUTHORITY-EVIDENCE.md",
+        "name": "08 — AUTHORITY EVIDENCE"
+      }
+    ],
+    "UCOS-IAC001E-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:11:41+00:00",
+        "content_hash": "04cd94a7d2243170fa90c001c64c633d01101374ead47f78e6f8ddd7f9e8d837",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001E/07-IMPLEMENTATION-READINESS.md",
+        "name": "07 — IMPLEMENTATION READINESS"
+      }
+    ],
+    "UCOS-IAC001E-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-24T16:11:41+00:00",
+        "content_hash": "1ed49b26b39ed6cffe7368bde52ada8ec2bc218c564b8e25fac380214c3533b7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IAC-001E/09-FINAL-CERTIFICATION.md",
+        "name": "09 — FINAL CERTIFICATION"
+      }
+    ],
+    "UCOS-PLT-000051": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T03:06:54+00:00",
+        "content_hash": "2eaa49fc5d85b438ff68a996b898079461c8503bc1df4c0db582cac5b35c793b",
+        "version": "1.0.0",
+        "status": "CERTIFIED",
+        "path": "platform/security/EC2-CAP-SEC-001-SEC-CLASS-CERTIFICATION-REPORT.md",
+        "name": "EC2-CAP-SEC-001 · SEC-CLASS — Security Classification Binding Runtime — Certification Report"
       }
     ]
   }
