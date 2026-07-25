@@ -9,16 +9,24 @@ from engine.factory import build_default_registry
 from engine.factory.classifier import resolve_blueprint_class
 from engine.factory.contracts import FactoryCapability, FactoryDescriptor
 from engine.factory.errors import FactoryNotFoundError, FactoryRegistrationError
-from engine.factory.factories import ApiFactory, DataFactory
+from engine.factory.factories import ApiFactory, DataFactory, EventFactory, WorkflowFactory
 from engine.factory.factories.base import BaseFactory
 from engine.factory.registry import FactoryRegistry
 
 
-def test_default_registry_has_four_factories():
+def test_default_registry_has_six_factories():
     registry = build_default_registry()
-    assert len(registry) == 4
+    assert len(registry) == 6
     classes = [d.blueprint_class for d in registry.list_factories()]
-    assert classes == ["BP-API", "BP-APPLICATION", "BP-DATA", "BP-SERVICE"]  # sorted, deterministic
+    # sorted, deterministic — one factory per registered realization family
+    assert classes == [
+        "BP-API",
+        "BP-APPLICATION",
+        "BP-DATA",
+        "BP-EVENT",
+        "BP-SERVICE",
+        "BP-WORKFLOW",
+    ]
 
 
 def test_register_returns_immutable_descriptor():
@@ -62,16 +70,31 @@ def test_resolve_unregistered_family_rejected():
     assert "no factory is registered" in exc.value.message
 
 
+def test_resolve_new_realizers_event_and_workflow():
+    registry = build_default_registry()
+    assert isinstance(registry.resolve_factory(BlueprintFamily.EVENT), EventFactory)
+    assert isinstance(registry.resolve_factory("BP-WORKFLOW"), WorkflowFactory)
+    event = registry.resolve_factory(BlueprintFamily.EVENT)
+    workflow = registry.resolve_factory(BlueprintFamily.WORKFLOW)
+    assert event.descriptor.name == "event-factory"
+    assert workflow.descriptor.name == "workflow-factory"
+    assert event.capability.blueprint_class == "BP-EVENT"
+    assert workflow.capability.blueprint_class == "BP-WORKFLOW"
+
+
 def test_has_factory():
     registry = build_default_registry()
     assert registry.has_factory("BP-DATA") is True
-    assert registry.has_factory(BlueprintFamily.EVENT) is False
+    assert registry.has_factory(BlueprintFamily.EVENT) is True
+    assert registry.has_factory(BlueprintFamily.WORKFLOW) is True
+    # CONTRACT has no factory in the default set (API contracts realize within API)
+    assert registry.has_factory(BlueprintFamily.CONTRACT) is False
 
 
 def test_capability_discovery():
     registry = build_default_registry()
     caps = registry.capabilities()
-    assert len(caps) == 4
+    assert len(caps) == 6
     assert all(isinstance(c, FactoryCapability) for c in caps)
     # every factory shares the same uniform stage set (one execution path)
     uniform = {("classify", "compile", "assemble", "deploy", "evidence")}

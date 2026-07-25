@@ -44,6 +44,8 @@ def test_generate_records_evidence(orchestrator):
     ("blueprint_id", "blueprint_class", "factory_name"),
     [
         ("BP-API-0001", "BP-API", "api-factory"),
+        ("BP-EVENT-0001", "BP-EVENT", "event-factory"),
+        ("BP-WORKFLOW-0001", "BP-WORKFLOW", "workflow-factory"),
         ("BP-SERVICE-0001", "BP-SERVICE", "service-factory"),
         ("BP-APPLICATION-0001", "BP-APPLICATION", "application-factory"),
     ],

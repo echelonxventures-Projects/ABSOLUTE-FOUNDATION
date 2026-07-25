@@ -18,20 +18,26 @@ from engine.factory.factories.base import (
     FactoryExecution,
 )
 from engine.factory.factories.data import DataFactory
+from engine.factory.factories.event import EventFactory
 from engine.factory.factories.service import ServiceFactory
+from engine.factory.factories.workflow import WorkflowFactory
 from engine.factory.registry import FactoryRegistry
 
-#: The initial factory set, in deterministic construction order.
+#: The factory set, in deterministic construction order following the closed
+#: realization chain (Data → Event → API → Workflow → Service → Application;
+#: REF-000 §19). One factory per registered BlueprintFamily realization class.
 DEFAULT_FACTORIES: tuple[type[BaseFactory], ...] = (
     DataFactory,
+    EventFactory,
     ApiFactory,
+    WorkflowFactory,
     ServiceFactory,
     ApplicationFactory,
 )
 
 
 def build_default_registry() -> FactoryRegistry:
-    """Construct a registry with the four initial factories explicitly registered."""
+    """Construct a registry with the initial factories explicitly registered."""
     registry = FactoryRegistry()
     for factory_cls in DEFAULT_FACTORIES:
         registry.register_factory(factory_cls())
@@ -45,7 +51,9 @@ __all__ = [
     "FactoryExecution",
     "ExecutionContext",
     "DataFactory",
+    "EventFactory",
     "ApiFactory",
+    "WorkflowFactory",
     "ServiceFactory",
     "ApplicationFactory",
     "DEFAULT_FACTORIES",
