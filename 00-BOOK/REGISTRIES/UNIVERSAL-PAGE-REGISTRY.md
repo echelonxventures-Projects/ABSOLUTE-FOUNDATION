@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 9429  ·  **Page cursor (next free):** UPN-000009430
+**Pages allocated:** 9499  ·  **Page cursor (next free):** UPN-000009500
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1132,5 +1132,45 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000009421 | UPN-000009422 | 2 | `UCOS-IAC001E-000009` | 000 | 09 — FINAL CERTIFICATION |
 | UPN-000009423 | UPN-000009426 | 4 | `UCOS-PLT-000051` | 006 | EC2-CAP-SEC-001 · SEC-CLASS — Security Classi… |
 | UPN-000009427 | UPN-000009429 | 3 | `UCOS-USIS-000006` | 024 | USIS-005 — Theory / Ontology / Taxonomy Found… |
+| UPN-000009430 | UPN-000009432 | 3 | `UCOS-USIS-000007` | 024 | USIS-007 — Domain Architecture |
+| UPN-000009433 | UPN-000009435 | 3 | `UCOS-USIS-000008` | 024 | USIS-006 — Capability Architecture |
+| UPN-000009436 | UPN-000009438 | 3 | `UCOS-USIS-000009` | 024 | USIS-009 — Model Architecture |
+| UPN-000009439 | UPN-000009441 | 3 | `UCOS-USIS-000010` | 024 | USIS-008 — Algorithm Architecture |
+| UPN-000009442 | UPN-000009444 | 3 | `UCOS-USIS-000011` | 024 | USIS-010 — Pattern Architecture |
+| UPN-000009445 | UPN-000009447 | 3 | `UCOS-USIS-000012` | 024 | USIS-011 — Engine Architecture |
+| UPN-000009448 | UPN-000009450 | 3 | `UCOS-USIS-000013` | 024 | USIS-013 — Runtime Architecture |
+| UPN-000009451 | UPN-000009453 | 3 | `UCOS-USIS-000014` | 024 | USIS-012 — Service Architecture |
+| UPN-000009454 | UPN-000009456 | 3 | `UCOS-USIS-000015` | 024 | USIS-017 — API & SDK Architecture |
+| UPN-000009457 | UPN-000009459 | 3 | `UCOS-USIS-000016` | 024 | USIS-INT-001 — Wave-2 Implementation Integration |
+| UPN-000009460 | UPN-000009463 | 4 | `UCOS-USIS-000017` | 024 | USIS-014 — Validation Architecture |
+| UPN-000009464 | UPN-000009464 | 1 | `UCOS-EVOUSIS014-000001` | 000 | EVO-USIS-014 · 01 — Context Delta Verificatio… |
+| UPN-000009465 | UPN-000009465 | 1 | `UCOS-EVOUSIS014-000002` | 000 | EVO-USIS-014 · 02 — Repository Structure Veri… |
+| UPN-000009466 | UPN-000009466 | 1 | `UCOS-EVOUSIS014-000003` | 000 | EVO-USIS-014 · 03 — Implementation Report |
+| UPN-000009467 | UPN-000009467 | 1 | `UCOS-EVOUSIS014-000004` | 000 | EVO-USIS-014 · 04 — Registration Report |
+| UPN-000009468 | UPN-000009468 | 1 | `UCOS-EVOUSIS014-000005` | 000 | EVO-USIS-014 · 05 — Validation Report |
+| UPN-000009469 | UPN-000009469 | 1 | `UCOS-EVOUSIS014-000006` | 000 | EVO-USIS-014 · 06 — Certification Report |
+| UPN-000009470 | UPN-000009470 | 1 | `UCOS-EVOUSIS014-000007` | 000 | EVO-USIS-014 · 07 — Coverage Closure Certificate |
+| UPN-000009471 | UPN-000009471 | 1 | `UCOS-EVOUSIS014-000008` | 000 | EVO-USIS-014 · 08 — Cross-Layer Consistency &… |
+| UPN-000009472 | UPN-000009472 | 1 | `UCOS-EVOUSIS014-000009` | 000 | EVO-USIS-014 · 09 — Repository Evidence Report |
+| UPN-000009473 | UPN-000009476 | 4 | `UCOS-USIS-000018` | 024 | USIS-015 — Certification Architecture |
+| UPN-000009477 | UPN-000009477 | 1 | `UCOS-EVOUSIS015-000001` | 000 | EVO-USIS-015 · 01 — Context Delta Report |
+| UPN-000009478 | UPN-000009478 | 1 | `UCOS-EVOUSIS015-000002` | 000 | EVO-USIS-015 · 02 — Repository Structure Report |
+| UPN-000009479 | UPN-000009479 | 1 | `UCOS-EVOUSIS015-000003` | 000 | EVO-USIS-015 · 03 — Implementation Report |
+| UPN-000009480 | UPN-000009480 | 1 | `UCOS-EVOUSIS015-000004` | 000 | EVO-USIS-015 · 04 — Registration Report |
+| UPN-000009481 | UPN-000009481 | 1 | `UCOS-EVOUSIS015-000005` | 000 | EVO-USIS-015 · 05 — Validation Report |
+| UPN-000009482 | UPN-000009482 | 1 | `UCOS-EVOUSIS015-000006` | 000 | EVO-USIS-015 · 06 — Certification Report |
+| UPN-000009483 | UPN-000009483 | 1 | `UCOS-EVOUSIS015-000007` | 000 | EVO-USIS-015 · 07 — Coverage Certificate |
+| UPN-000009484 | UPN-000009484 | 1 | `UCOS-EVOUSIS015-000008` | 000 | EVO-USIS-015 · 08 — Whole-Corpus Certificatio… |
+| UPN-000009485 | UPN-000009485 | 1 | `UCOS-EVOUSIS015-000009` | 000 | EVO-USIS-015 · 09 — Repository Evidence Report |
+| UPN-000009486 | UPN-000009489 | 4 | `UCOS-USIS-000019` | 024 | USIS-016 — Evidence Architecture |
+| UPN-000009490 | UPN-000009490 | 1 | `UCOS-EVOUSIS016-000001` | 000 | EVO-USIS-016 · 01 — Context Delta Report |
+| UPN-000009491 | UPN-000009491 | 1 | `UCOS-EVOUSIS016-000002` | 000 | EVO-USIS-016 · 02 — Repository Structure Report |
+| UPN-000009492 | UPN-000009493 | 2 | `UCOS-EVOUSIS016-000003` | 000 | EVO-USIS-016 · 03 — Implementation Report |
+| UPN-000009494 | UPN-000009494 | 1 | `UCOS-EVOUSIS016-000004` | 000 | EVO-USIS-016 · 04 — Registration Report |
+| UPN-000009495 | UPN-000009495 | 1 | `UCOS-EVOUSIS016-000005` | 000 | EVO-USIS-016 · 05 — Validation Report |
+| UPN-000009496 | UPN-000009496 | 1 | `UCOS-EVOUSIS016-000006` | 000 | EVO-USIS-016 · 06 — Certification Report |
+| UPN-000009497 | UPN-000009497 | 1 | `UCOS-EVOUSIS016-000007` | 000 | EVO-USIS-016 · 07 — Coverage Closure Certificate |
+| UPN-000009498 | UPN-000009498 | 1 | `UCOS-EVOUSIS016-000008` | 000 | EVO-USIS-016 · 08 — Whole-Corpus Certificatio… |
+| UPN-000009499 | UPN-000009499 | 1 | `UCOS-EVOUSIS016-000009` | 000 | EVO-USIS-016 · 09 — Repository Evidence Report |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

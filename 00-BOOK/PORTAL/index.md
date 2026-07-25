@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-25T05:20:50+00:00 by ukbx portal. 1124 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-25T08:43:57+00:00 by ukbx portal. 1164 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1128,3 +1128,43 @@
 | [UCOS-IAC001E-000009](UCOS-IAC001E-000009.md) | 09 — FINAL CERTIFICATION | VOL-000 | ACTIVE |
 | [UCOS-PLT-000051](UCOS-PLT-000051.md) | EC2-CAP-SEC-001 · SEC-CLASS — Security Classification Bindin | VOL-006 | CERTIFIED |
 | [UCOS-USIS-000006](UCOS-USIS-000006.md) | USIS-005 — Theory / Ontology / Taxonomy Foundation | VOL-024 | ACTIVE |
+| [UCOS-USIS-000007](UCOS-USIS-000007.md) | USIS-007 — Domain Architecture | VOL-024 | ACTIVE |
+| [UCOS-USIS-000008](UCOS-USIS-000008.md) | USIS-006 — Capability Architecture | VOL-024 | ACTIVE |
+| [UCOS-USIS-000009](UCOS-USIS-000009.md) | USIS-009 — Model Architecture | VOL-024 | ACTIVE |
+| [UCOS-USIS-000010](UCOS-USIS-000010.md) | USIS-008 — Algorithm Architecture | VOL-024 | ACTIVE |
+| [UCOS-USIS-000011](UCOS-USIS-000011.md) | USIS-010 — Pattern Architecture | VOL-024 | ACTIVE |
+| [UCOS-USIS-000012](UCOS-USIS-000012.md) | USIS-011 — Engine Architecture | VOL-024 | ACTIVE |
+| [UCOS-USIS-000013](UCOS-USIS-000013.md) | USIS-013 — Runtime Architecture | VOL-024 | ACTIVE |
+| [UCOS-USIS-000014](UCOS-USIS-000014.md) | USIS-012 — Service Architecture | VOL-024 | ACTIVE |
+| [UCOS-USIS-000015](UCOS-USIS-000015.md) | USIS-017 — API & SDK Architecture | VOL-024 | ACTIVE |
+| [UCOS-USIS-000016](UCOS-USIS-000016.md) | USIS-INT-001 — Wave-2 Implementation Integration | VOL-024 | ACTIVE |
+| [UCOS-USIS-000017](UCOS-USIS-000017.md) | USIS-014 — Validation Architecture | VOL-024 | ACTIVE |
+| [UCOS-EVOUSIS014-000001](UCOS-EVOUSIS014-000001.md) | EVO-USIS-014 · 01 — Context Delta Verification Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS014-000002](UCOS-EVOUSIS014-000002.md) | EVO-USIS-014 · 02 — Repository Structure Verification Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS014-000003](UCOS-EVOUSIS014-000003.md) | EVO-USIS-014 · 03 — Implementation Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS014-000004](UCOS-EVOUSIS014-000004.md) | EVO-USIS-014 · 04 — Registration Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS014-000005](UCOS-EVOUSIS014-000005.md) | EVO-USIS-014 · 05 — Validation Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS014-000006](UCOS-EVOUSIS014-000006.md) | EVO-USIS-014 · 06 — Certification Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS014-000007](UCOS-EVOUSIS014-000007.md) | EVO-USIS-014 · 07 — Coverage Closure Certificate | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS014-000008](UCOS-EVOUSIS014-000008.md) | EVO-USIS-014 · 08 — Cross-Layer Consistency & Regression Ver | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS014-000009](UCOS-EVOUSIS014-000009.md) | EVO-USIS-014 · 09 — Repository Evidence Report | VOL-000 | ACTIVE |
+| [UCOS-USIS-000018](UCOS-USIS-000018.md) | USIS-015 — Certification Architecture | VOL-024 | ACTIVE |
+| [UCOS-EVOUSIS015-000001](UCOS-EVOUSIS015-000001.md) | EVO-USIS-015 · 01 — Context Delta Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS015-000002](UCOS-EVOUSIS015-000002.md) | EVO-USIS-015 · 02 — Repository Structure Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS015-000003](UCOS-EVOUSIS015-000003.md) | EVO-USIS-015 · 03 — Implementation Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS015-000004](UCOS-EVOUSIS015-000004.md) | EVO-USIS-015 · 04 — Registration Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS015-000005](UCOS-EVOUSIS015-000005.md) | EVO-USIS-015 · 05 — Validation Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS015-000006](UCOS-EVOUSIS015-000006.md) | EVO-USIS-015 · 06 — Certification Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS015-000007](UCOS-EVOUSIS015-000007.md) | EVO-USIS-015 · 07 — Coverage Certificate | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS015-000008](UCOS-EVOUSIS015-000008.md) | EVO-USIS-015 · 08 — Whole-Corpus Certification & Regression  | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS015-000009](UCOS-EVOUSIS015-000009.md) | EVO-USIS-015 · 09 — Repository Evidence Report | VOL-000 | ACTIVE |
+| [UCOS-USIS-000019](UCOS-USIS-000019.md) | USIS-016 — Evidence Architecture | VOL-024 | ACTIVE |
+| [UCOS-EVOUSIS016-000001](UCOS-EVOUSIS016-000001.md) | EVO-USIS-016 · 01 — Context Delta Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS016-000002](UCOS-EVOUSIS016-000002.md) | EVO-USIS-016 · 02 — Repository Structure Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS016-000003](UCOS-EVOUSIS016-000003.md) | EVO-USIS-016 · 03 — Implementation Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS016-000004](UCOS-EVOUSIS016-000004.md) | EVO-USIS-016 · 04 — Registration Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS016-000005](UCOS-EVOUSIS016-000005.md) | EVO-USIS-016 · 05 — Validation Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS016-000006](UCOS-EVOUSIS016-000006.md) | EVO-USIS-016 · 06 — Certification Report | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS016-000007](UCOS-EVOUSIS016-000007.md) | EVO-USIS-016 · 07 — Coverage Closure Certificate | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS016-000008](UCOS-EVOUSIS016-000008.md) | EVO-USIS-016 · 08 — Whole-Corpus Certification & Regression  | VOL-000 | ACTIVE |
+| [UCOS-EVOUSIS016-000009](UCOS-EVOUSIS016-000009.md) | EVO-USIS-016 · 09 — Repository Evidence Report | VOL-000 | ACTIVE |

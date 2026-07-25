@@ -6,7 +6,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 718 | UPN-000000001–UPN-000009422 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 745 | UPN-000000001–UPN-000009499 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 50 | UPN-000001327–UPN-000009409 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 57 | UPN-000000022–UPN-000009371 |
@@ -29,14 +29,14 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-020` | 20 | CONTROL TOWER | CTL | ACTIVE | 12 | UPN-000004183–UPN-000005972 |
 | `VOL-021` | 21 | DIGITAL TWIN | ADV | ACTIVE | 20 | UPN-000004965–UPN-000005013 |
 | `VOL-022` | 22 | MASTER BOOK ARCHITECTURE | UMB | ACTIVE | 31 | UPN-000005247–UPN-000005480 |
-| `VOL-024` | 24 | UNIVERSAL SCIENCE & INTELLIGENCE | USIS | ACTIVE | 6 | UPN-000009133–UPN-000009429 |
+| `VOL-024` | 24 | UNIVERSAL SCIENCE & INTELLIGENCE | USIS | ACTIVE | 19 | UPN-000009133–UPN-000009489 |
 | `VOL-023` | 23 | SECURITY-GOVERNANCE | SEC | ACTIVE | 5 | UPN-000008900–UPN-000008934 |
 
 
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 718
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 745
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -758,6 +758,33 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-IAC001E-000007` | 08 — AUTHORITY EVIDENCE | — | ACTIVE |
 | `UCOS-IAC001E-000008` | 07 — IMPLEMENTATION READINESS | — | ACTIVE |
 | `UCOS-IAC001E-000009` | 09 — FINAL CERTIFICATION | — | ACTIVE |
+| `UCOS-EVOUSIS014-000001` | EVO-USIS-014 · 01 — Context Delta Verification Report | — | ACTIVE |
+| `UCOS-EVOUSIS014-000002` | EVO-USIS-014 · 02 — Repository Structure Verification Report | — | ACTIVE |
+| `UCOS-EVOUSIS014-000003` | EVO-USIS-014 · 03 — Implementation Report | — | ACTIVE |
+| `UCOS-EVOUSIS014-000004` | EVO-USIS-014 · 04 — Registration Report | — | ACTIVE |
+| `UCOS-EVOUSIS014-000005` | EVO-USIS-014 · 05 — Validation Report | — | ACTIVE |
+| `UCOS-EVOUSIS014-000006` | EVO-USIS-014 · 06 — Certification Report | — | ACTIVE |
+| `UCOS-EVOUSIS014-000007` | EVO-USIS-014 · 07 — Coverage Closure Certificate | — | ACTIVE |
+| `UCOS-EVOUSIS014-000008` | EVO-USIS-014 · 08 — Cross-Layer Consistency & Regression Veri… | — | ACTIVE |
+| `UCOS-EVOUSIS014-000009` | EVO-USIS-014 · 09 — Repository Evidence Report | — | ACTIVE |
+| `UCOS-EVOUSIS015-000001` | EVO-USIS-015 · 01 — Context Delta Report | — | ACTIVE |
+| `UCOS-EVOUSIS015-000002` | EVO-USIS-015 · 02 — Repository Structure Report | — | ACTIVE |
+| `UCOS-EVOUSIS015-000003` | EVO-USIS-015 · 03 — Implementation Report | — | ACTIVE |
+| `UCOS-EVOUSIS015-000004` | EVO-USIS-015 · 04 — Registration Report | — | ACTIVE |
+| `UCOS-EVOUSIS015-000005` | EVO-USIS-015 · 05 — Validation Report | — | ACTIVE |
+| `UCOS-EVOUSIS015-000006` | EVO-USIS-015 · 06 — Certification Report | — | ACTIVE |
+| `UCOS-EVOUSIS015-000007` | EVO-USIS-015 · 07 — Coverage Certificate | — | ACTIVE |
+| `UCOS-EVOUSIS015-000008` | EVO-USIS-015 · 08 — Whole-Corpus Certification & Regression R… | — | ACTIVE |
+| `UCOS-EVOUSIS015-000009` | EVO-USIS-015 · 09 — Repository Evidence Report | — | ACTIVE |
+| `UCOS-EVOUSIS016-000001` | EVO-USIS-016 · 01 — Context Delta Report | — | ACTIVE |
+| `UCOS-EVOUSIS016-000002` | EVO-USIS-016 · 02 — Repository Structure Report | — | ACTIVE |
+| `UCOS-EVOUSIS016-000003` | EVO-USIS-016 · 03 — Implementation Report | — | ACTIVE |
+| `UCOS-EVOUSIS016-000004` | EVO-USIS-016 · 04 — Registration Report | — | ACTIVE |
+| `UCOS-EVOUSIS016-000005` | EVO-USIS-016 · 05 — Validation Report | — | ACTIVE |
+| `UCOS-EVOUSIS016-000006` | EVO-USIS-016 · 06 — Certification Report | — | ACTIVE |
+| `UCOS-EVOUSIS016-000007` | EVO-USIS-016 · 07 — Coverage Closure Certificate | — | ACTIVE |
+| `UCOS-EVOUSIS016-000008` | EVO-USIS-016 · 08 — Whole-Corpus Certification & Regression R… | — | ACTIVE |
+| `UCOS-EVOUSIS016-000009` | EVO-USIS-016 · 09 — Repository Evidence Report | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -1329,7 +1356,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-024 — UNIVERSAL SCIENCE & INTELLIGENCE <a id="vol-024"></a>
 
 *Universal Science & Intelligence Substrate (USIS): the constitutional substrate beneath every scientific discipline and intelligence paradigm — 21 universes, Universal Science, Human Intelligence, Self-Evolution, and Data/Analytics/Algorithm/Model universes, the 24-tier Universal Capability Meta-Model, reasoning/learning/analytics/simulation runtime, grounding/explanation validation, and explainability/bounded-autonomy/reproducibility certification.*  \
-**Category:** USIS · **Status:** ACTIVE · **Artifacts:** 6
+**Category:** USIS · **Status:** ACTIVE · **Artifacts:** 19
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -1339,6 +1366,19 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-USIS-000004` | USIS-004 — Universal Capability Meta-Model | USIS-004 | ACTIVE |
 | `UCOS-USIS-000005` | USIS-003 — Universal Science Catalog | USIS-003 | ACTIVE |
 | `UCOS-USIS-000006` | USIS-005 — Theory / Ontology / Taxonomy Foundation | USIS-005 | ACTIVE |
+| `UCOS-USIS-000007` | USIS-007 — Domain Architecture | USIS-007 | ACTIVE |
+| `UCOS-USIS-000008` | USIS-006 — Capability Architecture | USIS-006 | ACTIVE |
+| `UCOS-USIS-000009` | USIS-009 — Model Architecture | USIS-009 | ACTIVE |
+| `UCOS-USIS-000010` | USIS-008 — Algorithm Architecture | USIS-008 | ACTIVE |
+| `UCOS-USIS-000011` | USIS-010 — Pattern Architecture | USIS-010 | ACTIVE |
+| `UCOS-USIS-000012` | USIS-011 — Engine Architecture | USIS-011 | ACTIVE |
+| `UCOS-USIS-000013` | USIS-013 — Runtime Architecture | USIS-013 | ACTIVE |
+| `UCOS-USIS-000014` | USIS-012 — Service Architecture | USIS-012 | ACTIVE |
+| `UCOS-USIS-000015` | USIS-017 — API & SDK Architecture | USIS-017 | ACTIVE |
+| `UCOS-USIS-000016` | USIS-INT-001 — Wave-2 Implementation Integration | USIS-INT-001 | ACTIVE |
+| `UCOS-USIS-000017` | USIS-014 — Validation Architecture | USIS-014 | ACTIVE |
+| `UCOS-USIS-000018` | USIS-015 — Certification Architecture | USIS-015 | ACTIVE |
+| `UCOS-USIS-000019` | USIS-016 — Evidence Architecture | USIS-016 | ACTIVE |
 
 ### VOL-023 — SECURITY-GOVERNANCE <a id="vol-023"></a>
 

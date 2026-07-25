@@ -12,11 +12,14 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 
 ## Backlinks (reverse)
 - [UCOS-USIS-000001](UCOS-USIS-000001.md) —Child→
+- [UCOS-USIS-000008](UCOS-USIS-000008.md) —Depends-On→
 - [UCOS-USIS-000003](UCOS-USIS-000003.md) —Required-By→
 - [UCOS-USIS-000004](UCOS-USIS-000004.md) —Required-By→
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) —Authorizes→
 - [UCOS-USIS-000003](UCOS-USIS-000003.md) —Authorizes→
 - [UCOS-USIS-000004](UCOS-USIS-000004.md) —Authorizes→
 - [UCOS-USIS-000004](UCOS-USIS-000004.md) —Implemented-By→
+- [UCOS-USIS-000007](UCOS-USIS-000007.md) —Depends-On→
+- [UCOS-USIS-000007](UCOS-USIS-000007.md) —Authorized-By→
 
 Return: [Portal Index](index.md) · [Master Index](../UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)

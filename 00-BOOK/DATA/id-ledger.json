@@ -8008,9 +8008,289 @@
       "page_start": 9427,
       "page_count": 3,
       "first_seen": "2026-07-25T05:20:49+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/08-DOMAINS/USIS-007-DOMAIN-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000007",
+      "category": "USIS",
+      "page_start": 9430,
+      "page_count": 3,
+      "first_seen": "2026-07-25T06:10:05+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/05-META-MODEL/USIS-006-CAPABILITY-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000008",
+      "category": "USIS",
+      "page_start": 9433,
+      "page_count": 3,
+      "first_seen": "2026-07-25T06:19:48+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/10-MODELS/USIS-009-MODEL-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000009",
+      "category": "USIS",
+      "page_start": 9436,
+      "page_count": 3,
+      "first_seen": "2026-07-25T06:25:46+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/09-ALGORITHMS/USIS-008-ALGORITHM-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000010",
+      "category": "USIS",
+      "page_start": 9439,
+      "page_count": 3,
+      "first_seen": "2026-07-25T06:31:09+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/11-PATTERNS/USIS-010-PATTERN-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000011",
+      "category": "USIS",
+      "page_start": 9442,
+      "page_count": 3,
+      "first_seen": "2026-07-25T06:36:48+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/12-ENGINES/USIS-011-ENGINE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000012",
+      "category": "USIS",
+      "page_start": 9445,
+      "page_count": 3,
+      "first_seen": "2026-07-25T06:42:22+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/14-RUNTIME/USIS-013-RUNTIME-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000013",
+      "category": "USIS",
+      "page_start": 9448,
+      "page_count": 3,
+      "first_seen": "2026-07-25T06:49:30+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/13-SERVICES/USIS-012-SERVICE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000014",
+      "category": "USIS",
+      "page_start": 9451,
+      "page_count": 3,
+      "first_seen": "2026-07-25T06:58:39+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/18-APIS-SDK/USIS-017-API-SDK-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000015",
+      "category": "USIS",
+      "page_start": 9454,
+      "page_count": 3,
+      "first_seen": "2026-07-25T07:06:01+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/20-PROJECTS/USIS-INT-001-WAVE-2-IMPLEMENTATION-INTEGRATION.md": {
+      "universal_id": "UCOS-USIS-000016",
+      "category": "USIS",
+      "page_start": 9457,
+      "page_count": 3,
+      "first_seen": "2026-07-25T07:18:17+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/15-VALIDATION/USIS-014-VALIDATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000017",
+      "category": "USIS",
+      "page_start": 9460,
+      "page_count": 4,
+      "first_seen": "2026-07-25T07:33:13+00:00"
+    },
+    "EVO-USIS-014/01-CONTEXT-DELTA-VERIFICATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS014-000001",
+      "category": "EVOUSIS014",
+      "page_start": 9464,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:41:13+00:00"
+    },
+    "EVO-USIS-014/02-REPOSITORY-STRUCTURE-VERIFICATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS014-000002",
+      "category": "EVOUSIS014",
+      "page_start": 9465,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:41:13+00:00"
+    },
+    "EVO-USIS-014/03-IMPLEMENTATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS014-000003",
+      "category": "EVOUSIS014",
+      "page_start": 9466,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:41:13+00:00"
+    },
+    "EVO-USIS-014/04-REGISTRATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS014-000004",
+      "category": "EVOUSIS014",
+      "page_start": 9467,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:41:13+00:00"
+    },
+    "EVO-USIS-014/05-VALIDATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS014-000005",
+      "category": "EVOUSIS014",
+      "page_start": 9468,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:41:13+00:00"
+    },
+    "EVO-USIS-014/06-CERTIFICATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS014-000006",
+      "category": "EVOUSIS014",
+      "page_start": 9469,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:41:13+00:00"
+    },
+    "EVO-USIS-014/07-COVERAGE-CLOSURE-CERTIFICATE.md": {
+      "universal_id": "UCOS-EVOUSIS014-000007",
+      "category": "EVOUSIS014",
+      "page_start": 9470,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:41:13+00:00"
+    },
+    "EVO-USIS-014/08-CROSS-LAYER-CONSISTENCY-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS014-000008",
+      "category": "EVOUSIS014",
+      "page_start": 9471,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:41:13+00:00"
+    },
+    "EVO-USIS-014/09-REPOSITORY-EVIDENCE-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS014-000009",
+      "category": "EVOUSIS014",
+      "page_start": 9472,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:41:13+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/16-CERTIFICATION/USIS-015-CERTIFICATION-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000018",
+      "category": "USIS",
+      "page_start": 9473,
+      "page_count": 4,
+      "first_seen": "2026-07-25T07:45:48+00:00"
+    },
+    "EVO-USIS-015/01-CONTEXT-DELTA-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS015-000001",
+      "category": "EVOUSIS015",
+      "page_start": 9477,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:49:17+00:00"
+    },
+    "EVO-USIS-015/02-REPOSITORY-STRUCTURE-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS015-000002",
+      "category": "EVOUSIS015",
+      "page_start": 9478,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:49:17+00:00"
+    },
+    "EVO-USIS-015/03-IMPLEMENTATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS015-000003",
+      "category": "EVOUSIS015",
+      "page_start": 9479,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:49:17+00:00"
+    },
+    "EVO-USIS-015/04-REGISTRATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS015-000004",
+      "category": "EVOUSIS015",
+      "page_start": 9480,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:49:17+00:00"
+    },
+    "EVO-USIS-015/05-VALIDATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS015-000005",
+      "category": "EVOUSIS015",
+      "page_start": 9481,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:49:17+00:00"
+    },
+    "EVO-USIS-015/06-CERTIFICATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS015-000006",
+      "category": "EVOUSIS015",
+      "page_start": 9482,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:49:17+00:00"
+    },
+    "EVO-USIS-015/07-COVERAGE-CERTIFICATE.md": {
+      "universal_id": "UCOS-EVOUSIS015-000007",
+      "category": "EVOUSIS015",
+      "page_start": 9483,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:49:17+00:00"
+    },
+    "EVO-USIS-015/08-WHOLE-CORPUS-CERTIFICATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS015-000008",
+      "category": "EVOUSIS015",
+      "page_start": 9484,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:49:17+00:00"
+    },
+    "EVO-USIS-015/09-REPOSITORY-EVIDENCE-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS015-000009",
+      "category": "EVOUSIS015",
+      "page_start": 9485,
+      "page_count": 1,
+      "first_seen": "2026-07-25T07:49:17+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/17-EVIDENCE/USIS-016-EVIDENCE-ARCHITECTURE.md": {
+      "universal_id": "UCOS-USIS-000019",
+      "category": "USIS",
+      "page_start": 9486,
+      "page_count": 4,
+      "first_seen": "2026-07-25T08:39:03+00:00"
+    },
+    "EVO-USIS-016/01-CONTEXT-DELTA-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS016-000001",
+      "category": "EVOUSIS016",
+      "page_start": 9490,
+      "page_count": 1,
+      "first_seen": "2026-07-25T08:43:55+00:00"
+    },
+    "EVO-USIS-016/02-REPOSITORY-STRUCTURE-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS016-000002",
+      "category": "EVOUSIS016",
+      "page_start": 9491,
+      "page_count": 1,
+      "first_seen": "2026-07-25T08:43:55+00:00"
+    },
+    "EVO-USIS-016/03-IMPLEMENTATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS016-000003",
+      "category": "EVOUSIS016",
+      "page_start": 9492,
+      "page_count": 2,
+      "first_seen": "2026-07-25T08:43:55+00:00"
+    },
+    "EVO-USIS-016/04-REGISTRATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS016-000004",
+      "category": "EVOUSIS016",
+      "page_start": 9494,
+      "page_count": 1,
+      "first_seen": "2026-07-25T08:43:55+00:00"
+    },
+    "EVO-USIS-016/05-VALIDATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS016-000005",
+      "category": "EVOUSIS016",
+      "page_start": 9495,
+      "page_count": 1,
+      "first_seen": "2026-07-25T08:43:55+00:00"
+    },
+    "EVO-USIS-016/06-CERTIFICATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS016-000006",
+      "category": "EVOUSIS016",
+      "page_start": 9496,
+      "page_count": 1,
+      "first_seen": "2026-07-25T08:43:55+00:00"
+    },
+    "EVO-USIS-016/07-COVERAGE-CERTIFICATE.md": {
+      "universal_id": "UCOS-EVOUSIS016-000007",
+      "category": "EVOUSIS016",
+      "page_start": 9497,
+      "page_count": 1,
+      "first_seen": "2026-07-25T08:43:55+00:00"
+    },
+    "EVO-USIS-016/08-WHOLE-CORPUS-CERTIFICATION-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS016-000008",
+      "category": "EVOUSIS016",
+      "page_start": 9498,
+      "page_count": 1,
+      "first_seen": "2026-07-25T08:43:55+00:00"
+    },
+    "EVO-USIS-016/09-REPOSITORY-EVIDENCE-REPORT.md": {
+      "universal_id": "UCOS-EVOUSIS016-000009",
+      "category": "EVOUSIS016",
+      "page_start": 9499,
+      "page_count": 1,
+      "first_seen": "2026-07-25T08:43:55+00:00"
     }
   },
-  "page_cursor": 9429,
+  "page_cursor": 9499,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8050,7 +8330,7 @@
     "CEP": 35,
     "SEC": 5,
     "REPOOPERATIO": 1,
-    "USIS": 6,
+    "USIS": 19,
     "READINESSASS": 1,
     "GAPCLASSIFIC": 1,
     "FINALCERTIFI": 2,
@@ -8101,7 +8381,10 @@
     "IAC001B": 8,
     "IAC001C": 9,
     "IAC001D": 8,
-    "IAC001E": 9
+    "IAC001E": 9,
+    "EVOUSIS014": 9,
+    "EVOUSIS015": 9,
+    "EVOUSIS016": 9
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -21668,6 +21951,446 @@
         "status": "ACTIVE",
         "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/01-THEORY/USIS-005-THEORY-ONTOLOGY-TAXONOMY-FOUNDATION.md",
         "name": "USIS-005 — Theory / Ontology / Taxonomy Foundation"
+      }
+    ],
+    "UCOS-USIS-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T06:10:05+00:00",
+        "content_hash": "1f0fadab3c105eedb0dae2553777c507e5765c5afdc5d3897c440d8fe130db37",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/08-DOMAINS/USIS-007-DOMAIN-ARCHITECTURE.md",
+        "name": "USIS-007 — Domain Architecture"
+      }
+    ],
+    "UCOS-USIS-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T06:19:48+00:00",
+        "content_hash": "1c204809a93aab3b6ec085ee37187fef00c0046455f1aabca0a7368a0a6617ef",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/05-META-MODEL/USIS-006-CAPABILITY-ARCHITECTURE.md",
+        "name": "USIS-006 — Capability Architecture"
+      }
+    ],
+    "UCOS-USIS-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T06:25:46+00:00",
+        "content_hash": "04ce1d5b701746783a6a76887d2c5e991769d6afb43552fdc19c9371b16e6d55",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/10-MODELS/USIS-009-MODEL-ARCHITECTURE.md",
+        "name": "USIS-009 — Model Architecture"
+      }
+    ],
+    "UCOS-USIS-000010": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T06:31:09+00:00",
+        "content_hash": "ebe4897b751803b475a045d633e0a2dd8a5200d81973da4ae7c140addef264f1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/09-ALGORITHMS/USIS-008-ALGORITHM-ARCHITECTURE.md",
+        "name": "USIS-008 — Algorithm Architecture"
+      }
+    ],
+    "UCOS-USIS-000011": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T06:36:48+00:00",
+        "content_hash": "f42180a9d214183a452f19d8dd793de1a184a442e8e6354c6f5f04922e1edd77",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/11-PATTERNS/USIS-010-PATTERN-ARCHITECTURE.md",
+        "name": "USIS-010 — Pattern Architecture"
+      }
+    ],
+    "UCOS-USIS-000012": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T06:42:22+00:00",
+        "content_hash": "45eaa740aa0ba7a7f3f7584e2673400c9a18548383af895facdc51abf1de61ee",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/12-ENGINES/USIS-011-ENGINE-ARCHITECTURE.md",
+        "name": "USIS-011 — Engine Architecture"
+      }
+    ],
+    "UCOS-USIS-000013": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T06:49:30+00:00",
+        "content_hash": "a237eaa61234c674c73906621f7a1a5539f961a8dce30f9548badd4f18c99af2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/14-RUNTIME/USIS-013-RUNTIME-ARCHITECTURE.md",
+        "name": "USIS-013 — Runtime Architecture"
+      }
+    ],
+    "UCOS-USIS-000014": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T06:58:39+00:00",
+        "content_hash": "73fa89017b3b0f5f7c762010d8116db1c30ea6359bd760570311210b5d564f74",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/13-SERVICES/USIS-012-SERVICE-ARCHITECTURE.md",
+        "name": "USIS-012 — Service Architecture"
+      }
+    ],
+    "UCOS-USIS-000015": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:06:01+00:00",
+        "content_hash": "8f67697b73771039bf99a8ee31328ea3230e94171eaf6bf512eb556a79566916",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/18-APIS-SDK/USIS-017-API-SDK-ARCHITECTURE.md",
+        "name": "USIS-017 — API & SDK Architecture"
+      }
+    ],
+    "UCOS-USIS-000016": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:18:17+00:00",
+        "content_hash": "21fee28cb5bee76ee955c88cbe2a49e183d4be0987ed294e604ed43884782f59",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/20-PROJECTS/USIS-INT-001-WAVE-2-IMPLEMENTATION-INTEGRATION.md",
+        "name": "USIS-INT-001 — Wave-2 Implementation Integration"
+      }
+    ],
+    "UCOS-USIS-000017": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:33:13+00:00",
+        "content_hash": "8e08a52f918d2cb7d15de718c6a805ca14b9c46f95a02fec72adb3adf8be2e1a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/15-VALIDATION/USIS-014-VALIDATION-ARCHITECTURE.md",
+        "name": "USIS-014 — Validation Architecture"
+      }
+    ],
+    "UCOS-EVOUSIS014-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:41:13+00:00",
+        "content_hash": "18f761bc8bf2ffe6eb3bd38308165f765f53928101714d899ad65a611c998da9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-014/01-CONTEXT-DELTA-VERIFICATION-REPORT.md",
+        "name": "EVO-USIS-014 · 01 — Context Delta Verification Report"
+      }
+    ],
+    "UCOS-EVOUSIS014-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:41:13+00:00",
+        "content_hash": "0ce97c561324ab58de344b4d71481d8a1254af6f26f64585500f2f6b15103b3b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-014/02-REPOSITORY-STRUCTURE-VERIFICATION-REPORT.md",
+        "name": "EVO-USIS-014 · 02 — Repository Structure Verification Report"
+      }
+    ],
+    "UCOS-EVOUSIS014-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:41:13+00:00",
+        "content_hash": "2d710d6143e807c3d9df624c8e57ce77db655d9a4c991ad867dd005eaa5a80e0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-014/03-IMPLEMENTATION-REPORT.md",
+        "name": "EVO-USIS-014 · 03 — Implementation Report"
+      }
+    ],
+    "UCOS-EVOUSIS014-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:41:13+00:00",
+        "content_hash": "966f6bc1fa422ca21e4ea7c9df1ac19011f67e4e981f2e3f9f601b862d92f086",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-014/04-REGISTRATION-REPORT.md",
+        "name": "EVO-USIS-014 · 04 — Registration Report"
+      }
+    ],
+    "UCOS-EVOUSIS014-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:41:13+00:00",
+        "content_hash": "81ed88080ac9083114d11a72ebcf0bae5a681ddf1baf91e3b1168e0773f48644",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-014/05-VALIDATION-REPORT.md",
+        "name": "EVO-USIS-014 · 05 — Validation Report"
+      }
+    ],
+    "UCOS-EVOUSIS014-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:41:13+00:00",
+        "content_hash": "0423c670d12d1f25c2ef361a9f31b29c1aced088d25b609f1cd417b8574c8f15",
+        "version": "PASS",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-014/06-CERTIFICATION-REPORT.md",
+        "name": "EVO-USIS-014 · 06 — Certification Report"
+      }
+    ],
+    "UCOS-EVOUSIS014-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:41:13+00:00",
+        "content_hash": "3d18422dee3697e3cca352fcde4137034a5f51e59f0d6513f3f45df4466cc46a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-014/07-COVERAGE-CLOSURE-CERTIFICATE.md",
+        "name": "EVO-USIS-014 · 07 — Coverage Closure Certificate"
+      }
+    ],
+    "UCOS-EVOUSIS014-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:41:13+00:00",
+        "content_hash": "d8c94f7ae02e176ccaf4041a894d0ac553363dfc945f3f274b1d3409719edcde",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-014/08-CROSS-LAYER-CONSISTENCY-REPORT.md",
+        "name": "EVO-USIS-014 · 08 — Cross-Layer Consistency & Regression Verification Report"
+      }
+    ],
+    "UCOS-EVOUSIS014-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:41:13+00:00",
+        "content_hash": "011450c1632f30a430d88938802316e1b4beed27c54bf5f51b265981fc1e19a9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-014/09-REPOSITORY-EVIDENCE-REPORT.md",
+        "name": "EVO-USIS-014 · 09 — Repository Evidence Report"
+      }
+    ],
+    "UCOS-USIS-000018": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:45:48+00:00",
+        "content_hash": "515f470192da83527d14279f5d7bca483b09031746eba84f154e269d47ac87e8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/16-CERTIFICATION/USIS-015-CERTIFICATION-ARCHITECTURE.md",
+        "name": "USIS-015 — Certification Architecture"
+      }
+    ],
+    "UCOS-EVOUSIS015-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:49:17+00:00",
+        "content_hash": "a88d28cd2f10c7b182f4bb2806481ebb639a7a1ce2fc188716cbc66213f63d94",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-015/01-CONTEXT-DELTA-REPORT.md",
+        "name": "EVO-USIS-015 · 01 — Context Delta Report"
+      }
+    ],
+    "UCOS-EVOUSIS015-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:49:17+00:00",
+        "content_hash": "8544d6a638bb3a6eb2ac2ac3bb626c66edc827daa21716930cd51cd390f31ba0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-015/02-REPOSITORY-STRUCTURE-REPORT.md",
+        "name": "EVO-USIS-015 · 02 — Repository Structure Report"
+      }
+    ],
+    "UCOS-EVOUSIS015-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:49:17+00:00",
+        "content_hash": "c8aeee36999eba95ccbe312d39a9b154917b906c16e7b83f0fc2dce20c79410b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-015/03-IMPLEMENTATION-REPORT.md",
+        "name": "EVO-USIS-015 · 03 — Implementation Report"
+      }
+    ],
+    "UCOS-EVOUSIS015-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:49:17+00:00",
+        "content_hash": "a3d28a5a16ef2a63175a9a96c638381d8eed46362688de7f7ea087e1aaaf71a2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-015/04-REGISTRATION-REPORT.md",
+        "name": "EVO-USIS-015 · 04 — Registration Report"
+      }
+    ],
+    "UCOS-EVOUSIS015-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:49:17+00:00",
+        "content_hash": "c7e5724fa5cfa8a69109453ccb8f56040e060f71663fe75a41d1974ccefa07ca",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-015/05-VALIDATION-REPORT.md",
+        "name": "EVO-USIS-015 · 05 — Validation Report"
+      }
+    ],
+    "UCOS-EVOUSIS015-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:49:17+00:00",
+        "content_hash": "7a9c429f775a1a4e342eca24d92bce06756d2afaa1e7c82aa313cf1278f72a6f",
+        "version": "PASS",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-015/06-CERTIFICATION-REPORT.md",
+        "name": "EVO-USIS-015 · 06 — Certification Report"
+      }
+    ],
+    "UCOS-EVOUSIS015-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:49:17+00:00",
+        "content_hash": "8454eb4320f2ac6411ad0679532e1f50ab936679ab12d181335800a355ec6264",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-015/07-COVERAGE-CERTIFICATE.md",
+        "name": "EVO-USIS-015 · 07 — Coverage Certificate"
+      }
+    ],
+    "UCOS-EVOUSIS015-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:49:17+00:00",
+        "content_hash": "4934a40c8ff5844a4195ef9e628cfe73c5bb90d274c9f4342290095604e2e98a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-015/08-WHOLE-CORPUS-CERTIFICATION-REPORT.md",
+        "name": "EVO-USIS-015 · 08 — Whole-Corpus Certification & Regression Report"
+      }
+    ],
+    "UCOS-EVOUSIS015-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T07:49:17+00:00",
+        "content_hash": "f50691d7ee4d7068253409ebae24ddbe70f3c13a091c194773c0b6f6a8c55d71",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-015/09-REPOSITORY-EVIDENCE-REPORT.md",
+        "name": "EVO-USIS-015 · 09 — Repository Evidence Report"
+      }
+    ],
+    "UCOS-USIS-000019": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:39:03+00:00",
+        "content_hash": "e89b89ce1722abd54dec806a0cb34aa54de5797a2cbf623bc10bb747a06d0cc7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/17-EVIDENCE/USIS-016-EVIDENCE-ARCHITECTURE.md",
+        "name": "USIS-016 — Evidence Architecture"
+      }
+    ],
+    "UCOS-EVOUSIS016-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:43:55+00:00",
+        "content_hash": "3d963566736f9529f3d051e74eb0b541a27cff77b0d8780850fef326afc23c72",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-016/01-CONTEXT-DELTA-REPORT.md",
+        "name": "EVO-USIS-016 · 01 — Context Delta Report"
+      }
+    ],
+    "UCOS-EVOUSIS016-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:43:55+00:00",
+        "content_hash": "609a8602e71a993ce59243a225b2bfe034f2bc9e0c81afc02895453bd9fa5e08",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-016/02-REPOSITORY-STRUCTURE-REPORT.md",
+        "name": "EVO-USIS-016 · 02 — Repository Structure Report"
+      }
+    ],
+    "UCOS-EVOUSIS016-000003": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:43:55+00:00",
+        "content_hash": "39e114721e613ddf3219d504daa105a6c969be4cae6c984792bcf712d1540fde",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-016/03-IMPLEMENTATION-REPORT.md",
+        "name": "EVO-USIS-016 · 03 — Implementation Report"
+      }
+    ],
+    "UCOS-EVOUSIS016-000004": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:43:55+00:00",
+        "content_hash": "28693796cf565186e0dbec96e3921a35b48719a4078494fa436f24f97973b442",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-016/04-REGISTRATION-REPORT.md",
+        "name": "EVO-USIS-016 · 04 — Registration Report"
+      }
+    ],
+    "UCOS-EVOUSIS016-000005": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:43:55+00:00",
+        "content_hash": "afe845f33d88dd7b705838cf015b0931abb117063789ea0876a8889120189ddb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-016/05-VALIDATION-REPORT.md",
+        "name": "EVO-USIS-016 · 05 — Validation Report"
+      }
+    ],
+    "UCOS-EVOUSIS016-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:43:55+00:00",
+        "content_hash": "8bc6a9f3db57568b4efbc9d036b3b4d745863eac795b5cf707067c6c5efa52ce",
+        "version": "PASS",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-016/06-CERTIFICATION-REPORT.md",
+        "name": "EVO-USIS-016 · 06 — Certification Report"
+      }
+    ],
+    "UCOS-EVOUSIS016-000007": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:43:55+00:00",
+        "content_hash": "17f8b0257e3dbfaab091c7dea04a269227eb3e71a29fd8ff8715fe1650120273",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-016/07-COVERAGE-CERTIFICATE.md",
+        "name": "EVO-USIS-016 · 07 — Coverage Closure Certificate"
+      }
+    ],
+    "UCOS-EVOUSIS016-000008": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:43:55+00:00",
+        "content_hash": "2a57aeb8cbe64c4978385047fea0ad154862570d9aa37976d6dd590453cc6390",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-016/08-WHOLE-CORPUS-CERTIFICATION-REPORT.md",
+        "name": "EVO-USIS-016 · 08 — Whole-Corpus Certification & Regression Report"
+      }
+    ],
+    "UCOS-EVOUSIS016-000009": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T08:43:55+00:00",
+        "content_hash": "2ff41bb8c610c3d75ada6c7d94e3e185c760c8c7cd1331d10091bc4bfb9b9ba7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "EVO-USIS-016/09-REPOSITORY-EVIDENCE-REPORT.md",
+        "name": "EVO-USIS-016 · 09 — Repository Evidence Report"
       }
     ]
   }
