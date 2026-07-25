@@ -20344,6 +20344,15 @@
         "status": "ACTIVE",
         "path": "04-REFERENCE/01-REFERENCE-INVENTORY.md",
         "name": "01 — REFERENCE INVENTORY"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T04:36:19+00:00",
+        "content_hash": "ca20a2d3a4932506105886eddf580d68502193e6cdd5f0a0d090cd15238086e1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/01-REFERENCE-INVENTORY.md",
+        "name": "01 — REFERENCE INVENTORY"
       }
     ],
     "UCOS-REF-000017": [
@@ -20355,6 +20364,15 @@
         "status": "ACTIVE",
         "path": "04-REFERENCE/02-REFERENCE-ASSIMILATION-MATRIX.md",
         "name": "02 — REFERENCE ASSIMILATION MATRIX"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T04:36:19+00:00",
+        "content_hash": "08525959079748d9332fb05aa674bca2034832ab79f2c7f9285880fec8406ff9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/02-REFERENCE-ASSIMILATION-MATRIX.md",
+        "name": "02 — REFERENCE ASSIMILATION MATRIX"
       }
     ],
     "UCOS-REF-000018": [
@@ -20362,6 +20380,15 @@
         "seq": 1,
         "at": "2026-07-23T15:18:41+00:00",
         "content_hash": "be600785eaae896ec221c4f536cebcca1a2018da2c1d5c8af7b4c670d6943b2c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "04-REFERENCE/03-REFERENCE-COVERAGE-SUMMARY.md",
+        "name": "03 — REFERENCE COVERAGE SUMMARY"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T04:36:19+00:00",
+        "content_hash": "1de0a442f3ad86db11d6ae10602c89d68a12a66bec443d25967e59494b67bc99",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "04-REFERENCE/03-REFERENCE-COVERAGE-SUMMARY.md",

@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-25T03:06:54+00:00",
+  "generated_at": "2026-07-25T04:36:19+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1228,
+    "change_events": 1231,
     "versioned_artifacts": 1123,
     "lineage_nodes": 1123,
     "artifacts_with_predecessors": 5,
@@ -10,7 +10,7 @@
   },
   "change_event_histogram": {
     "Created": 1123,
-    "Modified": 105
+    "Modified": 108
   },
   "evolution_timeline": [
     {
@@ -7380,6 +7380,24 @@
       "at": "2026-07-25T03:06:54+00:00",
       "subject": "UCOS-UCOSOMEGAINF-000001",
       "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001229",
+      "at": "2026-07-25T04:36:19+00:00",
+      "subject": "UCOS-REF-000016",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001230",
+      "at": "2026-07-25T04:36:19+00:00",
+      "subject": "UCOS-REF-000017",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001231",
+      "at": "2026-07-25T04:36:19+00:00",
+      "subject": "UCOS-REF-000018",
+      "kind": "Modified"
     }
   ],
   "change_events": [
@@ -8251,12 +8269,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "c8229f5babae",
-        "date": "2026-07-24T22:27:11+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-003 Wave-2: assimilate Universal Foundation Platform via reuse-first EXTEND (W2-F1..F12)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000088",
@@ -9046,12 +9059,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "c8229f5babae",
-        "date": "2026-07-24T22:27:11+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-003 Wave-2: assimilate Universal Foundation Platform via reuse-first EXTEND (W2-F1..F12)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000167",
@@ -9091,12 +9099,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "40297137a190",
-        "date": "2026-07-24T22:47:10+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-005 Wave-4: assimilate Universal Foundation/Nucleus/Universe recursive architecture (reuse-first EXTEND)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000171",
@@ -9166,12 +9169,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "c8229f5babae",
-        "date": "2026-07-24T22:27:11+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-003 Wave-2: assimilate Universal Foundation Platform via reuse-first EXTEND (W2-F1..F12)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000178",
@@ -10971,12 +10969,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "afd673f0fc84",
-        "date": "2026-07-24T22:09:34+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-002 Wave-1: assimilate ratified architecture via reuse-first EXTEND (B3-B7)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000358",
@@ -10996,12 +10989,7 @@
       "snapshot_seq": 2,
       "from": "f9265b5892cfe08f70927ee4251e5a588bd5c50cc870440e3b1d7e451a8bd52e",
       "to": "4d9b9e924bf39c04be95f48fc7a0fc00677b8294e4f6546008737e582e34ff39",
-      "commit": {
-        "commit": "afd673f0fc84",
-        "date": "2026-07-24T22:09:34+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-002 Wave-1: assimilate ratified architecture via reuse-first EXTEND (B3-B7)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000360",
@@ -16251,12 +16239,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "FROZEN",
-      "commit": {
-        "commit": "9fa847bd5cf9",
-        "date": "2026-07-24T22:37:36+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-004 Wave-3: assimilate Absolute Constitutional Architecture via reuse-first EXTEND (CEP-001/009)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000885",
@@ -16336,12 +16319,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "FROZEN",
-      "commit": {
-        "commit": "9fa847bd5cf9",
-        "date": "2026-07-24T22:37:36+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-004 Wave-3: assimilate Absolute Constitutional Architecture via reuse-first EXTEND (CEP-001/009)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000893",
@@ -16401,12 +16379,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "COMPLETE",
-      "commit": {
-        "commit": "40297137a190",
-        "date": "2026-07-24T22:47:10+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-005 Wave-4: assimilate Universal Foundation/Nucleus/Universe recursive architecture (reuse-first EXTEND)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000000899",
@@ -18456,7 +18429,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": null
+      "commit": {
+        "commit": "15cf8c616482",
+        "date": "2026-07-25T10:03:39+05:30",
+        "author": "Bipin Kumar",
+        "subject": "RATA-003: reconcile reference governance artifacts with Repository Truth"
+      }
     },
     {
       "change_id": "UCHG-000001104",
@@ -18466,7 +18444,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": null
+      "commit": {
+        "commit": "15cf8c616482",
+        "date": "2026-07-25T10:03:39+05:30",
+        "author": "Bipin Kumar",
+        "subject": "RATA-003: reconcile reference governance artifacts with Repository Truth"
+      }
     },
     {
       "change_id": "UCHG-000001105",
@@ -18476,7 +18459,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": null
+      "commit": {
+        "commit": "15cf8c616482",
+        "date": "2026-07-25T10:03:39+05:30",
+        "author": "Bipin Kumar",
+        "subject": "RATA-003: reconcile reference governance artifacts with Repository Truth"
+      }
     },
     {
       "change_id": "UCHG-000001106",
@@ -18806,12 +18794,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "afd673f0fc84",
-        "date": "2026-07-24T22:09:34+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-002 Wave-1: assimilate ratified architecture via reuse-first EXTEND (B3-B7)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001139",
@@ -18881,12 +18864,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "afd673f0fc84",
-        "date": "2026-07-24T22:09:34+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-002 Wave-1: assimilate ratified architecture via reuse-first EXTEND (B3-B7)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001146",
@@ -19616,12 +19594,7 @@
       "snapshot_seq": 2,
       "from": "123c7dd36bd6c76370537f7809d360dbd1879508300808afe4c1a3ad9569591c",
       "to": "ee517ee53b48b748637f78ffb77cb1023c58538cdcc4cac94317b504725f6bf5",
-      "commit": {
-        "commit": "40297137a190",
-        "date": "2026-07-24T22:47:10+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-005 Wave-4: assimilate Universal Foundation/Nucleus/Universe recursive architecture (reuse-first EXTEND)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001219",
@@ -19631,12 +19604,7 @@
       "snapshot_seq": 2,
       "from": "d44ac1eca707cc7998885d1bd916d7116823c7df677ea118bcae034e75119301",
       "to": "0e53dfc7535d0aac48573f3e139492ed46725a4b9d04398d0d86230c609b4dc9",
-      "commit": {
-        "commit": "9fa847bd5cf9",
-        "date": "2026-07-24T22:37:36+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-004 Wave-3: assimilate Absolute Constitutional Architecture via reuse-first EXTEND (CEP-001/009)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001220",
@@ -19646,12 +19614,7 @@
       "snapshot_seq": 2,
       "from": "86bd36e89e81c67f935ad511fe970ec71951d5f2801fb311bd1092c4d7122c0c",
       "to": "ef736a19eef0c2b20450d355e63e9bc257814414fd5c509ff915217c394a025c",
-      "commit": {
-        "commit": "9fa847bd5cf9",
-        "date": "2026-07-24T22:37:36+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-004 Wave-3: assimilate Absolute Constitutional Architecture via reuse-first EXTEND (CEP-001/009)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001221",
@@ -19661,12 +19624,7 @@
       "snapshot_seq": 2,
       "from": "66ed7ab34157c1f4259b8ef2ca211fd540f7439e89fb67e24575d0ac72e7f09f",
       "to": "3e66b19dcb703ea3326e61892ba809e5fc2f7e5e84d05613ac69e2d14a9a64c6",
-      "commit": {
-        "commit": "afd673f0fc84",
-        "date": "2026-07-24T22:09:34+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-002 Wave-1: assimilate ratified architecture via reuse-first EXTEND (B3-B7)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001222",
@@ -19676,12 +19634,7 @@
       "snapshot_seq": 2,
       "from": "2c85a7e7523592a3a7996039958cebc77a35b93655278b4234864d4d898c137e",
       "to": "527cac42fde96ca2fe4a6dc3346dfdb7828091a7fd7891ed78ddcdce0b8df809",
-      "commit": {
-        "commit": "c8229f5babae",
-        "date": "2026-07-24T22:27:11+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-003 Wave-2: assimilate Universal Foundation Platform via reuse-first EXTEND (W2-F1..F12)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001223",
@@ -19691,12 +19644,7 @@
       "snapshot_seq": 2,
       "from": "38e46a84bf0deb9325aff6a81d97d9892b590e39211f2354bbcb71ccfc09d52a",
       "to": "f7d484bc9d56f4b832f188b50d0e558056f4a40aa835b5a71ca40af1b1dbb33a",
-      "commit": {
-        "commit": "afd673f0fc84",
-        "date": "2026-07-24T22:09:34+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-002 Wave-1: assimilate ratified architecture via reuse-first EXTEND (B3-B7)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001224",
@@ -19706,12 +19654,7 @@
       "snapshot_seq": 2,
       "from": "37c5733f67714879bbc5ec0e159c405b6d3d2a61d7b4392ffab78f1dd7beb446",
       "to": "465ea97f0912d7c8676b857c735a4ac876820f47cae6c347f7bb09154ece43a3",
-      "commit": {
-        "commit": "c8229f5babae",
-        "date": "2026-07-24T22:27:11+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-003 Wave-2: assimilate Universal Foundation Platform via reuse-first EXTEND (W2-F1..F12)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001225",
@@ -19721,12 +19664,7 @@
       "snapshot_seq": 2,
       "from": "e4cff56b173cf315ad6eefb87725713622ef19178d0a93f4e2c41dbb3329aa8e",
       "to": "09f36fc56d66394b975b80dee76426acd9b7c50b2e3ae84c895a21f4946488d0",
-      "commit": {
-        "commit": "40297137a190",
-        "date": "2026-07-24T22:47:10+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-005 Wave-4: assimilate Universal Foundation/Nucleus/Universe recursive architecture (reuse-first EXTEND)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001226",
@@ -19736,12 +19674,7 @@
       "snapshot_seq": 2,
       "from": "816fdd4658a75c69b59fdd2bd8a0b7cb9890b6339e1f06e6c6a939a8cd1f4ee9",
       "to": "2521a310001e3de5158017943231c0391387b515bb0c3084f525dd3fa158d923",
-      "commit": {
-        "commit": "c8229f5babae",
-        "date": "2026-07-24T22:27:11+05:30",
-        "author": "Bipin Kumar",
-        "subject": "REP-003 Wave-2: assimilate Universal Foundation Platform via reuse-first EXTEND (W2-F1..F12)"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001227",
@@ -19761,11 +19694,51 @@
       "snapshot_seq": 3,
       "from": "4d9b9e924bf39c04be95f48fc7a0fc00677b8294e4f6546008737e582e34ff39",
       "to": "0fbbf76fdc4f8999dcbc195f8db82ff07974f8d8149d22a84a6ad0ce0598b77c",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001229",
+      "subject": "UCOS-REF-000016",
+      "kind": "Modified",
+      "at": "2026-07-25T04:36:19+00:00",
+      "snapshot_seq": 2,
+      "from": "be58c9f9a23a7bd1f3ed3d1df211ee088b6ec1d0ceec34d4e34248c639b1437a",
+      "to": "ca20a2d3a4932506105886eddf580d68502193e6cdd5f0a0d090cd15238086e1",
       "commit": {
-        "commit": "afd673f0fc84",
-        "date": "2026-07-24T22:09:34+05:30",
+        "commit": "15cf8c616482",
+        "date": "2026-07-25T10:03:39+05:30",
         "author": "Bipin Kumar",
-        "subject": "REP-002 Wave-1: assimilate ratified architecture via reuse-first EXTEND (B3-B7)"
+        "subject": "RATA-003: reconcile reference governance artifacts with Repository Truth"
+      }
+    },
+    {
+      "change_id": "UCHG-000001230",
+      "subject": "UCOS-REF-000017",
+      "kind": "Modified",
+      "at": "2026-07-25T04:36:19+00:00",
+      "snapshot_seq": 2,
+      "from": "73456039e08a93cc556de6ac12d505bc41dc1996eb347d098586f221713e6530",
+      "to": "08525959079748d9332fb05aa674bca2034832ab79f2c7f9285880fec8406ff9",
+      "commit": {
+        "commit": "15cf8c616482",
+        "date": "2026-07-25T10:03:39+05:30",
+        "author": "Bipin Kumar",
+        "subject": "RATA-003: reconcile reference governance artifacts with Repository Truth"
+      }
+    },
+    {
+      "change_id": "UCHG-000001231",
+      "subject": "UCOS-REF-000018",
+      "kind": "Modified",
+      "at": "2026-07-25T04:36:19+00:00",
+      "snapshot_seq": 2,
+      "from": "be600785eaae896ec221c4f536cebcca1a2018da2c1d5c8af7b4c670d6943b2c",
+      "to": "1de0a442f3ad86db11d6ae10602c89d68a12a66bec443d25967e59494b67bc99",
+      "commit": {
+        "commit": "15cf8c616482",
+        "date": "2026-07-25T10:03:39+05:30",
+        "author": "Bipin Kumar",
+        "subject": "RATA-003: reconcile reference governance artifacts with Repository Truth"
       }
     }
   ],
@@ -33900,7 +33873,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "be58c9f9a23a7bd1f3ed3d1df211ee088b6ec1d0ceec34d4e34248c639b1437a",
+      "content_baseline": "ca20a2d3a4932506105886eddf580d68502193e6cdd5f0a0d090cd15238086e1",
       "history": [
         {
           "version": "1.0.0",
@@ -33914,7 +33887,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "73456039e08a93cc556de6ac12d505bc41dc1996eb347d098586f221713e6530",
+      "content_baseline": "08525959079748d9332fb05aa674bca2034832ab79f2c7f9285880fec8406ff9",
       "history": [
         {
           "version": "1.0.0",
@@ -33928,7 +33901,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "be600785eaae896ec221c4f536cebcca1a2018da2c1d5c8af7b4c670d6943b2c",
+      "content_baseline": "1de0a442f3ad86db11d6ae10602c89d68a12a66bec443d25967e59494b67bc99",
       "history": [
         {
           "version": "1.0.0",
