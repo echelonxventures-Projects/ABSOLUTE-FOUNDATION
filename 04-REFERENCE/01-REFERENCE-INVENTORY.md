@@ -8,8 +8,11 @@
 | AUTHORITY | NONE — derived truth. Repository evidence is authoritative. |
 | METHOD | Filesystem enumeration + `.docx` text extraction (`textutil`) + `00-BOOK/DATA/artifacts.json` registry cross-reference |
 | BASELINE | Working tree as read on mission date |
+| RECONCILED | **RATA-003 (governance reconciliation)** — counts synchronized with authoritative registry (`artifacts.json`, gen 2026-07-25T03:06:54): **22 registered `04-REFERENCE` artifacts** (11 ACTIVE `.md` + 11 FROZEN `.docx`). Corrects the earlier "16 documents / 8 docx" baseline per RATA-001 finding F1. |
 
 > This inventory is descriptive only. Repository Truth remains the implementation authority. Nothing in `04-REFERENCE/` is treated as the canonical implementation authority (per `04-REFERENCE/ARCHITECTURAL-SOURCES/README.md`).
+>
+> **RATA-003 reconciliation note.** The original RA-001 baseline recorded 16 documents / 8 source `.docx`. The authoritative registry holds **22** `04-REFERENCE` artifacts, including **3 source `.docx` (UCOS-REF-000019/020/021)** not listed in the original baseline and this program's **3 audit-output `.md` (UCOS-REF-000016/017/018)**. All counts below are now synchronized to Repository Truth.
 
 ---
 
@@ -17,13 +20,16 @@
 
 | Item | Count |
 |------|------:|
-| Real documents under `04-REFERENCE/` | **16** |
-| — Reference-architecture Markdown (`.md`) | 7 |
-| — Architectural-source Word documents (`.docx`) | 8 |
-| — Governance note (`README.md`) | 1 |
-| Word lock / temp files (`~$…`, not documents) | 2 |
-| **Total filesystem entries (excl. directories)** | **18** |
-| Registered in Universal Knowledge Book (`artifacts.json`) | **16 of 16** real documents |
+| **Registered `04-REFERENCE` artifacts (registry truth)** | **22** |
+| — Reference-architecture Markdown (`.md`, ACTIVE) | 7 |
+| — Architectural-source Word documents (`.docx`, FROZEN) | 11 |
+| — Governance note (`README.md`, ACTIVE) | 1 |
+| — Audit-program outputs (`.md`, ACTIVE) — this RA-001/RATA program's deliverables | 3 |
+| Word lock / temp files (`~$…`, not documents, unregistered) | 3 |
+| **Total filesystem entries (excl. directories)** | **25** |
+| Registered in Universal Knowledge Book (`artifacts.json`) | **22 of 22 (100%)** |
+
+> **F1 correction (RATA-003).** The prior baseline (16 real / 8 docx / "16 of 16") understated the corpus. Repository Truth registers **22** `04-REFERENCE` artifacts: the **8 originally-listed source `.docx`** plus **3 additional source `.docx`** (`UCOS-REF-000019` ChatGPT Chat-1, `UCOS-REF-000020` After considering evolution, `UCOS-REF-000021` UCOS Ω.docx) plus this program's **3 audit outputs** (`UCOS-REF-000016/017/018`), the 7 reference architectures, and the README.
 
 ---
 
@@ -57,7 +63,20 @@ Registered as source inputs (status **FROZEN**), except the governance note (`RE
 | 13 | `PHASE.docx` | DOCX | 39,696 | UCOS-REF-000012 | FROZEN | Phase framework: PHASE-021…PHASE-040 universes (Civilization → Omniverse → Master Completion) + production implementation phase ontology (BEING → … → GENERATED REALITIES). |
 | 14 | `UCOS Ω - references.docx` | DOCX | 47,644 | UCOS-REF-000013 | FROZEN | Absolute Constitution (Articles Ω-1…Ω-20, Ten Absolute Laws) + Bible-Index integration-patch objective + Universal Commerce meta-model. |
 | 15 | `UCOS Ω∞ MASTER IMPLEMENTATION PLAN v2.docx` | DOCX | 22,451 | UCOS-REF-000014 | FROZEN | Sovereign Universe Implementation Model: Laws SU-001…SU-013, Universe Consumption Model, Constitutional Capabilities, Sovereign Universe Catalog. |
-| 16 | `UNIVERSAL REALITY COMPILER CONSTITUTION.docx` | DOCX | 22,066 | UCOS-REF-000015 | FROZEN | Universal Reality Compiler Constitution: root ontology (BEING → EXISTENCE → RELATIONSHIP → TRANSFORMATION), universal coordinates, Ten Absolute Invariants, compiler flow. |
+| 16 | `UNIVERSAL REALITY COMPILER CONSTITUTION.docx` | DOCX | 22,066 | UCOS-REF-000015 | FROZEN | Universal Reality Compiler Constitution: root ontology (BEING → EXISTENCE → RELATIONSHIP → TRANSFORMATION), universal coordinates, Ten Absolute Invariants, compiler flow. **Text-identical to frozen `00-SOURCE` twin `UCOS-CON-000003` (diff = 0) — reference copy of that authoritative source.** |
+| 17 | `ChatGPT Chat-1.docx` | DOCX | — | UCOS-REF-000019 | FROZEN | Working dialogue (continuation): Universal Capability Meta-Model + infinite-extensibility refinements. Provenance/working transcript. *(Added by F1 reconciliation — previously unlisted.)* |
+| 18 | `After considering the entire evolution of UCOS Ω.docx` | DOCX | — | UCOS-REF-000020 | FROZEN | Architectural deliberation proposing the 7-layer Absolute Architectural Hierarchy (Universal Invariants → … → Realization Foundation) and the Meta-Platform / Foundation-Composition model. Exploratory recommendation. *(Added by F1 reconciliation — previously unlisted.)* |
+| 19 | `UCOS Ω.docx` | DOCX | — | UCOS-REF-000021 | FROZEN | Expanded architectural corpus (≈4,595 extracted lines): Knowledge-Once Principle, Knowledge Object Model (CKO), Meta-Architecture, Universal Composition Model, Domain contracts, Governance pipeline. **Distinct artifact from the 668-line frozen constitution `00-SOURCE/CONSTITUTIONS/UCOS Ω.docx` (`UCOS-CON-000001`) — same filename, different content/hash (see F2).** *(Added by F1 reconciliation — previously unlisted.)* |
+
+### C.1 — AUDIT-PROGRAM OUTPUTS (this program's own registered deliverables)
+
+Registered ACTIVE `.md` artifacts produced by the RA-001/RATA reference-assimilation program; derived-truth, not canonical implementation authority.
+
+| # | Filename | Type | Universal ID | Status | Purpose |
+|---|----------|------|--------------|--------|---------|
+| 20 | `01-REFERENCE-INVENTORY.md` | MD | UCOS-REF-000016 | ACTIVE | This inventory (reconciled by RATA-003). |
+| 21 | `02-REFERENCE-ASSIMILATION-MATRIX.md` | MD | UCOS-REF-000017 | ACTIVE | Per-document assimilation determinations. |
+| 22 | `03-REFERENCE-COVERAGE-SUMMARY.md` | MD | UCOS-REF-000018 | ACTIVE | Coverage summary and final determination. |
 
 ---
 
@@ -65,8 +84,9 @@ Registered as source inputs (status **FROZEN**), except the governance note (`RE
 
 | Filename | Type | Size (bytes) | Note |
 |----------|------|-------------:|------|
-| `~$IVERSAL REALITY COMPILER CONSTITUTION.docx` | Word lock/owner temp file | 162 | Transient Microsoft Word artifact; not a document; not registered. Recommend deletion (housekeeping only — out of read-only scope). |
+| `~$IVERSAL REALITY COMPILER CONSTITUTION.docx` | Word lock/owner temp file | 162 | Transient Microsoft Word artifact; not a document; not registered. Recommend deletion (housekeeping only — out of scope). |
 | `~$OS Ω∞ MASTER IMPLEMENTATION PLAN v2.docx` | Word lock/owner temp file | 162 | Transient Microsoft Word artifact; not a document; not registered. Recommend deletion (housekeeping only). |
+| `~$ter considering the entire evolution of UCOS Ω.docx` | Word lock/owner temp file | 162 | Transient Microsoft Word artifact; not a document; not registered. Recommend deletion (housekeeping only). *(3rd lock file — corrected from "2" by F1 reconciliation.)* |
 
 ---
 
@@ -74,8 +94,10 @@ Registered as source inputs (status **FROZEN**), except the governance note (`RE
 
 Every real document is registered in the Universal Knowledge Book projection `00-BOOK/DATA/artifacts.json` and indexed in `00-BOOK/REGISTRIES/UNIVERSAL-ARTIFACT-REGISTRY.md`, with navigation-portal pages under `00-BOOK/PORTAL/UCOS-REF-0000NN.md` (and `UCOS-ARCH-000024.md` for REF-000) and knowledge-graph relationships (`00-BOOK/DATA/relationships.json`).
 
-- 16 of 16 real documents carry Universal IDs (`UCOS-REF-000001…000015`; REF-000 → `UCOS-ARCH-000024`).
-- 7 Markdown reference architectures = **ACTIVE**; 8 source `.docx` = **FROZEN**; `README.md` = **ACTIVE**.
-- The 2 `~$…` lock files are correctly **unregistered**.
+- **22 of 22** registered `04-REFERENCE` artifacts carry Universal IDs (`UCOS-REF-000001…000021`; REF-000 → `UCOS-ARCH-000024`).
+- 7 Markdown reference architectures = **ACTIVE**; 11 source `.docx` = **FROZEN**; `README.md` = **ACTIVE**; 3 audit outputs (`UCOS-REF-000016/017/018`) = **ACTIVE**.
+- The 3 `~$…` lock files are correctly **unregistered**.
 
-*END OF 01 — REFERENCE INVENTORY.*
+> **Registry-hash note (RATA-003).** Editing the three audit-output `.md` files (`UCOS-REF-000016/017/018`) changes their on-disk content and therefore their true `content_hash`. The `content_hash` values recorded in `artifacts.json` for these three artifacts should be refreshed by the routine Universal-Knowledge-Book projection generator; this is a mechanical regeneration step, not a governance determination, and no registry field was hand-edited by this reconciliation.
+
+*END OF 01 — REFERENCE INVENTORY (reconciled by RATA-003).*

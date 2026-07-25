@@ -3,13 +3,13 @@
 | Field | Value |
 |-------|-------|
 | MISSION | RA-001 — Reference Assimilation Audit · Assimilation Matrix |
-| SCOPE | 16 registered documents under `04-REFERENCE/` |
+| SCOPE | 22 registered artifacts under `04-REFERENCE/` (19 assessed documents + 3 audit outputs) |
 | MODE | READ ONLY — no implementation, no commits, no tags, no push |
 | AUTHORITY | NONE — derived truth from repository evidence |
 
-> **Assimilation model.** A reference is *assimilated* when its concepts have been normalized, reconciled, **registered**, **traced**, and **represented as canonical repository artifacts** (per `ARCHITECTURAL-SOURCES/README.md`). All 16 documents clear the registration/representation bar (they hold Universal IDs, portal pages, and knowledge-graph edges). The classification below reflects **conceptual/content assimilation** into downstream canonical artifacts.
+> **Assimilation model.** A reference is *assimilated* when its concepts have been normalized, reconciled, **registered**, **traced**, and **represented as canonical repository artifacts** (per `ARCHITECTURAL-SOURCES/README.md`). All 22 registered `04-REFERENCE` artifacts clear the registration/representation bar (they hold Universal IDs, portal pages, and knowledge-graph edges). The classification below reflects **conceptual/content assimilation** into downstream canonical artifacts.
 
-Legend: **✅ ASSIMILATED** · **🟧 PARTIALLY ASSIMILATED** · **⛔ NOT ASSIMILATED**
+Legend: **✅ ASSIMILATED** · **🟧 PARTIALLY ASSIMILATED** · **⬛ SUPERSEDED** · **⛔ NOT ASSIMILATED**
 
 ---
 
@@ -33,6 +33,9 @@ Legend: **✅ ASSIMILATED** · **🟧 PARTIALLY ASSIMILATED** · **⛔ NOT ASSIM
 | UCOS Ω - references | UCOS-REF-000013 | Absolute Constitution (+ integration patch objective) | Source docx → frozen twin `00-SOURCE/CONSTITUTIONS/UCOS Ω.docx` | Foundational (Being/Reality) | Constitutional foundation | pre-Stage-000 (foundation) | Absolute Constitution (self) | UKB Artifact Registry |
 | MASTER IMPLEMENTATION PLAN v2 | UCOS-REF-000014 | Master Implementation Plan v2 (Sovereign-Universe model) | Source docx → canonical `UCOS-OMEGA-INFINITY-MASTER-IMPLEMENTATION-PLAN-V2.md` (root; `UCOS-MIP-000002`, VOL-050, 50 Parts) | All (sovereign universes) | Master implementation blueprint | MIP root blueprint | Constitutional (governs generation/composition/evolution) · LAW Ω∞-000 | UKB Artifact Registry |
 | UNIVERSAL REALITY COMPILER CONSTITUTION | UCOS-REF-000015 | Universal Reality Compiler Constitution | Source docx → frozen twin `00-SOURCE/CONSTITUTIONS/UCOS Ω∞ UNIVERSAL REALITY COMPILER CONSTITUTION.docx`; portal `UCOS-CON-000003` | Foundational (root ontology) | Constitutional foundation | Foundation (FROZEN) | Absolute Constitution (self) · LAW Ω∞-000 | UKB Artifact Registry |
+| ChatGPT Chat-1 | UCOS-REF-000019 | Working dialogue (continuation) | Source docx (FROZEN); Universal Capability Meta-Model substance → `15-UNIVERSAL-SCIENCE-INTELLIGENCE/05-META-MODEL` | Foundational / Capability | Requirements capture | pre-Stage-000 (elicitation) | Absolute Constitution (derived) | UKB Artifact Registry |
+| After considering the entire evolution of UCOS Ω | UCOS-REF-000020 | Architectural deliberation (proposal) | Source docx (FROZEN); 7-layer hierarchy superseded by frozen URC Constitution + Sovereign-Universe model; composition/engine substance → `05-GENERATION/`, `06-IMPLEMENTATION/` | Reference-Architecture (meta) | Architectural derivation | pre-Stage-000 (deliberation) | Superseded by CON-000003 + MIP v2 | UKB Artifact Registry |
+| UCOS Ω (expanded corpus) | UCOS-REF-000021 | Expanded architectural corpus | Source docx (FROZEN); Knowledge-Once / CKO / Meta-Architecture / Composition / Domain contracts → `00-BOOK` (CKO/registry), `05-GENERATION/`, domain determinations in `02-MASTER/` | Foundational / Knowledge | Knowledge & composition modeling | pre-Stage-000 (source) | Absolute Constitution (derived) — **distinct from CON-000001** | UKB Artifact Registry |
 
 ---
 
@@ -84,6 +87,22 @@ Legend: **✅ ASSIMILATED** · **🟧 PARTIALLY ASSIMILATED** · **⛔ NOT ASSIM
 - **Assimilated:** The Absolute Constitution content and the Universal Product/Commerce meta-model within the dialogue are assimilated via the frozen constitutional corpus (`00-SOURCE/CONSTITUTIONS/*`, incl. the Commerce Compiler Constitution) and downstream commerce concepts.
 - **Remaining (not canonicalized):** The document is primarily a **working chat transcript**; its conversational scaffolding and the ad-hoc **"integration-patch objective"** request are captured only as frozen source, not distilled into a dedicated canonical artifact. No canonical artifact is required, but the raw dialogue itself is intentionally **not** promoted to canonical — retained as provenance only.
 
+### ChatGPT Chat-1 (`UCOS-REF-000019`) — 🟧 PARTIALLY ASSIMILATED
+- **Assimilated:** The substantive concept — the **Universal Capability Meta-Model** (every present/future capability conforms to one canonical governance workflow) — is realized in `15-UNIVERSAL-SCIENCE-INTELLIGENCE/05-META-MODEL` (54 canonical hits for "Capability Meta-Model" across the consolidation corpus).
+- **Remaining (not canonicalized):** Like `UCOS-REF-000011`, this is a **working chat transcript** retained as frozen provenance only; its conversational form is intentionally not promoted to a canonical artifact.
+- **Evidence:** Registered FROZEN (`UCOS-REF-000019`), parent `UCOS-ARCH-000024`.
+
+### After considering the entire evolution of UCOS Ω (`UCOS-REF-000020`) — ⬛ SUPERSEDED
+- **Disposition:** This document proposes a **7-layer Absolute Architectural Hierarchy** (Universal Invariants → Universal Constitutional Foundation → Universal Formal Constitutional System → Universal Knowledge Foundation → Universal Intelligence Foundation → Universal Realization Foundation → Universal Domain Foundations → Realizations) plus a **Meta-Platform / Foundation-Composition** model with a **Nucleus** primitive. It is explicitly exploratory ("If I were redesigning UCOS Ω∞ today…").
+- **Superseded by:** the ratified frozen **Universal Reality Compiler Constitution** (`UCOS-CON-000003`) stack (BEING → … → GENERATED REALITY) and the **Sovereign Universe Implementation Model** (MIP v2). The specific 7-layer taxonomy and "Nucleus" term were not adopted verbatim.
+- **Substance reused (not lost):** Universal Invariants → Ten Absolute Invariants (CON-000003); Composition/Blueprint engines → `05-GENERATION/` + `06-IMPLEMENTATION/` blueprint catalog (37 hits); Realization Foundation → `04-REFERENCE` + `05-GENERATION`; Capability/Intelligence Foundation → `15-UNIVERSAL-SCIENCE-INTELLIGENCE`. Repository evidence: `Composition Engine` (6), `Nucleus` (12), `Realization Foundation` (5) hits under canonical naming.
+- **Evidence:** Registered FROZEN (`UCOS-REF-000020`), parent `UCOS-ARCH-000024`.
+
+### UCOS Ω — expanded corpus (`UCOS-REF-000021`) — ✅ ASSIMILATED (REUSED)
+- **Assimilated:** This ≈4,595-line expanded corpus contributes **Knowledge-Once Principle**, **Knowledge Object Model (CKO)**, **Meta-Architecture**, **Universal Composition Model**, **Domain discovery/validation/quality/evolution contracts**, and a **Constitutional Execution Pipeline**. These are realized in `00-BOOK` (CKO / registry model), `05-GENERATION/` (composition), and the domain determinations in `02-MASTER/` (e.g. UAKOS, capability-universe).
+- **Distinctness (F2):** This is a **different document** from the frozen 668-line Absolute Constitution `00-SOURCE/CONSTITUTIONS/UCOS Ω.docx` (`UCOS-CON-000001`), despite the shared filename. Content hashes differ (`c885307e…` vs `0fdfcde0…`); text diff ≈ 5,265 lines. It is **not** a duplicate of CON-000001.
+- **Evidence:** Registered FROZEN (`UCOS-REF-000021`), parent `UCOS-ARCH-000024`.
+
 ---
 
 ## PART 3 — MATRIX SUMMARY
@@ -106,7 +125,12 @@ Legend: **✅ ASSIMILATED** · **🟧 PARTIALLY ASSIMILATED** · **⛔ NOT ASSIM
 | UNIVERSAL REALITY COMPILER CONSTITUTION | ✅ | ✅ ASSIMILATED | `00-SOURCE/CONSTITUTIONS` frozen twin + `LAW Ω∞-000` |
 | PHASE | ✅ | 🟧 PARTIAL | `00-SOURCE/PHASES` (021–040 universes not yet realized) |
 | ChatGPT Chat | ✅ | 🟧 PARTIAL | `00-SOURCE/CONSTITUTIONS` (dialogue/patch-request not canonicalized) |
+| ChatGPT Chat-1 | ✅ | 🟧 PARTIAL | `15-UNIVERSAL-SCIENCE-INTELLIGENCE/05-META-MODEL` (capability meta-model); transcript provenance-only |
+| After considering evolution | ✅ | ⬛ SUPERSEDED | Superseded by `UCOS-CON-000003` + MIP v2; substance reused in `05-GENERATION`/`06-IMPLEMENTATION` |
+| UCOS Ω (expanded corpus) | ✅ | ✅ ASSIMILATED | `00-BOOK` (CKO) + `05-GENERATION` + `02-MASTER` domain determinations |
 
-**Totals:** 14 ✅ ASSIMILATED · 2 🟧 PARTIALLY ASSIMILATED · 0 ⛔ NOT ASSIMILATED. Registration coverage: **16 / 16 (100%)**.
+**Totals (19 assessed source/reference documents):** 15 ✅ ASSIMILATED · 3 🟧 PARTIALLY ASSIMILATED · 1 ⬛ SUPERSEDED · 0 ⛔ NOT ASSIMILATED. Registration coverage: **22 / 22 registered `04-REFERENCE` artifacts (100%)** — 19 assessed documents + this program's 3 audit outputs (`UCOS-REF-000016/017/018`).
+
+> **RATA-003 reconciliation.** Rows for `UCOS-REF-000019/020/021` and the SUPERSEDED status were added to correct RATA-001 finding F1 (prior matrix stopped at `UCOS-REF-000015`). All determinations use RATA-001 repository evidence only; no new analysis introduced.
 
 *END OF 02 — REFERENCE ASSIMILATION MATRIX.*
