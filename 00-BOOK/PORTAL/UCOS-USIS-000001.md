@@ -12,10 +12,12 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-USIS-000003](UCOS-USIS-000003.md) USIS-002 — Universal Science & Intelligence Univer
 - [UCOS-USIS-000004](UCOS-USIS-000004.md) USIS-004 — Universal Capability Meta-Model
 - [UCOS-USIS-000005](UCOS-USIS-000005.md) USIS-003 — Universal Science Catalog
+- [UCOS-USIS-000006](UCOS-USIS-000006.md) USIS-005 — Theory / Ontology / Taxonomy Foundation
 
 ## Backlinks (reverse)
 - [UCOS-SVC-000018](UCOS-SVC-000018.md) —Child→
 - [UCOS-USIS-000002](UCOS-USIS-000002.md) —Parent→
+- [UCOS-USIS-000006](UCOS-USIS-000006.md) —Parent→
 - [UCOS-USIS-000004](UCOS-USIS-000004.md) —Parent→
 - [UCOS-USIS-000003](UCOS-USIS-000003.md) —Parent→
 - [UCOS-USIS-000005](UCOS-USIS-000005.md) —Parent→

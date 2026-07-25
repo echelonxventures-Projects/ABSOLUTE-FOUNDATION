@@ -8001,9 +8001,16 @@
       "page_start": 9423,
       "page_count": 4,
       "first_seen": "2026-07-25T03:06:54+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/01-THEORY/USIS-005-THEORY-ONTOLOGY-TAXONOMY-FOUNDATION.md": {
+      "universal_id": "UCOS-USIS-000006",
+      "category": "USIS",
+      "page_start": 9427,
+      "page_count": 3,
+      "first_seen": "2026-07-25T05:20:49+00:00"
     }
   },
-  "page_cursor": 9426,
+  "page_cursor": 9429,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8043,7 +8050,7 @@
     "CEP": 35,
     "SEC": 5,
     "REPOOPERATIO": 1,
-    "USIS": 5,
+    "USIS": 6,
     "READINESSASS": 1,
     "GAPCLASSIFIC": 1,
     "FINALCERTIFI": 2,
@@ -21650,6 +21657,17 @@
         "status": "CERTIFIED",
         "path": "platform/security/EC2-CAP-SEC-001-SEC-CLASS-CERTIFICATION-REPORT.md",
         "name": "EC2-CAP-SEC-001 · SEC-CLASS — Security Classification Binding Runtime — Certification Report"
+      }
+    ],
+    "UCOS-USIS-000006": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T05:20:49+00:00",
+        "content_hash": "dc3a535412bbb7414cdc35b74a0b29234f689ff049e499daa0604e202b28fd0a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/01-THEORY/USIS-005-THEORY-ONTOLOGY-TAXONOMY-FOUNDATION.md",
+        "name": "USIS-005 — Theory / Ontology / Taxonomy Foundation"
       }
     ]
   }

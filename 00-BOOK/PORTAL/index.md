@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-25T03:06:55+00:00 by ukbx portal. 1123 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-25T05:20:50+00:00 by ukbx portal. 1124 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1127,3 +1127,4 @@
 | [UCOS-IAC001E-000008](UCOS-IAC001E-000008.md) | 07 — IMPLEMENTATION READINESS | VOL-000 | ACTIVE |
 | [UCOS-IAC001E-000009](UCOS-IAC001E-000009.md) | 09 — FINAL CERTIFICATION | VOL-000 | ACTIVE |
 | [UCOS-PLT-000051](UCOS-PLT-000051.md) | EC2-CAP-SEC-001 · SEC-CLASS — Security Classification Bindin | VOL-006 | CERTIFIED |
+| [UCOS-USIS-000006](UCOS-USIS-000006.md) | USIS-005 — Theory / Ontology / Taxonomy Foundation | VOL-024 | ACTIVE |

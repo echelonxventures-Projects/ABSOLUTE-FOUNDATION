@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1123
+**Total artifacts:** 1124
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1131,5 +1131,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1121 | `UCOS-IAC001E-000008` | 07 — IMPLEMENTATION READINESS | — | 000 | UPN-000009420–UPN-000009420 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../IAC-001E/07-IMPLEMENTATION-READINESS.md) |
 | 1122 | `UCOS-IAC001E-000009` | 09 — FINAL CERTIFICATION | — | 000 | UPN-000009421–UPN-000009422 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../IAC-001E/09-FINAL-CERTIFICATION.md) |
 | 1123 | `UCOS-PLT-000051` | EC2-CAP-SEC-001 · SEC-CLASS — Security Classification Bin… | EC2-CAP-SEC-001 | 006 | UPN-000009423–UPN-000009426 | CERTIFIED | `UCOS-PLT-000007` | 0 | [↗](../../platform/security/EC2-CAP-SEC-001-SEC-CLASS-CERTIFICATION-REPORT.md) |
+| 1124 | `UCOS-USIS-000006` | USIS-005 — Theory / Ontology / Taxonomy Foundation | USIS-005 | 024 | UPN-000009427–UPN-000009429 | ACTIVE | `UCOS-USIS-000001` | 0 | [↗](../../15-UNIVERSAL-SCIENCE-INTELLIGENCE/01-THEORY/USIS-005-THEORY-ONTOLOGY-TAXONOMY-FOUNDATION.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

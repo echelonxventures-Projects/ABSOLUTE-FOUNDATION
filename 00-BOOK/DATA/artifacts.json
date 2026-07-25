@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-25T04:36:19+00:00",
+  "generated_at": "2026-07-25T05:20:50+00:00",
   "generator_version": "1.0.0",
-  "count": 1123,
+  "count": 1124,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -44923,6 +44923,7 @@
         ],
         "design": [],
         "implementation": [
+          "UCOS-USIS-000006",
           "UCOS-USIS-000005"
         ],
         "source_code": [],
@@ -49537,6 +49538,55 @@
         "architecture": [
           "UCOS-PLT-000032",
           "EC2-EPIC-002"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000006",
+      "native_id": "USIS-005",
+      "name": "USIS-005 — Theory / Ontology / Taxonomy Foundation",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9427,
+      "page_end": 9429,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/01-THEORY/USIS-005-THEORY-ONTOLOGY-TAXONOMY-FOUNDATION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "dc3a535412bbb7414cdc35b74a0b29234f689ff049e499daa0604e202b28fd0a",
+      "traceability": {
+        "requirement": [
+          "UCOS-USIS-000002",
+          "USIS-00",
+          "C-00",
+          "UCOS-USIS-000004",
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000004",
+          "USIS-011"
         ],
         "design": [],
         "implementation": [],
