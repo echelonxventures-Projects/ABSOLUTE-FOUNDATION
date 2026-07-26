@@ -3,10 +3,8 @@
     "CK-CLOSURE-P3",
     "CK-HEALTH"
   ],
-  "blocking_failures": [
-    "CK-REG-DRIFT"
-  ],
-  "certification": "NOT-CERTIFIED",
+  "blocking_failures": [],
+  "certification": "CERTIFIED-PROVISIONAL",
   "certification_ceiling": [
     "`UCCEP-F-001` — phase3_engine.py returns a constant NOT-CLOSED verdict independent of measured state",
     "`UCCEP-F-002` — Repository health is RED: 1198 of 1198 registered artifacts have incomplete traceability",
@@ -244,14 +242,14 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 3,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-REG-DRIFT",
       "name": "Atomic Registration Transaction + registration-drift gate",
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
-      "reason": "uncommitted-registration drift — source split from projections",
+      "reason": "",
       "tier": "full",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "write_scope": "projections"
     },
     {
@@ -325,7 +323,7 @@
       "write_scope": "read-only"
     }
   ],
-  "gate_exit": 1,
+  "gate_exit": 0,
   "gates": [
     {
       "advisory_failed": [],
@@ -437,14 +435,12 @@
         "CK-REG-ENFORCE",
         "CK-REG-DRIFT"
       ],
-      "failed": [
-        "CK-REG-DRIFT"
-      ],
+      "failed": [],
       "id": "G-07",
       "name": "Registry Gate",
       "not_executed": [],
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -688,14 +684,12 @@
         "CK-DISCOVERY",
         "CK-REG-DRIFT"
       ],
-      "failed": [
-        "CK-REG-DRIFT"
-      ],
+      "failed": [],
       "id": "PROGRAM-000004",
       "name": "Universal Registry Evolution",
       "not_executed": [],
       "output": "04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -714,14 +708,12 @@
         "CK-CMG",
         "CK-REG-DRIFT"
       ],
-      "failed": [
-        "CK-REG-DRIFT"
-      ],
+      "failed": [],
       "id": "PROGRAM-000005",
       "name": "Universal Repository Governance",
       "not_executed": [],
       "output": "05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -1000,11 +992,11 @@
   ],
   "repository": {
     "branch": "programme/evo-usis-005",
-    "dirty_entries": 133,
-    "head": "527485abf00f241a035dbd06062b78c1d9dcde31",
+    "dirty_entries": 8,
+    "head": "1c6e750e53efdbcba5fc501d58fc99781b03a966",
     "working_tree": "DIRTY"
   },
-  "seal_sha256": "12a33bff8c2d177885df51ad8cb4182a75ceefe77d3d66977926a67c4cba70df",
+  "seal_sha256": "a6082ab6c6a61b86157722c65d3a1d7d5095942d0742cef968d0116fe774dd5d",
   "tier": "full",
   "unavailable": []
 }
