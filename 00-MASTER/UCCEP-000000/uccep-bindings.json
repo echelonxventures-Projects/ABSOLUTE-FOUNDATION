@@ -1,0 +1,629 @@
+{
+  "$comment": [
+    "UCCEP-000000 BINDING DECLARATION — DATA ONLY. AUTHORITY = NONE (DERIVED TRUTH).",
+    "",
+    "This file is the single extensible declaration consumed by uccep_engine.py. It is",
+    "DATA, not law and not code: adding a programme, a gate, a check, an invariant or a",
+    "finding requires an entry here and NO change to the engine (Infinite Extensibility).",
+    "",
+    "What this file is NOT:",
+    "  * NOT a registry. It allocates no identity and stores no artifact. The sole",
+    "    registration/identity authority remains REG-AUTO-001 (00-BOOK/tools/ukb.py +",
+    "    id-ledger.json). Zero Parallel Authority.",
+    "  * NOT an evolution model or evolution registry. CEP-009 (Art VI, XVI, XXIV) is the",
+    "    canonical and only owner of the Constitutional Evolution Model, the Evolution",
+    "    Registry, versioning and lineage. This file references it; it never restates it.",
+    "  * NOT a constitution. Every 'owner' field below is a REFERENCE to a located",
+    "    governing instrument that already exists. UCCEP legislates nothing.",
+    "  * NOT a validator. It declares WHICH located executables are the gates; the gates",
+    "    themselves remain owned and implemented by their located owners.",
+    "",
+    "Zero Enumeration Principle: no domain, industry, science, technology, platform,",
+    "language, database, infrastructure or reality is enumerated anywhere in this file.",
+    "The only enumerations present are (a) this programme's own work-breakdown, given by",
+    "the mission, and (b) located repository entry points, which are Repository Truth."
+  ],
+
+  "programme": {
+    "id": "UCCEP-000000",
+    "name": "Universal Continuous Constitutional Evolution Programme",
+    "version": "1.0",
+    "authority": "NONE — DERIVED TRUTH",
+    "charter": "02-MASTER/UCCEP-000000-UNIVERSAL-CONTINUOUS-CONSTITUTIONAL-EVOLUTION-PROGRAMME-CHARTER.md",
+    "operational_home": "00-MASTER/UCCEP-000000/",
+    "terminal_state": false,
+    "governed_by": [
+      "00-CEP/CEP-000-CONSTITUTIONAL-ENGINEERING-CHARTER.md",
+      "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
+      "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+      "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md",
+      "00-CEP/CEP-004-CONSTITUTIONAL-VALIDATION-CONSTITUTION.md",
+      "00-CEP/CEP-005-CONSTITUTIONAL-CERTIFICATION-CONSTITUTION.md",
+      "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md",
+      "00-CEP/CEP-007-CONSTITUTIONAL-FREEZE-CONSTITUTION.md",
+      "00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md",
+      "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+      "00-CEP/CEP-010-CONSTITUTIONAL-AUDIT-COMPLIANCE-ASSURANCE-CONSTITUTION.md",
+      "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md"
+    ],
+    "evolution_owner": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+    "registration_owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
+    "operational_memory_owner": "00-MASTER/MCS-000-MASTER-CONTEXT-SYSTEM-ARCHITECTURE.md",
+    "forbidden_write_prefixes": [
+      "00-SOURCE/",
+      "99-FREEZE/",
+      "00-BOOK/",
+      "engine/",
+      "platform/",
+      "data/",
+      "service/",
+      "application/",
+      "infrastructure/",
+      "00-CEP/",
+      "00-CMG/"
+    ]
+  },
+
+  "principles": [
+    { "id": "PR-01", "name": "Repository Truth",              "owner": "00-CEP/CEP-001", "enforced_by": ["CK-REG-ENFORCE", "CK-REG-VALIDATE"] },
+    { "id": "PR-02", "name": "Knowledge Once",                "owner": "00-MASTER/UAKOS-CLOSURE-002/UAKOS-CLOSURE-002-CHARTER.md", "enforced_by": ["CK-CLOSURE-P1", "CK-CLOSURE-P2"] },
+    { "id": "PR-03", "name": "Context Assimilation Gate",     "owner": "00-MASTER/MCP-001-MASTER-CONTEXT.md", "enforced_by": ["CK-CLOSURE-P1"] },
+    { "id": "PR-04", "name": "Reuse First",                   "owner": "IAC-001D", "enforced_by": ["CK-CLOSURE-P2"] },
+    { "id": "PR-05", "name": "Architecture Admission Test",   "owner": "00-CMG/CMG-000001", "enforced_by": ["CK-CMG"] },
+    { "id": "PR-06", "name": "Expressive Completeness",       "owner": "UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md", "enforced_by": ["CK-CMG"] },
+    { "id": "PR-07", "name": "Zero Enumeration Principle",    "owner": "04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md", "enforced_by": ["CK-DISCOVERY"] },
+    { "id": "PR-08", "name": "Universal Representation",      "owner": "00-CMG/CMG-000010", "enforced_by": ["CK-DISCOVERY"] },
+    { "id": "PR-09", "name": "Universal Composition",         "owner": "00-CEP/CEP-001", "enforced_by": ["CK-GRAPH"] },
+    { "id": "PR-10", "name": "Universal Context",             "owner": "00-MASTER/MCS-000-MASTER-CONTEXT-SYSTEM-ARCHITECTURE.md", "enforced_by": ["CK-CLOSURE-P1"] },
+    { "id": "PR-11", "name": "Universal Identity",            "owner": "00-BOOK/tools/config.py (id-ledger)", "enforced_by": ["CK-REG-VALIDATE"] },
+    { "id": "PR-12", "name": "Universal Governance",          "owner": "00-CEP/CEP-002", "enforced_by": ["CK-CMG", "CK-REG-ENFORCE"] },
+    { "id": "PR-13", "name": "Universal Traceability",        "owner": "00-CEP/CEP-008", "enforced_by": ["CK-GRAPH", "CK-HEALTH"] },
+    { "id": "PR-14", "name": "Universal Validation",          "owner": "00-CEP/CEP-004", "enforced_by": ["CK-VERIFY"] },
+    { "id": "PR-15", "name": "Universal Certification",       "owner": "00-CEP/CEP-005", "enforced_by": ["CK-VERIFY"] },
+    { "id": "PR-16", "name": "Deterministic Evolution",       "owner": "00-CEP/CEP-009", "enforced_by": ["CK-RIE-DETERMINISM", "CK-SELF-DETERMINISM"] },
+    { "id": "PR-17", "name": "Continuous Evolution",          "owner": "00-CEP/CEP-009", "enforced_by": ["CK-SELF-DETERMINISM"] },
+    { "id": "PR-18", "name": "Evidence-Based Decision Making","owner": "00-CEP/CEP-008", "enforced_by": ["CK-HEALTH", "CK-GRAPH"] },
+    { "id": "PR-19", "name": "Infinite Extensibility",        "owner": "00-CMG/CMG-000010", "enforced_by": ["CK-SELF-NO-ENUMERATION"] },
+    { "id": "PR-20", "name": "Unlimited Evolution",           "owner": "00-CEP/CEP-009 Art XXIII.10", "enforced_by": ["CK-SELF-NO-ENUMERATION"] },
+    { "id": "PR-21", "name": "Decision Assimilation",         "owner": "00-CEP/CEP-002 Art 28", "enforced_by": ["CK-DECISION-EVIDENCE"] }
+  ],
+
+  "invariants": [
+    { "id": "IV-01", "name": "Universally Representable",       "owner": "00-CMG/CMG-000010" },
+    { "id": "IV-02", "name": "Constitutionally Governed",       "owner": "00-CEP/CEP-002" },
+    { "id": "IV-03", "name": "Meta-Model Compliant",            "owner": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md" },
+    { "id": "IV-04", "name": "Identity Aware",                  "owner": "00-BOOK/tools/config.py (id-ledger)" },
+    { "id": "IV-05", "name": "Context Aware",                   "owner": "00-MASTER/MCS-000-MASTER-CONTEXT-SYSTEM-ARCHITECTURE.md" },
+    { "id": "IV-06", "name": "Versioned",                       "owner": "00-CEP/CEP-009 Art XXIV" },
+    { "id": "IV-07", "name": "Traceable",                       "owner": "00-CEP/CEP-008" },
+    { "id": "IV-08", "name": "Composable",                      "owner": "00-CEP/CEP-001" },
+    { "id": "IV-09", "name": "Discoverable",                    "owner": "engine/discovery" },
+    { "id": "IV-10", "name": "Reusable",                        "owner": "IAC-001D §05" },
+    { "id": "IV-11", "name": "Observable",                      "owner": "platform/observability" },
+    { "id": "IV-12", "name": "Governed",                        "owner": "00-CEP/CEP-002" },
+    { "id": "IV-13", "name": "Validatable",                     "owner": "00-CEP/CEP-004" },
+    { "id": "IV-14", "name": "Certifiable",                     "owner": "00-CEP/CEP-005" },
+    { "id": "IV-15", "name": "Deterministically Realizable",    "owner": "engine/determinism" },
+    { "id": "IV-16", "name": "Continuously Evolvable",          "owner": "00-CEP/CEP-009" },
+    { "id": "IV-17", "name": "Dispositioned",                   "owner": "00-CEP/CEP-002 Art 28" }
+  ],
+
+  "$checks_comment": [
+    "Each check is a LOCATED, ALREADY-EXISTING executable. UCCEP adds no validator of its",
+    "own except the three CK-SELF-* checks, which validate only UCCEP's own declaration.",
+    "",
+    "write_scope:  read-only  — mutates nothing",
+    "              own-memory — regenerates artifacts inside its own operational-memory dir",
+    "              projections— regenerates the derived 00-BOOK projections (REG-AUTO-001)",
+    "tier:         boot       — fast, read-only; safe at session start and in CI",
+    "              standard   — regenerates derived state; safe in CI",
+    "              full       — heavy (test suites / whole-repo transactions); CI-only",
+    "interpreter:  $PY3       — system python3 (stdlib-only engines)",
+    "              $PY        — the canonical .ec1-venv interpreter (installed package)",
+    "advisory:     true       — verdict is recorded but does not by itself fail the gate;",
+    "                           used ONLY where the located owner's own contract declares",
+    "                           the check advisory. Every advisory check must name a",
+    "                           finding that governs its non-blocking status."
+  ],
+
+  "checks": [
+    {
+      "id": "CK-CMG",
+      "name": "Meta-constitutional validation (16 check groups over 12 invariants)",
+      "owner": "00-CMG/CMG-000001 · tools/cmg_validate.py",
+      "argv": ["./00-CMG/tools/cmg-gate.sh"],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "PASS (zero findings)", "1": "FINDINGS", "2": "FAIL-CLOSED ABORT" }
+    },
+    {
+      "id": "CK-REG-ENFORCE",
+      "name": "Registration & classification enforcement gate (pre-registration)",
+      "owner": "00-BOOK/tools/ukb.py (REG-AUTO-001 / UMB-IMP-001)",
+      "argv": ["$PY3", "00-BOOK/tools/ukb.py", "enforce", "--pre"],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "PASS", "nonzero": "unregistered / unclassified / invalid artifact present" }
+    },
+    {
+      "id": "CK-REG-VALIDATE",
+      "name": "Registry structural validation + append-only ledger integrity",
+      "owner": "00-BOOK/tools/ukb.py",
+      "argv": ["$PY3", "00-BOOK/tools/ukb.py", "validate"],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "PASS", "nonzero": "ledger or referential integrity broken" }
+    },
+    {
+      "id": "CK-CLOSURE-P1",
+      "name": "Knowledge assimilation closure (conversation-only / upload-only / orphan / duplicate)",
+      "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+      "argv": ["$PY3", "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py", "--gate"],
+      "env": { "CLOSURE_SKIP_CORPUS": "1" },
+      "write_scope": "own-memory",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "CLOSED", "nonzero": "constitutional knowledge gap remains" }
+    },
+    {
+      "id": "CK-CLOSURE-P2",
+      "name": "Concept-graph reconciliation (canonical home / duplicate / orphan concepts)",
+      "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
+      "argv": ["$PY3", "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py", "--gate"],
+      "env": { "CLOSURE_SKIP_CORPUS": "1" },
+      "write_scope": "own-memory",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "CLOSED", "nonzero": "concept unhomed / duplicated / orphaned" }
+    },
+    {
+      "id": "CK-CLOSURE-P3",
+      "name": "Implementation planning determination (repository closure projection)",
+      "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
+      "argv": ["$PY3", "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py", "--gate"],
+      "env": { "CLOSURE_SKIP_CORPUS": "1" },
+      "write_scope": "own-memory",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": true,
+      "advisory_reason": "UCCEP-F-001 — the located owner returns a CONSTANT verdict independent of measured state, so its exit code carries no evidentiary value until the finding is dispositioned.",
+      "governed_by_finding": "UCCEP-F-001",
+      "exit_semantics": { "0": "never returned at present", "1": "literal NOT-CLOSED (constant)" }
+    },
+    {
+      "id": "CK-HEALTH",
+      "name": "Repository health (strict certification policy)",
+      "owner": "platform/measurement (UCOS-UMA-001)",
+      "argv": ["$PY", "-m", "platform.measurement.cli", "health", "--strict"],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": true,
+      "advisory_reason": "UCCEP-F-002 — the check is RED on a known, registered, owned gap (incomplete traceability). It is recorded as blocking-for-certification but non-blocking-for-progress until UCCEP-F-002 is discharged.",
+      "governed_by_finding": "UCCEP-F-002",
+      "exit_semantics": { "0": "healthy", "1": "unhealthy" }
+    },
+    {
+      "id": "CK-GRAPH",
+      "name": "Universal traceability graph invariants",
+      "owner": "engine/graph (UCOS-EPIC-002)",
+      "argv": ["$PY", "-m", "engine.graph.cli", "validate"],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "json_stdout": true,
+      "json_assertions": [
+        { "path": "dangling_edge_endpoints", "must_be_empty": true },
+        { "path": "duplicate_node_ids", "must_be_empty": true },
+        { "path": "malformed_edge_ids", "must_be_empty": true },
+        { "path": "malformed_node_ids", "must_be_empty": true },
+        { "path": "unversioned_artifacts", "must_be_empty": true },
+        { "path": "dependency_cycle", "must_be_empty": true, "authority": "CEP-009 Art XV.2 — a lineage cycle IS PROHIBITED", "finding": "UCCEP-F-003" }
+      ],
+      "$assertion_comment": "The located owner reports these fields but returns exit 0 regardless (UCCEP-F-003, fail-open). UCCEP does not modify the owner; it reads the owner's OWN reported evidence and applies the constitutional consequence CEP-009 already mandates. No new validation logic and no second graph engine is created.",
+      "exit_semantics": { "0": "reported (verdict taken from the reported fields, not the exit code)" }
+    },
+    {
+      "id": "CK-DISCOVERY",
+      "name": "Universal discovery coverage (zero-enumeration substrate coverage)",
+      "owner": "engine/discovery (UCOS-EPIC-003)",
+      "argv": ["$PY", "-m", "engine.discovery.cli", "coverage"],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "json_stdout": true,
+      "json_assertions": [
+        { "path": "coverage.incomplete_dimensions", "must_be_empty": true },
+        { "path": "coverage.percent", "must_equal": 100.0 }
+      ],
+      "exit_semantics": { "0": "reported" }
+    },
+    {
+      "id": "CK-RIE-DETERMINISM",
+      "name": "Repository intelligence deterministic regeneration",
+      "owner": "intelligence/rie",
+      "argv": ["$PY", "-m", "intelligence.rie", "verify"],
+      "write_scope": "read-only",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "deterministic", "1": "non-deterministic regeneration" }
+    },
+    {
+      "id": "CK-VERIFY",
+      "name": "Canonical verification (lint · tests · coverage · enforcement)",
+      "owner": "verify.sh",
+      "argv": ["./verify.sh"],
+      "write_scope": "read-only",
+      "tier": "full",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "all gates green", "1": "one or more stages failed" }
+    },
+    {
+      "id": "CK-DETERMINISM-BUILD",
+      "name": "Constitutional determinism (double-build, fail-on-divergence)",
+      "owner": "engine/determinism (TASK-000033)",
+      "argv": ["$PY", "-m", "engine.determinism.reproduce", "BP-DATA-0001", "--evidence-dir", "determinism-evidence"],
+      "write_scope": "own-memory",
+      "tier": "full",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "byte-identical", "nonzero": "divergence" }
+    },
+    {
+      "id": "CK-REG-DRIFT",
+      "name": "Atomic Registration Transaction + registration-drift gate",
+      "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
+      "argv": ["bash", "00-BOOK/tools/register.sh", "--guard"],
+      "write_scope": "projections",
+      "tier": "full",
+      "fail_closed": true,
+      "advisory": false,
+      "$assertion_comment": "This gate regenerates the four derived projection subtrees under its OWN authority (REG-AUTO-001 owns them). UCCEP invokes it; UCCEP does not write them. The forbidden-write guard governs artifacts UCCEP itself authors, which is why write_scope is declared per check rather than assumed.",
+      "exit_semantics": { "0": "registered and synchronized", "3": "uncommitted-registration drift — source split from projections", "nonzero": "registration transaction failed" }
+    },
+    {
+      "id": "CK-DECISION-EVIDENCE",
+      "name": "Constitutional decision assimilation (Implementation Evidence Gate)",
+      "owner": "00-MASTER/UCDA-000001/ucda_engine.py (CEP-002 Art 28.19)",
+      "argv": ["$PY3", "00-MASTER/UCDA-000001/ucda_engine.py", "--gate"],
+      "write_scope": "own-memory",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "$assertion_comment": "The verdict is reachable in BOTH directions: with every declared decision carrying exactly one lawful disposition whose required evidence resolves, the gate exits 0; with any decision undispositioned, conversation-only, or claiming unresolvable evidence, it exits 1. A declaration whose own integrity is broken exits 2 and asserts no verdict.",
+      "exit_semantics": { "0": "OPEN — every ratified decision is dispositioned with resolving repository evidence", "1": "CLOSED — a decision is undispositioned (CEP-002 Art 28.14); successor implementation and architectural work is not authorized", "2": "FAIL-CLOSED ABORT — the decision declaration is unusable" }
+    },
+    {
+      "id": "CK-SELF-DECLARATION",
+      "name": "UCCEP declaration integrity (every reference resolves; no duplicate ids)",
+      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "argv": ["$SELF", "--check-declaration"],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "PASS", "1": "dangling reference or duplicate identifier" }
+    },
+    {
+      "id": "CK-SELF-NO-ENUMERATION",
+      "name": "Zero Enumeration / no-hardcoding guard over UCCEP's own surface",
+      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "argv": ["$SELF", "--check-no-enumeration"],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "PASS", "1": "a finite domain / vendor / technology assumption was introduced" }
+    },
+    {
+      "id": "CK-SELF-WRITE-SCOPE",
+      "name": "Forbidden-write guard (UCCEP writes only its own operational memory)",
+      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "argv": ["$SELF", "--check-write-scope"],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "PASS", "1": "a write outside 00-MASTER/UCCEP-000000/ was attempted" }
+    },
+    {
+      "id": "CK-SELF-DETERMINISM",
+      "name": "UCCEP self-determinism (identical seal across repeated runs)",
+      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "argv": ["$SELF", "--check-determinism"],
+      "write_scope": "read-only",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": { "0": "byte-identical seal", "1": "divergent seal" }
+    }
+  ],
+
+  "$gates_comment": "The mandatory constitutional gates of the mission, each bound to the located checks that execute it. A gate with no bound check would be a MANUAL gate and is itself a finding (no manual governance). The count is not fixed by this file's prose: adding a gate is an entry in the list below and requires no engine change.",
+
+  "gates": [
+    { "id": "G-01", "name": "Context Assimilation Gate",        "owner": "00-MASTER/MCP-001-MASTER-CONTEXT.md",        "checks": ["CK-CLOSURE-P1"] },
+    { "id": "G-02", "name": "Knowledge Assimilation Gate",      "owner": "00-MASTER/UAKOS-CLOSURE-002",                "checks": ["CK-CLOSURE-P1", "CK-CLOSURE-P2"] },
+    { "id": "G-03", "name": "Reuse Gate",                       "owner": "IAC-001D §05",                                "checks": ["CK-CLOSURE-P2", "CK-DISCOVERY"] },
+    { "id": "G-04", "name": "Constitution Gate",                "owner": "00-CEP/CEP-001",                              "checks": ["CK-CMG"] },
+    { "id": "G-05", "name": "Architecture Admission Gate",      "owner": "00-CMG/CMG-000001",                           "checks": ["CK-CMG", "CK-SELF-NO-ENUMERATION"] },
+    { "id": "G-06", "name": "Repository Truth Gate",            "owner": "00-BOOK/tools/ukb.py",                        "checks": ["CK-REG-ENFORCE", "CK-REG-VALIDATE", "CK-SELF-WRITE-SCOPE"] },
+    { "id": "G-07", "name": "Registry Gate",                    "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",    "checks": ["CK-REG-ENFORCE", "CK-REG-DRIFT"] },
+    { "id": "G-08", "name": "Dependency Gate",                  "owner": "engine/graph",                                "checks": ["CK-GRAPH"] },
+    { "id": "G-09", "name": "Governance Gate",                  "owner": "00-CEP/CEP-002",                              "checks": ["CK-CMG", "CK-SELF-DECLARATION"] },
+    { "id": "G-10", "name": "Validation Gate",                  "owner": "00-CEP/CEP-004",                              "checks": ["CK-VERIFY"] },
+    { "id": "G-11", "name": "Certification Gate",               "owner": "00-CEP/CEP-005",                              "checks": ["CK-HEALTH", "CK-VERIFY"] },
+    { "id": "G-12", "name": "Evidence Gate",                    "owner": "00-CEP/CEP-008",                              "checks": ["CK-RIE-DETERMINISM", "CK-SELF-DETERMINISM"] },
+    { "id": "G-13", "name": "Implementation Authorization Gate", "owner": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md", "checks": ["CK-DETERMINISM-BUILD", "CK-VERIFY"] },
+    { "id": "G-14", "name": "Implementation Evidence Gate",     "owner": "00-CEP/CEP-002 Art 28",                       "checks": ["CK-DECISION-EVIDENCE"] }
+  ],
+
+  "$programs_comment": "The programmes of the mission. Each is DELEGATED to an existing located owner — UCCEP creates no owner, no engine and no registry of its own. 'output' is the mission-named determination the engine regenerates into 00-MASTER/UCCEP-000000/. The count is not fixed by this file's prose: adding a programme is an entry in the list below and requires no engine change.",
+
+  "programs": [
+    {
+      "id": "PROGRAM-000001", "name": "Universal Constitutional Assimilation",
+      "output": "01-CANONICAL-ASSIMILATION-REGISTER.md",
+      "delegated_to": ["00-MASTER/UAKOS-CLOSURE-002", "00-MASTER/UAKOS-CLOSURE-003", "00-MASTER/UAKOS-CLOSURE-006"],
+      "checks": ["CK-CLOSURE-P1", "CK-CLOSURE-P2"]
+    },
+    {
+      "id": "PROGRAM-000002", "name": "Repository Truth Reconciliation",
+      "output": "02-REPOSITORY-TRUTH-REGISTER.md",
+      "delegated_to": ["00-BOOK/tools/ukb.py", "00-MASTER/UCOS-RECON-001-REPOSITORY-STATE-RECONCILIATION.md", "00-MASTER/UAKOS-CLOSURE-002/19-REPOSITORY-TRUTH-DETERMINATION.md"],
+      "checks": ["CK-REG-ENFORCE", "CK-REG-VALIDATE", "CK-SELF-WRITE-SCOPE"]
+    },
+    {
+      "id": "PROGRAM-000003", "name": "Universal Meta-Model Governance",
+      "output": "03-META-MODEL-GOVERNANCE-CERTIFICATION.md",
+      "delegated_to": ["00-CMG/CMG-000001", "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md", "00-MASTER/UCOS-UMA-001"],
+      "checks": ["CK-CMG", "CK-SELF-DECLARATION"]
+    },
+    {
+      "id": "PROGRAM-000004", "name": "Universal Registry Evolution",
+      "output": "04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
+      "delegated_to": ["00-BOOK/tools/register.sh", "00-BOOK/tools/config.py", "engine/registry", "00-CEP/STAGE-02-S2-02-REGISTRY-FEDERATION-ARCHITECTURE.md"],
+      "checks": ["CK-REG-ENFORCE", "CK-DISCOVERY", "CK-REG-DRIFT"]
+    },
+    {
+      "id": "PROGRAM-000005", "name": "Universal Repository Governance",
+      "output": "05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
+      "delegated_to": ["00-CEP/CEP-002", "00-BOOK/CONTROL-TOWER (REG-AUTO-001 standard)", "00-CMG/CMG-000005"],
+      "checks": ["CK-REG-ENFORCE", "CK-CMG", "CK-REG-DRIFT"]
+    },
+    {
+      "id": "PROGRAM-000006", "name": "Universal Enforcement Evolution",
+      "output": "06-EXECUTABLE-CONSTITUTIONAL-GOVERNANCE.md",
+      "delegated_to": ["verify.sh", "00-CMG/tools/cmg-gate.sh", "00-BOOK/tools/ukb.py", ".github/workflows"],
+      "checks": ["CK-CMG", "CK-REG-ENFORCE", "CK-SELF-DECLARATION"]
+    },
+    {
+      "id": "PROGRAM-000007", "name": "Universal Traceability Evolution",
+      "output": "07-UNIVERSAL-TRACEABILITY-GRAPH.md",
+      "delegated_to": ["00-CEP/CEP-008", "engine/graph", "00-BOOK/DATA/relationships.json", "00-MASTER/MCP-006-MASTER-TRACEABILITY.md"],
+      "checks": ["CK-GRAPH", "CK-HEALTH"]
+    },
+    {
+      "id": "PROGRAM-000008", "name": "Universal Dependency Evolution",
+      "output": "08-DEPENDENCY-INTELLIGENCE.md",
+      "delegated_to": ["engine/graph", "intelligence/rie", "00-MASTER/UAKOS-CLOSURE-002/38-DEPENDENCY-REGISTER.md"],
+      "checks": ["CK-GRAPH", "CK-RIE-DETERMINISM"]
+    },
+    {
+      "id": "PROGRAM-000009", "name": "Universal Knowledge Evolution",
+      "output": "09-KNOWLEDGE-EVOLUTION-ENGINE.md",
+      "delegated_to": ["engine/knowledge", "15-UNIVERSAL-SCIENCE-INTELLIGENCE", "00-CMG/CMG-000010"],
+      "checks": ["CK-CLOSURE-P1", "CK-DISCOVERY", "CK-SELF-NO-ENUMERATION"]
+    },
+    {
+      "id": "PROGRAM-000010", "name": "Universal Implementation Evolution",
+      "output": "10-IMPLEMENTATION-EVOLUTION-ENGINE.md",
+      "delegated_to": ["engine/compiler", "engine/factory", "engine/determinism", "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"],
+      "checks": ["CK-DETERMINISM-BUILD", "CK-SELF-NO-ENUMERATION"]
+    },
+    {
+      "id": "PROGRAM-000011", "name": "Universal Validation Evolution",
+      "output": "11-VALIDATION-INTELLIGENCE.md",
+      "delegated_to": ["00-CEP/CEP-004", "engine/validation", "platform/universal_validation", "platform/validation_intelligence"],
+      "checks": ["CK-VERIFY"]
+    },
+    {
+      "id": "PROGRAM-000012", "name": "Universal Certification Evolution",
+      "output": "12-CERTIFICATION-INTELLIGENCE.md",
+      "delegated_to": ["00-CEP/CEP-005", "engine/certification", "engine/universal_certification", "00-BOOK/DATA/certification.json"],
+      "checks": ["CK-VERIFY", "CK-HEALTH"]
+    },
+    {
+      "id": "PROGRAM-000013", "name": "Universal Evolution Intelligence",
+      "output": "13-EVOLUTION-INTELLIGENCE.md",
+      "delegated_to": ["intelligence/rie", "00-CEP/CEP-009", "00-MASTER/MCP-004-MASTER-DECISIONS.md"],
+      "checks": ["CK-RIE-DETERMINISM", "CK-GRAPH"]
+    },
+    {
+      "id": "PROGRAM-000014", "name": "Universal Repository Intelligence",
+      "output": "14-REPOSITORY-INTELLIGENCE.md",
+      "delegated_to": ["intelligence/rie", "platform/measurement", "00-MASTER/MCP-005-MASTER-DASHBOARD.md"],
+      "checks": ["CK-HEALTH", "CK-DISCOVERY", "CK-RIE-DETERMINISM"]
+    },
+    {
+      "id": "PROGRAM-000015", "name": "Universal Continuous Certification",
+      "output": "15-CONTINUOUS-CONSTITUTIONAL-CERTIFICATION.md",
+      "delegated_to": ["00-CEP/CEP-005", "00-CEP/CEP-010", "00-CMG/CMG-000007"],
+      "checks": ["CK-CMG", "CK-REG-ENFORCE", "CK-REG-VALIDATE", "CK-HEALTH", "CK-GRAPH", "CK-DISCOVERY", "CK-SELF-DECLARATION", "CK-SELF-NO-ENUMERATION", "CK-SELF-WRITE-SCOPE"]
+    },
+    {
+      "id": "PROGRAM-000016", "name": "Universal Decision Assimilation",
+      "output": "18-DECISION-ASSIMILATION-CERTIFICATION.md",
+      "delegated_to": ["00-CEP/CEP-002 Art 28", "00-MASTER/UCDA-000001", "00-MASTER/MCP-004-MASTER-DECISIONS.md", "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md", "adr/", "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"],
+      "checks": ["CK-DECISION-EVIDENCE"]
+    }
+  ],
+
+  "$findings_comment": [
+    "The Assimilation Register. Every agreement or observed condition must carry exactly",
+    "one disposition from: IMPLEMENTED, REGISTERED, GOVERNED, VALIDATED, CERTIFIED,",
+    "REJECTED-WITH-EVIDENCE, WORK-PACKAGE. Nothing may remain ambiguous.",
+    "",
+    "'blocking' declares whether the finding blocks CERTIFICATION (not progress). A",
+    "finding is discharged only by its named owner — UCCEP discharges nothing itself."
+  ],
+
+  "findings": [
+    {
+      "id": "UCCEP-F-001",
+      "title": "phase3_engine.py returns a constant NOT-CLOSED verdict independent of measured state",
+      "class": "FAIL-CLOSED-WITHOUT-PASS-PATH",
+      "evidence": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py assigns repository_status the literal \"NOT-CLOSED\" and --gate exits 1 unconditionally. Measured this session: unhomed concepts = 0, planned = 0/0, classes = 0, waves = 0, yet the gate still exited 1. A gate with no reachable PASS state carries no evidentiary value.",
+      "violates": ["PR-16 Deterministic Evolution", "PR-18 Evidence-Based Decision Making"],
+      "owner": "00-MASTER/UAKOS-CLOSURE-002 (FROZEN specification) — successor programme UAKOS-CLOSURE-003/004",
+      "disposition": "WORK-PACKAGE",
+      "work_package": "WP-UCCEP-001",
+      "blocking": true,
+      "note": "UCCEP does NOT patch the located owner: UAKOS-CLOSURE-002 is FROZEN as a specification and an amendment to it is owned by CEP-009 Art III/IV via its successor programme. Until discharged, CK-CLOSURE-P3 is recorded as advisory so that a constant verdict cannot masquerade as evidence."
+    },
+    {
+      "id": "UCCEP-F-002",
+      "title": "Repository health is RED: 1198 of 1198 registered artifacts have incomplete traceability",
+      "class": "MEASURED-GOVERNANCE-GAP",
+      "evidence": "platform.measurement.cli health --strict exits 1 with traceability-gaps unhealthy (other four critical checks healthy). platform.measurement.cli gaps reports total=1198, by_type={'incomplete-traceability': 1198}, structural_count=0. Independently corroborated by REG-AUTO-001's own build, which reports UMB-IMP-002: 272/1199 artifacts carry a populated traceability spine (22.7%) — consistent with UAKOS-CLOSURE-002 doc 68 recording traceability at ~21%. Two engines that share no code agree on the magnitude.",
+      "violates": ["PR-13 Universal Traceability", "IV-07 Traceable"],
+      "owner": "00-CEP/CEP-008 (traceability authority) · platform/measurement (UCOS-UMA-001) · engine/graph",
+      "disposition": "REGISTERED",
+      "work_package": "WP-UCCEP-002",
+      "blocking": true,
+      "note": "This is the single largest measured constitutional gap in the repository. It is recorded here as Repository Truth rather than left as an unread red exit code. It does not block progress; it blocks CERTIFICATION."
+    },
+    {
+      "id": "UCCEP-F-003",
+      "title": "engine.graph.cli validate reports a dependency cycle but returns is_valid=true and exit 0 (fail-open)",
+      "class": "FAIL-OPEN-GATE",
+      "evidence": "engine.graph.cli validate output: dependency_cycle = [UCOS-ENG-000008, UCOS-ENG-000007, UCOS-ENG-000008], is_valid = true, exit 0. Located root cause: UCOS-ENG-000008 = ENG-004 Universal Type System (07-ENGINEERING/…UNIVERSAL-TYPE-SYSTEM-MASTER-ARCHITECTURE.md) declares parent + dependency UCOS-ENG-000007, while UCOS-ENG-000007 = ENG-005 Universal Relationship & Reference System (07-ENGINEERING/…UNIVERSAL-RELATIONSHIP-REFERENCE-SYSTEM-MASTER-ARCHITECTURE.md) carries a metadata Depends-On back to UCOS-ENG-000008 (edge UEDGE-000003640, note 'metadata:DEPENDS ON') even though its artifacts.json dependencies list names only UCOS-ENG-000006. The two instruments therefore declare a mutual Depends-On. CEP-009 Art XV.2 provides that a lineage forming a cycle IS PROHIBITED; Art XX.2 provides that a lineage cycle places the Program in HALTED.",
+      "violates": ["PR-09 Universal Composition", "PR-13 Universal Traceability", "CEP-009 Art XV.2", "CEP-009 Art XX.2"],
+      "owner": "engine/graph (UCOS-EPIC-002)",
+      "disposition": "GOVERNED",
+      "work_package": "WP-UCCEP-003",
+      "blocking": true,
+      "note": "UCCEP does not modify engine/graph and creates no second graph engine. It reads the located owner's OWN reported fields and applies the consequence CEP-009 already mandates (CK-GRAPH json_assertions). The fail-open exit code remains the owner's to correct."
+    },
+    {
+      "id": "UCCEP-F-004",
+      "title": "CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no located authority is competent to ratify",
+      "class": "STANDING-CONSTITUTIONAL-VACANCY",
+      "evidence": "cmg-gate reports 0 findings with readiness outcome READY-PROVISIONAL, 1 vacancy, 9 gaps, 7 open questions (6 open). 00-CMG/README records that CMG-000001 is PROVISIONAL, not ratified, that Tier T1 is vacant, and that the corpus contains no authority competent to ratify anything.",
+      "violates": [],
+      "owner": "00-CMG/CMG-000014 · 00-CEP/CEP-006 (ratification)",
+      "disposition": "REGISTERED",
+      "work_package": null,
+      "blocking": true,
+      "note": "Pre-dates UCCEP and is correctly self-reported by its owner. It is the ceiling on every certification in this repository: UCCEP therefore CANNOT and DOES NOT assert a ratified or final certification. Its maximum attainable verdict is CERTIFIED-PROVISIONAL. Recorded, not remediated — remediation requires an authority that does not exist, and inventing one would create a parallel authority."
+    },
+    {
+      "id": "UCCEP-F-005",
+      "title": "Located constitutional gates were enforceable but not enforced — five gates absent from CI",
+      "class": "BYPASSABLE-ENFORCEMENT",
+      "evidence": "Before UCCEP the three CI workflows ran only: determinism (engine.determinism.reproduce), EC-1 lint/test/build/frozen-guard, and registration (ukb enforce --pre + register.sh --guard). cmg-gate, the closure gates, measure health, graph validate and rie verify existed, were fail-closed, and ran in no automated gate — so a change could bypass them.",
+      "violates": ["PR-12 Universal Governance", "IV-12 Governed"],
+      "owner": "UCCEP-000000 (this programme)",
+      "disposition": "IMPLEMENTED",
+      "work_package": null,
+      "blocking": false,
+      "note": "Discharged by this programme: the aggregate gate binds every located gate and is wired into the Makefile, a CI workflow, and the session-start hook. No new validator was written to do it."
+    },
+    {
+      "id": "UCCEP-F-006",
+      "title": "ukb validate degrades to structural-only checks when jsonschema is absent",
+      "class": "DEGRADED-VALIDATION",
+      "evidence": "python3 00-BOOK/tools/ukb.py validate prints \"jsonschema not installed — ran structural checks only\" and still exits 0. The CI registration workflow installs jsonschema with `|| true`, so schema validation is silently optional there too.",
+      "violates": ["PR-14 Universal Validation"],
+      "owner": "00-BOOK/tools/ukb.py · .github/workflows/ucos-registration-gate.yml",
+      "disposition": "REGISTERED",
+      "work_package": "WP-UCCEP-004",
+      "blocking": false,
+      "note": "A validation gate that silently reduces its own scope reports PASS for a weaker proposition than the one claimed. Recorded so the reduction is visible rather than silent."
+    },
+    {
+      "id": "UCCEP-F-007",
+      "title": "Working tree carries uncommitted constitutional zone and generator changes",
+      "class": "REPOSITORY-DRIFT",
+      "evidence": "At UCCEP establishment: branch programme/evo-usis-005, HEAD 527485a, 115 dirty entries — untracked 00-CMG/ (the entire meta-constitutional zone), untracked 00-MASTER/UCOS-{ACE,CCD,NUCLEUS}-001/ and USIS-WAVE3 determinations, modified 00-BOOK/tools/{config.py,ukb.py} (adds RECONCILED_SETS), modified 00-CEP/CEP-001 and CEP-002, modified Makefile, modified registry projections and intelligence outputs. Measured consequence: register.sh --guard exits 3 (uncommitted-registration drift) with 35 untracked portal projections — prior sessions registered artifacts without committing the registration, so REG-AUTO-001's own rule that source is never split from projections is currently violated.",
+      "violates": ["PR-01 Repository Truth"],
+      "owner": "00-MASTER/MCP-002-MASTER-STATE.md (operational memory) · repository operator",
+      "disposition": "REGISTERED",
+      "work_package": "WP-UCCEP-005",
+      "blocking": false,
+      "note": "Repository Truth is what is committed. Constitutional instruments that exist only in an uncommitted working tree are not yet Repository Truth — the entire 00-CMG meta-constitutional zone is currently in that state. Recorded as observed state; committing is an operator decision that UCCEP does not take unilaterally. This drift pre-dates UCCEP; the UCCEP charter itself registered cleanly as UCOS-CON-000064 (native id UCCEP-000000, VOL-002, page 9584), taking the count 1198 → 1199."
+    },
+    {
+      "id": "UCCEP-F-008",
+      "title": "Constitutionally agreed decisions had no disposition obligation and no gate — an agreement could remain only in conversation",
+      "class": "MEASURED-GOVERNANCE-GAP",
+      "evidence": "CF-01 of 00-MASTER/UAKOS-CLOSURE-006/13-CONSTITUTIONAL-FINDINGS-REGISTER.md records 108 conversation-only architectural concepts with no governed canonical home, while a determination of CLOSED was still presented; CF-03 records that the standing session gate runs with CLOSURE_SKIP_CORPUS=1 and therefore cannot detect the condition. The located decision registers (02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md, adr/, knowledge/decisions.json, 03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md, 00-MASTER/MCP-004-MASTER-DECISIONS.md) each recorded decisions, but no instrument said what dispositions a decision may carry, what evidence each requires, or what happens to successor work while any decision lacks one. CEP-002 Art 10.3 required exactly one recorded outcome per decision and was therefore unenforceable.",
+      "violates": ["PR-01 Repository Truth", "PR-18 Evidence-Based Decision Making"],
+      "owner": "00-CEP/CEP-002 Art 28 (CEP-002-AMD-002) · 00-MASTER/UCDA-000001",
+      "disposition": "IMPLEMENTED",
+      "work_package": null,
+      "blocking": false,
+      "note": "Discharged by amending the located governance constitution rather than by creating a new instrument: CEP-002 Article 28 legislates the assimilation prohibition, the nine-stage lifecycle, the closed five-member disposition set and the Implementation Evidence Gate; UCDA-000001 carries the machine-readable disposition overlay over the located registers; and the gate is bound here as G-14 / CK-DECISION-EVIDENCE so it executes in the session hook, the Makefile and CI. The gate's verdict is reachable in both directions, so it is evidence rather than a constant. The 108 conversation-only CONCEPTS remain the closure programme's own finding (CF-01, owner UAKOS-CLOSURE-003/006); what is discharged here is the absence of a constitutional obligation and gate over agreed DECISIONS."
+    }
+  ],
+
+  "work_packages": [
+    {
+      "id": "WP-UCCEP-001",
+      "title": "Make the repository-closure verdict measured rather than constant",
+      "discharges": ["UCCEP-F-001"],
+      "owner": "UAKOS-CLOSURE-003 / UAKOS-CLOSURE-004 (successor programmes of the FROZEN -002)",
+      "route": "CEP-009 Art III (change lifecycle) → Art IV.3 (corrective on a frozen artifact proceeds only as superseding) → Art XI (successor) → CEP-004 → CEP-005 → CEP-006",
+      "acceptance": "phase3 repository_status is derived from measured unhomed/gap counts; with zero gaps the gate exits 0; with any gap it exits non-zero. The verdict must be reachable in both directions.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCCEP-002",
+      "title": "Close the traceability completeness gap across all registered artifacts",
+      "discharges": ["UCCEP-F-002"],
+      "owner": "00-CEP/CEP-008 · platform/measurement · engine/graph",
+      "route": "Measure → per-artifact traceability chain completion (requirement → design → implementation → test → certification) → re-measure. Progress is a monotone reduction in incomplete-traceability count.",
+      "acceptance": "platform.measurement.cli health --strict exits 0; CK-HEALTH ceases to be advisory.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCCEP-003",
+      "title": "Make the traceability-graph validator fail closed on a reported cycle",
+      "discharges": ["UCCEP-F-003"],
+      "owner": "engine/graph (UCOS-EPIC-002)",
+      "route": "Two independent corrections. (1) DATA: reconcile the declared dependency direction between ENG-004 (Universal Type System) and ENG-005 (Universal Relationship & Reference System) so the Depends-On relation is acyclic — the mutual Depends-On must become a single direction plus a non-dependency relation type, or a shared substrate must be extracted; the metadata of ENG-005 that produces UEDGE-000003640 disagrees with its own artifacts.json dependencies list and is the point of correction. (2) GATE: engine/graph/validation.py — is_valid must consider dependency_cycle, and the CLI must exit non-zero when is_valid is false.",
+      "acceptance": "engine.graph.cli validate exits non-zero while any cycle is reported, and exits 0 once the cycle is resolved.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCCEP-004",
+      "title": "Make schema validation mandatory rather than silently optional",
+      "discharges": ["UCCEP-F-006"],
+      "owner": "00-BOOK/tools/ukb.py · .github/workflows/ucos-registration-gate.yml",
+      "route": "Pin jsonschema in the dev dependency set; remove the `|| true` from the CI install; have ukb validate declare a reduced-scope run as a finding rather than a silent note.",
+      "acceptance": "ukb validate cannot report PASS while its schema checks were skipped.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCCEP-005",
+      "title": "Commit the in-flight constitutional zone so it becomes Repository Truth",
+      "discharges": ["UCCEP-F-007"],
+      "owner": "repository operator · 00-MASTER/MCP-002-MASTER-STATE.md",
+      "route": "Review the untracked 00-CMG/ zone and the 00-BOOK/tools/{config.py,ukb.py} RECONCILED_SETS change together with their regenerated projections, then commit source and projections atomically (REG-AUTO-001: source is never split from projections), and reconcile MCP-002 §01 to the new HEAD.",
+      "acceptance": "register.sh --guard exits 0 with zero drift; git status reports no uncommitted registration.",
+      "authorization_required": true
+    }
+  ]
+}

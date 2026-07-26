@@ -1,18 +1,19 @@
 {
-  "generated_at": "2026-07-25T08:43:56+00:00",
+  "generated_at": "2026-07-26T10:44:55+00:00",
   "generator_version": "1.0.0",
   "portfolio": {
-    "total_artifacts": 1164,
-    "total_pages": 9499,
+    "total_artifacts": 1199,
+    "total_pages": 9587,
     "total_volumes": 25,
-    "total_edges": 12493,
+    "total_edges": 12841,
     "portfolio_status": "IN_PROGRESS — analysis/architecture/generation complete; runtime testing/deployment pending EC-1",
     "status_histogram": {
-      "ACTIVE": 1067,
+      "ACTIVE": 1098,
       "FINAL": 9,
-      "FROZEN": 38,
+      "FROZEN": 27,
       "CERTIFIED": 7,
-      "COMPLETE": 43
+      "COMPLETE": 43,
+      "UNDER_REVIEW": 15
     }
   },
   "programs": [
@@ -137,15 +138,25 @@
       "rollup_status": "ACTIVE"
     },
     {
+      "program": "CMG",
+      "artifact_count": 2,
+      "status_histogram": {
+        "ACTIVE": 1,
+        "UNDER_REVIEW": 1
+      },
+      "rollup_status": "UNDER_REVIEW"
+    },
+    {
       "program": "CONSOLIDATION",
-      "artifact_count": 43,
+      "artifact_count": 58,
       "status_histogram": {
         "FINAL": 7,
-        "ACTIVE": 20,
-        "FROZEN": 14,
-        "COMPLETE": 2
+        "ACTIVE": 32,
+        "FROZEN": 3,
+        "COMPLETE": 2,
+        "UNDER_REVIEW": 14
       },
-      "rollup_status": "ACTIVE"
+      "rollup_status": "UNDER_REVIEW"
     },
     {
       "program": "CRITICALPATH",
@@ -643,6 +654,14 @@
       "rollup_status": "ACTIVE"
     },
     {
+      "program": "UCOSACFV0000",
+      "artifact_count": 1,
+      "status_histogram": {
+        "ACTIVE": 1
+      },
+      "rollup_status": "ACTIVE"
+    },
+    {
       "program": "UCOSOMEGAINF",
       "artifact_count": 1,
       "status_histogram": {
@@ -676,9 +695,9 @@
     },
     {
       "program": "USIS",
-      "artifact_count": 19,
+      "artifact_count": 36,
       "status_histogram": {
-        "ACTIVE": 19
+        "ACTIVE": 36
       },
       "rollup_status": "ACTIVE"
     },
@@ -719,7 +738,7 @@
     "architecture": {
       "status": "APPROVED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-25T08:43:56+00:00",
+      "as_of": "2026-07-26T10:44:55+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "implementation": {
@@ -743,19 +762,19 @@
     "integration_testing": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-25T08:43:56+00:00",
+      "as_of": "2026-07-26T10:44:55+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "functional_testing": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-25T08:43:56+00:00",
+      "as_of": "2026-07-26T10:44:55+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "performance_testing": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-25T08:43:56+00:00",
+      "as_of": "2026-07-26T10:44:55+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "security": {
@@ -767,7 +786,7 @@
     "certification": {
       "status": "CERTIFIED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-25T08:43:56+00:00",
+      "as_of": "2026-07-26T10:44:55+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "deployment": {
@@ -791,19 +810,19 @@
     "release": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-25T08:43:56+00:00",
+      "as_of": "2026-07-26T10:44:55+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "execution": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-25T08:43:56+00:00",
+      "as_of": "2026-07-26T10:44:55+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "portfolio": {
       "status": "IN_PROGRESS",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-25T08:43:56+00:00",
+      "as_of": "2026-07-26T10:44:55+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     }
   }

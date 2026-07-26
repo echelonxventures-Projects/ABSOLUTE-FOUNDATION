@@ -140,6 +140,18 @@
     },
     {
       "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/discovery",
+      "canonical_name": "engine.discovery",
+      "category": "engine",
+      "description": "UCOS-EPIC-003 — Universal Discovery Engine (registry-driven, deterministic).",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "unique_id": "RC-05"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
       "canonical_location": "engine/factory",
       "canonical_name": "engine.factory",
       "category": "engine",
@@ -148,7 +160,7 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "unique_id": "RC-05"
+      "unique_id": "RC-06"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -160,7 +172,7 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "unique_id": "RC-06"
+      "unique_id": "RC-07"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -172,7 +184,19 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "unique_id": "RC-07"
+      "unique_id": "RC-08"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/graph",
+      "canonical_name": "engine.graph",
+      "category": "engine",
+      "description": "UCOS Ω∞ — Universal Knowledge Graph (UCOS-EPIC-002, Terminal T2).",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "unique_id": "RC-09"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -184,7 +208,7 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "unique_id": "RC-08"
+      "unique_id": "RC-10"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -196,7 +220,7 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "unique_id": "RC-09"
+      "unique_id": "RC-11"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -208,7 +232,19 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "unique_id": "RC-10"
+      "unique_id": "RC-12"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/universal_certification",
+      "canonical_name": "engine.universal_certification",
+      "category": "engine",
+      "description": "UCOS-EPIC-006 — Universal Certification Engine (Terminal T6).",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "unique_id": "RC-13"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -220,7 +256,7 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "unique_id": "RC-11"
+      "unique_id": "RC-14"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -232,7 +268,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-12"
+      "unique_id": "RC-15"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -244,7 +280,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-13"
+      "unique_id": "RC-16"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -256,7 +292,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-14"
+      "unique_id": "RC-17"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -268,7 +304,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-15"
+      "unique_id": "RC-18"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -280,7 +316,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-16"
+      "unique_id": "RC-19"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -292,7 +328,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-17"
+      "unique_id": "RC-20"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -304,7 +340,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-18"
+      "unique_id": "RC-21"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -316,7 +352,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-19"
+      "unique_id": "RC-22"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -328,7 +364,19 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-20"
+      "unique_id": "RC-23"
+    },
+    {
+      "authority": "EC-2 CLOSED/FROZEN",
+      "canonical_location": "platform/measurement",
+      "canonical_name": "platform.measurement",
+      "category": "platform",
+      "description": "UCOS Ω∞ — Universal Measurement Engine (``platform.measurement``, UCOS-EPIC-004).",
+      "evidence_present": true,
+      "implementation_status": "IMPLEMENTED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE/COMPOSE",
+      "unique_id": "RC-24"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -340,7 +388,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-21"
+      "unique_id": "RC-25"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -352,7 +400,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-22"
+      "unique_id": "RC-26"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -364,7 +412,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-23"
+      "unique_id": "RC-27"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -376,7 +424,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-24"
+      "unique_id": "RC-28"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -388,7 +436,19 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-25"
+      "unique_id": "RC-29"
+    },
+    {
+      "authority": "EC-2 CLOSED/FROZEN",
+      "canonical_location": "platform/runtime_platform",
+      "canonical_name": "platform.runtime_platform",
+      "category": "platform",
+      "description": "UCOS EPIC-007 (Terminal T7) — Universal Runtime Platform.",
+      "evidence_present": true,
+      "implementation_status": "IMPLEMENTED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE/COMPOSE",
+      "unique_id": "RC-30"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -400,7 +460,31 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-26"
+      "unique_id": "RC-31"
+    },
+    {
+      "authority": "EC-2 CLOSED/FROZEN",
+      "canonical_location": "platform/universal_portal",
+      "canonical_name": "platform.universal_portal",
+      "category": "platform",
+      "description": "UCOS Ω∞ — Universal Portal (UCOS-EPIC-008 · Terminal T8).",
+      "evidence_present": true,
+      "implementation_status": "IMPLEMENTED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE/COMPOSE",
+      "unique_id": "RC-32"
+    },
+    {
+      "authority": "EC-2 CLOSED/FROZEN",
+      "canonical_location": "platform/universal_validation",
+      "canonical_name": "platform.universal_validation",
+      "category": "platform",
+      "description": "UCOS-EPIC-005 — Universal Validation Engine (Terminal T5).",
+      "evidence_present": true,
+      "implementation_status": "IMPLEMENTED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE/COMPOSE",
+      "unique_id": "RC-33"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -412,7 +496,19 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-27"
+      "unique_id": "RC-34"
+    },
+    {
+      "authority": "EC-2 CLOSED/FROZEN",
+      "canonical_location": "platform/validation_intelligence",
+      "canonical_name": "platform.validation_intelligence",
+      "category": "platform",
+      "description": "UCOS-EPIC-013 — Continuous Validation Intelligence (Terminal T5).",
+      "evidence_present": true,
+      "implementation_status": "IMPLEMENTED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE/COMPOSE",
+      "unique_id": "RC-35"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -424,7 +520,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-28"
+      "unique_id": "RC-36"
     },
     {
       "authority": "ACTIVE",
@@ -436,7 +532,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-29"
+      "unique_id": "RC-37"
     },
     {
       "authority": "ACTIVE",
@@ -448,7 +544,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-30"
+      "unique_id": "RC-38"
     },
     {
       "authority": "ACTIVE",
@@ -460,7 +556,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-31"
+      "unique_id": "RC-39"
     },
     {
       "authority": "ACTIVE (AUTHORITY=NONE)",
@@ -472,7 +568,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-32"
+      "unique_id": "RC-40"
     },
     {
       "authority": "SPEC (AUTHORITY=NONE)",
@@ -500,7 +596,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "5b939ce3e483aaa7fab85e7d8a004ac70a99c5fdd43b883b0621637751da08f1",
+  "content_hash": "b790a867f501c7b61f566437894d46787e1994360238682fd124ca3fdbed99c4",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -516,7 +612,7 @@
       "[FUTURE] AEOS execution spine",
       "[FUTURE] adapters + universal CLI"
     ],
-    "program_edge_count": 15,
+    "program_edge_count": 16,
     "program_edges": [
       {
         "count": 1,
@@ -592,9 +688,14 @@
         "count": 1,
         "from": "UMB",
         "to": "ADV"
+      },
+      {
+        "count": 1,
+        "from": "USIS",
+        "to": "SERVICE"
       }
     ],
-    "total_corpus_edges": 11780
+    "total_corpus_edges": 12817
   },
   "digital_twin_snapshot": {
     "automation_readiness": "READY",
@@ -608,18 +709,18 @@
     "validation_health": "PARTIAL"
   },
   "evidence_state": {
-    "branch": "governance-reconciliation",
+    "branch": "programme/evo-usis-005",
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "5499a5363d4a0273f1b2dd2edac8875dd198f78efcf1ae1459ea97b64705ddfc",
-      "00-BOOK/DATA/certification.json": "a93dc4a12c7d14e5318dc534205ca20453f73a48a38a51f1501055f2f618962a",
-      "00-BOOK/DATA/control-tower.json": "5909baa557cf556890a46b7194fb6528ccf7ef1f9bed221284f81254ac63057b",
+      "00-BOOK/DATA/artifacts.json": "512180a52913897da1fca2130bc5bd9fd4d2e56396d021fd12e8995e0d8d929d",
+      "00-BOOK/DATA/certification.json": "ebe17b73cd9715bb533ffa49946cd93c6363c405db3e775605d8085acdc93a0d",
+      "00-BOOK/DATA/control-tower.json": "90eeccbe9c000f27104ad04dd2411454eb27e41b4a9457dc1a6a56eded4be759",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "5eb4a93df9761c3db9e6bbadac3d670ed7902be1acd5f42438c36598c8e5d455",
-      "coverage.xml": "64f7b95e8e13301477e34d00cbb9ce3e0dc47346aa712c595046b606e431942a"
+      "00-BOOK/DATA/volumes.json": "5e734533edd06487fc9979ad4390d7c077aeb4d3416870a02b38199b74316c00",
+      "coverage.xml": "77bbf749842ef3e2d7b6d7d66f266428d3f02d576eaf64ac367d431a1b59e0fc"
     },
-    "head": "081ecb0"
+    "head": "527485a"
   },
-  "evidence_timestamp": "2026-07-22T05:17:21+00:00",
+  "evidence_timestamp": "2026-07-26T02:49:04+00:00",
   "execution_frontier": {
     "blocked": [
       {
@@ -721,7 +822,7 @@
     "dimensions_counted": 15,
     "per_dimension": {
       "architecture": {
-        "as_of": "2026-07-22T05:17:21+00:00",
+        "as_of": "2026-07-26T02:49:04+00:00",
         "literal_score": 1.0,
         "reconciled_score": 1.0,
         "source": "MANUAL",
@@ -737,7 +838,7 @@
         "status": "BLOCKED"
       },
       "certification": {
-        "as_of": "2026-07-22T05:17:21+00:00",
+        "as_of": "2026-07-26T02:49:04+00:00",
         "literal_score": 1.0,
         "reconciled_score": 1.0,
         "source": "MANUAL",
@@ -753,7 +854,7 @@
         "status": "IN_PROGRESS"
       },
       "execution": {
-        "as_of": "2026-07-22T05:17:21+00:00",
+        "as_of": "2026-07-26T02:49:04+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -761,7 +862,7 @@
         "status": "NOT_STARTED"
       },
       "functional_testing": {
-        "as_of": "2026-07-22T05:17:21+00:00",
+        "as_of": "2026-07-26T02:49:04+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -777,7 +878,7 @@
         "status": "IMPLEMENTED"
       },
       "integration_testing": {
-        "as_of": "2026-07-22T05:17:21+00:00",
+        "as_of": "2026-07-26T02:49:04+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -793,7 +894,7 @@
         "status": "BLOCKED"
       },
       "performance_testing": {
-        "as_of": "2026-07-22T05:17:21+00:00",
+        "as_of": "2026-07-26T02:49:04+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -801,7 +902,7 @@
         "status": "NOT_STARTED"
       },
       "portfolio": {
-        "as_of": "2026-07-22T05:17:21+00:00",
+        "as_of": "2026-07-26T02:49:04+00:00",
         "literal_score": 0.5,
         "reconciled_score": 0.5,
         "source": "MANUAL",
@@ -817,7 +918,7 @@
         "status": "BLOCKED"
       },
       "release": {
-        "as_of": "2026-07-22T05:17:21+00:00",
+        "as_of": "2026-07-26T02:49:04+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -841,7 +942,7 @@
         "status": "BLOCKED"
       }
     },
-    "unit_validation_pct": 99.91
+    "unit_validation_pct": 96.93
   },
   "repository_health": {
     "certification": {
@@ -850,39 +951,40 @@
       "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)"
     },
     "code": {
-      "coverage_branch_pct": 99.31,
-      "coverage_line_pct": 99.91,
+      "coverage_branch_pct": 95.1,
+      "coverage_line_pct": 96.93,
       "roots": {
         "engine": {
-          "loc": 28440,
+          "loc": 39555,
           "root": "engine",
-          "source_files": 152,
-          "test_files": 128,
-          "test_functions": 1044
+          "source_files": 203,
+          "test_files": 159,
+          "test_functions": 1309
         },
         "platform": {
-          "loc": 50764,
+          "loc": 61944,
           "root": "platform",
-          "source_files": 214,
-          "test_files": 206,
-          "test_functions": 2218
+          "source_files": 271,
+          "test_files": 253,
+          "test_functions": 2543
         }
       },
-      "total_loc": 79204,
-      "total_tests": 3262
+      "total_loc": 101499,
+      "total_tests": 3852
     },
     "corpus": {
-      "artifacts": 974,
-      "edges": 11780,
-      "pages": 8934,
+      "artifacts": 1197,
+      "edges": 12817,
+      "pages": 9574,
       "status_histogram": {
-        "ACTIVE": 889,
-        "CERTIFIED": 6,
-        "COMPLETE": 40,
+        "ACTIVE": 1096,
+        "CERTIFIED": 7,
+        "COMPLETE": 43,
         "FINAL": 9,
-        "FROZEN": 30
+        "FROZEN": 27,
+        "UNDER_REVIEW": 15
       },
-      "volumes": 24
+      "volumes": 25
     },
     "health_flags": {
       "corpus_present": true,

@@ -3,26 +3,26 @@
   "authoritative_portfolio_status": "IN_PROGRESS — analysis/architecture/generation complete; runtime testing/deployment pending EC-1",
   "authority": "NONE (derived truth)",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "22f2f0ae2092e617da26072319236cddfe7156bec6d6b46de724f0c23ae79b40",
+  "content_hash": "3e472ffae45ad1b89ec6c7ff6eec7530fb638752043b29e7f3172465d47e8697",
   "dimension_index_literal_pct": 26.7,
   "dimension_index_reconciled_pct": 26.7,
   "dimensions_counted": 15,
   "evidence_state": {
-    "branch": "governance-reconciliation",
+    "branch": "programme/evo-usis-005",
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "5499a5363d4a0273f1b2dd2edac8875dd198f78efcf1ae1459ea97b64705ddfc",
-      "00-BOOK/DATA/certification.json": "a93dc4a12c7d14e5318dc534205ca20453f73a48a38a51f1501055f2f618962a",
-      "00-BOOK/DATA/control-tower.json": "5909baa557cf556890a46b7194fb6528ccf7ef1f9bed221284f81254ac63057b",
+      "00-BOOK/DATA/artifacts.json": "512180a52913897da1fca2130bc5bd9fd4d2e56396d021fd12e8995e0d8d929d",
+      "00-BOOK/DATA/certification.json": "ebe17b73cd9715bb533ffa49946cd93c6363c405db3e775605d8085acdc93a0d",
+      "00-BOOK/DATA/control-tower.json": "90eeccbe9c000f27104ad04dd2411454eb27e41b4a9457dc1a6a56eded4be759",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "5eb4a93df9761c3db9e6bbadac3d670ed7902be1acd5f42438c36598c8e5d455",
-      "coverage.xml": "64f7b95e8e13301477e34d00cbb9ce3e0dc47346aa712c595046b606e431942a"
+      "00-BOOK/DATA/volumes.json": "5e734533edd06487fc9979ad4390d7c077aeb4d3416870a02b38199b74316c00",
+      "coverage.xml": "77bbf749842ef3e2d7b6d7d66f266428d3f02d576eaf64ac367d431a1b59e0fc"
     },
-    "head": "081ecb0"
+    "head": "527485a"
   },
-  "evidence_timestamp": "2026-07-22T05:17:21+00:00",
+  "evidence_timestamp": "2026-07-26T02:49:04+00:00",
   "per_dimension": {
     "architecture": {
-      "as_of": "2026-07-22T05:17:21+00:00",
+      "as_of": "2026-07-26T02:49:04+00:00",
       "literal_score": 1.0,
       "reconciled_score": 1.0,
       "source": "MANUAL",
@@ -38,7 +38,7 @@
       "status": "BLOCKED"
     },
     "certification": {
-      "as_of": "2026-07-22T05:17:21+00:00",
+      "as_of": "2026-07-26T02:49:04+00:00",
       "literal_score": 1.0,
       "reconciled_score": 1.0,
       "source": "MANUAL",
@@ -54,7 +54,7 @@
       "status": "IN_PROGRESS"
     },
     "execution": {
-      "as_of": "2026-07-22T05:17:21+00:00",
+      "as_of": "2026-07-26T02:49:04+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -62,7 +62,7 @@
       "status": "NOT_STARTED"
     },
     "functional_testing": {
-      "as_of": "2026-07-22T05:17:21+00:00",
+      "as_of": "2026-07-26T02:49:04+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -78,7 +78,7 @@
       "status": "IMPLEMENTED"
     },
     "integration_testing": {
-      "as_of": "2026-07-22T05:17:21+00:00",
+      "as_of": "2026-07-26T02:49:04+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -94,7 +94,7 @@
       "status": "BLOCKED"
     },
     "performance_testing": {
-      "as_of": "2026-07-22T05:17:21+00:00",
+      "as_of": "2026-07-26T02:49:04+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -102,7 +102,7 @@
       "status": "NOT_STARTED"
     },
     "portfolio": {
-      "as_of": "2026-07-22T05:17:21+00:00",
+      "as_of": "2026-07-26T02:49:04+00:00",
       "literal_score": 0.5,
       "reconciled_score": 0.5,
       "source": "MANUAL",
@@ -118,7 +118,7 @@
       "status": "BLOCKED"
     },
     "release": {
-      "as_of": "2026-07-22T05:17:21+00:00",
+      "as_of": "2026-07-26T02:49:04+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -144,5 +144,5 @@
   },
   "producer": "UCOS-RIE-001 Repository Intelligence Engine v1.0.0",
   "title": "Progress Intelligence Report",
-  "unit_validation_pct": 99.91
+  "unit_validation_pct": 96.93
 }

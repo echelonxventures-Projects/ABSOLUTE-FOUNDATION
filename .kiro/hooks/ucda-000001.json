@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "UCDA-000001 Implementation Evidence Gate",
+      "trigger": "SessionStart",
+      "description": "Runs the UCDA-000001 Implementation Evidence Gate at session start, so the constitutional disposition state of every agreed decision (decision count, undispositioned count, conversation-only count, located evidence references, gate outcome, seal) is surfaced from Repository Truth rather than reconstructed from conversation. This is the executable expression of 00-CEP/CEP-002 Article 28 (CEP-002-AMD-002): no constitutionally agreed decision may remain only in conversation history. Deterministic, stdlib-only, non-blocking at session start; fail-closed as a gate. AUTHORITY = NONE (DERIVED TRUTH).",
+      "action": {
+        "type": "command",
+        "command": "python3 00-MASTER/UCDA-000001/ucda_engine.py 2>/dev/null | grep '^UCDA-000001:' || true",
+        "timeout": 120
+      }
+    }
+  ]
+}

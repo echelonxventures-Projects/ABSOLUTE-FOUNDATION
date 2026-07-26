@@ -7,7 +7,7 @@
 | CLASSIFICATION | Constitutional Engineering Program (CEP) — Supreme Operational Governing Instrument |
 | STATUS | RATIFIED (program-governance level) · NORMATIVE · LIVING-UNTIL-FROZEN |
 | STAGE | Stage 01 · Prompt 03 |
-| VERSION | 1.0 |
+| VERSION | 1.1 |
 | DERIVES AUTHORITY FROM | CEP-000 — Constitutional Engineering Charter |
 | AUTHORITY | Supreme over all CEP execution and over every subordinate CEP instrument; subordinate to CEP-000 on matters of authority |
 | SCOPE OF GOVERNANCE | HOW the Constitutional Engineering Program shall operate |
@@ -173,6 +173,8 @@ VIII.2 Legal artifact transitions SHALL be:
 - RATIFIED → FROZEN, and PROVISIONAL → FROZEN (engineering baseline), upon Freeze Model preconditions.
 - RATIFIED, PROVISIONAL, or FROZEN → SUPERSEDED (via Amendment Model only).
 - DRAFTED → DEFERRED (out-of-scope, recorded in the Deferral Register).
+- DEFERRED → DRAFTED (reactivation: the deferring condition no longer holds; performed only upon a governed determination of the deferral owner and recorded in the Deferral Register). *(added by ADDENDUM B · CEP-001-AMD-001)*
+- DEFERRED → SUPERSEDED (withdrawal: the deferred matter is determined no longer required or is displaced by a later canonical definition; performed only upon a governed determination of the deferral owner, recorded in the Deferral Register, and never by deletion). *(added by ADDENDUM B · CEP-001-AMD-001)*
 
 VIII.3 Any transition not enumerated in VIII.2 IS PROHIBITED.
 
@@ -181,6 +183,10 @@ VIII.4 Stage states SHALL be: NOT_ENTERED, ENTERED, EXECUTING, VALIDATED, GATED,
 VIII.5 A stage SHALL advance NOT_ENTERED → ENTERED (entry criteria hold) → EXECUTING → VALIDATED → GATED (exit criteria hold) → CHECKPOINTED → EXITED; RE_ENTERED SHALL be reachable ONLY from the Amendment Model.
 
 VIII.6 Program states SHALL be: INITIALIZED, ADVANCING, HALTED, AMENDING, COMPLETE. HALTED SHALL be entered on any failed criterion or contradiction and SHALL be exited only upon remediation.
+
+VIII.7 DEFERRED SHALL NOT be a terminal state. Every artifact in DEFERRED SHALL carry exactly one corresponding entry in the Deferral Register, SHALL carry a declared review point, and SHALL retain both exits of VIII.2 until one is taken. An artifact whose declared review point has passed without a recorded review IS a violation under Article XXIII and SHALL place the Program in HALTED until the review is performed. Reactivation under DEFERRED → DRAFTED SHALL re-enter validation in full (XI.3) and SHALL NOT inherit any prior validation, certification, or ratification. Withdrawal under DEFERRED → SUPERSEDED IS not an exercise of the Amendment Model, which governs only ratified or frozen work (XV.1); it terminates the effect of an unratified deferred matter while preserving its record (LAW-7, XVII.1). For XXII.3, an **unresolved deferral** IS a Deferral Register entry that has not reached one of its declared exit states. *(added by ADDENDUM B · CEP-001-AMD-001)*
+
+VIII.8 The lifecycle of the Deferral Register itself — its entry states, entry conditions, exit conditions, review cadence, and custody — IS a governance concern and IS owned by CEP-002 under its deferral-disposition domain. It IS consumed here by reference. This Constitution owns the artifact, stage, and program state model only, and SHALL NOT restate the register's lifecycle (LAW-4, INV-2). *(added by ADDENDUM B · CEP-001-AMD-001)*
 
 ---
 
@@ -382,7 +388,7 @@ XXIV.4 This Constitution SHALL bind every remaining Stage of the Program until a
 
 ## ARTICLE XXV — VERSIONING
 
-XXV.1 This Constitution carries an explicit version; the present version IS 1.0.
+XXV.1 This Constitution carries an explicit version; the present version IS 1.1 (amended from 1.0 by CEP-001-AMD-001, recorded in ADDENDUM B).
 
 XXV.2 Any change SHALL occur only through the Amendment Model and SHALL increment the version.
 
@@ -392,7 +398,7 @@ XXV.4 Every subordinate CEP instrument SHALL cite the Constitution version under
 
 ---
 
-*END OF ARTIFACT — CEP-001 · CONSTITUTIONAL ENGINEERING CONSTITUTION · VERSION 1.0 · NORMATIVE · SUPREME OPERATIONAL INSTRUMENT · DERIVES FROM CEP-000*
+*END OF ARTIFACT — CEP-001 · CONSTITUTIONAL ENGINEERING CONSTITUTION · VERSION 1.1 · NORMATIVE · SUPREME OPERATIONAL INSTRUMENT · DERIVES FROM CEP-000*
 
 ---
 
@@ -468,3 +474,51 @@ Repository Truth therefore **already provides the equivalent guarantee** ("only 
 Absolute hierarchy → Art VII/Art I + CEP-000 §5.5/§10 + CEP-009 (this addendum). Hierarchy governance → UNIVERSAL-ARTIFACT-REGISTRY + CEP-004/005 + S2-01 (reference). Layer Object → artifact object (`artifacts.json`) + Art VIII lifecycle. Immutability → Art VII + CEP-009 + CEP-007 (reference). All cite **CEP-001 Addendum A** as the canonical constitutional home of the Absolute Constitutional Architecture name; none creates a parallel constitution, hierarchy, registry, or Layer Object model. Layer evolution rules are homed at **CEP-009 Addendum A** (companion).
 
 **CEP-001 ADDENDUM A — ABSOLUTE CONSTITUTIONAL ARCHITECTURE — EXTEND/REUSE COMPLETE · ADDITIVE · NON-MUTATING · NO NEW OWNER, HIERARCHY, REGISTRY, OR LAYER-OBJECT MODEL.**
+
+
+---
+
+## ADDENDUM B — DEFERRED EXIT TRANSITIONS (CEP-001-AMD-001 · WAVE-2 · MISSION E-3 STEP 1)
+
+> **Provenance.** UCOS Ω∞ Wave-2 · Mission E-3 (Deferral Lifecycle Completion) · Step 1 of 3. Predecessor: ADDENDUM A (REP-004 Wave-3). Amendment identifier **CEP-001-AMD-001**. Raised under **Article XV.3** upon the logged inconsistency finding recorded in Repository Truth as **CMG-GAP-02** (`00-CMG/CMG-000001` Article LXXVIII.2; `00-CMG/CMG-000003` §CMG-GAP-02) and in the corpus's own foundation review as **GAP-2** (`00-CEP/CEP-STAGE-01-CONSTITUTIONAL-FOUNDATION-FINAL-REVIEW.md` §7). Change classification **MINOR (additive)** per CMG-000001 XXIX.2 and XLI.6. Version **1.0 → 1.1**.
+
+### B.1 — The finding
+
+Article VIII.1 declared DEFERRED a legal artifact state. Article VIII.2 enumerated exactly one transition touching it — `DRAFTED → DEFERRED` — and Article VIII.3 prohibits every transition not enumerated there. DEFERRED was therefore a **strict terminal**: the located state model admitted entry into deferral and no lawful exit from it. Repository Truth records the consequence directly: *"matters can enter and never be reviewed out"* (`00-CMG/CMG-000014` §CMG-OQ-04). Article XXII.3 simultaneously forbids declaring completion "while any … unresolved deferral remains", and CEP-000 §31.7 (SD-6) predicates program success on the Deferral Register being empty or every entry explicitly accepted. Without an exit transition, those obligations were **unsatisfiable by construction** — a Law that cannot be met, which Article I.11 (LAW-11) treats as unmet until proven met.
+
+### B.2 — What this Addendum adds
+
+| # | Added clause | Effect |
+|---|---|---|
+| 1 | `DEFERRED → DRAFTED` in VIII.2 | **Reactivation.** The deferring condition no longer holds; the matter returns to the forward path. Requires a governed determination of the deferral owner and a Deferral Register record. |
+| 2 | `DEFERRED → SUPERSEDED` in VIII.2 | **Withdrawal.** The deferred matter is no longer required, or is displaced by a later canonical definition. Terminates effect, never the record. |
+| 3 | VIII.7 | DEFERRED IS non-terminal; every deferred artifact carries exactly one register entry and a declared review point; a passed review point IS a violation under Article XXIII; reactivation re-validates in full; withdrawal IS not an Amendment-Model act; `unresolved deferral` (XXII.3) IS defined and decidable. |
+| 4 | VIII.8 | The **register's own lifecycle** is delegated to its canonical owner, CEP-002, and consumed by reference — preserving LAW-4 / INV-2. |
+
+### B.3 — What this Addendum does NOT change (XLIII.2(b))
+
+It alters **no** existing Law (Article I, LAW-1…11), **no** Invariant (Article VII, INV-1…8), **no** existing bullet of VIII.2, **no** clause of VIII.1, VIII.3, VIII.4, VIII.5, or VIII.6, and **no** member of any state enumeration. It **removes and renumbers nothing** (identifier stability, CMG-000001 XLII.4). It introduces **no new state** — withdrawal terminates into the already-enumerated SUPERSEDED. It introduces **no new authority**, **no new register**, **no new store**, **no new gate**, and **no new pipeline**. It does **not** legislate governance operation, validation method, certification method, ratification, or the Deferral Register's own lifecycle; each remains with its canonical owner. It does **not** weaken Article XV: the Amendment Model remains the sole lawful path for changing ratified or frozen work, and neither added transition originates from a ratified, provisional, or frozen state.
+
+### B.4 — Impact analysis (XLIII.2(c) · Article XV.2)
+
+| Affected | Classification | Disposition |
+|---|---|---|
+| `CEP-002` — Deferral Register lifecycle (states, entry, exit, cadence, custody) | Additive extension, same change | Extended by **CEP-002-AMD-001** (Article 27), Mission E-3 Step 2 |
+| `CEP-004` — validation | No change | Reactivation re-enters validation through the existing XI.3 obligation |
+| `CEP-005` — certification | No change | XII.3 already revokes on amendment; no certification attaches to a DEFERRED artifact |
+| `CEP-006` — ratification DEFERRED outcome | No change | A ratification-state deferral (CEP-006 VI, VII.2) IS a distinct subject with a distinct owner and IS not touched here |
+| `CEP-007` — freeze | No change | No frozen artifact is reachable from DEFERRED |
+| `CEP-000` §31.7 SD-6 | Now satisfiable | The success definition acquires a lawful path to satisfaction |
+| `CMG-000001` / `CMG-REGISTRY.json` | Recorded, same change | CMG-GAP-02 disposition and CEP-001 version updated, Mission E-3 Step 3 |
+
+Every affected artifact IS classified; none is left unclassified (CMG-000001 XLII.6).
+
+### B.5 — Void on conflict (XLIII.2(e))
+
+This Addendum IS void to the extent of any conflict with CEP-000, with Article I, with Article VII, or with any Article of this Constitution above. Severability IS structural: voiding any clause of this Addendum SHALL NOT void the remainder, and SHALL NOT restore DEFERRED to terminal status where an independent basis for an exit exists.
+
+### B.6 — Traceability
+
+`CMG-GAP-02` → `CEP-STAGE-01` §7 GAP-2 → this Addendum → VIII.2 (two transitions), VIII.7, VIII.8 → `CEP-002` Article 27 (register lifecycle) → `CMG-000001` LXXVIII.2 (gap disposition), LXXVIII.8 (closure record), LXXXII.2 CMG-DLG-49 (ownership recognition) → `CMG-REGISTRY.json`. Downward evidence: the CMG meta-constitutional gate (`00-CMG/tools/cmg-gate.sh`), the registration transaction (`00-BOOK/tools/register.sh`), and the canonical verification entry point (`./verify.sh`).
+
+**CEP-001 ADDENDUM B — DEFERRED EXIT TRANSITIONS — COMPLETE · ADDITIVE (MINOR) · NON-MUTATING OF EVERY EXISTING CLAUSE · NO NEW STATE, AUTHORITY, REGISTER, STORE, OR GATE.**

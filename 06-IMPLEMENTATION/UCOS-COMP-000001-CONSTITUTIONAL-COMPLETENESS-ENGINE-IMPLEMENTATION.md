@@ -285,3 +285,64 @@ CCE completeness **FAILS** (`NOT COMPLETE`, emits Gap Report, halts) when any ho
 | Scope | COMPLETENESS ORCHESTRATION & DETERMINATION ONLY |
 
 This artifact creates no authority, invents no engine, and duplicates no capability. It specifies how the Constitutional Completeness Engine orchestrates the existing certified controls into a single fail-closed completeness determination.
+
+---
+
+## SECTION E-ACA-IMPL — ARCHITECTURAL COMPLETENESS AUTHORITY BINDING (append-only)
+
+*Companion to Constitution §"CONSTITUTIONAL EXTENSION E-ACA". Binds the CCE's extended architectural-completeness-lifecycle responsibilities to **existing** owners by reference only. Adds no engine, nucleus, registry, component, or authority. The three CCE components (Subject Projector · Gate Orchestrator · Determination Recorder) are unchanged; this section only adds **read-only integration points** for the R-FUTURE / R-ADMISSION / R-QUALITY determinations.*
+
+### E-ACA-IMPL.1 — Additional integration points (all by reference)
+
+| Extended determination | Integration point (existing owner) | Call | Direction |
+|------------------------|------------------------------------|------|-----------|
+| Architectural completeness (governed set) | `00-MASTER/UAKOS-CLOSURE-006/CONST-04/15/18`; closure `gaps` counters | read | inbound → CCE |
+| Repository / knowledge state | RIE — `intelligence/` (`UCOS-RIE-{HEALTH,PROGRESS,EXECUTION-FRONTIER,DEPENDENCY-GRAPH,DIGITAL-TWIN,CAPABILITY-CATALOG}.json`) | read | inbound (consume, never duplicate) |
+| Admission (universal) | `00-BOOK/tools/register.sh` (REG-AUTO-001) + `ukb.py enforce` (eligibility/classification) | read | inbound |
+| Evolution / amendment gate | `00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md` + GOV-12 | read | inbound |
+| Sufficiency / permanence / infinity | `00-CEP/STAGE-03-S3-02 §0A`; `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md`; `04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md` | read | inbound |
+| Ownership / quality | `02-CANONICAL-OWNERSHIP-MATRIX.md`; RIE dependency-graph; `ukb.py validate`; `.runtime/governance/enforcement-audit.json` | read | inbound |
+
+All calls are read-only; the append-only `CertificationLedger` remains the only write target (unchanged). RIE is **consumed, not replaced** (USIS-GOV-000 §5 separation preserved).
+
+### E-ACA-IMPL.2 — Extended execution flow (generalized, fail-closed)
+
+```
+R-PRESENT   → (unchanged) Gates 1–10 over Coverage/Validation/Certification  → COMPLETE | NOT COMPLETE
+R-ADMISSION → for each entity class: resolve admission path (register.sh/ukb enforce/CEP-009/S2-03)
+              → path present ? CLOSED : Gate 9 OPEN (architectural incompleteness, CCE-LAW-012)
+R-FUTURE    → sufficiency predicate (single construct-agnostic pipeline ∧ Infinite Principle bound)
+              → SUFFICIENT ? CLOSED : Gap Report + constitutional blueprint only (CCE-LAW-014)
+R-QUALITY   → zero duplicate-authority ∧ zero orphan/dead ∧ zero cycle ∧ zero violation (CCE-LAW-015)
+              → clean ? CLOSED : NOT COMPLETE
+AGGREGATE   → Architectural Completeness = COMPLETE iff R-PRESENT ∧ R-ADMISSION ∧ R-FUTURE ∧ R-QUALITY
+RECORD      → immutable, content-addressed determination appended to CertificationLedger (unchanged schema)
+```
+
+The generalized determination remains a pure function of existing owners' outputs (IMP-007 §5); identical inputs → byte-identical determination and stable id. Any unresolved source halts with a Gap Report (CCE-LAW-008). 
+
+### E-ACA-IMPL.3 — Reuse mapping (extension)
+
+| Extended capability | Existing source | Reuse decision | New work |
+|---------------------|-----------------|----------------|----------|
+| Architectural-completeness determination | CCE 24-dim/10-gate + UAKOS-CLOSURE-006 | **GENERALIZE** | none (framing only) |
+| Repository/knowledge intelligence | RIE `intelligence/` | **REUSE** | none |
+| Universal admission | REG-AUTO-001 + `ukb enforce` + CEP-009 + S2-03 | **COMPOSE** | none |
+| Evolution/permanence/infinity | S3-02 §0A + CEP-007/008/009 + unboundedness certs | **REUSE** | none |
+| Architectural quality | RIE + coverage orphans + `ukb validate` + enforcement | **REUSE** | none |
+| Lifecycle abstraction (present/future/admission/quality) | CCE determination surface | **ABSTRACT** | framing only |
+
+**Net-new engine / nucleus / registry code: 0.** The extension is orchestration-and-framing over owners that already exist and are already certified.
+
+### E-ACA-IMPL.4 — Registry update (extension)
+
+| Attribute | Value |
+|-----------|-------|
+| Register | UCOS-COMP-000001 — Constitutional Completeness Engine (Implementation) · §E-ACA-IMPL |
+| New engines created | 0 |
+| Existing engines modified | 0 |
+| New nuclei / registries | 0 |
+| Integration points added | 6 (all read-only, by reference) |
+| Authority | NONE (ENGINEERING-EXECUTION-ONLY) |
+
+This section specifies how the CCE orchestrates existing owners to discharge the architectural-completeness lifecycle. It modifies, forks, or weakens no engine, and creates no new mechanism.

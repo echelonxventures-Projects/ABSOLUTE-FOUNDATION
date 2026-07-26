@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "UCCEP-000000 Continuous Constitutional Determination",
+      "trigger": "SessionStart",
+      "description": "Runs the UCCEP-000000 aggregate constitutional gate at the fast read-only boot tier at session start, so the current continuous constitutional determination (certification verdict, gate/programme pass counts, blocking failures, seal) is surfaced from Repository Truth rather than reconstructed from conversation. Deterministic, stdlib-only, non-blocking. AUTHORITY = NONE (DERIVED TRUTH).",
+      "action": {
+        "type": "command",
+        "command": "python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier boot 2>/dev/null | grep '^UCCEP-000000:' || true",
+        "timeout": 180
+      }
+    }
+  ]
+}

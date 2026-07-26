@@ -573,6 +573,19 @@ _STATUS_TOKENS = [
     "FROZEN", "COMPLETE", "ACTIVE", "FINAL", "APPROVED",
 ]
 
+# A declared token is recognized only when it stands alone in the STATUS cell —
+# never as a fragment of a longer compound. A hyphenated qualifier therefore does
+# not alias a canonical state: "LIVING-UNTIL-FROZEN" declares that an artifact is
+# NOT yet frozen, and SHALL NOT project as FROZEN. The boundary excludes A-Z, 0-9,
+# "_" and "-" so that compound qualifiers on either side suppress the match, while
+# tokens containing "_" ("UNDER_REVIEW") and " " ("NOT STARTED") still match.
+# Generic and total: no token is added, removed, renamed, or reordered, and the
+# ordered first-match-wins semantics of _STATUS_TOKENS are preserved exactly.
+_STATUS_TOKEN_PATTERNS = [
+    (tok, re.compile(rf"(?<![A-Z0-9_-]){re.escape(tok)}(?![A-Z0-9_-])"))
+    for tok in _STATUS_TOKENS
+]
+
 
 def infer_status(abspath: str, relpath: str) -> str:
     if relpath.endswith(".docx"):
@@ -584,8 +597,8 @@ def infer_status(abspath: str, relpath: str) -> str:
     m = re.search(r"\|\s*STATUS\s*\|([^\n|]*)\|", head, re.IGNORECASE)
     if m:
         cell = m.group(1).upper()
-        for tok in _STATUS_TOKENS:
-            if tok in cell:
+        for tok, pattern in _STATUS_TOKEN_PATTERNS:
+            if pattern.search(cell):
                 return tok.replace(" ", "_")
     # Registers / working reconciliation artifacts are FINAL/FROZEN records.
     if relpath.startswith(("01-WORKING/", "00-SOURCE-MANIFEST/")):
@@ -1654,11 +1667,62 @@ def _enforcement_audit(record):
     drift-free; pre/post alternate every transaction). Operational telemetry, not
     a registry — see governance_telemetry for the location/sequence lifecycle."""
     fp_keys = ("mode", "result", "eligible", "registered", "unregistered",
-               "unclassified", "invalid", "violations")
+               "unclassified", "unreconciled", "invalid", "violations")
     return T.append_audit(
         T.ENFORCEMENT_AUDIT, record,
         T.fingerprint_dedup(fp_keys, mode_key="mode"),
     )
+
+
+def _reconciled_sets():
+    """The declared reconciled sets (config.RECONCILED_SETS), fail-closed.
+
+    REG-AUTO-001 §21 — a reconciled set is a zone whose recognition the located
+    registration/classification authority reconciled BY DETERMINATION instead of
+    by a new classification family. This declaration is never consulted by
+    classify(): it changes no classification, adds no rule, allocates no
+    identity, and creates no registry. It is read only by the classification
+    gate below, which it strengthens.
+
+    §21.4 identity integrity: `set`, `namespace` and `zone` are unique across the
+    declaration. A malformed or duplicated record is an ambiguous input and
+    aborts the gate rather than passing it (fail-closed)."""
+    entries = list(getattr(C, "RECONCILED_SETS", ()) or ())
+    seen = {"set": set(), "namespace": set(), "zone": set()}
+    for entry in entries:
+        for field in ("set", "namespace", "zone"):
+            value = entry.get(field)
+            if not value:
+                raise SystemExit(
+                    f"REG-AUTO-001 §21 fail-closed: reconciled-set record declares "
+                    f"no {field}: {entry!r}")
+            if value in seen[field]:
+                raise SystemExit(
+                    f"REG-AUTO-001 §21 fail-closed: duplicate reconciled-set "
+                    f"{field} {value!r} — a reconciled set may not introduce "
+                    f"duplicate identity.")
+            seen[field].add(value)
+    return entries
+
+
+def reconciliation_violation(relpath, program, category, volume, sets):
+    """Return the reason a path inside a declared reconciled zone resolves OUTSIDE
+    the classification its determination admits, else None (REG-AUTO-001 §21.5).
+
+    Pure and deterministic: a function of (relpath, resolved class, declaration)
+    only — no clock, no environment, no ordering dependence."""
+    for entry in sets:
+        if not re.search(entry["zone"], relpath):
+            continue
+        admitted = {tuple(pair) for pair in (entry.get("admitted") or ())}
+        volumes = set(entry.get("admitted_volumes") or ())
+        if admitted and (program, category) not in admitted:
+            return (f"reconciled set {entry['set']}: resolves to "
+                    f"({program},{category}), not admitted by {entry['determination']}")
+        if volumes and volume not in volumes:
+            return (f"reconciled set {entry['set']}: resolves to volume {volume}, "
+                    f"not admitted by {entry['determination']}")
+    return None
 
 
 def cmd_enforce(args):
@@ -1678,8 +1742,10 @@ def cmd_enforce(args):
     eligible = list(_iter_files())                       # (abspath, rel)
     data = _load_json(ARTIFACTS_PATH, None)
     registered = {a["path"] for a in data["artifacts"]} if data else set()
+    recon_sets = _reconciled_sets()                      # REG-AUTO-001 §21
 
     invalid, unclassified, unregistered = [], [], []
+    unreconciled = []
     for abspath, rel in eligible:
         # validity gate
         try:
@@ -1694,11 +1760,21 @@ def cmd_enforce(args):
         program, category, _vol = classify(rel, abspath)
         if program == default_program or category == C.DEFAULT_CLASS[1]:
             unclassified.append(rel)
+        # classification gate, reconciled-set strengthening (REG-AUTO-001 §21.5).
+        # NOT a new gate: the same `classification` gate of ENFORCEMENT_GATES now
+        # also asserts that a file inside a zone reconciled BY DETERMINATION
+        # resolves to a classification that determination admits — so recognition
+        # of a reconciled zone is machine-proven, not incidental. Zones outside
+        # the declaration are unaffected (vacuously conformant).
+        reason = reconciliation_violation(rel, program, category, _vol, recon_sets)
+        if reason:
+            unreconciled.append((rel, reason))
         # registration gate
         if rel not in registered:
             unregistered.append(rel)
 
     pre = getattr(args, "pre", False)
+    unreconciled_paths = [rel for rel, _reason in unreconciled]
 
     # SINGLE FIXED GATE POLICY (GOV-005 §5.4, AUD-RC-1 correction). Classification
     # is ALWAYS enforced — never conditional on an invocation flag — so the audit
@@ -1717,11 +1793,13 @@ def cmd_enforce(args):
         # must be valid AND classifiable before the transaction registers it.
         pending = set(unregistered)
         hard = ([r for r in invalid if r in pending]
-                + [r for r in unclassified if r in pending])
+                + [r for r in unclassified if r in pending]
+                + [r for r in unreconciled_paths if r in pending])
         gate_label = "PRE-REGISTRATION"
     else:
         # POST: every eligible file must be registered (parity), valid, and classified.
-        hard = list(unregistered) + list(invalid) + list(unclassified)
+        hard = (list(unregistered) + list(invalid) + list(unclassified)
+                + list(unreconciled_paths))
         gate_label = "POST-REGISTRATION"
 
     violations = sorted(set(hard))
@@ -1735,6 +1813,9 @@ def cmd_enforce(args):
         "registered": len(registered),
         "unregistered": sorted(unregistered),
         "unclassified": sorted(unclassified),
+        "unreconciled": [{"path": rel, "reason": reason}
+                         for rel, reason in sorted(unreconciled)],
+        "reconciled_sets": sorted(e["set"] for e in recon_sets),
         "invalid": sorted(invalid),
         "violations": violations,
         "result": result,
@@ -1747,11 +1828,16 @@ def cmd_enforce(args):
     print(f"  registered (in registers)  : {len(registered)}")
     print(f"  unregistered eligible      : {len(unregistered)}")
     print(f"  unclassified (OTHER/MISC)  : {len(unclassified)} (GATED)")
+    print(f"  reconciled sets declared   : {len(recon_sets)} "
+          f"({', '.join(sorted(e['set'] for e in recon_sets)) or 'none'})")
+    print(f"  reconciled-set drift       : {len(unreconciled)} (GATED)")
     print(f"  invalid (unreadable/empty) : {len(invalid)}")
     for r in unregistered[:10]:
         print(f"    UNREGISTERED  {r}")
     for r in unclassified[:10]:
         print(f"    unclassified  {r}  (declare metadata or a CLASSIFY_RULE)")
+    for r, reason in unreconciled[:10]:
+        print(f"    unreconciled  {r}  ({reason})")
     print("-" * 60)
     if violations:
         print(f"ENFORCEMENT FAILED — {len(violations)} blocking violation(s); "

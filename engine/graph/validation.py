@@ -14,7 +14,9 @@ Invariants checked:
     * **Referential integrity** — every edge endpoint resolves to a node; the
       count of unresolved endpoints is reported.
     * **Version awareness** — every artifact node carries a non-empty version.
-    * **Acyclic dependency projection** — the ``Depends-On`` DAG has no cycle.
+    * **Acyclic dependency projection** — the ``Depends-On`` DAG has no cycle. A
+      reported cycle FAILS validity (CEP-009 Art XV.2 / Art XX.2), so the CLI and
+      every gate built on ``is_valid`` fail closed on it.
 """
 
 from __future__ import annotations
@@ -54,22 +56,32 @@ class GraphValidationReport:
     def is_valid(self) -> bool:
         """True iff no hard mission invariant was violated.
 
-        The hard invariants this graph *owns* are: no duplicate nodes, immutable
-        identifiers, and version-awareness. Two conditions are reported as
-        *findings* rather than validity failures because they are properties of
-        Registry Truth itself, not of the projection:
+        The hard invariants are: no duplicate nodes, immutable identifiers,
+        version-awareness, and an **acyclic ``Depends-On`` projection**.
+
+        ``dependency_cycle`` is a validity FAILURE, not a finding. CEP-009
+        Art XV.2 provides that a lineage forming a cycle IS PROHIBITED and
+        Art XX.2 that such a cycle places the Program in HALTED; a gate that
+        reported the cycle while returning valid was fail-open (UCCEP-F-003,
+        discharged by WP-UCCEP-003 T-2 / UCCEP-000005). The graph still never
+        invents or hides a cycle — it reflects Registry Truth faithfully in
+        ``dependency_cycle`` — but it no longer certifies it as valid. Callers
+        that must inspect a knowingly-cyclic substrate pass
+        ``require_acyclic_dependencies=False`` to ``validate_graph``, which
+        leaves the field empty and the invariant unasserted.
+
+        One condition remains a *finding* rather than a validity failure because
+        it is a property of Registry Truth by design rather than a defect:
 
             * ``dangling_edge_endpoints`` — external trace markers exist by design
               (UMB-007 §5).
-            * ``dependency_cycle`` — a cycle present in the certified
-              ``relationships.json`` (e.g. a mutual ``Depends-On``) is faithfully
-              reflected here; the graph does not invent or hide it.
         """
         return not (
             self.duplicate_node_ids
             or self.malformed_node_ids
             or self.malformed_edge_ids
             or self.unversioned_artifacts
+            or self.dependency_cycle
         )
 
     def to_dict(self) -> dict[str, Any]:

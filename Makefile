@@ -38,6 +38,15 @@ help:
 	@echo "  make test          pytest + coverage gate only"
 	@echo "  make build         build wheel + sdist via the canonical venv"
 	@echo "  make hooks         install the git pre-commit hook (local automation)"
+	@echo "  make cmg-gate      fail-closed meta-constitutional gate (CMG-000001)"
+	@echo "  make uccep         regenerate the UCCEP-000000 constitutional determinations"
+	@echo "  make uccep-gate    fail-closed AGGREGATE constitutional gate (all located gates)"
+	@echo "  make uccep-boot    fast read-only aggregate gate (session/pre-commit tier)"
+	@echo "  make uccep-full    aggregate gate including the heavy tier (suites + determinism)"
+	@echo "  make uccep-self    UCCEP guards over its own surface"
+	@echo "  make ucda          regenerate the UCDA-000001 decision-assimilation determinations"
+	@echo "  make ucda-gate     fail-closed Implementation Evidence Gate (CEP-002 Art 28)"
+	@echo "  make ucda-self     UCDA guards over its own surface"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
 
@@ -131,3 +140,87 @@ clean:
 
 clean-venv:
 	@rm -rf $(VENV) && echo "removed $(VENV) (run 'make bootstrap' to recreate)"
+
+
+# cmg-gate: fail-closed meta-constitutional gate (CMG-000001 Article L, LXVI.7).
+# Additive only — no existing target, recipe, or dependency above is altered.
+# Exit 0 zero findings · 1 findings · 2 fail-closed abort.
+.PHONY: cmg-gate
+cmg-gate:
+	@./00-CMG/tools/cmg-gate.sh
+
+
+# uccep: UCCEP-000000 — Universal Continuous Constitutional Evolution Programme.
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# The AGGREGATE constitutional gate. It executes the gates that already exist and are
+# already owned (cmg-gate, ukb enforce/validate, the closure engines, repository health,
+# graph invariants, intelligence determinism, verify.sh, the determinism double-build),
+# then emits the fifteen programme determinations + the assimilation/findings register
+# into 00-MASTER/UCCEP-000000/. AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes
+# nothing outside its own operational-memory directory (guarded, fail-closed).
+#
+# Adding a programme, gate, check, invariant or finding is an entry in
+# 00-MASTER/UCCEP-000000/uccep-bindings.json and requires NO change to any engine.
+#
+# Exit 0 every executed blocking check passed · 1 a blocking check failed ·
+# 2 fail-closed abort (declaration unusable — no verdict may be asserted).
+.PHONY: uccep uccep-gate uccep-boot uccep-full uccep-self
+uccep:
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier standard
+
+uccep-gate:
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier standard --gate
+
+uccep-boot:
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier boot --gate
+
+uccep-full: bootstrap-quiet
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier full --gate
+
+# uccep-self: the programme's guards over its own surface — declaration integrity,
+# zero-enumeration / data-driven proof, forbidden-write scope, self-determinism.
+uccep-self:
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-declaration
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-write-scope
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-determinism
+
+
+# ucda: UCDA-000001 — Constitutional Decision Assimilation.
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# The executable expression of the Implementation Evidence Gate legislated by
+# 00-CEP/CEP-002 Article 28 (CEP-002-AMD-002). It asserts that no constitutionally
+# agreed decision remains only in conversation history: every decision declared in
+# 00-MASTER/UCDA-000001/ucda-decisions.json must name the LOCATED register it was
+# recorded in, occupy exactly one stage of the mandatory lifecycle, and carry exactly
+# one disposition from the closed set, with the evidence that disposition requires
+# resolving against the repository.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside its own
+# operational-memory directory (guarded, fail-closed). Adding a decision, a work
+# package, a stage or a disposition is an entry in the declaration and requires NO
+# change to the engine.
+#
+# The gate is also bound into the aggregate gate as G-14 / CK-DECISION-EVIDENCE, so
+# `make uccep-gate` and the CI aggregate gate execute it too.
+#
+# Exit 0 gate OPEN · 1 gate CLOSED (a decision is undispositioned) ·
+# 2 fail-closed abort (declaration unusable — no verdict may be asserted).
+.PHONY: ucda ucda-gate ucda-self
+ucda:
+	@python3 00-MASTER/UCDA-000001/ucda_engine.py
+
+ucda-gate:
+	@python3 00-MASTER/UCDA-000001/ucda_engine.py --gate
+
+# ucda-self: the programme's guards over its own surface — declaration integrity
+# (lifecycle ordering/reachability/terminality, closed disposition set, per-disposition
+# evidence obligations), zero-enumeration / data-driven proof, forbidden-write scope,
+# self-determinism.
+ucda-self:
+	@python3 00-MASTER/UCDA-000001/ucda_engine.py --check-declaration
+	@python3 00-MASTER/UCDA-000001/ucda_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCDA-000001/ucda_engine.py --check-write-scope
+	@python3 00-MASTER/UCDA-000001/ucda_engine.py --check-determinism

@@ -12,6 +12,7 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-MISC-000027](UCOS
 
 ## Backlinks (reverse)
 - [UCOS-BOOK-000000](UCOS-BOOK-000000.md) —Child→
+- [UCOS-CON-000050](UCOS-CON-000050.md) —References→
 - [UCOS-MISC-000046](UCOS-MISC-000046.md) —Required-By→
 - [UCOS-ENG-000003](UCOS-ENG-000003.md) —Required-By→
 - [UCOS-ENG-000005](UCOS-ENG-000005.md) —Required-By→

@@ -41,7 +41,13 @@ def test_dangling_endpoint_is_finding_not_failure():
     assert report.is_valid is True  # dangling endpoints are findings
 
 
-def test_dependency_cycle_is_finding_not_failure():
+def test_dependency_cycle_fails_validity():
+    """A reported Depends-On cycle FAILS validity — CEP-009 Art XV.2 (fail-closed).
+
+    Negative path of the dependency gate (UCCEP-F-003 / WP-UCCEP-003 T-2): the
+    cycle is reported *and* it invalidates the graph, so every caller of
+    ``is_valid`` (CLI exit code, evidence ``operational``, CK-GRAPH) fails closed.
+    """
     graph = KnowledgeGraph(
         nodes=[
             Node("UCOS-A-000001", "Artifact", version="1"),
@@ -54,7 +60,58 @@ def test_dependency_cycle_is_finding_not_failure():
     )
     report = validate_graph(graph)
     assert report.dependency_cycle  # a cycle was found and reported
-    assert report.is_valid is True  # but it does not fail the mission invariants
+    assert report.is_valid is False  # ... and it fails the mission invariants
+    assert report.to_dict()["is_valid"] is False
+
+
+def test_dependency_cycle_verdict_is_deterministic():
+    """Repeated validation of the same substrate yields a byte-identical verdict."""
+    graph = KnowledgeGraph(
+        nodes=[
+            Node("UCOS-A-000001", "Artifact", version="1"),
+            Node("UCOS-B-000002", "Artifact", version="1"),
+        ],
+        edges=[
+            Edge("UEDGE-000000001", "UCOS-A-000001", "UCOS-B-000002", "Depends-On"),
+            Edge("UEDGE-000000002", "UCOS-B-000002", "UCOS-A-000001", "Depends-On"),
+        ],
+    )
+    first = validate_graph(graph).to_dict()
+    assert first == validate_graph(graph).to_dict()
+    assert first == validate_graph(graph).to_dict()
+
+
+def test_acyclic_dependency_chain_passes_validity():
+    """Positive path: the same two artifacts in a single direction remain valid."""
+    graph = KnowledgeGraph(
+        nodes=[
+            Node("UCOS-A-000001", "Artifact", version="1"),
+            Node("UCOS-B-000002", "Artifact", version="1"),
+        ],
+        edges=[
+            Edge("UEDGE-000000001", "UCOS-A-000001", "UCOS-B-000002", "Depends-On"),
+        ],
+    )
+    report = validate_graph(graph)
+    assert report.dependency_cycle == ()
+    assert report.is_valid is True
+
+
+def test_cycle_unasserted_when_acyclicity_not_required():
+    """Opting out leaves the invariant unasserted rather than silently passing it."""
+    graph = KnowledgeGraph(
+        nodes=[
+            Node("UCOS-A-000001", "Artifact", version="1"),
+            Node("UCOS-B-000002", "Artifact", version="1"),
+        ],
+        edges=[
+            Edge("UEDGE-000000001", "UCOS-A-000001", "UCOS-B-000002", "Depends-On"),
+            Edge("UEDGE-000000002", "UCOS-B-000002", "UCOS-A-000001", "Depends-On"),
+        ],
+    )
+    report = validate_graph(graph, require_acyclic_dependencies=False)
+    assert report.dependency_cycle == ()
+    assert report.is_valid is True
 
 
 def test_synthetic_and_registry_identifiers_accepted():

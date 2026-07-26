@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T08:43:56+00:00",
+  "generated_at": "2026-07-26T07:35:06+00:00",
   "count": 25,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 745,
+      "artifact_count": 747,
       "page_range_start": 1,
-      "page_range_end": 9499,
+      "page_range_end": 9583,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -33,9 +33,9 @@
       "description": "Constitutional corpus, consolidation program, freeze, and registers.",
       "category": "CON",
       "status": "ACTIVE",
-      "artifact_count": 50,
+      "artifact_count": 66,
       "page_range_start": 1327,
-      "page_range_end": 9409,
+      "page_range_end": 9587,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-002"
     },
     {
@@ -285,9 +285,9 @@
       "description": "Universal Science & Intelligence Substrate (USIS): the constitutional substrate beneath every scientific discipline and intelligence paradigm — 21 universes, Universal Science, Human Intelligence, Self-Evolution, and Data/Analytics/Algorithm/Model universes, the 24-tier Universal Capability Meta-Model, reasoning/learning/analytics/simulation runtime, grounding/explanation validation, and explainability/bounded-autonomy/reproducibility certification.",
       "category": "USIS",
       "status": "ACTIVE",
-      "artifact_count": 19,
+      "artifact_count": 36,
       "page_range_start": 9133,
-      "page_range_end": 9489,
+      "page_range_end": 9522,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-024"
     },
     {

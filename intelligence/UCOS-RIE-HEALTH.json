@@ -8,54 +8,55 @@
   },
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
   "code": {
-    "coverage_branch_pct": 99.31,
-    "coverage_line_pct": 99.91,
+    "coverage_branch_pct": 95.1,
+    "coverage_line_pct": 96.93,
     "roots": {
       "engine": {
-        "loc": 28440,
+        "loc": 39555,
         "root": "engine",
-        "source_files": 152,
-        "test_files": 128,
-        "test_functions": 1044
+        "source_files": 203,
+        "test_files": 159,
+        "test_functions": 1309
       },
       "platform": {
-        "loc": 50764,
+        "loc": 61944,
         "root": "platform",
-        "source_files": 214,
-        "test_files": 206,
-        "test_functions": 2218
+        "source_files": 271,
+        "test_files": 253,
+        "test_functions": 2543
       }
     },
-    "total_loc": 79204,
-    "total_tests": 3262
+    "total_loc": 101499,
+    "total_tests": 3852
   },
-  "content_hash": "301a91dc0fb8ba097cb73b3a747c24aaeb011f14a0c02eceeddb289f6b5a4806",
+  "content_hash": "27a102deda5e7e4a63252b67575d8d00be17a8f8ab5d696b1c59b0c6965935c8",
   "corpus": {
-    "artifacts": 974,
-    "edges": 11780,
-    "pages": 8934,
+    "artifacts": 1197,
+    "edges": 12817,
+    "pages": 9574,
     "status_histogram": {
-      "ACTIVE": 889,
-      "CERTIFIED": 6,
-      "COMPLETE": 40,
+      "ACTIVE": 1096,
+      "CERTIFIED": 7,
+      "COMPLETE": 43,
       "FINAL": 9,
-      "FROZEN": 30
+      "FROZEN": 27,
+      "UNDER_REVIEW": 15
     },
-    "volumes": 24
+    "volumes": 25
   },
   "evidence_state": {
-    "branch": "governance-reconciliation",
+    "branch": "programme/evo-usis-005",
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "5499a5363d4a0273f1b2dd2edac8875dd198f78efcf1ae1459ea97b64705ddfc",
-      "00-BOOK/DATA/certification.json": "a93dc4a12c7d14e5318dc534205ca20453f73a48a38a51f1501055f2f618962a",
-      "00-BOOK/DATA/control-tower.json": "5909baa557cf556890a46b7194fb6528ccf7ef1f9bed221284f81254ac63057b",
+      "00-BOOK/DATA/artifacts.json": "512180a52913897da1fca2130bc5bd9fd4d2e56396d021fd12e8995e0d8d929d",
+      "00-BOOK/DATA/certification.json": "ebe17b73cd9715bb533ffa49946cd93c6363c405db3e775605d8085acdc93a0d",
+      "00-BOOK/DATA/control-tower.json": "90eeccbe9c000f27104ad04dd2411454eb27e41b4a9457dc1a6a56eded4be759",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "5eb4a93df9761c3db9e6bbadac3d670ed7902be1acd5f42438c36598c8e5d455",
-      "coverage.xml": "64f7b95e8e13301477e34d00cbb9ce3e0dc47346aa712c595046b606e431942a"
+      "00-BOOK/DATA/volumes.json": "5e734533edd06487fc9979ad4390d7c077aeb4d3416870a02b38199b74316c00",
+      "coverage.xml": "77bbf749842ef3e2d7b6d7d66f266428d3f02d576eaf64ac367d431a1b59e0fc"
     },
-    "head": "081ecb0"
+    "head": "527485a"
   },
-  "evidence_timestamp": "2026-07-22T05:17:21+00:00",
+  "evidence_timestamp": "2026-07-26T02:49:04+00:00",
   "health_flags": {
     "corpus_present": true,
     "coverage_full": false,

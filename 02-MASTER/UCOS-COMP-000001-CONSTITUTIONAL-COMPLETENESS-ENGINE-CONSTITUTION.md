@@ -370,3 +370,229 @@ Any completeness action that would breach this boundary is void and must be esca
 | Scope | CONSTITUTIONAL COMPLETENESS DETERMINATION ONLY |
 
 This artifact creates no authority, alters no determination, authorizes no EC-series step, and invents no engine. It binds every completeness determination to the existing certified controls and constitutionalizes their unified verdict as the single completeness authority of UCOS Ω∞.
+
+---
+
+# CONSTITUTIONAL EXTENSION E-ACA — ARCHITECTURAL COMPLETENESS AUTHORITY
+
+| Field | Value |
+|-------|-------|
+| EXTENSION ID | E-ACA (append-only extension of UCOS-COMP-000001) |
+| CLASSIFICATION | Constitutional extension of the existing CCE — permanent Architectural Completeness Authority |
+| MODE | APPEND-ONLY · REUSE-FIRST · NO NEW ENGINE · NO NEW NUCLEUS · NO DUPLICATE AUTHORITY |
+| HELD AUTHORITY | ENGINEERING-EXECUTION-ONLY (unchanged; determination only) |
+| CONSTITUENT / GOVERNANCE / RATIFICATION AUTHORITY | NONE (unchanged) |
+| EFFECT | Generalizes the CCE completeness determination from *present per-target completeness* to the *permanent architectural-completeness lifecycle* (present completeness **and** future architectural evolution readiness), binding existing owners by reference. |
+| CONFLICT RULE | Subordinate to the frozen corpus, CEP-000…CEP-010, ARCH-GOV-001, the Technology Constitution, and every determination this artifact already declared subordinate. Where this extension would conflict with a higher instrument, the higher instrument governs and this extension is void to the extent of the conflict. Repository Truth prevails (CEP-001 Art XXI). |
+
+*This extension adds responsibilities to the pre-existing CCE. It creates no new engine, no new canonical nucleus, no new registry, no parallel completeness authority, and no duplicate ownership. Every architectural-completeness, evolution, admission, and quality capability it names is discharged by an **existing** owner consumed **by reference**. The Repository Intelligence Engine (RIE, `intelligence/` · UCOS-RIE-001) remains the sole repository-intelligence producer; this extension does not duplicate or replace it. Architectural Completeness Intelligence does **not** become an engine or nucleus — it is a determination responsibility of the CCE.*
+
+---
+
+## E-ACA.0 — MANDATORY ANALYSIS (Repository Truth override of assumptions)
+
+Ten mandated determinations, each answered from Repository Truth before any modification:
+
+| # | Analysis dimension | Repository Truth finding (evidence) |
+|---|--------------------|-------------------------------------|
+| 1 | Existing constitutional ownership | Completeness is owned by **CCE `UCOS-COMP-000001`** (this artifact). Architectural completeness (as a certified concept) is owned by **`00-MASTER/UAKOS-CLOSURE-006/CONST-04`** (Constitution), **CONST-15** (Certification), **CONST-18** (Determination). No new owner is needed. |
+| 2 | Existing repository implementation | Completeness mechanisms already realized: `platform/coverage/*`, `engine/validation/*`, `engine/certification/*` (+ ledger), `platform/certification/status.py`. Repository intelligence realized in `intelligence/` (RIE, UCOS-RIE-001). Registration realized in `00-BOOK/tools/{ukb.py,ukbx.py,register.sh}`. |
+| 3 | Existing responsibilities | CCE already answers 9 completeness questions across 24 dimensions / 10 gates. CIOA (`UCOS-COMP-000000`) owns sequencing/lifecycle. RIE owns health/progress/frontier/drift/dependency-graph. |
+| 4 | Existing runtime | `engine/runtime` + `08-RUNTIME` (RL-F2); registration transaction `register.sh`; digital-twin certification runtime `ukbx.py certify` (9→10 integrity domains). |
+| 5 | Existing validation | `engine/validation` (7 checks, blocking/advisory) + `ukb validate` (structural/referential) + `ukbx validate` (signal ledger). |
+| 6 | Existing certification | `engine/certification` (fail-closed, append-only hash-chained ledger) + `ukbx certify` (10 integrity domains) + CCE Gate 10. |
+| 7 | Existing governance | ARCH-GOV-001 (completeness gate / gap law / traceability law); CEP-000…010; `validate_governance` (6 rules); REG-AUTO-001 / UMB-IMP-001 enforcement. |
+| 8 | Existing traceability | CCE-LAW-007 + Coverage edges (authority+evidence) + `provenance-chain` + GOV-002 + UKB knowledge graph (typed edges) + `02-CANONICAL-OWNERSHIP-MATRIX.md`. |
+| 9 | Existing evidence | `engine/validation/evidence.py` + `engine/certification/evidence.py` + `00-BOOK/DATA/certification.json` + `.runtime/governance/*-audit.json` + UAKOS closure artifacts. |
+| 10 | Existing future extensibility | **Infinite & Unlimited Evolution Principle** (`00-CEP/STAGE-03-S3-02 §0A`; CEP-007 Art XXIII.10; CEP-008 Art XV.4; **CEP-009** amendment/evolution); admission via REG-AUTO-001 + `ukb enforce` + universe admission (S2-03); unboundedness certified in `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md` + `04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md`. |
+
+**Analysis determination:** every responsibility this mission requests **already has an owner and an implementation**. The only genuine gap is *unification of the architectural-completeness lifecycle under the single completeness authority* — closed here by **extension of the CCE**, exactly as the original CCE closed the "no single completeness authority" gap by orchestration (Implementation §10). **No new engine, nucleus, registry, or authority is introduced.**
+
+---
+
+## E-ACA.1 — DELIVERABLE 1: UPDATED CCE RESPONSIBILITIES
+
+The CCE, unchanged in authority (`ENGINEERING-EXECUTION-ONLY`) and mechanism (orchestration/aggregation/determination), is hereby the permanent **Architectural Completeness Authority**. Its determination surface is generalized from two tenses to a lifecycle:
+
+- **R-PRESENT (existing):** "Is target T constitutionally complete now?" — the 24-dimension / 10-gate determination (unchanged).
+- **R-FUTURE (extended):** "Is the constitutional architecture permanently sufficient for all lawful future evolution?" — determined by aggregating existing evolution/admission/unboundedness owners by reference (E-ACA.4–E-ACA.7).
+- **R-ADMISSION (extended):** "Does every legitimate future entity possess a constitutional admission path?" — aggregated from REG-AUTO-001, `ukb enforce`, CEP-009, S2-03 (E-ACA.4).
+- **R-QUALITY (extended):** "Is the architecture free of duplicate authority, orphan/dead capability, circular dependency, and unresolved violation?" — aggregated from RIE, coverage orphans, `ukb validate`, enforcement (E-ACA.9).
+
+The determination remains a **pure function** of existing owners' outputs (CCE-LAW-006), fail-closed (CCE-LAW-003), sound (CCE-LAW-005), zero-gap terminal (CCE-LAW-010).
+
+---
+
+## E-ACA.2 — EXTENDED CONSTITUTIONAL COMPLETENESS LAWS
+
+Appended to CCE-LAW-001…010 (which remain in force unchanged):
+
+| Law | Rule | Reused owner (by reference) |
+|-----|------|-----------------------------|
+| **CCE-LAW-011 — Lifecycle Authority** | The CCE permanently determines both present constitutional completeness **and** future architectural evolution readiness. Completeness is a lifecycle, not a snapshot. | CCE dims/gates + S3-02 §0A + CEP-009 |
+| **CCE-LAW-012 — Universal Admission Invariant** | Every legitimate future entity SHALL possess a constitutional admission path. If none exists, this is **architectural incompleteness** (Gate 9 OPEN) — **never** a capability failure. | REG-AUTO-001; `ukb enforce`; CEP-009; S2-03 |
+| **CCE-LAW-013 — Architectural Stability & Permanence** | The constitutional architecture SHALL remain stable while future evolution remains unlimited. No legitimate future capability SHALL require architectural redesign. | Infinite & Unlimited Evolution Principle (S3-02 §0A; CEP-007 Art XXIII.10; CEP-008 Art XV.4) |
+| **CCE-LAW-014 — Reuse-First Extension** | No new engine, nucleus, registry, or authority SHALL be introduced while any existing owner can satisfy a responsibility by reuse → extension → composition → generalization → abstraction. Constitutional addition is the last resort and requires a Gap Report (CCE-LAW-008). | CCE-LAW-002; ARCH-GOV-001 LAW 003 |
+| **CCE-LAW-015 — Architectural Quality Invariant** | Constitutional completeness requires **zero** duplicate authority, orphan/dead capability, circular dependency, broken ownership/lineage, and unresolved architectural/constitutional violation. Any occurrence is dispositive of NOT COMPLETE (extends CCE-LAW-010). | RIE dependency-graph/health; coverage orphans; `ukb validate`; enforcement audit |
+
+---
+
+## E-ACA.3 — DELIVERABLE 2: ARCHITECTURAL COMPLETENESS RESPONSIBILITY MATRIX
+
+Every requested completeness responsibility, its existing owner, and its reuse-first decision. **New mechanisms required: 0.**
+
+| # | Completeness responsibility | Existing owner / source (by reference) | Decision |
+|---|-----------------------------|----------------------------------------|----------|
+| 1 | Architectural | CCE Gate 1/9 + UAKOS-CLOSURE-006 CONST-04/15 + coverage spine | GENERALIZE |
+| 2 | Constitutional | CCE + frozen corpus + `UCOS-RAT-001` + `01-CONSTITUTIONAL-COMPLETENESS-CERTIFICATION.md` | REUSE |
+| 3 | Repository | RIE (`intelligence/`) + UAKOS closure + `ukb validate` | REUSE |
+| 4 | Knowledge | UAKOS closure (concepts/gaps) + UKB knowledge graph | REUSE |
+| 5 | Capability | `02-MASTER/UCOS-Ω∞-UNIVERSAL-CAPABILITY-CATALOG.md` + RIE capability-catalog | REUSE |
+| 6 | Canonical Nucleus | UMA/UAKOS namespace governance + UKB registry (`UCOS-COMP` family) | REUSE |
+| 7 | Universe | CCE dim 23 (Coverage UNIVERSE tier) + ARCH-001 Universe Catalog + S2-03 | REUSE |
+| 8 | Engine | EC-1 `engine/**` (certified) + coverage | REUSE |
+| 9 | Service | CCE dim 5 (ARCH-SERVICE-001) + `service/**` | REUSE |
+| 10 | Component | Coverage code tier + `platform/**` | REUSE |
+| 11 | Runtime | CCE dim 22 + `08-RUNTIME` + `engine/runtime` | REUSE |
+| 12 | Implementation | EC-3 bands (`data/service/application/infrastructure`) + CIOA | REUSE |
+| 13 | Configuration | `00-BOOK/tools/config.py` + validation | REUSE |
+| 14 | Composition | Dependency closure + CIOA sequencing | COMPOSE |
+| 15 | Dependency | CCE dim 17 (`DependencyClosureCheck`) | REUSE |
+| 16 | Lifecycle | CIOA (`UCOS-COMP-000000`) + CEP-009 | REUSE |
+| 17 | Ownership | `02-CANONICAL-OWNERSHIP-MATRIX.md` + UKB registry | REUSE |
+| 18 | Registry | CCE dim 7 + REG-AUTO-001 + `ukb` | REUSE |
+| 19 | Ontology | EL-1 `ONTOLOGY-REGISTER` (ENG-000…005) | REUSE |
+| 20 | Taxonomy | Namespace catalogs (`UAKOS-CLOSURE-007`) | REUSE |
+| 21 | Interface | Facades (`platform/*/facade.py`) + contracts | REUSE |
+| 22 | Contract | `ENGINE_CONTRACTS` + `COVERAGE_CONTRACTS` | REUSE |
+| 23 | API | CCE dim 3 (ARCH-API-001) | REUSE |
+| 24 | Storage | ARCH-DATA-001 + `data/**` | REUSE |
+| 25 | Data | CCE dim 2 (ARCH-DATA-001) | REUSE |
+| 26 | Security | CCE dim 9 (ARCH-SECURITY-001) + INFRASTRUCTURE-013 | REUSE |
+| 27 | Governance | CCE dim 10 (ARCH-GOV-001) + `validate_governance` | REUSE |
+| 28 | Validation | CCE dim + `engine/validation` + `ukb/ukbx validate` | REUSE |
+| 29 | Certification | CCE dim 16 + `engine/certification` + `ukbx certify` | REUSE |
+| 30 | Automation | REG-AUTO-001 (`register.sh`) + CI gates | REUSE |
+| 31 | Evidence | CCE dim 14 (validation+certification evidence) | REUSE |
+| 32 | Traceability | CCE dim 24 (`provenance-chain` + GOV-002 + graph) | REUSE |
+| 33 | Compliance | CCE dim 15 (`validate_governance`) | REUSE |
+| 34 | Evolution | CEP-009 + S3-02 §0A | REUSE |
+| 35 | Admission | REG-AUTO-001 + `ukb enforce` + CEP-009 + S2-03 | COMPOSE |
+| 36 | Future Readiness | RIE execution-frontier + S3-02 | REUSE |
+| 37 | Architectural Sufficiency | S3-02 + CONST-04 + E-ACA.5 proof | GENERALIZE |
+| 38 | Architectural Permanence | S3-02 §0A + CEP-007 Art XXIII.10 | REUSE |
+| 39–48 | Infinite Extensibility / Scalability / Evolvability / Composability / Configurability / Discoverability / Technology-Neutrality / Infrastructure-Neutrality / Domain-Neutrality (+ Architectural Sufficiency/Permanence) | Infinite & Unlimited Evolution Principle (S3-02 §0A) + `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md` + `04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md` | REUSE |
+
+**Determination:** 0 NEW · dominant decisions REUSE, with GENERALIZE/COMPOSE where existing owners are unified under the CCE. No duplicate authority created.
+
+---
+
+## E-ACA.4 — DELIVERABLE 3 & 4: ARCHITECTURAL EVOLUTION + UNIVERSAL ADMISSION RESPONSIBILITY MATRICES
+
+**Deliverable 3 — Architectural Evolution Responsibility Matrix.** Each "Can every future X enter UCOS?" question is a determination the CCE issues by aggregating an existing admission/evolution owner. All resolve **YES — admission path exists** at the current baseline; the CCE re-evaluates continuously and fails closed if any path is absent (CCE-LAW-012).
+
+| Future entity class | Constitutional admission path (existing owner) | Verdict |
+|---------------------|-----------------------------------------------|---------|
+| Capability | Universal Capability Catalog + REG-AUTO-001 registration | YES |
+| Nucleus | UKB namespace/family governance + REG-AUTO-001 | YES |
+| Universe | S2-03 universe admission + Coverage UNIVERSE tier | YES |
+| Technology / Framework / Language / Library | Technology Constitution (provisional-tech, TP-02) + CEP-009 | YES |
+| Infrastructure / Cloud / OS | ARCH-INFRA-001 + EC-3 Band bindings + CEP-009 | YES |
+| Protocol / Standard | ARCH-API/contract surfaces + CEP-009 | YES |
+| AI model / Agent | RIE (AI-agnostic) + `intelligence/` + admission via REG-AUTO-001 | YES |
+| Runtime system | `08-RUNTIME` (RL-F2) + `engine/runtime` | YES |
+| Knowledge object | UKB id-ledger (append-only) + `ukb build` | YES |
+| Implementation | CIOA sequencing + EC-3 factory admission | YES |
+| Registry / Ontology / Taxonomy | UKB substrate + EL-1 + namespace catalog | YES |
+
+**Redesign test (CCE-LAW-013):** *"Will any legitimate future capability require architectural redesign?"* → **NO** at baseline. Basis: the admission pipeline is construct-agnostic (S3-02 §0A: "any construct not yet conceived, classified, or represented"), append-only, and technology/infrastructure/domain-neutral. If a future entity ever lacks a path, the CCE records **architectural incompleteness** (Gate 9 OPEN → Gap Report), never capability failure.
+
+**Deliverable 4 — Universal Admission Responsibility Matrix.** The enumerated admissible classes (Capabilities, Universes, Nuclei, Domains, Industries, Organizations, Products, Services, Policies, Protocols, Standards, Languages, Frameworks, Libraries, Infrastructure, Cloud Platforms, Operating Systems, Databases, Storage Engines, AI Models, Agents, Knowledge Objects, Registries, Ontologies, Taxonomies, Contracts, Interfaces, APIs, Events, Commands, Queries, Pipelines, Workflows, Engines, Runtime Systems, Validation/Certification/Security/Governance/Compliance/Evidence/Traceability/Identity/Time/Location/Economic systems, **and any future constitutional concept**) all resolve to **one** admission pipeline:
+
+```
+new entity → identity (ukb id-ledger, append-only)
+           → classification (ukb enforce --pre; fail-closed)
+           → registration (register.sh / REG-AUTO-001)
+           → completeness determination (CCE 24-dim/10-gate)
+           → evolution/amendment gate if structural (CEP-009 / GOV-12)
+           → certification (ukbx certify) + audit (ledger)
+```
+
+No admission class is unowned. The single pipeline is the reuse-first proof that **no new admission mechanism is required** (CCE-LAW-014).
+
+---
+
+## E-ACA.5 — DELIVERABLE 5 & 6 & 7: SUFFICIENCY · PERMANENCE · FUTURE-EVOLUTION ASSESSMENTS
+
+**Deliverable 5 — Architectural Sufficiency Assessment.** The existing constitutional architecture is **SUFFICIENT** for all lawful future evolution. Basis (repository evidence): one construct-agnostic admission pipeline (E-ACA.4); Infinite & Unlimited Evolution Principle binding (S3-02 §0A); unboundedness certified (`03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md`); no hidden finite assumption (`04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md`). No missing constitutional mechanism, abstraction, composition, governance, or evolution pathway is found (E-ACA.6 registers empty). Where insufficiency were ever found, the CCE emits a **constitutional blueprint only** (Gap Report), never a unilateral addition.
+
+**Deliverable 6 — Architectural Permanence Assessment.** The architecture is **PERMANENT-STABLE**: stable core + unlimited evolution (CCE-LAW-013). Ratification closes acceptance, never evolution (CEP-006 P.3; CEP-009). Certified ≠ frozen ≠ deployed; the realization snapshot is never a boundary (S3-02 §0A). Verdict: **PERMANENCE HOLDS.**
+
+**Deliverable 7 — Future Evolution Readiness Assessment.** **READY.** The RIE execution-frontier (`intelligence/UCOS-RIE-EXECUTION-FRONTIER.json`) and AEOS-readiness projections show a live, evidence-derived frontier; the admission pipeline is open and append-only. Future readiness is a continuous CCE determination, not a one-time claim.
+
+---
+
+## E-ACA.6 — DELIVERABLES 8–16: OPPORTUNITY & GAP REGISTERS
+
+Determined autonomously from Repository Truth at the current baseline. Fail-closed: an empty register is asserted **only** on positive evidence of zero items; any unresolved source would instead raise a Gap Report (CCE-LAW-008).
+
+| # | Register (Deliverable) | Entries at baseline | Evidence |
+|---|------------------------|---------------------|----------|
+| 8 | Missing Responsibility Register | **0** | Every responsibility maps to an existing owner (E-ACA.3). |
+| 9 | Missing Admission Path Register | **0** | Single admission pipeline covers all classes (E-ACA.4). |
+| 10 | Missing Constitutional Mechanism Register | **0** | Sufficiency holds (E-ACA.5); no mechanism absent. |
+| 11 | Reuse Opportunity Register | Realized on all 48 responsibilities | E-ACA.3 (dominant REUSE). |
+| 12 | Extension Opportunity Register | Realized — this extension (CCE → ACA) | E-ACA.1/2. |
+| 13 | Composition Opportunity Register | Realized — Admission (#35), Composition (#14) | E-ACA.3/4. |
+| 14 | Generalization Opportunity Register | Realized — Architectural (#1), Sufficiency (#37) | E-ACA.3. |
+| 15 | Abstraction Opportunity Register | Realized — lifecycle abstraction R-PRESENT/FUTURE/ADMISSION/QUALITY | E-ACA.1. |
+| 16 | Architectural Gap Register | **0 open** (governed set) | UAKOS-CLOSURE-002 `gaps=0` (all subcounts 0); CCE Gate 9; CONST-15 ACHIEVED. |
+
+**Fail-closed honesty note (CONST-04/18).** Architectural completeness of the **governed set (Domain A)** is ACHIEVED/zero-gap. Any Vision-Assimilation (Domain B) enrichment items are a *closure/assimilation* frontier, dispositioned and non-blocking to the governed set's architectural completeness — reported separately per CONST-18, never silently folded into an architectural-completeness claim.
+
+---
+
+## E-ACA.7 — DELIVERABLES 17–19: DETERMINISTIC PROOFS
+
+Each proof is a pure predicate over existing owners' outputs (CCE-LAW-006), reproducible, with Repository / Constitutional / Governance / Validation / Certification evidence.
+
+**Deliverable 17 — Architectural Completeness Proof.** COMPLETE (governed set) ⟺ CCE Gates 1–10 CLOSED ∧ Gap Count = 0 ∧ CCE-LAW-015 quality-clean.
+- Repository evidence: `register.sh` TRANSACTION COMPLETE; `00-BOOK/DATA/certification.json`.
+- Constitutional evidence: CONST-04/15 (ACHIEVED, Domain A).
+- Governance evidence: enforcement gate PASS (registered == eligible; 0 unregistered).
+- Validation evidence: `ukb validate` PASS (referential integrity).
+- Certification evidence: `ukbx certify` CERTIFIED (10/10 domains).
+
+**Deliverable 18 — Architectural Sufficiency Proof.** SUFFICIENT ⟺ single construct-agnostic admission pipeline ∧ Infinite Principle bound ∧ Missing-Mechanism Register = 0.
+- Evidence: E-ACA.4/5; S3-02 §0A; `03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md`; `04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md`.
+
+**Deliverable 19 — Future Evolution Proof.** UNLIMITED ⟺ append-only admission ∧ no legitimate future capability requires redesign ∧ evolution gate live (CEP-009).
+- Evidence: RIE execution-frontier; CEP-009; append-only UKB id-ledger; CCE-LAW-012/013.
+
+Each proof **FAILS CLOSED**: absence of any cited evidence yields NOT PROVEN + Gap Report, never an assumed pass.
+
+---
+
+## E-ACA.8 — DELIVERABLE 20: FINAL CONSTITUTIONAL VERDICT
+
+> **VERDICT — CONSTITUTIONAL EXTENSION RATIFIED-CONSISTENT (engineering-execution tier).**
+> The Constitutional Completeness Engine (`UCOS-COMP-000001`) is hereby the permanent **Architectural Completeness Authority** of UCOS Ω∞, governing the entire architectural-completeness lifecycle (present completeness + future evolution readiness + universal admission + architectural quality) by **reference to existing owners**. **0 new engines · 0 new nuclei · 0 new registries · 0 duplicate authorities · 0 breaking changes.** Architectural Completeness = ACHIEVED (governed set); Architectural Sufficiency = SUFFICIENT; Architectural Permanence = HOLDS; Future Evolution = UNLIMITED/READY; open architectural gaps = 0. This verdict is engineering-execution only (AUTHORITY = NONE); it confers no constitutional finality and is subordinate to the frozen corpus, CEP-000…010, and ARCH-GOV-001.
+
+---
+
+## E-ACA CERTIFICATION
+
+| Attribute | Value |
+|-----------|-------|
+| Extension status | ACTIVE — Architectural Completeness Authority established by extension |
+| New laws | 5 (CCE-LAW-011…015) — append-only over CCE-LAW-001…010 |
+| Completeness responsibilities mapped | 48 (all to existing owners) |
+| New engines created | 0 |
+| New canonical nuclei created | 0 |
+| New registries created | 0 |
+| Duplicate authorities created | 0 |
+| Deliverables produced | 20 (E-ACA.1–E-ACA.8) |
+| Authority | NONE (ENGINEERING-EXECUTION-ONLY) |
+| Companion | `06-IMPLEMENTATION/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-IMPLEMENTATION.md` (§E-ACA-IMPL) |
+
+*This extension adds architectural-completeness-lifecycle responsibilities to the existing CCE by reference to existing owners. It invents no engine, nucleus, registry, or authority; duplicates no responsibility; and remains subordinate to every higher instrument.*

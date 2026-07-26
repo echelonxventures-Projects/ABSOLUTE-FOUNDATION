@@ -8288,15 +8288,260 @@
       "page_start": 9499,
       "page_count": 1,
       "first_seen": "2026-07-25T08:43:55+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/02-ONTOLOGY/USIS-ONT-000-SUBSTRATE-ONTOLOGY-HOME-AND-ROOT-CONCEPT-ANCHOR.md": {
+      "universal_id": "UCOS-USIS-000020",
+      "category": "USIS",
+      "page_start": 9500,
+      "page_count": 2,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/03-TAXONOMY/USIS-TAX-000-SUBSTRATE-TAXONOMY-HOME-AND-ROOT-TAXA-ANCHOR.md": {
+      "universal_id": "UCOS-USIS-000021",
+      "category": "USIS",
+      "page_start": 9502,
+      "page_count": 2,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-000-PROGRAMME-REGISTRIES-HOME-AND-ROOT-REGISTRY-ANCHOR.md": {
+      "universal_id": "UCOS-USIS-000022",
+      "category": "USIS",
+      "page_start": 9504,
+      "page_count": 2,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-001-UNIVERSE-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000023",
+      "category": "USIS",
+      "page_start": 9506,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-002-SCIENCE-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000024",
+      "category": "USIS",
+      "page_start": 9507,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-003-DOMAIN-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000025",
+      "category": "USIS",
+      "page_start": 9508,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-004-CAPABILITY-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000026",
+      "category": "USIS",
+      "page_start": 9509,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-005-ALGORITHM-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000027",
+      "category": "USIS",
+      "page_start": 9510,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-006-MODEL-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000028",
+      "category": "USIS",
+      "page_start": 9511,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-007-PATTERN-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000029",
+      "category": "USIS",
+      "page_start": 9512,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-008-INSIGHT-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000030",
+      "category": "USIS",
+      "page_start": 9513,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-009-REASONING-TRACE-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000031",
+      "category": "USIS",
+      "page_start": 9514,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-010-DATASET-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000032",
+      "category": "USIS",
+      "page_start": 9515,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-011-LEARNED-CHANGE-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000033",
+      "category": "USIS",
+      "page_start": 9516,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-012-SELF-EVOLUTION-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000034",
+      "category": "USIS",
+      "page_start": 9517,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/19-DOCUMENTATION/USIS-DOC-000-DOCUMENTATION-HOME-ANCHOR.md": {
+      "universal_id": "UCOS-USIS-000035",
+      "category": "USIS",
+      "page_start": 9518,
+      "page_count": 1,
+      "first_seen": "2026-07-25T10:54:44+00:00"
+    },
+    "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-021-UNIVERSAL-SCIENCE-INTELLIGENCE-MASTER-REGISTRY.md": {
+      "universal_id": "UCOS-USIS-000036",
+      "category": "USIS",
+      "page_start": 9519,
+      "page_count": 4,
+      "first_seen": "2026-07-25T11:13:48+00:00"
+    },
+    "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md": {
+      "universal_id": "UCOS-CON-000050",
+      "category": "CON",
+      "page_start": 9523,
+      "page_count": 6,
+      "first_seen": "2026-07-25T15:09:11+00:00"
+    },
+    "00-CMG/CMG-000002-CONSTITUTIONAL-REPOSITORY-IMPACT-ANALYSIS.md": {
+      "universal_id": "UCOS-CON-000051",
+      "category": "CON",
+      "page_start": 9529,
+      "page_count": 2,
+      "first_seen": "2026-07-25T15:40:21+00:00"
+    },
+    "00-CMG/CMG-REGISTRY.json": {
+      "universal_id": "UCOS-CMG-000001",
+      "category": "CMG",
+      "page_start": 9531,
+      "page_count": 7,
+      "first_seen": "2026-07-25T15:40:21+00:00"
+    },
+    "00-CMG/CMG-000003-CONSTITUTIONAL-GAP-ANALYSIS.md": {
+      "universal_id": "UCOS-CON-000052",
+      "category": "CON",
+      "page_start": 9538,
+      "page_count": 3,
+      "first_seen": "2026-07-25T15:41:27+00:00"
+    },
+    "00-CMG/CMG-000004-CONSTITUTIONAL-DEPENDENCY-ANALYSIS.md": {
+      "universal_id": "UCOS-CON-000053",
+      "category": "CON",
+      "page_start": 9541,
+      "page_count": 3,
+      "first_seen": "2026-07-25T15:42:16+00:00"
+    },
+    "00-CMG/CMG-000005-CONSTITUTIONAL-GOVERNANCE-ANALYSIS.md": {
+      "universal_id": "UCOS-CON-000054",
+      "category": "CON",
+      "page_start": 9544,
+      "page_count": 3,
+      "first_seen": "2026-07-25T15:43:18+00:00"
+    },
+    "00-CMG/CMG-000006-CONSTITUTIONAL-VALIDATION-STRATEGY.md": {
+      "universal_id": "UCOS-CON-000055",
+      "category": "CON",
+      "page_start": 9547,
+      "page_count": 3,
+      "first_seen": "2026-07-25T15:44:15+00:00"
+    },
+    "00-CMG/CMG-000007-CONSTITUTIONAL-CERTIFICATION-STRATEGY.md": {
+      "universal_id": "UCOS-CON-000056",
+      "category": "CON",
+      "page_start": 9550,
+      "page_count": 3,
+      "first_seen": "2026-07-25T15:44:58+00:00"
+    },
+    "00-CMG/CMG-000008-CONSTITUTIONAL-MIGRATION-STRATEGY.md": {
+      "universal_id": "UCOS-CON-000057",
+      "category": "CON",
+      "page_start": 9553,
+      "page_count": 2,
+      "first_seen": "2026-07-25T15:45:46+00:00"
+    },
+    "00-CMG/CMG-000009-CONSTITUTIONAL-INTEGRATION-STRATEGY.md": {
+      "universal_id": "UCOS-CON-000058",
+      "category": "CON",
+      "page_start": 9555,
+      "page_count": 3,
+      "first_seen": "2026-07-25T15:46:41+00:00"
+    },
+    "00-CMG/CMG-000010-CONSTITUTIONAL-FUTURE-EVOLUTION-STRATEGY.md": {
+      "universal_id": "UCOS-CON-000059",
+      "category": "CON",
+      "page_start": 9558,
+      "page_count": 3,
+      "first_seen": "2026-07-25T15:47:37+00:00"
+    },
+    "00-CMG/CMG-000011-CONSTITUTIONAL-ZERO-MISSING-VERIFICATION.md": {
+      "universal_id": "UCOS-CON-000060",
+      "category": "CON",
+      "page_start": 9561,
+      "page_count": 4,
+      "first_seen": "2026-07-25T15:48:54+00:00"
+    },
+    "00-CMG/CMG-000012-CONSTITUTIONAL-IMPLEMENTATION-READINESS-ASSESSMENT.md": {
+      "universal_id": "UCOS-CON-000061",
+      "category": "CON",
+      "page_start": 9565,
+      "page_count": 2,
+      "first_seen": "2026-07-25T15:50:52+00:00"
+    },
+    "00-CMG/CMG-000013-CONSTITUTIONAL-RECOMMENDATIONS.md": {
+      "universal_id": "UCOS-CON-000062",
+      "category": "CON",
+      "page_start": 9567,
+      "page_count": 3,
+      "first_seen": "2026-07-25T15:52:01+00:00"
+    },
+    "00-CMG/CMG-000014-CONSTITUTIONAL-OPEN-QUESTIONS-FOR-RATIFICATION.md": {
+      "universal_id": "UCOS-CON-000063",
+      "category": "CON",
+      "page_start": 9570,
+      "page_count": 3,
+      "first_seen": "2026-07-25T15:52:57+00:00"
+    },
+    "00-CMG/README.md": {
+      "universal_id": "UCOS-CMG-000002",
+      "category": "CMG",
+      "page_start": 9573,
+      "page_count": 2,
+      "first_seen": "2026-07-25T15:53:32+00:00"
+    },
+    "UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md": {
+      "universal_id": "UCOS-UCOSACFV0000-000001",
+      "category": "UCOSACFV0000",
+      "page_start": 9575,
+      "page_count": 9,
+      "first_seen": "2026-07-26T06:31:59+00:00"
+    },
+    "02-MASTER/UCCEP-000000-UNIVERSAL-CONTINUOUS-CONSTITUTIONAL-EVOLUTION-PROGRAMME-CHARTER.md": {
+      "universal_id": "UCOS-CON-000064",
+      "category": "CON",
+      "page_start": 9584,
+      "page_count": 4,
+      "first_seen": "2026-07-26T07:35:05+00:00"
     }
   },
-  "page_cursor": 9499,
+  "page_cursor": 9587,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
     "SRC": 2,
     "ARCH": 24,
-    "CON": 49,
+    "CON": 64,
     "VSN": 3,
     "IDX": 1,
     "EES": 2,
@@ -8330,7 +8575,7 @@
     "CEP": 35,
     "SEC": 5,
     "REPOOPERATIO": 1,
-    "USIS": 19,
+    "USIS": 36,
     "READINESSASS": 1,
     "GAPCLASSIFIC": 1,
     "FINALCERTIFI": 2,
@@ -8384,7 +8629,9 @@
     "IAC001E": 9,
     "EVOUSIS014": 9,
     "EVOUSIS015": 9,
-    "EVOUSIS016": 9
+    "EVOUSIS016": 9,
+    "CMG": 2,
+    "UCOSACFV0000": 1
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -8657,6 +8904,15 @@
         "status": "FINAL",
         "path": "01-WORKING/AUTHORITY-REGISTER.md",
         "name": "UCOS Ω∞ AUTHORITY & GOVERNANCE REGISTER"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T03:06:10+00:00",
+        "content_hash": "dfb00c53931ccb92abefca2c13214e2ec8c387b68ae7b1083c916d9fe6f9869c",
+        "version": "1.0.0",
+        "status": "FINAL",
+        "path": "01-WORKING/AUTHORITY-REGISTER.md",
+        "name": "UCOS Ω∞ AUTHORITY & GOVERNANCE REGISTER"
       }
     ],
     "UCOS-CON-000010": [
@@ -8864,6 +9120,15 @@
         "seq": 6,
         "at": "2026-07-22T05:17:20+00:00",
         "content_hash": "5c3210e199429e3fa41656ad8edac48fb2688f45943f0c6b204cb271e90cc946",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md",
+        "name": "UCOS Ω∞ CONSTITUTIONAL DECISION REGISTER"
+      },
+      {
+        "seq": 7,
+        "at": "2026-07-26T03:06:10+00:00",
+        "content_hash": "d3ad3c0d7438be3d5602a40268bb99e8361788f2cc1b5865ac2b77f96d58a33d",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md",
@@ -12583,6 +12848,15 @@
         "status": "ACTIVE",
         "path": "02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL COMPLETENESS ENGINE CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T04:11:02+00:00",
+        "content_hash": "67d25eb7c27fd2a5049ff419deef7d612768b9706f45cce098b75924b4cc2d4c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL COMPLETENESS ENGINE CONSTITUTION"
       }
     ],
     "UCOS-CON-000027": [
@@ -12590,6 +12864,15 @@
         "seq": 1,
         "at": "2026-07-17T16:40:30+00:00",
         "content_hash": "820a1558d435eebe5488a524ff71a3b21d6f5c3ccf9ee25d4c4c320ffc6d64dc",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "06-IMPLEMENTATION/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-IMPLEMENTATION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL COMPLETENESS ENGINE IMPLEMENTATION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T04:11:02+00:00",
+        "content_hash": "25438e71be689926293640e3af97e66fe574483c79f6ead18ed7d3b19bc359bf",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "06-IMPLEMENTATION/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-IMPLEMENTATION.md",
@@ -13463,6 +13746,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-IMP-BASELINE-001.rib.json",
         "name": "Ucos Imp Baseline 001.Rib"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "3b540156726e34e2a6794b4efe7f0e1e08616cea26d3f6fdbd5a1af451477ea0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-IMP-BASELINE-001.rib.json",
+        "name": "Ucos Imp Baseline 001.Rib"
       }
     ],
     "UCOS-INTELLIGENCE-000003": [
@@ -13524,6 +13816,15 @@
         "seq": 7,
         "at": "2026-07-22T05:42:51+00:00",
         "content_hash": "a3a0a3632fffe933555ae8fbe83e3718129bc7aad28f692350304a60f2c428b7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-AEOS-READINESS.json",
+        "name": "Ucos Rie Aeos Readiness"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "909da0a1d5817a3112833ea5edf79fe23cd42c1108dde4c0fe521f2aae5be289",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-AEOS-READINESS.json",
@@ -13593,6 +13894,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
         "name": "Ucos Rie Capability Catalog"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "5fe102e883e00d56f5388f9f9746e5b3dbab0b3642bf6efd8f65efd47b17cf83",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
+        "name": "Ucos Rie Capability Catalog"
       }
     ],
     "UCOS-INTELLIGENCE-000005": [
@@ -13654,6 +13964,15 @@
         "seq": 7,
         "at": "2026-07-22T05:42:51+00:00",
         "content_hash": "b22ebeb5edcf67558a02ca3a5046406581072b174a1eea44b82305bf5c515829",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json",
+        "name": "Ucos Rie Dependency Graph"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "bad77ec9e0d0f248e3999a72b013caf862fd7ff77d68d946380108d9cf824860",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json",
@@ -13723,6 +14042,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-DIGITAL-TWIN.json",
         "name": "Ucos Rie Digital Twin"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "fe906caae8a6a86d3fcc7350ee82fdf646edc71bbf394ced34c4b1b60e2ed755",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-DIGITAL-TWIN.json",
+        "name": "Ucos Rie Digital Twin"
       }
     ],
     "UCOS-INTELLIGENCE-000007": [
@@ -13784,6 +14112,15 @@
         "seq": 7,
         "at": "2026-07-22T05:42:51+00:00",
         "content_hash": "6fe018f9b6b36ab26921515c43033ae7a7b511dd0879bdf8cbf8ce30fc55af5f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-EXECUTION-FRONTIER.json",
+        "name": "Ucos Rie Execution Frontier"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "61dba1590da3c0368ce6ff873f2209454df685a50ef736479f0b3c92b9e56710",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-EXECUTION-FRONTIER.json",
@@ -13853,6 +14190,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-HEALTH.json",
         "name": "Ucos Rie Health"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "e17df8844999dc27e16904fb4cb13d44908cb98f7c7f9521c0b90c13924b5e05",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-HEALTH.json",
+        "name": "Ucos Rie Health"
       }
     ],
     "UCOS-INTELLIGENCE-000009": [
@@ -13914,6 +14260,15 @@
         "seq": 7,
         "at": "2026-07-22T05:42:51+00:00",
         "content_hash": "48f2b55e091e5472915d41efd34edd1b89671a8e3224dac2c65416c1f15dfa40",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-MODEL.json",
+        "name": "Ucos Rie Model"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "5afb11fb4867496bf46a45b05481b75da2f298b39963a9cc4d329ceec5cb9d04",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-MODEL.json",
@@ -13983,6 +14338,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-PROGRESS.json",
         "name": "Ucos Rie Progress"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "b83933610ad901e89a2ddf2fef7c5b95f79c7803ee279e2e120bda65bf3e7461",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-PROGRESS.json",
+        "name": "Ucos Rie Progress"
       }
     ],
     "UCOS-INTELLIGENCE-000011": [
@@ -14044,6 +14408,15 @@
         "seq": 7,
         "at": "2026-07-22T05:42:51+00:00",
         "content_hash": "54c26952e461b5ce9423e1ebd0f8068558326ee72f5ae846e3d8cdbdfd9e5127",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-SNAPSHOT.json",
+        "name": "Ucos Rie Snapshot"
+      },
+      {
+        "seq": 8,
+        "at": "2026-07-26T06:32:00+00:00",
+        "content_hash": "e59857d8dcf54b5a963dd51d6f6c743477577181f39863e013c879669b1616ad",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-SNAPSHOT.json",
@@ -18974,6 +19347,15 @@
         "status": "FROZEN",
         "path": "00-CEP/CEP-000-CONSTITUTIONAL-ENGINEERING-CHARTER.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL ENGINEERING CHARTER"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "c1b598b897f224550399820966e0d6a32b8e115db5ddf8a7160e50892a49553f",
+        "version": "1.0",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-000-CONSTITUTIONAL-ENGINEERING-CHARTER.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL ENGINEERING CHARTER"
       }
     ],
     "UCOS-CON-000033": [
@@ -18994,6 +19376,33 @@
         "status": "FROZEN",
         "path": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL ENGINEERING CONSTITUTION"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "0e53dfc7535d0aac48573f3e139492ed46725a4b9d04398d0d86230c609b4dc9",
+        "version": "1.0",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL ENGINEERING CONSTITUTION"
+      },
+      {
+        "seq": 4,
+        "at": "2026-07-26T03:06:10+00:00",
+        "content_hash": "e7feb3ebb64a178b95d0b49c33b2e69335d52605eaf57b6e9ae20201a54f0914",
+        "version": "1.1",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL ENGINEERING CONSTITUTION"
+      },
+      {
+        "seq": 5,
+        "at": "2026-07-26T03:40:18+00:00",
+        "content_hash": "12eb6b058ece906ff48ac803fd65bbac9436e51921a71e92794e33b02598587a",
+        "version": "1.1",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL ENGINEERING CONSTITUTION"
       }
     ],
     "UCOS-CON-000034": [
@@ -19003,6 +19412,42 @@
         "content_hash": "cfb29d87524a389b8fdaed8edcd821bdf159e5ceb8d32d8682bcdda0c7830b37",
         "version": "1.0",
         "status": "FROZEN",
+        "path": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "cfb29d87524a389b8fdaed8edcd821bdf159e5ceb8d32d8682bcdda0c7830b37",
+        "version": "1.0",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T03:06:10+00:00",
+        "content_hash": "5b338298f583da0256cfbb2af6d04974199b991ae0dc3eab7357b3b7d2f0b3da",
+        "version": "1.1",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 4,
+        "at": "2026-07-26T03:08:13+00:00",
+        "content_hash": "bb762bbf1a9555a6a894bc33af4b56db81191b7490cb3ea443bb5e9202cfa475",
+        "version": "1.1",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 5,
+        "at": "2026-07-26T14:13:03+00:00",
+        "content_hash": "f7ae8766f1fda329c362ef86a35cb594d3912ea23a91075e6d1eb6e0cdb52baa",
+        "version": "1.2",
+        "status": "ACTIVE",
         "path": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL GOVERNANCE CONSTITUTION"
       }
@@ -19016,6 +19461,15 @@
         "status": "FROZEN",
         "path": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL EXECUTION CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "956e02b1f095f31a58cb1907f730b97730cb56a3e7e6f147a46a3624be8eba29",
+        "version": "1.0",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL EXECUTION CONSTITUTION"
       }
     ],
     "UCOS-CON-000036": [
@@ -19025,6 +19479,15 @@
         "content_hash": "1cdc63daa6699dd95e10e4f1e86d81fdb1e138701c8c1674b05514c9f416fc97",
         "version": "1.0",
         "status": "FROZEN",
+        "path": "00-CEP/CEP-004-CONSTITUTIONAL-VALIDATION-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL VALIDATION CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "1cdc63daa6699dd95e10e4f1e86d81fdb1e138701c8c1674b05514c9f416fc97",
+        "version": "1.0",
+        "status": "ACTIVE",
         "path": "00-CEP/CEP-004-CONSTITUTIONAL-VALIDATION-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL VALIDATION CONSTITUTION"
       }
@@ -19038,6 +19501,15 @@
         "status": "FROZEN",
         "path": "00-CEP/CEP-005-CONSTITUTIONAL-CERTIFICATION-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL CERTIFICATION CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "baff1ab6ed903ade579793b1e7d44ee467fae2a2282a25431e60ab45fa01091f",
+        "version": "1.0",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-005-CONSTITUTIONAL-CERTIFICATION-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL CERTIFICATION CONSTITUTION"
       }
     ],
     "UCOS-CON-000038": [
@@ -19047,6 +19519,15 @@
         "content_hash": "48524217103d258942c557916c6f266ace454983ad94a9ca2f9322a9daa79e1e",
         "version": "1.0",
         "status": "FROZEN",
+        "path": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL RATIFICATION CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "48524217103d258942c557916c6f266ace454983ad94a9ca2f9322a9daa79e1e",
+        "version": "1.0",
+        "status": "ACTIVE",
         "path": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL RATIFICATION CONSTITUTION"
       }
@@ -19060,6 +19541,15 @@
         "status": "FROZEN",
         "path": "00-CEP/CEP-007-CONSTITUTIONAL-FREEZE-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL FREEZE CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "8b31db6ac535912e29b3f69bed6e4ad788d5108b2cfeeca6c9671e45bfb71c98",
+        "version": "1.0",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-007-CONSTITUTIONAL-FREEZE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL FREEZE CONSTITUTION"
       }
     ],
     "UCOS-CON-000040": [
@@ -19069,6 +19559,15 @@
         "content_hash": "08c25caeed43bb4773a5ea636bb5cf66b03057e284c084b1d56ac7ef757da8b1",
         "version": "1.0",
         "status": "FROZEN",
+        "path": "00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL EVIDENCE & TRACEABILITY CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "08c25caeed43bb4773a5ea636bb5cf66b03057e284c084b1d56ac7ef757da8b1",
+        "version": "1.0",
+        "status": "ACTIVE",
         "path": "00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL EVIDENCE & TRACEABILITY CONSTITUTION"
       }
@@ -19091,6 +19590,15 @@
         "status": "FROZEN",
         "path": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL AMENDMENT & EVOLUTION CONSTITUTION"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "ef736a19eef0c2b20450d355e63e9bc257814414fd5c509ff915217c394a025c",
+        "version": "1.0",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL AMENDMENT & EVOLUTION CONSTITUTION"
       }
     ],
     "UCOS-CON-000042": [
@@ -19100,6 +19608,15 @@
         "content_hash": "87259b7248b424f35830f9443a0859a1cd04398bffe76c073e3428d13a549974",
         "version": "1.0",
         "status": "FROZEN",
+        "path": "00-CEP/CEP-010-CONSTITUTIONAL-AUDIT-COMPLIANCE-ASSURANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL AUDIT, COMPLIANCE & ASSURANCE CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "87259b7248b424f35830f9443a0859a1cd04398bffe76c073e3428d13a549974",
+        "version": "1.0",
+        "status": "ACTIVE",
         "path": "00-CEP/CEP-010-CONSTITUTIONAL-AUDIT-COMPLIANCE-ASSURANCE-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL AUDIT, COMPLIANCE & ASSURANCE CONSTITUTION"
       }
@@ -20176,6 +20693,15 @@
         "status": "ACTIVE",
         "path": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md",
         "name": "UCOS Ω∞ REPOSITORY RATIFICATION DETERMINATION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T03:06:10+00:00",
+        "content_hash": "3625ea5f92c8acc1766c867d1fece3ac0a155f17b5ae5267523529723ea8a126",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md",
+        "name": "UCOS Ω∞ REPOSITORY RATIFICATION DETERMINATION"
       }
     ],
     "UCOS-SEC-000005": [
@@ -20976,6 +21502,15 @@
         "status": "ACTIVE",
         "path": "09-DR-RAT-11-ASSESSMENT.md",
         "name": "09 — DR-RAT-11 CONSTITUTIONAL ASSESSMENT"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T03:06:10+00:00",
+        "content_hash": "c7c3aadf1090c79780ab79a4d06aaae4b4a9e82d8bf515194b75b8fa8075b88c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "09-DR-RAT-11-ASSESSMENT.md",
+        "name": "09 — DR-RAT-11 CONSTITUTIONAL ASSESSMENT"
       }
     ],
     "UCOS-READINESSDET-000001": [
@@ -21368,6 +21903,15 @@
         "status": "ACTIVE",
         "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
         "name": "02 — CANONICAL OWNERSHIP MATRIX"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T14:13:03+00:00",
+        "content_hash": "7fe74a39a51e02ff0e7b8a9c7199f158d177495c94df739622deef3ad4e375a4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
+        "name": "02 — CANONICAL OWNERSHIP MATRIX"
       }
     ],
     "UCOS-ARCHITECTURA-000003": [
@@ -21375,6 +21919,15 @@
         "seq": 1,
         "at": "2026-07-24T01:12:39+00:00",
         "content_hash": "3727f59f5fbaaf2655217f8ff30274bf56beab4fe8150c8fa73f9debbf0b73cd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+        "name": "03 — ARCHITECTURAL DECISION ASSIMILATION MATRIX"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T14:13:03+00:00",
+        "content_hash": "40cb92fe3c938ceb248622a6322f247e2a1c4f60df728f0a93460589aec6da60",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
@@ -22391,6 +22944,607 @@
         "status": "ACTIVE",
         "path": "EVO-USIS-016/09-REPOSITORY-EVIDENCE-REPORT.md",
         "name": "EVO-USIS-016 · 09 — Repository Evidence Report"
+      }
+    ],
+    "UCOS-USIS-000020": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "6f791c3ce673addd304b6852c2ca55cdc7b39bb75b8d6f5984164c93e1d141fb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/02-ONTOLOGY/USIS-ONT-000-SUBSTRATE-ONTOLOGY-HOME-AND-ROOT-CONCEPT-ANCHOR.md",
+        "name": "USIS-ONT-000 — Substrate Ontology Home & Root Concept Anchor"
+      }
+    ],
+    "UCOS-USIS-000021": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "469b300ff51bf27ac2a30449fd901829500fb1ebab1e40f73d227cbf011b0cbc",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/03-TAXONOMY/USIS-TAX-000-SUBSTRATE-TAXONOMY-HOME-AND-ROOT-TAXA-ANCHOR.md",
+        "name": "USIS-TAX-000 — Substrate Taxonomy Home & Root Taxa Anchor"
+      }
+    ],
+    "UCOS-USIS-000022": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "7174c105b8aaea0c2275561e9f369556e63064d715f85282f8c391d3d871d665",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-000-PROGRAMME-REGISTRIES-HOME-AND-ROOT-REGISTRY-ANCHOR.md",
+        "name": "USIS-REG-000 — Programme Registries Home & Root Registry Anchor"
+      }
+    ],
+    "UCOS-USIS-000023": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "6fc5d503780c06bd9787a62275fb1d45ba32974ef7273ce7ea6edf96e3f5db36",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-001-UNIVERSE-REGISTRY.md",
+        "name": "USIS-REG-001 — Universe Registry"
+      }
+    ],
+    "UCOS-USIS-000024": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "95a46db01431b578c8d3faf924fb961a03355dcb3fca476b38af86e9755fe705",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-002-SCIENCE-REGISTRY.md",
+        "name": "USIS-REG-002 — Science Registry"
+      }
+    ],
+    "UCOS-USIS-000025": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "dff52e56fbbe1a6e0baeb55002bdebc8ddbf55c1d401f03893af378475275e79",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-003-DOMAIN-REGISTRY.md",
+        "name": "USIS-REG-003 — Domain Registry"
+      }
+    ],
+    "UCOS-USIS-000026": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "cc47c159e076d58b70810438e717a5b9b430f48ec875ae08cd21c1f84b395f01",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-004-CAPABILITY-REGISTRY.md",
+        "name": "USIS-REG-004 — Capability Registry"
+      }
+    ],
+    "UCOS-USIS-000027": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "2faefc0c6458d8a27b78749f0c0dd3a2eaa29fa1d94e5dd86c782fff51cf63c6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-005-ALGORITHM-REGISTRY.md",
+        "name": "USIS-REG-005 — Algorithm Registry"
+      }
+    ],
+    "UCOS-USIS-000028": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "72f78d947cd3832cf55ce2ac765cb93c537d251f82d01fc9513d114a5deb5b6c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-006-MODEL-REGISTRY.md",
+        "name": "USIS-REG-006 — Model Registry"
+      }
+    ],
+    "UCOS-USIS-000029": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "b7ffd6472e1f5d52fbf36c69d9d2e693fd3e615aa262d5a6c9a9f78bc84df0e7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-007-PATTERN-REGISTRY.md",
+        "name": "USIS-REG-007 — Pattern Registry"
+      }
+    ],
+    "UCOS-USIS-000030": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "77f22e1b0749cad2ee1cbe0a63ad9f150d44bc3ad2e270217d554940ed595770",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-008-INSIGHT-REGISTRY.md",
+        "name": "USIS-REG-008 — Insight Registry"
+      }
+    ],
+    "UCOS-USIS-000031": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "8d86bc9208f5ef7f4defdd268cd16c0c4b9cfba98ee23aaf8261d134fae0daee",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-009-REASONING-TRACE-REGISTRY.md",
+        "name": "USIS-REG-009 — Reasoning-Trace Registry"
+      }
+    ],
+    "UCOS-USIS-000032": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "be899dccfc76c0036df16fcc196eb15c1d9c685a1cea2f6d61c278476c44f25c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-010-DATASET-REGISTRY.md",
+        "name": "USIS-REG-010 — Dataset Registry"
+      }
+    ],
+    "UCOS-USIS-000033": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "b8853a4d6598b1bb253940d56e128876f733942ab32edbb78d3471954967fafe",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-011-LEARNED-CHANGE-REGISTRY.md",
+        "name": "USIS-REG-011 — Learned-Change Registry"
+      }
+    ],
+    "UCOS-USIS-000034": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "ad4c216e78f3be216105064c5f0e6f36b52a98fc309cc0794208dae27d189358",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-012-SELF-EVOLUTION-REGISTRY.md",
+        "name": "USIS-REG-012 — Self-Evolution Registry"
+      }
+    ],
+    "UCOS-USIS-000035": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T10:54:44+00:00",
+        "content_hash": "55932a948efa3b59471d031761dff26b117797d41d8954860c4a576b6f7cdb9e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/19-DOCUMENTATION/USIS-DOC-000-DOCUMENTATION-HOME-ANCHOR.md",
+        "name": "USIS-DOC-000 — Documentation Home Anchor"
+      }
+    ],
+    "UCOS-USIS-000036": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T11:13:48+00:00",
+        "content_hash": "d7d028b1db32e71eec86ab833fd2dd6ee63f5bcc6d9cbd8bfba46a62f1c8d851",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-021-UNIVERSAL-SCIENCE-INTELLIGENCE-MASTER-REGISTRY.md",
+        "name": "USIS-021 — Universal Science & Intelligence Master Registry"
+      }
+    ],
+    "UCOS-CON-000050": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:09:11+00:00",
+        "content_hash": "2e7faa98d98b0ededf84603fcca99175b7e389df4e5fad0cb8e012d1cec8e678",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-25T15:40:22+00:00",
+        "content_hash": "2a4870609d6bbe087d19a12cca77d6c289cb93369cbb86ce995fc4029e6620d0",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T03:08:13+00:00",
+        "content_hash": "0e4637e30bfb9e812e415acdaf96626c20b977febfbadb3b3d36588d31afdac4",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 4,
+        "at": "2026-07-26T03:08:33+00:00",
+        "content_hash": "20124cbed5ae21befc465709a0c30e152cbf5397b39ad2fd97e31e125d543864",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 5,
+        "at": "2026-07-26T03:09:12+00:00",
+        "content_hash": "cbaeb49da4394082c291559e46237d6a009a2150966cf84ad2eefe4e367b7740",
+        "version": "1.1",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 6,
+        "at": "2026-07-26T03:10:02+00:00",
+        "content_hash": "55bb086f5642f7c68bda89a1c202469b9873567347200132698880ab5c47f2cf",
+        "version": "1.1",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
+      },
+      {
+        "seq": 7,
+        "at": "2026-07-26T03:40:18+00:00",
+        "content_hash": "727c913938e4f0cf41f2a002143dca60ce102b0fe731be655ff0e6facab81d33",
+        "version": "1.1",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION"
+      }
+    ],
+    "UCOS-CON-000051": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:40:21+00:00",
+        "content_hash": "c403da143d8e08e3284312a73a6533dfe1bb96dafaa5980ae0cf4edbd9e9dbc9",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000002-CONSTITUTIONAL-REPOSITORY-IMPACT-ANALYSIS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL REPOSITORY IMPACT ANALYSIS"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "89c87fb5f8f78660d3274609f7dbdef354fc02e733494e858f67ddb204931d47",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000002-CONSTITUTIONAL-REPOSITORY-IMPACT-ANALYSIS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL REPOSITORY IMPACT ANALYSIS"
+      }
+    ],
+    "UCOS-CMG-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:40:21+00:00",
+        "content_hash": "5d472654434b4b42e912f35015e4199c6f221dbf2105b75b3ebc35d4a020cf0f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-CMG/CMG-REGISTRY.json",
+        "name": "Cmg Registry"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T03:08:13+00:00",
+        "content_hash": "3b47ff9b18d346d41323016cc0c0470724ba289931a645f0930bee1ac721dbb6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-CMG/CMG-REGISTRY.json",
+        "name": "Cmg Registry"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T03:19:07+00:00",
+        "content_hash": "56f1bbd99b48a34ab481cacb58ae43164974efdae66b21647357e2d829189f60",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-CMG/CMG-REGISTRY.json",
+        "name": "Cmg Registry"
+      },
+      {
+        "seq": 4,
+        "at": "2026-07-26T03:40:18+00:00",
+        "content_hash": "2cc67f867a2bd07e685a57fd812653ccb8f0eb682ca77a7589dc14b291514d27",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-CMG/CMG-REGISTRY.json",
+        "name": "Cmg Registry"
+      },
+      {
+        "seq": 5,
+        "at": "2026-07-26T14:13:03+00:00",
+        "content_hash": "ae12d2d5656583ccb2b5a6c3a2ce2b123c1198faeec7d80dc192b2487dc0463f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-CMG/CMG-REGISTRY.json",
+        "name": "Cmg Registry"
+      }
+    ],
+    "UCOS-CON-000052": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:41:27+00:00",
+        "content_hash": "6b8e443a9166ed007c535ff56e31d35d3cfe4756e50cafb1cee082c143a3b074",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000003-CONSTITUTIONAL-GAP-ANALYSIS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL GAP ANALYSIS"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T03:19:07+00:00",
+        "content_hash": "1cbfc4126db04da524b50cb430ae4d458dfe0c5e604c356fca11ceba0201a424",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000003-CONSTITUTIONAL-GAP-ANALYSIS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL GAP ANALYSIS"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T03:40:18+00:00",
+        "content_hash": "7afd5def9d09855375f77bdbdd921963ebb31f45346695a2aa8296ff4642d64b",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000003-CONSTITUTIONAL-GAP-ANALYSIS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL GAP ANALYSIS"
+      }
+    ],
+    "UCOS-CON-000053": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:42:16+00:00",
+        "content_hash": "8e823e1825fb714ed7d3692a57bbff41b75f3a65f06e0cf7f473fbd8e7cf018d",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000004-CONSTITUTIONAL-DEPENDENCY-ANALYSIS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL DEPENDENCY ANALYSIS"
+      }
+    ],
+    "UCOS-CON-000054": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:43:18+00:00",
+        "content_hash": "51a28de8b9ac77f66b32b7a2117dddfd313a80bc2df50c392c771b5336db7b6b",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000005-CONSTITUTIONAL-GOVERNANCE-ANALYSIS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL GOVERNANCE ANALYSIS"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T03:19:07+00:00",
+        "content_hash": "2f828743be25da367bf9144d0a48943edbce27c155be3f498c2bae45d9ca4597",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000005-CONSTITUTIONAL-GOVERNANCE-ANALYSIS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL GOVERNANCE ANALYSIS"
+      }
+    ],
+    "UCOS-CON-000055": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:44:15+00:00",
+        "content_hash": "7103ca9f0397caa97f70e908bf6fd139202a70c75d9aa1699bfc67fe6bb25469",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000006-CONSTITUTIONAL-VALIDATION-STRATEGY.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL VALIDATION STRATEGY"
+      }
+    ],
+    "UCOS-CON-000056": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:44:58+00:00",
+        "content_hash": "82f74f8671624dd0c4c1d38088e6a4aa1c8f2acf11fbe450d324b3d6cbab0b00",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000007-CONSTITUTIONAL-CERTIFICATION-STRATEGY.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL CERTIFICATION STRATEGY"
+      }
+    ],
+    "UCOS-CON-000057": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:45:46+00:00",
+        "content_hash": "c28607336428050be59751df1fec5ba73a7ea6dee5143bc423bde9e21675800d",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000008-CONSTITUTIONAL-MIGRATION-STRATEGY.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL MIGRATION STRATEGY"
+      }
+    ],
+    "UCOS-CON-000058": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:46:41+00:00",
+        "content_hash": "f8e9f29f549e0b66b220c783d4961979348b4b557e9a9530f0d65659271ca949",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000009-CONSTITUTIONAL-INTEGRATION-STRATEGY.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL INTEGRATION STRATEGY"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "b9a22eabf9c86c64d45d72a1883f994afb8c9175c38462a3732da65c17942088",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000009-CONSTITUTIONAL-INTEGRATION-STRATEGY.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL INTEGRATION STRATEGY"
+      }
+    ],
+    "UCOS-CON-000059": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:47:37+00:00",
+        "content_hash": "ce353f972aea020bdac13ddc9e69eee9444c136695c6afa575a000a19ef6730a",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000010-CONSTITUTIONAL-FUTURE-EVOLUTION-STRATEGY.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL FUTURE EVOLUTION STRATEGY"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T03:19:07+00:00",
+        "content_hash": "6104d16b00afcc862ca1dfc6daed09ab2ef786b332f1a7e3699f0e96b40ba876",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000010-CONSTITUTIONAL-FUTURE-EVOLUTION-STRATEGY.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL FUTURE EVOLUTION STRATEGY"
+      }
+    ],
+    "UCOS-CON-000060": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:48:54+00:00",
+        "content_hash": "9a07f69f77401ab385fc38111f0a0a4e94a3a68825462d3dc27ef1fe89a40061",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000011-CONSTITUTIONAL-ZERO-MISSING-VERIFICATION.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL ZERO-MISSING VERIFICATION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T03:19:07+00:00",
+        "content_hash": "d7b0075ef1a9bca6ee8bc47d54185d1a4417d8ae7db77dcef46de3ed5ecab9dc",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000011-CONSTITUTIONAL-ZERO-MISSING-VERIFICATION.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL ZERO-MISSING VERIFICATION"
+      }
+    ],
+    "UCOS-CON-000061": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:50:52+00:00",
+        "content_hash": "0875137e9680385d104110dfb394673853756e59b87310886bad2580fac07cc8",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000012-CONSTITUTIONAL-IMPLEMENTATION-READINESS-ASSESSMENT.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL IMPLEMENTATION READINESS ASSESSMENT"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "2ee3fffd882e5444faab2a1d43fb522ad449ea6a67d8fd6bae59c4bdfc61aae4",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000012-CONSTITUTIONAL-IMPLEMENTATION-READINESS-ASSESSMENT.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL IMPLEMENTATION READINESS ASSESSMENT"
+      }
+    ],
+    "UCOS-CON-000062": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:52:01+00:00",
+        "content_hash": "91fcf32fa35f7f1c72cb9de25add13d95057e0a306e43be46080f0ad7e8c3919",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000013-CONSTITUTIONAL-RECOMMENDATIONS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL RECOMMENDATIONS"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T03:19:07+00:00",
+        "content_hash": "ea903111c57e47cd15704999f1e759d23fc4213a1598e61ea0cba02fc2d6bbb4",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000013-CONSTITUTIONAL-RECOMMENDATIONS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL RECOMMENDATIONS"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T03:40:18+00:00",
+        "content_hash": "00c04cce5279b3c0efa502f3ab6f86acd5675507c485a7771a5905c52b622863",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000013-CONSTITUTIONAL-RECOMMENDATIONS.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL RECOMMENDATIONS"
+      }
+    ],
+    "UCOS-CON-000063": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:52:57+00:00",
+        "content_hash": "8f8f994934a95af63c9aa04f21befbcd486fe95325bb8dcf2ec2ce2b072cd038",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000014-CONSTITUTIONAL-OPEN-QUESTIONS-FOR-RATIFICATION.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL OPEN QUESTIONS REQUIRING EXPLICIT RATIFICATION"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T03:19:07+00:00",
+        "content_hash": "a42b805627937121d40f094876483ad5464bb448ad3d05ebb76f421e8c443a7a",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000014-CONSTITUTIONAL-OPEN-QUESTIONS-FOR-RATIFICATION.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL OPEN QUESTIONS REQUIRING EXPLICIT RATIFICATION"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T03:40:18+00:00",
+        "content_hash": "c736383f965b6720624bc22f10de06f5eb786389ff78198ccf39d8d29380a3af",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/CMG-000014-CONSTITUTIONAL-OPEN-QUESTIONS-FOR-RATIFICATION.md",
+        "name": "UCOS Ω∞ — CMG CONSTITUTIONAL OPEN QUESTIONS REQUIRING EXPLICIT RATIFICATION"
+      }
+    ],
+    "UCOS-CMG-000002": [
+      {
+        "seq": 1,
+        "at": "2026-07-25T15:53:32+00:00",
+        "content_hash": "96c6defbbf006f909e273561537ff0acb286207ab72b83dbc82906f3af12d0cb",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/README.md",
+        "name": "00-CMG — CONSTITUTIONAL META GOVERNANCE"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-26T02:49:03+00:00",
+        "content_hash": "95422db22dbb7a817cff09292dde4c515e0dc65753e86bb4cecc5fe647c29a6d",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/README.md",
+        "name": "00-CMG — CONSTITUTIONAL META GOVERNANCE"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-26T03:19:07+00:00",
+        "content_hash": "dda836f253dc5c07fcfb0d980372c3133ab0c215e866615892ff83ce43420750",
+        "version": "1.0",
+        "status": "UNDER_REVIEW",
+        "path": "00-CMG/README.md",
+        "name": "00-CMG — CONSTITUTIONAL META GOVERNANCE"
+      }
+    ],
+    "UCOS-UCOSACFV0000-000001": [
+      {
+        "seq": 1,
+        "at": "2026-07-26T06:31:59+00:00",
+        "content_hash": "89435996f6a3ae5d5d598b557bf36497d911243b0142fe3bf26c94d1b0928e94",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — ABSOLUTE ARCHITECTURAL COMPLETENESS & FORMAL VERIFICATION DETERMINATION"
+      }
+    ],
+    "UCOS-CON-000064": [
+      {
+        "seq": 1,
+        "at": "2026-07-26T07:35:05+00:00",
+        "content_hash": "500f3e0b132d474e9134b5ca530a0e4f929e51caa060d132a1867f7cf55319a7",
+        "version": "1.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCCEP-000000-UNIVERSAL-CONTINUOUS-CONSTITUTIONAL-EVOLUTION-PROGRAMME-CHARTER.md",
+        "name": "UCOS Ω∞ — UCCEP-000000 · UNIVERSAL CONTINUOUS CONSTITUTIONAL EVOLUTION PROGRAMME CHARTER"
       }
     ]
   }

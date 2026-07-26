@@ -13,6 +13,12 @@
 | INPUTS (read-only) | Phase 1 registers (`01-WORKING/`); Phase 2–9 reports (`02-MASTER/`); ADR-0002 Repository Capability Inventory |
 | OUTPUTS | This determination + ratified status updates to the live registers (SUPERSESSION, AUTHORITY, ONTOLOGY, LAW, DECISION-REGISTER) + addenda to READINESS-CERTIFICATION and CLOSURE-REPORT |
 | CONFLICT RULE | Where this determination conflicts with any Phase 1–9 *analysis-only* statement of non-finality, **this determination governs** (it is the exogenous act those phases identified as the sole unblocking input). Where it would conflict with a **frozen source** (`00-SOURCE/`), the source governs and this statement is void to the extent of the conflict. |
+| RATIFIER IDENTITY | **UCOS Ω∞ Constituent Authority** (AUTH-13 — exogenous sovereign seat), exercised through **Terminal T4** under mission **UCOS-RAT-001**; standing organ chartered by this act = **Ratification Authority `RA-Ω∞`** (AUTH-14). Founding ratification: Constituent Authority as sole ratifier (quorum = the constituent seat), per AMD-04. |
+| RATIFICATION ACT | **EC-1** — the exogenous constituent act. Constituent-authority capabilities **CAC-01…CAC-07 = ALL PRESENT and EXERCISED** (§1.1). |
+| EFFECTIVE / ENACTMENT | **Phase 10** (Exogenous Constituent Act & Repository Ratification — enactment). Repository baseline of record: `db82bfb` (`GOVERNANCE-RECONCILIATION`: sealed reconciled T2→T1→T3→T4→T5 baseline). |
+| RATIFICATION BASIS | AMD-01…AMD-08 (closing GAP-01…GAP-08) supply the governance machinery; §2 fixes the five canonical determinations; §4 advances RAT-01…RAT-11 to **RATIFIED** at their unchanged Phase-3 positions. No new substantive content (all substance pre-adjudicated). |
+| TRACEABILITY ANCHORS | RAT-11 / SUP-14 / CONF-07 (supremacy); AUTH-13 / AUTH-14 (authority chain root + organ); GOV-11 / GOV-12 (procedure + evolution gate); DR-RAT-01…DR-RAT-11 (`UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER`); SUP-01/02/03/06/07/14 (`SUPERSESSION-REGISTER`); ONT-01/ONT-05 (`ONTOLOGY-REGISTER`); `AUTHORITY-REGISTER` §RATIFICATION NOTE (Phase 10). |
+| EVIDENCE / AUDIT | This determination is itself the **first audited ratification record** (AMD-06), satisfying LAW-INV02 "Audit Before Trust" and the LAW-AX03 trust chain. Evidence record: §1.2. |
 
 ---
 
@@ -44,6 +50,22 @@ Phase 7 established that constitutional closure requires an authority holding se
 | CAC-07 | Exogeneity | The act is external to the constituted order by construction (§1). |
 
 All seven capabilities are hereby **PRESENT and EXERCISED**, closing the Phase-7 constituent-authority vacuum.
+
+### 1.2 RATIFICATION EVIDENCE RECORD (GOV-11 / AMD-06)
+
+GOV-11 requires every ratification to be **recorded in the canonical registry and evidenced (date, ratifier, basis, traceability)**; AMD-06 requires the **basis, date, ratifier identity, and traceability anchors** to be recorded. This subsection completes those evidence fields for the founding ratification. It records no new substantive content — every anchor below already exists in the cited registers.
+
+| Evidence field (GOV-11 / AMD-06) | Recorded value |
+|----------------------------------|----------------|
+| **Ratifier identity** | UCOS Ω∞ **Constituent Authority** (AUTH-13), the exogenous sovereign seat, acting through **Terminal T4** under mission **UCOS-RAT-001**. Sole ratifier for the founding act (quorum = the constituent seat, AMD-04). |
+| **Chartered organ** | **Ratification Authority `RA-Ω∞`** (AUTH-14), chartered by this act (AMD-02); empowered for all subsequent ratification under an explicit recorded threshold (AMD-04/AMD-05). |
+| **Ratification act** | **EC-1** exogenous constituent act; CAC-01…CAC-07 discharged (§1.1). |
+| **Date / enactment** | **Phase 10** enactment. Repository baseline of record `db82bfb` (governance-reconciliation sealed baseline); this determination is the enactment artifact of that baseline. |
+| **Basis** | §1 legitimacy basis; §2 five canonical determinations (authority, ownership, definitions, supremacy, registry); §3 AMD-01…AMD-08 (GAP-01…GAP-08 closed); §4 RAT-01…RAT-11 RATIFIED at unchanged Phase-3 positions; §7 EC-1…EC-6 / P-1…P-6 SATISFIED. |
+| **Traceability anchors** | Decision ledger: DR-RAT-01…DR-RAT-11 (`UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER`). Supremacy: RAT-11 / SUP-14 / CONF-07. Authority chain: AUTH-11 (resolved), AUTH-13, AUTH-14 (`AUTHORITY-REGISTER`). Governance: GOV-11, GOV-12. Supersession: SUP-01/02/03/06/07/14. Ontology: ONT-01, ONT-05. Assessment: `09-DR-RAT-11-ASSESSMENT.md` §5 (enactment reconciliation). |
+| **Audit** | This determination is the **first audited ratification record** (AMD-06), satisfying LAW-INV02 "Audit Before Trust" and anchoring the LAW-AX03 trust chain. Recognition per CAC-06. |
+
+The founding ratification is therefore **complete and fully evidenced** under GOV-11 / AMD-06: issued by the identified ratifier under the sovereign charter, recorded in the canonical registry set (§2.5), and evidenced with date, basis, and traceability anchors.
 
 ---
 

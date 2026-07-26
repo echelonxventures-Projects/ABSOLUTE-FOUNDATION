@@ -317,6 +317,81 @@ A creation that bypasses gate 1 is caught by gate 2; a bypass of gate 2 is caugh
 
 ---
 
+## SECTION 21 — CONSTITUTIONAL DETERMINATION: RECONCILED SETS (CMG-DLG-13 / CMG-OQ-06)
+
+> **STATUS DOMAIN:** GOVERNANCE · **STATUS BASIS:** REG-AUTO-001 self-definition (§17 governance model) as the located owner of the concern delegated at `CMG-DLG-13` + Repository Truth (`00-BOOK/tools/{config.py,ukb.py}`, `00-BOOK/DATA/artifacts.json`, `00-CMG/CMG-REGISTRY.json`) + `CMG-000002` §3.2 registration evidence + `CMG-000012` classification evidence
+
+**21.1 — The question referred.** `CMG-000001` LXXVIII.3 records the open constitutional question `CMG-OQ-06`: *does admission of the `CMG` namespace and zone require amendment of any located registration or classification instrument?* `CMG-000014` and `CMG-000013` R-04 refer that question to **this** standard, because artifact registration, identity allocation, classification, and the namespace of registered artifacts are delegated at `CMG-DLG-13` to REG-AUTO-001 with `00-BOOK/` (UKB) as the store. `CMG-000001` declines to answer it (LVIII.2 — it consumes Repository Truth and does not compete with it). This Section is the referred authority's answer.
+
+**21.2 — The determination.** **NO amendment of any located registration or classification instrument is required.** Recognition of a constitutional zone and its namespace is already **total by construction**, on three ordered recognition paths that Repository Truth exhibits and that this standard already owns:
+
+| # | Recognition path | Mechanism (Repository Truth) | Effect on `00-CMG/` |
+|---|---|---|---|
+| 1 | Existing `CLASSIFY_RULES` match | `config.py::CLASSIFY_RULES`, first match wins, unchanged | the 14 `CONSTITUTIONAL-*` artifacts resolve to `CONSOLIDATION`/`CON`/`VOL-002` through the pre-existing filename rule |
+| 2 | Self-declared metadata | `ukb.py::classify` step 2 over `METADATA_CLASSIFY_KEYS` — a family participates with **zero** config edits (§11, L4) | each zone artifact additionally self-declares its program, category and volume |
+| 3 | Deterministic path-derived catch-all | `ukb.py::_derive_class_from_path` (GOV-005 §5.2) — classification is **TOTAL**; the `OTHER/MISC` dead-end is structurally unreachable | the remaining zone files resolve to the real class `CMG`/`CMG` |
+
+Consequently the §12 new-family declaration procedure is **not triggered**: L4 requires a family declaration only to prevent an artifact falling to `OTHER/MISC/VOL-000`, and that outcome is unreachable for a tracked artifact. Creating a `CLASSIFY_RULES` entry, a chain, a program root, a cross-program edge or a volume for `00-CMG/` would therefore add **no** recognition, and is refused: it would edit shared machinery that admission is forbidden to touch (`CMG-000001` LVIII.5–LVIII.6) and would create a second, redundant classification path for artifacts already classified.
+
+**21.3 — What the authority requires instead: the reconciled-set record.** A determination that recognition *already suffices* must be recorded where the machinery can be held to it. This standard therefore requires exactly one append-only artefact of record — a **reconciled set** — and nothing else:
+
+> A **reconciled set** IS a repository zone whose recognition was reconciled **by determination** rather than by a new classification family, together with the namespace admitted with it, its located owner, and the classification resolutions the determination admits.
+
+The declaration lives append-only in `config.py::RECONCILED_SETS`. It is **record only**:
+- it is **never** consulted by `classify()` — it changes no classification and resolves nothing;
+- it adds, edits, reorders and renumbers **no** `CLASSIFY_RULES`, `CHAINS`, `PROGRAM_ROOTS`, `CROSS_PROGRAM` or `VOLUMES` entry, and creates **no** classification family (L4/L5);
+- it is **not** a register: it is never emitted into `00-BOOK/DATA/`, allocates no identifier, and leaves `id-ledger.json` the one identity authority (P4);
+- it is **not** a compatibility layer: no legacy path, alias, shim or dual representation is introduced.
+
+**21.4 — Identity integrity (fail-closed).** Within the declaration, `set`, `namespace` and `zone` SHALL each be unique. A missing or duplicated value is an ambiguous input and **aborts** the reading gate rather than passing it. A reconciled set therefore cannot introduce duplicate identity, a second namespace owner, or two records for one zone.
+
+**21.5 — Enforcement: the existing classification gate, strengthened.** The reconciled-set record is read by exactly one consumer: the **`classification` gate already enumerated in `ENFORCEMENT_GATES`** (`ukb.py::cmd_enforce`, §16 gate 1/2/3). No gate is added, no validator is created, and `ENFORCEMENT_GATES` is unchanged. The gate is strengthened as follows:
+
+| | Before | After |
+|---|---|---|
+| Gate question | does the file resolve to something other than `OTHER/MISC`? | *and*, if the file lies in a declared reconciled zone, does it resolve to a classification that zone's determination **admits**? |
+| Failure mode covered | unclassified artifact | unclassified artifact **+ reconciliation drift**: an artifact inside a reconciled zone silently resolving outside the admitted set |
+| Scope outside reconciled zones | — | unchanged (vacuously conformant) |
+| Determinism | pure function of repository state (GOV-005 §5.4) | unchanged — the check is a pure function of (path, resolved class, declaration); no clock, no environment, no flag |
+
+Reconciliation drift is a **blocking** violation in both gate modes (pre-registration for newly-created files, post-registration for the whole eligible set), and is recorded in the enforcement audit record (`unreconciled`, `reconciled_sets`). Recognition of a reconciled zone is therefore machine-proven on every transaction and every CI run (§16.3), not incidental.
+
+**21.6 — The reconciled set determined for the `CMG` zone.**
+
+| Field | Value |
+|-------|-------|
+| Set | `CMG` |
+| Zone | `^00-CMG/` |
+| Namespace | `CMG` (width 6; `RECOGNIZED` — owned by `CMG-000001` per `CMG-000001` XXXIII, by reference only) |
+| Namespace owner | `CMG-000001` |
+| Delegated concern | `CMG-DLG-13` (artifact registration, identity allocation, classification, namespace of registered artifacts) |
+| Recognition paths found sufficient | existing `CLASSIFY_RULES` match · self-declared metadata · deterministic path-derived catch-all |
+| Admitted classifications | (`CONSOLIDATION`, `CON`) · (`CMG`, `CMG`) |
+| Admitted volumes | `VOL-002` (CONSOLIDATION) · `VOL-000` (MASTER INDEX) — both pre-existing; none created, none renumbered |
+| Closes | `CMG-OQ-06` |
+
+**21.7 — Closure.** `CMG-OQ-06` is **CLOSED** by this determination. Closure is recorded, with evidence, in the two places the meta layer's own maintenance rule requires (`CMG-000001` LXXVIII.4): the constitution's own gap-and-question register (`CMG-000001` LXXVIII.7) and the derived projection (`00-CMG/CMG-REGISTRY.json`, `open_questions[CMG-OQ-06]`). No other open question, vacancy, gap, tier, or readiness outcome is touched: `CMG-OQ-01`, `CMG-OQ-02`, `CMG-OQ-03`, `CMG-OQ-04`, `CMG-OQ-05`, `CMG-OQ-07` and `VAC-01` are unaffected, and the declared readiness ceiling `READY-PROVISIONAL` is unchanged.
+
+**21.8 — Non-mutation guarantees.** This determination: renumbers no Universal ID and no Universal Page (P4); edits no existing `CLASSIFY_RULE` (L5); creates no classification family, no registry, no validator and no gate; introduces no compatibility layer and no duplicate identity; edits no frozen artifact and rewrites no history; and leaves every artifact outside the declared zones classified exactly as before. It is additive in the same sense as every prior Section of this standard.
+
+**21.9 — Evolution.** A future reconciliation is a **new** `RECONCILED_SETS` entry plus a new clause of this Section — never a rewrite of an existing entry or clause (§19; `AUTH-INF-001` CR-INF-007). Withdrawal of a reconciled set is likewise append-only: a superseding clause, never deletion of the record.
+
+**21.10 — Authority neutrality.** This determination is confined to registration, classification, and the namespace of registered artifacts — precisely the concern delegated at `CMG-DLG-13`. It ratifies nothing, confers no authority, occupies no tier, decides no substantive question, and makes no completion or certification claim about `00-CMG/` or about the meta layer's standing (§17; STATUS-001 §2 non-projection).
+
+**21.11 — Evidence (as executed).**
+
+| Check | Result |
+|-------|--------|
+| Zone recognition, before and after | unchanged — 14 files `CONSOLIDATION/CON/VOL-002`, `CMG-REGISTRY.json` `CMG/CMG/VOL-000`, `README.md` `CMG/CMG/VOL-002` |
+| Classification gate (pre-registration) | PASS — eligible 1197 · unregistered 0 · unclassified 0 · reconciled sets 1 (`CMG`) · reconciled-set drift 0 |
+| Classification gate (post-registration) | PASS — same, parity 1197 = 1197 |
+| Strengthening bites (negative proof) | a zone path resolving to a non-admitted class or volume is reported as a blocking violation; a duplicated reconciled-set record aborts fail-closed |
+| Zones outside the declaration | unaffected — vacuously conformant |
+| Meta-constitutional validation (`cmg-gate`) | PASS — 0 findings, readiness `READY-PROVISIONAL` (unchanged) |
+| Append-only / no renumbering (SC-8) | PASS — `ukb.py validate` append-only ledger intact; no ID or page reallocated |
+
+---
+
 # APPLICATION & REQUIRED OUTPUTS
 
 ## OUTPUT A — PLATFORM-001..005 REGISTRATION ASSESSMENT

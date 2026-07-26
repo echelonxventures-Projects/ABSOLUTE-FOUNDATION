@@ -43,6 +43,13 @@ Establish the **single canonical owner** for every concept touched by the finali
 | **Constitutional Reuse Gate** | *(nascent: 1 file; related to CEP + Context Assimilation Gate)* | — | **WEAK / TO FORMALIZE** |
 | **Nucleus model** | *(none)* | — | **UNOWNED (genuine gap)** |
 | **Nucleus ↔ Universe ownership** | *(Universe owned; Nucleus unowned)* | — | **PARTIAL (binding needed)** |
+| Constitutional decision assimilation (lifecycle · disposition · evidence gate) | CEP-002 **Article 28** (added by CEP-002-AMD-002); machine-readable overlay + engine at UCDA-000001 | `00-CEP/`; `00-MASTER/UCDA-000001/` | **OWNED** |
+| Decision register (constitutional) | UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER; UCOS-Ω∞-CONSTITUTIONAL-ADJUDICATION-RECORD | `02-MASTER/` | **OWNED** |
+| Decision record set (architectural/technology) | `adr/` (ADR-NNNN, template `adr/0000-template.md`) | `adr/` | **OWNED** |
+| Decision index (operational memory) | MCP-004-MASTER-DECISIONS (append-only index, AUTHORITY = NONE) | `00-MASTER/` | **OWNED** |
+| Canonical decision store (machine-readable) | `knowledge/decisions.json` (UKDA-DEC family, UKB per CMG-DLG-17) | `knowledge/` | **OWNED** |
+
+> **Addendum (2026-07-26, CDAF-001).** Three rows above are superseded by Repository Truth and are retained for lineage: the **Nucleus model** is no longer unowned — it is canonicalized at `00-MASTER/UCOS-NUCLEUS-001/02-NUCLEUS-CONSTITUTIONAL-MODEL.md` and registered in `00-CMG/CMG-REGISTRY.json` as `NUCLEUS-001-02`; the **Nucleus ↔ Universe ownership** binding exists at `00-MASTER/UCOS-NUCLEUS-001/03-CANONICAL-NUCLEI-CATALOG-AND-OWNERSHIP.md` + `05-PLATFORM-CONFIG-AND-UNIVERSE-COMPOSITION.md`; the **Constitutional Reuse Gate** remains TO FORMALIZE and is now a registered work package (`WP-UCDA-005`) rather than an open note. Each of these is a dispositioned decision in `00-MASTER/UCDA-000001/ucda-decisions.json` (`DEC-ADAM-03`, `DEC-ADAM-05`, `DEC-ADAM-10`), and the parallel-gate alternative is recorded as REJECTED WITH CONSTITUTIONAL JUSTIFICATION (`DEC-ADAM-10R`).
 
 ---
 
@@ -65,6 +72,8 @@ Establish the **single canonical owner** for every concept touched by the finali
 - **WEAK:** the **Constitutional Reuse Gate** should be formalized by EXTEND of the existing Context Assimilation Gate / CEP reuse principles rather than a new parallel gate.
 
 Per-decision method is specified in `03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md`.
+
+Per-decision **constitutional disposition** is specified in `00-MASTER/UCDA-000001/ucda-decisions.json` and rendered at `00-MASTER/UCDA-000001/01-CONSTITUTIONAL-DECISION-REGISTER.md`, under `00-CEP/CEP-002` Article 28. Ownership without a disposition is incomplete: an owned concept whose decision is undispositioned closes the Implementation Evidence Gate (Art 28.14, 28.18).
 
 ---
 *End of 02-CANONICAL-OWNERSHIP-MATRIX.md*

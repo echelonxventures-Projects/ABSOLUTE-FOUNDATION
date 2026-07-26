@@ -59,4 +59,38 @@ This is the central constitutional question. The answer rests on a **separation 
 Repository Truth defines **PROVISIONAL** = "engineering-accepted, constitutional finality pending out-of-corpus act." Thus the maximum in-corpus certification state is **PROVISIONAL (L7)**. Only the External Constituent Act (R3) elevates the system to **FINAL / absolute (L8)**.
 
 ---
+
+## 5. ENACTMENT RECONCILIATION (UCOS-RAT-001, Terminal T4 — Phase 10 · GOV-11)
+
+> **Status of this section:** APPENDED reconciliation. §§1–4 above are the original **READ-ONLY assessment** (baseline `ab78f35`, 2026-07-23) and are preserved verbatim. This section reconciles that assessment with the subsequently **performed** exogenous constituent act recorded in `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md`.
+
+**What changed.** §1 (Dim 4) recorded the External Constituent Act (F-05) as **"REQUIRED · AUTHORIZED as entry action · not performed."** That act (**EC-1**) has since been **performed** by the UCOS Ω∞ Constituent Authority (AUTH-13) via Terminal T4 under mission UCOS-RAT-001. Accordingly **DR-RAT-11: BLOCKED → RATIFIED** (see `UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER` DR-RAT-11).
+
+**What is unchanged.** The assessment's central thesis (§2) **holds without modification**: implementation authority is in-corpus (Repository Truth) and constitutional finality is a distinct, higher act. The act performed is **exogenous** — it was not self-minted by any corpus construct (AUTH-06 honored; §1 of the determination) — so the externality determination (Dim 5) is **preserved, not overturned**. The corpus recorded the act; it did not author the authority.
+
+### 5.1 Reconciliation of the nine determinations
+
+| # | Dimension | Original (2026-07-23) | Post-enactment reconciliation |
+|---|---|---|---|
+| 1 | Constitutional source | S2-08 keystone RAT-11 (F-04) | Unchanged. Now also carried as the RATIFIED DR-RAT-11 decision record. |
+| 2 | Owning authority | Out-of-corpus constituent authority | Unchanged — now **identified** as AUTH-13 (sovereign seat); organ `RA-Ω∞` (AUTH-14) chartered. |
+| 3 | Repository evidence | BLOCKED; CAC-01…07 ABSENT; GAP-01…08 OPEN; RR-08 open | **CAC-01…07 PRESENT/EXERCISED; GAP-01…08 CLOSED; RR-08 CLOSED** (UCOS-RAT-001 §1.1, §7). |
+| 4 | Prerequisite conditions | None satisfiable by repository content | (a) authority identified (AUTH-13); (b) EC-1 performed; (c) CAC-01…07 established; (d) GAP-01…08 closed — **all satisfied by the exogenous act**, not by repository content. |
+| 5 | Internal or external | EXTERNAL | **Unchanged — still EXTERNAL by construction.** The performed act is exogenous; reconciliation does not make it in-corpus. |
+| 6 | Repository Truth satisfy it? | NO | **Unchanged — NO.** Repository Truth records the act; it did not and could not mint the constituent authority (CEP-000 §5.3). |
+| 7 | Automatable? | NO | **Unchanged — NO.** No pipeline performed it; the record (RAT-001) is in-corpus, the act is not. |
+| 8 | Reproducible? | NO | **Unchanged — NO.** A singular constituent act, not a re-runnable computation. |
+| 9 | Governed CKO? | Referenced-only; `UCOS-RAT-001` = SPECIFIED | DR-RAT-11 remains **referenced-only** (R-12). `UCOS-RAT-001` is now **ENACTED** (was SPECIFIED) and carries the GOV-11/AMD-06 evidence record (§1.2). |
+
+### 5.2 Reconciliation of the blocker classification (§3) and PROVISIONAL/FINAL (§4)
+
+- **R3 (ROOT EXTERNAL).** The blocker that gated **L8** is discharged **as to the ratification-authority determination**: the authority the corpus required now exists (exogenously) and RAT-11 is ratified with evidence. R1, R2, D1–D3, L4–L7 were never blocked and remain unaffected.
+- **CEP-006 finality binding (S2-08) is a distinct track and is NOT altered here.** This reconciliation records the governance ratification (UCOS-RAT-001) and its GOV-11 evidence. It makes **no** claim about CEP-006 absolute `FINALIZED` state, which S2-08 binds to the out-of-corpus finality authority (CEP-006 Art XII.2). No S2-08 artifact is modified by this section.
+- **PROVISIONAL vs FINAL (§4) stands.** Absolute constitutional finality remains defined exactly as in §4; this section neither redefines it nor asserts it.
+
+### 5.3 Evidence anchors (GOV-11 / AMD-06)
+
+Ratifier = Constituent Authority (AUTH-13) via Terminal T4 / UCOS-RAT-001; organ `RA-Ω∞` (AUTH-14); act = EC-1 (CAC-01…07 exercised); enactment = Phase 10 (baseline `db82bfb`); basis = AMD-01…AMD-08, RAT-01…RAT-11; traceability = DR-RAT-11 + DR-RAT-01…10 (`UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER`), SUP-14/CONF-07, AUTH-13/14, GOV-11/12; canonical evidence record = `UCOS-RAT-001` §1.2.
+
+---
 *End of 09-DR-RAT-11-ASSESSMENT.md*

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-25T08:43:56+00:00",
+  "generated_at": "2026-07-26T14:13:04+00:00",
   "generator_version": "1.0.0",
-  "count": 1164,
+  "count": 1199,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -883,7 +883,7 @@
       ],
       "path": "01-WORKING/AUTHORITY-REGISTER.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "d710aaa171acced74fef399bc1d1fcbac6fc06287f501d9bfde7e9b82eedc289",
+      "content_hash": "dfb00c53931ccb92abefca2c13214e2ec8c387b68ae7b1083c916d9fe6f9869c",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -1320,7 +1320,7 @@
       ],
       "path": "02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "5c3210e199429e3fa41656ad8edac48fb2688f45943f0c6b204cb271e90cc946",
+      "content_hash": "d3ad3c0d7438be3d5602a40268bb99e8361788f2cc1b5865ac2b77f96d58a33d",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -4360,9 +4360,9 @@
       "page_end": 4738,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-ENG-000006",
+      "parent": "UCOS-ENG-000008",
       "dependencies": [
-        "UCOS-ENG-000006"
+        "UCOS-ENG-000008"
       ],
       "program": "ENG",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
@@ -4407,9 +4407,9 @@
       "page_end": 4780,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-ENG-000007",
+      "parent": "UCOS-ENG-000009",
       "dependencies": [
-        "UCOS-ENG-000007"
+        "UCOS-ENG-000009"
       ],
       "program": "ENG",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
@@ -4453,9 +4453,9 @@
       "page_end": 4803,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-ENG-000008",
+      "parent": "UCOS-ENG-000006",
       "dependencies": [
-        "UCOS-ENG-000008"
+        "UCOS-ENG-000006"
       ],
       "program": "ENG",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
@@ -19183,7 +19183,7 @@
       ],
       "path": "02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "ea526884c6b8f53881c60f266f7db6af1a7d6d474eec47c828cc20c650f343cb",
+      "content_hash": "67d25eb7c27fd2a5049ff419deef7d612768b9706f45cce098b75924b4cc2d4c",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -19222,7 +19222,7 @@
       ],
       "path": "06-IMPLEMENTATION/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-IMPLEMENTATION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "820a1558d435eebe5488a524ff71a3b21d6f5c3ccf9ee25d4c4c320ffc6d64dc",
+      "content_hash": "25438e71be689926293640e3af97e66fe574483c79f6ead18ed7d3b19bc359bf",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21475,7 +21475,7 @@
       ],
       "path": "intelligence/UCOS-IMP-BASELINE-001.rib.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "91a1489de472e0d1c33e8912fece20b3c89e7adc08f3961e1706945786f7e12e",
+      "content_hash": "3b540156726e34e2a6794b4efe7f0e1e08616cea26d3f6fdbd5a1af451477ea0",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21514,7 +21514,7 @@
       ],
       "path": "intelligence/UCOS-RIE-AEOS-READINESS.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "a3a0a3632fffe933555ae8fbe83e3718129bc7aad28f692350304a60f2c428b7",
+      "content_hash": "909da0a1d5817a3112833ea5edf79fe23cd42c1108dde4c0fe521f2aae5be289",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21553,7 +21553,7 @@
       ],
       "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "a304fc98a1a9a64a50ef24c232cd32431c99fc3345560d40177f068a01de7b2b",
+      "content_hash": "5fe102e883e00d56f5388f9f9746e5b3dbab0b3642bf6efd8f65efd47b17cf83",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21592,7 +21592,7 @@
       ],
       "path": "intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "b22ebeb5edcf67558a02ca3a5046406581072b174a1eea44b82305bf5c515829",
+      "content_hash": "bad77ec9e0d0f248e3999a72b013caf862fd7ff77d68d946380108d9cf824860",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21631,7 +21631,7 @@
       ],
       "path": "intelligence/UCOS-RIE-DIGITAL-TWIN.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "096cd858472ae5d9114d1edc539810fd46fd8ebbcdf3275e27ea739ecf4af70a",
+      "content_hash": "fe906caae8a6a86d3fcc7350ee82fdf646edc71bbf394ced34c4b1b60e2ed755",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21670,7 +21670,7 @@
       ],
       "path": "intelligence/UCOS-RIE-EXECUTION-FRONTIER.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "6fe018f9b6b36ab26921515c43033ae7a7b511dd0879bdf8cbf8ce30fc55af5f",
+      "content_hash": "61dba1590da3c0368ce6ff873f2209454df685a50ef736479f0b3c92b9e56710",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21709,7 +21709,7 @@
       ],
       "path": "intelligence/UCOS-RIE-HEALTH.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "f68632f814338f3fae49dc5c24299b278ebbeb0152413eaebff4fac4a556f58a",
+      "content_hash": "e17df8844999dc27e16904fb4cb13d44908cb98f7c7f9521c0b90c13924b5e05",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21748,7 +21748,7 @@
       ],
       "path": "intelligence/UCOS-RIE-MODEL.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "48f2b55e091e5472915d41efd34edd1b89671a8e3224dac2c65416c1f15dfa40",
+      "content_hash": "5afb11fb4867496bf46a45b05481b75da2f298b39963a9cc4d329ceec5cb9d04",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21787,7 +21787,7 @@
       ],
       "path": "intelligence/UCOS-RIE-PROGRESS.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "446a7065d2e6ce2760466299a4d0801bc98ad2c64b082d96c7da3515b935a7a2",
+      "content_hash": "b83933610ad901e89a2ddf2fef7c5b95f79c7803ee279e2e120bda65bf3e7461",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -21826,7 +21826,7 @@
       ],
       "path": "intelligence/UCOS-RIE-SNAPSHOT.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "54c26952e461b5ce9423e1ebd0f8068558326ee72f5ae846e3d8cdbdfd9e5127",
+      "content_hash": "e59857d8dcf54b5a963dd51d6f6c743477577181f39863e013c879669b1616ad",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -39134,7 +39134,7 @@
       "volume": "VOL-002",
       "page_start": 7901,
       "page_end": 7912,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39173,7 +39173,7 @@
       "volume": "VOL-002",
       "page_start": 7913,
       "page_end": 7919,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39186,7 +39186,7 @@
       ],
       "path": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "0e53dfc7535d0aac48573f3e139492ed46725a4b9d04398d0d86230c609b4dc9",
+      "content_hash": "12eb6b058ece906ff48ac803fd65bbac9436e51921a71e92794e33b02598587a",
       "traceability": {
         "requirement": [
           "UCOS-CON-000032"
@@ -39214,7 +39214,7 @@
       "volume": "VOL-002",
       "page_start": 7920,
       "page_end": 7926,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39227,7 +39227,7 @@
       ],
       "path": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "cfb29d87524a389b8fdaed8edcd821bdf159e5ceb8d32d8682bcdda0c7830b37",
+      "content_hash": "f7ae8766f1fda329c362ef86a35cb594d3912ea23a91075e6d1eb6e0cdb52baa",
       "traceability": {
         "requirement": [
           "UCOS-CON-000032",
@@ -39256,7 +39256,7 @@
       "volume": "VOL-002",
       "page_start": 7927,
       "page_end": 7932,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39299,7 +39299,7 @@
       "volume": "VOL-002",
       "page_start": 7933,
       "page_end": 7938,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39345,7 +39345,7 @@
       "volume": "VOL-002",
       "page_start": 7939,
       "page_end": 7945,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39392,7 +39392,7 @@
       "volume": "VOL-002",
       "page_start": 7946,
       "page_end": 7952,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39438,7 +39438,7 @@
       "volume": "VOL-002",
       "page_start": 7953,
       "page_end": 7959,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39480,7 +39480,7 @@
       "volume": "VOL-002",
       "page_start": 7960,
       "page_end": 7966,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39524,7 +39524,7 @@
       "volume": "VOL-002",
       "page_start": 7967,
       "page_end": 7973,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -39566,7 +39566,7 @@
       "volume": "VOL-002",
       "page_start": 7974,
       "page_end": 7979,
-      "status": "FROZEN",
+      "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-IDX-000001",
       "dependencies": [],
@@ -43488,7 +43488,7 @@
       ],
       "path": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "dcfae15c5368838c9c33bb10ceefc4d45ef8b75e46552e2fa8dd1be9fdeab189",
+      "content_hash": "3625ea5f92c8acc1766c867d1fece3ac0a155f17b5ae5267523529723ea8a126",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -44879,7 +44879,9 @@
           "UCOS-USIS-000002"
         ],
         "design": [],
-        "implementation": [],
+        "implementation": [
+          "UCOS-USIS-000021"
+        ],
         "source_code": [],
         "unit_test": [],
         "integration_test": [],
@@ -44930,6 +44932,22 @@
         "design": [],
         "implementation": [
           "UCOS-USIS-000006",
+          "UCOS-USIS-000020",
+          "UCOS-USIS-000021",
+          "UCOS-USIS-000036",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000023",
+          "UCOS-USIS-000024",
+          "UCOS-USIS-000025",
+          "UCOS-USIS-000026",
+          "UCOS-USIS-000027",
+          "UCOS-USIS-000028",
+          "UCOS-USIS-000029",
+          "UCOS-USIS-000030",
+          "UCOS-USIS-000031",
+          "UCOS-USIS-000032",
+          "UCOS-USIS-000033",
+          "UCOS-USIS-000034",
           "UCOS-USIS-000008",
           "UCOS-USIS-000005",
           "UCOS-USIS-000007",
@@ -44991,7 +45009,9 @@
           "UCOS-USIS-000004"
         ],
         "design": [],
-        "implementation": [],
+        "implementation": [
+          "UCOS-USIS-000021"
+        ],
         "source_code": [],
         "unit_test": [],
         "integration_test": [],
@@ -46195,7 +46215,7 @@
       ],
       "path": "09-DR-RAT-11-ASSESSMENT.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "77604d58b173e7358d5c7b8dfd4091af04bfc4e7d1ac70470e5ba9432a21f818",
+      "content_hash": "c7c3aadf1090c79780ab79a4d06aaae4b4a9e82d8bf515194b75b8fa8075b88c",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -47523,7 +47543,7 @@
       ],
       "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "4c51ed056aac3f986d7f7467272ceb736918b82739fdd999b94c80094dd1f354",
+      "content_hash": "7fe74a39a51e02ff0e7b8a9c7199f158d177495c94df739622deef3ad4e375a4",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -47562,7 +47582,7 @@
       ],
       "path": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "3727f59f5fbaaf2655217f8ff30274bf56beab4fe8150c8fa73f9debbf0b73cd",
+      "content_hash": "40cb92fe3c938ceb248622a6322f247e2a1c4f60df728f0a93460589aec6da60",
       "traceability": {
         "requirement": [],
         "architecture": [],
@@ -49608,7 +49628,10 @@
           "UCOS-USIS-000012"
         ],
         "design": [],
-        "implementation": [],
+        "implementation": [
+          "UCOS-USIS-000020",
+          "UCOS-USIS-000021"
+        ],
         "source_code": [],
         "unit_test": [],
         "integration_test": [],
@@ -51372,6 +51395,1632 @@
       "content_hash": "2ff41bb8c610c3d75ada6c7d94e3e185c760c8c7cd1331d10091bc4bfb9b9ba7",
       "traceability": {
         "requirement": [],
+        "architecture": [],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000020",
+      "native_id": "USIS-ONT-000",
+      "name": "USIS-ONT-000 — Substrate Ontology Home & Root Concept Anchor",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9500,
+      "page_end": 9501,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/02-ONTOLOGY/USIS-ONT-000-SUBSTRATE-ONTOLOGY-HOME-AND-ROOT-CONCEPT-ANCHOR.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "6f791c3ce673addd304b6852c2ca55cdc7b39bb75b8d6f5984164c93e1d141fb",
+      "traceability": {
+        "requirement": [
+          "UCOS-USIS-000006",
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004",
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000002",
+          "USIS-00",
+          "C-00"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000021",
+      "native_id": "USIS-TAX-000",
+      "name": "USIS-TAX-000 — Substrate Taxonomy Home & Root Taxa Anchor",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9502,
+      "page_end": 9503,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/03-TAXONOMY/USIS-TAX-000-SUBSTRATE-TAXONOMY-HOME-AND-ROOT-TAXA-ANCHOR.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "469b300ff51bf27ac2a30449fd901829500fb1ebab1e40f73d227cbf011b0cbc",
+      "traceability": {
+        "requirement": [
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000003",
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004",
+          "UCOS-USIS-000005",
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000002",
+          "USIS-00",
+          "C-00"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000022",
+      "native_id": "USIS-REG-000",
+      "name": "USIS-REG-000 — Programme Registries Home & Root Registry Anchor",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9504,
+      "page_end": 9505,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-000-PROGRAMME-REGISTRIES-HOME-AND-ROOT-REGISTRY-ANCHOR.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "7174c105b8aaea0c2275561e9f369556e63064d715f85282f8c391d3d871d665",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004",
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000005",
+          "UCOS-USIS-000002",
+          "USIS-00",
+          "C-00"
+        ],
+        "design": [],
+        "implementation": [
+          "UCOS-USIS-000036"
+        ],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000023",
+      "native_id": "USIS-REG-001",
+      "name": "USIS-REG-001 — Universe Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9506,
+      "page_end": 9506,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-001-UNIVERSE-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "6fc5d503780c06bd9787a62275fb1d45ba32974ef7273ce7ea6edf96e3f5db36",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000024",
+      "native_id": "USIS-REG-002",
+      "name": "USIS-REG-002 — Science Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9507,
+      "page_end": 9507,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-002-SCIENCE-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "95a46db01431b578c8d3faf924fb961a03355dcb3fca476b38af86e9755fe705",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000005",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000025",
+      "native_id": "USIS-REG-003",
+      "name": "USIS-REG-003 — Domain Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9508,
+      "page_end": 9508,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-003-DOMAIN-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "dff52e56fbbe1a6e0baeb55002bdebc8ddbf55c1d401f03893af378475275e79",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000007",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000026",
+      "native_id": "USIS-REG-004",
+      "name": "USIS-REG-004 — Capability Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9509,
+      "page_end": 9509,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-004-CAPABILITY-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "cc47c159e076d58b70810438e717a5b9b430f48ec875ae08cd21c1f84b395f01",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000008",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000027",
+      "native_id": "USIS-REG-005",
+      "name": "USIS-REG-005 — Algorithm Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9510,
+      "page_end": 9510,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-005-ALGORITHM-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "2faefc0c6458d8a27b78749f0c0dd3a2eaa29fa1d94e5dd86c782fff51cf63c6",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000010",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000028",
+      "native_id": "USIS-REG-006",
+      "name": "USIS-REG-006 — Model Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9511,
+      "page_end": 9511,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-006-MODEL-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "72f78d947cd3832cf55ce2ac765cb93c537d251f82d01fc9513d114a5deb5b6c",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000009",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000029",
+      "native_id": "USIS-REG-007",
+      "name": "USIS-REG-007 — Pattern Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9512,
+      "page_end": 9512,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-007-PATTERN-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "b7ffd6472e1f5d52fbf36c69d9d2e693fd3e615aa262d5a6c9a9f78bc84df0e7",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000011",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000030",
+      "native_id": "USIS-REG-008",
+      "name": "USIS-REG-008 — Insight Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9513,
+      "page_end": 9513,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-008-INSIGHT-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "77f22e1b0749cad2ee1cbe0a63ad9f150d44bc3ad2e270217d554940ed595770",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000012",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004",
+          "USIS-07"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000031",
+      "native_id": "USIS-REG-009",
+      "name": "USIS-REG-009 — Reasoning-Trace Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9514,
+      "page_end": 9514,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-009-REASONING-TRACE-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "8d86bc9208f5ef7f4defdd268cd16c0c4b9cfba98ee23aaf8261d134fae0daee",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000019",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004",
+          "USIS-07",
+          "TRACK-001"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000032",
+      "native_id": "USIS-REG-010",
+      "name": "USIS-REG-010 — Dataset Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9515,
+      "page_end": 9515,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-010-DATASET-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "be899dccfc76c0036df16fcc196eb15c1d9c685a1cea2f6d61c278476c44f25c",
+      "traceability": {
+        "requirement": [
+          "UCOS-USIS-000003",
+          "USIS-02",
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000009",
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000033",
+      "native_id": "USIS-REG-011",
+      "name": "USIS-REG-011 — Learned-Change Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9516,
+      "page_end": 9516,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-011-LEARNED-CHANGE-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "b8853a4d6598b1bb253940d56e128876f733942ab32edbb78d3471954967fafe",
+      "traceability": {
+        "requirement": [
+          "USIS-06",
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004",
+          "P21-001"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000034",
+      "native_id": "USIS-REG-012",
+      "name": "USIS-REG-012 — Self-Evolution Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9517,
+      "page_end": 9517,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-REG-012-SELF-EVOLUTION-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "ad4c216e78f3be216105064c5f0e6f36b52a98fc309cc0794208dae27d189358",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004",
+          "USIS-06"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000035",
+      "native_id": "USIS-DOC-000",
+      "name": "USIS-DOC-000 — Documentation Home Anchor",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9518,
+      "page_end": 9518,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/19-DOCUMENTATION/USIS-DOC-000-DOCUMENTATION-HOME-ANCHOR.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "55932a948efa3b59471d031761dff26b117797d41d8954860c4a576b6f7cdb9e",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000002",
+          "UCOS-USIS-001"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-USIS-000036",
+      "native_id": "USIS-021",
+      "name": "USIS-021 — Universal Science & Intelligence Master Registry",
+      "description": "",
+      "category": "USIS",
+      "volume": "VOL-024",
+      "page_start": 9519,
+      "page_end": 9522,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-USIS-000001",
+      "dependencies": [],
+      "program": "USIS",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "USIS",
+        "USIS",
+        "VOL-024"
+      ],
+      "path": "15-UNIVERSAL-SCIENCE-INTELLIGENCE/04-REGISTRIES/USIS-021-UNIVERSAL-SCIENCE-INTELLIGENCE-MASTER-REGISTRY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "d7d028b1db32e71eec86ab833fd2dd6ee63f5bcc6d9cbd8bfba46a62f1c8d851",
+      "traceability": {
+        "requirement": [
+          "DR-RAT-11"
+        ],
+        "architecture": [
+          "UCOS-USIS-000001",
+          "UCOS-USIS-000022",
+          "UCOS-USIS-000023",
+          "UCOS-USIS-000024",
+          "UCOS-USIS-000025",
+          "UCOS-USIS-000026",
+          "UCOS-USIS-000027",
+          "UCOS-USIS-000028",
+          "UCOS-USIS-000029",
+          "UCOS-USIS-000030",
+          "UCOS-USIS-000031",
+          "UCOS-USIS-000032",
+          "UCOS-USIS-000033",
+          "UCOS-USIS-000034",
+          "UCOS-USIS-000006",
+          "UCOS-USIS-000004",
+          "UCOS-USIS-000003",
+          "UCOS-USIS-000005",
+          "UCOS-USIS-000002",
+          "UCOS-USIS-001",
+          "S-02",
+          "G-04"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000050",
+      "native_id": "CMG-000001",
+      "name": "UCOS Ω∞ — CONSTITUTIONAL META GOVERNANCE CONSTITUTION",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9523,
+      "page_end": 9528,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "727c913938e4f0cf41f2a002143dca60ce102b0fe731be655ff0e6facab81d33",
+      "traceability": {
+        "requirement": [
+          "UCOS-CON-000032",
+          "UCOS-CON-000033",
+          "UCOS-CON-000034"
+        ],
+        "architecture": [
+          "UCOS-CON-000032",
+          "UCOS-CON-000033",
+          "UCOS-CON-000034",
+          "UCOS-CON-000035",
+          "UCOS-CON-000036",
+          "UCOS-CON-000037",
+          "UCOS-CON-000038",
+          "UCOS-CON-000039",
+          "UCOS-CON-000040",
+          "UCOS-CON-000041",
+          "UCOS-CON-000042",
+          "AUTH-INF-001",
+          "STATUS-001",
+          "REG-AUTO-001",
+          "UCI-001"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000051",
+      "native_id": "CMG-000002",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL REPOSITORY IMPACT ANALYSIS",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9529,
+      "page_end": 9530,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000002-CONSTITUTIONAL-REPOSITORY-IMPACT-ANALYSIS.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "89c87fb5f8f78660d3274609f7dbdef354fc02e733494e858f67ddb204931d47",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CMG-000001",
+      "native_id": null,
+      "name": "Cmg Registry",
+      "description": "",
+      "category": "CMG",
+      "volume": "VOL-000",
+      "page_start": 9531,
+      "page_end": 9537,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "CMG",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CMG",
+        "CMG",
+        "VOL-000"
+      ],
+      "path": "00-CMG/CMG-REGISTRY.json",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "ae12d2d5656583ccb2b5a6c3a2ce2b123c1198faeec7d80dc192b2487dc0463f",
+      "traceability": {
+        "requirement": [],
+        "architecture": [],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000052",
+      "native_id": "CMG-000003",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL GAP ANALYSIS",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9538,
+      "page_end": 9540,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000003-CONSTITUTIONAL-GAP-ANALYSIS.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "7afd5def9d09855375f77bdbdd921963ebb31f45346695a2aa8296ff4642d64b",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000053",
+      "native_id": "CMG-000004",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL DEPENDENCY ANALYSIS",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9541,
+      "page_end": 9543,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000004-CONSTITUTIONAL-DEPENDENCY-ANALYSIS.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "8e823e1825fb714ed7d3692a57bbff41b75f3a65f06e0cf7f473fbd8e7cf018d",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000054",
+      "native_id": "CMG-000005",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL GOVERNANCE ANALYSIS",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9544,
+      "page_end": 9546,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000005-CONSTITUTIONAL-GOVERNANCE-ANALYSIS.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "2f828743be25da367bf9144d0a48943edbce27c155be3f498c2bae45d9ca4597",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000055",
+      "native_id": "CMG-000006",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL VALIDATION STRATEGY",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9547,
+      "page_end": 9549,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000006-CONSTITUTIONAL-VALIDATION-STRATEGY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "7103ca9f0397caa97f70e908bf6fd139202a70c75d9aa1699bfc67fe6bb25469",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000056",
+      "native_id": "CMG-000007",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL CERTIFICATION STRATEGY",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9550,
+      "page_end": 9552,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000007-CONSTITUTIONAL-CERTIFICATION-STRATEGY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "82f74f8671624dd0c4c1d38088e6a4aa1c8f2acf11fbe450d324b3d6cbab0b00",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000057",
+      "native_id": "CMG-000008",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL MIGRATION STRATEGY",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9553,
+      "page_end": 9554,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000008-CONSTITUTIONAL-MIGRATION-STRATEGY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "c28607336428050be59751df1fec5ba73a7ea6dee5143bc423bde9e21675800d",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000058",
+      "native_id": "CMG-000009",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL INTEGRATION STRATEGY",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9555,
+      "page_end": 9557,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000009-CONSTITUTIONAL-INTEGRATION-STRATEGY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "b9a22eabf9c86c64d45d72a1883f994afb8c9175c38462a3732da65c17942088",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000059",
+      "native_id": "CMG-000010",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL FUTURE EVOLUTION STRATEGY",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9558,
+      "page_end": 9560,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000010-CONSTITUTIONAL-FUTURE-EVOLUTION-STRATEGY.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "6104d16b00afcc862ca1dfc6daed09ab2ef786b332f1a7e3699f0e96b40ba876",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000060",
+      "native_id": "CMG-000011",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL ZERO-MISSING VERIFICATION",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9561,
+      "page_end": 9564,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000011-CONSTITUTIONAL-ZERO-MISSING-VERIFICATION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "d7b0075ef1a9bca6ee8bc47d54185d1a4417d8ae7db77dcef46de3ed5ecab9dc",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000061",
+      "native_id": "CMG-000012",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL IMPLEMENTATION READINESS ASSESSMENT",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9565,
+      "page_end": 9566,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000012-CONSTITUTIONAL-IMPLEMENTATION-READINESS-ASSESSMENT.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "2ee3fffd882e5444faab2a1d43fb522ad449ea6a67d8fd6bae59c4bdfc61aae4",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000062",
+      "native_id": "CMG-000013",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL RECOMMENDATIONS",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9567,
+      "page_end": 9569,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000013-CONSTITUTIONAL-RECOMMENDATIONS.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "00c04cce5279b3c0efa502f3ab6f86acd5675507c485a7771a5905c52b622863",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000063",
+      "native_id": "CMG-000014",
+      "name": "UCOS Ω∞ — CMG CONSTITUTIONAL OPEN QUESTIONS REQUIRING EXPLICIT RATIFICATION",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9570,
+      "page_end": 9572,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "00-CMG/CMG-000014-CONSTITUTIONAL-OPEN-QUESTIONS-FOR-RATIFICATION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "c736383f965b6720624bc22f10de06f5eb786389ff78198ccf39d8d29380a3af",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [
+          "CMG-0000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CMG-000002",
+      "native_id": "CMG-000000",
+      "name": "00-CMG — CONSTITUTIONAL META GOVERNANCE",
+      "description": "",
+      "category": "CMG",
+      "volume": "VOL-002",
+      "page_start": 9573,
+      "page_end": 9574,
+      "status": "UNDER_REVIEW",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "CMG",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CMG",
+        "CMG",
+        "VOL-002"
+      ],
+      "path": "00-CMG/README.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "dda836f253dc5c07fcfb0d980372c3133ab0c215e866615892ff83ce43420750",
+      "traceability": {
+        "requirement": [
+          "CMG-0000"
+        ],
+        "architecture": [],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-UCOSACFV0000-000001",
+      "native_id": null,
+      "name": "UCOS Ω∞ — ABSOLUTE ARCHITECTURAL COMPLETENESS & FORMAL VERIFICATION DETERMINATION",
+      "description": "",
+      "category": "UCOSACFV0000",
+      "volume": "VOL-000",
+      "page_start": 9575,
+      "page_end": 9583,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "UCOSACFV0000",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "UCOSACFV0000",
+        "UCOSACFV0000",
+        "VOL-000"
+      ],
+      "path": "UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "89435996f6a3ae5d5d598b557bf36497d911243b0142fe3bf26c94d1b0928e94",
+      "traceability": {
+        "requirement": [],
+        "architecture": [],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-CON-000064",
+      "native_id": "UCCEP-000000",
+      "name": "UCOS Ω∞ — UCCEP-000000 · UNIVERSAL CONTINUOUS CONSTITUTIONAL EVOLUTION PROGRAMME CHARTER",
+      "description": "",
+      "category": "CON",
+      "volume": "VOL-002",
+      "page_start": 9584,
+      "page_end": 9587,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-IDX-000001",
+      "dependencies": [],
+      "program": "CONSOLIDATION",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "CONSOLIDATION",
+        "CON",
+        "VOL-002"
+      ],
+      "path": "02-MASTER/UCCEP-000000-UNIVERSAL-CONTINUOUS-CONSTITUTIONAL-EVOLUTION-PROGRAMME-CHARTER.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "500f3e0b132d474e9134b5ca530a0e4f929e51caa060d132a1867f7cf55319a7",
+      "traceability": {
+        "requirement": [
+          "UCOS-CON-000032",
+          "UCOS-CON-000033",
+          "UCOS-CON-000034",
+          "UCOS-CON-000035",
+          "UCOS-CON-000036",
+          "UCOS-CON-000037",
+          "UCOS-CON-000038",
+          "UCOS-CON-000039",
+          "UCOS-CON-000040",
+          "UCOS-CON-000041",
+          "UCOS-CON-000042",
+          "CMG-0000"
+        ],
         "architecture": [],
         "design": [],
         "implementation": [],

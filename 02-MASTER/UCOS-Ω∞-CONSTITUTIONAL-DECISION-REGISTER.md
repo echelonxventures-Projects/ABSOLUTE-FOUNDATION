@@ -17,6 +17,14 @@ Output (this file only): `02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.
 > - **DR-RAT-01 … DR-RAT-10 are RATIFIED** (were ADJUDICATED/non-final), at their **unchanged Phase-3 positions**. DR-RAT-04's residual INV01↔INV02 ordering is selected (LAW-INV02 canonical; "Constitution Before Governance" first).
 > - Selected positions are **not modified** — only their status advances from adjudicated/blocked to **RATIFIED**.
 > Authoritative record: `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md`. The per-record "Status" lines and the summary below are updated to reflect this enactment.
+>
+> ### ⚑ Ratification evidence (GOV-11 / AMD-06)
+> This enactment is recorded and evidenced per the GOV-11 audit procedure:
+> - **Ratifier identity:** UCOS Ω∞ Constituent Authority (AUTH-13 — exogenous sovereign seat), via Terminal T4 / mission UCOS-RAT-001; sole ratifier for the founding act (quorum = constituent seat, AMD-04). Standing organ chartered: `RA-Ω∞` (AUTH-14).
+> - **Ratification act / date:** EC-1 exogenous constituent act (CAC-01…07 exercised); **Phase 10** enactment; repository baseline `db82bfb`.
+> - **Basis:** AMD-01…AMD-08 (GAP-01…08 closed); §2 five canonical determinations; RAT-01…RAT-11 RATIFIED at unchanged positions.
+> - **Traceability anchors:** DR-RAT-01…DR-RAT-11 (this register); RAT-11/SUP-14/CONF-07; AUTH-13/AUTH-14 + GOV-11/GOV-12 (`01-WORKING/AUTHORITY-REGISTER.md`); SUP-01/02/03/06/07/14 (`SUPERSESSION-REGISTER`); `09-DR-RAT-11-ASSESSMENT.md` §5.
+> - **Audit:** first audited ratification record (AMD-06), satisfying LAW-INV02 "Audit Before Trust." Canonical evidence record: `UCOS-RAT-001` §1.2.
 
 ## SCOPE DISCIPLINE
 

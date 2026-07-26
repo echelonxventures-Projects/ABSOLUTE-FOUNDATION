@@ -69,4 +69,34 @@ Columns: Decision · Canonical Owner · Existing Artifact · Method · Repositor
 | Zero Parallel Architecture | ✔ — Meta-Platform/Platform-Builder EXTEND platform owners, not fork them |
 
 ---
+
+## 5. Constitutional binding — decision disposition (added 2026-07-26, CDAF-001)
+
+This matrix determines the **integration method** for each decision. It does not, by itself, determine each decision's **constitutional disposition**, nor does it block successor work while a decision is left undetermined. Both obligations are now legislated at `00-CEP/CEP-002` **Article 28** (added by **CEP-002-AMD-002**), and every row of §2 is dispositioned in the machine-readable overlay `00-MASTER/UCDA-000001/ucda-decisions.json`.
+
+| Matrix row (§2 decision) | Register id | Disposition (CEP-002 Art 28.13) | Carried by |
+|---|---|---|---|
+| Meta-Platform architecture | `DEC-ADAM-01` | REGISTERED AS AN IMPLEMENTATION WORK PACKAGE | `WP-UCDA-003` |
+| Platform Builder architecture | `DEC-ADAM-02` | REGISTERED AS AN IMPLEMENTATION WORK PACKAGE | `WP-UCDA-004` |
+| Nucleus model | `DEC-ADAM-03` | IMPLEMENTED | `00-MASTER/UCOS-NUCLEUS-001/02-NUCLEUS-CONSTITUTIONAL-MODEL.md` |
+| Universe model | `DEC-ADAM-04` | REPRESENTED BY AN EXISTING CANONICAL CAPABILITY | `00-CEP/STAGE-02-S2-03-UNIVERSE-FOUNDATION-BINDING.md` |
+| Nucleus ↔ Universe ownership | `DEC-ADAM-05` | IMPLEMENTED | `00-MASTER/UCOS-NUCLEUS-001/03…`, `05…` |
+| Blueprint-driven platform composition | `DEC-ADAM-06` | REPRESENTED BY AN EXISTING CANONICAL CAPABILITY | blueprint catalog |
+| Foundation composition | `DEC-ADAM-07` | REPRESENTED BY AN EXISTING CANONICAL CAPABILITY | foundation architecture |
+| Registry-first implementation | `DEC-ADAM-08` | REPRESENTED BY AN EXISTING CANONICAL CAPABILITY | registry federation |
+| Context Assimilation Gate | `DEC-ADAM-09` | REPRESENTED BY AN EXISTING CANONICAL CAPABILITY | USIS-WAVE1 assimilation |
+| Constitutional Reuse Gate (as a facet) | `DEC-ADAM-10` | REGISTERED AS AN IMPLEMENTATION WORK PACKAGE | `WP-UCDA-005` |
+| Constitutional Reuse Gate **as a NEW parallel gate** | `DEC-ADAM-10R` | **REJECTED WITH CONSTITUTIONAL JUSTIFICATION** | CEP-002 8.3 · CEP-001 VII.2 · §4 Zero Parallel Architecture |
+| Canonical Ownership model | `DEC-ADAM-11` | REPRESENTED BY AN EXISTING CANONICAL CAPABILITY | RA-003 canonical ownership |
+| Platform Blueprint | `DEC-ADAM-12` | REPRESENTED BY AN EXISTING CANONICAL CAPABILITY | blueprint catalog constitution |
+| Registry as institutional memory | `DEC-ADAM-13` | REPRESENTED BY AN EXISTING CANONICAL CAPABILITY | master knowledge book + ledgers |
+| Declarative composition | `DEC-ADAM-14` | REGISTERED AS AN IMPLEMENTATION WORK PACKAGE | `WP-UCDA-006` |
+| Universal composition architecture | `DEC-ADAM-15` | REPRESENTED BY AN EXISTING CANONICAL CAPABILITY | PLATFORM-010 |
+| Implementation sequence refinement | `DEC-ADAM-16` | REGISTERED AS AN IMPLEMENTATION WORK PACKAGE | `WP-UCDA-007` |
+
+**Reconciliation of §2 against present Repository Truth.** Two rows of §2 recorded at baseline `ab78f35` are superseded by later Repository Truth: the Nucleus model, recorded there as **NEW · UNVALIDATED**, is canonicalized and registered (`DEC-ADAM-03`), and the Nucleus↔Universe ownership binding, recorded as **NEW binding · UNVALIDATED**, exists (`DEC-ADAM-05`). §2 is retained unaltered as the read-only determination it was; the current disposition of each row is the register's, and the register is regenerated from Repository Truth on every run.
+
+**Every row marked "pending" in §2 is now a registered work package** with a named owner, a constitutional route, and an acceptance condition (`00-MASTER/UCDA-000001/05-WORK-PACKAGE-REGISTER.md`). A pending integration is therefore no longer an open note: it is a disposition. Enforcement is the **Implementation Evidence Gate** — `make ucda-gate`, and `G-14` / `CK-DECISION-EVIDENCE` of `00-MASTER/UCCEP-000000/uccep-bindings.json`.
+
+---
 *End of 03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md*

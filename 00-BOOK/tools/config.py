@@ -453,13 +453,29 @@ CHAINS = {
         "ECOSYSTEM-PLATFORM",
         "PRODUCTION-PLATFORM",
     ],
+    # ENG chain order is FIXED BY REPOSITORY TRUTH, not by filename or by the
+    # UCOS-ENG-NNNNNN allocation order. The authoritative EL-1 Existence-Primitive
+    # sequence is ENG-GOV-001 (07-ENGINEERING/UCOS-Ω∞-ENGINEERING-ROADMAP-
+    # RECONCILIATION-DETERMINATION.md) Output 11, OPTION B (SELECTED):
+    #
+    #   ENG-000 Index → ENG-001 Identity → ENG-002 Object → ENG-003 Value
+    #                 → ENG-004 Type     → ENG-005 Relationship & Reference
+    #
+    # Type MUST precede Relationship & Reference: relationship kinds, cardinalities
+    # and reference classes are themselves typed, so ENG-005 Depends-On ENG-004
+    # (ENG-004 §"Sequencing Note"; ENG-GOV-001 Output 11 / F-05; ENG-000 ENG-L-05/06
+    # downward-only + acyclic). Emitting the chain in any other order manufactures a
+    # structural:chain Depends-On edge that contradicts the artifacts' own declared
+    # metadata and creates a prohibited lineage cycle (CEP-009 Art XV.2).
+    # Corrective change under CEP-009 Article IV.3 (UCCEP-000005 / WP-UCCEP-003 T-1);
+    # DATA ONLY — no identifier is allocated, renumbered or released here.
     "ENG": [
         "ENGINEERING-PROGRAM-MASTER-INDEX",
         "UNIVERSAL-IDENTITY-SYSTEM-MASTER-ARCHITECTURE",
         "UNIVERSAL-OBJECT-SYSTEM-MASTER-ARCHITECTURE",
-        "UNIVERSAL-RELATIONSHIP-REFERENCE-SYSTEM-MASTER-ARCHITECTURE",
-        "UNIVERSAL-TYPE-SYSTEM-MASTER-ARCHITECTURE",
         "UNIVERSAL-VALUE-SYSTEM-MASTER-ARCHITECTURE",
+        "UNIVERSAL-TYPE-SYSTEM-MASTER-ARCHITECTURE",
+        "UNIVERSAL-RELATIONSHIP-REFERENCE-SYSTEM-MASTER-ARCHITECTURE",
     ],
     "RUN": [
         "RUNTIME-001-UNIVERSAL-RUNTIME-CONSTITUTION",
@@ -1286,3 +1302,62 @@ EXECUTION_STATE_TO_SIGNAL = {
 # runtime certification only; artifact-level DOMAIN-D certification stays separate
 # and evidence-based (STATUS-001).
 CERT_INTEGRITY_DOMAINS = CERT_INTEGRITY_DOMAINS + ("execution",)
+
+
+
+# ===========================================================================
+# REG-AUTO-001 §21 — RECONCILED-SET DECLARATION (CMG-DLG-13 / CMG-OQ-06)
+#               (append-only, DATA ONLY).
+#
+# The constitutional determination of the located registration/classification
+# authority (REG-AUTO-001 §21, closing CMG-OQ-06 for the concern delegated at
+# CMG-DLG-13) is that admission of a constitutional zone/namespace requires NO
+# amendment of a classification instrument: recognition is already total by
+# construction (an existing CLASSIFY_RULE, then self-declared metadata, then the
+# deterministic path-derived catch-all). What the authority requires instead is
+# this append-only RECORD of the reconciled set, and its enforcement by the
+# EXISTING classification gate.
+#
+# What this block is NOT:
+#   * NOT a classification rule — classify() never reads it; no CLASSIFY_RULES,
+#     CHAINS, PROGRAM_ROOTS, CROSS_PROGRAM or VOLUMES entry is added, edited or
+#     renumbered, and no new classification family is created (L4/L5).
+#   * NOT a registry — it stores no artifact, allocates no identity, and is
+#     never emitted into DATA/ (the id-ledger remains the one identity
+#     authority; P4).
+#   * NOT a new gate/validator — it is read ONLY by the classification gate of
+#     ENFORCEMENT_GATES (ukb.py::cmd_enforce), which it strengthens: a file
+#     inside a reconciled zone must resolve to a classification the
+#     determination ADMITS, not merely to "not OTHER/MISC".
+#
+# Record fields (append-only; a future reconciliation is a new entry, never a
+# rewrite — CR-INF-007):
+#   set              stable set id (also the reconciled namespace's zone key)
+#   zone             repo-relative path regex the determination reconciled
+#   namespace        the identifier namespace admitted with the zone
+#   namespace_owner  the located owner of that namespace (by reference only)
+#   concern          the delegated concern under which the determination issued
+#   determination    the clause of this standard that issued it
+#   closes           the open question the determination closes
+#   recognition      the recognition paths the determination found sufficient
+#   admitted         (program, category) pairs the determination admits
+#   admitted_volumes volumes the determination admits (existing volumes only)
+#
+# Identity integrity (§21.4): `set`, `namespace` and `zone` are unique across the
+# declaration; a duplicate is a fail-closed abort, so a reconciled set can never
+# introduce duplicate identity.
+# ===========================================================================
+RECONCILED_SETS = (
+    {
+        "set": "CMG",
+        "zone": r"^00-CMG/",
+        "namespace": "CMG",
+        "namespace_owner": "CMG-000001",
+        "concern": "CMG-DLG-13",
+        "determination": "REG-AUTO-001 §21",
+        "closes": "CMG-OQ-06",
+        "recognition": ("classify_rule", "declared_metadata", "path_derived"),
+        "admitted": (("CONSOLIDATION", "CON"), ("CMG", "CMG")),
+        "admitted_volumes": ("VOL-000", "VOL-002"),
+    },
+)
