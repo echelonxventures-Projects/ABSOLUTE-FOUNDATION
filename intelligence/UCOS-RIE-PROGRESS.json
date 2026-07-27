@@ -3,26 +3,44 @@
   "authoritative_portfolio_status": "IN_PROGRESS — analysis/architecture/generation complete; runtime testing/deployment pending EC-1",
   "authority": "NONE (derived truth)",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "3e472ffae45ad1b89ec6c7ff6eec7530fb638752043b29e7f3172465d47e8697",
+  "content_hash": "82f4b7b85950257851ab73b4443251cf4efc927e9a5fff6cd7583a131ddf01e8",
   "dimension_index_literal_pct": 26.7,
   "dimension_index_reconciled_pct": 26.7,
   "dimensions_counted": 15,
   "evidence_state": {
-    "branch": "programme/evo-usis-005",
-    "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "512180a52913897da1fca2130bc5bd9fd4d2e56396d021fd12e8995e0d8d929d",
-      "00-BOOK/DATA/certification.json": "ebe17b73cd9715bb533ffa49946cd93c6363c405db3e775605d8085acdc93a0d",
-      "00-BOOK/DATA/control-tower.json": "90eeccbe9c000f27104ad04dd2411454eb27e41b4a9457dc1a6a56eded4be759",
-      "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "5e734533edd06487fc9979ad4390d7c077aeb4d3416870a02b38199b74316c00",
-      "coverage.xml": "77bbf749842ef3e2d7b6d7d66f266428d3f02d576eaf64ac367d431a1b59e0fc"
+    "branch": "integration/recovery-001",
+    "coverage_measurement": {
+      "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
+      "fingerprint": "56d41ea0110c16352fee624be16b9039d83f5323f43d1cf38171df2ea0117abb",
+      "source": "coverage.xml"
     },
-    "head": "527485a"
+    "evidence_files": {
+      "00-BOOK/DATA/artifacts.json": "bae7d19773414b3bab00cef8598777d2702695d5a70c28772f00ea32c41fc6ba",
+      "00-BOOK/DATA/certification.json": "37bd71967910d6dfaefaf19bce0e73606bbee1e951d70bd5e46b98888ba8b7f7",
+      "00-BOOK/DATA/control-tower.json": "ed5bf960b91f428f86eb4a03ba31645d29170818863bf182a9bb646a38e69bf7",
+      "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
+      "00-BOOK/DATA/volumes.json": "4c92553878b98b2756c40ab26c8867e20f24039fcbbefbb0a2fcee1a8823272d"
+    },
+    "head": "e8d70f3"
   },
-  "evidence_timestamp": "2026-07-26T02:49:04+00:00",
+  "evidence_timestamp": "2026-07-27T16:26:49+00:00",
+  "generation": {
+    "generation_timestamp": "2026-07-28T00:56:57+05:30",
+    "generation_timestamp_basis": "committer date of the source commit — the wall clock is excluded so that regeneration at an unchanged repository state is byte-reproducible",
+    "generator": "UCOS-RIE-001 Repository Intelligence Engine",
+    "generator_version": "1.0.0",
+    "input_hash": "f18038c0d6e8a86f5d71e7318892a4830f9bbf35d02f4fff05f14462d9fcc46b",
+    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash, the coverage measurement fingerprint, and HEAD, which pins the whole tracked tree",
+    "output_hash_field": "content_hash",
+    "repository_head": {
+      "commit": "e8d70f3",
+      "ref": "integration/recovery-001"
+    },
+    "source_commit": "e8d70f33f72ec330b1bd3f13fa80f8e35edda08e"
+  },
   "per_dimension": {
     "architecture": {
-      "as_of": "2026-07-26T02:49:04+00:00",
+      "as_of": "2026-07-27T16:26:49+00:00",
       "literal_score": 1.0,
       "reconciled_score": 1.0,
       "source": "MANUAL",
@@ -38,7 +56,7 @@
       "status": "BLOCKED"
     },
     "certification": {
-      "as_of": "2026-07-26T02:49:04+00:00",
+      "as_of": "2026-07-27T16:26:49+00:00",
       "literal_score": 1.0,
       "reconciled_score": 1.0,
       "source": "MANUAL",
@@ -54,7 +72,7 @@
       "status": "IN_PROGRESS"
     },
     "execution": {
-      "as_of": "2026-07-26T02:49:04+00:00",
+      "as_of": "2026-07-27T16:26:49+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -62,7 +80,7 @@
       "status": "NOT_STARTED"
     },
     "functional_testing": {
-      "as_of": "2026-07-26T02:49:04+00:00",
+      "as_of": "2026-07-27T16:26:49+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -78,7 +96,7 @@
       "status": "IMPLEMENTED"
     },
     "integration_testing": {
-      "as_of": "2026-07-26T02:49:04+00:00",
+      "as_of": "2026-07-27T16:26:49+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -94,7 +112,7 @@
       "status": "BLOCKED"
     },
     "performance_testing": {
-      "as_of": "2026-07-26T02:49:04+00:00",
+      "as_of": "2026-07-27T16:26:49+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -102,7 +120,7 @@
       "status": "NOT_STARTED"
     },
     "portfolio": {
-      "as_of": "2026-07-26T02:49:04+00:00",
+      "as_of": "2026-07-27T16:26:49+00:00",
       "literal_score": 0.5,
       "reconciled_score": 0.5,
       "source": "MANUAL",
@@ -118,7 +136,7 @@
       "status": "BLOCKED"
     },
     "release": {
-      "as_of": "2026-07-26T02:49:04+00:00",
+      "as_of": "2026-07-27T16:26:49+00:00",
       "literal_score": 0.0,
       "reconciled_score": 0.0,
       "source": "MANUAL",
@@ -144,5 +162,5 @@
   },
   "producer": "UCOS-RIE-001 Repository Intelligence Engine v1.0.0",
   "title": "Progress Intelligence Report",
-  "unit_validation_pct": 96.93
+  "unit_validation_pct": 94.11
 }
