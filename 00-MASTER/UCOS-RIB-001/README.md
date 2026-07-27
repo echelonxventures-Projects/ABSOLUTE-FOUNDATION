@@ -27,7 +27,7 @@ machine-readable form.
 
 | Owner bound | What it already holds |
 |---|---|
-| `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | the canonical capability catalogue (42 records) |
+| `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | the canonical capability catalogue (66 records) |
 | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | the programme-level dependency graph |
 | `intelligence/UCOS-RIE-EXECUTION-FRONTIER.json` | the execution frontier and critical path |
 | `00-BOOK/tools/ukb.py` · `00-BOOK/DATA/` | registration, the typed graph, twin certification |
