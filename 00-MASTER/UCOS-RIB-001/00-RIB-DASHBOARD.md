@@ -8,7 +8,7 @@
 | AUTHORITY | **NONE (DERIVED TRUTH)** |
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
-| BRANCH / HEAD | `integration/recovery-001` · `8f2dd21252ef` |
+| BRANCH / HEAD | `integration/recovery-001` · `b2502aef6eab` |
 | WORKING TREE | DIRTY (1 entries) |
 | UNITS DISCOVERED | 236 |
 | SUBSTRATE USABLE | 13/15 |
@@ -109,7 +109,7 @@
 | `TRK-EVIDENCE` | EVIDENCE | `content hash of the emitted evidence index` | CONTENT-ADDRESSED | evidence identity is the content hash of the emitted evidence index |
 
 - **Execution identity** — `2850cdbb1857af699f5dca41921f80a27a6408bdbdb697d90b845e68072fe59e`
-- **Session identity** — `8f2dd21252ef5af23415eeae8943a85129bd2016`
+- **Session identity** — `b2502aef6eabcad263c15aa798d315fc15d251f0`
 
 ---
 

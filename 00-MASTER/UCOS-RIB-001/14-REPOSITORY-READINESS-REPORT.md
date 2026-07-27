@@ -8,7 +8,7 @@
 | AUTHORITY | **NONE (DERIVED TRUTH)** |
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
-| BRANCH / HEAD | `integration/recovery-001` · `8f2dd21252ef` |
+| BRANCH / HEAD | `integration/recovery-001` · `b2502aef6eab` |
 | WORKING TREE | DIRTY (1 entries) |
 | UNITS DISCOVERED | 236 |
 | SUBSTRATE USABLE | 13/15 |
@@ -45,11 +45,11 @@ The blueprint is complete and every finding below is measured, but the repositor
 
 | Criterion | Measured | Verdict |
 |---|---|---|
-| Repository is version-control clean | 1 dirty entr(y/ies), excluding 16 of this programme's own regenerated artifacts | **FAIL** |
+| Repository is version-control clean | 1 dirty entr(y/ies), excluding this programme's own regenerated artifacts | **FAIL** |
 | Verification PASS | 3 failed | **FAIL** |
 | Validation PASS | 1 failed | **FAIL** |
 | Certification PASS | 6 blocking gate(s) failing | **FAIL** |
-| Repository Truth synchronized | HEAD `8f2dd21252ef` | PASS |
+| Repository Truth synchronized | HEAD `b2502aef6eab` | PASS |
 | Canonical blueprint generated | 16 matrices, 15 outputs | PASS |
 | Zero duplicate capability ownership | 0 duplicate finding(s) | PASS |
 | Zero unresolved dependency | 0 | PASS |
@@ -66,7 +66,7 @@ The blueprint is complete and every finding below is measured, but the repositor
 
 | Element | Value |
 |---|---|
-| Anchor | `8f2dd21252ef5af23415eeae8943a85129bd2016` on `integration/recovery-001` |
+| Anchor | `b2502aef6eabcad263c15aa798d315fc15d251f0` on `integration/recovery-001` |
 | Regeneration route | `make rib` |
 | Completed work | 236 unit(s) discovered from 8 source(s), each carrying exactly one disposition; 16 matrices bound or derived; 12 gates evaluated |
 | Remaining work | 40 unit(s) queued across 6 wave(s); 6 blocking gate(s) to clear |

@@ -8,7 +8,7 @@
 | AUTHORITY | **NONE (DERIVED TRUTH)** |
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
-| BRANCH / HEAD | `integration/recovery-001` · `8f2dd21252ef` |
+| BRANCH / HEAD | `integration/recovery-001` · `b2502aef6eab` |
 | WORKING TREE | DIRTY (1 entries) |
 | UNITS DISCOVERED | 236 |
 | SUBSTRATE USABLE | 13/15 |
@@ -65,7 +65,7 @@
 
 | Criterion | Value | Verdict |
 |---|---|---|
-| Repository clean | DIRTY — 1 entr(y/ies), excluding 16 of this programme's own regenerated artifacts | **FAIL** |
+| Repository clean | DIRTY — 1 entr(y/ies), excluding this programme's own regenerated artifacts | **FAIL** |
 | Verification | 9/12 | **FAIL** |
 | Validation | 9/10 | **FAIL** |
 | Dependency closure | 0 | PASS |

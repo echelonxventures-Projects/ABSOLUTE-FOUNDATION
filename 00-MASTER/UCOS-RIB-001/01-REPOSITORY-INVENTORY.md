@@ -8,7 +8,7 @@
 | AUTHORITY | **NONE (DERIVED TRUTH)** |
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
-| BRANCH / HEAD | `integration/recovery-001` · `8f2dd21252ef` |
+| BRANCH / HEAD | `integration/recovery-001` · `b2502aef6eab` |
 | WORKING TREE | DIRTY (1 entries) |
 | UNITS DISCOVERED | 236 |
 | SUBSTRATE USABLE | 13/15 |
@@ -83,11 +83,11 @@
 | Dimension | Value |
 |---|---|
 | Branch | `integration/recovery-001` |
-| HEAD | `8f2dd21252ef5af23415eeae8943a85129bd2016` |
+| HEAD | `b2502aef6eabcad263c15aa798d315fc15d251f0` |
 | Detached | no |
 | Working tree | DIRTY |
 | Dirty entries | 1 |
-| Own regenerated artifacts excluded from that count | 16 |
+| Own regenerated artifacts | excluded from the count above — they are the deterministic product of the command being gated |
 | Modified | 1 |
 | Deleted | 0 |
 | Untracked | 0 |

@@ -1711,7 +1711,6 @@ def observed_state(decl: dict, raw: dict) -> dict:
             "modified": len([line for line in entries if line[:2].strip() in {"M", "MM", "AM"}]),
             "deleted": len([line for line in entries if "D" in line[:2]]),
             "untracked": len([line for line in entries if line[:2] == "??"]),
-            "excluded_own_artifacts": len(raw.get("raw_entries", [])) - len(entries),
         }
     )
     return state
@@ -2090,8 +2089,9 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                 ["Working tree", model["repository"]["working_tree"]],
                 ["Dirty entries", str(model["repository"]["dirty_entries"])],
                 [
-                    "Own regenerated artifacts excluded from that count",
-                    str(model["repository"]["excluded_own_artifacts"]),
+                    "Own regenerated artifacts",
+                    "excluded from the count above — they are the deterministic product of "
+                    "the command being gated",
                 ],
                 ["Modified", str(model["repository"]["modified"])],
                 ["Deleted", str(model["repository"]["deleted"])],
@@ -2674,9 +2674,8 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                 [
                     "Repository clean",
                     f"{model['repository']['working_tree']} — "
-                    f"{m['dirty_entries_outside_generated']} entr(y/ies), excluding "
-                    f"{model['repository']['excluded_own_artifacts']} of this programme's "
-                    "own regenerated artifacts",
+                    f"{m['dirty_entries_outside_generated']} entr(y/ies), excluding this "
+                    "programme's own regenerated artifacts",
                     "PASS" if not m["dirty_entries_outside_generated"] else "**FAIL**",
                 ],
                 [
@@ -2763,8 +2762,7 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                 [
                     "Repository is version-control clean",
                     f"{m['dirty_entries_outside_generated']} dirty entr(y/ies), excluding "
-                    f"{model['repository']['excluded_own_artifacts']} of this programme's "
-                    "own regenerated artifacts",
+                    "this programme's own regenerated artifacts",
                     "PASS" if not m["dirty_entries_outside_generated"] else "**FAIL**",
                 ],
                 [
@@ -3254,7 +3252,6 @@ FIXED_STATE = {
     "modified": 0,
     "deleted": 0,
     "untracked": 0,
-    "excluded_own_artifacts": 0,
     "conflicts": 0,
     "interrupted_operations": [],
     "broken_symlinks": [],
@@ -3379,8 +3376,7 @@ def main() -> int:
         f"matrices={m['matrices_bound']}bound/{m['matrix_total']} | "
         f"queued={m['queued_total']}in{m['wave_total']}waves | "
         f"gates={m['gates_passed']}/{m['gate_total']} | "
-        f"dirty={m['dirty_entries_outside_generated']}"
-        f"(+{model['repository']['excluded_own_artifacts']} own) | "
+        f"dirty={m['dirty_entries_outside_generated']} | "
         f"gate={model['gate']} | seal={model['seal_sha256'][:16]}"
     )
     if not args.gate:
