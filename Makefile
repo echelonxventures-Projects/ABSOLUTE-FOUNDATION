@@ -26,6 +26,9 @@ help:
 	@echo "  make verify        canonical verification (lint + tests/coverage + governance)"
 	@echo "  make verify-full   verify + full registration/drift gate"
 	@echo "  make repo-ops      complete repository operational verification (EPIC-PLAT-003)"
+	@echo "  make rib           regenerate the UCOS-RIB-001 Repository Integration Blueprint (EPIC-001)"
+	@echo "  make rib-gate      fail-closed Repository Integration Gate (twelve quality gates)"
+	@echo "  make rib-self      UCOS-RIB-001 guards over its own surface"
 	@echo "  make closure       regenerate UAKOS-CLOSURE-002 repository-closure artifacts"
 	@echo "  make closure-gate  fail-closed closure gate (non-zero exit while gaps remain)"
 	@echo "  make closure-phase2      regenerate PHASE-002 concept-graph reconciliation (outputs 20-35)"
@@ -420,3 +423,52 @@ publications: research publication
 # research-publication-gate: both gates in dependency order (publication consumes the
 # research corpus, so a closed research gate closes the publication gate too).
 research-publication-gate: research-gate publication-gate
+
+
+
+# rib: UCOS-RIB-001 — Repository Integration Blueprint (EPIC-001 / WP-001).
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# The executable expression of EPIC-001. It creates no capability catalogue, no dependency
+# graph, no registry, no execution queue, no priority register and no certification
+# authority: every one already exists and is already owned (intelligence/UCOS-RIE-* — the
+# Repository Intelligence Engine; 00-BOOK/tools/ukb.py — registration; 00-BOOK/DATA — the
+# typed graph and the twin certification; 00-MASTER/URRC-000001 — the reality matrices;
+# 00-MASTER/UAKOS-CLOSURE-002 — concept closure and the planning layer; 00-MASTER/UEI-000001
+# and UER-000001 — the evolution and resilience capability bindings). It DISCOVERS the unit
+# universe from Repository Truth with zero enumeration, MEASURES every unit, BINDS each of
+# the sixteen chartered matrices to the owner that already holds it — emitting the pointer
+# and no rows — or DERIVES it where no owner holds it machine-readably, computes exactly one
+# disposition per unit through an ordered, total, data-declared rule set, and emits the
+# fourteen mandatory outputs into 00-MASTER/UCOS-RIB-001/.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside its own operational
+# memory directory (guarded, fail-closed). Adding a discovery source, measure, plane,
+# disposition, rule, matrix, gap class, duplicate class, gate or output is an entry in
+# 00-MASTER/UCOS-RIB-001/rib-blueprint.json and requires NO change to the engine.
+#
+# Exit 0 every blocking gate passed · 1 a blocking gate failed · 2 fail-closed abort
+# (the declaration or a required substrate is unusable, so no verdict may be asserted).
+.PHONY: rib rib-gate rib-self
+rib:
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py
+
+rib-gate:
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --gate
+
+# rib-self: the eight guards over the programme's own surface — declaration integrity
+# (every reference resolves; every obligation names a computed metric; the rule set is
+# ordered, reachable and total), zero-enumeration (the blueprint is DATA and the engine
+# names none of its subject matter), forbidden-write scope, self-determinism, substrate
+# usability, no-fabrication (every row traces to a source, a measure or a counted probe),
+# reuse-before-create (no bound owner lies inside this programme's own home), and totality
+# (every unit carries exactly one disposition from the closed set).
+rib-self:
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-declaration
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-write-scope
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-determinism
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-substrate
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-no-fabrication
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-reuse-before-create
+	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-totality
