@@ -20,7 +20,7 @@ import re
 from abc import ABC, abstractmethod
 from typing import Any, ClassVar
 
-from engine.runtime.disclosure import disclosure_present
+from engine.foundation.contracts.disclosure import disclosure_present
 from engine.validation.contracts import (
     CheckStatus,
     Severity,

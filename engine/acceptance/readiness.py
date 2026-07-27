@@ -23,8 +23,8 @@ from engine.acceptance.contracts import (
     content_hash,
 )
 from engine.acceptance.engine import AcceptanceDecision
+from engine.foundation.contracts.disclosure import build_disclosure
 from engine.foundation.obs.logging import get_logger
-from engine.runtime.disclosure import build_disclosure
 
 _logger = get_logger("acceptance.readiness")
 

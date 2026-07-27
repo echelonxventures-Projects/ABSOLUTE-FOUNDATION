@@ -1,13 +1,13 @@
 {
   "compliance": [
     {
-      "finding": "architectural_cycles=3",
-      "gate": "GATE-10",
-      "id": "CMP-ACYCLIC",
-      "rank": 2,
-      "remediation": "break the named cycle by extracting the mediating module into the lower layer both participants already depend on",
-      "requirement": "zero circular dependency",
-      "severity": "HIGH"
+      "finding": "dirty_entries_outside_generated=8",
+      "gate": "GATE-12",
+      "id": "CMP-CLEAN",
+      "rank": 1,
+      "remediation": "commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately",
+      "requirement": "the repository must remain clean, deterministic, buildable and reproducible",
+      "severity": "CRITICAL"
     },
     {
       "finding": "uncatalogued_units=23",
@@ -28,7 +28,16 @@
       "severity": "HIGH"
     },
     {
-      "finding": "verifications_failed=3",
+      "finding": "validations_failed=1",
+      "gate": "GATE-04",
+      "id": "CMP-VALIDATE",
+      "rank": 2,
+      "remediation": "discharge the named validation obligation",
+      "requirement": "validation must pass",
+      "severity": "HIGH"
+    },
+    {
+      "finding": "verifications_failed=2",
       "gate": "GATE-03",
       "id": "CMP-VERIFY",
       "rank": 2,
@@ -1279,7 +1288,7 @@
       "blocking": true,
       "criterion": "every verification obligation met",
       "failures": [
-        "verifications_failed=3"
+        "verifications_failed=2"
       ],
       "id": "GATE-03",
       "metrics": [
@@ -1291,13 +1300,15 @@
     {
       "blocking": true,
       "criterion": "every validation obligation met",
-      "failures": [],
+      "failures": [
+        "validations_failed=1"
+      ],
       "id": "GATE-04",
       "metrics": [
         "validations_failed"
       ],
       "name": "Repository Validation",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "blocking": true,
@@ -1362,15 +1373,13 @@
     {
       "blocking": true,
       "criterion": "no cycle of a non-benign declared class in any plane",
-      "failures": [
-        "architectural_cycles=3"
-      ],
+      "failures": [],
       "id": "GATE-10",
       "metrics": [
         "architectural_cycles"
       ],
       "name": "Zero Circular Dependency",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "blocking": true,
@@ -1388,13 +1397,15 @@
     {
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
-      "failures": [],
+      "failures": [
+        "dirty_entries_outside_generated=8"
+      ],
       "id": "GATE-12",
       "metrics": [
         "dirty_entries_outside_generated"
       ],
       "name": "Repository Clean",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     }
   ],
   "matrices": [
@@ -1802,13 +1813,14 @@
     "absent_unbounded:phase": 0,
     "absent_unbounded:superseded_by": 0,
     "advisory_duplicate_signals": 7,
-    "architectural_cycles": 3,
+    "architectural_cycles": 0,
     "benign_cycles": 2,
     "blocking_failed": [
       "GATE-03",
+      "GATE-04",
       "GATE-07",
-      "GATE-10",
-      "GATE-11"
+      "GATE-11",
+      "GATE-12"
     ],
     "catalogue_records": 42,
     "certification_domains_failed": 0,
@@ -1823,12 +1835,12 @@
     },
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
-    "compliance_findings": 4,
+    "compliance_findings": 5,
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 0,
-    "dirty_entries_outside_generated": 0,
+    "dirty_entries": 8,
+    "dirty_entries_outside_generated": 8,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 12,
@@ -1860,7 +1872,7 @@
     "gap_count:GAP-VERIFICATION": 207,
     "gap_findings": 669,
     "gate_total": 12,
-    "gates_passed": 8,
+    "gates_passed": 7,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -1938,8 +1950,8 @@
     "universes_unresolved": 0,
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
-    "validations_failed": 0,
-    "verifications_failed": 3,
+    "validations_failed": 1,
+    "verifications_failed": 2,
     "wave_total": 6
   },
   "non_derivable": [
@@ -1981,88 +1993,8 @@
   ],
   "planes": [
     {
-      "architectural_cycles": [
-        {
-          "benign": false,
-          "class": "CYC-ARCHITECTURAL",
-          "cycle": [
-            "engine.runtime",
-            "engine.acceptance",
-            "engine.runtime"
-          ],
-          "units": [
-            "engine.acceptance",
-            "engine.runtime"
-          ]
-        },
-        {
-          "benign": false,
-          "class": "CYC-ARCHITECTURAL",
-          "cycle": [
-            "engine.certification",
-            "engine.runtime",
-            "engine.certification"
-          ],
-          "units": [
-            "engine.certification",
-            "engine.runtime"
-          ]
-        },
-        {
-          "benign": false,
-          "class": "CYC-ARCHITECTURAL",
-          "cycle": [
-            "engine.runtime",
-            "engine.validation",
-            "engine.runtime"
-          ],
-          "units": [
-            "engine.runtime",
-            "engine.validation"
-          ]
-        }
-      ],
-      "cycles": [
-        {
-          "benign": false,
-          "class": "CYC-ARCHITECTURAL",
-          "cycle": [
-            "engine.runtime",
-            "engine.acceptance",
-            "engine.runtime"
-          ],
-          "units": [
-            "engine.acceptance",
-            "engine.runtime"
-          ]
-        },
-        {
-          "benign": false,
-          "class": "CYC-ARCHITECTURAL",
-          "cycle": [
-            "engine.certification",
-            "engine.runtime",
-            "engine.certification"
-          ],
-          "units": [
-            "engine.certification",
-            "engine.runtime"
-          ]
-        },
-        {
-          "benign": false,
-          "class": "CYC-ARCHITECTURAL",
-          "cycle": [
-            "engine.runtime",
-            "engine.validation",
-            "engine.runtime"
-          ],
-          "units": [
-            "engine.runtime",
-            "engine.validation"
-          ]
-        }
-      ],
+      "architectural_cycles": [],
+      "cycles": [],
       "edge_sites": {
         "application -> engine.certification": [
           "application/application.py",
@@ -2129,18 +2061,10 @@
           "engine/acceptance/errors.py",
           "engine/acceptance/readiness.py"
         ],
-        "engine.acceptance -> engine.runtime": [
-          "engine/acceptance/engine.py",
-          "engine/acceptance/readiness.py"
-        ],
         "engine.certification -> engine.foundation": [
           "engine/certification/closure.py",
           "engine/certification/engine.py",
           "engine/certification/errors.py"
-        ],
-        "engine.certification -> engine.runtime": [
-          "engine/certification/closure.py",
-          "engine/certification/engine.py"
         ],
         "engine.compiler -> engine.foundation": [
           "engine/compiler/data_compiler.py",
@@ -2354,12 +2278,9 @@
           "engine/universal_certification/engine.py"
         ],
         "engine.validation -> engine.foundation": [
+          "engine/validation/checks.py",
           "engine/validation/errors.py",
-          "engine/validation/executor.py",
-          "engine/validation/gates.py"
-        ],
-        "engine.validation -> engine.runtime": [
-          "engine/validation/checks.py"
+          "engine/validation/executor.py"
         ],
         "infrastructure -> engine.certification": [
           "infrastructure/band13.py",
@@ -3094,7 +3015,7 @@
           "service/tests/test_band11_freeze.py"
         ]
       },
-      "edges": 228,
+      "edges": 225,
       "id": "PLN-CODE",
       "kind": "python_import_graph",
       "nodes": 60,
@@ -3132,7 +3053,7 @@
         }
       ],
       "edge_sites": {},
-      "edges": 7566,
+      "edges": 7567,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
       "nodes": 1560,
@@ -3671,16 +3592,25 @@
     "conflicts": 0,
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 0,
-    "dirty_paths": [],
-    "head": "6980feff04e70e02650337d5001ac89386087a30",
+    "dirty_entries": 8,
+    "dirty_paths": [
+      "00-MASTER/UCOS-RIB-001/WP-002-CYCLE-ELIMINATION.md",
+      "engine/acceptance/engine.py",
+      "engine/acceptance/readiness.py",
+      "engine/certification/closure.py",
+      "engine/certification/engine.py",
+      "engine/foundation/contracts/disclosure.py",
+      "engine/runtime/disclosure.py",
+      "engine/validation/checks.py"
+    ],
+    "head": "088a853937f23f56a3dc261f00e70dcbb81e8357",
     "interrupted_operations": [],
-    "modified": 0,
+    "modified": 6,
     "tracked_files": 4891,
-    "untracked": 0,
-    "working_tree": "CLEAN"
+    "untracked": 2,
+    "working_tree": "DIRTY"
   },
-  "seal_sha256": "71334dbbef3ed2ce0299cc645de0827ff7194790a56b6184dcf8b81b6bbe2ddf",
+  "seal_sha256": "64a4e4cf88607f2248dc135c5b31f7f6cd07771a040b493e993b7082575fdf5c",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -13397,8 +13327,8 @@
       "consumers": 6,
       "corpus_artifacts": 0,
       "declared": "engine.acceptance",
-      "degree": 14,
-      "dependencies": 8,
+      "degree": 13,
+      "dependencies": 7,
       "dependency_units": [
         "engine.acceptance.contracts",
         "engine.acceptance.engine",
@@ -13406,10 +13336,9 @@
         "engine.acceptance.evidence",
         "engine.acceptance.gates",
         "engine.acceptance.readiness",
-        "engine.foundation",
-        "engine.runtime"
+        "engine.foundation"
       ],
-      "dependents": 35,
+      "dependents": 29,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -13432,7 +13361,7 @@
         "PLN-MODULE"
       ],
       "program": "engine",
-      "providers": 8,
+      "providers": 7,
       "reachable": true,
       "reachable_by": [
         "consumers",
@@ -13485,8 +13414,8 @@
       "consumers": 16,
       "corpus_artifacts": 0,
       "declared": "engine.certification",
-      "degree": 26,
-      "dependencies": 10,
+      "degree": 25,
+      "dependencies": 9,
       "dependency_units": [
         "engine.certification.closure",
         "engine.certification.contracts",
@@ -13496,10 +13425,9 @@
         "engine.certification.evidence",
         "engine.certification.integrity",
         "engine.certification.ledger",
-        "engine.foundation",
-        "engine.runtime"
+        "engine.foundation"
       ],
-      "dependents": 35,
+      "dependents": 24,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -13522,7 +13450,7 @@
         "PLN-MODULE"
       ],
       "program": "engine",
-      "providers": 10,
+      "providers": 9,
       "reachable": true,
       "reachable_by": [
         "consumers",
@@ -13585,7 +13513,7 @@
         "engine.foundation",
         "engine.registry"
       ],
-      "dependents": 36,
+      "dependents": 23,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -14239,7 +14167,7 @@
         "engine.knowledge.store",
         "engine.knowledge.validation"
       ],
-      "dependents": 35,
+      "dependents": 28,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -14326,7 +14254,7 @@
         "engine.registry.source",
         "engine.registry.volumes"
       ],
-      "dependents": 40,
+      "dependents": 31,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -14387,8 +14315,6 @@
       "consumer_units": [
         "application",
         "data",
-        "engine.acceptance",
-        "engine.certification",
         "engine.context",
         "engine.factory",
         "engine.factory.orchestrator",
@@ -14403,7 +14329,6 @@
         "engine.tests.validation.conftest",
         "engine.tests.validation.test_contracts",
         "engine.universal_certification",
-        "engine.validation",
         "infrastructure",
         "platform",
         "platform.commercial_intelligence",
@@ -14416,10 +14341,10 @@
         "service",
         "service.tests"
       ],
-      "consumers": 30,
+      "consumers": 27,
       "corpus_artifacts": 0,
       "declared": "engine.runtime",
-      "degree": 45,
+      "degree": 42,
       "dependencies": 15,
       "dependency_units": [
         "engine.acceptance",
@@ -14438,7 +14363,7 @@
         "engine.runtime.planner",
         "engine.validation"
       ],
-      "dependents": 35,
+      "dependents": 21,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -14675,11 +14600,10 @@
       "consumers": 20,
       "corpus_artifacts": 0,
       "declared": "engine.validation",
-      "degree": 28,
-      "dependencies": 8,
+      "degree": 27,
+      "dependencies": 7,
       "dependency_units": [
         "engine.foundation",
-        "engine.runtime",
         "engine.validation.checks",
         "engine.validation.contracts",
         "engine.validation.errors",
@@ -14687,7 +14611,7 @@
         "engine.validation.executor",
         "engine.validation.gates"
       ],
-      "dependents": 35,
+      "dependents": 25,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -14710,7 +14634,7 @@
         "PLN-MODULE"
       ],
       "program": "engine",
-      "providers": 8,
+      "providers": 7,
       "reachable": true,
       "reachable_by": [
         "consumers",
@@ -17711,10 +17635,10 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 0,
+      "measured": 8,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "criterion": "every discovered unit names a programme",
@@ -17857,10 +17781,10 @@
       "criterion": "no cycle of a non-benign declared class is present in any plane",
       "expect": 0,
       "id": "VER-08",
-      "measured": 3,
+      "measured": 0,
       "metric": "architectural_cycles",
       "name": "No circular dependency",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "criterion": "no unit is unreachable in every declared reachability dimension",

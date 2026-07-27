@@ -28,9 +28,9 @@ from engine.certification.contracts import (
     CertificationSubject,
 )
 from engine.certification.criteria import CertificationCriterion, default_criteria
+from engine.foundation.contracts.disclosure import build_disclosure
 from engine.foundation.obs.logging import get_logger
 from engine.foundation.obs.telemetry import trace
-from engine.runtime.disclosure import build_disclosure
 
 if TYPE_CHECKING:  # pragma: no cover - typing only
     from engine.validation.contracts import ValidationReport

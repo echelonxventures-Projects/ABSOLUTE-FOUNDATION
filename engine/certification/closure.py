@@ -31,8 +31,8 @@ from engine.certification.contracts import (
 )
 from engine.certification.errors import ProgramClosureError
 from engine.certification.ledger import CertificationLedger
+from engine.foundation.contracts.disclosure import build_disclosure
 from engine.foundation.obs.logging import get_logger
-from engine.runtime.disclosure import build_disclosure
 
 _logger = get_logger("certification.closure")
 

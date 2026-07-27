@@ -31,9 +31,9 @@ from engine.acceptance.contracts import (
 )
 from engine.acceptance.errors import AcceptanceRejectedError
 from engine.acceptance.gates import AcceptanceGate, default_gates
+from engine.foundation.contracts.disclosure import build_disclosure
 from engine.foundation.obs.logging import get_logger
 from engine.foundation.obs.telemetry import trace
-from engine.runtime.disclosure import build_disclosure
 
 _logger = get_logger("acceptance.engine")
 
