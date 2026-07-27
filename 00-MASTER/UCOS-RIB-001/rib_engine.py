@@ -264,7 +264,13 @@ def digest(payload: object) -> str:
     return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
-def git(*args: str) -> str:
+def git(*args: str, strip: bool = True) -> str:
+    """Run git and return stdout.
+
+    ``strip`` must be False for porcelain status: its records begin with a two-character
+    status field that is often a leading space, and stripping the whole output silently
+    shifts the first record by one character — turning a path into a different path.
+    """
     try:
         out = subprocess.run(  # noqa: S603 — fixed argv, no shell, no user input
             ["git", *args],  # noqa: S607 — resolved from PATH by design, as CI does
@@ -273,7 +279,7 @@ def git(*args: str) -> str:
             text=True,
             check=False,
         )
-        return out.stdout.strip()
+        return out.stdout.strip() if strip else out.stdout
     except OSError:
         return ""
 
@@ -329,9 +335,9 @@ def is_tracked(path: str) -> bool:
 
 
 def repository_state() -> dict:
-    porcelain = git("status", "--porcelain")
+    porcelain = git("status", "--porcelain", strip=False)
     entries = [line for line in porcelain.splitlines() if line.strip()]
-    conflicts = [line for line in tracked_conflicts()]
+    conflicts = list(tracked_conflicts())
     git_dir = REPO / ".git"
     interrupted = sorted(
         child.name
@@ -344,6 +350,7 @@ def repository_state() -> dict:
         "detached": not git("symbolic-ref", "-q", "HEAD"),
         "working_tree": "DIRTY" if entries else "CLEAN",
         "dirty_entries": len(entries),
+        "dirty_paths": sorted(line[3:].strip('"') for line in entries),
         "modified": len([line for line in entries if line[:2].strip() in {"M", "MM", "AM"}]),
         "deleted": len([line for line in entries if "D" in line[:2]]),
         "untracked": len([line for line in entries if line[:2] == "??"]),
@@ -1530,6 +1537,22 @@ def compute_metrics(
         "gap_findings": sum(record["count"] for record in gaps),
     }
     metrics.update(absence)
+    # Repository cleanliness excludes THIS programme's own regenerated artifacts, and
+    # nothing else. Those files are the deterministic output of the very command being
+    # gated — byte-identical for an unchanged repository state, which --check-determinism
+    # proves independently — so counting them would make the gate unsatisfiable by
+    # construction. The authored declaration, engine and README are NOT excluded: an
+    # uncommitted change to them is real repository dirt and is counted as such. The raw
+    # figure stays visible beside the narrowed one, so nothing is hidden.
+    generated = {
+        str(Path(HERE.relative_to(REPO)) / str(entry.get("file")))
+        for entry in section(decl, "outputs")
+    }
+    generated.add(str(Path(HERE.relative_to(REPO)) / MODEL_FILE))
+    metrics["generated_artifact_paths"] = sorted(generated)
+    metrics["dirty_entries_outside_generated"] = len(
+        [path for path in repo.get("dirty_paths", []) if path not in generated]
+    )
     for record in gaps:
         metrics[f"gap_count:{record['id']}"] = record["count"]
     for record in duplicates:
@@ -2040,7 +2063,11 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                 ["HEAD", f"`{model['repository']['head']}`"],
                 ["Detached", "YES" if model["repository"]["detached"] else "no"],
                 ["Working tree", model["repository"]["working_tree"]],
-                ["Dirty entries", str(model["repository"]["dirty_entries"])],
+                ["Dirty entries (raw)", str(model["repository"]["dirty_entries"])],
+                [
+                    "Dirty entries outside this programme's regenerated artifacts",
+                    str(m["dirty_entries_outside_generated"]),
+                ],
                 ["Modified", str(model["repository"]["modified"])],
                 ["Deleted", str(model["repository"]["deleted"])],
                 ["Untracked", str(model["repository"]["untracked"])],
@@ -2621,8 +2648,10 @@ def render(decl: dict, model: dict) -> dict[str, str]:
             [
                 [
                     "Repository clean",
-                    model["repository"]["working_tree"],
-                    "PASS" if not m["dirty_entries"] else "**FAIL**",
+                    f"{model['repository']['working_tree']} — "
+                    f"{m['dirty_entries_outside_generated']} entr(y/ies) outside this "
+                    f"programme's regenerated artifacts, {m['dirty_entries']} raw",
+                    "PASS" if not m["dirty_entries_outside_generated"] else "**FAIL**",
                 ],
                 [
                     "Verification",
@@ -2707,8 +2736,9 @@ def render(decl: dict, model: dict) -> dict[str, str]:
             [
                 [
                     "Repository is version-control clean",
-                    f"{m['dirty_entries']} dirty entr(y/ies)",
-                    "PASS" if not m["dirty_entries"] else "**FAIL**",
+                    f"{m['dirty_entries_outside_generated']} dirty entr(y/ies) outside this "
+                    f"programme's regenerated artifacts ({m['dirty_entries']} raw)",
+                    "PASS" if not m["dirty_entries_outside_generated"] else "**FAIL**",
                 ],
                 [
                     "Verification PASS",

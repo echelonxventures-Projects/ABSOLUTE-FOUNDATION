@@ -1353,8 +1353,8 @@
     {
       "id": "VAL-02",
       "name": "Repository",
-      "criterion": "the working tree is clean at the computed HEAD",
-      "metric": "dirty_entries",
+      "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
+      "metric": "dirty_entries_outside_generated",
       "expect": 0
     },
     {
@@ -1521,9 +1521,9 @@
       "id": "GATE-12",
       "name": "Repository Clean",
       "blocking": true,
-      "criterion": "the working tree carries no uncommitted entry",
+      "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
       "metrics": [
-        "dirty_entries"
+        "dirty_entries_outside_generated"
       ]
     }
   ],
@@ -1651,7 +1651,7 @@
       "requirement": "the repository must remain clean, deterministic, buildable and reproducible",
       "gate": "GATE-12",
       "severity_on_fail": "CRITICAL",
-      "remediation": "commit or discard every uncommitted entry into its canonical location before certification is asserted"
+      "remediation": "commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately"
     },
     {
       "id": "CMP-DISCOVERY",
