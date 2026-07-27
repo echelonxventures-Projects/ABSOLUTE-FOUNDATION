@@ -429,7 +429,8 @@ Per the mission's success criteria, **Mission-000004 is NOT started automaticall
 | Before execution (STEP-001) | empty — CLEAN | `4712da5` |
 | After generator reconciliation | empty — CLEAN | `e8d70f3` |
 | After intelligence regeneration | empty — CLEAN | `b47f5b9` |
-| After blueprint regeneration + this report | empty — CLEAN | this commit |
+| After blueprint regeneration + this report | empty — CLEAN | `b7431ca` |
+| Mission close | empty — CLEAN | this commit |
 
 Mission-owned commits, in order:
 
@@ -437,7 +438,8 @@ Mission-owned commits, in order:
 |---|---|
 | `e8d70f3` | `intelligence/rie/` — 6 generator files. No generated output. |
 | `b47f5b9` | `intelligence/UCOS-*.json` — 10 regenerated Repository Intelligence outputs. No code. |
-| this commit | `00-MASTER/UCOS-RIB-001/` — 16 regenerated blueprint artefacts, the README catalogue count (42 → 66), and this report. |
+| `b7431ca` | `00-MASTER/UCOS-RIB-001/` — 16 regenerated blueprint artefacts, the README catalogue count (42 → 66), and this report. |
+| this commit | this report — the anchor-delta disclosure below. |
 
 No unrelated modification is included in any of the three. The blueprint's own
 `GATE-12` (Repository Clean) reads `dirty_entries = 0` and `working_tree = CLEAN` at
@@ -447,5 +449,11 @@ One property is inherent and disclosed rather than worked around: a generated ar
 records the commit whose state it describes, which is necessarily its **parent** — a file
 cannot contain the hash of the commit that introduces it. The intelligence outputs are
 anchored at `e8d70f3` and committed in `b47f5b9`; the blueprint is anchored at `b47f5b9` and
-committed here. This is the same "regenerate at the committed anchor" convention WP-002
-established, and it is why the working tree is clean at every checkpoint above.
+committed in `b7431ca`. This is the same "regenerate at the committed anchor" convention
+WP-002 established, and it is why the working tree is clean at every checkpoint above.
+
+Re-running `make rib` / `make rib-gate` after this mission therefore rewrites the blueprint
+artefacts with a one-commit anchor delta. Verified: the only differences are
+`repository.head` and `repository.tracked_files` (+1, this report). Every metric, every
+verdict, all twelve gates and all 236 units are identical. That delta is the anchor moving,
+not the repository drifting.
