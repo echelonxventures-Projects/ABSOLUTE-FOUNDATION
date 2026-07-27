@@ -3142,9 +3142,9 @@
   ],
   "repository": {
     "branch": "programme/evo-usis-005",
-    "dirty_entries": 68,
-    "head": "f35eb299b9b54a3e22da18501527ce8a409597de",
-    "working_tree": "DIRTY"
+    "dirty_entries": 0,
+    "head": "fa3179ff4a669073077c302aa321af7934817783",
+    "working_tree": "CLEAN"
   },
   "seal_sha256": "8432609e10e719c6c2fef582f8f352a29e027e3ffe816e9eeed636f7c51eef40",
   "substrate": [
