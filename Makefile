@@ -265,3 +265,42 @@ uer-self:
 	@python3 00-MASTER/UER-000001/uer_engine.py --check-no-enumeration
 	@python3 00-MASTER/UER-000001/uer_engine.py --check-write-scope
 	@python3 00-MASTER/UER-000001/uer_engine.py --check-determinism
+
+
+
+# urrc: URRC-000001 — Repository Reality & Constitutional Completion.
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# The executable expression of the programme charter. It creates no catalogue, no
+# registry, no roadmap, no graph, no sequence and no authority: where a canonical owner
+# already exists it is bound by pointer and never restated; where none exists the fact is
+# derived from declared machine-readable substrate; where honest derivation is impossible
+# the absence is declared with a counted probe and the evidence class that would be
+# required. Every write lands inside 00-MASTER/URRC-000001/ (guarded, fail-closed).
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only. Adding a deliverable, matrix, gate,
+# substrate, derivation or binding mode is an edit to
+# 00-MASTER/URRC-000001/urrc-bindings.json and requires NO change to the engine.
+#
+# Exit 0 every blocking gate passed · 1 a blocking gate failed · 2 fail-closed abort
+# (the declaration or a required substrate is unusable, so no verdict may be asserted).
+.PHONY: urrc urrc-gate urrc-self
+urrc:
+	@python3 00-MASTER/URRC-000001/urrc_engine.py
+
+urrc-gate:
+	@python3 00-MASTER/URRC-000001/urrc_engine.py --gate
+
+# urrc-self: the eight guards over the programme's own surface — declaration integrity,
+# zero-enumeration (data-driven proof), forbidden-write scope, self-determinism, substrate
+# usability, no-fabrication, reuse-before-create (the zero-duplication invariant), and the
+# law-namespace guard that proves no emitted byte reintroduces the ratified law token.
+urrc-self:
+	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-declaration
+	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-no-enumeration
+	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-write-scope
+	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-determinism
+	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-substrate
+	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-no-fabrication
+	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-reuse-before-create
+	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-law-namespace
