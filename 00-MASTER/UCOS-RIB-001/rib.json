@@ -1,6 +1,15 @@
 {
   "compliance": [
     {
+      "finding": "dirty_entries_outside_generated=1",
+      "gate": "GATE-12",
+      "id": "CMP-CLEAN",
+      "rank": 1,
+      "remediation": "commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately",
+      "requirement": "the repository must remain clean, deterministic, buildable and reproducible",
+      "severity": "CRITICAL"
+    },
+    {
       "finding": "architectural_cycles=3",
       "gate": "GATE-10",
       "id": "CMP-ACYCLIC",
@@ -25,6 +34,15 @@
       "rank": 2,
       "remediation": "bind the orphan to a consumer, publish an interface for it, or disposition it for removal",
       "requirement": "zero orphan implementation",
+      "severity": "HIGH"
+    },
+    {
+      "finding": "validations_failed=1",
+      "gate": "GATE-04",
+      "id": "CMP-VALIDATE",
+      "rank": 2,
+      "remediation": "discharge the named validation obligation",
+      "requirement": "validation must pass",
       "severity": "HIGH"
     },
     {
@@ -1291,13 +1309,15 @@
     {
       "blocking": true,
       "criterion": "every validation obligation met",
-      "failures": [],
+      "failures": [
+        "validations_failed=1"
+      ],
       "id": "GATE-04",
       "metrics": [
         "validations_failed"
       ],
       "name": "Repository Validation",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "blocking": true,
@@ -1388,13 +1408,15 @@
     {
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
-      "failures": [],
+      "failures": [
+        "dirty_entries_outside_generated=1"
+      ],
       "id": "GATE-12",
       "metrics": [
         "dirty_entries_outside_generated"
       ],
       "name": "Repository Clean",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     }
   ],
   "matrices": [
@@ -1806,9 +1828,11 @@
     "benign_cycles": 2,
     "blocking_failed": [
       "GATE-03",
+      "GATE-04",
       "GATE-07",
       "GATE-10",
-      "GATE-11"
+      "GATE-11",
+      "GATE-12"
     ],
     "catalogue_records": 42,
     "certification_domains_failed": 0,
@@ -1823,12 +1847,12 @@
     },
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
-    "compliance_findings": 4,
+    "compliance_findings": 6,
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 0,
-    "dirty_entries_outside_generated": 0,
+    "dirty_entries": 1,
+    "dirty_entries_outside_generated": 1,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 12,
@@ -1860,7 +1884,7 @@
     "gap_count:GAP-VERIFICATION": 207,
     "gap_findings": 669,
     "gate_total": 12,
-    "gates_passed": 8,
+    "gates_passed": 6,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -1938,7 +1962,7 @@
     "universes_unresolved": 0,
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
-    "validations_failed": 0,
+    "validations_failed": 1,
     "verifications_failed": 3,
     "wave_total": 6
   },
@@ -3671,16 +3695,18 @@
     "conflicts": 0,
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 0,
-    "dirty_paths": [],
-    "head": "ad39f627cdbcc41a884bc868a3d1c4072307758f",
+    "dirty_entries": 1,
+    "dirty_paths": [
+      "00-MASTER/UCOS-RIB-001/rib_engine.py"
+    ],
+    "head": "d57ab5c1964460b36709f619fe021a4a33849694",
     "interrupted_operations": [],
-    "modified": 0,
+    "modified": 1,
     "tracked_files": 4891,
     "untracked": 0,
-    "working_tree": "CLEAN"
+    "working_tree": "DIRTY"
   },
-  "seal_sha256": "71334dbbef3ed2ce0299cc645de0827ff7194790a56b6184dcf8b81b6bbe2ddf",
+  "seal_sha256": "2850cdbb1857af699f5dca41921f80a27a6408bdbdb697d90b845e68072fe59e",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -17711,10 +17737,10 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 0,
+      "measured": 1,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "criterion": "every discovered unit names a programme",

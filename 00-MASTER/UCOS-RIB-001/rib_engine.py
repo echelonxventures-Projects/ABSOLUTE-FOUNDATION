@@ -2290,15 +2290,12 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                     for item in plane["cycles"]
                 ],
             )
-            named = {
-                key: value
-                for key, value in plane["edge_sites"].items()
-                if any(
-                    key.startswith(item["cycle"][0] + " ->")
-                    or key.split(" -> ")[0] in item["cycle"]
-                    for item in plane["architectural_cycles"]
-                )
+            cycle_edges = {
+                f"{item['cycle'][index]} -> {item['cycle'][index + 1]}"
+                for item in plane["architectural_cycles"]
+                for index in range(len(item["cycle"]) - 1)
             }
+            named = {key: value for key, value in plane["edge_sites"].items() if key in cycle_edges}
             if named:
                 body += "\n### The mediating modules of each non-benign cycle\n\n" + table(
                     ["Edge", "Import site(s)"],
