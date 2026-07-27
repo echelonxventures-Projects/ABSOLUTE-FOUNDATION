@@ -1,15 +1,6 @@
 {
   "compliance": [
     {
-      "finding": "dirty_entries_outside_generated=8",
-      "gate": "GATE-12",
-      "id": "CMP-CLEAN",
-      "rank": 1,
-      "remediation": "commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately",
-      "requirement": "the repository must remain clean, deterministic, buildable and reproducible",
-      "severity": "CRITICAL"
-    },
-    {
       "finding": "uncatalogued_units=23",
       "gate": "GATE-07",
       "id": "CMP-COVERAGE",
@@ -25,15 +16,6 @@
       "rank": 2,
       "remediation": "bind the orphan to a consumer, publish an interface for it, or disposition it for removal",
       "requirement": "zero orphan implementation",
-      "severity": "HIGH"
-    },
-    {
-      "finding": "validations_failed=1",
-      "gate": "GATE-04",
-      "id": "CMP-VALIDATE",
-      "rank": 2,
-      "remediation": "discharge the named validation obligation",
-      "requirement": "validation must pass",
       "severity": "HIGH"
     },
     {
@@ -1300,15 +1282,13 @@
     {
       "blocking": true,
       "criterion": "every validation obligation met",
-      "failures": [
-        "validations_failed=1"
-      ],
+      "failures": [],
       "id": "GATE-04",
       "metrics": [
         "validations_failed"
       ],
       "name": "Repository Validation",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "blocking": true,
@@ -1397,15 +1377,13 @@
     {
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
-      "failures": [
-        "dirty_entries_outside_generated=8"
-      ],
+      "failures": [],
       "id": "GATE-12",
       "metrics": [
         "dirty_entries_outside_generated"
       ],
       "name": "Repository Clean",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     }
   ],
   "matrices": [
@@ -1739,7 +1717,7 @@
       "id": "MSR-SOURCE",
       "kind": "owned_source_count",
       "purpose": "the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree",
-      "total": 1496,
+      "total": 1497,
       "units_with_value": 73
     },
     {
@@ -1747,7 +1725,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 4552,
+      "total": 4556,
       "units_with_value": 148
     },
     {
@@ -1817,10 +1795,8 @@
     "benign_cycles": 2,
     "blocking_failed": [
       "GATE-03",
-      "GATE-04",
       "GATE-07",
-      "GATE-11",
-      "GATE-12"
+      "GATE-11"
     ],
     "catalogue_records": 42,
     "certification_domains_failed": 0,
@@ -1835,12 +1811,12 @@
     },
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
-    "compliance_findings": 5,
+    "compliance_findings": 3,
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 8,
-    "dirty_entries_outside_generated": 8,
+    "dirty_entries": 0,
+    "dirty_entries_outside_generated": 0,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 12,
@@ -1872,7 +1848,7 @@
     "gap_count:GAP-VERIFICATION": 207,
     "gap_findings": 669,
     "gate_total": 12,
-    "gates_passed": 7,
+    "gates_passed": 9,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -1950,7 +1926,7 @@
     "universes_unresolved": 0,
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
-    "validations_failed": 1,
+    "validations_failed": 0,
     "verifications_failed": 2,
     "wave_total": 6
   },
@@ -3056,7 +3032,7 @@
       "edges": 7567,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
-      "nodes": 1560,
+      "nodes": 1561,
       "purpose": "the module-granularity import plane, where a true Python import cycle would break execution",
       "unit_class": "IMPLEMENTATION",
       "unresolved_edges": 0
@@ -3592,25 +3568,16 @@
     "conflicts": 0,
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 8,
-    "dirty_paths": [
-      "00-MASTER/UCOS-RIB-001/WP-002-CYCLE-ELIMINATION.md",
-      "engine/acceptance/engine.py",
-      "engine/acceptance/readiness.py",
-      "engine/certification/closure.py",
-      "engine/certification/engine.py",
-      "engine/foundation/contracts/disclosure.py",
-      "engine/runtime/disclosure.py",
-      "engine/validation/checks.py"
-    ],
-    "head": "088a853937f23f56a3dc261f00e70dcbb81e8357",
+    "dirty_entries": 0,
+    "dirty_paths": [],
+    "head": "6dae4368b8b569a6aed8a66f23df7b1458a95ef6",
     "interrupted_operations": [],
-    "modified": 6,
-    "tracked_files": 4891,
-    "untracked": 2,
-    "working_tree": "DIRTY"
+    "modified": 0,
+    "tracked_files": 4893,
+    "untracked": 0,
+    "working_tree": "CLEAN"
   },
-  "seal_sha256": "64a4e4cf88607f2248dc135c5b31f7f6cd07771a040b493e993b7082575fdf5c",
+  "seal_sha256": "820ee39f2a7f7c37c41713dba14a593f48f3e0ff8f662c880756820b41c81172",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -7518,7 +7485,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 840,
+      "tracked_files": 841,
       "unique_id": "UCOS-RIB-001-CAP-0068",
       "unit_class": "CAPABILITY",
       "unit_key": "00-MASTER",
@@ -7862,7 +7829,7 @@
         "DSC-PROGRAMME"
       ],
       "superseded_by": "",
-      "tracked_files": 19,
+      "tracked_files": 20,
       "unique_id": "UCOS-RIB-001-CAP-0075",
       "unit_class": "OPERATIONAL-PROGRAMME",
       "unit_key": "00-MASTER.UCOS-RIB-001",
@@ -13306,7 +13273,7 @@
         "DSC-CODE-ROOT"
       ],
       "superseded_by": "",
-      "tracked_files": 421,
+      "tracked_files": 422,
       "unique_id": "UCOS-RIB-001-CAP-0181",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "engine",
@@ -13961,13 +13928,13 @@
       "rie_reuse": "REUSE_AS_IS/COMPOSE",
       "rie_status": "CERTIFIED",
       "root": "engine",
-      "source_files": 7,
+      "source_files": 8,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 12,
+      "tracked_files": 13,
       "unique_id": "UCOS-RIB-001-CAP-0189",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "engine.foundation",
@@ -17635,10 +17602,10 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 8,
+      "measured": 0,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "criterion": "every discovered unit names a programme",
