@@ -20,7 +20,8 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from typing import Any
 
-from .canonical import sha256_file
+from . import __version__
+from .canonical import canonical_json, sha256_file, sha256_text
 from .config import RepoConfig
 
 _DATA_FILES = (
@@ -83,6 +84,19 @@ class EvidenceReader:
     def head(self) -> str:
         return self._git("rev-parse", "--short", "HEAD") or "UNKNOWN"
 
+    def head_commit(self) -> str:
+        """The full source commit the outputs are derived at."""
+        return self._git("rev-parse", "HEAD") or "UNKNOWN"
+
+    def head_committed_at(self) -> str:
+        """HEAD's committer date, strict ISO-8601.
+
+        Generation time is taken from the source commit, never from the wall
+        clock: the mandated generation timestamp must not make a regeneration of
+        an unchanged repository produce different bytes.
+        """
+        return self._git("show", "-s", "--format=%cI", "HEAD") or "UNKNOWN"
+
     def branch(self) -> str:
         return self._git("rev-parse", "--abbrev-ref", "HEAD") or "UNKNOWN"
 
@@ -105,6 +119,28 @@ class EvidenceReader:
         return res.stdout.strip() if res.returncode == 0 else ""
 
     # -- determinism fingerprint ----------------------------------------
+    def _coverage_fingerprint(self) -> str:
+        """Fingerprint coverage by the measurement consumed, not by the file bytes.
+
+        ``coverage.xml`` embeds a wall-clock ``timestamp`` attribute, so its byte
+        hash changes on every test run even when the measurement is identical.
+        Hashing the four values the engine actually reads keeps the fingerprint a
+        function of repository state, which is what makes regeneration reproducible.
+        """
+        cov = self.coverage()
+        if not cov.available:
+            return "absent"
+        return sha256_text(
+            canonical_json(
+                {
+                    "branch_pct": cov.branch_pct,
+                    "line_pct": cov.line_pct,
+                    "lines_covered": cov.lines_covered,
+                    "lines_valid": cov.lines_valid,
+                }
+            )
+        )
+
     def state_fingerprint(self) -> dict[str, Any]:
         """A content fingerprint of all evidence inputs + HEAD.
 
@@ -114,9 +150,48 @@ class EvidenceReader:
             self.config.rel(self.config.data_file(n)): sha256_file(self.config.data_file(n))
             for n in _DATA_FILES
         }
-        files[self.config.rel(self.config.coverage_xml)] = sha256_file(self.config.coverage_xml)
         return {
             "head": self.head(),
             "branch": self.branch(),
             "evidence_files": files,
+            "coverage_measurement": {
+                "source": self.config.rel(self.config.coverage_xml),
+                "fingerprint": self._coverage_fingerprint(),
+                "basis": (
+                    "the consumed measurement, not the file bytes — coverage.xml embeds a "
+                    "wall-clock timestamp, so a byte hash would make every regeneration differ "
+                    "with no change in repository state"
+                ),
+            },
         }
+
+    # -- generation provenance ------------------------------------------
+    def generation_state(self) -> dict[str, Any]:
+        """The provenance block every generated artefact carries.
+
+        Records the source commit, the generator, the generation timestamp, the
+        input hash and where the output hash lives. Every field is derived from
+        repository state, so regenerating at the same commit reproduces the same
+        bytes — provenance that cannot be reproduced is not provenance.
+        """
+        if "generation_state" not in self._cache:
+            fingerprint = self.state_fingerprint()
+            self._cache["generation_state"] = {
+                "generator": "UCOS-RIE-001 Repository Intelligence Engine",
+                "generator_version": __version__,
+                "source_commit": self.head_commit(),
+                "repository_head": {"ref": fingerprint["branch"], "commit": fingerprint["head"]},
+                "generation_timestamp": self.head_committed_at(),
+                "generation_timestamp_basis": (
+                    "committer date of the source commit — the wall clock is excluded so that "
+                    "regeneration at an unchanged repository state is byte-reproducible"
+                ),
+                "input_hash": sha256_text(canonical_json(fingerprint)),
+                "input_hash_basis": (
+                    "sha256 over the canonical evidence fingerprint — every evidence file hash, "
+                    "the coverage measurement fingerprint, and HEAD, which pins the whole "
+                    "tracked tree"
+                ),
+                "output_hash_field": "content_hash",
+            }
+        return dict(self._cache["generation_state"])

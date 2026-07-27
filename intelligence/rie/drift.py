@@ -40,20 +40,27 @@ def detect(current: dict[str, Any], prior: dict[str, Any] | None) -> dict[str, A
 
 
 def _cap_index(model: dict[str, Any]) -> dict[str, str]:
+    """Capability status by canonical name.
+
+    Keyed on the canonical name, not on ``unique_id``: the id is an ordinal over
+    the discovered catalogue, so inserting a capability shifts every later id and
+    a drift report keyed on it would attribute changes to the wrong capability.
+    The canonical name is the capability's identity.
+    """
     caps = model.get("capabilities", [])
-    return {c["unique_id"]: c.get("implementation_status", "?") for c in caps}
+    return {c["canonical_name"]: c.get("implementation_status", "?") for c in caps}
 
 
 def _impl_drift(cur: dict[str, Any], prior: dict[str, Any]) -> list[dict[str, str]]:
     now, was = _cap_index(cur), _cap_index(prior)
     drift: list[dict[str, str]] = []
-    for cid, status in sorted(now.items()):
-        if cid not in was:
-            drift.append({"capability": cid, "change": "ADDED", "status": status})
-        elif was[cid] != status:
-            drift.append({"capability": cid, "change": "STATUS", "from": was[cid], "to": status})
-    for cid in sorted(set(was) - set(now)):
-        drift.append({"capability": cid, "change": "REMOVED", "was": was[cid]})
+    for name, status in sorted(now.items()):
+        if name not in was:
+            drift.append({"capability": name, "change": "ADDED", "status": status})
+        elif was[name] != status:
+            drift.append({"capability": name, "change": "STATUS", "from": was[name], "to": status})
+    for name in sorted(set(was) - set(now)):
+        drift.append({"capability": name, "change": "REMOVED", "was": was[name]})
     return drift
 
 

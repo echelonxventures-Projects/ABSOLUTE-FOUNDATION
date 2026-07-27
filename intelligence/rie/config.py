@@ -5,6 +5,9 @@ walking upward from the current file until it finds the evidence markers
 (``00-BOOK/DATA`` and ``engine``). A caller may override the root explicitly,
 making the engine usable against any UCOS-shaped repository.
 
+The code roots are likewise never hardcoded: they are DERIVED from Repository
+Truth (see :func:`discover_code_roots`). A caller may still override them.
+
 Storage-agnosticism: outputs are emitted through :class:`OutputSink`. The
 default :class:`FileSink` writes JSON files, but any sink (SQL, object store,
 in-memory) satisfying the interface may be substituted without touching the
@@ -13,6 +16,7 @@ engine.
 
 from __future__ import annotations
 
+import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -29,6 +33,44 @@ def resolve_repo_root(start: Path | None = None) -> Path:
     return Path(__file__).resolve().parents[2]
 
 
+def discover_code_roots(repo_root: Path) -> tuple[str, ...]:
+    """Derive every top-level Python code root from Repository Truth.
+
+    A code root is a top-level directory that is a Python package — i.e. a
+    tracked ``<root>/__init__.py``. The version-controlled file set is the
+    eligibility boundary (``git ls-files``), with a deterministic filesystem
+    walk as the fallback for a non-git checkout (repository-agnosticism).
+
+    This is deliberately *derived* rather than declared. A hardcoded root list
+    is what let the capability catalogue drift: code roots added after the list
+    was written were invisible to discovery, so their packages could never be
+    catalogued and capability coverage silently fell behind the repository.
+    """
+    names: set[str] = set()
+    try:
+        res = subprocess.run(  # noqa: S603
+            ["git", "ls-files", ":(glob)*/__init__.py"],  # noqa: S607 - fixed argv, no shell
+            cwd=repo_root,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        res = None
+    if res is not None and res.returncode == 0 and res.stdout.strip():
+        names = {line.split("/", 1)[0] for line in res.stdout.split() if "/" in line}
+    else:
+        names = {
+            child.name
+            for child in repo_root.iterdir()
+            if child.is_dir()
+            and not child.name.startswith(".")
+            and (child / "__init__.py").exists()
+        }
+    return tuple(sorted(names))
+
+
 @dataclass(frozen=True)
 class RepoConfig:
     """Resolved, evidence-source locations. All paths are repository-relative."""
@@ -37,7 +79,7 @@ class RepoConfig:
     data_dir: Path
     coverage_xml: Path
     output_dir: Path
-    code_roots: tuple[str, ...] = ("engine", "platform")
+    code_roots: tuple[str, ...] = ()
     tool_dir: str = "00-BOOK/tools"
     mcs_dir: str = "00-MASTER"
     orchestration_specs: tuple[str, ...] = (
@@ -50,13 +92,19 @@ class RepoConfig:
     )
 
     @classmethod
-    def create(cls, repo_root: Path | None = None, output_subdir: str = "intelligence") -> RepoConfig:
+    def create(
+        cls,
+        repo_root: Path | None = None,
+        output_subdir: str = "intelligence",
+        code_roots: tuple[str, ...] | None = None,
+    ) -> RepoConfig:
         root = (repo_root or resolve_repo_root()).resolve()
         return cls(
             repo_root=root,
             data_dir=root / "00-BOOK" / "DATA",
             coverage_xml=root / "coverage.xml",
             output_dir=root / output_subdir,
+            code_roots=tuple(code_roots) if code_roots else discover_code_roots(root),
         )
 
     def data_file(self, name: str) -> Path:

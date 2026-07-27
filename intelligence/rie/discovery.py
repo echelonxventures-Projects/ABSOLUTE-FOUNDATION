@@ -1,11 +1,20 @@
 """Capability discovery — enumerate realized capabilities from the substrate.
 
-Discovery is genuine, not hardcoded: the engine scans the code roots for Python
-sub-packages (each ``<root>/<name>/`` with an ``__init__.py`` is a capability),
-reads the first line of the package docstring as its description, and derives
-metrics from the census. It also records the automation tools, operational
-memory (MCS), corpus, and the orchestration specifications (CIOA/CCE) whose
-presence-without-code marks them PLANNED.
+Discovery is genuine, not hardcoded. The unit universe is derived from the
+version-control eligibility boundary (``git ls-files``), which is the same
+Repository Truth the Repository Integration Blueprint discovers over:
+
+  * every tracked ``<root>/__init__.py``   — a code root
+  * every tracked ``<root>/<pkg>/__init__.py`` — a package inside a code root
+
+The first line of each package docstring is read as its description and metrics
+are derived from the census. Discovery also records the automation tools,
+operational memory (MCS), corpus, and the orchestration specifications
+(CIOA/CCE) whose presence-without-code marks them PLANNED.
+
+Nothing is filtered out on aesthetic grounds. A test package is a tracked
+implementation unit and is catalogued as one; excluding it created a permanent,
+uncloseable capability-coverage gap against the repository's own inventory.
 """
 
 from __future__ import annotations
@@ -15,7 +24,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 from .evidence import EvidenceReader
-from .knowledge import CATEGORY_POLICY
+from .knowledge import policy_for
 
 
 @dataclass(frozen=True)
@@ -45,15 +54,41 @@ def _docline(init_py: Path) -> str:
     return first[:160]
 
 
-def _subpackages(base: Path) -> list[Path]:
+def _package_locations(reader: EvidenceReader, root: str) -> list[str]:
+    """Tracked package locations inside *root*, repository-relative and sorted.
+
+    Derived from ``git ls-files``; falls back to a deterministic filesystem walk
+    so the engine remains usable in a non-git checkout.
+    """
+    base = reader.config.repo_root / root
+    tracked = reader.tracked(f":(glob){root}/*/__init__.py")
+    if tracked:
+        return sorted({rel.rsplit("/", 1)[0] for rel in tracked})
     if not base.exists():
         return []
     return sorted(
-        d for d in base.iterdir()
-        if d.is_dir()
-        and (d / "__init__.py").exists()
-        and not d.name.startswith("_")
-        and d.name != "tests"
+        f"{root}/{d.name}"
+        for d in base.iterdir()
+        if d.is_dir() and (d / "__init__.py").exists() and not d.name.startswith(".")
+    )
+
+
+def _code_capability(reader: EvidenceReader, seq: int, root: str, location: str) -> Capability:
+    """One catalogue record for one tracked Python package."""
+    policy = policy_for(root)
+    init_py = reader.config.repo_root / location / "__init__.py"
+    name = location.replace("/", ".")
+    return Capability(
+        unique_id=f"RC-{seq:02d}",
+        canonical_name=name,
+        canonical_location=location,
+        category=root,
+        authority=str(policy["authority"]),
+        reuse=str(policy["reuse"]),
+        replacement_prohibited=bool(policy["replacement_prohibited"]),
+        implementation_status=str(policy["status"]),
+        description=_docline(init_py),
+        evidence_present=init_py.exists(),
     )
 
 
@@ -62,30 +97,20 @@ def discover(reader: EvidenceReader) -> list[Capability]:
     caps: list[Capability] = []
     seq = 0
 
-    # 1. Realized code sub-packages under each code root.
+    # 1. Every tracked Python code root, and every tracked package inside it.
     for root in cfg.code_roots:
-        policy = CATEGORY_POLICY.get(root, CATEGORY_POLICY["engine"])
-        for pkg in _subpackages(cfg.repo_root / root):
+        seq += 1
+        caps.append(_code_capability(reader, seq, root, root))
+        for location in _package_locations(reader, root):
             seq += 1
-            caps.append(Capability(
-                unique_id=f"RC-{seq:02d}",
-                canonical_name=f"{root}.{pkg.name}",
-                canonical_location=cfg.rel(pkg),
-                category=root,
-                authority=str(policy["authority"]),
-                reuse=str(policy["reuse"]),
-                replacement_prohibited=bool(policy["replacement_prohibited"]),
-                implementation_status="CERTIFIED" if root == "engine" else "IMPLEMENTED",
-                description=_docline(pkg / "__init__.py"),
-                evidence_present=True,
-            ))
+            caps.append(_code_capability(reader, seq, root, location))
 
     # 2. Automation tools (presence-derived).
     tool_dir = cfg.repo_root / cfg.tool_dir
     for tool in ("ukb.py", "ukbx.py", "register.sh"):
         if (tool_dir / tool).exists():
             seq += 1
-            pol = CATEGORY_POLICY["automation"]
+            pol = policy_for("automation")
             caps.append(Capability(
                 unique_id=f"RC-{seq:02d}",
                 canonical_name=f"automation/{tool}",
@@ -94,7 +119,7 @@ def discover(reader: EvidenceReader) -> list[Capability]:
                 authority=str(pol["authority"]),
                 reuse=str(pol["reuse"]),
                 replacement_prohibited=bool(pol["replacement_prohibited"]),
-                implementation_status="IMPLEMENTED",
+                implementation_status=str(pol["status"]),
                 description=f"Repository automation tool {tool}",
                 evidence_present=True,
             ))
@@ -102,7 +127,7 @@ def discover(reader: EvidenceReader) -> list[Capability]:
     # 3. Operational memory (MCS).
     if (cfg.repo_root / cfg.mcs_dir).exists():
         seq += 1
-        pol = CATEGORY_POLICY["operational_memory"]
+        pol = policy_for("operational_memory")
         caps.append(Capability(
             unique_id=f"RC-{seq:02d}",
             canonical_name="master-context-system",
@@ -111,7 +136,7 @@ def discover(reader: EvidenceReader) -> list[Capability]:
             authority=str(pol["authority"]),
             reuse=str(pol["reuse"]),
             replacement_prohibited=bool(pol["replacement_prohibited"]),
-            implementation_status="IMPLEMENTED",
+            implementation_status=str(pol["status"]),
             description="Master Context System (state-driven operational memory)",
             evidence_present=True,
         ))
@@ -120,7 +145,7 @@ def discover(reader: EvidenceReader) -> list[Capability]:
     for spec in cfg.orchestration_specs:
         spec_path = cfg.repo_root / spec
         seq += 1
-        pol = CATEGORY_POLICY["orchestration_spec"]
+        pol = policy_for("orchestration_spec")
         name = "CIOA" if "000000" in spec else "CCE"
         caps.append(Capability(
             unique_id=f"SPEC-{name}",
@@ -130,7 +155,7 @@ def discover(reader: EvidenceReader) -> list[Capability]:
             authority=str(pol["authority"]),
             reuse=str(pol["reuse"]),
             replacement_prohibited=bool(pol["replacement_prohibited"]),
-            implementation_status="PLANNED",
+            implementation_status=str(pol["status"]),
             description="Orchestration authority — specification only (no executable code)",
             evidence_present=spec_path.exists(),
         ))

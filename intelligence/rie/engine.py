@@ -38,6 +38,7 @@ def _envelope(reader: EvidenceReader, artifact_id: str, title: str) -> dict[str,
         "producer": f"UCOS-RIE-001 Repository Intelligence Engine v{__version__}",
         "authority": _AUTHORITY,
         "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
+        "generation": reader.generation_state(),
         "evidence_state": reader.state_fingerprint(),
         "evidence_timestamp": reader.control_tower().get("generated_at"),
     }

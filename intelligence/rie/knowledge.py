@@ -16,16 +16,94 @@ derives the values).
 
 from __future__ import annotations
 
-# Category → (reuse disposition, replacement_prohibited). Derived facts such as
-# status/coverage/tests are NOT here; only the durable engineering policy is.
+# Category → (reuse disposition, replacement_prohibited, authority, status). Derived
+# facts such as coverage/tests are NOT here; only the durable engineering policy is.
+# Every posture below is quoted from the code root's own package docstring, which is
+# the repository's own statement about that layer.
 CATEGORY_POLICY: dict[str, dict[str, object]] = {
-    "engine": {"reuse": "REUSE_AS_IS/COMPOSE", "replacement_prohibited": True, "authority": "EC-1 CERTIFIED"},
-    "platform": {"reuse": "REUSE/COMPOSE", "replacement_prohibited": True, "authority": "EC-2 CLOSED/FROZEN"},
-    "automation": {"reuse": "REUSE/EXTEND", "replacement_prohibited": False, "authority": "ACTIVE"},
-    "operational_memory": {"reuse": "REUSE/EXTEND", "replacement_prohibited": False, "authority": "ACTIVE (AUTHORITY=NONE)"},
-    "orchestration_spec": {"reuse": "REALIZE_BY_COMPOSITION", "replacement_prohibited": False, "authority": "SPEC (AUTHORITY=NONE)"},
-    "corpus": {"reuse": "REUSE_AS_IS (read-only)", "replacement_prohibited": True, "authority": "FROZEN / GOVERNANCE"},
+    "engine": {
+        "reuse": "REUSE_AS_IS/COMPOSE",
+        "replacement_prohibited": True,
+        "authority": "EC-1 CERTIFIED",
+        "status": "CERTIFIED",
+    },
+    "platform": {
+        "reuse": "REUSE/COMPOSE",
+        "replacement_prohibited": True,
+        "authority": "EC-2 CLOSED/FROZEN",
+        "status": "IMPLEMENTED",
+    },
+    "data": {
+        "reuse": "REUSE/EXTEND",
+        "replacement_prohibited": False,
+        "authority": "EC-3 BAND 10 (DATA) REALIZATION",
+        "status": "IMPLEMENTED",
+    },
+    "service": {
+        "reuse": "REUSE/EXTEND",
+        "replacement_prohibited": False,
+        "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
+        "status": "IMPLEMENTED",
+    },
+    "application": {
+        "reuse": "REUSE/EXTEND",
+        "replacement_prohibited": False,
+        "authority": "EC-3 BAND 12 (APPLICATION) REALIZATION",
+        "status": "IMPLEMENTED",
+    },
+    "infrastructure": {
+        "reuse": "REUSE/EXTEND",
+        "replacement_prohibited": False,
+        "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
+        "status": "IMPLEMENTED",
+    },
+    "intelligence": {
+        "reuse": "REUSE/EXTEND",
+        "replacement_prohibited": False,
+        "authority": "ADDITIVE (AUTHORITY=NONE)",
+        "status": "IMPLEMENTED",
+    },
+    "automation": {
+        "reuse": "REUSE/EXTEND",
+        "replacement_prohibited": False,
+        "authority": "ACTIVE",
+        "status": "IMPLEMENTED",
+    },
+    "operational_memory": {
+        "reuse": "REUSE/EXTEND",
+        "replacement_prohibited": False,
+        "authority": "ACTIVE (AUTHORITY=NONE)",
+        "status": "IMPLEMENTED",
+    },
+    "orchestration_spec": {
+        "reuse": "REALIZE_BY_COMPOSITION",
+        "replacement_prohibited": False,
+        "authority": "SPEC (AUTHORITY=NONE)",
+        "status": "PLANNED",
+    },
+    "corpus": {
+        "reuse": "REUSE_AS_IS (read-only)",
+        "replacement_prohibited": True,
+        "authority": "FROZEN / GOVERNANCE",
+        "status": "IMPLEMENTED",
+    },
 }
+
+# Fallback for a category with no declared policy. Fail-closed: an undeclared
+# category is reported as INDETERMINATE rather than inheriting another layer's
+# authority. Inheriting ``engine``'s policy would have any newly discovered code
+# root falsely claim EC-1 certification — a fabricated fact.
+UNCLASSIFIED_POLICY: dict[str, object] = {
+    "reuse": "INDETERMINATE",
+    "replacement_prohibited": False,
+    "authority": "UNCLASSIFIED (no category policy declared)",
+    "status": "INDETERMINATE",
+}
+
+
+def policy_for(category: str) -> dict[str, object]:
+    """Return the declared policy for *category*, or the fail-closed fallback."""
+    return CATEGORY_POLICY.get(category, UNCLASSIFIED_POLICY)
 
 # Known AEOS execution-spine gaps (curated from ADR-0002 determination). The
 # engine reports these as PLANNED work; it does NOT implement them.
