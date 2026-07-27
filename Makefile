@@ -47,6 +47,9 @@ help:
 	@echo "  make ucda          regenerate the UCDA-000001 decision-assimilation determinations"
 	@echo "  make ucda-gate     fail-closed Implementation Evidence Gate (CEP-002 Art 28)"
 	@echo "  make ucda-self     UCDA guards over its own surface"
+	@echo "  make uer           regenerate the UER-000001 execution-resilience determinations (Ω∞-001A)"
+	@echo "  make uer-gate      fail-closed Execution Resilience Gate (Ω∞-001A exit criteria)"
+	@echo "  make uer-self      UER guards over its own surface"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
 
@@ -224,3 +227,41 @@ ucda-self:
 	@python3 00-MASTER/UCDA-000001/ucda_engine.py --check-no-enumeration
 	@python3 00-MASTER/UCDA-000001/ucda_engine.py --check-write-scope
 	@python3 00-MASTER/UCDA-000001/ucda_engine.py --check-determinism
+
+
+
+# uer: UER-000001 — Universal Execution Resilience (UCOS Ω∞ Programme Ω∞-001A).
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# The executable expression of the Execution Resilience contract. It creates no
+# checkpoint, journal, recovery, atomic-write, resume, ledger, continuation, replay,
+# repository-safety or health engine: every one already exists and is certified
+# (engine/runtime/execution — EPIC-RTE-002; platform/repository_operations;
+# 00-BOOK/tools/governance_telemetry.py; the master recovery/execution instruments).
+# It BINDS them into one contract that every future autonomous programme inherits, and
+# verifies from Repository Truth that each binding resolves, then emits the fourteen
+# constitutional deliverables — the last of which is the continuation package — into
+# 00-MASTER/UER-000001/.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside its own
+# operational-memory directory (guarded, fail-closed). Binding a newly proven gap is an
+# entry in 00-MASTER/UER-000001/uer-resilience.json and requires NO change to the engine.
+#
+# Exit 0 gate OPEN · 1 gate CLOSED (a capability/validation/exit criterion is unsatisfied)
+# · 2 fail-closed abort (declaration unusable — no verdict may be asserted).
+.PHONY: uer uer-gate uer-self
+uer:
+	@python3 00-MASTER/UER-000001/uer_engine.py
+
+uer-gate:
+	@python3 00-MASTER/UER-000001/uer_engine.py --gate
+
+# uer-self: the programme's guards over its own surface — declaration integrity
+# (every home/evidence/programme reference resolves; every pipeline step, validation and
+# exit criterion is bound to a declared capability/validation), zero-enumeration /
+# data-driven proof, forbidden-write scope, self-determinism.
+uer-self:
+	@python3 00-MASTER/UER-000001/uer_engine.py --check-declaration
+	@python3 00-MASTER/UER-000001/uer_engine.py --check-no-enumeration
+	@python3 00-MASTER/UER-000001/uer_engine.py --check-write-scope
+	@python3 00-MASTER/UER-000001/uer_engine.py --check-determinism

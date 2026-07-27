@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "UER-000001 Execution Resilience Gate",
+      "trigger": "SessionStart",
+      "description": "Runs the UER-000001 Execution Resilience Gate at session start, so the execution-resilience posture of the platform (capability coverage, validations satisfied, exit criteria met, evidence references, gate outcome, seal) is surfaced from Repository Truth. This is the executable expression of UCOS Ω∞ Programme Ω∞-001A: every future autonomous programme inherits deterministic checkpointing, recovery, resumability and execution safety by binding the infrastructure that already exists. Deterministic, stdlib-only, non-blocking at session start; fail-closed as a gate. AUTHORITY = NONE (DERIVED TRUTH).",
+      "action": {
+        "type": "command",
+        "command": "python3 00-MASTER/UER-000001/uer_engine.py 2>/dev/null | grep '^UER-000001:' || true",
+        "timeout": 120
+      }
+    }
+  ]
+}
