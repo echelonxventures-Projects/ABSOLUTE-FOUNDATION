@@ -8533,9 +8533,44 @@
       "page_start": 9584,
       "page_count": 4,
       "first_seen": "2026-07-26T07:35:05+00:00"
+    },
+    "platform/providers/TEMPLATE.provider.json": {
+      "universal_id": "UCOS-PLT-000052",
+      "category": "PLT",
+      "page_start": 9588,
+      "page_count": 1,
+      "first_seen": "2026-07-27T16:26:49+00:00"
+    },
+    "platform/providers/catalog/declared-providers.json": {
+      "universal_id": "UCOS-PLT-000053",
+      "category": "PLT",
+      "page_start": 9589,
+      "page_count": 9,
+      "first_seen": "2026-07-27T16:26:49+00:00"
+    },
+    "platform/providers/catalog/repository.json": {
+      "universal_id": "UCOS-PLT-000054",
+      "category": "PLT",
+      "page_start": 9598,
+      "page_count": 1,
+      "first_seen": "2026-07-27T16:26:49+00:00"
+    },
+    "platform/universal_assurance/data/ucos-assurance-policy.json": {
+      "universal_id": "UCOS-PLT-000055",
+      "category": "PLT",
+      "page_start": 9599,
+      "page_count": 14,
+      "first_seen": "2026-07-27T16:26:49+00:00"
+    },
+    "platform/universal_assurance/data/ucos-assurance-selfcheck.json": {
+      "universal_id": "UCOS-PLT-000056",
+      "category": "PLT",
+      "page_start": 9613,
+      "page_count": 6,
+      "first_seen": "2026-07-27T16:26:49+00:00"
     }
   },
-  "page_cursor": 9587,
+  "page_cursor": 9618,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8554,7 +8589,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 51,
+    "PLT": 56,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -23545,6 +23580,61 @@
         "status": "ACTIVE",
         "path": "02-MASTER/UCCEP-000000-UNIVERSAL-CONTINUOUS-CONSTITUTIONAL-EVOLUTION-PROGRAMME-CHARTER.md",
         "name": "UCOS Ω∞ — UCCEP-000000 · UNIVERSAL CONTINUOUS CONSTITUTIONAL EVOLUTION PROGRAMME CHARTER"
+      }
+    ],
+    "UCOS-PLT-000052": [
+      {
+        "seq": 1,
+        "at": "2026-07-27T16:26:49+00:00",
+        "content_hash": "9b499874eae6912053edd30fbc2a87a622c3db1be414095cb5eb2c107f561b45",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/providers/TEMPLATE.provider.json",
+        "name": "Template.Provider"
+      }
+    ],
+    "UCOS-PLT-000053": [
+      {
+        "seq": 1,
+        "at": "2026-07-27T16:26:49+00:00",
+        "content_hash": "bcb8ba61f8075edce5bf6c7a0193a8ea8048eb9d5620534c57a82c7fb8b4b649",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/providers/catalog/declared-providers.json",
+        "name": "Declared Providers"
+      }
+    ],
+    "UCOS-PLT-000054": [
+      {
+        "seq": 1,
+        "at": "2026-07-27T16:26:49+00:00",
+        "content_hash": "b8594703f57f01d70d5a64a25e7f5a9f0492a66460f7d179ded5c9e62d5b42e4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/providers/catalog/repository.json",
+        "name": "Repository"
+      }
+    ],
+    "UCOS-PLT-000055": [
+      {
+        "seq": 1,
+        "at": "2026-07-27T16:26:49+00:00",
+        "content_hash": "41d23d3545ca5168da788c7863b2febaa011b252a0d10043d91a05046d6904ad",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_assurance/data/ucos-assurance-policy.json",
+        "name": "Ucos Assurance Policy"
+      }
+    ],
+    "UCOS-PLT-000056": [
+      {
+        "seq": 1,
+        "at": "2026-07-27T16:26:49+00:00",
+        "content_hash": "cd9ae5d7d52f9e494cdc59990d9e89a55882b8327ea032217ed0957c71f48229",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_assurance/data/ucos-assurance-selfcheck.json",
+        "name": "Ucos Assurance Selfcheck"
       }
     ]
   }

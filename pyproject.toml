@@ -40,6 +40,9 @@ ec1-determinism = "engine.determinism.reproduce:main"
 ucos-knowledge = "engine.knowledge.cli:main"
 # EPIC-UKDA-002: Universal Constitutional Knowledge Integration CLI.
 ucos-knowledge-integration = "engine.knowledge.integration.cli:main"
+# EPIC-UKDA-003 (Terminal T3): Universal Knowledge Intelligence Platform — admit
+# canonical knowledge from unlimited providers, homed exactly once (Knowledge Once).
+ucos-knowledge-intelligence = "engine.knowledge.ukip.cli:main"
 # UCOS-EPIC-002 (Terminal T2): Universal Knowledge Graph over Registry Truth.
 ucos-knowledge-graph = "engine.graph.cli:main"
 # UCOS-EPIC-003: Universal Discovery Engine CLI (registry-driven discovery).
@@ -62,6 +65,10 @@ ucos-validate-intel = "platform.validation_intelligence.cli:main"
 # UCOS-EPIC-001: Universal Registry Platform — validate registrations against the
 # single registration authority and emit deterministic evidence (Terminal T1).
 ucos-registry = "engine.registry.universal.cli:main"
+# UCXI-000001: Universal Context Intelligence — the constitution, taxonomy, ontology,
+# registry, resolution, composition, graph, runtime, validation and certification of all
+# context (fifteen universal context kinds, open to future context types).
+ucos-context = "engine.context.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -93,6 +100,7 @@ addopts = [
   "--cov=engine.governance",
   "--cov=engine.knowledge",
   "--cov=engine.graph",
+  "--cov=engine.context",
   "--cov=platform.foundation",
   "--cov=platform.identity",
   "--cov=platform.administration",
@@ -119,7 +127,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

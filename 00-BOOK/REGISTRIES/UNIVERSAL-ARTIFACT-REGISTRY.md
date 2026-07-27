@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1199
+**Total artifacts:** 1204
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1207,5 +1207,10 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1197 | `UCOS-CMG-000002` | 00-CMG — CONSTITUTIONAL META GOVERNANCE | CMG-000000 | 002 | UPN-000009573–UPN-000009574 | UNDER_REVIEW | `UCOS-BOOK-000000` | 0 | [↗](../../00-CMG/README.md) |
 | 1198 | `UCOS-UCOSACFV0000-000001` | UCOS Ω∞ — ABSOLUTE ARCHITECTURAL COMPLETENESS & FORMAL VE… | — | 000 | UPN-000009575–UPN-000009583 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md) |
 | 1199 | `UCOS-CON-000064` | UCOS Ω∞ — UCCEP-000000 · UNIVERSAL CONTINUOUS CONSTITUTIO… | UCCEP-000000 | 002 | UPN-000009584–UPN-000009587 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../02-MASTER/UCCEP-000000-UNIVERSAL-CONTINUOUS-CONSTITUTIONAL-EVOLUTION-PROGRAMME-CHARTER.md) |
+| 1200 | `UCOS-PLT-000052` | Template.Provider | — | 006 | UPN-000009588–UPN-000009588 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/providers/TEMPLATE.provider.json) |
+| 1201 | `UCOS-PLT-000053` | Declared Providers | — | 006 | UPN-000009589–UPN-000009597 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/providers/catalog/declared-providers.json) |
+| 1202 | `UCOS-PLT-000054` | Repository | — | 006 | UPN-000009598–UPN-000009598 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/providers/catalog/repository.json) |
+| 1203 | `UCOS-PLT-000055` | Ucos Assurance Policy | — | 006 | UPN-000009599–UPN-000009612 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_assurance/data/ucos-assurance-policy.json) |
+| 1204 | `UCOS-PLT-000056` | Ucos Assurance Selfcheck | — | 006 | UPN-000009613–UPN-000009618 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_assurance/data/ucos-assurance-selfcheck.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

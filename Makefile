@@ -50,6 +50,14 @@ help:
 	@echo "  make uer           regenerate the UER-000001 execution-resilience determinations (Ω∞-001A)"
 	@echo "  make uer-gate      fail-closed Execution Resilience Gate (Ω∞-001A exit criteria)"
 	@echo "  make uer-self      UER guards over its own surface"
+	@echo "  make research      regenerate UCOS-URI-001 research intelligence (assimilation/registry/standards)"
+	@echo "  make research-gate fail-closed Research Validation Gate (13 obligations)"
+	@echo "  make publication   regenerate UCOS-UPI-001 publications (every registered format)"
+	@echo "  make publication-gate fail-closed Publication Validation Gate (14 obligations)"
+	@echo "  make publications  research + publication in dependency order"
+	@echo "  make uei           regenerate the UEI-000001 evolution-intelligence determinations (Ω∞-001B)"
+	@echo "  make uei-gate      fail-closed Evolution Intelligence Gate (Ω∞-001B exit criteria)"
+	@echo "  make uei-self      UEI guards over its own surface"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
 
@@ -304,3 +312,111 @@ urrc-self:
 	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-no-fabrication
 	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-reuse-before-create
 	@python3 00-MASTER/URRC-000001/urrc_engine.py --check-law-namespace
+
+
+
+# uei: UEI-000001 — Universal Evolution Intelligence (UCOS Ω∞ Programme Ω∞-001B).
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# The executable expression of the Evolution Intelligence contract. It creates no
+# observation, learning, optimization, recommendation, impact-analysis, simulation,
+# discovery, planning, execution, measurement or evolution mechanism: every one already
+# exists and is certified (platform/observability — EC2-EPIC-013; engine/knowledge — UKDA;
+# engine/compiler/optimization.py — EPIC-003; engine/graph/architecture over the certified
+# knowledge graph — EPIC-010 over EPIC-002; engine/determinism — EPIC-004;
+# engine/runtime/execution — EPIC-005; platform/repository_operations;
+# platform/runtime_operations — EC2-EPIC-012; platform/coverage; platform/measurement;
+# intelligence/rie). It BINDS them into one contract that every future autonomous
+# programme inherits, places each capability under a located governing instrument, and
+# verifies from Repository Truth that each binding resolves — then emits the twenty-three
+# deliverables, the last of which is the continuation package, into 00-MASTER/UEI-000001/.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside its own
+# operational-memory directory (guarded, fail-closed). Binding a newly proven capability is
+# an entry in 00-MASTER/UEI-000001/uei-evolution.json and requires NO change to the engine.
+#
+# Exit 0 gate OPEN · 1 gate CLOSED (an uncovered, ungoverned or unsatisfied element is
+# present) · 2 fail-closed abort (declaration unusable — no verdict may be asserted).
+.PHONY: uei uei-gate uei-self
+uei:
+	@python3 00-MASTER/UEI-000001/uei_engine.py
+
+uei-gate:
+	@python3 00-MASTER/UEI-000001/uei_engine.py --gate
+
+# uei-self: the six guards over the programme's own surface — declaration integrity (every
+# home/evidence/instrument/programme reference resolves; every deliverable, lifecycle step,
+# standing loop, validation, exit criterion and governance obligation is bound), zero-
+# enumeration / data-driven proof, forbidden-write scope, self-determinism, the governance
+# guard that proves no declared capability is left ungoverned, and the reuse-before-create
+# guard that proves no bound home lies inside this programme's own home.
+uei-self:
+	@python3 00-MASTER/UEI-000001/uei_engine.py --check-declaration
+	@python3 00-MASTER/UEI-000001/uei_engine.py --check-no-enumeration
+	@python3 00-MASTER/UEI-000001/uei_engine.py --check-write-scope
+	@python3 00-MASTER/UEI-000001/uei_engine.py --check-determinism
+	@python3 00-MASTER/UEI-000001/uei_engine.py --check-governance
+	@python3 00-MASTER/UEI-000001/uei_engine.py --check-reuse-before-create
+
+
+
+# research / publication: UCOS-URI-001 Universal Research Intelligence and
+# UCOS-UPI-001 Universal Publication Intelligence.
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# UCOS-URI-001 assimilates the repository's own canonical knowledge, decision record,
+# concept closure and generated corpus measurements into a research corpus of claims,
+# findings, contribution areas and standards records — then registers it append-only
+# (Knowledge-Once + hash chain), analyses standards conformance, and validates thirteen
+# fail-closed obligations. Every record stores a REFERENCE to canonical content; none
+# stores a copy (UCKO-PRIN-0001; the anti-pattern UCKO-ANTI-0001).
+#
+# UCOS-UPI-001 generates every publication format from that corpus: research paper,
+# journal article, conference paper (full/short/extended-abstract/poster), white paper,
+# technical article, patent draft, standards proposal, technical report, preprint,
+# review, thesis/book chapter, RFC-style memo, briefs, datasheet and tutorial — plus any
+# format registered afterwards. A format is DATA (a descriptor), not code: adding one is
+# an entry in intelligence/UCOS-UPI-001/publication-formats.json (or a runtime
+# register_format call) and requires NO engine change. Fourteen fail-closed obligations
+# are validated, including an executed proof that the format space is open.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only. Every write lands inside
+# intelligence/UCOS-URI-001/ or intelligence/UCOS-UPI-001/ (guarded, fail-closed).
+#
+# Exit 0 gate OPEN · 1 gate CLOSED (an obligation is unsatisfied or output is
+# non-deterministic) · 2 fail-closed abort (required substrate unusable — no verdict
+# may be asserted).
+.PHONY: research research-gate research-self publication publication-gate publication-self \
+        publications research-publication-gate
+research:
+	@python3 -m intelligence.research build
+
+research-gate:
+	@python3 -m intelligence.research gate
+
+# research-self: the subsystem's guards over its own surface — deterministic
+# regeneration and the full thirteen-obligation validation report.
+research-self:
+	@python3 -m intelligence.research verify >/dev/null
+	@python3 -m intelligence.research validate >/dev/null
+	@echo "UCOS-URI-001: self-guards PASS (determinism + research validation)"
+
+publication:
+	@python3 -m intelligence.publication build
+
+publication-gate:
+	@python3 -m intelligence.publication gate
+
+# publication-self: deterministic regeneration plus the fourteen-obligation validation
+# report (which itself executes the format-openness probe).
+publication-self:
+	@python3 -m intelligence.publication verify >/dev/null
+	@python3 -m intelligence.publication validate >/dev/null
+	@echo "UCOS-UPI-001: self-guards PASS (determinism + publication validation)"
+
+# publications: regenerate research intelligence, then every publication format.
+publications: research publication
+
+# research-publication-gate: both gates in dependency order (publication consumes the
+# research corpus, so a closed research gate closes the publication gate too).
+research-publication-gate: research-gate publication-gate

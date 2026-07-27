@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `programme/evo-usis-005` · `fa3179ff4a66` |
-| WORKING TREE | CLEAN (0 entries) |
+| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
+| WORKING TREE | DIRTY (362 entries) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -109,11 +109,11 @@
 
 | Substrate | Path | Kind | Tracked | Parses | Pointers | Records |
 |---|---|---|---|---|---|---|
-| `S-01` | `00-BOOK/DATA/artifacts.json` | registration projection | YES | YES | 2/2 | 2398 |
-| `S-02` | `00-BOOK/DATA/relationships.json` | graph projection | YES | YES | 2/2 | 25682 |
+| `S-01` | `00-BOOK/DATA/artifacts.json` | registration projection | YES | YES | 2/2 | 2474 |
+| `S-02` | `00-BOOK/DATA/relationships.json` | graph projection | YES | YES | 2/2 | 25834 |
 | `S-03` | `00-BOOK/DATA/control-tower.json` | portfolio projection | YES | YES | 3/3 | 109 |
 | `S-04` | `00-BOOK/DATA/certification.json` | certification projection | YES | YES | 5/5 | 45 |
-| `S-05` | `00-BOOK/DATA/id-ledger.json` | identity ledger | YES | YES | 2/2 | 1314 |
+| `S-05` | `00-BOOK/DATA/id-ledger.json` | identity ledger | YES | YES | 2/2 | 1352 |
 | `S-06` | `00-CMG/CMG-REGISTRY.json` | meta-constitutional registry | YES | YES | 9/9 | 164 |
 | `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | aggregate gate declaration | YES | YES | 5/5 | 61 |
 | `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | aggregate gate determination | YES | YES | 6/6 | 127 |

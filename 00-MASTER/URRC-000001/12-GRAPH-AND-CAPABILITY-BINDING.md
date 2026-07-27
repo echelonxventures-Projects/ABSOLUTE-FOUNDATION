@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `programme/evo-usis-005` · `fa3179ff4a66` |
-| WORKING TREE | CLEAN (0 entries) |
+| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
+| WORKING TREE | DIRTY (362 entries) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -52,35 +52,35 @@ Graph owners, edge-count reconciliation, capability edge census.
 **`DV-12`** — Graph edges present in the graph projection.
 
 - **Primitive** — `record_count`
-- **Result** — 12841 records
+- **Result** — 12917 records
 - **Substrate evidence** — `S-02`
 
 | Key | Value |
 |---|---|
-| records | 12841 |
+| records | 12917 |
 
 **`DV-13`** — Edge census against the portfolio rollup.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 12841 vs 12841 · delta 0
+- **Result** — 12917 vs 12917 · delta 0
 - **Substrate evidence** — `S-02`, `S-03`
 
 | Key | Value |
 |---|---|
-| `S-02` count | 12841 |
-| `S-03` portfolio.total_edges | 12841 |
+| `S-02` count | 12917 |
+| `S-03` portfolio.total_edges | 12917 |
 | delta | 0 |
 
 **`DV-14`** — Edge census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 12841 vs 12841 · delta 0
+- **Result** — 12917 vs 12917 · delta 0
 - **Substrate evidence** — `S-02`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-02` count | 12841 |
-| `S-04` scope.edges | 12841 |
+| `S-02` count | 12917 |
+| `S-04` scope.edges | 12917 |
 | delta | 0 |
 
 #### D-29 — Capability edge census
@@ -100,8 +100,8 @@ Graph owners, edge-count reconciliation, capability edge census.
 |---|---|
 | `Depends-On` | 4774 |
 | `Required-By` | 4697 |
-| `Child` | 1206 |
-| `Parent` | 1206 |
+| `Child` | 1244 |
+| `Parent` | 1244 |
 | `Consumed-By` | 316 |
 | `Consumes` | 316 |
 | `Authorized-By` | 99 |

@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `programme/evo-usis-005` · `fa3179ff4a66` |
-| WORKING TREE | CLEAN (0 entries) |
+| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
+| WORKING TREE | DIRTY (362 entries) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -62,7 +62,7 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 15 tracked path(s)
+- **Result** — 16 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -79,6 +79,7 @@ Evolution and master-roadmap owners; executable-owner delta.
 | `00-MASTER/UCCEP-000000/uccep_engine.py` | TRACKED |
 | `00-MASTER/UCDA-000001/ucda_engine.py` | TRACKED |
 | `00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py` | TRACKED |
+| `00-MASTER/UEI-000001/uei_engine.py` | TRACKED |
 | `00-MASTER/UER-000001/uer_engine.py` | TRACKED |
 | `00-MASTER/URRC-000001/urrc_engine.py` | TRACKED |
 | `verify.sh` | TRACKED |

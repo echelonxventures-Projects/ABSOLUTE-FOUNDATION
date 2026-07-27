@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-26T07:35:07+00:00 by ukbx portal. 1199 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-27T16:26:50+00:00 by ukbx portal. 1204 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1203,3 +1203,8 @@
 | [UCOS-CMG-000002](UCOS-CMG-000002.md) | 00-CMG — CONSTITUTIONAL META GOVERNANCE | VOL-002 | UNDER_REVIEW |
 | [UCOS-UCOSACFV0000-000001](UCOS-UCOSACFV0000-000001.md) | UCOS Ω∞ — ABSOLUTE ARCHITECTURAL COMPLETENESS & FORMAL VERIF | VOL-000 | ACTIVE |
 | [UCOS-CON-000064](UCOS-CON-000064.md) | UCOS Ω∞ — UCCEP-000000 · UNIVERSAL CONTINUOUS CONSTITUTIONAL | VOL-002 | ACTIVE |
+| [UCOS-PLT-000052](UCOS-PLT-000052.md) | Template.Provider | VOL-006 | ACTIVE |
+| [UCOS-PLT-000053](UCOS-PLT-000053.md) | Declared Providers | VOL-006 | ACTIVE |
+| [UCOS-PLT-000054](UCOS-PLT-000054.md) | Repository | VOL-006 | ACTIVE |
+| [UCOS-PLT-000055](UCOS-PLT-000055.md) | Ucos Assurance Policy | VOL-006 | ACTIVE |
+| [UCOS-PLT-000056](UCOS-PLT-000056.md) | Ucos Assurance Selfcheck | VOL-006 | ACTIVE |

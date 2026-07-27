@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `programme/evo-usis-005` · `fa3179ff4a66` |
-| WORKING TREE | CLEAN (0 entries) |
+| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
+| WORKING TREE | DIRTY (362 entries) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -52,7 +52,7 @@ Automation presence per gate and per deliverable.
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 15 tracked path(s)
+- **Result** — 16 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -69,6 +69,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/UCCEP-000000/uccep_engine.py` | TRACKED |
 | `00-MASTER/UCDA-000001/ucda_engine.py` | TRACKED |
 | `00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py` | TRACKED |
+| `00-MASTER/UEI-000001/uei_engine.py` | TRACKED |
 | `00-MASTER/UER-000001/uer_engine.py` | TRACKED |
 | `00-MASTER/URRC-000001/urrc_engine.py` | TRACKED |
 | `verify.sh` | TRACKED |
@@ -76,13 +77,13 @@ Automation presence per gate and per deliverable.
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 11/15 located engine(s) bound to at least one entry point, workflow or hook (over 13 tracked binding file(s))
+- **Result** — 12/16 located engine(s) bound to at least one entry point, workflow or hook (over 16 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
 |---|---|---|
 | `00-BOOK/tools/register.sh` | 2 | `.github/workflows/ucos-registration-gate.yml`, `.kiro/hooks/auto-register-artifact.json` |
-| `00-BOOK/tools/ukb.py` | 1 | `.github/workflows/ucos-registration-gate.yml` |
+| `00-BOOK/tools/ukb.py` | 2 | `.github/workflows/ucos-registration-gate.yml`, `.kiro/hooks/auto-register-artifact.json` |
 | `00-CMG/tools/cmg-gate.sh` | 1 | `Makefile` |
 | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | 2 | `.kiro/hooks/uakos-closure-002.json`, `Makefile` |
 | `00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py` | 1 | `Makefile` |
@@ -93,6 +94,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/UCCEP-000000/uccep_engine.py` | 3 | `.github/workflows/uccep-gate.yml`, `.kiro/hooks/uccep-000000.json`, `Makefile` |
 | `00-MASTER/UCDA-000001/ucda_engine.py` | 2 | `.kiro/hooks/ucda-000001.json`, `Makefile` |
 | `00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py` | 0 | **none** |
+| `00-MASTER/UEI-000001/uei_engine.py` | 3 | `.github/workflows/uei-gate.yml`, `.kiro/hooks/uei-000001.json`, `Makefile` |
 | `00-MASTER/UER-000001/uer_engine.py` | 3 | `.github/workflows/uer-gate.yml`, `.kiro/hooks/uer-000001.json`, `Makefile` |
 | `00-MASTER/URRC-000001/urrc_engine.py` | 3 | `.github/workflows/urrc-gate.yml`, `.kiro/hooks/urrc-000001.json`, `Makefile` |
 | `verify.sh` | 1 | `Makefile` |

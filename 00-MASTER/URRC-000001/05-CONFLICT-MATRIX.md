@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `programme/evo-usis-005` · `fa3179ff4a66` |
-| WORKING TREE | CLEAN (0 entries) |
+| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
+| WORKING TREE | DIRTY (362 entries) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -99,7 +99,7 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 1098 |
+| `ACTIVE` | 1136 |
 | `COMPLETE` | 43 |
 | `FROZEN` | 27 |
 | `UNDER_REVIEW` | 15 |
@@ -114,7 +114,7 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 1098 |
+| `ACTIVE` | 1136 |
 | `COMPLETE` | 43 |
 | `UNDER_REVIEW` | 15 |
 | `FINAL` | 9 |
@@ -129,12 +129,12 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-16`** — Live dependency on superseded truth: an edge whose target is superseded and whose source is not.
 
 - **Primitive** — `edge_status_join`
-- **Result** — 0 live dependency/dependencies on a superseded target (over 12841 edge(s); 0 endpoint(s) not registered)
+- **Result** — 0 live dependency/dependencies on a superseded target (over 12917 edge(s); 0 endpoint(s) not registered)
 - **Substrate evidence** — `S-01`, `S-02`
 
 | Key | Value |
 |---|---|
-| edges examined | 12841 |
+| edges examined | 12917 |
 | endpoints not registered | 0 |
 | live dependencies on superseded targets | 0 |
 

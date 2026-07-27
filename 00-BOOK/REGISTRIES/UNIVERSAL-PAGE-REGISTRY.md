@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 9587  ·  **Page cursor (next free):** UPN-000009588
+**Pages allocated:** 9618  ·  **Page cursor (next free):** UPN-000009619
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1207,5 +1207,10 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000009573 | UPN-000009574 | 2 | `UCOS-CMG-000002` | 002 | 00-CMG — CONSTITUTIONAL META GOVERNANCE |
 | UPN-000009575 | UPN-000009583 | 9 | `UCOS-UCOSACFV0000-000001` | 000 | UCOS Ω∞ — ABSOLUTE ARCHITECTURAL COMPLETENESS… |
 | UPN-000009584 | UPN-000009587 | 4 | `UCOS-CON-000064` | 002 | UCOS Ω∞ — UCCEP-000000 · UNIVERSAL CONTINUOUS… |
+| UPN-000009588 | UPN-000009588 | 1 | `UCOS-PLT-000052` | 006 | Template.Provider |
+| UPN-000009589 | UPN-000009597 | 9 | `UCOS-PLT-000053` | 006 | Declared Providers |
+| UPN-000009598 | UPN-000009598 | 1 | `UCOS-PLT-000054` | 006 | Repository |
+| UPN-000009599 | UPN-000009612 | 14 | `UCOS-PLT-000055` | 006 | Ucos Assurance Policy |
+| UPN-000009613 | UPN-000009618 | 6 | `UCOS-PLT-000056` | 006 | Ucos Assurance Selfcheck |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

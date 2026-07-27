@@ -59,6 +59,7 @@ class RegistryKind(str, Enum):
     DEPENDENCY = "DEPENDENCY"
     EVIDENCE = "EVIDENCE"
     CERTIFICATION = "CERTIFICATION"
+    CONTEXT = "CONTEXT"
 
     @property
     def code(self) -> str:
@@ -96,6 +97,10 @@ _KIND_CODES: dict[RegistryKind, str] = {
     RegistryKind.DEPENDENCY: "DEP",
     RegistryKind.EVIDENCE: "EVD",
     RegistryKind.CERTIFICATION: "CERT",
+    # UCXI-000001 — Universal Context Intelligence registers context as a first-class
+    # artifact kind, so context identities are minted by this single registration
+    # authority rather than by a parallel identity scheme.
+    RegistryKind.CONTEXT: "CTX",
 }
 
 #: Reverse map (id code → kind), used to parse/verify identifiers.

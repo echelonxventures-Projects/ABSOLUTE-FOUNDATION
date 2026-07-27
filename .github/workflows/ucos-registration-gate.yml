@@ -39,6 +39,14 @@ jobs:
       - name: Install optional validators
         run: pip install jsonschema || true
 
+      # B-01c — publish the CI eligibility universe. Read-only: writes nothing,
+      # allocates nothing, gates nothing. It exists so the universe every
+      # registration decision is a function of is directly observable in the CI log
+      # and comparable, by one digest, with `ukb.py eligibility` run locally. A
+      # matching digest is proof that both environments reach identical decisions.
+      - name: Registration eligibility universe (B-01c local/CI equivalence evidence)
+        run: python3 00-BOOK/tools/ukb.py eligibility --unbound
+
       - name: Pre-registration enforcement gate (UMB-IMP-001)
         run: python3 00-BOOK/tools/ukb.py enforce --pre
 

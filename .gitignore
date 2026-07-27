@@ -72,3 +72,35 @@ intelligence/die/
 00-MASTER/**/evidence/
 00-MASTER/UAKOS-PHASE-001B/provenance.json
 00-MASTER/UAKOS-PHASE-004/10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.json
+
+
+
+# URI-000001 (Universal Realization Intelligence) — generated realization artifacts and
+# the consolidated evidence bundle. Both are deterministically re-derivable OUTPUT
+# (GOV-005 §5.3): the authored source is intelligence/realization/** (tracked engineering
+# code) plus the canonical knowledge store it reads; `python -m intelligence.realization
+# realize` regenerates every byte. Declared NON-ARTIFACTS bounded by the ignore authority
+# so they are never hand-registered and never surface as drift — mirrors the existing
+# /knowledge/, determinism-evidence/ and UAKOS-CLOSURE-002 generated-artifact policy.
+# Anchored with a leading slash so ONLY the repo-root generated tree is ignored; the
+# intelligence/realization/ source package and its tests remain tracked.
+/realization/
+data/_evidence/URI-000001/
+
+
+# UCOS-URI-001 / UCOS-UPI-001 (Universal Research + Publication Intelligence) —
+# generated research corpus and generated publication set. Both are deterministically
+# re-derivable OUTPUT (GOV-005 §5.3): the authored sources are intelligence/research/**
+# and intelligence/publication/** (tracked engineering code) plus the canonical knowledge
+# store they read; `make research` / `make publication` regenerate every byte and both
+# engines self-prove determinism (`research verify` / `publication verify`). Every
+# publication additionally carries the provenance banner "GENERATED FROM CANONICAL
+# KNOWLEDGE BY UCOS-UPI-001 — DO NOT EDIT BY HAND". Declared NON-ARTIFACTS bounded by the
+# ignore authority so they never consume permanent corpus identities and never surface as
+# drift — mirrors the existing /knowledge/, /realization/, determinism-evidence/ and
+# UAKOS-CLOSURE-002 generated-artifact policy. The one AUTHORED file the publication engine
+# reads from inside its own output tree (the optional format-extension descriptor) is
+# explicitly re-admitted so a future authored format remains a registerable artifact.
+intelligence/UCOS-URI-001/
+intelligence/UCOS-UPI-001/
+!intelligence/UCOS-UPI-001/publication-formats.json

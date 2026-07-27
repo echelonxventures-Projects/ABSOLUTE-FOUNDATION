@@ -289,8 +289,8 @@ DEFAULT_CLASS = ("OTHER", "MISC", "VOL-000")
 # ===========================================================================
 
 # --- Constitutional definition (GOV-005 §5.3) -------------------------------
-# A REPOSITORY ARTIFACT is a version-controlled (tracked or newly-authored,
-# un-ignored), human-authored corpus file of an included type. A GENERATED
+# A REPOSITORY ARTIFACT is a version-controlled (carried by version control:
+# tracked or staged), human-authored corpus file of an included type. A GENERATED
 # ARTIFACT is a deterministically re-derivable output (registries, twin,
 # control-tower, portal, evidence) — regenerated, never hand-registered. An
 # ENVIRONMENT ARTIFACT is a build/cache/dependency/tooling output (venv,
@@ -298,12 +298,29 @@ DEFAULT_CLASS = ("OTHER", "MISC", "VOL-000")
 # REPOSITORY ARTIFACTS are eligible for registration; the other two classes are
 # bounded — and thereby excluded — by the ignore authority (.gitignore), NOT by
 # any hand-maintained path list.
+#
+# B-01c RECONCILIATION. This definition previously also admitted "newly-authored
+# and un-ignored" (i.e. UNTRACKED) files, which CONTRADICTED REGISTRATION_SCOPE
+# below ("version-controlled repository artifacts") and made eligibility a
+# function of the local working tree instead of the commit: a CI checkout, which
+# by construction contains only what version control carries, computed a SMALLER
+# universe than the authoring clone and therefore reached DIFFERENT registration
+# decisions over the same commit. The two declarations are now one: eligibility is
+# the version-controlled corpus (`git ls-files --cached --exclude-standard`), which
+# is identical in every environment at a given commit. Enforcement is unchanged in
+# strength and merely applied at the correct boundary — an artifact enters the
+# corpus by entering version control (`git add`), at which instant it becomes
+# eligible and the pre/post enforcement gates plus the --guard drift gate must pass
+# before it can be committed. Files awaiting that binding are never silent: the
+# enforcement gate and `ukb.py eligibility` report each one by path.
 REPOSITORY_ARTIFACT_DEFINITION = (
-    "A repository artifact is a version-controlled (git-tracked or newly-authored "
-    "and un-ignored), human-authored corpus file whose extension is in "
+    "A repository artifact is a version-controlled (carried by version control: "
+    "git-tracked or staged), human-authored corpus file whose extension is in "
     "INCLUDE_EXTENSIONS and which is not part of the generator's own machinery or "
     "generated output (EXCLUDE_DIR_PREFIXES). Generated and environment outputs "
-    "are non-artifacts, bounded by version control (.gitignore).")
+    "are non-artifacts, bounded by version control (.gitignore). A file that is "
+    "not yet carried by version control is a CANDIDATE artifact: reported, never "
+    "registered, until it is bound by `git add`.")
 
 # Registration scope: what the engines register (eligible == this set).
 REGISTRATION_SCOPE = (
@@ -837,7 +854,8 @@ METADATA_DEFAULT_VOLUME = "VOL-000"
 # ENFORCEMENT GATES — the minimum set of gates that make "Artifact Creation =
 # Artifact Registration" unskippable (REG-AUTO-001 §16; UMB-IMP-001). Order is
 # significant (fail-fast). Data-only; the mechanism lives in ukb.py::cmd_enforce.
-#   * eligibility   — the file is in scope (INCLUDE_EXTENSIONS, not EXCLUDE_*).
+#   * eligibility   — the file is in scope: carried by version control (tracked or
+#                     staged), of an INCLUDE_EXTENSIONS type, and not EXCLUDE_*.
 #   * validity      — the file is readable, non-empty, and carries a title/identity.
 #   * classification — the file resolves to a real (program != OTHER) class, via a
 #                      CLASSIFY_RULES match OR self-declared metadata.

@@ -665,49 +665,126 @@ def sha256(abspath: str) -> str | None:
         return None
 
 
-def _repo_artifact_paths():
-    """Return the REPOSITORY ARTIFACT BOUNDARY as declared by version control, or
-    None if git is unavailable (GOV-005 §5.1, ELIG-RC-1 correction).
+class EligibilityBoundaryError(RuntimeError):
+    """The version-control eligibility boundary could not be established.
 
-    The eligibility universe is derived from what the repository itself considers
-    to be part of the repository — never from raw environmental filesystem
-    contents. Concretely this is the union of git-tracked files and new
-    (not-yet-committed) files, with `.gitignore` (+ the standard exclude sources)
-    as the single authoritative non-artifact boundary:
+    Raised INSTEAD of silently degrading to the `.gitignore`-blind filesystem walk
+    while a git work tree is present (B-01c). A silent degradation would make the
+    eligibility universe — and therefore every registration decision — a function
+    of the local environment instead of a function of the repository, which is
+    precisely the local/CI divergence this correction removes. Fail loudly; never
+    suppress."""
 
-      * tracked files                     → repository artifacts (in scope);
-      * new, un-ignored files             → repository artifacts being authored
-                                            (in scope, so the enforcement gate
-                                            sees a document the instant it exists);
-      * ignored files (`.gitignore`)      → environment / build / cache /
-                                            generated outputs → automatically
-                                            excluded with ZERO hand-maintained
-                                            path list (venvs, *.egg-info,
-                                            .pytest_cache, .ruff_cache, coverage,
-                                            build/, dist/, __pycache__, and any
-                                            FUTURE ignored directory).
 
-    `git ls-files --cached --others --exclude-standard` is exactly this set. No
-    environment path is named here; the ignore authority is consulted instead of
-    contradicted (the previous os.walk denylist ignored `.gitignore` — the root
-    trigger of unbounded eligibility drift)."""
+def _git(*argv, timeout=180):
+    """Run a READ-ONLY git query in REPO. Returns the CompletedProcess, or None when
+    git itself cannot be invoked at all (no binary, no work tree, no permission).
+
+    The timeout is deliberately generous: a cold/slow CI runner that timed out at
+    60s used to silently switch the whole engine onto the degraded walk."""
     try:
         import subprocess
-        out = subprocess.run(
-            ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
-            cwd=REPO, capture_output=True, text=True, timeout=60)
-        if out.returncode != 0:
-            return None
-        return [p for p in out.stdout.split("\0") if p]
+        return subprocess.run(["git", *argv], cwd=REPO,
+                              capture_output=True, text=True, timeout=timeout)
     except Exception:
         return None
 
 
+def _git_work_tree() -> bool:
+    """True iff REPO is inside a usable git work tree — the ONLY condition under
+    which the off-VCS filesystem-walk fallback is legal."""
+    out = _git("rev-parse", "--is-inside-work-tree", timeout=60)
+    return bool(out and out.returncode == 0 and out.stdout.strip() == "true")
+
+
+def _git_ls(*selectors):
+    """`git ls-files <selectors> --exclude-standard -z` as a sorted path list.
+
+    Fails LOUDLY inside a git work tree: if version control is present but the
+    boundary query fails, the eligibility universe is UNKNOWN, and an unknown
+    universe must abort the transaction rather than be replaced by a guess."""
+    out = _git("ls-files", *selectors, "--exclude-standard", "-z")
+    if out is None or out.returncode != 0:
+        detail = (out.stderr.strip() if out is not None and out.stderr
+                  else "git could not be invoked")
+        raise EligibilityBoundaryError(
+            "version-control eligibility boundary unavailable: "
+            f"`git ls-files {' '.join(selectors)}` failed in a git work tree — {detail}")
+    return sorted(p for p in out.stdout.split("\0") if p)
+
+
+def _repo_artifact_paths():
+    """Return the REPOSITORY ARTIFACT BOUNDARY as declared by version control, or
+    None only when there is NO git work tree at all (a VCS-less export).
+
+    GOV-005 §5.1 / ELIG-RC-1: the eligibility universe is derived from what the
+    repository itself considers to be part of the repository — never from raw
+    environmental filesystem contents. `.gitignore` (+ the standard exclude
+    sources) remains the single authoritative non-artifact boundary, so venvs,
+    *.egg-info, __pycache__, .pytest_cache, .ruff_cache, coverage, build/, dist/
+    and every FUTURE ignored directory are excluded with ZERO hand-maintained
+    path list.
+
+    B-01c — CI REGISTRATION ELIGIBILITY RECONCILIATION. The boundary is the set of
+    artifacts VERSION CONTROL CARRIES: `git ls-files --cached --exclude-standard`
+    (tracked ∪ staged). This is the literal reading of the declared authority,
+    config.REGISTRATION_SCOPE ("version-controlled repository artifacts …"), and it
+    removes the last environment dependence in the engine:
+
+      * tracked / staged files  → carried by version control → in scope. A fresh
+                                  CI checkout of commit X and a local work tree at
+                                  commit X produce the SAME set, so eligibility is
+                                  a pure function of the commit — identical in
+                                  every environment, by construction.
+      * ignored files           → environment/build/cache/generated outputs → out
+                                  of scope via the ignore authority (unchanged).
+      * untracked, un-ignored   → NOT YET carried by version control, therefore not
+        files                     yet repository artifacts. They are not eligible,
+                                  so the append-only identity ledger can no longer
+                                  mint PERMANENT identities for files the
+                                  repository does not contain, and the synchronized
+                                  registers can no longer encode state that the
+                                  commit cannot reproduce (the exact mechanism by
+                                  which local registration diverged from CI).
+
+    Enforcement is NOT reduced — it is applied at the correct boundary. An artifact
+    enters the corpus by entering version control: the instant it is `git add`-ed it
+    appears in `--cached`, becomes eligible, and the pre/post enforcement gates plus
+    the `--guard` drift gate (pre-commit and CI) must pass before it can be
+    committed. Nothing can enter the repository unregistered, unclassified or
+    invalid. What can no longer happen is registration of something that is not in
+    the repository at all. Untracked, un-ignored includable files remain fully
+    VISIBLE (never silent): they are reported by `_vcs_unbound_candidates()` in the
+    enforcement gate output and by `ukb.py eligibility`."""
+    if not _git_work_tree():
+        return None
+    return _git_ls("--cached")
+
+
+def _vcs_unbound_candidates():
+    """Includable files present on disk but NOT carried by version control.
+
+    ADVISORY MEASUREMENT ONLY — never a gate, never a registration input. These are
+    candidate artifacts awaiting version-control binding (`git add`). Reporting them
+    guarantees that narrowing eligibility to the version-controlled corpus (B-01c)
+    hides nothing: every file that would previously have been silently registered
+    into the committed registers is now named on every gate run instead."""
+    if not _git_work_tree():
+        return []
+    excl = tuple(C.EXCLUDE_DIR_PREFIXES)
+    return [rel for rel in _git_ls("--others")
+            if not rel.startswith(excl)
+            and rel.endswith(C.INCLUDE_EXTENSIONS)
+            and os.path.isfile(os.path.join(REPO, rel))]
+
+
 def _iter_files_walk():
-    """Filesystem-walk enumeration — used ONLY as a degraded fallback when git is
-    unavailable (e.g. an exported tree with no VCS). Retains the historical
-    denylist so the engine still functions off-VCS; inside a git work tree the
-    version-control boundary in _repo_artifact_paths() is authoritative."""
+    """Filesystem-walk enumeration — used ONLY as a degraded fallback when there is
+    no git work tree at all (e.g. an exported tree with no VCS). Retains the
+    historical denylist so the engine still functions off-VCS; inside a git work
+    tree the version-control boundary in _repo_artifact_paths() is authoritative and
+    a failure to establish it aborts (EligibilityBoundaryError) rather than silently
+    landing here."""
     for dirpath, dirnames, filenames in os.walk(REPO):
         dirnames.sort()
         for fn in sorted(filenames):
@@ -731,14 +808,18 @@ def _iter_files():
     boundary because they name the generator's OWN machinery and its GENERATED
     outputs (tools/, DATA/, REGISTRIES/, CONTROL-TOWER/, VOLUMES/, PORTAL/) —
     tracked files that must never be registered as artifacts (the registry must
-    not list itself). Everything else that version control considers part of the
-    repository, and carries a registerable extension, is eligible."""
+    not list itself). Everything else that version control CARRIES (tracked or
+    staged), and carries a registerable extension, is eligible — see
+    _repo_artifact_paths() for the B-01c local/CI equivalence property."""
     paths = _repo_artifact_paths()
     if paths is None:
+        print("NOTICE: no git work tree — eligibility falls back to the DEGRADED "
+              "off-VCS filesystem walk (.gitignore is not consulted).",
+              file=sys.stderr)
         yield from _iter_files_walk()
         return
     excl = tuple(C.EXCLUDE_DIR_PREFIXES)
-    for rel in sorted(paths):
+    for rel in paths:
         if rel.startswith(excl):
             continue
         if not rel.endswith(C.INCLUDE_EXTENSIONS):
@@ -747,6 +828,17 @@ def _iter_files():
         if not os.path.isfile(abspath):
             continue          # index entry with no working-tree file (e.g. staged delete)
         yield abspath, rel
+
+
+def eligibility_universe():
+    """(paths, digest) — the eligibility universe and a stable content digest of it.
+
+    The digest is the sha256 of the newline-joined sorted path list, so two
+    environments (a local work tree and a CI checkout of the same commit) can be
+    proven to compute the IDENTICAL universe by comparing one hex string."""
+    paths = [rel for _abspath, rel in _iter_files()]
+    digest = hashlib.sha256("\n".join(paths).encode("utf-8")).hexdigest()
+    return paths, digest
 
 
 # ---------------------------------------------------------------------------
@@ -1804,6 +1896,11 @@ def cmd_enforce(args):
 
     violations = sorted(set(hard))
     result = "PASS" if not violations else "FAIL"
+    # B-01c advisory measurement (NOT a gate): includable files present on disk but
+    # not yet carried by version control. Narrowing eligibility to the
+    # version-controlled corpus therefore hides nothing — every such file is named
+    # on every gate run instead of being silently minted a permanent identity.
+    unbound = _vcs_unbound_candidates()
     record = {
         "generated_at": _now(),
         "generator_version": C.GENERATOR_VERSION,
@@ -1817,6 +1914,7 @@ def cmd_enforce(args):
                          for rel, reason in sorted(unreconciled)],
         "reconciled_sets": sorted(e["set"] for e in recon_sets),
         "invalid": sorted(invalid),
+        "vcs_unbound_candidates": unbound,
         "violations": violations,
         "result": result,
     }
@@ -1832,6 +1930,8 @@ def cmd_enforce(args):
           f"({', '.join(sorted(e['set'] for e in recon_sets)) or 'none'})")
     print(f"  reconciled-set drift       : {len(unreconciled)} (GATED)")
     print(f"  invalid (unreadable/empty) : {len(invalid)}")
+    print(f"  awaiting VCS binding       : {len(unbound)} (REPORTED — not repository "
+          f"artifacts until `git add`)")
     for r in unregistered[:10]:
         print(f"    UNREGISTERED  {r}")
     for r in unclassified[:10]:
@@ -1847,6 +1947,51 @@ def cmd_enforce(args):
         sys.exit(1)
     print(f"ENFORCEMENT PASSED — no unregistered or invalid artifact "
           f"can silently enter the corpus.")
+
+
+def cmd_eligibility(args):
+    """READ-ONLY eligibility-universe report (B-01c evidence instrument).
+
+    Writes nothing, allocates nothing, mutates no ledger and no register. Its only
+    purpose is to make the eligibility universe — the input every registration
+    decision is a function of — directly observable and comparable between a local
+    work tree and a CI checkout of the same commit. Identical `universe digest`
+    values in both environments are a proof of identical registration decisions."""
+    paths, digest = eligibility_universe()
+    on_vcs = _git_work_tree()
+    unbound = _vcs_unbound_candidates()
+    boundary = ("version-control (git ls-files --cached --exclude-standard)"
+                if on_vcs else "off-VCS filesystem walk (DEGRADED)")
+    if getattr(args, "json", False):
+        print(json.dumps({
+            "boundary": boundary,
+            "version_controlled": on_vcs,
+            "generator_version": C.GENERATOR_VERSION,
+            "registration_scope": C.REGISTRATION_SCOPE,
+            "include_extensions": list(C.INCLUDE_EXTENSIONS),
+            "corpus_internal_excludes": list(C.EXCLUDE_DIR_PREFIXES),
+            "eligible_count": len(paths),
+            "universe_digest": digest,
+            "vcs_unbound_candidate_count": len(unbound),
+            "vcs_unbound_candidates": unbound,
+            "eligible": paths,
+        }, indent=2, sort_keys=True))
+        return
+    print("UCOS Ω∞ Registration Eligibility Universe (GOV-005 §5.1 / B-01c)")
+    print("-" * 60)
+    print(f"  boundary                   : {boundary}")
+    print(f"  registration scope         : {C.REGISTRATION_SCOPE}")
+    print(f"  eligible artifacts         : {len(paths)}")
+    print(f"  universe digest (sha256)   : {digest}")
+    print(f"  awaiting VCS binding       : {len(unbound)} (not repository artifacts "
+          f"until `git add`)")
+    if getattr(args, "unbound", False):
+        for rel in unbound:
+            print(f"    AWAITING-VCS-BINDING  {rel}")
+    if getattr(args, "paths", False):
+        for rel in paths:
+            print(f"    ELIGIBLE  {rel}")
+    print("-" * 60)
 
 
 # ---------------------------------------------------------------------------
@@ -2154,6 +2299,14 @@ def main():
                          "enforced under the single fixed gate policy. Accepted for "
                          "backward compatibility; it no longer changes the audit result.")
 
+    gp = sub.add_parser("eligibility",
+                        help="Read-only eligibility-universe report + digest (B-01c: "
+                             "prove local and CI compute the same universe).")
+    gp.add_argument("--paths", action="store_true", help="List every eligible artifact.")
+    gp.add_argument("--unbound", action="store_true",
+                    help="List includable files awaiting version-control binding.")
+    gp.add_argument("--json", action="store_true", help="Machine-readable output.")
+
     xp = sub.add_parser("exec", help="EXEC-REG-001 execution register (RUNTIME-006): declare / "
                         "transition / activate / suspend / resume / complete / terminate / "
                         "list / show / validate execution instances.")
@@ -2174,9 +2327,20 @@ def main():
     xp.add_argument("--state", help="Filter `list` by lifecycle state.")
 
     args = ap.parse_args()
-    {"build": cmd_build, "search": cmd_search, "trace": cmd_trace,
-     "evolve": cmd_evolve, "stats": cmd_stats, "validate": cmd_validate,
-     "enforce": cmd_enforce, "exec": cmd_exec}[args.cmd](args)
+    handler = {"build": cmd_build, "search": cmd_search, "trace": cmd_trace,
+               "evolve": cmd_evolve, "stats": cmd_stats, "validate": cmd_validate,
+               "enforce": cmd_enforce, "eligibility": cmd_eligibility,
+               "exec": cmd_exec}[args.cmd]
+    try:
+        handler(args)
+    except EligibilityBoundaryError as exc:
+        # Fail closed and LOUD (B-01c): an unknown eligibility universe must abort
+        # the command, never be replaced by a `.gitignore`-blind guess that would
+        # make registration decisions environment-dependent.
+        print(f"ELIGIBILITY BOUNDARY FAILURE — {exc}", file=sys.stderr)
+        print("Refusing to compute registration eligibility from an unverified "
+              "boundary; no artifact was registered.", file=sys.stderr)
+        sys.exit(5)
 
 
 if __name__ == "__main__":

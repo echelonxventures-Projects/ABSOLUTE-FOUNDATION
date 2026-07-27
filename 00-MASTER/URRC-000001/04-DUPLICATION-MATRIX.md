@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `programme/evo-usis-005` · `fa3179ff4a66` |
-| WORKING TREE | CLEAN (0 entries) |
+| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
+| WORKING TREE | DIRTY (362 entries) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -55,7 +55,7 @@ Structural duplication only: content identity, name identity, registration delta
 **`DV-05`** — Content identity: distinct artifacts sharing one content hash.
 
 - **Primitive** — `duplicate_field_values`
-- **Result** — 2 value(s) shared by more than one record (over 1197 distinct value(s))
+- **Result** — 2 value(s) shared by more than one record (over 1235 distinct value(s))
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
@@ -73,7 +73,7 @@ Structural duplication only: content identity, name identity, registration delta
 **`DV-06`** — Name identity: distinct artifacts sharing one name.
 
 - **Primitive** — `duplicate_field_values`
-- **Result** — 21 value(s) shared by more than one record (over 730 distinct value(s))
+- **Result** — 21 value(s) shared by more than one record (over 768 distinct value(s))
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
@@ -110,37 +110,37 @@ Structural duplication only: content identity, name identity, registration delta
 **`DV-02`** — Declared registration count against the records actually present.
 
 - **Primitive** — `declared_vs_actual`
-- **Result** — declared 1199 · present 1199 · delta 0
+- **Result** — declared 1237 · present 1237 · delta 0
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| declared | 1199 |
-| present | 1199 |
+| declared | 1237 |
+| present | 1237 |
 | delta | 0 |
 
 **`DV-03`** — Registration census against the portfolio rollup.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1199 vs 1199 · delta 0
+- **Result** — 1237 vs 1237 · delta 0
 - **Substrate evidence** — `S-01`, `S-03`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1199 |
-| `S-03` portfolio.total_artifacts | 1199 |
+| `S-01` count | 1237 |
+| `S-03` portfolio.total_artifacts | 1237 |
 | delta | 0 |
 
 **`DV-04`** — Registration census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1199 vs 1199 · delta 0
+- **Result** — 1237 vs 1237 · delta 0
 - **Substrate evidence** — `S-01`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1199 |
-| `S-04` scope.artifacts | 1199 |
+| `S-01` count | 1237 |
+| `S-04` scope.artifacts | 1237 |
 | delta | 0 |
 
 #### D-07 — Duplication — multi-home concepts
@@ -153,13 +153,13 @@ Structural duplication only: content identity, name identity, registration delta
 **`DV-07`** — Identity collision: one universal identifier claimed by more than one record.
 
 - **Primitive** — `duplicate_field_values`
-- **Result** — 0 value(s) shared by more than one record (over 1199 distinct value(s))
+- **Result** — 0 value(s) shared by more than one record (over 1237 distinct value(s))
 - **Substrate evidence** — `S-01`
 
 **`DV-08`** — Multi-home concepts: one path registered more than once.
 
 - **Primitive** — `duplicate_field_values`
-- **Result** — 0 value(s) shared by more than one record (over 1199 distinct value(s))
+- **Result** — 0 value(s) shared by more than one record (over 1237 distinct value(s))
 - **Substrate evidence** — `S-01`
 
 #### D-08 — Duplication — deliverable overlap

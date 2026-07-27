@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `programme/evo-usis-005` · `fa3179ff4a66` |
-| WORKING TREE | CLEAN (0 entries) |
+| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
+| WORKING TREE | DIRTY (362 entries) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -63,12 +63,12 @@ Catalogue, registry, ontology, taxonomy, API and interface owners.
 **`DV-01`** — Registered artifact records present in the registration projection.
 
 - **Primitive** — `record_count`
-- **Result** — 1199 records
+- **Result** — 1237 records
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records | 1199 |
+| records | 1237 |
 
 **`DV-54`** — Meta-constitutional artifacts under registry control.
 
