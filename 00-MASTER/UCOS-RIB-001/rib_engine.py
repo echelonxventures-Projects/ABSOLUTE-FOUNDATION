@@ -349,11 +349,7 @@ def repository_state() -> dict:
         "head": git("rev-parse", "HEAD") or "UNKNOWN",
         "detached": not git("symbolic-ref", "-q", "HEAD"),
         "working_tree": "DIRTY" if entries else "CLEAN",
-        "dirty_entries": len(entries),
-        "dirty_paths": sorted(line[3:].strip('"') for line in entries),
-        "modified": len([line for line in entries if line[:2].strip() in {"M", "MM", "AM"}]),
-        "deleted": len([line for line in entries if "D" in line[:2]]),
-        "untracked": len([line for line in entries if line[:2] == "??"]),
+        "raw_entries": entries,
         "conflicts": len(conflicts),
         "interrupted_operations": interrupted,
         "broken_symlinks": broken_symlinks(),
@@ -1544,15 +1540,8 @@ def compute_metrics(
     # construction. The authored declaration, engine and README are NOT excluded: an
     # uncommitted change to them is real repository dirt and is counted as such. The raw
     # figure stays visible beside the narrowed one, so nothing is hidden.
-    generated = {
-        str(Path(HERE.relative_to(REPO)) / str(entry.get("file")))
-        for entry in section(decl, "outputs")
-    }
-    generated.add(str(Path(HERE.relative_to(REPO)) / MODEL_FILE))
-    metrics["generated_artifact_paths"] = sorted(generated)
-    metrics["dirty_entries_outside_generated"] = len(
-        [path for path in repo.get("dirty_paths", []) if path not in generated]
-    )
+    metrics["generated_artifact_paths"] = sorted(own_generated_paths(decl))
+    metrics["dirty_entries_outside_generated"] = repo["dirty_entries"]
     for record in gaps:
         metrics[f"gap_count:{record['id']}"] = record["count"]
     for record in duplicates:
@@ -1693,7 +1682,43 @@ def derive_identity(decl: dict, units: dict[str, dict]) -> None:
         unit["is_test_unit"] = bool(unit["location"]) and unit["leaf"] == "tests"
 
 
-def build_model(decl: dict, sub: Substrate, repo: dict) -> dict:
+def own_generated_paths(decl: dict) -> set[str]:
+    """The artifacts this programme itself rewrites on every run."""
+    home = Path(HERE.relative_to(REPO))
+    generated = {str(home / str(entry.get("file"))) for entry in section(decl, "outputs")}
+    generated.add(str(home / MODEL_FILE))
+    return generated
+
+
+def observed_state(decl: dict, raw: dict) -> dict:
+    """Repository state with this programme's own regenerated artifacts subtracted.
+
+    Its own outputs must not appear in its own emitted state. If they did, the artifact
+    set would never be idempotent: committing it makes the tree clean, regenerating dirties
+    exactly those files again, and each render would disagree with the last over a number
+    that describes nothing but the act of rendering. Everything else — an uncommitted
+    declaration, engine, README or any file elsewhere in the repository — is retained and
+    counted, so the narrowing removes noise without removing dirt.
+    """
+    generated = own_generated_paths(decl)
+    entries = [line for line in raw.get("raw_entries", []) if line[3:].strip('"') not in generated]
+    state = {key: value for key, value in raw.items() if key != "raw_entries"}
+    state.update(
+        {
+            "working_tree": "DIRTY" if entries else "CLEAN",
+            "dirty_entries": len(entries),
+            "dirty_paths": sorted(line[3:].strip('"') for line in entries),
+            "modified": len([line for line in entries if line[:2].strip() in {"M", "MM", "AM"}]),
+            "deleted": len([line for line in entries if "D" in line[:2]]),
+            "untracked": len([line for line in entries if line[:2] == "??"]),
+            "excluded_own_artifacts": len(raw.get("raw_entries", [])) - len(entries),
+        }
+    )
+    return state
+
+
+def build_model(decl: dict, sub: Substrate, repo_input: dict) -> dict:
+    repo = observed_state(decl, repo_input) if "raw_entries" in repo_input else repo_input
     units, discovery = discover(decl, sub)
     enrichment = enrich(decl, sub, units)
     measures = measure(decl, sub, units)
@@ -2063,10 +2088,10 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                 ["HEAD", f"`{model['repository']['head']}`"],
                 ["Detached", "YES" if model["repository"]["detached"] else "no"],
                 ["Working tree", model["repository"]["working_tree"]],
-                ["Dirty entries (raw)", str(model["repository"]["dirty_entries"])],
+                ["Dirty entries", str(model["repository"]["dirty_entries"])],
                 [
-                    "Dirty entries outside this programme's regenerated artifacts",
-                    str(m["dirty_entries_outside_generated"]),
+                    "Own regenerated artifacts excluded from that count",
+                    str(model["repository"]["excluded_own_artifacts"]),
                 ],
                 ["Modified", str(model["repository"]["modified"])],
                 ["Deleted", str(model["repository"]["deleted"])],
@@ -2649,8 +2674,9 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                 [
                     "Repository clean",
                     f"{model['repository']['working_tree']} — "
-                    f"{m['dirty_entries_outside_generated']} entr(y/ies) outside this "
-                    f"programme's regenerated artifacts, {m['dirty_entries']} raw",
+                    f"{m['dirty_entries_outside_generated']} entr(y/ies), excluding "
+                    f"{model['repository']['excluded_own_artifacts']} of this programme's "
+                    "own regenerated artifacts",
                     "PASS" if not m["dirty_entries_outside_generated"] else "**FAIL**",
                 ],
                 [
@@ -2736,8 +2762,9 @@ def render(decl: dict, model: dict) -> dict[str, str]:
             [
                 [
                     "Repository is version-control clean",
-                    f"{m['dirty_entries_outside_generated']} dirty entr(y/ies) outside this "
-                    f"programme's regenerated artifacts ({m['dirty_entries']} raw)",
+                    f"{m['dirty_entries_outside_generated']} dirty entr(y/ies), excluding "
+                    f"{model['repository']['excluded_own_artifacts']} of this programme's "
+                    "own regenerated artifacts",
                     "PASS" if not m["dirty_entries_outside_generated"] else "**FAIL**",
                 ],
                 [
@@ -3223,9 +3250,11 @@ FIXED_STATE = {
     "detached": False,
     "working_tree": "CLEAN",
     "dirty_entries": 0,
+    "dirty_paths": [],
     "modified": 0,
     "deleted": 0,
     "untracked": 0,
+    "excluded_own_artifacts": 0,
     "conflicts": 0,
     "interrupted_operations": [],
     "broken_symlinks": [],
@@ -3350,6 +3379,8 @@ def main() -> int:
         f"matrices={m['matrices_bound']}bound/{m['matrix_total']} | "
         f"queued={m['queued_total']}in{m['wave_total']}waves | "
         f"gates={m['gates_passed']}/{m['gate_total']} | "
+        f"dirty={m['dirty_entries_outside_generated']}"
+        f"(+{model['repository']['excluded_own_artifacts']} own) | "
         f"gate={model['gate']} | seal={model['seal_sha256'][:16]}"
     )
     if not args.gate:
