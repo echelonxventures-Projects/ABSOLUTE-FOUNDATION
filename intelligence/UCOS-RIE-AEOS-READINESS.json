@@ -3,37 +3,37 @@
   "authority": "NONE (derived truth)",
   "authorization_required": "CIOA/lane authority + GOV-004 (this engine authorizes nothing).",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "7fab8a2910d4d833decd08cfaa575b4e1cb63e2e518d3380be76795e98f3c71e",
+  "content_hash": "2008d236f193d0a049627614b8a6fc92877d3a9a2baced30fc7f2aad6c3409c5",
   "evidence_state": {
     "branch": "integration/recovery-001",
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "56d41ea0110c16352fee624be16b9039d83f5323f43d1cf38171df2ea0117abb",
+      "fingerprint": "d78ae9ce77d5ef47acf16bf63975292b547218c023c516ff4563b676808b5c2e",
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "bae7d19773414b3bab00cef8598777d2702695d5a70c28772f00ea32c41fc6ba",
-      "00-BOOK/DATA/certification.json": "37bd71967910d6dfaefaf19bce0e73606bbee1e951d70bd5e46b98888ba8b7f7",
-      "00-BOOK/DATA/control-tower.json": "ed5bf960b91f428f86eb4a03ba31645d29170818863bf182a9bb646a38e69bf7",
+      "00-BOOK/DATA/artifacts.json": "ad74b4bec63bf288b05306e20856860a747f80e83280eae550920b5a143f40d4",
+      "00-BOOK/DATA/certification.json": "9c58139bf04fb0ced452cf74de995808f20b8a63000c873a8a6cba70da8ae788",
+      "00-BOOK/DATA/control-tower.json": "1b4b563902703e1b423db59332321b217335db7daf9265e865aeec81261bed5e",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "4c92553878b98b2756c40ab26c8867e20f24039fcbbefbb0a2fcee1a8823272d"
+      "00-BOOK/DATA/volumes.json": "b463dfcc1f7411d844d52e24fe85b913ff887d35362d6dc2a20b993c2b275e8d"
     },
-    "head": "e8d70f3"
+    "head": "39819ad"
   },
-  "evidence_timestamp": "2026-07-27T16:26:49+00:00",
+  "evidence_timestamp": "2026-07-28T05:52:19+00:00",
   "generation": {
-    "generation_timestamp": "2026-07-28T00:56:57+05:30",
+    "generation_timestamp": "2026-07-28T11:35:33+05:30",
     "generation_timestamp_basis": "committer date of the source commit — the wall clock is excluded so that regeneration at an unchanged repository state is byte-reproducible",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "f18038c0d6e8a86f5d71e7318892a4830f9bbf35d02f4fff05f14462d9fcc46b",
+    "input_hash": "ab9cb1082c031999a3e3603ae8422063551f44d4f64160439f691c55d1643ba7",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash, the coverage measurement fingerprint, and HEAD, which pins the whole tracked tree",
     "output_hash_field": "content_hash",
     "repository_head": {
-      "commit": "e8d70f3",
+      "commit": "39819ad",
       "ref": "integration/recovery-001"
     },
-    "source_commit": "e8d70f33f72ec330b1bd3f13fa80f8e35edda08e"
+    "source_commit": "39819ada98bd582510f7e44a786e6021c58832ed"
   },
   "known_spine_gaps": [
     {
