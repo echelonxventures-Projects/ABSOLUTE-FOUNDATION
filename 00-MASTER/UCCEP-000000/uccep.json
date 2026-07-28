@@ -213,43 +213,43 @@
     {
       "advisory": false,
       "assertions": [],
-      "executed": false,
-      "exit_code": null,
+      "executed": true,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-VERIFY",
       "name": "Canonical verification (lint · tests · coverage · enforcement)",
       "owner": "verify.sh",
-      "reason": "tier full above the selected tier standard",
+      "reason": "",
       "tier": "full",
-      "verdict": "NOT-EXECUTED",
+      "verdict": "PASS",
       "write_scope": "read-only"
     },
     {
       "advisory": false,
       "assertions": [],
-      "executed": false,
-      "exit_code": null,
+      "executed": true,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-DETERMINISM-BUILD",
       "name": "Constitutional determinism (double-build, fail-on-divergence)",
       "owner": "engine/determinism (TASK-000033)",
-      "reason": "tier full above the selected tier standard",
+      "reason": "",
       "tier": "full",
-      "verdict": "NOT-EXECUTED",
+      "verdict": "PASS",
       "write_scope": "own-memory"
     },
     {
       "advisory": false,
       "assertions": [],
-      "executed": false,
-      "exit_code": null,
+      "executed": true,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-REG-DRIFT",
       "name": "Atomic Registration Transaction + registration-drift gate",
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
-      "reason": "tier full above the selected tier standard",
+      "reason": "",
       "tier": "full",
-      "verdict": "NOT-EXECUTED",
+      "verdict": "PASS",
       "write_scope": "projections"
     },
     {
@@ -432,16 +432,15 @@
         "CK-REG-DRIFT"
       ],
       "executed": [
-        "CK-REG-ENFORCE"
+        "CK-REG-ENFORCE",
+        "CK-REG-DRIFT"
       ],
       "failed": [],
       "id": "G-07",
       "name": "Registry Gate",
-      "not_executed": [
-        "CK-REG-DRIFT"
-      ],
+      "not_executed": [],
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
-      "verdict": "PARTIAL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -480,15 +479,15 @@
       "checks": [
         "CK-VERIFY"
       ],
-      "executed": [],
+      "executed": [
+        "CK-VERIFY"
+      ],
       "failed": [],
       "id": "G-10",
       "name": "Validation Gate",
-      "not_executed": [
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
       "owner": "00-CEP/CEP-004",
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [
@@ -499,16 +498,15 @@
         "CK-VERIFY"
       ],
       "executed": [
-        "CK-HEALTH"
+        "CK-HEALTH",
+        "CK-VERIFY"
       ],
       "failed": [],
       "id": "G-11",
       "name": "Certification Gate",
-      "not_executed": [
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
       "owner": "00-CEP/CEP-005",
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS-WITH-ADVISORY"
     },
     {
       "advisory_failed": [],
@@ -533,16 +531,16 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "executed": [],
-      "failed": [],
-      "id": "G-13",
-      "name": "Implementation Authorization Gate",
-      "not_executed": [
+      "executed": [
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
+      "failed": [],
+      "id": "G-13",
+      "name": "Implementation Authorization Gate",
+      "not_executed": [],
       "owner": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -683,16 +681,15 @@
       ],
       "executed": [
         "CK-REG-ENFORCE",
-        "CK-DISCOVERY"
+        "CK-DISCOVERY",
+        "CK-REG-DRIFT"
       ],
       "failed": [],
       "id": "PROGRAM-000004",
       "name": "Universal Registry Evolution",
-      "not_executed": [
-        "CK-REG-DRIFT"
-      ],
+      "not_executed": [],
       "output": "04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
-      "verdict": "PARTIAL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -708,16 +705,15 @@
       ],
       "executed": [
         "CK-REG-ENFORCE",
-        "CK-CMG"
+        "CK-CMG",
+        "CK-REG-DRIFT"
       ],
       "failed": [],
       "id": "PROGRAM-000005",
       "name": "Universal Repository Governance",
-      "not_executed": [
-        "CK-REG-DRIFT"
-      ],
+      "not_executed": [],
       "output": "05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
-      "verdict": "PARTIAL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -828,16 +824,15 @@
         "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"
       ],
       "executed": [
+        "CK-DETERMINISM-BUILD",
         "CK-SELF-NO-ENUMERATION"
       ],
       "failed": [],
       "id": "PROGRAM-000010",
       "name": "Universal Implementation Evolution",
-      "not_executed": [
-        "CK-DETERMINISM-BUILD"
-      ],
+      "not_executed": [],
       "output": "10-IMPLEMENTATION-EVOLUTION-ENGINE.md",
-      "verdict": "PARTIAL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -850,15 +845,15 @@
         "platform/universal_validation",
         "platform/validation_intelligence"
       ],
-      "executed": [],
+      "executed": [
+        "CK-VERIFY"
+      ],
       "failed": [],
       "id": "PROGRAM-000011",
       "name": "Universal Validation Evolution",
-      "not_executed": [
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
       "output": "11-VALIDATION-INTELLIGENCE.md",
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [
@@ -875,16 +870,15 @@
         "00-BOOK/DATA/certification.json"
       ],
       "executed": [
+        "CK-VERIFY",
         "CK-HEALTH"
       ],
       "failed": [],
       "id": "PROGRAM-000012",
       "name": "Universal Certification Evolution",
-      "not_executed": [
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
       "output": "12-CERTIFICATION-INTELLIGENCE.md",
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS-WITH-ADVISORY"
     },
     {
       "advisory_failed": [],
@@ -998,11 +992,11 @@
   ],
   "repository": {
     "branch": "integration/recovery-001",
-    "dirty_entries": 327,
-    "head": "1498cc0e7c6ffcd7f9c1ef7e61da5141c4f23476",
+    "dirty_entries": 45,
+    "head": "214c1a921e774d7a96ecd615f53d2671778dc50d",
     "working_tree": "DIRTY"
   },
-  "seal_sha256": "dc3a07530a3ff490d9b50e9716fce76005d1bb47409e768481ffb1ec743e2ccd",
-  "tier": "standard",
+  "seal_sha256": "a6082ab6c6a61b86157722c65d3a1d7d5095942d0742cef968d0116fe774dd5d",
+  "tier": "full",
   "unavailable": []
 }
