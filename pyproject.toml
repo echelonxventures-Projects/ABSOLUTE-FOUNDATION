@@ -69,6 +69,11 @@ ucos-registry = "engine.registry.universal.cli:main"
 # registry, resolution, composition, graph, runtime, validation and certification of all
 # context (fifteen universal context kinds, open to future context types).
 ucos-context = "engine.context.cli:main"
+# PROGRAM-002 (UMK-000001): Universal Meta-Kernel — the smallest open-world meta-model.
+# Prove constitutional compliance, run the mandatory architectural proof, and emit
+# validation/certification evidence. Open by registration; no kernel redesign for unknown
+# future concept-categories.
+ucos-kernel = "engine.kernel.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -101,6 +106,7 @@ addopts = [
   "--cov=engine.knowledge",
   "--cov=engine.graph",
   "--cov=engine.context",
+  "--cov=engine.kernel",
   "--cov=platform.foundation",
   "--cov=platform.identity",
   "--cov=platform.administration",
@@ -127,7 +133,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

@@ -62,6 +62,10 @@ help:
 	@echo "  make uei           regenerate the UEI-000001 evolution-intelligence determinations (Ω∞-001B)"
 	@echo "  make uei-gate      fail-closed Evolution Intelligence Gate (Ω∞-001B exit criteria)"
 	@echo "  make uei-self      UEI guards over its own surface"
+	@echo "  make umk           regenerate the UMK-000001 Universal Meta-Kernel deliverables (PROGRAM-002)"
+	@echo "  make umk-gate      fail-closed Universal Meta-Kernel constitutional gate"
+	@echo "  make umk-self      UMK-000001 guards over its own surface"
+	@echo "  make umk-certify   fail-closed UNCONDITIONAL certification (all 20 matrix dimensions = 100%)"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
 
@@ -499,3 +503,53 @@ uakos-archive:
 		if [ ! -d "$$d" ]; then echo "MISSING archived phase: $$d" ; ok=0 ; fi ; \
 	done ; \
 	[ "$$ok" -eq 1 ] && echo "UAKOS/USIS archived operational-memory phases present (4)"
+
+
+
+# umk: UMK-000001 — Universal Meta-Kernel Foundation (PROGRAM-002, WAVE-2).
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# The Universal Meta-Kernel itself lives under engine/kernel/: the smallest possible
+# open, self-describing meta-type system. Everything the platform can ever represent is a
+# MetaObject classified by a registered MetaType; the reflective root MetaType is
+# classified by itself. Concept-categories are registered DATA, never enum members, so a
+# previously unknown category (a civilization, language family, value-exchange system,
+# taxation/audit/temporal/governance/scientific model, provider category, capability
+# domain or execution model) is admitted by registration only — the kernel is never
+# redesigned (Engineering Rule 7).
+#
+# This target runs the executable expression of PROGRAM-002 in
+# 00-MASTER/UMK-000001/umk_engine.py, which BINDS every universal abstraction declared in
+# umk-kernel.json to its home in engine/kernel/, runs the kernel's own executed
+# constitutional proof (engine/kernel/compliance.py), and emits the seven deliverables +
+# validation/certification evidence into 00-MASTER/UMK-000001/. It legislates nothing and
+# freezes no architecture.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside its own
+# operational-memory directory (guarded, fail-closed). The kernel is also runnable
+# directly via the `ucos-kernel` console script (prove / certify / describe / evidence).
+#
+# Exit 0 constitutionally compliant · 1 a quality gate failed · 2 fail-closed abort
+# (declaration or substrate unusable — no verdict may be asserted).
+.PHONY: umk umk-gate umk-self umk-certify
+umk:
+	@python3 00-MASTER/UMK-000001/umk_engine.py
+
+umk-gate:
+	@python3 00-MASTER/UMK-000001/umk_engine.py --gate
+
+# umk-certify: fail-closed UNCONDITIONAL certification — exits non-zero unless every one
+# of the twenty Universal Certification Matrix dimensions reports exactly 100%. The two
+# coverage dimensions are read from coverage.xml, so run `make test` (or `make verify`)
+# first so the measured statement/branch coverage is present.
+umk-certify: test
+	@python3 00-MASTER/UMK-000001/umk_engine.py --certify
+
+# umk-self: the programme's guards over its own surface — declaration integrity (every
+# abstraction resolves to a real home, every seeded meta-type exists, every architectural-
+# proof category is proven), forbidden-write scope (every output lands inside
+# 00-MASTER/UMK-000001/), and self-determinism (deliverables are byte-identical across runs).
+umk-self:
+	@python3 00-MASTER/UMK-000001/umk_engine.py --check-declaration
+	@python3 00-MASTER/UMK-000001/umk_engine.py --check-write-scope
+	@python3 00-MASTER/UMK-000001/umk_engine.py --check-determinism
