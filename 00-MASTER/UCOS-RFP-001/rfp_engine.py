@@ -182,6 +182,15 @@ def run_stage(stage: dict, env: dict[str, str]) -> tuple[int, str]:
     argv = resolve_argv(list(stage.get("argv") or []))
     if not argv:
         fail_closed(f"stage declares no argv: {stage.get('id')}")
+    # A stage may declare the environment it must run under. That declaration is
+    # part of the stage's identity: a producer whose output is a function of the
+    # ambient environment rather than of the tracked tree has no fixed point in
+    # the tree (RFP-1), and the declared environment is what pins it to the tree.
+    # Applied here, per stage, over the shared child environment — which keys a
+    # stage declares is DECLARED, never decided here (PR-07 Zero Enumeration).
+    declared = stage.get("env") or {}
+    if declared:
+        env = {**env, **{str(k): str(v) for k, v in dict(declared).items()}}
     try:
         res = subprocess.run(
             argv, cwd=REPO, capture_output=True, text=True, timeout=3600, check=False, env=env

@@ -192,7 +192,7 @@
       "signature": "Tracked content changed during a pipeline pass but no declared stage's write zone contains it."
     }
   ],
-  "declaration_seal_sha256": "ae1c3c6383997823bf4cf6ec49bbdd87ed86d9c19cb2efb8b6fcd05325ae15cc",
+  "declaration_seal_sha256": "2dcbdd48f6e24639d54b64099bf1150f37d9c4fd93cb11e50e5728a364b54b57",
   "findings": [],
   "lifecycle": [
     {
@@ -332,10 +332,14 @@
         ]
       },
       {
+        "$env_comment": "The repository-only pass. Without it the engine also scans a corpus directory OUTSIDE the repository, so its output becomes a function of the machine rather than of the tracked tree — and a stage whose output is not a function of the repository can have no fixed point in the repository. Measured consequence of omitting it: the closure reading was 89 gaps here and 0 gaps in the certifier's own closure checks, which declare this same env, so the blueprint recorded a gap count that the next stage immediately contradicted. This is the identical reading the session anchor records and the integration blueprint binds.",
         "argv": [
           "$PY",
           "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py"
         ],
+        "env": {
+          "CLOSURE_SKIP_CORPUS": "1"
+        },
         "heavy": false,
         "id": "STAGE-CLOSURE",
         "name": "Knowledge closure",
