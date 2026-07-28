@@ -992,8 +992,8 @@
   ],
   "repository": {
     "branch": "integration/recovery-001",
-    "dirty_entries": 45,
-    "head": "214c1a921e774d7a96ecd615f53d2671778dc50d",
+    "dirty_entries": 24,
+    "head": "41416475a065091961eb8061114ec8a52d8d0894",
     "working_tree": "DIRTY"
   },
   "seal_sha256": "a6082ab6c6a61b86157722c65d3a1d7d5095942d0742cef968d0116fe774dd5d",
