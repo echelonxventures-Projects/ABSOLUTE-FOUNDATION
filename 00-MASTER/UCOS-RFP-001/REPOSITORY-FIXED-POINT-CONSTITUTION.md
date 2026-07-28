@@ -15,7 +15,7 @@
 | AUTHORITY | NONE — DERIVED TRUTH. This programme legislates the closure CONDITION; it ratifies nothing, freezes nothing and owns no capability. |
 | ORIGIN | CK-REG-DRIFT. A generated artifact carrying repository-derived state (HEAD, commit metadata, projection hashes) was admitted into the registration corpus, creating a registration relation with no fixed point. This declaration makes that class of topology constitutionally impossible rather than individually repaired. |
 | DECLARATION | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` |
-| SEAL | `b6f59ca02e65dfd6` |
+| SEAL | `36d83457417e4c1b` |
 
 ## Vocabulary
 
@@ -53,9 +53,9 @@
 
 ### RFP-3 — No Working-Tree Self-Observation
 
-**Rule.** No tracked artifact's bytes may record an observation of the working tree that contains it — its cleanliness, its dirty-entry count, or the set of modified paths. Such observations are legitimate inputs to a GATE VERDICT and legitimate content of a gate's exit code and standard output; they may not be written into a tracked artifact.
+**Rule.** No tracked artifact's bytes may record an observation of the working tree that the act of recording invalidates. An observation whose scope EXCLUDES the recorder's own declared write zone does not invalidate itself and is therefore permitted; an unscoped observation is not. In every case the observation is a legitimate input to a GATE VERDICT and legitimate content of a gate's exit code and standard output.
 
-**Why.** Writing the observation falsifies it: an artifact recording 'working tree CLEAN, 0 entries' makes the tree dirty by being written, so the recorded value is never the value that holds once it is recorded. The measurement is sound; only its persistence is unsound.
+**Why.** Writing an unscoped observation falsifies it: an artifact recording 'working tree CLEAN, 0 entries' makes the tree dirty by being written, so the recorded value is never the value that holds once it is recorded. The defect is not the measurement, it is the self-inclusion of the recorder in what it measures. Scoping the observation to exclude the recorder's own write zone removes the self-inclusion and makes the record stable, which is why a repository-cleanliness gate may persist a verdict measured outside its own zone.
 
 *Cycle class:* CYC-OBSERVE · *Enforced by:* `CK-FIXED-POINT`
 

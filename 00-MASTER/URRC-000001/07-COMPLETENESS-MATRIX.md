@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
-| WORKING TREE | DIRTY (362 entries) |
+| REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
+| FIXED-POINT BASIS | UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -76,32 +76,32 @@ Per-dimension completeness, declared as a lower bound.
 **`DV-11`** — Traceability completeness across the thirteen traceability dimensions of every registered artifact.
 
 - **Primitive** — `subdict_fill_ratio`
-- **Result** — 348/16081 dimension slots populated (2.16%) · 272/1237 record(s) carry at least one trace (21.98%) · 0 record(s) fully traced · 965 with none
+- **Result** — 348/15509 dimension slots populated (2.24%) · 272/1193 record(s) carry at least one trace (22.79%) · 0 record(s) fully traced · 921 with none
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records measured | 1237 |
-| dimension slots | 16081 |
+| records measured | 1193 |
+| dimension slots | 15509 |
 | slots populated | 348 |
-| populated share (%) | 2.16 |
+| populated share (%) | 2.24 |
 | records fully traced | 0 |
-| records with no trace | 965 |
+| records with no trace | 921 |
 | records with at least one trace | 272 |
-| traced-record share (%) | 21.98 |
-| dimension `architecture` | 251/1237 |
-| dimension `certification` | 0/1237 |
-| dimension `deployment` | 0/1237 |
-| dimension `design` | 0/1237 |
-| dimension `functional_test` | 0/1237 |
-| dimension `implementation` | 17/1237 |
-| dimension `integration_test` | 0/1237 |
-| dimension `operations` | 0/1237 |
-| dimension `production` | 0/1237 |
-| dimension `requirement` | 80/1237 |
-| dimension `security_test` | 0/1237 |
-| dimension `source_code` | 0/1237 |
-| dimension `unit_test` | 0/1237 |
+| traced-record share (%) | 22.79 |
+| dimension `architecture` | 251/1193 |
+| dimension `certification` | 0/1193 |
+| dimension `deployment` | 0/1193 |
+| dimension `design` | 0/1193 |
+| dimension `functional_test` | 0/1193 |
+| dimension `implementation` | 17/1193 |
+| dimension `integration_test` | 0/1193 |
+| dimension `operations` | 0/1193 |
+| dimension `production` | 0/1193 |
+| dimension `requirement` | 80/1193 |
+| dimension `security_test` | 0/1193 |
+| dimension `source_code` | 0/1193 |
+| dimension `unit_test` | 0/1193 |
 
 **`DV-20`** — Certification domains passed against domains declared.
 

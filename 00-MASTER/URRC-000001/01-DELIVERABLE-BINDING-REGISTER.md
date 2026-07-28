@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
-| WORKING TREE | DIRTY (362 entries) |
+| REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
+| FIXED-POINT BASIS | UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |

@@ -211,12 +211,31 @@ def is_tracked(path: str) -> bool:
 
 
 def repository_state() -> dict:
-    porcelain = git("status", "--porcelain")
+    """The repository state RECORDED in this programme's emitted determinations.
+
+    Repository Fixed-Point Closure (UCOS-RFP-001 RFP-2 / RFP-3) forbids a tracked
+    artifact from embedding the identity of the commit that contains it, and from
+    recording an observation of the working tree that contains it. This function
+    previously emitted both, and both are non-convergent by construction:
+
+      * a commit's identity is a function of the bytes it contains, so an artifact
+        naming its own commit demands a commit whose hash lies inside its own tree;
+      * writing "CLEAN, 0 entries" makes the tree dirty, so the value recorded is
+        never the value that holds once it has been recorded.
+
+    Neither is lost. Version control already owns the containing commit, and tree
+    cleanliness is owned by the gate's exit code — restating either here duplicated
+    state the repository already held and put this programme's determinations in
+    permanent Evidence Drift. The value below is constant, so regeneration at an
+    unchanged tracked tree is byte-identical in every environment and at every
+    commit.
+    """
     return {
-        "branch": git("branch", "--show-current") or "UNKNOWN",
-        "head": git("rev-parse", "HEAD") or "UNKNOWN",
-        "working_tree": "DIRTY" if porcelain else "CLEAN",
-        "dirty_entries": len([line for line in porcelain.splitlines() if line.strip()]),
+        "anchor": "the containing commit — owned by version control, never restated here",
+        "basis": (
+            "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 "
+            "(no working-tree self-observation)"
+        ),
     }
 
 
@@ -1245,12 +1264,7 @@ def check_law_namespace(decl: dict, sub: Substrate | None = None) -> list[str]:
 def self_determinism(decl: dict, sub: Substrate | None = None) -> list[str]:
     """Render the output set twice from one model; the bytes must be identical."""
     substrate = sub if sub is not None else Substrate(decl)
-    fixed_state = {
-        "branch": "self-check",
-        "head": "0" * 40,
-        "working_tree": "CLEAN",
-        "dirty_entries": 0,
-    }
+    fixed_state = repository_state()
     first = render(decl, build_model(decl, substrate, fixed_state))
     second = render(decl, build_model(decl, substrate, fixed_state))
     if set(first) != set(second):
@@ -1500,8 +1514,8 @@ def header(title: str, decl: dict, model: dict, purpose: str) -> str:
                 ["AUTHORITY", f"**{programme['authority']}**"],
                 ["GOVERNING INSTRUMENT", f"`{programme['governing_instrument']}`"],
                 ["OPERATIONAL HOME", f"`{programme['operational_home']}`"],
-                ["BRANCH / HEAD", f"`{repo['branch']}` · `{repo['head'][:12]}`"],
-                ["WORKING TREE", f"{repo['working_tree']} ({repo['dirty_entries']} entries)"],
+                ["REPOSITORY ANCHOR", repo["anchor"]],
+                ["FIXED-POINT BASIS", repo["basis"]],
                 ["DELIVERABLE BINDING", f"{m['deliverables_bound']}/{m['deliverable_total']}"],
                 ["SUBSTRATE USABLE", f"{m['substrate_usable']}/{m['substrate_total']}"],
                 ["DETERMINATION", f"**{model['determination']}**"],

@@ -1752,10 +1752,8 @@
     "version": "1.0"
   },
   "repository": {
-    "branch": "integration/recovery-001",
-    "dirty_entries": 16,
-    "head": "41416475a065091961eb8061114ec8a52d8d0894",
-    "working_tree": "DIRTY"
+    "anchor": "the containing commit — owned by version control, never restated here",
+    "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
   "seal_sha256": "8d34d196a80a05b84587c929bcabcbebce103a346b8e4d1127c0fffc7f7c727a",
   "undispositioned": [],

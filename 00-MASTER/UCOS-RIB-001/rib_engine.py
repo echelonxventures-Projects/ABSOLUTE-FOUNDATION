@@ -345,8 +345,13 @@ def repository_state() -> dict:
         if re.match(r"^(MERGE_HEAD|CHERRY_PICK_HEAD|REVERT_HEAD|BISECT_LOG|rebase-)", child.name)
     )
     return {
-        "branch": git("branch", "--show-current") or "UNKNOWN",
-        "head": git("rev-parse", "HEAD") or "UNKNOWN",
+        # UCOS-RFP-001 RFP-2 — the containing commit's identity is owned by version
+        # control and is never restated in a tracked artifact: an artifact naming its
+        # own commit demands a commit whose hash lies inside its own tree, so no
+        # regeneration of it can converge. Detachment is retained because the
+        # declared integrity gate consumes it, and observing it is not
+        # self-referential: writing an artifact does not detach HEAD.
+        "anchor": "the containing commit — owned by version control, never restated here",
         "detached": not git("symbolic-ref", "-q", "HEAD"),
         "working_tree": "DIRTY" if entries else "CLEAN",
         "raw_entries": entries,
@@ -1838,8 +1843,9 @@ def header(title: str, decl: dict, model: dict, purpose: str) -> str:
                 ["AUTHORITY", f"**{programme['authority']}**"],
                 ["GOVERNING INSTRUMENT", f"`{programme['governing_instrument']}`"],
                 ["OPERATIONAL HOME", f"`{programme['operational_home']}`"],
-                ["BRANCH / HEAD", f"`{repo['branch']}` · `{repo['head'][:12]}`"],
-                ["WORKING TREE", f"{repo['working_tree']} ({repo['dirty_entries']} entries)"],
+                ["REPOSITORY ANCHOR", repo["anchor"]],
+                ["WORKING TREE", f"{repo['working_tree']} ({repo['dirty_entries']} entries, "
+                                 "measured outside this programme's own zone — RFP-3)"],
                 ["UNITS DISCOVERED", str(m["unit_total"])],
                 ["SUBSTRATE USABLE", f"{m['substrate_usable']}/{m['substrate_total']}"],
                 ["GATES", f"{m['gates_passed']}/{m['gate_total']}"],
@@ -2016,7 +2022,7 @@ def render(decl: dict, model: dict) -> dict[str, str]:
             ],
         )
         + f"\n- **Execution identity** — `{model['seal_sha256']}`\n"
-        + f"- **Session identity** — `{model['repository']['head']}`\n"
+        + f"- **Repository anchor** — {model['repository']['anchor']}\n"
         + FOOTER
     )
 
@@ -2083,8 +2089,7 @@ def render(decl: dict, model: dict) -> dict[str, str]:
         + table(
             ["Dimension", "Value"],
             [
-                ["Branch", f"`{model['repository']['branch']}`"],
-                ["HEAD", f"`{model['repository']['head']}`"],
+                ["Repository anchor", model["repository"]["anchor"]],
                 ["Detached", "YES" if model["repository"]["detached"] else "no"],
                 ["Working tree", model["repository"]["working_tree"]],
                 ["Dirty entries", str(model["repository"]["dirty_entries"])],
@@ -2779,7 +2784,7 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                 ],
                 [
                     "Repository Truth synchronized",
-                    f"HEAD `{model['repository']['head'][:12]}`",
+                    model["repository"]["anchor"],
                     "PASS",
                 ],
                 [
@@ -2828,7 +2833,7 @@ def render(decl: dict, model: dict) -> dict[str, str]:
         + table(
             ["Element", "Value"],
             [
-                ["Anchor", f"`{model['repository']['head']}` on `{model['repository']['branch']}`"],
+                ["Anchor", model["repository"]["anchor"]],
                 ["Regeneration route", f"`{model['work_packages'][0]['route']}`"],
                 [
                     "Completed work",
@@ -3240,8 +3245,8 @@ def check_totality(decl: dict, sub: Substrate | None = None) -> list[str]:
 
 
 FIXED_STATE = {
-    "branch": "self-check",
-    "head": "0" * 40,
+    # UCOS-RFP-001 RFP-2 — no commit identity is emitted, so none is neutralised here.
+    "anchor": "the containing commit — owned by version control, never restated here",
     "detached": False,
     "working_tree": "CLEAN",
     "dirty_entries": 0,

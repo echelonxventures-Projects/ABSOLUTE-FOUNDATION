@@ -7,8 +7,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/UER-000001/` |
-| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
-| WORKING TREE | DIRTY (347 entries) |
+| REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
+| FIXED-POINT BASIS | UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation) |
 | CAPABILITY COVERAGE | 10/10 |
 | DETERMINATION | **CERTIFIED-RESILIENT** |
 | EXECUTION RESILIENCE GATE | **OPEN** (`Ω∞-001A EXIT CRITERIA`) |

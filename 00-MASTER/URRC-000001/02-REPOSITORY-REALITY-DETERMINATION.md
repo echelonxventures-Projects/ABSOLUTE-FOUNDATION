@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
-| WORKING TREE | DIRTY (362 entries) |
+| REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
+| FIXED-POINT BASIS | UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -53,47 +53,47 @@ What the repository contains, and the substrate that proves it.
 **`DV-01`** — Registered artifact records present in the registration projection.
 
 - **Primitive** — `record_count`
-- **Result** — 1237 records
+- **Result** — 1193 records
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records | 1237 |
+| records | 1193 |
 
 **`DV-02`** — Declared registration count against the records actually present.
 
 - **Primitive** — `declared_vs_actual`
-- **Result** — declared 1237 · present 1237 · delta 0
+- **Result** — declared 1193 · present 1193 · delta 0
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| declared | 1237 |
-| present | 1237 |
+| declared | 1193 |
+| present | 1193 |
 | delta | 0 |
 
 **`DV-03`** — Registration census against the portfolio rollup.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1237 vs 1237 · delta 0
+- **Result** — 1193 vs 1193 · delta 0
 - **Substrate evidence** — `S-01`, `S-03`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1237 |
-| `S-03` portfolio.total_artifacts | 1237 |
+| `S-01` count | 1193 |
+| `S-03` portfolio.total_artifacts | 1193 |
 | delta | 0 |
 
 **`DV-04`** — Registration census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1237 vs 1237 · delta 0
+- **Result** — 1193 vs 1193 · delta 0
 - **Substrate evidence** — `S-01`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1237 |
-| `S-04` scope.artifacts | 1237 |
+| `S-01` count | 1193 |
+| `S-04` scope.artifacts | 1193 |
 | delta | 0 |
 
 #### D-02 — Substrate census
@@ -112,17 +112,17 @@ What the repository contains, and the substrate that proves it.
 
 | Key | Value | Detail | Detail |
 |---|---|---|---|
-| `S-01` | `00-BOOK/DATA/artifacts.json` | YES | YES | YES | 2/2 | 2474 | `e2f3036ee039` |
-| `S-02` | `00-BOOK/DATA/relationships.json` | YES | YES | YES | 2/2 | 25834 | `05b35b10ee3b` |
-| `S-03` | `00-BOOK/DATA/control-tower.json` | YES | YES | YES | 3/3 | 109 | `a62f02ab1b18` |
-| `S-04` | `00-BOOK/DATA/certification.json` | YES | YES | YES | 5/5 | 45 | `63a9e4544c00` |
-| `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1352 | `36fa777ab0df` |
+| `S-01` | `00-BOOK/DATA/artifacts.json` | YES | YES | YES | 2/2 | 2386 | `ad74b4bec63b` |
+| `S-02` | `00-BOOK/DATA/relationships.json` | YES | YES | YES | 2/2 | 25658 | `6929b5223697` |
+| `S-03` | `00-BOOK/DATA/control-tower.json` | YES | YES | YES | 3/3 | 108 | `1b4b56390270` |
+| `S-04` | `00-BOOK/DATA/certification.json` | YES | YES | YES | 5/5 | 45 | `9c58139bf04f` |
+| `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1319 | `c80b79fc82c6` |
 | `S-06` | `00-CMG/CMG-REGISTRY.json` | YES | YES | YES | 9/9 | 164 | `ae12d2d56565` |
-| `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | YES | YES | YES | 5/5 | 61 | `5417a1534a5c` |
-| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 127 | `707de81affc1` |
+| `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | YES | YES | YES | 5/5 | 64 | `a536c55e2030` |
+| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 129 | `bd79bf6b42d1` |
 | `S-09` | `00-MASTER/UCDA-000001/ucda-decisions.json` | YES | YES | YES | 4/4 | 85 | `78f195359e39` |
-| `S-10` | `00-MASTER/UCDA-000001/ucda.json` | YES | YES | YES | 6/6 | 298 | `7d9d1cd2422e` |
-| `S-11` | `00-MASTER/UER-000001/uer.json` | YES | YES | YES | 6/6 | 113 | `e0b6382eb349` |
+| `S-10` | `00-MASTER/UCDA-000001/ucda.json` | YES | YES | YES | 6/6 | 298 | `f47c4d45e37b` |
+| `S-11` | `00-MASTER/UER-000001/uer.json` | YES | YES | YES | 6/6 | 113 | `0ae82cb58fdb` |
 | `S-12` | `00-MASTER/IMR-0000/imr-0000-platform-bindings.json` | YES | YES | YES | 7/7 | 65 | `2df229587d73` |
 | `S-13` | `00-MASTER/IMR-003A/cios-bindings.json` | YES | YES | YES | 7/7 | 140 | `624b8de84505` |
 | `S-14` | `00-MASTER/STATE/mcs-state.json` | YES | YES | YES | 5/5 | 17 | `c55abefa0a04` |

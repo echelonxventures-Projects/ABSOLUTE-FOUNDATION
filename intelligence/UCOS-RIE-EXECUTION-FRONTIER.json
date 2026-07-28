@@ -12,7 +12,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "0ba48d992254d7a778abe8bbd0b34c8b6c442666bff5fed9725867e6b66ab144",
+  "content_hash": "2c8e0195f3ed60bcb5fbc7db39e1d21f0a4a4dc0ec957cffc8a6eff56ced734a",
   "critical_path": [
     "Band 10 Data",
     "Band 11 Service",
@@ -26,7 +26,6 @@
     "02-MASTER/BANDS-10-13-REALIZATION-LANE-CHARTER.md"
   ],
   "evidence_state": {
-    "branch": "integration/recovery-001",
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
       "fingerprint": "d78ae9ce77d5ef47acf16bf63975292b547218c023c516ff4563b676808b5c2e",
@@ -38,23 +37,16 @@
       "00-BOOK/DATA/control-tower.json": "1b4b563902703e1b423db59332321b217335db7daf9265e865aeec81261bed5e",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
       "00-BOOK/DATA/volumes.json": "b463dfcc1f7411d844d52e24fe85b913ff887d35362d6dc2a20b993c2b275e8d"
-    },
-    "head": "39819ad"
+    }
   },
   "evidence_timestamp": "2026-07-28T05:52:19+00:00",
   "generation": {
-    "generation_timestamp": "2026-07-28T11:35:33+05:30",
-    "generation_timestamp_basis": "committer date of the source commit — the wall clock is excluded so that regeneration at an unchanged repository state is byte-reproducible",
+    "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "ab9cb1082c031999a3e3603ae8422063551f44d4f64160439f691c55d1643ba7",
-    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash, the coverage measurement fingerprint, and HEAD, which pins the whole tracked tree",
-    "output_hash_field": "content_hash",
-    "repository_head": {
-      "commit": "39819ad",
-      "ref": "integration/recovery-001"
-    },
-    "source_commit": "39819ada98bd582510f7e44a786e6021c58832ed"
+    "input_hash": "42b4aaf9c93593e4a6f7bff4721ee28f9790f8026c1a6c9adc6bd0d50fdd48c1",
+    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
+    "output_hash_field": "content_hash"
   },
   "next_executable_capability": "EC-3 Band 10 (Data) realization",
   "producer": "UCOS-RIE-001 Repository Intelligence Engine v1.0.0",

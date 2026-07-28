@@ -6,8 +6,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md (Article 28, added by CEP-002-AMD-002)` |
 | OPERATIONAL HOME | `00-MASTER/UCDA-000001/` |
-| BRANCH / HEAD | `integration/recovery-001` · `41416475a065` |
-| WORKING TREE | DIRTY (16 entries) |
+| REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
+| FIXED-POINT BASIS | UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation) |
 | DECISIONS | 64 |
 | DETERMINATION | **ASSIMILATED** |
 | IMPLEMENTATION EVIDENCE GATE | **OPEN** (`CEP-002 Art 28.17–28.21`) |

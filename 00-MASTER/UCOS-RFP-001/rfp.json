@@ -192,7 +192,7 @@
       "signature": "Tracked content changed during a pipeline pass but no declared stage's write zone contains it."
     }
   ],
-  "declaration_seal_sha256": "b6f59ca02e65dfd6b35beb50838c4ea2c883f1e51f6c9a3de480e829d4ea8dc0",
+  "declaration_seal_sha256": "36d83457417e4c1b8e9c87b1d2f89e5eac22e42334f37aad4d1f4dff668ddeb8",
   "findings": [],
   "lifecycle": [
     {
@@ -505,8 +505,8 @@
         "CK-FIXED-POINT"
       ],
       "id": "RFP-3",
-      "rationale": "Writing the observation falsifies it: an artifact recording 'working tree CLEAN, 0 entries' makes the tree dirty by being written, so the recorded value is never the value that holds once it is recorded. The measurement is sound; only its persistence is unsound.",
-      "rule": "No tracked artifact's bytes may record an observation of the working tree that contains it — its cleanliness, its dirty-entry count, or the set of modified paths. Such observations are legitimate inputs to a GATE VERDICT and legitimate content of a gate's exit code and standard output; they may not be written into a tracked artifact.",
+      "rationale": "Writing an unscoped observation falsifies it: an artifact recording 'working tree CLEAN, 0 entries' makes the tree dirty by being written, so the recorded value is never the value that holds once it is recorded. The defect is not the measurement, it is the self-inclusion of the recorder in what it measures. Scoping the observation to exclude the recorder's own write zone removes the self-inclusion and makes the record stable, which is why a repository-cleanliness gate may persist a verdict measured outside its own zone.",
+      "rule": "No tracked artifact's bytes may record an observation of the working tree that the act of recording invalidates. An observation whose scope EXCLUDES the recorder's own declared write zone does not invalidate itself and is therefore permitted; an unscoped observation is not. In every case the observation is a legitimate input to a GATE VERDICT and legitimate content of a gate's exit code and standard output.",
       "title": "No Working-Tree Self-Observation"
     },
     {

@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
-| WORKING TREE | DIRTY (362 entries) |
+| REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
+| FIXED-POINT BASIS | UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -63,13 +63,13 @@ Validation, certification and compliance owners plus certification-scope reconci
 **`DV-04`** — Registration census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1237 vs 1237 · delta 0
+- **Result** — 1193 vs 1193 · delta 0
 - **Substrate evidence** — `S-01`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1237 |
-| `S-04` scope.artifacts | 1237 |
+| `S-01` count | 1193 |
+| `S-04` scope.artifacts | 1193 |
 | delta | 0 |
 
 **`DV-32`** — Computed gate verdicts.
@@ -81,7 +81,7 @@ Validation, certification and compliance owners plus certification-scope reconci
 | Key | Value |
 |---|---|
 | `PASS` | 10 |
-| `NOT-EXECUTED` | 3 |
+| `NOT-EXECUTED` | 4 |
 | `PARTIAL` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
@@ -93,9 +93,9 @@ Validation, certification and compliance owners plus certification-scope reconci
 | Key | Value |
 |---|---|
 | `PASS` | 8 |
+| `NOT-EXECUTED` | 3 |
 | `PARTIAL` | 3 |
 | `PASS-WITH-ADVISORY` | 3 |
-| `NOT-EXECUTED` | 2 |
 
 **`DV-34`** — Findings composing the certification ceiling.
 

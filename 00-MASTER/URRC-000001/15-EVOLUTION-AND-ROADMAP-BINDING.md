@@ -8,8 +8,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH** |
 | GOVERNING INSTRUMENT | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` |
 | OPERATIONAL HOME | `00-MASTER/URRC-000001/` |
-| BRANCH / HEAD | `integration/recovery-001` · `1498cc0e7c6f` |
-| WORKING TREE | DIRTY (362 entries) |
+| REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
+| FIXED-POINT BASIS | UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation) |
 | DELIVERABLE BINDING | 32/32 |
 | SUBSTRATE USABLE | 14/14 |
 | DETERMINATION | **REALITY-BOUND** |
@@ -52,17 +52,17 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-29`** — Programmes on the aggregate roster.
 
 - **Primitive** — `record_count`
-- **Result** — 16 records
+- **Result** — 17 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 16 |
+| records | 17 |
 
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 16 tracked path(s)
+- **Result** — 20 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -78,9 +78,13 @@ Evolution and master-roadmap owners; executable-owner delta.
 | `00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py` | TRACKED |
 | `00-MASTER/UCCEP-000000/uccep_engine.py` | TRACKED |
 | `00-MASTER/UCDA-000001/ucda_engine.py` | TRACKED |
+| `00-MASTER/UCOS-RFP-001/rfp_engine.py` | TRACKED |
+| `00-MASTER/UCOS-RIB-001/rib_engine.py` | TRACKED |
 | `00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py` | TRACKED |
 | `00-MASTER/UEI-000001/uei_engine.py` | TRACKED |
 | `00-MASTER/UER-000001/uer_engine.py` | TRACKED |
+| `00-MASTER/UMK-000001/umk_engine.py` | TRACKED |
+| `00-MASTER/UPF-000001/upf_engine.py` | TRACKED |
 | `00-MASTER/URRC-000001/urrc_engine.py` | TRACKED |
 | `verify.sh` | TRACKED |
 
@@ -93,12 +97,12 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-18`** — Programmes carrying a portfolio rollup.
 
 - **Primitive** — `record_count`
-- **Result** — 88 records
+- **Result** — 87 records
 - **Substrate evidence** — `S-03`
 
 | Key | Value |
 |---|---|
-| records | 88 |
+| records | 87 |
 
 
 ---

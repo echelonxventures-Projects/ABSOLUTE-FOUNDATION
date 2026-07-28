@@ -40,7 +40,7 @@
         "test_functions": 821
       },
       "intelligence": {
-        "loc": 15617,
+        "loc": 15629,
         "root": "intelligence",
         "source_files": 65,
         "test_files": 6,
@@ -61,10 +61,10 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 249018,
+    "total_loc": 249030,
     "total_tests": 8435
   },
-  "content_hash": "c077a315966263f16847fbfd637649fc5afcc8b64404cd06e6d037c47a90a3e8",
+  "content_hash": "3b9093dd9580ed894fb13b146b8f95821e6ac81df471308881640a0b99e1dba1",
   "corpus": {
     "artifacts": 1193,
     "edges": 12829,
@@ -80,7 +80,6 @@
     "volumes": 25
   },
   "evidence_state": {
-    "branch": "integration/recovery-001",
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
       "fingerprint": "d78ae9ce77d5ef47acf16bf63975292b547218c023c516ff4563b676808b5c2e",
@@ -92,23 +91,16 @@
       "00-BOOK/DATA/control-tower.json": "1b4b563902703e1b423db59332321b217335db7daf9265e865aeec81261bed5e",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
       "00-BOOK/DATA/volumes.json": "b463dfcc1f7411d844d52e24fe85b913ff887d35362d6dc2a20b993c2b275e8d"
-    },
-    "head": "39819ad"
+    }
   },
   "evidence_timestamp": "2026-07-28T05:52:19+00:00",
   "generation": {
-    "generation_timestamp": "2026-07-28T11:35:33+05:30",
-    "generation_timestamp_basis": "committer date of the source commit — the wall clock is excluded so that regeneration at an unchanged repository state is byte-reproducible",
+    "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "ab9cb1082c031999a3e3603ae8422063551f44d4f64160439f691c55d1643ba7",
-    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash, the coverage measurement fingerprint, and HEAD, which pins the whole tracked tree",
-    "output_hash_field": "content_hash",
-    "repository_head": {
-      "commit": "39819ad",
-      "ref": "integration/recovery-001"
-    },
-    "source_commit": "39819ada98bd582510f7e44a786e6021c58832ed"
+    "input_hash": "42b4aaf9c93593e4a6f7bff4721ee28f9790f8026c1a6c9adc6bd0d50fdd48c1",
+    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
+    "output_hash_field": "content_hash"
   },
   "health_flags": {
     "corpus_present": true,

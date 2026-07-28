@@ -142,17 +142,25 @@ class EvidenceReader:
         )
 
     def state_fingerprint(self) -> dict[str, Any]:
-        """A content fingerprint of all evidence inputs + HEAD.
+        """A content fingerprint of all evidence inputs.
 
         Identical repository state ⇒ identical fingerprint ⇒ identical outputs.
+
+        Repository Fixed-Point Closure (UCOS-RFP-001 RFP-2) — the commit identity
+        and branch that this fingerprint previously included are excluded. They made
+        every output non-convergent by construction: the outputs are committed, so
+        the commit they named was necessarily not the commit that contained them,
+        and each regeneration therefore rewrote them without limit. What remains
+        pins repository state honestly and without self-reference: the content
+        hashes of the generated evidence surfaces and the consumed coverage
+        measurement. Both are functions of tracked content, so the fingerprint is
+        stable across commits of an unchanged tree.
         """
         files = {
             self.config.rel(self.config.data_file(n)): sha256_file(self.config.data_file(n))
             for n in _DATA_FILES
         }
         return {
-            "head": self.head(),
-            "branch": self.branch(),
             "evidence_files": files,
             "coverage_measurement": {
                 "source": self.config.rel(self.config.coverage_xml),
@@ -169,28 +177,32 @@ class EvidenceReader:
     def generation_state(self) -> dict[str, Any]:
         """The provenance block every generated artefact carries.
 
-        Records the source commit, the generator, the generation timestamp, the
-        input hash and where the output hash lives. Every field is derived from
-        repository state, so regenerating at the same commit reproduces the same
-        bytes — provenance that cannot be reproduced is not provenance.
+        Records the generator, the input hash and where the output hash lives.
+        Every field is derived from tracked repository content, so regenerating
+        over an unchanged tree reproduces the same bytes — provenance that cannot
+        be reproduced is not provenance.
+
+        The source commit, the repository head and the generation timestamp taken
+        from the commit's committer date are deliberately ABSENT (UCOS-RFP-001
+        RFP-2). Version control already records which commit contains these
+        artifacts; restating it inside them duplicated that state and made the
+        artifacts unable to reproduce themselves, which is the defect class
+        UCOS-RFP-001 abolishes.
         """
         if "generation_state" not in self._cache:
             fingerprint = self.state_fingerprint()
             self._cache["generation_state"] = {
                 "generator": "UCOS-RIE-001 Repository Intelligence Engine",
                 "generator_version": __version__,
-                "source_commit": self.head_commit(),
-                "repository_head": {"ref": fingerprint["branch"], "commit": fingerprint["head"]},
-                "generation_timestamp": self.head_committed_at(),
-                "generation_timestamp_basis": (
-                    "committer date of the source commit — the wall clock is excluded so that "
-                    "regeneration at an unchanged repository state is byte-reproducible"
+                "anchor": (
+                    "the containing commit — owned by version control, never restated here "
+                    "(UCOS-RFP-001 RFP-2)"
                 ),
                 "input_hash": sha256_text(canonical_json(fingerprint)),
                 "input_hash_basis": (
-                    "sha256 over the canonical evidence fingerprint — every evidence file hash, "
-                    "the coverage measurement fingerprint, and HEAD, which pins the whole "
-                    "tracked tree"
+                    "sha256 over the canonical evidence fingerprint — every evidence file hash "
+                    "and the coverage measurement fingerprint, which together pin the tracked "
+                    "state these outputs derive from without naming the commit that carries them"
                 ),
                 "output_hash_field": "content_hash",
             }
