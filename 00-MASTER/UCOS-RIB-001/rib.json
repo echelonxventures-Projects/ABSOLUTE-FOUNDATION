@@ -1,24 +1,5 @@
 {
-  "compliance": [
-    {
-      "finding": "closure_gaps=89",
-      "gate": "GATE-08",
-      "id": "CMP-ONCE",
-      "rank": 2,
-      "remediation": "resolve the duplicate home through the concept-closure owner",
-      "requirement": "knowledge is recorded once, in exactly one canonical home",
-      "severity": "HIGH"
-    },
-    {
-      "finding": "validations_failed=1",
-      "gate": "GATE-04",
-      "id": "CMP-VALIDATE",
-      "rank": 2,
-      "remediation": "discharge the named validation obligation",
-      "requirement": "validation must pass",
-      "severity": "HIGH"
-    }
-  ],
+  "compliance": [],
   "cycle_classes": [
     {
       "benign": true,
@@ -35,7 +16,7 @@
       "rule": "cross_unit"
     }
   ],
-  "determination": "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP",
+  "determination": "BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED",
   "discovery": [
     {
       "class": "IMPLEMENTATION",
@@ -1210,8 +1191,8 @@
       "subject": "operational programmes whose engine no declared entry point names"
     }
   ],
-  "gate": "CLOSED",
-  "gate_exit": 1,
+  "gate": "OPEN",
+  "gate_exit": 0,
   "gates": [
     {
       "blocking": true,
@@ -1249,15 +1230,13 @@
     {
       "blocking": true,
       "criterion": "every validation obligation met",
-      "failures": [
-        "validations_failed=1"
-      ],
+      "failures": [],
       "id": "GATE-04",
       "metrics": [
         "validations_failed"
       ],
       "name": "Repository Validation",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "blocking": true,
@@ -1297,16 +1276,14 @@
     {
       "blocking": true,
       "criterion": "zero duplicate canonical homes and zero constitutional gaps in the concept closure",
-      "failures": [
-        "closure_gaps=89"
-      ],
+      "failures": [],
       "id": "GATE-08",
       "metrics": [
         "closure_duplicate_homes",
         "closure_gaps"
       ],
       "name": "Knowledge Once",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "blocking": true,
@@ -1760,10 +1737,7 @@
     "advisory_duplicate_signals": 8,
     "architectural_cycles": 0,
     "benign_cycles": 2,
-    "blocking_failed": [
-      "GATE-04",
-      "GATE-08"
-    ],
+    "blocking_failed": [],
     "catalogue_records": 68,
     "certification_domains_failed": 0,
     "certification_verdict_absent": 0,
@@ -1776,8 +1750,8 @@
       "OPERATIONAL-PROGRAMME": 14
     },
     "closure_duplicate_homes": 0,
-    "closure_gaps": 89,
-    "compliance_findings": 2,
+    "closure_gaps": 0,
+    "compliance_findings": 0,
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
@@ -1813,7 +1787,7 @@
     "gap_count:GAP-VERIFICATION": 211,
     "gap_findings": 642,
     "gate_total": 12,
-    "gates_passed": 10,
+    "gates_passed": 12,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -1857,7 +1831,7 @@
     "universes_unresolved": 0,
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
-    "validations_failed": 1,
+    "validations_failed": 0,
     "verifications_failed": 0,
     "wave_total": 6
   },
@@ -3555,7 +3529,7 @@
     "untracked": 0,
     "working_tree": "CLEAN"
   },
-  "seal_sha256": "8c42120793b08b58c129452668cbdcb0c3cb17918c0044b1b21a59cccc41ce53",
+  "seal_sha256": "662e6564a357ae49e42ef42ae5618040fe0f11e637370afb22f80afca859d04c",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -3610,7 +3584,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "cbdd10c9e280b32334bfc0db0e08fc516efd0f97fa890e57399a5ea97d1c023a",
+      "content_sha256": "d4b283386e8e86f99a961f21b264d281d069bf0ba63ab17652cfbc5172ced58c",
       "exists": true,
       "generated": true,
       "id": "SUB-CLOSURE",
@@ -3631,7 +3605,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the constitutional concept closure — knowledge-once evidence. GENERATED operational memory, not version-controlled: its value depends on how its owner was last invoked, and the reading bound here is the repository-only pass (CLOSURE_SKIP_CORPUS=1) that the session anchor records, because an external corpus is not Repository Truth",
-      "records": 536,
+      "records": 447,
       "required": true,
       "tracked": false
     },
@@ -3682,7 +3656,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "dfd9d9913a550899582c53a451d481f53d8820b540788f865cc104cd7de5a6f0",
+      "content_sha256": "0498cd98dc74fe1197c7ae5f12323c71aef8bf4065d9240ed63046f3d379e75b",
       "exists": true,
       "generated": true,
       "id": "SUB-PHASE3",
@@ -18109,10 +18083,10 @@
       "criterion": "the concept closure reports zero constitutional gaps",
       "expect": 0,
       "id": "VAL-10",
-      "measured": 89,
+      "measured": 0,
       "metric": "closure_gaps",
       "name": "Knowledge objects",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     }
   ],
   "verifications": [
