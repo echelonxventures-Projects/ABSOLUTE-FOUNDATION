@@ -66,6 +66,10 @@ help:
 	@echo "  make umk-gate      fail-closed Universal Meta-Kernel constitutional gate"
 	@echo "  make umk-self      UMK-000001 guards over its own surface"
 	@echo "  make umk-certify   fail-closed UNCONDITIONAL certification (all 20 matrix dimensions = 100%)"
+	@echo "  make uprf          regenerate the UPF-000001 Universal Provider Framework deliverables (PROGRAM-003)"
+	@echo "  make uprf-gate     fail-closed Universal Provider Framework constitutional gate"
+	@echo "  make uprf-self     UPF-000001 guards over its own surface"
+	@echo "  make uprf-certify  fail-closed UNCONDITIONAL certification (all 20 matrix dimensions = 100%)"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
 
@@ -553,3 +557,45 @@ umk-self:
 	@python3 00-MASTER/UMK-000001/umk_engine.py --check-declaration
 	@python3 00-MASTER/UMK-000001/umk_engine.py --check-write-scope
 	@python3 00-MASTER/UMK-000001/umk_engine.py --check-determinism
+
+
+
+# uprf: UPF-000001 — Universal Provider Framework (PROGRAM-003, WAVE-2).
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# The framework itself lives under engine/provider/: the constitutional realization layer
+# over the immutable PROGRAM-002 kernel. A provider category is a registered kernel
+# meta-type (open set); a provider is a kernel MetaObject classified by its category.
+# Concrete providers are future registrations, never framework modifications. It imports
+# and modifies neither the kernel nor the distinct platform/universal_provider (EC-2).
+#
+# This target runs the executable expression of PROGRAM-003 in
+# 00-MASTER/UPF-000001/upf_engine.py, which BINDS every provider responsibility declared in
+# upf-provider.json to its home under engine/provider/ (or a reused kernel primitive), runs
+# the framework's own executed constitutional proof (engine/provider/compliance.py), and
+# emits the nine deliverables + validation/certification evidence into 00-MASTER/UPF-000001/.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside its own
+# operational-memory directory (guarded, fail-closed). The framework is also runnable
+# directly via the `ucos-uprf` console script (prove / certify / describe / evidence).
+#
+# Exit 0 compliant/certified · 1 a gate/dimension below 100% · 2 fail-closed abort.
+.PHONY: uprf uprf-gate uprf-self uprf-certify
+uprf:
+	@python3 00-MASTER/UPF-000001/upf_engine.py
+
+uprf-gate:
+	@python3 00-MASTER/UPF-000001/upf_engine.py --gate
+
+# uprf-self: declaration integrity (every responsibility resolves, every category is
+# proven), forbidden-write scope (outputs land inside 00-MASTER/UPF-000001/), self-determinism.
+uprf-self:
+	@python3 00-MASTER/UPF-000001/upf_engine.py --check-declaration
+	@python3 00-MASTER/UPF-000001/upf_engine.py --check-write-scope
+	@python3 00-MASTER/UPF-000001/upf_engine.py --check-determinism
+
+# uprf-certify: fail-closed UNCONDITIONAL certification — non-zero unless every one of the
+# twenty Universal Certification Matrix dimensions reports exactly 100%. Coverage dimensions
+# are read from coverage.xml, so `make test` runs first.
+uprf-certify: test
+	@python3 00-MASTER/UPF-000001/upf_engine.py --certify
