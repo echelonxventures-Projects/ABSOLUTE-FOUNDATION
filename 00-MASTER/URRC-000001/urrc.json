@@ -1524,18 +1524,18 @@
       "unknown": false
     },
     {
-      "count": 19,
+      "count": 18,
       "evidence": [
         "S-07"
       ],
-      "headline": "19 records",
+      "headline": "18 records",
       "id": "DV-27",
       "primitive": "record_count",
       "purpose": "Located executable checks bound by the aggregate gate.",
       "rows": [
         [
           "records",
-          "19"
+          "18"
         ]
       ],
       "unknown": false
@@ -2205,8 +2205,8 @@
           "YES",
           "YES",
           "5/5",
-          "64",
-          "`a536c55e2030`"
+          "63",
+          "`de740f856e73`"
         ],
         [
           "`S-08`",
@@ -3336,7 +3336,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "a536c55e2030340ccaf5fcb5a0e53544a928872db46fd91b857ee18f8edd4516",
+      "content_sha256": "de740f856e73c2c4ba34c55ba73e97ebc13389e967909b6b035f654820c56ced",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",
@@ -3358,7 +3358,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The aggregate constitutional gate: located checks, gates, programme roster, findings.",
-      "records": 64,
+      "records": 63,
       "required": true,
       "tracked": true
     },

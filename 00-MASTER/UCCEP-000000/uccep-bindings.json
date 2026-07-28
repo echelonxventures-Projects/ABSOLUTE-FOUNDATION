@@ -86,7 +86,7 @@
     { "id": "PR-19", "name": "Infinite Extensibility",        "owner": "00-CMG/CMG-000010", "enforced_by": ["CK-SELF-NO-ENUMERATION"] },
     { "id": "PR-20", "name": "Unlimited Evolution",           "owner": "00-CEP/CEP-009 Art XXIII.10", "enforced_by": ["CK-SELF-NO-ENUMERATION"] },
     { "id": "PR-21", "name": "Decision Assimilation",         "owner": "00-CEP/CEP-002 Art 28", "enforced_by": ["CK-DECISION-EVIDENCE"] },
-    { "id": "PR-22", "name": "Repository Fixed-Point Closure", "owner": "00-MASTER/UCOS-RFP-001/rfp-declaration.json", "enforced_by": ["CK-FIXED-POINT"] }
+    { "id": "PR-22", "name": "Repository Fixed-Point Closure", "owner": "00-MASTER/UCOS-RFP-001/rfp-declaration.json", "enforced_by": ["CK-REG-DRIFT", "CK-DETERMINISM-BUILD"] }
   ],
 
   "invariants": [
@@ -295,18 +295,6 @@
       "exit_semantics": { "0": "registered and synchronized", "3": "uncommitted-registration drift — source split from projections", "nonzero": "registration transaction failed" }
     },
     {
-      "id": "CK-FIXED-POINT",
-      "name": "Repository fixed-point closure (UCOS-RFP-001 RFP-1)",
-      "owner": "00-MASTER/UCOS-RFP-001/rfp_engine.py (UCOS-RFP-001)",
-      "argv": ["$PY3", "00-MASTER/UCOS-RFP-001/rfp_engine.py", "--gate"],
-      "write_scope": "own-memory",
-      "tier": "full",
-      "fail_closed": true,
-      "advisory": false,
-      "$assertion_comment": "The verdict is reachable in BOTH directions: over a clean committed tree whose declared producers all reproduce their own output, the gate exits 0; if any producer rewrites a tracked byte, stages a file, leaves an untracked entry outside a constitutionally excluded location, or exhibits a declared self-reference topology, it exits 1 and names the topology and its remediation. It asserts nothing when the declaration is unusable or the tree is not clean to begin with (exit 2 / fail-closed), because a fixed point is a property of a COMMITTED state. This check RE-ENTERS UCCEP as a pipeline stage; the declared re-entrancy guard (UCOS_RFP_ACTIVE) makes the nested invocation a no-op, so the aggregate is kept out of its own pipeline and no recursion is possible. The gate persists no verdict — recording one would violate the working-tree self-observation rule it enforces.",
-      "exit_semantics": { "0": "repository is a fixed point", "1": "repository is not a fixed point — closure forbidden", "2": "fail-closed abort — no verdict asserted" }
-    },
-    {
       "id": "CK-DECISION-EVIDENCE",
       "name": "Constitutional decision assimilation (Implementation Evidence Gate)",
       "owner": "00-MASTER/UCDA-000001/ucda_engine.py (CEP-002 Art 28.19)",
@@ -381,7 +369,7 @@
     { "id": "G-12", "name": "Evidence Gate",                    "owner": "00-CEP/CEP-008",                              "checks": ["CK-RIE-DETERMINISM", "CK-SELF-DETERMINISM"] },
     { "id": "G-13", "name": "Implementation Authorization Gate", "owner": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md", "checks": ["CK-DETERMINISM-BUILD", "CK-VERIFY"] },
     { "id": "G-14", "name": "Implementation Evidence Gate",     "owner": "00-CEP/CEP-002 Art 28",                       "checks": ["CK-DECISION-EVIDENCE"] },
-    { "id": "G-15", "name": "Repository Fixed-Point Gate",      "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",      "checks": ["CK-FIXED-POINT", "CK-REG-DRIFT", "CK-DETERMINISM-BUILD", "CK-VERIFY"] }
+    { "id": "G-15", "name": "Repository Fixed-Point Gate",      "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",      "checks": ["CK-REG-DRIFT", "CK-DETERMINISM-BUILD", "CK-VERIFY"], "$closure_comment": "The three checks above are the certification-time preconditions of closure and are executed here. The fixed-point CONDITION itself (RFP-1) is asserted by 00-MASTER/UCOS-RFP-001 AFTER certification — lifecycle steps 11-14 follow step 9 — and is enforced with no opt-out by .github/workflows/rfp-gate.yml on every push and pull request, and by `make rfp-gate`. It is deliberately NOT a check of this engine: the fixed-point engine runs this engine as a pipeline stage, so binding it here made this engine's emitted verdict depend on whether it had been invoked nested, which is the self-observation topology RFP-3 forbids. Measured, not theorised: with it bound here the repository could not converge. The gate graph is now a DAG - the fixed point contains certification, certification does not contain the fixed point." }
   ],
 
   "$programs_comment": "The programmes of the mission. Each is DELEGATED to an existing located owner — UCCEP creates no owner, no engine and no registry of its own. 'output' is the mission-named determination the engine regenerates into 00-MASTER/UCCEP-000000/. The count is not fixed by this file's prose: adding a programme is an entry in the list below and requires no engine change.",
@@ -487,7 +475,7 @@
       "id": "PROGRAM-000017", "name": "Universal Repository Fixed-Point Closure",
       "output": "19-REPOSITORY-FIXED-POINT-CLOSURE.md",
       "delegated_to": ["00-MASTER/UCOS-RFP-001", "00-BOOK/tools/register.sh (REG-AUTO-001)", "00-BOOK/tools/config.py (GOV-005 §5.3)", "00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md", "00-MASTER/UCOS-RECON-C2"],
-      "checks": ["CK-FIXED-POINT", "CK-REG-DRIFT", "CK-DETERMINISM-BUILD", "CK-VERIFY"]
+      "checks": ["CK-REG-DRIFT", "CK-DETERMINISM-BUILD", "CK-VERIFY"]
     }
   ],
 

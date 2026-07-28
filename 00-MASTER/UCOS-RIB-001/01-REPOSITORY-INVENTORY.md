@@ -42,10 +42,10 @@
 | Substrate | Path | Kind | Tracked | Parses | Pointers | Records | Content |
 |---|---|---|---|---|---|---|---|
 | `SUB-CERT` | `00-BOOK/DATA/certification.json` | json | YES | YES | 4/4 | 10 | `9c58139bf04f` |
-| `SUB-CLOSURE` | `00-MASTER/UAKOS-CLOSURE-002/closure.json` | json | **NO** | YES | 4/4 | 447 | `d4b283386e8e` |
+| `SUB-CLOSURE` | `00-MASTER/UAKOS-CLOSURE-002/closure.json` | json | **NO** | YES | 4/4 | 447 | `not recorded` |
 | `SUB-CONTROL` | `00-BOOK/DATA/control-tower.json` | json | YES | YES | 3/3 | 108 | `1b4b56390270` |
 | `SUB-EDGES` | `00-BOOK/DATA/relationships.json` | json | YES | YES | 2/2 | 12829 | `6929b5223697` |
-| `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `0498cd98dc74` |
+| `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `not recorded` |
 | `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 53 | `dfc10e370a0d` |
 | `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1193 | `ad74b4bec63b` |
 | `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 93 | `bbab1dd0832f` |
@@ -55,7 +55,7 @@
 | `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 64 | `f47c4d45e37b` |
 | `SUB-UEI` | `00-MASTER/UEI-000001/uei.json` | json | YES | YES | 2/2 | 15 | `50e80b680d9f` |
 | `SUB-UER` | `00-MASTER/UER-000001/uer.json` | json | YES | YES | 2/2 | 10 | `0ae82cb58fdb` |
-| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `736b9a975443` |
+| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `61565f872dcb` |
 
 ## Enrichment
 

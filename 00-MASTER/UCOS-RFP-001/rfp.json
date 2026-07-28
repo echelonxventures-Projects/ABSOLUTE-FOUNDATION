@@ -192,7 +192,7 @@
       "signature": "Tracked content changed during a pipeline pass but no declared stage's write zone contains it."
     }
   ],
-  "declaration_seal_sha256": "36d83457417e4c1b8e9c87b1d2f89e5eac22e42334f37aad4d1f4dff668ddeb8",
+  "declaration_seal_sha256": "ae1c3c6383997823bf4cf6ec49bbdd87ed86d9c19cb2efb8b6fcd05325ae15cc",
   "findings": [],
   "lifecycle": [
     {
@@ -460,6 +460,7 @@
         ]
       },
       {
+        "$reentrant_comment": "Declared non-reentrant as standing defence in depth. The gate graph is a DAG — this engine is a stage of the fixed-point pipeline and the fixed-point condition is NOT one of its checks — so no recursion occurs today. It was briefly bound as a check of this engine, and the measured consequence was that this engine's emitted verdict depended on whether it had been invoked nested, which is the self-observation topology RFP-3 forbids: the repository could not converge. Keeping the guard armed means a future re-binding degrades to a no-op instead of to non-termination.",
         "argv": [
           "$PY",
           "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -470,7 +471,7 @@
         "id": "STAGE-UCCEP",
         "name": "Aggregate constitutional certification",
         "owner": "00-MASTER/UCCEP-000000",
-        "purpose": "the eighteen checks, fifteen gates and sixteen programmes; LAST because it certifies what the earlier stages produced",
+        "purpose": "the constitutional checks, gates and programmes; LAST because it certifies what the earlier stages produced",
         "reentrant": false,
         "required": true,
         "writes": [

@@ -75,12 +75,12 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-27`** — Located executable checks bound by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 19 records
+- **Result** — 18 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 19 |
+| records | 18 |
 
 **`DV-28`** — Constitutional gates declared by the aggregate gate.
 

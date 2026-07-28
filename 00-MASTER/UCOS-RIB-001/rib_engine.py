@@ -452,7 +452,23 @@ class Substrate:
             payload: object | None = None
             if record["exists"]:
                 raw = path.read_bytes()
-                record["content_sha256"] = hashlib.sha256(raw).hexdigest()
+                # UCOS-RFP-001 RFP-4 — a substrate the declaration marks GENERATED is
+                # itself derived from the tracked tree, and this blueprint's own outputs
+                # are part of that tree. Recording its content hash therefore closes a
+                # cycle: the hash lands in a tracked artifact, which changes the tree the
+                # generated substrate derives from, which changes the hash, without limit.
+                # Measured: it did not converge over four successive commits. The hash of a
+                # generated substrate is not reproducible provenance in any case, because
+                # the commit does not carry the substrate. Its usability is still fully
+                # evidenced — existence, parsing, resolved pointers and record count are all
+                # recorded, and the only thing withheld is the one field that cannot hold
+                # still.
+                if not record["generated"]:
+                    record["content_sha256"] = hashlib.sha256(raw).hexdigest()
+                else:
+                    record["content_sha256"] = (
+                        "not recorded — generated substrate (UCOS-RFP-001 RFP-4)"
+                    )
                 try:
                     payload = tomllib.loads(raw.decode("utf-8")) if kind == "toml" else None
                     if payload is None:
