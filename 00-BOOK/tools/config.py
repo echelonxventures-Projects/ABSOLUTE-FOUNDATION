@@ -335,8 +335,10 @@ NON_ARTIFACT_SCOPE = {
                    "lint caches, coverage (.ec1-venv/, *.egg-info/, __pycache__/, "
                    ".pytest_cache/, .ruff_cache/, .coverage, coverage.xml) — ignored",
     "generated":   "deterministically re-derivable outputs: the emitted registries, "
-                   "DATA/, CONTROL-TOWER/, PORTAL/, and generated evidence "
-                   "(determinism-evidence/) — corpus-internal excludes / ignored",
+                   "DATA/, CONTROL-TOWER/, PORTAL/, generated evidence "
+                   "(determinism-evidence/), and derived intelligence emitted "
+                   "outside 00-BOOK by a located producer (the UCOS-RIE-001 output "
+                   "family) — corpus-internal excludes / ignored",
     "transient":   "editor/office lock & owner files (~$*) and the registration "
                    "re-entrancy lock — ignored",
 }
@@ -777,6 +779,42 @@ EXCLUDE_DIR_PREFIXES = (
     # (a startswith() prefix that matches exactly that one operational-memory file).
     "00-MASTER/",
     "MCP-001-MASTER-CONTEXT-AND-EXECUTION-SYSTEM.md",
+    # Generated Projections (class 2) emitted OUTSIDE 00-BOOK — the UCOS-RIE-001
+    # Repository Intelligence Engine output family. Closes the same defect
+    # UCOS-RECON-C1 closed for Operational Memory, on the leg that was still open:
+    # this list enumerated the generator's generated outputs only where they live
+    # under 00-BOOK/, so a generated family emitted anywhere else was admitted into
+    # the Repository Corpus. `intelligence/` did not exist when the list was
+    # authored — verbatim the RECON-C1 root cause.
+    #
+    # These files are DERIVED STATE, not knowledge state: every one declares
+    # "authority": "NONE (derived truth)" in its own envelope, and the baseline
+    # declares itself "a GENERATED OUTPUT of UCOS-RIE-001". Under GOV-005 §5.3 a
+    # GENERATED ARTIFACT is "regenerated, never hand-registered", so it is not an
+    # eligible repository artifact.
+    #
+    # Registering them is not merely a mis-classification, it is UNSATISFIABLE.
+    # Registration must record an artifact's content_hash, but every RIE output
+    # embeds (a) HEAD's own commit id and committer date and (b) the sha256 of the
+    # 00-BOOK/DATA projections that registration itself regenerates. So the bytes
+    # that must be registered are a function of the commit that will contain them
+    # and of the register that records them: committing changes HEAD, which changes
+    # the required bytes, which changes the register — a self-referential relation
+    # with no fixpoint (reaching one would require a commit whose hash appears in
+    # its own tree). CK-REG-DRIFT could therefore never hold across a regeneration,
+    # which is why "regenerate at the committed anchor" has recurred without ever
+    # converging. RIE also derives from gitignored coverage.xml, so its content is
+    # not even a function of the repository alone.
+    #
+    # Family prefixes, not artifact names: every present and FUTURE output of this
+    # producer is covered, and nothing else is. Deliberately NOT the broader
+    # "intelligence/UCOS-" — that would also capture
+    # intelligence/UCOS-UPI-001/publication-formats.json, the authored format
+    # descriptor the ignore authority explicitly re-admits as registerable.
+    # Append-only-safe: the 11 identities already allocated to these paths are
+    # RETAINED-BUT-RETIRED in the id-ledger per derive_change_events (UMB-017 C-05).
+    "intelligence/UCOS-RIE-",
+    "intelligence/UCOS-IMP-BASELINE-001.",
 )
 
 # Only these file extensions are registered as artifacts.

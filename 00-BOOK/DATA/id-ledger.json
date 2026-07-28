@@ -13790,6 +13790,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-IMP-BASELINE-001.rib.json",
         "name": "Ucos Imp Baseline 001.Rib"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "946e084f87818e213fcdba2e14b90f5c057ca47e327c90d9543acb0b0b7f128d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-IMP-BASELINE-001.rib.json",
+        "name": "Ucos Imp Baseline 001.Rib"
       }
     ],
     "UCOS-INTELLIGENCE-000003": [
@@ -13860,6 +13869,15 @@
         "seq": 8,
         "at": "2026-07-26T06:32:00+00:00",
         "content_hash": "909da0a1d5817a3112833ea5edf79fe23cd42c1108dde4c0fe521f2aae5be289",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-AEOS-READINESS.json",
+        "name": "Ucos Rie Aeos Readiness"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "162e8ac4809b19f445b91851c00bfe94db9c83aaeec5131aeee00d992386da1c",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-AEOS-READINESS.json",
@@ -13938,6 +13956,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
         "name": "Ucos Rie Capability Catalog"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "17e99193717435fd6b984ba1d17c272216daf667fb77eb04c742bf4991bd530d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
+        "name": "Ucos Rie Capability Catalog"
       }
     ],
     "UCOS-INTELLIGENCE-000005": [
@@ -14008,6 +14035,15 @@
         "seq": 8,
         "at": "2026-07-26T06:32:00+00:00",
         "content_hash": "bad77ec9e0d0f248e3999a72b013caf862fd7ff77d68d946380108d9cf824860",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json",
+        "name": "Ucos Rie Dependency Graph"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "464fabcd3b03d2f83e85341e5a637a3463ec21577d53f75ac95f4872ff12ad77",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json",
@@ -14086,6 +14122,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-DIGITAL-TWIN.json",
         "name": "Ucos Rie Digital Twin"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "43b035e3eed1e1278b0d748b751a5ca8f5c44c95033a2d1ea2e64106b276b686",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-DIGITAL-TWIN.json",
+        "name": "Ucos Rie Digital Twin"
       }
     ],
     "UCOS-INTELLIGENCE-000007": [
@@ -14156,6 +14201,15 @@
         "seq": 8,
         "at": "2026-07-26T06:32:00+00:00",
         "content_hash": "61dba1590da3c0368ce6ff873f2209454df685a50ef736479f0b3c92b9e56710",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-EXECUTION-FRONTIER.json",
+        "name": "Ucos Rie Execution Frontier"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "cc48790458f64ab1a660a9784d744b8349438a7263537cf06819737edff03fa6",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-EXECUTION-FRONTIER.json",
@@ -14234,6 +14288,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-HEALTH.json",
         "name": "Ucos Rie Health"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "d45ee3f5d74baf9779ca0f315af1d2bfb50d313cfb1b9a255e21716b08947be2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-HEALTH.json",
+        "name": "Ucos Rie Health"
       }
     ],
     "UCOS-INTELLIGENCE-000009": [
@@ -14304,6 +14367,15 @@
         "seq": 8,
         "at": "2026-07-26T06:32:00+00:00",
         "content_hash": "5afb11fb4867496bf46a45b05481b75da2f298b39963a9cc4d329ceec5cb9d04",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-MODEL.json",
+        "name": "Ucos Rie Model"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "90e60fc81f100b613086278cbc849d93939d0981ba2afcbc3156e6196ad96aa1",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-MODEL.json",
@@ -14382,6 +14454,15 @@
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-PROGRESS.json",
         "name": "Ucos Rie Progress"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "cd056503cdc2289d82653dca147be0f767dc183810de00f7e23b24f3471e5170",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-PROGRESS.json",
+        "name": "Ucos Rie Progress"
       }
     ],
     "UCOS-INTELLIGENCE-000011": [
@@ -14452,6 +14533,15 @@
         "seq": 8,
         "at": "2026-07-26T06:32:00+00:00",
         "content_hash": "e59857d8dcf54b5a963dd51d6f6c743477577181f39863e013c879669b1616ad",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "intelligence/UCOS-RIE-SNAPSHOT.json",
+        "name": "Ucos Rie Snapshot"
+      },
+      {
+        "seq": 9,
+        "at": "2026-07-28T02:21:11+00:00",
+        "content_hash": "eac221100e0631532b6ef53093c54c07a458e8f22228c4fa00023ff226f609c3",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "intelligence/UCOS-RIE-SNAPSHOT.json",

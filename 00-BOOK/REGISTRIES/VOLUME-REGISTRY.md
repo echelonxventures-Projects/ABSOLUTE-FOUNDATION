@@ -6,7 +6,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 747 | UPN-000000001–UPN-000009583 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 736 | UPN-000000001–UPN-000009583 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 66 | UPN-000001327–UPN-000009587 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 57 | UPN-000000022–UPN-000009371 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 747
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 736
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -93,17 +93,6 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-DATA-000032` | Validation Evidence | — | ACTIVE |
 | `UCOS-DATA-000033` | Validation Report | — | ACTIVE |
 | `UCOS-MASTER-000026` | UCOS Ω∞ — AEOS-001 CAPABILITY DISCOVERY & PROGRAM ADMISSION D… | AEOS-001 | ACTIVE |
-| `UCOS-INTELLIGENCE-000001` | Ucos Imp Baseline 001.Evidence | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000002` | Ucos Imp Baseline 001.Rib | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000003` | Ucos Rie Aeos Readiness | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000004` | Ucos Rie Capability Catalog | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000005` | Ucos Rie Dependency Graph | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000006` | Ucos Rie Digital Twin | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000007` | Ucos Rie Execution Frontier | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000008` | Ucos Rie Health | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000009` | Ucos Rie Model | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000010` | Ucos Rie Progress | — | ACTIVE |
-| `UCOS-INTELLIGENCE-000011` | Ucos Rie Snapshot | — | ACTIVE |
 | `UCOS-DATA-000034` | EC3-B10-U04 — SCHEMA FOUNDATION — REALIZATION COMPLETION REPORT | — | ACTIVE |
 | `UCOS-DATA-000035` | Acceptance Decision | — | ACTIVE |
 | `UCOS-DATA-000036` | Cce Certification | — | ACTIVE |
