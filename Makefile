@@ -599,3 +599,50 @@ uprf-self:
 # are read from coverage.xml, so `make test` runs first.
 uprf-certify: test
 	@python3 00-MASTER/UPF-000001/upf_engine.py --certify
+
+
+# ---------------------------------------------------------------------------
+# UCOS-RFP-001 — REPOSITORY FIXED-POINT CLOSURE (G-15).
+#
+# The permanent answer to the class of defect that produced CK-REG-DRIFT. It adds no
+# validator, engine, registry or capability: it BINDS the producers the repository
+# already owns into one declared pipeline and asserts a single property over them —
+# executing that pipeline over the committed HEAD must leave the repository
+# byte-identical, for each declared convergence pass. Every producer, cycle class,
+# artifact class and closure criterion is an entry in
+# 00-MASTER/UCOS-RFP-001/rfp-declaration.json; this Makefile and the engine never need
+# to change to admit a new one, and nothing is enumerated in either.
+#
+# The gate is what makes closure conditional on REALITY rather than on assertion:
+# certification says the state is lawful, the fixed point says the state is real.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside
+# 00-MASTER/UCOS-RFP-001/ (guarded, fail-closed). The gate itself PERSISTS NOTHING —
+# its verdict is the exit code, because an artifact recording "the repository is a
+# fixed point" would falsify that sentence by being written (RFP-3).
+#
+# Exit 0 fixed point (gate OPEN) · 1 not a fixed point (gate CLOSED) · 2 fail-closed abort.
+.PHONY: rfp rfp-gate rfp-detect rfp-self
+rfp:
+	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py
+
+# rfp-gate: G-15. Fail-closed. Requires a clean committed tree to begin (a fixed point
+# is a property of a COMMITTED state), then runs the full declared pipeline three times.
+rfp-gate:
+	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --gate
+
+# rfp-detect: the same measurement, reported without asserting a verdict — for use while
+# repairing a producer. Never fails, so it can never be mistaken for the gate.
+rfp-detect:
+	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --detect
+
+# rfp-self: declaration integrity, zero-enumeration proof (the engine names no producer,
+# zone or cycle class), forbidden-write scope, self-determinism, and self-compliance —
+# the programme that abolishes commit self-reference and working-tree self-observation
+# proving it commits neither in its own emitted bytes.
+rfp-self:
+	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-declaration
+	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-write-scope
+	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-determinism
+	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-self-compliance

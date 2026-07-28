@@ -1,0 +1,118 @@
+name: UCOS-RFP-001 Repository Fixed-Point Gate (G-15)
+
+# UCOS-RFP-001 — Repository Fixed-Point Closure.
+#
+# This workflow adds NO new validator, engine, registry, queue or capability. It runs the
+# executable expression of the declaration in 00-MASTER/UCOS-RFP-001/rfp-declaration.json,
+# which declares the principle, the admission classes, the self-reference topologies, the
+# producer pipeline and the closure criteria. Adding a producer, a topology, a class or a
+# criterion is an edit to that DATA file — this workflow never needs to change, and nothing
+# is enumerated here.
+#
+# WHY THIS RUNS IN CI AND NOT ONLY LOCALLY. RFP-7 forbids opt-out. A gate a programme must
+# enrol in is a gate the next programme forgets. Running on every push and every pull
+# request over a FRESH CHECKOUT of the committed HEAD makes inheritance structural: the
+# condition is evaluated over the repository, so every PROGRAM, EPIC, EIP, Universe,
+# Framework, Capability and Module the repository contains is bound without declaring
+# itself bound, and none can exempt itself by omission.
+#
+# WHAT IT PROVES. That a fresh checkout of the committed HEAD, put through the complete
+# declared pipeline the declared number of times, reproduces the repository byte for byte —
+# no tracked modification, nothing staged, no untracked entry outside a constitutionally
+# excluded location, and no self-reference topology. This is the property whose absence
+# produced CK-REG-DRIFT: a repository that cannot reproduce itself has certified a state
+# that does not exist.
+#
+# Exit semantics of the gate:
+#   0  the repository is a Repository Fixed Point (gate OPEN)
+#   1  the repository is not a fixed point (gate CLOSED) — closure is forbidden
+#   2  fail-closed abort — the declaration is unusable or the tree was not clean to begin
+#      with, so no verdict may be asserted
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rfp-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  self-guards:
+    name: UCOS-RFP-001 self-guards (five, each fail-closed)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12 (canonical toolchain series, DE-04)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Stdlib only — the guards install nothing. Each is fail-closed on its own.
+      - name: Declaration integrity (ids unique, principles bound, exactly one registrable class)
+        run: python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-declaration
+
+      - name: Zero-enumeration proof (the engine names no producer, zone or topology)
+        run: python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-no-enumeration
+
+      - name: Forbidden-write guard (writes only inside its own operational-memory lane)
+        run: python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-write-scope
+
+      - name: Self-determinism (byte-identical rendering across runs)
+        run: python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-determinism
+
+      # The programme that abolishes commit self-reference and working-tree
+      # self-observation must not practise either in its own emitted bytes.
+      - name: Self-compliance (its own output satisfies RFP-2 and RFP-3)
+        run: python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-self-compliance
+
+  fixed-point-gate:
+    name: Repository Fixed-Point Gate (fresh checkout, full pipeline, fail-closed)
+    runs-on: ubuntu-latest
+    needs: self-guards
+    steps:
+      # A fresh checkout IS the substance of the test: the pipeline must reproduce the
+      # repository from nothing but the committed tree.
+      - name: Checkout committed HEAD
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12 (canonical toolchain series, DE-04)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # The pipeline's verification stage owns the toolchain; bootstrap.sh pins it.
+      - name: Bootstrap the pinned toolchain
+        run: bash bootstrap.sh
+
+      - name: Confirm the checkout is clean before any verdict is asserted
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::checkout is not clean before the gate ran — no verdict may be asserted"
+            git status --porcelain
+            exit 2
+          fi
+          echo "checkout clean — a fixed point may be asserted over this committed state"
+
+      - name: Repository Fixed-Point Gate (fail-closed)
+        run: python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --gate
+
+      # Diagnostic only, and only when the gate has already failed: names the residue and
+      # the topology behind it so the failure is actionable without a local reproduction.
+      - name: Name the residue and its topology
+        if: failure()
+        run: |
+          git status --porcelain || true
+          git diff --stat || true
+          python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --detect || true

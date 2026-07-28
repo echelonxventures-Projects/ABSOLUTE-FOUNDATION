@@ -1,0 +1,630 @@
+{
+  "$measurement_comment": "This artifact records the DECLARATION only. No verdict, no commit identity and no working-tree observation is persisted (RFP-2, RFP-3): the gate's finding lives in its exit code.",
+  "artifact_classes": [
+    {
+      "authority": "00-BOOK/tools/config.py::REPOSITORY_ARTIFACT_DEFINITION",
+      "convergence": "INVARIANT — authored; no producer rewrites it, so it is trivially a fixed point.",
+      "definition": "A version-controlled, human-authored corpus file of an included type. The only registrable class.",
+      "id": "CLS-CANONICAL-SOURCE",
+      "name": "Canonical Source",
+      "registrable": true,
+      "tracked": true
+    },
+    {
+      "authority": "00-BOOK/tools/config.py::EXCLUDE_DIR_PREFIXES (corpus-internal excludes)",
+      "convergence": "REQUIRED — must be byte-reproducible from canonical source by its owner.",
+      "definition": "A deterministically re-derivable projection of the registered corpus: the emitted registries, DATA, control tower and portal. Regenerated, never hand-registered; the register must not list itself.",
+      "id": "CLS-GENERATED-PROJECTION",
+      "name": "Generated Projection",
+      "registrable": false,
+      "tracked": true
+    },
+    {
+      "authority": "00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md",
+      "convergence": "REQUIRED — a programme determination is evidence, and evidence that re-execution does not reproduce is Evidence Drift.",
+      "definition": "Execution and coordination state: programme lanes, determinations, dashboards and registers of the Master Context System. Knowledge state is corpus; execution state is memory; the two are never mixed.",
+      "id": "CLS-OPERATIONAL-MEMORY",
+      "name": "Operational Memory",
+      "registrable": false,
+      "tracked": true
+    },
+    {
+      "authority": "00-BOOK/tools/config.py::EXCLUDE_DIR_PREFIXES (UCOS-RECON-C2)",
+      "convergence": "REQUIRED — derived truth must be re-derivable, or it is not truth.",
+      "definition": "Repository-derived intelligence emitted by a located producer outside the projection zone, declaring AUTHORITY = NONE. Derived state is neither knowledge state nor execution state, and is never authoritative.",
+      "id": "CLS-DERIVED-INTELLIGENCE",
+      "name": "Derived Intelligence",
+      "registrable": false,
+      "tracked": true
+    },
+    {
+      "authority": ".gitignore (00-MASTER/**/evidence/, determinism-evidence/)",
+      "convergence": "REQUIRED-WHEN-TRACKED — per-run evidence is not tracked; where a family is tracked it carries the full obligation.",
+      "definition": "Per-run execution evidence and audit trails produced by a gate or engine as proof of a specific execution.",
+      "id": "CLS-EVIDENCE",
+      "name": "Evidence",
+      "registrable": false,
+      "tracked": false
+    },
+    {
+      "authority": "00-BOOK/tools/config.py::EXCLUDE_DIR_PREFIXES / .gitignore",
+      "convergence": "REQUIRED — a certification whose re-execution differs certifies nothing.",
+      "definition": "The verdict artifacts of a certification runtime: certification registers, gate registers and seals.",
+      "id": "CLS-CERTIFICATION",
+      "name": "Certification",
+      "registrable": false,
+      "tracked": true
+    },
+    {
+      "authority": ".gitignore",
+      "convergence": "EXEMPT — never tracked, so outside the fixed point by construction.",
+      "definition": "Build, cache, dependency, coverage, lock and editor outputs. Environment artifacts.",
+      "id": "CLS-TRANSIENT",
+      "name": "Transient Output",
+      "registrable": false,
+      "tracked": false
+    }
+  ],
+  "class_derivation": {
+    "$comment": "Totality without enumeration. Any present or future family is placed by these ordered questions; no family needs a new class and no path is listed.",
+    "invariant": "Exactly one class admits registration (CLS-CANONICAL-SOURCE). Every class that is tracked and has a producer carries the convergence obligation. There is no class that is both derived and registrable — which is the state that produced CK-REG-DRIFT.",
+    "ordered_questions": [
+      "Is it absent from version control (ignored or untracked)? → CLS-TRANSIENT if environment output, else CLS-EVIDENCE.",
+      "Does a located producer rewrite it? → NO: CLS-CANONICAL-SOURCE.",
+      "Is it emitted into the corpus-internal projection zone? → CLS-GENERATED-PROJECTION.",
+      "Is it a verdict of a certification runtime? → CLS-CERTIFICATION.",
+      "Is it programme execution or coordination state? → CLS-OPERATIONAL-MEMORY.",
+      "Otherwise it is producer output declaring AUTHORITY = NONE → CLS-DERIVED-INTELLIGENCE."
+    ]
+  },
+  "closure_criteria": [
+    {
+      "blocking": true,
+      "criterion": "the tree is clean before the fixed point is asserted",
+      "expect": 0,
+      "id": "CLO-01",
+      "measure": "initial_dirty_entries",
+      "note": "a fixed point cannot be asserted over an uncommitted tree; this fails closed rather than measuring the wrong state"
+    },
+    {
+      "blocking": true,
+      "criterion": "every required pipeline stage exits successfully",
+      "expect": 0,
+      "id": "CLO-02",
+      "measure": "stage_failures"
+    },
+    {
+      "blocking": true,
+      "criterion": "no tracked file is modified by any pass",
+      "expect": 0,
+      "id": "CLO-03",
+      "measure": "tracked_modifications"
+    },
+    {
+      "blocking": true,
+      "criterion": "no file is staged by any pass",
+      "expect": 0,
+      "id": "CLO-04",
+      "measure": "staged_entries"
+    },
+    {
+      "blocking": true,
+      "criterion": "no untracked entry appears outside a constitutionally excluded location",
+      "expect": 0,
+      "id": "CLO-05",
+      "measure": "untracked_outside_excluded"
+    },
+    {
+      "blocking": true,
+      "criterion": "the repository is byte-identical after every declared pass",
+      "expect": 0,
+      "id": "CLO-06",
+      "measure": "non_fixed_point_passes"
+    },
+    {
+      "blocking": true,
+      "criterion": "no self-reference cycle is detected",
+      "expect": 0,
+      "id": "CLO-07",
+      "measure": "cycles_detected"
+    },
+    {
+      "blocking": true,
+      "criterion": "all residue is attributable to a declared producer",
+      "expect": 0,
+      "id": "CLO-08",
+      "measure": "unattributed_paths"
+    }
+  ],
+  "cycle_classes": [
+    {
+      "detector": "pass_instability",
+      "id": "CYC-OBSERVE",
+      "name": "Self-observation cycle",
+      "principle": "RFP-3",
+      "remediation": "Stop persisting the observation. Keep it as an input to the gate verdict and to standard output.",
+      "severity": "CRITICAL",
+      "signature": "The producer's output differs between two consecutive executions at ONE unchanged commit. Only an input the producer itself perturbs can do that; the working tree is the input it perturbs by writing."
+    },
+    {
+      "detector": "commit_token_in_delta",
+      "id": "CYC-COMMIT",
+      "name": "Commit-identity cycle",
+      "principle": "RFP-2",
+      "remediation": "Remove the commit identity from the emitted bytes. Version control already records it.",
+      "severity": "CRITICAL",
+      "signature": "The bytes a producer writes contain a hex token that this repository's object database resolves to a commit. Only `git rev-parse`-class input produces that, and the artifact is inside a commit it cannot name."
+    },
+    {
+      "detector": "mutual_hash_in_delta",
+      "id": "CYC-HASH",
+      "name": "Hash cycle",
+      "principle": "RFP-4",
+      "remediation": "Break the mutual embedding: one side must derive from the other, never both.",
+      "severity": "CRITICAL",
+      "signature": "Within one pipeline pass, artifact A's written bytes contain the content hash of artifact B while B's written bytes contain the content hash of A."
+    },
+    {
+      "detector": "foreign_projection_write",
+      "id": "CYC-REGISTER",
+      "name": "Registration cycle",
+      "principle": "RFP-5",
+      "remediation": "Withdraw the class from registration through the declared admission authority.",
+      "severity": "CRITICAL",
+      "signature": "A producer that does not own the registration projections nevertheless causes them to change — so a non-canonical artifact is carrying a registered identity."
+    },
+    {
+      "detector": "reentrancy",
+      "id": "CYC-RECURSE",
+      "name": "Recursive generator",
+      "principle": "RFP-6",
+      "remediation": "Declare the stage non-reentrant; the aggregate must exclude itself from its own pipeline.",
+      "severity": "CRITICAL",
+      "signature": "A producer re-enters itself, directly or through an aggregate that invokes it."
+    },
+    {
+      "detector": "unattributed_residue",
+      "id": "CYC-UNDECLARED",
+      "name": "Undeclared producer",
+      "principle": "RFP-6",
+      "remediation": "Declare the producer as a pipeline stage, or stop it from writing tracked content.",
+      "severity": "HIGH",
+      "signature": "Tracked content changed during a pipeline pass but no declared stage's write zone contains it."
+    }
+  ],
+  "declaration_seal_sha256": "b6f59ca02e65dfd6b35beb50838c4ea2c883f1e51f6c9a3de480e829d4ea8dc0",
+  "findings": [],
+  "lifecycle": [
+    {
+      "closure_relevant": false,
+      "stage": "Repository Discovery",
+      "step": 1
+    },
+    {
+      "closure_relevant": false,
+      "stage": "Context Assimilation",
+      "step": 2
+    },
+    {
+      "closure_relevant": false,
+      "stage": "Architecture Review",
+      "step": 3
+    },
+    {
+      "closure_relevant": false,
+      "stage": "Implementation",
+      "step": 4
+    },
+    {
+      "closure_relevant": true,
+      "gate": "G-10",
+      "stage": "Verification",
+      "step": 5
+    },
+    {
+      "closure_relevant": true,
+      "gate": "G-10",
+      "stage": "Validation",
+      "step": 6
+    },
+    {
+      "closure_relevant": true,
+      "gate": "G-12",
+      "stage": "Evidence Generation",
+      "step": 7
+    },
+    {
+      "closure_relevant": true,
+      "gate": "G-07",
+      "stage": "Registry Regeneration",
+      "step": 8
+    },
+    {
+      "closure_relevant": true,
+      "gate": "G-11",
+      "stage": "Certification",
+      "step": 9
+    },
+    {
+      "closure_relevant": true,
+      "stage": "Commit",
+      "step": 10
+    },
+    {
+      "closure_relevant": true,
+      "gate": "G-15",
+      "stage": "Fresh Repository Discovery",
+      "step": 11
+    },
+    {
+      "closure_relevant": true,
+      "gate": "G-15",
+      "stage": "Pipeline Re-execution",
+      "step": 12
+    },
+    {
+      "closure_relevant": true,
+      "gate": "G-15",
+      "stage": "Repository Fixed-Point Verification",
+      "step": 13
+    },
+    {
+      "closure_relevant": true,
+      "gate": "G-15",
+      "stage": "Programme Closure",
+      "step": 14
+    }
+  ],
+  "pipeline": {
+    "convergence_passes": 3,
+    "reentrancy_env": "UCOS_RFP_ACTIVE",
+    "stages": [
+      {
+        "argv": [
+          "bash",
+          "verify.sh"
+        ],
+        "heavy": true,
+        "id": "STAGE-VERIFY",
+        "name": "Verification and validation",
+        "owner": "verify.sh (CEP-004)",
+        "purpose": "lint, tests, coverage gate and pre-registration enforcement; also produces the coverage measurement later stages consume",
+        "reentrant": true,
+        "required": true,
+        "writes": []
+      },
+      {
+        "argv": [
+          "bash",
+          "00-BOOK/tools/register.sh"
+        ],
+        "heavy": false,
+        "id": "STAGE-REGISTER",
+        "name": "Atomic registration transaction",
+        "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
+        "purpose": "registry, projections, twin, portal — the registration projection zone",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-BOOK/DATA/",
+          "00-BOOK/REGISTRIES/",
+          "00-BOOK/CONTROL-TOWER/",
+          "00-BOOK/PORTAL/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "-m",
+          "intelligence.rie",
+          "build"
+        ],
+        "heavy": false,
+        "id": "STAGE-RIE",
+        "name": "Repository intelligence",
+        "owner": "intelligence/rie (UCOS-RIE-001)",
+        "purpose": "derived intelligence: capability catalogue, dependency graph, frontier, health, baseline",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "intelligence/UCOS-RIE-",
+          "intelligence/UCOS-IMP-BASELINE-001."
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-CLOSURE",
+        "name": "Knowledge closure",
+        "owner": "00-MASTER/UAKOS-CLOSURE-002",
+        "purpose": "constitutional concept closure — knowledge-once evidence",
+        "reentrant": true,
+        "required": false,
+        "writes": [
+          "00-MASTER/UAKOS-CLOSURE-002/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/UCDA-000001/ucda_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UCDA",
+        "name": "Decision assimilation",
+        "owner": "00-MASTER/UCDA-000001",
+        "purpose": "constitutional decision register and disposition",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCDA-000001/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/UEI-000001/uei_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UEI",
+        "name": "Evolution intelligence",
+        "owner": "00-MASTER/UEI-000001",
+        "purpose": "capability bindings to governing instruments",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UEI-000001/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/UER-000001/uer_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UER",
+        "name": "Execution resilience",
+        "owner": "00-MASTER/UER-000001",
+        "purpose": "execution-resilience capability bindings",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UER-000001/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/URRC-000001/urrc_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-URRC",
+        "name": "Repository reality matrices",
+        "owner": "00-MASTER/URRC-000001",
+        "purpose": "reuse, duplication, conflict, gap, completeness, readiness, automation",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/URRC-000001/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/UMK-000001/umk_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UMK",
+        "name": "Universal meta-kernel",
+        "owner": "00-MASTER/UMK-000001 (PROGRAM-002)",
+        "purpose": "frozen kernel determination",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UMK-000001/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/UPF-000001/upf_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UPF",
+        "name": "Universal provider framework",
+        "owner": "00-MASTER/UPF-000001 (PROGRAM-003)",
+        "purpose": "provider framework determination",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UPF-000001/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/UCOS-RIB-001/rib_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-RIB",
+        "name": "Repository integration blueprint",
+        "owner": "00-MASTER/UCOS-RIB-001",
+        "purpose": "discovery, disposition, matrices, queue and the twelve integration gates",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCOS-RIB-001/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "--tier",
+          "full"
+        ],
+        "heavy": true,
+        "id": "STAGE-UCCEP",
+        "name": "Aggregate constitutional certification",
+        "owner": "00-MASTER/UCCEP-000000",
+        "purpose": "the eighteen checks, fifteen gates and sixteen programmes; LAST because it certifies what the earlier stages produced",
+        "reentrant": false,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCCEP-000000/"
+        ]
+      }
+    ]
+  },
+  "principle": [
+    {
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ],
+      "id": "RFP-1",
+      "rationale": "Certification asserts a property of the repository. An assertion that re-execution does not reproduce is not evidence.",
+      "rule": "No programme may close, and no repository may be certified, unless the repository is a Stable Repository State: executing the declared pipeline over the committed HEAD leaves the repository byte-identical, for each of the declared convergence passes.",
+      "title": "Fixed-Point Closure Condition"
+    },
+    {
+      "cycle_class": "CYC-COMMIT",
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ],
+      "id": "RFP-2",
+      "rationale": "The commit's identity is a function of the tracked bytes it contains. An artifact that names its own commit demands a commit whose hash appears inside its own tree, which is not reachable. Committing changes HEAD, which changes the artifact, without limit. Version control already records the containing commit, so restating it inside the artifact also duplicates state the repository already owns.",
+      "rule": "No tracked artifact's bytes may depend on the identity of the commit that contains it — its hash, abbreviation, committer date, author date, tag or ref.",
+      "title": "No Commit Self-Reference"
+    },
+    {
+      "cycle_class": "CYC-OBSERVE",
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ],
+      "id": "RFP-3",
+      "rationale": "Writing the observation falsifies it: an artifact recording 'working tree CLEAN, 0 entries' makes the tree dirty by being written, so the recorded value is never the value that holds once it is recorded. The measurement is sound; only its persistence is unsound.",
+      "rule": "No tracked artifact's bytes may record an observation of the working tree that contains it — its cleanliness, its dirty-entry count, or the set of modified paths. Such observations are legitimate inputs to a GATE VERDICT and legitimate content of a gate's exit code and standard output; they may not be written into a tracked artifact.",
+      "title": "No Working-Tree Self-Observation"
+    },
+    {
+      "cycle_class": "CYC-HASH",
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ],
+      "id": "RFP-4",
+      "rationale": "This is the CK-REG-DRIFT topology exactly: the registry recorded the hash of an artifact that embedded the hash of the registry. Mutual hash embedding admits no simultaneous solution.",
+      "rule": "No tracked artifact may embed a content hash of any artifact that depends, directly or transitively, upon it.",
+      "title": "No Hash Cycle"
+    },
+    {
+      "cycle_class": "CYC-REGISTER",
+      "enforced_by": [
+        "CK-REG-ENFORCE",
+        "CK-REG-DRIFT",
+        "CK-FIXED-POINT"
+      ],
+      "id": "RFP-5",
+      "rationale": "Registration records a content hash. A class whose content is derived cannot hold a stable hash relative to the register that records it. This restates GOV-005 §5.3 as a closure obligation and is the rule whose absence produced CK-REG-DRIFT.",
+      "rule": "Only artifacts of class CANONICAL-SOURCE are eligible for registration. Every other class is a non-artifact, excluded by a declared authority, and may never consume a permanent corpus identity.",
+      "title": "Registration Admits Canonical Source Only"
+    },
+    {
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ],
+      "id": "RFP-6",
+      "rationale": "A fixed point can only be asserted over a known pipeline. Undeclared regeneration is precisely how the CK-REG-DRIFT split reached four sealed commits unnoticed.",
+      "rule": "Every producer that writes tracked repository content must appear as a stage of the declared pipeline. A producer absent from the pipeline is unverifiable and its output is therefore not an Acceptable Repository State.",
+      "title": "Producers Are Declared, Never Discovered Ad Hoc"
+    },
+    {
+      "enforced_by": [
+        "CK-FIXED-POINT",
+        "G-15"
+      ],
+      "id": "RFP-7",
+      "rationale": "A rule a programme must opt into is a rule the next programme forgets. Evaluating the condition over the repository rather than over a programme register makes exemption impossible and enrolment unnecessary.",
+      "rule": "RFP-1..RFP-6 bind every PROGRAM, EPIC, EIP, Universe, Framework, Capability and Module, present and future, with no opt-out and no per-programme exemption. Inheritance is structural: the condition is evaluated over the REPOSITORY, so anything the repository contains is bound without needing to declare itself bound.",
+      "title": "Universal Inheritance, No Opt-Out"
+    }
+  ],
+  "programme": {
+    "$excluded_location_comment": "The engine RESOLVES excluded locations from these two authorities at run time (git's own ignore machinery plus the corpus-internal prefix list). It keeps no second list, so an exclusion declared once is honoured everywhere and no path is restated here.",
+    "authority": "NONE — DERIVED TRUTH. This programme legislates the closure CONDITION; it ratifies nothing, freezes nothing and owns no capability.",
+    "excluded_location_authority": [
+      "00-BOOK/tools/config.py::EXCLUDE_DIR_PREFIXES",
+      ".gitignore (+ standard git exclude sources)"
+    ],
+    "governing_instruments": [
+      "00-CEP/CEP-005-CONSTITUTIONAL-CERTIFICATION-CONSTITUTION.md",
+      "00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md",
+      "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+      "00-BOOK/tools/config.py (GOV-005 §5.3 admission boundary)",
+      "00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md",
+      "00-MASTER/UCOS-RECON-C2/ROOT-CAUSE-REPORT.md"
+    ],
+    "id": "UCOS-RFP-001",
+    "name": "Repository Fixed-Point Closure",
+    "origin": "CK-REG-DRIFT. A generated artifact carrying repository-derived state (HEAD, commit metadata, projection hashes) was admitted into the registration corpus, creating a registration relation with no fixed point. This declaration makes that class of topology constitutionally impossible rather than individually repaired."
+  },
+  "vocabulary": [
+    {
+      "definition": "A committed repository state R is a Repository Fixed Point of the declared pipeline P when P(R) = R byte-for-byte. Executing every declared producer over R rewrites no tracked byte and creates no untracked entry outside a constitutionally excluded location.",
+      "id": "VOC-FIXED-POINT",
+      "term": "Repository Fixed Point"
+    },
+    {
+      "definition": "A repository in which every producer's output is a pure function of tracked repository content. Two executions over the same tracked content, in any environment, yield identical bytes.",
+      "id": "VOC-DETERMINISTIC",
+      "term": "Deterministic Repository"
+    },
+    {
+      "definition": "A state that is a Repository Fixed Point under N consecutive pipeline executions, N being the declared convergence_passes. Stability is an observation over repetitions; a fixed point observed once may be coincidence.",
+      "id": "VOC-STABLE",
+      "term": "Stable Repository State"
+    },
+    {
+      "definition": "The state in which a programme is permitted to declare itself closed: its implementation is complete, every gate binding it PASSES, and the repository containing it is a Stable Repository State. Closure is a property of the REPOSITORY, never a property of the programme's own report.",
+      "id": "VOC-CLOSURE",
+      "term": "Closure State"
+    },
+    {
+      "definition": "A state that is either a Repository Fixed Point, or one whose only divergence is a declared, dispositioned finding carried in this declaration. Any other divergence is unacceptable and fails closed.",
+      "id": "VOC-ACCEPTABLE",
+      "term": "Acceptable Repository State"
+    },
+    {
+      "definition": "A repository for which no reachable state is a Repository Fixed Point, because at least one tracked artifact's required bytes are a function of the very act of committing or recording them. Non-convergence is a topological property: it cannot be cleared by regenerating, committing or reordering.",
+      "id": "VOC-NON-CONVERGENT",
+      "term": "Non-convergent Repository"
+    },
+    {
+      "definition": "A repository containing at least one tracked artifact whose content depends, directly or transitively, on itself — on the identity of the commit that contains it, on an observation of the working tree that contains it, or on the hash of an artifact that depends on it. Every self-referential repository is non-convergent.",
+      "id": "VOC-SELF-REFERENTIAL",
+      "term": "Self-referential Repository"
+    },
+    {
+      "definition": "The genus. Any divergence between the committed repository and the result of re-executing the declared pipeline over it. Registration, Projection and Evidence Drift are its species.",
+      "id": "VOC-REPO-DRIFT",
+      "term": "Repository Drift"
+    },
+    {
+      "definition": "Divergence between the registered corpus and the artifacts on disk: an artifact's recorded identity, content hash or classification no longer matches the artifact. Owned and detected by REG-AUTO-001 (register.sh --guard / CK-REG-DRIFT).",
+      "id": "VOC-REG-DRIFT",
+      "term": "Registration Drift"
+    },
+    {
+      "definition": "Divergence between a derived projection and the canonical source it projects: the projection was not regenerated after its source changed, or was regenerated from a stale reading of it.",
+      "id": "VOC-PROJ-DRIFT",
+      "term": "Projection Drift"
+    },
+    {
+      "definition": "Divergence between recorded evidence and the state it claims to evidence: a verdict, measurement or certification asserting a repository state that re-execution does not reproduce. An evidence artifact that records an observation invalidated by its own writing is permanently in Evidence Drift.",
+      "id": "VOC-EV-DRIFT",
+      "term": "Evidence Drift"
+    }
+  ]
+}
