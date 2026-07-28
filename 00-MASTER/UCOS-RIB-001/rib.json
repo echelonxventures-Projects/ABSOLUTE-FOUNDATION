@@ -1,24 +1,5 @@
 {
-  "compliance": [
-    {
-      "finding": "orphan_units=4",
-      "gate": "GATE-11",
-      "id": "CMP-NOORPHAN",
-      "rank": 2,
-      "remediation": "bind the orphan to a consumer, publish an interface for it, or disposition it for removal",
-      "requirement": "zero orphan implementation",
-      "severity": "HIGH"
-    },
-    {
-      "finding": "verifications_failed=2",
-      "gate": "GATE-03",
-      "id": "CMP-VERIFY",
-      "rank": 2,
-      "remediation": "discharge the named verification obligation",
-      "requirement": "verification must pass",
-      "severity": "HIGH"
-    }
-  ],
+  "compliance": [],
   "cycle_classes": [
     {
       "benign": true,
@@ -35,7 +16,7 @@
       "rule": "cross_unit"
     }
   ],
-  "determination": "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP",
+  "determination": "BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED",
   "discovery": [
     {
       "class": "IMPLEMENTATION",
@@ -206,14 +187,14 @@
       "clauses": 7,
       "disposition": "DEPRECATE",
       "id": "RUL-06",
-      "units": 4
+      "units": 0
     },
     {
       "because": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
       "clauses": 1,
       "disposition": "CONFIGURE",
       "id": "RUL-07",
-      "units": 7
+      "units": 11
     },
     {
       "because": "the canonical capability owner already records this capability as reuse-with-extension",
@@ -1162,14 +1143,9 @@
     },
     {
       "class": "MISSING RUNTIME",
-      "count": 4,
+      "count": 0,
       "id": "GAP-RUNTIME",
-      "members": [
-        "00-MASTER.UAKOS-PHASE-001A-R1",
-        "00-MASTER.UAKOS-PHASE-001B",
-        "00-MASTER.UAKOS-PHASE-003R",
-        "00-MASTER.UCOS-USIS-WAVE0"
-      ],
+      "members": [],
       "restrict_class": "",
       "subject": "units that publish no interface and are reachable by no consumer"
     },
@@ -1191,20 +1167,15 @@
     },
     {
       "class": "DEAD ENGINE",
-      "count": 4,
+      "count": 0,
       "id": "GAP-DEAD-ENGINE",
-      "members": [
-        "00-MASTER.UAKOS-PHASE-001A-R1",
-        "00-MASTER.UAKOS-PHASE-001B",
-        "00-MASTER.UAKOS-PHASE-003R",
-        "00-MASTER.UCOS-USIS-WAVE0"
-      ],
+      "members": [],
       "restrict_class": "OPERATIONAL-PROGRAMME",
       "subject": "operational programmes whose engine no declared entry point names"
     }
   ],
-  "gate": "CLOSED",
-  "gate_exit": 1,
+  "gate": "OPEN",
+  "gate_exit": 0,
   "gates": [
     {
       "blocking": true,
@@ -1231,15 +1202,13 @@
     {
       "blocking": true,
       "criterion": "every verification obligation met",
-      "failures": [
-        "verifications_failed=2"
-      ],
+      "failures": [],
       "id": "GATE-03",
       "metrics": [
         "verifications_failed"
       ],
       "name": "Repository Verification",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "blocking": true,
@@ -1324,15 +1293,13 @@
     {
       "blocking": true,
       "criterion": "no discovered unit is unreachable in every measured plane",
-      "failures": [
-        "orphan_units=4"
-      ],
+      "failures": [],
       "id": "GATE-11",
       "metrics": [
         "orphan_units"
       ],
       "name": "Zero Orphan Capability",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "blocking": true,
@@ -1685,7 +1652,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 4556,
+      "total": 4558,
       "units_with_value": 148
     },
     {
@@ -1733,8 +1700,8 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 624,
-      "units_with_value": 33
+      "total": 633,
+      "units_with_value": 37
     },
     {
       "field": "in_test_scope",
@@ -1753,10 +1720,7 @@
     "advisory_duplicate_signals": 7,
     "architectural_cycles": 0,
     "benign_cycles": 2,
-    "blocking_failed": [
-      "GATE-03",
-      "GATE-11"
-    ],
+    "blocking_failed": [],
     "catalogue_records": 66,
     "certification_domains_failed": 0,
     "certification_verdict_absent": 0,
@@ -1770,7 +1734,7 @@
     },
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
-    "compliance_findings": 2,
+    "compliance_findings": 0,
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
@@ -1778,8 +1742,7 @@
     "dirty_entries_outside_generated": 0,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
-      "CONFIGURE": 12,
-      "DEPRECATE": 4,
+      "CONFIGURE": 16,
       "EXTEND": 22,
       "IMPLEMENT": 2,
       "REUSE": 196
@@ -1798,16 +1761,16 @@
     "gap_count:GAP-CAPABILITY": 0,
     "gap_count:GAP-CERTIFICATION": 170,
     "gap_count:GAP-COVERAGE": 26,
-    "gap_count:GAP-DEAD-ENGINE": 4,
+    "gap_count:GAP-DEAD-ENGINE": 0,
     "gap_count:GAP-DEPENDENCY": 1,
     "gap_count:GAP-EVIDENCE": 228,
     "gap_count:GAP-OWNER": 0,
     "gap_count:GAP-REGISTRY": 0,
-    "gap_count:GAP-RUNTIME": 4,
+    "gap_count:GAP-RUNTIME": 0,
     "gap_count:GAP-VERIFICATION": 207,
-    "gap_findings": 640,
+    "gap_findings": 632,
     "gate_total": 12,
-    "gates_passed": 10,
+    "gates_passed": 12,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -1833,13 +1796,8 @@
     "matrix_duplication": 0,
     "matrix_total": 16,
     "max_parallel": 26,
-    "orphan_members": [
-      "00-MASTER.UAKOS-PHASE-001A-R1",
-      "00-MASTER.UAKOS-PHASE-001B",
-      "00-MASTER.UAKOS-PHASE-003R",
-      "00-MASTER.UCOS-USIS-WAVE0"
-    ],
-    "orphan_units": 4,
+    "orphan_members": [],
+    "orphan_units": 0,
     "owner_collisions": 0,
     "planning_unresolved": 0,
     "queued_total": 40,
@@ -1857,7 +1815,7 @@
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
     "validations_failed": 0,
-    "verifications_failed": 2,
+    "verifications_failed": 0,
     "wave_total": 6
   },
   "non_derivable": [
@@ -3149,21 +3107,21 @@
       },
       {
         "dependents": 0,
-        "disposition": "DEPRECATE",
+        "disposition": "CONFIGURE",
         "rank": 14,
         "unit_key": "00-MASTER.UAKOS-PHASE-001A-R1",
         "wave": 1
       },
       {
         "dependents": 0,
-        "disposition": "DEPRECATE",
+        "disposition": "CONFIGURE",
         "rank": 15,
         "unit_key": "00-MASTER.UAKOS-PHASE-001B",
         "wave": 1
       },
       {
         "dependents": 0,
-        "disposition": "DEPRECATE",
+        "disposition": "CONFIGURE",
         "rank": 16,
         "unit_key": "00-MASTER.UAKOS-PHASE-003R",
         "wave": 1
@@ -3191,7 +3149,7 @@
       },
       {
         "dependents": 0,
-        "disposition": "DEPRECATE",
+        "disposition": "CONFIGURE",
         "rank": 20,
         "unit_key": "00-MASTER.UCOS-USIS-WAVE0",
         "wave": 1
@@ -3500,14 +3458,14 @@
     "detached": false,
     "dirty_entries": 0,
     "dirty_paths": [],
-    "head": "b47f5b97fc22dc98595222219ad24642a07ded1e",
+    "head": "bde5ffa2284a7ec18945ae2fcd837d182adcc66c",
     "interrupted_operations": [],
     "modified": 0,
-    "tracked_files": 4893,
+    "tracked_files": 4894,
     "untracked": 0,
     "working_tree": "CLEAN"
   },
-  "seal_sha256": "4f424a68c3ac4e1915a623ef36c35b27717d94b4e793edc2795a74d8614dbee1",
+  "seal_sha256": "3ba75cb6d996586c5cd2cef0b0757a91d91f56a59d7ef33868db9f4fba31e8c7",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -3562,7 +3520,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "501b4a699cd0bc1046143a77fe5a9d8a3f2dd42a32105fdf790641ac734e60c8",
+      "content_sha256": "f3f9c873893a67a66dfde51eb594e02dadcca3ac5e2616f74f1bf9e8233d38ec",
       "exists": true,
       "generated": true,
       "id": "SUB-CLOSURE",
@@ -7380,7 +7338,7 @@
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
-      "entrypoint_references": 123,
+      "entrypoint_references": 127,
       "evidence_assets": 0,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
@@ -7415,7 +7373,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 841,
+      "tracked_files": 842,
       "unique_id": "UCOS-RIB-001-CAP-0068",
       "unit_class": "CAPABILITY",
       "unit_key": "00-MASTER",
@@ -7483,11 +7441,11 @@
       "dependencies": 0,
       "dependency_units": [],
       "dependents": 0,
-      "disposition": "DEPRECATE",
-      "disposition_reason": "the unit holds code that no plane consumes, no interface publishes, no registration homes, no entry point names and no runner collects, and its replacement is not prohibited",
-      "disposition_rule": "RUL-06",
+      "disposition": "CONFIGURE",
+      "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
+      "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 0,
+      "entrypoint_references": 1,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -7503,8 +7461,10 @@
       "planes": [],
       "program": "00-MASTER",
       "providers": 0,
-      "reachable": false,
-      "reachable_by": [],
+      "reachable": true,
+      "reachable_by": [
+        "entrypoint_references"
+      ],
       "registered_artifacts": 0,
       "rie_id": "",
       "root": "00-MASTER",
@@ -7531,11 +7491,11 @@
       "dependencies": 0,
       "dependency_units": [],
       "dependents": 0,
-      "disposition": "DEPRECATE",
-      "disposition_reason": "the unit holds code that no plane consumes, no interface publishes, no registration homes, no entry point names and no runner collects, and its replacement is not prohibited",
-      "disposition_rule": "RUL-06",
+      "disposition": "CONFIGURE",
+      "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
+      "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 0,
+      "entrypoint_references": 1,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -7551,8 +7511,10 @@
       "planes": [],
       "program": "00-MASTER",
       "providers": 0,
-      "reachable": false,
-      "reachable_by": [],
+      "reachable": true,
+      "reachable_by": [
+        "entrypoint_references"
+      ],
       "registered_artifacts": 0,
       "rie_id": "",
       "root": "00-MASTER",
@@ -7579,11 +7541,11 @@
       "dependencies": 0,
       "dependency_units": [],
       "dependents": 0,
-      "disposition": "DEPRECATE",
-      "disposition_reason": "the unit holds code that no plane consumes, no interface publishes, no registration homes, no entry point names and no runner collects, and its replacement is not prohibited",
-      "disposition_rule": "RUL-06",
+      "disposition": "CONFIGURE",
+      "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
+      "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 0,
+      "entrypoint_references": 1,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -7599,8 +7561,10 @@
       "planes": [],
       "program": "00-MASTER",
       "providers": 0,
-      "reachable": false,
-      "reachable_by": [],
+      "reachable": true,
+      "reachable_by": [
+        "entrypoint_references"
+      ],
       "registered_artifacts": 0,
       "rie_id": "",
       "root": "00-MASTER",
@@ -7759,7 +7723,7 @@
         "DSC-PROGRAMME"
       ],
       "superseded_by": "",
-      "tracked_files": 20,
+      "tracked_files": 21,
       "unique_id": "UCOS-RIB-001-CAP-0075",
       "unit_class": "OPERATIONAL-PROGRAMME",
       "unit_key": "00-MASTER.UCOS-RIB-001",
@@ -7777,11 +7741,11 @@
       "dependencies": 0,
       "dependency_units": [],
       "dependents": 0,
-      "disposition": "DEPRECATE",
-      "disposition_reason": "the unit holds code that no plane consumes, no interface publishes, no registration homes, no entry point names and no runner collects, and its replacement is not prohibited",
-      "disposition_rule": "RUL-06",
+      "disposition": "CONFIGURE",
+      "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
+      "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 0,
+      "entrypoint_references": 1,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -7797,8 +7761,10 @@
       "planes": [],
       "program": "00-MASTER",
       "providers": 0,
-      "reachable": false,
-      "reachable_by": [],
+      "reachable": true,
+      "reachable_by": [
+        "entrypoint_references"
+      ],
       "registered_artifacts": 0,
       "rie_id": "",
       "root": "00-MASTER",
@@ -13205,7 +13171,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 170,
+      "entrypoint_references": 171,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,
@@ -17884,10 +17850,10 @@
       "criterion": "no unit is unreachable in every declared reachability dimension",
       "expect": 0,
       "id": "VER-09",
-      "measured": 4,
+      "measured": 0,
       "metric": "orphan_units",
       "name": "No orphan capability",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "criterion": "every registered artifact resolves to a tracked path",
@@ -17902,10 +17868,10 @@
       "criterion": "every discovered programme engine is named by at least one declared entry point",
       "expect": 0,
       "id": "VER-11",
-      "measured": 4,
+      "measured": 0,
       "metric": "gap_count:GAP-DEAD-ENGINE",
       "name": "No dead engine",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "criterion": "every declared console interface resolves to a located module",
