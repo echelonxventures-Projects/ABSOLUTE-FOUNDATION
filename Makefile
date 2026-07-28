@@ -29,6 +29,7 @@ help:
 	@echo "  make rib           regenerate the UCOS-RIB-001 Repository Integration Blueprint (EPIC-001)"
 	@echo "  make rib-gate      fail-closed Repository Integration Gate (twelve quality gates)"
 	@echo "  make rib-self      UCOS-RIB-001 guards over its own surface"
+	@echo "  make uakos-archive read-only integrity guard over the completed UAKOS/USIS phases"
 	@echo "  make closure       regenerate UAKOS-CLOSURE-002 repository-closure artifacts"
 	@echo "  make closure-gate  fail-closed closure gate (non-zero exit while gaps remain)"
 	@echo "  make closure-phase2      regenerate PHASE-002 concept-graph reconciliation (outputs 20-35)"
@@ -472,3 +473,29 @@ rib-self:
 	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-no-fabrication
 	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-reuse-before-create
 	@python3 00-MASTER/UCOS-RIB-001/rib_engine.py --check-totality
+
+
+
+# uakos-archive: the completed, superseded UAKOS/USIS operational-memory phases.
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# Four operational-memory programme phases are terminal historical determinations: their
+# missions completed, their responsibility is held by their successor programmes, and they
+# are retained read-only as constitutional evidence. They run no live regeneration, so no
+# regeneration target names them — this guard is the declared entry point that reaches
+# them. It re-executes nothing (their one-shot engines are wall-clock-stamped and would
+# dirty the tree), mutates nothing, and only proves each archived phase directory and its
+# completion determination is still present.
+#
+# Exit 0 all four archived phases present · non-zero one is missing.
+.PHONY: uakos-archive
+uakos-archive:
+	@ok=1 ; \
+	for d in \
+		00-MASTER/UAKOS-PHASE-001A-R1 \
+		00-MASTER/UAKOS-PHASE-001B \
+		00-MASTER/UAKOS-PHASE-003R \
+		00-MASTER/UCOS-USIS-WAVE0 ; do \
+		if [ ! -d "$$d" ]; then echo "MISSING archived phase: $$d" ; ok=0 ; fi ; \
+	done ; \
+	[ "$$ok" -eq 1 ] && echo "UAKOS/USIS archived operational-memory phases present (4)"
