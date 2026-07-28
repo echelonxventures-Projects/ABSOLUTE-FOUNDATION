@@ -391,7 +391,9 @@ def run_pipeline_pass(decl: dict, stages: list[dict], env: dict[str, str], skip_
     return failures, attribution
 
 
-def cmd_gate(decl: dict, *, detect_only: bool = False, fast: bool = False) -> int:
+def cmd_gate(
+    decl: dict, *, detect_only: bool = False, fast: bool = False, keep_residue: bool = False
+) -> int:
     ident = programme_id(decl)
     if nested(decl):
         guarded = next(
@@ -467,6 +469,13 @@ def cmd_gate(decl: dict, *, detect_only: bool = False, fast: bool = False) -> in
         for stage_id, paths in sorted(attribution.items()):
             print(f"      {stage_id} wrote {len(paths)}: {', '.join(paths[:3])}"
                   f"{' …' if len(paths) > 3 else ''}")
+            # Name the bytes, not just the file. A gate that reports "something moved"
+            # sends the reader back to reproduce it by hand; reporting the first changed
+            # line of the first changed path localises an invocation-dependent producer
+            # in one run. Evidence, not notification.
+            for line in added_bytes(paths[0]).decode("utf-8", "replace").splitlines()[:3]:
+                if line.strip():
+                    print(f"          + {line.strip()[:140]}")
 
         if residue or outside:
             cycle_by_detector = {str(c.get("detector")): c for c in cycles.values()}
@@ -497,8 +506,10 @@ def cmd_gate(decl: dict, *, detect_only: bool = False, fast: bool = False) -> in
     measured["cycles_detected"] = len({cid for cid, _ in detected})
 
     # Restore: the gate observes, it does not leave damage. Safe because CLO-01
-    # proved the tree clean before any stage ran.
-    if measured["tracked_modifications"] or measured["staged_entries"]:
+    # proved the tree clean before any stage ran. `--keep-residue` suppresses the
+    # restore so a divergence can be inspected in place; it is a diagnostic only and
+    # is never used by the gate itself.
+    if not keep_residue and (measured["tracked_modifications"] or measured["staged_entries"]):
         git("reset", "--quiet")
         git("checkout", "--", ".")
 
@@ -872,6 +883,11 @@ def main() -> int:
     ap.add_argument("--gate", action="store_true", help="G-15: prove the repository is a fixed point")
     ap.add_argument("--detect", action="store_true", help="classify self-reference topologies (never fails)")
     ap.add_argument("--fast", action="store_true", help="skip stages declared heavy (never used by the gate)")
+    ap.add_argument(
+        "--keep-residue",
+        action="store_true",
+        help="leave a divergence in place for inspection (diagnostic; the gate always restores)",
+    )
     for flag in _GUARDS:
         ap.add_argument(flag, action="store_true")
     args = ap.parse_args()
@@ -896,7 +912,9 @@ def main() -> int:
             return 0
 
     if args.gate or args.detect:
-        return cmd_gate(decl, detect_only=args.detect, fast=args.fast)
+        return cmd_gate(
+            decl, detect_only=args.detect, fast=args.fast, keep_residue=args.keep_residue
+        )
 
     written = render_and_write(decl)
     print(f"{ident}: regenerated {len(written)} determinations in {HERE}")
