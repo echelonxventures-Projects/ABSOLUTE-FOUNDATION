@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (105 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (5 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 240 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 9/12 |
@@ -39,13 +39,13 @@
 | `GATE-09` | Zero Duplicate Capability | YES | no declared duplicate class reports a finding | `duplicate_findings` | **PASS** |
 | `GATE-10` | Zero Circular Dependency | YES | no cycle of a non-benign declared class in any plane | `architectural_cycles` | **PASS** |
 | `GATE-11` | Zero Orphan Capability | YES | no discovered unit is unreachable in every measured plane | `orphan_units` | **PASS** |
-| `GATE-12` | Repository Clean | YES | the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts | `dirty_entries_outside_generated` | **FAIL** — dirty_entries_outside_generated=105 |
+| `GATE-12` | Repository Clean | YES | the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts | `dirty_entries_outside_generated` | **FAIL** — dirty_entries_outside_generated=5 |
 
 ## Compliance findings, classified
 
 | Severity | Finding | Requirement | Gate | Remediation |
 |---|---|---|---|---|
-| **CRITICAL** | dirty_entries_outside_generated=105 | the repository must remain clean, deterministic, buildable and reproducible | `GATE-12` | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
+| **CRITICAL** | dirty_entries_outside_generated=5 | the repository must remain clean, deterministic, buildable and reproducible | `GATE-12` | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
 | **HIGH** | closure_gaps=89 | knowledge is recorded once, in exactly one canonical home | `GATE-08` | resolve the duplicate home through the concept-closure owner |
 | **HIGH** | validations_failed=2 | validation must pass | `GATE-04` | discharge the named validation obligation |
 
@@ -62,7 +62,7 @@
 
 | Criterion | Value | Verdict |
 |---|---|---|
-| Repository clean | DIRTY — 105 entr(y/ies), excluding this programme's own regenerated artifacts | **FAIL** |
+| Repository clean | DIRTY — 5 entr(y/ies), excluding this programme's own regenerated artifacts | **FAIL** |
 | Verification | 12/12 | PASS |
 | Validation | 8/10 | **FAIL** |
 | Dependency closure | 0 | PASS |

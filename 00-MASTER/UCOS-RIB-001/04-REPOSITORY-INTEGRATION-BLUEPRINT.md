@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (105 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (5 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 240 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 9/12 |
@@ -1862,7 +1862,7 @@ the compliance violations classified by severity
 
 | ID | Severity | Finding | Remediation |
 |---|---|---|---|
-| `CMP-CLEAN` | **CRITICAL** | dirty_entries_outside_generated=105 | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
+| `CMP-CLEAN` | **CRITICAL** | dirty_entries_outside_generated=5 | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
 | `CMP-ONCE` | **HIGH** | closure_gaps=89 | resolve the duplicate home through the concept-closure owner |
 | `CMP-VALIDATE` | **HIGH** | validations_failed=2 | discharge the named validation obligation |
 

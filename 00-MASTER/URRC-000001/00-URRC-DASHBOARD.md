@@ -116,7 +116,7 @@
 | `S-05` | `00-BOOK/DATA/id-ledger.json` | identity ledger | YES | YES | 2/2 | 1319 |
 | `S-06` | `00-CMG/CMG-REGISTRY.json` | meta-constitutional registry | YES | YES | 9/9 | 164 |
 | `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | aggregate gate declaration | YES | YES | 5/5 | 64 |
-| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | aggregate gate determination | YES | YES | 6/6 | 129 |
+| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | aggregate gate determination | YES | YES | 6/6 | 117 |
 | `S-09` | `00-MASTER/UCDA-000001/ucda-decisions.json` | decision register declaration | YES | YES | 4/4 | 85 |
 | `S-10` | `00-MASTER/UCDA-000001/ucda.json` | decision determination | YES | YES | 6/6 | 298 |
 | `S-11` | `00-MASTER/UER-000001/uer.json` | resilience determination | YES | YES | 6/6 | 113 |

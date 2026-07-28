@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (105 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (5 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 240 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 9/12 |
@@ -42,10 +42,10 @@
 | Substrate | Path | Kind | Tracked | Parses | Pointers | Records | Content |
 |---|---|---|---|---|---|---|---|
 | `SUB-CERT` | `00-BOOK/DATA/certification.json` | json | YES | YES | 4/4 | 10 | `9c58139bf04f` |
-| `SUB-CLOSURE` | `00-MASTER/UAKOS-CLOSURE-002/closure.json` | json | **NO** | YES | 4/4 | 536 | `4216164067e6` |
+| `SUB-CLOSURE` | `00-MASTER/UAKOS-CLOSURE-002/closure.json` | json | **NO** | YES | 4/4 | 536 | `9ec25633468f` |
 | `SUB-CONTROL` | `00-BOOK/DATA/control-tower.json` | json | YES | YES | 3/3 | 108 | `1b4b56390270` |
 | `SUB-EDGES` | `00-BOOK/DATA/relationships.json` | json | YES | YES | 2/2 | 12829 | `6929b5223697` |
-| `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `64b77be4d5a2` |
+| `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `dfd9d9913a55` |
 | `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 53 | `dfc10e370a0d` |
 | `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1193 | `ad74b4bec63b` |
 | `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 93 | `bbab1dd0832f` |
@@ -55,7 +55,7 @@
 | `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 64 | `f47c4d45e37b` |
 | `SUB-UEI` | `00-MASTER/UEI-000001/uei.json` | json | YES | YES | 2/2 | 15 | `50e80b680d9f` |
 | `SUB-UER` | `00-MASTER/UER-000001/uer.json` | json | YES | YES | 2/2 | 10 | `0ae82cb58fdb` |
-| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `87ce19c9f4f3` |
+| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `736b9a975443` |
 
 ## Enrichment
 
@@ -69,7 +69,7 @@
 | Measure | Kind | Field | Units with a value | Total | Purpose |
 |---|---|---|---|---|---|
 | `MSR-SOURCE` | `owned_source_count` | `source_files` | 78 | 1529 | the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree |
-| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 153 | 4719 | every version-controlled file homed inside the unit |
+| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 153 | 4721 | every version-controlled file homed inside the unit |
 | `MSR-UNITTEST` | `tracked_glob_count` | `unit_tests` | 29 | 298 | verification assets located for the unit itself |
 | `MSR-EVIDENCE` | `tracked_glob_count` | `evidence_assets` | 8 | 980 | the realization-evidence surface located for the unit's root |
 | `MSR-COVERAGE` | `substrate_list_member` | `in_coverage_scope` | 36 | 36 | whether the unit lies inside the declared coverage scope |
@@ -85,15 +85,15 @@
 | Repository anchor | the containing commit — owned by version control, never restated here |
 | Detached | no |
 | Working tree | DIRTY |
-| Dirty entries | 105 |
+| Dirty entries | 5 |
 | Own regenerated artifacts | excluded from the count above — they are the deterministic product of the command being gated |
-| Modified | 104 |
+| Modified | 5 |
 | Deleted | 0 |
-| Untracked | 1 |
+| Untracked | 0 |
 | Merge conflicts | 0 |
 | Interrupted operations | none |
 | Broken symlinks | 0 |
-| Version-controlled files | 4980 |
+| Version-controlled files | 4981 |
 
 ---
 
