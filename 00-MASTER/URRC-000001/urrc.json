@@ -1621,22 +1621,18 @@
       "unknown": false
     },
     {
-      "count": 3,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "3 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-32",
       "primitive": "field_histogram",
       "purpose": "Computed gate verdicts.",
       "rows": [
         [
           "`PASS`",
-          "13"
-        ],
-        [
-          "`FAIL`",
-          "1"
+          "14"
         ],
         [
           "`PASS-WITH-ADVISORY`",
@@ -1646,26 +1642,22 @@
       "unknown": false
     },
     {
-      "count": 3,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "3 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-33",
       "primitive": "field_histogram",
       "purpose": "Computed programme verdicts.",
       "rows": [
         [
           "`PASS`",
-          "12"
+          "13"
         ],
         [
           "`PASS-WITH-ADVISORY`",
           "4"
-        ],
-        [
-          "`FAIL`",
-          "1"
         ]
       ],
       "unknown": false
@@ -2206,7 +2198,7 @@
           "YES",
           "5/5",
           "63",
-          "`de740f856e73`"
+          "`e9671a9fc34c`"
         ],
         [
           "`S-08`",
@@ -2215,8 +2207,8 @@
           "YES",
           "YES",
           "6/6",
-          "117",
-          "`f18393646d80`"
+          "125",
+          "`827d3554591c`"
         ],
         [
           "`S-09`",
@@ -3336,7 +3328,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "de740f856e73c2c4ba34c55ba73e97ebc13389e967909b6b035f654820c56ced",
+      "content_sha256": "e9671a9fc34cc512c2c23720a6354ddae59773a389c0a3aecb6c45bac2351c45",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",
@@ -3363,7 +3355,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "f18393646d80b731f5daa109f02f4561beeffe5d07ea93dfb52ae5228ef5ed3b",
+      "content_sha256": "827d3554591c7773cc7c1044f9d15cd892cb816e9678e9c74a82f7879f50ae35",
       "exists": true,
       "id": "S-08",
       "kind": "aggregate gate determination",
@@ -3387,7 +3379,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The computed aggregate verdicts and the certification ceiling.",
-      "records": 117,
+      "records": 125,
       "required": true,
       "tracked": true
     },

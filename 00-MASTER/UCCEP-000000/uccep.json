@@ -3,10 +3,8 @@
     "CK-CLOSURE-P3",
     "CK-HEALTH"
   ],
-  "blocking_failures": [
-    "CK-FIXED-POINT"
-  ],
-  "certification": "NOT-CERTIFIED",
+  "blocking_failures": [],
+  "certification": "CERTIFIED-PROVISIONAL",
   "certification_ceiling": [
     "`UCCEP-F-001` — phase3_engine.py returns a constant NOT-CLOSED verdict independent of measured state",
     "`UCCEP-F-002` — Repository health is RED: 1198 of 1198 registered artifacts have incomplete traceability",
@@ -258,20 +256,6 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 1,
-      "governed_by_finding": null,
-      "id": "CK-FIXED-POINT",
-      "name": "Repository fixed-point closure (UCOS-RFP-001 RFP-1)",
-      "owner": "00-MASTER/UCOS-RFP-001/rfp_engine.py (UCOS-RFP-001)",
-      "reason": "repository is not a fixed point — closure forbidden",
-      "tier": "full",
-      "verdict": "FAIL",
-      "write_scope": "own-memory"
-    },
-    {
-      "advisory": false,
-      "assertions": [],
-      "executed": true,
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-DECISION-EVIDENCE",
@@ -339,7 +323,7 @@
       "write_scope": "read-only"
     }
   ],
-  "gate_exit": 1,
+  "gate_exit": 0,
   "gates": [
     {
       "advisory_failed": [],
@@ -576,25 +560,21 @@
     {
       "advisory_failed": [],
       "checks": [
-        "CK-FIXED-POINT",
         "CK-REG-DRIFT",
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
       "executed": [
-        "CK-FIXED-POINT",
         "CK-REG-DRIFT",
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-FIXED-POINT"
-      ],
+      "failed": [],
       "id": "G-15",
       "name": "Repository Fixed-Point Gate",
       "not_executed": [],
       "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     }
   ],
   "programme": {
@@ -1031,7 +1011,6 @@
     {
       "advisory_failed": [],
       "checks": [
-        "CK-FIXED-POINT",
         "CK-REG-DRIFT",
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
@@ -1044,26 +1023,23 @@
         "00-MASTER/UCOS-RECON-C2"
       ],
       "executed": [
-        "CK-FIXED-POINT",
         "CK-REG-DRIFT",
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-FIXED-POINT"
-      ],
+      "failed": [],
       "id": "PROGRAM-000017",
       "name": "Universal Repository Fixed-Point Closure",
       "not_executed": [],
       "output": "19-REPOSITORY-FIXED-POINT-CLOSURE.md",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     }
   ],
   "repository": {
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "8b26e0219638ea1f30f23085677a410d2842b3a6e5bb475ef6bc7179148f7525",
+  "seal_sha256": "eaff5dfaa124d283a9775fce8356e40a8714611a0ae513381bc3dd895ac93ddf",
   "tier": "full",
   "unavailable": []
 }

@@ -75,26 +75,24 @@ Validation, certification and compliance owners plus certification-scope reconci
 **`DV-32`** — Computed gate verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 3 distinct value(s)
+- **Result** — 2 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 13 |
-| `FAIL` | 1 |
+| `PASS` | 14 |
 | `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 3 distinct value(s)
+- **Result** — 2 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 12 |
+| `PASS` | 13 |
 | `PASS-WITH-ADVISORY` | 4 |
-| `FAIL` | 1 |
 
 **`DV-34`** — Findings composing the certification ceiling.
 

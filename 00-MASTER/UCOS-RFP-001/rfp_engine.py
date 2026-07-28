@@ -311,13 +311,22 @@ def _detect_mutual_hash_in_delta(ctx: dict) -> list[str]:
 
 
 def _detect_pass_instability(ctx: dict) -> list[str]:
+    """A path WRITTEN by consecutive passes at one unchanged commit.
+
+    The comparison is between what each pass actually wrote, not between what is
+    still dirty. Residue is measured against HEAD and is therefore cumulative: a
+    file written once in pass 1 stays dirty through passes 2 and 3 without being
+    touched again, and reading that as instability would accuse every one-time
+    divergence of self-observation. Only a genuine re-write at an unchanged commit
+    implicates an input the producer itself perturbs.
+    """
     if ctx["index"] < 2:
         return []
     previous = {p for paths in ctx["previous_attribution"].values() for p in paths}
+    written_now = {p for paths in ctx["attribution"].values() for p in paths}
     return [
-        f"{path} rewritten again at an unchanged commit"
-        for path in ctx["residue"]
-        if path in previous
+        f"{path} written again at an unchanged commit"
+        for path in sorted(written_now & previous)
     ]
 
 
@@ -452,10 +461,12 @@ def cmd_gate(decl: dict, *, detect_only: bool = False, fast: bool = False) -> in
         per_pass.append(attribution)
 
         print(
-            f"  pass {index}/{passes}: stages={len(attribution)} wrote · "
-            f"modified={len(observed['modified'])} staged={len(observed['staged'])} "
-            f"untracked={len(outside)}"
+            f"  pass {index}/{passes}: modified={len(observed['modified'])} "
+            f"staged={len(observed['staged'])} untracked={len(outside)}"
         )
+        for stage_id, paths in sorted(attribution.items()):
+            print(f"      {stage_id} wrote {len(paths)}: {', '.join(paths[:3])}"
+                  f"{' …' if len(paths) > 3 else ''}")
 
         if residue or outside:
             cycle_by_detector = {str(c.get("detector")): c for c in cycles.values()}
