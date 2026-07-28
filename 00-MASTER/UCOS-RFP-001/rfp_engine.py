@@ -508,6 +508,10 @@ def cmd_gate(decl: dict, *, detect_only: bool = False, fast: bool = False) -> in
         got = measured.get(str(c.get("measure")), 0)
         mark = "PASS" if got == c.get("expect") else "FAIL"
         print(f"  [{mark}] {c['id']} {c['criterion']} — {c['measure']}={got}")
+    if findings:
+        print("\n  stage findings:")
+        for line in findings[:20]:
+            print(f"    - {line}")
     if detected:
         print("\n  self-reference topologies detected:")
         for cid, description in sorted(set(detected))[:40]:
