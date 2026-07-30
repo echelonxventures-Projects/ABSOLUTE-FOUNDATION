@@ -72,7 +72,7 @@ UCOS-EVO-NNN-WNN     Evolution releases (wave completions)
 | Version | SHA | Date | Content |
 |---|---|---|---|
 | `UCOS-BASELINE-001` | `df763bf9` | 2026-07-30 | First certified baseline (68/68 capabilities) |
-| `UCOS-EVO-001-W01` | `91a8b1d`…`2a031b8` | 2026-07-30 | Wave-001 completion — the `IMPLEMENT-001` programme. 5 commits · 89 modified · 45 added · 0 removed. Registered by `IMPLEMENT-001D` per §5.1 step 5; full record at `EVOLUTION-001` §6.1. Lifecycle state **`RELEASED`**. |
+| `UCOS-EVO-001-W01` | `91a8b1d`…`ac44985` | 2026-07-30 | Wave-001 completion — the `IMPLEMENT-001` programme. 8 commits · 89 modified · 45 added · 0 removed, plus the evolution record and the producer-convergence regeneration. Registered by `IMPLEMENT-001D` per §5.1 step 5; full record at `EVOLUTION-001` §6.1, post-record findings at §6.2. Lifecycle state **`RELEASED`**. |
 | `UCOS-EVO-001-W02` | *(future)* | *(tbd)* | Wave-002 completion |
 
 **`UCOS-EVO-001-W01` against the §4 continuous-validation policy — 7 of 7:**
@@ -86,6 +86,11 @@ UCOS-EVO-NNN-WNN     Evolution releases (wave completions)
 | Registry validate (Stage 5) | exit 0 · schema + referential integrity PASS |
 | `make uccep-gate` | exit 0 · `blocking=none` · `unproven=none` |
 | `make closure-gate` | exit 0 · `CLOSED` · `gaps=0` |
+
+All seven are the gates §4 names. Two further gates are **not** in §4's list and do **not** pass:
+`rib-gate` (exit 1, single cause) and `rfp-gate` (exit 1, now evaluable rather than aborting).
+Both are recorded at `EVOLUTION-001` §6.2 as `W01-F-01` and `W01-F-02` rather than waived; §4 is
+unamended.
 
 Baseline advancement (§3.3) is **NOT** claimed: this wave is remediation and finalization, not a
 capability milestone. `UCOS-BASELINE-001` stands as the certified baseline.

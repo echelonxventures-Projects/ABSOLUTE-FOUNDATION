@@ -159,6 +159,31 @@ suspensive** action) · `CK-REG-DRIFT` / `G-07` · 15 stale registered `content_
 14-path report (disclosed, `RB-04`) · `repository-acceptance` expected-FAIL (disclosed) · one
 unreproduced `uccep-gate` exit 2 under concurrency (`IMPLEMENT-001C` D04 §6).
 
+### 6.2 Three findings measured AFTER the §6.1 record was written
+
+`IMPLEMENT-001D` Phase 4 re-ran the gates on the committed tree, which is the first time several
+of them could be evaluated at all. Three states became visible. All three are **pre-existing** —
+made *measurable* by the release, not caused by it — and none blocks `verify.sh`, so `RELEASED`
+stands. Recorded here because §6.1 was written before they were known.
+
+| # | Finding | Evidence | Owner |
+|---|---|---|---|
+| **W01-F-01** | **`rib-gate` does not pass.** `IMPLEMENT-001C` D06 §4.3 predicted it would. Its two named gates **are** discharged (`GATE-12` `dirty_entries_outside_generated` 86 → **0**; `GATE-04`/`VAL-02` FAIL → PASS), but `VER-09`/`GATE-11` *No orphan capability* (`orphan_units=1`) and `VER-11`/`GATE-03` *No dead engine* (`GAP-DEAD-ENGINE=1`) now fail. **Single cause:** the newly-tracked `00-MASTER.UCOS-UAR-001` is unreachable in every declared reachability dimension and no entry point names it. | `rib-gate` exit 1 · gates **10/12** · units 240 → 241 · seal `82efa15805178be8` · `orphan_members: ["00-MASTER.UCOS-UAR-001"]`. Independently confirmed by `URRC-000001`: tracked engines 20 → 21, unbound engines 4 → **5**, `uar_engine.py` bindings `**none**`. | `EB-01`, Wave-002 order 2 — this **is** `EB-01` defect #3 ("zero enforcement wiring"), now measured rather than asserted |
+| **W01-F-02** | **`rfp-gate` is now EVALUABLE and reports NOT A FIXED POINT.** `CLO-01` **PASSES** — the dirty-tree abort is gone, exactly as `IMPLEMENT-001C` D06 §4.3 predicted. The gate then measures **5/8** criteria: `CLO-03` `tracked_modifications=2359`, `CLO-06` `non_fixed_point_passes=3`, `CLO-07` `cycles_detected=2`. **22 × `CYC-OBSERVE`** — `UCOS-RIB-001` and `URRC-000001` persist observations of the tree, so running them is itself a mutation — and **2 × `CYC-REGISTER`** (`00-BOOK/DATA/change-ledger.json` lies in the registration projection zone but is written by `STAGE-UCCEP`). | `rfp-gate` exit 1 · `CLO-01`/`02`/`04`/`05`/`08` PASS · `unattributed_paths=0` · `untracked_outside_excluded=0` | Wave-002. `RB-05` removed the *worst* persisted observation (the per-path dirty list); the remaining `CYC-OBSERVE` set requires ceasing to persist the observation entirely — an **architecture change**, outside a finalization mission's mandate |
+| **W01-F-03** | **The registration projection zone is stale by 731 files.** Running `00-BOOK/tools/register.sh` (pipeline `STAGE-REGISTER`) rewrites **731** tracked files: `+7,995 / −7,767`. Two distinct causes. **(a)** `content_hash` values legitimately move because the release changed the artifacts they hash. **(b)** commit `91a8b1d` set `DERIVED_CATEGORY_MAXLEN` 12 → 6, so every derived category code would **migrate** — e.g. `ARCHITECTURA` → `ARCHIT`, `CANONICALOWN` → … — collapsing distinct 12-char codes into shared 6-char ones. Also `Total relationships` 12829 → 12817. | Measured, then **restored**: `artifacts.json` `generated_at` remains `2026-07-28T05:52:19+00:00` as committed. `git status` → 0 entries. | **`REG-AUTO-001`**, not `IMPLEMENT-001D`. Re-deriving 1193 artifacts' category codes is a registration-authority migration with its own admission route. **Not** blocked: `verify.sh` Stage 4 (`enforce --pre`, 1193 ≡ 1193, 0 unregistered, 0 drift) and Stage 5 (`validate`, schema + referential integrity PASS) both pass on the committed state, and the widened patterns keep the existing 12-char codes valid — which is why the widening was required. `CK-REG-DRIFT` is `NOT-EXECUTED, in_scope=false` at the standard tier and says so, per `RO-F-06`, committed in `d208272`. |
+
+**What IS proven deterministic at this release.** All eleven non-registration producer engines
+reach a **byte-identical fixed point** on the committed tree: two consecutive full passes in
+declared pipeline order (`closure` → `ucda` → `uei` → `uer` → `urrc` → `umk` → `upf` → `rib` →
+`uccep`) emit sha256-identical bytes for every path, and `git status` reports **0** entries
+afterwards. Commits `0a5f1ba` (URRC) and `ac44985` (RIB) are that convergence: RIB is regenerated
+**last**, from a clean tree, because it measures the tree's own dirtiness — the same reason
+`df763bf` exists.
+
+> **The prediction that `rib-gate` would pass was wrong, and is recorded as wrong.** A finalization
+> mission may not fix what it finds; it must leave the finding where the next mission will trip
+> over it.
+
 **`IMPLEMENT-001` remains INTERRUPTED.** D02, D03 and D04 do not exist, and D04 defines the
 `B-1`/`B-2` gate prerequisites all nine `EB-*` items cite. Per §4 wave-entry criteria, **no
 `EB-*` item is orderable until those deliverables exist** — this release does not open Wave-002
