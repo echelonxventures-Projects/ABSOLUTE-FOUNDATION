@@ -1918,9 +1918,9 @@
       "unknown": false
     },
     {
-      "count": 20,
+      "count": 21,
       "evidence": [],
-      "headline": "20 tracked path(s)",
+      "headline": "21 tracked path(s)",
       "id": "DV-45",
       "primitive": "tracked_glob_census",
       "purpose": "Executable governance engines and gate scripts present in version control.",
@@ -1978,6 +1978,10 @@
           "TRACKED"
         ],
         [
+          "`00-MASTER/UCOS-UAR-001/uar_engine.py`",
+          "TRACKED"
+        ],
+        [
           "`00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py`",
           "TRACKED"
         ],
@@ -2009,9 +2013,9 @@
       "unknown": false
     },
     {
-      "count": 4,
+      "count": 5,
       "evidence": [],
-      "headline": "16/20 located engine(s) bound to at least one entry point, workflow or hook (over 20 tracked binding file(s))",
+      "headline": "16/21 located engine(s) bound to at least one entry point, workflow or hook (over 20 tracked binding file(s))",
       "id": "DV-46",
       "primitive": "text_presence",
       "purpose": "Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.",
@@ -2080,6 +2084,11 @@
           "`00-MASTER/UCOS-RIB-001/rib_engine.py`",
           "2",
           "`.github/workflows/rib-gate.yml`, `Makefile`"
+        ],
+        [
+          "`00-MASTER/UCOS-UAR-001/uar_engine.py`",
+          "0",
+          "**none**"
         ],
         [
           "`00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py`",

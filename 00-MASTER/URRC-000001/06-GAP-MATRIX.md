@@ -95,7 +95,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 16/20 located engine(s) bound to at least one entry point, workflow or hook (over 20 tracked binding file(s))
+- **Result** — 16/21 located engine(s) bound to at least one entry point, workflow or hook (over 20 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -113,6 +113,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 | `00-MASTER/UCDA-000001/ucda_engine.py` | 2 | `.kiro/hooks/ucda-000001.json`, `Makefile` |
 | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | 2 | `.github/workflows/rfp-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-RIB-001/rib_engine.py` | 2 | `.github/workflows/rib-gate.yml`, `Makefile` |
+| `00-MASTER/UCOS-UAR-001/uar_engine.py` | 0 | **none** |
 | `00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py` | 0 | **none** |
 | `00-MASTER/UEI-000001/uei_engine.py` | 3 | `.github/workflows/uei-gate.yml`, `.kiro/hooks/uei-000001.json`, `Makefile` |
 | `00-MASTER/UER-000001/uer_engine.py` | 3 | `.github/workflows/uer-gate.yml`, `.kiro/hooks/uer-000001.json`, `Makefile` |
