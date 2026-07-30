@@ -19,7 +19,7 @@ def _write_config(tmp_path, facts):
         "repository_id": "R",
         "epic_id": "E",
         "stages": [
-            {"stage_id": "freeze", "kind": "freeze", "params": {"paths": []}},
+            {"stage_id": "freeze", "kind": "freeze", "params": {"paths": ["engine/a.py"]}},
             {"stage_id": "coverage", "kind": "coverage", "params": {"min_percent": 90}},
             {"stage_id": "acceptance", "kind": "acceptance", "params": {"facts": facts}},
         ],

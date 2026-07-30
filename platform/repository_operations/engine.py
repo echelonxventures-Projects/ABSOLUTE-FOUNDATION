@@ -92,6 +92,7 @@ class RepositoryOperationsOrchestrator:
                 spec,
                 command_runner=self._command_runner,
                 repo_root=self._repo_root,
+                measured_coverage=coverage,
             )
             results.append(result)
             if stage_coverage is not None:

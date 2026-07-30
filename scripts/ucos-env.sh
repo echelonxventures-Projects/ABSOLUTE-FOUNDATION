@@ -120,37 +120,131 @@ PY
 }
 
 # --- Dependency verification -----------------------------------------------------
-# Returns 0 iff every pinned dev tool is importable at exactly the pinned version.
+# Returns 0 iff every pinned dev tool is present at exactly the pinned version AND
+# every executable that tool's own installed-files manifest declares is present in
+# the venv script directory and executable.
+#
+# Metadata alone is NOT sufficient, and the difference is not theoretical. A pinned
+# tool can be RECORDED at the correct version while its executable is absent: an
+# interrupted or partially completed reinstall leaves the import package, the
+# version and the dist-info intact but never writes bin/<tool>. A metadata-only
+# check then reports "already present and at expected versions", ucos_install_deps
+# is never invoked, and the tool fails at the point of use instead of at the point
+# of verification — which is the opposite of a self-healing environment. Measured
+# consequence: bin/ruff was absent while `metadata.version("ruff")` returned the
+# pinned 0.8.4, so this function reported a healthy toolchain, no repair was
+# attempted, and verify.sh Stage 1 failed with FileNotFoundError on every run. That
+# in turn failed the fixed-point gate's CK-VERIFY and STAGE-VERIFY, and the
+# resulting certifier residue closed G-15 over an otherwise convergent repository.
+#
+# The executable set is DERIVED from each distribution's own manifest, never listed
+# here, so it needs no edit when a pin is added or changed, and it covers wheel data
+# scripts that declare no console_scripts entry point. That last case is exactly the
+# ruff case: ruff ships its binary as a wheel script with an EMPTY console_scripts
+# group, so an entry-points-based check would miss the only executable that mattered.
 ucos_deps_ok() {
   local py; py="$(ucos_venv_python)"
   [ -x "$py" ] || return 1
   local expected; expected="$(ucos_expected_deps "$py")"
   [ -n "$expected" ] || return 1
   "$py" - <<PY
+import csv
+import io
+import os
 import sys
+import sysconfig
 from importlib import metadata
+from pathlib import Path
+
 expected = """$expected"""
-dist = {"pytest_cov": "pytest-cov"}
+alias = {"pytest_cov": "pytest-cov"}
+scripts_dir = Path(sysconfig.get_path("scripts")).resolve()
 ok = True
+
 for line in expected.strip().splitlines():
     name, want = line.split()
-    pkg = dist.get(name, name.replace("_", "-"))
+    pkg = alias.get(name, name.replace("_", "-"))
+
+    # 1. the package is installed, at the pinned version
     try:
-        have = metadata.version(pkg)
+        dist = metadata.distribution(pkg)
     except Exception:
-        print(f"MISSING {pkg}", file=sys.stderr); ok = False; continue
-    if have != want:
-        print(f"DRIFT {pkg}: have {have} want {want}", file=sys.stderr); ok = False
+        print(f"MISSING {pkg}", file=sys.stderr)
+        ok = False
+        continue
+    if dist.version != want:
+        print(f"DRIFT {pkg}: have {dist.version} want {want}", file=sys.stderr)
+        ok = False
+
+    # 2. every executable the package itself declares is installed and usable.
+    #    RECORD is read DIRECTLY rather than through Distribution.files, because
+    #    Distribution.files applies skip_missing_files() and therefore silently
+    #    OMITS any recorded file that is absent from disk — it hides precisely the
+    #    condition this check exists to detect. Measured: with bin/ruff deleted,
+    #    dist.files yielded 10 entries and none of them was the bin entry, while
+    #    RECORD line 1 still read "../../../bin/ruff,sha256=...,27802040". A files()
+    #    based check is therefore inert by construction.
+    record = dist.read_text("RECORD")
+    if record is None:
+        print(f"NORECORD {pkg}: installed-files manifest absent, executables unverifiable",
+              file=sys.stderr)
+        ok = False
+        continue
+    base = Path(dist.locate_file("")).resolve()
+    for row in csv.reader(io.StringIO(record)):
+        if not row or not row[0]:
+            continue
+        try:
+            located = (base / row[0]).resolve()
+        except Exception:
+            continue
+        if located.parent != scripts_dir:
+            continue
+        if not located.is_file():
+            print(f"NOSCRIPT {pkg}: {located} is declared by the package but absent",
+                  file=sys.stderr)
+            ok = False
+        elif not os.access(located, os.X_OK):
+            print(f"NOEXEC {pkg}: {located} is present but not executable", file=sys.stderr)
+            ok = False
+
 sys.exit(0 if ok else 1)
 PY
 }
 
 # --- Install / repair the pinned toolchain --------------------------------------
+# Two passes, because the ordinary install cannot repair a missing executable.
+# pip treats a requirement as SATISFIED when the version metadata is present, so a
+# distribution whose bin/<tool> has been lost is left untouched by `pip install -e
+# '.[dev]'` — measured: with bin/ruff deleted, the editable install completed quietly
+# and bin/ruff was still absent, so ucos_deps_ok failed a second time and
+# ucos_ensure_venv aborted. The repair pass therefore force-reinstalls the pinned dev
+# tools at their pinned versions, and runs ONLY when the first pass left the toolchain
+# unhealthy, so the common case pays nothing for it. --no-deps keeps the blast radius
+# to the declared pins and cannot perturb the resolved dependency set.
 ucos_install_deps() {
   local py; py="$(ucos_venv_python)"
   ucos_log "Installing pinned toolchain into ${UCOS_VENV_DIR} (pip install -e '.[dev]')"
   "$py" -m pip install --disable-pip-version-check --quiet --upgrade pip >&2
   ( cd "$UCOS_REPO" && "$py" -m pip install --disable-pip-version-check --quiet -e ".[dev]" >&2 )
+
+  if ucos_deps_ok 2>/dev/null; then
+    return 0
+  fi
+
+  ucos_warn "toolchain still incomplete after install (a pinned executable is missing or unusable); forcing reinstall of the pinned dev tools"
+  local specs=()
+  local name want
+  while read -r name want; do
+    [ -n "${name:-}" ] || continue
+    [ -n "${want:-}" ] || continue
+    specs+=("$(printf '%s' "$name" | tr '_' '-')==${want}")
+  done < <(ucos_expected_deps "$py")
+  if [ "${#specs[@]}" -gt 0 ]; then
+    ucos_log "Forcing reinstall: ${specs[*]}"
+    "$py" -m pip install --disable-pip-version-check --quiet \
+      --force-reinstall --no-deps "${specs[@]}" >&2
+  fi
 }
 
 # --- Ensure the venv exists, matches the canonical series, and has the toolchain -

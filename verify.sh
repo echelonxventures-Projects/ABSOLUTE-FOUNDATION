@@ -104,7 +104,13 @@ run_stage "coverage report" "$PY" -m coverage report
 # Read-only eligibility/validity/classification gate (same gate CI runs first).
 run_stage "governance enforce --pre" "$PY" 00-BOOK/tools/ukb.py enforce --pre
 
-# --- Stage 5 (opt-in): full registration transaction + drift gate ----------------
+# --- Stage 5: registry structural validation (schema + referential integrity) -----
+# Validates emitted DATA against JSON schemas and checks structural invariants.
+# This gate was wired in by CRAP-001/CAEM-001 S-2 to close the silent-failure gap
+# that let 539 schema violations pass undetected through all prior gates.
+run_stage "registry validate (schema + integrity)" "$PY" 00-BOOK/tools/ukb.py validate
+
+# --- Stage 6 (opt-in): full registration transaction + drift gate ----------------
 # register.sh regenerates the synchronized registers and fails on drift; it mutates
 # generated DATA/REGISTRIES/CONTROL-TOWER/PORTAL, so it is opt-in for local runs.
 if [ "$FULL" = "1" ]; then

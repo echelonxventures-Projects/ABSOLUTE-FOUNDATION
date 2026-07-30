@@ -29,6 +29,18 @@ dev = [
   "pytest-cov==6.0.0",
   "coverage==7.15.2",
   "ruff==0.8.4",
+  # IMPLEMENT-001B RB-03 (UCCEP-F-006 · WP-UCCEP-004 · OA-3 · conflict CF-03).
+  # verify.sh Stage 5 (`ukb.py validate`) validates the emitted DATA against
+  # 00-BOOK/SCHEMAS/*.schema.json, but ukb.py:1733-1735 swallows ImportError and
+  # still exits 0 — so on a clean bootstrap the stage reported PASS having
+  # validated NO schema, which is the exact silent-failure mode that let 539
+  # schema violations pass undetected. RELEASE-001 §4 nonetheless requires
+  # "Schema + referential integrity PASS" as a release exit criterion.
+  # Declaring the pin here is sufficient and complete: ucos_expected_deps()
+  # (scripts/ucos-env.sh:104-120) DERIVES the required set by parsing this exact
+  # list, so ucos_ensure_venv now installs and verifies jsonschema with no second
+  # edit and no hardcoded list anywhere.
+  "jsonschema==4.26.0",
 ]
 
 [project.scripts]

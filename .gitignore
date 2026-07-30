@@ -104,3 +104,24 @@ data/_evidence/URI-000001/
 intelligence/UCOS-URI-001/
 intelligence/UCOS-UPI-001/
 !intelligence/UCOS-UPI-001/publication-formats.json
+
+
+
+# UCOS-RFP-001 W2-00 P-01 (RFP-1 / CLO-01 / CLO-05) — git bundle archives. A bundle is a
+# version-control TRANSPORT container: a serialization of the object database, produced by
+# `git bundle create` for backup or offline transfer. It is an environment output, so
+# RFP-001's class_derivation places it in CLS-TRANSIENT at the first ordered question
+# ("Is it absent from version control? → CLS-TRANSIENT if environment output"), and
+# CLS-TRANSIENT is EXEMPT from the fixed point by construction — never tracked, therefore
+# outside it. Left un-ignored, a bundle written into the working tree is an untracked entry
+# that no exclusion authority accounts for, so it counts against CLO-01
+# (initial_dirty_entries) and CLO-05 (untracked_outside_excluded) and aborts `make rfp-gate`
+# before any pipeline stage executes — and it is separately retained by UCOS-RIB-001's
+# scoped observation, failing GATE-12 (Repository Clean). Measured consequence of its
+# absence: a 92,678,041-byte bundle at the repository root held G-15 CLOSED at
+# df763bf while every producer in the declared pipeline was in fact convergent.
+# Declared at the GENUS (*.bundle) rather than by filename so recurrence is structurally
+# impossible for any future bundle under any name — mirrors the existing
+# determinism-evidence/, /knowledge/ and /realization/ generated-artifact policy.
+# Bundles belong in durable storage OUTSIDE the repository, never inside the tree they back up.
+*.bundle

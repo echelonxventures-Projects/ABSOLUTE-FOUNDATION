@@ -13,8 +13,9 @@ name: UCCEP-000000 Continuous Constitutional Evolution Gate
 # programme, domain, technology or platform is enumerated here.
 #
 # Exit semantics of the gate:
-#   0  every executed blocking check passed
-#   1  one or more executed blocking checks failed
+#   0  every blocking check in scope executed and passed
+#   1  a blocking check failed, OR a blocking check in scope produced no evidence
+#      (UNAVAILABLE / NOT-EXECUTED) — absence of evidence is never evidence
 #   2  fail-closed abort — the declaration is unusable, so no verdict may be asserted
 
 on:
@@ -76,12 +77,40 @@ jobs:
 
       # The standard tier reaches located gates that live in the installed package
       # (repository health, graph invariants, discovery coverage, intelligence
-      # determinism). Without the package those checks report UNAVAILABLE rather than
-      # PASS — absence of evidence is never treated as evidence — so the install is what
-      # makes the gate meaningful here.
-      - name: Install (pinned dev dependencies)
-        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+      # determinism). Those checks are declared with the `$PY` interpreter token, which
+      # resolves to the CANONICAL venv interpreter `.ec1-venv/bin/python` — not to
+      # whatever `python` happens to be on PATH.
+      #
+      # EIP-018 (FP-2): this step previously ran `pip install -e ".[dev]"` into the
+      # runner's system Python. That never creates `.ec1-venv`, so `$PY` resolved to the
+      # empty string and every `$PY` check reported UNAVAILABLE. Combined with the old
+      # aggregation — which filtered non-executed checks out of the exit code — four
+      # BLOCKING checks silently never ran while this job still went green.
+      #
+      # Bootstrapping the canonical venv is the fix: it is the same environment owner
+      # (`scripts/ucos-env.sh`) that `verify.sh` and `repo-ops.sh` use, so CI and local
+      # execution are now the same predicate rather than two similar ones.
+      - name: Bootstrap the canonical environment (creates .ec1-venv so $PY resolves)
+        run: ./bootstrap.sh
 
+      - name: Assert $PY resolves (fail-closed — a missing venv must never read as PASS)
+        run: |
+          test -x .ec1-venv/bin/python || {
+            echo "canonical venv interpreter absent; \$PY-declared blocking checks" \
+                 "would report UNAVAILABLE and the aggregate gate would fail-closed." >&2
+            exit 1
+          }
+          .ec1-venv/bin/python --version
+
+      # Tier note (EIP-018 / FP-3): the `full` tier additionally binds three blocking
+      # checks whose subjects are ./verify.sh, the determinism double-build, and
+      # register.sh --guard. They are NOT run here, and that exclusion is no longer
+      # silent: the engine now discloses every tier-excluded blocking check and caps
+      # this run's determination at CERTIFIED-PROVISIONAL. None of the three is
+      # bypassed — each executes in its own owning workflow (ec1-ci.yml,
+      # determinism.yml, ucos-registration-gate.yml), so running them again here would
+      # duplicate work without adding evidence. `make uccep-full` is the local path to
+      # an unqualified determination.
       - name: Aggregate constitutional gate (fail-closed)
         run: python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier standard --gate
 

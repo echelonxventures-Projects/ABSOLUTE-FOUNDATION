@@ -17,7 +17,7 @@ def _config():
             "repository_id": "R",
             "epic_id": "E",
             "stages": [
-                {"stage_id": "freeze", "kind": "freeze", "params": {"paths": []}},
+                {"stage_id": "freeze", "kind": "freeze", "params": {"paths": ["engine/a.py"]}},
                 acceptance_stage(),
             ],
         }

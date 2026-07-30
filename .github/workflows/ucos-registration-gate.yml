@@ -36,8 +36,14 @@ jobs:
           # the same interpreter everywhere.
           python-version: "3.12"
 
-      - name: Install optional validators
-        run: pip install jsonschema || true
+      # IMPLEMENT-001B RB-03 (UCCEP-F-006 · WP-UCCEP-004 · OA-3): `|| true` made the
+      # schema half of `ukb.py validate` silently optional in CI — an install failure
+      # was swallowed, ukb.py:1733-1735 then swallowed the ImportError, and the gate
+      # reported PASS for a weaker proposition than the one claimed. jsonschema is now
+      # a pinned dev dependency (pyproject.toml [project.optional-dependencies].dev),
+      # so it installs with the package and its absence is a real failure.
+      - name: Install validators (schema validation is mandatory, not optional)
+        run: pip install -e ".[dev]"
 
       # B-01c — publish the CI eligibility universe. Read-only: writes nothing,
       # allocates nothing, gates nothing. It exists so the universe every

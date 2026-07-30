@@ -18,7 +18,7 @@ import pytest
 
 def _config(tmp_path, *, command_code_stage=True):
     stages = [
-        {"stage_id": "freeze", "kind": "freeze", "params": {"paths": []}},
+        {"stage_id": "freeze", "kind": "freeze", "params": {"paths": ["engine/a.py"]}},
         {
             "stage_id": "coverage",
             "kind": "coverage",

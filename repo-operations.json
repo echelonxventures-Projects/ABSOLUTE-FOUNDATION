@@ -20,12 +20,13 @@
     {
       "stage_id": "architecture-freeze",
       "kind": "freeze",
-      "params": { "paths": [] }
+      "params": { "subject": "working-tree" }
     },
     {
       "stage_id": "repository-acceptance",
       "kind": "acceptance",
       "params": {
+        "coverage_from_measurement": true,
         "facts": {
           "repository_id": "UCOS-CONSOLIDATION",
           "epic_id": "EPIC-PLAT-003",
@@ -61,14 +62,7 @@
             "content_hashes": { "repository-operations": "ec2-plat-003" },
             "responsibilities": { "operational-verification": ["repository-operations"] }
           },
-          "coverage": [
-            { "name": "statements", "covered": 1, "total": 1 },
-            { "name": "branches", "covered": 1, "total": 1 },
-            { "name": "functions", "covered": 1, "total": 1 },
-            { "name": "public_api", "covered": 1, "total": 1 },
-            { "name": "exception_paths", "covered": 1, "total": 1 },
-            { "name": "repository", "covered": 1, "total": 1 }
-          ],
+          "coverage": [],
           "integrations": [
             { "point": "engine.acceptance", "satisfied": true },
             { "point": "engine.validation", "satisfied": true },

@@ -39,33 +39,109 @@ jobs:
 
       - name: Frozen-path guard (DP-03 — corpus is read-only)
         run: |
-          BASE="${{ github.event.pull_request.base.sha }}"
-          if [ -z "$BASE" ]; then BASE="${{ github.event.before }}"; fi
-          if git rev-parse --verify --quiet "$BASE" >/dev/null; then
-            # DP-03 protects the certified CANON. The four generated register
-            # surfaces (00-BOOK/{DATA,REGISTRIES,CONTROL-TOWER,PORTAL}) are
-            # deterministically re-derivable machinery OUTPUT — declared out of
-            # scope by REG-AUTO-001 §2 and owned by the Atomic Registration
-            # Transaction, which legitimately regenerates and commits them (every
-            # `REG-AUTO-001: register …` commit touches them). Their integrity is
-            # enforced by register.sh --guard (the Registration Gate drift check,
-            # same four-subtree set), NOT by this frozen-path guard. Excluding
-            # them here reconciles this gate with the Registration Gate so a
-            # registration commit is not falsely flagged as a DP-03 violation,
-            # while the guard still protects 00-SOURCE/, 99-FREEZE/, and the
-            # authored 00-BOOK canon.
-            CHANGED="$(git diff --name-only "$BASE" HEAD \
-              | grep -vE '^00-BOOK/(DATA|REGISTRIES|CONTROL-TOWER|PORTAL)/' || true)"
-            printf '%s\n' "$CHANGED" | ec1-frozen-guard --stdin
-          else
-            echo "No resolvable base ref; skipping diff-based guard (no-op)."
+          set -euo pipefail
+          # DP-03 protects the certified CANON. The four generated register
+          # surfaces (00-BOOK/{DATA,REGISTRIES,CONTROL-TOWER,PORTAL}) are
+          # deterministically re-derivable machinery OUTPUT — declared out of
+          # scope by REG-AUTO-001 §2 and owned by the Atomic Registration
+          # Transaction, which legitimately regenerates and commits them (every
+          # `REG-AUTO-001: register …` commit touches them). Their integrity is
+          # enforced by register.sh --guard (the Registration Gate drift check,
+          # same four-subtree set), NOT by this frozen-path guard. Excluding
+          # them here reconciles this gate with the Registration Gate so a
+          # registration commit is not falsely flagged as a DP-03 violation,
+          # while the guard still protects 00-SOURCE/, 99-FREEZE/, and the
+          # authored 00-BOOK canon.
+          #
+          # EIP-018 (FP-7): this step used to `echo "…skipping…(no-op)"` and
+          # report SUCCESS whenever the base ref did not resolve — which is the
+          # normal case for the first push to a new branch (github.event.before
+          # is the all-zero SHA) and for re-runs. DP-03 enforcement was
+          # therefore silently disabled on exactly the pushes most likely to
+          # introduce a corpus write. The base ref is now resolved through an
+          # ordered fallback chain, and if NOTHING resolves the step fails:
+          # if we cannot determine what changed, we cannot assert DP-03.
+          BASE=""
+          for CANDIDATE in \
+            "${{ github.event.pull_request.base.sha }}" \
+            "${{ github.event.before }}" \
+            "$(git merge-base "origin/${{ github.event.repository.default_branch }}" HEAD 2>/dev/null || true)" \
+            "$(git rev-parse --verify --quiet 'HEAD^' 2>/dev/null || true)"
+          do
+            [ -n "$CANDIDATE" ] || continue
+            if git rev-parse --verify --quiet "${CANDIDATE}^{commit}" >/dev/null; then
+              BASE="$CANDIDATE"
+              break
+            fi
+          done
+
+          if [ -z "$BASE" ]; then
+            echo "DP-03 GUARD FAIL-CLOSED: no diff base could be resolved, so the set of" >&2
+            echo "changed paths is unknown and corpus read-only-ness cannot be asserted." >&2
+            echo "Refusing to report success for an unperformed check." >&2
+            exit 1
           fi
+          echo "Guarding changes against base $BASE"
 
-      - name: Lint (ruff)
-        run: python -m ruff check engine platform
+          # No `|| true` on git: a git failure must fail the step rather than
+          # silently produce an empty change set that trivially passes.
+          CHANGED="$(git diff --name-only "$BASE" HEAD)"
 
-      - name: Test + coverage gate (fail under 90%)
-        run: python -m pytest
+          # IMPLEMENT-001B RB-01 (CF-01 / CF-02): SCHEMAS/ and tools/ join the
+          # exclusion set, because DP-03's authoritative text — UCIC-001 Stage 4,
+          # "0 writes to … `00-BOOK/**` SOURCE" — protects the authored 00-BOOK
+          # CANON, and neither of these two subtrees is that canon:
+          #
+          #   * 00-BOOK/tools/  — REG-AUTO-001 §2 names it "the generator's own
+          #     machinery", explicitly OUT OF SCOPE; §3 P3 further names config.py
+          #     a declared INPUT to registration ("a pure function of repository
+          #     content + the append-only ledger + config.py"). 0 of 1193
+          #     registered artifacts live under it — the registry never lists its
+          #     own generator.
+          #   * 00-BOOK/SCHEMAS/ — registered content, but four located Control
+          #     Tower standards affirmatively authorize ADDITIVE schema change:
+          #     STATUS-001:122 ("additive; existing data remains valid") and :139,
+          #     GOV-INT-001:308/:370, UCI-001:37, UCI-OPT-001:258. Its integrity is
+          #     enforced by the Registration Gate (content_hash drift via
+          #     register.sh --guard / CK-REG-DRIFT), not by this guard.
+          #
+          # Verified against the authority chain: 00-BOOK appears in the X-1…X-10
+          # protected-area register (UCCEP-000006 Output 6) ONLY at X-4
+          # (00-BOOK/DATA/id-ledger.json) and X-5 (00-BOOK/DATA/* ledgers) — X-1 is
+          # 00-SOURCE/ + 00-SOURCE-MANIFEST/ + 99-FREEZE/, and the freeze manifest
+          # (99-FREEZE/SOURCE-FILES.txt) names 13 files, none under 00-BOOK.
+          #
+          # STILL GUARDED, deliberately: 00-SOURCE/, 99-FREEZE/, and the authored
+          # 00-BOOK canon (UCOS-BOOK-000000-*.md, MASTER-BOOK/, ADVANCEMENT/).
+          # The shared FROZEN_PREFIXES constant is UNCHANGED — it has 21 call
+          # sites, of which 18 are write-time guards (evidence writers, knowledge
+          # store, publishing, realization) for which whole-tree 00-BOOK breadth is
+          # correct. Narrowing the constant would weaken those 18 to fix this one
+          # review gate. The scope correction belongs here, at the review boundary.
+          #
+          # `grep -v` exits 1 when it filters EVERYTHING. That is a legitimate
+          # "only generated register surfaces changed" result, so tolerate a
+          # non-zero exit from grep alone — never from git, handled above.
+          FILTERED="$(printf '%s\n' "$CHANGED" \
+            | grep -vE '^00-BOOK/(DATA|REGISTRIES|CONTROL-TOWER|PORTAL|SCHEMAS|tools)/' || true)"
+
+          if [ -z "$(printf '%s' "$FILTERED" | tr -d '[:space:]')" ]; then
+            echo "No changed paths outside the generated register surfaces; nothing for the guard to reject."
+            exit 0
+          fi
+          printf '%s\n' "$FILTERED" | ec1-frozen-guard --stdin
+
+      # EIP-018 (FP-8): CI used to reimplement a SUBSET of the canonical gate
+      # (`ruff check` + `pytest`), omitting `ruff format --check`, the explicit
+      # coverage report, and the governance pre-registration gate. verify.sh —
+      # the gate every contributor is told is authoritative — ran in NO
+      # workflow, so "verify.sh is green" and "CI is green" were different
+      # predicates and format drift passed CI. Invoking verify.sh directly makes
+      # them the same predicate by construction: it runs the shared
+      # ucos_ruff_gate (check AND format --check), pytest with the 90% coverage
+      # gate, the coverage report, and `ukb.py enforce --pre`.
+      - name: Canonical verification gate (./verify.sh)
+        run: ./verify.sh
 
       - name: Build (wheel + sdist)
         run: python -m pip install build==1.2.2 && python -m build

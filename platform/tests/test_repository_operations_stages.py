@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from platform.repository_operations.contracts import StageSpec
+import functools
+import os
+import subprocess
+from platform.repository_operations.contracts import CoverageSummary, StageSpec
 from platform.repository_operations.errors import (
     CoverageReportError,
     StageDefinitionError,
@@ -74,6 +77,44 @@ def test_acceptance_stage_assimilation_error():
         _run(_spec("acceptance", {"facts": {"epic_id": "E"}}))
 
 
+def test_acceptance_measured_coverage_overrides_declared_facts():
+    """EIP-018 (FP-13): measurement replaces self-declared coverage.
+
+    ``accepted_facts()`` declares complete coverage across every required dimension.
+    Supplying a MEASURED summary that is incomplete must flip the verdict, proving the
+    declared facts no longer decide the outcome.
+    """
+    measured = CoverageSummary(
+        line_rate=0.5,
+        branch_rate=0.5,
+        lines_covered=1,
+        lines_valid=2,
+        branches_covered=1,
+        branches_valid=2,
+    )
+    spec = _spec("acceptance", {"facts": accepted_facts(), "coverage_from_measurement": True})
+    result, _ = execute_stage(
+        spec,
+        command_runner=constant_runner(0),
+        repo_root=".",
+        measured_coverage=measured,
+    )
+    assert result.failed
+    assert result.detail["coverage_source"] == "measured"
+
+    # Same facts, no measurement injection -> the declared facts still stand.
+    declared, _ = _run(_spec("acceptance", {"facts": accepted_facts()}))
+    assert declared.passed
+    assert declared.detail["coverage_source"] == "declared"
+
+
+def test_acceptance_measured_coverage_without_measurement_is_fail_closed():
+    """Declaring measured coverage with no measurement must abort, not silently fall back."""
+    spec = _spec("acceptance", {"facts": accepted_facts(), "coverage_from_measurement": True})
+    with pytest.raises(StageExecutionError):
+        _run(spec)
+
+
 # -- validation --------------------------------------------------------------
 def test_validation_stage_pass_and_fail():
     result, _ = _run(_spec("validation", {"subject": valid_validation_subject()}))
@@ -122,9 +163,66 @@ def test_freeze_stage_clean_and_violation():
     assert dirty.detail["violations"] == ["00-BOOK/notes.md"]
 
 
-def test_freeze_stage_default_empty_paths_pass():
-    result, _ = _run(_spec("freeze", {}))
+def test_freeze_stage_empty_declared_subject_is_fail_closed():
+    """EIP-018 (FP-14): an empty subject evidences nothing and must not pass.
+
+    This previously asserted the opposite (``test_freeze_stage_default_empty_paths_pass``):
+    a freeze stage with no paths returned PASSED, so the architecture-freeze guard in
+    ``repo-operations.json`` — configured with ``paths: []`` — was a guaranteed pass over
+    nothing at all.
+    """
+    with pytest.raises(StageExecutionError):
+        _run(_spec("freeze", {}))
+    with pytest.raises(StageExecutionError):
+        _run(_spec("freeze", {"paths": []}))
+
+
+def test_freeze_stage_rejects_unknown_subject_source():
+    with pytest.raises(StageExecutionError):
+        _run(_spec("freeze", {"subject": "guesswork"}))
+
+
+def _init_repo(root):
+    """A throwaway git work tree with one commit, so HEAD resolves."""
+    env = {"GIT_CONFIG_GLOBAL": "/dev/null", "GIT_CONFIG_SYSTEM": "/dev/null"}
+    run = functools.partial(subprocess.run, cwd=str(root), check=True, capture_output=True)
+    run(["git", "init", "-q", "-b", "main"], env={**os.environ, **env})
+    run(["git", "config", "user.email", "t@example.invalid"])
+    run(["git", "config", "user.name", "t"])
+    (root / "seed.txt").write_text("seed\n", encoding="utf-8")
+    run(["git", "add", "seed.txt"])
+    run(["git", "commit", "-q", "-m", "seed"], env={**os.environ, **env})
+
+
+def test_freeze_stage_working_tree_subject_passes_on_non_corpus_write(tmp_path):
+    _init_repo(tmp_path)
+    (tmp_path / "engine").mkdir()
+    (tmp_path / "engine" / "new.py").write_text("x = 1\n", encoding="utf-8")
+
+    result, _ = _run(_spec("freeze", {"subject": "working-tree"}), repo_root=tmp_path)
     assert result.passed
+    assert result.detail["subject_source"] == "working-tree"
+    assert result.detail["violations"] == []
+    # The subject was DERIVED from git, not declared in config: the untracked write
+    # is what makes the count non-zero.
+    assert result.detail["checked"] == 1
+
+
+def test_freeze_stage_working_tree_subject_detects_real_corpus_write(tmp_path):
+    """A write into the frozen corpus must be caught from the derived subject alone."""
+    _init_repo(tmp_path)
+    (tmp_path / "00-BOOK").mkdir()
+    (tmp_path / "00-BOOK" / "smuggled.md").write_text("nope\n", encoding="utf-8")
+
+    result, _ = _run(_spec("freeze", {"subject": "working-tree"}), repo_root=tmp_path)
+    assert result.failed
+    assert result.detail["violations"] == ["00-BOOK/smuggled.md"]
+
+
+def test_freeze_stage_working_tree_subject_fails_closed_without_git(tmp_path):
+    """No git work tree means the write set is unknown, which must abort, not pass."""
+    with pytest.raises(StageExecutionError):
+        _run(_spec("freeze", {"subject": "working-tree"}), repo_root=tmp_path)
 
 
 def test_freeze_stage_rejects_non_list_paths():
