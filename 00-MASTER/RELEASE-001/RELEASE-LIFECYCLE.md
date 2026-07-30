@@ -72,7 +72,23 @@ UCOS-EVO-NNN-WNN     Evolution releases (wave completions)
 | Version | SHA | Date | Content |
 |---|---|---|---|
 | `UCOS-BASELINE-001` | `df763bf9` | 2026-07-30 | First certified baseline (68/68 capabilities) |
+| `UCOS-EVO-001-W01` | `91a8b1d`…`2a031b8` | 2026-07-30 | Wave-001 completion — the `IMPLEMENT-001` programme. 5 commits · 89 modified · 45 added · 0 removed. Registered by `IMPLEMENT-001D` per §5.1 step 5; full record at `EVOLUTION-001` §6.1. Lifecycle state **`RELEASED`**. |
 | `UCOS-EVO-001-W02` | *(future)* | *(tbd)* | Wave-002 completion |
+
+**`UCOS-EVO-001-W01` against the §4 continuous-validation policy — 7 of 7:**
+
+| Gate | Result |
+|---|---|
+| Lint + format (`verify.sh` Stage 1) | exit 0 |
+| Tests + coverage (Stage 2) | exit 0 · **94.28%** ≥ 90% · 0 failures |
+| Coverage report (Stage 3) | exit 0 |
+| Governance enforce (Stage 4) | exit 0 · 1193 ≡ 1193 · 0 unregistered · 0 drift |
+| Registry validate (Stage 5) | exit 0 · schema + referential integrity PASS |
+| `make uccep-gate` | exit 0 · `blocking=none` · `unproven=none` |
+| `make closure-gate` | exit 0 · `CLOSED` · `gaps=0` |
+
+Baseline advancement (§3.3) is **NOT** claimed: this wave is remediation and finalization, not a
+capability milestone. `UCOS-BASELINE-001` stands as the certified baseline.
 
 ### 3.3 Baseline advancement criteria
 
