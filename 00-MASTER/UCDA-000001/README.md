@@ -37,8 +37,9 @@ Every entry in the overlay names the register it was recorded in, and the engine
 | `04-IMPLEMENTATION-EVIDENCE-GATE-DETERMINATION.md` | **regenerated** | The gate outcome, computed from Repository Truth, with the consequence and the enforcement route. |
 | `05-WORK-PACKAGE-REGISTER.md` | **regenerated** | Every work package: owner, constitutional route, acceptance condition. |
 | `06-DECISION-TRACEABILITY-CLOSURE.md` | **regenerated** | decision → register → index → disposition → located evidence. |
+| `07-ARCHITECTURAL-COVERAGE-MATRIX.md` | **regenerated** | The Final Architectural Coverage Matrix: decision → located owner → **measured** coverage of the five equivalence dimensions → action taken → evidence. |
 | `ucda.json` | **regenerated** | Machine model + seal. |
-| `evidence/decision-evidence-index.json` | **regenerated** | Per-decision resolved and unresolved evidence references. |
+| `evidence/decision-evidence-index.json` | **regenerated** | Per-decision resolved and unresolved evidence references, and measured coverage. |
 
 Never hand-edit a regenerated file — it is overwritten on the next run.
 
@@ -66,6 +67,20 @@ The gate also runs inside `make uccep-gate`, inside `.github/workflows/uccep-gat
 ## Bidirectionality of the verdict
 
 A gate whose verdict cannot be reached in both directions carries no evidentiary value (the defect recorded as `UCCEP-F-001` against another located gate). This gate was probed in both directions: with the declaration as committed it exits `0` with the gate OPEN; with a single decision whose register and evidence do not resolve, it reports that decision by name, marks it conversation-only, and exits `1`.
+
+## Coverage completeness — similarity is not sufficient
+
+Article 28.13(b) lets a decision be recorded as already discharged by an existing canonical owner. Nothing in the bare Article prevents that claim from resting on a resemblance, so a partially covered decision could be closed as complete. The rule that closes this is registered at `03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md` **§7 (CR-1)** and mechanised here:
+
+> A decision may assert 28.13(b) only where the located owner demonstrably covers **all five** declared equivalence dimensions — **functional**, **architectural**, **governance**, **lifecycle**, **extensibility**. Where any dimension is unevidenced, the decision is *partially represented*, 28.13(b) is unavailable, and the lawful disposition is 28.13(c) with a work package against the named shortfall.
+
+The dimensions, the scope (a decision class, not a list of decisions) and the disposition the rule binds are all DATA in `ucda-decisions.json`, so `--check-no-enumeration` still passes and a sixth dimension is an entry, not a code change. A dimension is covered only where the decision names at least one artifact for it **and every artifact it names resolves**; a dimension for which nothing is named is not covered. Coverage is therefore measured from Repository Truth, and a claim survives only as long as the artifact it rests on does.
+
+This adds **no** sixth disposition, **no** second decision register, **no** new gate apparatus and **no** new authority. A breach is a declaration-integrity finding, so the run aborts fail-closed (exit `2`) and no verdict is emitted — the claim cannot be recorded at all.
+
+**Probed in both directions.** With the declaration as committed, the four guards pass and the gate is OPEN at the measured aggregate coverage. Withdrawing one proven dimension from a decision that asserts 28.13(b), and separately pointing one dimension at an artifact that does not exist, each names the affected decision, reports its measured percentage and the unevidenced dimension, and aborts fail-closed.
+
+**Boundary.** `platform/coverage` owns Universe→Code coverage — whether declared implementation is realized. It holds no notion of a decision, register or disposition, so it is not a duplicate of this concern and is not extended by it. The boundary is itself recorded as a dispositioned decision rather than left to inference.
 
 ---
 

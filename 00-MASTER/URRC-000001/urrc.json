@@ -1621,43 +1621,26 @@
       "unknown": false
     },
     {
-      "count": 2,
+      "count": 3,
       "evidence": [
         "S-08"
       ],
-      "headline": "2 distinct value(s)",
+      "headline": "3 distinct value(s)",
       "id": "DV-32",
       "primitive": "field_histogram",
       "purpose": "Computed gate verdicts.",
       "rows": [
         [
           "`PASS`",
-          "14"
+          "10"
         ],
         [
-          "`PASS-WITH-ADVISORY`",
-          "1"
-        ]
-      ],
-      "unknown": false
-    },
-    {
-      "count": 2,
-      "evidence": [
-        "S-08"
-      ],
-      "headline": "2 distinct value(s)",
-      "id": "DV-33",
-      "primitive": "field_histogram",
-      "purpose": "Computed programme verdicts.",
-      "rows": [
-        [
-          "`PASS`",
-          "13"
-        ],
-        [
-          "`PASS-WITH-ADVISORY`",
+          "`NOT-EXECUTED`",
           "4"
+        ],
+        [
+          "`PARTIAL`",
+          "1"
         ]
       ],
       "unknown": false
@@ -1667,24 +1650,53 @@
       "evidence": [
         "S-08"
       ],
-      "headline": "4 records",
+      "headline": "4 distinct value(s)",
+      "id": "DV-33",
+      "primitive": "field_histogram",
+      "purpose": "Computed programme verdicts.",
+      "rows": [
+        [
+          "`PASS`",
+          "8"
+        ],
+        [
+          "`NOT-EXECUTED`",
+          "3"
+        ],
+        [
+          "`PARTIAL`",
+          "3"
+        ],
+        [
+          "`PASS-WITH-ADVISORY`",
+          "3"
+        ]
+      ],
+      "unknown": false
+    },
+    {
+      "count": 5,
+      "evidence": [
+        "S-08"
+      ],
+      "headline": "5 records",
       "id": "DV-34",
       "primitive": "record_count",
       "purpose": "Findings composing the certification ceiling.",
       "rows": [
         [
           "records",
-          "4"
+          "5"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 64,
+      "count": 89,
       "evidence": [
         "S-10"
       ],
-      "headline": "9 key(s) · 64 member(s)",
+      "headline": "9 key(s) · 89 member(s)",
       "id": "DV-35",
       "primitive": "dict_list_lengths",
       "purpose": "Decision lifecycle occupancy by stage.",
@@ -1695,7 +1707,7 @@
         ],
         [
           "`CLOSURE`",
-          "10"
+          "14"
         ],
         [
           "`CONSTITUTIONAL-AGREEMENT`",
@@ -1715,11 +1727,11 @@
         ],
         [
           "`REPOSITORY-MAPPING`",
-          "26"
+          "44"
         ],
         [
           "`REPOSITORY-TRUTH-UPDATE`",
-          "28"
+          "31"
         ],
         [
           "`VALIDATION`",
@@ -1727,36 +1739,36 @@
         ],
         [
           "**total**",
-          "**64**"
+          "**89**"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 64,
+      "count": 89,
       "evidence": [
         "S-10"
       ],
-      "headline": "5 key(s) · 64 member(s)",
+      "headline": "5 key(s) · 89 member(s)",
       "id": "DV-36",
       "primitive": "dict_list_lengths",
       "purpose": "Decision disposition occupancy across the closed disposition set.",
       "rows": [
         [
           "`IMPLEMENTED`",
-          "22"
+          "25"
         ],
         [
           "`REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE`",
-          "8"
+          "18"
         ],
         [
           "`REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION`",
-          "2"
+          "6"
         ],
         [
           "`REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY`",
-          "28"
+          "36"
         ],
         [
           "`SUPERSEDED`",
@@ -1764,41 +1776,41 @@
         ],
         [
           "**total**",
-          "**64**"
+          "**89**"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 64,
+      "count": 89,
       "evidence": [
         "S-09"
       ],
-      "headline": "64 records",
+      "headline": "89 records",
       "id": "DV-37",
       "primitive": "record_count",
       "purpose": "Registered constitutional decisions.",
       "rows": [
         [
           "records",
-          "64"
+          "89"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 7,
+      "count": 17,
       "evidence": [
         "S-09"
       ],
-      "headline": "7 records",
+      "headline": "17 records",
       "id": "DV-38",
       "primitive": "record_count",
       "purpose": "Work packages registered by decision disposition.",
       "rows": [
         [
           "records",
-          "7"
+          "17"
         ]
       ],
       "unknown": false
@@ -2101,8 +2113,8 @@
         ],
         [
           "`verify.sh`",
-          "1",
-          "`Makefile`"
+          "3",
+          "`.github/workflows/ec1-ci.yml`, `.github/workflows/uccep-gate.yml`, `Makefile`"
         ]
       ],
       "unknown": false
@@ -2207,8 +2219,8 @@
           "YES",
           "YES",
           "6/6",
-          "125",
-          "`827d3554591c`"
+          "130",
+          "`f5130388f68c`"
         ],
         [
           "`S-09`",
@@ -2217,8 +2229,8 @@
           "YES",
           "YES",
           "4/4",
-          "85",
-          "`78f195359e39`"
+          "120",
+          "`4db0cdd76204`"
         ],
         [
           "`S-10`",
@@ -2227,8 +2239,8 @@
           "YES",
           "YES",
           "6/6",
-          "298",
-          "`f47c4d45e37b`"
+          "426",
+          "`8d61341fbaa6`"
         ],
         [
           "`S-11`",
@@ -3355,7 +3367,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "827d3554591c7773cc7c1044f9d15cd892cb816e9678e9c74a82f7879f50ae35",
+      "content_sha256": "f5130388f68cf1c8de802fc05fbecb5847fea0cdacfb6e7dc7fd205276843fff",
       "exists": true,
       "id": "S-08",
       "kind": "aggregate gate determination",
@@ -3379,12 +3391,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The computed aggregate verdicts and the certification ceiling.",
-      "records": 125,
+      "records": 130,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "78f195359e393531a37ce17e1cd2a2f2cef862d4f715e1038f025cd2f1ef050c",
+      "content_sha256": "4db0cdd762042b2356b2d2dbb11f50b35177176a08722f19a157ef502e0e15e6",
       "exists": true,
       "id": "S-09",
       "kind": "decision register declaration",
@@ -3404,12 +3416,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The constitutional decision register: lifecycle, closed disposition set, decisions.",
-      "records": 85,
+      "records": 120,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "f47c4d45e37b258c5212ee35c5836e4789506a93b73bf41153926f3b2b1a416e",
+      "content_sha256": "8d61341fbaa69bc78ff70fb70160c3d0d62af8fbb61415b3fd69c4e60f172bfc",
       "exists": true,
       "id": "S-10",
       "kind": "decision determination",
@@ -3433,7 +3445,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Computed decision lifecycle and disposition occupancy.",
-      "records": 298,
+      "records": 426,
       "required": true,
       "tracked": true
     },

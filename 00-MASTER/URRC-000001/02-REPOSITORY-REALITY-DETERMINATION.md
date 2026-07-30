@@ -119,9 +119,9 @@ What the repository contains, and the substrate that proves it.
 | `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1319 | `c80b79fc82c6` |
 | `S-06` | `00-CMG/CMG-REGISTRY.json` | YES | YES | YES | 9/9 | 164 | `ae12d2d56565` |
 | `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | YES | YES | YES | 5/5 | 63 | `e9671a9fc34c` |
-| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 125 | `827d3554591c` |
-| `S-09` | `00-MASTER/UCDA-000001/ucda-decisions.json` | YES | YES | YES | 4/4 | 85 | `78f195359e39` |
-| `S-10` | `00-MASTER/UCDA-000001/ucda.json` | YES | YES | YES | 6/6 | 298 | `f47c4d45e37b` |
+| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 130 | `f5130388f68c` |
+| `S-09` | `00-MASTER/UCDA-000001/ucda-decisions.json` | YES | YES | YES | 4/4 | 120 | `4db0cdd76204` |
+| `S-10` | `00-MASTER/UCDA-000001/ucda.json` | YES | YES | YES | 6/6 | 426 | `8d61341fbaa6` |
 | `S-11` | `00-MASTER/UER-000001/uer.json` | YES | YES | YES | 6/6 | 113 | `0ae82cb58fdb` |
 | `S-12` | `00-MASTER/IMR-0000/imr-0000-platform-bindings.json` | YES | YES | YES | 7/7 | 65 | `2df229587d73` |
 | `S-13` | `00-MASTER/IMR-003A/cios-bindings.json` | YES | YES | YES | 7/7 | 140 | `624b8de84505` |

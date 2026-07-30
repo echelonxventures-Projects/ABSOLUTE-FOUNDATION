@@ -67,12 +67,12 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-34`** — Findings composing the certification ceiling.
 
 - **Primitive** — `record_count`
-- **Result** — 4 records
+- **Result** — 5 records
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| records | 4 |
+| records | 5 |
 
 **`DV-24`** — Open constitutional questions.
 
@@ -148,24 +148,27 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-32`** — Computed gate verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 2 distinct value(s)
+- **Result** — 3 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 14 |
-| `PASS-WITH-ADVISORY` | 1 |
+| `PASS` | 10 |
+| `NOT-EXECUTED` | 4 |
+| `PARTIAL` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 2 distinct value(s)
+- **Result** — 4 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 13 |
-| `PASS-WITH-ADVISORY` | 4 |
+| `PASS` | 8 |
+| `NOT-EXECUTED` | 3 |
+| `PARTIAL` | 3 |
+| `PASS-WITH-ADVISORY` | 3 |
 
 **`DV-23`** — Meta-constitutional gap disposition distribution.
 

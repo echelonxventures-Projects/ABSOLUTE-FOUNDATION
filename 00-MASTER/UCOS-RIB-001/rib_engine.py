@@ -1720,6 +1720,20 @@ def observed_state(decl: dict, raw: dict) -> dict:
     that describes nothing but the act of rendering. Everything else — an uncommitted
     declaration, engine, README or any file elsewhere in the repository — is retained and
     counted, so the narrowing removes noise without removing dirt.
+
+    Backlog item RB-05 (finding C-5): the per-path LIST is no longer persisted, only the
+    counts. That list amplified a scalar condition into ~80 lines of tracked artifact which
+    churn with any unrelated repository activity: this model moved +129/-30 -> +137/-30
+    across two consecutive audit gate runs solely because an unrelated directory was
+    created between them, and the emitted artifact recorded 10 untracked entries while the
+    tree already held 11. Persisting a measurement of the working tree's own dirtiness
+    inside a TRACKED file is what the repository fixed-point principle forbids -- running
+    the gate became a mutation that changed the next measurement. The counts remain, and
+    the clean-tree gate and its validation both measure a count, not the list. Every
+    offending path stays visible in the gate's stdout report, so nothing is hidden -- only
+    the churn surface is removed. Verified before removal: the list was write-only --
+    produced here, defaulted in the determinism fixture, read by no code path and rendered
+    into no output artifact.
     """
     generated = own_generated_paths(decl)
     entries = [line for line in raw.get("raw_entries", []) if line[3:].strip('"') not in generated]
@@ -1728,7 +1742,6 @@ def observed_state(decl: dict, raw: dict) -> dict:
         {
             "working_tree": "DIRTY" if entries else "CLEAN",
             "dirty_entries": len(entries),
-            "dirty_paths": sorted(line[3:].strip('"') for line in entries),
             "modified": len([line for line in entries if line[:2].strip() in {"M", "MM", "AM"}]),
             "deleted": len([line for line in entries if "D" in line[:2]]),
             "untracked": len([line for line in entries if line[:2] == "??"]),
@@ -3266,7 +3279,9 @@ FIXED_STATE = {
     "detached": False,
     "working_tree": "CLEAN",
     "dirty_entries": 0,
-    "dirty_paths": [],
+    # Backlog item RB-05: the per-path list was removed — see observed_state(). This
+    # determinism fixture must mirror the emitted shape exactly, or the determinism
+    # self-guard would compare a key the engine no longer produces.
     "modified": 0,
     "deleted": 0,
     "untracked": 0,

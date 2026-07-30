@@ -416,8 +416,15 @@ def run_check(check: dict, resolved_tier: str, interp: dict) -> dict:
         "verdict": "NOT-EXECUTED",
         "reason": "",
         "assertions": [],
+        # True iff this check lies within the selected tier, i.e. THIS run was
+        # supposed to produce evidence for it. A check that is in scope but did
+        # not execute is UNPROVEN and blocks the gate (absence of evidence is
+        # never evidence); a check deliberately excluded by tier is disclosed as
+        # a certification ceiling instead of being silently dropped.
+        "in_scope": True,
     }
     if TIER_ORDER[check["tier"]] > TIER_ORDER[resolved_tier]:
+        record["in_scope"] = False
         record["reason"] = f"tier {check['tier']} above the selected tier {resolved_tier}"
         return record
 
@@ -513,8 +520,15 @@ def run_self_check(check: dict, decl: dict, resolved_tier: str) -> dict:
         "verdict": "NOT-EXECUTED",
         "reason": "",
         "assertions": [],
+        # True iff this check lies within the selected tier, i.e. THIS run was
+        # supposed to produce evidence for it. A check that is in scope but did
+        # not execute is UNPROVEN and blocks the gate (absence of evidence is
+        # never evidence); a check deliberately excluded by tier is disclosed as
+        # a certification ceiling instead of being silently dropped.
+        "in_scope": True,
     }
     if TIER_ORDER[check["tier"]] > TIER_ORDER[resolved_tier]:
+        record["in_scope"] = False
         record["reason"] = f"tier {check['tier']} above the selected tier {resolved_tier}"
         return record
     handler = SELF_CHECKS[check["argv"][1]]
@@ -545,6 +559,7 @@ def self_determinism(decl: dict) -> list[str]:
             "verdict": "PASS",
             "reason": "",
             "assertions": [],
+            "in_scope": True,
         }
         for check in decl["checks"]
     }
@@ -576,7 +591,22 @@ def aggregate(records: dict[str, dict], bound: list[str]) -> dict:
         rec["id"] for rec in executed if rec["advisory"] and rec["verdict"] == "FAIL"
     ]
     unexecuted = [cid for cid in bound if not records[cid]["executed"]]
-    if failed:
+    # A blocking check that was IN SCOPE for this tier but produced no evidence is
+    # UNPROVEN. It may not be filtered out of the verdict: doing so lets a missing
+    # interpreter or an unlocated entry point read as a pass.
+    unproven = [
+        cid
+        for cid in bound
+        if records[cid]["in_scope"]
+        and not records[cid]["advisory"]
+        and not records[cid]["executed"]
+    ]
+    # Blocking checks excluded by tier: not a failure, but they cap what this run
+    # can claim, so they are disclosed rather than dropped.
+    out_of_tier = [
+        cid for cid in bound if not records[cid]["in_scope"] and not records[cid]["advisory"]
+    ]
+    if failed or unproven:
         verdict = "FAIL"
     elif not blocking:
         verdict = "NOT-EXECUTED"
@@ -591,6 +621,8 @@ def aggregate(records: dict[str, dict], bound: list[str]) -> dict:
         "failed": failed,
         "advisory_failed": advisory_failed,
         "not_executed": unexecuted,
+        "unproven": unproven,
+        "out_of_tier": out_of_tier,
         "executed": [rec["id"] for rec in executed],
     }
 
@@ -632,6 +664,7 @@ def assemble(decl: dict, records: dict[str, dict], resolved_tier: str, repo_stat
 
     ordered = [records[check["id"]] for check in decl["checks"]]
     executed = [rec for rec in ordered if rec["executed"]]
+    in_scope = [rec for rec in ordered if rec["in_scope"]]
     blocking_failures = sorted(
         rec["id"] for rec in executed if not rec["advisory"] and rec["verdict"] == "FAIL"
     )
@@ -639,13 +672,42 @@ def assemble(decl: dict, records: dict[str, dict], resolved_tier: str, repo_stat
         rec["id"] for rec in executed if rec["advisory"] and rec["verdict"] == "FAIL"
     )
     unavailable = sorted(rec["id"] for rec in ordered if rec["verdict"] == "UNAVAILABLE")
+    # Blocking checks the environment failed to supply: the interpreter was absent or
+    # the entry point could not be located. Previously these were computed, rendered,
+    # and then excluded from the exit code, so four blocking checks could report
+    # UNAVAILABLE while the aggregate gate still exited 0.
+    blocking_unavailable = sorted(
+        rec["id"] for rec in in_scope if not rec["advisory"] and rec["verdict"] == "UNAVAILABLE"
+    )
+    # Blocking checks in scope that did not execute for any other reason. A residual
+    # NOT-EXECUTED here is an engine or declaration defect, never a pass.
+    blocking_not_executed = sorted(
+        rec["id"]
+        for rec in in_scope
+        if not rec["advisory"] and not rec["executed"] and rec["verdict"] != "UNAVAILABLE"
+    )
+    # The union of everything this run was obliged to prove and did not.
+    unproven = sorted(set(blocking_unavailable) | set(blocking_not_executed))
+    # Blocking checks deliberately excluded by tier. Not a failure, but a scope limit
+    # that must cap the certification this run may assert.
+    blocking_out_of_tier = sorted(
+        rec["id"] for rec in ordered if not rec["in_scope"] and not rec["advisory"]
+    )
+    # Fail-closed subject: a failed check and an unproven check are equally blocking.
+    gate_blocking = sorted(set(blocking_failures) | set(unproven))
 
     ceiling = sorted(
         f"`{f['id']}` — {f['title']}"
         for f in decl["findings"]
         if f.get("blocking") and f.get("disposition") != "IMPLEMENTED"
     )
-    if blocking_failures:
+    if blocking_out_of_tier:
+        ceiling = ceiling + [
+            f"tier `{resolved_tier}` excluded {len(blocking_out_of_tier)} blocking check(s) "
+            f"from this run: {', '.join(f'`{cid}`' for cid in blocking_out_of_tier)} — "
+            "a tier-limited run may not assert unqualified certification"
+        ]
+    if gate_blocking:
         certification = "NOT-CERTIFIED"
     elif ceiling:
         certification = "CERTIFIED-PROVISIONAL"
@@ -662,9 +724,14 @@ def assemble(decl: dict, records: dict[str, dict], resolved_tier: str, repo_stat
         "blocking_failures": blocking_failures,
         "advisory_failures": advisory_failures,
         "unavailable": unavailable,
+        "blocking_unavailable": blocking_unavailable,
+        "blocking_not_executed": blocking_not_executed,
+        "unproven": unproven,
+        "blocking_out_of_tier": blocking_out_of_tier,
+        "gate_blocking": gate_blocking,
         "certification": certification,
         "certification_ceiling": ceiling,
-        "gate_exit": 1 if blocking_failures else 0,
+        "gate_exit": 1 if gate_blocking else 0,
     }
     sealed = {
         "gates": [{k: g[k] for k in ("id", "verdict", "failed", "not_executed")} for g in gates],
@@ -674,6 +741,7 @@ def assemble(decl: dict, records: dict[str, dict], resolved_tier: str, repo_stat
         "checks": [{k: c[k] for k in ("id", "verdict", "exit_code")} for c in ordered],
         "certification": certification,
         "tier": resolved_tier,
+        "unproven": unproven,
     }
     model["seal_sha256"] = digest(sealed)
     return model
@@ -906,6 +974,15 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                     joined(model["advisory_failures"]),
                 ],
                 ["Unavailable in this environment", joined(model["unavailable"])],
+                [
+                    "**UNPROVEN — blocking, in scope, no evidence produced (blocks the gate)**",
+                    joined(model["unproven"]),
+                ],
+                [
+                    "Blocking checks excluded by tier (scope limit, disclosed as a ceiling)",
+                    joined(model["blocking_out_of_tier"]),
+                ],
+                ["Fail-closed gate subject", joined(model["gate_blocking"])],
                 ["Certification", f"**{model['certification']}**"],
                 ["Gate exit code", str(model["gate_exit"])],
             ],
@@ -984,23 +1061,32 @@ def main(argv: list[str] | None = None) -> int:
         fail_closed("forbidden-write guard tripped")
 
     if not args.quiet:
-        gate_failures = ",".join(model["blocking_failures"]) or "none"
+        gate_failures = ",".join(model["gate_blocking"]) or "none"
         gates_pass = sum(1 for g in model["gates"] if g["verdict"].startswith("PASS"))
         programmes_pass = sum(1 for p in model["programs"] if p["verdict"].startswith("PASS"))
         print(
             f"{decl['programme']['id']}: {model['certification']} | tier={model['tier']} | "
             f"gates={gates_pass}/{len(model['gates'])} PASS | "
             f"programmes={programmes_pass}/{len(model['programs'])} PASS | "
-            f"blocking={gate_failures} | seal={model['seal_sha256'][:16]}"
+            f"blocking={gate_failures} | unproven={','.join(model['unproven']) or 'none'} | "
+            f"seal={model['seal_sha256'][:16]}"
         )
         print(f"wrote {len(written)} artifacts to {HERE}")
 
-    if args.gate and model["blocking_failures"]:
-        print(
-            "GATE: FAIL-CLOSED — blocking constitutional checks failed: "
-            + ", ".join(model["blocking_failures"]),
-            file=sys.stderr,
-        )
+    if args.gate and model["gate_blocking"]:
+        if model["blocking_failures"]:
+            print(
+                "GATE: FAIL-CLOSED — blocking constitutional checks failed: "
+                + ", ".join(model["blocking_failures"]),
+                file=sys.stderr,
+            )
+        if model["unproven"]:
+            print(
+                "GATE: FAIL-CLOSED — blocking constitutional checks produced no evidence "
+                "in this environment (absence of evidence is never evidence): "
+                + ", ".join(model["unproven"]),
+                file=sys.stderr,
+            )
         return 1
     return 0
 

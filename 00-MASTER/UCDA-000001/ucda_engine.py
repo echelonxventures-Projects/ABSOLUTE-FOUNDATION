@@ -70,6 +70,7 @@ ALLOWED_KEYS = {
         "acceptance",
         "authorization_required",
     },
+    "coverage_criteria": {"id", "criterion", "clause", "question", "definition"},
     "decisions": {
         "id",
         "title",
@@ -85,6 +86,8 @@ ALLOWED_KEYS = {
         "constitutional_basis",
         "justification",
         "note",
+        "coverage",
+        "action_taken",
     },
 }
 
@@ -105,7 +108,7 @@ _SUFFIX_SPLITS = (" (", " §", " Art ", " · ", " — ")
 
 # The number of determinations the renderer produces. The declaration binds a file name,
 # a title and a purpose to each, positionally, in render order.
-RENDERED_OUTPUTS = 7
+RENDERED_OUTPUTS = 8
 
 
 # --------------------------------------------------------------------------- helpers
@@ -244,6 +247,59 @@ def external_work_packages(decl: dict) -> set[str]:
             if isinstance(entry, dict) and entry.get("id"):
                 found.add(entry["id"])
     return found
+
+
+# ------------------------------------------------------------------ coverage measurement
+
+
+def coverage_criteria(decl: dict) -> list[str]:
+    return [entry["id"] for entry in decl.get("coverage_criteria") or []]
+
+
+def in_coverage_scope(decl: dict, entry: dict) -> bool:
+    """Whether a decision falls inside the declared coverage scope.
+
+    The scope is a declared decision class, not a list of decisions, so a new decision of
+    that class is measured the moment it is declared and cannot opt out.
+    """
+    scope = decl["programme"].get("coverage_scope_decision_class")
+    return bool(scope) and entry.get("decision_class") == scope
+
+
+def measure_coverage(decl: dict, entry: dict) -> dict:
+    """Measure how completely a located owner represents a decision.
+
+    A dimension is COVERED when the decision declares at least one reference for it and
+    every reference it declares resolves against the repository. Coverage is therefore
+    measured from Repository Truth, never asserted: removing the artifact a dimension
+    rests on lowers the coverage of every decision that rested on it, and a dimension for
+    which nothing is named is not covered by default.
+    """
+    declared = entry.get("coverage") or {}
+    dimensions: list[dict] = []
+    for ident in coverage_criteria(decl):
+        refs = as_list(declared.get(ident))
+        unresolved = [ref for ref in refs if resolve_reference(ref) is None]
+        dimensions.append(
+            {
+                "criterion": ident,
+                "declared": refs,
+                "resolved": [ref for ref in refs if resolve_reference(ref) is not None],
+                "unresolved": unresolved,
+                "covered": bool(refs) and not unresolved,
+            }
+        )
+    total = len(dimensions)
+    covered = sum(1 for dimension in dimensions if dimension["covered"])
+    return {
+        "dimensions": dimensions,
+        "covered": covered,
+        "total": total,
+        "percent": (covered * 100) // total if total else 0,
+        "complete": total > 0 and covered == total,
+        "shortfall": [d["criterion"] for d in dimensions if not d["covered"]],
+        "unresolved": sorted({ref for d in dimensions for ref in d["unresolved"]}),
+    }
 
 
 # ------------------------------------------------------------------- self-check logic
@@ -398,6 +454,56 @@ def check_declaration(decl: dict) -> list[str]:
             if stages.index(entry["stage"]) < stages.index(floor):
                 findings.append(f"{ident}: disposition may not be asserted before stage {floor!r}")
 
+    # coverage completeness — the evidence obligation on the disposition that claims an
+    # existing owner already discharges the decision. Similarity is not sufficient: the
+    # dimensions, the scope and the disposition the rule binds are all DATA.
+    criteria = coverage_criteria(decl)
+    programme_block = decl["programme"]
+    for key in (
+        "coverage_scope_decision_class",
+        "coverage_completeness_disposition",
+        "coverage_owner_criterion",
+    ):
+        if not programme_block.get(key):
+            findings.append(f"programme: declares no {key}")
+    owner_criterion = programme_block.get("coverage_owner_criterion")
+    if owner_criterion and owner_criterion not in set(criteria):
+        findings.append(
+            f"programme: coverage_owner_criterion names {owner_criterion!r}, which is not a "
+            "declared criterion"
+        )
+    completeness_disposition = programme_block.get("coverage_completeness_disposition")
+    if completeness_disposition and completeness_disposition not in set(names):
+        findings.append(
+            "programme: coverage_completeness_disposition names "
+            f"{completeness_disposition!r}, which is not a declared disposition"
+        )
+    for entry in decl["decisions"]:
+        ident = entry["id"]
+        declared_coverage = entry.get("coverage") or {}
+        for key in declared_coverage:
+            if key not in criteria:
+                findings.append(
+                    f"{ident}: coverage names {key!r}, which is not a declared criterion"
+                )
+        if not in_coverage_scope(decl, entry):
+            continue
+        if not declared_coverage:
+            findings.append(
+                f"{ident}: falls inside the declared coverage scope and declares no "
+                "coverage — an unmeasured mapping may not be recorded"
+            )
+            continue
+        measured = measure_coverage(decl, entry)
+        if entry.get("disposition") == completeness_disposition and not measured["complete"]:
+            findings.append(
+                f"{ident}: asserts {completeness_disposition!r} at "
+                f"{measured['percent']}% measured coverage — unevidenced dimension(s): "
+                + ", ".join(measured["shortfall"])
+                + ". Similarity is not sufficient: the decision is partially represented "
+                "and its lawful disposition carries a work package against the shortfall"
+            )
+
     # every located reference of the programme block must resolve
     programme = decl["programme"]
     references: list[tuple[str, str]] = [
@@ -513,9 +619,12 @@ def assess(decl: dict) -> dict:
                 "canonical_owner": entry.get("canonical_owner"),
                 "constitutional_basis": entry.get("constitutional_basis"),
                 "justification": entry.get("justification"),
+                "action_taken": entry.get("action_taken") or "",
                 "note": entry.get("note") or "",
                 "evidence_resolved": resolved,
                 "evidence_unresolved": unresolved,
+                "coverage_measured": in_coverage_scope(decl, entry),
+                "coverage": measure_coverage(decl, entry),
                 "conversation_only": conversation_only,
                 "undispositioned": undispositioned,
                 "reasons": reasons,
@@ -542,6 +651,35 @@ def build_model(decl: dict, repo_state: dict) -> dict:
     unevidenced = sorted(r["id"] for r in records if r["evidence_unresolved"])
     unindexed = sorted(r["id"] for r in records if r["index"] and not r["index_located"])
 
+    measured = [r for r in records if r["coverage_measured"]]
+    fully_covered = [r for r in measured if r["coverage"]["complete"]]
+    partially_covered = [r for r in measured if not r["coverage"]["complete"]]
+    dimension_total = sum(r["coverage"]["total"] for r in measured)
+    dimension_covered = sum(r["coverage"]["covered"] for r in measured)
+    coverage = {
+        "scope_decision_class": decl["programme"].get("coverage_scope_decision_class") or "",
+        "completeness_disposition": decl["programme"].get("coverage_completeness_disposition")
+        or "",
+        "criteria": coverage_criteria(decl),
+        "decisions_measured": len(measured),
+        "decisions_fully_covered": len(fully_covered),
+        "decisions_partially_covered": len(partially_covered),
+        "dimensions_measured": dimension_total,
+        "dimensions_covered": dimension_covered,
+        "aggregate_percent": (dimension_covered * 100) // dimension_total if dimension_total else 0,
+        "representation_percent": (len(fully_covered) * 100) // len(measured) if measured else 0,
+        "partially_covered": sorted(r["id"] for r in partially_covered),
+        "by_criterion": {
+            ident: sum(
+                1
+                for r in measured
+                for dimension in r["coverage"]["dimensions"]
+                if dimension["criterion"] == ident and dimension["covered"]
+            )
+            for ident in coverage_criteria(decl)
+        },
+    }
+
     gate_open = not integrity and not undispositioned
     model = {
         "programme": decl["programme"],
@@ -550,6 +688,7 @@ def build_model(decl: dict, repo_state: dict) -> dict:
         "decisions": records,
         "by_disposition": by_disposition,
         "by_stage": by_stage,
+        "coverage": coverage,
         "declaration_findings": integrity,
         "undispositioned": undispositioned,
         "conversation_only": conversation_only,
@@ -567,6 +706,7 @@ def build_model(decl: dict, repo_state: dict) -> dict:
                 "stage": r["stage"],
                 "disposition": r["disposition"],
                 "undispositioned": r["undispositioned"],
+                "coverage_percent": r["coverage"]["percent"] if r["coverage_measured"] else None,
             }
             for r in records
         ],
@@ -996,6 +1136,156 @@ def render(decl: dict, model: dict) -> dict[str, str]:
         + FOOTER
     )
 
+    # ---- 07 the architectural coverage matrix
+    packages = {package["id"]: package for package in decl["work_packages"]}
+
+    def owner_of_record(record: dict) -> str:
+        """The located owner shown in the matrix, derived — never a second declared field.
+
+        A disposition admits `canonical_owner` only where the governing Article asks for
+        it, so for every other disposition the owner is derived from what the declaration
+        already carries: the dimension that asks which single owner holds the concern
+        (named in the programme block, not here), else the registered work package's
+        owner, else the first located evidence reference. Nothing is restated.
+        """
+        if record["canonical_owner"]:
+            return f"`{record['canonical_owner']}`"
+        criterion = decl["programme"].get("coverage_owner_criterion")
+        for dimension in record["coverage"]["dimensions"]:
+            if dimension["criterion"] == criterion and dimension["resolved"]:
+                return " · ".join(f"`{ref}`" for ref in dimension["resolved"])
+        package = packages.get(record["work_package"] or "")
+        if package:
+            return package["owner"]
+        if record["evidence_resolved"]:
+            return f"`{record['evidence_resolved'][0]}`"
+        return "—"
+
+    measured_records = [r for r in records if r["coverage_measured"]]
+    cov = model["coverage"]
+    criteria_by_id = {entry["id"]: entry for entry in decl.get("coverage_criteria") or []}
+    out[name[7]] = (
+        header(
+            title[7],
+            decl,
+            model,
+            purpose[7],
+        )
+        + "## The equivalence dimensions a mapping must prove\n\n"
+        + table(
+            ["#", "Criterion", "The question it answers", "Clause", "Dimensions covered"],
+            [
+                [
+                    str(i + 1),
+                    f"**{entry['criterion']}**",
+                    entry["question"],
+                    f"`{entry['clause']}`",
+                    f"{cov['by_criterion'].get(entry['id'], 0)}/{cov['decisions_measured']}",
+                ]
+                for i, entry in enumerate(decl.get("coverage_criteria") or [])
+            ],
+        )
+        + "\n> A dimension is covered only where the decision names at least one located "
+        "artifact for it and every artifact it names resolves against the repository. A "
+        "dimension for which nothing is named is not covered. Coverage is therefore "
+        f"measured, never asserted. Scope: decision class `{cov['scope_decision_class']}`.\n"
+        + "\n## Final Architectural Coverage Matrix\n\n"
+        + table(
+            ["Decision", "Canonical owner", "Coverage %", "Action taken", "Evidence"],
+            [
+                [
+                    f"`{r['id']}` — {r['title']}",
+                    owner_of_record(r),
+                    f"**{r['coverage']['percent']}%**"
+                    + (
+                        ""
+                        if r["coverage"]["complete"]
+                        else f" ({r['coverage']['covered']}/{r['coverage']['total']})"
+                    ),
+                    r["action_taken"] or r["disposition"],
+                    ", ".join(f"`{ref}`" for ref in r["evidence_resolved"]) or "—",
+                ]
+                for r in measured_records
+            ],
+        )
+        + "\n## Per-decision dimensional evidence\n\n"
+        + "".join(
+            f"\n### {r['id']} — {r['title']}\n\n"
+            f"- **Disposition** — {r['disposition']}\n"
+            f"- **Canonical owner** — {owner_of_record(r)}\n"
+            f"- **Action taken** — {r['action_taken'] or r['disposition']}\n"
+            f"- **Measured coverage** — **{r['coverage']['percent']}%** "
+            f"({r['coverage']['covered']}/{r['coverage']['total']} dimensions)\n"
+            + (
+                "- **Unevidenced dimension(s)** — "
+                + ", ".join(
+                    criteria_by_id[c]["criterion"] if c in criteria_by_id else c
+                    for c in r["coverage"]["shortfall"]
+                )
+                + "\n"
+                if r["coverage"]["shortfall"]
+                else ""
+            )
+            + (f"- **Carried by** — `{r['work_package']}`\n" if r["work_package"] else "")
+            + "\n"
+            + table(
+                ["Dimension", "Covered", "Located evidence"],
+                [
+                    [
+                        criteria_by_id[dimension["criterion"]]["criterion"]
+                        if dimension["criterion"] in criteria_by_id
+                        else dimension["criterion"],
+                        "YES" if dimension["covered"] else "**no**",
+                        ", ".join(f"`{ref}`" for ref in dimension["resolved"])
+                        + (
+                            " · **UNRESOLVED: "
+                            + ", ".join(f"`{ref}`" for ref in dimension["unresolved"])
+                            + "**"
+                            if dimension["unresolved"]
+                            else ""
+                        )
+                        or "—",
+                    ]
+                    for dimension in r["coverage"]["dimensions"]
+                ],
+            )
+            for r in measured_records
+        )
+        + "\n## Coverage determination\n\n"
+        + table(
+            ["Dimension", "Value"],
+            [
+                ["Decisions in coverage scope", str(cov["decisions_measured"])],
+                ["Equivalence dimensions measured", str(cov["dimensions_measured"])],
+                ["Equivalence dimensions covered", str(cov["dimensions_covered"])],
+                ["**Aggregate architectural coverage**", f"**{cov['aggregate_percent']}%**"],
+                [
+                    "Decisions at complete coverage",
+                    f"{cov['decisions_fully_covered']}/{cov['decisions_measured']} "
+                    f"(**{cov['representation_percent']}%**)",
+                ],
+                [
+                    "Partially covered decisions",
+                    ", ".join(f"`{i}`" for i in cov["partially_covered"]) or "none",
+                ],
+                [
+                    f"Decisions asserting `{cov['completeness_disposition']}` "
+                    "below complete coverage",
+                    "none — the rule is a declaration-integrity condition and a breach "
+                    "aborts fail-closed"
+                    if not model["declaration_findings"]
+                    else "**see the declaration integrity findings**",
+                ],
+                ["Decisions with no repository trace", str(len(model["conversation_only"]))],
+            ],
+        )
+        + "\n> A partially covered decision is **not** a defect of this matrix: it is the "
+        "matrix working. Partial coverage makes the claim of an existing owner unavailable "
+        "and routes the decision to a registered work package against the named shortfall, "
+        "so the residue is visible with an owner, a route and an acceptance condition "
+        "rather than closed as complete on a resemblance.\n" + FOOTER
+    )
+
     # ---- 00 dashboard
     out[name[0]] = (
         header(
@@ -1025,6 +1315,21 @@ def render(decl: dict, model: dict) -> dict[str, str]:
                 ["Undispositioned", str(len(model["undispositioned"]))],
                 ["Conversation-only", str(len(model["conversation_only"]))],
                 ["Unresolved evidence", str(len(model["unevidenced"]))],
+                [
+                    f"Decisions in coverage scope (`{model['coverage']['scope_decision_class']}`)",
+                    str(model["coverage"]["decisions_measured"]),
+                ],
+                [
+                    "Aggregate architectural coverage",
+                    f"**{model['coverage']['aggregate_percent']}%** "
+                    f"({model['coverage']['dimensions_covered']}/"
+                    f"{model['coverage']['dimensions_measured']} dimensions)",
+                ],
+                [
+                    "Decisions at complete coverage",
+                    f"{model['coverage']['decisions_fully_covered']}/"
+                    f"{model['coverage']['decisions_measured']}",
+                ],
                 ["Determination", f"**{model['determination']}**"],
                 ["Implementation Evidence Gate", f"**{model['gate']}**"],
             ],
@@ -1063,6 +1368,13 @@ def emit(decl: dict, model: dict) -> list[Path]:
                         "source_register_located": r["source_register_located"],
                         "evidence_resolved": r["evidence_resolved"],
                         "evidence_unresolved": r["evidence_unresolved"],
+                        "coverage_measured": r["coverage_measured"],
+                        "coverage_percent": (
+                            r["coverage"]["percent"] if r["coverage_measured"] else None
+                        ),
+                        "coverage_shortfall": (
+                            r["coverage"]["shortfall"] if r["coverage_measured"] else []
+                        ),
                         "undispositioned": r["undispositioned"],
                     }
                     for r in model["decisions"]
@@ -1119,6 +1431,9 @@ def main(argv: list[str] | None = None) -> int:
             f"undispositioned={len(model['undispositioned'])} | "
             f"conversation_only={len(model['conversation_only'])} | "
             f"evidence={model['evidence_references']} | "
+            f"coverage={model['coverage']['aggregate_percent']}% "
+            f"({model['coverage']['dimensions_covered']}/"
+            f"{model['coverage']['dimensions_measured']}) | "
             f"gate={model['gate']} | seal={model['seal_sha256'][:16]}"
         )
         print(f"wrote {len(written)} artifacts to {HERE}")

@@ -119,7 +119,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 | `00-MASTER/UMK-000001/umk_engine.py` | 2 | `.github/workflows/umk-gate.yml`, `Makefile` |
 | `00-MASTER/UPF-000001/upf_engine.py` | 2 | `.github/workflows/uprf-gate.yml`, `Makefile` |
 | `00-MASTER/URRC-000001/urrc_engine.py` | 3 | `.github/workflows/urrc-gate.yml`, `.kiro/hooks/urrc-000001.json`, `Makefile` |
-| `verify.sh` | 1 | `Makefile` |
+| `verify.sh` | 3 | `.github/workflows/ec1-ci.yml`, `.github/workflows/uccep-gate.yml`, `Makefile` |
 
 #### D-15 — Gap — dimension gaps
 
@@ -223,12 +223,12 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-38`** — Work packages registered by decision disposition.
 
 - **Primitive** — `record_count`
-- **Result** — 7 records
+- **Result** — 17 records
 - **Substrate evidence** — `S-09`
 
 | Key | Value |
 |---|---|
-| records | 7 |
+| records | 17 |
 
 **`DV-50`** — Recorded execution blockers in operational state.
 

@@ -4,12 +4,20 @@
     "CK-HEALTH"
   ],
   "blocking_failures": [],
+  "blocking_not_executed": [],
+  "blocking_out_of_tier": [
+    "CK-DETERMINISM-BUILD",
+    "CK-REG-DRIFT",
+    "CK-VERIFY"
+  ],
+  "blocking_unavailable": [],
   "certification": "CERTIFIED-PROVISIONAL",
   "certification_ceiling": [
     "`UCCEP-F-001` — phase3_engine.py returns a constant NOT-CLOSED verdict independent of measured state",
     "`UCCEP-F-002` — Repository health is RED: 1198 of 1198 registered artifacts have incomplete traceability",
     "`UCCEP-F-003` — engine.graph.cli validate reports a dependency cycle but returns is_valid=true and exit 0 (fail-open)",
-    "`UCCEP-F-004` — CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no located authority is competent to ratify"
+    "`UCCEP-F-004` — CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no located authority is competent to ratify",
+    "tier `standard` excluded 3 blocking check(s) from this run: `CK-DETERMINISM-BUILD`, `CK-REG-DRIFT`, `CK-VERIFY` — a tier-limited run may not assert unqualified certification"
   ],
   "checks": [
     {
@@ -19,6 +27,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-CMG",
+      "in_scope": true,
       "name": "Meta-constitutional validation (16 check groups over 12 invariants)",
       "owner": "00-CMG/CMG-000001 · tools/cmg_validate.py",
       "reason": "",
@@ -33,6 +42,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-REG-ENFORCE",
+      "in_scope": true,
       "name": "Registration & classification enforcement gate (pre-registration)",
       "owner": "00-BOOK/tools/ukb.py (REG-AUTO-001 / UMB-IMP-001)",
       "reason": "",
@@ -47,6 +57,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-REG-VALIDATE",
+      "in_scope": true,
       "name": "Registry structural validation + append-only ledger integrity",
       "owner": "00-BOOK/tools/ukb.py",
       "reason": "",
@@ -61,6 +72,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-CLOSURE-P1",
+      "in_scope": true,
       "name": "Knowledge assimilation closure (conversation-only / upload-only / orphan / duplicate)",
       "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
       "reason": "",
@@ -75,6 +87,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-CLOSURE-P2",
+      "in_scope": true,
       "name": "Concept-graph reconciliation (canonical home / duplicate / orphan concepts)",
       "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
       "reason": "",
@@ -89,6 +102,7 @@
       "exit_code": 1,
       "governed_by_finding": "UCCEP-F-001",
       "id": "CK-CLOSURE-P3",
+      "in_scope": true,
       "name": "Implementation planning determination (repository closure projection)",
       "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
       "reason": "literal NOT-CLOSED (constant)",
@@ -103,6 +117,7 @@
       "exit_code": 1,
       "governed_by_finding": "UCCEP-F-002",
       "id": "CK-HEALTH",
+      "in_scope": true,
       "name": "Repository health (strict certification policy)",
       "owner": "platform/measurement (UCOS-UMA-001)",
       "reason": "unhealthy",
@@ -160,6 +175,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-GRAPH",
+      "in_scope": true,
       "name": "Universal traceability graph invariants",
       "owner": "engine/graph (UCOS-EPIC-002)",
       "reason": "",
@@ -189,6 +205,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-DISCOVERY",
+      "in_scope": true,
       "name": "Universal discovery coverage (zero-enumeration substrate coverage)",
       "owner": "engine/discovery (UCOS-EPIC-003)",
       "reason": "",
@@ -203,6 +220,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-RIE-DETERMINISM",
+      "in_scope": true,
       "name": "Repository intelligence deterministic regeneration",
       "owner": "intelligence/rie",
       "reason": "",
@@ -213,43 +231,46 @@
     {
       "advisory": false,
       "assertions": [],
-      "executed": true,
-      "exit_code": 0,
+      "executed": false,
+      "exit_code": null,
       "governed_by_finding": null,
       "id": "CK-VERIFY",
+      "in_scope": false,
       "name": "Canonical verification (lint · tests · coverage · enforcement)",
       "owner": "verify.sh",
-      "reason": "",
+      "reason": "tier full above the selected tier standard",
       "tier": "full",
-      "verdict": "PASS",
+      "verdict": "NOT-EXECUTED",
       "write_scope": "read-only"
     },
     {
       "advisory": false,
       "assertions": [],
-      "executed": true,
-      "exit_code": 0,
+      "executed": false,
+      "exit_code": null,
       "governed_by_finding": null,
       "id": "CK-DETERMINISM-BUILD",
+      "in_scope": false,
       "name": "Constitutional determinism (double-build, fail-on-divergence)",
       "owner": "engine/determinism (TASK-000033)",
-      "reason": "",
+      "reason": "tier full above the selected tier standard",
       "tier": "full",
-      "verdict": "PASS",
+      "verdict": "NOT-EXECUTED",
       "write_scope": "own-memory"
     },
     {
       "advisory": false,
       "assertions": [],
-      "executed": true,
-      "exit_code": 0,
+      "executed": false,
+      "exit_code": null,
       "governed_by_finding": null,
       "id": "CK-REG-DRIFT",
+      "in_scope": false,
       "name": "Atomic Registration Transaction + registration-drift gate",
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
-      "reason": "",
+      "reason": "tier full above the selected tier standard",
       "tier": "full",
-      "verdict": "PASS",
+      "verdict": "NOT-EXECUTED",
       "write_scope": "projections"
     },
     {
@@ -259,6 +280,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-DECISION-EVIDENCE",
+      "in_scope": true,
       "name": "Constitutional decision assimilation (Implementation Evidence Gate)",
       "owner": "00-MASTER/UCDA-000001/ucda_engine.py (CEP-002 Art 28.19)",
       "reason": "",
@@ -273,6 +295,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-SELF-DECLARATION",
+      "in_scope": true,
       "name": "UCCEP declaration integrity (every reference resolves; no duplicate ids)",
       "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
       "reason": "",
@@ -287,6 +310,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-SELF-NO-ENUMERATION",
+      "in_scope": true,
       "name": "Zero Enumeration / no-hardcoding guard over UCCEP's own surface",
       "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
       "reason": "",
@@ -301,6 +325,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-SELF-WRITE-SCOPE",
+      "in_scope": true,
       "name": "Forbidden-write guard (UCCEP writes only its own operational memory)",
       "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
       "reason": "",
@@ -315,6 +340,7 @@
       "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-SELF-DETERMINISM",
+      "in_scope": true,
       "name": "UCCEP self-determinism (identical seal across repeated runs)",
       "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
       "reason": "",
@@ -323,6 +349,7 @@
       "write_scope": "read-only"
     }
   ],
+  "gate_blocking": [],
   "gate_exit": 0,
   "gates": [
     {
@@ -337,7 +364,9 @@
       "id": "G-01",
       "name": "Context Assimilation Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-MASTER/MCP-001-MASTER-CONTEXT.md",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -354,7 +383,9 @@
       "id": "G-02",
       "name": "Knowledge Assimilation Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-MASTER/UAKOS-CLOSURE-002",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -371,7 +402,9 @@
       "id": "G-03",
       "name": "Reuse Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "IAC-001D §05",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -386,7 +419,9 @@
       "id": "G-04",
       "name": "Constitution Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-CEP/CEP-001",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -403,7 +438,9 @@
       "id": "G-05",
       "name": "Architecture Admission Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-CMG/CMG-000001",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -422,7 +459,9 @@
       "id": "G-06",
       "name": "Repository Truth Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-BOOK/tools/ukb.py",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -432,15 +471,20 @@
         "CK-REG-DRIFT"
       ],
       "executed": [
-        "CK-REG-ENFORCE",
-        "CK-REG-DRIFT"
+        "CK-REG-ENFORCE"
       ],
       "failed": [],
       "id": "G-07",
       "name": "Registry Gate",
-      "not_executed": [],
+      "not_executed": [
+        "CK-REG-DRIFT"
+      ],
+      "out_of_tier": [
+        "CK-REG-DRIFT"
+      ],
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
-      "verdict": "PASS"
+      "unproven": [],
+      "verdict": "PARTIAL"
     },
     {
       "advisory_failed": [],
@@ -454,7 +498,9 @@
       "id": "G-08",
       "name": "Dependency Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "engine/graph",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -471,7 +517,9 @@
       "id": "G-09",
       "name": "Governance Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-CEP/CEP-002",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -479,15 +527,19 @@
       "checks": [
         "CK-VERIFY"
       ],
-      "executed": [
-        "CK-VERIFY"
-      ],
+      "executed": [],
       "failed": [],
       "id": "G-10",
       "name": "Validation Gate",
-      "not_executed": [],
+      "not_executed": [
+        "CK-VERIFY"
+      ],
+      "out_of_tier": [
+        "CK-VERIFY"
+      ],
       "owner": "00-CEP/CEP-004",
-      "verdict": "PASS"
+      "unproven": [],
+      "verdict": "NOT-EXECUTED"
     },
     {
       "advisory_failed": [
@@ -498,15 +550,20 @@
         "CK-VERIFY"
       ],
       "executed": [
-        "CK-HEALTH",
-        "CK-VERIFY"
+        "CK-HEALTH"
       ],
       "failed": [],
       "id": "G-11",
       "name": "Certification Gate",
-      "not_executed": [],
+      "not_executed": [
+        "CK-VERIFY"
+      ],
+      "out_of_tier": [
+        "CK-VERIFY"
+      ],
       "owner": "00-CEP/CEP-005",
-      "verdict": "PASS-WITH-ADVISORY"
+      "unproven": [],
+      "verdict": "NOT-EXECUTED"
     },
     {
       "advisory_failed": [],
@@ -522,7 +579,9 @@
       "id": "G-12",
       "name": "Evidence Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-CEP/CEP-008",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -531,16 +590,21 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "executed": [
-        "CK-DETERMINISM-BUILD",
-        "CK-VERIFY"
-      ],
+      "executed": [],
       "failed": [],
       "id": "G-13",
       "name": "Implementation Authorization Gate",
-      "not_executed": [],
+      "not_executed": [
+        "CK-DETERMINISM-BUILD",
+        "CK-VERIFY"
+      ],
+      "out_of_tier": [
+        "CK-DETERMINISM-BUILD",
+        "CK-VERIFY"
+      ],
       "owner": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
-      "verdict": "PASS"
+      "unproven": [],
+      "verdict": "NOT-EXECUTED"
     },
     {
       "advisory_failed": [],
@@ -554,7 +618,9 @@
       "id": "G-14",
       "name": "Implementation Evidence Gate",
       "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-CEP/CEP-002 Art 28",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -564,17 +630,23 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "executed": [
+      "executed": [],
+      "failed": [],
+      "id": "G-15",
+      "name": "Repository Fixed-Point Gate",
+      "not_executed": [
         "CK-REG-DRIFT",
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [],
-      "id": "G-15",
-      "name": "Repository Fixed-Point Gate",
-      "not_executed": [],
+      "out_of_tier": [
+        "CK-REG-DRIFT",
+        "CK-DETERMINISM-BUILD",
+        "CK-VERIFY"
+      ],
       "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",
-      "verdict": "PASS"
+      "unproven": [],
+      "verdict": "NOT-EXECUTED"
     }
   ],
   "programme": {
@@ -636,7 +708,9 @@
       "id": "PROGRAM-000001",
       "name": "Universal Constitutional Assimilation",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "01-CANONICAL-ASSIMILATION-REGISTER.md",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -660,7 +734,9 @@
       "id": "PROGRAM-000002",
       "name": "Repository Truth Reconciliation",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "02-REPOSITORY-TRUTH-REGISTER.md",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -682,7 +758,9 @@
       "id": "PROGRAM-000003",
       "name": "Universal Meta-Model Governance",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "03-META-MODEL-GOVERNANCE-CERTIFICATION.md",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -700,15 +778,20 @@
       ],
       "executed": [
         "CK-REG-ENFORCE",
-        "CK-DISCOVERY",
-        "CK-REG-DRIFT"
+        "CK-DISCOVERY"
       ],
       "failed": [],
       "id": "PROGRAM-000004",
       "name": "Universal Registry Evolution",
-      "not_executed": [],
+      "not_executed": [
+        "CK-REG-DRIFT"
+      ],
+      "out_of_tier": [
+        "CK-REG-DRIFT"
+      ],
       "output": "04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
-      "verdict": "PASS"
+      "unproven": [],
+      "verdict": "PARTIAL"
     },
     {
       "advisory_failed": [],
@@ -724,15 +807,20 @@
       ],
       "executed": [
         "CK-REG-ENFORCE",
-        "CK-CMG",
-        "CK-REG-DRIFT"
+        "CK-CMG"
       ],
       "failed": [],
       "id": "PROGRAM-000005",
       "name": "Universal Repository Governance",
-      "not_executed": [],
+      "not_executed": [
+        "CK-REG-DRIFT"
+      ],
+      "out_of_tier": [
+        "CK-REG-DRIFT"
+      ],
       "output": "05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
-      "verdict": "PASS"
+      "unproven": [],
+      "verdict": "PARTIAL"
     },
     {
       "advisory_failed": [],
@@ -756,7 +844,9 @@
       "id": "PROGRAM-000006",
       "name": "Universal Enforcement Evolution",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "06-EXECUTABLE-CONSTITUTIONAL-GOVERNANCE.md",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -781,7 +871,9 @@
       "id": "PROGRAM-000007",
       "name": "Universal Traceability Evolution",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "07-UNIVERSAL-TRACEABILITY-GRAPH.md",
+      "unproven": [],
       "verdict": "PASS-WITH-ADVISORY"
     },
     {
@@ -803,7 +895,9 @@
       "id": "PROGRAM-000008",
       "name": "Universal Dependency Evolution",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "08-DEPENDENCY-INTELLIGENCE.md",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -827,7 +921,9 @@
       "id": "PROGRAM-000009",
       "name": "Universal Knowledge Evolution",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "09-KNOWLEDGE-EVOLUTION-ENGINE.md",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -843,15 +939,20 @@
         "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"
       ],
       "executed": [
-        "CK-DETERMINISM-BUILD",
         "CK-SELF-NO-ENUMERATION"
       ],
       "failed": [],
       "id": "PROGRAM-000010",
       "name": "Universal Implementation Evolution",
-      "not_executed": [],
+      "not_executed": [
+        "CK-DETERMINISM-BUILD"
+      ],
+      "out_of_tier": [
+        "CK-DETERMINISM-BUILD"
+      ],
       "output": "10-IMPLEMENTATION-EVOLUTION-ENGINE.md",
-      "verdict": "PASS"
+      "unproven": [],
+      "verdict": "PARTIAL"
     },
     {
       "advisory_failed": [],
@@ -864,15 +965,19 @@
         "platform/universal_validation",
         "platform/validation_intelligence"
       ],
-      "executed": [
-        "CK-VERIFY"
-      ],
+      "executed": [],
       "failed": [],
       "id": "PROGRAM-000011",
       "name": "Universal Validation Evolution",
-      "not_executed": [],
+      "not_executed": [
+        "CK-VERIFY"
+      ],
+      "out_of_tier": [
+        "CK-VERIFY"
+      ],
       "output": "11-VALIDATION-INTELLIGENCE.md",
-      "verdict": "PASS"
+      "unproven": [],
+      "verdict": "NOT-EXECUTED"
     },
     {
       "advisory_failed": [
@@ -889,15 +994,20 @@
         "00-BOOK/DATA/certification.json"
       ],
       "executed": [
-        "CK-VERIFY",
         "CK-HEALTH"
       ],
       "failed": [],
       "id": "PROGRAM-000012",
       "name": "Universal Certification Evolution",
-      "not_executed": [],
+      "not_executed": [
+        "CK-VERIFY"
+      ],
+      "out_of_tier": [
+        "CK-VERIFY"
+      ],
       "output": "12-CERTIFICATION-INTELLIGENCE.md",
-      "verdict": "PASS-WITH-ADVISORY"
+      "unproven": [],
+      "verdict": "NOT-EXECUTED"
     },
     {
       "advisory_failed": [],
@@ -918,7 +1028,9 @@
       "id": "PROGRAM-000013",
       "name": "Universal Evolution Intelligence",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "13-EVOLUTION-INTELLIGENCE.md",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -944,7 +1056,9 @@
       "id": "PROGRAM-000014",
       "name": "Universal Repository Intelligence",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "14-REPOSITORY-INTELLIGENCE.md",
+      "unproven": [],
       "verdict": "PASS-WITH-ADVISORY"
     },
     {
@@ -982,7 +1096,9 @@
       "id": "PROGRAM-000015",
       "name": "Universal Continuous Certification",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "15-CONTINUOUS-CONSTITUTIONAL-CERTIFICATION.md",
+      "unproven": [],
       "verdict": "PASS-WITH-ADVISORY"
     },
     {
@@ -1005,7 +1121,9 @@
       "id": "PROGRAM-000016",
       "name": "Universal Decision Assimilation",
       "not_executed": [],
+      "out_of_tier": [],
       "output": "18-DECISION-ASSIMILATION-CERTIFICATION.md",
+      "unproven": [],
       "verdict": "PASS"
     },
     {
@@ -1022,24 +1140,31 @@
         "00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md",
         "00-MASTER/UCOS-RECON-C2"
       ],
-      "executed": [
+      "executed": [],
+      "failed": [],
+      "id": "PROGRAM-000017",
+      "name": "Universal Repository Fixed-Point Closure",
+      "not_executed": [
         "CK-REG-DRIFT",
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [],
-      "id": "PROGRAM-000017",
-      "name": "Universal Repository Fixed-Point Closure",
-      "not_executed": [],
+      "out_of_tier": [
+        "CK-REG-DRIFT",
+        "CK-DETERMINISM-BUILD",
+        "CK-VERIFY"
+      ],
       "output": "19-REPOSITORY-FIXED-POINT-CLOSURE.md",
-      "verdict": "PASS"
+      "unproven": [],
+      "verdict": "NOT-EXECUTED"
     }
   ],
   "repository": {
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "eaff5dfaa124d283a9775fce8356e40a8714611a0ae513381bc3dd895ac93ddf",
-  "tier": "full",
-  "unavailable": []
+  "seal_sha256": "68e8d9a2d396f3dc92c8e3b5f3c125822dbd66b8a8ed05a8dfe93d1f0c267978",
+  "tier": "standard",
+  "unavailable": [],
+  "unproven": []
 }
