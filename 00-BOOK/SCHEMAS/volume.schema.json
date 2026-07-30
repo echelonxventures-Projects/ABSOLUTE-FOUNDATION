@@ -12,7 +12,7 @@
     "category": {
       "type": "string",
       "description": "Primary identifier namespace associated with this volume.",
-      "pattern": "^[A-Z]{2,6}$"
+      "pattern": "^[A-Z][A-Z0-9]{1,11}$"
     },
     "status": { "type": "string", "enum": ["ACTIVE", "PLANNED", "FROZEN", "RETIRED"] },
     "artifact_count": { "type": "integer", "minimum": 0, "default": 0 },

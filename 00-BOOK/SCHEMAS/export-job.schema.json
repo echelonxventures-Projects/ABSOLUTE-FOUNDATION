@@ -10,7 +10,7 @@
     "selector": { "type": "string", "description": "The scope argument, e.g. 'login', 'runtime', 'UCOS-ARCH-000010'." },
     "format": { "type": "string", "enum": ["PDF", "DOCX", "HTML", "MARKDOWN", "JSON"] },
     "as_of": { "type": "string", "format": "date-time" },
-    "included_ids": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$" }, "default": [] },
+    "included_ids": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$" }, "default": [] },
     "content_hashes": { "type": "array", "items": { "type": "string" }, "default": [] },
     "source_signals": { "type": "array", "items": { "type": "string", "pattern": "^USIG-[0-9]{9,}$" }, "default": [] },
     "output_path": { "type": ["string", "null"], "default": null }

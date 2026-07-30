@@ -24,7 +24,7 @@
     },
     "entry": { "type": ["string", "null"], "default": null },
     "exit": { "type": ["string", "null"], "default": null },
-    "implements": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$" }, "default": [] },
+    "implements": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$" }, "default": [] },
     "derived_status": { "type": "string", "default": "NOT_STARTED" }
   }
 }

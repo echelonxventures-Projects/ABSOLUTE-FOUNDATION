@@ -13,12 +13,12 @@
     "from": {
       "type": "string",
       "description": "Source Universal Artifact ID.",
-      "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$"
+      "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$"
     },
     "to": {
       "type": "string",
       "description": "Target Universal Artifact ID.",
-      "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$"
+      "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$"
     },
     "type": {
       "type": "string",

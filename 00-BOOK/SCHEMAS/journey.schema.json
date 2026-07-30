@@ -13,7 +13,7 @@
     "flows": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-FLOW-[0-9]{6}$" }, "default": [] },
     "success_metric": { "type": ["string", "null"], "default": null },
     "funnel_stages": { "type": "array", "items": { "type": "string" }, "default": [] },
-    "implements": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$" }, "default": [] },
+    "implements": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$" }, "default": [] },
     "derived_status": { "type": "string", "default": "NOT_STARTED" }
   }
 }

@@ -273,6 +273,51 @@ CLASSIFY_RULES = [
     #     Mirrors the ^09-PLATFORM/ … ^13-INFRASTRUCTURE/ first-class-family
     #     pattern for the next numbered program tree.
     (r"^15-UNIVERSAL-SCIENCE-INTELLIGENCE/", "USIS", "USIS", "VOL-024"),
+
+    # --- CRAP-001 CLASSIFICATION HYGIENE — append-only. --------------------------
+    #     These rules close the path-derived catch-all gap for the lower-case
+    #     implementation directories (service/, application/, infrastructure/) and
+    #     the root-level evolution/IAC artifacts whose derived categories exceeded
+    #     the {2,6} schema constraint. They add NEW coverage only (no prior rule
+    #     matches these prefixes), change no existing classification (allocate() is
+    #     path-keyed; existing UIDs remain verbatim — append-only identity invariant
+    #     preserved). Each routes to a volume that ALREADY EXISTS.
+
+    # service/ implementation tree → SERVICE volume (VOL-008, category SVC).
+    (r"^service/", "SERVICE", "SVC", "VOL-008"),
+
+    # application/ implementation tree → APPLICATION volume (VOL-009, category APP).
+    (r"^application/", "APPLICATION", "APP", "VOL-009"),
+
+    # infrastructure/ implementation tree → INFRASTRUCTURE volume (VOL-010, category INF).
+    (r"^infrastructure/", "INFRASTRUCTURE", "INF", "VOL-010"),
+
+    # EVO-USIS-NNN evolution packages → USIS volume (VOL-024, category USIS).
+    (r"^EVO-USIS-", "USIS", "USIS", "VOL-024"),
+
+    # IAC-001x Implementation Authority Confirmation packages → EXEC volume (VOL-020).
+    (r"^IAC-001", "EXEC", "EXEC", "VOL-020"),
+
+    # intelligence/ implementation tree → ENGINEERING volume (VOL-003, category ENG).
+    (r"^intelligence/", "INTELLIGENCE", "ENG", "VOL-003"),
+
+    # knowledge/ declarations → ENGINEERING volume (VOL-003, category ENG).
+    (r"^knowledge/", "KNOWLEDGE", "ENG", "VOL-003"),
+
+    # data/ directory → DATA volume (VOL-007, category DAT).
+    (r"^data/", "DATA", "DAT", "VOL-007"),
+
+    # 14-SECURITY → SECURITY volume (VOL-011, category SEC).
+    (r"^14-SECURITY/", "SECURITY", "SEC", "VOL-011"),
+
+    # 00-MASTER/ (standing programmes, closures, phases) → CONTROL TOWER (VOL-020).
+    (r"^00-MASTER/", "MASTER", "MASTER", "VOL-020"),
+
+    # 00-CEP/ constitutional engineering → CONSTITUTION volume (VOL-002, category CEP).
+    (r"^00-CEP/", "CEP", "CEP", "VOL-002"),
+
+    # 00-CMG/ meta-governance → CONSTITUTION volume (VOL-002, category CMG).
+    (r"^00-CMG/", "CMG", "CMG", "VOL-002"),
 ]
 
 DEFAULT_CLASS = ("OTHER", "MISC", "VOL-000")
@@ -370,7 +415,7 @@ ARTIFACT_FAMILIES = {
 # metadata is classified by its top-level directory / identifier prefix into a
 # REAL category, guaranteeing unclassified == 0 for every present and future tree
 # with no per-tree config. These are shape parameters only — no artifact, no tree.
-DERIVED_CATEGORY_MAXLEN = 12      # stable code width derived from the path token
+DERIVED_CATEGORY_MAXLEN = 6       # schema-compliant category code width (2–6 preferred)
 DERIVED_DEFAULT_CATEGORY = "REPO" # used only for a token that reduces to empty
 DERIVED_DEFAULT_VOLUME = "VOL-000"  # thematic home when no volume matches the code
 

@@ -17,7 +17,7 @@
     "universal_id": {
       "type": "string",
       "description": "Globally unique, immutable, never-reused Universal Artifact ID.",
-      "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$"
+      "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$"
     },
     "native_id": {
       "type": ["string", "null"],
@@ -36,7 +36,7 @@
     "category": {
       "type": "string",
       "description": "Provenance / identifier namespace (program family).",
-      "pattern": "^[A-Z]{2,6}$"
+      "pattern": "^[A-Z][A-Z0-9]{1,11}$"
     },
     "volume": {
       "type": "string",
@@ -90,7 +90,7 @@
     "dependencies": {
       "type": "array",
       "description": "Universal Artifact IDs this artifact depends on (Depends-On edges).",
-      "items": { "type": "string", "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$" },
+      "items": { "type": "string", "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$" },
       "default": []
     },
     "program": {

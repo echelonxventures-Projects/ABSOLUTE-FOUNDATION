@@ -16,7 +16,7 @@
     "started_at": { "type": ["string", "null"], "format": "date-time", "default": null },
     "finished_at": { "type": ["string", "null"], "format": "date-time", "default": null },
     "supersedes": { "type": ["string", "null"], "pattern": "^UCOS-DEP-[0-9]{6}$", "default": null },
-    "references": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$" }, "default": [] },
+    "references": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$" }, "default": [] },
     "derived_status": { "type": "string", "default": "NOT_STARTED" }
   }
 }

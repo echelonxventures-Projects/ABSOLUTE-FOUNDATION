@@ -6,7 +6,7 @@
   "required": ["signal_id", "subject_universal_id", "dimension", "state", "source", "as_of"],
   "properties": {
     "signal_id": { "type": "string", "pattern": "^USIG-[0-9]{9,}$", "description": "Globally unique, immutable, append-only signal id." },
-    "subject_universal_id": { "type": "string", "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$", "description": "Universal Artifact this observation is about." },
+    "subject_universal_id": { "type": "string", "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$", "description": "Universal Artifact this observation is about." },
     "subject_native_id": { "type": ["string", "null"], "default": null },
     "dimension": {
       "type": "string",

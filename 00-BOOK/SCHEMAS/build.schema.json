@@ -17,7 +17,7 @@
     "duration_seconds": { "type": ["number", "null"], "default": null },
     "coverage": { "type": ["number", "null"], "default": null },
     "produces_release": { "type": ["string", "null"], "default": null },
-    "references": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z]{2,6}-[0-9]{6}$" }, "default": [] },
+    "references": { "type": "array", "items": { "type": "string", "pattern": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$" }, "default": [] },
     "derived_status": { "type": "string", "default": "NOT_STARTED" }
   }
 }
