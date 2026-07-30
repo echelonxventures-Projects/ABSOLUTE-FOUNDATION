@@ -2457,16 +2457,16 @@
       "unknown": false
     },
     {
-      "count": 1,
+      "count": 0,
       "evidence": [],
-      "headline": "no upstream is configured",
+      "headline": "an upstream is configured",
       "id": "DV-57",
       "primitive": "upstream_probe",
       "purpose": "Counted probe: whether the branch carrying the constitutional baseline has any configured off-machine upstream.",
       "rows": [
         [
           "configured upstream",
-          "**none**"
+          "`origin/integration/recovery-001`"
         ],
         [
           "remotes configured",

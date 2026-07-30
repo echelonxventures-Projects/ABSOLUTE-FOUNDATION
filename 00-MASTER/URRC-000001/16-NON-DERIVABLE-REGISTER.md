@@ -84,12 +84,12 @@
 **`DV-57`** — Counted probe: whether the branch carrying the constitutional baseline has any configured off-machine upstream.
 
 - **Primitive** — `upstream_probe`
-- **Result** — no upstream is configured
+- **Result** — an upstream is configured
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
 |---|---|
-| configured upstream | **none** |
+| configured upstream | `origin/integration/recovery-001` |
 | remotes configured | 1 |
 
 ## N-05 — Reproduction of prior authorization seals from committed history alone.
