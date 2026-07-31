@@ -92,6 +92,10 @@ help:
 	@echo "  make uapf          report the UAPF-000001 declared pipeline catalogue (derived plans)"
 	@echo "  make uapf-gate     fail-closed Universal Autonomous Pipeline Framework gate"
 	@echo "  make uapf-self     UAPF-000001 guards over its own surface (determinism + taxonomy)"
+	@echo "  make uaep          regenerate the UAEP-000001 platform capability binding registers"
+	@echo "  make uaep-gate     fail-closed Platform Binding Gate (every named capability resolves)"
+	@echo "  make uaep-self     UAEP-000001 guards over its own surface (incl. open-world + reuse-before-create)"
+	@echo "  make uaep-replay   prove the committed registers replay from the committed declaration"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
 
@@ -935,3 +939,49 @@ uapf-self:
 	@python3 -m platform.universal_pipeline.cli --check-determinism
 	@python3 -m platform.universal_pipeline.cli --taxonomy >/dev/null
 	@python3 -m platform.universal_pipeline.cli --gate
+
+
+# ---------------------------------------------------------------------------------------
+# uaep: UAEP-000001 — the platform capability binding register.
+#
+# The platform agreement names sixteen capabilities. Fifteen already had a canonical home
+# before this programme existed and one had none, so this programme binds each name to the
+# home that already realises it and then proves the binding still resolves. It creates no
+# engine, no registry, no catalogue, no identity, no graph and no pipeline: every binding is
+# a pointer, and `uaep-self` refuses any binding that points inside this programme's own home.
+#
+# The declaration 00-MASTER/UAEP-000001/uaep-platform.json is the single source: capabilities,
+# homes, symbols, vocabularies, pipeline categories and validation dimensions are all DATA,
+# so adding one is an edit to that file and never to the engine (proven by --check-no-enumeration).
+#
+# A declared validation dimension the engine does not measure FAILS CLOSED rather than being
+# reported satisfied — absence of evidence is never evidence.
+.PHONY: uaep uaep-gate uaep-self uaep-replay
+uaep:
+	@python3 00-MASTER/UAEP-000001/uaep_engine.py --render
+
+uaep-gate:
+	@python3 00-MASTER/UAEP-000001/uaep_engine.py --gate
+
+# uaep-self: the six guards over the programme's own surface — declaration integrity (no
+# duplicate id, no empty mandatory field), zero-enumeration (no capability id or name appears
+# in the engine source, including its docstring), write-scope (every rendered target resolves
+# inside 00-MASTER/UAEP-000001/), determinism (two renders are byte-identical; no wall-clock
+# is emitted), reuse-before-create (no capability is bound to an artifact this programme owns),
+# and open-world (every declared vocabulary names a registrar that exists in its declared home,
+# so the type, handler, event and object-kind spaces stay open).
+uaep-self:
+	@python3 00-MASTER/UAEP-000001/uaep_engine.py --check-declaration
+	@python3 00-MASTER/UAEP-000001/uaep_engine.py --check-no-enumeration
+	@python3 00-MASTER/UAEP-000001/uaep_engine.py --check-write-scope
+	@python3 00-MASTER/UAEP-000001/uaep_engine.py --check-determinism
+	@python3 00-MASTER/UAEP-000001/uaep_engine.py --check-reuse-before-create
+	@python3 00-MASTER/UAEP-000001/uaep_engine.py --check-open-world
+
+# uaep-replay: prove the committed registers are the deterministic product of the committed
+# declaration. Re-render, then require a clean diff over this programme's home.
+uaep-replay:
+	@python3 00-MASTER/UAEP-000001/uaep_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/UAEP-000001 \
+	  || { echo "UAEP-000001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "UAEP-000001 replay: no drift"
