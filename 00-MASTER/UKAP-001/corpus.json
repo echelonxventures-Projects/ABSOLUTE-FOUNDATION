@@ -1136,13 +1136,13 @@
       "content_sha256": "e92a893135027d23b50b24ea19c06edc65be86ef123625c2af812a4e9c67ed76",
       "corpus_class": "EXPORT-DOCUMENT",
       "export_id": "04-REFERENCE/ChatGPT Chat.docx",
-      "head_distance": 79,
+      "history_position": 161,
       "identifiable": true,
       "path": "04-REFERENCE/ChatGPT Chat.docx",
       "recency_basis": "git commit order — Repository Truth (filesystem mtime is never read: it does not survive a clone)",
       "recency_key": [
         "1784807832",
-        "-79",
+        "161",
         "e92a893135027d23b50b24ea19c06edc65be86ef123625c2af812a4e9c67ed76"
       ],
       "recency_rank": 0,
@@ -1156,13 +1156,13 @@
       "content_sha256": "1fbdb8248ef63b279afd832e5a519fed67a1967320ad012b9fb797609e4a5626",
       "corpus_class": "EXPORT-DOCUMENT",
       "export_id": "04-REFERENCE/ChatGPT Chat-1.docx",
-      "head_distance": 74,
+      "history_position": 166,
       "identifiable": true,
       "path": "04-REFERENCE/ChatGPT Chat-1.docx",
       "recency_basis": "git commit order — Repository Truth (filesystem mtime is never read: it does not survive a clone)",
       "recency_key": [
         "1784890504",
-        "-74",
+        "166",
         "1fbdb8248ef63b279afd832e5a519fed67a1967320ad012b9fb797609e4a5626"
       ],
       "recency_rank": 1,
@@ -1173,7 +1173,7 @@
     "assimilation_baseline": {
       "bytes": 5764423,
       "relative": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
-      "sha256": "fa19f7d0c0dac785e9af4150c59cecc9ebb456f0bf230616c1e396b38a41a075"
+      "sha256": "6e58ac5f6cbeb2f00818639dacf3049fafd43fae565b6b9fdd1e7912e4fc7c0b"
     },
     "export::31b621b2cecc55e8": {
       "bytes": 351,
@@ -1188,7 +1188,7 @@
     "provenance_baseline": {
       "bytes": 5944,
       "relative": "00-MASTER/UAKOS-PHASE-001B/01-SOURCE-PROVENANCE-REGISTER.md",
-      "sha256": "0367bbcf3269346c6b33266b7054a840216064fc5b416ac78dc8451779611b99"
+      "sha256": "5a8ed4bb4f93af8638618992c94bb0d658a7ec1d5b4bdbe42ff2e068afb6385b"
     }
   },
   "gates": [
@@ -1275,7 +1275,7 @@
       "subject": "EXPORT-ARCHIVE"
     }
   ],
-  "head_commit": "1b9fb90",
+  "head_commit": "f989241",
   "program": "UKAP-001",
-  "seal_sha256": "b61cc394f99741739eb789e2a58d4592b96671f77b3b8beda61e0a7ab7f883ff"
+  "seal_sha256": "981ad17629bf118bf9ec122364d5cc0a59f7b2a6f1f1c112715cf6b8498dc483"
 }

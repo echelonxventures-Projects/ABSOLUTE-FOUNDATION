@@ -369,8 +369,15 @@ def dedupe_by_identity(exports: list[dict]) -> list[dict]:
 
 # ------------------------------------------------------------ EXPORT-DOCUMENT discovery
 def commit_order() -> dict[str, int]:
-    """Distance from HEAD for every commit (0 = HEAD). Repository Truth, clone-stable."""
-    return {sha: idx for idx, sha in enumerate(git("rev-list", "HEAD").split()) if sha}
+    """History position of every commit (0 = root commit), from `git rev-list --reverse`.
+
+    Position is counted FROM THE ROOT, not from HEAD: distance-from-HEAD shifts by one on
+    every new commit, which would make the recency evidence — and therefore every rendered
+    register — drift on each commit. Counting from the root is stable under append and is
+    identical in every clone.
+    """
+    return {sha: idx for idx, sha in enumerate(git("rev-list", "--reverse", "HEAD").split())
+            if sha}
 
 
 def discover_documents(order: dict[str, int], tracked: set[str]) -> list[dict]:
@@ -397,7 +404,7 @@ def discover_documents(order: dict[str, int], tracked: set[str]) -> list[dict]:
                 "tracked": rel in tracked,
                 "commit": sha[:7] if sha else "",
                 "commit_time": int(ctime) if ctime.isdigit() else None,
-                "head_distance": order.get(sha) if sha else None,
+                "history_position": order.get(sha) if sha else None,
                 "recency_basis": "git commit order — Repository Truth (filesystem mtime is "
                                  "never read: it does not survive a clone)",
                 "identifiable": bool(sha) and rel in tracked,
@@ -418,7 +425,7 @@ def archive_recency_key(exp: dict) -> tuple[float, int, str]:
 def document_recency_key(doc: dict) -> tuple[int, int, str]:
     return (
         doc["commit_time"] if doc["commit_time"] is not None else -1,
-        -(doc["head_distance"] if doc["head_distance"] is not None else 1 << 30),
+        doc["history_position"] if doc["history_position"] is not None else -1,
         doc["content_sha256"],
     )
 
@@ -805,15 +812,16 @@ def render(model: dict) -> list[str]:
           "records; no filename and no filesystem mtime is consulted, so the order is "
           "identical on every machine and survives a clone.", ""]
     L += ["## EXPORT-DOCUMENT recency (Repository Truth)", ""]
-    L += table(["Rank", "Export", "Commit", "Commit time", "Distance from HEAD", "Canonical"],
+    L += table(["Rank", "Export", "Commit", "Commit time", "History position", "Canonical"],
                [[d["recency_rank"], f"`{d['path']}`", f"`{d['commit']}`" if d["commit"] else "—",
                  d["commit_time"] if d["commit_time"] is not None else "—",
-                 d["head_distance"] if d["head_distance"] is not None else "—",
+                 d["history_position"] if d["history_position"] is not None else "—",
                  "CANONICAL" if d.get("canonical") else ""] for d in documents])
-    L += ["Recency key: `(commit time of the last commit touching the path, proximity to "
-          "HEAD, content sha256)`. Git history is Repository Truth; an untracked export has "
-          "no commit and therefore no recency — it fails CC-02 rather than being ranked on "
-          "an unverifiable signal.", ""]
+    L += ["Recency key: `(commit time of the last commit touching the path, history position "
+          "counted from the root commit, content sha256)`. Git history is Repository Truth; "
+          "position is counted from the ROOT so it cannot shift when a new commit is appended. "
+          "An untracked export has no commit and therefore no recency — it fails CC-02 rather "
+          "than being ranked on an unverifiable signal.", ""]
     p = HERE / "02-EXPORT-RECENCY-REGISTER.md"
     write(p, L)
     written.append(p.name)

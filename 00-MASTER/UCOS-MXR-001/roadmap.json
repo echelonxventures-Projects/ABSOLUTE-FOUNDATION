@@ -6856,7 +6856,7 @@
       ]
     ]
   },
-  "head_commit": "1b9fb90",
+  "head_commit": "f989241",
   "implementation_classes": [
     "SPINE",
     "AEOS",
@@ -6872,11 +6872,11 @@
     },
     "assimilation": {
       "path": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
-      "sha256": "fa19f7d0c0dac785e9af4150c59cecc9ebb456f0bf230616c1e396b38a41a075"
+      "sha256": "6e58ac5f6cbeb2f00818639dacf3049fafd43fae565b6b9fdd1e7912e4fc7c0b"
     },
     "closure": {
       "path": "00-MASTER/UAKOS-CLOSURE-002/closure.json",
-      "sha256": "e80ebf4f7e19b959a30f8efa8ecd18803e9e6ccf7b54db3668b52f294d3eebed"
+      "sha256": "1ed95f51fc9d890e6c75bb7726d99d91db30de122bd3a01fb116716a72a2172d"
     },
     "depgraph": {
       "path": "intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json",
@@ -6947,7 +6947,7 @@
     "LOW": 663,
     "MEDIUM": 151
   },
-  "seal_sha256": "cf641617c1ef82b07b2a65b46cd1813781f6c89ea1fafe377ffde34a723120c4",
+  "seal_sha256": "38aad1c160b223d43c5e85f187ce6d21dc2d7c56ec1ed0f924eb1520240e3ebb",
   "total_effort_points": 1366,
   "total_items": 821,
   "verdict": "CONDITIONAL GO",

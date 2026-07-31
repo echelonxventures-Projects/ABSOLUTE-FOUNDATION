@@ -117,7 +117,7 @@ def determination(model: dict) -> str:
     return "CORPUS STALE" if blocking else "CORPUS CURRENT"
 
 
-def document(path: str, sha: str, commit_time: int, distance: int) -> dict:
+def document(path: str, sha: str, commit_time: int, position: int) -> dict:
     return {
         "corpus_class": ce.CLASS_DOCUMENT,
         "export_id": path,
@@ -127,7 +127,7 @@ def document(path: str, sha: str, commit_time: int, distance: int) -> dict:
         "tracked": True,
         "commit": sha[:7],
         "commit_time": commit_time,
-        "head_distance": distance,
+        "history_position": position,
         "recency_basis": "git commit order",
         "identifiable": True,
     }
@@ -210,13 +210,24 @@ def test_recency_order_is_a_strict_total_order(tmp_path: Path):
 
 def test_document_recency_uses_commit_order_and_breaks_ties_deterministically():
     older = document("04-REFERENCE/a.docx", "a" * 64, 100, 9)
-    newer = document("04-REFERENCE/b.docx", "b" * 64, 200, 2)
+    newer = document("04-REFERENCE/b.docx", "b" * 64, 200, 20)
     ordered = ce.order_exports([newer, older], ce.document_recency_key)
     assert [d["path"] for d in ordered] == ["04-REFERENCE/a.docx", "04-REFERENCE/b.docx"]
     assert ordered[-1]["canonical"] is True
-    same_time_closer_to_head = document("04-REFERENCE/c.docx", "c" * 64, 200, 1)
-    ordered = ce.order_exports([newer, same_time_closer_to_head], ce.document_recency_key)
+    same_time_later_in_history = document("04-REFERENCE/c.docx", "c" * 64, 200, 21)
+    ordered = ce.order_exports([newer, same_time_later_in_history], ce.document_recency_key)
     assert ordered[-1]["path"] == "04-REFERENCE/c.docx"
+
+
+def test_document_recency_is_stable_when_a_commit_is_appended():
+    """History position is counted from the ROOT, so appending a commit must not reorder or
+    change any recorded recency evidence — otherwise every register drifts on every commit."""
+    source = ENGINE_PATH.read_text(encoding="utf-8")
+    assert '"rev-list", "--reverse", "HEAD"' in source
+    assert "head_distance" not in source
+    record = json.loads((ENGINE_PATH.parent / "corpus.json").read_text(encoding="utf-8"))
+    for doc in record["documents"]:
+        assert isinstance(doc["history_position"], int)
 
 
 # --------------------------------------------------------------------- Knowledge Once
