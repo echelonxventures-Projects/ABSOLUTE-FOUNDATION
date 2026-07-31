@@ -75,52 +75,60 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-27`** — Located executable checks bound by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 18 records
+- **Result** — 30 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 18 |
+| records | 30 |
 
 **`DV-28`** — Constitutional gates declared by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 15 records
+- **Result** — 17 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 15 |
+| records | 17 |
 
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 16/21 located engine(s) bound to at least one entry point, workflow or hook (over 20 tracked binding file(s))
+- **Result** — 23/29 located engine(s) bound to at least one entry point, workflow or hook (over 26 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
 |---|---|---|
-| `00-BOOK/tools/register.sh` | 2 | `.github/workflows/ucos-registration-gate.yml`, `.kiro/hooks/auto-register-artifact.json` |
+| `00-BOOK/tools/register.sh` | 4 | `.github/workflows/ucef-gate.yml`, `.github/workflows/ucos-registration-gate.yml`, `.kiro/hooks/auto-register-artifact.json`, `Makefile` |
 | `00-BOOK/tools/ukb.py` | 3 | `.github/workflows/ucos-registration-gate.yml`, `.kiro/hooks/auto-register-artifact.json`, `Makefile` |
 | `00-CMG/tools/cmg-gate.sh` | 1 | `Makefile` |
-| `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | 2 | `.kiro/hooks/uakos-closure-002.json`, `Makefile` |
+| `00-MASTER/MCOS-000001/mcos_engine.py` | 2 | `.github/workflows/mcos-gate.yml`, `Makefile` |
+| `00-MASTER/UAEP-000001/uaep_engine.py` | 2 | `.github/workflows/uaep-gate.yml`, `Makefile` |
+| `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | 3 | `.github/workflows/roadmap-gate.yml`, `.kiro/hooks/uakos-closure-002.json`, `Makefile` |
 | `00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py` | 1 | `Makefile` |
 | `00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py` | 1 | `Makefile` |
+| `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | 2 | `.github/workflows/assimilation-gate.yml`, `Makefile` |
+| `00-MASTER/UAKOS-CLOSURE-008/decision_engine.py` | 0 | **none** |
+| `00-MASTER/UAKOS-CLOSURE-008/superiority_engine.py` | 0 | **none** |
 | `00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py` | 0 | **none** |
 | `00-MASTER/UAKOS-PHASE-001B/provenance_engine.py` | 0 | **none** |
 | `00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py` | 0 | **none** |
 | `00-MASTER/UCCEP-000000/uccep_engine.py` | 3 | `.github/workflows/uccep-gate.yml`, `.kiro/hooks/uccep-000000.json`, `Makefile` |
 | `00-MASTER/UCDA-000001/ucda_engine.py` | 2 | `.kiro/hooks/ucda-000001.json`, `Makefile` |
+| `00-MASTER/UCEF-000001/ucef_engine.py` | 2 | `.github/workflows/ucef-gate.yml`, `Makefile` |
+| `00-MASTER/UCOS-MXR-001/roadmap_engine.py` | 2 | `.github/workflows/roadmap-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | 2 | `.github/workflows/rfp-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-RIB-001/rib_engine.py` | 2 | `.github/workflows/rib-gate.yml`, `Makefile` |
-| `00-MASTER/UCOS-UAR-001/uar_engine.py` | 0 | **none** |
+| `00-MASTER/UCOS-UAR-001/uar_engine.py` | 1 | `Makefile` |
 | `00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py` | 0 | **none** |
 | `00-MASTER/UEI-000001/uei_engine.py` | 3 | `.github/workflows/uei-gate.yml`, `.kiro/hooks/uei-000001.json`, `Makefile` |
 | `00-MASTER/UER-000001/uer_engine.py` | 3 | `.github/workflows/uer-gate.yml`, `.kiro/hooks/uer-000001.json`, `Makefile` |
+| `00-MASTER/UKAP-001/corpus_engine.py` | 2 | `.github/workflows/corpus-currency-gate.yml`, `Makefile` |
 | `00-MASTER/UMK-000001/umk_engine.py` | 2 | `.github/workflows/umk-gate.yml`, `Makefile` |
 | `00-MASTER/UPF-000001/upf_engine.py` | 2 | `.github/workflows/uprf-gate.yml`, `Makefile` |
 | `00-MASTER/URRC-000001/urrc_engine.py` | 3 | `.github/workflows/urrc-gate.yml`, `.kiro/hooks/urrc-000001.json`, `Makefile` |
-| `verify.sh` | 3 | `.github/workflows/ec1-ci.yml`, `.github/workflows/uccep-gate.yml`, `Makefile` |
+| `verify.sh` | 6 | `.github/workflows/corpus-currency-gate.yml`, `.github/workflows/ec1-ci.yml`, `.github/workflows/uaep-gate.yml`, `.github/workflows/uccep-gate.yml`, `.github/workflows/ucef-gate.yml`, `Makefile` |
 
 #### D-15 — Gap — dimension gaps
 
@@ -161,7 +169,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 83 |
+| `ACTIVE` | 63 |
 | `UNDER_REVIEW` | 2 |
 | `COMPLETE` | 1 |
 | `FROZEN` | 1 |
@@ -176,32 +184,32 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-11`** — Traceability completeness across the thirteen traceability dimensions of every registered artifact.
 
 - **Primitive** — `subdict_fill_ratio`
-- **Result** — 348/15509 dimension slots populated (2.24%) · 272/1193 record(s) carry at least one trace (22.79%) · 0 record(s) fully traced · 921 with none
+- **Result** — 348/15522 dimension slots populated (2.24%) · 272/1194 record(s) carry at least one trace (22.78%) · 0 record(s) fully traced · 922 with none
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records measured | 1193 |
-| dimension slots | 15509 |
+| records measured | 1194 |
+| dimension slots | 15522 |
 | slots populated | 348 |
 | populated share (%) | 2.24 |
 | records fully traced | 0 |
-| records with no trace | 921 |
+| records with no trace | 922 |
 | records with at least one trace | 272 |
-| traced-record share (%) | 22.79 |
-| dimension `architecture` | 251/1193 |
-| dimension `certification` | 0/1193 |
-| dimension `deployment` | 0/1193 |
-| dimension `design` | 0/1193 |
-| dimension `functional_test` | 0/1193 |
-| dimension `implementation` | 17/1193 |
-| dimension `integration_test` | 0/1193 |
-| dimension `operations` | 0/1193 |
-| dimension `production` | 0/1193 |
-| dimension `requirement` | 80/1193 |
-| dimension `security_test` | 0/1193 |
-| dimension `source_code` | 0/1193 |
-| dimension `unit_test` | 0/1193 |
+| traced-record share (%) | 22.78 |
+| dimension `architecture` | 251/1194 |
+| dimension `certification` | 0/1194 |
+| dimension `deployment` | 0/1194 |
+| dimension `design` | 0/1194 |
+| dimension `functional_test` | 0/1194 |
+| dimension `implementation` | 17/1194 |
+| dimension `integration_test` | 0/1194 |
+| dimension `operations` | 0/1194 |
+| dimension `production` | 0/1194 |
+| dimension `requirement` | 80/1194 |
+| dimension `security_test` | 0/1194 |
+| dimension `source_code` | 0/1194 |
+| dimension `unit_test` | 0/1194 |
 
 #### D-17 — Gap — open-work gaps
 
@@ -224,12 +232,12 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-38`** — Work packages registered by decision disposition.
 
 - **Primitive** — `record_count`
-- **Result** — 17 records
+- **Result** — 18 records
 - **Substrate evidence** — `S-09`
 
 | Key | Value |
 |---|---|
-| records | 17 |
+| records | 18 |
 
 **`DV-50`** — Recorded execution blockers in operational state.
 

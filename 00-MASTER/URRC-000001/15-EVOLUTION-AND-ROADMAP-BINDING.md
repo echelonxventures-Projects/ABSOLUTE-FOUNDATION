@@ -52,17 +52,17 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-29`** — Programmes on the aggregate roster.
 
 - **Primitive** — `record_count`
-- **Result** — 17 records
+- **Result** — 19 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 17 |
+| records | 19 |
 
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 21 tracked path(s)
+- **Result** — 29 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -70,20 +70,28 @@ Evolution and master-roadmap owners; executable-owner delta.
 | `00-BOOK/tools/register.sh` | TRACKED |
 | `00-BOOK/tools/ukb.py` | TRACKED |
 | `00-CMG/tools/cmg-gate.sh` | TRACKED |
+| `00-MASTER/MCOS-000001/mcos_engine.py` | TRACKED |
+| `00-MASTER/UAEP-000001/uaep_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py` | TRACKED |
+| `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | TRACKED |
+| `00-MASTER/UAKOS-CLOSURE-008/decision_engine.py` | TRACKED |
+| `00-MASTER/UAKOS-CLOSURE-008/superiority_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-PHASE-001B/provenance_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py` | TRACKED |
 | `00-MASTER/UCCEP-000000/uccep_engine.py` | TRACKED |
 | `00-MASTER/UCDA-000001/ucda_engine.py` | TRACKED |
+| `00-MASTER/UCEF-000001/ucef_engine.py` | TRACKED |
+| `00-MASTER/UCOS-MXR-001/roadmap_engine.py` | TRACKED |
 | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | TRACKED |
 | `00-MASTER/UCOS-RIB-001/rib_engine.py` | TRACKED |
 | `00-MASTER/UCOS-UAR-001/uar_engine.py` | TRACKED |
 | `00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py` | TRACKED |
 | `00-MASTER/UEI-000001/uei_engine.py` | TRACKED |
 | `00-MASTER/UER-000001/uer_engine.py` | TRACKED |
+| `00-MASTER/UKAP-001/corpus_engine.py` | TRACKED |
 | `00-MASTER/UMK-000001/umk_engine.py` | TRACKED |
 | `00-MASTER/UPF-000001/upf_engine.py` | TRACKED |
 | `00-MASTER/URRC-000001/urrc_engine.py` | TRACKED |
@@ -92,18 +100,22 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-55`** — Counted probe: a machine-readable master execution sequence in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 0 tracked path(s)
+- **Result** — 1 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
+
+| Key | Value |
+|---|---|
+| `00-MASTER/UCOS-MXR-001/roadmap.json` | TRACKED |
 
 **`DV-18`** — Programmes carrying a portfolio rollup.
 
 - **Primitive** — `record_count`
-- **Result** — 87 records
+- **Result** — 67 records
 - **Substrate evidence** — `S-03`
 
 | Key | Value |
 |---|---|
-| records | 87 |
+| records | 67 |
 
 
 ---

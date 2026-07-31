@@ -932,7 +932,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "568c4dc115ac107deab8caf3b853316214b1fa2b7bc7067ab722f2517308152b",
+  "content_hash": "e305063b07f266c50ccbee6bf39fe3587effaf414bebfc1a7daf5bc363b02846",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -1031,7 +1031,7 @@
         "to": "SERVICE"
       }
     ],
-    "total_corpus_edges": 12817
+    "total_corpus_edges": 12819
   },
   "digital_twin_snapshot": {
     "automation_readiness": "READY",
@@ -1051,14 +1051,14 @@
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "f39edd40e07882246b7b32e4baa372ee2750f769890bb046fa3bea4a6926dc60",
-      "00-BOOK/DATA/certification.json": "a4d6c6a287fdb3175fb2548852ddd04ff28c7afaa6d7e2225265a7d5ed2883db",
-      "00-BOOK/DATA/control-tower.json": "241efe29a80fbfebb22ff2b7c915855a045a174510bebbefdd7be1b9b79c3b36",
+      "00-BOOK/DATA/artifacts.json": "6abf652155df1301bf2666e1d41296c51321989e9f4d8d45176199130bec7d4b",
+      "00-BOOK/DATA/certification.json": "c2d3af4fc52c76b28ae116a4eabfe72c2b29dd6ca1012a810941c33517870419",
+      "00-BOOK/DATA/control-tower.json": "af73cf584a95da40cd4f43461729e48d09b0ce4c4b6e50cad32826ed70e8dd3f",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "9d482cc7db16401ee7f2d73b69936e2a3c95d88f8ee8ee596524b701ff28f2a0"
+      "00-BOOK/DATA/volumes.json": "a34e648cd43f13818156dacdbdc814f9da3a785daac6c6113fb9eac8e05f6598"
     }
   },
-  "evidence_timestamp": "2026-07-31T06:45:07+00:00",
+  "evidence_timestamp": "2026-07-31T09:46:00+00:00",
   "execution_frontier": {
     "blocked": [
       {
@@ -1093,7 +1093,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "9e71f565889cf734f8f1dfbe112178446cb20f05b02492834ca0c9feac7f678e",
+    "input_hash": "23e9e86cc903f288c712f7c8bd97ced668f703d3b347cf6086717c70a0cc0bf8",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },
@@ -1168,7 +1168,7 @@
     "dimensions_counted": 15,
     "per_dimension": {
       "architecture": {
-        "as_of": "2026-07-31T06:45:07+00:00",
+        "as_of": "2026-07-31T09:46:00+00:00",
         "literal_score": 1.0,
         "reconciled_score": 1.0,
         "source": "MANUAL",
@@ -1184,7 +1184,7 @@
         "status": "BLOCKED"
       },
       "certification": {
-        "as_of": "2026-07-31T06:45:07+00:00",
+        "as_of": "2026-07-31T09:46:00+00:00",
         "literal_score": 1.0,
         "reconciled_score": 1.0,
         "source": "MANUAL",
@@ -1200,7 +1200,7 @@
         "status": "IN_PROGRESS"
       },
       "execution": {
-        "as_of": "2026-07-31T06:45:07+00:00",
+        "as_of": "2026-07-31T09:46:00+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -1208,7 +1208,7 @@
         "status": "NOT_STARTED"
       },
       "functional_testing": {
-        "as_of": "2026-07-31T06:45:07+00:00",
+        "as_of": "2026-07-31T09:46:00+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -1224,7 +1224,7 @@
         "status": "IMPLEMENTED"
       },
       "integration_testing": {
-        "as_of": "2026-07-31T06:45:07+00:00",
+        "as_of": "2026-07-31T09:46:00+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -1240,7 +1240,7 @@
         "status": "BLOCKED"
       },
       "performance_testing": {
-        "as_of": "2026-07-31T06:45:07+00:00",
+        "as_of": "2026-07-31T09:46:00+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -1248,7 +1248,7 @@
         "status": "NOT_STARTED"
       },
       "portfolio": {
-        "as_of": "2026-07-31T06:45:07+00:00",
+        "as_of": "2026-07-31T09:46:00+00:00",
         "literal_score": 0.5,
         "reconciled_score": 0.5,
         "source": "MANUAL",
@@ -1264,7 +1264,7 @@
         "status": "BLOCKED"
       },
       "release": {
-        "as_of": "2026-07-31T06:45:07+00:00",
+        "as_of": "2026-07-31T09:46:00+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -1318,8 +1318,8 @@
           "loc": 58414,
           "root": "engine",
           "source_files": 266,
-          "test_files": 202,
-          "test_functions": 1942
+          "test_files": 203,
+          "test_functions": 1968
         },
         "infrastructure": {
           "loc": 22599,
@@ -1351,14 +1351,14 @@
         }
       },
       "total_loc": 259299,
-      "total_tests": 8887
+      "total_tests": 8913
     },
     "corpus": {
-      "artifacts": 1193,
-      "edges": 12817,
-      "pages": 9618,
+      "artifacts": 1194,
+      "edges": 12819,
+      "pages": 9627,
       "status_histogram": {
-        "ACTIVE": 1092,
+        "ACTIVE": 1093,
         "CERTIFIED": 7,
         "COMPLETE": 43,
         "FINAL": 9,

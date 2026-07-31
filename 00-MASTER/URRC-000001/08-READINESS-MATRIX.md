@@ -74,12 +74,12 @@ Readiness bound to its owners, plus the blocked-by set.
 **`DV-34`** — Findings composing the certification ceiling.
 
 - **Primitive** — `record_count`
-- **Result** — 5 records
+- **Result** — 2 records
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| records | 5 |
+| records | 2 |
 
 #### D-20 — Blocked-by set
 
@@ -112,14 +112,12 @@ Readiness bound to its owners, plus the blocked-by set.
 **`DV-30`** — Blocking findings on the assimilation register.
 
 - **Primitive** — `filtered_record_count`
-- **Result** — 4 matching record(s)
+- **Result** — 2 matching record(s)
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| `UCCEP-F-001` | phase3_engine.py returns a constant NOT-CLOSED verdict independent of m… |
 | `UCCEP-F-002` | Repository health is RED: 1198 of 1198 registered artifacts have incomp… |
-| `UCCEP-F-003` | engine.graph.cli validate reports a dependency cycle but returns is_val… |
 | `UCCEP-F-004` | CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no loc… |
 
 **`DV-50`** — Recorded execution blockers in operational state.

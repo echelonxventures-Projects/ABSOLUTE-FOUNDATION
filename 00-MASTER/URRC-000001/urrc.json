@@ -686,18 +686,18 @@
   ],
   "derivations": [
     {
-      "count": 1193,
+      "count": 1194,
       "evidence": [
         "S-01"
       ],
-      "headline": "1193 records",
+      "headline": "1194 records",
       "id": "DV-01",
       "primitive": "record_count",
       "purpose": "Registered artifact records present in the registration projection.",
       "rows": [
         [
           "records",
-          "1193"
+          "1194"
         ]
       ],
       "unknown": false
@@ -707,18 +707,18 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "declared 1193 · present 1193 · delta 0",
+      "headline": "declared 1194 · present 1194 · delta 0",
       "id": "DV-02",
       "primitive": "declared_vs_actual",
       "purpose": "Declared registration count against the records actually present.",
       "rows": [
         [
           "declared",
-          "1193"
+          "1194"
         ],
         [
           "present",
-          "1193"
+          "1194"
         ],
         [
           "delta",
@@ -733,18 +733,18 @@
         "S-01",
         "S-03"
       ],
-      "headline": "1193 vs 1193 · delta 0",
+      "headline": "1194 vs 1194 · delta 0",
       "id": "DV-03",
       "primitive": "cross_count_delta",
       "purpose": "Registration census against the portfolio rollup.",
       "rows": [
         [
           "`S-01` count",
-          "1193"
+          "1194"
         ],
         [
           "`S-03` portfolio.total_artifacts",
-          "1193"
+          "1194"
         ],
         [
           "delta",
@@ -759,18 +759,18 @@
         "S-01",
         "S-04"
       ],
-      "headline": "1193 vs 1193 · delta 0",
+      "headline": "1194 vs 1194 · delta 0",
       "id": "DV-04",
       "primitive": "cross_count_delta",
       "purpose": "Registration census against the certified scope.",
       "rows": [
         [
           "`S-01` count",
-          "1193"
+          "1194"
         ],
         [
           "`S-04` scope.artifacts",
-          "1193"
+          "1194"
         ],
         [
           "delta",
@@ -784,7 +784,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "2 value(s) shared by more than one record (over 1191 distinct value(s))",
+      "headline": "2 value(s) shared by more than one record (over 1192 distinct value(s))",
       "id": "DV-05",
       "primitive": "duplicate_field_values",
       "purpose": "Content identity: distinct artifacts sharing one content hash.",
@@ -805,7 +805,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "21 value(s) shared by more than one record (over 724 distinct value(s))",
+      "headline": "21 value(s) shared by more than one record (over 725 distinct value(s))",
       "id": "DV-06",
       "primitive": "duplicate_field_values",
       "purpose": "Name identity: distinct artifacts sharing one name.",
@@ -902,7 +902,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "0 value(s) shared by more than one record (over 1193 distinct value(s))",
+      "headline": "0 value(s) shared by more than one record (over 1194 distinct value(s))",
       "id": "DV-07",
       "primitive": "duplicate_field_values",
       "purpose": "Identity collision: one universal identifier claimed by more than one record.",
@@ -914,7 +914,7 @@
       "evidence": [
         "S-01"
       ],
-      "headline": "0 value(s) shared by more than one record (over 1193 distinct value(s))",
+      "headline": "0 value(s) shared by more than one record (over 1194 distinct value(s))",
       "id": "DV-08",
       "primitive": "duplicate_field_values",
       "purpose": "Multi-home concepts: one path registered more than once.",
@@ -933,7 +933,7 @@
       "rows": [
         [
           "`ACTIVE`",
-          "1092"
+          "1093"
         ],
         [
           "`COMPLETE`",
@@ -971,7 +971,7 @@
       "rows": [
         [
           "`ACTIVE`",
-          "1092"
+          "1093"
         ],
         [
           "`COMPLETE`",
@@ -989,22 +989,22 @@
       "unknown": false
     },
     {
-      "count": 15161,
+      "count": 15174,
       "evidence": [
         "S-01"
       ],
-      "headline": "348/15509 dimension slots populated (2.24%) · 272/1193 record(s) carry at least one trace (22.79%) · 0 record(s) fully traced · 921 with none",
+      "headline": "348/15522 dimension slots populated (2.24%) · 272/1194 record(s) carry at least one trace (22.78%) · 0 record(s) fully traced · 922 with none",
       "id": "DV-11",
       "primitive": "subdict_fill_ratio",
       "purpose": "Traceability completeness across the thirteen traceability dimensions of every registered artifact.",
       "rows": [
         [
           "records measured",
-          "1193"
+          "1194"
         ],
         [
           "dimension slots",
-          "15509"
+          "15522"
         ],
         [
           "slots populated",
@@ -1020,7 +1020,7 @@
         ],
         [
           "records with no trace",
-          "921"
+          "922"
         ],
         [
           "records with at least one trace",
@@ -1028,76 +1028,76 @@
         ],
         [
           "traced-record share (%)",
-          "22.79"
+          "22.78"
         ],
         [
           "dimension `architecture`",
-          "251/1193"
+          "251/1194"
         ],
         [
           "dimension `certification`",
-          "0/1193"
+          "0/1194"
         ],
         [
           "dimension `deployment`",
-          "0/1193"
+          "0/1194"
         ],
         [
           "dimension `design`",
-          "0/1193"
+          "0/1194"
         ],
         [
           "dimension `functional_test`",
-          "0/1193"
+          "0/1194"
         ],
         [
           "dimension `implementation`",
-          "17/1193"
+          "17/1194"
         ],
         [
           "dimension `integration_test`",
-          "0/1193"
+          "0/1194"
         ],
         [
           "dimension `operations`",
-          "0/1193"
+          "0/1194"
         ],
         [
           "dimension `production`",
-          "0/1193"
+          "0/1194"
         ],
         [
           "dimension `requirement`",
-          "80/1193"
+          "80/1194"
         ],
         [
           "dimension `security_test`",
-          "0/1193"
+          "0/1194"
         ],
         [
           "dimension `source_code`",
-          "0/1193"
+          "0/1194"
         ],
         [
           "dimension `unit_test`",
-          "0/1193"
+          "0/1194"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 12829,
+      "count": 12819,
       "evidence": [
         "S-02"
       ],
-      "headline": "12829 records",
+      "headline": "12819 records",
       "id": "DV-12",
       "primitive": "record_count",
       "purpose": "Graph edges present in the graph projection.",
       "rows": [
         [
           "records",
-          "12829"
+          "12819"
         ]
       ],
       "unknown": false
@@ -1108,18 +1108,18 @@
         "S-02",
         "S-03"
       ],
-      "headline": "12829 vs 12829 · delta 0",
+      "headline": "12819 vs 12819 · delta 0",
       "id": "DV-13",
       "primitive": "cross_count_delta",
       "purpose": "Edge census against the portfolio rollup.",
       "rows": [
         [
           "`S-02` count",
-          "12829"
+          "12819"
         ],
         [
           "`S-03` portfolio.total_edges",
-          "12829"
+          "12819"
         ],
         [
           "delta",
@@ -1134,18 +1134,18 @@
         "S-02",
         "S-04"
       ],
-      "headline": "12829 vs 12829 · delta 0",
+      "headline": "12819 vs 12819 · delta 0",
       "id": "DV-14",
       "primitive": "cross_count_delta",
       "purpose": "Edge census against the certified scope.",
       "rows": [
         [
           "`S-02` count",
-          "12829"
+          "12819"
         ],
         [
           "`S-04` scope.edges",
-          "12829"
+          "12819"
         ],
         [
           "delta",
@@ -1174,11 +1174,11 @@
         ],
         [
           "`Child`",
-          "1200"
+          "1195"
         ],
         [
           "`Parent`",
-          "1200"
+          "1195"
         ],
         [
           "`Consumed-By`",
@@ -1237,14 +1237,14 @@
         "S-01",
         "S-02"
       ],
-      "headline": "0 live dependency/dependencies on a superseded target (over 12829 edge(s); 0 endpoint(s) not registered)",
+      "headline": "0 live dependency/dependencies on a superseded target (over 12819 edge(s); 0 endpoint(s) not registered)",
       "id": "DV-16",
       "primitive": "edge_status_join",
       "purpose": "Live dependency on superseded truth: an edge whose target is superseded and whose source is not.",
       "rows": [
         [
           "edges examined",
-          "12829"
+          "12819"
         ],
         [
           "endpoints not registered",
@@ -1331,18 +1331,18 @@
       "unknown": false
     },
     {
-      "count": 87,
+      "count": 67,
       "evidence": [
         "S-03"
       ],
-      "headline": "87 records",
+      "headline": "67 records",
       "id": "DV-18",
       "primitive": "record_count",
       "purpose": "Programmes carrying a portfolio rollup.",
       "rows": [
         [
           "records",
-          "87"
+          "67"
         ]
       ],
       "unknown": false
@@ -1359,7 +1359,7 @@
       "rows": [
         [
           "`ACTIVE`",
-          "83"
+          "63"
         ],
         [
           "`UNDER_REVIEW`",
@@ -1524,35 +1524,18 @@
       "unknown": false
     },
     {
-      "count": 18,
+      "count": 30,
       "evidence": [
         "S-07"
       ],
-      "headline": "18 records",
+      "headline": "30 records",
       "id": "DV-27",
       "primitive": "record_count",
       "purpose": "Located executable checks bound by the aggregate gate.",
       "rows": [
         [
           "records",
-          "18"
-        ]
-      ],
-      "unknown": false
-    },
-    {
-      "count": 15,
-      "evidence": [
-        "S-07"
-      ],
-      "headline": "15 records",
-      "id": "DV-28",
-      "primitive": "record_count",
-      "purpose": "Constitutional gates declared by the aggregate gate.",
-      "rows": [
-        [
-          "records",
-          "15"
+          "30"
         ]
       ],
       "unknown": false
@@ -1563,9 +1546,9 @@
         "S-07"
       ],
       "headline": "17 records",
-      "id": "DV-29",
+      "id": "DV-28",
       "primitive": "record_count",
-      "purpose": "Programmes on the aggregate roster.",
+      "purpose": "Constitutional gates declared by the aggregate gate.",
       "rows": [
         [
           "records",
@@ -1575,26 +1558,35 @@
       "unknown": false
     },
     {
-      "count": 4,
+      "count": 19,
       "evidence": [
         "S-07"
       ],
-      "headline": "4 matching record(s)",
+      "headline": "19 records",
+      "id": "DV-29",
+      "primitive": "record_count",
+      "purpose": "Programmes on the aggregate roster.",
+      "rows": [
+        [
+          "records",
+          "19"
+        ]
+      ],
+      "unknown": false
+    },
+    {
+      "count": 2,
+      "evidence": [
+        "S-07"
+      ],
+      "headline": "2 matching record(s)",
       "id": "DV-30",
       "primitive": "filtered_record_count",
       "purpose": "Blocking findings on the assimilation register.",
       "rows": [
         [
-          "`UCCEP-F-001`",
-          "phase3_engine.py returns a constant NOT-CLOSED verdict independent of m…"
-        ],
-        [
           "`UCCEP-F-002`",
           "Repository health is RED: 1198 of 1198 registered artifacts have incomp…"
-        ],
-        [
-          "`UCCEP-F-003`",
-          "engine.graph.cli validate reports a dependency cycle but returns is_val…"
         ],
         [
           "`UCCEP-F-004`",
@@ -1621,82 +1613,70 @@
       "unknown": false
     },
     {
-      "count": 3,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "3 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-32",
       "primitive": "field_histogram",
       "purpose": "Computed gate verdicts.",
       "rows": [
         [
           "`PASS`",
-          "10"
+          "16"
         ],
         [
-          "`NOT-EXECUTED`",
-          "4"
-        ],
-        [
-          "`PARTIAL`",
+          "`PASS-WITH-ADVISORY`",
           "1"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 4,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "4 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-33",
       "primitive": "field_histogram",
       "purpose": "Computed programme verdicts.",
       "rows": [
         [
           "`PASS`",
-          "8"
-        ],
-        [
-          "`NOT-EXECUTED`",
-          "3"
-        ],
-        [
-          "`PARTIAL`",
-          "3"
+          "15"
         ],
         [
           "`PASS-WITH-ADVISORY`",
-          "3"
+          "4"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 5,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "5 records",
+      "headline": "2 records",
       "id": "DV-34",
       "primitive": "record_count",
       "purpose": "Findings composing the certification ceiling.",
       "rows": [
         [
           "records",
-          "5"
+          "2"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 89,
+      "count": 108,
       "evidence": [
         "S-10"
       ],
-      "headline": "9 key(s) · 89 member(s)",
+      "headline": "9 key(s) · 108 member(s)",
       "id": "DV-35",
       "primitive": "dict_list_lengths",
       "purpose": "Decision lifecycle occupancy by stage.",
@@ -1707,7 +1687,7 @@
         ],
         [
           "`CLOSURE`",
-          "14"
+          "25"
         ],
         [
           "`CONSTITUTIONAL-AGREEMENT`",
@@ -1731,7 +1711,7 @@
         ],
         [
           "`REPOSITORY-TRUTH-UPDATE`",
-          "31"
+          "39"
         ],
         [
           "`VALIDATION`",
@@ -1739,24 +1719,24 @@
         ],
         [
           "**total**",
-          "**89**"
+          "**108**"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 89,
+      "count": 108,
       "evidence": [
         "S-10"
       ],
-      "headline": "5 key(s) · 89 member(s)",
+      "headline": "5 key(s) · 108 member(s)",
       "id": "DV-36",
       "primitive": "dict_list_lengths",
       "purpose": "Decision disposition occupancy across the closed disposition set.",
       "rows": [
         [
           "`IMPLEMENTED`",
-          "25"
+          "33"
         ],
         [
           "`REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE`",
@@ -1764,11 +1744,11 @@
         ],
         [
           "`REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION`",
-          "6"
+          "11"
         ],
         [
           "`REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY`",
-          "36"
+          "42"
         ],
         [
           "`SUPERSEDED`",
@@ -1776,41 +1756,41 @@
         ],
         [
           "**total**",
-          "**89**"
+          "**108**"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 89,
+      "count": 108,
       "evidence": [
         "S-09"
       ],
-      "headline": "89 records",
+      "headline": "108 records",
       "id": "DV-37",
       "primitive": "record_count",
       "purpose": "Registered constitutional decisions.",
       "rows": [
         [
           "records",
-          "89"
+          "108"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 17,
+      "count": 18,
       "evidence": [
         "S-09"
       ],
-      "headline": "17 records",
+      "headline": "18 records",
       "id": "DV-38",
       "primitive": "record_count",
       "purpose": "Work packages registered by decision disposition.",
       "rows": [
         [
           "records",
-          "17"
+          "18"
         ]
       ],
       "unknown": false
@@ -1918,9 +1898,9 @@
       "unknown": false
     },
     {
-      "count": 21,
+      "count": 29,
       "evidence": [],
-      "headline": "21 tracked path(s)",
+      "headline": "29 tracked path(s)",
       "id": "DV-45",
       "primitive": "tracked_glob_census",
       "purpose": "Executable governance engines and gate scripts present in version control.",
@@ -1938,6 +1918,14 @@
           "TRACKED"
         ],
         [
+          "`00-MASTER/MCOS-000001/mcos_engine.py`",
+          "TRACKED"
+        ],
+        [
+          "`00-MASTER/UAEP-000001/uaep_engine.py`",
+          "TRACKED"
+        ],
+        [
           "`00-MASTER/UAKOS-CLOSURE-002/closure_engine.py`",
           "TRACKED"
         ],
@@ -1947,6 +1935,18 @@
         ],
         [
           "`00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py`",
+          "TRACKED"
+        ],
+        [
+          "`00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py`",
+          "TRACKED"
+        ],
+        [
+          "`00-MASTER/UAKOS-CLOSURE-008/decision_engine.py`",
+          "TRACKED"
+        ],
+        [
+          "`00-MASTER/UAKOS-CLOSURE-008/superiority_engine.py`",
           "TRACKED"
         ],
         [
@@ -1967,6 +1967,14 @@
         ],
         [
           "`00-MASTER/UCDA-000001/ucda_engine.py`",
+          "TRACKED"
+        ],
+        [
+          "`00-MASTER/UCEF-000001/ucef_engine.py`",
+          "TRACKED"
+        ],
+        [
+          "`00-MASTER/UCOS-MXR-001/roadmap_engine.py`",
           "TRACKED"
         ],
         [
@@ -1994,6 +2002,10 @@
           "TRACKED"
         ],
         [
+          "`00-MASTER/UKAP-001/corpus_engine.py`",
+          "TRACKED"
+        ],
+        [
           "`00-MASTER/UMK-000001/umk_engine.py`",
           "TRACKED"
         ],
@@ -2013,17 +2025,17 @@
       "unknown": false
     },
     {
-      "count": 5,
+      "count": 6,
       "evidence": [],
-      "headline": "16/21 located engine(s) bound to at least one entry point, workflow or hook (over 20 tracked binding file(s))",
+      "headline": "23/29 located engine(s) bound to at least one entry point, workflow or hook (over 26 tracked binding file(s))",
       "id": "DV-46",
       "primitive": "text_presence",
       "purpose": "Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.",
       "rows": [
         [
           "`00-BOOK/tools/register.sh`",
-          "2",
-          "`.github/workflows/ucos-registration-gate.yml`, `.kiro/hooks/auto-register-artifact.json`"
+          "4",
+          "`.github/workflows/ucef-gate.yml`, `.github/workflows/ucos-registration-gate.yml`, `.kiro/hooks/auto-register-artifact.json`, `Makefile`"
         ],
         [
           "`00-BOOK/tools/ukb.py`",
@@ -2036,9 +2048,19 @@
           "`Makefile`"
         ],
         [
-          "`00-MASTER/UAKOS-CLOSURE-002/closure_engine.py`",
+          "`00-MASTER/MCOS-000001/mcos_engine.py`",
           "2",
-          "`.kiro/hooks/uakos-closure-002.json`, `Makefile`"
+          "`.github/workflows/mcos-gate.yml`, `Makefile`"
+        ],
+        [
+          "`00-MASTER/UAEP-000001/uaep_engine.py`",
+          "2",
+          "`.github/workflows/uaep-gate.yml`, `Makefile`"
+        ],
+        [
+          "`00-MASTER/UAKOS-CLOSURE-002/closure_engine.py`",
+          "3",
+          "`.github/workflows/roadmap-gate.yml`, `.kiro/hooks/uakos-closure-002.json`, `Makefile`"
         ],
         [
           "`00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py`",
@@ -2049,6 +2071,21 @@
           "`00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py`",
           "1",
           "`Makefile`"
+        ],
+        [
+          "`00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py`",
+          "2",
+          "`.github/workflows/assimilation-gate.yml`, `Makefile`"
+        ],
+        [
+          "`00-MASTER/UAKOS-CLOSURE-008/decision_engine.py`",
+          "0",
+          "**none**"
+        ],
+        [
+          "`00-MASTER/UAKOS-CLOSURE-008/superiority_engine.py`",
+          "0",
+          "**none**"
         ],
         [
           "`00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py`",
@@ -2076,6 +2113,16 @@
           "`.kiro/hooks/ucda-000001.json`, `Makefile`"
         ],
         [
+          "`00-MASTER/UCEF-000001/ucef_engine.py`",
+          "2",
+          "`.github/workflows/ucef-gate.yml`, `Makefile`"
+        ],
+        [
+          "`00-MASTER/UCOS-MXR-001/roadmap_engine.py`",
+          "2",
+          "`.github/workflows/roadmap-gate.yml`, `Makefile`"
+        ],
+        [
           "`00-MASTER/UCOS-RFP-001/rfp_engine.py`",
           "2",
           "`.github/workflows/rfp-gate.yml`, `Makefile`"
@@ -2087,8 +2134,8 @@
         ],
         [
           "`00-MASTER/UCOS-UAR-001/uar_engine.py`",
-          "0",
-          "**none**"
+          "1",
+          "`Makefile`"
         ],
         [
           "`00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py`",
@@ -2104,6 +2151,11 @@
           "`00-MASTER/UER-000001/uer_engine.py`",
           "3",
           "`.github/workflows/uer-gate.yml`, `.kiro/hooks/uer-000001.json`, `Makefile`"
+        ],
+        [
+          "`00-MASTER/UKAP-001/corpus_engine.py`",
+          "2",
+          "`.github/workflows/corpus-currency-gate.yml`, `Makefile`"
         ],
         [
           "`00-MASTER/UMK-000001/umk_engine.py`",
@@ -2122,8 +2174,8 @@
         ],
         [
           "`verify.sh`",
-          "3",
-          "`.github/workflows/ec1-ci.yml`, `.github/workflows/uccep-gate.yml`, `Makefile`"
+          "6",
+          "`.github/workflows/corpus-currency-gate.yml`, `.github/workflows/ec1-ci.yml`, `.github/workflows/uaep-gate.yml`, `.github/workflows/uccep-gate.yml`, `.github/workflows/ucef-gate.yml`, `Makefile`"
         ]
       ],
       "unknown": false
@@ -2158,8 +2210,8 @@
           "YES",
           "YES",
           "2/2",
-          "2386",
-          "`ad74b4bec63b`"
+          "2388",
+          "`6abf652155df`"
         ],
         [
           "`S-02`",
@@ -2168,8 +2220,8 @@
           "YES",
           "YES",
           "2/2",
-          "25658",
-          "`6929b5223697`"
+          "25638",
+          "`68daa90411d2`"
         ],
         [
           "`S-03`",
@@ -2178,8 +2230,8 @@
           "YES",
           "YES",
           "3/3",
-          "108",
-          "`1b4b56390270`"
+          "88",
+          "`af73cf584a95`"
         ],
         [
           "`S-04`",
@@ -2189,7 +2241,7 @@
           "YES",
           "5/5",
           "45",
-          "`9c58139bf04f`"
+          "`c2d3af4fc52c`"
         ],
         [
           "`S-05`",
@@ -2198,8 +2250,8 @@
           "YES",
           "YES",
           "2/2",
-          "1319",
-          "`c80b79fc82c6`"
+          "1320",
+          "`21bcd3960ca6`"
         ],
         [
           "`S-06`",
@@ -2209,7 +2261,7 @@
           "YES",
           "9/9",
           "164",
-          "`ae12d2d56565`"
+          "`4d8242bbd440`"
         ],
         [
           "`S-07`",
@@ -2218,8 +2270,8 @@
           "YES",
           "YES",
           "5/5",
-          "63",
-          "`e9671a9fc34c`"
+          "79",
+          "`bed6709de81c`"
         ],
         [
           "`S-08`",
@@ -2228,8 +2280,8 @@
           "YES",
           "YES",
           "6/6",
-          "130",
-          "`f5130388f68c`"
+          "127",
+          "`1880a6442c87`"
         ],
         [
           "`S-09`",
@@ -2238,8 +2290,8 @@
           "YES",
           "YES",
           "4/4",
-          "120",
-          "`4db0cdd76204`"
+          "140",
+          "`3a0ac522c6e0`"
         ],
         [
           "`S-10`",
@@ -2248,8 +2300,8 @@
           "YES",
           "YES",
           "6/6",
-          "426",
-          "`8d61341fbaa6`"
+          "535",
+          "`6e5206a51222`"
         ],
         [
           "`S-11`",
@@ -2437,13 +2489,18 @@
       "unknown": false
     },
     {
-      "count": 0,
+      "count": 1,
       "evidence": [],
-      "headline": "0 tracked path(s)",
+      "headline": "1 tracked path(s)",
       "id": "DV-55",
       "primitive": "tracked_glob_census",
       "purpose": "Counted probe: a machine-readable master execution sequence in version control.",
-      "rows": [],
+      "rows": [
+        [
+          "`00-MASTER/UCOS-MXR-001/roadmap.json`",
+          "TRACKED"
+        ]
+      ],
       "unknown": false
     },
     {
@@ -3201,7 +3258,7 @@
   "seal_sha256": "8432609e10e719c6c2fef582f8f352a29e027e3ffe816e9eeed636f7c51eef40",
   "substrate": [
     {
-      "content_sha256": "ad74b4bec63bf288b05306e20856860a747f80e83280eae550920b5a143f40d4",
+      "content_sha256": "6abf652155df1301bf2666e1d41296c51321989e9f4d8d45176199130bec7d4b",
       "exists": true,
       "id": "S-01",
       "kind": "registration projection",
@@ -3217,12 +3274,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The registered artifact census: identity, status, content hash, traceability.",
-      "records": 2386,
+      "records": 2388,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "6929b5223697d8f66ca076b0c895e5b4b47ae6c7c9e35a141624d4893814c235",
+      "content_sha256": "68daa90411d29a3b166b4f6c116b316c5f15e9bdccd098bfb87d8d47545936ab",
       "exists": true,
       "id": "S-02",
       "kind": "graph projection",
@@ -3238,12 +3295,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The knowledge-graph edge set.",
-      "records": 25658,
+      "records": 25638,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "1b4b563902703e1b423db59332321b217335db7daf9265e865aeec81261bed5e",
+      "content_sha256": "af73cf584a95da40cd4f43461729e48d09b0ce4c4b6e50cad32826ed70e8dd3f",
       "exists": true,
       "id": "S-03",
       "kind": "portfolio projection",
@@ -3261,12 +3318,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Portfolio rollup, per-programme status and the twelve execution dimensions.",
-      "records": 108,
+      "records": 88,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "9c58139bf04fb0ced452cf74de995808f20b8a63000c873a8a6cba70da8ae788",
+      "content_sha256": "c2d3af4fc52c76b28ae116a4eabfe72c2b29dd6ca1012a810941c33517870419",
       "exists": true,
       "id": "S-04",
       "kind": "certification projection",
@@ -3293,7 +3350,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "c80b79fc82c6f488be63c2211a6f9a8e9ffe94de3a8c6ee3e2d315cbdf0f6b32",
+      "content_sha256": "21bcd3960ca6f359562cc4fa951a3bf6b6db02157f1211e1515b3ba9acc8eac1",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",
@@ -3309,12 +3366,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Forward-only identity allocation ledger.",
-      "records": 1319,
+      "records": 1320,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "ae12d2d5656583ccb2b5a6c3a2ce2b123c1198faeec7d80dc192b2487dc0463f",
+      "content_sha256": "4d8242bbd4405602fe7eaa676f07498ef2980528fd133c2b18fe4818b360bfa3",
       "exists": true,
       "id": "S-06",
       "kind": "meta-constitutional registry",
@@ -3349,7 +3406,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "e9671a9fc34cc512c2c23720a6354ddae59773a389c0a3aecb6c45bac2351c45",
+      "content_sha256": "bed6709de81caa85ade460696e8feff950e184d3341ef594000b4cdcc4535065",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",
@@ -3371,12 +3428,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The aggregate constitutional gate: located checks, gates, programme roster, findings.",
-      "records": 63,
+      "records": 79,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "f5130388f68cf1c8de802fc05fbecb5847fea0cdacfb6e7dc7fd205276843fff",
+      "content_sha256": "1880a6442c87610da457816a3e3a90c5264ce240444ca9c26d762147c92a0b67",
       "exists": true,
       "id": "S-08",
       "kind": "aggregate gate determination",
@@ -3400,12 +3457,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The computed aggregate verdicts and the certification ceiling.",
-      "records": 130,
+      "records": 127,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "4db0cdd762042b2356b2d2dbb11f50b35177176a08722f19a157ef502e0e15e6",
+      "content_sha256": "3a0ac522c6e0c8e9524ef7c58ede162b2f32140b3bf52abb1d27e5bb191de744",
       "exists": true,
       "id": "S-09",
       "kind": "decision register declaration",
@@ -3425,12 +3482,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The constitutional decision register: lifecycle, closed disposition set, decisions.",
-      "records": 120,
+      "records": 140,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "8d61341fbaa69bc78ff70fb70160c3d0d62af8fbb61415b3fd69c4e60f172bfc",
+      "content_sha256": "6e5206a51222933722957edba24e828c2830aa4457f41da411d8c9e14473c9ac",
       "exists": true,
       "id": "S-10",
       "kind": "decision determination",
@@ -3454,7 +3511,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Computed decision lifecycle and disposition occupancy.",
-      "records": 426,
+      "records": 535,
       "required": true,
       "tracked": true
     },

@@ -53,47 +53,47 @@ What the repository contains, and the substrate that proves it.
 **`DV-01`** — Registered artifact records present in the registration projection.
 
 - **Primitive** — `record_count`
-- **Result** — 1193 records
+- **Result** — 1194 records
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records | 1193 |
+| records | 1194 |
 
 **`DV-02`** — Declared registration count against the records actually present.
 
 - **Primitive** — `declared_vs_actual`
-- **Result** — declared 1193 · present 1193 · delta 0
+- **Result** — declared 1194 · present 1194 · delta 0
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| declared | 1193 |
-| present | 1193 |
+| declared | 1194 |
+| present | 1194 |
 | delta | 0 |
 
 **`DV-03`** — Registration census against the portfolio rollup.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1193 vs 1193 · delta 0
+- **Result** — 1194 vs 1194 · delta 0
 - **Substrate evidence** — `S-01`, `S-03`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1193 |
-| `S-03` portfolio.total_artifacts | 1193 |
+| `S-01` count | 1194 |
+| `S-03` portfolio.total_artifacts | 1194 |
 | delta | 0 |
 
 **`DV-04`** — Registration census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1193 vs 1193 · delta 0
+- **Result** — 1194 vs 1194 · delta 0
 - **Substrate evidence** — `S-01`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1193 |
-| `S-04` scope.artifacts | 1193 |
+| `S-01` count | 1194 |
+| `S-04` scope.artifacts | 1194 |
 | delta | 0 |
 
 #### D-02 — Substrate census
@@ -112,16 +112,16 @@ What the repository contains, and the substrate that proves it.
 
 | Key | Value | Detail | Detail |
 |---|---|---|---|
-| `S-01` | `00-BOOK/DATA/artifacts.json` | YES | YES | YES | 2/2 | 2386 | `ad74b4bec63b` |
-| `S-02` | `00-BOOK/DATA/relationships.json` | YES | YES | YES | 2/2 | 25658 | `6929b5223697` |
-| `S-03` | `00-BOOK/DATA/control-tower.json` | YES | YES | YES | 3/3 | 108 | `1b4b56390270` |
-| `S-04` | `00-BOOK/DATA/certification.json` | YES | YES | YES | 5/5 | 45 | `9c58139bf04f` |
-| `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1319 | `c80b79fc82c6` |
-| `S-06` | `00-CMG/CMG-REGISTRY.json` | YES | YES | YES | 9/9 | 164 | `ae12d2d56565` |
-| `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | YES | YES | YES | 5/5 | 63 | `e9671a9fc34c` |
-| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 130 | `f5130388f68c` |
-| `S-09` | `00-MASTER/UCDA-000001/ucda-decisions.json` | YES | YES | YES | 4/4 | 120 | `4db0cdd76204` |
-| `S-10` | `00-MASTER/UCDA-000001/ucda.json` | YES | YES | YES | 6/6 | 426 | `8d61341fbaa6` |
+| `S-01` | `00-BOOK/DATA/artifacts.json` | YES | YES | YES | 2/2 | 2388 | `6abf652155df` |
+| `S-02` | `00-BOOK/DATA/relationships.json` | YES | YES | YES | 2/2 | 25638 | `68daa90411d2` |
+| `S-03` | `00-BOOK/DATA/control-tower.json` | YES | YES | YES | 3/3 | 88 | `af73cf584a95` |
+| `S-04` | `00-BOOK/DATA/certification.json` | YES | YES | YES | 5/5 | 45 | `c2d3af4fc52c` |
+| `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1320 | `21bcd3960ca6` |
+| `S-06` | `00-CMG/CMG-REGISTRY.json` | YES | YES | YES | 9/9 | 164 | `4d8242bbd440` |
+| `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | YES | YES | YES | 5/5 | 79 | `bed6709de81c` |
+| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 127 | `1880a6442c87` |
+| `S-09` | `00-MASTER/UCDA-000001/ucda-decisions.json` | YES | YES | YES | 4/4 | 140 | `3a0ac522c6e0` |
+| `S-10` | `00-MASTER/UCDA-000001/ucda.json` | YES | YES | YES | 6/6 | 535 | `6e5206a51222` |
 | `S-11` | `00-MASTER/UER-000001/uer.json` | YES | YES | YES | 6/6 | 113 | `0ae82cb58fdb` |
 | `S-12` | `00-MASTER/IMR-0000/imr-0000-platform-bindings.json` | YES | YES | YES | 7/7 | 65 | `2df229587d73` |
 | `S-13` | `00-MASTER/IMR-003A/cios-bindings.json` | YES | YES | YES | 7/7 | 140 | `624b8de84505` |

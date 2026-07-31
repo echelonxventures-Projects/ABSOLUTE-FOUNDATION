@@ -2,7 +2,7 @@
   "artifact_id": "UCOS-RIE-DEPENDENCY-GRAPH",
   "authority": "NONE (derived truth)",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "6166f4da1acdde6e8d4e8c234e3118b00468c2ca9d58868cb660e49592873510",
+  "content_hash": "5c545375a5f859f01d8544c54134cc8df68f4a7adb00ab637d5382d4bce30e6e",
   "depends_on_acyclic": true,
   "evidence_state": {
     "coverage_measurement": {
@@ -11,19 +11,19 @@
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "f39edd40e07882246b7b32e4baa372ee2750f769890bb046fa3bea4a6926dc60",
-      "00-BOOK/DATA/certification.json": "a4d6c6a287fdb3175fb2548852ddd04ff28c7afaa6d7e2225265a7d5ed2883db",
-      "00-BOOK/DATA/control-tower.json": "241efe29a80fbfebb22ff2b7c915855a045a174510bebbefdd7be1b9b79c3b36",
+      "00-BOOK/DATA/artifacts.json": "6abf652155df1301bf2666e1d41296c51321989e9f4d8d45176199130bec7d4b",
+      "00-BOOK/DATA/certification.json": "c2d3af4fc52c76b28ae116a4eabfe72c2b29dd6ca1012a810941c33517870419",
+      "00-BOOK/DATA/control-tower.json": "af73cf584a95da40cd4f43461729e48d09b0ce4c4b6e50cad32826ed70e8dd3f",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "9d482cc7db16401ee7f2d73b69936e2a3c95d88f8ee8ee596524b701ff28f2a0"
+      "00-BOOK/DATA/volumes.json": "a34e648cd43f13818156dacdbdc814f9da3a785daac6c6113fb9eac8e05f6598"
     }
   },
-  "evidence_timestamp": "2026-07-31T06:45:07+00:00",
+  "evidence_timestamp": "2026-07-31T09:46:00+00:00",
   "generation": {
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "9e71f565889cf734f8f1dfbe112178446cb20f05b02492834ca0c9feac7f678e",
+    "input_hash": "23e9e86cc903f288c712f7c8bd97ced668f703d3b347cf6086717c70a0cc0bf8",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },
@@ -125,5 +125,5 @@
     }
   ],
   "title": "Dependency Intelligence Graph",
-  "total_corpus_edges": 12817
+  "total_corpus_edges": 12819
 }

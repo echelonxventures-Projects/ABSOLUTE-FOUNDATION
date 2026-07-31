@@ -54,8 +54,12 @@
 **`DV-55`** — Counted probe: a machine-readable master execution sequence in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 0 tracked path(s)
+- **Result** — 1 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
+
+| Key | Value |
+|---|---|
+| `00-MASTER/UCOS-MXR-001/roadmap.json` | TRACKED |
 
 ## N-03 — Register-backed rollback capability.
 

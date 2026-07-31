@@ -54,25 +54,23 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-30`** — Blocking findings on the assimilation register.
 
 - **Primitive** — `filtered_record_count`
-- **Result** — 4 matching record(s)
+- **Result** — 2 matching record(s)
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| `UCCEP-F-001` | phase3_engine.py returns a constant NOT-CLOSED verdict independent of m… |
 | `UCCEP-F-002` | Repository health is RED: 1198 of 1198 registered artifacts have incomp… |
-| `UCCEP-F-003` | engine.graph.cli validate reports a dependency cycle but returns is_val… |
 | `UCCEP-F-004` | CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no loc… |
 
 **`DV-34`** — Findings composing the certification ceiling.
 
 - **Primitive** — `record_count`
-- **Result** — 5 records
+- **Result** — 2 records
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| records | 5 |
+| records | 2 |
 
 **`DV-24`** — Open constitutional questions.
 
@@ -99,7 +97,7 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 1092 |
+| `ACTIVE` | 1093 |
 | `COMPLETE` | 43 |
 | `FROZEN` | 27 |
 | `UNDER_REVIEW` | 15 |
@@ -114,7 +112,7 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 1092 |
+| `ACTIVE` | 1093 |
 | `COMPLETE` | 43 |
 | `UNDER_REVIEW` | 15 |
 | `FINAL` | 9 |
@@ -129,12 +127,12 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-16`** — Live dependency on superseded truth: an edge whose target is superseded and whose source is not.
 
 - **Primitive** — `edge_status_join`
-- **Result** — 0 live dependency/dependencies on a superseded target (over 12829 edge(s); 0 endpoint(s) not registered)
+- **Result** — 0 live dependency/dependencies on a superseded target (over 12819 edge(s); 0 endpoint(s) not registered)
 - **Substrate evidence** — `S-01`, `S-02`
 
 | Key | Value |
 |---|---|
-| edges examined | 12829 |
+| edges examined | 12819 |
 | endpoints not registered | 0 |
 | live dependencies on superseded targets | 0 |
 
@@ -148,27 +146,24 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-32`** — Computed gate verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 3 distinct value(s)
+- **Result** — 2 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 10 |
-| `NOT-EXECUTED` | 4 |
-| `PARTIAL` | 1 |
+| `PASS` | 16 |
+| `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 4 distinct value(s)
+- **Result** — 2 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 8 |
-| `NOT-EXECUTED` | 3 |
-| `PARTIAL` | 3 |
-| `PASS-WITH-ADVISORY` | 3 |
+| `PASS` | 15 |
+| `PASS-WITH-ADVISORY` | 4 |
 
 **`DV-23`** — Meta-constitutional gap disposition distribution.
 
