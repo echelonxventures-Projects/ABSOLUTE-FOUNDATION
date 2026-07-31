@@ -225,7 +225,7 @@
 | `UCOS-RIB-001-CAP-0195` | `intelligence.research` | IMPLEMENTATION | `intelligence/research` | 7 | 2 | 5 | 0 | 0 | 1 | no | IMPLEMENTED | **EXTEND** | `RUL-08` |
 | `UCOS-RIB-001-CAP-0196` | `intelligence.rie` | IMPLEMENTATION | `intelligence/rie` | 10 | 1 | 4 | 0 | 0 | 1 | no | IMPLEMENTED | **EXTEND** | `RUL-08` |
 | `UCOS-RIB-001-CAP-0197` | `intelligence.tests` | IMPLEMENTATION | `intelligence/tests` | 5 | 7 | 0 | 0 | 0 | 0 | no | IMPLEMENTED | **CONFIGURE** | `RUL-06A` |
-| `UCOS-RIB-001-CAP-0198` | `platform` | IMPLEMENTATION | `platform` | 14 | 6 | 0 | 0 | 36 | 16 | no | IMPLEMENTED | **EXTEND** | `RUL-09` |
+| `UCOS-RIB-001-CAP-0198` | `platform` | IMPLEMENTATION | `platform` | 14 | 6 | 0 | 0 | 37 | 16 | no | IMPLEMENTED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0199` | `platform.administration` | IMPLEMENTATION | `platform/administration` | 12 | 16 | 2 | 0 | 1 | 11 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0200` | `platform.artifact_explorer` | IMPLEMENTATION | `platform/artifact_explorer` | 10 | 16 | 2 | 0 | 1 | 11 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0201` | `platform.blueprints` | IMPLEMENTATION | `platform/blueprints` | 17 | 22 | 4 | 0 | 2 | 18 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
@@ -247,7 +247,7 @@
 | `UCOS-RIB-001-CAP-0217` | `platform.runtime_platform` | IMPLEMENTATION | `platform/runtime_platform` | 14 | 15 | 1 | 0 | 0 | 15 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0218` | `platform.security` | IMPLEMENTATION | `platform/security` | 10 | 13 | 3 | 0 | 7 | 12 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0219` | `platform.tests` | IMPLEMENTATION | `platform/tests` | 272 | 29 | 0 | 0 | 0 | 0 | no | IMPLEMENTED | **REUSE** | `RUL-10` |
-| `UCOS-RIB-001-CAP-0220` | `platform.universal_pipeline` | IMPLEMENTATION | `platform/universal_pipeline` | 20 | 20 | 2 | 1 | 0 | 7 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
+| `UCOS-RIB-001-CAP-0220` | `platform.universal_pipeline` | IMPLEMENTATION | `platform/universal_pipeline` | 20 | 20 | 2 | 1 | 1 | 7 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0221` | `platform.universal_portal` | IMPLEMENTATION | `platform/universal_portal` | 7 | 16 | 1 | 0 | 1 | 10 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0222` | `platform.universal_provider` | IMPLEMENTATION | `platform/universal_provider` | 13 | 12 | 2 | 0 | 0 | 1 | no | IMPLEMENTED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0223` | `platform.universal_validation` | IMPLEMENTATION | `platform/universal_validation` | 8 | 10 | 3 | 1 | 0 | 9 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |

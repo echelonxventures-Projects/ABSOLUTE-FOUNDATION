@@ -41,13 +41,13 @@
 
 | Substrate | Path | Kind | Tracked | Parses | Pointers | Records | Content |
 |---|---|---|---|---|---|---|---|
-| `SUB-CERT` | `00-BOOK/DATA/certification.json` | json | YES | YES | 4/4 | 10 | `a4d6c6a287fd` |
+| `SUB-CERT` | `00-BOOK/DATA/certification.json` | json | YES | YES | 4/4 | 10 | `c2d3af4fc52c` |
 | `SUB-CLOSURE` | `00-MASTER/UAKOS-CLOSURE-002/closure.json` | json | **NO** | YES | 4/4 | 454 | `not recorded` |
-| `SUB-CONTROL` | `00-BOOK/DATA/control-tower.json` | json | YES | YES | 3/3 | 88 | `241efe29a80f` |
-| `SUB-EDGES` | `00-BOOK/DATA/relationships.json` | json | YES | YES | 2/2 | 12817 | `fef32b1d5e47` |
+| `SUB-CONTROL` | `00-BOOK/DATA/control-tower.json` | json | YES | YES | 3/3 | 88 | `af73cf584a95` |
+| `SUB-EDGES` | `00-BOOK/DATA/relationships.json` | json | YES | YES | 2/2 | 12819 | `68daa90411d2` |
 | `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `not recorded` |
 | `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 57 | `ebb3da052a93` |
-| `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1193 | `f39edd40e078` |
+| `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1194 | `6abf652155df` |
 | `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 95 | `1c91393896fa` |
 | `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 70 | `a5c6b28a43aa` |
 | `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `59c020c8f049` |
@@ -74,7 +74,7 @@
 | `MSR-EVIDENCE` | `tracked_glob_count` | `evidence_assets` | 8 | 980 | the realization-evidence surface located for the unit's root |
 | `MSR-COVERAGE` | `substrate_list_member` | `in_coverage_scope` | 38 | 38 | whether the unit lies inside the declared coverage scope |
 | `MSR-INTERFACE` | `substrate_map_prefix` | `interfaces` | 15 | 17 | the declared console interfaces the unit publishes |
-| `MSR-REGISTERED` | `substrate_record_prefix` | `registered_artifacts` | 107 | 700 | the registered corpus artifacts homed inside the unit |
+| `MSR-REGISTERED` | `substrate_record_prefix` | `registered_artifacts` | 108 | 702 | the registered corpus artifacts homed inside the unit |
 | `MSR-ENTRYPOINT` | `text_reference_count` | `entrypoint_references` | 53 | 1101 | how many declared entry points name a path inside the unit — the reachability a non-imported tool has |
 | `MSR-TESTPATH` | `substrate_list_member` | `in_test_scope` | 2 | 2 | whether the unit lies inside the declared test-collection scope |
 
@@ -93,7 +93,7 @@
 | Merge conflicts | 0 |
 | Interrupted operations | none |
 | Broken symlinks | 0 |
-| Version-controlled files | 5167 |
+| Version-controlled files | 5168 |
 
 ---
 

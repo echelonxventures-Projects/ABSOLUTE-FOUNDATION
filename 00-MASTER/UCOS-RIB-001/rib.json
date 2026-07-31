@@ -1677,8 +1677,8 @@
       "id": "MSR-REGISTERED",
       "kind": "substrate_record_prefix",
       "purpose": "the registered corpus artifacts homed inside the unit",
-      "total": 700,
-      "units_with_value": 107
+      "total": 702,
+      "units_with_value": 108
     },
     {
       "field": "entrypoint_references",
@@ -2976,27 +2976,27 @@
   ],
   "probes": [
     {
-      "headline": "0 of 1193 records carry the field",
+      "headline": "0 of 1194 records carry the field",
       "id": "PRB-BENEFIT",
       "kind": "substrate_field_absence",
       "present": 0,
-      "probed": 1193,
+      "probed": 1194,
       "purpose": "count the registered artifacts that record a measured benefit"
     },
     {
-      "headline": "0 of 1193 records carry the field",
+      "headline": "0 of 1194 records carry the field",
       "id": "PRB-PHASE",
       "kind": "substrate_field_absence",
       "present": 0,
-      "probed": 1193,
+      "probed": 1194,
       "purpose": "count the registered artifacts that record a ratified phase"
     },
     {
-      "headline": "5 of 12817 records carry the value 'Evolves-From'",
+      "headline": "5 of 12819 records carry the value 'Evolves-From'",
       "id": "PRB-SUPERSEDE",
       "kind": "substrate_field_value_count",
       "present": 5,
-      "probed": 12817,
+      "probed": 12819,
       "purpose": "count the evolution edges that exist, and at which granularity they exist"
     }
   ],
@@ -3567,7 +3567,7 @@
     "dirty_entries": 0,
     "interrupted_operations": [],
     "modified": 0,
-    "tracked_files": 5167,
+    "tracked_files": 5168,
     "untracked": 0,
     "working_tree": "CLEAN"
   },
@@ -3600,7 +3600,7 @@
   ],
   "substrate": [
     {
-      "content_sha256": "a4d6c6a287fdb3175fb2548852ddd04ff28c7afaa6d7e2225265a7d5ed2883db",
+      "content_sha256": "c2d3af4fc52c76b28ae116a4eabfe72c2b29dd6ca1012a810941c33517870419",
       "exists": true,
       "generated": false,
       "id": "SUB-CERT",
@@ -3652,7 +3652,7 @@
       "tracked": false
     },
     {
-      "content_sha256": "241efe29a80fbfebb22ff2b7c915855a045a174510bebbefdd7be1b9b79c3b36",
+      "content_sha256": "af73cf584a95da40cd4f43461729e48d09b0ce4c4b6e50cad32826ed70e8dd3f",
       "exists": true,
       "generated": false,
       "id": "SUB-CONTROL",
@@ -3676,7 +3676,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "fef32b1d5e4776656f96b1e4f19cb023e7e605a97f52959b0ccae9038a30dc7f",
+      "content_sha256": "68daa90411d29a3b166b4f6c116b316c5f15e9bdccd098bfb87d8d47545936ab",
       "exists": true,
       "generated": false,
       "id": "SUB-EDGES",
@@ -3693,7 +3693,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the canonical typed graph over registered artifacts",
-      "records": 12817,
+      "records": 12819,
       "required": true,
       "tracked": true
     },
@@ -3748,7 +3748,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "f39edd40e07882246b7b32e4baa372ee2750f769890bb046fa3bea4a6926dc60",
+      "content_sha256": "6abf652155df1301bf2666e1d41296c51321989e9f4d8d45176199130bec7d4b",
       "exists": true,
       "generated": false,
       "id": "SUB-REGISTER",
@@ -3765,7 +3765,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the registration register — every version-controlled corpus artifact with owner, program, category, status, dependencies and traceability",
-      "records": 1193,
+      "records": 1194,
       "required": true,
       "tracked": true
     },
@@ -11149,7 +11149,7 @@
       "canonical_name": "PLATFORM",
       "consumer_units": [],
       "consumers": 0,
-      "corpus_artifacts": 56,
+      "corpus_artifacts": 57,
       "corpus_status": "ACTIVE",
       "declared": "PLATFORM",
       "degree": 0,
@@ -14991,7 +14991,7 @@
         "rie_id",
         "entrypoint_references"
       ],
-      "registered_artifacts": 36,
+      "registered_artifacts": 37,
       "rie_authority": "EC-2 CLOSED/FROZEN",
       "rie_category": "platform",
       "rie_evidence": true,
@@ -16839,10 +16839,11 @@
       "reachable_by": [
         "consumers",
         "interfaces",
+        "registered_artifacts",
         "rie_id",
         "entrypoint_references"
       ],
-      "registered_artifacts": 0,
+      "registered_artifacts": 1,
       "rie_authority": "EC-2 CLOSED/FROZEN",
       "rie_category": "platform",
       "rie_evidence": true,
