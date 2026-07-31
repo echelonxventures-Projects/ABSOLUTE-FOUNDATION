@@ -1,0 +1,392 @@
+{
+  "$comment": [
+    "UCOS-UCAF-001 — UNIVERSAL CONSTITUTIONAL AUTHORITY FRAMEWORK (declaration). This file is",
+    "DATA and is the ONLY place this programme's capability set, authority SOURCES, tier source,",
+    "delegation sources, succession sources, scope rules, resolution questions, reconciliations,",
+    "reference surfaces, validation dimensions and exit criteria are stated. ucaf_engine.py",
+    "contains no authority identifier, no tier identifier, no vacancy identifier, no resolution",
+    "answer and no source token: everything it registers, resolves, validates and certifies is",
+    "read from here and from the LOCATED instruments named here.",
+    "",
+    "KNOWLEDGE ONCE — WHY NO AUTHORITY IS DEFINED IN THIS FILE. The repository already defines",
+    "its authorities. 01-WORKING/AUTHORITY-REGISTER.md defines the authority and governance",
+    "constructs extracted from 00-SOURCE/ with traceability; each 00-CEP instrument defines its",
+    "own instrument authority in its ARTICLE I; 00-CMG/CMG-REGISTRY.json declares the tier",
+    "lattice, the tier occupancies and the recorded vacancies. This programme RESTATES none of",
+    "them. It declares WHERE they live and HOW to read them, and DISCOVERS the authorities at",
+    "run time. An authority added to a located register is therefore discovered here",
+    "automatically; an authority referenced anywhere but defined nowhere is surfaced as an",
+    "UNDEFINED AUTHORITY rather than silently accepted.",
+    "",
+    "WHAT THIS PROGRAMME ADDS, AND WHY IT IS NOT A PARALLEL AUTHORITY. It creates no authority,",
+    "confers no authority, ratifies nothing, certifies no artifact and occupies no tier. Its",
+    "authority is NONE (DERIVED TRUTH). What no located programme owned is the AUTHORITY MODEL",
+    "ITSELF as machine-readable, resolvable, validated structure: before this programme every",
+    "authority in the repository existed only as prose, so no gate could resolve a competence",
+    "question, no gate could detect an authority referenced but never defined, and no gate could",
+    "detect that a recorded vacancy had been contradicted by later located evidence. This",
+    "programme is that model and only that model.",
+    "",
+    "WHAT THIS PROGRAMME DELIBERATELY DOES NOT DO. It does not close a vacancy. It does not",
+    "promote a lower instrument into a vacant tier (00-CMG/CMG-000001 XVII.4 forbids it, and",
+    "LXXXI.5 voids any reading that does). It does not decide a conflict between two located",
+    "instruments: where a recorded claim of authority absence and later located evidence of",
+    "authority presence both stand, this programme MEASURES both, cites both, and reports a",
+    "RECONCILIATION-REQUIRED outcome for the claim owner to dispose of under CEP-002 Article 23.",
+    "It never converts a measured reconciliation into a ratification."
+  ],
+
+  "programme": {
+    "id": "UCOS-UCAF-001",
+    "name": "Universal Constitutional Authority Framework",
+    "version": "1.0",
+    "authority": "NONE — DERIVED TRUTH. This programme creates no authority, confers no authority, occupies no tier and ratifies nothing. It reads the located instruments that define the repository's authorities and reports what they say.",
+    "operational_home": "00-MASTER/UCOS-UCAF-001/",
+    "disclosure": "**DISCLOSURE.** CERTIFIED-PROVISIONAL. This programme holds no ratification authority and no constitutional authority: it registers, resolves, validates and audits the authorities the repository has already located. Where this register and a located instrument differ, the located instrument governs.",
+    "governing_instruments": [
+      "00-CEP/CEP-000-CONSTITUTIONAL-ENGINEERING-CHARTER.md",
+      "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+      "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md",
+      "00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md",
+      "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md"
+    ],
+    "forbidden_write_prefixes": [
+      "00-SOURCE/",
+      "99-FREEZE/",
+      "00-BOOK/DATA/",
+      "00-CEP/",
+      "00-CMG/",
+      "01-WORKING/",
+      "02-MASTER/"
+    ]
+  },
+
+  "$capability_comment": [
+    "The eleven capabilities the authority model must exhibit. Each names the measure that",
+    "discharges it. A capability whose measure does not run is reported UNDISCHARGED and fails",
+    "closed: absence of a measurement is never evidence of a capability."
+  ],
+  "capabilities": [
+    { "id": "UCAF-CAP-01", "capability": "Authority Registry", "obligation": "every authority the repository defines is registered as an addressable record derived from its located definition", "measure": "authorities_registered" },
+    { "id": "UCAF-CAP-02", "capability": "Authority Delegation", "obligation": "every located delegation of a concern to an owner is registered, and its owner resolves", "measure": "delegations_registered" },
+    { "id": "UCAF-CAP-03", "capability": "Authority Resolution", "obligation": "every declared competence question resolves to an answer read out of a located instrument, or is reported UNRESOLVED", "measure": "resolutions_answered" },
+    { "id": "UCAF-CAP-04", "capability": "Authority Validation", "obligation": "every declared validation dimension is measured, and a declared dimension with no measurement fails closed", "measure": "validations_measured" },
+    { "id": "UCAF-CAP-05", "capability": "Authority Succession", "obligation": "every located supersession determination over an authoritative source is registered and its source tokens resolve", "measure": "successions_registered" },
+    { "id": "UCAF-CAP-06", "capability": "Authority Scope", "obligation": "every declared scope rule binds to a located clause, and the clause text is verified present", "measure": "scope_rules_bound" },
+    { "id": "UCAF-CAP-07", "capability": "Authority Verification", "obligation": "every registered record is verified against the located file it was derived from, by path existence and content digest", "measure": "records_verified" },
+    { "id": "UCAF-CAP-08", "capability": "Authority Evidence", "obligation": "every registered authority carries at least one evidence pointer that resolves in the repository", "measure": "authorities_with_evidence" },
+    { "id": "UCAF-CAP-09", "capability": "Authority Audit", "obligation": "the registry emits an append-only, content-addressed audit ledger sufficient to reconstruct the registration deterministically", "measure": "audit_entries" },
+    { "id": "UCAF-CAP-10", "capability": "Authority Revocation", "obligation": "the revocation channel exists, is append-only, and every entry names a resolving authority and an existing record — per CEP-002 13.5 a revocation takes effect upon record", "measure": "revocations_registered" },
+    { "id": "UCAF-CAP-11", "capability": "Authority Certification", "obligation": "no authority remains undefined: every authority-shaped reference in the declared surfaces resolves to a registered authority", "measure": "undefined_references" }
+  ],
+
+  "$source_comment": [
+    "Authority sources. Each entry says WHERE authorities are defined and HOW to read them.",
+    "format markdown-table  — a pipe table in a markdown file, optionally under a heading.",
+    "format article-authority — an ARTICLE I heading of the form '## ARTICLE I — <NAME> AUTHORITY'",
+    "                           across a glob of instruments; the instrument IS the definition.",
+    "The engine holds no member of any of these families as a literal."
+  ],
+  "authority_sources": [
+    {
+      "id": "UCAF-SRC-01",
+      "name": "Located authority constructs",
+      "owner": "01-WORKING/AUTHORITY-REGISTER.md",
+      "format": "markdown-table",
+      "section": "## PART A — AUTHORITY CONSTRUCTS",
+      "id_pattern": "AUTH-[0-9]{2}",
+      "kind": "AUTHORITY-CONSTRUCT",
+      "columns": { "name": 1, "definition": 2, "sources": 3, "authoritative": 4 },
+      "basis": "01-WORKING/AUTHORITY-REGISTER.md PART A — every construct extracted from 00-SOURCE/ with traceability; 'No construct invented.'"
+    },
+    {
+      "id": "UCAF-SRC-02",
+      "name": "Located governance constructs",
+      "owner": "01-WORKING/AUTHORITY-REGISTER.md",
+      "format": "markdown-table",
+      "section": "## PART B — GOVERNANCE CONSTRUCTS",
+      "id_pattern": "GOV-[0-9]{2}",
+      "kind": "GOVERNANCE-CONSTRUCT",
+      "columns": { "name": 1, "definition": 2, "sources": 3, "authoritative": 4 },
+      "basis": "01-WORKING/AUTHORITY-REGISTER.md PART B — governance constructs including the ratification decision + audit procedure and the self-amendment procedure."
+    },
+    {
+      "id": "UCAF-SRC-03",
+      "name": "Instrument authorities declared by the constitutional programme",
+      "owner_glob": "00-CEP/CEP-0*.md",
+      "format": "article-authority",
+      "heading_pattern": "^## ARTICLE I \u2014 (?P<name>[A-Z][A-Z ]*[A-Z]) AUTHORITY$",
+      "kind": "INSTRUMENT-AUTHORITY",
+      "basis": "Each 00-CEP instrument defines its own authority in its ARTICLE I. The instrument is both the definition and the evidence."
+    }
+  ],
+
+  "$source_token_comment": [
+    "Source-token registers. A located authority names its sources by token. A token that",
+    "resolves in one of these registers, or to an existing repository path, is EVIDENCE; a token",
+    "that resolves nowhere is an unresolved evidence pointer and a validation failure."
+  ],
+  "source_token_registers": [
+    {
+      "id": "UCAF-TOK-01",
+      "name": "Source document register",
+      "owner": "01-WORKING/CONSOLIDATION-MATRIX.md",
+      "format": "markdown-table",
+      "section": "## 1. SOURCE DOCUMENT REGISTER",
+      "id_pattern": "SRC-[0-9]{2}"
+    },
+    {
+      "id": "UCAF-TOK-02",
+      "name": "Ratification determination identifiers",
+      "owner": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md",
+      "format": "document-token",
+      "id_pattern": "(?:AMD|RAT|CAC|GAP|EC)-[0-9]{2}"
+    }
+  ],
+
+  "$tier_comment": [
+    "The tier lattice is NOT declared here. It is read from the located meta-constitutional",
+    "projection, which is its canonical machine-readable home. Occupancy and vacancy are read",
+    "from the same place, so a vacancy closed by its owner is observed here automatically."
+  ],
+  "tier_source": {
+    "id": "UCAF-TIER-01",
+    "owner": "00-CMG/CMG-REGISTRY.json",
+    "collection_pointer": "tiers",
+    "id_field": "id",
+    "name_field": "name",
+    "subordinate_field": "subordinate_to",
+    "occupancy_field": "occupancy",
+    "vacancy_field": "vacancy",
+    "vacancy_collection_pointer": "vacancies",
+    "vacancy_id_field": "id",
+    "vacancy_tier_field": "tier",
+    "vacancy_located_field": "located",
+    "vacancy_required_fields": ["declared_superior", "evidence", "closure_procedure", "open_question", "provisional_consequence"],
+    "basis": "00-CMG/CMG-000001 ARTICLE XVI (authority hierarchy) and ARTICLE XVII.4 (resolution reaching a vacant tier), projected as data in 00-CMG/CMG-REGISTRY.json."
+  },
+
+  "$delegation_comment": [
+    "Delegation. CEP-002 Article 13 legislates the delegation model and Article 14 the canonical",
+    "ownership of a concern. The located meta-constitutional projection already records the",
+    "concern-to-owner allocations; this programme registers them and checks that each named",
+    "owner resolves to a located instrument or path."
+  ],
+  "delegation_sources": [
+    {
+      "id": "UCAF-DLG-01",
+      "name": "Located concern delegations",
+      "owner": "00-CMG/CMG-REGISTRY.json",
+      "collection_pointer": "concerns",
+      "id_field": "id",
+      "concern_field": "concern",
+      "owner_field": "owner",
+      "owner_paths_field": "owner_paths",
+      "disposition_field": "disposition",
+      "basis_field": "basis"
+    }
+  ],
+
+  "$succession_comment": [
+    "Succession. Authority succession in this repository is recorded as supersession of the",
+    "authoritative source for a concept. The located supersession register is that record."
+  ],
+  "succession_sources": [
+    {
+      "id": "UCAF-SUC-01",
+      "name": "Located supersession determinations",
+      "owner": "01-WORKING/SUPERSESSION-REGISTER.md",
+      "format": "markdown-table",
+      "section": null,
+      "id_pattern": "SUP-[0-9]{2}",
+      "columns": { "concept": 1, "authoritative_source": 2, "basis": 3, "superseded": 4, "status": 5 }
+    }
+  ],
+
+  "$revocation_comment": [
+    "Revocation. CEP-002 13.5: revocation of a delegation SHALL be recorded and SHALL take",
+    "effect upon record. The channel is append-only and is EMPTY: no revocation has been",
+    "recorded in this repository. An empty channel is not an absent channel — every entry",
+    "appended here is validated against the registry, so a future revocation cannot be recorded",
+    "against an authority that does not exist."
+  ],
+  "revocations": [],
+
+  "$scope_comment": [
+    "Scope. Rather than restating each authority's limits, this programme binds the located",
+    "clauses that bound ALL authority and verifies the clause text is present in the located",
+    "instrument. A rule whose anchor is absent is a binding failure, not a silent pass."
+  ],
+  "scope_rules": [
+    { "id": "UCAF-SCOPE-01", "rule": "authority must be explicit, traceable, auditable, governed, revocable and bounded; no action without authority; no authority beyond jurisdiction", "owner": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "Authority must be explicit, traceable, auditable, governed, revocable, bounded" },
+    { "id": "UCAF-SCOPE-02", "rule": "sovereignty cannot be assumed, fabricated or bypassed; delegation does not transfer sovereignty", "owner": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "Sovereignty cannot be assumed, fabricated, or bypassed" },
+    { "id": "UCAF-SCOPE-03", "rule": "governance shall never self-elevate and shall never create a governance power not established by its instrument", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "SHALL NEVER self-elevate" },
+    { "id": "UCAF-SCOPE-04", "rule": "governance shall not assert, simulate or substitute for constitutional authority", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "Governance SHALL NOT assert, simulate, or substitute for Constitutional Authority" },
+    { "id": "UCAF-SCOPE-05", "rule": "delegation flows only downward, is bounded, recorded and revocable, and never exceeds the delegator's own power", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "Revocation of a delegation SHALL be recorded and SHALL take effect upon record" },
+    { "id": "UCAF-SCOPE-06", "rule": "ratification authority shall never be self-conferred by execution authority and acts only upon an authorization", "owner": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md", "anchor": "SHALL NEVER be self-conferred by Execution Authority" },
+    { "id": "UCAF-SCOPE-07", "rule": "where finality requires an authority outside the corpus, that authority is superior for finality and in-corpus ratification confers only PROVISIONAL acceptance", "owner": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md", "anchor": "Ratification Authority within the corpus SHALL confer only PROVISIONAL acceptance" },
+    { "id": "UCAF-SCOPE-08", "rule": "resolution reaching a vacant tier shall not skip the tier and shall not promote a lower instrument into it", "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "anchor": "SHALL NOT skip the tier and SHALL NOT promote a lower instrument into it" },
+    { "id": "UCAF-SCOPE-09", "rule": "a steward shall not confer authority, decide constitutional content, or exceed delegated bounds", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "SHALL NOT confer authority" },
+    { "id": "UCAF-SCOPE-10", "rule": "freeze authority shall never be self-conferred by execution authority and preserves only", "owner": "00-CEP/CEP-007-CONSTITUTIONAL-FREEZE-CONSTITUTION.md", "anchor": "Freeze Authority SHALL NEVER be self-conferred by Execution Authority" }
+  ],
+
+  "$resolution_comment": [
+    "Resolution. A competence question is answered by READING a located instrument, never by",
+    "this programme deciding. Each question names the instrument and the clause text that",
+    "carries the answer. The engine verifies the anchor is present and extracts the answering",
+    "identifier from the anchor's line using the discovered identifier families. If the anchor",
+    "is absent the question is reported UNRESOLVED — it is never answered by default.",
+    "in_corpus false means the located instrument itself places the answer outside the corpus;",
+    "the resolution then records an out-of-corpus superior rather than an in-corpus identifier."
+  ],
+  "resolutions": [
+    { "id": "UCAF-R-01", "question": "Which authority is the root of the authority derivation chain?", "owner": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "Constituent Authority (sovereign seat)", "in_corpus": true },
+    { "id": "UCAF-R-02", "question": "Which authority is competent to perform ratification?", "owner": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "Standing constituted organ empowered to perform ratification", "in_corpus": true },
+    { "id": "UCAF-R-03", "question": "By what procedure is a ratification valid and audited?", "owner": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "Ratification decision + audit procedure", "in_corpus": true },
+    { "id": "UCAF-R-04", "question": "By what procedure may the constitutional order be amended?", "owner": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "Self-amendment procedure + evolution gate", "in_corpus": true },
+    { "id": "UCAF-R-05", "question": "Which authority is superior for constitutional finality?", "owner": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md", "anchor": "out-of-corpus authority SHALL be recognized as superior for finality", "in_corpus": false },
+    { "id": "UCAF-R-06", "question": "Which authority may confer PROVISIONAL acceptance, and what is the ceiling of an in-corpus determination?", "owner": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md", "anchor": "Ratification Authority within the corpus SHALL confer only PROVISIONAL acceptance", "in_corpus": true },
+    { "id": "UCAF-R-07", "question": "Which ratification states admit an artifact to the freeze lifecycle?", "owner": "00-CEP/CEP-007-CONSTITUTIONAL-FREEZE-CONSTITUTION.md", "anchor": "RATIFIED under CEP-006 (ACCEPTED, PROVISIONAL, or FINALIZED)", "in_corpus": true },
+    { "id": "UCAF-R-08", "question": "Which authority allocates canonical ownership of a concern?", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "registered in the Governance Registry", "in_corpus": true },
+    { "id": "UCAF-R-09", "question": "Which authority may revoke a delegation, and when does the revocation take effect?", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "Revocation of a delegation SHALL be recorded and SHALL take effect upon record", "in_corpus": true },
+    { "id": "UCAF-R-10", "question": "Which authority resolves a contested authority over the same artifact?", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "the earliest ratified definition prevailing", "in_corpus": true },
+    { "id": "UCAF-R-11", "question": "Was the exogenous constituent act performed, and are its constituent capabilities discharged?", "owner": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md", "anchor": "ALL PRESENT and EXERCISED", "in_corpus": false },
+    { "id": "UCAF-R-12", "question": "Is the located authority derivation chain rooted?", "owner": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "all authority-chain gaps are closed", "in_corpus": true }
+  ],
+
+  "$reconciliation_comment": [
+    "Reconciliation. Two located instruments may both stand and disagree. This programme neither",
+    "silences the earlier nor asserts the later: it verifies that the claim still stands in its",
+    "owner, verifies whether the candidate evidence exists in ITS owner, and reports an outcome.",
+    "RECONCILIATION-REQUIRED means both are located and the claim owner must dispose of the",
+    "conflict under CEP-002 Article 23. This programme performs no disposal.",
+    "A reconciliation is NEVER a ratification and NEVER closes a vacancy."
+  ],
+  "reconciliations": [
+    {
+      "id": "UCAF-RC-01",
+      "claim": "no located authority is competent to ratify",
+      "claim_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
+      "claim_anchor": "no located authority is competent to ratify",
+      "candidate_evidence": [
+        { "path": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "Standing constituted organ empowered to perform ratification" },
+        { "path": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md", "anchor": "ALL PRESENT and EXERCISED" },
+        { "path": "09-DR-RAT-11-ASSESSMENT.md", "anchor": "chartered" }
+      ],
+      "basis": "CEP-002 Art 23.2 — a conflict between governance instruments resolves by precedence, and among equal rank the earliest ratified definition prevails. The disposal belongs to the claim owner, not to this programme.",
+      "referred_to": "00-MASTER/UCCEP-000000/uccep-bindings.json"
+    },
+    {
+      "id": "UCAF-RC-02",
+      "claim": "no ratified normative artifact occupies the vacant constitutional tier",
+      "claim_owner": "00-CMG/CMG-REGISTRY.json",
+      "claim_anchor": "No ratified normative artifact occupies the tier",
+      "candidate_evidence": [
+        { "path": "01-WORKING/SUPERSESSION-REGISTER.md", "anchor": "SRC-02 is the supreme governing document" },
+        { "path": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "ratified as the supreme governing document" },
+        { "path": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md", "anchor": "Fixes SRC-02 supremacy" }
+      ],
+      "basis": "00-CMG/CMG-000001 XVII.4 forbids promoting a lower instrument into a vacant tier and requires the vacancy be recorded and referred to explicit ratification as an open question. This programme records the located contradicting evidence and refers it; it neither promotes nor closes.",
+      "referred_to": "00-CMG/CMG-REGISTRY.json"
+    },
+    {
+      "id": "UCAF-RC-03",
+      "claim": "the corpus contains no authority competent to ratify anything",
+      "claim_owner": "00-CMG/README.md",
+      "claim_anchor": "no authority competent to ratify",
+      "candidate_evidence": [
+        { "path": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "chartered by and deriving authority from" },
+        { "path": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "founding ratification is recorded and fully evidenced" }
+      ],
+      "basis": "00-CMG/CMG-000014 CMG-OQ-01 asks which authority is competent to ratify the meta-constitution. The competence question and the ratifying ACT are distinct: located evidence of a chartered organ answers competence and does not by itself ratify any artifact.",
+      "referred_to": "00-CMG/CMG-000014-CONSTITUTIONAL-OPEN-QUESTIONS-FOR-RATIFICATION.md"
+    }
+  ],
+
+  "$surface_comment": [
+    "Reference surfaces. Every authority-shaped token appearing in these paths must resolve to a",
+    "registered authority. This is the machine form of 'no authority shall remain undefined'.",
+    "Surfaces are DECLARED so the certification is auditable and extensible without engine change."
+  ],
+  "reference_surfaces": [
+    "00-CEP",
+    "00-CMG",
+    "01-WORKING",
+    "02-MASTER",
+    "09-DR-RAT-11-ASSESSMENT.md",
+    "00-MASTER/UCCEP-000000",
+    "00-MASTER/UCOS-CRAT-001",
+    "00-MASTER/IMR-001"
+  ],
+  "reference_surface_extensions": [".md", ".json"],
+
+  "$validation_comment": [
+    "Validation dimensions. Every dimension is measured; a dimension declared here and not",
+    "measured by the engine is reported measured=false, satisfied=false and fails closed.",
+    "blocking true closes the gate."
+  ],
+  "validations": [
+    { "id": "UCAF-VAL-01", "dimension": "SOURCE-RESOLUTION", "obligation": "every declared authority source resolves to an existing owner and yields at least one authority", "blocking": true },
+    { "id": "UCAF-VAL-02", "dimension": "DEFINITION-PRESENT", "obligation": "every registered authority carries a non-empty located definition", "blocking": true },
+    { "id": "UCAF-VAL-03", "dimension": "EVIDENCE-RESOLUTION", "obligation": "every registered authority carries at least one evidence pointer that resolves in the repository", "blocking": true },
+    { "id": "UCAF-VAL-04", "dimension": "NO-SELF-CONFERRAL", "obligation": "no registered authority names only itself as its source", "blocking": true },
+    { "id": "UCAF-VAL-05", "dimension": "TIER-LATTICE-ACYCLIC", "obligation": "the located tier lattice is acyclic and every subordinate reference resolves", "blocking": true },
+    { "id": "UCAF-VAL-06", "dimension": "VACANCY-COMPLETE", "obligation": "every located vacancy record carries its tier, its evidence, its closure procedure, its open question and its provisional consequence", "blocking": true },
+    { "id": "UCAF-VAL-07", "dimension": "NO-UNDEFINED-AUTHORITY", "obligation": "every authority-shaped reference in the declared surfaces resolves to a registered authority", "blocking": true },
+    { "id": "UCAF-VAL-08", "dimension": "RESOLUTION-ANSWERED", "obligation": "every declared competence question resolves to an answer located in its named instrument", "blocking": true },
+    { "id": "UCAF-VAL-09", "dimension": "SCOPE-BOUND", "obligation": "every declared scope rule binds to a located clause whose text is present", "blocking": true },
+    { "id": "UCAF-VAL-10", "dimension": "DELEGATION-OWNED", "obligation": "every registered delegation names an owner that resolves to a located instrument or path", "blocking": true },
+    { "id": "UCAF-VAL-11", "dimension": "SUCCESSION-SOURCED", "obligation": "every registered succession names an authoritative source token that resolves", "blocking": true },
+    { "id": "UCAF-VAL-12", "dimension": "REVOCATION-VALID", "obligation": "every recorded revocation names a registered authority and an existing record path", "blocking": true },
+    { "id": "UCAF-VAL-13", "dimension": "RECONCILIATION-MEASURED", "obligation": "every declared reconciliation is measured on both sides and carries a decided outcome", "blocking": true },
+    { "id": "UCAF-VAL-14", "dimension": "CAPABILITY-DISCHARGED", "obligation": "every declared capability is discharged by a measure that ran", "blocking": true },
+    { "id": "UCAF-VAL-15", "dimension": "NO-VACANCY-PROMOTION", "obligation": "no vacant tier is reported as occupied by this programme, and no reconciliation is reported as a ratification", "blocking": true }
+  ],
+
+  "$exit_comment": [
+    "Exit criteria for the authority-definition ceiling this programme exists to lift."
+  ],
+  "exit_criteria": [
+    { "id": "UCAF-EX-01", "criterion": "the authority model exists as machine-readable, addressable, verified structure derived from located instruments" },
+    { "id": "UCAF-EX-02", "criterion": "no authority-shaped reference in the declared surfaces is undefined" },
+    { "id": "UCAF-EX-03", "criterion": "every competence question a gate needs to ask resolves to a located clause" },
+    { "id": "UCAF-EX-04", "criterion": "every recorded vacancy is registered, complete, and reported without promotion" },
+    { "id": "UCAF-EX-05", "criterion": "every conflict between a recorded claim of authority absence and located evidence of authority presence is measured, cited and referred to the claim owner" }
+  ],
+
+  "$findings_comment": [
+    "Findings this programme discloses rather than resolves."
+  ],
+  "findings": [
+    {
+      "id": "UCAF-F-001",
+      "title": "The authority model was prose-only, so no gate could resolve a competence question",
+      "class": "MEASURED-GOVERNANCE-GAP",
+      "owner": "00-MASTER/UCOS-UCAF-001/ucaf-authority.json",
+      "evidence": ["01-WORKING/AUTHORITY-REGISTER.md", "00-CMG/CMG-REGISTRY.json"],
+      "disposition": "IMPLEMENTED",
+      "blocking": false,
+      "note": "Before this programme every authority in the repository existed only as a prose table or an article of an instrument. The tier lattice alone was machine-readable. Consequently no gate could resolve which authority was competent for an act, no gate could detect an authority referenced but never defined, and no gate could detect that a recorded claim of authority absence had been contradicted by later located evidence. Closed by deriving the registry from the located instruments rather than by authoring a second authority model."
+    },
+    {
+      "id": "UCAF-F-002",
+      "title": "A recorded vacancy and later located evidence of authority both stand; the conflict is referred, not decided",
+      "class": "STANDING-CONSTITUTIONAL-CONFLICT",
+      "owner": "00-CMG/CMG-REGISTRY.json",
+      "evidence": ["00-CMG/CMG-REGISTRY.json", "01-WORKING/AUTHORITY-REGISTER.md", "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md", "09-DR-RAT-11-ASSESSMENT.md"],
+      "disposition": "REGISTERED",
+      "blocking": false,
+      "note": "The meta-constitutional projection records a vacant constitutional tier on the evidence that no ratified normative artifact occupies it. Located instruments elsewhere record an exogenous constituent act that identified the sovereign seat, chartered a standing ratification organ, and fixed document supremacy. Both are Repository Truth. Deciding between them is reserved to the claim owner under CEP-002 Article 23; this programme measures both sides, cites both, and refers. It does not promote any instrument into the vacant tier, which CMG-000001 XVII.4 forbids and LXXXI.5 voids."
+    },
+    {
+      "id": "UCAF-F-003",
+      "title": "Competence to ratify and the ratifying act are distinct, and only the first is closable by measurement",
+      "class": "DECLARED-SCOPE-BOUNDARY",
+      "owner": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md",
+      "evidence": ["00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md", "01-WORKING/AUTHORITY-REGISTER.md"],
+      "disposition": "GOVERNED",
+      "blocking": false,
+      "note": "This programme can prove from located evidence which authority is competent for an act. It cannot perform the act: CEP-006 I.5 provides that ratification authority is never self-conferred by execution authority and acts only upon an authorization, and CEP-006 I.4 caps any in-corpus determination at PROVISIONAL. Recording a ratification is therefore owned by the ratification registry, and conferring one is owned by the located authority — never by this engine."
+    }
+  ]
+}

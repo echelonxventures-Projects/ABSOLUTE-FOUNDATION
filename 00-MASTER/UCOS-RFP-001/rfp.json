@@ -192,7 +192,7 @@
       "signature": "Tracked content changed during a pipeline pass but no declared stage's write zone contains it."
     }
   ],
-  "declaration_seal_sha256": "2dcbdd48f6e24639d54b64099bf1150f37d9c4fd93cb11e50e5728a364b54b57",
+  "declaration_seal_sha256": "40fddf13156871af2bddef54506fa4d54a4ed0b86941a1aede39e88fc9bd0b33",
   "findings": [],
   "lifecycle": [
     {
@@ -445,6 +445,22 @@
         "required": true,
         "writes": [
           "00-MASTER/UPF-000001/"
+        ]
+      },
+      {
+        "argv": [
+          "$PY",
+          "00-MASTER/MCOS-000001/mcos_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-MCOS",
+        "name": "Universal Meta-Civilization Platform deliverables (PROGRAM-004)",
+        "owner": "00-MASTER/MCOS-000001",
+        "purpose": "Regenerate the Meta-Civilization Platform deliverables and evidence from the DATA declaration, so every byte this programme contributes is attributable to a declared producer (CLO-08) and byte-identical across convergence passes (CLO-06).",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/MCOS-000001/"
         ]
       },
       {

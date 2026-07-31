@@ -4,7 +4,7 @@
 - Authority: **NONE (DERIVED TRUTH)**
 - Kernel home: `engine/kernel` (v1.0.0)
 - Verdict: **CONSTITUTIONALLY-COMPLIANT**
-- Report hash: `3f230ed5aa942c20cff5c2645de7f47607646703b10ecac6a9e16dd8eed497f1`
+- Report hash: `03dbe89821e248d29615a9efee7f15f58116f8dfc0845d889c0c1c7de20a6159`
 
 ## Universal Certification Matrix
 
@@ -22,11 +22,11 @@ Every mandatory dimension reports an exact percentage. Any dimension below 100% 
 | D08 | Implementation Completeness | 100.00% | PASS | 22/22 abstractions seeded |
 | D09 | Traceability Completeness | 100.00% | PASS | 22/22 abstractions homed |
 | D10 | Dependency Closure | 100.00% | PASS | third-party imports: none |
-| D11 | Documentation Coverage | 100.00% | PASS | 122/122 public symbols documented |
+| D11 | Documentation Coverage | 100.00% | PASS | 120/120 public symbols documented |
 | D12 | Evidence Coverage | 100.00% | PASS | 4/4 evidence artifacts emitted |
 | D13 | Validation Coverage | 100.00% | PASS | audit chain + single-head invariants verified |
 | D14 | Certification Coverage | 100.00% | PASS | kernel.certify() = CERTIFIED |
-| D15 | Statement Coverage | 100.00% | PASS | 666/666 lines (coverage.xml) |
+| D15 | Statement Coverage | 100.00% | PASS | 662/662 lines (coverage.xml) |
 | D16 | Branch Coverage | 100.00% | PASS | 114/114 branches (coverage.xml) |
 | D17 | Function Coverage | 100.00% | PASS | every function executed (implied by zero missed statements) |
 | D18 | Quality Gates | 100.00% | PASS | 6/6 gates pass |

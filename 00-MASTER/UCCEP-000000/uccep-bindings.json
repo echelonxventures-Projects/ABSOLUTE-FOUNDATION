@@ -504,7 +504,7 @@
       "tier": "boot",
       "fail_closed": true,
       "advisory": true,
-      "advisory_reason": "UCCEP-F-002 — the check is RED on a known, registered, owned gap (incomplete traceability). It is recorded as blocking-for-certification but non-blocking-for-progress until UCCEP-F-002 is discharged.",
+      "advisory_reason": "UCCEP-F-002 — the check is RED on the thirteen-lane ENGINEERING spine, which UCOS-UTCE-001 measures and reports unchanged and which UTCE-F-002 records as having no reachable satisfying state until the located relationship vocabulary names every lane. The CONSTITUTIONAL traceability obligation CEP-006 V.1 and CEP-007 V.1 actually require is measured separately and BLOCKING as CK-UTCE, and it is CLOSED. This check stays advisory because the spine is genuinely still incomplete, not because the constitutional obligation is unmet.",
       "governed_by_finding": "UCCEP-F-002",
       "exit_semantics": {
         "0": "healthy",
@@ -958,6 +958,160 @@
         "1": "a rendered register differs between two runs",
         "2": "fail-closed abort"
       }
+    },
+    {
+      "id": "CK-UCAF",
+      "name": "Authority model bound: every located authority registered, resolvable, scoped, evidenced and audited; no authority-shaped reference undefined",
+      "owner": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
+        "--gate"
+      ],
+      "write_scope": "read-only",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
+    },
+    {
+      "id": "CK-UCAF-SELF",
+      "name": "UCAF self-guards: declaration integrity, zero-enumeration, write scope, determinism, knowledge-once, no-vacancy-promotion",
+      "owner": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
+        "--check-declaration",
+        "--check-no-enumeration",
+        "--check-write-scope",
+        "--check-determinism",
+        "--check-knowledge-once",
+        "--check-no-promotion"
+      ],
+      "write_scope": "read-only",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
+    },
+    {
+      "id": "CK-URAT",
+      "name": "Ratification registry bound (CEP-006 Art XVI/XVII): every record verified against the located act that determined it, uniqueness and lineage legal, in-corpus ceiling enforced",
+      "owner": "00-MASTER/UCOS-URAT-001/urat_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/UCOS-URAT-001/urat_engine.py",
+        "--gate"
+      ],
+      "write_scope": "read-only",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
+    },
+    {
+      "id": "CK-URAT-SELF",
+      "name": "URAT self-guards: declaration integrity, zero-enumeration, write scope, determinism, discovery coverage, no-conferral",
+      "owner": "00-MASTER/UCOS-URAT-001/urat_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/UCOS-URAT-001/urat_engine.py",
+        "--check-declaration",
+        "--check-no-enumeration",
+        "--check-write-scope",
+        "--check-determinism",
+        "--check-coverage",
+        "--check-no-conferral"
+      ],
+      "write_scope": "read-only",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
+    },
+    {
+      "id": "CK-UTCE",
+      "name": "Constitutional traceability closed (CEP-001 Art XVIII / CEP-008 Art XI): rooted, closed, zero orphans, downward evidence present, lineage acyclic",
+      "owner": "00-MASTER/UCOS-UTCE-001/utce_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/UCOS-UTCE-001/utce_engine.py",
+        "--gate"
+      ],
+      "write_scope": "read-only",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "governed_by_finding": "UCCEP-F-002",
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
+    },
+    {
+      "id": "CK-UTCE-SELF",
+      "name": "UTCE self-guards: declaration integrity, zero-enumeration, write scope, determinism, read-only over the certified corpus, no-fabrication",
+      "owner": "00-MASTER/UCOS-UTCE-001/utce_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/UCOS-UTCE-001/utce_engine.py",
+        "--check-declaration",
+        "--check-no-enumeration",
+        "--check-write-scope",
+        "--check-determinism",
+        "--check-read-only",
+        "--check-no-fabrication"
+      ],
+      "write_scope": "read-only",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
+    },
+    {
+      "id": "CK-UFEP-SELF",
+      "name": "UFEP self-guards: declaration integrity, zero-enumeration, write scope, determinism and baseline reproducibility, no-freeze-performed, no-drift",
+      "owner": "00-MASTER/UCOS-UFEP-001/ufep_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/UCOS-UFEP-001/ufep_engine.py",
+        "--check-declaration",
+        "--check-no-enumeration",
+        "--check-write-scope",
+        "--check-determinism",
+        "--check-no-freeze",
+        "--check-no-drift"
+      ],
+      "write_scope": "read-only",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
     }
   ],
   "$gates_comment": "The mandatory constitutional gates of the mission, each bound to the located checks that execute it. A gate with no bound check would be a MANUAL gate and is itself a finding (no manual governance). The count is not fixed by this file's prose: adding a gate is an entry in the list below and requires no engine change. G-15 REPOSITORY FIXED-POINT GATE. The three checks above are the certification-time preconditions of closure and are executed here. The fixed-point CONDITION itself (RFP-1) is asserted by 00-MASTER/UCOS-RFP-001 AFTER certification — lifecycle steps 11-14 follow step 9 — and is enforced with no opt-out by .github/workflows/rfp-gate.yml on every push and pull request, and by `make rfp-gate`. It is deliberately NOT a check of this engine: the fixed-point engine runs this engine as a pipeline stage, so binding it here made this engine's emitted verdict depend on whether it had been invoked nested, which is the self-observation topology RFP-3 forbids. Measured, not theorised: with it bound here the repository could not converge. The gate graph is now a DAG - the fixed point contains certification, certification does not contain the fixed point.",
@@ -1119,6 +1273,41 @@
         "CK-UCEF-OPEN-WORLD",
         "CK-UCEF-CONSTITUTIONAL",
         "CK-UCEF-DETERMINISM"
+      ]
+    },
+    {
+      "id": "G-18",
+      "name": "Constitutional Authority Gate",
+      "owner": "00-MASTER/UCOS-UCAF-001 (the authority model CEP-002 Art 19 and CEP-006 Art I presuppose)",
+      "checks": [
+        "CK-UCAF",
+        "CK-UCAF-SELF"
+      ]
+    },
+    {
+      "id": "G-19",
+      "name": "Ratification Registry Gate",
+      "owner": "00-MASTER/UCOS-URAT-001 (the registry CEP-006 Art XVI mandates)",
+      "checks": [
+        "CK-URAT",
+        "CK-URAT-SELF"
+      ]
+    },
+    {
+      "id": "G-20",
+      "name": "Constitutional Traceability Closure Gate",
+      "owner": "00-MASTER/UCOS-UTCE-001 (the obligation CEP-001 Art XVIII imposes and CEP-006 V.1 / CEP-007 V.1 require)",
+      "checks": [
+        "CK-UTCE",
+        "CK-UTCE-SELF"
+      ]
+    },
+    {
+      "id": "G-21",
+      "name": "Freeze Eligibility Self-Integrity Gate",
+      "owner": "00-MASTER/UCOS-UFEP-001 (CEP-007 Art IV eligibility, Art V preconditions, Art X no-drift). Only the programme's SELF-guards are bound here. Its eligibility and completion DETERMINATION reads this aggregate certifier's own sealed model, so binding that determination as a check here would make the certifier a component of its own input — the recursion topology this repository forbids. The determination is gated by its own Makefile target and CI workflow, which run this certifier at full tier first.",
+      "checks": [
+        "CK-UFEP-SELF"
       ]
     }
   ],
@@ -1456,11 +1645,11 @@
         "PR-13 Universal Traceability",
         "IV-07 Traceable"
       ],
-      "owner": "00-CEP/CEP-008 (traceability authority) · platform/measurement (UCOS-UMA-001) · engine/graph",
-      "disposition": "REGISTERED",
+      "owner": "00-CEP/CEP-008 (traceability authority) · platform/measurement (UCOS-UMA-001) · engine/graph · 00-MASTER/UCOS-UTCE-001 (constitutional obligation) · 00-BOOK/tools/config.py (collection vocabulary)",
+      "disposition": "GOVERNED",
       "work_package": "WP-UCCEP-002",
-      "blocking": true,
-      "note": "This is the single largest measured constitutional gap in the repository. It is recorded here as Repository Truth rather than left as an unread red exit code. It does not block progress; it blocks CERTIFICATION."
+      "blocking": false,
+      "note": "GOVERNED by UCOS-UTCE-001, which separated two obligations this finding had conflated. (1) The CONSTITUTIONAL obligation — CEP-001 XVIII.1 upward rooting and downward evidence, XVIII.2 and CEP-008 XI.2 closure with zero orphans — is the one CEP-006 V.1 and CEP-007 V.1 both name, verbatim, as the ratification and freeze precondition. It is now measured and CLOSED: over the committed corpus, dangling endpoints = 0, unrooted = 0, orphans = 0, lineage cycles = 0, and every artifact carries its declared reproducible-evidence fields. That measurement is BLOCKING in UTCE's own gate, bound here as CK-UTCE. (2) The thirteen-lane ENGINEERING SPINE remains incomplete and is reported UNCHANGED — no predicate was weakened and no lane was populated. What changed is that it is no longer an unread red exit code: every lane now carries an obligation class saying whether the repository can discharge it at all, and UTCE-F-002 records the measured reason it cannot yet be satisfied in full — several lanes are named by NO label in the located relationship vocabulary, so the all-thirteen predicate has no reachable satisfying state (the same defect class as UCCEP-F-001). UTCE-F-003 quantifies the derivation headroom already supported by committed edges, citing each edge identifier. This finding therefore no longer stands as an unowned certification ceiling: the constitutional component is closed and gated, and the engineering component is owned, classified, quantified and referred to the vocabulary owner. CK-HEALTH remains advisory because the spine is genuinely still incomplete."
     },
     {
       "id": "UCCEP-F-003",
@@ -1480,15 +1669,15 @@
     },
     {
       "id": "UCCEP-F-004",
-      "title": "CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no located authority is competent to ratify",
-      "class": "STANDING-CONSTITUTIONAL-VACANCY",
-      "evidence": "cmg-gate reports 0 findings with readiness outcome READY-PROVISIONAL, 1 vacancy, 9 gaps, 7 open questions (6 open). 00-CMG/README records that CMG-000001 is PROVISIONAL, not ratified, that Tier T1 is vacant, and that the corpus contains no authority competent to ratify anything.",
+      "title": "Constitutional finality is reserved to an out-of-corpus authority, so every in-corpus determination is capped at provisional acceptance",
+      "class": "STANDING-CONSTITUTIONAL-CEILING",
+      "evidence": "CEP-006 I.4 provides that where finality requires an authority residing outside the corpus, that authority is superior for finality and in-corpus Ratification Authority confers only PROVISIONAL acceptance. 00-CMG/CMG-REGISTRY.json records vacancy VAC-01 over constitutional Tier T1 with open question CMG-OQ-02, and cmg-gate reports readiness READY-PROVISIONAL with 0 findings. The COMPETENCE component of this finding's original wording is contradicted by located evidence and has been reconciled: 01-WORKING/AUTHORITY-REGISTER.md defines a constituent sovereign seat and a standing chartered ratification organ with a recorded ratification-decision-and-audit procedure; 02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md records the exogenous constituent act with its constituent capabilities ALL PRESENT and EXERCISED; 09-DR-RAT-11-ASSESSMENT.md §5 reconciles that act and reports the authority now identified. Those instruments are registered and resolvable in 00-MASTER/UCOS-UCAF-001/ucaf.json, and the located ratification acts are admitted as canonical records in 00-MASTER/UCOS-URAT-001/urat.json.",
       "violates": [],
-      "owner": "00-CMG/CMG-000014 · 00-CEP/CEP-006 (ratification)",
+      "owner": "00-CEP/CEP-006 (ratification, Art I.4 and Art XII.2) · 00-CMG/CMG-000014 (VAC-01 / CMG-OQ-01 / CMG-OQ-02)",
       "disposition": "REGISTERED",
       "work_package": null,
       "blocking": true,
-      "note": "Pre-dates UCCEP and is correctly self-reported by its owner. It is the ceiling on every certification in this repository: UCCEP therefore CANNOT and DOES NOT assert a ratified or final certification. Its maximum attainable verdict is CERTIFIED-PROVISIONAL. Recorded, not remediated — remediation requires an authority that does not exist, and inventing one would create a parallel authority."
+      "note": "AMENDED, and deliberately RETAINED as blocking. It is retained because it IS the finality ceiling and the ceiling is correct: CEP-006 I.4 caps every in-corpus determination at provisional acceptance, so UCCEP CANNOT and DOES NOT assert a ratified or final certification, and its maximum attainable verdict remains CERTIFIED-PROVISIONAL. It is amended because its original wording — that no located authority is competent to ratify — is contradicted by committed Repository Truth. UCOS-UCAF-001 measures that conflict on both sides, cites both, and refers it to the claim owners under CEP-002 Article 23 (reconciliations UCAF-RC-01, UCAF-RC-02, UCAF-RC-03); it closes no vacancy and promotes no instrument into the vacant tier, which CMG-000001 XVII.4 forbids and LXXXI.5 voids. What IS closed is the machinery gap this finding had been standing in for: the authority model now exists as resolvable data (UCAF), the registry CEP-006 Article XVI mandates now exists so a located ratification is no longer deemed non-existent under XVI.4 (URAT), and both are bound as blocking checks here. Critically, this ceiling is NOT a freeze blocker: CEP-007 III.2 admits an artifact to the freeze lifecycle at provisional acceptance, IV.1 requires only that the ratification not be REJECTED, and 00-MASTER/UCOS-CRAT-001/07-FOUNDATION-FREEZE-AUTHORIZATION.md records in terms that the standing finality condition is carried forward and is 'not a freeze blocker'. UCOS-UFEP-001 determines eligibility on that basis and permits at most this one standing ceiling entry; a second entry fails its completion gate closed."
     },
     {
       "id": "UCCEP-F-005",

@@ -5,7 +5,7 @@
 - Layer home: `engine/civilization` (v1.0.0)
 - Realizes over: engine/kernel (PROGRAM-002, immutable baseline)
 - Verdict: **CONSTITUTIONALLY-COMPLIANT**
-- Report hash: `fed5b1851302af19d1cca195efc774324135dc3ca91fd375bd9433bef16edc10`
+- Report hash: `85f8afbda87be2026f88c4ef89baa0f19b0c90889b94ab992fdb7b30998d4013`
 
 ## The mandate's success criterion, executed
 
@@ -14,7 +14,7 @@
 Each category below was admitted by **registration only**, and the source fingerprints of both this layer and the kernel are unchanged across the proof.
 
 - Layer unchanged: **True** (`0e115b5f83f7188da974d4da36fe01bf3138920e0c078c0d82b66645f10bded0`)
-- Kernel unchanged: **True** (`3068dd95ae189288e11fb700595307e74020f8fb4f8afe815d692294ae87af1c`)
+- Kernel unchanged: **True** (`4bb5c79340b3403c34e2c4505c813b3688d5b55560612cb69c90cf0b878b1ff8`)
 
 ### Success-criterion categories
 

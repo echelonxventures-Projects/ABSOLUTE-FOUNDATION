@@ -4,7 +4,7 @@
 - Authority: **NONE (DERIVED TRUTH)**
 - Kernel home: `engine/kernel` (v1.0.0)
 - Verdict: **CONSTITUTIONALLY-COMPLIANT**
-- Report hash: `3f230ed5aa942c20cff5c2645de7f47607646703b10ecac6a9e16dd8eed497f1`
+- Report hash: `03dbe89821e248d29615a9efee7f15f58116f8dfc0845d889c0c1c7de20a6159`
 
 ## Quality gates
 
@@ -21,4 +21,4 @@
 
 - Categories proven: **11/11**
 - Kernel source unchanged: **True**
-- Kernel source fingerprint: `3068dd95ae189288e11fb700595307e74020f8fb4f8afe815d692294ae87af1c`
+- Kernel source fingerprint: `4bb5c79340b3403c34e2c4505c813b3688d5b55560612cb69c90cf0b878b1ff8`

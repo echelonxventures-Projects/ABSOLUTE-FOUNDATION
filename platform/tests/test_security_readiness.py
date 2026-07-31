@@ -12,14 +12,38 @@ from pathlib import Path
 from platform.security.contracts import ClassificationKind, SubjectLayer
 from platform.security.service import build_security_classification_service
 
+from engine.uckp.canonical import content_hash as LAYER_ZERO_CONTENT_HASH
+
 _SECURITY_PKG = Path(__file__).resolve().parents[1] / "security"
+
+
+def assert_reuses_certified_hashing(module) -> None:
+    """Assert a security module hashes through the one certified primitive.
+
+    Originally this compared ``content_hash.__module__`` to
+    ``platform.foundation.contracts``, using "where was this function defined" as a
+    proxy for "this module defined no hashing of its own". The primitive has since
+    been consolidated into UCKP Layer Zero (UCKP-LAW-0001 Art-13, UCKP-INV-03) and
+    ``platform.foundation.contracts`` re-exports it, so the defining module is now
+    ``engine.uckp.canonical``.
+
+    The check is expressed against object identity instead of a module name, which is
+    what the readiness condition actually meant and is strictly stronger: a local
+    redefinition would fail this even if it were placed in a module with the expected
+    name. The import seam is asserted separately, so the module keeps reaching the
+    primitive through the foundation it is certified against.
+    """
+    from platform.foundation import contracts as foundation_contracts
+
+    assert module.content_hash is LAYER_ZERO_CONTENT_HASH
+    assert foundation_contracts.content_hash is LAYER_ZERO_CONTENT_HASH
 
 
 def test_reuses_certified_foundation_hashing():
     # SEC-CLASS reuses the foundation content hash — it defines no new hashing.
     from platform.security import classification as classification_module
 
-    assert classification_module.content_hash.__module__ == "platform.foundation.contracts"
+    assert_reuses_certified_hashing(classification_module)
 
 
 def test_reuses_certified_identity_seam():
@@ -98,7 +122,7 @@ def test_expected_modules_are_present():
 def test_zone_runtime_reuses_certified_foundation_hashing():
     from platform.security import zones as zones_module
 
-    assert zones_module.content_hash.__module__ == "platform.foundation.contracts"
+    assert_reuses_certified_hashing(zones_module)
 
 
 def test_zones_and_controls_are_policy_configured_not_compiled_ceilings():
@@ -128,7 +152,7 @@ def test_zone_posture_service_introduces_no_enforcement():
 def test_certification_reuses_certified_foundation_hashing():
     from platform.security import certification as certification_module
 
-    assert certification_module.content_hash.__module__ == "platform.foundation.contracts"
+    assert_reuses_certified_hashing(certification_module)
 
 
 def test_certification_is_evidence_backed_and_non_constitutive():
@@ -174,7 +198,7 @@ def test_observability_introduces_no_new_signal_dimension():
 def test_registry_runtime_reuses_certified_foundation_hashing():
     from platform.security import registries as registries_module
 
-    assert registries_module.content_hash.__module__ == "platform.foundation.contracts"
+    assert_reuses_certified_hashing(registries_module)
 
 
 def test_registry_set_introduces_no_eighth_registry_and_no_enactment():
@@ -190,7 +214,7 @@ def test_intelligence_reuses_certified_foundation_hashing():
     # SEC-INTEL reuses the foundation content hash — it defines no new hashing.
     from platform.security import intelligence as intelligence_module
 
-    assert intelligence_module.content_hash.__module__ == "platform.foundation.contracts"
+    assert_reuses_certified_hashing(intelligence_module)
 
 
 def test_intelligence_evidence_is_deterministic_across_identical_runs():

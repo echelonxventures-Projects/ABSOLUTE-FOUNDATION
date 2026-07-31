@@ -22,8 +22,6 @@ exists. Provider *kind* is an open string carried as data (PC-02).
 
 from __future__ import annotations
 
-import hashlib
-import json
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
 from enum import Enum
@@ -41,6 +39,10 @@ from platform.universal_provider.errors import (
 )
 from typing import Any, Protocol, runtime_checkable
 
+# The canonical serialization primitive has exactly one definition, in UCKP Layer Zero
+# (UCKP-LAW-0001 Art-13, UCKP-INV-03). Re-exported unchanged for existing callers.
+from engine.uckp.canonical import canonical_json, content_hash
+
 #: Semantic version of the provider contract surface (AR-03 / PL-05).
 PROVIDER_CONTRACT_VERSION = "1.0.0"
 
@@ -49,20 +51,6 @@ DEFAULT_QUERY_LIMIT = 100
 
 #: Hard ceiling on a single page, so a provider cannot be coerced into unbounded work.
 MAX_QUERY_LIMIT = 10_000
-
-
-def canonical_json(payload: Any) -> str:
-    """Return a deterministic canonical JSON encoding (sorted keys, compact).
-
-    The single serialization used for every content hash in the Provider Framework,
-    so hashing is stable across processes, machines, and runs.
-    """
-    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-
-def content_hash(payload: Any) -> str:
-    """Return the SHA-256 hex digest of the canonical encoding of ``payload``."""
-    return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
 def _require_text(value: Any, *, field_name: str) -> str:

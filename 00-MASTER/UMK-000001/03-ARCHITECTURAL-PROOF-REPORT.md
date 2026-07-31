@@ -4,14 +4,14 @@
 - Authority: **NONE (DERIVED TRUTH)**
 - Kernel home: `engine/kernel` (v1.0.0)
 - Verdict: **CONSTITUTIONALLY-COMPLIANT**
-- Report hash: `3f230ed5aa942c20cff5c2645de7f47607646703b10ecac6a9e16dd8eed497f1`
+- Report hash: `03dbe89821e248d29615a9efee7f15f58116f8dfc0845d889c0c1c7de20a6159`
 
 ## Represent the previously-unknown through governed extension
 
 Each category below was represented on a fresh kernel by **registration only**. The kernel source fingerprint before and after is identical: representing universes that have not yet been imagined required **zero** kernel change.
 
-- Before: `3068dd95ae189288e11fb700595307e74020f8fb4f8afe815d692294ae87af1c`
-- After:  `3068dd95ae189288e11fb700595307e74020f8fb4f8afe815d692294ae87af1c`
+- Before: `4bb5c79340b3403c34e2c4505c813b3688d5b55560612cb69c90cf0b878b1ff8`
+- After:  `4bb5c79340b3403c34e2c4505c813b3688d5b55560612cb69c90cf0b878b1ff8`
 - Kernel unchanged: **True**
 
 | Category | Meta-Type | Instance | Discoverable | Traceable | Governed |

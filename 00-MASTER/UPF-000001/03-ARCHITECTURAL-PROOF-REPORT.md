@@ -5,13 +5,13 @@
 - Framework home: `engine/provider` (v1.0.0)
 - Realizes over: engine/kernel (PROGRAM-002, immutable baseline)
 - Verdict: **CONSTITUTIONALLY-COMPLIANT**
-- Report hash: `ef1b44db496336df3905c1df7714900acf326115d989952c69b74e71b5eac773`
+- Report hash: `72b4a24fb4a45c237988b0403a0bbaf41b261f2554f7d5e64335a646034e5d28`
 
 ## Govern-register every provider category through the kernel
 
 Each category below was govern-registered with the framework by **registration only**. Both the kernel and framework source fingerprints are unchanged.
 
-- Kernel unchanged: **True** (`3068dd95ae189288e11fb700595307e74020f8fb4f8afe815d692294ae87af1c`)
+- Kernel unchanged: **True** (`4bb5c79340b3403c34e2c4505c813b3688d5b55560612cb69c90cf0b878b1ff8`)
 - Framework unchanged: **True** (`f190721df14a426519fa3abdb5b1aabc7bda7904cb59be5c10d3858af8fd1bf3`)
 
 | Category | Provider | Discoverable | Resolvable | Traceable | Governed |

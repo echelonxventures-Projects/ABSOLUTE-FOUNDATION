@@ -54,23 +54,22 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-30`** — Blocking findings on the assimilation register.
 
 - **Primitive** — `filtered_record_count`
-- **Result** — 2 matching record(s)
+- **Result** — 1 matching record(s)
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| `UCCEP-F-002` | Repository health is RED: 1198 of 1198 registered artifacts have incomp… |
-| `UCCEP-F-004` | CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no loc… |
+| `UCCEP-F-004` | Constitutional finality is reserved to an out-of-corpus authority, so e… |
 
 **`DV-34`** — Findings composing the certification ceiling.
 
 - **Primitive** — `record_count`
-- **Result** — 2 records
+- **Result** — 1 records
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| records | 2 |
+| records | 1 |
 
 **`DV-24`** — Open constitutional questions.
 
@@ -151,7 +150,7 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `PASS` | 16 |
+| `PASS` | 20 |
 | `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.

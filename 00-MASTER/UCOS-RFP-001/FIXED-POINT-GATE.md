@@ -40,8 +40,9 @@ It executes the declared pipeline **3 times** over the committed HEAD and requir
 | 8 | `STAGE-URRC` Repository reality matrices | 00-MASTER/URRC-000001 | no | yes | yes |
 | 9 | `STAGE-UMK` Universal meta-kernel | 00-MASTER/UMK-000001 (PROGRAM-002) | no | yes | yes |
 | 10 | `STAGE-UPF` Universal provider framework | 00-MASTER/UPF-000001 (PROGRAM-003) | no | yes | yes |
-| 11 | `STAGE-RIB` Repository integration blueprint | 00-MASTER/UCOS-RIB-001 | no | yes | yes |
-| 12 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
+| 11 | `STAGE-MCOS` Universal Meta-Civilization Platform deliverables (PROGRAM-004) | 00-MASTER/MCOS-000001 | no | yes | yes |
+| 12 | `STAGE-RIB` Repository integration blueprint | 00-MASTER/UCOS-RIB-001 | no | yes | yes |
+| 13 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
 
 ## Exit semantics
 

@@ -4,7 +4,7 @@
 - Authority: **NONE (DERIVED TRUTH)**
 - Kernel home: `engine/kernel` (v1.0.0)
 - Verdict: **CONSTITUTIONALLY-COMPLIANT**
-- Report hash: `3f230ed5aa942c20cff5c2645de7f47607646703b10ecac6a9e16dd8eed497f1`
+- Report hash: `03dbe89821e248d29615a9efee7f15f58116f8dfc0845d889c0c1c7de20a6159`
 
 ## Architectural gap register
 

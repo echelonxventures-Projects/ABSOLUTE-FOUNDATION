@@ -17,13 +17,16 @@ the determined path (RC-4 determinism).
 
 from __future__ import annotations
 
-import hashlib
-import json
 import re
 from enum import Enum
 from typing import Any
 
 from engine.registry.universal.errors import NamespaceError, RegistrationValidationError
+
+# The canonical serialization primitive has exactly one definition, in UCKP Layer Zero
+# (UCKP-LAW-0001 Art-13, UCKP-INV-03). ``content_digest`` is this layer's historical
+# name for the digest and is kept as an alias, so no caller has to move.
+from engine.uckp.canonical import canonical_json, content_hash
 
 #: The fixed identifier authority prefix for every registered artifact.
 ID_PREFIX = "UCOS"
@@ -107,19 +110,9 @@ _KIND_CODES: dict[RegistryKind, str] = {
 _CODE_KINDS: dict[str, RegistryKind] = {code: kind for kind, code in _KIND_CODES.items()}
 
 
-def canonical_json(payload: Any) -> str:
-    """Return a deterministic, canonical JSON rendering of ``payload``.
-
-    Keys are sorted, separators are compact, and non-ASCII is preserved; the
-    output is byte-stable for equal inputs (the basis for content digests and
-    the tamper-evident audit chain).
-    """
-    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-
-def content_digest(payload: Any) -> str:
-    """Return the SHA-256 hex digest over the canonical rendering of ``payload``."""
-    return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
+#: This layer's historical name for the canonical digest. An alias, not a second
+#: implementation: one primitive, two names, so the rename never became a fork.
+content_digest = content_hash
 
 
 def normalize_namespace(namespace: Any) -> str:
@@ -166,7 +159,7 @@ def deterministic_id(kind: RegistryKind, namespace: str, natural_key: str) -> st
     **version-independent**: every version of the same artifact shares one id.
     """
     code, ns, key = identity_tuple(kind, namespace, natural_key)
-    digest = hashlib.sha256(canonical_json([code, ns, key]).encode("utf-8")).hexdigest()
+    digest = content_hash([code, ns, key])
     return f"{ID_PREFIX}-{code}-{digest[:_ID_DIGEST_LEN]}"
 
 

@@ -25,8 +25,6 @@ byte-identical subject, decision, record (and thus a stable ``certification_id``
 
 from __future__ import annotations
 
-import hashlib
-import json
 from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import Enum
@@ -36,6 +34,11 @@ from engine.certification.errors import (
     CertificationIntegrityError,
     CertificationSubjectError,
 )
+
+# The canonical serialization primitive has exactly one definition, in UCKP Layer Zero
+# (UCKP-LAW-0001 Art-13, UCKP-INV-03). Re-exported unchanged, so callers of
+# ``engine.certification.contracts.content_hash`` are unaffected.
+from engine.uckp.canonical import canonical_json, content_hash
 
 if TYPE_CHECKING:  # pragma: no cover - typing only
     from engine.validation.contracts import ValidationReport
@@ -51,21 +54,6 @@ CERTIFICATION_STANDARD_VERSION = "1.0.0"
 #: Certification confers no constitutional authority (DE-05 / IP-01): it records
 #: engineering readiness only. This is embedded verbatim in every record.
 CERTIFICATION_AUTHORITY = "ENGINEERING-EXECUTION-ONLY"
-
-
-def canonical_json(payload: Any) -> str:
-    """Return a deterministic canonical JSON encoding (sorted keys, compact).
-
-    The single serialization used for every content hash in the layer, so hashing
-    is stable across processes and runs (IMP-007 §5): identical structures always
-    encode to identical bytes.
-    """
-    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-
-def content_hash(payload: Any) -> str:
-    """Return the SHA-256 hex digest of the canonical encoding of ``payload``."""
-    return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
 class CriterionSeverity(str, Enum):

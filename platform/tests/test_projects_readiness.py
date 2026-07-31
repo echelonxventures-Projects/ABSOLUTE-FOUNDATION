@@ -20,9 +20,23 @@ _PROJECTS_PKG = Path(__file__).resolve().parents[1] / "projects"
 
 
 def test_reuses_certified_foundation_hashing():
+    """The projects layer hashes through the one certified primitive, defining none.
+
+    Asserted by object identity rather than by ``content_hash.__module__``: the
+    primitive now has a single definition in UCKP Layer Zero (UCKP-LAW-0001 Art-13,
+    UCKP-INV-03) which ``platform.foundation.contracts`` re-exports, so the defining
+    module is ``engine.uckp.canonical``. Identity is the stronger check — a local
+    redefinition fails it however the module is named — and the foundation seam is
+    asserted alongside, so this layer still reaches the primitive through the
+    foundation it is certified against.
+    """
+    from platform.foundation import contracts as foundation_contracts
     from platform.projects import contracts as contracts_module
 
-    assert contracts_module.content_hash.__module__ == "platform.foundation.contracts"
+    from engine.uckp.canonical import content_hash as layer_zero_content_hash
+
+    assert contracts_module.content_hash is layer_zero_content_hash
+    assert foundation_contracts.content_hash is layer_zero_content_hash
 
 
 def test_reuses_certified_identity_seam():

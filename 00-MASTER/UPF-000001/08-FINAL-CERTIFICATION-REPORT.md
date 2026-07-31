@@ -5,7 +5,7 @@
 - Framework home: `engine/provider` (v1.0.0)
 - Realizes over: engine/kernel (PROGRAM-002, immutable baseline)
 - Verdict: **CONSTITUTIONALLY-COMPLIANT**
-- Report hash: `ef1b44db496336df3905c1df7714900acf326115d989952c69b74e71b5eac773`
+- Report hash: `72b4a24fb4a45c237988b0403a0bbaf41b261f2554f7d5e64335a646034e5d28`
 
 ## Determination
 

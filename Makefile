@@ -57,6 +57,11 @@ help:
 	@echo "  make uccep-boot    fast read-only aggregate gate (session/pre-commit tier)"
 	@echo "  make uccep-full    aggregate gate including the heavy tier (suites + determinism)"
 	@echo "  make uccep-self    UCCEP guards over its own surface"
+	@echo "  make aee           run the autonomous evolution loop to convergence"
+	@echo "  make aee-observe   fast read-only pass; no located owner is invoked"
+	@echo "  make aee-gate      fail-closed convergence gate over the observation vector"
+	@echo "  make aee-closure   the loop including the heavy aggregate tier"
+	@echo "  make aee-self      AEE guards over its own surface"
 	@echo "  make ucda          regenerate the UCDA-000001 decision-assimilation determinations"
 	@echo "  make ucda-gate     fail-closed Implementation Evidence Gate (CEP-002 Art 28)"
 	@echo "  make ucda-self     UCDA guards over its own surface"
@@ -96,6 +101,23 @@ help:
 	@echo "  make uaep-gate     fail-closed Platform Binding Gate (every named capability resolves)"
 	@echo "  make uaep-self     UAEP-000001 guards over its own surface (incl. open-world + reuse-before-create)"
 	@echo "  make uaep-replay   prove the committed registers replay from the committed declaration"
+	@echo "  make ucaf          regenerate the UCOS-UCAF-001 constitutional authority registers"
+	@echo "  make ucaf-gate     fail-closed Constitutional Authority Gate (no authority undefined)"
+	@echo "  make ucaf-self     UCOS-UCAF-001 guards (incl. knowledge-once + no-vacancy-promotion)"
+	@echo "  make ucaf-replay   prove the committed authority registers replay from the declaration"
+	@echo "  make urat          regenerate the UCOS-URAT-001 ratification registry (CEP-006 Art XVI)"
+	@echo "  make urat-gate     fail-closed Ratification Registry Gate (every record located + verified)"
+	@echo "  make urat-self     UCOS-URAT-001 guards (incl. discovery coverage + no-conferral)"
+	@echo "  make urat-replay   prove the committed ratification registers replay from the declaration"
+	@echo "  make utce          regenerate the UCOS-UTCE-001 traceability closure registers"
+	@echo "  make utce-gate     fail-closed Constitutional Traceability Closure Gate (CEP-001 Art XVIII)"
+	@echo "  make utce-self     UCOS-UTCE-001 guards (incl. read-only corpus + no-fabrication)"
+	@echo "  make utce-replay   prove the committed traceability registers replay from the declaration"
+	@echo "  make ufep          regenerate the UCOS-UFEP-001 freeze eligibility registers"
+	@echo "  make ufep-gate     fail-closed Freeze Eligibility + Constitutional Completion Gate"
+	@echo "  make ufep-self     UCOS-UFEP-001 guards (incl. no-freeze-performed + no-drift)"
+	@echo "  make ufep-replay   prove the committed eligibility registers replay from the declaration"
+	@echo "  make completion    the full ordered convergence: authority -> ratification -> traceability -> certifier -> eligibility"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
 
@@ -985,3 +1007,264 @@ uaep-replay:
 	@git diff --exit-code -- 00-MASTER/UAEP-000001 \
 	  || { echo "UAEP-000001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
 	@echo "UAEP-000001 replay: no drift"
+
+
+# ---------------------------------------------------------------------------------------
+# UCOS-AEE-001 — AUTONOMOUS EVOLUTION ENGINE.
+#
+# The closed loop. Every phase of the evolution loop already has a located, certified
+# owner in this repository, and this programme creates none of them — no validator, no
+# gate, no registry, no schema, no measurement, no certification. What no located
+# programme owned is the LOOP: every entry point here is a one-shot process, so nothing
+# re-executed the located owners, re-read their sealed determinations, compared
+# consecutive readings and asserted a fixed point over what they report.
+#
+# The loop's phases are not restated anywhere in this programme. They are READ at run
+# time from the declarations that already own them — the pipeline catalogue's evolution
+# and implementation pipelines, and the evolution-intelligence loop and its standing
+# continuous obligations. A phase appended to any of those sources is discovered on the
+# next run; a phase nothing discharges is reported as uncovered rather than assumed.
+#
+# Convergence here is over the OBSERVATION VECTOR — the tuple of every located owner's
+# reported verdict — and requires consecutive iterations to agree. Byte-level repository
+# closure is a different and stronger condition owned by UCOS-RFP-001 and measured by
+# `make rfp-gate`; this programme never invokes it, which is what keeps the driver out of
+# the fixed-point engine's own pipeline (RFP CYC-RECURSE).
+#
+# Adding an actuator, an observation, a classification rule, a decision value, a
+# precondition or a convergence criterion is an append-only edit to
+# 00-MASTER/UCOS-AEE-001/aee-declaration.json and requires NO change to the engine or to
+# this Makefile.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside
+# 00-MASTER/UCOS-AEE-001/ (guarded, fail-closed).
+#
+# Exit 0 converged · 1 a blocking convergence criterion is unsatisfied · 2 fail-closed
+# abort (an admission condition failed, or the declaration is unusable).
+.PHONY: aee aee-observe aee-gate aee-closure aee-self
+aee:
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --tier standard
+
+# aee-observe: the fast read-only pass. No located owner is invoked, so nothing is
+# regenerated and no residue is produced. It cannot assert convergence — stability across
+# iterations is not measurable without actuation — and says so rather than implying it.
+aee-observe:
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --tier observe
+
+# aee-gate: actuate the located owners, iterate until the observation vector is stable,
+# fail closed. Refuses to begin while any declared owner or competing driver is already
+# executing: a reading taken during a race describes neither the state before it nor the
+# state after (measured, see AEE-F-004).
+aee-gate:
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --tier standard --gate
+
+# aee-closure: the same loop including the heavy tier, which runs the aggregate
+# constitutional certifier at its own full tier — verification, the determinism
+# double-build and the registration-drift gate included.
+aee-closure: bootstrap-quiet
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --tier closure --gate
+
+# aee-self: the six guards over the programme's own surface — declaration integrity,
+# zero-enumeration (the engine names no actuator, observation, mandate, class, decision
+# or owner path, including in its docstring), write scope (every emitted target resolves
+# inside 00-MASTER/UCOS-AEE-001/), determinism (two renders are byte-identical; no
+# wall-clock, commit identity or absolute path is emitted), reuse-before-create (no bound
+# owner lies inside this programme's own home, so it is not a second home for a located
+# capability), and mandate coverage (every loop phase read from the located sources is
+# discharged by something).
+aee-self:
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --check-declaration
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --check-write-scope
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --check-determinism
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --check-reuse-before-create
+	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --check-mandate-coverage
+
+
+
+# ---------------------------------------------------------------------------
+# CONSTITUTIONAL GOVERNANCE CONVERGENCE — four programmes, one ordered chain.
+#
+# WHY THIS BLOCK EXISTS. The aggregate certifier reported two standing ceilings, and neither was
+# a missing capability: both were missing MACHINERY.
+#
+#   * The authority ceiling. Every authority in this repository existed only as prose — a table
+#     in a located register, or ARTICLE I of a located instrument. The tier lattice alone was
+#     machine-readable. So no gate could resolve which authority was competent for an act, no
+#     gate could detect an authority referenced but defined nowhere, and no gate could detect
+#     that a recorded claim of authority ABSENCE had been contradicted by later located evidence.
+#     Separately, CEP-006 Article XVI mandates a Ratification Registry and XVI.4 deems any
+#     ratification absent from it NON-EXISTENT — and no registry existed, so five located and
+#     committed ratification acts could not lawfully be relied upon by anything.
+#
+#   * The traceability ceiling. Two different obligations had been conflated under one word. The
+#     CONSTITUTIONAL obligation (CEP-001 XVIII.1 upward rooting and downward evidence, XVIII.2
+#     and CEP-008 XI.2 closure with zero orphans) is the one CEP-006 V.1 and CEP-007 V.1 both
+#     name, verbatim, as the ratification and freeze precondition. The thirteen-lane ENGINEERING
+#     spine is a richer model owned by platform/measurement and 00-BOOK/tools. Only the first is
+#     a constitutional precondition, and nothing measured it on its own terms.
+#
+# AUTHORITY = NONE (DERIVED TRUTH) for all four. Stdlib only. Each writes nothing outside its own
+# operational-memory directory, proven by a fail-closed write-scope guard. None creates an
+# authority, confers a ratification, populates a traceability lane, weakens a predicate or
+# performs a freeze. Every identifier each one acts on is read from a located instrument or from
+# its own declaration, and a zero-enumeration guard fails closed if any leaks into engine source.
+#
+# NOTHING HERE LIFTS THE FINALITY CEILING. CEP-006 I.4 caps every in-corpus determination at
+# provisional acceptance pending an out-of-corpus finality authority. That ceiling is preserved,
+# and UCCEP-F-004 is deliberately RETAINED as blocking so the aggregate verdict stays capped.
+# What changed is that the ceiling is now the ONLY one standing, and CEP-007 III.2 admits an
+# artifact to the freeze lifecycle at provisional acceptance — which the located foundation
+# freeze authorization records in terms as "not a freeze blocker".
+#
+# Additive only — no existing target, recipe or dependency above is altered.
+#
+# Exit 0 gate OPEN · 1 gate CLOSED · 2 fail-closed abort (no verdict may be asserted).
+# ---------------------------------------------------------------------------
+
+# ucaf: UCOS-UCAF-001 — the Universal Constitutional Authority Framework. Registry, delegation,
+# resolution, validation, succession, scope, verification, evidence, audit, revocation and
+# certification over the authorities the repository has ALREADY located. It defines none of them:
+# every authority is discovered at run time from the located register or instrument that defines
+# it, which is what --check-knowledge-once proves. --check-no-promotion proves it never reports a
+# vacant tier as occupied and never converts a measured reconciliation into a ratification.
+.PHONY: ucaf ucaf-gate ucaf-self ucaf-replay
+ucaf:
+	@python3 00-MASTER/UCOS-UCAF-001/ucaf_engine.py
+
+ucaf-gate:
+	@python3 00-MASTER/UCOS-UCAF-001/ucaf_engine.py --gate
+
+ucaf-self:
+	@python3 00-MASTER/UCOS-UCAF-001/ucaf_engine.py --check-declaration
+	@python3 00-MASTER/UCOS-UCAF-001/ucaf_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCOS-UCAF-001/ucaf_engine.py --check-write-scope
+	@python3 00-MASTER/UCOS-UCAF-001/ucaf_engine.py --check-determinism
+	@python3 00-MASTER/UCOS-UCAF-001/ucaf_engine.py --check-knowledge-once
+	@python3 00-MASTER/UCOS-UCAF-001/ucaf_engine.py --check-no-promotion
+
+ucaf-replay:
+	@python3 00-MASTER/UCOS-UCAF-001/ucaf_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/UCOS-UCAF-001 \
+	  || { echo "UCOS-UCAF-001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "UCOS-UCAF-001 replay: no drift"
+
+
+# urat: UCOS-URAT-001 — the Ratification Registry CEP-006 Article XVI mandates. It confers
+# nothing: every state it records is READ out of the located act that determined it and verified
+# by an anchor that must be present in that act's own text, so no edit to the declaration alone
+# can improve a state. The two transitions into the terminal finality state are declared to
+# require the out-of-corpus authority, and --check-no-conferral fails closed if any record ever
+# reaches one. --check-coverage proves the registry is complete over its own discovery surface:
+# every located file whose name declares it a ratification instrument is either registered or
+# excluded with a class and a reason.
+.PHONY: urat urat-gate urat-self urat-replay
+urat:
+	@python3 00-MASTER/UCOS-URAT-001/urat_engine.py
+
+urat-gate:
+	@python3 00-MASTER/UCOS-URAT-001/urat_engine.py --gate
+
+urat-self:
+	@python3 00-MASTER/UCOS-URAT-001/urat_engine.py --check-declaration
+	@python3 00-MASTER/UCOS-URAT-001/urat_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCOS-URAT-001/urat_engine.py --check-write-scope
+	@python3 00-MASTER/UCOS-URAT-001/urat_engine.py --check-determinism
+	@python3 00-MASTER/UCOS-URAT-001/urat_engine.py --check-coverage
+	@python3 00-MASTER/UCOS-URAT-001/urat_engine.py --check-no-conferral
+
+urat-replay:
+	@python3 00-MASTER/UCOS-URAT-001/urat_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/UCOS-URAT-001 \
+	  || { echo "UCOS-URAT-001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "UCOS-URAT-001 replay: no drift"
+
+
+# utce: UCOS-UTCE-001 — the Universal Traceability Closure Engine. READ-ONLY over the certified
+# corpus, proven by --check-read-only, which requires every source it opens to sit under a path
+# this programme is forbidden to write. It measures the CONSTITUTIONAL obligation as BLOCKING and
+# reports the thirteen-lane engineering spine UNCHANGED against its own owner — no predicate is
+# weakened and no lane is populated. Both vocabularies are read from their located owners by
+# static analysis rather than by import, so a lane added to the schema or a label added to the
+# vocabulary is discovered here automatically. --check-no-fabrication requires every entry it
+# calls derivable to cite the located edge that would support it.
+.PHONY: utce utce-gate utce-self utce-replay
+utce:
+	@python3 00-MASTER/UCOS-UTCE-001/utce_engine.py
+
+utce-gate:
+	@python3 00-MASTER/UCOS-UTCE-001/utce_engine.py --gate
+
+utce-self:
+	@python3 00-MASTER/UCOS-UTCE-001/utce_engine.py --check-declaration
+	@python3 00-MASTER/UCOS-UTCE-001/utce_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCOS-UTCE-001/utce_engine.py --check-write-scope
+	@python3 00-MASTER/UCOS-UTCE-001/utce_engine.py --check-determinism
+	@python3 00-MASTER/UCOS-UTCE-001/utce_engine.py --check-read-only
+	@python3 00-MASTER/UCOS-UTCE-001/utce_engine.py --check-no-fabrication
+
+utce-replay:
+	@python3 00-MASTER/UCOS-UTCE-001/utce_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/UCOS-UTCE-001 \
+	  || { echo "UCOS-UTCE-001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "UCOS-UTCE-001 replay: no drift"
+
+
+# ufep: UCOS-UFEP-001 — the Universal Freeze Eligibility Programme. CEP-007 IV.2 requires
+# eligibility to be DECIDABLE and V.2 requires every precondition to be machine-verifiable;
+# nothing measured them together, and one of the five could not be measured at all until the
+# ratification registry existed. This programme measures all five per subject, computes the
+# content-addressed baseline a freeze WOULD seal (CEP-007 VIII.2), and runs the Article X no-drift
+# guard over the located frozen baseline manifest — recomputing every recorded digest.
+#
+# IT PERFORMS NO FREEZE. CEP-007 VII.1 reserves the freeze decision to Freeze Authority and I.5
+# forbids its self-conferral by Execution Authority. Every state past eligibility is declared
+# unreachable by this programme and --check-no-freeze fails closed if any subject is reported in
+# one. The located freeze authorization is recorded as evidence that the channel is occupied; it
+# is not acted upon.
+#
+# Its determination reads the aggregate certifier's own sealed model, so it is deliberately NOT
+# bound as a check inside that certifier — only its self-guards are (G-21). Criterion UFEP-CC-11
+# measures that the model it read was a FULL-tier one, so a tier-limited run cannot silently
+# produce a completion verdict. Run `make completion` for the correct ordering.
+.PHONY: ufep ufep-gate ufep-self ufep-replay
+ufep:
+	@python3 00-MASTER/UCOS-UFEP-001/ufep_engine.py
+
+ufep-gate:
+	@python3 00-MASTER/UCOS-UFEP-001/ufep_engine.py --gate
+
+ufep-self:
+	@python3 00-MASTER/UCOS-UFEP-001/ufep_engine.py --check-declaration
+	@python3 00-MASTER/UCOS-UFEP-001/ufep_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCOS-UFEP-001/ufep_engine.py --check-write-scope
+	@python3 00-MASTER/UCOS-UFEP-001/ufep_engine.py --check-determinism
+	@python3 00-MASTER/UCOS-UFEP-001/ufep_engine.py --check-no-freeze
+	@python3 00-MASTER/UCOS-UFEP-001/ufep_engine.py --check-no-drift
+
+ufep-replay:
+	@python3 00-MASTER/UCOS-UFEP-001/ufep_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/UCOS-UFEP-001 \
+	  || { echo "UCOS-UFEP-001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "UCOS-UFEP-001 replay: no drift"
+
+
+# completion: the ordered convergence. The order is not arbitrary and is not a preference — it is
+# the constitutional dependency order.
+#
+#   1. authority      — nothing may be attributed to an authority that does not resolve.
+#   2. ratification   — a record's authority must resolve in the authority registry (fail-closed).
+#   3. traceability   — the precondition CEP-006 V.1 and CEP-007 V.1 name in those exact words.
+#   4. certifier      — at FULL tier, because a tier-limited run excludes blocking checks and
+#                       says so in its own ceiling; completion may not rest on such a run.
+#   5. eligibility    — reads 1-4 and decides CEP-007 Article IV per subject.
+#
+# Each step is fail-closed, so the chain stops at the first unsatisfied condition rather than
+# reporting a completion the repository has not reached.
+.PHONY: completion
+completion:
+	@$(MAKE) --no-print-directory ucaf-gate
+	@$(MAKE) --no-print-directory urat-gate
+	@$(MAKE) --no-print-directory utce-gate
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier full --gate
+	@$(MAKE) --no-print-directory ufep-gate

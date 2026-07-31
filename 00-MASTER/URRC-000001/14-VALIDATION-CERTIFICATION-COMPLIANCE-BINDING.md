@@ -80,7 +80,7 @@ Validation, certification and compliance owners plus certification-scope reconci
 
 | Key | Value |
 |---|---|
-| `PASS` | 16 |
+| `PASS` | 20 |
 | `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
@@ -97,12 +97,12 @@ Validation, certification and compliance owners plus certification-scope reconci
 **`DV-34`** — Findings composing the certification ceiling.
 
 - **Primitive** — `record_count`
-- **Result** — 2 records
+- **Result** — 1 records
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| records | 2 |
+| records | 1 |
 
 
 ---

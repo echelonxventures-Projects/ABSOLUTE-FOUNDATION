@@ -5,7 +5,7 @@
 - Layer home: `engine/civilization` (v1.0.0)
 - Realizes over: engine/kernel (PROGRAM-002, immutable baseline)
 - Verdict: **CONSTITUTIONALLY-COMPLIANT**
-- Report hash: `fed5b1851302af19d1cca195efc774324135dc3ca91fd375bd9433bef16edc10`
+- Report hash: `85f8afbda87be2026f88c4ef89baa0f19b0c90889b94ab992fdb7b30998d4013`
 
 ## What was implemented
 

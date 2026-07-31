@@ -23,8 +23,6 @@ single source of truth. The public capability is published through the versioned
 
 from __future__ import annotations
 
-import hashlib
-import json
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 from enum import Enum
@@ -33,22 +31,12 @@ from typing import Any
 from engine.discovery.errors import DiscoveryDimensionError
 from engine.foundation.contracts.contract import Contract, Version
 
+# The canonical serialization primitive has exactly one definition, in UCKP Layer Zero
+# (UCKP-LAW-0001 Art-13, UCKP-INV-03). Re-exported unchanged for existing callers.
+from engine.uckp.canonical import canonical_json, content_hash
+
 #: The semantic version of the discovery contract surface (AR-03/PL-05).
 DISCOVERY_CONTRACT_VERSION = "1.0.0"
-
-
-def canonical_json(payload: Any) -> str:
-    """Return a deterministic canonical JSON encoding (sorted keys, compact).
-
-    The single serialization used for every content hash in the layer, so hashing
-    is stable across processes and runs (IMP-007 §5).
-    """
-    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-
-def content_hash(payload: Any) -> str:
-    """Return the SHA-256 hex digest of the canonical encoding of ``payload``."""
-    return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
 class DiscoveryKind(str, Enum):

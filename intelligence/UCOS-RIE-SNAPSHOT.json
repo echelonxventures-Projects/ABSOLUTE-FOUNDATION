@@ -2,9 +2,9 @@
   "aeos_verdict": "FOUNDATION-READY — AEOS may begin as a separately authorized program; NOT begun here.",
   "artifact_id": "UCOS-RIE-SNAPSHOT",
   "authority": "NONE (derived truth)",
-  "capability_count": 70,
+  "capability_count": 71,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "2353eb7d9231cf0cacef513f0dc8e89b1d88bf7a9735e8e847bffa50ddb39c3a",
+  "content_hash": "0d554a25c2fbb6281002b924adb08a5a3d5b14032a7310cb2e76a322c3c505a1",
   "dimension_index_reconciled_pct": 26.7,
   "drift": {
     "baseline": false,
@@ -114,7 +114,7 @@
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "20aae66f8d043345d6f21cbf99c49d04fa0b24f3e660692240fb0af20d23b2ad",
+      "fingerprint": "0b5031b1c26ce2ef2add00a3b4df9b697351c35e67ea835f6c11329cf136eccf",
       "source": "coverage.xml"
     },
     "evidence_files": {
@@ -130,7 +130,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "23e9e86cc903f288c712f7c8bd97ced668f703d3b347cf6086717c70a0cc0bf8",
+    "input_hash": "e1f799da7f4fb41c302ae91df73f7d1dad50663ba7205ffb0efb1c672a584840",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },

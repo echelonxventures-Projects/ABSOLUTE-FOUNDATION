@@ -17,12 +17,15 @@ Stdlib-only; no wall-clock, RNG, or network (Universal Time/Technology independe
 
 from __future__ import annotations
 
-import hashlib
-import json
 import re
 from typing import Any
 
 from engine.kernel.errors import IdentityError
+
+# The canonical serialization primitive has exactly one definition, in UCKP Layer Zero
+# (UCKP-LAW-0001 Art-13, UCKP-INV-03). ``content_digest`` is this layer's historical
+# name for the digest and is kept as an alias, so no caller has to move.
+from engine.uckp.canonical import canonical_json, content_hash
 
 #: The identifier authority prefix for every kernel-minted identity.
 ID_PREFIX = "UMK"
@@ -41,19 +44,9 @@ _SLUG_LEN = 12
 _WHITESPACE_RE = re.compile(r"\s")
 
 
-def canonical_json(payload: Any) -> str:
-    """Return a deterministic, canonical JSON rendering of ``payload``.
-
-    Keys are sorted, separators are compact, and non-ASCII is preserved; the output is
-    byte-stable for equal inputs — the basis for content digests and the tamper-evident
-    audit chain.
-    """
-    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-
-def content_digest(payload: Any) -> str:
-    """Return the SHA-256 hex digest over the canonical rendering of ``payload``."""
-    return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
+#: This layer's historical name for the canonical digest. An alias, not a second
+#: implementation: one primitive, two names, so the rename never became a fork.
+content_digest = content_hash
 
 
 def normalize_segment(value: Any, *, field: str) -> str:
@@ -99,7 +92,7 @@ def mint(metatype: Any, namespace: Any, natural_key: Any) -> str:
     same thing shares one identifier.
     """
     mt, ns, key = identity_tuple(metatype, namespace, natural_key)
-    digest = hashlib.sha256(canonical_json([mt, ns, key]).encode("utf-8")).hexdigest()
+    digest = content_hash([mt, ns, key])
     return f"{ID_PREFIX}-{_slug(mt)}-{digest[:_DIGEST_LEN]}"
 
 

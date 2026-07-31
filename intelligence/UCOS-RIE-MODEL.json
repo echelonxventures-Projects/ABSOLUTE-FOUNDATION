@@ -356,6 +356,18 @@
     },
     {
       "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/uckp",
+      "canonical_name": "engine.uckp",
+      "category": "engine",
+      "description": "UCKP — the Universal Constitutional Knowledge Principle, implemented.",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "unique_id": "RC-23"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
       "canonical_location": "engine/universal_certification",
       "canonical_name": "engine.universal_certification",
       "category": "engine",
@@ -364,7 +376,7 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "unique_id": "RC-23"
+      "unique_id": "RC-24"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -376,7 +388,7 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "unique_id": "RC-24"
+      "unique_id": "RC-25"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -388,7 +400,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-25"
+      "unique_id": "RC-26"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -400,7 +412,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-26"
+      "unique_id": "RC-27"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -412,7 +424,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-27"
+      "unique_id": "RC-28"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -424,7 +436,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-28"
+      "unique_id": "RC-29"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -436,7 +448,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-29"
+      "unique_id": "RC-30"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -448,7 +460,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-30"
+      "unique_id": "RC-31"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -460,7 +472,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-31"
+      "unique_id": "RC-32"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -472,7 +484,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-32"
+      "unique_id": "RC-33"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -484,7 +496,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-33"
+      "unique_id": "RC-34"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -496,7 +508,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-34"
+      "unique_id": "RC-35"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -508,7 +520,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-35"
+      "unique_id": "RC-36"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -520,7 +532,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-36"
+      "unique_id": "RC-37"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -532,7 +544,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-37"
+      "unique_id": "RC-38"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -544,7 +556,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-38"
+      "unique_id": "RC-39"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -556,7 +568,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-39"
+      "unique_id": "RC-40"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -568,7 +580,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-40"
+      "unique_id": "RC-41"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -580,7 +592,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-41"
+      "unique_id": "RC-42"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -592,7 +604,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-42"
+      "unique_id": "RC-43"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -604,7 +616,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-43"
+      "unique_id": "RC-44"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -616,7 +628,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-44"
+      "unique_id": "RC-45"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -628,7 +640,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-45"
+      "unique_id": "RC-46"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -640,7 +652,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-46"
+      "unique_id": "RC-47"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -652,7 +664,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-47"
+      "unique_id": "RC-48"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -664,7 +676,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-48"
+      "unique_id": "RC-49"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -676,7 +688,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-49"
+      "unique_id": "RC-50"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -688,7 +700,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-50"
+      "unique_id": "RC-51"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -700,7 +712,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-51"
+      "unique_id": "RC-52"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -712,7 +724,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-52"
+      "unique_id": "RC-53"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -724,7 +736,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-53"
+      "unique_id": "RC-54"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -736,7 +748,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-54"
+      "unique_id": "RC-55"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -748,7 +760,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-55"
+      "unique_id": "RC-56"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -760,7 +772,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-56"
+      "unique_id": "RC-57"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -772,7 +784,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-57"
+      "unique_id": "RC-58"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -784,7 +796,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-58"
+      "unique_id": "RC-59"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -796,7 +808,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-59"
+      "unique_id": "RC-60"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -808,7 +820,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-60"
+      "unique_id": "RC-61"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -820,7 +832,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-61"
+      "unique_id": "RC-62"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -832,7 +844,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-62"
+      "unique_id": "RC-63"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -844,7 +856,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-63"
+      "unique_id": "RC-64"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -856,7 +868,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-64"
+      "unique_id": "RC-65"
     },
     {
       "authority": "ACTIVE",
@@ -868,7 +880,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-65"
+      "unique_id": "RC-66"
     },
     {
       "authority": "ACTIVE",
@@ -880,7 +892,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-66"
+      "unique_id": "RC-67"
     },
     {
       "authority": "ACTIVE",
@@ -892,7 +904,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-67"
+      "unique_id": "RC-68"
     },
     {
       "authority": "ACTIVE (AUTHORITY=NONE)",
@@ -904,7 +916,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-68"
+      "unique_id": "RC-69"
     },
     {
       "authority": "SPEC (AUTHORITY=NONE)",
@@ -931,9 +943,9 @@
       "unique_id": "SPEC-CCE"
     }
   ],
-  "capability_count": 70,
+  "capability_count": 71,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "de8f5c847ee39f12c6e0e12364e77d8378a9e9dfd936b785e408d027a25eda72",
+  "content_hash": "0449b87fdea5f567357ab5f3bd40ada2a3bf113a9ceb9c7847c31bbd3db1b6a0",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -1048,7 +1060,7 @@
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "20aae66f8d043345d6f21cbf99c49d04fa0b24f3e660692240fb0af20d23b2ad",
+      "fingerprint": "0b5031b1c26ce2ef2add00a3b4df9b697351c35e67ea835f6c11329cf136eccf",
       "source": "coverage.xml"
     },
     "evidence_files": {
@@ -1094,7 +1106,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "23e9e86cc903f288c712f7c8bd97ced668f703d3b347cf6086717c70a0cc0bf8",
+    "input_hash": "e1f799da7f4fb41c302ae91df73f7d1dad50663ba7205ffb0efb1c672a584840",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },
@@ -1105,8 +1117,8 @@
       "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)"
     },
     "code": {
-      "coverage_branch_pct": 91.09,
-      "coverage_line_pct": 94.69,
+      "coverage_branch_pct": 91.86,
+      "coverage_line_pct": 95.13,
       "roots": {
         "application": {
           "loc": 23741,
@@ -1123,11 +1135,11 @@
           "test_functions": 887
         },
         "engine": {
-          "loc": 58414,
+          "loc": 68718,
           "root": "engine",
-          "source_files": 266,
-          "test_files": 203,
-          "test_functions": 1968
+          "source_files": 290,
+          "test_files": 216,
+          "test_functions": 2428
         },
         "infrastructure": {
           "loc": 22599,
@@ -1144,7 +1156,7 @@
           "test_functions": 115
         },
         "platform": {
-          "loc": 94875,
+          "loc": 94851,
           "root": "platform",
           "source_files": 357,
           "test_files": 273,
@@ -1158,8 +1170,8 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 259299,
-      "total_tests": 8913
+      "total_loc": 269579,
+      "total_tests": 9373
     },
     "corpus": {
       "artifacts": 1194,
@@ -1310,7 +1322,7 @@
         "status": "BLOCKED"
       }
     },
-    "unit_validation_pct": 94.69
+    "unit_validation_pct": 95.13
   },
   "title": "Repository Intelligence Model"
 }

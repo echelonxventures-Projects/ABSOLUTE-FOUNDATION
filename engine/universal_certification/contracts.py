@@ -26,13 +26,12 @@ constitutional finality.
 
 from __future__ import annotations
 
-import hashlib
-import json
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import TYPE_CHECKING, Any
 
+from engine.uckp.canonical import canonical_json, content_hash
 from engine.universal_certification.errors import (
     CertificateIntegrityError,
     CertificationInputError,
@@ -56,21 +55,6 @@ UCERT_AUTHORITY = "ENGINEERING-EXECUTION-ONLY"
 
 #: The validation check id that proves the EC-1 provisional-state disclosure (DE-05).
 DISCLOSURE_CHECK_ID = "provisional-state-disclosure"
-
-
-def canonical_json(payload: Any) -> str:
-    """Return a deterministic canonical JSON encoding (sorted keys, compact).
-
-    The single serialization used for every content hash in the engine, so hashing is
-    stable across processes and runs (IMP-007 §5): identical structures always encode
-    to identical bytes.
-    """
-    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-
-def content_hash(payload: Any) -> str:
-    """Return the SHA-256 hex digest of the canonical encoding of ``payload``."""
-    return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
 # --------------------------------------------------------------------------- #

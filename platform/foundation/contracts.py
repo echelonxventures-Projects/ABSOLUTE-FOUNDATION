@@ -23,13 +23,16 @@ runtime state.
 
 from __future__ import annotations
 
-import hashlib
-import json
 from dataclasses import dataclass
 from platform.foundation.errors import PlatformContractError
-from typing import Any
 
 from engine.foundation.contracts.contract import Contract, ContractRegistry, Version
+
+# The canonical serialization primitive has exactly one definition, in UCKP Layer Zero
+# (UCKP-LAW-0001 Art-13, UCKP-INV-03). Re-exported unchanged, so every platform caller
+# of ``platform.foundation.contracts.content_hash`` keeps working against one
+# implementation instead of a byte-identical copy of it.
+from engine.uckp.canonical import canonical_json, content_hash
 
 #: The semantic version of the Platform Foundation contract surface (AR-03/PL-05).
 PLATFORM_CONTRACT_VERSION = "1.0.0"
@@ -37,21 +40,6 @@ PLATFORM_CONTRACT_VERSION = "1.0.0"
 #: Stable identity of the platform foundation itself.
 PLATFORM_NAME = "UCOS Platform"
 PLATFORM_PROGRAM_ID = "EC-2"
-
-
-def canonical_json(payload: Any) -> str:
-    """Return a deterministic canonical JSON encoding (sorted keys, compact).
-
-    The single serialization used for every content hash in the foundation, so
-    hashing is stable across processes and runs (IMP-007 §5): identical structures
-    always encode to identical bytes.
-    """
-    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-
-def content_hash(payload: Any) -> str:
-    """Return the SHA-256 hex digest of the canonical encoding of ``payload``."""
-    return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
 @dataclass(frozen=True, slots=True)

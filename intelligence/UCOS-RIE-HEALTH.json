@@ -8,8 +8,8 @@
   },
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
   "code": {
-    "coverage_branch_pct": 91.09,
-    "coverage_line_pct": 94.69,
+    "coverage_branch_pct": 91.86,
+    "coverage_line_pct": 95.13,
     "roots": {
       "application": {
         "loc": 23741,
@@ -26,11 +26,11 @@
         "test_functions": 887
       },
       "engine": {
-        "loc": 58414,
+        "loc": 68718,
         "root": "engine",
-        "source_files": 266,
-        "test_files": 203,
-        "test_functions": 1968
+        "source_files": 290,
+        "test_files": 216,
+        "test_functions": 2428
       },
       "infrastructure": {
         "loc": 22599,
@@ -47,7 +47,7 @@
         "test_functions": 115
       },
       "platform": {
-        "loc": 94875,
+        "loc": 94851,
         "root": "platform",
         "source_files": 357,
         "test_files": 273,
@@ -61,10 +61,10 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 259299,
-    "total_tests": 8913
+    "total_loc": 269579,
+    "total_tests": 9373
   },
-  "content_hash": "4b2633bbb3ba423bf8088e63b3da7fd389b91dd96575170805a767d7963755f6",
+  "content_hash": "555f1988d631c939d98049bc5168975f954cdc2fc95b1452d32252b359a60109",
   "corpus": {
     "artifacts": 1194,
     "edges": 12819,
@@ -82,7 +82,7 @@
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "20aae66f8d043345d6f21cbf99c49d04fa0b24f3e660692240fb0af20d23b2ad",
+      "fingerprint": "0b5031b1c26ce2ef2add00a3b4df9b697351c35e67ea835f6c11329cf136eccf",
       "source": "coverage.xml"
     },
     "evidence_files": {
@@ -98,7 +98,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "23e9e86cc903f288c712f7c8bd97ced668f703d3b347cf6086717c70a0cc0bf8",
+    "input_hash": "e1f799da7f4fb41c302ae91df73f7d1dad50663ba7205ffb0efb1c672a584840",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },

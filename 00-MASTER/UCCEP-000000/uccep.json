@@ -8,8 +8,7 @@
   "blocking_unavailable": [],
   "certification": "CERTIFIED-PROVISIONAL",
   "certification_ceiling": [
-    "`UCCEP-F-002` — Repository health is RED: 1198 of 1198 registered artifacts have incomplete traceability",
-    "`UCCEP-F-004` — CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no located authority is competent to ratify"
+    "`UCCEP-F-004` — Constitutional finality is reserved to an out-of-corpus authority, so every in-corpus determination is capped at provisional acceptance"
   ],
   "checks": [
     {
@@ -519,6 +518,111 @@
       "tier": "standard",
       "verdict": "PASS",
       "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCAF",
+      "in_scope": true,
+      "name": "Authority model bound: every located authority registered, resolvable, scoped, evidenced and audited; no authority-shaped reference undefined",
+      "owner": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCAF-SELF",
+      "in_scope": true,
+      "name": "UCAF self-guards: declaration integrity, zero-enumeration, write scope, determinism, knowledge-once, no-vacancy-promotion",
+      "owner": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-URAT",
+      "in_scope": true,
+      "name": "Ratification registry bound (CEP-006 Art XVI/XVII): every record verified against the located act that determined it, uniqueness and lineage legal, in-corpus ceiling enforced",
+      "owner": "00-MASTER/UCOS-URAT-001/urat_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-URAT-SELF",
+      "in_scope": true,
+      "name": "URAT self-guards: declaration integrity, zero-enumeration, write scope, determinism, discovery coverage, no-conferral",
+      "owner": "00-MASTER/UCOS-URAT-001/urat_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": "UCCEP-F-002",
+      "id": "CK-UTCE",
+      "in_scope": true,
+      "name": "Constitutional traceability closed (CEP-001 Art XVIII / CEP-008 Art XI): rooted, closed, zero orphans, downward evidence present, lineage acyclic",
+      "owner": "00-MASTER/UCOS-UTCE-001/utce_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UTCE-SELF",
+      "in_scope": true,
+      "name": "UTCE self-guards: declaration integrity, zero-enumeration, write scope, determinism, read-only over the certified corpus, no-fabrication",
+      "owner": "00-MASTER/UCOS-UTCE-001/utce_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UFEP-SELF",
+      "in_scope": true,
+      "name": "UFEP self-guards: declaration integrity, zero-enumeration, write scope, determinism and baseline reproducibility, no-freeze-performed, no-drift",
+      "owner": "00-MASTER/UCOS-UFEP-001/ufep_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "read-only"
     }
   ],
   "gate_blocking": [],
@@ -858,6 +962,80 @@
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/UCEF-000001 (CEP-009-AMD-001 — ADDENDUM B of the located owner of evolution)",
+      "unproven": [],
+      "verdict": "PASS"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-UCAF",
+        "CK-UCAF-SELF"
+      ],
+      "executed": [
+        "CK-UCAF",
+        "CK-UCAF-SELF"
+      ],
+      "failed": [],
+      "id": "G-18",
+      "name": "Constitutional Authority Gate",
+      "not_executed": [],
+      "out_of_tier": [],
+      "owner": "00-MASTER/UCOS-UCAF-001 (the authority model CEP-002 Art 19 and CEP-006 Art I presuppose)",
+      "unproven": [],
+      "verdict": "PASS"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-URAT",
+        "CK-URAT-SELF"
+      ],
+      "executed": [
+        "CK-URAT",
+        "CK-URAT-SELF"
+      ],
+      "failed": [],
+      "id": "G-19",
+      "name": "Ratification Registry Gate",
+      "not_executed": [],
+      "out_of_tier": [],
+      "owner": "00-MASTER/UCOS-URAT-001 (the registry CEP-006 Art XVI mandates)",
+      "unproven": [],
+      "verdict": "PASS"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-UTCE",
+        "CK-UTCE-SELF"
+      ],
+      "executed": [
+        "CK-UTCE",
+        "CK-UTCE-SELF"
+      ],
+      "failed": [],
+      "id": "G-20",
+      "name": "Constitutional Traceability Closure Gate",
+      "not_executed": [],
+      "out_of_tier": [],
+      "owner": "00-MASTER/UCOS-UTCE-001 (the obligation CEP-001 Art XVIII imposes and CEP-006 V.1 / CEP-007 V.1 require)",
+      "unproven": [],
+      "verdict": "PASS"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-UFEP-SELF"
+      ],
+      "executed": [
+        "CK-UFEP-SELF"
+      ],
+      "failed": [],
+      "id": "G-21",
+      "name": "Freeze Eligibility Self-Integrity Gate",
+      "not_executed": [],
+      "out_of_tier": [],
+      "owner": "00-MASTER/UCOS-UFEP-001 (CEP-007 Art IV eligibility, Art V preconditions, Art X no-drift). Only the programme's SELF-guards are bound here. Its eligibility and completion DETERMINATION reads this aggregate certifier's own sealed model, so binding that determination as a check here would make the certifier a component of its own input — the recursion topology this repository forbids. The determination is gated by its own Makefile target and CI workflow, which run this certifier at full tier first.",
       "unproven": [],
       "verdict": "PASS"
     }
@@ -1423,7 +1601,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "77132548a27ec9e0453d72cc31c6099e6107bd009b806b0c51448a7e92f4aecb",
+  "seal_sha256": "d4484b9a355ef6a7975600a1de01a8fbacd1464a88d955d2c7e0231d911d2e48",
   "tier": "full",
   "unavailable": [],
   "unproven": []
