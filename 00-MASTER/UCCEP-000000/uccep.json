@@ -2,13 +2,11 @@
   "advisory_failures": [
     "CK-HEALTH"
   ],
-  "blocking_failures": [
-    "CK-REG-DRIFT"
-  ],
+  "blocking_failures": [],
   "blocking_not_executed": [],
   "blocking_out_of_tier": [],
   "blocking_unavailable": [],
-  "certification": "NOT-CERTIFIED",
+  "certification": "CERTIFIED-PROVISIONAL",
   "certification_ceiling": [
     "`UCCEP-F-002` — Repository health is RED: 1198 of 1198 registered artifacts have incomplete traceability",
     "`UCCEP-F-004` — CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no located authority is competent to ratify"
@@ -271,15 +269,15 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 3,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-REG-DRIFT",
       "in_scope": true,
       "name": "Atomic Registration Transaction + registration-drift gate",
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
-      "reason": "uncommitted-registration drift — source split from projections",
+      "reason": "",
       "tier": "full",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "write_scope": "projections"
     },
     {
@@ -523,10 +521,8 @@
       "write_scope": "read-only"
     }
   ],
-  "gate_blocking": [
-    "CK-REG-DRIFT"
-  ],
-  "gate_exit": 1,
+  "gate_blocking": [],
+  "gate_exit": 0,
   "gates": [
     {
       "advisory_failed": [],
@@ -654,16 +650,14 @@
         "CK-REG-ENFORCE",
         "CK-REG-DRIFT"
       ],
-      "failed": [
-        "CK-REG-DRIFT"
-      ],
+      "failed": [],
       "id": "G-07",
       "name": "Registry Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -806,16 +800,14 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-REG-DRIFT"
-      ],
+      "failed": [],
       "id": "G-15",
       "name": "Repository Fixed-Point Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -1002,16 +994,14 @@
         "CK-DISCOVERY",
         "CK-REG-DRIFT"
       ],
-      "failed": [
-        "CK-REG-DRIFT"
-      ],
+      "failed": [],
       "id": "PROGRAM-000004",
       "name": "Universal Registry Evolution",
       "not_executed": [],
       "out_of_tier": [],
       "output": "04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -1030,16 +1020,14 @@
         "CK-CMG",
         "CK-REG-DRIFT"
       ],
-      "failed": [
-        "CK-REG-DRIFT"
-      ],
+      "failed": [],
       "id": "PROGRAM-000005",
       "name": "Universal Repository Governance",
       "not_executed": [],
       "out_of_tier": [],
       "output": "05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -1356,16 +1344,14 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-REG-DRIFT"
-      ],
+      "failed": [],
       "id": "PROGRAM-000017",
       "name": "Universal Repository Fixed-Point Closure",
       "not_executed": [],
       "out_of_tier": [],
       "output": "19-REPOSITORY-FIXED-POINT-CLOSURE.md",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -1437,7 +1423,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "a6ae6b49d4aa3703d679e7740ed0ac0ef1ed179090e6207f33f3ed725ecf280e",
+  "seal_sha256": "77132548a27ec9e0453d72cc31c6099e6107bd009b806b0c51448a7e92f4aecb",
   "tier": "full",
   "unavailable": [],
   "unproven": []

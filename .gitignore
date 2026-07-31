@@ -19,7 +19,13 @@ dist/
 *.egg-info/
 .pytest_cache/
 .ruff_cache/
-.coverage
+# `.coverage*`, not `.coverage`: coverage.py writes parallel-mode data files as
+# `.coverage.<host>.<pid>.<rand>`, and a combine collision leaves `.coverage 2`,
+# `.coverage 3`, … . The bare pattern matched none of those, so heavy-tier residue
+# escaped the ignore rule and dirtied the working tree — which is precisely what the
+# repository-clean gates (UCOS-RIB-001 GATE-12, CK-REG-DRIFT, G-15) read as drift.
+# Widening the EXISTING rule; no new ignore mechanism is introduced.
+.coverage*
 coverage.xml
 
 # UCOS-GOV-006 (GOV-005 §5.1/§6.8) — formally declare generated evidence and
