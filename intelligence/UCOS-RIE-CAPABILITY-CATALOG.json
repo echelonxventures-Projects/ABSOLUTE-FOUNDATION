@@ -664,6 +664,18 @@
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
+      "canonical_location": "platform/universal_pipeline",
+      "canonical_name": "platform.universal_pipeline",
+      "category": "platform",
+      "description": "UAPF-000001 — the Universal Autonomous Pipeline Framework (UAPF).",
+      "evidence_present": true,
+      "implementation_status": "IMPLEMENTED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE/COMPOSE",
+      "unique_id": "RC-56"
+    },
+    {
+      "authority": "EC-2 CLOSED/FROZEN",
       "canonical_location": "platform/universal_portal",
       "canonical_name": "platform.universal_portal",
       "category": "platform",
@@ -672,7 +684,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-56"
+      "unique_id": "RC-57"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -684,7 +696,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-57"
+      "unique_id": "RC-58"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -696,7 +708,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-58"
+      "unique_id": "RC-59"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -708,7 +720,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-59"
+      "unique_id": "RC-60"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -720,7 +732,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-60"
+      "unique_id": "RC-61"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -732,7 +744,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": true,
       "reuse": "REUSE/COMPOSE",
-      "unique_id": "RC-61"
+      "unique_id": "RC-62"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -744,7 +756,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-62"
+      "unique_id": "RC-63"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -756,7 +768,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-63"
+      "unique_id": "RC-64"
     },
     {
       "authority": "ACTIVE",
@@ -768,7 +780,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-64"
+      "unique_id": "RC-65"
     },
     {
       "authority": "ACTIVE",
@@ -780,7 +792,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-65"
+      "unique_id": "RC-66"
     },
     {
       "authority": "ACTIVE",
@@ -792,7 +804,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-66"
+      "unique_id": "RC-67"
     },
     {
       "authority": "ACTIVE (AUTHORITY=NONE)",
@@ -804,7 +816,7 @@
       "implementation_status": "IMPLEMENTED",
       "replacement_prohibited": false,
       "reuse": "REUSE/EXTEND",
-      "unique_id": "RC-67"
+      "unique_id": "RC-68"
     },
     {
       "authority": "SPEC (AUTHORITY=NONE)",
@@ -832,12 +844,12 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "fe81ef6e0223bb79946ad63c6a3b9ee22b6ac676f8c9b27ba9e1f49d0a7d7a16",
-  "count": 69,
+  "content_hash": "7c285637901b05218b100c18477f786a5f0b969f9ea06f4e5878ea30289df2f6",
+  "count": 70,
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "94c816aee098d0a17c59b9d4a5c08791d0d890e01354563c51408b9ed1327c0d",
+      "fingerprint": "20aae66f8d043345d6f21cbf99c49d04fa0b24f3e660692240fb0af20d23b2ad",
       "source": "coverage.xml"
     },
     "evidence_files": {
@@ -853,7 +865,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "b79a1430ee424b75dc8c1fe8c9c4f4ee5aa7acb4bc4e939b07b47d56e92c9bb6",
+    "input_hash": "9e71f565889cf734f8f1dfbe112178446cb20f05b02492834ca0c9feac7f678e",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },

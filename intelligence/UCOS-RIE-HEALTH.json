@@ -8,8 +8,8 @@
   },
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
   "code": {
-    "coverage_branch_pct": 90.59,
-    "coverage_line_pct": 94.41,
+    "coverage_branch_pct": 91.09,
+    "coverage_line_pct": 94.69,
     "roots": {
       "application": {
         "loc": 23741,
@@ -47,11 +47,11 @@
         "test_functions": 115
       },
       "platform": {
-        "loc": 87520,
+        "loc": 94875,
         "root": "platform",
-        "source_files": 336,
-        "test_files": 266,
-        "test_functions": 2803
+        "source_files": 357,
+        "test_files": 273,
+        "test_functions": 3002
       },
       "service": {
         "loc": 20464,
@@ -61,10 +61,10 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 251944,
-    "total_tests": 8688
+    "total_loc": 259299,
+    "total_tests": 8887
   },
-  "content_hash": "9b4a07c176f6e4fc6caa3f786bf9def77f717a30beaf52cc6999a411c4f0d319",
+  "content_hash": "56056eca0f78e6b34034c0402219e65b72b3488c68a3dd08935e406d23015c4b",
   "corpus": {
     "artifacts": 1193,
     "edges": 12817,
@@ -82,7 +82,7 @@
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "94c816aee098d0a17c59b9d4a5c08791d0d890e01354563c51408b9ed1327c0d",
+      "fingerprint": "20aae66f8d043345d6f21cbf99c49d04fa0b24f3e660692240fb0af20d23b2ad",
       "source": "coverage.xml"
     },
     "evidence_files": {
@@ -98,7 +98,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "b79a1430ee424b75dc8c1fe8c9c4f4ee5aa7acb4bc4e939b07b47d56e92c9bb6",
+    "input_hash": "9e71f565889cf734f8f1dfbe112178446cb20f05b02492834ca0c9feac7f678e",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },
