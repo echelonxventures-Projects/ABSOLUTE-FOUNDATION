@@ -1171,9 +1171,9 @@
   ],
   "evidence_manifest": {
     "assimilation_baseline": {
-      "bytes": 5764423,
+      "bytes": 6976521,
       "relative": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
-      "sha256": "6e58ac5f6cbeb2f00818639dacf3049fafd43fae565b6b9fdd1e7912e4fc7c0b"
+      "sha256": "3bfa6f04f16999b70b1b84350184b4e23b30a3870ecb63b5fcfa5b53aa0ca949"
     },
     "export::31b621b2cecc55e8": {
       "bytes": 351,
@@ -1188,7 +1188,7 @@
     "provenance_baseline": {
       "bytes": 5944,
       "relative": "00-MASTER/UAKOS-PHASE-001B/01-SOURCE-PROVENANCE-REGISTER.md",
-      "sha256": "5a8ed4bb4f93af8638618992c94bb0d658a7ec1d5b4bdbe42ff2e068afb6385b"
+      "sha256": "02872e3edae553e6106c52ac8946dbd5c87b218743b78108ff7c6fc261e147b7"
     }
   },
   "gates": [
@@ -1275,7 +1275,7 @@
       "subject": "EXPORT-ARCHIVE"
     }
   ],
-  "head_commit": "f989241",
+  "head_commit": "4453227",
   "program": "UKAP-001",
-  "seal_sha256": "981ad17629bf118bf9ec122364d5cc0a59f7b2a6f1f1c112715cf6b8498dc483"
+  "seal_sha256": "6611ea337dda42ad38091c5952a1ff85c735a12ac85400055fa0869b363cf96b"
 }

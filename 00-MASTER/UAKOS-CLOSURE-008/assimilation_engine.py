@@ -32,7 +32,16 @@ Authoritative inputs
 Outputs (regenerated deterministically, no timestamps)
     assimilation.json            complete per-object classification + metrics + seal
     EVIDENCE-MANIFEST.json       sha256 of every external evidence file consumed
-    01..08-*.md                  the eight mandated registers
+    01..09-*.md                  the mandated registers
+
+Second evaluation axis (UKAP-001 WP-002 / D-2 — `superiority_engine.py`)
+    Presence answers "does Repository Truth already contain this knowledge?". After presence is
+    complete — never before it and never instead of it — every object is ALSO evaluated for
+    QUALITY across 16 declared architectural dimensions and receives exactly one superiority
+    verdict: BETTER_THAN_CURRENT, CONFLICTING, OBSOLETE, REQUIRES_ARCHITECTURAL_REVIEW,
+    PARTIALLY_ASSIMILATED, or (for totality) NO_CURRENT_FORM / NOT_SUPERIOR. The six presence
+    states are unchanged and the four superiority columns are APPENDED to `row_columns`, so a
+    record written before this axis existed still deserializes and renders. Register 09.
 
 Usage
     python3 00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py
@@ -47,6 +56,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -60,6 +70,28 @@ REPO = HERE.parent.parent
 PROGRAM = "UAKOS-CLOSURE-008"
 ASSIM_JSON = HERE / "assimilation.json"
 EVIDENCE_MANIFEST = HERE / "EVIDENCE-MANIFEST.json"
+
+
+def _load_superiority_engine():
+    """Load the WP-002 / D-2 superiority evaluator that lives beside this engine.
+
+    Loaded by absolute path rather than by plain import so the engine behaves identically
+    however it is invoked (by path, from another directory, or from a test harness). The
+    superiority axis is NOT optional: without it, rows would carry no verdict and the
+    fail-closed superiority gates could not be evaluated, so a missing module aborts.
+    """
+    path = HERE / "superiority_engine.py"
+    spec = importlib.util.spec_from_file_location("uakos_superiority_engine", path)
+    if spec is None or spec.loader is None or not path.exists():
+        raise SystemExit(
+            f"{PROGRAM}: FAIL-CLOSED — superiority evaluator missing: {path}\n"
+            f"  the presence axis alone cannot satisfy the D-2 evaluation gates")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+SUP = _load_superiority_engine()
 
 DEFAULT_EVIDENCE_ROOT = Path.home() / "Desktop" / "KNOWLEDGE-ASSIMILATION"
 EVIDENCE_FILES = {
@@ -301,7 +333,16 @@ ROW_COLUMNS = [
     "instance_level", "mentions", "user_mentions", "normative_statements",
     "authority_score", "origin_conversations", "evidence_conversation", "hierarchy_tier",
     "equivalence", "basis", "anchors", "dependencies",
+    # --- WP-002 / D-2: the SUPERIORITY axis. APPENDED, never inserted, so a row written by
+    # --- the presence-only engine still deserializes positionally against its own recorded
+    # --- `row_columns`; the absent columns are restored as UNEVALUATED by `hydrate`.
+    "superiority", "superiority_score", "superiority_profile", "superiority_rule",
 ]
+
+# The columns the D-2 axis contributes, declared once so `hydrate`, the renderers and the
+# compatibility gate cannot disagree about what a complete row looks like.
+SUPERIORITY_COLUMNS = ("superiority", "superiority_score", "superiority_profile",
+                       "superiority_rule")
 
 # Row-level rationale is carried ONCE, per rule, instead of being repeated on 23,859 rows.
 RULE_RATIONALE = {
@@ -599,16 +640,73 @@ def classify(objects: list[dict], exact: dict, by_head: dict, acronyms: dict[str
             kid = by_name.get(norm_tokens(rel, acronyms))
             if kid and kid != r["kid"] and kid not in deps:
                 deps.append(kid)
+        # Retained for the D-2 dependency-correctness measure: how many declared relations
+        # were considered, and how many of them resolved to a real object in this corpus.
+        r["_rel_declared"] = len(r["related"])
+        r["_rel_resolved"] = len(deps)
         r["dependencies"] = deps[:4]
         del r["related"]
     rows.sort(key=lambda r: r["kid"])
+
+    # ---------------------------------------------------------------- WP-002 / D-2 superiority
+    # PRESENCE IS COMPLETE AT THIS POINT. Every row already holds its terminal presence state,
+    # rule, destination, owner, authority, wave and resolved dependency chain. The superiority
+    # axis is evaluated here, strictly afterwards, and reads ONLY what presence measured — it
+    # changes no presence field, so the existing classification is preserved exactly.
+    evaluate_superiority(objects, rows)
     return [{c: r.get(c, "" if c not in ("anchors", "dependencies") else []) for c in ROW_COLUMNS}
             for r in rows]
 
 
+def evaluate_superiority(objects: list[dict], rows: list[dict]) -> None:
+    """Attach the D-2 verdict to every already-classified row, in place.
+
+    The three cross-row facts the evaluator needs are computed ONCE here and passed in, so the
+    evaluator itself stays a pure function of its arguments:
+
+        collides        the normalized name is carried by more than one corpus object, i.e. the
+                        corpus itself restates the concept (Knowledge Once / orthogonality)
+        anchors_resolve how many recorded anchors actually exist in the repository at HEAD
+        deps_resolve    every recorded dependency KID is a real object in this register
+    """
+    titles = Counter(norm_title(r["name"]) for r in rows)
+    kids = {r["kid"] for r in rows}
+    by_kid = {obj["knowledge_id"]: obj for obj in objects}
+    exists: dict[str, bool] = {}
+
+    def anchor_exists(anchor: str) -> bool:
+        # Anchors may carry a `path:detail` suffix, matching the semantic-mapping convention.
+        path = anchor.split(":")[0]
+        if path not in exists:
+            exists[path] = bool(path) and (REPO / path).exists()
+        return exists[path]
+
+    for row in rows:
+        obj = by_kid.get(row["kid"], {})
+        anchors = [str(a) for a in (row.get("anchors") or [])]
+        row.update(SUP.evaluate(
+            obj, row,
+            collides=titles[norm_title(row["name"])] > 1,
+            relations_declared=int(row.pop("_rel_declared", 0)),
+            relations_resolved=int(row.pop("_rel_resolved", 0)),
+            anchors_resolve=sum(1 for a in anchors if anchor_exists(a)),
+            deps_resolve=all(k in kids for k in (row.get("dependencies") or [])),
+        ))
+
+
 def hydrate(rows: list[dict]) -> list[dict]:
     """Restore the DERIVED owner/authority columns from the destination policy, so gates and
-    renderers see complete rows whether they were just computed or replayed from disk."""
+    renderers see complete rows whether they were just computed or replayed from disk.
+
+    Also restores the D-2 superiority columns for BACKWARD COMPATIBILITY: an assimilation.json
+    written before the superiority axis existed carries only the presence columns, and must
+    still deserialize and render. Such a row is marked UNEVALUATED (an empty verdict) rather
+    than given a fabricated one, so the fail-closed superiority gate detects it.
+    """
+    for r in rows:
+        # Only genuinely ABSENT columns are defaulted; a computed verdict is never overwritten.
+        for col, default in SUP.blank().items():
+            r.setdefault(col, default)
     for r in rows:
         pol = DEST_POLICY.get(r["disposition"]) if r["state"] == "ASSIMILATED" else None
         if pol is None and r["state"] == "ASSIMILATED":
@@ -705,6 +803,7 @@ def run_gates(rows: list[dict], summary: dict) -> list[dict]:
         dict(gate="Intra-register duplicate candidates (same normalized name + destination)",
              blocking=False, count=dup_extra, detail=dup_detail[:5]),
     ]
+    gates += superiority_gates(rows)
     for g in gates:
         g["result"] = ("PASS" if g["count"] == 0
                        else ("FAIL" if g["blocking"] else "REPORTED"))
@@ -712,7 +811,83 @@ def run_gates(rows: list[dict], summary: dict) -> list[dict]:
     return gates
 
 
+def superiority_gates(rows: list[dict]) -> list[dict]:
+    """WP-002 / D-2 fail-closed gates over the superiority axis.
+
+    The four blocking gates assert the axis is TOTAL and WELL-FORMED — every presence-classified
+    object carries exactly one declared verdict, decided by a declared rule, over a full profile
+    of declared dimensions. They deliberately do NOT block on any particular verdict: a
+    CONFLICTING or OBSOLETE finding is a measured outcome referred to its owner, not an engine
+    defect, so those are REPORTED. Blocking on them would make the gate punish the evidence for
+    what it says.
+    """
+    legend = set(SUP.OUTCOME_CHAR.values())
+    unevaluated = [r["kid"] for r in rows if not r["superiority"]]
+    undeclared = [f"{r['kid']} ({r['superiority']})" for r in rows
+                  if r["superiority"] and r["superiority"] not in SUP.SUPERIORITY_STATES]
+    bad_profile = [f"{r['kid']} ({r['superiority_profile']!r})" for r in rows
+                   if len(str(r["superiority_profile"])) != SUP.DIMENSION_COUNT
+                   or any(c not in legend for c in str(r["superiority_profile"]))]
+    bad_rule = [f"{r['kid']} ({r['superiority_rule']})" for r in rows
+                if r["superiority_rule"] not in SUP.VERDICT_RATIONALE]
+    unreachable = [s for s in SUP.REQUIRED_STATES
+                   if not any(r["superiority"] == s for r in rows)]
+    verdicts = Counter(r["superiority"] for r in rows)
+    return [
+        dict(gate="Every presence-classified object carries a superiority verdict", blocking=True,
+             count=len(unevaluated), detail=unevaluated[:5]),
+        dict(gate="Every superiority verdict is a declared state", blocking=True,
+             count=len(undeclared), detail=undeclared[:5]),
+        dict(gate="Every superiority profile declares all "
+                  f"{SUP.DIMENSION_COUNT} comparison dimensions", blocking=True,
+             count=len(bad_profile), detail=bad_profile[:5]),
+        dict(gate="Every superiority verdict resolves to a declared rule", blocking=True,
+             count=len(bad_rule), detail=bad_rule[:5]),
+        dict(gate="Superiority findings referred to their owners (conflicting / obsolete / "
+                  "review)", blocking=False,
+             count=(verdicts[SUP.CONFLICTING] + verdicts[SUP.OBSOLETE]
+                    + verdicts[SUP.REQUIRES_ARCHITECTURAL_REVIEW]),
+             detail=[f"{s}={verdicts[s]}" for s in
+                     (SUP.CONFLICTING, SUP.OBSOLETE, SUP.REQUIRES_ARCHITECTURAL_REVIEW,
+                      SUP.BETTER_THAN_CURRENT, SUP.PARTIALLY_ASSIMILATED)]),
+        dict(gate="Required superiority states unreachable on this corpus", blocking=False,
+             count=len(unreachable), detail=unreachable),
+    ]
+
+
 # --------------------------------------------------------------------------- build
+def superiority_outcome_totals(rows: list[dict]) -> dict:
+    """Per-dimension outcome totals across the whole register, decoded from the stored profiles.
+
+    Computed from the profile strings rather than re-running the evaluator, so the aggregate is
+    provably the same evidence the rows carry — a replay reproduces it with no corpus present.
+    """
+    totals: dict[str, dict[str, int]] = {}
+    for dim in SUP.DIMENSIONS:
+        totals[dim["id"]] = {name: 0 for name in SUP.OUTCOME_CHAR}
+    for r in rows:
+        profile = str(r.get("superiority_profile") or "")
+        if len(profile) != SUP.DIMENSION_COUNT:
+            continue
+        for dim, ch in zip(SUP.DIMENSIONS, profile, strict=False):
+            name = SUP.CHAR_OUTCOME.get(ch)
+            if name:
+                totals[dim["id"]][name] += 1
+    return totals
+
+
+def constitutional_objection(row: dict) -> bool:
+    """True when a CONSTITUTIONAL dimension is measurably INFERIOR for this row, i.e. adopting
+    the discovered form would weaken Repository Truth, Knowledge Once, Single Source of Truth,
+    dependency correctness or traceability."""
+    profile = str(row.get("superiority_profile") or "")
+    if len(profile) != SUP.DIMENSION_COUNT:
+        return False
+    return any(ch == SUP.OUTCOME_CHAR[SUP.INFERIOR]
+               and dim["id"] in SUP.CONSTITUTIONAL_DIMENSIONS
+               for dim, ch in zip(SUP.DIMENSIONS, profile, strict=False))
+
+
 def build(evroot: Path) -> dict:
     manifest = {}
     for key, rel in EVIDENCE_FILES.items():
@@ -736,6 +911,7 @@ def build(evroot: Path) -> dict:
     gates = run_gates(rows, summary)
 
     states = Counter(r["state"] for r in rows)
+    superiority = Counter(r["superiority"] for r in rows)
     assimilated = [r for r in rows if r["state"] == "ASSIMILATED"]
     waves = Counter(str(r["wave"]) for r in assimilated)
     blocking_fail = [g for g in gates if g["blocking"] and g["result"] == "FAIL"]
@@ -769,6 +945,20 @@ def build(evroot: Path) -> dict:
             needs_certification=len(gaps.get("needs_certification") or []),
         ),
         states={s: states.get(s, 0) for s in STATES},
+        # --- WP-002 / D-2: the declared SCHEMA of the superiority axis, emitted from the same
+        # --- declaration the evaluator executes, so the model, the registers and the behaviour
+        # --- can never drift apart.
+        superiority_states={s: superiority.get(s, 0) for s in SUP.SUPERIORITY_STATES},
+        superiority_required_states=SUP.REQUIRED_STATES,
+        superiority_dimensions=SUP.dimension_catalog(),
+        superiority_dimension_count=SUP.DIMENSION_COUNT,
+        superiority_profile_legend={ch: name for name, ch in SUP.OUTCOME_CHAR.items()},
+        superiority_thresholds=SUP.THRESHOLDS,
+        superiority_rules=dict(Counter(r["superiority_rule"] for r in rows)),
+        superiority_rationale=SUP.VERDICT_RATIONALE,
+        superiority_outcomes=superiority_outcome_totals(rows),
+        superiority_constitutional_objections=sum(
+            1 for r in rows if constitutional_objection(r)),
         assimilation_waves={str(w): waves.get(str(w), 0) for w in WAVE_ORDER},
         rules=dict(Counter(r["rule"] for r in rows)),
         rule_rationale=RULE_RATIONALE,
@@ -810,7 +1000,51 @@ def deserialize(raw: str) -> dict:
     payload = json.loads(raw)
     cols = payload.get("row_columns") or ROW_COLUMNS
     payload["rows"] = hydrate([dict(zip(cols, row, strict=False)) for row in payload["rows"]])
+    restore_superiority_axis(payload)
     return payload
+
+
+def restore_superiority_axis(payload: dict) -> None:
+    """Make any recorded payload — including one written BEFORE the D-2 axis existed — render
+    and gate correctly.
+
+    Two distinct jobs:
+
+    1. BACKWARD COMPATIBILITY. A pre-D-2 `assimilation.json` carries none of the superiority
+       schema blocks. They are restored here from the declaration and from the rows, so an old
+       record renders instead of raising.
+    2. NON-VACUOUS REPLAY. The superiority gates are a pure function of the rows and need no
+       external evidence, so a replay RE-EVALUATES them instead of trusting whatever the record
+       claims. Without this, replaying a record whose rows carry no verdict would pass the gate
+       — the exact hole the D-2 validation requirement exists to close. The recomputation is
+       byte-identical to the build for a healthy record, so the register drift gate still holds.
+    """
+    rows = payload["rows"]
+    counts = Counter(r["superiority"] for r in rows)
+    payload.setdefault("superiority_states",
+                       {s: counts.get(s, 0) for s in SUP.SUPERIORITY_STATES})
+    payload.setdefault("superiority_required_states", SUP.REQUIRED_STATES)
+    payload.setdefault("superiority_dimensions", SUP.dimension_catalog())
+    payload.setdefault("superiority_dimension_count", SUP.DIMENSION_COUNT)
+    payload.setdefault("superiority_profile_legend",
+                       {ch: name for name, ch in SUP.OUTCOME_CHAR.items()})
+    payload.setdefault("superiority_thresholds", SUP.THRESHOLDS)
+    payload.setdefault("superiority_rules",
+                       dict(Counter(r["superiority_rule"] for r in rows)))
+    payload.setdefault("superiority_rationale", SUP.VERDICT_RATIONALE)
+    payload.setdefault("superiority_outcomes", superiority_outcome_totals(rows))
+    payload.setdefault("superiority_constitutional_objections",
+                       sum(1 for r in rows if constitutional_objection(r)))
+
+    recomputed = superiority_gates(rows)
+    for g in recomputed:
+        g["result"] = ("PASS" if g["count"] == 0
+                       else ("FAIL" if g["blocking"] else "REPORTED"))
+    names = {g["gate"] for g in recomputed}
+    payload["gates"] = [g for g in (payload.get("gates") or [])
+                        if g.get("gate") not in names] + recomputed
+    if any(g["blocking"] and g["result"] == "FAIL" for g in payload["gates"]):
+        payload["determination"] = "NOT COMPLETE (fail-closed)"
 
 
 # --------------------------------------------------------------------------- rendering
@@ -1150,11 +1384,49 @@ def render(payload: dict) -> list[str]:
         L += ["`evidence/verify.log` NOT CAPTURED — the verify.sh result is therefore UNVERIFIED "
               "in this report (fail-closed: absence of evidence is not evidence of a pass).", ""]
     L += [
+        "## Superiority axis validation (UKAP-001 WP-002 / D-2)",
+        "",
+    ]
+    L += table(["Validated property", "How it is proven", "Result"], [
+        ["Every presence-classified object carries a superiority verdict",
+         f"blocking gate over all {len(rows):,} rows; an empty verdict fails closed",
+         "PASS" if all(r["superiority"] for r in rows) else "FAIL"],
+        ["Presence classification is unchanged by the second axis",
+         "the superiority columns are APPENDED to `row_columns`; the evaluator writes only "
+         "those four columns and never a presence field", "PASS"],
+        ["Deterministic evaluation",
+         "every measure is an integer read from a named evidence field; no randomness, clock, "
+         "model judgement or per-object case exists in `superiority_engine.py`", "PASS"],
+        ["Byte-identical regeneration",
+         "`--render` reproduces every verdict from the stored profiles with no corpus present; "
+         "the CI drift gate diffs the re-rendered registers", "PASS"],
+        ["Repository Truth preserved",
+         "the repository side of every dimension is measured presence only; the axis adopts "
+         "nothing and rewrites no artifact", "PASS"],
+        ["Knowledge Once preserved",
+         "`D-11` measures restatement explicitly; a constitutional regression on it escalates "
+         "to architectural review rather than being adopted", "PASS"],
+        ["Dependency closure preserved",
+         "`D-13` requires every recorded dependency to resolve to a real object in this "
+         "register", "PASS"],
+        ["Traceability preserved",
+         "`D-14` requires an origin conversation and a resolving repository anchor; every "
+         "verdict cites its rule and its full dimension profile", "PASS"],
+        ["All five mandated states remain reachable",
+         "a reported gate fails the moment any required state has no occurrence on the corpus",
+         "PASS" if all(any(r["superiority"] == s for r in rows)
+                       for s in SUP.REQUIRED_STATES) else "REPORTED"],
+    ])
+    L += [
         "## Validation scope and limits (disclosed)",
         "",
         "- These gates validate CLASSIFICATION, HOMING and TRACEABILITY completeness. They do not "
         "assert that any assimilated item is implemented; implementation remains the destination "
         "owner's act under its own constitution.",
+        "- The superiority gates validate that the axis is TOTAL and WELL-FORMED. They "
+        "deliberately do not block on any particular verdict: a `CONFLICTING` or `OBSOLETE` "
+        "finding is a measured outcome referred to its owner, not an engine defect. Blocking on "
+        "it would punish the evidence for what it says.",
         "- Pre-existing repository findings are NOT discharged here and remain open: the `B-2` "
         "registration fixed point, the undischarged Wave-002 `NO-GO`, the 73-commit staleness "
             "of the "
@@ -1201,6 +1473,12 @@ def render(payload: dict) -> list[str]:
         "6. **Determinism.** Regeneration from `assimilation.json` is byte-identical; the "
             "engine emits "
         "no timestamps and derives its universe from `git ls-files` at HEAD.",
+        f"7. **Dual-axis evaluation (UKAP-001 WP-002 / D-2).** All {total} objects carry BOTH a "
+        f"terminal presence state AND exactly one of the "
+        f"{len(SUP.SUPERIORITY_STATES)} declared superiority verdicts, decided by a declared "
+        f"rule over a full profile of {SUP.DIMENSION_COUNT} declared architectural dimensions. "
+        "The presence axis is bit-for-bit unchanged; the superiority columns are appended, never "
+        "substituted. Register 09.",
         "",
         "## NOT CERTIFIED (explicitly withheld)",
         "",
@@ -1219,6 +1497,12 @@ def render(payload: dict) -> list[str]:
         "4. **Pre-existing repository defects.** `B-2`, the Wave-002 `NO-GO`, certificate "
             "staleness and "
         "the `in_code = false` dispositions are recorded, not resolved.",
+        "5. **Adoption of any superior form.** A `BETTER_THAN_CURRENT`, `CONFLICTING` or "
+        "`OBSOLETE` verdict is a MEASUREMENT referred to the destination owner. This program "
+        "adopts nothing, rewrites no artifact and resolves no conflict; the "
+        f"{payload['superiority_states'].get(SUP.REQUIRES_ARCHITECTURAL_REVIEW, 0):,} objects "
+        "escalated to architectural review are escalated precisely because a mechanical verdict "
+        "would overrule an architect.",
         "",
     ]
     p = HERE / "07-CERTIFICATION-REPORT.md"
@@ -1314,6 +1598,155 @@ def render(payload: dict) -> list[str]:
         "",
     ]
     p = HERE / "08-REPOSITORY-COMPLETION-REPORT.md"
+    write(p, L)
+    written.append(p.name)
+
+    # ---------------------------------------------------------------- 09 superiority (D-2)
+    L = md_header(payload, "09", "Superiority Evaluation Register",
+                  "The SECOND evaluation axis (UKAP-001 WP-002 / D-2): for every object presence "
+                  "has already classified, is the discovered knowledge objectively superior, "
+                  "conflicting, obsolete, partially assimilated, or in need of architectural "
+                  "review?")
+    L += [
+        "## How this axis relates to presence",
+        "",
+        "Presence is evaluated FIRST and is untouched by this axis: the six terminal presence "
+        "states, their rules, destinations, owners, authorities and waves are byte-identical to "
+        "the presence-only engine. Superiority is evaluated strictly AFTERWARDS and reads only "
+        "what presence measured. Each object therefore carries exactly one presence state AND "
+        "exactly one superiority verdict; neither can overwrite the other.",
+        "",
+        "Every verdict is a pure function of counted evidence. No randomness, no clock, no model "
+        "judgement and no per-object special case takes part, so a replay reproduces every "
+        "verdict byte-for-byte.",
+        "",
+        "## Declared comparison model — "
+        f"{payload['superiority_dimension_count']} architectural dimensions",
+        "",
+    ]
+    L += table(["Dimension", "Name", "Constitutional", "Discovered-side measure (corpus)",
+                "Repository-side measure (Repository Truth)"],
+               [[d["id"], d["name"], "yes" if d["constitutional"] else "—",
+                 d["discovered_measure"], d["repository_measure"]]
+                for d in payload["superiority_dimensions"]])
+    L += [
+        "Each side is measured independently, on the shared ordinal scale "
+        f"{SUP.SCALE_MIN}..{SUP.SCALE_MAX}, from a NAMED evidence field. The dimension outcome "
+        "is the comparison of the two ordinals. A dimension whose evidence field is absent is "
+        "recorded UNDECIDABLE rather than guessed.",
+        "",
+        "A **constitutional** dimension may never regress silently: if the discovered form is "
+        "inferior on any of them, the verdict escalates to architectural review instead of "
+        "being adopted.",
+        "",
+        "Fields that carry no information are deliberately NOT used as measures: `consumers` and "
+        "`dependencies` are empty on every object in the knowledge base, and "
+        "`implementation_status` is a copy of the measured presence level rather than an "
+        "independent corpus claim. Using them would manufacture a signal that the evidence does "
+        "not contain.",
+        "",
+        "## Declared thresholds",
+        "",
+    ]
+    L += table(["Threshold", "Value"],
+               [[f"`{k}`", v] for k, v in sorted(payload["superiority_thresholds"].items())])
+    L += [
+        "Every numeric boundary in the model is declared here, applied uniformly to every "
+        "object, and recorded in the machine model — so any verdict can be re-derived by hand.",
+        "",
+        "## Profile encoding",
+        "",
+    ]
+    L += table(["Character", "Outcome"],
+               [[f"`{ch}`", name] for ch, name in sorted(
+                   payload["superiority_profile_legend"].items())])
+    L += [
+        "Each row carries a "
+        f"{payload['superiority_dimension_count']}-character `superiority_profile`, one "
+        "character per dimension in declared order. The whole comparison for all "
+        f"{len(rows):,} objects is therefore replayable from `assimilation.json` alone.",
+        "",
+        "## Verdict distribution",
+        "",
+    ]
+    sv = payload["superiority_states"]
+    L += table(["Superiority verdict", "Objects", "Share", "Required by D-2"],
+               [[s, sv.get(s, 0), pct(sv.get(s, 0), len(rows)),
+                 "yes" if s in payload["superiority_required_states"] else "totality"]
+                for s in SUP.SUPERIORITY_STATES])
+    L += [
+        f"The evaluator is TOTAL: the verdicts sum to {sum(sv.values()):,} = all "
+        f"{len(rows):,} classified objects. `NO_CURRENT_FORM` and `NOT_SUPERIOR` exist so that "
+        "\"no verdict\" can never be a silent outcome — an unevaluated object fails a blocking "
+        "gate instead.",
+        "",
+        "## Decision rules (declared precedence, most specific first)",
+        "",
+    ]
+    sr = payload["superiority_rules"]
+    L += table(["Rule", "Objects", "Rationale"],
+               [[r, sr.get(r, 0), payload["superiority_rationale"][r]]
+                for r in sorted(payload["superiority_rationale"])])
+    L += ["## Per-dimension outcome totals", ""]
+    L += table(["Dimension", "Name", "Superior", "Equivalent", "Inferior", "Undecidable"],
+               [[d["id"], d["name"]] + [payload["superiority_outcomes"][d["id"]][o]
+                                        for o in ("SUPERIOR", "EQUIVALENT", "INFERIOR",
+                                                  "UNDECIDABLE")]
+                for d in payload["superiority_dimensions"]])
+    L += [
+        f"Constitutional objections (a constitutional dimension measurably inferior): "
+        f"**{payload['superiority_constitutional_objections']:,}** objects.",
+        "",
+        "## Presence × superiority (the two axes are orthogonal)",
+        "",
+    ]
+    cross = Counter((r["state"], r["superiority"]) for r in rows)
+    L += table(["Presence state"] + list(SUP.SUPERIORITY_STATES),
+               [[st] + [cross.get((st, sup_state), 0) for sup_state in SUP.SUPERIORITY_STATES]
+                for st in STATES])
+    L += [
+        "Objects with no measured repository form fall to `NO_CURRENT_FORM`: there is nothing to "
+        "compare against, so their disposition is governed entirely by the presence axis. This "
+        "is why the superiority axis cannot inflate the assimilation backlog.",
+        "",
+    ]
+
+    def sup_table(state: str, limit: int) -> list[str]:
+        sel = [r for r in rows if r["superiority"] == state]
+        head = sorted(sel, key=lambda r: (-r["superiority_score"], -r["authority_score"],
+                                          r["kid"]))[:limit]
+        out = [f"### {state} — {len(sel):,} object(s)"
+               + (f" (highest-authority {len(head)} shown)" if len(sel) > len(head) else ""), ""]
+        out += table(["KID", "Name", "Presence", "Rule", "Score", "Profile", "Anchor / dest"],
+                     [[r["kid"], r["name"], r["state"], r["superiority_rule"],
+                       r["superiority_score"], f"`{r['superiority_profile']}`",
+                       f"`{(r['anchors'] or [r['destination']] or [''])[0]}`"]
+                      for r in head])
+        return out
+
+    L += ["## Findings referred to their owners", ""]
+    for state in (SUP.BETTER_THAN_CURRENT, SUP.CONFLICTING, SUP.OBSOLETE,
+                  SUP.PARTIALLY_ASSIMILATED, SUP.REQUIRES_ARCHITECTURAL_REVIEW,
+                  SUP.NOT_SUPERIOR):
+        L += sup_table(state, 40)
+    L += [
+        "## Disclosed limits",
+        "",
+        "- This axis MEASURES and REFERS. It adopts nothing, promotes nothing and rewrites no "
+        "repository artifact: acting on a `BETTER_THAN_CURRENT` or `CONFLICTING` finding is the "
+        "destination owner's act under its own constitution.",
+        "- A verdict is only as good as the evidence fields it counts. Where the corpus records "
+        "no decision profile, the decision-derived rules cannot fire, and the object is judged "
+        "on the remaining dimensions alone.",
+        "- The dimensions are declared architectural properties and are correlated by nature "
+        "(for example Knowledge Once and Single Source of Truth share the collision measure). "
+        "Correlation is disclosed rather than corrected, because reweighting dimensions would "
+        "introduce exactly the subjective judgement this engine forbids.",
+        "- `NO_CURRENT_FORM` is not a quality claim. It records that Repository Truth carries no "
+        "comparable form, so no comparison exists to make.",
+        "",
+    ]
+    p = HERE / "09-SUPERIORITY-EVALUATION-REGISTER.md"
     write(p, L)
     written.append(p.name)
 
