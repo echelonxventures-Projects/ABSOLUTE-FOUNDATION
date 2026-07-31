@@ -36,6 +36,12 @@ help:
 	@echo "  make closure-phase2-gate fail-closed PHASE-002 gate (non-zero exit while concept gaps remain)"
 	@echo "  make closure-phase3      regenerate PHASE-003 implementation planning (outputs 36-48)"
 	@echo "  make closure-phase3-gate fail-closed PHASE-003 gate (non-zero exit while repository NOT-CLOSED)"
+	@echo "  make assimilate    regenerate UAKOS-CLOSURE-008 assimilation registers (01-08)"
+	@echo "  make assimilate-replay  re-render the registers from assimilation.json (no evidence tree)"
+	@echo "  make assimilate-gate    fail-closed completion gate (non-zero while any object is unclassified)"
+	@echo "  make roadmap       regenerate the UCOS-MXR-001 master execution roadmap (01-10)"
+	@echo "  make roadmap-replay     re-render the roadmap from roadmap.json (recorded HEAD kept)"
+	@echo "  make roadmap-gate  fail-closed execution-roadmap gate (deps resolved, order total)"
 	@echo "  make lint          ruff lint only"
 	@echo "  make format        ruff format (rewrite engine + platform)"
 	@echo "  make format-check  ruff format --check (no writes; CI-style)"
@@ -127,6 +133,48 @@ closure-phase3: closure-phase2
 # (planning delivered, authorized execution still pending).
 closure-phase3-gate: closure-phase2
 	@python3 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py --gate
+
+# assimilate: UAKOS-CLOSURE-008 — constitutional assimilation & repository completion.
+# Consumes the FROZEN knowledge-assimilation base + tri-source verification determination
+# (read-only, hashed) and drives every verified knowledge object into exactly one of six
+# terminal states, homing every approved item with a destination, owner, constitutional
+# authority, wave and dependency chain. Deterministic, stdlib-only; mutates nothing outside
+# 00-MASTER/UAKOS-CLOSURE-008/. Set UAKOS_EVIDENCE_ROOT to relocate the evidence tree.
+.PHONY: assimilate assimilate-replay assimilate-gate
+assimilate:
+	@python3 00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py
+
+# assimilate-replay: re-render every register from the in-repo assimilation.json alone —
+# proves the repository is self-contained (no external evidence tree required).
+assimilate-replay:
+	@python3 00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py --render
+
+# assimilate-gate: fail-closed — non-zero exit while any verified knowledge object is
+# unclassified, unhomed, unowned, untraceable, or any semantic mapping fails to resolve.
+assimilate-gate:
+	@python3 00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py --render --gate
+
+# roadmap: UCOS-MXR-001 — master execution roadmap (post UAKOS-CLOSURE-008). Compiles the
+# CURRENT REPOSITORY STATE (MCP-002/MCP-003 state of record, UCDA-000001 work packages, the RIE
+# intelligence artifacts, closure.json, assimilation.json + HEAD band evidence) into a
+# deterministic execution program: backlog, dependency graph, waves, critical path, parallel
+# groups, validation/certification gates and the readiness determination. No discovery, no
+# reconciliation; mutates nothing outside 00-MASTER/UCOS-MXR-001/.
+.PHONY: roadmap roadmap-replay roadmap-gate
+roadmap:
+	@python3 00-MASTER/UCOS-MXR-001/roadmap_engine.py
+
+# roadmap-replay: re-render 01..10 from the committed roadmap.json alone. A committed artifact
+# can never contain the sha of the commit that carries it, so the DRIFT check must replay
+# (preserving the recorded HEAD) while `roadmap-gate` proves the program is still derivable.
+roadmap-replay:
+	@python3 00-MASTER/UCOS-MXR-001/roadmap_engine.py --render
+
+# roadmap-gate: fail-closed — non-zero exit unless the roadmap is executable (acyclic graph,
+# every dependency resolved, every item located/named-owner/validatable/rollback-able, no READY
+# item behind a non-executable prerequisite, total order).
+roadmap-gate:
+	@python3 00-MASTER/UCOS-MXR-001/roadmap_engine.py --gate
 
 # lint/test self-heal the venv first so they never hit "command not found".
 lint: bootstrap-quiet
