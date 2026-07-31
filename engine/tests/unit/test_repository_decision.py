@@ -22,7 +22,11 @@ from __future__ import annotations
 import ast
 import importlib.util
 import json
+import shutil
+import subprocess
 from pathlib import Path
+
+import pytest
 
 REPO = Path(__file__).resolve().parents[3]
 PROGRAM_DIR = REPO / "00-MASTER" / "UAKOS-CLOSURE-008"
@@ -540,10 +544,54 @@ def test_owner_resolution_is_total_and_never_overrides_the_presence_axis():
     assert dec.owner_for(row(anchors=["engine/a.py:def foo"])) == dec.ZONE_OWNER["engine"]
 
 
+def _version_controlled_zone_missing(zone: str) -> bool:
+    """Is this declared zone genuinely absent — as opposed to merely generated?
+
+    `.gitignore` is the single authority for what version control excludes, so this asks git
+    rather than carrying a second list of generated zones that could drift out of agreement
+    with it.
+    """
+    if (REPO / zone).exists():
+        return False
+    git_bin = shutil.which("git")
+    if git_bin is None:  # pragma: no cover - git always present in CI
+        pytest.skip("git is not available")
+    excluded = subprocess.run(  # noqa: S603
+        # The trailing slash is load-bearing: `.gitignore` states these zones as directory-only
+        # patterns, and git cannot infer directory-ness for a path that is absent from disk —
+        # which is precisely the case this check exists to answer.
+        [git_bin, "check-ignore", "-q", "--", f"{zone}/"],
+        cwd=REPO,
+        capture_output=True,
+        check=False,
+    )
+    return excluded.returncode != 0
+
+
 def test_owner_resolution_creates_no_authority():
-    """Every declared zone owner names an EXISTING repository zone that resolves on disk."""
+    """Every declared zone owner names a REAL repository zone.
+
+    A zone resolves either on disk or, for a generated zone that `.gitignore` excludes from
+    version control (`determinism-evidence/`, `dist/`, `knowledge/`, `realization/`), as a
+    declared exclusion. Asserting bare on-disk existence made this test pass only on a machine
+    that had already generated those zones locally and fail on every clean checkout, which is
+    the opposite of a determinism guarantee.
+    """
     for zone in dec.ZONE_OWNER:
-        assert (REPO / zone).exists(), zone
+        assert not _version_controlled_zone_missing(zone), zone
+
+
+def test_the_zone_existence_check_still_rejects_a_zone_that_names_nothing():
+    """The generated-zone allowance must not make the invariant vacuous.
+
+    Relaxing "exists on disk" to "exists on disk OR is a declared exclusion" would be worthless
+    if every name passed. A fabricated zone is neither present nor ignored, so it is still
+    caught — which is what keeps a typo or a stale `ZONE_OWNER` entry from going unnoticed.
+    """
+    assert _version_controlled_zone_missing("determinism-evidence-typo")
+    assert _version_controlled_zone_missing("zone-that-names-nothing")
+    # and a generated zone that .gitignore really does exclude is still allowed
+    assert not _version_controlled_zone_missing("determinism-evidence")
 
 
 def test_the_plan_generator_resolves_a_real_addressed_plan():
