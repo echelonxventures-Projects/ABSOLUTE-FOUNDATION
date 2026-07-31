@@ -36,6 +36,9 @@ help:
 	@echo "  make closure-phase2-gate fail-closed PHASE-002 gate (non-zero exit while concept gaps remain)"
 	@echo "  make closure-phase3      regenerate PHASE-003 implementation planning (outputs 36-48)"
 	@echo "  make closure-phase3-gate fail-closed PHASE-003 gate (non-zero exit while repository NOT-CLOSED)"
+	@echo "  make corpus        UKAP-001 D-1: discover exports, resolve the newest as canonical input"
+	@echo "  make corpus-replay      re-derive corpus currency from corpus.json (no corpus root)"
+	@echo "  make corpus-gate   fail-closed corpus-currency gate (non-zero while the corpus is stale)"
 	@echo "  make assimilate    regenerate UAKOS-CLOSURE-008 assimilation registers (01-08)"
 	@echo "  make assimilate-replay  re-render the registers from assimilation.json (no evidence tree)"
 	@echo "  make assimilate-gate    fail-closed completion gate (non-zero while any object is unclassified)"
@@ -134,24 +137,51 @@ closure-phase3: closure-phase2
 closure-phase3-gate: closure-phase2
 	@python3 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py --gate
 
+# corpus: UKAP-001 / D-1 — CORPUS CURRENCY RESTORATION. Discovers every available ChatGPT
+# export (archive form under the corpus roots + in-repository conversation exports),
+# identifies the NEWEST by content / git commit order (never by filename or filesystem
+# mtime), resolves it as the canonical assimilation input, measures what the committed
+# baselines actually consumed, and fails closed when a newer export exists but is ignored.
+# Deterministic, stdlib-only; mutates nothing outside 00-MASTER/UKAP-001/. Corpus roots come
+# from UKAP_CORPUS_ROOTS, else UAKOS_EVIDENCE_ROOT (the existing evidence-root contract).
+.PHONY: corpus corpus-replay corpus-gate
+corpus:
+	@python3 00-MASTER/UKAP-001/corpus_engine.py
+
+# corpus-replay: re-derive the determination from the committed corpus.json alone — proves
+# the currency record is self-contained (no corpus root required). The in-repo export class
+# and both consumption measurements are still re-measured live, so a replay is never vacuous.
+corpus-replay:
+	@python3 00-MASTER/UKAP-001/corpus_engine.py --render
+
+# corpus-gate: fail-closed — non-zero exit while any corpus class is STALE: a newer export
+# exists but is ignored, an assimilated conversation is absent from the canonical export, an
+# in-repo export was never reconstructed, or assimilated export content has drifted.
+corpus-gate:
+	@python3 00-MASTER/UKAP-001/corpus_engine.py --render --gate
+
 # assimilate: UAKOS-CLOSURE-008 — constitutional assimilation & repository completion.
 # Consumes the FROZEN knowledge-assimilation base + tri-source verification determination
 # (read-only, hashed) and drives every verified knowledge object into exactly one of six
 # terminal states, homing every approved item with a destination, owner, constitutional
 # authority, wave and dependency chain. Deterministic, stdlib-only; mutates nothing outside
 # 00-MASTER/UAKOS-CLOSURE-008/. Set UAKOS_EVIDENCE_ROOT to relocate the evidence tree.
+#
+# CORPUS CURRENCY (UKAP-001 D-1): every assimilation target depends on `corpus-gate`, so no
+# assimilation artifact can be produced or certified while the corpus is stale. This is the
+# dependency-closure guarantee — currency is verified BEFORE knowledge is assimilated.
 .PHONY: assimilate assimilate-replay assimilate-gate
-assimilate:
+assimilate: corpus-gate
 	@python3 00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py
 
 # assimilate-replay: re-render every register from the in-repo assimilation.json alone —
 # proves the repository is self-contained (no external evidence tree required).
-assimilate-replay:
+assimilate-replay: corpus-gate
 	@python3 00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py --render
 
 # assimilate-gate: fail-closed — non-zero exit while any verified knowledge object is
 # unclassified, unhomed, unowned, untraceable, or any semantic mapping fails to resolve.
-assimilate-gate:
+assimilate-gate: corpus-gate
 	@python3 00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py --render --gate
 
 # roadmap: UCOS-MXR-001 — master execution roadmap (post UAKOS-CLOSURE-008). Compiles the

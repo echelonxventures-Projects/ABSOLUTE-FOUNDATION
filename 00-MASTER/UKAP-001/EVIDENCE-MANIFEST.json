@@ -1,0 +1,32 @@
+{
+  "canonical_archive": "ac1451ac4015cf8b",
+  "canonical_document": "04-REFERENCE/ChatGPT Chat-1.docx",
+  "corpus_roots": [
+    "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION"
+  ],
+  "determination_id": "D-1",
+  "files": {
+    "assimilation_baseline": {
+      "bytes": 5764423,
+      "relative": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+      "sha256": "014c053c8ae94f8e72e436b49558f981f75714a08c025cdc1e18de3226723ed8"
+    },
+    "export::31b621b2cecc55e8": {
+      "bytes": 351,
+      "relative": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION/46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-08-02-36-04-5fc64362b35342e1ba7e6f1eba6ed88c",
+      "sha256": "31b621b2cecc55e878c8a844ef4748803ef23e9587d88e3fd649dea365d12e84"
+    },
+    "export::ac1451ac4015cf8b": {
+      "bytes": 382,
+      "relative": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION/46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-29-12-03-41-1d48b6b6d0504018bba29c16b1c54e80",
+      "sha256": "ac1451ac4015cf8b05a40856002b673ed175f33d08b9637fa3455a3f25da2fa8"
+    },
+    "provenance_baseline": {
+      "bytes": 5944,
+      "relative": "00-MASTER/UAKOS-PHASE-001B/01-SOURCE-PROVENANCE-REGISTER.md",
+      "sha256": "3907efd9c38e8f5f1c10bf096c8ba20f704a927691bb04c547336379db039cd7"
+    }
+  },
+  "head_commit": "09904a0",
+  "program": "UKAP-001"
+}

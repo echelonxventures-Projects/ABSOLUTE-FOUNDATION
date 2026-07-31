@@ -10,7 +10,8 @@ whitespace-collapsed string.
 Mission: reconstruct the chain
     Document -> Page -> Section -> Paragraph -> Original Text -> Knowledge Object
              -> Repository Evidence -> Validation Evidence -> Certification Evidence
-for every one of the 431 knowledge objects in closure.json.
+for every knowledge object in closure.json (the concept universe is read from the
+closure baseline — never hardcoded).
 
 Determinism (UCKO-PRIN-0005): stdlib only; logical pages are derived from
 explicit <w:br w:type="page"/> and Word <w:lastRenderedPageBreak/> markers in

@@ -7,7 +7,7 @@
     "5": 185,
     "6": 17,
     "7": 6,
-    "F": 11356
+    "F": 11355
   },
   "authority": "NONE \u2014 DERIVED TRUTH (fail-closed, TRACK-001)",
   "curated_mappings": [
@@ -288,7 +288,7 @@
       "result": "REPORTED"
     }
   ],
-  "head_commit": "e9d605a",
+  "head_commit": "09904a0",
   "mission": "Constitutional assimilation & repository completion (final closure)",
   "presence_corrections": 322,
   "program": "UAKOS-CLOSURE-008",
@@ -355,8 +355,8 @@
   },
   "remaining_approved_promotion_candidates": 0,
   "repository_index": {
-    "concepts": 38722,
-    "files": 4258
+    "concepts": 38904,
+    "files": 4285
   },
   "row_columns": [
     "kid",
@@ -401,23 +401,23 @@
     "R1": 32,
     "R2": 4894,
     "R4": 6176,
-    "R6": 11926,
+    "R6": 11925,
     "SE-1": 9,
-    "SE-2": 172,
-    "SE-3": 519
+    "SE-2": 175,
+    "SE-3": 517
   },
-  "seal_sha256": "af2958892e889ff40ea302d8fda62a96bc228b94c75d57fbd637ad9b218e2892",
+  "seal_sha256": "49191d2a6dba76187e2258ee486b393a79e70667458dbd7025e2a0c11214c327",
   "semantic_rules": {
     "SE-1": 4,
-    "SE-2": 172,
-    "SE-3": 519
+    "SE-2": 175,
+    "SE-3": 517
   },
   "states": {
     "ALREADY-REPRESENTED": 4894,
-    "ASSIMILATED": 11926,
+    "ASSIMILATED": 11925,
     "HISTORICAL-EVIDENCE-ONLY": 6176,
     "REJECTED": 131,
-    "SEMANTICALLY-REPRESENTED": 695,
+    "SEMANTICALLY-REPRESENTED": 696,
     "SUPERSEDED": 37
   },
   "unclassified": 0,
@@ -8634,7 +8634,7 @@
     ["UCOS-KA-008209","CD-04","CONSTITUTION","CONSTITUTIONAL","REPO-OPERATIONAL","P2","ALREADY-REPRESENTED","R2","","","REPO-OPERATIONAL",12,false,false,9,6,0,12.0,4,"6a412b2d-95a8-83e8-9527-4748db824c80",5,"","",[".github/workflows/ec1-ci.yml","00-MASTER/IMPLEMENT-001B/03-C4-EVIDENCE-AND-DISPOSITION.md"],[]],
     ["UCOS-KA-008210","Generate Registry","REGISTRY","REGISTRY","PROPOSAL","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,8,0,0,12.0,6,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",[],[]],
     ["UCOS-KA-008211","Acceptance Gates","CERTIFICATION","CERTIFICATION","REPO-CERTIFIED","P3","ALREADY-REPRESENTED","R2","","","REPO-CERTIFIED",2,false,false,26,0,0,12.0,5,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",["engine/certification/EPIC-008-COMPLETION-REPORT.md","engine/certification/closure.py"],[]],
-    ["UCOS-KA-008212","Implementation Waves","ROADMAP","ROADMAP","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,16,0,0,12.0,6,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"STRUCTURAL (token-set identity)","",["04-IMPLEMENTATION-WAVES.md"],[]],
+    ["UCOS-KA-008212","Implementation Waves","ROADMAP","ROADMAP","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,16,0,0,12.0,6,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"STRUCTURAL (token-set identity)","",["00-MASTER/UCOS-MXR-001/04-IMPLEMENTATION-WAVES.md","04-IMPLEMENTATION-WAVES.md"],[]],
     ["UCOS-KA-008213","Information Theory","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,19,0,0,12.0,6,"6a412b2d-95a8-83e8-9527-4748db824c80",9,"","",[],[]],
     ["UCOS-KA-008214","Operational Runtime","RUNTIME","ENGINE","PROPOSAL","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,9,0,0,12.0,6,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[]],
     ["UCOS-KA-008215","Relationship Taxonomy","TAXONOMY","REGISTRY","PROPOSAL","P2","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,7,0,0,12.0,6,"6a412b2d-95a8-83e8-9527-4748db824c80",6,"","",[],[]],
@@ -10107,7 +10107,7 @@
     ["UCOS-KA-009682","Context Framework","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,6,0,0,10.0,5,"6a511737-9478-83ee-9fee-9b938eceb0eb",9,"","",[],[]],
     ["UCOS-KA-009683","Infinite Scope Principle","PRINCIPLE","CONSTITUTIONAL","IDEA","P2","ASSIMILATED","R6","01-WORKING/LAW-REGISTER.md","F","ABSENT",0,false,false,3,0,0,10.0,3,"6a51fe95-5bbc-83e8-86fc-8b62ceede774",4,"","",[],[]],
     ["UCOS-KA-009684","Certification Graph","GRAPH","REGISTRY","REPO-CERTIFIED","P3","ALREADY-REPRESENTED","R2","","","REPO-CERTIFIED",3,false,false,21,0,0,10.0,5,"6a51fe95-5bbc-83e8-86fc-8b62ceede774",13,"","",["00-MASTER/UCOS-CVER-001/05-GRAPH-CERTIFICATION.md","06-IMPLEMENTATION/UCOS-\u03a9\u221e-KNOWLEDGE-GRAPH-ENGINE.md"],[]],
-    ["UCOS-KA-009685","Execution Readiness Determination","CERTIFICATION","CERTIFICATION","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,6,2,0,10.0,3,"6a543885-5f74-83ee-8c7e-63c600553d86",14,"SUBSUMPTION (repository artifact is more specific)","",["02-MASTER/UCOS-EXEC-003-EC2-EPIC-013-EXECUTION-PACKAGE-DETERMINATION.md"],[]],
+    ["UCOS-KA-009685","Execution Readiness Determination","CERTIFICATION","CERTIFICATION","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,6,2,0,10.0,3,"6a543885-5f74-83ee-8c7e-63c600553d86",14,"STRUCTURAL (token-set identity)","",["00-MASTER/UCOS-MXR-001/10-EXECUTION-READINESS-DETERMINATION.md"],[]],
     ["UCOS-KA-009686","Completion Rules","POLICY","REGISTRY","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",2,false,false,6,0,0,10.0,5,"6a543885-5f74-83ee-8c7e-63c600553d86",14,"","",["05-GENERATION/UCOS-\u03a9\u221e-UNIVERSAL-WORKFLOW-GENERATION-FRAMEWORK.md","08-RUNTIME/RUNTIME-006-UNIVERSAL-EXECUTION-ARCHITECTURE.md"],[]],
     ["UCOS-KA-009687","PL-03","PRINCIPLE","CONSTITUTIONAL","REPO-DOCUMENTED","P2","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",4,false,true,2,2,0,10.0,1,"6a543885-5f74-83ee-8c7e-63c600553d86",4,"","",["02-MASTER/UCOS-\u03a9\u221e-TECHNOLOGY-CONSTITUTION.md","02-MASTER/UCOS-\u03a9\u221e-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md"],[]],
     ["UCOS-KA-009688","Service Meta Model","ARCHITECTURE","ARCHITECTURE","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",11,false,false,17,4,0,10.0,4,"6a543885-5f74-83ee-8c7e-63c600553d86",9,"","",["11-SERVICE/SERVICE-005-UNIVERSAL-SERVICE-META-MODEL.md","11-SERVICE/SERVICE-006-UNIVERSAL-SERVICE-CAPABILITY-ARCHITECTURE.md"],[]],
@@ -11687,7 +11687,7 @@
     ["UCOS-KA-011262","Output Contract","SERVICE","ENGINE","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,6,0,0,8.0,4,"69439a57-0ef4-8325-bdc8-1bf7c204bfe8",15,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"],[]],
     ["UCOS-KA-011263","Agent Contracts","SERVICE","ENGINE","PROPOSAL","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,12,0,0,8.0,4,"694a8223-c6c4-8322-abf1-fcaf981abfc3",15,"","",[],[]],
     ["UCOS-KA-011264","Metrics Architecture","ARCHITECTURE","ARCHITECTURE","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",1,false,false,8,0,0,8.0,4,"695b6556-0ca8-8321-9ee0-33f8770e3e90",9,"","",["02-MASTER/UCOS-\u03a9\u221e-UNIVERSAL-OBSERVABILITY-ARCHITECTURE-CONSTITUTION.md"],[]],
-    ["UCOS-KA-011265","Resolution Rules","POLICY","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,5,0,0,8.0,4,"695b6556-0ca8-8321-9ee0-33f8770e3e90",14,"SUBSUMPTION (repository artifact is more specific)","",["IAC-001A/06-AUTHORITY-CLASSIFICATION-MATRIX.md"],[]],
+    ["UCOS-KA-011265","Resolution Rules","POLICY","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,5,0,0,8.0,4,"695b6556-0ca8-8321-9ee0-33f8770e3e90",14,"STRUCTURAL (token-set identity)","",["00-MASTER/UKAP-001/03-CANONICAL-CORPUS-REGISTER.md"],[]],
     ["UCOS-KA-011266","Hard Boundary","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,5,0,0,8.0,4,"695bec6f-4328-832c-b60f-a54b09c2bbae",9,"","",[],[]],
     ["UCOS-KA-011267","Public Contracts","SERVICE","ENGINE","PROPOSAL","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,4,0,0,8.0,4,"695bec6f-4328-832c-b60f-a54b09c2bbae",15,"","",[],[]],
     ["UCOS-KA-011268","Important Boundary","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,5,0,0,8.0,4,"695d4afa-0438-8324-b6b0-91cf41d328b1",9,"","",[],[]],
@@ -21589,7 +21589,7 @@
     ["UCOS-KA-021164","Reuse Existing Engines","ENGINE","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,2,0,0,4.0,2,"6a5a4832-1f5c-83e8-be0d-f772b33d19b6",12,"","",[],[]],
     ["UCOS-KA-021165","Constitutional Admission Engine","ENGINE","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,3,0,0,4.0,1,"6a5a4832-1f5c-83e8-be0d-f772b33d19b6",12,"","",[],[]],
     ["UCOS-KA-021166","Load Repository","COMPONENT","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,3,0,0,4.0,2,"6a5b099e-bca4-83e8-8c8d-19a30d689d70",15,"","",[],[]],
-    ["UCOS-KA-021167","Repository Gate","CERTIFICATION","CERTIFICATION","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b099e-bca4-83e8-8c8d-19a30d689d70",14,"SUBSUMPTION (repository artifact is more specific)","",["engine/acceptance/gates.py"],[]],
+    ["UCOS-KA-021167","Repository Gate","CERTIFICATION","CERTIFICATION","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b099e-bca4-83e8-8c8d-19a30d689d70",14,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/UCOS-MXR-001/07-VALIDATION-GATES.md"],[]],
     ["UCOS-KA-021168","Repository Laws","LAW","CONSTITUTIONAL","IDEA","P2","ASSIMILATED","R6","01-WORKING/LAW-REGISTER.md","F","ABSENT",0,false,false,3,0,0,4.0,2,"6a5b099e-bca4-83e8-8c8d-19a30d689d70",5,"","",[],[]],
     ["UCOS-KA-021169","Repository Workflow","WORKFLOW","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b099e-bca4-83e8-8c8d-19a30d689d70",14,"","",[],[]],
     ["UCOS-KA-021170","Repository Traceability Matrix","SPECIFICATION","DOCUMENTATION","IDEA","P3","ASSIMILATED","R6","00-BOOK/MASTER-BOOK","F","ABSENT",0,false,false,3,0,0,4.0,2,"6a5b099e-bca4-83e8-8c8d-19a30d689d70",14,"","",[],[]],
@@ -23062,7 +23062,7 @@
     ["UCOS-KA-022637","Attestation Framework","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,14,2,0,3.0,1,"6a412b2d-95a8-83e8-9527-4748db824c80",9,"","",[],[]],
     ["UCOS-KA-022638","Build Waves","ROADMAP","ROADMAP","IDEA","P3","ASSIMILATED","R6","00-MASTER/MCP-003-MASTER-EXECUTION.md","F","ABSENT",0,false,false,11,2,0,3.0,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[]],
     ["UCOS-KA-022639","B01-B1","CONCEPT","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,9,2,0,3.0,1,"6a412b2d-95a8-83e8-9527-4748db824c80",15,"","",[],[]],
-    ["UCOS-KA-022640","Evidence Manifest","REGISTRY","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,6,0,0,3.0,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",[],[]],
+    ["UCOS-KA-022640","Evidence Manifest","REGISTRY","REGISTRY","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,6,0,0,3.0,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"STRUCTURAL (token-set identity)","",["00-MASTER/UKAP-001/07-CERTIFICATION-REPORT.md","00-MASTER/UKAP-001/EVIDENCE-MANIFEST.json","00-MASTER/UKAP-001/corpus_engine.py"],[]],
     ["UCOS-KA-022641","Repository Reality Baseline","ROADMAP","ROADMAP","IDEA","P3","ASSIMILATED","R6","00-MASTER/MCP-003-MASTER-EXECUTION.md","F","ABSENT",0,false,false,6,2,0,3.0,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[]],
     ["UCOS-KA-022642","PCAMG-RUNTIME-0026","CONCEPT","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,9,2,0,3.0,1,"6a412b2d-95a8-83e8-9527-4748db824c80",15,"","",[],[]],
     ["UCOS-KA-022643","Registry Before Runtime","RUNTIME","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,9,0,0,3.0,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[]],

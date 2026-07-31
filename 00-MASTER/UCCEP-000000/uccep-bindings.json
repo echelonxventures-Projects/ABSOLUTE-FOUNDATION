@@ -200,6 +200,18 @@
       "exit_semantics": { "0": "never returned at present", "1": "literal NOT-CLOSED (constant)" }
     },
     {
+      "id": "CK-CORPUS-CURRENCY",
+      "name": "Corpus currency (newest ChatGPT export is the canonical assimilation input)",
+      "owner": "00-MASTER/UKAP-001/corpus_engine.py (UKAP-001 WP-001 D-1)",
+      "argv": ["$PY3", "00-MASTER/UKAP-001/corpus_engine.py", "--render", "--gate"],
+      "write_scope": "own-memory",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "$assertion_comment": "The verdict is reachable in BOTH directions and is measured, never constant: with every corpus class resolving to a canonical (newest) export that the committed baselines demonstrably consumed, the gate exits 0; with a newer export present but ignored, an assimilated conversation absent from the canonical export, an in-repository conversation export never reconstructed, or assimilated export content drifted, it exits 1. `--render` replays the recorded export inventory so no external corpus tree is required, while the in-repository export class and both consumption measurements are re-measured live at HEAD — a replayed verdict is therefore never vacuous.",
+      "exit_semantics": { "0": "CORPUS CURRENT — every downstream assimilation artifact is derived from the newest available export", "1": "CORPUS STALE — knowledge currency is not restored; assimilation and certification are not authorized" }
+    },
+    {
       "id": "CK-HEALTH",
       "name": "Repository health (strict certification policy)",
       "owner": "platform/measurement (UCOS-UMA-001)",
@@ -356,7 +368,7 @@
 
   "gates": [
     { "id": "G-01", "name": "Context Assimilation Gate",        "owner": "00-MASTER/MCP-001-MASTER-CONTEXT.md",        "checks": ["CK-CLOSURE-P1"] },
-    { "id": "G-02", "name": "Knowledge Assimilation Gate",      "owner": "00-MASTER/UAKOS-CLOSURE-002",                "checks": ["CK-CLOSURE-P1", "CK-CLOSURE-P2"] },
+    { "id": "G-02", "name": "Knowledge Assimilation Gate",      "owner": "00-MASTER/UAKOS-CLOSURE-002",                "checks": ["CK-CORPUS-CURRENCY", "CK-CLOSURE-P1", "CK-CLOSURE-P2"] },
     { "id": "G-03", "name": "Reuse Gate",                       "owner": "IAC-001D §05",                                "checks": ["CK-CLOSURE-P2", "CK-DISCOVERY"] },
     { "id": "G-04", "name": "Constitution Gate",                "owner": "00-CEP/CEP-001",                              "checks": ["CK-CMG"] },
     { "id": "G-05", "name": "Architecture Admission Gate",      "owner": "00-CMG/CMG-000001",                           "checks": ["CK-CMG", "CK-SELF-NO-ENUMERATION"] },
