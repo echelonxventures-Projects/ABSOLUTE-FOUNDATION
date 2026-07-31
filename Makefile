@@ -86,6 +86,12 @@ help:
 	@echo "  make ucef          regenerate the UCEF-000001 constitutional-evolution registers (CEP-009-AMD-001)"
 	@echo "  make ucef-gate     fail-closed Constitutional Evolution Gate (CEP-009 ADDENDUM B exit criteria)"
 	@echo "  make ucef-self     UCEF-000001 guards over its own surface (incl. open-world + reuse-before-create)"
+	@echo "  make uar           regenerate the UCOS-UAR-001 Universal Analysis Registry"
+	@echo "  make uar-gate      fail-closed Universal Analysis Registry gate"
+	@echo "  make uar-self      UCOS-UAR-001 guards over its own surface (incl. zero-enumeration)"
+	@echo "  make uapf          report the UAPF-000001 declared pipeline catalogue (derived plans)"
+	@echo "  make uapf-gate     fail-closed Universal Autonomous Pipeline Framework gate"
+	@echo "  make uapf-self     UAPF-000001 guards over its own surface (determinism + taxonomy)"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
 
@@ -844,3 +850,88 @@ ucef-self:
 	@python3 00-MASTER/UCEF-000001/ucef_engine.py --check-determinism
 	@python3 00-MASTER/UCEF-000001/ucef_engine.py --check-reuse-before-create
 	@python3 00-MASTER/UCEF-000001/ucef_engine.py --check-open-world
+
+
+
+# ---------------------------------------------------------------------------
+# uar: UCOS-UAR-001 — Universal Analysis Registry.
+#
+# WHY THIS BLOCK EXISTS. The engine was already complete, already deterministic and already
+# self-guarded, but no declared entry point named it — so the Repository Integration Blueprint
+# measured it as a DEAD ENGINE (`GAP-DEAD-ENGINE`, `VER-11`) and, because `RCH-ENTRYPOINT` is one
+# of its seven pre-declared reachability dimensions, simultaneously as an ORPHAN unit (`VER-09`,
+# `GATE-11`). One cause, two findings, both blocking `GATE-03`.
+#
+# UCOS-RIB-001/WP-003 §008 names the discharge exactly: "name the programme engine from a declared
+# entry point, or disposition the engine", and assigns the act to the `Makefile` / CI entry points
+# — this file. Disposition was rejected on measurement, not preference: all five of the engine's
+# own checks exit 0 (26 declared analyses, every home resolving), so the engine is live code that
+# was merely unreachable, and retiring working, self-guarded code to satisfy a reachability metric
+# would destroy capability to make a number look better.
+#
+# Additive only — no existing target, recipe or dependency above is altered. This introduces NO
+# authority, NO registry and NO new mechanism: it exposes an EXISTING engine through the EXISTING
+# entry-point convention every other programme here already uses.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside
+# 00-MASTER/UCOS-UAR-001/. Adding an analysis is an entry in uar-analyses.json and requires no
+# change to the engine or to this Makefile.
+#
+# Exit 0 gate OPEN · 1 gate CLOSED · 2 fail-closed abort.
+.PHONY: uar uar-gate uar-self
+uar:
+	@python3 00-MASTER/UCOS-UAR-001/uar_engine.py
+
+uar-gate:
+	@python3 00-MASTER/UCOS-UAR-001/uar_engine.py --gate
+
+# uar-self: declaration integrity (every declared analysis has a unique id and a resolving home),
+# zero-enumeration proof (no declared analysis id appears as a literal in the engine source, so
+# the registry cannot be faked by hardcoding), write scope, and self-determinism.
+uar-self:
+	@python3 00-MASTER/UCOS-UAR-001/uar_engine.py --check-declaration
+	@python3 00-MASTER/UCOS-UAR-001/uar_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCOS-UAR-001/uar_engine.py --check-write-scope
+	@python3 00-MASTER/UCOS-UAR-001/uar_engine.py --check-determinism
+
+
+# ---------------------------------------------------------------------------
+# uapf: UAPF-000001 — the Universal Autonomous Pipeline Framework.
+#
+# WHY THIS BLOCK EXISTS. The framework is the constitutional execution foundation for every
+# autonomous activity (Evolution Pipeline, Build Pipeline, and every future pipeline category),
+# and its two canonical pipelines are DECLARED as data in
+# platform/universal_pipeline/catalog/uapf-pipelines.json rather than written as code. Neither
+# the framework nor the catalogue may be reachable only from a test: the Repository Integration
+# Blueprint measures a capability that no declared entry point names as a DEAD ENGINE
+# (`GAP-DEAD-ENGINE`, `VER-11`) and, because `RCH-ENTRYPOINT` is one of its reachability
+# dimensions, simultaneously as an ORPHAN unit (`VER-09`). This block plus the `ucos-uapf`
+# console script in pyproject.toml are the discharge, using the same entry-point convention
+# every other programme here already uses.
+#
+# Additive only — no existing target, recipe or dependency above is altered. This introduces NO
+# authority, NO registry and NO new mechanism: it exposes an EXISTING framework through the
+# EXISTING entry-point convention.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; READ-ONLY — it opens the declared catalogue and
+# writes nothing anywhere, not the certified corpus (DP-03), not the registries, not a cache.
+# Adding a pipeline, a stage, a gate, a policy or a whole new pipeline CATEGORY is an entry in
+# the catalogue and requires no change to the framework or to this Makefile.
+#
+# Exit 0 gate OPEN · 1 gate CLOSED · 2 fail-closed abort.
+.PHONY: uapf uapf-gate uapf-self
+uapf:
+	@python3 -m platform.universal_pipeline.cli
+
+uapf-gate:
+	@python3 -m platform.universal_pipeline.cli --gate
+
+# uapf-self: the framework's guards over its own surface — that the derived registry is
+# byte-identical across two independent discovery passes of the same declarations
+# (--check-determinism), and that the open vocabularies it governs are enumerable
+# (--taxonomy: pipeline types, event categories, stage handlers, object kinds, readiness
+# predicates). Both are read-only.
+uapf-self:
+	@python3 -m platform.universal_pipeline.cli --check-determinism
+	@python3 -m platform.universal_pipeline.cli --taxonomy >/dev/null
+	@python3 -m platform.universal_pipeline.cli --gate

@@ -95,6 +95,12 @@ ucos-uprf = "engine.provider.cli:main"
 # rather than a pipeline, and generate a constitutional OS through the stratum chain. Open by
 # registration; no layer redesign for an unknown dimension, capability, stratum or OS.
 ucos-mcos = "engine.civilization.cli:main"
+# UAPF-000001: Universal Autonomous Pipeline Framework — the constitutional execution
+# foundation for every autonomous activity. Discovers the declared pipeline catalogue,
+# derives every plan from the declarations, and reports or gates. Declaring this entry point
+# is what keeps the framework and its catalogue reachable (RCH-ENTRYPOINT) rather than
+# measured as a dead engine. AUTHORITY = NONE (DERIVED TRUTH); writes nothing.
+ucos-uapf = "platform.universal_pipeline.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -104,6 +110,10 @@ exclude = ["engine.tests*", "platform.tests*"]
 [tool.setuptools.package-data]
 # TASK-000032: ship the canonical BP-DATA reproducibility fixture with the wheel.
 "engine.determinism" = ["blueprints/*.json"]
+# UAPF-000001: ship the declared pipeline catalogue. It is DATA, not code — the Evolution and
+# Build pipelines are declarations the framework derives, so an installed wheel without the
+# catalogue would be a framework with nothing to run.
+"platform.universal_pipeline" = ["catalog/*.json"]
 
 # --- TASK-000009: test + coverage configuration ---------------------------------
 [tool.pytest.ini_options]
@@ -149,6 +159,7 @@ addopts = [
   "--cov=platform.validation_intelligence",
   "--cov=platform.universal_portal",
   "--cov=platform.runtime_platform",
+  "--cov=platform.universal_pipeline",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -156,7 +167,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]
