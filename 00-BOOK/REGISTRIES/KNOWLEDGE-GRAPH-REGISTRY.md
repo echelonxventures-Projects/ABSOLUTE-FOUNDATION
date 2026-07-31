@@ -4,14 +4,14 @@
 
 Every relationship in the UKB is a first-class, navigable, directional edge. Parent/Child and Supersedes/Superseded-By are materialized as inverse pairs so navigation is bidirectional.
 
-**Total edges:** 12829
+**Total edges:** 12817
 
 | Edge type | Count |
 |-----------|-------|
 | Depends-On | 4774 |
 | Required-By | 4697 |
-| Parent | 1200 |
-| Child | 1200 |
+| Parent | 1194 |
+| Child | 1194 |
 | Consumes | 316 |
 | Consumed-By | 316 |
 | Authorized-By | 99 |
@@ -1281,60 +1281,60 @@ Every relationship in the UKB is a first-class, navigable, directional edge. Par
 | `UEDGE-000001250` | `UCOS-IDX-000001` | Child | `UCOS-FRZ-000003` | structural:program-root |
 | `UEDGE-000001251` | `UCOS-ENVIRONMENTS-000001` | Parent | `UCOS-BOOK-000000` | structural:book-root |
 | `UEDGE-000001252` | `UCOS-BOOK-000000` | Child | `UCOS-ENVIRONMENTS-000001` | structural:book-root |
-| `UEDGE-000001253` | `UCOS-EVOUSIS014-000001` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001254` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS014-000001` | structural:book-root |
-| `UEDGE-000001255` | `UCOS-EVOUSIS014-000002` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001256` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS014-000002` | structural:book-root |
-| `UEDGE-000001257` | `UCOS-EVOUSIS014-000003` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001258` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS014-000003` | structural:book-root |
-| `UEDGE-000001259` | `UCOS-EVOUSIS014-000004` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001260` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS014-000004` | structural:book-root |
-| `UEDGE-000001261` | `UCOS-EVOUSIS014-000005` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001262` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS014-000005` | structural:book-root |
-| `UEDGE-000001263` | `UCOS-EVOUSIS014-000006` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001264` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS014-000006` | structural:book-root |
-| `UEDGE-000001265` | `UCOS-EVOUSIS014-000007` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001266` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS014-000007` | structural:book-root |
-| `UEDGE-000001267` | `UCOS-EVOUSIS014-000008` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001268` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS014-000008` | structural:book-root |
-| `UEDGE-000001269` | `UCOS-EVOUSIS014-000009` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001270` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS014-000009` | structural:book-root |
-| `UEDGE-000001271` | `UCOS-EVOUSIS015-000001` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001272` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS015-000001` | structural:book-root |
-| `UEDGE-000001273` | `UCOS-EVOUSIS015-000002` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001274` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS015-000002` | structural:book-root |
-| `UEDGE-000001275` | `UCOS-EVOUSIS015-000003` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001276` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS015-000003` | structural:book-root |
-| `UEDGE-000001277` | `UCOS-EVOUSIS015-000004` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001278` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS015-000004` | structural:book-root |
-| `UEDGE-000001279` | `UCOS-EVOUSIS015-000005` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001280` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS015-000005` | structural:book-root |
-| `UEDGE-000001281` | `UCOS-EVOUSIS015-000006` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001282` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS015-000006` | structural:book-root |
-| `UEDGE-000001283` | `UCOS-EVOUSIS015-000007` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001284` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS015-000007` | structural:book-root |
-| `UEDGE-000001285` | `UCOS-EVOUSIS015-000008` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001286` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS015-000008` | structural:book-root |
-| `UEDGE-000001287` | `UCOS-EVOUSIS015-000009` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001288` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS015-000009` | structural:book-root |
-| `UEDGE-000001289` | `UCOS-EVOUSIS016-000001` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001290` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS016-000001` | structural:book-root |
-| `UEDGE-000001291` | `UCOS-EVOUSIS016-000002` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001292` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS016-000002` | structural:book-root |
-| `UEDGE-000001293` | `UCOS-EVOUSIS016-000003` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001294` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS016-000003` | structural:book-root |
-| `UEDGE-000001295` | `UCOS-EVOUSIS016-000004` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001296` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS016-000004` | structural:book-root |
-| `UEDGE-000001297` | `UCOS-EVOUSIS016-000005` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001298` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS016-000005` | structural:book-root |
-| `UEDGE-000001299` | `UCOS-EVOUSIS016-000006` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001300` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS016-000006` | structural:book-root |
-| `UEDGE-000001301` | `UCOS-EVOUSIS016-000007` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001302` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS016-000007` | structural:book-root |
-| `UEDGE-000001303` | `UCOS-EVOUSIS016-000008` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001304` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS016-000008` | structural:book-root |
-| `UEDGE-000001305` | `UCOS-EVOUSIS016-000009` | Parent | `UCOS-BOOK-000000` | structural:book-root |
-| `UEDGE-000001306` | `UCOS-BOOK-000000` | Child | `UCOS-EVOUSIS016-000009` | structural:book-root |
+| `UEDGE-000001253` | `UCOS-EVOUSIS014-000001` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001254` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000001` | structural:program-root |
+| `UEDGE-000001255` | `UCOS-EVOUSIS014-000002` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001256` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000002` | structural:program-root |
+| `UEDGE-000001257` | `UCOS-EVOUSIS014-000003` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001258` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000003` | structural:program-root |
+| `UEDGE-000001259` | `UCOS-EVOUSIS014-000004` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001260` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000004` | structural:program-root |
+| `UEDGE-000001261` | `UCOS-EVOUSIS014-000005` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001262` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000005` | structural:program-root |
+| `UEDGE-000001263` | `UCOS-EVOUSIS014-000006` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001264` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000006` | structural:program-root |
+| `UEDGE-000001265` | `UCOS-EVOUSIS014-000007` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001266` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000007` | structural:program-root |
+| `UEDGE-000001267` | `UCOS-EVOUSIS014-000008` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001268` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000008` | structural:program-root |
+| `UEDGE-000001269` | `UCOS-EVOUSIS014-000009` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001270` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000009` | structural:program-root |
+| `UEDGE-000001271` | `UCOS-EVOUSIS015-000001` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001272` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000001` | structural:program-root |
+| `UEDGE-000001273` | `UCOS-EVOUSIS015-000002` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001274` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000002` | structural:program-root |
+| `UEDGE-000001275` | `UCOS-EVOUSIS015-000003` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001276` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000003` | structural:program-root |
+| `UEDGE-000001277` | `UCOS-EVOUSIS015-000004` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001278` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000004` | structural:program-root |
+| `UEDGE-000001279` | `UCOS-EVOUSIS015-000005` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001280` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000005` | structural:program-root |
+| `UEDGE-000001281` | `UCOS-EVOUSIS015-000006` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001282` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000006` | structural:program-root |
+| `UEDGE-000001283` | `UCOS-EVOUSIS015-000007` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001284` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000007` | structural:program-root |
+| `UEDGE-000001285` | `UCOS-EVOUSIS015-000008` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001286` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000008` | structural:program-root |
+| `UEDGE-000001287` | `UCOS-EVOUSIS015-000009` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001288` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000009` | structural:program-root |
+| `UEDGE-000001289` | `UCOS-EVOUSIS016-000001` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001290` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000001` | structural:program-root |
+| `UEDGE-000001291` | `UCOS-EVOUSIS016-000002` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001292` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000002` | structural:program-root |
+| `UEDGE-000001293` | `UCOS-EVOUSIS016-000003` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001294` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000003` | structural:program-root |
+| `UEDGE-000001295` | `UCOS-EVOUSIS016-000004` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001296` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000004` | structural:program-root |
+| `UEDGE-000001297` | `UCOS-EVOUSIS016-000005` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001298` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000005` | structural:program-root |
+| `UEDGE-000001299` | `UCOS-EVOUSIS016-000006` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001300` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000006` | structural:program-root |
+| `UEDGE-000001301` | `UCOS-EVOUSIS016-000007` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001302` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000007` | structural:program-root |
+| `UEDGE-000001303` | `UCOS-EVOUSIS016-000008` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001304` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000008` | structural:program-root |
+| `UEDGE-000001305` | `UCOS-EVOUSIS016-000009` | Parent | `UCOS-USIS-000001` | structural:program-root |
+| `UEDGE-000001306` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000009` | structural:program-root |
 | `UEDGE-000001307` | `UCOS-IAC001A-000001` | Parent | `UCOS-BOOK-000000` | structural:book-root |
 | `UEDGE-000001308` | `UCOS-BOOK-000000` | Child | `UCOS-IAC001A-000001` | structural:book-root |
 | `UEDGE-000001309` | `UCOS-IAC001A-000002` | Parent | `UCOS-BOOK-000000` | structural:book-root |
@@ -12752,111 +12752,99 @@ Every relationship in the UKB is a first-class, navigable, directional edge. Par
 | `UEDGE-000012721` | `UCOS-USIS-000004` | Implemented-By | `UCOS-USIS-000016` | inverse-of Implements (metadata:IMPLEMENTS) |
 | `UEDGE-000012722` | `UCOS-USIS-000001` | Depends-On | `UCOS-SEC-000001` | metadata:DEPENDS-ON |
 | `UEDGE-000012723` | `UCOS-SEC-000001` | Required-By | `UCOS-USIS-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012724` | `UCOS-EVOUSIS014-000002` | Parent | `UCOS-USIS-000001` | metadata:PARENT |
-| `UEDGE-000012725` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000002` | inverse-of Parent (metadata:PARENT) |
-| `UEDGE-000012726` | `UCOS-EVOUSIS014-000004` | Parent | `UCOS-USIS-000001` | metadata:PARENT |
-| `UEDGE-000012727` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS014-000004` | inverse-of Parent (metadata:PARENT) |
-| `UEDGE-000012728` | `UCOS-EVOUSIS015-000002` | Parent | `UCOS-USIS-000001` | metadata:PARENT |
-| `UEDGE-000012729` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000002` | inverse-of Parent (metadata:PARENT) |
-| `UEDGE-000012730` | `UCOS-EVOUSIS015-000002` | Parent | `UCOS-USIS-000017` | metadata:PARENT |
-| `UEDGE-000012731` | `UCOS-USIS-000017` | Child | `UCOS-EVOUSIS015-000002` | inverse-of Parent (metadata:PARENT) |
-| `UEDGE-000012732` | `UCOS-EVOUSIS015-000004` | Parent | `UCOS-USIS-000001` | metadata:PARENT |
-| `UEDGE-000012733` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS015-000004` | inverse-of Parent (metadata:PARENT) |
-| `UEDGE-000012734` | `UCOS-EVOUSIS016-000002` | Parent | `UCOS-USIS-000001` | metadata:PARENT |
-| `UEDGE-000012735` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000002` | inverse-of Parent (metadata:PARENT) |
-| `UEDGE-000012736` | `UCOS-EVOUSIS016-000002` | Parent | `UCOS-USIS-000018` | metadata:PARENT |
-| `UEDGE-000012737` | `UCOS-USIS-000018` | Child | `UCOS-EVOUSIS016-000002` | inverse-of Parent (metadata:PARENT) |
-| `UEDGE-000012738` | `UCOS-EVOUSIS016-000004` | Parent | `UCOS-USIS-000001` | metadata:PARENT |
-| `UEDGE-000012739` | `UCOS-USIS-000001` | Child | `UCOS-EVOUSIS016-000004` | inverse-of Parent (metadata:PARENT) |
-| `UEDGE-000012740` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000001` | metadata:DEPENDS-ON |
-| `UEDGE-000012741` | `UCOS-UMB-000001` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012742` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000002` | metadata:DEPENDS-ON |
-| `UEDGE-000012743` | `UCOS-UMB-000002` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012744` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000003` | metadata:DEPENDS-ON |
-| `UEDGE-000012745` | `UCOS-UMB-000003` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012746` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000004` | metadata:DEPENDS-ON |
-| `UEDGE-000012747` | `UCOS-UMB-000004` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012748` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000005` | metadata:DEPENDS-ON |
-| `UEDGE-000012749` | `UCOS-UMB-000005` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012750` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000006` | metadata:DEPENDS-ON |
-| `UEDGE-000012751` | `UCOS-UMB-000006` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012752` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000007` | metadata:DEPENDS-ON |
-| `UEDGE-000012753` | `UCOS-UMB-000007` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012754` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000008` | metadata:DEPENDS-ON |
-| `UEDGE-000012755` | `UCOS-UMB-000008` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012756` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000009` | metadata:DEPENDS-ON |
-| `UEDGE-000012757` | `UCOS-UMB-000009` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012758` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000010` | metadata:DEPENDS-ON |
-| `UEDGE-000012759` | `UCOS-UMB-000010` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012760` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000011` | metadata:DEPENDS-ON |
-| `UEDGE-000012761` | `UCOS-UMB-000011` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012762` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000012` | metadata:DEPENDS-ON |
-| `UEDGE-000012763` | `UCOS-UMB-000012` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012764` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000013` | metadata:DEPENDS-ON |
-| `UEDGE-000012765` | `UCOS-UMB-000013` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012766` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000014` | metadata:DEPENDS-ON |
-| `UEDGE-000012767` | `UCOS-UMB-000014` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012768` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000015` | metadata:DEPENDS-ON |
-| `UEDGE-000012769` | `UCOS-UMB-000015` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012770` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000016` | metadata:DEPENDS-ON |
-| `UEDGE-000012771` | `UCOS-UMB-000016` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012772` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000017` | metadata:DEPENDS-ON |
-| `UEDGE-000012773` | `UCOS-UMB-000017` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012774` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000018` | metadata:DEPENDS-ON |
-| `UEDGE-000012775` | `UCOS-UMB-000018` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012776` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000019` | metadata:DEPENDS-ON |
-| `UEDGE-000012777` | `UCOS-UMB-000019` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012778` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000020` | metadata:DEPENDS-ON |
-| `UEDGE-000012779` | `UCOS-UMB-000020` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012780` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000021` | metadata:DEPENDS-ON |
-| `UEDGE-000012781` | `UCOS-UMB-000021` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012782` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000001` | metadata:DEPENDS-ON |
-| `UEDGE-000012783` | `UCOS-ADV-000001` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012784` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000002` | metadata:DEPENDS-ON |
-| `UEDGE-000012785` | `UCOS-ADV-000002` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012786` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000003` | metadata:DEPENDS-ON |
-| `UEDGE-000012787` | `UCOS-ADV-000003` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012788` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000004` | metadata:DEPENDS-ON |
-| `UEDGE-000012789` | `UCOS-ADV-000004` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012790` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000005` | metadata:DEPENDS-ON |
-| `UEDGE-000012791` | `UCOS-ADV-000005` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012792` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000006` | metadata:DEPENDS-ON |
-| `UEDGE-000012793` | `UCOS-ADV-000006` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012794` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000007` | metadata:DEPENDS-ON |
-| `UEDGE-000012795` | `UCOS-ADV-000007` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012796` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000008` | metadata:DEPENDS-ON |
-| `UEDGE-000012797` | `UCOS-ADV-000008` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012798` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000009` | metadata:DEPENDS-ON |
-| `UEDGE-000012799` | `UCOS-ADV-000009` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012800` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000010` | metadata:DEPENDS-ON |
-| `UEDGE-000012801` | `UCOS-ADV-000010` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012802` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000011` | metadata:DEPENDS-ON |
-| `UEDGE-000012803` | `UCOS-ADV-000011` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012804` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000012` | metadata:DEPENDS-ON |
-| `UEDGE-000012805` | `UCOS-ADV-000012` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012806` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000013` | metadata:DEPENDS-ON |
-| `UEDGE-000012807` | `UCOS-ADV-000013` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012808` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000014` | metadata:DEPENDS-ON |
-| `UEDGE-000012809` | `UCOS-ADV-000014` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012810` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000015` | metadata:DEPENDS-ON |
-| `UEDGE-000012811` | `UCOS-ADV-000015` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012812` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000016` | metadata:DEPENDS-ON |
-| `UEDGE-000012813` | `UCOS-ADV-000016` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012814` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000017` | metadata:DEPENDS-ON |
-| `UEDGE-000012815` | `UCOS-ADV-000017` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012816` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000018` | metadata:DEPENDS-ON |
-| `UEDGE-000012817` | `UCOS-ADV-000018` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012818` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000019` | metadata:DEPENDS-ON |
-| `UEDGE-000012819` | `UCOS-ADV-000019` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012820` | `UCOS-PLT-000031` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
-| `UEDGE-000012821` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000031` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012822` | `UCOS-PLT-000051` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
-| `UEDGE-000012823` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000051` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012824` | `UCOS-PLT-000028` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
-| `UEDGE-000012825` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000028` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012826` | `UCOS-PLT-000030` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
-| `UEDGE-000012827` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000030` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012828` | `UCOS-PLT-000029` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
-| `UEDGE-000012829` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000029` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012724` | `UCOS-EVOUSIS015-000002` | Parent | `UCOS-USIS-000017` | metadata:PARENT |
+| `UEDGE-000012725` | `UCOS-USIS-000017` | Child | `UCOS-EVOUSIS015-000002` | inverse-of Parent (metadata:PARENT) |
+| `UEDGE-000012726` | `UCOS-EVOUSIS016-000002` | Parent | `UCOS-USIS-000018` | metadata:PARENT |
+| `UEDGE-000012727` | `UCOS-USIS-000018` | Child | `UCOS-EVOUSIS016-000002` | inverse-of Parent (metadata:PARENT) |
+| `UEDGE-000012728` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000001` | metadata:DEPENDS-ON |
+| `UEDGE-000012729` | `UCOS-UMB-000001` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012730` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000002` | metadata:DEPENDS-ON |
+| `UEDGE-000012731` | `UCOS-UMB-000002` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012732` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000003` | metadata:DEPENDS-ON |
+| `UEDGE-000012733` | `UCOS-UMB-000003` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012734` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000004` | metadata:DEPENDS-ON |
+| `UEDGE-000012735` | `UCOS-UMB-000004` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012736` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000005` | metadata:DEPENDS-ON |
+| `UEDGE-000012737` | `UCOS-UMB-000005` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012738` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000006` | metadata:DEPENDS-ON |
+| `UEDGE-000012739` | `UCOS-UMB-000006` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012740` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000007` | metadata:DEPENDS-ON |
+| `UEDGE-000012741` | `UCOS-UMB-000007` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012742` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000008` | metadata:DEPENDS-ON |
+| `UEDGE-000012743` | `UCOS-UMB-000008` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012744` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000009` | metadata:DEPENDS-ON |
+| `UEDGE-000012745` | `UCOS-UMB-000009` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012746` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000010` | metadata:DEPENDS-ON |
+| `UEDGE-000012747` | `UCOS-UMB-000010` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012748` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000011` | metadata:DEPENDS-ON |
+| `UEDGE-000012749` | `UCOS-UMB-000011` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012750` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000012` | metadata:DEPENDS-ON |
+| `UEDGE-000012751` | `UCOS-UMB-000012` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012752` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000013` | metadata:DEPENDS-ON |
+| `UEDGE-000012753` | `UCOS-UMB-000013` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012754` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000014` | metadata:DEPENDS-ON |
+| `UEDGE-000012755` | `UCOS-UMB-000014` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012756` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000015` | metadata:DEPENDS-ON |
+| `UEDGE-000012757` | `UCOS-UMB-000015` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012758` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000016` | metadata:DEPENDS-ON |
+| `UEDGE-000012759` | `UCOS-UMB-000016` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012760` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000017` | metadata:DEPENDS-ON |
+| `UEDGE-000012761` | `UCOS-UMB-000017` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012762` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000018` | metadata:DEPENDS-ON |
+| `UEDGE-000012763` | `UCOS-UMB-000018` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012764` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000019` | metadata:DEPENDS-ON |
+| `UEDGE-000012765` | `UCOS-UMB-000019` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012766` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000020` | metadata:DEPENDS-ON |
+| `UEDGE-000012767` | `UCOS-UMB-000020` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012768` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000021` | metadata:DEPENDS-ON |
+| `UEDGE-000012769` | `UCOS-UMB-000021` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012770` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000001` | metadata:DEPENDS-ON |
+| `UEDGE-000012771` | `UCOS-ADV-000001` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012772` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000002` | metadata:DEPENDS-ON |
+| `UEDGE-000012773` | `UCOS-ADV-000002` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012774` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000003` | metadata:DEPENDS-ON |
+| `UEDGE-000012775` | `UCOS-ADV-000003` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012776` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000004` | metadata:DEPENDS-ON |
+| `UEDGE-000012777` | `UCOS-ADV-000004` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012778` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000005` | metadata:DEPENDS-ON |
+| `UEDGE-000012779` | `UCOS-ADV-000005` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012780` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000006` | metadata:DEPENDS-ON |
+| `UEDGE-000012781` | `UCOS-ADV-000006` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012782` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000007` | metadata:DEPENDS-ON |
+| `UEDGE-000012783` | `UCOS-ADV-000007` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012784` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000008` | metadata:DEPENDS-ON |
+| `UEDGE-000012785` | `UCOS-ADV-000008` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012786` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000009` | metadata:DEPENDS-ON |
+| `UEDGE-000012787` | `UCOS-ADV-000009` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012788` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000010` | metadata:DEPENDS-ON |
+| `UEDGE-000012789` | `UCOS-ADV-000010` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012790` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000011` | metadata:DEPENDS-ON |
+| `UEDGE-000012791` | `UCOS-ADV-000011` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012792` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000012` | metadata:DEPENDS-ON |
+| `UEDGE-000012793` | `UCOS-ADV-000012` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012794` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000013` | metadata:DEPENDS-ON |
+| `UEDGE-000012795` | `UCOS-ADV-000013` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012796` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000014` | metadata:DEPENDS-ON |
+| `UEDGE-000012797` | `UCOS-ADV-000014` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012798` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000015` | metadata:DEPENDS-ON |
+| `UEDGE-000012799` | `UCOS-ADV-000015` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012800` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000016` | metadata:DEPENDS-ON |
+| `UEDGE-000012801` | `UCOS-ADV-000016` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012802` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000017` | metadata:DEPENDS-ON |
+| `UEDGE-000012803` | `UCOS-ADV-000017` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012804` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000018` | metadata:DEPENDS-ON |
+| `UEDGE-000012805` | `UCOS-ADV-000018` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012806` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-ADV-000019` | metadata:DEPENDS-ON |
+| `UEDGE-000012807` | `UCOS-ADV-000019` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012808` | `UCOS-PLT-000031` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
+| `UEDGE-000012809` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000031` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012810` | `UCOS-PLT-000051` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
+| `UEDGE-000012811` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000051` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012812` | `UCOS-PLT-000028` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
+| `UEDGE-000012813` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000028` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012814` | `UCOS-PLT-000030` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
+| `UEDGE-000012815` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000030` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012816` | `UCOS-PLT-000029` | Depends-On | `UCOS-PLT-000032` | metadata:DEPENDS-ON |
+| `UEDGE-000012817` | `UCOS-PLT-000032` | Required-By | `UCOS-PLT-000029` | inverse-of Depends-On (metadata:DEPENDS-ON) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

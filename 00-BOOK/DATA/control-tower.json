@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-28T05:52:19+00:00",
+  "generated_at": "2026-07-31T06:45:07+00:00",
   "generator_version": "1.0.0",
   "portfolio": {
     "total_artifacts": 1193,
     "total_pages": 9618,
     "total_volumes": 25,
-    "total_edges": 12829,
+    "total_edges": 12817,
     "portfolio_status": "IN_PROGRESS — analysis/architecture/generation complete; runtime testing/deployment pending EC-1",
     "status_histogram": {
       "ACTIVE": 1092,
@@ -58,15 +58,15 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "ARCHITECTURA",
-      "artifact_count": 3,
+      "program": "ARCHIT",
+      "artifact_count": 4,
       "status_histogram": {
-        "ACTIVE": 3
+        "ACTIVE": 4
       },
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "ARCHITECTURE",
+      "program": "ASSIMI",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -74,7 +74,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "ASSIMILATION",
+      "program": "BATCHG",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -82,7 +82,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "BATCHGENERAT",
+      "program": "BLOCKE",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -90,26 +90,10 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "BLOCKERVERIF",
-      "artifact_count": 1,
+      "program": "CANONI",
+      "artifact_count": 2,
       "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "CANONICALINT",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "CANONICALOWN",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
+        "ACTIVE": 2
       },
       "rollup_status": "ACTIVE"
     },
@@ -130,7 +114,7 @@
       "rollup_status": "COMPLETE"
     },
     {
-      "program": "CERTIFICATIO",
+      "program": "CERTIF",
       "artifact_count": 2,
       "status_histogram": {
         "ACTIVE": 2
@@ -159,7 +143,7 @@
       "rollup_status": "UNDER_REVIEW"
     },
     {
-      "program": "CRITICALPATH",
+      "program": "CRITIC",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -175,7 +159,15 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "DEPENDENCYCL",
+      "program": "DEPEND",
+      "artifact_count": 2,
+      "status_histogram": {
+        "ACTIVE": 2
+      },
+      "rollup_status": "ACTIVE"
+    },
+    {
+      "program": "DRRAT1",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -183,23 +175,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "DEPENDENCYGR",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "DRRAT11ASSES",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "DUPLICATIONA",
+      "program": "DUPLIC",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -224,47 +200,31 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "ENVIRONMENTS",
+      "program": "ENVIRO",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "EVOUSIS014",
-      "artifact_count": 9,
-      "status_histogram": {
-        "ACTIVE": 9
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "EVOUSIS015",
-      "artifact_count": 9,
-      "status_histogram": {
-        "ACTIVE": 9
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "EVOUSIS016",
-      "artifact_count": 9,
-      "status_histogram": {
-        "ACTIVE": 9
       },
       "rollup_status": "ACTIVE"
     },
     {
       "program": "EXEC",
-      "artifact_count": 4,
+      "artifact_count": 45,
       "status_histogram": {
-        "ACTIVE": 4
+        "ACTIVE": 45
       },
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "EXECUTIONCON",
+      "program": "EXECUT",
+      "artifact_count": 5,
+      "status_histogram": {
+        "ACTIVE": 5
+      },
+      "rollup_status": "ACTIVE"
+    },
+    {
+      "program": "FINALA",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -272,47 +232,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "EXECUTIONGOV",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "EXECUTIONLIF",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "EXECUTIONQUE",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "EXECUTIVESUM",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "FINALARCHITE",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "FINALCERTIFI",
+      "program": "FINALC",
       "artifact_count": 2,
       "status_histogram": {
         "ACTIVE": 2
@@ -320,7 +240,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "FINALDETERMI",
+      "program": "FINALD",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -328,7 +248,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "FINALIMPLEME",
+      "program": "FINALI",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -336,7 +256,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "FINALRECOMME",
+      "program": "FINALR",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -344,7 +264,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "FOUNDATIONFR",
+      "program": "FOUNDA",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -352,7 +272,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "GAPCLASSIFIC",
+      "program": "GAPCLA",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -376,50 +296,10 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "HIDDENFINITE",
+      "program": "HIDDEN",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "IAC001A",
-      "artifact_count": 7,
-      "status_histogram": {
-        "ACTIVE": 7
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "IAC001B",
-      "artifact_count": 8,
-      "status_histogram": {
-        "ACTIVE": 8
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "IAC001C",
-      "artifact_count": 9,
-      "status_histogram": {
-        "ACTIVE": 9
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "IAC001D",
-      "artifact_count": 8,
-      "status_histogram": {
-        "ACTIVE": 8
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "IAC001E",
-      "artifact_count": 9,
-      "status_histogram": {
-        "ACTIVE": 9
       },
       "rollup_status": "ACTIVE"
     },
@@ -432,7 +312,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "IMPLEMENTATI",
+      "program": "IMPLEM",
       "artifact_count": 12,
       "status_histogram": {
         "ACTIVE": 12
@@ -440,7 +320,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "INCREMENTALK",
+      "program": "INCREM",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -448,24 +328,16 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "INFRASTRUCTU",
-      "artifact_count": 132,
+      "program": "INFRASTRUCTURE",
+      "artifact_count": 152,
       "status_histogram": {
-        "ACTIVE": 131,
+        "ACTIVE": 151,
         "CERTIFIED": 1
       },
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "INFRASTRUCTURE",
-      "artifact_count": 20,
-      "status_histogram": {
-        "ACTIVE": 20
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "KNOWLEDGECOM",
+      "program": "KNOWLE",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -482,7 +354,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "NEWKNOWLEDGE",
+      "program": "NEWKNO",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -490,7 +362,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "PARALLELEXEC",
+      "program": "PARALL",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -508,7 +380,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "QUALITYGATES",
+      "program": "QUALIT",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -516,7 +388,15 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "READINESSASS",
+      "program": "READIN",
+      "artifact_count": 2,
+      "status_histogram": {
+        "ACTIVE": 2
+      },
+      "rollup_status": "ACTIVE"
+    },
+    {
+      "program": "READYS",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -524,23 +404,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "READINESSDET",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "READYSELECTI",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "REALIZATIONG",
+      "program": "REALIZ",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -557,7 +421,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "REMEDIATIONG",
+      "program": "REMEDI",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -565,7 +429,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "REPOOPERATIO",
+      "program": "REPOOP",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -573,31 +437,15 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "REPOSITORYDI",
-      "artifact_count": 1,
+      "program": "REPOSI",
+      "artifact_count": 4,
       "status_histogram": {
-        "ACTIVE": 1
+        "ACTIVE": 4
       },
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "REPOSITORYGA",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "REPOSITORYRE",
-      "artifact_count": 2,
-      "status_histogram": {
-        "ACTIVE": 2
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "ROOTCAUSEANA",
+      "program": "ROOTCA",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -638,7 +486,7 @@
       "rollup_status": "FROZEN"
     },
     {
-      "program": "TRACEABILITY",
+      "program": "TRACEA",
       "artifact_count": 2,
       "status_histogram": {
         "ACTIVE": 2
@@ -646,7 +494,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "UCOSACFV0000",
+      "program": "UCOSAC",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -654,7 +502,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "UCOSOMEGAINF",
+      "program": "UCOSOM",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -678,7 +526,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "UNREALIZEDCK",
+      "program": "UNREAL",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -687,14 +535,14 @@
     },
     {
       "program": "USIS",
-      "artifact_count": 36,
+      "artifact_count": 63,
       "status_histogram": {
-        "ACTIVE": 36
+        "ACTIVE": 63
       },
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "VALIDATIONRE",
+      "program": "VALIDA",
       "artifact_count": 2,
       "status_histogram": {
         "ACTIVE": 2
@@ -702,7 +550,7 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "VERIFICATION",
+      "program": "VERIFI",
       "artifact_count": 1,
       "status_histogram": {
         "ACTIVE": 1
@@ -710,18 +558,10 @@
       "rollup_status": "ACTIVE"
     },
     {
-      "program": "WAVE01EXECUT",
-      "artifact_count": 1,
+      "program": "WAVE01",
+      "artifact_count": 2,
       "status_histogram": {
-        "ACTIVE": 1
-      },
-      "rollup_status": "ACTIVE"
-    },
-    {
-      "program": "WAVE01READIN",
-      "artifact_count": 1,
-      "status_histogram": {
-        "ACTIVE": 1
+        "ACTIVE": 2
       },
       "rollup_status": "ACTIVE"
     }
@@ -730,7 +570,7 @@
     "architecture": {
       "status": "APPROVED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-28T05:52:19+00:00",
+      "as_of": "2026-07-31T06:45:07+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "implementation": {
@@ -754,19 +594,19 @@
     "integration_testing": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-28T05:52:19+00:00",
+      "as_of": "2026-07-31T06:45:07+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "functional_testing": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-28T05:52:19+00:00",
+      "as_of": "2026-07-31T06:45:07+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "performance_testing": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-28T05:52:19+00:00",
+      "as_of": "2026-07-31T06:45:07+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "security": {
@@ -778,7 +618,7 @@
     "certification": {
       "status": "CERTIFIED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-28T05:52:19+00:00",
+      "as_of": "2026-07-31T06:45:07+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "deployment": {
@@ -802,19 +642,19 @@
     "release": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-28T05:52:19+00:00",
+      "as_of": "2026-07-31T06:45:07+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "execution": {
       "status": "NOT_STARTED",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-28T05:52:19+00:00",
+      "as_of": "2026-07-31T06:45:07+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     },
     "portfolio": {
       "status": "IN_PROGRESS",
       "signal_source": "MANUAL",
-      "as_of": "2026-07-28T05:52:19+00:00",
+      "as_of": "2026-07-31T06:45:07+00:00",
       "note": "Manual baseline; automated signals (GitHub Actions/Jira/SonarQube/OWASP/Trivy/Prometheus/Grafana/OTel/K8s/Cloud) roll up here when connected."
     }
   }

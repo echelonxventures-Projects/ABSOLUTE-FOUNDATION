@@ -2,7 +2,7 @@
 
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-CEP-000017](UCOS-CEP-000017.md)
 
-- Volume: VOL-000  ·  Status: COMPLETE  ·  Twin: [—]
+- Volume: VOL-002  ·  Status: COMPLETE  ·  Twin: [—]
 - Native: CEP-STAGE-03-S3-04  ·  Program: CEP
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [00-CEP/STAGE-03-S3-04-BAND13-EC3-CLOSURE-BINDING.md](../../00-CEP/STAGE-03-S3-04-BAND13-EC3-CLOSURE-BINDING.md)

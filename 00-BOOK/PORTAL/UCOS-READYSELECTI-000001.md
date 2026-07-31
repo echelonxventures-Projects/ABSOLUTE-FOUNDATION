@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-READYSELECTI-000001](UCOS-READYSELECTI-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: READYSELECTI
+- Native: —  ·  Program: READYS
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [03-READY-SELECTION-RULES.md](../../03-READY-SELECTION-RULES.md)
 

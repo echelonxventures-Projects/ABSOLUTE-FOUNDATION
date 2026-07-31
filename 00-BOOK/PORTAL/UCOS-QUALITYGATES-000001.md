@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-QUALITYGATES-000001](UCOS-QUALITYGATES-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: QUALITYGATES
+- Native: —  ·  Program: QUALIT
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [08-QUALITY-GATES.md](../../08-QUALITY-GATES.md)
 

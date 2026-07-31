@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-REMEDIATIONG-000001](UCOS-REMEDIATIONG-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: REMEDIATIONG
+- Native: —  ·  Program: REMEDI
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [04-REMEDIATION-GRAPH.md](../../04-REMEDIATION-GRAPH.md)
 

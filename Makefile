@@ -79,6 +79,13 @@ help:
 	@echo "  make uprf-gate     fail-closed Universal Provider Framework constitutional gate"
 	@echo "  make uprf-self     UPF-000001 guards over its own surface"
 	@echo "  make uprf-certify  fail-closed UNCONDITIONAL certification (all 20 matrix dimensions = 100%)"
+	@echo "  make mcos          regenerate the MCOS-000001 Meta-Civilization Platform deliverables (PROGRAM-004)"
+	@echo "  make mcos-gate     fail-closed Meta-Civilization Platform constitutional gate"
+	@echo "  make mcos-self     MCOS-000001 guards over its own surface (incl. reuse-before-create)"
+	@echo "  make mcos-certify  fail-closed UNCONDITIONAL certification (all 20 matrix dimensions = 100%)"
+	@echo "  make ucef          regenerate the UCEF-000001 constitutional-evolution registers (CEP-009-AMD-001)"
+	@echo "  make ucef-gate     fail-closed Constitutional Evolution Gate (CEP-009 ADDENDUM B exit criteria)"
+	@echo "  make ucef-self     UCEF-000001 guards over its own surface (incl. open-world + reuse-before-create)"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
 
@@ -724,3 +731,116 @@ rfp-self:
 	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-write-scope
 	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-determinism
 	@python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --check-self-compliance
+
+
+
+# ---------------------------------------------------------------------------
+# mcos: MCOS-000001 — Universal Meta-Civilization Platform (PROGRAM-004, WAVE-2).
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# The layer that GENERATES constitutional operating systems lives under engine/civilization/:
+# the third realization layer over the immutable PROGRAM-002 kernel, sibling to the PROGRAM-003
+# provider framework. Three components over ONE kernel — an open dimension space (the Universal
+# Dimension Model), a planner that derives execution from declarations rather than a pipeline
+# (Dynamic Capability Composition), and an ordered chain of registered strata through which a
+# constitutional operating system comes into being (the Constitutional Generation Model).
+#
+# Seven of the ten mandated constructs already had a canonical owner and were NOT
+# re-implemented: the Universal Meta Kernel (engine/kernel, UMK-000001), the Universal Registry
+# Architecture (the kernel registry — a second registry is prohibited), Universal Capability
+# Discovery (engine/discovery), the Open-World Expansion certifications, Unlimited
+# Constitutional Evolution (CEP-009, UEI-000001), the Universal Engineering Platform
+# (PLATFORM-005/010, named not authored), and the MCOS name itself (resolved onto MCS-000, with
+# authority NONE). Reuse is MEASURED by mcos-self, not asserted.
+#
+# This target runs the executable expression of PROGRAM-004 in
+# 00-MASTER/MCOS-000001/mcos_engine.py, which BINDS every responsibility declared in
+# mcos-civilization.json to its home under engine/civilization/ (or a REUSED owner elsewhere),
+# runs the layer's own executed constitutional proof (engine/civilization/compliance.py), and
+# emits the nine deliverables + validation/certification evidence into 00-MASTER/MCOS-000001/.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; writes nothing outside its own
+# operational-memory directory (guarded, fail-closed). Admitting a dimension, capability,
+# composition strategy, generation stratum or constitutional operating system is a REGISTRATION
+# and requires NO change to the layer, to the engine, or to the kernel. The platform is also
+# runnable directly via the `ucos-mcos` console script (describe / prove / certify / evidence).
+#
+# Exit 0 compliant/certified · 1 a gate/dimension below 100% · 2 fail-closed abort.
+.PHONY: mcos mcos-gate mcos-self mcos-certify
+mcos:
+	@python3 00-MASTER/MCOS-000001/mcos_engine.py
+
+mcos-gate:
+	@python3 00-MASTER/MCOS-000001/mcos_engine.py --gate
+
+# mcos-self: declaration integrity (every substrate, mechanism, gate, proof category, generated
+# operating system and stratum resolves), reuse-before-create (a responsibility claiming REUSED
+# must be homed OUTSIDE this layer, and one claiming NEW must be homed inside — the guard that
+# stops a re-implementation wearing a reuse label), forbidden-write scope, and self-determinism.
+mcos-self:
+	@python3 00-MASTER/MCOS-000001/mcos_engine.py --check-declaration
+	@python3 00-MASTER/MCOS-000001/mcos_engine.py --check-reuse-before-create
+	@python3 00-MASTER/MCOS-000001/mcos_engine.py --check-write-scope
+	@python3 00-MASTER/MCOS-000001/mcos_engine.py --check-determinism
+
+# mcos-certify: fail-closed UNCONDITIONAL certification — non-zero unless every one of the
+# twenty Universal Certification Matrix dimensions reports exactly 100%. Coverage dimensions are
+# read from coverage.xml, so `make test` runs first.
+mcos-certify: test
+	@python3 00-MASTER/MCOS-000001/mcos_engine.py --certify
+
+
+
+
+# ---------------------------------------------------------------------------
+# ucef: UCEF-000001 — Universal Constitutional Evolution Framework (CEP-009-AMD-001).
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# This block adds NO new validator, engine, authority or capability. It runs the executable
+# expression of the constitutional-evolution contract declared in
+# 00-MASTER/UCEF-000001/ucef-framework.json, whose NORMATIVE home is
+# 00-CEP/CEP-009-...-AMENDMENT-EVOLUTION-CONSTITUTION.md ADDENDUM B. Every law, lifecycle
+# stage, acceptance property, expansion axis, construct class and governance obligation in
+# that DATA file BINDS to an authority that already exists and is already located — the
+# meta-governance admission procedure and construct taxonomy (00-CMG/CMG-000001 Art XIII,
+# XIV, XV, XL, XLI, LXXVI, LXXVII), governance change control (00-CEP/CEP-002 Art 20/21/28),
+# validation (00-CEP/CEP-004 + verify.sh), certification (00-CEP/CEP-005), traceability
+# (00-CEP/CEP-008), registration (REG-AUTO-001 + 00-BOOK/tools/register.sh), the
+# implementation contract (00-MASTER/UCIC-001) and the evolution registry
+# (00-CEP/CEP-009 Art XVI + 00-MASTER/EVOLUTION-001).
+#
+# Admitting a further construct class, expansion axis, lifecycle stage, acceptance property,
+# governance obligation or validation dimension is an entry in that DATA file and requires NO
+# change to the engine, to this Makefile, or to the workflow. A self-guard proves it: the
+# engine names none of them.
+#
+# Exit semantics of the gate:
+#   0  every law is anchored, every stage is bound to a located owner outside the programme,
+#      every acceptance property is discharged by a located mechanism, the construct register
+#      is declared OPEN, no expansion axis declares a finite bound, the stage graph is acyclic
+#      and closed, and every mandatory dimension and exit criterion is satisfied (gate OPEN)
+#   1  a binding, dimension or exit criterion is unsatisfied (gate CLOSED)
+#   2  fail-closed abort — the declaration is unusable, so no verdict may be asserted
+.PHONY: ucef ucef-gate ucef-self
+ucef:
+	@python3 00-MASTER/UCEF-000001/ucef_engine.py
+
+ucef-gate:
+	@python3 00-MASTER/UCEF-000001/ucef_engine.py --gate
+
+# ucef-self: the six guards over the programme's own surface — declaration integrity (every
+# law basis, stage owner, acceptance mechanism, axis basis, construct admission route and
+# governance instrument resolves against Repository Truth), zero-enumeration (the framework is
+# DATA: the engine special-cases no declared member), write-scope (no write ever lands outside
+# 00-MASTER/UCEF-000001/, and never in a frozen or certified zone), determinism (assessment and
+# rendering are byte-identical across runs, no wall-clock is emitted), reuse-before-create (no
+# bound authority lies inside this programme's own home, so nothing owned elsewhere is
+# re-authored here), and open-world (no finite ceiling is declared anywhere — the construct
+# register is open and non-exhaustive and every expansion axis is unbounded).
+ucef-self:
+	@python3 00-MASTER/UCEF-000001/ucef_engine.py --check-declaration
+	@python3 00-MASTER/UCEF-000001/ucef_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCEF-000001/ucef_engine.py --check-write-scope
+	@python3 00-MASTER/UCEF-000001/ucef_engine.py --check-determinism
+	@python3 00-MASTER/UCEF-000001/ucef_engine.py --check-reuse-before-create
+	@python3 00-MASTER/UCEF-000001/ucef_engine.py --check-open-world

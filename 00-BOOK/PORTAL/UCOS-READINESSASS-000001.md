@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-READINESSASS-000001](UCOS-READINESSASS-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: READINESSASS
+- Native: —  ·  Program: READIN
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [01-READINESS-ASSESSMENT.md](../../01-READINESS-ASSESSMENT.md)
 

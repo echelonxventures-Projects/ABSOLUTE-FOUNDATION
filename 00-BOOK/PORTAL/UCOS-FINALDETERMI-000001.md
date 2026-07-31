@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-FINALDETERMI-000001](UCOS-FINALDETERMI-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: FINALDETERMI
+- Native: —  ·  Program: FINALD
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [05-FINAL-DETERMINATION.md](../../05-FINAL-DETERMINATION.md)
 

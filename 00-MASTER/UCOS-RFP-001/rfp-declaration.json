@@ -1,6 +1,5 @@
 {
   "$comment": "UCOS-RFP-001 — REPOSITORY FIXED-POINT CLOSURE CONSTITUTION (declaration). This file is DATA and is the ONLY place the principle, the vocabulary, the artifact classes, the cycle classes, the pipeline and the closure criteria are stated. rfp_engine.py contains no artifact path, no lane name, no producer name and no field name drawn from any programme: everything it enforces is read from here. Adding a producer, a cycle class, an artifact class or a closure criterion is an append-only edit to this file and requires NO engine change (PR-07 Zero Enumeration).",
-
   "programme": {
     "id": "UCOS-RFP-001",
     "name": "Repository Fixed-Point Closure",
@@ -20,9 +19,7 @@
     ],
     "$excluded_location_comment": "The engine RESOLVES excluded locations from these two authorities at run time (git's own ignore machinery plus the corpus-internal prefix list). It keeps no second list, so an exclusion declared once is honoured everywhere and no path is restated here."
   },
-
   "$vocabulary_comment": "The permanent constitutional vocabulary. Each term is DEFINED here and referenced by id from the principle articles, the cycle classes and the emitted reports. Definitions are normative.",
-
   "vocabulary": [
     {
       "id": "VOC-FIXED-POINT",
@@ -80,16 +77,16 @@
       "definition": "Divergence between recorded evidence and the state it claims to evidence: a verdict, measurement or certification asserting a repository state that re-execution does not reproduce. An evidence artifact that records an observation invalidated by its own writing is permanently in Evidence Drift."
     }
   ],
-
   "$principle_comment": "The permanent principle. RFP-1 is the closure condition. RFP-2..RFP-5 are the admission rules that make the condition REACHABLE — they forbid, by construction, the topologies under which no fixed point exists. RFP-6..RFP-7 bind and inherit.",
-
   "principle": [
     {
       "id": "RFP-1",
       "title": "Fixed-Point Closure Condition",
       "rule": "No programme may close, and no repository may be certified, unless the repository is a Stable Repository State: executing the declared pipeline over the committed HEAD leaves the repository byte-identical, for each of the declared convergence passes.",
       "rationale": "Certification asserts a property of the repository. An assertion that re-execution does not reproduce is not evidence.",
-      "enforced_by": ["CK-FIXED-POINT"]
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ]
     },
     {
       "id": "RFP-2",
@@ -97,7 +94,9 @@
       "rule": "No tracked artifact's bytes may depend on the identity of the commit that contains it — its hash, abbreviation, committer date, author date, tag or ref.",
       "rationale": "The commit's identity is a function of the tracked bytes it contains. An artifact that names its own commit demands a commit whose hash appears inside its own tree, which is not reachable. Committing changes HEAD, which changes the artifact, without limit. Version control already records the containing commit, so restating it inside the artifact also duplicates state the repository already owns.",
       "cycle_class": "CYC-COMMIT",
-      "enforced_by": ["CK-FIXED-POINT"]
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ]
     },
     {
       "id": "RFP-3",
@@ -105,7 +104,9 @@
       "rule": "No tracked artifact's bytes may record an observation of the working tree that the act of recording invalidates. An observation whose scope EXCLUDES the recorder's own declared write zone does not invalidate itself and is therefore permitted; an unscoped observation is not. In every case the observation is a legitimate input to a GATE VERDICT and legitimate content of a gate's exit code and standard output.",
       "rationale": "Writing an unscoped observation falsifies it: an artifact recording 'working tree CLEAN, 0 entries' makes the tree dirty by being written, so the recorded value is never the value that holds once it is recorded. The defect is not the measurement, it is the self-inclusion of the recorder in what it measures. Scoping the observation to exclude the recorder's own write zone removes the self-inclusion and makes the record stable, which is why a repository-cleanliness gate may persist a verdict measured outside its own zone.",
       "cycle_class": "CYC-OBSERVE",
-      "enforced_by": ["CK-FIXED-POINT"]
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ]
     },
     {
       "id": "RFP-4",
@@ -113,7 +114,9 @@
       "rule": "No tracked artifact may embed a content hash of any artifact that depends, directly or transitively, upon it.",
       "rationale": "This is the CK-REG-DRIFT topology exactly: the registry recorded the hash of an artifact that embedded the hash of the registry. Mutual hash embedding admits no simultaneous solution.",
       "cycle_class": "CYC-HASH",
-      "enforced_by": ["CK-FIXED-POINT"]
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ]
     },
     {
       "id": "RFP-5",
@@ -121,26 +124,33 @@
       "rule": "Only artifacts of class CANONICAL-SOURCE are eligible for registration. Every other class is a non-artifact, excluded by a declared authority, and may never consume a permanent corpus identity.",
       "rationale": "Registration records a content hash. A class whose content is derived cannot hold a stable hash relative to the register that records it. This restates GOV-005 §5.3 as a closure obligation and is the rule whose absence produced CK-REG-DRIFT.",
       "cycle_class": "CYC-REGISTER",
-      "enforced_by": ["CK-REG-ENFORCE", "CK-REG-DRIFT", "CK-FIXED-POINT"]
+      "enforced_by": [
+        "CK-REG-ENFORCE",
+        "CK-REG-DRIFT",
+        "CK-FIXED-POINT"
+      ]
     },
     {
       "id": "RFP-6",
       "title": "Producers Are Declared, Never Discovered Ad Hoc",
       "rule": "Every producer that writes tracked repository content must appear as a stage of the declared pipeline. A producer absent from the pipeline is unverifiable and its output is therefore not an Acceptable Repository State.",
       "rationale": "A fixed point can only be asserted over a known pipeline. Undeclared regeneration is precisely how the CK-REG-DRIFT split reached four sealed commits unnoticed.",
-      "enforced_by": ["CK-FIXED-POINT"]
+      "enforced_by": [
+        "CK-FIXED-POINT"
+      ]
     },
     {
       "id": "RFP-7",
       "title": "Universal Inheritance, No Opt-Out",
       "rule": "RFP-1..RFP-6 bind every PROGRAM, EPIC, EIP, Universe, Framework, Capability and Module, present and future, with no opt-out and no per-programme exemption. Inheritance is structural: the condition is evaluated over the REPOSITORY, so anything the repository contains is bound without needing to declare itself bound.",
       "rationale": "A rule a programme must opt into is a rule the next programme forgets. Evaluating the condition over the repository rather than over a programme register makes exemption impossible and enrolment unnecessary.",
-      "enforced_by": ["CK-FIXED-POINT", "G-15"]
+      "enforced_by": [
+        "CK-FIXED-POINT",
+        "G-15"
+      ]
     }
   ],
-
   "$artifact_classes_comment": "Phase 6 admission taxonomy. Every tracked or generated byte in the repository belongs to exactly one class. 'registrable' decides eligibility for a permanent corpus identity (RFP-5). 'tracked' decides whether the class participates in the fixed point. 'convergence' states the obligation the class carries. The classes are TOTAL: 'derivation' explains how any future family is placed without a new class.",
-
   "artifact_classes": [
     {
       "id": "CLS-CANONICAL-SOURCE",
@@ -206,7 +216,6 @@
       "authority": ".gitignore"
     }
   ],
-
   "class_derivation": {
     "$comment": "Totality without enumeration. Any present or future family is placed by these ordered questions; no family needs a new class and no path is listed.",
     "ordered_questions": [
@@ -219,9 +228,7 @@
     ],
     "invariant": "Exactly one class admits registration (CLS-CANONICAL-SOURCE). Every class that is tracked and has a producer carries the convergence obligation. There is no class that is both derived and registrable — which is the state that produced CK-REG-DRIFT."
   },
-
   "$cycle_classes_comment": "Phase 4. The self-reference topologies. Each is detected BEHAVIOURALLY or from the DELTA a producer writes — never by matching a path, a lane or a producer name. 'detector' names the mechanism rfp_engine implements.",
-
   "cycle_classes": [
     {
       "id": "CYC-OBSERVE",
@@ -278,148 +285,374 @@
       "remediation": "Declare the producer as a pipeline stage, or stop it from writing tracked content."
     }
   ],
-
   "$lifecycle_comment": "Phase 1. The canonical implementation lifecycle. The final four steps are what this programme adds: closure is no longer asserted at certification, it is asserted after the repository has been proven to reproduce itself from the committed state.",
-
   "lifecycle": [
-    { "step": 1,  "stage": "Repository Discovery",              "closure_relevant": false },
-    { "step": 2,  "stage": "Context Assimilation",              "closure_relevant": false },
-    { "step": 3,  "stage": "Architecture Review",               "closure_relevant": false },
-    { "step": 4,  "stage": "Implementation",                    "closure_relevant": false },
-    { "step": 5,  "stage": "Verification",                      "closure_relevant": true, "gate": "G-10" },
-    { "step": 6,  "stage": "Validation",                        "closure_relevant": true, "gate": "G-10" },
-    { "step": 7,  "stage": "Evidence Generation",               "closure_relevant": true, "gate": "G-12" },
-    { "step": 8,  "stage": "Registry Regeneration",             "closure_relevant": true, "gate": "G-07" },
-    { "step": 9,  "stage": "Certification",                    "closure_relevant": true, "gate": "G-11" },
-    { "step": 10, "stage": "Commit",                            "closure_relevant": true },
-    { "step": 11, "stage": "Fresh Repository Discovery",        "closure_relevant": true, "gate": "G-15" },
-    { "step": 12, "stage": "Pipeline Re-execution",             "closure_relevant": true, "gate": "G-15" },
-    { "step": 13, "stage": "Repository Fixed-Point Verification","closure_relevant": true, "gate": "G-15" },
-    { "step": 14, "stage": "Programme Closure",                 "closure_relevant": true, "gate": "G-15" }
+    {
+      "step": 1,
+      "stage": "Repository Discovery",
+      "closure_relevant": false
+    },
+    {
+      "step": 2,
+      "stage": "Context Assimilation",
+      "closure_relevant": false
+    },
+    {
+      "step": 3,
+      "stage": "Architecture Review",
+      "closure_relevant": false
+    },
+    {
+      "step": 4,
+      "stage": "Implementation",
+      "closure_relevant": false
+    },
+    {
+      "step": 5,
+      "stage": "Verification",
+      "closure_relevant": true,
+      "gate": "G-10"
+    },
+    {
+      "step": 6,
+      "stage": "Validation",
+      "closure_relevant": true,
+      "gate": "G-10"
+    },
+    {
+      "step": 7,
+      "stage": "Evidence Generation",
+      "closure_relevant": true,
+      "gate": "G-12"
+    },
+    {
+      "step": 8,
+      "stage": "Registry Regeneration",
+      "closure_relevant": true,
+      "gate": "G-07"
+    },
+    {
+      "step": 9,
+      "stage": "Certification",
+      "closure_relevant": true,
+      "gate": "G-11"
+    },
+    {
+      "step": 10,
+      "stage": "Commit",
+      "closure_relevant": true
+    },
+    {
+      "step": 11,
+      "stage": "Fresh Repository Discovery",
+      "closure_relevant": true,
+      "gate": "G-15"
+    },
+    {
+      "step": 12,
+      "stage": "Pipeline Re-execution",
+      "closure_relevant": true,
+      "gate": "G-15"
+    },
+    {
+      "step": 13,
+      "stage": "Repository Fixed-Point Verification",
+      "closure_relevant": true,
+      "gate": "G-15"
+    },
+    {
+      "step": 14,
+      "stage": "Programme Closure",
+      "closure_relevant": true,
+      "gate": "G-15"
+    }
   ],
-
   "$pipeline_comment": "Phase 5 / RFP-6. The declared pipeline P. Ordered: a stage may consume what an earlier stage produced. 'writes' is the stage's declared write zone, used to ATTRIBUTE residue (CYC-UNDECLARED) — it is not a permission and grants nothing. 'reentrant: false' marks a stage that must not run while the fixed-point engine is already active, which is how the aggregate certifier is kept out of its own pipeline (CYC-RECURSE). 'heavy' stages are skipped only in the explicitly-named fast mode, never in the gate.",
-
   "pipeline": {
     "convergence_passes": 3,
     "reentrancy_env": "UCOS_RFP_ACTIVE",
     "stages": [
       {
-        "id": "STAGE-VERIFY", "name": "Verification and validation",
+        "id": "STAGE-VERIFY",
+        "name": "Verification and validation",
         "owner": "verify.sh (CEP-004)",
-        "argv": ["bash", "verify.sh"],
-        "writes": [], "heavy": true, "reentrant": true, "required": true,
+        "argv": [
+          "bash",
+          "verify.sh"
+        ],
+        "writes": [],
+        "heavy": true,
+        "reentrant": true,
+        "required": true,
         "purpose": "lint, tests, coverage gate and pre-registration enforcement; also produces the coverage measurement later stages consume"
       },
       {
-        "id": "STAGE-REGISTER", "name": "Atomic registration transaction",
+        "id": "STAGE-REGISTER",
+        "name": "Atomic registration transaction",
         "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
-        "argv": ["bash", "00-BOOK/tools/register.sh"],
-        "writes": ["00-BOOK/DATA/", "00-BOOK/REGISTRIES/", "00-BOOK/CONTROL-TOWER/", "00-BOOK/PORTAL/"],
-        "heavy": false, "reentrant": true, "required": true,
+        "argv": [
+          "bash",
+          "00-BOOK/tools/register.sh"
+        ],
+        "writes": [
+          "00-BOOK/DATA/",
+          "00-BOOK/REGISTRIES/",
+          "00-BOOK/CONTROL-TOWER/",
+          "00-BOOK/PORTAL/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
         "purpose": "registry, projections, twin, portal — the registration projection zone"
       },
       {
-        "id": "STAGE-RIE", "name": "Repository intelligence",
+        "id": "STAGE-RIE",
+        "name": "Repository intelligence",
         "owner": "intelligence/rie (UCOS-RIE-001)",
-        "argv": ["$PY", "-m", "intelligence.rie", "build"],
-        "writes": ["intelligence/UCOS-RIE-", "intelligence/UCOS-IMP-BASELINE-001."],
-        "heavy": false, "reentrant": true, "required": true,
+        "argv": [
+          "$PY",
+          "-m",
+          "intelligence.rie",
+          "build"
+        ],
+        "writes": [
+          "intelligence/UCOS-RIE-",
+          "intelligence/UCOS-IMP-BASELINE-001."
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
         "purpose": "derived intelligence: capability catalogue, dependency graph, frontier, health, baseline"
       },
       {
-        "id": "STAGE-CLOSURE", "name": "Knowledge closure",
+        "id": "STAGE-CLOSURE",
+        "name": "Knowledge closure",
         "owner": "00-MASTER/UAKOS-CLOSURE-002",
-        "argv": ["$PY", "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py"],
-        "env": { "CLOSURE_SKIP_CORPUS": "1" },
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py"
+        ],
+        "env": {
+          "CLOSURE_SKIP_CORPUS": "1"
+        },
         "$env_comment": "The repository-only pass. Without it the engine also scans a corpus directory OUTSIDE the repository, so its output becomes a function of the machine rather than of the tracked tree — and a stage whose output is not a function of the repository can have no fixed point in the repository. Measured consequence of omitting it: the closure reading was 89 gaps here and 0 gaps in the certifier's own closure checks, which declare this same env, so the blueprint recorded a gap count that the next stage immediately contradicted. This is the identical reading the session anchor records and the integration blueprint binds.",
-        "writes": ["00-MASTER/UAKOS-CLOSURE-002/"],
-        "heavy": false, "reentrant": true, "required": false,
+        "writes": [
+          "00-MASTER/UAKOS-CLOSURE-002/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": false,
         "purpose": "constitutional concept closure — knowledge-once evidence"
       },
       {
-        "id": "STAGE-UCDA", "name": "Decision assimilation",
+        "id": "STAGE-UCDA",
+        "name": "Decision assimilation",
         "owner": "00-MASTER/UCDA-000001",
-        "argv": ["$PY", "00-MASTER/UCDA-000001/ucda_engine.py"],
-        "writes": ["00-MASTER/UCDA-000001/"],
-        "heavy": false, "reentrant": true, "required": true,
+        "argv": [
+          "$PY",
+          "00-MASTER/UCDA-000001/ucda_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UCDA-000001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
         "purpose": "constitutional decision register and disposition"
       },
       {
-        "id": "STAGE-UEI", "name": "Evolution intelligence",
+        "id": "STAGE-UEI",
+        "name": "Evolution intelligence",
         "owner": "00-MASTER/UEI-000001",
-        "argv": ["$PY", "00-MASTER/UEI-000001/uei_engine.py"],
-        "writes": ["00-MASTER/UEI-000001/"],
-        "heavy": false, "reentrant": true, "required": true,
+        "argv": [
+          "$PY",
+          "00-MASTER/UEI-000001/uei_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UEI-000001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
         "purpose": "capability bindings to governing instruments"
       },
       {
-        "id": "STAGE-UER", "name": "Execution resilience",
+        "id": "STAGE-UER",
+        "name": "Execution resilience",
         "owner": "00-MASTER/UER-000001",
-        "argv": ["$PY", "00-MASTER/UER-000001/uer_engine.py"],
-        "writes": ["00-MASTER/UER-000001/"],
-        "heavy": false, "reentrant": true, "required": true,
+        "argv": [
+          "$PY",
+          "00-MASTER/UER-000001/uer_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UER-000001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
         "purpose": "execution-resilience capability bindings"
       },
       {
-        "id": "STAGE-URRC", "name": "Repository reality matrices",
+        "id": "STAGE-URRC",
+        "name": "Repository reality matrices",
         "owner": "00-MASTER/URRC-000001",
-        "argv": ["$PY", "00-MASTER/URRC-000001/urrc_engine.py"],
-        "writes": ["00-MASTER/URRC-000001/"],
-        "heavy": false, "reentrant": true, "required": true,
+        "argv": [
+          "$PY",
+          "00-MASTER/URRC-000001/urrc_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/URRC-000001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
         "purpose": "reuse, duplication, conflict, gap, completeness, readiness, automation"
       },
       {
-        "id": "STAGE-UMK", "name": "Universal meta-kernel",
+        "id": "STAGE-UMK",
+        "name": "Universal meta-kernel",
         "owner": "00-MASTER/UMK-000001 (PROGRAM-002)",
-        "argv": ["$PY", "00-MASTER/UMK-000001/umk_engine.py"],
-        "writes": ["00-MASTER/UMK-000001/"],
-        "heavy": false, "reentrant": true, "required": true,
+        "argv": [
+          "$PY",
+          "00-MASTER/UMK-000001/umk_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UMK-000001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
         "purpose": "frozen kernel determination"
       },
       {
-        "id": "STAGE-UPF", "name": "Universal provider framework",
+        "id": "STAGE-UPF",
+        "name": "Universal provider framework",
         "owner": "00-MASTER/UPF-000001 (PROGRAM-003)",
-        "argv": ["$PY", "00-MASTER/UPF-000001/upf_engine.py"],
-        "writes": ["00-MASTER/UPF-000001/"],
-        "heavy": false, "reentrant": true, "required": true,
+        "argv": [
+          "$PY",
+          "00-MASTER/UPF-000001/upf_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UPF-000001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
         "purpose": "provider framework determination"
       },
       {
-        "id": "STAGE-RIB", "name": "Repository integration blueprint",
+        "id": "STAGE-MCOS",
+        "name": "Universal Meta-Civilization Platform deliverables (PROGRAM-004)",
+        "owner": "00-MASTER/MCOS-000001",
+        "argv": [
+          "$PY",
+          "00-MASTER/MCOS-000001/mcos_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/MCOS-000001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "purpose": "Regenerate the Meta-Civilization Platform deliverables and evidence from the DATA declaration, so every byte this programme contributes is attributable to a declared producer (CLO-08) and byte-identical across convergence passes (CLO-06)."
+      },
+      {
+        "id": "STAGE-RIB",
+        "name": "Repository integration blueprint",
         "owner": "00-MASTER/UCOS-RIB-001",
-        "argv": ["$PY", "00-MASTER/UCOS-RIB-001/rib_engine.py"],
-        "writes": ["00-MASTER/UCOS-RIB-001/"],
-        "heavy": false, "reentrant": true, "required": true,
+        "argv": [
+          "$PY",
+          "00-MASTER/UCOS-RIB-001/rib_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UCOS-RIB-001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
         "purpose": "discovery, disposition, matrices, queue and the twelve integration gates"
       },
       {
-        "id": "STAGE-UCCEP", "name": "Aggregate constitutional certification",
+        "id": "STAGE-UCCEP",
+        "name": "Aggregate constitutional certification",
         "owner": "00-MASTER/UCCEP-000000",
-        "argv": ["$PY", "00-MASTER/UCCEP-000000/uccep_engine.py", "--tier", "full"],
-        "writes": ["00-MASTER/UCCEP-000000/"],
-        "heavy": true, "reentrant": false, "required": true,
+        "argv": [
+          "$PY",
+          "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "--tier",
+          "full"
+        ],
+        "writes": [
+          "00-MASTER/UCCEP-000000/"
+        ],
+        "heavy": true,
+        "reentrant": false,
+        "required": true,
         "$reentrant_comment": "Declared non-reentrant as standing defence in depth. The gate graph is a DAG — this engine is a stage of the fixed-point pipeline and the fixed-point condition is NOT one of its checks — so no recursion occurs today. It was briefly bound as a check of this engine, and the measured consequence was that this engine's emitted verdict depended on whether it had been invoked nested, which is the self-observation topology RFP-3 forbids: the repository could not converge. Keeping the guard armed means a future re-binding degrades to a no-op instead of to non-termination.",
         "purpose": "the constitutional checks, gates and programmes; LAST because it certifies what the earlier stages produced"
       }
     ]
   },
-
   "$closure_comment": "Phase 3. The mandatory success criteria of G-15. Every criterion is measured, never asserted. 'measure' names the observation; 'expect' is the only accepted value.",
-
   "closure_criteria": [
-    { "id": "CLO-01", "criterion": "the tree is clean before the fixed point is asserted", "measure": "initial_dirty_entries", "expect": 0, "blocking": true,
-      "note": "a fixed point cannot be asserted over an uncommitted tree; this fails closed rather than measuring the wrong state" },
-    { "id": "CLO-02", "criterion": "every required pipeline stage exits successfully", "measure": "stage_failures", "expect": 0, "blocking": true },
-    { "id": "CLO-03", "criterion": "no tracked file is modified by any pass", "measure": "tracked_modifications", "expect": 0, "blocking": true },
-    { "id": "CLO-04", "criterion": "no file is staged by any pass", "measure": "staged_entries", "expect": 0, "blocking": true },
-    { "id": "CLO-05", "criterion": "no untracked entry appears outside a constitutionally excluded location", "measure": "untracked_outside_excluded", "expect": 0, "blocking": true },
-    { "id": "CLO-06", "criterion": "the repository is byte-identical after every declared pass", "measure": "non_fixed_point_passes", "expect": 0, "blocking": true },
-    { "id": "CLO-07", "criterion": "no self-reference cycle is detected", "measure": "cycles_detected", "expect": 0, "blocking": true },
-    { "id": "CLO-08", "criterion": "all residue is attributable to a declared producer", "measure": "unattributed_paths", "expect": 0, "blocking": true }
+    {
+      "id": "CLO-01",
+      "criterion": "the tree is clean before the fixed point is asserted",
+      "measure": "initial_dirty_entries",
+      "expect": 0,
+      "blocking": true,
+      "note": "a fixed point cannot be asserted over an uncommitted tree; this fails closed rather than measuring the wrong state"
+    },
+    {
+      "id": "CLO-02",
+      "criterion": "every required pipeline stage exits successfully",
+      "measure": "stage_failures",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-03",
+      "criterion": "no tracked file is modified by any pass",
+      "measure": "tracked_modifications",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-04",
+      "criterion": "no file is staged by any pass",
+      "measure": "staged_entries",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-05",
+      "criterion": "no untracked entry appears outside a constitutionally excluded location",
+      "measure": "untracked_outside_excluded",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-06",
+      "criterion": "the repository is byte-identical after every declared pass",
+      "measure": "non_fixed_point_passes",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-07",
+      "criterion": "no self-reference cycle is detected",
+      "measure": "cycles_detected",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-08",
+      "criterion": "all residue is attributable to a declared producer",
+      "measure": "unattributed_paths",
+      "expect": 0,
+      "blocking": true
+    }
   ],
-
   "$findings_comment": "Dispositioned findings. A finding here narrows VOC-ACCEPTABLE (an Acceptable Repository State may carry a declared finding). An UNDISPOSITIONED finding is a blocking failure. Recording a finding is never a way to pass the gate: 'disposition' must be REPAIRED for the gate to treat it as closed.",
-
   "findings": []
 }

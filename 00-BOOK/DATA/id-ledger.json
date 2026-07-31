@@ -8699,6 +8699,15 @@
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/artifact.schema.json",
         "name": "Artifact.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "b19c7f49dbd497bac60c5326fdf0a7472c28442080104282868527b5d8be24a7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/artifact.schema.json",
+        "name": "Artifact.Schema"
       }
     ],
     "UCOS-REG-000002": [
@@ -8721,6 +8730,15 @@
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/page.schema.json",
         "name": "Page.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "bab4ef41b7affc13204741963e734d523a355c24ec9550b85276d0f6568647c1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/page.schema.json",
+        "name": "Page.Schema"
       }
     ],
     "UCOS-REG-000004": [
@@ -8728,6 +8746,15 @@
         "seq": 1,
         "at": "2026-07-15T02:26:52+00:00",
         "content_hash": "1ac66805f68cb12069038610a31e382c244eb1284f9df9344132ba46f8146827",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/relationship.schema.json",
+        "name": "Relationship.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "439ee87768cbd5715045d8b7afef1032352323f4a62c0601726daca118a08dee",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/relationship.schema.json",
@@ -8750,6 +8777,15 @@
         "seq": 1,
         "at": "2026-07-15T02:26:52+00:00",
         "content_hash": "1cc44a3c77011bc2535fbcd4515cdb5103e89e7041dc5941867702a4c8def96b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/volume.schema.json",
+        "name": "Volume.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "0b5fc5f7d75c08a633900259ea6e0c3e338bc7f6657e464f13b84744370082f3",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/volume.schema.json",
@@ -10504,6 +10540,15 @@
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/build.schema.json",
         "name": "Build.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "9d16b524de10dc555bb67c658fdce93187bc12bd43c4a328d0c33203d39b506f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/build.schema.json",
+        "name": "Build.Schema"
       }
     ],
     "UCOS-REG-000008": [
@@ -10522,6 +10567,15 @@
         "seq": 1,
         "at": "2026-07-15T04:26:54+00:00",
         "content_hash": "ea7b126d7b21649b5891bcb08d3ad725d2cdae1308ae8515de7fc744acc4c23b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/deployment.schema.json",
+        "name": "Deployment.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "103d755f2b4c0b17e0efbe2c303bcf438b7b6e161257ef7d40071982f20000e9",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/deployment.schema.json",
@@ -10548,6 +10602,15 @@
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/export-job.schema.json",
         "name": "Export Job.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "7816fd01cbde98d12fb5926e9d80741bbcae216fe51bb99a6948de618ccb8345",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/export-job.schema.json",
+        "name": "Export Job.Schema"
       }
     ],
     "UCOS-REG-000012": [
@@ -10555,6 +10618,15 @@
         "seq": 1,
         "at": "2026-07-15T04:26:54+00:00",
         "content_hash": "0d6033f984981a9b5d2be2e2dc9860a46e6d5984b035e14cb4504cb1d9d45f3b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/finding.schema.json",
+        "name": "Finding.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "337498fada4341f40ff9d6bed8ce3061875c3af86326237f6ad554642d00fa05",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/finding.schema.json",
@@ -10570,6 +10642,15 @@
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/flow.schema.json",
         "name": "Flow.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "ff161b451519cd8ce7832060b7dbf03c2f31567e5a5e51a318db7c5d7fc37a62",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/flow.schema.json",
+        "name": "Flow.Schema"
       }
     ],
     "UCOS-REG-000014": [
@@ -10577,6 +10658,15 @@
         "seq": 1,
         "at": "2026-07-15T04:26:54+00:00",
         "content_hash": "81e0b0af7e2615de6f7fbaa4a23808b4a2c644454f184a285d1c6ca3cd633a9a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/journey.schema.json",
+        "name": "Journey.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "39e028f7083619542b7cd56d750015ba36647b20858ca8d3d6cf72e02aaee793",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/journey.schema.json",
@@ -10603,6 +10693,15 @@
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/repository.schema.json",
         "name": "Repository.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "ade7097f4ecbeccdafb831f88a939152979b5d20a24b74985d80e1c8c1844fd8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/repository.schema.json",
+        "name": "Repository.Schema"
       }
     ],
     "UCOS-REG-000017": [
@@ -10610,6 +10709,15 @@
         "seq": 1,
         "at": "2026-07-15T04:26:54+00:00",
         "content_hash": "8491cfcffa89e0f0a9c512084395ed5959784d1dcf08cd6d4a4ccd0922de5a15",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/signal.schema.json",
+        "name": "Signal.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "ac37ccf6765c06581d47ffa630a67c94cda6af636254aecafc0c799b9b72a470",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/signal.schema.json",
@@ -10632,6 +10740,15 @@
         "seq": 1,
         "at": "2026-07-15T04:26:54+00:00",
         "content_hash": "a3d500349eed565582279427770cea539f43fd6f22eeb34a58d28c3f7801f681",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-BOOK/SCHEMAS/ui-artifact.schema.json",
+        "name": "Ui Artifact.Schema"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "36b49da53b6ae0c97de941b45caa1e184fd0ca0909c37d04c833e6a59179118d",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-BOOK/SCHEMAS/ui-artifact.schema.json",
@@ -19724,6 +19841,15 @@
         "status": "ACTIVE",
         "path": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
         "name": "UCOS Ω∞ — CONSTITUTIONAL AMENDMENT & EVOLUTION CONSTITUTION"
+      },
+      {
+        "seq": 4,
+        "at": "2026-07-31T06:49:10+00:00",
+        "content_hash": "13da7567a2a90516ee1628fbcff2ef2b05f93adebd2bc7b69982fc6ef685264b",
+        "version": "1.1",
+        "status": "ACTIVE",
+        "path": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+        "name": "UCOS Ω∞ — CONSTITUTIONAL AMENDMENT & EVOLUTION CONSTITUTION"
       }
     ],
     "UCOS-CON-000042": [
@@ -20803,6 +20929,15 @@
         "seq": 1,
         "at": "2026-07-22T04:46:48+00:00",
         "content_hash": "761e2a086f0b55a346736540d764d46b1deeeeebfbbd9b409d7de3979e4809cb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "repo-operations.json",
+        "name": "Repo Operations"
+      },
+      {
+        "seq": 2,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "3ee2ccc381efe214b0288bda10c3129388a4da6e3ab7f0d4598276a12f98d356",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "repo-operations.json",
@@ -22037,6 +22172,15 @@
         "status": "ACTIVE",
         "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
         "name": "02 — CANONICAL OWNERSHIP MATRIX"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-31T07:10:01+00:00",
+        "content_hash": "0a8ba1e935e3acbfce3add4e352e559eba3393807ba3994b1ea3e9a4a4d5cfd7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
+        "name": "02 — CANONICAL OWNERSHIP MATRIX"
       }
     ],
     "UCOS-ARCHITECTURA-000003": [
@@ -22053,6 +22197,24 @@
         "seq": 2,
         "at": "2026-07-26T14:13:03+00:00",
         "content_hash": "40cb92fe3c938ceb248622a6322f247e2a1c4f60df728f0a93460589aec6da60",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+        "name": "03 — ARCHITECTURAL DECISION ASSIMILATION MATRIX"
+      },
+      {
+        "seq": 3,
+        "at": "2026-07-31T06:45:06+00:00",
+        "content_hash": "3fe3ff6479a66aa9a77e8dab440755a18c6444ea816ea929c588d325866718bb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+        "name": "03 — ARCHITECTURAL DECISION ASSIMILATION MATRIX"
+      },
+      {
+        "seq": 4,
+        "at": "2026-07-31T07:42:46+00:00",
+        "content_hash": "a51f4e1e21862db3146d395efa0f688bcf4d36c3d490a2de869bb9fb3ce04828",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
@@ -23384,6 +23546,15 @@
         "seq": 5,
         "at": "2026-07-26T14:13:03+00:00",
         "content_hash": "ae12d2d5656583ccb2b5a6c3a2ce2b123c1198faeec7d80dc192b2487dc0463f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-CMG/CMG-REGISTRY.json",
+        "name": "Cmg Registry"
+      },
+      {
+        "seq": 6,
+        "at": "2026-07-31T06:49:10+00:00",
+        "content_hash": "4d8242bbd4405602fe7eaa676f07498ef2980528fd133c2b18fe4818b360bfa3",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "00-CMG/CMG-REGISTRY.json",

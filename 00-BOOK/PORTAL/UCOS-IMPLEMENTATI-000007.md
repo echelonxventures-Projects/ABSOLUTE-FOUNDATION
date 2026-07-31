@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IMPLEMENTATI-000007](UCOS-IMPLEMENTATI-000007.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: IMPLEMENTATI
+- Native: —  ·  Program: IMPLEM
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [04-IMPLEMENTATION-WAVES.md](../../04-IMPLEMENTATION-WAVES.md)
 

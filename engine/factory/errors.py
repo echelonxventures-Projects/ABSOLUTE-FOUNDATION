@@ -53,6 +53,19 @@ class BlueprintResolutionError(FactoryError):
     code = "FAC-BP-404"
 
 
+class GenerationPhaseError(FactoryError):
+    """A generation phase declaration is invalid, or no order exists for it (WP-UCDA-018).
+
+    Raised for a duplicate phase key, a second delegation seam, a requirement naming an
+    undeclared phase, a declared cycle, or an absent seam. The generation runtime derives
+    its order from these declarations, so an unusable declaration is refused rather than
+    silently ordered — a runtime that cannot say what order it runs in has no evidentiary
+    value.
+    """
+
+    code = "FAC-PHASE-001"
+
+
 __all__ = [
     "FactoryError",
     "ClassificationError",
@@ -60,4 +73,5 @@ __all__ = [
     "FactoryNotFoundError",
     "OrchestrationError",
     "BlueprintResolutionError",
+    "GenerationPhaseError",
 ]

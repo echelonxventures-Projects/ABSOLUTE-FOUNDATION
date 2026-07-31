@@ -14,6 +14,13 @@ special-case paths).
     * :class:`Factory` — the structural contract every factory satisfies.
     * :class:`BaseFactory` — the shared implementation; concrete factories only
       declare their class, name, and capability.
+
+The stage vocabulary a factory advertises is **derived**, not frozen:
+:func:`~engine.factory.phases.generation_stages` computes it from the declared phase graph
+on every construction. This module previously carried a ``DEFAULT_STAGES`` tuple, which was
+a second declaration of the runtime order and could drift from the order actually executed
+— the defect recorded as ``DEC-MCOS-14`` and closed by ``WP-UCDA-018``. What a factory
+advertises is now, by construction, what the runtime runs.
 """
 
 from __future__ import annotations
@@ -30,16 +37,7 @@ from engine.factory.contracts import (
     FactoryRequest,
     FactoryResult,
 )
-
-#: The pipeline stages every factory participates in — a uniform, discoverable
-#: capability shared by all factories (they reuse one orchestrator path).
-DEFAULT_STAGES: tuple[str, ...] = (
-    "classify",
-    "compile",
-    "assemble",
-    "deploy",
-    "evidence",
-)
+from engine.factory.phases import generation_stages
 
 
 @dataclass(frozen=True, slots=True)
@@ -103,7 +101,7 @@ class BaseFactory:
             raise TypeError(f"{cls.__name__} must declare a factory_name")
         capability = FactoryCapability(
             blueprint_class=cls.blueprint_class.value,
-            stages=DEFAULT_STAGES,
+            stages=generation_stages(),
             description=cls.description or f"Generation factory for {cls.blueprint_class.value}.",
         )
         self._descriptor = FactoryDescriptor(
@@ -126,7 +124,6 @@ class BaseFactory:
 
 
 __all__ = [
-    "DEFAULT_STAGES",
     "ExecutionContext",
     "FactoryExecution",
     "Factory",

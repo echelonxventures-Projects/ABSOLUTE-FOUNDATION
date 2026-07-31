@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-FOUNDATIONFR-000001](UCOS-FOUNDATIONFR-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: FOUNDATIONFR
+- Native: —  ·  Program: FOUNDA
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [08-FOUNDATION-FREEZE-DECISION.md](../../08-FOUNDATION-FREEZE-DECISION.md)
 

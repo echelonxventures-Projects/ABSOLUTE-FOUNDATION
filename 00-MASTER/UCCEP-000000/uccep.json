@@ -1,23 +1,17 @@
 {
   "advisory_failures": [
-    "CK-CLOSURE-P3",
     "CK-HEALTH"
   ],
-  "blocking_failures": [],
-  "blocking_not_executed": [],
-  "blocking_out_of_tier": [
-    "CK-DETERMINISM-BUILD",
-    "CK-REG-DRIFT",
-    "CK-VERIFY"
+  "blocking_failures": [
+    "CK-REG-DRIFT"
   ],
+  "blocking_not_executed": [],
+  "blocking_out_of_tier": [],
   "blocking_unavailable": [],
-  "certification": "CERTIFIED-PROVISIONAL",
+  "certification": "NOT-CERTIFIED",
   "certification_ceiling": [
-    "`UCCEP-F-001` — phase3_engine.py returns a constant NOT-CLOSED verdict independent of measured state",
     "`UCCEP-F-002` — Repository health is RED: 1198 of 1198 registered artifacts have incomplete traceability",
-    "`UCCEP-F-003` — engine.graph.cli validate reports a dependency cycle but returns is_valid=true and exit 0 (fail-open)",
-    "`UCCEP-F-004` — CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no located authority is competent to ratify",
-    "tier `standard` excluded 3 blocking check(s) from this run: `CK-DETERMINISM-BUILD`, `CK-REG-DRIFT`, `CK-VERIFY` — a tier-limited run may not assert unqualified certification"
+    "`UCCEP-F-004` — CMG-000001 is PROVISIONAL, constitutional Tier T1 is VACANT, and no located authority is competent to ratify"
   ],
   "checks": [
     {
@@ -96,18 +90,18 @@
       "write_scope": "own-memory"
     },
     {
-      "advisory": true,
+      "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 1,
-      "governed_by_finding": "UCCEP-F-001",
+      "exit_code": 0,
+      "governed_by_finding": null,
       "id": "CK-CLOSURE-P3",
       "in_scope": true,
-      "name": "Implementation planning determination (repository closure projection)",
+      "name": "Implementation planning determination + measured repository-closure verdict",
       "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
-      "reason": "literal NOT-CLOSED (constant)",
+      "reason": "",
       "tier": "standard",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "write_scope": "own-memory"
     },
     {
@@ -246,46 +240,46 @@
     {
       "advisory": false,
       "assertions": [],
-      "executed": false,
-      "exit_code": null,
+      "executed": true,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-VERIFY",
-      "in_scope": false,
+      "in_scope": true,
       "name": "Canonical verification (lint · tests · coverage · enforcement)",
       "owner": "verify.sh",
-      "reason": "tier full above the selected tier standard",
+      "reason": "",
       "tier": "full",
-      "verdict": "NOT-EXECUTED",
+      "verdict": "PASS",
       "write_scope": "read-only"
     },
     {
       "advisory": false,
       "assertions": [],
-      "executed": false,
-      "exit_code": null,
+      "executed": true,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-DETERMINISM-BUILD",
-      "in_scope": false,
+      "in_scope": true,
       "name": "Constitutional determinism (double-build, fail-on-divergence)",
       "owner": "engine/determinism (TASK-000033)",
-      "reason": "tier full above the selected tier standard",
+      "reason": "",
       "tier": "full",
-      "verdict": "NOT-EXECUTED",
+      "verdict": "PASS",
       "write_scope": "own-memory"
     },
     {
       "advisory": false,
       "assertions": [],
-      "executed": false,
-      "exit_code": null,
+      "executed": true,
+      "exit_code": 3,
       "governed_by_finding": null,
       "id": "CK-REG-DRIFT",
-      "in_scope": false,
+      "in_scope": true,
       "name": "Atomic Registration Transaction + registration-drift gate",
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
-      "reason": "tier full above the selected tier standard",
+      "reason": "uncommitted-registration drift — source split from projections",
       "tier": "full",
-      "verdict": "NOT-EXECUTED",
+      "verdict": "FAIL",
       "write_scope": "projections"
     },
     {
@@ -362,10 +356,177 @@
       "tier": "standard",
       "verdict": "PASS",
       "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-MCOS-DECLARATION",
+      "in_scope": true,
+      "name": "MCOS-000001 declaration integrity (substrate, gates, proof categories, generated operating systems and generation strata all resolve)",
+      "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-MCOS-REUSE",
+      "in_scope": true,
+      "name": "MCOS-000001 reuse-before-create (a responsibility claiming REUSED is homed outside the layer; one claiming NEW is homed inside)",
+      "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-MCOS-CONSTITUTIONAL",
+      "in_scope": true,
+      "name": "Meta-Civilization Platform constitutional gate (12 blocking gates: open dimension set, no finite enumeration, no declared ceiling, no fixed pipeline, open operating-system catalogue, open generation chain, nothing bypasses the Meta Kernel, no parallel constitutional authority)",
+      "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "00-MASTER/MCOS-000001/"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-MCOS-DETERMINISM",
+      "in_scope": true,
+      "name": "MCOS-000001 self-determinism (byte-identical deliverables across runs)",
+      "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-MCOS-CERTIFICATION",
+      "in_scope": true,
+      "name": "Meta-Civilization Platform unconditional certification (every one of the twenty Universal Certification Matrix dimensions at exactly 100%)",
+      "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
+      "reason": "",
+      "tier": "full",
+      "verdict": "PASS",
+      "write_scope": "00-MASTER/MCOS-000001/"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCEF-DECLARATION",
+      "in_scope": true,
+      "name": "UCEF-000001 declaration integrity (every law basis, lifecycle-stage owner, acceptance mechanism and governance instrument resolves)",
+      "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCEF-NO-ENUMERATION",
+      "in_scope": true,
+      "name": "UCEF-000001 zero-enumeration (no law, lifecycle stage, construct class, expansion axis, acceptance property or validation dimension is hardcoded in the engine)",
+      "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCEF-REUSE",
+      "in_scope": true,
+      "name": "UCEF-000001 reuse-before-create (no bound authority lies inside this programme's own home — every one is a located owner elsewhere)",
+      "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCEF-OPEN-WORLD",
+      "in_scope": true,
+      "name": "UCEF-000001 open-world guard (no expansion axis and no construct register declares a finite architectural ceiling)",
+      "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCEF-CONSTITUTIONAL",
+      "in_scope": true,
+      "name": "Constitutional Evolution Gate (every law anchored, every lifecycle stage bound to a located owner outside this programme, stage graph acyclic with complete dependency closure, every validation dimension and exit criterion satisfied)",
+      "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "00-MASTER/UCEF-000001/"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCEF-DETERMINISM",
+      "in_scope": true,
+      "name": "UCEF-000001 self-determinism (byte-identical assessment and rendering; no wall-clock, no working-tree observation emitted)",
+      "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "read-only"
     }
   ],
-  "gate_blocking": [],
-  "gate_exit": 0,
+  "gate_blocking": [
+    "CK-REG-DRIFT"
+  ],
+  "gate_exit": 1,
   "gates": [
     {
       "advisory_failed": [],
@@ -389,12 +550,14 @@
       "checks": [
         "CK-CORPUS-CURRENCY",
         "CK-CLOSURE-P1",
-        "CK-CLOSURE-P2"
+        "CK-CLOSURE-P2",
+        "CK-CLOSURE-P3"
       ],
       "executed": [
         "CK-CORPUS-CURRENCY",
         "CK-CLOSURE-P1",
-        "CK-CLOSURE-P2"
+        "CK-CLOSURE-P2",
+        "CK-CLOSURE-P3"
       ],
       "failed": [],
       "id": "G-02",
@@ -488,20 +651,19 @@
         "CK-REG-DRIFT"
       ],
       "executed": [
-        "CK-REG-ENFORCE"
+        "CK-REG-ENFORCE",
+        "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "G-07",
       "name": "Registry Gate",
-      "not_executed": [
-        "CK-REG-DRIFT"
-      ],
-      "out_of_tier": [
-        "CK-REG-DRIFT"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
       "unproven": [],
-      "verdict": "PARTIAL"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -544,19 +706,17 @@
       "checks": [
         "CK-VERIFY"
       ],
-      "executed": [],
+      "executed": [
+        "CK-VERIFY"
+      ],
       "failed": [],
       "id": "G-10",
       "name": "Validation Gate",
-      "not_executed": [
-        "CK-VERIFY"
-      ],
-      "out_of_tier": [
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-CEP/CEP-004",
       "unproven": [],
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [
@@ -567,20 +727,17 @@
         "CK-VERIFY"
       ],
       "executed": [
-        "CK-HEALTH"
+        "CK-HEALTH",
+        "CK-VERIFY"
       ],
       "failed": [],
       "id": "G-11",
       "name": "Certification Gate",
-      "not_executed": [
-        "CK-VERIFY"
-      ],
-      "out_of_tier": [
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-CEP/CEP-005",
       "unproven": [],
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS-WITH-ADVISORY"
     },
     {
       "advisory_failed": [],
@@ -607,21 +764,18 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "executed": [],
+      "executed": [
+        "CK-DETERMINISM-BUILD",
+        "CK-VERIFY"
+      ],
       "failed": [],
       "id": "G-13",
       "name": "Implementation Authorization Gate",
-      "not_executed": [
-        "CK-DETERMINISM-BUILD",
-        "CK-VERIFY"
-      ],
-      "out_of_tier": [
-        "CK-DETERMINISM-BUILD",
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
       "unproven": [],
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -647,23 +801,73 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "executed": [],
-      "failed": [],
+      "executed": [
+        "CK-REG-DRIFT",
+        "CK-DETERMINISM-BUILD",
+        "CK-VERIFY"
+      ],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "G-15",
       "name": "Repository Fixed-Point Gate",
-      "not_executed": [
-        "CK-REG-DRIFT",
-        "CK-DETERMINISM-BUILD",
-        "CK-VERIFY"
-      ],
-      "out_of_tier": [
-        "CK-REG-DRIFT",
-        "CK-DETERMINISM-BUILD",
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",
       "unproven": [],
-      "verdict": "NOT-EXECUTED"
+      "verdict": "FAIL"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-MCOS-DECLARATION",
+        "CK-MCOS-REUSE",
+        "CK-MCOS-CONSTITUTIONAL",
+        "CK-MCOS-DETERMINISM",
+        "CK-MCOS-CERTIFICATION"
+      ],
+      "executed": [
+        "CK-MCOS-DECLARATION",
+        "CK-MCOS-REUSE",
+        "CK-MCOS-CONSTITUTIONAL",
+        "CK-MCOS-DETERMINISM",
+        "CK-MCOS-CERTIFICATION"
+      ],
+      "failed": [],
+      "id": "G-16",
+      "name": "Meta-Civilization Open-World Gate",
+      "not_executed": [],
+      "out_of_tier": [],
+      "owner": "00-MASTER/MCOS-000001 (PROGRAM-004)",
+      "unproven": [],
+      "verdict": "PASS"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-UCEF-DECLARATION",
+        "CK-UCEF-NO-ENUMERATION",
+        "CK-UCEF-REUSE",
+        "CK-UCEF-OPEN-WORLD",
+        "CK-UCEF-CONSTITUTIONAL",
+        "CK-UCEF-DETERMINISM"
+      ],
+      "executed": [
+        "CK-UCEF-DECLARATION",
+        "CK-UCEF-NO-ENUMERATION",
+        "CK-UCEF-REUSE",
+        "CK-UCEF-OPEN-WORLD",
+        "CK-UCEF-CONSTITUTIONAL",
+        "CK-UCEF-DETERMINISM"
+      ],
+      "failed": [],
+      "id": "G-17",
+      "name": "Constitutional Evolution Gate",
+      "not_executed": [],
+      "out_of_tier": [],
+      "owner": "00-MASTER/UCEF-000001 (CEP-009-AMD-001 — ADDENDUM B of the located owner of evolution)",
+      "unproven": [],
+      "verdict": "PASS"
     }
   ],
   "programme": {
@@ -795,20 +999,19 @@
       ],
       "executed": [
         "CK-REG-ENFORCE",
-        "CK-DISCOVERY"
+        "CK-DISCOVERY",
+        "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000004",
       "name": "Universal Registry Evolution",
-      "not_executed": [
-        "CK-REG-DRIFT"
-      ],
-      "out_of_tier": [
-        "CK-REG-DRIFT"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "output": "04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "PARTIAL"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -824,20 +1027,19 @@
       ],
       "executed": [
         "CK-REG-ENFORCE",
-        "CK-CMG"
+        "CK-CMG",
+        "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000005",
       "name": "Universal Repository Governance",
-      "not_executed": [
-        "CK-REG-DRIFT"
-      ],
-      "out_of_tier": [
-        "CK-REG-DRIFT"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "output": "05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "PARTIAL"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -956,20 +1158,17 @@
         "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"
       ],
       "executed": [
+        "CK-DETERMINISM-BUILD",
         "CK-SELF-NO-ENUMERATION"
       ],
       "failed": [],
       "id": "PROGRAM-000010",
       "name": "Universal Implementation Evolution",
-      "not_executed": [
-        "CK-DETERMINISM-BUILD"
-      ],
-      "out_of_tier": [
-        "CK-DETERMINISM-BUILD"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "output": "10-IMPLEMENTATION-EVOLUTION-ENGINE.md",
       "unproven": [],
-      "verdict": "PARTIAL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -982,19 +1181,17 @@
         "platform/universal_validation",
         "platform/validation_intelligence"
       ],
-      "executed": [],
+      "executed": [
+        "CK-VERIFY"
+      ],
       "failed": [],
       "id": "PROGRAM-000011",
       "name": "Universal Validation Evolution",
-      "not_executed": [
-        "CK-VERIFY"
-      ],
-      "out_of_tier": [
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "output": "11-VALIDATION-INTELLIGENCE.md",
       "unproven": [],
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [
@@ -1011,20 +1208,17 @@
         "00-BOOK/DATA/certification.json"
       ],
       "executed": [
+        "CK-VERIFY",
         "CK-HEALTH"
       ],
       "failed": [],
       "id": "PROGRAM-000012",
       "name": "Universal Certification Evolution",
-      "not_executed": [
-        "CK-VERIFY"
-      ],
-      "out_of_tier": [
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "output": "12-CERTIFICATION-INTELLIGENCE.md",
       "unproven": [],
-      "verdict": "NOT-EXECUTED"
+      "verdict": "PASS-WITH-ADVISORY"
     },
     {
       "advisory_failed": [],
@@ -1157,31 +1351,94 @@
         "00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md",
         "00-MASTER/UCOS-RECON-C2"
       ],
-      "executed": [],
-      "failed": [],
+      "executed": [
+        "CK-REG-DRIFT",
+        "CK-DETERMINISM-BUILD",
+        "CK-VERIFY"
+      ],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000017",
       "name": "Universal Repository Fixed-Point Closure",
-      "not_executed": [
-        "CK-REG-DRIFT",
-        "CK-DETERMINISM-BUILD",
-        "CK-VERIFY"
-      ],
-      "out_of_tier": [
-        "CK-REG-DRIFT",
-        "CK-DETERMINISM-BUILD",
-        "CK-VERIFY"
-      ],
+      "not_executed": [],
+      "out_of_tier": [],
       "output": "19-REPOSITORY-FIXED-POINT-CLOSURE.md",
       "unproven": [],
-      "verdict": "NOT-EXECUTED"
+      "verdict": "FAIL"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-MCOS-DECLARATION",
+        "CK-MCOS-REUSE",
+        "CK-MCOS-CONSTITUTIONAL",
+        "CK-MCOS-DETERMINISM",
+        "CK-MCOS-CERTIFICATION"
+      ],
+      "delegated_to": [
+        "00-MASTER/MCOS-000001",
+        "engine/civilization",
+        "engine/kernel (PROGRAM-002, immutable baseline — reused, never modified)",
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+        "00-MASTER/UCDA-000001/ucda-decisions.json (DEC-MCOS-01…14)"
+      ],
+      "executed": [
+        "CK-MCOS-DECLARATION",
+        "CK-MCOS-REUSE",
+        "CK-MCOS-CONSTITUTIONAL",
+        "CK-MCOS-DETERMINISM",
+        "CK-MCOS-CERTIFICATION"
+      ],
+      "failed": [],
+      "id": "PROGRAM-000018",
+      "name": "Universal Meta-Civilization Platform",
+      "not_executed": [],
+      "out_of_tier": [],
+      "output": "20-META-CIVILIZATION-OPEN-WORLD-CLOSURE.md",
+      "unproven": [],
+      "verdict": "PASS"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-UCEF-DECLARATION",
+        "CK-UCEF-NO-ENUMERATION",
+        "CK-UCEF-REUSE",
+        "CK-UCEF-OPEN-WORLD",
+        "CK-UCEF-CONSTITUTIONAL",
+        "CK-UCEF-DETERMINISM"
+      ],
+      "delegated_to": [
+        "00-MASTER/UCEF-000001",
+        "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md §ADDENDUM B (CEP-009-AMD-001)",
+        "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md Art LXXVI (construct admission)",
+        "00-MASTER/EVOLUTION-001/EVOLUTION-GOVERNANCE-MODEL.md"
+      ],
+      "executed": [
+        "CK-UCEF-DECLARATION",
+        "CK-UCEF-NO-ENUMERATION",
+        "CK-UCEF-REUSE",
+        "CK-UCEF-OPEN-WORLD",
+        "CK-UCEF-CONSTITUTIONAL",
+        "CK-UCEF-DETERMINISM"
+      ],
+      "failed": [],
+      "id": "PROGRAM-000019",
+      "name": "Universal Constitutional Evolution Framework",
+      "not_executed": [],
+      "out_of_tier": [],
+      "output": "21-CONSTITUTIONAL-EVOLUTION-CLOSURE.md",
+      "unproven": [],
+      "verdict": "PASS"
     }
   ],
   "repository": {
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "add0c72fc10812f0574c68a06d840c77c98bea34e994c5d63a6c82153b91b9f9",
-  "tier": "standard",
+  "seal_sha256": "a6ae6b49d4aa3703d679e7740ed0ac0ef1ed179090e6207f33f3ed725ecf280e",
+  "tier": "full",
   "unavailable": [],
   "unproven": []
 }

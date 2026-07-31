@@ -11,7 +11,6 @@ from __future__ import annotations
 from engine.factory.factories.api import ApiFactory
 from engine.factory.factories.application import ApplicationFactory
 from engine.factory.factories.base import (
-    DEFAULT_STAGES,
     BaseFactory,
     ExecutionContext,
     Factory,
@@ -45,7 +44,6 @@ def build_default_registry() -> FactoryRegistry:
 
 
 __all__ = [
-    "DEFAULT_STAGES",
     "BaseFactory",
     "Factory",
     "FactoryExecution",

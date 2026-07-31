@@ -36,6 +36,7 @@ from engine.factory.errors import (
     FactoryError,
     FactoryNotFoundError,
     FactoryRegistrationError,
+    GenerationPhaseError,
     OrchestrationError,
 )
 from engine.factory.evidence import (
@@ -53,12 +54,22 @@ from engine.factory.factories import (
     build_default_registry,
 )
 from engine.factory.factories.base import (
-    DEFAULT_STAGES,
     ExecutionContext,
     Factory,
     FactoryExecution,
 )
-from engine.factory.orchestrator import GenerationOrchestrator
+from engine.factory.orchestrator import GenerationOrchestrator, GenerationState
+from engine.factory.phases import (
+    GenerationPhase,
+    generation_order,
+    generation_phases,
+    generation_span,
+    generation_stages,
+    phase_graph,
+    register_generation_phase,
+    seam_phase,
+    unregister_generation_phase,
+)
 from engine.factory.registry import FactoryRegistry
 
 __all__ = [
@@ -79,7 +90,6 @@ __all__ = [
     "Factory",
     "FactoryExecution",
     "ExecutionContext",
-    "DEFAULT_STAGES",
     "DataFactory",
     "ApiFactory",
     "ServiceFactory",
@@ -88,7 +98,18 @@ __all__ = [
     "build_default_registry",
     # orchestrator + batch
     "GenerationOrchestrator",
+    "GenerationState",
     "generate_many",
+    # declared phase graph (WP-UCDA-018) — the derived generation order
+    "GenerationPhase",
+    "generation_order",
+    "generation_phases",
+    "generation_span",
+    "generation_stages",
+    "phase_graph",
+    "register_generation_phase",
+    "seam_phase",
+    "unregister_generation_phase",
     # evidence
     "GenerationEvidence",
     "build_generation_evidence",
@@ -100,4 +121,5 @@ __all__ = [
     "FactoryNotFoundError",
     "OrchestrationError",
     "BlueprintResolutionError",
+    "GenerationPhaseError",
 ]

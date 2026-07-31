@@ -90,6 +90,11 @@ ucos-kernel = "engine.kernel.cli:main"
 # Register/discover/resolve/select/negotiate/compose/govern providers as open kernel
 # meta-objects. Open by registration; no framework redesign for unknown provider categories.
 ucos-uprf = "engine.provider.cli:main"
+# PROGRAM-004 (MCOS-000001): Universal Meta-Civilization Platform — the layer that generates
+# constitutional operating systems. Register dimensions, derive composition from declarations
+# rather than a pipeline, and generate a constitutional OS through the stratum chain. Open by
+# registration; no layer redesign for an unknown dimension, capability, stratum or OS.
+ucos-mcos = "engine.civilization.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -124,6 +129,7 @@ addopts = [
   "--cov=engine.context",
   "--cov=engine.kernel",
   "--cov=engine.provider",
+  "--cov=engine.civilization",
   "--cov=platform.foundation",
   "--cov=platform.identity",
   "--cov=platform.administration",
@@ -150,7 +156,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/provider", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

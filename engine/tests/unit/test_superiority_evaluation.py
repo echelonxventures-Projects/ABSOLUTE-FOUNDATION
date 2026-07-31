@@ -415,15 +415,21 @@ def test_committed_verdicts_are_total_and_all_required_states_are_reachable():
 
 def test_presence_axis_columns_precede_the_superiority_axis():
     """Presence is evaluated first and the superiority columns are APPENDED, never inserted —
-    that is what keeps a pre-D-2 record positionally readable."""
+    that is what keeps a pre-D-2 record positionally readable. A LATER axis (D-3) may only append
+    after them, so the four columns must stay contiguous, in declared order, and behind presence.
+    """
     cols = committed()["row_columns"]
-    assert cols[-4:] == [
+    sup_cols = [
         "superiority",
         "superiority_score",
         "superiority_profile",
         "superiority_rule",
     ]
-    assert cols.index("state") < cols.index("superiority")
+    at = cols.index("superiority")
+    assert cols[at : at + 4] == sup_cols
+    assert cols.index("state") < at
+    assert not set(cols[:at]) & set(sup_cols)
+    assert not set(cols[at + 4 :]) & set(sup_cols)
 
 
 def test_committed_presence_states_are_unchanged_by_the_second_axis():

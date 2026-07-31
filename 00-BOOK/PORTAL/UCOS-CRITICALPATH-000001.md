@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-CRITICALPATH-000001](UCOS-CRITICALPATH-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: CRITICALPATH
+- Native: —  ·  Program: CRITIC
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [07-CRITICAL-PATH-ANALYSIS.md](../../07-CRITICAL-PATH-ANALYSIS.md)
 

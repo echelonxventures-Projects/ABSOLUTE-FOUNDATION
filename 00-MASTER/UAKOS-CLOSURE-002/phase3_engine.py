@@ -492,26 +492,91 @@ def emit(model: dict) -> tuple[list[Path], dict]:
       "gate, not a one-time event.")
 
     # ---- 48 Phase-003 Determination (fail-closed)
+    #
+    # UCCEP-F-001 / DG-7 / WP-UCCEP-001 / OA-5. This determination previously asserted
+    # `repository_status` as the literal "NOT-CLOSED", and three of its success criteria as
+    # the literal True, so `--gate` exited 1 unconditionally and no measured state could ever
+    # satisfy it. A gate with no reachable PASS state carries no evidentiary value (PR-18),
+    # and a constant verdict is not a determination. Every value below is now MEASURED, on
+    # the same terms the sibling engines already used: `closure_engine.py` and
+    # `phase2_engine.py` both compute "CLOSED" if closed else "NOT-CLOSED" from their own
+    # blocking-gap count, and this engine now reads that located determination rather than
+    # restating a constant beside it.
+    located_closure = str(model.get("determination", "")).strip()
+    located_gap_total = int(model.get("gap_total", 0) or 0)
+    # The located determination is authoritative, and it is cross-checked rather than trusted:
+    # a "CLOSED" carrying blocking gaps is itself a finding, and is refused.
+    repository_status = (
+        "CLOSED" if located_closure == "CLOSED" and located_gap_total == 0 else "NOT-CLOSED"
+    )
+
+    # Acyclicity is measured over the declared class-dependency chain instead of asserted.
+    # The invariant the registers state is wave monotonicity: no concept may depend on a
+    # predecessor in a later or equal wave. Wave "F" is parked and has no successors, so it is
+    # ordered last by WAVE_ORDER.index rather than by numeric comparison.
+    def _acyclic_dependency_chain() -> bool:
+        for plan in plans:
+            pred = plan["pred_class"]
+            if pred is None:
+                continue  # foundational / parked: no predecessor edge to order
+            if pred not in CLASS_META:
+                return False
+            if WAVE_ORDER.index(CLASS_META[pred]["wave"]) >= WAVE_ORDER.index(plan["wave"]):
+                return False
+        # The class chain itself must terminate: walking `pred` from any class must reach None
+        # without revisiting a class.
+        for klass in CLASS_META:
+            seen: set[str] = set()
+            cursor: str | None = klass
+            while cursor is not None:
+                if cursor in seen or cursor not in CLASS_META:
+                    return False
+                seen.add(cursor)
+                cursor = CLASS_META[cursor]["pred"]
+        return True
+
+    # "Planning only" is measured as a write-scope guard: this engine may write nothing
+    # outside its own operational memory. That is the whole of the claim that Repository
+    # Truth is unchanged and that no implementation was applied, and it is now checked
+    # against the paths actually written rather than asserted.
+    outside_own_memory = sorted(
+        str(path.relative_to(REPO)) for path in written if path.resolve().parent != HERE
+    )
+    planning_only = not outside_own_memory
+
     success = {
         "Every unresolved concept classified (1 class)": len(plans) == len(unhomed),
         "Every concept has exactly one destination": all(p["destination"] for p in plans),
         "Every concept has exactly one owner": all(p["owner"] for p in plans),
         "Every concept has exactly one wave": all(p["wave"] in WAVE_NAME for p in plans),
-        "Every concept has a dependency chain (acyclic)": True,
+        "Every concept has a dependency chain (acyclic)": _acyclic_dependency_chain(),
         "Every concept has an implementation contract": all(p["class"] in CLASS_META for p in plans),
         "Every concept has an enrichment plan row": len(plans) == len(unhomed),
-        "Every concept has a projected closure path": True,
-        "No concept unowned / unclassified / unknown": len(plans) == len(unhomed) and all(p["owner"] for p in plans),
-        "Repository Truth unchanged (planning only)": True,
-        "No automatic implementation applied": True,
+        "Every concept has a projected closure path": all(
+            p["wave"] in WAVE_NAME and p["destination"] and p["owner"] for p in plans
+        ),
+        "No concept unowned / unclassified / unknown": len(plans) == len(unhomed)
+        and all(p["owner"] for p in plans),
+        "Repository Truth unchanged (planning only)": planning_only,
+        "No automatic implementation applied": planning_only,
     }
     all_pass = all(success.values())
-    determination = "PLANNING-COMPLETE · REPOSITORY NOT-CLOSED (fail-closed)" if all_pass else \
-                    "FAIL-CLOSED — PLANNING INCOMPLETE"
+    if not all_pass:
+        determination = "FAIL-CLOSED — PLANNING INCOMPLETE"
+    elif repository_status == "CLOSED":
+        determination = "PLANNING-COMPLETE · REPOSITORY CLOSED (measured)"
+    else:
+        determination = "PLANNING-COMPLETE · REPOSITORY NOT-CLOSED (fail-closed)"
     seal = hashlib.sha256(json.dumps(
         {"phase": "PHASE-003", "baseline": baseline, "planned": len(plans),
+         "repository_status": repository_status,
          "classes": dict(sorted(class_counts.items())), "waves": {str(k): v for k, v in sorted(wave_counts.items(), key=str)}},
         sort_keys=True).encode()).hexdigest()
+    status_note = (
+        "measured from the located PHASE-002 closure determination"
+        if repository_status == "CLOSED"
+        else "measured — planning delivered, execution pending"
+    )
     w("48-PHASE-003-DETERMINATION.md",
       hdr("48 — PHASE-003 Determination", baseline, head,
           "The fail-closed determination for canonical implementation planning.") +
@@ -521,7 +586,8 @@ def emit(model: dict) -> tuple[list[Path], dict]:
       f"| Determination | **{determination}** |\n"
       f"| Unresolved concepts planned | {len(plans)} / {len(unhomed)} |\n"
       f"| Classes / Waves | {len(class_counts)} / {len(wave_counts)} |\n"
-      f"| Repository status | **NOT-CLOSED** (unchanged — planning only) |\n"
+      f"| Repository status | **{repository_status}** ({status_note}) |\n"
+      f"| Located closure determination | `{located_closure or '—'}` · blocking gaps {located_gap_total} |\n"
       f"| Seal (sha256) | `{seal}` |\n"
       f"| Authority | NONE — DERIVED TRUTH (fail-closed, TRACK-001) |\n\n"
       "## Success criteria (mission)\n\n" +
@@ -529,10 +595,19 @@ def emit(model: dict) -> tuple[list[Path], dict]:
       "\n\n" +
       ("**Planning is COMPLETE and internally consistent.** Every unresolved concept now has exactly one "
        "classification, destination, owner, wave, dependency chain, contract, enrichment-plan row, and "
-       "projected closure path. **Repository Truth is unchanged**; no implementation was applied. The "
-       "repository remains **NOT-CLOSED** — this determination delivers the deterministic roadmap to reach "
-       "closure, not closure itself (evidence precedes implementation; planning precedes execution). "
-       "Execute via authorized waves, then re-run `make closure && make closure-phase2` to measure progress."
+       "projected closure path. **Repository Truth is unchanged**; no implementation was applied, and that "
+       "is measured as a write-scope guard over the paths this engine actually wrote rather than asserted. "
+       + (
+           "The repository is **CLOSED**: the located PHASE-002 closure determination reports CLOSED with "
+           "zero blocking gaps, and this determination reports what was measured rather than a constant. "
+           "This verdict is reachable in both directions — it becomes NOT-CLOSED again the moment a "
+           "blocking gap reappears (UCCEP-F-001 / OA-5)."
+           if repository_status == "CLOSED" else
+           "The repository remains **NOT-CLOSED** — this determination delivers the deterministic roadmap "
+           "to reach closure, not closure itself (evidence precedes implementation; planning precedes "
+           "execution). Execute via authorized waves, then re-run `make closure && make closure-phase2` "
+           "to measure progress."
+       )
        if all_pass else
        "**Planning incomplete — fail-closed.** One or more concepts lack a required planning attribute. "
        "See the failing criteria above; no determination is asserted until every concept is fully planned."))
@@ -543,7 +618,11 @@ def emit(model: dict) -> tuple[list[Path], dict]:
         "baseline_commit": baseline, "head_commit": head,
         "authority": "NONE-DERIVED-TRUTH",
         "determination": determination,
-        "repository_status": "NOT-CLOSED",
+        "repository_status": repository_status,
+        "located_closure_determination": located_closure,
+        "located_blocking_gaps": located_gap_total,
+        "planning_only": planning_only,
+        "wrote_outside_own_memory": outside_own_memory,
         "planning_complete": all_pass,
         "unresolved_total": len(unhomed),
         "planned_total": len(plans),
@@ -588,6 +667,9 @@ def main(argv: list[str] | None = None) -> int:
           f"| classes={len(phase3['classes'])} waves={len(phase3['waves'])} "
           f"| repo={phase3['repository_status']}")
     print(f"wrote {len(written) + 1} artifacts to {HERE}")
+    if gate and not phase3["planning_complete"]:
+        print("GATE: planning incomplete (fail-closed) — a success criterion is unmet.", file=sys.stderr)
+        return 1
     if gate and phase3["repository_status"] != "CLOSED":
         print("GATE: repository NOT-CLOSED (fail-closed) — planning delivered, execution pending.", file=sys.stderr)
         return 1

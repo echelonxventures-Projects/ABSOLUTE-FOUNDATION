@@ -11,6 +11,7 @@ from engine.factory.contracts import FactoryCapability, FactoryDescriptor
 from engine.factory.errors import FactoryNotFoundError, FactoryRegistrationError
 from engine.factory.factories import ApiFactory, DataFactory, EventFactory, WorkflowFactory
 from engine.factory.factories.base import BaseFactory
+from engine.factory.phases import generation_order, generation_stages
 from engine.factory.registry import FactoryRegistry
 
 
@@ -96,9 +97,12 @@ def test_capability_discovery():
     caps = registry.capabilities()
     assert len(caps) == 6
     assert all(isinstance(c, FactoryCapability) for c in caps)
-    # every factory shares the same uniform stage set (one execution path)
-    uniform = {("classify", "compile", "assemble", "deploy", "evidence")}
+    # Every factory shares the same uniform stage set (one execution path), and that set IS
+    # the derived generation order rather than a frozen copy of it (WP-UCDA-018): a factory
+    # cannot advertise a stage vocabulary the runtime does not execute.
+    uniform = {generation_stages()}
     assert {tuple(c.stages) for c in caps} == uniform
+    assert generation_stages() == generation_order()
 
 
 def test_factory_exposes_capability_property():

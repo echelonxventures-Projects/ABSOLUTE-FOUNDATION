@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-PARALLELEXEC-000001](UCOS-PARALLELEXEC-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: PARALLELEXEC
+- Native: —  ·  Program: PARALL
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [06-PARALLEL-EXECUTION-GROUPS.md](../../06-PARALLEL-EXECUTION-GROUPS.md)
 

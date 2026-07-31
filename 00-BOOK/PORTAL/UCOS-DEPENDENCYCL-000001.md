@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-DEPENDENCYCL-000001](UCOS-DEPENDENCYCL-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: DEPENDENCYCL
+- Native: —  ·  Program: DEPEND
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [05-DEPENDENCY-CLOSURE.md](../../05-DEPENDENCY-CLOSURE.md)
 

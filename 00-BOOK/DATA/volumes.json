@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T05:52:19+00:00",
+  "generated_at": "2026-07-31T06:45:06+00:00",
   "count": 25,
   "volumes": [
     {
@@ -9,7 +9,7 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 736,
+      "artifact_count": 96,
       "page_range_start": 1,
       "page_range_end": 9583,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
@@ -33,7 +33,7 @@
       "description": "Constitutional corpus, consolidation program, freeze, and registers.",
       "category": "CON",
       "status": "ACTIVE",
-      "artifact_count": 66,
+      "artifact_count": 102,
       "page_range_start": 1327,
       "page_range_end": 9587,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-002"
@@ -93,9 +93,9 @@
       "description": "Data architecture, catalog, reference, and generation.",
       "category": "DAT",
       "status": "ACTIVE",
-      "artifact_count": 23,
+      "artifact_count": 157,
       "page_range_start": 4355,
-      "page_range_end": 5171,
+      "page_range_end": 6451,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-007"
     },
     {
@@ -105,9 +105,9 @@
       "description": "Service architecture, catalog, reference, and generation.",
       "category": "SVC",
       "status": "ACTIVE",
-      "artifact_count": 23,
+      "artifact_count": 172,
       "page_range_start": 4410,
-      "page_range_end": 5246,
+      "page_range_end": 7033,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-008"
     },
     {
@@ -117,9 +117,9 @@
       "description": "Application architecture, catalog, reference, and generation.",
       "category": "APP",
       "status": "ACTIVE",
-      "artifact_count": 28,
+      "artifact_count": 149,
       "page_range_start": 4232,
-      "page_range_end": 5495,
+      "page_range_end": 7536,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-009"
     },
     {
@@ -129,9 +129,9 @@
       "description": "Infrastructure architecture.",
       "category": "INF",
       "status": "ACTIVE",
-      "artifact_count": 21,
+      "artifact_count": 153,
       "page_range_start": 4390,
-      "page_range_end": 5434,
+      "page_range_end": 8988,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-010"
     },
     {
@@ -141,9 +141,9 @@
       "description": "Security architecture and controls.",
       "category": "SEC",
       "status": "ACTIVE",
-      "artifact_count": 1,
+      "artifact_count": 6,
       "page_range_start": 4406,
-      "page_range_end": 4409,
+      "page_range_end": 8934,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-011"
     },
     {
@@ -249,9 +249,9 @@
       "description": "Program control tower and external-execution support.",
       "category": "CTL",
       "status": "ACTIVE",
-      "artifact_count": 12,
+      "artifact_count": 53,
       "page_range_start": 4183,
-      "page_range_end": 5972,
+      "page_range_end": 9422,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-020"
     },
     {
@@ -285,7 +285,7 @@
       "description": "Universal Science & Intelligence Substrate (USIS): the constitutional substrate beneath every scientific discipline and intelligence paradigm — 21 universes, Universal Science, Human Intelligence, Self-Evolution, and Data/Analytics/Algorithm/Model universes, the 24-tier Universal Capability Meta-Model, reasoning/learning/analytics/simulation runtime, grounding/explanation validation, and explainability/bounded-autonomy/reproducibility certification.",
       "category": "USIS",
       "status": "ACTIVE",
-      "artifact_count": 36,
+      "artifact_count": 63,
       "page_range_start": 9133,
       "page_range_end": 9522,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-024"
@@ -296,10 +296,10 @@
       "name": "SECURITY-GOVERNANCE",
       "description": "Auto-discovered volume (metadata-driven, UMB-IMP-001) first declared by 14-SECURITY/SECURITY-GOV-000-UNIVERSAL-SECURITY-PROGRAM-ESTABLISHMENT-DETERMINATION.md.",
       "category": "SEC",
-      "status": "ACTIVE",
-      "artifact_count": 5,
-      "page_range_start": 8900,
-      "page_range_end": 8934,
+      "status": "PLANNED",
+      "artifact_count": 0,
+      "page_range_start": null,
+      "page_range_end": null,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-023",
       "discovered": true
     }

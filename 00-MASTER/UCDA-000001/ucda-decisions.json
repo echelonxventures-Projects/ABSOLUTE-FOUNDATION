@@ -524,6 +524,17 @@
       "route": "Two halves, deliberately split so nothing is registered twice. THIS package owns the namespace ceiling only: the located schema constrains an artifact namespace to a shorter span than the namespaces the corpus actually carries, so structurally valid artifacts are rejected. The file sits in the frozen corpus, so the route is either a CEP-009 amendment of the schema or a formal deferral recorded under CEP-002 Article 27 — not a patch. The OTHER half — making schema validation mandatory rather than silently optional so the failure cannot recur undetected — is ALREADY registered as WP-UCCEP-004 against finding UCCEP-F-006 in 00-MASTER/UCCEP-000000/uccep-bindings.json and is referenced here, not duplicated.",
       "acceptance": "The located validator exits zero over the registered corpus, or every remaining failure carries a recorded deferral with a constitutional basis; and the validator is wired into the verification entry point and the registration gate so a regression is detected rather than silent.",
       "authorization_required": true
+    },
+    {
+      "id": "WP-UCDA-018",
+      "title": "Make the composed plan the path the generation runtime takes, not a second path beside it",
+      "discharges": [
+        "DEC-MCOS-14"
+      ],
+      "owner": "engine/factory/orchestrator.py (EC-1 certified) with platform/generation/dispatch.py as the recording boundary",
+      "route": "MCOS-000001 supplies the derivation: engine/civilization/composition.py computes an execution order from capability declarations, the requesting context, the policies in force and the supplied evidence, and the rule that derives it is a registered, replaceable strategy. What it deliberately does NOT do is rewrite engine/factory/orchestrator.py::execute(), whose fixed six-step sequence remains the path generation actually takes. That file sits inside the EC-1 certified zone, and UCIC-001 Stage 4 makes an undeclared write to engine/** non-recoverable, so the wiring is an authorized act under its own declared additive surface — not a side effect of this programme. THIS package owns only that wiring. It does not re-register the composition capability, which is already discharged by DEC-MCOS-09, nor the declarative-composition decision, which is already registered as DEC-ADAM-14 against WP-UCDA-006 and is referenced here rather than duplicated.",
+      "acceptance": "A single composition path exists: the plan derived by engine/civilization/composition.py is the order the located generation runtime executes, proven by a test that changes the plan through a registration and observes the executed order change; and no second ordering mechanism remains reachable.",
+      "authorization_required": true
     }
   ],
   "$decisions_comment": [
@@ -2661,6 +2672,689 @@
       "work_package": "WP-UCDA-017",
       "action_taken": "REGISTERED AS A WORK PACKAGE — the measured defect is the sole blocking failure of the aggregate constitutional gate",
       "note": "This is the single measured reason the aggregate gate is currently red, and it is independent of any decision recorded here: the located validator rejects a namespace the corpus legitimately uses. Recorded as a governance decision, so it is outside architectural coverage scope. The wiring half is deliberately NOT re-registered — UCCEP-F-006 and WP-UCCEP-004 already own it, and duplicating a registered work package would breach Zero Duplication."
+    },
+    {
+      "id": "DEC-MCOS-01",
+      "title": "The Universal Meta Kernel IS the highest constitutional authority; everything derives from it and nothing bypasses it",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "CLOSURE",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "canonical_owner": "engine/kernel/kernel.py",
+      "evidence": [
+        "engine/kernel/kernel.py",
+        "00-MASTER/UMK-000001/ADR-0003-universal-meta-kernel-open-metatype-system.md",
+        "00-MASTER/UMK-000001/08-FINAL-CERTIFICATION-REPORT.md",
+        "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/kernel/kernel.py",
+          "engine/kernel/registry.py"
+        ],
+        "EQ-2": [
+          "00-MASTER/UMK-000001/ADR-0003-universal-meta-kernel-open-metatype-system.md"
+        ],
+        "EQ-3": [
+          ".github/workflows/umk-gate.yml",
+          "engine/kernel/governance.py"
+        ],
+        "EQ-4": [
+          "00-MASTER/UMK-000001/08-FINAL-CERTIFICATION-REPORT.md"
+        ],
+        "EQ-5": [
+          "engine/kernel/seed.py"
+        ]
+      },
+      "action_taken": "REPRESENTED — the kernel already exists at engine/kernel v1.0.0 under UMK-000001 with ADR-0003 Accepted; a second meta kernel was rejected as DEC-MCOS-00R",
+      "note": "The mandate named this as a construct to introduce. Repository Truth shows it was introduced by PROGRAM-002. The only thing MCOS-000001 adds IS the proof that the layer above it cannot bypass it: every generated record carries one derives-from edge and the lineage roots at the kernel's reflective root, checked by verify_derivation and by the blocking gate nothing-bypasses-the-meta-kernel."
+    },
+    {
+      "id": "DEC-MCOS-02",
+      "title": "MCOS IS a Meta-Civilization Operating System that generates unlimited constitutional operating systems, and it holds NO constitutional authority",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "engine/civilization/generation.py",
+        "engine/civilization/mcos.py",
+        "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md",
+        "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md",
+        "00-MASTER/MCOS-000001/mcos-civilization.json"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/generation.py",
+          "engine/civilization/mcos.py"
+        ],
+        "EQ-2": [
+          "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md",
+          "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+        ],
+        "EQ-3": [
+          ".github/workflows/mcos-gate.yml",
+          "engine/civilization/compliance.py"
+        ],
+        "EQ-4": [
+          "00-MASTER/MCOS-000001/08-FINAL-CERTIFICATION-REPORT.md",
+          "00-MASTER/MCOS-000001/07-UNIVERSAL-CERTIFICATION-MATRIX.md"
+        ],
+        "EQ-5": [
+          "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md"
+        ]
+      },
+      "action_taken": "IMPLEMENTED as a mechanism with authority NONE — the name resolves to MCS-000 per DEC-CAEM-13 and vesting authority in it was rejected as DEC-MCOS-02R",
+      "note": "Both halves of the earlier adjudication are honoured. DEC-CAEM-13 resolved the NAME onto MCS-000; DEC-CAEM-13R rejected vesting authority in it. What was genuinely absent was the GENERATION MECHANISM, and that IS what exists here: an operating system IS a registered kernel meta-type, so the catalogue IS never finite. Five previously unknown operating systems — deliberately not UCOS/GCOS/HCOS/ECOS/ICOS, since naming a system the repository already knows would prove nothing — are registered, generated and lineage-verified end to end, with the source fingerprints of both the layer and the kernel unchanged across the proof. MetaCivilizationPlatform.authority IS the literal string NONE and the blocking gate no-parallel-constitutional-authority fails if that ever changes."
+    },
+    {
+      "id": "DEC-MCOS-03",
+      "title": "The Universal Engineering Platform IS the named realization surface of the platform meta-model, not a new owner",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "CLOSURE",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "canonical_owner": "09-PLATFORM/PLATFORM-005-UNIVERSAL-PLATFORM-META-MODEL.md",
+      "evidence": [
+        "09-PLATFORM/PLATFORM-005-UNIVERSAL-PLATFORM-META-MODEL.md",
+        "09-PLATFORM/PLATFORM-010-UNIVERSAL-PLATFORM-COMPOSITION-ARCHITECTURE.md",
+        "02-CANONICAL-OWNERSHIP-MATRIX.md",
+        "engine/civilization/mcos.py",
+        "00-MASTER/UCOS-NUCLEUS-001/02-NUCLEUS-CONSTITUTIONAL-MODEL.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "09-PLATFORM/PLATFORM-005-UNIVERSAL-PLATFORM-META-MODEL.md",
+          "09-PLATFORM/PLATFORM-010-UNIVERSAL-PLATFORM-COMPOSITION-ARCHITECTURE.md"
+        ],
+        "EQ-2": [
+          "02-CANONICAL-OWNERSHIP-MATRIX.md",
+          "00-MASTER/UCOS-NUCLEUS-001/02-NUCLEUS-CONSTITUTIONAL-MODEL.md"
+        ],
+        "EQ-3": [
+          "00-MASTER/UCCEP-000000/uccep-bindings.json",
+          ".github/workflows/mcos-gate.yml"
+        ],
+        "EQ-4": [
+          "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"
+        ],
+        "EQ-5": [
+          "engine/civilization/mcos.py",
+          "07-ENGINEERING/UCOS-Ω∞-ENGINEERING-PROGRAM-MASTER-INDEX.md"
+        ]
+      },
+      "action_taken": "REPRESENTED — the substance IS owned by PLATFORM-005 and PLATFORM-010; MCOS-000001 supplies the named realization surface as an EXTEND",
+      "note": "02-CANONICAL-OWNERSHIP-MATRIX.md records Meta-Platform and Platform Builder as CONCEPTUAL / UNNAMED: the owner exists, the name does not. UCOS-NUCLEUS-001/02 section 6 forbids making either a new nucleus. MetaCivilizationPlatform IS therefore the named surface over the located owners, and no second platform meta-model, composition architecture or nucleus IS created."
+    },
+    {
+      "id": "DEC-MCOS-04",
+      "title": "The Universal Registry Architecture IS the kernel's single admission authority; a second registry IS prohibited",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "CLOSURE",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "canonical_owner": "engine/kernel/registry.py",
+      "evidence": [
+        "engine/kernel/registry.py",
+        "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-REG-AUTO-001-AUTOMATIC-ARTIFACT-REGISTRATION-STANDARD.md",
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+        "00-MASTER/MCOS-000001/05-TRACEABILITY.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/kernel/registry.py"
+        ],
+        "EQ-2": [
+          "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+          "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-REG-AUTO-001-AUTOMATIC-ARTIFACT-REGISTRATION-STANDARD.md"
+        ],
+        "EQ-3": [
+          "engine/kernel/governance.py",
+          ".github/workflows/mcos-gate.yml"
+        ],
+        "EQ-4": [
+          "00-MASTER/UMK-000001/08-FINAL-CERTIFICATION-REPORT.md"
+        ],
+        "EQ-5": [
+          "engine/kernel/seed.py",
+          "engine/kernel/registry.py"
+        ]
+      },
+      "action_taken": "REPRESENTED — DEC-CAEM-07 already records that a second registry IS prohibited, and the new layer admits through the one kernel registry",
+      "note": "The obligation this decision carries IS negative: not to add a registry. It IS discharged by measurement rather than by assertion — the blocking gate no-parallel-constitutional-authority asserts that the dimension registry, the composition planner and the constitutional generator all hold the SAME MetaKernel instance, so there IS exactly one admission authority, one identity scheme and one audit journal beneath all three."
+    },
+    {
+      "id": "DEC-MCOS-05",
+      "title": "Universal Capability Discovery IS present-canonical and registry-driven",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "CLOSURE",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "canonical_owner": "engine/discovery/dimensions.py",
+      "evidence": [
+        "engine/discovery/dimensions.py",
+        "00-MASTER/MCOS-000001/05-TRACEABILITY.md",
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/discovery/dimensions.py"
+        ],
+        "EQ-2": [
+          "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+        ],
+        "EQ-3": [
+          "00-MASTER/UCCEP-000000/uccep-bindings.json"
+        ],
+        "EQ-4": [
+          "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"
+        ],
+        "EQ-5": [
+          "engine/discovery/dimensions.py"
+        ]
+      },
+      "action_taken": "REPRESENTED — engine/discovery already discovers over eight registry-driven dimensions with zero hard-coded patterns",
+      "note": "Referenced, not duplicated. The new layer adds its own discover() surfaces over dimensions and capabilities, which are lookups over the kernel registry rather than a second discovery engine; engine/discovery IS neither imported nor modified."
+    },
+    {
+      "id": "DEC-MCOS-06",
+      "title": "The Universal Dimension Model makes the dimension SPACE open: every dimension registerable, discoverable, governed, composable, extensible, context aware, policy aware, implementation independent, with no upper limit",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "engine/civilization/dimensions.py",
+        "engine/civilization/compliance.py",
+        "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md",
+        "00-MASTER/MCOS-000001/05-TRACEABILITY.md",
+        "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/dimensions.py"
+        ],
+        "EQ-2": [
+          "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md",
+          "engine/context/constitution.py"
+        ],
+        "EQ-3": [
+          "engine/civilization/dimensions.py",
+          ".github/workflows/mcos-gate.yml"
+        ],
+        "EQ-4": [
+          "00-MASTER/MCOS-000001/08-FINAL-CERTIFICATION-REPORT.md",
+          "00-MASTER/MCOS-000001/07-UNIVERSAL-CERTIFICATION-MATRIX.md"
+        ],
+        "EQ-5": [
+          "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md"
+        ]
+      },
+      "action_taken": "IMPLEMENTED — the dimension space was unowned; engine/context owns context frames, values and the twelve CXL laws, which IS a different concern",
+      "note": "The distinction IS load-bearing and IS why this IS not a duplication. engine/context/** owns what a situation IS: frames, provenanced values, precedence, and the twelve executable laws CXL-01 through CXL-12. Nothing owned which axes exist at all, and engine/context/taxonomy.py::ContextKind IS a closed set of kinds. This layer owns the SPACE: a dimension IS a registered kernel meta-type, so language, currency, country, calendar, jurisdiction, cloud, region, tenant, reality, existence and axes nobody has named are admitted identically and by registration only. Two invariants are bound into the kernel's EXISTING open admission policy as registered Constraints, never by editing the kernel: every dimension satisfies every mandatory facet, and no dimension may legislate its own ceiling. Neither module imports the other, and 21 prohibited tokens are proven absent from the vocabulary yet all 21 proven representable."
+    },
+    {
+      "id": "DEC-MCOS-07",
+      "title": "The Universal Open-World Expansion Principle IS mechanised, not only certified",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md",
+        "04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md",
+        "engine/civilization/compliance.py",
+        "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/compliance.py",
+          "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md"
+        ],
+        "EQ-2": [
+          "03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md",
+          "04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md"
+        ],
+        "EQ-3": [
+          ".github/workflows/mcos-gate.yml",
+          "00-MASTER/UCCEP-000000/uccep-bindings.json"
+        ],
+        "EQ-4": [
+          "00-MASTER/MCOS-000001/08-FINAL-CERTIFICATION-REPORT.md"
+        ],
+        "EQ-5": [
+          "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md",
+          "00-MASTER/MCOS-000001/07-UNIVERSAL-CERTIFICATION-MATRIX.md"
+        ]
+      },
+      "action_taken": "IMPLEMENTED as executed mechanism under the two existing certifications — no second determination IS created",
+      "note": "The principle was already certified across 16 axes (03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md) and 23 axes (04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md), and 04 section 4 carries an explicit honesty flag that its claim IS structural rather than exhaustive. What was missing was a mechanism that FAILS when the principle IS violated. Twelve blocking gates now supply it, including no-finite-enumeration (an AST scan refusing any Enum subclass in the layer), no-dimension-declares-a-ceiling, no-finite-operating-system-catalogue and no-finite-generation-chain."
+    },
+    {
+      "id": "DEC-MCOS-08",
+      "title": "The Constitutional Generation Model generates operating systems through an open, ordered chain of registered strata",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "engine/civilization/generation.py",
+        "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md",
+        "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md",
+        "00-MASTER/MCOS-000001/mcos-civilization.json"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/generation.py"
+        ],
+        "EQ-2": [
+          "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md",
+          "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+        ],
+        "EQ-3": [
+          "engine/civilization/generation.py",
+          ".github/workflows/mcos-gate.yml"
+        ],
+        "EQ-4": [
+          "00-MASTER/MCOS-000001/08-FINAL-CERTIFICATION-REPORT.md",
+          "00-MASTER/MCOS-000001/07-UNIVERSAL-CERTIFICATION-MATRIX.md"
+        ],
+        "EQ-5": [
+          "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md",
+          "00-MASTER/MCOS-000001/mcos-civilization.json"
+        ]
+      },
+      "action_taken": "IMPLEMENTED at the operating-system stratum — the six frozen 05-GENERATION families generate artefacts WITHIN one operating system and are untouched",
+      "note": "The nine ratified strata — Meta Kernel, Meta-Civilization OS, Constitutional Blueprint, Domain Constitutional OS, Nucleus, Universe, Capability, Component, Configured Solution — ship as DATA ordered by declared predecessor, and a tenth IS a registration. Extending BlueprintFamily instead was rejected as DEC-MCOS-08R: 05-GENERATION IS frozen and its chain IS declared non-reversible, and an operating system IS not an artefact family but the stratum above them. Generation IS idempotent by construction, because the kernel's content-unique constraint makes re-generating an already-generated blueprint return the existing lineage rather than admit the same knowledge twice."
+    },
+    {
+      "id": "DEC-MCOS-09",
+      "title": "Dynamic Capability Composition derives execution from declarations, context, dependencies, evidence and policies — not from a fixed workflow or a predefined pipeline",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "engine/civilization/composition.py",
+        "engine/civilization/compliance.py",
+        "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md",
+        "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md",
+        "engine/tests/civilization"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/composition.py"
+        ],
+        "EQ-2": [
+          "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md",
+          "09-PLATFORM/PLATFORM-010-UNIVERSAL-PLATFORM-COMPOSITION-ARCHITECTURE.md"
+        ],
+        "EQ-3": [
+          ".github/workflows/mcos-gate.yml",
+          "engine/civilization/compliance.py"
+        ],
+        "EQ-4": [
+          "00-MASTER/MCOS-000001/08-FINAL-CERTIFICATION-REPORT.md",
+          "00-MASTER/MCOS-000001/07-UNIVERSAL-CERTIFICATION-MATRIX.md"
+        ],
+        "EQ-5": [
+          "engine/civilization/composition.py"
+        ]
+      },
+      "action_taken": "IMPLEMENTED as a located mechanism — the capability the outstanding decision DEC-ADAM-14 / WP-UCDA-006 describes now exists",
+      "note": "The gate no-fixed-pipeline proves the property rather than asserting it: registering one more capability changes the derived plan with no code change, and the same declarations yield different plans under different registered strategies. Requirements are declared by capability KEY, not minted identity, so declarations are order independent — which makes a declared cycle possible, so the planner detects cycles itself rather than relying on the kernel's relationship acyclicity to have excluded them. Plans are derived truth: computed, never registered, because registering a derivation of already-registered knowledge would itself breach Knowledge Once. This decision covers the DERIVATION only. Making it the path the existing generation runtime takes IS deliberately registered separately as DEC-MCOS-14 against WP-UCDA-018, because engine/factory/orchestrator.py sits in the EC-1 certified zone."
+    },
+    {
+      "id": "DEC-MCOS-10",
+      "title": "Unlimited Constitutional Evolution IS present-canonical",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "CLOSURE",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "canonical_owner": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+      "evidence": [
+        "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+        "00-MASTER/UEI-000001/01-UNIVERSAL-EVOLUTION-INTELLIGENCE-CONSTITUTION.md",
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+          "00-MASTER/UEI-000001/01-UNIVERSAL-EVOLUTION-INTELLIGENCE-CONSTITUTION.md"
+        ],
+        "EQ-2": [
+          "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+        ],
+        "EQ-3": [
+          "00-MASTER/UCCEP-000000/uccep-bindings.json"
+        ],
+        "EQ-4": [
+          "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md"
+        ],
+        "EQ-5": [
+          "00-MASTER/UEI-000001/01-UNIVERSAL-EVOLUTION-INTELLIGENCE-CONSTITUTION.md"
+        ]
+      },
+      "action_taken": "REPRESENTED — CEP-009 owns amendment and evolution, and UEI-000001 already binds fifteen evolution capabilities",
+      "note": "Recorded so the mandate's evolution objective IS discharged by its located owner rather than by a second evolution instrument. DEC-CAEM-09 already established this for the earlier mandate; nothing IS re-registered."
+    },
+    {
+      "id": "DEC-MCOS-11",
+      "title": "No dimension, capability, composition strategy, generation stratum or constitutional operating system may be admitted by editing code",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "engine/civilization/compliance.py",
+        "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md",
+        "00-MASTER/MCOS-000001/07-UNIVERSAL-CERTIFICATION-MATRIX.md",
+        ".github/workflows/mcos-gate.yml"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/compliance.py"
+        ],
+        "EQ-2": [
+          "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md"
+        ],
+        "EQ-3": [
+          ".github/workflows/mcos-gate.yml",
+          "00-MASTER/UCCEP-000000/uccep-bindings.json"
+        ],
+        "EQ-4": [
+          "00-MASTER/MCOS-000001/08-FINAL-CERTIFICATION-REPORT.md",
+          "00-MASTER/MCOS-000001/07-UNIVERSAL-CERTIFICATION-MATRIX.md"
+        ],
+        "EQ-5": [
+          "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md"
+        ]
+      },
+      "action_taken": "IMPLEMENTED — the mandate's own success criterion IS executed as a proof under source fingerprints",
+      "note": "The mandate's success criterion reads: no future capability, dimension, universe, reality, existence model, engineering model, commercial model, governance model or runtime model shall require changes to the constitutional foundation. The architectural proof takes each of those twelve categories, admits a previously unknown instance by registration, and fingerprints BOTH this layer's and the kernel's source before and after. A category that could only be admitted by editing code fails its own probe, so the criterion IS measured rather than promised."
+    },
+    {
+      "id": "DEC-MCOS-12",
+      "title": "Reuse-First MUST be provable: a responsibility claimed as REUSED must be homed outside the layer that claims it",
+      "decision_class": "governance",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "00-MASTER/MCOS-000001/mcos_engine.py",
+        "00-MASTER/MCOS-000001/mcos-civilization.json",
+        "00-MASTER/MCOS-000001/05-TRACEABILITY.md",
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+      ],
+      "action_taken": "IMPLEMENTED — mcos_engine.py --check-reuse-before-create fails closed on a reuse claim that does not hold",
+      "note": "The failure mode this closes IS a re-implementation wearing a reuse label. Every one of the 26 declared responsibilities carries a disposition of REUSED, EXTENDED or NEW; the guard fails closed if a responsibility claims REUSED while homed inside engine/civilization, or claims NEW while homed outside it, or carries no disposition at all. Present distribution: REUSED 9, EXTENDED 5, NEW 12. Recorded as a governance decision, so it IS outside architectural coverage scope. This introduces no second reuse gate: it IS a self-guard on one programme's own declaration, and the Constitutional Reuse Gate remains registered as DEC-ADAM-10 against WP-UCDA-005, referenced here and not duplicated."
+    },
+    {
+      "id": "DEC-MCOS-13",
+      "title": "The evolution occurs without foundational redesign, under the architecture freeze",
+      "decision_class": "governance",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "CLOSURE",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "canonical_owner": "10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md",
+      "evidence": [
+        "10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md",
+        "00-CEP/CEP-007",
+        "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+        "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md"
+      ],
+      "action_taken": "REPRESENTED — the freeze certificate already permits growth by registration, composition, configuration, extension, certification and supersession",
+      "note": "10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md section 5 IS the governing clause, and this programme conforms to it exactly: nothing under 00-BOOK, 00-SOURCE, 99-FREEZE or 05-GENERATION IS modified, engine/kernel and engine/provider are unmodified and the architectural proof carries the fingerprints that show it, and every addition IS a new additive surface plus DATA entries in existing declarations. The freeze IS therefore not breached and no amendment under CEP-009 IS required for this programme."
+    },
+    {
+      "id": "DEC-MCOS-14",
+      "title": "The composed plan MUST become the path the generation runtime takes, not a second path beside it",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "engine/foundation/composition/ordering.py",
+        "engine/factory/phases.py",
+        "engine/factory/orchestrator.py",
+        "engine/civilization/composition.py",
+        "engine/tests/factory/test_phases.py",
+        "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/factory/orchestrator.py",
+          "engine/factory/phases.py",
+          "engine/tests/factory/test_phases.py"
+        ],
+        "EQ-2": [
+          "engine/foundation/composition/ordering.py",
+          "engine/civilization/composition.py"
+        ],
+        "EQ-3": [
+          "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
+          "00-MASTER/UCCEP-000000/uccep-bindings.json"
+        ],
+        "EQ-4": [
+          "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
+          "engine/factory/phases.py"
+        ],
+        "EQ-5": [
+          "engine/factory/phases.py",
+          "engine/tests/factory/test_phases.py"
+        ]
+      },
+      "action_taken": "IMPLEMENTED — the generation runtime derives its execution order from a declared phase graph through the single ordering authority, and the frozen duplicate of that order was removed, so functional equivalence IS present and no second ordering mechanism remains reachable",
+      "note": "DISCHARGED by WP-UCDA-018 (which retains `discharges: [DEC-MCOS-14]`; the reference is carried from the work-package side because CEP-002 Art 28.13(a) admits no work-package field on an IMPLEMENTED disposition). The shortfall this entry recorded IS closed, and it IS closed by removing the second mechanism rather than by bridging to it. The ordering authority — the strategy registry, the layering algorithm and the act of derivation — IS relocated to engine/foundation/composition/ordering.py, which sits BELOW both consumers, so engine/civilization/composition.py (capability composition) and engine/factory/phases.py (generation-runtime phase order) now derive through one mechanism and neither can drift from the other. A layer inversion IS deliberately avoided: engine/factory does NOT import engine/civilization, which would make the artefact-generation layer depend on the operating-system-generation layer declared one stratum above it, so closing this decision introduces no new architectural defect. engine/factory/orchestrator.py::execute() no longer holds a sequence at all; engine/factory/phases.py declares eight phases and their requirements and the order IS derived, reproducing the located sequence exactly, so this IS a change of authority over the order and not a change of behaviour. The frozen DEFAULT_STAGES tuple IS removed and the advertised stage vocabulary IS now derived on every construction, which closes the THIRD declaration of the order that the original finding did not name. Acceptance IS met on both clauses and measured, not asserted: engine/tests/factory/test_phases.py registers a phase and observes the executed order change during a real generation, and asserts that no frozen stage tuple and no second strategy registry remain reachable. Measured: 5127 tests pass, engine/factory/orchestrator.py and engine/factory/phases.py and engine/foundation/composition/ordering.py at 100% statement and branch, engine/civilization at 100% statement and branch (MCOS-000001 certification unweakened), determinism reproduce BP-DATA-0001 byte_identical=True, verify.sh 5/5 stages, make mcos-self 4/4 guards, make mcos-gate 12/12 gates."
+    },
+    {
+      "id": "DEC-MCOS-00R",
+      "title": "Author a second Universal Meta Kernel, registry, identity scheme, governance engine or audit journal",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8.1",
+      "stage": "CLOSURE",
+      "disposition": "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION",
+      "constitutional_basis": "CEP-001 VII.2 (zero parallel architecture) · CEP-002 Art 8.3 (no parallel apparatus) · CMG-000001 CMG-INV-02 (a concern has exactly one owner) · 03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §4 (Zero Duplication, Single Canonical Ownership) · DEC-CAEM-07 (a second registry IS prohibited) · UMK-000001 / ADR-0003 (the kernel already exists)",
+      "justification": "The mandate named the Universal Meta Kernel and the Universal Registry Architecture as constructs to introduce. Repository Truth shows both already exist and are certified: engine/kernel v1.0.0 under UMK-000001 with ADR-0003 Accepted, and the kernel's UniversalRegistry as the single admission authority. Building either again would create two owners for one concern, two identity schemes in one namespace and two audit journals — the exact duplication the mandate itself prohibits. The alternative IS therefore declined on constitutional grounds, and the accepted form IS DEC-MCOS-01 and DEC-MCOS-04: register INTO the existing kernel and prove, by gate, that only one registry exists beneath the new layer.",
+      "evidence": [
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+        "00-MASTER/UMK-000001/ADR-0003-universal-meta-kernel-open-metatype-system.md",
+        "engine/kernel/registry.py",
+        "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
+        "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/kernel/kernel.py",
+          "engine/kernel/registry.py"
+        ],
+        "EQ-2": [
+          "00-MASTER/UMK-000001/ADR-0003-universal-meta-kernel-open-metatype-system.md",
+          "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+        ],
+        "EQ-3": [
+          "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
+          "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md"
+        ],
+        "EQ-4": [
+          "00-MASTER/UMK-000001/08-FINAL-CERTIFICATION-REPORT.md"
+        ],
+        "EQ-5": [
+          "engine/kernel/seed.py"
+        ]
+      },
+      "action_taken": "REJECTED — a second kernel or registry would create two owners for one concern",
+      "note": "Recorded so the rejected alternative cannot be silently revived. A rejection with a cited constitutional basis IS a disposition; an unrecorded rejection IS not."
+    },
+    {
+      "id": "DEC-MCOS-02R",
+      "title": "Vest constitutional authority in MCOS — making it the holder of the Meta Laws, Meta Governance, Meta Runtime and Meta Evolution authority roles",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8.1",
+      "stage": "CLOSURE",
+      "disposition": "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION",
+      "constitutional_basis": "DEC-CAEM-13R (already rejected for MCS/MCOS) · 00-MASTER/MCP-001-MASTER-CONTEXT.md §02 and §06 (authority hierarchy; no duplicate authority) · CEP-002 Art 8.3 · the mandate's own prohibition DO NOT create parallel constitutional authorities",
+      "justification": "The mandate stated that the Meta Kernel shall define Meta Laws, Meta Principles, Meta Governance, Meta Runtime and Meta Evolution, and that everything below derives from it. Vesting those roles in MCOS would put a second authority beneath the first and contradict both the mandate's own prohibition and the earlier rejection recorded as DEC-CAEM-13R. The alternative IS therefore declined, and the accepted form IS DEC-MCOS-02: MCOS IS realized as a GENERATION MECHANISM whose declared authority IS the literal string NONE, with the blocking gate no-parallel-constitutional-authority failing if that ever changes and asserting that all three components admit through the one kernel registry.",
+      "evidence": [
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+        "engine/civilization/mcos.py",
+        "engine/civilization/compliance.py",
+        "00-MASTER/MCP-001-MASTER-CONTEXT.md",
+        "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/mcos.py"
+        ],
+        "EQ-2": [
+          "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+          "00-MASTER/MCP-001-MASTER-CONTEXT.md"
+        ],
+        "EQ-3": [
+          "engine/civilization/compliance.py",
+          ".github/workflows/mcos-gate.yml"
+        ],
+        "EQ-4": [
+          "00-MASTER/MCOS-000001/08-FINAL-CERTIFICATION-REPORT.md"
+        ],
+        "EQ-5": [
+          "00-MASTER/MCOS-000001/03-ARCHITECTURAL-PROOF-REPORT.md"
+        ]
+      },
+      "action_taken": "REJECTED — authority remains where the constitution puts it; MCOS IS a mechanism, not an authority",
+      "note": "Recorded so the rejected alternative cannot be silently revived. The rejection IS enforced rather than remembered: MetaCivilizationPlatform.authority IS asserted equal to NONE by a blocking quality gate."
+    },
+    {
+      "id": "DEC-MCOS-06R",
+      "title": "Lift the closed ContextKind enumeration in engine/context/taxonomy.py to make dimensions open",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8.1",
+      "stage": "CLOSURE",
+      "disposition": "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION",
+      "constitutional_basis": "CMG-000001 CMG-INV-02 (a concern has exactly one owner) · 10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md §5 (growth by extension, never foundational redesign) · engine/context/constitution.py CXL-02 (bounded extension by declaration) · UCIC-001 Stage 4 (writes into certified zones)",
+      "justification": "engine/context/** IS the certified canonical owner of context and its twelve executable laws, and its ContextKind IS a closed set of the fifteen universal context KINDS — a deliberate, legislated closure with future_kinds() as its declared extension path. Editing a certified owner so it could serve a different concern would breach single-canonical-ownership and amount to foundational redesign of a frozen owner. The dimension SPACE IS a distinct concern from context frames and values, so the accepted form IS DEC-MCOS-06: home the space separately, import nothing from engine/context, and let the two compose — a registered dimension being the axis along which a provenanced context value IS measured.",
+      "evidence": [
+        "engine/context/constitution.py",
+        "engine/context/taxonomy.py",
+        "engine/civilization/dimensions.py",
+        "10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md",
+        "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/dimensions.py",
+          "engine/context/constitution.py"
+        ],
+        "EQ-2": [
+          "00-MASTER/MCOS-000001/ADR-0005-meta-civilization-platform-generation-layer.md",
+          "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md"
+        ],
+        "EQ-3": [
+          "10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md",
+          "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"
+        ],
+        "EQ-4": [
+          "00-MASTER/MCOS-000001/08-FINAL-CERTIFICATION-REPORT.md"
+        ],
+        "EQ-5": [
+          "engine/context/taxonomy.py"
+        ]
+      },
+      "action_taken": "REJECTED — the certified context owner IS not edited to serve a different concern",
+      "note": "Recorded so the rejected alternative cannot be silently revived. It also records WHY this programme IS not a duplication of engine/context: the two own different questions, and neither imports the other."
+    },
+    {
+      "id": "DEC-MCOS-08R",
+      "title": "Extend BlueprintFamily — the six frozen 05-GENERATION families — with an operating-system family",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8.1",
+      "stage": "CLOSURE",
+      "disposition": "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION",
+      "constitutional_basis": "05-GENERATION frozen generation constitutions · 10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md §5 · CMG-000001 CMG-INV-02 · UCIC-001 Stage 4",
+      "justification": "The six generation families DATA, EVENT, API, WORKFLOW, SERVICE and APPLICATION are frozen and their chain IS declared non-reversible; platform/blueprints records the classification read-only rather than computing it. An operating system IS not a seventh artefact family — it IS the stratum ABOVE all six, the thing WITHIN which artefacts of those families are generated. Adding it as a family would conflate two strata and require editing a frozen owner. The accepted form IS DEC-MCOS-08: generate at a higher stratum through an open chain, and leave the six frozen families untouched.",
+      "evidence": [
+        "engine/civilization/generation.py",
+        "05-GENERATION",
+        "platform/blueprints/contracts.py",
+        "10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/generation.py"
+        ],
+        "EQ-2": [
+          "05-GENERATION",
+          "platform/blueprints/contracts.py"
+        ],
+        "EQ-3": [
+          "10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md",
+          "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"
+        ],
+        "EQ-4": [
+          "00-MASTER/MCOS-000001/08-FINAL-CERTIFICATION-REPORT.md"
+        ],
+        "EQ-5": [
+          "00-MASTER/MCOS-000001/mcos-civilization.json"
+        ]
+      },
+      "action_taken": "REJECTED — an operating system IS a stratum above the artefact families, not a seventh family",
+      "note": "Recorded so the rejected alternative cannot be silently revived, and so the reason the frozen generation families are untouched IS located rather than implicit."
+    },
+    {
+      "id": "DEC-MCOS-09R",
+      "title": "Replace engine/factory/orchestrator.py::execute() with the composed plan as part of this programme",
+      "decision_class": "architectural",
+      "source_register": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+      "index": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md §8.1",
+      "stage": "CLOSURE",
+      "disposition": "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION",
+      "constitutional_basis": "UCIC-001 Stage 4 (a write to engine/** outside the declared additive surface IS NON-RECOVERABLE) · 10-FINAL-ARCHITECTURE-FREEZE-CERTIFICATE.md §5 · CEP-002 Art 28.13(c)",
+      "justification": "Rewriting the located orchestrator would be a write into the EC-1 certified zone outside this programme's declared additive surface, which UCIC-001 Stage 4 classifies as non-recoverable. The correct constitutional route IS an authorized act under its own declared surface, so the alternative IS declined AS PART OF THIS PROGRAMME and the residual IS registered honestly instead: DEC-MCOS-14 against WP-UCDA-018. This rejection IS therefore not a refusal of the objective — it IS a refusal to achieve it unlawfully.",
+      "evidence": [
+        "engine/factory/orchestrator.py",
+        "engine/civilization/composition.py",
+        "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+      ],
+      "coverage": {
+        "EQ-1": [
+          "engine/civilization/composition.py"
+        ],
+        "EQ-2": [
+          "engine/factory/orchestrator.py"
+        ],
+        "EQ-3": [
+          "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md"
+        ],
+        "EQ-4": [
+          "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
+          "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+        ],
+        "EQ-5": [
+          "engine/civilization/composition.py"
+        ]
+      },
+      "action_taken": "REJECTED for this programme — the objective IS carried forward as DEC-MCOS-14 / WP-UCDA-018",
+      "note": "Recorded so it IS visible that the shortfall in DEC-MCOS-14 IS a deliberate constitutional choice rather than an oversight."
     }
   ],
   "$coverage_criteria_comment": [

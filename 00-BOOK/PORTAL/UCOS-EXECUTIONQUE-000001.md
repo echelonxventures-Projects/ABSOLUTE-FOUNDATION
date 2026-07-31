@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-EXECUTIONQUE-000001](UCOS-EXECUTIONQUE-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: EXECUTIONQUE
+- Native: —  ·  Program: EXECUT
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [04-EXECUTION-QUEUE-MODEL.md](../../04-EXECUTION-QUEUE-MODEL.md)
 

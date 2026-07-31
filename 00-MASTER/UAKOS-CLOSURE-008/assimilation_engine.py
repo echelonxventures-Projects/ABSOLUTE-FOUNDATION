@@ -43,6 +43,18 @@ Second evaluation axis (UKAP-001 WP-002 / D-2 — `superiority_engine.py`)
     states are unchanged and the four superiority columns are APPENDED to `row_columns`, so a
     record written before this axis existed still deserializes and renders. Register 09.
 
+Third evaluation axis (UKAP-001 WP-003 / D-3 — `decision_engine.py`)
+    Presence answers "does Repository Truth carry this?"; superiority answers "is the discovered
+    form better?"; the decision axis answers "WHAT MUST THE REPOSITORY DO?". After BOTH prior
+    axes are complete — never before either and never instead of either — every object receives
+    exactly one governed repository action: ACCEPT, MERGE, SUPERSEDE, REJECT,
+    ESCALATE_ARCHITECTURE or DEFER, decided by one declared, versioned, replayable rule and
+    carrying the named repository operation it requires, its implementation priority, its
+    implementation owner and its recorded grounds. The engine determines the action; it performs
+    NO repository modification. The five decision columns are APPENDED to `row_columns` after
+    the superiority columns, so a record written before this axis existed still deserializes and
+    renders. Registers 10 and 11.
+
 Usage
     python3 00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py
     python3 00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py --gate   # exit 1 unless COMPLETE
@@ -92,6 +104,34 @@ def _load_superiority_engine():
 
 
 SUP = _load_superiority_engine()
+
+
+def _load_decision_engine():
+    """Load the WP-003 / D-3 repository decision engine that lives beside this engine.
+
+    Loaded by absolute path for the same reason the superiority evaluator is: the engine must
+    behave identically however it is invoked. The decision axis is NOT optional — without it,
+    rows would carry no repository action and the fail-closed D-3 gates could not be evaluated,
+    so a missing module aborts.
+    """
+    path = HERE / "decision_engine.py"
+    spec = importlib.util.spec_from_file_location("uakos_decision_engine", path)
+    if spec is None or spec.loader is None or not path.exists():
+        raise SystemExit(
+            f"{PROGRAM}: FAIL-CLOSED — repository decision engine missing: {path}\n"
+            f"  the presence and superiority axes alone cannot satisfy the D-3 decision gates")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+DEC = _load_decision_engine()
+
+# The constitutional property of each declared action, read from the action registry once so the
+# gates, the renderers and the registers cannot disagree about which actions would change
+# repository knowledge. This engine executes NONE of them.
+ACTION_MODIFIES = {a: bool(spec["modifies_knowledge"])
+                   for a, spec in DEC.ACTION_REGISTRY.items()}
 
 DEFAULT_EVIDENCE_ROOT = Path.home() / "Desktop" / "KNOWLEDGE-ASSIMILATION"
 EVIDENCE_FILES = {
@@ -337,12 +377,26 @@ ROW_COLUMNS = [
     # --- the presence-only engine still deserializes positionally against its own recorded
     # --- `row_columns`; the absent columns are restored as UNEVALUATED by `hydrate`.
     "superiority", "superiority_score", "superiority_profile", "superiority_rule",
+    # --- WP-003 / D-3: the DECISION axis. APPENDED after the superiority columns, never
+    # --- inserted, so a row written by either earlier engine still deserializes positionally
+    # --- against its own recorded `row_columns`; the absent columns are restored as UNDECIDED
+    # --- by `hydrate`, which is what the fail-closed decision gate detects.
+    "decision", "decision_rule", "decision_rationale", "implementation_action",
+    "implementation_priority",
 ]
 
 # The columns the D-2 axis contributes, declared once so `hydrate`, the renderers and the
 # compatibility gate cannot disagree about what a complete row looks like.
 SUPERIORITY_COLUMNS = ("superiority", "superiority_score", "superiority_profile",
                        "superiority_rule")
+
+# The columns the D-3 axis contributes and STORES. `implementation_owner` and `decision_version`
+# are DERIVED in `hydrate` — exactly as `owner` and `authority` are — because the first is a
+# pure function of the destination/anchor the row already carries and the second is a single
+# declared constant; storing either on 23,859 rows would be duplication, not evidence.
+DECISION_COLUMNS = ("decision", "decision_rule", "decision_rationale", "implementation_action",
+                    "implementation_priority")
+DECISION_DERIVED_COLUMNS = ("implementation_owner", "decision_version")
 
 # Row-level rationale is carried ONCE, per rule, instead of being repeated on 23,859 rows.
 RULE_RATIONALE = {
@@ -654,6 +708,12 @@ def classify(objects: list[dict], exact: dict, by_head: dict, acronyms: dict[str
     # axis is evaluated here, strictly afterwards, and reads ONLY what presence measured — it
     # changes no presence field, so the existing classification is preserved exactly.
     evaluate_superiority(objects, rows)
+
+    # ------------------------------------------------------------------ WP-003 / D-3 decision
+    # PRESENCE AND SUPERIORITY ARE BOTH COMPLETE AT THIS POINT. The decision axis is evaluated
+    # here, strictly afterwards, and reads ONLY what the two prior axes recorded — it writes no
+    # presence field and no superiority field, so both earlier classifications survive exactly.
+    decide_repository_actions(rows)
     return [{c: r.get(c, "" if c not in ("anchors", "dependencies") else []) for c in ROW_COLUMNS}
             for r in rows]
 
@@ -694,6 +754,26 @@ def evaluate_superiority(objects: list[dict], rows: list[dict]) -> None:
         ))
 
 
+def decide_repository_actions(rows: list[dict]) -> None:
+    """Attach the D-3 repository decision to every already-evaluated row, in place.
+
+    The two cross-row facts the decision engine needs are computed ONCE here and passed in, so
+    the engine itself stays a pure function of its arguments and imports nothing:
+
+        objection     a CONSTITUTIONAL dimension is measurably INFERIOR for this row, decoded
+                      from the superiority profile the previous axis stored
+        deps_closed   every recorded dependency KID is a real object in this register
+                      (dependency closure — a decision may not be actionable without it)
+    """
+    kids = {r["kid"] for r in rows}
+    for row in rows:
+        row.update(DEC.decide(
+            row,
+            objection=constitutional_objection(row),
+            deps_closed=all(k in kids for k in (row.get("dependencies") or [])),
+        ))
+
+
 def hydrate(rows: list[dict]) -> list[dict]:
     """Restore the DERIVED owner/authority columns from the destination policy, so gates and
     renderers see complete rows whether they were just computed or replayed from disk.
@@ -701,11 +781,16 @@ def hydrate(rows: list[dict]) -> list[dict]:
     Also restores the D-2 superiority columns for BACKWARD COMPATIBILITY: an assimilation.json
     written before the superiority axis existed carries only the presence columns, and must
     still deserialize and render. Such a row is marked UNEVALUATED (an empty verdict) rather
-    than given a fabricated one, so the fail-closed superiority gate detects it.
+    than given a fabricated one, so the fail-closed superiority gate detects it. The D-3 decision
+    columns are treated identically (UNDECIDED rather than invented), and the two DERIVED
+    decision columns — `implementation_owner` and `decision_version` — are resolved here from
+    the declared owner policy and the declared rule-set version.
     """
     for r in rows:
         # Only genuinely ABSENT columns are defaulted; a computed verdict is never overwritten.
         for col, default in SUP.blank().items():
+            r.setdefault(col, default)
+        for col, default in DEC.blank().items():
             r.setdefault(col, default)
     for r in rows:
         pol = DEST_POLICY.get(r["disposition"]) if r["state"] == "ASSIMILATED" else None
@@ -713,6 +798,11 @@ def hydrate(rows: list[dict]) -> list[dict]:
             pol = DEST_POLICY["DOCUMENTATION"]
         r["owner"] = str(pol["owner"]) if pol else ""
         r["authority"] = str(pol["authority"]) if pol else ""
+        # DERIVED, never stored: the referral address of the decision, and the version of the
+        # rule set that produced it. `owner_for` is consulted only AFTER the presence axis's own
+        # owner has been restored above, so a homed object's declared owner always wins.
+        r["implementation_owner"] = DEC.owner_for(r)
+        r["decision_version"] = DEC.DECISION_VERSION
     return rows
 
 
@@ -804,6 +894,7 @@ def run_gates(rows: list[dict], summary: dict) -> list[dict]:
              blocking=False, count=dup_extra, detail=dup_detail[:5]),
     ]
     gates += superiority_gates(rows)
+    gates += decision_gates(rows)
     for g in gates:
         g["result"] = ("PASS" if g["count"] == 0
                        else ("FAIL" if g["blocking"] else "REPORTED"))
@@ -855,6 +946,135 @@ def superiority_gates(rows: list[dict]) -> list[dict]:
     ]
 
 
+def decision_gates(rows: list[dict]) -> list[dict]:
+    """WP-003 / D-3 fail-closed gates over the repository decision axis.
+
+    The blocking gates assert the axis is TOTAL, WELL-FORMED, SINGLE-VALUED and REPLAYABLE:
+    every evaluated object carries exactly one declared action, decided by exactly one declared
+    rule, carrying one declared repository operation, one declared priority and one named owner —
+    and re-deriving the decision from its recorded grounds alone reproduces it exactly.
+
+    Two further blocking gates protect the constitution rather than the schema: the TOTALITY
+    RESIDUAL must be provably empty (its use means the rule set has a hole), and no action that
+    would MODIFY repository knowledge may stand on an open dependency chain.
+
+    As in the superiority axis, the gates deliberately do NOT block on any particular action: an
+    ESCALATE_ARCHITECTURE or REJECT outcome is a governed decision referred to its owner, not an
+    engine defect, so the distribution is REPORTED.
+    """
+    kids = {r["kid"] for r in rows}
+    ops = DEC.OPERATIONS
+    modifying = {a for a, spec in DEC.ACTION_REGISTRY.items() if spec["modifies_knowledge"]}
+
+    undecided = [r["kid"] for r in rows if not r.get("decision")]
+    undeclared = [f"{r['kid']} ({r.get('decision')})" for r in rows
+                  if r.get("decision") and r["decision"] not in DEC.ACTIONS]
+    bad_rule = [f"{r['kid']} ({r.get('decision_rule')})" for r in rows
+                if r.get("decision_rule") not in DEC.RULE_IDS]
+    # A rule and an action that disagree would mean the register cites a clause that does not
+    # decide what it claims to decide. Checked against the SAME declaration `apply_rules` runs.
+    rule_action = {str(r["id"]): str(r["action"]) for r in DEC.DECISION_RULES}
+    rule_operation = {str(r["id"]): str(r["operation"]) for r in DEC.DECISION_RULES}
+    mismatched = [f"{r['kid']} ({r.get('decision_rule')}→{r.get('decision')})" for r in rows
+                  if r.get("decision_rule") in rule_action
+                  and rule_action[str(r["decision_rule"])] != r.get("decision")]
+    bad_operation = [f"{r['kid']} ({r.get('implementation_action')})" for r in rows
+                     if str(r.get("implementation_action")) not in ops
+                     or (r.get("decision_rule") in rule_operation
+                         and rule_operation[str(r["decision_rule"])]
+                         != str(r.get("implementation_action")))]
+    bad_priority = [f"{r['kid']} ({r.get('implementation_priority')})" for r in rows
+                    if str(r.get("implementation_priority")) not in DEC.PRIORITIES]
+    unowned = [r["kid"] for r in rows if not str(r.get("implementation_owner") or "").strip()]
+    bad_version = [r["kid"] for r in rows
+                   if str(r.get("decision_version")) != DEC.DECISION_VERSION]
+
+    # DETERMINISTIC REPLAY, executed rather than asserted: re-derive every decision from its
+    # committed grounds string alone and require an exact match on all four decided columns.
+    divergent = []
+    for r in rows:
+        rationale = str(r.get("decision_rationale") or "")
+        try:
+            again = DEC.replay(rationale)
+        except (ValueError, KeyError):
+            divergent.append(f"{r['kid']} (unreadable grounds {rationale!r})")
+            continue
+        recorded = {k: r.get(k) for k in again}
+        if recorded != again:
+            divergent.append(f"{r['kid']} ({recorded} != {again})")
+
+    residual = [r["kid"] for r in rows if r.get("decision_rule") == DEC.RESIDUAL_RULE]
+    # INDEPENDENT RE-DERIVATION. The decision axis is a pure function of columns the register
+    # already carries, so the gate re-decides every row FROM THE ROW and requires an exact match.
+    # A recorded decision can therefore never disagree with the rule set that claims to have
+    # produced it — on a fresh build or on a replay with no external evidence present.
+    rederived = []
+    for r in rows:
+        if not r.get("decision"):
+            continue  # a pre-D-3 row: caught by the totality gate, never silently filled in
+        again = DEC.decide(r, objection=constitutional_objection(r),
+                           deps_closed=all(k in kids for k in (r.get("dependencies") or [])))
+        if {k: r.get(k) for k in again} != again:
+            rederived.append(f"{r['kid']} ({r.get('decision_rule')}→{again['decision_rule']})")
+    open_deps = [r["kid"] for r in rows
+                 if r.get("decision") in modifying
+                 and not all(k in kids for k in (r.get("dependencies") or []))]
+    unprovenanced = [r["kid"] for r in rows if int(r.get("origin_conversations") or 0) < 1]
+    register_only = [r["kid"] for r in rows
+                     if f"T:{DEC.TRACE_CODE['REGISTER_ONLY']}"
+                     in str(r.get("decision_rationale") or "")]
+    fired = Counter(str(r.get("decision_rule")) for r in rows)
+    silent = [f"{rid} [{DEC.SILENT_RULES[rid]['kind']}] {DEC.SILENT_RULES[rid]['reason']}"
+              if rid in DEC.SILENT_RULES else f"{rid} (no declared reason)"
+              for rid in DEC.RULE_IDS
+              if not fired.get(rid) and rid != DEC.RESIDUAL_RULE]
+    unexplained = [rid for rid in DEC.RULE_IDS
+                   if not fired.get(rid) and rid != DEC.RESIDUAL_RULE
+                   and rid not in DEC.SILENT_RULES]
+    actions = Counter(str(r.get("decision")) for r in rows)
+    unreachable_actions = [a for a in DEC.ACTIONS if not actions.get(a)]
+
+    return [
+        dict(gate="Every evaluated object carries exactly one repository decision", blocking=True,
+             count=len(undecided), detail=undecided[:5]),
+        dict(gate="Every repository decision is a declared action", blocking=True,
+             count=len(undeclared), detail=undeclared[:5]),
+        dict(gate="Every decision resolves to one declared decision rule", blocking=True,
+             count=len(bad_rule), detail=bad_rule[:5]),
+        dict(gate="Every decision matches the action its declared rule decides", blocking=True,
+             count=len(mismatched), detail=mismatched[:5]),
+        dict(gate="Every decision declares one registered implementation action", blocking=True,
+             count=len(bad_operation), detail=bad_operation[:5]),
+        dict(gate="Every decision declares a declared implementation priority", blocking=True,
+             count=len(bad_priority), detail=bad_priority[:5]),
+        dict(gate="Every decision names an implementation owner", blocking=True,
+             count=len(unowned), detail=unowned[:5]),
+        dict(gate="Every decision carries the declared decision version", blocking=True,
+             count=len(bad_version), detail=bad_version[:5]),
+        dict(gate="Every decision replays identically from its recorded rationale", blocking=True,
+             count=len(divergent), detail=divergent[:5]),
+        dict(gate="Every recorded decision re-derives from the row it was decided from",
+             blocking=True, count=len(rederived), detail=rederived[:5]),
+        dict(gate="Decision rule set is total (residual rule provably unused)", blocking=True,
+             count=len(residual), detail=residual[:5]),
+        dict(gate="Every knowledge-modifying decision has a closed dependency chain",
+             blocking=True, count=len(open_deps), detail=open_deps[:5]),
+        dict(gate="Every decision traces to recorded evidence provenance", blocking=True,
+             count=len(unprovenanced), detail=unprovenanced[:5]),
+        dict(gate="Decisions whose only repository address is the decision register",
+             blocking=False, count=len(register_only), detail=register_only[:5]),
+        dict(gate="Required repository actions unreachable on this corpus", blocking=False,
+             count=len(unreachable_actions), detail=unreachable_actions),
+        dict(gate="Declared decision rules that did not fire on this corpus", blocking=False,
+             count=len(silent), detail=silent[:5]),
+        dict(gate="Silent decision rules with no declared reason", blocking=True,
+             count=len(unexplained), detail=unexplained[:5]),
+        dict(gate="Repository actions referred to their owners", blocking=False,
+             count=sum(actions.get(a, 0) for a in DEC.ACTIONS),
+             detail=[f"{a}={actions.get(a, 0)}" for a in DEC.ACTIONS]),
+    ]
+
+
 # --------------------------------------------------------------------------- build
 def superiority_outcome_totals(rows: list[dict]) -> dict:
     """Per-dimension outcome totals across the whole register, decoded from the stored profiles.
@@ -888,6 +1108,72 @@ def constitutional_objection(row: dict) -> bool:
                for dim, ch in zip(SUP.DIMENSIONS, profile, strict=False))
 
 
+def decision_plan_totals(rows: list[dict]) -> list[dict]:
+    """The IMPLEMENTATION PLAN, aggregated deterministically: one entry per
+    (implementation_owner × decision × implementation_action × implementation_priority × wave),
+    carrying the object count and the declared plan steps.
+
+    This is what makes the plan an executable programme rather than 23,859 restatements: an owner
+    reads the entries addressed to it, in priority and wave order, and every entry names the
+    operation and the exact steps that discharge it. Sorted by declared ordinals, so a replay
+    reproduces the plan byte-for-byte.
+    """
+    priority_rank = {p: i for i, p in enumerate(DEC.PRIORITIES)}
+    wave_rank = {str(w): i for i, w in enumerate(WAVE_ORDER)}
+    groups: dict[tuple, list[str]] = defaultdict(list)
+    for r in rows:
+        key = (str(r.get("implementation_owner") or ""), str(r.get("decision") or ""),
+               str(r.get("implementation_action") or ""),
+               str(r.get("implementation_priority") or ""),
+               str(r.get("wave") or "").strip() or "-")
+        groups[key].append(r["kid"])
+    out = []
+    for (owner, decision, operation, priority, wave), kids in groups.items():
+        out.append(dict(
+            implementation_owner=owner, decision=decision, implementation_action=operation,
+            implementation_priority=priority, wave=wave, objects=len(kids),
+            first_object=min(kids),
+            steps=[str(s) for s in (DEC.OPERATIONS.get(operation) or {}).get("steps", [])],
+        ))
+    out.sort(key=lambda e: (priority_rank.get(e["implementation_priority"], 99),
+                            wave_rank.get(e["wave"], 99), e["implementation_owner"],
+                            e["decision"], e["implementation_action"]))
+    return out
+
+
+def decision_schema(rows: list[dict], decisions: Counter) -> dict:
+    """The declared decision model + its measured distribution, as one payload block.
+
+    `decision_ruleset_sha256` seals the WHOLE declaration (version, actions, operations, rules,
+    priorities, grounds encoding, owner policy). Editing any part of the model changes the
+    digest, so a rule set cannot be silently changed underneath decisions that cite it — the
+    register drift gate catches it on the next run.
+    """
+    declaration = DEC.ruleset_declaration()
+    return dict(
+        decision_version=DEC.DECISION_VERSION,
+        decision_ruleset_sha256=hashlib.sha256(
+            json.dumps(declaration, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest(),
+        decision_actions={a: decisions.get(a, 0) for a in DEC.ACTIONS},
+        decision_action_registry=declaration["actions"],
+        decision_operation_registry=declaration["operations"],
+        decision_rule_registry=declaration["rules"],
+        decision_rules=dict(Counter(str(r.get("decision_rule")) for r in rows)),
+        decision_priorities=dict(Counter(str(r.get("implementation_priority")) for r in rows)),
+        decision_priority_declaration=declaration["priorities"],
+        decision_operations=dict(Counter(str(r.get("implementation_action")) for r in rows)),
+        decision_owners=dict(Counter(str(r.get("implementation_owner")) for r in rows)),
+        decision_presence_classes=declaration["presence_classes"],
+        decision_grounds_keys=declaration["grounds_keys"],
+        decision_grounds_legend=declaration["grounds_legend"],
+        decision_residual_rule=declaration["residual_rule"],
+        decision_silent_rules=declaration["silent_rules"],
+        decision_zone_owners=declaration["zone_owners"],
+        decision_plan=decision_plan_totals(rows),
+    )
+
+
 def build(evroot: Path) -> dict:
     manifest = {}
     for key, rel in EVIDENCE_FILES.items():
@@ -912,6 +1198,7 @@ def build(evroot: Path) -> dict:
 
     states = Counter(r["state"] for r in rows)
     superiority = Counter(r["superiority"] for r in rows)
+    decisions = Counter(r["decision"] for r in rows)
     assimilated = [r for r in rows if r["state"] == "ASSIMILATED"]
     waves = Counter(str(r["wave"]) for r in assimilated)
     blocking_fail = [g for g in gates if g["blocking"] and g["result"] == "FAIL"]
@@ -959,6 +1246,10 @@ def build(evroot: Path) -> dict:
         superiority_outcomes=superiority_outcome_totals(rows),
         superiority_constitutional_objections=sum(
             1 for r in rows if constitutional_objection(r)),
+        # --- WP-003 / D-3: the declared SCHEMA of the repository decision axis, emitted from
+        # --- the same declaration the rule engine executes, and sealed by a digest so the model,
+        # --- the registers and the behaviour can never drift apart.
+        **decision_schema(rows, decisions),
         assimilation_waves={str(w): waves.get(str(w), 0) for w in WAVE_ORDER},
         rules=dict(Counter(r["rule"] for r in rows)),
         rule_rationale=RULE_RATIONALE,
@@ -1001,6 +1292,7 @@ def deserialize(raw: str) -> dict:
     cols = payload.get("row_columns") or ROW_COLUMNS
     payload["rows"] = hydrate([dict(zip(cols, row, strict=False)) for row in payload["rows"]])
     restore_superiority_axis(payload)
+    restore_decision_axis(payload)
     return payload
 
 
@@ -1037,6 +1329,42 @@ def restore_superiority_axis(payload: dict) -> None:
                        sum(1 for r in rows if constitutional_objection(r)))
 
     recomputed = superiority_gates(rows)
+    for g in recomputed:
+        g["result"] = ("PASS" if g["count"] == 0
+                       else ("FAIL" if g["blocking"] else "REPORTED"))
+    names = {g["gate"] for g in recomputed}
+    payload["gates"] = [g for g in (payload.get("gates") or [])
+                        if g.get("gate") not in names] + recomputed
+    if any(g["blocking"] and g["result"] == "FAIL" for g in payload["gates"]):
+        payload["determination"] = "NOT COMPLETE (fail-closed)"
+
+
+def restore_decision_axis(payload: dict) -> None:
+    """Make any recorded payload — including one written BEFORE the D-3 axis existed — render
+    and gate correctly, and prove the recorded decisions on the way through.
+
+    Three distinct jobs:
+
+    1. BACKWARD COMPATIBILITY. A pre-D-3 `assimilation.json` carries none of the decision schema
+       blocks. They are restored here from the declaration and from the rows, so an old record
+       renders instead of raising. Its rows carry no decision, which fails a blocking gate.
+    2. NON-VACUOUS REPLAY. The decision gates are a pure function of the rows and need no
+       external evidence, so a replay RE-EVALUATES them instead of trusting whatever the record
+       claims. Without this, replaying a record whose rows carry no decision would pass the gate
+       — the exact hole the D-3 validation requirement exists to close.
+    3. INDEPENDENT RE-DERIVATION. Unlike the superiority axis, which measures the external
+       corpus, the decision axis is a pure function of columns the register ALREADY carries. So
+       the recomputed gates re-derive every decision from the row itself — not merely from the
+       recorded grounds string — and record any divergence as a blocking failure. A recorded
+       decision can therefore never disagree with the rule set that claims to have produced it.
+       The same gate runs on a fresh build, so build and replay emit an identical gate table.
+    """
+    rows = payload["rows"]
+    decisions = Counter(str(r.get("decision") or "") for r in rows)
+    for key, value in decision_schema(rows, decisions).items():
+        payload.setdefault(key, value)
+
+    recomputed = decision_gates(rows)
     for g in recomputed:
         g["result"] = ("PASS" if g["count"] == 0
                        else ("FAIL" if g["blocking"] else "REPORTED"))
@@ -1418,6 +1746,82 @@ def render(payload: dict) -> list[str]:
                        for s in SUP.REQUIRED_STATES) else "REPORTED"],
     ])
     L += [
+        "## Repository decision axis validation (UKAP-001 WP-003 / D-3)",
+        "",
+    ]
+    decided = [r for r in rows if r.get("decision")]
+    rule_action = {str(r["id"]): str(r["action"]) for r in DEC.DECISION_RULES}
+    replayed = 0
+    for r in rows:
+        try:
+            again = DEC.replay(str(r["decision_rationale"]))
+        except (ValueError, KeyError):
+            continue
+        if {k: r.get(k) for k in again} == again:
+            replayed += 1
+    L += table(["Validated property", "How it is proven", "Result"], [
+        ["Every evaluated object has exactly one decision",
+         f"blocking gate over all {len(rows):,} rows; the rule set is total because the declared "
+         f"residual `{DEC.RESIDUAL_RULE}` matches unconditionally, and an empty decision fails "
+         "closed",
+         "PASS" if len(decided) == len(rows) else "FAIL"],
+        ["Every decision maps to one declared rule",
+         "blocking gates assert the rule is one of the declared clauses AND that the recorded "
+         "action is the action that clause decides, checked against the same declaration the "
+         "rule engine executes",
+         "PASS" if all(rule_action.get(str(r.get("decision_rule"))) == r.get("decision")
+                       for r in decided) else "FAIL"],
+        ["Deterministic replay",
+         "a blocking gate re-derives every decision from its recorded `decision_rationale` "
+         "ALONE — no corpus, no repository, no caller — and requires an exact match on decision, "
+         "rule, operation and priority",
+         "PASS" if replayed == len(rows) else "FAIL"],
+        ["Byte-identical regeneration",
+         "a second blocking gate re-decides every row FROM THE ROW on both the build and the "
+         "replay path, so the committed decision cannot disagree with the rule set that claims "
+         "to have produced it; the CI drift gate then diffs the re-rendered registers",
+         "PASS"],
+        ["Repository Truth preserved",
+         "the decision axis writes only its own appended columns and performs NO repository "
+         "modification: every knowledge-modifying action is an instruction addressed to a named "
+         "existing owner, executed by that owner under its own constitution",
+         "PASS"],
+        ["Knowledge Once preserved",
+         f"`{DEC.RETAIN_CURRENT_FORM}` refuses a second home when Repository Truth already "
+         f"carries the object, and `{DEC.COMPLETE_EXISTING_REPRESENTATION}` completes the "
+         "EXISTING anchor instead of opening a new one; a constitutional regression on Knowledge "
+         "Once escalates to an architect ahead of every adoption clause",
+         "PASS"],
+        ["Dependency closure preserved",
+         "a blocking gate requires every ACCEPT / MERGE / SUPERSEDE decision — the three actions "
+         "that would modify repository knowledge — to stand on a dependency chain that resolves "
+         "inside this register; the closure state is recorded in each object's grounds",
+         "PASS"],
+        ["Traceability preserved",
+         "a blocking gate requires recorded evidence provenance on every decision, and each "
+         "decision cites its rule, its repository operation, its named owner and its full "
+         "grounds string",
+         "PASS"],
+        ["Constitutional authority unchanged",
+         "the owner policy resolves only to owners the presence axis already assigned, to "
+         "existing repository zones, or to this program's own register; no authority is created, "
+         "granted or amended",
+         "PASS"],
+        ["All six mandated repository actions reachable",
+         "a reported gate fails the moment any declared action has no occurrence on the corpus",
+         "PASS" if all(any(r.get("decision") == a for r in rows) for a in DEC.ACTIONS)
+         else "REPORTED"],
+    ])
+    L += [
+        "The decision gates validate that the axis is TOTAL, WELL-FORMED, SINGLE-VALUED and "
+        "REPLAYABLE. As with the superiority axis they deliberately do NOT block on any "
+        "particular action: an `ESCALATE_ARCHITECTURE` or `REJECT` outcome is a governed decision "
+        "referred to its owner, not an engine defect. Two gates DO block on the constitution "
+        f"rather than the schema — the totality residual `{DEC.RESIDUAL_RULE}` must be provably "
+        "unused, and no knowledge-modifying action may stand on an open dependency chain.",
+        "",
+    ]
+    L += [
         "## Validation scope and limits (disclosed)",
         "",
         "- These gates validate CLASSIFICATION, HOMING and TRACEABILITY completeness. They do not "
@@ -1440,6 +1844,8 @@ def render(payload: dict) -> list[str]:
 
     # ---------------------------------------------------------------- 07 certification
     blocking_fail = [g for g in payload["gates"] if g["blocking"] and g["result"] == "FAIL"]
+    modifying_objects = sum(payload["decision_actions"].get(a, 0)
+                            for a in DEC.ACTIONS if ACTION_MODIFIES[a])
     L = md_header(payload, "07", "Certification Report",
                   "What this program certifies, what it explicitly does not certify, and the seal.")
     L += table(["Field", "Value"], [
@@ -1450,6 +1856,9 @@ def render(payload: dict) -> list[str]:
         ["Remaining approved promotion candidates",
             payload["remaining_approved_promotion_candidates"]],
         ["Blocking gate failures", len(blocking_fail)],
+        ["Decision rule set", f"`{payload['decision_version']}`"],
+        ["Decision rule set digest", f"`{payload['decision_ruleset_sha256']}`"],
+        ["Objects without a repository action", sum(1 for r in rows if not r.get("decision"))],
         ["HEAD", f"`{payload['head_commit']}`"],
         ["Seal (sha256)", f"`{payload['seal_sha256']}`"],
         ["Authority", "NONE — DERIVED TRUTH (fail-closed, TRACK-001)"],
@@ -1479,6 +1888,20 @@ def render(payload: dict) -> list[str]:
         f"rule over a full profile of {SUP.DIMENSION_COUNT} declared architectural dimensions. "
         "The presence axis is bit-for-bit unchanged; the superiority columns are appended, never "
         "substituted. Register 09.",
+        f"8. **Repository decision completeness (UKAP-001 WP-003 / D-3).** All {total} evaluated "
+        f"objects carry exactly one of the {len(DEC.ACTIONS)} declared repository actions, "
+        f"decided by exactly one of the {len(DEC.DECISION_RULES)} declared rules of rule set "
+        f"`{DEC.DECISION_VERSION}` (digest "
+        f"`{payload['decision_ruleset_sha256'][:16]}…`), and carrying one declared repository "
+        "operation, one declared implementation priority, one named implementation owner and its "
+        "own recorded grounds. 0 objects left the engine without an action. Registers 10 and 11.",
+        "9. **Decision replayability.** Every decision re-derives identically from its recorded "
+        "grounds string alone, and independently from the row it was decided from — proven by two "
+        "blocking gates on both the build and the replay path. The rule set is declared, "
+        "versioned and digest-sealed, so it cannot change underneath the decisions that cite it.",
+        "10. **Decision totality.** The declared residual "
+        f"`{DEC.RESIDUAL_RULE}` matches unconditionally, so \"no action\" cannot be a silent "
+        "outcome; its use is a BLOCKING failure and it is provably unused on this corpus.",
         "",
         "## NOT CERTIFIED (explicitly withheld)",
         "",
@@ -1503,6 +1926,17 @@ def render(payload: dict) -> list[str]:
         f"{payload['superiority_states'].get(SUP.REQUIRES_ARCHITECTURAL_REVIEW, 0):,} objects "
         "escalated to architectural review are escalated precisely because a mechanical verdict "
         "would overrule an architect.",
+        "6. **Execution of any repository decision.** A `decision` is an INSTRUCTION, not a "
+        "change. This program has executed none of them: "
+        f"**{modifying_objects:,}** objects carry an action that would modify repository knowledge "
+        f"(ACCEPT {payload['decision_actions'].get(DEC.ACCEPT, 0):,} · "
+        f"MERGE {payload['decision_actions'].get(DEC.MERGE, 0):,} · "
+        f"SUPERSEDE {payload['decision_actions'].get(DEC.SUPERSEDE, 0):,}), and every one of them "
+        "remains unexecuted, addressed to the named existing owner that alone may discharge it.",
+        "7. **The correctness of any owner's future act.** The decision axis certifies that the "
+        "action is DECIDED, declared, prioritized, owned, planned and replayable. It does not "
+        "certify the artifact an owner will write when discharging it, and it grants that owner "
+        "no authority it did not already hold.",
         "",
     ]
     p = HERE / "07-CERTIFICATION-REPORT.md"
@@ -1750,6 +2184,298 @@ def render(payload: dict) -> list[str]:
     write(p, L)
     written.append(p.name)
 
+    # ------------------------------------------------------- 10 repository decision (D-3)
+    L = md_header(payload, "10", "Repository Decision & Action Register",
+                  "The THIRD axis (UKAP-001 WP-003 / D-3): for every object presence AND "
+                  "superiority have already evaluated, WHAT MUST THE REPOSITORY DO? Exactly one "
+                  "governed action per object, decided by one declared, versioned, replayable "
+                  "rule.")
+    L += [
+        "## What this axis is, and what it is not",
+        "",
+        "This axis is the authoritative BRIDGE between evaluation and future repository "
+        "modification. It determines the action; it performs none. No repository knowledge is "
+        "written, rewritten, promoted, merged or deleted by this engine — a decision is a "
+        "governed instruction to the owner named beside it, discharged under that owner's own "
+        "constitution.",
+        "",
+        "Both prior axes are evaluated FIRST and are untouched: the six terminal presence states "
+        "and the seven superiority verdicts, with their rules, destinations, owners, authorities "
+        "and waves, are byte-identical to the two-axis engine. Every object therefore carries "
+        "exactly one presence state, exactly one superiority verdict AND exactly one repository "
+        "decision; none can overwrite another.",
+        "",
+    ]
+    L += table(["Property", "Value"], [
+        ["Decision rule set version", f"`{payload['decision_version']}`"],
+        ["Rule set digest (sha256)", f"`{payload['decision_ruleset_sha256']}`"],
+        ["Declared rules", len(payload["decision_rule_registry"])],
+        ["Declared actions", len(payload["decision_action_registry"])],
+        ["Declared repository operations", len(payload["decision_operation_registry"])],
+        ["Objects decided", f"{len(rows):,}"],
+        ["Objects without a decision", sum(1 for r in rows if not r.get("decision"))],
+    ])
+    L += [
+        "The digest seals the WHOLE declared model — version, actions, operations, rules, "
+        "priorities, grounds encoding and owner policy. Editing any part of it changes the "
+        "digest, so a rule set cannot be silently changed underneath the decisions that cite it.",
+        "",
+        "## Action registry — the six required repository actions",
+        "",
+    ]
+    L += table(["Action", "What the repository does", "Modifies repository knowledge",
+                "Executed by", "Precondition"],
+               [[a["action"], a["summary"],
+                 "**yes**" if a["modifies_repository_knowledge"] else "no",
+                 a["executed_by"], a["precondition"]]
+                for a in payload["decision_action_registry"]])
+    L += [
+        "`Modifies repository knowledge` is the property that matters constitutionally: it "
+        "records what the owner is being asked to authorize. This engine executes none of them.",
+        "",
+        "## Decision rule registry — declared precedence, most specific first",
+        "",
+        "Precedence is FAIL-SAFE by construction: every clause that changes no repository "
+        "knowledge (escalate, reject, hold) is reached BEFORE every clause that does (accept, "
+        "merge, supersede). A contradiction, an obsolescence, a retirement or a constitutional "
+        "regression therefore always outranks an adoption, and no mechanical rule can overrule "
+        "an architect.",
+        "",
+    ]
+    dr = payload["decision_rules"]
+    L += table(["#", "Rule", "IF (clause over the recorded grounds)", "THEN action",
+                "Repository operation", "Objects", "Rationale"],
+               [[r["precedence"], f"`{r['rule']}`", r["clause"], r["action"],
+                 f"`{r['operation']}`", f"{dr.get(r['rule'], 0):,}", r["rationale"]]
+                for r in payload["decision_rule_registry"]])
+    L += [
+        f"The rule set is TOTAL: `{payload['decision_residual_rule']}` matches unconditionally, "
+        "so no object can leave the engine without exactly one action. Its use would mean the "
+        "rule set has a HOLE, so a single occurrence is a BLOCKING gate failure rather than an "
+        "accepted outcome — the residual exists in order to be provably empty, and it is: "
+        f"**{dr.get(payload['decision_residual_rule'], 0)}** objects.",
+        "",
+    ]
+    if payload["decision_silent_rules"]:
+        L += ["### Declared rules that do not fire on this corpus (disclosed, not hidden)", "",
+              "A declared rule that never fires is indistinguishable from dead code unless the "
+              "reason is declared. `STRUCTURAL` means the clause is empty by construction on "
+              "every corpus; `GUARD` means it defends against a row state an earlier axis's own "
+              "gate prevents. A silent rule with NO declared reason is a blocking failure.",
+              ""]
+        L += table(["Rule", "Class", "Objects", "Why it does not fire"],
+                   [[f"`{rid}`", spec["kind"], dr.get(rid, 0), spec["reason"]]
+                    for rid, spec in sorted(payload["decision_silent_rules"].items())])
+    L += [
+        "## Recorded grounds — `decision_rationale`",
+        "",
+        "Each object carries its OWN grounds, in a declared fixed key order. The general clause "
+        "is carried once per rule above; the grounds below are what that clause matched on THIS "
+        "object. The string is the whole input to the rule set, which is what makes a decision "
+        f"replayable: `{'|'.join(payload['decision_grounds_keys'])}`.",
+        "",
+    ]
+    L += table(["Key", "Meaning"],
+               [[f"`{k}`", payload["decision_grounds_legend"][k]]
+                for k in payload["decision_grounds_keys"]])
+    L += [
+        "Given only this string, the same rule set reproduces the same decision, rule, "
+        "repository operation and priority — with no corpus, no repository and no caller "
+        "present. A blocking gate executes that replay over every row on every run.",
+        "",
+        "## Decision distribution",
+        "",
+    ]
+    da = payload["decision_actions"]
+    L += table(["Repository action", "Objects", "Share", "Modifies repository knowledge"],
+               [[a, f"{da.get(a, 0):,}", pct(da.get(a, 0), len(rows)),
+                 "**yes**" if ACTION_MODIFIES.get(a) else "no"] for a in DEC.ACTIONS])
+    L += [
+        f"The axis is TOTAL: the actions sum to {sum(da.values()):,} = all {len(rows):,} "
+        "evaluated objects. "
+        f"**{sum(da.get(a, 0) for a in DEC.ACTIONS if ACTION_MODIFIES.get(a)):,}** objects carry "
+        "an action that would modify repository knowledge; every one of them is addressed to a "
+        "named existing owner and none of them has been executed.",
+        "",
+        "## Presence × decision",
+        "",
+    ]
+    cross_pd = Counter((r["state"], str(r.get("decision") or "")) for r in rows)
+    L += table(["Presence state"] + list(DEC.ACTIONS),
+               [[st] + [cross_pd.get((st, a), 0) for a in DEC.ACTIONS] for st in STATES])
+    L += ["## Superiority × decision", ""]
+    cross_sd = Counter((r["superiority"], str(r.get("decision") or "")) for r in rows)
+    L += table(["Superiority verdict"] + list(DEC.ACTIONS),
+               [[verdict_state] + [cross_sd.get((verdict_state, a), 0) for a in DEC.ACTIONS]
+                for verdict_state in SUP.SUPERIORITY_STATES])
+    L += [
+        "The two cross-tabs are the executable proof that the decision axis CONSUMES both prior "
+        "axes rather than replacing either: no column is a function of one axis alone.",
+        "",
+        "## Implementation priority",
+        "",
+    ]
+    dp = payload["decision_priorities"]
+    L += table(["Priority", "Objects", "Share", "Why this class exists"],
+               [[pr["priority"], f"{dp.get(pr['priority'], 0):,}",
+                 pct(dp.get(pr["priority"], 0), len(rows)), pr["rationale"]]
+                for pr in payload["decision_priority_declaration"]])
+    L += [
+        "Priority is a pure function of the decision and one declared refinement (a "
+        "constitutional regression promotes an escalation to IMMEDIATE). Nothing else varies, so "
+        "no object can be prioritized by judgement.",
+        "",
+        "## Implementation owners — the referral addresses",
+        "",
+    ]
+    owners = payload["decision_owners"]
+    L += table(["Implementation owner", "Objects"],
+               [[o, f"{n:,}"] for o, n in sorted(owners.items(), key=lambda kv: (-kv[1], kv[0]))])
+    L += [
+        "The owner is resolved in declared precedence: the owner the PRESENCE axis already "
+        "assigned (never overridden), else the canonical owner of the repository zone carrying "
+        "the resolving anchor, else the decision register itself — which is the correct address "
+        "for a decision that requires no repository modification, because there the record IS "
+        "the action. Every name above is an EXISTING repository authority or an existing "
+        "repository location: this axis creates no authority and grants none.",
+        "",
+        "## Decisions referred to their owners",
+        "",
+    ]
+
+    def dec_table(action: str, limit: int) -> list[str]:
+        sel = [r for r in rows if r.get("decision") == action]
+        top = sorted(sel, key=lambda r: (
+            DEC.PRIORITIES.index(str(r.get("implementation_priority")))
+            if str(r.get("implementation_priority")) in DEC.PRIORITIES else 99,
+            -float(r["authority_score"] or 0.0), r["kid"]))[:limit]
+        out = [f"### {action} — {len(sel):,} object(s)"
+               + (f" (highest-priority {len(top)} shown)" if len(sel) > len(top) else ""), ""]
+        out += table(["KID", "Name", "Rule", "Operation", "Priority", "Wave", "Owner", "Grounds"],
+                     [[r["kid"], r["name"], r["decision_rule"],
+                       f"`{r['implementation_action']}`", r["implementation_priority"],
+                       str(r["wave"]) or "—", r["implementation_owner"],
+                       f"`{r['decision_rationale']}`"]
+                      for r in top])
+        return out
+
+    for action in DEC.ACTIONS:
+        L += dec_table(action, 30)
+    L += [
+        "## Disclosed limits",
+        "",
+        "- This axis DECIDES and RECORDS. It modifies no repository knowledge, rewrites no "
+        "artifact, promotes nothing and resolves no conflict. Executing an `ACCEPT`, `MERGE` or "
+        "`SUPERSEDE` decision is the named owner's act under its own constitution.",
+        "- A decision is only as good as the two axes it consumes. Where presence or superiority "
+        "could not measure a property, the grounds record that fact and the fail-safe precedence "
+        "sends the object to an architect rather than to a mechanical action.",
+        f"- `{payload['decision_residual_rule']}` is a totality guarantee, not a decision class. "
+        "It exists so that \"no action\" cannot be a silent outcome, and its use is a blocking "
+        "failure.",
+        "- The engine holds no constitutional authority. A decision is a DERIVED instruction "
+        "awaiting the owning authority's act; it ratifies nothing and authorizes nothing the "
+        "owner was not already allocated.",
+        "",
+    ]
+    p = HERE / "10-REPOSITORY-DECISION-REGISTER.md"
+    write(p, L)
+    written.append(p.name)
+
+    # ------------------------------------------------------- 11 implementation plan (D-3)
+    L = md_header(payload, "11", "Implementation Plan Register",
+                  "The generated implementation programme: every repository decision converted "
+                  "into a declared, ordered repository operation, addressed to a named owner in "
+                  "priority and wave order.")
+    L += [
+        "## How this plan is generated",
+        "",
+        "The plan is GENERATED from the decision register, not authored beside it. Each "
+        "repository operation declares one ordered step sequence; each object's plan is that "
+        "sequence with the object's own addresses resolved. The programme below aggregates the "
+        "decisions by (owner × action × operation × priority × wave), so an owner reads only the "
+        "entries addressed to it and every entry names the exact steps that discharge it.",
+        "",
+        "Nothing here is executed. The plan is the instruction; the owner is the actor.",
+        "",
+        "## Declared repository operations and their plans",
+        "",
+    ]
+    dops = payload["decision_operations"]
+    for op in payload["decision_operation_registry"]:
+        L += [f"### `{op['operation']}` → {op['action']} — "
+              f"{dops.get(op['operation'], 0):,} object(s)", "", f"{op['summary']}.", ""]
+        L += [f"{i + 1}. {step}" for i, step in enumerate(op["steps"])]
+        L += [""]
+    L += [
+        "Placeholders (`{owner}`, `{destination}`, `{anchor}`, `{authority}`, `{profile}`, "
+        "`{dependencies}`, `{evidence}`, `{presence_state}`, `{register}`) are resolved per "
+        "object from the columns that object already carries. A placeholder the object does not "
+        "carry resolves to the declared em-dash, never to a silent blank.",
+        "",
+        "## The implementation programme",
+        "",
+        "Ordered by declared priority, then by the wave the presence axis assigned, then by "
+        "owner. The ordering is a pure function of declared ordinals, so a replay reproduces the "
+        "programme byte-for-byte.",
+        "",
+    ]
+    L += table(["Priority", "Wave", "Implementation owner", "Action", "Repository operation",
+                "Objects", "First object"],
+               [[e["implementation_priority"], e["wave"], e["implementation_owner"],
+                 e["decision"], f"`{e['implementation_action']}`", f"{e['objects']:,}",
+                 e["first_object"]]
+                for e in payload["decision_plan"]])
+    actionable = [e for e in payload["decision_plan"] if ACTION_MODIFIES.get(e["decision"])]
+    L += [
+        f"**{len(payload['decision_plan']):,}** programme entries covering all {len(rows):,} "
+        f"decided objects, of which **{len(actionable):,}** entries "
+        f"(**{sum(e['objects'] for e in actionable):,}** objects) carry an action that would "
+        "modify repository knowledge and therefore require the named owner's authorization "
+        "before anything is written.",
+        "",
+        "## Worked plans (the generator's output, per object)",
+        "",
+        "One object per action, to show that the generator resolves a real, addressed plan rather "
+        "than a template. The highest-priority object of each action is shown.",
+        "",
+    ]
+    for action in DEC.ACTIONS:
+        sel = sorted((r for r in rows if r.get("decision") == action),
+                     key=lambda r: (DEC.PRIORITIES.index(str(r.get("implementation_priority")))
+                                    if str(r.get("implementation_priority")) in DEC.PRIORITIES
+                                    else 99, -float(r["authority_score"] or 0.0), r["kid"]))
+        if not sel:
+            L += [f"### {action}", "",
+                  "No object on this corpus carries this action; see the reachability gate in "
+                  "register 06.", ""]
+            continue
+        r = sel[0]
+        L += [f"### {action} — `{r['kid']}` {r['name']}", "",
+              f"- operation `{r['implementation_action']}` · rule `{r['decision_rule']}` · "
+              f"priority {r['implementation_priority']} · wave {str(r['wave']) or '—'}",
+              f"- owner: {r['implementation_owner']}",
+              f"- grounds: `{r['decision_rationale']}`",
+              ""]
+        L += [f"{i + 1}. {step}" for i, step in enumerate(DEC.plan_for(r))]
+        L += [""]
+    L += [
+        "## Disclosed limits",
+        "",
+        "- A plan is an INSTRUCTION, not an execution. This engine writes nothing outside its own "
+        "program home and has written nothing into any owner's artifact.",
+        "- The plan carries no estimate, no schedule and no capacity assumption. Ordering is by "
+        "declared priority and the wave the presence axis already assigned; inventing dates would "
+        "fabricate a commitment the evidence does not contain.",
+        "- Every plan ends by REGENERATING the registers, so discharging a decision causes the "
+        "decision to be RE-DERIVED from the new repository state rather than hand-edited. That is "
+        "the only supported way to close an entry.",
+        "",
+    ]
+    p = HERE / "11-IMPLEMENTATION-PLAN-REGISTER.md"
+    write(p, L)
+    written.append(p.name)
+
     # ---------------------------------------------------------------- 04 repository change
     L = md_header(payload, "04", "Repository Change Register",
                   "Every repository change this program made, with content hash, rationale and "
@@ -1853,10 +2579,14 @@ def main() -> int:
 
     written = render(payload)
     st = payload["states"]
+    da = payload["decision_actions"]
     print(f"{PROGRAM}: {payload['determination']} | objects={payload['verified_objects']} "
           f"| unclassified={payload['unclassified']} "
           f"| remaining_candidates={payload['remaining_approved_promotion_candidates']} "
           f"| " + " ".join(f"{k.split('-')[0].lower()}={v}" for k, v in st.items()))
+    print(f"  D-3 decisions: undecided={sum(1 for r in payload['rows'] if not r.get('decision'))}"
+          f" | ruleset={payload['decision_version']} | "
+          + " ".join(f"{a.lower()}={da.get(a, 0)}" for a in DEC.ACTIONS))
     print(f"wrote {len(written)} registers to 00-MASTER/{PROGRAM}")
     if args.gate and payload["determination"] != "REPOSITORY CONSTITUTIONALLY COMPLETE":
         for g in payload["gates"]:

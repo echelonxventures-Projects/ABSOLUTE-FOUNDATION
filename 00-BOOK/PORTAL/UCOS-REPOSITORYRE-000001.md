@@ -3,7 +3,7 @@
 Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-REPOSITORYRE-000001](UCOS-REPOSITORYRE-000001.md)
 
 - Volume: VOL-000  ·  Status: ACTIVE  ·  Twin: [—]
-- Native: —  ·  Program: REPOSITORYRE
+- Native: —  ·  Program: REPOSI
 - Parent: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - Source: [07-REPOSITORY-REGENERATION.md](../../07-REPOSITORY-REGENERATION.md)
 
