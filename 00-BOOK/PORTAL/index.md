@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-31T06:45:07+00:00 by ukbx portal. 1193 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-07-31T09:46:00+00:00 by ukbx portal. 1194 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1197,3 +1197,4 @@
 | [UCOS-PLT-000054](UCOS-PLT-000054.md) | Repository | VOL-006 | ACTIVE |
 | [UCOS-PLT-000055](UCOS-PLT-000055.md) | Ucos Assurance Policy | VOL-006 | ACTIVE |
 | [UCOS-PLT-000056](UCOS-PLT-000056.md) | Ucos Assurance Selfcheck | VOL-006 | ACTIVE |
+| [UCOS-PLT-000057](UCOS-PLT-000057.md) | Uapf Pipelines | VOL-006 | ACTIVE |

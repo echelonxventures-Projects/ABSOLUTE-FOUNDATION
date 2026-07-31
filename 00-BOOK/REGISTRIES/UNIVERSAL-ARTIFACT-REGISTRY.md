@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1193
+**Total artifacts:** 1194
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1201,5 +1201,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1191 | `UCOS-PLT-000054` | Repository | — | 006 | UPN-000009598–UPN-000009598 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/providers/catalog/repository.json) |
 | 1192 | `UCOS-PLT-000055` | Ucos Assurance Policy | — | 006 | UPN-000009599–UPN-000009612 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_assurance/data/ucos-assurance-policy.json) |
 | 1193 | `UCOS-PLT-000056` | Ucos Assurance Selfcheck | — | 006 | UPN-000009613–UPN-000009618 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_assurance/data/ucos-assurance-selfcheck.json) |
+| 1194 | `UCOS-PLT-000057` | Uapf Pipelines | — | 006 | UPN-000009619–UPN-000009627 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_pipeline/catalog/uapf-pipelines.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

@@ -12,7 +12,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 57 | UPN-000000022–UPN-000009371 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 6 | UPN-000004194–UPN-000005924 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
-| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 72 | UPN-000004559–UPN-000009618 |
+| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 73 | UPN-000004559–UPN-000009627 |
 | `VOL-007` | 7 | DATA | DAT | ACTIVE | 157 | UPN-000004355–UPN-000006451 |
 | `VOL-008` | 8 | SERVICE | SVC | ACTIVE | 172 | UPN-000004410–UPN-000007033 |
 | `VOL-009` | 9 | APPLICATION | APP | ACTIVE | 149 | UPN-000004232–UPN-000007536 |
@@ -370,7 +370,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-006 — PLATFORM <a id="vol-006"></a>
 
 *Implementation platforms and engines.*  \
-**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 72
+**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 73
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -446,6 +446,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-PLT-000054` | Repository | — | ACTIVE |
 | `UCOS-PLT-000055` | Ucos Assurance Policy | — | ACTIVE |
 | `UCOS-PLT-000056` | Ucos Assurance Selfcheck | — | ACTIVE |
+| `UCOS-PLT-000057` | Uapf Pipelines | — | ACTIVE |
 
 ### VOL-007 — DATA <a id="vol-007"></a>
 

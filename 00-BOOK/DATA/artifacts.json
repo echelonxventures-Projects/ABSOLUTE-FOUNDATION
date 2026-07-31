@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-31T07:42:46+00:00",
+  "generated_at": "2026-07-31T09:46:00+00:00",
   "generator_version": "1.0.0",
-  "count": 1193,
+  "count": 1194,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -52785,6 +52785,45 @@
       "path": "platform/universal_assurance/data/ucos-assurance-selfcheck.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
       "content_hash": "cd9ae5d7d52f9e494cdc59990d9e89a55882b8327ea032217ed0957c71f48229",
+      "traceability": {
+        "requirement": [],
+        "architecture": [],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-PLT-000057",
+      "native_id": null,
+      "name": "Uapf Pipelines",
+      "description": "",
+      "category": "PLT",
+      "volume": "VOL-006",
+      "page_start": 9619,
+      "page_end": 9627,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-PLT-000007",
+      "dependencies": [],
+      "program": "PLATFORM",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "PLATFORM",
+        "PLT",
+        "VOL-006"
+      ],
+      "path": "platform/universal_pipeline/catalog/uapf-pipelines.json",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "7ed76d3f48b109265141fbe63ad602c81807d59d9ea88fae375b931451e79934",
       "traceability": {
         "requirement": [],
         "architecture": [],

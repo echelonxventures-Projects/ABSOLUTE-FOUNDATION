@@ -8568,9 +8568,16 @@
       "page_start": 9613,
       "page_count": 6,
       "first_seen": "2026-07-27T16:26:49+00:00"
+    },
+    "platform/universal_pipeline/catalog/uapf-pipelines.json": {
+      "universal_id": "UCOS-PLT-000057",
+      "category": "PLT",
+      "page_start": 9619,
+      "page_count": 9,
+      "first_seen": "2026-07-31T09:46:00+00:00"
     }
   },
-  "page_cursor": 9618,
+  "page_cursor": 9627,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8589,7 +8596,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 56,
+    "PLT": 57,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -23896,6 +23903,17 @@
         "status": "ACTIVE",
         "path": "platform/universal_assurance/data/ucos-assurance-selfcheck.json",
         "name": "Ucos Assurance Selfcheck"
+      }
+    ],
+    "UCOS-PLT-000057": [
+      {
+        "seq": 1,
+        "at": "2026-07-31T09:46:00+00:00",
+        "content_hash": "7ed76d3f48b109265141fbe63ad602c81807d59d9ea88fae375b931451e79934",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_pipeline/catalog/uapf-pipelines.json",
+        "name": "Uapf Pipelines"
       }
     ]
   }
