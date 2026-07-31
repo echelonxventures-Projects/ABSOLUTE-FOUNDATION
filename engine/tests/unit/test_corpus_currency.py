@@ -379,6 +379,18 @@ def test_build_fails_closed_when_no_corpus_root_resolves(tmp_path: Path, monkeyp
     assert "FAIL-CLOSED" in str(exc.value)
 
 
+def test_replay_preserves_the_recorded_head_commit(tmp_path: Path, monkeypatch):
+    """A committed artifact cannot carry the sha of the commit that carries it, so a replay
+    must reproduce the RECORDED head — otherwise the register drift gate breaks on every
+    commit."""
+    write_export(tmp_path, "only", ["a"], 5.0)
+    monkeypatch.setenv("UKAP_CORPUS_ROOTS", str(tmp_path))
+    live = ce.build(None)
+    record = json.loads(ce.serialize(live))
+    record["head_commit"] = "deadbee"
+    assert ce.build(record)["head_commit"] == "deadbee"
+
+
 def test_replay_is_re_derivable_without_a_corpus(tmp_path: Path, monkeypatch):
     write_export(tmp_path, "older", ["a", "b"], 10.0)
     write_export(tmp_path, "newer", ["a", "b", "c"], 20.0)

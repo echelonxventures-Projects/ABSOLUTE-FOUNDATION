@@ -9,7 +9,7 @@
     "assimilation_baseline": {
       "bytes": 5764423,
       "relative": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
-      "sha256": "014c053c8ae94f8e72e436b49558f981f75714a08c025cdc1e18de3226723ed8"
+      "sha256": "fa19f7d0c0dac785e9af4150c59cecc9ebb456f0bf230616c1e396b38a41a075"
     },
     "export::31b621b2cecc55e8": {
       "bytes": 351,
@@ -24,9 +24,9 @@
     "provenance_baseline": {
       "bytes": 5944,
       "relative": "00-MASTER/UAKOS-PHASE-001B/01-SOURCE-PROVENANCE-REGISTER.md",
-      "sha256": "3907efd9c38e8f5f1c10bf096c8ba20f704a927691bb04c547336379db039cd7"
+      "sha256": "0367bbcf3269346c6b33266b7054a840216064fc5b416ac78dc8451779611b99"
     }
   },
-  "head_commit": "09904a0",
+  "head_commit": "1b9fb90",
   "program": "UKAP-001"
 }

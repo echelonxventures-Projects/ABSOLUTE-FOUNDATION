@@ -620,7 +620,12 @@ def build(replay: dict | None) -> dict:
         archives = [dict(exp) for exp in replay.get("archives", [])]
         root_names = [str(r) for r in replay.get("corpus_roots", [])]
         resolved = [str(r) for r in replay.get("corpus_roots_resolved", [])]
+        # The RECORDED head is replayed, never re-read: a committed artifact can never carry
+        # the sha of the commit that carries it, so a replay must preserve the recorded HEAD
+        # for the register drift gate to be a fixed point across commits.
+        head = str(replay.get("head_commit") or head_commit())
     else:
+        head = head_commit()
         roots = corpus_roots()
         root_names = [str(r) for r in roots]
         resolved = [str(r) for r in roots if r.is_dir()]
@@ -642,7 +647,7 @@ def build(replay: dict | None) -> dict:
         "program": PROGRAM,
         "determination_id": DETERMINATION_ID,
         "authority": "NONE — DERIVED TRUTH (fail-closed, TRACK-001)",
-        "head_commit": head_commit(),
+        "head_commit": head,
         "corpus_roots": root_names,
         "corpus_roots_resolved": resolved,
         "archives": archives,
