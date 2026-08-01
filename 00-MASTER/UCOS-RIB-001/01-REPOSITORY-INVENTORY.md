@@ -48,14 +48,14 @@
 | `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `not recorded` |
 | `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 58 | `cd9b82d94dca` |
 | `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1194 | `05a812f11ce4` |
-| `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 96 | `853c31c54afe` |
-| `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 71 | `aa7a9d02b7d7` |
-| `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `0836694ed71a` |
-| `SUB-RIE-FRONTIER` | `intelligence/UCOS-RIE-EXECUTION-FRONTIER.json` | json | YES | YES | 4/4 | 8 | `8983b0f8b696` |
+| `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 96 | `120d7abf870a` |
+| `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 71 | `197a4cb7cb65` |
+| `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `107787ba07ee` |
+| `SUB-RIE-FRONTIER` | `intelligence/UCOS-RIE-EXECUTION-FRONTIER.json` | json | YES | YES | 4/4 | 8 | `bdbd00899586` |
 | `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 108 | `6e5206a51222` |
 | `SUB-UEI` | `00-MASTER/UEI-000001/uei.json` | json | YES | YES | 2/2 | 15 | `50e80b680d9f` |
 | `SUB-UER` | `00-MASTER/UER-000001/uer.json` | json | YES | YES | 2/2 | 10 | `0ae82cb58fdb` |
-| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `ccf594dd6c21` |
+| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `4b4db295abd0` |
 
 ## Enrichment
 
@@ -68,14 +68,14 @@
 
 | Measure | Kind | Field | Units with a value | Total | Purpose |
 |---|---|---|---|---|---|
-| `MSR-SOURCE` | `owned_source_count` | `source_files` | 94 | 1630 | the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree |
-| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 169 | 5250 | every version-controlled file homed inside the unit |
+| `MSR-SOURCE` | `owned_source_count` | `source_files` | 94 | 1631 | the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree |
+| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 169 | 5252 | every version-controlled file homed inside the unit |
 | `MSR-UNITTEST` | `tracked_glob_count` | `unit_tests` | 31 | 307 | verification assets located for the unit itself |
 | `MSR-EVIDENCE` | `tracked_glob_count` | `evidence_assets` | 8 | 980 | the realization-evidence surface located for the unit's root |
 | `MSR-COVERAGE` | `substrate_list_member` | `in_coverage_scope` | 39 | 39 | whether the unit lies inside the declared coverage scope |
 | `MSR-INTERFACE` | `substrate_map_prefix` | `interfaces` | 15 | 17 | the declared console interfaces the unit publishes |
 | `MSR-REGISTERED` | `substrate_record_prefix` | `registered_artifacts` | 108 | 702 | the registered corpus artifacts homed inside the unit |
-| `MSR-ENTRYPOINT` | `text_reference_count` | `entrypoint_references` | 61 | 1494 | how many declared entry points name a path inside the unit — the reachability a non-imported tool has |
+| `MSR-ENTRYPOINT` | `text_reference_count` | `entrypoint_references` | 61 | 1530 | how many declared entry points name a path inside the unit — the reachability a non-imported tool has |
 | `MSR-TESTPATH` | `substrate_list_member` | `in_test_scope` | 2 | 2 | whether the unit lies inside the declared test-collection scope |
 
 ## Repository reality at the computed anchor
@@ -93,7 +93,7 @@
 | Merge conflicts | 0 |
 | Interrupted operations | none |
 | Broken symlinks | 0 |
-| Version-controlled files | 5280 |
+| Version-controlled files | 5282 |
 
 ---
 

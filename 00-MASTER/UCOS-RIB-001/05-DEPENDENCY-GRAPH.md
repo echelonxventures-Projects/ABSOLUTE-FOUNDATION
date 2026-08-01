@@ -40,7 +40,7 @@
 | Dimension | Value |
 |---|---|
 | Kind | `python_module_graph` |
-| Nodes | 1686 |
+| Nodes | 1687 |
 | Edges | 8132 |
 | Unresolved edges | 0 |
 | Cycles | 2 |

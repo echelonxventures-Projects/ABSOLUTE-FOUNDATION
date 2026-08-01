@@ -220,7 +220,7 @@
 | `UCOS-RIB-001-CAP-0190` | `engine.provider` | IMPLEMENTATION | `engine/provider` | 6 | 6 | 1 | 1 | 0 | 0 | YES | CERTIFIED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0191` | `engine.registry` | IMPLEMENTATION | `engine/registry` | 14 | 9 | 10 | 1 | 2 | 0 | YES | CERTIFIED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0192` | `engine.runtime` | IMPLEMENTATION | `engine/runtime` | 34 | 15 | 27 | 0 | 1 | 0 | YES | CERTIFIED | **REUSE** | `RUL-10` |
-| `UCOS-RIB-001-CAP-0193` | `engine.tests` | IMPLEMENTATION | `engine/tests` | 197 | 19 | 0 | 0 | 0 | 0 | no | CERTIFIED | **REUSE** | `RUL-10` |
+| `UCOS-RIB-001-CAP-0193` | `engine.tests` | IMPLEMENTATION | `engine/tests` | 198 | 19 | 0 | 0 | 0 | 0 | no | CERTIFIED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0194` | `engine.uckp` | IMPLEMENTATION | `engine/uckp` | 23 | 1 | 13 | 0 | 0 | 0 | YES | CERTIFIED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0195` | `engine.universal_certification` | IMPLEMENTATION | `engine/universal_certification` | 9 | 12 | 11 | 0 | 1 | 0 | YES | CERTIFIED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0196` | `engine.validation` | IMPLEMENTATION | `engine/validation` | 6 | 7 | 20 | 0 | 1 | 0 | YES | CERTIFIED | **REUSE** | `RUL-10` |

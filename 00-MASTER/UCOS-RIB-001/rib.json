@@ -1652,7 +1652,7 @@
       "id": "MSR-SOURCE",
       "kind": "owned_source_count",
       "purpose": "the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree",
-      "total": 1630,
+      "total": 1631,
       "units_with_value": 94
     },
     {
@@ -1660,7 +1660,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 5250,
+      "total": 5252,
       "units_with_value": 169
     },
     {
@@ -1708,7 +1708,7 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 1494,
+      "total": 1530,
       "units_with_value": 61
     },
     {
@@ -3018,7 +3018,7 @@
       "edges": 8132,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
-      "nodes": 1686,
+      "nodes": 1687,
       "purpose": "the module-granularity import plane, where a true Python import cycle would break execution",
       "unit_class": "IMPLEMENTATION",
       "unresolved_edges": 0
@@ -3685,7 +3685,7 @@
     "dirty_entries": 0,
     "interrupted_operations": [],
     "modified": 0,
-    "tracked_files": 5280,
+    "tracked_files": 5282,
     "untracked": 0,
     "working_tree": "CLEAN"
   },
@@ -3888,7 +3888,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "853c31c54afeff9b34fa463588d4bbd40d97ef236ed20da0d0887f56c3b69eb5",
+      "content_sha256": "120d7abf870a5bae755599407e0ad927d7a3cd0e3a7afe2b58f499f3d4b0fe3b",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-BASELINE",
@@ -3914,7 +3914,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "aa7a9d02b7d75c138ba2c5f1abfbb651f63877500872101d8e0b0603eef4192b",
+      "content_sha256": "197a4cb7cb65cb75784c5ea0df2ef27037e43beb956786bcb2f474f2a104ee40",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-CAPS",
@@ -3936,7 +3936,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "0836694ed71a8445adac351d9ad47d25bddecaaa7556346f9b201577572ea49f",
+      "content_sha256": "107787ba07eeea80c600a0b6b0bd67fbdd68987e2c2fde11d97116d28d8450b8",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-DEPS",
@@ -3960,7 +3960,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "8983b0f8b696f467a0b22c31463cdfb35a9de4d092e72cbf9357906e604a339c",
+      "content_sha256": "bdbd00899586cddb4496b6cbf0b6cceb5cc649f12394a391a76ac5b4a7e7845a",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-FRONTIER",
@@ -4050,7 +4050,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "ccf594dd6c21701c52f78a9a2bc2e45db27e177d8b6753c69983064d96bef920",
+      "content_sha256": "4b4db295abd0d082c231b310a9af35830ad9bd751eacfb0cb4130efd77637b81",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -7564,7 +7564,7 @@
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
-      "entrypoint_references": 388,
+      "entrypoint_references": 399,
       "evidence_assets": 0,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
@@ -8021,7 +8021,7 @@
       "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
       "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 20,
+      "entrypoint_references": 21,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -8371,7 +8371,7 @@
       "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
       "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 9,
+      "entrypoint_references": 19,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -12999,7 +12999,7 @@
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
-      "entrypoint_references": 34,
+      "entrypoint_references": 35,
       "evidence_assets": 123,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
@@ -13126,7 +13126,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 428,
+      "entrypoint_references": 440,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,
@@ -13166,7 +13166,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 519,
+      "tracked_files": 520,
       "unique_id": "UCOS-RIB-001-CAP-0176",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "engine",
@@ -14563,7 +14563,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 10,
+      "entrypoint_references": 11,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,
@@ -14597,13 +14597,13 @@
       "rie_reuse": "REUSE_AS_IS/COMPOSE",
       "rie_status": "CERTIFIED",
       "root": "engine",
-      "source_files": 197,
+      "source_files": 198,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 217,
+      "tracked_files": 218,
       "unique_id": "UCOS-RIB-001-CAP-0193",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "engine.tests",
