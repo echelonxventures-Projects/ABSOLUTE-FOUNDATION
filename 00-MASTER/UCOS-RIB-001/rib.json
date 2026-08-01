@@ -1,24 +1,5 @@
 {
-  "compliance": [
-    {
-      "finding": "dirty_entries_outside_generated=50",
-      "gate": "GATE-12",
-      "id": "CMP-CLEAN",
-      "rank": 1,
-      "remediation": "commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately",
-      "requirement": "the repository must remain clean, deterministic, buildable and reproducible",
-      "severity": "CRITICAL"
-    },
-    {
-      "finding": "validations_failed=1",
-      "gate": "GATE-04",
-      "id": "CMP-VALIDATE",
-      "rank": 2,
-      "remediation": "discharge the named validation obligation",
-      "requirement": "validation must pass",
-      "severity": "HIGH"
-    }
-  ],
+  "compliance": [],
   "cycle_classes": [
     {
       "benign": true,
@@ -35,7 +16,7 @@
       "rule": "cross_unit"
     }
   ],
-  "determination": "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP",
+  "determination": "BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED",
   "discovery": [
     {
       "class": "IMPLEMENTATION",
@@ -1201,8 +1182,8 @@
       "subject": "operational programmes whose engine no declared entry point names"
     }
   ],
-  "gate": "CLOSED",
-  "gate_exit": 1,
+  "gate": "OPEN",
+  "gate_exit": 0,
   "gates": [
     {
       "blocking": true,
@@ -1240,15 +1221,13 @@
     {
       "blocking": true,
       "criterion": "every validation obligation met",
-      "failures": [
-        "validations_failed=1"
-      ],
+      "failures": [],
       "id": "GATE-04",
       "metrics": [
         "validations_failed"
       ],
       "name": "Repository Validation",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "blocking": true,
@@ -1333,15 +1312,13 @@
     {
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
-      "failures": [
-        "dirty_entries_outside_generated=50"
-      ],
+      "failures": [],
       "id": "GATE-12",
       "metrics": [
         "dirty_entries_outside_generated"
       ],
       "name": "Repository Clean",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     }
   ],
   "matrices": [
@@ -1683,7 +1660,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 5246,
+      "total": 5250,
       "units_with_value": 169
     },
     {
@@ -1731,7 +1708,7 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 1488,
+      "total": 1494,
       "units_with_value": 61
     },
     {
@@ -1751,10 +1728,7 @@
     "advisory_duplicate_signals": 9,
     "architectural_cycles": 0,
     "benign_cycles": 2,
-    "blocking_failed": [
-      "GATE-04",
-      "GATE-12"
-    ],
+    "blocking_failed": [],
     "catalogue_records": 71,
     "certification_domains_failed": 0,
     "certification_verdict_absent": 0,
@@ -1768,12 +1742,12 @@
     },
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
-    "compliance_findings": 2,
+    "compliance_findings": 0,
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 50,
-    "dirty_entries_outside_generated": 50,
+    "dirty_entries": 0,
+    "dirty_entries_outside_generated": 0,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 32,
@@ -1804,7 +1778,7 @@
     "gap_count:GAP-VERIFICATION": 205,
     "gap_findings": 625,
     "gate_total": 12,
-    "gates_passed": 10,
+    "gates_passed": 12,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -1848,7 +1822,7 @@
     "universes_unresolved": 0,
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
-    "validations_failed": 1,
+    "validations_failed": 0,
     "verifications_failed": 0,
     "wave_total": 6
   },
@@ -3708,14 +3682,14 @@
     "conflicts": 0,
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 50,
+    "dirty_entries": 0,
     "interrupted_operations": [],
-    "modified": 35,
-    "tracked_files": 5277,
-    "untracked": 2,
-    "working_tree": "DIRTY"
+    "modified": 0,
+    "tracked_files": 5280,
+    "untracked": 0,
+    "working_tree": "CLEAN"
   },
-  "seal_sha256": "0cfb800d8b1dd17a6838a6eea0eec18009b1ba139de2959383f895c61666e52e",
+  "seal_sha256": "2f54a97a0c244e64749e8b7b9afab3a9fb8d9ab0955fd2b8e301825135507cd7",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -3744,7 +3718,7 @@
   ],
   "substrate": [
     {
-      "content_sha256": "dc310d4564b62d3d8a554a5e20304efad81dcd884ddbe298dfd83b2323547fe7",
+      "content_sha256": "9e01ca4f48f7a04d4387319a58a572bfae771c1f9e65c0c8d7c1b2c4bd500903",
       "exists": true,
       "generated": false,
       "id": "SUB-CERT",
@@ -3892,7 +3866,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "47da74beef4030c6f5bfe1ac3f93368e3bbe0bd39e6cc4fc831a0d790db5c9dd",
+      "content_sha256": "05a812f11ce4e3edd2b031503dc40d946d57813b9cf502640f5c728b4509b4e3",
       "exists": true,
       "generated": false,
       "id": "SUB-REGISTER",
@@ -4076,7 +4050,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "ef8853aa5b68eb4abee5503508e046434c0930c6c34f029e2eb046a5814e68ba",
+      "content_sha256": "ccf594dd6c21701c52f78a9a2bc2e45db27e177d8b6753c69983064d96bef920",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -7590,7 +7564,7 @@
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
-      "entrypoint_references": 386,
+      "entrypoint_references": 388,
       "evidence_assets": 0,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
@@ -7625,7 +7599,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 1098,
+      "tracked_files": 1101,
       "unique_id": "UCOS-RIB-001-CAP-0068",
       "unit_class": "CAPABILITY",
       "unit_key": "00-MASTER",
@@ -7747,7 +7721,7 @@
       "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
       "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 25,
+      "entrypoint_references": 27,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -7775,7 +7749,7 @@
         "DSC-PROGRAMME"
       ],
       "superseded_by": "",
-      "tracked_files": 11,
+      "tracked_files": 12,
       "unique_id": "UCOS-RIB-001-CAP-0071",
       "unit_class": "OPERATIONAL-PROGRAMME",
       "unit_key": "00-MASTER.UAIE-000001",
@@ -13152,7 +13126,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 426,
+      "entrypoint_references": 428,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,
@@ -18099,10 +18073,10 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 50,
+      "measured": 0,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "criterion": "every discovered unit names a programme",
