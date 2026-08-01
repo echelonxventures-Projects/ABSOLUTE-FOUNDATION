@@ -606,7 +606,7 @@ def main():
     ugdg_acyclic = True
     passed = every_gap_has_unit and every_unit_sequenced and ugdg_acyclic
     seal = hashlib.sha256(json.dumps(
-        {"base": BASE, "units": N, "waves": waves_present,
+        {"units": N, "waves": waves_present,
          "by_ready": dict(by_ready)}, sort_keys=True).encode()).hexdigest()
     b = hdr("12 — Phase-004 Completion Report", "Determination, method, success criteria, FREEZE D certification.")
     b += (f"## Determination: **{'COMPLETE — PASS' if passed else 'INCOMPLETE'}**\n\n"

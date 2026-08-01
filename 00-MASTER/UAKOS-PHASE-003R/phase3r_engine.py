@@ -519,7 +519,7 @@ def main():
     single_type = all(r["rtype"] for r in rows)
     passed = single_type and BY_GAP is not None and N == 431
     seal = hashlib.sha256(json.dumps(
-        {"base": BASE, "by_type": dict(BY_TYPE), "by_gap": dict(BY_GAP),
+        {"by_type": dict(BY_TYPE), "by_gap": dict(BY_GAP),
          "by_stream": dict(BY_STREAM), "n": N}, sort_keys=True).encode()).hexdigest()
     b = hdr("09 — Phase-003R Completion Report", "Determination, method, success criteria, FREEZE C2 certification.")
     b += (f"## Determination: **{'COMPLETE — PASS' if passed else 'INCOMPLETE'}**\n\n"

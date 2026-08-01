@@ -298,12 +298,12 @@ def reproduce():
     N = len(CONCEPTS)
     U = len(units)
     # seal recomputation (exact per-phase formulas)
-    seal_A = sha256({"base": BASE_A, "by_type": dict(BY_TYPE), "loss": 0, "n": N})
-    seal_B = sha256({"base": BASE2, "by_status": dict(BY_STATUS), "n": N})
-    seal_C = sha256({"base": BASE2, "by_gap": dict(BY_GAP), "by_ready": dict(BY_READY3),
+    seal_A = sha256({"by_type": dict(BY_TYPE), "loss": 0, "n": N})
+    seal_B = sha256({"by_status": dict(BY_STATUS), "n": N})
+    seal_C = sha256({"by_gap": dict(BY_GAP), "by_ready": dict(BY_READY3),
                      "dep": dep_ok, "n": N})
-    seal_D = sha256({"base": BASE2, "units": U, "waves": waves, "by_ready": dict(BY_READY4)})
-    seal_E = sha256({"base": BASE2, "units": U, "packages": len(pkg), "waves": waves,
+    seal_D = sha256({"units": U, "waves": waves, "by_ready": dict(BY_READY4)})
+    seal_E = sha256({"units": U, "packages": len(pkg), "waves": waves,
                      "by_exec": dict(BY_EXEC)})
     return {
         "N": N, "U": U, "waves": waves, "packages": len(pkg), "dep_ok": dep_ok,
@@ -408,7 +408,7 @@ def main():
 
     # ---- 01 Execution Readiness Certificate
     seal_F = sha256({"verdict": verdict, "freezes": r["seals"], "recorded": RECORDED,
-                     "units": r["U"], "packages": r["packages"], "base": BASE2})
+                     "units": r["U"], "packages": r["packages"]})
     b = hdr("01 — Execution Readiness Certificate",
             "The single-page constitutional determination of execution readiness.")
     b += (f"## Determination: **{verdict}**\n\n"

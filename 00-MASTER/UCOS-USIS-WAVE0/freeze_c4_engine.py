@@ -75,7 +75,6 @@ def fence(rows, header):
 def main():
     p3r = load_c2_model()
     CONCEPTS = p3r.CONCEPTS
-    BASE = {"commit": p3r.BASE["commit"], "branch": p3r.BASE["branch"]}
     N = len(CONCEPTS)
 
     # --- Reclassify the current closure under the C2 model (unchanged) ----------
@@ -91,7 +90,7 @@ def main():
 
     # --- Recompute the C2 object-distribution seal (proves byte-identical dist) --
     c2_recomputed = hashlib.sha256(json.dumps(
-        {"base": BASE, "by_type": dict(by_type), "by_gap": dict(by_gap),
+        {"by_type": dict(by_type), "by_gap": dict(by_gap),
          "by_stream": dict(by_stream), "n": N}, sort_keys=True).encode()).hexdigest()
 
     # --- The C4 EXTENDED MODEL definition ---------------------------------------
@@ -118,7 +117,7 @@ def main():
 
     # --- FREEZE C4 seal: over the EXTENDED MODEL + the (unchanged) object dist ---
     c4_seal = hashlib.sha256(json.dumps(
-        {"base": BASE, "model": model_def,
+        {"model": model_def,
          "object_distribution": {"by_type": dict(by_type), "by_stream": dict(by_stream),
                                  "by_gap": dict(by_gap), "n": N}},
         sort_keys=True).encode()).hexdigest()

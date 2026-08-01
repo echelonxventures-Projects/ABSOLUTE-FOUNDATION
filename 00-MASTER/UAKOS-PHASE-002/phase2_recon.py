@@ -463,7 +463,7 @@ def main():
     # ---- 10 Phase-002 Completion Report
     passed = (unknown == 0 and single_status and len(dup_home) == 0)
     seal = hashlib.sha256(json.dumps(
-        {"base": BASE, "by_status": dict(BY_STATUS), "n": N}, sort_keys=True).encode()).hexdigest()
+        {"by_status": dict(BY_STATUS), "n": N}, sort_keys=True).encode()).hexdigest()
     b = hdr("10 — Phase-002 Completion Report",
             "Authoritative repository implementation baseline: status distribution, method, success criteria.")
     b += (f"## Determination: **{'COMPLETE — PASS' if passed else 'INCOMPLETE'}**\n\n"

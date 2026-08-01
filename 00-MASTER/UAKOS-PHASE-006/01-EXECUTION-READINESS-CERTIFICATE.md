@@ -18,7 +18,7 @@
 | Dependency closure | CLOSED (1194 nodes / 12819 edges) |
 | Freeze seals A–E valid | 2/5 |
 | Execution Authorization | **NOT_AUTHORIZED** |
-| FREEZE F seal (sha256) | `3ca18fb916575301ba103b0e618af0ab050ac4b6641064e510e25d72deb1b9a7` |
+| FREEZE F seal (sha256) | `1975aae86814b1b6470f6116dc8eb8dbf48f48f804749ea69601d8607396c98e` |
 
 ## Evidence
 

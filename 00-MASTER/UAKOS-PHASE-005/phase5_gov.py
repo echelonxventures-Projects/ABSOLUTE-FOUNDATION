@@ -500,7 +500,7 @@ def main():
     passed = all_authorized and all_pkg_gated
     by_exec = Counter(u["executor"] for u in units)
     seal = hashlib.sha256(json.dumps(
-        {"base": BASE, "units": N, "packages": len(packages), "waves": waves,
+        {"units": N, "packages": len(packages), "waves": waves,
          "by_exec": dict(by_exec)}, sort_keys=True).encode()).hexdigest()
     b = hdr("08 — Phase-005 Completion Report", "Determination, method, success criteria, FREEZE E certification.")
     b += (f"## Determination: **{'COMPLETE — PASS' if passed else 'INCOMPLETE'}**\n\n"

@@ -17,7 +17,7 @@
 | Software-eligible objects | 133 |
 | Corrected IMPLEMENTATION_GAP | 46 (was 109) |
 | Objects reclassified (gap changed) | 141 |
-| FREEZE C2 seal (sha256) | `7c3e0d8cc3c67bcb507a8ea7fdc9b247d749333380a3a6ec277d59e5a1ade61d` |
+| FREEZE C2 seal (sha256) | `0d156091d62135906b727628170f82fb8b6ba12a976ff44790f5f4310a872718` |
 
 ### Corrected gap distribution
 

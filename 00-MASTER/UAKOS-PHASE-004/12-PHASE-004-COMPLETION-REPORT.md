@@ -21,7 +21,7 @@
 | PARTIALLY_READY | 1 |
 | UGDG | wave-layered DAG, 0 cycles |
 | Critical path | 5 serial waves |
-| FREEZE D seal (sha256) | `60eef014415108beabe10b60e68b98907980747e2f3b05f43d0aae0b85fc8703` |
+| FREEZE D seal (sha256) | `4f3b9979a7b0928eb928e20ea3dd4abe8a9d6647c6ae53314b4e95f7bcad59d5` |
 
 ## Method
 
@@ -61,6 +61,6 @@ Consumed FREEZE A + FREEZE B + FREEZE C2 (PHASE-003R realization model). Every o
 
 ## FREEZE D — Implementation Execution Blueprint
 
-**FREEZE D is CERTIFIED and IMMUTABLE at seal `60eef014415108beabe10b60e68b98907980747e2f3b05f43d0aae0b85fc8703`.** The complete Constitutional Implementation Execution Blueprint (units, sequence, waves, dependency resolution, validation + certification planning, critical path, UGDG, master blueprint) is established. Implementation execution SHALL originate exclusively from FREEZE A + FREEZE B + FREEZE C2 + FREEZE D. **Implementation execution may now commence under this plan.**
+**FREEZE D is CERTIFIED and IMMUTABLE at seal `4f3b9979a7b0928eb928e20ea3dd4abe8a9d6647c6ae53314b4e95f7bcad59d5`.** The complete Constitutional Implementation Execution Blueprint (units, sequence, waves, dependency resolution, validation + certification planning, critical path, UGDG, master blueprint) is established. Implementation execution SHALL originate exclusively from FREEZE A + FREEZE B + FREEZE C2 + FREEZE D. **Implementation execution may now commence under this plan.**
 
 _READ-ONLY: no implementation, code generation, repository modification, refactor, constitution change, or new knowledge objects were produced._

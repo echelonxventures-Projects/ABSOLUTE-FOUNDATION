@@ -525,7 +525,7 @@ def main():
     single = all(r["gap"] in GAP_ORDER for r in ROWS)
     passed = single and BY_GAP.get("UNKNOWN", 0) == 0
     seal = hashlib.sha256(json.dumps(
-        {"base": BASE, "by_gap": dict(BY_GAP), "by_ready": dict(BY_READY), "dep": dep["closed"], "n": N},
+        {"by_gap": dict(BY_GAP), "by_ready": dict(BY_READY), "dep": dep["closed"], "n": N},
         sort_keys=True).encode()).hexdigest()
     b = hdr("12 — Phase-003 Completion Report", "Determination, method, success criteria, and FREEZE C certification.")
     b += (f"## Determination: **{'COMPLETE — PASS' if passed else 'INCOMPLETE'}**\n\n"
