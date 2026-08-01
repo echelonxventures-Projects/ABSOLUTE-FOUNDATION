@@ -307,7 +307,7 @@
       "id": "QG-05",
       "gate": "no-dimension-declares-a-ceiling",
       "blocking": true,
-      "criterion": "A dimension declaring a closed value set or a finite upper bound is refused at admission."
+      "criterion": "A dimension declaring a closed value set, or a finite bound in either direction (ceiling or floor), is refused at admission."
     },
     {
       "id": "QG-06",

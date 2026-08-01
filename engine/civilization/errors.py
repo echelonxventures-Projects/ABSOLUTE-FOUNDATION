@@ -25,11 +25,13 @@ class DimensionUnknownError(CivilizationError):
 
 
 class DimensionClosedError(CivilizationError):
-    """A dimension declared a closed value set, or a finite upper bound.
+    """A dimension declared a closed value set, or a finite bound in either direction.
 
-    The Universal Dimension Model admits no dimension that legislates its own ceiling: a
-    dimension describes an axis, and the axis is unbounded. A finite value set belongs to a
-    *policy over* a dimension, never to the dimension itself.
+    The Universal Dimension Model admits no dimension that legislates its own bound: a
+    dimension describes an axis, and the axis is unbounded above *and* below. A finite value
+    set, a ceiling, and a floor all belong to a *policy over* a dimension, never to the
+    dimension itself — including a bound imposed by physical reality, which is a
+    configuration bound on a policy rather than a property of the axis.
     """
 
 

@@ -108,14 +108,27 @@ DIMENSION_ATTRIBUTE_KEYS: tuple[str, ...] = (
 )
 
 #: Attribute keys a declaration may NOT carry. A dimension that legislates its own finite
-#: value set or upper bound contradicts the Universal Open-World Expansion Principle, so it
-#: is refused at admission rather than accepted and documented as an exception.
+#: value set, or a finite bound in *either* direction, contradicts the Universal Open-World
+#: Expansion Principle, so it is refused at admission rather than accepted and documented as
+#: an exception.
+#:
+#: The principle is directional-symmetric by its own terms — "no intrinsic limit in any
+#: architectural direction" (DEC-MCOS-07) — so a floor is refused on the same ground as a
+#: ceiling. A bound imposed by physical reality is not excluded from the model: it belongs to
+#: a *policy over* a dimension, which is where a closed value set already belongs, never to
+#: the axis itself.
 FORBIDDEN_DIMENSION_KEYS: tuple[str, ...] = (
+    # closed value set
     "closed_values",
     "allowed_values",
     "enum",
+    # ceiling
     "max_cardinality",
     "upper_bound",
+    # floor — the mirror of the two ceiling keys above
+    "min_cardinality",
+    "lower_bound",
+    "minimum_values",
 )
 
 

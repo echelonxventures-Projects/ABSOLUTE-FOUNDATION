@@ -18,8 +18,8 @@ admission rather than asserted in prose:
 
     * **every dimension satisfies every mandatory facet** — a declaration that omits one is
       refused (:data:`~engine.civilization.metatypes.DIMENSION_FACETS`); and
-    * **no dimension legislates its own ceiling** — a declaration carrying a closed value
-      set or a finite upper bound is refused
+    * **no dimension legislates its own bound** — a declaration carrying a closed value
+      set, a ceiling, or a floor is refused
       (:data:`~engine.civilization.metatypes.FORBIDDEN_DIMENSION_KEYS`).
 
 Unlimited specialization and generalization are the same relation read in two directions
@@ -72,7 +72,7 @@ class DimensionRegistry:
         existing = set(gov.admission.constraint_names())
         for name, check in (
             ("dimension-facets-complete", self._check_facets_complete),
-            ("dimension-declares-no-ceiling", self._check_no_ceiling),
+            ("dimension-declares-no-ceiling", self._check_no_bound),
         ):
             if name not in existing:
                 gov.register_constraint(Constraint(name, check))
@@ -88,14 +88,14 @@ class DimensionRegistry:
             return True, ""
         return False, f"dimension omits mandatory facet(s): {missing}"
 
-    def _check_no_ceiling(self, candidate: MetaObject, _view: Any) -> tuple[bool, str]:
-        """A dimension may not legislate a closed value set or a finite upper bound."""
+    def _check_no_bound(self, candidate: MetaObject, _view: Any) -> tuple[bool, str]:
+        """A dimension may not legislate a closed value set, or a bound in either direction."""
         if candidate.namespace != DIMENSION_NS:
             return True, ""
         offending = sorted(set(FORBIDDEN_DIMENSION_KEYS) & set(candidate.attributes))
         if not offending:
             return True, ""
-        return False, f"dimension declares a ceiling: {offending}"
+        return False, f"dimension declares a bound: {offending}"
 
     # -- registration ----------------------------------------------------------
 
@@ -130,7 +130,7 @@ class DimensionRegistry:
         offending = sorted(set(FORBIDDEN_DIMENSION_KEYS) & set(attrs))
         if offending:
             raise DimensionClosedError(
-                "a dimension may not declare a closed value set or a finite upper bound",
+                "a dimension may not declare a closed value set or a finite bound",
                 dimension=key,
                 offending=offending,
             )

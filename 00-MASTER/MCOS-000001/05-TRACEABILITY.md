@@ -5,7 +5,7 @@
 - Layer home: `engine/civilization` (v1.0.0)
 - Realizes over: engine/kernel (PROGRAM-002, immutable baseline)
 - Verdict: **CONSTITUTIONALLY-COMPLIANT**
-- Report hash: `85f8afbda87be2026f88c4ef89baa0f19b0c90889b94ab992fdb7b30998d4013`
+- Report hash: `639fbed4a0b610478637fb11f07a08a1842d3e9b595e5d1d53861d9f00a3ebd3`
 
 ## Responsibility → Home → Disposition
 
@@ -46,13 +46,13 @@
 | no-finite-enumeration | no Enum/IntEnum/StrEnum/Flag class in the layer |
 | no-hardcoded-dimension-assumptions | 21 prohibited tokens; vocabulary intersection [] |
 | prohibited-tokens-representable-by-registration | all 21 tokens admitted by registration; missing [] |
-| no-dimension-declares-a-ceiling | 5/5 ceiling declarations refused at admission |
+| no-dimension-declares-a-ceiling | 8/8 bound declarations refused at admission |
 | no-fixed-pipeline | registering a capability changed the plan (2 -> 3 steps) with no code change; 2 strategies registered; the same declarations yield different plans per strategy |
 | no-finite-operating-system-catalogue | generated 'OS-cfe22538'; catalogue 0 -> 1; lineage rooted at the kernel |
 | no-finite-generation-chain | generation depth 9 -> 10 by registration alone |
 | nothing-bypasses-the-meta-kernel | 9 generated records and 1 composed step(s), every one admitted through the kernel registry and rooted at UMK-METATYPE-4d7c15ebcab0 |
 | no-parallel-constitutional-authority | declared authority 'NONE'; all three components admit through the single kernel registry, so no parallel authority and no second registry exist |
-| no-implementation-leakage | independent platform snapshot hashes match: 8b1b1e59a09c38e4… |
+| no-implementation-leakage | independent platform snapshot hashes match: 2e0ce7ce188ccc5c… |
 | unknown-future-compatibility | 12/12 categories and 5/5 operating systems admitted by registration; layer unchanged=True, kernel unchanged=True |
 
 ## Success-criterion category → admitted dimension

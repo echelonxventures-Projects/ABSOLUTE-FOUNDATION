@@ -1,4 +1,4 @@
-"""The Universal Dimension Model: open by registration, and refusing its own ceiling."""
+"""The Universal Dimension Model: open by registration, and refusing its own bounds."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ from engine.civilization.errors import DimensionClosedError, DimensionUnknownErr
 from engine.civilization.metatypes import (
     DIMENSION_META_NS,
     DIMENSION_NS,
+    FORBIDDEN_DIMENSION_KEYS,
     SPECIALIZES,
     dimension_facet_keys,
 )
@@ -29,11 +30,23 @@ def test_a_previously_unknown_dimension_is_admitted_by_registration():
     assert declared.attributes["facets"] == list(dimension_facet_keys())
 
 
-def test_no_dimension_may_declare_a_closed_value_set_or_upper_bound():
+def test_no_dimension_may_declare_a_closed_value_set_or_any_bound():
     registry = DimensionRegistry()
-    for key in ("closed_values", "allowed_values", "enum", "max_cardinality", "upper_bound"):
+    # Derived from the declared set, so a newly forbidden key is covered without a test edit.
+    for key in FORBIDDEN_DIMENSION_KEYS:
         with pytest.raises(DimensionClosedError):
             registry.register_dimension(f"Bounded-{key}", attributes={key: [1, 2]})
+    assert registry.dimensions() == ()
+
+
+def test_the_bound_prohibition_is_directional_symmetric():
+    """A floor is refused on the same ground as a ceiling (DEC-MCOS-07: any direction)."""
+    registry = DimensionRegistry()
+    for ceiling, floor in (("max_cardinality", "min_cardinality"), ("upper_bound", "lower_bound")):
+        assert ceiling in FORBIDDEN_DIMENSION_KEYS
+        assert floor in FORBIDDEN_DIMENSION_KEYS
+        with pytest.raises(DimensionClosedError):
+            registry.register_dimension(f"Floor-{floor}", attributes={floor: 3})
     assert registry.dimensions() == ()
 
 
@@ -158,17 +171,22 @@ def test_the_bound_invariants_refuse_a_malformed_declaration_at_admission():
         )
 
 
-def test_the_bound_invariants_refuse_a_ceiling_at_admission():
-    registry = DimensionRegistry()
-    kernel = registry.kernel
-    kernel.register_metatype("Ceiling", namespace=DIMENSION_META_NS)
-    with pytest.raises(Exception, match="admission denied"):
-        kernel.register_object(
-            metatype="Ceiling",
-            natural_key="Ceiling",
-            namespace=DIMENSION_NS,
-            attributes={"facets": list(dimension_facet_keys()), "upper_bound": 3},
-        )
+def test_the_bound_invariants_refuse_a_bound_at_admission():
+    """The kernel-level constraint refuses a bound in either direction, not only a ceiling."""
+    for label, attrs in (
+        ("Ceiling", {"upper_bound": 3}),
+        ("Floor", {"lower_bound": 3}),
+    ):
+        registry = DimensionRegistry()
+        kernel = registry.kernel
+        kernel.register_metatype(label, namespace=DIMENSION_META_NS)
+        with pytest.raises(Exception, match="admission denied"):
+            kernel.register_object(
+                metatype=label,
+                natural_key=label,
+                namespace=DIMENSION_NS,
+                attributes={"facets": list(dimension_facet_keys()), **attrs},
+            )
 
 
 def test_validate_defers_to_the_kernel_audit_chain(monkeypatch):

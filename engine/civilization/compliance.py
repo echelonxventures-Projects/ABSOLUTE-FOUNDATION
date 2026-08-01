@@ -34,6 +34,7 @@ from engine.civilization.generation import GENERATION_STRATA, ConstitutionalGene
 from engine.civilization.mcos import MetaCivilizationPlatform
 from engine.civilization.metatypes import (
     DIMENSION_FACETS,
+    FORBIDDEN_DIMENSION_KEYS,
     dimension_facet_keys,
     facet_keys,
 )
@@ -270,17 +271,19 @@ def _gate_prohibited_representable() -> tuple[bool, str]:
 
 
 def _gate_no_dimension_ceiling() -> tuple[bool, str]:
-    """A dimension declaring a closed value set or an upper bound is refused."""
+    """A dimension declaring a closed value set, or a bound in either direction, is refused."""
     registry = DimensionRegistry()
     refused = 0
-    attempted = ("closed_values", "allowed_values", "enum", "max_cardinality", "upper_bound")
+    # Derived from the single declared set, so a newly forbidden key is covered without a
+    # gate edit. Re-listing the keys here would be a second enumeration of the same rule.
+    attempted = FORBIDDEN_DIMENSION_KEYS
     for key in attempted:
         try:
             registry.register_dimension(f"Bounded-{key}", attributes={key: [1, 2, 3]})
         except DimensionClosedError:
             refused += 1
     ok = refused == len(attempted)
-    return ok, f"{refused}/{len(attempted)} ceiling declarations refused at admission"
+    return ok, f"{refused}/{len(attempted)} bound declarations refused at admission"
 
 
 def _gate_no_fixed_pipeline() -> tuple[bool, str]:
