@@ -75,6 +75,21 @@
       "id": "VOC-EV-DRIFT",
       "term": "Evidence Drift",
       "definition": "Divergence between recorded evidence and the state it claims to evidence: a verdict, measurement or certification asserting a repository state that re-execution does not reproduce. An evidence artifact that records an observation invalidated by its own writing is permanently in Evidence Drift."
+    },
+    {
+      "id": "VOC-PRODUCER",
+      "term": "Producer",
+      "definition": "An executable the repository itself can invoke that writes tracked repository content. Both halves are measured, never assumed: invocability is read from the repository's own Execution Surface, and writing is OBSERVED by executing the candidate and comparing tracked content. Neither half appeals to a filename, a directory, a naming convention or a list, so the definition admits producers that do not exist yet."
+    },
+    {
+      "id": "VOC-EXEC-SURFACE",
+      "term": "Execution Surface",
+      "definition": "The set of invocations the repository declares it performs: the recipe lines of its build entry point and the steps of its continuous-integration workflows, plus the argv of every declared pipeline stage. It is the repository's own statement of what it executes, maintained for its own reasons, and is therefore a discovery authority that cannot fall out of date without the repository ceasing to build."
+    },
+    {
+      "id": "VOC-PRODUCER-COMPLETE",
+      "term": "Producer-Complete Repository",
+      "definition": "A repository in which every Producer discovered from the Execution Surface is a declared pipeline stage, every path any Producer writes lies inside exactly one declared write zone, and no discovered candidate remains unprobed. Producer completeness is thus a MEASUREMENT over the repository rather than a list somebody maintains, and it is re-measured on every gate run."
     }
   ],
   "$principle_comment": "The permanent principle. RFP-1 is the closure condition. RFP-2..RFP-5 are the admission rules that make the condition REACHABLE — they forbid, by construction, the topologies under which no fixed point exists. RFP-6..RFP-7 bind and inherit.",
@@ -133,10 +148,11 @@
     {
       "id": "RFP-6",
       "title": "Producers Are Declared, Never Discovered Ad Hoc",
-      "rule": "Every producer that writes tracked repository content must appear as a stage of the declared pipeline. A producer absent from the pipeline is unverifiable and its output is therefore not an Acceptable Repository State.",
-      "rationale": "A fixed point can only be asserted over a known pipeline. Undeclared regeneration is precisely how the CK-REG-DRIFT split reached four sealed commits unnoticed.",
+      "rule": "Every producer that writes tracked repository content must appear as a stage of the declared pipeline. A producer absent from the pipeline is unverifiable and its output is therefore not an Acceptable Repository State. Completeness of the pipeline is itself a measured property: the repository DISCOVERS its own producers from its Execution Surface and proves, by execution, that each one is declared. Declaration is never satisfied by a list somebody remembered to update.",
+      "rationale": "A fixed point can only be asserted over a known pipeline. Undeclared regeneration is precisely how the CK-REG-DRIFT split reached four sealed commits unnoticed. Discovery closes the residual hole in the original enforcement: attributing residue can only convict a producer that RAN inside the declared pipeline, so a producer omitted from the pipeline never ran and was never observed. Measuring the Execution Surface instead makes omission itself the detectable event.",
       "enforced_by": [
-        "CK-FIXED-POINT"
+        "CK-FIXED-POINT",
+        "CK-PRODUCER-COMPLETE"
       ]
     },
     {
@@ -283,6 +299,42 @@
       "detector": "unattributed_residue",
       "signature": "Tracked content changed during a pipeline pass but no declared stage's write zone contains it.",
       "remediation": "Declare the producer as a pipeline stage, or stop it from writing tracked content."
+    },
+    {
+      "id": "CYC-PRODUCER",
+      "name": "Undiscovered producer",
+      "principle": "RFP-6",
+      "severity": "CRITICAL",
+      "detector": "undeclared_producer",
+      "signature": "An executable named by the repository's own Execution Surface writes tracked content when executed, yet is not a stage of the declared pipeline. The proof is behavioural: the candidate was run in isolation and its writes were measured, so the finding never rests on where the file lives or what it is called.",
+      "remediation": "Declare the producer as a pipeline stage with its write zone, positioned after the stages whose output it consumes; or stop it writing tracked content."
+    },
+    {
+      "id": "CYC-UNGOVERNED",
+      "name": "Producer outside write governance",
+      "principle": "RFP-6",
+      "severity": "CRITICAL",
+      "detector": "producer_write_outside_zone",
+      "signature": "A path a producer was OBSERVED to write lies inside no declared write zone. The artifact therefore has no constitutional owner and no pipeline coverage, whether or not the producer that wrote it is declared.",
+      "remediation": "Extend the owning stage's declared write zone to cover the path, or move the output inside the zone its producer already owns."
+    },
+    {
+      "id": "CYC-ZONE",
+      "name": "Ambiguous write scope",
+      "principle": "RFP-6",
+      "severity": "HIGH",
+      "detector": "overlapping_write_zones",
+      "signature": "Two stages declare write zones where one is a prefix of the other, so a path inside the overlap belongs to more than one write scope and 'exactly one owner' is not well-defined. Attribution would then depend on the order zones happen to be read.",
+      "remediation": "Make the declared write zones pairwise disjoint: narrow the broader zone, or merge the stages that genuinely share an output surface."
+    },
+    {
+      "id": "CYC-UNPROBED",
+      "name": "Unprobed producer candidate",
+      "principle": "RFP-6",
+      "severity": "HIGH",
+      "detector": "unprobed_producer",
+      "signature": "A discovered candidate could not be executed and does not participate in the declared re-entrancy protocol, so whether it writes tracked content is unknown. Producer completeness may not be asserted over an executable the repository cannot run: an unprobed candidate is an undetermined verdict, and treating it as innocent would make the whole measurement fail open. A candidate that aborts BECAUSE the declared guard is armed is not unprobed — it is self-excluded by the repository's own mechanism and is accounted for as such.",
+      "remediation": "Make the candidate runnable from a clean checkout, declare it as a stage so the pipeline runs it, or give it the inputs its earlier stages owe it."
     }
   ],
   "$lifecycle_comment": "Phase 1. The canonical implementation lifecycle. The final four steps are what this programme adds: closure is no longer asserted at certification, it is asserted after the repository has been proven to reproduce itself from the committed state.",
@@ -593,6 +645,69 @@
       }
     ]
   },
+  "$producer_discovery_comment": "Phase 5 / RFP-6, the DISCOVERY half. CYC-UNDECLARED attributes residue produced during a declared pass, so it can only convict a producer that the pipeline already runs; a producer omitted from the pipeline never runs and is invisible to it. This section declares how the repository finds its own producers instead, so pipeline completeness is measured on every gate run rather than maintained by hand. Nothing here enumerates a producer. 'surface_authorities' are files the repository already keeps in order to build and to run CI — they cannot go stale without the build breaking. 'entry_point_signatures' are language-level structural properties (a module's __main__ guard, a file's shebang), not naming conventions: they classify files that do not exist yet, and they deliberately do NOT match a role-suffixed filename. Self-exclusion is structural too — a candidate inside this programme's own home is skipped because the aggregate may not enter its own pipeline (CYC-RECURSE), and the declared re-entrancy guard makes any other recursive aggregate abort itself without being named here.",
+  "producer_discovery": {
+    "surface_authorities": [
+      {
+        "id": "SURF-BUILD",
+        "path": "Makefile",
+        "select": "recipe",
+        "recipe_prefix": "\t",
+        "comment_prefix": "#",
+        "rationale": "The canonical developer entry point. Every invocation the repository performs locally is a recipe line here, so an executable the repository runs but does not declare is visible at this surface."
+      },
+      {
+        "id": "SURF-CI",
+        "glob": ".github/workflows/*.yml",
+        "select": "all",
+        "comment_prefix": "#",
+        "rationale": "The invocations the repository performs in continuous integration. A producer wired into a gate but omitted from the pipeline is visible only here."
+      }
+    ],
+    "entry_point_signatures": [
+      {
+        "id": "EP-MODULE-MAIN",
+        "suffix": ".py",
+        "structural_marker": "__name__\\s*==\\s*['\"]__main__['\"]",
+        "interpreter": "$PY",
+        "rationale": "The language's own definition of a directly-executable module. A library lacks the guard and is therefore never a candidate, which is why the signature distinguishes executables from modules without appealing to their names."
+      },
+      {
+        "id": "EP-SHEBANG",
+        "shebang": true,
+        "rationale": "A file that declares its own interpreter declares itself executable. The interpreter is read from the file, so no interpreter is named here or in code."
+      }
+    ],
+    "probe": {
+      "isolation": "worktree",
+      "seed_with_declared_stages": true,
+      "seed_skips_heavy": true,
+      "timeout_seconds": 900,
+      "rationale": "Producer identity is proven by execution, so the execution must be harmless and faithful. Harmless: every probe runs in a detached worktree checked out at HEAD, so the live tree is never written and a mis-behaving candidate cannot damage it. Faithful: the declared stages are run first, because a producer that consumes an earlier stage's output would otherwise fail for want of its input and be misread as harmless. A candidate that still cannot run is reported as unprobed, never as innocent (CYC-UNPROBED) — the measurement fails closed.",
+      "classification": [
+        {
+          "id": "PRB-PRODUCER",
+          "outcome": "PRODUCER",
+          "meaning": "the candidate wrote tracked content, so RFP-6 binds it and it must be a declared stage"
+        },
+        {
+          "id": "PRB-INERT",
+          "outcome": "INERT",
+          "meaning": "the candidate ran successfully and wrote no tracked content, so it is not a producer and RFP-6 does not reach it"
+        },
+        {
+          "id": "PRB-SELF-EXCLUDED",
+          "outcome": "SELF-EXCLUDED",
+          "meaning": "the candidate refused to run because the declared re-entrancy guard was armed. It has excluded itself from the fixed-point pipeline through the repository's own guard protocol, which is what the recursive-generator remediation requires of an aggregate. Recognised from the DECLARED guard variable alone, so no aggregate is named anywhere"
+        },
+        {
+          "id": "PRB-UNPROBED",
+          "outcome": "UNPROBED",
+          "meaning": "the candidate could not be executed and does not participate in the guard protocol, so its status is undetermined. Reported as a blocking finding, never as innocence — otherwise the whole measurement would fail open"
+        }
+      ]
+    }
+  },
   "$closure_comment": "Phase 3. The mandatory success criteria of G-15. Every criterion is measured, never asserted. 'measure' names the observation; 'expect' is the only accepted value.",
   "closure_criteria": [
     {
@@ -649,6 +764,34 @@
       "id": "CLO-08",
       "criterion": "all residue is attributable to a declared producer",
       "measure": "unattributed_paths",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-09",
+      "criterion": "every discovered producer is a declared pipeline stage",
+      "measure": "undeclared_producers",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-10",
+      "criterion": "every path a producer writes lies inside a declared write zone",
+      "measure": "producer_writes_outside_zones",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-11",
+      "criterion": "declared write zones are pairwise disjoint, so ownership is exactly one",
+      "measure": "overlapping_write_zones",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-12",
+      "criterion": "no discovered producer candidate is left unprobed",
+      "measure": "unprobed_producer_candidates",
       "expect": 0,
       "blocking": true
     }

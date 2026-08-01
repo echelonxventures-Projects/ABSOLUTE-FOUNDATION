@@ -25,6 +25,10 @@ It executes the declared pipeline **3 times** over the committed HEAD and requir
 | CLO-06 | the repository is byte-identical after every declared pass | `non_fixed_point_passes` | 0 | yes |
 | CLO-07 | no self-reference cycle is detected | `cycles_detected` | 0 | yes |
 | CLO-08 | all residue is attributable to a declared producer | `unattributed_paths` | 0 | yes |
+| CLO-09 | every discovered producer is a declared pipeline stage | `undeclared_producers` | 0 | yes |
+| CLO-10 | every path a producer writes lies inside a declared write zone | `producer_writes_outside_zones` | 0 | yes |
+| CLO-11 | declared write zones are pairwise disjoint, so ownership is exactly one | `overlapping_write_zones` | 0 | yes |
+| CLO-12 | no discovered producer candidate is left unprobed | `unprobed_producer_candidates` | 0 | yes |
 
 ## The declared pipeline
 

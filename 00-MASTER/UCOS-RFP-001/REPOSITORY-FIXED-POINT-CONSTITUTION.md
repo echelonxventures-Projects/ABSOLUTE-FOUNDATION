@@ -15,7 +15,7 @@
 | AUTHORITY | NONE — DERIVED TRUTH. This programme legislates the closure CONDITION; it ratifies nothing, freezes nothing and owns no capability. |
 | ORIGIN | CK-REG-DRIFT. A generated artifact carrying repository-derived state (HEAD, commit metadata, projection hashes) was admitted into the registration corpus, creating a registration relation with no fixed point. This declaration makes that class of topology constitutionally impossible rather than individually repaired. |
 | DECLARATION | `00-MASTER/UCOS-RFP-001/rfp-declaration.json` |
-| SEAL | `40fddf13156871af` |
+| SEAL | `4be20620fa17c94a` |
 
 ## Vocabulary
 
@@ -32,6 +32,9 @@
 | VOC-REG-DRIFT | **Registration Drift** | Divergence between the registered corpus and the artifacts on disk: an artifact's recorded identity, content hash or classification no longer matches the artifact. Owned and detected by REG-AUTO-001 (register.sh --guard / CK-REG-DRIFT). |
 | VOC-PROJ-DRIFT | **Projection Drift** | Divergence between a derived projection and the canonical source it projects: the projection was not regenerated after its source changed, or was regenerated from a stale reading of it. |
 | VOC-EV-DRIFT | **Evidence Drift** | Divergence between recorded evidence and the state it claims to evidence: a verdict, measurement or certification asserting a repository state that re-execution does not reproduce. An evidence artifact that records an observation invalidated by its own writing is permanently in Evidence Drift. |
+| VOC-PRODUCER | **Producer** | An executable the repository itself can invoke that writes tracked repository content. Both halves are measured, never assumed: invocability is read from the repository's own Execution Surface, and writing is OBSERVED by executing the candidate and comparing tracked content. Neither half appeals to a filename, a directory, a naming convention or a list, so the definition admits producers that do not exist yet. |
+| VOC-EXEC-SURFACE | **Execution Surface** | The set of invocations the repository declares it performs: the recipe lines of its build entry point and the steps of its continuous-integration workflows, plus the argv of every declared pipeline stage. It is the repository's own statement of what it executes, maintained for its own reasons, and is therefore a discovery authority that cannot fall out of date without the repository ceasing to build. |
+| VOC-PRODUCER-COMPLETE | **Producer-Complete Repository** | A repository in which every Producer discovered from the Execution Surface is a declared pipeline stage, every path any Producer writes lies inside exactly one declared write zone, and no discovered candidate remains unprobed. Producer completeness is thus a MEASUREMENT over the repository rather than a list somebody maintains, and it is re-measured on every gate run. |
 
 ## Principle
 
@@ -77,11 +80,11 @@
 
 ### RFP-6 — Producers Are Declared, Never Discovered Ad Hoc
 
-**Rule.** Every producer that writes tracked repository content must appear as a stage of the declared pipeline. A producer absent from the pipeline is unverifiable and its output is therefore not an Acceptable Repository State.
+**Rule.** Every producer that writes tracked repository content must appear as a stage of the declared pipeline. A producer absent from the pipeline is unverifiable and its output is therefore not an Acceptable Repository State. Completeness of the pipeline is itself a measured property: the repository DISCOVERS its own producers from its Execution Surface and proves, by execution, that each one is declared. Declaration is never satisfied by a list somebody remembered to update.
 
-**Why.** A fixed point can only be asserted over a known pipeline. Undeclared regeneration is precisely how the CK-REG-DRIFT split reached four sealed commits unnoticed.
+**Why.** A fixed point can only be asserted over a known pipeline. Undeclared regeneration is precisely how the CK-REG-DRIFT split reached four sealed commits unnoticed. Discovery closes the residual hole in the original enforcement: attributing residue can only convict a producer that RAN inside the declared pipeline, so a producer omitted from the pipeline never ran and was never observed. Measuring the Execution Surface instead makes omission itself the detectable event.
 
-*Cycle class:* — · *Enforced by:* `CK-FIXED-POINT`
+*Cycle class:* — · *Enforced by:* `CK-FIXED-POINT`, `CK-PRODUCER-COMPLETE`
 
 ### RFP-7 — Universal Inheritance, No Opt-Out
 

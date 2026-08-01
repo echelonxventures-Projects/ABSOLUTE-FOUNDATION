@@ -17,6 +17,7 @@ file and never to this file (PR-07 Zero Enumeration, mechanically proven by
     rfp_engine.py --check-write-scope    forbidden-write guard
     rfp_engine.py --check-determinism    self-determinism (byte-identical rendering)
     rfp_engine.py --check-self-compliance this engine obeys RFP-2 and RFP-3 itself
+    rfp_engine.py --check-producer-completeness  discover every producer, prove each declared
 
 Exit semantics:
     0  the asserted property holds
@@ -42,8 +43,10 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -60,10 +63,15 @@ def fail_closed(reason: str) -> "NoReturn":  # type: ignore[valid-type]
     raise SystemExit(2)
 
 
-def git(*args: str, strip: bool = True) -> str:
+def git(*args: str, strip: bool = True, root: Path | None = None) -> str:
     try:
         res = subprocess.run(
-            ["git", *args], cwd=REPO, capture_output=True, text=True, timeout=300, check=False
+            ["git", *args],
+            cwd=root or REPO,
+            capture_output=True,
+            text=True,
+            timeout=300,
+            check=False,
         )
     except (OSError, subprocess.SubprocessError):
         return ""
@@ -107,10 +115,10 @@ def programme_id(decl: dict) -> str:
 
 
 # ------------------------------------------------------- repository observation
-def porcelain() -> list[tuple[str, str]]:
+def porcelain(root: Path | None = None) -> list[tuple[str, str]]:
     """(status, path) for every entry git reports. Ignored files never appear, so
     the ignore authority is honoured without this module holding any path."""
-    raw = git("status", "--porcelain", strip=False)
+    raw = git("status", "--porcelain", strip=False, root=root)
     out: list[tuple[str, str]] = []
     for line in raw.splitlines():
         if not line.strip():
@@ -178,7 +186,7 @@ def resolve_argv(argv: list[str]) -> list[str]:
     return [sys.executable if token == _PY_TOKEN else str(token) for token in argv]
 
 
-def run_stage(stage: dict, env: dict[str, str]) -> tuple[int, str]:
+def run_stage(stage: dict, env: dict[str, str], root: Path | None = None) -> tuple[int, str]:
     argv = resolve_argv(list(stage.get("argv") or []))
     if not argv:
         fail_closed(f"stage declares no argv: {stage.get('id')}")
@@ -193,7 +201,13 @@ def run_stage(stage: dict, env: dict[str, str]) -> tuple[int, str]:
         env = {**env, **{str(k): str(v) for k, v in dict(declared).items()}}
     try:
         res = subprocess.run(
-            argv, cwd=REPO, capture_output=True, text=True, timeout=3600, check=False, env=env
+            argv,
+            cwd=root or REPO,
+            capture_output=True,
+            text=True,
+            timeout=3600,
+            check=False,
+            env=env,
         )
     except (OSError, subprocess.SubprocessError) as exc:
         return 255, f"{exc}"
@@ -220,11 +234,12 @@ def nested(decl: dict) -> bool:
     return bool(guard) and bool(os.environ.get(str(guard)))
 
 
-def snapshot_tracked() -> dict[str, str]:
+def snapshot_tracked(root: Path | None = None) -> dict[str, str]:
     """path -> sha256 of working-tree content, for every tracked file."""
+    base = root or REPO
     out: dict[str, str] = {}
-    for rel in (p for p in git("ls-files", "-z").split("\0") if p):
-        target = REPO / rel
+    for rel in (p for p in git("ls-files", "-z", root=base).split("\0") if p):
+        target = base / rel
         try:
             out[rel] = hashlib.sha256(target.read_bytes()).hexdigest()
         except OSError:
@@ -306,6 +321,352 @@ def registration_owner(stages: list[dict]) -> str | None:
     return str(ranked[0].get("id")) if ranked and len(ranked[0].get("writes") or []) > 1 else None
 
 
+# ------------------------------------------------------- producer discovery
+# RFP-6 obliges every producer of tracked content to be a declared stage, but
+# attributing residue can only convict a producer the pipeline already RUNS. A
+# producer omitted from the pipeline never runs, so omission — the very defect the
+# rule exists to forbid — was the one thing the rule could not see.
+#
+# The repair is to stop trusting the pipeline as the list of producers and to
+# DISCOVER producers from the repository instead. Discovery uses two authorities,
+# both declared, neither of which is a list of producers:
+#
+#   the Execution Surface     what the repository says it executes — recipe lines
+#                             and CI steps. It cannot go stale without the build
+#                             breaking, which is what makes it a usable authority.
+#   entry-point signatures    language-level structure (a module's __main__ guard,
+#                             a file's shebang). Not a naming convention: a
+#                             role-suffixed filename is never consulted, so files
+#                             that do not exist yet are classified correctly.
+#
+# Whether a candidate is a producer is then PROVEN by running it and measuring
+# what it wrote. Nothing infers a producer from where it lives or what it is
+# called, so no naming convention, allowlist or denylist appears here or in data.
+_TOKEN = re.compile(r"[A-Za-z0-9_./-]+")
+_SEG = re.compile(r"&&|\|\||[;|]")
+_CUT = re.compile(r">|<|\$\(|`")
+
+
+def discovery(decl: dict) -> dict:
+    disc = decl.get("producer_discovery")
+    if not isinstance(disc, dict) or not disc.get("surface_authorities"):
+        fail_closed("declaration declares no producer-discovery authorities")
+    if not disc.get("entry_point_signatures"):
+        fail_closed("declaration declares no entry-point signatures")
+    return disc
+
+
+def surface_lines(disc: dict) -> list[str]:
+    """Every executable line of the repository's declared Execution Surface.
+
+    Comments are stripped before tokenising, so a path merely DISCUSSED in a
+    comment is never mistaken for an invocation the repository performs.
+    """
+    lines: list[str] = []
+    for auth in disc.get("surface_authorities") or []:
+        if auth.get("path"):
+            targets = [REPO / str(auth["path"])]
+        elif auth.get("glob"):
+            targets = sorted(REPO.glob(str(auth["glob"])))
+        else:
+            fail_closed(f"surface authority declares neither path nor glob: {auth.get('id')}")
+        recipe_only = str(auth.get("select") or "all") == "recipe"
+        recipe_prefix = str(auth.get("recipe_prefix") or "")
+        comment = str(auth.get("comment_prefix") or "")
+        for target in targets:
+            try:
+                text = target.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            for raw in text.splitlines():
+                if recipe_only and recipe_prefix and not raw.startswith(recipe_prefix):
+                    continue
+                line = raw
+                if comment:
+                    if line.strip().startswith(comment):
+                        continue
+                    cut = line.find(comment)
+                    if cut >= 0:
+                        line = line[:cut]
+                if line.strip():
+                    lines.append(line)
+    if not lines:
+        fail_closed("the declared authorities resolved to no Execution Surface")
+    return lines
+
+
+def entry_signature(disc: dict, rel: str, root: Path) -> dict | None:
+    """The declared signature under which `rel` is a directly-executable file."""
+    target = root / rel
+    for sig in disc.get("entry_point_signatures") or []:
+        suffix, marker = sig.get("suffix"), sig.get("structural_marker")
+        if suffix and marker:
+            if not rel.endswith(str(suffix)):
+                continue
+            try:
+                text = target.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            if re.search(str(marker), text):
+                return sig
+        elif sig.get("shebang"):
+            try:
+                with target.open("rb") as handle:
+                    if handle.read(2) == b"#!":
+                        return sig
+            except OSError:
+                continue
+    return None
+
+
+def module_path(rel: str, sig: dict) -> str:
+    """The dotted module path of a file, by the language's own mapping.
+
+    A stage may invoke a producer as a module rather than as a path. Comparing the
+    dotted form as well as the path keeps that stage recognised as declared without
+    the declaration having to repeat itself.
+    """
+    suffix = str(sig.get("suffix") or "")
+    stem = rel[: -len(suffix)] if suffix and rel.endswith(suffix) else rel
+    dotted = stem.replace("/", ".")
+    tail = ".__main__"
+    return dotted[: -len(tail)] if dotted.endswith(tail) else dotted
+
+
+def declared_invocations(stages: list[dict]) -> set[str]:
+    return {str(token) for stage in stages for token in (stage.get("argv") or [])}
+
+
+def probe_argv(sig: dict, rel: str, root: Path, tail: list[str]) -> list[str]:
+    """The command that runs `rel`, with the interpreter taken from the file itself.
+
+    A declared signature may name the interpreter symbolically (resolved exactly as
+    a stage's argv is), or the file may declare its own in a shebang, which is read
+    from the file and passed through verbatim. No interpreter is named here.
+    """
+    declared = sig.get("interpreter")
+    if declared:
+        return resolve_argv([str(declared), rel, *tail])
+    try:
+        with (root / rel).open("r", encoding="utf-8", errors="replace") as handle:
+            first = handle.readline()
+    except OSError:
+        return []
+    words = first[2:].strip().split() if first.startswith("#!") else []
+    return [*words, rel, *tail] if words else []
+
+
+def discover_candidates(decl: dict, disc: dict) -> dict[str, list[str]]:
+    """rel -> the argv tail the repository itself passes that executable.
+
+    The tail matters: a producer the repository invokes with a sub-command writes
+    nothing when invoked bare, and probing it bare would clear it falsely. Using
+    the repository's OWN invocation keeps the probe faithful to what it measures.
+    """
+    tracked = set(snapshot_tracked())
+    stages = list((decl.get("pipeline") or {}).get("stages") or [])
+    already = declared_invocations(stages)
+    found: dict[str, list[str]] = {}
+    for line in surface_lines(disc):
+        for segment in _SEG.split(line):
+            tokens = _TOKEN.findall(segment)
+            for token in tokens:
+                if token not in tracked or token in found:
+                    continue
+                sig = entry_signature(disc, token, REPO)
+                if sig is None:
+                    continue
+                # The aggregate may not enter its own pipeline (the recursive-generator
+                # topology). The exclusion is structural — this file's own home — not a name.
+                if (REPO / token).resolve().is_relative_to(HERE):
+                    continue
+                if token in already or module_path(token, sig) in already:
+                    continue
+                after = segment.split(token, 1)[1]
+                found[token] = _TOKEN.findall(_CUT.split(after)[0])
+    return found
+
+
+def probe_producers(decl: dict, disc: dict) -> dict:
+    """Prove, by execution, which discovered candidates write tracked content.
+
+    Harmless: every candidate runs in a detached worktree checked out at HEAD, so
+    the live tree is never written and a mis-behaving candidate cannot damage it.
+    Faithful: the declared stages run first, because a producer that consumes an
+    earlier stage's output would otherwise fail for want of its input and be
+    misread as harmless. A candidate that still cannot run is reported UNPROBED,
+    never innocent — the measurement fails closed.
+    """
+    probe = disc.get("probe") or {}
+    candidates = discover_candidates(decl, disc)
+    result: dict = {
+        "candidates": len(candidates),
+        "producers": {},
+        "unprobed": {},
+        "inert": [],
+        "self_excluded": [],
+        "isolated": False,
+    }
+    if not candidates:
+        return result
+
+    timeout = int(probe.get("timeout_seconds") or 900)
+    stages = list((decl.get("pipeline") or {}).get("stages") or [])
+    guard = str((decl.get("pipeline") or {}).get("reentrancy_env") or "")
+    env = stage_env(decl)
+    holder = Path(tempfile.mkdtemp(prefix="rfp-producer-probe-"))
+    tree = holder / "tree"
+    try:
+        git("worktree", "add", "--detach", "--quiet", str(tree), "HEAD")
+        if not (tree / ".git").exists():
+            result["unprobed"] = dict.fromkeys(candidates, "no isolated worktree")
+            return result
+        result["isolated"] = True
+
+        def restore() -> None:
+            git("reset", "--quiet", root=tree)
+            git("checkout", "--quiet", "--", ".", root=tree)
+            git("clean", "-qfd", root=tree)
+
+        if probe.get("seed_with_declared_stages"):
+            for stage in stages:
+                if probe.get("seed_skips_heavy") and stage.get("heavy"):
+                    continue
+                run_stage(stage, env, root=tree)
+            # Tracked content returns to HEAD; content an excluded location holds
+            # is deliberately kept, because that is what a producer downstream of a
+            # declared stage legitimately consumes.
+            restore()
+
+        for rel, tail in sorted(candidates.items()):
+            sig = entry_signature(disc, rel, tree)
+            argv = probe_argv(sig, rel, tree, tail) if sig else []
+            if not argv:
+                result["unprobed"][rel] = "no runnable invocation"
+                continue
+            before = probe_snapshot(tree)
+            output = ""
+            try:
+                run = subprocess.run(
+                    argv,
+                    cwd=tree,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout,
+                    check=False,
+                    env=env,
+                )
+                code = run.returncode
+                output = (run.stdout or "") + (run.stderr or "")
+            except subprocess.TimeoutExpired:
+                code = "timeout"
+            except (OSError, subprocess.SubprocessError) as exc:
+                code = f"{exc}"
+            wrote = probe_writes(before, probe_snapshot(tree))
+            if wrote:
+                result["producers"][rel] = wrote
+            elif code == 0:
+                result["inert"].append(rel)
+            elif honours_guard(rel, tree, guard, output):
+                # It refused to run because the declared re-entrancy guard is armed.
+                # That is not an unknown verdict: the repository's own guard protocol
+                # is what excluded it, and a producer that cannot run inside the
+                # pipeline is exactly what the recursive-generator remediation
+                # requires. Accounted for, and by a declared mechanism.
+                result["self_excluded"].append(rel)
+            else:
+                result["unprobed"][rel] = f"exit {code}"
+            restore()
+    finally:
+        git("worktree", "remove", "--force", str(tree))
+        shutil.rmtree(holder, ignore_errors=True)
+        git("worktree", "prune")
+    return result
+
+
+def probe_snapshot(root: Path) -> dict[str, tuple[str, int]]:
+    """(content hash, mtime) per tracked file — the probe's observation primitive.
+
+    Content alone is not enough. A producer whose output is ALREADY at its fixed
+    point rewrites identical bytes, so a content-only comparison would clear it and
+    an adversary could hide a producer simply by committing its output first. The
+    modification time advances whether or not the bytes changed, so writing is
+    observed as an ACT rather than inferred from a difference.
+    """
+    out: dict[str, tuple[str, int]] = {}
+    for rel in (p for p in git("ls-files", "-z", root=root).split("\0") if p):
+        target = root / rel
+        try:
+            out[rel] = (
+                hashlib.sha256(target.read_bytes()).hexdigest(),
+                target.stat().st_mtime_ns,
+            )
+        except OSError:
+            continue
+    return out
+
+
+def probe_writes(
+    before: dict[str, tuple[str, int]], after: dict[str, tuple[str, int]]
+) -> dict[str, str]:
+    """path -> how it was written. Both a content change and a silent rewrite count."""
+    out: dict[str, str] = {}
+    for rel, (sha, mtime) in after.items():
+        prior = before.get(rel)
+        if prior is None:
+            continue
+        if prior[0] != sha:
+            out[rel] = "content changed"
+        elif mtime > prior[1]:
+            out[rel] = "rewritten with identical bytes"
+    for rel in before:
+        if rel not in after:
+            out[rel] = "deleted"
+    return out
+
+
+def honours_guard(rel: str, root: Path, guard: str, output: str) -> bool:
+    """Did this executable refuse to run BECAUSE the declared guard is armed?
+
+    An executable that declines while the declared guard variable is set has
+    excluded itself from the fixed-point pipeline through the repository's own
+    mechanism, which is precisely what the recursive-generator remediation demands
+    of an aggregate. The primary evidence is behavioural — the process says which
+    guard stopped it — with the programme's own home as a fallback, because a
+    producer may hold the guard name in its declaration rather than in its code.
+    Only the DECLARED guard name is used, so no aggregate is named here or in data.
+    """
+    if not guard:
+        return False
+    if guard in output:
+        return True
+    home = (root / rel).parent
+    try:
+        for sibling in home.iterdir():
+            if not sibling.is_file():
+                continue
+            try:
+                if guard in sibling.read_text(encoding="utf-8", errors="replace"):
+                    return True
+            except OSError:
+                continue
+    except OSError:
+        return False
+    return False
+
+
+def zone_overlaps(stages: list[dict]) -> list[tuple[str, str, str, str]]:
+    """Declared write zones where one is a prefix of another owned by a different
+    stage, so a path inside the overlap would have two owners."""
+    zones = [(str(s.get("id")), str(w)) for s in stages for w in (s.get("writes") or [])]
+    out = []
+    for index, (owner_a, zone_a) in enumerate(zones):
+        for owner_b, zone_b in zones[index + 1 :]:
+            if owner_a != owner_b and (zone_a.startswith(zone_b) or zone_b.startswith(zone_a)):
+                out.append((owner_a, zone_a, owner_b, zone_b))
+    return out
+
+
 # --------------------------------------------------------- detector registry
 # The keys below are this engine's declared detection CAPABILITIES. Which topology
 # each one evidences, how severe it is and how it is remediated all come from the
@@ -376,7 +737,96 @@ DETECTORS = {
 }
 
 
+# ------------------------------------------------- producer-sweep detectors
+# These observe the DISCOVERED producer universe rather than the residue of a
+# declared pass, which is why they see a producer the pipeline never runs. Like
+# the residue detectors they are keyed by capability; which topology each one
+# evidences comes from the declaration's `detector` binding.
+def _detect_undeclared_producer(ctx: dict) -> list[str]:
+    return [
+        f"{rel} writes {len(wrote)} tracked path(s) when the repository invokes it, "
+        f"yet is no declared stage: "
+        + ", ".join(f"{p} ({how})" for p, how in sorted(wrote.items())[:3])
+        for rel, wrote in sorted((ctx["sweep"].get("producers") or {}).items())
+    ]
+
+
+def _detect_producer_write_outside_zone(ctx: dict) -> list[str]:
+    return [
+        f"{path} was written by {rel} ({how}) but lies inside no declared write zone, "
+        "so it has no constitutional owner"
+        for rel, wrote in sorted((ctx["sweep"].get("producers") or {}).items())
+        for path, how in sorted(wrote.items())
+        if owner_of(ctx["stages"], path) is None
+    ]
+
+
+def _detect_overlapping_write_zones(ctx: dict) -> list[str]:
+    return [
+        f"write zone {zone_a} ({owner_a}) overlaps {zone_b} ({owner_b}); "
+        "a path inside the overlap has more than one owner"
+        for owner_a, zone_a, owner_b, zone_b in zone_overlaps(ctx["stages"])
+    ]
+
+
+def _detect_unprobed_producer(ctx: dict) -> list[str]:
+    return [
+        f"{rel} could not be executed ({why}); whether it writes tracked content "
+        "is undetermined, so completeness cannot be asserted over it"
+        for rel, why in sorted((ctx["sweep"].get("unprobed") or {}).items())
+    ]
+
+
+SWEEP_DETECTORS = {
+    "undeclared_producer": _detect_undeclared_producer,
+    "producer_write_outside_zone": _detect_producer_write_outside_zone,
+    "overlapping_write_zones": _detect_overlapping_write_zones,
+    "unprobed_producer": _detect_unprobed_producer,
+}
+
+
 # ------------------------------------------------------------------ the gate
+def run_producer_sweep(decl: dict) -> tuple[dict, list[tuple[str, str]], dict]:
+    """Measure producer completeness over the DISCOVERED producer universe.
+
+    Returns (measures, [(cycle_id, description)], sweep). One implementation
+    serves both the gate and the standalone guard, so the two can never disagree.
+    """
+    disc = discovery(decl)
+    stages = list((decl.get("pipeline") or {}).get("stages") or [])
+    sweep = probe_producers(decl, disc)
+    ctx = {"sweep": sweep, "stages": stages}
+    cycles = {str(c["id"]): c for c in section(decl, "cycle_classes")}
+    detected: list[tuple[str, str]] = []
+    for rule in cycles.values():
+        run = SWEEP_DETECTORS.get(str(rule.get("detector")))
+        if run is None:
+            continue
+        for description in run(ctx):
+            detected.append((str(rule.get("id")), description))
+    measures = {
+        "undeclared_producers": len(sweep.get("producers") or {}),
+        "producer_writes_outside_zones": len(_detect_producer_write_outside_zone(ctx)),
+        "overlapping_write_zones": len(zone_overlaps(stages)),
+        "unprobed_producer_candidates": len(sweep.get("unprobed") or {}),
+    }
+    return measures, detected, sweep
+
+
+def check_producer_completeness(decl: dict) -> list[str]:
+    """Is the repository Producer-Complete? Discovered, proven, never listed."""
+    measures, detected, sweep = run_producer_sweep(decl)
+    print(
+        f"  discovered candidates={sweep['candidates']} "
+        f"producers={len(sweep.get('producers') or {})} "
+        f"inert={len(sweep.get('inert') or [])} "
+        f"self-excluded={len(sweep.get('self_excluded') or [])} "
+        f"unprobed={len(sweep.get('unprobed') or {})} "
+        f"isolated={'yes' if sweep.get('isolated') else 'NO'}"
+    )
+    return [f"[{cycle_id}] {description}" for cycle_id, description in sorted(set(detected))]
+
+
 def run_pipeline_pass(decl: dict, stages: list[dict], env: dict[str, str], skip_heavy: bool):
     """Execute one pass. Returns (failures, per_stage_paths)."""
     failures: list[str] = []
@@ -456,6 +906,25 @@ def cmd_gate(
     reg_owner = registration_owner(stages)
     per_pass: list[dict[str, list[str]]] = []
 
+    # Producer completeness is a property of HEAD, not of a pass, so it is measured
+    # once, before any stage runs, over the DISCOVERED producer universe rather than
+    # the declared one. This is what lets the gate see a producer the pipeline never
+    # invokes — the case residue attribution is structurally blind to.
+    if fast:
+        print("  producer sweep: SKIPPED (fast mode; the gate itself never skips it)")
+    else:
+        sweep_measures, sweep_detected, sweep = run_producer_sweep(decl)
+        measured.update(sweep_measures)
+        detected.extend(sweep_detected)
+        print(
+            f"  producer sweep: candidates={sweep['candidates']} "
+            f"producers={len(sweep.get('producers') or {})} "
+            f"inert={len(sweep.get('inert') or [])} "
+            f"self-excluded={len(sweep.get('self_excluded') or [])} "
+            f"unprobed={len(sweep.get('unprobed') or {})} "
+            f"isolated={'yes' if sweep.get('isolated') else 'NO'}"
+        )
+
     for index in range(1, passes + 1):
         failures, attribution = run_pipeline_pass(decl, stages, env, fast)
         measured["stage_failures"] += len(failures)
@@ -501,6 +970,8 @@ def cmd_gate(
                 "reentrancy": reentrancy_notes,
             }
             for detector_name, rule in sorted(cycle_by_detector.items()):
+                if detector_name in SWEEP_DETECTORS:
+                    continue  # measured once over the discovered universe, not per pass
                 run = DETECTORS.get(detector_name)
                 if run is None:
                     findings.append(
@@ -649,6 +1120,20 @@ def check_no_enumeration(decl: dict) -> list[str]:
         ident = str(record.get("id"))
         if ident in source:
             out.append(f"engine names a declared class id: {ident!r} outside data")
+    # The proof must grow with the capability: producer DISCOVERY is only
+    # zero-enumeration if the engine holds none of the authorities it discovers
+    # from either. If a discovery authority or a structural signature had to be
+    # written in code, adding one would be an edit to code, and the mechanism would
+    # be a convention rather than data.
+    disc = decl.get("producer_discovery") or {}
+    for auth in disc.get("surface_authorities") or []:
+        for token in (auth.get("path"), auth.get("glob")):
+            if token and len(str(token)) > 6 and str(token) in source:
+                out.append(f"engine names a declared discovery authority: {token!r}")
+    for sig in disc.get("entry_point_signatures") or []:
+        for token in (sig.get("structural_marker"), sig.get("interpreter")):
+            if token and len(str(token)) > 6 and str(token) in source:
+                out.append(f"engine names a declared entry-point signature: {token!r}")
     return out
 
 
@@ -884,6 +1369,7 @@ _GUARDS = {
     "--check-write-scope": check_write_scope,
     "--check-determinism": check_determinism,
     "--check-self-compliance": check_self_compliance,
+    "--check-producer-completeness": check_producer_completeness,
 }
 
 

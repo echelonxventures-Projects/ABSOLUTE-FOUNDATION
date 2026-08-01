@@ -23,6 +23,10 @@ No detector matches a path, a lane, a producer or a field name. Each observes ei
 | CYC-REGISTER | Registration cycle | RFP-5 | CRITICAL | `foreign_projection_write` | A producer that does not own the registration projections nevertheless causes them to change — so a non-canonical artifact is carrying a registered identity. |
 | CYC-RECURSE | Recursive generator | RFP-6 | CRITICAL | `reentrancy` | A producer re-enters itself, directly or through an aggregate that invokes it. |
 | CYC-UNDECLARED | Undeclared producer | RFP-6 | HIGH | `unattributed_residue` | Tracked content changed during a pipeline pass but no declared stage's write zone contains it. |
+| CYC-PRODUCER | Undiscovered producer | RFP-6 | CRITICAL | `undeclared_producer` | An executable named by the repository's own Execution Surface writes tracked content when executed, yet is not a stage of the declared pipeline. The proof is behavioural: the candidate was run in isolation and its writes were measured, so the finding never rests on where the file lives or what it is called. |
+| CYC-UNGOVERNED | Producer outside write governance | RFP-6 | CRITICAL | `producer_write_outside_zone` | A path a producer was OBSERVED to write lies inside no declared write zone. The artifact therefore has no constitutional owner and no pipeline coverage, whether or not the producer that wrote it is declared. |
+| CYC-ZONE | Ambiguous write scope | RFP-6 | HIGH | `overlapping_write_zones` | Two stages declare write zones where one is a prefix of the other, so a path inside the overlap belongs to more than one write scope and 'exactly one owner' is not well-defined. Attribution would then depend on the order zones happen to be read. |
+| CYC-UNPROBED | Unprobed producer candidate | RFP-6 | HIGH | `unprobed_producer` | A discovered candidate could not be executed and does not participate in the declared re-entrancy protocol, so whether it writes tracked content is unknown. Producer completeness may not be asserted over an executable the repository cannot run: an unprobed candidate is an undetermined verdict, and treating it as innocent would make the whole measurement fail open. A candidate that aborts BECAUSE the declared guard is armed is not unprobed — it is self-excluded by the repository's own mechanism and is accounted for as such. |
 
 ## Remediation
 
@@ -34,6 +38,10 @@ No detector matches a path, a lane, a producer or a field name. Each observes ei
 | CYC-REGISTER | Withdraw the class from registration through the declared admission authority. |
 | CYC-RECURSE | Declare the stage non-reentrant; the aggregate must exclude itself from its own pipeline. |
 | CYC-UNDECLARED | Declare the producer as a pipeline stage, or stop it from writing tracked content. |
+| CYC-PRODUCER | Declare the producer as a pipeline stage with its write zone, positioned after the stages whose output it consumes; or stop it writing tracked content. |
+| CYC-UNGOVERNED | Extend the owning stage's declared write zone to cover the path, or move the output inside the zone its producer already owns. |
+| CYC-ZONE | Make the declared write zones pairwise disjoint: narrow the broader zone, or merge the stages that genuinely share an output surface. |
+| CYC-UNPROBED | Make the candidate runnable from a clean checkout, declare it as a stage so the pipeline runs it, or give it the inputs its earlier stages owe it. |
 
 ## Why behaviour, not inspection
 
