@@ -47,7 +47,7 @@
 |---|---|
 | Units discovered | 236 |
 | Units with exactly one disposition | 236 |
-| Dependency edges measured | 13154 |
+| Dependency edges measured | 13156 |
 | Unresolved dependency edges | 0 |
 | Registered artifacts probed | 71 |
 | Dead registry entries | 0 |
