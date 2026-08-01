@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T03:08:54+00:00",
+  "generated_at": "2026-08-01T03:13:55+00:00",
   "generator_version": "1.0.0",
   "counts": {
     "change_events": 1305,
@@ -18794,12 +18794,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "49ce9626d6a6",
-        "date": "2026-07-31T13:36:00+05:30",
-        "author": "Echelon Ventures",
-        "subject": "MXR-HYG-001 / REG-AUTO-001: the atomic registration transaction — source and projection in ONE change"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001096",
@@ -20589,12 +20584,7 @@
       "snapshot_seq": 2,
       "from": "4c51ed056aac3f986d7f7467272ceb736918b82739fdd999b94c80094dd1f354",
       "to": "7fe74a39a51e02ff0e7b8a9c7199f158d177495c94df739622deef3ad4e375a4",
-      "commit": {
-        "commit": "49ce9626d6a6",
-        "date": "2026-07-31T13:36:00+05:30",
-        "author": "Echelon Ventures",
-        "subject": "MXR-HYG-001 / REG-AUTO-001: the atomic registration transaction — source and projection in ONE change"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001275",
@@ -20864,12 +20854,7 @@
       "snapshot_seq": 3,
       "from": "7fe74a39a51e02ff0e7b8a9c7199f158d177495c94df739622deef3ad4e375a4",
       "to": "0a8ba1e935e3acbfce3add4e352e559eba3393807ba3994b1ea3e9a4a4d5cfd7",
-      "commit": {
-        "commit": "49ce9626d6a6",
-        "date": "2026-07-31T13:36:00+05:30",
-        "author": "Echelon Ventures",
-        "subject": "MXR-HYG-001 / REG-AUTO-001: the atomic registration transaction — source and projection in ONE change"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001302",
@@ -20899,12 +20884,7 @@
       "snapshot_seq": 4,
       "from": "0a8ba1e935e3acbfce3add4e352e559eba3393807ba3994b1ea3e9a4a4d5cfd7",
       "to": "e3381b3cff7e2b65e1a79a256eeba0a0a189bf9a112cb73f646940232a701793",
-      "commit": {
-        "commit": "49ce9626d6a6",
-        "date": "2026-07-31T13:36:00+05:30",
-        "author": "Echelon Ventures",
-        "subject": "MXR-HYG-001 / REG-AUTO-001: the atomic registration transaction — source and projection in ONE change"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001305",
@@ -20914,12 +20894,7 @@
       "snapshot_seq": 5,
       "from": "e3381b3cff7e2b65e1a79a256eeba0a0a189bf9a112cb73f646940232a701793",
       "to": "ced3ddcd82b7857403f0a6ea2841eaeef17c318e40cd105878c7a09a0f440547",
-      "commit": {
-        "commit": "49ce9626d6a6",
-        "date": "2026-07-31T13:36:00+05:30",
-        "author": "Echelon Ventures",
-        "subject": "MXR-HYG-001 / REG-AUTO-001: the atomic registration transaction — source and projection in ONE change"
-      }
+      "commit": null
     }
   ],
   "version_records": {
