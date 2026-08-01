@@ -15,6 +15,19 @@ stops evolving becomes a description of the past.
 "Never rewrites" is enforced by :meth:`EvolutionLedger.append`, which admits only the
 stage the cycle says comes next. A caller cannot skip validation to reach certification,
 because skipping is exactly how an unproven claim acquires a certificate.
+
+"Never terminates" and "never bounded" are different claims, and the second one also has
+to be encoded. :data:`EvolutionStage` is a closed enumeration, so on its own it would fix
+the cycle at the fifteen stages that happened to be known when it was written, and a
+sixteenth would be a code edit. INV-14 requires that *every* vocabulary admit an unknown
+future member, so the stage set is also published as a vocabulary
+(:func:`evolution_stage_vocabulary`) — the same treatment
+:data:`~engine.uckp.vocabulary.FACET_VOCABULARY_INSTANCE` gives the equally closed
+:class:`~engine.uckp.facets.Facet`. The enum remains the single home of the seeded cycle
+and the vocabulary is derived from it, so the two cannot disagree; what the vocabulary
+adds is that the stage set is now *measured* against INV-14 by
+:meth:`~engine.uckp.vocabulary.VocabularyRegistry.is_extensible` instead of being the one
+constitutional vocabulary nothing probed.
 """
 
 from __future__ import annotations
@@ -25,6 +38,7 @@ from enum import Enum
 
 from engine.uckp.canonical import content_hash
 from engine.uckp.errors import EvolutionError
+from engine.uckp.vocabulary import Term, Vocabulary
 
 
 class EvolutionStage(str, Enum):
@@ -75,6 +89,34 @@ def is_terminal(stage: EvolutionStage | str) -> bool:
     """Always false. No stage of a perpetual cycle is terminal."""
     EvolutionStage.coerce(stage)
     return False
+
+
+#: The vocabulary id under which the stage set is published.
+EVOLUTION_STAGE = "uckp.evolution-stage"
+
+
+def evolution_stage_vocabulary() -> Vocabulary:
+    """The stage set as an open vocabulary, derived from :data:`EVOLUTION_CYCLE`.
+
+    Every term is generated from the cycle — its position becomes the rank and
+    :func:`next_stage` becomes its successor — so this is a projection of the cycle and
+    not a second list of stages to keep in step with the first. Registering it is what
+    brings the stage set under INV-14: a registry holding it reports itself closed unless
+    the stage set admits a term no stage declares.
+    """
+    return Vocabulary(
+        EVOLUTION_STAGE,
+        "the stages of the perpetual constitutional cycle, with their lawful successors",
+        tuple(
+            Term(
+                stage.value,
+                f"stage {index} of {CYCLE_LENGTH} in the perpetual constitutional cycle",
+                rank=index,
+                successors=(next_stage(stage).value,),
+            )
+            for index, stage in enumerate(EVOLUTION_CYCLE)
+        ),
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -210,9 +252,11 @@ class EvolutionLedger:
 __all__ = [
     "CYCLE_LENGTH",
     "EVOLUTION_CYCLE",
+    "EVOLUTION_STAGE",
     "EvolutionLedger",
     "EvolutionRecord",
     "EvolutionStage",
+    "evolution_stage_vocabulary",
     "is_terminal",
     "next_stage",
 ]

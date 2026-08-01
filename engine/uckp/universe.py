@@ -31,7 +31,13 @@ from pathlib import Path
 
 from engine.uckp.canonical import content_hash
 from engine.uckp.errors import LawViolation
-from engine.uckp.evolution import EVOLUTION_CYCLE, EvolutionLedger, EvolutionRecord
+from engine.uckp.evolution import (
+    EVOLUTION_CYCLE,
+    EVOLUTION_STAGE,
+    EvolutionLedger,
+    EvolutionRecord,
+    evolution_stage_vocabulary,
+)
 from engine.uckp.execution import (
     ExecutionAdapter,
     ExecutionRequest,
@@ -294,6 +300,31 @@ def _opening_governance(registry: UniversalKnowledgeRegistry) -> GovernanceEngin
     return engine
 
 
+def _contribute_evolution_stage_vocabulary(vocabularies: VocabularyRegistry) -> None:
+    """Publish the evolution stage set into the universe's vocabulary registry.
+
+    ``build_vocabulary_registry`` cannot seed this one: it lives below
+    :mod:`engine.uckp.evolution` in the layer order, and reaching upward for the cycle
+    would invert the dependency. So the evolution layer contributes its own vocabulary
+    here, exactly as :mod:`engine.uckp.assimilation` contributes the native ones.
+
+    A caller may pass a registry that already carries it, so an identical registration is
+    reused rather than refused; a *different* vocabulary under the same id still fails
+    closed, because two competing stage sets under one name is the ambiguity the id exists
+    to prevent.
+    """
+    published = evolution_stage_vocabulary()
+    existing = vocabularies.get(EVOLUTION_STAGE)
+    if existing is None:
+        vocabularies.register(published)
+        return
+    if existing.digest() != published.digest():
+        raise LawViolation(
+            "a different evolution stage vocabulary is already registered",
+            vocabulary_id=EVOLUTION_STAGE,
+        )
+
+
 def build_universe(
     *,
     roots: Iterable[str] = DEFAULT_DISCOVERY_ROOTS,
@@ -311,6 +342,7 @@ def build_universe(
     so an assimilated object is not a second class of citizen.
     """
     registry = UniversalKnowledgeRegistry(vocabularies=vocabularies or build_vocabulary_registry())
+    _contribute_evolution_stage_vocabulary(registry.vocabularies())
     discovery = registry.discover(*tuple(roots))
     extra = tuple(additional_objects)
     if extra:

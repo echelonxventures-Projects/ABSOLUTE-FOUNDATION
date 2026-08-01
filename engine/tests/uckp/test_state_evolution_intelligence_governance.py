@@ -6,13 +6,20 @@ import dataclasses
 
 import pytest
 
-from engine.uckp.errors import EvolutionError, GovernanceError, StateImmutabilityError
+from engine.uckp.errors import (
+    EvolutionError,
+    GovernanceError,
+    LawViolation,
+    StateImmutabilityError,
+)
 from engine.uckp.evolution import (
     CYCLE_LENGTH,
     EVOLUTION_CYCLE,
+    EVOLUTION_STAGE,
     EvolutionLedger,
     EvolutionRecord,
     EvolutionStage,
+    evolution_stage_vocabulary,
     is_terminal,
     next_stage,
 )
@@ -42,6 +49,8 @@ from engine.uckp.state import (
     ConstitutionalTimeline,
     Proof,
 )
+from engine.uckp.universe import _contribute_evolution_stage_vocabulary
+from engine.uckp.vocabulary import Term, Vocabulary, build_vocabulary_registry
 
 # --- constitutional state -------------------------------------------------------
 
@@ -179,6 +188,56 @@ def test_the_cycle_has_fifteen_stages_and_no_terminal_one():
 
 def test_the_final_stage_wraps_to_the_first():
     assert next_stage(EVOLUTION_CYCLE[-1]) is EVOLUTION_CYCLE[0]
+
+
+def test_the_stage_vocabulary_is_derived_from_the_cycle():
+    """The vocabulary is a projection of the cycle, not a second list of stages."""
+    vocabulary = evolution_stage_vocabulary()
+    assert vocabulary.vocabulary_id == EVOLUTION_STAGE
+    assert vocabulary.term_ids() == tuple(sorted(stage.value for stage in EVOLUTION_CYCLE))
+    for index, stage in enumerate(EVOLUTION_CYCLE):
+        term = vocabulary.require(stage.value)
+        assert term.rank == index
+        assert term.successors == (next_stage(stage).value,)
+
+
+def test_the_stage_vocabulary_admits_an_unknown_future_stage():
+    """INV-14 over the stage set: the enum refuses a stranger, the vocabulary admits one.
+
+    This is the property the closed enumeration cannot have on its own. ``coerce`` refuses
+    a sixteenth stage, so without the vocabulary the cycle would be fixed at the fifteen
+    stages that were known when it was written.
+    """
+    with pytest.raises(EvolutionError, match="unknown evolution stage"):
+        EvolutionStage.coerce("ascend")
+
+    vocabulary = evolution_stage_vocabulary()
+    widened = vocabulary.extended_with(Term("ascend", "an unknown future stage"))
+    assert widened.has("ascend")
+    assert not vocabulary.has("ascend"), "extension must derive a new vocabulary, not mutate"
+    assert len(widened.term_ids()) == CYCLE_LENGTH + 1
+
+
+def test_the_universe_publishes_the_stage_vocabulary(universe):
+    """Registering it is what brings the stage set under the INV-14 probe."""
+    vocabularies = universe.vocabularies()
+    assert EVOLUTION_STAGE in vocabularies.vocabulary_ids()
+    assert vocabularies.require(EVOLUTION_STAGE).digest() == evolution_stage_vocabulary().digest()
+    assert vocabularies.is_extensible()
+
+
+def test_contributing_the_stage_vocabulary_twice_reuses_the_identical_one():
+    registry = build_vocabulary_registry()
+    _contribute_evolution_stage_vocabulary(registry)
+    _contribute_evolution_stage_vocabulary(registry)
+    assert registry.require(EVOLUTION_STAGE).digest() == evolution_stage_vocabulary().digest()
+
+
+def test_a_competing_stage_vocabulary_under_the_same_id_fails_closed():
+    registry = build_vocabulary_registry()
+    registry.register(Vocabulary(EVOLUTION_STAGE, "a competing stage set", (Term("only", "x"),)))
+    with pytest.raises(LawViolation, match="different evolution stage vocabulary"):
+        _contribute_evolution_stage_vocabulary(registry)
 
 
 def test_the_ledger_refuses_a_start_that_is_not_the_first_stage_of_cycle_zero():
@@ -905,7 +964,7 @@ def test_future_reasoning_reports_a_declared_future_binding(mint_object, vocabul
 
 def test_future_reasoning_reports_a_vocabulary_that_refuses_the_future(minimal_root):
     from engine.tests.uckp.doubles import RegistryView
-    from engine.uckp.vocabulary import Term, Vocabulary, VocabularyRegistry
+    from engine.uckp.vocabulary import VocabularyRegistry
 
     class Swallowing(Vocabulary):
         def extended_with(self, term: Term) -> Vocabulary:
