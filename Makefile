@@ -609,12 +609,19 @@ rib-self:
 # Additive only — no existing target, recipe, or dependency above is altered.
 #
 # Four operational-memory programme phases are terminal historical determinations: their
-# missions completed, their responsibility is held by their successor programmes, and they
-# are retained read-only as constitutional evidence. They run no live regeneration, so no
-# regeneration target names them — this guard is the declared entry point that reaches
-# them. It re-executes nothing (their one-shot engines are wall-clock-stamped and would
-# dirty the tree), mutates nothing, and only proves each archived phase directory and its
-# completion determination is still present.
+# missions completed and their responsibility is held by their successor programmes. They
+# are retained as constitutional evidence, and this guard proves each archived phase
+# directory and its completion determination is still present.
+#
+# THEIR ENGINES ARE PIPELINE STAGES, not frozen artifacts. This comment previously stated
+# that no regeneration target names them and that their one-shot engines are
+# wall-clock-stamped and would dirty the tree. UCOS-RFP-001 producer discovery measured
+# both claims and both were false: the engines are DETERMINISTIC over two runs at one
+# commit, and their committed registers had drifted from what they re-derive. Under
+# CLS-OPERATIONAL-MEMORY the convergence obligation is REQUIRED — a determination that
+# re-execution does not reproduce evidences nothing — so they are declared stages of the
+# fixed-point pipeline and re-derived like every other producer. Being historical is not
+# an exemption from being reproducible.
 #
 # Exit 0 all four archived phases present · non-zero one is missing.
 .PHONY: uakos-archive

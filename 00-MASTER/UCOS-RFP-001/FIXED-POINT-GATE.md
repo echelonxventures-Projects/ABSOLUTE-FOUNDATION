@@ -29,6 +29,7 @@ It executes the declared pipeline **3 times** over the committed HEAD and requir
 | CLO-10 | every path a producer writes lies inside a declared write zone | `producer_writes_outside_zones` | 0 | yes |
 | CLO-11 | declared write zones are pairwise disjoint, so ownership is exactly one | `overlapping_write_zones` | 0 | yes |
 | CLO-12 | no discovered producer candidate is left unprobed | `unprobed_producer_candidates` | 0 | yes |
+| CLO-13 | no stage writes into another stage's declared write zone | `cross_zone_writes` | 0 | yes |
 
 ## The declared pipeline
 
@@ -57,7 +58,14 @@ It executes the declared pipeline **3 times** over the committed HEAD and requir
 | 21 | `STAGE-UAIE` Architectural intelligence | 00-MASTER/UAIE-000001 | no | yes | yes |
 | 22 | `STAGE-UCEF` Constitutional evolution | 00-MASTER/UCEF-000001 | no | yes | yes |
 | 23 | `STAGE-MXR` Master execution roadmap | 00-MASTER/UCOS-MXR-001 | no | yes | yes |
-| 24 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
+| 24 | `STAGE-PHASE2` Repository reconciliation (operational memory) | 00-MASTER/UAKOS-PHASE-002 | no | yes | yes |
+| 25 | `STAGE-PHASE3` Implementation gap baseline (operational memory) | 00-MASTER/UAKOS-PHASE-003 | no | yes | yes |
+| 26 | `STAGE-PHASE3R` Realization correction (operational memory) | 00-MASTER/UAKOS-PHASE-003R | no | yes | yes |
+| 27 | `STAGE-PHASE4` Implementation planning (operational memory) | 00-MASTER/UAKOS-PHASE-004 | no | yes | yes |
+| 28 | `STAGE-PHASE5` Execution governance (operational memory) | 00-MASTER/UAKOS-PHASE-005 | no | yes | yes |
+| 29 | `STAGE-PHASE6` Execution readiness certification (operational memory) | 00-MASTER/UAKOS-PHASE-006 | no | yes | yes |
+| 30 | `STAGE-FREEZE-C4` Freeze C4 execution streams (operational memory) | 00-MASTER/UCOS-USIS-WAVE0 | no | yes | yes |
+| 31 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
 
 ## Exit semantics
 

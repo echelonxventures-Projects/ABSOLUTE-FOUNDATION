@@ -333,8 +333,17 @@
       "principle": "RFP-6",
       "severity": "HIGH",
       "detector": "unprobed_producer",
-      "signature": "A discovered candidate could not be executed and does not participate in the declared re-entrancy protocol, so whether it writes tracked content is unknown. Producer completeness may not be asserted over an executable the repository cannot run: an unprobed candidate is an undetermined verdict, and treating it as innocent would make the whole measurement fail open. A candidate that aborts BECAUSE the declared guard is armed is not unprobed — it is self-excluded by the repository's own mechanism and is accounted for as such.",
+      "signature": "A candidate the repository invokes ITSELF could not be executed and does not participate in the declared re-entrancy protocol, so whether it writes tracked content is unknown. Producer completeness may not be asserted over an executable the repository runs but cannot measure: an unprobed candidate is an undetermined verdict, and treating it as innocent would make the whole measurement fail open. A candidate that aborts BECAUSE the declared guard is armed is self-excluded, and one that nothing invokes and that cannot start unaided is unreachable; both are accounted for separately.",
       "remediation": "Make the candidate runnable from a clean checkout, declare it as a stage so the pipeline runs it, or give it the inputs its earlier stages owe it."
+    },
+    {
+      "id": "CYC-TRESPASS",
+      "name": "Write-scope trespass",
+      "principle": "RFP-6",
+      "severity": "CRITICAL",
+      "detector": "cross_zone_write",
+      "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it.",
+      "remediation": "Stop the trespassing stage writing outside its own zone, or move the path into the zone of the stage that actually produces it. One artifact, one producer."
     }
   ],
   "$lifecycle_comment": "Phase 1. The canonical implementation lifecycle. The final four steps are what this programme adds: closure is no longer asserted at certification, it is asserted after the repository has been proven to reproduce itself from the committed state.",
@@ -806,6 +815,118 @@
         "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). self-contained replay: re-renders 01..10 from the committed roadmap.json. Last of the added stages because it aggregates what the others settle."
       },
       {
+        "id": "STAGE-PHASE2",
+        "name": "Repository reconciliation (operational memory)",
+        "owner": "00-MASTER/UAKOS-PHASE-002",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-002/phase2_recon.py"
+        ],
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-002/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent."
+      },
+      {
+        "id": "STAGE-PHASE3",
+        "name": "Implementation gap baseline (operational memory)",
+        "owner": "00-MASTER/UAKOS-PHASE-003",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-003/phase3_gap.py"
+        ],
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-003/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent."
+      },
+      {
+        "id": "STAGE-PHASE3R",
+        "name": "Realization correction (operational memory)",
+        "owner": "00-MASTER/UAKOS-PHASE-003R",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-003R/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent."
+      },
+      {
+        "id": "STAGE-PHASE4",
+        "name": "Implementation planning (operational memory)",
+        "owner": "00-MASTER/UAKOS-PHASE-004",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-004/phase4_plan.py"
+        ],
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-004/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent."
+      },
+      {
+        "id": "STAGE-PHASE5",
+        "name": "Execution governance (operational memory)",
+        "owner": "00-MASTER/UAKOS-PHASE-005",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-005/phase5_gov.py"
+        ],
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-005/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent."
+      },
+      {
+        "id": "STAGE-PHASE6",
+        "name": "Execution readiness certification (operational memory)",
+        "owner": "00-MASTER/UAKOS-PHASE-006",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-PHASE-006/phase6_certify.py"
+        ],
+        "writes": [
+          "00-MASTER/UAKOS-PHASE-006/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent."
+      },
+      {
+        "id": "STAGE-FREEZE-C4",
+        "name": "Freeze C4 execution streams (operational memory)",
+        "owner": "00-MASTER/UCOS-USIS-WAVE0",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UCOS-USIS-WAVE0/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent."
+      },
+      {
         "id": "STAGE-UCCEP",
         "name": "Aggregate constitutional certification",
         "owner": "00-MASTER/UCCEP-000000",
@@ -845,6 +966,11 @@
         "rationale": "The invocations the repository performs in continuous integration. A producer wired into a gate but omitted from the pipeline is visible only here."
       }
     ],
+    "candidate_scope": {
+      "execution_surface": true,
+      "whole_tracked_tree": true,
+      "rationale": "Two scopes, because one is provably not enough. The Execution Surface finds every producer the repository ADMITS it runs, and supplies the argv the repository passes it — which matters, since a producer invoked with a sub-command writes nothing when invoked bare. But the surface cannot name a producer nothing references: an executable committed and wired to nothing is invisible to it, and that is exactly the producer-outside-Repository-Truth case. A self-challenge confirmed such a producer escaped. The whole tracked tree is therefore also a candidate scope: every structural entry point is probed, referenced or not. Scope costs a probe; missing a producer costs the invariant."
+    },
     "entry_point_signatures": [
       {
         "id": "EP-MODULE-MAIN",
@@ -882,9 +1008,14 @@
           "meaning": "the candidate refused to run because the declared re-entrancy guard was armed. It has excluded itself from the fixed-point pipeline through the repository's own guard protocol, which is what the recursive-generator remediation requires of an aggregate. Recognised from the DECLARED guard variable alone, so no aggregate is named anywhere"
         },
         {
+          "id": "PRB-UNREACHABLE",
+          "outcome": "UNREACHABLE",
+          "meaning": "the candidate was found by the tracked-tree scope alone — nothing in the repository invokes it — and it cannot start unaided. It is a latent producer with NO governance path rather than one evading measurement: the repository cannot drive it, so it cannot write during any repository operation, and were it driven by hand the residue would surface as unattributable dirt at the next gate. Counted and named on every run so the population can never be silently assumed empty, but not blocking, because the arguments such a candidate would need are an open set and no measurement can close it"
+        },
+        {
           "id": "PRB-UNPROBED",
           "outcome": "UNPROBED",
-          "meaning": "the candidate could not be executed and does not participate in the guard protocol, so its status is undetermined. Reported as a blocking finding, never as innocence — otherwise the whole measurement would fail open"
+          "meaning": "the candidate is invoked by the repository ITSELF, with the repository's own argv, and still could not be executed, and it does not participate in the declared re-entrancy protocol. That is a verdict the repository owes and does not have, so it blocks. Treating it as innocent would make the whole measurement fail open"
         }
       ]
     }
@@ -973,6 +1104,13 @@
       "id": "CLO-12",
       "criterion": "no discovered producer candidate is left unprobed",
       "measure": "unprobed_producer_candidates",
+      "expect": 0,
+      "blocking": true
+    },
+    {
+      "id": "CLO-13",
+      "criterion": "no stage writes into another stage's declared write zone",
+      "measure": "cross_zone_writes",
       "expect": 0,
       "blocking": true
     }

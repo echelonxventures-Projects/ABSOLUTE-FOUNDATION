@@ -456,39 +456,63 @@ def probe_argv(sig: dict, rel: str, root: Path, tail: list[str]) -> list[str]:
     return [*words, rel, *tail] if words else []
 
 
-def discover_candidates(decl: dict, disc: dict) -> dict[str, list[list[str]]]:
-    """rel -> every distinct argv tail the repository itself passes that executable.
+def discover_candidates(decl: dict, disc: dict) -> dict[str, dict]:
+    """rel -> {"tails": [argv tails], "surface": whether the repository invokes it}.
 
-    The tail matters: a producer the repository invokes with a sub-command writes
-    nothing when invoked bare, and probing it bare would clear it falsely. Every
-    declared invocation is collected, not merely the first, because a producer is a
-    producer under any invocation the repository performs — otherwise a benign first
-    recipe line would be enough to hide one.
+    Two scopes, because one is provably not enough. The Execution Surface supplies
+    the argv the repository actually uses — which matters, since a producer invoked
+    with a sub-command writes nothing when invoked bare — and every distinct
+    invocation is collected, not merely the first, so a benign recipe line cannot
+    hide a producer behind itself. But the surface can only name what the repository
+    admits it runs; an executable committed and wired to nothing is invisible to it.
+    The tracked tree is therefore also a scope, probed bare, so a producer outside
+    every reference still has to answer for itself.
+
+    The two scopes carry different burdens, and the flag records which applies. What
+    the repository invokes ITSELF must be measurable, because the repository runs it.
+    What only the tree scope found is invoked by nothing, so a bare run that cannot
+    even start proves it has no governance path rather than that it is evading one.
     """
     tracked = set(snapshot_tracked())
     stages = list((decl.get("pipeline") or {}).get("stages") or [])
     already = declared_invocations(stages)
-    found: dict[str, list[list[str]]] = {}
-    for line in surface_lines(disc):
-        for segment in _SEG.split(line):
-            for token in _TOKEN.findall(segment):
-                if token not in tracked:
-                    continue
-                if token not in found:
-                    sig = entry_signature(disc, token, REPO)
-                    if sig is None:
+    scope = disc.get("candidate_scope") or {}
+    found: dict[str, dict] = {}
+
+    def admit(token: str) -> bool:
+        """Is this tracked path a candidate producer at all?"""
+        if token in found:
+            return True
+        sig = entry_signature(disc, token, REPO)
+        if sig is None:
+            return False
+        # The aggregate may not enter its own pipeline (the recursive-generator
+        # topology). The exclusion is structural — this file's own home — not a name.
+        if (REPO / token).resolve().is_relative_to(HERE):
+            return False
+        if token in already or module_path(token, sig) in already:
+            return False
+        found[token] = {"tails": [], "surface": False}
+        return True
+
+    if scope.get("execution_surface", True):
+        for line in surface_lines(disc):
+            for segment in _SEG.split(line):
+                for token in _TOKEN.findall(segment):
+                    if token not in tracked or not admit(token):
                         continue
-                    # The aggregate may not enter its own pipeline (the recursive-
-                    # generator topology). The exclusion is structural — this file's
-                    # own home — not a name.
-                    if (REPO / token).resolve().is_relative_to(HERE):
-                        continue
-                    if token in already or module_path(token, sig) in already:
-                        continue
-                    found[token] = []
-                tail = _TOKEN.findall(_CUT.split(segment.split(token, 1)[1])[0])
-                if tail not in found[token]:
-                    found[token].append(tail)
+                    found[token]["surface"] = True
+                    tail = _TOKEN.findall(_CUT.split(segment.split(token, 1)[1])[0])
+                    if tail not in found[token]["tails"]:
+                        found[token]["tails"].append(tail)
+
+    if scope.get("whole_tracked_tree"):
+        for token in sorted(tracked):
+            if admit(token) and not found[token]["tails"]:
+                found[token]["tails"].append([])
+
+    for record in found.values():
+        record["tails"] = record["tails"] or [[]]
     return found
 
 
@@ -506,9 +530,10 @@ def probe_producers(decl: dict, disc: dict) -> dict:
     candidates = discover_candidates(decl, disc)
     result: dict = {
         "candidates": len(candidates),
-        "invocations": sum(len(v) for v in candidates.values()),
+        "invocations": sum(len(v["tails"]) for v in candidates.values()),
         "producers": {},
         "unprobed": {},
+        "unreachable": {},
         "inert": [],
         "self_excluded": [],
         "isolated": False,
@@ -546,11 +571,11 @@ def probe_producers(decl: dict, disc: dict) -> dict:
 
         tracked_rels = [p for p in git("ls-files", "-z", root=tree).split("\0") if p]
 
-        for rel, invocations in sorted(candidates.items()):
+        for rel, record in sorted(candidates.items()):
             sig = entry_signature(disc, rel, tree)
             wrote: dict[str, str] = {}
             ran, guarded, reasons = False, False, []
-            for tail in invocations:
+            for tail in record["tails"]:
                 argv = probe_argv(sig, rel, tree, tail) if sig else []
                 if not argv:
                     reasons.append("no runnable invocation")
@@ -594,8 +619,18 @@ def probe_producers(decl: dict, disc: dict) -> dict:
                 # pipeline is exactly what the recursive-generator remediation
                 # requires. Accounted for, and by a declared mechanism.
                 result["self_excluded"].append(rel)
-            else:
+            elif record["surface"]:
+                # The repository invokes this itself, with this argv, and it still
+                # could not run. That is a verdict the repository owes and does not
+                # have, so it blocks.
                 result["unprobed"][rel] = "; ".join(reasons) or "not runnable"
+            else:
+                # Nothing in the repository invokes it, and it cannot even start
+                # unaided. It is a latent producer with no governance path rather than
+                # one evading measurement: the repository cannot drive it, so it
+                # cannot write during any repository operation. Counted and named, so
+                # the population can never be silently assumed empty.
+                result["unreachable"][rel] = "; ".join(reasons) or "not runnable"
     finally:
         git("worktree", "remove", "--force", str(tree))
         shutil.rmtree(holder, ignore_errors=True)
@@ -733,6 +768,26 @@ def _detect_foreign_projection_write(ctx: dict) -> list[str]:
     ]
 
 
+def _detect_cross_zone_write(ctx: dict) -> list[str]:
+    """A stage that wrote a path a DIFFERENT stage's declared zone owns.
+
+    Attributing residue to some declared zone is not enough. If the writer is not
+    the owner, the artifact has two producers and belongs to no single write scope,
+    so regenerating it from its declared owner cannot reproduce it.
+    """
+    out: list[str] = []
+    for stage_id, paths in ctx["attribution"].items():
+        for path in paths:
+            owner = owner_of(ctx["stages"], path)
+            if owner is not None and owner != stage_id:
+                ctx["cross_zone"].add(path)
+                out.append(
+                    f"{path} was written by {stage_id} but is owned by {owner}'s declared "
+                    "write zone, so it belongs to no single write scope"
+                )
+    return out
+
+
 def _detect_unattributed_residue(ctx: dict) -> list[str]:
     out: list[str] = []
     for stage_id, paths in ctx["attribution"].items():
@@ -753,6 +808,7 @@ DETECTORS = {
     "pass_instability": _detect_pass_instability,
     "foreign_projection_write": _detect_foreign_projection_write,
     "unattributed_residue": _detect_unattributed_residue,
+    "cross_zone_write": _detect_cross_zone_write,
     "reentrancy": _detect_reentrancy,
 }
 
@@ -840,6 +896,7 @@ def check_producer_completeness(decl: dict) -> list[str]:
         f"  discovered candidates={sweep['candidates']} "
         f"producers={len(sweep.get('producers') or {})} "
         f"inert={len(sweep.get('inert') or [])} "
+        f"unreachable={len(sweep.get('unreachable') or {})} "
         f"self-excluded={len(sweep.get('self_excluded') or [])} "
         f"unprobed={len(sweep.get('unprobed') or {})} "
         f"isolated={'yes' if sweep.get('isolated') else 'NO'}"
@@ -901,6 +958,7 @@ def cmd_gate(
     findings: list[str] = []
     detected: list[tuple[str, str]] = []
     unattributed: set[str] = set()
+    cross_zone: set[str] = set()
     reentrancy_notes: list[str] = []
 
     # CLO-01 — a fixed point may not be asserted over an uncommitted tree.
@@ -940,6 +998,7 @@ def cmd_gate(
             f"  producer sweep: candidates={sweep['candidates']} "
             f"producers={len(sweep.get('producers') or {})} "
             f"inert={len(sweep.get('inert') or [])} "
+            f"unreachable={len(sweep.get('unreachable') or {})} "
             f"self-excluded={len(sweep.get('self_excluded') or [])} "
             f"unprobed={len(sweep.get('unprobed') or {})} "
             f"isolated={'yes' if sweep.get('isolated') else 'NO'}"
@@ -987,6 +1046,7 @@ def cmd_gate(
                 "registration_owner": reg_owner,
                 "index": index,
                 "unattributed": unattributed,
+                "cross_zone": cross_zone,
                 "reentrancy": reentrancy_notes,
             }
             for detector_name, rule in sorted(cycle_by_detector.items()):
@@ -1003,6 +1063,7 @@ def cmd_gate(
                     detected.append((str(rule.get("id")), description))
 
     measured["unattributed_paths"] = len(unattributed)
+    measured["cross_zone_writes"] = len(cross_zone)
     measured["cycles_detected"] = len({cid for cid, _ in detected})
 
     # Restore: the gate observes, it does not leave damage. Safe because CLO-01
