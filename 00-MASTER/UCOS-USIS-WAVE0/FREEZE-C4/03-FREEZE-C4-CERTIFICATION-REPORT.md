@@ -17,8 +17,8 @@
 | Realization types | 24 → **29** (+1 +4 sub-types) |
 | Realization lifecycles | 6 → **7** (+1: SCIENCE_INTELLIGENCE) |
 | Objects reclassified into 7th stream | 0 (none — stream purity preserved) |
-| C2 object-distribution (recomputed, byte-identical basis) | `3e9759f871232eb6746cbb24b80d62cdbccf953b7c860b79def523c99bedb07f` |
-| **FREEZE C4 seal (sha256)** | **`d86f3d5c2d78df21bcbb68d4384118b8deeae014e49b10fc4c75c01a9b2175ea`** |
+| C2 object-distribution (recomputed, byte-identical basis) | `7c3e0d8cc3c67bcb507a8ea7fdc9b247d749333380a3a6ec277d59e5a1ade61d` |
+| **FREEZE C4 seal (sha256)** | **`995af8bea43c79bdb7050142b291df88be9efe02d93bed905f5604be22a600e3`** |
 
 ### Method
 
@@ -40,6 +40,6 @@ Imported the certified FREEZE C2 model **verbatim** from `phase3r_engine.py` (no
 
 ## FREEZE C4 — Constitutional Execution-Stream Model (7 streams)
 
-**FREEZE C4 is CERTIFIED and IMMUTABLE at seal `d86f3d5c2d78df21bcbb68d4384118b8deeae014e49b10fc4c75c01a9b2175ea`.** It is the constitutional successor to FREEZE C2 (adds the 7th Universal Science & Intelligence stream, the SCIENCE_INTELLIGENCE_CAPABILITY type + sub-types, and the SCIENCE_INTELLIGENCE lifecycle + gap vocabulary). FREEZE C2/C3 remain immutable and unmodified. The 7-stream model is now the governing execution model for classifying USIS capabilities as they register in Wave 1+.
+**FREEZE C4 is CERTIFIED and IMMUTABLE at seal `995af8bea43c79bdb7050142b291df88be9efe02d93bed905f5604be22a600e3`.** It is the constitutional successor to FREEZE C2 (adds the 7th Universal Science & Intelligence stream, the SCIENCE_INTELLIGENCE_CAPABILITY type + sub-types, and the SCIENCE_INTELLIGENCE lifecycle + gap vocabulary). FREEZE C2/C3 remain immutable and unmodified. The 7-stream model is now the governing execution model for classifying USIS capabilities as they register in Wave 1+.
 
 _READ-ONLY: no repository corpus/governed/frozen artifact modified; FREEZE C2/C3 untouched; no implementation performed; C4 register package is operational memory._

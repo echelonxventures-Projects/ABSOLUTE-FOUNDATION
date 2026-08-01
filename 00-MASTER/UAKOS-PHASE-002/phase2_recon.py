@@ -37,6 +37,22 @@ CONCEPTS = {c["id"]: c for c in CLOSURE["concepts"]}
 PROV = {p["id"]: p for p in PB["provenance"]}
 BASE = {"commit": CLOSURE.get("baseline_commit"), "branch": CLOSURE.get("branch")}
 
+# Keys by which an input records the commit it was derived at. Hashing an input
+# whole would make this programme's TRACKED artifacts depend on that commit (RFP-2):
+# the fingerprint would move on every commit, so the artifact could never be
+# reproduced and would evidence nothing. Excluding the anchor keys the fingerprint to
+# the input's SUBSTANCE, which is what the audit is actually attesting.
+_ANCHOR_KEYS = ("baseline_commit", "branch")
+
+
+def _stable_input_sha(path):
+    """sha256 of a json input with its commit anchor removed."""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(data, dict):
+        data = {k: v for k, v in data.items() if k not in _ANCHOR_KEYS}
+    canonical = json.dumps(data, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
 TEXT_EXT = {".md", ".txt", ".py", ".json", ".toml", ".sh", ".yml", ".yaml", ".cfg"}
 FAMILIES = [
     ("UCKO", re.compile(r"\bUCKO-[A-Z]+-\d{3,4}\b")), ("UKDA-DEC", re.compile(r"\bUKDA-DEC-\d{3,4}\b")),
@@ -430,8 +446,8 @@ def main():
     b = hdr("09 — Repository Integrity Report",
             "Machine-verified integrity determination for the reconciliation baseline.")
     prov_sha = hashlib.sha256(PROV_PATH.read_bytes()).hexdigest()
-    closure_sha = hashlib.sha256(CLOSURE_PATH.read_bytes()).hexdigest()
-    b += (f"- Input `closure.json` SHA-256: `{closure_sha}`\n"
+    closure_sha = _stable_input_sha(CLOSURE_PATH)
+    b += (f"- Input `closure.json` SHA-256 (substance, commit anchor excluded): `{closure_sha}`\n"
           f"- Input `provenance.json` SHA-256: `{prov_sha}`\n\n"
           + fence([
               ["every object has exactly one status", "PASS" if single_status else "FAIL"],

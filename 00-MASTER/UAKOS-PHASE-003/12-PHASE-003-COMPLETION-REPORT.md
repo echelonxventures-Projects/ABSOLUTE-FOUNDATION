@@ -16,7 +16,7 @@
 | Dependency closure | CLOSED (1194 nodes / 12819 edges) |
 | Circular dependencies | 0 node(s) |
 | CRITICAL/HIGH open gaps | 140 |
-| FREEZE C seal (sha256) | `e6552ae0c5a2883654c0604e8687c79e5d3c9d110deb63d63db6367db1b6e4ac` |
+| FREEZE C seal (sha256) | `162ea0b068e41d4ed3e3cc5946f74a84545dcf593ecbfb8b8109610961519a77` |
 
 ## Method
 
@@ -56,6 +56,6 @@ Consumed FREEZE A (certified `closure.json`) + FREEZE B (Phase-002 status) + the
 
 ## FREEZE C — Implementation Gap Baseline
 
-**FREEZE C is CERTIFIED and IMMUTABLE at seal `e6552ae0c5a2883654c0604e8687c79e5d3c9d110deb63d63db6367db1b6e4ac`.** The complete Constitutional Implementation Gap Baseline (gap register, classification, dependency closure, readiness, criticality, blockers, completeness, capability + repository gap matrices) is established. Implementation planning (Phase-004) SHALL consume FREEZE A + FREEZE B + FREEZE C as authoritative governance inputs. **Phase-004 Implementation Planning may begin.**
+**FREEZE C is CERTIFIED and IMMUTABLE at seal `162ea0b068e41d4ed3e3cc5946f74a84545dcf593ecbfb8b8109610961519a77`.** The complete Constitutional Implementation Gap Baseline (gap register, classification, dependency closure, readiness, criticality, blockers, completeness, capability + repository gap matrices) is established. Implementation planning (Phase-004) SHALL consume FREEZE A + FREEZE B + FREEZE C as authoritative governance inputs. **Phase-004 Implementation Planning may begin.**
 
 _READ-ONLY: no implementation, repository modification, task generation, implementation plan, refactor, constitution change, or new knowledge objects were produced._

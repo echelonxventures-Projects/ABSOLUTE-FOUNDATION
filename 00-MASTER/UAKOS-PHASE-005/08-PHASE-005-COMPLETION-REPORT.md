@@ -17,7 +17,7 @@
 | Authorized executor roles | 4 |
 | Governance-release-gated (deferred) | 58 |
 | CERTIFY dual-sign-off units | 21 |
-| FREEZE E seal (sha256) | `f25c3e1bb6a5059be902b5658b3fb8d4233867a8059edcce6a465eb595ea81c0` |
+| FREEZE E seal (sha256) | `48d5dd0859a7f14507fe51729a4c28390798ac196cd8b07fd10fd88a5a1b3eae` |
 
 ### Authorized executors
 
@@ -59,6 +59,6 @@ Reproduced the 109 FREEZE-D units from the PHASE-003R realization model (FREEZE 
 
 ## FREEZE E — Implementation Execution Governance
 
-**FREEZE E is CERTIFIED and IMMUTABLE at seal `f25c3e1bb6a5059be902b5658b3fb8d4233867a8059edcce6a465eb595ea81c0`.** The governed execution model (execution authorizations, execution packages, validation/certification/rollback governance, execution readiness) is established. Implementation SHALL NOT begin until FREEZE A+B+C2+D+E are all certified — now satisfied. Every implementation commit SHALL reference its Implementation Unit, Execution Authorization, Execution Package, Validation Evidence, and Certification Evidence, and no implementation may bypass an Execution Authorization. **Controlled implementation execution may now begin.**
+**FREEZE E is CERTIFIED and IMMUTABLE at seal `48d5dd0859a7f14507fe51729a4c28390798ac196cd8b07fd10fd88a5a1b3eae`.** The governed execution model (execution authorizations, execution packages, validation/certification/rollback governance, execution readiness) is established. Implementation SHALL NOT begin until FREEZE A+B+C2+D+E are all certified — now satisfied. Every implementation commit SHALL reference its Implementation Unit, Execution Authorization, Execution Package, Validation Evidence, and Certification Evidence, and no implementation may bypass an Execution Authorization. **Controlled implementation execution may now begin.**
 
 _READ-ONLY: no implementation, code generation, repository modification, refactor, constitution change, or new knowledge objects were produced._
