@@ -256,7 +256,7 @@
       "signature": "A discovered candidate could not be executed and does not participate in the declared re-entrancy protocol, so whether it writes tracked content is unknown. Producer completeness may not be asserted over an executable the repository cannot run: an unprobed candidate is an undetermined verdict, and treating it as innocent would make the whole measurement fail open. A candidate that aborts BECAUSE the declared guard is armed is not unprobed — it is self-excluded by the repository's own mechanism and is accounted for as such."
     }
   ],
-  "declaration_seal_sha256": "4be20620fa17c94a5ab0f870661923cecace70b903d8e932d283f8e1cfaab608",
+  "declaration_seal_sha256": "e0d5db8fb2f447116d61e179e1f720635b1ddcd19ed188db7d130a7205d9a19e",
   "findings": [],
   "lifecycle": [
     {
@@ -541,6 +541,187 @@
         "required": true,
         "writes": [
           "00-MASTER/UCOS-RIB-001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). self-contained replay: re-derives currency from the committed corpus.json, so the stage is a function of tracked content and needs no corpus root.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UKAP-001/corpus_engine.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-UKAP",
+        "name": "Corpus currency",
+        "owner": "00-MASTER/UKAP-001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UKAP-001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). self-contained replay: re-renders every register from the in-repo assimilation.json, so no external evidence tree is required. Ordered after the corpus stage it consumes.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-ASSIMILATE",
+        "name": "Constitutional assimilation",
+        "owner": "00-MASTER/UAKOS-CLOSURE-008",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAKOS-CLOSURE-008/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). regenerates the analysis registry from its declaration.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCOS-UAR-001/uar_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UAR",
+        "name": "Analysis registry",
+        "owner": "00-MASTER/UCOS-UAR-001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCOS-UAR-001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). authority is upstream of ratification, which is upstream of traceability and freeze eligibility; this is the order the convergence suite already asserts.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCOS-UCAF-001/ucaf_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UCAF",
+        "name": "Constitutional authority",
+        "owner": "00-MASTER/UCOS-UCAF-001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCOS-UCAF-001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). consumes the ratification instruments an earlier stage regenerates, so it must follow them; ordering here is what makes its output a function of tracked content.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCOS-URAT-001/urat_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-URAT",
+        "name": "Ratification registry",
+        "owner": "00-MASTER/UCOS-URAT-001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCOS-URAT-001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). reconciles against the certified corpus the earlier stages settle.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCOS-UTCE-001/utce_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UTCE",
+        "name": "Traceability closure",
+        "owner": "00-MASTER/UCOS-UTCE-001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCOS-UTCE-001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). consumes the ratification registry, so it follows it.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCOS-UFEP-001/ufep_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UFEP",
+        "name": "Freeze eligibility",
+        "owner": "00-MASTER/UCOS-UFEP-001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCOS-UFEP-001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). renders the capability binding register.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAEP-000001/uaep_engine.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-UAEP",
+        "name": "Platform capability binding",
+        "owner": "00-MASTER/UAEP-000001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAEP-000001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). renders the faculty binding and register plane.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UAIE-000001/uaie_engine.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-UAIE",
+        "name": "Architectural intelligence",
+        "owner": "00-MASTER/UAIE-000001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UAIE-000001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). renders the evolution law and lifecycle registers.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCEF-000001/ucef_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UCEF",
+        "name": "Constitutional evolution",
+        "owner": "00-MASTER/UCEF-000001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCEF-000001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). self-contained replay: re-renders 01..10 from the committed roadmap.json. Last of the added stages because it aggregates what the others settle.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
+          "--render"
+        ],
+        "heavy": false,
+        "id": "STAGE-MXR",
+        "name": "Master execution roadmap",
+        "owner": "00-MASTER/UCOS-MXR-001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCOS-MXR-001/"
         ]
       },
       {

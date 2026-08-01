@@ -46,7 +46,18 @@ It executes the declared pipeline **3 times** over the committed HEAD and requir
 | 10 | `STAGE-UPF` Universal provider framework | 00-MASTER/UPF-000001 (PROGRAM-003) | no | yes | yes |
 | 11 | `STAGE-MCOS` Universal Meta-Civilization Platform deliverables (PROGRAM-004) | 00-MASTER/MCOS-000001 | no | yes | yes |
 | 12 | `STAGE-RIB` Repository integration blueprint | 00-MASTER/UCOS-RIB-001 | no | yes | yes |
-| 13 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
+| 13 | `STAGE-UKAP` Corpus currency | 00-MASTER/UKAP-001 | no | yes | yes |
+| 14 | `STAGE-ASSIMILATE` Constitutional assimilation | 00-MASTER/UAKOS-CLOSURE-008 | no | yes | yes |
+| 15 | `STAGE-UAR` Analysis registry | 00-MASTER/UCOS-UAR-001 | no | yes | yes |
+| 16 | `STAGE-UCAF` Constitutional authority | 00-MASTER/UCOS-UCAF-001 | no | yes | yes |
+| 17 | `STAGE-URAT` Ratification registry | 00-MASTER/UCOS-URAT-001 | no | yes | yes |
+| 18 | `STAGE-UTCE` Traceability closure | 00-MASTER/UCOS-UTCE-001 | no | yes | yes |
+| 19 | `STAGE-UFEP` Freeze eligibility | 00-MASTER/UCOS-UFEP-001 | no | yes | yes |
+| 20 | `STAGE-UAEP` Platform capability binding | 00-MASTER/UAEP-000001 | no | yes | yes |
+| 21 | `STAGE-UAIE` Architectural intelligence | 00-MASTER/UAIE-000001 | no | yes | yes |
+| 22 | `STAGE-UCEF` Constitutional evolution | 00-MASTER/UCEF-000001 | no | yes | yes |
+| 23 | `STAGE-MXR` Master execution roadmap | 00-MASTER/UCOS-MXR-001 | no | yes | yes |
+| 24 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
 
 ## Exit semantics
 

@@ -456,34 +456,39 @@ def probe_argv(sig: dict, rel: str, root: Path, tail: list[str]) -> list[str]:
     return [*words, rel, *tail] if words else []
 
 
-def discover_candidates(decl: dict, disc: dict) -> dict[str, list[str]]:
-    """rel -> the argv tail the repository itself passes that executable.
+def discover_candidates(decl: dict, disc: dict) -> dict[str, list[list[str]]]:
+    """rel -> every distinct argv tail the repository itself passes that executable.
 
     The tail matters: a producer the repository invokes with a sub-command writes
-    nothing when invoked bare, and probing it bare would clear it falsely. Using
-    the repository's OWN invocation keeps the probe faithful to what it measures.
+    nothing when invoked bare, and probing it bare would clear it falsely. Every
+    declared invocation is collected, not merely the first, because a producer is a
+    producer under any invocation the repository performs — otherwise a benign first
+    recipe line would be enough to hide one.
     """
     tracked = set(snapshot_tracked())
     stages = list((decl.get("pipeline") or {}).get("stages") or [])
     already = declared_invocations(stages)
-    found: dict[str, list[str]] = {}
+    found: dict[str, list[list[str]]] = {}
     for line in surface_lines(disc):
         for segment in _SEG.split(line):
-            tokens = _TOKEN.findall(segment)
-            for token in tokens:
-                if token not in tracked or token in found:
+            for token in _TOKEN.findall(segment):
+                if token not in tracked:
                     continue
-                sig = entry_signature(disc, token, REPO)
-                if sig is None:
-                    continue
-                # The aggregate may not enter its own pipeline (the recursive-generator
-                # topology). The exclusion is structural — this file's own home — not a name.
-                if (REPO / token).resolve().is_relative_to(HERE):
-                    continue
-                if token in already or module_path(token, sig) in already:
-                    continue
-                after = segment.split(token, 1)[1]
-                found[token] = _TOKEN.findall(_CUT.split(after)[0])
+                if token not in found:
+                    sig = entry_signature(disc, token, REPO)
+                    if sig is None:
+                        continue
+                    # The aggregate may not enter its own pipeline (the recursive-
+                    # generator topology). The exclusion is structural — this file's
+                    # own home — not a name.
+                    if (REPO / token).resolve().is_relative_to(HERE):
+                        continue
+                    if token in already or module_path(token, sig) in already:
+                        continue
+                    found[token] = []
+                tail = _TOKEN.findall(_CUT.split(segment.split(token, 1)[1])[0])
+                if tail not in found[token]:
+                    found[token].append(tail)
     return found
 
 
@@ -501,6 +506,7 @@ def probe_producers(decl: dict, disc: dict) -> dict:
     candidates = discover_candidates(decl, disc)
     result: dict = {
         "candidates": len(candidates),
+        "invocations": sum(len(v) for v in candidates.values()),
         "producers": {},
         "unprobed": {},
         "inert": [],
@@ -538,36 +544,50 @@ def probe_producers(decl: dict, disc: dict) -> dict:
             # declared stage legitimately consumes.
             restore()
 
-        for rel, tail in sorted(candidates.items()):
+        tracked_rels = [p for p in git("ls-files", "-z", root=tree).split("\0") if p]
+
+        for rel, invocations in sorted(candidates.items()):
             sig = entry_signature(disc, rel, tree)
-            argv = probe_argv(sig, rel, tree, tail) if sig else []
-            if not argv:
-                result["unprobed"][rel] = "no runnable invocation"
-                continue
-            before = probe_snapshot(tree)
-            output = ""
-            try:
-                run = subprocess.run(
-                    argv,
-                    cwd=tree,
-                    capture_output=True,
-                    text=True,
-                    timeout=timeout,
-                    check=False,
-                    env=env,
+            wrote: dict[str, str] = {}
+            ran, guarded, reasons = False, False, []
+            for tail in invocations:
+                argv = probe_argv(sig, rel, tree, tail) if sig else []
+                if not argv:
+                    reasons.append("no runnable invocation")
+                    continue
+                before = probe_snapshot(tree, tracked_rels)
+                output = ""
+                try:
+                    run = subprocess.run(
+                        argv,
+                        cwd=tree,
+                        capture_output=True,
+                        text=True,
+                        timeout=timeout,
+                        check=False,
+                        env=env,
+                    )
+                    code = run.returncode
+                    output = (run.stdout or "") + (run.stderr or "")
+                except subprocess.TimeoutExpired:
+                    code = "timeout"
+                except (OSError, subprocess.SubprocessError) as exc:
+                    code = f"{exc}"
+                wrote.update(
+                    probe_writes(before, probe_snapshot(tree, tracked_rels), tree)
                 )
-                code = run.returncode
-                output = (run.stdout or "") + (run.stderr or "")
-            except subprocess.TimeoutExpired:
-                code = "timeout"
-            except (OSError, subprocess.SubprocessError) as exc:
-                code = f"{exc}"
-            wrote = probe_writes(before, probe_snapshot(tree))
+                if code == 0:
+                    ran = True
+                else:
+                    reasons.append(f"{' '.join(tail) or '(no arguments)'}: exit {code}")
+                    if honours_guard(rel, tree, guard, output):
+                        guarded = True
+                restore()
             if wrote:
                 result["producers"][rel] = wrote
-            elif code == 0:
+            elif ran:
                 result["inert"].append(rel)
-            elif honours_guard(rel, tree, guard, output):
+            elif guarded:
                 # It refused to run because the declared re-entrancy guard is armed.
                 # That is not an unknown verdict: the repository's own guard protocol
                 # is what excluded it, and a producer that cannot run inside the
@@ -575,8 +595,7 @@ def probe_producers(decl: dict, disc: dict) -> dict:
                 # requires. Accounted for, and by a declared mechanism.
                 result["self_excluded"].append(rel)
             else:
-                result["unprobed"][rel] = f"exit {code}"
-            restore()
+                result["unprobed"][rel] = "; ".join(reasons) or "not runnable"
     finally:
         git("worktree", "remove", "--force", str(tree))
         shutil.rmtree(holder, ignore_errors=True)
@@ -584,40 +603,41 @@ def probe_producers(decl: dict, disc: dict) -> dict:
     return result
 
 
-def probe_snapshot(root: Path) -> dict[str, tuple[str, int]]:
-    """(content hash, mtime) per tracked file — the probe's observation primitive.
+def probe_snapshot(root: Path, rels: list[str]) -> dict[str, int]:
+    """Modification time per tracked file — the probe's observation primitive.
 
-    Content alone is not enough. A producer whose output is ALREADY at its fixed
-    point rewrites identical bytes, so a content-only comparison would clear it and
-    an adversary could hide a producer simply by committing its output first. The
-    modification time advances whether or not the bytes changed, so writing is
-    observed as an ACT rather than inferred from a difference.
+    Content is deliberately not hashed here. A producer whose output is ALREADY at
+    its fixed point rewrites identical bytes, so a content comparison would clear it
+    and an adversary could hide a producer merely by committing its output first.
+    The modification time advances whether or not the bytes changed, so writing is
+    observed as an ACT rather than inferred from a difference — and a stat over the
+    tracked set is cheap enough to afford once per declared invocation.
     """
-    out: dict[str, tuple[str, int]] = {}
-    for rel in (p for p in git("ls-files", "-z", root=root).split("\0") if p):
-        target = root / rel
+    out: dict[str, int] = {}
+    for rel in rels:
         try:
-            out[rel] = (
-                hashlib.sha256(target.read_bytes()).hexdigest(),
-                target.stat().st_mtime_ns,
-            )
+            out[rel] = (root / rel).stat().st_mtime_ns
         except OSError:
             continue
     return out
 
 
-def probe_writes(
-    before: dict[str, tuple[str, int]], after: dict[str, tuple[str, int]]
-) -> dict[str, str]:
-    """path -> how it was written. Both a content change and a silent rewrite count."""
+def probe_writes(before: dict[str, int], after: dict[str, int], root: Path) -> dict[str, str]:
+    """path -> how it was written. A silent rewrite counts as much as a change.
+
+    Which paths differ in CONTENT is asked of git, which answers for the whole tree
+    in one call; the mtime comparison supplies the rest. The distinction is evidence,
+    not verdict: both outcomes make the executable a producer.
+    """
+    changed = {path for _, path in porcelain(root=root)}
     out: dict[str, str] = {}
-    for rel, (sha, mtime) in after.items():
+    for rel, mtime in after.items():
         prior = before.get(rel)
         if prior is None:
             continue
-        if prior[0] != sha:
+        if rel in changed:
             out[rel] = "content changed"
-        elif mtime > prior[1]:
+        elif mtime > prior:
             out[rel] = "rewritten with identical bytes"
     for rel in before:
         if rel not in after:
