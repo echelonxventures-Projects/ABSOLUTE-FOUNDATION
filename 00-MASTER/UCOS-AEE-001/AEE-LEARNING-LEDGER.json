@@ -353,7 +353,7 @@
       "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-GATES-PASS": {
-      "observed": 21,
+      "observed": 22,
       "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-PROGRAMMES-PASS": {
@@ -405,7 +405,7 @@
       "verdict": "SATISFIED"
     },
     "OBS-FIXED-POINT-DECLARATION-SEAL": {
-      "observed": "2dcbdd48f6e24639d54b64099bf1150f37d9c4fd93cb11e50e5728a364b54b57",
+      "observed": "9db64454176a23734aabb38fcf92b5171a776ec340b74c37aa852dce55f81452",
       "verdict": "SATISFIED"
     },
     "OBS-FIXED-POINT-FINDINGS": {

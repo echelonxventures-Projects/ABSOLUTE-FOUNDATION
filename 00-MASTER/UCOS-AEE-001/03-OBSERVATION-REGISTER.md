@@ -18,7 +18,7 @@
 | `OBS-AGGREGATE-BLOCKING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `blocking_failures` | `is_empty` | SATISFIED | `[]` |
 | `OBS-AGGREGATE-UNPROVEN` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `unproven` | `is_empty` | SATISFIED | `[]` |
 | `OBS-AGGREGATE-GATE-EXIT` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gate_exit` | `equals` | SATISFIED | `0` |
-| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gates` | `every_field_in` | SATISFIED | `21` |
+| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gates` | `every_field_in` | SATISFIED | `22` |
 | `OBS-AGGREGATE-PROGRAMMES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `programs` | `every_field_in` | SATISFIED | `19` |
 | `OBS-AGGREGATE-CEILING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `certification_ceiling` | `is_empty` | **VIOLATED** | `["`UCCEP-F-004` — Constitutional finality is reserved to an ou…"]` |
 | `OBS-KNOWLEDGE-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | `determination` | `equals` | SATISFIED | `"CLOSED"` |
@@ -51,5 +51,5 @@
 | `OBS-CORPUS-CURRENCY` | `00-MASTER/UKAP-001/corpus_engine.py` | `determination` | `equals` | SATISFIED | `"CORPUS CURRENT"` |
 | `OBS-ASSIMILATION-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | `determination` | `equals` | SATISFIED | `"REPOSITORY CONSTITUTIONALLY COMPLETE"` |
 | `OBS-ROADMAP-VERDICT` | `00-MASTER/UCOS-MXR-001/roadmap_engine.py` | `verdict` | `not_empty` | SATISFIED | `"CONDITIONAL GO"` |
-| `OBS-FIXED-POINT-DECLARATION-SEAL` | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | `declaration_seal_sha256` | `not_empty` | SATISFIED | `"2dcbdd48f6e24639d54b64099bf1150f37d9c4fd93cb11e50e5728a364b54b57"` |
+| `OBS-FIXED-POINT-DECLARATION-SEAL` | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | `declaration_seal_sha256` | `not_empty` | SATISFIED | `"9db64454176a23734aabb38fcf92b5171a776ec340b74c37aa852dce55f81452"` |
 | `OBS-FIXED-POINT-FINDINGS` | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | `findings` | `is_empty` | SATISFIED | `[]` |
