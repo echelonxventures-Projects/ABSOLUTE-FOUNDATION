@@ -1609,22 +1609,18 @@
       "unknown": false
     },
     {
-      "count": 3,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "3 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-32",
       "primitive": "field_histogram",
       "purpose": "Computed gate verdicts.",
       "rows": [
         [
           "`PASS`",
-          "19"
-        ],
-        [
-          "`FAIL`",
-          "2"
+          "21"
         ],
         [
           "`PASS-WITH-ADVISORY`",
@@ -1634,26 +1630,22 @@
       "unknown": false
     },
     {
-      "count": 3,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "3 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-33",
       "primitive": "field_histogram",
       "purpose": "Computed programme verdicts.",
       "rows": [
         [
           "`PASS`",
-          "12"
+          "15"
         ],
         [
           "`PASS-WITH-ADVISORY`",
           "4"
-        ],
-        [
-          "`FAIL`",
-          "3"
         ]
       ],
       "unknown": false
@@ -2055,7 +2047,7 @@
     {
       "count": 6,
       "evidence": [],
-      "headline": "29/35 located engine(s) bound to at least one entry point, workflow or hook (over 28 tracked binding file(s))",
+      "headline": "29/35 located engine(s) bound to at least one entry point, workflow or hook (over 29 tracked binding file(s))",
       "id": "DV-46",
       "primitive": "text_presence",
       "purpose": "Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.",
@@ -2172,8 +2164,8 @@
         ],
         [
           "`00-MASTER/UCOS-UAR-001/uar_engine.py`",
-          "1",
-          "`Makefile`"
+          "2",
+          "`.github/workflows/uar-gate.yml`, `Makefile`"
         ],
         [
           "`00-MASTER/UCOS-UCAF-001/ucaf_engine.py`",
@@ -2338,8 +2330,8 @@
           "YES",
           "YES",
           "6/6",
-          "123",
-          "`40dddbeae51b`"
+          "131",
+          "`54620eb875ba`"
         ],
         [
           "`S-09`",
@@ -3491,7 +3483,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "40dddbeae51bd3c9e2a7c4fd88d7b88f1216d54fba4e8afc3f06de266bb7d561",
+      "content_sha256": "54620eb875bacc72bc5e7ef93ad5413481a3143250c05a6cdf75be6ac62f8cd3",
       "exists": true,
       "id": "S-08",
       "kind": "aggregate gate determination",
@@ -3515,7 +3507,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The computed aggregate verdicts and the certification ceiling.",
-      "records": 123,
+      "records": 131,
       "required": true,
       "tracked": true
     },

@@ -96,7 +96,7 @@ Automation presence per gate and per deliverable.
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 29/35 located engine(s) bound to at least one entry point, workflow or hook (over 28 tracked binding file(s))
+- **Result** — 29/35 located engine(s) bound to at least one entry point, workflow or hook (over 29 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -123,7 +123,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/UCOS-MXR-001/roadmap_engine.py` | 2 | `.github/workflows/roadmap-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | 2 | `.github/workflows/rfp-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-RIB-001/rib_engine.py` | 2 | `.github/workflows/rib-gate.yml`, `Makefile` |
-| `00-MASTER/UCOS-UAR-001/uar_engine.py` | 1 | `Makefile` |
+| `00-MASTER/UCOS-UAR-001/uar_engine.py` | 2 | `.github/workflows/uar-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-UCAF-001/ucaf_engine.py` | 1 | `Makefile` |
 | `00-MASTER/UCOS-UFEP-001/ufep_engine.py` | 1 | `Makefile` |
 | `00-MASTER/UCOS-URAT-001/urat_engine.py` | 1 | `Makefile` |
