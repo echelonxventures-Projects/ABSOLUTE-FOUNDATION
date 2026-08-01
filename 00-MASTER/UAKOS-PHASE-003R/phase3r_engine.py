@@ -24,7 +24,6 @@ import json
 import re
 import subprocess
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -36,7 +35,6 @@ CLOSURE = json.loads(CLOSURE_PATH.read_text("utf-8"))
 PB = json.loads(PROV_PATH.read_text("utf-8"))
 CONCEPTS = {c["id"]: c for c in CLOSURE["concepts"]}
 PROV = {p["id"]: p for p in PB["provenance"]}
-NOW = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 BASE = {"commit": CLOSURE.get("baseline_commit"), "branch": CLOSURE.get("branch")}
 
 TEXT_EXT = {".md", ".txt", ".py", ".json", ".toml", ".sh", ".yml", ".yaml", ".cfg"}
@@ -333,9 +331,9 @@ def fence(rows, header):
 def hdr(title, answers):
     return (f"# {title}\n\n"
             f"> PROGRAM **UAKOS PHASE-003R** — Universal Realization Model Determination · "
-            f"baseline `{BASE['commit']}` (branch `{BASE['branch']}`) · corrects the Wave-002 category error · "
-            f"consumes FREEZE A–F (read-only) · AUTHORITY = **NONE (DERIVED)** · **READ-ONLY** · generated "
-            f"`{NOW}` by `phase3r_engine.py`.\n>\n> {answers}\n>\n"
+            f"anchor: the containing commit — owned by version control, never restated here · corrects the Wave-002 category error · "
+            f"consumes FREEZE A–F (read-only) · AUTHORITY = **NONE (DERIVED)** · **READ-ONLY** · regenerated "
+            f"by `phase3r_engine.py`.\n>\n> {answers}\n>\n"
             f"> Reproduce: `python3 00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py`.\n\n")
 
 

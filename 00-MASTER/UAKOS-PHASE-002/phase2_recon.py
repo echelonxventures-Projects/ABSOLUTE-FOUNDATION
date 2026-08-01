@@ -24,7 +24,6 @@ import re
 import subprocess
 import zipfile
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -36,7 +35,6 @@ CLOSURE = json.loads(CLOSURE_PATH.read_text("utf-8"))
 PB = json.loads(PROV_PATH.read_text("utf-8"))
 CONCEPTS = {c["id"]: c for c in CLOSURE["concepts"]}
 PROV = {p["id"]: p for p in PB["provenance"]}
-NOW = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 BASE = {"commit": CLOSURE.get("baseline_commit"), "branch": CLOSURE.get("branch")}
 
 TEXT_EXT = {".md", ".txt", ".py", ".json", ".toml", ".sh", ".yml", ".yaml", ".cfg"}
@@ -273,8 +271,8 @@ def fence(rows, header):
 def hdr(title, answers):
     return (f"# {title}\n\n"
             f"> PROGRAM **UAKOS PHASE-002** — Universal Constitutional Repository Reconciliation · "
-            f"baseline `{BASE['commit']}` (branch `{BASE['branch']}`) · "
-            f"AUTHORITY = **NONE (DERIVED / EVIDENCE-BASED TRUTH)** · **READ-ONLY** · generated `{NOW}` "
+            f"anchor: the containing commit — owned by version control, never restated here · "
+            f"AUTHORITY = **NONE (DERIVED / EVIDENCE-BASED TRUTH)** · **READ-ONLY** · regenerated "
             f"by `phase2_recon.py`.\n>\n> {answers}\n>\n"
             f"> Reproduce: `python3 00-MASTER/UAKOS-PHASE-002/phase2_recon.py`.\n\n")
 
