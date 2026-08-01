@@ -62,7 +62,7 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 34 tracked path(s)
+- **Result** — 35 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -72,6 +72,7 @@ Evolution and master-roadmap owners; executable-owner delta.
 | `00-CMG/tools/cmg-gate.sh` | TRACKED |
 | `00-MASTER/MCOS-000001/mcos_engine.py` | TRACKED |
 | `00-MASTER/UAEP-000001/uaep_engine.py` | TRACKED |
+| `00-MASTER/UAIE-000001/uaie_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py` | TRACKED |

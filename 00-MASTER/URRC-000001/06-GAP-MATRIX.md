@@ -75,27 +75,27 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-27`** — Located executable checks bound by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 37 records
+- **Result** — 39 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 37 |
+| records | 39 |
 
 **`DV-28`** — Constitutional gates declared by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 21 records
+- **Result** — 22 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 21 |
+| records | 22 |
 
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 28/34 located engine(s) bound to at least one entry point, workflow or hook (over 27 tracked binding file(s))
+- **Result** — 29/35 located engine(s) bound to at least one entry point, workflow or hook (over 28 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -105,6 +105,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 | `00-CMG/tools/cmg-gate.sh` | 1 | `Makefile` |
 | `00-MASTER/MCOS-000001/mcos_engine.py` | 2 | `.github/workflows/mcos-gate.yml`, `Makefile` |
 | `00-MASTER/UAEP-000001/uaep_engine.py` | 2 | `.github/workflows/uaep-gate.yml`, `Makefile` |
+| `00-MASTER/UAIE-000001/uaie_engine.py` | 2 | `.github/workflows/uaie-gate.yml`, `Makefile` |
 | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | 3 | `.github/workflows/roadmap-gate.yml`, `.kiro/hooks/uakos-closure-002.json`, `Makefile` |
 | `00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py` | 1 | `Makefile` |
 | `00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py` | 1 | `Makefile` |
@@ -133,7 +134,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 | `00-MASTER/UMK-000001/umk_engine.py` | 2 | `.github/workflows/umk-gate.yml`, `Makefile` |
 | `00-MASTER/UPF-000001/upf_engine.py` | 2 | `.github/workflows/uprf-gate.yml`, `Makefile` |
 | `00-MASTER/URRC-000001/urrc_engine.py` | 3 | `.github/workflows/urrc-gate.yml`, `.kiro/hooks/urrc-000001.json`, `Makefile` |
-| `verify.sh` | 7 | `.github/workflows/aee-gate.yml`, `.github/workflows/corpus-currency-gate.yml`, `.github/workflows/ec1-ci.yml`, `.github/workflows/uaep-gate.yml`, `.github/workflows/uccep-gate.yml`, `.github/workflows/ucef-gate.yml`, `Makefile` |
+| `verify.sh` | 8 | `.github/workflows/aee-gate.yml`, `.github/workflows/corpus-currency-gate.yml`, `.github/workflows/ec1-ci.yml`, `.github/workflows/uaep-gate.yml`, `.github/workflows/uaie-gate.yml`, `.github/workflows/uccep-gate.yml`, `.github/workflows/ucef-gate.yml`, `Makefile` |
 
 #### D-15 — Gap — dimension gaps
 

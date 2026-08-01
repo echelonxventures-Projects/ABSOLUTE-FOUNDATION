@@ -22188,6 +22188,24 @@
         "status": "ACTIVE",
         "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
         "name": "02 — CANONICAL OWNERSHIP MATRIX"
+      },
+      {
+        "seq": 4,
+        "at": "2026-08-01T02:47:27+00:00",
+        "content_hash": "e3381b3cff7e2b65e1a79a256eeba0a0a189bf9a112cb73f646940232a701793",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
+        "name": "02 — CANONICAL OWNERSHIP MATRIX"
+      },
+      {
+        "seq": 5,
+        "at": "2026-08-01T03:08:54+00:00",
+        "content_hash": "ced3ddcd82b7857403f0a6ea2841eaeef17c318e40cd105878c7a09a0f440547",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
+        "name": "02 — CANONICAL OWNERSHIP MATRIX"
       }
     ],
     "UCOS-ARCHITECTURA-000003": [

@@ -1,11 +1,13 @@
 {
   "by_kind": {
+    "architectural-intelligence-analysis": 3,
     "closure-analysis": 6,
     "integration-analysis": 6,
     "repository-intelligence-analysis": 7,
     "validation-intelligence-dimension": 7
   },
   "by_owner": {
+    "00-MASTER/UAIE-000001": 3,
     "00-MASTER/UAKOS-CLOSURE-002": 6,
     "00-MASTER/UCOS-RIB-001": 6,
     "intelligence/rie": 7,
@@ -15,6 +17,6 @@
   "gate": "OPEN",
   "gate_exit": 0,
   "programme": "UCOS-UAR-001",
-  "seal_sha256": "3ec09f4a35fe1f7b",
-  "total_analyses": 26
+  "seal_sha256": "2f43e8968bd1267f",
+  "total_analyses": 29
 }

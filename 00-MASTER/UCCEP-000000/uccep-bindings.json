@@ -1112,6 +1112,51 @@
         "1": "gate CLOSED",
         "2": "fail-closed abort"
       }
+    },
+    {
+      "id": "CK-UAIE",
+      "name": "Architectural intelligence bound: every named architectural faculty resolves to a located owner, a home, a symbol and a registered analysis; every declared register of the plane resolves; every cross-register reference still exists",
+      "owner": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/UAIE-000001/uaie_engine.py",
+        "--gate"
+      ],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
+    },
+    {
+      "id": "CK-UAIE-SELF",
+      "name": "UAIE self-guards: declaration integrity, zero-enumeration, write scope, determinism, reuse-before-create, register-plane resolution, no-parallel-authority, Constitutional Evolution Contract obligation binding",
+      "owner": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/UAIE-000001/uaie_engine.py",
+        "--check-declaration",
+        "--check-no-enumeration",
+        "--check-write-scope",
+        "--check-determinism",
+        "--check-reuse-before-create",
+        "--check-register-plane",
+        "--check-no-parallel-authority",
+        "--check-evolution-contract"
+      ],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
     }
   ],
   "$gates_comment": "The mandatory constitutional gates of the mission, each bound to the located checks that execute it. A gate with no bound check would be a MANUAL gate and is itself a finding (no manual governance). The count is not fixed by this file's prose: adding a gate is an entry in the list below and requires no engine change. G-15 REPOSITORY FIXED-POINT GATE. The three checks above are the certification-time preconditions of closure and are executed here. The fixed-point CONDITION itself (RFP-1) is asserted by 00-MASTER/UCOS-RFP-001 AFTER certification — lifecycle steps 11-14 follow step 9 — and is enforced with no opt-out by .github/workflows/rfp-gate.yml on every push and pull request, and by `make rfp-gate`. It is deliberately NOT a check of this engine: the fixed-point engine runs this engine as a pipeline stage, so binding it here made this engine's emitted verdict depend on whether it had been invoked nested, which is the self-observation topology RFP-3 forbids. Measured, not theorised: with it bound here the repository could not converge. The gate graph is now a DAG - the fixed point contains certification, certification does not contain the fixed point.",
@@ -1308,6 +1353,15 @@
       "owner": "00-MASTER/UCOS-UFEP-001 (CEP-007 Art IV eligibility, Art V preconditions, Art X no-drift). Only the programme's SELF-guards are bound here. Its eligibility and completion DETERMINATION reads this aggregate certifier's own sealed model, so binding that determination as a check here would make the certifier a component of its own input — the recursion topology this repository forbids. The determination is gated by its own Makefile target and CI workflow, which run this certifier at full tier first.",
       "checks": [
         "CK-UFEP-SELF"
+      ]
+    },
+    {
+      "id": "G-22",
+      "name": "Architectural Intelligence Gate",
+      "owner": "00-MASTER/UAIE-000001 (00-CMG/CMG-000001 Art LXXVII.2 disposition; 00-MASTER/UCIC-001 implementation contract). The gate proves that every architectural faculty the repository claims — semantic graph, architectural reasoning, dependency, ownership, duplication, gap, evolution, reuse, constitutional and completion intelligence — still resolves to a located owner, a home, a symbol and an analysis registered in 00-MASTER/UCOS-UAR-001, and that the register plane those faculties reason over is internally consistent. The programme is classified SUBSTANTIVE and is therefore absent from 00-CMG/CMG-REGISTRY.json per Art LXXVI.2(b); CK-UAIE-SELF measures that absence, so a claim of meta-constitutional standing closes the gate.",
+      "checks": [
+        "CK-UAIE",
+        "CK-UAIE-SELF"
       ]
     }
   ],

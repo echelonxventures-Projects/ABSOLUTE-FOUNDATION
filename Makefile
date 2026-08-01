@@ -101,6 +101,10 @@ help:
 	@echo "  make uaep-gate     fail-closed Platform Binding Gate (every named capability resolves)"
 	@echo "  make uaep-self     UAEP-000001 guards over its own surface (incl. open-world + reuse-before-create)"
 	@echo "  make uaep-replay   prove the committed registers replay from the committed declaration"
+	@echo "  make uaie          regenerate the UAIE-000001 architectural intelligence registers"
+	@echo "  make uaie-gate     fail-closed Architectural Intelligence Gate (every faculty + register resolves)"
+	@echo "  make uaie-self     UAIE-000001 guards (incl. register-plane, no-parallel-authority, evolution-contract)"
+	@echo "  make uaie-replay   prove the committed architectural registers replay from the declaration"
 	@echo "  make ucaf          regenerate the UCOS-UCAF-001 constitutional authority registers"
 	@echo "  make ucaf-gate     fail-closed Constitutional Authority Gate (no authority undefined)"
 	@echo "  make ucaf-self     UCOS-UCAF-001 guards (incl. knowledge-once + no-vacancy-promotion)"
@@ -1007,6 +1011,81 @@ uaep-replay:
 	@git diff --exit-code -- 00-MASTER/UAEP-000001 \
 	  || { echo "UAEP-000001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
 	@echo "UAEP-000001 replay: no drift"
+
+
+# ---------------------------------------------------------------------------------------
+# uaie: UAIE-000001 — the architectural intelligence faculty binding and register-plane
+# reasoning register.
+#
+# WHY THIS BLOCK EXISTS. The mission this programme records names ten architectural faculties
+# — semantic graph, architectural reasoning, dependency, ownership, duplication, gap, evolution,
+# reuse, constitutional and completion intelligence — and twelve subjects the repository must be
+# able to reason about. EVERY ONE of them already had a canonical owner and a located register
+# before this programme existed, so nothing here is built: each faculty is bound by pointer to
+# the owner that realises it, to the analysis already registered in 00-MASTER/UCOS-UAR-001, and
+# to the registers it reasons over, and the binding is then MEASURED so a rename, a move or a
+# deletion closes the gate instead of silently invalidating the claim.
+#
+# WHAT IS ADDED. Exactly three analyses, and they are entries in the LOCATED analysis registry
+# rather than a registry of this programme's own: cross-register consistency, faculty binding
+# resolution, and closure over the faculty relation. The first is the one measurement no located
+# owner performed — each owner validates its own register, and none reads one register's
+# references against what the repository still holds, so a register that drifts while its own
+# owner stays green is visible only across them.
+#
+# WHAT IS NOT ADDED. No engine, no registry, no catalogue, no identity, no graph, no lifecycle,
+# no authority and no namespace. The programme is classified SUBSTANTIVE under
+# 00-CMG/CMG-000001 Article LXXVI.2(b), which forbids admitting a substantive concept into the
+# meta-constitutional layer, so it is deliberately ABSENT from 00-CMG/CMG-REGISTRY.json — and
+# `uaie-self` MEASURES that absence rather than asserting it (--check-no-parallel-authority).
+#
+# The declaration 00-MASTER/UAIE-000001/uaie-architecture.json is the single source: faculties,
+# owners, homes, symbols, analyses, registers, probes, ontology anchors and validation dimensions
+# are all DATA, so adding one is an edit to that file and never to the engine (proven by
+# --check-no-enumeration, which fails if any declared id, name or path leaks into the source).
+#
+# A declared validation dimension the engine does not measure FAILS CLOSED rather than being
+# reported satisfied — absence of evidence is never evidence.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; READ-ONLY outside its own home.
+# Exit 0 gate OPEN · 1 gate CLOSED · 2 fail-closed abort.
+.PHONY: uaie uaie-gate uaie-self uaie-replay
+uaie:
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --render
+
+uaie-gate:
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --gate
+
+# uaie-self: the seven guards over the programme's own surface — declaration integrity (no
+# duplicate id, no empty mandatory field, no CREATE disposition, every structural register role
+# present), zero-enumeration (no faculty, owner, home, register, path or anchor appears in the
+# engine source, including its docstring), write-scope (every rendered target resolves inside
+# 00-MASTER/UAIE-000001/), determinism (two renders are byte-identical; no wall-clock is
+# emitted), reuse-before-create (no faculty and no canonical owner points inside this
+# programme's own home), register-plane (every declared register resolves, parses, and is
+# claimed by at least one faculty), and no-parallel-authority (the programme holds no place and
+# claims no namespace token in the meta-constitutional plane, and declares AUTHORITY = NONE),
+# and evolution-contract (every one of the ten Constitutional Evolution Contract obligations
+# binds to a located owner, a named gate and evidence that resolves, and the change class,
+# release state and baseline are members of the located registers that own those vocabularies
+# — the VERDICT of each obligation stays with its own gate and is never restated here).
+uaie-self:
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --check-declaration
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --check-no-enumeration
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --check-write-scope
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --check-determinism
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --check-reuse-before-create
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --check-register-plane
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --check-no-parallel-authority
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --check-evolution-contract
+
+# uaie-replay: prove the committed registers are the deterministic product of the committed
+# declaration — the programme's fixed point. Re-render, then require a clean diff over its home.
+uaie-replay:
+	@python3 00-MASTER/UAIE-000001/uaie_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/UAIE-000001 \
+	  || { echo "UAIE-000001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "UAIE-000001 replay: no drift"
 
 
 # ---------------------------------------------------------------------------------------
