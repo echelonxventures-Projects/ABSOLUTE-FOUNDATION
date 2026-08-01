@@ -48,10 +48,10 @@
 | `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `not recorded` |
 | `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 58 | `cd9b82d94dca` |
 | `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1194 | `05a812f11ce4` |
-| `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 96 | `120d7abf870a` |
-| `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 71 | `197a4cb7cb65` |
-| `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `107787ba07ee` |
-| `SUB-RIE-FRONTIER` | `intelligence/UCOS-RIE-EXECUTION-FRONTIER.json` | json | YES | YES | 4/4 | 8 | `bdbd00899586` |
+| `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 96 | `7a41407c1079` |
+| `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 71 | `7f11fad8ab8b` |
+| `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `b0539831b1d6` |
+| `SUB-RIE-FRONTIER` | `intelligence/UCOS-RIE-EXECUTION-FRONTIER.json` | json | YES | YES | 4/4 | 8 | `282ca619d81e` |
 | `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 108 | `6e5206a51222` |
 | `SUB-UEI` | `00-MASTER/UEI-000001/uei.json` | json | YES | YES | 2/2 | 15 | `50e80b680d9f` |
 | `SUB-UER` | `00-MASTER/UER-000001/uer.json` | json | YES | YES | 2/2 | 10 | `0ae82cb58fdb` |
