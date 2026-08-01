@@ -1708,7 +1708,7 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 1530,
+      "total": 1531,
       "units_with_value": 61
     },
     {
@@ -13126,7 +13126,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 440,
+      "entrypoint_references": 441,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,

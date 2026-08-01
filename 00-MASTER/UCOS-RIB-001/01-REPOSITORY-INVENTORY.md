@@ -75,7 +75,7 @@
 | `MSR-COVERAGE` | `substrate_list_member` | `in_coverage_scope` | 39 | 39 | whether the unit lies inside the declared coverage scope |
 | `MSR-INTERFACE` | `substrate_map_prefix` | `interfaces` | 15 | 17 | the declared console interfaces the unit publishes |
 | `MSR-REGISTERED` | `substrate_record_prefix` | `registered_artifacts` | 108 | 702 | the registered corpus artifacts homed inside the unit |
-| `MSR-ENTRYPOINT` | `text_reference_count` | `entrypoint_references` | 61 | 1530 | how many declared entry points name a path inside the unit — the reachability a non-imported tool has |
+| `MSR-ENTRYPOINT` | `text_reference_count` | `entrypoint_references` | 61 | 1531 | how many declared entry points name a path inside the unit — the reachability a non-imported tool has |
 | `MSR-TESTPATH` | `substrate_list_member` | `in_test_scope` | 2 | 2 | whether the unit lies inside the declared test-collection scope |
 
 ## Repository reality at the computed anchor
