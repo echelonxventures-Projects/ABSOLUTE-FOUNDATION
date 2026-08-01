@@ -309,9 +309,68 @@ programme's uncommitted work would destroy it. This is the already-disclosed `W0
 
 ---
 
+## 7. THE CONSTITUTIONAL EVOLUTION CONTRACT
+
+| Field | Value |
+|---|---|
+| BASELINE | `UCOS-BASELINE-002` — `00-MASTER/BASELINE-001/BASELINE-REGISTRY.md` §2 |
+| STATUS | **BOUND — not created.** Every obligation below was already implemented, owned and gate-bound before this section was written. This section **composes and records** the binding; it introduces no stage, no mechanism, no authority and no gate. |
+| CONSTITUTIONAL BASIS | `UCOS-RFP-001` `rfp-declaration.json` `lifecycle` (the canonical 14-step implementation lifecycle with its gate bindings) · `CEP-009` ADDENDUM B.4 (the 15-stage constitutional evolution lifecycle) · `CMG-000001` LXXVI.2 (the 8-step admission procedure) · `RELEASE-001` §1 (the 8-state release lifecycle) · §1 and §2 of this model |
+
+> **Why composition and not creation.** §1 of this model already mandates *Reuse First* and
+> *Additive only*; `RELEASE-001` §1 already governs a *release*; `CEP-009` ADDENDUM B.4 already
+> governs a *construct*; `UCOS-RFP-001` already governs *closure*. What did not exist in one
+> place was the statement that the ten obligations a change owes are **one contract**, each with a
+> named owner and a reachable gate. Recording that is not a second evolution model — `CEP-009`
+> ADDENDUM B.11 prohibits one, and `CMG-INV-02` would fail if a second owner of *evolution* were
+> minted. Nothing below is novel; every cell cites an owner that already discharges it.
+
+### 7.1 The contract
+
+Every future change from `UCOS-BASELINE-002` forward SHALL discharge all ten obligations, in
+order. Each is owned, each is measured, and each has a gate whose verdict is reachable in both
+directions.
+
+| # | Obligation | Canonical owner | Gate | Lifecycle step |
+|---|---|---|---|---|
+| 1 | **measure baseline** | `00-MASTER/BASELINE-001/BASELINE-REGISTRY.md` (registry) · `00-MASTER/UCOS-RIB-001/rib_engine.py` (repository truth) · `00-MASTER/URRC-000001/urrc_engine.py` (reality binding) | `rib-gate` 12/12 · `urrc-gate` 10/10 | `RFP` 1–2 *Repository Discovery · Context Assimilation*; `CEP-009` B.4 stages 1–3 |
+| 2 | **derive delta** | §2 of this model — the closed 8-member classification register. A change is exactly one of: new capability · extension · enhancement · infrastructure · documentation · refactoring · defect correction · constitutional amendment | `RELEASE-001` §1 `CLASSIFIED` state | `RFP` 3 *Architecture Review*; `CMG-000001` LXXVI.2(a)–(b) |
+| 3 | **reuse existing authority** | `CMG-000001` LXXVII.2 totality rule (**EXTEND is the default**, `CREATE` requires that no owner exists) · `02-CANONICAL-OWNERSHIP-MATRIX.md` · `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` (`replacement_prohibited` on 50 of 71) | `urrc-gate` `G-02` *Reuse before create* · `G-03` *Non-proliferation* · every programme's `--check-reuse-before-create` · `rib-gate` `GATE-09` *Zero Duplicate Capability* | `CEP-009` B.4 stage 4; `CMG-000001` LXXVI.2(c) |
+| 4 | **implement** | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` · in the `00-MASTER/CAEM-001/` mandated form (**declaration + engine + gate + self-guards**) | `uccep` `G-13` *Implementation Authorization* | `RFP` 4; `CEP-009` B.4 stages 11–12 |
+| 5 | **register** | `00-BOOK/tools/register.sh` (`REG-AUTO-001` Atomic Registration Transaction, 10 phases) · `00-BOOK/tools/ukb.py` (append-only identity ledger) | `uccep` `G-06` *Repository Truth* · `G-07` *Registry* · `CK-REG-ENFORCE` · `CK-REG-VALIDATE` · `CK-REG-DRIFT` | `RFP` 8 *Registry Regeneration*; `CEP-009` B.4 stages 6, 9 |
+| 6 | **validate** | `00-CEP/CEP-004` · `./verify.sh` | `uccep` `G-10` *Validation* · `verify.sh` 5/5 stages | `RFP` 6; `CEP-009` B.4 stage 13 |
+| 7 | **verify** | `00-CEP/CEP-001` · `00-MASTER/UCOS-RIB-001` · `engine/determinism` | `uccep` `G-10` · `rib-gate` · `CK-DETERMINISM-BUILD` | `RFP` 5 |
+| 8 | **certify** | `00-CEP/CEP-005` · `00-MASTER/UCCEP-000000/uccep_engine.py --tier full --gate` | `uccep` `G-11` *Certification* — `blocking=none`, `gate_exit=0`. **Absence of evidence is never evidence**: `UNAVAILABLE` or `NOT-EXECUTED` exits 1 | `RFP` 9; `CEP-009` B.4 stage 14 |
+| 9 | **update evidence** | `00-CEP/CEP-008` · `00-MASTER/UCOS-UTCE-001/utce_engine.py` · `00-MASTER/UCDA-000001/ucda_engine.py` | `uccep` `G-12` *Evidence* · `G-14` *Implementation Evidence* (`CEP-002` Art 28) · `G-20` *Constitutional Traceability Closure* | `RFP` 7 *Evidence Generation* |
+| 10 | **re-measure** | `00-MASTER/UCOS-RFP-001/rfp_engine.py --gate` — the full declared 13-stage pipeline, three times, from the **committed** state | `uccep` `G-15` *Repository Fixed-Point* — 8/8 `CLO-*` criteria | `RFP` 11–14 *Fresh Repository Discovery · Pipeline Re-execution · Fixed-Point Verification · Programme Closure* |
+
+### 7.2 The two absolute rules
+
+| Rule | Statement | Enforcement that already exists |
+|---|---|---|
+| **R-1 — No future implementation may modify the baseline directly.** | A certified baseline record is never edited. A new baseline is a **new row** in the registry; the predecessor record is preserved byte-identically. | §1.1 of this model (baseline immutable) · `RELEASE-001` §2.2 (force-push and artifact removal prohibited) · `CMG-000001` LXXVI.3 (admission is append-only; no renumber, rename, reclassify or invalidate) · `CEP-009` ADDENDUM B.7.2 (a proposal that would renumber, rename, reclassify or invalidate an existing enumeration member **is not an admission** and is refused) · `CEP-007` supersession-with-lineage, never replacement · git history append-only, verified by `git merge-base --is-ancestor` |
+| **R-2 — All evolution is append-only.** | Paths are added; existing paths change only by append or by a version statement. **Removals: 0.** | `00-BOOK/tools/ukb.py` `allocate()` — path-keyed, append-only over `00-BOOK/DATA/id-ledger.json`; an existing UID is returned verbatim, never re-minted · `CK-REG-VALIDATE` (duplicate-UID absence, page non-overlap, no inverted range) · DP-03 frozen-path guard (`.github/workflows/ec1-ci.yml`) over `00-SOURCE/`, `99-FREEZE/` and the authored `00-BOOK` canon · `CMG-INV-11` (every lineage predecessor resolves) · `G-20` `UTCE-OB-04` (lineage acyclic) |
+
+### 7.3 Why the contract is *reachable*, not merely declared
+
+`UCOS-BASELINE-002` is the first baseline at which all ten obligations were discharged and
+**measured** in one run: `make rfp-gate` executes obligations 5–10 as declared pipeline stages
+(`STAGE-VERIFY`, `STAGE-REGISTER`, `STAGE-UCCEP` among them) three consecutive times from the
+committed tree and reports `stage_failures=0`, `tracked_modifications=0`,
+`non_fixed_point_passes=0`, `cycles_detected=0`. Before this baseline the contract was declared
+and its final obligation was unreachable — `EVOLUTION-001` §6.2 `W01-F-02` records `rfp-gate`
+reporting *NOT A FIXED POINT* with 2 detected cycles. A contract whose last step cannot pass is
+not a contract. It can pass now, and it does.
+
+---
+
 > **Evolution governance model ESTABLISHED.**
 
-All future development proceeds as governed evolution from UCOS-BASELINE-001. The baseline is immutable. Every change is classified, traced, validated, and certified. verify.sh remains the permanent gate.
+All future development proceeds as governed evolution from `UCOS-BASELINE-002` (§7), whose
+predecessor chain from `UCOS-BASELINE-001` is recorded at §6 and registered at
+`00-MASTER/BASELINE-001/BASELINE-REGISTRY.md`. The baseline is immutable. Every change is
+classified, traced, validated, and certified. verify.sh remains the permanent gate, and the
+repository fixed point (`G-15`) is the permanent closure condition.
 
 ---
 
