@@ -353,7 +353,7 @@
       "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-GATES-PASS": {
-      "observed": 22,
+      "observed": 23,
       "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-PROGRAMMES-PASS": {

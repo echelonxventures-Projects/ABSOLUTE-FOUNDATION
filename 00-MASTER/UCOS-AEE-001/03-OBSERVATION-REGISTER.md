@@ -18,7 +18,7 @@
 | `OBS-AGGREGATE-BLOCKING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `blocking_failures` | `is_empty` | SATISFIED | `[]` |
 | `OBS-AGGREGATE-UNPROVEN` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `unproven` | `is_empty` | SATISFIED | `[]` |
 | `OBS-AGGREGATE-GATE-EXIT` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gate_exit` | `equals` | SATISFIED | `0` |
-| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gates` | `every_field_in` | SATISFIED | `22` |
+| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gates` | `every_field_in` | SATISFIED | `23` |
 | `OBS-AGGREGATE-PROGRAMMES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `programs` | `every_field_in` | SATISFIED | `19` |
 | `OBS-AGGREGATE-CEILING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `certification_ceiling` | `is_empty` | **VIOLATED** | `["`UCCEP-F-004` — Constitutional finality is reserved to an ou…"]` |
 | `OBS-KNOWLEDGE-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | `determination` | `equals` | SATISFIED | `"CLOSED"` |

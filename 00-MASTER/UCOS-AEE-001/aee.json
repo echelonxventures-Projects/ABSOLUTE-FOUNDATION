@@ -583,7 +583,7 @@
             "certification"
           ],
           "name": "Every constitutional gate reports a passing verdict",
-          "observed": 22,
+          "observed": 23,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "gates",
           "reason": "",
@@ -1566,7 +1566,7 @@
             "certification"
           ],
           "name": "Every constitutional gate reports a passing verdict",
-          "observed": 22,
+          "observed": 23,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "gates",
           "reason": "",
@@ -2463,7 +2463,7 @@
         "verdict": "SATISFIED"
       },
       "OBS-AGGREGATE-GATES-PASS": {
-        "observed": 22,
+        "observed": 23,
         "verdict": "SATISFIED"
       },
       "OBS-AGGREGATE-PROGRAMMES-PASS": {
