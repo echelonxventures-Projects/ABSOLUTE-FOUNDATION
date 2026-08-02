@@ -51,21 +51,22 @@ It executes the declared pipeline **3 times** over the committed HEAD and requir
 | 14 | `STAGE-ASSIMILATE` Constitutional assimilation | 00-MASTER/UAKOS-CLOSURE-008 | no | yes | yes |
 | 15 | `STAGE-UAR` Analysis registry | 00-MASTER/UCOS-UAR-001 | no | yes | yes |
 | 16 | `STAGE-UCAF` Constitutional authority | 00-MASTER/UCOS-UCAF-001 | no | yes | yes |
-| 17 | `STAGE-URAT` Ratification registry | 00-MASTER/UCOS-URAT-001 | no | yes | yes |
-| 18 | `STAGE-UTCE` Traceability closure | 00-MASTER/UCOS-UTCE-001 | no | yes | yes |
-| 19 | `STAGE-UFEP` Freeze eligibility | 00-MASTER/UCOS-UFEP-001 | no | yes | yes |
-| 20 | `STAGE-UAEP` Platform capability binding | 00-MASTER/UAEP-000001 | no | yes | yes |
-| 21 | `STAGE-UAIE` Architectural intelligence | 00-MASTER/UAIE-000001 | no | yes | yes |
-| 22 | `STAGE-UCEF` Constitutional evolution | 00-MASTER/UCEF-000001 | no | yes | yes |
-| 23 | `STAGE-MXR` Master execution roadmap | 00-MASTER/UCOS-MXR-001 | no | yes | yes |
-| 24 | `STAGE-PHASE2` Repository reconciliation (operational memory) | 00-MASTER/UAKOS-PHASE-002 | no | yes | yes |
-| 25 | `STAGE-PHASE3` Implementation gap baseline (operational memory) | 00-MASTER/UAKOS-PHASE-003 | no | yes | yes |
-| 26 | `STAGE-PHASE3R` Realization correction (operational memory) | 00-MASTER/UAKOS-PHASE-003R | no | yes | yes |
-| 27 | `STAGE-PHASE4` Implementation planning (operational memory) | 00-MASTER/UAKOS-PHASE-004 | no | yes | yes |
-| 28 | `STAGE-PHASE5` Execution governance (operational memory) | 00-MASTER/UAKOS-PHASE-005 | no | yes | yes |
-| 29 | `STAGE-PHASE6` Execution readiness certification (operational memory) | 00-MASTER/UAKOS-PHASE-006 | no | yes | yes |
-| 30 | `STAGE-FREEZE-C4` Freeze C4 execution streams (operational memory) | 00-MASTER/UCOS-USIS-WAVE0 | no | yes | yes |
-| 31 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
+| 17 | `STAGE-BASELINE` Baseline inheritance | 00-MASTER/BASELINE-001 | no | yes | yes |
+| 18 | `STAGE-URAT` Ratification registry | 00-MASTER/UCOS-URAT-001 | no | yes | yes |
+| 19 | `STAGE-UTCE` Traceability closure | 00-MASTER/UCOS-UTCE-001 | no | yes | yes |
+| 20 | `STAGE-UFEP` Freeze eligibility | 00-MASTER/UCOS-UFEP-001 | no | yes | yes |
+| 21 | `STAGE-UAEP` Platform capability binding | 00-MASTER/UAEP-000001 | no | yes | yes |
+| 22 | `STAGE-UAIE` Architectural intelligence | 00-MASTER/UAIE-000001 | no | yes | yes |
+| 23 | `STAGE-UCEF` Constitutional evolution | 00-MASTER/UCEF-000001 | no | yes | yes |
+| 24 | `STAGE-MXR` Master execution roadmap | 00-MASTER/UCOS-MXR-001 | no | yes | yes |
+| 25 | `STAGE-PHASE2` Repository reconciliation (operational memory) | 00-MASTER/UAKOS-PHASE-002 | no | yes | yes |
+| 26 | `STAGE-PHASE3` Implementation gap baseline (operational memory) | 00-MASTER/UAKOS-PHASE-003 | no | yes | yes |
+| 27 | `STAGE-PHASE3R` Realization correction (operational memory) | 00-MASTER/UAKOS-PHASE-003R | no | yes | yes |
+| 28 | `STAGE-PHASE4` Implementation planning (operational memory) | 00-MASTER/UAKOS-PHASE-004 | no | yes | yes |
+| 29 | `STAGE-PHASE5` Execution governance (operational memory) | 00-MASTER/UAKOS-PHASE-005 | no | yes | yes |
+| 30 | `STAGE-PHASE6` Execution readiness certification (operational memory) | 00-MASTER/UAKOS-PHASE-006 | no | yes | yes |
+| 31 | `STAGE-FREEZE-C4` Freeze C4 execution streams (operational memory) | 00-MASTER/UCOS-USIS-WAVE0 | no | yes | yes |
+| 32 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
 
 ## Exit semantics
 

@@ -700,6 +700,22 @@
         "$discovery": "Discovered from the Execution Surface and PROVED a producer by execution (RFP-6). authority is upstream of ratification, which is upstream of traceability and freeze eligibility; this is the order the convergence suite already asserts."
       },
       {
+        "id": "STAGE-BASELINE",
+        "name": "Baseline inheritance",
+        "owner": "00-MASTER/BASELINE-001",
+        "argv": [
+          "$PY",
+          "00-MASTER/BASELINE-001/baseline_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/BASELINE-001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "$discovery": "Discovered from the Execution Surface (Makefile recipes baseline / baseline-gate / baseline-self / baseline-replay and .github/workflows/baseline-gate.yml) and PROVED a producer by execution (RFP-6). It derives the certified baseline chain from the APPEND-ONLY records BASELINE-001 already holds, so it must run after STAGE-REGISTER, whose projections it reads for universal identity and version-increment events. Its write zone is the programme home and NOTHING inside that home that is a canonical record: the engine's own --check-record-immutability requires write set intersect canonical record set = empty, and the CI gate re-proves it with a git diff over the four records, so the zone declared here is wider than what the stage may actually write and the narrower bound is enforced by the owner."
+      },
+      {
         "id": "STAGE-URAT",
         "name": "Ratification registry",
         "owner": "00-MASTER/UCOS-URAT-001",

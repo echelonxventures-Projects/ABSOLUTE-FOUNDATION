@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "9db64454176a23734aabb38fcf92b5171a776ec340b74c37aa852dce55f81452",
+  "declaration_seal_sha256": "aba1b11adfb752014cd2c6d922027dde0940e6c57dede9218c1b030e8c57db45",
   "findings": [],
   "lifecycle": [
     {
@@ -623,6 +623,22 @@
         "required": true,
         "writes": [
           "00-MASTER/UCOS-UCAF-001/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface (Makefile recipes baseline / baseline-gate / baseline-self / baseline-replay and .github/workflows/baseline-gate.yml) and PROVED a producer by execution (RFP-6). It derives the certified baseline chain from the APPEND-ONLY records BASELINE-001 already holds, so it must run after STAGE-REGISTER, whose projections it reads for universal identity and version-increment events. Its write zone is the programme home and NOTHING inside that home that is a canonical record: the engine's own --check-record-immutability requires write set intersect canonical record set = empty, and the CI gate re-proves it with a git diff over the four records, so the zone declared here is wider than what the stage may actually write and the narrower bound is enforced by the owner.",
+        "argv": [
+          "$PY",
+          "00-MASTER/BASELINE-001/baseline_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-BASELINE",
+        "name": "Baseline inheritance",
+        "owner": "00-MASTER/BASELINE-001",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/BASELINE-001/"
         ]
       },
       {
