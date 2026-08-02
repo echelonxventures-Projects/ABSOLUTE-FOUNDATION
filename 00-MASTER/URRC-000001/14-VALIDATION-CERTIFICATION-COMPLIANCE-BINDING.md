@@ -80,7 +80,7 @@ Validation, certification and compliance owners plus certification-scope reconci
 
 | Key | Value |
 |---|---|
-| `PASS` | 21 |
+| `PASS` | 22 |
 | `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.

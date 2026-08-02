@@ -2,7 +2,7 @@
   "artifact_id": "UCOS-RIE-DEPENDENCY-GRAPH",
   "authority": "NONE (derived truth)",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "ae3cf30dac42d1a1abd0e2eee1c55baada4254800bc2d9392e9ab560480aba88",
+  "content_hash": "fb4cd286fe949364118940ef0b4f1849ff532fa01e3bcfbb3b0f8bd83602607c",
   "depends_on_acyclic": true,
   "evidence_state": {
     "coverage_measurement": {
@@ -11,8 +11,8 @@
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "84f92e14ccf7af01b7340876a4a06664cc8afe71c8aa695d4313825de7fbb0cb",
-      "00-BOOK/DATA/certification.json": "6ef0e02c67bbe16db1c6eb01ead005aa0c1ab4920d9dfddc9e6c44bf44066b42",
+      "00-BOOK/DATA/artifacts.json": "3ae38de9bb9026cf53a025a85c4c5a13cfd130e9ba464a623b78759aef8e5412",
+      "00-BOOK/DATA/certification.json": "16a31b903d6c41568c7134b7611a660ec9034ac20a3b0d9c113bcf1b77f7bfb9",
       "00-BOOK/DATA/control-tower.json": "2412718e1702f9e33c3cc8234be565c7ed3c05e84a78956d593b3c269dd5b977",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
       "00-BOOK/DATA/volumes.json": "a34e648cd43f13818156dacdbdc814f9da3a785daac6c6113fb9eac8e05f6598"
@@ -23,7 +23,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "b7f7a854045e80b16ce5e04eb87f72d92a973ef4d834add5994acc800c47c6fe",
+    "input_hash": "c0ae83d8553a43b6ba143ab7b64a8cb71d44833ac2cec6194a60c3bb86dc39c0",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },

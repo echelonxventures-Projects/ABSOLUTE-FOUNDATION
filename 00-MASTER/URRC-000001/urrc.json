@@ -1524,35 +1524,35 @@
       "unknown": false
     },
     {
-      "count": 39,
+      "count": 41,
       "evidence": [
         "S-07"
       ],
-      "headline": "39 records",
+      "headline": "41 records",
       "id": "DV-27",
       "primitive": "record_count",
       "purpose": "Located executable checks bound by the aggregate gate.",
       "rows": [
         [
           "records",
-          "39"
+          "41"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 22,
+      "count": 23,
       "evidence": [
         "S-07"
       ],
-      "headline": "22 records",
+      "headline": "23 records",
       "id": "DV-28",
       "primitive": "record_count",
       "purpose": "Constitutional gates declared by the aggregate gate.",
       "rows": [
         [
           "records",
-          "22"
+          "23"
         ]
       ],
       "unknown": false
@@ -1620,7 +1620,7 @@
       "rows": [
         [
           "`PASS`",
-          "21"
+          "22"
         ],
         [
           "`PASS-WITH-ADVISORY`",
@@ -1894,9 +1894,9 @@
       "unknown": false
     },
     {
-      "count": 35,
+      "count": 36,
       "evidence": [],
-      "headline": "35 tracked path(s)",
+      "headline": "36 tracked path(s)",
       "id": "DV-45",
       "primitive": "tracked_glob_census",
       "purpose": "Executable governance engines and gate scripts present in version control.",
@@ -1911,6 +1911,10 @@
         ],
         [
           "`00-CMG/tools/cmg-gate.sh`",
+          "TRACKED"
+        ],
+        [
+          "`00-MASTER/BASELINE-001/baseline_engine.py`",
           "TRACKED"
         ],
         [
@@ -2047,7 +2051,7 @@
     {
       "count": 6,
       "evidence": [],
-      "headline": "29/35 located engine(s) bound to at least one entry point, workflow or hook (over 29 tracked binding file(s))",
+      "headline": "30/36 located engine(s) bound to at least one entry point, workflow or hook (over 30 tracked binding file(s))",
       "id": "DV-46",
       "primitive": "text_presence",
       "purpose": "Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.",
@@ -2066,6 +2070,11 @@
           "`00-CMG/tools/cmg-gate.sh`",
           "1",
           "`Makefile`"
+        ],
+        [
+          "`00-MASTER/BASELINE-001/baseline_engine.py`",
+          "2",
+          "`.github/workflows/baseline-gate.yml`, `Makefile`"
         ],
         [
           "`00-MASTER/MCOS-000001/mcos_engine.py`",
@@ -2261,7 +2270,7 @@
           "YES",
           "2/2",
           "2388",
-          "`84f92e14ccf7`"
+          "`3ae38de9bb90`"
         ],
         [
           "`S-02`",
@@ -2291,7 +2300,7 @@
           "YES",
           "5/5",
           "45",
-          "`6ef0e02c67bb`"
+          "`16a31b903d6c`"
         ],
         [
           "`S-05`",
@@ -2301,7 +2310,7 @@
           "YES",
           "2/2",
           "1320",
-          "`5178f6ea97a6`"
+          "`f4397ec4d205`"
         ],
         [
           "`S-06`",
@@ -2320,8 +2329,8 @@
           "YES",
           "YES",
           "5/5",
-          "93",
-          "`2e7be62d11c0`"
+          "96",
+          "`9f1995556f0d`"
         ],
         [
           "`S-08`",
@@ -2330,8 +2339,8 @@
           "YES",
           "YES",
           "6/6",
-          "131",
-          "`31e97c4102b5`"
+          "132",
+          "`35eaf9d22b74`"
         ],
         [
           "`S-09`",
@@ -3308,7 +3317,7 @@
   "seal_sha256": "8432609e10e719c6c2fef582f8f352a29e027e3ffe816e9eeed636f7c51eef40",
   "substrate": [
     {
-      "content_sha256": "84f92e14ccf7af01b7340876a4a06664cc8afe71c8aa695d4313825de7fbb0cb",
+      "content_sha256": "3ae38de9bb9026cf53a025a85c4c5a13cfd130e9ba464a623b78759aef8e5412",
       "exists": true,
       "id": "S-01",
       "kind": "registration projection",
@@ -3373,7 +3382,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "6ef0e02c67bbe16db1c6eb01ead005aa0c1ab4920d9dfddc9e6c44bf44066b42",
+      "content_sha256": "16a31b903d6c41568c7134b7611a660ec9034ac20a3b0d9c113bcf1b77f7bfb9",
       "exists": true,
       "id": "S-04",
       "kind": "certification projection",
@@ -3400,7 +3409,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "5178f6ea97a65d2ee1a5a1a6605f2ff14e1f51533352f7509665398daff433c0",
+      "content_sha256": "f4397ec4d205ce37e1c8e4921444c3a93f9cc22e31a1e30d66c96222c9aafc2a",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",
@@ -3456,7 +3465,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "2e7be62d11c0d63089a4022256cf3b5a6c9e7c71167e44b814b773afeed72c45",
+      "content_sha256": "9f1995556f0d4e5b1dbd12c3cb6e56c4740f9fe71080d355ce8329b367c05a43",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",
@@ -3478,12 +3487,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The aggregate constitutional gate: located checks, gates, programme roster, findings.",
-      "records": 93,
+      "records": 96,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "31e97c4102b558865a80b51593e1b378e74e46c2ba3036aa44594f0f8f0cda3d",
+      "content_sha256": "35eaf9d22b743a4e344223c03ea0432c6259aacdc025b95eba1d88311478e9ca",
       "exists": true,
       "id": "S-08",
       "kind": "aggregate gate determination",
@@ -3507,7 +3516,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The computed aggregate verdicts and the certification ceiling.",
-      "records": 131,
+      "records": 132,
       "required": true,
       "tracked": true
     },
