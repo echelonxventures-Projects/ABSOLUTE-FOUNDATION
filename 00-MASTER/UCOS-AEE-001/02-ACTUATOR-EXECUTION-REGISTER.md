@@ -4,9 +4,9 @@
 |---|---|
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
-| TIER | `closure` |
-| DETERMINATION | **CONVERGED-PROVISIONAL** |
-| SEAL | `efeba054528e04b84d118b43a336394e` |
+| TIER | `standard` |
+| DETERMINATION | **NOT-CONVERGED** |
+| SEAL | `3848998af6893ee81234121b570ff6e1` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Every actuator is a located owner's own entry point, invoked so that owner regenerates its own determination. This programme authored none of them and writes none of their homes.
@@ -32,6 +32,6 @@
 | `ACT-PROVIDER-FRAMEWORK` | `00-MASTER/UPF-000001/upf_engine.py` | `standard` | yes | PASS | 0 | none |
 | `ACT-CIVILIZATION-PLATFORM` | `00-MASTER/MCOS-000001/mcos_engine.py` | `standard` | yes | PASS | 0 | none |
 | `ACT-REGISTRY-BINDING` | `00-MASTER/UCOS-UAR-001/uar_engine.py` | `standard` | yes | PASS | 0 | none |
-| `ACT-AGGREGATE-CERTIFIER` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `closure` | yes | PASS | 0 | none |
+| `ACT-AGGREGATE-CERTIFIER` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `closure` | yes | **NOT-EXECUTED** | 0 | none |
 
 > Residue is attributed to the actuator's declared write zone. An entry no declared zone explains is unattributed and blocks convergence.

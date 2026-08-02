@@ -4,9 +4,9 @@
 |---|---|
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
-| TIER | `closure` |
-| DETERMINATION | **CONVERGED-PROVISIONAL** |
-| SEAL | `efeba054528e04b84d118b43a336394e` |
+| TIER | `standard` |
+| DETERMINATION | **NOT-CONVERGED** |
+| SEAL | `3848998af6893ee81234121b570ff6e1` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Every principle to its located enforcing owner, and every located phase to the actuator or observation that discharges it. Nothing in this programme is enforced by prose.

@@ -52,35 +52,35 @@ Graph owners, edge-count reconciliation, capability edge census.
 **`DV-12`** — Graph edges present in the graph projection.
 
 - **Primitive** — `record_count`
-- **Result** — 12819 records
+- **Result** — 12821 records
 - **Substrate evidence** — `S-02`
 
 | Key | Value |
 |---|---|
-| records | 12819 |
+| records | 12821 |
 
 **`DV-13`** — Edge census against the portfolio rollup.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 12819 vs 12819 · delta 0
+- **Result** — 12821 vs 12821 · delta 0
 - **Substrate evidence** — `S-02`, `S-03`
 
 | Key | Value |
 |---|---|
-| `S-02` count | 12819 |
-| `S-03` portfolio.total_edges | 12819 |
+| `S-02` count | 12821 |
+| `S-03` portfolio.total_edges | 12821 |
 | delta | 0 |
 
 **`DV-14`** — Edge census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 12819 vs 12819 · delta 0
+- **Result** — 12821 vs 12821 · delta 0
 - **Substrate evidence** — `S-02`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-02` count | 12819 |
-| `S-04` scope.edges | 12819 |
+| `S-02` count | 12821 |
+| `S-04` scope.edges | 12821 |
 | delta | 0 |
 
 #### D-29 — Capability edge census
@@ -104,8 +104,8 @@ Graph owners, edge-count reconciliation, capability edge census.
 | `Parent` | 1195 |
 | `Consumed-By` | 316 |
 | `Consumes` | 316 |
-| `Authorized-By` | 99 |
-| `Authorizes` | 99 |
+| `Authorized-By` | 100 |
+| `Authorizes` | 100 |
 | `Implemented-By` | 48 |
 | `Implements` | 48 |
 | `Referenced-By` | 6 |
