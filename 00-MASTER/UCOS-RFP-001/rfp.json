@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "aba1b11adfb752014cd2c6d922027dde0940e6c57dede9218c1b030e8c57db45",
+  "declaration_seal_sha256": "052a79ba9aad09ace948051caf31fae8d9d77346f994c4bf068d8971ee28fab7",
   "findings": [],
   "lifecycle": [
     {
@@ -390,6 +390,23 @@
           "00-BOOK/REGISTRIES/",
           "00-BOOK/CONTROL-TOWER/",
           "00-BOOK/PORTAL/"
+        ]
+      },
+      {
+        "$discovery": "Discovered from the Execution Surface (Makefile recipes uis / uis-gate / uis-self / uis-replay and .github/workflows/uis-gate.yml) and PROVED a producer by execution (RFP-6). It measures the identity architecture the repository already legislated (AIF, ENG-001, UMB-003/004/005/008/009/010, AUTH-INF-001) against the identity data the repository already recorded, so it must run AFTER STAGE-REGISTER, whose projections are the recorded identity ledger and the derived artifact registry it reads. It is positioned immediately after that stage because nothing else it reads is produced: every other input is canonical source or located code. Its write zone is its own programme home and nothing else — the engine's own --check-write-scope and --check-record-immutability require the write set to lie inside that home and to be disjoint from the located identity records, and --check-no-identity-minting additionally proves the emitted bytes carry no identifier the ledger does not already record, so this stage cannot become a second identity allocator.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UIS-001/uis_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UIS",
+        "name": "Universal identity conformance",
+        "owner": "00-MASTER/UIS-001",
+        "purpose": "identity conformance: the planes crosswalked, the identity laws measured, unbounded expansion probed",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UIS-001/"
         ]
       },
       {

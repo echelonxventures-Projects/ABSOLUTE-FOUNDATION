@@ -113,6 +113,9 @@ help:
 	@echo "  make baseline-gate fail-closed Baseline Inheritance Gate (chain resolves, succession explicit)"
 	@echo "  make baseline-self BASELINE-001 guards (incl. record-immutability + no-elevation)"
 	@echo "  make baseline-replay prove the committed baseline registers replay from the declaration"
+	@echo "  make uis-gate      fail-closed Identity Conformance Gate (planes crosswalked, laws measured)"
+	@echo "  make uis-self      UIS-001 guards (incl. no-identity-minting + bounds-tight)"
+	@echo "  make uis-replay    prove the committed identity registers replay from the declaration"
 	@echo "  make urat          regenerate the UCOS-URAT-001 ratification registry (CEP-006 Art XVI)"
 	@echo "  make urat-gate     fail-closed Ratification Registry Gate (every record located + verified)"
 	@echo "  make urat-self     UCOS-URAT-001 guards (incl. discovery coverage + no-conferral)"
@@ -1288,6 +1291,46 @@ baseline-replay:
 	@git diff --exit-code -- 00-MASTER/BASELINE-001 \
 	  || { echo "BASELINE-001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
 	@echo "BASELINE-001 replay: no drift"
+
+
+# uis: UIS-001 — Universal Identity System Conformance. It makes the identity architecture the
+# repository ALREADY legislated executable, and adds no identity capability of its own. AIF governs
+# the law of identity, ENG-001 is the engineering architecture of record, and UMB-003/004/005/008/
+# 009/010 realize them; this measurement reads all of them plus the append-only identity ledger and
+# the derived artifact registry, and reports what they say. It mints no identity, declares no
+# namespace, defines no grammar, opens no registry and legislates no lifecycle:
+# --check-no-identity-minting fails closed if any emitted byte carries an identifier the ledger does
+# not already record, which is what forbids this programme from becoming a fifth identifier scheme
+# or a sixth registry. --check-bounds-tight forbids inflating a disclosed divergence to hide a
+# regression inside the slack.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; no wall-clock, no version-control observation;
+# writes nothing outside 00-MASTER/UIS-001/ (guarded, fail-closed).
+#
+# Exit 0 gate OPEN · 1 gate CLOSED · 2 fail-closed abort (no verdict may be asserted).
+.PHONY: uis uis-gate uis-self uis-replay
+uis:
+	@python3 00-MASTER/UIS-001/uis_engine.py
+
+uis-gate:
+	@python3 00-MASTER/UIS-001/uis_engine.py --gate
+
+uis-self:
+	@python3 00-MASTER/UIS-001/uis_engine.py --check-declaration
+	@python3 00-MASTER/UIS-001/uis_engine.py --check-no-enumeration
+	@python3 00-MASTER/UIS-001/uis_engine.py --check-write-scope
+	@python3 00-MASTER/UIS-001/uis_engine.py --check-determinism
+	@python3 00-MASTER/UIS-001/uis_engine.py --check-knowledge-once
+	@python3 00-MASTER/UIS-001/uis_engine.py --check-record-immutability
+	@python3 00-MASTER/UIS-001/uis_engine.py --check-no-identity-minting
+	@python3 00-MASTER/UIS-001/uis_engine.py --check-bounds-tight
+	@python3 00-MASTER/UIS-001/uis_engine.py --check-no-authority
+
+uis-replay:
+	@python3 00-MASTER/UIS-001/uis_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/UIS-001 \
+	  || { echo "UIS-001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "UIS-001 replay: no drift"
 
 
 # urat: UCOS-URAT-001 — the Ratification Registry CEP-006 Article XVI mandates. It confers

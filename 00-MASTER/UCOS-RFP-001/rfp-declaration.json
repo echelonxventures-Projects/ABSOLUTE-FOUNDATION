@@ -467,6 +467,23 @@
         "purpose": "registry, projections, twin, portal — the registration projection zone"
       },
       {
+        "id": "STAGE-UIS",
+        "name": "Universal identity conformance",
+        "owner": "00-MASTER/UIS-001",
+        "argv": [
+          "$PY",
+          "00-MASTER/UIS-001/uis_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UIS-001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "$discovery": "Discovered from the Execution Surface (Makefile recipes uis / uis-gate / uis-self / uis-replay and .github/workflows/uis-gate.yml) and PROVED a producer by execution (RFP-6). It measures the identity architecture the repository already legislated (AIF, ENG-001, UMB-003/004/005/008/009/010, AUTH-INF-001) against the identity data the repository already recorded, so it must run AFTER STAGE-REGISTER, whose projections are the recorded identity ledger and the derived artifact registry it reads. It is positioned immediately after that stage because nothing else it reads is produced: every other input is canonical source or located code. Its write zone is its own programme home and nothing else — the engine's own --check-write-scope and --check-record-immutability require the write set to lie inside that home and to be disjoint from the located identity records, and --check-no-identity-minting additionally proves the emitted bytes carry no identifier the ledger does not already record, so this stage cannot become a second identity allocator.",
+        "purpose": "identity conformance: the planes crosswalked, the identity laws measured, unbounded expansion probed"
+      },
+      {
         "id": "STAGE-RIE",
         "name": "Repository intelligence",
         "owner": "intelligence/rie (UCOS-RIE-001)",
