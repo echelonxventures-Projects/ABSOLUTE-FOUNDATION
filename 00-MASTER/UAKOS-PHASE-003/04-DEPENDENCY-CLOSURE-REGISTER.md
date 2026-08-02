@@ -6,12 +6,12 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-003/phase3_gap.py`.
 
-- Dependency graph nodes: **1194** · edges: **12819**
+- Dependency graph nodes: **1194** · edges: **12821**
 - Depends-On edges: **4774** · nodes with dependencies: **296**
 
 | Dependency dimension | Value |
 |---|---|
-| Satisfied dependencies (edge target present) | 12819 |
+| Satisfied dependencies (edge target present) | 12821 |
 | Unsatisfied / missing dependency targets | 0 |
 | Blocked dependencies | 0 |
 | Circular dependency nodes (Depends-On cycles) | 0 |
@@ -28,8 +28,8 @@
 | Child | 1195 |
 | Consumes | 316 |
 | Consumed-By | 316 |
-| Authorized-By | 99 |
-| Authorizes | 99 |
+| Authorized-By | 100 |
+| Authorizes | 100 |
 | Implements | 48 |
 | Implemented-By | 48 |
 | References | 6 |

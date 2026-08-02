@@ -6,7 +6,7 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-002/phase2_recon.py`.
 
-- Total conflicts detected: **102**
+- Total conflicts detected: **103**
 - Traceability conflicts (orphans): **0** · unhomed: **0** · in-repo-unhomed: **0**
 
 | Concept | Conflict type | Evidence |
@@ -25,6 +25,7 @@
 | CEP-001 | LIFECYCLE_VS_IMPLEMENTATION | DEPRECATED,SUPERSEDED marker with active code implementation |
 | CEP-002 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | CEP-002 | LIFECYCLE_VS_IMPLEMENTATION | SUPERSEDED marker with active code implementation |
+| CEP-003 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | CEP-006 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | CEP-007 | REJECTED_BUT_IMPLEMENTED | explicit rejected marker co-located with code-root evidence |
 | CEP-007 | LIFECYCLE_VS_IMPLEMENTATION | SUPERSEDED marker with active code implementation |

@@ -13,7 +13,7 @@
 | Certified knowledge objects | 447 |
 | Objects with exactly one gap status | 447 |
 | Open gaps | 190 · NO_GAP: 257 |
-| Dependency closure | CLOSED (1194 nodes / 12819 edges) |
+| Dependency closure | CLOSED (1194 nodes / 12821 edges) |
 | Circular dependencies | 0 node(s) |
 | CRITICAL/HIGH open gaps | 140 |
 | FREEZE C seal (sha256) | `090cdb698eced2f779dc0dff84f4079848cba8e3fdbb707992fa3dd3441f76a6` |

@@ -8,7 +8,7 @@
 
 ### Resolution basis (disclosed)
 
-The 431 certified concept ids are disjoint from the knowledge dependency graph (1194 nodes / 12819 edges), so unit ordering is resolved by the certified **constitutional layering**: CRITICAL (laws/foundation/governance/metaclass) resolve before HIGH (arch/platform/runtime/data/service/application/infrastructure) before MEDIUM. Within a tier, the gap lifecycle resolves specification → implementation → certification. No unit is scheduled before its tier+lifecycle prerequisites.
+The 431 certified concept ids are disjoint from the knowledge dependency graph (1194 nodes / 12821 edges), so unit ordering is resolved by the certified **constitutional layering**: CRITICAL (laws/foundation/governance/metaclass) resolve before HIGH (arch/platform/runtime/data/service/application/infrastructure) before MEDIUM. Within a tier, the gap lifecycle resolves specification → implementation → certification. No unit is scheduled before its tier+lifecycle prerequisites.
 
 ### Dependencies to resolve first (Wave 1)
 
