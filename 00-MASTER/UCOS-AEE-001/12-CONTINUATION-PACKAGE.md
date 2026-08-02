@@ -4,9 +4,9 @@
 |---|---|
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
-| TIER | `standard` |
+| TIER | `closure` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `3848998af6893ee81234121b570ff6e1` |
+| SEAL | `7cade9b2b5574cb868165cd248927c9b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > The resume anchor. Everything a later session needs in order to continue the loop without rediscovering what this run established.
@@ -18,11 +18,11 @@
 | Field | Value |
 |---|---|
 | DETERMINATION | **NOT-CONVERGED** |
-| TIER | `standard` |
+| TIER | `closure` |
 | ITERATIONS | 4 |
-| SEAL | `3848998af6893ee81234121b570ff6e1e648fb08a69bb25e151831edf1c38202` |
+| SEAL | `7cade9b2b5574cb868165cd248927c9b3df30ccfe9539857e0aecff19b2623dd` |
 | UNSATISFIED BLOCKING CRITERIA | `CONV-02` |
-| OPEN FINDINGS | 4 |
+| OPEN FINDINGS | 2 |
 
 ## What closes the remaining ceiling, and who owns it
 

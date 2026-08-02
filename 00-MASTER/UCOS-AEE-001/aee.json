@@ -23,7 +23,7 @@
       "expect": 0,
       "id": "CONV-02",
       "measure": "blocking_violations",
-      "measured": 3,
+      "measured": 1,
       "verdict": "VIOLATED"
     },
     {
@@ -119,53 +119,6 @@
   "determination": "NOT-CONVERGED",
   "findings": [
     {
-      "blocking": true,
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "detail": "the measured value does not meet the declared expectation",
-      "evidence": [
-        "00-MASTER/UCCEP-000000/uccep.json"
-      ],
-      "governed_by_finding": null,
-      "id": "OBS-AGGREGATE-GATES-PASS",
-      "observed": [
-        "G-07='PARTIAL'",
-        "G-10='NOT-EXECUTED'",
-        "G-11='NOT-EXECUTED'",
-        "G-13='NOT-EXECUTED'",
-        "G-15='NOT-EXECUTED'",
-        "G-16='PARTIAL'"
-      ],
-      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-      "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-      "rule": "CR-BLOCKING-REGRESSION",
-      "subject": "Every constitutional gate reports a passing verdict"
-    },
-    {
-      "blocking": true,
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "detail": "the measured value does not meet the declared expectation",
-      "evidence": [
-        "00-MASTER/UCCEP-000000/uccep.json"
-      ],
-      "governed_by_finding": null,
-      "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-      "observed": [
-        "PROGRAM-000004='PARTIAL'",
-        "PROGRAM-000005='PARTIAL'",
-        "PROGRAM-000010='PARTIAL'",
-        "PROGRAM-000011='NOT-EXECUTED'",
-        "PROGRAM-000012='NOT-EXECUTED'",
-        "PROGRAM-000017='NOT-EXECUTED'",
-        "PROGRAM-000018='PARTIAL'"
-      ],
-      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-      "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-      "rule": "CR-BLOCKING-REGRESSION",
-      "subject": "Every delegated programme reports a passing verdict"
-    },
-    {
       "blocking": false,
       "class": "Constitutional amendment",
       "decision": "ESCALATE",
@@ -177,8 +130,7 @@
       "governed_by_finding": "AEE-F-001",
       "id": "OBS-AGGREGATE-CEILING",
       "observed": [
-        "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-        "tier `standard` excluded 4 blocking check(s) from this run: …"
+        "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
       ],
       "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
       "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
@@ -348,14 +300,1029 @@
           "owner": "00-MASTER/URRC-000001/urrc_engine.py",
           "reason": "",
           "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-PLATFORM-BINDING",
+          "in_scope": true,
+          "mandate": [
+            "update-capability-graph",
+            "UEI-CON-08"
+          ],
+          "name": "Platform capability binding register",
+          "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-EVOLUTION-FRAMEWORK",
+          "in_scope": true,
+          "mandate": [
+            "UEI-EVO-11",
+            "UEI-EVO-13"
+          ],
+          "name": "Universal constitutional evolution framework registers",
+          "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-ARCHITECTURAL-BLUEPRINT",
+          "in_scope": true,
+          "mandate": [
+            "architectural-validation",
+            "UEI-EVO-06"
+          ],
+          "name": "Repository implementation blueprint and architectural admission",
+          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-ROADMAP-PROJECTION",
+          "in_scope": true,
+          "mandate": [
+            "UEI-EVO-05"
+          ],
+          "name": "Master execution roadmap projection",
+          "owner": "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-CORPUS-CURRENCY",
+          "in_scope": true,
+          "mandate": [
+            "repository-truth-discovery",
+            "UEI-CON-04"
+          ],
+          "name": "Knowledge corpus currency and export inventory",
+          "owner": "00-MASTER/UKAP-001/corpus_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-CONSTITUTIONAL-ASSIMILATION",
+          "in_scope": true,
+          "mandate": [
+            "update-repository-truth"
+          ],
+          "name": "Constitutional assimilation and superiority registers",
+          "owner": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-META-KERNEL",
+          "in_scope": true,
+          "mandate": [
+            "update-ontology",
+            "update-taxonomy"
+          ],
+          "name": "Universal meta-kernel — open metatype system",
+          "owner": "00-MASTER/UMK-000001/umk_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-PROVIDER-FRAMEWORK",
+          "in_scope": true,
+          "mandate": [
+            "canonical-identity-assignment"
+          ],
+          "name": "Universal provider framework — kernel realization layer",
+          "owner": "00-MASTER/UPF-000001/upf_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-CIVILIZATION-PLATFORM",
+          "in_scope": true,
+          "mandate": [
+            "UEI-EVO-13"
+          ],
+          "name": "Meta-civilization platform generation layer",
+          "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-REGISTRY-BINDING",
+          "in_scope": true,
+          "mandate": [
+            "canonical-registration",
+            "repository-registration"
+          ],
+          "name": "Universal artifact registry binding",
+          "owner": "00-MASTER/UCOS-UAR-001/uar_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": true,
+          "id": "ACT-AGGREGATE-CERTIFIER",
+          "in_scope": true,
+          "mandate": [
+            "constitutional-validation",
+            "verification",
+            "certification",
+            "execute-validation",
+            "execute-verification",
+            "execute-certification",
+            "execute-repository-validation",
+            "execute-verify-sh",
+            "update-registries",
+            "update-evidence",
+            "update-traceability",
+            "UEI-CON-02",
+            "UEI-CON-05"
+          ],
+          "name": "Aggregate constitutional gate — every located gate, heavy tier included",
+          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [
+            "00-MASTER/UCCEP-000000/00-UCCEP-DASHBOARD.md",
+            "00-MASTER/UCCEP-000000/01-CANONICAL-ASSIMILATION-REGISTER.md",
+            "00-MASTER/UCCEP-000000/02-REPOSITORY-TRUTH-REGISTER.md",
+            "00-MASTER/UCCEP-000000/03-META-MODEL-GOVERNANCE-CERTIFICATION.md",
+            "00-MASTER/UCCEP-000000/04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
+            "00-MASTER/UCCEP-000000/05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
+            "00-MASTER/UCCEP-000000/06-EXECUTABLE-CONSTITUTIONAL-GOVERNANCE.md",
+            "00-MASTER/UCCEP-000000/07-UNIVERSAL-TRACEABILITY-GRAPH.md",
+            "00-MASTER/UCCEP-000000/08-DEPENDENCY-INTELLIGENCE.md",
+            "00-MASTER/UCCEP-000000/09-KNOWLEDGE-EVOLUTION-ENGINE.md",
+            "00-MASTER/UCCEP-000000/10-IMPLEMENTATION-EVOLUTION-ENGINE.md",
+            "00-MASTER/UCCEP-000000/11-VALIDATION-INTELLIGENCE.md",
+            "00-MASTER/UCCEP-000000/12-CERTIFICATION-INTELLIGENCE.md",
+            "00-MASTER/UCCEP-000000/13-EVOLUTION-INTELLIGENCE.md",
+            "00-MASTER/UCCEP-000000/14-REPOSITORY-INTELLIGENCE.md",
+            "00-MASTER/UCCEP-000000/15-CONTINUOUS-CONSTITUTIONAL-CERTIFICATION.md",
+            "00-MASTER/UCCEP-000000/16-CONSTITUTIONAL-GATE-REGISTER.md",
+            "00-MASTER/UCCEP-000000/17-ASSIMILATION-FINDINGS-REGISTER.md",
+            "00-MASTER/UCCEP-000000/18-DECISION-ASSIMILATION-CERTIFICATION.md",
+            "00-MASTER/UCCEP-000000/19-REPOSITORY-FIXED-POINT-CLOSURE.md",
+            "00-MASTER/UCCEP-000000/20-META-CIVILIZATION-OPEN-WORLD-CLOSURE.md",
+            "00-MASTER/UCCEP-000000/21-CONSTITUTIONAL-EVOLUTION-CLOSURE.md",
+            "00-MASTER/UCCEP-000000/uccep.json",
+            "00-MASTER/UCOS-UTCE-001/00-UTCE-DASHBOARD.md",
+            "00-MASTER/UCOS-UTCE-001/01-TRACEABILITY-OBLIGATION-REGISTER.md",
+            "00-MASTER/UCOS-UTCE-001/02-DERIVATION-HEADROOM-REGISTER.md",
+            "00-MASTER/UCOS-UTCE-001/03-CERTIFICATION-REPORT.md",
+            "00-MASTER/UCOS-UTCE-001/utce.json"
+          ],
+          "tier": "closure",
+          "unattributed": [
+            "00-MASTER/UCOS-UTCE-001/00-UTCE-DASHBOARD.md",
+            "00-MASTER/UCOS-UTCE-001/01-TRACEABILITY-OBLIGATION-REGISTER.md",
+            "00-MASTER/UCOS-UTCE-001/02-DERIVATION-HEADROOM-REGISTER.md",
+            "00-MASTER/UCOS-UTCE-001/03-CERTIFICATION-REPORT.md",
+            "00-MASTER/UCOS-UTCE-001/utce.json"
+          ],
+          "verdict": "PASS"
+        }
+      ],
+      "blocking_violations": [],
+      "findings": [
+        {
+          "blocking": false,
+          "class": "Constitutional amendment",
+          "decision": "ESCALATE",
+          "detail": "the measured value does not meet the declared expectation",
+          "evidence": [
+            "00-MASTER/UCCEP-000000/uccep-bindings.json",
+            "00-MASTER/UCCEP-000000/uccep.json"
+          ],
+          "governed_by_finding": "AEE-F-001",
+          "id": "OBS-AGGREGATE-CEILING",
+          "observed": [
+            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
+          ],
+          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
+          "rule": "CR-ESCALATED-CEILING",
+          "subject": "No standing finding bounds the attainable certification"
+        }
+      ],
+      "index": 1,
+      "observations": [
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-AGGREGATE-BLOCKING",
+          "mandate": [
+            "constitutional-validation"
+          ],
+          "name": "No blocking constitutional check failed",
+          "observed": [],
+          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "pointer": "blocking_failures",
+          "reason": "",
+          "source": "00-MASTER/UCCEP-000000/uccep.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-AGGREGATE-UNPROVEN",
+          "mandate": [
+            "execute-verification"
+          ],
+          "name": "No blocking check was left without evidence",
+          "observed": [],
+          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "pointer": "unproven",
+          "reason": "",
+          "source": "00-MASTER/UCCEP-000000/uccep.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-AGGREGATE-GATE-EXIT",
+          "mandate": [
+            "UEI-EVO-14"
+          ],
+          "name": "The aggregate constitutional gate exits clean",
+          "observed": 0,
+          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "pointer": "gate_exit",
+          "reason": "",
+          "source": "00-MASTER/UCCEP-000000/uccep.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-AGGREGATE-GATES-PASS",
+          "mandate": [
+            "certification"
+          ],
+          "name": "Every constitutional gate reports a passing verdict",
+          "observed": 22,
+          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "pointer": "gates",
+          "reason": "",
+          "source": "00-MASTER/UCCEP-000000/uccep.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
+          "mandate": [
+            "execute-repository-validation"
+          ],
+          "name": "Every delegated programme reports a passing verdict",
+          "observed": 19,
+          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "pointer": "programs",
+          "reason": "",
+          "source": "00-MASTER/UCCEP-000000/uccep.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": false,
+          "governed_by_finding": "AEE-F-001",
+          "id": "OBS-AGGREGATE-CEILING",
+          "mandate": [
+            "UEI-CON-01"
+          ],
+          "name": "No standing finding bounds the attainable certification",
+          "observed": [
+            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
+          ],
+          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+          "pointer": "certification_ceiling",
+          "reason": "the measured value does not meet the declared expectation",
+          "source": "00-MASTER/UCCEP-000000/uccep.json",
+          "verdict": "VIOLATED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-KNOWLEDGE-DETERMINATION",
+          "mandate": [
+            "canonical-knowledge-discovery"
+          ],
+          "name": "Constitutional knowledge closure is reached",
+          "observed": "CLOSED",
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+          "pointer": "determination",
+          "reason": "",
+          "source": "00-MASTER/UAKOS-CLOSURE-002/closure.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-KNOWLEDGE-GAPS",
+          "mandate": [
+            "gap-analysis",
+            "UEI-EVO-12"
+          ],
+          "name": "Zero knowledge-closure gaps remain",
+          "observed": 0,
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+          "pointer": "gap_total",
+          "reason": "",
+          "source": "00-MASTER/UAKOS-CLOSURE-002/closure.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-KNOWLEDGE-DISPOSITION",
+          "mandate": [
+            "UEI-EVO-03"
+          ],
+          "name": "Knowledge gap disposition is closed",
+          "observed": "CLOSED",
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
+          "pointer": "determination",
+          "reason": "",
+          "source": "00-MASTER/UAKOS-CLOSURE-002/phase2.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-READINESS-STATUS",
+          "mandate": [
+            "implementation-readiness-assessment"
+          ],
+          "name": "Measured repository status is closed",
+          "observed": "CLOSED",
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
+          "pointer": "repository_status",
+          "reason": "",
+          "source": "00-MASTER/UAKOS-CLOSURE-002/phase3.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-READINESS-BLOCKING-GAPS",
+          "mandate": [
+            "reserve-execution"
+          ],
+          "name": "Zero located blocking gaps remain",
+          "observed": 0,
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
+          "pointer": "located_blocking_gaps",
+          "reason": "",
+          "source": "00-MASTER/UAKOS-CLOSURE-002/phase3.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-READINESS-UNRESOLVED",
+          "mandate": [
+            "execute-implementation",
+            "UEI-EVO-09"
+          ],
+          "name": "Zero unresolved planning items remain",
+          "observed": 0,
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
+          "pointer": "unresolved_total",
+          "reason": "",
+          "source": "00-MASTER/UAKOS-CLOSURE-002/phase3.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-READINESS-WRITE-SCOPE",
+          "mandate": [
+            "update-repository-truth"
+          ],
+          "name": "The readiness owner wrote nothing outside its own memory",
+          "observed": [],
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
+          "pointer": "wrote_outside_own_memory",
+          "reason": "",
+          "source": "00-MASTER/UAKOS-CLOSURE-002/phase3.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-DECISION-GATE",
+          "mandate": [
+            "conflict-detection"
+          ],
+          "name": "The constitutional decision gate is open",
+          "observed": "OPEN",
+          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
+          "pointer": "gate",
+          "reason": "",
+          "source": "00-MASTER/UCDA-000001/ucda.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-DECISION-UNDISPOSITIONED",
+          "mandate": [
+            "UEI-EVO-08"
+          ],
+          "name": "No constitutional decision lacks a disposition",
+          "observed": [],
+          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
+          "pointer": "undispositioned",
+          "reason": "",
+          "source": "00-MASTER/UCDA-000001/ucda.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-DECISION-UNEVIDENCED",
+          "mandate": [
+            "update-evidence"
+          ],
+          "name": "No constitutional decision lacks evidence",
+          "observed": [],
+          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
+          "pointer": "unevidenced",
+          "reason": "",
+          "source": "00-MASTER/UCDA-000001/ucda.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-DECISION-CONVERSATION-ONLY",
+          "mandate": [
+            "context-assimilation"
+          ],
+          "name": "No agreed decision remains only in conversation",
+          "observed": [],
+          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
+          "pointer": "conversation_only",
+          "reason": "",
+          "source": "00-MASTER/UCDA-000001/ucda.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-EVOLUTION-GATE",
+          "mandate": [
+            "UEI-CON-03"
+          ],
+          "name": "The evolution intelligence gate is open",
+          "observed": "OPEN",
+          "owner": "00-MASTER/UEI-000001/uei_engine.py",
+          "pointer": "gate",
+          "reason": "",
+          "source": "00-MASTER/UEI-000001/uei.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-EVOLUTION-CAPABILITIES-COVERED",
+          "mandate": [
+            "UEI-EVO-02"
+          ],
+          "name": "Every declared evolution capability resolves to a located home",
+          "observed": [],
+          "owner": "00-MASTER/UEI-000001/uei_engine.py",
+          "pointer": "metrics.capabilities_uncovered",
+          "reason": "",
+          "source": "00-MASTER/UEI-000001/uei.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-EVOLUTION-CAPABILITIES-GOVERNED",
+          "mandate": [
+            "UEI-EVO-15"
+          ],
+          "name": "Every declared evolution capability is governed",
+          "observed": [],
+          "owner": "00-MASTER/UEI-000001/uei_engine.py",
+          "pointer": "metrics.capabilities_ungoverned",
+          "reason": "",
+          "source": "00-MASTER/UEI-000001/uei.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-RESILIENCE-GATE",
+          "mandate": [
+            "execute-integration",
+            "UEI-EVO-10"
+          ],
+          "name": "The execution resilience gate is open",
+          "observed": "OPEN",
+          "owner": "00-MASTER/UER-000001/uer_engine.py",
+          "pointer": "gate",
+          "reason": "",
+          "source": "00-MASTER/UER-000001/uer.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-REALITY-GATE",
+          "mandate": [
+            "impact-analysis"
+          ],
+          "name": "The repository reality gate is open",
+          "observed": "OPEN",
+          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
+          "pointer": "gate",
+          "reason": "",
+          "source": "00-MASTER/URRC-000001/urrc.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-REALITY-GUARDS",
+          "mandate": [
+            "duplicate-detection"
+          ],
+          "name": "The repository reality guards report nothing",
+          "observed": [],
+          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
+          "pointer": "guard_findings",
+          "reason": "",
+          "source": "00-MASTER/URRC-000001/urrc.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-REALITY-DELIVERABLES-BOUND",
+          "mandate": [
+            "reuse-analysis",
+            "UEI-EVO-04",
+            "UEI-EVO-07"
+          ],
+          "name": "Every reality deliverable is bound to located substrate",
+          "observed": [],
+          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
+          "pointer": "metrics.deliverables_unbound",
+          "reason": "",
+          "source": "00-MASTER/URRC-000001/urrc.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-REALITY-UNKNOWN-BINDINGS",
+          "mandate": [
+            "dependency-discovery",
+            "discover-dependencies",
+            "update-dependency-graph"
+          ],
+          "name": "No declared binding resolves to an unknown owner",
+          "observed": 0,
+          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
+          "pointer": "metrics.declared_unknown_bindings",
+          "reason": "",
+          "source": "00-MASTER/URRC-000001/urrc.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-PLATFORM-GATE",
+          "mandate": [
+            "update-capability-graph"
+          ],
+          "name": "The platform capability binding gate is open",
+          "observed": "OPEN",
+          "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
+          "pointer": "gate",
+          "reason": "",
+          "source": "00-MASTER/UAEP-000001/uaep.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-PLATFORM-BLOCKING",
+          "mandate": [
+            "UEI-CON-08"
+          ],
+          "name": "No platform capability binding failure stands",
+          "observed": [],
+          "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
+          "pointer": "blocking_failures",
+          "reason": "",
+          "source": "00-MASTER/UAEP-000001/uaep.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-PLATFORM-HOMES-RESOLVED",
+          "mandate": [
+            "canonical-identity-assignment"
+          ],
+          "name": "Every declared platform home resolves in Repository Truth",
+          "observed": {
+            "measured": 25,
+            "sibling": 25
+          },
+          "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
+          "pointer": "counts.homes_resolved",
+          "reason": "",
+          "source": "00-MASTER/UAEP-000001/uaep.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-FRAMEWORK-VERDICT",
+          "mandate": [
+            "UEI-EVO-11"
+          ],
+          "name": "The constitutional evolution framework gate is open",
+          "observed": "GATE-OPEN",
+          "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+          "pointer": "verdict",
+          "reason": "",
+          "source": "00-MASTER/UCEF-000001/ucef.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-FRAMEWORK-GUARDS",
+          "mandate": [
+            "UEI-EVO-13"
+          ],
+          "name": "The evolution framework guards report nothing",
+          "observed": [],
+          "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+          "pointer": "guard_findings",
+          "reason": "",
+          "source": "00-MASTER/UCEF-000001/ucef.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-FRAMEWORK-CRITERIA",
+          "mandate": [
+            "update-ontology",
+            "update-taxonomy"
+          ],
+          "name": "Every evolution framework criterion is discharged",
+          "observed": {
+            "measured": 16,
+            "sibling": 16
+          },
+          "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
+          "pointer": "counts.criteria_discharged",
+          "reason": "",
+          "source": "00-MASTER/UCEF-000001/ucef.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-BLUEPRINT-GATE",
+          "mandate": [
+            "architectural-validation",
+            "UEI-EVO-06",
+            "UEI-CON-07"
+          ],
+          "name": "The architectural blueprint gate is open",
+          "observed": "OPEN",
+          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+          "pointer": "gate",
+          "reason": "",
+          "source": "00-MASTER/UCOS-RIB-001/rib.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-REGISTRY-GATE",
+          "mandate": [
+            "canonical-registration",
+            "repository-registration",
+            "update-registries"
+          ],
+          "name": "The universal artifact registry binding gate is open",
+          "observed": "OPEN",
+          "owner": "00-MASTER/UCOS-UAR-001/uar_engine.py",
+          "pointer": "gate",
+          "reason": "",
+          "source": "00-MASTER/UCOS-UAR-001/uar.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-CORPUS-CURRENCY",
+          "mandate": [
+            "repository-truth-discovery",
+            "UEI-CON-04"
+          ],
+          "name": "The knowledge corpus is current",
+          "observed": "CORPUS CURRENT",
+          "owner": "00-MASTER/UKAP-001/corpus_engine.py",
+          "pointer": "determination",
+          "reason": "",
+          "source": "00-MASTER/UKAP-001/corpus.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-ASSIMILATION-DETERMINATION",
+          "mandate": [
+            "update-traceability"
+          ],
+          "name": "Constitutional assimilation is complete",
+          "observed": "REPOSITORY CONSTITUTIONALLY COMPLETE",
+          "owner": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
+          "pointer": "determination",
+          "reason": "",
+          "source": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-ROADMAP-VERDICT",
+          "mandate": [
+            "UEI-EVO-05"
+          ],
+          "name": "The master execution roadmap is executable",
+          "observed": "CONDITIONAL GO",
+          "owner": "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
+          "pointer": "verdict",
+          "reason": "",
+          "source": "00-MASTER/UCOS-MXR-001/roadmap.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-FIXED-POINT-DECLARATION-SEAL",
+          "mandate": [
+            "UEI-CON-05"
+          ],
+          "name": "The fixed-point owner's declaration seal is present",
+          "observed": "9db64454176a23734aabb38fcf92b5171a776ec340b74c37aa852dce55f81452",
+          "owner": "00-MASTER/UCOS-RFP-001/rfp_engine.py",
+          "pointer": "declaration_seal_sha256",
+          "reason": "",
+          "source": "00-MASTER/UCOS-RFP-001/rfp.json",
+          "verdict": "SATISFIED"
+        },
+        {
+          "blocking": true,
+          "governed_by_finding": null,
+          "id": "OBS-FIXED-POINT-FINDINGS",
+          "mandate": [
+            "UEI-CON-02"
+          ],
+          "name": "The fixed-point owner records no undispositioned finding",
+          "observed": [],
+          "owner": "00-MASTER/UCOS-RFP-001/rfp_engine.py",
+          "pointer": "findings",
+          "reason": "",
+          "source": "00-MASTER/UCOS-RFP-001/rfp.json",
+          "verdict": "SATISFIED"
+        }
+      ],
+      "vector_digest": "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b"
+    },
+    {
+      "actuator_failures": [],
+      "actuators": [
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-KNOWLEDGE-CLOSURE",
+          "in_scope": true,
+          "mandate": [
+            "context-assimilation",
+            "canonical-knowledge-discovery",
+            "UEI-EVO-01",
+            "UEI-EVO-12",
+            "UEI-CON-06"
+          ],
+          "name": "Constitutional concept closure (knowledge-once evidence)",
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-KNOWLEDGE-GAP-PLAN",
+          "in_scope": true,
+          "mandate": [
+            "gap-analysis",
+            "UEI-EVO-03"
+          ],
+          "name": "Knowledge gap disposition and planning",
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-READINESS-PROJECTION",
+          "in_scope": true,
+          "mandate": [
+            "implementation-readiness-assessment",
+            "reserve-execution",
+            "UEI-EVO-09"
+          ],
+          "name": "Implementation readiness and wave projection",
+          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-DECISION-ASSIMILATION",
+          "in_scope": true,
+          "mandate": [
+            "conflict-detection",
+            "UEI-EVO-08"
+          ],
+          "name": "Constitutional decision register and disposition",
+          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-EVOLUTION-INTELLIGENCE",
+          "in_scope": true,
+          "mandate": [
+            "UEI-EVO-02",
+            "UEI-EVO-15",
+            "UEI-CON-03"
+          ],
+          "name": "Evolution intelligence capability bindings",
+          "owner": "00-MASTER/UEI-000001/uei_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-EXECUTION-RESILIENCE",
+          "in_scope": true,
+          "mandate": [
+            "execute-integration",
+            "execute-implementation",
+            "UEI-EVO-10"
+          ],
+          "name": "Execution resilience and recovery bindings",
+          "owner": "00-MASTER/UER-000001/uer_engine.py",
+          "reason": "",
+          "required": true,
+          "residue": [],
+          "tier": "standard",
+          "unattributed": [],
+          "verdict": "PASS"
+        },
+        {
+          "executed": true,
+          "exit_code": 0,
+          "heavy": false,
+          "id": "ACT-REPOSITORY-REALITY",
+          "in_scope": true,
+          "mandate": [
+            "reuse-analysis",
+            "duplicate-detection",
+            "dependency-discovery",
+            "impact-analysis",
+            "discover-dependencies",
+            "update-dependency-graph",
+            "UEI-EVO-04",
+            "UEI-EVO-07"
+          ],
+          "name": "Reuse, duplication, conflict, gap, completeness and readiness matrices",
+          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
+          "reason": "",
+          "required": true,
           "residue": [
             "00-MASTER/URRC-000001/00-URRC-DASHBOARD.md",
             "00-MASTER/URRC-000001/02-REPOSITORY-REALITY-DETERMINATION.md",
             "00-MASTER/URRC-000001/05-CONFLICT-MATRIX.md",
-            "00-MASTER/URRC-000001/06-GAP-MATRIX.md",
-            "00-MASTER/URRC-000001/07-COMPLETENESS-MATRIX.md",
             "00-MASTER/URRC-000001/08-READINESS-MATRIX.md",
-            "00-MASTER/URRC-000001/12-GRAPH-AND-CAPABILITY-BINDING.md",
             "00-MASTER/URRC-000001/14-VALIDATION-CERTIFICATION-COMPLIANCE-BINDING.md",
             "00-MASTER/URRC-000001/urrc.json"
           ],
@@ -567,11 +1534,11 @@
           "verdict": "PASS"
         },
         {
-          "executed": false,
-          "exit_code": null,
+          "executed": true,
+          "exit_code": 0,
           "heavy": true,
           "id": "ACT-AGGREGATE-CERTIFIER",
-          "in_scope": false,
+          "in_scope": true,
           "mandate": [
             "constitutional-validation",
             "verification",
@@ -589,67 +1556,18 @@
           ],
           "name": "Aggregate constitutional gate — every located gate, heavy tier included",
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "reason": "declared tier is above the selected tier standard",
+          "reason": "",
           "required": true,
           "residue": [],
           "tier": "closure",
           "unattributed": [],
-          "verdict": "NOT-EXECUTED"
+          "verdict": "PASS"
         }
       ],
       "blocking_violations": [
-        "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS",
         "OBS-BLUEPRINT-GATE"
       ],
       "findings": [
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATES-PASS",
-          "observed": [
-            "G-07='PARTIAL'",
-            "G-10='NOT-EXECUTED'",
-            "G-11='NOT-EXECUTED'",
-            "G-13='NOT-EXECUTED'",
-            "G-15='NOT-EXECUTED'",
-            "G-16='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every constitutional gate reports a passing verdict"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-          "observed": [
-            "PROGRAM-000004='PARTIAL'",
-            "PROGRAM-000005='PARTIAL'",
-            "PROGRAM-000010='PARTIAL'",
-            "PROGRAM-000011='NOT-EXECUTED'",
-            "PROGRAM-000012='NOT-EXECUTED'",
-            "PROGRAM-000017='NOT-EXECUTED'",
-            "PROGRAM-000018='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every delegated programme reports a passing verdict"
-        },
         {
           "blocking": false,
           "class": "Constitutional amendment",
@@ -662,1075 +1580,7 @@
           "governed_by_finding": "AEE-F-001",
           "id": "OBS-AGGREGATE-CEILING",
           "observed": [
-            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-            "tier `standard` excluded 4 blocking check(s) from this run: …"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
-          "rule": "CR-ESCALATED-CEILING",
-          "subject": "No standing finding bounds the attainable certification"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The architectural blueprint gate is open"
-        }
-      ],
-      "index": 1,
-      "observations": [
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-BLOCKING",
-          "mandate": [
-            "constitutional-validation"
-          ],
-          "name": "No blocking constitutional check failed",
-          "observed": [],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "blocking_failures",
-          "reason": "",
-          "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-UNPROVEN",
-          "mandate": [
-            "execute-verification"
-          ],
-          "name": "No blocking check was left without evidence",
-          "observed": [],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "unproven",
-          "reason": "",
-          "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATE-EXIT",
-          "mandate": [
-            "UEI-EVO-14"
-          ],
-          "name": "The aggregate constitutional gate exits clean",
-          "observed": 0,
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gate_exit",
-          "reason": "",
-          "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATES-PASS",
-          "mandate": [
-            "certification"
-          ],
-          "name": "Every constitutional gate reports a passing verdict",
-          "observed": [
-            "G-07='PARTIAL'",
-            "G-10='NOT-EXECUTED'",
-            "G-11='NOT-EXECUTED'",
-            "G-13='NOT-EXECUTED'",
-            "G-15='NOT-EXECUTED'",
-            "G-16='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gates",
-          "reason": "the measured value does not meet the declared expectation",
-          "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-          "mandate": [
-            "execute-repository-validation"
-          ],
-          "name": "Every delegated programme reports a passing verdict",
-          "observed": [
-            "PROGRAM-000004='PARTIAL'",
-            "PROGRAM-000005='PARTIAL'",
-            "PROGRAM-000010='PARTIAL'",
-            "PROGRAM-000011='NOT-EXECUTED'",
-            "PROGRAM-000012='NOT-EXECUTED'",
-            "PROGRAM-000017='NOT-EXECUTED'",
-            "PROGRAM-000018='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "programs",
-          "reason": "the measured value does not meet the declared expectation",
-          "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
-        },
-        {
-          "blocking": false,
-          "governed_by_finding": "AEE-F-001",
-          "id": "OBS-AGGREGATE-CEILING",
-          "mandate": [
-            "UEI-CON-01"
-          ],
-          "name": "No standing finding bounds the attainable certification",
-          "observed": [
-            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-            "tier `standard` excluded 4 blocking check(s) from this run: …"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "certification_ceiling",
-          "reason": "the measured value does not meet the declared expectation",
-          "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-KNOWLEDGE-DETERMINATION",
-          "mandate": [
-            "canonical-knowledge-discovery"
-          ],
-          "name": "Constitutional knowledge closure is reached",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
-          "pointer": "determination",
-          "reason": "",
-          "source": "00-MASTER/UAKOS-CLOSURE-002/closure.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-KNOWLEDGE-GAPS",
-          "mandate": [
-            "gap-analysis",
-            "UEI-EVO-12"
-          ],
-          "name": "Zero knowledge-closure gaps remain",
-          "observed": 0,
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
-          "pointer": "gap_total",
-          "reason": "",
-          "source": "00-MASTER/UAKOS-CLOSURE-002/closure.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-KNOWLEDGE-DISPOSITION",
-          "mandate": [
-            "UEI-EVO-03"
-          ],
-          "name": "Knowledge gap disposition is closed",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
-          "pointer": "determination",
-          "reason": "",
-          "source": "00-MASTER/UAKOS-CLOSURE-002/phase2.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-READINESS-STATUS",
-          "mandate": [
-            "implementation-readiness-assessment"
-          ],
-          "name": "Measured repository status is closed",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
-          "pointer": "repository_status",
-          "reason": "",
-          "source": "00-MASTER/UAKOS-CLOSURE-002/phase3.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-READINESS-BLOCKING-GAPS",
-          "mandate": [
-            "reserve-execution"
-          ],
-          "name": "Zero located blocking gaps remain",
-          "observed": 0,
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
-          "pointer": "located_blocking_gaps",
-          "reason": "",
-          "source": "00-MASTER/UAKOS-CLOSURE-002/phase3.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-READINESS-UNRESOLVED",
-          "mandate": [
-            "execute-implementation",
-            "UEI-EVO-09"
-          ],
-          "name": "Zero unresolved planning items remain",
-          "observed": 0,
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
-          "pointer": "unresolved_total",
-          "reason": "",
-          "source": "00-MASTER/UAKOS-CLOSURE-002/phase3.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-READINESS-WRITE-SCOPE",
-          "mandate": [
-            "update-repository-truth"
-          ],
-          "name": "The readiness owner wrote nothing outside its own memory",
-          "observed": [],
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
-          "pointer": "wrote_outside_own_memory",
-          "reason": "",
-          "source": "00-MASTER/UAKOS-CLOSURE-002/phase3.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-DECISION-GATE",
-          "mandate": [
-            "conflict-detection"
-          ],
-          "name": "The constitutional decision gate is open",
-          "observed": "OPEN",
-          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
-          "pointer": "gate",
-          "reason": "",
-          "source": "00-MASTER/UCDA-000001/ucda.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-DECISION-UNDISPOSITIONED",
-          "mandate": [
-            "UEI-EVO-08"
-          ],
-          "name": "No constitutional decision lacks a disposition",
-          "observed": [],
-          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
-          "pointer": "undispositioned",
-          "reason": "",
-          "source": "00-MASTER/UCDA-000001/ucda.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-DECISION-UNEVIDENCED",
-          "mandate": [
-            "update-evidence"
-          ],
-          "name": "No constitutional decision lacks evidence",
-          "observed": [],
-          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
-          "pointer": "unevidenced",
-          "reason": "",
-          "source": "00-MASTER/UCDA-000001/ucda.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-DECISION-CONVERSATION-ONLY",
-          "mandate": [
-            "context-assimilation"
-          ],
-          "name": "No agreed decision remains only in conversation",
-          "observed": [],
-          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
-          "pointer": "conversation_only",
-          "reason": "",
-          "source": "00-MASTER/UCDA-000001/ucda.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-EVOLUTION-GATE",
-          "mandate": [
-            "UEI-CON-03"
-          ],
-          "name": "The evolution intelligence gate is open",
-          "observed": "OPEN",
-          "owner": "00-MASTER/UEI-000001/uei_engine.py",
-          "pointer": "gate",
-          "reason": "",
-          "source": "00-MASTER/UEI-000001/uei.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-EVOLUTION-CAPABILITIES-COVERED",
-          "mandate": [
-            "UEI-EVO-02"
-          ],
-          "name": "Every declared evolution capability resolves to a located home",
-          "observed": [],
-          "owner": "00-MASTER/UEI-000001/uei_engine.py",
-          "pointer": "metrics.capabilities_uncovered",
-          "reason": "",
-          "source": "00-MASTER/UEI-000001/uei.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-EVOLUTION-CAPABILITIES-GOVERNED",
-          "mandate": [
-            "UEI-EVO-15"
-          ],
-          "name": "Every declared evolution capability is governed",
-          "observed": [],
-          "owner": "00-MASTER/UEI-000001/uei_engine.py",
-          "pointer": "metrics.capabilities_ungoverned",
-          "reason": "",
-          "source": "00-MASTER/UEI-000001/uei.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-RESILIENCE-GATE",
-          "mandate": [
-            "execute-integration",
-            "UEI-EVO-10"
-          ],
-          "name": "The execution resilience gate is open",
-          "observed": "OPEN",
-          "owner": "00-MASTER/UER-000001/uer_engine.py",
-          "pointer": "gate",
-          "reason": "",
-          "source": "00-MASTER/UER-000001/uer.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-REALITY-GATE",
-          "mandate": [
-            "impact-analysis"
-          ],
-          "name": "The repository reality gate is open",
-          "observed": "OPEN",
-          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
-          "pointer": "gate",
-          "reason": "",
-          "source": "00-MASTER/URRC-000001/urrc.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-REALITY-GUARDS",
-          "mandate": [
-            "duplicate-detection"
-          ],
-          "name": "The repository reality guards report nothing",
-          "observed": [],
-          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
-          "pointer": "guard_findings",
-          "reason": "",
-          "source": "00-MASTER/URRC-000001/urrc.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-REALITY-DELIVERABLES-BOUND",
-          "mandate": [
-            "reuse-analysis",
-            "UEI-EVO-04",
-            "UEI-EVO-07"
-          ],
-          "name": "Every reality deliverable is bound to located substrate",
-          "observed": [],
-          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
-          "pointer": "metrics.deliverables_unbound",
-          "reason": "",
-          "source": "00-MASTER/URRC-000001/urrc.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-REALITY-UNKNOWN-BINDINGS",
-          "mandate": [
-            "dependency-discovery",
-            "discover-dependencies",
-            "update-dependency-graph"
-          ],
-          "name": "No declared binding resolves to an unknown owner",
-          "observed": 0,
-          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
-          "pointer": "metrics.declared_unknown_bindings",
-          "reason": "",
-          "source": "00-MASTER/URRC-000001/urrc.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-PLATFORM-GATE",
-          "mandate": [
-            "update-capability-graph"
-          ],
-          "name": "The platform capability binding gate is open",
-          "observed": "OPEN",
-          "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
-          "pointer": "gate",
-          "reason": "",
-          "source": "00-MASTER/UAEP-000001/uaep.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-PLATFORM-BLOCKING",
-          "mandate": [
-            "UEI-CON-08"
-          ],
-          "name": "No platform capability binding failure stands",
-          "observed": [],
-          "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
-          "pointer": "blocking_failures",
-          "reason": "",
-          "source": "00-MASTER/UAEP-000001/uaep.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-PLATFORM-HOMES-RESOLVED",
-          "mandate": [
-            "canonical-identity-assignment"
-          ],
-          "name": "Every declared platform home resolves in Repository Truth",
-          "observed": {
-            "measured": 25,
-            "sibling": 25
-          },
-          "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
-          "pointer": "counts.homes_resolved",
-          "reason": "",
-          "source": "00-MASTER/UAEP-000001/uaep.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-FRAMEWORK-VERDICT",
-          "mandate": [
-            "UEI-EVO-11"
-          ],
-          "name": "The constitutional evolution framework gate is open",
-          "observed": "GATE-OPEN",
-          "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
-          "pointer": "verdict",
-          "reason": "",
-          "source": "00-MASTER/UCEF-000001/ucef.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-FRAMEWORK-GUARDS",
-          "mandate": [
-            "UEI-EVO-13"
-          ],
-          "name": "The evolution framework guards report nothing",
-          "observed": [],
-          "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
-          "pointer": "guard_findings",
-          "reason": "",
-          "source": "00-MASTER/UCEF-000001/ucef.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-FRAMEWORK-CRITERIA",
-          "mandate": [
-            "update-ontology",
-            "update-taxonomy"
-          ],
-          "name": "Every evolution framework criterion is discharged",
-          "observed": {
-            "measured": 16,
-            "sibling": 16
-          },
-          "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
-          "pointer": "counts.criteria_discharged",
-          "reason": "",
-          "source": "00-MASTER/UCEF-000001/ucef.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "mandate": [
-            "architectural-validation",
-            "UEI-EVO-06",
-            "UEI-CON-07"
-          ],
-          "name": "The architectural blueprint gate is open",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "pointer": "gate",
-          "reason": "the measured value does not meet the declared expectation",
-          "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "VIOLATED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-REGISTRY-GATE",
-          "mandate": [
-            "canonical-registration",
-            "repository-registration",
-            "update-registries"
-          ],
-          "name": "The universal artifact registry binding gate is open",
-          "observed": "OPEN",
-          "owner": "00-MASTER/UCOS-UAR-001/uar_engine.py",
-          "pointer": "gate",
-          "reason": "",
-          "source": "00-MASTER/UCOS-UAR-001/uar.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-CORPUS-CURRENCY",
-          "mandate": [
-            "repository-truth-discovery",
-            "UEI-CON-04"
-          ],
-          "name": "The knowledge corpus is current",
-          "observed": "CORPUS CURRENT",
-          "owner": "00-MASTER/UKAP-001/corpus_engine.py",
-          "pointer": "determination",
-          "reason": "",
-          "source": "00-MASTER/UKAP-001/corpus.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-ASSIMILATION-DETERMINATION",
-          "mandate": [
-            "update-traceability"
-          ],
-          "name": "Constitutional assimilation is complete",
-          "observed": "REPOSITORY CONSTITUTIONALLY COMPLETE",
-          "owner": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
-          "pointer": "determination",
-          "reason": "",
-          "source": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-ROADMAP-VERDICT",
-          "mandate": [
-            "UEI-EVO-05"
-          ],
-          "name": "The master execution roadmap is executable",
-          "observed": "CONDITIONAL GO",
-          "owner": "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
-          "pointer": "verdict",
-          "reason": "",
-          "source": "00-MASTER/UCOS-MXR-001/roadmap.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-FIXED-POINT-DECLARATION-SEAL",
-          "mandate": [
-            "UEI-CON-05"
-          ],
-          "name": "The fixed-point owner's declaration seal is present",
-          "observed": "9db64454176a23734aabb38fcf92b5171a776ec340b74c37aa852dce55f81452",
-          "owner": "00-MASTER/UCOS-RFP-001/rfp_engine.py",
-          "pointer": "declaration_seal_sha256",
-          "reason": "",
-          "source": "00-MASTER/UCOS-RFP-001/rfp.json",
-          "verdict": "SATISFIED"
-        },
-        {
-          "blocking": true,
-          "governed_by_finding": null,
-          "id": "OBS-FIXED-POINT-FINDINGS",
-          "mandate": [
-            "UEI-CON-02"
-          ],
-          "name": "The fixed-point owner records no undispositioned finding",
-          "observed": [],
-          "owner": "00-MASTER/UCOS-RFP-001/rfp_engine.py",
-          "pointer": "findings",
-          "reason": "",
-          "source": "00-MASTER/UCOS-RFP-001/rfp.json",
-          "verdict": "SATISFIED"
-        }
-      ],
-      "vector_digest": "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1"
-    },
-    {
-      "actuator_failures": [],
-      "actuators": [
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-KNOWLEDGE-CLOSURE",
-          "in_scope": true,
-          "mandate": [
-            "context-assimilation",
-            "canonical-knowledge-discovery",
-            "UEI-EVO-01",
-            "UEI-EVO-12",
-            "UEI-CON-06"
-          ],
-          "name": "Constitutional concept closure (knowledge-once evidence)",
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-KNOWLEDGE-GAP-PLAN",
-          "in_scope": true,
-          "mandate": [
-            "gap-analysis",
-            "UEI-EVO-03"
-          ],
-          "name": "Knowledge gap disposition and planning",
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-READINESS-PROJECTION",
-          "in_scope": true,
-          "mandate": [
-            "implementation-readiness-assessment",
-            "reserve-execution",
-            "UEI-EVO-09"
-          ],
-          "name": "Implementation readiness and wave projection",
-          "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-DECISION-ASSIMILATION",
-          "in_scope": true,
-          "mandate": [
-            "conflict-detection",
-            "UEI-EVO-08"
-          ],
-          "name": "Constitutional decision register and disposition",
-          "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-EVOLUTION-INTELLIGENCE",
-          "in_scope": true,
-          "mandate": [
-            "UEI-EVO-02",
-            "UEI-EVO-15",
-            "UEI-CON-03"
-          ],
-          "name": "Evolution intelligence capability bindings",
-          "owner": "00-MASTER/UEI-000001/uei_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-EXECUTION-RESILIENCE",
-          "in_scope": true,
-          "mandate": [
-            "execute-integration",
-            "execute-implementation",
-            "UEI-EVO-10"
-          ],
-          "name": "Execution resilience and recovery bindings",
-          "owner": "00-MASTER/UER-000001/uer_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-REPOSITORY-REALITY",
-          "in_scope": true,
-          "mandate": [
-            "reuse-analysis",
-            "duplicate-detection",
-            "dependency-discovery",
-            "impact-analysis",
-            "discover-dependencies",
-            "update-dependency-graph",
-            "UEI-EVO-04",
-            "UEI-EVO-07"
-          ],
-          "name": "Reuse, duplication, conflict, gap, completeness and readiness matrices",
-          "owner": "00-MASTER/URRC-000001/urrc_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-PLATFORM-BINDING",
-          "in_scope": true,
-          "mandate": [
-            "update-capability-graph",
-            "UEI-CON-08"
-          ],
-          "name": "Platform capability binding register",
-          "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-EVOLUTION-FRAMEWORK",
-          "in_scope": true,
-          "mandate": [
-            "UEI-EVO-11",
-            "UEI-EVO-13"
-          ],
-          "name": "Universal constitutional evolution framework registers",
-          "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-ARCHITECTURAL-BLUEPRINT",
-          "in_scope": true,
-          "mandate": [
-            "architectural-validation",
-            "UEI-EVO-06"
-          ],
-          "name": "Repository implementation blueprint and architectural admission",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-ROADMAP-PROJECTION",
-          "in_scope": true,
-          "mandate": [
-            "UEI-EVO-05"
-          ],
-          "name": "Master execution roadmap projection",
-          "owner": "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-CORPUS-CURRENCY",
-          "in_scope": true,
-          "mandate": [
-            "repository-truth-discovery",
-            "UEI-CON-04"
-          ],
-          "name": "Knowledge corpus currency and export inventory",
-          "owner": "00-MASTER/UKAP-001/corpus_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-CONSTITUTIONAL-ASSIMILATION",
-          "in_scope": true,
-          "mandate": [
-            "update-repository-truth"
-          ],
-          "name": "Constitutional assimilation and superiority registers",
-          "owner": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-META-KERNEL",
-          "in_scope": true,
-          "mandate": [
-            "update-ontology",
-            "update-taxonomy"
-          ],
-          "name": "Universal meta-kernel — open metatype system",
-          "owner": "00-MASTER/UMK-000001/umk_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-PROVIDER-FRAMEWORK",
-          "in_scope": true,
-          "mandate": [
-            "canonical-identity-assignment"
-          ],
-          "name": "Universal provider framework — kernel realization layer",
-          "owner": "00-MASTER/UPF-000001/upf_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-CIVILIZATION-PLATFORM",
-          "in_scope": true,
-          "mandate": [
-            "UEI-EVO-13"
-          ],
-          "name": "Meta-civilization platform generation layer",
-          "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": true,
-          "exit_code": 0,
-          "heavy": false,
-          "id": "ACT-REGISTRY-BINDING",
-          "in_scope": true,
-          "mandate": [
-            "canonical-registration",
-            "repository-registration"
-          ],
-          "name": "Universal artifact registry binding",
-          "owner": "00-MASTER/UCOS-UAR-001/uar_engine.py",
-          "reason": "",
-          "required": true,
-          "residue": [],
-          "tier": "standard",
-          "unattributed": [],
-          "verdict": "PASS"
-        },
-        {
-          "executed": false,
-          "exit_code": null,
-          "heavy": true,
-          "id": "ACT-AGGREGATE-CERTIFIER",
-          "in_scope": false,
-          "mandate": [
-            "constitutional-validation",
-            "verification",
-            "certification",
-            "execute-validation",
-            "execute-verification",
-            "execute-certification",
-            "execute-repository-validation",
-            "execute-verify-sh",
-            "update-registries",
-            "update-evidence",
-            "update-traceability",
-            "UEI-CON-02",
-            "UEI-CON-05"
-          ],
-          "name": "Aggregate constitutional gate — every located gate, heavy tier included",
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "reason": "declared tier is above the selected tier standard",
-          "required": true,
-          "residue": [],
-          "tier": "closure",
-          "unattributed": [],
-          "verdict": "NOT-EXECUTED"
-        }
-      ],
-      "blocking_violations": [
-        "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS",
-        "OBS-BLUEPRINT-GATE"
-      ],
-      "findings": [
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATES-PASS",
-          "observed": [
-            "G-07='PARTIAL'",
-            "G-10='NOT-EXECUTED'",
-            "G-11='NOT-EXECUTED'",
-            "G-13='NOT-EXECUTED'",
-            "G-15='NOT-EXECUTED'",
-            "G-16='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every constitutional gate reports a passing verdict"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-          "observed": [
-            "PROGRAM-000004='PARTIAL'",
-            "PROGRAM-000005='PARTIAL'",
-            "PROGRAM-000010='PARTIAL'",
-            "PROGRAM-000011='NOT-EXECUTED'",
-            "PROGRAM-000012='NOT-EXECUTED'",
-            "PROGRAM-000017='NOT-EXECUTED'",
-            "PROGRAM-000018='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every delegated programme reports a passing verdict"
-        },
-        {
-          "blocking": false,
-          "class": "Constitutional amendment",
-          "decision": "ESCALATE",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep-bindings.json",
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": "AEE-F-001",
-          "id": "OBS-AGGREGATE-CEILING",
-          "observed": [
-            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-            "tier `standard` excluded 4 blocking check(s) from this run: …"
+            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
@@ -1809,19 +1659,12 @@
             "certification"
           ],
           "name": "Every constitutional gate reports a passing verdict",
-          "observed": [
-            "G-07='PARTIAL'",
-            "G-10='NOT-EXECUTED'",
-            "G-11='NOT-EXECUTED'",
-            "G-13='NOT-EXECUTED'",
-            "G-15='NOT-EXECUTED'",
-            "G-16='PARTIAL'"
-          ],
+          "observed": 22,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "gates",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -1831,20 +1674,12 @@
             "execute-repository-validation"
           ],
           "name": "Every delegated programme reports a passing verdict",
-          "observed": [
-            "PROGRAM-000004='PARTIAL'",
-            "PROGRAM-000005='PARTIAL'",
-            "PROGRAM-000010='PARTIAL'",
-            "PROGRAM-000011='NOT-EXECUTED'",
-            "PROGRAM-000012='NOT-EXECUTED'",
-            "PROGRAM-000017='NOT-EXECUTED'",
-            "PROGRAM-000018='PARTIAL'"
-          ],
+          "observed": 19,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "programs",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": false,
@@ -1855,8 +1690,7 @@
           ],
           "name": "No standing finding bounds the attainable certification",
           "observed": [
-            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-            "tier `standard` excluded 4 blocking check(s) from this run: …"
+            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "certification_ceiling",
@@ -2364,7 +2198,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1"
+      "vector_digest": "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     },
     {
       "actuator_failures": [],
@@ -2701,11 +2535,11 @@
           "verdict": "PASS"
         },
         {
-          "executed": false,
-          "exit_code": null,
+          "executed": true,
+          "exit_code": 0,
           "heavy": true,
           "id": "ACT-AGGREGATE-CERTIFIER",
-          "in_scope": false,
+          "in_scope": true,
           "mandate": [
             "constitutional-validation",
             "verification",
@@ -2723,67 +2557,18 @@
           ],
           "name": "Aggregate constitutional gate — every located gate, heavy tier included",
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "reason": "declared tier is above the selected tier standard",
+          "reason": "",
           "required": true,
           "residue": [],
           "tier": "closure",
           "unattributed": [],
-          "verdict": "NOT-EXECUTED"
+          "verdict": "PASS"
         }
       ],
       "blocking_violations": [
-        "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS",
         "OBS-BLUEPRINT-GATE"
       ],
       "findings": [
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATES-PASS",
-          "observed": [
-            "G-07='PARTIAL'",
-            "G-10='NOT-EXECUTED'",
-            "G-11='NOT-EXECUTED'",
-            "G-13='NOT-EXECUTED'",
-            "G-15='NOT-EXECUTED'",
-            "G-16='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every constitutional gate reports a passing verdict"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-          "observed": [
-            "PROGRAM-000004='PARTIAL'",
-            "PROGRAM-000005='PARTIAL'",
-            "PROGRAM-000010='PARTIAL'",
-            "PROGRAM-000011='NOT-EXECUTED'",
-            "PROGRAM-000012='NOT-EXECUTED'",
-            "PROGRAM-000017='NOT-EXECUTED'",
-            "PROGRAM-000018='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every delegated programme reports a passing verdict"
-        },
         {
           "blocking": false,
           "class": "Constitutional amendment",
@@ -2796,8 +2581,7 @@
           "governed_by_finding": "AEE-F-001",
           "id": "OBS-AGGREGATE-CEILING",
           "observed": [
-            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-            "tier `standard` excluded 4 blocking check(s) from this run: …"
+            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
@@ -2876,19 +2660,12 @@
             "certification"
           ],
           "name": "Every constitutional gate reports a passing verdict",
-          "observed": [
-            "G-07='PARTIAL'",
-            "G-10='NOT-EXECUTED'",
-            "G-11='NOT-EXECUTED'",
-            "G-13='NOT-EXECUTED'",
-            "G-15='NOT-EXECUTED'",
-            "G-16='PARTIAL'"
-          ],
+          "observed": 22,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "gates",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -2898,20 +2675,12 @@
             "execute-repository-validation"
           ],
           "name": "Every delegated programme reports a passing verdict",
-          "observed": [
-            "PROGRAM-000004='PARTIAL'",
-            "PROGRAM-000005='PARTIAL'",
-            "PROGRAM-000010='PARTIAL'",
-            "PROGRAM-000011='NOT-EXECUTED'",
-            "PROGRAM-000012='NOT-EXECUTED'",
-            "PROGRAM-000017='NOT-EXECUTED'",
-            "PROGRAM-000018='PARTIAL'"
-          ],
+          "observed": 19,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "programs",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": false,
@@ -2922,8 +2691,7 @@
           ],
           "name": "No standing finding bounds the attainable certification",
           "observed": [
-            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-            "tier `standard` excluded 4 blocking check(s) from this run: …"
+            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "certification_ceiling",
@@ -3431,7 +3199,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1"
+      "vector_digest": "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     },
     {
       "actuator_failures": [],
@@ -3768,11 +3536,11 @@
           "verdict": "PASS"
         },
         {
-          "executed": false,
-          "exit_code": null,
+          "executed": true,
+          "exit_code": 0,
           "heavy": true,
           "id": "ACT-AGGREGATE-CERTIFIER",
-          "in_scope": false,
+          "in_scope": true,
           "mandate": [
             "constitutional-validation",
             "verification",
@@ -3790,67 +3558,18 @@
           ],
           "name": "Aggregate constitutional gate — every located gate, heavy tier included",
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "reason": "declared tier is above the selected tier standard",
+          "reason": "",
           "required": true,
           "residue": [],
           "tier": "closure",
           "unattributed": [],
-          "verdict": "NOT-EXECUTED"
+          "verdict": "PASS"
         }
       ],
       "blocking_violations": [
-        "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS",
         "OBS-BLUEPRINT-GATE"
       ],
       "findings": [
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATES-PASS",
-          "observed": [
-            "G-07='PARTIAL'",
-            "G-10='NOT-EXECUTED'",
-            "G-11='NOT-EXECUTED'",
-            "G-13='NOT-EXECUTED'",
-            "G-15='NOT-EXECUTED'",
-            "G-16='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every constitutional gate reports a passing verdict"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-          "observed": [
-            "PROGRAM-000004='PARTIAL'",
-            "PROGRAM-000005='PARTIAL'",
-            "PROGRAM-000010='PARTIAL'",
-            "PROGRAM-000011='NOT-EXECUTED'",
-            "PROGRAM-000012='NOT-EXECUTED'",
-            "PROGRAM-000017='NOT-EXECUTED'",
-            "PROGRAM-000018='PARTIAL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every delegated programme reports a passing verdict"
-        },
         {
           "blocking": false,
           "class": "Constitutional amendment",
@@ -3863,8 +3582,7 @@
           "governed_by_finding": "AEE-F-001",
           "id": "OBS-AGGREGATE-CEILING",
           "observed": [
-            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-            "tier `standard` excluded 4 blocking check(s) from this run: …"
+            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
@@ -3943,19 +3661,12 @@
             "certification"
           ],
           "name": "Every constitutional gate reports a passing verdict",
-          "observed": [
-            "G-07='PARTIAL'",
-            "G-10='NOT-EXECUTED'",
-            "G-11='NOT-EXECUTED'",
-            "G-13='NOT-EXECUTED'",
-            "G-15='NOT-EXECUTED'",
-            "G-16='PARTIAL'"
-          ],
+          "observed": 22,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "gates",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -3965,20 +3676,12 @@
             "execute-repository-validation"
           ],
           "name": "Every delegated programme reports a passing verdict",
-          "observed": [
-            "PROGRAM-000004='PARTIAL'",
-            "PROGRAM-000005='PARTIAL'",
-            "PROGRAM-000010='PARTIAL'",
-            "PROGRAM-000011='NOT-EXECUTED'",
-            "PROGRAM-000012='NOT-EXECUTED'",
-            "PROGRAM-000017='NOT-EXECUTED'",
-            "PROGRAM-000018='PARTIAL'"
-          ],
+          "observed": 19,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "programs",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": false,
@@ -3989,8 +3692,7 @@
           ],
           "name": "No standing finding bounds the attainable certification",
           "observed": [
-            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-            "tier `standard` excluded 4 blocking check(s) from this run: …"
+            "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "certification_ceiling",
@@ -4498,11 +4200,16 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1"
+      "vector_digest": "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     }
   ],
   "learning": {
     "actuator": {
+      "ACT-AGGREGATE-CERTIFIER": {
+        "residue_total": 0,
+        "verdict": "PASS",
+        "zones_exercised": []
+      },
       "ACT-ARCHITECTURAL-BLUEPRINT": {
         "residue_total": 0,
         "verdict": "PASS",
@@ -4592,12 +4299,12 @@
     "convergence": {
       "determination": "NOT-CONVERGED",
       "iteration_total": 4,
-      "stable_iterations": 4,
+      "stable_iterations": 3,
       "vector_digests": [
-        "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1",
-        "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1",
-        "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1",
-        "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1"
+        "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b",
+        "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+        "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+        "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
       ]
     },
     "decision": {
@@ -4605,16 +4312,6 @@
         "class": "Constitutional amendment",
         "decision": "ESCALATE",
         "rule": "CR-ESCALATED-CEILING"
-      },
-      "OBS-AGGREGATE-GATES-PASS": {
-        "class": "Defect correction",
-        "decision": "IMPLEMENT",
-        "rule": "CR-BLOCKING-REGRESSION"
-      },
-      "OBS-AGGREGATE-PROGRAMMES-PASS": {
-        "class": "Defect correction",
-        "decision": "IMPLEMENT",
-        "rule": "CR-BLOCKING-REGRESSION"
       },
       "OBS-BLUEPRINT-GATE": {
         "class": "Defect correction",
@@ -4859,8 +4556,7 @@
       },
       "OBS-AGGREGATE-CEILING": {
         "observed": [
-          "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-          "tier `standard` excluded 4 blocking check(s) from this run: …"
+          "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
         ],
         "verdict": "VIOLATED"
       },
@@ -4869,27 +4565,12 @@
         "verdict": "SATISFIED"
       },
       "OBS-AGGREGATE-GATES-PASS": {
-        "observed": [
-          "G-07='PARTIAL'",
-          "G-10='NOT-EXECUTED'",
-          "G-11='NOT-EXECUTED'",
-          "G-13='NOT-EXECUTED'",
-          "G-15='NOT-EXECUTED'",
-          "G-16='PARTIAL'"
-        ],
-        "verdict": "VIOLATED"
+        "observed": 22,
+        "verdict": "SATISFIED"
       },
       "OBS-AGGREGATE-PROGRAMMES-PASS": {
-        "observed": [
-          "PROGRAM-000004='PARTIAL'",
-          "PROGRAM-000005='PARTIAL'",
-          "PROGRAM-000010='PARTIAL'",
-          "PROGRAM-000011='NOT-EXECUTED'",
-          "PROGRAM-000012='NOT-EXECUTED'",
-          "PROGRAM-000017='NOT-EXECUTED'",
-          "PROGRAM-000018='PARTIAL'"
-        ],
-        "verdict": "VIOLATED"
+        "observed": 19,
+        "verdict": "SATISFIED"
       },
       "OBS-AGGREGATE-UNPROVEN": {
         "observed": [],
@@ -5605,7 +5286,7 @@
   },
   "measured": {
     "actuator_failures": 0,
-    "blocking_violations": 3,
+    "blocking_violations": 1,
     "unattributed_residue": 0,
     "unclassified_findings": 0,
     "unresolved_mandate_bindings": 0,
@@ -5648,9 +5329,9 @@
     "version": "1.0"
   },
   "required_stable_iterations": 2,
-  "seal_sha256": "3848998af6893ee81234121b570ff6e1e648fb08a69bb25e151831edf1c38202",
-  "stable_iterations": 4,
-  "tier": "standard",
+  "seal_sha256": "7cade9b2b5574cb868165cd248927c9b3df30ccfe9539857e0aecff19b2623dd",
+  "stable_iterations": 3,
+  "tier": "closure",
   "unattributed_residue": [],
   "unclassified_findings": [],
   "unresolved_pointers": [],
@@ -5658,9 +5339,9 @@
     "CONV-02"
   ],
   "vector_digests": [
-    "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1",
-    "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1",
-    "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1",
-    "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1"
+    "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b",
+    "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+    "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+    "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
   ]
 }

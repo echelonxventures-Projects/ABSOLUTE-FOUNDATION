@@ -4,9 +4,9 @@
 |---|---|
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
-| TIER | `standard` |
+| TIER | `closure` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `3848998af6893ee81234121b570ff6e1` |
+| SEAL | `7cade9b2b5574cb868165cd248927c9b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Cadence is bound to the authorities the repository actually has. No resident process, scheduler or armed session hook exists here, and inventing one would be unadjudicated surface, so the loop runs on every change and on invocation.

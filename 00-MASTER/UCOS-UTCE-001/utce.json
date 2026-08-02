@@ -6,21 +6,21 @@
     "evidence_field_gaps": 0,
     "lineage_cycles": 0,
     "orphans": 0,
-    "relationships": 12819,
+    "relationships": 12821,
     "rooted_and_closed": true,
     "unrooted": 0
   },
   "counts": {
     "artifacts": 1194,
     "artifacts_fully_traced": 0,
-    "artifacts_with_any_lane": 272,
+    "artifacts_with_any_lane": 273,
     "derivable_not_written": 1048,
     "lanes": 13,
     "lanes_with_mechanism": 8,
     "lanes_without_mechanism": 5,
     "obligations": 6,
     "obligations_bound": 6,
-    "relationships": 12819
+    "relationships": 12821
   },
   "derivation": [
     {
@@ -54,8 +54,8 @@
       "type": "Depends-On"
     },
     {
-      "already_written": 37,
-      "artifacts_supported": 37,
+      "already_written": 38,
+      "artifacts_supported": 38,
       "basis": "Declared subject lane in the located vocabulary.",
       "cited_edges": [
         "UEDGE-000003453",
@@ -134,7 +134,7 @@
     "artifacts": 1194,
     "artifacts_fully_traced": 0,
     "artifacts_incomplete": 1194,
-    "artifacts_with_any_lane": 272,
+    "artifacts_with_any_lane": 273,
     "lanes": 13,
     "owner": "platform/measurement · 00-BOOK/tools"
   },
@@ -219,12 +219,12 @@
       ],
       "lane": "requirement",
       "obligation_class": "DISCHARGEABLE",
-      "populated": 80,
+      "populated": 81,
       "types": [
         "Authorized-By",
         "Traces-To"
       ],
-      "unevidenced": 1114
+      "unevidenced": 1113
     },
     {
       "labels": [
@@ -441,7 +441,7 @@
     "operational_home": "00-MASTER/UCOS-UTCE-001/",
     "version": "1.0"
   },
-  "seal_sha256": "a75b6e69e221a24464aec58457bdaa7dce203437bb72f0fb83cbe83da3819e81",
+  "seal_sha256": "13a21f5b405bd13d4a9e041bdd2d0edb2cf4046ac922c67cd6ac35715402a35f",
   "validations": [
     {
       "blocking": true,

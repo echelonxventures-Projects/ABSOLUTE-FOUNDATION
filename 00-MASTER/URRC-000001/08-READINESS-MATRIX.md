@@ -74,12 +74,12 @@ Readiness bound to its owners, plus the blocked-by set.
 **`DV-34`** — Findings composing the certification ceiling.
 
 - **Primitive** — `record_count`
-- **Result** — 2 records
+- **Result** — 1 records
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| records | 2 |
+| records | 1 |
 
 #### D-20 — Blocked-by set
 

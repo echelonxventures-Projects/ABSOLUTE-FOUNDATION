@@ -1,5 +1,10 @@
 {
   "actuator": {
+    "ACT-AGGREGATE-CERTIFIER": {
+      "residue_total": 0,
+      "verdict": "PASS",
+      "zones_exercised": []
+    },
     "ACT-ARCHITECTURAL-BLUEPRINT": {
       "residue_total": 0,
       "verdict": "PASS",
@@ -89,12 +94,12 @@
   "convergence": {
     "determination": "NOT-CONVERGED",
     "iteration_total": 4,
-    "stable_iterations": 4,
+    "stable_iterations": 3,
     "vector_digests": [
-      "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1",
-      "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1",
-      "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1",
-      "aaa6181bbedd67069b96316f5351aaa3179247fbd55482b8f7e6e65e8c5d6de1"
+      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b",
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     ]
   },
   "decision": {
@@ -102,16 +107,6 @@
       "class": "Constitutional amendment",
       "decision": "ESCALATE",
       "rule": "CR-ESCALATED-CEILING"
-    },
-    "OBS-AGGREGATE-GATES-PASS": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-BLOCKING-REGRESSION"
-    },
-    "OBS-AGGREGATE-PROGRAMMES-PASS": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-BLOCKING-REGRESSION"
     },
     "OBS-BLUEPRINT-GATE": {
       "class": "Defect correction",
@@ -356,8 +351,7 @@
     },
     "OBS-AGGREGATE-CEILING": {
       "observed": [
-        "`UCCEP-F-004` — Constitutional finality is reserved to an ou…",
-        "tier `standard` excluded 4 blocking check(s) from this run: …"
+        "`UCCEP-F-004` — Constitutional finality is reserved to an ou…"
       ],
       "verdict": "VIOLATED"
     },
@@ -366,27 +360,12 @@
       "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-GATES-PASS": {
-      "observed": [
-        "G-07='PARTIAL'",
-        "G-10='NOT-EXECUTED'",
-        "G-11='NOT-EXECUTED'",
-        "G-13='NOT-EXECUTED'",
-        "G-15='NOT-EXECUTED'",
-        "G-16='PARTIAL'"
-      ],
-      "verdict": "VIOLATED"
+      "observed": 22,
+      "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-PROGRAMMES-PASS": {
-      "observed": [
-        "PROGRAM-000004='PARTIAL'",
-        "PROGRAM-000005='PARTIAL'",
-        "PROGRAM-000010='PARTIAL'",
-        "PROGRAM-000011='NOT-EXECUTED'",
-        "PROGRAM-000012='NOT-EXECUTED'",
-        "PROGRAM-000017='NOT-EXECUTED'",
-        "PROGRAM-000018='PARTIAL'"
-      ],
-      "verdict": "VIOLATED"
+      "observed": 19,
+      "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-UNPROVEN": {
       "observed": [],

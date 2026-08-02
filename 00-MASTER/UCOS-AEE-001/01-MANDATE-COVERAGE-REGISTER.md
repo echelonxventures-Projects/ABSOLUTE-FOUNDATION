@@ -4,9 +4,9 @@
 |---|---|
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
-| TIER | `standard` |
+| TIER | `closure` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `3848998af6893ee81234121b570ff6e1` |
+| SEAL | `7cade9b2b5574cb868165cd248927c9b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > The loop's phases are not authored here. They are READ from the located declarations that already own them, and each is bound to whatever discharges it. A phase appended to a source appears here on the next run.

@@ -4,9 +4,9 @@
 |---|---|
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
-| TIER | `standard` |
+| TIER | `closure` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `3848998af6893ee81234121b570ff6e1` |
+| SEAL | `7cade9b2b5574cb868165cd248927c9b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Every finding receives a decision from the declared rules, with the located evidence that justifies it. A decision whose evidence obligation is unmet is withheld rather than asserted.
@@ -31,34 +31,6 @@
 
 ## Adjudication
 
-### `OBS-AGGREGATE-GATES-PASS` — Every constitutional gate reports a passing verdict
-
-| Field | Value |
-|---|---|
-| DECISION | **IMPLEMENT** |
-| CLASS | Defect correction |
-| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
-| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
-| GOVERNING FINDING | — |
-| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `["G-07='PARTIAL'", "G-10='NOT-EXECUTED'", "G-11='NOT-EXECUTED'", "G-13='NOT-EXECUTED'", "G-15='NOT-EXECUTED'", "G-16='PA` |
-
-A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
-
-### `OBS-AGGREGATE-PROGRAMMES-PASS` — Every delegated programme reports a passing verdict
-
-| Field | Value |
-|---|---|
-| DECISION | **IMPLEMENT** |
-| CLASS | Defect correction |
-| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
-| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
-| GOVERNING FINDING | — |
-| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `["PROGRAM-000004='PARTIAL'", "PROGRAM-000005='PARTIAL'", "PROGRAM-000010='PARTIAL'", "PROGRAM-000011='NOT-EXECUTED'", "P` |
-
-A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
-
 ### `OBS-AGGREGATE-CEILING` — No standing finding bounds the attainable certification
 
 | Field | Value |
@@ -69,7 +41,7 @@ A blocking expectation that no located finding governs was satisfied by construc
 | LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
 | GOVERNING FINDING | `AEE-F-001` |
 | EVIDENCE | `00-MASTER/UCCEP-000000/uccep-bindings.json`, `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `["`UCCEP-F-004` — Constitutional finality is reserved to an ou…", "tier `standard` excluded 4 blocking check(s) from thi` |
+| MEASURED | `["`UCCEP-F-004` — Constitutional finality is reserved to an ou…"]` |
 
 The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.
 

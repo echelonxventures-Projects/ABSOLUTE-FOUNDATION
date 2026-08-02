@@ -1609,55 +1609,22 @@
       "unknown": false
     },
     {
-      "count": 3,
+      "count": 2,
       "evidence": [
         "S-08"
       ],
-      "headline": "3 distinct value(s)",
+      "headline": "2 distinct value(s)",
       "id": "DV-32",
       "primitive": "field_histogram",
       "purpose": "Computed gate verdicts.",
       "rows": [
         [
           "`PASS`",
-          "16"
-        ],
-        [
-          "`NOT-EXECUTED`",
-          "4"
-        ],
-        [
-          "`PARTIAL`",
-          "2"
-        ]
-      ],
-      "unknown": false
-    },
-    {
-      "count": 4,
-      "evidence": [
-        "S-08"
-      ],
-      "headline": "4 distinct value(s)",
-      "id": "DV-33",
-      "primitive": "field_histogram",
-      "purpose": "Computed programme verdicts.",
-      "rows": [
-        [
-          "`PASS`",
-          "9"
-        ],
-        [
-          "`PARTIAL`",
-          "4"
-        ],
-        [
-          "`NOT-EXECUTED`",
-          "3"
+          "21"
         ],
         [
           "`PASS-WITH-ADVISORY`",
-          "3"
+          "1"
         ]
       ],
       "unknown": false
@@ -1667,14 +1634,35 @@
       "evidence": [
         "S-08"
       ],
-      "headline": "2 records",
+      "headline": "2 distinct value(s)",
+      "id": "DV-33",
+      "primitive": "field_histogram",
+      "purpose": "Computed programme verdicts.",
+      "rows": [
+        [
+          "`PASS`",
+          "15"
+        ],
+        [
+          "`PASS-WITH-ADVISORY`",
+          "4"
+        ]
+      ],
+      "unknown": false
+    },
+    {
+      "count": 1,
+      "evidence": [
+        "S-08"
+      ],
+      "headline": "1 records",
       "id": "DV-34",
       "primitive": "record_count",
       "purpose": "Findings composing the certification ceiling.",
       "rows": [
         [
           "records",
-          "2"
+          "1"
         ]
       ],
       "unknown": false
@@ -2342,8 +2330,8 @@
           "YES",
           "YES",
           "6/6",
-          "136",
-          "`3362149b7a8b`"
+          "131",
+          "`31e97c4102b5`"
         ],
         [
           "`S-09`",
@@ -3495,7 +3483,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "3362149b7a8be306bfc1859e09280acda27b59429f54d1a06cc345f9bc85fe01",
+      "content_sha256": "31e97c4102b558865a80b51593e1b378e74e46c2ba3036aa44594f0f8f0cda3d",
       "exists": true,
       "id": "S-08",
       "kind": "aggregate gate determination",
@@ -3519,7 +3507,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The computed aggregate verdicts and the certification ceiling.",
-      "records": 136,
+      "records": 131,
       "required": true,
       "tracked": true
     },

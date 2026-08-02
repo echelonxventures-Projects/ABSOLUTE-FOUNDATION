@@ -4,9 +4,9 @@
 |---|---|
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
-| TIER | `standard` |
+| TIER | `closure` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `3848998af6893ee81234121b570ff6e1` |
+| SEAL | `7cade9b2b5574cb868165cd248927c9b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > The continuously regenerated view of the loop. This programme has no terminal state: actuate the located owners, read what they determined, classify and decide every divergence, compare against the previous reading, repeat.
@@ -18,7 +18,7 @@
 | Criterion | Measure | Expect | Measured | Verdict |
 |---|---|---|---|---|
 | `CONV-01` | `unstable_transitions` | `0` | `0` | SATISFIED |
-| `CONV-02` | `blocking_violations` | `0` | `3` | **VIOLATED** |
+| `CONV-02` | `blocking_violations` | `0` | `1` | **VIOLATED** |
 | `CONV-03` | `actuator_failures` | `0` | `0` | SATISFIED |
 | `CONV-04` | `unresolved_mandate_bindings` | `0` | `0` | SATISFIED |
 | `CONV-05` | `unclassified_findings` | `0` | `0` | SATISFIED |
@@ -30,13 +30,13 @@
 | Dimension | Value |
 |---|---|
 | Iterations executed | 4 |
-| Consecutive iterations sharing one observation vector | 4 (required 2) |
+| Consecutive iterations sharing one observation vector | 3 (required 2) |
 | Observations declared | 38 |
-| Observations satisfied | 34 |
-| Actuators in scope | 17 |
+| Observations satisfied | 36 |
+| Actuators in scope | 18 |
 | Located loop mandates read | 57 |
 | Mandates discharged | 57 |
-| Findings discovered | 4 |
+| Findings discovered | 2 |
 | Unsatisfied blocking criteria | `CONV-02` |
 | Gate exit code | 1 |
 
