@@ -75,27 +75,27 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-27`** — Located executable checks bound by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 41 records
+- **Result** — 43 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 41 |
+| records | 43 |
 
 **`DV-28`** — Constitutional gates declared by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 23 records
+- **Result** — 24 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 23 |
+| records | 24 |
 
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 30/36 located engine(s) bound to at least one entry point, workflow or hook (over 30 tracked binding file(s))
+- **Result** — 31/37 located engine(s) bound to at least one entry point, workflow or hook (over 31 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -131,6 +131,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 | `00-MASTER/UCOS-UTCE-001/utce_engine.py` | 1 | `Makefile` |
 | `00-MASTER/UEI-000001/uei_engine.py` | 3 | `.github/workflows/uei-gate.yml`, `.kiro/hooks/uei-000001.json`, `Makefile` |
 | `00-MASTER/UER-000001/uer_engine.py` | 3 | `.github/workflows/uer-gate.yml`, `.kiro/hooks/uer-000001.json`, `Makefile` |
+| `00-MASTER/UIS-001/uis_engine.py` | 2 | `.github/workflows/uis-gate.yml`, `Makefile` |
 | `00-MASTER/UKAP-001/corpus_engine.py` | 2 | `.github/workflows/corpus-currency-gate.yml`, `Makefile` |
 | `00-MASTER/UMK-000001/umk_engine.py` | 2 | `.github/workflows/umk-gate.yml`, `Makefile` |
 | `00-MASTER/UPF-000001/upf_engine.py` | 2 | `.github/workflows/uprf-gate.yml`, `Makefile` |

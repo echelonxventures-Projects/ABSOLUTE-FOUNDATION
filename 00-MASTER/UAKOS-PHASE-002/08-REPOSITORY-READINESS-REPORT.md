@@ -20,7 +20,7 @@
 
 | Dimension | Status | Evidence basis |
 |---|---|---|
-| Repository Integrity | PASS | 5295 tracked files; closure structural closure PROVEN |
+| Repository Integrity | PASS | 5308 tracked files; closure structural closure PROVEN |
 | Knowledge Integrity | PASS | 447 objects, all homed, orphans=0 |
 | Implementation Integrity | PASS | 233 implemented + 81 partial, evidence-based, 0 UNKNOWN |
 | Validation Integrity | PASS | 447/447 carry validation evidence |

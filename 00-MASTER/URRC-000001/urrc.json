@@ -1524,35 +1524,35 @@
       "unknown": false
     },
     {
-      "count": 41,
+      "count": 43,
       "evidence": [
         "S-07"
       ],
-      "headline": "41 records",
+      "headline": "43 records",
       "id": "DV-27",
       "primitive": "record_count",
       "purpose": "Located executable checks bound by the aggregate gate.",
       "rows": [
         [
           "records",
-          "41"
+          "43"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 23,
+      "count": 24,
       "evidence": [
         "S-07"
       ],
-      "headline": "23 records",
+      "headline": "24 records",
       "id": "DV-28",
       "primitive": "record_count",
       "purpose": "Constitutional gates declared by the aggregate gate.",
       "rows": [
         [
           "records",
-          "23"
+          "24"
         ]
       ],
       "unknown": false
@@ -1894,9 +1894,9 @@
       "unknown": false
     },
     {
-      "count": 36,
+      "count": 37,
       "evidence": [],
-      "headline": "36 tracked path(s)",
+      "headline": "37 tracked path(s)",
       "id": "DV-45",
       "primitive": "tracked_glob_census",
       "purpose": "Executable governance engines and gate scripts present in version control.",
@@ -2026,6 +2026,10 @@
           "TRACKED"
         ],
         [
+          "`00-MASTER/UIS-001/uis_engine.py`",
+          "TRACKED"
+        ],
+        [
           "`00-MASTER/UKAP-001/corpus_engine.py`",
           "TRACKED"
         ],
@@ -2051,7 +2055,7 @@
     {
       "count": 6,
       "evidence": [],
-      "headline": "30/36 located engine(s) bound to at least one entry point, workflow or hook (over 30 tracked binding file(s))",
+      "headline": "31/37 located engine(s) bound to at least one entry point, workflow or hook (over 31 tracked binding file(s))",
       "id": "DV-46",
       "primitive": "text_presence",
       "purpose": "Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.",
@@ -2212,6 +2216,11 @@
           "`.github/workflows/uer-gate.yml`, `.kiro/hooks/uer-000001.json`, `Makefile`"
         ],
         [
+          "`00-MASTER/UIS-001/uis_engine.py`",
+          "2",
+          "`.github/workflows/uis-gate.yml`, `Makefile`"
+        ],
+        [
           "`00-MASTER/UKAP-001/corpus_engine.py`",
           "2",
           "`.github/workflows/corpus-currency-gate.yml`, `Makefile`"
@@ -2270,7 +2279,7 @@
           "YES",
           "2/2",
           "2388",
-          "`3ae38de9bb90`"
+          "`26c4b1352699`"
         ],
         [
           "`S-02`",
@@ -2300,7 +2309,7 @@
           "YES",
           "5/5",
           "45",
-          "`16a31b903d6c`"
+          "`012d01b1c056`"
         ],
         [
           "`S-05`",
@@ -2310,7 +2319,7 @@
           "YES",
           "2/2",
           "1320",
-          "`f4397ec4d205`"
+          "`f1ec47150cc2`"
         ],
         [
           "`S-06`",
@@ -2329,8 +2338,8 @@
           "YES",
           "YES",
           "5/5",
-          "96",
-          "`9f1995556f0d`"
+          "99",
+          "`1b02f9dfe79a`"
         ],
         [
           "`S-08`",
@@ -3317,7 +3326,7 @@
   "seal_sha256": "8432609e10e719c6c2fef582f8f352a29e027e3ffe816e9eeed636f7c51eef40",
   "substrate": [
     {
-      "content_sha256": "3ae38de9bb9026cf53a025a85c4c5a13cfd130e9ba464a623b78759aef8e5412",
+      "content_sha256": "26c4b135269943ffb7c07985ea1fafcb913e0265da8e4b6836b122a7be2a91d7",
       "exists": true,
       "id": "S-01",
       "kind": "registration projection",
@@ -3382,7 +3391,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "16a31b903d6c41568c7134b7611a660ec9034ac20a3b0d9c113bcf1b77f7bfb9",
+      "content_sha256": "012d01b1c056a806d55a7e538b630c98d3f8914ba4548bfeb1b732a4d8b11a79",
       "exists": true,
       "id": "S-04",
       "kind": "certification projection",
@@ -3409,7 +3418,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "f4397ec4d205ce37e1c8e4921444c3a93f9cc22e31a1e30d66c96222c9aafc2a",
+      "content_sha256": "f1ec47150cc249a614eeea3b6590dea9effcbe1b4ef1606b6c93e8f4a98df4eb",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",
@@ -3465,7 +3474,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "9f1995556f0d4e5b1dbd12c3cb6e56c4740f9fe71080d355ce8329b367c05a43",
+      "content_sha256": "1b02f9dfe79a28d403ca9c569e768fdae327f715af1b24c654301996bd311fde",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",
@@ -3487,7 +3496,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The aggregate constitutional gate: located checks, gates, programme roster, findings.",
-      "records": 96,
+      "records": 99,
       "required": true,
       "tracked": true
     },
