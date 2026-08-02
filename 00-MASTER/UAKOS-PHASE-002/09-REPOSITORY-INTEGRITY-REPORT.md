@@ -6,7 +6,7 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-002/phase2_recon.py`.
 
-- Input `closure.json` SHA-256 (substance, commit anchor excluded): `b170cd9e789a7cfb77c38cb519c492b54afe659ad8ad034d0faf76450aa94639`
+- Input `closure.json` SHA-256 (substance, commit anchor excluded): `ccb2324871fdba5e044cf2c506750369909e0f2397d7aa9f1dd8c0fe2dc385f9`
 - Input `provenance.json` SHA-256: `df0dfd1b03acd973ab095605f68fa472f1de18af30ec150f30fb95376ab738b8`
 
 | Integrity assertion | Result |
