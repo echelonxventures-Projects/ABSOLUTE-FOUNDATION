@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (23 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (5 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 238 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -35,13 +35,13 @@ The blueprint is complete and every finding below is measured, but the repositor
 | Gate | Name | Measured failure | Requirement it violates | Remediation |
 |---|---|---|---|---|
 | `GATE-04` | Repository Validation | validations_failed=1 | validation must pass | discharge the named validation obligation |
-| `GATE-12` | Repository Clean | dirty_entries_outside_generated=23 | the repository must remain clean, deterministic, buildable and reproducible | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
+| `GATE-12` | Repository Clean | dirty_entries_outside_generated=5 | the repository must remain clean, deterministic, buildable and reproducible | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
 
 ## Mission success criteria
 
 | Criterion | Measured | Verdict |
 |---|---|---|
-| Repository is version-control clean | 23 dirty entr(y/ies), excluding this programme's own regenerated artifacts | **FAIL** |
+| Repository is version-control clean | 5 dirty entr(y/ies), excluding this programme's own regenerated artifacts | **FAIL** |
 | Verification PASS | 0 failed | PASS |
 | Validation PASS | 1 failed | **FAIL** |
 | Certification PASS | 2 blocking gate(s) failing | **FAIL** |
