@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T03:09:01+00:00",
+  "generated_at": "2026-08-02T02:41:33+00:00",
   "generator_version": "1.0.0-adv",
   "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)",
   "verdict": "CERTIFIED",
@@ -67,7 +67,7 @@
         {
           "name": "no dangling edge endpoints",
           "pass": true,
-          "detail": "12819 edges resolve"
+          "detail": "12821 edges resolve"
         },
         {
           "name": "Depends-On graph acyclic",
@@ -82,7 +82,7 @@
         {
           "name": "every change event bound to a real subject",
           "pass": true,
-          "detail": "1305 events node-bound"
+          "detail": "1306 events node-bound"
         },
         {
           "name": "change ids unique",
@@ -184,8 +184,8 @@
   },
   "scope": {
     "artifacts": 1194,
-    "edges": 12819,
-    "change_events": 1305,
+    "edges": 12821,
+    "change_events": 1306,
     "signals": 15,
     "lineage_nodes": 1194,
     "executions": 0

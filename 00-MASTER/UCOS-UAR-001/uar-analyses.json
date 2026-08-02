@@ -33,6 +33,10 @@
     {"id": "UAR-CL-06", "name": "content-hash-duplicate-detection", "owner": "00-MASTER/UAKOS-CLOSURE-002", "home": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py", "kind": "closure-analysis"},
     {"id": "UAR-AIE-01", "name": "register-plane-consistency", "owner": "00-MASTER/UAIE-000001", "home": "00-MASTER/UAIE-000001/uaie_engine.py", "kind": "architectural-intelligence-analysis"},
     {"id": "UAR-AIE-02", "name": "faculty-binding-resolution", "owner": "00-MASTER/UAIE-000001", "home": "00-MASTER/UAIE-000001/uaie_engine.py", "kind": "architectural-intelligence-analysis"},
-    {"id": "UAR-AIE-03", "name": "architectural-faculty-closure", "owner": "00-MASTER/UAIE-000001", "home": "00-MASTER/UAIE-000001/uaie_engine.py", "kind": "architectural-intelligence-analysis"}
+    {"id": "UAR-AIE-03", "name": "architectural-faculty-closure", "owner": "00-MASTER/UAIE-000001", "home": "00-MASTER/UAIE-000001/uaie_engine.py", "kind": "architectural-intelligence-analysis"},
+    {"id": "UAR-UCAF-01", "name": "tier-projection-fidelity", "owner": "00-MASTER/UCOS-UCAF-001", "home": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py", "kind": "constitutional-authority-analysis"},
+    {"id": "UAR-UCAF-02", "name": "tier-occupancy-corroboration", "owner": "00-MASTER/UCOS-UCAF-001", "home": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py", "kind": "constitutional-authority-analysis"},
+    {"id": "UAR-UCAF-03", "name": "executable-authority-token-classification", "owner": "00-MASTER/UCOS-UCAF-001", "home": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py", "kind": "constitutional-authority-analysis"},
+    {"id": "UAR-UCAF-04", "name": "authority-realization-binding", "owner": "00-MASTER/UCOS-UCAF-001", "home": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py", "kind": "constitutional-authority-analysis"}
   ]
 }

@@ -2,6 +2,7 @@
   "by_kind": {
     "architectural-intelligence-analysis": 3,
     "closure-analysis": 6,
+    "constitutional-authority-analysis": 4,
     "integration-analysis": 6,
     "repository-intelligence-analysis": 7,
     "validation-intelligence-dimension": 7
@@ -10,6 +11,7 @@
     "00-MASTER/UAIE-000001": 3,
     "00-MASTER/UAKOS-CLOSURE-002": 6,
     "00-MASTER/UCOS-RIB-001": 6,
+    "00-MASTER/UCOS-UCAF-001": 4,
     "intelligence/rie": 7,
     "platform/validation_intelligence": 7
   },
@@ -17,6 +19,6 @@
   "gate": "OPEN",
   "gate_exit": 0,
   "programme": "UCOS-UAR-001",
-  "seal_sha256": "2f43e8968bd1267f",
-  "total_analyses": 29
+  "seal_sha256": "1fc23f8113dfd944",
+  "total_analyses": 33
 }

@@ -422,7 +422,7 @@
   "counts": {
     "analyses_cited": 18,
     "analyses_contributed": 3,
-    "analyses_registered": 29,
+    "analyses_registered": 33,
     "compose": 2,
     "dependency_edges": 15,
     "dependency_layers": 4,
@@ -439,7 +439,7 @@
     "ontology_anchors": 3,
     "ontology_anchors_present": 3,
     "owners": 10,
-    "register_references": 1362,
+    "register_references": 1366,
     "register_references_unresolved": 0,
     "registers": 20,
     "registers_resolved": 20,
@@ -947,7 +947,7 @@
       "owner": "00-MASTER/UCOS-UAR-001/uar_engine.py",
       "path": "00-MASTER/UCOS-UAR-001/uar-analyses.json",
       "problem": "",
-      "references": 29,
+      "references": 33,
       "references_unresolved": 0,
       "resolves": true,
       "role": "analysis-registry",
@@ -1104,7 +1104,7 @@
       "subject": "every baseline"
     }
   ],
-  "seal_sha256": "4575bf4a1df61bb50a0a2538ed29472fac3ea8857abffc7d4e2828882eebaea1",
+  "seal_sha256": "f5075fe8c5f64d4505c05dd7d6605738deb67a3848943d787233cdcc928603af",
   "validations": [
     {
       "blocking": true,

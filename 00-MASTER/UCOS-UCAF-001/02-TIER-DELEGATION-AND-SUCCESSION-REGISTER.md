@@ -13,6 +13,37 @@
 | `T4` | Execution Authority | `T3` | LOCATED | — |
 | `T5` | Derived-Truth Authority | `T4` | LOCATED | — |
 
+## Projection fidelity against the canonical lattice
+
+The table above is a machine PROJECTION. The lattice it projects is legislated as
+prose by its canonical owner. Both are read here and compared: membership, tier name
+and located status must agree in both directions, because every gate that resolves
+rank reads the projection and would inherit any drift silently.
+
+Corroboration is computed ONLY for a tier the projection already reports occupied.
+Reading located evidence as the occupant of a recorded vacancy would be a promotion,
+which the meta-constitution forbids and whose disposal belongs to the claim owner.
+
+| Tier | Projected name | Canonical name | Projected | Canonical status | Faithful | Occupant named by the canonical owner | Corroboration |
+|---|---|---|---|---|---|---|---|
+| `T0` | Constitutional Source Corpus | Constitutional Source Corpus | LOCATED | Located, frozen, non-normative-as-law | YES | The frozen source material from which constitutional intent derives | canonical-lattice-content |
+| `T1` | Constitutional Authority | Constitutional Authority | VACANT | VACANT — see XVII.4 and CMG-OQ-02 | YES | The ratified constitution of substance presupposed by CEP-000 §5.5 Tier 1 | n/a — vacancy recorded |
+| `T1M` | Meta-Constitutional Authority | Meta-Constitutional Authority | LOCATED | Located (PROVISIONAL) | YES | This instrument — recognition of constitutionality; orthogonal to T1, not superior to it | canonical-lattice-content, registered-artifact |
+| `T2` | Program Authority | Program Authority | LOCATED | Located | YES | CEP-000 and its derived CEP instruments; supreme over constitutional-engineering process | canonical-lattice-content, registered-artifact, charter-vesting |
+| `T2I` | Interpretive Authority | Interpretive Authority | LOCATED | Located | YES | AUTH-INF-001; binds reading, enacts nothing; orthogonal to T2 | canonical-lattice-content, registered-artifact |
+| `T3` | Domain Authority | Domain Authority | LOCATED | Located | YES | Domain constitutions governing substance within one domain | canonical-lattice-content, registered-artifact |
+| `T4` | Execution Authority | Execution Authority | LOCATED | Located | YES | Agents and engines acting within a gate | canonical-lattice-content, located-authority-of-the-same-name, charter-vesting |
+| `T5` | Derived-Truth Authority | Derived-Truth Authority | LOCATED | Located | YES | State, checkpoints, evidence, reports, registries, projections — assert nothing | canonical-lattice-content, charter-vesting |
+
+## Charter tier vesting (the order the lattice may not amend)
+
+| Vesting | Tier | Name | Occupant the charter vests |
+|---|---|---|---|
+| `UCAF-VEST-01-1` | 1 | Constitutional Authority | the ratified UCOS Ω∞ Constitution and its concerns |
+| `UCAF-VEST-01-2` | 2 | Program Authority | this Charter and its derived CEP instruments |
+| `UCAF-VEST-01-3` | 3 | Execution Authority | the autonomous execution agent, acting only within the current stage gate |
+| `UCAF-VEST-01-4` | 4 | Derived-Truth Authority | program state, checkpoints, evidence, and reports, which assert nothing and are always reconciled against repository reality |
+
 ## Recorded vacancies
 
 A vacancy is recorded, never promoted. This programme reports occupancy exactly as

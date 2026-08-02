@@ -961,7 +961,7 @@
     },
     {
       "id": "CK-UCAF",
-      "name": "Authority model bound: every located authority registered, resolvable, scoped, evidenced and audited; no authority-shaped reference undefined",
+      "name": "Authority model bound: every located authority registered, resolvable, scoped, evidenced and audited; no authority-shaped reference undefined; the tier projection every gate reads faithful to the canonical lattice and to the charter vesting; every tier reported occupied corroborated by a located occupant; every authority token minted in the executable plane classified and colliding with no registered constitutional authority; every declared realization bound to the module, the enforcement symbol and the vesting clause it names",
       "owner": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
       "argv": [
         "$PY3",
@@ -980,7 +980,7 @@
     },
     {
       "id": "CK-UCAF-SELF",
-      "name": "UCAF self-guards: declaration integrity, zero-enumeration, write scope, determinism, knowledge-once, no-vacancy-promotion",
+      "name": "UCAF self-guards: declaration integrity, zero-enumeration, write scope, determinism, knowledge-once, no-vacancy-promotion (including that no recorded vacancy is corroborated as occupied and no realization claims an unlocated tier)",
       "owner": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
       "argv": [
         "$PY3",
@@ -1323,7 +1323,7 @@
     {
       "id": "G-18",
       "name": "Constitutional Authority Gate",
-      "owner": "00-MASTER/UCOS-UCAF-001 (the authority model CEP-002 Art 19 and CEP-006 Art I presuppose)",
+      "owner": "00-MASTER/UCOS-UCAF-001 (the authority model CEP-002 Art 19 and CEP-006 Art I presuppose; extended under 00-CMG/CMG-000001 Art LXXVII.2(b) to cover execution authority and tier governance — CEP-003 Art I/VIII vests the first and CMG-000001 Art XVI legislates the second, so both are REUSED and neither is created here)",
       "checks": [
         "CK-UCAF",
         "CK-UCAF-SELF"

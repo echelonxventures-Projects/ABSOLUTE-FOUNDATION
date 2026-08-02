@@ -39,7 +39,7 @@
   "programme": {
     "id": "UCOS-UCAF-001",
     "name": "Universal Constitutional Authority Framework",
-    "version": "1.0",
+    "version": "1.1",
     "authority": "NONE — DERIVED TRUTH. This programme creates no authority, confers no authority, occupies no tier and ratifies nothing. It reads the located instruments that define the repository's authorities and reports what they say.",
     "operational_home": "00-MASTER/UCOS-UCAF-001/",
     "disclosure": "**DISCLOSURE.** CERTIFIED-PROVISIONAL. This programme holds no ratification authority and no constitutional authority: it registers, resolves, validates and audits the authorities the repository has already located. Where this register and a located instrument differ, the located instrument governs.",
@@ -77,7 +77,10 @@
     { "id": "UCAF-CAP-08", "capability": "Authority Evidence", "obligation": "every registered authority carries at least one evidence pointer that resolves in the repository", "measure": "authorities_with_evidence" },
     { "id": "UCAF-CAP-09", "capability": "Authority Audit", "obligation": "the registry emits an append-only, content-addressed audit ledger sufficient to reconstruct the registration deterministically", "measure": "audit_entries" },
     { "id": "UCAF-CAP-10", "capability": "Authority Revocation", "obligation": "the revocation channel exists, is append-only, and every entry names a resolving authority and an existing record — per CEP-002 13.5 a revocation takes effect upon record", "measure": "revocations_registered" },
-    { "id": "UCAF-CAP-11", "capability": "Authority Certification", "obligation": "no authority remains undefined: every authority-shaped reference in the declared surfaces resolves to a registered authority", "measure": "undefined_references" }
+    { "id": "UCAF-CAP-11", "capability": "Authority Certification", "obligation": "no authority remains undefined: every authority-shaped reference in the declared surfaces resolves to a registered authority", "measure": "undefined_references" },
+    { "id": "UCAF-CAP-12", "capability": "Authority Realization", "obligation": "every authority token minted in the executable plane is discovered, classified against a declared non-constitutional token class, and collides with no registered constitutional authority; and every declared realization binding resolves to a located module, a located enforcement symbol and a located vesting clause", "measure": "realizations_bound" },
+    { "id": "UCAF-CAP-13", "capability": "Tier Governance", "obligation": "the machine tier projection is faithful to the canonical constitutional precedence lattice in membership, name and located status; every tier the projection reports located is corroborated by a located occupant; and every authority tier the charter vests is present in the lattice", "measure": "tiers_corroborated" },
+    { "id": "UCAF-CAP-14", "capability": "Authority Admission", "obligation": "every concept this programme admits carries a recorded disposition drawn from the located totality rule and a canonical owner that resolves, and no concept is admitted by creating a parallel authority", "measure": "dispositions_owned" }
   ],
 
   "$source_comment": [
@@ -166,6 +169,202 @@
     "basis": "00-CMG/CMG-000001 ARTICLE XVI (authority hierarchy) and ARTICLE XVII.4 (resolution reaching a vacant tier), projected as data in 00-CMG/CMG-REGISTRY.json."
   },
 
+  "$lattice_comment": [
+    "The CANONICAL lattice. 00-CMG/CMG-REGISTRY.json is a machine PROJECTION of the lattice that",
+    "00-CMG/CMG-000001 ARTICLE XVI.2 legislates as prose. Until now nothing read the two against",
+    "each other, so a projection could drift from the instrument it projects and every gate that",
+    "trusts the projection would inherit the drift silently. This entry declares where the",
+    "canonical lattice lives and how to read it. It restates no tier: tier identifiers, tier",
+    "names, occupancies and contents are all READ from the instrument.",
+    "",
+    "The Content column is the occupant the canonical instrument names for a tier. It is the",
+    "corroboration this programme measures: a tier the projection reports located whose canonical",
+    "row names no occupant is an occupancy claim with nothing behind it. This programme does not",
+    "supply the occupant and never promotes anything into a tier."
+  ],
+  "tier_lattice_source": {
+    "id": "UCAF-LAT-01",
+    "name": "Canonical constitutional precedence lattice",
+    "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+    "format": "markdown-table",
+    "section": "## ARTICLE XVI — AUTHORITY HIERARCHY",
+    "id_pattern": "T[0-9][A-Z]*",
+    "columns": { "name": 1, "content": 2, "status": 3 },
+    "located_token": "LOCATED",
+    "vacant_token": "VACANT",
+    "occupant_owner": "00-CMG/CMG-REGISTRY.json",
+    "occupant_pointer": "artifacts",
+    "occupant_tier_field": "tier",
+    "basis": "00-CMG/CMG-000001 ARTICLE XVI.1-XVI.2 — 'There SHALL be exactly one Constitutional Precedence Lattice', defined by the rank-tier table of XVI.2. XVI.7 requires the lattice be verified acyclic on every change; this programme additionally verifies that the projection every gate reads is faithful to it."
+  },
+
+  "$vesting_comment": [
+    "Tier vesting. 00-CMG/CMG-000001 XVI.5 obliges the lattice to be consistent with, and to not",
+    "amend, the four-tier Program authority order already declared by the charter. That is a",
+    "consistency obligation between two located instruments and nothing measured it. This entry",
+    "declares where the charter vests its authority tiers and how to read the vesting list.",
+    "Consistency is measured by NAME, which is the only join the two instruments share: the",
+    "charter numbers four tiers, the lattice uses symbolic non-consecutive identifiers (XVI.8),",
+    "so ordinal comparison would be a false join and is deliberately not performed."
+  ],
+  "tier_vesting_source": {
+    "id": "UCAF-VEST-01",
+    "name": "Charter authority-tier vesting",
+    "owner": "00-CEP/CEP-000-CONSTITUTIONAL-ENGINEERING-CHARTER.md",
+    "format": "vesting-list",
+    "anchor": "The authority tiers of the Program SHALL be, in descending precedence:",
+    "item_pattern": "^-\\s+Tier\\s+(?P<ordinal>[0-9]+)\\s+\u2014\\s+(?P<name>[^(]+?)\\s+\\((?P<occupant>.+?)\\)\\.?\\s*$",
+    "basis": "00-CEP/CEP-000 \u00a75.5 — the authority tiers of the Program in descending precedence, each with the occupant the charter vests in it. 00-CMG/CMG-000001 XVI.5 declares each such statement a refinement within a tier of the canonical lattice and 'remains fully in force'."
+  },
+
+  "$realization_comment": [
+    "Realization. An authority is not only declared; in this repository it is also EXERCISED by",
+    "code. Before this entry the executable plane minted authority tokens as free strings that",
+    "resolved to nothing: engine/runtime/execution/authorization.py refused an authorization",
+    "asserting 'a foreign authority' while no gate could say which authorities were not foreign,",
+    "and nothing prevented a module from minting a token that reads as a constitutional",
+    "authority. Two properties are measured, independently, and the first is not waivable by the",
+    "second.",
+    "",
+    "COLLISION. No token minted in the executable plane may equal a registered constitutional",
+    "authority, by identifier or by name. This is the machine form of CEP-002's prohibition on",
+    "governance asserting, simulating or substituting for constitutional authority and of",
+    "CEP-003 I.3's prohibition on execution authority exercising a power reserved to a higher",
+    "tier. It applies to every discovered token whether or not a class is declared for it.",
+    "",
+    "CLASSIFICATION. Every discovered token must belong to a declared token class that records",
+    "what the token IS and why it is not a constitutional authority. An undeclared token fails",
+    "closed: a new authority-shaped constant in the executable plane must be disclosed and",
+    "classified before the gate reopens. The classes are DATA so disclosure is an edit here, and",
+    "the tokens are DISCOVERED so the population can never be understated by this file."
+  ],
+  "realization_sources": [
+    {
+      "id": "UCAF-REAL-01",
+      "name": "Authority tokens minted in the executable plane",
+      "owner_globs": ["engine/**/*.py", "platform/**/*.py"],
+      "exclude_fragments": ["/tests/"],
+      "symbol_suffix": "AUTHORITY",
+      "assignment_pattern": "^(?P<symbol>[A-Z][A-Z0-9_]*)\\s*(?::[^=\\n]+)?=\\s*\"(?P<token>[^\"]*)\"",
+      "collision_min_name_words": 2,
+      "basis": "The executable plane declares its own standing as a module-level constant whose name ends in AUTHORITY. Discovery reads those assignments; it enumerates no token and no module, so a token added anywhere under the declared globs is observed here automatically. collision_min_name_words is the word count at which a registered authority NAME is treated as a designation rather than a generic noun: the authority register names authority itself with a single generic word that is also an ordinary program identifier, so a one-word match would report vocabulary as usurpation. Registered IDENTIFIERS collide at any length, and the classification obligation closes the gate on any undisclosed token whatever it says, so nothing is waived by this bound."
+    }
+  ],
+  "realization_token_classes": [
+    {
+      "id": "UCAF-TC-01",
+      "token": "ENGINEERING-EXECUTION-ONLY",
+      "class": "ENGINEERING-EXECUTION",
+      "constitutional": false,
+      "basis": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md ARTICLE I.3 — execution authority SHALL NOT govern, ratify, decide constitutional content, or exercise a power reserved to a higher tier. A module minting this token discloses that it acts and holds nothing."
+    },
+    {
+      "id": "UCAF-TC-02",
+      "token": "NONE (DERIVED TRUTH)",
+      "class": "DERIVED-TRUTH",
+      "constitutional": false,
+      "basis": "00-CMG/CMG-000001 ARTICLE XVI.2 — the derived-truth tier records and asserts nothing. A module minting this token discloses that it computes and refuses rather than legislating."
+    },
+    {
+      "id": "UCAF-TC-03",
+      "token": "authority",
+      "class": "DELTA-REGISTER-KEY",
+      "constitutional": false,
+      "basis": "engine/uckp/state.py — one of the five delta registers a UCKP transition is required to carry. The constant is a register key in a state record, not a claim to hold authority; it is disclosed here rather than filtered in code so that the discovered population is never quietly narrowed."
+    }
+  ],
+  "realization_bindings": [
+    {
+      "id": "UCAF-RB-01",
+      "authority": "Execution Authority",
+      "tier": "Execution Authority",
+      "owner": "engine/runtime/execution/authorization.py",
+      "token_symbol": "EXECUTION_AUTHORITY",
+      "guard_symbol": "require_authorization",
+      "vesting_instrument": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md",
+      "vesting_anchor": "SHALL NEVER self-authorize an action",
+      "basis": "00-CEP/CEP-003 ARTICLE I.4 and ARTICLE VIII.4 — execution authority never self-authorizes and acts only upon an authorization granted under Article VIII, which SHALL NEVER be self-conferred by execution authority. The named module is where the repository mints and refuses that authorization; the guard symbol is where refusal happens, so a binding whose guard is absent is a declared enforcement that does not exist."
+    }
+  ],
+
+  "$admission_comment": [
+    "Admission. 00-CMG/CMG-000001 LXXVII.2 requires exactly one disposition for every concept",
+    "reached, and LXXVII.4 forbids admitting a concept by default routing to the nearest owner,",
+    "the most active programme or the meta layer. Each concept this programme reaches is recorded",
+    "here with its located canonical owner, its disposition and the reason CREATE was refused.",
+    "The dispositions themselves are read from the totality rule in the located instrument; this",
+    "file may not invent one, and a disposition of CREATE is a validation failure because a",
+    "concept whose owner is named cannot be constitutionally created a second time."
+  ],
+  "admission_determination": {
+    "classification": "SUBSTANTIVE",
+    "meta_registry": "00-CMG/CMG-REGISTRY.json",
+    "admitted_to_meta_registry": false,
+    "basis": "00-CMG/CMG-000001 ARTICLE LXXVI.2(b) forbids admitting a substantive concept into the meta-constitutional layer, so this programme claims no namespace token there (ARTICLE XLI.5) and is absent from the meta registry by design.",
+    "disposition_source": {
+      "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+      "anchor": "already owned",
+      "forbidden_disposition": "CREATE"
+    },
+    "concepts": [
+      {
+        "id": "UCAF-AD-01",
+        "concept": "execution authority — which authority may authorize an execution, and under what authorization",
+        "disposition": "REUSE",
+        "canonical_owner": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md",
+        "owner_examined": "00-CEP/CEP-003 ARTICLE I vests execution authority and ARTICLE VIII legislates the authorization; the concept is fully addressed there.",
+        "why_not_create": "CREATE would be a second definition of an authority the constitutional programme already vests, breaching 00-CMG/CMG-000001 LXXVII.2(a) and manufacturing the parallel authority LXXVII.4 forbids."
+      },
+      {
+        "id": "UCAF-AD-02",
+        "concept": "constitutional tier lattice — the ordered tiers of authority and their occupancy",
+        "disposition": "REUSE",
+        "canonical_owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "owner_examined": "00-CMG/CMG-000001 ARTICLE XVI legislates exactly one Constitutional Precedence Lattice and 00-CMG/CMG-REGISTRY.json projects it; ARTICLE XVI.8 already governs admission of a new tier.",
+        "why_not_create": "CREATE would be a second lattice, which ARTICLE XVI.1 forecloses by legislating that there SHALL be exactly one."
+      },
+      {
+        "id": "UCAF-AD-03",
+        "concept": "tier vesting — which occupant each authority tier of the Program vests in",
+        "disposition": "REUSE",
+        "canonical_owner": "00-CEP/CEP-000-CONSTITUTIONAL-ENGINEERING-CHARTER.md",
+        "owner_examined": "00-CEP/CEP-000 \u00a75.5 vests four authority tiers in descending precedence with a named occupant for each.",
+        "why_not_create": "CREATE would amend the charter's vesting by restating it, which 00-CMG/CMG-000001 XVI.5 expressly forbids the lattice from doing."
+      },
+      {
+        "id": "UCAF-AD-04",
+        "concept": "gate execution tiers — the boot, standard and full tiers by which verification work is scheduled",
+        "disposition": "REUSE",
+        "canonical_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
+        "owner_examined": "The aggregate constitutional gate declares a tier on every check and schedules by it; 00-CMG/CMG-REGISTRY.json delegates the enforcement machinery to the located Makefile, verify.sh and CI workflows.",
+        "why_not_create": "Gate execution tiers are a scheduling property of the enforcement machinery, not a rank of authority. They share only the word 'tier' with the precedence lattice. Creating a construct here would conflate two owned concepts, which 00-CMG/CMG-000001 LXXVI.6 forbids as expansion by reinterpretation."
+      },
+      {
+        "id": "UCAF-AD-05",
+        "concept": "authority realization — the binding between a located authority and the executable plane that exercises it",
+        "disposition": "EXTEND",
+        "canonical_owner": "00-MASTER/UCOS-UCAF-001/ucaf-authority.json",
+        "owner_examined": "This programme is the located owner of the authority MODEL — registry, delegation, resolution, validation, succession, scope, verification, evidence, audit, revocation and certification. Binding a located authority to the code that exercises it lies inside that declared scope and was unaddressed.",
+        "why_not_create": "00-CMG/CMG-000001 LXXVII.2(b) requires a concept inside an existing owner's scope but unaddressed to be dispositioned EXTEND against that owner, and LXXVI.2(c) makes EXTEND the default; a new programme would be the parallel authority LXXVII.4 forbids."
+      },
+      {
+        "id": "UCAF-AD-06",
+        "concept": "tier projection fidelity — agreement between the canonical lattice and the machine projection every gate reads",
+        "disposition": "EXTEND",
+        "canonical_owner": "00-MASTER/UCOS-UCAF-001/ucaf-authority.json",
+        "owner_examined": "This programme already reads the tier projection and validates its acyclicity and its vacancy records; reading the projection against the instrument it projects lies inside the same declared scope and was unaddressed.",
+        "why_not_create": "The lattice and its projection each already have an owner. What was missing is a measurement over both, which is a capability of the authority model rather than a new construct; CREATE would duplicate ownership and breach single canonical ownership."
+      }
+    ],
+    "rejected_alternatives": [
+      "CREATE a Universal Execution Authority programme — refused: 00-CEP/CEP-003 vests execution authority and 00-CMG/CMG-REGISTRY.json already delegates execution-operation to it, so discovery yields an owner and 00-CMG/CMG-000001 LXXVII.2(a) requires REUSE.",
+      "CREATE a Tier Governance programme — refused: 00-CMG/CMG-000001 ARTICLE XVI legislates exactly one precedence lattice and ARTICLE XVI.8 already governs tier admission; a second governor of tiers would breach CMG-INV-02.",
+      "Admit either concept into the meta-constitutional registry — refused: both are substantive and 00-CMG/CMG-000001 LXXVI.2(b) forbids admitting a substantive concept there.",
+      "Unify gate execution tiers with the constitutional precedence lattice — refused: they are distinct owned concepts sharing a word, and unifying them by reinterpretation is what 00-CMG/CMG-000001 LXXVI.6 forbids.",
+      "Close the recorded vacancy by reading the charter's vesting of the tier as its occupant — refused: 00-CMG/CMG-000001 XVII.4 forbids promoting a lower instrument into a vacant tier and LXXXI.5 voids any reading that does, so corroboration is measured only for tiers the projection already reports located."
+    ]
+  },
+
   "$delegation_comment": [
     "Delegation. CEP-002 Article 13 legislates the delegation model and Article 14 the canonical",
     "ownership of a concern. The located meta-constitutional projection already records the",
@@ -227,7 +426,14 @@
     { "id": "UCAF-SCOPE-07", "rule": "where finality requires an authority outside the corpus, that authority is superior for finality and in-corpus ratification confers only PROVISIONAL acceptance", "owner": "00-CEP/CEP-006-CONSTITUTIONAL-RATIFICATION-CONSTITUTION.md", "anchor": "Ratification Authority within the corpus SHALL confer only PROVISIONAL acceptance" },
     { "id": "UCAF-SCOPE-08", "rule": "resolution reaching a vacant tier shall not skip the tier and shall not promote a lower instrument into it", "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "anchor": "SHALL NOT skip the tier and SHALL NOT promote a lower instrument into it" },
     { "id": "UCAF-SCOPE-09", "rule": "a steward shall not confer authority, decide constitutional content, or exceed delegated bounds", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "SHALL NOT confer authority" },
-    { "id": "UCAF-SCOPE-10", "rule": "freeze authority shall never be self-conferred by execution authority and preserves only", "owner": "00-CEP/CEP-007-CONSTITUTIONAL-FREEZE-CONSTITUTION.md", "anchor": "Freeze Authority SHALL NEVER be self-conferred by Execution Authority" }
+    { "id": "UCAF-SCOPE-10", "rule": "freeze authority shall never be self-conferred by execution authority and preserves only", "owner": "00-CEP/CEP-007-CONSTITUTIONAL-FREEZE-CONSTITUTION.md", "anchor": "Freeze Authority SHALL NEVER be self-conferred by Execution Authority" },
+    { "id": "UCAF-SCOPE-11", "rule": "execution authority acts only within a stage that is in the EXECUTING condition, performs exactly the single next authorized action, and writes only to the declared write area of the active stage", "owner": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md", "anchor": "SHALL act only within a stage that is in the EXECUTING condition" },
+    { "id": "UCAF-SCOPE-12", "rule": "execution authority shall not govern, ratify, decide constitutional content, or exercise a power reserved to a higher tier", "owner": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md", "anchor": "SHALL NOT govern, ratify, decide constitutional content, or exercise a power reserved to a higher tier" },
+    { "id": "UCAF-SCOPE-13", "rule": "execution authority never self-authorizes an action and acts only upon an authorization granted under the authorization article", "owner": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md", "anchor": "SHALL NEVER self-authorize an action" },
+    { "id": "UCAF-SCOPE-14", "rule": "an authorization shall never be self-conferred by execution authority and shall never bypass a gate, a governance control or a preservation rule", "owner": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md", "anchor": "SHALL NEVER be self-conferred by Execution Authority and SHALL NEVER bypass a gate" },
+    { "id": "UCAF-SCOPE-15", "rule": "every tier is subordinate to every tier above it except where an orthogonality is declared, and rank is never decided by recency, size or prominence", "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "anchor": "Every tier SHALL be subordinate to every tier above it" },
+    { "id": "UCAF-SCOPE-16", "rule": "the tier set is open: a new tier is admitted by declaring its position relative to existing tiers, and admission shall not renumber an existing tier", "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "anchor": "SHALL NOT renumber an existing tier" },
+    { "id": "UCAF-SCOPE-17", "rule": "the lattice shall be consistent with, and shall not amend, the four-tier Program authority order already declared by the charter", "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "anchor": "SHALL NOT amend, the precedence statements already declared in the corpus" }
   ],
 
   "$resolution_comment": [
@@ -251,7 +457,12 @@
     { "id": "UCAF-R-09", "question": "Which authority may revoke a delegation, and when does the revocation take effect?", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "Revocation of a delegation SHALL be recorded and SHALL take effect upon record", "in_corpus": true },
     { "id": "UCAF-R-10", "question": "Which authority resolves a contested authority over the same artifact?", "owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md", "anchor": "the earliest ratified definition prevailing", "in_corpus": true },
     { "id": "UCAF-R-11", "question": "Was the exogenous constituent act performed, and are its constituent capabilities discharged?", "owner": "02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md", "anchor": "ALL PRESENT and EXERCISED", "in_corpus": false },
-    { "id": "UCAF-R-12", "question": "Is the located authority derivation chain rooted?", "owner": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "all authority-chain gaps are closed", "in_corpus": true }
+    { "id": "UCAF-R-12", "question": "Is the located authority derivation chain rooted?", "owner": "01-WORKING/AUTHORITY-REGISTER.md", "anchor": "all authority-chain gaps are closed", "in_corpus": true },
+    { "id": "UCAF-R-13", "question": "Which authority may authorize an execution, and may execution authority confer its own authorization?", "owner": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md", "anchor": "SHALL NEVER be self-conferred by Execution Authority", "in_corpus": true },
+    { "id": "UCAF-R-14", "question": "Upon what does an execution unit enter AUTHORIZED, and what is the consequence of a denied authorization?", "owner": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md", "anchor": "SHALL enter AUTHORIZED only upon an authorization derived from program state", "in_corpus": true },
+    { "id": "UCAF-R-15", "question": "In which tier does execution authority vest, and which instrument vests it?", "owner": "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md", "anchor": "SHALL vest as defined by CEP-000", "in_corpus": true },
+    { "id": "UCAF-R-16", "question": "Which authority governs the ordering of authority tiers, and how many precedence lattices are there?", "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "anchor": "There SHALL be exactly one **Constitutional Precedence Lattice**", "in_corpus": true },
+    { "id": "UCAF-R-17", "question": "By what procedure is a new authority tier admitted, and may admission renumber an existing tier?", "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "anchor": "The tier set IS OPEN", "in_corpus": true }
   ],
 
   "$reconciliation_comment": [
@@ -340,7 +551,14 @@
     { "id": "UCAF-VAL-12", "dimension": "REVOCATION-VALID", "obligation": "every recorded revocation names a registered authority and an existing record path", "blocking": true },
     { "id": "UCAF-VAL-13", "dimension": "RECONCILIATION-MEASURED", "obligation": "every declared reconciliation is measured on both sides and carries a decided outcome", "blocking": true },
     { "id": "UCAF-VAL-14", "dimension": "CAPABILITY-DISCHARGED", "obligation": "every declared capability is discharged by a measure that ran", "blocking": true },
-    { "id": "UCAF-VAL-15", "dimension": "NO-VACANCY-PROMOTION", "obligation": "no vacant tier is reported as occupied by this programme, and no reconciliation is reported as a ratification", "blocking": true }
+    { "id": "UCAF-VAL-15", "dimension": "NO-VACANCY-PROMOTION", "obligation": "no vacant tier is reported as occupied by this programme, and no reconciliation is reported as a ratification", "blocking": true },
+    { "id": "UCAF-VAL-16", "dimension": "REALIZATION-NO-COLLISION", "obligation": "no authority token minted in the executable plane equals a registered constitutional authority, by identifier or by name", "blocking": true },
+    { "id": "UCAF-VAL-17", "dimension": "REALIZATION-CLASSIFIED", "obligation": "every authority token discovered in the executable plane belongs to a declared token class that records why it is not a constitutional authority", "blocking": true },
+    { "id": "UCAF-VAL-18", "dimension": "REALIZATION-BOUND", "obligation": "every declared realization binding resolves: its module exists, its token symbol is assigned there, its enforcement symbol is present, the authority it names resolves to exactly one registered authority, the tier it names is a located tier of the canonical lattice, and its vesting clause is located", "blocking": true },
+    { "id": "UCAF-VAL-19", "dimension": "TIER-PROJECTION-FAITHFUL", "obligation": "the machine tier projection and the canonical constitutional lattice agree on membership, on tier name and on located status, in both directions", "blocking": true },
+    { "id": "UCAF-VAL-20", "dimension": "TIER-OCCUPANCY-CORROBORATED", "obligation": "every tier the projection reports located is corroborated by at least one located occupant, and no vacant tier is corroborated", "blocking": true },
+    { "id": "UCAF-VAL-21", "dimension": "TIER-VESTING-CONSISTENT", "obligation": "every authority tier the charter vests is present by name in the canonical lattice, and no vested tier is absent from it", "blocking": true },
+    { "id": "UCAF-VAL-22", "dimension": "DISPOSITION-OWNED", "obligation": "every admitted concept carries a disposition drawn from the located totality rule, a canonical owner that resolves, and a recorded reason CREATE was refused; no disposition is CREATE", "blocking": true }
   ],
 
   "$exit_comment": [
@@ -351,7 +569,11 @@
     { "id": "UCAF-EX-02", "criterion": "no authority-shaped reference in the declared surfaces is undefined" },
     { "id": "UCAF-EX-03", "criterion": "every competence question a gate needs to ask resolves to a located clause" },
     { "id": "UCAF-EX-04", "criterion": "every recorded vacancy is registered, complete, and reported without promotion" },
-    { "id": "UCAF-EX-05", "criterion": "every conflict between a recorded claim of authority absence and located evidence of authority presence is measured, cited and referred to the claim owner" }
+    { "id": "UCAF-EX-05", "criterion": "every conflict between a recorded claim of authority absence and located evidence of authority presence is measured, cited and referred to the claim owner" },
+    { "id": "UCAF-EX-06", "criterion": "no authority token minted in the executable plane collides with a registered constitutional authority, every such token is disclosed and classified, and every declared realization of a located authority resolves to the module, the enforcement symbol and the vesting clause it names" },
+    { "id": "UCAF-EX-07", "criterion": "the machine tier projection every gate reads is faithful to the canonical constitutional precedence lattice in membership, name and located status, and drift between them closes the gate" },
+    { "id": "UCAF-EX-08", "criterion": "every tier reported located names a located occupant, every authority tier the charter vests is present in the lattice, and no vacant tier is corroborated as occupied" },
+    { "id": "UCAF-EX-09", "criterion": "every concept this programme admits carries a located canonical owner and a recorded disposition drawn from the located totality rule, and no admission creates a parallel authority" }
   ],
 
   "$findings_comment": [
@@ -387,6 +609,26 @@
       "disposition": "GOVERNED",
       "blocking": false,
       "note": "This programme can prove from located evidence which authority is competent for an act. It cannot perform the act: CEP-006 I.5 provides that ratification authority is never self-conferred by execution authority and acts only upon an authorization, and CEP-006 I.4 caps any in-corpus determination at PROVISIONAL. Recording a ratification is therefore owned by the ratification registry, and conferring one is owned by the located authority — never by this engine."
+    },
+    {
+      "id": "UCAF-F-004",
+      "title": "The executable plane minted authority tokens that resolved to nothing",
+      "class": "MEASURED-GOVERNANCE-GAP",
+      "owner": "00-MASTER/UCOS-UCAF-001/ucaf-authority.json",
+      "evidence": ["engine/runtime/execution/authorization.py", "00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md"],
+      "disposition": "IMPLEMENTED",
+      "blocking": false,
+      "note": "The runtime refused an authorization that 'asserts a foreign authority', but no gate could say which authorities were not foreign: the minted token was a free string bound to no registered authority, to no vesting instrument and to no tier. Nothing prevented a module from minting a token that reads as a constitutional authority, and nothing required a new authority-shaped constant to be disclosed. Closed by DISCOVERING every such token from the executable plane and measuring two independent properties — that no token collides with a registered constitutional authority, and that every discovered token is classified with its basis. The declared classes cannot narrow the discovered population and cannot waive the collision check."
+    },
+    {
+      "id": "UCAF-F-005",
+      "title": "The tier projection every gate reads was never read against the instrument it projects",
+      "class": "MEASURED-GOVERNANCE-GAP",
+      "owner": "00-MASTER/UCOS-UCAF-001/ucaf-authority.json",
+      "evidence": ["00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "00-CMG/CMG-REGISTRY.json", "00-CEP/CEP-000-CONSTITUTIONAL-ENGINEERING-CHARTER.md"],
+      "disposition": "IMPLEMENTED",
+      "blocking": false,
+      "note": "CMG-000001 ARTICLE XVI.2 legislates the one precedence lattice as prose and CMG-REGISTRY.json projects it as data; every gate that resolves rank reads the projection. Acyclicity and vacancy completeness were validated, but membership, tier name and located status were never compared against the canonical instrument, so a projection could drift from what it projects and every dependent gate would inherit the drift silently. The charter's own four-tier vesting, which XVI.5 obliges the lattice to remain consistent with, was likewise unmeasured. Closed by reading all three located instruments against each other. Corroboration is computed only for tiers the projection already reports located, so no measurement here can promote an instrument into the recorded vacancy."
     }
   ]
 }

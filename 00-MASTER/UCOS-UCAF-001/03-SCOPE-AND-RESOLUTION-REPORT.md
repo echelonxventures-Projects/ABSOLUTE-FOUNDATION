@@ -14,6 +14,13 @@
 | `UCAF-SCOPE-08` | resolution reaching a vacant tier shall not skip the tier and shall not promote a lower instrument into it | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` | YES |
 | `UCAF-SCOPE-09` | a steward shall not confer authority, decide constitutional content, or exceed delegated bounds | `00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md` | YES |
 | `UCAF-SCOPE-10` | freeze authority shall never be self-conferred by execution authority and preserves only | `00-CEP/CEP-007-CONSTITUTIONAL-FREEZE-CONSTITUTION.md` | YES |
+| `UCAF-SCOPE-11` | execution authority acts only within a stage that is in the EXECUTING condition, performs exactly the single next authorized action, and writes only to the declared write area of the active stage | `00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md` | YES |
+| `UCAF-SCOPE-12` | execution authority shall not govern, ratify, decide constitutional content, or exercise a power reserved to a higher tier | `00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md` | YES |
+| `UCAF-SCOPE-13` | execution authority never self-authorizes an action and acts only upon an authorization granted under the authorization article | `00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md` | YES |
+| `UCAF-SCOPE-14` | an authorization shall never be self-conferred by execution authority and shall never bypass a gate, a governance control or a preservation rule | `00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md` | YES |
+| `UCAF-SCOPE-15` | every tier is subordinate to every tier above it except where an orthogonality is declared, and rank is never decided by recency, size or prominence | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` | YES |
+| `UCAF-SCOPE-16` | the tier set is open: a new tier is admitted by declaring its position relative to existing tiers, and admission shall not renumber an existing tier | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` | YES |
+| `UCAF-SCOPE-17` | the lattice shall be consistent with, and shall not amend, the four-tier Program authority order already declared by the charter | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` | YES |
 
 ## Competence resolution
 
@@ -34,3 +41,8 @@ reported UNRESOLVED and is never answered by default.
 | `UCAF-R-10` | Which authority resolves a contested authority over the same artifact? | `00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md` | YES | — | ANSWERED |
 | `UCAF-R-11` | Was the exogenous constituent act performed, and are its constituent capabilities discharged? | `02-MASTER/UCOS-RAT-001-REPOSITORY-RATIFICATION-DETERMINATION.md` | NO (out-of-corpus superior) | — | ANSWERED |
 | `UCAF-R-12` | Is the located authority derivation chain rooted? | `01-WORKING/AUTHORITY-REGISTER.md` | YES | `AUTH-13`, `AUTH-14`, `GOV-11`, `GOV-12`, `AUTH-03` | ANSWERED |
+| `UCAF-R-13` | Which authority may authorize an execution, and may execution authority confer its own authorization? | `00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md` | YES | — | ANSWERED |
+| `UCAF-R-14` | Upon what does an execution unit enter AUTHORIZED, and what is the consequence of a denied authorization? | `00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md` | YES | — | ANSWERED |
+| `UCAF-R-15` | In which tier does execution authority vest, and which instrument vests it? | `00-CEP/CEP-003-CONSTITUTIONAL-EXECUTION-CONSTITUTION.md` | YES | — | ANSWERED |
+| `UCAF-R-16` | Which authority governs the ordering of authority tiers, and how many precedence lattices are there? | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` | YES | — | ANSWERED |
+| `UCAF-R-17` | By what procedure is a new authority tier admitted, and may admission renumber an existing tier? | `00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md` | YES | — | ANSWERED |

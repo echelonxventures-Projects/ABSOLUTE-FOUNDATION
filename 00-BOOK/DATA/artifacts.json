@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T03:08:54+00:00",
+  "generated_at": "2026-08-02T02:41:26+00:00",
   "generator_version": "1.0.0",
   "count": 1194,
   "artifacts": [
@@ -47114,9 +47114,12 @@
       ],
       "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "ced3ddcd82b7857403f0a6ea2841eaeef17c318e40cd105878c7a09a0f440547",
+      "content_hash": "731440c6909e542d45dd3d92ca4b7e7a39021e363b200f03a65fcbb4cbe16795",
       "traceability": {
-        "requirement": [],
+        "requirement": [
+          "UCOS-CON-000032",
+          "CMG-0000"
+        ],
         "architecture": [],
         "design": [],
         "implementation": [],
