@@ -176,6 +176,42 @@ def symbol_present(relative: str, symbol: str) -> bool:
     return bool(pattern.search(source))
 
 
+def collect_field_space(payload: Any) -> tuple[set[str], set[str]]:
+    """The field names a located JSON source ITSELF carries, at its two natural depths.
+
+    A bookkeeping obligation names a *field*, and a field is answered either by the
+    document as a whole or by each entry the document records. Those are the only two
+    depths the located sources use: the recorded plane answers ``history`` once for the
+    whole ledger and ``first_seen`` once per recorded path, and the derived plane
+    answers every obligation per registered entry.
+
+    Nothing is enumerated here: the key space is READ from whatever the located source
+    contains, so adding a field to a source, or an obligation to the declaration, needs
+    no change in this module (PR-07 Zero Enumeration).
+    """
+    document_fields: set[str] = set()
+    entry_fields: set[str] = set()
+    if isinstance(payload, dict):
+        document_fields |= {str(key) for key in payload}
+        containers: Any = list(payload.values())
+    elif isinstance(payload, list):
+        containers = list(payload)
+    else:
+        return document_fields, entry_fields
+    for container in containers:
+        entries: Any
+        if isinstance(container, dict):
+            entries = list(container.values())
+        elif isinstance(container, list):
+            entries = list(container)
+        else:
+            continue
+        for entry in entries:
+            if isinstance(entry, dict):
+                entry_fields |= {str(key) for key in entry}
+    return document_fields, entry_fields
+
+
 def digest(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
@@ -525,6 +561,7 @@ def measure_bookkeeping(document: dict) -> list[dict]:
     facet_decl = document["facet_authority"]
     facet_source = read_text(str(facet_decl["owner"])) or ""
     facet_values = set(re.findall(r'^\s*[A-Z][A-Z0-9_]*\s*=\s*"([a-z0-9-]+)"', facet_source, re.MULTILINE))
+    field_space: dict[str, tuple[set[str], set[str]]] = {}
     rows: list[dict] = []
     for item in document["bookkeeping_obligations"]:
         source_key = str(item["source"])
@@ -532,10 +569,30 @@ def measure_bookkeeping(document: dict) -> list[dict]:
         owner = str(source.get("owner") or "")
         field = str(item["field"])
         facet = str(item["facet"])
-        if item["plane"] == "artifact":
-            bound = bool(owner) and (REPO / owner).is_file()
+        located = bool(owner) and (REPO / owner).is_file()
+        # An obligation that binds only to the file CONTAINING the answer has not been
+        # measured: the located source must actually carry the declared field. The
+        # resolution scope is recorded so the reading is evidence rather than a verdict.
+        if not located:
+            resolved, scope = False, "OWNER-ABSENT"
+        elif item["plane"] == "artifact":
+            if source_key not in field_space:
+                field_space[source_key] = collect_field_space(read_json(owner))
+            document_fields, entry_fields = field_space[source_key]
+            if field in entry_fields:
+                resolved, scope = True, "ENTRY"
+            elif field in document_fields:
+                resolved, scope = True, "DOCUMENT"
+            else:
+                resolved, scope = False, "FIELD-ABSENT"
+        elif field in facet_values:
+            # The code plane answers an obligation with a member of the located closed
+            # set, so the member itself is the field.
+            resolved, scope = True, "MEMBER"
+        elif symbol_present(owner, field):
+            resolved, scope = True, "SYMBOL"
         else:
-            bound = bool(owner) and (REPO / owner).is_file()
+            resolved, scope = False, "FIELD-ABSENT"
         rows.append(
             {
                 "id": item["id"],
@@ -544,7 +601,9 @@ def measure_bookkeeping(document: dict) -> list[dict]:
                 "source": owner,
                 "field": field,
                 "facet": facet,
-                "bound": bound,
+                "owner_located": located,
+                "field_scope": scope,
+                "bound": located and resolved,
                 "facet_known": facet in facet_values,
             }
         )
@@ -766,6 +825,12 @@ def measure(document: dict) -> dict:  # noqa: C901 - one measurement per declare
         "laws_unbound": sum(0 if law["bound"] else 1 for law in laws),
         "laws_violated": sum(1 for law in laws if law["blocking"] and not law["satisfied"]),
         "bookkeeping_unbound": sum(0 if b["bound"] else 1 for b in bookkeeping),
+        # The field half of the binding, isolated from the owner half: an obligation whose
+        # containing source is located but whose declared field is not is exactly the
+        # defect a source-only reading could not see.
+        "bookkeeping_fields_unresolved": sum(
+            1 for b in bookkeeping if b["owner_located"] and not b["bound"]
+        ),
         "bookkeeping_facets_unknown": sum(0 if b["facet_known"] else 1 for b in bookkeeping),
         "identity_minting_attempts": 0,
         "writes_outside_home": len(immutability["outside_home"]) + len(immutability["forbidden_trespass"]),
@@ -1233,10 +1298,35 @@ def render(model: dict) -> dict[str, str]:  # noqa: C901 - one page per measured
         "measured property is that resolving any identity answers every declared bookkeeping obligation.\n"
     )
     body.append(
+        "An obligation binds only when the located source **carries the declared field**, not\n"
+        "merely when the file containing it resolves. `Field resolves in` records where the\n"
+        "located source answers it: `DOCUMENT` once for the whole record, `ENTRY` once per\n"
+        "recorded entry, `MEMBER` as a member of the located closed facet set, `SYMBOL` as a\n"
+        "definition in the located module. `FIELD-ABSENT` is a failure of the binding, not a note.\n"
+    )
+    body.append(
         table(
-            ["Obligation", "Plane", "Answered by", "Field", "Facet", "Bound", "Facet is a declared member"],
             [
-                [b["obligation"], b["plane"], code(b["source"]), code(b["field"]), code(b["facet"]), yes(b["bound"]), yes(b["facet_known"])]
+                "Obligation",
+                "Plane",
+                "Answered by",
+                "Field",
+                "Field resolves in",
+                "Facet",
+                "Bound",
+                "Facet is a declared member",
+            ],
+            [
+                [
+                    b["obligation"],
+                    b["plane"],
+                    code(b["source"]),
+                    code(b["field"]),
+                    b["field_scope"],
+                    code(b["facet"]),
+                    yes(b["bound"]),
+                    yes(b["facet_known"]),
+                ]
                 for b in model["bookkeeping"]
             ],
         )

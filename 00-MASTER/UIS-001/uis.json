@@ -52,8 +52,10 @@
       "facet": "identity",
       "facet_known": true,
       "field": "universal_id",
+      "field_scope": "ENTRY",
       "id": "BK-01",
       "obligation": "Universal Constitutional Identifier",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -62,8 +64,10 @@
       "facet": "relationships",
       "facet_known": true,
       "field": "parent",
+      "field_scope": "ENTRY",
       "id": "BK-02",
       "obligation": "Parent Identifier",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -72,8 +76,10 @@
       "facet": "ownership",
       "facet_known": true,
       "field": "program",
+      "field_scope": "ENTRY",
       "id": "BK-03",
       "obligation": "Root Identifier",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -82,8 +88,10 @@
       "facet": "temporal-history",
       "facet_known": true,
       "field": "history",
+      "field_scope": "DOCUMENT",
       "id": "BK-04",
       "obligation": "Lineage",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/id-ledger.json"
     },
@@ -92,8 +100,10 @@
       "facet": "ownership",
       "facet_known": true,
       "field": "owner",
+      "field_scope": "ENTRY",
       "id": "BK-05",
       "obligation": "Owner",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -102,8 +112,10 @@
       "facet": "authority",
       "facet_known": true,
       "field": "authority",
+      "field_scope": "MEMBER",
       "id": "BK-06",
       "obligation": "Authority",
+      "owner_located": true,
       "plane": "code",
       "source": "engine/uckp/facets.py"
     },
@@ -112,8 +124,10 @@
       "facet": "taxonomy",
       "facet_known": true,
       "field": "category",
+      "field_scope": "ENTRY",
       "id": "BK-07",
       "obligation": "Capability",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -122,8 +136,10 @@
       "facet": "taxonomy",
       "facet_known": true,
       "field": "volume",
+      "field_scope": "ENTRY",
       "id": "BK-08",
       "obligation": "Classification",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -132,8 +148,10 @@
       "facet": "lifecycle",
       "facet_known": true,
       "field": "status",
+      "field_scope": "ENTRY",
       "id": "BK-09",
       "obligation": "Lifecycle",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -142,8 +160,10 @@
       "facet": "relationships",
       "facet_known": true,
       "field": "traceability",
+      "field_scope": "ENTRY",
       "id": "BK-10",
       "obligation": "Relationships",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -152,8 +172,10 @@
       "facet": "dependencies",
       "facet_known": true,
       "field": "dependencies",
+      "field_scope": "ENTRY",
       "id": "BK-11",
       "obligation": "Dependencies",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -162,8 +184,10 @@
       "facet": "evolution-history",
       "facet_known": true,
       "field": "version",
+      "field_scope": "ENTRY",
       "id": "BK-12",
       "obligation": "Evolution",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     },
@@ -172,8 +196,10 @@
       "facet": "governance-context",
       "facet_known": true,
       "field": "authority",
+      "field_scope": "MEMBER",
       "id": "BK-13",
       "obligation": "Elevation",
+      "owner_located": true,
       "plane": "code",
       "source": "engine/uckp/facets.py"
     },
@@ -182,8 +208,10 @@
       "facet": "validation",
       "facet_known": true,
       "field": "validation",
+      "field_scope": "MEMBER",
       "id": "BK-14",
       "obligation": "Validation",
+      "owner_located": true,
       "plane": "code",
       "source": "engine/uckp/facets.py"
     },
@@ -192,8 +220,10 @@
       "facet": "verification",
       "facet_known": true,
       "field": "verification",
+      "field_scope": "MEMBER",
       "id": "BK-15",
       "obligation": "Verification",
+      "owner_located": true,
       "plane": "code",
       "source": "engine/uckp/facets.py"
     },
@@ -202,8 +232,10 @@
       "facet": "certification",
       "facet_known": true,
       "field": "certification",
+      "field_scope": "MEMBER",
       "id": "BK-16",
       "obligation": "Certification",
+      "owner_located": true,
       "plane": "code",
       "source": "engine/uckp/facets.py"
     },
@@ -212,8 +244,10 @@
       "facet": "temporal-history",
       "facet_known": true,
       "field": "first_seen",
+      "field_scope": "ENTRY",
       "id": "BK-17",
       "obligation": "Temporal Context",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/id-ledger.json"
     },
@@ -222,8 +256,10 @@
       "facet": "context",
       "facet_known": true,
       "field": "context",
+      "field_scope": "MEMBER",
       "id": "BK-18",
       "obligation": "Context Metadata",
+      "owner_located": true,
       "plane": "code",
       "source": "engine/uckp/facets.py"
     },
@@ -232,8 +268,10 @@
       "facet": "provenance",
       "facet_known": true,
       "field": "content_hash",
+      "field_scope": "ENTRY",
       "id": "BK-19",
       "obligation": "Repository Truth provenance",
+      "owner_located": true,
       "plane": "artifact",
       "source": "00-BOOK/DATA/artifacts.json"
     }
@@ -1008,6 +1046,7 @@
   "counters": {
     "authority_claims": 0,
     "bookkeeping_facets_unknown": 0,
+    "bookkeeping_fields_unresolved": 0,
     "bookkeeping_unbound": 0,
     "bounds_slack": 0,
     "capabilities_created": 0,
@@ -1977,7 +2016,7 @@
       "owner": "00-BOOK/MASTER-BOOK/UMB-004-NOMENCLATURE-ARCHITECTURE.md"
     }
   ],
-  "seal_sha256": "cd753fa12a6b7ec866778841bbc570a2cfefd7026f59d5c345724d3f9a056543",
+  "seal_sha256": "a05f279d99b26e5d9852b6c01db6101b82b7f978bb2641eca6c38f0d1ad2e145",
   "terminal_hits": [],
   "unboundedness": [
     {
