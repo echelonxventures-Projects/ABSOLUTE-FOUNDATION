@@ -4,18 +4,12 @@
   "authority": "NONE (derived truth)",
   "capability_count": 71,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "a2bbb83b069dd5908e8b65518729e5d8e255791bb16fff5d905e37563372e493",
+  "content_hash": "be31951036f376d37099e9eef2f452b02852c59458ff8adac305c75d0d1e6c83",
   "dimension_index_reconciled_pct": 26.7,
   "drift": {
     "baseline": false,
     "certification_drift": [],
-    "dependency_drift": [
-      {
-        "from": 12819,
-        "metric": "corpus_edges",
-        "to": 12821
-      }
-    ],
+    "dependency_drift": [],
     "duplicate_findings": [
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
