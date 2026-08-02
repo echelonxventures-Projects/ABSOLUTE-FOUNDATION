@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `closure` |
-| DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `7cade9b2b5574cb868165cd248927c9b` |
+| DETERMINATION | **CONVERGED-PROVISIONAL** |
+| SEAL | `efeba054528e04b84d118b43a336394e` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > What an iteration establishes is retained so a later run resolves an identical finding by lookup instead of rediscovery. This is a deterministic knowledge projection, not a statistical model.
