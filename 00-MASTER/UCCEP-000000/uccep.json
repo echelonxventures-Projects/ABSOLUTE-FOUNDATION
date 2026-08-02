@@ -2,11 +2,13 @@
   "advisory_failures": [
     "CK-HEALTH"
   ],
-  "blocking_failures": [],
+  "blocking_failures": [
+    "CK-REG-DRIFT"
+  ],
   "blocking_not_executed": [],
   "blocking_out_of_tier": [],
   "blocking_unavailable": [],
-  "certification": "CERTIFIED-PROVISIONAL",
+  "certification": "NOT-CERTIFIED",
   "certification_ceiling": [
     "`UCCEP-F-004` — Constitutional finality is reserved to an out-of-corpus authority, so every in-corpus determination is capped at provisional acceptance"
   ],
@@ -268,15 +270,15 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 0,
+      "exit_code": 3,
       "governed_by_finding": null,
       "id": "CK-REG-DRIFT",
       "in_scope": true,
       "name": "Atomic Registration Transaction + registration-drift gate",
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
-      "reason": "",
+      "reason": "uncommitted-registration drift — source split from projections",
       "tier": "full",
-      "verdict": "PASS",
+      "verdict": "FAIL",
       "write_scope": "projections"
     },
     {
@@ -525,6 +527,36 @@
       "executed": true,
       "exit_code": 0,
       "governed_by_finding": null,
+      "id": "CK-BASELINE",
+      "in_scope": true,
+      "name": "Baseline inheritance bound: the located baseline register resolves; every recorded baseline conforms to the scheme its owner declares, is densely addressable, resolves to an evidence block and records an explicit predecessor; the succession chain is acyclic with one origin and one head; exactly one baseline is current and it is the head; no baseline is cited anywhere that the register does not record; every pointer in every baseline record resolves; every inheritance and non-inheritance clause binds; version progression is recorded for every constitutional artifact above the base version; no baseline carries the terminal finality token",
+      "owner": "00-MASTER/BASELINE-001/baseline_engine.py",
+      "reason": "",
+      "tier": "standard",
+      "verdict": "PASS",
+      "write_scope": "00-MASTER/BASELINE-001/"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-BASELINE-SELF",
+      "in_scope": true,
+      "name": "BASELINE-001 self-guards: declaration integrity (including that every currency claimant is protected by a forbidden write prefix), zero-enumeration, write scope, determinism, knowledge-once, RECORD IMMUTABILITY (write set ∩ canonical record set = ∅ and every record in the home is protected), and no-elevation (no baseline reported above the standing its located record carries, no currency divergence decided rather than referred)",
+      "owner": "00-MASTER/BASELINE-001/baseline_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
       "id": "CK-UCAF",
       "in_scope": true,
       "name": "Authority model bound: every located authority registered, resolvable, scoped, evidenced and audited; no authority-shaped reference undefined; the tier projection every gate reads faithful to the canonical lattice and to the charter vesting; every tier reported occupied corroborated by a located occupant; every authority token minted in the executable plane classified and colliding with no registered constitutional authority; every declared realization bound to the module, the enforcement symbol and the vesting clause it names",
@@ -655,8 +687,10 @@
       "write_scope": "read-only"
     }
   ],
-  "gate_blocking": [],
-  "gate_exit": 0,
+  "gate_blocking": [
+    "CK-REG-DRIFT"
+  ],
+  "gate_exit": 1,
   "gates": [
     {
       "advisory_failed": [],
@@ -784,14 +818,16 @@
         "CK-REG-ENFORCE",
         "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "G-07",
       "name": "Registry Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -934,14 +970,16 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "G-15",
       "name": "Repository Fixed-Point Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1087,6 +1125,25 @@
       "owner": "00-MASTER/UAIE-000001 (00-CMG/CMG-000001 Art LXXVII.2 disposition; 00-MASTER/UCIC-001 implementation contract). The gate proves that every architectural faculty the repository claims — semantic graph, architectural reasoning, dependency, ownership, duplication, gap, evolution, reuse, constitutional and completion intelligence — still resolves to a located owner, a home, a symbol and an analysis registered in 00-MASTER/UCOS-UAR-001, and that the register plane those faculties reason over is internally consistent. The programme is classified SUBSTANTIVE and is therefore absent from 00-CMG/CMG-REGISTRY.json per Art LXXVI.2(b); CK-UAIE-SELF measures that absence, so a claim of meta-constitutional standing closes the gate.",
       "unproven": [],
       "verdict": "PASS"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-BASELINE",
+        "CK-BASELINE-SELF"
+      ],
+      "executed": [
+        "CK-BASELINE",
+        "CK-BASELINE-SELF"
+      ],
+      "failed": [],
+      "id": "G-23",
+      "name": "Baseline Inheritance Gate",
+      "not_executed": [],
+      "out_of_tier": [],
+      "owner": "00-MASTER/BASELINE-001 (00-CMG/CMG-000001 Art LXXVII.2(b) disposition — EXTEND of the already-located baseline authority; the baseline model itself is owned by 00-CEP/CEP-007 Art VIII per concern CMG-DLG-07, the naming scheme and advancement criteria by 00-MASTER/RELEASE-001 §3.1/§3.3, the inheritance and lineage rules by 00-CMG/CMG-000001 Art XXXIX and Art XXVIII, and the evolution version history by 00-MASTER/EVOLUTION-001 §6 — none of which is created, moved, split or restated here). The gate proves that the certified baseline chain the repository records is machine-resolvable rather than prose: that every recorded baseline conforms to the located scheme, is densely addressable, resolves to an evidence block, records an EXPLICIT predecessor as Art XXXIX.6 requires of all inheritance, and rests on pointers that still resolve; that the chain is acyclic with exactly one origin and one head and that the current baseline is that head; that no baseline is cited anywhere in the declared surfaces which the register does not record; that version progression is recorded in the located ledger for every constitutional artifact standing above the base version; and that what a successor does NOT inherit — standing, ratification, finality, authority — is bound to the located clause that prohibits it. The programme is classified SUBSTANTIVE and claims no namespace token in 00-CMG/CMG-REGISTRY.json per Art LXXVI.2(b). It confers nothing: a divergence between the register that records currency and another register that claims it is measured, cited and REFERRED to the claim owner under CEP-002 Art 23, never adjudicated, and CK-BASELINE-SELF fails closed if a divergence is ever recorded as decided. The append-only records remain immutable by mechanical proof: write set ∩ canonical record set = ∅, and every record present in the programme home must be a member of the protected set.",
+      "unproven": [],
+      "verdict": "PASS"
     }
   ],
   "programme": {
@@ -1221,14 +1278,16 @@
         "CK-DISCOVERY",
         "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000004",
       "name": "Universal Registry Evolution",
       "not_executed": [],
       "out_of_tier": [],
       "output": "04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1247,14 +1306,16 @@
         "CK-CMG",
         "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000005",
       "name": "Universal Repository Governance",
       "not_executed": [],
       "out_of_tier": [],
       "output": "05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1571,14 +1632,16 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000017",
       "name": "Universal Repository Fixed-Point Closure",
       "not_executed": [],
       "out_of_tier": [],
       "output": "19-REPOSITORY-FIXED-POINT-CLOSURE.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1650,7 +1713,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "e991bc1da95923a5e1cd3499880428d29a894449c1b25d7e3d4fea02f2c2948e",
+  "seal_sha256": "81ec7a8cfd827b55dbf0268f02cb482a10ab0da8a816b91602d962a2ce5a7fbd",
   "tier": "full",
   "unavailable": [],
   "unproven": []

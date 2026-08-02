@@ -1,6 +1,7 @@
 {
   "by_kind": {
     "architectural-intelligence-analysis": 3,
+    "baseline-inheritance-analysis": 5,
     "closure-analysis": 6,
     "constitutional-authority-analysis": 4,
     "integration-analysis": 6,
@@ -8,6 +9,7 @@
     "validation-intelligence-dimension": 7
   },
   "by_owner": {
+    "00-MASTER/BASELINE-001": 5,
     "00-MASTER/UAIE-000001": 3,
     "00-MASTER/UAKOS-CLOSURE-002": 6,
     "00-MASTER/UCOS-RIB-001": 6,
@@ -19,6 +21,6 @@
   "gate": "OPEN",
   "gate_exit": 0,
   "programme": "UCOS-UAR-001",
-  "seal_sha256": "1fc23f8113dfd944",
-  "total_analyses": 33
+  "seal_sha256": "8c14c4295f1fe8e1",
+  "total_analyses": 38
 }

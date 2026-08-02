@@ -109,6 +109,10 @@ help:
 	@echo "  make ucaf-gate     fail-closed Constitutional Authority Gate (no authority undefined)"
 	@echo "  make ucaf-self     UCOS-UCAF-001 guards (incl. knowledge-once + no-vacancy-promotion)"
 	@echo "  make ucaf-replay   prove the committed authority registers replay from the declaration"
+	@echo "  make baseline      regenerate the BASELINE-001 baseline-inheritance registers"
+	@echo "  make baseline-gate fail-closed Baseline Inheritance Gate (chain resolves, succession explicit)"
+	@echo "  make baseline-self BASELINE-001 guards (incl. record-immutability + no-elevation)"
+	@echo "  make baseline-replay prove the committed baseline registers replay from the declaration"
 	@echo "  make urat          regenerate the UCOS-URAT-001 ratification registry (CEP-006 Art XVI)"
 	@echo "  make urat-gate     fail-closed Ratification Registry Gate (every record located + verified)"
 	@echo "  make urat-self     UCOS-URAT-001 guards (incl. discovery coverage + no-conferral)"
@@ -1234,6 +1238,56 @@ ucaf-replay:
 	@git diff --exit-code -- 00-MASTER/UCOS-UCAF-001 \
 	  || { echo "UCOS-UCAF-001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
 	@echo "UCOS-UCAF-001 replay: no drift"
+
+
+# baseline: BASELINE-001 — Universal Constitutional Baseline Inheritance. The canonical baseline
+# register, its origin record, its certificate and its continuation classification are APPEND-ONLY
+# records held by the already-located baseline authority, and until now they were prose: no gate
+# could resolve a baseline, detect a missing or duplicated row, detect a break in succession,
+# detect a second claimed current baseline, detect a baseline cited but never recorded, or detect
+# that a recorded baseline had come to rest on evidence that no longer existed. This measurement
+# DERIVES the chain from those records and creates no second baseline, register, namespace,
+# identifier family or lifecycle — CMG-INV-02 requires the concern-to-owner map be injective and
+# BASELINE-001 already owns certified baseline, so the measurement is held BY that owner inside
+# that owner's home.
+#
+# It confers nothing. Advancement is measured against the located criteria and reported, never
+# granted. Where the register that records currency and another register that claims it disagree,
+# both are measured, both are cited, and a referred outcome is reported for the claim owner to
+# dispose of under CEP-002 Article 23 — every claimant is named in the declaration's forbidden
+# write prefixes, and --check-declaration fails closed if a claimant is ever left unprotected.
+#
+# --check-record-immutability is the mandatory mechanical proof that write set ∩ canonical record
+# set = ∅, and additionally that every record present in the home is a member of the protected
+# set, so the protected set cannot be quietly narrowed to make room for a generated page.
+# --check-no-elevation proves no baseline is reported at a standing its located record does not
+# carry and that no currency divergence is decided rather than referred.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; no version-control observation; writes nothing
+# outside 00-MASTER/BASELINE-001/ (guarded, fail-closed).
+#
+# Exit 0 gate OPEN · 1 gate CLOSED · 2 fail-closed abort (no verdict may be asserted).
+.PHONY: baseline baseline-gate baseline-self baseline-replay
+baseline:
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py
+
+baseline-gate:
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py --gate
+
+baseline-self:
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py --check-declaration
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py --check-no-enumeration
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py --check-write-scope
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py --check-determinism
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py --check-knowledge-once
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py --check-record-immutability
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py --check-no-elevation
+
+baseline-replay:
+	@python3 00-MASTER/BASELINE-001/baseline_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/BASELINE-001 \
+	  || { echo "BASELINE-001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "BASELINE-001 replay: no drift"
 
 
 # urat: UCOS-URAT-001 — the Ratification Registry CEP-006 Article XVI mandates. It confers

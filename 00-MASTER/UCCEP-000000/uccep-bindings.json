@@ -960,6 +960,50 @@
       }
     },
     {
+      "id": "CK-BASELINE",
+      "name": "Baseline inheritance bound: the located baseline register resolves; every recorded baseline conforms to the scheme its owner declares, is densely addressable, resolves to an evidence block and records an explicit predecessor; the succession chain is acyclic with one origin and one head; exactly one baseline is current and it is the head; no baseline is cited anywhere that the register does not record; every pointer in every baseline record resolves; every inheritance and non-inheritance clause binds; version progression is recorded for every constitutional artifact above the base version; no baseline carries the terminal finality token",
+      "owner": "00-MASTER/BASELINE-001/baseline_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/BASELINE-001/baseline_engine.py",
+        "--gate"
+      ],
+      "write_scope": "00-MASTER/BASELINE-001/",
+      "tier": "standard",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN — baseline inheritance bound",
+        "1": "gate CLOSED — a blocking dimension is unsatisfied",
+        "2": "fail-closed abort — the declaration is unusable, so no verdict may be asserted"
+      }
+    },
+    {
+      "id": "CK-BASELINE-SELF",
+      "name": "BASELINE-001 self-guards: declaration integrity (including that every currency claimant is protected by a forbidden write prefix), zero-enumeration, write scope, determinism, knowledge-once, RECORD IMMUTABILITY (write set ∩ canonical record set = ∅ and every record in the home is protected), and no-elevation (no baseline reported above the standing its located record carries, no currency divergence decided rather than referred)",
+      "owner": "00-MASTER/BASELINE-001/baseline_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/BASELINE-001/baseline_engine.py",
+        "--check-declaration",
+        "--check-no-enumeration",
+        "--check-write-scope",
+        "--check-determinism",
+        "--check-knowledge-once",
+        "--check-record-immutability",
+        "--check-no-elevation"
+      ],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "every guard passed",
+        "1": "a guard failed",
+        "2": "fail-closed abort — the declaration is unusable, so no verdict may be asserted"
+      }
+    },
+    {
       "id": "CK-UCAF",
       "name": "Authority model bound: every located authority registered, resolvable, scoped, evidenced and audited; no authority-shaped reference undefined; the tier projection every gate reads faithful to the canonical lattice and to the charter vesting; every tier reported occupied corroborated by a located occupant; every authority token minted in the executable plane classified and colliding with no registered constitutional authority; every declared realization bound to the module, the enforcement symbol and the vesting clause it names",
       "owner": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
@@ -1362,6 +1406,15 @@
       "checks": [
         "CK-UAIE",
         "CK-UAIE-SELF"
+      ]
+    },
+    {
+      "id": "G-23",
+      "name": "Baseline Inheritance Gate",
+      "owner": "00-MASTER/BASELINE-001 (00-CMG/CMG-000001 Art LXXVII.2(b) disposition — EXTEND of the already-located baseline authority; the baseline model itself is owned by 00-CEP/CEP-007 Art VIII per concern CMG-DLG-07, the naming scheme and advancement criteria by 00-MASTER/RELEASE-001 §3.1/§3.3, the inheritance and lineage rules by 00-CMG/CMG-000001 Art XXXIX and Art XXVIII, and the evolution version history by 00-MASTER/EVOLUTION-001 §6 — none of which is created, moved, split or restated here). The gate proves that the certified baseline chain the repository records is machine-resolvable rather than prose: that every recorded baseline conforms to the located scheme, is densely addressable, resolves to an evidence block, records an EXPLICIT predecessor as Art XXXIX.6 requires of all inheritance, and rests on pointers that still resolve; that the chain is acyclic with exactly one origin and one head and that the current baseline is that head; that no baseline is cited anywhere in the declared surfaces which the register does not record; that version progression is recorded in the located ledger for every constitutional artifact standing above the base version; and that what a successor does NOT inherit — standing, ratification, finality, authority — is bound to the located clause that prohibits it. The programme is classified SUBSTANTIVE and claims no namespace token in 00-CMG/CMG-REGISTRY.json per Art LXXVI.2(b). It confers nothing: a divergence between the register that records currency and another register that claims it is measured, cited and REFERRED to the claim owner under CEP-002 Art 23, never adjudicated, and CK-BASELINE-SELF fails closed if a divergence is ever recorded as decided. The append-only records remain immutable by mechanical proof: write set ∩ canonical record set = ∅, and every record present in the programme home must be a member of the protected set.",
+      "checks": [
+        "CK-BASELINE",
+        "CK-BASELINE-SELF"
       ]
     }
   ],

@@ -37,6 +37,11 @@
     {"id": "UAR-UCAF-01", "name": "tier-projection-fidelity", "owner": "00-MASTER/UCOS-UCAF-001", "home": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py", "kind": "constitutional-authority-analysis"},
     {"id": "UAR-UCAF-02", "name": "tier-occupancy-corroboration", "owner": "00-MASTER/UCOS-UCAF-001", "home": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py", "kind": "constitutional-authority-analysis"},
     {"id": "UAR-UCAF-03", "name": "executable-authority-token-classification", "owner": "00-MASTER/UCOS-UCAF-001", "home": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py", "kind": "constitutional-authority-analysis"},
-    {"id": "UAR-UCAF-04", "name": "authority-realization-binding", "owner": "00-MASTER/UCOS-UCAF-001", "home": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py", "kind": "constitutional-authority-analysis"}
+    {"id": "UAR-UCAF-04", "name": "authority-realization-binding", "owner": "00-MASTER/UCOS-UCAF-001", "home": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py", "kind": "constitutional-authority-analysis"},
+    {"id": "UAR-BLN-01", "name": "baseline-succession-resolution", "owner": "00-MASTER/BASELINE-001", "home": "00-MASTER/BASELINE-001/baseline_engine.py", "kind": "baseline-inheritance-analysis"},
+    {"id": "UAR-BLN-02", "name": "baseline-currency-divergence", "owner": "00-MASTER/BASELINE-001", "home": "00-MASTER/BASELINE-001/baseline_engine.py", "kind": "baseline-inheritance-analysis"},
+    {"id": "UAR-BLN-03", "name": "baseline-citation-closure", "owner": "00-MASTER/BASELINE-001", "home": "00-MASTER/BASELINE-001/baseline_engine.py", "kind": "baseline-inheritance-analysis"},
+    {"id": "UAR-BLN-04", "name": "constitutional-version-progression", "owner": "00-MASTER/BASELINE-001", "home": "00-MASTER/BASELINE-001/baseline_engine.py", "kind": "baseline-inheritance-analysis"},
+    {"id": "UAR-BLN-05", "name": "inheritance-clause-binding", "owner": "00-MASTER/BASELINE-001", "home": "00-MASTER/BASELINE-001/baseline_engine.py", "kind": "baseline-inheritance-analysis"}
   ]
 }
