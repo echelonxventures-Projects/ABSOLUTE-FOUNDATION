@@ -2441,7 +2441,7 @@
       "dimension": "relationships whose target carries no registered constitutional identity stay within the disclosed bound",
       "measure": "relationships_without_target_identity",
       "comparator": "<=",
-      "expect": 92,
+      "expect": 98,
       "blocking": true,
       "bound_finding": "UCL-F-004"
     }
@@ -2560,7 +2560,7 @@
       "disposition": "REGISTERED",
       "blocking": false,
       "title": "Some relationship targets carry no registered constitutional identity",
-      "detail": "A relationship's constitutional identity derives from the semantic identities of its participants. Where a target is a located artifact that the Universal Registry does not admit — overwhelmingly operational memory, which is deliberately barred from consuming a permanent corpus identity — the target has no registered constitutional identity to derive from. Those relationships are counted and reported. Their handles remain distinct, so no relationship is lost or conflated in the graph.",
+      "detail": "A relationship's constitutional identity derives from the semantic identities of its participants. Where a target is a located artifact that the Universal Registry does not admit — overwhelmingly operational memory, which is deliberately barred from consuming a permanent corpus identity — the target has no registered constitutional identity to derive from. Those relationships are counted and reported. Their handles remain distinct, so no relationship is lost or conflated in the graph. The bound is a RATCHET held at exactly the measured value, so it is re-tightened whenever governed records are lawfully admitted. It moved from 92 to 98 when Ω-E05 declared PROGRAM-000021 in the aggregate certifier: that programme delegates to six located owners, every one of which is operational memory the registry deliberately does not admit, so each delegation is exactly this disclosed condition and not a new one. The delta was measured against the committed reading — six added, none removed — rather than assumed, and no other relationship moved.",
       "why_not_repaired": "The remedy would be to substitute the target's PATH into the identity, and a path is a location that the invariants expressly permit to evolve — using it would convert a location change into an identity change, which is the defect this invariant exists to prevent. Registering operational memory to obtain an identity would instead violate the exclusion authority. The condition is therefore reported and referred to the registry owner.",
       "referred_to": "00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md",
       "bound_measure": "relationships_without_target_identity"

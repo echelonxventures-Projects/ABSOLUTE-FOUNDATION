@@ -1297,6 +1297,60 @@
         "1": "gate CLOSED",
         "2": "fail-closed abort"
       }
+    },
+    {
+      "id": "CK-ACEE",
+      "name": "Autonomous constitutional engineering executable: engineering goals are discovered from a located manifest pattern rather than enumerated, the constitutional lifecycle is CONSUMED from its located owner rather than re-derived, every goal traverses that lifecycle to a deterministic plan whose every step binds a located owner and requires no new engineering infrastructure, every constitutional completion invariant is measured against a located owner and anchor, and every disposition resolves to a value the repository already legislates with CREATE reached only where no canonical owner exists",
+      "owner": "00-MASTER/ACEE-000001/acee_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/ACEE-000001/acee_engine.py",
+        "--gate"
+      ],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
+    },
+    {
+      "id": "CK-ACEE-SELF",
+      "name": "ACEE-000001 self-guards: declaration integrity, zero-enumeration over executable literals, no privileged logic over itself, reuse before create, write scope, determinism, implementation independence, open world, no parallel authority, goal-plane executability, completion-invariant coverage, Canonical Knowledge Object identity, invariant semantic identity, knowledge-once, record immutability, measured future-engineering reduction, bound tightness",
+      "owner": "00-MASTER/ACEE-000001/acee_engine.py",
+      "argv": [
+        "$PY3",
+        "00-MASTER/ACEE-000001/acee_engine.py",
+        "--check-declaration",
+        "--check-no-enumeration",
+        "--check-no-privileged-logic",
+        "--check-reuse-before-create",
+        "--check-write-scope",
+        "--check-determinism",
+        "--check-implementation-independence",
+        "--check-open-world",
+        "--check-no-parallel-authority",
+        "--check-goal-plane-executable",
+        "--check-invariant-coverage",
+        "--check-cko-identity",
+        "--check-semantic-identity",
+        "--check-knowledge-once",
+        "--check-record-immutability",
+        "--check-reduction-measured",
+        "--check-bounds-tight"
+      ],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "gate OPEN",
+        "1": "gate CLOSED",
+        "2": "fail-closed abort"
+      }
     }
   ],
   "$gates_comment": "The mandatory constitutional gates of the mission, each bound to the located checks that execute it. A gate with no bound check would be a MANUAL gate and is itself a finding (no manual governance). The count is not fixed by this file's prose: adding a gate is an entry in the list below and requires no engine change. G-15 REPOSITORY FIXED-POINT GATE. The three checks above are the certification-time preconditions of closure and are executed here. The fixed-point CONDITION itself (RFP-1) is asserted by 00-MASTER/UCOS-RFP-001 AFTER certification — lifecycle steps 11-14 follow step 9 — and is enforced with no opt-out by .github/workflows/rfp-gate.yml on every push and pull request, and by `make rfp-gate`. It is deliberately NOT a check of this engine: the fixed-point engine runs this engine as a pipeline stage, so binding it here made this engine's emitted verdict depend on whether it had been invoked nested, which is the self-observation topology RFP-3 forbids. Measured, not theorised: with it bound here the repository could not converge. The gate graph is now a DAG - the fixed point contains certification, certification does not contain the fixed point.",
@@ -1529,6 +1583,15 @@
       "checks": [
         "CK-UCL",
         "CK-UCL-SELF"
+      ]
+    },
+    {
+      "id": "G-26",
+      "name": "Autonomous Constitutional Engineering Gate",
+      "owner": "00-MASTER/ACEE-000001 (00-CMG/CMG-000001 Art LXXVII.2(b) disposition — EXTEND of the already-located engineering plane; nothing here is created. The single deterministic lifecycle every capability follows is owned by 00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md and was made discoverable, ordered and executable by 00-MASTER/UCL-000001, whose stage graph this programme CONSUMES rather than re-derives — a re-derivation would be a second lifecycle, which CMG-000001 Art LXXVI.6 forbids. The closed repository-directed loop is owned by 00-MASTER/UCOS-AEE-001 and is neither duplicated nor re-driven: this programme invokes no engine and re-runs no owner. Engineering governance is owned by 00-MASTER/UCOS-EG-001, the disposition vocabulary by 00-MASTER/UCOS-AEE-001/aee-declaration.json and 00-MASTER/UCDA-000001/ucda-decisions.json, evolution by 00-MASTER/UEI-000001 and 00-MASTER/UCEF-000001, recovery by 00-MASTER/UER-000001, reuse measurement by 00-MASTER/URRC-000001, certification by 00-MASTER/UCCEP-000000, fixed-point closure by 00-MASTER/UCOS-RFP-001, identity by 00-BOOK/MASTER-BOOK/UMB-003-IDENTITY-ARCHITECTURE.md, the registry by 00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md, knowledge by 00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md and lineage by 00-BOOK/MASTER-BOOK/UMB-010-LINEAGE-ARCHITECTURE.md — none of which is created, moved, split or restated here. Those owners are CROSSWALKED and never merged. The gate proves that GOAL-DIRECTED engineering is autonomous: that engineering goals and constitutional completion invariants are DISCOVERED from located manifest patterns and never enumerated in code or in the declaration, so admitting a further goal or invariant is an append to data; that the constitutional lifecycle is consumed from a single located owner, no stage being originated here; that every discovered goal traverses that lifecycle to a plan which is complete, every step binding a located canonical owner, and deterministic, the plan identity being a pure function of the goal text and the consumed stage graph; that no plan step would require new engineering infrastructure, which is the measured form of the claim that future engineering is reduced to domain work and governed evolution; that every constitutional completion invariant is measured against a located owner whose cited anchor is actually present and whose counter resides in another owner's committed artifact, so an invariant cannot be reported satisfied by this programme's own output; that every disposition is DERIVED from measurement and resolves to a value the repository already legislates, CREATE being reachable only where Repository Truth proves no canonical owner exists; and that no privileged path exists, this engine appearing in the goal plane as a subject measured by the same obligations, disposed by the same rules and planned over the same lifecycle as any other subject, with no executable literal naming its own home. It confers nothing and creates nothing: CK-ACEE-SELF fails closed if this programme claims any located engineering authority, if any capability is dispositioned CREATE, if any discovered value could steer behaviour from inside the engine, if it exempts itself, or if it reads any register it wrote as a metadata source. Every standing divergence is bounded exactly, disclosed and REFERRED to its owner under CEP-002 Art 23.2 rather than repaired. The located records read remain immutable by mechanical proof: write set ∩ located record set = ∅.",
+      "checks": [
+        "CK-ACEE",
+        "CK-ACEE-SELF"
       ]
     }
   ],
@@ -1847,6 +1910,23 @@
       "checks": [
         "CK-UCL",
         "CK-UCL-SELF"
+      ]
+    },
+    {
+      "id": "PROGRAM-000021",
+      "name": "Autonomous Constitutional Engineering",
+      "output": "00-AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-DASHBOARD.md",
+      "delegated_to": [
+        "00-MASTER/ACEE-000001",
+        "00-MASTER/UCL-000001",
+        "00-MASTER/UCOS-AEE-001",
+        "00-MASTER/UCOS-EG-001",
+        "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
+        "00-MASTER/URRC-000001/urrc-bindings.json"
+      ],
+      "checks": [
+        "CK-ACEE",
+        "CK-ACEE-SELF"
       ]
     }
   ],

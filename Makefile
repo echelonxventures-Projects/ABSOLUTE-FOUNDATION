@@ -121,6 +121,11 @@ help:
 	@echo "  make ucl-self      UCL-000001 guards (incl. implementation-independence + open-world + cko-identity)"
 	@echo "  make ucl-replay    prove the committed lifecycle registers replay from the declaration"
 	@echo "  make ucl-execute   execute the discovered lifecycle for GOAL='...' (writes nothing)"
+	@echo "  make acee          regenerate the ACEE-000001 Autonomous Constitutional Engineering registers"
+	@echo "  make acee-gate     fail-closed Autonomous Constitutional Engineering Gate (goal plane bound + invariants measured)"
+	@echo "  make acee-self     ACEE-000001 guards (incl. no-privileged-logic + reuse-before-create + reduction)"
+	@echo "  make acee-replay   prove the committed engineering registers replay from the declaration"
+	@echo "  make acee-engineer derive the engineering plan for GOAL='...' SUBJECT='...' (writes nothing)"
 	@echo "  make urat          regenerate the UCOS-URAT-001 ratification registry (CEP-006 Art XVI)"
 	@echo "  make urat-gate     fail-closed Ratification Registry Gate (every record located + verified)"
 	@echo "  make urat-self     UCOS-URAT-001 guards (incl. discovery coverage + no-conferral)"
@@ -1526,3 +1531,66 @@ ucl-replay:
 # identity is a pure function of the goal text and the discovered graph, and nothing is written.
 ucl-execute:
 	@python3 00-MASTER/UCL-000001/ucl_engine.py --execute "$(GOAL)"
+
+# acee: ACEE-000001 — Autonomous Constitutional Engineering. It binds an engineering GOAL to
+# the constitutional lifecycle the repository already legislated, and creates nothing. The
+# lifecycle is CONSUMED from 00-MASTER/UCL-000001/ucl-stage-manifest.json, never re-derived:
+# a second derivation would be a second lifecycle, which CMG-000001 Art LXXVI.6 forbids.
+# The repository-directed loop stays with 00-MASTER/UCOS-AEE-001 and the fixed point with
+# 00-MASTER/UCOS-RFP-001; this engine invokes NO capability and re-runs NO owner, so it
+# never observes a run of itself and opens no second execution surface.
+#
+# Goals and constitutional completion invariants are DISCOVERED from located manifest
+# patterns in this lane, so admitting a further goal or invariant is an append to data and
+# requires no engine change, no declaration change and no architectural redesign. Every
+# invariant is measured against a located owner, a cited anchor that must actually be
+# present in that owner, and a counter in ANOTHER owner's committed artifact — so an
+# invariant can never be reported satisfied by this programme's own output.
+#
+# Disposition is DERIVED from measurement and resolves only to values the repository already
+# legislates; CREATE is reachable only where Repository Truth locates no owner at all.
+# This engine holds no privileged path: it appears in its own goal plane as a subject.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; no wall-clock, no version-control
+# observation; writes nothing outside 00-MASTER/ACEE-000001/ (guarded, fail-closed).
+#
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# Exit 0 gate OPEN · 1 gate CLOSED · 2 fail-closed abort (no verdict may be asserted).
+.PHONY: acee acee-gate acee-self acee-replay acee-engineer
+acee:
+	@python3 00-MASTER/ACEE-000001/acee_engine.py
+
+acee-gate:
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --gate
+
+acee-self:
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-declaration
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-no-enumeration
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-no-privileged-logic
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-reuse-before-create
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-write-scope
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-determinism
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-implementation-independence
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-open-world
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-no-parallel-authority
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-goal-plane-executable
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-invariant-coverage
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-cko-identity
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-semantic-identity
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-knowledge-once
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-record-immutability
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-reduction-measured
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --check-bounds-tight
+
+acee-replay:
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/ACEE-000001 \
+	  || { echo "ACEE-000001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "ACEE-000001 replay: no drift"
+
+# Goal-directed autonomous engineering for a goal nobody declared. Deterministic and
+# side-effect free: the plan identity is a pure function of the goal text and the consumed
+# stage graph, and nothing is written.
+acee-engineer:
+	@python3 00-MASTER/ACEE-000001/acee_engine.py --engineer "$(GOAL)" --subject "$(SUBJECT)"

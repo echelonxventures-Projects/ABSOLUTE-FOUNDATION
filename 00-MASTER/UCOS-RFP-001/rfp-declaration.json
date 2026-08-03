@@ -977,6 +977,23 @@
         "$discovery": "Declared by Ω-E04 as an EXTEND of the located lifecycle authority. Measured DETERMINISTIC over two runs at one commit: the registers are a pure function of the declaration, the discovered manifests and the located constitutional metadata, so re-execution reproduces them byte for byte and admitting the stage keeps the pipeline convergent. It reads the pipeline declaration it is a member of, which is a read of DECLARED metadata and not an observation of the working tree, so RFP-3 is unaffected; and it re-invokes no stage engine, so it never observes a run of itself."
       },
       {
+        "id": "STAGE-ACEE",
+        "name": "Autonomous constitutional engineering (bind an engineering goal to the consumed lifecycle)",
+        "owner": "00-MASTER/ACEE-000001",
+        "argv": [
+          "$PY",
+          "00-MASTER/ACEE-000001/acee_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/ACEE-000001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "purpose": "the goal plane and the constitutional completion invariants, measured against located owners; AFTER the lifecycle stage because it CONSUMES the stage graph that stage discovers, and BEFORE the aggregate certifier because the bindings it measures are what the certifier then certifies",
+        "$discovery": "Declared by Ω-E05 as an EXTEND of the located engineering plane. It CONSUMES the constitutional lifecycle from 00-MASTER/UCL-000001/ucl-stage-manifest.json and derives no lifecycle of its own, so it is not a parallel lifecycle. Measured DETERMINISTIC over two runs at one commit: the registers and every derived plan identity are a pure function of the declaration, the two discovered manifests and the located constitutional metadata it reads, so re-execution reproduces them byte for byte and admitting the stage keeps the pipeline convergent. It reads the pipeline declaration it is a member of, which is a read of DECLARED metadata and not an observation of the working tree, so RFP-3 is unaffected. It INVOKES NO CAPABILITY and re-runs no owner — actuation is discharged by the located owners of the stages declared here — so it never observes a run of itself and creates no second execution surface."
+      },
+      {
         "id": "STAGE-UCCEP",
         "name": "Aggregate constitutional certification",
         "owner": "00-MASTER/UCCEP-000000",
