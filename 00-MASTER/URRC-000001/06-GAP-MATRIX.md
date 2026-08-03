@@ -75,22 +75,22 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-27`** — Located executable checks bound by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 43 records
+- **Result** — 45 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 43 |
+| records | 45 |
 
 **`DV-28`** — Constitutional gates declared by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 24 records
+- **Result** — 25 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 24 |
+| records | 25 |
 
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 

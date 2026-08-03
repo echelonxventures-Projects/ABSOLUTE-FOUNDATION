@@ -67,7 +67,8 @@ It executes the declared pipeline **3 times** over the committed HEAD and requir
 | 30 | `STAGE-PHASE5` Execution governance (operational memory) | 00-MASTER/UAKOS-PHASE-005 | no | yes | yes |
 | 31 | `STAGE-PHASE6` Execution readiness certification (operational memory) | 00-MASTER/UAKOS-PHASE-006 | no | yes | yes |
 | 32 | `STAGE-FREEZE-C4` Freeze C4 execution streams (operational memory) | 00-MASTER/UCOS-USIS-WAVE0 | no | yes | yes |
-| 33 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
+| 33 | `STAGE-UCL` Universal Constitutional Lifecycle (discover, order and execute the constitutional stage graph) | 00-MASTER/UCL-000001 | no | yes | yes |
+| 34 | `STAGE-UCCEP` Aggregate constitutional certification | 00-MASTER/UCCEP-000000 | yes | yes | **no** |
 
 ## Exit semantics
 

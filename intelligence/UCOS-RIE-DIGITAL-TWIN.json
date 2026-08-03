@@ -5,7 +5,7 @@
   "certification_health": "HEALTHY-ENGINEERING",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
   "constitutional_finality": "BLOCKED (DR-RAT-11)",
-  "content_hash": "2ec1a7fa487b7abc2fb36405cfafeae24dfd107b001573c46471aafe1843adf5",
+  "content_hash": "95c416705f9d53ee4d708093d9c382e66a451f384b286638ad30485750402c75",
   "deployment_readiness": "IN_PROGRESS",
   "dimension_index_reconciled_pct": 26.7,
   "evidence_state": {
@@ -15,8 +15,8 @@
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "26c4b135269943ffb7c07985ea1fafcb913e0265da8e4b6836b122a7be2a91d7",
-      "00-BOOK/DATA/certification.json": "012d01b1c056a806d55a7e538b630c98d3f8914ba4548bfeb1b732a4d8b11a79",
+      "00-BOOK/DATA/artifacts.json": "aca7de8b437b50e6877265fa4b4e2d2c9424b36b9f6b22e18f723f870552bb85",
+      "00-BOOK/DATA/certification.json": "702e77d78c8958f707221c67f036819e7231223a58baf7ce9dad8efe024b7f4d",
       "00-BOOK/DATA/control-tower.json": "2412718e1702f9e33c3cc8234be565c7ed3c05e84a78956d593b3c269dd5b977",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
       "00-BOOK/DATA/volumes.json": "a34e648cd43f13818156dacdbdc814f9da3a785daac6c6113fb9eac8e05f6598"
@@ -28,7 +28,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "7ca56d06bf1af8379ccde84bba4f9186079bc07a6d9786a1482614409540594f",
+    "input_hash": "c843ac936cf2d506dcd45faa0dad6e3a12319ff3c307771d0ff97e4d9f794591",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },

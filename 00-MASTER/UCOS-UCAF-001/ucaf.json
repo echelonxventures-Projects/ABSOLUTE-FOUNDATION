@@ -1140,7 +1140,7 @@
     "scope_rules": 17,
     "scope_rules_bound": 17,
     "successions": 15,
-    "surfaces_scanned": 189,
+    "surfaces_scanned": 190,
     "tiers": 8,
     "tiers_corroborated": 7,
     "tiers_faithful": 8,
@@ -2305,7 +2305,7 @@
       "rule": "the lattice shall be consistent with, and shall not amend, the four-tier Program authority order already declared by the charter"
     }
   ],
-  "seal_sha256": "4a98094d73b3f3694d1a9eee0fbb711035696203f91ac0cea5e79a30a07695f8",
+  "seal_sha256": "cded2e2c473263b29b1377db0feeece14f4ceff2587c61ba44892d00c0b37cb5",
   "source_token_registers": [
     {
       "id": "UCAF-TOK-01",

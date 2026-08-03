@@ -22233,6 +22233,15 @@
         "status": "ACTIVE",
         "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
         "name": "02 — CANONICAL OWNERSHIP MATRIX"
+      },
+      {
+        "seq": 9,
+        "at": "2026-08-03T07:14:12+00:00",
+        "content_hash": "0b4aec019dfa299cd7528de7930156195e89a9d4d5c8e8a34fc7d2607b1c5cd4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-CANONICAL-OWNERSHIP-MATRIX.md",
+        "name": "02 — CANONICAL OWNERSHIP MATRIX"
       }
     ],
     "UCOS-ARCHITECTURA-000003": [

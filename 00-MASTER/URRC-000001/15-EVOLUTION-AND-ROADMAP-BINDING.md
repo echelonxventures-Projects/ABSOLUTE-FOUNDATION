@@ -52,12 +52,12 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-29`** — Programmes on the aggregate roster.
 
 - **Primitive** — `record_count`
-- **Result** — 19 records
+- **Result** — 20 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 19 |
+| records | 20 |
 
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 

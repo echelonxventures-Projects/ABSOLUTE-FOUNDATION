@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "052a79ba9aad09ace948051caf31fae8d9d77346f994c4bf068d8971ee28fab7",
+  "declaration_seal_sha256": "5169382f6a0bdee4c9ca05ee0a1fa3fcd4cb2807367ddcc14c4a92d214d41151",
   "findings": [],
   "lifecycle": [
     {
@@ -883,6 +883,23 @@
         "required": true,
         "writes": [
           "00-MASTER/UCOS-USIS-WAVE0/"
+        ]
+      },
+      {
+        "$discovery": "Declared by Ω-E04 as an EXTEND of the located lifecycle authority. Measured DETERMINISTIC over two runs at one commit: the registers are a pure function of the declaration, the discovered manifests and the located constitutional metadata, so re-execution reproduces them byte for byte and admitting the stage keeps the pipeline convergent. It reads the pipeline declaration it is a member of, which is a read of DECLARED metadata and not an observation of the working tree, so RFP-3 is unaffected; and it re-invokes no stage engine, so it never observes a run of itself.",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCL-000001/ucl_engine.py"
+        ],
+        "heavy": false,
+        "id": "STAGE-UCL",
+        "name": "Universal Constitutional Lifecycle (discover, order and execute the constitutional stage graph)",
+        "owner": "00-MASTER/UCL-000001",
+        "purpose": "the constitutional stage graph, discovered from constitutional metadata and executed; BEFORE the aggregate certifier because the lifecycle it measures is what the certifier then certifies",
+        "reentrant": true,
+        "required": true,
+        "writes": [
+          "00-MASTER/UCL-000001/"
         ]
       },
       {

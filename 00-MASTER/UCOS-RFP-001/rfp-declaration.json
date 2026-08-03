@@ -960,6 +960,23 @@
         "$discovery": "Discovered by the tracked-tree candidate scope — the Execution Surface never named it — and PROVED a producer by execution (RFP-6). Its committed registers had drifted from what it re-derives, which is Evidence Drift in an operational-memory artifact: the artifact class whose convergence obligation is REQUIRED precisely because a determination that re-execution does not reproduce evidences nothing. Measured DETERMINISTIC over two runs at one commit, so admitting it keeps the pipeline convergent."
       },
       {
+        "id": "STAGE-UCL",
+        "name": "Universal Constitutional Lifecycle (discover, order and execute the constitutional stage graph)",
+        "owner": "00-MASTER/UCL-000001",
+        "argv": [
+          "$PY",
+          "00-MASTER/UCL-000001/ucl_engine.py"
+        ],
+        "writes": [
+          "00-MASTER/UCL-000001/"
+        ],
+        "heavy": false,
+        "reentrant": true,
+        "required": true,
+        "purpose": "the constitutional stage graph, discovered from constitutional metadata and executed; BEFORE the aggregate certifier because the lifecycle it measures is what the certifier then certifies",
+        "$discovery": "Declared by Ω-E04 as an EXTEND of the located lifecycle authority. Measured DETERMINISTIC over two runs at one commit: the registers are a pure function of the declaration, the discovered manifests and the located constitutional metadata, so re-execution reproduces them byte for byte and admitting the stage keeps the pipeline convergent. It reads the pipeline declaration it is a member of, which is a read of DECLARED metadata and not an observation of the working tree, so RFP-3 is unaffected; and it re-invokes no stage engine, so it never observes a run of itself."
+      },
+      {
         "id": "STAGE-UCCEP",
         "name": "Aggregate constitutional certification",
         "owner": "00-MASTER/UCCEP-000000",

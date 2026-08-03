@@ -1524,52 +1524,52 @@
       "unknown": false
     },
     {
-      "count": 43,
+      "count": 45,
       "evidence": [
         "S-07"
       ],
-      "headline": "43 records",
+      "headline": "45 records",
       "id": "DV-27",
       "primitive": "record_count",
       "purpose": "Located executable checks bound by the aggregate gate.",
       "rows": [
         [
           "records",
-          "43"
+          "45"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 24,
+      "count": 25,
       "evidence": [
         "S-07"
       ],
-      "headline": "24 records",
+      "headline": "25 records",
       "id": "DV-28",
       "primitive": "record_count",
       "purpose": "Constitutional gates declared by the aggregate gate.",
       "rows": [
         [
           "records",
-          "24"
+          "25"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 19,
+      "count": 20,
       "evidence": [
         "S-07"
       ],
-      "headline": "19 records",
+      "headline": "20 records",
       "id": "DV-29",
       "primitive": "record_count",
       "purpose": "Programmes on the aggregate roster.",
       "rows": [
         [
           "records",
-          "19"
+          "20"
         ]
       ],
       "unknown": false
@@ -1609,18 +1609,22 @@
       "unknown": false
     },
     {
-      "count": 2,
+      "count": 3,
       "evidence": [
         "S-08"
       ],
-      "headline": "2 distinct value(s)",
+      "headline": "3 distinct value(s)",
       "id": "DV-32",
       "primitive": "field_histogram",
       "purpose": "Computed gate verdicts.",
       "rows": [
         [
           "`PASS`",
-          "23"
+          "22"
+        ],
+        [
+          "`FAIL`",
+          "2"
         ],
         [
           "`PASS-WITH-ADVISORY`",
@@ -1630,22 +1634,26 @@
       "unknown": false
     },
     {
-      "count": 2,
+      "count": 3,
       "evidence": [
         "S-08"
       ],
-      "headline": "2 distinct value(s)",
+      "headline": "3 distinct value(s)",
       "id": "DV-33",
       "primitive": "field_histogram",
       "purpose": "Computed programme verdicts.",
       "rows": [
         [
           "`PASS`",
-          "15"
+          "13"
         ],
         [
           "`PASS-WITH-ADVISORY`",
           "4"
+        ],
+        [
+          "`FAIL`",
+          "3"
         ]
       ],
       "unknown": false
@@ -2279,7 +2287,7 @@
           "YES",
           "2/2",
           "2388",
-          "`26c4b1352699`"
+          "`aca7de8b437b`"
         ],
         [
           "`S-02`",
@@ -2309,7 +2317,7 @@
           "YES",
           "5/5",
           "45",
-          "`012d01b1c056`"
+          "`702e77d78c89`"
         ],
         [
           "`S-05`",
@@ -2319,7 +2327,7 @@
           "YES",
           "2/2",
           "1320",
-          "`f1ec47150cc2`"
+          "`61bffc5fb852`"
         ],
         [
           "`S-06`",
@@ -2338,8 +2346,8 @@
           "YES",
           "YES",
           "5/5",
-          "99",
-          "`1b02f9dfe79a`"
+          "103",
+          "`394b8195da7f`"
         ],
         [
           "`S-08`",
@@ -2348,8 +2356,8 @@
           "YES",
           "YES",
           "6/6",
-          "133",
-          "`0de630362def`"
+          "127",
+          "`cade6c33232d`"
         ],
         [
           "`S-09`",
@@ -3326,7 +3334,7 @@
   "seal_sha256": "8432609e10e719c6c2fef582f8f352a29e027e3ffe816e9eeed636f7c51eef40",
   "substrate": [
     {
-      "content_sha256": "26c4b135269943ffb7c07985ea1fafcb913e0265da8e4b6836b122a7be2a91d7",
+      "content_sha256": "aca7de8b437b50e6877265fa4b4e2d2c9424b36b9f6b22e18f723f870552bb85",
       "exists": true,
       "id": "S-01",
       "kind": "registration projection",
@@ -3391,7 +3399,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "012d01b1c056a806d55a7e538b630c98d3f8914ba4548bfeb1b732a4d8b11a79",
+      "content_sha256": "702e77d78c8958f707221c67f036819e7231223a58baf7ce9dad8efe024b7f4d",
       "exists": true,
       "id": "S-04",
       "kind": "certification projection",
@@ -3418,7 +3426,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "f1ec47150cc249a614eeea3b6590dea9effcbe1b4ef1606b6c93e8f4a98df4eb",
+      "content_sha256": "61bffc5fb852bd236255e2dfbcbe40b4cec9e367aeef1d18fe25f5280d1b3dc3",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",
@@ -3474,7 +3482,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "1b02f9dfe79a28d403ca9c569e768fdae327f715af1b24c654301996bd311fde",
+      "content_sha256": "394b8195da7f8c79cc535289f0070bda7ba800cdd006536b1bce970d3316541b",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",
@@ -3496,12 +3504,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The aggregate constitutional gate: located checks, gates, programme roster, findings.",
-      "records": 99,
+      "records": 103,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "0de630362deff05941532db1086948242fbdecb64d7e20d9d8f4cda7caca3d00",
+      "content_sha256": "cade6c33232dfd42cf3bec63a2bd5d488382503b8af03aa05f5d9bc5cea6943b",
       "exists": true,
       "id": "S-08",
       "kind": "aggregate gate determination",
@@ -3525,7 +3533,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The computed aggregate verdicts and the certification ceiling.",
-      "records": 133,
+      "records": 127,
       "required": true,
       "tracked": true
     },

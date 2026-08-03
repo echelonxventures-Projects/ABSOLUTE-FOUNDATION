@@ -116,6 +116,11 @@ help:
 	@echo "  make uis-gate      fail-closed Identity Conformance Gate (planes crosswalked, laws measured)"
 	@echo "  make uis-self      UIS-001 guards (incl. no-identity-minting + bounds-tight)"
 	@echo "  make uis-replay    prove the committed identity registers replay from the declaration"
+	@echo "  make ucl           regenerate the UCL-000001 Universal Constitutional Lifecycle registers"
+	@echo "  make ucl-gate      fail-closed Universal Constitutional Lifecycle Gate (graph discovered + executable)"
+	@echo "  make ucl-self      UCL-000001 guards (incl. implementation-independence + open-world + cko-identity)"
+	@echo "  make ucl-replay    prove the committed lifecycle registers replay from the declaration"
+	@echo "  make ucl-execute   execute the discovered lifecycle for GOAL='...' (writes nothing)"
 	@echo "  make urat          regenerate the UCOS-URAT-001 ratification registry (CEP-006 Art XVI)"
 	@echo "  make urat-gate     fail-closed Ratification Registry Gate (every record located + verified)"
 	@echo "  make urat-self     UCOS-URAT-001 guards (incl. discovery coverage + no-conferral)"
@@ -1451,3 +1456,73 @@ completion:
 	@$(MAKE) --no-print-directory utce-gate
 	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier full --gate
 	@$(MAKE) --no-print-directory ufep-gate
+
+
+
+# ucl: UCL-000001 — the Universal Constitutional Lifecycle. It makes the constitutional stage graph
+# the repository ALREADY legislated discoverable, orderable and EXECUTABLE, and creates no lifecycle
+# of its own. UCIC-001 owns the single deterministic lifecycle every capability follows, CEP-009
+# ADDENDUM B owns construct admission, ENG-001 D30 and UMB-003 §3 own the artifact lifecycle,
+# UEI-000001 §17 owns the evolution lifecycle and 02-EXECUTION-LIFECYCLE.md owns the execution
+# lifecycle; this programme crosswalks all of them and MERGES none, because a merge would amend
+# every owner at once.
+#
+# The lifecycle is GRAPH-DRIVEN, not enumeration-driven. Constitutional metadata is reached through
+# Metadata Providers, normalized by Metadata Adapters into Canonical Knowledge Objects, and the
+# Discovery Engine operates on those objects alone — so it never sees a file, a format or a field
+# name. Admitting a stage, a capability, an object kind, a relation type, a graph type, a provider,
+# an adapter, a serialization, an obligation, a property or an expansion axis is an append to DATA:
+# --check-no-enumeration fails closed if any discovered value could steer behaviour from inside the
+# engine, scanning EXECUTABLE string constants only (comments and docstrings are excluded, because
+# the objective is to prevent hardcoded constitutional behaviour, not constitutional terminology).
+#
+# --check-implementation-independence fails closed if any object or relation is traced to an
+# evidence-class provider: implementation source may corroborate an obligation, never originate one.
+# --check-cko-identity proves every governed entity holds exactly ONE Canonical Knowledge Object and
+# that no derived register is ever read back as a source. --check-open-world fails closed on any
+# architectural bound token, on an expansion axis with no resolving registrar, on a closed registry,
+# and if fewer than two serialization readers exist. Obligations are NOT universally applicable:
+# applicability is determined first, and a NOT_APPLICABLE obligation is reported rather than counted
+# as unbound.
+#
+# Execution resolves and records; it never re-invokes the stages' own engines, which would create the
+# self-observation topology RFP-3 forbids and stop the repository converging.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only; no wall-clock, no version-control observation;
+# writes nothing outside 00-MASTER/UCL-000001/ (guarded, fail-closed).
+#
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# Exit 0 gate OPEN · 1 gate CLOSED · 2 fail-closed abort (no verdict may be asserted).
+.PHONY: ucl ucl-gate ucl-self ucl-replay ucl-execute
+ucl:
+	@python3 00-MASTER/UCL-000001/ucl_engine.py
+
+ucl-gate:
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --gate
+
+ucl-self:
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-declaration
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-no-enumeration
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-write-scope
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-determinism
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-implementation-independence
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-open-world
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-no-parallel-authority
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-lifecycle-executable
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-cko-identity
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-semantic-identity
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-knowledge-once
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-record-immutability
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --check-bounds-tight
+
+ucl-replay:
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/UCL-000001 \
+	  || { echo "UCL-000001 REPLAY DRIFT — committed registers are not the product of the declaration" >&2; exit 1; }
+	@echo "UCL-000001 replay: no drift"
+
+# The substrate entry point Ω-E05 (ACEE) binds to. Deterministic and side-effect free: the run
+# identity is a pure function of the goal text and the discovered graph, and nothing is written.
+ucl-execute:
+	@python3 00-MASTER/UCL-000001/ucl_engine.py --execute "$(GOAL)"

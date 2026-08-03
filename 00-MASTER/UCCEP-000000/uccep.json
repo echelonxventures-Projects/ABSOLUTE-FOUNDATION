@@ -2,11 +2,13 @@
   "advisory_failures": [
     "CK-HEALTH"
   ],
-  "blocking_failures": [],
+  "blocking_failures": [
+    "CK-REG-DRIFT"
+  ],
   "blocking_not_executed": [],
   "blocking_out_of_tier": [],
   "blocking_unavailable": [],
-  "certification": "CERTIFIED-PROVISIONAL",
+  "certification": "NOT-CERTIFIED",
   "certification_ceiling": [
     "`UCCEP-F-004` — Constitutional finality is reserved to an out-of-corpus authority, so every in-corpus determination is capped at provisional acceptance"
   ],
@@ -268,15 +270,15 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 0,
+      "exit_code": 3,
       "governed_by_finding": null,
       "id": "CK-REG-DRIFT",
       "in_scope": true,
       "name": "Atomic Registration Transaction + registration-drift gate",
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
-      "reason": "",
+      "reason": "uncommitted-registration drift — source split from projections",
       "tier": "full",
-      "verdict": "PASS",
+      "verdict": "FAIL",
       "write_scope": "projections"
     },
     {
@@ -713,10 +715,42 @@
       "tier": "boot",
       "verdict": "PASS",
       "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCL",
+      "in_scope": true,
+      "name": "Universal Constitutional Lifecycle executable: the constitutional stage graph is discovered from constitutional metadata rather than enumerated, normalized into Canonical Knowledge Objects, acyclic and fully ordered, every stage bound to a located canonical owner and constitutional authority, every applicable obligation bound, and every declared goal traversed to a deterministic run identity",
+      "owner": "00-MASTER/UCL-000001/ucl_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
+      "id": "CK-UCL-SELF",
+      "in_scope": true,
+      "name": "UCL-000001 self-guards: declaration integrity, zero-enumeration over executable literals, write scope, determinism, implementation independence, open world, no parallel lifecycle authority, lifecycle executability, Canonical Knowledge Object identity, invariant semantic identity, knowledge-once, record immutability, bound tightness",
+      "owner": "00-MASTER/UCL-000001/ucl_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
     }
   ],
-  "gate_blocking": [],
-  "gate_exit": 0,
+  "gate_blocking": [
+    "CK-REG-DRIFT"
+  ],
+  "gate_exit": 1,
   "gates": [
     {
       "advisory_failed": [],
@@ -844,14 +878,16 @@
         "CK-REG-ENFORCE",
         "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "G-07",
       "name": "Registry Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -994,14 +1030,16 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "G-15",
       "name": "Repository Fixed-Point Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1185,6 +1223,25 @@
       "owner": "00-MASTER/UIS-001 (00-CMG/CMG-000001 Art LXXVII.2(b) disposition — EXTEND of the already-located identity authority; the LAW of identity is owned by 02-MASTER/UCOS-Ω∞-ABSOLUTE-IDENTITY-FEDERATION-AND-CONTINUITY-CONSTITUTION.md (AIF Part II, AIF-L03 five planes, Part III A/G-AUTH exactly one identity authority), the ENGINEERING ARCHITECTURE by 07-ENGINEERING/UCOS-Ω∞-UNIVERSAL-IDENTITY-SYSTEM-MASTER-ARCHITECTURE.md (ENG-001 D3 principles, D5 the twenty laws, D10 registry, D11 dictionary, D12 namespace, D13 allocation, D14 resolution, D15 validation, D30 lifecycle), the REALIZATION by 00-BOOK/MASTER-BOOK/UMB-003/004/005/008/009/010, and UNBOUNDED EXPANSION by 00-BOOK/CONTROL-TOWER/AUTH-INF-001 CR-INF-001..012 — none of which is created, moved, split or restated here. The gate proves that the identity architecture the repository already legislated is executable rather than prose: that every identity capability reached by semantic measurement has a located canonical owner and that NONE is dispositioned CREATE; that 'exactly one identity authority' is VERIFIED against each obligated architecture's own text rather than asserted; that each of the five declared identity planes is realized by exactly one located mechanism, so the located identifier schemes are crosswalked and never merged (AIF-L03 declares the planes orthogonal and non-substitutable, so a merge would amend four owners at once); that every one of the twenty declared identity laws is bound to its owner and every law the located data can decide is measured, a law that cannot be decided being reported DECLARED-NOT-MEASURABLE rather than passing silently; that universal bookkeeping binds to a located field AND to a member of the closed facet set; and that every declared direction of lawful unbounded expansion resolves to a located extension path. The programme is classified SUBSTANTIVE and claims no namespace token in 00-CMG/CMG-REGISTRY.json per Art LXXVI.2(b); being operational memory it consumes no corpus identity at all. It confers nothing and mints nothing: CK-UIS-SELF fails closed if any emitted byte carries an identifier the located ledger does not already record, which is what forbids this measurement from becoming a fifth identifier scheme or a sixth registry, and every standing divergence is bounded, disclosed and REFERRED to its owner rather than repaired — UIL-13 and AIF-L17 forbid erasing or editing a recorded identity, so a measurement that 'fixed' one would commit the defect it reports. The located identity records remain immutable by mechanical proof: write set ∩ located record set = ∅, and every protected record's anchor must still be present in its owner's own text.",
       "unproven": [],
       "verdict": "PASS"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-UCL",
+        "CK-UCL-SELF"
+      ],
+      "executed": [
+        "CK-UCL",
+        "CK-UCL-SELF"
+      ],
+      "failed": [],
+      "id": "G-25",
+      "name": "Universal Constitutional Lifecycle Gate",
+      "not_executed": [],
+      "out_of_tier": [],
+      "owner": "00-MASTER/UCL-000001 (00-CMG/CMG-000001 Art LXXVII.2(b) disposition — EXTEND of the already-located lifecycle authority; the single deterministic lifecycle every capability follows is owned by 00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md, construct admission by 00-CEP/CEP-009 §ADDENDUM B, the artifact lifecycle by 07-ENGINEERING/ENG-001 D30 and 00-BOOK/MASTER-BOOK/UMB-003 §3, the evolution lifecycle by 00-MASTER/UEI-000001 §17, the execution lifecycle by 02-EXECUTION-LIFECYCLE.md, the executable pipeline by 00-MASTER/UCOS-RFP-001/rfp-declaration.json and unbounded expansion by 00-BOOK/CONTROL-TOWER/AUTH-INF-001 CR-INF-001..012 — none of which is created, moved, split or restated here. Those owners are CROSSWALKED and never merged: several distinct owned things share the word 'lifecycle', so a merge would amend every owner at once, which is expansion by reinterpretation. The gate proves that the constitutional lifecycle the repository already legislated is EXECUTABLE rather than prose: that the stage graph is DISCOVERED from Canonical Constitutional Metadata through declared providers and adapters and never enumerated in code, so admitting a future stage is an append to data and requires no architectural redesign; that discovery is implementation-independent, no object or relation originating from implementation source, which may corroborate an obligation but never originate one; that discovery is serialization-independent, more than one reader being exercised by a located provider and an unregistered format being reported rather than fatal; that every constitutionally governed entity holds exactly ONE Canonical Knowledge Object and that no derived register is ever read back as a source, so no view becomes Repository Truth; that the dependency graph is acyclic and every discovered stage is reachable, so the lifecycle is orderable, and that it re-enters, so no stage is terminal (CR-INF-001); that obligations are applied by APPLICABILITY, a NOT_APPLICABLE obligation being reported rather than counted as unbound so the gate measures deficiency instead of manufacturing it; that no architectural bound exists, every expansion axis resolving to a located registrar; and that the lifecycle EXECUTES, each declared goal traversing the discovered graph to a deterministic run identity. The programme is classified SUBSTANTIVE and claims no namespace token in 00-CMG/CMG-REGISTRY.json per Art LXXVI.2(b); being operational memory it consumes no corpus identity at all. It confers nothing and creates nothing: CK-UCL-SELF fails closed if this programme claims any located lifecycle authority, if any capability is dispositioned CREATE, or if any discovered value could steer behaviour from inside the engine. Every standing divergence is bounded exactly, disclosed and REFERRED to its owner under CEP-002 Art 23.2 rather than repaired, because an obligation is bound by the instrument that owns the stage and not by the measurement that reads it. The located records read remain immutable by mechanical proof: write set ∩ located record set = ∅.",
+      "unproven": [],
+      "verdict": "PASS"
     }
   ],
   "programme": {
@@ -1319,14 +1376,16 @@
         "CK-DISCOVERY",
         "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000004",
       "name": "Universal Registry Evolution",
       "not_executed": [],
       "out_of_tier": [],
       "output": "04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1345,14 +1404,16 @@
         "CK-CMG",
         "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000005",
       "name": "Universal Repository Governance",
       "not_executed": [],
       "out_of_tier": [],
       "output": "05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1669,14 +1730,16 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000017",
       "name": "Universal Repository Fixed-Point Closure",
       "not_executed": [],
       "out_of_tier": [],
       "output": "19-REPOSITORY-FIXED-POINT-CLOSURE.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1742,13 +1805,39 @@
       "output": "21-CONSTITUTIONAL-EVOLUTION-CLOSURE.md",
       "unproven": [],
       "verdict": "PASS"
+    },
+    {
+      "advisory_failed": [],
+      "checks": [
+        "CK-UCL",
+        "CK-UCL-SELF"
+      ],
+      "delegated_to": [
+        "00-MASTER/UCL-000001",
+        "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
+        "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
+        "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+        "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-AUTH-INF-001-INFINITE-EVOLUTION-UNIVERSAL-IDENTITY-AND-UNBOUNDED-EXPANSION-CONSTITUTION.md"
+      ],
+      "executed": [
+        "CK-UCL",
+        "CK-UCL-SELF"
+      ],
+      "failed": [],
+      "id": "PROGRAM-000020",
+      "name": "Universal Constitutional Lifecycle",
+      "not_executed": [],
+      "out_of_tier": [],
+      "output": "22-UNIVERSAL-CONSTITUTIONAL-LIFECYCLE-CLOSURE.md",
+      "unproven": [],
+      "verdict": "PASS"
     }
   ],
   "repository": {
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "ca18947d4ee6a25a80b72e0050d76c04745b7e06cfc33d7bc99674ca3aaa4566",
+  "seal_sha256": "bce8b3cdc4ebd1046c68ab67391ec76612d6d04df0e6006734b86a8ae62e508a",
   "tier": "full",
   "unavailable": [],
   "unproven": []
