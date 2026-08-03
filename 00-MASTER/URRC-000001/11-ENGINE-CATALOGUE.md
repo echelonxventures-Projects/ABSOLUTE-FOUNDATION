@@ -51,7 +51,7 @@ Engines discovered by declared glob, joined to gate, entry point and workflow bi
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 37 tracked path(s)
+- **Result** — 38 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -75,6 +75,7 @@ Engines discovered by declared glob, joined to gate, entry point and workflow bi
 | `00-MASTER/UCCEP-000000/uccep_engine.py` | TRACKED |
 | `00-MASTER/UCDA-000001/ucda_engine.py` | TRACKED |
 | `00-MASTER/UCEF-000001/ucef_engine.py` | TRACKED |
+| `00-MASTER/UCL-000001/ucl_engine.py` | TRACKED |
 | `00-MASTER/UCOS-AEE-001/aee_engine.py` | TRACKED |
 | `00-MASTER/UCOS-MXR-001/roadmap_engine.py` | TRACKED |
 | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | TRACKED |
@@ -97,7 +98,7 @@ Engines discovered by declared glob, joined to gate, entry point and workflow bi
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 31/37 located engine(s) bound to at least one entry point, workflow or hook (over 31 tracked binding file(s))
+- **Result** — 32/38 located engine(s) bound to at least one entry point, workflow or hook (over 32 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -121,6 +122,7 @@ Engines discovered by declared glob, joined to gate, entry point and workflow bi
 | `00-MASTER/UCCEP-000000/uccep_engine.py` | 3 | `.github/workflows/uccep-gate.yml`, `.kiro/hooks/uccep-000000.json`, `Makefile` |
 | `00-MASTER/UCDA-000001/ucda_engine.py` | 2 | `.kiro/hooks/ucda-000001.json`, `Makefile` |
 | `00-MASTER/UCEF-000001/ucef_engine.py` | 2 | `.github/workflows/ucef-gate.yml`, `Makefile` |
+| `00-MASTER/UCL-000001/ucl_engine.py` | 2 | `.github/workflows/ucl-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-AEE-001/aee_engine.py` | 2 | `.github/workflows/aee-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-MXR-001/roadmap_engine.py` | 2 | `.github/workflows/roadmap-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | 2 | `.github/workflows/rfp-gate.yml`, `Makefile` |

@@ -6,13 +6,13 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-002/phase2_recon.py`.
 
-- Git-tracked files at baseline: **5309**
+- Git-tracked files at baseline: **5330**
 - Capability classes: **17**
 
 | Capability class | Files | Owning roots |
 |---|---|---|
 | Knowledge/Registries | 1326 | 00-BOOK, 03-CATALOGS |
-| Master/Operational-Memory | 1133 | 00-MASTER, 01-WORKING |
+| Master/Operational-Memory | 1153 | 00-MASTER, 01-WORKING |
 | Platform | 687 | 09-PLATFORM, platform |
 | Engines/Compilers/Validators/Certifiers | 602 | engine, intelligence |
 | Services | 300 | 11-SERVICE, service |
@@ -23,7 +23,7 @@
 | Governance/Constitutions | 131 | 00-CEP, 02-MASTER, adr |
 | Source/Reference | 37 | 00-SOURCE, 00-SOURCE-MANIFEST, 04-REFERENCE |
 | Implementation | 29 | 06-IMPLEMENTATION, 07-ENGINEERING |
-| Automation/Testing | 26 | .github, scripts |
+| Automation/Testing | 27 | .github, scripts |
 | Runtime | 18 | 08-RUNTIME |
 | Generation | 7 | 05-GENERATION |
 | Security | 5 | 14-SECURITY |
@@ -34,7 +34,7 @@
 | Root | Files |
 |---|---|
 | 00-BOOK | 1319 |
-| 00-MASTER | 1126 |
+| 00-MASTER | 1146 |
 | platform | 667 |
 | engine | 520 |
 | service | 281 |
@@ -45,7 +45,7 @@
 | 02-MASTER | 80 |
 | 00-CEP | 48 |
 | 15-UNIVERSAL-SCIENCE-INTELLIGENCE | 36 |
-| .github | 23 |
+| .github | 24 |
 | 04-REFERENCE | 22 |
 | 12-APPLICATION | 22 |
 | 06-IMPLEMENTATION | 20 |

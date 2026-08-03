@@ -1902,9 +1902,9 @@
       "unknown": false
     },
     {
-      "count": 37,
+      "count": 38,
       "evidence": [],
-      "headline": "37 tracked path(s)",
+      "headline": "38 tracked path(s)",
       "id": "DV-45",
       "primitive": "tracked_glob_census",
       "purpose": "Executable governance engines and gate scripts present in version control.",
@@ -1986,6 +1986,10 @@
           "TRACKED"
         ],
         [
+          "`00-MASTER/UCL-000001/ucl_engine.py`",
+          "TRACKED"
+        ],
+        [
           "`00-MASTER/UCOS-AEE-001/aee_engine.py`",
           "TRACKED"
         ],
@@ -2063,7 +2067,7 @@
     {
       "count": 6,
       "evidence": [],
-      "headline": "31/37 located engine(s) bound to at least one entry point, workflow or hook (over 31 tracked binding file(s))",
+      "headline": "32/38 located engine(s) bound to at least one entry point, workflow or hook (over 32 tracked binding file(s))",
       "id": "DV-46",
       "primitive": "text_presence",
       "purpose": "Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.",
@@ -2162,6 +2166,11 @@
           "`00-MASTER/UCEF-000001/ucef_engine.py`",
           "2",
           "`.github/workflows/ucef-gate.yml`, `Makefile`"
+        ],
+        [
+          "`00-MASTER/UCL-000001/ucl_engine.py`",
+          "2",
+          "`.github/workflows/ucl-gate.yml`, `Makefile`"
         ],
         [
           "`00-MASTER/UCOS-AEE-001/aee_engine.py`",
