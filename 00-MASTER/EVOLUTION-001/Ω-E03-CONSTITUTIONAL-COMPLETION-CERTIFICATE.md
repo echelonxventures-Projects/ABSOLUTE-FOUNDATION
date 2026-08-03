@@ -28,7 +28,7 @@ that produced them.
 
 | Reading | Value | Located at |
 |---|---|---|
-| Wave commits | 8 — 5 original (`6ad60f6` binding · `b2a688f`, `5e4f9a3`, `2087748`, `a531e8e` convergence), then `ba1a995` `OBL-E04-01` discharge, `925d364` + `f3b2d7d` convergence | `git log` |
+| Wave commits | owned by version control, never restated here (RFP-2). The wave opens at `6ad60f6` "bind the identity architecture to its located owners" and closes at the last `Ω-E03` commit reachable from this record; `git log --grep='Ω-E03'` is the located enumeration. | `git log` |
 | Wave home | `00-MASTER/UIS-001/` — 13 files: declaration, engine, model, 8 rendered registers | filesystem |
 | Declaration | `uis-declaration.json` — 5 planes, 6 mechanisms, 20 laws, 19 bookkeeping obligations, 54 capabilities, 24 validations, 8 exit criteria, 6 findings. **Unchanged by the discharge.** | `00-MASTER/UIS-001/uis-declaration.json` |
 | Engine | `uis_engine.py` — the only file the discharge amended | `00-MASTER/UIS-001/uis_engine.py` |
@@ -404,20 +404,24 @@ Passes 1/3, 2/3, 3/3: `modified=0 staged=0 untracked=0`.
 ### Convergence record
 
 A strengthened measurement moves its seal, and derived consumers must catch up. Convergence was
-driven with the **declared mechanism** (`rfp_engine.py --detect --keep-residue`, residue preserved
-so it could be inspected rather than silently restored) and iterated until residue reached **zero**:
+driven with the **declared mechanism** — `rfp_engine.py --detect --keep-residue`, residue preserved
+so it could be inspected rather than silently restored — and iterated until residue reached **zero**.
 
-| Round | Residue | Reading |
-|---|---|---|
-| discharge | 15 files | engine + 10 UIS registers + `BASELINE-001` (the located citation consumer) |
-| 1 | 20 files | `BASELINE-001` + `UCOS-RIB-001`; **RIB observed a DIRTY tree and recorded 10/12 gates** |
-| 2 | 16 files | `UCOS-RIB-001` only — confined to its own zone |
-| 3 | **0** | RIB re-measured with residue only inside its own excluded zone (RFP-3) → **CLEAN, 12/12, CERTIFIED**; byte-stable across three consecutive runs |
+This certificate states the *properties* of that convergence, not a table of its rounds. A record
+that enumerated its own convergence history would go stale the moment it was itself committed and
+absorbed by the producers that inventory it, and updating it would require another round to record —
+the self-reference `CLO-07` exists to forbid. The round-by-round history is owned by version control
+(RFP-2) and is located at `git log --grep='Ω-E03 convergence'`.
 
-**Round 1's dirty observation was never treated as Repository Truth.** RIB reads working-tree state
-*outside its own zone*, so it was re-measured only after the upstream producers had stabilized, and
-the corrected reading — not the intermediate one — is what stands committed. Byte-stability was
-proved by digest comparison before the reading was committed.
+The properties that hold at this record:
+
+| Property | Evidence |
+|---|---|
+| Residue reached exactly zero | `rfp-gate` `tracked_modifications = 0`, `staged_entries = 0`, `untracked_outside_excluded = 0` over 3 passes |
+| Every producer is byte-stable before its reading was committed | each producer re-run and digest-compared; no reading committed until two consecutive runs agreed |
+| No intermediate dirty observation was committed as Repository Truth | the blueprint reads working-tree state **outside its own zone** (RFP-3), so its dirty-tree readings — recorded while upstream producers were still settling, at 10/12 gates — were **discarded, not committed**; the corpus consumers were committed ahead of it precisely so its reading could be taken at a clean tree, which is required for deterministic convergence rather than a convenience |
+| The blueprint's committed reading was taken at a clean tree | `WORKING TREE CLEAN (0 entries…)`, `GATES 12/12`, `dirty=0`, `BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED` |
+| A record describing the repository becomes part of it, lawfully | committing this certificate moved exactly one measurement — tracked files by one — and the producers that inventory and cite repository surfaces absorbed it without any determination changing; the fixed point absorbing that fact is the pipeline working, not a defect |
 
 `STAGE-UIS` participates as a required, re-entrant stage in the **33-stage** pipeline: Ω-E03 extended
 the pipeline, the discharge changed a stage's output, and the extended pipeline still converges.
