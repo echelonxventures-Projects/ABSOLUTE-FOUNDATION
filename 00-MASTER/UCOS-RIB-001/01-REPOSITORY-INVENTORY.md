@@ -69,7 +69,7 @@
 | Measure | Kind | Field | Units with a value | Total | Purpose |
 |---|---|---|---|---|---|
 | `MSR-SOURCE` | `owned_source_count` | `source_files` | 96 | 1633 | the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree |
-| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 171 | 5304 | every version-controlled file homed inside the unit |
+| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 171 | 5305 | every version-controlled file homed inside the unit |
 | `MSR-UNITTEST` | `tracked_glob_count` | `unit_tests` | 31 | 307 | verification assets located for the unit itself |
 | `MSR-EVIDENCE` | `tracked_glob_count` | `evidence_assets` | 8 | 980 | the realization-evidence surface located for the unit's root |
 | `MSR-COVERAGE` | `substrate_list_member` | `in_coverage_scope` | 39 | 39 | whether the unit lies inside the declared coverage scope |
@@ -93,7 +93,7 @@
 | Merge conflicts | 0 |
 | Interrupted operations | none |
 | Broken symlinks | 0 |
-| Version-controlled files | 5308 |
+| Version-controlled files | 5309 |
 
 ---
 
