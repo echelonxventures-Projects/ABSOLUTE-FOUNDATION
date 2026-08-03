@@ -22,7 +22,7 @@ be.
 
 ## Citation certification
 
-Surfaces scanned: **122**. Every baseline-shaped
+Surfaces scanned: **121**. Every baseline-shaped
 reference in the declared surfaces must resolve to a recorded baseline: this is the
 machine form of *no baseline shall be cited that was never recorded*.
 
