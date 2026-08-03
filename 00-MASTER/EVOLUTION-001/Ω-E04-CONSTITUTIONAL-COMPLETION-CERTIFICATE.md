@@ -175,9 +175,17 @@ Each divergence is bounded at exactly its measured value, so no bound carries sl
 | Openness probe — append a stage | discovered and correctly ordered; engine and declaration byte-identical |
 | Openness probe — add a new manifest provider | discovered automatically; gate remained OPEN |
 
-### What was NOT verified
+### Fixed-point convergence over the committed state
 
-**Full fixed-point convergence (`G-15`, `make rfp-gate`) was not executed.** That gate requires a **clean committed tree** — a fixed point is a property of a *committed* state — and this work is uncommitted. What was verified instead is the precondition the pipeline places on a new stage: `STAGE-UCL` is deterministic over two runs at one state, writes only inside its own home, and `rfp-self` passes with the extended thirty-four-stage declaration. Convergence over the committed state must be run after commit, and this certificate does not claim it.
+**Executed.** `G-15` (`make rfp-gate`) requires a **clean committed tree**, because a fixed point is a property of a *committed* state. That precondition is now met: Ω-E04 is in Repository Truth together with the convergence cascade that absorbs it into every dependent derived register, and the tree is clean.
+
+Convergence was not immediate and is recorded here as measured rather than assumed. Committing Ω-E04 perturbed the derived registers of programmes that measure repository composition — the assimilation change register (the `Makefile` gained the `ucl` targets, changing its recorded digest), the phase-two reconnaissance counts, the repository-intelligence projections, and the blueprint's own inventory. The declared pipeline was therefore re-run and committed until the repository reproduced itself, which took **four rounds** (`49 → 10 → 16 → 0` uncommitted entries), followed by a further complete pipeline round that changed nothing. The residue at the third round was exactly the sixteen blueprint artifacts, which converge last because the blueprint measures the working tree.
+
+Per `RFP-3`, the fixed-point verdict is an observation of the working tree; persisting it here would make this record permanently false the moment anything changed. The verdict is therefore carried by the gate's exit code and standard output, and this certificate records only that the obligation was discharged.
+
+### What is NOT claimed
+
+Constitutional finality is reserved to an out-of-corpus authority (`UCCEP-F-004`), so aggregate certification is capped at **provisional** acceptance and this certificate confers no ratification.
 
 ---
 
@@ -187,7 +195,7 @@ Each divergence is bounded at exactly its measured value, so no bound carries sl
 
 It is reusable by every canonical capability without modification, because the traversal names no capability. No capability requires its own engineering methodology, and no capability list exists that could be incomplete.
 
-**Ω-E05 is AUTHORIZED**, subject to fixed-point convergence being run over the committed state. Authorization inherits **no ratification, no finality and no authority** (`CR-INF-001`).
+**Ω-E05 is AUTHORIZED.** Fixed-point convergence over the committed state has been executed, so the authorization no longer rests on an outstanding condition. Authorization inherits **no ratification, no finality and no authority** (`CR-INF-001`).
 
 Ω-E05 shall implement **ACEE — the Autonomous Constitutional Engineering Engine** — which executes this lifecycle autonomously for any engineering goal while remaining fully governed by Repository Truth. Its binding point is the substrate entry point certified here.
 
