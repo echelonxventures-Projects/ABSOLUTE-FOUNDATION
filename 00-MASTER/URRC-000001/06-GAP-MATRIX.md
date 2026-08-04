@@ -75,27 +75,27 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-27`** — Located executable checks bound by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 45 records
+- **Result** — 47 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 45 |
+| records | 47 |
 
 **`DV-28`** — Constitutional gates declared by the aggregate gate.
 
 - **Primitive** — `record_count`
-- **Result** — 25 records
+- **Result** — 26 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 25 |
+| records | 26 |
 
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 32/38 located engine(s) bound to at least one entry point, workflow or hook (over 32 tracked binding file(s))
+- **Result** — 33/39 located engine(s) bound to at least one entry point, workflow or hook (over 33 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -103,6 +103,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 | `00-BOOK/tools/register.sh` | 4 | `.github/workflows/ucef-gate.yml`, `.github/workflows/ucos-registration-gate.yml`, `.kiro/hooks/auto-register-artifact.json`, `Makefile` |
 | `00-BOOK/tools/ukb.py` | 3 | `.github/workflows/ucos-registration-gate.yml`, `.kiro/hooks/auto-register-artifact.json`, `Makefile` |
 | `00-CMG/tools/cmg-gate.sh` | 1 | `Makefile` |
+| `00-MASTER/ACEE-000001/acee_engine.py` | 2 | `.github/workflows/acee-gate.yml`, `Makefile` |
 | `00-MASTER/BASELINE-001/baseline_engine.py` | 2 | `.github/workflows/baseline-gate.yml`, `Makefile` |
 | `00-MASTER/MCOS-000001/mcos_engine.py` | 2 | `.github/workflows/mcos-gate.yml`, `Makefile` |
 | `00-MASTER/UAEP-000001/uaep_engine.py` | 2 | `.github/workflows/uaep-gate.yml`, `Makefile` |

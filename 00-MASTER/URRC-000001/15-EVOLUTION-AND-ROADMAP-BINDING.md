@@ -52,17 +52,17 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-29`** — Programmes on the aggregate roster.
 
 - **Primitive** — `record_count`
-- **Result** — 20 records
+- **Result** — 21 records
 - **Substrate evidence** — `S-07`
 
 | Key | Value |
 |---|---|
-| records | 20 |
+| records | 21 |
 
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 38 tracked path(s)
+- **Result** — 39 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -70,6 +70,7 @@ Evolution and master-roadmap owners; executable-owner delta.
 | `00-BOOK/tools/register.sh` | TRACKED |
 | `00-BOOK/tools/ukb.py` | TRACKED |
 | `00-CMG/tools/cmg-gate.sh` | TRACKED |
+| `00-MASTER/ACEE-000001/acee_engine.py` | TRACKED |
 | `00-MASTER/BASELINE-001/baseline_engine.py` | TRACKED |
 | `00-MASTER/MCOS-000001/mcos_engine.py` | TRACKED |
 | `00-MASTER/UAEP-000001/uaep_engine.py` | TRACKED |

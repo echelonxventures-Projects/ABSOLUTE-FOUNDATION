@@ -80,7 +80,7 @@ Validation, certification and compliance owners plus certification-scope reconci
 
 | Key | Value |
 |---|---|
-| `PASS` | 24 |
+| `PASS` | 25 |
 | `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
@@ -91,7 +91,7 @@ Validation, certification and compliance owners plus certification-scope reconci
 
 | Key | Value |
 |---|---|
-| `PASS` | 16 |
+| `PASS` | 17 |
 | `PASS-WITH-ADVISORY` | 4 |
 
 **`DV-34`** — Findings composing the certification ceiling.
