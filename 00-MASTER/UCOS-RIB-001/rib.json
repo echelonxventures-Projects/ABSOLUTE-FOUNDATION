@@ -1672,7 +1672,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 5393,
+      "total": 5394,
       "units_with_value": 173
     },
     {
@@ -3729,7 +3729,7 @@
     "dirty_entries": 0,
     "interrupted_operations": [],
     "modified": 0,
-    "tracked_files": 5358,
+    "tracked_files": 5359,
     "untracked": 0,
     "working_tree": "CLEAN"
   },
@@ -7643,7 +7643,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 1173,
+      "tracked_files": 1174,
       "unique_id": "UCOS-RIB-001-CAP-0068",
       "unit_class": "CAPABILITY",
       "unit_key": "00-MASTER",
