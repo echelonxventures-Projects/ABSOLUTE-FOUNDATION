@@ -52,7 +52,7 @@
 | `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 71 | `e3af774cc2d0` |
 | `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `35ce2e6bb1f6` |
 | `SUB-RIE-FRONTIER` | `intelligence/UCOS-RIE-EXECUTION-FRONTIER.json` | json | YES | YES | 4/4 | 8 | `12d7081b85a2` |
-| `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 108 | `6e5206a51222` |
+| `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 113 | `336d50c9f430` |
 | `SUB-UEI` | `00-MASTER/UEI-000001/uei.json` | json | YES | YES | 2/2 | 15 | `50e80b680d9f` |
 | `SUB-UER` | `00-MASTER/UER-000001/uer.json` | json | YES | YES | 2/2 | 10 | `0ae82cb58fdb` |
 | `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `105225a3ae87` |
@@ -69,13 +69,13 @@
 | Measure | Kind | Field | Units with a value | Total | Purpose |
 |---|---|---|---|---|---|
 | `MSR-SOURCE` | `owned_source_count` | `source_files` | 98 | 1635 | the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree |
-| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 173 | 5389 | every version-controlled file homed inside the unit |
+| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 173 | 5393 | every version-controlled file homed inside the unit |
 | `MSR-UNITTEST` | `tracked_glob_count` | `unit_tests` | 31 | 307 | verification assets located for the unit itself |
 | `MSR-EVIDENCE` | `tracked_glob_count` | `evidence_assets` | 8 | 980 | the realization-evidence surface located for the unit's root |
 | `MSR-COVERAGE` | `substrate_list_member` | `in_coverage_scope` | 39 | 39 | whether the unit lies inside the declared coverage scope |
 | `MSR-INTERFACE` | `substrate_map_prefix` | `interfaces` | 15 | 17 | the declared console interfaces the unit publishes |
 | `MSR-REGISTERED` | `substrate_record_prefix` | `registered_artifacts` | 108 | 702 | the registered corpus artifacts homed inside the unit |
-| `MSR-ENTRYPOINT` | `text_reference_count` | `entrypoint_references` | 65 | 2015 | how many declared entry points name a path inside the unit — the reachability a non-imported tool has |
+| `MSR-ENTRYPOINT` | `text_reference_count` | `entrypoint_references` | 65 | 2021 | how many declared entry points name a path inside the unit — the reachability a non-imported tool has |
 | `MSR-TESTPATH` | `substrate_list_member` | `in_test_scope` | 2 | 2 | whether the unit lies inside the declared test-collection scope |
 
 ## Repository reality at the computed anchor
@@ -93,7 +93,7 @@
 | Merge conflicts | 0 |
 | Interrupted operations | none |
 | Broken symlinks | 0 |
-| Version-controlled files | 5354 |
+| Version-controlled files | 5358 |
 
 ---
 

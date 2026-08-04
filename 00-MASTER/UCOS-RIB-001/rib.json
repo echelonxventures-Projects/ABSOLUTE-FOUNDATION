@@ -1672,7 +1672,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 5389,
+      "total": 5393,
       "units_with_value": 173
     },
     {
@@ -1720,7 +1720,7 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 2015,
+      "total": 2021,
       "units_with_value": 65
     },
     {
@@ -3729,7 +3729,7 @@
     "dirty_entries": 0,
     "interrupted_operations": [],
     "modified": 0,
-    "tracked_files": 5354,
+    "tracked_files": 5358,
     "untracked": 0,
     "working_tree": "CLEAN"
   },
@@ -4030,7 +4030,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "6e5206a51222933722957edba24e828c2830aa4457f41da411d8c9e14473c9ac",
+      "content_sha256": "336d50c9f43091e8089c1886fda2fe0eb2ad0bb339c32b028b7103a487dc9c82",
       "exists": true,
       "generated": false,
       "id": "SUB-UCDA",
@@ -4045,7 +4045,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the decision-assimilation register — the located home of every constitutional decision",
-      "records": 108,
+      "records": 113,
       "required": true,
       "tracked": true
     },
@@ -7608,7 +7608,7 @@
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
-      "entrypoint_references": 551,
+      "entrypoint_references": 553,
       "evidence_assets": 0,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
@@ -7643,7 +7643,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 1169,
+      "tracked_files": 1173,
       "unique_id": "UCOS-RIB-001-CAP-0068",
       "unit_class": "CAPABILITY",
       "unit_key": "00-MASTER",
@@ -8165,7 +8165,7 @@
       "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
       "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 21,
+      "entrypoint_references": 23,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -13370,7 +13370,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 609,
+      "entrypoint_references": 611,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,
