@@ -25,7 +25,7 @@
 | `UCCEP-F-004` | STANDING-CONSTITUTIONAL-CEILING | **REGISTERED** | YES | `00-CEP/CEP-006 (ratification, Art I.4 and Art XII.2) · 00-CMG/CMG-000014 (VAC-01 / CMG-OQ-01 / CMG-OQ-02)` | — |
 | `UCCEP-F-005` | BYPASSABLE-ENFORCEMENT | **IMPLEMENTED** | no | `UCCEP-000000 (this programme)` | — |
 | `UCCEP-F-006` | DEGRADED-VALIDATION | **IMPLEMENTED** | no | `00-BOOK/tools/ukb.py · .github/workflows/ucos-registration-gate.yml` | — |
-| `UCCEP-F-007` | REPOSITORY-DRIFT | **REGISTERED** | no | `00-MASTER/MCP-002-MASTER-STATE.md (operational memory) · repository operator` | `WP-UCCEP-005` |
+| `UCCEP-F-007` | REPOSITORY-DRIFT | **IMPLEMENTED** | no | `00-MASTER/MCP-002-MASTER-STATE.md (operational memory) · repository operator` | — |
 | `UCCEP-F-008` | MEASURED-GOVERNANCE-GAP | **IMPLEMENTED** | no | `00-CEP/CEP-002 Art 28 (CEP-002-AMD-002) · 00-MASTER/UCDA-000001` | — |
 | `UCCEP-F-009` | OBSERVATION-MUTATES-TRUTH | **IMPLEMENTED** | no | `00-MASTER/UCCEP-000000/uccep_engine.py` | — |
 | `UCCEP-F-010` | OBSERVATION-MUTATES-TRUTH | **GOVERNED** | no | `00-MASTER/UCOS-RIB-001/rib_engine.py` | — |
@@ -87,11 +87,11 @@
 ### UCCEP-F-007 — Working tree carries uncommitted constitutional zone and generator changes
 
 - **Class** — REPOSITORY-DRIFT
-- **Disposition** — REGISTERED
+- **Disposition** — IMPLEMENTED
 - **Owner** — `00-MASTER/MCP-002-MASTER-STATE.md (operational memory) · repository operator`
 - **Violates** — PR-01 Repository Truth
 - **Evidence** — At UCCEP establishment: branch programme/evo-usis-005, HEAD 527485a, 115 dirty entries — untracked 00-CMG/ (the entire meta-constitutional zone), untracked 00-MASTER/UCOS-{ACE,CCD,NUCLEUS}-001/ and USIS-WAVE3 determinations, modified 00-BOOK/tools/{config.py,ukb.py} (adds RECONCILED_SETS), modified 00-CEP/CEP-001 and CEP-002, modified Makefile, modified registry projections and intelligence outputs. Measured consequence: register.sh --guard exits 3 (uncommitted-registration drift) with 35 untracked portal projections — prior sessions registered artifacts without committing the registration, so REG-AUTO-001's own rule that source is never split from projections is currently violated.
-- **Note** — Repository Truth is what is committed. Constitutional instruments that exist only in an uncommitted working tree are not yet Repository Truth — the entire 00-CMG meta-constitutional zone is currently in that state. Recorded as observed state; committing is an operator decision that UCCEP does not take unilaterally. This drift pre-dates UCCEP; the UCCEP charter itself registered cleanly as UCOS-CON-000064 (native id UCCEP-000000, VOL-002, page 9584), taking the count 1198 → 1199.
+- **Note** — Repository Truth is what is committed. Constitutional instruments that exist only in an uncommitted working tree are not yet Repository Truth — the entire 00-CMG meta-constitutional zone is currently in that state. Recorded as observed state; committing is an operator decision that UCCEP does not take unilaterally. This drift pre-dates UCCEP; the UCCEP charter itself registered cleanly as UCOS-CON-000064 (native id UCCEP-000000, VOL-002, page 9584), taking the count 1198 → 1199. DISCHARGED under Ω-E06-B, by re-measurement rather than by assertion. WP-UCCEP-005's acceptance condition was 'register.sh --guard exits 0 with zero drift; git status reports no uncommitted registration', and both limbs now measure true over the committed tree: `./00-BOOK/tools/register.sh --guard` exits 0 and reports 'Guard PASSED — repository, registry, control tower, twin, and portal are in sync' at 1194 registered artifacts with unregistered-eligible 0, reconciled-set drift 0, invalid 0 and awaiting-VCS-binding 0; and `git status --porcelain` reports zero entries. Every zone the evidence named as untracked or uncommitted is now carried by version control: 00-CMG/ (18 files), 00-MASTER/UCOS-{ACE,CCD,NUCLEUS}-001/ (11 files), the portal projections (1201 files), and the 00-BOOK/tools/{config.py,ukb.py} RECONCILED_SETS change, which shows no diff against HEAD. The 35 untracked portal projections and the guard's exit 3 that the evidence records are therefore historical: REG-AUTO-001's rule that source is never split from projections is satisfied at the measured state. The disposition changes because the measurement changed, and the original evidence above is retained unaltered as the record of the state that was observed at UCCEP establishment.
 
 ### UCCEP-F-008 — Constitutionally agreed decisions had no disposition obligation and no gate — an agreement could remain only in conversation
 
