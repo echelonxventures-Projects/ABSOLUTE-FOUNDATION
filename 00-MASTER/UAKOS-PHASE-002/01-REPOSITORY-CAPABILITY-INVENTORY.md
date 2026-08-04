@@ -6,13 +6,13 @@
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-002/phase2_recon.py`.
 
-- Git-tracked files at baseline: **5358**
+- Git-tracked files at baseline: **5359**
 - Capability classes: **17**
 
 | Capability class | Files | Owning roots |
 |---|---|---|
 | Knowledge/Registries | 1326 | 00-BOOK, 03-CATALOGS |
-| Master/Operational-Memory | 1180 | 00-MASTER, 01-WORKING |
+| Master/Operational-Memory | 1181 | 00-MASTER, 01-WORKING |
 | Platform | 687 | 09-PLATFORM, platform |
 | Engines/Compilers/Validators/Certifiers | 602 | engine, intelligence |
 | Services | 300 | 11-SERVICE, service |
@@ -34,7 +34,7 @@
 | Root | Files |
 |---|---|
 | 00-BOOK | 1319 |
-| 00-MASTER | 1173 |
+| 00-MASTER | 1174 |
 | platform | 667 |
 | engine | 520 |
 | service | 281 |

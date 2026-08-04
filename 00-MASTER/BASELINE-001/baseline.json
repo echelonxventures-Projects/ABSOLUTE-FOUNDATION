@@ -244,7 +244,7 @@
       "UCOS-BASELINE-002": "UCOS-BASELINE-001"
     }
   },
-  "citation_surfaces_scanned": 130,
+  "citation_surfaces_scanned": 131,
   "configuration": [
     "CEP-001 1.1",
     "CEP-002 1.2",
@@ -276,7 +276,7 @@
     "releases_corroborated": 3,
     "scope_rules": 5,
     "scope_rules_bound": 5,
-    "surfaces_scanned": 130,
+    "surfaces_scanned": 131,
     "unrecorded_citations": 0,
     "version_progressions": 4,
     "versions_succeeded": 4
@@ -744,7 +744,7 @@
       "rule": "a baseline shall be recomputable and shall yield a byte-identical result on recomputation"
     }
   ],
-  "seal_sha256": "444c14b8dfa387fdb5af26828f2fc8c4b51037962867bfad5d00c53815cbf9b0",
+  "seal_sha256": "860df8cac85979c1696d07f05005ec92df2d6d7f4acd8864e4b6b22ab7868655",
   "unrecorded_citations": [],
   "validations": [
     {
