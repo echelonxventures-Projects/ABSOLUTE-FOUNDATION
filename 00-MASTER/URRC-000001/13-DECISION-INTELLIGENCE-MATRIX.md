@@ -51,7 +51,7 @@ Decision lifecycle and disposition occupancy, and deliverable-to-decision covera
 **`DV-35`** — Decision lifecycle occupancy by stage.
 
 - **Primitive** — `dict_list_lengths`
-- **Result** — 9 key(s) · 108 member(s)
+- **Result** — 9 key(s) · 113 member(s)
 - **Substrate evidence** — `S-10`
 
 | Key | Value |
@@ -62,35 +62,35 @@ Decision lifecycle and disposition occupancy, and deliverable-to-decision covera
 | `DECISION-REGISTRATION` | 0 |
 | `DISCUSSION` | 0 |
 | `IMPLEMENTATION` | 0 |
-| `REPOSITORY-MAPPING` | 44 |
-| `REPOSITORY-TRUTH-UPDATE` | 39 |
+| `REPOSITORY-MAPPING` | 45 |
+| `REPOSITORY-TRUTH-UPDATE` | 43 |
 | `VALIDATION` | 0 |
-| **total** | **108** |
+| **total** | **113** |
 
 **`DV-36`** — Decision disposition occupancy across the closed disposition set.
 
 - **Primitive** — `dict_list_lengths`
-- **Result** — 5 key(s) · 108 member(s)
+- **Result** — 5 key(s) · 113 member(s)
 - **Substrate evidence** — `S-10`
 
 | Key | Value |
 |---|---|
-| `IMPLEMENTED` | 33 |
+| `IMPLEMENTED` | 37 |
 | `REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE` | 18 |
 | `REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION` | 11 |
-| `REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY` | 42 |
+| `REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY` | 43 |
 | `SUPERSEDED` | 4 |
-| **total** | **108** |
+| **total** | **113** |
 
 **`DV-37`** — Registered constitutional decisions.
 
 - **Primitive** — `record_count`
-- **Result** — 108 records
+- **Result** — 113 records
 - **Substrate evidence** — `S-09`
 
 | Key | Value |
 |---|---|
-| records | 108 |
+| records | 113 |
 
 **`DV-38`** — Work packages registered by decision disposition.
 

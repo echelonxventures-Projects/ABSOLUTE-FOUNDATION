@@ -1524,18 +1524,18 @@
       "unknown": false
     },
     {
-      "count": 47,
+      "count": 48,
       "evidence": [
         "S-07"
       ],
-      "headline": "47 records",
+      "headline": "48 records",
       "id": "DV-27",
       "primitive": "record_count",
       "purpose": "Located executable checks bound by the aggregate gate.",
       "rows": [
         [
           "records",
-          "47"
+          "48"
         ]
       ],
       "unknown": false
@@ -1592,18 +1592,18 @@
       "unknown": false
     },
     {
-      "count": 5,
+      "count": 6,
       "evidence": [
         "S-07"
       ],
-      "headline": "5 records",
+      "headline": "6 records",
       "id": "DV-31",
       "primitive": "record_count",
       "purpose": "Open work packages registered by the aggregate gate.",
       "rows": [
         [
           "records",
-          "5"
+          "6"
         ]
       ],
       "unknown": false
@@ -1668,11 +1668,11 @@
       "unknown": false
     },
     {
-      "count": 108,
+      "count": 113,
       "evidence": [
         "S-10"
       ],
-      "headline": "9 key(s) · 108 member(s)",
+      "headline": "9 key(s) · 113 member(s)",
       "id": "DV-35",
       "primitive": "dict_list_lengths",
       "purpose": "Decision lifecycle occupancy by stage.",
@@ -1703,11 +1703,11 @@
         ],
         [
           "`REPOSITORY-MAPPING`",
-          "44"
+          "45"
         ],
         [
           "`REPOSITORY-TRUTH-UPDATE`",
-          "39"
+          "43"
         ],
         [
           "`VALIDATION`",
@@ -1715,24 +1715,24 @@
         ],
         [
           "**total**",
-          "**108**"
+          "**113**"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 108,
+      "count": 113,
       "evidence": [
         "S-10"
       ],
-      "headline": "5 key(s) · 108 member(s)",
+      "headline": "5 key(s) · 113 member(s)",
       "id": "DV-36",
       "primitive": "dict_list_lengths",
       "purpose": "Decision disposition occupancy across the closed disposition set.",
       "rows": [
         [
           "`IMPLEMENTED`",
-          "33"
+          "37"
         ],
         [
           "`REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE`",
@@ -1744,7 +1744,7 @@
         ],
         [
           "`REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY`",
-          "42"
+          "43"
         ],
         [
           "`SUPERSEDED`",
@@ -1752,24 +1752,24 @@
         ],
         [
           "**total**",
-          "**108**"
+          "**113**"
         ]
       ],
       "unknown": false
     },
     {
-      "count": 108,
+      "count": 113,
       "evidence": [
         "S-09"
       ],
-      "headline": "108 records",
+      "headline": "113 records",
       "id": "DV-37",
       "primitive": "record_count",
       "purpose": "Registered constitutional decisions.",
       "rows": [
         [
           "records",
-          "108"
+          "113"
         ]
       ],
       "unknown": false
@@ -2356,8 +2356,8 @@
           "YES",
           "YES",
           "5/5",
-          "107",
-          "`c6fe3d18ffc4`"
+          "110",
+          "`00a5bf1dcecc`"
         ],
         [
           "`S-08`",
@@ -2367,7 +2367,7 @@
           "YES",
           "6/6",
           "137",
-          "`8e9095513963`"
+          "`b751b95e006d`"
         ],
         [
           "`S-09`",
@@ -2376,8 +2376,8 @@
           "YES",
           "YES",
           "4/4",
-          "140",
-          "`3a0ac522c6e0`"
+          "145",
+          "`8a52e38d68e3`"
         ],
         [
           "`S-10`",
@@ -2386,8 +2386,8 @@
           "YES",
           "YES",
           "6/6",
-          "535",
-          "`6e5206a51222`"
+          "565",
+          "`336d50c9f430`"
         ],
         [
           "`S-11`",
@@ -3492,7 +3492,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "c6fe3d18ffc49894123e23d2aff1cd695db659d844cef10855e6b8d5a5585a15",
+      "content_sha256": "00a5bf1dcecccc57aa6c286fda2972fc18d36054f8788dbf4e76828de4936d5e",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",
@@ -3514,12 +3514,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The aggregate constitutional gate: located checks, gates, programme roster, findings.",
-      "records": 107,
+      "records": 110,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "8e9095513963bd7a0a63ad09354c3452e37c619af8f2487beaa342fb54acc952",
+      "content_sha256": "b751b95e006d32e311627f866ea3c435739fc9b84395c230ed8154ede5642116",
       "exists": true,
       "id": "S-08",
       "kind": "aggregate gate determination",
@@ -3548,7 +3548,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "3a0ac522c6e0c8e9524ef7c58ede162b2f32140b3bf52abb1d27e5bb191de744",
+      "content_sha256": "8a52e38d68e3dd992c11fffaa8ea5cfbf9120cf9c2bdb8e7ef89f9b6c4a453f0",
       "exists": true,
       "id": "S-09",
       "kind": "decision register declaration",
@@ -3568,12 +3568,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The constitutional decision register: lifecycle, closed disposition set, decisions.",
-      "records": 140,
+      "records": 145,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "6e5206a51222933722957edba24e828c2830aa4457f41da411d8c9e14473c9ac",
+      "content_sha256": "336d50c9f43091e8089c1886fda2fe0eb2ad0bb339c32b028b7103a487dc9c82",
       "exists": true,
       "id": "S-10",
       "kind": "decision determination",
@@ -3597,7 +3597,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Computed decision lifecycle and disposition occupancy.",
-      "records": 535,
+      "records": 565,
       "required": true,
       "tracked": true
     },
