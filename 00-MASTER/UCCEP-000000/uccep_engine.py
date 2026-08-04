@@ -5,14 +5,29 @@ AUTHORITY = NONE (DERIVED TRUTH). This engine legislates nothing, registers noth
 and owns nothing. It is the *aggregation* of gates that already exist and are already
 owned, plus the deterministic emission of the programme determinations the mission names.
 
-    python3 00-MASTER/UCCEP-000000/uccep_engine.py                 # boot + standard tiers, emit
-    python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier boot     # fast read-only pass
+    python3 00-MASTER/UCCEP-000000/uccep_engine.py                 # observe at the standard tier
+    python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier boot     # read-only pass
     python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier full     # every located gate
     python3 00-MASTER/UCCEP-000000/uccep_engine.py --gate          # fail-closed on failure
     python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-declaration
     python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-no-enumeration
     python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-write-scope
     python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-determinism
+    python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-observation
+
+OBSERVATION IS NOT EMISSION. Every invocation observes and
+renders its verdict. An invocation WRITES only when emission is authorized, and emission
+is authorized only when the requested tier is at least as wide as the tier of the
+determination Repository Truth already records. A narrower run therefore prints its
+verdict and leaves the tracked tree byte-identical — which is what makes the read-only
+claim for `--tier boot` above true rather than aspirational. The located authority is
+the Universal Observation Law (UEI-CAP-01: "observation is read-only over its subject
+and mutates nothing it observes"), declared in the bindings as
+`programme.observation_law_owner`.
+
+Narrowing the recorded determination is an explicit constituent act, never a side
+effect: `--authorize-emission` is the only path by which a run below the recorded tier
+may write, and it announces itself in the run's own output.
 
 Exit semantics of --gate:
     0  every EXECUTED blocking check passed
@@ -335,6 +350,9 @@ def check_declaration(decl: dict) -> list[str]:
     # abstract, vendor, or otherwise unlocated owner
     references: list[tuple[str, str]] = [("programme.charter", decl["programme"]["charter"])]
     references += [("programme.governed_by", ref) for ref in decl["programme"]["governed_by"]]
+    law = decl["programme"].get("observation_law_owner")
+    if law:
+        references.append(("programme.observation_law_owner", law))
     for section in ("principles", "invariants", "checks", "gates"):
         references += [
             (entry["id"], entry["owner"]) for entry in decl.get(section, []) if entry.get("owner")
@@ -395,6 +413,175 @@ def check_write_scope(decl: dict, written: list[Path] | None = None) -> list[str
             resolved.relative_to(HERE)
         except ValueError:
             findings.append(f"write outside the programme's operational memory: {resolved}")
+    return findings
+
+
+# ------------------------------------------------------- observation versus emission
+
+
+class EmissionWithheld(RuntimeError):
+    """Emission was attempted without an authorizing determination.
+
+    Raised by ``emit`` itself rather than checked by its callers, so that a future
+    caller which forgets the authorization branch still cannot write. This is the
+    structural form of the Universal Observation Law: emission is not reachable from
+    an observing act, by construction and not by convention.
+    """
+
+
+def recorded_determination_tier(decl: dict) -> tuple[str | None, str]:
+    """The tier of the determination the repository ALREADY records, and its source.
+
+    Consulted for exactly one purpose: as a PRECONDITION ON WRITING. It never enters
+    the model, the verdict, the certification or the seal, so no determination is ever
+    a function of a previous determination and Knowledge Once is not weakened — a
+    derived artifact is not being read back as a source of truth, it is being protected
+    from being overwritten by a narrower observation.
+
+    Both the committed record and the working-tree record are consulted and the WIDER
+    of the two governs. The committed record is Repository Truth; the working-tree
+    record may be a wider determination that has not yet been committed, and losing it
+    to a narrower run would destroy evidence just as surely.
+    """
+    record_name = decl["programme"].get("determination_record")
+    if not record_name:
+        return None, "no determination record is declared"
+    home = decl["programme"]["operational_home"].rstrip("/")
+
+    candidates: list[tuple[str, str]] = []
+    committed = git("show", f"HEAD:{home}/{record_name}")
+    if committed:
+        candidates.append((committed, "the committed determination"))
+    on_disk = HERE / record_name
+    if on_disk.is_file():
+        candidates.append((on_disk.read_text("utf-8"), "the working-tree determination"))
+
+    widest: str | None = None
+    source = "no determination is recorded"
+    for text, origin in candidates:
+        try:
+            payload = json.loads(text)
+        except json.JSONDecodeError:
+            continue
+        tier = payload.get("tier") if isinstance(payload, dict) else None
+        if tier not in TIER_ORDER:
+            continue
+        if widest is None or TIER_ORDER[tier] > TIER_ORDER[widest]:
+            widest, source = tier, origin
+    return widest, source
+
+
+def emission_authorized(recorded: str | None, requested: str) -> bool:
+    """Tier monotonicity: an emitting run may never narrow what is already recorded.
+
+    With nothing recorded there is nothing to narrow, so emission is authorized. This
+    is a total function of two declared tier names and of nothing else, which is what
+    makes ``check_observation``'s exhaustive probe of it a proof rather than a sample.
+    """
+    if recorded is None:
+        return True
+    return TIER_ORDER[requested] >= TIER_ORDER[recorded]
+
+
+def emission_authority(decl: dict, requested: str, override: bool = False) -> dict:
+    recorded, source = recorded_determination_tier(decl)
+    authorized = emission_authorized(recorded, requested)
+    if authorized:
+        reason = (
+            f"tier {requested} is at least as wide as {recorded} ({source})"
+            if recorded is not None
+            else f"{source} — nothing may be narrowed"
+        )
+    else:
+        reason = (
+            f"tier {requested} is narrower than the recorded tier {recorded} "
+            f"({source}); observation may not replace a wider determination"
+        )
+    if not authorized and override:
+        return {
+            "authorized": True,
+            "overridden": True,
+            "recorded_tier": recorded,
+            "requested_tier": requested,
+            "reason": f"EXPLICITLY AUTHORIZED constituent act — {reason}",
+        }
+    return {
+        "authorized": authorized,
+        "overridden": False,
+        "recorded_tier": recorded,
+        "requested_tier": requested,
+        "reason": reason,
+    }
+
+
+def check_observation(decl: dict) -> list[str]:
+    """Prove that no observing act can rewrite Repository Truth.
+
+    Four mechanical properties, none of which is a tautology:
+
+      1. the located Universal Observation Law owner is declared and RESOLVES;
+      2. a determination record is declared, so narrowing is detectable at all;
+      3. the emission authority is tier-monotonic over EVERY ordered pair of declared
+         tiers — exhaustive, and reachable in both directions (some pair is authorized
+         and some pair is withheld), because a guard whose verdict cannot be reached in
+         both directions carries no evidentiary value;
+      4. ``emit`` itself refuses an unauthorized authority, so emission is unreachable
+         from an observing act structurally rather than by the caller's discipline.
+    """
+    findings: list[str] = []
+    programme = decl["programme"]
+
+    owner = programme.get("observation_law_owner")
+    if not owner:
+        findings.append(
+            "no located observation-law owner is declared — the read-only obligation "
+            "would rest on this engine's own assertion"
+        )
+    elif resolve_reference(owner) is None:
+        findings.append(f"declared observation-law owner does not resolve: {owner!r}")
+
+    if not programme.get("determination_record"):
+        findings.append(
+            "no determination record is declared — a narrowing emission could not be detected"
+        )
+
+    authorized = withheld = 0
+    for recorded in TIERS:
+        for requested in TIERS:
+            expected = TIER_ORDER[requested] >= TIER_ORDER[recorded]
+            observed = emission_authorized(recorded, requested)
+            if observed != expected:
+                findings.append(
+                    f"emission authority is not tier-monotonic: recorded={recorded} "
+                    f"requested={requested} expected={expected} observed={observed}"
+                )
+            if observed:
+                authorized += 1
+            else:
+                withheld += 1
+    if not withheld:
+        findings.append(
+            "no requested tier is ever withheld — the guard's negative direction is "
+            "unreachable and the guard would carry no evidentiary value"
+        )
+    if not authorized:
+        findings.append("no requested tier is ever authorized — emission would be unreachable")
+
+    try:
+        emit(decl, {}, {"authorized": False, "reason": "self-guard probe"})
+    except EmissionWithheld:
+        pass
+    except Exception as exc:  # noqa: BLE001 — any other outcome means emit() did not refuse
+        findings.append(
+            "emit() did not refuse an unauthorized authority; it proceeded and failed "
+            f"with {exc!r} — observation is not separated from emission"
+        )
+    else:
+        findings.append(
+            "emit() proceeded without an authorizing determination — observation is "
+            "not separated from emission"
+        )
+
     return findings
 
 
@@ -577,6 +764,7 @@ SELF_CHECKS = {
     "--check-no-enumeration": check_no_enumeration,
     "--check-write-scope": lambda decl: check_write_scope(decl),
     "--check-determinism": self_determinism,
+    "--check-observation": check_observation,
 }
 
 
@@ -1001,14 +1189,21 @@ def render(decl: dict, model: dict) -> dict[str, str]:
     return out
 
 
-def emit(decl: dict, model: dict) -> list[Path]:
+def emit(decl: dict, model: dict, authority: dict) -> list[Path]:
+    """Write the sealed output set. THE ONLY WRITING PATH IN THIS ENGINE.
+
+    The authorization test is the first statement, before any rendering and before any
+    byte reaches the filesystem, so an unauthorized call is not a partial write.
+    """
+    if not authority.get("authorized"):
+        raise EmissionWithheld(authority.get("reason") or "no authorizing determination")
     rendered = render(decl, model)
     written: list[Path] = []
     for name, body in sorted(rendered.items()):
         target = HERE / name
         target.write_text(body, "utf-8")
         written.append(target)
-    machine = HERE / "uccep.json"
+    machine = HERE / decl["programme"]["determination_record"]
     machine.write_text(canonical_json(model), "utf-8")
     written.append(machine)
     return written
@@ -1024,6 +1219,14 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--tier", choices=TIERS, default="standard")
     parser.add_argument("--gate", action="store_true", help="fail-closed: exit non-zero on failure")
+    parser.add_argument(
+        "--authorize-emission",
+        action="store_true",
+        help=(
+            "explicit constituent act: permit this run to write even though it would "
+            "narrow the recorded determination"
+        ),
+    )
     parser.add_argument("--quiet", action="store_true")
     for flag in sorted(SELF_CHECKS):
         parser.add_argument(flag, action="store_true", dest=flag.lstrip("-").replace("-", "_"))
@@ -1052,7 +1255,16 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     model = build_model(decl, args.tier)
-    written = emit(decl, model)
+
+    # OBSERVATION IS COMPLETE AT THIS POINT. Everything below decides whether this
+    # observation is also permitted to become an emission.
+    authority = emission_authority(decl, args.tier, args.authorize_emission)
+    written: list[Path] = []
+    if authority["authorized"]:
+        try:
+            written = emit(decl, model, authority)
+        except EmissionWithheld as exc:  # pragma: no cover — structurally unreachable
+            fail_closed(f"emission attempted without authority: {exc}")
 
     scope = check_write_scope(decl, written)
     if scope:
@@ -1071,7 +1283,12 @@ def main(argv: list[str] | None = None) -> int:
             f"blocking={gate_failures} | unproven={','.join(model['unproven']) or 'none'} | "
             f"seal={model['seal_sha256'][:16]}"
         )
-        print(f"wrote {len(written)} artifacts to {HERE}")
+        if authority["overridden"]:
+            print(f"EMISSION OVERRIDDEN — {authority['reason']}")
+        if written:
+            print(f"wrote {len(written)} artifacts to {HERE}")
+        else:
+            print(f"OBSERVATION ONLY — emission withheld: {authority['reason']}")
 
     if args.gate and model["gate_blocking"]:
         if model["blocking_failures"]:

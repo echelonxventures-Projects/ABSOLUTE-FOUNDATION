@@ -59,6 +59,10 @@ jobs:
       - name: Self-determinism (byte-identical rendering across runs)
         run: python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-determinism
 
+      # Observation is not emission: no observing act may narrow a recorded determination.
+      - name: Observation/emission separation (an observing run may never rewrite Repository Truth)
+        run: python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-observation
+
   aggregate-gate:
     name: Aggregate constitutional gate (standard tier)
     runs-on: ubuntu-latest
@@ -111,9 +115,18 @@ jobs:
       # determinism.yml, ucos-registration-gate.yml), so running them again here would
       # duplicate work without adding evidence. `make uccep-full` is the local path to
       # an unqualified determination.
+      #
+      # OBSERVATION IS NOT EMISSION: this step is read-only over the tracked tree
+      # whenever the recorded determination is wider than the standard tier, which is
+      # what it means for CI to observe Repository Truth rather than rewrite it. Before
+      # that separation existed, this job's standard-tier run replaced the committed
+      # full-tier determination in its own checkout and published the narrower reading as
+      # the workflow artifact.
       - name: Aggregate constitutional gate (fail-closed)
         run: python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier standard --gate
 
+      # The determinations published here are the ones Repository Truth records, not a
+      # narrower re-derivation produced by this job.
       - name: Publish the constitutional determinations
         if: always()
         uses: actions/upload-artifact@v4

@@ -27,7 +27,7 @@
       "kind": "governance-check",
       "name": "Constitutional check adapter",
       "note": "Supplies the validation and verification graphs.",
-      "objects": 47,
+      "objects": 48,
       "pointer": "checks",
       "provider": "PRV-UCCEP",
       "providers_matched": 1,
@@ -599,7 +599,7 @@
     "cko_identity_collisions": 0,
     "cko_kind_registry_closed": 0,
     "cko_reference_ambiguities": 0,
-    "ckos_discovered": 3078,
+    "ckos_discovered": 3082,
     "ckos_of_unknown_kind": 0,
     "ckos_without_provenance": 0,
     "ckos_without_semantic_identity": 0,
@@ -629,9 +629,9 @@
     "record_write_intersections": 0,
     "reentry_declarations_absent": 0,
     "registry_artifacts_discovered": 1194,
-    "relations_discovered": 352,
+    "relations_discovered": 355,
     "relations_of_unknown_type": 0,
-    "relationship_ckos_discovered": 352,
+    "relationship_ckos_discovered": 355,
     "relationships_without_target_identity": 98,
     "runs_nondeterministic": 0,
     "self_evolution_steps_unbound": 0,
@@ -686,7 +686,7 @@
       "measure": "relationship_ckos_discovered",
       "measured": true,
       "statement": "governed relationships now first-class and composable into graphs without new machinery",
-      "value": 352
+      "value": 355
     },
     {
       "evidenced": true,
@@ -1087,7 +1087,7 @@
       "registration_owner": "knowledge/canonical-knowledge.json",
       "registration_owner_located": true,
       "reusable_as": "the relationship substrate a future graph type composes over without new machinery",
-      "value": 352
+      "value": 355
     },
     {
       "id": "EK-06",
@@ -1147,7 +1147,7 @@
     }
   ],
   "gate": "OPEN",
-  "graph_digest": "46fadcc129c301f0a9f917e7e928762f5eccee5784049cde783715e12e634cca",
+  "graph_digest": "af1a546da89d836d80590862fab1924508c5c5bae8606e1c8fd20056d10f5114",
   "graphs": [
     {
       "edge_relations": [
@@ -1228,7 +1228,7 @@
       "edge_relations": [
         "validated-by"
       ],
-      "edges": 57,
+      "edges": 58,
       "graph": "validation graph",
       "id": "GT-VALIDATION",
       "kinds_known": true,
@@ -1236,7 +1236,7 @@
         "governance-gate",
         "governance-check"
       ],
-      "nodes": 73,
+      "nodes": 74,
       "relations_known": true
     },
     {
@@ -1248,14 +1248,14 @@
       "node_kinds": [
         "governance-check"
       ],
-      "nodes": 47,
+      "nodes": 48,
       "relations_known": true
     },
     {
       "edge_relations": [
         "validated-by"
       ],
-      "edges": 57,
+      "edges": 58,
       "graph": "certification graph",
       "id": "GT-CERTIFICATION",
       "kinds_known": true,
@@ -1325,7 +1325,7 @@
       "node_kinds": [
         "constitutional-relationship"
       ],
-      "nodes": 352,
+      "nodes": 355,
       "relations_known": true
     }
   ],
@@ -2004,7 +2004,7 @@
       "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "owner_located": true,
       "ready": true,
-      "value": 352
+      "value": 355
     }
   ],
   "records": [
@@ -2556,6 +2556,28 @@
       "record_id": "validated-by|6d18fb1b730f82f6a5a829455a9c7c0b4d0becabb797ab52022693ae8f596eed|842cdfb02f24973a0a47db3a2b68c83d7d54f31ce97e27f64352e44f3a398b0f",
       "relations": [],
       "semantic_id": "248d4a9316efdfc31255c625281b7339cf0d75ee5e6c6749a25ab172e28c2a54",
+      "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "validated-by",
+        "source": "SRC-GOVERNANCE-GATES::G-06",
+        "target": "CK-SELF-OBSERVATION",
+        "target_class": "cko"
+      },
+      "cko_id": "constitutional-relationship::035ae47f5c2ed146e85cbd91b474d480",
+      "kind": "constitutional-relationship",
+      "name": "validated-by",
+      "provenance": {
+        "adapter": "SRC-GOVERNANCE-GATES",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-UCCEP",
+        "provider_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "validated-by|6d18fb1b730f82f6a5a829455a9c7c0b4d0becabb797ab52022693ae8f596eed|b5e419e5e56a292ca6ef0afe3667c7608bf080cb8096deadb4acdc9c709edff5",
+      "relations": [],
+      "semantic_id": "0339b76ce466e30423d68483ab6f51d58e54bf78de77fe190a0c6f3a036ac9e5",
       "target_identified": true
     },
     {
@@ -3700,6 +3722,28 @@
       "record_id": "validated-by|901ca1c52edecaa4fac900c23d9f54285673015aab59feee6af2b0dceea20db1|842cdfb02f24973a0a47db3a2b68c83d7d54f31ce97e27f64352e44f3a398b0f",
       "relations": [],
       "semantic_id": "851b330826213cc6f7510e7fff96f618ceeb8faff1d8ed5d9a7b9284a4a15515",
+      "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "validated-by",
+        "source": "SRC-GOVERNANCE-PROGRAMMES::PROGRAM-000002",
+        "target": "CK-SELF-OBSERVATION",
+        "target_class": "cko"
+      },
+      "cko_id": "constitutional-relationship::6e88758484398e8368f1eb7243db7417",
+      "kind": "constitutional-relationship",
+      "name": "validated-by",
+      "provenance": {
+        "adapter": "SRC-GOVERNANCE-PROGRAMMES",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-UCCEP",
+        "provider_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "validated-by|901ca1c52edecaa4fac900c23d9f54285673015aab59feee6af2b0dceea20db1|b5e419e5e56a292ca6ef0afe3667c7608bf080cb8096deadb4acdc9c709edff5",
+      "relations": [],
+      "semantic_id": "89235aba79ad28db2c515676a47930e6378f4a1f3d51a0b74fe2a9b1fab0974c",
       "target_identified": true
     },
     {
@@ -5504,6 +5548,28 @@
       "record_id": "validated-by|2d772d8b5ede44d27d3c58223472b641d08d5c106a298d4f434d0d43fba3ff85|842cdfb02f24973a0a47db3a2b68c83d7d54f31ce97e27f64352e44f3a398b0f",
       "relations": [],
       "semantic_id": "dc242676d6790664ee0e0cea29f7d9b81e8ec115b959ce8898383172c25aa12f",
+      "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "validated-by",
+        "source": "SRC-GOVERNANCE-PROGRAMMES::PROGRAM-000015",
+        "target": "CK-SELF-OBSERVATION",
+        "target_class": "cko"
+      },
+      "cko_id": "constitutional-relationship::5e1537efdfa3f4463228ac6d58ba3e38",
+      "kind": "constitutional-relationship",
+      "name": "validated-by",
+      "provenance": {
+        "adapter": "SRC-GOVERNANCE-PROGRAMMES",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-UCCEP",
+        "provider_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "validated-by|2d772d8b5ede44d27d3c58223472b641d08d5c106a298d4f434d0d43fba3ff85|b5e419e5e56a292ca6ef0afe3667c7608bf080cb8096deadb4acdc9c709edff5",
+      "relations": [],
+      "semantic_id": "aee383c2a25ba8cde375143bd77982c9c520cb311e27a064a7621c2ddbf00a78",
       "target_identified": true
     },
     {
@@ -9825,7 +9891,7 @@
       "goal": "Execute the Universal Constitutional Lifecycle over the Universal Constitutional Lifecycle itself.",
       "id": "GOAL-SELF",
       "note": "Self-application. The lifecycle is the first capability the lifecycle governs, which is what makes it a substrate rather than a description.",
-      "run_id": "4868da5702f6c237ed5a8cbc6e58d32c0a4ecf94bcb8be2ffa44fa513d563b28",
+      "run_id": "c0d64ba3a516bcbf26cd197f7f28fc23354ceebe29f124cee4c5d8cddef7c059",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -10331,7 +10397,7 @@
       "goal": "Engineer the Universal Constitutional Engineering Substrate required for the Autonomous Constitutional Engineering Engine.",
       "id": "GOAL-SUBSTRATE",
       "note": "The Ω-E04→Ω-E05 handover goal.",
-      "run_id": "b1800891baae10608e867b89458e5f4b9e529c6af80f080a721d1940fa8e026f",
+      "run_id": "6973b79f95406bcef8d18c4077688007f03c7631856eddf9f97f25c7ee667f1d",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -10837,7 +10903,7 @@
       "goal": "Engineer an arbitrary future canonical capability that Repository Truth does not yet record.",
       "id": "GOAL-ARBITRARY-CAPABILITY",
       "note": "Proves universal applicability WITHOUT naming a capability: the traversal is identical for every goal, so no capability needs its own methodology and no capability list exists to be incomplete.",
-      "run_id": "dc0cdbb81c33381d8d6a336968ceab29b0331d4f0d9826fb6c4650e142868bf6",
+      "run_id": "fb99eb614db455446a51fc27b392799a7525827ef0b133df5478dc7547ae3096",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -11339,7 +11405,7 @@
       ]
     }
   ],
-  "seal_sha256": "50cebedcb855e9e49cbafe596dde87f39c45623c3d7f5490368cce9102a6fce0",
+  "seal_sha256": "1199d499249309f0eb9dd8b328f5e32baa59c1553600628bab39327bb465ecd8",
   "self_evolution": [
     {
       "anchor": "",
@@ -15303,7 +15369,7 @@
       "id": "UCL-V-35",
       "measure": "relationship_ckos_discovered",
       "satisfied": true,
-      "value": 352
+      "value": 355
     },
     {
       "blocking": true,

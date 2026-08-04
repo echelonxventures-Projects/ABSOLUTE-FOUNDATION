@@ -48,6 +48,8 @@
     "evolution_owner": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
     "registration_owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
     "operational_memory_owner": "00-MASTER/MCS-000-MASTER-CONTEXT-SYSTEM-ARCHITECTURE.md",
+    "observation_law_owner": "00-MASTER/UEI-000001/02-UNIVERSAL-OBSERVATION-SPECIFICATION.md (UEI-CAP-01: observation is read-only over its subject and mutates nothing it observes)",
+    "determination_record": "uccep.json",
     "forbidden_write_prefixes": [
       "00-SOURCE/",
       "99-FREEZE/",
@@ -69,7 +71,8 @@
       "owner": "00-CEP/CEP-001",
       "enforced_by": [
         "CK-REG-ENFORCE",
-        "CK-REG-VALIDATE"
+        "CK-REG-VALIDATE",
+        "CK-SELF-OBSERVATION"
       ]
     },
     {
@@ -753,6 +756,23 @@
       }
     },
     {
+      "id": "CK-SELF-OBSERVATION",
+      "name": "Observation/emission separation (no observing act may narrow a recorded determination)",
+      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "argv": [
+        "$SELF",
+        "--check-observation"
+      ],
+      "write_scope": "read-only",
+      "tier": "boot",
+      "fail_closed": true,
+      "advisory": false,
+      "exit_semantics": {
+        "0": "the located observation-law owner resolves, the emission authority is tier-monotonic over every ordered pair of declared tiers and reachable in both directions, and emit() refuses an unauthorized authority",
+        "1": "an observing act could rewrite Repository Truth"
+      }
+    },
+    {
       "id": "CK-MCOS-DECLARATION",
       "name": "MCOS-000001 declaration integrity (substrate, gates, proof categories, generated operating systems and generation strata all resolve)",
       "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
@@ -1407,7 +1427,8 @@
       "checks": [
         "CK-REG-ENFORCE",
         "CK-REG-VALIDATE",
-        "CK-SELF-WRITE-SCOPE"
+        "CK-SELF-WRITE-SCOPE",
+        "CK-SELF-OBSERVATION"
       ]
     },
     {
@@ -1623,7 +1644,8 @@
       "checks": [
         "CK-REG-ENFORCE",
         "CK-REG-VALIDATE",
-        "CK-SELF-WRITE-SCOPE"
+        "CK-SELF-WRITE-SCOPE",
+        "CK-SELF-OBSERVATION"
       ]
     },
     {
@@ -1822,7 +1844,8 @@
         "CK-DISCOVERY",
         "CK-SELF-DECLARATION",
         "CK-SELF-NO-ENUMERATION",
-        "CK-SELF-WRITE-SCOPE"
+        "CK-SELF-WRITE-SCOPE",
+        "CK-SELF-OBSERVATION"
       ]
     },
     {
@@ -2052,6 +2075,21 @@
       "work_package": null,
       "blocking": false,
       "note": "Discharged by amending the located governance constitution rather than by creating a new instrument: CEP-002 Article 28 legislates the assimilation prohibition, the nine-stage lifecycle, the closed five-member disposition set and the Implementation Evidence Gate; UCDA-000001 carries the machine-readable disposition overlay over the located registers; and the gate is bound here as G-14 / CK-DECISION-EVIDENCE so it executes in the session hook, the Makefile and CI. The gate's verdict is reachable in both directions, so it is evidence rather than a constant. The 108 conversation-only CONCEPTS remain the closure programme's own finding (CF-01, owner UAKOS-CLOSURE-003/006); what is discharged here is the absence of a constitutional obligation and gate over agreed DECISIONS."
+    },
+    {
+      "id": "UCCEP-F-009",
+      "title": "Observation mutates Repository Truth: a lower-tier --gate run silently overwrites a higher-tier determination",
+      "class": "OBSERVATION-MUTATES-TRUTH",
+      "evidence": "uccep_engine.py documents `--tier boot` as a \"fast read-only pass\" (module docstring line 9), but the tier flag does not gate emission: main() reaches build_model(decl, args.tier) then emit(decl, model) for every tier, and emit writes the full sealed output set into the programme home. Measured live over the committed tree at 43dec4a: `--tier boot --gate` exited 0, reported `tier=boot | gates=10/27 PASS | programmes=8/21 PASS`, wrote 25 artifacts and regenerated 70 files (+1110/-669). The committed full-tier determination was overwritten in place — TIER `full` became `boot`, seal 7da3fae9486a0f5364c5fe4e98bf346229dbd35256fde9db7a441331b555637b became c46fa8d561e4aad2106885d5f08900a2b1466bbecb98b92e4072327a35f472fb, PROGRAM-000001 PASS became NOT-EXECUTED, and PROGRAM-000004/000005/000008 PASS became PARTIAL. No verdict was recomputed as false; a narrower observation simply replaced a broader one. The tree was restored with `git checkout -- 00-MASTER/` and the seal verified back to 7da3fae9. The same downgrade is reachable from CI or an operator invoking any tier below the committed one, and the git-diff replay-drift check that guards every gate workflow would then either fail spuriously against a higher-tier commit or ratify the downgrade as the new baseline. The out_of_tier/in_scope disclosure machinery at run_check() and run_self_check() correctly marks excluded checks as a certification ceiling rather than a failure, so the defect is not in the verdict logic but in emission being unconditioned on tier.",
+      "violates": [
+        "PR-01 Repository Truth",
+        "PR-16 Deterministic Evolution",
+        "PR-18 Evidence-Based Decision Making"
+      ],
+      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "disposition": "IMPLEMENTED",
+      "blocking": false,
+      "note": "Assimilated from the Universal Observation Law, which provides that observation, measurement, analysis, validation, verification, certification, replay, simulation, determination and discovery SHALL NOT modify Repository Truth, and that Repository Truth may evolve only through constitutionally governed repository evolution. The general defect is that this engine conflates observation with emission in a single --gate act; tier non-monotonicity is the corollary by which the conflation becomes destructive. The remedy is already realized elsewhere in this same file and needs only to be generalized: the self-check path at main() returns its verdict before build_model and emit are reached, so `--check-*` is provably read-only today. That is the pattern to extend to the gate path. Recorded as GOVERNED rather than IMPLEMENTED because the remedy changes the write semantics that 25 gate workflows and the Makefile targets depend on, so it proceeds under WP-UCCEP-006 rather than as an incidental edit. Authority note: this finding records measured evidence and confers nothing; per the Universal Constitutional Authority Model, authority is facet AUTHORITY of the UCKP object model and arises only from Repository Truth, never from a finding, a representation, a realization or a projection. DISCHARGE (WP-UCCEP-006, directive Ω-E06-B): emission is now conditioned on an authorization derived from Repository Truth rather than unconditioned on tier. `emit()` is the engine's only writing path and raises `EmissionWithheld` as its first statement when handed an authority that does not permit writing, so emission is unreachable from an observing act structurally rather than by the caller's discipline. `emission_authority()` refuses any run whose requested tier is narrower than the widest determination already recorded — committed or in the working tree — so the measured downgrade (TIER full → boot, seal 7da3fae9 → c46fa8d5, PROGRAM-000001 PASS → NOT-EXECUTED) is no longer reachable. The recorded tier is consulted solely as a precondition on writing: it enters no model, no verdict, no certification and no seal, so Knowledge Once is not weakened and no determination becomes a function of a previous determination. Narrowing remains possible only as an explicit constituent act via `--authorize-emission`, which announces itself in the run's own output. `CK-SELF-OBSERVATION` binds the property as a fail-closed boot-tier self-guard under G-06 and PR-01: it proves the located observation-law owner resolves, probes emission authority over every ordered pair of declared tiers (9 pairs, 6 authorized, 3 withheld — so the verdict is reachable in both directions and is not vacuous), and probes that `emit()` refuses an unauthorized authority. No gate is weakened, no check is removed, no tier's verdict logic changes and the write scope is unchanged. This also root-causes batch B-01b, which could only disarm the SessionStart hook that carried the downgrade; the downgrade itself is now impossible from any caller, hook, workflow or tier."
     }
   ],
   "work_packages": [
@@ -2108,6 +2146,17 @@
       "owner": "repository operator · 00-MASTER/MCP-002-MASTER-STATE.md",
       "route": "Review the untracked 00-CMG/ zone and the 00-BOOK/tools/{config.py,ukb.py} RECONCILED_SETS change together with their regenerated projections, then commit source and projections atomically (REG-AUTO-001: source is never split from projections), and reconcile MCP-002 §01 to the new HEAD.",
       "acceptance": "register.sh --guard exits 0 with zero drift; git status reports no uncommitted registration.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCCEP-006",
+      "title": "Separate observation from emission so no observing act can rewrite Repository Truth",
+      "discharges": [
+        "UCCEP-F-009"
+      ],
+      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "route": "Generalize the read-only pattern this engine already realizes for --check-* (main() returns its verdict before build_model and emit are reached) to the gate path: make verdict rendering unconditional and emission an explicitly authorized act, then add a tier-monotonicity self-guard so an emitting run may never write a determination narrower than the one it would replace. Both changes stay within this engine's own declared write_scope; no gate is weakened, no check is removed and no tier's verdict logic changes. The 25 gate workflows and the Makefile targets that depend on current semantics are updated in the same change so emission remains reachable where intended. Route: CEP-009 Art III (change lifecycle) -> CEP-004 (validation) -> CEP-005 (certification).",
+      "acceptance": "A run at any tier below the committed one leaves the working tree byte-identical (git diff --exit-code clean) while still printing its verdict and still exiting non-zero under --gate on failure; an emitting run at or above the committed tier regenerates the sealed output set exactly as today; a new self-guard fails closed when emission would narrow a committed determination; and the module docstring's read-only claim for --tier boot becomes true rather than aspirational.",
       "authorization_required": true
     }
   ]

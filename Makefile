@@ -52,10 +52,10 @@ help:
 	@echo "  make build         build wheel + sdist via the canonical venv"
 	@echo "  make hooks         install the git pre-commit hook (local automation)"
 	@echo "  make cmg-gate      fail-closed meta-constitutional gate (CMG-000001)"
-	@echo "  make uccep         regenerate the UCCEP-000000 constitutional determinations"
+	@echo "  make uccep         observe the UCCEP-000000 constitutional determinations (emits only at or above the recorded tier)"
 	@echo "  make uccep-gate    fail-closed AGGREGATE constitutional gate (all located gates)"
-	@echo "  make uccep-boot    fast read-only aggregate gate (session/pre-commit tier)"
-	@echo "  make uccep-full    aggregate gate including the heavy tier (suites + determinism)"
+	@echo "  make uccep-boot    read-only aggregate gate (session/pre-commit tier)"
+	@echo "  make uccep-full    aggregate gate including the heavy tier (suites + determinism); the emitting path"
 	@echo "  make uccep-self    UCCEP guards over its own surface"
 	@echo "  make aee           run the autonomous evolution loop to convergence"
 	@echo "  make aee-observe   fast read-only pass; no located owner is invoked"
@@ -324,6 +324,16 @@ cmg-gate:
 # Adding a programme, gate, check, invariant or finding is an entry in
 # 00-MASTER/UCCEP-000000/uccep-bindings.json and requires NO change to any engine.
 #
+# OBSERVATION IS NOT EMISSION. Every target below observes and reports its verdict.
+# A target WRITES only when the tier it requests is at least as wide as the tier of the
+# determination Repository Truth already records, so a narrower run leaves the tracked
+# tree byte-identical instead of replacing a wider determination with a narrower one.
+# `uccep-full` is therefore the emitting path whenever the recorded determination is at
+# the full tier, and `uccep` / `uccep-boot` are observation. Narrowing the recorded
+# determination is an explicit constituent act (`--authorize-emission`), never a side
+# effect of running a gate. Enforced by `--check-observation` (CK-SELF-OBSERVATION,
+# blocking, boot tier).
+#
 # Exit 0 every executed blocking check passed · 1 a blocking check failed ·
 # 2 fail-closed abort (declaration unusable — no verdict may be asserted).
 .PHONY: uccep uccep-gate uccep-boot uccep-full uccep-self
@@ -340,12 +350,14 @@ uccep-full: bootstrap-quiet
 	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --tier full --gate
 
 # uccep-self: the programme's guards over its own surface — declaration integrity,
-# zero-enumeration / data-driven proof, forbidden-write scope, self-determinism.
+# zero-enumeration / data-driven proof, forbidden-write scope, self-determinism, and the
+# separation of observation from emission.
 uccep-self:
 	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-declaration
 	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-no-enumeration
 	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-write-scope
 	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-determinism
+	@python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-observation
 
 
 # ucda: UCDA-000001 — Constitutional Decision Assimilation.

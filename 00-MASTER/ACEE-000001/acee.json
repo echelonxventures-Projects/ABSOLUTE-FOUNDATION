@@ -49,7 +49,7 @@
       "kind": "quality-capability",
       "name": "Constitutional checks",
       "note": "supplies the validation and verification planes; a second adapter over one provider",
-      "objects": 47,
+      "objects": 48,
       "pointer": "checks",
       "provider": "PRV-GOVERNANCE",
       "providers_matched": 1,
@@ -709,7 +709,7 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "cko_identity_collisions": 0,
-    "ckos_discovered": 3201,
+    "ckos_discovered": 3202,
     "ckos_of_unknown_kind": 0,
     "ckos_without_semantic_identity": 0,
     "closed_enumerations_declared": 0,
@@ -759,8 +759,8 @@
     "reduction_owners_unresolved": 0,
     "reductions_unachieved": 0,
     "reentry_declarations_absent": 0,
-    "relations_discovered": 646,
-    "relationship_ckos_discovered": 646,
+    "relations_discovered": 650,
+    "relationship_ckos_discovered": 650,
     "relationships_without_target_identity": 268,
     "self_evolution_steps_owned_here": 0,
     "self_evolution_steps_unbound": 0,
@@ -1611,7 +1611,7 @@
       "measure": "ckos_discovered",
       "measured": true,
       "reusable_as": "a composable object graph any further measurement reads without re-parsing its owners",
-      "value": 3201
+      "value": 3202
     },
     {
       "id": "EK-05",
@@ -1619,7 +1619,7 @@
       "measure": "relationship_ckos_discovered",
       "measured": true,
       "reusable_as": "first-class relationship objects, so a relationship is governed rather than implied",
-      "value": 646
+      "value": 650
     },
     {
       "id": "EK-06",
@@ -5669,7 +5669,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "dd15d571c401e161be240ddb4093a3618c785543611932b78624af38e997ef6b",
+  "graph_digest": "b9c5b07e35b0cd1647498481a5fc6bce485030b2e788f0ecb60dab57aa0b62dd",
   "graphs": [
     {
       "composed": true,
@@ -5743,14 +5743,14 @@
       "edge_relations": [
         "certifies"
       ],
-      "edges": 57,
+      "edges": 58,
       "graph": "Gate to the checks that execute it",
       "id": "GT-CERTIFICATION",
       "node_kinds": [
         "governance-gate",
         "quality-capability"
       ],
-      "nodes": 73
+      "nodes": 74
     },
     {
       "composed": true,
@@ -5758,28 +5758,28 @@
         "certifies",
         "delegates"
       ],
-      "edges": 61,
+      "edges": 63,
       "graph": "Programme capability delegation",
       "id": "GT-CAPABILITY",
       "node_kinds": [
         "governance-programme",
         "quality-capability"
       ],
-      "nodes": 68
+      "nodes": 69
     },
     {
       "composed": true,
       "edge_relations": [
         "enforced-by"
       ],
-      "edges": 29,
+      "edges": 30,
       "graph": "Principle enforcement",
       "id": "GT-GOVERNANCE",
       "node_kinds": [
         "governance-principle",
         "quality-capability"
       ],
-      "nodes": 69
+      "nodes": 70
     },
     {
       "composed": true,
@@ -7693,7 +7693,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 352,
+        "measure_value": 355,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7701,7 +7701,7 @@
       "invariant": "Universal Engineering Capability Elevation",
       "measure": "counters.relationship_ckos_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 352,
+      "measure_value": 355,
       "ordinal": 390,
       "owner": "00-MASTER/UCL-000001/ucl-declaration.json",
       "properties": {
@@ -14805,6 +14805,28 @@
     {
       "attributes": {
         "relation": "certifies",
+        "source": "SRC-GOVERNANCE-GATE::G-06",
+        "target": "CK-SELF-OBSERVATION",
+        "target_class": "cko"
+      },
+      "cko_id": "engineering-relationship::b229c70098a78121da1236f17c7e9637",
+      "kind": "engineering-relationship",
+      "name": "certifies",
+      "provenance": {
+        "adapter": "SRC-GOVERNANCE-GATE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-GOVERNANCE",
+        "provider_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "certifies|6d18fb1b730f82f6a5a829455a9c7c0b4d0becabb797ab52022693ae8f596eed|c0c3768256cbaff25e0fcaf6a17a8442a4b356b7701e87e7cb34ed4b4ec2644d",
+      "relations": [],
+      "semantic_id": "08cd5dd9b96203200bf9103bf256eeaf22296b138e72a8488811835a428ac71b",
+      "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "certifies",
         "source": "SRC-GOVERNANCE-GATE::G-07",
         "target": "CK-REG-ENFORCE",
         "target_class": "cko"
@@ -16010,6 +16032,28 @@
       "record_id": "certifies|901ca1c52edecaa4fac900c23d9f54285673015aab59feee6af2b0dceea20db1|dd595f05edfef45efe1c6b4cc1bc77016ff24e71bbd404ae400fd08d128bf809",
       "relations": [],
       "semantic_id": "df393e11c4cb08fa5f8fd3299401b7c3455e0a6a39e8942374baf399167ce4e2",
+      "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "certifies",
+        "source": "SRC-GOVERNANCE-PROGRAMME::PROGRAM-000002",
+        "target": "CK-SELF-OBSERVATION",
+        "target_class": "cko"
+      },
+      "cko_id": "engineering-relationship::14fbf1b44b7255502887b65d97c7efc5",
+      "kind": "engineering-relationship",
+      "name": "certifies",
+      "provenance": {
+        "adapter": "SRC-GOVERNANCE-PROGRAMME",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-GOVERNANCE",
+        "provider_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "certifies|901ca1c52edecaa4fac900c23d9f54285673015aab59feee6af2b0dceea20db1|c0c3768256cbaff25e0fcaf6a17a8442a4b356b7701e87e7cb34ed4b4ec2644d",
+      "relations": [],
+      "semantic_id": "245d21217db5ec11a364b79bba6a47ae316c05aa9749e20f82f0d75bda3954a9",
       "target_identified": true
     },
     {
@@ -17818,6 +17862,28 @@
     },
     {
       "attributes": {
+        "relation": "certifies",
+        "source": "SRC-GOVERNANCE-PROGRAMME::PROGRAM-000015",
+        "target": "CK-SELF-OBSERVATION",
+        "target_class": "cko"
+      },
+      "cko_id": "engineering-relationship::fcd639bcc03cc85d1f903f19923d0448",
+      "kind": "engineering-relationship",
+      "name": "certifies",
+      "provenance": {
+        "adapter": "SRC-GOVERNANCE-PROGRAMME",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-GOVERNANCE",
+        "provider_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "certifies|2d772d8b5ede44d27d3c58223472b641d08d5c106a298d4f434d0d43fba3ff85|c0c3768256cbaff25e0fcaf6a17a8442a4b356b7701e87e7cb34ed4b4ec2644d",
+      "relations": [],
+      "semantic_id": "d6e6a445d5fd694dc2f1f91338fb29f11fa98d9d0994054c423cdaa9f8e58a57",
+      "target_identified": true
+    },
+    {
+      "attributes": {
         "relation": "delegates",
         "source": "SRC-GOVERNANCE-PROGRAMME::PROGRAM-000016",
         "target": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
@@ -18958,6 +19024,28 @@
       "record_id": "enforced-by|18cc6f7170198ec8593fa9d9d2a2f13d6e8d131376373c2be0a7322d1002e6ee|9876c294e47bfd5d6addfc4bf6b25d5fc843b43a3a2111ca96bb9151f601053a",
       "relations": [],
       "semantic_id": "3a51fc49035f932d04aa2409e0ae21e8354979eafb4e4f3d9be81f4f1ee83bbe",
+      "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "enforced-by",
+        "source": "SRC-GOVERNANCE-PRINCIPLE::PR-01",
+        "target": "CK-SELF-OBSERVATION",
+        "target_class": "cko"
+      },
+      "cko_id": "engineering-relationship::361adb5369004e62820a1aad6a62a962",
+      "kind": "engineering-relationship",
+      "name": "enforced-by",
+      "provenance": {
+        "adapter": "SRC-GOVERNANCE-PRINCIPLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-GOVERNANCE",
+        "provider_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "enforced-by|18cc6f7170198ec8593fa9d9d2a2f13d6e8d131376373c2be0a7322d1002e6ee|c0c3768256cbaff25e0fcaf6a17a8442a4b356b7701e87e7cb34ed4b4ec2644d",
+      "relations": [],
+      "semantic_id": "643605a7ff0bdf7f35783746320ad330fb46a68c7aaedae4da93f6db8829d7c6",
       "target_identified": true
     },
     {
@@ -23075,7 +23163,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "9a43d93e6800d330a6708374ed47bdc8a3da71538feff1a7398849bad7fbbd32",
+  "seal_sha256": "35bab8e8a387b9cfa22d33ab1b9664f15f5ed15edf6c5ed6af527eb55b755c4e",
   "self_evolution": [
     {
       "anchor": "determination",
@@ -24774,7 +24862,7 @@
       "id": "ACEE-V-54",
       "measure": "relationship_ckos_discovered",
       "satisfied": true,
-      "value": 646
+      "value": 650
     },
     {
       "blocking": true,

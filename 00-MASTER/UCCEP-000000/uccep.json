@@ -360,6 +360,21 @@
       "executed": true,
       "exit_code": 0,
       "governed_by_finding": null,
+      "id": "CK-SELF-OBSERVATION",
+      "in_scope": true,
+      "name": "Observation/emission separation (no observing act may narrow a recorded determination)",
+      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "reason": "",
+      "tier": "boot",
+      "verdict": "PASS",
+      "write_scope": "read-only"
+    },
+    {
+      "advisory": false,
+      "assertions": [],
+      "executed": true,
+      "exit_code": 0,
+      "governed_by_finding": null,
       "id": "CK-MCOS-DECLARATION",
       "in_scope": true,
       "name": "MCOS-000001 declaration integrity (substrate, gates, proof categories, generated operating systems and generation strata all resolve)",
@@ -878,12 +893,14 @@
       "checks": [
         "CK-REG-ENFORCE",
         "CK-REG-VALIDATE",
-        "CK-SELF-WRITE-SCOPE"
+        "CK-SELF-WRITE-SCOPE",
+        "CK-SELF-OBSERVATION"
       ],
       "executed": [
         "CK-REG-ENFORCE",
         "CK-REG-VALIDATE",
-        "CK-SELF-WRITE-SCOPE"
+        "CK-SELF-WRITE-SCOPE",
+        "CK-SELF-OBSERVATION"
       ],
       "failed": [],
       "id": "G-06",
@@ -1288,6 +1305,7 @@
   "programme": {
     "authority": "NONE — DERIVED TRUTH",
     "charter": "02-MASTER/UCCEP-000000-UNIVERSAL-CONTINUOUS-CONSTITUTIONAL-EVOLUTION-PROGRAMME-CHARTER.md",
+    "determination_record": "uccep.json",
     "evolution_owner": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
     "forbidden_write_prefixes": [
       "00-SOURCE/",
@@ -1318,6 +1336,7 @@
     ],
     "id": "UCCEP-000000",
     "name": "Universal Continuous Constitutional Evolution Programme",
+    "observation_law_owner": "00-MASTER/UEI-000001/02-UNIVERSAL-OBSERVATION-SPECIFICATION.md (UEI-CAP-01: observation is read-only over its subject and mutates nothing it observes)",
     "operational_home": "00-MASTER/UCCEP-000000/",
     "operational_memory_owner": "00-MASTER/MCS-000-MASTER-CONTEXT-SYSTEM-ARCHITECTURE.md",
     "registration_owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
@@ -1354,7 +1373,8 @@
       "checks": [
         "CK-REG-ENFORCE",
         "CK-REG-VALIDATE",
-        "CK-SELF-WRITE-SCOPE"
+        "CK-SELF-WRITE-SCOPE",
+        "CK-SELF-OBSERVATION"
       ],
       "delegated_to": [
         "00-BOOK/tools/ukb.py",
@@ -1364,7 +1384,8 @@
       "executed": [
         "CK-REG-ENFORCE",
         "CK-REG-VALIDATE",
-        "CK-SELF-WRITE-SCOPE"
+        "CK-SELF-WRITE-SCOPE",
+        "CK-SELF-OBSERVATION"
       ],
       "failed": [],
       "id": "PROGRAM-000002",
@@ -1696,7 +1717,8 @@
         "CK-DISCOVERY",
         "CK-SELF-DECLARATION",
         "CK-SELF-NO-ENUMERATION",
-        "CK-SELF-WRITE-SCOPE"
+        "CK-SELF-WRITE-SCOPE",
+        "CK-SELF-OBSERVATION"
       ],
       "delegated_to": [
         "00-CEP/CEP-005",
@@ -1712,7 +1734,8 @@
         "CK-DISCOVERY",
         "CK-SELF-DECLARATION",
         "CK-SELF-NO-ENUMERATION",
-        "CK-SELF-WRITE-SCOPE"
+        "CK-SELF-WRITE-SCOPE",
+        "CK-SELF-OBSERVATION"
       ],
       "failed": [],
       "id": "PROGRAM-000015",
@@ -1899,7 +1922,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "7da3fae9486a0f5364c5fe4e98bf346229dbd35256fde9db7a441331b555637b",
+  "seal_sha256": "96e5c7dd3c986e98f8cf1bbe836bc041f9b96ca7faba37d0b31f3a90a887111c",
   "tier": "full",
   "unavailable": [],
   "unproven": []
