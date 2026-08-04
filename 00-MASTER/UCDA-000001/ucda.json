@@ -1,9 +1,9 @@
 {
   "by_disposition": {
-    "IMPLEMENTED": 33,
+    "IMPLEMENTED": 37,
     "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 18,
     "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION": 11,
-    "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY": 42,
+    "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY": 43,
     "SUPERSEDED": 4
   },
   "by_stage": {
@@ -13,8 +13,8 @@
     "DECISION-REGISTRATION": 0,
     "DISCUSSION": 0,
     "IMPLEMENTATION": 0,
-    "REPOSITORY-MAPPING": 44,
-    "REPOSITORY-TRUTH-UPDATE": 39,
+    "REPOSITORY-MAPPING": 45,
+    "REPOSITORY-TRUTH-UPDATE": 43,
     "VALIDATION": 0
   },
   "conversation_only": [],
@@ -59,7 +59,7 @@
     "representation_percent": 76,
     "scope_decision_class": "architectural"
   },
-  "decision_total": 108,
+  "decision_total": 113,
   "decisions": [
     {
       "action_taken": "",
@@ -9569,11 +9569,416 @@
       "title": "Replace engine/factory/orchestrator.py::execute() with the composed plan as part of this programme",
       "undispositioned": false,
       "work_package": null
+    },
+    {
+      "action_taken": "Admitted through the located registration transaction; standing clause, artifact-disposition row, §6 fixed-point consequence and §8.7 reconciled to the admitted state",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "constitutional",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "00-MASTER/EVOLUTION-001/Ω-P1-UNIVERSAL-CONSTITUTIONAL-KERNEL-DETERMINATION.md",
+        "00-MASTER/EVOLUTION-001/",
+        "00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md",
+        "00-BOOK/tools/config.py",
+        "00-MASTER/UCOS-RFP-001/rfp-declaration.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-OMEGA-P-01",
+      "index": "00-MASTER/MCP-004-MASTER-DECISIONS.md §05",
+      "index_located": true,
+      "justification": null,
+      "note": "ADMITTED under Ω-E06-B. The artifact was authored as an untracked CANDIDATE and its own standing clause made admission conditional on two things: acceptance of the canonical ownership it proved, and the located registration transaction. Both are discharged. The canonical home is the located home of evolution-round constitutional determinations, already occupied by the tracked Ω-E03/Ω-E04/Ω-E05 completion certificates — REUSE, with no new home, namespace or identifier, so CREATE = 0. Because 00-MASTER/ is excluded from corpus registration by UCOS-RECON-C1 as implemented at config.py EXCLUDE_DIR_PREFIXES, admission consumes no corpus identity and register.sh --guard reports no drift. Admission changes STANDING only: AUTHORITY remains NONE (DERIVED TRUTH) and every measurement in the artifact remains the epoch measurement it was, taken at the program state its own header names. The candidate banner was replaced by an admission banner that quotes the discharged condition verbatim; no measurement, theorem, cardinality or verdict was altered. Ω-P1 §6 recorded the consequence of remaining untracked — that a PROVISIONAL untracked determination is outside the fixed point and blocks its re-assertion until it is either admitted or removed. Of the two routes it named, admission was taken.",
+      "reasons": [],
+      "source_register": "00-MASTER/EVOLUTION-001/Ω-P1-UNIVERSAL-CONSTITUTIONAL-KERNEL-DETERMINATION.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Ω-P1 Universal Constitutional Kernel Determination IS admitted to Repository Truth in its located canonical home",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "Admitted through the located registration transaction; standing clause, §6 precondition and §8.3 reconciled to the admitted state",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "constitutional",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "00-MASTER/EVOLUTION-001/Ω-P2-CONSTITUTIONAL-RECONCILIATION.md",
+        "00-MASTER/EVOLUTION-001/Ω-P1-UNIVERSAL-CONSTITUTIONAL-KERNEL-DETERMINATION.md",
+        "00-MASTER/EVOLUTION-001/",
+        "00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md",
+        "00-BOOK/tools/config.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-OMEGA-P-02",
+      "index": "00-MASTER/MCP-004-MASTER-DECISIONS.md §05",
+      "index_located": true,
+      "justification": null,
+      "note": "ADMITTED under Ω-E06-B. The artifact was authored as an untracked CANDIDATE and its own standing clause made admission conditional on two things: acceptance of the canonical ownership it proved, and the located registration transaction. Both are discharged. The canonical home is the located home of evolution-round constitutional determinations, already occupied by the tracked Ω-E03/Ω-E04/Ω-E05 completion certificates — REUSE, with no new home, namespace or identifier, so CREATE = 0. Because 00-MASTER/ is excluded from corpus registration by UCOS-RECON-C1 as implemented at config.py EXCLUDE_DIR_PREFIXES, admission consumes no corpus identity and register.sh --guard reports no drift. Admission changes STANDING only: AUTHORITY remains NONE (DERIVED TRUTH) and every measurement in the artifact remains the epoch measurement it was, taken at the program state its own header names. The candidate banner was replaced by an admission banner that quotes the discharged condition verbatim; no measurement, theorem, cardinality or verdict was altered. Ω-P2's own condition was that admission occur only after Ω-P2 is frozen; it was frozen at its reconciliation (§7) before admission, so the condition is satisfied rather than bypassed. Its outcome set — 1 NARROWED+IMPLEMENTED · 3 WITHDRAWN · 2 RECORD AS GAP · 1 RECLASSIFIED · 1 NARROWED-PENDING · 1 GAP CONFIRMED · CREATE = 0 — is admitted as recorded and is re-adjudicated by nothing in this act.",
+      "reasons": [],
+      "source_register": "00-MASTER/EVOLUTION-001/Ω-P2-CONSTITUTIONAL-RECONCILIATION.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Ω-P2 Constitutional Reconciliation IS admitted to Repository Truth in its located canonical home",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "Admitted through the located registration transaction; standing clause, §8.7 blocking disclosure and closing line reconciled to the admitted state",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "constitutional",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "00-MASTER/EVOLUTION-001/Ω-P2-E1-CERTIFIED-EVOLUTION-EPOCH.md",
+        "00-MASTER/EVOLUTION-001/Ω-P2-CONSTITUTIONAL-RECONCILIATION.md",
+        "00-MASTER/EVOLUTION-001/Ω-P1-UNIVERSAL-CONSTITUTIONAL-KERNEL-DETERMINATION.md",
+        "00-MASTER/EVOLUTION-001/",
+        "00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-OMEGA-P-03",
+      "index": "00-MASTER/MCP-004-MASTER-DECISIONS.md §05",
+      "index_located": true,
+      "justification": null,
+      "note": "ADMITTED under Ω-E06-B. The artifact was authored as an untracked CANDIDATE and its own standing clause made admission conditional on two things: acceptance of the canonical ownership it proved, and the located registration transaction. Both are discharged. The canonical home is the located home of evolution-round constitutional determinations, already occupied by the tracked Ω-E03/Ω-E04/Ω-E05 completion certificates — REUSE, with no new home, namespace or identifier, so CREATE = 0. Because 00-MASTER/ is excluded from corpus registration by UCOS-RECON-C1 as implemented at config.py EXCLUDE_DIR_PREFIXES, admission consumes no corpus identity and register.sh --guard reports no drift. Admission changes STANDING only: AUTHORITY remains NONE (DERIVED TRUTH) and every measurement in the artifact remains the epoch measurement it was, taken at the program state its own header names. The candidate banner was replaced by an admission banner that quotes the discharged condition verbatim; no measurement, theorem, cardinality or verdict was altered. The certificate's §0 declares every cardinality an epoch measurement and never a ceiling, and every closed relation an epoch relation and never a prohibition; admission preserves that reading and closes no enumeration. Its §8.7 recorded that its own untracked presence blocks re-assertion of the UCOS-RFP-001 fixed point by CLO-01 and CLO-05 — measured again and confirmed before this act, then discharged by it.",
+      "reasons": [],
+      "source_register": "00-MASTER/EVOLUTION-001/Ω-P2-E1-CERTIFIED-EVOLUTION-EPOCH.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Ω-P2-E1 Certified Evolution Epoch IS admitted to Repository Truth in its located canonical home",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "Admitted through the located registration transaction; standing clause, §15 standing disclosure and closing line reconciled to the admitted state",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "constitutional",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "00-MASTER/EVOLUTION-001/Ω-P2-R-CANONICAL-RECONCILIATION.md",
+        "00-MASTER/EVOLUTION-001/Ω-P2-E1-CERTIFIED-EVOLUTION-EPOCH.md",
+        "00-MASTER/EVOLUTION-001/Ω-P2-CONSTITUTIONAL-RECONCILIATION.md",
+        "00-MASTER/EVOLUTION-001/Ω-P1-UNIVERSAL-CONSTITUTIONAL-KERNEL-DETERMINATION.md",
+        "00-MASTER/EVOLUTION-001/"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-OMEGA-P-04",
+      "index": "00-MASTER/MCP-004-MASTER-DECISIONS.md §05",
+      "index_located": true,
+      "justification": null,
+      "note": "ADMITTED under Ω-E06-B. The artifact was authored as an untracked CANDIDATE and its own standing clause made admission conditional on two things: acceptance of the canonical ownership it proved, and the located registration transaction. Both are discharged. The canonical home is the located home of evolution-round constitutional determinations, already occupied by the tracked Ω-E03/Ω-E04/Ω-E05 completion certificates — REUSE, with no new home, namespace or identifier, so CREATE = 0. Because 00-MASTER/ is excluded from corpus registration by UCOS-RECON-C1 as implemented at config.py EXCLUDE_DIR_PREFIXES, admission consumes no corpus identity and register.sh --guard reports no drift. Admission changes STANDING only: AUTHORITY remains NONE (DERIVED TRUTH) and every measurement in the artifact remains the epoch measurement it was, taken at the program state its own header names. The candidate banner was replaced by an admission banner that quotes the discharged condition verbatim; no measurement, theorem, cardinality or verdict was altered. Ω-P2-R declares itself a PURE SERIALIZATION that introduces no reasoning, measurement, interpretation, constitutional claim, finding, disposition or proof. Admission introduces none of those either, so the property is preserved: what changed is standing, and standing is not a proposition of the serialization.",
+      "reasons": [],
+      "source_register": "00-MASTER/EVOLUTION-001/Ω-P2-R-CANONICAL-RECONCILIATION.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Ω-P2-R Canonical Constitutional Reconciliation IS admitted to Repository Truth in its located canonical home",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": "00-MASTER/EVOLUTION-001/Ω-P2-R-CANONICAL-RECONCILIATION.md",
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "constitutional",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "evidence_resolved": [
+        "00-MASTER/EVOLUTION-001/Ω-P2-R-CANONICAL-RECONCILIATION.md",
+        "00-MASTER/EVOLUTION-001/Ω-P2-R-CANONICAL-RECONCILIATION.md",
+        "00-MASTER/EVOLUTION-001/Ω-P2-E1-CERTIFIED-EVOLUTION-EPOCH.md",
+        "00-MASTER/EVOLUTION-001/Ω-P2-CONSTITUTIONAL-RECONCILIATION.md",
+        "00-MASTER/EVOLUTION-001/Ω-P1-UNIVERSAL-CONSTITUTIONAL-KERNEL-DETERMINATION.md"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-OMEGA-P-05",
+      "index": "00-MASTER/MCP-004-MASTER-DECISIONS.md §05",
+      "index_located": true,
+      "justification": null,
+      "note": "Ω-P2-R §7 carries, for every one of the fifteen Ω-P propositions, exactly one replay outcome with its reason, its load-bearing theorems, its Repository Truth evidence, its governing clauses, its verbatim derivation and its adversarial replay: 7 FALSIFIED (R-D-01, R-F-01, R-D-03, R-D-04, R-D-07, R-D-08, R-B-14), 5 PROVEN (R-D-02, R-D-06, R-T-01, R-T-04, R-T-05), 1 UNKNOWN (R-D-05), 1 REUSE (R-T-02) and 1 WITHDRAWN (R-T-03). Its §9 certifies 0 contradictions, 0 cycles, 0 dependency inversions, 0 duplicated authority, 0 uncertified premises, 0 UNKNOWN dependencies and 0 outcomes outside the closed six-value vocabulary; its §11 records the GAP class empty and manufactures none. That is a complete disposition register for those propositions, held by a single located owner now admitted to Repository Truth. Re-recording the fifteen outcomes as fifteen entries here would duplicate a disposition store and create a competing truth, which CMG-INV-02 and the Knowledge Once principle forbid; this decision therefore registers the located owner rather than copying its content. The two questions Ω-P2-R leaves certified-UNKNOWN (R-D-05, and R-D-02 SCOPE-2 referred to AUTH-INF-001 under CL-XII.7) are recorded there as certified outcomes, not as absent dispositions — a certified UNKNOWN is a disposition of the proposition, and the questions themselves remain open for a future epoch. Decision class is constitutional rather than architectural because what is decided is where constitutional determinations are dispositioned, not an architectural mapping.",
+      "reasons": [],
+      "source_register": "00-MASTER/EVOLUTION-001/Ω-P2-R-CANONICAL-RECONCILIATION.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-MAPPING",
+      "superseded_by": null,
+      "title": "The fifteen Ω-P proposition outcomes ARE dispositioned in the located Ω-P2-R transition matrix, and no second disposition store IS opened for them",
+      "undispositioned": false,
+      "work_package": null
     }
   ],
   "declaration_findings": [],
   "determination": "ASSIMILATED",
-  "evidence_references": 398,
+  "evidence_references": 423,
   "gate": "OPEN",
   "gate_exit": 0,
   "programme": {
@@ -9632,7 +10037,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "d64189ac626195641f4ab8aecb42c48d6abba4d440451b4af824acf45daa2950",
+  "seal_sha256": "6f4bd4230c7d8e758ef5211d95be07b000e7125f9efa5c94166f5537fe1d0688",
   "undispositioned": [],
   "unevidenced": [],
   "unindexed": []

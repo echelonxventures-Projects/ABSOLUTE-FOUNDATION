@@ -6330,7 +6330,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 108,
+        "measure_value": 113,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6338,7 +6338,7 @@
       "invariant": "Universal Alternative Strategy Generation",
       "measure": "decision_total",
       "measure_source": "00-MASTER/UCDA-000001/ucda.json",
-      "measure_value": 108,
+      "measure_value": 113,
       "ordinal": 100,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -23163,7 +23163,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "35bab8e8a387b9cfa22d33ab1b9664f15f5ed15edf6c5ed6af527eb55b755c4e",
+  "seal_sha256": "8471042e013ba09a1cfccb107e3ef9654f7864395bff8647ef891300f503dbf0",
   "self_evolution": [
     {
       "anchor": "determination",
