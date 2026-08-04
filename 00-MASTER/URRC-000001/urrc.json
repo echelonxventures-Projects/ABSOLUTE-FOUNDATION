@@ -2357,7 +2357,7 @@
           "YES",
           "5/5",
           "111",
-          "`5a5915af4cbb`"
+          "`cf05f134d774`"
         ],
         [
           "`S-08`",
@@ -3492,7 +3492,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "5a5915af4cbb564636c98bb177ad969a947e0778b32bc03e9094873637cc93aa",
+      "content_sha256": "cf05f134d7742d82007e890e29bec5d5c2ff7388623aa4c5895865d427009a82",
       "exists": true,
       "id": "S-07",
       "kind": "aggregate gate declaration",
