@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1194
+**Total artifacts:** 1201
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1202,5 +1202,12 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1192 | `UCOS-PLT-000055` | Ucos Assurance Policy | — | 006 | UPN-000009599–UPN-000009612 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_assurance/data/ucos-assurance-policy.json) |
 | 1193 | `UCOS-PLT-000056` | Ucos Assurance Selfcheck | — | 006 | UPN-000009613–UPN-000009618 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_assurance/data/ucos-assurance-selfcheck.json) |
 | 1194 | `UCOS-PLT-000057` | Uapf Pipelines | — | 006 | UPN-000009619–UPN-000009627 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_pipeline/catalog/uapf-pipelines.json) |
+| 1195 | `UCOS-PLT-000058` | Foundation Capabilities | — | 006 | UPN-000009628–UPN-000009632 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_foundation/catalog/foundation-capabilities.json) |
+| 1196 | `UCOS-PLT-000059` | Foundation Convergence | — | 006 | UPN-000009633–UPN-000009635 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_foundation/catalog/foundation-convergence.json) |
+| 1197 | `UCOS-PLT-000060` | Foundation Freeze | — | 006 | UPN-000009636–UPN-000009637 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_foundation/catalog/foundation-freeze.json) |
+| 1198 | `UCOS-PLT-000061` | Ucos Consolidation | — | 006 | UPN-000009638–UPN-000009638 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_foundation/catalog/ucos-consolidation.json) |
+| 1199 | `UCOS-PLT-000062` | Ucos Measurement Policies | — | 006 | UPN-000009639–UPN-000009639 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_measurement/catalog/ucos-measurement-policies.json) |
+| 1200 | `UCOS-PLT-000063` | Ucos Ownership Declarations | — | 006 | UPN-000009640–UPN-000009640 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_ownership/catalog/ucos-ownership-declarations.json) |
+| 1201 | `UCOS-PLT-000064` | Ucos Repository Truth | — | 006 | UPN-000009641–UPN-000009643 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_truth/catalog/ucos-repository-truth.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

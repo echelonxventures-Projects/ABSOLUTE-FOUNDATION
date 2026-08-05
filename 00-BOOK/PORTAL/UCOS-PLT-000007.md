@@ -46,6 +46,13 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000055](UCOS-PLT-000055.md) Ucos Assurance Policy
 - [UCOS-PLT-000056](UCOS-PLT-000056.md) Ucos Assurance Selfcheck
 - [UCOS-PLT-000057](UCOS-PLT-000057.md) Uapf Pipelines
+- [UCOS-PLT-000058](UCOS-PLT-000058.md) Foundation Capabilities
+- [UCOS-PLT-000059](UCOS-PLT-000059.md) Foundation Convergence
+- [UCOS-PLT-000060](UCOS-PLT-000060.md) Foundation Freeze
+- [UCOS-PLT-000061](UCOS-PLT-000061.md) Ucos Consolidation
+- [UCOS-PLT-000062](UCOS-PLT-000062.md) Ucos Measurement Policies
+- [UCOS-PLT-000063](UCOS-PLT-000063.md) Ucos Ownership Declarations
+- [UCOS-PLT-000064](UCOS-PLT-000064.md) Ucos Repository Truth
 
 ## Backlinks (reverse)
 - [UCOS-PLT-000001](UCOS-PLT-000001.md) —Depends-On→
@@ -83,8 +90,15 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000032](UCOS-PLT-000032.md) —Parent→
 - [UCOS-PLT-000055](UCOS-PLT-000055.md) —Parent→
 - [UCOS-PLT-000056](UCOS-PLT-000056.md) —Parent→
+- [UCOS-PLT-000058](UCOS-PLT-000058.md) —Parent→
+- [UCOS-PLT-000059](UCOS-PLT-000059.md) —Parent→
+- [UCOS-PLT-000060](UCOS-PLT-000060.md) —Parent→
+- [UCOS-PLT-000061](UCOS-PLT-000061.md) —Parent→
+- [UCOS-PLT-000062](UCOS-PLT-000062.md) —Parent→
+- [UCOS-PLT-000063](UCOS-PLT-000063.md) —Parent→
 - [UCOS-PLT-000057](UCOS-PLT-000057.md) —Parent→
 - [UCOS-PLT-000050](UCOS-PLT-000050.md) —Parent→
+- [UCOS-PLT-000064](UCOS-PLT-000064.md) —Parent→
 - [UCOS-PLT-000044](UCOS-PLT-000044.md) —Parent→
 - [UCOS-PLT-000042](UCOS-PLT-000042.md) —Parent→
 - [UCOS-PLT-000026](UCOS-PLT-000026.md) —Parent→

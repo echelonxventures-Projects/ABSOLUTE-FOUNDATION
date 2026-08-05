@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 9627  ·  **Page cursor (next free):** UPN-000009628
+**Pages allocated:** 9643  ·  **Page cursor (next free):** UPN-000009644
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1202,5 +1202,12 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000009599 | UPN-000009612 | 14 | `UCOS-PLT-000055` | 006 | Ucos Assurance Policy |
 | UPN-000009613 | UPN-000009618 | 6 | `UCOS-PLT-000056` | 006 | Ucos Assurance Selfcheck |
 | UPN-000009619 | UPN-000009627 | 9 | `UCOS-PLT-000057` | 006 | Uapf Pipelines |
+| UPN-000009628 | UPN-000009632 | 5 | `UCOS-PLT-000058` | 006 | Foundation Capabilities |
+| UPN-000009633 | UPN-000009635 | 3 | `UCOS-PLT-000059` | 006 | Foundation Convergence |
+| UPN-000009636 | UPN-000009637 | 2 | `UCOS-PLT-000060` | 006 | Foundation Freeze |
+| UPN-000009638 | UPN-000009638 | 1 | `UCOS-PLT-000061` | 006 | Ucos Consolidation |
+| UPN-000009639 | UPN-000009639 | 1 | `UCOS-PLT-000062` | 006 | Ucos Measurement Policies |
+| UPN-000009640 | UPN-000009640 | 1 | `UCOS-PLT-000063` | 006 | Ucos Ownership Declarations |
+| UPN-000009641 | UPN-000009643 | 3 | `UCOS-PLT-000064` | 006 | Ucos Repository Truth |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

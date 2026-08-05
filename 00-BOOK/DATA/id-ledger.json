@@ -8575,9 +8575,58 @@
       "page_start": 9619,
       "page_count": 9,
       "first_seen": "2026-07-31T09:46:00+00:00"
+    },
+    "platform/universal_foundation/catalog/foundation-capabilities.json": {
+      "universal_id": "UCOS-PLT-000058",
+      "category": "PLT",
+      "page_start": 9628,
+      "page_count": 5,
+      "first_seen": "2026-08-05T10:50:25+00:00"
+    },
+    "platform/universal_foundation/catalog/foundation-convergence.json": {
+      "universal_id": "UCOS-PLT-000059",
+      "category": "PLT",
+      "page_start": 9633,
+      "page_count": 3,
+      "first_seen": "2026-08-05T10:50:25+00:00"
+    },
+    "platform/universal_foundation/catalog/foundation-freeze.json": {
+      "universal_id": "UCOS-PLT-000060",
+      "category": "PLT",
+      "page_start": 9636,
+      "page_count": 2,
+      "first_seen": "2026-08-05T10:50:25+00:00"
+    },
+    "platform/universal_foundation/catalog/ucos-consolidation.json": {
+      "universal_id": "UCOS-PLT-000061",
+      "category": "PLT",
+      "page_start": 9638,
+      "page_count": 1,
+      "first_seen": "2026-08-05T10:50:25+00:00"
+    },
+    "platform/universal_measurement/catalog/ucos-measurement-policies.json": {
+      "universal_id": "UCOS-PLT-000062",
+      "category": "PLT",
+      "page_start": 9639,
+      "page_count": 1,
+      "first_seen": "2026-08-05T10:50:25+00:00"
+    },
+    "platform/universal_ownership/catalog/ucos-ownership-declarations.json": {
+      "universal_id": "UCOS-PLT-000063",
+      "category": "PLT",
+      "page_start": 9640,
+      "page_count": 1,
+      "first_seen": "2026-08-05T10:50:25+00:00"
+    },
+    "platform/universal_truth/catalog/ucos-repository-truth.json": {
+      "universal_id": "UCOS-PLT-000064",
+      "category": "PLT",
+      "page_start": 9641,
+      "page_count": 3,
+      "first_seen": "2026-08-05T10:50:25+00:00"
     }
   },
-  "page_cursor": 9627,
+  "page_cursor": 9643,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8596,7 +8645,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 57,
+    "PLT": 64,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -23977,6 +24026,83 @@
         "status": "ACTIVE",
         "path": "platform/universal_pipeline/catalog/uapf-pipelines.json",
         "name": "Uapf Pipelines"
+      }
+    ],
+    "UCOS-PLT-000058": [
+      {
+        "seq": 1,
+        "at": "2026-08-05T10:50:25+00:00",
+        "content_hash": "daf542ba99f6de744ce8ed6a8337f31cb6ddb1c36bbf87dfdbfc69855ab1134d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_foundation/catalog/foundation-capabilities.json",
+        "name": "Foundation Capabilities"
+      }
+    ],
+    "UCOS-PLT-000059": [
+      {
+        "seq": 1,
+        "at": "2026-08-05T10:50:25+00:00",
+        "content_hash": "290157500386e2875e05dd8e2ee6fa5c1834d50d722163e3cfadf139cb87641d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_foundation/catalog/foundation-convergence.json",
+        "name": "Foundation Convergence"
+      }
+    ],
+    "UCOS-PLT-000060": [
+      {
+        "seq": 1,
+        "at": "2026-08-05T10:50:25+00:00",
+        "content_hash": "48d9006431c5d0763406dda735838d938acfe53da91745005aeb34486e86234e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_foundation/catalog/foundation-freeze.json",
+        "name": "Foundation Freeze"
+      }
+    ],
+    "UCOS-PLT-000061": [
+      {
+        "seq": 1,
+        "at": "2026-08-05T10:50:25+00:00",
+        "content_hash": "ce3e64365d5ee779f7f89b17f9670b72d872a4845b567b320c5c2e334307c0c5",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_foundation/catalog/ucos-consolidation.json",
+        "name": "Ucos Consolidation"
+      }
+    ],
+    "UCOS-PLT-000062": [
+      {
+        "seq": 1,
+        "at": "2026-08-05T10:50:25+00:00",
+        "content_hash": "06f4cd85824f1c94f57bce2b9ee17ef95c468d18a33d673cda28249ee637a784",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_measurement/catalog/ucos-measurement-policies.json",
+        "name": "Ucos Measurement Policies"
+      }
+    ],
+    "UCOS-PLT-000063": [
+      {
+        "seq": 1,
+        "at": "2026-08-05T10:50:25+00:00",
+        "content_hash": "96aa2be26454f7d618ddebb00281bb195f8576f3dbc9521cc1081c40b95146cd",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_ownership/catalog/ucos-ownership-declarations.json",
+        "name": "Ucos Ownership Declarations"
+      }
+    ],
+    "UCOS-PLT-000064": [
+      {
+        "seq": 1,
+        "at": "2026-08-05T10:50:25+00:00",
+        "content_hash": "cdc0f7c0cf246851cf17dc6d186a8c470716671a7d696d3002a2b501aec7be05",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_truth/catalog/ucos-repository-truth.json",
+        "name": "Ucos Repository Truth"
       }
     ]
   }

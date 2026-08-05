@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-07-31T09:46:00+00:00 by ukbx portal. 1194 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-08-05T10:50:26+00:00 by ukbx portal. 1201 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1198,3 +1198,10 @@
 | [UCOS-PLT-000055](UCOS-PLT-000055.md) | Ucos Assurance Policy | VOL-006 | ACTIVE |
 | [UCOS-PLT-000056](UCOS-PLT-000056.md) | Ucos Assurance Selfcheck | VOL-006 | ACTIVE |
 | [UCOS-PLT-000057](UCOS-PLT-000057.md) | Uapf Pipelines | VOL-006 | ACTIVE |
+| [UCOS-PLT-000058](UCOS-PLT-000058.md) | Foundation Capabilities | VOL-006 | ACTIVE |
+| [UCOS-PLT-000059](UCOS-PLT-000059.md) | Foundation Convergence | VOL-006 | ACTIVE |
+| [UCOS-PLT-000060](UCOS-PLT-000060.md) | Foundation Freeze | VOL-006 | ACTIVE |
+| [UCOS-PLT-000061](UCOS-PLT-000061.md) | Ucos Consolidation | VOL-006 | ACTIVE |
+| [UCOS-PLT-000062](UCOS-PLT-000062.md) | Ucos Measurement Policies | VOL-006 | ACTIVE |
+| [UCOS-PLT-000063](UCOS-PLT-000063.md) | Ucos Ownership Declarations | VOL-006 | ACTIVE |
+| [UCOS-PLT-000064](UCOS-PLT-000064.md) | Ucos Repository Truth | VOL-006 | ACTIVE |
