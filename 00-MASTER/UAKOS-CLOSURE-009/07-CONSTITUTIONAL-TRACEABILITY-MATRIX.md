@@ -566,4 +566,4 @@ Rule inherited from the canonical owner: a missing edge means NOT-DONE. Full con
 | RR-Ω∞-019 | Ω∞-019 | ✓ | ✓ | ✓ | · | ✓ | · | · | · | · | 4/9 |
 | RR-Ω∞-020 | Ω∞-020 | ✓ | ✓ | ✓ | · | ✓ | · | · | · | · | 4/9 |
 
-*Seal `17b02ddf1119b34f` · END 07 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `52dce15beab252ca` · END 07 · AUTHORITY = NONE (DERIVED TRUTH).*

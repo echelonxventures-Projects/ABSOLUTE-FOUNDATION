@@ -78,7 +78,7 @@
 | Determination | **ASSIMILATION-INCOMPLETE** |
 | Implementation continuation | **BARRED** until assimilation reaches 100% |
 | Certified baseline | **WITHHELD** |
-| Seal | `17b02ddf1119b34faad8228cd84e73303219af169e234a9a81d5174b790fb6f0` |
+| Seal | `52dce15beab252ca4dd371325f7b4ea1c8535f0e632f16973bd8665a86d733f5` |
 
 ## 6. Regeneration
 
