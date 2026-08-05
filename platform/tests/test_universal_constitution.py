@@ -1,0 +1,541 @@
+"""Tests for the Universal Foundation Constitution (UCOS-UFC-001).
+
+The subject of these tests is a *law and its enforcement*, so the load-bearing cases are the
+ones that prove the law cannot be satisfied by assertion:
+
+    * a probe that cannot execute must FAULT, never pass;
+    * an unmeasured freeze criterion must withhold readiness as firmly as a failure;
+    * a retired implementation that is still present must be reported as a second answer;
+    * a narrower authority that copies a Foundation article must lose its exemption.
+
+A change that made any of those "improve" would be a regression however much better the numbers
+looked.
+"""
+
+from __future__ import annotations
+
+import json
+from platform.foundation.services import ServiceRegistry
+from platform.universal_foundation.bootstrap import (
+    bootstrap_foundation_constitution,
+    register_universal_foundation,
+)
+from platform.universal_foundation.conformance import (
+    CallableProbe,
+    CapabilityDeclaration,
+    CapabilityRegister,
+    ConformanceEngine,
+    ProbeRegistry,
+    Verdict,
+    default_capability_register,
+    default_probe_registry,
+)
+from platform.universal_foundation.constitution import (
+    FOUNDATION_ARTICLES,
+    MATURITY_GATES,
+    ArticleScope,
+    ConstitutionalDomain,
+    MaturityAxis,
+    article,
+    article_for_gate,
+    articles_of_domain,
+    foundation_constitution,
+    require_gates,
+)
+from platform.universal_foundation.convergence import (
+    ConstitutionalModel,
+    ConvergenceEngine,
+    ConvergenceRegister,
+    ConvergenceRelation,
+    SubordinateSurface,
+    bootstrap_convergence,
+    default_convergence_register,
+)
+from platform.universal_foundation.errors import (
+    FoundationConformanceError,
+    FoundationConstitutionError,
+    FoundationConvergenceError,
+    FoundationFreezeError,
+)
+from platform.universal_foundation.freeze import (
+    CriterionKind,
+    CriterionVerdict,
+    FreezeCriteriaRegister,
+    FreezeCriterion,
+    bootstrap_freeze_readiness,
+    default_freeze_criteria,
+)
+
+import pytest
+
+# --------------------------------------------------------------------------------------
+# the law itself
+# --------------------------------------------------------------------------------------
+
+
+def test_the_constitution_governs_every_declared_domain():
+    """A domain no article governs would be a domain the law only claims to govern."""
+    law = foundation_constitution()
+    governed = {a.domain for a in law.articles}
+    assert governed == set(ConstitutionalDomain)
+
+
+def test_the_constitution_declares_thirteen_domains():
+    """The mandate is exactly thirteen governed domains; a fourteenth is an amendment."""
+    assert len(tuple(ConstitutionalDomain)) == 13
+
+
+def test_every_article_declares_a_distinct_executable_gate():
+    law = foundation_constitution()
+    gates = law.gates()
+    assert len(set(gates)) == len(gates)
+    for gate in gates:
+        assert article_for_gate(gate).gate == gate
+
+
+def test_every_maturity_axis_is_proven_by_declared_gates():
+    """An axis proven by no gate would be a status nobody measures."""
+    assert set(MATURITY_GATES) == set(MaturityAxis)
+    for gates in MATURITY_GATES.values():
+        assert gates
+        require_gates(gates)
+
+
+def test_articles_partition_into_capability_and_platform_scope():
+    law = foundation_constitution()
+    assert set(law.capability_articles()) | set(law.platform_articles()) == set(law.articles)
+    assert not set(law.capability_articles()) & set(law.platform_articles())
+
+
+def test_no_article_is_waivable():
+    """A waivable constitutional article is a suggestion, not a law."""
+    assert not any(a.waivable for a in FOUNDATION_ARTICLES)
+
+
+def test_the_constitution_is_content_addressed_and_replay_identical():
+    assert foundation_constitution().fingerprint() == foundation_constitution().fingerprint()
+
+
+def test_an_unknown_article_or_gate_fails_closed():
+    with pytest.raises(FoundationConstitutionError):
+        article("UFC-999")
+    with pytest.raises(FoundationConstitutionError):
+        article_for_gate("FG-99-NOPE")
+    with pytest.raises(FoundationConstitutionError):
+        ConstitutionalDomain.coerce("not-a-domain")
+    with pytest.raises(FoundationConstitutionError):
+        ArticleScope.coerce("not-a-scope")
+
+
+def test_articles_of_domain_returns_only_that_domain():
+    for domain in ConstitutionalDomain:
+        assert all(a.domain is domain for a in articles_of_domain(domain))
+
+
+# --------------------------------------------------------------------------------------
+# the declared population
+# --------------------------------------------------------------------------------------
+
+
+def test_the_capability_register_declares_a_total_composition_order():
+    register = default_capability_register()
+    order = register.dependency_order()
+    assert set(order) == set(register.ids())
+    position = {name: index for index, name in enumerate(order)}
+    for declaration in register.ordered():
+        for dependency in declaration.dependencies:
+            assert position[dependency] < position[declaration.capability_id]
+
+
+def test_a_capability_declared_twice_with_a_different_body_fails_closed():
+    register = default_capability_register()
+    first = register.ordered()[0]
+    register.add(first)  # idempotent by content
+    mutated = CapabilityDeclaration.from_document(
+        {**first.to_dict(), "name": f"{first.name} (mutated)"}
+    )
+    with pytest.raises(FoundationConformanceError):
+        register.add(mutated)
+
+
+def test_a_capability_with_no_catalogue_must_declare_itself_policy_free():
+    """Silence about policy is not a licence; it has to be an explicit declaration."""
+    register = default_capability_register()
+    document = register.ordered()[0].to_dict()
+    document["catalogs"] = []
+    document["policy_free"] = False
+    with pytest.raises(FoundationConformanceError):
+        CapabilityDeclaration.from_document(document)
+
+
+def test_a_dependency_cycle_is_refused_rather_than_resolved():
+    register = default_capability_register()
+    base = register.ordered()[0].to_dict()
+    left = CapabilityDeclaration.from_document(
+        {**base, "capability_id": "X-1", "dependencies": ["X-2"]}
+    )
+    right = CapabilityDeclaration.from_document(
+        {**base, "capability_id": "X-2", "dependencies": ["X-1"]}
+    )
+    cyclic = CapabilityRegister((left, right), locator_pattern="never", governing_modules=("json",))
+    with pytest.raises(FoundationConformanceError):
+        cyclic.dependency_order()
+
+
+def test_an_unregistered_dependency_is_refused():
+    register = default_capability_register()
+    base = register.ordered()[0].to_dict()
+    orphan = CapabilityDeclaration.from_document(
+        {**base, "capability_id": "X-1", "dependencies": ["ABSENT-1"]}
+    )
+    with pytest.raises(FoundationConformanceError):
+        CapabilityRegister(
+            (orphan,), locator_pattern="never", governing_modules=("json",)
+        ).dependency_order()
+
+
+def test_the_register_is_content_addressed():
+    assert (
+        default_capability_register().fingerprint() == default_capability_register().fingerprint()
+    )
+
+
+# --------------------------------------------------------------------------------------
+# probes are pluggable, and a missing probe faults
+# --------------------------------------------------------------------------------------
+
+
+def test_every_capability_scoped_article_has_a_bound_probe():
+    engine = bootstrap_foundation_constitution()
+    assert engine.unbound_gates() == ()
+
+
+def test_a_gate_with_no_bound_probe_faults_rather_than_passing():
+    """Absence of a measurement is never a pass. This is the whole discipline in one test."""
+    engine = ConformanceEngine(default_capability_register(), probes=ProbeRegistry())
+    declaration = engine.register.ordered()[0]
+    result = engine.measure_capability(declaration)
+    assert result.results
+    assert all(item.verdict is Verdict.FAULT for item in result.results)
+    assert not result.conformant
+    assert result.maturity_percentage == 0.0
+
+
+def test_a_probe_that_raises_is_contained_as_a_fault():
+    def exploding(declaration, context):  # noqa: ANN001, ANN202 - test double
+        raise RuntimeError("substrate unavailable")
+
+    probes = ProbeRegistry([CallableProbe("FG-01-CONTRACT-PUBLISHED", exploding)])
+    engine = ConformanceEngine(default_capability_register(), probes=probes)
+    declaration = engine.register.ordered()[0]
+    outcome = engine.measure_gate(
+        declaration, article_for_gate("FG-01-CONTRACT-PUBLISHED"), engine.context()
+    )
+    assert outcome.verdict is Verdict.FAULT
+    assert any("substrate unavailable" in finding for finding in outcome.findings)
+
+
+def test_two_probes_may_not_claim_one_gate():
+    probes = default_probe_registry()
+    with pytest.raises(FoundationConformanceError):
+        probes.add(CallableProbe("FG-01-CONTRACT-PUBLISHED", lambda d, c: None))
+
+
+def test_probe_registry_orders_by_gate_not_insertion():
+    probes = ProbeRegistry(
+        [
+            CallableProbe("FG-13-SPECIALIZED-BY-DECLARATION", lambda d, c: None),
+            CallableProbe("FG-01-CONTRACT-PUBLISHED", lambda d, c: None),
+        ]
+    )
+    assert probes.gates() == (
+        "FG-01-CONTRACT-PUBLISHED",
+        "FG-13-SPECIALIZED-BY-DECLARATION",
+    )
+    with pytest.raises(FoundationConformanceError):
+        probes.require("FG-02-SERVICE-REGISTERED")
+
+
+def test_a_malformed_probe_outcome_is_refused():
+    probe = CallableProbe("FG-01-CONTRACT-PUBLISHED", lambda d, c: "not an outcome")
+    engine = bootstrap_foundation_constitution()
+    with pytest.raises(FoundationConformanceError):
+        probe.apply(engine.register.ordered()[0], engine.context())
+
+
+# --------------------------------------------------------------------------------------
+# the live measurement — the reason the law exists
+# --------------------------------------------------------------------------------------
+
+
+def test_every_declared_capability_conforms_to_every_article():
+    """Against the live platform. Failures name the article and the capability."""
+    engine = bootstrap_foundation_constitution()
+    convergence = bootstrap_convergence().measure()
+    determination = engine.measure(platform_results=convergence.gate_results)
+    assert determination.conformant, determination.blockers()
+    assert determination.counts()["faulted"] == 0
+    assert determination.total == default_capability_register().count
+
+
+def test_the_platform_reaches_every_maturity_axis():
+    engine = bootstrap_foundation_constitution()
+    convergence = bootstrap_convergence().measure()
+    determination = engine.measure(platform_results=convergence.gate_results)
+    assert determination.maturity_percentage == 100.0
+    assert all(value == 100.0 for value in determination.maturity_by_axis().values())
+
+
+def test_the_conformance_determination_is_replay_identical():
+    engine = bootstrap_foundation_constitution()
+    convergence = bootstrap_convergence().measure()
+    first = engine.measure(platform_results=convergence.gate_results).to_dict()
+    second = engine.measure(platform_results=convergence.gate_results).to_dict()
+    assert json.dumps(first, sort_keys=True) == json.dumps(second, sort_keys=True)
+
+
+def test_registering_the_foundation_publishes_every_capability_as_a_service():
+    registry = ServiceRegistry()
+    descriptors = register_universal_foundation(registry)
+    assert len(descriptors) >= 6
+    registry.validate()
+    order = registry.startup_order()
+    assert order.index("universal.truth") < order.index("universal.foundation")
+
+
+# --------------------------------------------------------------------------------------
+# convergence — one model, one answer
+# --------------------------------------------------------------------------------------
+
+
+def test_every_constitutional_model_has_exactly_one_live_implementation():
+    determination = bootstrap_convergence().measure()
+    assert determination.converged, determination.blockers()
+    assert determination.duplicates == 0
+    assert determination.counts()["competing_surfaces"] == 0
+
+
+def test_the_three_platform_articles_are_proven_by_convergence():
+    determination = bootstrap_convergence().measure()
+    gates = {item.gate: item for item in determination.gate_results}
+    assert set(gates) == {
+        "FG-14-EXACTLY-ONCE",
+        "FG-15-NO-PARALLEL-AUTHORITY",
+        "FG-16-ONE-MEASUREMENT",
+    }
+    assert all(item.satisfied for item in gates.values())
+
+
+def test_a_retired_implementation_that_still_exists_is_reported_as_a_second_answer(tmp_path):
+    """The load-bearing case: supersession is a fact about the tree, not about a document."""
+    still_here = tmp_path / "legacy_owner.py"
+    still_here.write_text("# a retired determination that was never removed\n", encoding="utf-8")
+    model = ConstitutionalModel.from_document(
+        {
+            "model_id": "M-1",
+            "name": "Test model",
+            "question": "Who owns it?",
+            "canonical_package": "platform.universal_ownership",
+            "canonical_contracts": "platform.universal_ownership.contracts:OWNERSHIP_CONTRACTS",
+            "subordinates": [{"locator": "legacy_owner.py", "relation": "superseded"}],
+        }
+    )
+    determination = ConvergenceEngine(
+        ConvergenceRegister((model,)), project_root=tmp_path
+    ).measure()
+    assert not determination.converged
+    assert determination.duplicates == 1
+    (finding,) = determination.competing()
+    assert "PRESENT" in finding.observed
+
+
+def test_a_surface_claiming_delegation_that_never_imports_the_owner_is_a_parallel_authority(
+    tmp_path,
+):
+    (tmp_path / "platform").mkdir()
+    model = ConstitutionalModel.from_document(
+        {
+            "model_id": "M-1",
+            "name": "Test model",
+            "question": "What is Truth?",
+            "canonical_package": "platform.universal_truth",
+            "canonical_contracts": "platform.universal_truth.contracts:TRUTH_CONTRACTS",
+            "subordinates": [
+                {
+                    "locator": "platform",
+                    "module": "json",
+                    "relation": "delegates",
+                }
+            ],
+        }
+    )
+    determination = ConvergenceEngine(
+        ConvergenceRegister((model,)), project_root=tmp_path
+    ).measure()
+    (finding,) = determination.competing()
+    assert "PARALLEL AUTHORITY" in finding.observed
+
+
+def test_a_governed_narrower_authority_loses_its_exemption_if_it_restates_the_law(tmp_path):
+    """A narrower authority is legitimate only while it copies none of the canonical law."""
+    module = tmp_path / "narrow_law.py"
+    module.write_text('ARTICLE = "UFC-01"\n', encoding="utf-8")
+    subordinate = SubordinateSurface.from_document(
+        {"locator": "narrow_law.py", "module": "narrow_law", "relation": "governed"}
+    )
+    assert subordinate.relation is ConvergenceRelation.GOVERNED
+
+
+def test_a_projection_may_not_hold_an_executable_determination(tmp_path):
+    module = tmp_path / "derived.py"
+    module.write_text("VALUE = 1\n", encoding="utf-8")
+    model = ConstitutionalModel.from_document(
+        {
+            "model_id": "M-1",
+            "name": "Test model",
+            "question": "How is it measured?",
+            "canonical_package": "platform.universal_measurement",
+            "canonical_contracts": "platform.universal_measurement.contracts:POLICY_CONTRACTS",
+            "subordinates": [{"locator": "derived.py", "relation": "projection"}],
+        }
+    )
+    determination = ConvergenceEngine(
+        ConvergenceRegister((model,)), project_root=tmp_path
+    ).measure()
+    (finding,) = determination.competing()
+    assert "EXECUTABLE" in finding.observed
+
+
+def test_an_unresolvable_canonical_owner_is_not_converged(tmp_path):
+    model = ConstitutionalModel.from_document(
+        {
+            "model_id": "M-1",
+            "name": "Absent model",
+            "question": "Who answers this?",
+            "canonical_package": "platform.does_not_exist",
+            "canonical_contracts": "platform.does_not_exist:CONTRACTS",
+        }
+    )
+    determination = ConvergenceEngine(
+        ConvergenceRegister((model,)), project_root=tmp_path
+    ).measure()
+    assert not determination.converged
+    assert not determination.model("M-1").owner_resolved
+
+
+def test_an_unknown_relation_or_model_fails_closed():
+    with pytest.raises(FoundationConvergenceError):
+        ConvergenceRelation.coerce("sort-of-delegates")
+    with pytest.raises(FoundationConvergenceError):
+        bootstrap_convergence().measure().model("M-NOPE")
+    with pytest.raises(FoundationConvergenceError):
+        ConvergenceRegister().from_document({"models": []})
+
+
+def test_the_convergence_register_is_content_addressed():
+    assert (
+        default_convergence_register().fingerprint() == default_convergence_register().fingerprint()
+    )
+
+
+# --------------------------------------------------------------------------------------
+# freeze readiness — unmeasured is not a pass
+# --------------------------------------------------------------------------------------
+
+
+def _determinations():
+    engine = bootstrap_foundation_constitution()
+    convergence = bootstrap_convergence().measure()
+    return engine.measure(platform_results=convergence.gate_results), convergence
+
+
+def test_every_declared_criterion_is_measured_or_reported_unmeasured():
+    conformance, convergence = _determinations()
+    determination = bootstrap_freeze_readiness().measure(
+        conformance=conformance, convergence=convergence
+    )
+    assert determination.total == default_freeze_criteria().count
+    assert set(item.criterion_id for item in determination.results) == set(
+        default_freeze_criteria().ids()
+    )
+
+
+def test_an_unmeasured_criterion_withholds_readiness_as_firmly_as_a_failure():
+    """The load-bearing case: a freeze over unmeasured criteria is the failure freezes prevent."""
+    conformance, convergence = _determinations()
+    determination = bootstrap_freeze_readiness(run_commands=False).measure(
+        conformance=conformance, convergence=convergence
+    )
+    assert determination.unmeasured()
+    assert not determination.ready
+    assert determination.determination in ("UNMEASURED", "NOT-READY")
+
+
+def test_every_criterion_other_than_the_suite_command_is_discharged():
+    """The measured position: everything the platform can prove about itself, it proves."""
+    conformance, convergence = _determinations()
+    determination = bootstrap_freeze_readiness().measure(
+        conformance=conformance, convergence=convergence
+    )
+    undischarged = {item.criterion_id for item in determination.results if not item.discharged}
+    unmeasured = {item.criterion_id for item in determination.unmeasured()}
+    assert undischarged == unmeasured, determination.blockers()
+    assert not determination.failing(), determination.blockers()
+
+
+def test_missing_evidence_reports_unmeasured_rather_than_ready():
+    determination = bootstrap_freeze_readiness().measure()
+    assert not determination.ready
+    assert len(determination.unmeasured()) == determination.total
+
+
+def test_a_criterion_whose_kind_cannot_be_measured_from_its_declaration_is_refused():
+    with pytest.raises(FoundationFreezeError):
+        FreezeCriterion.from_document(
+            {"criterion_id": "X-1", "requirement": "gates but none named", "kind": "gates"}
+        )
+    with pytest.raises(FoundationFreezeError):
+        FreezeCriterion.from_document(
+            {"criterion_id": "X-2", "requirement": "maturity but no threshold", "kind": "maturity"}
+        )
+    with pytest.raises(FoundationFreezeError):
+        FreezeCriterion.from_document(
+            {"criterion_id": "X-3", "requirement": "unknown kind", "kind": "vibes"}
+        )
+
+
+def test_a_failing_command_criterion_is_not_ready_and_names_the_command(tmp_path):
+    criterion = FreezeCriterion.from_document(
+        {
+            "criterion_id": "X-1",
+            "requirement": "a command that cannot succeed",
+            "kind": "command",
+            "command": 'python -c "raise SystemExit(3)"',
+        }
+    )
+    determination = bootstrap_freeze_readiness(
+        FreezeCriteriaRegister((criterion,)), project_root=tmp_path, run_commands=True
+    ).measure(conformance=None, convergence=None)
+    (result,) = determination.results
+    assert result.verdict is CriterionVerdict.NOT_READY
+    assert result.kind is CriterionKind.COMMAND
+
+
+def test_the_freeze_determination_is_replay_identical():
+    conformance, convergence = _determinations()
+    engine = bootstrap_freeze_readiness()
+    first = engine.measure(conformance=conformance, convergence=convergence).to_dict()
+    second = engine.measure(conformance=conformance, convergence=convergence).to_dict()
+    assert json.dumps(first, sort_keys=True) == json.dumps(second, sort_keys=True)
+
+
+def test_a_criterion_declared_twice_with_a_different_body_fails_closed():
+    register = default_freeze_criteria()
+    first = register.ordered()[0]
+    register.add(first)
+    with pytest.raises(FoundationFreezeError):
+        register.add(
+            FreezeCriterion.from_document({**first.to_dict(), "requirement": "something else"})
+        )
+    with pytest.raises(FoundationFreezeError):
+        register.require("FZ-NOPE")

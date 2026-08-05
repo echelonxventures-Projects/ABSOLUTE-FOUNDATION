@@ -1128,8 +1128,8 @@
     "delegations": 60,
     "dispositions_owned": 6,
     "minted_collisions": 0,
-    "minted_token_classes": 3,
-    "minted_tokens": 18,
+    "minted_token_classes": 5,
+    "minted_tokens": 21,
     "minted_unclassified": 0,
     "realizations": 1,
     "realizations_bound": 1,
@@ -1878,6 +1878,33 @@
       "token": "ENGINEERING-EXECUTION-ONLY"
     },
     {
+      "class": "IMPLEMENTATION-CONFORMANCE",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "platform/universal_foundation/constitution.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "FOUNDATION_CONSTITUTION_AUTHORITY",
+      "token": "Universal Foundation Constitutional Authority"
+    },
+    {
+      "class": "CONSTITUTIONAL-GATE-IDENTITY",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "platform/universal_foundation/convergence 2.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "GATE_NO_PARALLEL_AUTHORITY",
+      "token": "FG-15-NO-PARALLEL-AUTHORITY"
+    },
+    {
+      "class": "CONSTITUTIONAL-GATE-IDENTITY",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "platform/universal_foundation/convergence.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "GATE_NO_PARALLEL_AUTHORITY",
+      "token": "FG-15-NO-PARALLEL-AUTHORITY"
+    },
+    {
       "class": "DERIVED-TRUTH",
       "classified": true,
       "constitutional_collision": false,
@@ -1950,6 +1977,20 @@
       "constitutional": false,
       "id": "UCAF-TC-03",
       "token": "authority"
+    },
+    {
+      "basis": "platform/universal_foundation/constitution.py — the declared owner of UCOS-UFC-001, the law governing whether a Foundation CAPABILITY conforms across the thirteen domains it names (contracts, services, providers, policies, registries, runtimes, lifecycle, compatibility, evolution, governance, certification, composition, specialization). Its subject is implementation conformance, never constitutional content: it cannot ratify, cannot legislate, cannot vest or revoke a tier, and cannot override a located canonical owner. Its standing is AUTHORITY = NONE (DERIVED TRUTH) under 00-CMG/CMG-000001 ARTICLE XVI.2 — it measures and refuses. Disclosed here rather than filtered in code so the discovered population is never quietly narrowed.",
+      "class": "IMPLEMENTATION-CONFORMANCE",
+      "constitutional": false,
+      "id": "UCAF-TC-04",
+      "token": "Universal Foundation Constitutional Authority"
+    },
+    {
+      "basis": "platform/universal_foundation/convergence.py — the identity of the executable gate that proves UCOS-UFC-001 UFC-15, the article FORBIDDING a parallel constitutional authority. The symbol name ends in AUTHORITY because the article it proves is about authority; the constant is the name of a measurement, not a claim to hold anything. Classified for the same reason as UCAF-TC-03: the discovered population is disclosed in full and narrowed by declaration, never by a filter in code.",
+      "class": "CONSTITUTIONAL-GATE-IDENTITY",
+      "constitutional": false,
+      "id": "UCAF-TC-05",
+      "token": "FG-15-NO-PARALLEL-AUTHORITY"
     }
   ],
   "realizations": [
@@ -2305,7 +2346,7 @@
       "rule": "the lattice shall be consistent with, and shall not amend, the four-tier Program authority order already declared by the charter"
     }
   ],
-  "seal_sha256": "8c9a30e4edd78817e9280ab5d27c308abd6ba6cbe5b30f28ce57d22743cc0f26",
+  "seal_sha256": "af6cd0f2b56e903921851dafba705f59b186ae43c0f480ae5f4feab40fb8b5f3",
   "source_token_registers": [
     {
       "id": "UCAF-TOK-01",

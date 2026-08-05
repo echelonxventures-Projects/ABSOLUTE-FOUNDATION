@@ -3,14 +3,14 @@
   "authoritative_portfolio_status": "IN_PROGRESS — analysis/architecture/generation complete; runtime testing/deployment pending EC-1",
   "authority": "NONE (derived truth)",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "6581da297b5654d1dec8e0f3e3b31ab27b7163e48f3d21280c51b480b396364c",
+  "content_hash": "26f60abfa2d7a42dedfc3cc77cfba32686778af6abd7eeeea8825fa0486f6b93",
   "dimension_index_literal_pct": 26.7,
   "dimension_index_reconciled_pct": 26.7,
   "dimensions_counted": 15,
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "fca8eed2cf1a969b76cd1bbf6cafbd0dabecdd4cc4281082aefcb46ecef00087",
+      "fingerprint": "e140fb2cde6a11b530371385ff2c407cc699890923f650e836039a24d1c9c152",
       "source": "coverage.xml"
     },
     "evidence_files": {
@@ -26,7 +26,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "e19fe5864fc06477fdb73d052e4388694b3f303f0b84cd21f85a79433375703a",
+    "input_hash": "e92ad12455696365cb81e366070ff612ed80e148b534e5fbfbbc91b43bf98739",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },
@@ -154,5 +154,5 @@
   },
   "producer": "UCOS-RIE-001 Repository Intelligence Engine v1.0.0",
   "title": "Progress Intelligence Report",
-  "unit_validation_pct": 95.13
+  "unit_validation_pct": 94.71
 }

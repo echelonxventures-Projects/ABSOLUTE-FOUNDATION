@@ -1,0 +1,18 @@
+{
+  "provider_id": "ownership.declared-assignment",
+  "authority": "Governed Ownership Authority",
+  "precedence": 900,
+  "description": "Machine-readable ownership declaration catalogue. This is the governed surface through which a human authority assigns canonical ownership: the Ownership Determination Framework reads it as constitutive evidence and never infers an owner. Each entry SHALL name an owner, the authority under which the assignment binds, and the locator that holds the declaration. Entries are added ONLY by governed determination — an empty catalogue is an honest statement that no assignment has been governed yet, never a licence to guess.",
+  "schema": {
+    "assignments": {
+      "<subject-id>": {
+        "owner": "the canonical owner (an authority, not a path)",
+        "authority": "the authority under which this assignment binds",
+        "locator": "the locator holding the declaration (must classify into a canonical-home-eligible zone)",
+        "precedence": "optional integer overriding the provider precedence",
+        "detail": "optional governance reference"
+      }
+    }
+  },
+  "assignments": {}
+}

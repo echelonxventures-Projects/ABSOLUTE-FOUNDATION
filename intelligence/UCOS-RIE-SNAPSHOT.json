@@ -4,7 +4,7 @@
   "authority": "NONE (derived truth)",
   "capability_count": 105,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "cda143a29fe2bae056772fbfcd5fd07c9efada92c769926bc51d95f2b26bc041",
+  "content_hash": "da938f1fa7844aa0ab9544b647b55b5a8758c9a6bf6dd5910d3e3b4ce10b106e",
   "dimension_index_reconciled_pct": 26.7,
   "drift": {
     "baseline": false,
@@ -222,7 +222,7 @@
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "fca8eed2cf1a969b76cd1bbf6cafbd0dabecdd4cc4281082aefcb46ecef00087",
+      "fingerprint": "e140fb2cde6a11b530371385ff2c407cc699890923f650e836039a24d1c9c152",
       "source": "coverage.xml"
     },
     "evidence_files": {
@@ -238,7 +238,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "e19fe5864fc06477fdb73d052e4388694b3f303f0b84cd21f85a79433375703a",
+    "input_hash": "e92ad12455696365cb81e366070ff612ed80e148b534e5fbfbbc91b43bf98739",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },

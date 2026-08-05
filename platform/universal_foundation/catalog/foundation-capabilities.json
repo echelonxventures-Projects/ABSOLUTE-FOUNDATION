@@ -1,0 +1,245 @@
+{
+  "register_id": "ucos.foundation.capabilities",
+  "$comment": "THE Foundation capability register. This document \u2014 not any module \u2014 is the population the Universal Foundation Constitution (UCOS-UFC-001) governs. Registering a Foundation capability is an entry here and requires NO change to constitution.py, conformance.py, convergence.py or freeze.py; UFC-09 is measured by proving those governing modules contain none of the identities below. Every field is a declaration a probe resolves live: an entry that names something absent produces a FAULT, never a silent pass.",
+  "governing_modules": [
+    "platform.universal_foundation.constitution",
+    "platform.universal_foundation.conformance",
+    "platform.universal_foundation.convergence",
+    "platform.universal_foundation.freeze"
+  ],
+  "locator_literal_pattern": "(^|/)[0-9]{2}-[A-Z][A-Z0-9-]*(/|$)",
+  "$locator_note": "A string literal matching this shape is a repository locator and therefore a project fact that UFC-13 requires to live in a declared document rather than in code. Declared catalogue documents are data and are never scanned.",
+  "capabilities": [
+    {
+      "capability_id": "UCOS-URTF-001",
+      "name": "Universal Repository Truth Framework",
+      "domain": "policies",
+      "description": "What counts as Truth, determined by declared zone policy rather than by any hardcoded path. The one Repository Truth model.",
+      "package": "platform.universal_truth",
+      "identity": "platform.universal_truth.contracts:URTF_ID",
+      "contracts": "platform.universal_truth.contracts:TRUTH_CONTRACTS",
+      "version": "platform.universal_truth.contracts:TRUTH_CONTRACT_VERSION",
+      "service_name": "universal.truth",
+      "service_descriptor": "platform.universal_truth.bootstrap:truth_service_descriptor",
+      "service_register": "platform.universal_truth.bootstrap:register_repository_truth",
+      "bootstrap": "platform.universal_truth.bootstrap:bootstrap_repository_truth",
+      "build": "platform.universal_truth.policy:default_truth_policy",
+      "errors_module": "platform.universal_truth.errors",
+      "errors_base": "platform.universal_truth.errors:RepositoryTruthError",
+      "extension_points": [
+        {
+          "symbol": "platform.universal_truth.policy:TruthPolicy",
+          "abstract": false,
+          "methods": ["register", "register_all", "zones", "zone", "classify"]
+        }
+      ],
+      "registries": [
+        {"symbol": "platform.universal_truth.policy:TruthPolicy", "ordered": "zones", "require": "zone"}
+      ],
+      "entry_point": "ucos-truth",
+      "cli": "platform.universal_truth.cli:main",
+      "catalogs": ["catalog/ucos-repository-truth.json"],
+      "dependencies": []
+    },
+    {
+      "capability_id": "UCOS-UOF-001",
+      "name": "Universal Ownership Framework",
+      "domain": "governance",
+      "description": "Who owns a subject, determined from constitutional evidence only and never inferred. The one ownership model.",
+      "package": "platform.universal_ownership",
+      "identity": "platform.universal_ownership.contracts:UOF_ID",
+      "contracts": "platform.universal_ownership.contracts:OWNERSHIP_CONTRACTS",
+      "version": "platform.universal_ownership.contracts:OWNERSHIP_CONTRACT_VERSION",
+      "service_name": "universal.ownership",
+      "service_descriptor": "platform.universal_ownership.bootstrap:ownership_service_descriptor",
+      "service_register": "platform.universal_ownership.bootstrap:register_ownership",
+      "bootstrap": "platform.universal_ownership.bootstrap:bootstrap_ownership",
+      "build": "platform.universal_ownership.bootstrap:bootstrap_ownership",
+      "errors_module": "platform.universal_ownership.errors",
+      "errors_base": "platform.universal_ownership.errors:OwnershipError",
+      "extension_points": [
+        {
+          "symbol": "platform.universal_ownership.evidence:OwnershipEvidenceProvider",
+          "abstract": true,
+          "methods": ["descriptor", "provide", "collect"]
+        },
+        {
+          "symbol": "platform.universal_ownership.recommendation:OwnershipRecommendationProvider",
+          "abstract": true,
+          "methods": ["descriptor", "recommend", "propose"]
+        }
+      ],
+      "registries": [
+        {
+          "symbol": "platform.universal_ownership.evidence:EvidenceProviderRegistry",
+          "ordered": "ordered",
+          "require": "require"
+        },
+        {
+          "symbol": "platform.universal_ownership.recommendation:RecommendationProviderRegistry",
+          "ordered": "ordered",
+          "require": "require"
+        }
+      ],
+      "entry_point": "ucos-ownership",
+      "cli": "platform.universal_ownership.cli:main",
+      "catalogs": ["catalog/ucos-ownership-declarations.json"],
+      "dependencies": ["UCOS-URTF-001"]
+    },
+    {
+      "capability_id": "UCOS-USAF-001",
+      "name": "Universal Source Assimilation Framework",
+      "domain": "providers",
+      "description": "How anything \u2014 document, export, record set, API response \u2014 becomes admitted content with a declared destination. The one assimilation model.",
+      "package": "platform.universal_assimilation",
+      "identity": "platform.universal_assimilation.contracts:USAF_ID",
+      "contracts": "platform.universal_assimilation.contracts:ASSIMILATION_CONTRACTS",
+      "version": "platform.universal_assimilation.contracts:ASSIMILATION_CONTRACT_VERSION",
+      "service_name": "universal.assimilation",
+      "service_descriptor": "platform.universal_assimilation.bootstrap:assimilation_service_descriptor",
+      "service_register": "platform.universal_assimilation.bootstrap:register_assimilation",
+      "bootstrap": "platform.universal_assimilation.bootstrap:bootstrap_assimilation",
+      "build": "platform.universal_assimilation.bootstrap:bootstrap_assimilation",
+      "errors_module": "platform.universal_assimilation.errors",
+      "errors_base": "platform.universal_assimilation.errors:AssimilationError",
+      "extension_points": [
+        {
+          "symbol": "platform.universal_assimilation.adapters:SourceAdapter",
+          "abstract": true,
+          "methods": ["descriptor", "extract", "units"]
+        }
+      ],
+      "registries": [
+        {
+          "symbol": "platform.universal_assimilation.adapters:SourceAdapterRegistry",
+          "ordered": "ordered",
+          "require": "require"
+        },
+        {
+          "symbol": "platform.universal_assimilation.contracts:SourceKindRegistry",
+          "ordered": "declarations",
+          "require": "require"
+        }
+      ],
+      "entry_point": "ucos-assimilate",
+      "cli": "platform.universal_assimilation.cli:main",
+      "policy_free": true,
+      "$policy_note": "The declared source-kind vocabulary and adapter set are the framework's own reusable content, not a project policy: a project specialises assimilation through the Foundation specialisation's source manifest and destination map, never through a document owned here.",
+      "dependencies": ["UCOS-URTF-001"]
+    },
+    {
+      "capability_id": "UCOS-UMPF-001",
+      "name": "Universal Measurement Policy Framework",
+      "domain": "policies",
+      "description": "How any determination is measured, by registered policy rather than by a branch inside an engine. The one measurement model.",
+      "package": "platform.universal_measurement",
+      "identity": "platform.universal_measurement.contracts:UMPF_ID",
+      "contracts": "platform.universal_measurement.contracts:POLICY_CONTRACTS",
+      "version": "platform.universal_measurement.contracts:POLICY_CONTRACT_VERSION",
+      "service_name": "universal.measurement.policy",
+      "service_descriptor": "platform.universal_measurement.bootstrap:policy_service_descriptor",
+      "service_register": "platform.universal_measurement.bootstrap:register_measurement_policies",
+      "bootstrap": "platform.universal_measurement.bootstrap:bootstrap_measurement_policies",
+      "build": "platform.universal_measurement.bootstrap:bootstrap_measurement_policies",
+      "errors_module": "platform.universal_measurement.errors",
+      "errors_base": "platform.universal_measurement.errors:MeasurementPolicyError",
+      "extension_points": [
+        {
+          "symbol": "platform.universal_measurement.policies:MeasurementPolicy",
+          "abstract": true,
+          "methods": ["descriptor", "evaluate", "apply"]
+        }
+      ],
+      "registries": [
+        {
+          "symbol": "platform.universal_measurement.engine:MeasurementPolicyRegistry",
+          "ordered": "ordered",
+          "require": "require"
+        }
+      ],
+      "entry_point": "ucos-measurement",
+      "cli": "platform.universal_measurement.cli:main",
+      "catalogs": ["catalog/ucos-measurement-policies.json"],
+      "dependencies": ["UCOS-URTF-001", "UCOS-UOF-001", "UCOS-USAF-001"]
+    },
+    {
+      "capability_id": "UCOS-UFC-001",
+      "name": "Universal Foundation Constitution",
+      "domain": "certification",
+      "description": "The one law every Foundation capability obeys, with one executable probe per article and a measured convergence and freeze determination.",
+      "package": "platform.universal_foundation",
+      "identity": "platform.universal_foundation.constitution:FOUNDATION_CONSTITUTION_ID",
+      "contracts": "platform.universal_foundation.constitution:CONSTITUTION_CONTRACTS",
+      "version": "platform.universal_foundation.constitution:FOUNDATION_CONSTITUTION_VERSION",
+      "service_name": "universal.foundation.constitution",
+      "service_descriptor": "platform.universal_foundation.bootstrap:constitution_service_descriptor",
+      "service_register": "platform.universal_foundation.bootstrap:register_foundation_constitution",
+      "bootstrap": "platform.universal_foundation.bootstrap:bootstrap_foundation_constitution",
+      "build": "platform.universal_foundation.bootstrap:bootstrap_foundation_constitution",
+      "errors_module": "platform.universal_foundation.errors",
+      "errors_base": "platform.universal_foundation.errors:UniversalFoundationError",
+      "extension_points": [
+        {
+          "symbol": "platform.universal_foundation.conformance:ConformanceProbe",
+          "abstract": true,
+          "methods": ["gate", "measure", "apply"]
+        }
+      ],
+      "registries": [
+        {
+          "symbol": "platform.universal_foundation.conformance:ProbeRegistry",
+          "ordered": "ordered",
+          "require": "require"
+        },
+        {
+          "symbol": "platform.universal_foundation.conformance:CapabilityRegister",
+          "ordered": "ordered",
+          "require": "require"
+        }
+      ],
+      "entry_point": "ucos-constitution",
+      "cli": "platform.universal_foundation.constitution_cli:main",
+      "catalogs": [
+        "catalog/foundation-capabilities.json",
+        "catalog/foundation-convergence.json",
+        "catalog/foundation-freeze.json"
+      ],
+      "dependencies": []
+    },
+    {
+      "capability_id": "UCOS-UFP-001",
+      "name": "Universal Foundation Platform",
+      "domain": "composition",
+      "description": "The composition in which Truth, ownership, assimilation and measurement become one determination, specialised by one declared document per project.",
+      "package": "platform.universal_foundation",
+      "identity": "platform.universal_foundation.bootstrap:UFP_ID",
+      "contracts": "platform.universal_foundation.bootstrap:FOUNDATION_CONTRACTS",
+      "version": "platform.universal_foundation.bootstrap:FOUNDATION_CONTRACT_VERSION",
+      "service_name": "universal.foundation",
+      "service_descriptor": "platform.universal_foundation.bootstrap:foundation_service_descriptor",
+      "service_register": "platform.universal_foundation.bootstrap:register_universal_foundation",
+      "bootstrap": "platform.universal_foundation.bootstrap:bootstrap_universal_foundation",
+      "build": "platform.universal_foundation.bootstrap:bootstrap_universal_foundation",
+      "errors_module": "platform.universal_foundation.errors",
+      "errors_base": "platform.universal_foundation.errors:UniversalFoundationError",
+      "extension_points": [
+        {
+          "symbol": "platform.universal_foundation.specialization:FoundationSpecialization",
+          "abstract": false,
+          "methods": ["create", "from_document", "resolve", "to_dict", "fingerprint"]
+        }
+      ],
+      "registries": [
+        {
+          "symbol": "platform.universal_foundation.conformance:CapabilityRegister",
+          "ordered": "ordered",
+          "require": "require"
+        }
+      ],
+      "entry_point": "ucos-foundation",
+      "cli": "platform.universal_foundation.cli:main",
+      "catalogs": ["catalog/ucos-consolidation.json"],
+      "dependencies": ["UCOS-URTF-001", "UCOS-UOF-001", "UCOS-USAF-001", "UCOS-UMPF-001", "UCOS-UFC-001"]
+    }
+  ]
+}

@@ -2761,6 +2761,7 @@
         "docs",
         "errors",
         "graph",
+        "homing",
         "intelligence",
         "is_capability",
         "is_reuse_candidate",
@@ -4606,6 +4607,7 @@
         "test_governance_handbook_renders_exceptions_and_skips_empty_kinds",
         "test_graph",
         "test_graph_navigation_and_dedup",
+        "test_homing",
         "test_index_lists_every_portal",
         "test_init_then_validate_certify",
         "test_integrity_failure_blocks",
@@ -5455,6 +5457,7 @@
         "better_candidate",
         "bridge",
         "chain",
+        "closure",
         "committed",
         "conversation",
         "decide",
@@ -5475,6 +5478,7 @@
         "obj",
         "platform",
         "programme",
+        "record",
         "repo",
         "row",
         "rows_of",
@@ -5493,6 +5497,7 @@
         "test_a_faculty_referencing_an_undeclared_register_closes_the_gate",
         "test_a_hold_outranks_an_admission",
         "test_a_home_that_does_not_exist_closes_the_gate",
+        "test_a_makefile_target_names_the_engine",
         "test_a_missing_placeholder_resolves_to_the_declared_dash_never_a_blank",
         "test_a_pre_d3_row_deserializes_and_fails_closed",
         "test_a_protected_owner_is_reused_rather_than_replaced",
@@ -5501,7 +5506,10 @@
         "test_a_register_referencing_a_path_that_is_gone_closes_the_gate",
         "test_a_register_that_does_not_resolve_closes_the_gate",
         "test_a_release_state_no_register_admits_closes_the_gate",
+        "test_a_required_input_that_is_absent_asserts_no_verdict",
         "test_a_symbol_that_does_not_exist_closes_the_gate",
+        "test_a_workflow_names_the_engine",
+        "test_absent_or_blank_recorded_head_falls_back_and_never_yields_empty",
         "test_accept_execution_returns_decision_and_evidence",
         "test_accept_execution_strict_raises_when_rejected",
         "test_all_coordination_classes_supported",
@@ -5590,6 +5598,7 @@
         "test_cli_malformed_registration_exit_two",
         "test_cli_missing_manifest_exit_two",
         "test_cli_valid_manifest_exit_zero",
+        "test_closure009_requirement_engine",
         "test_closure_root_only_by_default",
         "test_coerce_secrets_preserves_existing_secret_ref",
         "test_collection_views",
@@ -5597,6 +5606,7 @@
         "test_committed_decisions_are_total_and_all_six_actions_are_reachable",
         "test_committed_declaration_satisfies_the_check",
         "test_committed_presence_states_are_unchanged_by_the_second_axis",
+        "test_committed_register_measures_the_current_closure_register",
         "test_committed_schema_declares_the_whole_comparison_model",
         "test_committed_schema_declares_the_whole_decision_model",
         "test_committed_verdicts_are_total_and_all_required_states_are_reachable",
@@ -5803,6 +5813,8 @@
         "test_every_recorded_gap_states_why_it_is_not_closed",
         "test_every_rendered_target_is_a_plain_filename_inside_the_programme",
         "test_every_rendered_target_resolves_inside_the_programme",
+        "test_every_requirement_carries_exactly_one_canonical_owner",
+        "test_every_requirement_is_homed_when_the_closure_homes_every_concept",
         "test_exception_logging",
         "test_execute_and_observability_methods",
         "test_execute_composition_honours_outcomes_and_platform",
@@ -5840,17 +5852,7 @@
         "test_federation_dangling_target",
         "test_federation_dict",
         "test_federation_duplicate_refused",
-        "test_federation_same_context_refused",
-        "test_federation_self_refused",
-        "test_federation_view_to_dict",
-        "test_file_not_found",
-        "test_file_then_env_precedence",
-        "test_filesystem_mtime_is_never_consulted",
-        "test_filter_by_category",
-        "test_filter_multi_criteria",
-        "test_filter_owner_and_parent",
-        "test_filter_status_accepts_enum",
-        "test_filter_unknown_criteria"
+        "test_federation_same_context_refused"
       ],
       "unique_id": "RC-51"
     },
@@ -11219,7 +11221,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "9a75583d0a833cfee5c010e450829219738835758ebac930b88992bf9e43e929",
+  "content_hash": "5b20bda848086063db55b193c402b80778fbff657c26d808ad22e386589600cf",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -11334,7 +11336,7 @@
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "fca8eed2cf1a969b76cd1bbf6cafbd0dabecdd4cc4281082aefcb46ecef00087",
+      "fingerprint": "e140fb2cde6a11b530371385ff2c407cc699890923f650e836039a24d1c9c152",
       "source": "coverage.xml"
     },
     "evidence_files": {
@@ -11380,7 +11382,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "e19fe5864fc06477fdb73d052e4388694b3f303f0b84cd21f85a79433375703a",
+    "input_hash": "e92ad12455696365cb81e366070ff612ed80e148b534e5fbfbbc91b43bf98739",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },
@@ -11575,7 +11577,7 @@
         "status": "BLOCKED"
       }
     },
-    "unit_validation_pct": 95.13
+    "unit_validation_pct": 94.71
   },
   "repository_health": {
     "certification": {
@@ -11584,8 +11586,8 @@
       "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)"
     },
     "code": {
-      "coverage_branch_pct": 91.84,
-      "coverage_line_pct": 95.13,
+      "coverage_branch_pct": 90.39,
+      "coverage_line_pct": 94.71,
       "roots": {
         "application": {
           "loc": 23741,
@@ -11602,11 +11604,11 @@
           "test_functions": 887
         },
         "engine": {
-          "loc": 69643,
+          "loc": 69595,
           "root": "engine",
-          "source_files": 291,
-          "test_files": 219,
-          "test_functions": 2548
+          "source_files": 292,
+          "test_files": 221,
+          "test_functions": 2567
         },
         "infrastructure": {
           "loc": 22599,
@@ -11637,8 +11639,8 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 270654,
-      "total_tests": 9493
+      "total_loc": 270606,
+      "total_tests": 9512
     },
     "corpus": {
       "artifacts": 1194,

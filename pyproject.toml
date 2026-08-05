@@ -101,6 +101,19 @@ ucos-mcos = "engine.civilization.cli:main"
 # is what keeps the framework and its catalogue reachable (RCH-ENTRYPOINT) rather than
 # measured as a dead engine. AUTHORITY = NONE (DERIVED TRUTH); writes nothing.
 ucos-uapf = "platform.universal_pipeline.cli:main"
+# Ω-A05 — Universal Foundation capabilities. Each is a reusable Foundation service with its own
+# one-command surface, so "what is Truth", "who owns this", "assimilate this source" and "measure
+# this" are invocable capabilities (RCH-ENTRYPOINT) rather than logic buried in one engine.
+# AUTHORITY = NONE (DERIVED TRUTH); every one of them reads Truth and writes none.
+ucos-truth = "platform.universal_truth.cli:main"
+ucos-ownership = "platform.universal_ownership.cli:main"
+ucos-assimilate = "platform.universal_assimilation.cli:main"
+ucos-foundation = "platform.universal_foundation.cli:main"
+# Ω-A07 — the Foundation's own law and the measurement framework it is configured by. Both are
+# Foundation capabilities under UCOS-UFC-001 and UFC-06 requires each to be invocable in one
+# command, so the entry point is what makes the article true rather than aspirational.
+ucos-constitution = "platform.universal_foundation.constitution_cli:main"
+ucos-measurement = "platform.universal_measurement.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -114,6 +127,16 @@ exclude = ["engine.tests*", "platform.tests*"]
 # Build pipelines are declarations the framework derives, so an installed wheel without the
 # catalogue would be a framework with nothing to run.
 "platform.universal_pipeline" = ["catalog/*.json"]
+# Ω-A05: ship the declared Foundation specialisations. They are DATA, not code — the Repository
+# Truth policy, the governed ownership declarations and the project specialisation are the ONLY
+# places a project's own names appear, so an installed wheel without them is a Foundation with
+# nothing to specialise.
+"platform.universal_truth" = ["catalog/*.json"]
+"platform.universal_ownership" = ["catalog/*.json"]
+"platform.universal_foundation" = ["catalog/*.json"]
+# Ω-A07: the measurement policy composition is declared data too — which measurements bind, and
+# how strongly, is configuration and not code (UFC-04).
+"platform.universal_measurement" = ["catalog/*.json"]
 
 # --- TASK-000009: test + coverage configuration ---------------------------------
 [tool.pytest.ini_options]
@@ -161,6 +184,11 @@ addopts = [
   "--cov=platform.universal_portal",
   "--cov=platform.runtime_platform",
   "--cov=platform.universal_pipeline",
+  "--cov=platform.universal_truth",
+  "--cov=platform.universal_ownership",
+  "--cov=platform.universal_assimilation",
+  "--cov=platform.universal_measurement",
+  "--cov=platform.universal_foundation",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -168,7 +196,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

@@ -2,7 +2,7 @@
 #
 # UCOS Ω∞ — Canonical Verification Entry Point.
 #
-#   ./verify.sh              lint + tests/coverage + governance enforcement (read-only gate)
+#   ./verify.sh              lint + tests/coverage + governance + meta-constitutional gate
 #   ./verify.sh --full       also run the full registration + drift gate (register.sh --guard)
 #   ./verify.sh --failfast   stop at the first failing stage
 #
@@ -110,7 +110,26 @@ run_stage "governance enforce --pre" "$PY" 00-BOOK/tools/ukb.py enforce --pre
 # that let 539 schema violations pass undetected through all prior gates.
 run_stage "registry validate (schema + integrity)" "$PY" 00-BOOK/tools/ukb.py validate
 
-# --- Stage 6 (opt-in): full registration transaction + drift gate ----------------
+# --- Stage 6: meta-constitutional conformance gate (CMG-000001 Article L) ---------
+# The meta layer is permitted EXACTLY ONE automated realization, and Article LXVI.7
+# requires it be "invoked through the corpus's existing verification entry point" —
+# this stage IS that invocation. It adds no second pipeline, scheduler, or daemon
+# (LXVI.7) and no second criteria set (L.2): the criteria are CMG-INV-01..12 and
+# nothing else, evaluated by the validator Article L.3 names as its realization.
+#
+# Before this stage existed, meta-constitutional conformance was measurable but only
+# on demand, so a corpus could drift into parallel authority, orphan governance, a
+# dangling superior or an illegal lifecycle record and stay green through every gate.
+# XLIX.7 is explicit that an unchecked obligation is of UNKNOWN compliance and SHALL
+# NOT be presumed satisfied; binding the gate here converts the twelve invariants from
+# on-demand measurement into continuous enforcement.
+#
+# Read-only and fail-closed (L.4): the validator writes nothing and reports a finding
+# rather than a pass on any unparseable, missing or ambiguous input. It is deterministic
+# and hermetic (L.5), so it cannot flake a verification run.
+run_stage "meta-constitutional conformance (CMG-INV-01..12)" bash 00-CMG/tools/cmg-gate.sh
+
+# --- Stage 7 (opt-in): full registration transaction + drift gate ----------------
 # register.sh regenerates the synchronized registers and fails on drift; it mutates
 # generated DATA/REGISTRIES/CONTROL-TOWER/PORTAL, so it is opt-in for local runs.
 if [ "$FULL" = "1" ]; then

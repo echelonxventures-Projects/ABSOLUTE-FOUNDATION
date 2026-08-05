@@ -40,6 +40,16 @@ help:
 	@echo "  make selfaware-gate     fail-closed when the capability register is behind the repo"
 	@echo "  make homing        resolve each concept's canonical home from declared ownership"
 	@echo "  make homing-gate   fail-closed while any canonical home is undeclared (RG-B01)"
+	@echo "  make homing-recommend   the governance workload, reduced to its irreducible minimum"
+	@echo "  make homing-draft  the NON-BINDING draft assignment document for governance review"
+	@echo "  make constitution  measure every Foundation capability against UCOS-UFC-001"
+	@echo "  make constitution-gate  fail-closed while any capability fails any article"
+	@echo "  make maturity      the measured Foundation maturity, axis by axis"
+	@echo "  make convergence   prove each constitutional model has exactly one implementation"
+	@echo "  make convergence-gate   fail-closed while any surface is a competing authority"
+	@echo "  make freeze        the Foundation freeze readiness determination (twelve criteria)"
+	@echo "  make freeze-full   the same, executing the declared verification commands"
+	@echo "  make freeze-gate   fail-closed unless every criterion is discharged by measurement"
 	@echo "  make corpus        UKAP-001 D-1: discover exports, resolve the newest as canonical input"
 	@echo "  make corpus-replay      re-derive corpus currency from corpus.json (no corpus root)"
 	@echo "  make corpus-gate   fail-closed corpus-currency gate (non-zero while the corpus is stale)"
@@ -228,17 +238,105 @@ selfaware-gate:
 # ownership is DECLARED by, and which concepts Repository Truth does not answer. Reads
 # only; assigns nothing. Ownership must be assigned by governed determination and must
 # never be implied (CEP-002 14.2), so an undeclared home is reported, never guessed.
-.PHONY: homing homing-gate
-homing:
-	@python3 -m engine.knowledge.cli homing
+#
+# Ω-A07 CONVERGENCE: this target now invokes the ONE ownership determination — the Universal
+# Ownership Framework, specialised by platform/universal_foundation/catalog/ucos-consolidation.json.
+# The engine-side resolver it used to call (engine/knowledge/homing.py) is RETIRED: two
+# determinations over one population reported different numbers, which UCOS-UFC-001 UFC-16
+# forbids. The converged determination reproduces the retired measurement exactly (151 declared,
+# 390 unresolved over 541 subjects) and settles by declared zone precedence the two contests the
+# retired rule broke with a hardcoded realization special case. Supersession is enforced, not
+# documented: `make convergence-gate` fails if the retired module reappears.
+.PHONY: homing homing-gate homing-recommend homing-draft
+homing: bootstrap-quiet
+	@$(PY) -m platform.universal_ownership.cli homing
 
 # homing-gate: fail-closed — non-zero exit while any concept's canonical home is
 # undeclared. This is the standing measurement of RG-B01 / WP-UAKOS-CLOSURE-009-001; it
 # goes green only when a Governance Authority determination has declared the residue.
-homing-gate:
-	@python3 -m engine.knowledge.cli homing --gate >/dev/null \
+homing-gate: bootstrap-quiet
+	@$(PY) -m platform.universal_ownership.cli homing --gate >/dev/null 2>&1 \
 	  || { echo "CANONICAL OWNERSHIP UNDECLARED — run 'make homing' for the per-concept residue (RG-B01)" >&2; exit 1; }
 	@echo "canonical ownership: every concept carries a declared canonical home"
+
+# homing-recommend: GOVERNANCE MINIMISATION. Every deterministic capability has already run, so
+# what remains is measured and split three ways: the RATIFIABLE residue, where a deterministic
+# provider can state the assignment an authority would ratify together with its located basis;
+# the REMEDIABLE residue, where the determination diagnosed a named eligibility deficit at a named
+# locator, so what is needed is an ACT (register the artifact, give it the declared form, move it
+# out of derived residue) and not a decision; and the GOVERNANCE MINIMUM, which is neither. Only
+# the third number is work an authority must originate — reporting the second as "irreducible"
+# billed a mechanical omission as constitutional ambiguity. A recommendation is never ownership
+# and no engine reads one as evidence.
+homing-recommend: bootstrap-quiet
+	@$(PY) -m platform.universal_ownership.cli recommend
+
+# homing-draft: emit the NON-BINDING draft assignment document a governing authority would
+# review. It carries ratified:false and is deliberately a separate document from the governed
+# ownership catalogue, so ratification stays an explicit constituent act.
+homing-draft: bootstrap-quiet
+	@$(PY) -m platform.universal_ownership.cli recommend --draft --json
+
+
+# --- Ω-A07: the Universal Foundation Constitution ------------------------------------------
+# UCOS-UFC-001 — the ONE law every Foundation capability obeys: sixteen articles over thirteen
+# governed domains, each bound to exactly one executable probe. The law names no capability; its
+# population is platform/universal_foundation/catalog/foundation-capabilities.json, and UFC-09 is
+# measured by proving no governing module contains any identity from it. Registering a Foundation
+# capability is therefore an entry in that document and requires NO change to any engine.
+#
+# A probe that cannot execute reports FAULT, never a pass. Absence of evidence is never evidence.
+.PHONY: constitution constitution-gate maturity convergence convergence-gate freeze freeze-gate freeze-full
+constitution: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.constitution_cli conform
+
+# constitution-gate: fail-closed — non-zero while any capability fails or faults any article.
+constitution-gate: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.constitution_cli conform --gate >/dev/null \
+	  || { echo "FOUNDATION NON-CONFORMANT — run 'make constitution' for the article and capability" >&2; exit 1; }
+	@echo "universal foundation: every capability conforms to every constitutional article"
+
+# maturity: the measured maturity of the platform, axis by axis. Each of the fourteen axes is
+# reached only when every gate declared to prove it passed, so this is a measurement over
+# executed probes and never a status anybody typed.
+maturity: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.constitution_cli maturity
+
+# convergence: prove each constitutional model — Repository Truth, ownership, assimilation,
+# measurement, dependency, implementation — has exactly ONE live implementation. Relations are
+# verified, not asserted: a SUPERSEDED surface must be absent from the tree, a DELEGATES surface
+# must really import the canonical owner (measured over its import graph), a GOVERNED narrower
+# authority must restate none of the canonical law, and a PROJECTION must hold no executable
+# determination.
+convergence: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.constitution_cli convergence
+
+# convergence-gate: fail-closed — non-zero while any surface holds a competing constitutional
+# definition. This is the gate that keeps a retired implementation from quietly returning.
+convergence-gate: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.constitution_cli convergence --gate >/dev/null \
+	  || { echo "COMPETING CONSTITUTIONAL AUTHORITY — run 'make convergence' for the model and surface" >&2; exit 1; }
+	@echo "constitutional convergence: every model has exactly one live implementation"
+
+# freeze: the Foundation freeze readiness determination over the twelve declared criteria.
+# UNMEASURED is not a pass: a criterion whose evidence was not gathered withholds readiness as
+# firmly as a failure, because a freeze declared over unmeasured criteria is the failure a freeze
+# exists to prevent. This target DETERMINES ELIGIBILITY and never performs a freeze.
+freeze: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.constitution_cli freeze
+
+# freeze-full: the same determination including the declared verification commands, so the
+# suite criterion is measured rather than reported UNMEASURED. This is the emitting path for a
+# freeze decision.
+freeze-full: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.constitution_cli freeze --with-suites
+
+# freeze-gate: fail-closed — non-zero unless every declared criterion is discharged by measured
+# evidence.
+freeze-gate: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.constitution_cli freeze --with-suites --gate >/dev/null \
+	  || { echo "FOUNDATION NOT FREEZE-READY — run 'make freeze' for the criterion and its blockers" >&2; exit 1; }
+	@echo "universal foundation: every freeze criterion is discharged by measured evidence"
 
 
 # corpus: UKAP-001 / D-1 — CORPUS CURRENCY RESTORATION. Discovers every available ChatGPT
@@ -1699,3 +1797,33 @@ closure009-replay:
 	@git diff --exit-code -- 00-MASTER/UAKOS-CLOSURE-009 \
 	  || { echo "UAKOS-CLOSURE-009 REPLAY DRIFT — committed registers are not the product of the declared inputs" >&2; exit 1; }
 	@echo "UAKOS-CLOSURE-009 replay: no drift"
+
+
+# --- Ω-A05: Universal Foundation capabilities -----------------------------------------
+# The reusable Foundation is invoked as a capability, never re-derived per programme.
+# Every target below EXECUTES FROM REPOSITORY TRUTH: the population comes from the declared
+# specialisation (platform/universal_foundation/catalog/*.json), so none of them scans the
+# repository. Swap the specialisation document and the same targets serve another project.
+.PHONY: truth ownership-determination foundation foundation-gate
+
+# truth: classify any locator population against declared Repository Truth zones.
+truth: bootstrap-quiet
+	@$(PY) -m platform.universal_truth.cli policy
+
+# ownership-determination: the Ownership Declaration Contract and its evidence providers.
+ownership-determination: bootstrap-quiet
+	@$(PY) -m platform.universal_ownership.cli contract
+	@$(PY) -m platform.universal_ownership.cli providers
+
+# foundation: the composed determination — Truth classified, ownership determined from
+# evidence only, and every measurement produced by a registered policy.
+foundation: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.cli determine
+
+# foundation-gate: fail-closed — non-zero while any blocking measurement policy is
+# unsatisfied. The blockers are named policies, so the gate says WHICH determination is
+# incomplete rather than reporting one opaque number.
+foundation-gate: bootstrap-quiet
+	@$(PY) -m platform.universal_foundation.cli determine --gate >/dev/null \
+	  || { echo "FOUNDATION DETERMINATION NOT CLOSED — run 'make foundation' for the named blockers" >&2; exit 1; }
+	@echo "universal foundation: every blocking measurement policy is satisfied"
