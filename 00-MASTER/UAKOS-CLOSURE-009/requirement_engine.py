@@ -26,12 +26,20 @@ CONSTITUTIONAL POSTURE
       ceiling and no wave count is bounded by this engine.
     * Deterministic. No timestamps, no randomness, no environment dependence beyond
       the declared inputs; re-rendering is byte-identical at a fixed commit.
+    * Replay-stable. A committed artifact can never carry the sha of the commit that
+      carries it, so `--render` REPLAYS the head commit recorded in the existing
+      requirements.json instead of re-reading it. Without this the registers drift by
+      exactly one field on every commit, which is why a byte-for-byte drift gate over
+      this programme was previously unenforceable. The mechanism is not invented here:
+      it is the pattern 00-MASTER/UKAP-001/corpus_engine.py already proved (Reuse
+      Before Create).
     * Fail-closed. `--gate` exits non-zero while constitutional assimilation is below
       100%. `--baseline-gate` exits non-zero while any Phase-8 baseline precondition
       is unproven.
 
 USAGE
     python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py
+    python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --render
     python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --gate
     python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --baseline-gate
 """
@@ -140,6 +148,23 @@ def _cell(v) -> str:
     return s if s else "-"
 
 
+def _head_commit(replay: dict | None) -> str:
+    """The HEAD this model is rendered against.
+
+    In replay mode the head recorded in the previously written ``requirements.json`` is
+    reused verbatim. A committed artifact cannot carry the sha of the commit that carries
+    it, so re-reading HEAD would make every register drift by exactly one field on every
+    commit and no byte-for-byte drift gate over this programme could ever pass. Reusing
+    the recorded head is what makes the determinism claim in this module's docstring
+    mechanically enforceable.
+    """
+    if replay is not None:
+        recorded = str((replay.get("baseline") or {}).get("head_commit") or "").strip()
+        if recorded:
+            return recorded
+    return _git("rev-parse", "--short", "HEAD") or "unknown"
+
+
 def _fence(header: list[str], rows: list[list], note: str = "") -> str:
     out = ["| " + " | ".join(header) + " |", "|" + "|".join(["---"] * len(header)) + "|"]
     for r in rows:
@@ -225,7 +250,7 @@ def declared_authority(rel: str, cache: dict) -> str:
 # --------------------------------------------------------------------------------------
 # model construction
 # --------------------------------------------------------------------------------------
-def build(inputs: dict) -> dict:
+def build(inputs: dict, replay: dict | None = None) -> dict:
     closure = inputs["closure"]
     concepts = closure["concepts"]
     rules, rules_src = load_classifier()
@@ -801,7 +826,10 @@ def build(inputs: dict) -> dict:
     baseline_meta = {
         "closure_baseline_commit": closure.get("baseline_commit", "unknown"),
         "branch": closure.get("branch", "unknown"),
-        "head_commit": _git("rev-parse", "--short", "HEAD") or "unknown",
+        # The RECORDED head is replayed, never re-read: a committed artifact can never
+        # carry the sha of the commit that carries it, so a replay must preserve the
+        # recorded HEAD or every register drifts on every commit (UKAP-001 precedent).
+        "head_commit": _head_commit(replay),
         "closure_determination": closure.get("determination", "unknown"),
         "closure_gap_total": closure.get("gap_total", "unknown"),
         "concept_total": closure.get("concept_total", len(reqs)),
@@ -1662,9 +1690,21 @@ def d10(m):
         "## 6. Regeneration",
         "",
         "```",
-        "python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py               # regenerate",
-        "python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --gate        # fail-closed assimilation gate",
-        "python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --baseline-gate  # fail-closed baseline gate",
+        "make closure009               # regenerate (depends on closure-phase3)",
+        "make closure009-gate          # fail-closed assimilation gate",
+        "make closure009-baseline-gate # fail-closed baseline precondition gate",
+        "make closure009-replay        # byte-for-byte register drift gate",
+        "```",
+        "",
+        "The engine is also invocable directly; `--render` replays the HEAD recorded in",
+        "`requirements.json` instead of re-reading it, which is what makes the drift gate",
+        "above stable across the very commit that carries these registers.",
+        "",
+        "```",
+        "python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",
+        "python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --render --quiet",
+        "python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --gate",
+        "python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --baseline-gate",
         "```",
         "",
         f"*END 10 · AUTHORITY = {AUTHORITY}. This determination creates no authority, ratifies",
@@ -1690,6 +1730,7 @@ DELIVERABLES = (
 def main(argv: list[str]) -> int:
     gate = "--gate" in argv
     baseline_gate = "--baseline-gate" in argv
+    render = "--render" in argv
 
     inputs = {}
     missing = []
@@ -1704,7 +1745,12 @@ def main(argv: list[str]) -> int:
         )
         return 2
 
-    model = build(inputs)
+    # In render mode the previously written record supplies the HEAD, so the rendered
+    # surface is a pure function of the declared inputs plus that record and can be
+    # diffed byte-for-byte against what is committed.
+    replay = _load(f"00-MASTER/{PROGRAM}/requirements.json") if render else None
+
+    model = build(inputs, replay)
     HERE.mkdir(parents=True, exist_ok=True)
     (HERE / "requirements.json").write_text(
         json.dumps(model, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
@@ -1715,15 +1761,16 @@ def main(argv: list[str]) -> int:
 
     a = model["assimilation"]
     fails = [c["id"] for c in model["baseline_conditions"] if c["verdict"] == "FAIL"]
-    print(
-        f"{PROGRAM}: {model['determination']} | requirements={model['requirement_total']} "
-        f"| fully={a['fully']} partially={a['partially']} not={a['not']} "
-        f"({a['percent_fully']}%) | created=0 | open_gap_classes="
-        f"{sum(1 for g in model['gap_classes'] if g['count'] > 0)} "
-        f"| work_packages={len(model['work_packages'])} "
-        f"| baseline=WITHHELD({len(fails)} preconditions unproven)"
-    )
-    print(f"{PROGRAM}: wrote {len(DELIVERABLES) + 1} artifacts to {HERE}")
+    if "--quiet" not in argv:
+        print(
+            f"{PROGRAM}: {model['determination']} | requirements={model['requirement_total']} "
+            f"| fully={a['fully']} partially={a['partially']} not={a['not']} "
+            f"({a['percent_fully']}%) | created=0 | open_gap_classes="
+            f"{sum(1 for g in model['gap_classes'] if g['count'] > 0)} "
+            f"| work_packages={len(model['work_packages'])} "
+            f"| baseline=WITHHELD({len(fails)} preconditions unproven)"
+        )
+        print(f"{PROGRAM}: wrote {len(DELIVERABLES) + 1} artifacts to {HERE}")
 
     if baseline_gate and not model["baseline_permitted"]:
         sys.stderr.write(

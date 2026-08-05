@@ -1650,3 +1650,52 @@ acee-replay:
 # stage graph, and nothing is written.
 acee-engineer:
 	@python3 00-MASTER/ACEE-000001/acee_engine.py --engineer "$(GOAL)" --subject "$(SUBJECT)"
+
+
+# closure009: UAKOS-CLOSURE-009 — Universal Constitutional Assimilation Programme.
+# It projects every constitutionally accepted concept already in Repository Truth into a
+# governed Repository Requirement and MEASURES assimilation coverage, lifecycle maturity,
+# readiness, traceability and gap. CREATE = 0 at the concept layer: requirement identity is
+# a derived, injective function of the existing concept identity (RR-<CONCEPT-ID>).
+#
+# Why these targets exist. UCOS-RIB-001 measured this programme as BOTH a dead engine
+# (VER-11 / GAP-DEAD-ENGINE) and an orphan capability (VER-09): its engine was named by no
+# Makefile target, no workflow and no test, so REG-AUTO-001 P7 — enforceability by tooling
+# gates rather than author discipline — was undischarged. The consequence was not cosmetic:
+# because nothing re-ran it, its committed registers were left rendered against a stale
+# HEAD and carried 89 inherited concept gaps that Repository Truth had already closed. An
+# engine no target names is an engine nobody re-runs, and a register nobody re-runs is a
+# register that silently stops being true.
+#
+# closure009 depends on closure-phase3 because the engine's required inputs are the
+# PHASE-002/003 models; running it against an unregenerated predecessor would measure a
+# superseded substrate (the engine itself fails closed with exit 2 if they are absent).
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Stdlib only. Writes only inside
+# 00-MASTER/UAKOS-CLOSURE-009/. No timestamp is emitted anywhere.
+#
+# Additive only — no existing target, recipe, or dependency above is altered.
+#
+# Exit 0 gate OPEN · 1 gate CLOSED · 2 fail-closed abort (required input absent).
+.PHONY: closure009 closure009-gate closure009-baseline-gate closure009-replay
+closure009: closure-phase3
+	@python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py
+
+# Fail-closed standing gate: non-zero while constitutional assimilation is below 100%.
+closure009-gate: closure-phase3
+	@python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --gate
+
+# Fail-closed: non-zero while any Phase-8 baseline precondition is unproven.
+closure009-baseline-gate: closure-phase3
+	@python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --baseline-gate
+
+# The drift gate this programme could not previously have: --render replays the HEAD
+# recorded in requirements.json instead of re-reading it, so the rendered surface is a pure
+# function of the declared inputs plus that record and can be diffed byte-for-byte. Without
+# the replayed head every register would drift by exactly one field on every commit, and the
+# check would be permanently red for a reason that has nothing to do with truth.
+closure009-replay:
+	@python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --render --quiet
+	@git diff --exit-code -- 00-MASTER/UAKOS-CLOSURE-009 \
+	  || { echo "UAKOS-CLOSURE-009 REPLAY DRIFT — committed registers are not the product of the declared inputs" >&2; exit 1; }
+	@echo "UAKOS-CLOSURE-009 replay: no drift"
