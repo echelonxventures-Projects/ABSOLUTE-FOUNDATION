@@ -13,8 +13,8 @@
   "counts": {
     "artifacts": 1194,
     "artifacts_fully_traced": 0,
-    "artifacts_with_any_lane": 273,
-    "derivable_not_written": 1048,
+    "artifacts_with_any_lane": 1193,
+    "derivable_not_written": 0,
     "lanes": 13,
     "lanes_with_mechanism": 8,
     "lanes_without_mechanism": 5,
@@ -24,7 +24,7 @@
   },
   "derivation": [
     {
-      "already_written": 251,
+      "already_written": 1193,
       "artifacts_supported": 1193,
       "basis": "The located vocabulary declares this type's subject lane to be the architecture lane; the structural edges already exist in the certified corpus but the generator writes no lane entry for them.",
       "cited_edges": [
@@ -32,14 +32,14 @@
         "UEDGE-000000005",
         "UEDGE-000000907"
       ],
-      "derivable_not_written": 942,
+      "derivable_not_written": 0,
       "id": "UTCE-DR-01",
       "lane": "architecture",
       "read": "from",
       "type": "Parent"
     },
     {
-      "already_written": 222,
+      "already_written": 296,
       "artifacts_supported": 296,
       "basis": "Declared subject lane in the located vocabulary.",
       "cited_edges": [
@@ -47,7 +47,7 @@
         "UEDGE-000000004",
         "UEDGE-000000007"
       ],
-      "derivable_not_written": 74,
+      "derivable_not_written": 0,
       "id": "UTCE-DR-02",
       "lane": "architecture",
       "read": "from",
@@ -84,18 +84,18 @@
       "type": "Implements"
     },
     {
-      "already_written": 4,
-      "artifacts_supported": 36,
-      "basis": "Declared object lane of the located Implements type; read from the inverse edge.",
+      "already_written": 17,
+      "artifacts_supported": 17,
+      "basis": "Declared object lane of the located Implements type. The object of a forward Implements edge is its target, and the target is the FROM endpoint of the materialized inverse, so the object lane is measured there. Reading the inverse edge's TO endpoint selected the DECLARER instead of the object — measured 4/36 populated against 17/17 for the object — which counted as headroom a lane entry no located edge supports. Corrected to the endpoint this basis names; the located vocabulary at 00-BOOK/tools/config.py governs the attribution (CMG-000001 XXXIV.5).",
       "cited_edges": [
         "UEDGE-000002918",
-        "UEDGE-000002986",
-        "UEDGE-000003056"
+        "UEDGE-000002920",
+        "UEDGE-000002986"
       ],
-      "derivable_not_written": 32,
+      "derivable_not_written": 0,
       "id": "UTCE-DR-05",
       "lane": "implementation",
-      "read": "to",
+      "read": "from",
       "type": "Implemented-By"
     },
     {
@@ -134,7 +134,7 @@
     "artifacts": 1194,
     "artifacts_fully_traced": 0,
     "artifacts_incomplete": 1194,
-    "artifacts_with_any_lane": 273,
+    "artifacts_with_any_lane": 1193,
     "lanes": 13,
     "owner": "platform/measurement · 00-BOOK/tools"
   },
@@ -239,14 +239,14 @@
       ],
       "lane": "architecture",
       "obligation_class": "DISCHARGEABLE",
-      "populated": 251,
+      "populated": 1193,
       "types": [
         "Parent",
         "Depends-On",
         "Implements",
         "Consumes"
       ],
-      "unevidenced": 943
+      "unevidenced": 1
     },
     {
       "labels": [],
@@ -441,7 +441,7 @@
     "operational_home": "00-MASTER/UCOS-UTCE-001/",
     "version": "1.0"
   },
-  "seal_sha256": "13a21f5b405bd13d4a9e041bdd2d0edb2cf4046ac922c67cd6ac35715402a35f",
+  "seal_sha256": "0484d1d546f683f38054ae5ac60b0881b64aa88f961feda9d5cdeb2d464a6f94",
   "validations": [
     {
       "blocking": true,

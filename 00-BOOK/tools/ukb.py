@@ -1114,6 +1114,57 @@ def cmd_build(args):
                         _trace_add(art, lane, tok)
                         external_marker_count += 1
 
+    # ----- UMB-IMP-002 (derivation pass): project EVERY declared edge --------
+    # CMG-000001 XXXVII.2: "Traceability SHALL be derived, never authored. It
+    # SHALL be computed from declared relationships (Article XXXIV) and SHALL NOT
+    # be maintained as an independent hand-written matrix." The loop above
+    # populates the spine only for edges declared in FRONT-MATTER rows, so the
+    # structural edges THIS SAME BUILDER emits above (CHAINS, CROSS_PROGRAM,
+    # program-root, book-root) never reached the spine — even though their types
+    # declare a subject_lane / object_lane in the very same vocabulary. The
+    # located measurement of that residue is UCOS-UTCE-001 §02 (DERIVABLE, NOT
+    # WRITTEN) and its referral is UTCE-F-003, whose named owner is this file.
+    #
+    # This pass introduces NO relationship type, NO lane and NO mapping. It reads
+    # `subject_lane` / `object_lane` out of config.RELATIONSHIP_TYPES and applies
+    # them to edges that already exist, so the spine becomes what config.py
+    # already declares it to be: "a derived composition of these edges + the
+    # `traceability` field". No new store is created (UCI-001 Part XVII.4).
+    #
+    # Materialized inverses are skipped BY CONSTRUCTION rather than by a filter:
+    # the lane pair is declared on the FORWARD type only, and it already reaches
+    # both endpoints (subject_lane on `from`, object_lane on `to`). Projecting an
+    # inverse as well would record one relationship twice under two names. A
+    # self-declared freeform `RELATES <Type>` carries no lane and is likewise
+    # absent from the vocabulary, so it contributes nothing.
+    #
+    # Idempotent and replayable: `_trace_add` de-duplicates, every endpoint is an
+    # already-resolved Universal ID (add_edge admits no unresolved endpoint), and
+    # `edges` is built in a fixed order — so re-running writes nothing new and
+    # yields byte-identical output. Nothing is inferred: an entry appears only
+    # where a typed edge already exists and its own type declares the lane.
+    lane_spec_by_type = {spec["type"]: spec for spec in C.RELATIONSHIP_TYPES}
+    derived_lane_entries = 0
+    derived_by_lane = Counter()
+    for e in edges:
+        spec = lane_spec_by_type.get(e["type"])
+        if not spec:
+            continue
+        src = by_uid.get(e["from"])
+        dst = by_uid.get(e["to"])
+        subject_lane = spec.get("subject_lane")
+        object_lane = spec.get("object_lane")
+        if subject_lane and src is not None:
+            if e["to"] not in src["traceability"][subject_lane]:
+                _trace_add(src, subject_lane, e["to"])
+                derived_lane_entries += 1
+                derived_by_lane[subject_lane] += 1
+        if object_lane and dst is not None:
+            if e["from"] not in dst["traceability"][object_lane]:
+                _trace_add(dst, object_lane, e["from"])
+                derived_lane_entries += 1
+                derived_by_lane[object_lane] += 1
+
     # ----- UMB-IMP-003: change / version / lineage / evolution intelligence -
     # Append-only snapshot history preserves every prior content_hash/version
     # (UMB-009 §2 — the one append-only gap this mission fills). Change events,
@@ -1197,6 +1248,11 @@ def cmd_build(args):
     print(f"  UMB-IMP-002: {typed_edge_count} typed semantic edges derived; "
           f"{external_marker_count} external spine markers; "
           f"{_spine_pop}/{len(art_list)} artifacts carry a populated traceability spine.")
+    print(f"  UMB-IMP-002: {derived_lane_entries} spine entries projected from declared "
+          f"edges via subject_lane/object_lane"
+          + (" (" + ", ".join(f"{lane}:{n}" for lane, n
+                              in sorted(derived_by_lane.items(), key=lambda kv: -kv[1])) + ")"
+             if derived_by_lane else "") + ".")
     print(f"  edge types ({len(_etypes)}): " +
           ", ".join(f"{t}:{n}" for t, n in sorted(_etypes.items(), key=lambda kv: -kv[1])))
     _cc = change_ledger["counts"]

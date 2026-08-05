@@ -9,7 +9,7 @@ therefore undischargeable until the vocabulary owner adds one.
 | Lane | Populated | Unevidenced | Collection labels (located) | Obligation class |
 |---|---|---|---|---|
 | `requirement` | 81 | 1113 | `AUTHORITY`, `AUTHORITIES`, `AUTHORIZED-BY`, `GOVERNED-BY`, `TRACES-TO`, `TRACES TO` | DISCHARGEABLE |
-| `architecture` | 251 | 943 | `PARENT`, `DEPENDS-ON`, `DEPENDS ON`, `IMPLEMENTS`, `REALIZES`, `CONSUMES`, `USES`, `READS` | DISCHARGEABLE |
+| `architecture` | 1193 | 1 | `PARENT`, `DEPENDS-ON`, `DEPENDS ON`, `IMPLEMENTS`, `REALIZES`, `CONSUMES`, `USES`, `READS` | DISCHARGEABLE |
 | `design` | 0 | 1194 | — none | MECHANISM-ABSENT |
 | `implementation` | 17 | 1177 | `IMPLEMENTS`, `REALIZES` | DISCHARGEABLE |
 | `source_code` | 0 | 1194 | — none | MECHANISM-ABSENT |

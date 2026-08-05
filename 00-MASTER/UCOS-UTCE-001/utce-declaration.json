@@ -148,7 +148,7 @@
     { "id": "UTCE-DR-02", "type": "Depends-On", "read": "from", "lane": "architecture", "basis": "Declared subject lane in the located vocabulary." },
     { "id": "UTCE-DR-03", "type": "Authorized-By", "read": "from", "lane": "requirement", "basis": "Declared subject lane in the located vocabulary." },
     { "id": "UTCE-DR-04", "type": "Implements", "read": "from", "lane": "architecture", "basis": "Declared subject lane in the located vocabulary." },
-    { "id": "UTCE-DR-05", "type": "Implemented-By", "read": "to", "lane": "implementation", "basis": "Declared object lane of the located Implements type; read from the inverse edge." },
+    { "id": "UTCE-DR-05", "type": "Implemented-By", "read": "from", "lane": "implementation", "basis": "Declared object lane of the located Implements type. The object of a forward Implements edge is its target, and the target is the FROM endpoint of the materialized inverse, so the object lane is measured there. Reading the inverse edge's TO endpoint selected the DECLARER instead of the object \u2014 measured 4/36 populated against 17/17 for the object \u2014 which counted as headroom a lane entry no located edge supports. Corrected to the endpoint this basis names; the located vocabulary at 00-BOOK/tools/config.py governs the attribution (CMG-000001 XXXIV.5)." },
     { "id": "UTCE-DR-06", "type": "Consumes", "read": "from", "lane": "architecture", "basis": "Declared subject lane in the located vocabulary." },
     { "id": "UTCE-DR-07", "type": "Traces-To", "read": "from", "lane": "requirement", "basis": "Declared subject lane in the located vocabulary." }
   ],
