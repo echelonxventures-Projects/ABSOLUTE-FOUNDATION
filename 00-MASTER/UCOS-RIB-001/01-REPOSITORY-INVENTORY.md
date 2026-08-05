@@ -47,7 +47,7 @@
 | `SUB-EDGES` | `00-BOOK/DATA/relationships.json` | json | YES | YES | 2/2 | 12821 | `f799bc704f74` |
 | `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `not recorded` |
 | `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 58 | `cd9b82d94dca` |
-| `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1194 | `aca7de8b437b` |
+| `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1194 | `cadbfca5e8ab` |
 | `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 96 | `bf97ba06a48d` |
 | `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 71 | `e3af774cc2d0` |
 | `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `35ce2e6bb1f6` |
@@ -55,7 +55,7 @@
 | `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 113 | `336d50c9f430` |
 | `SUB-UEI` | `00-MASTER/UEI-000001/uei.json` | json | YES | YES | 2/2 | 15 | `50e80b680d9f` |
 | `SUB-UER` | `00-MASTER/UER-000001/uer.json` | json | YES | YES | 2/2 | 10 | `0ae82cb58fdb` |
-| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `d3e6403a9bda` |
+| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `b8e687dfeaa3` |
 
 ## Enrichment
 
