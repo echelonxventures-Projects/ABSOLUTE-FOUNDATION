@@ -622,8 +622,10 @@ def build(inputs: dict) -> dict:
     )
     vacuous_exact = all(not r["exact_homes"] for r in reqs)
 
-    # tracked machine-readable test-result artifacts, measured from the index itself
-    tracked = [ln for ln in _git("ls-files").splitlines() if ln]
+    # tracked machine-readable test-result artifacts, measured from the index itself.
+    # -z: `git ls-files` renders non-ASCII paths in quoted octal form, which does not
+    # resolve on disk; 116 tracked `Ω∞` artifacts were silently invisible without it.
+    tracked = [ln for ln in _git("ls-files", "-z").split("\0") if ln]
     test_result_rx = re.compile(
         r"(junit|test-results?|testreport|test_report|pytest-report)[^/]*\.(xml|json)$", re.I
     )

@@ -101,8 +101,17 @@ class EvidenceReader:
         return self._git("rev-parse", "--abbrev-ref", "HEAD") or "UNKNOWN"
 
     def tracked(self, pattern: str) -> list[str]:
-        out = self._git("ls-files", pattern)
-        return sorted(line for line in out.splitlines() if line) if out else []
+        """Tracked paths matching *pattern*, NUL-delimited so non-ASCII names survive.
+
+        Without ``-z``, git renders any path containing a non-ASCII byte in
+        double-quoted, octal-escaped form (``"…/UCOS-\\316\\251\\342\\210\\236-…"``).
+        That literal string does not resolve on disk, so such a path is silently
+        unreadable — the eligibility boundary would omit tracked artifacts that
+        demonstrably exist. ``-z`` is what ``00-BOOK/tools/ukb.py::_git_ls`` already
+        uses, so discovery measures the same boundary registration does.
+        """
+        out = self._git("ls-files", "-z", pattern)
+        return sorted(entry for entry in out.split("\0") if entry) if out else []
 
     def _git(self, *args: str) -> str:
         try:

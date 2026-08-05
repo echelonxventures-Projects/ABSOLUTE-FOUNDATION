@@ -8,7 +8,7 @@
   },
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
   "code": {
-    "coverage_branch_pct": 91.85,
+    "coverage_branch_pct": 91.84,
     "coverage_line_pct": 95.13,
     "roots": {
       "application": {
@@ -26,11 +26,11 @@
         "test_functions": 887
       },
       "engine": {
-        "loc": 69110,
+        "loc": 69643,
         "root": "engine",
-        "source_files": 290,
-        "test_files": 218,
-        "test_functions": 2517
+        "source_files": 291,
+        "test_files": 219,
+        "test_functions": 2548
       },
       "infrastructure": {
         "loc": 22599,
@@ -40,7 +40,7 @@
         "test_functions": 821
       },
       "intelligence": {
-        "loc": 15718,
+        "loc": 15727,
         "root": "intelligence",
         "source_files": 65,
         "test_files": 6,
@@ -61,10 +61,10 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 270112,
-    "total_tests": 9462
+    "total_loc": 270654,
+    "total_tests": 9493
   },
-  "content_hash": "e481e19dea29e332bfd8024caafb768ed973fa520b857eeb322ae865f94dc36e",
+  "content_hash": "d5ba0340f32f4f1385c21976edf4a8b88b29a2dfc84e27b8c7c31a392afbf327",
   "corpus": {
     "artifacts": 1194,
     "edges": 12821,
@@ -82,12 +82,12 @@
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "c95026b294deeed22426b05d44a6a3de01fb34cb2e38a681d84beb1f9fb775b2",
+      "fingerprint": "fca8eed2cf1a969b76cd1bbf6cafbd0dabecdd4cc4281082aefcb46ecef00087",
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "cadbfca5e8abe8a670f202b5bf79a69712512c63491a297d110a99903416faad",
-      "00-BOOK/DATA/certification.json": "702e77d78c8958f707221c67f036819e7231223a58baf7ce9dad8efe024b7f4d",
+      "00-BOOK/DATA/artifacts.json": "ecc1427e586805f31c944c6a7f4262283acb3d3f85f93aff673fc2e8c1807680",
+      "00-BOOK/DATA/certification.json": "386b0f81f9df849794409bb8fdff106e49fdca4f1153717bcfcdcf4227c9c641",
       "00-BOOK/DATA/control-tower.json": "2412718e1702f9e33c3cc8234be565c7ed3c05e84a78956d593b3c269dd5b977",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
       "00-BOOK/DATA/volumes.json": "a34e648cd43f13818156dacdbdc814f9da3a785daac6c6113fb9eac8e05f6598"
@@ -98,7 +98,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "580df5a7d995e39a4b2242a9bfe41526a4d026f52e08588cdf15e060b12761c9",
+    "input_hash": "e19fe5864fc06477fdb73d052e4388694b3f303f0b84cd21f85a79433375703a",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },

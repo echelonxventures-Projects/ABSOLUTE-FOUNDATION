@@ -169,8 +169,11 @@ def test_a_real_capability_is_a_reuse_candidate():
 
 
 def test_a_non_capability_object_is_not_a_capability():
-    assert not is_capability(make_cko("UCKO-OTHER-0001"))
-    assert not is_reuse_candidate(make_cko("UCKO-OTHER-0001"))
+    # Uses the founding seed principle rather than a synthetic id: any string matching
+    # the UCKO family grammar (`UCKO-[A-Z]+-\d{3,4}`) is harvested from source by
+    # `closure_engine.py` and would enter the concept universe as a phantom concept.
+    assert not is_capability(make_cko("UCKO-PRIN-0001"))
+    assert not is_reuse_candidate(make_cko("UCKO-PRIN-0001"))
 
 
 def test_replacement_permitted_capability_carries_no_prohibition_tag():

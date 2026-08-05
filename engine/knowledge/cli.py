@@ -14,6 +14,7 @@ Architecture. It is the operational entry point for repository integration
     python -m engine.knowledge.cli bootstrap      # Part 06/14 agent/developer digest
     python -m engine.knowledge.cli stats           # Part 09 coverage/consistency
     python -m engine.knowledge.cli capabilities     # Part 04/09 Repository Self-Awareness
+    python -m engine.knowledge.cli homing           # Part 04/09 canonical-home resolution
 
 Every command loads the canonical store when present, else falls back to the seed
 base, so the tool is useful on a fresh clone. Output is deterministic JSON/Markdown.
@@ -36,6 +37,13 @@ from engine.knowledge.capability import coverage as capability_coverage
 from engine.knowledge.certification import certify_base
 from engine.knowledge.docs import DocumentationEngine
 from engine.knowledge.errors import KnowledgeError
+from engine.knowledge.homing import (
+    DEFAULT_ARTIFACTS_PATH,
+    DEFAULT_CLOSURE_PATH,
+    derive_homing,
+    load_concepts,
+    load_registered_corpus,
+)
 from engine.knowledge.intelligence import KnowledgeIntelligence
 from engine.knowledge.portal import KnowledgePortal
 from engine.knowledge.seed import build_seed_base
@@ -158,6 +166,30 @@ def _cmd_capabilities(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_homing(args: argparse.Namespace) -> int:
+    """Resolve every concept's canonical home from declared ownership (Part 04/09).
+
+    Read-only and assigns nothing: it reports which registered artifact each concept's
+    ownership is *declared* by, and which concepts Repository Truth does not answer.
+    Exit 1 when ``--gate`` is set and any concept remains unresolved, so an undeclared
+    canonical home fails closed rather than being silently inferred (``CEP-002`` 14.2).
+    """
+    concepts = load_concepts(args.closure)
+    corpus = load_registered_corpus(args.artifacts)
+    result = derive_homing(
+        concepts,
+        corpus,
+        inputs={"closure": str(args.closure), "artifacts": str(args.artifacts)},
+    )
+    payload = result.to_dict()
+    if not args.verbose:
+        payload.pop("homings", None)
+    _emit(payload)
+    if args.gate and not result.closed:
+        return 1
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="ucos-knowledge",
@@ -220,6 +252,28 @@ def build_parser() -> argparse.ArgumentParser:
         "--gate", action="store_true", help="exit 1 when the canonical layer is stale"
     )
     p_caps.set_defaults(func=_cmd_capabilities)
+
+    p_home = sub.add_parser(
+        "homing",
+        help="resolve each concept's canonical home from declared ownership (Part 04/09)",
+    )
+    p_home.add_argument(
+        "--closure",
+        default=DEFAULT_CLOSURE_PATH,
+        help=f"measured concept closure to read (default: {DEFAULT_CLOSURE_PATH})",
+    )
+    p_home.add_argument(
+        "--artifacts",
+        default=DEFAULT_ARTIFACTS_PATH,
+        help=f"registered-artifact projection (default: {DEFAULT_ARTIFACTS_PATH})",
+    )
+    p_home.add_argument(
+        "--gate", action="store_true", help="exit 1 while any canonical home is undeclared"
+    )
+    p_home.add_argument(
+        "--verbose", action="store_true", help="include the per-concept homing records"
+    )
+    p_home.set_defaults(func=_cmd_homing)
     return parser
 
 

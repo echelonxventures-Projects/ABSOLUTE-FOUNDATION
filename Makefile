@@ -38,6 +38,8 @@ help:
 	@echo "  make closure-phase3-gate fail-closed PHASE-003 gate (non-zero exit while repository NOT-CLOSED)"
 	@echo "  make selfaware     project every discovered capability into canonical knowledge"
 	@echo "  make selfaware-gate     fail-closed when the capability register is behind the repo"
+	@echo "  make homing        resolve each concept's canonical home from declared ownership"
+	@echo "  make homing-gate   fail-closed while any canonical home is undeclared (RG-B01)"
 	@echo "  make corpus        UKAP-001 D-1: discover exports, resolve the newest as canonical input"
 	@echo "  make corpus-replay      re-derive corpus currency from corpus.json (no corpus root)"
 	@echo "  make corpus-gate   fail-closed corpus-currency gate (non-zero while the corpus is stale)"
@@ -221,6 +223,22 @@ selfaware-gate:
 	@python3 -m engine.knowledge.cli capabilities --gate >/dev/null \
 	  || { echo "SELF-AWARENESS STALE — run 'make selfaware' (capability register is behind the repository)" >&2; exit 1; }
 	@echo "self-awareness: canonical capability register is current"
+
+# homing: CANONICAL HOME RESOLUTION — report which registered artifact each concept's
+# ownership is DECLARED by, and which concepts Repository Truth does not answer. Reads
+# only; assigns nothing. Ownership must be assigned by governed determination and must
+# never be implied (CEP-002 14.2), so an undeclared home is reported, never guessed.
+.PHONY: homing homing-gate
+homing:
+	@python3 -m engine.knowledge.cli homing
+
+# homing-gate: fail-closed — non-zero exit while any concept's canonical home is
+# undeclared. This is the standing measurement of RG-B01 / WP-UAKOS-CLOSURE-009-001; it
+# goes green only when a Governance Authority determination has declared the residue.
+homing-gate:
+	@python3 -m engine.knowledge.cli homing --gate >/dev/null \
+	  || { echo "CANONICAL OWNERSHIP UNDECLARED — run 'make homing' for the per-concept residue (RG-B01)" >&2; exit 1; }
+	@echo "canonical ownership: every concept carries a declared canonical home"
 
 
 # corpus: UKAP-001 / D-1 — CORPUS CURRENCY RESTORATION. Discovers every available ChatGPT

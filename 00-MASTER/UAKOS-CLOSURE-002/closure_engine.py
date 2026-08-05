@@ -111,8 +111,25 @@ def _top(rel: str) -> str:
 
 
 # --------------------------------------------------------------------------- phase 1: source discovery
+def _tracked_paths() -> list[str]:
+    """Every tracked path, NUL-delimited so non-ASCII names survive verbatim.
+
+    `git ls-files` without `-z` renders any path containing a non-ASCII byte in
+    double-quoted, octal-escaped form (`"…/UCOS-\\316\\251\\342\\210\\236-…"`). That
+    literal string does not resolve on disk, so every such artifact was silently read as
+    empty and dropped from concept extraction — 116 tracked `Ω∞` artifacts, including
+    canonical `02-MASTER/` architecture constitutions that DECLARE concept identities.
+    Their concepts therefore measured as having no canonical home, which is a measurement
+    defect, not repository truth. `-z` is the same fix `00-BOOK/tools/ukb.py::_git_ls`
+    already applies, so closure now sees exactly the eligibility boundary registration
+    sees (the divergence recorded as OBS-1 in
+    `00-MASTER/UCCEP-000007/17-EVIDENCE-APPENDIX.md` §E-02).
+    """
+    return [f for f in _run(["git", "ls-files", "-z"]).split("\0") if f]
+
+
 def discover_sources() -> dict:
-    tracked = [f for f in _run(["git", "ls-files"]).splitlines() if f]
+    tracked = _tracked_paths()
     docx = sorted(f for f in tracked if f.lower().endswith(".docx"))
     md = sorted(f for f in tracked if f.lower().endswith(".md"))
     root_uploads = sorted(f for f in tracked if "/" not in f and f.lower().endswith((".md", ".docx")))
@@ -536,7 +553,8 @@ def emit(m: dict) -> list[Path]:
 
 
 def _sources_docx(m: dict) -> list[str]:
-    return [f for f in _run(["git", "ls-files", "*.docx"]).splitlines() if f]
+    # -z: see _tracked_paths — quoted octal paths do not resolve on disk.
+    return [f for f in _run(["git", "ls-files", "-z", "*.docx"]).split("\0") if f]
 
 
 def _enrichment_plan(m: dict) -> str:
