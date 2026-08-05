@@ -36,6 +36,19 @@ def _tokenize(text: str) -> list[str]:
     return _TOKEN.findall(spaced.lower())
 
 
+def subject_terms(*texts: str) -> tuple[str, ...]:
+    """The sorted, de-duplicated searchable terms of free text.
+
+    Uses the same tokenisation as :meth:`KnowledgeIntelligence.search`, so a caller can
+    build a query from an object's *subject* fields (title, statement, tags) without
+    also picking up its structural metadata (identifier, kind, universe). Those
+    structural fields are what a query should be matched *against*, never with: an
+    identifier contributes no subject matter, and matching on it manufactures
+    similarity out of bookkeeping.
+    """
+    return tuple(sorted({term for text in texts for term in _tokenize(text)}))
+
+
 @dataclass(frozen=True, slots=True)
 class SearchHit:
     """A single ranked search result over the canonical knowledge base."""

@@ -36,6 +36,8 @@ help:
 	@echo "  make closure-phase2-gate fail-closed PHASE-002 gate (non-zero exit while concept gaps remain)"
 	@echo "  make closure-phase3      regenerate PHASE-003 implementation planning (outputs 36-48)"
 	@echo "  make closure-phase3-gate fail-closed PHASE-003 gate (non-zero exit while repository NOT-CLOSED)"
+	@echo "  make selfaware     project every discovered capability into canonical knowledge"
+	@echo "  make selfaware-gate     fail-closed when the capability register is behind the repo"
 	@echo "  make corpus        UKAP-001 D-1: discover exports, resolve the newest as canonical input"
 	@echo "  make corpus-replay      re-derive corpus currency from corpus.json (no corpus root)"
 	@echo "  make corpus-gate   fail-closed corpus-currency gate (non-zero while the corpus is stale)"
@@ -196,6 +198,30 @@ closure-phase3: closure-phase2
 # (planning delivered, authorized execution still pending).
 closure-phase3-gate: closure-phase2
 	@python3 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py --gate
+
+# selfaware: REPOSITORY SELF-AWARENESS — project every discovered capability into the
+# canonical knowledge layer so the reuse gate can see the repository's own implementation.
+# Discovery is owned by intelligence/rie (git ls-files eligibility boundary, any depth);
+# this only projects its catalogue into UCKO-CAP-* facts. Deterministic and idempotent:
+# a second run reports every capability unchanged and rewrites nothing.
+.PHONY: selfaware selfaware-report selfaware-gate
+selfaware:
+	@python3 -m intelligence.rie build
+	@python3 -m engine.knowledge.cli capabilities --write
+	@python3 -m engine.knowledge.cli validate >/dev/null && echo "canonical base: valid"
+
+# selfaware-report: read-only — what the projection WOULD change, plus coverage before/after.
+selfaware-report:
+	@python3 -m engine.knowledge.cli capabilities
+
+# selfaware-gate: fail-closed — non-zero exit while the canonical capability register has
+# fallen behind the repository (a capability was added, changed or removed without its
+# canonical knowledge). This is the guard that keeps the reuse engine from going blind again.
+selfaware-gate:
+	@python3 -m engine.knowledge.cli capabilities --gate >/dev/null \
+	  || { echo "SELF-AWARENESS STALE — run 'make selfaware' (capability register is behind the repository)" >&2; exit 1; }
+	@echo "self-awareness: canonical capability register is current"
+
 
 # corpus: UKAP-001 / D-1 — CORPUS CURRENCY RESTORATION. Discovers every available ChatGPT
 # export (archive form under the corpus roots + in-repository conversation exports),

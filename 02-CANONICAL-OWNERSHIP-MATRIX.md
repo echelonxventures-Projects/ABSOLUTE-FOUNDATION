@@ -108,4 +108,56 @@ Per-decision method is specified in `03-ARCHITECTURAL-DECISION-ASSIMILATION-MATR
 Per-decision **constitutional disposition** is specified in `00-MASTER/UCDA-000001/ucda-decisions.json` and rendered at `00-MASTER/UCDA-000001/01-CONSTITUTIONAL-DECISION-REGISTER.md`, under `00-CEP/CEP-002` Article 28. Ownership without a disposition is incomplete: an owned concept whose decision is undispositioned closes the Implementation Evidence Gate (Art 28.14, 28.18).
 
 ---
+
+## 5. §2 addendum 2026-08-05 Ω-A02 — Repository Self-Awareness (capability ownership becomes machine-derived)
+
+**Finding.** Every ownership row in §2 above was authored by a human and is unreadable by machine.
+The repository's own reuse oracle — `engine/knowledge/integration/reuse.py` `ReuseEngine` — reads
+`knowledge/canonical-knowledge.json`, which held only the **11 founding seed objects**. No
+implemented capability was canonical knowledge, so the engine was structurally blind to the
+repository's own implementation and returned `CREATE` for **12 of 12** capabilities that
+demonstrably already existed. A reuse gate that cannot see the repository licenses the
+duplication it exists to prevent.
+
+**Two discovery defects were the root cause, both now closed:**
+
+| Defect | Evidence | Disposition |
+|---|---|---|
+| `intelligence/rie/discovery.py::_package_locations` globbed `<root>/*/__init__.py` — one level only. 34 of 99 tracked packages were invisible, including the whole of `engine/knowledge/ukip`. | catalogue held 71 of 105 capabilities | **EXTEND** the located owner (recursive glob, any depth) |
+| `platform/universal_assurance` carried 14 tracked modules and used absolute `platform.universal_assurance.*` imports but had no `__init__.py`, so it was not a package by the repository's own eligibility rule. | absent from the catalogue entirely | **CREATE** the missing `__init__.py` (an omission, not a new capability) |
+
+**Ownership rows added (machine-derived, 105 capabilities).**
+
+| Concept domain | Canonical owner (existing artifact) | Repository location | Ownership status |
+|---|---|---|---|
+| Capability discovery (what the repository implements) | `intelligence/rie` — `discover()` over the `git ls-files` eligibility boundary; emits `UCOS-RIE-CAPABILITY-CATALOG.json` | `intelligence/rie/` | **OWNED** (EXTENDED to unbounded depth + public symbol surface — this addendum) |
+| Canonical capability knowledge (the register the reuse gate reads) | `engine/knowledge/capability.py` — projects the catalogue into `UCKO-CAP-*` facts in universe `CAPABILITY` | `engine/knowledge/` | **OWNED** (new projection; consumes the catalogue as DATA, so `engine` never imports `intelligence`) |
+| Reuse determination (reuse > extend > compose > create) | `engine/knowledge/integration/reuse.py` `ReuseEngine` | `engine/knowledge/integration/` | **OWNED** (EXTENDED with capability awareness — this addendum) |
+
+**Result.** Discovery 71 → **105** capabilities; canonical objects 11 → **116**; capability
+coverage 0% → **100%**; `CREATE` verdicts on the twelve evidenced capabilities 12 → **0**.
+The canonical base remains `valid` (9/9 checks) and `certified`.
+
+**Standing limitations — recorded, not resolved.**
+
+1. **Candidates, not owners.** Matching is inverse-document-frequency cosine similarity over each
+   capability's documented purpose and public symbol surface. It reliably establishes *that*
+   existing capabilities cover a subject; it does **not** prove which one is the canonical owner.
+   The engine therefore returns ranked candidates and refuses to assert a single owner —
+   the correct owner appears within the top five for 8 of 12 evidenced intents. §2 above remains
+   the authority for *which* owner; this addendum only guarantees the question is never answered
+   "nothing exists" when something does.
+2. **Calibrated for recall.** The confidence floor is set so that no intent whose capability
+   exists is answered `CREATE` (0/10), at the cost of one deliberately off-topic control intent in
+   five attracting a suggestion. A false `REUSE` is a ranked suggestion discarded in seconds; a
+   false `CREATE` is a silent licence to duplicate.
+3. **Programme engines are not capabilities.** The ~40 `00-MASTER/<PROGRAMME>/*_engine.py` files
+   are not Python packages and collapse into the single `00-MASTER` operational-memory row. Real
+   owners that live there — notably `UKAP-001` for external-corpus intake — are therefore not
+   individually addressable by the reuse engine.
+4. **The register is derived, not committed.** `/knowledge/` is gitignored, so the capability
+   register is regenerated per clone by `ucos-knowledge capabilities --write` from the tracked
+   catalogue. `make selfaware-gate` fails closed when it has fallen behind the repository.
+
+---
 *End of 02-CANONICAL-OWNERSHIP-MATRIX.md*

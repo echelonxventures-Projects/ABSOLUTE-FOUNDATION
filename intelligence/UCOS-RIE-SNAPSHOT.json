@@ -2,9 +2,9 @@
   "aeos_verdict": "FOUNDATION-READY — AEOS may begin as a separately authorized program; NOT begun here.",
   "artifact_id": "UCOS-RIE-SNAPSHOT",
   "authority": "NONE (derived truth)",
-  "capability_count": 71,
+  "capability_count": 105,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "1773513570ddf8e6beb3b92950bf97a0c0e2faa7fe907b68e26a9e25d09b1b31",
+  "content_hash": "09d8c9ad37d1022aac543d64fbc712d3bc9b37d3599d3b46040d9ae8b09c8e0d",
   "dimension_index_reconciled_pct": 26.7,
   "drift": {
     "baseline": false,
@@ -14,10 +14,51 @@
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
         "locations": [
+          "engine.acceptance",
+          "engine.tests.acceptance"
+        ],
+        "name": "acceptance"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
           "engine.certification",
+          "engine.tests.certification",
           "platform.certification"
         ],
         "name": "certification"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.civilization",
+          "engine.tests.civilization"
+        ],
+        "name": "civilization"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.context",
+          "engine.tests.context"
+        ],
+        "name": "context"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.discovery",
+          "engine.tests.discovery"
+        ],
+        "name": "discovery"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.factory",
+          "engine.tests.factory"
+        ],
+        "name": "factory"
       },
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
@@ -30,10 +71,52 @@
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
         "locations": [
+          "engine.governance",
+          "engine.tests.governance"
+        ],
+        "name": "governance"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.graph",
+          "engine.tests.graph"
+        ],
+        "name": "graph"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.knowledge.integration",
+          "engine.tests.integration",
+          "engine.tests.knowledge.integration"
+        ],
+        "name": "integration"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
           "engine.kernel",
+          "engine.tests.kernel",
           "intelligence.kernel"
         ],
         "name": "kernel"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.knowledge",
+          "engine.tests.knowledge"
+        ],
+        "name": "knowledge"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.provider",
+          "engine.tests.provider"
+        ],
+        "name": "provider"
       },
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
@@ -59,6 +142,31 @@
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
         "locations": [
+          "engine.tests.uckp",
+          "engine.uckp"
+        ],
+        "name": "uckp"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.knowledge.ukip",
+          "engine.tests.knowledge.ukip"
+        ],
+        "name": "ukip"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.tests.universal_certification",
+          "engine.universal_certification"
+        ],
+        "name": "universal_certification"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.tests.validation",
           "engine.validation",
           "platform.validation"
         ],
@@ -114,7 +222,7 @@
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "854c078d87b92aef34e239d3191fb3863719bf6eaa4174a3e281e12cc22ff5a0",
+      "fingerprint": "c95026b294deeed22426b05d44a6a3de01fb34cb2e38a681d84beb1f9fb775b2",
       "source": "coverage.xml"
     },
     "evidence_files": {
@@ -130,7 +238,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "f0b9801d77b60988c722f13f5cb75ded03786c2698fad9ba93b660ccdfa9b296",
+    "input_hash": "580df5a7d995e39a4b2242a9bfe41526a4d026f52e08588cdf15e060b12761c9",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },

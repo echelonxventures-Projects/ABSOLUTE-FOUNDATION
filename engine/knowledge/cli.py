@@ -13,6 +13,7 @@ Architecture. It is the operational entry point for repository integration
     python -m engine.knowledge.cli portal         # EPIC-DOC-002 generate the knowledge portal
     python -m engine.knowledge.cli bootstrap      # Part 06/14 agent/developer digest
     python -m engine.knowledge.cli stats           # Part 09 coverage/consistency
+    python -m engine.knowledge.cli capabilities     # Part 04/09 Repository Self-Awareness
 
 Every command loads the canonical store when present, else falls back to the seed
 base, so the tool is useful on a fresh clone. Output is deterministic JSON/Markdown.
@@ -26,6 +27,12 @@ from pathlib import Path
 from typing import Any
 
 from engine.knowledge.bootstrap import build_digest
+from engine.knowledge.capability import (
+    DEFAULT_CATALOG_PATH,
+    assimilate_capabilities,
+    load_catalog,
+)
+from engine.knowledge.capability import coverage as capability_coverage
 from engine.knowledge.certification import certify_base
 from engine.knowledge.docs import DocumentationEngine
 from engine.knowledge.errors import KnowledgeError
@@ -123,6 +130,34 @@ def _cmd_stats(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_capabilities(args: argparse.Namespace) -> int:
+    """Project discovered capabilities into canonical knowledge (Repository Self-Awareness).
+
+    Read-only by default: it reports what *would* change, so the projection can be run in
+    a gate to detect that the canonical layer has fallen behind the repository. ``--write``
+    persists. Exit 1 when ``--gate`` is set and the layer is stale, so a capability added
+    without its canonical knowledge fails closed.
+    """
+    records = load_catalog(args.catalog)
+    store = KnowledgeStore(args.store)
+    base = _load_base(args.store)
+    result = assimilate_capabilities(base, records)
+    payload: dict[str, Any] = {
+        "catalog": args.catalog,
+        "discovered": len(records),
+        "assimilation": result.to_dict(),
+        "coverage_before": capability_coverage(records, base),
+        "coverage_after": capability_coverage(records, result.base),
+    }
+    if args.write:
+        canon, decisions = store.save(result.base)
+        payload["wrote"] = [str(canon), str(decisions)]
+    _emit(payload)
+    if args.gate and result.changed:
+        return 1
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="ucos-knowledge",
@@ -170,6 +205,21 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("stats", help="coverage/consistency snapshot (Part 09)").set_defaults(
         func=_cmd_stats
     )
+
+    p_caps = sub.add_parser(
+        "capabilities",
+        help="project discovered capabilities into canonical knowledge (self-awareness)",
+    )
+    p_caps.add_argument(
+        "--catalog",
+        default=DEFAULT_CATALOG_PATH,
+        help=f"capability catalogue to project (default: {DEFAULT_CATALOG_PATH})",
+    )
+    p_caps.add_argument("--write", action="store_true", help="persist the projection")
+    p_caps.add_argument(
+        "--gate", action="store_true", help="exit 1 when the canonical layer is stale"
+    )
+    p_caps.set_defaults(func=_cmd_capabilities)
     return parser
 
 

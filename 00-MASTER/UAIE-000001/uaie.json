@@ -268,7 +268,7 @@
         "UAIE-REG-18",
         "UAIE-REG-20"
       ],
-      "replacement_prohibited": false,
+      "replacement_prohibited": true,
       "reuse": "Already realised and registered as its own programme. Universal evolution intelligence binds the evolution capabilities to their homes; the autonomous evolution engine closes the observe-recommend loop over located owners; the constitutional evolution framework measures the fifteen-stage lifecycle any new construct must traverse; and the evolution governance model holds the normative process. A recommendation engine here would be a second voice on the same question.",
       "symbols": []
     },
@@ -439,7 +439,7 @@
     "ontology_anchors": 3,
     "ontology_anchors_present": 3,
     "owners": 10,
-    "register_references": 1378,
+    "register_references": 1412,
     "register_references_unresolved": 0,
     "registers": 20,
     "registers_resolved": 20,
@@ -932,7 +932,7 @@
       "owner": "intelligence/rie/engine.py",
       "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
       "problem": "",
-      "references": 71,
+      "references": 105,
       "references_unresolved": 0,
       "resolves": true,
       "role": "capability-catalogue",
@@ -1104,7 +1104,7 @@
       "subject": "every baseline"
     }
   ],
-  "seal_sha256": "96936cfaec6d17255939b1001383115d41d7aa6f01bbb4737d0322d6670f4150",
+  "seal_sha256": "921d4ad59f12b97a9a2bf48e3ab03fc135cb724377b95799eb8d2ac27fc488a8",
   "validations": [
     {
       "blocking": true,

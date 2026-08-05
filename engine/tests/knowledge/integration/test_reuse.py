@@ -2,8 +2,15 @@
 
 from __future__ import annotations
 
+from engine.knowledge.capability import (
+    KNOWLEDGE_ONCE_PRINCIPLE,
+    CapabilityRecord,
+    assimilate_capabilities,
+    is_capability,
+)
 from engine.knowledge.integration.contracts import Disposition
 from engine.knowledge.integration.reuse import ReuseEngine
+from engine.knowledge.model import KnowledgeKind
 from engine.knowledge.store import KnowledgeBase
 
 from .conftest import make_cko, make_intent
@@ -60,3 +67,200 @@ def test_compose_needs_two_active_components():
         "NEW", title="Zeta", statement="orchestrating flows", dependencies=("ONLY-A", "MISSING")
     )
     assert engine.assess(intent).disposition is Disposition.CREATE
+
+
+# -- capability awareness (Repository Self-Awareness) --------------------------
+#
+# The engine used to be structurally blind to the repository's own implementation:
+# capability facts are a different *kind* of knowledge than the intent proposing a
+# capability, so neither the semantic-hash path nor the same-kind/same-universe path
+# could ever match one. Every implemented capability was answered CREATE.
+
+
+def _capability_base(*records) -> KnowledgeBase:
+    """A base holding the founding principle plus projected capability facts."""
+    return assimilate_capabilities(
+        KnowledgeBase([make_cko(KNOWLEDGE_ONCE_PRINCIPLE)]),
+        [CapabilityRecord.from_dict(record) for record in records],
+    ).base
+
+
+def _capability_record(**overrides) -> dict[str, object]:
+    record: dict[str, object] = {
+        "unique_id": "RC-01",
+        "canonical_name": "engine.knowledge.ukip",
+        "canonical_location": "engine/knowledge/ukip",
+        "category": "engine",
+        "authority": "EC-1 CERTIFIED",
+        "reuse": "REUSE_AS_IS/COMPOSE",
+        "replacement_prohibited": True,
+        "implementation_status": "CERTIFIED",
+        "description": "Knowledge intelligence platform.",
+        "evidence_present": True,
+        "summary": (
+            "Admits provenance chains, classification rules and a knowledge registry from "
+            "an unbounded number of providers, recording hash chained provenance for every "
+            "registered knowledge record."
+        ),
+        "symbols": ["KnowledgeRegistry", "ProvenanceLedger", "provenance", "classification"],
+    }
+    record.update(overrides)
+    return record
+
+
+def test_an_implemented_capability_is_found_and_creation_is_refused():
+    base = _capability_base(_capability_record())
+    intent = make_intent(
+        "NEW",
+        title="Universal Knowledge Provenance",
+        statement="Record a hash chained provenance chain for every knowledge record.",
+    )
+    assessment = ReuseEngine(base).assess(intent)
+    assert assessment.disposition is Disposition.REUSE
+    assert not assessment.requires_creation
+    assert assessment.candidates
+    assert assessment.candidates[0].relation == "implemented-capability"
+    assert any("replacement" in reason for reason in assessment.reasons)
+
+
+def test_capability_awareness_ignores_kind_and_universe():
+    """The whole point: a capability fact never shares an intent's kind or universe."""
+    base = _capability_base(_capability_record())
+    capability = next(obj for obj in base.objects() if is_capability(obj))
+    intent = make_intent(
+        "NEW",
+        kind=KnowledgeKind.PATTERN,
+        universe="SOMETHING-ELSE",
+        title="Universal Knowledge Provenance",
+        statement="Record a hash chained provenance chain for every knowledge record.",
+    )
+    assert capability.kind is not intent.kind
+    assert capability.universe != intent.universe
+    assert ReuseEngine(base).assess(intent).disposition is Disposition.REUSE
+
+
+def test_a_replaceable_capability_yields_extend_not_reuse():
+    base = _capability_base(_capability_record(replacement_prohibited=False))
+    intent = make_intent(
+        "NEW",
+        title="Universal Knowledge Provenance",
+        statement="Record a hash chained provenance chain for every knowledge record.",
+    )
+    assessment = ReuseEngine(base).assess(intent)
+    assert assessment.disposition is Disposition.EXTEND
+    assert any("extension is permitted" in reason for reason in assessment.reasons)
+
+
+def test_verification_packages_are_never_offered_as_reuse_targets():
+    """You do not implement provenance by reusing the provenance tests."""
+    base = _capability_base(
+        _capability_record(canonical_location="engine/tests/knowledge/ukip", unique_id="RC-02")
+    )
+    intent = make_intent(
+        "NEW",
+        title="Universal Knowledge Provenance",
+        statement="Record a hash chained provenance chain for every knowledge record.",
+    )
+    assessment = ReuseEngine(base).assess(intent)
+    assert not [c for c in assessment.candidates if c.relation == "implemented-capability"]
+
+
+def test_an_unbuilt_capability_is_never_offered_as_a_reuse_target():
+    base = _capability_base(_capability_record(implementation_status="PLANNED"))
+    intent = make_intent(
+        "NEW",
+        title="Universal Knowledge Provenance",
+        statement="Record a hash chained provenance chain for every knowledge record.",
+    )
+    assessment = ReuseEngine(base).assess(intent)
+    assert not [c for c in assessment.candidates if c.relation == "implemented-capability"]
+
+
+def test_an_on_topic_intent_outranks_an_off_topic_one():
+    """Discrimination is a property of the ranking, measurable without a threshold.
+
+    Asserting a bare CREATE for an off-topic intent would only hold on a corpus large
+    enough for inverse document frequency to discriminate; the invariant that holds at
+    every corpus size is that the on-topic intent scores strictly higher.
+    """
+    base = _capability_base(
+        _capability_record(),
+        _capability_record(
+            unique_id="RC-02",
+            canonical_name="platform.security",
+            canonical_location="platform/security",
+            category="platform",
+            summary="Authorises subjects, enforces policy and audits access decisions.",
+            symbols=["Authoriser", "PolicyDecision", "audit"],
+        ),
+    )
+    engine = ReuseEngine(base)
+
+    def best(title: str, statement: str) -> int:
+        candidates = [
+            c
+            for c in engine.assess(make_intent("NEW", title=title, statement=statement)).candidates
+            if c.relation in {"implemented-capability", "nearest-capability"}
+        ]
+        return candidates[0].score if candidates else 0
+
+    on_topic = best(
+        "Universal Knowledge Provenance",
+        "Record a hash chained provenance chain for every registered knowledge record.",
+    )
+    off_topic = best(
+        "Bake a chocolate cake",
+        "Cream butter and sugar then fold in flour cocoa and eggs and bake.",
+    )
+    assert on_topic > off_topic
+
+
+def test_create_carries_the_nearest_capabilities_as_evidence():
+    """A CREATE verdict must be auditable, not a bare 'nothing found'."""
+    base = _capability_base(_capability_record())
+    intent = make_intent(
+        "NEW",
+        title="Knowledge registry telemetry sampling",
+        statement="Sample telemetry counters emitted while registering knowledge.",
+    )
+    assessment = ReuseEngine(base).assess(intent)
+    if assessment.disposition is Disposition.CREATE:
+        assert any("confidence floor" in reason for reason in assessment.reasons)
+        assert [c for c in assessment.candidates if c.relation == "nearest-capability"]
+
+
+def test_semantic_reuse_still_takes_precedence_over_capability_matching(base):
+    intent = make_intent("NEW", statement="the alpha component substance", owner="TEAM-A")
+    assessment = ReuseEngine(base).assess(intent)
+    assert assessment.disposition is Disposition.REUSE
+    assert assessment.candidates[0].relation == "semantic"
+
+
+def test_a_base_without_capabilities_behaves_exactly_as_before(base):
+    """Capability awareness must not perturb a base that records no capabilities."""
+    intent = make_intent(
+        "NEW", title="alpha component v2", statement="alpha component substance improved"
+    )
+    assessment = ReuseEngine(base).assess(intent)
+    assert assessment.disposition is Disposition.EXTEND
+    assert assessment.targets == ("COMP-A",)
+
+
+def test_candidate_ordering_is_deterministic():
+    base = _capability_base(
+        _capability_record(),
+        _capability_record(
+            unique_id="RC-02",
+            canonical_name="engine.knowledge",
+            canonical_location="engine/knowledge",
+        ),
+    )
+    intent = make_intent(
+        "NEW",
+        title="Universal Knowledge Provenance",
+        statement="Record a hash chained provenance chain for every knowledge record.",
+    )
+    engine = ReuseEngine(base)
+    first = [c.cko_id for c in engine.assess(intent).candidates]
+    second = [c.cko_id for c in ReuseEngine(base).assess(intent).candidates]
+    assert first == second

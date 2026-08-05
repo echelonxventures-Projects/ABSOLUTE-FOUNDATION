@@ -115,7 +115,7 @@ Already realised three times, all bound. The gap engine detects structural and c
 - **Registered analyses reused:** UAR-RIE-04, UAR-RIE-03
 - **Registers reasoned over:** UAIE-REG-15, UAIE-REG-04, UAIE-REG-18, UAIE-REG-20
 - **Depends on:** UAIE-FAC-02, UAIE-FAC-06
-- **Replacement prohibited by catalogue:** false
+- **Replacement prohibited by catalogue:** true
 
 Already realised and registered as its own programme. Universal evolution intelligence binds the evolution capabilities to their homes; the autonomous evolution engine closes the observe-recommend loop over located owners; the constitutional evolution framework measures the fifteen-stage lifecycle any new construct must traverse; and the evolution governance model holds the normative process. A recommendation engine here would be a second voice on the same question.
 
