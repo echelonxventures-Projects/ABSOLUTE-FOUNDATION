@@ -2,28 +2,28 @@
   "artifact_id": "UCOS-RIE-DEPENDENCY-GRAPH",
   "authority": "NONE (derived truth)",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "1cd382951b9e95a6dc1ebc86acfeb23231d953cc1a993df1c3f818ed4e2be6df",
+  "content_hash": "32d37330ba6bc54961e38df239687c0d0f1d4d7a41c30fbd6a43edafe04259b2",
   "depends_on_acyclic": true,
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "e140fb2cde6a11b530371385ff2c407cc699890923f650e836039a24d1c9c152",
+      "fingerprint": "0d358a7975e6f9a621b5e7ae8b635baee6fdf52885fc1c0b28829e088cf2f78a",
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "ecc1427e586805f31c944c6a7f4262283acb3d3f85f93aff673fc2e8c1807680",
-      "00-BOOK/DATA/certification.json": "386b0f81f9df849794409bb8fdff106e49fdca4f1153717bcfcdcf4227c9c641",
-      "00-BOOK/DATA/control-tower.json": "2412718e1702f9e33c3cc8234be565c7ed3c05e84a78956d593b3c269dd5b977",
+      "00-BOOK/DATA/artifacts.json": "a3e93543305b25f93080a16741970b1b7d1c14437a04f17813a60edef9b1534b",
+      "00-BOOK/DATA/certification.json": "ad30e6ea45028b7bce0ea55c342f50cc25b211203492e1bb402bd2e827ee6283",
+      "00-BOOK/DATA/control-tower.json": "842d36f9467d47a70f4cb2496c1cc41e3e6929d9ed8ee4cd0cf6f558ca107f0a",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "a34e648cd43f13818156dacdbdc814f9da3a785daac6c6113fb9eac8e05f6598"
+      "00-BOOK/DATA/volumes.json": "8d1045916d922c69d0a8a001e5001286a231346d1ef4e14b365f4890dae2016c"
     }
   },
-  "evidence_timestamp": "2026-08-02T02:41:26+00:00",
+  "evidence_timestamp": "2026-08-05T10:50:25+00:00",
   "generation": {
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "e92ad12455696365cb81e366070ff612ed80e148b534e5fbfbbc91b43bf98739",
+    "input_hash": "daf661b8af982a141bc0c98a645d514ab0b3507f5c1775f0abd05dbbec61a2dd",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },
@@ -125,5 +125,5 @@
     }
   ],
   "title": "Dependency Intelligence Graph",
-  "total_corpus_edges": 12821
+  "total_corpus_edges": 12835
 }
