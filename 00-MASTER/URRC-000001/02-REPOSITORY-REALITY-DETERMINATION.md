@@ -112,7 +112,7 @@ What the repository contains, and the substrate that proves it.
 
 | Key | Value | Detail | Detail |
 |---|---|---|---|
-| `S-01` | `00-BOOK/DATA/artifacts.json` | YES | YES | YES | 2/2 | 2388 | `aca7de8b437b` |
+| `S-01` | `00-BOOK/DATA/artifacts.json` | YES | YES | YES | 2/2 | 2388 | `cadbfca5e8ab` |
 | `S-02` | `00-BOOK/DATA/relationships.json` | YES | YES | YES | 2/2 | 25642 | `f799bc704f74` |
 | `S-03` | `00-BOOK/DATA/control-tower.json` | YES | YES | YES | 3/3 | 88 | `2412718e1702` |
 | `S-04` | `00-BOOK/DATA/certification.json` | YES | YES | YES | 5/5 | 45 | `702e77d78c89` |

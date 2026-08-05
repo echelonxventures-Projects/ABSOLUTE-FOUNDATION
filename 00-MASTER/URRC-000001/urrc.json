@@ -989,11 +989,11 @@
       "unknown": false
     },
     {
-      "count": 15173,
+      "count": 14231,
       "evidence": [
         "S-01"
       ],
-      "headline": "349/15522 dimension slots populated (2.24%) · 273/1194 record(s) carry at least one trace (22.86%) · 0 record(s) fully traced · 921 with none",
+      "headline": "1291/15522 dimension slots populated (8.31%) · 1193/1194 record(s) carry at least one trace (99.91%) · 0 record(s) fully traced · 1 with none",
       "id": "DV-11",
       "primitive": "subdict_fill_ratio",
       "purpose": "Traceability completeness across the thirteen traceability dimensions of every registered artifact.",
@@ -1008,11 +1008,11 @@
         ],
         [
           "slots populated",
-          "349"
+          "1291"
         ],
         [
           "populated share (%)",
-          "2.24"
+          "8.31"
         ],
         [
           "records fully traced",
@@ -1020,19 +1020,19 @@
         ],
         [
           "records with no trace",
-          "921"
+          "1"
         ],
         [
           "records with at least one trace",
-          "273"
+          "1193"
         ],
         [
           "traced-record share (%)",
-          "22.86"
+          "99.91"
         ],
         [
           "dimension `architecture`",
-          "251/1194"
+          "1193/1194"
         ],
         [
           "dimension `certification`",
@@ -2297,7 +2297,7 @@
           "YES",
           "2/2",
           "2388",
-          "`aca7de8b437b`"
+          "`cadbfca5e8ab`"
         ],
         [
           "`S-02`",
@@ -3344,7 +3344,7 @@
   "seal_sha256": "8432609e10e719c6c2fef582f8f352a29e027e3ffe816e9eeed636f7c51eef40",
   "substrate": [
     {
-      "content_sha256": "aca7de8b437b50e6877265fa4b4e2d2c9424b36b9f6b22e18f723f870552bb85",
+      "content_sha256": "cadbfca5e8abe8a670f202b5bf79a69712512c63491a297d110a99903416faad",
       "exists": true,
       "id": "S-01",
       "kind": "registration projection",

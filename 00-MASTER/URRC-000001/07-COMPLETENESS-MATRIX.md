@@ -76,20 +76,20 @@ Per-dimension completeness, declared as a lower bound.
 **`DV-11`** — Traceability completeness across the thirteen traceability dimensions of every registered artifact.
 
 - **Primitive** — `subdict_fill_ratio`
-- **Result** — 349/15522 dimension slots populated (2.24%) · 273/1194 record(s) carry at least one trace (22.86%) · 0 record(s) fully traced · 921 with none
+- **Result** — 1291/15522 dimension slots populated (8.31%) · 1193/1194 record(s) carry at least one trace (99.91%) · 0 record(s) fully traced · 1 with none
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
 | records measured | 1194 |
 | dimension slots | 15522 |
-| slots populated | 349 |
-| populated share (%) | 2.24 |
+| slots populated | 1291 |
+| populated share (%) | 8.31 |
 | records fully traced | 0 |
-| records with no trace | 921 |
-| records with at least one trace | 273 |
-| traced-record share (%) | 22.86 |
-| dimension `architecture` | 251/1194 |
+| records with no trace | 1 |
+| records with at least one trace | 1193 |
+| traced-record share (%) | 99.91 |
+| dimension `architecture` | 1193/1194 |
 | dimension `certification` | 0/1194 |
 | dimension `deployment` | 0/1194 |
 | dimension `design` | 0/1194 |
