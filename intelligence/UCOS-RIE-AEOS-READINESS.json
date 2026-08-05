@@ -3,7 +3,7 @@
   "authority": "NONE (derived truth)",
   "authorization_required": "CIOA/lane authority + GOV-004 (this engine authorizes nothing).",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "0616908b2849e4147569a46525dda745c71a9d245efbbbc1f7a61da043666ea6",
+  "content_hash": "84aae55e1419267ec4e00b31da4df2850b3c869a2f6726d63e2b86e7c7a917d9",
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
@@ -11,7 +11,7 @@
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "aca7de8b437b50e6877265fa4b4e2d2c9424b36b9f6b22e18f723f870552bb85",
+      "00-BOOK/DATA/artifacts.json": "cadbfca5e8abe8a670f202b5bf79a69712512c63491a297d110a99903416faad",
       "00-BOOK/DATA/certification.json": "702e77d78c8958f707221c67f036819e7231223a58baf7ce9dad8efe024b7f4d",
       "00-BOOK/DATA/control-tower.json": "2412718e1702f9e33c3cc8234be565c7ed3c05e84a78956d593b3c269dd5b977",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
@@ -23,7 +23,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "c843ac936cf2d506dcd45faa0dad6e3a12319ff3c307771d0ff97e4d9f794591",
+    "input_hash": "f0b9801d77b60988c722f13f5cb75ded03786c2698fad9ba93b660ccdfa9b296",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },

@@ -4,7 +4,7 @@
   "authority": "NONE (derived truth)",
   "capability_count": 71,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "5779c7b6f0e9349d3215bec86bc874103ddcdb1c5016e4cee0d63a8577101594",
+  "content_hash": "1773513570ddf8e6beb3b92950bf97a0c0e2faa7fe907b68e26a9e25d09b1b31",
   "dimension_index_reconciled_pct": 26.7,
   "drift": {
     "baseline": false,
@@ -118,7 +118,7 @@
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "aca7de8b437b50e6877265fa4b4e2d2c9424b36b9f6b22e18f723f870552bb85",
+      "00-BOOK/DATA/artifacts.json": "cadbfca5e8abe8a670f202b5bf79a69712512c63491a297d110a99903416faad",
       "00-BOOK/DATA/certification.json": "702e77d78c8958f707221c67f036819e7231223a58baf7ce9dad8efe024b7f4d",
       "00-BOOK/DATA/control-tower.json": "2412718e1702f9e33c3cc8234be565c7ed3c05e84a78956d593b3c269dd5b977",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
@@ -130,7 +130,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "c843ac936cf2d506dcd45faa0dad6e3a12319ff3c307771d0ff97e4d9f794591",
+    "input_hash": "f0b9801d77b60988c722f13f5cb75ded03786c2698fad9ba93b660ccdfa9b296",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },
