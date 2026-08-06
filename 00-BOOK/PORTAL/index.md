@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-08-06T08:52:25+00:00 by ukbx portal. 1206 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-08-06T15:45:22+00:00 by ukbx portal. 1219 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1210,3 +1210,16 @@
 | [UCOS-OMEGAN-000001](UCOS-OMEGAN-000001.md) | UCOS Ω∞ — Ω Nucleus Implementation Inventory | VOL-000 | ACTIVE |
 | [UCOS-PRODUC-000001](UCOS-PRODUC-000001.md) | UCOS Ω∞ — Production Foundation | VOL-000 | ACTIVE |
 | [UCOS-PRODUC-000002](UCOS-PRODUC-000002.md) | UCOS Ω∞ — Remaining Implementation Roadmap | VOL-000 | ACTIVE |
+| [UCOS-CEPMOD-000001](UCOS-CEPMOD-000001.md) | CEP-MOD-002 — Universal Structural Vocabulary Migration Dete | VOL-000 | ACTIVE |
+| [UCOS-CON-000065](UCOS-CON-000065.md) | P0-ASSIMILATION-001 — Universal Constitutional Assimilation  | VOL-002 | ACTIVE |
+| [UCOS-P0CLOS-000001](UCOS-P0CLOS-000001.md) | P0-CLOSURE-001 — Universal Foundation Closure Determination | VOL-000 | ACTIVE |
+| [UCOS-P0DECL-000001](UCOS-P0DECL-000001.md) | P0-DECLARATION-001 — Universal Foundation Declaration Comple | VOL-000 | ACTIVE |
+| [UCOS-CON-000066](UCOS-CON-000066.md) | UCFM-001 — Universal Constitutional Facet Model · Final Dete | VOL-002 | ACTIVE |
+| [UCOS-CON-000067](UCOS-CON-000067.md) | UCOD-001 — Universal Constitutional Ownership Determination | VOL-002 | ACTIVE |
+| [UCOS-CON-000068](UCOS-CON-000068.md) | UCOS-MOD-001 — Constitutional Meta-Ontology Determination | VOL-002 | ACTIVE |
+| [UCOS-CON-000069](UCOS-CON-000069.md) | UCOS-P0-CONVERGENCE-001 — Constitutional Convergence Determi | VOL-002 | ACTIVE |
+| [UCOS-CON-000070](UCOS-CON-000070.md) | UCOS-UCOM-001 — Universal Constitutional Object Model Determ | VOL-002 | ACTIVE |
+| [UCOS-UCOSUC-000001](UCOS-UCOSUC-000001.md) | UCOS-UCOM-002 — Universal Constitutional Evolution & Univers | VOL-000 | ACTIVE |
+| [UCOS-CON-000071](UCOS-CON-000071.md) | UCRD-001 — Constitutional Relationship Determination | VOL-002 | ACTIVE |
+| [UCOS-CON-000072](UCOS-CON-000072.md) | UMN-001 — Universal Micro Nucleus Constitutional Determinati | VOL-002 | ACTIVE |
+| [UCOS-UNAF00-000001](UCOS-UNAF00-000001.md) | UNAF-001 — Universal Nucleus Architecture Freeze | VOL-000 | ACTIVE |

@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1206
+**Total artifacts:** 1219
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1214,5 +1214,18 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1204 | `UCOS-OMEGAN-000001` | UCOS Ω∞ — Ω Nucleus Implementation Inventory | — | 000 | UPN-000009651–UPN-000009651 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../OMEGA-NUCLEUS-IMPLEMENTATION-INVENTORY.md) |
 | 1205 | `UCOS-PRODUC-000001` | UCOS Ω∞ — Production Foundation | — | 000 | UPN-000009652–UPN-000009653 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../PRODUCTION-FOUNDATION.md) |
 | 1206 | `UCOS-PRODUC-000002` | UCOS Ω∞ — Remaining Implementation Roadmap | — | 000 | UPN-000009654–UPN-000009655 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../PRODUCTION-ROADMAP.md) |
+| 1207 | `UCOS-CEPMOD-000001` | CEP-MOD-002 — Universal Structural Vocabulary Migration D… | — | 000 | UPN-000009656–UPN-000009664 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../CEP-MOD-002-UNIVERSAL-STRUCTURAL-VOCABULARY-MIGRATION-DETERMINATION.md) |
+| 1208 | `UCOS-CON-000065` | P0-ASSIMILATION-001 — Universal Constitutional Assimilati… | — | 002 | UPN-000009665–UPN-000009668 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../P0-ASSIMILATION-001-UNIVERSAL-CONSTITUTIONAL-ASSIMILATION-DETERMINATION.md) |
+| 1209 | `UCOS-P0CLOS-000001` | P0-CLOSURE-001 — Universal Foundation Closure Determination | — | 000 | UPN-000009669–UPN-000009673 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../P0-CLOSURE-001-UNIVERSAL-FOUNDATION-CLOSURE-DETERMINATION.md) |
+| 1210 | `UCOS-P0DECL-000001` | P0-DECLARATION-001 — Universal Foundation Declaration Com… | — | 000 | UPN-000009674–UPN-000009679 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../P0-DECLARATION-001-UNIVERSAL-FOUNDATION-DECLARATION-COMPLETION.md) |
+| 1211 | `UCOS-CON-000066` | UCFM-001 — Universal Constitutional Facet Model · Final D… | — | 002 | UPN-000009680–UPN-000009685 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCFM-001-UNIVERSAL-CONSTITUTIONAL-FACET-MODEL-FINAL-DETERMINATION.md) |
+| 1212 | `UCOS-CON-000067` | UCOD-001 — Universal Constitutional Ownership Determination | — | 002 | UPN-000009686–UPN-000009692 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCOD-001-UNIVERSAL-CONSTITUTIONAL-OWNERSHIP-DETERMINATION.md) |
+| 1213 | `UCOS-CON-000068` | UCOS-MOD-001 — Constitutional Meta-Ontology Determination | — | 002 | UPN-000009693–UPN-000009698 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCOS-MOD-001-CONSTITUTIONAL-META-ONTOLOGY-DETERMINATION.md) |
+| 1214 | `UCOS-CON-000069` | UCOS-P0-CONVERGENCE-001 — Constitutional Convergence Dete… | — | 002 | UPN-000009699–UPN-000009703 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCOS-P0-CONVERGENCE-001-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md) |
+| 1215 | `UCOS-CON-000070` | UCOS-UCOM-001 — Universal Constitutional Object Model Det… | — | 002 | UPN-000009704–UPN-000009708 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCOS-UCOM-001-UNIVERSAL-CONSTITUTIONAL-OBJECT-MODEL-DETERMINATION.md) |
+| 1216 | `UCOS-UCOSUC-000001` | UCOS-UCOM-002 — Universal Constitutional Evolution & Univ… | — | 000 | UPN-000009709–UPN-000009713 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UCOS-UCOM-002-UNIVERSAL-EVOLUTION-AND-OPERATIONS-FINAL-DETERMINATION.md) |
+| 1217 | `UCOS-CON-000071` | UCRD-001 — Constitutional Relationship Determination | — | 002 | UPN-000009714–UPN-000009717 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCRD-001-CONSTITUTIONAL-RELATIONSHIP-DETERMINATION.md) |
+| 1218 | `UCOS-CON-000072` | UMN-001 — Universal Micro Nucleus Constitutional Determin… | — | 002 | UPN-000009718–UPN-000009727 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UMN-001-UNIVERSAL-MICRO-NUCLEUS-CONSTITUTIONAL-DETERMINATION.md) |
+| 1219 | `UCOS-UNAF00-000001` | UNAF-001 — Universal Nucleus Architecture Freeze | — | 000 | UPN-000009728–UPN-000009739 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UNAF-001-UNIVERSAL-NUCLEUS-ARCHITECTURE-FREEZE.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

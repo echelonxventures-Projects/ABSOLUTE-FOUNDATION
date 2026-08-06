@@ -8659,15 +8659,106 @@
       "page_start": 9654,
       "page_count": 2,
       "first_seen": "2026-08-06T08:52:24+00:00"
+    },
+    "CEP-MOD-002-UNIVERSAL-STRUCTURAL-VOCABULARY-MIGRATION-DETERMINATION.md": {
+      "universal_id": "UCOS-CEPMOD-000001",
+      "category": "CEPMOD",
+      "page_start": 9656,
+      "page_count": 9,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "P0-ASSIMILATION-001-UNIVERSAL-CONSTITUTIONAL-ASSIMILATION-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000065",
+      "category": "CON",
+      "page_start": 9665,
+      "page_count": 4,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "P0-CLOSURE-001-UNIVERSAL-FOUNDATION-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-P0CLOS-000001",
+      "category": "P0CLOS",
+      "page_start": 9669,
+      "page_count": 5,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "P0-DECLARATION-001-UNIVERSAL-FOUNDATION-DECLARATION-COMPLETION.md": {
+      "universal_id": "UCOS-P0DECL-000001",
+      "category": "P0DECL",
+      "page_start": 9674,
+      "page_count": 6,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "UCFM-001-UNIVERSAL-CONSTITUTIONAL-FACET-MODEL-FINAL-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000066",
+      "category": "CON",
+      "page_start": 9680,
+      "page_count": 6,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "UCOD-001-UNIVERSAL-CONSTITUTIONAL-OWNERSHIP-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000067",
+      "category": "CON",
+      "page_start": 9686,
+      "page_count": 7,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "UCOS-MOD-001-CONSTITUTIONAL-META-ONTOLOGY-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000068",
+      "category": "CON",
+      "page_start": 9693,
+      "page_count": 6,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "UCOS-P0-CONVERGENCE-001-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000069",
+      "category": "CON",
+      "page_start": 9699,
+      "page_count": 5,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "UCOS-UCOM-001-UNIVERSAL-CONSTITUTIONAL-OBJECT-MODEL-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000070",
+      "category": "CON",
+      "page_start": 9704,
+      "page_count": 5,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "UCOS-UCOM-002-UNIVERSAL-EVOLUTION-AND-OPERATIONS-FINAL-DETERMINATION.md": {
+      "universal_id": "UCOS-UCOSUC-000001",
+      "category": "UCOSUC",
+      "page_start": 9709,
+      "page_count": 5,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "UCRD-001-CONSTITUTIONAL-RELATIONSHIP-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000071",
+      "category": "CON",
+      "page_start": 9714,
+      "page_count": 4,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "UMN-001-UNIVERSAL-MICRO-NUCLEUS-CONSTITUTIONAL-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000072",
+      "category": "CON",
+      "page_start": 9718,
+      "page_count": 10,
+      "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "UNAF-001-UNIVERSAL-NUCLEUS-ARCHITECTURE-FREEZE.md": {
+      "universal_id": "UCOS-UNAF00-000001",
+      "category": "UNAF00",
+      "page_start": 9728,
+      "page_count": 12,
+      "first_seen": "2026-08-06T15:45:21+00:00"
     }
   },
-  "page_cursor": 9655,
+  "page_cursor": 9739,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
     "SRC": 2,
     "ARCH": 24,
-    "CON": 64,
+    "CON": 72,
     "VSN": 3,
     "IDX": 1,
     "EES": 2,
@@ -8759,7 +8850,12 @@
     "CMG": 2,
     "UCOSACFV0000": 1,
     "OMEGAN": 1,
-    "PRODUC": 2
+    "PRODUC": 2,
+    "CEPMOD": 1,
+    "P0CLOS": 1,
+    "P0DECL": 1,
+    "UCOSUC": 1,
+    "UNAF00": 1
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -24222,6 +24318,149 @@
         "status": "ACTIVE",
         "path": "PRODUCTION-ROADMAP.md",
         "name": "UCOS Ω∞ — Remaining Implementation Roadmap"
+      }
+    ],
+    "UCOS-CEPMOD-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "f0fefdcc7adfc6df022aae5865a5d1e5985550059e07bc97334759a67e2b1316",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "CEP-MOD-002-UNIVERSAL-STRUCTURAL-VOCABULARY-MIGRATION-DETERMINATION.md",
+        "name": "CEP-MOD-002 — Universal Structural Vocabulary Migration Determination"
+      }
+    ],
+    "UCOS-CON-000065": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "1b5f6e6666474603c49494d0a94a4a9aaf7629143681a7d97229bc16cbef3a06",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "P0-ASSIMILATION-001-UNIVERSAL-CONSTITUTIONAL-ASSIMILATION-DETERMINATION.md",
+        "name": "P0-ASSIMILATION-001 — Universal Constitutional Assimilation Determination"
+      }
+    ],
+    "UCOS-P0CLOS-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "01b2a9dab3c2080ef9070658b7c97bf0df68a7772fc9cd3ef7e138825024a29f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "P0-CLOSURE-001-UNIVERSAL-FOUNDATION-CLOSURE-DETERMINATION.md",
+        "name": "P0-CLOSURE-001 — Universal Foundation Closure Determination"
+      }
+    ],
+    "UCOS-P0DECL-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "01be69b613064d91e44884a2be302f1d5d5662c384c38c7cf35de74c1cc5b5ed",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "P0-DECLARATION-001-UNIVERSAL-FOUNDATION-DECLARATION-COMPLETION.md",
+        "name": "P0-DECLARATION-001 — Universal Foundation Declaration Completion"
+      }
+    ],
+    "UCOS-CON-000066": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "1faac7c988f5a7bf46ba0fa9696330f694b8cc7b30cc53d90828703dfbfca173",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCFM-001-UNIVERSAL-CONSTITUTIONAL-FACET-MODEL-FINAL-DETERMINATION.md",
+        "name": "UCFM-001 — Universal Constitutional Facet Model · Final Determination"
+      }
+    ],
+    "UCOS-CON-000067": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "7f30bfa53e750ead6af60007e2cd6ed63909adff77dc9b728cc3ff6f9060ddde",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOD-001-UNIVERSAL-CONSTITUTIONAL-OWNERSHIP-DETERMINATION.md",
+        "name": "UCOD-001 — Universal Constitutional Ownership Determination"
+      }
+    ],
+    "UCOS-CON-000068": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "e4d7309283d6f05d12fc2426404966513021a8842cc85f0733813a9783840a70",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-MOD-001-CONSTITUTIONAL-META-ONTOLOGY-DETERMINATION.md",
+        "name": "UCOS-MOD-001 — Constitutional Meta-Ontology Determination"
+      }
+    ],
+    "UCOS-CON-000069": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "3681cf0458ccbe5f32de0d12fb9ce28b6afdbed4d38ff6e0fba81faf5d9784a2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-P0-CONVERGENCE-001-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md",
+        "name": "UCOS-P0-CONVERGENCE-001 — Constitutional Convergence Determination"
+      }
+    ],
+    "UCOS-CON-000070": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "b3676e6c36582aa2f2beece82e1a4f5c09d517af586f1bab68e16b2f12bb5859",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-UCOM-001-UNIVERSAL-CONSTITUTIONAL-OBJECT-MODEL-DETERMINATION.md",
+        "name": "UCOS-UCOM-001 — Universal Constitutional Object Model Determination"
+      }
+    ],
+    "UCOS-UCOSUC-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "fd54069ca74199119a38f545ed8afefd0b02d9bbb6274f927004aa162b61dcd2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-UCOM-002-UNIVERSAL-EVOLUTION-AND-OPERATIONS-FINAL-DETERMINATION.md",
+        "name": "UCOS-UCOM-002 — Universal Constitutional Evolution & Universal Constitutional Operations · Final Determination"
+      }
+    ],
+    "UCOS-CON-000071": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "d7a23da564032831b80c1fbf1b1afb4acb7739e22b66d1cd9264cd2562f15e6b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCRD-001-CONSTITUTIONAL-RELATIONSHIP-DETERMINATION.md",
+        "name": "UCRD-001 — Constitutional Relationship Determination"
+      }
+    ],
+    "UCOS-CON-000072": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "13c76591953e94c2c5242a8089a62a21ea7abc7c468f2dae84d99baf6153b8d1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UMN-001-UNIVERSAL-MICRO-NUCLEUS-CONSTITUTIONAL-DETERMINATION.md",
+        "name": "UMN-001 — Universal Micro Nucleus Constitutional Determination"
+      }
+    ],
+    "UCOS-UNAF00-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:45:21+00:00",
+        "content_hash": "5b3cab54cac373e5688eca2343782234d5d32da58568d814ef3397839a701d05",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UNAF-001-UNIVERSAL-NUCLEUS-ARCHITECTURE-FREEZE.md",
+        "name": "UNAF-001 — Universal Nucleus Architecture Freeze"
       }
     ]
   }

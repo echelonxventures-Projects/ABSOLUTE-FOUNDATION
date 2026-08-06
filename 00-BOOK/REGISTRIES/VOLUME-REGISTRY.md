@@ -6,9 +6,9 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 99 | UPN-000000001–UPN-000009655 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 104 | UPN-000000001–UPN-000009739 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
-| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 102 | UPN-000001327–UPN-000009587 |
+| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 110 | UPN-000001327–UPN-000009727 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 57 | UPN-000000022–UPN-000009371 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 6 | UPN-000004194–UPN-000005924 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 99
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 104
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -139,6 +139,11 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-OMEGAN-000001` | UCOS Ω∞ — Ω Nucleus Implementation Inventory | — | ACTIVE |
 | `UCOS-PRODUC-000001` | UCOS Ω∞ — Production Foundation | — | ACTIVE |
 | `UCOS-PRODUC-000002` | UCOS Ω∞ — Remaining Implementation Roadmap | — | ACTIVE |
+| `UCOS-CEPMOD-000001` | CEP-MOD-002 — Universal Structural Vocabulary Migration Deter… | — | ACTIVE |
+| `UCOS-P0CLOS-000001` | P0-CLOSURE-001 — Universal Foundation Closure Determination | — | ACTIVE |
+| `UCOS-P0DECL-000001` | P0-DECLARATION-001 — Universal Foundation Declaration Completion | — | ACTIVE |
+| `UCOS-UCOSUC-000001` | UCOS-UCOM-002 — Universal Constitutional Evolution & Universa… | — | ACTIVE |
+| `UCOS-UNAF00-000001` | UNAF-001 — Universal Nucleus Architecture Freeze | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -154,7 +159,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-002 — CONSTITUTION <a id="vol-002"></a>
 
 *Constitutional corpus, consolidation program, freeze, and registers.*  \
-**Category:** CON · **Status:** ACTIVE · **Artifacts:** 102
+**Category:** CON · **Status:** ACTIVE · **Artifacts:** 110
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -260,6 +265,14 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-CON-000063` | UCOS Ω∞ — CMG CONSTITUTIONAL OPEN QUESTIONS REQUIRING EXPLICI… | CMG-000014 | UNDER_REVIEW |
 | `UCOS-CMG-000002` | 00-CMG — CONSTITUTIONAL META GOVERNANCE | CMG-000000 | UNDER_REVIEW |
 | `UCOS-CON-000064` | UCOS Ω∞ — UCCEP-000000 · UNIVERSAL CONTINUOUS CONSTITUTIONAL … | UCCEP-000000 | ACTIVE |
+| `UCOS-CON-000065` | P0-ASSIMILATION-001 — Universal Constitutional Assimilation D… | — | ACTIVE |
+| `UCOS-CON-000066` | UCFM-001 — Universal Constitutional Facet Model · Final Deter… | — | ACTIVE |
+| `UCOS-CON-000067` | UCOD-001 — Universal Constitutional Ownership Determination | — | ACTIVE |
+| `UCOS-CON-000068` | UCOS-MOD-001 — Constitutional Meta-Ontology Determination | — | ACTIVE |
+| `UCOS-CON-000069` | UCOS-P0-CONVERGENCE-001 — Constitutional Convergence Determin… | — | ACTIVE |
+| `UCOS-CON-000070` | UCOS-UCOM-001 — Universal Constitutional Object Model Determi… | — | ACTIVE |
+| `UCOS-CON-000071` | UCRD-001 — Constitutional Relationship Determination | — | ACTIVE |
+| `UCOS-CON-000072` | UMN-001 — Universal Micro Nucleus Constitutional Determination | — | ACTIVE |
 
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 

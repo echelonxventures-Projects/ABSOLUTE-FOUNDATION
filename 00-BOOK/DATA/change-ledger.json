@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-06T08:52:34+00:00",
+  "generated_at": "2026-08-06T15:45:22+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1325,
-    "versioned_artifacts": 1206,
-    "lineage_nodes": 1206,
+    "change_events": 1338,
+    "versioned_artifacts": 1219,
+    "lineage_nodes": 1219,
     "artifacts_with_predecessors": 5,
     "artifacts_with_successors": 5
   },
   "change_event_histogram": {
-    "Created": 1206,
+    "Created": 1219,
     "Modified": 114,
     "Version-Incremented": 5
   },
@@ -7962,6 +7962,84 @@
       "change_id": "UCHG-000001325",
       "at": "2026-08-06T08:52:24+00:00",
       "subject": "UCOS-PRODUC-000002",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001326",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-CEPMOD-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001327",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-CON-000065",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001328",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-CON-000066",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001329",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-CON-000067",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001330",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-CON-000068",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001331",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-CON-000069",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001332",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-CON-000070",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001333",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-CON-000071",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001334",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-CON-000072",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001335",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-P0CLOS-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001336",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-P0DECL-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001337",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-UCOSUC-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001338",
+      "at": "2026-08-06T15:45:21+00:00",
+      "subject": "UCOS-UNAF00-000001",
       "kind": "Created"
     }
   ],
@@ -21215,6 +21293,201 @@
       "from": null,
       "to": "ACTIVE",
       "commit": null
+    },
+    {
+      "change_id": "UCHG-000001326",
+      "subject": "UCOS-CEPMOD-000001",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001327",
+      "subject": "UCOS-CON-000065",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001328",
+      "subject": "UCOS-CON-000066",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001329",
+      "subject": "UCOS-CON-000067",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001330",
+      "subject": "UCOS-CON-000068",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001331",
+      "subject": "UCOS-CON-000069",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001332",
+      "subject": "UCOS-CON-000070",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001333",
+      "subject": "UCOS-CON-000071",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001334",
+      "subject": "UCOS-CON-000072",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001335",
+      "subject": "UCOS-P0CLOS-000001",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001336",
+      "subject": "UCOS-P0DECL-000001",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001337",
+      "subject": "UCOS-UCOSUC-000001",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
+    },
+    {
+      "change_id": "UCHG-000001338",
+      "subject": "UCOS-UNAF00-000001",
+      "kind": "Created",
+      "at": "2026-08-06T15:45:21+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": {
+        "commit": "fac2ff9f0c08",
+        "date": "2026-08-06T21:15:13+05:30",
+        "author": "Echelon Ventures",
+        "subject": "P0 DETERMINATIONS: what was determined is written down, and what is written down is admitted"
+      }
     }
   ],
   "version_records": {
@@ -38131,6 +38404,188 @@
           "snapshot_seq": 1
         }
       ]
+    },
+    "UCOS-CEPMOD-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "f0fefdcc7adfc6df022aae5865a5d1e5985550059e07bc97334759a67e2b1316",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "f0fefdcc7adfc6df022aae5865a5d1e5985550059e07bc97334759a67e2b1316",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000065": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "1b5f6e6666474603c49494d0a94a4a9aaf7629143681a7d97229bc16cbef3a06",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "1b5f6e6666474603c49494d0a94a4a9aaf7629143681a7d97229bc16cbef3a06",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-P0CLOS-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "01b2a9dab3c2080ef9070658b7c97bf0df68a7772fc9cd3ef7e138825024a29f",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "01b2a9dab3c2080ef9070658b7c97bf0df68a7772fc9cd3ef7e138825024a29f",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-P0DECL-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "01be69b613064d91e44884a2be302f1d5d5662c384c38c7cf35de74c1cc5b5ed",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "01be69b613064d91e44884a2be302f1d5d5662c384c38c7cf35de74c1cc5b5ed",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000066": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "1faac7c988f5a7bf46ba0fa9696330f694b8cc7b30cc53d90828703dfbfca173",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "1faac7c988f5a7bf46ba0fa9696330f694b8cc7b30cc53d90828703dfbfca173",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000067": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "7f30bfa53e750ead6af60007e2cd6ed63909adff77dc9b728cc3ff6f9060ddde",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "7f30bfa53e750ead6af60007e2cd6ed63909adff77dc9b728cc3ff6f9060ddde",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000068": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "e4d7309283d6f05d12fc2426404966513021a8842cc85f0733813a9783840a70",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "e4d7309283d6f05d12fc2426404966513021a8842cc85f0733813a9783840a70",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000069": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "3681cf0458ccbe5f32de0d12fb9ce28b6afdbed4d38ff6e0fba81faf5d9784a2",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "3681cf0458ccbe5f32de0d12fb9ce28b6afdbed4d38ff6e0fba81faf5d9784a2",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000070": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "b3676e6c36582aa2f2beece82e1a4f5c09d517af586f1bab68e16b2f12bb5859",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "b3676e6c36582aa2f2beece82e1a4f5c09d517af586f1bab68e16b2f12bb5859",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-UCOSUC-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "fd54069ca74199119a38f545ed8afefd0b02d9bbb6274f927004aa162b61dcd2",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "fd54069ca74199119a38f545ed8afefd0b02d9bbb6274f927004aa162b61dcd2",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000071": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "d7a23da564032831b80c1fbf1b1afb4acb7739e22b66d1cd9264cd2562f15e6b",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "d7a23da564032831b80c1fbf1b1afb4acb7739e22b66d1cd9264cd2562f15e6b",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000072": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "13c76591953e94c2c5242a8089a62a21ea7abc7c468f2dae84d99baf6153b8d1",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "13c76591953e94c2c5242a8089a62a21ea7abc7c468f2dae84d99baf6153b8d1",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-UNAF00-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "5b3cab54cac373e5688eca2343782234d5d32da58568d814ef3397839a701d05",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "5b3cab54cac373e5688eca2343782234d5d32da58568d814ef3397839a701d05",
+          "at": "2026-08-06T15:45:21+00:00",
+          "snapshot_seq": 1
+        }
+      ]
     }
   },
   "lineage": {
@@ -42442,6 +42897,14 @@
       "descendant_chain": [],
       "origin": "UCOS-FRZ-000003"
     },
+    "UCOS-CEPMOD-000001": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CEPMOD-000001"
+    },
     "UCOS-ENVIRONMENTS-000001": {
       "birth": "2026-07-17T12:14:10+00:00",
       "predecessors": [],
@@ -43018,6 +43481,30 @@
       "descendant_chain": [],
       "origin": "UCOS-OMEGAN-000001"
     },
+    "UCOS-CON-000065": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000065"
+    },
+    "UCOS-P0CLOS-000001": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-P0CLOS-000001"
+    },
+    "UCOS-P0DECL-000001": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-P0DECL-000001"
+    },
     "UCOS-PRODUC-000001": {
       "birth": "2026-08-06T08:52:24+00:00",
       "predecessors": [],
@@ -43034,6 +43521,22 @@
       "descendant_chain": [],
       "origin": "UCOS-PRODUC-000002"
     },
+    "UCOS-CON-000066": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000066"
+    },
+    "UCOS-CON-000067": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000067"
+    },
     "UCOS-UCOSACFV0000-000001": {
       "birth": "2026-07-26T06:31:59+00:00",
       "predecessors": [],
@@ -43042,6 +43545,14 @@
       "descendant_chain": [],
       "origin": "UCOS-UCOSACFV0000-000001"
     },
+    "UCOS-CON-000068": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000068"
+    },
     "UCOS-UCOSOMEGAINF-000001": {
       "birth": "2026-07-17T16:18:15+00:00",
       "predecessors": [],
@@ -43049,6 +43560,54 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-UCOSOMEGAINF-000001"
+    },
+    "UCOS-CON-000069": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000069"
+    },
+    "UCOS-CON-000070": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000070"
+    },
+    "UCOS-UCOSUC-000001": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-UCOSUC-000001"
+    },
+    "UCOS-CON-000071": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000071"
+    },
+    "UCOS-CON-000072": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000072"
+    },
+    "UCOS-UNAF00-000001": {
+      "birth": "2026-08-06T15:45:21+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-UNAF00-000001"
     },
     "UCOS-VERIFICATION-000001": {
       "birth": "2026-07-17T12:14:43+00:00",

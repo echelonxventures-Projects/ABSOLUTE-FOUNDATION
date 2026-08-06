@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 9655  ·  **Page cursor (next free):** UPN-000009656
+**Pages allocated:** 9739  ·  **Page cursor (next free):** UPN-000009740
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1214,5 +1214,18 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000009651 | UPN-000009651 | 1 | `UCOS-OMEGAN-000001` | 000 | UCOS Ω∞ — Ω Nucleus Implementation Inventory |
 | UPN-000009652 | UPN-000009653 | 2 | `UCOS-PRODUC-000001` | 000 | UCOS Ω∞ — Production Foundation |
 | UPN-000009654 | UPN-000009655 | 2 | `UCOS-PRODUC-000002` | 000 | UCOS Ω∞ — Remaining Implementation Roadmap |
+| UPN-000009656 | UPN-000009664 | 9 | `UCOS-CEPMOD-000001` | 000 | CEP-MOD-002 — Universal Structural Vocabulary… |
+| UPN-000009665 | UPN-000009668 | 4 | `UCOS-CON-000065` | 002 | P0-ASSIMILATION-001 — Universal Constitutiona… |
+| UPN-000009669 | UPN-000009673 | 5 | `UCOS-P0CLOS-000001` | 000 | P0-CLOSURE-001 — Universal Foundation Closure… |
+| UPN-000009674 | UPN-000009679 | 6 | `UCOS-P0DECL-000001` | 000 | P0-DECLARATION-001 — Universal Foundation Dec… |
+| UPN-000009680 | UPN-000009685 | 6 | `UCOS-CON-000066` | 002 | UCFM-001 — Universal Constitutional Facet Mod… |
+| UPN-000009686 | UPN-000009692 | 7 | `UCOS-CON-000067` | 002 | UCOD-001 — Universal Constitutional Ownership… |
+| UPN-000009693 | UPN-000009698 | 6 | `UCOS-CON-000068` | 002 | UCOS-MOD-001 — Constitutional Meta-Ontology D… |
+| UPN-000009699 | UPN-000009703 | 5 | `UCOS-CON-000069` | 002 | UCOS-P0-CONVERGENCE-001 — Constitutional Conv… |
+| UPN-000009704 | UPN-000009708 | 5 | `UCOS-CON-000070` | 002 | UCOS-UCOM-001 — Universal Constitutional Obje… |
+| UPN-000009709 | UPN-000009713 | 5 | `UCOS-UCOSUC-000001` | 000 | UCOS-UCOM-002 — Universal Constitutional Evol… |
+| UPN-000009714 | UPN-000009717 | 4 | `UCOS-CON-000071` | 002 | UCRD-001 — Constitutional Relationship Determ… |
+| UPN-000009718 | UPN-000009727 | 10 | `UCOS-CON-000072` | 002 | UMN-001 — Universal Micro Nucleus Constitutio… |
+| UPN-000009728 | UPN-000009739 | 12 | `UCOS-UNAF00-000001` | 000 | UNAF-001 — Universal Nucleus Architecture Freeze |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
