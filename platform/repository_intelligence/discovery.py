@@ -1142,8 +1142,7 @@ def discover_ownership(
                     OWNERSHIP_CONTESTED,
                     dimension,
                     unit.name,
-                    "capability declares more than one owning terminal, so ownership "
-                    "is ambiguous",
+                    "capability declares more than one owning terminal, so ownership is ambiguous",
                     candidates=list(candidates),
                 )
             )

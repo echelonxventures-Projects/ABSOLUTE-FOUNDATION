@@ -31,11 +31,7 @@ def test_load_config_json(tmp_path):
 def test_load_config_toml(tmp_path):
     path = tmp_path / "ops.toml"
     path.write_text(
-        'repository_id = "R"\n'
-        'epic_id = "E"\n'
-        "[[stages]]\n"
-        'stage_id = "s1"\n'
-        'kind = "freeze"\n',
+        'repository_id = "R"\nepic_id = "E"\n[[stages]]\nstage_id = "s1"\nkind = "freeze"\n',
         encoding="utf-8",
     )
     config = load_config(path)

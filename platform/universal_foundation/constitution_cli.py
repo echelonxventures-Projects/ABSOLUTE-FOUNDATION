@@ -2,16 +2,24 @@
 
 The one-command surface over the Foundation's own law (UFC-06):
 
-    ucos-constitution articles      # the law: sixteen articles over thirteen governed domains
+    ucos-constitution articles      # the law: seventeen articles over thirteen governed domains
     ucos-constitution capabilities  # the declared population the law governs
     ucos-constitution conform       # execute every article against every capability
     ucos-constitution convergence   # prove each constitutional model has exactly one answer
+    ucos-constitution nucleus        # prove every registered Ω Nucleus is constitutionally complete
     ucos-constitution maturity       # the measured maturity of the platform, axis by axis
     ucos-constitution freeze         # the freeze readiness determination
 
 ``conform`` and ``freeze`` are the gates. ``freeze --with-suites`` additionally executes the
 declared verification commands; without it those criteria are reported UNMEASURED and readiness
 is withheld rather than assumed.
+
+``conform`` measures twice, and deliberately so. UFC-17 is a platform-scoped article whose
+evidence is the per-capability gate results, so completeness cannot be known until conformance
+has been measured — and conformance is not final until completeness has contributed its gate.
+The second pass carries the first pass's verdict; because every probe is pure and reads only
+its declared context, the two passes are identical inputs and the composition is a fixed point
+rather than a feedback loop.
 
 Nothing here performs a freeze. Freezing is a constituent act, not a side effect of measuring
 eligibility for one.
@@ -30,11 +38,12 @@ from platform.universal_foundation.bootstrap import bootstrap_foundation_constit
 from platform.universal_foundation.constitution import MATURITY_GATES, foundation_constitution
 from platform.universal_foundation.convergence import bootstrap_convergence
 from platform.universal_foundation.freeze import bootstrap_freeze_readiness
+from platform.universal_foundation.nucleus import bootstrap_nucleus_completeness
 
 from engine.foundation.obs.errors import FoundationError
 
 #: Commands whose measured verdict a ``--gate`` run is allowed to fail on.
-GATED_COMMANDS: tuple[str, ...] = ("conform", "convergence", "freeze")
+GATED_COMMANDS: tuple[str, ...] = ("conform", "convergence", "nucleus", "freeze")
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -44,7 +53,15 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "command",
-        choices=("articles", "capabilities", "conform", "convergence", "maturity", "freeze"),
+        choices=(
+            "articles",
+            "capabilities",
+            "conform",
+            "convergence",
+            "nucleus",
+            "maturity",
+            "freeze",
+        ),
         help="the operation to perform",
     )
     parser.add_argument("--register", default=None, help="declared capability register document")
@@ -52,6 +69,9 @@ def _build_parser() -> argparse.ArgumentParser:
         "--convergence-register", default=None, help="declared convergence register document"
     )
     parser.add_argument("--freeze-register", default=None, help="declared freeze criteria document")
+    parser.add_argument(
+        "--nucleus-contract", default=None, help="declared Ω Nucleus facet contract document"
+    )
     parser.add_argument(
         "--root", default=".", help="project root against which declarations resolve"
     )
@@ -71,10 +91,22 @@ def _build_parser() -> argparse.ArgumentParser:
 
 
 def _conformance(args: argparse.Namespace):  # noqa: ANN202 - local composition helper
-    """Measure conformance, including the three platform-scoped articles."""
+    """Measure conformance, including every platform-scoped article.
+
+    Two passes, because UFC-17 reads the per-capability gate results it then contributes a
+    platform gate about. The first pass establishes those results; the second carries the
+    completeness verdict alongside the convergence verdicts. Both passes measure identical
+    inputs — every probe is pure and reads only its declared context — so this converges at the
+    second pass by construction rather than by hoping it settles.
+    """
     engine = bootstrap_foundation_constitution(args.register, project_root=args.root)
     convergence = bootstrap_convergence(args.convergence_register, project_root=args.root).measure()
-    return engine, convergence, engine.measure(platform_results=convergence.gate_results)
+    first = engine.measure(platform_results=convergence.gate_results)
+    nucleus = bootstrap_nucleus_completeness(
+        args.nucleus_contract, register=engine.register
+    ).measure(conformance=first)
+    platform_results = (*convergence.gate_results, *nucleus.gate_results)
+    return engine, convergence, nucleus, engine.measure(platform_results=platform_results)
 
 
 def _payload(args: argparse.Namespace) -> tuple[dict, bool]:
@@ -97,7 +129,10 @@ def _payload(args: argparse.Namespace) -> tuple[dict, bool]:
             determination.to_dict() if args.detail else determination.summary()
         ), determination.converged
 
-    _, convergence, conformance = _conformance(args)
+    _, convergence, nucleus, conformance = _conformance(args)
+
+    if args.command == "nucleus":
+        return (nucleus.to_dict() if args.detail else nucleus.summary()), nucleus.complete
 
     if args.command == "conform":
         return (
@@ -172,6 +207,27 @@ def _print_summary(command: str, payload: dict, stream) -> None:  # noqa: ANN001
                 f"    {mark:<14} {model['model_id']:<22} {model['canonical_package']}",
                 file=stream,
             )
+        for gate in payload.get("gate_results", []):
+            print(f"    {gate['verdict']:<6} {gate['gate']}", file=stream)
+    elif command == "nucleus":
+        counts = payload.get("counts", {})
+        print(f"  contract:              {payload.get('contract_id', '')}", file=stream)
+        print(f"  nuclei:                {counts.get('nuclei', 0)}", file=stream)
+        print(f"  complete:              {counts.get('complete', 0)}", file=stream)
+        print(f"  declared facets:       {counts.get('facets', 0)}", file=stream)
+        print(f"  missing facets:        {counts.get('missing', 0)}", file=stream)
+        for nucleus in payload.get("nuclei", []):
+            mark = "COMPLETE" if nucleus.get("complete") else "INCOMPLETE"
+            resolved = nucleus.get("counts", {})
+            print(
+                f"    {mark:<11} {nucleus['capability_id']:<16} "
+                f"{nucleus.get('completeness_percentage', 0.0):>6.2f}%  "
+                f"resolved={resolved.get('RESOLVED', 0)} "
+                f"declared-absent={resolved.get('DECLARED-ABSENT', 0)}",
+                file=stream,
+            )
+        for blocker in payload.get("blockers", []):
+            print(f"    MISSING  {blocker}", file=stream)
         for gate in payload.get("gate_results", []):
             print(f"    {gate['verdict']:<6} {gate['gate']}", file=stream)
     elif command == "maturity":

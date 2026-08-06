@@ -8624,9 +8624,23 @@
       "page_start": 9641,
       "page_count": 3,
       "first_seen": "2026-08-05T10:50:25+00:00"
+    },
+    "platform/universal_foundation/catalog/foundation-nucleus.json": {
+      "universal_id": "UCOS-PLT-000065",
+      "category": "PLT",
+      "page_start": 9644,
+      "page_count": 5,
+      "first_seen": "2026-08-06T08:42:39+00:00"
+    },
+    "platform/universal_generator/catalog/ucos-generation-targets.json": {
+      "universal_id": "UCOS-PLT-000066",
+      "category": "PLT",
+      "page_start": 9649,
+      "page_count": 2,
+      "first_seen": "2026-08-06T08:42:39+00:00"
     }
   },
-  "page_cursor": 9643,
+  "page_cursor": 9650,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8645,7 +8659,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 64,
+    "PLT": 66,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -24037,6 +24051,15 @@
         "status": "ACTIVE",
         "path": "platform/universal_foundation/catalog/foundation-capabilities.json",
         "name": "Foundation Capabilities"
+      },
+      {
+        "seq": 2,
+        "at": "2026-08-06T08:42:39+00:00",
+        "content_hash": "6c28c68e43392089bb97ff7e0d3838da4a586396c4772f85c9d6d9fe4aea3919",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_foundation/catalog/foundation-capabilities.json",
+        "name": "Foundation Capabilities"
       }
     ],
     "UCOS-PLT-000059": [
@@ -24048,6 +24071,15 @@
         "status": "ACTIVE",
         "path": "platform/universal_foundation/catalog/foundation-convergence.json",
         "name": "Foundation Convergence"
+      },
+      {
+        "seq": 2,
+        "at": "2026-08-06T08:42:39+00:00",
+        "content_hash": "a585935c544ba8193561b56be0ef9d58d668d0a9394f5231f0b928cc4cbf2523",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_foundation/catalog/foundation-convergence.json",
+        "name": "Foundation Convergence"
       }
     ],
     "UCOS-PLT-000060": [
@@ -24055,6 +24087,15 @@
         "seq": 1,
         "at": "2026-08-05T10:50:25+00:00",
         "content_hash": "48d9006431c5d0763406dda735838d938acfe53da91745005aeb34486e86234e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_foundation/catalog/foundation-freeze.json",
+        "name": "Foundation Freeze"
+      },
+      {
+        "seq": 2,
+        "at": "2026-08-06T08:42:39+00:00",
+        "content_hash": "55696b47d0dddeaf261b3af6da9b7fccce595463503311d9e6d1be2ef0418759",
         "version": "1.0.0",
         "status": "ACTIVE",
         "path": "platform/universal_foundation/catalog/foundation-freeze.json",
@@ -24103,6 +24144,28 @@
         "status": "ACTIVE",
         "path": "platform/universal_truth/catalog/ucos-repository-truth.json",
         "name": "Ucos Repository Truth"
+      }
+    ],
+    "UCOS-PLT-000065": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T08:42:39+00:00",
+        "content_hash": "e702768da7580a192e9e48c7efea3b837724978f5bee680af91d9676d998a4a0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_foundation/catalog/foundation-nucleus.json",
+        "name": "Foundation Nucleus"
+      }
+    ],
+    "UCOS-PLT-000066": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T08:42:39+00:00",
+        "content_hash": "d909016ff206d0af90eb782da986d7845510a5225238650041bb3c5dc7b95b67",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_generator/catalog/ucos-generation-targets.json",
+        "name": "Ucos Generation Targets"
       }
     ]
   }

@@ -448,8 +448,7 @@ class PeerPrecedentRecommendationProvider(OwnershipRecommendationProvider):
                 authority=owner,
                 precedence=self._descriptor.precedence,
                 detail=(
-                    f"every declared peer with {self._attribute}={value} is owned by this "
-                    "authority"
+                    f"every declared peer with {self._attribute}={value} is owned by this authority"
                 ),
             ),
         )

@@ -272,6 +272,169 @@ class ReplayDeclaration:
         }
 
 
+class FacetStatus(str, Enum):
+    """How a declared nucleus facet stands. There is deliberately no third, softer value."""
+
+    #: The facet is realised, and the declaration names the evidence that realises it.
+    PRESENT = "present"
+    #: The facet does not apply to this nucleus, and the declaration says why.
+    NOT_APPLICABLE = "not-applicable"
+
+    @classmethod
+    def coerce(cls, value: Any, *, subject: str) -> FacetStatus:
+        """Coerce ``value`` to a status, failing closed (never silently)."""
+        if isinstance(value, cls):
+            return value
+        if isinstance(value, str):
+            try:
+                return cls(value)
+            except ValueError as exc:
+                raise FoundationConformanceError(
+                    "unknown nucleus facet status", subject=subject, value=value
+                ) from exc
+        raise FoundationConformanceError("nucleus facet status must be a string", subject=subject)
+
+
+@dataclass(frozen=True, slots=True)
+class FacetDeclaration:
+    """One leaf of a nucleus profile: a facet path, its status, and the reason for it."""
+
+    path: str
+    status: FacetStatus
+    detail: str
+
+    @property
+    def present(self) -> bool:
+        """Whether the facet is declared realised rather than declared inapplicable."""
+        return self.status is FacetStatus.PRESENT
+
+    def to_dict(self) -> dict[str, Any]:
+        """A JSON-serialisable projection."""
+        return {"path": self.path, "status": self.status.value, "detail": self.detail}
+
+
+@dataclass(frozen=True, slots=True)
+class NucleusProfile:
+    """A nucleus's declared facet profile, flattened to dotted paths.
+
+    The profile is the only place a capability may answer a facet that no constitutional gate
+    already proves. It is deliberately *flat*: the declaration document may nest for
+    readability, but a facet is addressed by one dotted path, so the contract can name a facet
+    without knowing how the document happens to be grouped.
+
+    Every leaf SHALL state a status and the reason for it — ``evidence`` when the facet is
+    present, ``rationale`` when it does not apply. A leaf that states one without the other is
+    refused at construction: "somebody wrote a key" is not a determination.
+    """
+
+    entries: tuple[FacetDeclaration, ...] = ()
+
+    @classmethod
+    def from_document(cls, payload: Any, *, capability_id: str) -> NucleusProfile:
+        """Flatten a declared profile document into dotted facet paths (fail-closed)."""
+        if payload is None:
+            return cls()
+        collected: list[FacetDeclaration] = []
+        if isinstance(payload, Sequence) and not isinstance(payload, str | bytes):
+            # The projection form emitted by :meth:`to_dict` — already flat, already resolved.
+            # Accepting it is what makes the declaration round-trip: a register entry read,
+            # projected and read back SHALL yield the same declaration, or the register cannot
+            # be re-derived from its own output (UFC-11).
+            collected = [cls._projected(item, capability_id=capability_id) for item in payload]
+        elif isinstance(payload, Mapping):
+            # The authoring form — nested for readability, flattened here.
+            cls._walk(payload, (), collected, capability_id=capability_id)
+        else:
+            raise FoundationConformanceError(
+                "nucleus profile must be a mapping or a projected sequence",
+                capability_id=capability_id,
+            )
+        return cls(entries=tuple(sorted(collected, key=lambda item: item.path)))
+
+    @staticmethod
+    def _projected(value: Any, *, capability_id: str) -> FacetDeclaration:
+        """Rebuild one leaf from the projected form (fail-closed, never guessing)."""
+        if not isinstance(value, Mapping):
+            raise FoundationConformanceError(
+                "projected nucleus facet must be a mapping", capability_id=capability_id
+            )
+        missing = [key for key in ("path", "status", "detail") if key not in value]
+        if missing:
+            raise FoundationConformanceError(
+                "projected nucleus facet is incomplete",
+                capability_id=capability_id,
+                missing=",".join(missing),
+            )
+        path = str(value["path"]).strip()
+        detail = str(value["detail"]).strip()
+        if not path or not detail:
+            raise FoundationConformanceError(
+                "projected nucleus facet states no path or no reason",
+                capability_id=capability_id,
+                subject=path,
+            )
+        return FacetDeclaration(
+            path=path,
+            status=FacetStatus.coerce(value["status"], subject=f"{capability_id}:{path}"),
+            detail=detail,
+        )
+
+    @classmethod
+    def _walk(
+        cls,
+        payload: Mapping[str, Any],
+        prefix: tuple[str, ...],
+        collected: list[FacetDeclaration],
+        *,
+        capability_id: str,
+    ) -> None:
+        """Recurse into the declared document, collecting leaves. Comment keys are skipped."""
+        for key in sorted(str(name) for name in payload):
+            if key.startswith("$"):
+                continue
+            value = payload[key]
+            path = ".".join((*prefix, key))
+            if not isinstance(value, Mapping):
+                raise FoundationConformanceError(
+                    "nucleus profile entry must be a mapping",
+                    capability_id=capability_id,
+                    subject=path,
+                )
+            if "status" not in value:
+                cls._walk(value, (*prefix, key), collected, capability_id=capability_id)
+                continue
+            collected.append(cls._leaf(value, path, capability_id=capability_id))
+
+    @staticmethod
+    def _leaf(value: Mapping[str, Any], path: str, *, capability_id: str) -> FacetDeclaration:
+        """Build one validated leaf. The reason a facet stands as it does is mandatory."""
+        status = FacetStatus.coerce(value["status"], subject=f"{capability_id}:{path}")
+        key = "evidence" if status is FacetStatus.PRESENT else "rationale"
+        detail = str(value.get(key, "")).strip()
+        if not detail:
+            raise FoundationConformanceError(
+                f"nucleus facet declared '{status.value}' states no {key}",
+                capability_id=capability_id,
+                subject=path,
+            )
+        return FacetDeclaration(path=path, status=status, detail=detail)
+
+    def get(self, path: str) -> FacetDeclaration | None:
+        """The declaration at ``path``, or ``None`` when the profile is silent about it."""
+        for entry in self.entries:
+            if entry.path == path:
+                return entry
+        return None
+
+    def paths(self) -> tuple[str, ...]:
+        """Every declared facet path, in canonical order."""
+        return tuple(entry.path for entry in self.entries)
+
+    def to_dict(self) -> list[dict[str, Any]]:
+        """A JSON-serialisable projection."""
+        return [entry.to_dict() for entry in self.entries]
+
+
 @dataclass(frozen=True, slots=True)
 class CapabilityDeclaration:
     """One declared Foundation capability — the complete data a probe needs to measure it.
@@ -295,6 +458,7 @@ class CapabilityDeclaration:
     errors_module: str
     errors_base: SymbolRef
     replay: ReplayDeclaration = ReplayDeclaration()
+    nucleus: NucleusProfile = NucleusProfile()
     extension_points: tuple[ExtensionPointDeclaration, ...] = ()
     registries: tuple[RegistryDeclaration, ...] = ()
     entry_point: str = ""
@@ -364,6 +528,9 @@ class CapabilityDeclaration:
             errors_module=str(payload["errors_module"]),
             errors_base=SymbolRef.parse(payload["errors_base"], context=capability_id),
             replay=ReplayDeclaration.from_document(payload["replay"], capability_id=capability_id),
+            nucleus=NucleusProfile.from_document(
+                payload.get("nucleus"), capability_id=capability_id
+            ),
             extension_points=tuple(
                 ExtensionPointDeclaration.from_document(item)
                 for item in payload.get("extension_points", ())
@@ -429,6 +596,7 @@ class CapabilityDeclaration:
             "errors_module": self.errors_module,
             "errors_base": str(self.errors_base),
             "replay": self.replay.to_dict(),
+            "nucleus": self.nucleus.to_dict(),
             "extension_points": [item.to_dict() for item in self.extension_points],
             "registries": [item.to_dict() for item in self.registries],
             "entry_point": self.entry_point,
@@ -1729,6 +1897,9 @@ __all__ = [
     "ConformanceEngine",
     "ConformanceProbe",
     "ExtensionPointDeclaration",
+    "FacetDeclaration",
+    "FacetStatus",
+    "NucleusProfile",
     "GateResult",
     "ProbeContext",
     "ProbeOutcome",

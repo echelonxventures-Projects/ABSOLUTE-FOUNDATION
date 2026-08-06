@@ -626,10 +626,7 @@ class RoleLocatorProvider(HomeGatedEvidenceProvider):
 
     def detail(self, locator: str, classification: Any) -> str:
         """How this provider describes a declared-role finding."""
-        return (
-            f"locator declared '{self._role}' for this subject, in zone "
-            f"{classification.zone_id}"
-        )
+        return f"locator declared '{self._role}' for this subject, in zone {classification.zone_id}"
 
 
 class DeclaredIdentityProvider(HomeGatedEvidenceProvider):

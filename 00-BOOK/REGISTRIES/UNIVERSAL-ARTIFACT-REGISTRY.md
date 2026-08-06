@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1201
+**Total artifacts:** 1203
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1209,5 +1209,7 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1199 | `UCOS-PLT-000062` | Ucos Measurement Policies | — | 006 | UPN-000009639–UPN-000009639 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_measurement/catalog/ucos-measurement-policies.json) |
 | 1200 | `UCOS-PLT-000063` | Ucos Ownership Declarations | — | 006 | UPN-000009640–UPN-000009640 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_ownership/catalog/ucos-ownership-declarations.json) |
 | 1201 | `UCOS-PLT-000064` | Ucos Repository Truth | — | 006 | UPN-000009641–UPN-000009643 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_truth/catalog/ucos-repository-truth.json) |
+| 1202 | `UCOS-PLT-000065` | Foundation Nucleus | — | 006 | UPN-000009644–UPN-000009648 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_foundation/catalog/foundation-nucleus.json) |
+| 1203 | `UCOS-PLT-000066` | Ucos Generation Targets | — | 006 | UPN-000009649–UPN-000009650 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_generator/catalog/ucos-generation-targets.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

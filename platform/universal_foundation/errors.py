@@ -56,7 +56,14 @@ class FoundationFreezeError(UniversalFoundationError):
     code = "EC2-UFP-FREEZE-001"
 
 
+class FoundationNucleusError(UniversalFoundationError):
+    """An Ω Nucleus facet contract or profile declaration is malformed or unresolvable."""
+
+    code = "EC2-UFP-NUCLEUS-001"
+
+
 __all__ = [
+    "FoundationNucleusError",
     "UniversalFoundationError",
     "SpecializationError",
     "FoundationCompositionError",

@@ -654,8 +654,7 @@ class ConvergenceEngine:
                 "absent — the retired implementation is gone"
                 if not exists
                 else (
-                    "PRESENT — a retired implementation that still exists is still a "
-                    "second answer"
+                    "PRESENT — a retired implementation that still exists is still a second answer"
                 ),
             )
 

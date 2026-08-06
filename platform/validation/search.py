@@ -33,8 +33,7 @@ def _tokens(text: str) -> tuple[str, ...]:
 
 def _score(record: ValidationRecord, query_tokens: tuple[str, ...]) -> int:
     haystack = (
-        f"{record.target_id.lower()} {record.blueprint_id.lower()} "
-        f"{record.report.verdict.value}"
+        f"{record.target_id.lower()} {record.blueprint_id.lower()} {record.report.verdict.value}"
     )
     labels = {label.lower() for label in record.metadata.labels}
     matched = 0

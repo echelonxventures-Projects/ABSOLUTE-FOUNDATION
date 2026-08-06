@@ -50,13 +50,16 @@ from typing import Any
 #: The canonical identity of the Universal Foundation Constitution.
 FOUNDATION_CONSTITUTION_ID = "UCOS-UFC-001"
 
-#: The semantic version of the Constitution itself. 1.1.0 amends two articles: UFC-11, so that
+#: The semantic version of the Constitution itself. 1.1.0 amended two articles: UFC-11, so that
 #: a capability whose outputs become Repository Truth must be re-measurable at the commit that
 #: carries them; and UFC-14, so that duplication is measured by content and not only by
-#: declaration. Both amendments are additive — no article removed, no mandate narrowed, no
-#: domain added — so this is a minor version under the same discipline UFC-08 requires of
+#: declaration. 1.2.0 legislates UFC-17, which holds every registered capability to the
+#: completeness of an Ω Nucleus — the production implementation programme's first amendment,
+#: and the article that makes "which facets must a capability contain" a measurement rather
+#: than a checklist. Every amendment is additive — no article removed, no mandate narrowed, no
+#: domain added — so these are minor versions under the same discipline UFC-08 requires of
 #: every contract surface.
-FOUNDATION_CONSTITUTION_VERSION = "1.1.0"
+FOUNDATION_CONSTITUTION_VERSION = "1.2.0"
 
 #: The constitutional authority that owns this law.
 FOUNDATION_CONSTITUTION_AUTHORITY = "Universal Foundation Constitutional Authority"
@@ -198,7 +201,7 @@ class FoundationArticle:
         return content_hash(self.to_dict())
 
 
-#: The Universal Foundation Constitution — sixteen articles over thirteen governed domains,
+#: The Universal Foundation Constitution — seventeen articles over thirteen governed domains,
 #: each bound to exactly one executable gate.
 FOUNDATION_ARTICLES: tuple[FoundationArticle, ...] = (
     FoundationArticle(
@@ -391,6 +394,22 @@ FOUNDATION_ARTICLES: tuple[FoundationArticle, ...] = (
         gate="FG-16-ONE-MEASUREMENT",
         scope=ArticleScope.PLATFORM,
     ),
+    FoundationArticle(
+        article_id="UFC-17",
+        domain=ConstitutionalDomain.COMPOSITION,
+        title="Nucleus Completeness",
+        mandate=(
+            "Every registered capability is an Ω Nucleus: the complete constitutional universe "
+            "of exactly one canonical concept. Every facet the declared nucleus contract "
+            "requires SHALL resolve — to a field of the nucleus's own declaration, to a "
+            "constitutional gate it has passed, or to its declared profile. A facet that does "
+            "not apply SHALL be declared inapplicable with a reason; an undeclared facet is "
+            "incompleteness, because 'nobody wrote it down' and 'it does not apply' are "
+            "different facts and only one of them is a determination."
+        ),
+        gate="FG-17-NUCLEUS-COMPLETE",
+        scope=ArticleScope.PLATFORM,
+    ),
 )
 
 #: Article index for O(1) lookup by identity.
@@ -470,6 +489,7 @@ _CONTRACT_NAMES: tuple[tuple[str, str], ...] = (
     ("foundation.constitution.articles", "The complete article set of the Foundation law."),
     ("foundation.constitution.conform", "Measure a capability against every article."),
     ("foundation.constitution.maturity", "Measure a capability across the maturity axes."),
+    ("foundation.constitution.nucleus", "Measure a capability's Ω Nucleus completeness."),
 )
 
 #: The versioned published contract surface of the Foundation Constitution.

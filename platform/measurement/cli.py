@@ -78,8 +78,7 @@ def _print_summary(command: str, payload: dict, stream) -> None:  # noqa: ANN001
         print(f"  metric series:  {payload.get('metric_count', 0)}", file=stream)
         print(f"  traceability:   {trace.get('overall_percentage', 0.0)}% mean", file=stream)
         print(
-            f"  gaps:           {gaps.get('total', 0)} "
-            f"({gaps.get('structural', 0)} structural)",
+            f"  gaps:           {gaps.get('total', 0)} ({gaps.get('structural', 0)} structural)",
             file=stream,
         )
         print(f"  run:            {payload.get('run_id', '')}", file=stream)

@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-08-05T10:50:25+00:00",
+  "generated_at": "2026-08-06T08:42:39+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1317,
-    "versioned_artifacts": 1201,
-    "lineage_nodes": 1201,
+    "change_events": 1322,
+    "versioned_artifacts": 1203,
+    "lineage_nodes": 1203,
     "artifacts_with_predecessors": 5,
     "artifacts_with_successors": 5
   },
   "change_event_histogram": {
-    "Created": 1201,
-    "Modified": 111,
+    "Created": 1203,
+    "Modified": 114,
     "Version-Incremented": 5
   },
   "evolution_timeline": [
@@ -7914,6 +7914,36 @@
       "change_id": "UCHG-000001317",
       "at": "2026-08-05T10:50:25+00:00",
       "subject": "UCOS-PLT-000064",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001318",
+      "at": "2026-08-06T08:42:39+00:00",
+      "subject": "UCOS-PLT-000058",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001319",
+      "at": "2026-08-06T08:42:39+00:00",
+      "subject": "UCOS-PLT-000059",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001320",
+      "at": "2026-08-06T08:42:39+00:00",
+      "subject": "UCOS-PLT-000060",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001321",
+      "at": "2026-08-06T08:42:39+00:00",
+      "subject": "UCOS-PLT-000065",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001322",
+      "at": "2026-08-06T08:42:39+00:00",
+      "subject": "UCOS-PLT-000066",
       "kind": "Created"
     }
   ],
@@ -21027,10 +21057,10 @@
       "from": null,
       "to": "ACTIVE",
       "commit": {
-        "commit": "04366c302344",
-        "date": "2026-08-05T16:20:06+05:30",
+        "commit": "cceba91e9f2a",
+        "date": "2026-08-06T12:11:01+05:30",
         "author": "Echelon Ventures",
-        "subject": "Ω-A12: the Universal Foundation enters Repository Truth, and the residue learns to say why"
+        "subject": "GAP-01 / UFC-11: a register that cannot be replayed at its own commit is not certified"
       }
     },
     {
@@ -21042,10 +21072,10 @@
       "from": null,
       "to": "ACTIVE",
       "commit": {
-        "commit": "04366c302344",
-        "date": "2026-08-05T16:20:06+05:30",
+        "commit": "570a50d4f960",
+        "date": "2026-08-06T13:00:00+05:30",
         "author": "Echelon Ventures",
-        "subject": "Ω-A12: the Universal Foundation enters Repository Truth, and the residue learns to say why"
+        "subject": "GAP-02 / UFC-14 + BASELINE B1: a copy declares nothing, so content is the only honest instrument"
       }
     },
     {
@@ -21071,12 +21101,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "04366c302344",
-        "date": "2026-08-05T16:20:06+05:30",
-        "author": "Echelon Ventures",
-        "subject": "Ω-A12: the Universal Foundation enters Repository Truth, and the residue learns to say why"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001315",
@@ -21086,12 +21111,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "04366c302344",
-        "date": "2026-08-05T16:20:06+05:30",
-        "author": "Echelon Ventures",
-        "subject": "Ω-A12: the Universal Foundation enters Repository Truth, and the residue learns to say why"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001316",
@@ -21101,12 +21121,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "04366c302344",
-        "date": "2026-08-05T16:20:06+05:30",
-        "author": "Echelon Ventures",
-        "subject": "Ω-A12: the Universal Foundation enters Repository Truth, and the residue learns to say why"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001317",
@@ -21116,12 +21131,72 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001318",
+      "subject": "UCOS-PLT-000058",
+      "kind": "Modified",
+      "at": "2026-08-06T08:42:39+00:00",
+      "snapshot_seq": 2,
+      "from": "daf542ba99f6de744ce8ed6a8337f31cb6ddb1c36bbf87dfdbfc69855ab1134d",
+      "to": "6c28c68e43392089bb97ff7e0d3838da4a586396c4772f85c9d6d9fe4aea3919",
+      "commit": {
+        "commit": "cceba91e9f2a",
+        "date": "2026-08-06T12:11:01+05:30",
+        "author": "Echelon Ventures",
+        "subject": "GAP-01 / UFC-11: a register that cannot be replayed at its own commit is not certified"
+      }
+    },
+    {
+      "change_id": "UCHG-000001319",
+      "subject": "UCOS-PLT-000059",
+      "kind": "Modified",
+      "at": "2026-08-06T08:42:39+00:00",
+      "snapshot_seq": 2,
+      "from": "290157500386e2875e05dd8e2ee6fa5c1834d50d722163e3cfadf139cb87641d",
+      "to": "a585935c544ba8193561b56be0ef9d58d668d0a9394f5231f0b928cc4cbf2523",
+      "commit": {
+        "commit": "570a50d4f960",
+        "date": "2026-08-06T13:00:00+05:30",
+        "author": "Echelon Ventures",
+        "subject": "GAP-02 / UFC-14 + BASELINE B1: a copy declares nothing, so content is the only honest instrument"
+      }
+    },
+    {
+      "change_id": "UCHG-000001320",
+      "subject": "UCOS-PLT-000060",
+      "kind": "Modified",
+      "at": "2026-08-06T08:42:39+00:00",
+      "snapshot_seq": 2,
+      "from": "48d9006431c5d0763406dda735838d938acfe53da91745005aeb34486e86234e",
+      "to": "55696b47d0dddeaf261b3af6da9b7fccce595463503311d9e6d1be2ef0418759",
       "commit": {
         "commit": "04366c302344",
         "date": "2026-08-05T16:20:06+05:30",
         "author": "Echelon Ventures",
         "subject": "Ω-A12: the Universal Foundation enters Repository Truth, and the residue learns to say why"
       }
+    },
+    {
+      "change_id": "UCHG-000001321",
+      "subject": "UCOS-PLT-000065",
+      "kind": "Created",
+      "at": "2026-08-06T08:42:39+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001322",
+      "subject": "UCOS-PLT-000066",
+      "kind": "Created",
+      "at": "2026-08-06T08:42:39+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
     }
   ],
   "version_records": {
@@ -37875,7 +37950,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "daf542ba99f6de744ce8ed6a8337f31cb6ddb1c36bbf87dfdbfc69855ab1134d",
+      "content_baseline": "6c28c68e43392089bb97ff7e0d3838da4a586396c4772f85c9d6d9fe4aea3919",
       "history": [
         {
           "version": "1.0.0",
@@ -37889,7 +37964,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "290157500386e2875e05dd8e2ee6fa5c1834d50d722163e3cfadf139cb87641d",
+      "content_baseline": "a585935c544ba8193561b56be0ef9d58d668d0a9394f5231f0b928cc4cbf2523",
       "history": [
         {
           "version": "1.0.0",
@@ -37903,7 +37978,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "48d9006431c5d0763406dda735838d938acfe53da91745005aeb34486e86234e",
+      "content_baseline": "55696b47d0dddeaf261b3af6da9b7fccce595463503311d9e6d1be2ef0418759",
       "history": [
         {
           "version": "1.0.0",
@@ -37965,6 +38040,34 @@
           "version": "1.0.0",
           "content_hash": "cdc0f7c0cf246851cf17dc6d186a8c470716671a7d696d3002a2b501aec7be05",
           "at": "2026-08-05T10:50:25+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PLT-000065": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "e702768da7580a192e9e48c7efea3b837724978f5bee680af91d9676d998a4a0",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "e702768da7580a192e9e48c7efea3b837724978f5bee680af91d9676d998a4a0",
+          "at": "2026-08-06T08:42:39+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PLT-000066": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "d909016ff206d0af90eb782da986d7845510a5225238650041bb3c5dc7b95b67",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "d909016ff206d0af90eb782da986d7845510a5225238650041bb3c5dc7b95b67",
+          "at": "2026-08-06T08:42:39+00:00",
           "snapshot_seq": 1
         }
       ]
@@ -46367,6 +46470,14 @@
       "descendant_chain": [],
       "origin": "UCOS-PLT-000060"
     },
+    "UCOS-PLT-000065": {
+      "birth": "2026-08-06T08:42:39+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PLT-000065"
+    },
     "UCOS-PLT-000061": {
       "birth": "2026-08-05T10:50:25+00:00",
       "predecessors": [],
@@ -46374,6 +46485,14 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-PLT-000061"
+    },
+    "UCOS-PLT-000066": {
+      "birth": "2026-08-06T08:42:39+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PLT-000066"
     },
     "UCOS-PLT-000062": {
       "birth": "2026-08-05T10:50:25+00:00",

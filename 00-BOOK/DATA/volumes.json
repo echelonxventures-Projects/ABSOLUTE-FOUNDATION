@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T10:50:25+00:00",
+  "generated_at": "2026-08-06T08:42:39+00:00",
   "count": 25,
   "volumes": [
     {
@@ -81,9 +81,9 @@
       "description": "Implementation platforms and engines.",
       "category": "PLT",
       "status": "ACTIVE",
-      "artifact_count": 80,
+      "artifact_count": 82,
       "page_range_start": 4559,
-      "page_range_end": 9643,
+      "page_range_end": 9650,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-006"
     },
     {

@@ -874,8 +874,7 @@ class ApprovalAnalyzer:
                 failed(
                     "CMI-APR-001",
                     self.domain,
-                    "no approval chain is declared — policy-required approval cannot be "
-                    "discharged",
+                    "no approval chain is declared — policy-required approval cannot be discharged",
                 ),
             )
         malformed: list[dict[str, Any]] = []

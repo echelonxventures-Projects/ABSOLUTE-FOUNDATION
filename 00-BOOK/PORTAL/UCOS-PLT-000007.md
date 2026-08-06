@@ -53,6 +53,8 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000062](UCOS-PLT-000062.md) Ucos Measurement Policies
 - [UCOS-PLT-000063](UCOS-PLT-000063.md) Ucos Ownership Declarations
 - [UCOS-PLT-000064](UCOS-PLT-000064.md) Ucos Repository Truth
+- [UCOS-PLT-000065](UCOS-PLT-000065.md) Foundation Nucleus
+- [UCOS-PLT-000066](UCOS-PLT-000066.md) Ucos Generation Targets
 
 ## Backlinks (reverse)
 - [UCOS-PLT-000001](UCOS-PLT-000001.md) —Depends-On→
@@ -93,7 +95,9 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md) › [UCOS-IDX-000001](UCOS-
 - [UCOS-PLT-000058](UCOS-PLT-000058.md) —Parent→
 - [UCOS-PLT-000059](UCOS-PLT-000059.md) —Parent→
 - [UCOS-PLT-000060](UCOS-PLT-000060.md) —Parent→
+- [UCOS-PLT-000065](UCOS-PLT-000065.md) —Parent→
 - [UCOS-PLT-000061](UCOS-PLT-000061.md) —Parent→
+- [UCOS-PLT-000066](UCOS-PLT-000066.md) —Parent→
 - [UCOS-PLT-000062](UCOS-PLT-000062.md) —Parent→
 - [UCOS-PLT-000063](UCOS-PLT-000063.md) —Parent→
 - [UCOS-PLT-000057](UCOS-PLT-000057.md) —Parent→

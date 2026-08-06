@@ -82,6 +82,13 @@
       "kind": "maturity",
       "threshold": 100.0,
       "rationale": "Every capability reaches every declared maturity axis, and the platform-scoped articles pass. Anything below 100% names the axis that is not yet reached rather than rounding it away."
+    },
+    {
+      "criterion_id": "FZ-13",
+      "requirement": "Every registered Ω Nucleus is constitutionally complete",
+      "kind": "platform-gates",
+      "gates": ["FG-17-NUCLEUS-COMPLETE"],
+      "rationale": "A Foundation frozen with one incomplete nucleus freezes the incompleteness with it. Every facet of the declared nucleus contract must resolve for every registered nucleus — realised with evidence, or declared inapplicable with a reason. Nothing is discharged by silence."
     }
   ]
 }

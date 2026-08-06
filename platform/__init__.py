@@ -32,7 +32,7 @@ _stdlib_platform_path = _os.path.join(_sysconfig.get_paths()["stdlib"], "platfor
 _spec = _importlib_util.spec_from_file_location("_ucos_stdlib_platform", _stdlib_platform_path)
 if _spec is None or _spec.loader is None:  # pragma: no cover - defensive
     raise ImportError(
-        f"could not locate the standard-library 'platform' module at " f"{_stdlib_platform_path!r}"
+        f"could not locate the standard-library 'platform' module at {_stdlib_platform_path!r}"
     )
 _stdlib_platform = _importlib_util.module_from_spec(_spec)
 _spec.loader.exec_module(_stdlib_platform)

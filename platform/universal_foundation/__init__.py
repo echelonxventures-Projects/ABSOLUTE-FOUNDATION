@@ -3,7 +3,7 @@
 Two capabilities live here, and the distinction between them is the whole architecture:
 
 **UCOS-UFC-001 — the Universal Foundation Constitution.** The single law every Foundation
-capability obeys: sixteen articles over thirteen governed domains, each bound to one executable
+capability obeys: seventeen articles over thirteen governed domains, each bound to one executable
 probe, plus the convergence measurement that proves each constitutional model has exactly one
 implementation and the freeze readiness determination built on both. The law names no
 capability; its population is a declared register.
@@ -55,7 +55,10 @@ from platform.universal_foundation.conformance import (
     ConformanceDetermination,
     ConformanceEngine,
     ConformanceProbe,
+    FacetDeclaration,
+    FacetStatus,
     GateResult,
+    NucleusProfile,
     ProbeContext,
     ProbeRegistry,
     Verdict,
@@ -98,6 +101,7 @@ from platform.universal_foundation.errors import (
     FoundationConstitutionError,
     FoundationConvergenceError,
     FoundationFreezeError,
+    FoundationNucleusError,
     SpecializationError,
     UniversalFoundationError,
 )
@@ -112,6 +116,20 @@ from platform.universal_foundation.freeze import (
     bootstrap_freeze_readiness,
     default_freeze_criteria,
     load_freeze_criteria,
+)
+from platform.universal_foundation.nucleus import (
+    GATE_NUCLEUS_COMPLETE,
+    FacetResolution,
+    FacetResult,
+    FacetVerdict,
+    NucleusCompleteness,
+    NucleusCompletenessEngine,
+    NucleusContract,
+    NucleusDetermination,
+    NucleusFacet,
+    bootstrap_nucleus_completeness,
+    default_nucleus_contract,
+    load_nucleus_contract,
 )
 from platform.universal_foundation.service import (
     COMPOSED_CAPABILITIES,
@@ -170,6 +188,9 @@ __all__ = [
     "CapabilityConformance",
     "CapabilityDeclaration",
     "CapabilityRegister",
+    "FacetDeclaration",
+    "FacetStatus",
+    "NucleusProfile",
     "ConformanceDetermination",
     "ConformanceEngine",
     "ConformanceProbe",
@@ -202,8 +223,22 @@ __all__ = [
     "bootstrap_freeze_readiness",
     "default_freeze_criteria",
     "load_freeze_criteria",
+    # Ω Nucleus completeness
+    "GATE_NUCLEUS_COMPLETE",
+    "FacetResolution",
+    "FacetResult",
+    "FacetVerdict",
+    "NucleusCompleteness",
+    "NucleusCompletenessEngine",
+    "NucleusContract",
+    "NucleusDetermination",
+    "NucleusFacet",
+    "bootstrap_nucleus_completeness",
+    "default_nucleus_contract",
+    "load_nucleus_contract",
     # errors
     "UniversalFoundationError",
+    "FoundationNucleusError",
     "SpecializationError",
     "FoundationCompositionError",
     "FoundationConstitutionError",
