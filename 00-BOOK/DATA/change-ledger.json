@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T15:49:50+00:00",
+  "generated_at": "2026-08-06T15:49:59+00:00",
   "generator_version": "1.0.0",
   "counts": {
     "change_events": 1339,
@@ -21438,12 +21438,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "56b5530dd252",
-        "date": "2026-08-06T21:19:48+05:30",
-        "author": "Echelon Ventures",
-        "subject": "P0 REGISTRATION: the transaction records itself, and the record is admitted next"
-      }
+      "commit": null
     }
   ],
   "version_records": {
