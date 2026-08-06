@@ -10,7 +10,7 @@ So each object carries the complete original record, verbatim, in its metadata u
 :data:`NATIVE_RECORD_KEY`, encoded through the one canonical form.
 :func:`reconstruct_artifact` returns it. :func:`verify_invertible` re-derives every
 source record from its object and compares canonical digests, so "lossless" is a
-measurement over all 1194 artifacts rather than a design intention.
+measurement over all 1201 artifacts rather than a design intention.
 
 The salient fields are *also* mapped onto real facets — authority from ``parent``,
 dependencies from ``dependencies``, traceability from ``traceability``, evidence from
@@ -21,7 +21,7 @@ artifact a participating citizen of the graph.
 Three things this module refuses to do quietly, because each would be a way of faking
 success:
 
-**It does not invent meaning.** All 1194 source artifacts carry an empty
+**It does not invent meaning.** All 1201 source artifacts carry an empty
 ``description``, and 21 names are shared by 490 artifacts (47 files are each called
 "Acceptance Decision"). Semantic identity must still be unique or the registry will
 refuse the second claimant — correctly, under Article 3. Rather than mangle names or
@@ -328,7 +328,7 @@ def semantic_definition(record: Mapping[str, object]) -> str:
 
     Every source description is empty and 21 names are shared, so a name alone cannot
     be a semantic identity. What actually distinguishes these artifacts is their native
-    identifier and the place they occupy, and the path is unique across all 1194 — so
+    identifier and the place they occupy, and the path is unique across all 1201 — so
     this sentence is both honest and injective. Fabricating a description, or appending
     a counter to a name, would make the collision disappear without making the meanings
     distinct.

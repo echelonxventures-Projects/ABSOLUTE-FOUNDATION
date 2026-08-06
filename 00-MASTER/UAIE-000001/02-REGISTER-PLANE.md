@@ -6,7 +6,7 @@
 
 | ID | Subject | Register | Form | Status | Refs | Broken | Claimed by |
 |---|---|---|---|---|---|---|---|
-| `UAIE-REG-01` | every repository artifact | `00-BOOK/DATA/artifacts.json` | json | **RESOLVES** | 1194 | 0 | UAIE-FAC-01, UAIE-FAC-06 |
+| `UAIE-REG-01` | every repository artifact | `00-BOOK/DATA/artifacts.json` | json | **RESOLVES** | 1201 | 0 | UAIE-FAC-01, UAIE-FAC-06 |
 | `UAIE-REG-02` | every relationship between artifacts | `00-BOOK/DATA/relationships.json` | json | **RESOLVES** | 0 | 0 | UAIE-FAC-01, UAIE-FAC-02 |
 | `UAIE-REG-03` | every constitution | `00-CMG/CMG-REGISTRY.json` | json | **RESOLVES** | 43 | 0 | UAIE-FAC-04, UAIE-FAC-09 |
 | `UAIE-REG-04` | every registry | `00-MASTER/MIP-W1-P001/10-UNIVERSAL-REGISTRY-CATALOG.md` | markdown | **RESOLVES** | 0 | 0 | UAIE-FAC-01, UAIE-FAC-07 |
@@ -14,7 +14,7 @@
 | `UAIE-REG-06` | every taxonomy | `10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md` | markdown | **RESOLVES** | 0 | 0 | UAIE-FAC-02 |
 | `UAIE-REG-07` | every dependency | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | **RESOLVES** | 0 | 0 | UAIE-FAC-03 |
 | `UAIE-REG-08` | every ownership relationship | `02-CANONICAL-OWNERSHIP-MATRIX.md` | markdown | **RESOLVES** | 0 | 0 | UAIE-FAC-04 |
-| `UAIE-REG-09` | every capability | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | **RESOLVES** | 105 | 0 | UAIE-FAC-05, UAIE-FAC-08 |
+| `UAIE-REG-09` | every capability | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | **RESOLVES** | 110 | 0 | UAIE-FAC-05, UAIE-FAC-08 |
 | `UAIE-REG-10` | every analysis | `00-MASTER/UCOS-UAR-001/uar-analyses.json` | json | **RESOLVES** | 45 | 0 | UAIE-FAC-10 |
 | `UAIE-REG-11` | every platform capability binding | `00-MASTER/UAEP-000001/uaep-platform.json` | json | **RESOLVES** | 25 | 0 | UAIE-FAC-08 |
 | `UAIE-REG-12` | every validation | `00-MASTER/UCCEP-000000/uccep-bindings.json` | json | **RESOLVES** | 0 | 0 | UAIE-FAC-09 |

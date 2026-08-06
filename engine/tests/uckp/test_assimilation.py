@@ -1,7 +1,7 @@
 """Article 19: every existing UCOS artifact assimilated, losslessly and invertibly.
 
 Losslessness is asserted by measurement over the whole corpus, not by inspection of a
-sample: :func:`verify_invertible` reconstructs all 1194 source records from their objects
+sample: :func:`verify_invertible` reconstructs all 1201 source records from their objects
 and compares canonical digests. The negative tests then prove the check can fail, because
 an invertibility test that cannot detect a loss is not evidence of anything.
 """
@@ -47,7 +47,7 @@ from engine.uckp.vocabulary import LIFECYCLE_STAGE, build_vocabulary_registry
 def test_the_registry_is_read_with_a_digest_naming_the_state_assimilated(repo_root):
     digest, records = load_artifact_registry(repo_root)
     assert len(digest) == 64
-    assert len(records) == 1194
+    assert len(records) == 1201
     again, _ = load_artifact_registry(repo_root)
     assert again == digest
 
@@ -132,8 +132,8 @@ def test_native_term_normalises_and_never_returns_empty():
 
 
 def test_every_artifact_becomes_exactly_one_object(assimilation_report):
-    assert assimilation_report.artifacts_read == 1194
-    assert assimilation_report.objects_minted == 1194
+    assert assimilation_report.artifacts_read == 1201
+    assert assimilation_report.objects_minted == 1201
 
 
 def test_assimilation_is_invertible_over_the_whole_corpus(assimilation_report):
@@ -151,7 +151,7 @@ def test_every_object_reconstructs_its_source_record_exactly(assimilated_univers
         for obj in assimilated_universe.objects()
         if obj.identity.namespace == ASSIMILATION_NAMESPACE
     ]
-    assert len(assimilated) == 1194
+    assert len(assimilated) == 1201
     for obj in assimilated:
         original = by_id[obj.identity.local_name]
         assert content_hash(reconstruct_artifact(obj)) == content_hash(original)
@@ -345,7 +345,7 @@ def test_require_lossless_refuses_a_lossy_report():
 
 def test_the_report_serializes_and_summarizes(assimilation_report):
     record = assimilation_report.to_dict()
-    assert record["counts"]["artifacts_read"] == 1194
+    assert record["counts"]["artifacts_read"] == 1201
     assert record["lossless"] is True
     assert "invertible=True" in assimilation_report.summary()
 
@@ -356,7 +356,7 @@ def test_the_report_serializes_and_summarizes(assimilation_report):
 def test_the_assimilated_universe_holds_the_constitution_and_the_corpus(
     assimilated_universe,
 ):
-    assert len(assimilated_universe.objects()) == 170 + 1194
+    assert len(assimilated_universe.objects()) == 170 + 1201
     assert len(assimilated_universe.discovery.providers_found) == 2
     assert "engine.uckp.assimilation" in assimilated_universe.registry.providers()
 

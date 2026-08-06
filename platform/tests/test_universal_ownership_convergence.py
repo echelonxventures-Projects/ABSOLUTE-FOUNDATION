@@ -68,8 +68,11 @@ PROJECTION = "00-BOOK/DATA/artifacts.json"
 
 #: The measurement the retired engine-side resolver produced over this repository. The
 #: converged determination must reproduce it exactly; that reproduction is what made retiring
-#: the second implementation a convergence rather than a replacement.
-RETIRED_MEASUREMENT = {"total": 541, "declared": 151, "contested": 0, "unresolved": 390}
+#: the second implementation a convergence rather than a replacement. The pin advances with
+#: the measured population: Ω-A12 registered the Foundation's specialisation catalogue as a
+#: concept (541 → 542), and the one new concept stands unresolved (390 → 391), so each count
+#: moves by exactly its measured amount while declared and contested hold still.
+RETIRED_MEASUREMENT = {"total": 542, "declared": 151, "contested": 0, "unresolved": 391}
 
 
 def _home(*registered: str, **kwargs) -> CanonicalHomePolicy:

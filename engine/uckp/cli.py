@@ -21,7 +21,7 @@ verdict being reached. The distinction matters — "the universe is not lawful" 
 could not tell whether the universe is lawful" are different answers, and collapsing
 them into one exit code is how an unmeasured invariant comes to look like a passing one.
 
-``--assimilate`` includes the 1194 existing UCOS artifacts. Without it the commands
+``--assimilate`` includes the 1201 existing UCOS artifacts. Without it the commands
 operate on the constitutional core alone, which is the faster loop when the question is
 about the law rather than about the corpus.
 """

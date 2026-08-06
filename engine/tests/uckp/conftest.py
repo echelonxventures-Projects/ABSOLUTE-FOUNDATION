@@ -1,7 +1,7 @@
 """Fixtures for the UCKP (Universal Constitutional Knowledge Universe) suite.
 
 The assembled universe is expensive to build — discovery walks the package, ten
-persistence adapters are constructed, and the assimilated variant reads and maps 1194
+persistence adapters are constructed, and the assimilated variant reads and maps 1201
 artifacts — so both are session-scoped. They are immutable values, which is what makes
 sharing them across tests safe: :class:`ConstitutionalUniverse` is frozen and its
 registry, timeline and ledger are append-only, so no test can hand a mutated universe to
