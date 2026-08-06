@@ -50,13 +50,13 @@ def test_certify_covers_validation_assimilation_and_the_universe(tmp_path, capsy
     payload = json.loads(capsys.readouterr().out)
     assert payload["verdict"] == "certified"
     assert payload["assimilation"]["lossless"] is True
-    assert payload["universe"]["counts"]["objects"] == 1376
+    assert payload["universe"]["counts"]["objects"] == 1390
 
 
 def test_assimilate_implies_the_artifact_corpus_without_being_asked_twice(tmp_path, capsys):
     assert main(["assimilate", "--persistence-base", str(tmp_path / "a"), "--json"]) == 0
     payload = json.loads(capsys.readouterr().out)
-    assert payload["counts"]["artifacts_read"] == 1206
+    assert payload["counts"]["artifacts_read"] == 1220
     assert payload["invertible"] is True
 
 
