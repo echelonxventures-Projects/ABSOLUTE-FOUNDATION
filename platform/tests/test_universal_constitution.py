@@ -52,13 +52,18 @@ from platform.universal_foundation.constitution import (
     require_gates,
 )
 from platform.universal_foundation.convergence import (
+    GATE_EXACTLY_ONCE,
     ConstitutionalModel,
     ConvergenceEngine,
     ConvergenceRegister,
     ConvergenceRelation,
+    DuplicationPolicy,
     SubordinateSurface,
     bootstrap_convergence,
     default_convergence_register,
+)
+from platform.universal_foundation.convergence import (
+    catalog_path as convergence_catalog_path,
 )
 from platform.universal_foundation.errors import (
     FoundationConformanceError,
@@ -636,3 +641,135 @@ def test_the_write_vocabulary_excludes_pure_calls():
     """A measurement that lies is worse than none: str.replace and json.dumps are pure."""
     assert "replace" not in ARTIFACT_WRITE_CALLS
     assert "dumps" not in ARTIFACT_WRITE_CALLS
+
+
+# --------------------------------------------------------------------------------------
+# UFC-14 content duplication (GAP-02) — a copy declares nothing, so content is the instrument
+# --------------------------------------------------------------------------------------
+
+
+def test_ufc_14_mandates_duplication_measured_by_content():
+    """The amended article reaches the copy that no declaration can see."""
+    mandate = article("UFC-14").mandate
+    assert "byte-identical" in mandate
+    assert "measured by content and never by declaration alone" in mandate
+
+
+def test_governed_roots_are_derived_from_declared_canonical_packages():
+    """No root is enumerated: the population follows the models (UFC-09)."""
+    engine = bootstrap_convergence()
+    roots = engine.governed_roots()
+    assert len(roots) == engine.register.count
+    assert {model.model_id for _, model in roots} == set(engine.register.ids())
+
+
+def test_the_repository_holds_no_byte_identical_artifact_in_a_governed_package():
+    """Positive proof: the production tree is clean, with no false positive."""
+    determination = bootstrap_convergence().measure()
+    assert determination.duplicate_groups == ()
+    assert determination.counts()["surplus_artifacts"] == 0
+    gate = next(g for g in determination.gate_results if g.gate == GATE_EXACTLY_ONCE)
+    assert gate.verdict is Verdict.PASS
+
+
+def test_a_byte_identical_duplicate_in_a_governed_package_fails_exactly_once(tmp_path, monkeypatch):
+    """Negative proof: the defect Ω-A12 removed by hand is now caught by the gate.
+
+    ``make convergence`` reported "duplicate impls: 0" throughout that condition and was correct
+    by its own definition — thirty-six byte-identical siblings declared nothing. This is the
+    measurement that sees them.
+    """
+    import sys
+
+    package = tmp_path / "governed_pkg"
+    package.mkdir()
+    (package / "__init__.py").write_text("", "utf-8")
+    (package / "engine.py").write_text("VALUE = 1\n", "utf-8")
+    (package / "engine 2.py").write_text("VALUE = 1\n", "utf-8")  # byte-identical copy
+    monkeypatch.syspath_prepend(str(tmp_path))
+    sys.modules.pop("governed_pkg", None)
+
+    model = ConstitutionalModel.from_document(
+        {
+            "model_id": "M-DUP",
+            "name": "Duplicated model",
+            "question": "Is a copy an implementation?",
+            "canonical_package": "governed_pkg",
+            "canonical_contracts": "platform.universal_truth.contracts:TRUTH_CONTRACTS",
+        }
+    )
+    register = ConvergenceRegister(
+        (model,), duplication=DuplicationPolicy(("__pycache__",), exclude_empty_artifacts=True)
+    )
+    determination = ConvergenceEngine(register, project_root=tmp_path).measure()
+
+    (group,) = determination.duplicate_groups
+    assert group.locators == ("governed_pkg/engine 2.py", "governed_pkg/engine.py")
+    assert group.governed_root == "governed_pkg"
+    assert group.model_id == "M-DUP"
+    assert group.canonical_package == "governed_pkg"
+    assert group.surplus == 1
+    assert "remove the 1 surplus artifact" in group.remediation
+
+    gate = next(g for g in determination.gate_results if g.gate == GATE_EXACTLY_ONCE)
+    assert gate.verdict is Verdict.FAIL
+    assert "1 duplicate artifact group(s), 1 surplus copies" in gate.summary
+    assert any("byte-identical artifacts" in finding for finding in gate.findings)
+    assert not determination.converged
+    assert GATE_EXACTLY_ONCE in determination.blockers()
+
+
+def test_empty_package_markers_are_excluded_by_declaration(tmp_path, monkeypatch):
+    """Two empty markers are not two implementations — and the exclusion is declared, not coded."""
+    import sys
+
+    package = tmp_path / "marker_pkg"
+    (package / "inner").mkdir(parents=True)
+    (package / "__init__.py").write_text("SENTINEL = 0\n", "utf-8")
+    (package / "inner" / "__init__.py").write_text("", "utf-8")
+    (package / "inner" / "marker.py").write_text("", "utf-8")
+    monkeypatch.syspath_prepend(str(tmp_path))
+    sys.modules.pop("marker_pkg", None)
+
+    model = ConstitutionalModel.from_document(
+        {
+            "model_id": "M-MARK",
+            "name": "Marker model",
+            "question": "Is an empty file an implementation?",
+            "canonical_package": "marker_pkg",
+            "canonical_contracts": "platform.universal_truth.contracts:TRUTH_CONTRACTS",
+        }
+    )
+    permissive = ConvergenceEngine(
+        ConvergenceRegister(
+            (model,), duplication=DuplicationPolicy((), exclude_empty_artifacts=False)
+        ),
+        project_root=tmp_path,
+    ).measure()
+    assert permissive.duplicate_groups  # identical empty files WOULD collide
+
+    declared = ConvergenceEngine(
+        ConvergenceRegister(
+            (model,), duplication=DuplicationPolicy((), exclude_empty_artifacts=True)
+        ),
+        project_root=tmp_path,
+    ).measure()
+    assert declared.duplicate_groups == ()
+
+
+def test_the_duplication_policy_is_declared_data_not_engine_constants():
+    """Every exclusion narrowing a constitutional measurement is visible in the register."""
+    policy = default_convergence_register().duplication
+    assert policy.excluded_segments == ("__pycache__",)
+    assert policy.exclude_empty_artifacts is True
+    document = json.loads(convergence_catalog_path().read_text("utf-8"))
+    assert "duplication" in document
+    # An absent declaration excludes nothing — silence is never a licence to narrow.
+    assert DuplicationPolicy.from_document(None).excluded_segments == ()
+    assert DuplicationPolicy.from_document(None).exclude_empty_artifacts is False
+
+
+def test_the_convergence_determination_is_replay_identical_with_duplication():
+    first, second = bootstrap_convergence().measure(), bootstrap_convergence().measure()
+    assert first.fingerprint() == second.fingerprint()
+    assert first.determination_id == second.determination_id

@@ -157,6 +157,15 @@ def _print_summary(command: str, payload: dict, stream) -> None:  # noqa: ANN001
         print(f"  converged:             {counts.get('converged', 0)}", file=stream)
         print(f"  duplicate impls:       {counts.get('duplicate_implementations', 0)}", file=stream)
         print(f"  competing surfaces:    {counts.get('competing_surfaces', 0)}", file=stream)
+        print(f"  duplicate artifacts:   {counts.get('surplus_artifacts', 0)}", file=stream)
+        for group in payload.get("duplicate_groups", []):
+            print(
+                f"    DUPLICATE      {group['model_id']:<22} {group['governed_root']}",
+                file=stream,
+            )
+            for locator in group["locators"]:
+                print(f"                     {locator}", file=stream)
+            print(f"                     -> {group['remediation']}", file=stream)
         for model in payload.get("models", []):
             mark = "CONVERGED" if model.get("converged") else "NOT-CONVERGED"
             print(

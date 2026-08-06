@@ -211,6 +211,106 @@ class SubordinateFinding:
 
 
 @dataclass(frozen=True, slots=True)
+class DuplicationPolicy:
+    """The declared exclusions that narrow the UFC-14 content measurement.
+
+    Governed roots are never declared — they are derived from each model's canonical package,
+    so a model added to the register is measured automatically. Only *exclusions* are declared,
+    because an exclusion narrows a constitutional measurement and must therefore be visible and
+    justified rather than buried in this engine (UFC-04, UFC-13).
+    """
+
+    excluded_segments: tuple[str, ...] = ()
+    exclude_empty_artifacts: bool = True
+
+    @classmethod
+    def from_document(cls, payload: Mapping[str, Any] | None) -> DuplicationPolicy:
+        """Build from the declared mapping; an absent declaration excludes nothing."""
+        if payload is None:
+            return cls(excluded_segments=(), exclude_empty_artifacts=False)
+        if not isinstance(payload, Mapping):
+            raise FoundationConvergenceError("duplication declaration must be a mapping")
+        segments = payload.get("excluded_segments", ())
+        if isinstance(segments, str | bytes) or not isinstance(segments, Iterable):
+            raise FoundationConvergenceError("excluded_segments must be a sequence")
+        return cls(
+            excluded_segments=tuple(sorted({str(item) for item in segments})),
+            exclude_empty_artifacts=bool(payload.get("exclude_empty_artifacts", True)),
+        )
+
+    def admits(self, path: Path) -> bool:
+        """Whether ``path`` is measured, given the declared exclusions."""
+        if any(segment in path.parts for segment in self.excluded_segments):
+            return False
+        if self.exclude_empty_artifacts:
+            try:
+                if not path.read_bytes().strip():
+                    return False
+            except OSError:
+                return False
+        return True
+
+    def to_dict(self) -> dict[str, Any]:
+        """A JSON-serialisable projection of this policy."""
+        return {
+            "excluded_segments": list(self.excluded_segments),
+            "exclude_empty_artifacts": self.exclude_empty_artifacts,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class DuplicateGroup:
+    """Two or more byte-identical artifacts inside one governed package (UFC-14).
+
+    A copy declares nothing, so it competes for no model and is invisible to every
+    declaration-driven measurement. This is what makes content the only honest instrument:
+    ``make convergence`` reported "duplicate impls: 0" throughout the Ω-A12 condition and was
+    correct by its own definition, because thirty-six byte-identical siblings declared nothing.
+    """
+
+    digest: str
+    locators: tuple[str, ...]
+    governed_root: str
+    model_id: str
+    canonical_package: str
+
+    @property
+    def surplus(self) -> int:
+        """How many artifacts are surplus — the group size less the one legitimate original."""
+        return max(0, len(self.locators) - 1)
+
+    @property
+    def remediation(self) -> str:
+        """The constitutional disposition this group requires."""
+        return (
+            f"compare each copy against its canonical original under {self.canonical_package} "
+            f"and remove the {self.surplus} surplus artifact(s); a byte-identical sibling "
+            "carries no information its original does not, so removal loses nothing "
+            "(CMG-000001 Art LXXVII: REUSE, never a second copy)"
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        """A JSON-serialisable projection of this group."""
+        return {
+            "digest": self.digest,
+            "locators": list(self.locators),
+            "governed_root": self.governed_root,
+            "model_id": self.model_id,
+            "canonical_package": self.canonical_package,
+            "surplus": self.surplus,
+            "remediation": self.remediation,
+        }
+
+    def describe(self) -> str:
+        """A single-line finding naming both locations, the package and its owner."""
+        return (
+            f"{self.model_id}/{self.canonical_package}: {len(self.locators)} byte-identical "
+            f"artifacts in {self.governed_root} [{self.digest[:16]}] "
+            f"{' == '.join(self.locators)} — {self.remediation}"
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class ModelConvergence:
     """The measured convergence of one constitutional model."""
 
@@ -267,6 +367,7 @@ class ConvergenceDetermination:
 
     models: tuple[ModelConvergence, ...]
     gate_results: tuple[GateResult, ...]
+    duplicate_groups: tuple[DuplicateGroup, ...] = ()
     determination_id: str = ""
 
     @classmethod
@@ -274,17 +375,23 @@ class ConvergenceDetermination:
         cls,
         models: Iterable[ModelConvergence],
         gate_results: Iterable[GateResult],
+        duplicate_groups: Iterable[DuplicateGroup] = (),
     ) -> ConvergenceDetermination:
         """Build a content-addressed determination."""
         ordered = tuple(sorted(models, key=lambda item: item.model_id))
         gates = tuple(sorted(gate_results, key=lambda item: item.gate))
+        duplicates = tuple(
+            sorted(duplicate_groups, key=lambda item: (item.locators[0], item.digest))
+        )
         core = {
             "models": [item.to_dict() for item in ordered],
             "gates": [item.result_id for item in gates],
+            "duplicate_groups": [item.to_dict() for item in duplicates],
         }
         return cls(
             models=ordered,
             gate_results=gates,
+            duplicate_groups=duplicates,
             determination_id=f"UCOS-UFCV-{content_hash(core)[:16]}",
         )
 
@@ -330,6 +437,8 @@ class ConvergenceDetermination:
             "unconverged": sum(1 for item in self.models if not item.converged),
             "duplicate_implementations": self.duplicates,
             "competing_surfaces": len(self.competing()),
+            "duplicate_artifact_groups": len(self.duplicate_groups),
+            "surplus_artifacts": sum(item.surplus for item in self.duplicate_groups),
         }
 
     def blockers(self) -> tuple[str, ...]:
@@ -346,6 +455,7 @@ class ConvergenceDetermination:
             "counts": self.counts(),
             "blockers": list(self.blockers()),
             "models": [item.to_dict() for item in self.models],
+            "duplicate_groups": [item.to_dict() for item in self.duplicate_groups],
             "gate_results": [item.to_dict() for item in self.gate_results],
         }
 
@@ -356,6 +466,7 @@ class ConvergenceDetermination:
             "converged": self.converged,
             "counts": self.counts(),
             "blockers": list(self.blockers()),
+            "duplicate_groups": [item.to_dict() for item in self.duplicate_groups],
             "models": [
                 {
                     "model_id": item.model_id,
@@ -380,18 +491,25 @@ class ConvergenceDetermination:
 class ConvergenceRegister:
     """A deterministic, fail-closed registry of declared constitutional models."""
 
-    __slots__ = ("_models", "_register_id")
+    __slots__ = ("_models", "_register_id", "_duplication")
 
     def __init__(
         self,
         models: Iterable[ConstitutionalModel] = (),
         *,
         register_id: str = "foundation.convergence",
+        duplication: DuplicationPolicy | None = None,
     ) -> None:
         self._models: dict[str, ConstitutionalModel] = {}
         self._register_id = register_id.strip() or "foundation.convergence"
+        self._duplication = duplication if duplication is not None else DuplicationPolicy()
         for model in models:
             self.add(model)
+
+    @property
+    def duplication(self) -> DuplicationPolicy:
+        """The declared exclusions narrowing the UFC-14 content measurement."""
+        return self._duplication
 
     def add(self, model: ConstitutionalModel) -> ConstitutionalModel:
         """Declare ``model``; fail-closed on an identity collision."""
@@ -444,7 +562,10 @@ class ConvergenceRegister:
         models = document.get("models")
         if not isinstance(models, Sequence) or isinstance(models, str | bytes):
             raise FoundationConvergenceError("convergence document requires a 'models' sequence")
-        register = cls(register_id=str(document.get("register_id", "")))
+        register = cls(
+            register_id=str(document.get("register_id", "")),
+            duplication=DuplicationPolicy.from_document(document.get("duplication")),
+        )
         for model in models:
             register.add(ConstitutionalModel.from_document(model))
         if register.count == 0:
@@ -456,6 +577,7 @@ class ConvergenceRegister:
         return {
             "register_id": self._register_id,
             "model_count": self.count,
+            "duplication": self._duplication.to_dict(),
             "models": [item.to_dict() for item in self.ordered()],
         }
 
@@ -624,6 +746,79 @@ class ConvergenceEngine:
             else f"PARALLEL AUTHORITY — never reaches the canonical owner ({package})",
         )
 
+    def governed_roots(self) -> tuple[tuple[str, ConstitutionalModel], ...]:
+        """Every governed package root, DERIVED from the declared canonical packages.
+
+        No root is enumerated here or in the register: the population follows the models, so a
+        model added to the register is measured without any change to this engine (UFC-09). A
+        canonical owner may be a package or a module; the containing directory is the governed
+        root in both cases, which is why the location is resolved rather than assumed.
+
+        A root that cannot be resolved is omitted rather than guessed — :meth:`measure_model`
+        already reports that owner as unresolved, and reporting one defect twice would be the
+        double-count UFC-16 forbids.
+        """
+        found: dict[str, ConstitutionalModel] = {}
+        for model in self._register.ordered():
+            try:
+                module = importlib.import_module(model.canonical_package)
+                location = getattr(module, "__file__", None)
+            except Exception:  # noqa: BLE001, S112 - measure_model already reports this owner
+                continue
+            if not location:
+                continue
+            root = Path(location).resolve().parent
+            key = root.as_posix()
+            if key not in found:
+                found[key] = model
+        return tuple(sorted(found.items(), key=lambda item: item[0]))
+
+    def measure_duplication(self) -> tuple[DuplicateGroup, ...]:
+        """Measure byte-identical artifacts inside every governed package root (UFC-14).
+
+        Content is the instrument, not naming: a duplicate is found because it *is* a copy, not
+        because it is called one. Grouping is global across the governed roots so a copy that
+        was moved into a neighbouring governed package is still a copy.
+        """
+        policy = self._register.duplication
+        seen: dict[str, list[tuple[str, str, ConstitutionalModel]]] = {}
+        for key, model in self.governed_roots():
+            root = Path(key)
+            for path in sorted(root.rglob("*")):
+                if not path.is_file() or not policy.admits(path):
+                    continue
+                try:
+                    payload = path.read_bytes()
+                except OSError:  # pragma: no cover - unreadable file is not a duplicate claim
+                    continue
+                digest = content_hash({"bytes": payload.hex()})
+                locator = self._relative(path)
+                seen.setdefault(digest, []).append((locator, key, model))
+
+        groups: list[DuplicateGroup] = []
+        for digest, members in seen.items():
+            if len(members) < 2:
+                continue
+            locators = tuple(sorted(item[0] for item in members))
+            owner = min(members, key=lambda item: item[0])
+            groups.append(
+                DuplicateGroup(
+                    digest=digest,
+                    locators=locators,
+                    governed_root=self._relative(Path(owner[1])),
+                    model_id=owner[2].model_id,
+                    canonical_package=owner[2].canonical_package,
+                )
+            )
+        return tuple(sorted(groups, key=lambda item: (item.locators[0], item.digest)))
+
+    def _relative(self, path: Path) -> str:
+        """``path`` as a repository-relative locator where possible, else absolute."""
+        try:
+            return path.resolve().relative_to(self._project_root.resolve()).as_posix()
+        except ValueError:
+            return path.as_posix()
+
     def measure_model(self, model: ConstitutionalModel) -> ModelConvergence:
         """Measure one constitutional model against its declaration."""
         owner_resolved = True
@@ -688,14 +883,26 @@ class ConvergenceEngine:
         uncontracted = [
             item.model_id for item in models if item.owner_resolved and item.contract_count == 0
         ]
+        duplicated = self.measure_duplication()
+        surplus = sum(item.surplus for item in duplicated)
         exactly_once = self._gate(
             GATE_EXACTLY_ONCE,
-            Verdict.PASS if not unowned and not uncontracted else Verdict.FAIL,
+            Verdict.PASS if not unowned and not uncontracted and not duplicated else Verdict.FAIL,
             f"{len(models)} constitutional models, each with exactly one canonical owner "
-            "publishing a contract surface"
-            if not unowned and not uncontracted
-            else "a constitutional model has no resolvable, contracted owner",
-            findings=[*unowned, *uncontracted],
+            f"publishing a contract surface; no byte-identical artifact across "
+            f"{len(self.governed_roots())} governed packages"
+            if not unowned and not uncontracted and not duplicated
+            else (
+                f"{len(duplicated)} duplicate artifact group(s), {surplus} surplus copies, "
+                "inside the governed packages"
+                if duplicated
+                else "a constitutional model has no resolvable, contracted owner"
+            ),
+            findings=[
+                *unowned,
+                *uncontracted,
+                *(item.describe() for item in duplicated),
+            ],
         )
 
         competing = [
@@ -731,11 +938,16 @@ class ConvergenceEngine:
             ],
         )
 
-        return ConvergenceDetermination.create(models, (exactly_once, no_parallel, one_measurement))
+        return ConvergenceDetermination.create(
+            models, (exactly_once, no_parallel, one_measurement), duplicated
+        )
 
     def to_dict(self) -> dict[str, Any]:
         """A JSON-serialisable projection of this engine's composition."""
-        return {"register": self._register.to_dict()}
+        return {
+            "register": self._register.to_dict(),
+            "governed_roots": [self._relative(Path(key)) for key, _ in self.governed_roots()],
+        }
 
     def fingerprint(self) -> str:
         """The deterministic content fingerprint of this engine's composition."""
@@ -758,6 +970,8 @@ def bootstrap_convergence(
 
 
 __all__ = [
+    "DuplicateGroup",
+    "DuplicationPolicy",
     "CATALOG_DIRNAME",
     "DEFAULT_CONVERGENCE_FILENAME",
     "GATE_EXACTLY_ONCE",

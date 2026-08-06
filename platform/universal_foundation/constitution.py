@@ -50,10 +50,12 @@ from typing import Any
 #: The canonical identity of the Universal Foundation Constitution.
 FOUNDATION_CONSTITUTION_ID = "UCOS-UFC-001"
 
-#: The semantic version of the Constitution itself. 1.1.0 amends UFC-11: a capability whose
-#: outputs become Repository Truth must be re-measurable at the commit that carries them. The
-#: amendment is additive — no article removed, no mandate narrowed, no domain added — so it is
-#: a minor version under the same discipline UFC-08 requires of every contract surface.
+#: The semantic version of the Constitution itself. 1.1.0 amends two articles: UFC-11, so that
+#: a capability whose outputs become Repository Truth must be re-measurable at the commit that
+#: carries them; and UFC-14, so that duplication is measured by content and not only by
+#: declaration. Both amendments are additive — no article removed, no mandate narrowed, no
+#: domain added — so this is a minor version under the same discipline UFC-08 requires of
+#: every contract surface.
 FOUNDATION_CONSTITUTION_VERSION = "1.1.0"
 
 #: The constitutional authority that owns this law.
@@ -357,7 +359,10 @@ FOUNDATION_ARTICLES: tuple[FoundationArticle, ...] = (
             "Each constitutional model — Repository Truth, ownership, assimilation, "
             "measurement, dependency and implementation — SHALL have exactly one canonical "
             "implementation holding exactly one contract surface. Two implementations of one "
-            "model is a duplicate architecture, not a choice."
+            "model is a duplicate architecture, not a choice. Within a governed package no two "
+            "artifacts SHALL be byte-identical: a copy declares nothing, and therefore competes "
+            "for no model and is caught by no declaration, so duplication SHALL be measured by "
+            "content and never by declaration alone."
         ),
         gate="FG-14-EXACTLY-ONCE",
         scope=ArticleScope.PLATFORM,

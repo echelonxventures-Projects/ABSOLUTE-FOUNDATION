@@ -1,6 +1,14 @@
 {
   "register_id": "ucos.foundation.convergence",
   "$comment": "THE convergence register. Six constitutional models, each with exactly ONE canonical implementation, and every surface that once did or could answer the same question declared with the relation it now stands in. Relations are VERIFIED, not asserted: a SUPERSEDED surface must be absent from the working tree, a DELEGATES surface must really import the canonical owner (measured over its import graph), and a PROJECTION must hold no executable determination. Adding a model or a subordinate is an entry here and requires NO change to convergence.py.",
+  "duplication": {
+    "$comment": "UFC-14 content duplication. The governed roots are NOT declared here: they are DERIVED from each model's canonical_package, so a model added above is measured here automatically and no root can be enumerated, forgotten or hardcoded. What IS declared is every exclusion, because an exclusion narrows a constitutional measurement and must therefore be visible, justified and countable rather than buried in the engine.",
+    "excluded_segments": ["__pycache__"],
+    "$excluded_segments_rationale": "Compiled residue is regenerated from the source it mirrors, so two identical .pyc files are one implementation observed twice, not two implementations. Under UCOS-URTF-001 this is TRANSIENT and is never Truth, so measuring it would report a duplicate the repository does not have.",
+    "exclude_empty_artifacts": true,
+    "$exclude_empty_rationale": "A zero-byte or whitespace-only artifact declares nothing and implements nothing, so two of them are not two implementations of one model. Package markers are the ordinary case: every package needs one and they are identical by construction. This is a universal property of empty files, not a project fact.",
+    "$no_other_exclusion": "There is deliberately no suffix filter and no name-pattern filter. The Ω-A12 duplicates were byte-identical '* 2.*' siblings, and a measurement that looked for that NAME rather than for identical CONTENT would be the same blind spot wearing a different mask."
+  },
   "models": [
     {
       "model_id": "MODEL-TRUTH",
