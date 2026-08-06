@@ -6,7 +6,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 96 | UPN-000000001–UPN-000009583 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 99 | UPN-000000001–UPN-000009655 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 102 | UPN-000001327–UPN-000009587 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 57 | UPN-000000022–UPN-000009371 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 96
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 99
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -136,6 +136,9 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-REPOSITORYRE-000002` | 07 — REPOSITORY READINESS DETERMINATION | — | ACTIVE |
 | `UCOS-EXECUTIVESUM-000001` | 08 — EXECUTIVE SUMMARY | — | ACTIVE |
 | `UCOS-UCOSACFV0000-000001` | UCOS Ω∞ — ABSOLUTE ARCHITECTURAL COMPLETENESS & FORMAL VERIFI… | — | ACTIVE |
+| `UCOS-OMEGAN-000001` | UCOS Ω∞ — Ω Nucleus Implementation Inventory | — | ACTIVE |
+| `UCOS-PRODUC-000001` | UCOS Ω∞ — Production Foundation | — | ACTIVE |
+| `UCOS-PRODUC-000002` | UCOS Ω∞ — Remaining Implementation Roadmap | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 

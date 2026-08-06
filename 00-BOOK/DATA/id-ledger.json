@@ -8638,9 +8638,30 @@
       "page_start": 9649,
       "page_count": 2,
       "first_seen": "2026-08-06T08:42:39+00:00"
+    },
+    "OMEGA-NUCLEUS-IMPLEMENTATION-INVENTORY.md": {
+      "universal_id": "UCOS-OMEGAN-000001",
+      "category": "OMEGAN",
+      "page_start": 9651,
+      "page_count": 1,
+      "first_seen": "2026-08-06T08:52:24+00:00"
+    },
+    "PRODUCTION-FOUNDATION.md": {
+      "universal_id": "UCOS-PRODUC-000001",
+      "category": "PRODUC",
+      "page_start": 9652,
+      "page_count": 2,
+      "first_seen": "2026-08-06T08:52:24+00:00"
+    },
+    "PRODUCTION-ROADMAP.md": {
+      "universal_id": "UCOS-PRODUC-000002",
+      "category": "PRODUC",
+      "page_start": 9654,
+      "page_count": 2,
+      "first_seen": "2026-08-06T08:52:24+00:00"
     }
   },
-  "page_cursor": 9650,
+  "page_cursor": 9655,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8736,7 +8757,9 @@
     "EVOUSIS015": 9,
     "EVOUSIS016": 9,
     "CMG": 2,
-    "UCOSACFV0000": 1
+    "UCOSACFV0000": 1,
+    "OMEGAN": 1,
+    "PRODUC": 2
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -24166,6 +24189,39 @@
         "status": "ACTIVE",
         "path": "platform/universal_generator/catalog/ucos-generation-targets.json",
         "name": "Ucos Generation Targets"
+      }
+    ],
+    "UCOS-OMEGAN-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T08:52:24+00:00",
+        "content_hash": "e7838d23d8a3d206223f84019d91ab0f8d81c0893bc56842ce4b252fdec0b0e4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "OMEGA-NUCLEUS-IMPLEMENTATION-INVENTORY.md",
+        "name": "UCOS Ω∞ — Ω Nucleus Implementation Inventory"
+      }
+    ],
+    "UCOS-PRODUC-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T08:52:24+00:00",
+        "content_hash": "3fd167b3445abd6aef47d1c98018fa03a41880f9e8eda01bc94f28db8ee7bda8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PRODUCTION-FOUNDATION.md",
+        "name": "UCOS Ω∞ — Production Foundation"
+      }
+    ],
+    "UCOS-PRODUC-000002": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T08:52:24+00:00",
+        "content_hash": "6a413751d26f214adf502e7a98593cc5ebf5220a0f0c245e98a4a3a52d7edf40",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PRODUCTION-ROADMAP.md",
+        "name": "UCOS Ω∞ — Remaining Implementation Roadmap"
       }
     ]
   }

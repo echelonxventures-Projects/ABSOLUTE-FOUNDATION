@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-08-06T08:42:40+00:00 by ukbx portal. 1203 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-08-06T08:52:25+00:00 by ukbx portal. 1206 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1207,3 +1207,6 @@
 | [UCOS-PLT-000064](UCOS-PLT-000064.md) | Ucos Repository Truth | VOL-006 | ACTIVE |
 | [UCOS-PLT-000065](UCOS-PLT-000065.md) | Foundation Nucleus | VOL-006 | ACTIVE |
 | [UCOS-PLT-000066](UCOS-PLT-000066.md) | Ucos Generation Targets | VOL-006 | ACTIVE |
+| [UCOS-OMEGAN-000001](UCOS-OMEGAN-000001.md) | UCOS Ω∞ — Ω Nucleus Implementation Inventory | VOL-000 | ACTIVE |
+| [UCOS-PRODUC-000001](UCOS-PRODUC-000001.md) | UCOS Ω∞ — Production Foundation | VOL-000 | ACTIVE |
+| [UCOS-PRODUC-000002](UCOS-PRODUC-000002.md) | UCOS Ω∞ — Remaining Implementation Roadmap | VOL-000 | ACTIVE |

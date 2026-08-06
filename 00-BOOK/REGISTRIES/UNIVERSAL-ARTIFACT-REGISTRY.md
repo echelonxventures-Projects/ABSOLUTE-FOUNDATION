@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1203
+**Total artifacts:** 1206
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1211,5 +1211,8 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1201 | `UCOS-PLT-000064` | Ucos Repository Truth | — | 006 | UPN-000009641–UPN-000009643 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_truth/catalog/ucos-repository-truth.json) |
 | 1202 | `UCOS-PLT-000065` | Foundation Nucleus | — | 006 | UPN-000009644–UPN-000009648 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_foundation/catalog/foundation-nucleus.json) |
 | 1203 | `UCOS-PLT-000066` | Ucos Generation Targets | — | 006 | UPN-000009649–UPN-000009650 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_generator/catalog/ucos-generation-targets.json) |
+| 1204 | `UCOS-OMEGAN-000001` | UCOS Ω∞ — Ω Nucleus Implementation Inventory | — | 000 | UPN-000009651–UPN-000009651 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../OMEGA-NUCLEUS-IMPLEMENTATION-INVENTORY.md) |
+| 1205 | `UCOS-PRODUC-000001` | UCOS Ω∞ — Production Foundation | — | 000 | UPN-000009652–UPN-000009653 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../PRODUCTION-FOUNDATION.md) |
+| 1206 | `UCOS-PRODUC-000002` | UCOS Ω∞ — Remaining Implementation Roadmap | — | 000 | UPN-000009654–UPN-000009655 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../PRODUCTION-ROADMAP.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
