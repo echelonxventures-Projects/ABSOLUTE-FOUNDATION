@@ -83,6 +83,25 @@ IMPORT_PURITY_FORBIDDEN: tuple[str, ...] = (
 #: Package sub-paths never inspected as source (compiled residue and declared data).
 _SOURCE_EXCLUDED = ("__pycache__",)
 
+#: Callables whose appearance *anywhere* in a capability's source proves that the capability
+#: emits an artifact — that is, that its determinations can become Repository Truth (UFC-11).
+#: This is the write half of :data:`IMPORT_PURITY_FORBIDDEN`, which measures the same
+#: vocabulary at module level for a different article; the two are deliberately disjoint in
+#: scope and share no verdict. Every name here is an unambiguous filesystem artifact
+#: operation: ``replace`` and ``dumps`` are deliberately absent, because ``str.replace`` and
+#: ``json.dumps`` are pure and would make the measurement lie — and a measurement that lies is
+#: worse than no measurement at all (UFC-10).
+ARTIFACT_WRITE_CALLS: tuple[str, ...] = (
+    "write_text",
+    "write_bytes",
+    "mkdir",
+    "touch",
+    "rename",
+    "unlink",
+    "rmdir",
+    "dump",
+)
+
 
 class Verdict(str, Enum):
     """The outcome of one probe. There is deliberately no fourth, softer value."""
@@ -200,6 +219,60 @@ class RegistryDeclaration:
 
 
 @dataclass(frozen=True, slots=True)
+class ReplayDeclaration:
+    """A declared replay posture: whether a capability's outputs become Repository Truth.
+
+    UFC-11 requires a capability that emits artifacts to be re-measurable at the commit that
+    carries them, because a committed artifact cannot carry the sha of the commit that carries
+    it — so a register rendered before its own commit drifts by exactly one field forever.
+
+    The declaration is never trusted. :func:`probe_certifiable` measures the capability's own
+    source against :data:`ARTIFACT_WRITE_CALLS` and fails the article when the declaration and
+    the measurement disagree in *either* direction: an undeclared writer is an ungated
+    register, and a phantom writer is a replay obligation nobody can discharge.
+    """
+
+    writes_tracked_artifacts: bool = False
+    target: SymbolRef | None = None
+
+    @classmethod
+    def from_document(cls, payload: Mapping[str, Any], *, capability_id: str) -> ReplayDeclaration:
+        """Build from a declared mapping (fail-closed)."""
+        if not isinstance(payload, Mapping):
+            raise FoundationConformanceError(
+                "replay declaration must be a mapping", capability_id=capability_id
+            )
+        if "writes_tracked_artifacts" not in payload:
+            raise FoundationConformanceError(
+                "replay declaration must state 'writes_tracked_artifacts'",
+                capability_id=capability_id,
+            )
+        writes = bool(payload["writes_tracked_artifacts"])
+        target = payload.get("target")
+        if writes and not target:
+            raise FoundationConformanceError(
+                "a capability that writes tracked artifacts must declare a replay target",
+                capability_id=capability_id,
+            )
+        if target and not writes:
+            raise FoundationConformanceError(
+                "a replay target is declared but the capability declares no tracked output",
+                capability_id=capability_id,
+            )
+        return cls(
+            writes_tracked_artifacts=writes,
+            target=SymbolRef.parse(target, context=capability_id) if target else None,
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        """A JSON-serialisable projection."""
+        return {
+            "writes_tracked_artifacts": self.writes_tracked_artifacts,
+            "target": str(self.target) if self.target else "",
+        }
+
+
+@dataclass(frozen=True, slots=True)
 class CapabilityDeclaration:
     """One declared Foundation capability — the complete data a probe needs to measure it.
 
@@ -221,6 +294,7 @@ class CapabilityDeclaration:
     build: SymbolRef
     errors_module: str
     errors_base: SymbolRef
+    replay: ReplayDeclaration = ReplayDeclaration()
     extension_points: tuple[ExtensionPointDeclaration, ...] = ()
     registries: tuple[RegistryDeclaration, ...] = ()
     entry_point: str = ""
@@ -250,6 +324,7 @@ class CapabilityDeclaration:
             "build",
             "errors_module",
             "errors_base",
+            "replay",
         )
         missing = [key for key in required if key not in payload]
         if missing:
@@ -288,6 +363,7 @@ class CapabilityDeclaration:
             build=SymbolRef.parse(payload["build"], context=capability_id),
             errors_module=str(payload["errors_module"]),
             errors_base=SymbolRef.parse(payload["errors_base"], context=capability_id),
+            replay=ReplayDeclaration.from_document(payload["replay"], capability_id=capability_id),
             extension_points=tuple(
                 ExtensionPointDeclaration.from_document(item)
                 for item in payload.get("extension_points", ())
@@ -352,6 +428,7 @@ class CapabilityDeclaration:
             "build": str(self.build),
             "errors_module": self.errors_module,
             "errors_base": str(self.errors_base),
+            "replay": self.replay.to_dict(),
             "extension_points": [item.to_dict() for item in self.extension_points],
             "registries": [item.to_dict() for item in self.registries],
             "entry_point": self.entry_point,
@@ -808,6 +885,25 @@ def default_capability_register(
     return load_capability_register(catalog_path(filename))
 
 
+def _called_names(tree: ast.Module) -> tuple[str, ...]:
+    """Every callable name invoked at *any* depth — the write half of UFC-11.
+
+    :func:`_module_level_calls` deliberately stops at the first function or class because
+    UFC-07 asks a question about import time. UFC-11 asks a question about the whole
+    capability, so this walk does not stop.
+    """
+    found: set[str] = set()
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        func = node.func
+        if isinstance(func, ast.Name):
+            found.add(func.id)
+        elif isinstance(func, ast.Attribute):
+            found.add(func.attr)
+    return tuple(sorted(found))
+
+
 def _module_level_calls(tree: ast.Module) -> tuple[str, ...]:
     """Every callable name invoked at module level (never inside a function or class)."""
     found: list[str] = []
@@ -869,6 +965,7 @@ parse_source = _parse
 imported_modules = _imported_modules
 string_literals = _string_literals
 module_level_calls = _module_level_calls
+called_names = _called_names
 
 
 class ConformanceProbe(ABC):
@@ -1490,7 +1587,50 @@ def probe_certifiable(declaration: CapabilityDeclaration, context: ProbeContext)
             "two independent builds produced different fingerprints",
             (f"{left} != {right}",),
         )
-    return Verdict.PASS, f"content-addressed and replay-identical: {left[:16]}", ()
+
+    # Register currency. A determination that becomes Repository Truth must be replayable at
+    # the commit that carries it, so the declared replay posture is measured against the
+    # capability's own source rather than taken on trust.
+    observed: list[str] = []
+    for path in declaration.source_files():
+        called = set(_called_names(_parse(path)))
+        observed.extend(
+            f"{path.name} calls {name}()" for name in sorted(called & set(ARTIFACT_WRITE_CALLS))
+        )
+    declared = declaration.replay
+    if observed and not declared.writes_tracked_artifacts:
+        return (
+            Verdict.FAIL,
+            "capability emits artifacts but declares no replay obligation",
+            tuple(observed),
+        )
+    if declared.writes_tracked_artifacts and not observed:
+        return (
+            Verdict.FAIL,
+            "capability declares a replay obligation its source cannot discharge",
+            (f"no call from {','.join(ARTIFACT_WRITE_CALLS)} appears in its source",),
+        )
+    if declared.writes_tracked_artifacts:
+        if declared.target is None:  # pragma: no cover - construction refuses this pairing
+            return Verdict.FAIL, "declared writer names no replay target", ()
+        try:
+            replay = declared.target.resolve()
+        except FoundationConformanceError as exc:
+            return Verdict.FAIL, "declared replay target does not resolve", (str(exc),)
+        if not callable(replay):
+            return Verdict.FAIL, "declared replay target is not callable", (str(declared.target),)
+        return (
+            Verdict.PASS,
+            f"content-addressed, replay-identical ({left[:16]}) and re-measurable at its "
+            f"own commit via {declared.target}",
+            (),
+        )
+    return (
+        Verdict.PASS,
+        f"content-addressed and replay-identical: {left[:16]}; emits no tracked artifact, "
+        "measured over its own source",
+        (),
+    )
 
 
 def probe_composable(declaration: CapabilityDeclaration, context: ProbeContext) -> ProbeOutcome:
@@ -1577,10 +1717,12 @@ def default_probe_registry() -> ProbeRegistry:
 __all__ = [
     "CATALOG_DIRNAME",
     "DEFAULT_REGISTER_FILENAME",
+    "ARTIFACT_WRITE_CALLS",
     "IMPORT_PURITY_FORBIDDEN",
     "SHIPPED_PROBES",
     "CallableProbe",
     "CapabilityConformance",
+    "ReplayDeclaration",
     "CapabilityDeclaration",
     "CapabilityRegister",
     "ConformanceDetermination",
@@ -1597,6 +1739,7 @@ __all__ = [
     "catalog_path",
     "default_capability_register",
     "imported_modules",
+    "called_names",
     "module_level_calls",
     "parse_source",
     "string_literals",

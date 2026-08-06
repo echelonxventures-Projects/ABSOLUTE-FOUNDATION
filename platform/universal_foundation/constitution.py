@@ -50,8 +50,11 @@ from typing import Any
 #: The canonical identity of the Universal Foundation Constitution.
 FOUNDATION_CONSTITUTION_ID = "UCOS-UFC-001"
 
-#: The semantic version of the Constitution itself.
-FOUNDATION_CONSTITUTION_VERSION = "1.0.0"
+#: The semantic version of the Constitution itself. 1.1.0 amends UFC-11: a capability whose
+#: outputs become Repository Truth must be re-measurable at the commit that carries them. The
+#: amendment is additive — no article removed, no mandate narrowed, no domain added — so it is
+#: a minor version under the same discipline UFC-08 requires of every contract surface.
+FOUNDATION_CONSTITUTION_VERSION = "1.1.0"
 
 #: The constitutional authority that owns this law.
 FOUNDATION_CONSTITUTION_AUTHORITY = "Universal Foundation Constitutional Authority"
@@ -316,7 +319,11 @@ FOUNDATION_ARTICLES: tuple[FoundationArticle, ...] = (
         mandate=(
             "Every Foundation determination carries a content-addressed identity derived from "
             "its inputs alone, holds no wall-clock, and is byte-identical on replay. "
-            "Certification pins the fingerprint, so what was certified is always recoverable."
+            "Certification pins the fingerprint, so what was certified is always recoverable. "
+            "A capability whose outputs become Repository Truth SHALL declare a replay target "
+            "and re-measure at the commit that carries those outputs until the render is a "
+            "fixed point. A capability that writes no such output SHALL declare that too: the "
+            "declaration is measured against the capability's own source, never trusted."
         ),
         gate="FG-11-CERTIFIABLE",
     ),

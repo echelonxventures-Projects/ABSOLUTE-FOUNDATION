@@ -9,6 +9,7 @@
   ],
   "locator_literal_pattern": "(^|/)[0-9]{2}-[A-Z][A-Z0-9-]*(/|$)",
   "$locator_note": "A string literal matching this shape is a repository locator and therefore a project fact that UFC-13 requires to live in a declared document rather than in code. Declared catalogue documents are data and are never scanned.",
+  "$replay_comment": "UFC-11 register currency. Every capability SHALL state whether its outputs become Repository Truth. The claim is NOT trusted: probe_certifiable walks the capability's own source for the calls in conformance.ARTIFACT_WRITE_CALLS and fails the article when the declaration and the measurement disagree in either direction. A capability that begins emitting artifacts therefore fails FG-11 until it declares a replay target, which is the executable form of 'a measurer that adds files must re-measure after its own commit'. A declared target is a module:attribute callable that re-renders the committed output so the render can be proven a fixed point at the commit that carries it.",
   "capabilities": [
     {
       "capability_id": "UCOS-URTF-001",
@@ -26,6 +27,7 @@
       "build": "platform.universal_truth.policy:default_truth_policy",
       "errors_module": "platform.universal_truth.errors",
       "errors_base": "platform.universal_truth.errors:RepositoryTruthError",
+      "replay": {"writes_tracked_artifacts": false},
       "extension_points": [
         {
           "symbol": "platform.universal_truth.policy:TruthPolicy",
@@ -57,6 +59,7 @@
       "build": "platform.universal_ownership.bootstrap:bootstrap_ownership",
       "errors_module": "platform.universal_ownership.errors",
       "errors_base": "platform.universal_ownership.errors:OwnershipError",
+      "replay": {"writes_tracked_artifacts": false},
       "extension_points": [
         {
           "symbol": "platform.universal_ownership.evidence:OwnershipEvidenceProvider",
@@ -102,6 +105,7 @@
       "build": "platform.universal_assimilation.bootstrap:bootstrap_assimilation",
       "errors_module": "platform.universal_assimilation.errors",
       "errors_base": "platform.universal_assimilation.errors:AssimilationError",
+      "replay": {"writes_tracked_artifacts": false},
       "extension_points": [
         {
           "symbol": "platform.universal_assimilation.adapters:SourceAdapter",
@@ -143,6 +147,7 @@
       "build": "platform.universal_measurement.bootstrap:bootstrap_measurement_policies",
       "errors_module": "platform.universal_measurement.errors",
       "errors_base": "platform.universal_measurement.errors:MeasurementPolicyError",
+      "replay": {"writes_tracked_artifacts": false},
       "extension_points": [
         {
           "symbol": "platform.universal_measurement.policies:MeasurementPolicy",
@@ -178,6 +183,7 @@
       "build": "platform.universal_foundation.bootstrap:bootstrap_foundation_constitution",
       "errors_module": "platform.universal_foundation.errors",
       "errors_base": "platform.universal_foundation.errors:UniversalFoundationError",
+      "replay": {"writes_tracked_artifacts": false},
       "extension_points": [
         {
           "symbol": "platform.universal_foundation.conformance:ConformanceProbe",
@@ -222,6 +228,7 @@
       "build": "platform.universal_foundation.bootstrap:bootstrap_universal_foundation",
       "errors_module": "platform.universal_foundation.errors",
       "errors_base": "platform.universal_foundation.errors:UniversalFoundationError",
+      "replay": {"writes_tracked_artifacts": false},
       "extension_points": [
         {
           "symbol": "platform.universal_foundation.specialization:FoundationSpecialization",

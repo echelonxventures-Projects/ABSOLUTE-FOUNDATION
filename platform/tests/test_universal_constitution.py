@@ -21,14 +21,23 @@ from platform.universal_foundation.bootstrap import (
     register_universal_foundation,
 )
 from platform.universal_foundation.conformance import (
+    ARTIFACT_WRITE_CALLS,
     CallableProbe,
     CapabilityDeclaration,
     CapabilityRegister,
     ConformanceEngine,
     ProbeRegistry,
+    ReplayDeclaration,
+    SymbolRef,
     Verdict,
+    called_names,
     default_capability_register,
     default_probe_registry,
+    parse_source,
+    probe_certifiable,
+)
+from platform.universal_foundation.conformance import (
+    catalog_path as conformance_catalog_path,
 )
 from platform.universal_foundation.constitution import (
     FOUNDATION_ARTICLES,
@@ -539,3 +548,91 @@ def test_a_criterion_declared_twice_with_a_different_body_fails_closed():
         )
     with pytest.raises(FoundationFreezeError):
         register.require("FZ-NOPE")
+
+
+# --------------------------------------------------------------------------------------
+# UFC-11 register currency (GAP-01) — a declaration measured against its own source
+# --------------------------------------------------------------------------------------
+
+
+def test_ufc_11_mandates_register_currency_at_the_carrying_commit():
+    """The amended article legislates the fixed point, not merely double-build equality."""
+    mandate = article("UFC-11").mandate
+    assert "replay target" in mandate
+    assert "fixed point" in mandate
+    # The declaration is measured, never trusted — that clause is the whole discharge.
+    assert "never trusted" in mandate
+
+
+def test_every_capability_declares_its_replay_posture():
+    """UFC-11 is fail-closed: an absent declaration is not an implicit 'writes nothing'."""
+    register = default_capability_register()
+    for declaration in register.ordered():
+        assert isinstance(declaration.replay, ReplayDeclaration)
+
+
+def test_a_capability_omitting_its_replay_declaration_is_refused():
+    """Silence about tracked output is refused at construction, not defaulted."""
+    document = json.loads(conformance_catalog_path().read_text("utf-8"))
+    document["capabilities"][0].pop("replay")
+    with pytest.raises(FoundationConformanceError) as excinfo:
+        CapabilityRegister.from_document(document)
+    assert "replay" in str(excinfo.value)
+
+
+def test_a_declared_writer_must_name_a_replay_target():
+    """A capability that writes tracked artifacts cannot leave the obligation unaddressed."""
+    with pytest.raises(FoundationConformanceError):
+        ReplayDeclaration.from_document(
+            {"writes_tracked_artifacts": True}, capability_id="UCOS-TEST-001"
+        )
+
+
+def test_a_replay_target_without_a_declared_write_is_refused():
+    """The inverse is equally incoherent: an obligation with nothing to discharge."""
+    with pytest.raises(FoundationConformanceError):
+        ReplayDeclaration.from_document(
+            {"writes_tracked_artifacts": False, "target": "a.b:c"},
+            capability_id="UCOS-TEST-001",
+        )
+
+
+def test_a_phantom_writer_fails_because_its_source_cannot_discharge_the_claim():
+    """A declaration is measured against the capability's own source, in both directions."""
+    import dataclasses
+
+    register = default_capability_register()
+    engine = ConformanceEngine(register)
+    declaration = register.require("UCOS-URTF-001")
+
+    verdict, summary, _ = probe_certifiable(declaration, engine.context())
+    assert verdict is Verdict.PASS
+    assert "emits no tracked artifact" in summary
+
+    phantom = dataclasses.replace(
+        declaration,
+        replay=ReplayDeclaration(
+            writes_tracked_artifacts=True,
+            target=SymbolRef.parse("platform.universal_truth.policy:default_truth_policy"),
+        ),
+    )
+    verdict, summary, _ = probe_certifiable(phantom, engine.context())
+    assert verdict is Verdict.FAIL
+    assert "cannot discharge" in summary
+
+
+def test_an_artifact_write_is_detected_at_any_depth(tmp_path):
+    """UFC-07 stops at module level by design; UFC-11 must not, or a writer hides in a function."""
+    source = tmp_path / "writer.py"
+    source.write_text(
+        "from pathlib import Path\ndef render(target):\n    Path(target).write_text('x')\n",
+        "utf-8",
+    )
+    observed = set(called_names(parse_source(source)))
+    assert observed & set(ARTIFACT_WRITE_CALLS) == {"write_text"}
+
+
+def test_the_write_vocabulary_excludes_pure_calls():
+    """A measurement that lies is worse than none: str.replace and json.dumps are pure."""
+    assert "replace" not in ARTIFACT_WRITE_CALLS
+    assert "dumps" not in ARTIFACT_WRITE_CALLS
