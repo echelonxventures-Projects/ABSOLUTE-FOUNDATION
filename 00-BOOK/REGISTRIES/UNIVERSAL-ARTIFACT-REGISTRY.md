@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1219
+**Total artifacts:** 1220
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1227,5 +1227,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1217 | `UCOS-CON-000071` | UCRD-001 — Constitutional Relationship Determination | — | 002 | UPN-000009714–UPN-000009717 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCRD-001-CONSTITUTIONAL-RELATIONSHIP-DETERMINATION.md) |
 | 1218 | `UCOS-CON-000072` | UMN-001 — Universal Micro Nucleus Constitutional Determin… | — | 002 | UPN-000009718–UPN-000009727 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UMN-001-UNIVERSAL-MICRO-NUCLEUS-CONSTITUTIONAL-DETERMINATION.md) |
 | 1219 | `UCOS-UNAF00-000001` | UNAF-001 — Universal Nucleus Architecture Freeze | — | 000 | UPN-000009728–UPN-000009739 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UNAF-001-UNIVERSAL-NUCLEUS-ARCHITECTURE-FREEZE.md) |
+| 1220 | `UCOS-P0REGI-000001` | P0-REGISTRATION-001 — Universal Foundation Determination … | — | 000 | UPN-000009740–UPN-000009743 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../P0-REGISTRATION-001-UNIVERSAL-FOUNDATION-DETERMINATION-ASSIMILATION.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

@@ -6,7 +6,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 104 | UPN-000000001–UPN-000009739 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 105 | UPN-000000001–UPN-000009743 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 110 | UPN-000001327–UPN-000009727 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 57 | UPN-000000022–UPN-000009371 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 104
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 105
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -144,6 +144,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-P0DECL-000001` | P0-DECLARATION-001 — Universal Foundation Declaration Completion | — | ACTIVE |
 | `UCOS-UCOSUC-000001` | UCOS-UCOM-002 — Universal Constitutional Evolution & Universa… | — | ACTIVE |
 | `UCOS-UNAF00-000001` | UNAF-001 — Universal Nucleus Architecture Freeze | — | ACTIVE |
+| `UCOS-P0REGI-000001` | P0-REGISTRATION-001 — Universal Foundation Determination Assi… | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 

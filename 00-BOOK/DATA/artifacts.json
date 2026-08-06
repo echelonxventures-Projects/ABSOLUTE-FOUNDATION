@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-06T15:45:22+00:00",
+  "generated_at": "2026-08-06T15:49:50+00:00",
   "generator_version": "1.0.0",
-  "count": 1219,
+  "count": 1220,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -55818,6 +55818,47 @@
       "path": "UNAF-001-UNIVERSAL-NUCLEUS-ARCHITECTURE-FREEZE.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
       "content_hash": "5b3cab54cac373e5688eca2343782234d5d32da58568d814ef3397839a701d05",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-P0REGI-000001",
+      "native_id": null,
+      "name": "P0-REGISTRATION-001 — Universal Foundation Determination Assimilation",
+      "description": "",
+      "category": "P0REGI",
+      "volume": "VOL-000",
+      "page_start": 9740,
+      "page_end": 9743,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "P0REGI",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "P0REGI",
+        "P0REGI",
+        "VOL-000"
+      ],
+      "path": "P0-REGISTRATION-001-UNIVERSAL-FOUNDATION-DETERMINATION-ASSIMILATION.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "9fbc8b9ef47454386c854b8f58104b3ef725a1d3789a9baf129f2c90417d638e",
       "traceability": {
         "requirement": [],
         "architecture": [

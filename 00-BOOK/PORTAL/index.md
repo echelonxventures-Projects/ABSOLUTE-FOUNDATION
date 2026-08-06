@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-08-06T15:45:22+00:00 by ukbx portal. 1219 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-08-06T15:49:50+00:00 by ukbx portal. 1220 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1223,3 +1223,4 @@
 | [UCOS-CON-000071](UCOS-CON-000071.md) | UCRD-001 — Constitutional Relationship Determination | VOL-002 | ACTIVE |
 | [UCOS-CON-000072](UCOS-CON-000072.md) | UMN-001 — Universal Micro Nucleus Constitutional Determinati | VOL-002 | ACTIVE |
 | [UCOS-UNAF00-000001](UCOS-UNAF00-000001.md) | UNAF-001 — Universal Nucleus Architecture Freeze | VOL-000 | ACTIVE |
+| [UCOS-P0REGI-000001](UCOS-P0REGI-000001.md) | P0-REGISTRATION-001 — Universal Foundation Determination Ass | VOL-000 | ACTIVE |

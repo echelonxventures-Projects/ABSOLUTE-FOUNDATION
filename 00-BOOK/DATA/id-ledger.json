@@ -8750,9 +8750,16 @@
       "page_start": 9728,
       "page_count": 12,
       "first_seen": "2026-08-06T15:45:21+00:00"
+    },
+    "P0-REGISTRATION-001-UNIVERSAL-FOUNDATION-DETERMINATION-ASSIMILATION.md": {
+      "universal_id": "UCOS-P0REGI-000001",
+      "category": "P0REGI",
+      "page_start": 9740,
+      "page_count": 4,
+      "first_seen": "2026-08-06T15:49:49+00:00"
     }
   },
-  "page_cursor": 9739,
+  "page_cursor": 9743,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8855,7 +8862,8 @@
     "P0CLOS": 1,
     "P0DECL": 1,
     "UCOSUC": 1,
-    "UNAF00": 1
+    "UNAF00": 1,
+    "P0REGI": 1
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -24461,6 +24469,17 @@
         "status": "ACTIVE",
         "path": "UNAF-001-UNIVERSAL-NUCLEUS-ARCHITECTURE-FREEZE.md",
         "name": "UNAF-001 — Universal Nucleus Architecture Freeze"
+      }
+    ],
+    "UCOS-P0REGI-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-06T15:49:49+00:00",
+        "content_hash": "9fbc8b9ef47454386c854b8f58104b3ef725a1d3789a9baf129f2c90417d638e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "P0-REGISTRATION-001-UNIVERSAL-FOUNDATION-DETERMINATION-ASSIMILATION.md",
+        "name": "P0-REGISTRATION-001 — Universal Foundation Determination Assimilation"
       }
     ]
   }
