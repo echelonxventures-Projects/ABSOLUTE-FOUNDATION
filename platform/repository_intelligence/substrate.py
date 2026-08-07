@@ -76,6 +76,7 @@ class ModuleFact:
     loc: int
     content_sha256: str
     imports: tuple[str, ...] = ()
+    import_time_imports: tuple[str, ...] = ()
     symbols: tuple[str, ...] = ()
     docline: str = ""
     is_test: bool = False
@@ -86,6 +87,22 @@ class ModuleFact:
         """The module's terminal name (``contracts`` for ``platform.x.contracts``)."""
         return self.module.rsplit(".", 1)[-1]
 
+    @property
+    def deferred_imports(self) -> tuple[str, ...]:
+        """Targets this module names but never resolves while it is being imported.
+
+        Two constructs land here, and Python treats both as the *cure* for a circular
+        import rather than a symptom of one:
+
+          * ``if TYPE_CHECKING:`` — erased before the interpreter resolves anything;
+          * an import inside a function or class body — resolved on first call, by which
+            time every module in the loop is fully initialised.
+
+        Neither can deadlock module initialisation, so neither can close an import cycle.
+        """
+        at_import = set(self.import_time_imports)
+        return tuple(i for i in self.imports if i not in at_import)
+
     def core(self) -> dict[str, Any]:
         return {
             "module": self.module,
@@ -95,6 +112,7 @@ class ModuleFact:
             "loc": self.loc,
             "content_sha256": self.content_sha256,
             "imports": list(self.imports),
+            "import_time_imports": list(self.import_time_imports),
             "symbols": list(self.symbols),
             "is_test": self.is_test,
             "parsed": self.parsed,
@@ -334,7 +352,7 @@ def _module_fact(cfg: RepositoryIntelligenceConfig, rel: str) -> ModuleFact | No
         tree: ast.Module | None = ast.parse(source)
     except (SyntaxError, ValueError):
         tree = None
-    imports = _imports(tree, package) if tree else ()
+    imports, import_time_imports = _imports(tree, package) if tree else ((), ())
     symbols = _symbols(tree) if tree else ()
     docline = _docline(tree) if tree else ""
     return ModuleFact(
@@ -345,6 +363,7 @@ def _module_fact(cfg: RepositoryIntelligenceConfig, rel: str) -> ModuleFact | No
         loc=loc,
         content_sha256=digest,
         imports=imports,
+        import_time_imports=import_time_imports,
         symbols=symbols,
         docline=docline,
         is_test=cfg.test_dir_name in parts,
@@ -368,18 +387,80 @@ def _capability_name(cfg: RepositoryIntelligenceConfig, parts: tuple[str, ...]) 
     return f"{root}.{parts[1]}"
 
 
-def _imports(tree: ast.Module, package: str) -> tuple[str, ...]:
-    """Absolute dotted module targets of every import, relative imports resolved."""
-    found: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                found.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            target = _resolve_import_from(node, package)
-            if target:
-                found.add(target)
-    return tuple(sorted(found))
+def _imports(tree: ast.Module, package: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Absolute dotted import targets, relative resolved: ``(every target, at import)``.
+
+    The second element is the subset the interpreter actually resolves while this module
+    is being imported — module-level statements that are not ``TYPE_CHECKING``-guarded.
+    That is the only set an import cycle can be built from; see
+    :attr:`ModuleFact.deferred_imports` for what is excluded and why.
+
+    A target reached both ways is at-import: one unguarded module-level statement is
+    enough to make the dependency load-bearing, and deferring it elsewhere does not undo
+    that.
+    """
+    at_import: set[str] = set()
+    every: set[str] = set()
+
+    def visit(node: ast.AST, *, deferred: bool) -> None:
+        for child in ast.iter_child_nodes(node):
+            if isinstance(child, ast.Import | ast.ImportFrom):
+                targets = (
+                    {alias.name for alias in child.names}
+                    if isinstance(child, ast.Import)
+                    else ({t} if (t := _resolve_import_from(child, package)) else set())
+                )
+                every.update(targets)
+                if not deferred:
+                    at_import.update(targets)
+                continue
+            if isinstance(child, ast.If) and _is_type_checking_test(child.test):
+                # Body only. The `else:` arm of a TYPE_CHECKING block is precisely the
+                # branch that DOES run at import, so deferring it would erase a real
+                # dependency — the same error in the opposite direction.
+                for statement in child.body:
+                    visit_statement(statement, deferred=True)
+                for statement in child.orelse:
+                    visit_statement(statement, deferred=deferred)
+                continue
+            visit(
+                child,
+                deferred=deferred
+                or isinstance(child, ast.FunctionDef | ast.AsyncFunctionDef | ast.Lambda),
+            )
+
+    def visit_statement(node: ast.AST, *, deferred: bool) -> None:
+        """Apply the import test to a statement itself, then descend into it."""
+        if isinstance(node, ast.Import | ast.ImportFrom):
+            targets = (
+                {alias.name for alias in node.names}
+                if isinstance(node, ast.Import)
+                else ({t} if (t := _resolve_import_from(node, package)) else set())
+            )
+            every.update(targets)
+            if not deferred:
+                at_import.update(targets)
+            return
+        visit(node, deferred=deferred)
+
+    visit(tree, deferred=False)
+    # Set membership, not visit order: a target may be imported at module level in one
+    # place and deferred in another, and the verdict must not depend on which the walk
+    # reached first.
+    return tuple(sorted(every)), tuple(sorted(at_import))
+
+
+def _is_type_checking_test(test: ast.expr) -> bool:
+    """Whether an ``if`` test is the ``TYPE_CHECKING`` sentinel.
+
+    Matches both spellings the repository uses — the bare ``TYPE_CHECKING`` name and the
+    qualified ``typing.TYPE_CHECKING`` attribute.
+    """
+    if isinstance(test, ast.Name):
+        return test.id == "TYPE_CHECKING"
+    if isinstance(test, ast.Attribute):
+        return test.attr == "TYPE_CHECKING"
+    return False
 
 
 def _resolve_import_from(node: ast.ImportFrom, package: str) -> str:

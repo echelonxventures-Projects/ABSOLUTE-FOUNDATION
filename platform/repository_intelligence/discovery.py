@@ -482,7 +482,19 @@ def discover_dependencies(
     aggregated: dict[tuple[str, str], list[str]] = {}
     for module in substrate.source_modules():
         source_capability = module.capability
-        for imported in module.imports:
+        # import_time_imports, not imports: this graph decides the acyclicity rule, and a
+        # cycle is a property of module *initialisation*. A TYPE_CHECKING import is erased
+        # before anything resolves; a function-body import resolves on first call, once
+        # every module in the loop is already initialised. Neither can deadlock an import.
+        #
+        # Reading `imports` here reported both recorded cycles against code that was
+        # already decoupled on purpose: C-01 (certification -> validation -> runtime) had
+        # two of three edges under TYPE_CHECKING, in blocks whose own comments read
+        # "typing only, avoids import cycles"; and the universal_foundation ->
+        # universal_measurement -> universal_ownership loop was closed by a single
+        # function-local import in universal_ownership/cli.py. Deferring is the cure for a
+        # circular import, so counting it as one reported the fix as the defect.
+        for imported in module.import_time_imports:
             top = imported.split(".", 1)[0]
             if top not in roots:
                 continue
