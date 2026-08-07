@@ -57,6 +57,7 @@ class KnowledgeKind(str, Enum):
     ANTI_PATTERN = "anti-pattern"
     EXAMPLE = "example"
     REFERENCE = "reference"
+    LAW = "law"
 
     @classmethod
     def coerce(cls, value: Any, *, context: str = "knowledge") -> KnowledgeKind:

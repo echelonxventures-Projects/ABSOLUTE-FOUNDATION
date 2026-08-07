@@ -51,6 +51,12 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from engine.knowledge.model import (
+    KnowledgeAuthority,
+    KnowledgeKind,
+    Lifecycle,
+    RelationType,
+)
 from engine.uckp.canonical import canonical_json, content_hash
 from engine.uckp.constitution import (
     UNIVERSAL_RUNTIMES,
@@ -70,8 +76,11 @@ from engine.uckp.values import (
     TraceLink,
 )
 from engine.uckp.vocabulary import (
+    AUTHORITY_TIER,
     GOVERNED_CATEGORY,
+    KNOWLEDGE_KIND,
     LIFECYCLE_STAGE,
+    RELATION_TYPE,
     Term,
     Vocabulary,
     VocabularyRegistry,
@@ -529,7 +538,7 @@ def verify_invertible(
                 if content_hash(original[key]) != content_hash(reconstructed[key])
             )
             losses.append(
-                f"{obj.ucko_id} does not reconstruct: " f"missing={missing} changed={changed}"
+                f"{obj.ucko_id} does not reconstruct: missing={missing} changed={changed}"
             )
     return tuple(losses)
 
@@ -621,6 +630,49 @@ def require_lossless(report: AssimilationReport) -> None:
         )
 
 
+def verify_vocabulary_alignment(
+    vocabularies: VocabularyRegistry | None = None,
+) -> None:
+    """Verify the Enum projections in :mod:`engine.knowledge.model` match Layer Zero.
+
+    The four ``str``-enums — :class:`~engine.knowledge.model.KnowledgeKind`,
+    :class:`~engine.knowledge.model.KnowledgeAuthority`,
+    :class:`~engine.knowledge.model.Lifecycle` and
+    :class:`~engine.knowledge.model.RelationType` — are a typed projection of the
+    Layer Zero vocabularies.  The vocabulary is the canonical owner; the enum is a
+    convenience view.  This function fails closed if they ever diverge, so there is
+    one authority and one verified view rather than two competing declarations
+    (vocabulary.py, Articles 15 and 17).
+    """
+    registry = vocabularies or build_vocabulary_registry()
+    divergences: list[str] = []
+    checks = (
+        (KnowledgeKind, KNOWLEDGE_KIND),
+        (KnowledgeAuthority, AUTHORITY_TIER),
+        (Lifecycle, LIFECYCLE_STAGE),
+        (RelationType, RELATION_TYPE),
+    )
+    for enum_cls, vocabulary_id in checks:
+        vocabulary = registry.require(vocabulary_id)
+        enum_values = frozenset(member.value for member in enum_cls)
+        vocab_terms = frozenset(vocabulary.term_ids())
+        only_in_enum = sorted(enum_values - vocab_terms)
+        only_in_vocab = sorted(vocab_terms - enum_values)
+        if only_in_enum:
+            divergences.append(
+                f"{enum_cls.__name__} declares {only_in_enum!r} not registered in {vocabulary_id!r}"
+            )
+        if only_in_vocab:
+            divergences.append(
+                f"{vocabulary_id!r} declares {only_in_vocab!r} absent from {enum_cls.__name__}"
+            )
+    if divergences:
+        raise AssimilationError(
+            "vocabulary alignment failed: Enum projections diverge from Layer Zero vocabularies",
+            divergences=divergences,
+        )
+
+
 def build_assimilated_universe(
     *,
     source_root: str | Path | None = None,
@@ -687,4 +739,5 @@ __all__ = [
     "require_lossless",
     "semantic_definition",
     "verify_invertible",
+    "verify_vocabulary_alignment",
 ]
