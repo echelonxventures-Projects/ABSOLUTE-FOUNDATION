@@ -731,7 +731,12 @@ class CapabilityConformance:
     def maturity_percentage(self) -> float:
         """The share of declared maturity axes this capability reached."""
         reached = self.maturity()
-        if not reached:
+        if not reached:  # pragma: no cover - MATURITY_GATES is a non-empty literal
+            # maturity() emits exactly one key per MATURITY_GATES entry, and that name is a
+            # module-level dict literal every production reference only ever reads. No
+            # assignment, rebinding or removal exists, so len(reached) is the declared axis
+            # count and this division can never be by zero. The guard stays because the axis
+            # population is declared data: were it ever emptied, 0% is the honest reading.
             return 0.0
         return round(sum(1 for value in reached.values() if value) / len(reached) * 100, 4)
 

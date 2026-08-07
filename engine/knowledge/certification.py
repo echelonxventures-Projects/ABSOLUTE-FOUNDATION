@@ -29,8 +29,19 @@ KNOWLEDGE_CERTIFICATION_STANDARD_VERSION = "1.0.0"
 
 
 class CertStatus(str, Enum):
+    """The shared certification vocabulary (UKDA and UKIP mean the same by the same words).
+
+    ``DENIED`` and ``INCOMPLETE`` refine ``NOT_CERTIFIED`` for callers that must
+    distinguish *refused outright* (a blocking failure denies regardless of how many
+    criteria pass) from *not yet established* (nothing asserts against it). The UKIP
+    certifier is declared to reuse this vocabulary rather than redefine it
+    (:mod:`engine.knowledge.ukip.certification`), so the members it names live here.
+    """
+
     CERTIFIED = "certified"
     NOT_CERTIFIED = "not-certified"
+    DENIED = "denied"
+    INCOMPLETE = "incomplete"
 
 
 @dataclass(frozen=True, slots=True)

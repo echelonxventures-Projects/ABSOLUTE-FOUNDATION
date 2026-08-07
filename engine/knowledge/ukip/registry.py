@@ -413,7 +413,12 @@ class KnowledgeRegistry:
         if existing is None:
             record = RegisteredKnowledge.from_unit(unit, classification)
             chain = record.provenance
-            if not chain.has_stage(Stage.CLASSIFIED):
+            # The guard is idempotence, not a live fork: from_unit is called here without a
+            # provenance chain, so it opens one with begin_chain, which appends exactly
+            # OBSERVED then PROVIDED. A chain reaching this line therefore never carries
+            # CLASSIFIED. It stays so that a caller who one day supplies an already-classified
+            # chain cannot make the record claim a classification step twice.
+            if not chain.has_stage(Stage.CLASSIFIED):  # pragma: no branch
                 chain = chain.append(
                     Stage.CLASSIFIED,
                     actor=REGISTRY_ACTOR,
@@ -538,7 +543,12 @@ class KnowledgeRegistry:
         for alias, knowledge_id in sorted(self._key_index.items()):
             mapping[alias] = knowledge_id
             _, _, key = alias.partition(":")
-            if not key:
+            if not key:  # pragma: no cover - _index_key cannot produce an empty tail
+                # Every alias here was written by _index_key as f"{provider_id}:{unit.key}",
+                # so the tail after the first colon always contains at least unit.key — and
+                # KnowledgeUnit refuses a key that is empty or whitespace-only at
+                # construction. The guard stays because it is what makes the bare-key
+                # shorthand below safe to read without re-deriving that invariant here.
                 continue
             # A bare provider-local key is also accepted while it stays unambiguous,
             # so providers may cite peers by their own key without knowing the
