@@ -38,6 +38,9 @@ help:
 	@echo "  make closure-phase3-gate fail-closed PHASE-003 gate (non-zero exit while repository NOT-CLOSED)"
 	@echo "  make selfaware     project every discovered capability into canonical knowledge"
 	@echo "  make selfaware-gate     fail-closed when the capability register is behind the repo"
+	@echo "  make rpi           re-run repository intelligence and persist every sealed artefact"
+	@echo "  make rpi-report    read-only: the current cycle, its verdicts and validation rules"
+	@echo "  make rpi-gate      fail-closed while intelligence is NOT-CERTIFIED or non-deterministic"
 	@echo "  make homing        resolve each concept's canonical home from declared ownership"
 	@echo "  make homing-gate   fail-closed while any canonical home is undeclared (RG-B01)"
 	@echo "  make homing-recommend   the governance workload, reduced to its irreducible minimum"
@@ -233,6 +236,45 @@ selfaware-gate:
 	@python3 -m engine.knowledge.cli capabilities --gate >/dev/null \
 	  || { echo "SELF-AWARENESS STALE — run 'make selfaware' (capability register is behind the repository)" >&2; exit 1; }
 	@echo "self-awareness: canonical capability register is current"
+
+# ---------------------------------------------------------------------------
+# Ω-E06 M-04 / W1-4 — REPOSITORY INTELLIGENCE. The producer had no re-run target, so
+# nothing re-ran it: its certificate went 142 commits and 500 files stale while still
+# being read as current. A producer nobody re-runs does not measure the repository, it
+# measures whenever somebody last remembered to. These targets bind the producer to an
+# entry point and to a gate, which is the whole of the M-04 disposition (EXTEND).
+#
+# HONEST LIMIT: emit writes to .runtime/repository-intelligence/, and .gitignore:12
+# excludes .runtime/. The artefacts are therefore OUTSIDE Repository Truth — re-running
+# refreshes them locally but commits nothing a clone can reproduce. Staleness returns
+# the moment this is not run. Making the certificate durable requires W0-1, the
+# constitutional determination on .gitignore against the twelve Truth zones. These
+# targets close the "nothing re-runs it" half of M-04 and cannot close the other half.
+.PHONY: rpi rpi-report rpi-gate
+rpi: bootstrap-quiet
+	@$(PY) -m platform.repository_intelligence.cli emit
+
+# rpi-report: read-only — the current cycle with its dimension verdicts and validation
+# rules, persisting nothing. Non-zero while the repository is NOT-CERTIFIED.
+rpi-report: bootstrap-quiet
+	@$(PY) -m platform.repository_intelligence.cli scan
+
+# rpi-gate: fail-closed on BOTH halves of the M-04 defect, in the order that reports the
+# more actionable failure first.
+#
+# certify re-derives the certificate from the live repository, so a NOT-CERTIFIED verdict
+# is a finding about the repository and never a stale file being re-read.
+#
+# verify then proves the producer is deterministic: two scans of one substrate must yield
+# byte-identical artefacts. It is fail-closed on an INCONCLUSIVE proof too — a substrate
+# that changed mid-proof reports deterministic=False — so a concurrent writer cannot be
+# mistaken for a pass.
+rpi-gate: bootstrap-quiet
+	@$(PY) -m platform.repository_intelligence.cli certify >/dev/null \
+	  || { echo "REPOSITORY INTELLIGENCE NOT-CERTIFIED — run 'make rpi-report' for the blocking dimension and rule" >&2; exit 1; }
+	@$(PY) -m platform.repository_intelligence.cli verify >/dev/null \
+	  || { echo "REPOSITORY INTELLIGENCE NON-DETERMINISTIC — one substrate produced two different artefact sets; run 'make rpi-report'" >&2; exit 1; }
+	@echo "repository intelligence: certified, and one substrate reproduces one artefact set"
 
 # homing: CANONICAL HOME RESOLUTION — report which registered artifact each concept's
 # ownership is DECLARED by, and which concepts Repository Truth does not answer. Reads
