@@ -100,8 +100,8 @@ def test_the_repositorys_own_categories_and_programmes_get_their_own_vocabularie
     vocabularies = assimilated_universe.vocabularies()
     assert NATIVE_CATEGORY_VOCABULARY in vocabularies.vocabulary_ids()
     assert NATIVE_PROGRAM_VOCABULARY in vocabularies.vocabulary_ids()
-    assert len(assimilation_report.registered_categories) == 78
-    assert len(assimilation_report.registered_programs) == 75
+    assert len(assimilation_report.registered_categories) == 75  # W3-3: execut/archit/implem merged
+    assert len(assimilation_report.registered_programs) == 72  # W3-3: same 3 deduplicated
 
 
 def test_registration_is_idempotent_over_the_same_records(repo_root):

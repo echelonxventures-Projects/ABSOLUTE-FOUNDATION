@@ -318,6 +318,30 @@ CLASSIFY_RULES = [
 
     # 00-CMG/ meta-governance → CONSTITUTION volume (VOL-002, category CMG).
     (r"^00-CMG/", "CMG", "CMG", "VOL-002"),
+
+    # --- W3-3 CONSOLIDATE (C-03): truncation-variant category reconciliation --------
+    #     Root-level EXECUTION*/ARCHITECTURAL*/IMPLEMENTATION* files were falling through
+    #     to the path-derived catch-all, which truncated their stems to DERIVED_CATEGORY_MAXLEN
+    #     (6 chars) yielding EXECUT/ARCHIT/IMPLEM. These rules map them to their canonical
+    #     categories before the catch-all. Append-only: no existing classification changes
+    #     (allocate() is path-keyed; existing UIDs remain verbatim). The 9 affected artifacts
+    #     (5 EXECUT → EXEC, 4 ARCHIT → ARCH, 12 IMPLEM → IMP) reclassify to their canonical
+    #     volumes. Pattern: matches root-level files whose stem begins with the specified
+    #     prefix (after stripping leading NN- ordinal).
+
+    # Root-level EXECUTION-* and EXECUTIVE-* files → EXEC (CONTROL TOWER, VOL-020).
+    # Matches: 01-EXECUTION-CONTROLLER-ARCHITECTURE.md, 02-EXECUTION-LIFECYCLE.md,
+    #          04-EXECUTION-QUEUE-MODEL.md, 09-EXECUTION-GOVERNANCE.md, 08-EXECUTIVE-SUMMARY.md
+    (r"^(?:\d+[-_.])?EXECUT", "EXEC", "EXEC", "VOL-020"),
+
+    # Root-level ARCHITECTURAL-* and ARCHITECTURE-* files → ARCH (ARCHITECTURE, VOL-003).
+    # Matches: 03-ARCHITECTURAL-COMPLETENESS.md, 02-ARCHITECTURAL-STABILITY-CERTIFICATION.md,
+    #          07-ARCHITECTURE-FREEZE-EVIDENCE.md, 03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md
+    (r"^(?:\d+[-_.])?ARCHIT", "ARCH", "ARCH", "VOL-003"),
+
+    # Root-level IMPLEMENTATION-* files → IMP (IMPLEMENTATION, VOL-004).
+    # Matches: 04-IMPLEMENTATION-BACKLOG.md (+ 11 other IMPLEMENTATION-* root files)
+    (r"^(?:\d+[-_.])?IMPLEMENT", "IMP", "IMP", "VOL-004"),
 ]
 
 DEFAULT_CLASS = ("OTHER", "MISC", "VOL-000")

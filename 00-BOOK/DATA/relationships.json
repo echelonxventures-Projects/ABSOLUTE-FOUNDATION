@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T15:49:50+00:00",
+  "generated_at": "2026-08-07T08:34:19+00:00",
   "count": 12873,
   "relationships": [
     {
@@ -6341,18 +6341,18 @@
     {
       "edge_id": "UEDGE-000000793",
       "from": "UCOS-IMPLEMENTATI-000002",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000794",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000002",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000795",
@@ -6533,18 +6533,18 @@
     {
       "edge_id": "UEDGE-000000817",
       "from": "UCOS-ARCHITECTURA-000002",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-ARCH-000003",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000818",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-ARCH-000003",
       "to": "UCOS-ARCHITECTURA-000002",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000819",
@@ -6597,18 +6597,18 @@
     {
       "edge_id": "UEDGE-000000825",
       "from": "UCOS-IMPLEMENTATI-000005",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000826",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000005",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000827",
@@ -7365,34 +7365,34 @@
     {
       "edge_id": "UEDGE-000000921",
       "from": "UCOS-ARCHITECTURA-000001",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-ARCH-000003",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000922",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-ARCH-000003",
       "to": "UCOS-ARCHITECTURA-000001",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000923",
       "from": "UCOS-ARCHITECTURA-000003",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-ARCH-000003",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000924",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-ARCH-000003",
       "to": "UCOS-ARCHITECTURA-000003",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000925",
@@ -7461,18 +7461,18 @@
     {
       "edge_id": "UEDGE-000000933",
       "from": "UCOS-IMPLEMENTATI-000006",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000934",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000006",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000935",
@@ -7525,50 +7525,50 @@
     {
       "edge_id": "UEDGE-000000941",
       "from": "UCOS-IMPLEMENTATI-000001",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000942",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000001",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000943",
       "from": "UCOS-IMPLEMENTATI-000003",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000944",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000003",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000945",
       "from": "UCOS-IMPLEMENTATI-000007",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000946",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000007",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000947",
@@ -7925,18 +7925,18 @@
     {
       "edge_id": "UEDGE-000000991",
       "from": "UCOS-IMPLEMENTATI-000008",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000992",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000008",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000993",
@@ -7973,34 +7973,34 @@
     {
       "edge_id": "UEDGE-000000997",
       "from": "UCOS-IMPLEMENTATI-000012",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000998",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000012",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000000999",
       "from": "UCOS-IMPLEMENTATI-000011",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001000",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000011",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001001",
@@ -8165,18 +8165,18 @@
     {
       "edge_id": "UEDGE-000001021",
       "from": "UCOS-ARCHITECTURE-000001",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-ARCH-000003",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001022",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-ARCH-000003",
       "to": "UCOS-ARCHITECTURE-000001",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001023",
@@ -8341,18 +8341,18 @@
     {
       "edge_id": "UEDGE-000001043",
       "from": "UCOS-IMPLEMENTATI-000009",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001044",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000009",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001045",
@@ -8501,34 +8501,34 @@
     {
       "edge_id": "UEDGE-000001063",
       "from": "UCOS-IMPLEMENTATI-000010",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001064",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000010",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001065",
       "from": "UCOS-IMPLEMENTATI-000004",
-      "to": "UCOS-BOOK-000000",
+      "to": "UCOS-CEP-000001",
       "type": "Parent",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001066",
-      "from": "UCOS-BOOK-000000",
+      "from": "UCOS-CEP-000001",
       "to": "UCOS-IMPLEMENTATI-000004",
       "type": "Child",
       "inverse_of": null,
-      "note": "structural:book-root"
+      "note": "structural:program-root"
     },
     {
       "edge_id": "UEDGE-000001067",

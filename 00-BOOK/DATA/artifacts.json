@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T15:49:50+00:00",
+  "generated_at": "2026-08-07T08:34:19+00:00",
   "generator_version": "1.0.0",
   "count": 1220,
   "artifacts": [
@@ -46671,20 +46671,20 @@
       "native_id": null,
       "name": "04 — IMPLEMENTATION BACKLOG",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9197,
       "page_end": 9197,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "04-IMPLEMENTATION-BACKLOG.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -46692,7 +46692,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -46753,20 +46753,20 @@
       "native_id": null,
       "name": "01 — IMPLEMENTATION AUTHORITY ASSESSMENT (Executive)",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9200,
       "page_end": 9201,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "01-IMPLEMENTATION-AUTHORITY-ASSESSMENT.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -46774,7 +46774,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -46835,20 +46835,20 @@
       "native_id": null,
       "name": "03 — ARCHITECTURAL COMPLETENESS",
       "description": "",
-      "category": "ARCHIT",
-      "volume": "VOL-000",
+      "category": "ARCH",
+      "volume": "VOL-003",
       "page_start": 9204,
       "page_end": 9204,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-ARCH-000003",
       "dependencies": [],
-      "program": "ARCHIT",
+      "program": "ARCH",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "ARCHIT",
-        "ARCHIT",
-        "VOL-000"
+        "ARCH",
+        "ARCH",
+        "VOL-003"
       ],
       "path": "03-ARCHITECTURAL-COMPLETENESS.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -46856,7 +46856,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-ARCH-000003"
         ],
         "design": [],
         "implementation": [],
@@ -46876,20 +46876,20 @@
       "native_id": null,
       "name": "04 — IMPLEMENTATION READINESS",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9205,
       "page_end": 9206,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "04-IMPLEMENTATION-READINESS.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -46897,7 +46897,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -47081,20 +47081,20 @@
       "native_id": null,
       "name": "09 — IMPLEMENTATION SEQUENCE DETERMINATION",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9213,
       "page_end": 9213,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "09-IMPLEMENTATION-SEQUENCE-DETERMINATION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -47102,7 +47102,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -47655,20 +47655,20 @@
       "native_id": null,
       "name": "02 — CANONICAL IMPLEMENTATION MANIFEST",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9241,
       "page_end": 9243,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "02-IMPLEMENTATION-MANIFEST.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -47677,7 +47677,7 @@
         "requirement": [],
         "architecture": [
           "XXX-000",
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -47697,20 +47697,20 @@
       "native_id": null,
       "name": "03 — IMPLEMENTATION DEPENDENCY GRAPH",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9244,
       "page_end": 9245,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "03-IMPLEMENTATION-DEPENDENCY-GRAPH.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -47718,7 +47718,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -47738,20 +47738,20 @@
       "native_id": null,
       "name": "04 — IMPLEMENTATION WAVES",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9246,
       "page_end": 9247,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "04-IMPLEMENTATION-WAVES.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -47759,7 +47759,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -47779,20 +47779,20 @@
       "native_id": null,
       "name": "05 — TOPOLOGICAL IMPLEMENTATION ORDER",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9248,
       "page_end": 9250,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "05-IMPLEMENTATION-ORDER.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -47800,7 +47800,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -47902,20 +47902,20 @@
       "native_id": null,
       "name": "08 — IMPLEMENTATION READINESS MATRIX",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9255,
       "page_end": 9257,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "08-IMPLEMENTATION-READINESS-MATRIX.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -47923,7 +47923,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -47943,20 +47943,20 @@
       "native_id": null,
       "name": "09 — REPOSITORY-WIDE IMPLEMENTATION BACKLOG",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9258,
       "page_end": 9259,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "09-IMPLEMENTATION-BACKLOG.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -47964,7 +47964,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -48025,20 +48025,20 @@
       "native_id": null,
       "name": "01 — EXECUTION CONTROLLER ARCHITECTURE",
       "description": "",
-      "category": "EXECUT",
-      "volume": "VOL-000",
+      "category": "EXEC",
+      "volume": "VOL-020",
       "page_start": 9262,
       "page_end": 9263,
       "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-BOOK-000000",
       "dependencies": [],
-      "program": "EXECUT",
+      "program": "EXEC",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "EXECUT",
-        "EXECUT",
-        "VOL-000"
+        "EXEC",
+        "EXEC",
+        "VOL-020"
       ],
       "path": "01-EXECUTION-CONTROLLER-ARCHITECTURE.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -48066,20 +48066,20 @@
       "native_id": null,
       "name": "02 — EXECUTION LIFECYCLE",
       "description": "",
-      "category": "EXECUT",
-      "volume": "VOL-000",
+      "category": "EXEC",
+      "volume": "VOL-020",
       "page_start": 9264,
       "page_end": 9265,
       "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-BOOK-000000",
       "dependencies": [],
-      "program": "EXECUT",
+      "program": "EXEC",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "EXECUT",
-        "EXECUT",
-        "VOL-000"
+        "EXEC",
+        "EXEC",
+        "VOL-020"
       ],
       "path": "02-EXECUTION-LIFECYCLE.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -48148,20 +48148,20 @@
       "native_id": null,
       "name": "04 — EXECUTION QUEUE MODEL",
       "description": "",
-      "category": "EXECUT",
-      "volume": "VOL-000",
+      "category": "EXEC",
+      "volume": "VOL-020",
       "page_start": 9268,
       "page_end": 9269,
       "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-BOOK-000000",
       "dependencies": [],
-      "program": "EXECUT",
+      "program": "EXEC",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "EXECUT",
-        "EXECUT",
-        "VOL-000"
+        "EXEC",
+        "EXEC",
+        "VOL-020"
       ],
       "path": "04-EXECUTION-QUEUE-MODEL.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -48230,20 +48230,20 @@
       "native_id": null,
       "name": "06 — IMPLEMENTATION STATE MACHINE",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9272,
       "page_end": 9274,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "06-IMPLEMENTATION-STATE-MACHINE.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -48251,7 +48251,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -48353,20 +48353,20 @@
       "native_id": null,
       "name": "09 — EXECUTION GOVERNANCE MODEL",
       "description": "",
-      "category": "EXECUT",
-      "volume": "VOL-000",
+      "category": "EXEC",
+      "volume": "VOL-020",
       "page_start": 9279,
       "page_end": 9280,
       "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-BOOK-000000",
       "dependencies": [],
-      "program": "EXECUT",
+      "program": "EXEC",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "EXECUT",
-        "EXECUT",
-        "VOL-000"
+        "EXEC",
+        "EXEC",
+        "VOL-020"
       ],
       "path": "09-EXECUTION-GOVERNANCE.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -48476,20 +48476,20 @@
       "native_id": null,
       "name": "02 — ARCHITECTURAL STABILITY CERTIFICATION",
       "description": "",
-      "category": "ARCHIT",
-      "volume": "VOL-000",
+      "category": "ARCH",
+      "volume": "VOL-003",
       "page_start": 9285,
       "page_end": 9286,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-ARCH-000003",
       "dependencies": [],
-      "program": "ARCHIT",
+      "program": "ARCH",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "ARCHIT",
-        "ARCHIT",
-        "VOL-000"
+        "ARCH",
+        "ARCH",
+        "VOL-003"
       ],
       "path": "02-ARCHITECTURAL-STABILITY-CERTIFICATION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -48497,7 +48497,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-ARCH-000003"
         ],
         "design": [],
         "implementation": [],
@@ -48640,20 +48640,20 @@
       "native_id": null,
       "name": "06 — IMPLEMENTATION RISK ASSESSMENT",
       "description": "",
-      "category": "IMPLEM",
-      "volume": "VOL-000",
+      "category": "IMP",
+      "volume": "VOL-004",
       "page_start": 9293,
       "page_end": 9294,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-CEP-000001",
       "dependencies": [],
-      "program": "IMPLEM",
+      "program": "IMP",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "IMPLEM",
-        "IMPLEM",
-        "VOL-000"
+        "IMP",
+        "IMP",
+        "VOL-004"
       ],
       "path": "06-IMPLEMENTATION-RISK-ASSESSMENT.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -48661,7 +48661,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-CEP-000001"
         ],
         "design": [],
         "implementation": [],
@@ -48681,20 +48681,20 @@
       "native_id": null,
       "name": "07 — ARCHITECTURE FREEZE EVIDENCE",
       "description": "",
-      "category": "ARCHIT",
-      "volume": "VOL-000",
+      "category": "ARCH",
+      "volume": "VOL-003",
       "page_start": 9295,
       "page_end": 9296,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-ARCH-000003",
       "dependencies": [],
-      "program": "ARCHIT",
+      "program": "ARCH",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "ARCHIT",
-        "ARCHIT",
-        "VOL-000"
+        "ARCH",
+        "ARCH",
+        "VOL-003"
       ],
       "path": "07-ARCHITECTURE-FREEZE-EVIDENCE.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -48702,7 +48702,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-ARCH-000003"
         ],
         "design": [],
         "implementation": [],
@@ -48930,20 +48930,20 @@
       "native_id": null,
       "name": "03 — ARCHITECTURAL DECISION ASSIMILATION MATRIX",
       "description": "",
-      "category": "ARCHIT",
-      "volume": "VOL-000",
+      "category": "ARCH",
+      "volume": "VOL-003",
       "page_start": 9308,
       "page_end": 9309,
       "status": "ACTIVE",
       "version": "1.0.0",
-      "parent": "UCOS-BOOK-000000",
+      "parent": "UCOS-ARCH-000003",
       "dependencies": [],
-      "program": "ARCHIT",
+      "program": "ARCH",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "ARCHIT",
-        "ARCHIT",
-        "VOL-000"
+        "ARCH",
+        "ARCH",
+        "VOL-003"
       ],
       "path": "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
@@ -48951,7 +48951,7 @@
       "traceability": {
         "requirement": [],
         "architecture": [
-          "UCOS-BOOK-000000"
+          "UCOS-ARCH-000003"
         ],
         "design": [],
         "implementation": [],
@@ -49135,20 +49135,20 @@
       "native_id": null,
       "name": "08 — EXECUTIVE SUMMARY",
       "description": "",
-      "category": "EXECUT",
-      "volume": "VOL-000",
+      "category": "EXEC",
+      "volume": "VOL-020",
       "page_start": 9318,
       "page_end": 9319,
       "status": "ACTIVE",
       "version": "1.0.0",
       "parent": "UCOS-BOOK-000000",
       "dependencies": [],
-      "program": "EXECUT",
+      "program": "EXEC",
       "owner": "UCOS-PROGRAM-CUSTODIAN",
       "tags": [
-        "EXECUT",
-        "EXECUT",
-        "VOL-000"
+        "EXEC",
+        "EXEC",
+        "VOL-020"
       ],
       "path": "08-EXECUTIVE-SUMMARY.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
