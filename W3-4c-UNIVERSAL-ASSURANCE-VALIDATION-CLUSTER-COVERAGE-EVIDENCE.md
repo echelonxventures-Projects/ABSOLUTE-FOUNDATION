@@ -278,6 +278,44 @@ No file belonging to another session was edited to make the gate green — the o
 notified with the exact remediation and fixed their own files, including a production
 source (`planning.py`) that was failing `ruff format --check`.
 
+### 9.1 Commit record correction — `dfadda1` contains work this session did not author
+
+`dfadda1`'s message describes a one-file amendment to this document. **Its actual contents
+are 11 files, 2,556 insertions.** Ten of them belong to another session (Terminal T5,
+`platform.validation_intelligence`):
+
+```
+platform/tests/_validation_intelligence_helpers.py
+platform/tests/test_validation_intelligence_{analyzers,cli,compatibility,config,
+                contracts,determinism,engine,evidence,service}.py
+```
+
+**Cause.** This session staged its own file with an explicit pathspec
+(`git add W3-4c-…-EVIDENCE.md`) and then ran a bare `git commit`. An explicit `add` does
+not scope a commit: bare `git commit` commits **the whole index**, and the peer session had
+its files already staged in the shared index awaiting a green Stage 1. The explicit
+pathspec created a false sense of containment. `git commit -- <pathspec>` was required and
+was not used.
+
+**Compounding cause — a verification that could not fail.** The post-commit check was
+`git status --short | grep -v validation_intelligence`, which filtered out precisely the
+signal that would have exposed the contamination, then reported `(empty = clean)`. A check
+constructed so it cannot report the failure it is meant to detect is not a check. The
+filter was added to reduce noise from another session's files and instead suppressed the
+evidence.
+
+**State.** Nothing is lost or altered: the working tree matches the commit, the index is
+empty, and the ten files are byte-for-byte the peer's content.
+
+**Not corrected by rewriting history.** An amend or rebase to re-split `dfadda1` on a
+branch with three live sessions sharing one working tree and index would be far more
+destructive than the misattribution. The record is corrected here instead. Authorship of
+those ten files is Terminal T5's; `d55eb63` is clean (one file) and `845ad51` was staged by
+another session.
+
+**Practice adopted.** While sessions share this tree: explicit pathspecs on *commit*, not
+just on *add* — `git commit -- <files>` — and never `-a` or `add -A`.
+
 Tracking this document was itself measured rather than assumed safe: with it staged,
 `governance enforce --pre`, `ukb.py validate`, and the CMG gate all still pass. It joins
 five sibling root evidence documents already carried in the same UNREGISTERED-but-passing
