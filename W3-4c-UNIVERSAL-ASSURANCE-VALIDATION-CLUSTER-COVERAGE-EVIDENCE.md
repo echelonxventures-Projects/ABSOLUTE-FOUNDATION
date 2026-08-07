@@ -193,9 +193,40 @@ genuinely reached 90%.
 
 **This is outside this claim and was not modified.** It needs an explicit owner. The
 remedy is `precision = 4` under `[tool.coverage.report]`, which makes the comparison
-`round(total, 4) < 90`. It should not be applied casually: it will expose the true total,
-and if that total is currently below 90% the gate will turn red for every session at once.
-Measure with `--precision=4` first, then decide.
+`round(total, 4) < 90`.
+
+### Blast radius — measured, and smaller than first stated
+
+The initial version of this determination cautioned that applying the fix "will turn the
+gate red for every session at once if the true total is below 90%". That caution was
+written before the true total was known, and it is **overstated at the current tree**. A
+peer session measured the headroom; the figure was then re-verified here independently
+from the `.coverage` the last full `verify.sh` wrote:
+
+| measurement | value |
+|---|---|
+| precision 0 — what the gate compares | 94% |
+| precision 4 — the honest total | **94.3053%** |
+| headroom above the 90% floor | **+4.31 pts** |
+
+The loophole only bites when the true total lands in **[89.5, 90)**. Verified against
+`should_fail_under` directly:
+
+| true total | precision 0 | precision 4 |
+|---|---|---|
+| 94.3053% | pass | pass |
+| 89.9999% | pass | **FAIL** |
+| 89.5000% | pass | **FAIL** |
+| 89.4999% | FAIL | FAIL |
+
+So `precision = 4` is a **no-op at the current total** and can be applied safely today. The
+window in which the fix is harmless is exactly the window in which the corpus is
+comfortably above the floor — which argues for applying it while that holds rather than
+after coverage drifts down. Whoever picks it up should re-measure immediately before
+applying rather than trusting this number.
+
+**Not applied here.** Changing gate semantics repository-wide is outside this claim, and a
+peer's concurrence is not authorization for it. It is surfaced to the user for decision.
 
 ## 6.3 The superseded determination follows, unaltered
 
