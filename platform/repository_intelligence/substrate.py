@@ -212,6 +212,24 @@ class RepositorySubstrate:
         """Distinct capability names present in the code substrate, canonically ordered."""
         return tuple(sorted({m.capability for m in self.source_modules()}))
 
+    def location_is_populated(self, location: str) -> bool:
+        """Whether any tracked module lives at or beneath a repository-relative location.
+
+        This answers "is the thing the catalog claims actually here", which is a different
+        question from "does the substrate model it as a capability". A catalog entry may
+        name a real package at a granularity the capability model does not carry — a
+        nested sub-package, a test package, a bare code root — and that is a divergence in
+        naming, not a claim about something absent.
+
+        Measured over the tracked module facts rather than the filesystem, so the answer
+        stays a function of the substrate and cannot be changed by an untracked file.
+        """
+        cleaned = location.strip().strip("/")
+        if not cleaned:
+            return False
+        prefix = f"{cleaned}/"
+        return any(m.path == cleaned or m.path.startswith(prefix) for m in self.modules)
+
     def modules_of(self, capability: str) -> tuple[ModuleFact, ...]:
         return tuple(m for m in self.source_modules() if m.capability == capability)
 

@@ -69,6 +69,7 @@ MODULE_UNPARSED = "repository-module-unparsed"
 
 CATALOG_OMISSION = "capability-catalog-omission"
 CATALOG_PHANTOM = "conflict-catalog-phantom"
+CATALOG_GRANULARITY = "capability-catalog-granularity"
 CAPABILITY_UNDOCUMENTED = "capability-undocumented"
 
 REUSE_DIRECTIVE_MISSING = "reuse-directive-missing"
@@ -395,25 +396,55 @@ def discover_capabilities(
             )
 
     # Catalog entries that name a code capability which is not on disk are phantoms.
+    #
+    # "Not on disk" is tested against the location the catalog itself declares, NOT against
+    # membership of ``on_disk``. Those are different questions, and conflating them was
+    # C-02. ``implementation_capabilities`` deliberately narrows the capability set — it
+    # drops the bare code roots and the test packages, and says in its own docstring that
+    # including them "would manufacture false catalog omissions". Comparing the catalog
+    # against that narrowed set applied the exclusion in one direction only: it suppressed
+    # false omissions and manufactured false PHANTOMS out of the very same entries.
+    #
+    # The catalog is authoritative for capability identity — this module states twice that
+    # it never re-derives it — and it names capabilities at their real package depth, while
+    # ``_capability_name`` attributes every module to a depth-1 owner. Both are correct for
+    # their own dimension. Neither is evidence that a location is absent, which is the only
+    # thing "phantom" may mean.
     disk_set = set(on_disk)
     for name, entry in sorted(catalog.items()):
         if str(entry.get("category", "")) not in substrate.config.code_roots:
             continue
-        if name not in disk_set:
-            records.append(
-                CapabilityRecord(
-                    name=name,
-                    location=str(entry.get("canonical_location", "")),
-                    category=str(entry.get("category", "")),
-                    authority=str(entry.get("authority", "")),
-                    reuse_directive=str(entry.get("reuse", "")),
-                    replacement_prohibited=bool(entry.get("replacement_prohibited", False)),
-                    implementation_status=str(entry.get("implementation_status", "")),
-                    description=str(entry.get("description", "")),
-                    source=substrate.catalog_source,
-                    present_on_disk=False,
+        if name in disk_set:
+            continue
+        location = str(entry.get("canonical_location", ""))
+        if substrate.location_is_populated(location):
+            findings.append(
+                _advisory(
+                    CATALOG_GRANULARITY,
+                    dimension,
+                    name,
+                    "catalog names a real code location the capability model does not "
+                    "carry as a capability of its own; the location exists and its "
+                    "modules attribute to their owning capability",
+                    claimed_location=location,
+                    catalog_source=substrate.catalog_source,
                 )
             )
+            continue
+        records.append(
+            CapabilityRecord(
+                name=name,
+                location=location,
+                category=str(entry.get("category", "")),
+                authority=str(entry.get("authority", "")),
+                reuse_directive=str(entry.get("reuse", "")),
+                replacement_prohibited=bool(entry.get("replacement_prohibited", False)),
+                implementation_status=str(entry.get("implementation_status", "")),
+                description=str(entry.get("description", "")),
+                source=substrate.catalog_source,
+                present_on_disk=False,
+            )
+        )
 
     ordered = tuple(sorted(records, key=lambda r: r.name))
     return ordered, DimensionResult.create(dimension, tuple(findings))
