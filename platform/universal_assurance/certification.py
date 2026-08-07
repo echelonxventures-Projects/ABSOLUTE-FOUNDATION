@@ -47,6 +47,9 @@ from platform.universal_assurance.contracts import (
 from platform.universal_assurance.errors import AssuranceExecutionError
 from platform.universal_assurance.execution import ObligationOutcome, ValidationExecution
 from platform.universal_assurance.measurement import MeasurementReport
+from platform.universal_assurance.planning import (
+    REASON_UNSATISFIABLE as PLAN_REASON_UNSATISFIABLE,
+)
 from platform.universal_assurance.planning import AssurancePlan, gate_outcomes
 from platform.universal_assurance.policy import AssurancePolicy
 from typing import Any
@@ -78,7 +81,8 @@ CERTIFICATION_EXECUTION_FORMAT = "ucos-assurance-certification-execution/1.0.0"
 #: Fail-closed reconciliation reasons (recorded as data, never raised).
 REASON_UNKNOWN_CRITERION = "unknown-certification-criterion"
 REASON_UNKNOWN_FRAME = "unknown-certification-frame"
-REASON_UNSATISFIABLE = "unsatisfiable-obligation"
+#: Reused from planning: the same condition must not carry two spellings.
+REASON_UNSATISFIABLE = PLAN_REASON_UNSATISFIABLE
 REASON_NOT_EVALUATED = "not-evaluated"
 REASON_NO_DECISION = "no-certification-decision"
 REASON_MALFORMED_REPOSITORY_TRUTH = "malformed-repository-truth"

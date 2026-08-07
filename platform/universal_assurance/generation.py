@@ -35,7 +35,11 @@ from dataclasses import dataclass
 from platform.foundation.contracts import content_hash
 from platform.universal_assurance.contracts import ObligationKind, Severity
 from platform.universal_assurance.errors import AssuranceGenerationError
-from platform.universal_assurance.planning import AssurancePlan, PlannedObligation
+from platform.universal_assurance.planning import (
+    REASON_UNSATISFIABLE,
+    AssurancePlan,
+    PlannedObligation,
+)
 from platform.universal_validation.contracts import ValidationDomain
 from platform.universal_validation.rules import ValidationRule, default_rules
 from platform.validation_intelligence.contracts import IntelligenceDimension
@@ -48,7 +52,8 @@ SUITE_FORMAT = "ucos-assurance-validation-suite/1.0.0"
 UNBOUND_UNKNOWN_RULE = "unknown-validation-rule"
 UNBOUND_UNKNOWN_DIMENSION = "unknown-intelligence-dimension"
 UNBOUND_UNSUPPORTED_KIND = "unsupported-obligation-kind"
-UNBOUND_UNSATISFIABLE = "unsatisfiable-obligation"
+#: Reused from planning: the same condition must not carry two spellings.
+UNBOUND_UNSATISFIABLE = REASON_UNSATISFIABLE
 
 
 class RuleCatalog:

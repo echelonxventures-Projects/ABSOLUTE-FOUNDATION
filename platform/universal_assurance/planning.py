@@ -62,6 +62,12 @@ FACT_INTELLIGENCE_PREFIX = "intelligence."
 FACT_OBSERVATIONS_PREFIX = "observations."
 FACT_REPOSITORY_TRUTH = "repository_truth"
 
+#: The fail-closed reason recorded for an obligation whose required facts are absent.
+#: Planning is the earliest stage that can reach this verdict, so the string is defined
+#: here and reused by generation (``UNBOUND_UNSATISFIABLE``) and certification
+#: (``REASON_UNSATISFIABLE``) rather than restated — one condition, one vocabulary.
+REASON_UNSATISFIABLE = "unsatisfiable-obligation"
+
 
 class PlanKind(str, Enum):
     """Which owned planning capability produced a plan."""
@@ -290,6 +296,18 @@ class AssurancePlan:
     def obligation_ids(self) -> tuple[str, ...]:
         return tuple(item.id for item in self.planned)
 
+    def failure_reasons_for_shortfalls(self) -> dict[str, str]:
+        """A map of ``obligation id -> reason`` for every undecidable planned obligation.
+
+        The plan's contribution to the run-level gate evaluation, mirroring
+        :meth:`~platform.universal_assurance.execution.ValidationExecution.failure_reasons`.
+        An obligation that could not be decided from the supplied facts is a failure for
+        gate purposes at *either* severity — absence of evidence is never evidence of
+        correctness, and the sibling contributors to that same map report every
+        non-passing obligation regardless of severity.
+        """
+        return {item.id: REASON_UNSATISFIABLE for item in self.planned if not item.satisfiable}
+
     def obligations_of_kind(self, kind: ObligationKind) -> tuple[PlannedObligation, ...]:
         return tuple(item for item in self.planned if item.obligation.kind is kind)
 
@@ -497,6 +515,7 @@ __all__ = [
     "FACT_INTELLIGENCE_PREFIX",
     "FACT_OBSERVATIONS_PREFIX",
     "FACT_REPOSITORY_TRUTH",
+    "REASON_UNSATISFIABLE",
     "PlanKind",
     "resolve_fact_address",
     "PlannedObligation",
