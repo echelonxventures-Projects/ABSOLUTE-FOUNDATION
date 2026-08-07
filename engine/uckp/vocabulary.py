@@ -17,12 +17,14 @@ Two properties make this safe rather than merely flexible:
     * **Closed at the point of use.** :meth:`Vocabulary.require` refuses an
       unregistered term, so the openness is "register then use", not "anything goes".
 
-The seeded vocabularies below are the canonical home of these term sets. The
+The seeded vocabularies below are the canonical home of these term sets. Nine closed
+term sets elsewhere in the engine are a *checked projection* of one of them: the four
 ``Enum`` vocabularies in :mod:`engine.knowledge.model` (``KnowledgeKind``,
-``KnowledgeAuthority``, ``Lifecycle``, ``RelationType``) are a *checked projection*
-of them: :func:`engine.uckp.assimilation.verify_vocabulary_alignment` fails closed
-if the two ever diverge, so there is one authority and one verified view rather
-than two competing declarations.
+``KnowledgeAuthority``, ``Lifecycle``, ``RelationType``) and the five engine
+structural term sets contributed by CEP-MOD-002 M-1…M-5 (see below).
+:func:`engine.uckp.assimilation.verify_vocabulary_alignment` fails closed if any
+projection and its vocabulary ever diverge, so there is one authority and one
+verified view rather than two competing declarations.
 """
 
 from __future__ import annotations
@@ -347,8 +349,174 @@ NON_AUTHORITATIVE_CATEGORY_VOCABULARY = Vocabulary(
 )
 
 
+# ---------------------------------------------------------------------------
+# Engine structural vocabularies — CEP-MOD-002 M-1…M-5
+#
+# Five downstream engines each carried a closed term set where the
+# constitution declares the vocabulary open (Articles 15 and 17).  These
+# vocabularies move them inside the VocabularyRegistry so INV-14's
+# extensibility probe reaches them.  The existing Enum / tuple in each
+# engine file is retained as a checked projection.
+# ---------------------------------------------------------------------------
+
+#: Vocabulary identifiers for the five engine structural vocabularies.
+CIVILIZATION_STRATUM = "ucos.civilization-stratum"
+ARCHITECTURE_LAYER = "ucos.architecture-layer"
+PROJECTION_KIND = "ucos.projection-kind"
+UKIP_FACET = "ucos.ukip-facet"
+DISCOVERY_DIMENSION = "ucos.discovery-dimension"
+
+
+# M-1 — H-04: the nine-stratum generation chain
+# (engine/civilization/generation.py · GENERATION_STRATA).
+# Term.successors holds the immediate child (what is generated from this stratum).
+CIVILIZATION_STRATUM_VOCABULARY = Vocabulary(
+    CIVILIZATION_STRATUM,
+    "the constitutional generation lineage from the meta-kernel to a delivered solution",
+    (
+        Term(
+            "MetaKernelStratum",
+            "the highest constitutional authority; everything below derives from it",
+            successors=("MetaCivilizationStratum",),
+        ),
+        Term(
+            "MetaCivilizationStratum",
+            "the layer that generates constitutional operating systems",
+            successors=("BlueprintStratum",),
+        ),
+        Term(
+            "BlueprintStratum",
+            "the declaration from which a constitutional operating system is generated",
+            successors=("OperatingSystemStratum",),
+        ),
+        Term(
+            "OperatingSystemStratum",
+            "a generated, self-governing constitutional operating system for a domain",
+            successors=("NucleusStratum",),
+        ),
+        Term(
+            "NucleusStratum",
+            "the complete constitutional universe of exactly one canonical concept",
+            successors=("UniverseStratum",),
+        ),
+        Term(
+            "UniverseStratum",
+            "a governed composition of complete nuclei plus configuration",
+            successors=("CapabilityStratum",),
+        ),
+        Term(
+            "CapabilityStratum",
+            "a declared, discoverable, composable unit of realisable behaviour",
+            successors=("ComponentStratum",),
+        ),
+        Term(
+            "ComponentStratum",
+            "a realisation of a capability within a universe",
+            successors=("SolutionStratum",),
+        ),
+        Term("SolutionStratum", "a configuration of components; a delivered system"),
+    ),
+)
+
+
+# M-2 — H-05: the 14-layer architecture stack
+# (engine/graph/architecture/layers.py · LAYER_ORDER).
+# Term.rank = stack depth; rank 0 is the most foundational layer.
+# The _CATEGORY_LAYER mapping is excluded: a mapping between two term sets
+# has no representation in Vocabulary and is deferred per CEP-MOD-002 §7.1.
+ARCHITECTURE_LAYER_VOCABULARY = Vocabulary(
+    ARCHITECTURE_LAYER,
+    "the architectural layer stack; rank 0 is the most foundational",
+    (
+        Term("book", "books and indices", rank=0),
+        Term("constitution", "constitutional law and supremacy clauses", rank=1),
+        Term("governance", "governance decisions, ADRs, policies", rank=2),
+        Term("architecture", "architectural decisions and meta-models", rank=3),
+        Term("registry", "registries and nomenclature", rank=4),
+        Term("engineering", "engineering specifications", rank=5),
+        Term("implementation", "realised source, generated artefacts", rank=6),
+        Term("runtime", "execution environments and runtimes", rank=7),
+        Term("platform", "platform capabilities and adapters", rank=8),
+        Term("data", "data models and persistence schemas", rank=9),
+        Term("service", "service contracts and endpoints", rank=10),
+        Term("application", "application logic and features", rank=11),
+        Term("infrastructure", "infrastructure and deployment", rank=12),
+        Term("security", "security controls and policies", rank=13),
+    ),
+)
+
+
+# M-3 — H-06: projection output kinds and diagram kinds.
+# Merges KNOWN_PROJECTION_KINDS (engine/uckp/projection.py) and
+# DIAGRAM_NAMES (engine/graph/architecture/engine.py) into one registry entry.
+PROJECTION_KIND_VOCABULARY = Vocabulary(
+    PROJECTION_KIND,
+    "the output projection kinds a UCKO supports, plus the visualisation diagram kinds",
+    _terms(
+        {
+            "api": "a machine-readable API surface projection",
+            "capability": "a capability diagram projection",
+            "condensation": "a condensation (strongly-connected-components) diagram",
+            "database": "a relational or document database schema projection",
+            "dataset": "a structured dataset export projection",
+            "graph": "a knowledge-graph serialisation projection",
+            "json": "a JSON document projection",
+            "layer": "a layered architecture diagram projection",
+            "markdown": "a Markdown document projection",
+            "repository": "a repository artefact projection",
+            "runtime": "a runtime composition projection",
+            "source": "a source-code projection",
+            "user-interface": "a user-interface surface projection",
+        }
+    ),
+)
+
+
+# M-4 — H-02: the six UKIP classification facets
+# (engine/knowledge/ukip/classification.py · Facet).
+# Note: this is a DIFFERENT facet set from uckp.facet (engine/uckp/facets.py).
+# The two must never be merged — they name distinct decision dimensions.
+UKIP_FACET_VOCABULARY = Vocabulary(
+    UKIP_FACET,
+    "the six facets a complete UKIP classification decides",
+    _terms(
+        {
+            "authority": "the authority tier the object carries",
+            "kind": "the knowledge kind of the object",
+            "lifecycle": "the lifecycle stage of the object",
+            "owner": "the accountable owner of the object",
+            "universe": "the universe the object is filed under",
+            "version": "the version identifier of the object",
+        }
+    ),
+)
+
+
+# M-5 — H-01: the eight discovery dimensions
+# (engine/discovery/contracts.py · DiscoveryKind).
+# Highest constitutional severity of the five: DiscoveryKind.coerce() raises
+# on any unregistered value — the only H-site that hard-refuses an unknown
+# future member.
+DISCOVERY_DIMENSION_VOCABULARY = Vocabulary(
+    DISCOVERY_DIMENSION,
+    "the eight dimensions along which the constitutional corpus is discovered",
+    _terms(
+        {
+            "capability": "the capabilities the corpus declares",
+            "component": "the components the corpus contains",
+            "dependency": "the dependency graph of the corpus",
+            "document": "the documents the corpus contains",
+            "evidence": "the evidence the corpus holds",
+            "namespace": "the namespaces the corpus defines",
+            "ontology": "the ontology the corpus models",
+            "registry": "the registries the corpus holds",
+        }
+    ),
+)
+
+
 def build_vocabulary_registry() -> VocabularyRegistry:
-    """Return a fresh registry seeded with the Layer Zero vocabularies."""
+    """Return a fresh registry seeded with the Layer Zero and engine structural vocabularies."""
     return VocabularyRegistry(
         (
             KNOWLEDGE_KIND_VOCABULARY,
@@ -359,6 +527,12 @@ def build_vocabulary_registry() -> VocabularyRegistry:
             FACET_VOCABULARY_INSTANCE,
             GOVERNED_CATEGORY_VOCABULARY,
             NON_AUTHORITATIVE_CATEGORY_VOCABULARY,
+            # engine structural vocabularies (CEP-MOD-002 M-1…M-5)
+            CIVILIZATION_STRATUM_VOCABULARY,
+            ARCHITECTURE_LAYER_VOCABULARY,
+            PROJECTION_KIND_VOCABULARY,
+            UKIP_FACET_VOCABULARY,
+            DISCOVERY_DIMENSION_VOCABULARY,
         )
     )
 
@@ -369,9 +543,15 @@ DEFAULT_VOCABULARIES = build_vocabulary_registry()
 
 
 __all__ = [
+    "ARCHITECTURE_LAYER",
+    "ARCHITECTURE_LAYER_VOCABULARY",
     "AUTHORITY_TIER",
     "AUTHORITY_TIER_VOCABULARY",
+    "CIVILIZATION_STRATUM",
+    "CIVILIZATION_STRATUM_VOCABULARY",
     "DEFAULT_VOCABULARIES",
+    "DISCOVERY_DIMENSION",
+    "DISCOVERY_DIMENSION_VOCABULARY",
     "FACET_VOCABULARY",
     "FACET_VOCABULARY_INSTANCE",
     "GOVERNED_CATEGORY",
@@ -382,10 +562,14 @@ __all__ = [
     "LIFECYCLE_STAGE_VOCABULARY",
     "NON_AUTHORITATIVE_CATEGORY",
     "NON_AUTHORITATIVE_CATEGORY_VOCABULARY",
+    "PROJECTION_KIND",
+    "PROJECTION_KIND_VOCABULARY",
     "RELATIONSHIP_CLASS",
     "RELATIONSHIP_CLASS_VOCABULARY",
     "RELATION_TYPE",
     "RELATION_TYPE_VOCABULARY",
+    "UKIP_FACET",
+    "UKIP_FACET_VOCABULARY",
     "Term",
     "Vocabulary",
     "VocabularyRegistry",

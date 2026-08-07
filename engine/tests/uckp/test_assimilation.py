@@ -356,7 +356,7 @@ def test_the_report_serializes_and_summarizes(assimilation_report):
 def test_the_assimilated_universe_holds_the_constitution_and_the_corpus(
     assimilated_universe,
 ):
-    assert len(assimilated_universe.objects()) == 170 + 1220
+    assert len(assimilated_universe.objects()) == 175 + 1220
     assert len(assimilated_universe.discovery.providers_found) == 2
     assert "engine.uckp.assimilation" in assimilated_universe.registry.providers()
 

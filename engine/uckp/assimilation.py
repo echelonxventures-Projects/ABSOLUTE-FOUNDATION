@@ -51,12 +51,6 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from engine.knowledge.model import (
-    KnowledgeAuthority,
-    KnowledgeKind,
-    Lifecycle,
-    RelationType,
-)
 from engine.uckp.canonical import canonical_json, content_hash
 from engine.uckp.constitution import (
     UNIVERSAL_RUNTIMES,
@@ -76,11 +70,16 @@ from engine.uckp.values import (
     TraceLink,
 )
 from engine.uckp.vocabulary import (
+    ARCHITECTURE_LAYER,
     AUTHORITY_TIER,
+    CIVILIZATION_STRATUM,
+    DISCOVERY_DIMENSION,
     GOVERNED_CATEGORY,
     KNOWLEDGE_KIND,
     LIFECYCLE_STAGE,
+    PROJECTION_KIND,
     RELATION_TYPE,
+    UKIP_FACET,
     Term,
     Vocabulary,
     VocabularyRegistry,
@@ -630,45 +629,119 @@ def require_lossless(report: AssimilationReport) -> None:
         )
 
 
+def _projections() -> tuple[tuple[str, frozenset[str], str], ...]:
+    """Return every projection of a registered vocabulary as (name, members, vocabulary).
+
+    Every import here is function-local, and deliberately so.  ``engine.knowledge``,
+    ``engine.discovery``, ``engine.graph`` and ``engine.civilization`` are downstream
+    of ``engine.uckp`` and import it; importing them back at module level closes a
+    capability-level import cycle and fails the acyclicity rule W3-1 cleared.  W3-6
+    did exactly that with :mod:`engine.knowledge.model` — measured here as
+    ``engine.uckp <-> engine.knowledge``, 177 dependency edges against W3-1's 176 —
+    so the four Layer Zero enums are deferred alongside the five engine term sets.
+    A function-body import resolves on first call, once every module in the loop is
+    already initialised, which is precisely why ``discover_dependencies`` measures
+    ``import_time_imports`` rather than every ``Import`` node it can reach.
+
+    A guard over nine downstream term sets can only live upstream of all nine on
+    these terms.  Deferring is the cure for a circular import, not a workaround.
+    """
+    from engine.civilization.generation import GENERATION_STRATA
+    from engine.discovery.contracts import DiscoveryKind
+    from engine.graph.architecture.engine import DIAGRAM_NAMES
+    from engine.graph.architecture.layers import LAYER_ORDER
+    from engine.knowledge.model import (
+        KnowledgeAuthority,
+        KnowledgeKind,
+        Lifecycle,
+        RelationType,
+    )
+    from engine.knowledge.ukip.classification import Facet as UkipFacet
+    from engine.uckp.projection import KNOWN_PROJECTION_KINDS
+
+    layer_zero = tuple(
+        (enum_cls.__name__, frozenset(member.value for member in enum_cls), vocabulary_id)
+        for enum_cls, vocabulary_id in (
+            (KnowledgeKind, KNOWLEDGE_KIND),
+            (KnowledgeAuthority, AUTHORITY_TIER),
+            (Lifecycle, LIFECYCLE_STAGE),
+            (RelationType, RELATION_TYPE),
+        )
+    )
+    return layer_zero + (
+        # M-1 · H-04 — the stratum key is field 0 of the GENERATION_STRATA row.
+        (
+            "GENERATION_STRATA",
+            frozenset(row[0] for row in GENERATION_STRATA),
+            CIVILIZATION_STRATUM,
+        ),
+        # M-2 · H-05 — the term-set half only.  UNCLASSIFIED is a fallback for a
+        # category with no position in the stack, not a layer, so it is not a term;
+        # the _CATEGORY_LAYER mapping is deferred to its own CEP (§12.2).
+        ("LAYER_ORDER", frozenset(LAYER_ORDER), ARCHITECTURE_LAYER),
+        # M-3 · H-06 — one vocabulary, two projections: a UCKO output kind and a
+        # visualisation diagram kind are both projection kinds.
+        (
+            "KNOWN_PROJECTION_KINDS|DIAGRAM_NAMES",
+            frozenset(KNOWN_PROJECTION_KINDS) | frozenset(DIAGRAM_NAMES),
+            PROJECTION_KIND,
+        ),
+        # M-4 · H-02 — distinct from uckp.facet; the two name different decisions.
+        (
+            "ukip.classification.Facet",
+            frozenset(member.value for member in UkipFacet),
+            UKIP_FACET,
+        ),
+        # M-5 · H-01 — DiscoveryKind.coerce() hard-refuses an unregistered value,
+        # so this is the projection whose divergence bites soonest.
+        (
+            "DiscoveryKind",
+            frozenset(member.value for member in DiscoveryKind),
+            DISCOVERY_DIMENSION,
+        ),
+    )
+
+
 def verify_vocabulary_alignment(
     vocabularies: VocabularyRegistry | None = None,
 ) -> None:
-    """Verify the Enum projections in :mod:`engine.knowledge.model` match Layer Zero.
+    """Verify every projection of a registered vocabulary still matches its owner.
 
-    The four ``str``-enums — :class:`~engine.knowledge.model.KnowledgeKind`,
+    Nine closed term sets are a typed projection of a registered vocabulary.  Four
+    are the Layer Zero ``str``-enums in :mod:`engine.knowledge.model` —
+    :class:`~engine.knowledge.model.KnowledgeKind`,
     :class:`~engine.knowledge.model.KnowledgeAuthority`,
     :class:`~engine.knowledge.model.Lifecycle` and
-    :class:`~engine.knowledge.model.RelationType` — are a typed projection of the
-    Layer Zero vocabularies.  The vocabulary is the canonical owner; the enum is a
+    :class:`~engine.knowledge.model.RelationType`.  Five are the engine structural
+    term sets contributed by CEP-MOD-002 M-1…M-5: ``GENERATION_STRATA``,
+    ``LAYER_ORDER``, ``KNOWN_PROJECTION_KINDS`` with ``DIAGRAM_NAMES``, the UKIP
+    ``Facet`` enum and ``DiscoveryKind``.
+
+    In every case the vocabulary is the canonical owner and the local type is a
     convenience view.  This function fails closed if they ever diverge, so there is
     one authority and one verified view rather than two competing declarations
-    (vocabulary.py, Articles 15 and 17).
+    (vocabulary.py, Articles 15 and 17).  Contribution without this guard would move
+    the closure rather than close it: the registry would hold a term set nothing
+    checks the engine against.
     """
     registry = vocabularies or build_vocabulary_registry()
     divergences: list[str] = []
-    checks = (
-        (KnowledgeKind, KNOWLEDGE_KIND),
-        (KnowledgeAuthority, AUTHORITY_TIER),
-        (Lifecycle, LIFECYCLE_STAGE),
-        (RelationType, RELATION_TYPE),
-    )
-    for enum_cls, vocabulary_id in checks:
+    for projection, declared, vocabulary_id in _projections():
         vocabulary = registry.require(vocabulary_id)
-        enum_values = frozenset(member.value for member in enum_cls)
         vocab_terms = frozenset(vocabulary.term_ids())
-        only_in_enum = sorted(enum_values - vocab_terms)
-        only_in_vocab = sorted(vocab_terms - enum_values)
-        if only_in_enum:
+        only_in_projection = sorted(declared - vocab_terms)
+        only_in_vocab = sorted(vocab_terms - declared)
+        if only_in_projection:
             divergences.append(
-                f"{enum_cls.__name__} declares {only_in_enum!r} not registered in {vocabulary_id!r}"
+                f"{projection} declares {only_in_projection!r} not registered in {vocabulary_id!r}"
             )
         if only_in_vocab:
             divergences.append(
-                f"{vocabulary_id!r} declares {only_in_vocab!r} absent from {enum_cls.__name__}"
+                f"{vocabulary_id!r} declares {only_in_vocab!r} absent from {projection}"
             )
     if divergences:
         raise AssimilationError(
-            "vocabulary alignment failed: Enum projections diverge from Layer Zero vocabularies",
+            "vocabulary alignment failed: projections diverge from their registered vocabularies",
             divergences=divergences,
         )
 

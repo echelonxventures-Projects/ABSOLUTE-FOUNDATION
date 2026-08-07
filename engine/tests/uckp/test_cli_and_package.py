@@ -50,7 +50,7 @@ def test_certify_covers_validation_assimilation_and_the_universe(tmp_path, capsy
     payload = json.loads(capsys.readouterr().out)
     assert payload["verdict"] == "certified"
     assert payload["assimilation"]["lossless"] is True
-    assert payload["universe"]["counts"]["objects"] == 1390
+    assert payload["universe"]["counts"]["objects"] == 1395
 
 
 def test_assimilate_implies_the_artifact_corpus_without_being_asked_twice(tmp_path, capsys):

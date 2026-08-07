@@ -4,8 +4,11 @@ from __future__ import annotations
 
 import pytest
 
+from engine.civilization.generation import GENERATION_STRATA
+from engine.graph.architecture.layers import LAYER_ORDER, UNCLASSIFIED
+from engine.uckp.assimilation import verify_vocabulary_alignment
 from engine.uckp.canonical import content_hash
-from engine.uckp.errors import LawViolation
+from engine.uckp.errors import AssimilationError, LawViolation
 from engine.uckp.law import (
     GOVERNED_CATEGORIES,
     LAW_ID,
@@ -18,11 +21,17 @@ from engine.uckp.law import (
     StopCondition,
 )
 from engine.uckp.vocabulary import (
+    ARCHITECTURE_LAYER,
     AUTHORITY_TIER,
+    CIVILIZATION_STRATUM,
     DEFAULT_VOCABULARIES,
+    DISCOVERY_DIMENSION,
+    FACET_VOCABULARY,
     KNOWLEDGE_KIND,
     LIFECYCLE_STAGE,
+    PROJECTION_KIND,
     RELATION_TYPE,
+    UKIP_FACET,
     Term,
     Vocabulary,
     VocabularyRegistry,
@@ -196,9 +205,9 @@ def test_every_invariant_is_blocking():
 # --- vocabularies ---------------------------------------------------------------
 
 
-def test_the_default_registry_declares_the_eight_layer_zero_vocabularies():
+def test_the_default_registry_declares_the_thirteen_vocabularies():
     registry = build_vocabulary_registry()
-    assert len(registry.vocabulary_ids()) == 8
+    assert len(registry.vocabulary_ids()) == 13
     assert DEFAULT_VOCABULARIES.vocabulary_ids() == registry.vocabulary_ids()
 
 
@@ -335,3 +344,87 @@ def test_the_registry_reports_itself_closed_when_a_vocabulary_swallows_an_extens
     registry = VocabularyRegistry((Swallowing("test.closed", "closed in practice"),))
     assert registry.is_extensible() is False
     assert build_vocabulary_registry().is_extensible() is True
+
+
+# --- the five engine structural vocabularies (CEP-MOD-002 M-1…M-5) ---------------
+
+
+@pytest.mark.parametrize(
+    ("vocabulary_id", "size"),
+    [
+        (CIVILIZATION_STRATUM, 9),
+        (ARCHITECTURE_LAYER, 14),
+        (PROJECTION_KIND, 13),
+        (UKIP_FACET, 6),
+        (DISCOVERY_DIMENSION, 8),
+    ],
+)
+def test_each_engine_vocabulary_is_registered_and_admits_a_stranger(vocabulary_id, size):
+    """INV-14 could not reach these term sets while they lived only in engine code."""
+    registry = build_vocabulary_registry()
+    vocabulary = registry.require(vocabulary_id)
+    assert len(vocabulary.term_ids()) == size
+    assert all(vocabulary.get(term_id).definition for term_id in vocabulary.term_ids())
+    registry.extend(vocabulary_id, Term("uckp.probe.future", "an unregistered future member"))
+    assert registry.require(vocabulary_id).has("uckp.probe.future")
+
+
+def test_every_projection_matches_the_vocabulary_that_owns_it():
+    """Nine closed term sets, nine registered owners, zero divergences. Fails closed."""
+    verify_vocabulary_alignment()
+
+
+def test_the_ukip_facets_and_the_uckp_facets_are_not_the_same_vocabulary():
+    """Two facet sets name two different decisions; merging them would fork meaning."""
+    registry = build_vocabulary_registry()
+    ukip = set(registry.require(UKIP_FACET).term_ids())
+    uckp = set(registry.require(FACET_VOCABULARY).term_ids())
+    assert ukip != uckp
+    assert UKIP_FACET != FACET_VOCABULARY
+
+
+def test_the_stratum_lineage_is_the_generation_chain_read_forwards():
+    """GENERATION_STRATA records a predecessor; the vocabulary records the successor."""
+    strata = build_vocabulary_registry().require(CIVILIZATION_STRATUM)
+    for key, _name, predecessor, _definition in GENERATION_STRATA:
+        if predecessor is not None:
+            assert strata.can_transition(predecessor, key)
+    assert strata.require("SolutionStratum").successors == ()
+
+
+def test_the_layer_rank_is_the_stack_depth_the_engine_measures():
+    """A layer's depth is its index in LAYER_ORDER, so Term.rank must be that index."""
+    layers = build_vocabulary_registry().require(ARCHITECTURE_LAYER)
+    for term_id in layers.term_ids():
+        assert layers.require(term_id).rank == LAYER_ORDER.index(term_id)
+
+
+def test_the_unclassified_fallback_is_not_a_layer():
+    """It is what a category gets when it has no position in the stack, not a position."""
+    assert UNCLASSIFIED not in build_vocabulary_registry().require(ARCHITECTURE_LAYER).term_ids()
+
+
+def test_alignment_fails_closed_when_a_vocabulary_gains_a_term_the_engine_lacks():
+    """The guard's whole purpose: registration without projection is a live divergence."""
+    registry = build_vocabulary_registry()
+    registry.extend(DISCOVERY_DIMENSION, Term("prophecy", "a dimension nobody discovers yet"))
+    with pytest.raises(AssimilationError, match="vocabulary alignment failed") as raised:
+        verify_vocabulary_alignment(registry)
+    assert "'prophecy'" in str(raised.value.context["divergences"])
+
+
+def test_alignment_fails_closed_when_the_engine_declares_an_unregistered_term():
+    """The other direction: a term set may not outrun the registry that owns it."""
+    seeded = build_vocabulary_registry()
+    declared = seeded.require(UKIP_FACET)
+    registry = VocabularyRegistry(
+        Vocabulary(
+            UKIP_FACET, declared.purpose, tuple(t for t in declared.terms if t.term_id != "version")
+        )
+        if vocabulary_id == UKIP_FACET
+        else seeded.require(vocabulary_id)
+        for vocabulary_id in seeded.vocabulary_ids()
+    )
+    with pytest.raises(AssimilationError, match="vocabulary alignment failed") as raised:
+        verify_vocabulary_alignment(registry)
+    assert "'version'" in str(raised.value.context["divergences"])
