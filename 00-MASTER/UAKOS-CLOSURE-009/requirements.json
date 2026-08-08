@@ -12,12 +12,12 @@
   "baseline": {
     "branch": "integration/recovery-001",
     "classifier_source": "00-BOOK/tools/config.py::CLASSIFY_RULES",
-    "closure_baseline_commit": "05ce974",
+    "closure_baseline_commit": "89d3baf",
     "closure_determination": "CLOSED",
     "closure_gap_total": 0,
     "concept_total": 549,
-    "head_commit": "05ce974",
-    "tracked_total": 5582
+    "head_commit": "89d3baf",
+    "tracked_total": 5590
   },
   "baseline_conditions": [
     {
@@ -2506,15 +2506,14 @@
       ".github": 1,
       "00-BOOK": 87,
       "00-CEP": 20,
-      "00-MASTER": 312,
+      "00-MASTER": 319,
       "02-MASTER": 18,
       "08-RUNTIME": 14,
       "09-PLATFORM": 18,
       "10-DATA": 18,
       "11-SERVICE": 18,
       "12-APPLICATION": 18,
-      "13-INFRASTRUCTURE": 18,
-      "engine": 7
+      "13-INFRASTRUCTURE": 18
     },
     "certification_status": {
       "CERTIFIED-PROVISIONAL": 241,
@@ -25846,7 +25845,7 @@
     {
       "assimilation_action": "REUSED",
       "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "engine",
+      "canonical_owner": "00-MASTER",
       "category": "UNCLASSIFIED",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-ALIAS-0001",
@@ -25855,7 +25854,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 1,
+      "evidence_files": 5,
       "evidence_kinds": [
         "test"
       ],
@@ -25870,7 +25869,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 1 evidence files · zones engine)",
+      "repository_location": "(non-filename home · 5 evidence files · zones 00-MASTER+engine)",
       "requirement_id": "RR-UCKO-ALIAS-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -26038,7 +26037,7 @@
     {
       "assimilation_action": "REUSED",
       "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "engine",
+      "canonical_owner": "00-MASTER",
       "category": "UNCLASSIFIED",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-EXPLICIT-0001",
@@ -26047,7 +26046,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 1,
+      "evidence_files": 5,
       "evidence_kinds": [
         "test"
       ],
@@ -26062,7 +26061,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 1 evidence files · zones engine)",
+      "repository_location": "(non-filename home · 5 evidence files · zones 00-MASTER+engine)",
       "requirement_id": "RR-UCKO-EXPLICIT-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -26085,7 +26084,7 @@
     {
       "assimilation_action": "REUSED",
       "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "engine",
+      "canonical_owner": "00-MASTER",
       "category": "UNCLASSIFIED",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-NOBODY-0001",
@@ -26094,7 +26093,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 1,
+      "evidence_files": 5,
       "evidence_kinds": [
         "test"
       ],
@@ -26109,7 +26108,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 1 evidence files · zones engine)",
+      "repository_location": "(non-filename home · 5 evidence files · zones 00-MASTER+engine)",
       "requirement_id": "RR-UCKO-NOBODY-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -26225,7 +26224,7 @@
     {
       "assimilation_action": "REUSED",
       "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "engine",
+      "canonical_owner": "00-MASTER",
       "category": "UNCLASSIFIED",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-PEER-0001",
@@ -26234,7 +26233,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 1,
+      "evidence_files": 5,
       "evidence_kinds": [
         "test"
       ],
@@ -26249,7 +26248,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 1 evidence files · zones engine)",
+      "repository_location": "(non-filename home · 5 evidence files · zones 00-MASTER+engine)",
       "requirement_id": "RR-UCKO-PEER-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -27203,7 +27202,7 @@
     {
       "assimilation_action": "REUSED",
       "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "engine",
+      "canonical_owner": "00-MASTER",
       "category": "UNCLASSIFIED",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-TARGET-0001",
@@ -27212,7 +27211,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 1,
+      "evidence_files": 5,
       "evidence_kinds": [
         "test"
       ],
@@ -27227,7 +27226,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 1 evidence files · zones engine)",
+      "repository_location": "(non-filename home · 5 evidence files · zones 00-MASTER+engine)",
       "requirement_id": "RR-UCKO-TARGET-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -27298,7 +27297,7 @@
     {
       "assimilation_action": "REUSED",
       "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "engine",
+      "canonical_owner": "00-MASTER",
       "category": "UNCLASSIFIED",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-WRONG-0001",
@@ -27307,7 +27306,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 1,
+      "evidence_files": 5,
       "evidence_kinds": [
         "test"
       ],
@@ -27322,7 +27321,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 1 evidence files · zones engine)",
+      "repository_location": "(non-filename home · 5 evidence files · zones 00-MASTER+engine)",
       "requirement_id": "RR-UCKO-WRONG-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -27345,7 +27344,7 @@
     {
       "assimilation_action": "REUSED",
       "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "engine",
+      "canonical_owner": "00-MASTER",
       "category": "UNCLASSIFIED",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-X-0001",
@@ -27354,7 +27353,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 1,
+      "evidence_files": 5,
       "evidence_kinds": [
         "test"
       ],
@@ -27369,7 +27368,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 1 evidence files · zones engine)",
+      "repository_location": "(non-filename home · 5 evidence files · zones 00-MASTER+engine)",
       "requirement_id": "RR-UCKO-X-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -34391,7 +34390,7 @@
       "volume": "UNCLASSIFIED"
     }
   ],
-  "seal_sha256": "3eaa965255ffca827c30eb04229d0df99e8dfc52274bc33968156841299fbef4",
+  "seal_sha256": "00fd8803c087cbf9aac46e82daf18c83b02f40e9c2634c92d3f19f6a12b95ecf",
   "systemic_findings": [
     {
       "id": "RG-S01",
