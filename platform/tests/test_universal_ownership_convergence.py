@@ -72,7 +72,15 @@ PROJECTION = "00-BOOK/DATA/artifacts.json"
 #: the measured population: Ω-A12 registered the Foundation's specialisation catalogue as a
 #: concept (541 → 542), and the one new concept stands unresolved (390 → 391), so each count
 #: moves by exactly its measured amount while declared and contested hold still.
-RETIRED_MEASUREMENT = {"total": 542, "declared": 151, "contested": 0, "unresolved": 391}
+#:
+#: CLOSURE-SYNC-001 advances it again for the same reason. UAKOS-CLOSURE-002 now measures 549
+#: concepts: the seven UCKO-{ALIAS,EXPLICIT,NOBODY,PEER,TARGET,WRONG,X}-0001 identities carried
+#: by engine/tests/knowledge/ukip/test_registry.py — a file tracked since W0-2 and unmodified
+#: since — became visible to the concept scan when the upstream model was re-rendered. All
+#: seven stand unresolved, so total moves 542 → 549 and unresolved 391 → 398 by exactly the
+#: measured population delta, while declared (151) and contested (0) hold still. Those two
+#: are the convergence claim: the retired resolver's answer is still reproduced exactly.
+RETIRED_MEASUREMENT = {"total": 549, "declared": 151, "contested": 0, "unresolved": 398}
 
 
 def _home(*registered: str, **kwargs) -> CanonicalHomePolicy:
