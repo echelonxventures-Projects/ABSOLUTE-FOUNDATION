@@ -45,3 +45,35 @@ class EvidenceError(ControlPlaneError):
 
 class SchedulerError(ControlPlaneError):
     """The scheduler could not produce a valid schedule (cycle, missing dependency, etc.)."""
+
+
+class ManifestError(ControlPlaneError):
+    """The declared control-plane manifest is absent, unreadable or structurally invalid."""
+
+
+class TruthDiscoveryError(ControlPlaneError):
+    """Repository Truth could not be discovered from the declared sources."""
+
+
+class GovernanceStateError(ControlPlaneError):
+    """A governance state could not be resolved or is structurally invalid."""
+
+
+class CertificationStateError(ControlPlaneError):
+    """A certification state could not be resolved or is structurally invalid."""
+
+
+class VersionError(ControlPlaneError):
+    """A version could not be parsed, compared, promoted or rolled back."""
+
+
+class EvolutionError(ControlPlaneError):
+    """An evolution delta could not be computed or replayed."""
+
+
+class JournalError(ControlPlaneError):
+    """The durable journal is unreadable, corrupt, or its chain does not verify."""
+
+
+class LinkageError(ControlPlaneError):
+    """A constitutional linkage is incomplete — an orphan capability."""

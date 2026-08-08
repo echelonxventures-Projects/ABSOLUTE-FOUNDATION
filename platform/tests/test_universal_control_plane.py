@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import io
 import json
+from platform.tests.control_plane_helpers import FIXTURE_ARTIFACTS, build_substrate
 from platform.universal_control_plane import (
     DEFAULT_LIFECYCLE,
     LIFECYCLE_ACTIVE,
@@ -1780,65 +1781,235 @@ class TestEvidenceEngine:
 
 # ---------------------------------------------------------------------------
 # CLI
+#
+# Every command reads discovered repository state, so each test drives the CLI
+# against a hermetic fixture substrate rather than the packaged registry. That
+# keeps the suite fast and — more importantly — proves the CLI carries no path:
+# if any command reached for the real repository, none of these would pass.
 # ---------------------------------------------------------------------------
 
-COMMANDS = ("state", "registries", "plan", "roadmap", "backlog", "schedule", "dashboard")
+COMMANDS = cli_mod.COMMANDS
 
 
-def _invoke(argv):
+@pytest.fixture(scope="module")
+def substrate(tmp_path_factory):
+    root = tmp_path_factory.mktemp("cli-substrate")
+    repository_root, data_dir = build_substrate(root)
+    return repository_root, data_dir, root / "runtime"
+
+
+def _invoke(argv, substrate=None):
     out, err = io.StringIO(), io.StringIO()
+    if substrate is not None:
+        repository_root, data_dir, journal_root = substrate
+        argv = [
+            *argv,
+            "--data-dir",
+            str(data_dir),
+            "--repository-root",
+            str(repository_root),
+            "--journal-root",
+            str(journal_root),
+        ]
     code = cli_run(argv, out=out, err=err)
     return code, out.getvalue(), err.getvalue()
 
 
 class TestCLI:
     @pytest.mark.parametrize("command", COMMANDS)
-    def test_command_succeeds_and_writes_text(self, command):
-        code, out, err = _invoke([command])
+    def test_command_succeeds_and_writes_text(self, command, substrate):
+        code, out, err = _invoke([command], substrate)
         assert code == 0
         assert out.strip()
         assert err == ""
 
     @pytest.mark.parametrize("command", COMMANDS)
-    def test_command_json_is_parsable(self, command):
-        code, out, _ = _invoke([command, "--json"])
+    def test_command_json_is_parsable(self, command, substrate):
+        code, out, _ = _invoke([command, "--json"], substrate)
         assert code == 0
         assert isinstance(json.loads(out), dict)
 
     @pytest.mark.parametrize("command", COMMANDS)
-    def test_command_is_deterministic(self, command):
-        assert _invoke([command, "--json"])[1] == _invoke([command, "--json"])[1]
+    def test_command_is_deterministic(self, command, substrate):
+        """Two runs over identical repository state must be byte-identical.
 
-    def test_state_lists_lifecycle_states(self):
-        payload = json.loads(_invoke(["state", "--json"])[1])
+        The two journal-reading commands are excluded here and covered by
+        :meth:`test_journal_commands_are_deterministic_from_a_fresh_journal`
+        instead: a shared journal is append-only, so the second run legitimately
+        sees more entries than the first. That is the durability property, not a
+        determinism failure — but it does mean the byte-equality has to be
+        measured from an equal starting state to mean anything.
+        """
+        if command in cli_mod.JOURNAL_COMMANDS:
+            pytest.skip("covered against a fresh journal, since a shared one is append-only")
+        assert (
+            _invoke([command, "--json"], substrate)[1] == _invoke([command, "--json"], substrate)[1]
+        )
+
+    @pytest.mark.parametrize("command", sorted(cli_mod.JOURNAL_COMMANDS))
+    def test_journal_commands_are_deterministic_from_a_fresh_journal(
+        self, command, substrate, tmp_path
+    ):
+        import shutil
+
+        repository_root, data_dir, _ = substrate
+        journal_root = tmp_path / "journal"
+        outputs = []
+        for _ in (1, 2):
+            # Same path both times — a differing path would show up as a
+            # difference in the output and mask a real divergence.
+            shutil.rmtree(journal_root, ignore_errors=True)
+            out, err = io.StringIO(), io.StringIO()
+            assert (
+                cli_run(
+                    [
+                        command,
+                        "--json",
+                        "--data-dir",
+                        str(data_dir),
+                        "--repository-root",
+                        str(repository_root),
+                        "--journal-root",
+                        str(journal_root),
+                    ],
+                    out=out,
+                    err=err,
+                )
+                == 0
+            )
+            outputs.append(out.getvalue())
+        assert outputs[0] == outputs[1]
+
+    def test_state_lists_lifecycle_states(self, substrate):
+        payload = json.loads(_invoke(["state", "--json"], substrate)[1])
         assert LIFECYCLE_DRAFT in json.dumps(payload)
         assert LIFECYCLE_COMPLETE in json.dumps(payload)
 
-    def test_registries_reports_all_four(self):
-        payload = json.loads(_invoke(["registries", "--json"])[1])
+    def test_registries_reports_all_four(self, substrate):
+        payload = json.loads(_invoke(["registries", "--json"], substrate)[1])
         assert len(payload["registries"]) == 4
 
-    def test_plan_reports_demo_plan(self):
-        payload = json.loads(_invoke(["plan", "--json"])[1])
+    def test_truth_reports_the_declared_sources(self, substrate):
+        payload = json.loads(_invoke(["truth", "--json"], substrate)[1])
+        assert payload["counts"]["artifacts"] == len(FIXTURE_ARTIFACTS)
+        assert {s["source_id"] for s in payload["sources"]} == {
+            "artifacts",
+            "relationships",
+            "certification",
+            "change_ledger",
+            "capability_catalog",
+        }
+
+    def test_plan_is_derived_from_registered_programmes(self, substrate):
+        payload = json.loads(_invoke(["plan", "--json"], substrate)[1])
         assert payload["visions"] == 1
-        assert payload["goals"] == 1
-        assert payload["objectives"] == 1
+        # One goal per programme the fixture artifacts declare.
+        assert payload["goals"] == len({a["program"] for a in FIXTURE_ARTIFACTS})
+        assert payload["objectives"] >= payload["goals"]
 
-    def test_roadmap_reports_demo_milestones(self):
-        assert json.loads(_invoke(["roadmap", "--json"])[1])["total_milestones"] == 2
+    def test_roadmap_is_derived_from_registry_volumes(self, substrate):
+        payload = json.loads(_invoke(["roadmap", "--json"], substrate)[1])
+        assert payload["total_milestones"] == len({a["volume"] for a in FIXTURE_ARTIFACTS})
+        assert [m["sequence"] for m in payload["milestones"]] == [0, 1, 2]
 
-    def test_backlog_reports_demo_items(self):
-        payload = json.loads(_invoke(["backlog", "--json"])[1])
-        assert payload["count"] == 3
-        assert payload["total_estimate"] == 9
+    def test_backlog_is_derived_from_governance_violations(self, substrate):
+        payload = json.loads(_invoke(["backlog", "--json"], substrate)[1])
+        governance = json.loads(_invoke(["governance", "--json"], substrate)[1])
+        assert payload["count"] == governance["counts"]["violations"]
+        assert payload["count"] > 0
+        assert {i["attributes"]["rule_id"] for i in payload["items"]} <= {
+            r["rule_id"] for r in governance["rules"]
+        }
 
-    def test_schedule_assigns_every_ready_item(self):
-        payload = json.loads(_invoke(["schedule", "--json"])[1])
-        assert payload["total_entries"] == 3
-        assert payload["wave_count"] == 1
+    def test_schedule_covers_every_ready_backlog_item(self, substrate):
+        backlog = json.loads(_invoke(["backlog", "--json"], substrate)[1])
+        payload = json.loads(_invoke(["schedule", "--json"], substrate)[1])
+        assert payload["total_entries"] == backlog["count"]
+        assert payload["wave_count"] >= 1
 
-    def test_dashboard_contains_every_section(self):
-        payload = json.loads(_invoke(["dashboard", "--json"])[1])
+    def test_registration_reports_every_required_engine(self, substrate):
+        payload = json.loads(_invoke(["registration", "--json"], substrate)[1])
+        names = {r["name"] for r in payload["registrations"]}
+        assert set(cli_mod.ControlPlane.__module__.split()) or True  # module import sanity
+        from platform.universal_control_plane import REQUIRED_ENGINES
+
+        assert set(REQUIRED_ENGINES) <= names
+        assert payload["counts"]["unclassified"] == 0
+
+    def test_governance_can_report_a_single_subject(self, substrate):
+        payload = json.loads(
+            _invoke(["governance", "--json", "--subject", "UCOS-GOV-000001"], substrate)[1]
+        )
+        assert payload["subject_id"] == "UCOS-GOV-000001"
+        assert payload["kind"] == "GovernanceRecord"
+
+    def test_certification_can_report_a_single_subject(self, substrate):
+        payload = json.loads(
+            _invoke(["certification", "--json", "--subject", "UCOS-GOV-000001"], substrate)[1]
+        )
+        assert payload["subject_id"] == "UCOS-GOV-000001"
+        assert payload["kind"] == "CertificationState"
+
+    def test_version_can_report_a_single_subject(self, substrate):
+        payload = json.loads(
+            _invoke(["version", "--json", "--subject", "UCOS-GOV-000001"], substrate)[1]
+        )
+        assert payload["subject_id"] == "UCOS-GOV-000001"
+        assert "artifact" in payload["kinds"]
+
+    def test_unknown_subject_is_an_operational_error(self, substrate):
+        code, out, err = _invoke(["governance", "--subject", "NOPE"], substrate)
+        assert code == 1
+        assert "no governance state resolved" in err
+        assert out == ""
+
+    def test_evolution_reports_a_verified_replay_digest(self, substrate):
+        payload = json.loads(_invoke(["evolution", "--json"], substrate)[1])
+        assert payload["counts"]["changes"] > 0
+        assert len(payload["replay_digest"]) == 64
+
+    def test_linkage_reports_no_orphans(self, substrate):
+        payload = json.loads(_invoke(["linkage", "--json"], substrate)[1])
+        assert payload["counts"]["orphans"] == 0
+        assert payload["coverage"] == 1.0
+
+    def test_consumption_measures_every_bound_domain(self, substrate):
+        payload = json.loads(_invoke(["consumption", "--json"], substrate)[1])
+        assert payload["operational"] is True
+        assert payload["counts"]["failed"] == 0
+
+    def test_replay_reconstructs_state_from_the_journal(self, substrate):
+        payload = json.loads(_invoke(["replay", "--json"], substrate)[1])
+        assert payload["journal"]["count"] > 0
+        assert payload["state"]["counts"]["registrations"] > 0
+
+    def test_replay_without_a_journal_root_still_reconstructs(self, tmp_path):
+        """A journal-reading command with no ``--journal-root`` gets a fresh one
+        rather than failing: the reconstruction is of this run's own record."""
+        repository_root, data_dir = build_substrate(tmp_path)
+        code, out, _ = _invoke(
+            [
+                "replay",
+                "--json",
+                "--data-dir",
+                str(data_dir),
+                "--repository-root",
+                str(repository_root),
+            ]
+        )
+        assert code == 0
+        assert json.loads(out)["state"]["counts"]["registrations"] > 0
+
+    def test_completion_passes_and_exits_zero(self, substrate):
+        code, out, err = _invoke(["completion", "--json"], substrate)
+        payload = json.loads(out)
+        assert payload["complete"] is True, payload["failures"]
+        assert payload["total"] == 10
+        assert code == 0
+        assert err == ""
+
+    def test_dashboard_contains_every_section(self, substrate):
+        payload = json.loads(_invoke(["dashboard", "--json"], substrate)[1])
         assert payload["dashboard"] == "UCOS-CTRL-000001"
         for section in (
             "plan",
@@ -1851,29 +2022,24 @@ class TestCLI:
         ):
             assert section in payload
 
-    def test_dashboard_reports_the_empty_assignment_section(self):
-        """The CLI builds an AssignmentEngine it never assigns into. Its to_dict()
-        is still a non-empty mapping, so the truthiness gate in
+    def test_dashboard_reports_the_empty_assignment_section(self, substrate):
+        """The plane composes an AssignmentEngine it never assigns into. Its
+        to_dict() is still a non-empty mapping, so the truthiness gate in
         DashboardEngine.snapshot keeps the section — reporting zero, not nothing."""
-        payload = json.loads(_invoke(["dashboard", "--json"])[1])
+        payload = json.loads(_invoke(["dashboard", "--json"], substrate)[1])
         assert payload["assignments"] == {"total": 0, "active": 0}
 
-    def test_universe_id_flag_is_threaded_through(self):
-        out = _invoke(["plan", "--json", "--universe-id", "OTHER-U"])[1]
-        assert "OTHER-U" in out
-        assert "UCOS-CTRL-000001" not in out
+    def test_tick_flag_is_threaded_through(self, substrate):
+        payload = json.loads(_invoke(["truth", "--json", "--tick", "7"], substrate)[1])
+        assert payload["tick"] == 7
 
-    def test_universe_id_appears_in_registries_output(self):
-        out = _invoke(["registries", "--json", "--universe-id", "OTHER-U"])[1]
-        assert "OTHER-U" in out
-
-    def test_pretty_output_renders_nested_structures(self):
-        out = _invoke(["registries"])[1]
+    def test_pretty_output_renders_nested_structures(self, substrate):
+        out = _invoke(["registries"], substrate)[1]
         assert "registries:" in out
         assert "count:" in out
 
-    def test_pretty_output_renders_scalar_lists(self):
-        out = _invoke(["state"])[1]
+    def test_pretty_output_renders_scalar_lists(self, substrate):
+        out = _invoke(["state"], substrate)[1]
         assert "- " in out
 
     def test_pretty_renders_a_bare_scalar_payload(self):
@@ -1898,28 +2064,58 @@ class TestCLI:
             cli_run(["--help"])
         assert exc.value.code == 0
 
-    def test_control_plane_error_returns_1(self, monkeypatch):
-        def boom(_uid):
-            raise RegistrationError("demo universe is unbuildable")
+    def test_control_plane_error_returns_1(self, monkeypatch, substrate):
+        def boom(**_kwargs):
+            raise RegistrationError("the control plane is undiscoverable")
 
-        monkeypatch.setattr(cli_mod, "_demo_universe", boom)
-        code, out, err = _invoke(["state"])
+        monkeypatch.setattr(cli_mod.ControlPlane, "discover", staticmethod(boom))
+        code, out, err = _invoke(["state"], substrate)
         assert code == 1
-        assert "error: demo universe is unbuildable" in err
+        assert "error: the control plane is undiscoverable" in err
         assert out == ""
 
-    def test_unexpected_error_returns_2(self, monkeypatch):
-        def boom(_uid):
+    def test_unexpected_error_returns_2(self, monkeypatch, substrate):
+        def boom(**_kwargs):
             raise RuntimeError("something structural broke")
 
-        monkeypatch.setattr(cli_mod, "_demo_universe", boom)
-        code, _, err = _invoke(["state"])
+        monkeypatch.setattr(cli_mod.ControlPlane, "discover", staticmethod(boom))
+        code, _, err = _invoke(["state"], substrate)
         assert code == 2
         assert "fatal: something structural broke" in err
 
-    def test_main_exits_with_run_code(self):
+    def test_completion_exits_one_when_the_gate_is_not_met(self, monkeypatch, substrate):
+        """The gate is usable in CI: a failing criterion must set the exit code,
+        not merely appear in the report nobody reads."""
+        from platform.universal_control_plane.discovery import CompletionReport, GateCriterion
+
+        monkeypatch.setattr(
+            cli_mod.ControlPlane,
+            "completion",
+            lambda self: CompletionReport(
+                universe_id="U",
+                truth_id="t",
+                criteria=(GateCriterion("invented-criterion", False, "0 of 1"),),
+            ),
+        )
+        code, out, err = _invoke(["completion", "--json"], substrate)
+        assert code == 1
+        assert json.loads(out)["complete"] is False
+        assert "gate not met: invented-criterion" in err
+
+    def test_main_exits_with_run_code(self, substrate):
+        repository_root, data_dir, journal_root = substrate
         with pytest.raises(SystemExit) as exc:
-            cli_main(["state"])
+            cli_main(
+                [
+                    "state",
+                    "--data-dir",
+                    str(data_dir),
+                    "--repository-root",
+                    str(repository_root),
+                    "--journal-root",
+                    str(journal_root),
+                ]
+            )
         assert exc.value.code == 0
 
     def test_main_propagates_failure_code(self, monkeypatch):
@@ -1928,6 +2124,20 @@ class TestCLI:
             cli_main(["state"])
         assert exc.value.code == 1
 
-    def test_run_defaults_to_process_streams(self, capsys):
-        assert cli_run(["state"]) == 0
+    def test_run_defaults_to_process_streams(self, capsys, substrate):
+        repository_root, data_dir, journal_root = substrate
+        assert (
+            cli_run(
+                [
+                    "state",
+                    "--data-dir",
+                    str(data_dir),
+                    "--repository-root",
+                    str(repository_root),
+                    "--journal-root",
+                    str(journal_root),
+                ]
+            )
+            == 0
+        )
         assert capsys.readouterr().out.strip()

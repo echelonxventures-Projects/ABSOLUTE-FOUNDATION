@@ -66,6 +66,38 @@ class ProgressEngine:
         self._records.setdefault(subject_id, []).append(record)
         return record
 
+    def measure_counts(
+        self,
+        subject_id: str,
+        *,
+        total: int,
+        completed: int,
+        tick: int = 0,
+    ) -> ProgressRecord:
+        """Record progress from counts a caller already measured.
+
+        The counterpart of :meth:`measure` for populations that are not backlog
+        items — governed objects, certified engines, closed linkages. Without it a
+        caller would have to fabricate a list of items it does not have just to
+        report a ratio it does.
+        """
+        if total < 0 or completed < 0:
+            raise ValueError("progress counts must be non-negative")
+        if completed > total:
+            raise ValueError(
+                f"completed ({completed}) cannot exceed total ({total}) for {subject_id!r}"
+            )
+        record = ProgressRecord(
+            record_id=_prid(subject_id, tick),
+            subject_id=subject_id,
+            total=total,
+            completed=completed,
+            state=LIFECYCLE_ACTIVE,
+            tick=tick,
+        )
+        self._records.setdefault(subject_id, []).append(record)
+        return record
+
     def latest(self, subject_id: str) -> ProgressRecord | None:
         history = self._records.get(subject_id, [])
         return history[-1] if history else None

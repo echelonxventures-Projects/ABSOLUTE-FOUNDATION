@@ -1,16 +1,28 @@
 """UCOS-CTRL-000001 — Universal Control Plane CLI.
 
-One-command surface over the Control Plane:
+One command over the whole control plane. Every subcommand reads *discovered*
+repository state — there is no demo mode and no sample data behind any of them:
 
-    ucos-ctrl state          # list registered lifecycle states and transitions
-    ucos-ctrl registries     # summarise all four registries
-    ucos-ctrl plan           # show master plan summary
-    ucos-ctrl roadmap        # show roadmap milestone sequence
-    ucos-ctrl backlog        # show ordered backlog
-    ucos-ctrl schedule       # produce and display a schedule (demo mode)
-    ucos-ctrl dashboard      # full unified dashboard snapshot
+    ucos-ctrl truth           Repository Truth: sources, counts, classification
+    ucos-ctrl state           registered lifecycle states and transitions
+    ucos-ctrl registries      the four registries after engine registration
+    ucos-ctrl registration    every registered control-plane engine
+    ucos-ctrl plan            the master plan derived from registered programmes
+    ucos-ctrl roadmap         milestones derived from registry volumes
+    ucos-ctrl backlog         work derived from governance violations
+    ucos-ctrl schedule        the derived backlog scheduled across discovered agents
+    ucos-ctrl governance      per-object governance state and violations
+    ucos-ctrl certification   certification status, eligibility and criteria
+    ucos-ctrl version         version lineages across all seven dimensions
+    ucos-ctrl evolution       observed change, deltas and replay digest
+    ucos-ctrl linkage         constitutional linkage and any orphans
+    ucos-ctrl consumption     measured cross-system consumption
+    ucos-ctrl replay          durable journal reconstruction
+    ucos-ctrl dashboard       the unified snapshot
+    ucos-ctrl completion      the ten-criterion completion gate
 
-Exit codes: 0 success, 1 operational error, 2 fatal/argument error.
+Exit codes: 0 success, 1 operational error, 2 fatal/argument error. ``completion``
+additionally exits 1 when the gate does not pass, so it is usable in CI.
 """
 
 from __future__ import annotations
@@ -18,32 +30,33 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from pathlib import Path
+from platform.universal_control_plane.discovery import ControlPlane
 from platform.universal_control_plane.errors import ControlPlaneError
-from platform.universal_control_plane.execution import AssignmentEngine, Scheduler
-from platform.universal_control_plane.intelligence import (
-    DashboardEngine,
-    MetricsEngine,
-    ProgressEngine,
-)
-from platform.universal_control_plane.ontology import (
-    AgentRecord,
-    BacklogItem,
-    Capability,
-    Goal,
-    Milestone,
-    Objective,
-    OwnershipRecord,
-    Vision,
-)
-from platform.universal_control_plane.plan import BacklogEngine, PlanEngine, RoadmapEngine
-from platform.universal_control_plane.registry import (
-    AgentRegistry,
-    CapabilityRegistry,
-    DependencyRegistry,
-    OwnershipRegistry,
-)
-from platform.universal_control_plane.state import StateEngine
 from typing import Any
+
+COMMANDS: tuple[str, ...] = (
+    "truth",
+    "state",
+    "registries",
+    "registration",
+    "plan",
+    "roadmap",
+    "backlog",
+    "schedule",
+    "governance",
+    "certification",
+    "version",
+    "evolution",
+    "linkage",
+    "consumption",
+    "replay",
+    "dashboard",
+    "completion",
+)
+
+#: Commands that need a durable journal to answer at all.
+JOURNAL_COMMANDS: frozenset[str] = frozenset({"replay", "completion"})
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -51,151 +64,30 @@ def _build_parser() -> argparse.ArgumentParser:
         prog="ucos-ctrl",
         description="UCOS-CTRL-000001 Universal Control Plane (UCOS Ω∞).",
     )
-    parser.add_argument(
-        "command",
-        choices=("state", "registries", "plan", "roadmap", "backlog", "schedule", "dashboard"),
-        help="the operation to perform",
-    )
+    parser.add_argument("command", choices=COMMANDS, help="the operation to perform")
     parser.add_argument("--json", action="store_true", dest="as_json", help="emit JSON on stdout")
     parser.add_argument(
-        "--universe-id",
-        default="UCOS-CTRL-000001",
-        help="universe ID for demo data (default: UCOS-CTRL-000001)",
+        "--data-dir",
+        default=None,
+        help="registry data directory to discover from (default: the packaged substrate)",
+    )
+    parser.add_argument(
+        "--repository-root",
+        default=None,
+        help="repository root for declared derived-truth artifacts (default: resolved)",
+    )
+    parser.add_argument(
+        "--journal-root",
+        default=None,
+        help="root beneath which the durable replay journal is opened",
+    )
+    parser.add_argument(
+        "--tick", type=int, default=0, help="logical tick for this run (default: 0)"
+    )
+    parser.add_argument(
+        "--subject", default=None, help="restrict the output to one subject id where supported"
     )
     return parser
-
-
-def _demo_universe(
-    universe_id: str,
-) -> tuple[
-    CapabilityRegistry,
-    OwnershipRegistry,
-    DependencyRegistry,
-    AgentRegistry,
-    PlanEngine,
-    RoadmapEngine,
-    BacklogEngine,
-    StateEngine,
-]:
-    """Build a minimal demo Control Plane for CLI inspection."""
-    cap_reg = CapabilityRegistry()
-    own_reg = OwnershipRegistry()
-    dep_reg = DependencyRegistry()
-    agt_reg = AgentRegistry()
-    plan_eng = PlanEngine()
-    road_eng = RoadmapEngine()
-    back_eng = BacklogEngine()
-    state_eng = StateEngine()
-
-    # Register the Control Plane universe as a capability.
-    cap_reg.register(
-        Capability(
-            capability_id="CTRL-CAP-001",
-            universe_id=universe_id,
-            name="Universal Control Plane",
-            description="Engineering operating system",
-        )
-    )
-    cap_reg.register(
-        Capability(
-            capability_id="CTRL-CAP-002",
-            universe_id=universe_id,
-            name="Universal State Engine",
-            description="Lifecycle governance",
-        )
-    )
-    own_reg.register(
-        OwnershipRecord(
-            ownership_id="OWN-001",
-            capability_id="CTRL-CAP-001",
-            owner_id=universe_id,
-            owner_kind="Universe",
-            rationale="Constitutional ownership",
-        )
-    )
-    agt_reg.register(
-        AgentRecord(
-            agent_id="AGT-001",
-            name="Execution Agent Alpha",
-            kind="AUTONOMOUS",
-            capabilities=("CTRL-CAP-001",),
-        )
-    )
-    agt_reg.register(
-        AgentRecord(
-            agent_id="AGT-002",
-            name="Execution Agent Beta",
-            kind="AUTONOMOUS",
-            capabilities=("CTRL-CAP-002",),
-        )
-    )
-
-    vision = Vision(
-        vision_id="VIS-001",
-        universe_id=universe_id,
-        statement="A universal engineering operating system, infinite by design.",
-    )
-    plan_eng.register_vision(vision)
-    goal = Goal(
-        goal_id="GOAL-001",
-        vision_id="VIS-001",
-        title="Implement the Control Plane",
-        priority="CRITICAL",
-    )
-    plan_eng.register_goal(goal)
-    obj = Objective(
-        objective_id="OBJ-001",
-        goal_id="GOAL-001",
-        title="Foundation Layer",
-        success_criteria="All engines pass verification",
-    )
-    plan_eng.register_objective(obj)
-
-    m1 = Milestone(
-        milestone_id="MS-001",
-        universe_id=universe_id,
-        title="Constitutional Foundation",
-        sequence=1,
-        objective_ids=("OBJ-001",),
-    )
-    m2 = Milestone(
-        milestone_id="MS-002", universe_id=universe_id, title="Execution Layer", sequence=2
-    )
-    road_eng.register(m1)
-    road_eng.register(m2)
-
-    back_eng.add(
-        BacklogItem(
-            item_id="BLI-001",
-            universe_id=universe_id,
-            title="Implement ontology",
-            priority="CRITICAL",
-            milestone_id="MS-001",
-            estimate=3,
-        )
-    )
-    back_eng.add(
-        BacklogItem(
-            item_id="BLI-002",
-            universe_id=universe_id,
-            title="Implement state engine",
-            priority="HIGH",
-            milestone_id="MS-001",
-            estimate=2,
-        )
-    )
-    back_eng.add(
-        BacklogItem(
-            item_id="BLI-003",
-            universe_id=universe_id,
-            title="Implement scheduler",
-            priority="MEDIUM",
-            milestone_id="MS-002",
-            estimate=4,
-        )
-    )
-
-    return cap_reg, own_reg, dep_reg, agt_reg, plan_eng, road_eng, back_eng, state_eng
 
 
 def _emit(payload: Any, *, as_json: bool, stream=None) -> None:
@@ -225,6 +117,84 @@ def _pretty(data: Any, out, indent: int = 0) -> None:
         print(f"{pad}{data}", file=out)
 
 
+def _default_journal_root(args: argparse.Namespace) -> Path | None:
+    """Where the journal lives for this run, when the command needs one.
+
+    A command that reads the journal gets a temporary one rather than failing:
+    the reconstruction is still real, it simply starts from this run's own
+    determinations. Pass ``--journal-root`` to read or extend a durable one.
+    """
+    if args.journal_root:
+        return Path(args.journal_root)
+    if args.command in JOURNAL_COMMANDS:
+        import tempfile
+
+        return Path(tempfile.mkdtemp(prefix="ucos-ctrl-journal-"))
+    return None
+
+
+def _payload(plane: ControlPlane, command: str, subject: str | None) -> Any:
+    """Project the composed control plane for one command."""
+    if command == "truth":
+        return plane.truth.to_dict(tick=plane.tick)
+    if command == "state":
+        return plane.state.to_dict()
+    if command == "registries":
+        return {
+            "registries": [
+                plane.registration.capability_registry.to_dict(),
+                plane.registration.ownership_registry.to_dict(),
+                plane.registration.dependency_registry.to_dict(),
+                plane.agents.to_dict(),
+            ]
+        }
+    if command == "registration":
+        return plane.registration.to_dict()
+    if command == "plan":
+        return plane.plan.to_dict()
+    if command == "roadmap":
+        return plane.roadmap.to_dict()
+    if command == "backlog":
+        return plane.backlog.to_dict()
+    if command == "schedule":
+        return plane.schedule().to_dict()
+    if command == "governance":
+        if subject:
+            return plane.governance.state_of(subject).to_dict()
+        return plane.governance.to_dict()
+    if command == "certification":
+        if subject:
+            return plane.certification.state_of(subject).to_dict()
+        return plane.certification.to_dict()
+    if command == "version":
+        if subject:
+            return {
+                "subject_id": subject,
+                "kinds": list(plane.version.kinds_for(subject)),
+                "lineages": {
+                    kind: [r.to_dict() for r in plane.version.lineage(subject, kind=kind)]
+                    for kind in plane.version.kinds_for(subject)
+                },
+            }
+        return plane.version.to_dict()
+    if command == "evolution":
+        return plane.evolution.to_dict()
+    if command == "linkage":
+        return plane.linkage.to_dict()
+    if command == "consumption":
+        plane.consume()
+        return plane.consumption.to_dict()
+    if command == "replay":
+        if plane.journal is None:  # pragma: no cover — guarded by _default_journal_root
+            raise ControlPlaneError("no durable journal is open; pass --journal-root")
+        return {"journal": plane.journal.to_dict(), "state": plane.journal.reconstruct().to_dict()}
+    if command == "dashboard":
+        return plane.dashboard()
+    # completion
+    plane.consume()
+    return plane.completion().to_dict()
+
+
 def run(argv: list[str] | None = None, *, out=None, err=None) -> int:
     out = out or sys.stdout
     err = err or sys.stderr
@@ -232,70 +202,20 @@ def run(argv: list[str] | None = None, *, out=None, err=None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        uid = args.universe_id
-        cap_reg, own_reg, dep_reg, agt_reg, plan_eng, road_eng, back_eng, state_eng = (
-            _demo_universe(uid)
+        plane = ControlPlane.discover(
+            data_dir=args.data_dir,
+            repository_root=args.repository_root,
+            journal_root=_default_journal_root(args),
+            tick=args.tick,
         )
-
-        if args.command == "state":
-            payload = state_eng.to_dict()
-
-        elif args.command == "registries":
-            payload = {
-                "registries": [
-                    cap_reg.to_dict(),
-                    own_reg.to_dict(),
-                    dep_reg.to_dict(),
-                    agt_reg.to_dict(),
-                ]
-            }
-
-        elif args.command == "plan":
-            payload = plan_eng.to_dict()
-
-        elif args.command == "roadmap":
-            payload = road_eng.to_dict()
-
-        elif args.command == "backlog":
-            payload = back_eng.to_dict()
-
-        elif args.command == "schedule":
-            scheduler = Scheduler()
-            schedule = scheduler.schedule(back_eng.ready(), dep_reg, agt_reg, tick=0)
-            payload = schedule.to_dict()
-
-        elif args.command == "dashboard":
-            scheduler = Scheduler()
-            schedule = scheduler.schedule(back_eng.ready(), dep_reg, agt_reg, tick=0)
-            assign_eng = AssignmentEngine()
-            prog_eng = ProgressEngine()
-            prog_eng.measure(uid, back_eng.ordered(), tick=0)
-            met_eng = MetricsEngine()
-            met_eng.record(uid, "backlog.count", float(back_eng.count()), tick=0)
-            met_eng.record(uid, "milestone.count", float(road_eng.count()), tick=0)
-            dash = DashboardEngine()
-            payload = dash.snapshot(
-                plan_dict=plan_eng.to_dict(),
-                roadmap_dict=road_eng.to_dict(),
-                backlog_dict=back_eng.to_dict(),
-                schedule_dict=schedule.to_dict(),
-                assignment_dict=assign_eng.to_dict(),
-                progress_dict=prog_eng.to_dict(),
-                metrics_dict=met_eng.to_dict(),
-                registry_dicts=[
-                    cap_reg.to_dict(),
-                    own_reg.to_dict(),
-                    dep_reg.to_dict(),
-                    agt_reg.to_dict(),
-                ],
-                tick=0,
-            )
-
-        else:  # pragma: no cover — argparse guards this
-            print(f"unknown command: {args.command}", file=err)
-            return 2
-
+        payload = _payload(plane, args.command, args.subject)
         _emit(payload, as_json=args.as_json, stream=out)
+        if args.command == "completion" and not payload["complete"]:
+            print(
+                f"gate not met: {', '.join(payload['failures'])}",
+                file=err,
+            )
+            return 1
         return 0
 
     except ControlPlaneError as exc:

@@ -1,8 +1,12 @@
 """UCOS-CTRL-000001 — Universal Scheduler and Assignment Engine.
 
-Scheduler   — produces a wave-based, topologically-ordered execution schedule
-              from a backlog and a dependency registry.
+SchedulerEngine  — produces a wave-based, topologically-ordered execution schedule
+                   from a backlog and a dependency registry.
 AssignmentEngine — binds backlog items to agents and tracks those bindings.
+
+``Scheduler`` remains available from the package root as a compatibility alias for
+callers written before the class carried the ``Engine`` suffix the control-plane
+registration taxonomy selects on.
 """
 
 from __future__ import annotations
@@ -52,7 +56,7 @@ class Schedule:
 
 
 @dataclass
-class Scheduler:
+class SchedulerEngine:
     """Produces a wave-based schedule from items and dependency constraints.
 
     The scheduler assigns each backlog item a wave number such that all of a
