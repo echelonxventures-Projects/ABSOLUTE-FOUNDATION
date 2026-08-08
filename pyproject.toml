@@ -229,6 +229,10 @@ addopts = [
   # its own suite (platform/tests/test_universal_control_plane.py), so the percentage
   # measures a capability something actually exercises.
   "--cov=platform.universal_control_plane",
+  # UCOS-CTRL-STATE-000001 (Wave 11) — Universal Project State enters the denominator on the
+  # same condition: it ships with platform/tests/test_universal_project_state.py, so the
+  # percentage measures a capability something actually exercises.
+  "--cov=platform.universal_project_state",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -236,7 +240,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]
