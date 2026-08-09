@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T17:22:23+00:00",
+  "generated_at": "2026-08-09T17:31:58+00:00",
   "generator_version": "1.0.0",
   "counts": {
     "change_events": 1346,
@@ -21490,12 +21490,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "22d7754fe049",
-        "date": "2026-08-07T14:49:39+05:30",
-        "author": "Echelon Ventures",
-        "subject": "REGISTER: the five determination documents become tracked truth"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001341",
@@ -21505,12 +21500,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "22d7754fe049",
-        "date": "2026-08-07T14:49:39+05:30",
-        "author": "Echelon Ventures",
-        "subject": "REGISTER: the five determination documents become tracked truth"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001342",
@@ -21520,12 +21510,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "22d7754fe049",
-        "date": "2026-08-07T14:49:39+05:30",
-        "author": "Echelon Ventures",
-        "subject": "REGISTER: the five determination documents become tracked truth"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001343",
@@ -21535,12 +21520,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "51b9937ffad4",
-        "date": "2026-08-08T09:36:03+05:30",
-        "author": "Echelon Ventures",
-        "subject": "W6-W10 COMPLETE: runtime registration, linkage, consumption, durable replay and composition root"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001344",
@@ -21550,12 +21530,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "22d7754fe049",
-        "date": "2026-08-07T14:49:39+05:30",
-        "author": "Echelon Ventures",
-        "subject": "REGISTER: the five determination documents become tracked truth"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001345",
@@ -21565,12 +21540,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "22d7754fe049",
-        "date": "2026-08-07T14:49:39+05:30",
-        "author": "Echelon Ventures",
-        "subject": "REGISTER: the five determination documents become tracked truth"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001346",
@@ -21580,12 +21550,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "9637ac6b4c93",
-        "date": "2026-08-07T23:02:46+05:30",
-        "author": "Echelon Ventures",
-        "subject": "W3-4c EVIDENCE: dfadda1 says one file and contains eleven"
-      }
+      "commit": null
     }
   ],
   "version_records": {
