@@ -8757,15 +8757,64 @@
       "page_start": 9740,
       "page_count": 4,
       "first_seen": "2026-08-06T15:49:49+00:00"
+    },
+    "OMEGA-E06-STAGE-1-UNIVERSAL-CONSTITUTIONAL-REPOSITORY-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000073",
+      "category": "CON",
+      "page_start": 9744,
+      "page_count": 16,
+      "first_seen": "2026-08-09T17:22:23+00:00"
+    },
+    "P0-FINAL-ASSIMILATION-AUDIT.md": {
+      "universal_id": "UCOS-P0FINA-000001",
+      "category": "P0FINA",
+      "page_start": 9760,
+      "page_count": 4,
+      "first_seen": "2026-08-09T17:22:23+00:00"
+    },
+    "P0-FREEZE-CERTIFICATION-001-FINAL-FOUNDATION-FREEZE-CERTIFICATION.md": {
+      "universal_id": "UCOS-P0FREE-000001",
+      "category": "P0FREE",
+      "page_start": 9764,
+      "page_count": 5,
+      "first_seen": "2026-08-09T17:22:23+00:00"
+    },
+    "R-1-REPOSITORY-REPLAY-SYNCHRONIZATION-EVIDENCE.md": {
+      "universal_id": "UCOS-R1REPO-000001",
+      "category": "R1REPO",
+      "page_start": 9769,
+      "page_count": 2,
+      "first_seen": "2026-08-09T17:22:23+00:00"
+    },
+    "RTBD-001-REPOSITORY-TRUTH-BOUNDARY-DETERMINATION.md": {
+      "universal_id": "UCOS-RTBD00-000001",
+      "category": "RTBD00",
+      "page_start": 9771,
+      "page_count": 7,
+      "first_seen": "2026-08-09T17:22:23+00:00"
+    },
+    "W3-4c-UNIVERSAL-ASSURANCE-VALIDATION-CLUSTER-COVERAGE-EVIDENCE.md": {
+      "universal_id": "UCOS-W34CUN-000001",
+      "category": "W34CUN",
+      "page_start": 9778,
+      "page_count": 6,
+      "first_seen": "2026-08-09T17:22:23+00:00"
+    },
+    "platform/universal_control_plane/catalog/ucos-control-plane.json": {
+      "universal_id": "UCOS-PLT-000067",
+      "category": "PLT",
+      "page_start": 9784,
+      "page_count": 4,
+      "first_seen": "2026-08-09T17:22:23+00:00"
     }
   },
-  "page_cursor": 9743,
+  "page_cursor": 9787,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
     "SRC": 2,
     "ARCH": 24,
-    "CON": 72,
+    "CON": 73,
     "VSN": 3,
     "IDX": 1,
     "EES": 2,
@@ -8778,7 +8827,7 @@
     "FRZ": 3,
     "MISC": 46,
     "ADV": 20,
-    "PLT": 66,
+    "PLT": 67,
     "DAT": 19,
     "SVC": 19,
     "UMB": 31,
@@ -8863,7 +8912,12 @@
     "P0DECL": 1,
     "UCOSUC": 1,
     "UNAF00": 1,
-    "P0REGI": 1
+    "P0REGI": 1,
+    "P0FINA": 1,
+    "P0FREE": 1,
+    "R1REPO": 1,
+    "RTBD00": 1,
+    "W34CUN": 1
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -24480,6 +24534,83 @@
         "status": "ACTIVE",
         "path": "P0-REGISTRATION-001-UNIVERSAL-FOUNDATION-DETERMINATION-ASSIMILATION.md",
         "name": "P0-REGISTRATION-001 — Universal Foundation Determination Assimilation"
+      }
+    ],
+    "UCOS-CON-000073": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T17:22:23+00:00",
+        "content_hash": "24bcdcbcfc22199f22f167a6d34e1e5765832e415d430942aeb716539774798a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "OMEGA-E06-STAGE-1-UNIVERSAL-CONSTITUTIONAL-REPOSITORY-DETERMINATION.md",
+        "name": "Ω-E06-STAGE-1 — UNIVERSAL CONSTITUTIONAL REPOSITORY DETERMINATION"
+      }
+    ],
+    "UCOS-P0FINA-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T17:22:23+00:00",
+        "content_hash": "500ef68f0f047ea5cef0bff07984b303ed10584f1c9ae642cfd2e54d43eb27c8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "P0-FINAL-ASSIMILATION-AUDIT.md",
+        "name": "P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete Traceability"
+      }
+    ],
+    "UCOS-P0FREE-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T17:22:23+00:00",
+        "content_hash": "495613067c2fd9e23ebf25f3353a43dc5dc53c4cd935ce55ded72397e3b9a1bb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "P0-FREEZE-CERTIFICATION-001-FINAL-FOUNDATION-FREEZE-CERTIFICATION.md",
+        "name": "P0-FREEZE-CERTIFICATION-001 — Final Universal Foundation Freeze Certification"
+      }
+    ],
+    "UCOS-R1REPO-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T17:22:23+00:00",
+        "content_hash": "db62fdcb01b88c2f7287d2340eb5e175777615df323a217906a62b6600be16f5",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "R-1-REPOSITORY-REPLAY-SYNCHRONIZATION-EVIDENCE.md",
+        "name": "R-1 — Repository Replay Synchronization · Final Evidence"
+      }
+    ],
+    "UCOS-RTBD00-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T17:22:23+00:00",
+        "content_hash": "d5d8c1454f4b65bf2e278945622a61edc7debe36e62561ec1dbac8bfc867095e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "RTBD-001-REPOSITORY-TRUTH-BOUNDARY-DETERMINATION.md",
+        "name": "RTBD-001 — Repository Truth Boundary Determination"
+      }
+    ],
+    "UCOS-W34CUN-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T17:22:23+00:00",
+        "content_hash": "b91a8ecb02f9aeb39550d18d2a6fe1ae98d5f2b56218708d07cf95505c3c3157",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "W3-4c-UNIVERSAL-ASSURANCE-VALIDATION-CLUSTER-COVERAGE-EVIDENCE.md",
+        "name": "W3-4c — Universal Assurance validation cluster: coverage evidence"
+      }
+    ],
+    "UCOS-PLT-000067": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T17:22:23+00:00",
+        "content_hash": "4effe7cce3e2392c812c9dc471b72504fa4c38f99bef0d2e117ef3d1638eb0d6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "platform/universal_control_plane/catalog/ucos-control-plane.json",
+        "name": "Ucos Control Plane"
       }
     ]
   }

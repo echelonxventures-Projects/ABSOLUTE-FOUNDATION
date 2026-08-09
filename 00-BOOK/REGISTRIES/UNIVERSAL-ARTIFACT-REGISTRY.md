@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1220
+**Total artifacts:** 1227
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1228,5 +1228,12 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1218 | `UCOS-CON-000072` | UMN-001 — Universal Micro Nucleus Constitutional Determin… | — | 002 | UPN-000009718–UPN-000009727 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UMN-001-UNIVERSAL-MICRO-NUCLEUS-CONSTITUTIONAL-DETERMINATION.md) |
 | 1219 | `UCOS-UNAF00-000001` | UNAF-001 — Universal Nucleus Architecture Freeze | — | 000 | UPN-000009728–UPN-000009739 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UNAF-001-UNIVERSAL-NUCLEUS-ARCHITECTURE-FREEZE.md) |
 | 1220 | `UCOS-P0REGI-000001` | P0-REGISTRATION-001 — Universal Foundation Determination … | — | 000 | UPN-000009740–UPN-000009743 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../P0-REGISTRATION-001-UNIVERSAL-FOUNDATION-DETERMINATION-ASSIMILATION.md) |
+| 1221 | `UCOS-CON-000073` | Ω-E06-STAGE-1 — UNIVERSAL CONSTITUTIONAL REPOSITORY DETER… | — | 002 | UPN-000009744–UPN-000009759 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../OMEGA-E06-STAGE-1-UNIVERSAL-CONSTITUTIONAL-REPOSITORY-DETERMINATION.md) |
+| 1222 | `UCOS-P0FINA-000001` | P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete Traceability | — | 000 | UPN-000009760–UPN-000009763 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../P0-FINAL-ASSIMILATION-AUDIT.md) |
+| 1223 | `UCOS-P0FREE-000001` | P0-FREEZE-CERTIFICATION-001 — Final Universal Foundation … | — | 000 | UPN-000009764–UPN-000009768 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../P0-FREEZE-CERTIFICATION-001-FINAL-FOUNDATION-FREEZE-CERTIFICATION.md) |
+| 1224 | `UCOS-R1REPO-000001` | R-1 — Repository Replay Synchronization · Final Evidence | — | 000 | UPN-000009769–UPN-000009770 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../R-1-REPOSITORY-REPLAY-SYNCHRONIZATION-EVIDENCE.md) |
+| 1225 | `UCOS-RTBD00-000001` | RTBD-001 — Repository Truth Boundary Determination | — | 000 | UPN-000009771–UPN-000009777 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../RTBD-001-REPOSITORY-TRUTH-BOUNDARY-DETERMINATION.md) |
+| 1226 | `UCOS-W34CUN-000001` | W3-4c — Universal Assurance validation cluster: coverage … | — | 000 | UPN-000009778–UPN-000009783 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../W3-4c-UNIVERSAL-ASSURANCE-VALIDATION-CLUSTER-COVERAGE-EVIDENCE.md) |
+| 1227 | `UCOS-PLT-000067` | Ucos Control Plane | — | 006 | UPN-000009784–UPN-000009787 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_control_plane/catalog/ucos-control-plane.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

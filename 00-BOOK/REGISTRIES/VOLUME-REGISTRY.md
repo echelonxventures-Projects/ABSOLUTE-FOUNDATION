@@ -6,13 +6,13 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 84 | UPN-000000001–UPN-000009743 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 89 | UPN-000000001–UPN-000009783 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
-| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 110 | UPN-000001327–UPN-000009727 |
+| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 111 | UPN-000001327–UPN-000009759 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 61 | UPN-000000022–UPN-000009371 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 18 | UPN-000004194–UPN-000009294 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
-| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 82 | UPN-000004559–UPN-000009650 |
+| `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 83 | UPN-000004559–UPN-000009787 |
 | `VOL-007` | 7 | DATA | DAT | ACTIVE | 157 | UPN-000004355–UPN-000006451 |
 | `VOL-008` | 8 | SERVICE | SVC | ACTIVE | 172 | UPN-000004410–UPN-000007033 |
 | `VOL-009` | 9 | APPLICATION | APP | ACTIVE | 149 | UPN-000004232–UPN-000007536 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 84
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 89
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -124,6 +124,11 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-UCOSUC-000001` | UCOS-UCOM-002 — Universal Constitutional Evolution & Universa… | — | ACTIVE |
 | `UCOS-UNAF00-000001` | UNAF-001 — Universal Nucleus Architecture Freeze | — | ACTIVE |
 | `UCOS-P0REGI-000001` | P0-REGISTRATION-001 — Universal Foundation Determination Assi… | — | ACTIVE |
+| `UCOS-P0FINA-000001` | P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete Traceability | — | ACTIVE |
+| `UCOS-P0FREE-000001` | P0-FREEZE-CERTIFICATION-001 — Final Universal Foundation Free… | — | ACTIVE |
+| `UCOS-R1REPO-000001` | R-1 — Repository Replay Synchronization · Final Evidence | — | ACTIVE |
+| `UCOS-RTBD00-000001` | RTBD-001 — Repository Truth Boundary Determination | — | ACTIVE |
+| `UCOS-W34CUN-000001` | W3-4c — Universal Assurance validation cluster: coverage evid… | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -139,7 +144,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-002 — CONSTITUTION <a id="vol-002"></a>
 
 *Constitutional corpus, consolidation program, freeze, and registers.*  \
-**Category:** CON · **Status:** ACTIVE · **Artifacts:** 110
+**Category:** CON · **Status:** ACTIVE · **Artifacts:** 111
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -253,6 +258,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-CON-000070` | UCOS-UCOM-001 — Universal Constitutional Object Model Determi… | — | ACTIVE |
 | `UCOS-CON-000071` | UCRD-001 — Constitutional Relationship Determination | — | ACTIVE |
 | `UCOS-CON-000072` | UMN-001 — Universal Micro Nucleus Constitutional Determination | — | ACTIVE |
+| `UCOS-CON-000073` | Ω-E06-STAGE-1 — UNIVERSAL CONSTITUTIONAL REPOSITORY DETERMINA… | — | ACTIVE |
 
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 
@@ -382,7 +388,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-006 — PLATFORM <a id="vol-006"></a>
 
 *Implementation platforms and engines.*  \
-**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 82
+**Category:** PLT · **Status:** ACTIVE · **Artifacts:** 83
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -468,6 +474,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-PLT-000064` | Ucos Repository Truth | — | ACTIVE |
 | `UCOS-PLT-000065` | Foundation Nucleus | — | ACTIVE |
 | `UCOS-PLT-000066` | Ucos Generation Targets | — | ACTIVE |
+| `UCOS-PLT-000067` | Ucos Control Plane | — | ACTIVE |
 
 ### VOL-007 — DATA <a id="vol-007"></a>
 

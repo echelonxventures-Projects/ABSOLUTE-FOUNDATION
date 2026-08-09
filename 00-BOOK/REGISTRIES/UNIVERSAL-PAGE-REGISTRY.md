@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 9743  ·  **Page cursor (next free):** UPN-000009744
+**Pages allocated:** 9787  ·  **Page cursor (next free):** UPN-000009788
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1228,5 +1228,12 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000009718 | UPN-000009727 | 10 | `UCOS-CON-000072` | 002 | UMN-001 — Universal Micro Nucleus Constitutio… |
 | UPN-000009728 | UPN-000009739 | 12 | `UCOS-UNAF00-000001` | 000 | UNAF-001 — Universal Nucleus Architecture Freeze |
 | UPN-000009740 | UPN-000009743 | 4 | `UCOS-P0REGI-000001` | 000 | P0-REGISTRATION-001 — Universal Foundation De… |
+| UPN-000009744 | UPN-000009759 | 16 | `UCOS-CON-000073` | 002 | Ω-E06-STAGE-1 — UNIVERSAL CONSTITUTIONAL REPO… |
+| UPN-000009760 | UPN-000009763 | 4 | `UCOS-P0FINA-000001` | 000 | P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete … |
+| UPN-000009764 | UPN-000009768 | 5 | `UCOS-P0FREE-000001` | 000 | P0-FREEZE-CERTIFICATION-001 — Final Universal… |
+| UPN-000009769 | UPN-000009770 | 2 | `UCOS-R1REPO-000001` | 000 | R-1 — Repository Replay Synchronization · Fin… |
+| UPN-000009771 | UPN-000009777 | 7 | `UCOS-RTBD00-000001` | 000 | RTBD-001 — Repository Truth Boundary Determin… |
+| UPN-000009778 | UPN-000009783 | 6 | `UCOS-W34CUN-000001` | 000 | W3-4c — Universal Assurance validation cluste… |
+| UPN-000009784 | UPN-000009787 | 4 | `UCOS-PLT-000067` | 006 | Ucos Control Plane |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

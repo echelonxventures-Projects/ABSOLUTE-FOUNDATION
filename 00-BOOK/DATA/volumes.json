@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T08:34:19+00:00",
+  "generated_at": "2026-08-09T17:22:23+00:00",
   "count": 25,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 84,
+      "artifact_count": 89,
       "page_range_start": 1,
-      "page_range_end": 9743,
+      "page_range_end": 9783,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -33,9 +33,9 @@
       "description": "Constitutional corpus, consolidation program, freeze, and registers.",
       "category": "CON",
       "status": "ACTIVE",
-      "artifact_count": 110,
+      "artifact_count": 111,
       "page_range_start": 1327,
-      "page_range_end": 9727,
+      "page_range_end": 9759,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-002"
     },
     {
@@ -81,9 +81,9 @@
       "description": "Implementation platforms and engines.",
       "category": "PLT",
       "status": "ACTIVE",
-      "artifact_count": 82,
+      "artifact_count": 83,
       "page_range_start": 4559,
-      "page_range_end": 9650,
+      "page_range_end": 9787,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-006"
     },
     {
