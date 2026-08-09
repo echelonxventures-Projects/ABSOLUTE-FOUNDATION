@@ -87,16 +87,30 @@ def _stamp_eq_json(path, obj, stamp_keys=("generated_at",)):
         return False
     if not isinstance(old, dict):
         return old == obj
-    return _neutralize_stamps(old, stamp_keys) == _neutralize_stamps(obj, stamp_keys)
+    # P0-BLOCKER-ERADICATION-001: neutralize against the UNION of both documents' stamps
+    # (see the identical correction in ukb.py). Per-document neutralization erased a
+    # content-derived timestamp on the OLD side whenever it equalled that document's own
+    # generation stamp while preserving it on the NEW side, so substantively identical
+    # registers compared unequal and were rewritten with only their stamp changed.
+    stamps = _stamps_of(old, stamp_keys) | _stamps_of(obj, stamp_keys)
+    return _neutralize_stamps(old, stamp_keys, stamps) == _neutralize_stamps(
+        obj, stamp_keys, stamps
+    )
 
 
-def _neutralize_stamps(doc, stamp_keys):
+def _stamps_of(doc, stamp_keys):
     stamps = set()
     if isinstance(doc, dict):
         for k in stamp_keys:
             v = doc.get(k)
             if v is not None:
                 stamps.add(v)
+    return stamps
+
+
+def _neutralize_stamps(doc, stamp_keys, stamps=None):
+    if stamps is None:
+        stamps = _stamps_of(doc, stamp_keys)
 
     def walk(x):
         if isinstance(x, dict):

@@ -88,16 +88,36 @@ def _stamp_eq_json(path, obj, stamp_keys=("generated_at",)):
             old = json.load(fh)
     except Exception:
         return False
-    return _neutralize_stamps(old, stamp_keys) == _neutralize_stamps(obj, stamp_keys)
+    # P0-BLOCKER-ERADICATION-001: neutralize against the UNION of both documents' stamps,
+    # never each document's own. A change event minted in the same second as the generation
+    # stamp carries `at` == that stamp, so per-document neutralization erased it on the OLD
+    # side (where it matched that document's stamp) and preserved it on the NEW side (where
+    # the stamp had moved on). Two substantively identical registers then compared unequal,
+    # the writer took the rewrite branch, and only the timestamp changed on disk — which is
+    # exactly how 00-BOOK/DATA/change-ledger.json drifted on every regeneration and held
+    # `register.sh --guard` red. Measured at 3027080: 4 of 1350 change events carried
+    # `at` == `generated_at`, the four artifacts registered in that transaction's own second.
+    # Genuine drift is still detected: counts and event bodies are compared untouched, and a
+    # value is neutralized only where it equals a generation stamp of one of the two docs.
+    stamps = _stamps_of(old, stamp_keys) | _stamps_of(obj, stamp_keys)
+    return _neutralize_stamps(old, stamp_keys, stamps) == _neutralize_stamps(
+        obj, stamp_keys, stamps
+    )
 
 
-def _neutralize_stamps(doc, stamp_keys):
+def _stamps_of(doc, stamp_keys):
     stamps = set()
     if isinstance(doc, dict):
         for k in stamp_keys:
             v = doc.get(k)
             if v is not None:
                 stamps.add(v)
+    return stamps
+
+
+def _neutralize_stamps(doc, stamp_keys, stamps=None):
+    if stamps is None:
+        stamps = _stamps_of(doc, stamp_keys)
 
     def walk(x):
         if isinstance(x, dict):

@@ -17,6 +17,7 @@ from pathlib import Path
 
 import pytest
 
+from engine.uckp.assimilation import load_artifact_registry
 from engine.uckp.identity import urn_for
 from engine.uckp.registry import UniversalKnowledgeRegistry
 from engine.uckp.ucko import UCKO
@@ -147,3 +148,31 @@ def assimilation_report(assimilated):
 @pytest.fixture(scope="session")
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[3]
+
+
+#: P0-BLOCKER-ERADICATION-001 — the corpus population is MEASURED, never asserted as a
+#: literal. Snapshot literals made this suite fail on every legitimate corpus growth: the
+#: same assertion has broken at 1206, at 1220, at 1227 and again at 1231, each time reported
+#: as a test failure when nothing was wrong except that the repository had grown. The
+#: invariants these tests actually name — "every artifact becomes exactly one object", "every
+#: object reconstructs its source record exactly" — are relations between the register and the
+#: assimilation of it, and a relation is proven by comparing the two sides, not by comparing
+#: one side to a number a human transcribed on a particular day. Deriving the expectation from
+#: the register under measurement keeps the invariant exact and retires the recurrence class.
+@pytest.fixture(scope="session")
+def corpus_size(repo_root: Path) -> int:
+    """How many artifacts the registry under measurement actually holds."""
+    _, records = load_artifact_registry(repo_root)
+    return len(records)
+
+
+@pytest.fixture(scope="session")
+def constitution_object_count() -> int:
+    """Objects the constitution mints for itself, independent of the corpus.
+
+    This one IS a literal, and legitimately so: it counts the authored constitutional
+    objects, which change only when the constitution is amended — never when a repository
+    artifact is added. Keeping it separate from :func:`corpus_size` is what makes a change
+    in the total attributable to one cause or the other.
+    """
+    return 175

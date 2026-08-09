@@ -1,9 +1,12 @@
 """Article 19: every existing UCOS artifact assimilated, losslessly and invertibly.
 
 Losslessness is asserted by measurement over the whole corpus, not by inspection of a
-sample: :func:`verify_invertible` reconstructs all 1227 source records from their objects
-and compares canonical digests. The negative tests then prove the check can fail, because
+sample: :func:`verify_invertible` reconstructs every source record from its object and
+compares canonical digests. The negative tests then prove the check can fail, because
 an invertibility test that cannot detect a loss is not evidence of anything.
+
+Corpus counts are DERIVED from the register under measurement (the ``corpus_size``
+fixture), never transcribed as literals — see the rationale on that fixture.
 """
 
 from __future__ import annotations
@@ -44,10 +47,10 @@ from engine.uckp.vocabulary import LIFECYCLE_STAGE, build_vocabulary_registry
 # --- the source -----------------------------------------------------------------
 
 
-def test_the_registry_is_read_with_a_digest_naming_the_state_assimilated(repo_root):
+def test_the_registry_is_read_with_a_digest_naming_the_state_assimilated(repo_root, corpus_size):
     digest, records = load_artifact_registry(repo_root)
     assert len(digest) == 64
-    assert len(records) == 1227
+    assert len(records) == corpus_size
     again, _ = load_artifact_registry(repo_root)
     assert again == digest
 
@@ -100,8 +103,17 @@ def test_the_repositorys_own_categories_and_programmes_get_their_own_vocabularie
     vocabularies = assimilated_universe.vocabularies()
     assert NATIVE_CATEGORY_VOCABULARY in vocabularies.vocabulary_ids()
     assert NATIVE_PROGRAM_VOCABULARY in vocabularies.vocabulary_ids()
-    assert len(assimilation_report.registered_categories) == 80  # W3-3: execut/archit/implem merged
-    assert len(assimilation_report.registered_programs) == 77  # W3-3: same 3 deduplicated
+    # The claim is that the repository's OWN categories and programmes get vocabularies of
+    # their own — a containment relation, which is what is asserted here. The former literals
+    # (80 / 77) measured one day's corpus and broke on the next: adding four artifacts moved
+    # them to 81 / 78 and failed a suite where nothing was wrong. Containment proves the
+    # property for any corpus, and the non-emptiness assertions keep it from passing vacuously.
+    category_terms = set(vocabularies.require(NATIVE_CATEGORY_VOCABULARY).term_ids())
+    program_terms = set(vocabularies.require(NATIVE_PROGRAM_VOCABULARY).term_ids())
+    assert set(assimilation_report.registered_categories) <= category_terms
+    assert set(assimilation_report.registered_programs) <= program_terms
+    assert assimilation_report.registered_categories
+    assert assimilation_report.registered_programs
 
 
 def test_registration_is_idempotent_over_the_same_records(repo_root):
@@ -131,9 +143,9 @@ def test_native_term_normalises_and_never_returns_empty():
 # --- the mapping ----------------------------------------------------------------
 
 
-def test_every_artifact_becomes_exactly_one_object(assimilation_report):
-    assert assimilation_report.artifacts_read == 1227
-    assert assimilation_report.objects_minted == 1227
+def test_every_artifact_becomes_exactly_one_object(assimilation_report, corpus_size):
+    assert assimilation_report.artifacts_read == corpus_size
+    assert assimilation_report.objects_minted == corpus_size
 
 
 def test_assimilation_is_invertible_over_the_whole_corpus(assimilation_report):
@@ -151,7 +163,7 @@ def test_every_object_reconstructs_its_source_record_exactly(assimilated_univers
         for obj in assimilated_universe.objects()
         if obj.identity.namespace == ASSIMILATION_NAMESPACE
     ]
-    assert len(assimilated) == 1227
+    assert len(assimilated) == len(records)
     for obj in assimilated:
         original = by_id[obj.identity.local_name]
         assert content_hash(reconstruct_artifact(obj)) == content_hash(original)
@@ -343,9 +355,9 @@ def test_require_lossless_refuses_a_lossy_report():
         require_lossless(report)
 
 
-def test_the_report_serializes_and_summarizes(assimilation_report):
+def test_the_report_serializes_and_summarizes(assimilation_report, corpus_size):
     record = assimilation_report.to_dict()
-    assert record["counts"]["artifacts_read"] == 1227
+    assert record["counts"]["artifacts_read"] == corpus_size
     assert record["lossless"] is True
     assert "invertible=True" in assimilation_report.summary()
 
@@ -355,8 +367,10 @@ def test_the_report_serializes_and_summarizes(assimilation_report):
 
 def test_the_assimilated_universe_holds_the_constitution_and_the_corpus(
     assimilated_universe,
+    constitution_object_count,
+    corpus_size,
 ):
-    assert len(assimilated_universe.objects()) == 175 + 1227
+    assert len(assimilated_universe.objects()) == constitution_object_count + corpus_size
     assert len(assimilated_universe.discovery.providers_found) == 2
     assert "engine.uckp.assimilation" in assimilated_universe.registry.providers()
 

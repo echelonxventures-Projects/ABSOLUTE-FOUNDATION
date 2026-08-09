@@ -43,20 +43,24 @@ def test_validate_reports_all_seventeen_invariants_as_satisfied(tmp_path, capsys
     assert payload["all_stop_conditions_met"] is True
 
 
-def test_certify_covers_validation_assimilation_and_the_universe(tmp_path, capsys):
+def test_certify_covers_validation_assimilation_and_the_universe(
+    tmp_path, capsys, constitution_object_count, corpus_size
+):
     assert (
         main(["certify", "--assimilate", "--persistence-base", str(tmp_path / "c"), "--json"]) == 0
     )
     payload = json.loads(capsys.readouterr().out)
     assert payload["verdict"] == "certified"
     assert payload["assimilation"]["lossless"] is True
-    assert payload["universe"]["counts"]["objects"] == 1402
+    assert payload["universe"]["counts"]["objects"] == constitution_object_count + corpus_size
 
 
-def test_assimilate_implies_the_artifact_corpus_without_being_asked_twice(tmp_path, capsys):
+def test_assimilate_implies_the_artifact_corpus_without_being_asked_twice(
+    tmp_path, capsys, corpus_size
+):
     assert main(["assimilate", "--persistence-base", str(tmp_path / "a"), "--json"]) == 0
     payload = json.loads(capsys.readouterr().out)
-    assert payload["counts"]["artifacts_read"] == 1227
+    assert payload["counts"]["artifacts_read"] == corpus_size
     assert payload["invertible"] is True
 
 

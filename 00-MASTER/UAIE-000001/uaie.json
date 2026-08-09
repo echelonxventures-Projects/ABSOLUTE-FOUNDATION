@@ -439,7 +439,7 @@
     "ontology_anchors": 3,
     "ontology_anchors_present": 3,
     "owners": 10,
-    "register_references": 1450,
+    "register_references": 1454,
     "register_references_unresolved": 0,
     "registers": 20,
     "registers_resolved": 20,
@@ -808,7 +808,7 @@
       "owner": "00-BOOK/tools/ukb.py",
       "path": "00-BOOK/DATA/artifacts.json",
       "problem": "",
-      "references": 1227,
+      "references": 1231,
       "references_unresolved": 0,
       "resolves": true,
       "role": "artifact-registry",
@@ -1104,7 +1104,7 @@
       "subject": "every baseline"
     }
   ],
-  "seal_sha256": "0532b605cc40d4c169533aff19de0cc686d422de3810798ff7b814d808abb628",
+  "seal_sha256": "5bfac2951510fa34335333efad732d1fc527521dbb08afc72afe4b8299cbe3b5",
   "validations": [
     {
       "blocking": true,
