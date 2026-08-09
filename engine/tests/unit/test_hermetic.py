@@ -152,7 +152,7 @@ def test_dependency_lock_verifies_real_pyproject():
 def test_dependency_lock_rejects_unpinned_dev(tmp_path):
     pyproject = tmp_path / "pyproject.toml"
     pyproject.write_text(
-        "[project]\ndependencies = []\n" '[project.optional-dependencies]\ndev = ["pytest>=8"]\n',
+        '[project]\ndependencies = []\n[project.optional-dependencies]\ndev = ["pytest>=8"]\n',
         encoding="utf-8",
     )
     with pytest.raises(DependencyLockError) as exc:

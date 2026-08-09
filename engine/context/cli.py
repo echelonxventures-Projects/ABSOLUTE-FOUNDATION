@@ -17,6 +17,12 @@ sealed and used as CI evidence:
     python -m engine.context.cli validate                  # the twelve rules (gate)
     python -m engine.context.cli certify                   # the eight dimensions (gate)
     python -m engine.context.cli evidence --out <path>     # the whole evidence document
+    python -m engine.context.cli frames                    # the declared reference frames
+    python -m engine.context.cli location --frame <key>    # resolve one frame (gate)
+    python -m engine.context.cli rebase --frames a b       # re-resolve across frames
+    python -m engine.context.cli location-validate         # the location rules (gate)
+    python -m engine.context.cli location-certify          # the location dimensions (gate)
+    python -m engine.context.cli location-replay           # the location fixed point (gate)
 
 Exit codes are gate semantics, not decoration: ``0`` the assertion holds, ``1`` it does
 not (validation findings, no certificate, unresolvable kind), ``2`` the request could not
@@ -36,6 +42,13 @@ from engine.context.constitution import CONTEXT_CONSTITUTION
 from engine.context.errors import ContextError
 from engine.context.evidence import build_evidence, evidence_index, write_evidence
 from engine.context.graph import build_context_graph
+from engine.context.location import build_context_registry, build_frame_registry
+from engine.context.location import to_document as location_document
+from engine.context.location_assurance import (
+    certify_location,
+    replay_location,
+    validate_location,
+)
 from engine.context.registry import ContextRegistry
 from engine.context.resolution import ContextRequest, resolution_report, resolve
 from engine.context.runtime import ContextRuntime
@@ -175,6 +188,61 @@ def _cmd_evidence(args: argparse.Namespace) -> int:
     return 0 if evidence["operational"] else 1
 
 
+def _cmd_frames(args: argparse.Namespace) -> int:
+    frames = build_frame_registry()
+    _emit(frames.to_document() if args.verbose else frames.coverage())
+    return 0
+
+
+def _cmd_location(args: argparse.Namespace) -> int:
+    """Resolve one frame, or report the whole architecture.
+
+    A frame that leaves an axis unresolved exits non-zero: an incomplete context is a
+    gate failure, never a context with holes in it.
+    """
+    frames = build_frame_registry()
+    if not args.frame:
+        _emit(location_document(frames))
+        return 0
+    resolution = frames.resolve(args.frame)
+    payload = resolution.to_dict()
+    payload["digest"] = resolution.digest()
+    if args.verbose:
+        payload["registered"] = [
+            record.to_dict()
+            for record in build_context_registry(args.frame, frames=frames).records()
+        ]
+    _emit(payload)
+    return 0 if resolution.complete else 1
+
+
+def _cmd_rebase(args: argparse.Namespace) -> int:
+    frames = build_frame_registry()
+    report = frames.rebase(args.subject, frame_keys=args.frames)
+    _emit(report)
+    return 0 if report["differing_count"] else 1
+
+
+def _cmd_location_validate(args: argparse.Namespace) -> int:
+    report = validate_location()
+    _emit(report.to_dict() if args.verbose else report.summary())
+    if args.strict:
+        return 0 if report.is_clean else 1
+    return 0 if report.is_valid else 1
+
+
+def _cmd_location_certify(args: argparse.Namespace) -> int:
+    certificate = certify_location()
+    _emit(certificate.to_dict() if args.verbose else certificate.summary())
+    return 0 if certificate.certified else 1
+
+
+def _cmd_location_replay(_args: argparse.Namespace) -> int:
+    replay = replay_location()
+    _emit(replay)
+    return 0 if replay["fixed_point"] else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="ucos-context",
@@ -237,6 +305,32 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("certify", help="compute the context certification").set_defaults(
         func=_cmd_certify
+    )
+
+    sub.add_parser("frames", help="the declared reference frames and their coverage").set_defaults(
+        func=_cmd_frames
+    )
+
+    p_loc = sub.add_parser("location", help="resolve context from a reference frame")
+    p_loc.add_argument("--frame", default="", help="frame key (default: the whole architecture)")
+    p_loc.set_defaults(func=_cmd_location)
+
+    p_reb = sub.add_parser("rebase", help="re-resolve one subject across several frames")
+    p_reb.add_argument("--subject", default="ucos-context")
+    p_reb.add_argument("--frames", nargs="+", required=True)
+    p_reb.set_defaults(func=_cmd_rebase)
+
+    p_lval = sub.add_parser("location-validate", help="run the declared location rules")
+    p_lval.add_argument(
+        "--strict", action="store_true", help="fail on advisories as well as violations"
+    )
+    p_lval.set_defaults(func=_cmd_location_validate)
+
+    sub.add_parser("location-certify", help="compute the location certification").set_defaults(
+        func=_cmd_location_certify
+    )
+    sub.add_parser("location-replay", help="prove the location fixed point").set_defaults(
+        func=_cmd_location_replay
     )
 
     p_ev = sub.add_parser("evidence", help="build the context evidence document")

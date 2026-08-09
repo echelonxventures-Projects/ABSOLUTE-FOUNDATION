@@ -177,6 +177,20 @@ verify-full:
 repo-ops:
 	@./repo-ops.sh
 
+# P0-FINAL-CONVERGENCE-001 — the two producers no target named. `.gitignore` excludes
+# /knowledge/ and determinism-evidence/ on the STATED grounds that they are "regenerated
+# each run", but neither had a Makefile target, so nothing named them and nothing re-ran
+# them: the exclusion asserted a regeneration no entry point performed. Both wrap an
+# ALREADY-DECLARED console script (ucos-knowledge / ec1-determinism in pyproject.toml) —
+# no new capability, only reachability, which is the same discharge REG-AUTO-001 P7
+# requires of every other engine (a target, a workflow and a test must name it).
+.PHONY: knowledge determinism-evidence
+knowledge: bootstrap-quiet
+	@$(PY) -m engine.knowledge.cli init
+
+determinism-evidence: bootstrap-quiet
+	@$(PY) -m engine.determinism.reproduce
+
 # closure: UAKOS-CLOSURE-002 — regenerate the Vision-to-Repository closure artifacts
 # (source inventory, concept inventory, coverage/traceability matrices, gap register,
 # closure certificates). Deterministic, stdlib-only; never mutates the frozen corpus.

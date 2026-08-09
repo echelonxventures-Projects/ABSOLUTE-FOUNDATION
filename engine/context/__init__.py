@@ -1,6 +1,6 @@
 """UCXI-000001 — Universal Context Intelligence.
 
-The complete context capability of the platform, in fourteen parts:
+The complete context capability of the platform, in sixteen parts:
 
     Part 01  ``constitution``   the twelve laws of all context, each with a check
     Part 02  ``taxonomy``       the classification: fifteen universal kinds, open to more
@@ -16,6 +16,8 @@ The complete context capability of the platform, in fourteen parts:
     Part 12  ``certification``  eight measured dimensions, one computed verdict
     Part 13  ``evidence``       the deterministic, auditable artefact of the whole layer
     Part 14  ``cli``            the operational surface (``ucos-context``)
+    Part 15  ``location``       the location axis and location-derived resolution
+    Part 16  ``location_assurance``  the rules and dimensions that measure Part 15
 
 The fifteen universal context kinds — existence, reality, observer, temporal, spatial,
 identity, governance, security, knowledge, computational, environmental, economic,
@@ -81,6 +83,40 @@ from engine.context.errors import (
 )
 from engine.context.evidence import build_evidence, evidence_index, write_evidence
 from engine.context.graph import ContextGraph, build_context_graph
+from engine.context.location import (
+    AXIS_DERIVATION,
+    AXIS_GRAPH,
+    FRAME_NAMESPACE,
+    LOCATION,
+    UNRESOLVED,
+    FrameRegistry,
+    LocationResolution,
+    ReferenceFrame,
+    ResolvedAxis,
+    axis_order,
+    axis_waves,
+    build_context_registry,
+    build_frame_registry,
+    context_registries,
+    derivation_path,
+    empty_context_registry,
+    extended_ontology,
+    extended_taxonomy,
+    identity_tuples,
+    introduced_axes,
+    location_determined_axes,
+    register_resolution,
+)
+from engine.context.location_assurance import (
+    LOCATION_DIMENSIONS,
+    LOCATION_RULES,
+    certify_location,
+    complete_frame_kinds,
+    complete_frames,
+    replay_location,
+    require_certified_location,
+    validate_location,
+)
 from engine.context.model import (
     ContextDeclaration,
     ContextRecord,
@@ -198,6 +234,38 @@ __all__ = [
     "VERDICT_NOT_CERTIFIED",
     "certify",
     "require_certified",
+    # location (Part 15)
+    "LOCATION",
+    "UNRESOLVED",
+    "FRAME_NAMESPACE",
+    "AXIS_DERIVATION",
+    "AXIS_GRAPH",
+    "ReferenceFrame",
+    "ResolvedAxis",
+    "LocationResolution",
+    "FrameRegistry",
+    "axis_order",
+    "axis_waves",
+    "derivation_path",
+    "location_determined_axes",
+    "introduced_axes",
+    "extended_taxonomy",
+    "extended_ontology",
+    "build_frame_registry",
+    "register_resolution",
+    "empty_context_registry",
+    "build_context_registry",
+    "context_registries",
+    "identity_tuples",
+    # location assurance (Part 16)
+    "LOCATION_RULES",
+    "LOCATION_DIMENSIONS",
+    "complete_frames",
+    "complete_frame_kinds",
+    "validate_location",
+    "certify_location",
+    "require_certified_location",
+    "replay_location",
     # evidence
     "build_evidence",
     "evidence_index",

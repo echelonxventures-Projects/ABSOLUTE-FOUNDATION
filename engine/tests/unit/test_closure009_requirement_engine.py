@@ -66,9 +66,28 @@ def test_committed_register_measures_the_current_closure_register(record, closur
 
     Every one of these fields is COPIED from the closure register at render time, so a
     disagreement means the committed register was rendered against a superseded substrate.
+
+    P0-FINAL-CONVERGENCE-001. The commit sha is deliberately NOT compared for equality with
+    the live closure register. It cannot be: `closure.json` records `git rev-parse --short
+    HEAD` at generation time, so requiring the COMMITTED register to carry it demands that a
+    committed artifact carry the sha of the commit that carries it — the exact impossibility
+    `_head_commit` exists to prevent, in this module's own words. Git history shows the chase
+    it produced, four generations deep: a5ff49a recorded 75166e2, c4a3a10 recorded 89d3baf,
+    32a0f36 recorded 05ce974, b71b1e8 recorded d64fbb8 — every register naming its
+    predecessor, one commit message reading "the register catches up to the commit that moved
+    the corpus". The equality was therefore unsatisfiable at EVERY committed state, and once
+    verify.sh regenerates closure.json on every run it fails at every commit rather than
+    erroring on an absent file.
+
+    What must agree is the MEASUREMENT the register copied, not the provenance sha. The three
+    substantive fields below are what actually detect the original defect (a stale register
+    reporting 89 phantom gaps Repository Truth had closed): a register rendered against a
+    superseded substrate disagrees on determination, gap_total or concept_total. Detection is
+    preserved; only the unsatisfiable provenance equality is dropped, and the sha is still
+    required to be present and non-empty.
     """
     baseline = record["baseline"]
-    assert baseline["closure_baseline_commit"] == closure["baseline_commit"]
+    assert str(baseline["closure_baseline_commit"]).strip(), "no closure baseline recorded"
     assert baseline["closure_determination"] == closure["determination"]
     assert baseline["closure_gap_total"] == closure["gap_total"]
     assert baseline["concept_total"] == closure["concept_total"]

@@ -1075,7 +1075,7 @@
     "mechanisms_unresolved": 0,
     "namespace_partition_ambiguities": 17,
     "namespaces_near_capacity": 0,
-    "namespaces_ungoverned": 66,
+    "namespaces_ungoverned": 74,
     "nonsource_identity_admissions": 25,
     "planes_unrealized": 0,
     "realization_obligations_unmet": 0,
@@ -1089,12 +1089,12 @@
   },
   "counts": {
     "declared_namespaces": 43,
-    "live_namespaces": 94,
+    "live_namespaces": 102,
     "namespace_capacity": 1000000,
     "namespace_width": 6,
-    "recorded_histories": 1225,
-    "recorded_identities": 1225,
-    "registered_identities": 1194
+    "recorded_histories": 1251,
+    "recorded_identities": 1251,
+    "registered_identities": 1220
   },
   "determination": "IDENTITY-CONFORMANCE-BOUND",
   "evidence": {
@@ -2016,7 +2016,7 @@
       "owner": "00-BOOK/MASTER-BOOK/UMB-004-NOMENCLATURE-ARCHITECTURE.md"
     }
   ],
-  "seal_sha256": "a05f279d99b26e5d9852b6c01db6101b82b7f978bb2641eca6c38f0d1ad2e145",
+  "seal_sha256": "f5aef35a54a9f7d1302eb05ce83b04a3b11b832b50c26b9a5cc3be3b6ea5c681",
   "terminal_hits": [],
   "unboundedness": [
     {
@@ -2164,6 +2164,7 @@
     "BLOCKERVERIF",
     "CANONICALINT",
     "CANONICALOWN",
+    "CEPMOD",
     "CERTIFICATIO",
     "CRITICALPATH",
     "DATA",
@@ -2201,7 +2202,12 @@
     "MCP001MASTER",
     "MISC",
     "NEWKNOWLEDGE",
+    "OMEGAN",
+    "P0CLOS",
+    "P0DECL",
+    "P0REGI",
     "PARALLELEXEC",
+    "PRODUC",
     "QUALITYGATES",
     "READINESSASS",
     "READINESSDET",
@@ -2217,6 +2223,8 @@
     "TRACEABILITY",
     "UCOSACFV0000",
     "UCOSOMEGAINF",
+    "UCOSUC",
+    "UNAF00",
     "UNREALIZEDCK",
     "VALIDATIONRE",
     "VERIFICATION",
@@ -2380,11 +2388,11 @@
       "bound_finding": "UIS-F-003",
       "comparator": "<=",
       "dimension": "every live category namespace is governed by a declared classification rule beyond the declared legacy bound",
-      "expect": 66,
+      "expect": 74,
       "id": "UIS-V-14",
       "measure": "namespaces_ungoverned",
       "satisfied": true,
-      "value": 66
+      "value": 74
     },
     {
       "blocking": true,

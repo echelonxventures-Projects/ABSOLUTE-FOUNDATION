@@ -191,7 +191,7 @@ class DocumentationEngine:
             lines.append(f"## {kind.value.title()}s")
             for obj in objs:
                 lines.append(
-                    f"- **{obj.cko_id}** ({obj.authority.value}): " f"{obj.title} — {obj.statement}"
+                    f"- **{obj.cko_id}** ({obj.authority.value}): {obj.title} — {obj.statement}"
                 )
         exceptions = self._base.by_kind(KnowledgeKind.EXCEPTION)
         if exceptions:
@@ -413,8 +413,7 @@ class DocumentationEngine:
                     if dec.decision_id in obj.decision_links
                 )
                 lines.append(
-                    f"| {dec.decision_id} | {_cell(dec.dependencies)} "
-                    f"| {_cell(referenced_by)} |"
+                    f"| {dec.decision_id} | {_cell(dec.dependencies)} | {_cell(referenced_by)} |"
                 )
         else:
             lines.append("_No decisions recorded yet._")

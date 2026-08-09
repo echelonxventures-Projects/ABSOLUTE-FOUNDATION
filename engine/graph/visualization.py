@@ -89,7 +89,7 @@ def to_dot(graph: KnowledgeGraph, *, name: str = "UniversalKnowledgeGraph") -> s
     for edge in graph.edges():
         label = _dot_escape(edge.type)
         lines.append(
-            f'  "{_dot_escape(edge.source)}" -> "{_dot_escape(edge.target)}" ' f'[label="{label}"];'
+            f'  "{_dot_escape(edge.source)}" -> "{_dot_escape(edge.target)}" [label="{label}"];'
         )
     lines.append("}")
     return "\n".join(lines)

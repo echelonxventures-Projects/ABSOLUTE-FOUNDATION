@@ -81,6 +81,12 @@ ucos-registry = "engine.registry.universal.cli:main"
 # registry, resolution, composition, graph, runtime, validation and certification of all
 # context (fifteen universal context kinds, open to future context types).
 ucos-context = "engine.context.cli:main"
+# UCOS-NUC-001: the Nucleus Ownership Authority — capabilities belong to Nuclei; layers and
+# compositions own nothing. Its parser already declares `prog="ucos-nucleus"`, so publishing
+# the entry point makes `law`/`gate`/`compose`/`lifecycle`/`certify`/`context`/`replay`
+# reachable as the one command the capability names for itself, rather than only as
+# `python -m`. AUTHORITY = the ownership law it enforces; writes nothing.
+ucos-nucleus = "engine.nucleus.cli:main"
 # PROGRAM-002 (UMK-000001): Universal Meta-Kernel — the smallest open-world meta-model.
 # Prove constitutional compliance, run the mandatory architectural proof, and emit
 # validation/certification evidence. Open by registration; no kernel redesign for unknown
@@ -147,6 +153,11 @@ exclude = ["engine.tests*", "platform.tests*"]
 # Build pipelines are declarations the framework derives, so an installed wheel without the
 # catalogue would be a framework with nothing to run.
 "platform.universal_pipeline" = ["catalog/*.json"]
+# UCXI-000001 Part 15: ship the declared reference frames. They are DATA, not code — the
+# whole point of the location architecture is that no axis value appears in a module, so an
+# installed wheel without the catalogue is a resolver with nothing to resolve from, and
+# every axis would fail closed as unresolved.
+"engine.context" = ["catalog/*.json"]
 # Ω-A05: ship the declared Foundation specialisations. They are DATA, not code — the Repository
 # Truth policy, the governed ownership declarations and the project specialisation are the ONLY
 # places a project's own names appear, so an installed wheel without them is a Foundation with
@@ -180,6 +191,14 @@ addopts = [
   "--cov=engine.knowledge",
   "--cov=engine.graph",
   "--cov=engine.context",
+  # UCOS-CEU-001 — the Constitutional Existence substrate enters the denominator on the
+  # same condition every other capability does: it ships with engine/tests/ceu/, so the
+  # percentage measures a capability something actually exercises.
+  "--cov=engine.ceu",
+  # UCOS-NUC-001 — the Nucleus Ownership Authority enters the denominator on the same
+  # condition W3-4c applied: it ships with engine/tests/nucleus/, so the percentage
+  # measures a capability something actually exercises.
+  "--cov=engine.nucleus",
   "--cov=engine.kernel",
   "--cov=engine.provider",
   "--cov=engine.civilization",
@@ -244,7 +263,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

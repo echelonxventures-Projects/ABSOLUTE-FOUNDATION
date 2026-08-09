@@ -14,6 +14,41 @@ Pipeline (mission phases 1-10):
 Usage:
     python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py            # generate reports
     python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py --gate     # exit 1 if NOT-CLOSED
+    python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py --gate \
+        --require-complete-population                     # additionally exit 1 if UNMEASURED
+
+SCAN-MODE DISCLOSURE (AB-6 / CG-10, schema 2).
+    The `conversation_only` gap class is measurable ONLY from the external corpus at
+    ``REPO.parent / "UCOS"``. Where that directory is absent, no concept originating there
+    enters the population at all, so the class measures 0 by ABSENCE rather than by closure.
+    Before schema 2 that was indistinguishable, from the outside, from a measured zero: the
+    determination is a pure function of the discovered population and never consulted
+    ``corpus_present``, so an unscanned population returned CLOSED. This engine's own
+    contract above forbids exactly that ("never issues a closure certificate that the
+    evidence does not support"), and the repository's standing rule is that a probe which
+    cannot execute reports FAULT, never a pass.
+
+    Schema 2 therefore records, on every run and in ``closure.json``:
+
+        ``schema_version``       the disclosure contract version (integer)
+        ``scan_mode``            how the population was bounded on this run
+        ``population_complete``  False whenever a declared source could not be read
+        ``population_disclosure`` the human-readable reason, or None
+
+    Two scan modes are COMPLETE within their declared scope: ``full-corpus`` (the corpus was
+    present and scanned) and ``repo-only (declared)`` (the caller set ``CLOSURE_SKIP_CORPUS=1``,
+    an explicit constituent act — this is the "declare then use" shape the repository already
+    applies to open vocabularies, not "anything goes"). One mode is INCOMPLETE:
+    ``repo-only (undeclared — corpus absent)``, where nobody declared a narrower scope and the
+    wider one could not be read.
+
+    WHAT THIS CHANGE DOES NOT DO. It does not alter the determination. ``closed`` remains the
+    same pure function of the discovered population it has always been, so no verdict moves and
+    no gate changes colour. Making an incomplete population BLOCKING is a verdict-changing
+    governance act, recorded as AB-6 ("pin canonical full-corpus mode") and reserved to the EKI
+    owner pending P2 sign-off; a measurement engine may not confer that on itself. The lever is
+    provided, fail-closed and default-off, as ``--require-complete-population`` so the owner can
+    bind it in CI with one line at the moment sign-off is given.
 """
 
 from __future__ import annotations
@@ -30,6 +65,11 @@ from pathlib import Path
 
 # --------------------------------------------------------------------------- paths
 HERE = Path(__file__).resolve().parent
+
+# AB-6 / CG-10: the disclosure contract version. Bumped when the meaning of `scan_mode`,
+# `population_complete` or `population_disclosure` changes, so a consumer can refuse a
+# reading it does not understand instead of misreading it.
+SCHEMA_VERSION = 2
 REPO = HERE.parent.parent  # <repo>/00-MASTER/UAKOS-CLOSURE-002 -> <repo>
 CORPUS = REPO.parent / "UCOS"  # external corpus sibling (conversation/upload material)
 
@@ -134,7 +174,9 @@ def discover_sources() -> dict:
     md = sorted(f for f in tracked if f.lower().endswith(".md"))
     root_uploads = sorted(f for f in tracked if "/" not in f and f.lower().endswith((".md", ".docx")))
     corpus_files: list[str] = []
-    if CORPUS.is_dir() and os.environ.get("CLOSURE_SKIP_CORPUS") != "1":
+    corpus_skip_declared = os.environ.get("CLOSURE_SKIP_CORPUS") == "1"
+    corpus_present = CORPUS.is_dir()
+    if corpus_present and not corpus_skip_declared:
         for p in sorted(CORPUS.rglob("*")):
             if p.is_file() and p.suffix.lower() in (TEXT_EXT | {".docx"}):
                 corpus_files.append(str(p.relative_to(CORPUS)))
@@ -148,9 +190,50 @@ def discover_sources() -> dict:
         "docx_uploads": docx,
         "root_uploads": root_uploads,
         "corpus_dir": str(CORPUS),
-        "corpus_present": CORPUS.is_dir(),
+        "corpus_present": corpus_present,
+        "corpus_skip_declared": corpus_skip_declared,
         "corpus_files": corpus_files,
         "_tracked": tracked,
+    }
+
+
+def scan_disclosure(sources: dict) -> dict:
+    """Bound the population this run actually read, and say so (AB-6 / CG-10, schema 2).
+
+    Three outcomes, only one of which is incomplete. A declared narrowing is complete WITHIN
+    ITS DECLARED SCOPE, because somebody performed a constituent act naming that scope; an
+    UNDECLARED narrowing is incomplete, because the wider scope was neither read nor waived.
+    Returned as data so the determination stays a pure function and the disclosure travels
+    with the artifact rather than living in a print statement.
+    """
+    if sources["corpus_skip_declared"]:
+        return {
+            "scan_mode": "repo-only (declared)",
+            "population_complete": True,
+            "population_disclosure": (
+                "CLOSURE_SKIP_CORPUS=1 was declared by the caller, so the external corpus was "
+                "deliberately not scanned. The `conversation_only` class is out of scope for "
+                "this run by explicit declaration, not unmeasured by accident."
+            ),
+        }
+    if sources["corpus_present"]:
+        return {
+            "scan_mode": "full-corpus",
+            "population_complete": True,
+            "population_disclosure": None,
+        }
+    return {
+        "scan_mode": "repo-only (undeclared — corpus absent)",
+        "population_complete": False,
+        "population_disclosure": (
+            f"The external corpus {sources['corpus_dir']} does not exist and no narrower scope "
+            "was declared. Every concept originating only there is absent from the population, "
+            "so `conversation_only` (and any gap class derived from corpus-only concepts) is "
+            "UNMEASURED on this run and its zero is an absence, not a closure. The historical "
+            "measured residue under full-corpus mode was 91. Consumers projecting this document "
+            "as a population — notably the ownership determination, which declares "
+            "`population_document: 00-MASTER/UAKOS-CLOSURE-002/closure.json` — inherit this bound."
+        ),
     }
 
 
@@ -363,8 +446,14 @@ def build_model(sources: dict, concepts: dict) -> dict:
     closed = blocking == 0
     return {
         "program": "UAKOS-CLOSURE-002",
+        "schema_version": SCHEMA_VERSION,
         "baseline_commit": _run(["git", "rev-parse", "--short", "HEAD"]).strip(),
         "branch": _run(["git", "rev-parse", "--abbrev-ref", "HEAD"]).strip(),
+        # AB-6 / CG-10 disclosure. Recorded ALONGSIDE the determination and deliberately not
+        # folded into it: `closed` above remains the same pure function of the discovered
+        # population, so this addition moves no verdict. Making an incomplete population
+        # blocking is the governance act reserved to the EKI owner (AB-6, pending P2 sign-off).
+        **scan_disclosure(sources),
         "determination": "CLOSED" if closed else "NOT-CLOSED",
         "gap_total": blocking,
         "gaps": gaps,
@@ -649,6 +738,7 @@ def _final_report(m: dict) -> str:
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     gate = "--gate" in argv
+    require_complete = "--require-complete-population" in argv
     sources = discover_sources()
     concepts, _cert = build_concepts(sources)
     assign(concepts)
@@ -659,9 +749,26 @@ def main(argv: list[str] | None = None) -> int:
     written = emit(model)
     print(f"UAKOS-CLOSURE-002: {model['determination']} | concepts={model['concept_total']} "
           f"| gaps={model['gap_total']} {json.dumps(model['gaps'], sort_keys=True)}")
+    # AB-6: the scan mode travels with the verdict on every run, so a reader can never again
+    # mistake an unscanned population for a closed one from the summary line alone.
+    print(f"scan_mode={model['scan_mode']} | population_complete={model['population_complete']}")
     print(f"wrote {len(written) + 1} artifacts to {HERE}")
+    if not model["population_complete"]:
+        print(
+            "DISCLOSURE — POPULATION INCOMPLETE (schema 2, AB-6 / CG-10): "
+            f"{model['population_disclosure']}",
+            file=sys.stderr,
+        )
     if gate and model["determination"] != "CLOSED":
         print("GATE FAILED: repository closure NOT achieved (fail-closed).", file=sys.stderr)
+        return 1
+    if require_complete and not model["population_complete"]:
+        print(
+            "GATE FAILED: population INCOMPLETE — a closure certificate may not rest on a "
+            "population that was not read (fail-closed). Declare a narrower scope with "
+            "CLOSURE_SKIP_CORPUS=1, or make the corpus readable.",
+            file=sys.stderr,
+        )
         return 1
     return 0
 

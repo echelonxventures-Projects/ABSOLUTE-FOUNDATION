@@ -342,9 +342,7 @@ def record_execution_evidence(
     cko = CanonicalKnowledgeObject.create(
         cko_id=f"UCOS-EVIDENCE-{digest[:16]}",
         kind=KnowledgeKind.EVIDENCE,
-        title=(
-            f"Runtime execution evidence — {normalised.repository_id} " f"({normalised.epic_id})"
-        ),
+        title=(f"Runtime execution evidence — {normalised.repository_id} ({normalised.epic_id})"),
         statement=(
             f"Deterministic runtime-bridge evidence for repository "
             f"{normalised.repository_id} under {normalised.epic_id}: execution run "

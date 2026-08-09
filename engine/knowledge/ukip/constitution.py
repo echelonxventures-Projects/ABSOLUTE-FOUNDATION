@@ -386,7 +386,7 @@ def constitution_objects() -> (
         alternatives=(
             "Hand-author every record into the canonical store.",
             "Give each provider its own store and reconcile periodically.",
-            "Admit all providers into one registry keyed by derived content identity " "(chosen).",
+            "Admit all providers into one registry keyed by derived content identity (chosen).",
         ),
         evaluation_criteria=(
             "unlimited providers",

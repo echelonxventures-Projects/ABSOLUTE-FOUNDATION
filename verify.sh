@@ -90,6 +90,29 @@ summarize_and_exit() {
 # drift that let verify.sh pass while pre-commit's `ruff format --check` failed.
 run_stage "ruff lint + format-check (engine + platform)" ucos_ruff_gate
 
+# --- Stage 1b: prerequisite generation (P0-FINAL-CONVERGENCE-001) ----------------
+# The tests below READ generated artifacts that `.gitignore` excludes on the stated
+# grounds that they are "regenerated each run": /knowledge/, determinism-evidence/ and
+# the UAKOS-CLOSURE-002 engine outputs. Nothing re-ran them. Generation appeared in NO
+# stage of this script and in no part of register.sh, so the ignore authority asserted a
+# regeneration that no entry point performed. Locally that was invisible because the
+# artifacts persist from earlier manual runs; on a clean checkout they simply do not
+# exist, and 51 tests that pass here failed in CI — measured on a fresh clone of HEAD:
+# 50 failed + 3 errors, reduced to 2 by running exactly these five producers.
+#
+# This stage MUST precede the pytest stage: a prerequisite generated after the gate that
+# consumes it is not a prerequisite. Every write lands on an ignored path, so the stage
+# cannot dirty the working tree and cannot be seen as drift by the Registration Gate.
+generate_prerequisites() {
+  "$PY" -m engine.knowledge.cli init                          >/dev/null || return 1
+  "$PY" -m engine.determinism.reproduce                       >/dev/null || return 1
+  "$PY" 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py         >/dev/null || return 1
+  "$PY" 00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py          >/dev/null || return 1
+  "$PY" 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py          >/dev/null || return 1
+}
+run_stage "prerequisite generation (knowledge · determinism · closure 1-3)" \
+  generate_prerequisites
+
 # --- Stage 2: tests + coverage gate — CD-02 (pytest addopts drive --cov ≥ 90%) ---
 # Running via the venv interpreter guarantees pytest-cov is present, so the --cov
 # arguments in pyproject are always recognized.

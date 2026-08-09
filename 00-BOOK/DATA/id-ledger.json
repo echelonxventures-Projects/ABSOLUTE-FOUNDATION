@@ -8806,15 +8806,43 @@
       "page_start": 9784,
       "page_count": 4,
       "first_seen": "2026-08-09T17:22:23+00:00"
+    },
+    "STAGE-0-IMPLEMENTATION-COMPLETION-PLAN.md": {
+      "universal_id": "UCOS-STAGE0-000001",
+      "category": "STAGE0",
+      "page_start": 9788,
+      "page_count": 7,
+      "first_seen": "2026-08-09T19:01:22+00:00"
+    },
+    "UCOS-ACC-001-ABSOLUTE-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md": {
+      "universal_id": "UCOS-CON-000074",
+      "category": "CON",
+      "page_start": 9795,
+      "page_count": 9,
+      "first_seen": "2026-08-09T19:01:22+00:00"
+    },
+    "UCOS-ACC-002-UNIVERSAL-CONSTITUTIONAL-EVOLUTION-RESPONSE.md": {
+      "universal_id": "UCOS-CON-000075",
+      "category": "CON",
+      "page_start": 9804,
+      "page_count": 7,
+      "first_seen": "2026-08-09T19:01:22+00:00"
+    },
+    "engine/context/catalog/reference-frames.json": {
+      "universal_id": "UCOS-ENG-000022",
+      "category": "ENG",
+      "page_start": 9811,
+      "page_count": 5,
+      "first_seen": "2026-08-09T19:01:22+00:00"
     }
   },
-  "page_cursor": 9787,
+  "page_cursor": 9815,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
     "SRC": 2,
     "ARCH": 24,
-    "CON": 73,
+    "CON": 75,
     "VSN": 3,
     "IDX": 1,
     "EES": 2,
@@ -8822,7 +8850,7 @@
     "CAT": 7,
     "REF": 21,
     "GEN": 7,
-    "ENG": 21,
+    "ENG": 22,
     "RUN": 18,
     "FRZ": 3,
     "MISC": 46,
@@ -8917,7 +8945,8 @@
     "P0FREE": 1,
     "R1REPO": 1,
     "RTBD00": 1,
-    "W34CUN": 1
+    "W34CUN": 1,
+    "STAGE0": 1
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -24611,6 +24640,50 @@
         "status": "ACTIVE",
         "path": "platform/universal_control_plane/catalog/ucos-control-plane.json",
         "name": "Ucos Control Plane"
+      }
+    ],
+    "UCOS-STAGE0-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T19:01:22+00:00",
+        "content_hash": "927c7345fee9aef30267ec5f1cebeb4b17e7dcb6e8b791acbea51f69524ebcdc",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "STAGE-0-IMPLEMENTATION-COMPLETION-PLAN.md",
+        "name": "STAGE-0 IMPLEMENTATION COMPLETION PLAN"
+      }
+    ],
+    "UCOS-CON-000074": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T19:01:22+00:00",
+        "content_hash": "cd1d4d9500db46d8376d7dedab474f40e2507126a0994348ab51b1f6910403cf",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-ACC-001-ABSOLUTE-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md",
+        "name": "UCOS-ACC-001 — Absolute Constitutional Convergence Determination"
+      }
+    ],
+    "UCOS-CON-000075": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T19:01:22+00:00",
+        "content_hash": "a3d2d61b64978d8493dec69bef2c9af1e3e9237b7fbb3b998e31145785ef7667",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-ACC-002-UNIVERSAL-CONSTITUTIONAL-EVOLUTION-RESPONSE.md",
+        "name": "UCOS-ACC-002 — Universal Constitutional Evolution Response"
+      }
+    ],
+    "UCOS-ENG-000022": [
+      {
+        "seq": 1,
+        "at": "2026-08-09T19:01:22+00:00",
+        "content_hash": "a1cf3dfff538bd3a43dac9365f8ac5455e8ce777adc6723017e2a23df4bed705",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "engine/context/catalog/reference-frames.json",
+        "name": "Reference Frames"
       }
     ]
   }

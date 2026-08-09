@@ -6,10 +6,10 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 89 | UPN-000000001–UPN-000009783 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 90 | UPN-000000001–UPN-000009794 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
-| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 111 | UPN-000001327–UPN-000009759 |
-| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 61 | UPN-000000022–UPN-000009371 |
+| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 113 | UPN-000001327–UPN-000009810 |
+| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 62 | UPN-000000022–UPN-000009815 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 18 | UPN-000004194–UPN-000009294 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
 | `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 83 | UPN-000004559–UPN-000009787 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 89
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 90
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -129,6 +129,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-R1REPO-000001` | R-1 — Repository Replay Synchronization · Final Evidence | — | ACTIVE |
 | `UCOS-RTBD00-000001` | RTBD-001 — Repository Truth Boundary Determination | — | ACTIVE |
 | `UCOS-W34CUN-000001` | W3-4c — Universal Assurance validation cluster: coverage evid… | — | ACTIVE |
+| `UCOS-STAGE0-000001` | STAGE-0 IMPLEMENTATION COMPLETION PLAN | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -144,7 +145,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-002 — CONSTITUTION <a id="vol-002"></a>
 
 *Constitutional corpus, consolidation program, freeze, and registers.*  \
-**Category:** CON · **Status:** ACTIVE · **Artifacts:** 111
+**Category:** CON · **Status:** ACTIVE · **Artifacts:** 113
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -259,11 +260,13 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-CON-000071` | UCRD-001 — Constitutional Relationship Determination | — | ACTIVE |
 | `UCOS-CON-000072` | UMN-001 — Universal Micro Nucleus Constitutional Determination | — | ACTIVE |
 | `UCOS-CON-000073` | Ω-E06-STAGE-1 — UNIVERSAL CONSTITUTIONAL REPOSITORY DETERMINA… | — | ACTIVE |
+| `UCOS-CON-000074` | UCOS-ACC-001 — Absolute Constitutional Convergence Determination | — | ACTIVE |
+| `UCOS-CON-000075` | UCOS-ACC-002 — Universal Constitutional Evolution Response | — | ACTIVE |
 
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 
 *Universal architecture constitutions, catalogs, and engineering foundation.*  \
-**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 61
+**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 62
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -328,6 +331,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-ARCHITECTURA-000003` | 03 — ARCHITECTURAL DECISION ASSIMILATION MATRIX | — | ACTIVE |
 | `UCOS-REF-000020` | After Considering The Entire Evolution Of Ucos Ω | — | FROZEN |
 | `UCOS-REF-000021` | Ucos Ω | — | FROZEN |
+| `UCOS-ENG-000022` | Reference Frames | — | ACTIVE |
 
 ### VOL-004 — IMPLEMENTATION <a id="vol-004"></a>
 

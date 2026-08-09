@@ -172,3 +172,91 @@ def test_evidence_command(capsys: pytest.CaptureFixture[str], tmp_path: Path) ->
     code, degraded = _run(capsys, "--empty", "evidence")
     assert code == 1
     assert degraded["operational"] is False
+
+
+# --------------------------------------------------------------------------- #
+# Part 15/16 — the location surface                                            #
+# --------------------------------------------------------------------------- #
+
+
+def test_frames_command(capsys: pytest.CaptureFixture[str]) -> None:
+    code, coverage = _run(capsys, "frames")
+    assert code == 0
+    assert coverage["frame_count"] > 0
+    assert coverage["complete_frames"] + coverage["incomplete_frames"] == coverage["frame_count"]
+
+    code, document = _run(capsys, "--verbose", "frames")
+    assert code == 0
+    assert document["closed_set"] is False
+
+
+def test_location_command_resolves_a_frame(capsys: pytest.CaptureFixture[str]) -> None:
+    code, payload = _run(capsys, "location", "--frame", "planetary-a1")
+    assert code == 0
+    assert payload["complete"] is True
+    assert payload["unresolved"] == []
+    assert payload["digest"]
+
+
+def test_location_command_fails_closed_on_an_incomplete_frame(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    code, payload = _run(capsys, "location", "--frame", "partial-frame-p0")
+    assert code == 1
+    assert payload["complete"] is False
+    assert payload["unresolved"]
+
+
+def test_location_command_reports_the_whole_architecture(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    code, payload = _run(capsys, "location")
+    assert code == 0
+    assert payload["defaults"] == []
+    assert payload["location_axis"] == "location"
+
+
+def test_location_command_can_show_what_it_registered(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    code, payload = _run(capsys, "--verbose", "location", "--frame", "planetary-a1")
+    assert code == 0
+    assert payload["registered"]
+    assert {record["boundary"] for record in payload["registered"]} == {"planetary-a1"}
+
+
+def test_rebase_command(capsys: pytest.CaptureFixture[str]) -> None:
+    code, payload = _run(capsys, "rebase", "--frames", "planetary-a1", "planetary-b4")
+    assert code == 0
+    assert payload["differing_count"] > 0
+
+    code, unchanged = _run(capsys, "rebase", "--frames", "planetary-a1", "planetary-a1")
+    assert code == 1
+    assert unchanged["axes_differing"] == []
+
+
+def test_location_validate_command(capsys: pytest.CaptureFixture[str]) -> None:
+    code, summary = _run(capsys, "location-validate")
+    assert code == 0
+    assert summary["violations"] == 0
+
+    code, full = _run(capsys, "--verbose", "location-validate", "--strict")
+    assert code == 0
+    assert full["is_clean"] is True
+
+
+def test_location_certify_command(capsys: pytest.CaptureFixture[str]) -> None:
+    code, summary = _run(capsys, "location-certify")
+    assert code == 0
+    assert summary["verdict"] == VERDICT_CERTIFIED
+
+    code, full = _run(capsys, "--verbose", "location-certify")
+    assert code == 0
+    assert full["certified"] is True
+
+
+def test_location_replay_command(capsys: pytest.CaptureFixture[str]) -> None:
+    code, payload = _run(capsys, "location-replay")
+    assert code == 0
+    assert payload["fixed_point"] is True
+    assert payload["drifted"] == []

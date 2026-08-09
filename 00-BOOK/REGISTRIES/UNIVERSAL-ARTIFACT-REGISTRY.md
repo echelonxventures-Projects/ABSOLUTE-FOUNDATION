@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1227
+**Total artifacts:** 1231
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1235,5 +1235,9 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1225 | `UCOS-RTBD00-000001` | RTBD-001 — Repository Truth Boundary Determination | — | 000 | UPN-000009771–UPN-000009777 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../RTBD-001-REPOSITORY-TRUTH-BOUNDARY-DETERMINATION.md) |
 | 1226 | `UCOS-W34CUN-000001` | W3-4c — Universal Assurance validation cluster: coverage … | — | 000 | UPN-000009778–UPN-000009783 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../W3-4c-UNIVERSAL-ASSURANCE-VALIDATION-CLUSTER-COVERAGE-EVIDENCE.md) |
 | 1227 | `UCOS-PLT-000067` | Ucos Control Plane | — | 006 | UPN-000009784–UPN-000009787 | ACTIVE | `UCOS-PLT-000007` | 0 | [↗](../../platform/universal_control_plane/catalog/ucos-control-plane.json) |
+| 1228 | `UCOS-STAGE0-000001` | STAGE-0 IMPLEMENTATION COMPLETION PLAN | — | 000 | UPN-000009788–UPN-000009794 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../STAGE-0-IMPLEMENTATION-COMPLETION-PLAN.md) |
+| 1229 | `UCOS-CON-000074` | UCOS-ACC-001 — Absolute Constitutional Convergence Determ… | — | 002 | UPN-000009795–UPN-000009803 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCOS-ACC-001-ABSOLUTE-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md) |
+| 1230 | `UCOS-CON-000075` | UCOS-ACC-002 — Universal Constitutional Evolution Response | — | 002 | UPN-000009804–UPN-000009810 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCOS-ACC-002-UNIVERSAL-CONSTITUTIONAL-EVOLUTION-RESPONSE.md) |
+| 1231 | `UCOS-ENG-000022` | Reference Frames | — | 003 | UPN-000009811–UPN-000009815 | ACTIVE | `UCOS-ENG-000003` | 0 | [↗](../../engine/context/catalog/reference-frames.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
