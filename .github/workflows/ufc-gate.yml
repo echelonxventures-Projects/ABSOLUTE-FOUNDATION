@@ -136,7 +136,7 @@ jobs:
       # merely replace it. The suite pins that reproduction, so a change that quietly altered the
       # measurement while retiring the second implementation would fail here.
       - name: Install pinned test toolchain
-        run: python -m pip install --disable-pip-version-check "pytest==8.3.4"
+        run: python -m pip install --disable-pip-version-check "pytest==8.3.4" "pytest-cov==6.0.0" "coverage==7.15.2"
 
       - name: Ownership convergence suite (reproduction · refusal to infer · recommendation is not ownership)
         run: python -m pytest platform/tests/test_universal_ownership_convergence.py -q --no-cov
@@ -166,7 +166,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install pinned test toolchain
-        run: python -m pip install --disable-pip-version-check "pytest==8.3.4"
+        run: python -m pip install --disable-pip-version-check "pytest==8.3.4" "pytest-cov==6.0.0" "coverage==7.15.2"
 
       # --no-cov: these suites gate the Constitution, not repository coverage. The coverage floor
       # is owned by ./verify.sh in ec1-ci.yml and is not duplicated here.

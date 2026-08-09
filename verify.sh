@@ -103,15 +103,10 @@ run_stage "ruff lint + format-check (engine + platform)" ucos_ruff_gate
 # This stage MUST precede the pytest stage: a prerequisite generated after the gate that
 # consumes it is not a prerequisite. Every write lands on an ignored path, so the stage
 # cannot dirty the working tree and cannot be seen as drift by the Registration Gate.
-generate_prerequisites() {
-  "$PY" -m engine.knowledge.cli init                          >/dev/null || return 1
-  "$PY" -m engine.determinism.reproduce                       >/dev/null || return 1
-  "$PY" 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py         >/dev/null || return 1
-  "$PY" 00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py          >/dev/null || return 1
-  "$PY" 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py          >/dev/null || return 1
-}
+# The producers live in scripts/generate-prerequisites.sh so this path and the stdlib-only
+# constitutional gate workflows share ONE definition rather than two that can drift apart.
 run_stage "prerequisite generation (knowledge · determinism · closure 1-3)" \
-  generate_prerequisites
+  env PYTHON="$PY" bash scripts/generate-prerequisites.sh
 
 # --- Stage 2: tests + coverage gate — CD-02 (pytest addopts drive --cov ≥ 90%) ---
 # Running via the venv interpreter guarantees pytest-cov is present, so the --cov

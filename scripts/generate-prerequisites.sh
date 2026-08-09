@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#
+# UCOS Ω∞ — Generated-prerequisite regeneration (P0-BLOCKER-ERADICATION-001).
+#
+#   ./scripts/generate-prerequisites.sh
+#   PYTHON=/path/to/python ./scripts/generate-prerequisites.sh
+#
+# THE one definition of "re-derive the generated inputs the gates read". Four trees are
+# excluded from version control on the STATED grounds that they are "regenerated each run":
+#
+#   knowledge/                          ucos-knowledge init      (engine.knowledge.cli)
+#   determinism-evidence/               ec1-determinism          (engine.determinism.reproduce)
+#   00-MASTER/UAKOS-CLOSURE-002/*.md    make closure             (closure_engine.py)
+#   …/closure.json · phase2 · phase3    make closure-phase2/3    (phase2/phase3_engine.py)
+#
+# Nothing ran them. The exclusion asserted a regeneration no entry point performed, so every
+# consumer read them only by accident of local residue. Measured consequences on a clean
+# checkout of 404568e: 51 of 10201 tests failed, and five constitutional gate engines
+# reported a declared reference as unresolvable —
+#   UCL-000001   REC-KNOWLEDGE: record owner does not resolve: knowledge/canonical-knowledge.json
+#   ACEE-000001  a cited owner does not resolve: CAP-08 → knowledge/canonical-knowledge.json
+#   UCCEP-000000 PROGRAM-000008: reference does not resolve: 00-MASTER/UAKOS-CLOSURE-002/…
+#   UCOS-AEE-001 OBS-READINESS-WRITE-SCOPE: reference does not resolve: 00-MASTER/UAKOS-…
+#   UCOS-RIB-001 matrices.MTX-PRIORITY: canonical owner does not resolve: …/42-…
+# — every one of which PASSES once these four producers have run. The declarations were
+# correct; the inputs were simply never re-derived.
+#
+# Deliberately STDLIB-ONLY and venv-free. The constitutional gate workflows are stdlib-only
+# by design (no bootstrap, no pinned toolchain, `python3` straight from setup-python), so a
+# prerequisite step that needed the venv could not run there — and those are exactly the jobs
+# that were failing. Verified: all four producers exit 0 under a bare `python3`.
+#
+# Writes ONLY to the four ignored trees above, so running this can never dirty the working
+# tree and can never be seen as drift by the Registration Gate.
+#
+# `init --force` is deliberate and required for IDEMPOTENCE. Plain `init` refuses an existing
+# store ("canonical store already exists … use --force") and exits 1, so a bare `init` works
+# exactly once per checkout and fails on every subsequent run — a verification stage that can
+# only run on a virgin tree is not a verification stage. The store is deterministically
+# re-derived from engine/knowledge/seed.py, the single authored source, and is ignored by
+# version control, so overwriting it discards nothing: re-deriving output from its own source
+# is the whole reason it is declared re-derivable.
+
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+PY="${PYTHON:-python3}"
+
+"$PY" -m engine.knowledge.cli init --force            >/dev/null
+"$PY" -m engine.determinism.reproduce                 >/dev/null
+"$PY" 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py   >/dev/null
+"$PY" 00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py    >/dev/null
+"$PY" 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py    >/dev/null
+
+echo "generated prerequisites: knowledge · determinism-evidence · closure phases 1-3" >&2
