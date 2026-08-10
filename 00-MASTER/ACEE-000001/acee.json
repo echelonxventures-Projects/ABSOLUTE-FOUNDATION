@@ -137,7 +137,7 @@
       "kind": "registered-artifact",
       "name": "Registered artifacts",
       "note": "the source of REGISTERED constitutional identity for a relationship target",
-      "objects": 1232,
+      "objects": 1233,
       "pointer": "artifacts",
       "provider": "PRV-REGISTRY",
       "providers_matched": 1,
@@ -148,7 +148,7 @@
       "kind": "lineage-record",
       "name": "Lineage and bookkeeping records",
       "note": "a keyed store: the mapping key IS the identity, which needs no adapter change and no engine change",
-      "objects": 1263,
+      "objects": 1264,
       "pointer": "by_path",
       "provider": "PRV-LEDGER",
       "providers_matched": 1,
@@ -712,7 +712,7 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "cko_identity_collisions": 0,
-    "ckos_discovered": 3499,
+    "ckos_discovered": 3501,
     "ckos_of_unknown_kind": 0,
     "ckos_without_semantic_identity": 0,
     "closed_enumerations_declared": 0,
@@ -752,7 +752,7 @@
     "objects_from_invariants": 48,
     "objects_from_lifecycle": 45,
     "objects_from_pipeline": 35,
-    "objects_from_registry": 1232,
+    "objects_from_registry": 1233,
     "parallel_authority_claims": 0,
     "privileged_branches": 0,
     "providers_not_open": 0,
@@ -1614,7 +1614,7 @@
       "measure": "ckos_discovered",
       "measured": true,
       "reusable_as": "a composable object graph any further measurement reads without re-parsing its owners",
-      "value": 3499
+      "value": 3501
     },
     {
       "id": "EK-05",
@@ -5672,7 +5672,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "1cebc9b2133e96167c9b06e179790fd3ba6ae51885cabebca9a0853c2b93f761",
+  "graph_digest": "b2f0dfc514e9307eeadec272acee7b597822852adf4b6254fd4db06ca14ec99d",
   "graphs": [
     {
       "composed": true,
@@ -6098,7 +6098,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 1253,
+        "measure_value": 1254,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6106,7 +6106,7 @@
       "invariant": "Universal Capability Discovery",
       "measure": "counters.capability_nodes_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 1253,
+      "measure_value": 1254,
       "ordinal": 50,
       "owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "properties": {
@@ -7038,7 +7038,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 1232,
+        "measure_value": 1233,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7046,7 +7046,7 @@
       "invariant": "Universal Registration",
       "measure": "counters.registry_artifacts_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 1232,
+      "measure_value": 1233,
       "ordinal": 250,
       "owner": "00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md",
       "properties": {
@@ -23166,7 +23166,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "d56bac045e2a1b1f0cc65b017ec4203b8c949e3b4ab58b8fa0a3d9ca5f700a2f",
+  "seal_sha256": "e8abad7e8c2df7af92444fb2f6e8a8c0ebdf6074c4baeb7c11bec887b6e77c64",
   "self_evolution": [
     {
       "anchor": "determination",

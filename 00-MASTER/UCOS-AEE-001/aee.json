@@ -252,13 +252,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
           "reason": "",
           "required": true,
-          "residue": [
-            "engine/constitution/evolution.py"
-          ],
+          "residue": [],
           "tier": "standard",
-          "unattributed": [
-            "engine/constitution/evolution.py"
-          ],
+          "unattributed": [],
           "verdict": "PASS"
         },
         {
@@ -379,7 +375,21 @@
           "owner": "00-MASTER/URRC-000001/urrc_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue": [
+            "00-MASTER/URRC-000001/00-URRC-DASHBOARD.md",
+            "00-MASTER/URRC-000001/02-REPOSITORY-REALITY-DETERMINATION.md",
+            "00-MASTER/URRC-000001/04-DUPLICATION-MATRIX.md",
+            "00-MASTER/URRC-000001/05-CONFLICT-MATRIX.md",
+            "00-MASTER/URRC-000001/06-GAP-MATRIX.md",
+            "00-MASTER/URRC-000001/07-COMPLETENESS-MATRIX.md",
+            "00-MASTER/URRC-000001/09-AUTOMATION-MATRIX.md",
+            "00-MASTER/URRC-000001/10-CATALOGUE-AND-REGISTRY-BINDING.md",
+            "00-MASTER/URRC-000001/11-ENGINE-CATALOGUE.md",
+            "00-MASTER/URRC-000001/12-GRAPH-AND-CAPABILITY-BINDING.md",
+            "00-MASTER/URRC-000001/14-VALIDATION-CERTIFICATION-COMPLIANCE-BINDING.md",
+            "00-MASTER/URRC-000001/15-EVOLUTION-AND-ROADMAP-BINDING.md",
+            "00-MASTER/URRC-000001/urrc.json"
+          ],
           "tier": "standard",
           "unattributed": [],
           "verdict": "PASS"
@@ -417,7 +427,11 @@
           "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue": [
+            "00-MASTER/UCEF-000001/09-VALIDATION-REPORT.md",
+            "00-MASTER/UCEF-000001/10-CERTIFICATION-REPORT.md",
+            "00-MASTER/UCEF-000001/ucef.json"
+          ],
           "tier": "standard",
           "unattributed": [],
           "verdict": "PASS"

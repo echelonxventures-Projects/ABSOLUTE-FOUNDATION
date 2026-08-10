@@ -3,8 +3,7 @@
     "CK-HEALTH"
   ],
   "blocking_failures": [
-    "CK-ACEE",
-    "CK-VERIFY"
+    "CK-ACEE"
   ],
   "blocking_not_executed": [],
   "blocking_out_of_tier": [],
@@ -241,15 +240,15 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 1,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-VERIFY",
       "in_scope": true,
       "name": "Canonical verification (lint · tests · coverage · enforcement)",
       "owner": "verify.sh",
-      "reason": "one or more stages failed",
+      "reason": "",
       "tier": "full",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "write_scope": "read-only"
     },
     {
@@ -794,8 +793,7 @@
     }
   ],
   "gate_blocking": [
-    "CK-ACEE",
-    "CK-VERIFY"
+    "CK-ACEE"
   ],
   "gate_exit": 1,
   "gates": [
@@ -980,16 +978,14 @@
       "executed": [
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-VERIFY"
-      ],
+      "failed": [],
       "id": "G-10",
       "name": "Validation Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-CEP/CEP-004",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [
@@ -1003,16 +999,14 @@
         "CK-HEALTH",
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-VERIFY"
-      ],
+      "failed": [],
       "id": "G-11",
       "name": "Certification Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-CEP/CEP-005",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS-WITH-ADVISORY"
     },
     {
       "advisory_failed": [],
@@ -1043,16 +1037,14 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-VERIFY"
-      ],
+      "failed": [],
       "id": "G-13",
       "name": "Implementation Authorization Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -1083,16 +1075,14 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-VERIFY"
-      ],
+      "failed": [],
       "id": "G-15",
       "name": "Repository Fixed-Point Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -1324,15 +1314,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -1379,20 +1367,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -1401,12 +1385,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -1415,12 +1397,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -1541,20 +1521,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -1581,12 +1557,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -1627,15 +1601,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -1694,20 +1666,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -1716,12 +1684,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -1730,12 +1696,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -1862,20 +1826,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -1902,12 +1862,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -1941,15 +1899,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -1996,20 +1952,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -2018,12 +1970,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -2032,12 +1982,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -2164,20 +2112,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -2204,12 +2148,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -2716,15 +2658,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -2777,20 +2717,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -2799,12 +2735,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -2813,12 +2747,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -2951,20 +2883,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -2991,12 +2919,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -3035,15 +2961,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -3084,20 +3008,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -3106,12 +3026,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -3120,12 +3038,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -3240,20 +3156,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -3280,12 +3192,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -3327,15 +3237,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -3394,20 +3302,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -3416,20 +3320,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -3562,20 +3462,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -3596,12 +3492,10 @@
           "verdict": "PASS-WITH-ADVISORY"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4168,15 +4062,13 @@
     "00-CEP/CEP-008": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -4229,28 +4121,22 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4259,12 +4145,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4385,20 +4269,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4419,12 +4299,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4466,15 +4344,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -4527,20 +4403,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -4549,12 +4421,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4563,12 +4433,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4695,20 +4563,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -4729,12 +4593,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4774,15 +4636,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -4841,20 +4701,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -4863,12 +4719,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -4877,12 +4731,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5009,20 +4861,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -5049,12 +4897,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5088,15 +4934,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -5155,20 +4999,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -5177,12 +5017,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5191,12 +5029,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5323,20 +5159,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -5363,12 +5195,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5404,15 +5234,13 @@
     "00-CEP/CEP-010": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -5441,20 +5269,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5463,12 +5287,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5477,12 +5299,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5591,20 +5411,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5625,12 +5441,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5678,15 +5492,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -5739,20 +5551,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -5761,12 +5569,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5775,12 +5581,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5907,20 +5711,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -5947,12 +5747,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -5993,15 +5791,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -6042,20 +5838,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -6064,12 +5856,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6078,12 +5868,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6210,20 +5998,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -6250,12 +6034,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6294,15 +6076,13 @@
     "00-CMG/CMG-000001 · tools": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -6325,20 +6105,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6347,12 +6123,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6361,12 +6135,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6463,20 +6235,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6497,12 +6265,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6551,15 +6317,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -6618,20 +6382,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -6640,12 +6400,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6654,12 +6412,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6786,20 +6542,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -6826,12 +6578,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6869,15 +6619,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -6924,20 +6672,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -6946,12 +6690,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -6960,12 +6702,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7092,20 +6832,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -7132,12 +6868,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7176,15 +6910,13 @@
     "00-CMG/CMG-000007": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -7213,20 +6945,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7235,12 +6963,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7249,12 +6975,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7363,20 +7087,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7397,12 +7117,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7450,15 +7168,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -7511,20 +7227,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -7533,12 +7245,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7547,12 +7257,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7679,20 +7387,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -7719,12 +7423,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7765,15 +7467,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -7820,20 +7520,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -7842,12 +7538,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7856,12 +7550,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -7982,20 +7674,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -8022,12 +7710,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8067,16 +7753,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-VERIFY"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-VERIFY"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -8133,20 +7815,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -8155,12 +7833,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8169,12 +7845,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8299,20 +7973,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -8339,12 +8009,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8375,16 +8043,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-VERIFY"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-VERIFY"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -8441,20 +8105,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -8463,12 +8123,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8477,12 +8135,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8607,20 +8263,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -8647,12 +8299,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8684,15 +8334,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -8751,20 +8399,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -8773,12 +8417,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8787,12 +8429,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -8919,20 +8559,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -8959,12 +8595,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9004,15 +8638,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -9071,20 +8703,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -9093,12 +8721,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9107,12 +8733,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9239,20 +8863,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -9279,12 +8899,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9324,15 +8942,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -9391,20 +9007,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -9413,12 +9025,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9427,12 +9037,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9559,20 +9167,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -9599,12 +9203,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9642,15 +9244,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -9709,20 +9309,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -9731,12 +9327,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9745,12 +9339,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9877,20 +9469,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -9917,12 +9505,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -9959,15 +9545,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -10026,20 +9610,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -10048,12 +9628,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10062,12 +9640,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10194,20 +9770,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -10234,12 +9806,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10276,15 +9846,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -10337,20 +9905,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -10359,12 +9923,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10373,12 +9935,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10511,20 +10071,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -10551,12 +10107,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10595,15 +10149,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -10656,20 +10208,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -10678,20 +10226,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10818,20 +10362,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -10846,12 +10386,10 @@
           "verdict": "PASS-WITH-ADVISORY"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10890,15 +10428,13 @@
     "00-MASTER/MCP-005-MASTER-DASHBOARD.md": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -10957,20 +10493,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10979,12 +10511,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -10993,12 +10523,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11131,20 +10659,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11165,12 +10689,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11209,15 +10731,13 @@
     "00-MASTER/MCP-006-MASTER-TRACEABILITY.md": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -11270,20 +10790,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11292,12 +10808,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11306,12 +10820,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11438,20 +10950,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11478,12 +10986,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11523,15 +11029,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -11590,20 +11094,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -11612,12 +11112,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11626,12 +11124,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11758,20 +11254,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -11798,12 +11290,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11843,15 +11333,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -11910,20 +11398,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -11932,12 +11416,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -11946,12 +11428,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12078,20 +11558,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -12118,12 +11594,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12163,15 +11637,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -12200,20 +11672,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -12222,12 +11690,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12236,12 +11702,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12350,20 +11814,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -12384,12 +11844,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12439,15 +11897,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -12500,20 +11956,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -12522,12 +11974,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12536,12 +11986,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12668,20 +12116,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -12708,12 +12152,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12753,15 +12195,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -12814,20 +12254,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -12836,12 +12272,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12850,12 +12284,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -12982,20 +12414,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -13022,12 +12450,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13065,15 +12491,13 @@
     "00-MASTER/UCCEP-000000": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -13096,28 +12520,22 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13126,12 +12544,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13222,20 +12638,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13244,12 +12656,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13301,15 +12711,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -13368,20 +12776,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -13390,20 +12794,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13530,20 +12930,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -13564,12 +12960,10 @@
           "verdict": "PASS-WITH-ADVISORY"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13607,15 +13001,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -13674,20 +13066,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -13696,12 +13084,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13710,12 +13096,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13842,20 +13226,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -13882,12 +13262,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -13925,15 +13303,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -13992,20 +13368,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -14014,12 +13386,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14028,12 +13398,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14160,20 +13528,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -14200,12 +13564,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14479,16 +13841,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-VERIFY"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-VERIFY"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -14545,20 +13903,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -14567,12 +13921,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14581,12 +13933,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14705,20 +14055,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -14745,12 +14091,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14778,15 +14122,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -14845,20 +14187,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -14867,12 +14205,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -14881,12 +14217,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15013,20 +14347,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -15053,12 +14383,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15091,16 +14419,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-VERIFY"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-VERIFY"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -15157,20 +14481,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -15179,12 +14499,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15193,12 +14511,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15323,20 +14639,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -15363,12 +14675,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15399,16 +14709,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-VERIFY"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-VERIFY"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -15465,20 +14771,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -15487,12 +14789,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15501,12 +14801,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15631,20 +14929,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -15671,12 +14965,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15708,15 +15000,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -15769,20 +15059,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -15791,12 +15077,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15805,12 +15089,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -15937,20 +15219,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -15977,12 +15255,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17138,15 +16414,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -17205,20 +16479,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -17227,12 +16497,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17241,12 +16509,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17373,20 +16639,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -17413,12 +16675,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17458,15 +16718,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -17525,20 +16783,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -17547,12 +16801,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17561,12 +16813,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17693,20 +16943,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -17733,12 +16979,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17778,15 +17022,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -17845,20 +17087,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -17867,12 +17105,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -17881,12 +17117,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18013,20 +17247,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -18053,12 +17283,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18097,15 +17325,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -18164,20 +17390,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -18186,12 +17408,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18200,12 +17420,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18332,20 +17550,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -18372,12 +17586,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18416,15 +17628,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -18471,20 +17681,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -18493,12 +17699,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18507,12 +17711,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18639,20 +17841,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -18679,12 +17877,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18724,15 +17920,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -18791,20 +17985,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -18813,12 +18003,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18827,12 +18015,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -18959,20 +18145,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -18999,12 +18181,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19044,15 +18224,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -19111,20 +18289,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -19133,12 +18307,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19147,12 +18319,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19279,20 +18449,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -19319,12 +18485,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19364,15 +18528,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -19431,20 +18593,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -19453,12 +18611,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19467,12 +18623,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19599,20 +18753,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -19639,12 +18789,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19684,15 +18832,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -19751,20 +18897,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -19773,12 +18915,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19787,12 +18927,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -19919,20 +19057,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -19959,12 +19093,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20004,15 +19136,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -20071,20 +19201,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -20093,12 +19219,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20107,12 +19231,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20239,20 +19361,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -20279,12 +19397,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20324,15 +19440,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -20391,20 +19505,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -20413,12 +19523,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20427,12 +19535,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20559,20 +19665,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -20599,12 +19701,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20644,15 +19744,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -20699,20 +19797,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -20721,12 +19815,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20735,12 +19827,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20867,20 +19957,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -20907,12 +19993,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -20953,16 +20037,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-VERIFY"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-VERIFY"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -21019,20 +20099,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -21041,12 +20117,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21055,12 +20129,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21185,20 +20257,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -21225,12 +20293,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21262,15 +20328,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -21329,20 +20393,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -21351,20 +20411,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21497,20 +20553,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -21531,12 +20583,10 @@
           "verdict": "PASS-WITH-ADVISORY"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21575,15 +20625,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -21642,20 +20690,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -21664,20 +20708,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21810,20 +20850,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -21844,12 +20880,10 @@
           "verdict": "PASS-WITH-ADVISORY"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21888,15 +20922,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -21955,20 +20987,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -21977,12 +21005,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -21991,12 +21017,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22123,20 +21147,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -22163,12 +21183,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22205,15 +21223,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -22266,20 +21282,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -22288,12 +21300,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22302,12 +21312,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22434,20 +21442,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -22474,12 +21478,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22520,15 +21522,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -22581,20 +21581,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -22603,12 +21599,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22617,12 +21611,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22755,20 +21747,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -22795,12 +21783,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -22840,15 +21826,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -22907,20 +21891,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -22929,20 +21909,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23075,20 +22051,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -23109,12 +22081,10 @@
           "verdict": "PASS-WITH-ADVISORY"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23437,15 +22407,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -23504,20 +22472,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -23526,12 +22490,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23540,12 +22502,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23672,20 +22632,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -23712,12 +22668,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23754,15 +22708,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -23821,20 +22773,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -23843,12 +22791,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23857,12 +22803,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -23989,20 +22933,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -24029,12 +22969,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24074,15 +23012,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -24141,20 +23077,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -24163,12 +23095,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24177,12 +23107,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24309,20 +23237,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -24349,12 +23273,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24668,15 +23590,13 @@
     "engine/discovery (UCOS-EPIC-003)": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -24687,20 +23607,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24709,12 +23625,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24723,12 +23637,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24807,20 +23719,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24829,12 +23737,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24886,15 +23792,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -24953,20 +23857,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -24975,12 +23875,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -24989,12 +23887,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25121,20 +24017,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -25161,12 +24053,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25204,15 +24094,13 @@
     "engine/graph": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -25265,20 +24153,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25287,12 +24171,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25301,12 +24183,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25427,20 +24307,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25461,12 +24337,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25505,15 +24379,13 @@
     "engine/graph (UCOS-EPIC-002)": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -25542,20 +24414,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25564,12 +24432,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25578,12 +24444,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25686,20 +24550,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25708,12 +24568,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25762,15 +24620,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -25829,20 +24685,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -25851,12 +24703,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25865,12 +24715,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -25997,20 +24845,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -26037,12 +24881,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -26079,15 +24921,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -26140,20 +24980,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -26162,12 +24998,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -26176,12 +25010,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -26308,20 +25140,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -26348,12 +25176,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -26394,15 +25220,13 @@
         "CK-HEALTH"
       ],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -26455,20 +25279,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -26477,12 +25297,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -26491,12 +25309,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -26623,20 +25439,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS-WITH-ADVISORY"
         },
         {
           "failed": [],
@@ -26663,12 +25475,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27288,15 +26098,13 @@
     "intelligence/rie": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -27349,28 +26157,22 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27379,12 +26181,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27505,20 +26305,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27533,12 +26329,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27579,15 +26373,13 @@
     "platform/measurement": {
       "advisory_failures": [],
       "blocking_failures": [
-        "CK-VERIFY",
         "CK-ACEE"
       ],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
       "gate_blocking": [
-        "CK-ACEE",
-        "CK-VERIFY"
+        "CK-ACEE"
       ],
       "gate_exit": 1,
       "gates": [
@@ -27646,20 +26438,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-10",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-11",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27668,12 +26456,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-13",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27682,12 +26468,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "G-15",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27820,20 +26604,16 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000011",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000012",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -27854,12 +26634,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-VERIFY"
-          ],
+          "failed": [],
           "id": "PROGRAM-000017",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         },
         {
           "failed": [],
@@ -29255,16 +28033,14 @@
       "executed": [
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-VERIFY"
-      ],
+      "failed": [],
       "id": "PROGRAM-000011",
       "name": "Universal Validation Evolution",
       "not_executed": [],
       "out_of_tier": [],
       "output": "11-VALIDATION-INTELLIGENCE.md",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [
@@ -29284,16 +28060,14 @@
         "CK-VERIFY",
         "CK-HEALTH"
       ],
-      "failed": [
-        "CK-VERIFY"
-      ],
+      "failed": [],
       "id": "PROGRAM-000012",
       "name": "Universal Certification Evolution",
       "not_executed": [],
       "out_of_tier": [],
       "output": "12-CERTIFICATION-INTELLIGENCE.md",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS-WITH-ADVISORY"
     },
     {
       "advisory_failed": [],
@@ -29433,16 +28207,14 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [
-        "CK-VERIFY"
-      ],
+      "failed": [],
       "id": "PROGRAM-000017",
       "name": "Universal Repository Fixed-Point Closure",
       "not_executed": [],
       "out_of_tier": [],
       "output": "19-REPOSITORY-FIXED-POINT-CLOSURE.md",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "advisory_failed": [],
@@ -29569,7 +28341,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "c96489d41717a3f49e9a79ebb0be6886611d9e2a88fe40b79fb227d0037ecc70",
+  "seal_sha256": "d006615fbf58e34ae67a3fe1e52a7cf32388a6f2fe474a55e3dbf5a065e63667",
   "tier": "full",
   "unavailable": [],
   "unproven": []

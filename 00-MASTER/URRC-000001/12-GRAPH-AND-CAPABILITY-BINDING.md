@@ -52,35 +52,35 @@ Graph owners, edge-count reconciliation, capability edge census.
 **`DV-12`** — Graph edges present in the graph projection.
 
 - **Primitive** — `record_count`
-- **Result** — 12897 records
+- **Result** — 12899 records
 - **Substrate evidence** — `S-02`
 
 | Key | Value |
 |---|---|
-| records | 12897 |
+| records | 12899 |
 
 **`DV-13`** — Edge census against the portfolio rollup.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 12897 vs 12897 · delta 0
+- **Result** — 12899 vs 12899 · delta 0
 - **Substrate evidence** — `S-02`, `S-03`
 
 | Key | Value |
 |---|---|
-| `S-02` count | 12897 |
-| `S-03` portfolio.total_edges | 12897 |
+| `S-02` count | 12899 |
+| `S-03` portfolio.total_edges | 12899 |
 | delta | 0 |
 
 **`DV-14`** — Edge census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 12897 vs 12897 · delta 0
+- **Result** — 12899 vs 12899 · delta 0
 - **Substrate evidence** — `S-02`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-02` count | 12897 |
-| `S-04` scope.edges | 12897 |
+| `S-02` count | 12899 |
+| `S-04` scope.edges | 12899 |
 | delta | 0 |
 
 #### D-29 — Capability edge census
@@ -100,8 +100,8 @@ Graph owners, edge-count reconciliation, capability edge census.
 |---|---|
 | `Depends-On` | 4774 |
 | `Required-By` | 4697 |
-| `Child` | 1233 |
-| `Parent` | 1233 |
+| `Child` | 1234 |
+| `Parent` | 1234 |
 | `Consumed-By` | 316 |
 | `Consumes` | 316 |
 | `Authorized-By` | 100 |
