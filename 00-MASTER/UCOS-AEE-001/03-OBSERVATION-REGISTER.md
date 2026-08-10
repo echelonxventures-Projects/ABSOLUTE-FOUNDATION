@@ -15,11 +15,11 @@
 
 | Observation | Located owner | Pointer | Operator | Verdict | Observed |
 |---|---|---|---|---|---|
-| `OBS-AGGREGATE-BLOCKING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `blocking_failures` | `is_empty` | **VIOLATED** | `["CK-ACEE", "CK-UCL"]` |
+| `OBS-AGGREGATE-BLOCKING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `blocking_failures` | `is_empty` | **VIOLATED** | `["CK-ACEE", "CK-REG-DRIFT", "CK-UCL"]` |
 | `OBS-AGGREGATE-UNPROVEN` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `unproven` | `is_empty` | SATISFIED | `[]` |
 | `OBS-AGGREGATE-GATE-EXIT` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gate_exit` | `equals` | **VIOLATED** | `1` |
-| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gates` | `every_field_in` | **VIOLATED** | `["G-25='FAIL'", "G-26='FAIL'"]` |
-| `OBS-AGGREGATE-PROGRAMMES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `programs` | `every_field_in` | **VIOLATED** | `["PROGRAM-000020='FAIL'", "PROGRAM-000021='FAIL'"]` |
+| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gates` | `every_field_in` | **VIOLATED** | `["G-07='FAIL'", "G-15='FAIL'", "G-25='FAIL'", "G-26='FAIL'"]` |
+| `OBS-AGGREGATE-PROGRAMMES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `programs` | `every_field_in` | **VIOLATED** | `["PROGRAM-000004='FAIL'", "PROGRAM-000005='FAIL'", "PROGRAM-000017='FAIL'", "PRO` |
 | `OBS-AGGREGATE-CEILING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `certification_ceiling` | `is_empty` | **VIOLATED** | `["`UCCEP-F-004` — Constitutional finality is reserved to an ou…"]` |
 | `OBS-KNOWLEDGE-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | `determination` | `equals` | SATISFIED | `"CLOSED"` |
 | `OBS-KNOWLEDGE-GAPS` | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | `gap_total` | `equals` | SATISFIED | `0` |

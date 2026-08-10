@@ -41,7 +41,7 @@
 | LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
 | GOVERNING FINDING | — |
 | EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `["CK-ACEE", "CK-UCL"]` |
+| MEASURED | `["CK-ACEE", "CK-REG-DRIFT", "CK-UCL"]` |
 
 A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
 
@@ -69,7 +69,7 @@ A blocking expectation that no located finding governs was satisfied by construc
 | LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
 | GOVERNING FINDING | — |
 | EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `["G-25='FAIL'", "G-26='FAIL'"]` |
+| MEASURED | `["G-07='FAIL'", "G-15='FAIL'", "G-25='FAIL'", "G-26='FAIL'"]` |
 
 A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
 
@@ -83,7 +83,7 @@ A blocking expectation that no located finding governs was satisfied by construc
 | LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
 | GOVERNING FINDING | — |
 | EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `["PROGRAM-000020='FAIL'", "PROGRAM-000021='FAIL'"]` |
+| MEASURED | `["PROGRAM-000004='FAIL'", "PROGRAM-000005='FAIL'", "PROGRAM-000017='FAIL'", "PROGRAM-000020='FAIL'", "PROGRAM-000021='FA` |
 
 A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
 

@@ -130,6 +130,7 @@
       "id": "OBS-AGGREGATE-BLOCKING",
       "observed": [
         "CK-ACEE",
+        "CK-REG-DRIFT",
         "CK-UCL"
       ],
       "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -164,6 +165,8 @@
       "governed_by_finding": null,
       "id": "OBS-AGGREGATE-GATES-PASS",
       "observed": [
+        "G-07='FAIL'",
+        "G-15='FAIL'",
         "G-25='FAIL'",
         "G-26='FAIL'"
       ],
@@ -183,6 +186,9 @@
       "governed_by_finding": null,
       "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
       "observed": [
+        "PROGRAM-000004='FAIL'",
+        "PROGRAM-000005='FAIL'",
+        "PROGRAM-000017='FAIL'",
         "PROGRAM-000020='FAIL'",
         "PROGRAM-000021='FAIL'"
       ],
@@ -374,14 +380,8 @@
           "reason": "",
           "required": true,
           "residue": [
-            "00-MASTER/URRC-000001/00-URRC-DASHBOARD.md",
             "00-MASTER/URRC-000001/02-REPOSITORY-REALITY-DETERMINATION.md",
-            "00-MASTER/URRC-000001/04-DUPLICATION-MATRIX.md",
             "00-MASTER/URRC-000001/05-CONFLICT-MATRIX.md",
-            "00-MASTER/URRC-000001/06-GAP-MATRIX.md",
-            "00-MASTER/URRC-000001/07-COMPLETENESS-MATRIX.md",
-            "00-MASTER/URRC-000001/10-CATALOGUE-AND-REGISTRY-BINDING.md",
-            "00-MASTER/URRC-000001/12-GRAPH-AND-CAPABILITY-BINDING.md",
             "00-MASTER/URRC-000001/14-VALIDATION-CERTIFICATION-COMPLIANCE-BINDING.md",
             "00-MASTER/URRC-000001/urrc.json"
           ],
@@ -422,11 +422,7 @@
           "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
           "reason": "",
           "required": true,
-          "residue": [
-            "00-MASTER/UCEF-000001/09-VALIDATION-REPORT.md",
-            "00-MASTER/UCEF-000001/10-CERTIFICATION-REPORT.md",
-            "00-MASTER/UCEF-000001/ucef.json"
-          ],
+          "residue": [],
           "tier": "standard",
           "unattributed": [],
           "verdict": "PASS"
@@ -630,6 +626,7 @@
           "id": "OBS-AGGREGATE-BLOCKING",
           "observed": [
             "CK-ACEE",
+            "CK-REG-DRIFT",
             "CK-UCL"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -664,6 +661,8 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-GATES-PASS",
           "observed": [
+            "G-07='FAIL'",
+            "G-15='FAIL'",
             "G-25='FAIL'",
             "G-26='FAIL'"
           ],
@@ -683,6 +682,9 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
           "observed": [
+            "PROGRAM-000004='FAIL'",
+            "PROGRAM-000005='FAIL'",
+            "PROGRAM-000017='FAIL'",
             "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
@@ -739,6 +741,7 @@
           "name": "No blocking constitutional check failed",
           "observed": [
             "CK-ACEE",
+            "CK-REG-DRIFT",
             "CK-UCL"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -786,6 +789,8 @@
           ],
           "name": "Every constitutional gate reports a passing verdict",
           "observed": [
+            "G-07='FAIL'",
+            "G-15='FAIL'",
             "G-25='FAIL'",
             "G-26='FAIL'"
           ],
@@ -804,6 +809,9 @@
           ],
           "name": "Every delegated programme reports a passing verdict",
           "observed": [
+            "PROGRAM-000004='FAIL'",
+            "PROGRAM-000005='FAIL'",
+            "PROGRAM-000017='FAIL'",
             "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
@@ -1717,6 +1725,7 @@
           "id": "OBS-AGGREGATE-BLOCKING",
           "observed": [
             "CK-ACEE",
+            "CK-REG-DRIFT",
             "CK-UCL"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -1751,6 +1760,8 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-GATES-PASS",
           "observed": [
+            "G-07='FAIL'",
+            "G-15='FAIL'",
             "G-25='FAIL'",
             "G-26='FAIL'"
           ],
@@ -1770,6 +1781,9 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
           "observed": [
+            "PROGRAM-000004='FAIL'",
+            "PROGRAM-000005='FAIL'",
+            "PROGRAM-000017='FAIL'",
             "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
@@ -1826,6 +1840,7 @@
           "name": "No blocking constitutional check failed",
           "observed": [
             "CK-ACEE",
+            "CK-REG-DRIFT",
             "CK-UCL"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -1873,6 +1888,8 @@
           ],
           "name": "Every constitutional gate reports a passing verdict",
           "observed": [
+            "G-07='FAIL'",
+            "G-15='FAIL'",
             "G-25='FAIL'",
             "G-26='FAIL'"
           ],
@@ -1891,6 +1908,9 @@
           ],
           "name": "Every delegated programme reports a passing verdict",
           "observed": [
+            "PROGRAM-000004='FAIL'",
+            "PROGRAM-000005='FAIL'",
+            "PROGRAM-000017='FAIL'",
             "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
@@ -2804,6 +2824,7 @@
           "id": "OBS-AGGREGATE-BLOCKING",
           "observed": [
             "CK-ACEE",
+            "CK-REG-DRIFT",
             "CK-UCL"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -2838,6 +2859,8 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-GATES-PASS",
           "observed": [
+            "G-07='FAIL'",
+            "G-15='FAIL'",
             "G-25='FAIL'",
             "G-26='FAIL'"
           ],
@@ -2857,6 +2880,9 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
           "observed": [
+            "PROGRAM-000004='FAIL'",
+            "PROGRAM-000005='FAIL'",
+            "PROGRAM-000017='FAIL'",
             "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
@@ -2913,6 +2939,7 @@
           "name": "No blocking constitutional check failed",
           "observed": [
             "CK-ACEE",
+            "CK-REG-DRIFT",
             "CK-UCL"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -2960,6 +2987,8 @@
           ],
           "name": "Every constitutional gate reports a passing verdict",
           "observed": [
+            "G-07='FAIL'",
+            "G-15='FAIL'",
             "G-25='FAIL'",
             "G-26='FAIL'"
           ],
@@ -2978,6 +3007,9 @@
           ],
           "name": "Every delegated programme reports a passing verdict",
           "observed": [
+            "PROGRAM-000004='FAIL'",
+            "PROGRAM-000005='FAIL'",
+            "PROGRAM-000017='FAIL'",
             "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
@@ -3891,6 +3923,7 @@
           "id": "OBS-AGGREGATE-BLOCKING",
           "observed": [
             "CK-ACEE",
+            "CK-REG-DRIFT",
             "CK-UCL"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -3925,6 +3958,8 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-GATES-PASS",
           "observed": [
+            "G-07='FAIL'",
+            "G-15='FAIL'",
             "G-25='FAIL'",
             "G-26='FAIL'"
           ],
@@ -3944,6 +3979,9 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
           "observed": [
+            "PROGRAM-000004='FAIL'",
+            "PROGRAM-000005='FAIL'",
+            "PROGRAM-000017='FAIL'",
             "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
@@ -4000,6 +4038,7 @@
           "name": "No blocking constitutional check failed",
           "observed": [
             "CK-ACEE",
+            "CK-REG-DRIFT",
             "CK-UCL"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -4047,6 +4086,8 @@
           ],
           "name": "Every constitutional gate reports a passing verdict",
           "observed": [
+            "G-07='FAIL'",
+            "G-15='FAIL'",
             "G-25='FAIL'",
             "G-26='FAIL'"
           ],
@@ -4065,6 +4106,9 @@
           ],
           "name": "Every delegated programme reports a passing verdict",
           "observed": [
+            "PROGRAM-000004='FAIL'",
+            "PROGRAM-000005='FAIL'",
+            "PROGRAM-000017='FAIL'",
             "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
@@ -4959,6 +5003,7 @@
       "OBS-AGGREGATE-BLOCKING": {
         "observed": [
           "CK-ACEE",
+          "CK-REG-DRIFT",
           "CK-UCL"
         ],
         "verdict": "VIOLATED"
@@ -4975,6 +5020,8 @@
       },
       "OBS-AGGREGATE-GATES-PASS": {
         "observed": [
+          "G-07='FAIL'",
+          "G-15='FAIL'",
           "G-25='FAIL'",
           "G-26='FAIL'"
         ],
@@ -4982,6 +5029,9 @@
       },
       "OBS-AGGREGATE-PROGRAMMES-PASS": {
         "observed": [
+          "PROGRAM-000004='FAIL'",
+          "PROGRAM-000005='FAIL'",
+          "PROGRAM-000017='FAIL'",
           "PROGRAM-000020='FAIL'",
           "PROGRAM-000021='FAIL'"
         ],

@@ -363,6 +363,7 @@
     "OBS-AGGREGATE-BLOCKING": {
       "observed": [
         "CK-ACEE",
+        "CK-REG-DRIFT",
         "CK-UCL"
       ],
       "verdict": "VIOLATED"
@@ -379,6 +380,8 @@
     },
     "OBS-AGGREGATE-GATES-PASS": {
       "observed": [
+        "G-07='FAIL'",
+        "G-15='FAIL'",
         "G-25='FAIL'",
         "G-26='FAIL'"
       ],
@@ -386,6 +389,9 @@
     },
     "OBS-AGGREGATE-PROGRAMMES-PASS": {
       "observed": [
+        "PROGRAM-000004='FAIL'",
+        "PROGRAM-000005='FAIL'",
+        "PROGRAM-000017='FAIL'",
         "PROGRAM-000020='FAIL'",
         "PROGRAM-000021='FAIL'"
       ],
