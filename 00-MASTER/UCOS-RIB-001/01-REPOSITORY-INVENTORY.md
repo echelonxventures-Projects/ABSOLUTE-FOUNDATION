@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (18 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (2 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 292 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -41,13 +41,13 @@
 
 | Substrate | Path | Kind | Tracked | Parses | Pointers | Records | Content |
 |---|---|---|---|---|---|---|---|
-| `SUB-CERT` | `00-BOOK/DATA/certification.json` | json | YES | YES | 4/4 | 10 | `eb06c6789e91` |
+| `SUB-CERT` | `00-BOOK/DATA/certification.json` | json | YES | YES | 4/4 | 10 | `c258159059b5` |
 | `SUB-CLOSURE` | `00-MASTER/UAKOS-CLOSURE-002/closure.json` | json | **NO** | YES | 4/4 | 556 | `not recorded` |
 | `SUB-CONTROL` | `00-BOOK/DATA/control-tower.json` | json | YES | YES | 3/3 | 91 | `2f4763314a07` |
 | `SUB-EDGES` | `00-BOOK/DATA/relationships.json` | json | YES | YES | 2/2 | 12897 | `ef82897bf90d` |
 | `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `not recorded` |
 | `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 90 | `8c3af2e6e3ab` |
-| `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1232 | `d6103c425dcd` |
+| `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1232 | `c7a8b4e4efcf` |
 | `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 144 | `2101bc2e6532` |
 | `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 119 | `205573f89a63` |
 | `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `79f2f011fa94` |
@@ -55,7 +55,7 @@
 | `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 113 | `336d50c9f430` |
 | `SUB-UEI` | `00-MASTER/UEI-000001/uei.json` | json | YES | YES | 2/2 | 15 | `50e80b680d9f` |
 | `SUB-UER` | `00-MASTER/UER-000001/uer.json` | json | YES | YES | 2/2 | 10 | `0ae82cb58fdb` |
-| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `386ad8376f59` |
+| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `35bc6c0ef604` |
 
 ## Enrichment
 
@@ -85,9 +85,9 @@
 | Repository anchor | the containing commit — owned by version control, never restated here |
 | Detached | no |
 | Working tree | DIRTY |
-| Dirty entries | 18 |
+| Dirty entries | 2 |
 | Own regenerated artifacts | excluded from the count above — they are the deterministic product of the command being gated |
-| Modified | 18 |
+| Modified | 2 |
 | Deleted | 0 |
 | Untracked | 0 |
 | Merge conflicts | 0 |

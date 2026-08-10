@@ -5,7 +5,7 @@
   "blocking_failures": [
     "CK-ACEE",
     "CK-REG-DRIFT",
-    "CK-UCL"
+    "CK-UCL-SELF"
   ],
   "blocking_not_executed": [],
   "blocking_out_of_tier": [],
@@ -737,30 +737,30 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 1,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-UCL",
       "in_scope": true,
       "name": "Universal Constitutional Lifecycle executable: the constitutional stage graph is discovered from constitutional metadata rather than enumerated, normalized into Canonical Knowledge Objects, acyclic and fully ordered, every stage bound to a located canonical owner and constitutional authority, every applicable obligation bound, and every declared goal traversed to a deterministic run identity",
       "owner": "00-MASTER/UCL-000001/ucl_engine.py",
-      "reason": "gate CLOSED",
+      "reason": "",
       "tier": "boot",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "write_scope": "read-only"
     },
     {
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 0,
+      "exit_code": 1,
       "governed_by_finding": null,
       "id": "CK-UCL-SELF",
       "in_scope": true,
       "name": "UCL-000001 self-guards: declaration integrity, zero-enumeration over executable literals, write scope, determinism, implementation independence, open world, no parallel lifecycle authority, lifecycle executability, Canonical Knowledge Object identity, invariant semantic identity, knowledge-once, record immutability, bound tightness",
       "owner": "00-MASTER/UCL-000001/ucl_engine.py",
-      "reason": "",
+      "reason": "gate CLOSED",
       "tier": "boot",
-      "verdict": "PASS",
+      "verdict": "FAIL",
       "write_scope": "read-only"
     },
     {
@@ -797,7 +797,7 @@
   "gate_blocking": [
     "CK-ACEE",
     "CK-REG-DRIFT",
-    "CK-UCL"
+    "CK-UCL-SELF"
   ],
   "gate_exit": 1,
   "gates": [
@@ -1286,7 +1286,7 @@
         "CK-UCL-SELF"
       ],
       "failed": [
-        "CK-UCL"
+        "CK-UCL-SELF"
       ],
       "id": "G-25",
       "name": "Universal Constitutional Lifecycle Gate",
@@ -1904,7 +1904,7 @@
         "CK-UCL-SELF"
       ],
       "failed": [
-        "CK-UCL"
+        "CK-UCL-SELF"
       ],
       "id": "PROGRAM-000020",
       "name": "Universal Constitutional Lifecycle",
@@ -1948,7 +1948,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "2a677bbe7cbbe0a76523f5f40a94ba29faef73c858dcd0f8ee16817a5f9687cd",
+  "seal_sha256": "b97681045886ce6cda0286968844fb50cf23896aee9b746a3a5872acf55b005f",
   "tier": "full",
   "unavailable": [],
   "unproven": []

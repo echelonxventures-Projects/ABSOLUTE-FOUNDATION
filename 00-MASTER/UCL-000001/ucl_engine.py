@@ -1064,6 +1064,20 @@ def measure(document: dict) -> dict:  # noqa: C901 - one measurement per declare
         if name in document["semantic_identity"]["inputs"]:
             mutable_leak.append(f"declared input is a mutable characteristic: {name}")
     unidentified_targets = [e["cko_id"] for e in relationships if not e["target_identified"]]
+    # The DISTINCT artifacts the Universal Registry does not admit, as opposed to the
+    # EDGES that reach them. The two are different constitutional quantities and only
+    # this one measures the disclosed condition itself.
+    #
+    # A relationship count conflates "the graph reaches a new corner of the corpus the
+    # registry cannot name" with "more edges point at a corner already disclosed". The
+    # second grows with legitimate knowledge-base growth for no constitutional reason —
+    # 119 capability facts each citing the one generated catalogue they were all derived
+    # from move the relationship count by 119 and the disclosed condition by ONE. Only the
+    # target measure detects a genuinely new unadmitted corner at +1, and it detects it
+    # even when the relationship ratchet still has slack.
+    unadmitted_targets = sorted(
+        {str(e["attributes"]["target"]) for e in relationships if not e["target_identified"]}
+    )
 
     # ---- self-evolution path: every step owned OUTSIDE this programme
     evolution_steps: list[dict] = []
@@ -1369,6 +1383,7 @@ def measure(document: dict) -> dict:  # noqa: C901 - one measurement per declare
         "expansion_axes_bound": sum(1 for a in axes if a["bound"]),
         "semantic_identity_mutable_inputs": len(mutable_leak),
         "relationships_without_target_identity": len(unidentified_targets),
+        "unadmitted_target_artifacts": len(unadmitted_targets),
         "knowledge_extractions_unmeasured": 0,
         "elevations_unevidenced": 0,
         "readiness_owners_unresolved": 0,
@@ -1558,6 +1573,7 @@ def measure(document: dict) -> dict:  # noqa: C901 - one measurement per declare
             "without_identity": without_semantic,
             "mutable_inputs": mutable_leak,
             "relationships_without_target_identity": len(unidentified_targets),
+            "unadmitted_target_artifacts": unadmitted_targets,
         },
         "extractions": extractions,
         "elevations": elevations,

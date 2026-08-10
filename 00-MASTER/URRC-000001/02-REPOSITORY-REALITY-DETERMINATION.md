@@ -112,11 +112,11 @@ What the repository contains, and the substrate that proves it.
 
 | Key | Value | Detail | Detail |
 |---|---|---|---|
-| `S-01` | `00-BOOK/DATA/artifacts.json` | YES | YES | YES | 2/2 | 2464 | `d6103c425dcd` |
+| `S-01` | `00-BOOK/DATA/artifacts.json` | YES | YES | YES | 2/2 | 2464 | `c7a8b4e4efcf` |
 | `S-02` | `00-BOOK/DATA/relationships.json` | YES | YES | YES | 2/2 | 25794 | `ef82897bf90d` |
 | `S-03` | `00-BOOK/DATA/control-tower.json` | YES | YES | YES | 3/3 | 91 | `2f4763314a07` |
-| `S-04` | `00-BOOK/DATA/certification.json` | YES | YES | YES | 5/5 | 45 | `eb06c6789e91` |
-| `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1373 | `9a5b0a7ebf41` |
+| `S-04` | `00-BOOK/DATA/certification.json` | YES | YES | YES | 5/5 | 45 | `c258159059b5` |
+| `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1373 | `3dbcb5cb58cd` |
 | `S-06` | `00-CMG/CMG-REGISTRY.json` | YES | YES | YES | 9/9 | 164 | `4d8242bbd440` |
 | `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | YES | YES | YES | 5/5 | 112 | `505ec5c77ee1` |
 | `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 129 | `210e285fc828` |

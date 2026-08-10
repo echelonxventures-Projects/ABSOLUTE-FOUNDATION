@@ -1,7 +1,7 @@
 {
   "compliance": [
     {
-      "finding": "dirty_entries_outside_generated=18",
+      "finding": "dirty_entries_outside_generated=2",
       "gate": "GATE-12",
       "id": "CMP-CLEAN",
       "rank": 1,
@@ -1544,7 +1544,7 @@
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
       "failures": [
-        "dirty_entries_outside_generated=18"
+        "dirty_entries_outside_generated=2"
       ],
       "id": "GATE-12",
       "metrics": [
@@ -1982,8 +1982,8 @@
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 18,
-    "dirty_entries_outside_generated": 18,
+    "dirty_entries": 2,
+    "dirty_entries_outside_generated": 2,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 37,
@@ -4125,9 +4125,9 @@
     "conflicts": 0,
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 18,
+    "dirty_entries": 2,
     "interrupted_operations": [],
-    "modified": 18,
+    "modified": 2,
     "tracked_files": 5679,
     "untracked": 0,
     "working_tree": "DIRTY"
@@ -4161,7 +4161,7 @@
   ],
   "substrate": [
     {
-      "content_sha256": "eb06c6789e9163b58ca81f06ef0c2c41f0089f66cc869ebc4b9c561a2c10cef5",
+      "content_sha256": "c258159059b54c472ceaf18a3aa32a57358f24b2d9f38464044cecc55d414ee5",
       "exists": true,
       "generated": false,
       "id": "SUB-CERT",
@@ -4309,7 +4309,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "d6103c425dcd738f9fbf67a03fb6b338bc33f1b71276dee8418f93fba9967f38",
+      "content_sha256": "c7a8b4e4efcfa8b409780f7a7360a80b7809bd014db189faf9db0fe69eac78fa",
       "exists": true,
       "generated": false,
       "id": "SUB-REGISTER",
@@ -4493,7 +4493,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "386ad8376f59d1d4f3ce5f8c1aef91b4d8ae2c924b6ffeac0f3a0cae0713341b",
+      "content_sha256": "35bc6c0ef6045d4a576edfdbc8cbfcf8746b5f4113110b8fdd9903fecb974670",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -22164,7 +22164,7 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 18,
+      "measured": 2,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
       "verdict": "FAIL"

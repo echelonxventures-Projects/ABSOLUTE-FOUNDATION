@@ -256,13 +256,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
           "reason": "",
           "required": true,
-          "residue": [
-            "P0-REMEDIATION-001-DETERMINATION.md"
-          ],
+          "residue": [],
           "tier": "standard",
-          "unattributed": [
-            "P0-REMEDIATION-001-DETERMINATION.md"
-          ],
+          "unattributed": [],
           "verdict": "PASS"
         },
         {
@@ -383,7 +379,10 @@
           "owner": "00-MASTER/URRC-000001/urrc_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue": [
+            "00-MASTER/URRC-000001/02-REPOSITORY-REALITY-DETERMINATION.md",
+            "00-MASTER/URRC-000001/urrc.json"
+          ],
           "tier": "standard",
           "unattributed": [],
           "verdict": "PASS"

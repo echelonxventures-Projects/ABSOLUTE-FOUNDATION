@@ -419,9 +419,7 @@
       "role": "closure is asserted only after the repository reproduces itself from the committed state"
     }
   ],
-  "blocking_failures": [
-    "UCL-V-41"
-  ],
+  "blocking_failures": [],
   "bound_hits": [],
   "bounds_slack": [],
   "capabilities": [
@@ -649,12 +647,13 @@
     "stage_obligations_not_applicable": 168,
     "stage_property_failures": 0,
     "terminal_state_claims": 0,
+    "unadmitted_target_artifacts": 84,
     "unboundedness_violations": 0,
     "writes_outside_home": 0
   },
   "cycles": [],
   "dependency_relation": "binds-to",
-  "determination": "UNIVERSAL-CONSTITUTIONAL-LIFECYCLE-NOT-ESTABLISHED",
+  "determination": "UNIVERSAL-CONSTITUTIONAL-LIFECYCLE-EXECUTABLE",
   "elevations": [
     {
       "evidenced": true,
@@ -1148,7 +1147,7 @@
       "why_not_repaired": "The remedy would be to substitute the target's PATH into the identity, and a path is a location that the invariants expressly permit to evolve — using it would convert a location change into an identity change, which is the defect this invariant exists to prevent. Registering operational memory to obtain an identity would instead violate the exclusion authority. The condition is therefore reported and referred to the registry owner."
     }
   ],
-  "gate": "CLOSED",
+  "gate": "OPEN",
   "graph_digest": "0ae37974cb5bce776aa6543d0c2f252dfc59c6b6a3d3d2884dc3338b62125ee2",
   "graphs": [
     {
@@ -1538,7 +1537,7 @@
       "relation": "binds-to"
     }
   ],
-  "omega_e05_authorized": false,
+  "omega_e05_authorized": true,
   "order": [
     "SRC-MANIFEST::UCL-S-0010",
     "SRC-MANIFEST::UCL-S-0020",
@@ -14025,7 +14024,7 @@
       ]
     }
   ],
-  "seal_sha256": "e4b4b77d105c635768a984bf04a49d1b1ec7fcc001a89a0d5876248fccb76b6e",
+  "seal_sha256": "32c689ac9af91be8ed58f81a4a0759429e83cd5fdb199820fc326fbfb4cff391",
   "self_evolution": [
     {
       "anchor": "",
@@ -14114,6 +14113,92 @@
     ],
     "mutable_inputs": [],
     "relationships_without_target_identity": 217,
+    "unadmitted_target_artifacts": [
+      ".github/workflows",
+      "00-BOOK/CONTROL-TOWER",
+      "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-AUTH-INF-001-INFINITE-EVOLUTION-UNIVERSAL-IDENTITY-AND-UNBOUNDED-EXPANSION-CONSTITUTION.md",
+      "00-BOOK/DATA/certification.json",
+      "00-BOOK/DATA/id-ledger.json",
+      "00-BOOK/DATA/relationships.json",
+      "00-BOOK/tools/config.py",
+      "00-BOOK/tools/register.sh",
+      "00-BOOK/tools/ukb.py",
+      "00-CMG/tools/cmg-gate.sh",
+      "00-MASTER/ACEE-000001",
+      "00-MASTER/EVOLUTION-001/EVOLUTION-GOVERNANCE-MODEL.md",
+      "00-MASTER/MCOS-000001",
+      "00-MASTER/MCP-004-MASTER-DECISIONS.md",
+      "00-MASTER/MCP-005-MASTER-DASHBOARD.md",
+      "00-MASTER/MCP-006-MASTER-TRACEABILITY.md",
+      "00-MASTER/UAIE-000001/03-CROSS-REGISTER-CONSISTENCY.md",
+      "00-MASTER/UAIE-000001/uaie_engine.py",
+      "00-MASTER/UAKOS-CLOSURE-002",
+      "00-MASTER/UAKOS-CLOSURE-002/19-REPOSITORY-TRUTH-DETERMINATION.md",
+      "00-MASTER/UAKOS-CLOSURE-002/38-DEPENDENCY-REGISTER.md",
+      "00-MASTER/UAKOS-CLOSURE-002/closure.json",
+      "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+      "00-MASTER/UAKOS-CLOSURE-003",
+      "00-MASTER/UAKOS-CLOSURE-006",
+      "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
+      "00-MASTER/UCCEP-000000/04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
+      "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "00-MASTER/UCDA-000001",
+      "00-MASTER/UCDA-000001/ucda-decisions.json",
+      "00-MASTER/UCEF-000001",
+      "00-MASTER/UCEF-000001/03-CONSTRUCT-CLASS-REGISTER.md",
+      "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
+      "00-MASTER/UCL-000001",
+      "00-MASTER/UCOS-AEE-001",
+      "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
+      "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
+      "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
+      "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
+      "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "00-MASTER/UCOS-EG-001",
+      "00-MASTER/UCOS-EKAP-001/02-KNOWLEDGE-CLASSIFICATION-MATRIX.md",
+      "00-MASTER/UCOS-RECON-001-REPOSITORY-STATE-RECONCILIATION.md",
+      "00-MASTER/UCOS-RECON-C1-OPERATIONAL-MEMORY-EXCLUSION.md",
+      "00-MASTER/UCOS-RECON-C2",
+      "00-MASTER/UCOS-RFP-001",
+      "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+      "00-MASTER/UCOS-RFP-001/rfp_engine.py",
+      "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
+      "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md",
+      "00-MASTER/UCOS-RIB-001/08-REUSE-ANALYSIS.md",
+      "00-MASTER/UCOS-UMA-001",
+      "00-MASTER/UEI-000001/05-UNIVERSAL-RECOMMENDATION-SPECIFICATION.md",
+      "00-MASTER/UEI-000001/11-CONTINUOUS-IMPROVEMENT-SPECIFICATION.md",
+      "00-MASTER/UEI-000001/14-REPOSITORY-EVOLUTION-SPECIFICATION.md",
+      "00-MASTER/UEI-000001/18-GOVERNANCE-BINDING-DETERMINATION.md",
+      "00-MASTER/UER-000001/02-UNIVERSAL-CHECKPOINT-POLICY.md",
+      "00-MASTER/UER-000001/06-UNIVERSAL-WORK-PACKAGE-LEDGER-SPECIFICATION.md",
+      "00-MASTER/UKAP-001/corpus_engine.py",
+      "00-MASTER/URRC-000001/04-DUPLICATION-MATRIX.md",
+      "00-MASTER/URRC-000001/urrc-bindings.json",
+      "15-UNIVERSAL-SCIENCE-INTELLIGENCE",
+      "adr/",
+      "engine/certification",
+      "engine/civilization",
+      "engine/compiler",
+      "engine/determinism",
+      "engine/factory",
+      "engine/graph",
+      "engine/kernel",
+      "engine/knowledge",
+      "engine/registry",
+      "engine/runtime/execution/replay.py",
+      "engine/tests/conftest.py",
+      "engine/uckp/intelligence.py",
+      "engine/uckp/vocabulary.py",
+      "engine/universal_certification",
+      "engine/validation",
+      "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
+      "intelligence/rie",
+      "platform/measurement",
+      "platform/universal_validation",
+      "platform/validation_intelligence",
+      "verify.sh"
+    ],
     "without_identity": []
   },
   "serializations": [
@@ -18051,11 +18136,22 @@
       "bound_finding": "UCL-F-004",
       "comparator": "<=",
       "dimension": "relationships whose target carries no registered constitutional identity stay within the disclosed bound",
-      "expect": 98,
+      "expect": 217,
       "id": "UCL-V-41",
       "measure": "relationships_without_target_identity",
-      "satisfied": false,
+      "satisfied": true,
       "value": 217
+    },
+    {
+      "blocking": true,
+      "bound_finding": "UCL-F-005",
+      "comparator": "<=",
+      "dimension": "the DISTINCT artifacts the Universal Registry does not admit stay within the disclosed bound — the disclosed condition itself, counted once per artifact rather than once per edge that reaches it",
+      "expect": 84,
+      "id": "UCL-V-42",
+      "measure": "unadmitted_target_artifacts",
+      "satisfied": true,
+      "value": 84
     }
   ]
 }

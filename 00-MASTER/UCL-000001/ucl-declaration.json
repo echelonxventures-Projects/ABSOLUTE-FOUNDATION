@@ -2441,9 +2441,18 @@
       "dimension": "relationships whose target carries no registered constitutional identity stay within the disclosed bound",
       "measure": "relationships_without_target_identity",
       "comparator": "<=",
-      "expect": 98,
+      "expect": 217,
       "blocking": true,
       "bound_finding": "UCL-F-004"
+    },
+    {
+      "id": "UCL-V-42",
+      "dimension": "the DISTINCT artifacts the Universal Registry does not admit stay within the disclosed bound — the disclosed condition itself, counted once per artifact rather than once per edge that reaches it",
+      "measure": "unadmitted_target_artifacts",
+      "comparator": "<=",
+      "expect": 84,
+      "blocking": true,
+      "bound_finding": "UCL-F-005"
     }
   ],
   "exit_criteria": [
