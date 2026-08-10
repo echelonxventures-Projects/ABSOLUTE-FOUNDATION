@@ -1,0 +1,55 @@
+{
+  "authority": "NONE — DERIVED TRUTH. Measurement only.",
+  "phase": 8,
+  "verdict": "NOT PROVEN — MEASUREMENT INTEGRITY COMPROMISED",
+  "rounds_attempted": 3,
+  "rounds": [
+    {
+      "round": 1,
+      "drift": 111,
+      "cluster": "CLOSED"
+    },
+    {
+      "round": 2,
+      "drift": 50,
+      "cluster": "CLOSED"
+    },
+    {
+      "round": 3,
+      "drift": 0,
+      "cluster": "CLOSED"
+    }
+  ],
+  "zero_drift_reached": true,
+  "zero_drift_at_passing_state": false,
+  "prior_result": {
+    "commit": "e7532153",
+    "consecutive_zero_drift_rounds": 3,
+    "cluster": "PASSING (UCCEP CERTIFIED-PROVISIONAL 26/26 gates, 21/21 programmes, zero blocking)"
+  },
+  "requirement": "5 consecutive rounds, 0 drift",
+  "met": false,
+  "blocking_cause": "A CONCURRENT WRITER mutated the working tree throughout these rounds (see UCOS-P0-FINAL-CLOSURE-DETERMINATION.md §3). Drift measured under concurrent mutation is not attributable to the regeneration pipeline, so no fixed-point claim may be derived from it.",
+  "residual_repository_defect": {
+    "unit": "00-MASTER/P0-LIFECYCLE-CLOSURE-001",
+    "reachable": false,
+    "entrypoint_references": 0,
+    "closes": [
+      "RIB GATE-03 Repository Verification",
+      "RIB GATE-07 Capability Coverage",
+      "RIB GATE-11 Zero Orphan Capability"
+    ],
+    "failing_verifications": [
+      {
+        "id": "VER-09",
+        "criterion": "no unit is unreachable in every declared reachability dimension",
+        "measured": 1
+      },
+      {
+        "id": "VER-11",
+        "criterion": "every discovered programme engine is named by at least one declared entry point",
+        "measured": 1
+      }
+    ]
+  }
+}

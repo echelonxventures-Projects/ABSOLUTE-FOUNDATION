@@ -1,0 +1,28 @@
+{
+  "authority": "NONE — DERIVED TRUTH. Measurement only.",
+  "phase": 9,
+  "verdict": "NOT RE-RUN AGAINST POST-REMEDIATION STATE",
+  "reason": "Superseded by the Phase 8 result: a pristine-clone certification of a state whose fixed point is unproven, and whose tree was mutated concurrently during measurement, would certify an arbitrary snapshot.",
+  "prior_result": {
+    "mission": "P0-ULTIMATE-CLOSURE-001",
+    "commit": "5e792b53",
+    "clones": 3,
+    "runs_per_clone": 5,
+    "total_runs": 15,
+    "all_runs": {
+      "exit": 0,
+      "drift": 0,
+      "tests_passed": 10198,
+      "coverage_totals": "70928 3109 15270 347"
+    },
+    "register_byte_identity": [
+      "ucl.json",
+      "uccep.json",
+      "acee.json",
+      "aee.json",
+      "rib.json",
+      "artifacts.json"
+    ],
+    "note": "Valid for 5e792b53 only. Predates the authority-graph repair."
+  }
+}
