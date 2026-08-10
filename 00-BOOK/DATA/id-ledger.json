@@ -24703,6 +24703,15 @@
         "status": "ACTIVE",
         "path": "P0-REMEDIATION-001-DETERMINATION.md",
         "name": "P0-REMEDIATION-001 — Final Certification Determination"
+      },
+      {
+        "seq": 2,
+        "at": "2026-08-10T04:59:06+00:00",
+        "content_hash": "6e44813e7caf079a37a0778e5cd0d10c7b2974773e1044a01714ff8e9f601bc7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "P0-REMEDIATION-001-DETERMINATION.md",
+        "name": "P0-REMEDIATION-001 — Final Certification Determination"
       }
     ]
   }

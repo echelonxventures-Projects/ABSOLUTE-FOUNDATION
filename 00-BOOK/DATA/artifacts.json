@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T04:23:21+00:00",
+  "generated_at": "2026-08-10T04:59:06+00:00",
   "generator_version": "1.0.0",
   "count": 1232,
   "artifacts": [
@@ -56350,7 +56350,7 @@
       ],
       "path": "P0-REMEDIATION-001-DETERMINATION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "820fd0a86f6456cdd4a3f2cda2e858feaf1727a348cd821eeb2b3d64a43e6c14",
+      "content_hash": "6e44813e7caf079a37a0778e5cd0d10c7b2974773e1044a01714ff8e9f601bc7",
       "traceability": {
         "requirement": [],
         "architecture": [

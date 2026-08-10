@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T04:23:29+00:00",
+  "generated_at": "2026-08-10T04:59:13+00:00",
   "generator_version": "1.0.0-adv",
   "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)",
   "verdict": "CERTIFIED",
@@ -82,7 +82,7 @@
         {
           "name": "every change event bound to a real subject",
           "pass": true,
-          "detail": "1351 events node-bound"
+          "detail": "1352 events node-bound"
         },
         {
           "name": "change ids unique",
@@ -185,7 +185,7 @@
   "scope": {
     "artifacts": 1232,
     "edges": 12897,
-    "change_events": 1351,
+    "change_events": 1352,
     "signals": 15,
     "lineage_nodes": 1232,
     "executions": 0

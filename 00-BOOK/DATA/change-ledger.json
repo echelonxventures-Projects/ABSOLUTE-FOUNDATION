@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-10T04:23:21+00:00",
+  "generated_at": "2026-08-10T04:59:06+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1351,
+    "change_events": 1352,
     "versioned_artifacts": 1232,
     "lineage_nodes": 1232,
     "artifacts_with_predecessors": 5,
@@ -10,7 +10,7 @@
   },
   "change_event_histogram": {
     "Created": 1232,
-    "Modified": 114,
+    "Modified": 115,
     "Version-Incremented": 5
   },
   "evolution_timeline": [
@@ -8119,6 +8119,12 @@
       "at": "2026-08-10T04:23:20+00:00",
       "subject": "UCOS-DET-000001",
       "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001352",
+      "at": "2026-08-10T04:59:06+00:00",
+      "subject": "UCOS-DET-000001",
+      "kind": "Modified"
     }
   ],
   "change_events": [
@@ -21630,7 +21636,27 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": null
+      "commit": {
+        "commit": "3415ae80847f",
+        "date": "2026-08-10T10:13:48+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS-P0-REMEDIATION-001 (4): final determination, registered as UCOS-DET-000001"
+      }
+    },
+    {
+      "change_id": "UCHG-000001352",
+      "subject": "UCOS-DET-000001",
+      "kind": "Modified",
+      "at": "2026-08-10T04:59:06+00:00",
+      "snapshot_seq": 2,
+      "from": "820fd0a86f6456cdd4a3f2cda2e858feaf1727a348cd821eeb2b3d64a43e6c14",
+      "to": "6e44813e7caf079a37a0778e5cd0d10c7b2974773e1044a01714ff8e9f601bc7",
+      "commit": {
+        "commit": "3415ae80847f",
+        "date": "2026-08-10T10:13:48+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS-P0-REMEDIATION-001 (4): final determination, registered as UCOS-DET-000001"
+      }
     }
   ],
   "version_records": {
@@ -38902,7 +38928,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "820fd0a86f6456cdd4a3f2cda2e858feaf1727a348cd821eeb2b3d64a43e6c14",
+      "content_baseline": "6e44813e7caf079a37a0778e5cd0d10c7b2974773e1044a01714ff8e9f601bc7",
       "history": [
         {
           "version": "1.0.0",

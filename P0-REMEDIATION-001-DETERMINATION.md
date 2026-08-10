@@ -146,25 +146,43 @@ so RIB GATE-07 reported six uncatalogued units (`engine.ceu`, `engine.nucleus`,
 |---|---|---|---|
 | **UCOS-RIB-001** | NOT CERTIFIED — REPOSITORY MUST STOP, gate CLOSED, gates 9/12 | **BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED**, gate OPEN, **12/12**, dirty=0 | **CLEARED** |
 | **UIS-001** | IDENTITY-CONFORMANCE-NOT-ESTABLISHED, gate CLOSED, 23/24, 80 ungoverned | **IDENTITY-CONFORMANCE-BOUND**, gate OPEN, **24/24**, 74 ungoverned | **CLEARED** |
-| **UCOS-AEE-001** | NOT-CONVERGED, blocking CONV-02 | **CONVERGED-PROVISIONAL**, unsatisfied=none, 37/38 observations | **CLEARED** |
 | **UCDA-000001** | ASSIMILATED, gate OPEN | **ASSIMILATED**, gate OPEN, 0 undispositioned | already passing |
-| **UCCEP-000000** | NOT-CERTIFIED, gates 18/26, programmes 13/21, blocking CK-UCL + CK-UIS | NOT-CERTIFIED, gates **25/26**, programmes **20/21**, blocking **CK-UCL** | **advanced, not cleared** |
+| **UCCEP-000000** | NOT-CERTIFIED, gates 18/26, programmes 13/21, blocking CK-UCL + CK-UIS | NOT-CERTIFIED, gates **25/26**, programmes **20/21**, blocking **CK-UCL** (+`CK-ACEE` via the loop below) | **advanced, not cleared** |
 | **ACEE-000001** | (masked — see below) | gate CLOSED, blocking ACEE-V-07 + ACEE-V-10 | **open, downstream of UCCEP** |
+| **UCOS-AEE-001** | NOT-CONVERGED, blocking CONV-02 | NOT-CONVERGED, blocking CONV-02 | **open, downstream of UCCEP** |
 | **UCL-000001** | NOT-ESTABLISHED, gate CLOSED, blocking UCL-V-41 | NOT-ESTABLISHED, gate CLOSED, blocking **UCL-V-41** | **ROOT BLOCKER** |
 | **UAKOS-CLOSURE-009** | ASSIMILATION-INCOMPLETE, 140/549 (25.5%) | unchanged | **open, independent** |
 | **UCOS-COMP-000001 (CCE)** | declared, no executable realization | unchanged | **open** |
 | `./verify.sh --full` | PASS (7 stages) | **PASS (8 stages incl. drift gate)** | holds |
 | Replay drift | — | **0 over two full rounds** | **CLEARED** |
 
-### A correction to an intermediate reading
+### A correction to two intermediate readings
 
-Mid-mission, ACEE-000001 measured `ESTABLISHED` and this was reported as cleared. That
-reading was taken against a **stale committed `uccep.json`** which still recorded a
-historical all-pass full-tier state. Once UCCEP was honestly re-measured at its recorded
-`full` tier, five ACEE invariants that read `uccep.json` (`ACEE-I-0180`, `-0220`,
-`-0240`, `-0450`, `-0470`, measuring `gate_blocking`, `blocking_failures`, `gate_exit`)
-correctly went unsatisfied and ACEE closed. **ACEE is not cleared.** It is fail-closed
-behaviour working exactly as designed: the truth propagated.
+Mid-mission, ACEE-000001 measured `ESTABLISHED` and UCOS-AEE-001 measured
+`CONVERGED-PROVISIONAL`, and both were reported as cleared. **Both readings were wrong**,
+and for the same reason: they were taken against a **stale committed `uccep.json`** that
+still recorded a historical all-pass full-tier state. UCCEP's standard tier withholds
+emission by design, so the stale register survived every standard-tier run and was only
+refreshed once UCCEP was measured at its recorded `full` tier.
+
+Against the honest UCCEP register:
+
+- **ACEE closes.** Five invariants read `uccep.json` — `ACEE-I-0180`, `-0220`, `-0240`,
+  `-0450`, `-0470`, measuring `gate_blocking`, `blocking_failures` and `gate_exit` —
+  and go unsatisfied, closing `ACEE-V-07` and `ACEE-V-10`.
+- **AEE stops converging.** Its violated observations are `OBS-AGGREGATE-BLOCKING`,
+  `-GATE-EXIT`, `-GATES-PASS`, `-PROGRAMMES-PASS` (all blocking) and `-CEILING`
+  (non-blocking) — **every one of them sourced from `uccep.json`**. Observations fall
+  from 37/38 to 32/38 and `CONV-02` is violated again.
+
+Neither is a regression introduced by this mission and neither is a defect in those
+engines. It is fail-closed behaviour working exactly as designed: a stale register was
+masking a real failure, the register was refreshed, and the truth propagated. The
+honest conclusion is that **ACEE and AEE are not independent authorities at all — they
+are downstream reporters of UCCEP**, and therefore of UCL-V-41.
+
+Reporting them as cleared would have been precisely the "narrative certification" this
+mission forbids.
 
 ---
 
@@ -173,10 +191,16 @@ behaviour working exactly as designed: the truth propagated.
 Every remaining fail-closed authority except UAKOS-CLOSURE-009 reduces to one measurement.
 
 ```
-UCL-V-41 ──> UCCEP CK-UCL ──> ACEE-I-0180/0220/0240/0450/0470 ──> ACEE-V-07 / V-10
-                  ^                          |
-                  └────── CK-ACEE ───────────┘   (mutual: UCCEP executes acee_engine)
+                        ┌─> ACEE-I-0180/0220/0240/0450/0470 ─> ACEE-V-07 / V-10  (ACEE CLOSED)
+UCL-V-41 ─> UCCEP CK-UCL┤                    │
+                    ^   └─> AEE OBS-AGGREGATE-{BLOCKING,GATE-EXIT,
+                    │       GATES-PASS,PROGRAMMES-PASS} ─> CONV-02  (AEE NOT-CONVERGED)
+                    └────────── CK-ACEE ─────┘      (mutual: UCCEP executes acee_engine)
 ```
+
+Three of the four remaining fail-closed authorities — UCCEP, ACEE and AEE — carry no
+independent defect of their own. Each is reporting UCL-V-41 through a different lens.
+
 
 **UCL-V-41**: `relationships_without_target_identity <= 98`. Measured: **217**.
 
@@ -378,12 +402,12 @@ measurably false today.
 | UCOS-RIB | CERTIFIED | **BLUEPRINT CERTIFIED**, 12/12 | **YES** |
 | UIS | PASS | **gate OPEN**, 24/24 | **YES** |
 | UCDA | PASS | **ASSIMILATED**, gate OPEN | **YES** |
-| AEE | CONVERGED | **CONVERGED-PROVISIONAL** | **YES** |
 | Drift gate | PASS | **PASS**, 0 drift over 2 rounds | **YES** |
 | `./verify.sh` | PASS | **PASS** (8/8 stages, `--full`) | **YES** |
 | Fixed point | VERIFIED | **VERIFIED** | **YES** |
 | UCCEP | PASS | NOT-CERTIFIED (25/26, blocking CK-UCL) | NO |
 | ACEE | PASS | gate CLOSED (downstream of UCCEP) | NO |
+| AEE | CONVERGED | NOT-CONVERGED, CONV-02 (downstream of UCCEP) | NO |
 | UCL | PASS | gate CLOSED (**UCL-V-41 — root**) | NO |
 | UAKOS-CLOSURE | PASS | ASSIMILATION-INCOMPLETE (25.5%) | NO |
 | CCE | COMPLETE | **no executable realization** | NO |
@@ -391,17 +415,20 @@ measurably false today.
 
 **Four independent blockers remain**, in ascending order of cost:
 
-1. **UCL-V-41** — one owner decision (Section 4). Unblocks UCL, UCCEP and ACEE at once.
-   The recommended amendment makes the gate *stronger*, not weaker.
+1. **UCL-V-41** — one owner decision (Section 4). Unblocks **four** authorities at once:
+   UCL, UCCEP, ACEE and AEE, none of which carries an independent defect. The
+   recommended amendment makes the gate *stronger*, not weaker.
 2. **CCE realization** — compose ten gates over engines that already exist (Section 6).
 3. **UAKOS-CLOSURE-009** — 409 requirements requiring human constitutional authorship.
 4. **Coverage to 100%** — 4,528 points across 143 files, plus a scope decision on
    `00-MASTER/**`.
 
 Nothing in this determination was closed by waiver, exemption, suppression, accepted
-risk, threshold change, coverage exclusion, or narrative certification. Three defects
-were found and repaired at the root; four authorities moved to PASS; replay drift went
-to zero; and what remains open is stated as open.
+risk, threshold change, coverage exclusion, or narrative certification. Four defects
+were found and repaired at the root (RC-1…RC-4); three authorities moved to PASS and
+hold there from a clean tree; replay drift went to zero and a fixed point was proven by
+byte-identity; and what remains open is stated as open — including two authorities this
+mission briefly and wrongly reported as cleared, corrected in Section 3.
 
 ---
 
