@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `6772107f3817529692f1e73b4b656baf` |
+| SEAL | `4a40807e5a73d0a35f4ee69b335b602b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Every finding receives a decision from the declared rules, with the located evidence that justifies it. A decision whose evidence obligation is unmet is withheld rather than asserted.
@@ -30,62 +30,6 @@
 | `DEFER` | Closure is admissible but blocked by a declared dependency; it waits on that dependency and on nothing else. |
 
 ## Adjudication
-
-### `OBS-AGGREGATE-BLOCKING` — No blocking constitutional check failed
-
-| Field | Value |
-|---|---|
-| DECISION | **IMPLEMENT** |
-| CLASS | Defect correction |
-| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
-| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
-| GOVERNING FINDING | — |
-| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `["CK-VERIFY"]` |
-
-A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
-
-### `OBS-AGGREGATE-GATE-EXIT` — The aggregate constitutional gate exits clean
-
-| Field | Value |
-|---|---|
-| DECISION | **IMPLEMENT** |
-| CLASS | Defect correction |
-| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
-| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
-| GOVERNING FINDING | — |
-| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `1` |
-
-A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
-
-### `OBS-AGGREGATE-GATES-PASS` — Every constitutional gate reports a passing verdict
-
-| Field | Value |
-|---|---|
-| DECISION | **IMPLEMENT** |
-| CLASS | Defect correction |
-| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
-| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
-| GOVERNING FINDING | — |
-| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `["G-10='FAIL'", "G-11='FAIL'", "G-13='FAIL'", "G-15='FAIL'"]` |
-
-A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
-
-### `OBS-AGGREGATE-PROGRAMMES-PASS` — Every delegated programme reports a passing verdict
-
-| Field | Value |
-|---|---|
-| DECISION | **IMPLEMENT** |
-| CLASS | Defect correction |
-| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
-| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
-| GOVERNING FINDING | — |
-| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
-| MEASURED | `["PROGRAM-000011='FAIL'", "PROGRAM-000012='FAIL'", "PROGRAM-000017='FAIL'"]` |
-
-A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
 
 ### `OBS-AGGREGATE-CEILING` — No standing finding bounds the attainable certification
 

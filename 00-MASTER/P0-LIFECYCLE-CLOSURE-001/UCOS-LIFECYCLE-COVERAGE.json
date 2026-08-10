@@ -1,6 +1,6 @@
 {
   "authority": "NONE — DERIVED TRUTH",
-  "digest": "21038e1625f8d02d1c654f535a1281f759f99f98c6903bf1dffece4da6fd75d0",
+  "digest": "fdb1c40cbb71aeea0d36c4d2dbba4d1f81dceb1ef17a2c86963dec1abc832cdc",
   "measurements": {
     "branch_count": 17832,
     "branch_coverage_percent": 38.91,
@@ -17,7 +17,7 @@
     "statements": 77830,
     "statements_covered": 32063,
     "test_referenced_stages": 11,
-    "test_suite_passed": false,
+    "test_suite_passed": true,
     "traceability_coverage_percent": 15.56
   },
   "per_engine_coverage": {

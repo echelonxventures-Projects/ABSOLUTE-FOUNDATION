@@ -122,7 +122,7 @@
 | `statements` | 77830 |
 | `statements_covered` | 32063 |
 | `test_referenced_stages` | 11 |
-| `test_suite_passed` | False |
+| `test_suite_passed` | True |
 | `traceability_coverage_percent` | 15.56 |
 
 > Path coverage: not measured: no path-coverage instrument exists in this repository, so the value is withheld rather than approximated by branch coverage

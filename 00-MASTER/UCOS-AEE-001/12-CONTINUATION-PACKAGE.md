@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `6772107f3817529692f1e73b4b656baf` |
+| SEAL | `4a40807e5a73d0a35f4ee69b335b602b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > The resume anchor. Everything a later session needs in order to continue the loop without rediscovering what this run established.
@@ -20,9 +20,9 @@
 | DETERMINATION | **NOT-CONVERGED** |
 | TIER | `standard` |
 | ITERATIONS | 4 |
-| SEAL | `6772107f3817529692f1e73b4b656bafbfc261c54a07d6eb277d90e4349599e9` |
+| SEAL | `4a40807e5a73d0a35f4ee69b335b602b65167ad4a6870e02bcbb9a1c9a634573` |
 | UNSATISFIED BLOCKING CRITERIA | `CONV-02` |
-| OPEN FINDINGS | 6 |
+| OPEN FINDINGS | 2 |
 
 ## What closes the remaining ceiling, and who owns it
 

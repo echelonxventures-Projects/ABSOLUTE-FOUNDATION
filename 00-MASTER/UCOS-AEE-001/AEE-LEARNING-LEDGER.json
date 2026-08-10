@@ -91,37 +91,17 @@
     "iteration_total": 4,
     "stable_iterations": 4,
     "vector_digests": [
-      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582"
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     ]
   },
   "decision": {
-    "OBS-AGGREGATE-BLOCKING": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-BLOCKING-REGRESSION"
-    },
     "OBS-AGGREGATE-CEILING": {
       "class": "Constitutional amendment",
       "decision": "ESCALATE",
       "rule": "CR-ESCALATED-CEILING"
-    },
-    "OBS-AGGREGATE-GATE-EXIT": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-BLOCKING-REGRESSION"
-    },
-    "OBS-AGGREGATE-GATES-PASS": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-BLOCKING-REGRESSION"
-    },
-    "OBS-AGGREGATE-PROGRAMMES-PASS": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-BLOCKING-REGRESSION"
     },
     "OBS-BLUEPRINT-GATE": {
       "class": "Defect correction",
@@ -361,10 +341,8 @@
   },
   "observation": {
     "OBS-AGGREGATE-BLOCKING": {
-      "observed": [
-        "CK-VERIFY"
-      ],
-      "verdict": "VIOLATED"
+      "observed": [],
+      "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-CEILING": {
       "observed": [
@@ -373,25 +351,16 @@
       "verdict": "VIOLATED"
     },
     "OBS-AGGREGATE-GATE-EXIT": {
-      "observed": 1,
-      "verdict": "VIOLATED"
+      "observed": 0,
+      "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-GATES-PASS": {
-      "observed": [
-        "G-10='FAIL'",
-        "G-11='FAIL'",
-        "G-13='FAIL'",
-        "G-15='FAIL'"
-      ],
-      "verdict": "VIOLATED"
+      "observed": 25,
+      "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-PROGRAMMES-PASS": {
-      "observed": [
-        "PROGRAM-000011='FAIL'",
-        "PROGRAM-000012='FAIL'",
-        "PROGRAM-000017='FAIL'"
-      ],
-      "verdict": "VIOLATED"
+      "observed": 20,
+      "verdict": "SATISFIED"
     },
     "OBS-AGGREGATE-UNPROVEN": {
       "observed": [],
