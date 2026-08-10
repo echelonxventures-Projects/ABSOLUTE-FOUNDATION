@@ -6709,7 +6709,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": false,
-        "measure_value": 3,
+        "measure_value": 1,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": true
@@ -6717,7 +6717,7 @@
       "invariant": "Universal Execution Coordination",
       "measure": "gate_blocking",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure_value": 3,
+      "measure_value": 1,
       "ordinal": 180,
       "owner": "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
       "properties": {
@@ -6897,7 +6897,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": false,
-        "measure_value": 3,
+        "measure_value": 1,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": true
@@ -6905,7 +6905,7 @@
       "invariant": "Universal Validation",
       "measure": "blocking_failures",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure_value": 3,
+      "measure_value": 1,
       "ordinal": 220,
       "owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "properties": {
@@ -8072,7 +8072,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": false,
-        "measure_value": 3,
+        "measure_value": 1,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": true
@@ -8080,7 +8080,7 @@
       "invariant": "Auto Integration",
       "measure": "blocking_failures",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure_value": 3,
+      "measure_value": 1,
       "ordinal": 470,
       "owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
       "properties": {
@@ -23166,7 +23166,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "2afc1f39a7fe44c99db6a9f4ab03e43556833e5bdad7b2ba32ffc0b64a4caa8c",
+  "seal_sha256": "39385460651bb5661a776d8873ebef9266255665ca7315a3e8f6f4b34bdeb063",
   "self_evolution": [
     {
       "anchor": "determination",

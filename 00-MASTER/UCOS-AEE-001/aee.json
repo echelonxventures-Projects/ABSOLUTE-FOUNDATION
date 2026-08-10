@@ -129,9 +129,7 @@
       "governed_by_finding": null,
       "id": "OBS-AGGREGATE-BLOCKING",
       "observed": [
-        "CK-ACEE",
-        "CK-REG-DRIFT",
-        "CK-UCL"
+        "CK-ACEE"
       ],
       "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
       "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
@@ -165,9 +163,6 @@
       "governed_by_finding": null,
       "id": "OBS-AGGREGATE-GATES-PASS",
       "observed": [
-        "G-07='FAIL'",
-        "G-15='FAIL'",
-        "G-25='FAIL'",
         "G-26='FAIL'"
       ],
       "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -186,10 +181,6 @@
       "governed_by_finding": null,
       "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
       "observed": [
-        "PROGRAM-000004='FAIL'",
-        "PROGRAM-000005='FAIL'",
-        "PROGRAM-000017='FAIL'",
-        "PROGRAM-000020='FAIL'",
         "PROGRAM-000021='FAIL'"
       ],
       "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -379,10 +370,7 @@
           "owner": "00-MASTER/URRC-000001/urrc_engine.py",
           "reason": "",
           "required": true,
-          "residue": [
-            "00-MASTER/URRC-000001/02-REPOSITORY-REALITY-DETERMINATION.md",
-            "00-MASTER/URRC-000001/urrc.json"
-          ],
+          "residue": [],
           "tier": "standard",
           "unattributed": [],
           "verdict": "PASS"
@@ -439,24 +427,7 @@
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "reason": "",
           "required": true,
-          "residue": [
-            "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
-            "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
-            "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
-            "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
-            "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md",
-            "00-MASTER/UCOS-RIB-001/05-DEPENDENCY-GRAPH.md",
-            "00-MASTER/UCOS-RIB-001/06-GAP-ANALYSIS.md",
-            "00-MASTER/UCOS-RIB-001/07-DUPLICATE-ANALYSIS.md",
-            "00-MASTER/UCOS-RIB-001/08-REUSE-ANALYSIS.md",
-            "00-MASTER/UCOS-RIB-001/09-EXTENSION-ANALYSIS.md",
-            "00-MASTER/UCOS-RIB-001/10-IMPLEMENTATION-QUEUE.md",
-            "00-MASTER/UCOS-RIB-001/11-VERIFICATION-REPORT.md",
-            "00-MASTER/UCOS-RIB-001/12-VALIDATION-REPORT.md",
-            "00-MASTER/UCOS-RIB-001/13-CERTIFICATION-REPORT.md",
-            "00-MASTER/UCOS-RIB-001/14-REPOSITORY-READINESS-REPORT.md",
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
+          "residue": [],
           "tier": "standard",
           "unattributed": [],
           "verdict": "PASS"
@@ -640,9 +611,7 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-BLOCKING",
           "observed": [
-            "CK-ACEE",
-            "CK-REG-DRIFT",
-            "CK-UCL"
+            "CK-ACEE"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
@@ -676,9 +645,6 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-GATES-PASS",
           "observed": [
-            "G-07='FAIL'",
-            "G-15='FAIL'",
-            "G-25='FAIL'",
             "G-26='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -697,10 +663,6 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
           "observed": [
-            "PROGRAM-000004='FAIL'",
-            "PROGRAM-000005='FAIL'",
-            "PROGRAM-000017='FAIL'",
-            "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -755,9 +717,7 @@
           ],
           "name": "No blocking constitutional check failed",
           "observed": [
-            "CK-ACEE",
-            "CK-REG-DRIFT",
-            "CK-UCL"
+            "CK-ACEE"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "blocking_failures",
@@ -804,9 +764,6 @@
           ],
           "name": "Every constitutional gate reports a passing verdict",
           "observed": [
-            "G-07='FAIL'",
-            "G-15='FAIL'",
-            "G-25='FAIL'",
             "G-26='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -824,10 +781,6 @@
           ],
           "name": "Every delegated programme reports a passing verdict",
           "observed": [
-            "PROGRAM-000004='FAIL'",
-            "PROGRAM-000005='FAIL'",
-            "PROGRAM-000017='FAIL'",
-            "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -1739,9 +1692,7 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-BLOCKING",
           "observed": [
-            "CK-ACEE",
-            "CK-REG-DRIFT",
-            "CK-UCL"
+            "CK-ACEE"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
@@ -1775,9 +1726,6 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-GATES-PASS",
           "observed": [
-            "G-07='FAIL'",
-            "G-15='FAIL'",
-            "G-25='FAIL'",
             "G-26='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -1796,10 +1744,6 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
           "observed": [
-            "PROGRAM-000004='FAIL'",
-            "PROGRAM-000005='FAIL'",
-            "PROGRAM-000017='FAIL'",
-            "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -1854,9 +1798,7 @@
           ],
           "name": "No blocking constitutional check failed",
           "observed": [
-            "CK-ACEE",
-            "CK-REG-DRIFT",
-            "CK-UCL"
+            "CK-ACEE"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "blocking_failures",
@@ -1903,9 +1845,6 @@
           ],
           "name": "Every constitutional gate reports a passing verdict",
           "observed": [
-            "G-07='FAIL'",
-            "G-15='FAIL'",
-            "G-25='FAIL'",
             "G-26='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -1923,10 +1862,6 @@
           ],
           "name": "Every delegated programme reports a passing verdict",
           "observed": [
-            "PROGRAM-000004='FAIL'",
-            "PROGRAM-000005='FAIL'",
-            "PROGRAM-000017='FAIL'",
-            "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -2838,9 +2773,7 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-BLOCKING",
           "observed": [
-            "CK-ACEE",
-            "CK-REG-DRIFT",
-            "CK-UCL"
+            "CK-ACEE"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
@@ -2874,9 +2807,6 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-GATES-PASS",
           "observed": [
-            "G-07='FAIL'",
-            "G-15='FAIL'",
-            "G-25='FAIL'",
             "G-26='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -2895,10 +2825,6 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
           "observed": [
-            "PROGRAM-000004='FAIL'",
-            "PROGRAM-000005='FAIL'",
-            "PROGRAM-000017='FAIL'",
-            "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -2953,9 +2879,7 @@
           ],
           "name": "No blocking constitutional check failed",
           "observed": [
-            "CK-ACEE",
-            "CK-REG-DRIFT",
-            "CK-UCL"
+            "CK-ACEE"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "blocking_failures",
@@ -3002,9 +2926,6 @@
           ],
           "name": "Every constitutional gate reports a passing verdict",
           "observed": [
-            "G-07='FAIL'",
-            "G-15='FAIL'",
-            "G-25='FAIL'",
             "G-26='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -3022,10 +2943,6 @@
           ],
           "name": "Every delegated programme reports a passing verdict",
           "observed": [
-            "PROGRAM-000004='FAIL'",
-            "PROGRAM-000005='FAIL'",
-            "PROGRAM-000017='FAIL'",
-            "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -3937,9 +3854,7 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-BLOCKING",
           "observed": [
-            "CK-ACEE",
-            "CK-REG-DRIFT",
-            "CK-UCL"
+            "CK-ACEE"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
@@ -3973,9 +3888,6 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-GATES-PASS",
           "observed": [
-            "G-07='FAIL'",
-            "G-15='FAIL'",
-            "G-25='FAIL'",
             "G-26='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -3994,10 +3906,6 @@
           "governed_by_finding": null,
           "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
           "observed": [
-            "PROGRAM-000004='FAIL'",
-            "PROGRAM-000005='FAIL'",
-            "PROGRAM-000017='FAIL'",
-            "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -4052,9 +3960,7 @@
           ],
           "name": "No blocking constitutional check failed",
           "observed": [
-            "CK-ACEE",
-            "CK-REG-DRIFT",
-            "CK-UCL"
+            "CK-ACEE"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "pointer": "blocking_failures",
@@ -4101,9 +4007,6 @@
           ],
           "name": "Every constitutional gate reports a passing verdict",
           "observed": [
-            "G-07='FAIL'",
-            "G-15='FAIL'",
-            "G-25='FAIL'",
             "G-26='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -4121,10 +4024,6 @@
           ],
           "name": "Every delegated programme reports a passing verdict",
           "observed": [
-            "PROGRAM-000004='FAIL'",
-            "PROGRAM-000005='FAIL'",
-            "PROGRAM-000017='FAIL'",
-            "PROGRAM-000020='FAIL'",
             "PROGRAM-000021='FAIL'"
           ],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
@@ -5017,9 +4916,7 @@
     "observation": {
       "OBS-AGGREGATE-BLOCKING": {
         "observed": [
-          "CK-ACEE",
-          "CK-REG-DRIFT",
-          "CK-UCL"
+          "CK-ACEE"
         ],
         "verdict": "VIOLATED"
       },
@@ -5035,19 +4932,12 @@
       },
       "OBS-AGGREGATE-GATES-PASS": {
         "observed": [
-          "G-07='FAIL'",
-          "G-15='FAIL'",
-          "G-25='FAIL'",
           "G-26='FAIL'"
         ],
         "verdict": "VIOLATED"
       },
       "OBS-AGGREGATE-PROGRAMMES-PASS": {
         "observed": [
-          "PROGRAM-000004='FAIL'",
-          "PROGRAM-000005='FAIL'",
-          "PROGRAM-000017='FAIL'",
-          "PROGRAM-000020='FAIL'",
           "PROGRAM-000021='FAIL'"
         ],
         "verdict": "VIOLATED"

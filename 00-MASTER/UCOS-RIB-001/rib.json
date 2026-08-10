@@ -1,7 +1,7 @@
 {
   "compliance": [
     {
-      "finding": "dirty_entries_outside_generated=2",
+      "finding": "dirty_entries_outside_generated=66",
       "gate": "GATE-12",
       "id": "CMP-CLEAN",
       "rank": 1,
@@ -1544,7 +1544,7 @@
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
       "failures": [
-        "dirty_entries_outside_generated=2"
+        "dirty_entries_outside_generated=66"
       ],
       "id": "GATE-12",
       "metrics": [
@@ -1982,8 +1982,8 @@
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 2,
-    "dirty_entries_outside_generated": 2,
+    "dirty_entries": 66,
+    "dirty_entries_outside_generated": 66,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 37,
@@ -4125,9 +4125,9 @@
     "conflicts": 0,
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 2,
+    "dirty_entries": 66,
     "interrupted_operations": [],
-    "modified": 2,
+    "modified": 66,
     "tracked_files": 5679,
     "untracked": 0,
     "working_tree": "DIRTY"
@@ -4493,7 +4493,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "35bc6c0ef6045d4a576edfdbc8cbfcf8746b5f4113110b8fdd9903fecb974670",
+      "content_sha256": "5e0994495495d2db18b8477aeaacf294a26ed4344756aec6530c2b6bb4e7269a",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -22164,7 +22164,7 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 2,
+      "measured": 66,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
       "verdict": "FAIL"

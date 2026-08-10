@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (2 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (66 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 292 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -29,7 +29,7 @@
 | Obligation | Name | Criterion | Metric | Measured | Verdict |
 |---|---|---|---|---|---|
 | `VAL-01` | Architecture | every implementation unit lies under a discovered code root and inside a declared layer | `units_outside_architecture` | 0 (expected 0) | **PASS** |
-| `VAL-02` | Repository | the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts | `dirty_entries_outside_generated` | 2 (expected 0) | **FAIL** |
+| `VAL-02` | Repository | the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts | `dirty_entries_outside_generated` | 66 (expected 0) | **FAIL** |
 | `VAL-03` | Programs | every discovered unit names a programme | `units_without_program` | 0 (expected 0) | **PASS** |
 | `VAL-04` | Roadmaps | the planning layer reports no unresolved plan | `planning_unresolved` | 0 (expected 0) | **PASS** |
 | `VAL-05` | Universes | every registered programme rollup resolves to a discovered unit or a corpus programme | `universes_unresolved` | 0 (expected 0) | **PASS** |
