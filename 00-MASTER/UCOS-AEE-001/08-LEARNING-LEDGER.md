@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `c053ec93676229eef4cab8e45970c1ec` |
+| SEAL | `4a40807e5a73d0a35f4ee69b335b602b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > What an iteration establishes is retained so a later run resolves an identical finding by lookup instead of rediscovery. This is a deterministic knowledge projection, not a statistical model.

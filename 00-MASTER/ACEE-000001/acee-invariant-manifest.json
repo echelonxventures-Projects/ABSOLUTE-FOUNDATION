@@ -275,7 +275,7 @@
       "anchor": "reentrancy_env",
       "authority_owner": "02-EXECUTION-LIFECYCLE.md",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure": "gate_blocking",
+      "measure": "independent_view.00-MASTER/ACEE-000001.gate_blocking",
       "comparator": "==",
       "expect": 0,
       "evidence": [
@@ -305,7 +305,7 @@
       "anchor": "checks",
       "authority_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure": "unproven",
+      "measure": "independent_view.00-MASTER/ACEE-000001.unproven",
       "comparator": "==",
       "expect": 0,
       "evidence": [
@@ -335,7 +335,7 @@
       "anchor": "fail_closed",
       "authority_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure": "blocking_failures",
+      "measure": "independent_view.00-MASTER/ACEE-000001.blocking_failures",
       "comparator": "==",
       "expect": 0,
       "evidence": [
@@ -350,7 +350,7 @@
       "anchor": "exit_semantics",
       "authority_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure": "blocking_unavailable",
+      "measure": "independent_view.00-MASTER/ACEE-000001.blocking_unavailable",
       "comparator": "==",
       "expect": 0,
       "evidence": [
@@ -365,7 +365,7 @@
       "anchor": "Gate",
       "authority_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure": "gate_exit",
+      "measure": "independent_view.00-MASTER/ACEE-000001.gate_exit",
       "comparator": "==",
       "expect": 0,
       "evidence": [
@@ -680,7 +680,7 @@
       "anchor": "Engineer",
       "authority_owner": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure": "gate_exit",
+      "measure": "independent_view.00-MASTER/ACEE-000001.gate_exit",
       "comparator": "==",
       "expect": 0,
       "evidence": [
@@ -695,7 +695,7 @@
       "anchor": "Test",
       "authority_owner": "00-MASTER/UCOS-EG-001/13-QUALITY-COMPLIANCE-RULES.md",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure": "blocking_not_executed",
+      "measure": "independent_view.00-MASTER/ACEE-000001.blocking_not_executed",
       "comparator": "==",
       "expect": 0,
       "evidence": [
@@ -710,7 +710,7 @@
       "anchor": "Integrate",
       "authority_owner": "00-MASTER/UCOS-EG-001/09-REPOSITORY-INTEGRATION-RULES.md",
       "measure_source": "00-MASTER/UCCEP-000000/uccep.json",
-      "measure": "blocking_failures",
+      "measure": "independent_view.00-MASTER/ACEE-000001.blocking_failures",
       "comparator": "==",
       "expect": 0,
       "evidence": [

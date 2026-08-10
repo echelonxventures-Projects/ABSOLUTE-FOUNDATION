@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `c053ec93676229eef4cab8e45970c1ec` |
+| SEAL | `4a40807e5a73d0a35f4ee69b335b602b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Cadence is bound to the authorities the repository actually has. No resident process, scheduler or armed session hook exists here, and inventing one would be unadjudicated surface, so the loop runs on every change and on invocation.

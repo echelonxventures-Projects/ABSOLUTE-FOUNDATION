@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `c053ec93676229eef4cab8e45970c1ec` |
+| SEAL | `4a40807e5a73d0a35f4ee69b335b602b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > What this programme certifies, and — equally — what it does not. A verdict that could not be reached in both directions would carry no evidentiary value.

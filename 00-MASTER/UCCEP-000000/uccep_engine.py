@@ -902,6 +902,105 @@ def assemble(decl: dict, records: dict[str, dict], resolved_tier: str, repo_stat
     else:
         certification = "CERTIFIED"
 
+    # ---- independent views: the aggregate as it stands for each constituent, with the
+    # portion that constituent itself generated STRUCK.
+    #
+    # CMG-000001 LI.6: "Certification SHALL NOT be self-issued. The certifying authority
+    # SHALL be distinct from the certified subject's author." EDQ-004 disposes of the same
+    # defect from the other side: standing that "rests on authority or recognition it
+    # generated or controls" is a circular authority claim, and the declared remedy is that
+    # the "circular basis [is] rejected as non-independent" — struck, neither passed nor
+    # failed.
+    #
+    # This register is consumed by the very programmes it aggregates. A constituent reading
+    # `gate_blocking` reads a set that contains its OWN verdict, so its invariants measure
+    # themselves: the reading is self-sustaining in either direction and has two fixed
+    # points, one of which is a failure no defect causes. That is not a measurement.
+    #
+    # Constituency is read from the declaration, never enumerated here: a gate or programme
+    # CONSTITUTES a home when that home appears in its `delegated_to`, or when it binds a
+    # check that home owns. A home's own view strikes exactly the checks of the gates and
+    # programmes it constitutes — and nothing else, so every failure outside a home's own
+    # programme still reaches it at full strength. The repository-level aggregate below is
+    # untouched: UCCEP still reports every failure, including a constituent's own, to the
+    # world. Only the constituent's view of itself is made independent.
+    def _home_of(owner: str) -> str:
+        parts = [p for p in str(owner).split("/") if p]
+        return "/".join(parts[:2]) if len(parts) > 2 else str(owner)
+
+    check_home = {rec["id"]: _home_of(rec["owner"]) for rec in ordered}
+    homes = sorted(set(check_home.values()) | {
+        _home_of(str(d))
+        for group in (*decl["gates"], *decl["programs"])
+        for d in group.get("delegated_to", [])
+    } | {_home_of(str(group["owner"])) for group in decl["gates"] if group.get("owner")})
+
+    def _constitutes(group: dict, home: str) -> bool:
+        if any(_home_of(str(d)) == home for d in group.get("delegated_to", [])):
+            return True
+        if group.get("owner") and _home_of(str(group["owner"])) == home:
+            return True
+        return any(check_home.get(cid) == home for cid in group["checks"])
+
+    independent_view: dict[str, dict] = {}
+    for home in homes:
+        struck = sorted(
+            {
+                cid
+                for group in (*decl["gates"], *decl["programs"])
+                if _constitutes(group, home)
+                for cid in group["checks"]
+            }
+        )
+        if not struck:
+            continue
+        kept = [cid for cid in records if cid not in struck]
+        view = aggregate(records, kept)
+        view_blocking = sorted(set(view["failed"]) | set(view["unproven"]))
+        independent_view[home] = {
+            "struck": struck,
+            "blocking_failures": view["failed"],
+            "advisory_failures": view["advisory_failed"],
+            "unproven": view["unproven"],
+            "blocking_unavailable": sorted(
+                cid
+                for cid in kept
+                if records[cid]["in_scope"]
+                and not records[cid]["advisory"]
+                and records[cid]["verdict"] == "UNAVAILABLE"
+            ),
+            "blocking_not_executed": sorted(
+                cid
+                for cid in kept
+                if records[cid]["in_scope"]
+                and not records[cid]["advisory"]
+                and not records[cid]["executed"]
+                and records[cid]["verdict"] != "UNAVAILABLE"
+            ),
+            "blocking_out_of_tier": view["out_of_tier"],
+            "gate_blocking": view_blocking,
+            "gate_exit": 1 if view_blocking else 0,
+            # A gate or programme is re-aggregated over its non-struck checks only, so a
+            # verdict this home itself produced cannot reach it through a group either.
+            # A group whose every check is struck carries no independent content at all
+            # and is dropped rather than reported as passing — an empty group is not
+            # evidence of anything.
+            "gates": [
+                {"id": d["id"], **{k: v for k, v in aggregate(records, keep).items()
+                                   if k in ("verdict", "failed", "not_executed")}}
+                for d in decl["gates"]
+                for keep in [[cid for cid in d["checks"] if cid not in struck]]
+                if keep
+            ],
+            "programs": [
+                {"id": d["id"], **{k: v for k, v in aggregate(records, keep).items()
+                                   if k in ("verdict", "failed", "not_executed")}}
+                for d in decl["programs"]
+                for keep in [[cid for cid in d["checks"] if cid not in struck]]
+                if keep
+            ],
+        }
+
     model = {
         "programme": decl["programme"],
         "tier": resolved_tier,
@@ -909,6 +1008,7 @@ def assemble(decl: dict, records: dict[str, dict], resolved_tier: str, repo_stat
         "checks": ordered,
         "gates": gates,
         "programs": programs,
+        "independent_view": independent_view,
         "blocking_failures": blocking_failures,
         "advisory_failures": advisory_failures,
         "unavailable": unavailable,

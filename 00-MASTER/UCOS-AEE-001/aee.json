@@ -23,7 +23,7 @@
       "expect": 0,
       "id": "CONV-02",
       "measure": "blocking_violations",
-      "measured": 4,
+      "measured": 1,
       "verdict": "VIOLATED"
     },
     {
@@ -119,76 +119,6 @@
   "determination": "NOT-CONVERGED",
   "findings": [
     {
-      "blocking": true,
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "detail": "the measured value does not meet the declared expectation",
-      "evidence": [
-        "00-MASTER/UCCEP-000000/uccep.json"
-      ],
-      "governed_by_finding": null,
-      "id": "OBS-AGGREGATE-BLOCKING",
-      "observed": [
-        "CK-ACEE"
-      ],
-      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-      "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-      "rule": "CR-BLOCKING-REGRESSION",
-      "subject": "No blocking constitutional check failed"
-    },
-    {
-      "blocking": true,
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "detail": "the measured value does not meet the declared expectation",
-      "evidence": [
-        "00-MASTER/UCCEP-000000/uccep.json"
-      ],
-      "governed_by_finding": null,
-      "id": "OBS-AGGREGATE-GATE-EXIT",
-      "observed": 1,
-      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-      "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-      "rule": "CR-BLOCKING-REGRESSION",
-      "subject": "The aggregate constitutional gate exits clean"
-    },
-    {
-      "blocking": true,
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "detail": "the measured value does not meet the declared expectation",
-      "evidence": [
-        "00-MASTER/UCCEP-000000/uccep.json"
-      ],
-      "governed_by_finding": null,
-      "id": "OBS-AGGREGATE-GATES-PASS",
-      "observed": [
-        "G-26='FAIL'"
-      ],
-      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-      "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-      "rule": "CR-BLOCKING-REGRESSION",
-      "subject": "Every constitutional gate reports a passing verdict"
-    },
-    {
-      "blocking": true,
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "detail": "the measured value does not meet the declared expectation",
-      "evidence": [
-        "00-MASTER/UCCEP-000000/uccep.json"
-      ],
-      "governed_by_finding": null,
-      "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-      "observed": [
-        "PROGRAM-000021='FAIL'"
-      ],
-      "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-      "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-      "rule": "CR-BLOCKING-REGRESSION",
-      "subject": "Every delegated programme reports a passing verdict"
-    },
-    {
       "blocking": false,
       "class": "Constitutional amendment",
       "decision": "ESCALATE",
@@ -206,6 +136,22 @@
       "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
       "rule": "CR-ESCALATED-CEILING",
       "subject": "No standing finding bounds the attainable certification"
+    },
+    {
+      "blocking": true,
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "detail": "the measured value does not meet the declared expectation",
+      "evidence": [
+        "00-MASTER/UCOS-RIB-001/rib.json"
+      ],
+      "governed_by_finding": null,
+      "id": "OBS-BLUEPRINT-GATE",
+      "observed": "CLOSED",
+      "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
+      "rule": "CR-BLOCKING-REGRESSION",
+      "subject": "The architectural blueprint gate is open"
     }
   ],
   "gate_exit": 1,
@@ -354,7 +300,10 @@
           "owner": "00-MASTER/URRC-000001/urrc_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue": [
+            "00-MASTER/URRC-000001/02-REPOSITORY-REALITY-DETERMINATION.md",
+            "00-MASTER/URRC-000001/urrc.json"
+          ],
           "tier": "standard",
           "unattributed": [],
           "verdict": "PASS"
@@ -411,7 +360,24 @@
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue": [
+            "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
+            "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
+            "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
+            "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
+            "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md",
+            "00-MASTER/UCOS-RIB-001/05-DEPENDENCY-GRAPH.md",
+            "00-MASTER/UCOS-RIB-001/06-GAP-ANALYSIS.md",
+            "00-MASTER/UCOS-RIB-001/07-DUPLICATE-ANALYSIS.md",
+            "00-MASTER/UCOS-RIB-001/08-REUSE-ANALYSIS.md",
+            "00-MASTER/UCOS-RIB-001/09-EXTENSION-ANALYSIS.md",
+            "00-MASTER/UCOS-RIB-001/10-IMPLEMENTATION-QUEUE.md",
+            "00-MASTER/UCOS-RIB-001/11-VERIFICATION-REPORT.md",
+            "00-MASTER/UCOS-RIB-001/12-VALIDATION-REPORT.md",
+            "00-MASTER/UCOS-RIB-001/13-CERTIFICATION-REPORT.md",
+            "00-MASTER/UCOS-RIB-001/14-REPOSITORY-READINESS-REPORT.md",
+            "00-MASTER/UCOS-RIB-001/rib.json"
+          ],
           "tier": "standard",
           "unattributed": [],
           "verdict": "PASS"
@@ -577,82 +543,9 @@
         }
       ],
       "blocking_violations": [
-        "OBS-AGGREGATE-BLOCKING",
-        "OBS-AGGREGATE-GATE-EXIT",
-        "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS"
+        "OBS-BLUEPRINT-GATE"
       ],
       "findings": [
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-BLOCKING",
-          "observed": [
-            "CK-ACEE"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "No blocking constitutional check failed"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATE-EXIT",
-          "observed": 1,
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The aggregate constitutional gate exits clean"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATES-PASS",
-          "observed": [
-            "G-26='FAIL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every constitutional gate reports a passing verdict"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-          "observed": [
-            "PROGRAM-000021='FAIL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every delegated programme reports a passing verdict"
-        },
         {
           "blocking": false,
           "class": "Constitutional amendment",
@@ -671,6 +564,22 @@
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
           "rule": "CR-ESCALATED-CEILING",
           "subject": "No standing finding bounds the attainable certification"
+        },
+        {
+          "blocking": true,
+          "class": "Defect correction",
+          "decision": "IMPLEMENT",
+          "detail": "the measured value does not meet the declared expectation",
+          "evidence": [
+            "00-MASTER/UCOS-RIB-001/rib.json"
+          ],
+          "governed_by_finding": null,
+          "id": "OBS-BLUEPRINT-GATE",
+          "observed": "CLOSED",
+          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
+          "rule": "CR-BLOCKING-REGRESSION",
+          "subject": "The architectural blueprint gate is open"
         }
       ],
       "index": 1,
@@ -683,14 +592,12 @@
             "constitutional-validation"
           ],
           "name": "No blocking constitutional check failed",
-          "observed": [
-            "CK-ACEE"
-          ],
+          "observed": [],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "blocking_failures",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.blocking_failures",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -702,7 +609,7 @@
           "name": "No blocking check was left without evidence",
           "observed": [],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "unproven",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.unproven",
           "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
           "verdict": "SATISFIED"
@@ -715,12 +622,12 @@
             "UEI-EVO-14"
           ],
           "name": "The aggregate constitutional gate exits clean",
-          "observed": 1,
+          "observed": 0,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gate_exit",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.gate_exit",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -730,14 +637,12 @@
             "certification"
           ],
           "name": "Every constitutional gate reports a passing verdict",
-          "observed": [
-            "G-26='FAIL'"
-          ],
+          "observed": 25,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gates",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.gates",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -747,14 +652,12 @@
             "execute-repository-validation"
           ],
           "name": "Every delegated programme reports a passing verdict",
-          "observed": [
-            "PROGRAM-000021='FAIL'"
-          ],
+          "observed": 20,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "programs",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.programs",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": false,
@@ -1172,12 +1075,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "OPEN",
+          "observed": "CLOSED",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "",
+          "reason": "the measured value does not meet the declared expectation",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "SATISFIED"
+          "verdict": "VIOLATED"
         },
         {
           "blocking": true,
@@ -1273,7 +1176,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
+      "vector_digest": "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     },
     {
       "actuator_failures": [],
@@ -1641,82 +1544,9 @@
         }
       ],
       "blocking_violations": [
-        "OBS-AGGREGATE-BLOCKING",
-        "OBS-AGGREGATE-GATE-EXIT",
-        "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS"
+        "OBS-BLUEPRINT-GATE"
       ],
       "findings": [
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-BLOCKING",
-          "observed": [
-            "CK-ACEE"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "No blocking constitutional check failed"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATE-EXIT",
-          "observed": 1,
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The aggregate constitutional gate exits clean"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATES-PASS",
-          "observed": [
-            "G-26='FAIL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every constitutional gate reports a passing verdict"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-          "observed": [
-            "PROGRAM-000021='FAIL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every delegated programme reports a passing verdict"
-        },
         {
           "blocking": false,
           "class": "Constitutional amendment",
@@ -1735,6 +1565,22 @@
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
           "rule": "CR-ESCALATED-CEILING",
           "subject": "No standing finding bounds the attainable certification"
+        },
+        {
+          "blocking": true,
+          "class": "Defect correction",
+          "decision": "IMPLEMENT",
+          "detail": "the measured value does not meet the declared expectation",
+          "evidence": [
+            "00-MASTER/UCOS-RIB-001/rib.json"
+          ],
+          "governed_by_finding": null,
+          "id": "OBS-BLUEPRINT-GATE",
+          "observed": "CLOSED",
+          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
+          "rule": "CR-BLOCKING-REGRESSION",
+          "subject": "The architectural blueprint gate is open"
         }
       ],
       "index": 2,
@@ -1747,14 +1593,12 @@
             "constitutional-validation"
           ],
           "name": "No blocking constitutional check failed",
-          "observed": [
-            "CK-ACEE"
-          ],
+          "observed": [],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "blocking_failures",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.blocking_failures",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -1766,7 +1610,7 @@
           "name": "No blocking check was left without evidence",
           "observed": [],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "unproven",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.unproven",
           "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
           "verdict": "SATISFIED"
@@ -1779,12 +1623,12 @@
             "UEI-EVO-14"
           ],
           "name": "The aggregate constitutional gate exits clean",
-          "observed": 1,
+          "observed": 0,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gate_exit",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.gate_exit",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -1794,14 +1638,12 @@
             "certification"
           ],
           "name": "Every constitutional gate reports a passing verdict",
-          "observed": [
-            "G-26='FAIL'"
-          ],
+          "observed": 25,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gates",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.gates",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -1811,14 +1653,12 @@
             "execute-repository-validation"
           ],
           "name": "Every delegated programme reports a passing verdict",
-          "observed": [
-            "PROGRAM-000021='FAIL'"
-          ],
+          "observed": 20,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "programs",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.programs",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": false,
@@ -2236,12 +2076,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "OPEN",
+          "observed": "CLOSED",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "",
+          "reason": "the measured value does not meet the declared expectation",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "SATISFIED"
+          "verdict": "VIOLATED"
         },
         {
           "blocking": true,
@@ -2337,7 +2177,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
+      "vector_digest": "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     },
     {
       "actuator_failures": [],
@@ -2705,82 +2545,9 @@
         }
       ],
       "blocking_violations": [
-        "OBS-AGGREGATE-BLOCKING",
-        "OBS-AGGREGATE-GATE-EXIT",
-        "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS"
+        "OBS-BLUEPRINT-GATE"
       ],
       "findings": [
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-BLOCKING",
-          "observed": [
-            "CK-ACEE"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "No blocking constitutional check failed"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATE-EXIT",
-          "observed": 1,
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The aggregate constitutional gate exits clean"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATES-PASS",
-          "observed": [
-            "G-26='FAIL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every constitutional gate reports a passing verdict"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-          "observed": [
-            "PROGRAM-000021='FAIL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every delegated programme reports a passing verdict"
-        },
         {
           "blocking": false,
           "class": "Constitutional amendment",
@@ -2799,6 +2566,22 @@
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
           "rule": "CR-ESCALATED-CEILING",
           "subject": "No standing finding bounds the attainable certification"
+        },
+        {
+          "blocking": true,
+          "class": "Defect correction",
+          "decision": "IMPLEMENT",
+          "detail": "the measured value does not meet the declared expectation",
+          "evidence": [
+            "00-MASTER/UCOS-RIB-001/rib.json"
+          ],
+          "governed_by_finding": null,
+          "id": "OBS-BLUEPRINT-GATE",
+          "observed": "CLOSED",
+          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
+          "rule": "CR-BLOCKING-REGRESSION",
+          "subject": "The architectural blueprint gate is open"
         }
       ],
       "index": 3,
@@ -2811,14 +2594,12 @@
             "constitutional-validation"
           ],
           "name": "No blocking constitutional check failed",
-          "observed": [
-            "CK-ACEE"
-          ],
+          "observed": [],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "blocking_failures",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.blocking_failures",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -2830,7 +2611,7 @@
           "name": "No blocking check was left without evidence",
           "observed": [],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "unproven",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.unproven",
           "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
           "verdict": "SATISFIED"
@@ -2843,12 +2624,12 @@
             "UEI-EVO-14"
           ],
           "name": "The aggregate constitutional gate exits clean",
-          "observed": 1,
+          "observed": 0,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gate_exit",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.gate_exit",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -2858,14 +2639,12 @@
             "certification"
           ],
           "name": "Every constitutional gate reports a passing verdict",
-          "observed": [
-            "G-26='FAIL'"
-          ],
+          "observed": 25,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gates",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.gates",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -2875,14 +2654,12 @@
             "execute-repository-validation"
           ],
           "name": "Every delegated programme reports a passing verdict",
-          "observed": [
-            "PROGRAM-000021='FAIL'"
-          ],
+          "observed": 20,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "programs",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.programs",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": false,
@@ -3300,12 +3077,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "OPEN",
+          "observed": "CLOSED",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "",
+          "reason": "the measured value does not meet the declared expectation",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "SATISFIED"
+          "verdict": "VIOLATED"
         },
         {
           "blocking": true,
@@ -3401,7 +3178,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
+      "vector_digest": "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     },
     {
       "actuator_failures": [],
@@ -3769,82 +3546,9 @@
         }
       ],
       "blocking_violations": [
-        "OBS-AGGREGATE-BLOCKING",
-        "OBS-AGGREGATE-GATE-EXIT",
-        "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS"
+        "OBS-BLUEPRINT-GATE"
       ],
       "findings": [
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-BLOCKING",
-          "observed": [
-            "CK-ACEE"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "No blocking constitutional check failed"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATE-EXIT",
-          "observed": 1,
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The aggregate constitutional gate exits clean"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-GATES-PASS",
-          "observed": [
-            "G-26='FAIL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every constitutional gate reports a passing verdict"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCCEP-000000/uccep.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-AGGREGATE-PROGRAMMES-PASS",
-          "observed": [
-            "PROGRAM-000021='FAIL'"
-          ],
-          "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "Every delegated programme reports a passing verdict"
-        },
         {
           "blocking": false,
           "class": "Constitutional amendment",
@@ -3863,6 +3567,22 @@
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
           "rule": "CR-ESCALATED-CEILING",
           "subject": "No standing finding bounds the attainable certification"
+        },
+        {
+          "blocking": true,
+          "class": "Defect correction",
+          "decision": "IMPLEMENT",
+          "detail": "the measured value does not meet the declared expectation",
+          "evidence": [
+            "00-MASTER/UCOS-RIB-001/rib.json"
+          ],
+          "governed_by_finding": null,
+          "id": "OBS-BLUEPRINT-GATE",
+          "observed": "CLOSED",
+          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
+          "rule": "CR-BLOCKING-REGRESSION",
+          "subject": "The architectural blueprint gate is open"
         }
       ],
       "index": 4,
@@ -3875,14 +3595,12 @@
             "constitutional-validation"
           ],
           "name": "No blocking constitutional check failed",
-          "observed": [
-            "CK-ACEE"
-          ],
+          "observed": [],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "blocking_failures",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.blocking_failures",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -3894,7 +3612,7 @@
           "name": "No blocking check was left without evidence",
           "observed": [],
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "unproven",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.unproven",
           "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
           "verdict": "SATISFIED"
@@ -3907,12 +3625,12 @@
             "UEI-EVO-14"
           ],
           "name": "The aggregate constitutional gate exits clean",
-          "observed": 1,
+          "observed": 0,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gate_exit",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.gate_exit",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -3922,14 +3640,12 @@
             "certification"
           ],
           "name": "Every constitutional gate reports a passing verdict",
-          "observed": [
-            "G-26='FAIL'"
-          ],
+          "observed": 25,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "gates",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.gates",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -3939,14 +3655,12 @@
             "execute-repository-validation"
           ],
           "name": "Every delegated programme reports a passing verdict",
-          "observed": [
-            "PROGRAM-000021='FAIL'"
-          ],
+          "observed": 20,
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
-          "pointer": "programs",
-          "reason": "the measured value does not meet the declared expectation",
+          "pointer": "independent_view.00-MASTER/UCOS-AEE-001.programs",
+          "reason": "",
           "source": "00-MASTER/UCCEP-000000/uccep.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": false,
@@ -4364,12 +4078,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "OPEN",
+          "observed": "CLOSED",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "",
+          "reason": "the measured value does not meet the declared expectation",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "SATISFIED"
+          "verdict": "VIOLATED"
         },
         {
           "blocking": true,
@@ -4465,7 +4179,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
+      "vector_digest": "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     }
   ],
   "learning": {
@@ -4561,34 +4275,19 @@
       "iteration_total": 4,
       "stable_iterations": 4,
       "vector_digests": [
-        "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
-        "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
-        "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
-        "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
+        "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+        "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+        "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+        "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
       ]
     },
     "decision": {
-      "OBS-AGGREGATE-BLOCKING": {
-        "class": "Defect correction",
-        "decision": "IMPLEMENT",
-        "rule": "CR-BLOCKING-REGRESSION"
-      },
       "OBS-AGGREGATE-CEILING": {
         "class": "Constitutional amendment",
         "decision": "ESCALATE",
         "rule": "CR-ESCALATED-CEILING"
       },
-      "OBS-AGGREGATE-GATE-EXIT": {
-        "class": "Defect correction",
-        "decision": "IMPLEMENT",
-        "rule": "CR-BLOCKING-REGRESSION"
-      },
-      "OBS-AGGREGATE-GATES-PASS": {
-        "class": "Defect correction",
-        "decision": "IMPLEMENT",
-        "rule": "CR-BLOCKING-REGRESSION"
-      },
-      "OBS-AGGREGATE-PROGRAMMES-PASS": {
+      "OBS-BLUEPRINT-GATE": {
         "class": "Defect correction",
         "decision": "IMPLEMENT",
         "rule": "CR-BLOCKING-REGRESSION"
@@ -4826,10 +4525,8 @@
     },
     "observation": {
       "OBS-AGGREGATE-BLOCKING": {
-        "observed": [
-          "CK-ACEE"
-        ],
-        "verdict": "VIOLATED"
+        "observed": [],
+        "verdict": "SATISFIED"
       },
       "OBS-AGGREGATE-CEILING": {
         "observed": [
@@ -4838,20 +4535,16 @@
         "verdict": "VIOLATED"
       },
       "OBS-AGGREGATE-GATE-EXIT": {
-        "observed": 1,
-        "verdict": "VIOLATED"
+        "observed": 0,
+        "verdict": "SATISFIED"
       },
       "OBS-AGGREGATE-GATES-PASS": {
-        "observed": [
-          "G-26='FAIL'"
-        ],
-        "verdict": "VIOLATED"
+        "observed": 25,
+        "verdict": "SATISFIED"
       },
       "OBS-AGGREGATE-PROGRAMMES-PASS": {
-        "observed": [
-          "PROGRAM-000021='FAIL'"
-        ],
-        "verdict": "VIOLATED"
+        "observed": 20,
+        "verdict": "SATISFIED"
       },
       "OBS-AGGREGATE-UNPROVEN": {
         "observed": [],
@@ -4862,8 +4555,8 @@
         "verdict": "SATISFIED"
       },
       "OBS-BLUEPRINT-GATE": {
-        "observed": "OPEN",
-        "verdict": "SATISFIED"
+        "observed": "CLOSED",
+        "verdict": "VIOLATED"
       },
       "OBS-CORPUS-CURRENCY": {
         "observed": "CORPUS CURRENT",
@@ -5567,7 +5260,7 @@
   },
   "measured": {
     "actuator_failures": 0,
-    "blocking_violations": 4,
+    "blocking_violations": 1,
     "unattributed_residue": 0,
     "unclassified_findings": 0,
     "unresolved_mandate_bindings": 0,
@@ -5610,7 +5303,7 @@
     "version": "1.0"
   },
   "required_stable_iterations": 2,
-  "seal_sha256": "c053ec93676229eef4cab8e45970c1ecb200057ccb65f45b2e407c58bf4800e0",
+  "seal_sha256": "4a40807e5a73d0a35f4ee69b335b602b65167ad4a6870e02bcbb9a1c9a634573",
   "stable_iterations": 4,
   "tier": "standard",
   "unattributed_residue": [],
@@ -5620,9 +5313,9 @@
     "CONV-02"
   ],
   "vector_digests": [
-    "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
-    "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
-    "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
-    "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
+    "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+    "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+    "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+    "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
   ]
 }
