@@ -23,7 +23,7 @@
       "expect": 0,
       "id": "CONV-02",
       "measure": "blocking_violations",
-      "measured": 5,
+      "measured": 4,
       "verdict": "VIOLATED"
     },
     {
@@ -206,22 +206,6 @@
       "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
       "rule": "CR-ESCALATED-CEILING",
       "subject": "No standing finding bounds the attainable certification"
-    },
-    {
-      "blocking": true,
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "detail": "the measured value does not meet the declared expectation",
-      "evidence": [
-        "00-MASTER/UCOS-RIB-001/rib.json"
-      ],
-      "governed_by_finding": null,
-      "id": "OBS-BLUEPRINT-GATE",
-      "observed": "CLOSED",
-      "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-      "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-      "rule": "CR-BLOCKING-REGRESSION",
-      "subject": "The architectural blueprint gate is open"
     }
   ],
   "gate_exit": 1,
@@ -596,8 +580,7 @@
         "OBS-AGGREGATE-BLOCKING",
         "OBS-AGGREGATE-GATE-EXIT",
         "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS",
-        "OBS-BLUEPRINT-GATE"
+        "OBS-AGGREGATE-PROGRAMMES-PASS"
       ],
       "findings": [
         {
@@ -688,22 +671,6 @@
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
           "rule": "CR-ESCALATED-CEILING",
           "subject": "No standing finding bounds the attainable certification"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The architectural blueprint gate is open"
         }
       ],
       "index": 1,
@@ -1205,12 +1172,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "CLOSED",
+          "observed": "OPEN",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -1306,7 +1273,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582"
+      "vector_digest": "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
     },
     {
       "actuator_failures": [],
@@ -1677,8 +1644,7 @@
         "OBS-AGGREGATE-BLOCKING",
         "OBS-AGGREGATE-GATE-EXIT",
         "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS",
-        "OBS-BLUEPRINT-GATE"
+        "OBS-AGGREGATE-PROGRAMMES-PASS"
       ],
       "findings": [
         {
@@ -1769,22 +1735,6 @@
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
           "rule": "CR-ESCALATED-CEILING",
           "subject": "No standing finding bounds the attainable certification"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The architectural blueprint gate is open"
         }
       ],
       "index": 2,
@@ -2286,12 +2236,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "CLOSED",
+          "observed": "OPEN",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -2387,7 +2337,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582"
+      "vector_digest": "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
     },
     {
       "actuator_failures": [],
@@ -2758,8 +2708,7 @@
         "OBS-AGGREGATE-BLOCKING",
         "OBS-AGGREGATE-GATE-EXIT",
         "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS",
-        "OBS-BLUEPRINT-GATE"
+        "OBS-AGGREGATE-PROGRAMMES-PASS"
       ],
       "findings": [
         {
@@ -2850,22 +2799,6 @@
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
           "rule": "CR-ESCALATED-CEILING",
           "subject": "No standing finding bounds the attainable certification"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The architectural blueprint gate is open"
         }
       ],
       "index": 3,
@@ -3367,12 +3300,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "CLOSED",
+          "observed": "OPEN",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -3468,7 +3401,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582"
+      "vector_digest": "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
     },
     {
       "actuator_failures": [],
@@ -3839,8 +3772,7 @@
         "OBS-AGGREGATE-BLOCKING",
         "OBS-AGGREGATE-GATE-EXIT",
         "OBS-AGGREGATE-GATES-PASS",
-        "OBS-AGGREGATE-PROGRAMMES-PASS",
-        "OBS-BLUEPRINT-GATE"
+        "OBS-AGGREGATE-PROGRAMMES-PASS"
       ],
       "findings": [
         {
@@ -3931,22 +3863,6 @@
           "rationale": "The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.",
           "rule": "CR-ESCALATED-CEILING",
           "subject": "No standing finding bounds the attainable certification"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The architectural blueprint gate is open"
         }
       ],
       "index": 4,
@@ -4448,12 +4364,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "CLOSED",
+          "observed": "OPEN",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -4549,7 +4465,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582"
+      "vector_digest": "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
     }
   ],
   "learning": {
@@ -4645,10 +4561,10 @@
       "iteration_total": 4,
       "stable_iterations": 4,
       "vector_digests": [
-        "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-        "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-        "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-        "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582"
+        "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
+        "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
+        "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
+        "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
       ]
     },
     "decision": {
@@ -4673,11 +4589,6 @@
         "rule": "CR-BLOCKING-REGRESSION"
       },
       "OBS-AGGREGATE-PROGRAMMES-PASS": {
-        "class": "Defect correction",
-        "decision": "IMPLEMENT",
-        "rule": "CR-BLOCKING-REGRESSION"
-      },
-      "OBS-BLUEPRINT-GATE": {
         "class": "Defect correction",
         "decision": "IMPLEMENT",
         "rule": "CR-BLOCKING-REGRESSION"
@@ -4951,8 +4862,8 @@
         "verdict": "SATISFIED"
       },
       "OBS-BLUEPRINT-GATE": {
-        "observed": "CLOSED",
-        "verdict": "VIOLATED"
+        "observed": "OPEN",
+        "verdict": "SATISFIED"
       },
       "OBS-CORPUS-CURRENCY": {
         "observed": "CORPUS CURRENT",
@@ -5656,7 +5567,7 @@
   },
   "measured": {
     "actuator_failures": 0,
-    "blocking_violations": 5,
+    "blocking_violations": 4,
     "unattributed_residue": 0,
     "unclassified_findings": 0,
     "unresolved_mandate_bindings": 0,
@@ -5699,7 +5610,7 @@
     "version": "1.0"
   },
   "required_stable_iterations": 2,
-  "seal_sha256": "6772107f3817529692f1e73b4b656bafbfc261c54a07d6eb277d90e4349599e9",
+  "seal_sha256": "c053ec93676229eef4cab8e45970c1ecb200057ccb65f45b2e407c58bf4800e0",
   "stable_iterations": 4,
   "tier": "standard",
   "unattributed_residue": [],
@@ -5709,9 +5620,9 @@
     "CONV-02"
   ],
   "vector_digests": [
-    "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-    "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-    "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-    "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582"
+    "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
+    "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
+    "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
+    "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
   ]
 }

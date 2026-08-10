@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `6772107f3817529692f1e73b4b656baf` |
+| SEAL | `c053ec93676229eef4cab8e45970c1ec` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Convergence is measured, never asserted. Byte-level repository closure is a different and stronger condition owned by the fixed-point programme and measured by its own gate; this certification does not claim it.
@@ -16,7 +16,7 @@
 | Criterion | Statement | Expect | Measured | Blocking | Verdict |
 |---|---|---|---|---|---|
 | `CONV-01` | the observation vector is identical across the required number of consecutive iterations | `0` | `0` | yes | SATISFIED |
-| `CONV-02` | every blocking observation is satisfied | `0` | `5` | yes | **VIOLATED** |
+| `CONV-02` | every blocking observation is satisfied | `0` | `4` | yes | **VIOLATED** |
 | `CONV-03` | every required actuator in the selected tier exits successfully | `0` | `0` | yes | SATISFIED |
 | `CONV-04` | every mandate bound by an actuator or an observation resolves in a located mandate source | `0` | `0` | yes | SATISFIED |
 | `CONV-05` | every discovered finding carries a class and a decision | `0` | `0` | yes | SATISFIED |

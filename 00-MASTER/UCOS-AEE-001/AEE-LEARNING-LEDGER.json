@@ -91,10 +91,10 @@
     "iteration_total": 4,
     "stable_iterations": 4,
     "vector_digests": [
-      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
-      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582"
+      "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
+      "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
+      "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b",
+      "35ed8f6a7188e7082c39795924e7d20e317207cb4ba6abe2f2bdf2fdc6334b7b"
     ]
   },
   "decision": {
@@ -119,11 +119,6 @@
       "rule": "CR-BLOCKING-REGRESSION"
     },
     "OBS-AGGREGATE-PROGRAMMES-PASS": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-BLOCKING-REGRESSION"
-    },
-    "OBS-BLUEPRINT-GATE": {
       "class": "Defect correction",
       "decision": "IMPLEMENT",
       "rule": "CR-BLOCKING-REGRESSION"
@@ -397,8 +392,8 @@
       "verdict": "SATISFIED"
     },
     "OBS-BLUEPRINT-GATE": {
-      "observed": "CLOSED",
-      "verdict": "VIOLATED"
+      "observed": "OPEN",
+      "verdict": "SATISFIED"
     },
     "OBS-CORPUS-CURRENCY": {
       "observed": "CORPUS CURRENT",
