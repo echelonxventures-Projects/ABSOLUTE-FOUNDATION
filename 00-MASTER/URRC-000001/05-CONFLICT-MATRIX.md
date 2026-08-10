@@ -145,26 +145,24 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-32`** — Computed gate verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 3 distinct value(s)
+- **Result** — 2 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 24 |
-| `FAIL` | 1 |
+| `PASS` | 25 |
 | `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 3 distinct value(s)
+- **Result** — 2 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 16 |
+| `PASS` | 17 |
 | `PASS-WITH-ADVISORY` | 4 |
-| `FAIL` | 1 |
 
 **`DV-23`** — Meta-constitutional gap disposition distribution.
 
