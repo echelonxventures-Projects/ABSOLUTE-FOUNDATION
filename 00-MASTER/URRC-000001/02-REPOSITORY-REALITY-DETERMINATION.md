@@ -119,7 +119,7 @@ What the repository contains, and the substrate that proves it.
 | `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1373 | `3dbcb5cb58cd` |
 | `S-06` | `00-CMG/CMG-REGISTRY.json` | YES | YES | YES | 9/9 | 164 | `4d8242bbd440` |
 | `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | YES | YES | YES | 5/5 | 112 | `505ec5c77ee1` |
-| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 129 | `16e80a5122dc` |
+| `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 137 | `2a9f45b2ddfb` |
 | `S-09` | `00-MASTER/UCDA-000001/ucda-decisions.json` | YES | YES | YES | 4/4 | 145 | `8a52e38d68e3` |
 | `S-10` | `00-MASTER/UCDA-000001/ucda.json` | YES | YES | YES | 6/6 | 565 | `336d50c9f430` |
 | `S-11` | `00-MASTER/UER-000001/uer.json` | YES | YES | YES | 6/6 | 113 | `0ae82cb58fdb` |
