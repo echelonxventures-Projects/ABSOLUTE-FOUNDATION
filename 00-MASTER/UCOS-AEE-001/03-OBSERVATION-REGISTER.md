@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
-| DETERMINATION | **CONVERGED-PROVISIONAL** |
-| SEAL | `8ff810a249eb199e3f6cb93a0fe20fcb` |
+| DETERMINATION | **NOT-CONVERGED** |
+| SEAL | `4a40807e5a73d0a35f4ee69b335b602b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Each reading is taken from a located owner's own sealed output. This programme measures nothing itself; it reports what its owners determined.
@@ -46,7 +46,7 @@
 | `OBS-FRAMEWORK-VERDICT` | `00-MASTER/UCEF-000001/ucef_engine.py` | `verdict` | `equals` | SATISFIED | `"GATE-OPEN"` |
 | `OBS-FRAMEWORK-GUARDS` | `00-MASTER/UCEF-000001/ucef_engine.py` | `guard_findings` | `is_empty` | SATISFIED | `[]` |
 | `OBS-FRAMEWORK-CRITERIA` | `00-MASTER/UCEF-000001/ucef_engine.py` | `counts.criteria_discharged` | `equals_sibling` | SATISFIED | `{"measured": 16, "sibling": 16}` |
-| `OBS-BLUEPRINT-GATE` | `00-MASTER/UCOS-RIB-001/rib_engine.py` | `gate` | `equals` | SATISFIED | `"OPEN"` |
+| `OBS-BLUEPRINT-GATE` | `00-MASTER/UCOS-RIB-001/rib_engine.py` | `gate` | `equals` | **VIOLATED** | `"CLOSED"` |
 | `OBS-REGISTRY-GATE` | `00-MASTER/UCOS-UAR-001/uar_engine.py` | `gate` | `equals` | SATISFIED | `"OPEN"` |
 | `OBS-CORPUS-CURRENCY` | `00-MASTER/UKAP-001/corpus_engine.py` | `determination` | `equals` | SATISFIED | `"CORPUS CURRENT"` |
 | `OBS-ASSIMILATION-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | `determination` | `equals` | SATISFIED | `"REPOSITORY CONSTITUTIONALLY COMPLETE"` |
