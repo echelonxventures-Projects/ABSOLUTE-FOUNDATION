@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (47 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (2 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 292 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -55,7 +55,7 @@
 | `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 113 | `336d50c9f430` |
 | `SUB-UEI` | `00-MASTER/UEI-000001/uei.json` | json | YES | YES | 2/2 | 15 | `50e80b680d9f` |
 | `SUB-UER` | `00-MASTER/UER-000001/uer.json` | json | YES | YES | 2/2 | 10 | `0ae82cb58fdb` |
-| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `cee49a113412` |
+| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `9171b362bf9f` |
 
 ## Enrichment
 
@@ -85,9 +85,9 @@
 | Repository anchor | the containing commit — owned by version control, never restated here |
 | Detached | no |
 | Working tree | DIRTY |
-| Dirty entries | 47 |
+| Dirty entries | 2 |
 | Own regenerated artifacts | excluded from the count above — they are the deterministic product of the command being gated |
-| Modified | 47 |
+| Modified | 2 |
 | Deleted | 0 |
 | Untracked | 0 |
 | Merge conflicts | 0 |
