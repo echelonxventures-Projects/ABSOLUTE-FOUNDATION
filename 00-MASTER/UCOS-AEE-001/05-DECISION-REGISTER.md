@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
-| DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `4a40807e5a73d0a35f4ee69b335b602b` |
+| DETERMINATION | **CONVERGED-PROVISIONAL** |
+| SEAL | `8ff810a249eb199e3f6cb93a0fe20fcb` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Every finding receives a decision from the declared rules, with the located evidence that justifies it. A decision whose evidence obligation is unmet is withheld rather than asserted.
@@ -44,18 +44,4 @@
 | MEASURED | `["`UCCEP-F-004` — Constitutional finality is reserved to an ou…"]` |
 
 The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.
-
-### `OBS-BLUEPRINT-GATE` — The architectural blueprint gate is open
-
-| Field | Value |
-|---|---|
-| DECISION | **IMPLEMENT** |
-| CLASS | Defect correction |
-| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
-| LOCATED OWNER | `00-MASTER/UCOS-RIB-001/rib_engine.py` |
-| GOVERNING FINDING | — |
-| EVIDENCE | `00-MASTER/UCOS-RIB-001/rib.json` |
-| MEASURED | `"CLOSED"` |
-
-A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
 
