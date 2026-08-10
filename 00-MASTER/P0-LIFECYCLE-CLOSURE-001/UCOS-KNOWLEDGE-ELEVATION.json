@@ -1,0 +1,185 @@
+{
+  "authority": "NONE — DERIVED TRUTH",
+  "closures": [
+    {
+      "blocking": [
+        "Extract Engineering Knowledge",
+        "Register Engineering Knowledge"
+      ],
+      "closed": false,
+      "closure": "knowledge_closure",
+      "members": [
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Extract Engineering Knowledge",
+          "stage_id": "UCL-S-0390"
+        },
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Register Engineering Knowledge",
+          "stage_id": "UCL-S-0400"
+        }
+      ],
+      "requires": [
+        "Extract Engineering Knowledge",
+        "Register Engineering Knowledge"
+      ]
+    },
+    {
+      "blocking": [
+        "Increase Constitutional Capability",
+        "Increase Engineering Capability"
+      ],
+      "closed": false,
+      "closure": "capability_closure",
+      "members": [
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Increase Constitutional Capability",
+          "stage_id": "UCL-S-0420"
+        },
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Increase Engineering Capability",
+          "stage_id": "UCL-S-0430"
+        }
+      ],
+      "requires": [
+        "Increase Constitutional Capability",
+        "Increase Engineering Capability"
+      ]
+    },
+    {
+      "blocking": [
+        "Begin Next Elevated Engineering Cycle",
+        "Elevate",
+        "Update Repository Truth"
+      ],
+      "closed": false,
+      "closure": "evolution_closure",
+      "members": [
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Update Repository Truth",
+          "stage_id": "UCL-S-0360"
+        },
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Elevate",
+          "stage_id": "UCL-S-0410"
+        },
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Begin Next Elevated Engineering Cycle",
+          "stage_id": "UCL-S-0450"
+        }
+      ],
+      "requires": [
+        "Update Repository Truth",
+        "Elevate",
+        "Begin Next Elevated Engineering Cycle"
+      ]
+    },
+    {
+      "blocking": [
+        "Improve",
+        "Learn",
+        "Reason",
+        "Reflect"
+      ],
+      "closed": false,
+      "closure": "learning_closure",
+      "members": [
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Learn",
+          "stage_id": "UCL-S-0180"
+        },
+        {
+          "failed_probes": [
+            "executably_discharged"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
+          "stage": "Reason",
+          "stage_id": "UCL-S-0190"
+        },
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Reflect",
+          "stage_id": "UCL-S-0200"
+        },
+        {
+          "failed_probes": [
+            "executable_engine",
+            "executably_discharged",
+            "test_coverage"
+          ],
+          "realization": "DECLARED_ONLY",
+          "stage": "Improve",
+          "stage_id": "UCL-S-0230"
+        }
+      ],
+      "requires": [
+        "Learn",
+        "Reason",
+        "Reflect",
+        "Improve"
+      ]
+    }
+  ],
+  "digest": "e686c27e0741df159ce499f9be283035caeb30e25b3dd4695c2b09eac3e316c0",
+  "measurements": {
+    "closed": 0,
+    "closures": 4,
+    "manual_intervention_required": true,
+    "open": 4
+  },
+  "phase": 7,
+  "programme": "P0-LIFECYCLE-CLOSURE-001",
+  "title": "Knowledge Elevation Determination"
+}

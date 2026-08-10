@@ -1,0 +1,112 @@
+{
+  "authority": "NONE — DERIVED TRUTH",
+  "capabilities": [
+    {
+      "basis": "no executable engine; the evidence is a document",
+      "capability": "Observe",
+      "failed_probes": [
+        "executable_engine",
+        "executably_discharged",
+        "test_coverage"
+      ],
+      "level": "NONE",
+      "stage": "Observe",
+      "stage_id": "UCL-S-0120"
+    },
+    {
+      "basis": "no executable engine; the evidence is a document",
+      "capability": "Learn",
+      "failed_probes": [
+        "executable_engine",
+        "executably_discharged",
+        "test_coverage"
+      ],
+      "level": "NONE",
+      "stage": "Learn",
+      "stage_id": "UCL-S-0180"
+    },
+    {
+      "basis": "an executable engine exists but nothing discharges the stage unattended",
+      "capability": "Reason",
+      "failed_probes": [
+        "executably_discharged"
+      ],
+      "level": "MANUAL",
+      "stage": "Reason",
+      "stage_id": "UCL-S-0190"
+    },
+    {
+      "basis": "no executable engine; the evidence is a document",
+      "capability": "Reflect",
+      "failed_probes": [
+        "executable_engine",
+        "executably_discharged",
+        "test_coverage"
+      ],
+      "level": "NONE",
+      "stage": "Reflect",
+      "stage_id": "UCL-S-0200"
+    },
+    {
+      "basis": "no executable engine; the evidence is a document",
+      "capability": "Challenge",
+      "failed_probes": [
+        "executable_engine",
+        "executably_discharged",
+        "test_coverage"
+      ],
+      "level": "NONE",
+      "stage": "Challenge",
+      "stage_id": "UCL-S-0210"
+    },
+    {
+      "basis": "no executable engine; the evidence is a document",
+      "capability": "Correct",
+      "failed_probes": [
+        "executable_engine",
+        "executably_discharged",
+        "test_coverage"
+      ],
+      "level": "NONE",
+      "stage": "Correct",
+      "stage_id": "UCL-S-0220"
+    },
+    {
+      "basis": "no executable engine; the evidence is a document",
+      "capability": "Improve",
+      "failed_probes": [
+        "executable_engine",
+        "executably_discharged",
+        "test_coverage"
+      ],
+      "level": "NONE",
+      "stage": "Improve",
+      "stage_id": "UCL-S-0230"
+    },
+    {
+      "basis": "no executable engine; the evidence is a document",
+      "capability": "Elevate",
+      "failed_probes": [
+        "executable_engine",
+        "executably_discharged",
+        "test_coverage"
+      ],
+      "level": "NONE",
+      "stage": "Elevate",
+      "stage_id": "UCL-S-0410"
+    }
+  ],
+  "digest": "397934a956dd94e0611d1fb91b4c3d27593a0834d687cf3be7d20b514883f556",
+  "measurements": {
+    "assisted": 0,
+    "autonomous": 0,
+    "capabilities": 8,
+    "fully_autonomous": false,
+    "manual": 1,
+    "none": 7
+  },
+  "phase": 6,
+  "programme": "P0-LIFECYCLE-CLOSURE-001",
+  "question": "can the repository do this without human orchestration?",
+  "title": "Autonomous Evolution Determination"
+}
