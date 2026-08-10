@@ -87,6 +87,15 @@ ucos-context = "engine.context.cli:main"
 # reachable as the one command the capability names for itself, rather than only as
 # `python -m`. AUTHORITY = the ownership law it enforces; writes nothing.
 ucos-nucleus = "engine.nucleus.cli:main"
+# P0-AUTONOMOUS-CONSTITUTIONAL-EXECUTION-001 (UCOS-CEL-0001): the Autonomous Constitutional
+# Execution System — dependencies are discovered, execution order is derived, legality is
+# proven before execution, mutation passes the gateway, replay reaches a deterministic fixed
+# point, and nothing certifies itself. Publishing the entry point makes the fail-closed gates
+# (`acceptance`, `legality`, `authority`, `plan`, `replay`, `cycle`) reachable from CI as the
+# one command the capability names for itself. AUTHORITY = the execution law it enforces;
+# writes nothing. Named for the law rather than "ucos-constitution", which the Foundation's
+# own constitution CLI already owns — one name, one owner.
+ucos-cel = "engine.constitution.cli:main"
 # PROGRAM-002 (UMK-000001): Universal Meta-Kernel — the smallest open-world meta-model.
 # Prove constitutional compliance, run the mandatory architectural proof, and emit
 # validation/certification evidence. Open by registration; no kernel redesign for unknown

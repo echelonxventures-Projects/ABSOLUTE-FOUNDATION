@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
-| DETERMINATION | **CONVERGED-PROVISIONAL** |
-| SEAL | `8ff810a249eb199e3f6cb93a0fe20fcb` |
+| DETERMINATION | **NOT-CONVERGED** |
+| SEAL | `6772107f3817529692f1e73b4b656baf` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Each reading is taken from a located owner's own sealed output. This programme measures nothing itself; it reports what its owners determined.
@@ -15,11 +15,11 @@
 
 | Observation | Located owner | Pointer | Operator | Verdict | Observed |
 |---|---|---|---|---|---|
-| `OBS-AGGREGATE-BLOCKING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `independent_view.00-MASTER/UCOS-AEE-001.blocking_failures` | `is_empty` | SATISFIED | `[]` |
+| `OBS-AGGREGATE-BLOCKING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `independent_view.00-MASTER/UCOS-AEE-001.blocking_failures` | `is_empty` | **VIOLATED** | `["CK-VERIFY"]` |
 | `OBS-AGGREGATE-UNPROVEN` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `independent_view.00-MASTER/UCOS-AEE-001.unproven` | `is_empty` | SATISFIED | `[]` |
-| `OBS-AGGREGATE-GATE-EXIT` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `independent_view.00-MASTER/UCOS-AEE-001.gate_exit` | `equals` | SATISFIED | `0` |
-| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `independent_view.00-MASTER/UCOS-AEE-001.gates` | `every_field_in` | SATISFIED | `25` |
-| `OBS-AGGREGATE-PROGRAMMES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `independent_view.00-MASTER/UCOS-AEE-001.programs` | `every_field_in` | SATISFIED | `20` |
+| `OBS-AGGREGATE-GATE-EXIT` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `independent_view.00-MASTER/UCOS-AEE-001.gate_exit` | `equals` | **VIOLATED** | `1` |
+| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `independent_view.00-MASTER/UCOS-AEE-001.gates` | `every_field_in` | **VIOLATED** | `["G-10='FAIL'", "G-11='FAIL'", "G-13='FAIL'", "G-15='FAIL'"]` |
+| `OBS-AGGREGATE-PROGRAMMES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `independent_view.00-MASTER/UCOS-AEE-001.programs` | `every_field_in` | **VIOLATED** | `["PROGRAM-000011='FAIL'", "PROGRAM-000012='FAIL'", "PROGRAM-000017='FAIL'"]` |
 | `OBS-AGGREGATE-CEILING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `certification_ceiling` | `is_empty` | **VIOLATED** | `["`UCCEP-F-004` — Constitutional finality is reserved to an ou…"]` |
 | `OBS-KNOWLEDGE-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | `determination` | `equals` | SATISFIED | `"CLOSED"` |
 | `OBS-KNOWLEDGE-GAPS` | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | `gap_total` | `equals` | SATISFIED | `0` |
@@ -46,7 +46,7 @@
 | `OBS-FRAMEWORK-VERDICT` | `00-MASTER/UCEF-000001/ucef_engine.py` | `verdict` | `equals` | SATISFIED | `"GATE-OPEN"` |
 | `OBS-FRAMEWORK-GUARDS` | `00-MASTER/UCEF-000001/ucef_engine.py` | `guard_findings` | `is_empty` | SATISFIED | `[]` |
 | `OBS-FRAMEWORK-CRITERIA` | `00-MASTER/UCEF-000001/ucef_engine.py` | `counts.criteria_discharged` | `equals_sibling` | SATISFIED | `{"measured": 16, "sibling": 16}` |
-| `OBS-BLUEPRINT-GATE` | `00-MASTER/UCOS-RIB-001/rib_engine.py` | `gate` | `equals` | SATISFIED | `"OPEN"` |
+| `OBS-BLUEPRINT-GATE` | `00-MASTER/UCOS-RIB-001/rib_engine.py` | `gate` | `equals` | **VIOLATED** | `"CLOSED"` |
 | `OBS-REGISTRY-GATE` | `00-MASTER/UCOS-UAR-001/uar_engine.py` | `gate` | `equals` | SATISFIED | `"OPEN"` |
 | `OBS-CORPUS-CURRENCY` | `00-MASTER/UKAP-001/corpus_engine.py` | `determination` | `equals` | SATISFIED | `"CORPUS CURRENT"` |
 | `OBS-ASSIMILATION-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | `determination` | `equals` | SATISFIED | `"REPOSITORY CONSTITUTIONALLY COMPLETE"` |

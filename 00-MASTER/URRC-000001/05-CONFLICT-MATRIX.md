@@ -150,19 +150,20 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `PASS` | 25 |
-| `PASS-WITH-ADVISORY` | 1 |
+| `PASS` | 21 |
+| `FAIL` | 5 |
 
 **`DV-33`** — Computed programme verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 2 distinct value(s)
+- **Result** — 3 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 17 |
-| `PASS-WITH-ADVISORY` | 4 |
+| `PASS` | 14 |
+| `FAIL` | 4 |
+| `PASS-WITH-ADVISORY` | 3 |
 
 **`DV-23`** — Meta-constitutional gap disposition distribution.
 
