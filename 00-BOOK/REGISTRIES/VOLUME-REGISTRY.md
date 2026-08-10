@@ -6,7 +6,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 90 | UPN-000000001–UPN-000009794 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 81 | UPN-000000001–UPN-000009739 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 113 | UPN-000001327–UPN-000009810 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 62 | UPN-000000022–UPN-000009815 |
@@ -26,7 +26,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-017` | 17 | FACTORY | FAC | ACTIVE | 5 | UPN-000004510–UPN-000004573 |
 | `VOL-018` | 18 | REGISTRIES | REG | ACTIVE | 21 | UPN-000000011–UPN-000005010 |
 | `VOL-019` | 19 | CERTIFICATION | CRT | ACTIVE | 1 | UPN-000004290–UPN-000004293 |
-| `VOL-020` | 20 | CONTROL TOWER | CTL | ACTIVE | 58 | UPN-000004183–UPN-000009422 |
+| `VOL-020` | 20 | CONTROL TOWER | CTL | ACTIVE | 67 | UPN-000004183–UPN-000009794 |
 | `VOL-021` | 21 | DIGITAL TWIN | ADV | ACTIVE | 20 | UPN-000004965–UPN-000005013 |
 | `VOL-022` | 22 | MASTER BOOK ARCHITECTURE | UMB | ACTIVE | 31 | UPN-000005247–UPN-000005480 |
 | `VOL-024` | 24 | UNIVERSAL SCIENCE & INTELLIGENCE | USIS | ACTIVE | 63 | UPN-000009133–UPN-000009522 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 90
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 81
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -119,17 +119,8 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-PRODUC-000001` | UCOS Ω∞ — Production Foundation | — | ACTIVE |
 | `UCOS-PRODUC-000002` | UCOS Ω∞ — Remaining Implementation Roadmap | — | ACTIVE |
 | `UCOS-CEPMOD-000001` | CEP-MOD-002 — Universal Structural Vocabulary Migration Deter… | — | ACTIVE |
-| `UCOS-P0CLOS-000001` | P0-CLOSURE-001 — Universal Foundation Closure Determination | — | ACTIVE |
-| `UCOS-P0DECL-000001` | P0-DECLARATION-001 — Universal Foundation Declaration Completion | — | ACTIVE |
 | `UCOS-UCOSUC-000001` | UCOS-UCOM-002 — Universal Constitutional Evolution & Universa… | — | ACTIVE |
 | `UCOS-UNAF00-000001` | UNAF-001 — Universal Nucleus Architecture Freeze | — | ACTIVE |
-| `UCOS-P0REGI-000001` | P0-REGISTRATION-001 — Universal Foundation Determination Assi… | — | ACTIVE |
-| `UCOS-P0FINA-000001` | P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete Traceability | — | ACTIVE |
-| `UCOS-P0FREE-000001` | P0-FREEZE-CERTIFICATION-001 — Final Universal Foundation Free… | — | ACTIVE |
-| `UCOS-R1REPO-000001` | R-1 — Repository Replay Synchronization · Final Evidence | — | ACTIVE |
-| `UCOS-RTBD00-000001` | RTBD-001 — Repository Truth Boundary Determination | — | ACTIVE |
-| `UCOS-W34CUN-000001` | W3-4c — Universal Assurance validation cluster: coverage evid… | — | ACTIVE |
-| `UCOS-STAGE0-000001` | STAGE-0 IMPLEMENTATION COMPLETION PLAN | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -1251,7 +1242,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-020 — CONTROL TOWER <a id="vol-020"></a>
 
 *Program control tower and external-execution support.*  \
-**Category:** CTL · **Status:** ACTIVE · **Artifacts:** 58
+**Category:** CTL · **Status:** ACTIVE · **Artifacts:** 67
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -1313,6 +1304,15 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-IAC001E-000007` | 08 — AUTHORITY EVIDENCE | — | ACTIVE |
 | `UCOS-IAC001E-000008` | 07 — IMPLEMENTATION READINESS | — | ACTIVE |
 | `UCOS-IAC001E-000009` | 09 — FINAL CERTIFICATION | — | ACTIVE |
+| `UCOS-P0CLOS-000001` | P0-CLOSURE-001 — Universal Foundation Closure Determination | — | ACTIVE |
+| `UCOS-P0DECL-000001` | P0-DECLARATION-001 — Universal Foundation Declaration Completion | — | ACTIVE |
+| `UCOS-P0REGI-000001` | P0-REGISTRATION-001 — Universal Foundation Determination Assi… | — | ACTIVE |
+| `UCOS-P0FINA-000001` | P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete Traceability | — | ACTIVE |
+| `UCOS-P0FREE-000001` | P0-FREEZE-CERTIFICATION-001 — Final Universal Foundation Free… | — | ACTIVE |
+| `UCOS-R1REPO-000001` | R-1 — Repository Replay Synchronization · Final Evidence | — | ACTIVE |
+| `UCOS-RTBD00-000001` | RTBD-001 — Repository Truth Boundary Determination | — | ACTIVE |
+| `UCOS-W34CUN-000001` | W3-4c — Universal Assurance validation cluster: coverage evid… | — | ACTIVE |
+| `UCOS-STAGE0-000001` | STAGE-0 IMPLEMENTATION COMPLETION PLAN | — | ACTIVE |
 
 ### VOL-021 — DIGITAL TWIN <a id="vol-021"></a>
 

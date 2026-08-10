@@ -1216,8 +1216,8 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000009654 | UPN-000009655 | 2 | `UCOS-PRODUC-000002` | 000 | UCOS Ω∞ — Remaining Implementation Roadmap |
 | UPN-000009656 | UPN-000009664 | 9 | `UCOS-CEPMOD-000001` | 000 | CEP-MOD-002 — Universal Structural Vocabulary… |
 | UPN-000009665 | UPN-000009668 | 4 | `UCOS-CON-000065` | 002 | P0-ASSIMILATION-001 — Universal Constitutiona… |
-| UPN-000009669 | UPN-000009673 | 5 | `UCOS-P0CLOS-000001` | 000 | P0-CLOSURE-001 — Universal Foundation Closure… |
-| UPN-000009674 | UPN-000009679 | 6 | `UCOS-P0DECL-000001` | 000 | P0-DECLARATION-001 — Universal Foundation Dec… |
+| UPN-000009669 | UPN-000009673 | 5 | `UCOS-P0CLOS-000001` | 020 | P0-CLOSURE-001 — Universal Foundation Closure… |
+| UPN-000009674 | UPN-000009679 | 6 | `UCOS-P0DECL-000001` | 020 | P0-DECLARATION-001 — Universal Foundation Dec… |
 | UPN-000009680 | UPN-000009685 | 6 | `UCOS-CON-000066` | 002 | UCFM-001 — Universal Constitutional Facet Mod… |
 | UPN-000009686 | UPN-000009692 | 7 | `UCOS-CON-000067` | 002 | UCOD-001 — Universal Constitutional Ownership… |
 | UPN-000009693 | UPN-000009698 | 6 | `UCOS-CON-000068` | 002 | UCOS-MOD-001 — Constitutional Meta-Ontology D… |
@@ -1227,15 +1227,15 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000009714 | UPN-000009717 | 4 | `UCOS-CON-000071` | 002 | UCRD-001 — Constitutional Relationship Determ… |
 | UPN-000009718 | UPN-000009727 | 10 | `UCOS-CON-000072` | 002 | UMN-001 — Universal Micro Nucleus Constitutio… |
 | UPN-000009728 | UPN-000009739 | 12 | `UCOS-UNAF00-000001` | 000 | UNAF-001 — Universal Nucleus Architecture Freeze |
-| UPN-000009740 | UPN-000009743 | 4 | `UCOS-P0REGI-000001` | 000 | P0-REGISTRATION-001 — Universal Foundation De… |
+| UPN-000009740 | UPN-000009743 | 4 | `UCOS-P0REGI-000001` | 020 | P0-REGISTRATION-001 — Universal Foundation De… |
 | UPN-000009744 | UPN-000009759 | 16 | `UCOS-CON-000073` | 002 | Ω-E06-STAGE-1 — UNIVERSAL CONSTITUTIONAL REPO… |
-| UPN-000009760 | UPN-000009763 | 4 | `UCOS-P0FINA-000001` | 000 | P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete … |
-| UPN-000009764 | UPN-000009768 | 5 | `UCOS-P0FREE-000001` | 000 | P0-FREEZE-CERTIFICATION-001 — Final Universal… |
-| UPN-000009769 | UPN-000009770 | 2 | `UCOS-R1REPO-000001` | 000 | R-1 — Repository Replay Synchronization · Fin… |
-| UPN-000009771 | UPN-000009777 | 7 | `UCOS-RTBD00-000001` | 000 | RTBD-001 — Repository Truth Boundary Determin… |
-| UPN-000009778 | UPN-000009783 | 6 | `UCOS-W34CUN-000001` | 000 | W3-4c — Universal Assurance validation cluste… |
+| UPN-000009760 | UPN-000009763 | 4 | `UCOS-P0FINA-000001` | 020 | P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete … |
+| UPN-000009764 | UPN-000009768 | 5 | `UCOS-P0FREE-000001` | 020 | P0-FREEZE-CERTIFICATION-001 — Final Universal… |
+| UPN-000009769 | UPN-000009770 | 2 | `UCOS-R1REPO-000001` | 020 | R-1 — Repository Replay Synchronization · Fin… |
+| UPN-000009771 | UPN-000009777 | 7 | `UCOS-RTBD00-000001` | 020 | RTBD-001 — Repository Truth Boundary Determin… |
+| UPN-000009778 | UPN-000009783 | 6 | `UCOS-W34CUN-000001` | 020 | W3-4c — Universal Assurance validation cluste… |
 | UPN-000009784 | UPN-000009787 | 4 | `UCOS-PLT-000067` | 006 | Ucos Control Plane |
-| UPN-000009788 | UPN-000009794 | 7 | `UCOS-STAGE0-000001` | 000 | STAGE-0 IMPLEMENTATION COMPLETION PLAN |
+| UPN-000009788 | UPN-000009794 | 7 | `UCOS-STAGE0-000001` | 020 | STAGE-0 IMPLEMENTATION COMPLETION PLAN |
 | UPN-000009795 | UPN-000009803 | 9 | `UCOS-CON-000074` | 002 | UCOS-ACC-001 — Absolute Constitutional Conver… |
 | UPN-000009804 | UPN-000009810 | 7 | `UCOS-CON-000075` | 002 | UCOS-ACC-002 — Universal Constitutional Evolu… |
 | UPN-000009811 | UPN-000009815 | 5 | `UCOS-ENG-000022` | 003 | Reference Frames |

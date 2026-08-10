@@ -62,7 +62,7 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 39 tracked path(s)
+- **Result** — 40 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -81,6 +81,7 @@ Evolution and master-roadmap owners; executable-owner delta.
 | `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-008/decision_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-008/superiority_engine.py` | TRACKED |
+| `00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-PHASE-001B/provenance_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py` | TRACKED |
@@ -120,12 +121,12 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-18`** — Programmes carrying a portfolio rollup.
 
 - **Primitive** — `record_count`
-- **Result** — 67 records
+- **Result** — 70 records
 - **Substrate evidence** — `S-03`
 
 | Key | Value |
 |---|---|
-| records | 67 |
+| records | 70 |
 
 
 ---

@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-08-09T19:01:23+00:00 by ukbx portal. 1231 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-08-10T03:28:41+00:00 by ukbx portal. 1231 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1212,8 +1212,8 @@
 | [UCOS-PRODUC-000002](UCOS-PRODUC-000002.md) | UCOS Ω∞ — Remaining Implementation Roadmap | VOL-000 | ACTIVE |
 | [UCOS-CEPMOD-000001](UCOS-CEPMOD-000001.md) | CEP-MOD-002 — Universal Structural Vocabulary Migration Dete | VOL-000 | ACTIVE |
 | [UCOS-CON-000065](UCOS-CON-000065.md) | P0-ASSIMILATION-001 — Universal Constitutional Assimilation  | VOL-002 | ACTIVE |
-| [UCOS-P0CLOS-000001](UCOS-P0CLOS-000001.md) | P0-CLOSURE-001 — Universal Foundation Closure Determination | VOL-000 | ACTIVE |
-| [UCOS-P0DECL-000001](UCOS-P0DECL-000001.md) | P0-DECLARATION-001 — Universal Foundation Declaration Comple | VOL-000 | ACTIVE |
+| [UCOS-P0CLOS-000001](UCOS-P0CLOS-000001.md) | P0-CLOSURE-001 — Universal Foundation Closure Determination | VOL-020 | ACTIVE |
+| [UCOS-P0DECL-000001](UCOS-P0DECL-000001.md) | P0-DECLARATION-001 — Universal Foundation Declaration Comple | VOL-020 | ACTIVE |
 | [UCOS-CON-000066](UCOS-CON-000066.md) | UCFM-001 — Universal Constitutional Facet Model · Final Dete | VOL-002 | ACTIVE |
 | [UCOS-CON-000067](UCOS-CON-000067.md) | UCOD-001 — Universal Constitutional Ownership Determination | VOL-002 | ACTIVE |
 | [UCOS-CON-000068](UCOS-CON-000068.md) | UCOS-MOD-001 — Constitutional Meta-Ontology Determination | VOL-002 | ACTIVE |
@@ -1223,15 +1223,15 @@
 | [UCOS-CON-000071](UCOS-CON-000071.md) | UCRD-001 — Constitutional Relationship Determination | VOL-002 | ACTIVE |
 | [UCOS-CON-000072](UCOS-CON-000072.md) | UMN-001 — Universal Micro Nucleus Constitutional Determinati | VOL-002 | ACTIVE |
 | [UCOS-UNAF00-000001](UCOS-UNAF00-000001.md) | UNAF-001 — Universal Nucleus Architecture Freeze | VOL-000 | ACTIVE |
-| [UCOS-P0REGI-000001](UCOS-P0REGI-000001.md) | P0-REGISTRATION-001 — Universal Foundation Determination Ass | VOL-000 | ACTIVE |
+| [UCOS-P0REGI-000001](UCOS-P0REGI-000001.md) | P0-REGISTRATION-001 — Universal Foundation Determination Ass | VOL-020 | ACTIVE |
 | [UCOS-CON-000073](UCOS-CON-000073.md) | Ω-E06-STAGE-1 — UNIVERSAL CONSTITUTIONAL REPOSITORY DETERMIN | VOL-002 | ACTIVE |
-| [UCOS-P0FINA-000001](UCOS-P0FINA-000001.md) | P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete Traceability | VOL-000 | ACTIVE |
-| [UCOS-P0FREE-000001](UCOS-P0FREE-000001.md) | P0-FREEZE-CERTIFICATION-001 — Final Universal Foundation Fre | VOL-000 | ACTIVE |
-| [UCOS-R1REPO-000001](UCOS-R1REPO-000001.md) | R-1 — Repository Replay Synchronization · Final Evidence | VOL-000 | ACTIVE |
-| [UCOS-RTBD00-000001](UCOS-RTBD00-000001.md) | RTBD-001 — Repository Truth Boundary Determination | VOL-000 | ACTIVE |
-| [UCOS-W34CUN-000001](UCOS-W34CUN-000001.md) | W3-4c — Universal Assurance validation cluster: coverage evi | VOL-000 | ACTIVE |
+| [UCOS-P0FINA-000001](UCOS-P0FINA-000001.md) | P0-FINAL-ASSIMILATION-AUDIT — Ω-E05 Complete Traceability | VOL-020 | ACTIVE |
+| [UCOS-P0FREE-000001](UCOS-P0FREE-000001.md) | P0-FREEZE-CERTIFICATION-001 — Final Universal Foundation Fre | VOL-020 | ACTIVE |
+| [UCOS-R1REPO-000001](UCOS-R1REPO-000001.md) | R-1 — Repository Replay Synchronization · Final Evidence | VOL-020 | ACTIVE |
+| [UCOS-RTBD00-000001](UCOS-RTBD00-000001.md) | RTBD-001 — Repository Truth Boundary Determination | VOL-020 | ACTIVE |
+| [UCOS-W34CUN-000001](UCOS-W34CUN-000001.md) | W3-4c — Universal Assurance validation cluster: coverage evi | VOL-020 | ACTIVE |
 | [UCOS-PLT-000067](UCOS-PLT-000067.md) | Ucos Control Plane | VOL-006 | ACTIVE |
-| [UCOS-STAGE0-000001](UCOS-STAGE0-000001.md) | STAGE-0 IMPLEMENTATION COMPLETION PLAN | VOL-000 | ACTIVE |
+| [UCOS-STAGE0-000001](UCOS-STAGE0-000001.md) | STAGE-0 IMPLEMENTATION COMPLETION PLAN | VOL-020 | ACTIVE |
 | [UCOS-CON-000074](UCOS-CON-000074.md) | UCOS-ACC-001 — Absolute Constitutional Convergence Determina | VOL-002 | ACTIVE |
 | [UCOS-CON-000075](UCOS-CON-000075.md) | UCOS-ACC-002 — Universal Constitutional Evolution Response | VOL-002 | ACTIVE |
 | [UCOS-ENG-000022](UCOS-ENG-000022.md) | Reference Frames | VOL-003 | ACTIVE |

@@ -137,7 +137,7 @@
       "kind": "registered-artifact",
       "name": "Registered artifacts",
       "note": "the source of REGISTERED constitutional identity for a relationship target",
-      "objects": 1220,
+      "objects": 1231,
       "pointer": "artifacts",
       "provider": "PRV-REGISTRY",
       "providers_matched": 1,
@@ -148,7 +148,7 @@
       "kind": "lineage-record",
       "name": "Lineage and bookkeeping records",
       "note": "a keyed store: the mapping key IS the identity, which needs no adapter change and no engine change",
-      "objects": 1251,
+      "objects": 1262,
       "pointer": "by_path",
       "provider": "PRV-LEDGER",
       "providers_matched": 1,
@@ -159,7 +159,7 @@
       "kind": "knowledge-object",
       "name": "Canonical knowledge objects",
       "note": "Knowledge Once: extracted knowledge is registered here, never in a register this programme writes",
-      "objects": 121,
+      "objects": 130,
       "pointer": "objects",
       "provider": "PRV-KNOWLEDGE",
       "providers_matched": 1,
@@ -572,7 +572,10 @@
       "role": "the disposition law under which this programme is an EXTEND"
     }
   ],
-  "blocking_failures": [],
+  "blocking_failures": [
+    "ACEE-V-07",
+    "ACEE-V-10"
+  ],
   "bound_hits": [],
   "bounds_slack": [],
   "capabilities": [
@@ -709,7 +712,7 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "cko_identity_collisions": 0,
-    "ckos_discovered": 3466,
+    "ckos_discovered": 3497,
     "ckos_of_unknown_kind": 0,
     "ckos_without_semantic_identity": 0,
     "closed_enumerations_declared": 0,
@@ -736,12 +739,12 @@
     "graph_cycles": 0,
     "graph_types_empty": 0,
     "identities_on_mutable_input": 0,
-    "invariant_property_failures": 0,
+    "invariant_property_failures": 1,
     "invariants_discovered": 48,
     "invariants_dispositioned_create": 0,
     "invariants_owned_here": 0,
     "invariants_unmeasured": 0,
-    "invariants_unsatisfied": 0,
+    "invariants_unsatisfied": 1,
     "invariants_without_anchor": 0,
     "invariants_without_located_owner": 0,
     "limit_tokens_present": 0,
@@ -749,7 +752,7 @@
     "objects_from_invariants": 48,
     "objects_from_lifecycle": 45,
     "objects_from_pipeline": 35,
-    "objects_from_registry": 1220,
+    "objects_from_registry": 1231,
     "parallel_authority_claims": 0,
     "privileged_branches": 0,
     "providers_not_open": 0,
@@ -782,7 +785,7 @@
   },
   "cycles": [],
   "dependency_relation": "binds",
-  "determination": "AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-ESTABLISHED",
+  "determination": "AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-NOT-ESTABLISHED",
   "disposition_rules": [
     {
       "disposition": "DEC-REUSE",
@@ -1172,8 +1175,8 @@
       "located": true,
       "measure": "invariants_unsatisfied",
       "owner": "00-MASTER/URRC-000001/07-COMPLETENESS-MATRIX.md",
-      "ready": true,
-      "value": 0
+      "ready": false,
+      "value": 1
     },
     {
       "comparator": "==",
@@ -1611,7 +1614,7 @@
       "measure": "ckos_discovered",
       "measured": true,
       "reusable_as": "a composable object graph any further measurement reads without re-parsing its owners",
-      "value": 3466
+      "value": 3497
     },
     {
       "id": "EK-05",
@@ -1681,7 +1684,7 @@
       "why_not_repaired": "Adding a stage here would create a second lifecycle, which CMG-000001 Art LXXVI.6 forbids. A missing stage is admitted by appending a node to the located owner's manifest, which that owner's own admission clause provides for."
     }
   ],
-  "gate": "OPEN",
+  "gate": "CLOSED",
   "goal_contract": {
     "actuation_owner": "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
     "invokes_capabilities": false,
@@ -5669,7 +5672,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "4f7d1f0cec8256587f2cee2e269cf2984dda5f3312f76f273955156d24cccb11",
+  "graph_digest": "57a36efd8e31c812882b5d2656e11c8043d022a4f422b2a714d67f308f25847e",
   "graphs": [
     {
       "composed": true,
@@ -6048,7 +6051,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 121,
+        "measure_value": 130,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6056,7 +6059,7 @@
       "invariant": "Universal Knowledge Discovery",
       "measure": "counters.knowledge_objects_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 121,
+      "measure_value": 130,
       "ordinal": 40,
       "owner": "00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md",
       "properties": {
@@ -6095,7 +6098,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 1241,
+        "measure_value": 1252,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6103,7 +6106,7 @@
       "invariant": "Universal Capability Discovery",
       "measure": "counters.capability_nodes_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 1241,
+      "measure_value": 1252,
       "ordinal": 50,
       "owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "properties": {
@@ -6460,26 +6463,26 @@
       "anchor": "convergence",
       "cko_id": "SRC-INVARIANT::ACEE-I-0130",
       "comparator": "==",
-      "disposition": "DEC-REUSE",
+      "disposition": "DEC-EXTEND",
       "disposition_located": true,
-      "disposition_rationale": "a located owner outside this programme carries the anchor and the measure is met, so Repository Truth already satisfies the invariant and reimplementing it would duplicate a constitutional capability",
-      "disposition_rule": "DR-INVARIANT-REUSE",
+      "disposition_rationale": "an owner is located but the anchor, the measure or the expectation is not yet discharged, so that located owner is extended",
+      "disposition_rule": "DR-INVARIANT-EXTEND",
       "expect": 0,
       "facts": {
         "anchor_present": true,
         "machine_readable": true,
         "measure_declared": true,
         "measure_located": true,
-        "measure_met": true,
-        "measure_value": 0,
+        "measure_met": false,
+        "measure_value": 1,
         "outside_own_home": true,
         "owner_located": true,
-        "properties_unmet": false
+        "properties_unmet": true
       },
       "invariant": "Universal Self Challenge",
       "measure": "unsatisfied_criteria",
       "measure_source": "00-MASTER/UCOS-AEE-001/aee.json",
-      "measure_value": 0,
+      "measure_value": 1,
       "ordinal": 130,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -6491,7 +6494,7 @@
         "PROP-MEASURE-LOCATED": true,
         "PROP-OWNED": true,
         "PROP-READABLE": true,
-        "PROP-SATISFIED": true,
+        "PROP-SATISFIED": false,
         "PROP-TRACEABLE": true
       },
       "provenance": {
@@ -7035,7 +7038,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 1220,
+        "measure_value": 1231,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7043,7 +7046,7 @@
       "invariant": "Universal Registration",
       "measure": "counters.registry_artifacts_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 1220,
+      "measure_value": 1231,
       "ordinal": 250,
       "owner": "00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md",
       "properties": {
@@ -7176,7 +7179,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 121,
+        "measure_value": 130,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7184,7 +7187,7 @@
       "invariant": "Universal Knowledge Registration",
       "measure": "count",
       "measure_source": "knowledge/canonical-knowledge.json",
-      "measure_value": 121,
+      "measure_value": 130,
       "ordinal": 280,
       "owner": "knowledge/canonical-knowledge.json",
       "properties": {
@@ -7458,7 +7461,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 2,
+        "measure_value": 4,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7466,7 +7469,7 @@
       "invariant": "Universal Self Assessment",
       "measure": "stable_iterations",
       "measure_source": "00-MASTER/UCOS-AEE-001/aee.json",
-      "measure_value": 2,
+      "measure_value": 4,
       "ordinal": 340,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -7693,7 +7696,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 465,
+        "measure_value": 474,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7701,7 +7704,7 @@
       "invariant": "Universal Engineering Capability Elevation",
       "measure": "counters.relationship_ckos_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 465,
+      "measure_value": 474,
       "ordinal": 390,
       "owner": "00-MASTER/UCL-000001/ucl-declaration.json",
       "properties": {
@@ -8318,7 +8321,7 @@
       "relation": "reenters"
     }
   ],
-  "omega_e05_complete": true,
+  "omega_e05_complete": false,
   "order": [
     "SRC-LIFECYCLE::UCL-S-0010",
     "SRC-LIFECYCLE::UCL-S-0020",
@@ -23163,7 +23166,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "24d34ac8b109edc8ae837b357f594c51a9902700ccf69648236e8c2d4ae3f651",
+  "seal_sha256": "07978c6641c8c2dda8bfe79d05351c34052446b8fc582db63c6d921c6b34bb44",
   "self_evolution": [
     {
       "anchor": "determination",
@@ -24344,8 +24347,8 @@
       "expect": 0,
       "id": "ACEE-V-07",
       "measure": "invariants_unsatisfied",
-      "satisfied": true,
-      "value": 0
+      "satisfied": false,
+      "value": 1
     },
     {
       "blocking": true,
@@ -24377,8 +24380,8 @@
       "expect": 0,
       "id": "ACEE-V-10",
       "measure": "invariant_property_failures",
-      "satisfied": true,
-      "value": 0
+      "satisfied": false,
+      "value": 1
     },
     {
       "blocking": true,

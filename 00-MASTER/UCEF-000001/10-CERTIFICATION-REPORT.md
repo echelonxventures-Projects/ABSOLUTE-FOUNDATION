@@ -38,4 +38,4 @@ Every mandatory validation dimension and every exit criterion is satisfied, and 
 
 > **Standing.** CERTIFIED-PROVISIONAL — Tier T1 is VACANT (VAC-01 / CMG-OQ-02) and no ratification authority exists within the located corpus (CMG-OQ-01). No determination of this programme is ratified or final.
 
-- Assessment digest: `b21e393b80a484a38df0526c879611a9520c06df931079aaa159fe747cfbafe7`
+- Assessment digest: `978411c80770c523a66503e285f20005e42c1934e5d48489747d88c2275b9653`

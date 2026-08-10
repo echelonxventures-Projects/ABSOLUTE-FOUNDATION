@@ -76,32 +76,32 @@ Per-dimension completeness, declared as a lower bound.
 **`DV-11`** — Traceability completeness across the thirteen traceability dimensions of every registered artifact.
 
 - **Primitive** — `subdict_fill_ratio`
-- **Result** — 1291/15522 dimension slots populated (8.31%) · 1193/1194 record(s) carry at least one trace (99.91%) · 0 record(s) fully traced · 1 with none
+- **Result** — 1328/16003 dimension slots populated (8.29%) · 1230/1231 record(s) carry at least one trace (99.91%) · 0 record(s) fully traced · 1 with none
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records measured | 1194 |
-| dimension slots | 15522 |
-| slots populated | 1291 |
-| populated share (%) | 8.31 |
+| records measured | 1231 |
+| dimension slots | 16003 |
+| slots populated | 1328 |
+| populated share (%) | 8.29 |
 | records fully traced | 0 |
 | records with no trace | 1 |
-| records with at least one trace | 1193 |
+| records with at least one trace | 1230 |
 | traced-record share (%) | 99.91 |
-| dimension `architecture` | 1193/1194 |
-| dimension `certification` | 0/1194 |
-| dimension `deployment` | 0/1194 |
-| dimension `design` | 0/1194 |
-| dimension `functional_test` | 0/1194 |
-| dimension `implementation` | 17/1194 |
-| dimension `integration_test` | 0/1194 |
-| dimension `operations` | 0/1194 |
-| dimension `production` | 0/1194 |
-| dimension `requirement` | 81/1194 |
-| dimension `security_test` | 0/1194 |
-| dimension `source_code` | 0/1194 |
-| dimension `unit_test` | 0/1194 |
+| dimension `architecture` | 1230/1231 |
+| dimension `certification` | 0/1231 |
+| dimension `deployment` | 0/1231 |
+| dimension `design` | 0/1231 |
+| dimension `functional_test` | 0/1231 |
+| dimension `implementation` | 17/1231 |
+| dimension `integration_test` | 0/1231 |
+| dimension `operations` | 0/1231 |
+| dimension `production` | 0/1231 |
+| dimension `requirement` | 81/1231 |
+| dimension `security_test` | 0/1231 |
+| dimension `source_code` | 0/1231 |
+| dimension `unit_test` | 0/1231 |
 
 **`DV-20`** — Certification domains passed against domains declared.
 

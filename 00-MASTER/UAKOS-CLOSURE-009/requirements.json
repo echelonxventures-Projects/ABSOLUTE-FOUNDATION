@@ -12,12 +12,12 @@
   "baseline": {
     "branch": "integration/recovery-001",
     "classifier_source": "00-BOOK/tools/config.py::CLASSIFY_RULES",
-    "closure_baseline_commit": "a5ff49a",
+    "closure_baseline_commit": "a034ebfa",
     "closure_determination": "CLOSED",
     "closure_gap_total": 0,
     "concept_total": 549,
-    "head_commit": "a5ff49a",
-    "tracked_total": 5596
+    "head_commit": "a034ebfa",
+    "tracked_total": 5677
   },
   "baseline_conditions": [
     {
@@ -2770,7 +2770,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 131,
+      "evidence_files": 132,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -2789,7 +2789,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 131 evidence files · zones 00-MASTER+02-MASTER+12-APPLICATION+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+application+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 132 evidence files · zones 00-MASTER+02-MASTER+12-APPLICATION+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+application+intelligence+knowledge)",
       "requirement_id": "RR-AMC-01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -3338,7 +3338,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 117,
+      "evidence_files": 118,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -3358,7 +3358,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 117 evidence files · zones 00-MASTER+02-MASTER+12-APPLICATION+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+application+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 118 evidence files · zones 00-MASTER+02-MASTER+12-APPLICATION+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+application+intelligence+knowledge)",
       "requirement_id": "RR-AMR-01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -4169,7 +4169,7 @@
       ],
       "dependency_count": 68,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 262,
+      "evidence_files": 263,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -4429,7 +4429,7 @@
       ],
       "dependency_count": 70,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 87,
+      "evidence_files": 88,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -4687,7 +4687,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 157,
+      "evidence_files": 158,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -5769,7 +5769,7 @@
       ],
       "dependency_count": 81,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 77,
+      "evidence_files": 78,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -6228,7 +6228,7 @@
       ],
       "dependency_count": 27,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 71,
+      "evidence_files": 72,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -7371,7 +7371,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 104,
+      "evidence_files": 105,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -7390,7 +7390,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 104 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+06-IMPLEMENTATION+07-CERTIFICATION-RECONCILIATION.md+07-ENGINEERING+14-SECURITY+intelligence+knowledge+platform)",
+      "repository_location": "(non-filename home · 105 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+06-IMPLEMENTATION+07-CERTIFICATION-RECONCILIATION.md+07-ENGINEERING+14-SECURITY+intelligence+knowledge+platform)",
       "requirement_id": "RR-ARCH-SECURITY-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -7623,7 +7623,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 171,
+      "evidence_files": 172,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -7745,7 +7745,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 270,
+      "evidence_files": 278,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -7869,7 +7869,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 221,
+      "evidence_files": 231,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -7931,7 +7931,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 239,
+      "evidence_files": 254,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -7993,7 +7993,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 207,
+      "evidence_files": 219,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8055,7 +8055,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 226,
+      "evidence_files": 235,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8117,7 +8117,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 213,
+      "evidence_files": 216,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8180,7 +8180,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 382,
+      "evidence_files": 384,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8242,7 +8242,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 141,
+      "evidence_files": 143,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8436,7 +8436,7 @@
       ],
       "dependency_count": 38,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 324,
+      "evidence_files": 325,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -8837,7 +8837,7 @@
       ],
       "dependency_count": 42,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 158,
+      "evidence_files": 159,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -9781,7 +9781,7 @@
       ],
       "dependency_count": 51,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 112,
+      "evidence_files": 113,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -10099,7 +10099,7 @@
       ],
       "dependency_count": 23,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 52,
+      "evidence_files": 53,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -10255,7 +10255,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 165,
+      "evidence_files": 166,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -10274,7 +10274,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 165 evidence files · zones 00-MASTER+06-IMPLEMENTATION+10-DATA+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+data+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 166 evidence files · zones 00-MASTER+06-IMPLEMENTATION+10-DATA+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+data+intelligence+knowledge)",
       "requirement_id": "RR-DMC-01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -11482,7 +11482,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 66,
+      "evidence_files": 67,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -11536,7 +11536,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 77,
+      "evidence_files": 78,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -11590,7 +11590,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 72,
+      "evidence_files": 73,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -11642,7 +11642,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 98,
+      "evidence_files": 99,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -11660,7 +11660,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 98 evidence files · zones 00-BOOK+00-MASTER+06-IMPLEMENTATION+data+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 99 evidence files · zones 00-BOOK+00-MASTER+06-IMPLEMENTATION+data+intelligence+knowledge)",
       "requirement_id": "RR-EC3-B10-U01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -12244,7 +12244,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 73,
+      "evidence_files": 74,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -12262,7 +12262,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 73 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+intelligence+knowledge+service)",
+      "repository_location": "(non-filename home · 74 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+intelligence+knowledge+service)",
       "requirement_id": "RR-EC3-B11-U01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -12896,7 +12896,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 81,
+      "evidence_files": 82,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -12914,7 +12914,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 81 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+application+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 82 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+application+intelligence+knowledge)",
       "requirement_id": "RR-EC3-B12-U01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -13688,7 +13688,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 121,
+      "evidence_files": 122,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -13708,7 +13708,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 121 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+14-SECURITY+IAC-001C+infrastructure+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 122 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+14-SECURITY+IAC-001C+infrastructure+intelligence+knowledge)",
       "requirement_id": "RR-EC3-B13-U01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -14585,7 +14585,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 69,
+      "evidence_files": 70,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -14603,7 +14603,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 69 evidence files · zones 00-MASTER+intelligence+knowledge+platform+pyproject.toml+repo-operations.json+repo-ops.sh)",
+      "repository_location": "(non-filename home · 70 evidence files · zones 00-MASTER+intelligence+knowledge+platform+pyproject.toml+repo-operations.json+repo-ops.sh)",
       "requirement_id": "RR-EPIC-PLAT-003",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -14682,7 +14682,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 77,
+      "evidence_files": 78,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -14700,7 +14700,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 77 evidence files · zones .github+00-MASTER+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 78 evidence files · zones .github+00-MASTER+engine+intelligence+knowledge)",
       "requirement_id": "RR-EPIC-RTE-002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -14732,7 +14732,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 32,
+      "evidence_files": 33,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -14749,7 +14749,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 32 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 33 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
       "requirement_id": "RR-EPIC-RTE-003",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -14781,7 +14781,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 47,
+      "evidence_files": 48,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -14798,7 +14798,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 47 evidence files · zones 00-MASTER+engine+intelligence+knowledge+pyproject.toml)",
+      "repository_location": "(non-filename home · 48 evidence files · zones 00-MASTER+engine+intelligence+knowledge+pyproject.toml)",
       "requirement_id": "RR-EPIC-UKDA-002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -14830,7 +14830,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 41,
+      "evidence_files": 42,
       "evidence_kinds": [
         "plan",
         "test"
@@ -14846,7 +14846,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 41 evidence files · zones 00-MASTER+engine+intelligence+knowledge+pyproject.toml)",
+      "repository_location": "(non-filename home · 42 evidence files · zones 00-MASTER+engine+intelligence+knowledge+pyproject.toml)",
       "requirement_id": "RR-EPIC-UKDA-003",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -14974,7 +14974,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 59,
+      "evidence_files": 60,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -14994,7 +14994,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 59 evidence files · zones 00-BOOK+00-MASTER+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 60 evidence files · zones 00-BOOK+00-MASTER+engine+intelligence+knowledge)",
       "requirement_id": "RR-EPIC-VAL-002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -15026,7 +15026,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 41,
+      "evidence_files": 42,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -15043,7 +15043,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 41 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 42 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
       "requirement_id": "RR-EPIC-VAL-003",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -15234,7 +15234,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 197,
+      "evidence_files": 203,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -15254,7 +15254,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 197 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+04-REFERENCE+06-IMPLEMENTATION+07-CERTIFICATION-RECONCILIATION.md+07-ENGINEERING+08-RUNTIME+09-PLATFORM+13-INFRASTRUCTURE+15-UNIVERSAL-SCIENCE-INTELLIGENCE+EVO-USIS-014+EVO-USIS-015+EVO-USIS-016+IAC-001B+IAC-001C+intelligence+knowledge+platform)",
+      "repository_location": "(non-filename home · 203 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+04-REFERENCE+06-IMPLEMENTATION+07-CERTIFICATION-RECONCILIATION.md+07-ENGINEERING+08-RUNTIME+09-PLATFORM+13-INFRASTRUCTURE+15-UNIVERSAL-SCIENCE-INTELLIGENCE+EVO-USIS-014+EVO-USIS-015+EVO-USIS-016+IAC-001B+IAC-001C+intelligence+knowledge+platform)",
       "requirement_id": "RR-GOV-002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -15389,7 +15389,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 72,
+      "evidence_files": 73,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -15410,7 +15410,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 72 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+IAC-001A+IAC-001B+IAC-001E+RTBD-001-REPOSITORY-TRUTH-BOUNDARY-DETERMINATION.md+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+platform)",
+      "repository_location": "(non-filename home · 73 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+IAC-001A+IAC-001B+IAC-001E+RTBD-001-REPOSITORY-TRUTH-BOUNDARY-DETERMINATION.md+UCOS-ACC-002-UNIVERSAL-CONSTITUTIONAL-EVOLUTION-RESPONSE.md+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+platform)",
       "requirement_id": "RR-GOV-005",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -15689,7 +15689,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 36,
+      "evidence_files": 37,
       "evidence_kinds": [
         "certificate",
         "test",
@@ -15706,7 +15706,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 36 evidence files · zones 00-MASTER+13-INFRASTRUCTURE+infrastructure+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 37 evidence files · zones 00-MASTER+13-INFRASTRUCTURE+infrastructure+intelligence+knowledge)",
       "requirement_id": "RR-ICAP-01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -15786,7 +15786,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 31,
+      "evidence_files": 32,
       "evidence_kinds": [
         "certificate",
         "test",
@@ -15803,7 +15803,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 31 evidence files · zones 00-MASTER+13-INFRASTRUCTURE+infrastructure+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 32 evidence files · zones 00-MASTER+13-INFRASTRUCTURE+infrastructure+intelligence+knowledge)",
       "requirement_id": "RR-ICAP-03",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -16560,7 +16560,7 @@
       ],
       "dependency_count": 85,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 185,
+      "evidence_files": 186,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -16631,7 +16631,7 @@
       ],
       "dependency_count": 8,
       "disposition": "DEFERRED",
-      "evidence_files": 38,
+      "evidence_files": 39,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -16832,7 +16832,7 @@
       ],
       "dependency_count": 10,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 187,
+      "evidence_files": 188,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -16899,7 +16899,7 @@
       ],
       "dependency_count": 7,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 67,
+      "evidence_files": 68,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -17358,7 +17358,7 @@
       ],
       "dependency_count": 6,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 98,
+      "evidence_files": 99,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -18336,7 +18336,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 98,
+      "evidence_files": 109,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -18389,7 +18389,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 122,
+      "evidence_files": 123,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -18637,7 +18637,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 89,
+      "evidence_files": 90,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -18655,7 +18655,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 89 evidence files · zones 00-CEP+00-MASTER+02-MASTER+data+intelligence+knowledge+service)",
+      "repository_location": "(non-filename home · 90 evidence files · zones 00-CEP+00-MASTER+02-MASTER+data+intelligence+knowledge+service)",
       "requirement_id": "RR-MEP-02",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -18687,7 +18687,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 78,
+      "evidence_files": 79,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -18705,7 +18705,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 78 evidence files · zones 00-CEP+00-MASTER+02-MASTER+application+intelligence+knowledge+service)",
+      "repository_location": "(non-filename home · 79 evidence files · zones 00-CEP+00-MASTER+02-MASTER+application+intelligence+knowledge+service)",
       "requirement_id": "RR-MEP-03",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -18737,7 +18737,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 95,
+      "evidence_files": 96,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -18756,7 +18756,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 95 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+infrastructure+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 96 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+infrastructure+intelligence+knowledge)",
       "requirement_id": "RR-MEP-04",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -19681,7 +19681,7 @@
       ],
       "dependency_count": 29,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 107,
+      "evidence_files": 108,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -20039,7 +20039,7 @@
       ],
       "dependency_count": 32,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 87,
+      "evidence_files": 88,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -20777,7 +20777,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 45,
+      "evidence_files": 46,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -20795,7 +20795,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 45 evidence files · zones 00-BOOK+00-CMG+00-MASTER+00-SOURCE-MANIFEST+01-WORKING+02-MASTER+04-REFERENCE+99-FREEZE)",
+      "repository_location": "(non-filename home · 46 evidence files · zones 00-BOOK+00-CMG+00-MASTER+00-SOURCE-MANIFEST+01-WORKING+02-MASTER+04-REFERENCE+99-FREEZE)",
       "requirement_id": "RR-Phase-000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -20827,7 +20827,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 33,
+      "evidence_files": 38,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -20844,7 +20844,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 33 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md)",
+      "repository_location": "(non-filename home · 38 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md)",
       "requirement_id": "RR-Phase-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -20876,7 +20876,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 39,
+      "evidence_files": 45,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -20894,7 +20894,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 39 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md)",
+      "repository_location": "(non-filename home · 45 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md)",
       "requirement_id": "RR-Phase-002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -20926,7 +20926,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 35,
+      "evidence_files": 41,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -20944,7 +20944,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 35 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md)",
+      "repository_location": "(non-filename home · 41 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md)",
       "requirement_id": "RR-Phase-003",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -20976,7 +20976,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 21,
+      "evidence_files": 31,
       "evidence_kinds": [
         "plan",
         "verification"
@@ -20992,7 +20992,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 21 evidence files · zones 00-MASTER)",
+      "repository_location": "(non-filename home · 31 evidence files · zones 00-MASTER)",
       "requirement_id": "RR-Phase-004",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -21120,7 +21120,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 41,
+      "evidence_files": 42,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -21137,7 +21137,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 41 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE-MANIFEST+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-IMPLEMENTATION-ORDER.md+99-FREEZE)",
+      "repository_location": "(non-filename home · 42 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE-MANIFEST+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-IMPLEMENTATION-ORDER.md+99-FREEZE)",
       "requirement_id": "RR-Phase-020",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -21217,7 +21217,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 35,
+      "evidence_files": 36,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -21234,7 +21234,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 35 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE-MANIFEST+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+06-PARALLEL-EXECUTION-GROUPS.md+99-FREEZE)",
+      "repository_location": "(non-filename home · 36 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE-MANIFEST+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+06-PARALLEL-EXECUTION-GROUPS.md+99-FREEZE)",
       "requirement_id": "RR-Phase-024",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -21475,7 +21475,7 @@
       ],
       "dependency_count": 7,
       "disposition": "DEFERRED",
-      "evidence_files": 235,
+      "evidence_files": 236,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -22340,7 +22340,7 @@
       ],
       "dependency_count": 20,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 87,
+      "evidence_files": 88,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -22673,7 +22673,7 @@
       ],
       "dependency_count": 53,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 290,
+      "evidence_files": 291,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -22901,7 +22901,7 @@
       ],
       "dependency_count": 55,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 91,
+      "evidence_files": 92,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -23129,7 +23129,7 @@
       ],
       "dependency_count": 57,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 164,
+      "evidence_files": 165,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -24201,7 +24201,7 @@
       ],
       "dependency_count": 66,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 85,
+      "evidence_files": 86,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -24524,7 +24524,7 @@
       ],
       "dependency_count": 25,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 48,
+      "evidence_files": 49,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -24578,7 +24578,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 275,
+      "evidence_files": 276,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -24600,7 +24600,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 275 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+11-SERVICE+12-APPLICATION+13-INFRASTRUCTURE+14-SECURITY+UCFM-001-UNIVERSAL-CONSTITUTIONAL-FACET-MODEL-FINAL-DETERMINATION.md+UCOS-P0-CONVERGENCE-001-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md+application+infrastructure+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 276 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+11-SERVICE+12-APPLICATION+13-INFRASTRUCTURE+14-SECURITY+UCFM-001-UNIVERSAL-CONSTITUTIONAL-FACET-MODEL-FINAL-DETERMINATION.md+UCOS-P0-CONVERGENCE-001-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md+application+infrastructure+intelligence+knowledge)",
       "requirement_id": "RR-SF-2",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -24632,7 +24632,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 132,
+      "evidence_files": 133,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -24651,7 +24651,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 132 evidence files · zones 00-MASTER+02-MASTER+11-SERVICE+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+intelligence+knowledge+service)",
+      "repository_location": "(non-filename home · 133 evidence files · zones 00-MASTER+02-MASTER+11-SERVICE+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md+intelligence+knowledge+service)",
       "requirement_id": "RR-SMC-01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -25195,7 +25195,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 127,
+      "evidence_files": 128,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -25215,7 +25215,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 127 evidence files · zones 00-MASTER+02-MASTER+11-SERVICE+intelligence+knowledge+service)",
+      "repository_location": "(non-filename home · 128 evidence files · zones 00-MASTER+02-MASTER+11-SERVICE+intelligence+knowledge+service)",
       "requirement_id": "RR-SMR-01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -26280,7 +26280,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 74,
+      "evidence_files": 80,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -26298,7 +26298,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 74 evidence files · zones 00-MASTER+02-MASTER+03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 80 evidence files · zones 00-MASTER+02-MASTER+03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md+engine+intelligence+knowledge)",
       "requirement_id": "RR-UCKO-PRIN-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -26330,7 +26330,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 40,
+      "evidence_files": 42,
       "evidence_kinds": [
         "certificate",
         "plan"
@@ -26346,7 +26346,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 40 evidence files · zones 00-MASTER+02-MASTER+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 42 evidence files · zones 00-MASTER+02-MASTER+engine+intelligence+knowledge)",
       "requirement_id": "RR-UCKO-PRIN-0002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -26378,7 +26378,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 36,
+      "evidence_files": 37,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -26395,7 +26395,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 36 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 37 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
       "requirement_id": "RR-UCKO-PRIN-0003",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -26475,7 +26475,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 42,
+      "evidence_files": 46,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -26492,7 +26492,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 42 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 46 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
       "requirement_id": "RR-UCKO-PRIN-0005",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -26524,7 +26524,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 39,
+      "evidence_files": 40,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -26542,7 +26542,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 39 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 40 evidence files · zones 00-MASTER+engine+intelligence+knowledge)",
       "requirement_id": "RR-UCKO-RULE-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -27511,7 +27511,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 119,
+      "evidence_files": 123,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -32562,7 +32562,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 49,
+      "evidence_files": 54,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -33276,7 +33276,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 24,
+      "evidence_files": 31,
       "evidence_kinds": [
         "certificate",
         "plan"
@@ -33292,7 +33292,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 24 evidence files · zones 00-MASTER+engine)",
+      "repository_location": "(non-filename home · 31 evidence files · zones 00-MASTER+engine)",
       "requirement_id": "RR-UKDA-DEC-0002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -33765,7 +33765,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 61,
+      "evidence_files": 65,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -33782,7 +33782,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 61 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+10-WAVE-01-EXECUTION-RECOMMENDATION.md)",
+      "repository_location": "(non-filename home · 65 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+10-WAVE-01-EXECUTION-RECOMMENDATION.md)",
       "requirement_id": "RR-Ω∞-008",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -34390,11 +34390,11 @@
       "volume": "UNCLASSIFIED"
     }
   ],
-  "seal_sha256": "d7a70b49af4bf84aba134f3a6f0e543c6dece98cc5e7f581d86f535222e73628",
+  "seal_sha256": "b9d62642d699651f931fba2c07ea4843ca4a2cdf7ac0f236b1cf7a0ed96f2ed7",
   "systemic_findings": [
     {
       "id": "RG-S01",
-      "measured": "10 of 13 per-artifact traceability axes are empty across all 1220 registered artifacts (certification, deployment, design, functional_test, integration_test, operations, production, security_test, source_code, unit_test); populated axes: architecture=1219, implementation=17, requirement=81",
+      "measured": "10 of 13 per-artifact traceability axes are empty across all 1231 registered artifacts (certification, deployment, design, functional_test, integration_test, operations, production, security_test, source_code, unit_test); populated axes: architecture=1230, implementation=17, requirement=81",
       "name": "ARTIFACT-TRACEABILITY-SCHEMA-UNPOPULATED",
       "open": true,
       "owner": "00-BOOK/DATA/artifacts.json"

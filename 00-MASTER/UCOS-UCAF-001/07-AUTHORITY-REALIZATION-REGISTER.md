@@ -41,7 +41,6 @@ properties are measured independently, and the second cannot waive the first.
 | `platform/repository_operations/contracts.py` | `OPERATIONS_AUTHORITY` | `ENGINEERING-EXECUTION-ONLY` | ENGINEERING-EXECUTION | YES | no |
 | `platform/universal_assurance/contracts.py` | `ASSURANCE_AUTHORITY` | `ENGINEERING-EXECUTION-ONLY` | ENGINEERING-EXECUTION | YES | no |
 | `platform/universal_foundation/constitution.py` | `FOUNDATION_CONSTITUTION_AUTHORITY` | `Universal Foundation Constitutional Authority` | IMPLEMENTATION-CONFORMANCE | YES | no |
-| `platform/universal_foundation/convergence 2.py` | `GATE_NO_PARALLEL_AUTHORITY` | `FG-15-NO-PARALLEL-AUTHORITY` | CONSTITUTIONAL-GATE-IDENTITY | YES | no |
 | `platform/universal_foundation/convergence.py` | `GATE_NO_PARALLEL_AUTHORITY` | `FG-15-NO-PARALLEL-AUTHORITY` | CONSTITUTIONAL-GATE-IDENTITY | YES | no |
 | `platform/universal_pipeline/governance.py` | `GOVERNANCE_AUTHORITY` | `NONE (DERIVED TRUTH)` | DERIVED-TRUTH | YES | no |
 | `platform/universal_validation/contracts.py` | `VALIDATION_AUTHORITY` | `ENGINEERING-EXECUTION-ONLY` | ENGINEERING-EXECUTION | YES | no |

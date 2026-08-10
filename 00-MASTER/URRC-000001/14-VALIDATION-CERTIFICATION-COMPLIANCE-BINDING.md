@@ -63,13 +63,13 @@ Validation, certification and compliance owners plus certification-scope reconci
 **`DV-04`** — Registration census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1194 vs 1194 · delta 0
+- **Result** — 1231 vs 1231 · delta 0
 - **Substrate evidence** — `S-01`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1194 |
-| `S-04` scope.artifacts | 1194 |
+| `S-01` count | 1231 |
+| `S-04` scope.artifacts | 1231 |
 | delta | 0 |
 
 **`DV-32`** — Computed gate verdicts.

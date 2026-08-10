@@ -95,7 +95,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 33/39 located engine(s) bound to at least one entry point, workflow or hook (over 33 tracked binding file(s))
+- **Result** — 34/40 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -114,6 +114,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 | `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | 2 | `.github/workflows/assimilation-gate.yml`, `Makefile` |
 | `00-MASTER/UAKOS-CLOSURE-008/decision_engine.py` | 0 | **none** |
 | `00-MASTER/UAKOS-CLOSURE-008/superiority_engine.py` | 0 | **none** |
+| `00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py` | 2 | `.github/workflows/closure009-gate.yml`, `Makefile` |
 | `00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py` | 0 | **none** |
 | `00-MASTER/UAKOS-PHASE-001B/provenance_engine.py` | 0 | **none** |
 | `00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py` | 0 | **none** |
@@ -138,7 +139,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 | `00-MASTER/UMK-000001/umk_engine.py` | 2 | `.github/workflows/umk-gate.yml`, `Makefile` |
 | `00-MASTER/UPF-000001/upf_engine.py` | 2 | `.github/workflows/uprf-gate.yml`, `Makefile` |
 | `00-MASTER/URRC-000001/urrc_engine.py` | 3 | `.github/workflows/urrc-gate.yml`, `.kiro/hooks/urrc-000001.json`, `Makefile` |
-| `verify.sh` | 8 | `.github/workflows/aee-gate.yml`, `.github/workflows/corpus-currency-gate.yml`, `.github/workflows/ec1-ci.yml`, `.github/workflows/uaep-gate.yml`, `.github/workflows/uaie-gate.yml`, `.github/workflows/uccep-gate.yml`, `.github/workflows/ucef-gate.yml`, `Makefile` |
+| `verify.sh` | 9 | `.github/workflows/aee-gate.yml`, `.github/workflows/corpus-currency-gate.yml`, `.github/workflows/ec1-ci.yml`, `.github/workflows/uaep-gate.yml`, `.github/workflows/uaie-gate.yml`, `.github/workflows/uccep-gate.yml`, `.github/workflows/ucef-gate.yml`, `.github/workflows/ufc-gate.yml`, `Makefile` |
 
 #### D-15 — Gap — dimension gaps
 
@@ -179,7 +180,7 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 63 |
+| `ACTIVE` | 66 |
 | `UNDER_REVIEW` | 2 |
 | `COMPLETE` | 1 |
 | `FROZEN` | 1 |
@@ -194,32 +195,32 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-11`** — Traceability completeness across the thirteen traceability dimensions of every registered artifact.
 
 - **Primitive** — `subdict_fill_ratio`
-- **Result** — 1291/15522 dimension slots populated (8.31%) · 1193/1194 record(s) carry at least one trace (99.91%) · 0 record(s) fully traced · 1 with none
+- **Result** — 1328/16003 dimension slots populated (8.29%) · 1230/1231 record(s) carry at least one trace (99.91%) · 0 record(s) fully traced · 1 with none
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records measured | 1194 |
-| dimension slots | 15522 |
-| slots populated | 1291 |
-| populated share (%) | 8.31 |
+| records measured | 1231 |
+| dimension slots | 16003 |
+| slots populated | 1328 |
+| populated share (%) | 8.29 |
 | records fully traced | 0 |
 | records with no trace | 1 |
-| records with at least one trace | 1193 |
+| records with at least one trace | 1230 |
 | traced-record share (%) | 99.91 |
-| dimension `architecture` | 1193/1194 |
-| dimension `certification` | 0/1194 |
-| dimension `deployment` | 0/1194 |
-| dimension `design` | 0/1194 |
-| dimension `functional_test` | 0/1194 |
-| dimension `implementation` | 17/1194 |
-| dimension `integration_test` | 0/1194 |
-| dimension `operations` | 0/1194 |
-| dimension `production` | 0/1194 |
-| dimension `requirement` | 81/1194 |
-| dimension `security_test` | 0/1194 |
-| dimension `source_code` | 0/1194 |
-| dimension `unit_test` | 0/1194 |
+| dimension `architecture` | 1230/1231 |
+| dimension `certification` | 0/1231 |
+| dimension `deployment` | 0/1231 |
+| dimension `design` | 0/1231 |
+| dimension `functional_test` | 0/1231 |
+| dimension `implementation` | 17/1231 |
+| dimension `integration_test` | 0/1231 |
+| dimension `operations` | 0/1231 |
+| dimension `production` | 0/1231 |
+| dimension `requirement` | 81/1231 |
+| dimension `security_test` | 0/1231 |
+| dimension `source_code` | 0/1231 |
+| dimension `unit_test` | 0/1231 |
 
 #### D-17 — Gap — open-work gaps
 

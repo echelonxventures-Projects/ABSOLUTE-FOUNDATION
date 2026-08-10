@@ -342,6 +342,50 @@ CLASSIFY_RULES = [
     # Root-level IMPLEMENTATION-* files → IMP (IMPLEMENTATION, VOL-004).
     # Matches: 04-IMPLEMENTATION-BACKLOG.md (+ 11 other IMPLEMENTATION-* root files)
     (r"^(?:\d+[-_.])?IMPLEMENT", "IMP", "IMP", "VOL-004"),
+
+    # --- Root-level constitutional determination & evidence documents --------------
+    #     UMB-004 §5: "When a new entity class appears it receives a category namespace
+    #     (append-only) AND a classification rule. A namespace minted without a declared
+    #     rule is a namespace no authority governs." Six root-level determination and
+    #     evidence documents were minting ONE namespace EACH through the path-derived
+    #     catch-all — P0FINA, P0FREE, R1REPO, RTBD00, STAGE0, W34CUN — each landing in
+    #     VOL-000 with its own name as its own program, i.e. governed by nothing. That
+    #     carried live ungoverned namespaces from 74 to 80 and closed the UIS-001 gate on
+    #     the blocking UIS-V-14 ratchet (`namespaces_ungoverned <= 74`).
+    #
+    #     The remedy is the one UMB-004 §5 names: declare the rule. It is NOT a widening
+    #     of the ratchet — the bound is untouched and the count returns to 74.
+    #
+    #     TWO parts, because the six namespaces are already minted and identity is
+    #     immutable (allocate() is path-keyed: an existing by_path entry returns its
+    #     universal_id verbatim, so no rule can renumber or retire one):
+    #
+    #       (a) DECLARE the six. Each exact-path rule carries the category its artifact
+    #           already bears, so the declared rule agrees with the immutable identity
+    #           rather than contradicting it, and gives each document the CONTROL TOWER
+    #           home (VOL-020) that its VOL-000 orphan state denied it. Nothing is
+    #           renumbered; only volume and program change, both of them derived fields.
+    #
+    #       (b) PREVENT recurrence. The trailing family rules below route every FUTURE
+    #           document of these same identifier families to the governed DET category,
+    #           so the next P0-*, RTBD-*, STAGE-*, R-N-* or W3-* determination reuses one
+    #           declared namespace instead of minting a seventh, an eighth, a ninth.
+    #           Without (b) this defect returns on the next determination committed.
+    #
+    #     Ordered before (b) so the six keep the identity they were minted with.
+    (r"^P0-FINAL-ASSIMILATION-AUDIT\.md$", "DET", "P0FINA", "VOL-020"),
+    (r"^P0-FREEZE-CERTIFICATION-001-", "DET", "P0FREE", "VOL-020"),
+    (r"^R-1-REPOSITORY-REPLAY-SYNCHRONIZATION-EVIDENCE\.md$", "DET", "R1REPO", "VOL-020"),
+    (r"^RTBD-001-REPOSITORY-TRUTH-BOUNDARY-DETERMINATION\.md$", "DET", "RTBD00", "VOL-020"),
+    (r"^STAGE-0-IMPLEMENTATION-COMPLETION-PLAN\.md$", "DET", "STAGE0", "VOL-020"),
+    (r"^W3-4c-UNIVERSAL-ASSURANCE-VALIDATION-CLUSTER-COVERAGE-EVIDENCE\.md$",
+     "DET", "W34CUN", "VOL-020"),
+
+    # (b) Future root-level determination & evidence documents of the same families →
+    #     the single governed DET namespace (CONTROL TOWER, VOL-020). Root-level only:
+    #     each alternative is anchored and carries its family's own separator, so these
+    #     cannot reach into a subdirectory or collide with the curated rules above.
+    (r"^(?:P0-|RTBD-|STAGE-\d|R-\d+-|W\d+-\d)[A-Za-z0-9]", "DET", "DET", "VOL-020"),
 ]
 
 DEFAULT_CLASS = ("OTHER", "MISC", "VOL-000")
@@ -431,6 +475,14 @@ ARTIFACT_FAMILIES = {
              "sources": ("^engine/", "^07-ENGINEERING/")},
     "PLT":  {"category": "PLT",  "volume": "VOL-006", "kind": "platform-document/completion-report",
              "sources": ("^platform/", "^09-PLATFORM/")},
+    # Root-level constitutional determination & evidence documents. Enumerated here as a
+    # first-class family (GOV-005 Part 4) because the taxonomy had no entry for the class
+    # at all: every such document fell to the path-derived catch-all and minted a private
+    # single-use namespace, which is the incompleteness GOV-005 §5.3 names as the root of
+    # structurally guaranteed drift. The executable mapping is the trailing DET rules in
+    # CLASSIFY_RULES; this entry is the taxonomy that authorizes them.
+    "DET":  {"category": "DET",  "volume": "VOL-020", "kind": "constitutional-determination/evidence",
+             "sources": (r"^P0-", r"^RTBD-", r"^STAGE-\d", r"^R-\d+-", r"^W\d+-\d")},
 }
 
 # --- Deterministic path-derived catch-all (GOV-005 §5.2) --------------------

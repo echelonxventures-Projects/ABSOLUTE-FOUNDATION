@@ -4,9 +4,9 @@
 |---|---|
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
-| TIER | `closure` |
-| DETERMINATION | **CONVERGED-PROVISIONAL** |
-| SEAL | `efeba054528e04b84d118b43a336394e` |
+| TIER | `standard` |
+| DETERMINATION | **NOT-CONVERGED** |
+| SEAL | `4a40807e5a73d0a35f4ee69b335b602b` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Each reading is taken from a located owner's own sealed output. This programme measures nothing itself; it reports what its owners determined.
@@ -18,8 +18,8 @@
 | `OBS-AGGREGATE-BLOCKING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `blocking_failures` | `is_empty` | SATISFIED | `[]` |
 | `OBS-AGGREGATE-UNPROVEN` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `unproven` | `is_empty` | SATISFIED | `[]` |
 | `OBS-AGGREGATE-GATE-EXIT` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gate_exit` | `equals` | SATISFIED | `0` |
-| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gates` | `every_field_in` | SATISFIED | `23` |
-| `OBS-AGGREGATE-PROGRAMMES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `programs` | `every_field_in` | SATISFIED | `19` |
+| `OBS-AGGREGATE-GATES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `gates` | `every_field_in` | SATISFIED | `26` |
+| `OBS-AGGREGATE-PROGRAMMES-PASS` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `programs` | `every_field_in` | SATISFIED | `21` |
 | `OBS-AGGREGATE-CEILING` | `00-MASTER/UCCEP-000000/uccep_engine.py` | `certification_ceiling` | `is_empty` | **VIOLATED** | `["`UCCEP-F-004` — Constitutional finality is reserved to an ou…"]` |
 | `OBS-KNOWLEDGE-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | `determination` | `equals` | SATISFIED | `"CLOSED"` |
 | `OBS-KNOWLEDGE-GAPS` | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | `gap_total` | `equals` | SATISFIED | `0` |
@@ -46,10 +46,10 @@
 | `OBS-FRAMEWORK-VERDICT` | `00-MASTER/UCEF-000001/ucef_engine.py` | `verdict` | `equals` | SATISFIED | `"GATE-OPEN"` |
 | `OBS-FRAMEWORK-GUARDS` | `00-MASTER/UCEF-000001/ucef_engine.py` | `guard_findings` | `is_empty` | SATISFIED | `[]` |
 | `OBS-FRAMEWORK-CRITERIA` | `00-MASTER/UCEF-000001/ucef_engine.py` | `counts.criteria_discharged` | `equals_sibling` | SATISFIED | `{"measured": 16, "sibling": 16}` |
-| `OBS-BLUEPRINT-GATE` | `00-MASTER/UCOS-RIB-001/rib_engine.py` | `gate` | `equals` | SATISFIED | `"OPEN"` |
+| `OBS-BLUEPRINT-GATE` | `00-MASTER/UCOS-RIB-001/rib_engine.py` | `gate` | `equals` | **VIOLATED** | `"CLOSED"` |
 | `OBS-REGISTRY-GATE` | `00-MASTER/UCOS-UAR-001/uar_engine.py` | `gate` | `equals` | SATISFIED | `"OPEN"` |
 | `OBS-CORPUS-CURRENCY` | `00-MASTER/UKAP-001/corpus_engine.py` | `determination` | `equals` | SATISFIED | `"CORPUS CURRENT"` |
 | `OBS-ASSIMILATION-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | `determination` | `equals` | SATISFIED | `"REPOSITORY CONSTITUTIONALLY COMPLETE"` |
 | `OBS-ROADMAP-VERDICT` | `00-MASTER/UCOS-MXR-001/roadmap_engine.py` | `verdict` | `not_empty` | SATISFIED | `"CONDITIONAL GO"` |
-| `OBS-FIXED-POINT-DECLARATION-SEAL` | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | `declaration_seal_sha256` | `not_empty` | SATISFIED | `"9db64454176a23734aabb38fcf92b5171a776ec340b74c37aa852dce55f81452"` |
+| `OBS-FIXED-POINT-DECLARATION-SEAL` | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | `declaration_seal_sha256` | `not_empty` | SATISFIED | `"d8e69c809dcf8d7130b612260bca3699e2147028e549e09657c7bb0e2294294e"` |
 | `OBS-FIXED-POINT-FINDINGS` | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | `findings` | `is_empty` | SATISFIED | `[]` |

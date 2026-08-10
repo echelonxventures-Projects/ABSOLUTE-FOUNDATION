@@ -1129,7 +1129,7 @@
     "dispositions_owned": 6,
     "minted_collisions": 0,
     "minted_token_classes": 5,
-    "minted_tokens": 21,
+    "minted_tokens": 20,
     "minted_unclassified": 0,
     "realizations": 1,
     "realizations_bound": 1,
@@ -1890,15 +1890,6 @@
       "class": "CONSTITUTIONAL-GATE-IDENTITY",
       "classified": true,
       "constitutional_collision": false,
-      "owner": "platform/universal_foundation/convergence 2.py",
-      "source": "UCAF-REAL-01",
-      "symbol": "GATE_NO_PARALLEL_AUTHORITY",
-      "token": "FG-15-NO-PARALLEL-AUTHORITY"
-    },
-    {
-      "class": "CONSTITUTIONAL-GATE-IDENTITY",
-      "classified": true,
-      "constitutional_collision": false,
       "owner": "platform/universal_foundation/convergence.py",
       "source": "UCAF-REAL-01",
       "symbol": "GATE_NO_PARALLEL_AUTHORITY",
@@ -2346,7 +2337,7 @@
       "rule": "the lattice shall be consistent with, and shall not amend, the four-tier Program authority order already declared by the charter"
     }
   ],
-  "seal_sha256": "af6cd0f2b56e903921851dafba705f59b186ae43c0f480ae5f4feab40fb8b5f3",
+  "seal_sha256": "9d18009b1c2caa28f7728edf24a3e31f750a9afc8e7967a84c845bf34267ee11",
   "source_token_registers": [
     {
       "id": "UCAF-TOK-01",

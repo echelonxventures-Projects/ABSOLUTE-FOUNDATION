@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T19:01:22+00:00",
+  "generated_at": "2026-08-10T03:17:01+00:00",
   "count": 25,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 90,
+      "artifact_count": 81,
       "page_range_start": 1,
-      "page_range_end": 9794,
+      "page_range_end": 9739,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -249,9 +249,9 @@
       "description": "Program control tower and external-execution support.",
       "category": "CTL",
       "status": "ACTIVE",
-      "artifact_count": 58,
+      "artifact_count": 67,
       "page_range_start": 4183,
-      "page_range_end": 9422,
+      "page_range_end": 9794,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-020"
     },
     {

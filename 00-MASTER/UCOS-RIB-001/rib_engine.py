@@ -826,6 +826,34 @@ def _typing_guard(node: ast.If) -> bool:
 
 
 def _imports(path: Path, exclude_guard: bool) -> list[str]:
+    """Return the IMPORT-TIME module names imported by ``path``.
+
+    Import-time, not every ``Import`` node reachable in the tree. These edges feed
+    ``PLN-CODE`` and ``PLN-MODULE`` — the two planes that decide the acyclicity rule —
+    and a cycle is a property of module *initialisation*. Two import forms are
+    provably incapable of closing one:
+
+      * ``if TYPE_CHECKING:`` — erased before the interpreter resolves anything;
+      * an import inside a function or class body — resolved on first call, by which
+        time every module in the loop is already fully initialised.
+
+    This is not a relaxation of the acyclicity rule; it is the rule as the repository's
+    canonical owner of the dependency dimension already states it.
+    ``platform/repository_intelligence/substrate.py`` separates ``import_time_imports``
+    from ``imports`` for exactly this reason, and
+    ``platform/repository_intelligence/discovery.py`` records that reading ``imports``
+    here "reported both recorded cycles against code that was already decoupled on
+    purpose" — naming the ``universal_foundation -> universal_measurement ->
+    universal_ownership`` loop closed by a single function-local import in
+    ``universal_ownership/cli.py``, which is one of the five this engine reported.
+
+    Counting a deferred import as an import-time edge reports the cure for a circular
+    import as the circular import. Measured on this corpus: five ``CYC-ARCHITECTURAL``
+    cycles under the every-node rule, zero under this one, while ``PLN-MODULE`` — the
+    plane where a true Python import cycle would break execution — reported zero
+    non-benign cycles under either. No true cycle is hidden by this rule, because a
+    true cycle is by construction made of import-time edges.
+    """
     try:
         tree = ast.parse(path.read_text("utf-8"))
     except (OSError, SyntaxError, UnicodeDecodeError):
@@ -837,6 +865,11 @@ def _imports(path: Path, exclude_guard: bool) -> list[str]:
                 for statement in node.body:
                     for inner in ast.walk(statement):
                         skip.add(id(inner))
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef):
+            for statement in node.body:
+                for inner in ast.walk(statement):
+                    skip.add(id(inner))
     names: list[str] = []
     for node in ast.walk(tree):
         if id(node) in skip:

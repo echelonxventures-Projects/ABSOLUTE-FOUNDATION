@@ -52,7 +52,7 @@ Automation presence per gate and per deliverable.
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 39 tracked path(s)
+- **Result** — 40 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -71,6 +71,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-008/decision_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-CLOSURE-008/superiority_engine.py` | TRACKED |
+| `00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-PHASE-001B/provenance_engine.py` | TRACKED |
 | `00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py` | TRACKED |
@@ -100,7 +101,7 @@ Automation presence per gate and per deliverable.
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 33/39 located engine(s) bound to at least one entry point, workflow or hook (over 33 tracked binding file(s))
+- **Result** — 34/40 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -119,6 +120,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | 2 | `.github/workflows/assimilation-gate.yml`, `Makefile` |
 | `00-MASTER/UAKOS-CLOSURE-008/decision_engine.py` | 0 | **none** |
 | `00-MASTER/UAKOS-CLOSURE-008/superiority_engine.py` | 0 | **none** |
+| `00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py` | 2 | `.github/workflows/closure009-gate.yml`, `Makefile` |
 | `00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py` | 0 | **none** |
 | `00-MASTER/UAKOS-PHASE-001B/provenance_engine.py` | 0 | **none** |
 | `00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py` | 0 | **none** |
@@ -143,7 +145,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/UMK-000001/umk_engine.py` | 2 | `.github/workflows/umk-gate.yml`, `Makefile` |
 | `00-MASTER/UPF-000001/upf_engine.py` | 2 | `.github/workflows/uprf-gate.yml`, `Makefile` |
 | `00-MASTER/URRC-000001/urrc_engine.py` | 3 | `.github/workflows/urrc-gate.yml`, `.kiro/hooks/urrc-000001.json`, `Makefile` |
-| `verify.sh` | 8 | `.github/workflows/aee-gate.yml`, `.github/workflows/corpus-currency-gate.yml`, `.github/workflows/ec1-ci.yml`, `.github/workflows/uaep-gate.yml`, `.github/workflows/uaie-gate.yml`, `.github/workflows/uccep-gate.yml`, `.github/workflows/ucef-gate.yml`, `Makefile` |
+| `verify.sh` | 9 | `.github/workflows/aee-gate.yml`, `.github/workflows/corpus-currency-gate.yml`, `.github/workflows/ec1-ci.yml`, `.github/workflows/uaep-gate.yml`, `.github/workflows/uaie-gate.yml`, `.github/workflows/uccep-gate.yml`, `.github/workflows/ucef-gate.yml`, `.github/workflows/ufc-gate.yml`, `Makefile` |
 
 
 ---
