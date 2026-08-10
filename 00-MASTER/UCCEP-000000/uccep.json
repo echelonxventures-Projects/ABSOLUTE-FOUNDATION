@@ -2,13 +2,11 @@
   "advisory_failures": [
     "CK-HEALTH"
   ],
-  "blocking_failures": [
-    "CK-ACEE"
-  ],
+  "blocking_failures": [],
   "blocking_not_executed": [],
   "blocking_out_of_tier": [],
   "blocking_unavailable": [],
-  "certification": "NOT-CERTIFIED",
+  "certification": "CERTIFIED-PROVISIONAL",
   "certification_ceiling": [
     "`UCCEP-F-004` — Constitutional finality is reserved to an out-of-corpus authority, so every in-corpus determination is capped at provisional acceptance"
   ],
@@ -765,15 +763,15 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 1,
+      "exit_code": 0,
       "governed_by_finding": null,
       "id": "CK-ACEE",
       "in_scope": true,
       "name": "Autonomous constitutional engineering executable: engineering goals are discovered from a located manifest pattern rather than enumerated, the constitutional lifecycle is CONSUMED from its located owner rather than re-derived, every goal traverses that lifecycle to a deterministic plan whose every step binds a located owner and requires no new engineering infrastructure, every constitutional completion invariant is measured against a located owner and anchor, and every disposition resolves to a value the repository already legislates with CREATE reached only where no canonical owner exists",
       "owner": "00-MASTER/ACEE-000001/acee_engine.py",
-      "reason": "gate CLOSED",
+      "reason": "",
       "tier": "boot",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "write_scope": "read-only"
     },
     {
@@ -792,10 +790,8 @@
       "write_scope": "read-only"
     }
   ],
-  "gate_blocking": [
-    "CK-ACEE"
-  ],
-  "gate_exit": 1,
+  "gate_blocking": [],
+  "gate_exit": 0,
   "gates": [
     {
       "advisory_failed": [],
@@ -1296,16 +1292,14 @@
         "CK-ACEE",
         "CK-ACEE-SELF"
       ],
-      "failed": [
-        "CK-ACEE"
-      ],
+      "failed": [],
       "id": "G-26",
       "name": "Autonomous Constitutional Engineering Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/ACEE-000001 (00-CMG/CMG-000001 Art LXXVII.2(b) disposition — EXTEND of the already-located engineering plane; nothing here is created. The single deterministic lifecycle every capability follows is owned by 00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md and was made discoverable, ordered and executable by 00-MASTER/UCL-000001, whose stage graph this programme CONSUMES rather than re-derives — a re-derivation would be a second lifecycle, which CMG-000001 Art LXXVI.6 forbids. The closed repository-directed loop is owned by 00-MASTER/UCOS-AEE-001 and is neither duplicated nor re-driven: this programme invokes no engine and re-runs no owner. Engineering governance is owned by 00-MASTER/UCOS-EG-001, the disposition vocabulary by 00-MASTER/UCOS-AEE-001/aee-declaration.json and 00-MASTER/UCDA-000001/ucda-decisions.json, evolution by 00-MASTER/UEI-000001 and 00-MASTER/UCEF-000001, recovery by 00-MASTER/UER-000001, reuse measurement by 00-MASTER/URRC-000001, certification by 00-MASTER/UCCEP-000000, fixed-point closure by 00-MASTER/UCOS-RFP-001, identity by 00-BOOK/MASTER-BOOK/UMB-003-IDENTITY-ARCHITECTURE.md, the registry by 00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md, knowledge by 00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md and lineage by 00-BOOK/MASTER-BOOK/UMB-010-LINEAGE-ARCHITECTURE.md — none of which is created, moved, split or restated here. Those owners are CROSSWALKED and never merged. The gate proves that GOAL-DIRECTED engineering is autonomous: that engineering goals and constitutional completion invariants are DISCOVERED from located manifest patterns and never enumerated in code or in the declaration, so admitting a further goal or invariant is an append to data; that the constitutional lifecycle is consumed from a single located owner, no stage being originated here; that every discovered goal traverses that lifecycle to a plan which is complete, every step binding a located canonical owner, and deterministic, the plan identity being a pure function of the goal text and the consumed stage graph; that no plan step would require new engineering infrastructure, which is the measured form of the claim that future engineering is reduced to domain work and governed evolution; that every constitutional completion invariant is measured against a located owner whose cited anchor is actually present and whose counter resides in another owner's committed artifact, so an invariant cannot be reported satisfied by this programme's own output; that every disposition is DERIVED from measurement and resolves to a value the repository already legislates, CREATE being reachable only where Repository Truth proves no canonical owner exists; and that no privileged path exists, this engine appearing in the goal plane as a subject measured by the same obligations, disposed by the same rules and planned over the same lifecycle as any other subject, with no executable literal naming its own home. It confers nothing and creates nothing: CK-ACEE-SELF fails closed if this programme claims any located engineering authority, if any capability is dispositioned CREATE, if any discovered value could steer behaviour from inside the engine, if it exempts itself, or if it reads any register it wrote as a metadata source. Every standing divergence is bounded exactly, disclosed and REFERRED to its owner under CEP-002 Art 23.2 rather than repaired. The located records read remain immutable by mechanical proof: write set ∩ located record set = ∅.",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     }
   ],
   "independent_view": {
@@ -1313,16 +1307,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -1463,12 +1453,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -1581,12 +1569,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -1600,16 +1586,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -1756,12 +1738,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -1880,12 +1860,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -1898,16 +1876,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -2048,12 +2022,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -2172,12 +2144,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -2189,16 +2159,12 @@
     },
     "00-BOOK/DATA": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -2333,12 +2299,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -2445,12 +2409,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -2462,16 +2424,12 @@
     },
     "00-BOOK/tools": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -2564,12 +2522,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -2628,12 +2584,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -2657,16 +2611,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -2813,12 +2763,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -2943,12 +2891,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -2960,16 +2906,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -3104,12 +3046,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -3216,12 +3156,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -3236,16 +3174,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -3392,12 +3326,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -3516,12 +3448,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -3533,16 +3463,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -3689,12 +3615,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -3813,12 +3737,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -3828,16 +3750,12 @@
     },
     "00-CEP/CEP-005": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -3948,12 +3866,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -4036,12 +3952,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -4061,16 +3975,12 @@
     },
     "00-CEP/CEP-008": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -4211,12 +4121,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -4323,12 +4231,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -4343,16 +4249,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -4499,12 +4401,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -4617,12 +4517,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -4635,16 +4533,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -4791,12 +4685,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -4915,12 +4807,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -4933,16 +4823,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -5089,12 +4975,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -5213,12 +5097,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -5233,16 +5115,12 @@
     },
     "00-CEP/CEP-010": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -5365,12 +5243,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -5465,12 +5341,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -5491,16 +5365,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -5647,12 +5517,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -5771,12 +5639,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -5790,16 +5656,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -5934,12 +5796,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -6058,12 +5918,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -6075,16 +5933,12 @@
     },
     "00-CMG/CMG-000001 · tools": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -6201,12 +6055,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -6289,12 +6141,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -6316,16 +6166,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -6472,12 +6318,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -6596,12 +6440,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -6618,16 +6460,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -6768,12 +6606,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -6892,12 +6728,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -6909,16 +6743,12 @@
     },
     "00-CMG/CMG-000007": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -7041,12 +6871,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -7141,12 +6969,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -7167,16 +6993,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -7323,12 +7145,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -7447,12 +7267,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -7466,16 +7284,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -7616,12 +7430,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -7734,12 +7546,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -8333,16 +8143,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -8489,12 +8295,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -8619,12 +8423,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -8637,16 +8439,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -8793,12 +8591,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -8923,12 +8719,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -8941,16 +8735,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -9097,12 +8887,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -9221,12 +9009,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -9243,16 +9029,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -9399,12 +9181,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -9523,12 +9303,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -9544,16 +9322,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -9700,12 +9474,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -9824,12 +9596,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -9845,16 +9615,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -10001,12 +9767,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -10131,12 +9895,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -10148,16 +9910,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -10298,12 +10056,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -10410,12 +10166,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -10427,16 +10181,12 @@
     },
     "00-MASTER/MCP-005-MASTER-DASHBOARD.md": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -10589,12 +10339,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -10713,12 +10461,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -10730,16 +10476,12 @@
     },
     "00-MASTER/MCP-006-MASTER-TRACEABILITY.md": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -10886,12 +10628,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -11010,12 +10750,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -11028,16 +10766,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -11184,12 +10918,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -11314,12 +11046,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -11332,16 +11062,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -11488,12 +11214,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -11618,12 +11342,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -11636,16 +11358,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -11768,12 +11486,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -11868,12 +11584,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -11896,16 +11610,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -12052,12 +11762,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -12176,12 +11884,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -12194,16 +11900,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -12350,12 +12052,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -12474,12 +12174,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -12490,16 +12188,12 @@
     },
     "00-MASTER/UCCEP-000000": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -12610,12 +12304,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -12680,12 +12372,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -12710,16 +12400,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -12860,12 +12546,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -12978,12 +12662,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -13000,16 +12682,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -13156,12 +12834,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -13280,12 +12956,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -13302,16 +12976,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -13458,12 +13128,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -13582,12 +13250,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -14121,16 +13787,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -14277,12 +13939,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -14401,12 +14061,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -14999,16 +14657,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -15155,12 +14809,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -15279,12 +14931,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -15299,16 +14949,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -15443,12 +15089,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -15561,12 +15205,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -15580,16 +15222,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -15724,12 +15362,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -15842,12 +15478,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -15861,16 +15495,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -15999,12 +15629,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -16111,12 +15739,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -16132,16 +15758,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -16276,12 +15898,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -16394,12 +16014,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -16413,16 +16031,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -16569,12 +16183,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -16699,12 +16311,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -16717,16 +16327,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -16873,12 +16479,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -17003,12 +16607,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -17021,16 +16623,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -17177,12 +16775,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -17307,12 +16903,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -17324,16 +16918,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -17480,12 +17070,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -17610,12 +17198,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -17627,16 +17213,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -17777,12 +17359,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -17901,12 +17481,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -17919,16 +17497,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -18075,12 +17649,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -18205,12 +17777,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -18223,16 +17793,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -18379,12 +17945,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -18509,12 +18073,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -18527,16 +18089,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -18683,12 +18241,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -18813,12 +18369,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -18831,16 +18385,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -18987,12 +18537,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -19117,12 +18665,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -19135,16 +18681,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -19291,12 +18833,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -19421,12 +18961,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -19439,16 +18977,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -19595,12 +19129,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -19725,12 +19257,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -19743,16 +19273,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -19893,12 +19419,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -20017,12 +19541,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -20327,16 +19849,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -20483,12 +20001,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -20607,12 +20123,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -20624,16 +20138,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -20780,12 +20290,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -20904,12 +20412,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -20921,16 +20427,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -21077,12 +20579,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -21201,12 +20701,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -21222,16 +20720,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -21378,12 +20872,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -21502,12 +20994,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -21521,16 +21011,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -21677,12 +21163,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -21807,12 +21291,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -21825,16 +21307,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -21981,12 +21459,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -22105,12 +21581,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -22120,16 +21594,12 @@
     },
     "engine/certification": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -22270,12 +21740,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -22388,12 +21856,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -22406,16 +21872,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -22562,12 +22024,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -22686,12 +22146,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -22707,16 +22165,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -22869,12 +22323,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -22993,12 +22445,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -23011,16 +22461,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -23173,12 +22619,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -23297,12 +22741,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -23315,16 +22757,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -23459,12 +22897,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -23571,12 +23007,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -23589,16 +23023,12 @@
     },
     "engine/discovery (UCOS-EPIC-003)": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -23703,12 +23133,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -23761,12 +23189,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -23791,16 +23217,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -23953,12 +23375,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -24077,12 +23497,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -24093,16 +23511,12 @@
     },
     "engine/graph": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -24249,12 +23663,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -24361,12 +23773,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -24378,16 +23788,12 @@
     },
     "engine/graph (UCOS-EPIC-002)": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -24510,12 +23916,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -24592,12 +23996,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -24619,16 +24021,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -24775,12 +24173,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -24899,12 +24295,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -24920,16 +24314,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -25076,12 +24466,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -25200,12 +24588,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -25219,16 +24605,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -25375,12 +24757,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -25499,12 +24879,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -25516,16 +24894,12 @@
     },
     "engine/universal_certification": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -25666,12 +25040,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -25784,12 +25156,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -25802,16 +25172,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -25958,12 +25324,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -26082,12 +25446,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -26097,16 +25459,12 @@
     },
     "intelligence/rie": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -26247,12 +25605,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -26353,12 +25709,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -26372,16 +25726,12 @@
     },
     "platform/measurement": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -26534,12 +25884,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -26658,12 +26006,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -26675,16 +26021,12 @@
     },
     "platform/measurement (UCOS-UMA-001)": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -26795,12 +26137,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -26865,12 +26205,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -26893,16 +26231,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -27049,12 +26383,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -27173,12 +26505,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -27190,16 +26520,12 @@
       "advisory_failures": [
         "CK-HEALTH"
       ],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -27346,12 +26672,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -27470,12 +26794,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -27485,16 +26807,12 @@
     },
     "verify.sh": {
       "advisory_failures": [],
-      "blocking_failures": [
-        "CK-ACEE"
-      ],
+      "blocking_failures": [],
       "blocking_not_executed": [],
       "blocking_out_of_tier": [],
       "blocking_unavailable": [],
-      "gate_blocking": [
-        "CK-ACEE"
-      ],
-      "gate_exit": 1,
+      "gate_blocking": [],
+      "gate_exit": 0,
       "gates": [
         {
           "failed": [],
@@ -27605,12 +26923,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "G-26",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "programs": [
@@ -27699,12 +27015,10 @@
           "verdict": "PASS"
         },
         {
-          "failed": [
-            "CK-ACEE"
-          ],
+          "failed": [],
           "id": "PROGRAM-000021",
           "not_executed": [],
-          "verdict": "FAIL"
+          "verdict": "PASS"
         }
       ],
       "struck": [
@@ -28325,23 +27639,21 @@
         "CK-ACEE",
         "CK-ACEE-SELF"
       ],
-      "failed": [
-        "CK-ACEE"
-      ],
+      "failed": [],
       "id": "PROGRAM-000021",
       "name": "Autonomous Constitutional Engineering",
       "not_executed": [],
       "out_of_tier": [],
       "output": "00-AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-DASHBOARD.md",
       "unproven": [],
-      "verdict": "FAIL"
+      "verdict": "PASS"
     }
   ],
   "repository": {
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "d006615fbf58e34ae67a3fe1e52a7cf32388a6f2fe474a55e3dbf5a065e63667",
+  "seal_sha256": "96e5c7dd3c986e98f8cf1bbe836bc041f9b96ca7faba37d0b31f3a90a887111c",
   "tier": "full",
   "unavailable": [],
   "unproven": []
