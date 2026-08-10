@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-08-10T03:28:41+00:00 by ukbx portal. 1231 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-08-10T04:23:21+00:00 by ukbx portal. 1232 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1235,3 +1235,4 @@
 | [UCOS-CON-000074](UCOS-CON-000074.md) | UCOS-ACC-001 — Absolute Constitutional Convergence Determina | VOL-002 | ACTIVE |
 | [UCOS-CON-000075](UCOS-CON-000075.md) | UCOS-ACC-002 — Universal Constitutional Evolution Response | VOL-002 | ACTIVE |
 | [UCOS-ENG-000022](UCOS-ENG-000022.md) | Reference Frames | VOL-003 | ACTIVE |
+| [UCOS-DET-000001](UCOS-DET-000001.md) | P0-REMEDIATION-001 — Final Certification Determination | VOL-020 | ACTIVE |

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T03:17:01+00:00",
+  "generated_at": "2026-08-10T04:23:21+00:00",
   "count": 25,
   "volumes": [
     {
@@ -249,9 +249,9 @@
       "description": "Program control tower and external-execution support.",
       "category": "CTL",
       "status": "ACTIVE",
-      "artifact_count": 67,
+      "artifact_count": 68,
       "page_range_start": 4183,
-      "page_range_end": 9794,
+      "page_range_end": 9822,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-020"
     },
     {

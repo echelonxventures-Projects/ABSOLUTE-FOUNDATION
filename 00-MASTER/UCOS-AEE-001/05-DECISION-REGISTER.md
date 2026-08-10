@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
-| DETERMINATION | **CONVERGED-PROVISIONAL** |
-| SEAL | `8ff810a249eb199e3f6cb93a0fe20fcb` |
+| DETERMINATION | **NOT-CONVERGED** |
+| SEAL | `6772107f3817529692f1e73b4b656baf` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Every finding receives a decision from the declared rules, with the located evidence that justifies it. A decision whose evidence obligation is unmet is withheld rather than asserted.
@@ -31,6 +31,62 @@
 
 ## Adjudication
 
+### `OBS-AGGREGATE-BLOCKING` — No blocking constitutional check failed
+
+| Field | Value |
+|---|---|
+| DECISION | **IMPLEMENT** |
+| CLASS | Defect correction |
+| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
+| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
+| GOVERNING FINDING | — |
+| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
+| MEASURED | `["CK-ACEE", "CK-UCL"]` |
+
+A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
+
+### `OBS-AGGREGATE-GATE-EXIT` — The aggregate constitutional gate exits clean
+
+| Field | Value |
+|---|---|
+| DECISION | **IMPLEMENT** |
+| CLASS | Defect correction |
+| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
+| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
+| GOVERNING FINDING | — |
+| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
+| MEASURED | `1` |
+
+A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
+
+### `OBS-AGGREGATE-GATES-PASS` — Every constitutional gate reports a passing verdict
+
+| Field | Value |
+|---|---|
+| DECISION | **IMPLEMENT** |
+| CLASS | Defect correction |
+| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
+| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
+| GOVERNING FINDING | — |
+| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
+| MEASURED | `["G-25='FAIL'", "G-26='FAIL'"]` |
+
+A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
+
+### `OBS-AGGREGATE-PROGRAMMES-PASS` — Every delegated programme reports a passing verdict
+
+| Field | Value |
+|---|---|
+| DECISION | **IMPLEMENT** |
+| CLASS | Defect correction |
+| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
+| LOCATED OWNER | `00-MASTER/UCCEP-000000/uccep_engine.py` |
+| GOVERNING FINDING | — |
+| EVIDENCE | `00-MASTER/UCCEP-000000/uccep.json` |
+| MEASURED | `["PROGRAM-000020='FAIL'", "PROGRAM-000021='FAIL'"]` |
+
+A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
+
 ### `OBS-AGGREGATE-CEILING` — No standing finding bounds the attainable certification
 
 | Field | Value |
@@ -44,4 +100,18 @@
 | MEASURED | `["`UCCEP-F-004` — Constitutional finality is reserved to an ou…"]` |
 
 The governing finding records that no located authority is competent to close the subject. An engineering act cannot discharge a vacancy of authority, so the finding leaves engineering scope and stands as a disclosed ceiling.
+
+### `OBS-BLUEPRINT-GATE` — The architectural blueprint gate is open
+
+| Field | Value |
+|---|---|
+| DECISION | **IMPLEMENT** |
+| CLASS | Defect correction |
+| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
+| LOCATED OWNER | `00-MASTER/UCOS-RIB-001/rib_engine.py` |
+| GOVERNING FINDING | — |
+| EVIDENCE | `00-MASTER/UCOS-RIB-001/rib.json` |
+| MEASURED | `"CLOSED"` |
+
+A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
 

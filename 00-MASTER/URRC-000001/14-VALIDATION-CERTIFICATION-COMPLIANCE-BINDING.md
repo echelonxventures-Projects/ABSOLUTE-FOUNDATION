@@ -63,36 +63,38 @@ Validation, certification and compliance owners plus certification-scope reconci
 **`DV-04`** — Registration census against the certified scope.
 
 - **Primitive** — `cross_count_delta`
-- **Result** — 1231 vs 1231 · delta 0
+- **Result** — 1232 vs 1232 · delta 0
 - **Substrate evidence** — `S-01`, `S-04`
 
 | Key | Value |
 |---|---|
-| `S-01` count | 1231 |
-| `S-04` scope.artifacts | 1231 |
+| `S-01` count | 1232 |
+| `S-04` scope.artifacts | 1232 |
 | delta | 0 |
 
 **`DV-32`** — Computed gate verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 2 distinct value(s)
+- **Result** — 3 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 25 |
+| `PASS` | 23 |
+| `FAIL` | 2 |
 | `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 2 distinct value(s)
+- **Result** — 3 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 17 |
+| `PASS` | 15 |
 | `PASS-WITH-ADVISORY` | 4 |
+| `FAIL` | 2 |
 
 **`DV-34`** — Findings composing the certification ceiling.
 

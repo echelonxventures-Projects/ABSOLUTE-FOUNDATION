@@ -96,7 +96,7 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 1130 |
+| `ACTIVE` | 1131 |
 | `COMPLETE` | 43 |
 | `FROZEN` | 27 |
 | `UNDER_REVIEW` | 15 |
@@ -111,7 +111,7 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 
 | Key | Value |
 |---|---|
-| `ACTIVE` | 1130 |
+| `ACTIVE` | 1131 |
 | `COMPLETE` | 43 |
 | `UNDER_REVIEW` | 15 |
 | `FINAL` | 9 |
@@ -126,12 +126,12 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-16`** — Live dependency on superseded truth: an edge whose target is superseded and whose source is not.
 
 - **Primitive** — `edge_status_join`
-- **Result** — 0 live dependency/dependencies on a superseded target (over 12895 edge(s); 0 endpoint(s) not registered)
+- **Result** — 0 live dependency/dependencies on a superseded target (over 12897 edge(s); 0 endpoint(s) not registered)
 - **Substrate evidence** — `S-01`, `S-02`
 
 | Key | Value |
 |---|---|
-| edges examined | 12895 |
+| edges examined | 12897 |
 | endpoints not registered | 0 |
 | live dependencies on superseded targets | 0 |
 
@@ -145,24 +145,26 @@ Declared conflicts, status-vocabulary conflict, live dependency on superseded tr
 **`DV-32`** — Computed gate verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 2 distinct value(s)
+- **Result** — 3 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 25 |
+| `PASS` | 23 |
+| `FAIL` | 2 |
 | `PASS-WITH-ADVISORY` | 1 |
 
 **`DV-33`** — Computed programme verdicts.
 
 - **Primitive** — `field_histogram`
-- **Result** — 2 distinct value(s)
+- **Result** — 3 distinct value(s)
 - **Substrate evidence** — `S-08`
 
 | Key | Value |
 |---|---|
-| `PASS` | 17 |
+| `PASS` | 15 |
 | `PASS-WITH-ADVISORY` | 4 |
+| `FAIL` | 2 |
 
 **`DV-23`** — Meta-constitutional gap disposition distribution.
 

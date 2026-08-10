@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
-| DETERMINATION | **CONVERGED-PROVISIONAL** |
-| SEAL | `8ff810a249eb199e3f6cb93a0fe20fcb` |
+| DETERMINATION | **NOT-CONVERGED** |
+| SEAL | `6772107f3817529692f1e73b4b656baf` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Every actuator is a located owner's own entry point, invoked so that owner regenerates its own determination. This programme authored none of them and writes none of their homes.

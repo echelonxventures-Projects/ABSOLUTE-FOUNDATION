@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1231
+**Total artifacts:** 1232
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1239,5 +1239,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1229 | `UCOS-CON-000074` | UCOS-ACC-001 — Absolute Constitutional Convergence Determ… | — | 002 | UPN-000009795–UPN-000009803 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCOS-ACC-001-ABSOLUTE-CONSTITUTIONAL-CONVERGENCE-DETERMINATION.md) |
 | 1230 | `UCOS-CON-000075` | UCOS-ACC-002 — Universal Constitutional Evolution Response | — | 002 | UPN-000009804–UPN-000009810 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../UCOS-ACC-002-UNIVERSAL-CONSTITUTIONAL-EVOLUTION-RESPONSE.md) |
 | 1231 | `UCOS-ENG-000022` | Reference Frames | — | 003 | UPN-000009811–UPN-000009815 | ACTIVE | `UCOS-ENG-000003` | 0 | [↗](../../engine/context/catalog/reference-frames.json) |
+| 1232 | `UCOS-DET-000001` | P0-REMEDIATION-001 — Final Certification Determination | — | 020 | UPN-000009816–UPN-000009822 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../P0-REMEDIATION-001-DETERMINATION.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

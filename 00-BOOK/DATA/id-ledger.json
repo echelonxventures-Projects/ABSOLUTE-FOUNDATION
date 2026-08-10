@@ -8834,9 +8834,16 @@
       "page_start": 9811,
       "page_count": 5,
       "first_seen": "2026-08-09T19:01:22+00:00"
+    },
+    "P0-REMEDIATION-001-DETERMINATION.md": {
+      "universal_id": "UCOS-DET-000001",
+      "category": "DET",
+      "page_start": 9816,
+      "page_count": 7,
+      "first_seen": "2026-08-10T04:23:20+00:00"
     }
   },
-  "page_cursor": 9815,
+  "page_cursor": 9822,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8946,7 +8953,8 @@
     "R1REPO": 1,
     "RTBD00": 1,
     "W34CUN": 1,
-    "STAGE0": 1
+    "STAGE0": 1,
+    "DET": 1
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -24684,6 +24692,17 @@
         "status": "ACTIVE",
         "path": "engine/context/catalog/reference-frames.json",
         "name": "Reference Frames"
+      }
+    ],
+    "UCOS-DET-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-10T04:23:20+00:00",
+        "content_hash": "820fd0a86f6456cdd4a3f2cda2e858feaf1727a348cd821eeb2b3d64a43e6c14",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "P0-REMEDIATION-001-DETERMINATION.md",
+        "name": "P0-REMEDIATION-001 — Final Certification Determination"
       }
     ]
   }

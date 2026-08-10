@@ -87,19 +87,46 @@
     }
   },
   "convergence": {
-    "determination": "CONVERGED-PROVISIONAL",
-    "iteration_total": 2,
-    "stable_iterations": 2,
+    "determination": "NOT-CONVERGED",
+    "iteration_total": 4,
+    "stable_iterations": 4,
     "vector_digests": [
-      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b",
-      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b"
+      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
+      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
+      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582",
+      "141b446a1a33d7cedb82c23db02dbf172fa477c7177fd8bbc125bb38158b2582"
     ]
   },
   "decision": {
+    "OBS-AGGREGATE-BLOCKING": {
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "rule": "CR-BLOCKING-REGRESSION"
+    },
     "OBS-AGGREGATE-CEILING": {
       "class": "Constitutional amendment",
       "decision": "ESCALATE",
       "rule": "CR-ESCALATED-CEILING"
+    },
+    "OBS-AGGREGATE-GATE-EXIT": {
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "rule": "CR-BLOCKING-REGRESSION"
+    },
+    "OBS-AGGREGATE-GATES-PASS": {
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "rule": "CR-BLOCKING-REGRESSION"
+    },
+    "OBS-AGGREGATE-PROGRAMMES-PASS": {
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "rule": "CR-BLOCKING-REGRESSION"
+    },
+    "OBS-BLUEPRINT-GATE": {
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "rule": "CR-BLOCKING-REGRESSION"
     }
   },
   "dimensions": [
@@ -334,8 +361,11 @@
   },
   "observation": {
     "OBS-AGGREGATE-BLOCKING": {
-      "observed": [],
-      "verdict": "SATISFIED"
+      "observed": [
+        "CK-ACEE",
+        "CK-UCL"
+      ],
+      "verdict": "VIOLATED"
     },
     "OBS-AGGREGATE-CEILING": {
       "observed": [
@@ -344,16 +374,22 @@
       "verdict": "VIOLATED"
     },
     "OBS-AGGREGATE-GATE-EXIT": {
-      "observed": 0,
-      "verdict": "SATISFIED"
+      "observed": 1,
+      "verdict": "VIOLATED"
     },
     "OBS-AGGREGATE-GATES-PASS": {
-      "observed": 26,
-      "verdict": "SATISFIED"
+      "observed": [
+        "G-25='FAIL'",
+        "G-26='FAIL'"
+      ],
+      "verdict": "VIOLATED"
     },
     "OBS-AGGREGATE-PROGRAMMES-PASS": {
-      "observed": 21,
-      "verdict": "SATISFIED"
+      "observed": [
+        "PROGRAM-000020='FAIL'",
+        "PROGRAM-000021='FAIL'"
+      ],
+      "verdict": "VIOLATED"
     },
     "OBS-AGGREGATE-UNPROVEN": {
       "observed": [],
@@ -364,8 +400,8 @@
       "verdict": "SATISFIED"
     },
     "OBS-BLUEPRINT-GATE": {
-      "observed": "OPEN",
-      "verdict": "SATISFIED"
+      "observed": "CLOSED",
+      "verdict": "VIOLATED"
     },
     "OBS-CORPUS-CURRENCY": {
       "observed": "CORPUS CURRENT",

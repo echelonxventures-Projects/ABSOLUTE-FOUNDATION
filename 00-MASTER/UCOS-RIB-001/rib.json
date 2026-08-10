@@ -1,5 +1,24 @@
 {
-  "compliance": [],
+  "compliance": [
+    {
+      "finding": "dirty_entries_outside_generated=104",
+      "gate": "GATE-12",
+      "id": "CMP-CLEAN",
+      "rank": 1,
+      "remediation": "commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately",
+      "requirement": "the repository must remain clean, deterministic, buildable and reproducible",
+      "severity": "CRITICAL"
+    },
+    {
+      "finding": "validations_failed=1",
+      "gate": "GATE-04",
+      "id": "CMP-VALIDATE",
+      "rank": 2,
+      "remediation": "discharge the named validation obligation",
+      "requirement": "validation must pass",
+      "severity": "HIGH"
+    }
+  ],
   "cycle_classes": [
     {
       "benign": true,
@@ -16,7 +35,7 @@
       "rule": "cross_unit"
     }
   ],
-  "determination": "BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED",
+  "determination": "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP",
   "discovery": [
     {
       "class": "IMPLEMENTATION",
@@ -1392,8 +1411,8 @@
       "subject": "operational programmes whose engine no declared entry point names"
     }
   ],
-  "gate": "OPEN",
-  "gate_exit": 0,
+  "gate": "CLOSED",
+  "gate_exit": 1,
   "gates": [
     {
       "blocking": true,
@@ -1431,13 +1450,15 @@
     {
       "blocking": true,
       "criterion": "every validation obligation met",
-      "failures": [],
+      "failures": [
+        "validations_failed=1"
+      ],
       "id": "GATE-04",
       "metrics": [
         "validations_failed"
       ],
       "name": "Repository Validation",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "blocking": true,
@@ -1522,13 +1543,15 @@
     {
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
-      "failures": [],
+      "failures": [
+        "dirty_entries_outside_generated=104"
+      ],
       "id": "GATE-12",
       "metrics": [
         "dirty_entries_outside_generated"
       ],
       "name": "Repository Clean",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     }
   ],
   "matrices": [
@@ -1938,7 +1961,10 @@
     "advisory_duplicate_signals": 24,
     "architectural_cycles": 0,
     "benign_cycles": 4,
-    "blocking_failed": [],
+    "blocking_failed": [
+      "GATE-04",
+      "GATE-12"
+    ],
     "catalogue_records": 119,
     "certification_domains_failed": 0,
     "certification_verdict_absent": 0,
@@ -1952,12 +1978,12 @@
     },
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
-    "compliance_findings": 0,
+    "compliance_findings": 2,
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 0,
-    "dirty_entries_outside_generated": 0,
+    "dirty_entries": 104,
+    "dirty_entries_outside_generated": 104,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 37,
@@ -1988,7 +2014,7 @@
     "gap_count:GAP-VERIFICATION": 248,
     "gap_findings": 726,
     "gate_total": 12,
-    "gates_passed": 12,
+    "gates_passed": 10,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -2032,7 +2058,7 @@
     "universes_unresolved": 0,
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
-    "validations_failed": 0,
+    "validations_failed": 1,
     "verifications_failed": 0,
     "wave_total": 5
   },
@@ -3481,27 +3507,27 @@
   ],
   "probes": [
     {
-      "headline": "0 of 1231 records carry the field",
+      "headline": "0 of 1232 records carry the field",
       "id": "PRB-BENEFIT",
       "kind": "substrate_field_absence",
       "present": 0,
-      "probed": 1231,
+      "probed": 1232,
       "purpose": "count the registered artifacts that record a measured benefit"
     },
     {
-      "headline": "0 of 1231 records carry the field",
+      "headline": "0 of 1232 records carry the field",
       "id": "PRB-PHASE",
       "kind": "substrate_field_absence",
       "present": 0,
-      "probed": 1231,
+      "probed": 1232,
       "purpose": "count the registered artifacts that record a ratified phase"
     },
     {
-      "headline": "5 of 12895 records carry the value 'Evolves-From'",
+      "headline": "5 of 12897 records carry the value 'Evolves-From'",
       "id": "PRB-SUPERSEDE",
       "kind": "substrate_field_value_count",
       "present": 5,
-      "probed": 12895,
+      "probed": 12897,
       "purpose": "count the evolution edges that exist, and at which granularity they exist"
     }
   ],
@@ -4099,14 +4125,14 @@
     "conflicts": 0,
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 0,
+    "dirty_entries": 104,
     "interrupted_operations": [],
-    "modified": 0,
-    "tracked_files": 5677,
-    "untracked": 0,
-    "working_tree": "CLEAN"
+    "modified": 102,
+    "tracked_files": 5678,
+    "untracked": 1,
+    "working_tree": "DIRTY"
   },
-  "seal_sha256": "ae77a5d5b920a5da8256ccab4ce07161a54fdd43ba3a83313524aebc82e1f444",
+  "seal_sha256": "c46bee49fc630e99b116fa783a7812eaa4f6f0da4d969f1c3fa0e06ad76316ab",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -4135,7 +4161,7 @@
   ],
   "substrate": [
     {
-      "content_sha256": "8261424727228bc2d0f13795f46c2b46a0d2da77826c573cbfbf5befb3af6e6a",
+      "content_sha256": "eb06c6789e9163b58ca81f06ef0c2c41f0089f66cc869ebc4b9c561a2c10cef5",
       "exists": true,
       "generated": false,
       "id": "SUB-CERT",
@@ -4187,7 +4213,7 @@
       "tracked": false
     },
     {
-      "content_sha256": "3a44edb5ecece26cf3abf4988ae96e5350cf2eaf72643fe29202788a21a57c46",
+      "content_sha256": "2f4763314a07f9e5a4dde218eee41cc021644029f70c99af7cc8443c548c1f01",
       "exists": true,
       "generated": false,
       "id": "SUB-CONTROL",
@@ -4211,7 +4237,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "b7751e8307f53bf9c9ff76fda956e4346081d2c3d57be4e8ce7f6860e07ce1ee",
+      "content_sha256": "ef82897bf90df4b5f8591300c37f86455ad19714b46ac623aff7fa0e659871e0",
       "exists": true,
       "generated": false,
       "id": "SUB-EDGES",
@@ -4228,7 +4254,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the canonical typed graph over registered artifacts",
-      "records": 12895,
+      "records": 12897,
       "required": true,
       "tracked": true
     },
@@ -4283,7 +4309,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "8db963176b37da85199227444bca029f079fcc6a422ebba534cac313d8ec61c2",
+      "content_sha256": "d6103c425dcd738f9fbf67a03fb6b338bc33f1b71276dee8418f93fba9967f38",
       "exists": true,
       "generated": false,
       "id": "SUB-REGISTER",
@@ -4300,7 +4326,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the registration register — every version-controlled corpus artifact with owner, program, category, status, dependencies and traceability",
-      "records": 1231,
+      "records": 1232,
       "required": true,
       "tracked": true
     },
@@ -4467,7 +4493,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "90eb4dd5f16a3b829c569fdf1302780cc6b84bcac016a9b35d8ec21ef555ad85",
+      "content_sha256": "0a7ac5cf5d7be278083498c57fcf0b49657924d054e931205478d8c87a510cf1",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -11010,7 +11036,7 @@
       "canonical_name": "DET",
       "consumer_units": [],
       "consumers": 0,
-      "corpus_artifacts": 9,
+      "corpus_artifacts": 10,
       "corpus_status": "ACTIVE",
       "declared": "DET",
       "degree": 0,
@@ -22138,10 +22164,10 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 0,
+      "measured": 104,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "criterion": "every discovered unit names a programme",

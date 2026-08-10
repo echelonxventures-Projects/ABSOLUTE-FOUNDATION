@@ -3,6 +3,8 @@
     "CK-HEALTH"
   ],
   "blocking_failures": [
+    "CK-ACEE",
+    "CK-REG-DRIFT",
     "CK-UCL"
   ],
   "blocking_not_executed": [],
@@ -270,15 +272,15 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 0,
+      "exit_code": 3,
       "governed_by_finding": null,
       "id": "CK-REG-DRIFT",
       "in_scope": true,
       "name": "Atomic Registration Transaction + registration-drift gate",
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001 §16.3)",
-      "reason": "",
+      "reason": "uncommitted-registration drift — source split from projections",
       "tier": "full",
-      "verdict": "PASS",
+      "verdict": "FAIL",
       "write_scope": "projections"
     },
     {
@@ -765,15 +767,15 @@
       "advisory": false,
       "assertions": [],
       "executed": true,
-      "exit_code": 0,
+      "exit_code": 1,
       "governed_by_finding": null,
       "id": "CK-ACEE",
       "in_scope": true,
       "name": "Autonomous constitutional engineering executable: engineering goals are discovered from a located manifest pattern rather than enumerated, the constitutional lifecycle is CONSUMED from its located owner rather than re-derived, every goal traverses that lifecycle to a deterministic plan whose every step binds a located owner and requires no new engineering infrastructure, every constitutional completion invariant is measured against a located owner and anchor, and every disposition resolves to a value the repository already legislates with CREATE reached only where no canonical owner exists",
       "owner": "00-MASTER/ACEE-000001/acee_engine.py",
-      "reason": "",
+      "reason": "gate CLOSED",
       "tier": "boot",
-      "verdict": "PASS",
+      "verdict": "FAIL",
       "write_scope": "read-only"
     },
     {
@@ -793,6 +795,8 @@
     }
   ],
   "gate_blocking": [
+    "CK-ACEE",
+    "CK-REG-DRIFT",
     "CK-UCL"
   ],
   "gate_exit": 1,
@@ -925,14 +929,16 @@
         "CK-REG-ENFORCE",
         "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "G-07",
       "name": "Registry Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-BOOK/tools/register.sh (REG-AUTO-001)",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1075,14 +1081,16 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "G-15",
       "name": "Repository Fixed-Point Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/UCOS-RFP-001 (RFP-1 / RFP-7)",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1298,14 +1306,16 @@
         "CK-ACEE",
         "CK-ACEE-SELF"
       ],
-      "failed": [],
+      "failed": [
+        "CK-ACEE"
+      ],
       "id": "G-26",
       "name": "Autonomous Constitutional Engineering Gate",
       "not_executed": [],
       "out_of_tier": [],
       "owner": "00-MASTER/ACEE-000001 (00-CMG/CMG-000001 Art LXXVII.2(b) disposition — EXTEND of the already-located engineering plane; nothing here is created. The single deterministic lifecycle every capability follows is owned by 00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md and was made discoverable, ordered and executable by 00-MASTER/UCL-000001, whose stage graph this programme CONSUMES rather than re-derives — a re-derivation would be a second lifecycle, which CMG-000001 Art LXXVI.6 forbids. The closed repository-directed loop is owned by 00-MASTER/UCOS-AEE-001 and is neither duplicated nor re-driven: this programme invokes no engine and re-runs no owner. Engineering governance is owned by 00-MASTER/UCOS-EG-001, the disposition vocabulary by 00-MASTER/UCOS-AEE-001/aee-declaration.json and 00-MASTER/UCDA-000001/ucda-decisions.json, evolution by 00-MASTER/UEI-000001 and 00-MASTER/UCEF-000001, recovery by 00-MASTER/UER-000001, reuse measurement by 00-MASTER/URRC-000001, certification by 00-MASTER/UCCEP-000000, fixed-point closure by 00-MASTER/UCOS-RFP-001, identity by 00-BOOK/MASTER-BOOK/UMB-003-IDENTITY-ARCHITECTURE.md, the registry by 00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md, knowledge by 00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md and lineage by 00-BOOK/MASTER-BOOK/UMB-010-LINEAGE-ARCHITECTURE.md — none of which is created, moved, split or restated here. Those owners are CROSSWALKED and never merged. The gate proves that GOAL-DIRECTED engineering is autonomous: that engineering goals and constitutional completion invariants are DISCOVERED from located manifest patterns and never enumerated in code or in the declaration, so admitting a further goal or invariant is an append to data; that the constitutional lifecycle is consumed from a single located owner, no stage being originated here; that every discovered goal traverses that lifecycle to a plan which is complete, every step binding a located canonical owner, and deterministic, the plan identity being a pure function of the goal text and the consumed stage graph; that no plan step would require new engineering infrastructure, which is the measured form of the claim that future engineering is reduced to domain work and governed evolution; that every constitutional completion invariant is measured against a located owner whose cited anchor is actually present and whose counter resides in another owner's committed artifact, so an invariant cannot be reported satisfied by this programme's own output; that every disposition is DERIVED from measurement and resolves to a value the repository already legislates, CREATE being reachable only where Repository Truth proves no canonical owner exists; and that no privileged path exists, this engine appearing in the goal plane as a subject measured by the same obligations, disposed by the same rules and planned over the same lifecycle as any other subject, with no executable literal naming its own home. It confers nothing and creates nothing: CK-ACEE-SELF fails closed if this programme claims any located engineering authority, if any capability is dispositioned CREATE, if any discovered value could steer behaviour from inside the engine, if it exempts itself, or if it reads any register it wrote as a metadata source. Every standing divergence is bounded exactly, disclosed and REFERRED to its owner under CEP-002 Art 23.2 rather than repaired. The located records read remain immutable by mechanical proof: write set ∩ located record set = ∅.",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     }
   ],
   "programme": {
@@ -1444,14 +1454,16 @@
         "CK-DISCOVERY",
         "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000004",
       "name": "Universal Registry Evolution",
       "not_executed": [],
       "out_of_tier": [],
       "output": "04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1470,14 +1482,16 @@
         "CK-CMG",
         "CK-REG-DRIFT"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000005",
       "name": "Universal Repository Governance",
       "not_executed": [],
       "out_of_tier": [],
       "output": "05-REPOSITORY-GOVERNANCE-CERTIFICATION.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1796,14 +1810,16 @@
         "CK-DETERMINISM-BUILD",
         "CK-VERIFY"
       ],
-      "failed": [],
+      "failed": [
+        "CK-REG-DRIFT"
+      ],
       "id": "PROGRAM-000017",
       "name": "Universal Repository Fixed-Point Closure",
       "not_executed": [],
       "out_of_tier": [],
       "output": "19-REPOSITORY-FIXED-POINT-CLOSURE.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "advisory_failed": [],
@@ -1916,21 +1932,23 @@
         "CK-ACEE",
         "CK-ACEE-SELF"
       ],
-      "failed": [],
+      "failed": [
+        "CK-ACEE"
+      ],
       "id": "PROGRAM-000021",
       "name": "Autonomous Constitutional Engineering",
       "not_executed": [],
       "out_of_tier": [],
       "output": "00-AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-DASHBOARD.md",
       "unproven": [],
-      "verdict": "PASS"
+      "verdict": "FAIL"
     }
   ],
   "repository": {
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "495d5c61e661dc6609e53c97ea4564d225cb442d17bd56c6f237d60018be84c2",
+  "seal_sha256": "2a677bbe7cbbe0a76523f5f40a94ba29faef73c858dcd0f8ee16817a5f9687cd",
   "tier": "full",
   "unavailable": [],
   "unproven": []

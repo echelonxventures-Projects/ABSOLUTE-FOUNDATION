@@ -1,31 +1,31 @@
 {
   "blocking_failures": [],
   "constitutional_traceability": {
-    "artifacts": 1231,
+    "artifacts": 1232,
     "dangling_endpoints": 0,
     "evidence_field_gaps": 0,
     "lineage_cycles": 0,
     "orphans": 0,
-    "relationships": 12895,
+    "relationships": 12897,
     "rooted_and_closed": true,
     "unrooted": 0
   },
   "counts": {
-    "artifacts": 1231,
+    "artifacts": 1232,
     "artifacts_fully_traced": 0,
-    "artifacts_with_any_lane": 1230,
+    "artifacts_with_any_lane": 1231,
     "derivable_not_written": 0,
     "lanes": 13,
     "lanes_with_mechanism": 8,
     "lanes_without_mechanism": 5,
     "obligations": 6,
     "obligations_bound": 6,
-    "relationships": 12895
+    "relationships": 12897
   },
   "derivation": [
     {
-      "already_written": 1230,
-      "artifacts_supported": 1230,
+      "already_written": 1231,
+      "artifacts_supported": 1231,
       "basis": "The located vocabulary declares this type's subject lane to be the architecture lane; the structural edges already exist in the certified corpus but the generator writes no lane entry for them.",
       "cited_edges": [
         "UEDGE-000000002",
@@ -58,9 +58,9 @@
       "artifacts_supported": 38,
       "basis": "Declared subject lane in the located vocabulary.",
       "cited_edges": [
-        "UEDGE-000003527",
         "UEDGE-000003529",
-        "UEDGE-000003533"
+        "UEDGE-000003531",
+        "UEDGE-000003535"
       ],
       "derivable_not_written": 0,
       "id": "UTCE-DR-03",
@@ -73,9 +73,9 @@
       "artifacts_supported": 36,
       "basis": "Declared subject lane in the located vocabulary.",
       "cited_edges": [
-        "UEDGE-000002991",
-        "UEDGE-000003059",
-        "UEDGE-000003129"
+        "UEDGE-000002993",
+        "UEDGE-000003061",
+        "UEDGE-000003131"
       ],
       "derivable_not_written": 0,
       "id": "UTCE-DR-04",
@@ -88,9 +88,9 @@
       "artifacts_supported": 17,
       "basis": "Declared object lane of the located Implements type. The object of a forward Implements edge is its target, and the target is the FROM endpoint of the materialized inverse, so the object lane is measured there. Reading the inverse edge's TO endpoint selected the DECLARER instead of the object — measured 4/36 populated against 17/17 for the object — which counted as headroom a lane entry no located edge supports. Corrected to the endpoint this basis names; the located vocabulary at 00-BOOK/tools/config.py governs the attribution (CMG-000001 XXXIV.5).",
       "cited_edges": [
-        "UEDGE-000002992",
         "UEDGE-000002994",
-        "UEDGE-000003060"
+        "UEDGE-000002996",
+        "UEDGE-000003062"
       ],
       "derivable_not_written": 0,
       "id": "UTCE-DR-05",
@@ -103,9 +103,9 @@
       "artifacts_supported": 24,
       "basis": "Declared subject lane in the located vocabulary.",
       "cited_edges": [
-        "UEDGE-000002671",
-        "UEDGE-000002713",
-        "UEDGE-000002733"
+        "UEDGE-000002673",
+        "UEDGE-000002715",
+        "UEDGE-000002735"
       ],
       "derivable_not_written": 0,
       "id": "UTCE-DR-06",
@@ -118,9 +118,9 @@
       "artifacts_supported": 5,
       "basis": "Declared subject lane in the located vocabulary.",
       "cited_edges": [
-        "UEDGE-000003041",
-        "UEDGE-000003113",
-        "UEDGE-000003179"
+        "UEDGE-000003043",
+        "UEDGE-000003115",
+        "UEDGE-000003181"
       ],
       "derivable_not_written": 0,
       "id": "UTCE-DR-07",
@@ -131,10 +131,10 @@
   ],
   "determination": "CONSTITUTIONAL-TRACEABILITY-CLOSED",
   "engineering_spine": {
-    "artifacts": 1231,
+    "artifacts": 1232,
     "artifacts_fully_traced": 0,
-    "artifacts_incomplete": 1231,
-    "artifacts_with_any_lane": 1230,
+    "artifacts_incomplete": 1232,
+    "artifacts_with_any_lane": 1231,
     "lanes": 13,
     "owner": "platform/measurement · 00-BOOK/tools"
   },
@@ -224,7 +224,7 @@
         "Authorized-By",
         "Traces-To"
       ],
-      "unevidenced": 1150
+      "unevidenced": 1151
     },
     {
       "labels": [
@@ -239,7 +239,7 @@
       ],
       "lane": "architecture",
       "obligation_class": "DISCHARGEABLE",
-      "populated": 1230,
+      "populated": 1231,
       "types": [
         "Parent",
         "Depends-On",
@@ -254,7 +254,7 @@
       "obligation_class": "MECHANISM-ABSENT",
       "populated": 0,
       "types": [],
-      "unevidenced": 1231
+      "unevidenced": 1232
     },
     {
       "labels": [
@@ -267,7 +267,7 @@
       "types": [
         "Implements"
       ],
-      "unevidenced": 1214
+      "unevidenced": 1215
     },
     {
       "labels": [],
@@ -275,7 +275,7 @@
       "obligation_class": "MECHANISM-ABSENT",
       "populated": 0,
       "types": [],
-      "unevidenced": 1231
+      "unevidenced": 1232
     },
     {
       "labels": [
@@ -287,7 +287,7 @@
       "types": [
         "Tests"
       ],
-      "unevidenced": 1231
+      "unevidenced": 1232
     },
     {
       "labels": [],
@@ -295,7 +295,7 @@
       "obligation_class": "MECHANISM-ABSENT",
       "populated": 0,
       "types": [],
-      "unevidenced": 1231
+      "unevidenced": 1232
     },
     {
       "labels": [],
@@ -303,7 +303,7 @@
       "obligation_class": "MECHANISM-ABSENT",
       "populated": 0,
       "types": [],
-      "unevidenced": 1231
+      "unevidenced": 1232
     },
     {
       "labels": [
@@ -315,7 +315,7 @@
       "types": [
         "Secures"
       ],
-      "unevidenced": 1231
+      "unevidenced": 1232
     },
     {
       "labels": [
@@ -327,7 +327,7 @@
       "types": [
         "Certifies"
       ],
-      "unevidenced": 1231
+      "unevidenced": 1232
     },
     {
       "labels": [
@@ -339,7 +339,7 @@
       "types": [
         "Deploys"
       ],
-      "unevidenced": 1231
+      "unevidenced": 1232
     },
     {
       "labels": [
@@ -355,7 +355,7 @@
         "Produces",
         "Publishes"
       ],
-      "unevidenced": 1231
+      "unevidenced": 1232
     },
     {
       "labels": [],
@@ -363,7 +363,7 @@
       "obligation_class": "MECHANISM-ABSENT",
       "populated": 0,
       "types": [],
-      "unevidenced": 1231
+      "unevidenced": 1232
     }
   ],
   "obligation_classes": [
@@ -441,7 +441,7 @@
     "operational_home": "00-MASTER/UCOS-UTCE-001/",
     "version": "1.0"
   },
-  "seal_sha256": "f9a6326299389e449a03a1bd7cd4b8f49df51e2517ee083cb9fba4e41f9fbb50",
+  "seal_sha256": "c159ff07b43acae558af1545e53dfc223faecac952af618b9f1e5827edb2cd28",
   "validations": [
     {
       "blocking": true,
@@ -584,7 +584,7 @@
       "dimension": "ENGINEERING-SPINE-COMPLETE",
       "failure_count": 1,
       "failures": [
-        "1231 of 1231 artifacts do not populate every lane"
+        "1232 of 1232 artifacts do not populate every lane"
       ],
       "id": "UTCE-VAL-14",
       "measured": true,

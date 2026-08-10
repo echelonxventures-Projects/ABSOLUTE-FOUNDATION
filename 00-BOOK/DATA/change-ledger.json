@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-09T19:01:22+00:00",
+  "generated_at": "2026-08-10T04:23:21+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1350,
-    "versioned_artifacts": 1231,
-    "lineage_nodes": 1231,
+    "change_events": 1351,
+    "versioned_artifacts": 1232,
+    "lineage_nodes": 1232,
     "artifacts_with_predecessors": 5,
     "artifacts_with_successors": 5
   },
   "change_event_histogram": {
-    "Created": 1231,
+    "Created": 1232,
     "Modified": 114,
     "Version-Incremented": 5
   },
@@ -8112,6 +8112,12 @@
       "change_id": "UCHG-000001350",
       "at": "2026-08-09T19:01:22+00:00",
       "subject": "UCOS-STAGE0-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001351",
+      "at": "2026-08-10T04:23:20+00:00",
+      "subject": "UCOS-DET-000001",
       "kind": "Created"
     }
   ],
@@ -21611,6 +21617,16 @@
       "subject": "UCOS-STAGE0-000001",
       "kind": "Created",
       "at": "2026-08-09T19:01:22+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001351",
+      "subject": "UCOS-DET-000001",
+      "kind": "Created",
+      "at": "2026-08-10T04:23:20+00:00",
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
@@ -38881,6 +38897,20 @@
           "snapshot_seq": 1
         }
       ]
+    },
+    "UCOS-DET-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "820fd0a86f6456cdd4a3f2cda2e858feaf1727a348cd821eeb2b3d64a43e6c14",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "820fd0a86f6456cdd4a3f2cda2e858feaf1727a348cd821eeb2b3d64a43e6c14",
+          "at": "2026-08-10T04:23:20+00:00",
+          "snapshot_seq": 1
+        }
+      ]
     }
   },
   "lineage": {
@@ -43831,6 +43861,14 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-P0REGI-000001"
+    },
+    "UCOS-DET-000001": {
+      "birth": "2026-08-10T04:23:20+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-DET-000001"
     },
     "UCOS-PRODUC-000001": {
       "birth": "2026-08-06T08:52:24+00:00",

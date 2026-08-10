@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 9815  ·  **Page cursor (next free):** UPN-000009816
+**Pages allocated:** 9822  ·  **Page cursor (next free):** UPN-000009823
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1239,5 +1239,6 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000009795 | UPN-000009803 | 9 | `UCOS-CON-000074` | 002 | UCOS-ACC-001 — Absolute Constitutional Conver… |
 | UPN-000009804 | UPN-000009810 | 7 | `UCOS-CON-000075` | 002 | UCOS-ACC-002 — Universal Constitutional Evolu… |
 | UPN-000009811 | UPN-000009815 | 5 | `UCOS-ENG-000022` | 003 | Reference Frames |
+| UPN-000009816 | UPN-000009822 | 7 | `UCOS-DET-000001` | 020 | P0-REMEDIATION-001 — Final Certification Dete… |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*
