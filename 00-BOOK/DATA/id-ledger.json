@@ -8841,9 +8841,16 @@
       "page_start": 9816,
       "page_count": 7,
       "first_seen": "2026-08-10T04:23:20+00:00"
+    },
+    "P0-ULTIMATE-CLOSURE-CERTIFICATION.md": {
+      "universal_id": "UCOS-DET-000002",
+      "category": "DET",
+      "page_start": 9823,
+      "page_count": 4,
+      "first_seen": "2026-08-10T15:29:21+00:00"
     }
   },
-  "page_cursor": 9822,
+  "page_cursor": 9826,
   "category_seq": {
     "BOOK": 0,
     "REG": 19,
@@ -8954,7 +8961,7 @@
     "RTBD00": 1,
     "W34CUN": 1,
     "STAGE0": 1,
-    "DET": 1
+    "DET": 2
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -24712,6 +24719,17 @@
         "status": "ACTIVE",
         "path": "P0-REMEDIATION-001-DETERMINATION.md",
         "name": "P0-REMEDIATION-001 — Final Certification Determination"
+      }
+    ],
+    "UCOS-DET-000002": [
+      {
+        "seq": 1,
+        "at": "2026-08-10T15:29:21+00:00",
+        "content_hash": "06288de4d91b2f128dec882a0eb66e873893b02f183adb0a9c4e56ba9a5f327a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "P0-ULTIMATE-CLOSURE-CERTIFICATION.md",
+        "name": "P0-ULTIMATE-CLOSURE-CERTIFICATION"
       }
     ]
   }
