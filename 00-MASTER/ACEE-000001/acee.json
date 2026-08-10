@@ -572,7 +572,10 @@
       "role": "the disposition law under which this programme is an EXTEND"
     }
   ],
-  "blocking_failures": [],
+  "blocking_failures": [
+    "ACEE-V-07",
+    "ACEE-V-10"
+  ],
   "bound_hits": [],
   "bounds_slack": [],
   "capabilities": [
@@ -736,12 +739,12 @@
     "graph_cycles": 0,
     "graph_types_empty": 0,
     "identities_on_mutable_input": 0,
-    "invariant_property_failures": 0,
+    "invariant_property_failures": 1,
     "invariants_discovered": 48,
     "invariants_dispositioned_create": 0,
     "invariants_owned_here": 0,
     "invariants_unmeasured": 0,
-    "invariants_unsatisfied": 0,
+    "invariants_unsatisfied": 1,
     "invariants_without_anchor": 0,
     "invariants_without_located_owner": 0,
     "limit_tokens_present": 0,
@@ -782,7 +785,7 @@
   },
   "cycles": [],
   "dependency_relation": "binds",
-  "determination": "AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-ESTABLISHED",
+  "determination": "AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-NOT-ESTABLISHED",
   "disposition_rules": [
     {
       "disposition": "DEC-REUSE",
@@ -1172,8 +1175,8 @@
       "located": true,
       "measure": "invariants_unsatisfied",
       "owner": "00-MASTER/URRC-000001/07-COMPLETENESS-MATRIX.md",
-      "ready": true,
-      "value": 0
+      "ready": false,
+      "value": 1
     },
     {
       "comparator": "==",
@@ -1681,7 +1684,7 @@
       "why_not_repaired": "Adding a stage here would create a second lifecycle, which CMG-000001 Art LXXVI.6 forbids. A missing stage is admitted by appending a node to the located owner's manifest, which that owner's own admission clause provides for."
     }
   ],
-  "gate": "OPEN",
+  "gate": "CLOSED",
   "goal_contract": {
     "actuation_owner": "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
     "invokes_capabilities": false,
@@ -6460,26 +6463,26 @@
       "anchor": "convergence",
       "cko_id": "SRC-INVARIANT::ACEE-I-0130",
       "comparator": "==",
-      "disposition": "DEC-REUSE",
+      "disposition": "DEC-EXTEND",
       "disposition_located": true,
-      "disposition_rationale": "a located owner outside this programme carries the anchor and the measure is met, so Repository Truth already satisfies the invariant and reimplementing it would duplicate a constitutional capability",
-      "disposition_rule": "DR-INVARIANT-REUSE",
+      "disposition_rationale": "an owner is located but the anchor, the measure or the expectation is not yet discharged, so that located owner is extended",
+      "disposition_rule": "DR-INVARIANT-EXTEND",
       "expect": 0,
       "facts": {
         "anchor_present": true,
         "machine_readable": true,
         "measure_declared": true,
         "measure_located": true,
-        "measure_met": true,
-        "measure_value": 0,
+        "measure_met": false,
+        "measure_value": 1,
         "outside_own_home": true,
         "owner_located": true,
-        "properties_unmet": false
+        "properties_unmet": true
       },
       "invariant": "Universal Self Challenge",
       "measure": "unsatisfied_criteria",
       "measure_source": "00-MASTER/UCOS-AEE-001/aee.json",
-      "measure_value": 0,
+      "measure_value": 1,
       "ordinal": 130,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -6491,7 +6494,7 @@
         "PROP-MEASURE-LOCATED": true,
         "PROP-OWNED": true,
         "PROP-READABLE": true,
-        "PROP-SATISFIED": true,
+        "PROP-SATISFIED": false,
         "PROP-TRACEABLE": true
       },
       "provenance": {
@@ -7458,7 +7461,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 2,
+        "measure_value": 4,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7466,7 +7469,7 @@
       "invariant": "Universal Self Assessment",
       "measure": "stable_iterations",
       "measure_source": "00-MASTER/UCOS-AEE-001/aee.json",
-      "measure_value": 2,
+      "measure_value": 4,
       "ordinal": 340,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -8318,7 +8321,7 @@
       "relation": "reenters"
     }
   ],
-  "omega_e05_complete": true,
+  "omega_e05_complete": false,
   "order": [
     "SRC-LIFECYCLE::UCL-S-0010",
     "SRC-LIFECYCLE::UCL-S-0020",
@@ -23163,7 +23166,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "16032b833f3315da40fc556953dddabed66c8ff1609799d319bbcd8c852ada73",
+  "seal_sha256": "5e7685db5cdb1f7035d29db472e4eb1d95d287f6ac3db2c36c72f58ac80f7664",
   "self_evolution": [
     {
       "anchor": "determination",
@@ -24344,8 +24347,8 @@
       "expect": 0,
       "id": "ACEE-V-07",
       "measure": "invariants_unsatisfied",
-      "satisfied": true,
-      "value": 0
+      "satisfied": false,
+      "value": 1
     },
     {
       "blocking": true,
@@ -24377,8 +24380,8 @@
       "expect": 0,
       "id": "ACEE-V-10",
       "measure": "invariant_property_failures",
-      "satisfied": true,
-      "value": 0
+      "satisfied": false,
+      "value": 1
     },
     {
       "blocking": true,
