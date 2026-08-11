@@ -3474,6 +3474,83 @@ SELF_CHECKS: dict[str, Callable[[dict, Substrate | None], list[str]]] = {
 # ----------------------------------------------------------------------------- driver
 
 
+#: UCOS-RC-003 — working-tree measurements are GATE INPUTS, never canonical identity.
+#:
+#: `dirty_entries_outside_generated` and its siblings count uncommitted entries in the tree
+#: that is being measured. Persisting that count into a TRACKED file inside that same tree
+#: is self-referential: this engine necessarily runs BEFORE the commit that carries its
+#: output, so it always records the pre-commit dirt, while a pristine clone of that commit
+#: computes something else. The Phase-9 forensic measured it directly — source `6`, clone
+#: `23`, and after RC-001 removed `excluded_entries` this was the entire remaining
+#: divergence in rib.json across nine fields.
+#:
+#: This is the defect RB-05 already identified and only half-closed. That item removed the
+#: per-path LIST on exactly this reasoning ("Persisting a measurement of the working tree's
+#: own dirtiness inside a TRACKED file is what the repository fixed-point principle
+#: forbids -- running the gate became a mutation that changed the next measurement") and
+#: kept the COUNT, which carries the identical defect at lower resolution.
+#:
+#: Nothing is weakened. The metric is still computed, still evaluated by GATE-12 and
+#: VAL-02, still fail-closed, and still printed in the gate's stdout report where an
+#: operator reads it. Only its serialization into the canonical artifact is withheld — the
+#: verdict remains, so AEE still observes a CLOSED gate over a dirty tree, and the
+#: repository still refuses to certify one.
+_WORKING_TREE_MEASURES: frozenset[str] = frozenset(
+    {
+        "dirty_entries_outside_generated",
+        "dirty_entries",
+        "contamination_entries",
+        "modified",
+        "deleted",
+        "untracked",
+        "untracked_entries",
+        "working_tree",
+    }
+)
+
+
+def canonical_model(model: dict) -> dict:
+    """The model with working-tree measurements withheld from serialization.
+
+    Returns a copy; the in-memory model keeps every value so gate evaluation, the stdout
+    report and the evidence index are unaffected.
+    """
+
+    withheld = "<withheld: working-tree measurement, UCOS-RC-003>"
+
+    def redact_text(text: str) -> str:
+        """Redact `metric=value` renderings, which is how gates and compliance carry it."""
+        for metric in _WORKING_TREE_MEASURES:
+            text = re.sub(rf"\b{re.escape(metric)}=\S+", f"{metric}={withheld}", text)
+        return text
+
+    def strip(node: object) -> object:
+        if isinstance(node, dict):
+            # A validation carries its subject in `metric` and its reading in `measured`,
+            # so the reading is only identifiable through its sibling.
+            measured_is_working_tree = node.get("metric") in _WORKING_TREE_MEASURES
+            out: dict[str, object] = {}
+            for k, v in node.items():
+                if k in _WORKING_TREE_MEASURES and isinstance(v, int | str):
+                    out[k] = withheld
+                elif k == "measured" and measured_is_working_tree:
+                    out[k] = withheld
+                elif isinstance(v, str):
+                    out[k] = redact_text(v)
+                else:
+                    out[k] = strip(v)
+            return out
+        if isinstance(node, list):
+            return [redact_text(v) if isinstance(v, str) else strip(v) for v in node]
+        if isinstance(node, str):
+            return redact_text(node)
+        return node
+
+    stripped = strip(model)
+    assert isinstance(stripped, dict)
+    return stripped
+
+
 def write_outputs(decl: dict, model: dict) -> list[Path]:
     written: list[Path] = []
     for filename, text in sorted(render(decl, model).items()):
@@ -3481,7 +3558,7 @@ def write_outputs(decl: dict, model: dict) -> list[Path]:
         target.write_text(text, encoding="utf-8")
         written.append(target)
     model_path = HERE / MODEL_FILE
-    model_path.write_text(canonical_json(model), encoding="utf-8")
+    model_path.write_text(canonical_json(canonical_model(model)), encoding="utf-8")
     written.append(model_path)
     EVIDENCE_DIR.mkdir(exist_ok=True)
     index_path = EVIDENCE_DIR / EVIDENCE_INDEX

@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (6 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (1 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 296 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -85,9 +85,9 @@
 | Repository anchor | the containing commit — owned by version control, never restated here |
 | Detached | no |
 | Working tree | DIRTY |
-| Dirty entries | 6 |
+| Dirty entries | 1 |
 | Own regenerated artifacts | excluded from the count above — they are the deterministic product of the command being gated |
-| Modified | 6 |
+| Modified | 1 |
 | Deleted | 0 |
 | Untracked | 0 |
 | Merge conflicts | 0 |

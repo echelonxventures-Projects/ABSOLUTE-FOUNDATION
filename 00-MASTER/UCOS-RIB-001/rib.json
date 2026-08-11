@@ -1,7 +1,7 @@
 {
   "compliance": [
     {
-      "finding": "dirty_entries_outside_generated=6",
+      "finding": "dirty_entries_outside_generated=<withheld: working-tree measurement, UCOS-RC-003>",
       "gate": "GATE-12",
       "id": "CMP-CLEAN",
       "rank": 1,
@@ -1562,7 +1562,7 @@
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts, every ignored path resolves to a declared class in the exclusion register, and no tracked path is shadowed by an ignore rule",
       "failures": [
-        "dirty_entries_outside_generated=6"
+        "dirty_entries_outside_generated=<withheld: working-tree measurement, UCOS-RC-003>"
       ],
       "id": "GATE-12",
       "metrics": [
@@ -2000,14 +2000,14 @@
     "closure_gaps": 0,
     "compliance_findings": 2,
     "contamination_available": true,
-    "contamination_entries": 6,
+    "contamination_entries": "<withheld: working-tree measurement, UCOS-RC-003>",
     "contamination_shadowed_members": [],
     "contamination_unclassified_members": [],
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 6,
-    "dirty_entries_outside_generated": 6,
+    "dirty_entries": "<withheld: working-tree measurement, UCOS-RC-003>",
+    "dirty_entries_outside_generated": "<withheld: working-tree measurement, UCOS-RC-003>",
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 38,
@@ -4275,24 +4275,24 @@
     "contamination": {
       "available": true,
       "clean": false,
-      "contamination_entries": 6,
-      "dirty_entries": 6,
+      "contamination_entries": "<withheld: working-tree measurement, UCOS-RC-003>",
+      "dirty_entries": "<withheld: working-tree measurement, UCOS-RC-003>",
       "ignored_unclassified": 0,
       "register_errors": [],
       "shadowed_tracked": 0,
       "shadowed_tracked_paths": [],
       "unclassified_paths": [],
-      "untracked_entries": 0
+      "untracked_entries": "<withheld: working-tree measurement, UCOS-RC-003>"
     },
-    "deleted": 0,
+    "deleted": "<withheld: working-tree measurement, UCOS-RC-003>",
     "detached": false,
-    "dirty_entries": 6,
+    "dirty_entries": "<withheld: working-tree measurement, UCOS-RC-003>",
     "fsck_errors": [],
     "interrupted_operations": [],
-    "modified": 6,
+    "modified": "<withheld: working-tree measurement, UCOS-RC-003>",
     "tracked_files": 5737,
-    "untracked": 0,
-    "working_tree": "DIRTY"
+    "untracked": "<withheld: working-tree measurement, UCOS-RC-003>",
+    "working_tree": "<withheld: working-tree measurement, UCOS-RC-003>"
   },
   "seal_sha256": "8465cb2925acda7988fa410c7dfba69e69bd5eba1badbb068f120353b1f3bdaa",
   "severities": [
@@ -22597,7 +22597,7 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 6,
+      "measured": "<withheld: working-tree measurement, UCOS-RC-003>",
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
       "verdict": "FAIL"

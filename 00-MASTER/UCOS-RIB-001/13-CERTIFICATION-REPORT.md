@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (6 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (1 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 296 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -39,13 +39,13 @@
 | `GATE-09` | Zero Duplicate Capability | YES | no declared duplicate class reports a finding | `duplicate_findings` | **PASS** |
 | `GATE-10` | Zero Circular Dependency | YES | no cycle of a non-benign declared class in any plane | `architectural_cycles` | **PASS** |
 | `GATE-11` | Zero Orphan Capability | YES | no discovered unit is unreachable in every measured plane | `orphan_units` | **PASS** |
-| `GATE-12` | Repository Clean | YES | the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts, every ignored path resolves to a declared class in the exclusion register, and no tracked path is shadowed by an ignore rule | `dirty_entries_outside_generated`, `ignored_unclassified`, `shadowed_tracked_paths_count` | **FAIL** — dirty_entries_outside_generated=6 |
+| `GATE-12` | Repository Clean | YES | the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts, every ignored path resolves to a declared class in the exclusion register, and no tracked path is shadowed by an ignore rule | `dirty_entries_outside_generated`, `ignored_unclassified`, `shadowed_tracked_paths_count` | **FAIL** — dirty_entries_outside_generated=1 |
 
 ## Compliance findings, classified
 
 | Severity | Finding | Requirement | Gate | Remediation |
 |---|---|---|---|---|
-| **CRITICAL** | dirty_entries_outside_generated=6 | the repository must remain clean, deterministic, buildable and reproducible | `GATE-12` | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
+| **CRITICAL** | dirty_entries_outside_generated=1 | the repository must remain clean, deterministic, buildable and reproducible | `GATE-12` | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
 | **HIGH** | validations_failed=1 | validation must pass | `GATE-04` | discharge the named validation obligation |
 
 ## Severity scale
@@ -61,7 +61,7 @@
 
 | Criterion | Value | Verdict |
 |---|---|---|
-| Repository clean | DIRTY — 6 entr(y/ies), excluding this programme's own regenerated artifacts | **FAIL** |
+| Repository clean | DIRTY — 1 entr(y/ies), excluding this programme's own regenerated artifacts | **FAIL** |
 | Verification | 12/12 | PASS |
 | Validation | 11/12 | **FAIL** |
 | Dependency closure | 0 | PASS |
