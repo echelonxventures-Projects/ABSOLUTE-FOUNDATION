@@ -1,55 +1,297 @@
 {
   "authority": "NONE — DERIVED TRUTH. Measurement only.",
-  "phase": 8,
-  "verdict": "NOT PROVEN — MEASUREMENT INTEGRITY COMPROMISED",
-  "rounds_attempted": 3,
-  "rounds": [
+  "baseline_identities": {
+    "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
+    "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
+    "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
+    "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
+    "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
+    "ordering_variance": "d9eecf719bbd5d26937a2d9962be58c989f81af934e80159a94b318f8508d558",
+    "registry_variance": "7999fd8ca4f4f0654e9929ae4af4a562901e708c82f0ee857bf85d23667c2ca9",
+    "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
+  },
+  "chain": [
     {
-      "round": 1,
-      "drift": 111,
-      "cluster": "CLOSED"
+      "actuator": "rib",
+      "argv": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py"
+      ]
     },
     {
-      "round": 2,
-      "drift": 50,
-      "cluster": "CLOSED"
-    },
-    {
-      "round": 3,
-      "drift": 0,
-      "cluster": "CLOSED"
+      "actuator": "aee",
+      "argv": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py",
+        "--tier",
+        "standard"
+      ]
     }
   ],
-  "zero_drift_reached": true,
-  "zero_drift_at_passing_state": false,
-  "prior_result": {
-    "commit": "e7532153",
-    "consecutive_zero_drift_rounds": 3,
-    "cluster": "PASSING (UCCEP CERTIFIED-PROVISIONAL 26/26 gates, 21/21 programmes, zero blocking)"
+  "concurrent_writer_detected": false,
+  "consecutive_zero_drift_rounds": 0,
+  "digest": "4c461b9935dcd3cfb763e12a9ecffe13915012a88dab854e5f45bb7bc97f12fd",
+  "dimensions": {
+    "authority_variance": "00-MASTER/UCCEP-000000/uccep.json",
+    "bookkeeping_variance": "00-MASTER/UCL-000001/ucl.json",
+    "certification_variance": "00-MASTER/UCOS-AEE-001/aee.json",
+    "dictionary_variance": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
+    "lineage_variance": "00-MASTER/ACEE-000001/acee.json",
+    "ordering_variance": "00-MASTER/UCOS-RIB-001/10-IMPLEMENTATION-QUEUE.md",
+    "registry_variance": "00-MASTER/UCOS-RIB-001/rib.json",
+    "replay_variance": "00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-REPLAY.json"
   },
-  "requirement": "5 consecutive rounds, 0 drift",
   "met": false,
-  "blocking_cause": "A CONCURRENT WRITER mutated the working tree throughout these rounds (see UCOS-P0-FINAL-CLOSURE-DETERMINATION.md §3). Drift measured under concurrent mutation is not attributable to the regeneration pipeline, so no fixed-point claim may be derived from it.",
-  "residual_repository_defect": {
-    "unit": "00-MASTER/P0-LIFECYCLE-CLOSURE-001",
-    "reachable": false,
-    "entrypoint_references": 0,
-    "closes": [
-      "RIB GATE-03 Repository Verification",
-      "RIB GATE-07 Capability Coverage",
-      "RIB GATE-11 Zero Orphan Capability"
-    ],
-    "failing_verifications": [
-      {
-        "id": "VER-09",
-        "criterion": "no unit is unreachable in every declared reachability dimension",
-        "measured": 1
+  "phase": 8,
+  "programme": "P0-FINAL-CLOSURE-002",
+  "requirement": "5 consecutive rounds, 0 drift, 0 mutation, 0 variance",
+  "rounds": [
+    {
+      "actuator_failures": [],
+      "actuators": {
+        "aee": 0,
+        "rib": 0
       },
-      {
-        "id": "VER-11",
-        "criterion": "every discovered programme engine is named by at least one declared entry point",
-        "measured": 1
-      }
-    ]
-  }
+      "drift": 3,
+      "drifted_dimensions": [
+        "certification_variance",
+        "ordering_variance",
+        "registry_variance"
+      ],
+      "identities": {
+        "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
+        "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
+        "certification_variance": "39e4cb3bd5b007dfe9e6a6ab6ff24de55864efe46a5278f320f5f87897de0ccc",
+        "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
+        "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
+        "ordering_variance": "31d453c00847ca73223c0d6c55b4f23aa4220be23e8e64ced55abcddbd7213c9",
+        "registry_variance": "da2ca59731d2eb077ae4e9a3d78ccd82f1eb564c67de9155d04721d9eaab0855",
+        "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
+      },
+      "mutated_paths": [
+        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
+        "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/04-DISCOVERY-AND-CLASSIFICATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/06-ITERATION-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
+        "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/09-CONTINUOUS-EVOLUTION-BINDING.md",
+        "00-MASTER/UCOS-AEE-001/10-TRACEABILITY.md",
+        "00-MASTER/UCOS-AEE-001/11-CERTIFICATION-REPORT.md",
+        "00-MASTER/UCOS-AEE-001/12-CONTINUATION-PACKAGE.md",
+        "00-MASTER/UCOS-AEE-001/AEE-LEARNING-LEDGER.json",
+        "00-MASTER/UCOS-AEE-001/aee.json",
+        "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
+        "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
+        "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+      ],
+      "mutation": 37,
+      "round": 1
+    },
+    {
+      "actuator_failures": [],
+      "actuators": {
+        "aee": 0,
+        "rib": 0
+      },
+      "drift": 3,
+      "drifted_dimensions": [
+        "certification_variance",
+        "ordering_variance",
+        "registry_variance"
+      ],
+      "identities": {
+        "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
+        "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
+        "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
+        "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
+        "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
+        "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
+        "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
+        "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
+      },
+      "mutated_paths": [
+        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
+        "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/04-DISCOVERY-AND-CLASSIFICATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/06-ITERATION-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
+        "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/09-CONTINUOUS-EVOLUTION-BINDING.md",
+        "00-MASTER/UCOS-AEE-001/10-TRACEABILITY.md",
+        "00-MASTER/UCOS-AEE-001/11-CERTIFICATION-REPORT.md",
+        "00-MASTER/UCOS-AEE-001/12-CONTINUATION-PACKAGE.md",
+        "00-MASTER/UCOS-AEE-001/AEE-LEARNING-LEDGER.json",
+        "00-MASTER/UCOS-AEE-001/aee.json",
+        "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
+        "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
+        "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+      ],
+      "mutation": 37,
+      "round": 2
+    },
+    {
+      "actuator_failures": [],
+      "actuators": {
+        "aee": 0,
+        "rib": 0
+      },
+      "drift": 3,
+      "drifted_dimensions": [
+        "certification_variance",
+        "ordering_variance",
+        "registry_variance"
+      ],
+      "identities": {
+        "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
+        "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
+        "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
+        "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
+        "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
+        "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
+        "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
+        "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
+      },
+      "mutated_paths": [
+        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
+        "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/04-DISCOVERY-AND-CLASSIFICATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/06-ITERATION-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
+        "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/09-CONTINUOUS-EVOLUTION-BINDING.md",
+        "00-MASTER/UCOS-AEE-001/10-TRACEABILITY.md",
+        "00-MASTER/UCOS-AEE-001/11-CERTIFICATION-REPORT.md",
+        "00-MASTER/UCOS-AEE-001/12-CONTINUATION-PACKAGE.md",
+        "00-MASTER/UCOS-AEE-001/AEE-LEARNING-LEDGER.json",
+        "00-MASTER/UCOS-AEE-001/aee.json",
+        "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
+        "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
+        "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+      ],
+      "mutation": 37,
+      "round": 3
+    },
+    {
+      "actuator_failures": [],
+      "actuators": {
+        "aee": 0,
+        "rib": 0
+      },
+      "drift": 3,
+      "drifted_dimensions": [
+        "certification_variance",
+        "ordering_variance",
+        "registry_variance"
+      ],
+      "identities": {
+        "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
+        "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
+        "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
+        "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
+        "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
+        "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
+        "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
+        "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
+      },
+      "mutated_paths": [
+        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
+        "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/04-DISCOVERY-AND-CLASSIFICATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/06-ITERATION-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
+        "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/09-CONTINUOUS-EVOLUTION-BINDING.md",
+        "00-MASTER/UCOS-AEE-001/10-TRACEABILITY.md",
+        "00-MASTER/UCOS-AEE-001/11-CERTIFICATION-REPORT.md",
+        "00-MASTER/UCOS-AEE-001/12-CONTINUATION-PACKAGE.md",
+        "00-MASTER/UCOS-AEE-001/AEE-LEARNING-LEDGER.json",
+        "00-MASTER/UCOS-AEE-001/aee.json",
+        "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
+        "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
+        "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+      ],
+      "mutation": 37,
+      "round": 4
+    },
+    {
+      "actuator_failures": [],
+      "actuators": {
+        "aee": 0,
+        "rib": 0
+      },
+      "drift": 3,
+      "drifted_dimensions": [
+        "certification_variance",
+        "ordering_variance",
+        "registry_variance"
+      ],
+      "identities": {
+        "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
+        "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
+        "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
+        "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
+        "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
+        "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
+        "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
+        "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
+      },
+      "mutated_paths": [
+        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
+        "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/04-DISCOVERY-AND-CLASSIFICATION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
+        "00-MASTER/UCOS-AEE-001/06-ITERATION-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
+        "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
+        "00-MASTER/UCOS-AEE-001/09-CONTINUOUS-EVOLUTION-BINDING.md",
+        "00-MASTER/UCOS-AEE-001/10-TRACEABILITY.md",
+        "00-MASTER/UCOS-AEE-001/11-CERTIFICATION-REPORT.md",
+        "00-MASTER/UCOS-AEE-001/12-CONTINUATION-PACKAGE.md",
+        "00-MASTER/UCOS-AEE-001/AEE-LEARNING-LEDGER.json",
+        "00-MASTER/UCOS-AEE-001/aee.json",
+        "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
+        "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
+        "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+      ],
+      "mutation": 37,
+      "round": 5
+    }
+  ],
+  "rounds_executed": 5,
+  "title": "Five-Round Fixed-Point Certification",
+  "variance": {
+    "authority_variance": 0,
+    "bookkeeping_variance": 0,
+    "certification_variance": 5,
+    "dictionary_variance": 0,
+    "lineage_variance": 0,
+    "ordering_variance": 5,
+    "registry_variance": 5,
+    "replay_variance": 0
+  },
+  "verdict": "NOT PROVEN",
+  "zero_drift_rounds": 0
 }

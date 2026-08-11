@@ -80,6 +80,27 @@ DIMENSIONS: Mapping[str, str] = {
 #: What Phase 9 compares between a clone and the canonical repository.
 CLONE_IDENTITIES: Mapping[str, str] = dict(DIMENSIONS)
 
+#: The bootstrap a pristine clone requires before the chain can run at all.
+#:
+#: Several substrates the chain declares REQUIRED are generated artifacts the repository
+#: deliberately does not track (``/knowledge/`` and the ``UAKOS-CLOSURE-002`` outputs are
+#: excluded by ``.gitignore`` under a stated generated-artifact policy). A clone therefore
+#: does not contain them, and the chain fail-closed aborts rather than measuring a
+#: repository it cannot see — correctly.
+#:
+#: Phase 9 requires each clone to be *bootstrapped independently*, and this is that
+#: bootstrap: the located generators that produce the untracked substrates, run in the
+#: clone, from the clone's own tracked content. Nothing is copied in from the canonical
+#: repository — copying would make the clone a mirror rather than an independent
+#: reproduction, and would prove nothing about reproducibility.
+BOOTSTRAP: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("closure", ("00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",)),
+    ("phase2", ("00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",)),
+    ("phase3", ("00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",)),
+    ("rie", ("-m", "intelligence.rie", "build")),
+    ("knowledge", ("-m", "engine.knowledge.cli", "capabilities", "--write")),
+)
+
 
 class Abort(Exception):
     """A phase could not be measured, so no verdict may be asserted."""
@@ -129,9 +150,17 @@ def porcelain(root: Path) -> list[str]:
     return sorted(line for line in run.stdout.splitlines() if line.strip())
 
 
-def run_chain(root: Path, chain: Sequence[tuple[str, tuple[str, ...]]] = CHAIN) -> dict[str, int]:
-    """Execute the located regeneration chain once. Returns each actuator's exit code."""
+def run_chain(
+    root: Path, chain: Sequence[tuple[str, tuple[str, ...]]] = CHAIN
+) -> tuple[dict[str, int], dict[str, str]]:
+    """Execute a located chain once. Returns each actuator's exit code and its refusal.
+
+    The refusal text is captured, not discarded. An actuator that fail-closed aborts is
+    reporting *why* the repository could not be measured, and a phase that recorded only
+    the exit code would turn a diagnosable cause into an anonymous number.
+    """
     codes: dict[str, int] = {}
+    refusals: dict[str, str] = {}
     for name, argv in chain:
         run = subprocess.run(  # noqa: S603 - argv is literal; root is a repository path
             [sys.executable, *argv],
@@ -141,7 +170,10 @@ def run_chain(root: Path, chain: Sequence[tuple[str, tuple[str, ...]]] = CHAIN) 
             check=False,
         )
         codes[name] = run.returncode
-    return codes
+        if run.returncode not in (0, 1):
+            message = (run.stderr or run.stdout or "").strip().splitlines()
+            refusals[name] = message[-1][:300] if message else "no diagnostic emitted"
+    return codes, refusals
 
 
 # --------------------------------------------------------------------------- phase 8
@@ -168,7 +200,7 @@ def phase8(rounds: int) -> dict[str, Any]:
     for index in range(1, rounds + 1):
         if porcelain(REPO) != previous_tree:
             raise Abort(f"a concurrent writer mutated the tree before round {index}")
-        codes = run_chain(REPO)
+        codes, refusals = run_chain(REPO)
         tree = porcelain(REPO)
         current = identities(REPO)
         drifted = sorted(k for k, v in current.items() if v != baseline[k])
@@ -177,6 +209,7 @@ def phase8(rounds: int) -> dict[str, Any]:
                 "round": index,
                 "actuators": codes,
                 "actuator_failures": sorted(k for k, v in codes.items() if v not in (0, 1)),
+                "actuator_refusals": refusals,
                 "mutation": len(tree),
                 "mutated_paths": [line[3:] for line in tree][:20],
                 "drift": len(drifted),
@@ -250,9 +283,10 @@ def phase9(clones: int, cycles: int) -> dict[str, Any]:
         workdir = Path(tmp)
         for index in range(1, clones + 1):
             target = _clone(index, workdir)
+            boot_codes, boot_refusals = run_chain(target, BOOTSTRAP)
             cycle_records: list[dict[str, Any]] = []
             for cycle in range(1, cycles + 1):
-                codes = run_chain(target)
+                codes, refusals = run_chain(target)
                 observed = identities(target, CLONE_IDENTITIES)
                 mismatched = sorted(k for k, v in observed.items() if v != canonical[k])
                 cycle_records.append(
@@ -269,6 +303,8 @@ def phase9(clones: int, cycles: int) -> dict[str, Any]:
             results.append(
                 {
                     "clone": index,
+                    "bootstrap": boot_codes,
+                    "bootstrap_refusals": boot_refusals,
                     "cycles_executed": len(cycle_records),
                     "byte_identical_every_cycle": identical,
                     "cycles": cycle_records,

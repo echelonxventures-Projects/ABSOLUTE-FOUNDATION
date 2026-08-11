@@ -52,7 +52,7 @@ Automation presence per gate and per deliverable.
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 41 tracked path(s)
+- **Result** — 42 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -63,6 +63,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/ACEE-000001/acee_engine.py` | TRACKED |
 | `00-MASTER/BASELINE-001/baseline_engine.py` | TRACKED |
 | `00-MASTER/MCOS-000001/mcos_engine.py` | TRACKED |
+| `00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py` | TRACKED |
 | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py` | TRACKED |
 | `00-MASTER/UAEP-000001/uaep_engine.py` | TRACKED |
 | `00-MASTER/UAIE-000001/uaie_engine.py` | TRACKED |
@@ -102,7 +103,7 @@ Automation presence per gate and per deliverable.
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 35/41 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))
+- **Result** — 36/42 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -113,6 +114,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/ACEE-000001/acee_engine.py` | 2 | `.github/workflows/acee-gate.yml`, `Makefile` |
 | `00-MASTER/BASELINE-001/baseline_engine.py` | 2 | `.github/workflows/baseline-gate.yml`, `Makefile` |
 | `00-MASTER/MCOS-000001/mcos_engine.py` | 2 | `.github/workflows/mcos-gate.yml`, `Makefile` |
+| `00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py` | 1 | `Makefile` |
 | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py` | 1 | `Makefile` |
 | `00-MASTER/UAEP-000001/uaep_engine.py` | 2 | `.github/workflows/uaep-gate.yml`, `Makefile` |
 | `00-MASTER/UAIE-000001/uaie_engine.py` | 2 | `.github/workflows/uaie-gate.yml`, `Makefile` |

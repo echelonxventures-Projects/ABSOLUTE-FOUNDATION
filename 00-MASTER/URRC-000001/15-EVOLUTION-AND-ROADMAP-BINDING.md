@@ -62,7 +62,7 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 41 tracked path(s)
+- **Result** — 42 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -73,6 +73,7 @@ Evolution and master-roadmap owners; executable-owner delta.
 | `00-MASTER/ACEE-000001/acee_engine.py` | TRACKED |
 | `00-MASTER/BASELINE-001/baseline_engine.py` | TRACKED |
 | `00-MASTER/MCOS-000001/mcos_engine.py` | TRACKED |
+| `00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py` | TRACKED |
 | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py` | TRACKED |
 | `00-MASTER/UAEP-000001/uaep_engine.py` | TRACKED |
 | `00-MASTER/UAIE-000001/uaie_engine.py` | TRACKED |
