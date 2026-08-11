@@ -2077,9 +2077,9 @@
       "unknown": false
     },
     {
-      "count": 7,
+      "count": 6,
       "evidence": [],
-      "headline": "34/41 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))",
+      "headline": "35/41 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))",
       "id": "DV-46",
       "primitive": "text_presence",
       "purpose": "Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.",
@@ -2116,8 +2116,8 @@
         ],
         [
           "`00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py`",
-          "0",
-          "**none**"
+          "1",
+          "`Makefile`"
         ],
         [
           "`00-MASTER/UAEP-000001/uaep_engine.py`",
