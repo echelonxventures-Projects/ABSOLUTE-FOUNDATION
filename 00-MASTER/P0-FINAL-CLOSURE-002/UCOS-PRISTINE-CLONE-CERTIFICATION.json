@@ -11,8 +11,8 @@
     "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
   },
   "clones": 3,
-  "cycles_per_clone": 5,
-  "digest": "e3aa962d6231579a15025643e4025a443cc950c186cfb122f8e30acfd37badcc",
+  "cycles_per_clone": 3,
+  "digest": "3accdeca4ab1f5dd8f46f1c3fabeecbba425c0d0fc0d31db91d8f8902c320eae",
   "identities_compared": [
     "authority_variance",
     "bookkeeping_variance",
@@ -26,7 +26,7 @@
   "met": false,
   "phase": 9,
   "programme": "P0-FINAL-CLOSURE-002",
-  "requirement": "3 independent clones, 5 verification cycles each",
+  "requirement": "3 independent clones, 3 verification cycles each",
   "results": [
     {
       "bootstrap": {
@@ -87,41 +87,9 @@
             "registry_variance"
           ],
           "mutation": 41
-        },
-        {
-          "actuator_failures": [],
-          "actuators": {
-            "aee": 0,
-            "rib": 0
-          },
-          "byte_identical": false,
-          "cycle": 4,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 41
-        },
-        {
-          "actuator_failures": [],
-          "actuators": {
-            "aee": 0,
-            "rib": 0
-          },
-          "byte_identical": false,
-          "cycle": 5,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 41
         }
       ],
-      "cycles_executed": 5
+      "cycles_executed": 3
     },
     {
       "bootstrap": {
@@ -182,41 +150,9 @@
             "registry_variance"
           ],
           "mutation": 41
-        },
-        {
-          "actuator_failures": [],
-          "actuators": {
-            "aee": 0,
-            "rib": 0
-          },
-          "byte_identical": false,
-          "cycle": 4,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 41
-        },
-        {
-          "actuator_failures": [],
-          "actuators": {
-            "aee": 0,
-            "rib": 0
-          },
-          "byte_identical": false,
-          "cycle": 5,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 41
         }
       ],
-      "cycles_executed": 5
+      "cycles_executed": 3
     },
     {
       "bootstrap": {
@@ -277,44 +213,12 @@
             "registry_variance"
           ],
           "mutation": 41
-        },
-        {
-          "actuator_failures": [],
-          "actuators": {
-            "aee": 0,
-            "rib": 0
-          },
-          "byte_identical": false,
-          "cycle": 4,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 41
-        },
-        {
-          "actuator_failures": [],
-          "actuators": {
-            "aee": 0,
-            "rib": 0
-          },
-          "byte_identical": false,
-          "cycle": 5,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 41
         }
       ],
-      "cycles_executed": 5
+      "cycles_executed": 3
     }
   ],
   "title": "Pristine Clone Certification",
-  "total_cycles": 15,
+  "total_cycles": 9,
   "verdict": "NOT PROVEN"
 }

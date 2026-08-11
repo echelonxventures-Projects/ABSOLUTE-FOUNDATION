@@ -1,5 +1,24 @@
 {
-  "compliance": [],
+  "compliance": [
+    {
+      "finding": "dirty_entries_outside_generated=52",
+      "gate": "GATE-12",
+      "id": "CMP-CLEAN",
+      "rank": 1,
+      "remediation": "commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately",
+      "requirement": "the repository must remain clean, deterministic, buildable and reproducible",
+      "severity": "CRITICAL"
+    },
+    {
+      "finding": "validations_failed=1",
+      "gate": "GATE-04",
+      "id": "CMP-VALIDATE",
+      "rank": 2,
+      "remediation": "discharge the named validation obligation",
+      "requirement": "validation must pass",
+      "severity": "HIGH"
+    }
+  ],
   "cycle_classes": [
     {
       "benign": true,
@@ -16,7 +35,7 @@
       "rule": "cross_unit"
     }
   ],
-  "determination": "BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED",
+  "determination": "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP",
   "discovery": [
     {
       "class": "IMPLEMENTATION",
@@ -1410,8 +1429,8 @@
       "subject": "operational programmes whose engine no declared entry point names"
     }
   ],
-  "gate": "OPEN",
-  "gate_exit": 0,
+  "gate": "CLOSED",
+  "gate_exit": 1,
   "gates": [
     {
       "blocking": true,
@@ -1449,13 +1468,15 @@
     {
       "blocking": true,
       "criterion": "every validation obligation met",
-      "failures": [],
+      "failures": [
+        "validations_failed=1"
+      ],
       "id": "GATE-04",
       "metrics": [
         "validations_failed"
       ],
       "name": "Repository Validation",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "blocking": true,
@@ -1540,13 +1561,15 @@
     {
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
-      "failures": [],
+      "failures": [
+        "dirty_entries_outside_generated=52"
+      ],
       "id": "GATE-12",
       "metrics": [
         "dirty_entries_outside_generated"
       ],
       "name": "Repository Clean",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     }
   ],
   "matrices": [
@@ -1956,7 +1979,10 @@
     "advisory_duplicate_signals": 25,
     "architectural_cycles": 0,
     "benign_cycles": 10,
-    "blocking_failed": [],
+    "blocking_failed": [
+      "GATE-04",
+      "GATE-12"
+    ],
     "catalogue_records": 121,
     "certification_domains_failed": 0,
     "certification_verdict_absent": 0,
@@ -1970,12 +1996,12 @@
     },
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
-    "compliance_findings": 0,
+    "compliance_findings": 2,
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 0,
-    "dirty_entries_outside_generated": 0,
+    "dirty_entries": 52,
+    "dirty_entries_outside_generated": 52,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 39,
@@ -2006,7 +2032,7 @@
     "gap_count:GAP-VERIFICATION": 252,
     "gap_findings": 737,
     "gate_total": 12,
-    "gates_passed": 12,
+    "gates_passed": 10,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -2050,7 +2076,7 @@
     "universes_unresolved": 0,
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
-    "validations_failed": 0,
+    "validations_failed": 1,
     "verifications_failed": 0,
     "wave_total": 5
   },
@@ -4236,14 +4262,14 @@
     "conflicts": 0,
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 0,
+    "dirty_entries": 52,
     "interrupted_operations": [],
-    "modified": 0,
+    "modified": 12,
     "tracked_files": 5729,
-    "untracked": 0,
-    "working_tree": "CLEAN"
+    "untracked": 40,
+    "working_tree": "DIRTY"
   },
-  "seal_sha256": "6aa79f8f66fc16c66487213dcd32db12b1ad5b70851a1c6227084917846a5ebc",
+  "seal_sha256": "22d463851e5312181374d9dc9914a0a400fc12c45dc5746ce892e1e9a6e6dcc2",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -4442,7 +4468,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "e83326e7d68a1aa0b15d713b4eba5b1413751667917f72c35df44b0c04bb1b38",
+      "content_sha256": "469ed6d4820f4e0874c81454341cb4fa441a594bc31feba18cc35d3f5bdc02fb",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-BASELINE",
@@ -4468,7 +4494,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
+      "content_sha256": "d0d2c1b833b3e6cdc2b881c20e39425d189c623387af0e29f31956d4a4cd4d07",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-CAPS",
@@ -4490,7 +4516,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "2662b130461b1537c216d2769bf626691b61445840226ebe2e38b4b100a35a99",
+      "content_sha256": "fd6b1b750ba525d7324797efd30f6778aae65adf48b87db55663ea30d6f3ef56",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-DEPS",
@@ -4514,7 +4540,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "b7efe2537517ec85b5a388911af15b909d1bf1d57494868744a6b2f0bab2b45a",
+      "content_sha256": "b7355f62a4260dccc7d0a48e6b955cad51082fe54e8535b483abfe533913db5b",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-FRONTIER",
@@ -22542,10 +22568,10 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 0,
+      "measured": 52,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "criterion": "every discovered unit names a programme",

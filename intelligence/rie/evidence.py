@@ -151,19 +151,33 @@ class EvidenceReader:
         )
 
     def state_fingerprint(self) -> dict[str, Any]:
-        """A content fingerprint of all evidence inputs.
+        """A content fingerprint of all evidence inputs that determine canonical output identity.
 
         Identical repository state ⇒ identical fingerprint ⇒ identical outputs.
 
         Repository Fixed-Point Closure (UCOS-RFP-001 RFP-2) — the commit identity
-        and branch that this fingerprint previously included are excluded. They made
-        every output non-convergent by construction: the outputs are committed, so
-        the commit they named was necessarily not the commit that contained them,
-        and each regeneration therefore rewrote them without limit. What remains
-        pins repository state honestly and without self-reference: the content
-        hashes of the generated evidence surfaces and the consumed coverage
-        measurement. Both are functions of tracked content, so the fingerprint is
-        stable across commits of an unchanged tree.
+        and branch are excluded (they made every output non-convergent by construction).
+
+        Constitutional classification of inputs (UCOS-UCL-LIFECYCLE):
+
+        ``evidence_files`` (00-BOOK/DATA/*.json) — TRACKED_SOURCE: git-versioned artifacts
+        produced by the canonical generation chain (ukb/ukbx). These are the canonical
+        identity-determining inputs.
+
+        ``coverage.xml`` — TEST_EXECUTION_STATE / QUALITY_MEASUREMENT: a generated artifact
+        produced by the test runner outside the canonical RIB→AEE→RIE chain. It is
+        environmental state, not repository truth. Including it in the identity fingerprint
+        violates the universal input closure contract: a pristine clone lacks coverage.xml
+        because the bootstrap does not run the test suite, so every clone regeneration
+        produces a different ``input_hash`` and therefore a different catalog SHA256, causing
+        irreproducible ``registry_variance``, ``ordering_variance`` and ``certification_variance``
+        in Phase-9 pristine-clone certification.
+
+        Fix (UCOS-P0-FCL-002-FIX-001): coverage measurement is excluded from the identity
+        fingerprint. It remains available via ``coverage_enrichment()`` for health and progress
+        outputs where observational/quality state is explicitly expected and documented. This
+        eliminates the entire class of hidden-input failure: the catalog identity is now a
+        pure function of tracked, version-controlled evidence.
         """
         files = {
             self.config.rel(self.config.data_file(n)): sha256_file(self.config.data_file(n))
@@ -171,15 +185,31 @@ class EvidenceReader:
         }
         return {
             "evidence_files": files,
-            "coverage_measurement": {
-                "source": self.config.rel(self.config.coverage_xml),
-                "fingerprint": self._coverage_fingerprint(),
-                "basis": (
-                    "the consumed measurement, not the file bytes — coverage.xml embeds a "
-                    "wall-clock timestamp, so a byte hash would make every regeneration differ "
-                    "with no change in repository state"
-                ),
-            },
+            # coverage_measurement is intentionally absent from this fingerprint.
+            # See docstring — it is TEST_EXECUTION_STATE and must not influence canonical
+            # artifact identity. Coverage data is recorded separately in coverage_enrichment().
+        }
+
+    def coverage_enrichment(self) -> dict[str, Any]:
+        """Coverage measurement as additive observational evidence (not identity-determining).
+
+        For use in health and progress outputs only. Must NOT be included in any fingerprint
+        that determines canonical artifact identity (content_sha256, input_hash).
+
+        Classification: TEST_EXECUTION_STATE / QUALITY_MEASUREMENT
+        Owner: test execution environment (outside canonical RIB→AEE→RIE chain)
+        Reproducibility: ENVIRONMENTAL — depends on test runner, Python version, installed deps
+        """
+        return {
+            "source": self.config.rel(self.config.coverage_xml),
+            "fingerprint": self._coverage_fingerprint(),
+            "classification": "TEST_EXECUTION_STATE / QUALITY_MEASUREMENT",
+            "identity_role": "EXCLUDED — observational enrichment only, not canonical identity",
+            "basis": (
+                "the consumed measurement, not the file bytes — coverage.xml embeds a "
+                "wall-clock timestamp, so a byte hash would make every regeneration differ "
+                "with no change in repository state"
+            ),
         }
 
     # -- generation provenance ------------------------------------------
@@ -209,9 +239,10 @@ class EvidenceReader:
                 ),
                 "input_hash": sha256_text(canonical_json(fingerprint)),
                 "input_hash_basis": (
-                    "sha256 over the canonical evidence fingerprint — every evidence file hash "
-                    "and the coverage measurement fingerprint, which together pin the tracked "
-                    "state these outputs derive from without naming the commit that carries them"
+                    "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence "
+                    "file hash, which together pin the tracked state these outputs derive from. "
+                    "Coverage measurement (TEST_EXECUTION_STATE) is excluded per "
+                    "UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input."
                 ),
                 "output_hash_field": "content_hash",
             }

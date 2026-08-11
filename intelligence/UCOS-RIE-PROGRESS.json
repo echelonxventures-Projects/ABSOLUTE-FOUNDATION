@@ -3,16 +3,11 @@
   "authoritative_portfolio_status": "IN_PROGRESS — analysis/architecture/generation complete; runtime testing/deployment pending EC-1",
   "authority": "NONE (derived truth)",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "06bab31684044c821621c69aef2354414b03b7eaf78b27c6fb5c2101d1726152",
+  "content_hash": "b756a6954e35110cfd2ef43da2c784a0d55a4ced2be8ece047870b1e7fe5a6e8",
   "dimension_index_literal_pct": 26.7,
   "dimension_index_reconciled_pct": 26.7,
   "dimensions_counted": 15,
   "evidence_state": {
-    "coverage_measurement": {
-      "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "61a61a5d60ec645f9d5f0a5e0b4a66aa1c81f47f2283f077228507a2265f023a",
-      "source": "coverage.xml"
-    },
     "evidence_files": {
       "00-BOOK/DATA/artifacts.json": "8a49b2f9f5e8ad213d6b0ed9fe17fa1a6ae8493faf77d84ca2b7846e8c324a0c",
       "00-BOOK/DATA/certification.json": "d92e5b4c3ffc9cc9adfc9fdece77a69cb7cfe0057ec146b76bcfeb5d30d46387",
@@ -26,8 +21,8 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "68951f423d2b7b6dd47e2892de1e808d70ce6f966c21bb3f651535b115bb9cc3",
-    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
+    "input_hash": "0a8ce6bea7823a1bf2f6a9cc4f1bd400b21174b55430c2c6f1894bfec139aec3",
+    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence file hash, which together pin the tracked state these outputs derive from. Coverage measurement (TEST_EXECUTION_STATE) is excluded per UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input.",
     "output_hash_field": "content_hash"
   },
   "per_dimension": {

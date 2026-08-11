@@ -292,7 +292,41 @@ ucos_ensure_venv() {
 # dependency). ruff format --check is a NON-mutating check (it never rewrites files); use
 # `make format` to apply formatting.
 ucos_ruff_gate() {
+  # UCOS-GOV-LINT-BOUNDARY: lint scope is the git-tracked file set, not the filesystem.
+  #
+  # WHY: ruff receives directory arguments and walks all .py files it finds — including
+  # untracked files (macOS Finder " 2" copies, ephemeral editors, generated transients).
+  # An untracked file with a lint error blocks every legitimate commit regardless of
+  # whether that file will ever be committed. The pre-commit hook exists to validate
+  # *the intended mutation* (staged + tracked content), not arbitrary filesystem state.
+  #
+  # HOW: git ls-files returns only tracked paths. We filter to Python files under the
+  # governed source roots (engine/ platform/) and pass them explicitly.  This preserves
+  # the RC-1 invariant ("verify.sh passes ⇒ pre-commit passes") because verify.sh also
+  # calls this function — both paths now operate on the identical tracked boundary.
+  #
+  # GOVERNANCE VISIBILITY: untracked files are NOT hidden from governance. RIB GATE-12
+  # (dirty_entries_outside_generated) and VAL-02 still surface them as working-tree
+  # contamination — they are classified, not silently ignored.
+  #
+  # IMPLEMENTATION NOTE: if no tracked Python files exist in engine/ or platform/ the
+  # gate becomes a no-op and exits 0, which is correct (nothing to lint).
   local py; py="$(ucos_venv_python)"
-  "$py" -m ruff check engine platform
-  "$py" -m ruff format --check engine platform
+  local repo; repo="$(git rev-parse --show-toplevel)"
+
+  # Build the tracked file list scoped to the governed source roots.
+  local tracked_py
+  tracked_py=$(git -C "$repo" ls-files -- 'engine/*.py' 'engine/**/*.py' \
+                                          'platform/*.py' 'platform/**/*.py' 2>/dev/null \
+               | sed "s|^|$repo/|")
+
+  if [[ -z "$tracked_py" ]]; then
+    ucos_ok "ruff gate: no tracked Python files in engine/ or platform/ — skipping"
+    return 0
+  fi
+
+  # Pass the explicit file list. xargs handles argument-length limits.
+  # ruff check: lint violations exit 1; ruff format --check: format drift exits 1.
+  echo "$tracked_py" | xargs "$py" -m ruff check
+  echo "$tracked_py" | xargs "$py" -m ruff format --check
 }

@@ -175,3 +175,19 @@ intelligence/UCOS-UPI-001/
 # determinism-evidence/, /knowledge/ and /realization/ generated-artifact policy.
 # Bundles belong in durable storage OUTSIDE the repository, never inside the tree they back up.
 *.bundle
+
+
+# macOS Finder duplicate files — created when a file is dragged or pasted into a directory
+# that already contains a file with the same name. The first copy is named
+# "<stem> 2" / "<stem> 2.<ext>", the second "<stem> 3.<ext>", and so on. These files
+# are NEVER Repository Truth: they carry no canonical identity (no git history, no
+# programme declaration), and any copy present in the working tree is counted by
+# UCOS-RIB-001 GATE-12 (Repository Clean) as a dirty_entry, holding that gate CLOSED
+# and cascading through RIB → AEE → P0-FCL-002 certification.
+# Declared at the GENUS (`[2-9]`) so the class is structurally unreachable regardless
+# of future file name, extension, or directory — mirrors the *.bundle and /knowledge/
+# generated-artifact policy. The lower bound is 2 (not 1) because Finder's numbering
+# begins at 2 for the first duplicate; intentionally numbered originals ("chapter 1",
+# "step 1.md") are therefore not suppressed.
+* [2-9]
+* [2-9].*

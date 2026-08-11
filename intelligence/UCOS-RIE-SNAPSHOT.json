@@ -4,18 +4,12 @@
   "authority": "NONE (derived truth)",
   "capability_count": 121,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "5f5310fe9462fdc599d93e9007877639b149b75bb94ee52367368e42befd5335",
+  "content_hash": "e78cb0ebeaefbd7ff962f4471355dc470558ec3cc267186fbb6e5c8b2f932641",
   "dimension_index_reconciled_pct": 26.7,
   "drift": {
     "baseline": false,
     "certification_drift": [],
-    "dependency_drift": [
-      {
-        "from": 12895,
-        "metric": "corpus_edges",
-        "to": 12899
-      }
-    ],
+    "dependency_drift": [],
     "duplicate_findings": [
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
@@ -211,18 +205,7 @@
         "name": "validation"
       }
     ],
-    "implementation_drift": [
-      {
-        "capability": "engine.constitution",
-        "change": "ADDED",
-        "status": "CERTIFIED"
-      },
-      {
-        "capability": "engine.tests.constitution",
-        "change": "ADDED",
-        "status": "CERTIFIED"
-      }
-    ],
+    "implementation_drift": [],
     "stale_evidence": [
       {
         "as_of": "2026-07-15T08:05:00Z",
@@ -269,11 +252,6 @@
     ]
   },
   "evidence_state": {
-    "coverage_measurement": {
-      "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "61a61a5d60ec645f9d5f0a5e0b4a66aa1c81f47f2283f077228507a2265f023a",
-      "source": "coverage.xml"
-    },
     "evidence_files": {
       "00-BOOK/DATA/artifacts.json": "8a49b2f9f5e8ad213d6b0ed9fe17fa1a6ae8493faf77d84ca2b7846e8c324a0c",
       "00-BOOK/DATA/certification.json": "d92e5b4c3ffc9cc9adfc9fdece77a69cb7cfe0057ec146b76bcfeb5d30d46387",
@@ -287,8 +265,8 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "68951f423d2b7b6dd47e2892de1e808d70ce6f966c21bb3f651535b115bb9cc3",
-    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
+    "input_hash": "0a8ce6bea7823a1bf2f6a9cc4f1bd400b21174b55430c2c6f1894bfec139aec3",
+    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence file hash, which together pin the tracked state these outputs derive from. Coverage measurement (TEST_EXECUTION_STATE) is excluded per UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input.",
     "output_hash_field": "content_hash"
   },
   "next_executable_capability": "EC-3 Band 10 (Data) realization",

@@ -40,7 +40,7 @@
         "test_functions": 821
       },
       "intelligence": {
-        "loc": 15727,
+        "loc": 15758,
         "root": "intelligence",
         "source_files": 65,
         "test_files": 6,
@@ -61,10 +61,10 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 316708,
+    "total_loc": 316739,
     "total_tests": 12893
   },
-  "content_hash": "d024160050eec9d1643600c4d23d9e0f28ed3dd474bafc889ad7d5af17e38612",
+  "content_hash": "54525d107ac6919d9654b962cbc33b8dde3ed292ae8708c6dd978fda67f8708f",
   "corpus": {
     "artifacts": 1233,
     "edges": 12899,
@@ -80,11 +80,6 @@
     "volumes": 25
   },
   "evidence_state": {
-    "coverage_measurement": {
-      "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "61a61a5d60ec645f9d5f0a5e0b4a66aa1c81f47f2283f077228507a2265f023a",
-      "source": "coverage.xml"
-    },
     "evidence_files": {
       "00-BOOK/DATA/artifacts.json": "8a49b2f9f5e8ad213d6b0ed9fe17fa1a6ae8493faf77d84ca2b7846e8c324a0c",
       "00-BOOK/DATA/certification.json": "d92e5b4c3ffc9cc9adfc9fdece77a69cb7cfe0057ec146b76bcfeb5d30d46387",
@@ -98,8 +93,8 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "68951f423d2b7b6dd47e2892de1e808d70ce6f966c21bb3f651535b115bb9cc3",
-    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
+    "input_hash": "0a8ce6bea7823a1bf2f6a9cc4f1bd400b21174b55430c2c6f1894bfec139aec3",
+    "input_hash_basis": "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence file hash, which together pin the tracked state these outputs derive from. Coverage measurement (TEST_EXECUTION_STATE) is excluded per UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input.",
     "output_hash_field": "content_hash"
   },
   "health_flags": {
