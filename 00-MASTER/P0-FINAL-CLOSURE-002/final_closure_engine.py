@@ -85,6 +85,19 @@ class Abort(Exception):
     """A phase could not be measured, so no verdict may be asserted."""
 
 
+def _git() -> str:
+    """The absolute path to git, resolved once.
+
+    Resolved rather than invoked by bare name: a partial executable path takes whatever
+    ``PATH`` happens to offer, and a measurement engine that can be pointed at a different
+    binary by an environment variable is not measuring the repository.
+    """
+    found = shutil.which("git")
+    if not found:
+        raise Abort("git is not available; repository state cannot be measured")
+    return found
+
+
 def rel(path: Path | str) -> str:
     try:
         return str(Path(path).resolve().relative_to(REPO))
@@ -106,8 +119,8 @@ def identities(root: Path, mapping: Mapping[str, str] = DIMENSIONS) -> dict[str,
 
 def porcelain(root: Path) -> list[str]:
     """The working-tree state as git reports it, sorted."""
-    run = subprocess.run(  # noqa: S603 - literal argv
-        ["git", "status", "--porcelain"],
+    run = subprocess.run(  # noqa: S603 - resolved absolute argv
+        [_git(), "status", "--porcelain"],
         cwd=root,
         capture_output=True,
         text=True,
@@ -211,8 +224,8 @@ def phase8(rounds: int) -> dict[str, Any]:
 
 def _clone(index: int, workdir: Path) -> Path:
     target = workdir / f"clone-{index}"
-    run = subprocess.run(  # noqa: S603 - literal argv
-        ["git", "clone", "--quiet", "--local", "--no-hardlinks", str(REPO), str(target)],
+    run = subprocess.run(  # noqa: S603 - resolved absolute argv
+        [_git(), "clone", "--quiet", "--local", "--no-hardlinks", str(REPO), str(target)],
         capture_output=True,
         text=True,
         check=False,
@@ -246,9 +259,7 @@ def phase9(clones: int, cycles: int) -> dict[str, Any]:
                     {
                         "cycle": cycle,
                         "actuators": codes,
-                        "actuator_failures": sorted(
-                            k for k, v in codes.items() if v not in (0, 1)
-                        ),
+                        "actuator_failures": sorted(k for k, v in codes.items() if v not in (0, 1)),
                         "mismatched_identities": mismatched,
                         "byte_identical": not mismatched,
                         "mutation": len(porcelain(target)),
