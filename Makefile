@@ -82,6 +82,8 @@ help:
 	@echo "  make lifecycle-closure   measure realization of the 45 UCL-000001 lifecycle stages"
 	@echo "  make lifecycle-closure-fast   the same measurement without the coverage phase"
 	@echo "  make lifecycle-closure-gate   fail-closed: exit 1 unless every closure claim is PROVEN"
+	@echo "  make final-closure       Phase 8 fixed-point + Phase 9 pristine-clone measurement"
+	@echo "  make final-closure-gate  fail-closed: exit 1 unless both phases meet their requirement"
 	@echo "  make ucda          regenerate the UCDA-000001 decision-assimilation determinations"
 	@echo "  make ucda-gate     fail-closed Implementation Evidence Gate (CEP-002 Art 28)"
 	@echo "  make ucda-self     UCDA guards over its own surface"
@@ -1427,6 +1429,29 @@ lifecycle-closure-fast:
 # claims measures NOT_PROVEN, so CI cannot pass on a lifecycle that is only declared.
 lifecycle-closure-gate:
 	@python3 00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py --rounds 10 --gate
+
+
+# ---------------------------------------------------------------------------
+# P0-FINAL-CLOSURE-002 — FIXED-POINT AND PRISTINE-CLONE MEASUREMENT.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). Runs the located regeneration chain repeatedly and
+# measures whether the repository regenerates to itself (Phase 8), then clones the
+# repository and measures whether independent copies regenerate to the same identities
+# (Phase 9). It creates no authority and certifies nothing it did not measure.
+#
+# Phase 8 fails closed on a dirty tree or a concurrent writer: drift measured while
+# another process is writing is not attributable to the regeneration pipeline, which is
+# the defect that invalidated the previous attempt at this phase.
+#
+# Write scope: 00-MASTER/P0-FINAL-CLOSURE-002/ plus whatever the located chain regenerates
+# under its own owners, which is the chain's own declared scope and not this engine's.
+# Exit 0 measured · 1 --gate requested and a requirement unmet · 2 fail-closed abort.
+.PHONY: final-closure final-closure-gate
+final-closure:
+	@python3 00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py --rounds 5 --clones 3 --cycles 5
+
+final-closure-gate:
+	@python3 00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py --rounds 5 --clones 3 --cycles 5 --gate
 
 
 # ---------------------------------------------------------------------------
