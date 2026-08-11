@@ -79,6 +79,9 @@ help:
 	@echo "  make aee-gate      fail-closed convergence gate over the observation vector"
 	@echo "  make aee-closure   the loop including the heavy aggregate tier"
 	@echo "  make aee-self      AEE guards over its own surface"
+	@echo "  make lifecycle-closure   measure realization of the 45 UCL-000001 lifecycle stages"
+	@echo "  make lifecycle-closure-fast   the same measurement without the coverage phase"
+	@echo "  make lifecycle-closure-gate   fail-closed: exit 1 unless every closure claim is PROVEN"
 	@echo "  make ucda          regenerate the UCDA-000001 decision-assimilation determinations"
 	@echo "  make ucda-gate     fail-closed Implementation Evidence Gate (CEP-002 Art 28)"
 	@echo "  make ucda-self     UCDA guards over its own surface"
@@ -1393,6 +1396,37 @@ aee-self:
 	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --check-reuse-before-create
 	@python3 00-MASTER/UCOS-AEE-001/aee_engine.py --check-mandate-coverage
 
+
+# ---------------------------------------------------------------------------
+# P0-LIFECYCLE-CLOSURE-001 — UNIVERSAL CONSTITUTIONAL LIFECYCLE REALIZATION.
+#
+# AUTHORITY = NONE (DERIVED TRUTH). The engine legislates nothing and certifies nothing.
+# It measures whether each of UCL-000001's 45 stages is actually realized, treating the
+# stage manifest's declared owner and evidence as claims to be tested rather than as
+# findings. A stage is IMPLEMENTED only where five executed probes agree.
+#
+# These targets exist because RIB VER-09 (no orphan capability) and VER-11 (no dead
+# engine) measure reachability by scanning the declared entry-point surface — the
+# Makefile among it. A programme engine no entry point names is a dead engine by
+# measurement, whatever its quality, so declaring the target IS the remediation.
+#
+# Write scope: 00-MASTER/P0-LIFECYCLE-CLOSURE-001/ only.
+# Exit 0 measured · 1 --gate requested and a closure claim is NOT_PROVEN · 2 fail-closed
+# abort (a phase could not be measured, so no verdict may be asserted).
+.PHONY: lifecycle-closure lifecycle-closure-fast lifecycle-closure-gate
+lifecycle-closure:
+	@python3 00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py --rounds 10
+
+# lifecycle-closure-fast: skips the coverage phase, which runs the test suite as a
+# subprocess. Use when the realization/graph/replay measurement is what is wanted and the
+# several-minute instrumented test run is not.
+lifecycle-closure-fast:
+	@python3 00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py --rounds 10 --no-coverage
+
+# lifecycle-closure-gate: the fail-closed form. Exits 1 while any of the twelve closure
+# claims measures NOT_PROVEN, so CI cannot pass on a lifecycle that is only declared.
+lifecycle-closure-gate:
+	@python3 00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py --rounds 10 --gate
 
 
 # ---------------------------------------------------------------------------

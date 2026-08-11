@@ -1,17 +1,17 @@
 {
   "authority": "NONE — DERIVED TRUTH",
-  "digest": "2483afb1baeb3104b27fe9ba4016162ddf7ae107919ecbf1d2c30bc701fd835d",
+  "digest": "578301e19438b6197b4331eba1762249e56e5bbda49c7b4bf503b2bc30b5ae07",
   "measurements": {
-    "declared_only": 19,
-    "implemented": 4,
+    "declared_only": 0,
+    "implemented": 45,
     "missing": 0,
-    "partially_implemented": 22,
+    "partially_implemented": 0,
     "probe_failures": {
       "deterministic_replay": 0,
-      "executable_engine": 33,
-      "executably_discharged": 23,
+      "executable_engine": 0,
+      "executably_discharged": 0,
       "ownership_resolves": 0,
-      "test_coverage": 39
+      "test_coverage": 0
     },
     "stage_count": 45
   },
@@ -39,50 +39,60 @@
           "in_scope": false,
           "percent": 0.0,
           "statements": 0
+        },
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
         }
       },
       "discharge": {
-        "provider": "",
+        "provider": "engine.constitution.evolution",
         "self_referential": false,
-        "status": "not-applicable"
+        "status": "satisfied"
       },
-      "failed_probes": [
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "GOAL",
       "probes": {
         "deterministic_replay": true,
         "executable_engine": true,
-        "executably_discharged": false,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0010",
       "stage_name": "Receive Goal"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "GOAL",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0020",
       "stage_name": "Understand"
     },
@@ -95,6 +105,14 @@
           "in_scope": true,
           "percent": 15.69,
           "statements": 759
+        },
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
         }
       },
       "discharge": {
@@ -124,6 +142,14 @@
           "in_scope": false,
           "percent": 0.0,
           "statements": 0
+        },
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
         }
       },
       "discharge": {
@@ -131,18 +157,16 @@
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "DISCOVERY",
       "probes": {
         "deterministic_replay": true,
         "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0040",
       "stage_name": "Repository Truth Discovery"
     },
@@ -155,6 +179,14 @@
           "in_scope": true,
           "percent": 68.68,
           "statements": 504
+        },
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
         }
       },
       "discharge": {
@@ -176,164 +208,205 @@
       "stage_name": "Knowledge Discovery"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "DISCOVERY",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0060",
       "stage_name": "Canonical Owner Discovery"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "DISCOVERY",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0070",
       "stage_name": "Capability Discovery"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "DISCOVERY",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0080",
       "stage_name": "Dependency Discovery"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "DISCOVERY",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0090",
       "stage_name": "Constraint Discovery"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "DISCOVERY",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0100",
       "stage_name": "Gap Discovery"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "REUSE",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0110",
       "stage_name": "Reuse Before Create"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "PERCEPTION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0120",
       "stage_name": "Observe"
     },
@@ -346,148 +419,189 @@
           "in_scope": true,
           "percent": 76.73,
           "statements": 587
+        },
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
         }
       },
       "discharge": {
-        "provider": "",
+        "provider": "engine.constitution.evolution",
         "self_referential": false,
-        "status": "not-applicable"
+        "status": "satisfied"
       },
-      "failed_probes": [
-        "executably_discharged"
-      ],
+      "failed_probes": [],
       "group": "PERCEPTION",
       "probes": {
         "deterministic_replay": true,
         "executable_engine": true,
-        "executably_discharged": false,
+        "executably_discharged": true,
         "ownership_resolves": true,
         "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0130",
       "stage_name": "Perceive"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "PERCEPTION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0140",
       "stage_name": "Measure"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "EVIDENCE",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0150",
       "stage_name": "Evidence"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "ASSURANCE",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0160",
       "stage_name": "Validate"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "ASSURANCE",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0170",
       "stage_name": "Verify"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "COGNITION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0180",
       "stage_name": "Learn"
     },
     {
       "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        },
         "engine/uckp/intelligence.py": {
           "branches": 82,
           "covered": 226,
@@ -498,171 +612,207 @@
         }
       },
       "discharge": {
-        "provider": "",
+        "provider": "engine.constitution.evolution",
         "self_referential": false,
-        "status": "not-applicable"
+        "status": "satisfied"
       },
-      "failed_probes": [
-        "executably_discharged"
-      ],
+      "failed_probes": [],
       "group": "COGNITION",
       "probes": {
         "deterministic_replay": true,
         "executable_engine": true,
-        "executably_discharged": false,
+        "executably_discharged": true,
         "ownership_resolves": true,
         "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0190",
       "stage_name": "Reason"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "COGNITION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0200",
       "stage_name": "Reflect"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "CORRECTION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0210",
       "stage_name": "Challenge"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "CORRECTION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0220",
       "stage_name": "Correct"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "CORRECTION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0230",
       "stage_name": "Improve"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "CONSTRUCTION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0240",
       "stage_name": "Architect"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "CONSTRUCTION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0250",
       "stage_name": "Engineer"
     },
     {
       "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        },
         "engine/tests/conftest.py": {
           "branches": 0,
           "covered": 0,
@@ -673,46 +823,49 @@
         }
       },
       "discharge": {
-        "provider": "",
+        "provider": "engine.constitution.evolution",
         "self_referential": false,
-        "status": "not-applicable"
+        "status": "satisfied"
       },
-      "failed_probes": [
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "CONSTRUCTION",
       "probes": {
         "deterministic_replay": true,
         "executable_engine": true,
-        "executably_discharged": false,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0260",
       "stage_name": "Test"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "GOVERNANCE",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0270",
       "stage_name": "Govern"
     },
@@ -725,6 +878,14 @@
           "in_scope": false,
           "percent": 0.0,
           "statements": 0
+        },
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
         }
       },
       "discharge": {
@@ -732,41 +893,45 @@
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "GOVERNANCE",
       "probes": {
         "deterministic_replay": true,
         "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0280",
       "stage_name": "Certify"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "INTEGRATION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0290",
       "stage_name": "Integrate"
     },
@@ -779,6 +944,14 @@
           "in_scope": false,
           "percent": 0.0,
           "statements": 0
+        },
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
         }
       },
       "discharge": {
@@ -786,46 +959,58 @@
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "INTEGRATION",
       "probes": {
         "deterministic_replay": true,
         "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0300",
       "stage_name": "Register"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "IDENTITY",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0310",
       "stage_name": "Assign Universal Constitutional Identifier"
     },
     {
       "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        },
         "engine/uckp/vocabulary.py": {
           "branches": 24,
           "covered": 125,
@@ -854,100 +1039,131 @@
       "stage_name": "Update Universal Constitutional Identifier Dictionary"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "IDENTITY",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0330",
       "stage_name": "Update Universal Registry"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "IDENTITY",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0340",
       "stage_name": "Update Universal Bookkeeping"
     },
     {
-      "coverage": {},
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
+      },
       "discharge": {
         "provider": "engine.constitution.evolution",
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "executable_engine",
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "IDENTITY",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
+        "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0350",
       "stage_name": "Update Universal Lineage"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "TRUTH",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0360",
       "stage_name": "Update Repository Truth"
     },
     {
       "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        },
         "engine/runtime/execution/replay.py": {
           "branches": 8,
           "covered": 25,
@@ -984,6 +1200,14 @@
           "in_scope": false,
           "percent": 0.0,
           "statements": 0
+        },
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
         }
       },
       "discharge": {
@@ -991,186 +1215,219 @@
         "self_referential": false,
         "status": "satisfied"
       },
-      "failed_probes": [
-        "test_coverage"
-      ],
+      "failed_probes": [],
       "group": "CONVERGENCE",
       "probes": {
         "deterministic_replay": true,
         "executable_engine": true,
         "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "PARTIALLY_IMPLEMENTED",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0380",
       "stage_name": "Deterministic Fixed Point"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "KNOWLEDGE",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0390",
       "stage_name": "Extract Engineering Knowledge"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "KNOWLEDGE",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0400",
       "stage_name": "Register Engineering Knowledge"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "ELEVATION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0410",
       "stage_name": "Elevate"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "ELEVATION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0420",
       "stage_name": "Increase Constitutional Capability"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "ELEVATION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0430",
       "stage_name": "Increase Engineering Capability"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "ELEVATION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0440",
       "stage_name": "Increase Autonomous Engineering Capability"
     },
     {
-      "coverage": {},
-      "discharge": {
-        "provider": "",
-        "self_referential": false,
-        "status": "not-applicable"
+      "coverage": {
+        "engine/constitution/stages.py": {
+          "branches": 10,
+          "covered": 280,
+          "covered_branches": 8,
+          "in_scope": true,
+          "percent": 98.29,
+          "statements": 283
+        }
       },
-      "failed_probes": [
-        "executable_engine",
-        "executably_discharged",
-        "test_coverage"
-      ],
+      "discharge": {
+        "provider": "engine.constitution.evolution",
+        "self_referential": false,
+        "status": "satisfied"
+      },
+      "failed_probes": [],
       "group": "ELEVATION",
       "probes": {
         "deterministic_replay": true,
-        "executable_engine": false,
-        "executably_discharged": false,
+        "executable_engine": true,
+        "executably_discharged": true,
         "ownership_resolves": true,
-        "test_coverage": false
+        "test_coverage": true
       },
-      "realization": "DECLARED_ONLY",
+      "realization": "IMPLEMENTED",
       "stage_id": "UCL-S-0450",
       "stage_name": "Begin Next Elevated Engineering Cycle"
     }

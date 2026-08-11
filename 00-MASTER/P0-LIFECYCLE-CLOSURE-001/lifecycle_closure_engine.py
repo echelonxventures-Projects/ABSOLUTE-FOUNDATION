@@ -101,7 +101,10 @@ EVOLUTION_CAPABILITIES: tuple[tuple[str, str], ...] = (
 #: The Phase 7 closures, and the stages whose realization each requires.
 KNOWLEDGE_CLOSURES: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("knowledge_closure", ("Extract Engineering Knowledge", "Register Engineering Knowledge")),
-    ("capability_closure", ("Increase Constitutional Capability", "Increase Engineering Capability")),
+    (
+        "capability_closure",
+        ("Increase Constitutional Capability", "Increase Engineering Capability"),
+    ),
     (
         "evolution_closure",
         ("Update Repository Truth", "Elevate", "Begin Next Elevated Engineering Cycle"),
@@ -325,7 +328,9 @@ def measure_coverage(targets: Sequence[str]) -> dict[str, Any]:
     roots = sorted({t.split("/", 1)[0] for t in targets if "/" in t} | {"engine", "platform"})
     with tempfile.TemporaryDirectory() as tmp:
         data = Path(tmp) / "cov.json"
-        run = subprocess.run(
+        # S603: every argument is a literal or `sys.executable`; nothing here is derived
+        # from repository content, so there is no untrusted input to inject.
+        run = subprocess.run(  # noqa: S603
             [
                 sys.executable,
                 "-m",
@@ -346,7 +351,7 @@ def measure_coverage(targets: Sequence[str]) -> dict[str, Any]:
             capture_output=True,
             text=True,
         )
-        report = subprocess.run(
+        report = subprocess.run(  # noqa: S603 - literal argv; see above
             [sys.executable, "-m", "coverage", "json", "-o", str(data), "--pretty-print"],
             cwd=REPO,
             capture_output=True,
@@ -591,8 +596,10 @@ def phase3_realization(
         },
         "measurements": {
             "stage_count": len(results),
-            **{k.lower(): tally.get(k, 0) for k in
-               ("IMPLEMENTED", "PARTIALLY_IMPLEMENTED", "DECLARED_ONLY", "MISSING")},
+            **{
+                k.lower(): tally.get(k, 0)
+                for k in ("IMPLEMENTED", "PARTIALLY_IMPLEMENTED", "DECLARED_ONLY", "MISSING")
+            },
             "probe_failures": {
                 probe: sum(1 for r in results if probe in r["failed_probes"])
                 for probe in REALIZATION_PROBES
@@ -626,9 +633,7 @@ def phase4_graph(nodes: list[dict[str, Any]]) -> dict[str, Any]:
                         "detail": "prerequisite is not ordered before the stage",
                     }
                 )
-    unknown = sorted(
-        {r for n in nodes for r in n.get("depends_on", ()) if r not in graph}
-    )
+    unknown = sorted({r for n in nodes for r in n.get("depends_on", ()) if r not in graph})
     return {
         "phase": 4,
         "title": "Execution Graph Determination",
@@ -676,9 +681,7 @@ def phase5_replay(rounds: int) -> dict[str, Any]:
                 knowledge.read_text(encoding="utf-8") if knowledge.exists() else ""
             ),
             "bookkeeping_identity": content_hash(population.to_dict()),
-            "lineage_identity": content_hash(
-                [o.to_dict() for o in execution.outcomes]
-            ),
+            "lineage_identity": content_hash([o.to_dict() for o in execution.outcomes]),
             "chain_head": execution.chain_head,
             "chain_intact": str(execution.chain_is_intact()),
         }
@@ -926,7 +929,9 @@ def phase9_coverage(
             ),
             "governance_coverage_percent": round(100.0 * governed / total, 2) if total else 0.0,
             "evolution_coverage_percent": round(
-                100.0 * knowledge["measurements"]["closed"] / max(1, knowledge["measurements"]["closures"]),
+                100.0
+                * knowledge["measurements"]["closed"]
+                / max(1, knowledge["measurements"]["closures"]),
                 2,
             ),
             "knowledge_coverage_percent": round(
@@ -1009,8 +1014,7 @@ def phase10_closure(
         ),
         "observability": (
             full,
-            f"{r['probe_failures']['executably_discharged']} stages emit no executable "
-            "observation",
+            f"{r['probe_failures']['executably_discharged']} stages emit no executable observation",
         ),
         "recoverability": (
             replay["status"] == "REPLAYABLE" and full,
@@ -1018,7 +1022,8 @@ def phase10_closure(
             f"{r['implemented']}/{total} are",
         ),
         "reproducibility": (
-            replay["measurements"]["mutation"] == 0 and coverage["measurements"]["coverage_measured"],
+            replay["measurements"]["mutation"] == 0
+            and coverage["measurements"]["coverage_measured"],
             f"{replay['measurements']['mutation']} drift dimensions; "
             f"coverage_measured={coverage['measurements']['coverage_measured']}",
         ),
@@ -1071,6 +1076,10 @@ def determination(artifacts: Mapping[str, dict[str, Any]]) -> str:
     clo = artifacts["closure"]
 
     r = rea["measurements"]
+    cm = clo["measurements"]
+    im = inv["measurements"]
+    om = own["measurements"]
+    gm = gra["measurements"]
     total = r["stage_count"]
     lines: list[str] = []
     add = lines.append
@@ -1088,12 +1097,14 @@ def determination(artifacts: Mapping[str, dict[str, Any]]) -> str:
     add("| LIFECYCLE AUTHORITY | `UCL-000001` (45 stages) |")
     add(f"| ENGINE | `{rel(Path(__file__))}` |")
     add(f"| DETERMINATION | **{'CLOSED' if clo['measurements']['closure'] else 'NOT CLOSED'}** |")
-    add(f"| CLOSURE CLAIMS PROVEN | {clo['measurements']['proven']} / {clo['measurements']['claims']} |")
+    add(f"| CLOSURE CLAIMS PROVEN | {cm['proven']} / {cm['claims']} |")
     add("| REPOSITORY ANCHOR | the containing commit — owned by version control |")
     add("")
-    add("> Declarations were treated as claims to be tested. A stage is IMPLEMENTED only "
+    add(
+        "> Declarations were treated as claims to be tested. A stage is IMPLEMENTED only "
         "where five executed probes agree; the manifest is never accepted as evidence for "
-        "itself.")
+        "itself."
+    )
     add("")
 
     add("## Headline")
@@ -1105,8 +1116,10 @@ def determination(artifacts: Mapping[str, dict[str, Any]]) -> str:
     add(f"| PARTIALLY_IMPLEMENTED | {r['partially_implemented']} |")
     add(f"| DECLARED_ONLY | {r['declared_only']} |")
     add(f"| MISSING | {r['missing']} |")
-    add(f"| Stages with an executable engine | {inv['measurements']['stages_with_executable_engine']} |")
-    add(f"| Stages whose evidence is a document only | {inv['measurements']['stages_with_document_evidence_only']} |")
+    add(f"| Stages with an executable engine | {im['stages_with_executable_engine']} |")
+    add(
+        f"| Stages whose evidence is a document only | {im['stages_with_document_evidence_only']} |"
+    )
     add(f"| Fully traceable stages | {tra['measurements']['fully_traceable']} |")
     add(f"| Replay status ({rep['rounds']} rounds) | {rep['status']} |")
     add(f"| Autonomous capabilities | {evo['measurements']['autonomous']} / 8 |")
@@ -1124,16 +1137,24 @@ def determination(artifacts: Mapping[str, dict[str, Any]]) -> str:
     add("## Phase-by-phase measurement")
     add("")
     add("### Phase 1 — inventory")
-    add(f"- {total} stages read from `{rel(MANIFEST)}`; every declared owner and evidence "
-        f"artifact resolved on disk ({inv['measurements']['owners_absent_from_disk']} absent).")
-    add(f"- {inv['measurements']['stages_with_executable_engine']} stages name a module that "
-        f"compiles; {inv['measurements']['stages_with_document_evidence_only']} name only documents.")
+    add(
+        f"- {total} stages read from `{rel(MANIFEST)}`; every declared owner and evidence "
+        f"artifact resolved on disk ({inv['measurements']['owners_absent_from_disk']} absent)."
+    )
+    add(
+        f"- {im['stages_with_executable_engine']} stages name a module that compiles; "
+        f"{im['stages_with_document_evidence_only']} name only documents."
+    )
     add("")
     add("### Phase 2 — canonical ownership")
-    add(f"- {own['measurements']['distinct_owners']} distinct owners for {total} stages; "
-        f"gaps {own['measurements']['ownership_gaps']}, collisions {own['measurements']['ownership_collisions']}.")
-    add(f"- {own['measurements']['ownership_ambiguities']} stages are owned by a document, so no "
-        "executable component owns the behaviour.")
+    add(
+        f"- {om['distinct_owners']} distinct owners for {total} stages; "
+        f"gaps {om['ownership_gaps']}, collisions {om['ownership_collisions']}."
+    )
+    add(
+        f"- {own['measurements']['ownership_ambiguities']} stages are owned by a document, so no "
+        "executable component owns the behaviour."
+    )
     add("")
     add("### Phase 3 — executable realization")
     add("| Probe | Stages failing |")
@@ -1142,17 +1163,23 @@ def determination(artifacts: Mapping[str, dict[str, Any]]) -> str:
         add(f"| `{probe}` | {count} |")
     add("")
     add("### Phase 4 — execution graph")
-    add(f"- {gra['measurements']['nodes']} nodes, {gra['measurements']['edges']} edges, "
+    add(
+        f"- {gra['measurements']['nodes']} nodes, {gra['measurements']['edges']} edges, "
         f"cycles {gra['measurements']['cycles']}, skipped prerequisites "
-        f"{gra['measurements']['skipped_prerequisites']}.")
-    add(f"- Derived order matches the declared order: {gra['measurements']['derived_matches_declared_order']}.")
+        f"{gra['measurements']['skipped_prerequisites']}."
+    )
+    add(f"- Derived order matches the declared order: {gm['derived_matches_declared_order']}.")
     add("")
     add("### Phase 5 — deterministic replay")
-    add(f"- {rep['measurements']['rounds_executed']} consecutive rounds over "
+    add(
+        f"- {rep['measurements']['rounds_executed']} consecutive rounds over "
         f"{rep['measurements']['dimensions_measured']} identity dimensions; "
-        f"{rep['measurements']['mutation']} unstable.")
-    add(f"- Status **{rep['status']}** — and this measures only what actually executes; "
-        f"{r['declared_only'] + r['missing']} stages contribute no observation to replay at all.")
+        f"{rep['measurements']['mutation']} unstable."
+    )
+    add(
+        f"- Status **{rep['status']}** — and this measures only what actually executes; "
+        f"{r['declared_only'] + r['missing']} stages contribute no observation to replay at all."
+    )
     add("")
     add("### Phase 6 — autonomous evolution")
     add("| Capability | Level | Basis |")
@@ -1164,8 +1191,10 @@ def determination(artifacts: Mapping[str, dict[str, Any]]) -> str:
     add("| Closure | Closed | Blocking stages |")
     add("|---|---|---|")
     for closure in kno["closures"]:
-        add(f"| `{closure['closure']}` | {'YES' if closure['closed'] else '**NO**'} | "
-            f"{', '.join(closure['blocking']) or '—'} |")
+        add(
+            f"| `{closure['closure']}` | {'YES' if closure['closed'] else '**NO**'} | "
+            f"{', '.join(closure['blocking']) or '—'} |"
+        )
     add("")
     add("### Phase 8 — traceability")
     add("| Link | Stages broken |")
@@ -1199,20 +1228,22 @@ def determination(artifacts: Mapping[str, dict[str, Any]]) -> str:
     for stage in rea["stages"]:
         if stage["realization"] == "IMPLEMENTED":
             continue
-        add(f"| `{stage['stage_id']}` | {stage['stage_name']} | {stage['realization']} | "
-            f"{', '.join(stage['failed_probes'])} |")
+        add(
+            f"| `{stage['stage_id']}` | {stage['stage_name']} | {stage['realization']} | "
+            f"{', '.join(stage['failed_probes'])} |"
+        )
     add("")
 
     add("## Success condition")
     add("")
-    condition = (
-        "MET" if clo["measurements"]["closure"] else "NOT MET"
-    )
-    add(f"**{condition}.** The directive requires every stage to be canonically owned, "
+    condition = "MET" if clo["measurements"]["closure"] else "NOT MET"
+    add(
+        f"**{condition}.** The directive requires every stage to be canonically owned, "
         "executably realized, governed, tested, traceable, replayable, deterministic and "
         "evolution-capable, with every gap explicitly identified. The gap table above is "
         "complete and machine-generated; the realization requirement is "
-        f"{r['implemented']}/{total}.")
+        f"{r['implemented']}/{total}."
+    )
     add("")
     return "\n".join(lines) + "\n"
 

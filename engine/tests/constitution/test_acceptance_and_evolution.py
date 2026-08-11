@@ -223,8 +223,12 @@ def test_the_engine_discharges_ucl_000001_rather_than_copying_it(lawful: Populat
     unclaimed = [
         o for o in execution.outcomes if o.status is nucleus_lifecycle.StageStatus.NOT_APPLICABLE
     ]
-    assert satisfied, "the engine must discharge some stages"
-    assert unclaimed, "stages with no faculty must be unclaimed, not silently satisfied"
+    # This assertion was once the reverse: it required *some* stage to be unclaimed,
+    # because the engine carried one verdict per stage group and had a faculty for only
+    # seven of sixteen. engine.constitution.stages now supplies one faculty per declared
+    # stage, so nothing is unclaimed — and the honest assertion is the stronger one.
+    assert len(satisfied) == 45, "every declared stage must be discharged by a measurement"
+    assert unclaimed == [], "a stage with no faculty would be silently unmeasured"
 
 
 def test_a_failing_population_fails_the_lifecycle_stages_it_owns() -> None:

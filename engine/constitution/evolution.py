@@ -588,42 +588,46 @@ def lifecycle_stage_function(
 
     The composition point named in this module's docstring. The 45 stages stay where they
     are declared; what changes is that a stage is now discharged by a measurement rather
-    than by the declaration asserting itself. Stages this engine has no faculty for are
-    reported ``NOT_APPLICABLE`` — honestly unclaimed rather than silently satisfied, which
-    is the same discipline :func:`engine.nucleus.lifecycle.satisfied_by_declaration` keeps.
-    """
-    report = enforcement_layer.enforce(population)
-    derived = execution_planner.plan(population)
-    settled = replay_engine.converge(population)
+    than by the declaration asserting itself.
 
-    #: Stage group → whether this engine can discharge it, and with what evidence.
-    discharged: Mapping[str, tuple[bool, str]] = {
-        "DISCOVERY": (not derived.graph.unknown_referents(), derived.graph.digest()),
-        "REUSE": (not assimilation_gate.duplicate_capabilities(population), report.digest()),
-        "ASSURANCE": (report.passed, report.digest()),
-        "GOVERNANCE": (derived.authority.passed, derived.authority.digest()),
-        "INTEGRATION": (derived.executable, derived.digest()),
-        "IDENTITY": (report.measurement("CEL-INV-12").satisfied, report.digest()),
-        "CONVERGENCE": (settled.fixed_point, settled.digest()),
-    }
+    Discharge is **per stage**, not per group. An earlier form of this function carried one
+    verdict for a whole stage group, which meant a stage could read as satisfied because a
+    sibling was — a group of eight sharing one measurement is one measurement, not eight.
+    :mod:`engine.constitution.stages` supplies one faculty per declared stage, and each
+    returns the digest of what it actually measured.
+
+    A stage with no registered faculty is reported ``NOT_APPLICABLE`` — honestly unclaimed
+    rather than silently satisfied, the same discipline
+    :func:`engine.nucleus.lifecycle.satisfied_by_declaration` keeps.
+    """
+    from engine.constitution import stages as stage_faculties
+
+    context = stage_faculties.Context(population=population)
 
     def stage_function(
         subject: str, stage: nucleus_lifecycle.Stage
     ) -> tuple[nucleus_lifecycle.StageStatus, str, Mapping[str, Any]]:
-        verdict = discharged.get(stage.group)
-        if verdict is None:
+        registered = stage_faculties.FACULTIES.get(stage.stage_id)
+        if registered is None:
             return (
                 nucleus_lifecycle.StageStatus.NOT_APPLICABLE,
                 f"{ENGINE_ID}:{stage.stage_id}",
-                {"subject": subject, "group": stage.group, "reason": "no faculty for this group"},
+                {"subject": subject, "group": stage.group, "reason": "no faculty for this stage"},
             )
-        satisfied, evidence = verdict
+        try:
+            measurement = registered(context)
+        except Exception as exc:  # noqa: BLE001 - an unevaluable faculty is a failed stage
+            return (
+                nucleus_lifecycle.StageStatus.FAILED,
+                f"{stage_faculties.EVIDENCE_PREFIX}:unevaluable",
+                {"subject": subject, "group": stage.group, "error": f"{type(exc).__name__}: {exc}"},
+            )
         return (
             nucleus_lifecycle.StageStatus.SATISFIED
-            if satisfied
+            if measurement.satisfied
             else nucleus_lifecycle.StageStatus.FAILED,
-            f"{ENGINE_ID}:{evidence}",
-            {"subject": subject, "group": stage.group},
+            measurement.digest(),
+            {"subject": subject, "group": stage.group, "detail": measurement.detail},
         )
 
     return stage_function

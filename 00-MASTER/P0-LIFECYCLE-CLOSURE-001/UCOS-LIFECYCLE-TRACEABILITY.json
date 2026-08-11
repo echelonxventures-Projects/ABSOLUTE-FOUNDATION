@@ -10,61 +10,54 @@
     "registry_to_repository_truth",
     "repository_truth_to_replay"
   ],
-  "digest": "3b8b4fe0fe1f600cddd40ede8c5fac2797823c0a706609ad94ea03e1cd27adb9",
+  "digest": "dd12b1ca83e135773d6634126a799f4d4dc0fbcabaf7e3196c4f5f086234e6a6",
   "measurements": {
-    "fully_traceable": 7,
-    "hundred_percent": false,
+    "fully_traceable": 45,
+    "hundred_percent": true,
     "link_failures": {
-      "constitution_to_engine": 33,
-      "engine_to_tests": 38,
+      "constitution_to_engine": 0,
+      "engine_to_tests": 0,
       "evidence_to_registry": 0,
       "owner_to_constitution": 0,
       "registry_to_repository_truth": 0,
       "repository_truth_to_replay": 0,
       "stage_to_owner": 0,
-      "tests_to_evidence": 34
+      "tests_to_evidence": 0
     },
     "stages": 45,
-    "traceability_percent": 15.56
+    "traceability_percent": 100.0
   },
   "phase": 8,
   "programme": "P0-LIFECYCLE-CLOSURE-001",
   "stages": [
     {
-      "broken_links": [
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
         "constitution_to_engine": true,
-        "engine_to_tests": false,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0010",
       "stage_name": "Receive Goal"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0020",
       "stage_name": "Understand"
@@ -118,141 +111,113 @@
       "stage_name": "Knowledge Discovery"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0060",
       "stage_name": "Canonical Owner Discovery"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0070",
       "stage_name": "Capability Discovery"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0080",
       "stage_name": "Dependency Discovery"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0090",
       "stage_name": "Constraint Discovery"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0100",
       "stage_name": "Gap Discovery"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0110",
       "stage_name": "Reuse Before Create"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0120",
       "stage_name": "Observe"
@@ -274,74 +239,59 @@
       "stage_name": "Perceive"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0140",
       "stage_name": "Measure"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0150",
       "stage_name": "Evidence"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0160",
       "stage_name": "Validate"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
@@ -353,21 +303,17 @@
       "stage_name": "Verify"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0180",
       "stage_name": "Learn"
@@ -389,238 +335,193 @@
       "stage_name": "Reason"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0200",
       "stage_name": "Reflect"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0210",
       "stage_name": "Challenge"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0220",
       "stage_name": "Correct"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0230",
       "stage_name": "Improve"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0240",
       "stage_name": "Architect"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0250",
       "stage_name": "Engineer"
     },
     {
-      "broken_links": [
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
         "constitution_to_engine": true,
-        "engine_to_tests": false,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0260",
       "stage_name": "Test"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0270",
       "stage_name": "Govern"
     },
     {
-      "broken_links": [
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
         "constitution_to_engine": true,
-        "engine_to_tests": false,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0280",
       "stage_name": "Certify"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0290",
       "stage_name": "Integrate"
     },
     {
-      "broken_links": [
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
         "constitution_to_engine": true,
-        "engine_to_tests": false,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0300",
       "stage_name": "Register"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0310",
       "stage_name": "Assign Universal Constitutional Identifier"
@@ -642,14 +543,11 @@
       "stage_name": "Update Universal Constitutional Identifier Dictionary"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
@@ -661,54 +559,43 @@
       "stage_name": "Update Universal Registry"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0340",
       "stage_name": "Update Universal Bookkeeping"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0350",
       "stage_name": "Update Universal Lineage"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
@@ -736,53 +623,43 @@
       "stage_name": "Replay"
     },
     {
-      "broken_links": [
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
         "constitution_to_engine": true,
-        "engine_to_tests": false,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0380",
       "stage_name": "Deterministic Fixed Point"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0390",
       "stage_name": "Extract Engineering Knowledge"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
@@ -794,101 +671,81 @@
       "stage_name": "Register Engineering Knowledge"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0410",
       "stage_name": "Elevate"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0420",
       "stage_name": "Increase Constitutional Capability"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0430",
       "stage_name": "Increase Engineering Capability"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0440",
       "stage_name": "Increase Autonomous Engineering Capability"
     },
     {
-      "broken_links": [
-        "constitution_to_engine",
-        "engine_to_tests",
-        "tests_to_evidence"
-      ],
-      "complete": false,
+      "broken_links": [],
+      "complete": true,
       "links": {
-        "constitution_to_engine": false,
-        "engine_to_tests": false,
+        "constitution_to_engine": true,
+        "engine_to_tests": true,
         "evidence_to_registry": true,
         "owner_to_constitution": true,
         "registry_to_repository_truth": true,
         "repository_truth_to_replay": true,
         "stage_to_owner": true,
-        "tests_to_evidence": false
+        "tests_to_evidence": true
       },
       "stage_id": "UCL-S-0450",
       "stage_name": "Begin Next Elevated Engineering Cycle"

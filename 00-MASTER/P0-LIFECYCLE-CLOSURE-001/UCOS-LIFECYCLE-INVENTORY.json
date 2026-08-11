@@ -1,14 +1,14 @@
 {
   "authority": "NONE — DERIVED TRUTH",
-  "digest": "d9ffcf6624675dbe692441c391998a83e9d1a86579f11557ddc9c195d3e12c1f",
+  "digest": "0f7034127aa7414805ec5412120a9da55f15bd469e4fb542d5d18e850293345f",
   "lifecycle_authority": "UCL-000001",
   "manifest": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
   "measurements": {
     "distinct_owners": 45,
     "owners_absent_from_disk": 0,
-    "stages_with_document_evidence_only": 33,
-    "stages_with_executable_engine": 12,
-    "stages_with_tests": 11
+    "stages_with_document_evidence_only": 0,
+    "stages_with_executable_engine": 45,
+    "stages_with_tests": 45
   },
   "phase": 1,
   "programme": "P0-LIFECYCLE-CLOSURE-001",
@@ -33,14 +33,17 @@
       "constitution": "A goal is admissible only as a mandate the repository records; an unrecorded goal is not an engineering goal.",
       "dependencies": [],
       "engine": [
-        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+        "00-MASTER/UCOS-AEE-001/aee_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence": [
-        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+        "00-MASTER/UCOS-AEE-001/aee_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
-        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+        "00-MASTER/UCOS-AEE-001/aee_engine.py",
+        "engine/constitution/stages.py"
       ],
       "group": "GOAL",
       "input": [],
@@ -50,7 +53,10 @@
       "registry": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "stage_id": "UCL-S-0010",
       "stage_name": "Receive Goal",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UCOS-AEE-001/04-DISCOVERY-AND-CLASSIFICATION-REGISTER.md",
@@ -58,12 +64,17 @@
       "dependencies": [
         "UCL-S-0010"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md"
+        "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "GOAL",
       "input": [
         "UCL-S-0010"
@@ -74,7 +85,10 @@
       "registry": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "stage_id": "UCL-S-0020",
       "stage_name": "Understand",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
@@ -83,14 +97,17 @@
         "UCL-S-0020"
       ],
       "engine": [
-        "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py"
+        "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence": [
-        "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py"
+        "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
-        "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py"
+        "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
+        "engine/constitution/stages.py"
       ],
       "group": "DISCOVERY",
       "input": [
@@ -106,6 +123,8 @@
       "stage_id": "UCL-S-0030",
       "stage_name": "Context Assimilation",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/unit/test_corpus_currency.py",
         "engine/tests/unit/test_repository_decision.py",
         "engine/tests/unit/test_superiority_evaluation.py"
@@ -118,14 +137,17 @@
         "UCL-S-0030"
       ],
       "engine": [
-        "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py"
+        "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence": [
-        "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py"
+        "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
-        "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py"
+        "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+        "engine/constitution/stages.py"
       ],
       "group": "DISCOVERY",
       "input": [
@@ -141,6 +163,8 @@
       "stage_id": "UCL-S-0040",
       "stage_name": "Repository Truth Discovery",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/knowledge/test_capability.py",
         "engine/tests/unit/test_closure009_requirement_engine.py",
         "platform/tests/test_universal_truth.py"
@@ -153,14 +177,17 @@
         "UCL-S-0040"
       ],
       "engine": [
-        "00-MASTER/UKAP-001/corpus_engine.py"
+        "00-MASTER/UKAP-001/corpus_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence": [
-        "00-MASTER/UKAP-001/corpus_engine.py"
+        "00-MASTER/UKAP-001/corpus_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
-        "00-MASTER/UKAP-001/corpus_engine.py"
+        "00-MASTER/UKAP-001/corpus_engine.py",
+        "engine/constitution/stages.py"
       ],
       "group": "DISCOVERY",
       "input": [
@@ -176,6 +203,8 @@
       "stage_id": "UCL-S-0050",
       "stage_name": "Knowledge Discovery",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/unit/test_corpus_currency.py",
         "platform/tests/test_universal_truth.py"
       ]
@@ -186,12 +215,17 @@
       "dependencies": [
         "UCL-S-0040"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "DISCOVERY",
       "input": [
         "UCL-S-0040"
@@ -204,7 +238,10 @@
       "registry": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0060",
       "stage_name": "Canonical Owner Discovery",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
@@ -212,12 +249,17 @@
       "dependencies": [
         "UCL-S-0060"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCOS-RIB-001/08-REUSE-ANALYSIS.md"
+        "00-MASTER/UCOS-RIB-001/08-REUSE-ANALYSIS.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "DISCOVERY",
       "input": [
         "UCL-S-0060"
@@ -230,7 +272,10 @@
       "registry": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
       "stage_id": "UCL-S-0070",
       "stage_name": "Capability Discovery",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "03-DEPENDENCY-GRAPH.md",
@@ -238,12 +283,17 @@
       "dependencies": [
         "UCL-S-0070"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "05-DEPENDENCY-CLOSURE.md"
+        "05-DEPENDENCY-CLOSURE.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "DISCOVERY",
       "input": [
         "UCL-S-0070"
@@ -256,7 +306,10 @@
       "registry": "00-MASTER/UCOS-RIB-001/05-DEPENDENCY-GRAPH.md",
       "stage_id": "UCL-S-0080",
       "stage_name": "Dependency Discovery",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "08-QUALITY-GATES.md",
@@ -264,12 +317,17 @@
       "dependencies": [
         "UCL-S-0080"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "06-VALIDATION-READINESS.md"
+        "06-VALIDATION-READINESS.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "DISCOVERY",
       "input": [
         "UCL-S-0080"
@@ -282,7 +340,10 @@
       "registry": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0090",
       "stage_name": "Constraint Discovery",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "04-REPOSITORY-GAP-ANALYSIS.md",
@@ -290,12 +351,17 @@
       "dependencies": [
         "UCL-S-0090"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "02-GAP-CLASSIFICATION.md"
+        "02-GAP-CLASSIFICATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "DISCOVERY",
       "input": [
         "UCL-S-0090"
@@ -308,7 +374,10 @@
       "registry": "00-MASTER/URRC-000001/06-GAP-MATRIX.md",
       "stage_id": "UCL-S-0100",
       "stage_name": "Gap Discovery",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/URRC-000001/03-REUSE-MATRIX.md",
@@ -316,12 +385,17 @@
       "dependencies": [
         "UCL-S-0100"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/URRC-000001/04-DUPLICATION-MATRIX.md"
+        "00-MASTER/URRC-000001/04-DUPLICATION-MATRIX.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "REUSE",
       "input": [
         "UCL-S-0100"
@@ -334,7 +408,10 @@
       "registry": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0110",
       "stage_name": "Reuse Before Create",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UEI-000001/02-UNIVERSAL-OBSERVATION-SPECIFICATION.md",
@@ -342,12 +419,17 @@
       "dependencies": [
         "UCL-S-0110"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md"
+        "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "PERCEPTION",
       "input": [
         "UCL-S-0110"
@@ -360,7 +442,10 @@
       "registry": "00-MASTER/UEI-000001/01-UNIVERSAL-EVOLUTION-INTELLIGENCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0120",
       "stage_name": "Observe",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UAIE-000001/01-FACULTY-BINDING-REGISTER.md",
@@ -369,14 +454,17 @@
         "UCL-S-0120"
       ],
       "engine": [
-        "00-MASTER/UAIE-000001/uaie_engine.py"
+        "00-MASTER/UAIE-000001/uaie_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence": [
-        "00-MASTER/UAIE-000001/uaie_engine.py"
+        "00-MASTER/UAIE-000001/uaie_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
-        "00-MASTER/UAIE-000001/uaie_engine.py"
+        "00-MASTER/UAIE-000001/uaie_engine.py",
+        "engine/constitution/stages.py"
       ],
       "group": "PERCEPTION",
       "input": [
@@ -392,6 +480,8 @@
       "stage_id": "UCL-S-0130",
       "stage_name": "Perceive",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/unit/test_uaie_architectural_intelligence.py"
       ]
     },
@@ -401,12 +491,17 @@
       "dependencies": [
         "UCL-S-0130"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UAIE-000001/03-CROSS-REGISTER-CONSISTENCY.md"
+        "00-MASTER/UAIE-000001/03-CROSS-REGISTER-CONSISTENCY.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "PERCEPTION",
       "input": [
         "UCL-S-0130"
@@ -419,7 +514,10 @@
       "registry": "00-MASTER/UAIE-000001/uaie-architecture.json",
       "stage_id": "UCL-S-0140",
       "stage_name": "Measure",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UCOS-AEE-001/06-ITERATION-LEDGER.md",
@@ -427,12 +525,17 @@
       "dependencies": [
         "UCL-S-0140"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UER-000001/06-UNIVERSAL-WORK-PACKAGE-LEDGER-SPECIFICATION.md"
+        "00-MASTER/UER-000001/06-UNIVERSAL-WORK-PACKAGE-LEDGER-SPECIFICATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "EVIDENCE",
       "input": [
         "UCL-S-0140"
@@ -445,7 +548,10 @@
       "registry": "00-MASTER/UER-000001/05-UNIVERSAL-EXECUTION-JOURNAL-SPECIFICATION.md",
       "stage_id": "UCL-S-0150",
       "stage_name": "Evidence",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UEI-000001/19-VALIDATION-REPORT.md",
@@ -453,12 +559,17 @@
       "dependencies": [
         "UCL-S-0150"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "06-VALIDATION-RECONCILIATION.md"
+        "06-VALIDATION-RECONCILIATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "ASSURANCE",
       "input": [
         "UCL-S-0150"
@@ -472,7 +583,10 @@
       "registry": "08-QUALITY-GATES.md",
       "stage_id": "UCL-S-0160",
       "stage_name": "Validate",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "VERIFICATION-RUNBOOK.md",
@@ -480,12 +594,17 @@
       "dependencies": [
         "UCL-S-0160"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
+        "engine/constitution/stages.py",
         "verify.sh"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "ASSURANCE",
       "input": [
         "UCL-S-0160"
@@ -500,6 +619,8 @@
       "stage_id": "UCL-S-0170",
       "stage_name": "Verify",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/unit/test_closure009_requirement_engine.py",
         "platform/tests/test_repository_operations_commands.py"
       ]
@@ -510,12 +631,17 @@
       "dependencies": [
         "UCL-S-0170"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md"
+        "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "COGNITION",
       "input": [
         "UCL-S-0170"
@@ -528,7 +654,10 @@
       "registry": "00-MASTER/UEI-000001/01-UNIVERSAL-EVOLUTION-INTELLIGENCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0180",
       "stage_name": "Learn",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UEI-000001/06-UNIVERSAL-IMPACT-ANALYSIS-SPECIFICATION.md",
@@ -537,13 +666,16 @@
         "UCL-S-0180"
       ],
       "engine": [
+        "engine/constitution/stages.py",
         "engine/uckp/intelligence.py"
       ],
       "evidence": [
+        "engine/constitution/stages.py",
         "engine/uckp/intelligence.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
+        "engine/constitution/stages.py",
         "engine/uckp/intelligence.py"
       ],
       "group": "COGNITION",
@@ -557,6 +689,8 @@
       "stage_id": "UCL-S-0190",
       "stage_name": "Reason",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/uckp/test_state_evolution_intelligence_governance.py",
         "platform/tests/test_security_readiness.py"
       ]
@@ -567,12 +701,17 @@
       "dependencies": [
         "UCL-S-0190"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UEI-000001/05-UNIVERSAL-RECOMMENDATION-SPECIFICATION.md"
+        "00-MASTER/UEI-000001/05-UNIVERSAL-RECOMMENDATION-SPECIFICATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "COGNITION",
       "input": [
         "UCL-S-0190"
@@ -583,7 +722,10 @@
       "registry": "00-MASTER/UEI-000001/01-UNIVERSAL-EVOLUTION-INTELLIGENCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0200",
       "stage_name": "Reflect",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/URRC-000001/05-CONFLICT-MATRIX.md",
@@ -591,12 +733,17 @@
       "dependencies": [
         "UCL-S-0200"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/URRC-000001/04-DUPLICATION-MATRIX.md"
+        "00-MASTER/URRC-000001/04-DUPLICATION-MATRIX.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "CORRECTION",
       "input": [
         "UCL-S-0200"
@@ -607,7 +754,10 @@
       "registry": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0210",
       "stage_name": "Challenge",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UER-000001/03-UNIVERSAL-RECOVERY-POLICY.md",
@@ -615,12 +765,17 @@
       "dependencies": [
         "UCL-S-0210"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UER-000001/02-UNIVERSAL-CHECKPOINT-POLICY.md"
+        "00-MASTER/UER-000001/02-UNIVERSAL-CHECKPOINT-POLICY.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "CORRECTION",
       "input": [
         "UCL-S-0210"
@@ -633,7 +788,10 @@
       "registry": "00-MASTER/UER-000001/01-UNIVERSAL-EXECUTION-RESILIENCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0220",
       "stage_name": "Correct",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UEI-000001/08-UNIVERSAL-IMPROVEMENT-DISCOVERY-SPECIFICATION.md",
@@ -641,12 +799,17 @@
       "dependencies": [
         "UCL-S-0220"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UEI-000001/11-CONTINUOUS-IMPROVEMENT-SPECIFICATION.md"
+        "00-MASTER/UEI-000001/11-CONTINUOUS-IMPROVEMENT-SPECIFICATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "CORRECTION",
       "input": [
         "UCL-S-0220"
@@ -657,7 +820,10 @@
       "registry": "00-MASTER/UEI-000001/01-UNIVERSAL-EVOLUTION-INTELLIGENCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0230",
       "stage_name": "Improve",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "03-ARCHITECTURAL-COMPLETENESS.md",
@@ -665,12 +831,17 @@
       "dependencies": [
         "UCL-S-0230"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "02-ARCHITECTURAL-STABILITY-CERTIFICATION.md"
+        "02-ARCHITECTURAL-STABILITY-CERTIFICATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "CONSTRUCTION",
       "input": [
         "UCL-S-0230"
@@ -683,7 +854,10 @@
       "registry": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0240",
       "stage_name": "Architect",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
@@ -691,12 +865,17 @@
       "dependencies": [
         "UCL-S-0240"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "02-IMPLEMENTATION-MANIFEST.md"
+        "02-IMPLEMENTATION-MANIFEST.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "CONSTRUCTION",
       "input": [
         "UCL-S-0240"
@@ -709,7 +888,10 @@
       "registry": "00-MASTER/MCS-000-MASTER-CONTEXT-SYSTEM-ARCHITECTURE.md",
       "stage_id": "UCL-S-0250",
       "stage_name": "Engineer",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "06-VALIDATION-READINESS.md",
@@ -718,13 +900,16 @@
         "UCL-S-0250"
       ],
       "engine": [
+        "engine/constitution/stages.py",
         "engine/tests/conftest.py"
       ],
       "evidence": [
+        "engine/constitution/stages.py",
         "engine/tests/conftest.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
+        "engine/constitution/stages.py",
         "engine/tests/conftest.py"
       ],
       "group": "CONSTRUCTION",
@@ -739,7 +924,10 @@
       "registry": "08-QUALITY-GATES.md",
       "stage_id": "UCL-S-0260",
       "stage_name": "Test",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
@@ -747,12 +935,17 @@
       "dependencies": [
         "UCL-S-0260"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "09-EXECUTION-GOVERNANCE.md"
+        "09-EXECUTION-GOVERNANCE.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "GOVERNANCE",
       "input": [
         "UCL-S-0260"
@@ -765,7 +958,10 @@
       "registry": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0270",
       "stage_name": "Govern",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UCCEP-000000/16-CONSTITUTIONAL-GATE-REGISTER.md",
@@ -774,14 +970,17 @@
         "UCL-S-0270"
       ],
       "engine": [
-        "00-MASTER/UCCEP-000000/uccep_engine.py"
+        "00-MASTER/UCCEP-000000/uccep_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence": [
-        "00-MASTER/UCCEP-000000/uccep_engine.py"
+        "00-MASTER/UCCEP-000000/uccep_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
-        "00-MASTER/UCCEP-000000/uccep_engine.py"
+        "00-MASTER/UCCEP-000000/uccep_engine.py",
+        "engine/constitution/stages.py"
       ],
       "group": "GOVERNANCE",
       "input": [
@@ -796,7 +995,10 @@
       "registry": "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0280",
       "stage_name": "Certify",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "05-CANONICAL-INTEGRATION-PLAN.md",
@@ -804,12 +1006,17 @@
       "dependencies": [
         "UCL-S-0280"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md"
+        "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "INTEGRATION",
       "input": [
         "UCL-S-0280"
@@ -822,7 +1029,10 @@
       "registry": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "stage_id": "UCL-S-0290",
       "stage_name": "Integrate",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md",
@@ -831,14 +1041,17 @@
         "UCL-S-0290"
       ],
       "engine": [
-        "00-BOOK/tools/ukb.py"
+        "00-BOOK/tools/ukb.py",
+        "engine/constitution/stages.py"
       ],
       "evidence": [
-        "00-BOOK/tools/ukb.py"
+        "00-BOOK/tools/ukb.py",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
-        "00-BOOK/tools/ukb.py"
+        "00-BOOK/tools/ukb.py",
+        "engine/constitution/stages.py"
       ],
       "group": "INTEGRATION",
       "input": [
@@ -853,7 +1066,10 @@
       "registry": "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-REG-AUTO-001-AUTOMATIC-ARTIFACT-REGISTRATION-STANDARD.md",
       "stage_id": "UCL-S-0300",
       "stage_name": "Register",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-BOOK/MASTER-BOOK/UMB-003-IDENTITY-ARCHITECTURE.md",
@@ -861,12 +1077,17 @@
       "dependencies": [
         "UCL-S-0300"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-BOOK/DATA/id-ledger.json"
+        "00-BOOK/DATA/id-ledger.json",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "IDENTITY",
       "input": [
         "UCL-S-0300"
@@ -880,7 +1101,10 @@
       "registry": "02-MASTER/UCOS-Ω∞-ABSOLUTE-IDENTITY-FEDERATION-AND-CONTINUITY-CONSTITUTION.md",
       "stage_id": "UCL-S-0310",
       "stage_name": "Assign Universal Constitutional Identifier",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-BOOK/MASTER-BOOK/UMB-004-NOMENCLATURE-ARCHITECTURE.md",
@@ -889,13 +1113,16 @@
         "UCL-S-0310"
       ],
       "engine": [
+        "engine/constitution/stages.py",
         "engine/uckp/vocabulary.py"
       ],
       "evidence": [
+        "engine/constitution/stages.py",
         "engine/uckp/vocabulary.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
+        "engine/constitution/stages.py",
         "engine/uckp/vocabulary.py"
       ],
       "group": "IDENTITY",
@@ -911,6 +1138,8 @@
       "stage_id": "UCL-S-0320",
       "stage_name": "Update Universal Constitutional Identifier Dictionary",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/nucleus/test_registry_and_ownership.py",
         "engine/tests/uckp/test_assimilation.py",
         "engine/tests/uckp/test_law_and_vocabulary.py",
@@ -926,12 +1155,17 @@
       "dependencies": [
         "UCL-S-0320"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCCEP-000000/04-UNIVERSAL-REGISTRY-CERTIFICATION.md"
+        "00-MASTER/UCCEP-000000/04-UNIVERSAL-REGISTRY-CERTIFICATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "IDENTITY",
       "input": [
         "UCL-S-0320"
@@ -946,6 +1180,8 @@
       "stage_id": "UCL-S-0330",
       "stage_name": "Update Universal Registry",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/discovery/test_contracts.py",
         "engine/tests/unit/test_frozen_paths.py",
         "platform/tests/test_control_plane_truth.py",
@@ -960,12 +1196,17 @@
       "dependencies": [
         "UCL-S-0330"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-BOOK/MASTER-BOOK/UMB-009-VERSION-ARCHITECTURE.md"
+        "00-BOOK/MASTER-BOOK/UMB-009-VERSION-ARCHITECTURE.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "IDENTITY",
       "input": [
         "UCL-S-0330"
@@ -978,7 +1219,10 @@
       "registry": "00-BOOK/MASTER-BOOK/UMB-IMP-001-AUTOMATIC-REGISTRATION-AND-ENFORCEMENT-REALIZATION.md",
       "stage_id": "UCL-S-0340",
       "stage_name": "Update Universal Bookkeeping",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-BOOK/MASTER-BOOK/UMB-010-LINEAGE-ARCHITECTURE.md",
@@ -986,12 +1230,17 @@
       "dependencies": [
         "UCL-S-0340"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-BOOK/MASTER-BOOK/UMB-008-CHANGE-ARCHITECTURE.md"
+        "00-BOOK/MASTER-BOOK/UMB-008-CHANGE-ARCHITECTURE.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "IDENTITY",
       "input": [
         "UCL-S-0340"
@@ -1004,7 +1253,10 @@
       "registry": "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-UCI-001-UNIVERSAL-CHANGE-INTELLIGENCE-AND-REGENERATION-STANDARD.md",
       "stage_id": "UCL-S-0350",
       "stage_name": "Update Universal Lineage",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UCCEP-000000/02-REPOSITORY-TRUTH-REGISTER.md",
@@ -1012,12 +1264,17 @@
       "dependencies": [
         "UCL-S-0350"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UAKOS-CLOSURE-002/closure.json"
+        "00-MASTER/UAKOS-CLOSURE-002/closure.json",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "TRUTH",
       "input": [
         "UCL-S-0350"
@@ -1032,6 +1289,8 @@
       "stage_id": "UCL-S-0360",
       "stage_name": "Update Repository Truth",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/unit/test_closure009_requirement_engine.py",
         "platform/tests/test_universal_truth.py"
       ]
@@ -1043,13 +1302,16 @@
         "UCL-S-0360"
       ],
       "engine": [
+        "engine/constitution/stages.py",
         "engine/runtime/execution/replay.py"
       ],
       "evidence": [
+        "engine/constitution/stages.py",
         "engine/runtime/execution/replay.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
+        "engine/constitution/stages.py",
         "engine/runtime/execution/replay.py"
       ],
       "group": "CONVERGENCE",
@@ -1065,6 +1327,8 @@
       "stage_id": "UCL-S-0370",
       "stage_name": "Replay",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/unit/test_execution_replay.py",
         "engine/tests/unit/test_execution_replay_validation.py",
         "platform/tests/test_universal_project_state.py"
@@ -1077,14 +1341,17 @@
         "UCL-S-0370"
       ],
       "engine": [
-        "00-MASTER/UCOS-RFP-001/rfp_engine.py"
+        "00-MASTER/UCOS-RFP-001/rfp_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence": [
-        "00-MASTER/UCOS-RFP-001/rfp_engine.py"
+        "00-MASTER/UCOS-RFP-001/rfp_engine.py",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
       "executable_engine": [
-        "00-MASTER/UCOS-RFP-001/rfp_engine.py"
+        "00-MASTER/UCOS-RFP-001/rfp_engine.py",
+        "engine/constitution/stages.py"
       ],
       "group": "CONVERGENCE",
       "input": [
@@ -1098,7 +1365,10 @@
       "registry": "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
       "stage_id": "UCL-S-0380",
       "stage_name": "Deterministic Fixed Point",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UCOS-EKAP-001/06-KNOWLEDGE-ASSIMILATION-REPORT.md",
@@ -1106,12 +1376,17 @@
       "dependencies": [
         "UCL-S-0380"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCOS-EKAP-001/02-KNOWLEDGE-CLASSIFICATION-MATRIX.md"
+        "00-MASTER/UCOS-EKAP-001/02-KNOWLEDGE-CLASSIFICATION-MATRIX.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "KNOWLEDGE",
       "input": [
         "UCL-S-0380"
@@ -1124,7 +1399,10 @@
       "registry": "00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md",
       "stage_id": "UCL-S-0390",
       "stage_name": "Extract Engineering Knowledge",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "knowledge/decisions.json",
@@ -1132,12 +1410,17 @@
       "dependencies": [
         "UCL-S-0390"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md"
+        "03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "KNOWLEDGE",
       "input": [
         "UCL-S-0390"
@@ -1152,6 +1435,8 @@
       "stage_id": "UCL-S-0400",
       "stage_name": "Register Engineering Knowledge",
       "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py",
         "engine/tests/knowledge/ukip/test_cli.py"
       ]
     },
@@ -1161,12 +1446,17 @@
       "dependencies": [
         "UCL-S-0400"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UEI-000001/18-GOVERNANCE-BINDING-DETERMINATION.md"
+        "00-MASTER/UEI-000001/18-GOVERNANCE-BINDING-DETERMINATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "ELEVATION",
       "input": [
         "UCL-S-0400"
@@ -1180,7 +1470,10 @@
       "registry": "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-AUTH-INF-001-INFINITE-EVOLUTION-UNIVERSAL-IDENTITY-AND-UNBOUNDED-EXPANSION-CONSTITUTION.md",
       "stage_id": "UCL-S-0410",
       "stage_name": "Elevate",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UCEF-000001/04-OPEN-WORLD-EXPANSION-REGISTER.md",
@@ -1188,12 +1481,17 @@
       "dependencies": [
         "UCL-S-0410"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCEF-000001/03-CONSTRUCT-CLASS-REGISTER.md"
+        "00-MASTER/UCEF-000001/03-CONSTRUCT-CLASS-REGISTER.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "ELEVATION",
       "input": [
         "UCL-S-0410"
@@ -1207,7 +1505,10 @@
       "registry": "00-CEP/CEP-009-CONSTITUTIONAL-AMENDMENT-EVOLUTION-CONSTITUTION.md",
       "stage_id": "UCL-S-0420",
       "stage_name": "Increase Constitutional Capability",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UEI-000001/16-ARCHITECTURE-EVOLUTION-SPECIFICATION.md",
@@ -1215,12 +1516,17 @@
       "dependencies": [
         "UCL-S-0420"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UEI-000001/14-REPOSITORY-EVOLUTION-SPECIFICATION.md"
+        "00-MASTER/UEI-000001/14-REPOSITORY-EVOLUTION-SPECIFICATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "ELEVATION",
       "input": [
         "UCL-S-0420"
@@ -1233,7 +1539,10 @@
       "registry": "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-AUTH-INF-001-INFINITE-EVOLUTION-UNIVERSAL-IDENTITY-AND-UNBOUNDED-EXPANSION-CONSTITUTION.md",
       "stage_id": "UCL-S-0430",
       "stage_name": "Increase Engineering Capability",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "00-MASTER/UCOS-AEE-001/09-CONTINUOUS-EVOLUTION-BINDING.md",
@@ -1241,12 +1550,17 @@
       "dependencies": [
         "UCL-S-0430"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md"
+        "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "ELEVATION",
       "input": [
         "UCL-S-0430"
@@ -1259,7 +1573,10 @@
       "registry": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "stage_id": "UCL-S-0440",
       "stage_name": "Increase Autonomous Engineering Capability",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     },
     {
       "canonical_owner": "02-EXECUTION-LIFECYCLE.md",
@@ -1267,12 +1584,17 @@
       "dependencies": [
         "UCL-S-0440"
       ],
-      "engine": [],
+      "engine": [
+        "engine/constitution/stages.py"
+      ],
       "evidence": [
-        "00-MASTER/EVOLUTION-001/EVOLUTION-GOVERNANCE-MODEL.md"
+        "00-MASTER/EVOLUTION-001/EVOLUTION-GOVERNANCE-MODEL.md",
+        "engine/constitution/stages.py"
       ],
       "evidence_all_present": true,
-      "executable_engine": [],
+      "executable_engine": [
+        "engine/constitution/stages.py"
+      ],
       "group": "ELEVATION",
       "input": [
         "UCL-S-0440"
@@ -1285,7 +1607,10 @@
       "registry": "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-AUTH-INF-001-INFINITE-EVOLUTION-UNIVERSAL-IDENTITY-AND-UNBOUNDED-EXPANSION-CONSTITUTION.md",
       "stage_id": "UCL-S-0450",
       "stage_name": "Begin Next Elevated Engineering Cycle",
-      "tests": []
+      "tests": [
+        "engine/tests/constitution/test_acceptance_and_evolution.py",
+        "engine/tests/constitution/test_stages.py"
+      ]
     }
   ],
   "title": "Universal Lifecycle Inventory"
