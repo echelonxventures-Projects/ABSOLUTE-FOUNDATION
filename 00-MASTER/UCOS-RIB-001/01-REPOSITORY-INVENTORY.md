@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (29 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (4 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 296 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -48,8 +48,8 @@
 | `SUB-PHASE3` | `00-MASTER/UAKOS-CLOSURE-002/phase3.json` | json | **NO** | YES | 4/4 | 0 | `not recorded` |
 | `SUB-PROJECT` | `pyproject.toml` | toml | YES | YES | 3/3 | 92 | `cf9722bbfc80` |
 | `SUB-REGISTER` | `00-BOOK/DATA/artifacts.json` | json | YES | YES | 2/2 | 1233 | `8a49b2f9f5e8` |
-| `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 146 | `c3209ea767a6` |
-| `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 121 | `87143325622a` |
+| `SUB-RIE-BASELINE` | `intelligence/UCOS-IMP-BASELINE-001.rib.json` | json | YES | YES | 4/4 | 146 | `7f6d41c51c37` |
+| `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 121 | `18101c16e837` |
 | `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `fd6b1b750ba5` |
 | `SUB-RIE-FRONTIER` | `intelligence/UCOS-RIE-EXECUTION-FRONTIER.json` | json | YES | YES | 4/4 | 8 | `b7355f62a426` |
 | `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 113 | `336d50c9f430` |
@@ -68,9 +68,9 @@
 
 | Measure | Kind | Field | Units with a value | Total | Purpose |
 |---|---|---|---|---|---|
-| `MSR-SOURCE` | `owned_source_count` | `source_files` | 148 | 1850 | the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree |
-| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 226 | 6422 | every version-controlled file homed inside the unit |
-| `MSR-UNITTEST` | `tracked_glob_count` | `unit_tests` | 44 | 389 | verification assets located for the unit itself |
+| `MSR-SOURCE` | `owned_source_count` | `source_files` | 148 | 1855 | the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree |
+| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 226 | 6432 | every version-controlled file homed inside the unit |
+| `MSR-UNITTEST` | `tracked_glob_count` | `unit_tests` | 44 | 390 | verification assets located for the unit itself |
 | `MSR-EVIDENCE` | `tracked_glob_count` | `evidence_assets` | 8 | 980 | the realization-evidence surface located for the unit's root |
 | `MSR-COVERAGE` | `substrate_list_member` | `in_coverage_scope` | 58 | 58 | whether the unit lies inside the declared coverage scope |
 | `MSR-INTERFACE` | `substrate_map_prefix` | `interfaces` | 30 | 31 | the declared console interfaces the unit publishes |
@@ -85,15 +85,15 @@
 | Repository anchor | the containing commit — owned by version control, never restated here |
 | Detached | no |
 | Working tree | DIRTY |
-| Dirty entries | 29 |
+| Dirty entries | 4 |
 | Own regenerated artifacts | excluded from the count above — they are the deterministic product of the command being gated |
-| Modified | 21 |
+| Modified | 4 |
 | Deleted | 0 |
-| Untracked | 8 |
+| Untracked | 0 |
 | Merge conflicts | 0 |
 | Interrupted operations | none |
 | Broken symlinks | 0 |
-| Version-controlled files | 5729 |
+| Version-controlled files | 5737 |
 
 ---
 

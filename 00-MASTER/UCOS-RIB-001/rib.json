@@ -1,7 +1,7 @@
 {
   "compliance": [
     {
-      "finding": "dirty_entries_outside_generated=29",
+      "finding": "dirty_entries_outside_generated=4",
       "gate": "GATE-12",
       "id": "CMP-CLEAN",
       "rank": 1,
@@ -1562,7 +1562,7 @@
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts, every ignored path resolves to a declared class in the exclusion register, and no tracked path is shadowed by an ignore rule",
       "failures": [
-        "dirty_entries_outside_generated=29"
+        "dirty_entries_outside_generated=4"
       ],
       "id": "GATE-12",
       "metrics": [
@@ -1905,7 +1905,7 @@
       "id": "MSR-SOURCE",
       "kind": "owned_source_count",
       "purpose": "the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree",
-      "total": 1850,
+      "total": 1855,
       "units_with_value": 148
     },
     {
@@ -1913,7 +1913,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 6422,
+      "total": 6432,
       "units_with_value": 226
     },
     {
@@ -1921,7 +1921,7 @@
       "id": "MSR-UNITTEST",
       "kind": "tracked_glob_count",
       "purpose": "verification assets located for the unit itself",
-      "total": 389,
+      "total": 390,
       "units_with_value": 44
     },
     {
@@ -2000,14 +2000,14 @@
     "closure_gaps": 0,
     "compliance_findings": 2,
     "contamination_available": true,
-    "contamination_entries": 29,
+    "contamination_entries": 4,
     "contamination_shadowed_members": [],
     "contamination_unclassified_members": [],
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 29,
-    "dirty_entries_outside_generated": 29,
+    "dirty_entries": 4,
+    "dirty_entries_outside_generated": 4,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 38,
@@ -3086,8 +3086,9 @@
           "platform/tests/test_repository_provider.py"
         ],
         "platform.tests -> platform.repository_intelligence": [
-          "platform/tests/test_repository_intelligence_catalog.py",
-          "platform/tests/test_repository_intelligence_imports.py"
+          "platform/tests/test_generated_artifact_registry.py",
+          "platform/tests/test_repository_contamination.py",
+          "platform/tests/test_repository_intelligence_catalog.py"
         ],
         "platform.tests -> platform.repository_operations": [
           "platform/tests/repository_operations_helpers.py",
@@ -3608,10 +3609,10 @@
         }
       ],
       "edge_sites": {},
-      "edges": 8926,
+      "edges": 8928,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
-      "nodes": 1916,
+      "nodes": 1921,
       "purpose": "the module-granularity import plane, where a true Python import cycle would break execution",
       "unit_class": "IMPLEMENTATION",
       "unresolved_edges": 0
@@ -4274,24 +4275,24 @@
     "contamination": {
       "available": true,
       "clean": false,
-      "contamination_entries": 29,
-      "dirty_entries": 21,
+      "contamination_entries": 4,
+      "dirty_entries": 4,
       "excluded_entries": 232,
       "ignored_unclassified": 0,
       "register_errors": [],
       "shadowed_tracked": 0,
       "shadowed_tracked_paths": [],
       "unclassified_paths": [],
-      "untracked_entries": 8
+      "untracked_entries": 0
     },
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 29,
+    "dirty_entries": 4,
     "fsck_errors": [],
     "interrupted_operations": [],
-    "modified": 21,
-    "tracked_files": 5729,
-    "untracked": 8,
+    "modified": 4,
+    "tracked_files": 5737,
+    "untracked": 0,
     "working_tree": "DIRTY"
   },
   "seal_sha256": "8465cb2925acda7988fa410c7dfba69e69bd5eba1badbb068f120353b1f3bdaa",
@@ -4493,7 +4494,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "c3209ea767a67755b38196aefde5385d14ee87c74ead33d3aa553a89be208a5a",
+      "content_sha256": "7f6d41c51c37224eb233b653cd1450020b1a49a8fa10f1a43bff3b4ac794d8df",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-BASELINE",
@@ -4519,7 +4520,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "87143325622aa452e1a6132101903757c34438e856cc7999117e3dd9ecbb00ec",
+      "content_sha256": "18101c16e837b08e289ec0bc5d264ea1e5e874f685d4706ef206c761e986c1ce",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-CAPS",
@@ -19190,7 +19191,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 820,
+      "tracked_files": 825,
       "unique_id": "UCOS-RIB-001-CAP-0255",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform",
@@ -20527,7 +20528,7 @@
       "unique_id": "UCOS-RIB-001-CAP-0271",
       "unit_class": "CAPABILITY",
       "unit_key": "platform.providers.repository",
-      "unit_tests": 17,
+      "unit_tests": 18,
       "unregistered_and_closed": false,
       "unresolved_catalogue_record": false
     },
@@ -20600,13 +20601,13 @@
       "rie_reuse": "REUSE/COMPOSE",
       "rie_status": "IMPLEMENTED",
       "root": "platform",
-      "source_files": 13,
+      "source_files": 15,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 14,
+      "tracked_files": 16,
       "unique_id": "UCOS-RIB-001-CAP-0272",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform.repository_intelligence",
@@ -21036,13 +21037,13 @@
       "rie_reuse": "REUSE/COMPOSE",
       "rie_status": "IMPLEMENTED",
       "root": "platform",
-      "source_files": 330,
+      "source_files": 333,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 331,
+      "tracked_files": 334,
       "unique_id": "UCOS-RIB-001-CAP-0277",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform.tests",
@@ -22597,7 +22598,7 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 29,
+      "measured": 4,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
       "verdict": "FAIL"

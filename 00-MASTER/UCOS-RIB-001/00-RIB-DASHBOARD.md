@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (29 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (4 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 296 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -63,7 +63,7 @@
 | `GATE-09` | Zero Duplicate Capability | YES | no declared duplicate class reports a finding | **PASS** |
 | `GATE-10` | Zero Circular Dependency | YES | no cycle of a non-benign declared class in any plane | **PASS** |
 | `GATE-11` | Zero Orphan Capability | YES | no discovered unit is unreachable in every measured plane | **PASS** |
-| `GATE-12` | Repository Clean | YES | the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts, every ignored path resolves to a declared class in the exclusion register, and no tracked path is shadowed by an ignore rule | **FAIL** — dirty_entries_outside_generated=29 |
+| `GATE-12` | Repository Clean | YES | the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts, every ignored path resolves to a declared class in the exclusion register, and no tracked path is shadowed by an ignore rule | **FAIL** — dirty_entries_outside_generated=4 |
 
 ## Disposition distribution
 

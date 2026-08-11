@@ -45,11 +45,11 @@
         "test_functions": 119
       },
       "platform": {
-        "loc": 123903,
+        "loc": 124382,
         "root": "platform",
-        "source_files": 442,
-        "test_files": 331,
-        "test_functions": 5371
+        "source_files": 444,
+        "test_files": 334,
+        "test_functions": 5406
       },
       "service": {
         "loc": 20464,
@@ -59,10 +59,10 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 316765,
-    "total_tests": 12897
+    "total_loc": 317244,
+    "total_tests": 12932
   },
-  "content_hash": "396dc3dbac31e28fb4fb11a5b535c4fea41494761856c6cfd209c60b7949fd9e",
+  "content_hash": "f0682338606a0fea0d6935bf7e7fba3b2b55461e3593016aaf99601500703630",
   "corpus": {
     "artifacts": 1233,
     "edges": 12899,

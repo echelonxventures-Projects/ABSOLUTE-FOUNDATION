@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (29 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (4 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 296 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -298,13 +298,13 @@
 | `UCOS-RIB-001-CAP-0268` | `platform.portal` | IMPLEMENTATION | `platform/portal` | 9 | 12 | 2 | 0 | 1 | 18 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0269` | `platform.projects` | IMPLEMENTATION | `platform/projects` | 12 | 16 | 2 | 0 | 1 | 14 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0270` | `platform.providers` | IMPLEMENTATION | `platform/providers` | 0 | 1 | 2 | 0 | 3 | 0 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
-| `UCOS-RIB-001-CAP-0271` | `platform.providers.repository` | CAPABILITY | `platform/providers/repository` | 1 | 1 | 0 | 0 | 0 | 17 | no | IMPLEMENTED | **REUSE** | `RUL-10` |
-| `UCOS-RIB-001-CAP-0272` | `platform.repository_intelligence` | IMPLEMENTATION | `platform/repository_intelligence` | 13 | 16 | 1 | 1 | 0 | 3 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
+| `UCOS-RIB-001-CAP-0271` | `platform.providers.repository` | CAPABILITY | `platform/providers/repository` | 1 | 1 | 0 | 0 | 0 | 18 | no | IMPLEMENTED | **REUSE** | `RUL-10` |
+| `UCOS-RIB-001-CAP-0272` | `platform.repository_intelligence` | IMPLEMENTATION | `platform/repository_intelligence` | 15 | 16 | 1 | 1 | 0 | 3 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0273` | `platform.repository_operations` | IMPLEMENTATION | `platform/repository_operations` | 11 | 16 | 2 | 1 | 0 | 12 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0274` | `platform.runtime_operations` | IMPLEMENTATION | `platform/runtime_operations` | 14 | 20 | 1 | 0 | 2 | 15 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0275` | `platform.runtime_platform` | IMPLEMENTATION | `platform/runtime_platform` | 14 | 15 | 1 | 0 | 0 | 15 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0276` | `platform.security` | IMPLEMENTATION | `platform/security` | 10 | 13 | 2 | 0 | 7 | 12 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
-| `UCOS-RIB-001-CAP-0277` | `platform.tests` | IMPLEMENTATION | `platform/tests` | 330 | 44 | 0 | 0 | 0 | 0 | no | IMPLEMENTED | **REUSE** | `RUL-10` |
+| `UCOS-RIB-001-CAP-0277` | `platform.tests` | IMPLEMENTATION | `platform/tests` | 333 | 44 | 0 | 0 | 0 | 0 | no | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0278` | `platform.universal_assimilation` | IMPLEMENTATION | `platform/universal_assimilation` | 6 | 8 | 6 | 1 | 0 | 1 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0279` | `platform.universal_assurance` | IMPLEMENTATION | `platform/universal_assurance` | 14 | 6 | 2 | 0 | 2 | 15 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0280` | `platform.universal_control_plane` | IMPLEMENTATION | `platform/universal_control_plane` | 21 | 20 | 7 | 1 | 1 | 1 | YES | IMPLEMENTED | **REUSE** | `RUL-10` |

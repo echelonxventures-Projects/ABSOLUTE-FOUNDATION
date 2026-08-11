@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (29 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (4 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 296 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -47,7 +47,7 @@
 |---|---|
 | Units discovered | 296 |
 | Units with exactly one disposition | 296 |
-| Dependency edges measured | 14002 |
+| Dependency edges measured | 14004 |
 | Unresolved dependency edges | 0 |
 | Registered artifacts probed | 121 |
 | Dead registry entries | 0 |
