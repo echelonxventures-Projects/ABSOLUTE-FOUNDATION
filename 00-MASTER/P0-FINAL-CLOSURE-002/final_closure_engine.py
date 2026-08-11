@@ -93,7 +93,40 @@ CLONE_IDENTITIES: Mapping[str, str] = dict(DIMENSIONS)
 #: clone, from the clone's own tracked content. Nothing is copied in from the canonical
 #: repository — copying would make the clone a mirror rather than an independent
 #: reproduction, and would prove nothing about reproducibility.
+#: UCOS-RC-002 — the canonical toolchain is part of the bootstrap, not a precondition.
+#:
+#: DETERMINATION (Option A). UCOS-AEE-001 resolves its actuator interpreter as
+#: ``REPO/.ec1-venv/bin/python`` (aee_engine.py::interpreters, the ``$PY`` slot).
+#: ``.ec1-venv/`` is gitignored, so it is absent from every pristine clone, and this list
+#: did not create it. The measured consequence at HEAD 382b65e8: all seventeen required
+#: actuators returned ``executed=false, verdict=UNAVAILABLE, reason="the declared
+#: interpreter is not present in this environment"``, which drove blocking_violations from
+#: 0 to 17, violated CONV-02, and turned AEE's determination from CONVERGED-PROVISIONAL
+#: into NOT-CONVERGED. That is the whole of Phase-9 certification_variance.
+#:
+#: Option A rather than "declare it an external prerequisite", because the repository has
+#: already made that choice everywhere else: ``verify.sh`` states that a brand-new terminal
+#: runs it with no manual activation and no tribal knowledge because it *self-heals* the
+#: canonical venv, and ``.ec1-venv/`` is excluded on exactly the same ground as
+#: ``/knowledge/`` and ``/realization/`` — deterministically re-derivable output, not
+#: authored truth. An environment the repository can rebuild from its own declarations is
+#: inside the reproducibility contract by construction; this list was simply incomplete.
+#:
+#: The provisioner is INVOKED, never reimplemented. ``ucos_ensure_venv`` in
+#: scripts/ucos-env.sh is the single canonical definition — it pins the Python series and
+#: the toolchain versions — so a second copy here would be exactly the drift this closure
+#: has spent its effort removing. It runs first: every later bootstrap step and the whole
+#: chain depend on the interpreter existing.
 BOOTSTRAP: tuple[tuple[str, tuple[str, ...]], ...] = (
+    (
+        "toolchain",
+        (
+            "-c",
+            "import subprocess,sys;"
+            "sys.exit(subprocess.run(['bash','-c',"
+            "'set -e; source scripts/ucos-env.sh; ucos_ensure_venv']).returncode)",
+        ),
+    ),
     ("closure", ("00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",)),
     ("phase2", ("00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",)),
     ("phase3", ("00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",)),

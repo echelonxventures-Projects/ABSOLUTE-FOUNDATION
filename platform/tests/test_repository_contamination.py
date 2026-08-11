@@ -28,6 +28,7 @@ from pathlib import Path
 from platform.repository_intelligence.contamination import (
     DECLARED_CLASSES,
     ContaminationReport,
+    ExcludedPath,
     load_register,
     measure,
 )
@@ -218,3 +219,83 @@ def test_report_counts_are_consistent() -> None:
     )
     assert r.contamination_entries == 4
     assert not r.clean
+
+
+# ---------------------------------------------------------------------------
+# UCOS-RC-001 — canonical identity must not carry environmental filesystem state.
+#
+# Phase 9 forensic, HEAD 382b65e8: rib.json differed from a pristine clone in
+# EXACTLY ONE field, `.repository.contamination.excluded_entries` — 232 in the
+# source repository, 69 in the clone. It is a count of ignored files physically
+# present on disk (__pycache__, .ec1-venv, tool caches), so it measures the
+# machine, not the repository. All 15 RIB markdown outputs were byte-identical;
+# this single integer was the whole of registry_variance.
+#
+# Phase 8 could not see it: it iterates an already-settled tree where the count
+# is constant, so it reported drift 0 across 5 rounds while the leak was live.
+# Only a clone moves that number, which is why the boundary asserted here is the
+# SERIALIZED REPORT rather than any fixed-point round.
+# ---------------------------------------------------------------------------
+
+
+def test_serialized_report_carries_no_environmental_count() -> None:
+    """Two repositories with identical governance state must serialize identically.
+
+    The reports below differ only in how many ignored files happen to sit on disk —
+    232 versus 69, the exact source/clone figures from the forensic. Every governance
+    fact is the same: nothing unclassified, nothing shadowed, nothing dirty. If the
+    serialized bytes differ, canonical identity is a function of the machine.
+    """
+    governed = ExcludedPath(path="x/__pycache__/m.pyc", rule="__pycache__/", classification="CACHE")
+
+    source_env = ContaminationReport(
+        excluded=tuple(
+            ExcludedPath(
+                path=f"p{i}/__pycache__/m.pyc", rule="__pycache__/", classification="CACHE"
+            )
+            for i in range(232)
+        )
+    )
+    clone_env = ContaminationReport(excluded=(governed,) * 69)
+
+    assert source_env.ignored_unclassified == clone_env.ignored_unclassified == 0
+    assert source_env.contamination_entries == clone_env.contamination_entries == 0
+
+    assert source_env.as_dict() == clone_env.as_dict(), (
+        "the serialized contamination report changes with the number of ignored files "
+        "present on disk. That number is environment, not repository content, and it is "
+        "embedded in rib.json — so a pristine clone of the same commit derives a "
+        "different canonical artifact. This is Phase-9 registry_variance."
+    )
+
+
+def test_no_canonical_field_counts_excluded_entries() -> None:
+    """`excluded_entries` must not appear in the serialized report at any depth.
+
+    The byte test above catches a divergence only when the two environments actually
+    differ. This forbids the field outright, so the leak cannot return by being equal
+    on the machine that happens to run the test.
+    """
+    report = ContaminationReport(
+        excluded=(ExcludedPath(path="a", rule="__pycache__/", classification="CACHE"),)
+    )
+    assert (
+        "excluded_entries" not in report.as_dict()
+    ), "as_dict() serializes a count of ignored filesystem entries into canonical output"
+
+
+def test_live_rib_json_carries_no_environmental_count() -> None:
+    """The artifact boundary: the committed canonical artifact itself.
+
+    Asserted over rib.json rather than over the producer, because the producer is not
+    what Phase 9 compares.
+    """
+    rib = REPO_ROOT / "00-MASTER" / "UCOS-RIB-001" / "rib.json"
+    if not rib.is_file():
+        pytest.skip("rib.json not present")
+    contamination = json.loads(rib.read_text(encoding="utf-8"))["repository"]["contamination"]
+    assert "excluded_entries" not in contamination, (
+        "rib.json embeds excluded_entries — a count of ignored files on this machine. "
+        f"Present value: {contamination.get('excluded_entries')!r}. A pristine clone "
+        "computes a different one, which is exactly Phase-9 registry_variance."
+    )

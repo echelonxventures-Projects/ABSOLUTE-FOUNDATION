@@ -115,11 +115,33 @@ class ContaminationReport:
     def clean(self) -> bool:
         return self.contamination_entries == 0 and not self.register_errors
 
+    @property
+    def excluded_entries(self) -> int:
+        """How many ignored paths exist on THIS filesystem.
+
+        UCOS-RC-001 — diagnostic only, and deliberately NOT serialized. This counts
+        ``__pycache__`` directories, ``.ec1-venv``, tool caches: artifacts of the machine
+        rather than of the repository. It was serialized once, and the Phase-9 forensic at
+        HEAD 382b65e8 found it to be the single differing field in rib.json between the
+        source repository (232) and a pristine clone (69) — the entire cause of
+        registry_variance. A caller wanting it for a report reads it here; nothing that
+        reaches a canonical artifact may.
+        """
+        return len(self.excluded)
+
     def as_dict(self) -> dict[str, object]:
+        """The CANONICAL serialization. Every value is invariant across environments.
+
+        What is included is a governance verdict — is anything unclassified, shadowed,
+        dirty, or untracked — and each of those is zero in any correctly-governed clone of
+        the same commit. What is excluded is any measure of how much ignored material this
+        particular machine happens to hold, because a canonical artifact whose bytes move
+        with the local cache population cannot be reproduced from its own commit.
+        """
         return {
             "dirty_entries": len(self.dirty_entries),
             "untracked_entries": len(self.untracked_entries),
-            "excluded_entries": len(self.excluded),
+            # `excluded_entries` is deliberately absent — see the property above.
             "ignored_unclassified": self.ignored_unclassified,
             "shadowed_tracked": len(self.shadowed_tracked),
             "contamination_entries": self.contamination_entries,
@@ -127,7 +149,9 @@ class ContaminationReport:
             "clean": self.clean,
             # Paths, not just counts, for the unaccounted-for cases: a reader must be able
             # to act on a failure without re-deriving it. The counts alone are what let the
-            # earlier defect stay invisible.
+            # earlier defect stay invisible. These are empty whenever governance holds, so
+            # they carry no environmental content in a passing repository — and when they
+            # are non-empty the repository is already failing closed and must be read.
             "unclassified_paths": list(self.unclassified_paths)[:50],
             "shadowed_tracked_paths": list(self.shadowed_tracked)[:50],
         }
