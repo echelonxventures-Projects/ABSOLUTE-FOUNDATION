@@ -2072,6 +2072,183 @@
     },
     {
       "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/constitution",
+      "canonical_name": "engine.constitution",
+      "category": "engine",
+      "description": "UCOS-CEL-0001 — the Autonomous Constitutional Execution System.",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "UCOS-CEL-0001 — the Autonomous Constitutional Execution System. The repository already *contained* constitutional rules. This package is what makes it **enforce** them: the difference between a rule a person follows and a rule that has no path around it. Twelve engines, each realising one requirement of ``P0-AUTONOMOUS-CONSTITUTIONAL-EXECUTION-001``: =========================== ========================== ============================== Requirement Identity Module =========================== ========================== ============================== 001 Dependency graph ``UCOS-CDG-000001`` :mod:`~engine.constitution.dependency` 002 Execution planner ``UCOS-CEP-EXEC-000001`` :mod:`~engine.constitution.planner` 003 Legality engine ``UCOS-CLE-000001`` :mod:`~engine.constitution.legality` 004 Mutation gateway ``UCOS-CMG-EXEC-000001`` :mod:`~engine.constitution.gateway` 005 Authority graph ``UCOS-CAG-000001`` :mod:`~engine.constitution.authority` 006 Replay engine ``UCOS-ARE-000001`` :mod:`~engine.constitution.replay` 007 Dirty state prevention ``UCOS-DPE-000001`` :mod:`~engine.constitution.state` 008 Assimilation gate ``UCOS-RTAG-000001`` :mod:`~engine.constitution.assimilation` 009 Metadata mandate ``UCOS-CMM-000001`` :mod:`~engine.constitution.metadata` 010 Enforcement layer ``UCOS-CEL-ENFORCE-0001`` :mod:`~engine.constitution.acceptance` 011 Evolution engine ``UCOS-UACE-000001`` :mod:`~engine.constitution.evolution` =========================== ========================== ============================== What it creates, and what it deliberately does not -------------------------------------------------- It creates no second ordering mechanism (:mod:`engine.foundation.composition.ordering` remains the one), no second identifier scheme (:mod:`engine.registry.universal.identity`), no second hash primitive (:mod:`engine.uckp.canonical`), no second ownership law (:mod:`engine.nucleus.law`) and no second lifecycle — ``UCL-000001`` in :mod:`engine.nucleus.lifecycle` keeps its 45 stages, and :func:`engine.constitution.evolution.lifecycle_stage_function` supplies the machinery to discharge them through the extension point that module already declares. One command:: ucos-cel law ucos-cel graph ucos-cel authority ucos-cel legality ucos-cel plan ucos-cel replay ucos-cel cycle ucos-cel acceptance",
+      "symbols": [
+        "AcceptanceCriterion",
+        "AcceptanceFailure",
+        "AcceptanceReport",
+        "Act",
+        "AssimilationVerdict",
+        "AuthorityFinding",
+        "AuthorityReport",
+        "CircularAuthority",
+        "Clause",
+        "ConstitutionalError",
+        "ConstitutionalMetadata",
+        "Context",
+        "CriterionOutcome",
+        "CycleRecord",
+        "CycleState",
+        "Declaration",
+        "DependencyGraph",
+        "DirtyStateViolation",
+        "DuplicateTruth",
+        "Edge",
+        "ExecutionPlan",
+        "ExecutionStep",
+        "Facet",
+        "Goal",
+        "GraphError",
+        "IllegalExecution",
+        "Incumbent",
+        "Invariant",
+        "LegalityReport",
+        "LegalityVerdict",
+        "ManualSequencing",
+        "Measured",
+        "Measurement",
+        "MetadataIncomplete",
+        "Mutation",
+        "MutationRecord",
+        "MutationRefused",
+        "Obligation",
+        "Phase",
+        "PhaseOutcome",
+        "Population",
+        "Proof",
+        "Proposal",
+        "ReplayDivergence",
+        "ReplayRecord",
+        "Round",
+        "Search",
+        "SelfAttestation",
+        "Stage",
+        "StageOutcome",
+        "StateSeal",
+        "View",
+        "acceptance",
+        "analyse",
+        "apply",
+        "architect",
+        "assess",
+        "assign_identifier",
+        "assimilate",
+        "assimilation",
+        "authority",
+        "authority_closure",
+        "begin_next_cycle",
+        "blocking_invariant_ids",
+        "build",
+        "build_parser",
+        "build_population",
+        "canonical_owner_discovery",
+        "capability_discovery",
+        "capability_reading",
+        "catalog",
+        "certify",
+        "challenge",
+        "clause",
+        "cli",
+        "commit",
+        "constraint_discovery",
+        "context_assimilation",
+        "converge",
+        "converge_cycles",
+        "correct",
+        "dependency",
+        "dependency_discovery",
+        "deterministic_fixed_point",
+        "digest",
+        "discover",
+        "duplicate_capabilities",
+        "elevate",
+        "enforce",
+        "engine_index",
+        "engineer",
+        "errors",
+        "evidence",
+        "evolution",
+        "extract_engineering_knowledge",
+        "facet",
+        "facet_ids",
+        "faculty",
+        "gap_discovery",
+        "gate",
+        "gateway",
+        "govern",
+        "graph_bearing_facets",
+        "guard",
+        "improve",
+        "increase_autonomous_capability",
+        "increase_constitutional_capability",
+        "increase_engineering_capability",
+        "integrate",
+        "invariant",
+        "is_external",
+        "knowledge_discovery",
+        "law",
+        "learn",
+        "legality",
+        "lifecycle_stage_function",
+        "main",
+        "measure",
+        "measure_all",
+        "measure_stage",
+        "metadata",
+        "mutating",
+        "obligation_names",
+        "observe",
+        "perceive",
+        "phase_order",
+        "pipeline_order",
+        "plan",
+        "planner",
+        "proposal_for",
+        "propose",
+        "prove",
+        "reason",
+        "receive_goal",
+        "reflect",
+        "register",
+        "register_engineering_knowledge",
+        "replay",
+        "repository_truth_discovery",
+        "require_committed",
+        "require_complete",
+        "require_creatable",
+        "require_elevation",
+        "require_executable",
+        "require_fixed_point",
+        "require_legal",
+        "reuse_before_create",
+        "run",
+        "stages",
+        "state",
+        "test",
+        "to_document",
+        "understand",
+        "unmeasured_invariants",
+        "unrealized",
+        "update_bookkeeping",
+        "update_identifier_dictionary",
+        "update_lineage",
+        "update_repository_truth",
+        "update_universal_registry",
+        "validate",
+        "verify"
+      ],
+      "unique_id": "RC-11"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
       "canonical_location": "engine/context",
       "canonical_name": "engine.context",
       "category": "engine",
@@ -2217,7 +2394,7 @@
         "values_of",
         "write_evidence"
       ],
-      "unique_id": "RC-11"
+      "unique_id": "RC-12"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2252,7 +2429,7 @@
         "main",
         "reproduce"
       ],
-      "unique_id": "RC-12"
+      "unique_id": "RC-13"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2298,7 +2475,7 @@
         "evidence",
         "main"
       ],
-      "unique_id": "RC-13"
+      "unique_id": "RC-14"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2352,7 +2529,7 @@
         "seam_phase",
         "unregister_generation_phase"
       ],
-      "unique_id": "RC-14"
+      "unique_id": "RC-15"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2385,7 +2562,7 @@
         "service",
         "workflow"
       ],
-      "unique_id": "RC-15"
+      "unique_id": "RC-16"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2399,7 +2576,7 @@
       "reuse": "REUSE_AS_IS/COMPOSE",
       "summary": "EC-1 Foundation layer (IMP-001). Public API surface for configuration, observability (errors, logging, telemetry), versioned contracts, and the frozen-path guard.",
       "symbols": [],
-      "unique_id": "RC-16"
+      "unique_id": "RC-17"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2423,7 +2600,7 @@
         "strategy_names",
         "unresolved_keys"
       ],
-      "unique_id": "RC-17"
+      "unique_id": "RC-18"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2443,7 +2620,7 @@
         "config",
         "load_config"
       ],
-      "unique_id": "RC-18"
+      "unique_id": "RC-19"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2465,7 +2642,7 @@
         "disclosure",
         "disclosure_present"
       ],
-      "unique_id": "RC-19"
+      "unique_id": "RC-20"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2484,7 +2661,7 @@
         "frozen_paths",
         "main"
       ],
-      "unique_id": "RC-20"
+      "unique_id": "RC-21"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2522,7 +2699,7 @@
         "telemetry",
         "trace"
       ],
-      "unique_id": "RC-21"
+      "unique_id": "RC-22"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2561,7 +2738,7 @@
         "pipeline",
         "report"
       ],
-      "unique_id": "RC-22"
+      "unique_id": "RC-23"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2636,7 +2813,7 @@
         "visualization",
         "write_evidence"
       ],
-      "unique_id": "RC-23"
+      "unique_id": "RC-24"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2700,7 +2877,7 @@
         "visualization",
         "write_evidence"
       ],
-      "unique_id": "RC-24"
+      "unique_id": "RC-25"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2762,7 +2939,7 @@
         "registry",
         "seed"
       ],
-      "unique_id": "RC-25"
+      "unique_id": "RC-26"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2861,7 +3038,7 @@
         "validate_base",
         "validation"
       ],
-      "unique_id": "RC-26"
+      "unique_id": "RC-27"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2967,7 +3144,7 @@
         "reuse",
         "traceability"
       ],
-      "unique_id": "RC-27"
+      "unique_id": "RC-28"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3122,7 +3299,7 @@
         "verify_evidence",
         "write_evidence"
       ],
-      "unique_id": "RC-28"
+      "unique_id": "RC-29"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3239,7 +3416,7 @@
         "validate",
         "verify_manifest_alignment"
       ],
-      "unique_id": "RC-29"
+      "unique_id": "RC-30"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3283,7 +3460,7 @@
         "selection",
         "strategy_names"
       ],
-      "unique_id": "RC-30"
+      "unique_id": "RC-31"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3324,7 +3501,7 @@
         "source",
         "volumes"
       ],
-      "unique_id": "RC-31"
+      "unique_id": "RC-32"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3396,7 +3573,7 @@
         "utc_clock",
         "version_ref"
       ],
-      "unique_id": "RC-32"
+      "unique_id": "RC-33"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3463,7 +3640,7 @@
         "resolve_reference_frames",
         "rollback"
       ],
-      "unique_id": "RC-33"
+      "unique_id": "RC-34"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3493,7 +3670,7 @@
         "record_execution_evidence",
         "validate_execution"
       ],
-      "unique_id": "RC-34"
+      "unique_id": "RC-35"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3600,7 +3777,7 @@
         "validate_replay",
         "verify_continuation"
       ],
-      "unique_id": "RC-35"
+      "unique_id": "RC-36"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3634,7 +3811,7 @@
         "sample_volumes",
         "source"
       ],
-      "unique_id": "RC-36"
+      "unique_id": "RC-37"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3722,7 +3899,7 @@
         "test_zero_overlap_fails",
         "valid_subject"
       ],
-      "unique_id": "RC-37"
+      "unique_id": "RC-38"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3830,7 +4007,7 @@
         "valid_report",
         "valid_subject"
       ],
-      "unique_id": "RC-38"
+      "unique_id": "RC-39"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3973,7 +4150,7 @@
         "test_unknown_is_a_valid_state_in_every_population_that_declares_one",
         "view"
       ],
-      "unique_id": "RC-39"
+      "unique_id": "RC-40"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4092,7 +4269,137 @@
         "test_validate_rejects_a_record_deriving_from_nothing_registered",
         "test_validate_rejects_an_unresolvable_requirement"
       ],
-      "unique_id": "RC-40"
+      "unique_id": "RC-41"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/tests/constitution",
+      "canonical_name": "engine.tests.constitution",
+      "category": "engine",
+      "description": "",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "",
+      "symbols": [
+        "conftest",
+        "declare",
+        "lawful",
+        "measured",
+        "population",
+        "system",
+        "test_a_broken_population_fails_stages_rather_than_skipping_them",
+        "test_a_committed_seal_admits_every_guarded_act",
+        "test_a_cycle_in_an_unordered_relation_is_still_refused",
+        "test_a_dangling_referent_fails_the_facet_it_appears_in",
+        "test_a_dependency_cycle_is_reported_never_broken",
+        "test_a_dependency_that_is_itself_incomplete_does_not_satisfy_the_closure",
+        "test_a_faculty_exists_for_every_declared_stage",
+        "test_a_failing_population_fails_the_lifecycle_stages_it_owns",
+        "test_a_fixed_point_cannot_be_observed_in_one_round",
+        "test_a_lawful_mutation_applies_and_yields_a_committed_seal",
+        "test_a_lawful_population_closes_its_authority",
+        "test_a_lawful_population_document_round_trips",
+        "test_a_lawful_population_proves_every_obligation",
+        "test_a_lawful_population_satisfies_every_invariant_and_criterion",
+        "test_a_malformed_population_document_fails_closed",
+        "test_a_measuring_cycle_completes_and_elevates",
+        "test_a_mutating_cycle_carries_the_mutation_through",
+        "test_a_mutation_refused_by_the_gateway_refuses_the_cycle",
+        "test_a_mutation_with_no_authority_is_refused",
+        "test_a_plan_is_deterministic",
+        "test_a_population_is_immutable_and_with_records_returns_a_new_one",
+        "test_a_population_refuses_two_declarations_of_one_subject",
+        "test_a_proposal_can_be_read_out_of_a_declaration",
+        "test_a_pure_system_settles_at_round_two",
+        "test_a_refused_cycle_reports_only_the_phases_it_reached",
+        "test_a_refused_mutation_leaves_repository_truth_untouched",
+        "test_a_seal_carries_no_clock",
+        "test_a_seal_taken_during_a_mutation_is_born_dirty",
+        "test_a_stable_failure_is_still_a_fixed_point",
+        "test_a_stale_seal_is_refused_even_though_it_was_clean",
+        "test_a_verdict_for_an_unassessed_subject_fails_closed",
+        "test_acceptance_and_evolution",
+        "test_all_six_closures_are_calculated",
+        "test_an_amendment_supersedes_rather_than_duplicating",
+        "test_an_empty_mutation_is_refused",
+        "test_an_illegal_population_yields_a_plan_that_refuses_to_execute",
+        "test_an_incomplete_artifact_loses_all_four_faculties_together",
+        "test_an_unevaluable_proof_is_an_unproven_proof",
+        "test_an_unguarded_act_is_admitted_but_can_be_guarded_explicitly",
+        "test_an_unknown_facet_is_refused_rather_than_ignored",
+        "test_an_unknown_measurement_lookup_fails_closed",
+        "test_an_unknown_referent_is_refused_not_projected",
+        "test_an_unknown_stage_fails_closed",
+        "test_an_unmeasured_invariant_is_blocking_not_satisfied",
+        "test_certification_relations_do_not_constrain_execution_order",
+        "test_circularity_in_each_authority_relation_is_refused",
+        "test_cli",
+        "test_closure_of_an_unknown_subject_fails_closed",
+        "test_creation_is_permitted_only_where_nothing_canonical_exists",
+        "test_cycles_converge_when_the_state_stops_changing",
+        "test_declarations_normalize_deterministically",
+        "test_defect_finding_faculties_are_satisfied_by_finding_defects",
+        "test_divergence_is_refused_and_names_the_offending_act",
+        "test_duplicate_capabilities_are_measurable_across_a_population",
+        "test_each_canonical_search_refuses_creation",
+        "test_each_invariant_counts_its_own_violation",
+        "test_each_obligation_fails_when_its_facet_is_absent",
+        "test_each_stage_refuses_what_it_owns",
+        "test_every_acceptance_criterion_names_a_declared_invariant",
+        "test_every_act_of_self_attestation_is_refused",
+        "test_every_clause_names_the_engine_that_realizes_it",
+        "test_every_declared_invariant_has_a_measurement",
+        "test_every_faculty_executes_and_measures",
+        "test_every_gating_subcommand_exits_one_on_a_violating_population",
+        "test_every_subcommand_emits_json_and_exits_zero_on_the_system",
+        "test_evidence_digests_distinguish_the_stages",
+        "test_external_references_terminate_rather_than_dangle",
+        "test_gate_carrying_faculties_refuse_a_broken_population",
+        "test_gateway_and_assimilation",
+        "test_graph_authority_legality",
+        "test_identity_completeness_rejects_a_malformed_identifier",
+        "test_law_and_metadata",
+        "test_measurement_is_deterministic",
+        "test_no_argument_admits_a_caller_supplied_order",
+        "test_no_faculty_returns_the_stage_declaration_as_its_own_evidence",
+        "test_one_view_is_shared_by_every_measurement",
+        "test_output_is_byte_identical_across_runs",
+        "test_parallel_waves_expresses_the_declared_concurrency",
+        "test_planner_state_replay",
+        "test_relations_are_restricted_to_graph_bearing_facets",
+        "test_replay_still_settles_over_a_violating_population",
+        "test_require_legal_refuses_and_names_the_unproven",
+        "test_stages",
+        "test_the_assimilate_subcommand_gates_on_reuse",
+        "test_the_capability_reading_is_derived_from_measurements",
+        "test_the_context_derives_one_shared_view",
+        "test_the_cycle_stops_at_the_phase_that_refuses",
+        "test_the_engine_discharges_ucl_000001_rather_than_copying_it",
+        "test_the_faculty_set_is_addressable_and_open",
+        "test_the_gateway_is_the_only_producer_of_a_clean_seal_over_a_new_state",
+        "test_the_graph_is_discovered_from_declarations",
+        "test_the_journal_is_tamper_evident",
+        "test_the_law_is_deterministic_and_addressable",
+        "test_the_lifecycle_executes_every_stage_through_the_faculties",
+        "test_the_lifecycle_subcommand_runs_ucl_000001",
+        "test_the_mandate_declares_fifteen_facets",
+        "test_the_manifest_records_the_faculty_module_as_evidence",
+        "test_the_order_is_derived_and_respects_dependencies",
+        "test_the_owner_search_refuses_duplication_but_not_growth",
+        "test_the_phase_order_is_derived",
+        "test_the_pipeline_order_is_derived_from_the_declared_chain",
+        "test_the_pipeline_stops_at_the_first_refusal",
+        "test_the_registration_stage_is_a_second_defence",
+        "test_the_system_declares_no_subject_it_does_not_implement",
+        "test_the_system_population_discharges_every_stage",
+        "test_the_system_satisfies_its_own_constitution",
+        "test_the_whole_system_is_deterministic",
+        "test_two_owners_is_as_incomplete_as_none",
+        "test_unknown_clause_and_invariant_fail_closed"
+      ],
+      "unique_id": "RC-42"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4390,7 +4697,7 @@
         "test_write_evidence_writes_canonically",
         "universal_registry"
       ],
-      "unique_id": "RC-41"
+      "unique_id": "RC-43"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4452,7 +4759,7 @@
         "test_version_parse_and_str",
         "test_version_parse_invalid"
       ],
-      "unique_id": "RC-42"
+      "unique_id": "RC-44"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4540,7 +4847,7 @@
         "test_registry_property",
         "volume"
       ],
-      "unique_id": "RC-43"
+      "unique_id": "RC-45"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4650,7 +4957,7 @@
         "test_withdrawing_an_undeclared_phase_is_refused",
         "workflow_blueprint"
       ],
-      "unique_id": "RC-44"
+      "unique_id": "RC-46"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4721,7 +5028,7 @@
         "valid_input",
         "valid_subject"
       ],
-      "unique_id": "RC-45"
+      "unique_id": "RC-47"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4842,7 +5149,7 @@
         "test_write_evidence_refuses_frozen_corpus",
         "test_write_evidence_to_tmp"
       ],
-      "unique_id": "RC-46"
+      "unique_id": "RC-48"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5085,7 +5392,7 @@
         "test_write_evidence_refuses_frozen_corpus",
         "test_write_evidence_returns_path"
       ],
-      "unique_id": "RC-47"
+      "unique_id": "RC-49"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5131,7 +5438,7 @@
         "test_sbom_verified",
         "test_signature_verified"
       ],
-      "unique_id": "RC-48"
+      "unique_id": "RC-50"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5229,7 +5536,7 @@
         "test_would_cycle_walk_detects_cycle_and_backedge",
         "test_would_cycle_walks_into_unregistered_target"
       ],
-      "unique_id": "RC-49"
+      "unique_id": "RC-51"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5388,7 +5695,7 @@
         "test_verification_packages_are_tagged_and_excluded_from_reuse",
         "test_write_all_is_deterministic"
       ],
-      "unique_id": "RC-50"
+      "unique_id": "RC-52"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5526,7 +5833,7 @@
         "test_vocabularies_stable_and_complete",
         "test_workstreams"
       ],
-      "unique_id": "RC-51"
+      "unique_id": "RC-53"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5854,7 +6161,7 @@
         "test_with_relations_dedupes_and_orders",
         "unit_from"
       ],
-      "unique_id": "RC-52"
+      "unique_id": "RC-54"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6101,7 +6408,7 @@
         "test_validation_reports_context_failures",
         "test_withdrawing_the_faculty_in_ceu_withdraws_legacy_ownership"
       ],
-      "unique_id": "RC-53"
+      "unique_id": "RC-55"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6177,7 +6484,7 @@
         "test_validate_fails_when_provider_contract_malformed",
         "test_validate_fails_when_provider_has_no_capability"
       ],
-      "unique_id": "RC-54"
+      "unique_id": "RC-56"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6592,7 +6899,7 @@
         "test_the_registry_describes_and_documents_itself",
         "test_the_registry_indexes_by_every_declared_dimension"
       ],
-      "unique_id": "RC-55"
+      "unique_id": "RC-57"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7007,7 +7314,7 @@
         "test_federation_duplicate_refused",
         "test_federation_same_context_refused"
       ],
-      "unique_id": "RC-56"
+      "unique_id": "RC-58"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7128,7 +7435,7 @@
         "valid_report",
         "validation_input"
       ],
-      "unique_id": "RC-57"
+      "unique_id": "RC-59"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7190,7 +7497,7 @@
         "test_validate_runtime_unit_convenience",
         "valid_subject"
       ],
-      "unique_id": "RC-58"
+      "unique_id": "RC-60"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7404,7 +7711,7 @@
         "vocabulary_object",
         "write_projections"
       ],
-      "unique_id": "RC-59"
+      "unique_id": "RC-61"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7485,7 +7792,7 @@
         "pipeline",
         "rules"
       ],
-      "unique_id": "RC-60"
+      "unique_id": "RC-62"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7531,7 +7838,7 @@
         "gates",
         "validate_runtime_unit"
       ],
-      "unique_id": "RC-61"
+      "unique_id": "RC-63"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -7853,7 +8160,7 @@
         "validate_network",
         "validate_storage"
       ],
-      "unique_id": "RC-62"
+      "unique_id": "RC-64"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -8268,7 +8575,7 @@
         "test_untyped_capability_is_rejected_fail_closed",
         "test_untyped_compute_resource_is_rejected_fail_closed"
       ],
-      "unique_id": "RC-63"
+      "unique_id": "RC-65"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8287,7 +8594,7 @@
         "main",
         "portal"
       ],
-      "unique_id": "RC-64"
+      "unique_id": "RC-66"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8341,7 +8648,7 @@
         "subsystem_config",
         "validation"
       ],
-      "unique_id": "RC-65"
+      "unique_id": "RC-67"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8393,7 +8700,7 @@
         "renderers",
         "validation"
       ],
-      "unique_id": "RC-66"
+      "unique_id": "RC-68"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8490,7 +8797,7 @@
         "verify_bundle",
         "verify_seal"
       ],
-      "unique_id": "RC-67"
+      "unique_id": "RC-69"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8524,7 +8831,7 @@
         "schema",
         "tests"
       ],
-      "unique_id": "RC-68"
+      "unique_id": "RC-70"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8567,7 +8874,7 @@
         "standards",
         "validation"
       ],
-      "unique_id": "RC-69"
+      "unique_id": "RC-71"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8621,7 +8928,7 @@
         "sha256_file",
         "sha256_text"
       ],
-      "unique_id": "RC-70"
+      "unique_id": "RC-72"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8752,7 +9059,7 @@
         "test_verify_reports_a_corrupted_artifact",
         "test_write_all_is_deterministic"
       ],
-      "unique_id": "RC-71"
+      "unique_id": "RC-73"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -8766,7 +9073,7 @@
       "reuse": "REUSE/COMPOSE",
       "summary": "UCOS EC-2 ``platform`` package root — stdlib-safe shim. The EC-2 Platform Realization Program's authoritative deliverable path is ``platform/foundation/`` (per ``06-IMPLEMENTATION/UCOS-EC-2-PLATFORM-REALIZATION-PROGRAM.md``). Because ``platform`` is also the name of a Python standard-library module, a naive package here would *shadow* the stdlib module for the whole interpreter and break tooling (pytest, coverage, setuptools all ``import platform``). To honor the mandated deliverable path **without** breaking the toolchain, this package is a **transparent shim**: it loads the genuine standard-library ``platform`` module by file location and re-exports its public API into this package namespace. Therefore: * ``import platform`` → exposes the real stdlib API (``system()``, ``python_version()``, ``machine()``, …) — tooling is unaffected; * ``import platform.foundation`` → resolves the EC-2 Platform Foundation, because this remains a real package with a ``__path__``. This shim is additive and reads nothing from the certified corpus. It is *not* an EC-2 foundation module; it exists solely to reconcile the reserved package name.",
       "symbols": [],
-      "unique_id": "RC-72"
+      "unique_id": "RC-74"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -8836,7 +9143,7 @@
         "search",
         "service"
       ],
-      "unique_id": "RC-73"
+      "unique_id": "RC-75"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -8892,7 +9199,7 @@
         "search",
         "service"
       ],
-      "unique_id": "RC-74"
+      "unique_id": "RC-76"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -8989,7 +9296,7 @@
         "validation",
         "versioning"
       ],
-      "unique_id": "RC-75"
+      "unique_id": "RC-77"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9064,7 +9371,7 @@
         "status",
         "validate_governance"
       ],
-      "unique_id": "RC-76"
+      "unique_id": "RC-78"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9207,7 +9514,7 @@
         "sum_money",
         "validation"
       ],
-      "unique_id": "RC-77"
+      "unique_id": "RC-79"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9269,7 +9576,7 @@
         "service",
         "top_level_symbols"
       ],
-      "unique_id": "RC-78"
+      "unique_id": "RC-80"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9319,7 +9626,7 @@
         "service",
         "views"
       ],
-      "unique_id": "RC-79"
+      "unique_id": "RC-81"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9440,7 +9747,7 @@
         "services",
         "trust"
       ],
-      "unique_id": "RC-80"
+      "unique_id": "RC-82"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9515,7 +9822,7 @@
         "status",
         "validate_transition"
       ],
-      "unique_id": "RC-81"
+      "unique_id": "RC-83"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9572,7 +9879,7 @@
         "service",
         "sessions"
       ],
-      "unique_id": "RC-82"
+      "unique_id": "RC-84"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9636,7 +9943,7 @@
         "service",
         "source"
       ],
-      "unique_id": "RC-83"
+      "unique_id": "RC-85"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9695,7 +10002,7 @@
         "service",
         "traces"
       ],
-      "unique_id": "RC-84"
+      "unique_id": "RC-86"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9763,7 +10070,7 @@
         "service",
         "workspace"
       ],
-      "unique_id": "RC-85"
+      "unique_id": "RC-87"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9833,7 +10140,7 @@
         "status",
         "validate_transition"
       ],
-      "unique_id": "RC-86"
+      "unique_id": "RC-88"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9847,7 +10154,7 @@
       "reuse": "REUSE/COMPOSE",
       "summary": "UCOS Ω∞ — Provider implementations and the provider catalog (Terminal-04). This package sits **outside** the Universal Provider Architecture (:mod:`platform.universal_provider`) by design. The framework must not know that any particular provider exists, so provider implementations live here and reach the framework only as **data**: * ``catalog/`` — JSON provider manifests. Discovery reads this directory; the framework has no compiled knowledge of its contents. * ``repository/`` — the Repository provider, the reference implementation. It is built on :class:`~platform.universal_provider.sdk.BaseProvider` and is reached exclusively through the ``entry_point`` string declared in its manifest. * ``TEMPLATE.provider.json`` — the copy-me manifest for a new provider. It is deliberately *not* inside ``catalog/`` so it is never discovered. Onboarding a provider is therefore two acts, neither of which touches the framework: 1. add a manifest to ``catalog/`` declaring identity, capabilities, and entry point; 2. add a module exposing that entry point. The framework's own gate ``PV-02-KIND-OPEN`` scans :mod:`platform.universal_provider` for the provider under validation and fails if it finds it — so this separation is enforced, not merely intended.",
       "symbols": [],
-      "unique_id": "RC-87"
+      "unique_id": "RC-89"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9868,7 +10175,7 @@
         "repository_descriptor",
         "repository_root"
       ],
-      "unique_id": "RC-88"
+      "unique_id": "RC-90"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9965,7 +10272,7 @@
         "validate_report",
         "validation"
       ],
-      "unique_id": "RC-89"
+      "unique_id": "RC-91"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10021,7 +10328,7 @@
         "subjects",
         "subprocess_command_runner"
       ],
-      "unique_id": "RC-90"
+      "unique_id": "RC-92"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10107,7 +10414,7 @@
         "status",
         "validate_governance"
       ],
-      "unique_id": "RC-91"
+      "unique_id": "RC-93"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10195,7 +10502,7 @@
         "validate_trajectory",
         "workflow"
       ],
-      "unique_id": "RC-92"
+      "unique_id": "RC-94"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10323,7 +10630,7 @@
         "zone_may_mutate",
         "zones"
       ],
-      "unique_id": "RC-93"
+      "unique_id": "RC-95"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10738,7 +11045,7 @@
         "test_a_determination_over_no_nucleus_is_not_complete",
         "test_a_determination_that_left_nothing_open_is_fully_reduced"
       ],
-      "unique_id": "RC-94"
+      "unique_id": "RC-96"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10796,7 +11103,7 @@
         "pipeline",
         "register_assimilation"
       ],
-      "unique_id": "RC-95"
+      "unique_id": "RC-97"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10924,7 +11231,7 @@
         "write_bundle",
         "write_json"
       ],
-      "unique_id": "RC-96"
+      "unique_id": "RC-98"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11070,7 +11377,7 @@
         "truth",
         "version"
       ],
-      "unique_id": "RC-97"
+      "unique_id": "RC-99"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11204,7 +11511,7 @@
         "service",
         "specialization"
       ],
-      "unique_id": "RC-98"
+      "unique_id": "RC-100"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11263,7 +11570,7 @@
         "template_fingerprint",
         "templates"
       ],
-      "unique_id": "RC-99"
+      "unique_id": "RC-101"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11303,7 +11610,7 @@
         "record_plan",
         "replays"
       ],
-      "unique_id": "RC-100"
+      "unique_id": "RC-102"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11357,7 +11664,7 @@
         "policy_service_descriptor",
         "register_measurement_policies"
       ],
-      "unique_id": "RC-101"
+      "unique_id": "RC-103"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11429,7 +11736,7 @@
         "recommendation",
         "register_ownership"
       ],
-      "unique_id": "RC-102"
+      "unique_id": "RC-104"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11573,7 +11880,7 @@
         "state_machine",
         "vocabulary"
       ],
-      "unique_id": "RC-103"
+      "unique_id": "RC-105"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11629,7 +11936,7 @@
         "universal_portal_contract",
         "universal_portal_health_report"
       ],
-      "unique_id": "RC-104"
+      "unique_id": "RC-106"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11675,7 +11982,7 @@
         "state_runtime",
         "version_index"
       ],
-      "unique_id": "RC-105"
+      "unique_id": "RC-107"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11797,7 +12104,7 @@
         "version_tuple",
         "write_evidence"
       ],
-      "unique_id": "RC-106"
+      "unique_id": "RC-108"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11850,7 +12157,7 @@
         "truth_contract_names",
         "truth_service_descriptor"
       ],
-      "unique_id": "RC-107"
+      "unique_id": "RC-109"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11919,7 +12226,7 @@
         "rules",
         "service"
       ],
-      "unique_id": "RC-108"
+      "unique_id": "RC-110"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11986,7 +12293,7 @@
         "validation_console_contract",
         "validation_console_health_checks"
       ],
-      "unique_id": "RC-109"
+      "unique_id": "RC-111"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12052,7 +12359,7 @@
         "parse_config",
         "service"
       ],
-      "unique_id": "RC-110"
+      "unique_id": "RC-112"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12119,7 +12426,7 @@
         "workspace_contract",
         "workspace_health_checks"
       ],
-      "unique_id": "RC-111"
+      "unique_id": "RC-113"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -12534,7 +12841,7 @@
         "validate_execution",
         "validate_interface"
       ],
-      "unique_id": "RC-112"
+      "unique_id": "RC-114"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -12949,7 +13256,7 @@
         "test_non_constitutive_check_fails_on_authority",
         "test_non_constitutive_check_fails_on_secret"
       ],
-      "unique_id": "RC-113"
+      "unique_id": "RC-115"
     },
     {
       "authority": "ACTIVE",
@@ -12963,7 +13270,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-114"
+      "unique_id": "RC-116"
     },
     {
       "authority": "ACTIVE",
@@ -12977,7 +13284,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-115"
+      "unique_id": "RC-117"
     },
     {
       "authority": "ACTIVE",
@@ -12991,7 +13298,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-116"
+      "unique_id": "RC-118"
     },
     {
       "authority": "ACTIVE (AUTHORITY=NONE)",
@@ -13005,7 +13312,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-117"
+      "unique_id": "RC-119"
     },
     {
       "authority": "SPEC (AUTHORITY=NONE)",
@@ -13036,9 +13343,9 @@
       "unique_id": "SPEC-CCE"
     }
   ],
-  "capability_count": 119,
+  "capability_count": 121,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "232c27853a34c91c0b5fdcf098cdd3bd97af832e3782d09b04261befca9b9c49",
+  "content_hash": "949beb271dcaaaa3416f48eda640e99f1e770394e773c7766db1e7fe9e5ba8fc",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -13137,7 +13444,7 @@
         "to": "SERVICE"
       }
     ],
-    "total_corpus_edges": 12895
+    "total_corpus_edges": 12899
   },
   "digital_twin": {
     "automation_readiness": "READY",
@@ -13153,18 +13460,18 @@
   "evidence_state": {
     "coverage_measurement": {
       "basis": "the consumed measurement, not the file bytes — coverage.xml embeds a wall-clock timestamp, so a byte hash would make every regeneration differ with no change in repository state",
-      "fingerprint": "ace674450ede46138f0612ab9c3095cb268048a013756f4b5e308b51d1ad7a74",
+      "fingerprint": "61a61a5d60ec645f9d5f0a5e0b4a66aa1c81f47f2283f077228507a2265f023a",
       "source": "coverage.xml"
     },
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "2fd4cc37b364b311b1961e9e2ffd233a765e7852e1395b4da6aec1340afb9537",
-      "00-BOOK/DATA/certification.json": "8261424727228bc2d0f13795f46c2b46a0d2da77826c573cbfbf5befb3af6e6a",
-      "00-BOOK/DATA/control-tower.json": "7fd4c9d7f432fa87e277ebebd94a360a21ac37839540dbda6562cbefb9a4bcd1",
+      "00-BOOK/DATA/artifacts.json": "8a49b2f9f5e8ad213d6b0ed9fe17fa1a6ae8493faf77d84ca2b7846e8c324a0c",
+      "00-BOOK/DATA/certification.json": "d92e5b4c3ffc9cc9adfc9fdece77a69cb7cfe0057ec146b76bcfeb5d30d46387",
+      "00-BOOK/DATA/control-tower.json": "304072e9af5c2e798b559ba460d5e92c87ad388fefcfcccaa292c1ad1e050931",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "0fa00749f3ee8a01c1f9ec9c88083953d690fa5b4702665c462b7998a3db4612"
+      "00-BOOK/DATA/volumes.json": "895355b4082d11f432827ba41517076cc82a1f77095c50e718eda3306121e9ca"
     }
   },
-  "evidence_timestamp": "2026-08-09T19:01:22+00:00",
+  "evidence_timestamp": "2026-08-10T15:29:21+00:00",
   "execution_frontier": {
     "blocked": [
       {
@@ -13199,7 +13506,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "795c923e80de73c4b765c07a69140e0db0ba368dc04ec84c2c297729ea0b7d63",
+    "input_hash": "68951f423d2b7b6dd47e2892de1e808d70ce6f966c21bb3f651535b115bb9cc3",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every evidence file hash and the coverage measurement fingerprint, which together pin the tracked state these outputs derive from without naming the commit that carries them",
     "output_hash_field": "content_hash"
   },
@@ -13210,8 +13517,8 @@
       "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)"
     },
     "code": {
-      "coverage_branch_pct": 90.73,
-      "coverage_line_pct": 95.61,
+      "coverage_branch_pct": 90.75,
+      "coverage_line_pct": 95.62,
       "roots": {
         "application": {
           "loc": 23741,
@@ -13228,11 +13535,11 @@
           "test_functions": 887
         },
         "engine": {
-          "loc": 79809,
+          "loc": 86697,
           "root": "engine",
-          "source_files": 314,
-          "test_files": 254,
-          "test_functions": 3477
+          "source_files": 331,
+          "test_files": 263,
+          "test_functions": 3579
         },
         "infrastructure": {
           "loc": 22599,
@@ -13263,15 +13570,15 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 309820,
-      "total_tests": 12791
+      "total_loc": 316708,
+      "total_tests": 12893
     },
     "corpus": {
-      "artifacts": 1231,
-      "edges": 12895,
-      "pages": 9815,
+      "artifacts": 1233,
+      "edges": 12899,
+      "pages": 9826,
       "status_histogram": {
-        "ACTIVE": 1130,
+        "ACTIVE": 1132,
         "CERTIFIED": 7,
         "COMPLETE": 43,
         "FINAL": 9,
@@ -13295,7 +13602,7 @@
     "dimensions_counted": 15,
     "per_dimension": {
       "architecture": {
-        "as_of": "2026-08-09T19:01:22+00:00",
+        "as_of": "2026-08-10T15:29:21+00:00",
         "literal_score": 1.0,
         "reconciled_score": 1.0,
         "source": "MANUAL",
@@ -13311,7 +13618,7 @@
         "status": "BLOCKED"
       },
       "certification": {
-        "as_of": "2026-08-09T19:01:22+00:00",
+        "as_of": "2026-08-10T15:29:21+00:00",
         "literal_score": 1.0,
         "reconciled_score": 1.0,
         "source": "MANUAL",
@@ -13327,7 +13634,7 @@
         "status": "IN_PROGRESS"
       },
       "execution": {
-        "as_of": "2026-08-09T19:01:22+00:00",
+        "as_of": "2026-08-10T15:29:21+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -13335,7 +13642,7 @@
         "status": "NOT_STARTED"
       },
       "functional_testing": {
-        "as_of": "2026-08-09T19:01:22+00:00",
+        "as_of": "2026-08-10T15:29:21+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -13351,7 +13658,7 @@
         "status": "IMPLEMENTED"
       },
       "integration_testing": {
-        "as_of": "2026-08-09T19:01:22+00:00",
+        "as_of": "2026-08-10T15:29:21+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -13367,7 +13674,7 @@
         "status": "BLOCKED"
       },
       "performance_testing": {
-        "as_of": "2026-08-09T19:01:22+00:00",
+        "as_of": "2026-08-10T15:29:21+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -13375,7 +13682,7 @@
         "status": "NOT_STARTED"
       },
       "portfolio": {
-        "as_of": "2026-08-09T19:01:22+00:00",
+        "as_of": "2026-08-10T15:29:21+00:00",
         "literal_score": 0.5,
         "reconciled_score": 0.5,
         "source": "MANUAL",
@@ -13391,7 +13698,7 @@
         "status": "BLOCKED"
       },
       "release": {
-        "as_of": "2026-08-09T19:01:22+00:00",
+        "as_of": "2026-08-10T15:29:21+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -13415,7 +13722,7 @@
         "status": "BLOCKED"
       }
     },
-    "unit_validation_pct": 95.61
+    "unit_validation_pct": 95.62
   },
   "title": "Repository Intelligence Model"
 }
