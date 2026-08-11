@@ -8862,6 +8862,7 @@
         "test_acceptance_is_reused_verbatim",
         "test_all_outputs_are_valid_json_and_sealed",
         "test_all_seven_families_are_generated",
+        "test_canonical_identity_independent_of_coverage",
         "test_claims_reference_prose_instead_of_storing_it",
         "test_cli_read_only_commands_exit_zero",
         "test_cli_realize_writes_into_the_configured_roots",
@@ -8870,6 +8871,7 @@
         "test_composition_is_clean_and_ordered",
         "test_corpus_is_reproducible",
         "test_counts_are_derived_not_hardcoded",
+        "test_coverage_enrichment_is_observational_not_identity",
         "test_decision_is_sealed_and_deterministic",
         "test_determinism_identical_state_identical_outputs",
         "test_determinism_of_outputs_and_documents",
@@ -13256,7 +13258,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "df7c8b50672eaa695d381f281309b6455500953c2483c9dd3ebff299ecad75e7",
+  "content_hash": "81c43ccfeb03afea84ffc08216cb2cf4491ddb0752cc8e819203928a8fba519b",
   "count": 121,
   "evidence_state": {
     "evidence_files": {
