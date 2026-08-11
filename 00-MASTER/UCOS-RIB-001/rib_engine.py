@@ -359,7 +359,72 @@ def repository_state() -> dict:
         "interrupted_operations": interrupted,
         "broken_symlinks": broken_symlinks(),
         "tracked_files": len(tracked(".")),
+        # UCOS-CL-003 — object-database integrity. GATE-02 declares itself the Repository
+        # Integrity gate and reported PASS against a demonstrably corrupt database: ten
+        # Finder-duplicated artifacts sat inside .git, one of them a malformed ref
+        # (`refs/heads/integration/recovery-001 2`) that made `git fsck` report badRefName
+        # and `git log --all`, `--branches` and `rev-list --all` all exit 128. Nothing in
+        # the programme looked, because integrity was measured only over the WORKING TREE.
+        # .gitignore cannot reach .git, so no exclusion rule could ever have addressed it.
+        "fsck_errors": fsck_errors(),
     }
+
+
+def fsck_errors() -> list[str]:
+    """Object-database errors reported by `git fsck`.
+
+    Only `error:` lines are retained. `dangling` objects are a normal consequence of
+    ordinary history rewriting and are not corruption; treating them as findings would make
+    the gate fire on healthy repositories and train readers to ignore it.
+    """
+    proc = subprocess.run(  # noqa: S603
+        ["git", "fsck", "--no-progress"],  # noqa: S607 - fixed argv, no shell
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return [
+        line.strip()
+        for line in (proc.stdout + proc.stderr).splitlines()
+        if line.startswith(("error:", "fatal:", "missing ", "broken "))
+    ]
+
+
+def contamination_state(decl: dict) -> dict:
+    """Filesystem contamination, from the canonical repository-intelligence capability.
+
+    UCOS-CL-001. This programme previously defined repository cleanliness as a count of
+    `git status --porcelain` lines. That command applies the ignore authority, which made
+    `.gitignore` an INPUT to the gate that polices excluded state: two lines added at
+    be46a300 removed 41 physically-present files from the observation surface, flipped
+    GATE-12 and GATE-04, opened this programme's gate, satisfied AEE OBS-BLUEPRINT-GATE
+    and cleared CONV-02 — while every one of those files was still on disk.
+
+    The measurement is NOT reimplemented here. `platform.repository_intelligence` is the
+    repository's repository-state capability; this programme consumes it. Adding an ignore
+    rule now adds a classification obligation in `00-BOOK/DATA/exclusion-register.json`
+    rather than removing an observation, so the metric cannot be shrunk unilaterally.
+    """
+    # The repository root must lead sys.path or `platform` resolves to the STDLIB module of
+    # that name and the capability is invisible. This engine is executed from its own
+    # directory (`make rib`, and directly), so the root is not there by default — the
+    # measurement silently fell back to fail-closed until this was added.
+    root = str(REPO)
+    if sys.path[:1] != [root]:
+        sys.path.insert(0, root)
+    try:
+        from platform.repository_intelligence.contamination import measure
+    except ImportError as exc:  # pragma: no cover - the capability ships with the repo
+        return {"available": False, "reason": f"contamination capability unavailable: {exc}"}
+    try:
+        report = measure(REPO, generated=own_generated_paths(decl))
+    except (OSError, RuntimeError) as exc:
+        # Fail closed: an unmeasurable repository is not a clean one.
+        return {"available": False, "reason": str(exc)}
+    state = dict(report.as_dict())
+    state["available"] = True
+    return state
 
 
 def tracked_conflicts() -> list[str]:
@@ -1506,6 +1571,11 @@ def compute_metrics(
         )
     if repo["broken_symlinks"]:
         integrity.append(f"{len(repo['broken_symlinks'])} broken symlink(s)")
+    # UCOS-CL-003 — object-database corruption is a repository-integrity finding. Without
+    # this, GATE-02 reported PASS while `git fsck` reported badRefName on a malformed ref
+    # that broke every whole-history traversal in the repository.
+    for finding in repo.get("fsck_errors", []):
+        integrity.append(f"git fsck: {finding}")
     integrity += sub.findings()
 
     owner_collisions = 0
@@ -1596,6 +1666,22 @@ def compute_metrics(
     # figure stays visible beside the narrowed one, so nothing is hidden.
     metrics["generated_artifact_paths"] = sorted(own_generated_paths(decl))
     metrics["dirty_entries_outside_generated"] = repo["dirty_entries"]
+    # UCOS-CL-001 — the contamination metrics. `dirty_entries_outside_generated` is
+    # retained unchanged so nothing that reads it changes meaning; these ADD the
+    # observation surface that the porcelain-only measurement never had.
+    contam = repo.get("contamination") or {}
+    metrics["contamination_available"] = bool(contam.get("available"))
+    metrics["ignored_unclassified"] = (
+        int(contam.get("ignored_unclassified", 0)) if contam.get("available") else 1
+    )
+    metrics["shadowed_tracked_paths_count"] = (
+        int(contam.get("shadowed_tracked", 0)) if contam.get("available") else 1
+    )
+    metrics["contamination_entries"] = (
+        int(contam.get("contamination_entries", 0)) if contam.get("available") else 1
+    )
+    metrics["contamination_unclassified_members"] = list(contam.get("unclassified_paths", []))
+    metrics["contamination_shadowed_members"] = list(contam.get("shadowed_tracked_paths", []))
     for record in gaps:
         metrics[f"gap_count:{record['id']}"] = record["count"]
     for record in duplicates:
@@ -1737,11 +1823,40 @@ def derive_identity(decl: dict, units: dict[str, dict]) -> None:
 
 
 def own_generated_paths(decl: dict) -> set[str]:
-    """The artifacts this programme itself rewrites on every run."""
+    """The artifacts this programme itself rewrites on every run.
+
+    UCOS-CL-015 — the authoritative answer is the generated-artifact registry
+    (``00-BOOK/DATA/generated-artifact-registry.json``), not this engine's private reading
+    of its own declaration. "This path is generated output" was previously asserted in
+    three independent places — here, in ``EXCLUDE_DIR_PREFIXES`` for registration
+    eligibility, and in ``.gitignore`` for the version-control boundary — and they drifted:
+    UCOS-RECON-C2 records eleven RIE outputs being registered as authored corpus because
+    one of those lists had never heard of ``intelligence/``.
+
+    The declaration remains the FALLBACK, so this engine still runs standalone if the
+    registry is unreachable. When both are available they must agree, and
+    ``reconcile_owner_view`` proves it — a disagreement is a finding, never a silent
+    preference for one of the two.
+    """
     home = Path(HERE.relative_to(REPO))
-    generated = {str(home / str(entry.get("file"))) for entry in section(decl, "outputs")}
-    generated.add(str(home / MODEL_FILE))
-    return generated
+    declared = {str(home / str(entry.get("file"))) for entry in section(decl, "outputs")}
+    declared.add(str(home / MODEL_FILE))
+
+    root = str(REPO)
+    if sys.path[:1] != [root]:
+        sys.path.insert(0, root)
+    try:
+        from platform.repository_intelligence.generated_artifacts import paths_for_owner
+    except ImportError:
+        return declared
+    try:
+        registry = paths_for_owner(REPO, "UCOS-RIB-001")
+    except (OSError, ValueError, KeyError):
+        return declared
+    # The registry is upstream and authoritative; the union keeps the engine safe if the
+    # registry has not yet caught up with a newly added output, and the reconciliation
+    # validation reports that state rather than hiding it.
+    return declared | registry
 
 
 def observed_state(decl: dict, raw: dict) -> dict:
@@ -1773,6 +1888,11 @@ def observed_state(decl: dict, raw: dict) -> dict:
     state = {key: value for key, value in raw.items() if key != "raw_entries"}
     state.update(
         {
+            # UCOS-CL-001 — the ignored-inclusive measurement, resolved against the tracked
+            # exclusion register. `dirty_entries` below answers "is the index clean";
+            # `contamination` answers "is the repository accounted for". They are different
+            # questions, and conflating them is what let an ignore rule clear a gate.
+            "contamination": contamination_state(decl),
             "working_tree": "DIRTY" if entries else "CLEAN",
             "dirty_entries": len(entries),
             "modified": len([line for line in entries if line[:2].strip() in {"M", "MM", "AM"}]),

@@ -8950,7 +8950,9 @@
         "test_acceptance_is_reused_verbatim",
         "test_all_outputs_are_valid_json_and_sealed",
         "test_all_seven_families_are_generated",
+        "test_canonical_identity_hashes_invariant_under_coverage_presence",
         "test_canonical_identity_independent_of_coverage",
+        "test_canonical_model_bytes_invariant_under_coverage_presence",
         "test_claims_reference_prose_instead_of_storing_it",
         "test_cli_read_only_commands_exit_zero",
         "test_cli_realize_writes_into_the_configured_roots",
@@ -8959,7 +8961,6 @@
         "test_composition_is_clean_and_ordered",
         "test_corpus_is_reproducible",
         "test_counts_are_derived_not_hardcoded",
-        "test_coverage_enrichment_is_observational_not_identity",
         "test_decision_is_sealed_and_deterministic",
         "test_determinism_identical_state_identical_outputs",
         "test_determinism_of_outputs_and_documents",
@@ -9010,6 +9011,7 @@
         "test_new_format_registered_from_data_generates_without_code_change",
         "test_new_renderer_registered_at_runtime",
         "test_new_section_type_registered_from_data",
+        "test_no_canonical_output_carries_a_coverage_field",
         "test_no_duplicate_authority",
         "test_no_reference_repeats_inside_a_document",
         "test_no_research_record_carries_canonical_prose",
@@ -13346,7 +13348,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "201b684f001d00a164e52bbc55ea1c07ae4b55e97a44de0583b6b80a6c1f9022",
+  "content_hash": "86fc59a75df3587c82d137d6631324a09edcbd4d32ab735555efb45b1e364ac2",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -13696,8 +13698,7 @@
         "stale": true,
         "status": "BLOCKED"
       }
-    },
-    "unit_validation_pct": 95.62
+    }
   },
   "repository_health": {
     "certification": {
@@ -13706,8 +13707,6 @@
       "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)"
     },
     "code": {
-      "coverage_branch_pct": 90.75,
-      "coverage_line_pct": 95.62,
       "roots": {
         "application": {
           "loc": 23741,
@@ -13738,11 +13737,11 @@
           "test_functions": 821
         },
         "intelligence": {
-          "loc": 15758,
+          "loc": 15784,
           "root": "intelligence",
           "source_files": 65,
           "test_files": 6,
-          "test_functions": 117
+          "test_functions": 119
         },
         "platform": {
           "loc": 123903,
@@ -13759,8 +13758,8 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 316739,
-      "total_tests": 12895
+      "total_loc": 316765,
+      "total_tests": 12897
     },
     "corpus": {
       "artifacts": 1233,
@@ -13778,7 +13777,6 @@
     },
     "health_flags": {
       "corpus_present": true,
-      "coverage_full": false,
       "twin_certified": true
     },
     "overall": "HEALTHY"

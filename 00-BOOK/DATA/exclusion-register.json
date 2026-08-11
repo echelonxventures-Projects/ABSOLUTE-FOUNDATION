@@ -1,0 +1,264 @@
+{
+  "artifact_id": "UCOS-EXCLUSION-REGISTER-001",
+  "title": "Repository Exclusion Register — the declared classification of every excluded path",
+  "authority": "AUTHORED REPOSITORY TRUTH. This register legislates the classification of excluded filesystem state; it is not generated and must never be regenerated.",
+  "constitutional_basis": "GOV-005 §5.1 / §5.3, UCOS-CL-001",
+  "schema": "ucos-exclusion-register",
+  "version": "1.0.0",
+  "why_this_exists": [
+    "UCOS-RIB-001 measured repository cleanliness as a count over `git status --porcelain`.",
+    "That command applies the ignore authority, so the exclusion rules were an INPUT to the",
+    "gate that polices excluded state. At be46a300 two lines added to .gitignore removed 41",
+    "physically-present contaminating files from the gate's observation surface, flipping",
+    "GATE-12 and GATE-04, opening rib.json:gate, satisfying AEE OBS-BLUEPRINT-GATE and",
+    "clearing CONV-02 — on a repository that still held every one of those files.",
+    "",
+    "The correction is not a better pattern. It is that EXCLUSION MUST COST A DECLARATION.",
+    "Repository cleanliness is now measured over the ignored-inclusive filesystem, and every",
+    "ignored path must resolve to a class declared HERE. An ignored path with no declared",
+    "class is `ignored_unclassified` and FAILS CLOSED. Adding an ignore rule therefore no",
+    "longer removes an observation; it adds a classification obligation. The metric cannot",
+    "be shrunk by editing .gitignore, which is the property that was missing."
+  ],
+  "classes": {
+    "GENERATED_DETERMINISTIC": "Deterministically re-derivable output of a declared producer. Regenerated each run, never hand-registered (GOV-005 §5.3). Byte-identical from the same tracked inputs.",
+    "GENERATED_ENVIRONMENTAL": "Output of a declared producer whose bytes depend on the execution environment. Never an input to canonical identity.",
+    "TEST_EXECUTION_ARTIFACT": "Produced by the test runner. Absent from every pristine clone because the bootstrap does not run the suite. Never an input to canonical identity (UCOS-CL-005).",
+    "CACHE": "Interpreter or tool cache. Reconstructible from source at any time; carries no information.",
+    "TOOL_OPERATIONAL": "Per-clone operational state of a development tool or environment. Not repository truth, not shared, not reproducible across machines.",
+    "TEMPORARY": "Transient lock or editor scratch file with a bounded lifetime, owned by the process that creates it.",
+    "EXPLICITLY_AUTHORIZED_EXTERNAL": "Present by explicit authorization and outside the governed corpus by declaration, not by accident."
+  },
+  "invariants": [
+    "Every ignored path resolves to exactly one entry here (`ignored_unclassified` = 0).",
+    "No tracked path is matched by any ignore rule (`git check-ignore --no-index` over `git ls-files` is empty).",
+    "No entry may be added for a path whose correct disposition is deletion — exclusion is not a disposal mechanism.",
+    "Adding a rule here does not reduce the contamination count unless the class is one this register declares."
+  ],
+  "entries": [
+    {
+      "rule": "__pycache__/",
+      "class": "CACHE",
+      "owner": "CPython",
+      "producer": "python interpreter",
+      "rationale": "Bytecode cache. Reconstructed on import; carries no information not in the .py source."
+    },
+    {
+      "rule": "*.pyc",
+      "class": "CACHE",
+      "owner": "CPython",
+      "producer": "python interpreter",
+      "rationale": "As above, for loose bytecode outside a __pycache__ directory."
+    },
+    {
+      "rule": ".pytest_cache/",
+      "class": "CACHE",
+      "owner": "pytest",
+      "producer": "pytest",
+      "rationale": "Test-run cache (last-failed, node ids). Rebuilt on the next run."
+    },
+    {
+      "rule": ".ruff_cache/",
+      "class": "CACHE",
+      "owner": "ruff",
+      "producer": "ruff",
+      "rationale": "Lint result cache keyed by file hash. Rebuilt on the next run."
+    },
+    {
+      "rule": ".mypy_cache/",
+      "class": "CACHE",
+      "owner": "mypy",
+      "producer": "mypy",
+      "rationale": "Type-check cache. Rebuilt on the next run. Ships its own nested .gitignore containing `*`, which is why a bare `*` rule appears in the in-force rule set."
+    },
+    {
+      "rule": "*",
+      "class": "CACHE",
+      "owner": "tool-authored nested .gitignore",
+      "producer": "mypy and peers",
+      "rationale": "Several caches write a nested `.gitignore` holding `*` to self-exclude. The rule is scoped to the cache directory that contains it, never to the repository root, and is admitted only in that scope."
+    },
+    {
+      "rule": ".coverage*",
+      "class": "TEST_EXECUTION_ARTIFACT",
+      "owner": "coverage.py",
+      "producer": "pytest-cov / coverage",
+      "rationale": "Coverage data files, including parallel-mode `.coverage.<host>.<pid>.<rand>` and combine-collision residue. Environmental; excluded from canonical identity by UCOS-CL-005."
+    },
+    {
+      "rule": "coverage.xml",
+      "class": "TEST_EXECUTION_ARTIFACT",
+      "owner": "coverage.py",
+      "producer": "pytest --cov-report=xml",
+      "rationale": "Cobertura report consumed by platform/repository_operations/coverage.py. Absent from every pristine clone; nothing reachable from RIE build_model may read it."
+    },
+    {
+      "rule": ".ec1-venv/",
+      "class": "TOOL_OPERATIONAL",
+      "owner": "verify.sh / ucos-env.sh",
+      "producer": "ucos_ensure_venv",
+      "rationale": "The canonical virtual environment, self-healed by verify.sh. Machine-specific absolute paths make it non-portable by construction."
+    },
+    {
+      "rule": "build/",
+      "class": "TOOL_OPERATIONAL",
+      "owner": "setuptools",
+      "producer": "python -m build",
+      "rationale": "Packaging intermediate."
+    },
+    {
+      "rule": "dist/",
+      "class": "TOOL_OPERATIONAL",
+      "owner": "setuptools",
+      "producer": "python -m build",
+      "rationale": "Packaging output; belongs in a release artifact store, not the tree."
+    },
+    {
+      "rule": "*.egg-info/",
+      "class": "TOOL_OPERATIONAL",
+      "owner": "setuptools",
+      "producer": "pip install -e",
+      "rationale": "Editable-install metadata, regenerated on every install."
+    },
+    {
+      "rule": ".runtime/",
+      "class": "TOOL_OPERATIONAL",
+      "owner": "00-BOOK/tools/governance_telemetry.py",
+      "producer": "governance_telemetry.py",
+      "rationale": "EC3 Phase-3 per-clone runtime governance telemetry (enforcement / synchronization / certification audit logs). Operational runtime state, written by exactly one module. This is the permanent remediation for telemetry-induced non-determinism."
+    },
+    {
+      "rule": "**/.claude/settings.local.json",
+      "class": "TOOL_OPERATIONAL",
+      "owner": "developer workstation",
+      "producer": "Claude Code",
+      "rationale": "Per-developer editor/agent settings. Never shared, never repository truth."
+    },
+    {
+      "rule": "00-BOOK/tools/.register.lock",
+      "class": "TEMPORARY",
+      "owner": "00-BOOK/tools/register.sh",
+      "producer": "register.sh",
+      "rationale": "Registration re-entrancy lock, created and removed within a single run (UMB-IMP-001)."
+    },
+    {
+      "rule": "~$*",
+      "class": "TEMPORARY",
+      "owner": "Microsoft Office",
+      "producer": "Word / Excel",
+      "rationale": "Office owner/lock temp files, created beside an open document and removed on close."
+    },
+    {
+      "rule": "determinism-evidence/",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "engine.determinism",
+      "producer": "ec1-determinism",
+      "rationale": "Deterministically re-derivable evidence bundle, regenerated each run (GOV-005 §5.3)."
+    },
+    {
+      "rule": "/knowledge/",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "engine/knowledge/seed.py",
+      "producer": "ucos-knowledge init / docs",
+      "rationale": "Generated canonical knowledge store and handbooks. Authored source is the tracked seed module. Anchored with a leading slash so only the repo-root store is excluded; engine/knowledge/ stays tracked."
+    },
+    {
+      "rule": "/realization/",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "intelligence/realization/",
+      "producer": "python -m intelligence.realization realize",
+      "rationale": "Generated realization artifacts. Authored source is the tracked package plus the canonical knowledge store."
+    },
+    {
+      "rule": "data/_evidence/URI-000001/",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "intelligence/realization/",
+      "producer": "python -m intelligence.realization realize",
+      "rationale": "Consolidated evidence bundle for URI-000001, regenerated with the realization tree."
+    },
+    {
+      "rule": "intelligence/UCOS-URI-001/",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "intelligence/research/",
+      "producer": "make research",
+      "rationale": "Generated research corpus; the engine self-proves determinism via `research verify`."
+    },
+    {
+      "rule": "intelligence/UCOS-UPI-001/",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "intelligence/publication/",
+      "producer": "make publication",
+      "rationale": "Generated publication set; every publication carries a DO-NOT-EDIT provenance banner and the engine self-proves determinism via `publication verify`. The one authored descriptor inside the tree (publication-formats.json) is explicitly re-admitted in .gitignore."
+    },
+    {
+      "rule": "00-MASTER/UAKOS-CLOSURE-002/[0-9][0-9]-*.md",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+      "producer": "make closure / closure-phase2 / closure-phase3",
+      "rationale": "Numbered engine reports, regenerated each run. Stated at the genus so future engine output is bounded without a new rule; the 24 AUTHORED determinations in the same directory are re-admitted by name in .gitignore (P0-FINAL-CONVERGENCE-001)."
+    },
+    {
+      "rule": "00-MASTER/UAKOS-CLOSURE-002/closure.json",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+      "producer": "make closure",
+      "rationale": "Engine state for phase 1."
+    },
+    {
+      "rule": "00-MASTER/UAKOS-CLOSURE-002/phase2.json",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
+      "producer": "make closure-phase2",
+      "rationale": "Engine state for phase 2."
+    },
+    {
+      "rule": "00-MASTER/UAKOS-CLOSURE-002/phase3.json",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
+      "producer": "make closure-phase3",
+      "rationale": "Engine state for phase 3."
+    },
+    {
+      "rule": "00-MASTER/**/evidence/",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "00-MASTER programme phase engines",
+      "producer": "per-programme register/validate/certify/determinism runs",
+      "rationale": "Programme-lane execution evidence, regenerated each run (GPR-001 S1). Scoped to the 00-MASTER lane only: the tracked data/_evidence/ certification artifacts are a distinct registered family and are deliberately not matched."
+    },
+    {
+      "rule": "00-MASTER/UAKOS-PHASE-001B/provenance.json",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "00-MASTER/UAKOS-PHASE-001B",
+      "producer": "phase engine",
+      "rationale": "Engine provenance state."
+    },
+    {
+      "rule": "00-MASTER/UAKOS-PHASE-004/10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.json",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "00-MASTER/UAKOS-PHASE-004",
+      "producer": "phase engine",
+      "rationale": "Engine gap-graph state."
+    },
+    {
+      "rule": "intelligence/die/",
+      "class": "EXPLICITLY_AUTHORIZED_EXTERNAL",
+      "owner": "RC-1 pre-sealing audit",
+      "producer": "none — unwired source",
+      "rationale": "imports.py was identified as an unverified orphan: no __init__.py, no importers, no tests, not packaged or covered. Excluded from the RC-1 baseline until it is wired and tested, so it is not sealed as verified implementation. This exclusion carries a disposition obligation, not a permanent licence."
+    },
+    {
+      "rule": ".archive/",
+      "class": "EXPLICITLY_AUTHORIZED_EXTERNAL",
+      "owner": "repository operator",
+      "producer": "manual",
+      "rationale": "Operator archive held outside the governed corpus by declaration."
+    },
+    {
+      "rule": "*.bundle",
+      "class": "EXPLICITLY_AUTHORIZED_EXTERNAL",
+      "owner": "git",
+      "producer": "git bundle create",
+      "rationale": "Version-control transport container — a serialization of the object database for backup or offline transfer, classified CLS-TRANSIENT by UCOS-RFP-001. Bundles belong in durable storage outside the repository; the rule exists so one written into the tree by accident is bounded rather than counted."
+    }
+  ]
+}

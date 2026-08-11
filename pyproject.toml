@@ -181,7 +181,23 @@ exclude = ["engine.tests*", "platform.tests*"]
 # --- TASK-000009: test + coverage configuration ---------------------------------
 [tool.pytest.ini_options]
 minversion = "8.0"
-testpaths = ["engine/tests", "platform/tests"]
+# UCOS-CL-008 — intelligence/tests joins the canonical collection.
+#
+# The determination this settles: intelligence/ IS part of the certified corpus. It is not
+# a side lane. UCOS-RIE-001 emits ELEVEN TRACKED artifacts under intelligence/ that the
+# RIB → AEE → P0-FCL-002 chain consumes as evidence, and Phase-9 certifies their bytes. A
+# producer of certified artifacts whose tests never run in the certifying command is a
+# capability the certification does not actually cover.
+#
+# Measured consequence of its absence: the coverage-isolation regression added at be46a300
+# lived in intelligence/tests/test_rie.py and was therefore collected by NOTHING —
+# not ./verify.sh, not CI, not the certification pipeline. The invariant it claimed to
+# guard was unguarded, and the residual leak through analysis.py (UCOS-CL-005) shipped
+# under it. Adding the path is what makes that regression real rather than decorative.
+#
+# The coverage DENOMINATOR is deliberately a separate question, answered separately below:
+# these tests entering collection does not by itself put intelligence/* into --cov.
+testpaths = ["engine/tests", "platform/tests", "intelligence/tests"]
 addopts = [
   "-ra",
   "--strict-markers",

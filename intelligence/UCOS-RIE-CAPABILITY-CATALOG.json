@@ -8862,7 +8862,9 @@
         "test_acceptance_is_reused_verbatim",
         "test_all_outputs_are_valid_json_and_sealed",
         "test_all_seven_families_are_generated",
+        "test_canonical_identity_hashes_invariant_under_coverage_presence",
         "test_canonical_identity_independent_of_coverage",
+        "test_canonical_model_bytes_invariant_under_coverage_presence",
         "test_claims_reference_prose_instead_of_storing_it",
         "test_cli_read_only_commands_exit_zero",
         "test_cli_realize_writes_into_the_configured_roots",
@@ -8871,7 +8873,6 @@
         "test_composition_is_clean_and_ordered",
         "test_corpus_is_reproducible",
         "test_counts_are_derived_not_hardcoded",
-        "test_coverage_enrichment_is_observational_not_identity",
         "test_decision_is_sealed_and_deterministic",
         "test_determinism_identical_state_identical_outputs",
         "test_determinism_of_outputs_and_documents",
@@ -8922,6 +8923,7 @@
         "test_new_format_registered_from_data_generates_without_code_change",
         "test_new_renderer_registered_at_runtime",
         "test_new_section_type_registered_from_data",
+        "test_no_canonical_output_carries_a_coverage_field",
         "test_no_duplicate_authority",
         "test_no_reference_repeats_inside_a_document",
         "test_no_research_record_carries_canonical_prose",
@@ -13258,7 +13260,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "81c43ccfeb03afea84ffc08216cb2cf4491ddb0752cc8e819203928a8fba519b",
+  "content_hash": "6852733fd1935ae56a543459a4af4c5560c281eb99ab3b1164dad3f847840327",
   "count": 121,
   "evidence_state": {
     "evidence_files": {

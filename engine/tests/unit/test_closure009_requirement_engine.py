@@ -218,6 +218,19 @@ def test_a_workflow_names_the_engine():
 
 
 def test_this_test_is_collected_by_the_canonical_test_runner():
+    """This file sits inside a declared testpath, so `pytest` with no arguments runs it.
+
+    UCOS-CL-008 — the assertion was a literal match on the full testpaths line, which made
+    it a change-detector for that string rather than a check of the property it names: a
+    legitimate ADDITION to the canonical collection broke it. It now asserts what it means,
+    that this file's own root is declared, and additionally that intelligence/tests is
+    declared — the omission that left the RIE coverage-isolation regression collected by
+    nothing while it claimed to guard canonical identity.
+    """
     pyproject = (REPO / "pyproject.toml").read_text(encoding="utf-8")
-    assert 'testpaths = ["engine/tests", "platform/tests"]' in pyproject
+    testpaths = next(
+        line for line in pyproject.splitlines() if line.strip().startswith("testpaths")
+    )
+    for root in ("engine/tests", "platform/tests", "intelligence/tests"):
+        assert f'"{root}"' in testpaths, f"{root} is not a canonical testpath: {testpaths}"
     assert Path(__file__).resolve().is_relative_to(REPO / "engine" / "tests")

@@ -177,17 +177,38 @@ intelligence/UCOS-UPI-001/
 *.bundle
 
 
-# macOS Finder duplicate files — created when a file is dragged or pasted into a directory
-# that already contains a file with the same name. The first copy is named
-# "<stem> 2" / "<stem> 2.<ext>", the second "<stem> 3.<ext>", and so on. These files
-# are NEVER Repository Truth: they carry no canonical identity (no git history, no
-# programme declaration), and any copy present in the working tree is counted by
-# UCOS-RIB-001 GATE-12 (Repository Clean) as a dirty_entry, holding that gate CLOSED
-# and cascading through RIB → AEE → P0-FCL-002 certification.
-# Declared at the GENUS (`[2-9]`) so the class is structurally unreachable regardless
-# of future file name, extension, or directory — mirrors the *.bundle and /knowledge/
-# generated-artifact policy. The lower bound is 2 (not 1) because Finder's numbering
-# begins at 2 for the first duplicate; intentionally numbered originals ("chapter 1",
-# "step 1.md") are therefore not suppressed.
-* [2-9]
-* [2-9].*
+# UCOS-CL-002/CL-017 — WITHDRAWN: the `* [2-9]` / `* [2-9].*` Finder-duplicate patterns.
+#
+# They were introduced at be46a300 to stop untracked Finder copies aborting the pre-commit
+# ruff hook, and they were unsound in three independent ways:
+#
+#   1. A filename pattern cannot decide a semantic class. Measured over the 45 matching
+#      files actually present: 26 were byte-identical to HEAD, 10 were stale snapshots
+#      recoverable from history, 2 held content in no commit, 5 were environmental peers,
+#      and 2 were TRACKED AUTHORED sources. Name shape predicted none of that.
+#
+#   2. The rule matched tracked authored truth. `00-SOURCE/VISION/Missing 2.docx` and
+#      `Missing 3.docx` are a numbered series with no `Missing.docx` base; both are tracked
+#      and both are matched (`git check-ignore -v --no-index` confirms). They survived only
+#      because git does not apply ignore rules to files already in the index — so the moment
+#      either left the index it would have vanished from governance. The comment this block
+#      replaces asserted the opposite ("intentionally numbered originals are therefore not
+#      suppressed"); that assertion was false, and it is the same defect class the
+#      P0-FINAL-CONVERGENCE-001 re-admission block above exists to correct.
+#
+#   3. Most seriously, it manufactured cleanliness. UCOS-RIB-001 measures
+#      `dirty_entries_outside_generated` from `git status --porcelain`, so adding these two
+#      lines removed 41 physically-present files from the gate's observation surface,
+#      flipping GATE-12 and GATE-04, opening `rib.json:gate`, satisfying AEE
+#      `OBS-BLUEPRINT-GATE` and clearing `CONV-02` — on a repository that still held every
+#      contaminating file. An exclusion rule must never be an input to the gate that polices
+#      the excluded state.
+#
+# The replacement is not another pattern. Duplicate detection is now a CONTENT-derived
+# classification owned by UCOS-RIB-001's existing duplicate plane (EXACT_COPY_OF_HEAD /
+# STALE_SNAPSHOT / UNIQUE_CONTENT / NO_CANONICAL_PEER / TRACKED_AUTHORED), and repository
+# cleanliness is measured over the ignored-inclusive filesystem with every ignored path
+# required to resolve to a declared class in the tracked exclusion register
+# (`00-BOOK/DATA/exclusion-register.json`). Deletion is a separate authorized disposition,
+# never an ignore rule. No pattern is reintroduced here, deliberately: the class is
+# platform-neutral and is decided by blob comparison, not by macOS Finder's naming.

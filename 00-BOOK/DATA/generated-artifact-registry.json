@@ -1,0 +1,1750 @@
+{
+  "artifact_id": "UCOS-GENERATED-ARTIFACT-REGISTRY-001",
+  "title": "Generated-Artifact Registry — one fact, one owner, many derived views",
+  "authority": "AUTHORED REPOSITORY TRUTH. This register declares generated-artifact identity and lifecycle. It is upstream of every engine it describes and must never be produced by one of them.",
+  "constitutional_basis": "GOV-005 §5.3, UCOS-RECON-C1/C2, UCOS-CL-015",
+  "schema": "ucos-generated-artifact-registry",
+  "version": "1.0.0",
+  "why_this_exists": [
+    "The same fact — 'this path is generated output' — was expressed in three independent places:",
+    "each programme's own declaration `outputs` section, `00-BOOK/tools/config.py::EXCLUDE_DIR_PREFIXES`",
+    "for registration eligibility, and .gitignore prose for the version-control boundary. They drifted,",
+    "and the drift was not hypothetical: UCOS-RECON-C2 records the eleven RIE outputs being admitted to",
+    "the Repository Corpus and given permanent identities because EXCLUDE_DIR_PREFIXES enumerated",
+    "generated outputs only where they lived under 00-BOOK/. `intelligence/` did not exist when that list",
+    "was written — verbatim the RECON-C1 root cause, one leg later.",
+    "",
+    "Two producers declared nothing at all. UCOS-AEE-001 and UAIE-000001 emit 18 and 12 tracked files",
+    "respectively and carry no `outputs` section, so no declaration named them as generated; RIB",
+    "maintained a hard-coded understanding of only its own.",
+    "",
+    "This register is the single upstream fact. Derived views consume it; none produces it. Adding a",
+    "generated artifact is now ONE entry here rather than edits to several independent lists."
+  ],
+  "input_classifications": {
+    "TRACKED_DETERMINISTIC": "Version-controlled input. Same commit implies same bytes.",
+    "ENVIRONMENTAL": "Depends on the execution environment (test runner, wall clock, machine). Absent from a pristine clone.",
+    "OPERATIONAL": "Per-clone operational state of a tool or runtime.",
+    "EXTERNAL": "Outside the repository boundary entirely.",
+    "UNKNOWN": "Unclassified. FAILS CLOSED — a canonical artifact may not depend on an input nobody has classified."
+  },
+  "invariants": [
+    "Every canonical_path resolves to exactly one producer.",
+    "No two entries claim the same canonical_path.",
+    "Every entry carries a producer, an owner, a lifecycle and a non-empty input_closure.",
+    "Every input in every input_closure carries a classification.",
+    "An entry with any UNKNOWN input classification fails closed.",
+    "A deterministic:true entry may not declare an ENVIRONMENTAL input — this is the structural bar that makes the UCOS-CL-005 coverage defect unrepresentable rather than merely fixed.",
+    "RIB's own generated-path view equals the registry-derived view for UCOS-RIB-001."
+  ],
+  "environmental_artifacts": [
+    {
+      "artifact_id": "COVERAGE-XML",
+      "canonical_path": "coverage.xml",
+      "producer": "pytest --cov-report=xml",
+      "owner": "platform/repository_operations/coverage.py",
+      "capability": "coverage-measurement",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "the executed test corpus"
+      ],
+      "input_classification": {
+        "the executed test corpus": "ENVIRONMENTAL"
+      },
+      "deterministic": false,
+      "environmental_dependencies": [
+        "test runner",
+        "python version",
+        "installed dependencies"
+      ],
+      "canonical_identity_role": "EXCLUDED",
+      "consumers": [
+        "intelligence/portal.py",
+        "intelligence/kernel/knowledge.py",
+        "intelligence/research/assimilation.py"
+      ],
+      "registration_status": "NOT_TRACKED",
+      "validation_owner": "verify.sh stage 2",
+      "regeneration_command": "./verify.sh",
+      "certification_role": "QUALITY_GATE_ONLY",
+      "note": "Declared here so the exclusion is VISIBLE rather than implicit. Any canonical entry naming this path in its input_closure fails the deterministic/environmental invariant, which is what makes the UCOS-CL-005 leak structurally unrepresentable rather than merely removed once."
+    },
+    {
+      "artifact_id": "COVERAGE-DATA",
+      "canonical_path": ".coverage",
+      "producer": "coverage.py",
+      "owner": "platform/repository_operations/coverage.py",
+      "capability": "coverage-measurement",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "the executed test corpus"
+      ],
+      "input_classification": {
+        "the executed test corpus": "ENVIRONMENTAL"
+      },
+      "deterministic": false,
+      "environmental_dependencies": [
+        "test runner"
+      ],
+      "canonical_identity_role": "EXCLUDED",
+      "consumers": [],
+      "registration_status": "NOT_TRACKED",
+      "validation_owner": "verify.sh stage 3",
+      "regeneration_command": "./verify.sh",
+      "certification_role": "QUALITY_GATE_ONLY"
+    }
+  ],
+  "entries": [
+    {
+      "artifact_id": "UCOS-IMP-BASELINE-001.evidence",
+      "canonical_path": "intelligence/UCOS-IMP-BASELINE-001.evidence.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-IMP-BASELINE-001.rib",
+      "canonical_path": "intelligence/UCOS-IMP-BASELINE-001.rib.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-RIE-AEOS-READINESS",
+      "canonical_path": "intelligence/UCOS-RIE-AEOS-READINESS.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-RIE-CAPABILITY-CATALOG",
+      "canonical_path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-RIE-DEPENDENCY-GRAPH",
+      "canonical_path": "intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-RIE-DIGITAL-TWIN",
+      "canonical_path": "intelligence/UCOS-RIE-DIGITAL-TWIN.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-RIE-EXECUTION-FRONTIER",
+      "canonical_path": "intelligence/UCOS-RIE-EXECUTION-FRONTIER.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-RIE-HEALTH",
+      "canonical_path": "intelligence/UCOS-RIE-HEALTH.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-RIE-MODEL",
+      "canonical_path": "intelligence/UCOS-RIE-MODEL.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-RIE-PROGRESS",
+      "canonical_path": "intelligence/UCOS-RIE-PROGRESS.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "UCOS-RIE-SNAPSHOT",
+      "canonical_path": "intelligence/UCOS-RIE-SNAPSHOT.json",
+      "title": "",
+      "producer": "intelligence/rie/engine.py",
+      "owner": "UCOS-RIE-001",
+      "capability": "repository-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-RIB-001/rib_engine.py",
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIE-001",
+      "regeneration_command": "python -m intelligence.rie build",
+      "certification_role": "PHASE9_VARIANCE_DIMENSION"
+    },
+    {
+      "artifact_id": "OUT-00",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
+      "title": "Repository Integration Blueprint — Dashboard",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-01",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
+      "title": "01 — Repository Inventory",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-02",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
+      "title": "02 — Repository Capability Graph",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-03",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
+      "title": "03 — Canonical Owner Matrix",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-04",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md",
+      "title": "04 — Repository Integration Blueprint",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-05",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/05-DEPENDENCY-GRAPH.md",
+      "title": "05 — Dependency Graph",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-06",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/06-GAP-ANALYSIS.md",
+      "title": "06 — Gap Analysis",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-07",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/07-DUPLICATE-ANALYSIS.md",
+      "title": "07 — Duplicate Analysis",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-08",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/08-REUSE-ANALYSIS.md",
+      "title": "08 — Reuse Analysis",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-09",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/09-EXTENSION-ANALYSIS.md",
+      "title": "09 — Extension Analysis",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-10",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/10-IMPLEMENTATION-QUEUE.md",
+      "title": "10 — Implementation Queue",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-11",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/11-VERIFICATION-REPORT.md",
+      "title": "11 — Verification Report",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-12",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/12-VALIDATION-REPORT.md",
+      "title": "12 — Validation Report",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-13",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/13-CERTIFICATION-REPORT.md",
+      "title": "13 — Certification Report",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-14",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/14-REPOSITORY-READINESS-REPORT.md",
+      "title": "14 — Repository Readiness Report",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "OUT-MODEL",
+      "canonical_path": "00-MASTER/UCOS-RIB-001/rib.json",
+      "title": "",
+      "producer": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "owner": "UCOS-RIB-001",
+      "capability": "repository-integration-blueprint",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-RIB-001/rib-blueprint.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/control-tower.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/certification.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/twin.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/volumes.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/UCOS-AEE-001/aee_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-RIB-001",
+      "regeneration_command": "make rib",
+      "certification_role": "BLOCKING_GATE_SOURCE"
+    },
+    {
+      "artifact_id": "00-AEE-DASHBOARD",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "01-MANDATE-COVERAGE-REGISTER",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "02-ACTUATOR-EXECUTION-REGISTER",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "03-OBSERVATION-REGISTER",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "04-DISCOVERY-AND-CLASSIFICATION-REGISTER",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/04-DISCOVERY-AND-CLASSIFICATION-REGISTER.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "05-DECISION-REGISTER",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "06-ITERATION-LEDGER",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/06-ITERATION-LEDGER.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "07-CONVERGENCE-CERTIFICATION",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "08-LEARNING-LEDGER",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "09-CONTINUOUS-EVOLUTION-BINDING",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/09-CONTINUOUS-EVOLUTION-BINDING.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "10-TRACEABILITY",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/10-TRACEABILITY.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "11-CERTIFICATION-REPORT",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/11-CERTIFICATION-REPORT.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "12-CONTINUATION-PACKAGE",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/12-CONTINUATION-PACKAGE.md",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "AEE-LEARNING-LEDGER",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/AEE-LEARNING-LEDGER.json",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "aee",
+      "canonical_path": "00-MASTER/UCOS-AEE-001/aee.json",
+      "title": "",
+      "producer": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "owner": "UCOS-AEE-001",
+      "capability": "autonomous-evolution",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+        "00-MASTER/UCOS-RIB-001/rib.json",
+        "00-MASTER/UCCEP-000000/uccep.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-AEE-001/aee-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-RIB-001/rib.json": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCCEP-000000/uccep.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-AEE-001",
+      "regeneration_command": "make aee",
+      "certification_role": "CONVERGENCE_DETERMINATION"
+    },
+    {
+      "artifact_id": "00-UAIE-DASHBOARD",
+      "canonical_path": "00-MASTER/UAIE-000001/00-UAIE-DASHBOARD.md",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "01-FACULTY-BINDING-REGISTER",
+      "canonical_path": "00-MASTER/UAIE-000001/01-FACULTY-BINDING-REGISTER.md",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "02-REGISTER-PLANE",
+      "canonical_path": "00-MASTER/UAIE-000001/02-REGISTER-PLANE.md",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "03-CROSS-REGISTER-CONSISTENCY",
+      "canonical_path": "00-MASTER/UAIE-000001/03-CROSS-REGISTER-CONSISTENCY.md",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "04-OWNERSHIP-AND-DEPENDENCY-GRAPH",
+      "canonical_path": "00-MASTER/UAIE-000001/04-OWNERSHIP-AND-DEPENDENCY-GRAPH.md",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "05-VALIDATION-REPORT",
+      "canonical_path": "00-MASTER/UAIE-000001/05-VALIDATION-REPORT.md",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "06-CERTIFICATION-REPORT",
+      "canonical_path": "00-MASTER/UAIE-000001/06-CERTIFICATION-REPORT.md",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "07-ADMISSION-AND-REUSE-DETERMINATION",
+      "canonical_path": "00-MASTER/UAIE-000001/07-ADMISSION-AND-REUSE-DETERMINATION.md",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "08-EVOLUTION-CONTRACT-DISCHARGE",
+      "canonical_path": "00-MASTER/UAIE-000001/08-EVOLUTION-CONTRACT-DISCHARGE.md",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "uaie",
+      "canonical_path": "00-MASTER/UAIE-000001/uaie.json",
+      "title": "",
+      "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "owner": "UAIE-000001",
+      "capability": "architectural-intelligence",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UAIE-000001/uaie-architecture.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UAIE-000001/uaie-architecture.json": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "engine/tests/unit/test_uaie_architectural_intelligence.py"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UAIE-000001",
+      "regeneration_command": "make uaie",
+      "certification_role": "REPLAY_PROVEN"
+    }
+  ]
+}

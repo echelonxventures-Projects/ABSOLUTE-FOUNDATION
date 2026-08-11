@@ -10,15 +10,15 @@ from __future__ import annotations
 from typing import Any
 
 from .census import RootCensus
-from .evidence import Coverage, EvidenceReader
-from .knowledge import DIMENSION_SCORE, KNOWN_SPINE_GAPS, LOCALLY_VERIFIABLE_DIMENSIONS
+from .evidence import EvidenceReader
+from .knowledge import DIMENSION_SCORE, KNOWN_SPINE_GAPS
 
 
 def _dimensions(ct: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return ct.get("dimensions", {})
 
 
-def repository_health(reader: EvidenceReader, census: dict[str, RootCensus], cov: Coverage) -> dict[str, Any]:
+def repository_health(reader: EvidenceReader, census: dict[str, RootCensus]) -> dict[str, Any]:
     ct = reader.control_tower()
     cert = reader.certification()
     portfolio = ct.get("portfolio", {})
@@ -38,8 +38,15 @@ def repository_health(reader: EvidenceReader, census: dict[str, RootCensus], cov
             "roots": {r: c.as_dict() for r, c in census.items()},
             "total_loc": total_loc,
             "total_tests": total_tests,
-            "coverage_line_pct": cov.line_pct if cov.available else None,
-            "coverage_branch_pct": cov.branch_pct if cov.available else None,
+            # UCOS-CL-005: coverage_line_pct / coverage_branch_pct removed. They were read
+            # from coverage.xml — TEST_EXECUTION_STATE, gitignored, and absent from every
+            # pristine clone — and this dict is serialized into UCOS-RIE-HEALTH.json,
+            # UCOS-RIE-MODEL.json and UCOS-IMP-BASELINE-001.rib.json, all of which are
+            # TRACKED and carry a content hash. Their presence made canonical artifact
+            # identity a function of whether the suite had been run, which is the exact
+            # irreproducibility Phase-9 measures. Coverage remains available to
+            # NON-canonical surfaces (portal, knowledge store, research corpus — all
+            # ignored or untracked output) through EvidenceReader.coverage().
         },
         "certification": {
             "digital_twin_verdict": cert.get("verdict"),
@@ -47,7 +54,8 @@ def repository_health(reader: EvidenceReader, census: dict[str, RootCensus], cov
             "standard": cert.get("standard"),
         },
         "health_flags": {
-            "coverage_full": bool(cov.available and cov.line_pct >= 100.0 and cov.branch_pct >= 100.0),
+            # UCOS-CL-005: coverage_full removed for the same reason — it is a predicate
+            # over coverage.xml, so it encodes test-execution state into canonical bytes.
             "twin_certified": cert.get("verdict") == "CERTIFIED",
             "corpus_present": bool(portfolio.get("total_artifacts")),
         },
@@ -55,7 +63,24 @@ def repository_health(reader: EvidenceReader, census: dict[str, RootCensus], cov
     }
 
 
-def progress(reader: EvidenceReader, census: dict[str, RootCensus], cov: Coverage) -> dict[str, Any]:
+def progress(reader: EvidenceReader, census: dict[str, RootCensus]) -> dict[str, Any]:
+    """Dimension progress, derived only from tracked control-tower evidence.
+
+    UCOS-CL-005 removed the two coverage-derived terms this function used to carry:
+
+    * a ``reconciled = 1.0`` override applied when a LOCALLY_VERIFIABLE dimension read
+      BLOCKED while ``coverage.xml`` showed 100% line coverage. Its intent — let locally
+      passing evidence outrank a stale BLOCKED signal — was reasonable, but it made
+      ``reconciled_score`` and ``dimension_index_reconciled_pct`` a function of whether
+      the suite had been run in this working tree. A pristine clone has no coverage.xml,
+      so it computed a different progress index from the identical commit.
+    * ``unit_validation_pct``, which was ``cov.line_pct`` restated.
+
+    Both are environmental. The reconciled index is now derived from tracked evidence
+    alone, so it is identical in a clone and in a tree where tests have run. Coverage as
+    a quality signal is unaffected: it is enforced by the ``--cov-fail-under=90`` gate in
+    verify.sh, which is where a quality threshold belongs.
+    """
     ct = reader.control_tower()
     dims = _dimensions(ct)
     literal_total = 0.0
@@ -66,9 +91,6 @@ def progress(reader: EvidenceReader, census: dict[str, RootCensus], cov: Coverag
         literal = DIMENSION_SCORE.get(status, 0.0)
         reconciled = literal
         stale = _is_stale(d, ct)
-        if (name in LOCALLY_VERIFIABLE_DIMENSIONS and status == "BLOCKED"
-                and cov.available and cov.line_pct >= 100.0):
-            reconciled = 1.0  # locally-passing evidence overrides stale BLOCKED signal
         literal_total += literal
         reconciled_total += reconciled
         per_dimension[name] = {
@@ -85,7 +107,6 @@ def progress(reader: EvidenceReader, census: dict[str, RootCensus], cov: Coverag
         "dimension_index_literal_pct": round(literal_total / n * 100, 1),
         "dimension_index_reconciled_pct": round(reconciled_total / n * 100, 1),
         "dimensions_counted": len(dims),
-        "unit_validation_pct": cov.line_pct if cov.available else None,
         "authoritative_portfolio_status": ct.get("portfolio", {}).get("portfolio_status"),
     }
 
@@ -140,9 +161,14 @@ def digital_twin_snapshot(reader: EvidenceReader, health: dict[str, Any], progre
         "repository_health": health["overall"],
         "certification_health": "HEALTHY-ENGINEERING" if cert.get("verdict") == "CERTIFIED" else "INDETERMINATE",
         "constitutional_finality": "BLOCKED (DR-RAT-11)",
+        # UCOS-CL-005: was `"HEALTHY-UNIT · HIGHER-ORDER MISSING" if coverage_full else
+        # "PARTIAL"`, i.e. a canonical field switched by coverage.xml. It is now derived
+        # from the tracked `unit_testing` control-tower dimension — the same fact, taken
+        # from Repository Truth rather than from local test-execution state.
         "validation_health": (
             "HEALTHY-UNIT · HIGHER-ORDER MISSING"
-            if health["health_flags"]["coverage_full"] else "PARTIAL"
+            if _dimension_status(reader, "unit_testing") == "PASS"
+            else "PARTIAL"
         ),
         "execution_readiness": "SUBSTRATE-READY · SPINE-NOT-IMPLEMENTED",
         "automation_readiness": "READY",

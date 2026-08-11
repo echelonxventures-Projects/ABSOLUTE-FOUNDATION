@@ -8,8 +8,6 @@
   },
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
   "code": {
-    "coverage_branch_pct": 90.75,
-    "coverage_line_pct": 95.62,
     "roots": {
       "application": {
         "loc": 23741,
@@ -40,11 +38,11 @@
         "test_functions": 821
       },
       "intelligence": {
-        "loc": 15758,
+        "loc": 15784,
         "root": "intelligence",
         "source_files": 65,
         "test_files": 6,
-        "test_functions": 117
+        "test_functions": 119
       },
       "platform": {
         "loc": 123903,
@@ -61,10 +59,10 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 316739,
-    "total_tests": 12895
+    "total_loc": 316765,
+    "total_tests": 12897
   },
-  "content_hash": "2899ad600a37b141d3ab33af47d3ea683e23cf734e7dce6e4d7456bda113b0d5",
+  "content_hash": "396dc3dbac31e28fb4fb11a5b535c4fea41494761856c6cfd209c60b7949fd9e",
   "corpus": {
     "artifacts": 1233,
     "edges": 12899,
@@ -99,7 +97,6 @@
   },
   "health_flags": {
     "corpus_present": true,
-    "coverage_full": false,
     "twin_certified": true
   },
   "overall": "HEALTHY",

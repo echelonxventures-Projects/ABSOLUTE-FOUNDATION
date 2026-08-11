@@ -3,7 +3,7 @@
   "authoritative_portfolio_status": "IN_PROGRESS — analysis/architecture/generation complete; runtime testing/deployment pending EC-1",
   "authority": "NONE (derived truth)",
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "b756a6954e35110cfd2ef43da2c784a0d55a4ced2be8ece047870b1e7fe5a6e8",
+  "content_hash": "a784022fccabca5830504a147348b5bc39fce58ecfec4bad662e4c54ace9812a",
   "dimension_index_literal_pct": 26.7,
   "dimension_index_reconciled_pct": 26.7,
   "dimensions_counted": 15,
@@ -148,6 +148,5 @@
     }
   },
   "producer": "UCOS-RIE-001 Repository Intelligence Engine v1.0.0",
-  "title": "Progress Intelligence Report",
-  "unit_validation_pct": 95.62
+  "title": "Progress Intelligence Report"
 }

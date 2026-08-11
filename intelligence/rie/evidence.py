@@ -4,8 +4,13 @@ Every fact the engine reports is read here from repository evidence that other
 certified/authoritative producers already emit:
 
   * ``00-BOOK/DATA/*.json``   — ukb.py / ukbx.py generated corpus intelligence
-  * ``coverage.xml``          — the pytest+coverage gate output
   * ``git``                   — the version-control eligibility boundary + HEAD
+
+``coverage.xml`` is read too, but is deliberately NOT in that list: it is
+TEST_EXECUTION_STATE, not repository evidence. Nothing reachable from
+:func:`intelligence.rie.engine.build_model` may consume it (UCOS-CL-005), and it
+is parsed through the repository's canonical Cobertura reader rather than here
+(UCOS-CL-007). See :meth:`EvidenceReader.coverage`.
 
 The reader NEVER writes any of these; it composes them (compose-never-duplicate).
 Absent evidence is reported as ``available=False`` and degrades gracefully to a
@@ -16,8 +21,9 @@ from __future__ import annotations
 
 import json
 import subprocess
-import xml.etree.ElementTree as ET
 from dataclasses import dataclass
+from platform.repository_operations.coverage import load_coverage_summary
+from platform.repository_operations.errors import CoverageReportError
 from typing import Any
 
 from . import __version__
@@ -70,15 +76,38 @@ class EvidenceReader:
 
     # -- coverage --------------------------------------------------------
     def coverage(self) -> Coverage:
+        """Coverage measurement for NON-canonical surfaces only.
+
+        UCOS-CL-005 — nothing reachable from :func:`intelligence.rie.engine.build_model`
+        may call this. ``coverage.xml`` is TEST_EXECUTION_STATE: gitignored, produced by
+        the test runner, and absent from every pristine clone, so a canonical artifact
+        that reads it cannot reproduce itself from the same commit. The remaining callers
+        (portal, knowledge store, research corpus) all emit to ignored or untracked paths
+        where an environmental measurement is legitimate and expected.
+
+        UCOS-CL-007 — the Cobertura document is parsed by the repository's canonical
+        reader, ``platform.repository_operations.coverage``, rather than by a private
+        ``ElementTree`` walk here. That module already exists to reuse "the coverage.xml
+        the canonical tool already emitted"; re-implementing it was a second answer to a
+        question the repository had answered once.
+        """
         path = self.config.coverage_xml
         if not path.exists():
             return Coverage(False, 0.0, 0.0, 0, 0)
-        root = ET.parse(path).getroot()  # noqa: S314 - trusted local build artifact
-        lr = float(root.get("line-rate", "0") or 0)
-        br = float(root.get("branch-rate", "0") or 0)
-        lc = int(root.get("lines-covered", "0") or 0)
-        lv = int(root.get("lines-valid", "0") or 0)
-        return Coverage(True, round(lr * 100, 2), round(br * 100, 2), lc, lv)
+        try:
+            summary = load_coverage_summary(path)
+        except CoverageReportError:
+            # Fail closed to "unavailable" rather than propagating: an unreadable
+            # environmental artifact must degrade an observational surface, never abort
+            # a caller that is not asking about coverage.
+            return Coverage(False, 0.0, 0.0, 0, 0)
+        return Coverage(
+            True,
+            round(summary.line_rate * 100, 2),
+            round(summary.branch_rate * 100, 2),
+            summary.lines_covered,
+            summary.lines_valid,
+        )
 
     # -- git -------------------------------------------------------------
     def head(self) -> str:
@@ -128,28 +157,6 @@ class EvidenceReader:
         return res.stdout.strip() if res.returncode == 0 else ""
 
     # -- determinism fingerprint ----------------------------------------
-    def _coverage_fingerprint(self) -> str:
-        """Fingerprint coverage by the measurement consumed, not by the file bytes.
-
-        ``coverage.xml`` embeds a wall-clock ``timestamp`` attribute, so its byte
-        hash changes on every test run even when the measurement is identical.
-        Hashing the four values the engine actually reads keeps the fingerprint a
-        function of repository state, which is what makes regeneration reproducible.
-        """
-        cov = self.coverage()
-        if not cov.available:
-            return "absent"
-        return sha256_text(
-            canonical_json(
-                {
-                    "branch_pct": cov.branch_pct,
-                    "line_pct": cov.line_pct,
-                    "lines_covered": cov.lines_covered,
-                    "lines_valid": cov.lines_valid,
-                }
-            )
-        )
-
     def state_fingerprint(self) -> dict[str, Any]:
         """A content fingerprint of all evidence inputs that determine canonical output identity.
 
@@ -173,11 +180,13 @@ class EvidenceReader:
         irreproducible ``registry_variance``, ``ordering_variance`` and ``certification_variance``
         in Phase-9 pristine-clone certification.
 
-        Fix (UCOS-P0-FCL-002-FIX-001): coverage measurement is excluded from the identity
-        fingerprint. It remains available via ``coverage_enrichment()`` for health and progress
-        outputs where observational/quality state is explicitly expected and documented. This
-        eliminates the entire class of hidden-input failure: the catalog identity is now a
-        pure function of tracked, version-controlled evidence.
+        Fix, in two parts. UCOS-P0-FCL-002-FIX-001 removed coverage from this fingerprint,
+        which made ``input_hash`` deterministic. UCOS-CL-005 completed it: coverage was still
+        reaching canonical bytes through ``analysis.py`` (``coverage_line_pct``,
+        ``coverage_branch_pct``, ``coverage_full``, and a progress reconciliation branch), so
+        the model digest still moved with ``coverage.xml`` while the fingerprint did not. Both
+        routes are now closed, and the whole class is held shut by a boundary test asserting
+        the serialized model is byte-identical with and without ``coverage.xml``.
         """
         files = {
             self.config.rel(self.config.data_file(n)): sha256_file(self.config.data_file(n))
@@ -187,30 +196,16 @@ class EvidenceReader:
             "evidence_files": files,
             # coverage_measurement is intentionally absent from this fingerprint.
             # See docstring — it is TEST_EXECUTION_STATE and must not influence canonical
-            # artifact identity. Coverage data is recorded separately in coverage_enrichment().
+            # artifact identity, and under UCOS-CL-005 no canonical surface reads it at all.
         }
 
-    def coverage_enrichment(self) -> dict[str, Any]:
-        """Coverage measurement as additive observational evidence (not identity-determining).
-
-        For use in health and progress outputs only. Must NOT be included in any fingerprint
-        that determines canonical artifact identity (content_sha256, input_hash).
-
-        Classification: TEST_EXECUTION_STATE / QUALITY_MEASUREMENT
-        Owner: test execution environment (outside canonical RIB→AEE→RIE chain)
-        Reproducibility: ENVIRONMENTAL — depends on test runner, Python version, installed deps
-        """
-        return {
-            "source": self.config.rel(self.config.coverage_xml),
-            "fingerprint": self._coverage_fingerprint(),
-            "classification": "TEST_EXECUTION_STATE / QUALITY_MEASUREMENT",
-            "identity_role": "EXCLUDED — observational enrichment only, not canonical identity",
-            "basis": (
-                "the consumed measurement, not the file bytes — coverage.xml embeds a "
-                "wall-clock timestamp, so a byte hash would make every regeneration differ "
-                "with no change in repository state"
-            ),
-        }
+    # UCOS-CL-007: coverage_enrichment() removed. It was added at be46a300 to hold the
+    # coverage measurement that state_fingerprint() had just given up, but nothing ever
+    # consumed it — its only caller was its own test. It also duplicated a capability the
+    # repository already owns: platform/repository_operations/coverage.py parses Cobertura
+    # into a CoverageSummary and documents itself as reusing "the canonical coverage.xml",
+    # and platform/measurement/contracts.py owns the Measurement abstraction. Adding a
+    # third parser here would have violated Knowledge Once for a value no producer read.
 
     # -- generation provenance ------------------------------------------
     def generation_state(self) -> dict[str, Any]:

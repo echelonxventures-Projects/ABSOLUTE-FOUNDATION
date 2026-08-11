@@ -1,0 +1,240 @@
+"""UCOS-CL-015 — the generated-artifact registry invariants.
+
+The defect these guard against is on record. UCOS-RECON-C2 found the eleven UCOS-RIE-001
+outputs registered as authored corpus artifacts, each given a permanent identity, because
+``00-BOOK/tools/config.py::EXCLUDE_DIR_PREFIXES`` enumerated generated outputs only where
+they lived under ``00-BOOK/`` — and ``intelligence/`` did not exist when that list was
+written. That is the same root cause UCOS-RECON-C1 had already closed one leg of. The list
+could not be wrong about a directory it had never heard of; the architecture was wrong to
+have three lists.
+
+Test 12 (``test_a_new_artifact_needs_one_entry_not_several_lists``) is the one that matters
+most: it asserts the property whose absence made the earlier drift possible.
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from platform.repository_intelligence.generated_artifacts import (
+    CANONICAL_SAFE_INPUTS,
+    INPUT_CLASSIFICATIONS,
+    REGISTRY_PATH,
+    load,
+    paths_for_owner,
+    producer_of,
+    reconcile_owner_view,
+    validate,
+)
+
+import pytest
+
+REPO = Path(__file__).resolve().parents[2]
+
+
+@pytest.fixture(scope="module")
+def artifacts():
+    return load(REPO)
+
+
+def test_registry_exists_and_is_authored() -> None:
+    doc = json.loads((REPO / REGISTRY_PATH).read_text(encoding="utf-8"))
+    assert doc["schema"] == "ucos-generated-artifact-registry"
+    assert doc["version"]
+    assert "AUTHORED REPOSITORY TRUTH" in doc["authority"]
+    assert doc["entries"], "registry declares no artifacts"
+
+
+def test_1_every_generated_path_resolves_to_exactly_one_producer(artifacts) -> None:
+    seen: dict[str, str] = {}
+    for a in artifacts:
+        assert (
+            a.canonical_path not in seen
+        ), f"{a.canonical_path} claimed by {seen.get(a.canonical_path)} and {a.producer}"
+        seen[a.canonical_path] = a.producer
+    assert producer_of(REPO, "intelligence/UCOS-RIE-MODEL.json") == "intelligence/rie/engine.py"
+
+
+def test_2_no_two_producers_claim_the_same_canonical_path(artifacts) -> None:
+    paths = [a.canonical_path for a in artifacts]
+    assert len(paths) == len(set(paths))
+
+
+def test_3_every_artifact_has_an_owner(artifacts) -> None:
+    assert all(a.owner for a in artifacts)
+
+
+def test_4_every_artifact_has_a_lifecycle(artifacts) -> None:
+    assert all(a.lifecycle for a in artifacts)
+
+
+def test_5_every_artifact_has_an_explicit_input_closure(artifacts) -> None:
+    for a in artifacts:
+        assert a.input_closure, f"{a.canonical_path} declares no inputs"
+
+
+def test_6_every_input_carries_a_classification(artifacts) -> None:
+    for a in artifacts:
+        for inp in a.input_closure:
+            klass = a.input_classification.get(inp)
+            assert (
+                klass in INPUT_CLASSIFICATIONS
+            ), f"{a.canonical_path}: input {inp!r} classified {klass!r}"
+
+
+def test_7_unknown_input_classification_fails_closed(tmp_path: Path) -> None:
+    """UNKNOWN is not a placeholder to be filled in later. It is a refusal."""
+    repo = tmp_path / "r"
+    (repo / "00-BOOK" / "DATA").mkdir(parents=True)
+    (repo / REGISTRY_PATH).write_text(
+        json.dumps(
+            {
+                "schema": "ucos-generated-artifact-registry",
+                "entries": [
+                    {
+                        "artifact_id": "X",
+                        "canonical_path": "out.json",
+                        "producer": "p.py",
+                        "owner": "OWN",
+                        "lifecycle": "REGENERATED",
+                        "input_closure": ["mystery"],
+                        "input_classification": {"mystery": "UNKNOWN"},
+                        "deterministic": True,
+                        "canonical_identity_role": "CANONICAL",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    findings = validate(repo)
+    assert any("UNKNOWN" in f for f in findings), findings
+
+
+def test_8_a_canonical_artifact_may_not_declare_an_environmental_input(tmp_path: Path) -> None:
+    """UCOS-CL-005 as a rule, not a repair.
+
+    An RIE artifact that named coverage.xml in its input closure is now UNDECLARABLE. The
+    leak is unrepresentable rather than merely removed once, which is the difference
+    between fixing a defect and closing its class.
+    """
+    repo = tmp_path / "r"
+    (repo / "00-BOOK" / "DATA").mkdir(parents=True)
+    (repo / REGISTRY_PATH).write_text(
+        json.dumps(
+            {
+                "schema": "ucos-generated-artifact-registry",
+                "entries": [
+                    {
+                        "artifact_id": "RIE-HEALTH",
+                        "canonical_path": "intelligence/UCOS-RIE-HEALTH.json",
+                        "producer": "intelligence/rie/engine.py",
+                        "owner": "UCOS-RIE-001",
+                        "lifecycle": "REGENERATED",
+                        "input_closure": ["coverage.xml"],
+                        "input_classification": {"coverage.xml": "ENVIRONMENTAL"},
+                        "deterministic": True,
+                        "canonical_identity_role": "CANONICAL",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    findings = validate(repo)
+    assert any("ENVIRONMENTAL" in f and "CANONICAL" in f for f in findings), findings
+
+
+def test_9_rib_generated_view_equals_the_registry_view() -> None:
+    """The engine's own idea of its outputs and the register's must be one fact."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "rib_under_test", REPO / "00-MASTER" / "UCOS-RIB-001" / "rib_engine.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    decl = json.loads(
+        (REPO / "00-MASTER" / "UCOS-RIB-001" / "rib-blueprint.json").read_text(encoding="utf-8")
+    )
+    engine_view = module.own_generated_paths(decl)
+    assert reconcile_owner_view(REPO, "UCOS-RIB-001", engine_view) == []
+
+
+def test_10_live_registry_satisfies_every_invariant() -> None:
+    findings = validate(REPO)
+    assert findings == [], "generated-artifact registry invariants violated:\n  " + "\n  ".join(
+        findings
+    )
+
+
+def test_11_every_canonical_artifact_is_tracked(artifacts) -> None:
+    """A canonical generated artifact that is not in the tree is a declaration of nothing."""
+    import subprocess
+
+    tracked = {
+        p
+        for p in subprocess.run(  # noqa: S603
+            ["git", "ls-files", "-z"],  # noqa: S607
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.split("\0")
+        if p
+    }
+    missing = [
+        a.canonical_path for a in artifacts if a.canonical and a.canonical_path not in tracked
+    ]
+    assert not missing, f"canonical artifacts not tracked: {missing}"
+
+
+def test_12_a_new_artifact_needs_one_entry_not_several_lists(tmp_path: Path) -> None:
+    """THE structural property. Declaring a generated artifact is ONE edit.
+
+    Before the registry, a new generated output had to be added to the producer's own
+    declaration, to EXCLUDE_DIR_PREFIXES for registration eligibility, and to .gitignore.
+    Missing any one of them produced a real, shipped defect. Here, one entry makes the
+    artifact known to every derived view at once.
+    """
+    repo = tmp_path / "r"
+    (repo / "00-BOOK" / "DATA").mkdir(parents=True)
+    entry = {
+        "artifact_id": "NEW",
+        "canonical_path": "programme/NEW-OUTPUT.json",
+        "producer": "programme/engine.py",
+        "owner": "NEW-PROGRAMME",
+        "lifecycle": "REGENERATED",
+        "input_closure": ["programme/declaration.json"],
+        "input_classification": {"programme/declaration.json": "TRACKED_DETERMINISTIC"},
+        "deterministic": True,
+        "canonical_identity_role": "CANONICAL",
+    }
+    (repo / REGISTRY_PATH).write_text(
+        json.dumps({"schema": "ucos-generated-artifact-registry", "entries": [entry]}),
+        encoding="utf-8",
+    )
+    assert validate(repo) == []
+    assert paths_for_owner(repo, "NEW-PROGRAMME") == {"programme/NEW-OUTPUT.json"}
+    assert producer_of(repo, "programme/NEW-OUTPUT.json") == "programme/engine.py"
+
+
+def test_coverage_xml_is_declared_environmental_and_excluded(artifacts) -> None:
+    """The register names coverage.xml explicitly, so the exclusion is visible."""
+    cov = next(a for a in artifacts if a.canonical_path == "coverage.xml")
+    assert cov.canonical_identity_role == "EXCLUDED"
+    assert cov.deterministic is False
+    assert cov.environmental_dependencies
+    assert not cov.canonical
+
+
+def test_every_producer_that_emits_tracked_artifacts_is_declared(artifacts) -> None:
+    """AEE and UAIE declared no outputs at all before this register existed."""
+    owners = {a.owner for a in artifacts}
+    for required in ("UCOS-RIE-001", "UCOS-RIB-001", "UCOS-AEE-001", "UAIE-000001"):
+        assert required in owners, f"{required} emits tracked artifacts but is not declared"
+
+
+def test_canonical_safe_inputs_excludes_unknown() -> None:
+    assert "UNKNOWN" not in CANONICAL_SAFE_INPUTS
+    assert "ENVIRONMENTAL" not in CANONICAL_SAFE_INPUTS

@@ -1412,6 +1412,20 @@
       "criterion": "the concept closure reports zero constitutional gaps",
       "metric": "closure_gaps",
       "expect": 0
+    },
+    {
+      "id": "VAL-11",
+      "name": "Exclusion Declaration",
+      "criterion": "every ignored path resolves to a declared class in 00-BOOK/DATA/exclusion-register.json",
+      "metric": "ignored_unclassified",
+      "expect": 0
+    },
+    {
+      "id": "VAL-12",
+      "name": "Exclusion Shadowing",
+      "criterion": "no tracked path is matched by an ignore rule (it would vanish from governance the moment it left the index)",
+      "metric": "shadowed_tracked_paths_count",
+      "expect": 0
     }
   ],
   "gates": [
@@ -1521,10 +1535,13 @@
       "id": "GATE-12",
       "name": "Repository Clean",
       "blocking": true,
-      "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
+      "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts, every ignored path resolves to a declared class in the exclusion register, and no tracked path is shadowed by an ignore rule",
       "metrics": [
-        "dirty_entries_outside_generated"
-      ]
+        "dirty_entries_outside_generated",
+        "ignored_unclassified",
+        "shadowed_tracked_paths_count"
+      ],
+      "basis": "UCOS-CL-001 — measured over the ignored-inclusive filesystem. Measuring only `git status --porcelain` made .gitignore an input to this gate: two lines added at be46a300 removed 41 physically-present files from the observation surface and flipped this gate while every file remained on disk."
     }
   ],
   "outputs": [

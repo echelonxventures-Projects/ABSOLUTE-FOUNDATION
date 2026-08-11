@@ -311,22 +311,47 @@ ucos_ruff_gate() {
   #
   # IMPLEMENTATION NOTE: if no tracked Python files exist in engine/ or platform/ the
   # gate becomes a no-op and exits 0, which is correct (nothing to lint).
+  #
+  # UCOS-CL-011 — the plumbing is NUL-delimited end to end. The first implementation
+  # joined paths with newlines and piped them to a bare `xargs`, which splits on ANY
+  # whitespace: a tracked path containing a space would have been passed to ruff as two
+  # nonexistent paths. 23 tracked paths contain spaces today; none is currently a .py, so
+  # the defect was latent rather than active — but a gate whose correctness depends on
+  # that coincidence is not a gate. It also passed `git ls-files` output straight through,
+  # which lists INDEX entries: a tracked file deleted in the working tree but not yet
+  # staged was handed to ruff, which fails on a missing path and would have blocked every
+  # commit during an ordinary staged deletion. And it prefixed paths with
+  # `sed "s|^|$repo/|"`, which corrupts any repository path containing `|`.
+  #
+  # All three are removed: `-z` from git, `-0` into xargs, an existence filter for the
+  # deletion case, and no path rewriting at all (we cd to the repo root instead, so ruff
+  # receives the repository-relative paths git actually emitted).
   local py; py="$(ucos_venv_python)"
   local repo; repo="$(git rev-parse --show-toplevel)"
 
-  # Build the tracked file list scoped to the governed source roots.
-  local tracked_py
-  tracked_py=$(git -C "$repo" ls-files -- 'engine/*.py' 'engine/**/*.py' \
-                                          'platform/*.py' 'platform/**/*.py' 2>/dev/null \
-               | sed "s|^|$repo/|")
+  # Tracked Python under the governed source roots, NUL-delimited, filtered to paths that
+  # exist on disk so a staged/unstaged deletion cannot break the gate.
+  local list; list="$(mktemp)"
+  # shellcheck disable=SC2016
+  git -C "$repo" ls-files -z -- 'engine/*.py' 'engine/**/*.py' \
+                                'platform/*.py' 'platform/**/*.py' 2>/dev/null \
+    | ( cd "$repo" && while IFS= read -r -d '' f; do
+          [ -f "$f" ] && printf '%s\0' "$f"
+        done ) > "$list"
 
-  if [[ -z "$tracked_py" ]]; then
+  if [ ! -s "$list" ]; then
+    rm -f "$list"
     ucos_ok "ruff gate: no tracked Python files in engine/ or platform/ — skipping"
     return 0
   fi
 
-  # Pass the explicit file list. xargs handles argument-length limits.
-  # ruff check: lint violations exit 1; ruff format --check: format drift exits 1.
-  echo "$tracked_py" | xargs "$py" -m ruff check
-  echo "$tracked_py" | xargs "$py" -m ruff format --check
+  # xargs -0 handles argument-length limits and NUL delimiting. Both invocations run from
+  # the repository root so the relative paths resolve, and both statuses are captured:
+  # `ruff check` and `ruff format --check` each exit non-zero independently, and the gate
+  # must report a failure in EITHER, not just the last one.
+  local rc=0
+  ( cd "$repo" && xargs -0 "$py" -m ruff check < "$list" ) || rc=1
+  ( cd "$repo" && xargs -0 "$py" -m ruff format --check < "$list" ) || rc=1
+  rm -f "$list"
+  return "$rc"
 }

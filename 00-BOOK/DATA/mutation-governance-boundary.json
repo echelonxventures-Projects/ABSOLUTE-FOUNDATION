@@ -1,0 +1,152 @@
+{
+  "artifact_id": "UCOS-MUTATION-GOVERNANCE-BOUNDARY-001",
+  "title": "Mutation Governance Boundary — which authority governs which class of mutation",
+  "authority": "AUTHORED REPOSITORY TRUTH. This artifact declares the boundary; it does not create a new authority and governs nothing itself.",
+  "constitutional_basis": "UCOS-CMG-EXEC-000001 Requirement 004, GOV-005, UCOS-CL-016",
+  "schema": "ucos-mutation-governance-boundary",
+  "version": "1.0.0",
+
+  "determination": "OPTION B — SOURCE MUTATIONS ARE OUTSIDE THE CONSTITUTIONAL MUTATION GATEWAY",
+
+  "why_this_determination": [
+    "The question was live because a source mutation (be46a300, touching intelligence/rie/evidence.py,",
+    "scripts/ucos-env.sh and .gitignore) was applied with no gateway record, and the closure matrix",
+    "could not say whether that was a bypass or simply out of scope.",
+    "",
+    "It is out of scope, and the evidence is structural rather than interpretive:",
+    "",
+    "  * engine/constitution/gateway.py::PIPELINE operates on `Population` and",
+    "    `ConstitutionalMetadata` values. Its stages take a `Context` holding `base` and",
+    "    `candidate` populations, and `apply()` returns a new population plus a StateSeal.",
+    "  * Neither gateway.py nor state.py imports `pathlib`, opens a file, reads or writes text,",
+    "    or invokes git. Measured directly: a search for Path / open( / read_text / write_text /",
+    "    git across both modules returns nothing.",
+    "  * Its enforcement mechanism is that it is the ONLY producer of a clean StateSeal, and",
+    "    engine.constitution.state refuses to verify, certify, register, measure or govern under a",
+    "    dirty or mismatched seal. That mechanism binds constitutional TRUTH operations. There is",
+    "    no seal check anywhere on the path that writes a .py file to disk, and adding one would",
+    "    require the gateway to grow a filesystem it deliberately does not have.",
+    "",
+    "So CMG governs mutations of CONSTITUTIONAL TRUTH — law, population, metadata, registry state.",
+    "A source-file mutation is a different class of act, and the repository already governs it, but",
+    "through a chain that had never been written down. That absence is what made the earlier bypass",
+    "unanswerable. It is written down here."
+  ],
+
+  "authorities": [
+    {
+      "authority": "UCOS-CMG-EXEC-000001 — Constitutional Mutation Gateway",
+      "implementation": "engine/constitution/gateway.py",
+      "governs": [
+        "mutation of a constitutional Population",
+        "creation or amendment of ConstitutionalMetadata",
+        "constitutional registration and truth update"
+      ],
+      "does_not_govern": [
+        "source files on disk",
+        "generated artifacts",
+        "the working tree",
+        "the git object database"
+      ],
+      "lifecycle": ["proposal", "evidence", "validation", "verification", "certification", "registration", "truth_update"],
+      "enforcement": "sole producer of a clean StateSeal; engine.constitution.state refuses the five truth operations without one"
+    },
+    {
+      "authority": "pre-commit hook",
+      "implementation": "scripts/ucos-env.sh::ucos_ruff_gate",
+      "governs": ["the INTENDED MUTATION boundary — tracked/staged source content at commit time"],
+      "does_not_govern": ["untracked filesystem debris", "generated artifact identity", "repository-wide state"],
+      "enforcement": "blocks the commit"
+    },
+    {
+      "authority": "verify.sh — canonical verification entry point",
+      "implementation": "verify.sh",
+      "governs": [
+        "lint and format of the governed source roots",
+        "the full canonical test corpus",
+        "the coverage quality gate (--cov-fail-under=90)",
+        "governance enforcement, registry schema validation, meta-constitutional conformance"
+      ],
+      "does_not_govern": ["filesystem contamination", "generated artifact convergence", "clone reproducibility"],
+      "enforcement": "non-zero exit on any failing stage"
+    },
+    {
+      "authority": "UCOS-RIB-001 — Repository Integration Blueprint",
+      "implementation": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "governs": [
+        "repository integrity including the git object database (GATE-02)",
+        "filesystem contamination and exclusion classification (GATE-12, VAL-11, VAL-12)",
+        "duplicate capability (GATE-09)",
+        "validation obligations (GATE-04)"
+      ],
+      "does_not_govern": ["source correctness", "test outcomes", "convergence over time"],
+      "enforcement": "rib.json:gate CLOSED"
+    },
+    {
+      "authority": "UCOS-AEE-001 — Autonomous Evolution Engine",
+      "implementation": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "governs": ["convergence of the observation vector across iterations (CONV-01..07)"],
+      "does_not_govern": ["byte-level repository closure — explicitly disclaimed in its own certification (AEE-F-002)"],
+      "enforcement": "converged=false, gate_exit=1"
+    },
+    {
+      "authority": "Phase 8 — fixed-point verification",
+      "implementation": "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py",
+      "governs": ["byte-level idempotence of the canonical chain across consecutive rounds"],
+      "does_not_govern": ["reproducibility in a different environment"],
+      "enforcement": "fixed point not proven"
+    },
+    {
+      "authority": "Phase 9 — pristine-clone certification",
+      "implementation": "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py",
+      "governs": ["reproduction of canonical artifacts from a clean clone of the certified commit"],
+      "does_not_govern": ["environmental observational outputs explicitly classified non-canonical"],
+      "enforcement": "canonical variance non-zero"
+    }
+  ],
+
+  "mutation_classes": [
+    {
+      "class": "CONSTITUTIONAL_TRUTH",
+      "examples": ["Population amendment", "ConstitutionalMetadata creation"],
+      "governed_by": "UCOS-CMG-EXEC-000001"
+    },
+    {
+      "class": "SOURCE",
+      "examples": ["engine/**/*.py", "platform/**/*.py", "intelligence/**/*.py", "scripts/*.sh", "pyproject.toml"],
+      "governed_by": "pre-commit → verify.sh → UCOS-RIB-001 → UCOS-AEE-001 → Phase 8 → Phase 9"
+    },
+    {
+      "class": "GENERATED_ARTIFACT",
+      "examples": ["intelligence/UCOS-RIE-*.json", "00-MASTER/UCOS-RIB-001/*.md", "00-MASTER/UCOS-AEE-001/aee.json"],
+      "governed_by": "UCOS-GENERATED-ARTIFACT-REGISTRY-001 → producer → Phase 8 → Phase 9"
+    },
+    {
+      "class": "EXCLUSION",
+      "examples": [".gitignore"],
+      "governed_by": "UCOS-EXCLUSION-REGISTER-001 → UCOS-RIB-001 GATE-12"
+    },
+    {
+      "class": "REPOSITORY_STATE",
+      "examples": [".git/refs", ".git/index", "working tree contamination"],
+      "governed_by": "UCOS-RIB-001 GATE-02 / GATE-12"
+    }
+  ],
+
+  "invariants": [
+    "Every mutation class names exactly one governing authority chain.",
+    "No mutation class is claimed by two authorities as primary.",
+    "No mutation class is ungoverned — there is no class whose governed_by is empty.",
+    "Every named authority resolves to an implementation that exists in the tree.",
+    "The EXCLUSION class is governed by a register, never by the exclusion mechanism itself — this is the UCOS-CL-001 correction stated as a boundary rule."
+  ],
+
+  "recurrence_prevention": [
+    "The bypass at be46a300 was not a rule violation; it was an undeclared boundary. A source",
+    "mutation had no gateway to take and no written statement that it did not need one, so the",
+    "question could only be answered by reading the gateway's imports. This artifact makes the",
+    "answer declarative and testable: test_mutation_governance_boundary.py asserts that every",
+    "class is governed, that no class is doubly claimed, and that every named implementation",
+    "exists. A future mutation class added without an authority fails that test."
+  ]
+}

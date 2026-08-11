@@ -82,10 +82,15 @@ def _dependency_graph(reader: EvidenceReader) -> dict[str, Any]:
 def build_model(reader: EvidenceReader) -> dict[str, Any]:
     """Derive the full, deterministic Repository Intelligence Model (no drift, no wall-clock)."""
     census = full_census(reader)
-    cov = reader.coverage()
+    # UCOS-CL-005: the canonical model no longer reads coverage. coverage.xml is
+    # TEST_EXECUTION_STATE — gitignored, absent from every pristine clone — so any value
+    # derived from it made these tracked, content-hashed outputs irreproducible across
+    # clones. Coverage remains available through EvidenceReader.coverage() for the
+    # NON-canonical surfaces that legitimately report it (portal, knowledge store,
+    # research corpus), all of which emit to ignored or untracked paths.
     caps = [c.as_dict() for c in discover(reader)]
-    health = repository_health(reader, census, cov)
-    prog = progress(reader, census, cov)
+    health = repository_health(reader, census)
+    prog = progress(reader, census)
     frontier = execution_frontier(reader)
     twin = digital_twin_snapshot(reader, health, prog)
     aeos = aeos_readiness(reader, caps)

@@ -1,7 +1,7 @@
 {
   "compliance": [
     {
-      "finding": "dirty_entries_outside_generated=52",
+      "finding": "dirty_entries_outside_generated=29",
       "gate": "GATE-12",
       "id": "CMP-CLEAN",
       "rank": 1,
@@ -199,7 +199,7 @@
       "clauses": 2,
       "disposition": "CONFIGURE",
       "id": "RUL-06A",
-      "units": 5
+      "units": 4
     },
     {
       "because": "the unit holds code that no plane consumes, no interface publishes, no registration homes, no entry point names and no runner collects, and its replacement is not prohibited",
@@ -220,7 +220,7 @@
       "clauses": 1,
       "disposition": "EXTEND",
       "id": "RUL-08",
-      "units": 15
+      "units": 16
     },
     {
       "because": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
@@ -1560,13 +1560,15 @@
     },
     {
       "blocking": true,
-      "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
+      "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts, every ignored path resolves to a declared class in the exclusion register, and no tracked path is shadowed by an ignore rule",
       "failures": [
-        "dirty_entries_outside_generated=52"
+        "dirty_entries_outside_generated=29"
       ],
       "id": "GATE-12",
       "metrics": [
-        "dirty_entries_outside_generated"
+        "dirty_entries_outside_generated",
+        "ignored_unclassified",
+        "shadowed_tracked_paths_count"
       ],
       "name": "Repository Clean",
       "verdict": "FAIL"
@@ -1959,7 +1961,7 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 2201,
+      "total": 2207,
       "units_with_value": 77
     },
     {
@@ -1967,8 +1969,8 @@
       "id": "MSR-TESTPATH",
       "kind": "substrate_list_member",
       "purpose": "whether the unit lies inside the declared test-collection scope",
-      "total": 2,
-      "units_with_value": 2
+      "total": 3,
+      "units_with_value": 3
     }
   ],
   "metrics": {
@@ -1997,15 +1999,19 @@
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
     "compliance_findings": 2,
+    "contamination_available": true,
+    "contamination_entries": 29,
+    "contamination_shadowed_members": [],
+    "contamination_unclassified_members": [],
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 52,
-    "dirty_entries_outside_generated": 52,
+    "dirty_entries": 29,
+    "dirty_entries_outside_generated": 29,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
-      "CONFIGURE": 39,
-      "EXTEND": 16,
+      "CONFIGURE": 38,
+      "EXTEND": 17,
       "IMPLEMENT": 2,
       "REUSE": 239
     },
@@ -2051,6 +2057,7 @@
       "00-MASTER/UCOS-RIB-001/14-REPOSITORY-READINESS-REPORT.md",
       "00-MASTER/UCOS-RIB-001/rib.json"
     ],
+    "ignored_unclassified": 0,
     "integrity_findings": 0,
     "integrity_members": [],
     "matrices_bound": 6,
@@ -2065,6 +2072,7 @@
     "queued_total": 57,
     "realized_without_source": 0,
     "registration_drift": 0,
+    "shadowed_tracked_paths_count": 0,
     "substrate_total": 15,
     "substrate_usable": 13,
     "uncatalogued_members": [],
@@ -2620,6 +2628,9 @@
           "intelligence/research/__main__.py",
           "intelligence/research/assimilation.py",
           "intelligence/research/engine.py"
+        ],
+        "intelligence.rie -> platform.repository_operations": [
+          "intelligence/rie/evidence.py"
         ],
         "intelligence.tests -> engine.knowledge": [
           "intelligence/tests/test_realization.py"
@@ -3462,7 +3473,7 @@
           "service/tests/test_band11_freeze.py"
         ]
       },
-      "edges": 301,
+      "edges": 302,
       "id": "PLN-CODE",
       "kind": "python_import_graph",
       "nodes": 78,
@@ -3597,7 +3608,7 @@
         }
       ],
       "edge_sites": {},
-      "edges": 8923,
+      "edges": 8926,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
       "nodes": 1916,
@@ -4088,7 +4099,7 @@
       },
       {
         "dependents": 0,
-        "disposition": "CONFIGURE",
+        "disposition": "EXTEND",
         "rank": 57,
         "unit_key": "intelligence.tests",
         "wave": 5
@@ -4260,16 +4271,30 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "broken_symlinks": [],
     "conflicts": 0,
+    "contamination": {
+      "available": true,
+      "clean": false,
+      "contamination_entries": 29,
+      "dirty_entries": 21,
+      "excluded_entries": 232,
+      "ignored_unclassified": 0,
+      "register_errors": [],
+      "shadowed_tracked": 0,
+      "shadowed_tracked_paths": [],
+      "unclassified_paths": [],
+      "untracked_entries": 8
+    },
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 52,
+    "dirty_entries": 29,
+    "fsck_errors": [],
     "interrupted_operations": [],
-    "modified": 12,
+    "modified": 21,
     "tracked_files": 5729,
-    "untracked": 40,
+    "untracked": 8,
     "working_tree": "DIRTY"
   },
-  "seal_sha256": "22d463851e5312181374d9dc9914a0a400fc12c45dc5746ce892e1e9a6e6dcc2",
+  "seal_sha256": "8465cb2925acda7988fa410c7dfba69e69bd5eba1badbb068f120353b1f3bdaa",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -4422,7 +4447,7 @@
       "tracked": false
     },
     {
-      "content_sha256": "874a2abaf4ed49fecf48209fbbaff4dbf88b72ea0a5bc820c4e56b916891aa15",
+      "content_sha256": "cf9722bbfc80227225f8a5e95dc22ee39787f2b2f581f94e30837375f12ae716",
       "exists": true,
       "generated": false,
       "id": "SUB-PROJECT",
@@ -4441,7 +4466,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "the declared interface surface (console entry points) and the declared verification scope",
-      "records": 91,
+      "records": 92,
       "required": true,
       "tracked": true
     },
@@ -4468,7 +4493,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "469ed6d4820f4e0874c81454341cb4fa441a594bc31feba18cc35d3f5bdc02fb",
+      "content_sha256": "c3209ea767a67755b38196aefde5385d14ee87c74ead33d3aa553a89be208a5a",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-BASELINE",
@@ -4494,7 +4519,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "d0d2c1b833b3e6cdc2b881c20e39425d189c623387af0e29f31956d4a4cd4d07",
+      "content_sha256": "87143325622aa452e1a6132101903757c34438e856cc7999117e3dd9ecbb00ec",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-CAPS",
@@ -14209,7 +14234,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 667,
+      "entrypoint_references": 670,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,
@@ -14282,7 +14307,7 @@
         "engine.foundation",
         "engine.uckp"
       ],
-      "dependents": 26,
+      "dependents": 31,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -14372,7 +14397,7 @@
         "engine.foundation",
         "engine.uckp"
       ],
-      "dependents": 26,
+      "dependents": 32,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -14605,7 +14630,7 @@
         "engine.foundation",
         "engine.registry"
       ],
-      "dependents": 26,
+      "dependents": 32,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -15214,7 +15239,7 @@
         "engine.foundation.obs.logging",
         "engine.foundation.obs.telemetry"
       ],
-      "dependents": 71,
+      "dependents": 72,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -15923,7 +15948,7 @@
         "engine.knowledge.validation",
         "engine.uckp"
       ],
-      "dependents": 29,
+      "dependents": 30,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -16339,7 +16364,7 @@
         "engine.registry.volumes",
         "engine.uckp"
       ],
-      "dependents": 37,
+      "dependents": 39,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -16516,7 +16541,7 @@
         "engine.runtime.planner",
         "engine.validation"
       ],
-      "dependents": 23,
+      "dependents": 29,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -18170,7 +18195,7 @@
       "dependency_units": [
         "engine.foundation"
       ],
-      "dependents": 69,
+      "dependents": 70,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -18350,7 +18375,7 @@
         "engine.validation.executor",
         "engine.validation.gates"
       ],
-      "dependents": 27,
+      "dependents": 33,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -18983,9 +19008,11 @@
       "consumers": 3,
       "corpus_artifacts": 0,
       "declared": "intelligence.rie",
-      "degree": 3,
-      "dependencies": 0,
-      "dependency_units": [],
+      "degree": 4,
+      "dependencies": 1,
+      "dependency_units": [
+        "platform.repository_operations"
+      ],
       "dependents": 5,
       "disposition": "EXTEND",
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
@@ -19009,7 +19036,7 @@
         "PLN-MODULE"
       ],
       "program": "intelligence",
-      "providers": 0,
+      "providers": 1,
       "reachable": true,
       "reachable_by": [
         "consumers",
@@ -19057,15 +19084,15 @@
         "intelligence.rie"
       ],
       "dependents": 0,
-      "disposition": "CONFIGURE",
-      "disposition_reason": "the unit is a verification suite the canonical runner does not collect — what is required is an entry in the declared test scope, not code",
-      "disposition_rule": "RUL-06A",
+      "disposition": "EXTEND",
+      "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
+      "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
       "entrypoint_references": 3,
       "evidence_assets": 0,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
-      "in_test_scope": false,
+      "in_test_scope": true,
       "interface_names": [],
       "interfaces": 0,
       "is_test_unit": true,
@@ -19083,7 +19110,8 @@
       "reachable": true,
       "reachable_by": [
         "rie_id",
-        "entrypoint_references"
+        "entrypoint_references",
+        "in_test_scope"
       ],
       "registered_artifacts": 0,
       "rie_authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -19122,7 +19150,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 103,
+      "entrypoint_references": 106,
       "evidence_assets": 0,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
@@ -19814,7 +19842,7 @@
         "platform.foundation.services",
         "platform.foundation.trust"
       ],
-      "dependents": 32,
+      "dependents": 38,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -20589,12 +20617,13 @@
     {
       "canonical_name": "platform.repository_operations",
       "consumer_units": [
+        "intelligence.rie",
         "platform.tests"
       ],
-      "consumers": 1,
+      "consumers": 2,
       "corpus_artifacts": 0,
       "declared": "platform.repository_operations",
-      "degree": 17,
+      "degree": 18,
       "dependencies": 16,
       "dependency_units": [
         "engine.acceptance",
@@ -20614,7 +20643,7 @@
         "platform.repository_operations.stages",
         "platform.repository_operations.subjects"
       ],
-      "dependents": 1,
+      "dependents": 7,
       "disposition": "REUSE",
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
@@ -22568,7 +22597,7 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 52,
+      "measured": 29,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
       "verdict": "FAIL"
@@ -22643,6 +22672,24 @@
       "measured": 0,
       "metric": "closure_gaps",
       "name": "Knowledge objects",
+      "verdict": "PASS"
+    },
+    {
+      "criterion": "every ignored path resolves to a declared class in 00-BOOK/DATA/exclusion-register.json",
+      "expect": 0,
+      "id": "VAL-11",
+      "measured": 0,
+      "metric": "ignored_unclassified",
+      "name": "Exclusion Declaration",
+      "verdict": "PASS"
+    },
+    {
+      "criterion": "no tracked path is matched by an ignore rule (it would vanish from governance the moment it left the index)",
+      "expect": 0,
+      "id": "VAL-12",
+      "measured": 0,
+      "metric": "shadowed_tracked_paths_count",
+      "name": "Exclusion Shadowing",
       "verdict": "PASS"
     }
   ],
