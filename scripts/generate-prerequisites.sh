@@ -66,4 +66,20 @@ PY="${PYTHON:-python3}"
 "$PY" 00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py    >/dev/null
 "$PY" 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py    >/dev/null
 
-echo "generated prerequisites: knowledge · determinism-evidence · closure phases 1-3" >&2
+# UCOS-RC-004 — the research corpus and publication set belong to this list for exactly the
+# reason everything above does: both are excluded from version control on the stated ground
+# that they are regenerated each run, and both are READ as evidence by a tracked consumer.
+#
+# UCDA-000001 resolves decision DEC-CAEM-04's coverage against `intelligence/UCOS-URI-001`
+# (EQ-4) and `intelligence/UCOS-UPI-001` (EQ-5). Measured on a pristine clone at 3af66dcc:
+# both resolved to [] because nothing had produced them, dropping that decision from
+# complete to incomplete and `dimensions_covered` from 278 to 276 — after the knowledge
+# store fix had already recovered the other four. The declaration was right; the producer
+# simply never ran outside a working tree that happened to retain earlier output.
+#
+# This is the same defect the header above describes, one directory further out: an
+# exclusion asserting a regeneration that no entry point performed.
+"$PY" -m intelligence.research    build >/dev/null
+"$PY" -m intelligence.publication build >/dev/null
+
+echo "generated prerequisites: knowledge · determinism-evidence · closure phases 1-3 · research · publication" >&2

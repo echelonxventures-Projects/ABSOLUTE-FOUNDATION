@@ -127,11 +127,38 @@ BOOTSTRAP: tuple[tuple[str, tuple[str, ...]], ...] = (
             "'set -e; source scripts/ucos-env.sh; ucos_ensure_venv']).returncode)",
         ),
     ),
-    ("closure", ("00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",)),
-    ("phase2", ("00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",)),
-    ("phase3", ("00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",)),
+    #: UCOS-RC-004 — the prerequisite set is INVOKED, not restated.
+    #:
+    #: This tuple used to name five producers directly: closure, phase2, phase3, rie, and
+    #: `knowledge capabilities --write`. That was a second, independent copy of a list the
+    #: repository already owns. scripts/generate-prerequisites.sh declares itself "THE one
+    #: definition of 're-derive the generated inputs the gates read'" and runs SEVEN steps,
+    #: including the knowledge store's full three-step pipeline — `init --force`, then
+    #: `capabilities --write`, then `docs` — plus determinism evidence. That script's own
+    #: header records why all three knowledge steps are required: running `init` alone
+    #: leaves the store at 11 CKOs of 121, "so every consumer measured a store truncated to
+    #: 9% of itself".
+    #:
+    #: This copy ran ONLY `capabilities --write` — step two of three, without step one. So
+    #: every clone carried a knowledge store that had never been seeded. Measured at
+    #: 3af66dcc: UCDA's decision DEC-UKDA-DEC-0001 reported
+    #: `evidence_unresolved: ['knowledge/decisions.json', 'knowledge/canonical-knowledge.json']`,
+    #: dropping dimensions_covered from 278 to 272 and mutating all nine UCDA outputs. The
+    #: same mechanism moved URRC, UPF, MCOS, UMK and UAKOS-CLOSURE-008 — 23 paths — which
+    #: cycle-2 RIB then observed as a dirty tree, closing its gate (source OPEN, clone
+    #: CLOSED) and carrying AEE with it. That is the whole of registry_variance,
+    #: ordering_variance and certification_variance.
+    #:
+    #: The defect was never in the producers. It was in maintaining two lists of them.
+    (
+        "prerequisites",
+        (
+            "-c",
+            "import subprocess,sys;"
+            "sys.exit(subprocess.run(['bash','scripts/generate-prerequisites.sh']).returncode)",
+        ),
+    ),
     ("rie", ("-m", "intelligence.rie", "build")),
-    ("knowledge", ("-m", "engine.knowledge.cli", "capabilities", "--write")),
 )
 
 
