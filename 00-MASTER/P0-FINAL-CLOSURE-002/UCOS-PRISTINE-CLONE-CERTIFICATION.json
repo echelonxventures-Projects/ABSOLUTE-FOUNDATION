@@ -3,16 +3,16 @@
   "canonical_identities": {
     "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
     "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-    "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
+    "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
     "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
     "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-    "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
-    "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
+    "ordering_variance": "fe7095bd99ca5b00ab909d638e8d9e8c747eba8106f61f88704da9389e9937ca",
+    "registry_variance": "dfc7d83f6272944764f1b38f6711239c377d316859144e87eec799507817e98d",
     "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
   },
   "clones": 3,
   "cycles_per_clone": 5,
-  "digest": "69c0ee91c6b79e0c88f5fe7a1ede9c63d169f1112ac3b230ae5aea8cc74e6280",
+  "digest": "e3aa962d6231579a15025643e4025a443cc950c186cfb122f8e30acfd37badcc",
   "identities_compared": [
     "authority_variance",
     "bookkeeping_variance",
@@ -29,292 +29,286 @@
   "requirement": "3 independent clones, 5 verification cycles each",
   "results": [
     {
+      "bootstrap": {
+        "closure": 0,
+        "knowledge": 0,
+        "phase2": 0,
+        "phase3": 0,
+        "rie": 0
+      },
+      "bootstrap_refusals": {},
       "byte_identical_every_cycle": false,
       "clone": 1,
       "cycles": [
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 1,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 2,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 3,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 4,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 5,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         }
       ],
       "cycles_executed": 5
     },
     {
+      "bootstrap": {
+        "closure": 0,
+        "knowledge": 0,
+        "phase2": 0,
+        "phase3": 0,
+        "rie": 0
+      },
+      "bootstrap_refusals": {},
       "byte_identical_every_cycle": false,
       "clone": 2,
       "cycles": [
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 1,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 2,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 3,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 4,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 5,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         }
       ],
       "cycles_executed": 5
     },
     {
+      "bootstrap": {
+        "closure": 0,
+        "knowledge": 0,
+        "phase2": 0,
+        "phase3": 0,
+        "rie": 0
+      },
+      "bootstrap_refusals": {},
       "byte_identical_every_cycle": false,
       "clone": 3,
       "cycles": [
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 1,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 2,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 3,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 4,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         },
         {
-          "actuator_failures": [
-            "aee",
-            "rib"
-          ],
+          "actuator_failures": [],
           "actuators": {
-            "aee": 2,
-            "rib": 2
+            "aee": 0,
+            "rib": 0
           },
           "byte_identical": false,
           "cycle": 5,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 0
+          "mutation": 41
         }
       ],
       "cycles_executed": 5

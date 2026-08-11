@@ -1,7 +1,7 @@
 {
   "compliance": [
     {
-      "finding": "dirty_entries_outside_generated=21",
+      "finding": "dirty_entries_outside_generated=17",
       "gate": "GATE-12",
       "id": "CMP-CLEAN",
       "rank": 1,
@@ -1562,7 +1562,7 @@
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts",
       "failures": [
-        "dirty_entries_outside_generated=21"
+        "dirty_entries_outside_generated=17"
       ],
       "id": "GATE-12",
       "metrics": [
@@ -2000,8 +2000,8 @@
     "dead_interface_members": [],
     "dead_interfaces": 0,
     "dead_registry_entries": 0,
-    "dirty_entries": 21,
-    "dirty_entries_outside_generated": 21,
+    "dirty_entries": 17,
+    "dirty_entries_outside_generated": 17,
     "discovery_sources_empty": 0,
     "disposition_distribution": {
       "CONFIGURE": 39,
@@ -4262,9 +4262,9 @@
     "conflicts": 0,
     "deleted": 0,
     "detached": false,
-    "dirty_entries": 21,
+    "dirty_entries": 17,
     "interrupted_operations": [],
-    "modified": 21,
+    "modified": 17,
     "tracked_files": 5729,
     "untracked": 0,
     "working_tree": "DIRTY"
@@ -22568,7 +22568,7 @@
       "criterion": "the working tree is clean at the computed HEAD, excluding this programme's own regenerated artifacts",
       "expect": 0,
       "id": "VAL-02",
-      "measured": 21,
+      "measured": 17,
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
       "verdict": "FAIL"

@@ -3,11 +3,11 @@
   "baseline_identities": {
     "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
     "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-    "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
+    "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
     "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
     "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-    "ordering_variance": "d9eecf719bbd5d26937a2d9962be58c989f81af934e80159a94b318f8508d558",
-    "registry_variance": "7999fd8ca4f4f0654e9929ae4af4a562901e708c82f0ee857bf85d23667c2ca9",
+    "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
+    "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
     "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
   },
   "chain": [
@@ -28,7 +28,7 @@
   ],
   "concurrent_writer_detected": false,
   "consecutive_zero_drift_rounds": 0,
-  "digest": "4c461b9935dcd3cfb763e12a9ecffe13915012a88dab854e5f45bb7bc97f12fd",
+  "digest": "a0daffb4302771b29b23bdfa3f4adce7cbcb479675d1095cdf5c75d9bd2de3fd",
   "dimensions": {
     "authority_variance": "00-MASTER/UCCEP-000000/uccep.json",
     "bookkeeping_variance": "00-MASTER/UCL-000001/ucl.json",
@@ -46,6 +46,7 @@
   "rounds": [
     {
       "actuator_failures": [],
+      "actuator_refusals": {},
       "actuators": {
         "aee": 0,
         "rib": 0
@@ -59,15 +60,14 @@
       "identities": {
         "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
         "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-        "certification_variance": "39e4cb3bd5b007dfe9e6a6ab6ff24de55864efe46a5278f320f5f87897de0ccc",
+        "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
         "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "31d453c00847ca73223c0d6c55b4f23aa4220be23e8e64ced55abcddbd7213c9",
-        "registry_variance": "da2ca59731d2eb077ae4e9a3d78ccd82f1eb564c67de9155d04721d9eaab0855",
+        "ordering_variance": "fe7095bd99ca5b00ab909d638e8d9e8c747eba8106f61f88704da9389e9937ca",
+        "registry_variance": "dfc7d83f6272944764f1b38f6711239c377d316859144e87eec799507817e98d",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [
-        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
         "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
         "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
         "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
@@ -86,20 +86,21 @@
         "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
         "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
         "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
-        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
+        "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md"
       ],
-      "mutation": 37,
+      "mutation": 31,
       "round": 1
     },
     {
       "actuator_failures": [],
+      "actuator_refusals": {},
       "actuators": {
         "aee": 0,
         "rib": 0
       },
-      "drift": 3,
+      "drift": 2,
       "drifted_dimensions": [
-        "certification_variance",
         "ordering_variance",
         "registry_variance"
       ],
@@ -109,37 +110,34 @@
         "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
         "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
-        "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
+        "ordering_variance": "c8911d538fa29f6f1c59f788d30eec0858595c53645cd0fbad2edc7f60a8b9de",
+        "registry_variance": "c800fbf07bd28a55558837f965dfe84ba4659e9d23fc12a23f907bb4c7775be0",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [
-        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
-        "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/04-DISCOVERY-AND-CLASSIFICATION-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/06-ITERATION-LEDGER.md",
-        "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
-        "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
-        "00-MASTER/UCOS-AEE-001/09-CONTINUOUS-EVOLUTION-BINDING.md",
-        "00-MASTER/UCOS-AEE-001/10-TRACEABILITY.md",
-        "00-MASTER/UCOS-AEE-001/11-CERTIFICATION-REPORT.md",
-        "00-MASTER/UCOS-AEE-001/12-CONTINUATION-PACKAGE.md",
-        "00-MASTER/UCOS-AEE-001/AEE-LEARNING-LEDGER.json",
-        "00-MASTER/UCOS-AEE-001/aee.json",
         "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
         "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
         "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
-        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
+        "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md",
+        "00-MASTER/UCOS-RIB-001/05-DEPENDENCY-GRAPH.md",
+        "00-MASTER/UCOS-RIB-001/06-GAP-ANALYSIS.md",
+        "00-MASTER/UCOS-RIB-001/07-DUPLICATE-ANALYSIS.md",
+        "00-MASTER/UCOS-RIB-001/08-REUSE-ANALYSIS.md",
+        "00-MASTER/UCOS-RIB-001/09-EXTENSION-ANALYSIS.md",
+        "00-MASTER/UCOS-RIB-001/10-IMPLEMENTATION-QUEUE.md",
+        "00-MASTER/UCOS-RIB-001/11-VERIFICATION-REPORT.md",
+        "00-MASTER/UCOS-RIB-001/12-VALIDATION-REPORT.md",
+        "00-MASTER/UCOS-RIB-001/13-CERTIFICATION-REPORT.md",
+        "00-MASTER/UCOS-RIB-001/14-REPOSITORY-READINESS-REPORT.md",
+        "00-MASTER/UCOS-RIB-001/rib.json"
       ],
-      "mutation": 37,
+      "mutation": 16,
       "round": 2
     },
     {
       "actuator_failures": [],
+      "actuator_refusals": {},
       "actuators": {
         "aee": 0,
         "rib": 0
@@ -153,15 +151,14 @@
       "identities": {
         "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
         "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-        "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
+        "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
         "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
-        "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
+        "ordering_variance": "fe7095bd99ca5b00ab909d638e8d9e8c747eba8106f61f88704da9389e9937ca",
+        "registry_variance": "dfc7d83f6272944764f1b38f6711239c377d316859144e87eec799507817e98d",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [
-        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
         "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
         "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
         "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
@@ -180,20 +177,21 @@
         "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
         "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
         "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
-        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
+        "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md"
       ],
-      "mutation": 37,
+      "mutation": 31,
       "round": 3
     },
     {
       "actuator_failures": [],
+      "actuator_refusals": {},
       "actuators": {
         "aee": 0,
         "rib": 0
       },
-      "drift": 3,
+      "drift": 2,
       "drifted_dimensions": [
-        "certification_variance",
         "ordering_variance",
         "registry_variance"
       ],
@@ -203,37 +201,34 @@
         "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
         "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
-        "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
+        "ordering_variance": "c8911d538fa29f6f1c59f788d30eec0858595c53645cd0fbad2edc7f60a8b9de",
+        "registry_variance": "c800fbf07bd28a55558837f965dfe84ba4659e9d23fc12a23f907bb4c7775be0",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [
-        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
-        "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/03-OBSERVATION-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/04-DISCOVERY-AND-CLASSIFICATION-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/05-DECISION-REGISTER.md",
-        "00-MASTER/UCOS-AEE-001/06-ITERATION-LEDGER.md",
-        "00-MASTER/UCOS-AEE-001/07-CONVERGENCE-CERTIFICATION.md",
-        "00-MASTER/UCOS-AEE-001/08-LEARNING-LEDGER.md",
-        "00-MASTER/UCOS-AEE-001/09-CONTINUOUS-EVOLUTION-BINDING.md",
-        "00-MASTER/UCOS-AEE-001/10-TRACEABILITY.md",
-        "00-MASTER/UCOS-AEE-001/11-CERTIFICATION-REPORT.md",
-        "00-MASTER/UCOS-AEE-001/12-CONTINUATION-PACKAGE.md",
-        "00-MASTER/UCOS-AEE-001/AEE-LEARNING-LEDGER.json",
-        "00-MASTER/UCOS-AEE-001/aee.json",
         "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
         "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
         "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
-        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
+        "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md",
+        "00-MASTER/UCOS-RIB-001/05-DEPENDENCY-GRAPH.md",
+        "00-MASTER/UCOS-RIB-001/06-GAP-ANALYSIS.md",
+        "00-MASTER/UCOS-RIB-001/07-DUPLICATE-ANALYSIS.md",
+        "00-MASTER/UCOS-RIB-001/08-REUSE-ANALYSIS.md",
+        "00-MASTER/UCOS-RIB-001/09-EXTENSION-ANALYSIS.md",
+        "00-MASTER/UCOS-RIB-001/10-IMPLEMENTATION-QUEUE.md",
+        "00-MASTER/UCOS-RIB-001/11-VERIFICATION-REPORT.md",
+        "00-MASTER/UCOS-RIB-001/12-VALIDATION-REPORT.md",
+        "00-MASTER/UCOS-RIB-001/13-CERTIFICATION-REPORT.md",
+        "00-MASTER/UCOS-RIB-001/14-REPOSITORY-READINESS-REPORT.md",
+        "00-MASTER/UCOS-RIB-001/rib.json"
       ],
-      "mutation": 37,
+      "mutation": 16,
       "round": 4
     },
     {
       "actuator_failures": [],
+      "actuator_refusals": {},
       "actuators": {
         "aee": 0,
         "rib": 0
@@ -247,15 +242,14 @@
       "identities": {
         "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
         "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-        "certification_variance": "816ea0db5af27842baff9f34df13fe1dfc4c4206a0b18f696075ad9da71a2d93",
+        "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
         "dictionary_variance": "b7849014648b28c36faff05cd582fcd261ceb5f7cc4ab1a47428bfed97156bbc",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "a1dc4359d742fc994b0476145a2d8af75fa5573d11b99827467021e333f97090",
-        "registry_variance": "9f69946e3b152759a9bfb323e8dcffcec2839409461f03900c0305bfc85a2138",
+        "ordering_variance": "fe7095bd99ca5b00ab909d638e8d9e8c747eba8106f61f88704da9389e9937ca",
+        "registry_variance": "dfc7d83f6272944764f1b38f6711239c377d316859144e87eec799507817e98d",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [
-        "00-MASTER/UAKOS-CLOSURE-008/04-REPOSITORY-CHANGE-REGISTER.md",
         "00-MASTER/UCOS-AEE-001/00-AEE-DASHBOARD.md",
         "00-MASTER/UCOS-AEE-001/01-MANDATE-COVERAGE-REGISTER.md",
         "00-MASTER/UCOS-AEE-001/02-ACTUATOR-EXECUTION-REGISTER.md",
@@ -274,9 +268,10 @@
         "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
         "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
         "00-MASTER/UCOS-RIB-001/02-REPOSITORY-CAPABILITY-GRAPH.md",
-        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md"
+        "00-MASTER/UCOS-RIB-001/03-CANONICAL-OWNER-MATRIX.md",
+        "00-MASTER/UCOS-RIB-001/04-REPOSITORY-INTEGRATION-BLUEPRINT.md"
       ],
-      "mutation": 37,
+      "mutation": 31,
       "round": 5
     }
   ],
@@ -285,7 +280,7 @@
   "variance": {
     "authority_variance": 0,
     "bookkeeping_variance": 0,
-    "certification_variance": 5,
+    "certification_variance": 3,
     "dictionary_variance": 0,
     "lineage_variance": 0,
     "ordering_variance": 5,
