@@ -1882,7 +1882,7 @@
       "id": "MSR-SOURCE",
       "kind": "owned_source_count",
       "purpose": "the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree",
-      "total": 1855,
+      "total": 1857,
       "units_with_value": 148
     },
     {
@@ -1890,7 +1890,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 6432,
+      "total": 6438,
       "units_with_value": 226
     },
     {
@@ -1898,7 +1898,7 @@
       "id": "MSR-UNITTEST",
       "kind": "tracked_glob_count",
       "purpose": "verification assets located for the unit itself",
-      "total": 390,
+      "total": 391,
       "units_with_value": 44
     },
     {
@@ -1938,7 +1938,7 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 2207,
+      "total": 2211,
       "units_with_value": 77
     },
     {
@@ -3060,9 +3060,9 @@
           "platform/tests/test_repository_provider.py"
         ],
         "platform.tests -> platform.repository_intelligence": [
+          "platform/tests/test_canonical_validation_evidence.py",
           "platform/tests/test_generated_artifact_registry.py",
-          "platform/tests/test_repository_contamination.py",
-          "platform/tests/test_repository_intelligence_catalog.py"
+          "platform/tests/test_repository_contamination.py"
         ],
         "platform.tests -> platform.repository_operations": [
           "platform/tests/repository_operations_helpers.py",
@@ -3583,10 +3583,10 @@
         }
       ],
       "edge_sites": {},
-      "edges": 8928,
+      "edges": 8930,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
-      "nodes": 1921,
+      "nodes": 1923,
       "purpose": "the module-granularity import plane, where a true Python import cycle would break execution",
       "unit_class": "IMPLEMENTATION",
       "unresolved_edges": 0
@@ -4264,7 +4264,7 @@
     "fsck_errors": [],
     "interrupted_operations": [],
     "modified": "<withheld: working-tree measurement, UCOS-RC-003>",
-    "tracked_files": 5737,
+    "tracked_files": 5740,
     "untracked": "<withheld: working-tree measurement, UCOS-RC-003>",
     "working_tree": "<withheld: working-tree measurement, UCOS-RC-003>"
   },
@@ -4467,7 +4467,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "495fe1bd085c1cd79ab8b1399a4ad36b782bdf7dd3791081bdf3fc540721160a",
+      "content_sha256": "9728f73e45e324d9a7825562df45028c4bc29b916a17589c3182cc237fb9c373",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-BASELINE",
@@ -4493,7 +4493,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "18101c16e837b08e289ec0bc5d264ea1e5e874f685d4706ef206c761e986c1ce",
+      "content_sha256": "ba95deb1b4ecc9d61ce2189a998e0e14c6877adef0734568a55b710014b16bae",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-CAPS",
@@ -8178,7 +8178,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 1234,
+      "tracked_files": 1235,
       "unique_id": "UCOS-RIB-001-CAP-0068",
       "unit_class": "CAPABILITY",
       "unit_key": "00-MASTER",
@@ -8628,7 +8628,7 @@
         "DSC-PROGRAMME"
       ],
       "superseded_by": "",
-      "tracked_files": 17,
+      "tracked_files": 18,
       "unique_id": "UCOS-RIB-001-CAP-0077",
       "unit_class": "OPERATIONAL-PROGRAMME",
       "unit_key": "00-MASTER.UAKOS-CLOSURE-008",
@@ -18556,7 +18556,7 @@
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
-      "entrypoint_references": 78,
+      "entrypoint_references": 82,
       "evidence_assets": 0,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
@@ -19164,7 +19164,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 825,
+      "tracked_files": 827,
       "unique_id": "UCOS-RIB-001-CAP-0255",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform",
@@ -20508,12 +20508,13 @@
     {
       "canonical_name": "platform.repository_intelligence",
       "consumer_units": [
+        "platform.repository_intelligence.generated_artifacts",
         "platform.tests"
       ],
-      "consumers": 1,
+      "consumers": 2,
       "corpus_artifacts": 0,
       "declared": "platform.repository_intelligence",
-      "degree": 17,
+      "degree": 18,
       "dependencies": 16,
       "dependency_units": [
         "engine.acceptance",
@@ -20574,13 +20575,13 @@
       "rie_reuse": "REUSE/COMPOSE",
       "rie_status": "IMPLEMENTED",
       "root": "platform",
-      "source_files": 15,
+      "source_files": 16,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 16,
+      "tracked_files": 17,
       "unique_id": "UCOS-RIB-001-CAP-0272",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform.repository_intelligence",
@@ -21010,13 +21011,13 @@
       "rie_reuse": "REUSE/COMPOSE",
       "rie_status": "IMPLEMENTED",
       "root": "platform",
-      "source_files": 333,
+      "source_files": 334,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 334,
+      "tracked_files": 335,
       "unique_id": "UCOS-RIB-001-CAP-0277",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform.tests",
@@ -22240,7 +22241,7 @@
       "unique_id": "UCOS-RIB-001-CAP-0292",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform.validation",
-      "unit_tests": 35,
+      "unit_tests": 36,
       "unregistered_and_closed": false,
       "unresolved_catalogue_record": false
     },

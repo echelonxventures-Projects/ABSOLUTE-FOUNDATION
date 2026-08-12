@@ -942,7 +942,7 @@ the measured dependency, consumer and provider degree of every unit
 | UCOS-RIB-001-CAP-0269 | platform.projects | 16 | 2 | 16 |
 | UCOS-RIB-001-CAP-0270 | platform.providers | 1 | 2 | 1 |
 | UCOS-RIB-001-CAP-0271 | platform.providers.repository | 1 | 0 | 1 |
-| UCOS-RIB-001-CAP-0272 | platform.repository_intelligence | 16 | 1 | 16 |
+| UCOS-RIB-001-CAP-0272 | platform.repository_intelligence | 16 | 2 | 16 |
 | UCOS-RIB-001-CAP-0273 | platform.repository_operations | 16 | 2 | 16 |
 | UCOS-RIB-001-CAP-0274 | platform.runtime_operations | 20 | 1 | 20 |
 | UCOS-RIB-001-CAP-0275 | platform.runtime_platform | 15 | 1 | 15 |
@@ -1249,12 +1249,12 @@ the located executable surface of every unit
 | UCOS-RIB-001-CAP-0269 | platform.projects | 12 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0270 | platform.providers | 0 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0271 | platform.providers.repository | 1 | IMPLEMENTED | 0 |
-| UCOS-RIB-001-CAP-0272 | platform.repository_intelligence | 15 | IMPLEMENTED | 1 |
+| UCOS-RIB-001-CAP-0272 | platform.repository_intelligence | 16 | IMPLEMENTED | 1 |
 | UCOS-RIB-001-CAP-0273 | platform.repository_operations | 11 | IMPLEMENTED | 1 |
 | UCOS-RIB-001-CAP-0274 | platform.runtime_operations | 14 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0275 | platform.runtime_platform | 14 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0276 | platform.security | 10 | IMPLEMENTED | 0 |
-| UCOS-RIB-001-CAP-0277 | platform.tests | 333 | IMPLEMENTED | 0 |
+| UCOS-RIB-001-CAP-0277 | platform.tests | 334 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0278 | platform.universal_assimilation | 6 | IMPLEMENTED | 1 |
 | UCOS-RIB-001-CAP-0279 | platform.universal_assurance | 14 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0280 | platform.universal_control_plane | 21 | IMPLEMENTED | 1 |
@@ -1576,7 +1576,7 @@ the located verification assets and declared verification scope of every unit
 | UCOS-RIB-001-CAP-0289 | platform.universal_provider | 1 | True |
 | UCOS-RIB-001-CAP-0290 | platform.universal_truth | 1 | True |
 | UCOS-RIB-001-CAP-0291 | platform.universal_validation | 9 | True |
-| UCOS-RIB-001-CAP-0292 | platform.validation | 35 | True |
+| UCOS-RIB-001-CAP-0292 | platform.validation | 36 | True |
 | UCOS-RIB-001-CAP-0293 | platform.validation_intelligence | 10 | True |
 | UCOS-RIB-001-CAP-0294 | platform.workspace | 11 | True |
 | UCOS-RIB-001-CAP-0295 | service | 4 | False |
