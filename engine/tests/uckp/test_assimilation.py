@@ -371,7 +371,7 @@ def test_the_assimilated_universe_holds_the_constitution_and_the_corpus(
     corpus_size,
 ):
     assert len(assimilated_universe.objects()) == constitution_object_count + corpus_size
-    assert len(assimilated_universe.discovery.providers_found) == 2
+    assert len(assimilated_universe.discovery.providers_found) == 3
     assert "engine.uckp.assimilation" in assimilated_universe.registry.providers()
 
 
@@ -406,12 +406,13 @@ def test_assimilation_is_not_a_discovery_provider():
     assert not hasattr(assimilation, "UCKO_OBJECTS")
 
 
-def test_discovery_finds_exactly_the_two_declarative_providers():
+def test_discovery_finds_exactly_the_declarative_providers():
     from engine.uckp.registry import UniversalKnowledgeRegistry
 
     registry = UniversalKnowledgeRegistry(vocabularies=build_vocabulary_registry())
     report = registry.discover("engine.uckp")
     assert report.providers_found == (
+        "engine.uckp.alignment",
         "engine.uckp.capabilities",
         "engine.uckp.constitution",
     )

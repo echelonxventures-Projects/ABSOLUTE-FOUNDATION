@@ -4,6 +4,12 @@
   "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "4 — Relationship Graph",
+  "model_owner": {
+    "authority": "UCKP-ART-07",
+    "home": "engine/uckp/graph.py",
+    "owns": "What a relationship is, what an edge is, what makes an edge resolvable, and the requirement that the authority relation stay acyclic (UCKP-INV-04, UCKP-INV-05, UCKP-INV-06)."
+  },
+  "standing": "PROJECTION. This surface measures the repository-object edge POPULATION. It declares no relationship class: what a relationship IS lives in engine/uckp/graph.py under UCKP-ART-07, and every kind below binds to a class of that model in 00-BOOK/DATA/constitutional-authority-alignment.json.",
   "relationship_kinds": [
     "owned_by",
     "produced_by",
@@ -12,7 +18,51 @@
     "validated_by",
     "evidenced_by"
   ],
-  "count": 32902,
+  "kind_bindings": {
+    "owned_by": {
+      "uckp_class": "ownership",
+      "uckp_relation": "owns",
+      "direction": "inverse",
+      "article": "UCKP-ART-06",
+      "meaning": "the accountable owner — the ownership facet, read from the owned object toward its owner"
+    },
+    "produced_by": {
+      "uckp_class": "traceability",
+      "uckp_relation": "produces",
+      "direction": "inverse",
+      "article": "UCKP-ART-19",
+      "meaning": "the producer whose execution brought the object into being"
+    },
+    "produces": {
+      "uckp_class": "traceability",
+      "uckp_relation": "produces",
+      "direction": "forward",
+      "article": "UCKP-ART-19",
+      "meaning": "the same provenance edge forward, so lineage is traversable in both directions"
+    },
+    "depends_on": {
+      "uckp_class": "constitutional",
+      "uckp_relation": "depends-on",
+      "direction": "forward",
+      "article": "UCKP-ART-07",
+      "meaning": "what must exist for the object to exist — the class derive_edges gives every dependency"
+    },
+    "validated_by": {
+      "uckp_class": "validation",
+      "uckp_relation": "validates",
+      "direction": "inverse",
+      "article": "UCKP-ART-16",
+      "meaning": "the contract that decides whether the object is admissible"
+    },
+    "evidenced_by": {
+      "uckp_class": "constitutional",
+      "uckp_relation": "references",
+      "direction": "forward",
+      "article": "UCKP-ART-12",
+      "meaning": "the evidence class the object's governance records belong to"
+    }
+  },
+  "count": 32937,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -66606,6 +66656,56 @@
     },
     {
       "from": "UCOS-ENGINE-001186",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
+      "kind": "depends_on",
+      "to": "engine/uckp/constitution.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
+      "kind": "depends_on",
+      "to": "engine/uckp/identity.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
+      "kind": "depends_on",
+      "to": "engine/uckp/law.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
+      "kind": "depends_on",
+      "to": "engine/uckp/ucko.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
+      "kind": "depends_on",
+      "to": "engine/uckp/values.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
+      "kind": "depends_on",
+      "to": "engine/uckp/vocabulary.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
+      "kind": "owned_by",
+      "to": "engine/uckp"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001187",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -162155,6 +162255,91 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
+      "from": "UCOS-TESTOBJ-000799",
+      "kind": "depends_on",
+      "to": "engine/uckp/alignment.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000799",
+      "kind": "depends_on",
+      "to": "engine/uckp/constitution.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000799",
+      "kind": "depends_on",
+      "to": "engine/uckp/identity.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000799",
+      "kind": "depends_on",
+      "to": "engine/uckp/law.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000799",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000799",
+      "kind": "owned_by",
+      "to": "engine/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000799",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000799",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000800",
+      "kind": "depends_on",
+      "to": "engine/uckp/alignment.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000800",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000800",
+      "kind": "owned_by",
+      "to": "platform/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000800",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000800",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000801",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000801",
+      "kind": "owned_by",
+      "to": "platform/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000801",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000801",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
       "from": "UCOS-TOOLING-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -162861,6 +163046,46 @@
     },
     {
       "from": "UCOS-TOOLING-000034",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TOOLING-000035",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TOOLING-000035",
+      "kind": "owned_by",
+      "to": "UCOS-UKB-TOOLING"
+    },
+    {
+      "from": "UCOS-TOOLING-000035",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TOOLING-000035",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TOOLING-000036",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TOOLING-000036",
+      "kind": "owned_by",
+      "to": "UCOS-UKB-TOOLING"
+    },
+    {
+      "from": "UCOS-TOOLING-000036",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TOOLING-000036",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },

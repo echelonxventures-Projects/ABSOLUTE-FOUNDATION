@@ -1,8 +1,19 @@
 {
   "artifact_id": "UCOS-UGA-001",
   "title": "Universal Governance Assimilation — bringing every existing object under constitutional control",
-  "authority": "AUTHORED REPOSITORY TRUTH. This declaration legislates what an OBJECT is, which classes exist, how each is owned, and which evidence class its governance records belong to. It is upstream of the engine that reads it and must never be produced by one.",
-  "constitutional_basis": "GOV-005 §5.1/§5.3, UMB-IMP-001, UCOS-EVIDENCE-UNIVERSE-001, UCOS-GENERATED-ARTIFACT-REGISTRY-001, EXEC-REG-001",
+  "authority": "AUTHORED REPOSITORY TRUTH, HELD AS A PROJECTION UNDER UCKP-LAW-0001. This declaration states which version-controlled objects exist, how each is owned, what produced it, and which evidence class its governance records belong to. Every one of those is a statement about the REPOSITORY, and UCKP-ART-04 makes the repository a projection and persistence binding — never an authority. It remains upstream of the engine that reads it and must never be produced by one; what it is not, and never was, is the top of its own chain.",
+  "constitutional_superior": {
+    "authority": "UCKP-LAW-0001",
+    "home": "engine/uckp/law.py",
+    "role": "PROJECTION",
+    "relation": "PROJECTION",
+    "articles": ["UCKP-ART-04", "UCKP-ART-05", "UCKP-ART-07", "UCKP-ART-11"],
+    "binding": "00-BOOK/DATA/constitutional-authority-alignment.json",
+    "object_model": "UCKO — engine/uckp/ucko.py",
+    "effect": "This programme owns the REPOSITORY REALITY PROJECTION and nothing above it. What an object IS (UCKP-ART-02), what an identity IS (UCKP-ART-05) and what a relationship IS (UCKP-ART-07) are law, and are not restated here.",
+    "why_this_changes_no_measurement": "Not one of the 5757 objects, 32902 edges or 20 invariants below is affected. The programme measured what nothing else could and keeps every finding. The only thing that changes is that the warrant is now named, so a gate can tell this projection apart from an authority nobody vetted."
+  },
+  "constitutional_basis": "UCKP-LAW-0001 (engine/uckp/law.py), UCOS-CAA-001, GOV-005 §5.1/§5.3, UMB-IMP-001, UCOS-EVIDENCE-UNIVERSE-001, UCOS-GENERATED-ARTIFACT-REGISTRY-001, EXEC-REG-001",
   "schema": "ucos-universal-governance-assimilation",
   "version": "1.0.0",
 
@@ -25,7 +36,39 @@
     "rule": "There is exactly ONE identity authority. This programme mints from the SAME ledger and the SAME category_seq counter as the corpus. It creates no second authority and no second sequence.",
     "map": "by_object",
     "precedent": "EXEC-REG-001 established `by_execution` as an append-only map sharing the one identity authority. `by_object` is the same construction for a second object class.",
-    "page_allocation": "NONE. Pages are a BOOK concept. Executable objects consume no page range, so page_cursor is never advanced and the corpus page layout is bit-for-bit unaffected."
+    "page_allocation": "NONE. Pages are a BOOK concept. Executable objects consume no page range, so page_cursor is never advanced and the corpus page layout is bit-for-bit unaffected.",
+
+    "constitutional_law_of_identity": {
+      "article": "UCKP-ART-05",
+      "home": "engine/uckp/identity.py",
+      "standing_of_this_ledger": "PERSISTENCE — the one storage binding of Article 5 in this repository, not a rival to it.",
+      "two_planes_one_authority": "engine/uckp/identity.py mints the identity of a constitutional OBJECT: a pure, clock-free, storage-free URN. This ledger mints the identity of a REPOSITORY object: an append-only UCOS-<CATEGORY>-<NNNNNN> serial frozen at first sight. engine/uckp/law.py holds both — UCOS-ENGINE-000496 names the FILE and urn:ucos:ucko:ucos:UCKP-LAW-0001 names the LAW. They were never competing for one subject; until UCOS-CAA-001 nothing said so, and an undeclared subordination is indistinguishable from a rival.",
+      "derivation": "engine.uckp.alignment.repository_local_urn — total over every id this ledger holds, pure, and injective. The identifier is carried through VERBATIM as the URN's local name: urn:ucos:ucko:ucos-repository:<UCOS-ID>.",
+      "ids_preserved": "ALL. Nothing is re-minted, renumbered, reissued or retired. A derivation that reshaped an identifier would be a re-mint wearing a projection's clothes, and Article 5 says an identity once minted never changes.",
+      "measured_by": "CAA-INV-04, which recomputes the derivation over every id in every map and fails on any collision or any id it cannot carry through."
+    }
+  },
+
+  "relationship_graph_ownership": {
+    "model_owner": {
+      "authority": "UCKP-ART-07",
+      "home": "engine/uckp/graph.py",
+      "owns": "What a relationship IS — every object a node, every dependency an edge, and every relationship executable, because a relationship that cannot be resolved is not one."
+    },
+    "this_programme_owns": "The POPULATION, not the model. 04-RELATIONSHIP-GRAPH.json measures the repository-object edge set and declares no relationship class of its own.",
+    "kind_bindings": "00-BOOK/DATA/constitutional-authority-alignment.json :: relationship_graph_resolution.relationship_kind_bindings — every kind this programme emits, bound to the class and relation term engine/uckp/vocabulary.py actually holds.",
+    "may_never": "Declare a relationship kind that names no class in the model above it. A seventh kind is one appended entry in the binding (UCKP-ART-17) and never a new model.",
+    "measured_by": "CAA-INV-05"
+  },
+
+  "object_model": {
+    "model": "UCKO — the Universal Constitutional Knowledge Object",
+    "home": "engine/uckp/ucko.py",
+    "article": "UCKP-ART-02",
+    "determination": "UCOS-UCOM-001-UNIVERSAL-CONSTITUTIONAL-OBJECT-MODEL-DETERMINATION.md",
+    "what_object_classes_below_are": "PROJECTIONS of that model onto the version-control boundary. They answer 'which KIND of repository thing is this', which is a taxonomy question the object model already provides a facet for. They do not answer 'what is an object', and a class added below declares no new model.",
+    "why_this_is_stated": "Seven object classes named in a declaration that cites no model read exactly like a rival object model. CAA-INV-07 measures that no instrument declares one, and this block is what makes the measurement pass truthfully rather than by absence of a keyword.",
+    "measured_by": "CAA-INV-07"
   },
 
   "object_classes": {
@@ -94,6 +137,7 @@
       {"path": "00-MASTER/UCOS-UGA-001/06-SELF-OBSERVATION.json", "class": "IMPROVEMENT", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"},
       {"path": "00-MASTER/UCOS-UGA-001/07-CERTIFICATION.json", "class": "VALIDATION", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"},
       {"path": "00-MASTER/UCOS-UGA-001/08-OBSERVATION-REGISTRY.json", "class": "VALIDATION", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"},
+      {"path": "00-BOOK/DATA/canonical-observation-audit.json", "class": "VALIDATION", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"},
       {"path": "00-MASTER/UCOS-UGA-001/00-UGA-DASHBOARD.md", "class": "VALIDATION", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"}
     ]
   },
@@ -130,6 +174,27 @@
     {"id": "UGA-INV-08", "name": "NO_CANONICAL_ARTIFACT_DEPENDS_ON_UNCLASSIFIED_OBSERVATION", "fails_closed": true},
     {"id": "UGA-INV-09", "name": "NO_ARCHITECTURE_DEPENDS_ON_FINITE_INSTANCE", "fails_closed": true},
     {"id": "UGA-INV-10", "name": "EVERY_MUTATION_HAS_AUDIT_EVENT",       "fails_closed": true}
+  ],
+
+  "$caa_comment": [
+    "Constitutional Authority Alignment. The statements, the roles and the articles they enforce",
+    "live in 00-BOOK/DATA/constitutional-authority-alignment.json and, above that, in",
+    "engine/uckp/alignment.py. They are NOT restated here — this list is the addressing that lets",
+    "UGA-INV-09's structural scan reach them and the dashboard report them.",
+    "",
+    "They are measured by this engine because this engine is the repository reality projection and",
+    "they are measurements of repository reality, and because doing it here means the gate verify.sh",
+    "ALREADY runs enforces them. A second gate for the invariants that forbid a second authority",
+    "would be a joke with a straight face."
+  ],
+  "alignment_invariants": [
+    {"id": "CAA-INV-01", "name": "EXACTLY_ONE_SUPREME_CONSTITUTIONAL_AUTHORITY",      "fails_closed": true},
+    {"id": "CAA-INV-02", "name": "EVERY_AUTHORITY_CLAIM_NAMES_ITS_CONSTITUTIONAL_SUPERIOR", "fails_closed": true},
+    {"id": "CAA-INV-03", "name": "NO_SUBORDINATE_INSTRUMENT_CLAIMS_INDEPENDENT_AUTHORITY", "fails_closed": true},
+    {"id": "CAA-INV-04", "name": "EXACTLY_ONE_IDENTITY_AUTHORITY",                    "fails_closed": true},
+    {"id": "CAA-INV-05", "name": "EXACTLY_ONE_RELATIONSHIP_GRAPH_MODEL_OWNER",        "fails_closed": true},
+    {"id": "CAA-INV-06", "name": "EVIDENCE_AND_OBSERVATION_REMAIN_SEPARATE_TRUTHS",   "fails_closed": true},
+    {"id": "CAA-INV-07", "name": "NO_INSTRUMENT_DECLARES_A_RIVAL_OBJECT_MODEL",       "fails_closed": true}
   ],
 
   "finite_instance_tokens": {

@@ -1,8 +1,17 @@
 {
   "artifact_id": "UCOS-MUTATION-GOVERNANCE-BOUNDARY-001",
   "title": "Mutation Governance Boundary — which authority governs which class of mutation",
-  "authority": "AUTHORED REPOSITORY TRUTH. This artifact declares the boundary; it does not create a new authority and governs nothing itself.",
-  "constitutional_basis": "UCOS-CMG-EXEC-000001 Requirement 004, GOV-005, UCOS-CL-016",
+  "authority": "AUTHORED REPOSITORY TRUTH, HELD SUBORDINATE UNDER UCKP-LAW-0001. This artifact declares the boundary; it does not create a new authority and governs nothing itself.",
+  "constitutional_superior": {
+    "authority": "UCKP-LAW-0001",
+    "home": "engine/uckp/law.py",
+    "role": "EXECUTION",
+    "relation": "PROJECTION",
+    "articles": ["UCKP-ART-10", "UCKP-ART-16"],
+    "binding": "00-BOOK/DATA/constitutional-authority-alignment.json",
+    "effect": "This artifact already said of itself that it creates no authority and governs nothing. UCKP-ART-10 — execution never owns knowledge — is the article that sentence is true UNDER. It owns which mutation classes exist and which authority disposes of each; it may never own knowledge."
+  },
+  "constitutional_basis": "UCKP-LAW-0001 (engine/uckp/law.py), UCOS-CAA-001, UCOS-CMG-EXEC-000001 Requirement 004, GOV-005, UCOS-CL-016",
   "schema": "ucos-mutation-governance-boundary",
   "version": "1.0.0",
 

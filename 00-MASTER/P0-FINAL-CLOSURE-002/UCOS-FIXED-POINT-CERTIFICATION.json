@@ -3,11 +3,11 @@
   "baseline_identities": {
     "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
     "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-    "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
-    "dictionary_variance": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
+    "certification_variance": "b2162a2e34c754107619b3364da0916e739720362c8946e3b6f115cfe15fa390",
+    "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
     "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-    "ordering_variance": "3f45798f382ad6065fbd38f4341b1857bc0cc84b8aef73b18177d96e50348467",
-    "registry_variance": "be83d68b4d75294bb946ec3567c80c6517daab96e8f9e8e93db81dd4e48f71d4",
+    "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
+    "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
     "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
   },
   "chain": [
@@ -28,7 +28,7 @@
   ],
   "concurrent_writer_detected": false,
   "consecutive_zero_drift_rounds": 5,
-  "digest": "55091f6c19d6ff82bd9a3d32a9c2f74366bcf7fa85eed77c23585ef62fa069b6",
+  "digest": "af27d56ce111c8fbcedc4f7e518996ca494b77dbd9a9a30d67c040474eb7600a",
   "dimensions": {
     "authority_variance": "00-MASTER/UCCEP-000000/uccep.json",
     "bookkeeping_variance": "00-MASTER/UCL-000001/ucl.json",
@@ -56,11 +56,11 @@
       "identities": {
         "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
         "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-        "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
-        "dictionary_variance": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
+        "certification_variance": "b2162a2e34c754107619b3364da0916e739720362c8946e3b6f115cfe15fa390",
+        "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "3f45798f382ad6065fbd38f4341b1857bc0cc84b8aef73b18177d96e50348467",
-        "registry_variance": "be83d68b4d75294bb946ec3567c80c6517daab96e8f9e8e93db81dd4e48f71d4",
+        "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
+        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],
@@ -79,11 +79,11 @@
       "identities": {
         "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
         "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-        "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
-        "dictionary_variance": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
+        "certification_variance": "b2162a2e34c754107619b3364da0916e739720362c8946e3b6f115cfe15fa390",
+        "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "3f45798f382ad6065fbd38f4341b1857bc0cc84b8aef73b18177d96e50348467",
-        "registry_variance": "be83d68b4d75294bb946ec3567c80c6517daab96e8f9e8e93db81dd4e48f71d4",
+        "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
+        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],
@@ -102,11 +102,11 @@
       "identities": {
         "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
         "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-        "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
-        "dictionary_variance": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
+        "certification_variance": "b2162a2e34c754107619b3364da0916e739720362c8946e3b6f115cfe15fa390",
+        "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "3f45798f382ad6065fbd38f4341b1857bc0cc84b8aef73b18177d96e50348467",
-        "registry_variance": "be83d68b4d75294bb946ec3567c80c6517daab96e8f9e8e93db81dd4e48f71d4",
+        "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
+        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],
@@ -125,11 +125,11 @@
       "identities": {
         "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
         "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-        "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
-        "dictionary_variance": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
+        "certification_variance": "b2162a2e34c754107619b3364da0916e739720362c8946e3b6f115cfe15fa390",
+        "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "3f45798f382ad6065fbd38f4341b1857bc0cc84b8aef73b18177d96e50348467",
-        "registry_variance": "be83d68b4d75294bb946ec3567c80c6517daab96e8f9e8e93db81dd4e48f71d4",
+        "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
+        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],
@@ -148,11 +148,11 @@
       "identities": {
         "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
         "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-        "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
-        "dictionary_variance": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
+        "certification_variance": "b2162a2e34c754107619b3364da0916e739720362c8946e3b6f115cfe15fa390",
+        "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-        "ordering_variance": "3f45798f382ad6065fbd38f4341b1857bc0cc84b8aef73b18177d96e50348467",
-        "registry_variance": "be83d68b4d75294bb946ec3567c80c6517daab96e8f9e8e93db81dd4e48f71d4",
+        "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
+        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],

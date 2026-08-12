@@ -8965,9 +8965,9 @@
     "CONFIG": 29,
     "DATAOBJ": 109,
     "EXDOC": 2368,
-    "TOOLING": 34,
-    "ENGINE": 1186,
-    "TESTOBJ": 798,
+    "TOOLING": 36,
+    "ENGINE": 1187,
+    "TESTOBJ": 801,
     "OBS": 7
   },
   "discovered_volumes": {
@@ -51884,6 +51884,42 @@
       "object_class": "TEST_OBJECT",
       "category": "TESTOBJ",
       "first_seen": "commit:c087882cfd0a"
+    },
+    "00-BOOK/DATA/constitutional-authority-alignment.json": {
+      "universal_id": "UCOS-TOOLING-000035",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:3c1644ab67b2"
+    },
+    "engine/uckp/alignment.py": {
+      "universal_id": "UCOS-ENGINE-001187",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:3c1644ab67b2"
+    },
+    "engine/tests/uckp/test_alignment.py": {
+      "universal_id": "UCOS-TESTOBJ-000799",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:3c1644ab67b2"
+    },
+    "platform/tests/test_constitutional_authority_alignment.py": {
+      "universal_id": "UCOS-TESTOBJ-000800",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:3c1644ab67b2"
+    },
+    "00-BOOK/DATA/canonical-observation-audit.json": {
+      "universal_id": "UCOS-TOOLING-000036",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:3fb0c8148bb6"
+    },
+    "platform/tests/test_observation_lineage_boundary.py": {
+      "universal_id": "UCOS-TESTOBJ-000801",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:3fb0c8148bb6"
     }
   },
   "by_observation": {

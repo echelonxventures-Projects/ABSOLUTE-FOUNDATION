@@ -1,8 +1,17 @@
 {
   "artifact_id": "UCOS-GENERATED-ARTIFACT-REGISTRY-001",
   "title": "Generated-Artifact Registry — one fact, one owner, many derived views",
-  "authority": "AUTHORED REPOSITORY TRUTH. This register declares generated-artifact identity and lifecycle. It is upstream of every engine it describes and must never be produced by one of them.",
-  "constitutional_basis": "GOV-005 §5.3, UCOS-RECON-C1/C2, UCOS-CL-015",
+  "authority": "AUTHORED REPOSITORY TRUTH, HELD AS A PROJECTION UNDER UCKP-LAW-0001. This register declares generated-artifact identity and lifecycle. It is upstream of every engine it describes and must never be produced by one of them.",
+  "constitutional_superior": {
+    "authority": "UCKP-LAW-0001",
+    "home": "engine/uckp/law.py",
+    "role": "PROJECTION",
+    "relation": "PROJECTION",
+    "articles": ["UCKP-ART-04", "UCKP-ART-11", "UCKP-ART-13"],
+    "binding": "00-BOOK/DATA/constitutional-authority-alignment.json",
+    "effect": "UCKP-ART-11 is explicit that generated output never owns truth. This register is the machine form of that article over the corpus: it says which artifacts are generated, by which producer, from which input closure, under which input classification. It may never own truth itself."
+  },
+  "constitutional_basis": "UCKP-LAW-0001 (engine/uckp/law.py), UCOS-CAA-001, GOV-005 §5.3, UCOS-RECON-C1/C2, UCOS-CL-015",
   "schema": "ucos-generated-artifact-registry",
   "version": "2.0.0",
   "why_this_exists": [
@@ -7030,7 +7039,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7040,7 +7050,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7068,7 +7079,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7078,7 +7090,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7106,7 +7119,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7116,7 +7130,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7144,7 +7159,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7154,7 +7170,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7182,7 +7199,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7192,7 +7210,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7220,7 +7239,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7230,7 +7250,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7258,7 +7279,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7268,7 +7290,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7296,7 +7319,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7306,7 +7330,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7334,7 +7359,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7344,7 +7370,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7372,7 +7399,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
         "scripts/generate-prerequisites.sh",
-        "00-BOOK/DATA/observation-universe.json"
+        "00-BOOK/DATA/observation-universe.json",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7382,7 +7410,8 @@
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
         "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
-        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,

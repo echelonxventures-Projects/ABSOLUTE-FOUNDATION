@@ -174,5 +174,9 @@ def constitution_object_count() -> int:
     objects, which change only when the constitution is amended — never when a repository
     artifact is added. Keeping it separate from :func:`corpus_size` is what makes a change
     in the total attributable to one cause or the other.
+
+    175 constitution + capability objects, plus the 16 UCOS-CAA-001 alignment objects
+    (the binding, the identity derivation, 7 authority roles and 7 alignment rules) that
+    :mod:`engine.uckp.alignment` contributes as the third declarative provider.
     """
-    return 175
+    return 191

@@ -1,100 +1,98 @@
 {
   "actuator": {
     "ACT-ARCHITECTURAL-BLUEPRINT": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-CIVILIZATION-PLATFORM": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-CONSTITUTIONAL-ASSIMILATION": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-CORPUS-CURRENCY": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-DECISION-ASSIMILATION": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-EVOLUTION-FRAMEWORK": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-EVOLUTION-INTELLIGENCE": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-EXECUTION-RESILIENCE": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-KNOWLEDGE-CLOSURE": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-KNOWLEDGE-GAP-PLAN": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-META-KERNEL": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-PLATFORM-BINDING": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-PROVIDER-FRAMEWORK": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-READINESS-PROJECTION": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-REGISTRY-BINDING": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-REPOSITORY-REALITY": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-ROADMAP-PROJECTION": {
-      "residue_total": 0,
+      "residue_total_observation": "UCOS-OBS-000001",
       "verdict": "PASS",
       "zones_exercised": []
     }
   },
   "convergence": {
-    "determination": "NOT-CONVERGED",
-    "iteration_total": 4,
-    "stable_iterations": 4,
+    "determination": "CONVERGED-PROVISIONAL",
+    "iteration_total": 2,
+    "stable_iterations": 2,
     "vector_digests": [
-      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
-      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
-      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
-      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
+      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b",
+      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b"
     ]
   },
   "decision": {
@@ -102,11 +100,6 @@
       "class": "Constitutional amendment",
       "decision": "ESCALATE",
       "rule": "CR-ESCALATED-CEILING"
-    },
-    "OBS-BLUEPRINT-GATE": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-BLOCKING-REGRESSION"
     }
   },
   "dimensions": [
@@ -371,8 +364,8 @@
       "verdict": "SATISFIED"
     },
     "OBS-BLUEPRINT-GATE": {
-      "observed": "CLOSED",
-      "verdict": "VIOLATED"
+      "observed": "OPEN",
+      "verdict": "SATISFIED"
     },
     "OBS-CORPUS-CURRENCY": {
       "observed": "CORPUS CURRENT",

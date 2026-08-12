@@ -198,3 +198,155 @@ def test_the_governance_gate_enforces_every_invariant() -> None:
         "OBS-INV-06",
     ):
         assert f"[PASS] {invariant}" in run.stdout, f"{invariant} is not passing"
+
+
+# --- PHASE 7: TEST-OBS-001..003 — mutation must not move canonical identity ----------
+
+
+def test_obs_001_working_tree_mutation_does_not_change_canonical_identity(tmp_path) -> None:
+    """TEST-OBS-001. A dirty tree may change the VERDICT but never the canonical bytes.
+
+    Exercised against the projection rather than by dirtying the real tree, so the test
+    is hermetic. Against the previous implementation the two projections differed: the
+    dirty model appended a CMP-CLEAN compliance finding and flipped `gate`, which is the
+    twenty-one-file oscillation that held Phase 8 at zero_drift_rounds=0.
+    """
+    sys.path.insert(0, str(REPO / "00-MASTER" / "UCOS-RIB-001"))
+    try:
+        import rib_engine
+    finally:
+        sys.path.pop(0)
+
+    clean = {
+        "gates": [
+            {
+                "id": "GATE-12",
+                "blocking": True,
+                "failures": [],
+                "metrics": ["dirty_entries_outside_generated", "ignored_unclassified"],
+                "verdict": "PASS",
+            },
+        ],
+        "validations": [
+            {
+                "id": "VAL-02",
+                "metric": "dirty_entries_outside_generated",
+                "verdict": "PASS",
+                "measured": 0,
+            }
+        ],
+        "compliance": [],
+        "gate": "OPEN",
+        "gate_exit": 0,
+        "determination": "BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED",
+        "repository": {"dirty_entries": 0},
+    }
+    dirty = {
+        "gates": [
+            {
+                "id": "GATE-12",
+                "blocking": True,
+                "failures": ["dirty_entries_outside_generated=7"],
+                "metrics": ["dirty_entries_outside_generated", "ignored_unclassified"],
+                "verdict": "FAIL",
+            },
+        ],
+        "validations": [
+            {
+                "id": "VAL-02",
+                "metric": "dirty_entries_outside_generated",
+                "verdict": "FAIL",
+                "measured": 7,
+            }
+        ],
+        "compliance": [
+            {
+                "id": "CMP-CLEAN",
+                "gate": "GATE-12",
+                "rank": 1,
+                "finding": "dirty_entries_outside_generated=7",
+            }
+        ],
+        "gate": "CLOSED",
+        "gate_exit": 1,
+        "determination": "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP",
+        "repository": {"dirty_entries": 7},
+    }
+    assert rib_engine.canonical_model(clean) == rib_engine.canonical_model(
+        dirty
+    ), "a working-tree mutation moved the canonical projection"
+
+
+def test_obs_001b_a_real_gate_failure_still_closes_the_gate() -> None:
+    """The other side of TEST-OBS-001, and the one that proves nothing was weakened.
+
+    GATE-12 declares three metrics and only one is a working-tree reading. If the whole
+    gate were excused, an unclassified ignored path would pass silently.
+    """
+    sys.path.insert(0, str(REPO / "00-MASTER" / "UCOS-RIB-001"))
+    try:
+        import rib_engine
+    finally:
+        sys.path.pop(0)
+
+    model = {
+        "gates": [
+            {
+                "id": "GATE-12",
+                "blocking": True,
+                "failures": ["dirty_entries_outside_generated=7", "ignored_unclassified=3"],
+                "metrics": ["dirty_entries_outside_generated", "ignored_unclassified"],
+                "verdict": "FAIL",
+            },
+        ],
+        "validations": [],
+        "compliance": [
+            {"id": "CMP-CLEAN", "gate": "GATE-12", "rank": 1, "finding": "ignored_unclassified=3"}
+        ],
+        "gate": "CLOSED",
+        "gate_exit": 1,
+        "determination": "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP",
+        "repository": {},
+    }
+    out = rib_engine.canonical_model(model)
+    assert out["gate"] == "CLOSED", "a non-working-tree failure was excused"
+    assert out["gate_exit"] == 1
+    assert out["compliance"], "the finding for a real failure was dropped"
+
+
+def test_obs_002_execution_residue_changes_only_evidence() -> None:
+    """TEST-OBS-002. Residue differing between two passes must move no canonical byte."""
+    sys.path.insert(0, str(REPO / "00-MASTER" / "UCOS-AEE-001"))
+    try:
+        import aee_engine
+    finally:
+        sys.path.pop(0)
+
+    first = {
+        "iterations": [
+            {"actuators": [{"id": "ACT-X", "verdict": "PASS", "residue": [], "unattributed": []}]}
+        ]
+    }
+    second = {
+        "iterations": [
+            {
+                "actuators": [
+                    {
+                        "id": "ACT-X",
+                        "verdict": "PASS",
+                        "residue": ["a.md", "b.md"],
+                        "unattributed": ["a.md"],
+                    }
+                ]
+            }
+        ]
+    }
+    assert aee_engine.canonical_model(first) == aee_engine.canonical_model(second)
+
+
+def test_obs_003_canonical_artifacts_carry_no_runtime_measurement() -> None:
+    """TEST-OBS-003. The forensic sweep must report zero open violations."""
+    audit = _load(REPO / "00-BOOK" / "DATA" / "canonical-observation-audit.json")
+    assert audit["open_violations"] == 0, [
+        r["current_location"] for r in audit["entries"] if r["classification"].startswith("MUTABLE")
+    ]

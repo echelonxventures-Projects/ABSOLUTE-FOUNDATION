@@ -1,8 +1,17 @@
 {
   "artifact_id": "UCOS-EXCLUSION-REGISTER-001",
   "title": "Repository Exclusion Register — the declared classification of every excluded path",
-  "authority": "AUTHORED REPOSITORY TRUTH. This register legislates the classification of excluded filesystem state; it is not generated and must never be regenerated.",
-  "constitutional_basis": "GOV-005 §5.1 / §5.3, UCOS-CL-001",
+  "authority": "AUTHORED REPOSITORY TRUTH, HELD SUBORDINATE UNDER UCKP-LAW-0001. This register legislates the classification of excluded filesystem state; it is not generated and must never be regenerated.",
+  "constitutional_superior": {
+    "authority": "UCKP-LAW-0001",
+    "home": "engine/uckp/law.py",
+    "role": "PERSISTENCE",
+    "relation": "PROJECTION",
+    "articles": ["UCKP-ART-04", "UCKP-ART-09"],
+    "binding": "00-BOOK/DATA/constitutional-authority-alignment.json",
+    "effect": "UCKP-ART-09 makes the repository one persistence mechanism among several, so exclusion from it is a statement about STORAGE and never about whether a thing exists. This register owns which bytes the version-control binding carries; it may never own existence."
+  },
+  "constitutional_basis": "UCKP-LAW-0001 (engine/uckp/law.py), UCOS-CAA-001, GOV-005 §5.1 / §5.3, UCOS-CL-001",
   "schema": "ucos-exclusion-register",
   "version": "1.0.0",
   "why_this_exists": [

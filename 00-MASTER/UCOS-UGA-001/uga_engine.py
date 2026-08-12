@@ -63,6 +63,8 @@ ARTIFACTS_PATH = os.path.join(REPO, "00-BOOK", "DATA", "artifacts.json")
 GENREG_PATH = os.path.join(REPO, "00-BOOK", "DATA", "generated-artifact-registry.json")
 EVIDENCE_PATH = os.path.join(REPO, "00-BOOK", "DATA", "evidence-universe.json")
 OBSERVATION_PATH = os.path.join(REPO, "00-BOOK", "DATA", "observation-universe.json")
+CAA_PATH = os.path.join(REPO, "00-BOOK", "DATA",
+                        "constitutional-authority-alignment.json")
 
 OUT = {
     "inventory":    os.path.join(HERE, "00-EXISTENCE-INVENTORY.json"),
@@ -75,6 +77,33 @@ OUT = {
     "certification": os.path.join(HERE, "07-CERTIFICATION.json"),
     "observations": os.path.join(HERE, "08-OBSERVATION-REGISTRY.json"),
     "dashboard":    os.path.join(HERE, "00-UGA-DASHBOARD.md"),
+    "obs_audit":    os.path.join(REPO, "00-BOOK", "DATA",
+                                 "canonical-observation-audit.json"),
+}
+
+#: PHASE 1 — the signatures by which a mutable observation is recognised inside a
+#: canonical artifact. Distinct from `forbidden_canonical_keys`, which is the ENFORCED
+#: scoped rule set: this is the wider DETECTION sweep that finds candidates the rules do
+#: not yet name, so an unidentified leak is a measurement rather than a surprise.
+OBSERVATION_SIGNATURES: dict[str, str] = {
+    "residue": "EXECUTION_RESIDUE",
+    "unattributed": "EXECUTION_RESIDUE",
+    "residue_total": "EXECUTION_RESIDUE",
+    "unattributed_residue": "EXECUTION_RESIDUE",
+    "dirty_entries": "WORKING_TREE_STATE",
+    "dirty_entries_outside_generated": "WORKING_TREE_STATE",
+    "contamination_entries": "WORKING_TREE_STATE",
+    "worktree_entries": "WORKING_TREE_STATE",
+    "working_tree": "WORKING_TREE_STATE",
+    "untracked": "WORKING_TREE_STATE",
+    "modified": "WORKING_TREE_STATE",
+    "deleted": "WORKING_TREE_STATE",
+    "generated_at": "ENVIRONMENT_STATE",
+    "timestamp": "ENVIRONMENT_STATE",
+    "elapsed": "ENVIRONMENT_STATE",
+    "duration": "ENVIRONMENT_STATE",
+    "coverage": "ENVIRONMENT_STATE",
+    "total_coverage": "ENVIRONMENT_STATE",
 }
 
 # Trees whose Python packages participate in intra-repository import resolution.
@@ -561,14 +590,458 @@ def scan_canonical_for_observation_values(obs_decl):
     return findings
 
 
+def canonical_observation_audit(obs_decl, genreg, ledger):
+    """PHASE 1 — every canonical artifact that carries a mutable observation.
+
+    Sweeps the WHOLE declared canonical set (every CANONICAL entry in the
+    generated-artifact registry), not just the enforced scope, so nothing stays
+    unidentified. A site already migrated to an observation id is reported as REMEDIATED
+    rather than omitted — the audit records the state of the leak, not merely the ones
+    still open.
+    """
+    id_shape = re.compile(obs_decl["observation_id_shape"])
+    enforced = {(r["artifact"], r["key"]) for r in
+                obs_decl["forbidden_canonical_keys"]["rules"]}
+    by_key = {}
+    for rec in (ledger.get("by_observation") or {}).values():
+        by_key.setdefault(rec["observer"], []).append(rec["observation_id"])
+
+    rows = []
+    seq = 0
+    for entry in genreg["entries"]:
+        if entry.get("canonical_identity_role") != "CANONICAL":
+            continue
+        rel = entry["canonical_path"]
+        if not rel.endswith(".json"):
+            continue
+        abspath = os.path.join(REPO, rel)
+        try:
+            with open(abspath, encoding="utf-8") as fh:
+                doc = json.load(fh)
+        except (OSError, ValueError):
+            continue
+
+        hits: dict[str, tuple[str, bool]] = {}
+
+        def walk(node, path):
+            if isinstance(node, dict):
+                for k, v in node.items():
+                    if k in OBSERVATION_SIGNATURES:
+                        migrated = isinstance(v, str) and bool(id_shape.match(v))
+                        prev = hits.get(k)
+                        # A key is only REMEDIATED if EVERY occurrence is a reference.
+                        hits[k] = (f"{path}.{k}",
+                                   migrated if prev is None else (prev[1] and migrated))
+                    walk(v, f"{path}.{k}")
+            elif isinstance(node, list):
+                for i, v in enumerate(node):
+                    walk(v, f"{path}[{i}]")
+
+        walk(doc, "$")
+        for key, (where, migrated) in sorted(hits.items()):
+            seq += 1
+            kind = OBSERVATION_SIGNATURES[key]
+            owner = entry.get("owner") or "UNKNOWN"
+            rows.append({
+                "object_id": f"COA-{seq:06d}",
+                "artifact": rel,
+                "producer": entry.get("producer") or "UNDECLARED",
+                "observation_type": kind,
+                "current_location": where,
+                "classification": (
+                    "REMEDIATED — carries an observation identity, not a reading"
+                    if migrated else
+                    "MUTABLE OBSERVATION IN CANONICAL IDENTITY"
+                    if (rel, key) in enforced else
+                    "CANDIDATE — signature present, not yet under an enforced rule"),
+                "enforced_by_rule": (rel, key) in enforced,
+                "remediation": (
+                    "none — already an observation reference" if migrated else
+                    f"replace the reading with the {owner} observation identity and write "
+                    f"the value to that programme's evidence surface"),
+                "observation_identities_available": sorted(by_key.get(owner, [])),
+            })
+    return rows
+
+
+# ---------------------------------------------------------------------------
+# UNIVERSAL OBSERVATION LINEAGE BOUNDARY — UCOS-OBSERVATION-UNIVERSE-001
+#
+# "Observation influence must never enter canonical identity, directly or through
+# derived values."
+#
+# The three guards that existed before this — OBS-INV-02 (declared keys), OBS-INV-07
+# (signature sweep) and RIB's own strip (_WORKING_TREE_MEASURES) — are the SAME KIND of
+# instrument: a vocabulary of leak NAMES. None of the six values that broke Phase 8 is
+# spelled like a leak; `gates_passed` is a perfectly innocent name for a contaminated
+# number. A name-based test can only find the leaks someone already thought of.
+#
+# So the boundary is measured two ways, neither of them lexical, and neither of them a
+# new pipeline:
+#
+#   OBS-INV-11  DIFFERENTIAL. Hold the commit fixed, vary a declared observation source,
+#               require the canonical projection to be byte-identical. It must EXECUTE a
+#               producer's projection function, which this engine may not do — it is
+#               stdlib-only so the constitutional gate workflows can run it, and running
+#               producers from here would make it a second execution engine. It is
+#               measured in the pytest stage of verify.sh, the same single pipeline.
+#   OBS-INV-12  Every producer holding canonical output declares the observation sources
+#               it actually reads. Measured HERE, by reading the producer's source with
+#               docstrings and comments removed — because three producers carry the words
+#               `coverage.xml` in prose describing a leak UCOS-CL-005 already closed, and
+#               a guard that cannot tell prose from a call site cries wolf.
+#   OBS-INV-13  Every canonical artifact proves its ancestry: the transitive closure of
+#               its input_closure, with every ancestor classified.
+# ---------------------------------------------------------------------------
+def _code_only(source: str) -> str:
+    """``source`` reduced to the string literals that could be a READ.
+
+    Two positions are blanked, both on the same principle: a token a module DECLARES is
+    not a token it reads.
+
+      * a docstring — three producers carry `coverage` prose describing a leak
+        UCOS-CL-005 already closed, and reading that as a call site is a false accusation;
+      * a string used as a DICTIONARY-LITERAL KEY — `{"total_coverage": ...}` names a
+        term; `data["total_coverage"]` reads one. The first is a declaration and is
+        blanked, the second is a Subscript and survives, which is what lets this engine
+        hold the detection vocabulary it is itself measured against.
+
+    Everything else stays, because `"--porcelain"` inside an argv list IS the read this
+    invariant exists to find. Blanking is span-precise and preserves line numbering, so a
+    future line-number report stays truthful.
+    """
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return source
+    spans: list[ast.Constant] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Dict):
+            spans.extend(
+                key for key in node.keys
+                if isinstance(key, ast.Constant) and isinstance(key.value, str)
+            )
+            continue
+        if not isinstance(node, ast.Module | ast.ClassDef | ast.FunctionDef
+                          | ast.AsyncFunctionDef):
+            continue
+        body = getattr(node, "body", None)
+        if body and isinstance(body[0], ast.Expr) and isinstance(body[0].value, ast.Constant):
+            if isinstance(body[0].value.value, str):
+                spans.append(body[0].value)
+
+    lines = source.splitlines()
+    for constant in spans:
+        start, end = constant.lineno - 1, (constant.end_lineno or constant.lineno) - 1
+        if start == end:
+            line = lines[start]
+            head, tail = line[: constant.col_offset], line[constant.end_col_offset :]
+            lines[start] = head + " " * (constant.end_col_offset - constant.col_offset) + tail
+            continue
+        lines[start] = lines[start][: constant.col_offset]
+        for number in range(start + 1, end):
+            lines[number] = ""
+        lines[end] = lines[end][constant.end_col_offset :]
+
+    return "\n".join(
+        "" if line.lstrip().startswith("#") else line for line in lines
+    )
+
+
+def observation_lineage_state(obs_decl, genreg):
+    """Measure the lineage boundary over every producer and canonical artifact.
+
+    Decides nothing — the verdicts are formed in `epoch5_invariants`. Returns what is
+    there, so the same numbers can appear in a violation list and in a dashboard without
+    being measured twice.
+    """
+    sources = obs_decl.get("observation_sources") or {}
+    patterns = {name: re.compile(spec["detect"]) for name, spec in sources.items()
+                if spec.get("detect")}
+    undetectable = sorted(name for name, spec in sources.items() if not spec.get("detect"))
+
+    declared = {d["producer"]: d for d in obs_decl.get("producer_observation_declarations", [])}
+    discharges = {"IDENTITY_REFERENCE", "RECOMPUTED", "INPUT_SELECTION", "NONE"}
+
+    # Every producer that holds CANONICAL output — read from the registry, never listed
+    # here, so a producer added tomorrow is measured the day it is declared.
+    canonical_producers = sorted({
+        e["producer"] for e in genreg["entries"]
+        if e.get("canonical_identity_role") == "CANONICAL" and e.get("producer")
+    })
+
+    undeclared, unreadable, bad_discharge = [], [], []
+    for producer in canonical_producers:
+        try:
+            with open(os.path.join(REPO, producer), encoding="utf-8") as fh:
+                code = _code_only(fh.read())
+        except OSError as exc:
+            unreadable.append(f"{producer}: {exc}")
+            continue
+        read = sorted(name for name, rx in patterns.items() if rx.search(code))
+        entry = declared.get(producer)
+        if entry is None:
+            if read:
+                undeclared.append(
+                    f"{producer}: reads {', '.join(read)} and declares no observation source"
+                )
+            continue
+        missing = sorted(set(read) - set(entry.get("sources") or []))
+        if missing:
+            undeclared.append(
+                f"{producer}: reads {', '.join(missing)}, which its declaration omits"
+            )
+        stale = sorted(set(entry.get("sources") or []) - set(read))
+        if stale:
+            undeclared.append(
+                f"{producer}: declares {', '.join(stale)} and no call site reads it"
+            )
+        for kind in entry.get("discharge") or ["<none>"]:
+            if kind not in discharges:
+                bad_discharge.append(f"{producer}: discharge {kind!r} is not a declared kind")
+        if read and set(entry.get("discharge") or []) == {"NONE"}:
+            bad_discharge.append(
+                f"{producer}: reads {', '.join(read)} and discharges NONE"
+            )
+
+    # --- ancestry: the transitive closure of every canonical artifact's inputs ---------
+    produced_by = {e["canonical_path"]: e for e in genreg["entries"]}
+    allowed = set(genreg["input_classifications"])
+    unclassified_ancestors, ancestry_cycles = [], []
+    ancestry_total = 0
+    for entry in genreg["entries"]:
+        if entry.get("canonical_identity_role") != "CANONICAL":
+            continue
+        target = entry["canonical_path"]
+        seen, frontier = set(), list(entry.get("input_closure") or [])
+        while frontier:
+            ancestor = frontier.pop()
+            if ancestor in seen:
+                continue
+            seen.add(ancestor)
+            if ancestor == target:
+                ancestry_cycles.append(f"{target}: is its own ancestor")
+                continue
+            producer_entry = produced_by.get(ancestor)
+            if producer_entry is not None:
+                frontier.extend(producer_entry.get("input_closure") or [])
+        ancestry_total += len(seen)
+        classification = entry.get("input_classification") or {}
+        for ancestor in sorted(seen):
+            owner = produced_by.get(ancestor)
+            # An ancestor is classified by the artifact that names it, or — where it is
+            # reached transitively — by the entry that produces it.
+            declared_class = classification.get(ancestor)
+            if declared_class is None and owner is not None:
+                declared_class = "GENERATED_DETERMINISTIC"
+            if declared_class is None:
+                continue  # a transitive ancestor of an unregistered input: not this rule
+            if declared_class not in allowed:
+                unclassified_ancestors.append(
+                    f"{target} <- {ancestor} ({declared_class})"
+                )
+
+    return {
+        "declared_sources": sorted(sources),
+        "undetectable_sources": undetectable,
+        "canonical_producers": canonical_producers,
+        "undeclared_reads": sorted(set(undeclared)),
+        "unreadable_producers": sorted(set(unreadable)),
+        "bad_discharge": sorted(set(bad_discharge)),
+        "ancestors_resolved": ancestry_total,
+        "unclassified_ancestors": sorted(set(unclassified_ancestors)),
+        "ancestry_cycles": sorted(set(ancestry_cycles)),
+    }
+
+
+# ---------------------------------------------------------------------------
+# CONSTITUTIONAL AUTHORITY ALIGNMENT — UCOS-CAA-001
+#
+# Seven instruments in this repository declared themselves "AUTHORED REPOSITORY TRUTH
+# … upstream of every engine that reads it", and not one named the authority it was
+# upstream UNDER. Each was right about what it authored; together they were seven roots,
+# and UCKP-ART-01 admits one. The same absence made the two duplications visible but
+# unmeasurable: the id-ledger and UCKP identity both mint, and this programme emits a
+# relationship graph while engine/uckp/graph.py declares what a relationship IS. Neither
+# was a rival implementation. Both were UNDECLARED SUBORDINATIONS, which is what a rival
+# looks like to anything that has to check.
+#
+# WHY THE MEASUREMENT LIVES HERE. This engine is the repository reality projection, and
+# every one of these is a measurement of repository reality. Measuring them here means
+# the gate `verify.sh` ALREADY runs (Stage 6b) enforces them: no new stage, no second
+# pipeline, no second criteria set. A separate gate for the invariants that forbid a
+# second authority would be a joke told with a straight face.
+#
+# WHY IT IS STDLIB-ONLY. This module may not import engine.uckp — the constitutional gate
+# workflows run it with a bare interpreter. So the law is not imported; it is READ, from
+# its one home, and the derivation contract is read from the binding, which
+# engine.uckp.alignment.verify_binding resolves against its own constants. Two readers,
+# one truth, and a test between them rather than two copies that can drift.
+# ---------------------------------------------------------------------------
+LAW_SOURCE = os.path.join(REPO, "engine", "uckp", "law.py")
+
+_LAW_ARTICLE_RE = re.compile(r'Article\(\s*"(UCKP-ART-\d+)"')
+_LAW_ID_RE = re.compile(r'^LAW_ID\s*=\s*"([^"]+)"', re.M)
+
+
+def read_root_law():
+    """The law id and article ids, read from the law's ONE home.
+
+    Not a copy. UCKP-ART-11 keeps the articles in code because a law whose only home is
+    a document is a law a document edit can repeal, so the honest way to check an
+    article reference from outside Layer Zero is to read that code. An unreadable or
+    article-free law yields an empty set, and every check that needs it then fails
+    closed rather than concluding compliance from an absent measurement.
+    """
+    try:
+        with open(LAW_SOURCE, encoding="utf-8") as fh:
+            source = fh.read()
+    except OSError:
+        return "", frozenset()
+    found = _LAW_ID_RE.search(source)
+    return (found.group(1) if found else ""), frozenset(_LAW_ARTICLE_RE.findall(source))
+
+
+def _load_quiet(abspath):
+    """Load JSON, distinguishing 'not an object' from 'could not be read'."""
+    try:
+        with open(abspath, encoding="utf-8") as fh:
+            return json.load(fh), None
+    except (OSError, ValueError) as exc:
+        return None, f"{type(exc).__name__}: {exc}"
+
+
+def scan_authority_claims(caa, paths):
+    """Every tracked JSON instrument that CLAIMS constitutional authority.
+
+    A claim is a top-level `authority` string matching none of the disclaiming tokens
+    the binding declares — and those tokens are not invented there either: they are the
+    non-constitutional classes UCOS-UCAF-001 already legislates for the executable plane.
+    Reusing that determination is UCKP-ART-18; restating it would be a second answer to
+    a question already answered.
+    """
+    scan = caa["authority_claim_scan"]
+    prefixes = tuple(p["prefix"].upper() for p in scan["disclaiming_prefixes"])
+    suffixes = tuple(scan["path_suffixes"])
+    key = scan["authority_key"]
+    claims, unreadable, scanned = {}, [], 0
+    for rel in paths:
+        if not rel.endswith(suffixes):
+            continue
+        doc, error = _load_quiet(os.path.join(REPO, rel))
+        if error is not None:
+            unreadable.append(f"{rel}: {error}")
+            continue
+        if not isinstance(doc, dict):
+            continue
+        value = doc.get(key)
+        if not isinstance(value, str):
+            continue
+        scanned += 1
+        if value.strip().upper().startswith(prefixes):
+            continue
+        claims[rel] = value
+    return claims, unreadable, scanned
+
+
+def alignment_state(caa, paths, ledger, rel_edges, evidence, obs_decl):
+    """Measure the alignment of every authority claim against the root law.
+
+    Returns the raw measurements. The verdicts are formed in `epoch5_invariants`, so
+    this function decides nothing — it only reads what is there, which is what lets the
+    same numbers appear in a violation list and in a dashboard without being computed
+    twice.
+    """
+    law_id, articles = read_root_law()
+    claims, unreadable, scanned = scan_authority_claims(caa, paths)
+    bound = {e["instrument"]: e for e in caa["subordinate_instruments"]}
+
+    # Each bound instrument, re-read from disk: the binding says where it stands, the
+    # instrument must say the same thing, and disagreement is the finding.
+    superiors, missing = {}, []
+    for rel in sorted(bound):
+        doc, error = _load_quiet(os.path.join(REPO, rel))
+        if error is not None or not isinstance(doc, dict):
+            missing.append(f"{rel}: bound instrument could not be read "
+                           f"({error or 'not an object'})")
+            continue
+        superiors[rel] = doc
+
+    derivation = caa["identity_authority_resolution"]["derivation"]
+    id_shape = re.compile(derivation["id_shape"])
+    # Composed from the DECLARED contract, never from a constant repeated here. The same
+    # three fields are what engine.uckp.alignment.verify_binding resolves against its own
+    # derivation, so the two readers cannot drift into two answers.
+    urn_stem = f"{derivation['urn_prefix']}:{derivation['namespace']}:"
+
+    # Every identifier the one mint has issued, from every map it declares.
+    plane = next(p for p in caa["identity_authority_resolution"]["planes"]
+                 if p["plane"] == "REPOSITORY_OBJECT")
+    identities, malformed = [], []
+    for map_name in plane["maps"]:
+        records = ledger.get(map_name)
+        if not isinstance(records, dict):
+            malformed.append(f"{map_name}: declared map is absent from the ledger")
+            continue
+        for rec in records.values():
+            for field in ("universal_id", "observation_id"):
+                value = rec.get(field)
+                if isinstance(value, str):
+                    identities.append(value)
+
+    # The derivation, recomputed over the whole population. Injectivity is a COUNT.
+    by_urn, unshaped = {}, []
+    for identifier in identities:
+        if not id_shape.match(identifier):
+            unshaped.append(f"{identifier}: does not match the declared identifier shape")
+            continue
+        by_urn.setdefault(urn_stem + identifier, set()).add(identifier)
+    collisions = [f"{urn}: derived by {', '.join(sorted(ids))}"
+                  for urn, ids in sorted(by_urn.items()) if len(ids) > 1]
+
+    # A second mint is a second counter, wherever it lives and whatever it calls itself.
+    markers = set(caa["identity_authority_resolution"]["mint_markers"])
+    declared_mint = caa["identity_authority_resolution"]["planes"]
+    mint_home = next(p["home"] for p in declared_mint if p["plane"] == "REPOSITORY_OBJECT")
+    rival_mints = []
+    for rel in paths:
+        if rel == mint_home or not rel.endswith(".json"):
+            continue
+        doc, error = _load_quiet(os.path.join(REPO, rel))
+        if error is not None or not isinstance(doc, dict):
+            continue
+        found = markers & set(doc)
+        if found:
+            rival_mints.append(f"{rel}: holds {', '.join(sorted(found))} — a second sequence")
+
+    return {
+        "law_id": law_id,
+        "law_articles": articles,
+        "claims": claims,
+        "unreadable": unreadable,
+        "claims_scanned": scanned,
+        "bound": bound,
+        "superiors": superiors,
+        "unreadable_bound": missing,
+        "identities": len(identities),
+        "identity_collisions": collisions,
+        "unshaped_identities": unshaped,
+        "malformed_maps": malformed,
+        "rival_mints": rival_mints,
+        "emitted_kinds": sorted({e["kind"] for e in rel_edges}),
+        "evidence_classes": sorted(evidence.get("evidence_classes") or {}),
+        "observation_kinds": obs_decl.get("observation_kinds") or {},
+    }
+
+
 # ---------------------------------------------------------------------------
 # EPOCH 5 — executable governance invariants
 # ---------------------------------------------------------------------------
 def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, retired,
                       obs_decl, obs_rows, obs_anonymous, obs_undeclared_kind,
-                      obs_value_findings, ledger):
-    """Evaluate all ten invariants. Every one is a real measurement over real state
-    and every one fails closed: an unmeasurable input is a violation, never a pass.
+                      obs_value_findings, ledger, obs_audit, caa, align, lineage):
+    """Evaluate every invariant. Each is a real measurement over real state and each
+    fails closed: an unmeasurable input is a violation, never a pass.
     """
     inv = []
 
@@ -677,6 +1150,9 @@ def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, re
     structural += [r["owner"] for r in decl["ownership_rules"]]
     structural += list(decl["lifecycle_states"])
     structural += [i["name"] for i in decl["invariants"]]
+    structural += [i["name"] for i in decl["alignment_invariants"]]
+    structural += sorted(caa["authority_roles"])
+    structural += sorted(caa["relationship_graph_resolution"]["relationship_kind_bindings"])
     structural += list(ID_CATEGORY.values())
     structural += sorted({e["object_class"] for e in entries})
     v = [f"{s}: contains '{t}'" for s in structural for t in tokens if t in s.lower()]
@@ -742,6 +1218,273 @@ def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, re
             v.append(f"{rec.get('observation_id')}: key {key!r} != {expected!r}")
     add("OBS-INV-06", "OBSERVATION_IDENTITY_IS_VALUE_INDEPENDENT", v,
         len(ledger.get("by_observation") or {}))
+
+    # OBS-07 — no canonical artifact carries a MUTABLE repository observation.
+    # Wider than OBS-INV-02: that one polices the enforced rule set over the Phase-8
+    # dimensions; this one polices the FORENSIC SWEEP over every declared canonical
+    # artifact, so a leak nobody has written a rule for still fails the gate.
+    v = [f"{r['artifact']}: {r['current_location']} ({r['observation_type']})"
+         for r in obs_audit if r["classification"].startswith("MUTABLE")]
+    add("OBS-INV-07", "CANONICAL_ARTIFACTS_CARRY_NO_MUTABLE_REPOSITORY_OBSERVATION", v,
+        len(obs_audit),
+        "Detection sweep, not the enforced rule set — see 00-BOOK/DATA/"
+        "canonical-observation-audit.json for every site and its classification.")
+
+    # OBS-08 — every observation holds a Universal Observation Identity, and every
+    # identity referenced by a canonical artifact resolves in the ledger.
+    minted = {r["observation_id"] for r in (ledger.get("by_observation") or {}).values()}
+    id_shape = re.compile(obs_decl["observation_id_shape"])
+    v = list(obs_anonymous)
+    for rel in obs_decl["canonical_scope"]["paths"]:
+        abspath = os.path.join(REPO, rel)
+        if not os.path.isfile(abspath):
+            continue
+        try:
+            with open(abspath, encoding="utf-8") as fh:
+                body = fh.read()
+        except OSError:
+            continue
+        for ref in sorted(set(id_shape.findall(body)) if id_shape.groups == 0
+                          else set()):
+            if ref not in minted:
+                v.append(f"{rel}: dangling observation reference {ref}")
+    add("OBS-INV-08", "EVERY_OBSERVATION_HAS_UNIVERSAL_OBSERVATION_IDENTITY", v,
+        len(minted),
+        "A reference that resolves to nothing is worse than the value it replaced.")
+
+    # OBS-09 — certification artifacts reference evidence, never embed it.
+    v = []
+    for r in obs_rows:
+        if r["canonical_admissibility"] == "FORBIDDEN" and not r.get("evidence_surface"):
+            v.append(f"{r['observation_id']}: forbidden in canonical identity but names "
+                     f"no evidence surface, so the reading would be LOST rather than moved")
+    add("OBS-INV-09", "CERTIFICATION_REFERENCES_EVIDENCE_NEVER_EMBEDS_IT", v, len(obs_rows),
+        "The remedy is relocation. An observation removed from identity with nowhere to "
+        "land is deletion of evidence, which is forbidden.")
+
+    # OBS-10 — an observation changing may not mutate canonical identity.
+    # Proven structurally: the identity a canonical artifact references is keyed on
+    # observer::subject::kind, so no reading can move it. OBS-06 proves the keys; this
+    # proves the CONSEQUENCE — every reference in a canonical artifact is such an id.
+    v = []
+    for rel in obs_decl["canonical_scope"]["paths"]:
+        for rule in obs_decl["forbidden_canonical_keys"]["rules"]:
+            if rule["artifact"] != rel:
+                continue
+            if any(f.startswith(f"{rel}:") and f".{rule['key']} " in f
+                   for f in obs_value_findings):
+                v.append(f"{rel}.{rule['key']} still moves with its reading")
+    add("OBS-INV-10", "OBSERVATION_CHANGE_DOES_NOT_MUTATE_CANONICAL_IDENTITY", v,
+        len(obs_decl["canonical_scope"]["paths"]))
+
+    # ---- Universal Observation Lineage Boundary --------------------------------
+    # OBS-INV-11 is DIFFERENTIAL and must execute a producer's projection function, so it
+    # is measured in the pytest stage of verify.sh rather than here: this engine is
+    # stdlib-only by constitutional design and running producers from it would make it a
+    # second execution engine. Its absence from this list is a declared division of
+    # labour, recorded in the register's `measured_by`, not a gap.
+
+    # OBS-12 — every producer declares the observation sources it actually reads
+    v = (list(lineage["undeclared_reads"]) + list(lineage["unreadable_producers"])
+         + list(lineage["bad_discharge"]))
+    v += [f"observation source {s} declares no `detect` pattern, so it is UNMEASURED"
+          for s in lineage["undetectable_sources"]]
+    add("OBS-INV-12", "EVERY_PRODUCER_DECLARES_THE_OBSERVATION_SOURCES_IT_READS",
+        sorted(set(v)), len(lineage["canonical_producers"]),
+        "Measured over the producer's SOURCE with docstrings, comments and "
+        "dictionary-literal keys blanked, and over the producers the generated-artifact "
+        "registry names rather than a list kept here. A token a module DECLARES is not a "
+        "token it reads: three producers describe an already-closed leak in prose, and "
+        "this engine holds the detection vocabulary itself as dict keys. A guard that "
+        "cannot tell a declaration from a call site reports violations that do not exist, "
+        "and an invariant that cries wolf gets suppressed. Both directions are checked — "
+        "an undeclared read AND a declared source no call site exercises, because a stale "
+        "declaration is a false assurance.")
+
+    # OBS-13 — every canonical artifact proves its ancestry
+    v = list(lineage["unclassified_ancestors"]) + list(lineage["ancestry_cycles"])
+    add("OBS-INV-13", "EVERY_CANONICAL_ARTIFACT_PROVES_ITS_ANCESTRY", sorted(set(v)),
+        lineage["ancestors_resolved"],
+        "A clean immediate input_closure says nothing about a contaminated grandparent. "
+        "Ancestry is walked transitively through the registry's own producer relation and "
+        "is DERIVED, never authored — a second copy of the dependency graph would be a "
+        "second answer to the same question.")
+
+    # ---- Constitutional Authority Alignment (UCOS-CAA-001) ----------------------
+    # The invariants that keep an eighth root from appearing. Each measures the
+    # binding against the law's own home and against the instruments themselves, so a
+    # subordination that is declared but not carried is a violation, not a courtesy.
+
+    roles = caa["authority_roles"]
+    bound = align["bound"]
+    law_articles = align["law_articles"]
+
+    def unknown_articles(candidates, prefix):
+        return [f"{prefix} names {a!r}, which engine/uckp/law.py does not declare"
+                for a in candidates if a not in law_articles]
+
+    # CAA-01 — exactly one supreme constitutional authority
+    supreme = caa["supreme_authority"]
+    may_hold = sorted(r for r, spec in roles.items() if spec.get("may_hold_authority"))
+    v = []
+    if not law_articles:
+        v.append("engine/uckp/law.py could not be read, so supremacy is UNMEASURED")
+    if may_hold != ["SUPREME"]:
+        v.append(f"roles that may hold authority: {may_hold or ['none']}")
+    elif roles["SUPREME"].get("cardinality") != "EXACTLY_ONE":
+        v.append("the supreme role does not declare cardinality EXACTLY_ONE")
+    if not align["law_id"] or supreme.get("id") != align["law_id"]:
+        v.append(f"the binding declares {supreme.get('id')!r} supreme; "
+                 f"engine/uckp/law.py declares {align['law_id']!r}")
+    if not os.path.isfile(os.path.join(REPO, supreme.get("home") or "")):
+        v.append(f"the declared home of the supreme authority does not exist: "
+                 f"{supreme.get('home')!r}")
+    v += [f"{rel}: holds role {e['role']}, which may hold authority"
+          for rel, e in sorted(bound.items()) if roles.get(e["role"], {}).get("may_hold_authority")]
+    add("CAA-INV-01", "EXACTLY_ONE_SUPREME_CONSTITUTIONAL_AUTHORITY", sorted(set(v)),
+        len(bound) + 1,
+        "The supreme authority is read from engine/uckp/law.py itself, not from a copy of "
+        "it. A binding that named a law the law does not hold would otherwise certify "
+        "against its own transcription.")
+
+    # CAA-02 — every authority claim names its constitutional superior
+    v = list(align["unreadable"])
+    v += [f"{rel}: claims authority and is bound to no superior — "
+          f"{align['claims'][rel].split('.')[0][:70]}"
+          for rel in sorted(align["claims"]) if rel not in bound]
+    v += [f"{rel}: bound as a subordinate and declares no authority claim"
+          for rel in sorted(bound) if rel not in align["claims"]]
+    add("CAA-INV-02", "EVERY_AUTHORITY_CLAIM_NAMES_ITS_CONSTITUTIONAL_SUPERIOR",
+        sorted(set(v)), align["claims_scanned"],
+        "Swept over every tracked JSON, not a chosen directory: a rival authority is most "
+        "useful to whoever writes it exactly where nobody is sweeping. An instrument that "
+        "disclaims authority needs no superior — it asserts nothing, so there is nothing "
+        "to derive — and the disclaiming tokens are the non-constitutional classes "
+        "UCOS-UCAF-001 already legislates rather than a set invented here.")
+
+    # CAA-03 — no subordinate instrument claims independent authority
+    v = list(align["unreadable_bound"])
+    for rel, entry in sorted(bound.items()):
+        doc = align["superiors"].get(rel)
+        if doc is None:
+            continue
+        superior = doc.get("constitutional_superior")
+        if not isinstance(superior, dict):
+            v.append(f"{rel}: carries no constitutional_superior block")
+            continue
+        if superior.get("authority") != align["law_id"]:
+            v.append(f"{rel}: names superior {superior.get('authority')!r}, "
+                     f"not {align['law_id']!r}")
+        if superior.get("role") != entry["role"]:
+            v.append(f"{rel}: declares role {superior.get('role')!r}; the binding "
+                     f"declares {entry['role']!r}")
+        declared = list(superior.get("articles") or [])
+        if declared != list(entry["derives_under"]):
+            v.append(f"{rel}: declares articles {declared}; the binding declares "
+                     f"{list(entry['derives_under'])}")
+        v += unknown_articles(set(declared) | set(entry["derives_under"]), rel)
+    add("CAA-INV-03", "NO_SUBORDINATE_INSTRUMENT_CLAIMS_INDEPENDENT_AUTHORITY",
+        sorted(set(v)), len(bound),
+        "Both directions are checked. A binding that says an instrument is subordinate "
+        "while the instrument says nothing is a claim about a file rather than a "
+        "property of it, and it would pass a one-sided check unchanged.")
+
+    # CAA-04 — exactly one identity authority
+    identity = caa["identity_authority_resolution"]
+    mint = next(p for p in identity["planes"] if p["plane"] == "REPOSITORY_OBJECT")
+    v = (list(align["malformed_maps"]) + list(align["unshaped_identities"])
+         + list(align["identity_collisions"]) + list(align["rival_mints"]))
+    if not os.path.isfile(os.path.join(REPO, mint["home"])):
+        v.append(f"the one declared mint does not exist: {mint['home']}")
+    v += unknown_articles([identity["one_authority"].split(" ")[0]], "the identity authority")
+    if not align["identities"]:
+        v.append("the declared maps hold no identity, so the derivation is UNMEASURED")
+    add("CAA-INV-04", "EXACTLY_ONE_IDENTITY_AUTHORITY", sorted(set(v)),
+        align["identities"],
+        "Not an assertion that there is one mint — a recomputation of the derivation over "
+        "every identifier all three declared maps hold, plus a sweep for a second counter "
+        "anywhere in the tree. Injectivity is a count, and every id is carried through "
+        "verbatim, so a pass here is also the proof that no identifier was rewritten.")
+
+    # CAA-05 — exactly one relationship graph model owner
+    graph_res = caa["relationship_graph_resolution"]
+    kind_bindings = graph_res["relationship_kind_bindings"]
+    owner = graph_res["model_owner"]
+    v = unknown_articles([owner["authority"]], "the relationship model owner")
+    if not os.path.isfile(os.path.join(REPO, owner["home"])):
+        v.append(f"the declared relationship model owner does not exist: {owner['home']}")
+    for kind in align["emitted_kinds"]:
+        binding = kind_bindings.get(kind)
+        if not isinstance(binding, dict):
+            v.append(f"{kind}: emitted by this projection and bound to no class of the model")
+            continue
+        v += [f"{kind}: binding declares no {field}"
+              for field in ("uckp_class", "uckp_relation", "direction")
+              if not binding.get(field)]
+        v += unknown_articles([binding.get("article")], f"relationship kind {kind}")
+    v += [f"{kind}: bound in the register and emitted by nothing"
+          for kind in sorted(set(kind_bindings) - set(align["emitted_kinds"]))]
+    add("CAA-INV-05", "EXACTLY_ONE_RELATIONSHIP_GRAPH_MODEL_OWNER", sorted(set(v)),
+        len(align["emitted_kinds"]),
+        "The emitted kinds are read off the graph this run actually produced, never off a "
+        "declared list — a projection that quietly emits an eighth kind is the case worth "
+        "catching, and a list of six would report six either way.")
+
+    # CAA-06 — evidence and observation remain separate truths
+    separation = caa["evidence_observation_separation"]
+    classes = set(align["evidence_classes"])
+    v = []
+    for truth in ("identity_truth", "observation_truth", "evidence_truth", "decision_truth"):
+        spec = separation.get(truth)
+        if not isinstance(spec, dict):
+            v.append(f"{truth}: not declared, so the separation is incomplete")
+            continue
+        v += unknown_articles([spec.get("article"), *(spec.get("also") or [])], truth)
+    if len(classes) != 5:
+        v.append(f"the evidence universe declares {len(classes)} classes; "
+                 "the set is closed at five")
+    for kind, spec in sorted(align["observation_kinds"].items()):
+        if spec.get("evidence_class") not in classes:
+            v.append(f"observation kind {kind} binds to evidence class "
+                     f"{spec.get('evidence_class')!r}, which is not one of the five")
+    if "observation_kinds" in evidence:
+        v.append("the evidence register declares observation kinds — the subjects have merged")
+    if "evidence_classes" in obs_decl:
+        v.append("the observation register declares evidence classes — the subjects have merged")
+    v += [f"separation rule {r.get('id')} names no measurement"
+          for r in separation["separation_rules"] if not r.get("measured_by")]
+    add("CAA-INV-06", "EVIDENCE_AND_OBSERVATION_REMAIN_SEPARATE_TRUTHS", sorted(set(v)),
+        len(align["observation_kinds"]),
+        "The separation was already drawn by two registers; what it lacked was an article "
+        "making it binding. UCKP-ART-13 is that article: a reading taken outside the commit "
+        "boundary is not an input the commit contains, so admitting one into a canonical "
+        "digest destroys the fixed point by construction.")
+
+    # CAA-07 — no instrument declares a rival object model
+    model = caa["object_model"]
+    v = unknown_articles([model["article"]], "the object model")
+    if not os.path.isfile(os.path.join(REPO, model["home"])):
+        v.append(f"the declared object model home does not exist: {model['home']}")
+    for role, spec in sorted(roles.items()):
+        v += unknown_articles([spec.get("article"), *([spec["also"]] if spec.get("also") else [])],
+                              f"role {role}")
+    for rel, doc in sorted(align["superiors"].items()):
+        if "object_classes" not in doc:
+            continue
+        declared = doc.get("object_model")
+        if not isinstance(declared, dict):
+            v.append(f"{rel}: declares object classes and names no object model")
+            continue
+        if model["model"] not in str(declared.get("model") or ""):
+            v.append(f"{rel}: names object model {declared.get('model')!r}, not {model['model']}")
+        if declared.get("home") != model["home"]:
+            v.append(f"{rel}: homes the object model at {declared.get('home')!r}, "
+                     f"not {model['home']}")
+    add("CAA-INV-07", "NO_INSTRUMENT_DECLARES_A_RIVAL_OBJECT_MODEL", sorted(set(v)),
+        len(roles) + len(align["superiors"]),
+        "A class list that cites no model reads exactly like a second model. This does not "
+        "forbid object classes — it requires the instrument that declares them to say which "
+        "model they project, which is the difference between an extension and a rival.")
 
     return inv
 
@@ -838,6 +1581,7 @@ def build(mint: bool):
     genreg = _load(GENREG_PATH)
     evidence = _load(EVIDENCE_PATH)
     obs_decl = _load(OBSERVATION_PATH)
+    caa = _load(CAA_PATH)
     artifacts = _load(ARTIFACTS_PATH, {"artifacts": []})
 
     registered_docs = {a["path"] for a in artifacts.get("artifacts", [])}
@@ -898,15 +1642,10 @@ def build(mint: bool):
     obs_rows, obs_anonymous, obs_undeclared_kind = epoch_observation_universe(
         ledger, obs_decl, mint, now)
     obs_value_findings = scan_canonical_for_observation_values(obs_decl)
+    obs_audit = canonical_observation_audit(obs_decl, genreg, ledger)
 
-    invariants = epoch5_invariants(entries, objects, genreg, evidence, decl,
-                                   audit_events, retired, obs_decl, obs_rows,
-                                   obs_anonymous, obs_undeclared_kind,
-                                   obs_value_findings, ledger)
-    observation, deviations, plans, evolution = epochs6_9(entries, invariants,
-                                                          objects, retired)
-
-    # EPOCH 4 — relationship graph
+    # EPOCH 4 — relationship graph. Derived BEFORE the invariants because CAA-INV-05
+    # measures the kinds this run actually emitted, not a list of the kinds it means to.
     rel_edges = []
     for e in entries:
         uid = e["universal_id"] or e["path"]
@@ -920,14 +1659,25 @@ def build(mint: bool):
             rel_edges.append({"from": uid, "kind": "produces", "to": p})
     rel_edges.sort(key=lambda r: (r["from"], r["kind"], r["to"]))
 
-    return dict(decl=decl, ledger=ledger, objects=objects, entries=entries,
+    align = alignment_state(caa, paths, ledger, rel_edges, evidence, obs_decl)
+    lineage = observation_lineage_state(obs_decl, genreg)
+
+    invariants = epoch5_invariants(entries, objects, genreg, evidence, decl,
+                                   audit_events, retired, obs_decl, obs_rows,
+                                   obs_anonymous, obs_undeclared_kind,
+                                   obs_value_findings, ledger, obs_audit, caa, align,
+                                   lineage)
+    observation, deviations, plans, evolution = epochs6_9(entries, invariants,
+                                                          objects, retired)
+
+    return dict(decl=decl, ledger=ledger, objects=objects, entries=entries, caa=caa,
                 minted=minted, anonymous=anonymous, retired=retired, unknown=unknown,
                 audit_events=audit_events, invariants=invariants,
                 observation=observation, deviations=deviations, plans=plans,
                 evolution=evolution, rel_edges=rel_edges, genreg=genreg,
                 registered_docs=registered_docs, now=now,
                 obs_decl=obs_decl, obs_rows=obs_rows,
-                obs_value_findings=obs_value_findings)
+                obs_value_findings=obs_value_findings, obs_audit=obs_audit)
 
 
 def emit(st):
@@ -975,9 +1725,17 @@ def emit(st):
     w("audit", {**hdr, "epoch": "3 — Audit Universe", "evidence_class": "AUDIT",
                 "count": len(st["audit_events"]), "events": st["audit_events"]})
 
+    graph_res = st["caa"]["relationship_graph_resolution"]
     w("graph", {**hdr, "epoch": "4 — Relationship Graph",
+                "model_owner": graph_res["model_owner"],
+                "standing": "PROJECTION. This surface measures the repository-object edge "
+                            "POPULATION. It declares no relationship class: what a "
+                            "relationship IS lives in engine/uckp/graph.py under "
+                            "UCKP-ART-07, and every kind below binds to a class of that "
+                            "model in 00-BOOK/DATA/constitutional-authority-alignment.json.",
                 "relationship_kinds": ["owned_by", "produced_by", "depends_on",
                                        "produces", "validated_by", "evidenced_by"],
+                "kind_bindings": graph_res["relationship_kind_bindings"],
                 "count": len(st["rel_edges"]), "relationships": st["rel_edges"]})
 
     passed = sum(1 for i in st["invariants"] if i["result"] == "PASS")
@@ -986,6 +1744,19 @@ def emit(st):
                      "passed": passed, "total": len(st["invariants"]),
                      "result": "PASS" if passed == len(st["invariants"]) else "FAIL",
                      "invariants": st["invariants"]})
+
+    open_rows = [r for r in st["obs_audit"]
+                 if r["classification"].startswith("MUTABLE")]
+    w("obs_audit", {**hdr, "phase": "1 — Forensic Inventory of mutable observations in "
+                                    "canonical identity",
+                    "authority_binding": "UCOS-OBSERVATION-UNIVERSE-001",
+                    "swept": "every CANONICAL .json entry in the generated-artifact registry, "
+                             "against the wider OBSERVATION_SIGNATURES detection set — not "
+                             "only the keys an enforced rule already names, so an "
+                             "unidentified leak is a measurement and never a surprise.",
+                    "total_sites": len(st["obs_audit"]),
+                    "open_violations": len(open_rows),
+                    "entries": st["obs_audit"]})
 
     w("observations", {**hdr, "epoch": "Observation Universe — Observation Truth, held apart from Identity Truth",
                        "authority_binding": "UCOS-OBSERVATION-UNIVERSE-001",

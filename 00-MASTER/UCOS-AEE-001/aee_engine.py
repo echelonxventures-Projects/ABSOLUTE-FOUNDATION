@@ -1691,7 +1691,11 @@ def emit(decl: dict, model: dict) -> list[Path]:
     state.write_text(canonical_json(canonical_model(model)), "utf-8")
     written.append(state)
     ledger = HERE / decl["learning"]["ledger"]
-    ledger.write_text(canonical_json(model["learning"]), "utf-8")
+    # Through the SAME projection as aee.json. The learning ledger was written straight
+    # from the runtime model, so it kept `residue_total` after the state file had been
+    # cleaned — the forensic sweep in 00-BOOK/DATA/canonical-observation-audit.json found
+    # it. One projection, applied at every canonical write, or the leak simply moves.
+    ledger.write_text(canonical_json(canonical_model(model)["learning"]), "utf-8")
     written.append(ledger)
     EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
     index = EVIDENCE_DIR / "aee-evidence-index.json"

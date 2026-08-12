@@ -1171,9 +1171,9 @@
   ],
   "evidence_manifest": {
     "assimilation_baseline": {
-      "bytes": 9317261,
+      "bytes": 9317315,
       "relative": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
-      "sha256": "77a1158843a569232fd42368b2d5f03b366ada10747d84dacfbb0a7182fc36c8"
+      "sha256": "68ffba46ab06db0385b46c1e67dbb4ba8c56f970c6ade901a431377ae701fcdb"
     },
     "export::31b621b2cecc55e8": {
       "bytes": 351,
@@ -1275,7 +1275,7 @@
       "subject": "EXPORT-ARCHIVE"
     }
   ],
-  "head_commit": "c087882c",
+  "head_commit": "3c1644ab",
   "program": "UKAP-001",
-  "seal_sha256": "0c742ad481b6857dd52622d9e5ca3e5a17fef9c0a555286ba3cc3c6fa58c4262"
+  "seal_sha256": "fc5ab8c459073795b1ed633862fa80a3ccdffff4daa18381623e6528c66795b8"
 }

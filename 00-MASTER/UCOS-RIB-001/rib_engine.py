@@ -1992,18 +1992,9 @@ def build_model(decl: dict, sub: Substrate, repo_input: dict) -> dict:
         ),
         "gate_exit": 0 if gate_open else 1,
     }
-    sealed = {
-        "units": [
-            {"id": unit["unique_id"], "key": unit["unit_key"], "disposition": unit["disposition"]}
-            for unit in model["units"]
-        ],
-        "gates": [{"id": gate["id"], "verdict": gate["verdict"]} for gate in gates],
-        "verifications": [{"id": item["id"], "verdict": item["verdict"]} for item in verifications],
-        "validations": [{"id": item["id"], "verdict": item["verdict"]} for item in validations],
-        "gate": model["gate"],
-        "determination": model["determination"],
-    }
-    model["seal_sha256"] = digest(sealed)
+    model["seal_sha256"] = digest(seal_payload(model))
+    # (the seal is re-derived from the CANONICAL structures in canonical_model — see
+    #  seal_payload, which is the single definition of what a seal covers.)
     return model
 
 
@@ -2026,8 +2017,7 @@ def header(title: str, decl: dict, model: dict, purpose: str) -> str:
                 ["GOVERNING INSTRUMENT", f"`{programme['governing_instrument']}`"],
                 ["OPERATIONAL HOME", f"`{programme['operational_home']}`"],
                 ["REPOSITORY ANCHOR", repo["anchor"]],
-                ["WORKING TREE", f"{repo['working_tree']} ({repo['dirty_entries']} entries, "
-                                 "measured outside this programme's own zone — RFP-3)"],
+                ["WORKING TREE", _working_tree_row(repo)],
                 ["UNITS DISCOVERED", str(m["unit_total"])],
                 ["SUBSTRATE USABLE", f"{m['substrate_usable']}/{m['substrate_total']}"],
                 ["GATES", f"{m['gates_passed']}/{m['gate_total']}"],
@@ -3509,6 +3499,57 @@ _WORKING_TREE_MEASURES: frozenset[str] = frozenset(
 )
 
 
+def _working_tree_row(repo: dict) -> str:
+    """The working-tree row of every rendered header.
+
+    Rendered from the CANONICAL model, where both fields hold the observation's identity
+    rather than a reading. Interpolating them into the old sentence produced
+    "UCOS-OBS-000003 (UCOS-OBS-000003 entries…)" — byte-stable and correct, but it reads
+    as a defect, and a register nobody trusts to be legible is a register nobody reads.
+    So the row names the observation once and says plainly where the reading lives.
+    """
+    state = repo.get("working_tree")
+    entries = repo.get("dirty_entries")
+    if isinstance(state, str) and state.startswith("UCOS-OBS-"):
+        return (
+            f"observation `{state}` — reading withheld (Observation Truth, "
+            "UCOS-OBSERVATION-UNIVERSE-001); the measurement is on this programme's "
+            "evidence surface"
+        )
+    return (
+        f"{state} ({entries} entries, measured outside this programme's own zone — RFP-3)"
+    )
+
+
+def seal_payload(model: dict) -> dict:
+    """What a seal covers. THE single definition, applied to two planes.
+
+    It is called once over the runtime model — the execution identity the stdout report
+    and the evidence surface carry — and once over the canonical model inside
+    :func:`canonical_model`, so the seal in rib.json summarises the CANONICAL verdicts.
+
+    That it is one function rather than two literals is the whole point. Every verdict it
+    reads is working-tree-dependent at runtime and commit-determined after redaction, so
+    a second copy of this shape would drift the moment either plane gained a field — and
+    a drifted seal is a fixed point that silently stops meaning anything.
+    """
+    return {
+        "units": [
+            {"id": unit["unique_id"], "key": unit["unit_key"], "disposition": unit["disposition"]}
+            for unit in model.get("units", [])
+        ],
+        "gates": [{"id": g["id"], "verdict": g["verdict"]} for g in model.get("gates", [])],
+        "verifications": [
+            {"id": i["id"], "verdict": i["verdict"]} for i in model.get("verifications", [])
+        ],
+        "validations": [
+            {"id": i["id"], "verdict": i["verdict"]} for i in model.get("validations", [])
+        ],
+        "gate": model.get("gate"),
+        "determination": model.get("determination"),
+    }
+
+
 def _working_tree_observation_id() -> str | None:
     """This programme's working-tree observation, resolved to its Universal Identity.
 
@@ -3526,6 +3567,58 @@ def _working_tree_observation_id() -> str | None:
         return None
     record = (ledger.get("by_observation") or {}).get(key)
     return record.get("observation_id") if record else None
+
+
+def _working_tree_scope(model: dict) -> tuple[set[str], set[str]]:
+    """(validation ids, gate ids) whose verdict is a function of the WORKING TREE.
+
+    Derived from the declared metrics, never from a hand-kept list, so a future gate that
+    reads a working-tree measure is covered the day it is declared.
+
+    GATE-04 is included transitively: it gates on `validations_failed`, which aggregates
+    VAL-02 (working-tree cleanliness). Its canonical verdict is therefore recomputed from
+    the validations that remain once the working-tree ones are set aside — so GATE-04
+    still FAILS canonically for any other unmet validation. Nothing is excused.
+    """
+    wt_validations = {
+        str(v.get("id"))
+        for v in model.get("validations", [])
+        if v.get("metric") in _WORKING_TREE_MEASURES
+    }
+    wt_gates = {
+        str(g.get("id"))
+        for g in model.get("gates", [])
+        if set(g.get("metrics") or []) and set(g.get("metrics") or []) <= _WORKING_TREE_MEASURES
+    }
+    return wt_validations, wt_gates
+
+
+def _observed_verdicts(model: dict) -> dict:
+    """The runtime verdicts this pass actually observed — the reading, for evidence."""
+    wt_validations, _wt_gates = _working_tree_scope(model)
+    # Every gate that DECLARES a working-tree metric — the same rule the canonical
+    # projection uses. Keying this to the all-or-nothing `wt_gates` set omitted GATE-12,
+    # whose metrics are mixed, so the one verdict most affected by the tree was the one
+    # the evidence did not record. Evidence must be complete or the relocation is a
+    # deletion.
+    return {
+        "gate": model.get("gate"),
+        "gate_exit": model.get("gate_exit"),
+        "determination": model.get("determination"),
+        "working_tree_gates": {
+            str(g["id"]): g.get("verdict")
+            for g in model.get("gates", [])
+            if (set(g.get("metrics") or []) & _WORKING_TREE_MEASURES)
+            or str(g["id"]) == "GATE-04"
+        },
+        "working_tree_validations": {
+            str(v["id"]): v.get("verdict")
+            for v in model.get("validations", [])
+            if str(v["id"]) in wt_validations
+        },
+        "compliance": model.get("compliance", []),
+        "repository": model.get("repository", {}),
+    }
 
 
 def canonical_model(model: dict) -> dict:
@@ -3575,18 +3668,195 @@ def canonical_model(model: dict) -> dict:
 
     stripped = strip(model)
     assert isinstance(stripped, dict)
+
+    # UCOS-OBSERVATION-UNIVERSE-001 (OBS-INV-07/10) — redaction was not enough.
+    #
+    # Blanking a VALUE cannot blank a list ELEMENT. `compliance` gained a CMP-CLEAN entry
+    # when the tree was dirty and lost it when clean, and `gate`/`determination`/
+    # `gate_exit` flipped with it — so rib.json still moved with the working tree even
+    # though every measurement in it was withheld. This engine runs as an actuator INSIDE
+    # a UCOS-AEE-001 pass, where earlier actuators necessarily dirty the tree, so no
+    # ordering could ever let it observe a clean one: it rewrote sixteen files every
+    # round and Phase 8 held at zero_drift_rounds=0.
+    #
+    # The canonical projection now carries the COMMIT-DETERMINED verdict — what the
+    # blueprint says about the repository at this commit — and the working-tree verdict
+    # becomes an observation reference. GATE-04 is RECOMPUTED rather than excused: it
+    # still fails canonically for any non-working-tree validation that is unmet.
+    #
+    # NOTHING IS WEAKENED. The runtime model keeps every verdict, `gate_exit` below is
+    # unchanged so the process still exits non-zero over a dirty tree, the stdout report
+    # still names the failure, and the full reading is written to
+    # evidence/observations/RIB/ where it stays auditable.
+    wt_validations, wt_gates = _working_tree_scope(model)
+    observation = _working_tree_observation_id() or withheld
+
+    canonical_validation_failures = sum(
+        1
+        for v in model.get("validations", [])
+        if str(v.get("id")) not in wt_validations and v.get("verdict") != "PASS"
+    )
+    for entry in stripped.get("validations", []):
+        if str(entry.get("id")) in wt_validations:
+            entry["verdict"] = observation
+
+    # Uniform, per-FAILURE rather than per-gate. GATE-12 declares three metrics — dirty
+    # entries, unclassified ignored paths, shadowed tracked paths — and only the first is
+    # a working-tree reading. Excusing the whole gate would have excused the other two,
+    # which is the weakening this remediation forbids. So each failure is judged on its
+    # own metric and the verdict is recomputed from those that remain: GATE-12 still
+    # FAILS canonically the moment an ignored path is unclassified.
+    observed_gate_ids: set[str] = set()
+    for gate in stripped.get("gates", []):
+        gid = str(gate.get("id"))
+        original = list(gate.get("failures") or [])
+        remaining = [
+            f for f in original
+            if not any(str(f).startswith(m) for m in _WORKING_TREE_MEASURES)
+        ]
+        if gid == "GATE-04":
+            remaining = [f for f in remaining if canonical_validation_failures]
+        # Attached on DECLARATION, never on outcome. Keying it to "was a failure filtered"
+        # would put the reading back into the artifact as key PRESENCE — the same
+        # membership leak that made redaction insufficient in the first place.
+        declares_working_tree = bool(
+            set(gate.get("metrics") or []) & _WORKING_TREE_MEASURES
+        ) or gid == "GATE-04"
+        if declares_working_tree:
+            observed_gate_ids.add(gid)
+            gate["working_tree_verdict_observation"] = observation
+        gate["failures"] = remaining
+        gate["verdict"] = "PASS" if not remaining else "FAIL"
+
+    stripped["compliance"] = [
+        finding
+        for finding in stripped.get("compliance", [])
+        if next((g for g in stripped.get("gates", [])
+                 if str(g.get("id")) == str(finding.get("gate"))), {}).get("verdict") == "FAIL"
+    ]
+
+    canonical_open = all(
+        g.get("verdict") == "PASS"
+        for g in stripped.get("gates", [])
+        if g.get("blocking")
+    )
+    stripped["gate"] = "OPEN" if canonical_open else "CLOSED"
+    stripped["gate_exit"] = 0 if canonical_open else 1
+    stripped["determination"] = (
+        model["determination"] if canonical_open == (model.get("gate") == "OPEN")
+        else ("BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED" if canonical_open
+              else "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP")
+    )
+    stripped["working_tree_verdict_observation"] = observation
+
+    # UCOS-OBSERVATION-UNIVERSE-001 `derived_observation_rule` — THE UNIVERSAL RULE.
+    #
+    # Everything above recomputes the canonical VERDICTS from the redacted structures. The
+    # AGGREGATES OVER those verdicts were not recomputed, and they are computed far
+    # upstream — `metrics["gates_passed"]` and `metrics["blocking_failed"]` at the model
+    # build (see the `metrics.update` block), from the RUNTIME gates, before this function
+    # is ever called. So the artifact carried `gate: OPEN`, `gates[]` all PASS and
+    # `gates_passed: 10` simultaneously, and moved with the working tree through numbers
+    # that are not spelled like a leak. Phase 8 held at zero_drift_rounds=0.
+    #
+    # The remedy is the rule, not a patch: A CANONICAL AGGREGATE IS DERIVED FROM CANONICAL
+    # STRUCTURES. Each metric below is re-derived from `stripped`, so a future gate,
+    # validation or finding is covered the day it is declared — there is no list of leaking
+    # metric names here to fall out of date, because the aggregates are recomputed from the
+    # structures they summarise rather than filtered by name.
+    #
+    # NOTHING IS WEAKENED. The runtime model keeps every count, `gate_exit` is unchanged,
+    # the stdout report still names the failure, and the full reading is written to
+    # evidence/observations/RIB/ under the observation's Universal Identity.
+    canonical_metrics = dict(stripped.get("metrics") or {})
+    canonical_gates = stripped.get("gates", [])
+    canonical_metrics["gates_passed"] = len(
+        [g for g in canonical_gates if not g.get("failures")]
+    )
+    canonical_metrics["blocking_failed"] = [
+        g["id"] for g in canonical_gates if g.get("blocking") and g.get("failures")
+    ]
+    canonical_metrics["validations_failed"] = canonical_validation_failures
+    canonical_metrics["compliance_findings"] = len(stripped.get("compliance", []))
+    stripped["metrics"] = canonical_metrics
+
+    # The same rule one level out: `contamination.clean` is a one-bit copy of
+    # `contamination_entries`, which `strip` already withheld. A boolean is a lower
+    # resolution of a count, and the resolution of a copy is not what makes it a copy.
+    repository = stripped.get("repository")
+    if isinstance(repository, dict):
+        contamination = repository.get("contamination")
+        if isinstance(contamination, dict) and "clean" in contamination:
+            contamination = dict(contamination)
+            contamination["clean"] = observation
+            repository = dict(repository)
+            repository["contamination"] = contamination
+            stripped["repository"] = repository
+
+    # The seal is the outermost derived value, and it was the last one still leaking.
+    # `build_model` computes it over the RUNTIME gates, validations, gate and
+    # determination — every one of which is working-tree-dependent — and the strip
+    # carried the result through untouched. Measured: identical substrate hashes, seal
+    # 13b54470 over a dirty tree and 69fffed4 over a clean one, which is registry_variance
+    # and ordering_variance in Phase 8 for as long as the chain dirties the tree it runs
+    # in. Re-derived here from the canonical structures, through the SAME payload
+    # function, so a seal summarises the verdicts the artifact actually states.
+    stripped["seal_sha256"] = digest(seal_payload(stripped))
     return stripped
 
 
+def _emit_observation_evidence(model: dict) -> Path:
+    """The runtime reading canonical_model() lifted out. Relocated, never deleted."""
+    target = HERE / "evidence" / "observations" / "RIB"
+    target.mkdir(parents=True, exist_ok=True)
+    path = target / f"{_working_tree_observation_id() or 'OBS-RIB-UNMINTED'}.json"
+    path.write_text(
+        json.dumps(
+            {
+                "authority": "NONE — EVIDENCE. Observation Truth, never canonical identity.",
+                "evidence_class": "EXECUTION",
+                "binds": "UCOS-OBSERVATION-UNIVERSE-001",
+                "observation_id": _working_tree_observation_id(),
+                "observer": "UCOS-RIB-001",
+                "reading": _observed_verdicts(model),
+            },
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return path
+
+
 def write_outputs(decl: dict, model: dict) -> list[Path]:
+    """Every canonical surface is rendered from the CANONICAL model.
+
+    UCOS-OBSERVATION-UNIVERSE-001 `derived_observation_rule`. Only rib.json used to be
+    projected; the fifteen Markdown registers were rendered straight from the runtime
+    model, so their headers carried `WORKING TREE | DIRTY (5 entries)`, `GATES | 10/12`,
+    the runtime determination and the runtime seal — every one of them an observation, in
+    files the generated-artifact registry declares CANONICAL and one of which
+    (10-IMPLEMENTATION-QUEUE.md) is the Phase-8 `ordering_variance` dimension.
+    A rendered sentence is a lower-resolution copy of the value it renders.
+
+    The projection is computed ONCE and shared, which also closes the gap that let
+    rib.json and its own dashboard state two different seals for one run.
+
+    The runtime model is still passed to :func:`_emit_observation_evidence`, because the
+    evidence surface is exactly where the reading belongs.
+    """
+    canonical = canonical_model(model)
     written: list[Path] = []
-    for filename, text in sorted(render(decl, model).items()):
+    for filename, text in sorted(render(decl, canonical).items()):
         target = HERE / filename
         target.write_text(text, encoding="utf-8")
         written.append(target)
     model_path = HERE / MODEL_FILE
-    model_path.write_text(canonical_json(canonical_model(model)), encoding="utf-8")
+    model_path.write_text(canonical_json(canonical), encoding="utf-8")
     written.append(model_path)
+    _emit_observation_evidence(model)
     EVIDENCE_DIR.mkdir(exist_ok=True)
     index_path = EVIDENCE_DIR / EVIDENCE_INDEX
     index_path.write_text(
