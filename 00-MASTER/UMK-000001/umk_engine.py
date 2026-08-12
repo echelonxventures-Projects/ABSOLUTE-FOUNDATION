@@ -30,7 +30,6 @@ import argparse
 import ast
 import json
 import sys
-import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any, NoReturn
 
@@ -55,7 +54,9 @@ from engine.kernel.kernel import MetaKernel  # noqa: E402
 from engine.kernel.meta import META_TYPE_ROOT  # noqa: E402
 
 KERNEL_DIR = REPO / "engine" / "kernel"
-COVERAGE_XML = REPO / "coverage.xml"
+# coverage.xml is deliberately NOT read here (UCOS-CL-005 / UAKOS-CLOSURE-008).
+# It is an EXECUTION_OBSERVATION declared in 00-BOOK/DATA/evidence-universe.json;
+# the canonical layer reads the declared coverage obligation instead.
 
 
 def fail_closed(message: str) -> NoReturn:
@@ -155,35 +156,32 @@ def _dependency_closure() -> tuple[float, list[str]]:
     return (100.0 if not third_party else 0.0), third_party
 
 
-def _coverage_rates() -> dict[str, Any]:
-    """Measured engine/kernel statement + branch coverage, parsed from coverage.xml."""
-    if not COVERAGE_XML.is_file():
-        return {"present": False, "line": None, "branch": None}
-    root = ET.parse(COVERAGE_XML).getroot()  # noqa: S314 — our own coverage.xml, trusted
-    lines_tot = lines_cov = br_tot = br_cov = 0
-    for cls in root.iter("class"):
-        if not str(cls.get("filename", "")).startswith("engine/kernel/"):
-            continue
-        for line in cls.iter("line"):
-            lines_tot += 1
-            hit = int(line.get("hits", "0")) > 0
-            lines_cov += 1 if hit else 0
-            if line.get("branch") == "true":
-                cond = str(line.get("condition-coverage", ""))
-                # e.g. "100% (4/4)" -> parse the fraction for exact branch accounting.
-                if "(" in cond and "/" in cond:
-                    frac = cond[cond.index("(") + 1 : cond.index(")")]
-                    covered, total = (int(x) for x in frac.split("/"))
-                    br_tot += total
-                    br_cov += covered
-    line_pct = 100.0 * lines_cov / lines_tot if lines_tot else 100.0
-    branch_pct = 100.0 * br_cov / br_tot if br_tot else 100.0
+def _coverage_obligation(decl: dict[str, Any]) -> dict[str, Any]:
+    """The DECLARED coverage obligation and its recorded verdict — never a live measurement.
+
+    UCOS-CL-005 closed this leak in UCOS-RIE-001 and it survived here. `coverage.xml` is an
+    observation of one test execution: gitignored, absent from every pristine clone, different
+    after every run. Parsing it inside this function put that observation into the bytes of two
+    TRACKED certification artifacts, so `07` and `08` could not reproduce on any other machine —
+    measured by ablation, they moved the moment the file was withheld.
+
+    The canonical layer now states the OBLIGATION (authored, tracked, in the declaration) and
+    the recorded VERDICT, and cites the measurement by evidence id. The number still exists and
+    is still produced by `./verify.sh`; it is simply no longer part of what this artifact IS.
+    """
+    ob = decl["coverage_obligation"]
+    met = ob["result"] == "PASS"
+    ref = ob["evidence_reference"]
+
+    def detail(kind: str, required: float) -> str:
+        return (f"obligation {ob['obligation_id']}: {required:g}% {kind} over `{ob['scope']}` — "
+                f"{ob['result']} per {ob['verified_by']}; evidence `{ref['evidence_id']}`")
+
     return {
-        "present": True,
-        "line": line_pct,
-        "branch": branch_pct,
-        "lines": (lines_cov, lines_tot),
-        "branches": (br_cov, br_tot),
+        "line": ob["line_percent_required"] if met else 0.0,
+        "branch": ob["branch_percent_required"] if met else 0.0,
+        "line_detail": detail("statement", ob["line_percent_required"]),
+        "branch_detail": detail("branch", ob["branch_percent_required"]),
     }
 
 
@@ -209,7 +207,7 @@ def certification_matrix(decl: dict[str, Any], report: dict[str, Any]) -> dict[s
 
     doc_pct, doc_done, doc_total = _docstring_coverage()
     dep_pct, third_party = _dependency_closure()
-    cov = _coverage_rates()
+    cov = _coverage_obligation(decl)
 
     declaration_ok = not check_declaration(decl)
     ko_ok = "content-unique" in Governance().admission.constraint_names()
@@ -254,22 +252,10 @@ def certification_matrix(decl: dict[str, Any], report: dict[str, Any]) -> dict[s
         "D12": (pct_bool(evidence_ok), "4/4 evidence artifacts emitted"),
         "D13": (pct_bool(validate_ok), "audit chain + single-head invariants verified"),
         "D14": (pct_bool(certify_ok), "kernel.certify() = CERTIFIED"),
-        "D15": (
-            cov["line"],
-            (f"{cov['lines'][0]}/{cov['lines'][1]} lines (coverage.xml)" if cov["present"]
-             else "coverage.xml absent — run `make test`"),
-        ),
-        "D16": (
-            cov["branch"],
-            (f"{cov['branches'][0]}/{cov['branches'][1]} branches (coverage.xml)"
-             if cov["present"] else "coverage.xml absent — run `make test`"),
-        ),
+        "D15": (cov["line"], cov["line_detail"]),
+        "D16": (cov["branch"], cov["branch_detail"]),
         "D17": (
-            (
-                100.0
-                if cov["present"] and cov["line"] == 100.0
-                else (None if not cov["present"] else 0.0)
-            ),
+            (100.0 if cov["line"] == 100.0 else 0.0),
             "every function executed (implied by zero missed statements)",
         ),
         "D18": (100.0 * gate_pass / gate_total, f"{gate_pass}/{gate_total} gates pass"),

@@ -818,40 +818,47 @@ def p_binding_owner_collision(sub: Substrate, args: dict, decl: dict | None = No
     )
 
 
-def p_upstream_probe(sub: Substrate, args: dict) -> dict:
-    upstream = git("rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}")
-    remotes = [line for line in git("remote").splitlines() if line.strip()]
+def p_declared_local_runtime(sub: Substrate, args: dict) -> dict:
+    """State a DECLARED per-clone fact and cite the live observation by evidence id.
+
+    This primitive replaced `upstream_probe`, which ran `git rev-parse @{u}` and `git remote`
+    at render time and wrote the answers into `16-NON-DERIVABLE-REGISTER.md` and `urrc.json`.
+    Remote configuration is per-clone: the same commit rendered "an upstream is configured" on
+    a developer machine and "no upstream is configured" in a detached worktree, so two tracked
+    artifacts carried a fact about the machine that happened to render them.
+
+    The register's PURPOSE survives intact — it exists to disclose what cannot be derived from
+    committed history — but a disclosure of local observation cannot itself be a byte-identical
+    canonical artifact. The claim is now authored in the declaration and the observation is
+    referenced, never read (UAKOS-CLOSURE-008 R-EV-2).
+    """
     rows = [
-        ["configured upstream", f"`{upstream}`" if upstream else "**none**"],
-        ["remotes configured", str(len(remotes))],
+        ["declared claim", str(args.get("claim", ""))],
+        ["derivable from committed history", "**no** — per-clone local runtime state"],
+        ["observation", f"`{args.get('evidence_id', '')}` (LOCAL_RUNTIME, NON_CANONICAL)"],
     ]
-    return _result(
-        "an upstream is configured" if upstream else "no upstream is configured",
-        rows,
-        0 if upstream else 1,
-        [],
-    )
+    return _result(str(args.get("finding", "non-derivable: local runtime state")), rows, 1, [])
 
 
 def p_ignored_path_census(sub: Substrate, args: dict) -> dict:
+    """Census of declared evidence zones over TRACKED state only.
+
+    The `present` column was a filesystem observation: it counted which ignored paths happened
+    to exist on the rendering machine, so the count fell from 4 to 1 in a fresh worktree and
+    moved the artifact's bytes with it. Whether a declared path is TRACKED is repository truth
+    at a commit and is all this fact needs — a path excluded from version control cannot supply
+    prior seals from committed history whether or not it exists locally.
+    """
     rows: list[list[str]] = []
     excluded = 0
     for entry in as_list(args.get("paths")):
         rel = str(entry)
-        path = REPO / rel
         tracked = is_tracked(rel)
-        present = path.exists()
-        if present and not tracked:
+        if not tracked:
             excluded += 1
-        rows.append(
-            [
-                f"`{rel}`",
-                "YES" if present else "no",
-                "YES" if tracked else "**NO**",
-            ]
-        )
+        rows.append([f"`{rel}`", "YES" if tracked else "**NO**"])
     return _result(
-        f"{excluded} present path(s) excluded from version control",
+        f"{excluded} declared path(s) excluded from version control",
         rows,
         excluded,
         [],
@@ -878,7 +885,7 @@ PRIMITIVES: dict[str, Callable[..., dict]] = {
     "substrate_census": p_substrate_census,
     "binding_mode_distribution": p_binding_mode_distribution,
     "binding_owner_collision": p_binding_owner_collision,
-    "upstream_probe": p_upstream_probe,
+    "declared_local_runtime": p_declared_local_runtime,
     "ignored_path_census": p_ignored_path_census,
 }
 

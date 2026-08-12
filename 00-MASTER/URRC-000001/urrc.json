@@ -2635,20 +2635,24 @@
       "unknown": false
     },
     {
-      "count": 0,
+      "count": 1,
       "evidence": [],
-      "headline": "an upstream is configured",
+      "headline": "non-derivable: upstream configuration is local runtime state",
       "id": "DV-57",
-      "primitive": "upstream_probe",
-      "purpose": "Counted probe: whether the branch carrying the constitutional baseline has any configured off-machine upstream.",
+      "primitive": "declared_local_runtime",
+      "purpose": "Declared fact: whether the branch carrying the constitutional baseline has a configured off-machine upstream is per-clone local runtime state, not committed history.",
       "rows": [
         [
-          "configured upstream",
-          "`origin/integration/recovery-001`"
+          "declared claim",
+          "upstream configuration is per-clone git config, absent from the object database"
         ],
         [
-          "remotes configured",
-          "1"
+          "derivable from committed history",
+          "**no** — per-clone local runtime state"
+        ],
+        [
+          "observation",
+          "`URRC-000001/EV-UPSTREAM-001` (LOCAL_RUNTIME, NON_CANONICAL)"
         ]
       ],
       "unknown": false
@@ -2656,29 +2660,25 @@
     {
       "count": 4,
       "evidence": [],
-      "headline": "4 present path(s) excluded from version control",
+      "headline": "4 declared path(s) excluded from version control",
       "id": "DV-58",
       "primitive": "ignored_path_census",
       "purpose": "Counted probe: declared evidence zones excluded from version control, so prior seals cannot be reproduced from committed history alone.",
       "rows": [
         [
           "`00-MASTER/UER-000001/evidence`",
-          "YES",
           "**NO**"
         ],
         [
           "`00-MASTER/UCCEP-000000/evidence`",
-          "YES",
           "**NO**"
         ],
         [
           "`00-MASTER/UCCEP-000007/evidence`",
-          "YES",
           "**NO**"
         ],
         [
           "`00-MASTER/UAKOS-CLOSURE-002/closure.json`",
-          "YES",
           "**NO**"
         ]
       ],

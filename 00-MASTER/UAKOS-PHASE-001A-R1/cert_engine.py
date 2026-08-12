@@ -22,7 +22,6 @@ from __future__ import annotations
 import hashlib
 import json
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -33,7 +32,6 @@ CLOSURE_PATH = REPO / "00-MASTER" / "UAKOS-CLOSURE-002" / "closure.json"
 PB = json.loads(PROV_PATH.read_text("utf-8"))
 CLOSURE = json.loads(CLOSURE_PATH.read_text("utf-8"))
 CONCEPTS = {c["id"]: c for c in CLOSURE["concepts"]}
-NOW = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 BASE = PB["closure_baseline"]
 PROV = {p["id"]: p for p in PB["provenance"]}
 
@@ -199,8 +197,8 @@ def hdr(title, answers):
             f"> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · "
             f"closure baseline `{BASE['commit']}` (branch `{BASE['branch']}`) · "
             f"corrected Authoritative-Origin model (Phase-001B) · "
-            f"AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · generated `{NOW}` "
-            f"by `cert_engine.py`.\n>\n> {answers}\n>\n"
+            f"AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · derived from "
+            f"provenance baseline `{BASE['commit']}` by `cert_engine.py`.\n>\n> {answers}\n>\n"
             f"> Reproduce: `python3 00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py`.\n\n")
 
 

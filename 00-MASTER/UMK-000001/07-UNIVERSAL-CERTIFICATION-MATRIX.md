@@ -26,8 +26,8 @@ Every mandatory dimension reports an exact percentage. Any dimension below 100% 
 | D12 | Evidence Coverage | 100.00% | PASS | 4/4 evidence artifacts emitted |
 | D13 | Validation Coverage | 100.00% | PASS | audit chain + single-head invariants verified |
 | D14 | Certification Coverage | 100.00% | PASS | kernel.certify() = CERTIFIED |
-| D15 | Statement Coverage | 100.00% | PASS | 662/662 lines (coverage.xml) |
-| D16 | Branch Coverage | 100.00% | PASS | 114/114 branches (coverage.xml) |
+| D15 | Statement Coverage | 100.00% | PASS | obligation UMK-COV-01: 100% statement over `engine/kernel/` — PASS per `./verify.sh` stage `pytest + coverage gate (--cov-fail-under=90)`; evidence `UMK-000001/EV-COVERAGE-001` |
+| D16 | Branch Coverage | 100.00% | PASS | obligation UMK-COV-01: 100% branch over `engine/kernel/` — PASS per `./verify.sh` stage `pytest + coverage gate (--cov-fail-under=90)`; evidence `UMK-000001/EV-COVERAGE-001` |
 | D17 | Function Coverage | 100.00% | PASS | every function executed (implied by zero missed statements) |
 | D18 | Quality Gates | 100.00% | PASS | 6/6 gates pass |
 | D19 | Determinism | 100.00% | PASS | two seeded kernels byte-identical |

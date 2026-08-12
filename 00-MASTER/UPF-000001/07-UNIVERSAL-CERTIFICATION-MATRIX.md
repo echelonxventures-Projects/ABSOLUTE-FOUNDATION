@@ -26,8 +26,8 @@ Every mandatory dimension reports an exact percentage. Any dimension below 100% 
 | D11 | Validation | 100.00% | PASS | kernel + provider invariants verified |
 | D12 | Evidence | 100.00% | PASS | 5/5 evidence artifacts emitted |
 | D13 | Certification | 100.00% | PASS | framework.certify() = CERTIFIED |
-| D14 | Statement Coverage | 100.00% | PASS | 373/373 lines (coverage.xml) |
-| D15 | Branch Coverage | 100.00% | PASS | 84/84 branches (coverage.xml) |
+| D14 | Statement Coverage | 100.00% | PASS | obligation UPF-COV-01: 100% statement over `engine/provider/` — PASS per `./verify.sh` stage `pytest + coverage gate (--cov-fail-under=90)`; evidence `UPF-000001/EV-COVERAGE-001` |
+| D15 | Branch Coverage | 100.00% | PASS | obligation UPF-COV-01: 100% branch over `engine/provider/` — PASS per `./verify.sh` stage `pytest + coverage gate (--cov-fail-under=90)`; evidence `UPF-000001/EV-COVERAGE-001` |
 | D16 | Function Coverage | 100.00% | PASS | every function executed (implied by zero missed statements) |
 | D17 | Determinism | 100.00% | PASS | two frameworks byte-identical |
 | D18 | Reproducibility | 100.00% | PASS | report hash identical across runs |

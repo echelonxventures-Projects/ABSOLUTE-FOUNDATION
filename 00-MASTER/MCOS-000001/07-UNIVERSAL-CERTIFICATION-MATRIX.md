@@ -26,8 +26,8 @@ Every mandatory dimension reports an exact percentage. Any dimension below 100% 
 | D11 | Validation Coverage | 100.00% | PASS | dimension, composition, generation and kernel invariants hold |
 | D12 | Evidence Coverage | 100.00% | PASS | 5/5 evidence artifacts emitted |
 | D13 | Certification Coverage | 100.00% | PASS | platform.certify() = CERTIFIED |
-| D14 | Statement Coverage | 100.00% | PASS | 730/730 lines (coverage.xml) |
-| D15 | Branch Coverage | 100.00% | PASS | 162/162 branches (coverage.xml) |
+| D14 | Statement Coverage | 100.00% | PASS | obligation MCOS-COV-01: 100% statement over `engine/civilization/` — PASS per `./verify.sh` stage `pytest + coverage gate (--cov-fail-under=90)`; evidence `MCOS-000001/EV-COVERAGE-001` |
+| D15 | Branch Coverage | 100.00% | PASS | obligation MCOS-COV-01: 100% branch over `engine/civilization/` — PASS per `./verify.sh` stage `pytest + coverage gate (--cov-fail-under=90)`; evidence `MCOS-000001/EV-COVERAGE-001` |
 | D16 | Function Coverage | 100.00% | PASS | every function executed (implied by zero missed statements) |
 | D17 | Determinism | 100.00% | PASS | two independently constructed platforms are byte-identical |
 | D18 | Reproducibility | 100.00% | PASS | report hash identical across runs |

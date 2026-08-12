@@ -85,16 +85,17 @@
 
 **Counted probe**
 
-**`DV-57`** — Counted probe: whether the branch carrying the constitutional baseline has any configured off-machine upstream.
+**`DV-57`** — Declared fact: whether the branch carrying the constitutional baseline has a configured off-machine upstream is per-clone local runtime state, not committed history.
 
-- **Primitive** — `upstream_probe`
-- **Result** — an upstream is configured
+- **Primitive** — `declared_local_runtime`
+- **Result** — non-derivable: upstream configuration is local runtime state
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
 |---|---|
-| configured upstream | `origin/integration/recovery-001` |
-| remotes configured | 1 |
+| declared claim | upstream configuration is per-clone git config, absent from the object database |
+| derivable from committed history | **no** — per-clone local runtime state |
+| observation | `URRC-000001/EV-UPSTREAM-001` (LOCAL_RUNTIME, NON_CANONICAL) |
 
 ## N-05 — Reproduction of prior authorization seals from committed history alone.
 
@@ -108,15 +109,15 @@
 **`DV-58`** — Counted probe: declared evidence zones excluded from version control, so prior seals cannot be reproduced from committed history alone.
 
 - **Primitive** — `ignored_path_census`
-- **Result** — 4 present path(s) excluded from version control
+- **Result** — 4 declared path(s) excluded from version control
 - **Substrate evidence** — none (probe over the repository)
 
-| Key | Value | Detail |
-|---|---|---|
-| `00-MASTER/UER-000001/evidence` | YES | **NO** |
-| `00-MASTER/UCCEP-000000/evidence` | YES | **NO** |
-| `00-MASTER/UCCEP-000007/evidence` | YES | **NO** |
-| `00-MASTER/UAKOS-CLOSURE-002/closure.json` | YES | **NO** |
+| Key | Value |
+|---|---|
+| `00-MASTER/UER-000001/evidence` | **NO** |
+| `00-MASTER/UCCEP-000000/evidence` | **NO** |
+| `00-MASTER/UCCEP-000007/evidence` | **NO** |
+| `00-MASTER/UAKOS-CLOSURE-002/closure.json` | **NO** |
 
 ## What is refused, and why that is the honest result
 

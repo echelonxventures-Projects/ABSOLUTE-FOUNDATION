@@ -82,4 +82,17 @@ PY="${PYTHON:-python3}"
 "$PY" -m intelligence.research    build >/dev/null
 "$PY" -m intelligence.publication build >/dev/null
 
-echo "generated prerequisites: knowledge · determinism-evidence · closure phases 1-3 · research · publication" >&2
+# UCOS-GOV-FOUNDATION — the provenance baseline belongs here for the same reason, and its
+# absence is a harder failure than a drop in coverage: UAKOS-PHASE-001A-R1 READS
+# `00-MASTER/UAKOS-PHASE-001B/provenance.json` at module import and cannot render without it.
+# The file is excluded from version control by the same 00-MASTER GPR-001 rule as every other
+# engine JSON state, so a pristine clone had no way to obtain it — all twelve of that
+# programme's tracked registers, including 00-FINAL-CONSTITUTIONAL-BASELINE-CERTIFICATION.md,
+# stood on a generated input that nothing in the declared bootstrap produced.
+#
+# GENERATED_INPUT_HAS_PRODUCER_AND_BOOTSTRAP now refuses that declaration, and this line is
+# what discharges it. It runs AFTER the closure phases because the provenance engine reads
+# `00-MASTER/UAKOS-CLOSURE-002/closure.json`, which phase 1 above produces.
+"$PY" 00-MASTER/UAKOS-PHASE-001B/provenance_engine.py >/dev/null
+
+echo "generated prerequisites: knowledge · determinism-evidence · closure phases 1-3 · research · publication · provenance" >&2

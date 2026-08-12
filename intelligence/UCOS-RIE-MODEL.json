@@ -10207,12 +10207,14 @@
         "ExcludedPath",
         "Finding",
         "GeneratedArtifact",
+        "GeneratedInput",
         "GraphError",
         "GraphNode",
         "IntelligenceConfigurationError",
         "IntelligenceCycle",
         "ModuleFact",
         "OwnershipRecord",
+        "ProducerHome",
         "Recommendation",
         "RecommendationAction",
         "RecommendationError",
@@ -10267,6 +10269,8 @@
         "evidence",
         "gate",
         "generated_artifacts",
+        "generated_input_for",
+        "generated_inputs",
         "graph",
         "implementation_capabilities",
         "load",
@@ -10277,6 +10281,7 @@
         "parse",
         "parse_config",
         "paths_for_owner",
+        "producer_homes",
         "producer_of",
         "recommendation",
         "reconcile_owner_view",
@@ -10288,6 +10293,7 @@
         "sort_findings",
         "strongly_connected_components",
         "substrate",
+        "unregistered_paths",
         "validate",
         "validate_report",
         "validation",
@@ -13366,7 +13372,7 @@
   ],
   "capability_count": 121,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "8868380614e697686ab6e744e636317510f797add04c379dcb3499849e1af86e",
+  "content_hash": "079d5a0828f2a0497ee37d79b21465499a0aa1a116464add2a80925aa0f8f891",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -13570,7 +13576,7 @@
           "test_functions": 119
         },
         "platform": {
-          "loc": 124702,
+          "loc": 124892,
           "root": "platform",
           "source_files": 445,
           "test_files": 335,
@@ -13584,7 +13590,7 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 317564,
+      "total_loc": 317754,
       "total_tests": 12954
     },
     "corpus": {

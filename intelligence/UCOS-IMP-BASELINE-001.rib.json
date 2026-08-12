@@ -10207,12 +10207,14 @@
         "ExcludedPath",
         "Finding",
         "GeneratedArtifact",
+        "GeneratedInput",
         "GraphError",
         "GraphNode",
         "IntelligenceConfigurationError",
         "IntelligenceCycle",
         "ModuleFact",
         "OwnershipRecord",
+        "ProducerHome",
         "Recommendation",
         "RecommendationAction",
         "RecommendationError",
@@ -10267,6 +10269,8 @@
         "evidence",
         "gate",
         "generated_artifacts",
+        "generated_input_for",
+        "generated_inputs",
         "graph",
         "implementation_capabilities",
         "load",
@@ -10277,6 +10281,7 @@
         "parse",
         "parse_config",
         "paths_for_owner",
+        "producer_homes",
         "producer_of",
         "recommendation",
         "reconcile_owner_view",
@@ -10288,6 +10293,7 @@
         "sort_findings",
         "strongly_connected_components",
         "substrate",
+        "unregistered_paths",
         "validate",
         "validate_report",
         "validation",
@@ -13365,7 +13371,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "5d8ea6a09d7c75efabff552a7589e8490b83b5bb35899cd63f07a7359bccb0ef",
+  "content_hash": "244306247cb466003e745ba83d71799b099b124eb2d815603029f323cd9b3565",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -13761,7 +13767,7 @@
           "test_functions": 119
         },
         "platform": {
-          "loc": 124702,
+          "loc": 124892,
           "root": "platform",
           "source_files": 445,
           "test_files": 335,
@@ -13775,7 +13781,7 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 317564,
+      "total_loc": 317754,
       "total_tests": 12954
     },
     "corpus": {

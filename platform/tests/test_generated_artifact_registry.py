@@ -245,12 +245,42 @@ def test_canonical_safe_inputs_excludes_unknown() -> None:
 # --- CANONICAL_ARTIFACT_INPUT_CLASSIFICATION (UAKOS-CLOSURE-008) --------------------------
 
 
+def _evidence_universe(repo: Path) -> None:
+    """A minimal evidence universe, so an evidence check has a register to consult."""
+    (repo / "00-BOOK" / "DATA").mkdir(parents=True, exist_ok=True)
+    (repo / "00-BOOK" / "DATA" / "evidence-universe.json").write_text(
+        json.dumps(
+            {
+                "schema": "ucos-evidence-universe",
+                "evidence_classes": dict.fromkeys(
+                    ["AUDIT", "DEBUG", "IMPROVEMENT", "EXECUTION", "VALIDATION"], "x"
+                ),
+                "surfaces": [
+                    {
+                        "surface_id": "EV-TEST",
+                        "path_pattern": "programme/evidence/*",
+                        "evidence_class": "EXECUTION",
+                        "owner": "PROGRAMME",
+                        "producer": "programme/engine.py",
+                        "retention": "PRESERVED",
+                        "input_classification": "EXECUTION_TRANSCRIPT",
+                        "canonical_identity_role": "NON_CANONICAL",
+                        "may_affect_certification": False,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+
 def _one_entry_registry(repo: Path, entry: dict) -> Path:
     (repo / "00-BOOK" / "DATA").mkdir(parents=True, exist_ok=True)
     (repo / REGISTRY_PATH).write_text(
         json.dumps({"schema": "ucos-generated-artifact-registry", "entries": [entry]}),
         encoding="utf-8",
     )
+    _evidence_universe(repo)
     return repo
 
 

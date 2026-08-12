@@ -41,11 +41,12 @@ kept. What it may not do is claim to be repository truth.
 from __future__ import annotations
 
 import json
+import subprocess
 from collections.abc import Iterable
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
-from platform.repository_intelligence import validation_records
+from platform.repository_intelligence import evidence_universe, validation_records
 
 REGISTRY_PATH = "00-BOOK/DATA/generated-artifact-registry.json"
 
@@ -58,12 +59,28 @@ EXECUTION_OBSERVATION_CLASSIFICATIONS: frozenset[str] = (
 
 #: Every input of every declared artifact carries one of these.
 INPUT_CLASSIFICATIONS: frozenset[str] = (
-    frozenset({"TRACKED_DETERMINISTIC", "ENVIRONMENTAL", "OPERATIONAL", "EXTERNAL", "UNKNOWN"})
+    frozenset(
+        {
+            "TRACKED_DETERMINISTIC",
+            "GENERATED_DETERMINISTIC",
+            "ENVIRONMENTAL",
+            "OPERATIONAL",
+            "EXTERNAL",
+            "UNKNOWN",
+        }
+    )
     | EXECUTION_OBSERVATION_CLASSIFICATIONS
 )
 
 #: Classifications a *canonical* artifact may depend on. UNKNOWN is absent by design.
-CANONICAL_SAFE_INPUTS: frozenset[str] = frozenset({"TRACKED_DETERMINISTIC"})
+#:
+#: ``GENERATED_DETERMINISTIC`` is admitted on ONE condition, enforced below: the input must be
+#: declared in ``generated_inputs`` with a producer and a bootstrap path. Without that it is an
+#: input a pristine clone cannot obtain, which is how 114 artifacts came to depend on trees
+#: whose creation lived only inside one stage of one shell script.
+CANONICAL_SAFE_INPUTS: frozenset[str] = frozenset(
+    {"TRACKED_DETERMINISTIC", "GENERATED_DETERMINISTIC"}
+)
 
 #: The roles that place an artifact OUTSIDE canonical identity. ``EXCLUDED`` says the artifact
 #: is not part of the corpus at all; ``NON_CANONICAL`` says it is kept and referenced but makes
@@ -119,13 +136,78 @@ def _artifact(raw: dict) -> GeneratedArtifact:
     )
 
 
+@dataclass(frozen=True)
+class GeneratedInput:
+    """A generated file a producer READS. Declared so a pristine clone can obtain it."""
+
+    path: str
+    producer: str
+    bootstrap_command: str
+    bootstrap_stage: str
+    tracked: bool
+    deterministic: bool
+
+    @property
+    def bootstrap_complete(self) -> bool:
+        """A stage that says it is not in the bootstrap is a gap, not a path."""
+        return bool(self.bootstrap_stage) and "NOT IN THE BOOTSTRAP" not in self.bootstrap_stage
+
+    def covers(self, path: str) -> bool:
+        return path == self.path or (self.path.endswith("/") and path.startswith(self.path))
+
+
+@dataclass(frozen=True)
+class ProducerHome:
+    """A programme directory and the split between what is authored and what is emitted."""
+
+    owner: str
+    home: str
+    producer: str
+    authored_inputs: tuple[str, ...]
+
+
 @lru_cache(maxsize=8)
 def load(repo: Path) -> tuple[GeneratedArtifact, ...]:
     """Every declared artifact, canonical and environmental alike."""
-    doc = json.loads((Path(repo) / REGISTRY_PATH).read_text(encoding="utf-8"))
+    doc = _document(Path(repo))
     return tuple(
         _artifact(raw) for raw in [*doc.get("entries", []), *doc.get("environmental_artifacts", [])]
     )
+
+
+@lru_cache(maxsize=8)
+def _document(repo: Path) -> dict:
+    return json.loads((Path(repo) / REGISTRY_PATH).read_text(encoding="utf-8"))
+
+
+def generated_inputs(repo: Path) -> tuple[GeneratedInput, ...]:
+    return tuple(
+        GeneratedInput(
+            path=str(raw.get("path", "")),
+            producer=str(raw.get("producer", "")),
+            bootstrap_command=str(raw.get("bootstrap_command", "")),
+            bootstrap_stage=str(raw.get("bootstrap_stage", "")),
+            tracked=bool(raw.get("tracked", False)),
+            deterministic=bool(raw.get("deterministic", False)),
+        )
+        for raw in _document(Path(repo)).get("generated_inputs", [])
+    )
+
+
+def producer_homes(repo: Path) -> tuple[ProducerHome, ...]:
+    return tuple(
+        ProducerHome(
+            owner=str(raw.get("owner", "")),
+            home=str(raw.get("home", "")),
+            producer=str(raw.get("producer", "")),
+            authored_inputs=tuple(raw.get("authored_inputs", ())),
+        )
+        for raw in _document(Path(repo)).get("producer_homes", [])
+    )
+
+
+def generated_input_for(repo: Path, path: str) -> GeneratedInput | None:
+    return next((g for g in generated_inputs(Path(repo)) if g.covers(path)), None)
 
 
 # --- derived views ----------------------------------------------------------------------
@@ -212,6 +294,10 @@ def validate(repo: Path) -> list[str]:
                     f"{a.canonical_path}: CANONICAL artifact declares a {klass} input "
                     f"({inp!r}) — canonical identity may not depend on non-tracked state"
                 )
+            elif klass == "GENERATED_DETERMINISTIC":
+                findings.extend(_check_generated_input(repo, a, inp))
+            if klass in EXECUTION_OBSERVATION_CLASSIFICATIONS:
+                findings.extend(_check_evidence_input(repo, a, inp, klass))
         if a.canonical and a.environmental_dependencies:
             findings.append(
                 f"{a.canonical_path}: CANONICAL artifact declares environmental "
@@ -219,6 +305,110 @@ def validate(repo: Path) -> list[str]:
             )
         if a.canonical and not a.deterministic:
             findings.append(f"{a.canonical_path}: CANONICAL artifact is not deterministic")
+    return findings
+
+
+def _check_generated_input(repo: Path, a: GeneratedArtifact, inp: str) -> list[str]:
+    """GENERATED_INPUT_HAS_PRODUCER_AND_BOOTSTRAP.
+
+    A generated input is admissible into canonical identity only if a pristine clone can
+    OBTAIN it: someone produces it, and a named bootstrap path runs that producer. Measured
+    consequence of the alternative: 114 artifacts depended on four generated trees whose
+    creation existed only inside stage 1b of verify.sh, and a clone that skipped that stage
+    rendered different bytes — or, for UCDA, refused to render at all.
+    """
+    declared = generated_input_for(repo, inp)
+    if declared is None:
+        return [
+            f"{a.canonical_path}: GENERATED_DETERMINISTIC input {inp!r} is not declared in "
+            f"generated_inputs — a generated input with no declared producer is an input a "
+            f"pristine clone cannot obtain"
+        ]
+    findings = []
+    if not declared.producer:
+        findings.append(f"{a.canonical_path}: generated input {inp!r} declares no producer")
+    if not declared.bootstrap_command:
+        findings.append(
+            f"{a.canonical_path}: generated input {inp!r} declares no bootstrap_command"
+        )
+    if a.canonical and not declared.bootstrap_complete:
+        findings.append(
+            f"{a.canonical_path}: CANONICAL artifact consumes generated input {inp!r} whose "
+            f"bootstrap path is incomplete ({declared.bootstrap_stage!r}) — a clone running the "
+            f"declared bootstrap would not have it"
+        )
+    return findings
+
+
+def _check_evidence_input(repo: Path, a: GeneratedArtifact, inp: str, klass: str) -> list[str]:
+    """EVIDENCE_INPUT_MUST_BE_DECLARED and CERTIFICATION_EVIDENCE_CLASS.
+
+    Evidence may support truth; it may not arrive from a surface nobody declared, and a
+    diagnosis or an improvement measurement may never reach a certification outcome.
+    """
+    try:
+        surface = evidence_universe.surface_for(repo, inp)
+    except FileNotFoundError:
+        return [
+            f"{a.canonical_path}: input {inp!r} is classified {klass} but "
+            f"{evidence_universe.REGISTRY_PATH} is absent — the class of an evidence input "
+            f"cannot be checked against a register that does not exist"
+        ]
+    if surface is None:
+        return [
+            f"{a.canonical_path}: input {inp!r} is classified {klass} but resolves to no "
+            f"declared evidence surface — see {evidence_universe.REGISTRY_PATH}"
+        ]
+    findings = []
+    if surface.canonical_identity_role != evidence_universe.REQUIRED_IDENTITY_ROLE:
+        findings.append(
+            f"{a.canonical_path}: evidence surface {surface.surface_id} is not "
+            f"{evidence_universe.REQUIRED_IDENTITY_ROLE}"
+        )
+    if (
+        a.certification_role
+        and a.certification_role not in {"NONE", "QUALITY_GATE_ONLY"}
+        and surface.evidence_class in evidence_universe.CERTIFICATION_FORBIDDEN_CLASSES
+    ):
+        findings.append(
+            f"{a.canonical_path}: certification artifact ({a.certification_role}) consumes a "
+            f"{surface.evidence_class} surface ({surface.surface_id}) — R-EV-4"
+        )
+    return findings
+
+
+def unregistered_paths(repo: Path) -> list[str]:
+    """EVERY_CANONICAL_ARTIFACT_REGISTERED, over every declared producer home.
+
+    A tracked file inside a declared home is one of three things: the producer, an authored
+    input, or a generated artifact. Anything else is a file the register does not know about,
+    and the register is what every other view derives from — so an unknown file is a hole in
+    all of them at once. Adding one now fails closed instead of being discovered by a phase
+    gate months later.
+    """
+    repo = Path(repo)
+    tracked = {
+        p
+        for p in subprocess.run(  # noqa: S603
+            ["git", "ls-files", "-z"],  # noqa: S607
+            cwd=repo,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.split("\0")
+        if p
+    }
+    declared = {a.canonical_path for a in load(repo)}
+    findings: list[str] = []
+    for home in producer_homes(repo):
+        prefix = home.home.rstrip("/") + "/"
+        known = declared | {home.producer} | {f"{prefix}{rel}" for rel in home.authored_inputs}
+        for path in sorted(p for p in tracked if p.startswith(prefix)):
+            if path not in known and path != home.producer:
+                findings.append(
+                    f"{path}: inside declared home {home.home} but neither a declared generated "
+                    f"artifact nor a declared authored input of {home.owner}"
+                )
     return findings
 
 

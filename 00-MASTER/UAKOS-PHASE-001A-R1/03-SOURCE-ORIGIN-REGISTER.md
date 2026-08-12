@@ -1,16 +1,17 @@
 # 03 — Source Origin Register
 
-> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · closure baseline `57d91b7` (branch `governance-reconciliation`) · corrected Authoritative-Origin model (Phase-001B) · AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · generated `2026-07-23T05:42:28Z` by `cert_engine.py`.
+> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · closure baseline `05342cb` (branch `integration/recovery-001`) · corrected Authoritative-Origin model (Phase-001B) · AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · derived from provenance baseline `05342cb` by `cert_engine.py`.
 >
 > Every source-derived knowledge object: Document → Page → Section → Paragraph → Original Text → Evidence → Certification. Completeness: Complete/Partial/Missing/Unreadable/Corrupted.
 >
 > Reproduce: `python3 00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py`.
 
-- Source-derived objects: **85** (SOURCE_DOCUMENT=25, REFERENCE_ARCHITECTURE=57, IMPORTED_REFERENCE=3, HISTORICAL_DISCUSSION=0)
-- Completeness: COMPLETE=82, PARTIAL=3
+- Source-derived objects: **88** (SOURCE_DOCUMENT=27, REFERENCE_ARCHITECTURE=57, IMPORTED_REFERENCE=4, HISTORICAL_DISCUSSION=0)
+- Completeness: COMPLETE=84, MISSING=1, PARTIAL=3
 
 | Concept | Origin type | Document | Pg | Section | Para | Original text | Complete? |
 |---|---|---|---|---|---|---|---|
+| ARCH-EVENT-001 | IMPORTED_REFERENCE | — | — | — | — | — | MISSING |
 | DATA-001 | REFERENCE_ARCHITECTURE | UCOS Ω∞ MASTER END-TO-END | 4 | PHASE-004 / DATA FOUNDATION | 115 | DATA-001 Constitution | COMPLETE |
 | DATA-002 | REFERENCE_ARCHITECTURE | UCOS Ω∞ MASTER END-TO-END | 4 | PHASE-004 / DATA FOUNDATION | 116 | DATA-002 Theory | COMPLETE |
 | DATA-003 | REFERENCE_ARCHITECTURE | UCOS Ω∞ MASTER END-TO-END | 4 | PHASE-004 / DATA FOUNDATION | 117 | DATA-003 Ontology | COMPLETE |
@@ -73,7 +74,9 @@
 | SERVICE-012 | REFERENCE_ARCHITECTURE | UCOS Ω∞ MASTER END-TO-END | 5 | PHASE-005 / SERVICE FOUNDATION | 148 | SERVICE-012 Runtime Architecture | COMPLETE |
 | UCOS-COMP-000001 | SOURCE_DOCUMENT | UCOS Ω∞ - Universal Civili | 2043 | PHASE-002 COMPLETE / UCOS-COMP-000 | 76904 | UCOS-COMP-000001 | COMPLETE |
 | UCOS-COMP-001000 | SOURCE_DOCUMENT | UCOS Ω∞ - Universal Civili | 2057 | Stage 9 / 17. DOCUMENT STATUS / UC | 77638 | UCOS-COMP-001000 | COMPLETE |
+| UCOS-COMP-001001 | SOURCE_DOCUMENT | UCOS Ω∞ - Universal Civili | 2063 | Stage 9 / 5. ONTOLOGY GRAMMAR / UC | 77873 | UCOS-COMP-001001 | COMPLETE |
 | UCOS-COMP-001010 | SOURCE_DOCUMENT | UCOS Ω∞ - Universal Civili | 2068 | Stage 9 / 14. ONTOLOGY RUNTIME GEN | 78213 | UCOS-COMP-001010 | COMPLETE |
+| UCOS-COMP-009009 | SOURCE_DOCUMENT | UCOS Ω∞ - Universal Civili | 2211 | Stage 9 / 13. UNIVERSAL DEPLOYMENT | 84092 | UCOS-COMP-009009 | COMPLETE |
 | UCOS-COMP-009010 | SOURCE_DOCUMENT | UCOS Ω∞ - Universal Civili | 2212 | Stage 9 / 14. UNIVERSAL CERTIFICAT | 84129 | UCOS-COMP-009010 | COMPLETE |
 | Ω∞-000 | SOURCE_DOCUMENT | UCOS Ω∞ UNIVERSAL REALITY | 8 | LAW Ω∞-000 | 317 | LAW Ω∞-000 | COMPLETE |
 | Ω∞-001 | SOURCE_DOCUMENT | UCOS Ω∞ ABSOLUTE ARCHITECT | 12 | LAW Ω∞-001 | 475 | LAW Ω∞-001 | COMPLETE |
