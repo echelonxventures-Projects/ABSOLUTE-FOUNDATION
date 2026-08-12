@@ -1,0 +1,113 @@
+{
+  "artifact_id": "UCOS-UGA-001",
+  "authority": "NONE — DERIVED TRUTH. Measurement of repository state.",
+  "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+  "determinism": "No wall clock. Timestamps are ledger first_seen values.",
+  "epoch": "5 — Governance Enforcement",
+  "gate": "FAIL_CLOSED",
+  "passed": 10,
+  "total": 10,
+  "result": "PASS",
+  "invariants": [
+    {
+      "id": "UGA-INV-01",
+      "name": "EVERY_OBJECT_HAS_UNIVERSAL_ID",
+      "result": "PASS",
+      "measured": 5754,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": ""
+    },
+    {
+      "id": "UGA-INV-02",
+      "name": "EVERY_OBJECT_HAS_OWNER",
+      "result": "PASS",
+      "measured": 5754,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": ""
+    },
+    {
+      "id": "UGA-INV-03",
+      "name": "EVERY_OBJECT_REGISTERED",
+      "result": "PASS",
+      "measured": 5754,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": ""
+    },
+    {
+      "id": "UGA-INV-04",
+      "name": "EVERY_CANONICAL_ARTIFACT_HAS_INPUT_CLOSURE",
+      "result": "PASS",
+      "measured": 324,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": ""
+    },
+    {
+      "id": "UGA-INV-05",
+      "name": "EVERY_GENERATED_INPUT_HAS_PRODUCER",
+      "result": "PASS",
+      "measured": 10,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": "Strengthened by this programme: a producer must now be an IDENTIFIED OBJECT, not merely a declared path string. Before assimilation all 29 declared producers were anonymous."
+    },
+    {
+      "id": "UGA-INV-06",
+      "name": "EVERY_GENERATED_INPUT_HAS_BOOTSTRAP_PATH",
+      "result": "PASS",
+      "measured": 10,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": "Pre-existing DECLARED-OPEN condition, recorded by the generated-artifact registry itself in `bootstrap_gaps`. Not introduced by this programme. Measured by reading the bootstrap script rather than trusting the registry's own claim — which also showed the registry's gap note to be STALE: provenance_engine.py IS invoked, so realization/ is the only true gap."
+    },
+    {
+      "id": "UGA-INV-07",
+      "name": "EVERY_CERTIFICATION_HAS_EVIDENCE_BOUNDARY",
+      "result": "PASS",
+      "measured": 9,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": ""
+    },
+    {
+      "id": "UGA-INV-08",
+      "name": "NO_CANONICAL_ARTIFACT_DEPENDS_ON_UNCLASSIFIED_OBSERVATION",
+      "result": "PASS",
+      "measured": 324,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": ""
+    },
+    {
+      "id": "UGA-INV-09",
+      "name": "NO_ARCHITECTURE_DEPENDS_ON_FINITE_INSTANCE",
+      "result": "PASS",
+      "measured": 43,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": "UCOS-ACFV-000001 and the constitutional corpus discuss finite domains as EXAMPLES; naming one in prose is not a dependency. The invariant is meaningful only where a finite instance could become STRUCTURAL — in the keys, classes and rules of the foundation itself. Scanning prose would produce noise and would gate on discussion rather than on architecture."
+    },
+    {
+      "id": "UGA-INV-10",
+      "name": "EVERY_MUTATION_HAS_AUDIT_EVENT",
+      "result": "PASS",
+      "measured": 4521,
+      "violation_count": 0,
+      "violations": [],
+      "violations_truncated": 0,
+      "note": ""
+    }
+  ]
+}

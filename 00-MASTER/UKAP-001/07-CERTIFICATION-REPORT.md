@@ -15,7 +15,7 @@
 | Canonical input resolution is recorded | Register 03 + `corpus.json` (`canonical_archive`, `canonical_document`) |
 | Stale corpus is rejected automatically | CC-04/CC-05/CC-06/CC-07 are blocking; `make corpus-gate` exits non-zero |
 | Assimilation cannot run against an unverified corpus | `assimilate`, `assimilate-replay` and `assimilate-gate` depend on `corpus-gate` |
-| Determinism | no timestamps are emitted; regeneration is byte-identical; seal `d45970fe8361cc18` |
+| Determinism | no timestamps are emitted; regeneration is byte-identical; seal `a5fff6a509222fe8` |
 | Knowledge Once | an export discovered at several locations is one export (content identity); no corpus is counted or assimilated twice |
 | Repository Truth | consumption is measured from committed in-repo baselines only; the external corpus is read-only |
 
@@ -23,7 +23,7 @@
 
 | Key | Input | sha256 (first 16) |
 |---|---|---|
-| assimilation_baseline | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 371841576a8cd22a |
+| assimilation_baseline | `00-MASTER/UAKOS-CLOSURE-008/assimilation.json` | 426b98ab1d372fbb |
 | export::31b621b2cecc55e8 | `46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-08-02-36-04-5fc64362b35342e1ba7e6f1eba6ed88c` | 31b621b2cecc55e8 |
 | export::ac1451ac4015cf8b | `46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-29-12-03-41-1d48b6b6d0504018bba29c16b1c54e80` | ac1451ac4015cf8b |
 | provenance_baseline | `00-MASTER/UAKOS-PHASE-001B/01-SOURCE-PROVENANCE-REGISTER.md` | 02872e3edae553e6 |

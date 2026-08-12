@@ -1,0 +1,23 @@
+{
+  "artifact_id": "UCOS-UGA-001",
+  "authority": "NONE — DERIVED TRUTH. Measurement of repository state.",
+  "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+  "determinism": "No wall clock. Timestamps are ledger first_seen values.",
+  "epoch": "10-11 — Certification / Phase 8 / Phase 9",
+  "verdict": "CERTIFIED",
+  "blocking_deviations": [],
+  "declared_open": [],
+  "proof": {
+    "existence_digest": "2e97ac809e94984bb07c845b264d8eea8ebd997968c82c3dee7ef3eeb4190b1c",
+    "identity_digest": "b992c9165dd32d3911ad07cffcd249913b4a376166e609febb5d8c80d0e4c337",
+    "registry_digest": "f7e89adf757c6da6304c3cc7be47676dea77f7b73d56934982cecaae5ba57787",
+    "graph_digest": "daf943957e8fdc65c6a37d0f4ac985bb9c6bafdde4e9d1c1bc5bae121be827bb",
+    "invariant_digest": "a631cfba98cb265c0e152d1883ed7a6e1437088dd3470e7b8091be0790b8516d"
+  },
+  "fixed_point_property": "Outputs contain no wall clock, so a second run over an unchanged repository rewrites no byte. Fixed point is checkable by comparison.",
+  "scope": {
+    "objects_governed": 5754,
+    "minted_by_this_programme": 4521,
+    "corpus_bytes_touched": 0
+  }
+}

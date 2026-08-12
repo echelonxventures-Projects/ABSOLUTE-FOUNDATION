@@ -1902,9 +1902,9 @@
       "unknown": false
     },
     {
-      "count": 42,
+      "count": 43,
       "evidence": [],
-      "headline": "42 tracked path(s)",
+      "headline": "43 tracked path(s)",
       "id": "DV-45",
       "primitive": "tracked_glob_census",
       "purpose": "Executable governance engines and gate scripts present in version control.",
@@ -2034,6 +2034,10 @@
           "TRACKED"
         ],
         [
+          "`00-MASTER/UCOS-UGA-001/uga_engine.py`",
+          "TRACKED"
+        ],
+        [
           "`00-MASTER/UCOS-URAT-001/urat_engine.py`",
           "TRACKED"
         ],
@@ -2081,9 +2085,9 @@
       "unknown": false
     },
     {
-      "count": 6,
+      "count": 7,
       "evidence": [],
-      "headline": "36/42 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))",
+      "headline": "36/43 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))",
       "id": "DV-46",
       "primitive": "text_presence",
       "purpose": "Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.",
@@ -2244,6 +2248,11 @@
           "`Makefile`"
         ],
         [
+          "`00-MASTER/UCOS-UGA-001/uga_engine.py`",
+          "0",
+          "**none**"
+        ],
+        [
           "`00-MASTER/UCOS-URAT-001/urat_engine.py`",
           "1",
           "`Makefile`"
@@ -2371,8 +2380,8 @@
           "YES",
           "YES",
           "2/2",
-          "1374",
-          "`69954ffae1fc`"
+          "1380",
+          "`8ce4fd1aba86`"
         ],
         [
           "`S-06`",
@@ -3471,7 +3480,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "69954ffae1fce4cb3c21a2114c08e3ba083aa13cbda2464d159d5c0e6e2db7ca",
+      "content_sha256": "8ce4fd1aba86f44553f19e346b05310df5ac7090f3d3f7f4478f9a6ad99ccc23",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",
@@ -3487,7 +3496,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Forward-only identity allocation ledger.",
-      "records": 1374,
+      "records": 1380,
       "required": true,
       "tracked": true
     },

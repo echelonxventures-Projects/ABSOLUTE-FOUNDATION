@@ -113,7 +113,7 @@
 | `S-02` | `00-BOOK/DATA/relationships.json` | graph projection | YES | YES | 2/2 | 25798 |
 | `S-03` | `00-BOOK/DATA/control-tower.json` | portfolio projection | YES | YES | 3/3 | 91 |
 | `S-04` | `00-BOOK/DATA/certification.json` | certification projection | YES | YES | 5/5 | 45 |
-| `S-05` | `00-BOOK/DATA/id-ledger.json` | identity ledger | YES | YES | 2/2 | 1374 |
+| `S-05` | `00-BOOK/DATA/id-ledger.json` | identity ledger | YES | YES | 2/2 | 1380 |
 | `S-06` | `00-CMG/CMG-REGISTRY.json` | meta-constitutional registry | YES | YES | 9/9 | 164 |
 | `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | aggregate gate declaration | YES | YES | 5/5 | 112 |
 | `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | aggregate gate determination | YES | YES | 6/6 | 129 |

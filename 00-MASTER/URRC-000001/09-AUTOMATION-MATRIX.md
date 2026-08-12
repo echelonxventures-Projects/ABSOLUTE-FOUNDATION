@@ -52,7 +52,7 @@ Automation presence per gate and per deliverable.
 **`DV-45`** — Executable governance engines and gate scripts present in version control.
 
 - **Primitive** — `tracked_glob_census`
-- **Result** — 42 tracked path(s)
+- **Result** — 43 tracked path(s)
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value |
@@ -88,6 +88,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/UCOS-UAR-001/uar_engine.py` | TRACKED |
 | `00-MASTER/UCOS-UCAF-001/ucaf_engine.py` | TRACKED |
 | `00-MASTER/UCOS-UFEP-001/ufep_engine.py` | TRACKED |
+| `00-MASTER/UCOS-UGA-001/uga_engine.py` | TRACKED |
 | `00-MASTER/UCOS-URAT-001/urat_engine.py` | TRACKED |
 | `00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py` | TRACKED |
 | `00-MASTER/UCOS-UTCE-001/utce_engine.py` | TRACKED |
@@ -103,7 +104,7 @@ Automation presence per gate and per deliverable.
 **`DV-46`** — Automation presence: each located engine joined to its developer entry point, continuous-integration workflow and session-start hook.
 
 - **Primitive** — `text_presence`
-- **Result** — 36/42 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))
+- **Result** — 36/43 located engine(s) bound to at least one entry point, workflow or hook (over 35 tracked binding file(s))
 - **Substrate evidence** — none (probe over the repository)
 
 | Key | Value | Detail |
@@ -139,6 +140,7 @@ Automation presence per gate and per deliverable.
 | `00-MASTER/UCOS-UAR-001/uar_engine.py` | 2 | `.github/workflows/uar-gate.yml`, `Makefile` |
 | `00-MASTER/UCOS-UCAF-001/ucaf_engine.py` | 1 | `Makefile` |
 | `00-MASTER/UCOS-UFEP-001/ufep_engine.py` | 1 | `Makefile` |
+| `00-MASTER/UCOS-UGA-001/uga_engine.py` | 0 | **none** |
 | `00-MASTER/UCOS-URAT-001/urat_engine.py` | 1 | `Makefile` |
 | `00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py` | 0 | **none** |
 | `00-MASTER/UCOS-UTCE-001/utce_engine.py` | 1 | `Makefile` |
