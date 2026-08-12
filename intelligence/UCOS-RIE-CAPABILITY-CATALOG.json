@@ -10115,6 +10115,7 @@
         "DiscoveryError",
         "DiscoveryOutcome",
         "EdgeKind",
+        "EvidenceReference",
         "ExcludedPath",
         "Finding",
         "GeneratedArtifact",
@@ -10148,6 +10149,7 @@
         "RuleOutcome",
         "SubstrateError",
         "UnitKind",
+        "ValidationRecord",
         "artifact_text",
         "build_artifacts",
         "build_evidence",
@@ -10184,6 +10186,7 @@
         "load_register",
         "main",
         "measure",
+        "parse",
         "parse_config",
         "paths_for_owner",
         "producer_of",
@@ -10199,7 +10202,8 @@
         "substrate",
         "validate",
         "validate_report",
-        "validation"
+        "validation",
+        "validation_records"
       ],
       "unique_id": "RC-91"
     },
@@ -10762,6 +10766,7 @@
         "product_b",
         "product_dev",
         "products",
+        "program_copy",
         "projected",
         "provenance_for",
         "provider",
@@ -10800,6 +10805,10 @@
         "test_10_live_registry_satisfies_every_invariant",
         "test_11_every_canonical_artifact_is_tracked",
         "test_12_a_new_artifact_needs_one_entry_not_several_lists",
+        "test_13_a_canonical_artifact_may_not_consume_an_execution_observation",
+        "test_14_non_canonical_is_the_escape_so_evidence_is_kept_not_hidden",
+        "test_15_an_unrecognised_identity_role_fails_closed",
+        "test_16_the_registers_declared_vocabulary_matches_the_module",
         "test_1_every_generated_path_resolves_to_exactly_one_producer",
         "test_1_every_mutation_class_names_exactly_one_governing_chain",
         "test_2_no_class_is_claimed_by_two_authorities_as_primary",
@@ -10967,12 +10976,7 @@
         "test_a_declared_relation_coerces_from_its_value",
         "test_a_declared_relation_is_returned_unchanged",
         "test_a_declared_resolution_string_resolves",
-        "test_a_declared_segment_excludes_the_paths_that_carry_it",
-        "test_a_declared_target_round_trips_through_its_projection",
-        "test_a_declared_writer_must_name_a_replay_target",
-        "test_a_declared_writer_whose_replay_target_does_not_resolve_fails",
-        "test_a_declared_writer_whose_replay_target_is_not_callable_fails",
-        "test_a_declared_writer_with_a_resolvable_replay_target_passes"
+        "test_a_declared_segment_excludes_the_paths_that_carry_it"
       ],
       "unique_id": "RC-96"
     },
@@ -13273,7 +13277,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "0395f7612d8a728e3c332bb7b79fb6fce779a3fc37122188126a0d3de53c32ea",
+  "content_hash": "6153cbc4fdc1b339170e89e1f14fcaf68da0f0a7fd406c89b8ede1887b11778f",
   "count": 121,
   "evidence_state": {
     "evidence_files": {

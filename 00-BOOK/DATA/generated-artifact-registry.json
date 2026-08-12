@@ -26,7 +26,10 @@
     "ENVIRONMENTAL": "Depends on the execution environment (test runner, wall clock, machine). Absent from a pristine clone.",
     "OPERATIONAL": "Per-clone operational state of a tool or runtime.",
     "EXTERNAL": "Outside the repository boundary entirely.",
-    "UNKNOWN": "Unclassified. FAILS CLOSED — a canonical artifact may not depend on an input nobody has classified."
+    "UNKNOWN": "Unclassified. FAILS CLOSED — a canonical artifact may not depend on an input nobody has classified.",
+    "EXECUTION_TRANSCRIPT": "Captured stdout/stderr of a command run. A historical observation of one execution event, not repository truth. UAKOS-CLOSURE-008.",
+    "LOCAL_RUNTIME": "Per-clone runtime or machine state observed during a run (paths, interpreter, venv, host).",
+    "ENVIRONMENTAL_OBSERVATION": "A measurement of the execution environment (timings, coverage totals, counts as observed)."
   },
   "invariants": [
     "Every canonical_path resolves to exactly one producer.",
@@ -35,7 +38,9 @@
     "Every input in every input_closure carries a classification.",
     "An entry with any UNKNOWN input classification fails closed.",
     "A deterministic:true entry may not declare an ENVIRONMENTAL input — this is the structural bar that makes the UCOS-CL-005 coverage defect unrepresentable rather than merely fixed.",
-    "RIB's own generated-path view equals the registry-derived view for UCOS-RIB-001."
+    "RIB's own generated-path view equals the registry-derived view for UCOS-RIB-001.",
+    "CANONICAL_ARTIFACT_INPUT_CLASSIFICATION — a CANONICAL artifact may not declare an EXECUTION_TRANSCRIPT, LOCAL_RUNTIME or ENVIRONMENTAL_OBSERVATION input. An execution transcript is preserved and referenced by id; it never enters canonical identity. The escape is to declare the artifact NON_CANONICAL — evidence rather than identity. UAKOS-CLOSURE-008.",
+    "Every canonical_identity_role is one of CANONICAL, NON_CANONICAL or EXCLUDED."
   ],
   "environmental_artifacts": [
     {

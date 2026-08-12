@@ -18,6 +18,8 @@ import json
 from pathlib import Path
 from platform.repository_intelligence.generated_artifacts import (
     CANONICAL_SAFE_INPUTS,
+    EXECUTION_OBSERVATION_CLASSIFICATIONS,
+    IDENTITY_ROLES,
     INPUT_CLASSIFICATIONS,
     REGISTRY_PATH,
     load,
@@ -238,3 +240,81 @@ def test_every_producer_that_emits_tracked_artifacts_is_declared(artifacts) -> N
 def test_canonical_safe_inputs_excludes_unknown() -> None:
     assert "UNKNOWN" not in CANONICAL_SAFE_INPUTS
     assert "ENVIRONMENTAL" not in CANONICAL_SAFE_INPUTS
+
+
+# --- CANONICAL_ARTIFACT_INPUT_CLASSIFICATION (UAKOS-CLOSURE-008) --------------------------
+
+
+def _one_entry_registry(repo: Path, entry: dict) -> Path:
+    (repo / "00-BOOK" / "DATA").mkdir(parents=True, exist_ok=True)
+    (repo / REGISTRY_PATH).write_text(
+        json.dumps({"schema": "ucos-generated-artifact-registry", "entries": [entry]}),
+        encoding="utf-8",
+    )
+    return repo
+
+
+def _entry(**overrides) -> dict:
+    entry = {
+        "artifact_id": "REPORT",
+        "canonical_path": "programme/REPORT.md",
+        "producer": "programme/engine.py",
+        "owner": "PROGRAMME",
+        "lifecycle": "REGENERATED",
+        "input_closure": ["programme/evidence/verify.log"],
+        "input_classification": {"programme/evidence/verify.log": "EXECUTION_TRANSCRIPT"},
+        "deterministic": True,
+        "canonical_identity_role": "CANONICAL",
+    }
+    entry.update(overrides)
+    return entry
+
+
+@pytest.mark.parametrize(
+    "classification",
+    sorted(EXECUTION_OBSERVATION_CLASSIFICATIONS),
+)
+def test_13_a_canonical_artifact_may_not_consume_an_execution_observation(
+    tmp_path: Path, classification: str
+) -> None:
+    """UAKOS-CLOSURE-008 as a rule, not a repair.
+
+    Register 06 declared an execution transcript as an input in everything but name: it read
+    ``evidence/verify.log`` at render time and embedded its tail, so canonical bytes moved
+    whenever the command ran again. That declaration is now undeclarable.
+    """
+    repo = _one_entry_registry(
+        tmp_path / "r",
+        _entry(
+            input_classification={"programme/evidence/verify.log": classification},
+        ),
+    )
+    findings = validate(repo)
+    assert any(
+        "CANONICAL_ARTIFACT_INPUT_CLASSIFICATION" in f and classification in f for f in findings
+    ), findings
+
+
+def test_14_non_canonical_is_the_escape_so_evidence_is_kept_not_hidden(tmp_path: Path) -> None:
+    """The evidence layer may depend on the run. It simply makes no identity claim.
+
+    This is the half of the rule that keeps it honest: nothing forces a programme to delete or
+    conceal an execution transcript to satisfy the invariant.
+    """
+    repo = _one_entry_registry(
+        tmp_path / "r", _entry(canonical_identity_role="NON_CANONICAL", deterministic=False)
+    )
+    assert validate(repo) == []
+
+
+def test_15_an_unrecognised_identity_role_fails_closed(tmp_path: Path) -> None:
+    repo = _one_entry_registry(tmp_path / "r", _entry(canonical_identity_role="PROBABLY_FINE"))
+    assert any("canonical_identity_role" in f for f in validate(repo))
+    assert IDENTITY_ROLES == {"CANONICAL", "NON_CANONICAL", "EXCLUDED"}
+
+
+def test_16_the_registers_declared_vocabulary_matches_the_module() -> None:
+    """One fact, one owner. The register documents exactly the classes the code enforces."""
+    doc = json.loads((REPO / REGISTRY_PATH).read_text(encoding="utf-8"))
+    assert set(doc["input_classifications"]) == set(INPUT_CLASSIFICATIONS)
+    assert any("CANONICAL_ARTIFACT_INPUT_CLASSIFICATION" in i for i in doc["invariants"])

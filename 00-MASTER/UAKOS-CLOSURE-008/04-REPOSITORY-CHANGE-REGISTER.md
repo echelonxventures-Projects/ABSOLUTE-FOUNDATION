@@ -36,7 +36,7 @@ This engine writes none of the paths below and amends no ratified text in them, 
 | `02-SEMANTIC-EQUIVALENCE-REGISTER.md` | register / report | 15773 | e8aeee70b1c39437 |
 | `03-ASSIMILATION-REGISTER.md` | register / report | 88005 | c166f499d80ac309 |
 | `05-TRACEABILITY-REGISTER.md` | register / report | 11297 | e374d4eaa5a18b78 |
-| `06-VALIDATION-REPORT.md` | register / report | 11660 | bc7190e86ec813ec |
+| `06-VALIDATION-REPORT.md` | register / report | 11999 | 0c10053a532e191f |
 | `07-CERTIFICATION-REPORT.md` | register / report | 5485 | 5c1958c197beed77 |
 | `08-REPOSITORY-COMPLETION-REPORT.md` | register / report | 3752 | 06f917b13a6d4d85 |
 | `09-SUPERIORITY-EVALUATION-REGISTER.md` | register / report | 39021 | 50c2de377806d585 |
@@ -45,9 +45,10 @@ This engine writes none of the paths below and amends no ratified text in them, 
 | `EVIDENCE-MANIFEST.json` | machine-readable register | 1928 | 1e787994cf43b9d5 |
 | `UAKOS-CLOSURE-008-CHARTER.md` | register / report | 7533 | f157ece4a121e707 |
 | `assimilation.json` | machine-readable register | 9308828 | 371841576a8cd22a |
-| `assimilation_engine.py` | engine | 145914 | 284179fbdc7609f4 |
+| `assimilation_engine.py` | engine | 149874 | 35572492fe06ac96 |
 | `decision_engine.py` | engine | 45288 | 60bd5939744811f4 |
 | `superiority_engine.py` | engine | 28769 | 427fa83dd467693c |
+| `validation-record.json` | authored input (not engine output) | 3067 | 007b6d35664bda96 |
 
 `04-REPOSITORY-CHANGE-REGISTER.md` is itself excluded from the table above — a file cannot carry its own content hash.
 

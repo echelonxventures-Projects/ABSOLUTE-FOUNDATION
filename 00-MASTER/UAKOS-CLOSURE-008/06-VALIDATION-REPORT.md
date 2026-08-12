@@ -50,24 +50,29 @@
 
 ## Canonical repository gate — `./verify.sh`
 
-Captured verbatim from `evidence/verify.log` (run after assimilation):
+The canonical layer records the deterministic RESULT of the gate. The execution transcript that observed the run is evidence, not identity, and is referenced below by id rather than read for content — so re-running the command changes no byte of this report.
 
-```
-TOTAL                                                  37679   2157   7432    112    94%
-✓ STAGE PASSED: coverage report
-ENFORCEMENT PASSED — no unregistered or invalid artifact can silently enter the corpus.
-✓ STAGE PASSED: governance enforce --pre
-VALIDATION PASSED — 1193 artifacts, append-only page ledger intact, referential integrity OK; 0 execution(s) — forward-only append-only lifecycle intact.
-✓ STAGE PASSED: registry validate (schema + integrity)
-================ VERIFICATION SUMMARY ================
-  PASS  ruff lint + format-check (engine + platform)   0s
-  PASS  pytest + coverage gate (--cov-fail-under=90)  26s
-  PASS  coverage report                                1s
-  PASS  governance enforce --pre                       1s
-  PASS  registry validate (schema + integrity)         7s
-  TOTAL (wall clock)                                    35s
-✓ VERIFICATION PASSED — all gates green (reproduced without manual venv activation).
-```
+| Property | Value |
+|---|---|
+| validation_id | `UAKOS-CLOSURE-008.VR-001` |
+| contract_id | `UCOS-VERIFY-001` |
+| command | `./verify.sh` |
+| invocation | default (the opt-in --full registration stage is outside this contract) |
+| contract artifacts | `verify.sh`, `scripts/ucos-env.sh` |
+| declared-stage digest (sha256) | `d91580b5487ba0b0` |
+| result | **PASS** |
+
+| Gate (declared contract stage) | Result |
+|---|---|
+| ruff lint + format-check (engine + platform) | PASS |
+| prerequisite generation (knowledge · determinism · closure 1-3) | PASS |
+| pytest + coverage gate (--cov-fail-under=90) | PASS |
+| coverage report | PASS |
+| governance enforce --pre | PASS |
+| registry validate (schema + integrity) | PASS |
+| meta-constitutional conformance (CMG-INV-01..12) | PASS |
+
+Execution evidence `UAKOS-CLOSURE-008/EV-VERIFY-001` (EXECUTION_TRANSCRIPT, NON_CANONICAL) is retained in the archive `00-MASTER/UAKOS-CLOSURE-008/evidence/` as `verify.log`. The archive is preserved and published, and is NOT an input to any canonical artifact: no hash, byte count, timing or captured line from it enters this report.
 
 ## Superiority axis validation (UKAP-001 WP-002 / D-2)
 

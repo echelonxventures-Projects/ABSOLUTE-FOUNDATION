@@ -28,6 +28,11 @@ Authoritative inputs
         the repository itself, via `git ls-files` — the semantic-equivalence universe
         assimilation.json — this engine's own frozen output, sufficient to re-render every
           register with NO external evidence present (self-contained, byte-identical replay)
+        validation-record.json — AUTHORED, tracked, deterministic: the result of the canonical
+          repository gate. It replaced `evidence/verify.log` as register 06's input, because a
+          canonical artifact may state a validation RESULT and may not carry the TRANSCRIPT of
+          the run that observed it (CLOSURE-008). The transcript is preserved in the evidence
+          archive and referenced by id; nothing reads it to render an artifact.
 
 Outputs (regenerated deterministically, no timestamps)
     assimilation.json            complete per-object classification + metrics + seal
@@ -1417,6 +1422,75 @@ def write(path: Path, lines: list[str]) -> None:
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
+# ------------------------------------------------- canonical validation record (CLOSURE-008)
+#
+# What this replaced, and why. Register 06 used to embed the tail of `evidence/verify.log`
+# verbatim, so the canonical bytes of 06 — and, through the content hash 04 records for it,
+# the bytes of 04 — carried the stdout of ONE execution on ONE machine: stage timings, a
+# coverage total, an artifact count. `.gitignore` excludes `00-MASTER/**/evidence/`, so that
+# transcript was never in the tree; rendering a fresh checkout took the NOT-CAPTURED branch
+# and produced registers that differed from the committed ones. The CI drift gate asserts the
+# committed registers ARE the rendered fixed point, and on a clean clone they were not.
+#
+# A validation RESULT is repository truth: same commit, same bytes. An execution TRANSCRIPT is
+# a historical observation of one run. The canonical layer reads the first from an authored,
+# tracked record; the transcript stays in the evidence archive and is named by IDENTITY, never
+# read for content. Running `./verify.sh` again therefore moves no canonical byte.
+def load_validation_record(home: Path) -> dict | None:
+    """The authored validation record, or None if it is absent (the caller fails closed)."""
+    path = home / "validation-record.json"
+    if not path.is_file():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def validation_gate_section(record: dict | None) -> list[str]:
+    """Register 06's canonical-gate section, as a pure function of the RECORD.
+
+    Nothing here touches the evidence archive, the clock, the environment or any command
+    output. Given the same record it emits the same bytes on every machine and every clone —
+    which is the property the regression test pins.
+    """
+    L = ["## Canonical repository gate — `./verify.sh`", ""]
+    if record is None:
+        return L + [
+            "`validation-record.json` ABSENT — the canonical gate result is therefore UNVERIFIED "
+            "in this report (fail-closed: absence of a record is not evidence of a pass).",
+            "",
+        ]
+    contract = record.get("contract", {})
+    L += [
+        "The canonical layer records the deterministic RESULT of the gate. The execution "
+        "transcript that observed the run is evidence, not identity, and is referenced below "
+        "by id rather than read for content — so re-running the command changes no byte of "
+        "this report.",
+        "",
+    ]
+    L += table(["Property", "Value"], [
+        ["validation_id", f"`{record.get('validation_id', '')}`"],
+        ["contract_id", f"`{contract.get('contract_id', '')}`"],
+        ["command", f"`{contract.get('command', '')}`"],
+        ["invocation", contract.get("invocation", "—")],
+        ["contract artifacts", ", ".join(f"`{a}`" for a in contract.get("artifact_references", []))
+            or "—"],
+        ["declared-stage digest (sha256)", f"`{contract.get('stages_digest', '')[:16]}`"],
+        ["result", f"**{record.get('result', '')}**"],
+    ])
+    L += table(["Gate (declared contract stage)", "Result"],
+               [[s.get("stage", ""), s.get("result", "")] for s in record.get("stages", [])])
+    ref = record.get("evidence_reference")
+    if ref:
+        L += [
+            f"Execution evidence `{ref.get('evidence_id', '')}` "
+            f"({ref.get('classification', '')}, {ref.get('canonical_identity_role', '')}) is "
+            f"retained in the archive `{ref.get('archive_path', '')}` as `{ref.get('member', '')}`. "
+            "The archive is preserved and published, and is NOT an input to any canonical "
+            "artifact: no hash, byte count, timing or captured line from it enters this report.",
+            "",
+        ]
+    return L
+
+
 def render(payload: dict) -> list[str]:
     rows = payload["rows"]
     total = len(rows)
@@ -1700,17 +1774,7 @@ def render(payload: dict) -> list[str]:
     L += table(["Gate", "Blocking", "Count", "Result", "Detail"],
                [[g["gate"], "yes" if g["blocking"] else "no", g["count"], g["result"],
                  ", ".join(str(d) for d in g["detail"]) or "—"] for g in payload["gates"]])
-    verify_log = HERE / "evidence" / "verify.log"
-    L += ["## Canonical repository gate — `./verify.sh`", ""]
-    if verify_log.exists():
-        text = verify_log.read_text(encoding="utf-8", errors="replace").splitlines()
-        keep = [ln for ln in text if re.search(r"PASS|FAIL|VERIFICATION|TOTAL", ln)]
-        L += ["Captured verbatim from `evidence/verify.log` (run after assimilation):", "", "```"]
-        L += [re.sub(r"\x1b\[[0-9;]*m", "", ln) for ln in keep[-14:]]
-        L += ["```", ""]
-    else:
-        L += ["`evidence/verify.log` NOT CAPTURED — the verify.sh result is therefore UNVERIFIED "
-              "in this report (fail-closed: absence of evidence is not evidence of a pass).", ""]
+    L += validation_gate_section(load_validation_record(HERE))
     L += [
         "## Superiority axis validation (UKAP-001 WP-002 / D-2)",
         "",
@@ -2533,7 +2597,11 @@ def render(payload: dict) -> list[str]:
     change_rows = []
     for name in files:
         f = HERE / name
-        kind = ("engine" if f.suffix == ".py" else
+        # `validation-record.json` is an INPUT, not an output: it is authored repository truth
+        # about the canonical gate and this engine only reads it. Declaring it as engine output
+        # would be the same category error CLOSURE-008 closed on the execution transcript.
+        kind = ("authored input (not engine output)" if name == "validation-record.json" else
+                "engine" if f.suffix == ".py" else
                 "machine-readable register" if f.suffix == ".json" else "register / report")
         change_rows.append([f"`{name}`", kind, f.stat().st_size, sha256_file(f)[:16]])
     L += table(["Artifact", "Kind", "Bytes", "sha256 (first 16)"], change_rows)

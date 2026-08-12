@@ -24,6 +24,18 @@ The structural bar
 the UCOS-CL-005 coverage defect expressed as a rule rather than as a fix: an RIE artifact
 naming ``coverage.xml`` in its input closure cannot be declared, so the leak becomes
 unrepresentable instead of merely removed once.
+
+CANONICAL_ARTIFACT_INPUT_CLASSIFICATION
+---------------------------------------
+UAKOS-CLOSURE-008 found the same class of leak one category over: register 06 embedded the
+tail of an execution transcript, and register 04 recorded the byte count and content hash that
+resulted. The transcript was untracked, so a fresh clone rendered different canonical bytes
+than the ones committed. The named invariant closes the class — a CANONICAL artifact may not
+declare an ``EXECUTION_TRANSCRIPT``, ``LOCAL_RUNTIME`` or ``ENVIRONMENTAL_OBSERVATION`` input.
+
+The escape is a declaration, not a loophole: mark the artifact ``NON_CANONICAL`` and it may
+depend on whatever it likes, because it is then evidence rather than identity. Evidence is
+kept. What it may not do is claim to be repository truth.
 """
 
 from __future__ import annotations
@@ -33,16 +45,33 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
+from platform.repository_intelligence import validation_records
 
 REGISTRY_PATH = "00-BOOK/DATA/generated-artifact-registry.json"
 
+#: Input classes that are a historical OBSERVATION of an execution event rather than
+#: repository truth (UAKOS-CLOSURE-008). Held as one fact with the canonical validation
+#: record model, which classifies the other side of the same boundary.
+EXECUTION_OBSERVATION_CLASSIFICATIONS: frozenset[str] = (
+    validation_records.EXECUTION_OBSERVATION_CLASSIFICATIONS
+)
+
 #: Every input of every declared artifact carries one of these.
-INPUT_CLASSIFICATIONS: frozenset[str] = frozenset(
-    {"TRACKED_DETERMINISTIC", "ENVIRONMENTAL", "OPERATIONAL", "EXTERNAL", "UNKNOWN"}
+INPUT_CLASSIFICATIONS: frozenset[str] = (
+    frozenset({"TRACKED_DETERMINISTIC", "ENVIRONMENTAL", "OPERATIONAL", "EXTERNAL", "UNKNOWN"})
+    | EXECUTION_OBSERVATION_CLASSIFICATIONS
 )
 
 #: Classifications a *canonical* artifact may depend on. UNKNOWN is absent by design.
 CANONICAL_SAFE_INPUTS: frozenset[str] = frozenset({"TRACKED_DETERMINISTIC"})
+
+#: The roles that place an artifact OUTSIDE canonical identity. ``EXCLUDED`` says the artifact
+#: is not part of the corpus at all; ``NON_CANONICAL`` says it is kept and referenced but makes
+#: no identity claim — the marker an execution-evidence archive carries.
+NON_CANONICAL_IDENTITY_ROLES: frozenset[str] = frozenset({"EXCLUDED", "NON_CANONICAL"})
+
+#: Every recognised identity role.
+IDENTITY_ROLES: frozenset[str] = frozenset({"CANONICAL"}) | NON_CANONICAL_IDENTITY_ROLES
 
 
 @dataclass(frozen=True)
@@ -153,6 +182,12 @@ def validate(repo: Path) -> list[str]:
         if not a.input_closure:
             findings.append(f"{a.canonical_path}: empty input_closure")
 
+        if a.canonical_identity_role not in IDENTITY_ROLES:
+            findings.append(
+                f"{a.canonical_path}: unrecognised canonical_identity_role "
+                f"{a.canonical_identity_role!r} — expected one of {sorted(IDENTITY_ROLES)}"
+            )
+
         for inp in a.input_closure:
             klass = a.input_classification.get(inp)
             if klass is None:
@@ -163,6 +198,14 @@ def validate(repo: Path) -> list[str]:
                 )
             elif klass == "UNKNOWN":
                 findings.append(f"{a.canonical_path}: input {inp!r} is UNKNOWN — fails closed")
+            elif a.canonical and klass in EXECUTION_OBSERVATION_CLASSIFICATIONS:
+                # CANONICAL_ARTIFACT_INPUT_CLASSIFICATION — UAKOS-CLOSURE-008.
+                findings.append(
+                    f"{a.canonical_path}: CANONICAL_ARTIFACT_INPUT_CLASSIFICATION — input "
+                    f"{inp!r} is classified {klass}, a historical observation of an execution "
+                    f"event; canonical identity may not depend on one. Keep the evidence and "
+                    f"reference it, or declare this artifact NON_CANONICAL."
+                )
             elif a.canonical and klass not in CANONICAL_SAFE_INPUTS:
                 # THE bar. UCOS-CL-005 as a rule rather than a repair.
                 findings.append(
