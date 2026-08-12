@@ -1882,7 +1882,7 @@
       "id": "MSR-SOURCE",
       "kind": "owned_source_count",
       "purpose": "the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree",
-      "total": 1857,
+      "total": 1859,
       "units_with_value": 148
     },
     {
@@ -1890,7 +1890,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 6438,
+      "total": 6442,
       "units_with_value": 226
     },
     {
@@ -1938,7 +1938,7 @@
       "id": "MSR-ENTRYPOINT",
       "kind": "text_reference_count",
       "purpose": "how many declared entry points name a path inside the unit — the reachability a non-imported tool has",
-      "total": 2211,
+      "total": 2221,
       "units_with_value": 77
     },
     {
@@ -3583,10 +3583,10 @@
         }
       ],
       "edge_sites": {},
-      "edges": 8930,
+      "edges": 8932,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
-      "nodes": 1923,
+      "nodes": 1925,
       "purpose": "the module-granularity import plane, where a true Python import cycle would break execution",
       "unit_class": "IMPLEMENTATION",
       "unresolved_edges": 0
@@ -4264,7 +4264,7 @@
     "fsck_errors": [],
     "interrupted_operations": [],
     "modified": "<withheld: working-tree measurement, UCOS-RC-003>",
-    "tracked_files": 5740,
+    "tracked_files": 5743,
     "untracked": "<withheld: working-tree measurement, UCOS-RC-003>",
     "working_tree": "<withheld: working-tree measurement, UCOS-RC-003>"
   },
@@ -4467,7 +4467,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "9728f73e45e324d9a7825562df45028c4bc29b916a17589c3182cc237fb9c373",
+      "content_sha256": "2a6a1dc5f70bc9eb92d439fd7b9ae27f75a35270d33dfeea3d2851b4454debd2",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-BASELINE",
@@ -4493,7 +4493,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "ba95deb1b4ecc9d61ce2189a998e0e14c6877adef0734568a55b710014b16bae",
+      "content_sha256": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-CAPS",
@@ -4629,7 +4629,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "6bc474b4b3bcc61c333f372648e232517726bd313d5056483bdf8fc8cff93c8a",
+      "content_sha256": "a11cca973d84be4aaba1ae5038c3e6cd41e01c99a314c98246fecf2b7912ed06",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -8143,7 +8143,7 @@
       "disposition_reason": "the canonical capability owner already records this capability as reuse-with-extension",
       "disposition_rule": "RUL-08",
       "duplicate_responsibility": false,
-      "entrypoint_references": 577,
+      "entrypoint_references": 581,
       "evidence_assets": 0,
       "implementation_status": "IMPLEMENTED",
       "in_coverage_scope": false,
@@ -8550,7 +8550,7 @@
       "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
       "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 14,
+      "entrypoint_references": 15,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -8750,7 +8750,7 @@
       "disposition_reason": "an operational programme is extended by editing its declaration, never its engine — that is the ratified engine pattern",
       "disposition_rule": "RUL-07",
       "duplicate_responsibility": false,
-      "entrypoint_references": 1,
+      "entrypoint_references": 3,
       "evidence_assets": 0,
       "implementation_status": "",
       "in_coverage_scope": false,
@@ -14208,7 +14208,7 @@
       "disposition_reason": "the unit is located, depended upon, inside the declared verification scope and carries no unresolved obligation — it is consumed unchanged",
       "disposition_rule": "RUL-10",
       "duplicate_responsibility": false,
-      "entrypoint_references": 670,
+      "entrypoint_references": 673,
       "evidence_assets": 0,
       "implementation_status": "CERTIFIED",
       "in_coverage_scope": false,
@@ -19164,7 +19164,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 827,
+      "tracked_files": 829,
       "unique_id": "UCOS-RIB-001-CAP-0255",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform",
@@ -20509,12 +20509,13 @@
       "canonical_name": "platform.repository_intelligence",
       "consumer_units": [
         "platform.repository_intelligence.generated_artifacts",
-        "platform.tests"
+        "platform.tests",
+        "platform.tests.test_universal_canonical_governance"
       ],
-      "consumers": 2,
+      "consumers": 3,
       "corpus_artifacts": 0,
       "declared": "platform.repository_intelligence",
-      "degree": 18,
+      "degree": 19,
       "dependencies": 16,
       "dependency_units": [
         "engine.acceptance",
@@ -20575,13 +20576,13 @@
       "rie_reuse": "REUSE/COMPOSE",
       "rie_status": "IMPLEMENTED",
       "root": "platform",
-      "source_files": 16,
+      "source_files": 17,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 17,
+      "tracked_files": 18,
       "unique_id": "UCOS-RIB-001-CAP-0272",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform.repository_intelligence",
@@ -21011,13 +21012,13 @@
       "rie_reuse": "REUSE/COMPOSE",
       "rie_status": "IMPLEMENTED",
       "root": "platform",
-      "source_files": 334,
+      "source_files": 335,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 335,
+      "tracked_files": 336,
       "unique_id": "UCOS-RIB-001-CAP-0277",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform.tests",
