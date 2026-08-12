@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (40 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (2 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 297 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -1258,7 +1258,7 @@ the located executable surface of every unit
 | UCOS-RIB-001-CAP-0275 | platform.runtime_operations | 14 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0276 | platform.runtime_platform | 14 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0277 | platform.security | 10 | IMPLEMENTED | 0 |
-| UCOS-RIB-001-CAP-0278 | platform.tests | 335 | IMPLEMENTED | 0 |
+| UCOS-RIB-001-CAP-0278 | platform.tests | 336 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0279 | platform.universal_assimilation | 6 | IMPLEMENTED | 1 |
 | UCOS-RIB-001-CAP-0280 | platform.universal_assurance | 14 | IMPLEMENTED | 0 |
 | UCOS-RIB-001-CAP-0281 | platform.universal_control_plane | 21 | IMPLEMENTED | 1 |
@@ -2263,7 +2263,7 @@ the compliance violations classified by severity
 
 | ID | Severity | Finding | Remediation |
 |---|---|---|---|
-| `CMP-CLEAN` | **CRITICAL** | dirty_entries_outside_generated=40 | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
+| `CMP-CLEAN` | **CRITICAL** | dirty_entries_outside_generated=2 | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
 | `CMP-VALIDATE` | **HIGH** | validations_failed=1 | discharge the named validation obligation |
 
 ### 13. Benefit Matrix — `MTX-BENEFIT`

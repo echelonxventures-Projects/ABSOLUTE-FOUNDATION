@@ -1908,7 +1908,7 @@
       "id": "MSR-SOURCE",
       "kind": "owned_source_count",
       "purpose": "the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree",
-      "total": 1860,
+      "total": 1861,
       "units_with_value": 149
     },
     {
@@ -1916,7 +1916,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 6464,
+      "total": 6468,
       "units_with_value": 227
     },
     {
@@ -3615,7 +3615,7 @@
       "edges": 8932,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
-      "nodes": 1925,
+      "nodes": 1926,
       "purpose": "the module-granularity import plane, where a true Python import cycle would break execution",
       "unit_class": "IMPLEMENTATION",
       "unresolved_edges": 0
@@ -4301,7 +4301,7 @@
     "fsck_errors": [],
     "interrupted_operations": [],
     "modified": "UCOS-OBS-000003",
-    "tracked_files": 5754,
+    "tracked_files": 5757,
     "untracked": "UCOS-OBS-000003",
     "working_tree": "UCOS-OBS-000003"
   },
@@ -4504,7 +4504,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "a0c44bf5543e52f664aaeed6b42432014f8c5c5246fa21003a6272ca621c7386",
+      "content_sha256": "8ed1f2c27e14564ccfeea322e8e3db32c59458a0b7bd36951af1336bbc14dc6a",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-BASELINE",
@@ -4530,7 +4530,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "d2ba9da9a0312716627114be40f583d65249053ab214b75c67eb77e8eb86face",
+      "content_sha256": "5e75031bd78b0cdfe9da69dcff646eddbf26272b83cfc85ee589cba882b8b3c7",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-CAPS",
@@ -4666,7 +4666,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "c9d708ad13c4e553e7c9f953e04ccc2750801b0e6dfc734346ec2958d4f0aba2",
+      "content_sha256": "b9249a90ef6f9512105a8a29fe65ea33a66ae482c83fbfaee805a40b2cc22c48",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -8215,7 +8215,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 1246,
+      "tracked_files": 1247,
       "unique_id": "UCOS-RIB-001-CAP-0068",
       "unit_class": "CAPABILITY",
       "unit_key": "00-MASTER",
@@ -9465,7 +9465,7 @@
         "DSC-PROGRAMME"
       ],
       "superseded_by": "",
-      "tracked_files": 11,
+      "tracked_files": 12,
       "unique_id": "UCOS-RIB-001-CAP-0093",
       "unit_class": "OPERATIONAL-PROGRAMME",
       "unit_key": "00-MASTER.UCOS-UGA-001",
@@ -19251,7 +19251,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 829,
+      "tracked_files": 830,
       "unique_id": "UCOS-RIB-001-CAP-0256",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform",
@@ -21099,13 +21099,13 @@
       "rie_reuse": "REUSE/COMPOSE",
       "rie_status": "IMPLEMENTED",
       "root": "platform",
-      "source_files": 335,
+      "source_files": 336,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 336,
+      "tracked_files": 337,
       "unique_id": "UCOS-RIB-001-CAP-0278",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "platform.tests",

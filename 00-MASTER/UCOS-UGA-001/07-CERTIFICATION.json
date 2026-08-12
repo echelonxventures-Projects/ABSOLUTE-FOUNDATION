@@ -10,7 +10,7 @@
   "proof": {
     "existence_digest": "1979cf1ece564f1993ba7cad89f76d2384720352c6da3a0c728b488cd6fca31b",
     "identity_digest": "4a8966bd52f3af12c728c271de263fe0198f714061469213d50c4b96ebf3b9ab",
-    "registry_digest": "a6def4d3aba534b3942ea599dcd479eb86f27a0008038729d83566c74ff61ece",
+    "registry_digest": "c3980c1cdd0d46a092ca5011ef35648c6dc888a1214cdde36ed261c017f98f58",
     "graph_digest": "86039b7f89d5f0c4c8a988088b6a9cc14cab3c5de9bd198c48bc2812d6dbfb07",
     "invariant_digest": "db057fc2f3cd4fe8db0804a13f2cd73aec53d27468d75ee8c0823bd81d8a85c5"
   },
