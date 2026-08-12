@@ -7015,6 +7015,330 @@
       "certification_role": "PROGRAMME_DELIVERABLE"
     },
     {
+      "artifact_id": "UCOS-UGA-001.00-EXISTENCE-INVENTORY.json",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/00-EXISTENCE-INVENTORY.json",
+      "title": "Epoch 0 — every version-controlled object, classified. UNKNOWN is structurally unreachable.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-UGA-001.01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "title": "Epochs 1-2 — the objects this programme mints identity for.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-UGA-001.02-UNIVERSAL-OBJECT-REGISTRY.json",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/02-UNIVERSAL-OBJECT-REGISTRY.json",
+      "title": "Epoch 2 — union view over both identity authorities. The single source of truth for existence.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-UGA-001.03-AUDIT-UNIVERSE.json",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/03-AUDIT-UNIVERSE.json",
+      "title": "Epoch 3 — one IDENTITY_MINTED event per governed object, derived from the append-only ledger.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-UGA-001.04-RELATIONSHIP-GRAPH.json",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/04-RELATIONSHIP-GRAPH.json",
+      "title": "Epoch 4 — owned_by / produced_by / depends_on / produces / validated_by / evidenced_by.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-UGA-001.05-GOVERNANCE-INVARIANTS.json",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/05-GOVERNANCE-INVARIANTS.json",
+      "title": "Epoch 5 — UGA-INV-01..10 evaluated, fail-closed.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-UGA-001.06-SELF-OBSERVATION.json",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/06-SELF-OBSERVATION.json",
+      "title": "Epochs 6-9 — observation, analysis, planning, evolution proposals. IMPROVEMENT evidence; may not influence certification.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-UGA-001.07-CERTIFICATION.json",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/07-CERTIFICATION.json",
+      "title": "Epochs 10-11 — proof digests and fixed-point property.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-UGA-001.00-UGA-DASHBOARD.md",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/00-UGA-DASHBOARD.md",
+      "title": "Human-readable rollup of the above.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
       "artifact_id": "UCOS-URAT-001.00-URAT-DASHBOARD.md",
       "canonical_path": "00-MASTER/UCOS-URAT-001/00-URAT-DASHBOARD.md",
       "title": "",
@@ -10417,15 +10741,13 @@
       "path": "realization/",
       "producer": "intelligence/realization/engine.py",
       "bootstrap_command": "python -m intelligence.realization realize",
-      "bootstrap_stage": "NOT IN THE BOOTSTRAP — see bootstrap_gaps",
+      "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh",
       "tracked": false,
       "deterministic": true,
-      "note": "Generated realization artifacts."
+      "note": "Generated realization artifacts. Deterministic in ONE pass as of UCOS-UGA-001: the per-file `action` was an execution observation sealed into UCOS-URI-MANIFEST.json, so a pristine clone and a steady-state tree produced different bytes. It is now excluded from the seal and the manifest (UAKOS-CLOSURE-008) and retained as evidence."
     }
   ],
-  "bootstrap_gaps": [
-    "realization/ and 00-MASTER/UAKOS-PHASE-001B/provenance.json are GENERATED_DETERMINISTIC inputs whose producers are NOT invoked by scripts/generate-prerequisites.sh. A pristine clone that runs ./verify.sh does not create them. Declared rather than hidden: the invariant requires a producer and a bootstrap path for every generated input, and these two have a producer and an INCOMPLETE path."
-  ],
+  "bootstrap_gaps": [],
   "producer_homes": [
     {
       "owner": "ACEE-000001",
@@ -10575,6 +10897,14 @@
       ]
     },
     {
+      "owner": "UCOS-UGA-001",
+      "home": "00-MASTER/UCOS-UGA-001",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "authored_inputs": [
+        "uga-declaration.json"
+      ]
+    },
+    {
       "owner": "UCOS-URAT-001",
       "home": "00-MASTER/UCOS-URAT-001",
       "producer": "00-MASTER/UCOS-URAT-001/urat_engine.py",
@@ -10680,5 +11010,6 @@
         "uaie-architecture.json"
       ]
     }
-  ]
+  ],
+  "bootstrap_gaps_note": "EMPTY — every GENERATED_DETERMINISTIC input now names a producer AND a bootstrap path that scripts/generate-prerequisites.sh actually invokes. Two entries were discharged: 00-MASTER/UAKOS-PHASE-001B/provenance.json, whose producer was already invoked (the prior gap text was STALE and named it incorrectly), and realization/, whose producer was added to the bootstrap only after it was made deterministic. The gap was closed by completing the capability, never by relaxing the invariant. UGA-INV-06 measures this by READING the bootstrap script rather than by trusting this field."
 }

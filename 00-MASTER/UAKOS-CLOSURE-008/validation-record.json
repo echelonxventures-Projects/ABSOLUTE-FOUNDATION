@@ -23,7 +23,7 @@
       "verify.sh",
       "scripts/ucos-env.sh"
     ],
-    "stages_digest": "d91580b5487ba0b0de4838abbecda784120b5d61089964b96f7ed345d856e3c3",
+    "stages_digest": "1656580bfd68ae04782a7e607be52a0752f75f72742c6f81cd1f5cb71291b650",
     "stages_digest_definition": "sha256 over the newline-joined stage names this contract declares, read from verify.sh. A gate added to the contract and not to this record fails the record's own test."
   },
   "result": "PASS",
@@ -54,6 +54,10 @@
     },
     {
       "stage": "meta-constitutional conformance (CMG-INV-01..12)",
+      "result": "PASS"
+    },
+    {
+      "stage": "universal object governance (UGA-INV-01..10)",
       "result": "PASS"
     }
   ],

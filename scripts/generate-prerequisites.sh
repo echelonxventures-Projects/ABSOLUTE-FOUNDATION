@@ -95,4 +95,25 @@ PY="${PYTHON:-python3}"
 # `00-MASTER/UAKOS-CLOSURE-002/closure.json`, which phase 1 above produces.
 "$PY" 00-MASTER/UAKOS-PHASE-001B/provenance_engine.py >/dev/null
 
-echo "generated prerequisites: knowledge · determinism-evidence · closure phases 1-3 · research · publication · provenance" >&2
+# UCOS-UGA-001 — `realization/` was the LAST open bootstrap gap: the generated-artifact
+# registry declared a producer and a bootstrap_command for it, and recorded the stage as
+# "NOT IN THE BOOTSTRAP — see bootstrap_gaps". A pristine clone running ./verify.sh did not
+# create it, so UGA-INV-06 (EVERY_GENERATED_INPUT_HAS_BOOTSTRAP_PATH) failed against it.
+#
+# It could not simply be added here, because the producer was not deterministic. The
+# manifest sealed the per-file `action` — "created" on a clone that lacked the files,
+# "unchanged" on every later pass — so identical canonical knowledge produced two different
+# implementation identities and realization/UCOS-URI-MANIFEST.json had no fixed point. Wiring
+# a non-deterministic producer into the bootstrap would have injected that variance into
+# every verification run and broken the Phase-8 fixed point outright.
+#
+# The capability was completed rather than the declaration relaxed: `action` is an execution
+# observation, so it is excluded from the seal and from the manifest (UAKOS-CLOSURE-008 — an
+# execution transcript is evidence, never identity) and retained on the returned record, in
+# the structured log and in the evidence documents. Measured after the fix: a wiped tree and
+# a steady-state tree now produce the SAME digest in ONE pass.
+#
+# Writes only inside the ignored `realization/` tree, so it cannot dirty the working tree.
+"$PY" -m intelligence.realization realize >/dev/null
+
+echo "generated prerequisites: knowledge · determinism-evidence · closure phases 1-3 · research · publication · provenance · realization" >&2

@@ -147,6 +147,32 @@ run_stage "registry validate (schema + integrity)" "$PY" 00-BOOK/tools/ukb.py va
 # and hermetic (L.5), so it cannot flake a verification run.
 run_stage "meta-constitutional conformance (CMG-INV-01..12)" bash 00-CMG/tools/cmg-gate.sh
 
+# --- Stage 6b: universal object governance gate (UCOS-UGA-001 UGA-INV-01..10) -----
+# The gates above enforce the DOCUMENT corpus. config.INCLUDE_EXTENSIONS is
+# (.md, .txt, .docx, .json), so the registration boundary never saw a thing that
+# EXECUTES: at the time this stage was added, 4510 version-controlled objects —
+# every engine, every test, every workflow, and all 29 producers named by the
+# generated-artifact registry — carried no universal identity, no owner and no
+# lifecycle. The corpus governed 1233 artifacts by naming producers that were
+# themselves anonymous.
+#
+# This stage closes that leg. It asserts the ten universal invariants over the
+# WHOLE version-controlled boundary, so a new engine, test or config file can no
+# longer enter the repository unidentified, unowned, unregistered or unaudited.
+#
+# Read-only and fail-closed: `gate` mints nothing and writes nothing (`run` does
+# that), and it reports a violation rather than a pass on any input it cannot
+# measure. Deterministic and hermetic — no clock, no network — so it cannot flake.
+#
+# All ten invariants block. UGA-INV-06 (bootstrap path for every generated input)
+# was briefly carried as a non-blocking DECLARED-OPEN condition while `realization/`
+# had a declared producer but no bootstrap invocation. That gap is now discharged:
+# the producer was made deterministic — its manifest sealed a per-run `action`, so it
+# had no fixed point — and added to scripts/generate-prerequisites.sh. The registry's
+# `bootstrap_gaps` is empty and the exemption is gone with the condition it covered.
+run_stage "universal object governance (UGA-INV-01..10)" \
+  "$PY" 00-MASTER/UCOS-UGA-001/uga_engine.py gate
+
 # --- Stage 7 (opt-in): full registration transaction + drift gate ----------------
 # register.sh regenerates the synchronized registers and fails on drift; it mutates
 # generated DATA/REGISTRIES/CONTROL-TOWER/PORTAL, so it is opt-in for local runs.

@@ -511,14 +511,25 @@ class MaterializedFile:
     size: int
     action: str
 
-    def to_dict(self) -> dict[str, Any]:
+    def to_canonical_dict(self) -> dict[str, Any]:
+        """What the file IS. A pure function of the generated artifact.
+
+        ``action`` is deliberately absent. It records what THIS execution did to the
+        filesystem — ``created`` on a clone that did not have the file, ``unchanged``
+        on the next pass — so it is an observation of one run, not a property of the
+        artifact. UAKOS-CLOSURE-008 settled that an execution transcript is evidence
+        and never identity; this is the same fact for a materialization pass.
+        """
         return {
             "relative_path": self.relative_path,
             "artifact_id": self.artifact_id,
             "content_sha256": self.content_sha256,
             "size": self.size,
-            "action": self.action,
         }
+
+    def to_dict(self) -> dict[str, Any]:
+        """The canonical facts plus the per-run observation, for evidence and logs."""
+        return {**self.to_canonical_dict(), "action": self.action}
 
 
 @dataclass(frozen=True, slots=True)
@@ -544,12 +555,21 @@ class ImplementationRecord:
         return dict(sorted(counts.items()))
 
     def _core(self) -> dict[str, Any]:
+        """The sealed core. Canonical file facts only.
+
+        The per-file ``action`` is excluded so that the seal — and therefore
+        ``implementation_id`` — is a function of WHAT WAS MATERIALIZED and not of
+        what the filesystem happened to hold beforehand. While ``action`` was sealed
+        here, a pristine clone reported ``created`` and every later pass reported
+        ``unchanged``, so the same canonical knowledge produced two different
+        implementation identities and the manifest had no fixed point.
+        """
         return {
             "generation_id": self.generation_id,
             "generation_seal": self.generation_seal,
             "knowledge_seal": self.knowledge_seal,
             "artifact_root": self.artifact_root,
-            "files": [f.to_dict() for f in self.files],
+            "files": [f.to_canonical_dict() for f in self.files],
             "dry_run": self.dry_run,
             "verified": self.verified,
         }
@@ -558,12 +578,19 @@ class ImplementationRecord:
     def seal(self) -> str:
         return _seal(self._core())
 
-    def to_dict(self) -> dict[str, Any]:
+    def to_canonical_dict(self) -> dict[str, Any]:
+        """The record as repository truth — no per-run observation. Written to the manifest."""
         payload = self._core()
         payload["implementation_id"] = self.implementation_id
         payload["file_count"] = len(self.files)
-        payload["actions"] = self.actions()
         payload["seal"] = self.seal
+        return payload
+
+    def to_dict(self) -> dict[str, Any]:
+        """The canonical record plus this run's observations, for evidence and logs."""
+        payload = self.to_canonical_dict()
+        payload["files"] = [f.to_dict() for f in self.files]
+        payload["actions"] = self.actions()
         return payload
 
 

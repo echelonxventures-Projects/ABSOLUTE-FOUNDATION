@@ -239,7 +239,11 @@ class ImplementationEngine:
                 "capability": "URI-000001",
                 "authority": "NONE (derived from canonical knowledge)",
                 "generation": manifest.to_dict(),
-                "implementation": record.to_dict(),
+                # Canonical: the manifest is a generated artifact that a pristine
+                # clone must reproduce byte-for-byte, so it may carry no observation
+                # of the run that wrote it. The actions remain on the returned record
+                # and in the structured log, where they are evidence.
+                "implementation": record.to_canonical_dict(),
             }
         )
         path.parent.mkdir(parents=True, exist_ok=True)

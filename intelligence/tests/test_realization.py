@@ -555,9 +555,23 @@ def test_evidence_varies_only_where_the_materialization_pass_differs(engine) -> 
     """Re-running changes exactly one fact: what the materialization pass did.
 
     The first pass creates files; the second finds them byte-identical and reports
-    ``unchanged``. Exactly three documents may reflect that — the implementation record,
-    the governance decision that cites its id, and the evidence record that seals both.
-    Every knowledge-derived document must be byte-identical.
+    ``unchanged``. Exactly two documents may reflect that — the implementation record
+    that states the observation, and the evidence record that seals it. Every
+    knowledge-derived document must be byte-identical.
+
+    The governance decision is NO LONGER among them. It varied only because it cites
+    ``implementation_id``, and that id was sealed over the per-file ``action`` — so a
+    pristine clone reporting ``created`` and every later pass reporting ``unchanged``
+    produced two different implementation identities from identical canonical
+    knowledge. ``realization/UCOS-URI-MANIFEST.json`` therefore had no fixed point,
+    which is why ``intelligence/realization/engine.py`` could not be added to
+    scripts/generate-prerequisites.sh and ``realization/`` stayed the one open
+    bootstrap gap in the generated-artifact registry.
+
+    ``action`` is now excluded from the seal and from the manifest (UAKOS-CLOSURE-008:
+    an execution transcript is evidence, never identity). The observation is preserved
+    where it belongs — on the returned record, in the structured log, and in these two
+    evidence documents.
     """
     from intelligence.realization.evidence import (
         GOVERNANCE_FILE,
@@ -575,7 +589,14 @@ def test_evidence_varies_only_where_the_materialization_pass_differs(engine) -> 
         for name in first.evidence.documents
         if first.evidence.documents[name] != second.evidence.documents[name]
     }
-    assert varied == {IMPLEMENTATION_FILE, GOVERNANCE_FILE, RECORD_FILE}
+    assert varied == {IMPLEMENTATION_FILE, RECORD_FILE}
+    # The implementation IDENTITY is now a function of what was materialized, not of
+    # what the filesystem held first — so the same knowledge yields one id, always.
+    assert first.record.seal == second.record.seal
+    assert first.record.implementation_id == second.record.implementation_id
+    assert (
+        first.evidence.documents[GOVERNANCE_FILE] == second.evidence.documents[GOVERNANCE_FILE]
+    )
     # The governance verdict itself is unchanged — only the id it cites moved.
     assert first.decision.verdict == second.decision.verdict == VERDICT_GOVERNED
     assert [gate.to_dict() for gate in first.decision.gates] == [
