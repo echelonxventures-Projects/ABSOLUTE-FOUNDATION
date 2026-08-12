@@ -8963,11 +8963,12 @@
     "STAGE0": 1,
     "DET": 2,
     "CONFIG": 29,
-    "DATAOBJ": 108,
+    "DATAOBJ": 109,
     "EXDOC": 2368,
-    "TOOLING": 33,
+    "TOOLING": 34,
     "ENGINE": 1186,
-    "TESTOBJ": 797
+    "TESTOBJ": 798,
+    "OBS": 7
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -51865,6 +51866,75 @@
       "object_class": "EXECUTABLE_OBJECT",
       "category": "ENGINE",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    "00-BOOK/DATA/observation-universe.json": {
+      "universal_id": "UCOS-TOOLING-000034",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:c087882cfd0a"
+    },
+    "00-MASTER/UCOS-UGA-001/08-OBSERVATION-REGISTRY.json": {
+      "universal_id": "UCOS-DATAOBJ-000109",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:c087882cfd0a"
+    },
+    "platform/tests/test_observation_universe.py": {
+      "universal_id": "UCOS-TESTOBJ-000798",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:c087882cfd0a"
+    }
+  },
+  "by_observation": {
+    "UCOS-AEE-001::actuator-execution-residue::EXECUTION_RESIDUE": {
+      "observation_id": "UCOS-OBS-000001",
+      "observer": "UCOS-AEE-001",
+      "subject": "actuator-execution-residue",
+      "kind": "EXECUTION_RESIDUE",
+      "first_seen": "commit:c087882cfd0a"
+    },
+    "UCOS-AEE-001::unattributed-residue::EXECUTION_RESIDUE": {
+      "observation_id": "UCOS-OBS-000002",
+      "observer": "UCOS-AEE-001",
+      "subject": "unattributed-residue",
+      "kind": "EXECUTION_RESIDUE",
+      "first_seen": "commit:c087882cfd0a"
+    },
+    "UCOS-RIB-001::dirty-entries-outside-generated::WORKING_TREE_STATE": {
+      "observation_id": "UCOS-OBS-000003",
+      "observer": "UCOS-RIB-001",
+      "subject": "dirty-entries-outside-generated",
+      "kind": "WORKING_TREE_STATE",
+      "first_seen": "commit:c087882cfd0a"
+    },
+    "UCOS-RIB-001::working-tree-cleanliness-verdict::WORKING_TREE_STATE": {
+      "observation_id": "UCOS-OBS-000004",
+      "observer": "UCOS-RIB-001",
+      "subject": "working-tree-cleanliness-verdict",
+      "kind": "WORKING_TREE_STATE",
+      "first_seen": "commit:c087882cfd0a"
+    },
+    "UCCEP-000005::worktree-entries::WORKING_TREE_STATE": {
+      "observation_id": "UCOS-OBS-000005",
+      "observer": "UCCEP-000005",
+      "subject": "worktree-entries",
+      "kind": "WORKING_TREE_STATE",
+      "first_seen": "commit:c087882cfd0a"
+    },
+    "intelligence/realization::materialization-action::MATERIALIZATION_ACTION": {
+      "observation_id": "UCOS-OBS-000006",
+      "observer": "intelligence/realization",
+      "subject": "materialization-action",
+      "kind": "MATERIALIZATION_ACTION",
+      "first_seen": "commit:c087882cfd0a"
+    },
+    "P0-FINAL-CLOSURE-002::concurrent-writer-detection::WORKING_TREE_STATE": {
+      "observation_id": "UCOS-OBS-000007",
+      "observer": "P0-FINAL-CLOSURE-002",
+      "subject": "concurrent-writer-detection",
+      "kind": "WORKING_TREE_STATE",
+      "first_seen": "commit:c087882cfd0a"
     }
   }
 }

@@ -1562,14 +1562,133 @@ def render(decl: dict, model: dict) -> dict[str, str]:
     return out
 
 
+#: UCOS-OBSERVATION-UNIVERSE-001 — observation VALUES may not enter canonical identity.
+#:
+#: `residue` is the set of paths whose on-disk state changed while a located actuator ran.
+#: It is Observation Truth: it depends on what the working tree held BEFORE the run, not on
+#: what the commit contains. Writing it into aee.json — the artifact Phase 8 measures as
+#: `certification_variance` — made this programme's canonical identity a function of the
+#: tree it was measuring.
+#:
+#: Measured: one stale digest in UKAP-001 caused ONE file to be rewritten. RIB, running
+#: later in the same pass, observed that single dirty entry, flipped GATE-04 and GATE-12
+#: and rewrote sixteen files. This engine then recorded seventeen residue paths into
+#: aee.json. A one-file staleness became a twenty-one-file oscillation that could not
+#: converge, because running the gate was itself a mutation that changed the next reading.
+#:
+#: NOTHING IS WEAKENED AND NOTHING IS DELETED. Residue is still computed, still drives
+#: `unattributed`, still fails the write-zone finding closed, and still appears in the
+#: dashboard and the evidence index. Only its SERIALIZATION into canonical identity is
+#: replaced — by the observation's stable Universal Identity, which is keyed on
+#: observer::subject::kind and therefore never moves when the reading does. The reading
+#: itself is written to the evidence surface below, so it remains fully traceable.
+#:
+#: This is the RIB UCOS-RC-003 pattern, applied to the one programme that lacked it, and
+#: extended past the flaw RC-003 left open: redaction can hide what a field SAYS, but not
+#: whether a list ELEMENT EXISTS, so the key is replaced rather than blanked.
+OBS_KIND = "EXECUTION_RESIDUE"
+OBS_SUBJECTS = {
+    "residue": "actuator-execution-residue",
+    "unattributed": "unattributed-residue",
+    # A COUNT of an observation is still that observation, at lower resolution. The
+    # learning section carried `residue_total` after the per-actuator lists were lifted
+    # out, which would have left the same reading leaking through a scalar.
+    "residue_total": "actuator-execution-residue",
+    "unattributed_residue": "unattributed-residue",
+}
+
+
+def _observation_id(subject: str) -> str:
+    """Resolve one of this programme's observations to its stable Universal Identity.
+
+    Read from the ONE identity authority (00-BOOK/DATA/id-ledger.json :: by_observation).
+    This engine never mints: minting is UCOS-UGA-001's, and a second minter would be a
+    second authority. Fail-closed — an observation with no identity is an anonymous
+    observation, and emitting a reference to one would be worse than emitting the value.
+    """
+    key = f"UCOS-AEE-001::{subject}::{OBS_KIND}"
+    ledger = REPO / "00-BOOK" / "DATA" / "id-ledger.json"
+    try:
+        record = (json.loads(ledger.read_text("utf-8")).get("by_observation") or {}).get(key)
+    except (OSError, ValueError) as exc:  # pragma: no cover - unreadable authority
+        raise SystemExit(f"UCOS-AEE-001: identity authority unreadable ({exc})") from exc
+    if not record:
+        raise SystemExit(
+            f"UCOS-AEE-001: observation {key!r} holds no Universal Identity. "
+            f"Run `python3 00-MASTER/UCOS-UGA-001/uga_engine.py run` to mint it. "
+            f"Refusing to serialize an anonymous observation."
+        )
+    return record["observation_id"]
+
+
+def canonical_model(model: dict) -> dict:
+    """The model with observation values replaced by their stable identities.
+
+    Returns a copy. The in-memory model keeps every reading, so gate evaluation, the
+    rendered registers and the evidence index are unaffected.
+    """
+    ids = {key: _observation_id(subject) for key, subject in OBS_SUBJECTS.items()}
+
+    def strip(node: object) -> object:
+        if isinstance(node, dict):
+            out: dict[str, object] = {}
+            for k, v in node.items():
+                if k in ids:
+                    out[f"{k}_observation"] = ids[k]
+                else:
+                    out[k] = strip(v)
+            return out
+        if isinstance(node, list):
+            return [strip(v) for v in node]
+        return node
+
+    stripped = strip(model)
+    assert isinstance(stripped, dict)
+    return stripped
+
+
+def _emit_observation_evidence(model: dict) -> Path:
+    """Preserve the readings that canonical_model() lifted out of canonical identity.
+
+    Evidence is relocated, never deleted: every residue path this pass observed is written
+    here, addressed by the same observation identity aee.json now carries, so the value is
+    one lookup away from the artifact that references it.
+    """
+    per_actuator = []
+    for iteration in model.get("iterations", []):
+        for actuator in iteration.get("actuators", []):
+            per_actuator.append({
+                "actuator": actuator.get("id"),
+                "residue": actuator.get("residue", []),
+                "unattributed": actuator.get("unattributed", []),
+            })
+    EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
+    target = EVIDENCE_DIR / "observations.json"
+    target.write_text(
+        canonical_json({
+            "authority": "NONE — EVIDENCE. Observation Truth, never canonical identity.",
+            "evidence_class": "EXECUTION",
+            "binds": "UCOS-OBSERVATION-UNIVERSE-001",
+            "observations": {
+                f"{key}_observation": _observation_id(subject)
+                for key, subject in OBS_SUBJECTS.items()
+            },
+            "readings": per_actuator,
+        }),
+        "utf-8",
+    )
+    return target
+
+
 def emit(decl: dict, model: dict) -> list[Path]:
     written: list[Path] = []
     for name, body in sorted(render(decl, model).items()):
         target = HERE / name
         target.write_text(body, "utf-8")
         written.append(target)
+    _emit_observation_evidence(model)
     state = HERE / STATE_FILE
-    state.write_text(canonical_json(model), "utf-8")
+    state.write_text(canonical_json(canonical_model(model)), "utf-8")
     written.append(state)
     ledger = HERE / decl["learning"]["ledger"]
     ledger.write_text(canonical_json(model["learning"]), "utf-8")

@@ -93,6 +93,7 @@
       {"path": "00-MASTER/UCOS-UGA-001/05-GOVERNANCE-INVARIANTS.json", "class": "VALIDATION", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"},
       {"path": "00-MASTER/UCOS-UGA-001/06-SELF-OBSERVATION.json", "class": "IMPROVEMENT", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"},
       {"path": "00-MASTER/UCOS-UGA-001/07-CERTIFICATION.json", "class": "VALIDATION", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"},
+      {"path": "00-MASTER/UCOS-UGA-001/08-OBSERVATION-REGISTRY.json", "class": "VALIDATION", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"},
       {"path": "00-MASTER/UCOS-UGA-001/00-UGA-DASHBOARD.md", "class": "VALIDATION", "retention": "REGENERATED", "input_classification": "TRACKED_DETERMINISTIC"}
     ]
   },

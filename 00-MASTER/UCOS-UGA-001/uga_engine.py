@@ -50,6 +50,7 @@ import ast
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -61,6 +62,7 @@ LEDGER_PATH = os.path.join(REPO, "00-BOOK", "DATA", "id-ledger.json")
 ARTIFACTS_PATH = os.path.join(REPO, "00-BOOK", "DATA", "artifacts.json")
 GENREG_PATH = os.path.join(REPO, "00-BOOK", "DATA", "generated-artifact-registry.json")
 EVIDENCE_PATH = os.path.join(REPO, "00-BOOK", "DATA", "evidence-universe.json")
+OBSERVATION_PATH = os.path.join(REPO, "00-BOOK", "DATA", "observation-universe.json")
 
 OUT = {
     "inventory":    os.path.join(HERE, "00-EXISTENCE-INVENTORY.json"),
@@ -71,6 +73,7 @@ OUT = {
     "invariants":   os.path.join(HERE, "05-GOVERNANCE-INVARIANTS.json"),
     "observation":  os.path.join(HERE, "06-SELF-OBSERVATION.json"),
     "certification": os.path.join(HERE, "07-CERTIFICATION.json"),
+    "observations": os.path.join(HERE, "08-OBSERVATION-REGISTRY.json"),
     "dashboard":    os.path.join(HERE, "00-UGA-DASHBOARD.md"),
 }
 
@@ -423,9 +426,147 @@ def epoch2_registry(objects, index, producer_of, consumers_of, decl, tracked):
 
 
 # ---------------------------------------------------------------------------
+# Observation Universe — identity for what was SEEN, separate from what IS
+# ---------------------------------------------------------------------------
+def observation_key(observer: str, subject: str, kind: str) -> str:
+    return f"{observer}::{subject}::{kind}"
+
+
+def mint_observation(ledger, observer: str, subject: str, kind: str, mint: bool, now: str):
+    """Return the stable Universal Identity of an observation.
+
+    VALUE-INDEPENDENT BY CONSTRUCTION. The key is (observer, subject, kind) and the
+    observed value is not an input, so the identity a canonical artifact carries never
+    moves when the observation does. That is the whole mechanism: the canonical bytes
+    hold still while the measurement stays free to change, and nothing is hidden —
+    the value is preserved on an evidence surface addressed by this id.
+
+    Minted from the ONE identity authority (shared category_seq, category OBS) into the
+    append-only `by_observation` map, alongside `by_path` and `by_object`.
+    """
+    by_obs = ledger.setdefault("by_observation", {})
+    key = observation_key(observer, subject, kind)
+    existing = by_obs.get(key)
+    if existing:
+        return existing["observation_id"]
+    if not mint:
+        return None
+    seq = ledger.setdefault("category_seq", {})
+    n = seq.get("OBS", 0) + 1
+    seq["OBS"] = n
+    oid = f"UCOS-OBS-{n:06d}"
+    by_obs[key] = {
+        "observation_id": oid,
+        "observer": observer,
+        "subject": subject,
+        "kind": kind,
+        "first_seen": now,
+    }
+    return oid
+
+
+#: The observations this repository's engines are KNOWN to take. Declaring them here
+#: (rather than discovering them) is deliberate: an observation that no one declared is
+#: an anonymous observation, and OBS-INV-01 forbids those. Each entry is minted an
+#: identity, so a canonical artifact has a stable id to reference in place of a value.
+DECLARED_OBSERVATIONS: tuple[tuple[str, str, str], ...] = (
+    ("UCOS-AEE-001", "actuator-execution-residue", "EXECUTION_RESIDUE"),
+    ("UCOS-AEE-001", "unattributed-residue", "EXECUTION_RESIDUE"),
+    ("UCOS-RIB-001", "dirty-entries-outside-generated", "WORKING_TREE_STATE"),
+    ("UCOS-RIB-001", "working-tree-cleanliness-verdict", "WORKING_TREE_STATE"),
+    ("UCCEP-000005", "worktree-entries", "WORKING_TREE_STATE"),
+    ("intelligence/realization", "materialization-action", "MATERIALIZATION_ACTION"),
+    ("P0-FINAL-CLOSURE-002", "concurrent-writer-detection", "WORKING_TREE_STATE"),
+)
+
+
+def epoch_observation_universe(ledger, obs_decl, mint: bool, now: str):
+    """Mint identity for every declared observation; return the registry rows."""
+    kinds = set(obs_decl["observation_kinds"])
+    rows, anonymous, undeclared_kind = [], [], []
+    for observer, subject, kind in DECLARED_OBSERVATIONS:
+        if kind not in kinds:
+            undeclared_kind.append(f"{observer}::{subject}::{kind}")
+            continue
+        oid = mint_observation(ledger, observer, subject, kind, mint, now)
+        if not oid:
+            anonymous.append(observation_key(observer, subject, kind))
+            continue
+        spec = obs_decl["observation_kinds"][kind]
+        rows.append({
+            "observation_id": oid,
+            "observer": observer,
+            "subject": subject,
+            "kind": kind,
+            "canonical_admissibility": spec["canonical_admissibility"],
+            "evidence_class": spec["evidence_class"],
+            "evidence_surface": f"00-MASTER/{observer}/evidence/"
+                                if observer.startswith(("UCOS-", "UCCEP", "P0-")) else observer,
+            "value_recorded_here": False,
+        })
+    rows.sort(key=lambda r: r["observation_id"])
+    return rows, anonymous, undeclared_kind
+
+
+def scan_canonical_for_observation_values(obs_decl):
+    """OBS-INV-02 — find observation VALUES embedded in canonical artifacts.
+
+    Structural, deterministic, and declaration-driven: the key names come from the
+    registry's `forbidden_canonical_keys`, so closing a newly-found leak is one appended
+    entry in DATA and needs no code change.
+
+    A key carrying a well-formed observation id is COMPLIANT — that is the migration
+    target, not a violation. A key carrying anything else is the value itself.
+    """
+    id_shape = re.compile(obs_decl["observation_id_shape"])
+    rules = obs_decl["forbidden_canonical_keys"]["rules"]
+    findings = []
+
+    def walk(node, path, rel, forbidden):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                if k in forbidden:
+                    if isinstance(v, str) and id_shape.match(v):
+                        continue                      # a reference — compliant
+                    if isinstance(v, list) and not v:
+                        # An empty list still ENCODES the observation: it is the value
+                        # "nothing was seen", and it becomes non-empty when something is.
+                        findings.append(f"{rel}: {path}.{k} carries an observation value "
+                                        f"(empty list — presence still encodes the reading)")
+                    else:
+                        findings.append(f"{rel}: {path}.{k} carries an observation value "
+                                        f"({forbidden[k]})")
+                walk(v, f"{path}.{k}", rel, forbidden)
+        elif isinstance(node, list):
+            for i, v in enumerate(node):
+                walk(v, f"{path}[{i}]", rel, forbidden)
+
+    for rel in obs_decl["canonical_scope"]["paths"]:
+        abspath = os.path.join(REPO, rel)
+        if not os.path.isfile(abspath):
+            findings.append(f"{rel}: declared canonical artifact is absent (fails closed)")
+            continue
+        if not rel.endswith(".json"):
+            continue                                  # markdown renderings follow their model
+        forbidden = {r["key"]: r["kind"] for r in rules if r["artifact"] == rel}
+        if not forbidden:
+            continue
+        try:
+            with open(abspath, encoding="utf-8") as fh:
+                doc = json.load(fh)
+        except (OSError, ValueError) as exc:
+            findings.append(f"{rel}: unreadable, so it cannot be cleared ({exc})")
+            continue
+        walk(doc, "$", rel, forbidden)
+    return findings
+
+
+# ---------------------------------------------------------------------------
 # EPOCH 5 — executable governance invariants
 # ---------------------------------------------------------------------------
-def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, retired):
+def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, retired,
+                      obs_decl, obs_rows, obs_anonymous, obs_undeclared_kind,
+                      obs_value_findings, ledger):
     """Evaluate all ten invariants. Every one is a real measurement over real state
     and every one fails closed: an unmeasurable input is a violation, never a pass.
     """
@@ -548,6 +689,60 @@ def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, re
     v = sorted(mutated - audited)
     add("UGA-INV-10", "EVERY_MUTATION_HAS_AUDIT_EVENT", v, len(mutated))
 
+    # ---- Observation Universe (UCOS-OBSERVATION-UNIVERSE-001) --------------------
+    # The separation of Identity Truth from Observation Truth. These are the invariants
+    # whose absence let one stale digest become a permanently non-convergent Phase 8.
+
+    # OBS-01 — every declared observation holds a universal identity
+    v = list(obs_anonymous)
+    add("OBS-INV-01", "EVERY_OBSERVATION_HAS_UNIVERSAL_IDENTITY", v, len(DECLARED_OBSERVATIONS))
+
+    # OBS-02 — no canonical artifact embeds an observation value
+    v = list(obs_value_findings)
+    add("OBS-INV-02", "NO_CANONICAL_ARTIFACT_EMBEDS_AN_OBSERVATION_VALUE", v,
+        len(obs_decl["canonical_scope"]["paths"]),
+        "Structural scan driven by the registry's forbidden_canonical_keys. A key holding "
+        "a well-formed observation id is compliant; a key holding anything else — including "
+        "an empty list, whose presence still encodes the reading — is the value itself.")
+
+    # OBS-03 — every observation reference resolves to a declared kind
+    v = list(obs_undeclared_kind)
+    add("OBS-INV-03", "EVERY_OBSERVATION_REFERENCE_RESOLVES_TO_A_DECLARED_KIND", v,
+        len(DECLARED_OBSERVATIONS))
+
+    # OBS-04 — every observation names an evidence surface
+    v = [r["observation_id"] for r in obs_rows if not r.get("evidence_surface")]
+    add("OBS-INV-04", "EVERY_OBSERVATION_HAS_AN_EVIDENCE_SURFACE", v, len(obs_rows))
+
+    # OBS-05 — no certification artifact observes its own product.
+    # An artifact may not both be written by a producer and record an observation of the
+    # tree that producer's own write dirties. That is the self-reference loop itself.
+    v = []
+    scope = obs_decl["canonical_scope"]["paths"]
+    for r in obs_rows:
+        if r["canonical_admissibility"] != "FORBIDDEN":
+            continue
+        # The canonical artifacts this observer itself produces.
+        own = [p for p in scope if f"/{r['observer']}/" in f"/{p}"]
+        for out in own:
+            if any(finding.startswith(f"{out}:") for finding in obs_value_findings):
+                v.append(f"{r['observation_id']} ({r['observer']}) embeds a "
+                         f"{r['kind']} observation in its own product {out}")
+    add("OBS-INV-05", "NO_CERTIFICATION_ARTIFACT_OBSERVES_ITS_OWN_PRODUCT", sorted(set(v)),
+        len(obs_rows))
+
+    # OBS-06 — observation identity is value-independent.
+    # Proven from the ledger rather than asserted: the minted key must be exactly
+    # observer::subject::kind, so no observed value can have entered it.
+    v = []
+    for key, rec in (ledger.get("by_observation") or {}).items():
+        expected = observation_key(rec.get("observer", ""), rec.get("subject", ""),
+                                   rec.get("kind", ""))
+        if key != expected:
+            v.append(f"{rec.get('observation_id')}: key {key!r} != {expected!r}")
+    add("OBS-INV-06", "OBSERVATION_IDENTITY_IS_VALUE_INDEPENDENT", v,
+        len(ledger.get("by_observation") or {}))
+
     return inv
 
 
@@ -642,6 +837,7 @@ def build(mint: bool):
     ledger = _load(LEDGER_PATH)
     genreg = _load(GENREG_PATH)
     evidence = _load(EVIDENCE_PATH)
+    obs_decl = _load(OBSERVATION_PATH)
     artifacts = _load(ARTIFACTS_PATH, {"artifacts": []})
 
     registered_docs = {a["path"] for a in artifacts.get("artifacts", [])}
@@ -699,8 +895,14 @@ def build(mint: bool):
             "status": "RETIRED" if rel in set(retired) else "ACTIVE",
         })
 
+    obs_rows, obs_anonymous, obs_undeclared_kind = epoch_observation_universe(
+        ledger, obs_decl, mint, now)
+    obs_value_findings = scan_canonical_for_observation_values(obs_decl)
+
     invariants = epoch5_invariants(entries, objects, genreg, evidence, decl,
-                                   audit_events, retired)
+                                   audit_events, retired, obs_decl, obs_rows,
+                                   obs_anonymous, obs_undeclared_kind,
+                                   obs_value_findings, ledger)
     observation, deviations, plans, evolution = epochs6_9(entries, invariants,
                                                           objects, retired)
 
@@ -723,7 +925,9 @@ def build(mint: bool):
                 audit_events=audit_events, invariants=invariants,
                 observation=observation, deviations=deviations, plans=plans,
                 evolution=evolution, rel_edges=rel_edges, genreg=genreg,
-                registered_docs=registered_docs, now=now)
+                registered_docs=registered_docs, now=now,
+                obs_decl=obs_decl, obs_rows=obs_rows,
+                obs_value_findings=obs_value_findings)
 
 
 def emit(st):
@@ -782,6 +986,20 @@ def emit(st):
                      "passed": passed, "total": len(st["invariants"]),
                      "result": "PASS" if passed == len(st["invariants"]) else "FAIL",
                      "invariants": st["invariants"]})
+
+    w("observations", {**hdr, "epoch": "Observation Universe — Observation Truth, held apart from Identity Truth",
+                       "authority_binding": "UCOS-OBSERVATION-UNIVERSE-001",
+                       "identity_authority": "00-BOOK/DATA/id-ledger.json :: by_observation "
+                                             "(shared category_seq, category OBS)",
+                       "value_independence": "The identity is keyed on observer::subject::kind. "
+                                             "No observed value is an input, so a canonical "
+                                             "artifact may carry the id permanently while the "
+                                             "reading changes on every run.",
+                       "values_are_not_here": "This registry records WHICH observations exist and "
+                                              "WHO takes them. The readings live on the evidence "
+                                              "surface each row names.",
+                       "count": len(st["obs_rows"]),
+                       "observations": st["obs_rows"]})
 
     w("observation", {**hdr, "epoch": "6-9 — Self Observation / Analysis / Planning / Evolution",
                       "evidence_class": "IMPROVEMENT",

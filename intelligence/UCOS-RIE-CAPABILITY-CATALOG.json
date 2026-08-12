@@ -10743,6 +10743,7 @@
         "grant_b",
         "invalid_validation_subject",
         "item",
+        "ledger",
         "listings",
         "make_policy",
         "make_request",
@@ -10785,6 +10786,7 @@
         "record",
         "register",
         "register_for",
+        "registry",
         "rejected_facts",
         "rejected_subject",
         "relationship",
@@ -10985,9 +10987,7 @@
         "test_a_declared_catalogue_that_is_absent_fails",
         "test_a_declared_cli_that_is_not_callable_fails",
         "test_a_declared_command_is_unmeasured_until_it_is_actually_run",
-        "test_a_declared_command_that_cannot_be_executed_withholds_readiness",
-        "test_a_declared_command_that_exits_zero_discharges_its_criterion",
-        "test_a_declared_command_that_fails_withholds_readiness_and_reports_its_tail"
+        "test_a_declared_command_that_cannot_be_executed_withholds_readiness"
       ],
       "unique_id": "RC-96"
     },
@@ -13288,7 +13288,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "6e5fae5308b096f428ede760a7656436c8dc550e2bc59267e5e0336aa6ff29da",
+  "content_hash": "b64f4cf4bfdc40f4609d56797561607f7d57d37deec286bb83c75c648da705f4",
   "count": 121,
   "evidence_state": {
     "evidence_files": {

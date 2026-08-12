@@ -48,8 +48,8 @@
         "loc": 125109,
         "root": "platform",
         "source_files": 446,
-        "test_files": 336,
-        "test_functions": 5444
+        "test_files": 337,
+        "test_functions": 5457
       },
       "service": {
         "loc": 20464,
@@ -60,9 +60,9 @@
       }
     },
     "total_loc": 318002,
-    "total_tests": 12970
+    "total_tests": 12983
   },
-  "content_hash": "4fb5ef507d36a3be5ee74fc5cf0333c73421698b54de880de0fe7c8758e74679",
+  "content_hash": "2beed067aac9260b45312718a8ed69fc4d429d099a8cd97b8802f910d43241a2",
   "corpus": {
     "artifacts": 1233,
     "edges": 12899,

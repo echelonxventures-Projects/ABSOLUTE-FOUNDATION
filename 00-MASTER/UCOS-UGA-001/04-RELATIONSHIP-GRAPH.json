@@ -12,7 +12,7 @@
     "validated_by",
     "evidenced_by"
   ],
-  "count": 32889,
+  "count": 32902,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -11831,6 +11831,26 @@
     },
     {
       "from": "UCOS-DATAOBJ-000108",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000109",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000109",
+      "kind": "owned_by",
+      "to": "UCOS-UGA-001"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000109",
+      "kind": "produced_by",
+      "to": "00-MASTER/UCOS-UGA-001/uga_engine.py"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000109",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -66578,6 +66598,11 @@
       "from": "UCOS-ENGINE-001186",
       "kind": "produces",
       "to": "00-MASTER/UCOS-UGA-001/07-CERTIFICATION.json"
+    },
+    {
+      "from": "UCOS-ENGINE-001186",
+      "kind": "produces",
+      "to": "00-MASTER/UCOS-UGA-001/08-OBSERVATION-REGISTRY.json"
     },
     {
       "from": "UCOS-ENGINE-001186",
@@ -162110,6 +162135,26 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
+      "from": "UCOS-TESTOBJ-000798",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000798",
+      "kind": "owned_by",
+      "to": "platform/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000798",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000798",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
       "from": "UCOS-TOOLING-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -162796,6 +162841,26 @@
     },
     {
       "from": "UCOS-TOOLING-000033",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TOOLING-000034",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TOOLING-000034",
+      "kind": "owned_by",
+      "to": "UCOS-UKB-TOOLING"
+    },
+    {
+      "from": "UCOS-TOOLING-000034",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TOOLING-000034",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },

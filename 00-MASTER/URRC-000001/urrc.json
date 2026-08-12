@@ -2380,8 +2380,8 @@
           "YES",
           "YES",
           "2/2",
-          "1380",
-          "`8ce4fd1aba86`"
+          "1381",
+          "`6e188bf4a2d3`"
         ],
         [
           "`S-06`",
@@ -3480,7 +3480,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "8ce4fd1aba86f44553f19e346b05310df5ac7090f3d3f7f4478f9a6ad99ccc23",
+      "content_sha256": "6e188bf4a2d3cee0c253e72fcf0bf7206c70a14d9837ad2407e196d93975e84d",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",
@@ -3496,7 +3496,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Forward-only identity allocation ledger.",
-      "records": 1380,
+      "records": 1381,
       "required": true,
       "tracked": true
     },

@@ -7,19 +7,19 @@
   "evidence_class": "IMPROVEMENT",
   "may_influence_certification": false,
   "observation": {
-    "total_objects": 5754,
+    "total_objects": 5757,
     "by_object_class": {
       "CONFIGURATION_OBJECT": 29,
-      "DATA_OBJECT": 108,
+      "DATA_OBJECT": 109,
       "DOCUMENT_ARTIFACT": 1233,
       "EXCLUDED_DOCUMENT": 2368,
       "EXECUTABLE_OBJECT": 1186,
-      "TEST_OBJECT": 797,
-      "TOOLING_OBJECT": 33
+      "TEST_OBJECT": 798,
+      "TOOLING_OBJECT": 34
     },
     "by_lifecycle": {
-      "AUTHORED": 5430,
-      "GENERATED": 324
+      "AUTHORED": 5432,
+      "GENERATED": 325
     },
     "distinct_owners": 245,
     "top_owners": [
@@ -29,7 +29,7 @@
       },
       {
         "owner": "platform/tests",
-        "objects": 336
+        "objects": 337
       },
       {
         "owner": "engine/tests",

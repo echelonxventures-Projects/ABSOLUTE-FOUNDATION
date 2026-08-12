@@ -3509,6 +3509,25 @@ _WORKING_TREE_MEASURES: frozenset[str] = frozenset(
 )
 
 
+def _working_tree_observation_id() -> str | None:
+    """This programme's working-tree observation, resolved to its Universal Identity.
+
+    Read from the ONE identity authority (00-BOOK/DATA/id-ledger.json :: by_observation).
+    This engine never mints — minting belongs to UCOS-UGA-001, and a second minter would
+    be a second authority. Returns None when the observation has not been minted, so the
+    caller keeps the original RC-003 placeholder rather than emitting a dangling id.
+    """
+    key = "UCOS-RIB-001::dirty-entries-outside-generated::WORKING_TREE_STATE"
+    try:
+        ledger = json.loads(
+            (REPO / "00-BOOK" / "DATA" / "id-ledger.json").read_text(encoding="utf-8")
+        )
+    except (OSError, ValueError):
+        return None
+    record = (ledger.get("by_observation") or {}).get(key)
+    return record.get("observation_id") if record else None
+
+
 def canonical_model(model: dict) -> dict:
     """The model with working-tree measurements withheld from serialization.
 
@@ -3516,7 +3535,15 @@ def canonical_model(model: dict) -> dict:
     report and the evidence index are unaffected.
     """
 
-    withheld = "<withheld: working-tree measurement, UCOS-RC-003>"
+    # UCOS-OBSERVATION-UNIVERSE-001 — a redaction hides the reading but points at nothing,
+    # so the evidence it withholds is untraceable. The placeholder is replaced by the
+    # observation's stable Universal Identity: byte-stable exactly as the placeholder was,
+    # and now resolvable to the surface that holds the reading. Falls back to the original
+    # placeholder only if the identity authority has not yet minted the observation, so
+    # this engine never blocks on UCOS-UGA-001 and never emits a dangling reference.
+    withheld = _working_tree_observation_id() or (
+        "<withheld: working-tree measurement, UCOS-RC-003>"
+    )
 
     def redact_text(text: str) -> str:
         """Redact `metric=value` renderings, which is how gates and compliance carry it."""

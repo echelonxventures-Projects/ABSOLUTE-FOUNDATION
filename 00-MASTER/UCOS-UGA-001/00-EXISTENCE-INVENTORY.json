@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 5754,
+  "total_objects": 5757,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -681,6 +681,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-TOOLING-000010",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "00-BOOK/DATA/observation-universe.json",
+      "object_class": "TOOLING_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-UKB-TOOLING",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TOOLING-000034",
+      "first_seen": "commit:c087882cfd0a"
     },
     {
       "path": "00-BOOK/DATA/relationships.json",
@@ -20672,6 +20681,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-DATAOBJ-000107",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "00-MASTER/UCOS-UGA-001/08-OBSERVATION-REGISTRY.json",
+      "object_class": "DATA_OBJECT",
+      "lifecycle": "GENERATED",
+      "owner": "UCOS-UGA-001",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-DATAOBJ-000109",
+      "first_seen": "commit:c087882cfd0a"
     },
     {
       "path": "00-MASTER/UCOS-UGA-001/uga-declaration.json",
@@ -44581,6 +44599,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-TESTOBJ-000555",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "platform/tests/test_observation_universe.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "platform/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000798",
+      "first_seen": "commit:c087882cfd0a"
     },
     {
       "path": "platform/tests/test_portal_access.py",

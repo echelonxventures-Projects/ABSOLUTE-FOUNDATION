@@ -7029,7 +7029,8 @@
         "00-BOOK/DATA/artifacts.json",
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
-        "scripts/generate-prerequisites.sh"
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7038,7 +7039,8 @@
         "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
-        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7065,7 +7067,8 @@
         "00-BOOK/DATA/artifacts.json",
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
-        "scripts/generate-prerequisites.sh"
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7074,7 +7077,8 @@
         "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
-        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7101,7 +7105,8 @@
         "00-BOOK/DATA/artifacts.json",
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
-        "scripts/generate-prerequisites.sh"
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7110,7 +7115,8 @@
         "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
-        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7137,7 +7143,8 @@
         "00-BOOK/DATA/artifacts.json",
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
-        "scripts/generate-prerequisites.sh"
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7146,7 +7153,8 @@
         "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
-        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7173,7 +7181,8 @@
         "00-BOOK/DATA/artifacts.json",
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
-        "scripts/generate-prerequisites.sh"
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7182,7 +7191,8 @@
         "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
-        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7209,7 +7219,8 @@
         "00-BOOK/DATA/artifacts.json",
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
-        "scripts/generate-prerequisites.sh"
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7218,7 +7229,8 @@
         "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
-        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7245,7 +7257,8 @@
         "00-BOOK/DATA/artifacts.json",
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
-        "scripts/generate-prerequisites.sh"
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7254,7 +7267,8 @@
         "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
-        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7281,7 +7295,8 @@
         "00-BOOK/DATA/artifacts.json",
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
-        "scripts/generate-prerequisites.sh"
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7290,7 +7305,8 @@
         "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
-        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,
@@ -7317,7 +7333,8 @@
         "00-BOOK/DATA/artifacts.json",
         "00-BOOK/DATA/generated-artifact-registry.json",
         "00-BOOK/DATA/evidence-universe.json",
-        "scripts/generate-prerequisites.sh"
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
       ],
       "input_classification": {
         "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
@@ -7326,7 +7343,46 @@
         "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
         "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
-        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC"
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-UGA-001",
+      "regeneration_command": "python3 00-MASTER/UCOS-UGA-001/uga_engine.py run",
+      "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-UGA-001.08-OBSERVATION-REGISTRY.json",
+      "canonical_path": "00-MASTER/UCOS-UGA-001/08-OBSERVATION-REGISTRY.json",
+      "title": "Observation Universe registry — every observation this repository takes, with its stable Universal Identity. Values live on evidence surfaces.",
+      "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "owner": "UCOS-UGA-001",
+      "capability": "universal-governance-assimilation",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+        "00-BOOK/DATA/id-ledger.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/generated-artifact-registry.json",
+        "00-BOOK/DATA/evidence-universe.json",
+        "scripts/generate-prerequisites.sh",
+        "00-BOOK/DATA/observation-universe.json"
+      ],
+      "input_classification": {
+        "00-MASTER/UCOS-UGA-001/uga_engine.py": "TRACKED_DETERMINISTIC",
+        "00-MASTER/UCOS-UGA-001/uga-declaration.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/id-ledger.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/artifacts.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/generated-artifact-registry.json": "GENERATED_DETERMINISTIC",
+        "00-BOOK/DATA/evidence-universe.json": "GENERATED_DETERMINISTIC",
+        "scripts/generate-prerequisites.sh": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/observation-universe.json": "GENERATED_DETERMINISTIC"
       },
       "build_mode_inputs": [],
       "deterministic": true,

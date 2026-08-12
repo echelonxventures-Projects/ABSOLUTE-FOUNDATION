@@ -7,9 +7,9 @@
   "determination_id": "D-1",
   "files": {
     "assimilation_baseline": {
-      "bytes": 9308828,
+      "bytes": 9317261,
       "relative": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
-      "sha256": "371841576a8cd22a1cabbd0d952e6cd467af5192b04ee468697e723bf2834eff"
+      "sha256": "77a1158843a569232fd42368b2d5f03b366ada10747d84dacfbb0a7182fc36c8"
     },
     "export::31b621b2cecc55e8": {
       "bytes": 351,
@@ -27,6 +27,6 @@
       "sha256": "02872e3edae553e6106c52ac8946dbd5c87b218743b78108ff7c6fc261e147b7"
     }
   },
-  "head_commit": "05342cb",
+  "head_commit": "c087882c",
   "program": "UKAP-001"
 }

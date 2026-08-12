@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "3 — Audit Universe",
   "evidence_class": "AUDIT",
-  "count": 4521,
+  "count": 4524,
   "events": [
     {
       "event_id": "UGA-AUD-368c03bec2e5",
@@ -744,6 +744,19 @@
       "object_path": "00-BOOK/DATA/mutation-governance-boundary.json",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-TOOLING-000010",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-521d9c556ec9",
+      "timestamp": "commit:c087882cfd0a",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-TOOLING-000034",
+      "object_path": "00-BOOK/DATA/observation-universe.json",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-TOOLING-000034",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"
@@ -28296,6 +28309,19 @@
       "status": "ACTIVE"
     },
     {
+      "event_id": "UGA-AUD-27856ca19505",
+      "timestamp": "commit:c087882cfd0a",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-DATAOBJ-000109",
+      "object_path": "00-MASTER/UCOS-UGA-001/08-OBSERVATION-REGISTRY.json",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-DATAOBJ-000109",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-0b4a6fbefd9f",
       "timestamp": "commit:e98f59cd22e9",
       "actor": "UCOS-UGA-001",
@@ -52068,6 +52094,19 @@
       "object_path": "platform/tests/test_observability_traces.py",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-TESTOBJ-000555",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-5aefb36e877a",
+      "timestamp": "commit:c087882cfd0a",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-TESTOBJ-000798",
+      "object_path": "platform/tests/test_observation_universe.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-TESTOBJ-000798",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"

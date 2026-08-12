@@ -177,9 +177,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -196,9 +196,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -216,9 +216,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -235,9 +235,9 @@
           "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -255,9 +255,9 @@
           "owner": "00-MASTER/UEI-000001/uei_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -275,9 +275,9 @@
           "owner": "00-MASTER/UER-000001/uer_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -300,9 +300,9 @@
           "owner": "00-MASTER/URRC-000001/urrc_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -319,9 +319,9 @@
           "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -338,9 +338,9 @@
           "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -357,9 +357,9 @@
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -375,9 +375,9 @@
           "owner": "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -394,9 +394,9 @@
           "owner": "00-MASTER/UKAP-001/corpus_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -412,9 +412,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -431,9 +431,9 @@
           "owner": "00-MASTER/UMK-000001/umk_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -449,9 +449,9 @@
           "owner": "00-MASTER/UPF-000001/upf_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -467,9 +467,9 @@
           "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -486,9 +486,9 @@
           "owner": "00-MASTER/UCOS-UAR-001/uar_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -516,9 +516,9 @@
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "reason": "declared tier is above the selected tier standard",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "closure",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "NOT-EXECUTED"
         }
       ],
@@ -1178,9 +1178,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1197,9 +1197,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1217,9 +1217,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1236,9 +1236,9 @@
           "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1256,9 +1256,9 @@
           "owner": "00-MASTER/UEI-000001/uei_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1276,9 +1276,9 @@
           "owner": "00-MASTER/UER-000001/uer_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1301,9 +1301,9 @@
           "owner": "00-MASTER/URRC-000001/urrc_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1320,9 +1320,9 @@
           "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1339,9 +1339,9 @@
           "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1358,9 +1358,9 @@
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1376,9 +1376,9 @@
           "owner": "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1395,9 +1395,9 @@
           "owner": "00-MASTER/UKAP-001/corpus_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1413,9 +1413,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1432,9 +1432,9 @@
           "owner": "00-MASTER/UMK-000001/umk_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1450,9 +1450,9 @@
           "owner": "00-MASTER/UPF-000001/upf_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1468,9 +1468,9 @@
           "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1487,9 +1487,9 @@
           "owner": "00-MASTER/UCOS-UAR-001/uar_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -1517,9 +1517,9 @@
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "reason": "declared tier is above the selected tier standard",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "closure",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "NOT-EXECUTED"
         }
       ],
@@ -2179,9 +2179,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2198,9 +2198,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2218,9 +2218,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2237,9 +2237,9 @@
           "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2257,9 +2257,9 @@
           "owner": "00-MASTER/UEI-000001/uei_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2277,9 +2277,9 @@
           "owner": "00-MASTER/UER-000001/uer_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2302,9 +2302,9 @@
           "owner": "00-MASTER/URRC-000001/urrc_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2321,9 +2321,9 @@
           "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2340,9 +2340,9 @@
           "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2359,9 +2359,9 @@
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2377,9 +2377,9 @@
           "owner": "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2396,9 +2396,9 @@
           "owner": "00-MASTER/UKAP-001/corpus_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2414,9 +2414,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2433,9 +2433,9 @@
           "owner": "00-MASTER/UMK-000001/umk_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2451,9 +2451,9 @@
           "owner": "00-MASTER/UPF-000001/upf_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2469,9 +2469,9 @@
           "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2488,9 +2488,9 @@
           "owner": "00-MASTER/UCOS-UAR-001/uar_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -2518,9 +2518,9 @@
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "reason": "declared tier is above the selected tier standard",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "closure",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "NOT-EXECUTED"
         }
       ],
@@ -3180,9 +3180,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3199,9 +3199,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3219,9 +3219,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3238,9 +3238,9 @@
           "owner": "00-MASTER/UCDA-000001/ucda_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3258,9 +3258,9 @@
           "owner": "00-MASTER/UEI-000001/uei_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3278,9 +3278,9 @@
           "owner": "00-MASTER/UER-000001/uer_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3303,9 +3303,9 @@
           "owner": "00-MASTER/URRC-000001/urrc_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3322,9 +3322,9 @@
           "owner": "00-MASTER/UAEP-000001/uaep_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3341,9 +3341,9 @@
           "owner": "00-MASTER/UCEF-000001/ucef_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3360,9 +3360,9 @@
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3378,9 +3378,9 @@
           "owner": "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3397,9 +3397,9 @@
           "owner": "00-MASTER/UKAP-001/corpus_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3415,9 +3415,9 @@
           "owner": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3434,9 +3434,9 @@
           "owner": "00-MASTER/UMK-000001/umk_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3452,9 +3452,9 @@
           "owner": "00-MASTER/UPF-000001/upf_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3470,9 +3470,9 @@
           "owner": "00-MASTER/MCOS-000001/mcos_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3489,9 +3489,9 @@
           "owner": "00-MASTER/UCOS-UAR-001/uar_engine.py",
           "reason": "",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "standard",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "PASS"
         },
         {
@@ -3519,9 +3519,9 @@
           "owner": "00-MASTER/UCCEP-000000/uccep_engine.py",
           "reason": "declared tier is above the selected tier standard",
           "required": true,
-          "residue": [],
+          "residue_observation": "UCOS-OBS-000001",
           "tier": "closure",
-          "unattributed": [],
+          "unattributed_observation": "UCOS-OBS-000002",
           "verdict": "NOT-EXECUTED"
         }
       ],
@@ -4165,87 +4165,87 @@
   "learning": {
     "actuator": {
       "ACT-ARCHITECTURAL-BLUEPRINT": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-CIVILIZATION-PLATFORM": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-CONSTITUTIONAL-ASSIMILATION": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-CORPUS-CURRENCY": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-DECISION-ASSIMILATION": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-EVOLUTION-FRAMEWORK": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-EVOLUTION-INTELLIGENCE": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-EXECUTION-RESILIENCE": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-KNOWLEDGE-CLOSURE": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-KNOWLEDGE-GAP-PLAN": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-META-KERNEL": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-PLATFORM-BINDING": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-PROVIDER-FRAMEWORK": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-READINESS-PROJECTION": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-REGISTRY-BINDING": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-REPOSITORY-REALITY": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       },
       "ACT-ROADMAP-PROJECTION": {
-        "residue_total": 0,
+        "residue_total_observation": "UCOS-OBS-000001",
         "verdict": "PASS",
         "zones_exercised": []
       }
@@ -5241,7 +5241,7 @@
   "measured": {
     "actuator_failures": 0,
     "blocking_violations": 1,
-    "unattributed_residue": 0,
+    "unattributed_residue_observation": "UCOS-OBS-000002",
     "unclassified_findings": 0,
     "unresolved_mandate_bindings": 0,
     "unresolved_pointers": 0,
@@ -5286,7 +5286,7 @@
   "seal_sha256": "4a40807e5a73d0a35f4ee69b335b602b65167ad4a6870e02bcbb9a1c9a634573",
   "stable_iterations": 4,
   "tier": "standard",
-  "unattributed_residue": [],
+  "unattributed_residue_observation": "UCOS-OBS-000002",
   "unclassified_findings": [],
   "unresolved_pointers": [],
   "unsatisfied_criteria": [

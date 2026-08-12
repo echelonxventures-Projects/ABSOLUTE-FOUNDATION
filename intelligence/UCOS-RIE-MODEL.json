@@ -10831,6 +10831,7 @@
         "grant_b",
         "invalid_validation_subject",
         "item",
+        "ledger",
         "listings",
         "make_policy",
         "make_request",
@@ -10873,6 +10874,7 @@
         "record",
         "register",
         "register_for",
+        "registry",
         "rejected_facts",
         "rejected_subject",
         "relationship",
@@ -11073,9 +11075,7 @@
         "test_a_declared_catalogue_that_is_absent_fails",
         "test_a_declared_cli_that_is_not_callable_fails",
         "test_a_declared_command_is_unmeasured_until_it_is_actually_run",
-        "test_a_declared_command_that_cannot_be_executed_withholds_readiness",
-        "test_a_declared_command_that_exits_zero_discharges_its_criterion",
-        "test_a_declared_command_that_fails_withholds_readiness_and_reports_its_tail"
+        "test_a_declared_command_that_cannot_be_executed_withholds_readiness"
       ],
       "unique_id": "RC-96"
     },
@@ -13377,7 +13377,7 @@
   ],
   "capability_count": 121,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "0dfe1408756ea72bc35c2ca585a1105794cc5e2586a075622dafb2f5af6047b6",
+  "content_hash": "7d59edf20c0789177ab7bfe3c558a0195fb1e5c450a4fc0903d242d3a8d34839",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -13584,8 +13584,8 @@
           "loc": 125109,
           "root": "platform",
           "source_files": 446,
-          "test_files": 336,
-          "test_functions": 5444
+          "test_files": 337,
+          "test_functions": 5457
         },
         "service": {
           "loc": 20464,
@@ -13596,7 +13596,7 @@
         }
       },
       "total_loc": 318002,
-      "total_tests": 12970
+      "total_tests": 12983
     },
     "corpus": {
       "artifacts": 1233,

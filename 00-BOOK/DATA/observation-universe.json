@@ -1,0 +1,171 @@
+{
+  "artifact_id": "UCOS-OBSERVATION-UNIVERSE-001",
+  "title": "Universal Observation Universe — what an observation IS, and why it may never be canonical",
+  "authority": "AUTHORED REPOSITORY TRUTH. This register legislates the separation of Identity Truth, Observation Truth, Evidence Truth and Decision Truth. It is upstream of every engine it governs and must never be produced by one.",
+  "constitutional_basis": "UCOS-RC-003, UAKOS-CLOSURE-008, GOV-005 §5.1/§5.3, UCOS-EVIDENCE-UNIVERSE-001, UCOS-UGA-001",
+  "schema": "ucos-observation-universe",
+  "version": "1.0.0",
+
+  "why_this_exists": [
+    "UCOS-RC-003 already established that a working-tree measurement is a GATE INPUT and never canonical",
+    "identity, and withheld the VALUES of such measurements from rib.json. It was correct and incomplete:",
+    "redaction can hide what a field SAYS, but it cannot hide whether a list ELEMENT EXISTS. A compliance",
+    "finding is appended when the tree is dirty and absent when it is clean, so the canonical bytes still",
+    "move with the working tree. UCOS-AEE-001 had no such protection at all — it wrote the observed",
+    "`residue` path list verbatim into aee.json, the artifact Phase 8 measures as certification_variance.",
+    "",
+    "Measured consequence: one stale digest in UKAP-001 caused ONE file to be rewritten. RIB, running",
+    "later in the same AEE pass, observed that single dirty entry, flipped GATE-04 and GATE-12, and",
+    "rewrote sixteen files. AEE then recorded seventeen residue paths into its own canonical artifact.",
+    "A one-file staleness became a twenty-one-file, permanently non-convergent oscillation, because",
+    "canonical artifacts were allowed to absorb transient state.",
+    "",
+    "The amplifier is the defect, not the trigger. A repository whose canonical artifacts embed runtime",
+    "observations can never hold a fixed point, because running the gate is itself a mutation that",
+    "changes the next measurement."
+  ],
+
+  "the_four_truths": {
+    "IDENTITY_TRUTH": {
+      "definition": "What a thing IS. A pure function of the commit.",
+      "may_be_canonical": true,
+      "home": "00-BOOK/DATA/id-ledger.json and the object registries derived from it",
+      "test": "Two clones of the same commit compute it identically, with no execution history."
+    },
+    "OBSERVATION_TRUTH": {
+      "definition": "What was SEEN at a moment — working-tree dirtiness, what an actuator wrote, a wall clock, a duration, a count of uncommitted entries.",
+      "may_be_canonical": false,
+      "home": "an evidence surface, addressed by a stable observation identity",
+      "test": "Its value can differ between two runs over the same commit. If it can, it is an observation."
+    },
+    "EVIDENCE_TRUTH": {
+      "definition": "The preserved record of an observation, retained so a decision can be reviewed after the fact.",
+      "may_be_canonical": false,
+      "home": "the surfaces declared in UCOS-EVIDENCE-UNIVERSE-001",
+      "test": "It is referenced by identity and never by content."
+    },
+    "DECISION_TRUTH": {
+      "definition": "A verdict reached by applying a rule to an observation.",
+      "may_be_canonical": "ONLY when every input to the rule is Identity Truth",
+      "home": "canonical when commit-determined; otherwise an evidence surface carrying the observation id it rests on",
+      "test": "A verdict that changes because the tree is dirty is Observation Truth wearing a verdict's clothes."
+    }
+  },
+
+  "observation_kinds": {
+    "WORKING_TREE_STATE": {
+      "definition": "Any measurement of uncommitted state: dirty entries, modified, deleted, untracked, contamination.",
+      "canonical_admissibility": "FORBIDDEN",
+      "evidence_class": "EXECUTION",
+      "precedent": "UCOS-RC-003"
+    },
+    "EXECUTION_RESIDUE": {
+      "definition": "The set of paths whose on-disk state changed while a located actuator ran.",
+      "canonical_admissibility": "FORBIDDEN",
+      "evidence_class": "EXECUTION",
+      "precedent": "UAKOS-CLOSURE-008"
+    },
+    "MATERIALIZATION_ACTION": {
+      "definition": "What a write did to the filesystem — created, updated, unchanged.",
+      "canonical_admissibility": "FORBIDDEN",
+      "evidence_class": "EXECUTION",
+      "precedent": "UCOS-UGA-001 (intelligence/realization)"
+    },
+    "ENVIRONMENT_STATE": {
+      "definition": "Interpreter path, venv presence, host, wall clock, elapsed time.",
+      "canonical_admissibility": "FORBIDDEN",
+      "evidence_class": "EXECUTION"
+    },
+    "COMMITTED_CONTENT": {
+      "definition": "A measurement whose entire input is version-controlled content at a commit — a content hash of a tracked file, a count derived from `git ls-files`.",
+      "canonical_admissibility": "PERMITTED",
+      "evidence_class": "VALIDATION",
+      "note": "This is Identity Truth, listed here so the boundary is explicit rather than assumed. It is the ONLY kind a canonical artifact may embed by value."
+    }
+  },
+
+  "identity_rule": {
+    "statement": "Every observation receives a Universal Identity before it may be referenced.",
+    "authority": "00-BOOK/DATA/id-ledger.json — the ONE identity authority. Observations are minted into the append-only `by_observation` map from the shared `category_seq`, category OBS.",
+    "key": "observation_key = <observer>::<subject>::<kind>",
+    "value_independence": "THE CENTRAL PROPERTY. The identity is a function of WHO observed WHAT, and never of what was seen. So a canonical artifact may carry the observation id forever while the observed value changes on every run — which is precisely what makes the canonical bytes hold still without hiding anything.",
+    "anonymous_observations": "FORBIDDEN. An observation with no identity cannot be referenced, cannot be audited, and cannot be traced to the run that produced it."
+  },
+
+  "canonical_reference_rule": {
+    "statement": "A canonical artifact may reference an observation ONLY through its stable identity.",
+    "permitted": "\"residue_observation\": \"UCOS-OBS-000042\"",
+    "forbidden": [
+      "\"residue\": [\"path/a\", \"path/b\"]        — the value",
+      "\"residue_count\": 16                      — a lower-resolution copy of the value",
+      "\"dirty\": true                            — a one-bit copy of the value",
+      "appending a finding only when the observation is non-empty — LIST MEMBERSHIP is a copy of the value"
+    ],
+    "membership_rule": "Where a finding depends on an observation, the finding SLOT is always present with its stable id, and only its verdict is withheld. Presence must not encode the observation."
+  },
+
+  "mutation_evidence_rule": {
+    "statement": "Every execution mutation produces evidence.",
+    "requirement": "An engine that writes MUST emit an observation record naming what it wrote, so nothing is lost by removing the value from canonical artifacts. Evidence is preserved, never deleted — it is relocated from identity into evidence, where it was always supposed to live."
+  },
+
+  "forbidden_canonical_keys": {
+    "_note": "Where an observation VALUE is known to enter a canonical artifact. Declared here, never hard-coded in an engine, so closing a newly-found leak is one appended entry in DATA and the gate strengthens without a code change.",
+
+    "_why_scoped_to_artifacts": [
+      "A key name alone cannot decide this, and assuming it can produces false accusations.",
+      "Measured: an unscoped scan flagged 188 sites, of which 18 were `action` in ACEE-000001/acee.json",
+      "and UCL-000001/ucl.json holding 'REUSE' and 'EXTEND' — architectural DISPOSITIONS derived from a",
+      "declaration. That is Identity Truth and perfectly canonical. The identical word in a",
+      "materialization manifest means 'this run created the file', which is Observation Truth and is",
+      "forbidden.",
+      "",
+      "The kind is therefore a property of the (artifact, key) PAIR, never of the key. Scoping is what",
+      "makes this invariant precise enough to be believed — an invariant that cries wolf gets",
+      "suppressed, and a suppressed invariant governs nothing."
+    ],
+
+    "rules": [
+      {"key": "residue", "kind": "EXECUTION_RESIDUE", "artifact": "00-MASTER/UCOS-AEE-001/aee.json"},
+      {"key": "unattributed", "kind": "EXECUTION_RESIDUE", "artifact": "00-MASTER/UCOS-AEE-001/aee.json"},
+      {"key": "unattributed_residue", "kind": "EXECUTION_RESIDUE", "artifact": "00-MASTER/UCOS-AEE-001/aee.json"},
+      {"key": "residue_total", "kind": "EXECUTION_RESIDUE", "artifact": "00-MASTER/UCOS-AEE-001/aee.json"},
+      {"key": "dirty_entries", "kind": "WORKING_TREE_STATE", "artifact": "00-MASTER/UCOS-RIB-001/rib.json"},
+      {"key": "dirty_entries_outside_generated", "kind": "WORKING_TREE_STATE", "artifact": "00-MASTER/UCOS-RIB-001/rib.json"},
+      {"key": "contamination_entries", "kind": "WORKING_TREE_STATE", "artifact": "00-MASTER/UCOS-RIB-001/rib.json"}
+    ]
+  },
+
+  "canonical_scope": {
+    "_note": "The artifacts OBS-INV-02 polices. These are the eight Phase-8 variance dimensions — the set whose byte-stability IS the fixed point — plus the pristine-clone comparison set, which is the same set.",
+    "paths": [
+      "00-MASTER/UCOS-RIB-001/rib.json",
+      "00-MASTER/UCOS-RIB-001/10-IMPLEMENTATION-QUEUE.md",
+      "00-MASTER/UCOS-AEE-001/aee.json",
+      "00-MASTER/UCCEP-000000/uccep.json",
+      "00-MASTER/UCL-000001/ucl.json",
+      "00-MASTER/ACEE-000001/acee.json",
+      "00-MASTER/P0-LIFECYCLE-CLOSURE-001/UCOS-LIFECYCLE-REPLAY.json",
+      "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json"
+    ]
+  },
+
+  "observation_id_shape": "^UCOS-OBS-[0-9]{6}$",
+
+  "invariants": [
+    {"id": "OBS-INV-01", "name": "EVERY_OBSERVATION_HAS_UNIVERSAL_IDENTITY"},
+    {"id": "OBS-INV-02", "name": "NO_CANONICAL_ARTIFACT_EMBEDS_AN_OBSERVATION_VALUE"},
+    {"id": "OBS-INV-03", "name": "EVERY_OBSERVATION_REFERENCE_RESOLVES_TO_A_DECLARED_KIND"},
+    {"id": "OBS-INV-04", "name": "EVERY_OBSERVATION_HAS_AN_EVIDENCE_SURFACE"},
+    {"id": "OBS-INV-05", "name": "NO_CERTIFICATION_ARTIFACT_OBSERVES_ITS_OWN_PRODUCT"},
+    {"id": "OBS-INV-06", "name": "OBSERVATION_IDENTITY_IS_VALUE_INDEPENDENT"}
+  ],
+
+  "no_finite_domain": "Observation kinds are defined by their relation to the commit boundary — inside it or outside it — never by any named environment, machine, platform, reality or domain. A new kind is one appended entry and requires no change to the rule.",
+
+  "not_in_this_universe": [
+    "The observed VALUES. They live on evidence surfaces declared in UCOS-EVIDENCE-UNIVERSE-001.",
+    "A sixth evidence class. This register creates none; every observation binds to one of the five that already exist.",
+    "A second identity authority. Observations mint from the one id-ledger."
+  ]
+}
