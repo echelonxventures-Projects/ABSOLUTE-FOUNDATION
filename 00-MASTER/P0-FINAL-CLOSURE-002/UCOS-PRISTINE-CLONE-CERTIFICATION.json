@@ -4,15 +4,15 @@
     "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
     "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
     "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
-    "dictionary_variance": "18101c16e837b08e289ec0bc5d264ea1e5e874f685d4706ef206c761e986c1ce",
+    "dictionary_variance": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
     "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
     "ordering_variance": "3f45798f382ad6065fbd38f4341b1857bc0cc84b8aef73b18177d96e50348467",
-    "registry_variance": "fc3e286ee9956724df017aa0ef8950fa88c1daff2e4caf470de1b376f850cab0",
+    "registry_variance": "be83d68b4d75294bb946ec3567c80c6517daab96e8f9e8e93db81dd4e48f71d4",
     "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
   },
   "clones": 3,
   "cycles_per_clone": 5,
-  "digest": "2c6be9bb49f82477182116038276eac85cfbca2a398c71d30310db30c941a099",
+  "digest": "bd04dff47d9bcaf30966db20cef176e6f39c9d5e3a90941f915da737d10c7e4c",
   "identities_compared": [
     "authority_variance",
     "bookkeeping_variance",
@@ -30,11 +30,9 @@
   "results": [
     {
       "bootstrap": {
-        "closure": 0,
-        "knowledge": 0,
-        "phase2": 0,
-        "phase3": 0,
-        "rie": 0
+        "prerequisites": 0,
+        "rie": 0,
+        "toolchain": 0
       },
       "bootstrap_refusals": {},
       "byte_identical_every_cycle": false,
@@ -50,9 +48,11 @@
           "cycle": 1,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
+            "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 16
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -64,10 +64,11 @@
           "cycle": 2,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -79,10 +80,11 @@
           "cycle": 3,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -94,10 +96,11 @@
           "cycle": 4,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -109,21 +112,20 @@
           "cycle": 5,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         }
       ],
       "cycles_executed": 5
     },
     {
       "bootstrap": {
-        "closure": 0,
-        "knowledge": 0,
-        "phase2": 0,
-        "phase3": 0,
-        "rie": 0
+        "prerequisites": 0,
+        "rie": 0,
+        "toolchain": 0
       },
       "bootstrap_refusals": {},
       "byte_identical_every_cycle": false,
@@ -139,9 +141,11 @@
           "cycle": 1,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
+            "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 16
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -153,10 +157,11 @@
           "cycle": 2,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -168,10 +173,11 @@
           "cycle": 3,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -183,10 +189,11 @@
           "cycle": 4,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -198,21 +205,20 @@
           "cycle": 5,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         }
       ],
       "cycles_executed": 5
     },
     {
       "bootstrap": {
-        "closure": 0,
-        "knowledge": 0,
-        "phase2": 0,
-        "phase3": 0,
-        "rie": 0
+        "prerequisites": 0,
+        "rie": 0,
+        "toolchain": 0
       },
       "bootstrap_refusals": {},
       "byte_identical_every_cycle": false,
@@ -228,9 +234,11 @@
           "cycle": 1,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
+            "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 16
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -242,10 +250,11 @@
           "cycle": 2,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -257,10 +266,11 @@
           "cycle": 3,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -272,10 +282,11 @@
           "cycle": 4,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         },
         {
           "actuator_failures": [],
@@ -287,10 +298,11 @@
           "cycle": 5,
           "mismatched_identities": [
             "certification_variance",
+            "dictionary_variance",
             "ordering_variance",
             "registry_variance"
           ],
-          "mutation": 31
+          "mutation": 35
         }
       ],
       "cycles_executed": 5

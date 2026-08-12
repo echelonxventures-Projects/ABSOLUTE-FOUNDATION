@@ -87,12 +87,14 @@
     }
   },
   "convergence": {
-    "determination": "CONVERGED-PROVISIONAL",
-    "iteration_total": 2,
-    "stable_iterations": 2,
+    "determination": "NOT-CONVERGED",
+    "iteration_total": 4,
+    "stable_iterations": 4,
     "vector_digests": [
-      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b",
-      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b"
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51",
+      "38f90a443f116ad60c801d102b9f685fb7fd2288d88ea9af7303c84d75024b51"
     ]
   },
   "decision": {
@@ -100,6 +102,11 @@
       "class": "Constitutional amendment",
       "decision": "ESCALATE",
       "rule": "CR-ESCALATED-CEILING"
+    },
+    "OBS-BLUEPRINT-GATE": {
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "rule": "CR-BLOCKING-REGRESSION"
     }
   },
   "dimensions": [
@@ -364,8 +371,8 @@
       "verdict": "SATISFIED"
     },
     "OBS-BLUEPRINT-GATE": {
-      "observed": "OPEN",
-      "verdict": "SATISFIED"
+      "observed": "CLOSED",
+      "verdict": "VIOLATED"
     },
     "OBS-CORPUS-CURRENCY": {
       "observed": "CORPUS CURRENT",

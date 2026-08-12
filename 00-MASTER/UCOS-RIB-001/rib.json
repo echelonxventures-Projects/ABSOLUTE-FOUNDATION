@@ -1,5 +1,24 @@
 {
-  "compliance": [],
+  "compliance": [
+    {
+      "finding": "dirty_entries_outside_generated=<withheld: working-tree measurement, UCOS-RC-003>",
+      "gate": "GATE-12",
+      "id": "CMP-CLEAN",
+      "rank": 1,
+      "remediation": "commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately",
+      "requirement": "the repository must remain clean, deterministic, buildable and reproducible",
+      "severity": "CRITICAL"
+    },
+    {
+      "finding": "validations_failed=1",
+      "gate": "GATE-04",
+      "id": "CMP-VALIDATE",
+      "rank": 2,
+      "remediation": "discharge the named validation obligation",
+      "requirement": "validation must pass",
+      "severity": "HIGH"
+    }
+  ],
   "cycle_classes": [
     {
       "benign": true,
@@ -16,7 +35,7 @@
       "rule": "cross_unit"
     }
   ],
-  "determination": "BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED",
+  "determination": "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP",
   "discovery": [
     {
       "class": "IMPLEMENTATION",
@@ -1410,8 +1429,8 @@
       "subject": "operational programmes whose engine no declared entry point names"
     }
   ],
-  "gate": "OPEN",
-  "gate_exit": 0,
+  "gate": "CLOSED",
+  "gate_exit": 1,
   "gates": [
     {
       "blocking": true,
@@ -1449,13 +1468,15 @@
     {
       "blocking": true,
       "criterion": "every validation obligation met",
-      "failures": [],
+      "failures": [
+        "validations_failed=1"
+      ],
       "id": "GATE-04",
       "metrics": [
         "validations_failed"
       ],
       "name": "Repository Validation",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "blocking": true,
@@ -1540,7 +1561,9 @@
     {
       "blocking": true,
       "criterion": "the working tree carries no uncommitted entry outside this programme's own deterministically regenerated artifacts, every ignored path resolves to a declared class in the exclusion register, and no tracked path is shadowed by an ignore rule",
-      "failures": [],
+      "failures": [
+        "dirty_entries_outside_generated=<withheld: working-tree measurement, UCOS-RC-003>"
+      ],
       "id": "GATE-12",
       "metrics": [
         "dirty_entries_outside_generated",
@@ -1548,7 +1571,7 @@
         "shadowed_tracked_paths_count"
       ],
       "name": "Repository Clean",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     }
   ],
   "matrices": [
@@ -1958,7 +1981,10 @@
     "advisory_duplicate_signals": 25,
     "architectural_cycles": 0,
     "benign_cycles": 10,
-    "blocking_failed": [],
+    "blocking_failed": [
+      "GATE-04",
+      "GATE-12"
+    ],
     "catalogue_records": 121,
     "certification_domains_failed": 0,
     "certification_verdict_absent": 0,
@@ -1972,7 +1998,7 @@
     },
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
-    "compliance_findings": 0,
+    "compliance_findings": 2,
     "contamination_available": true,
     "contamination_entries": "<withheld: working-tree measurement, UCOS-RC-003>",
     "contamination_shadowed_members": [],
@@ -2012,7 +2038,7 @@
     "gap_count:GAP-VERIFICATION": 252,
     "gap_findings": 737,
     "gate_total": 12,
-    "gates_passed": 12,
+    "gates_passed": 10,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -2058,7 +2084,7 @@
     "universes_unresolved": 0,
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
-    "validations_failed": 0,
+    "validations_failed": 1,
     "verifications_failed": 0,
     "wave_total": 5
   },
@@ -4248,7 +4274,7 @@
     "conflicts": 0,
     "contamination": {
       "available": true,
-      "clean": true,
+      "clean": false,
       "contamination_entries": "<withheld: working-tree measurement, UCOS-RC-003>",
       "dirty_entries": "<withheld: working-tree measurement, UCOS-RC-003>",
       "ignored_unclassified": 0,
@@ -4268,7 +4294,7 @@
     "untracked": "<withheld: working-tree measurement, UCOS-RC-003>",
     "working_tree": "<withheld: working-tree measurement, UCOS-RC-003>"
   },
-  "seal_sha256": "8fdf4cad11239e98f2da9ab6d05894f3c15e2190728452bd2461eafaa66377a0",
+  "seal_sha256": "8465cb2925acda7988fa410c7dfba69e69bd5eba1badbb068f120353b1f3bdaa",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -4467,7 +4493,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "2a6a1dc5f70bc9eb92d439fd7b9ae27f75a35270d33dfeea3d2851b4454debd2",
+      "content_sha256": "b521ef0a5b97601f7be0fe306ee306d589623af243d3746b90d3cd6c5b5795ca",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-BASELINE",
@@ -4493,7 +4519,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
+      "content_sha256": "d2ba9da9a0312716627114be40f583d65249053ab214b75c67eb77e8eb86face",
       "exists": true,
       "generated": false,
       "id": "SUB-RIE-CAPS",
@@ -22576,7 +22602,7 @@
       "measured": "<withheld: working-tree measurement, UCOS-RC-003>",
       "metric": "dirty_entries_outside_generated",
       "name": "Repository",
-      "verdict": "PASS"
+      "verdict": "FAIL"
     },
     {
       "criterion": "every discovered unit names a programme",
