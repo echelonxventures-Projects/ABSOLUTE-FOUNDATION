@@ -9,7 +9,7 @@
 | GOVERNING INSTRUMENT | `00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md` |
 | OPERATIONAL HOME | `00-MASTER/UCOS-RIB-001` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
-| WORKING TREE | DIRTY (20 entries, measured outside this programme's own zone — RFP-3) |
+| WORKING TREE | DIRTY (15 entries, measured outside this programme's own zone — RFP-3) |
 | UNITS DISCOVERED | 296 |
 | SUBSTRATE USABLE | 13/15 |
 | GATES | 10/12 |
@@ -2256,7 +2256,7 @@ the compliance violations classified by severity
 
 | ID | Severity | Finding | Remediation |
 |---|---|---|---|
-| `CMP-CLEAN` | **CRITICAL** | dirty_entries_outside_generated=20 | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
+| `CMP-CLEAN` | **CRITICAL** | dirty_entries_outside_generated=15 | commit or discard every uncommitted entry into its canonical location; this programme's own regenerated outputs are excluded because they are the deterministic product of the gated command itself, and their determinism is proven separately |
 | `CMP-VALIDATE` | **HIGH** | validations_failed=1 | discharge the named validation obligation |
 
 ### 13. Benefit Matrix — `MTX-BENEFIT`
