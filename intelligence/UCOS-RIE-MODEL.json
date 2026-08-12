@@ -13377,7 +13377,7 @@
   ],
   "capability_count": 121,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "ba6fd31599d986881837706b9301c1e3e0592e03f229a8f3dd0a31cb40ae193d",
+  "content_hash": "0dfe1408756ea72bc35c2ca585a1105794cc5e2586a075622dafb2f5af6047b6",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -13574,7 +13574,7 @@
           "test_functions": 821
         },
         "intelligence": {
-          "loc": 15784,
+          "loc": 15815,
           "root": "intelligence",
           "source_files": 65,
           "test_files": 6,
@@ -13595,7 +13595,7 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 317971,
+      "total_loc": 318002,
       "total_tests": 12970
     },
     "corpus": {
