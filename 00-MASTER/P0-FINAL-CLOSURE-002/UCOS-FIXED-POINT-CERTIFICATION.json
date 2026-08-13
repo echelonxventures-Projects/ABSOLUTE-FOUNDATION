@@ -7,7 +7,7 @@
     "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
     "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
     "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
-    "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
+    "registry_variance": "73f2b9b95ab15ee680281938aee6f36a43d064cdaf4a63b17bbf8071a4c31a56",
     "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
   },
   "chain": [
@@ -28,7 +28,7 @@
   ],
   "concurrent_writer_detected": false,
   "consecutive_zero_drift_rounds": 5,
-  "digest": "af27d56ce111c8fbcedc4f7e518996ca494b77dbd9a9a30d67c040474eb7600a",
+  "digest": "db9d5c8e052987bda02cb3d594d332e036245bf79303de860e0d32692875a9bb",
   "dimensions": {
     "authority_variance": "00-MASTER/UCCEP-000000/uccep.json",
     "bookkeeping_variance": "00-MASTER/UCL-000001/ucl.json",
@@ -60,7 +60,7 @@
         "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
         "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
-        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
+        "registry_variance": "73f2b9b95ab15ee680281938aee6f36a43d064cdaf4a63b17bbf8071a4c31a56",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],
@@ -83,7 +83,7 @@
         "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
         "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
-        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
+        "registry_variance": "73f2b9b95ab15ee680281938aee6f36a43d064cdaf4a63b17bbf8071a4c31a56",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],
@@ -106,7 +106,7 @@
         "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
         "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
-        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
+        "registry_variance": "73f2b9b95ab15ee680281938aee6f36a43d064cdaf4a63b17bbf8071a4c31a56",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],
@@ -129,7 +129,7 @@
         "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
         "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
-        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
+        "registry_variance": "73f2b9b95ab15ee680281938aee6f36a43d064cdaf4a63b17bbf8071a4c31a56",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],
@@ -152,7 +152,7 @@
         "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
         "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
         "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
-        "registry_variance": "f608f9dbe963f66967597e1e85c248b6f1fcb4556237beb4e873c5e94b6348e3",
+        "registry_variance": "73f2b9b95ab15ee680281938aee6f36a43d064cdaf4a63b17bbf8071a4c31a56",
         "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
       },
       "mutated_paths": [],

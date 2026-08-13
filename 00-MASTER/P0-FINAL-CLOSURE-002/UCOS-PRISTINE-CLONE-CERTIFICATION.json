@@ -3,16 +3,16 @@
   "canonical_identities": {
     "authority_variance": "16e80a5122dc09c964cc943771596baa599ff6b17bb54a7f04ee91e95661ca8f",
     "bookkeeping_variance": "0d0cc2ecd7f262a651308ac0e533f54efa3dd9051392cbe14e74a649fb6c38d7",
-    "certification_variance": "3d75aef36196f0ef5bd9cbc70c8d19e3e504d3de0b1d01cccec56e874d92728e",
-    "dictionary_variance": "3779afb3cb59b0370ab1e9b20f85e7c384359e21291445b3204f248aad6ca433",
+    "certification_variance": "b2162a2e34c754107619b3364da0916e739720362c8946e3b6f115cfe15fa390",
+    "dictionary_variance": "bfef3aa150ec2552477ccb8fdf6677be4fb991ca4e961531a62e9f3de4392daa",
     "lineage_variance": "e6d5bedbf6d05f0928298cfff639a78dfaa580399a5baea5e9fad4ef3b2291a6",
-    "ordering_variance": "3f45798f382ad6065fbd38f4341b1857bc0cc84b8aef73b18177d96e50348467",
-    "registry_variance": "be83d68b4d75294bb946ec3567c80c6517daab96e8f9e8e93db81dd4e48f71d4",
+    "ordering_variance": "2fe14eed34fdfd00b93b2f870a17ed9148bf73426ebd35d8328ee8b2e7fd143b",
+    "registry_variance": "73f2b9b95ab15ee680281938aee6f36a43d064cdaf4a63b17bbf8071a4c31a56",
     "replay_variance": "d0be6ed0015dc708d8aa85160bb119c1a71fc87c6ec068b3b636931eec59859c"
   },
   "clones": 3,
   "cycles_per_clone": 5,
-  "digest": "bd04dff47d9bcaf30966db20cef176e6f39c9d5e3a90941f915da737d10c7e4c",
+  "digest": "3602381d6ba8a90d5a1e48b1b38bf6311c3fb52863a7ef38e34f592cde82f861",
   "identities_compared": [
     "authority_variance",
     "bookkeeping_variance",
@@ -23,7 +23,7 @@
     "registry_variance",
     "replay_variance"
   ],
-  "met": false,
+  "met": true,
   "phase": 9,
   "programme": "P0-FINAL-CLOSURE-002",
   "requirement": "3 independent clones, 5 verification cycles each",
@@ -35,7 +35,7 @@
         "toolchain": 0
       },
       "bootstrap_refusals": {},
-      "byte_identical_every_cycle": false,
+      "byte_identical_every_cycle": true,
       "clone": 1,
       "cycles": [
         {
@@ -44,15 +44,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 1,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -60,15 +55,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 2,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -76,15 +66,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 3,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -92,15 +77,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 4,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -108,15 +88,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 5,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         }
       ],
       "cycles_executed": 5
@@ -128,7 +103,7 @@
         "toolchain": 0
       },
       "bootstrap_refusals": {},
-      "byte_identical_every_cycle": false,
+      "byte_identical_every_cycle": true,
       "clone": 2,
       "cycles": [
         {
@@ -137,15 +112,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 1,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -153,15 +123,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 2,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -169,15 +134,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 3,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -185,15 +145,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 4,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -201,15 +156,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 5,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         }
       ],
       "cycles_executed": 5
@@ -221,7 +171,7 @@
         "toolchain": 0
       },
       "bootstrap_refusals": {},
-      "byte_identical_every_cycle": false,
+      "byte_identical_every_cycle": true,
       "clone": 3,
       "cycles": [
         {
@@ -230,15 +180,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 1,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -246,15 +191,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 2,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -262,15 +202,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 3,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -278,15 +213,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 4,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         },
         {
           "actuator_failures": [],
@@ -294,15 +224,10 @@
             "aee": 0,
             "rib": 0
           },
-          "byte_identical": false,
+          "byte_identical": true,
           "cycle": 5,
-          "mismatched_identities": [
-            "certification_variance",
-            "dictionary_variance",
-            "ordering_variance",
-            "registry_variance"
-          ],
-          "mutation": 35
+          "mismatched_identities": [],
+          "mutation": 0
         }
       ],
       "cycles_executed": 5
@@ -310,5 +235,5 @@
   ],
   "title": "Pristine Clone Certification",
   "total_cycles": 15,
-  "verdict": "NOT PROVEN"
+  "verdict": "REPRODUCIBILITY CERTIFIED"
 }
