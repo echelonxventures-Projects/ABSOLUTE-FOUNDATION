@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 5766,
+  "total_objects": 5785,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -27468,6 +27468,33 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "CERTIFICATION-ARCHITECTURE-DETERMINATION-DRAFT.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002372",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "CERTIFICATION-OWNERSHIP-RECONCILIATION-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002373",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "CERTIFICATION-OWNERSHIP-RECONCILIATION-FINDING.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002374",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
       "path": "ENVIRONMENT-SETUP.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -28134,6 +28161,141 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "PHASE-0.7-DEPENDENCY-GRAPH-CONSOLIDATION-READINESS-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002375",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-0.7-DEPENDENCY-GRAPH-GOVERNANCE-BINDING-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002376",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-CAA-INV-08-ENFORCEMENT-COMPLETENESS-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002377",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-CERTIFICATION-GOVERNANCE-BINDING-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002378",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-CERTIFICATION-GOVERNANCE-RELATIONSHIP-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002379",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-CERTIFICATION-TAXONOMY-READINESS-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002380",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-GOVERNANCE-FREEZE-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002381",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-GOVERNANCE-RECONCILIATION-FREEZE-READINESS-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002382",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-IDENTITY-NAMESPACE-GOVERNANCE-BINDING-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002383",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-IDENTITY-NAMESPACE-OWNERSHIP-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002384",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-KNOWLEDGE-IDENTITY-RELATIONSHIP-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002385",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-KNOWLEDGE-REGISTRY-OWNERSHIP-RECONCILIATION-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002386",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-UNIVERSAL-ASSURANCE-RELATIONSHIP-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002387",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "PHASE-VERDICT-VOCABULARY-TAXONOMY-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002388",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
+      "path": "POST-STABILIZATION-DETERMINATION-LIFECYCLE-DECISION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002389",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    {
       "path": "PRODUCTION-FOUNDATION.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -28254,6 +28416,15 @@
       "owner": "UCOS-REPOSITORY-ROOT",
       "universal_id": "UCOS-CON-000069",
       "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "UCOS-POST-STABILIZATION-READINESS-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002390",
+      "first_seen": "commit:ec8b8d5b52e2"
     },
     {
       "path": "UCOS-UCOM-001-UNIVERSAL-CONSTITUTIONAL-OBJECT-MODEL-DETERMINATION.md",

@@ -8964,7 +8964,7 @@
     "DET": 2,
     "CONFIG": 29,
     "DATAOBJ": 109,
-    "EXDOC": 2371,
+    "EXDOC": 2390,
     "TOOLING": 36,
     "ENGINE": 1187,
     "TESTOBJ": 801,
@@ -51938,6 +51938,120 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:73c276d56893"
+    },
+    "CERTIFICATION-ARCHITECTURE-DETERMINATION-DRAFT.md": {
+      "universal_id": "UCOS-EXDOC-002372",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "CERTIFICATION-OWNERSHIP-RECONCILIATION-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002373",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "CERTIFICATION-OWNERSHIP-RECONCILIATION-FINDING.md": {
+      "universal_id": "UCOS-EXDOC-002374",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-0.7-DEPENDENCY-GRAPH-CONSOLIDATION-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002375",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-0.7-DEPENDENCY-GRAPH-GOVERNANCE-BINDING-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002376",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-CAA-INV-08-ENFORCEMENT-COMPLETENESS-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002377",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-CERTIFICATION-GOVERNANCE-BINDING-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002378",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-CERTIFICATION-GOVERNANCE-RELATIONSHIP-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002379",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-CERTIFICATION-TAXONOMY-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002380",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-GOVERNANCE-FREEZE-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002381",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-GOVERNANCE-RECONCILIATION-FREEZE-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002382",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-IDENTITY-NAMESPACE-GOVERNANCE-BINDING-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002383",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-IDENTITY-NAMESPACE-OWNERSHIP-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002384",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-KNOWLEDGE-IDENTITY-RELATIONSHIP-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002385",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-KNOWLEDGE-REGISTRY-OWNERSHIP-RECONCILIATION-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002386",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-UNIVERSAL-ASSURANCE-RELATIONSHIP-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002387",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "PHASE-VERDICT-VOCABULARY-TAXONOMY-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002388",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "POST-STABILIZATION-DETERMINATION-LIFECYCLE-DECISION.md": {
+      "universal_id": "UCOS-EXDOC-002389",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
+    },
+    "UCOS-POST-STABILIZATION-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002390",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:ec8b8d5b52e2"
     }
   },
   "by_observation": {

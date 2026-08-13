@@ -11,11 +11,11 @@
 | CONFIGURATION_OBJECT | 29 | UCOS-UGA-001 |
 | DATA_OBJECT | 109 | UCOS-UGA-001 |
 | DOCUMENT_ARTIFACT | 1233 | UMB-IMP-001 |
-| EXCLUDED_DOCUMENT | 2371 | UCOS-UGA-001 |
+| EXCLUDED_DOCUMENT | 2390 | UCOS-UGA-001 |
 | EXECUTABLE_OBJECT | 1187 | UCOS-UGA-001 |
 | TEST_OBJECT | 801 | UCOS-UGA-001 |
 | TOOLING_OBJECT | 36 | UCOS-UGA-001 |
-| **TOTAL** | **5766** | one shared ledger |
+| **TOTAL** | **5785** | one shared ledger |
 
 ## Invariants
 
@@ -53,7 +53,7 @@
 
 ## Graph
 
-- relationship edges: **32949**
+- relationship edges: **33025**
 - dependency edges: **9550**
 - producers bound to declared outputs: **40**
 - distinct owners: **245**
