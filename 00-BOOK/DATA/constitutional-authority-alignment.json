@@ -367,6 +367,22 @@
         "role": "PROJECTION",
         "measures": "the repository-object population",
         "may_never": "declare a relationship KIND that names no class in the model above it"
+      },
+      {
+        "projection": "intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json",
+        "producer": "intelligence/rie/engine.py",
+        "role": "PROJECTION",
+        "measures": "program-to-program dependency rollup, aggregated from each artifact's declared `dependencies` field in 00-BOOK/DATA/artifacts.json — a different grain of the same model, never a rival of it",
+        "may_never": "declare a relationship KIND that names no class in the model above it, or claim authority over the object-level question the model already answers",
+        "$disclaim": "Already self-disclaiming: its own `authority` field reads \"NONE (derived truth)\", matching authority_claim_scan's `NONE` disclaiming prefix (basis: CMG-000001 Article XVI.2). This entry records recognition; it confers nothing the field does not already say."
+      },
+      {
+        "projection": ".runtime/repository-intelligence/UCOS-RPI-DEPENDENCY-GRAPH.json",
+        "producer": "platform/repository_intelligence/substrate.py",
+        "role": "PROJECTION",
+        "measures": "module-to-module dependency graph derived from actual source-code import statements (AST analysis over tracked .py files) — a different grain and a different source (actual imports, not declared metadata) from the model above it, never a rival of it",
+        "may_never": "declare a relationship KIND that names no class in the model above it, or claim authority over the object-level question the model already answers",
+        "$disclaim": "Already self-disclaiming: its own `authority` field reads \"ENGINEERING-EXECUTION-ONLY\", matching authority_claim_scan's `ENGINEERING-EXECUTION-ONLY` disclaiming prefix (basis: CEP-003 Article I.3). Output is written under `.runtime/`, which `.gitignore` excludes — never committed as canonical state. This entry records recognition; it confers nothing the field and the ignore rule do not already say."
       }
     ],
     "$kind_binding_comment": [
@@ -396,6 +412,80 @@
       "evidenced_by": {"uckp_class": "constitutional", "uckp_relation": "references", "direction": "forward", "article": "UCKP-ART-12", "meaning": "the evidence class the object's governance records belong to"}
     },
     "second_model_test": "A second relationship model would be a second declaration of what a relationship IS. CAA-INV-05 measures that exactly one instrument declares the model and that every emitted kind resolves into it."
+  },
+
+  "$dependency_evidence_comment": [
+    "TASK (Phase 0.7): record the ~20 static per-programme dependency-graph documents as what",
+    "they are — historical evidence of a closed programme's own measurement at its own closure —",
+    "so they are discoverable and unambiguous rather than silently scattered. None of them is a",
+    "rival to the model above: none is regenerated, none is read by any live gate, and role EVIDENCE",
+    "already exists in AUTHORITY_ROLES for exactly this case ('the record of what was done, kept so",
+    "an act can be reviewed after the fact; evidence supports truth and never constitutes it')."
+  ],
+  "dependency_evidence_index": {
+    "declaration": "No historical snapshot listed here may serve as a dependency authority. Each is EVIDENCE (UCKP-ART-16) of a closed programme's measurement at its own point in time, never a live or competing truth about current repository state.",
+    "role": "EVIDENCE",
+    "authority": "UCKP-ART-16",
+    "verified_frozen": "Sampled by git history at Phase 0.7 authoring time: 00-MASTER/UAKOS-PHASE-004's copy last touched 2026-08-01, 00-MASTER/UCOS-USIS-WAVE1's last touched 2026-07-24 — neither regenerated since, no live producer exists for either.",
+    "entries": [
+      {"location": "00-MASTER/UAKOS-CLOSURE-002/", "files": ["29-CONCEPT-DEPENDENCY-GRAPH.md", "39-IMPLEMENTATION-DEPENDENCY-GRAPH.md"], "programme_state": "closed"},
+      {"location": "00-MASTER/UAKOS-PHASE-004/", "files": ["10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.md", "10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.json"], "programme_state": "closed"},
+      {"location": "00-MASTER/UCOS-USIS-WAVE1/", "files": ["03-WAVE1-DEPENDENCY-GRAPH.md", "MISSION-002-USIS-002/03-USIS002-DEPENDENCY-GRAPH.md", "MISSION-003-USIS-003/03-USIS003-DEPENDENCY-GRAPH.md", "MISSION-004-USIS-004/03-USIS004-DEPENDENCY-GRAPH.md"], "programme_state": "closed"},
+      {"location": "00-MASTER/UCOS-USIS-WAVE3-FOUNDATION/", "files": ["05-DEPENDENCY-GRAPH.md"], "programme_state": "closed"},
+      {"location": "00-MASTER/UCOS-RIB-001/", "files": ["05-DEPENDENCY-GRAPH.md"], "programme_state": "active programme, but this specific file confirmed NOT part of RIB's own live-regenerated surface set (unlike rib.json, 01-REPOSITORY-INVENTORY.md, etc.) — frozen despite its location"},
+      {"location": "00-MASTER/ (single-file programmes)", "files": ["IMPLEMENT-001/01-DEPENDENCY-GRAPH.md", "IMR-0000/09-DEPENDENCY-GRAPH-ARCHITECTURE.md", "MIP-W1-P001/12-UNIVERSAL-DEPENDENCY-GRAPH.md", "UAIE-000001/04-OWNERSHIP-AND-DEPENDENCY-GRAPH.md", "UCCEP-000005/07-UPDATED-DEPENDENCY-GRAPH.md", "UCOS-AB-001/05-DEPENDENCY-GRAPH.md", "UCOS-CVR-001/03-VERIFICATION-DEPENDENCY-GRAPH.md", "UCOS-MXR-001/03-DEPENDENCY-GRAPH.md"], "programme_state": "closed or single-deliverable, individually"},
+      {"location": "00-BOOK/ADVANCEMENT/", "files": ["UKB-ADV-017-DEPENDENCY-GRAPH.md"], "programme_state": "closed"},
+      {"location": "repository root", "files": ["03-DEPENDENCY-GRAPH.md", "03-IMPLEMENTATION-DEPENDENCY-GRAPH.md"], "programme_state": "closed, pre-dates current program structure"},
+      {"location": "IAC-001C/", "files": ["03-DEPENDENCY-GRAPH.md"], "programme_state": "closed"},
+      {"location": "infrastructure/_evidence/EC3-B13-U10/", "files": ["dependency-graph.json"], "programme_state": "evidence directory by its own path — already self-classifying"}
+    ]
+  },
+
+  "$certification_comment": [
+    "TASK: resolve certification authority. Same shape as identity and the relationship graph —",
+    "recognition of a plural but non-competing landscape, never a new authority.",
+    "",
+    "Thirteen certification-adjacent surfaces were found (PHASE-CERTIFICATION-GOVERNANCE-RELATIONSHIP-",
+    "DETERMINATION.md), bidirectionally searched for cross-reference, and found to reference each other",
+    "in exactly one real, code-level case: platform/certification imports engine.certification by",
+    "reference. Every other surface answers a genuinely different question (repository-integration",
+    "disposition, meta-constitutional readiness, fixed-point regeneration, validated-subject",
+    "certification, knowledge-object completeness, digital-twin corpus integrity...) and holds its own",
+    "undisputed authority over that question. None claims another's. This is not fragmentation; it is",
+    "what UCKP-ART-01 already permits — architectural authority is one thing (the object model, which",
+    "none of these surfaces touches), and domain-bounded engineering determination is another. Nothing",
+    "here is bound under role SUPREME, PROJECTION-of-the-model, or any existing AUTHORITY_ROLES member:",
+    "those roles govern standing under the canonical-object model specifically (UCKP-ART-01/04/07), and",
+    "certification authority is a materially different axis this binding records without conflating."
+  ],
+  "certification_authority_resolution": {
+    "model": {
+      "type": "MULTIPLE_INDEPENDENT_AUTHORITIES",
+      "declares": "Certification authority in UCOS is plural by design. A certification surface answers one bounded question; holding undisputed authority over that one question is not competition with any other surface holding undisputed authority over a different one."
+    },
+    "principles": [
+      "Certification authority is bounded by certification purpose.",
+      "Multiple certification authorities may coexist.",
+      "Coexistence does not represent duplication.",
+      "A certification authority owns its lifecycle, its verdict semantics, and its evidence interpretation.",
+      "Evidence integrity rules remain globally governed (see evidence_observation_separation and 00-BOOK/DATA/evidence-universe.json's CERTIFICATION_EVIDENCE_CLASS rule — DEBUG/IMPROVEMENT evidence may never influence any certification, anywhere).",
+      "Cross-certification relationships require explicit declaration; an undeclared relationship is not assumed to exist."
+    ],
+    "surfaces": [
+      {"id": "EC1-CERTIFICATION", "home": "engine/certification/", "role": "AUTHORITY", "bounded_question": "Is this one validated subject (single Validation Report + Evidence input) engineering-ready?"},
+      {"id": "UNIVERSAL-CERTIFICATION", "home": "engine/universal_certification/", "role": "AUTHORITY", "bounded_question": "Is this subject (Validation + Measurement + RepositoryTruth, compliance-aware) universally engineering-ready? A distinct, broader question EC-1 does not ask — resolved as valid bounded specialization, not duplication, in CERTIFICATION-OWNERSHIP-RECONCILIATION-FINDING.md."},
+      {"id": "EC2-CERTIFICATION-CONSOLE", "home": "platform/certification/", "role": "PROJECTION", "of": "EC1-CERTIFICATION", "evidence": "real, code-level imports confirmed (facade.py, contracts.py, ledger.py, health.py, status.py, service.py all import from engine.certification); its own documentation states \"no new authority, no new capability group\"", "bounded_question": "n/a — reproduces EC-1's decision read-only, byte-for-byte"},
+      {"id": "KNOWLEDGE-CERTIFICATION", "home": "engine/knowledge/certification.py", "role": "AUTHORITY", "bounded_question": "Is this canonical knowledge object complete?"},
+      {"id": "ASSURANCE-CERTIFICATION", "home": "platform/universal_assurance/certification.py", "role": "AUTHORITY", "bounded_question": "Did this assurance run's measured outcome satisfy its declared policy? Relationship to EC1/UNIVERSAL-CERTIFICATION not established by evidence; recorded as an open question, not assumed either way."},
+      {"id": "RIB-CERTIFICATION", "home": "00-MASTER/UCOS-RIB-001/rib_engine.py", "role": "AUTHORITY", "bounded_question": "Does the whole repository integrate coherently right now?"},
+      {"id": "AEE-CERTIFICATION", "home": "00-MASTER/UCOS-AEE-001/aee_engine.py", "role": "AUTHORITY", "bounded_question": "Have this repository's cross-programme mandates and observations converged?"},
+      {"id": "CMG-CERTIFICATION", "home": "00-CMG/tools/cmg_validate.py", "role": "AUTHORITY", "bounded_question": "Is the constitutional corpus meta-constitutionally ready?"},
+      {"id": "PHASE8-CERTIFICATION", "home": "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py", "role": "AUTHORITY", "bounded_question": "Does repeated in-place regeneration of this repository produce zero drift?"},
+      {"id": "PHASE9-CERTIFICATION", "home": "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py", "role": "AUTHORITY", "bounded_question": "Do independent pristine clones of this repository reproduce identically?"},
+      {"id": "UCEF-CERTIFICATION", "home": "00-MASTER/UCEF-000001/ucef_engine.py", "role": "AUTHORITY", "bounded_question": "Is the constitutional evolution framework ready?"},
+      {"id": "UMB017-DIGITAL-TWIN-CERTIFICATION", "home": "00-BOOK/tools/ukbx.py (cmd_certify)", "role": "AUTHORITY", "bounded_question": "Is the UKB/UMB document-corpus digital twin internally consistent across its ten integrity domains?", "outputs": ["00-BOOK/DATA/certification.json", "00-BOOK/REGISTRIES/CERTIFICATION-REGISTRY.md"], "note": "one mechanism, two artifacts (evidence data + rendered report) — not two surfaces"}
+    ],
+    "second_authority_test": "A second certification authority over the SAME bounded question would be a rival. None was found: every pair of surfaces compared either answers a different question, or (EC-2 only) is an explicit, code-confirmed read-only projection of the one that answers it. Full comparison in PHASE-CERTIFICATION-GOVERNANCE-RELATIONSHIP-DETERMINATION.md and CERTIFICATION-OWNERSHIP-RECONCILIATION-FINDING.md."
   },
 
   "$truth_comment": [
