@@ -1,5 +1,5 @@
 {
-  "assessment_digest": "7bff2797085e6d3eb7e21c9474178c715480e89c1cc6acbe0f850dc42413fa53",
+  "assessment_digest": "113d2d007ac1741d19ec06f335f033af3dfc8383cf0463f71779f4293ca7cb5d",
   "counts": {
     "construct_classes": 33,
     "criteria": 16,
@@ -489,7 +489,7 @@
     {
       "clause": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md Art L",
       "dimension": "Zero constitutional conflicts",
-      "evidence": "43 recognized artifacts with unique identity and path; 60 concerns each allocated to exactly one owner — no parallel authority",
+      "evidence": "44 recognized artifacts with unique identity and path; 61 concerns each allocated to exactly one owner — no parallel authority",
       "id": "UCEF-VAL-02",
       "probe": "conflict_free",
       "satisfied": true,

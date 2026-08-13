@@ -1402,18 +1402,18 @@
       "unknown": false
     },
     {
-      "count": 60,
+      "count": 61,
       "evidence": [
         "S-06"
       ],
-      "headline": "60 records",
+      "headline": "61 records",
       "id": "DV-21",
       "primitive": "record_count",
       "purpose": "Declared meta-constitutional concerns.",
       "rows": [
         [
           "records",
-          "60"
+          "61"
         ]
       ],
       "unknown": false
@@ -1430,7 +1430,7 @@
       "rows": [
         [
           "`REUSE`",
-          "49"
+          "50"
         ],
         [
           "`RETAIN`",
@@ -2390,8 +2390,8 @@
           "YES",
           "YES",
           "9/9",
-          "164",
-          "`4d8242bbd440`"
+          "166",
+          "`83fe5ce03b42`"
         ],
         [
           "`S-07`",
@@ -2602,18 +2602,18 @@
       "unknown": false
     },
     {
-      "count": 43,
+      "count": 44,
       "evidence": [
         "S-06"
       ],
-      "headline": "43 records",
+      "headline": "44 records",
       "id": "DV-54",
       "primitive": "record_count",
       "purpose": "Meta-constitutional artifacts under registry control.",
       "rows": [
         [
           "records",
-          "43"
+          "44"
         ]
       ],
       "unknown": false
@@ -3501,7 +3501,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "4d8242bbd4405602fe7eaa676f07498ef2980528fd133c2b18fe4818b360bfa3",
+      "content_sha256": "83fe5ce03b42b87465267ff6604d7b5a7ac6e7256908219852e4ddfd4feca879",
       "exists": true,
       "id": "S-06",
       "kind": "meta-constitutional registry",
@@ -3531,7 +3531,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The machine-readable projection of the meta-governance constitution.",
-      "records": 164,
+      "records": 166,
       "required": true,
       "tracked": true
     },

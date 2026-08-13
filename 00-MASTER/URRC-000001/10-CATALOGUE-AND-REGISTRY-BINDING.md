@@ -73,12 +73,12 @@ Catalogue, registry, ontology, taxonomy, API and interface owners.
 **`DV-54`** — Meta-constitutional artifacts under registry control.
 
 - **Primitive** — `record_count`
-- **Result** — 43 records
+- **Result** — 44 records
 - **Substrate evidence** — `S-06`
 
 | Key | Value |
 |---|---|
-| records | 43 |
+| records | 44 |
 
 **`DV-59`** — Declared namespaces under meta-constitutional control.
 

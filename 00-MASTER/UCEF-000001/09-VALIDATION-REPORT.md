@@ -22,7 +22,7 @@ Every dimension is computed from Repository Truth. `UNVERIFIED` is **fail-closed
 | ID | Measured dimension | Verdict | Measured evidence |
 |---|---|---|---|
 | UCEF-VAL-01 | Zero architectural redesign required | PASS | 124/124 bindings pre-exist outside this programme — the framework authored no foundational authority, so no foundational redesign was required |
-| UCEF-VAL-02 | Zero constitutional conflicts | PASS | 43 recognized artifacts with unique identity and path; 60 concerns each allocated to exactly one owner — no parallel authority |
+| UCEF-VAL-02 | Zero constitutional conflicts | PASS | 44 recognized artifacts with unique identity and path; 61 concerns each allocated to exactly one owner — no parallel authority |
 | UCEF-VAL-03 | Zero duplication | PASS | every declared identity is unique and every bound authority is reused rather than re-authored — no competing model, registry or lifecycle is created |
 | UCEF-VAL-04 | Zero orphan constitutional assets | PASS | 157/157 references resolve against Repository Truth — zero orphans |
 | UCEF-VAL-05 | Zero circular dependencies | PASS | 15 stages form an acyclic graph — no stage depends upon itself |
