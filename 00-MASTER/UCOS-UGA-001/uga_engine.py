@@ -957,9 +957,15 @@ def alignment_state(caa, paths, ledger, rel_edges, evidence, obs_decl):
     bound = {e["instrument"]: e for e in caa["subordinate_instruments"]}
 
     # Each bound instrument, re-read from disk: the binding says where it stands, the
-    # instrument must say the same thing, and disagreement is the finding.
+    # instrument must say the same thing, and disagreement is the finding. Role
+    # ORTHOGONAL is exempt: it names an instrument that does NOT derive under
+    # UCKP-LAW-0001 (that is the whole content of "orthogonal"), so it carries no
+    # constitutional_superior block to re-read and is not expected to be JSON at all —
+    # CAA-INV-08 is what measures it instead (engine/uckp/alignment.py).
     superiors, missing = {}, []
     for rel in sorted(bound):
+        if bound[rel]["role"] == "ORTHOGONAL":
+            continue
         doc, error = _load_quiet(os.path.join(REPO, rel))
         if error is not None or not isinstance(doc, dict):
             missing.append(f"{rel}: bound instrument could not be read "
@@ -1353,14 +1359,17 @@ def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, re
           f"{align['claims'][rel].split('.')[0][:70]}"
           for rel in sorted(align["claims"]) if rel not in bound]
     v += [f"{rel}: bound as a subordinate and declares no authority claim"
-          for rel in sorted(bound) if rel not in align["claims"]]
+          for rel in sorted(bound)
+          if rel not in align["claims"] and bound[rel]["role"] != "ORTHOGONAL"]
     add("CAA-INV-02", "EVERY_AUTHORITY_CLAIM_NAMES_ITS_CONSTITUTIONAL_SUPERIOR",
         sorted(set(v)), align["claims_scanned"],
         "Swept over every tracked JSON, not a chosen directory: a rival authority is most "
         "useful to whoever writes it exactly where nobody is sweeping. An instrument that "
         "disclaims authority needs no superior — it asserts nothing, so there is nothing "
         "to derive — and the disclaiming tokens are the non-constitutional classes "
-        "UCOS-UCAF-001 already legislates rather than a set invented here.")
+        "UCOS-UCAF-001 already legislates rather than a set invented here. Role ORTHOGONAL "
+        "is exempt from this sweep for the same reason it is exempt from CAA-INV-03: it "
+        "names no superior to claim, by definition of the role (CAA-INV-08).")
 
     # CAA-03 — no subordinate instrument claims independent authority
     v = list(align["unreadable_bound"])

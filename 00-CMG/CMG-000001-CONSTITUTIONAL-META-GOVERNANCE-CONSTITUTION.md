@@ -11,7 +11,7 @@
 | VOLUME | VOL-002 |
 | STATUS | PROPOSED · UNDER REVIEW · NORMATIVE-UPON-RATIFICATION · PROVISIONAL PENDING CEP-006 |
 | STAGE | Phase-000 · Program-000 · Prompt 01 |
-| VERSION | 1.1 |
+| VERSION | 1.2 |
 | DERIVES AUTHORITY FROM | The self-constituting meta-constitutional question that no existing instrument owns; recognized subordinate to Tier-1 Constitutional Authority once identified under Article XVII |
 | AUTHORITY | Supreme over META-CONSTITUTIONAL MATTER ONLY — what a Constitution is, how constitutionality is recognized, and how constitutional authority is allocated across the whole corpus. Confers NO authority over constitutional content and NO authority over constitutional-engineering process. |
 | SCOPE OF GOVERNANCE | WHAT a Constitution IS and HOW constitutional authority is allocated — meta-constitutional matter only |
@@ -1898,6 +1898,7 @@ LXXXII.2 **Delegated concerns and their located owners:**
 | CMG-DLG-47 | Repository lifecycle | `00-MASTER/UAKOS-CLOSURE-006/CONST-09` | REUSE | CONST-09 |
 | CMG-DLG-48 | Constitutional-engineering operational law: the Laws, the Universal Invariants, and the artifact/stage/program state model | `00-CEP/CEP-001` | REUSE | CEP-001 Art I (LAW-1…11), Art VII (INV-1…8), Art VIII, Art XXIV |
 | CMG-DLG-49 | Deferral Register lifecycle: entry states, entry conditions, exit conditions, review cadence, and custody of the Deferral Register | `00-CEP/CEP-002` (Article 27) | REUSE | CEP-002 Art 27, added by CEP-002-AMD-001 under Art 21; refines — and does not compete with — the deferral-disposition concern already delegated at CMG-DLG-02. Paired artifact transitions are owned at CEP-001 VIII.2/VIII.7 (CMG-DLG-48). Closes CMG-GAP-02 and answers CMG-OQ-04; recorded at LXXVIII.8 |
+| CMG-DLG-50 | Canonical-object identity, universal object registry model, relationship graph model, constitutional invariant validation, and the root constitutional law of the executable plane | `engine/uckp/` (root law `UCKP-LAW-0001`) | REUSE | UCKP-ART-01, UCKP-ART-02, UCKP-ART-05, UCKP-ART-08; recognized as orthogonal, not subordinate, under `engine/uckp/alignment.py` (`UCOS-CAA-001`), which binds this instrument (`CMG-000001`) under role `ORTHOGONAL` in `00-BOOK/DATA/constitutional-authority-alignment.json`. Added by amendment AMD-002; full analysis in `UCKP-CMG-CONSTITUTIONAL-RECONCILIATION-DETERMINATION.md` |
 
 LXXXII.3 **Concerns retained by this instrument** — the complete residue, and nothing beyond it:
 
@@ -1975,7 +1976,7 @@ LXXXIV.10 Where any normative reference conflicts with this instrument on **meta
 
 ## ARTICLE LXXXV — VERSIONING
 
-LXXXV.1 This instrument SHALL carry an explicit version. The present version IS **1.1** (amended from 1.0 by amendment AMD-001 under Article XLIII; recorded in the AMENDMENT RECORD below and at LXXVIII.8).
+LXXXV.1 This instrument SHALL carry an explicit version. The present version IS **1.2** (amended from 1.1 by amendment AMD-002 under Article XLIII; amended from 1.0 by amendment AMD-001; both recorded in the AMENDMENT RECORD below).
 
 LXXXV.2 This instrument SHALL change only by amendment under Article XLIII, and every change SHALL increment the version according to the semantics of Article XXIX.
 
@@ -2003,7 +2004,7 @@ LXXXVI.5 This instrument SHALL govern meta-constitutional matter until amended, 
 
 ---
 
-*END OF ARTIFACT — CMG-000001 · CONSTITUTIONAL META GOVERNANCE CONSTITUTION · VERSION 1.1 · NORMATIVE-UPON-RATIFICATION · META-CONSTITUTIONAL MATTER ONLY · ORTHOGONAL TO CEP-000 · DELEGATES CMG-DLG-01…CMG-DLG-49 · RETAINS CMG-RET-01…CMG-RET-11*
+*END OF ARTIFACT — CMG-000001 · CONSTITUTIONAL META GOVERNANCE CONSTITUTION · VERSION 1.2 · NORMATIVE-UPON-RATIFICATION · META-CONSTITUTIONAL MATTER ONLY · ORTHOGONAL TO CEP-000 · DELEGATES CMG-DLG-01…CMG-DLG-50 · RETAINS CMG-RET-01…CMG-RET-11*
 
 ---
 
@@ -2022,3 +2023,21 @@ Recorded under Article XLIII, append-only. This record IS part of the instrument
 | **(g) CMG-INV-01…12 remain satisfied** | Verified mechanically by `00-CMG/tools/cmg_validate.py` (Article L) for the repository state that produced this record. In particular: CMG-INV-02 (no concern with two owners — CMG-DLG-49's concern is distinct from CMG-DLG-02's and both resolve to the same located owner); CMG-INV-03 (no orphan concern, no ownerless owner); CMG-INV-08 (identifier injectivity across every registry collection); CMG-INV-12 (no substantive matter decided — this is recognition only). |
 | **XLIII.4 — no jurisdiction expansion** | Satisfied. This amendment **narrows** nothing and **claims** nothing: the concern is allocated to CEP-002 by CEP-002's own authority, and this instrument records the allocation. Had this instrument selected the owner itself, that would have been an allocation of authority beyond its jurisdiction and void under CMG-L-13. |
 | **LXXX.6 — certification revocation** | Any prior Constitutional Readiness certification of version 1.0 IS revoked by this amendment and SHALL be re-issued by the located certification owner against version 1.1, accompanied by the validator output that produced it (LXXX.5, LXXX.8). |
+
+---
+
+## AMENDMENT RECORD — AMD-002 (UCOS Ω∞ Universal Evolution Foundation · Phase 0.6 Constitutional Reconciliation)
+
+Recorded under Article XLIII, append-only. This record IS part of the instrument and SHALL NOT be deleted (LXXXV.3, LXXXIII.7).
+
+| Meta requirement (XLIII.2) | Record |
+|---|---|
+| **(a) Change classification (XXIX.2)** | **MINOR** — additive. It adds one delegation (CMG-DLG-50) recognizing `engine/uckp/` (`UCKP-LAW-0001`) as the located, already-functioning owner of canonical-object identity, registry, relationship-graph, and invariant-validation concerns. It invalidates no conforming subject, closes no gap, and answers no open question. Adding a delegation IS MINOR by the express terms of XXIX.2. Version **1.1 → 1.2**. |
+| **(b) What it does NOT change** | No Principle (CMG-P-\*), no Law (CMG-L-\*), no Invariant (Article XI, CMG-INV-01…12), no Kind, no state, no transition, no relationship type, no tier, no namespace, no vacancy, and no gap or open question (none is opened or closed by this amendment). No Article is added, removed, renumbered, or reordered; the Article count and the conformance map are untouched (LXXIX.7). No identifier is reused or withdrawn (XLII.4). No retained concern (CMG-RET-01…11) changes. The readiness ceiling of LXXX.4 IS unchanged. Amendments touched only: front-matter VERSION, LXXXII.2 (new CMG-DLG-50 row), LXXXV.1, and the closing footer. |
+| **(c) Impact analysis (Article XXXVI)** | `engine/uckp/alignment.py` (`UCOS-CAA-001`) — extended in the same change with one new `AuthorityRole` (`ORTHOGONAL`) and one new `AlignmentRule` (`CAA-INV-08`), plus the enforcement check for both. `00-BOOK/DATA/constitutional-authority-alignment.json` — extended in the same change: `authority_roles.ORTHOGONAL`, `invariants[CAA-INV-08]`, `subordination_relations.ORTHOGONAL`, and one `subordinate_instruments` entry for `CMG-000001`. `00-CMG/CMG-REGISTRY.json` — the derived projection is updated in the same change (canonical source version, one new `artifacts` entry for `UCKP-LAW-0001`, one new `concerns` entry for CMG-DLG-50). No other artifact is affected; nothing is left unclassified. |
+| **(d) Identifier stability (XLII.4)** | Preserved. CMG-DLG-50 IS the next unused identifier in a family already declared at V.3. No prior identifier is reused, renumbered, or withdrawn. |
+| **(e) Void on conflict (XLIII.2(e), CMG-L-13)** | This amendment IS void to the extent of any conflict with CEP-000, CEP-001, CEP-002, or the owner of any delegated concern. Severability IS structural (XIX.6). Should CMG-DLG-50 conflict with `engine/uckp/`'s own determination of its scope, `engine/uckp/law.py` (`UCKP-LAW-0001`) governs on the canonical-object axis and this recognition IS void to that extent — consistent with LXXXI.2, which already disclaims this instrument holding substantive authority. |
+| **(f) Registry, delegation, traceability, dependency records updated in the same change** | Yes: Article LXXXII.2 (delegation register, LXXXII.5) and the derived `00-CMG/CMG-REGISTRY.json`. Dependency records are unchanged — this instrument declares no new dependency; recognition of `UCKP-LAW-0001` is a delegation (LXXXII.2), not a dependency (front-matter `DEPENDS-ON` is untouched). |
+| **(g) CMG-INV-01…12 remain satisfied** | Verified mechanically by `00-CMG/tools/cmg_validate.py` (Article L) for the repository state that produced this record. In particular: CMG-INV-02 (CMG-DLG-50's concern is distinct from every other delegated concern and resolves to one located owner); CMG-INV-03 (no orphan concern — `UCKP-LAW-0001` is a located, resolvable artifact); CMG-INV-05 (acyclic — `engine/uckp/` derives no standing from this instrument, and this instrument derives no standing from `engine/uckp/`; the relationship is declared orthogonal, not a dependency cycle); CMG-INV-08 (identifier injectivity across every registry collection); CMG-INV-12 (no substantive matter decided — this is recognition only, exactly mirrored by the `ORTHOGONAL` binding on the UCKP side, which likewise confers no authority (LXXXII.7)). |
+| **XLIII.4 — no jurisdiction expansion** | Satisfied. This amendment **narrows** nothing and **claims** nothing over the canonical-object axis: `engine/uckp/law.py`'s own text (Articles 1–20) already declares that scope, and this instrument only records recognition of it (XVIII.1). Had this instrument attempted to define what a canonical knowledge object IS, that would have been a substantive determination beyond its jurisdiction and void under CMG-L-13. |
+| **LXXX.6 — certification revocation** | Any prior Constitutional Readiness certification of version 1.1 IS revoked by this amendment and SHALL be re-issued by the located certification owner against version 1.2, accompanied by the validator output that produced it (LXXX.5, LXXX.8). |

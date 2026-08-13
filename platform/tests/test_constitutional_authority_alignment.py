@@ -133,17 +133,23 @@ def test_every_authority_claim_is_bound_to_a_superior(binding, claims) -> None:
 
 
 def test_every_bound_instrument_still_claims_authority(binding, claims) -> None:
-    """A binding entry for a file that claims nothing is stale, not harmless."""
+    """A binding entry for a file that claims nothing is stale, not harmless.
+
+    Role ORTHOGONAL is exempt: by definition (CAA-INV-08) it names no superior to
+    claim, and its instrument need not even be JSON — CMG-000001 is markdown.
+    """
     stale = sorted(
         entry["instrument"]
         for entry in binding["subordinate_instruments"]
-        if entry["instrument"] not in claims
+        if entry["instrument"] not in claims and entry["role"] != "ORTHOGONAL"
     )
     assert stale == []
 
 
 def test_every_bound_instrument_carries_the_block_the_binding_says_it_does(binding) -> None:
     for entry in binding["subordinate_instruments"]:
+        if entry["role"] == "ORTHOGONAL":
+            continue
         document = _load(REPO / entry["instrument"])
         superior = document["constitutional_superior"]
         assert superior["authority"] == "UCKP-LAW-0001", entry["instrument"]

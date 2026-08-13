@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "authority": "NONE (DERIVED TRUTH) — this file asserts nothing. It is the machine-readable projection of CMG-000001 declared at CMG-000001 Article XV.3 and Article LIX.5. Where this file and the canonical source disagree, the canonical source governs and this file SHALL be corrected.",
   "canonical_source": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
-  "canonical_source_version": "1.1",
+  "canonical_source_version": "1.2",
   "verified_by": "00-CMG/tools/cmg_validate.py",
   "notes": "Zero hard coding: the validator contains no member of any enumeration below. Every kind, state, transition, relationship, tier, namespace, artifact, concern, vacancy, gap and open question is carried here as configuration (CMG-000001 CMG-L-08, LXVI.5).",
 
@@ -263,7 +263,7 @@
   ],
 
   "artifacts": [
-    { "id": "CMG-000001", "name": "Constitutional Meta Governance Constitution", "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "kind": "CMG-K-01", "standing": "META", "reach": "CORPUS-WIDE", "tier": "T1M", "state": "DECLARED", "version": "1.1", "superiors": ["VAC-01"], "depends_on": ["CEP-000", "CEP-001", "CEP-002", "CEP-003", "CEP-004", "CEP-005", "CEP-006", "CEP-007", "CEP-008", "CEP-009", "CEP-010", "AUTH-INF-001", "STATUS-001", "REG-AUTO-001", "UCI-001"], "lineage_predecessor": null },
+    { "id": "CMG-000001", "name": "Constitutional Meta Governance Constitution", "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md", "kind": "CMG-K-01", "standing": "META", "reach": "CORPUS-WIDE", "tier": "T1M", "state": "DECLARED", "version": "1.2", "superiors": ["VAC-01"], "depends_on": ["CEP-000", "CEP-001", "CEP-002", "CEP-003", "CEP-004", "CEP-005", "CEP-006", "CEP-007", "CEP-008", "CEP-009", "CEP-010", "AUTH-INF-001", "STATUS-001", "REG-AUTO-001", "UCI-001"], "lineage_predecessor": null },
 
     { "id": "CEP-000", "name": "Constitutional Engineering Charter", "path": "00-CEP/CEP-000-CONSTITUTIONAL-ENGINEERING-CHARTER.md", "kind": "CMG-K-02", "standing": "FOUNDATIONAL", "reach": "PROGRAM-SCOPED", "tier": "T2", "state": "PROVISIONAL", "version": "1.0", "superiors": ["VAC-01"], "depends_on": [], "lineage_predecessor": null },
     { "id": "CEP-001", "name": "Constitutional Engineering Constitution", "path": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md", "kind": "CMG-K-03", "standing": "FOUNDATIONAL", "reach": "PROGRAM-SCOPED", "tier": "T2", "state": "PROVISIONAL", "version": "1.1", "superiors": ["CEP-000"], "depends_on": ["CEP-000"], "lineage_predecessor": null },
@@ -312,7 +312,9 @@
     { "id": "PLATFORM-001", "name": "Universal Platform Constitution", "path": "09-PLATFORM/PLATFORM-001-UNIVERSAL-PLATFORM-CONSTITUTION.md", "kind": "CMG-K-03", "standing": "FOUNDATIONAL", "reach": "DOMAIN-SCOPED", "tier": "T3", "state": "PROVISIONAL", "version": "1.0", "superiors": ["TECH-CONST-001"], "depends_on": [], "lineage_predecessor": null },
     { "id": "SECURITY-001", "name": "Universal Security Constitution", "path": "14-SECURITY/SECURITY-001-UNIVERSAL-SECURITY-CONSTITUTION.md", "kind": "CMG-K-03", "standing": "FOUNDATIONAL", "reach": "DOMAIN-SCOPED", "tier": "T3", "state": "PROVISIONAL", "version": "1.0", "superiors": ["TECH-CONST-001"], "depends_on": [], "lineage_predecessor": null },
     { "id": "CAT-000", "name": "Universal Canonical Runtime Catalog Constitution", "path": "03-CATALOGS/UCOS-Ω∞-UNIVERSAL-CANONICAL-RUNTIME-CATALOG-CONSTITUTION.md", "kind": "CMG-K-10", "standing": "FOUNDATIONAL", "reach": "DOMAIN-SCOPED", "tier": "T3", "state": "PROVISIONAL", "version": "1.0", "superiors": ["TECH-CONST-001"], "depends_on": [], "lineage_predecessor": null },
-    { "id": "REF-000", "name": "Universal Reference Architecture Constitution", "path": "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-ARCHITECTURE-CONSTITUTION.md", "kind": "CMG-K-10", "standing": "FOUNDATIONAL", "reach": "DOMAIN-SCOPED", "tier": "T3", "state": "PROVISIONAL", "version": "1.0", "superiors": ["TECH-CONST-001"], "depends_on": [], "lineage_predecessor": null }
+    { "id": "REF-000", "name": "Universal Reference Architecture Constitution", "path": "04-REFERENCE/UCOS-Ω∞-UNIVERSAL-REFERENCE-ARCHITECTURE-CONSTITUTION.md", "kind": "CMG-K-10", "standing": "FOUNDATIONAL", "reach": "DOMAIN-SCOPED", "tier": "T3", "state": "PROVISIONAL", "version": "1.0", "superiors": ["TECH-CONST-001"], "depends_on": [], "lineage_predecessor": null },
+
+    { "id": "UCKP-LAW-0001", "name": "UCKP Root Constitutional Law", "path": "engine/uckp/law.py", "kind": "CMG-K-14", "standing": "FOUNDATIONAL", "reach": "CORPUS-WIDE", "tier": "T4", "state": "PROVISIONAL", "version": "1.0.0", "superiors": ["VAC-01"], "depends_on": [], "lineage_predecessor": null }
   ],
 
   "concerns": [
@@ -365,6 +367,7 @@
     { "id": "CMG-DLG-47", "concern": "repository-lifecycle", "owner": "CONST-09", "disposition": "REUSE", "basis": "CONST-09" },
     { "id": "CMG-DLG-48", "concern": "constitutional-engineering-operational-law-invariants-and-artifact-state-model", "owner": "CEP-001", "disposition": "REUSE", "basis": "CEP-001 Art I (LAW-1..11), Art VII (INV-1..8), Art VIII (state model), Art XXIV" },
     { "id": "CMG-DLG-49", "concern": "deferral-register-lifecycle-states-entry-exit-review-cadence-and-custody", "owner": "CEP-002", "disposition": "REUSE", "basis": "CEP-002 Art 27 (added by CEP-002-AMD-001 under Art 21); refines CMG-DLG-02; paired artifact transitions owned at CEP-001 Art VIII.2/VIII.7 (CMG-DLG-48); closes CMG-GAP-02, answers CMG-OQ-04; recorded at CMG-000001 LXXVIII.8" },
+    { "id": "CMG-DLG-50", "concern": "canonical-object-identity-registry-relationship-graph-and-invariant-validation", "owner": "UCKP-LAW-0001", "disposition": "REUSE", "basis": "engine/uckp/law.py UCKP-ART-01, -02, -05, -08; recognized orthogonal (not subordinate) under engine/uckp/alignment.py (UCOS-CAA-001), which binds CMG-000001 under role ORTHOGONAL in 00-BOOK/DATA/constitutional-authority-alignment.json; added by amendment AMD-002" },
 
     { "id": "CMG-RET-01", "concern": "definition-of-constitution-and-constitutional-artifact", "owner": "CMG-000001", "disposition": "RETAIN", "basis": "CMG-000001 Art IV, VI" },
     { "id": "CMG-RET-02", "concern": "recognition-of-constitutionality-and-the-constitution-registry", "owner": "CMG-000001", "disposition": "RETAIN", "basis": "CMG-000001 Art XII, XV" },

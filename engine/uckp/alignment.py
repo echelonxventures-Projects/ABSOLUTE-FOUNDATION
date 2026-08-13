@@ -88,6 +88,17 @@ REPOSITORY_NAMESPACE = "ucos-repository"
 #: the derivation *total over the ledger* rather than total over anything at all.
 REPOSITORY_ID_PATTERN = re.compile(r"^UCOS-[A-Z0-9]+-[0-9]{6}$")
 
+#: CAA-INV-08 phrasing that turns a declared ORTHOGONAL scope back into an unrestricted
+#: claim in disguise — the safeguard the role exists to prevent (Article 1 admits
+#: exactly one unrestricted authority, and ORTHOGONAL is deliberately not it).
+_UNRESTRICTED_SCOPE_MARKERS = (
+    "every constitutional matter",
+    "all constitutional authority",
+    "universal supremacy",
+    "unrestricted",
+    "everything in ucos",
+)
+
 
 class AlignmentError(ValueError):
     """Raised when a binding contradicts the law it claims to derive under."""
@@ -192,6 +203,16 @@ AUTHORITY_ROLES: tuple[AuthorityRole, ...] = (
         False,
         "MANY",
     ),
+    AuthorityRole(
+        "ORTHOGONAL",
+        "an instrument that governs a distinct, non-overlapping axis of constitutional "
+        "responsibility — such as recognition and classification of constitutional "
+        "instruments — and does not compete for supremacy on the axis Article 1 "
+        "governs; it holds no authority outside its own declared scope",
+        "UCKP-ART-01",
+        False,
+        "FEW",
+    ),
 )
 
 #: The seven alignment invariants. Each enforces an article of the root law; none adds
@@ -256,6 +277,16 @@ ALIGNMENT_RULES: tuple[AlignmentRule, ...] = (
         "declared authority role resolves to an article of the root law.",
         "UCKP-ART-02",
         ("UCKP-ART-17", "UCKP-ART-18"),
+    ),
+    AlignmentRule(
+        "CAA-INV-08",
+        "ORTHOGONAL_ROLE_IS_SCOPE_BOUNDED_AND_NON_SUPREME",
+        "Every instrument bound under role ORTHOGONAL declares an explicit, "
+        "non-unrestricted scope naming the axis its authority is bounded to, and role "
+        "ORTHOGONAL never resolves as a supreme role; Article 1 continues to admit "
+        "exactly one.",
+        "UCKP-ART-01",
+        ("UCKP-ART-04",),
     ),
 )
 
@@ -711,6 +742,17 @@ def verify_binding(document: Mapping[str, object]) -> tuple[str, ...]:
                 findings.append(f"{name} declares role {role!r}, which is not a declared role")
             elif role in supreme_roles:
                 findings.append(f"{name} claims a supreme role; Article 1 admits exactly one")
+            elif role == "ORTHOGONAL":
+                owns = entry.get("owns")
+                if not isinstance(owns, str) or not owns.strip():
+                    findings.append(f"{name} claims role ORTHOGONAL but declares no explicit scope")
+                else:
+                    lowered = owns.strip().lower()
+                    if any(marker in lowered for marker in _UNRESTRICTED_SCOPE_MARKERS):
+                        findings.append(
+                            f"{name} claims role ORTHOGONAL with an unrestricted scope in "
+                            f"'owns': {owns!r}"
+                        )
             derives = _entries(entry.get("derives_under"))
             if not derives:
                 findings.append(f"{name} names no article of derivation")

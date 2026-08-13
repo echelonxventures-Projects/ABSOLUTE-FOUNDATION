@@ -175,8 +175,9 @@ def constitution_object_count() -> int:
     artifact is added. Keeping it separate from :func:`corpus_size` is what makes a change
     in the total attributable to one cause or the other.
 
-    175 constitution + capability objects, plus the 16 UCOS-CAA-001 alignment objects
-    (the binding, the identity derivation, 7 authority roles and 7 alignment rules) that
+    175 constitution + capability objects, plus the 18 UCOS-CAA-001 alignment objects
+    (the binding, the identity derivation, 8 authority roles and 8 alignment rules — role
+    ORTHOGONAL and rule CAA-INV-08 added by the CMG/UCKP reconciliation) that
     :mod:`engine.uckp.alignment` contributes as the third declarative provider.
     """
-    return 191
+    return 193

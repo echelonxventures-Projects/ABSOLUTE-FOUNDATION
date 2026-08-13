@@ -127,6 +127,13 @@
       "article": "UCKP-ART-15",
       "may_hold_authority": false,
       "cardinality": "MANY"
+    },
+    "ORTHOGONAL": {
+      "definition": "an instrument that governs a distinct, non-overlapping axis of constitutional responsibility — such as recognition and classification of constitutional instruments — and does not compete for supremacy on the axis Article 1 governs; it holds no authority outside its own declared scope",
+      "article": "UCKP-ART-01",
+      "also": "UCKP-ART-04",
+      "may_hold_authority": false,
+      "cardinality": "FEW"
     }
   },
 
@@ -140,7 +147,8 @@
   "subordination_relations": {
     "DELEGATES": "The surface still exists and reaches the authority above it rather than answering for itself.",
     "SUPERSEDED": "The surface once held a competing definition and is now gone. A retired definition that still exists is still a second answer.",
-    "PROJECTION": "The surface is a derived or authored view of the objects, holding no independent determination."
+    "PROJECTION": "The surface is a derived or authored view of the objects, holding no independent determination.",
+    "ORTHOGONAL": "The surface holds independent, non-overlapping authority on a different axis and neither derives from nor answers to the authority above it; the two are declared non-competing rather than ranked."
   },
   "plane_relation_to_UFC_15": {
     "statement": "UFC-15 and this binding are one principle measured on two planes, not two authorities.",
@@ -242,6 +250,17 @@
       "derives_under": ["UCKP-ART-12", "UCKP-ART-16"],
       "owns": "The deterministic result of one named validation, recorded so the act can be reviewed after the fact.",
       "may_never_own": "The standard it validated against. A record of a measurement is not the law the measurement was taken under."
+    },
+    {
+      "id": "CMG-000001",
+      "instrument": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+      "name": "Constitutional Meta Governance Constitution",
+      "role": "ORTHOGONAL",
+      "relation": "ORTHOGONAL",
+      "derives_under": ["UCKP-ART-01", "UCKP-ART-04"],
+      "owns": "Recognition and classification of constitutional instruments: what counts as a Constitution, how instruments rank against each other under the Constitutional Precedence Lattice, and the recording of vacancies, gaps and open constitutional questions across the corpus. Self-bounded by its own front matter: 'Supreme over META-CONSTITUTIONAL MATTER ONLY... Confers NO authority over constitutional content.'",
+      "may_never_own": "What a canonical knowledge object is; identity; the relationship graph model; persistence, execution or projection authority. Those are UCKP-ART-02, UCKP-ART-05, UCKP-ART-07 and UCKP-ART-04, and CMG-000001 Article LXXXI.2 disclaims them in its own text: 'This instrument holds no substantive authority.'",
+      "why_orthogonal_not_subordinate": "CMG-000001 never claims authority over the canonical-object axis Article 1 governs, and UCKP-LAW-0001 never claims authority over which instruments are recognized as constitutional (that question is never posed inside the root law). The two claims do not overlap, so neither derives from nor is superior to the other — the same relationship CMG-000001 Article XVI.4 already declares between its own T1M tier and Program Authority (T2). See UCKP-CMG-CONSTITUTIONAL-RECONCILIATION-DETERMINATION.md for the full analysis."
     }
   ],
 
@@ -512,6 +531,14 @@
       "statement": "One object model is declared repository-wide. Every bound instrument that declares object classes names UCKO as the model they project, and every declared authority role resolves to an article of the root law.",
       "article": "UCKP-ART-02",
       "also": ["UCKP-ART-17", "UCKP-ART-18"],
+      "fails_closed": true
+    },
+    {
+      "id": "CAA-INV-08",
+      "name": "ORTHOGONAL_ROLE_IS_SCOPE_BOUNDED_AND_NON_SUPREME",
+      "statement": "Every instrument bound under role ORTHOGONAL declares an explicit, non-unrestricted scope naming the axis its authority is bounded to, and role ORTHOGONAL never resolves as a supreme role; Article 1 continues to admit exactly one.",
+      "article": "UCKP-ART-01",
+      "also": ["UCKP-ART-04"],
       "fails_closed": true
     }
   ],

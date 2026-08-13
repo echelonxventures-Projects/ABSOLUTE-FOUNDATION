@@ -5,7 +5,7 @@
     "declared_admitted_to_meta_registry": false,
     "disposition": "COMPOSE-AND-EXTEND OVER LOCATED OWNERS",
     "measured_admitted_to_meta_registry": false,
-    "meta_identifiers_read": 60,
+    "meta_identifiers_read": 61,
     "namespace_basis": "No namespace token is claimed in the meta-constitutional registry. Article XLI.5 forbids an EXTEND from introducing a new authority, registry, lifecycle or namespace, and Article LXXVI reserves namespace admission to the meta layer for meta-constitutional constructs only. This programme's identifier is a programme home under 00-MASTER/, which is the convention every other substantive programme in this repository already follows.",
     "rejected_alternatives": [
       "CREATE a new architectural reasoning engine in engine/ or platform/ — rejected: the eleven located owners bound below already realise all ten faculties, and a new engine would be a parallel authority over architectural reasoning, which 00-CMG/CMG-000001 CMG-INV-02 forbids.",
@@ -439,7 +439,7 @@
     "ontology_anchors": 3,
     "ontology_anchors_present": 3,
     "owners": 10,
-    "register_references": 1467,
+    "register_references": 1468,
     "register_references_unresolved": 0,
     "registers": 20,
     "registers_resolved": 20,
@@ -840,7 +840,7 @@
       "owner": "00-CMG/tools/cmg_validate.py",
       "path": "00-CMG/CMG-REGISTRY.json",
       "problem": "",
-      "references": 43,
+      "references": 44,
       "references_unresolved": 0,
       "resolves": true,
       "role": "meta-constitutional-registry",
@@ -1104,7 +1104,7 @@
       "subject": "every baseline"
     }
   ],
-  "seal_sha256": "83f4254df5f1c2c83db954bcf0e432debaab944c884dad83e2a8ceaa45a43c9d",
+  "seal_sha256": "a29254064b9837613202b8e2e0eeb6f692d7ccf9e583f1a2bf06248df2dc8ebb",
   "validations": [
     {
       "blocking": true,

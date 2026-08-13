@@ -13391,7 +13391,7 @@
   ],
   "capability_count": 121,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "9ae64efd0cacc3e99ffd891cb8ec0290596aa3603e5c4e6456840a8876266f0c",
+  "content_hash": "6490cd17eac98e91fa859ab961fe202bdbbf759c70335624fde3ac54e1d87eb6",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -13574,7 +13574,7 @@
           "test_functions": 887
         },
         "engine": {
-          "loc": 87452,
+          "loc": 87494,
           "root": "engine",
           "source_files": 332,
           "test_files": 264,
@@ -13609,7 +13609,7 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 318757,
+      "total_loc": 318799,
       "total_tests": 13062
     },
     "corpus": {

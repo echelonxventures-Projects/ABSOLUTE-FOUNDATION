@@ -8,7 +8,7 @@
 |---|---|---|---|---|---|---|---|
 | `UAIE-REG-01` | every repository artifact | `00-BOOK/DATA/artifacts.json` | json | **RESOLVES** | 1233 | 0 | UAIE-FAC-01, UAIE-FAC-06 |
 | `UAIE-REG-02` | every relationship between artifacts | `00-BOOK/DATA/relationships.json` | json | **RESOLVES** | 0 | 0 | UAIE-FAC-01, UAIE-FAC-02 |
-| `UAIE-REG-03` | every constitution | `00-CMG/CMG-REGISTRY.json` | json | **RESOLVES** | 43 | 0 | UAIE-FAC-04, UAIE-FAC-09 |
+| `UAIE-REG-03` | every constitution | `00-CMG/CMG-REGISTRY.json` | json | **RESOLVES** | 44 | 0 | UAIE-FAC-04, UAIE-FAC-09 |
 | `UAIE-REG-04` | every registry | `00-MASTER/MIP-W1-P001/10-UNIVERSAL-REGISTRY-CATALOG.md` | markdown | **RESOLVES** | 0 | 0 | UAIE-FAC-01, UAIE-FAC-07 |
 | `UAIE-REG-05` | every ontology | `01-WORKING/ONTOLOGY-REGISTER.md` | markdown | **RESOLVES** | 0 | 0 | UAIE-FAC-01 |
 | `UAIE-REG-06` | every taxonomy | `10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md` | markdown | **RESOLVES** | 0 | 0 | UAIE-FAC-02 |
