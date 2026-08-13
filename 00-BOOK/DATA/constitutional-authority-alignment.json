@@ -476,7 +476,8 @@
       {"id": "UNIVERSAL-CERTIFICATION", "home": "engine/universal_certification/", "role": "AUTHORITY", "bounded_question": "Is this subject (Validation + Measurement + RepositoryTruth, compliance-aware) universally engineering-ready? A distinct, broader question EC-1 does not ask — resolved as valid bounded specialization, not duplication, in CERTIFICATION-OWNERSHIP-RECONCILIATION-FINDING.md."},
       {"id": "EC2-CERTIFICATION-CONSOLE", "home": "platform/certification/", "role": "PROJECTION", "of": "EC1-CERTIFICATION", "evidence": "real, code-level imports confirmed (facade.py, contracts.py, ledger.py, health.py, status.py, service.py all import from engine.certification); its own documentation states \"no new authority, no new capability group\"", "bounded_question": "n/a — reproduces EC-1's decision read-only, byte-for-byte"},
       {"id": "KNOWLEDGE-CERTIFICATION", "home": "engine/knowledge/certification.py", "role": "AUTHORITY", "bounded_question": "Is this canonical knowledge object complete?"},
-      {"id": "ASSURANCE-CERTIFICATION", "home": "platform/universal_assurance/certification.py", "role": "AUTHORITY", "bounded_question": "Did this assurance run's measured outcome satisfy its declared policy? Relationship to EC1/UNIVERSAL-CERTIFICATION not established by evidence; recorded as an open question, not assumed either way."},
+      {"id": "UKIP-KNOWLEDGE-CERTIFICATION", "home": "engine/knowledge/ukip/certification.py", "role": "AUTHORITY", "bounded_question": "Across an unbounded number of providers, is each of the eleven knowledge capabilities fully established or merely present? A distinct, per-capability question KNOWLEDGE-CERTIFICATION does not ask (which certifies one canonical object's completeness, not a capability across providers).", "vocabulary": "Reuses engine.knowledge.certification.CertStatus verbatim, by the module's own docstring (\"the status vocabulary is reused from the UKDA certifier ... rather than redefined, so a UKIP certificate and a UKDA certificate mean the same thing by the same words\") — shared vocabulary, not shared or subordinate authority; resolved as valid specialization in PHASE-KNOWLEDGE-REGISTRY-OWNERSHIP-RECONCILIATION-DETERMINATION.md."},
+      {"id": "ASSURANCE-CERTIFICATION", "home": "platform/universal_assurance/certification.py", "role": "AUTHORITY", "bounded_question": "Did this assurance run's measured outcome satisfy its declared policy? Established by evidence in PHASE-UNIVERSAL-ASSURANCE-RELATIONSHIP-DETERMINATION.md: zero relationship to EC1-CERTIFICATION (no import anywhere in platform/universal_assurance/); a confirmed, one-directional, non-competing component-reuse relationship to UNIVERSAL-CERTIFICATION for exactly two of this package's ten owned pipeline stages (Certification Execution, Certification Evidence), which the package's own certification.py docstring states explicitly issues no certificate of its own and re-judges nothing on those two stages — the certificate, audit ledger, compliance engine and rule suite are all reused from engine.universal_certification. Assurance's own policy-gate evaluation can still close its certification stage even where the reused rule suite alone would have passed, so this is real component reuse plus additional judgment, not a read-only projection."},
       {"id": "RIB-CERTIFICATION", "home": "00-MASTER/UCOS-RIB-001/rib_engine.py", "role": "AUTHORITY", "bounded_question": "Does the whole repository integrate coherently right now?"},
       {"id": "AEE-CERTIFICATION", "home": "00-MASTER/UCOS-AEE-001/aee_engine.py", "role": "AUTHORITY", "bounded_question": "Have this repository's cross-programme mandates and observations converged?"},
       {"id": "CMG-CERTIFICATION", "home": "00-CMG/tools/cmg_validate.py", "role": "AUTHORITY", "bounded_question": "Is the constitutional corpus meta-constitutionally ready?"},
@@ -486,6 +487,76 @@
       {"id": "UMB017-DIGITAL-TWIN-CERTIFICATION", "home": "00-BOOK/tools/ukbx.py (cmd_certify)", "role": "AUTHORITY", "bounded_question": "Is the UKB/UMB document-corpus digital twin internally consistent across its ten integrity domains?", "outputs": ["00-BOOK/DATA/certification.json", "00-BOOK/REGISTRIES/CERTIFICATION-REGISTRY.md"], "note": "one mechanism, two artifacts (evidence data + rendered report) — not two surfaces"}
     ],
     "second_authority_test": "A second certification authority over the SAME bounded question would be a rival. None was found: every pair of surfaces compared either answers a different question, or (EC-2 only) is an explicit, code-confirmed read-only projection of the one that answers it. Full comparison in PHASE-CERTIFICATION-GOVERNANCE-RELATIONSHIP-DETERMINATION.md and CERTIFICATION-OWNERSHIP-RECONCILIATION-FINDING.md."
+  },
+
+  "$identity_namespace_comment": [
+    "TASK: resolve the identity-namespace ambiguity between UCKP URN identity and knowledge object",
+    "identifiers. Same shape as certification and the relationship graph — recognition of a plural but",
+    "non-competing landscape, never a new authority.",
+    "",
+    "PHASE-KNOWLEDGE-IDENTITY-RELATIONSHIP-DETERMINATION.md and PHASE-IDENTITY-NAMESPACE-OWNERSHIP-",
+    "DETERMINATION.md found: engine/uckp/identity.py (URN-minted constitutional-object identity) and",
+    "engine/knowledge/cko.py + engine/knowledge/ukip/contracts.py (content-derived knowledge identity)",
+    "both compute their content digests through the one Layer Zero primitive, engine/uckp/canonical.py",
+    "(content_hash, canonical_json) — confirmed by direct import at engine/knowledge/model.py:37 and",
+    "engine/uckp/ucko.py:39, and guarded repository-wide against reimplementation by UCKP-INV-03. Sharing",
+    "that primitive does not make either identity scheme subordinate to the other: URN identity is",
+    "minted (uuid5 over a namespace+local-name pair) and knowledge identity is derived (a pure digest of",
+    "content), and neither construction references, resolves, or is admitted through the other's registry.",
+    "identity_authority_resolution's own text — 'every other identity mechanism in the repository is a",
+    "persistence or projection binding of it' — was written before this question was asked and does not,",
+    "on the evidence, extend to knowledge identity; this binding does not amend that section, it adds the",
+    "sibling declaration that section's own scope does not cover.",
+    "",
+    "The UCKO-<KIND>-<NNNN> knowledge-object id shape was also found already consumed, unmodified, by",
+    "twelve pre-existing 00-MASTER/UAKOS-PHASE-* scripts as a recognized text-reference family. This",
+    "binding records that pattern's origin; it does not create, change, or consolidate those scripts."
+  ],
+  "identity_namespace_resolution": {
+    "model": {
+      "type": "MULTIPLE_INDEPENDENT_BOUNDED_NAMESPACES",
+      "declares": "Identity in UCOS is namespace-plural by design. A namespace answers one bounded identity question over one bounded population; holding undisputed ownership of that namespace is not competition with another namespace holding undisputed ownership of a different one."
+    },
+    "principles": [
+      "An identity namespace is bounded by the population it identifies, not by the primitive it happens to compute digests with.",
+      "Multiple identity namespaces may share a canonical hashing primitive without either becoming a projection or persistence binding of the other.",
+      "Coexistence of namespaces that share a naming acronym by coincidence is not a namespace ownership violation absent a formal reservation of that acronym.",
+      "Each namespace owns its own identifier pattern, its own admission semantics, and its own registry (or the explicit absence of one).",
+      "Cross-namespace relationships require explicit declaration; an undeclared relationship is not assumed to exist."
+    ],
+    "shared_primitive": {
+      "home": "engine/uckp/canonical.py",
+      "provides": ["canonical_json", "content_hash"],
+      "consumed_by": ["engine/uckp/ucko.py (content_sha256, semantic_digest — line 39)", "engine/knowledge/model.py (re-exported content_hash — line 37, consumed by CKO's content_sha256/semantic_hash and by UKIP's knowledge_sha256/knowledge_id)"],
+      "enforcement": "UCKP-INV-03 / engine.uckp.validation.ConstitutionalValidator._probe_zero_duplication — forbids any module from reimplementing this primitive; runs on every live gate",
+      "ownership_note": "This entry recognizes a SHARED FOUNDATION, not shared or transferred SEMANTIC OWNERSHIP. Layer Zero owns the digest function; it owns neither namespace's identity scheme built on top of that function."
+    },
+    "namespaces": [
+      {
+        "id": "UCKP-URN-IDENTITY",
+        "home": "engine/uckp/identity.py",
+        "shape": "urn:ucos:ucko:<namespace>:<local_name>",
+        "identifies": "constitutional objects, Article 5 — minted (uuid5 over namespace+local-name) and admitted with refuse-on-clash semantics by engine/uckp/registry.py",
+        "authority": "UCKP-ART-05, already bound SUPREME under identity_authority_resolution's CONSTITUTIONAL_OBJECT plane; unchanged by this binding",
+        "relationship_to_sibling_namespace": "NONE — no knowledge object identifier is ever minted, admitted, or refused through this namespace's registry"
+      },
+      {
+        "id": "KNOWLEDGE-OBJECT-IDENTITY",
+        "home": "engine/knowledge/cko.py (cko_id) + engine/knowledge/model.py (content_hash) + engine/knowledge/ukip/contracts.py (knowledge_id, knowledge_sha256)",
+        "shape": "author-assigned cko_id string, conventionally UCKO-<KIND>-<NNNN>, plus content-derived knowledge_sha256 and UKID-<digest12> knowledge_id",
+        "identifies": "curated institutional/architectural decision knowledge (UKDA) and its unbounded-provider admission layer (UKIP), per PHASE-KNOWLEDGE-REGISTRY-OWNERSHIP-RECONCILIATION-DETERMINATION.md",
+        "authority": "engine/knowledge/store.py, the single authoritative home confirmed by every downstream consumer",
+        "relationship_to_sibling_namespace": "NONE — no UCKP URN is ever derived from, or resolves to, a knowledge object identifier; zero use of the ucko_objects()/UCKO_OBJECTS provider hook anywhere in engine/knowledge/"
+      }
+    ],
+    "canonical_pattern_ownership": [
+      {"pattern": "urn:ucos:ucko:<namespace>:<local_name>", "owner": "engine/uckp/identity.py", "validated_by": "_NAMESPACE_RE, _LOCAL_RE (namespace component lowercase-only, structurally cannot equal a KNOWLEDGE-OBJECT-IDENTITY value)"},
+      {"pattern": "UCKO-<KIND>-<NNNN>", "owner": "engine/knowledge/seed.py, engine/knowledge/capability.py (CAPABILITY_ID_PREFIX)", "consumed_by": "00-MASTER/UAKOS-PHASE-002/003/003R/004/005/006, UAKOS-CLOSURE-002, UAKOS-PHASE-001B, UCOS-MXR-001 (pre-existing text-reference family scanners; this binding records their existing convention, does not create or consolidate them)", "validated_by": "none — informal convention, recorded here as fact, not newly enforced by this binding"},
+      {"pattern": "UKID-<digest12>", "owner": "engine/knowledge/ukip/contracts.py (KNOWLEDGE_ID_PREFIX)", "validated_by": "derived deterministically from knowledge_sha256; no collision found with either pattern above"}
+    ],
+    "$acronym_collision_note": "The bare token UCKO also names a Python symbol (engine.uckp.ucko.UCKO, a class alias for UniversalConstitutionalKnowledgeObject, exposed via engine/uckp/__init__.py's lazy-import table) — a third, code-symbol namespace resolved entirely by Python's own import machinery, sharing no keyspace, parser, or lookup path with either namespace declared above. Recorded per PHASE-IDENTITY-NAMESPACE-OWNERSHIP-DETERMINATION.md section 1; not a namespace this binding governs, since Python's own scoping already governs it completely.",
+    "second_authority_test": "A second authority over the SAME namespace would be a rival mint or a rival admission registry for the same population. None was found: UCKP-URN-IDENTITY is minted and admitted exactly once (engine/uckp/identity.py + engine/uckp/registry.py); KNOWLEDGE-OBJECT-IDENTITY is authored/derived exactly once (engine/knowledge/store.py, reused verbatim by UKI and UKIP per PHASE-KNOWLEDGE-REGISTRY-OWNERSHIP-RECONCILIATION-DETERMINATION.md). Neither namespace's population is ever registered into the other's mechanism. Full analysis in PHASE-KNOWLEDGE-IDENTITY-RELATIONSHIP-DETERMINATION.md and PHASE-IDENTITY-NAMESPACE-OWNERSHIP-DETERMINATION.md.",
+    "ids_preserved": "ALL. This binding renames nothing, migrates nothing, merges no identity system, and creates no new or universal identity authority — it declares two namespaces already independent in code, and the one primitive they already, correctly, share."
   },
 
   "$truth_comment": [
