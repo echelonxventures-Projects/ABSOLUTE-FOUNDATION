@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 5763,
+  "total_objects": 5766,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -28182,6 +28182,24 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "UCKP-CMG-AUTHORITY-ALIGNMENT-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002369",
+      "first_seen": "commit:73c276d56893"
+    },
+    {
+      "path": "UCKP-CMG-CONSTITUTIONAL-RECONCILIATION-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002370",
+      "first_seen": "commit:73c276d56893"
+    },
+    {
       "path": "UCOD-001-UNIVERSAL-CONSTITUTIONAL-OWNERSHIP-DETERMINATION.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -28276,6 +28294,15 @@
       "owner": "UCOS-REPOSITORY-ROOT",
       "universal_id": "UCOS-UNAF00-000001",
       "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "UNIVERSAL-EVOLUTION-FOUNDATION-GAP-ANALYSIS.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002371",
+      "first_seen": "commit:73c276d56893"
     },
     {
       "path": "VERIFICATION-RUNBOOK.md",

@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "3 — Audit Universe",
   "evidence_class": "AUDIT",
-  "count": 4530,
+  "count": 4533,
   "events": [
     {
       "event_id": "UGA-AUD-368c03bec2e5",
@@ -33543,6 +33543,45 @@
       "object_path": "Makefile",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-EXDOC-002367",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-3269ee7ccdd8",
+      "timestamp": "commit:73c276d56893",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-EXDOC-002369",
+      "object_path": "UCKP-CMG-AUTHORITY-ALIGNMENT-DETERMINATION.md",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-EXDOC-002369",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-a7901dc8a66f",
+      "timestamp": "commit:73c276d56893",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-EXDOC-002370",
+      "object_path": "UCKP-CMG-CONSTITUTIONAL-RECONCILIATION-DETERMINATION.md",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-EXDOC-002370",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-465b36322670",
+      "timestamp": "commit:73c276d56893",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-EXDOC-002371",
+      "object_path": "UNIVERSAL-EVOLUTION-FOUNDATION-GAP-ANALYSIS.md",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-EXDOC-002371",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"

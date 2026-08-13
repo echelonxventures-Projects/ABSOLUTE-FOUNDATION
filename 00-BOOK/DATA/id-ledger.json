@@ -8964,7 +8964,7 @@
     "DET": 2,
     "CONFIG": 29,
     "DATAOBJ": 109,
-    "EXDOC": 2368,
+    "EXDOC": 2371,
     "TOOLING": 36,
     "ENGINE": 1187,
     "TESTOBJ": 801,
@@ -51920,6 +51920,24 @@
       "object_class": "TEST_OBJECT",
       "category": "TESTOBJ",
       "first_seen": "commit:3fb0c8148bb6"
+    },
+    "UCKP-CMG-AUTHORITY-ALIGNMENT-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002369",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:73c276d56893"
+    },
+    "UCKP-CMG-CONSTITUTIONAL-RECONCILIATION-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002370",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:73c276d56893"
+    },
+    "UNIVERSAL-EVOLUTION-FOUNDATION-GAP-ANALYSIS.md": {
+      "universal_id": "UCOS-EXDOC-002371",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:73c276d56893"
     }
   },
   "by_observation": {

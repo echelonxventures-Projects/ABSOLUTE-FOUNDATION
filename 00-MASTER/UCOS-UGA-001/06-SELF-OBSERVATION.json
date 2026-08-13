@@ -7,18 +7,18 @@
   "evidence_class": "IMPROVEMENT",
   "may_influence_certification": false,
   "observation": {
-    "total_objects": 5763,
+    "total_objects": 5766,
     "by_object_class": {
       "CONFIGURATION_OBJECT": 29,
       "DATA_OBJECT": 109,
       "DOCUMENT_ARTIFACT": 1233,
-      "EXCLUDED_DOCUMENT": 2368,
+      "EXCLUDED_DOCUMENT": 2371,
       "EXECUTABLE_OBJECT": 1187,
       "TEST_OBJECT": 801,
       "TOOLING_OBJECT": 36
     },
     "by_lifecycle": {
-      "AUTHORED": 5438,
+      "AUTHORED": 5441,
       "GENERATED": 325
     },
     "distinct_owners": 245,
@@ -48,12 +48,12 @@
         "objects": 121
       },
       {
-        "owner": "application/_evidence",
-        "objects": 110
+        "owner": "UCOS-REPOSITORY-ROOT",
+        "objects": 111
       },
       {
-        "owner": "UCOS-REPOSITORY-ROOT",
-        "objects": 108
+        "owner": "application/_evidence",
+        "objects": 110
       },
       {
         "owner": "UCOS-USIS-WAVE2",
