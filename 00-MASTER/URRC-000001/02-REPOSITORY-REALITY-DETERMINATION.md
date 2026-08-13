@@ -116,7 +116,7 @@ What the repository contains, and the substrate that proves it.
 | `S-02` | `00-BOOK/DATA/relationships.json` | YES | YES | YES | 2/2 | 25798 | `6da99e21f3ba` |
 | `S-03` | `00-BOOK/DATA/control-tower.json` | YES | YES | YES | 3/3 | 91 | `304072e9af5c` |
 | `S-04` | `00-BOOK/DATA/certification.json` | YES | YES | YES | 5/5 | 45 | `d92e5b4c3ffc` |
-| `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1381 | `7d8aeca7b3a2` |
+| `S-05` | `00-BOOK/DATA/id-ledger.json` | YES | YES | YES | 2/2 | 1381 | `6c0f60500e1c` |
 | `S-06` | `00-CMG/CMG-REGISTRY.json` | YES | YES | YES | 9/9 | 166 | `83fe5ce03b42` |
 | `S-07` | `00-MASTER/UCCEP-000000/uccep-bindings.json` | YES | YES | YES | 5/5 | 112 | `505ec5c77ee1` |
 | `S-08` | `00-MASTER/UCCEP-000000/uccep.json` | YES | YES | YES | 6/6 | 129 | `16e80a5122dc` |

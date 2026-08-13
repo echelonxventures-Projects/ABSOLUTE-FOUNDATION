@@ -2381,7 +2381,7 @@
           "YES",
           "2/2",
           "1381",
-          "`7d8aeca7b3a2`"
+          "`6c0f60500e1c`"
         ],
         [
           "`S-06`",
@@ -3480,7 +3480,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "7d8aeca7b3a22f2008e199413945b9999f6983a5d3829eb439edd5d4b023790b",
+      "content_sha256": "6c0f60500e1cd4a8ca4480b7b2c5169ddbad577caa694558e1bf84b0279c7cd7",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",

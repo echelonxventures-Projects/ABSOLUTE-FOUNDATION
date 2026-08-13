@@ -4277,7 +4277,7 @@
     "fsck_errors": [],
     "interrupted_operations": [],
     "modified": "UCOS-OBS-000003",
-    "tracked_files": 5763,
+    "tracked_files": 5766,
     "untracked": "UCOS-OBS-000003",
     "working_tree": "UCOS-OBS-000003"
   },
@@ -4642,7 +4642,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "abe483b994c517dee9fdb27e9fd44be23f64c6fb9643a501af31c23d4ea402dc",
+      "content_sha256": "527b0a26ae082b2a0cffbd91de01df950ded943bef21dff3227764f98f65f71a",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
