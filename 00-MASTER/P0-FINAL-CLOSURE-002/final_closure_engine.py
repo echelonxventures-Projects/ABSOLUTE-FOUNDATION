@@ -48,6 +48,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
@@ -210,18 +211,72 @@ def porcelain(root: Path) -> list[str]:
     return sorted(line for line in run.stdout.splitlines() if line.strip())
 
 
+def _integrity_snapshot(root: Path) -> dict[str, Any]:
+    """Read-only repository integrity signal: HEAD, index presence, and file counts.
+
+    Three git subprocess calls (``rev-parse``, ``ls-files``, and ``porcelain``'s own
+    ``status``) plus one path check, all read-only. This function writes nothing, stages
+    nothing, regenerates nothing, and never mutates git state.
+    """
+    head = subprocess.run(  # noqa: S603 - resolved absolute argv
+        [_git(), "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=False
+    ).stdout.strip()
+    ls_files_count = len(
+        subprocess.run(  # noqa: S603 - resolved absolute argv
+            [_git(), "ls-files"], cwd=root, capture_output=True, text=True, check=False
+        ).stdout.splitlines()
+    )
+    return {
+        "head": head,
+        "index_exists": (root / ".git" / "index").is_file(),
+        "ls_files_count": ls_files_count,
+        "porcelain_count": len(porcelain(root)),
+    }
+
+
+def _integrity_violations(before: Mapping[str, Any], after: Mapping[str, Any]) -> list[str]:
+    """The three specific failure modes a checkpoint detects — nothing broader.
+
+    Deliberately narrow: ordinary generated-file drift changes ``porcelain_count`` on every
+    legitimate round and is never treated as corruption. Only a missing index, a collapsed
+    ``ls-files`` count, or a moved HEAD ever are — the three signatures the forensic
+    investigation (P0-FINAL-CLOSURE-002 index-corruption finding) actually observed.
+    """
+    violations: list[str] = []
+    if not after["index_exists"]:
+        violations.append("`.git/index` is missing")
+    if before["ls_files_count"] > 0 and after["ls_files_count"] == 0:
+        violations.append(f"git ls-files count dropped to zero (was {before['ls_files_count']})")
+    if before["head"] != after["head"]:
+        violations.append(f"HEAD changed: {before['head']!r} -> {after['head']!r}")
+    return violations
+
+
 def run_chain(
-    root: Path, chain: Sequence[tuple[str, tuple[str, ...]]] = CHAIN
+    root: Path,
+    chain: Sequence[tuple[str, tuple[str, ...]]] = CHAIN,
+    *,
+    integrity_context: tuple[int, int] | None = None,
 ) -> tuple[dict[str, int], dict[str, str]]:
     """Execute a located chain once. Returns each actuator's exit code and its refusal.
 
     The refusal text is captured, not discarded. An actuator that fail-closed aborts is
     reporting *why* the repository could not be measured, and a phase that recorded only
     the exit code would turn a diagnosable cause into an anonymous number.
+
+    ``integrity_context``, given as ``(phase, round_index)``, additionally checkpoints git
+    integrity immediately after every actuator and fails closed the instant one is violated
+    — HEAD moves, ``.git/index`` disappears, or ``git ls-files`` collapses to zero — instead
+    of letting a corrupted mid-round state propagate silently into a later round's drift
+    reading. Only Phase 8 passes this. Phase 9's chain runs inside a disposable clone, where
+    this class of finding is exactly what Phase 9 already reports on its own terms, so its
+    calls (here and via ``BOOTSTRAP``) leave this parameter at its default and are
+    unaffected.
     """
     codes: dict[str, int] = {}
     refusals: dict[str, str] = {}
     for name, argv in chain:
+        before = _integrity_snapshot(root) if integrity_context is not None else None
         run = subprocess.run(  # noqa: S603 - argv is literal; root is a repository path
             [sys.executable, *argv],
             cwd=root,
@@ -233,6 +288,18 @@ def run_chain(
         if run.returncode not in (0, 1):
             message = (run.stderr or run.stdout or "").strip().splitlines()
             refusals[name] = message[-1][:300] if message else "no diagnostic emitted"
+        if integrity_context is not None:
+            phase, round_index = integrity_context
+            after = _integrity_snapshot(root)
+            violations = _integrity_violations(before, after)
+            if violations:
+                raise Abort(
+                    f"integrity checkpoint failed — phase {phase}, round {round_index}, "
+                    f"executor {name!r}, at "
+                    f"{time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}: "
+                    + "; ".join(violations)
+                    + f" | before={before} | after={after}"
+                )
     return codes, refusals
 
 
@@ -260,7 +327,7 @@ def phase8(rounds: int) -> dict[str, Any]:
     for index in range(1, rounds + 1):
         if porcelain(REPO) != previous_tree:
             raise Abort(f"a concurrent writer mutated the tree before round {index}")
-        codes, refusals = run_chain(REPO)
+        codes, refusals = run_chain(REPO, integrity_context=(8, index))
         tree = porcelain(REPO)
         current = identities(REPO)
         drifted = sorted(k for k, v in current.items() if v != baseline[k])
