@@ -23,6 +23,7 @@ The package is layered strictly bottom-up, and the order is the dependency order
     :mod:`~engine.uckp.execution`      10 interchangeable execution technologies
     :mod:`~engine.uckp.state`          immutable, content-addressed constitutional states
     :mod:`~engine.uckp.evolution`      the 15-stage cycle that never terminates
+    :mod:`~engine.uckp.resolution`     the constitutional resolutions, read as data
     :mod:`~engine.uckp.intelligence`   13 ways the universe reasons about itself
     :mod:`~engine.uckp.governance`     decisions that replay from themselves
     :mod:`~engine.uckp.constitution`   the law, re-entered as objects (a provider)
@@ -113,6 +114,9 @@ _EXPORTS: dict[str, str] = {
     "EvolutionStage": "engine.uckp.evolution",
     "UniversalIntelligence": "engine.uckp.intelligence",
     "build_intelligence": "engine.uckp.intelligence",
+    "Resolution": "engine.uckp.resolution",
+    "ResolutionReader": "engine.uckp.resolution",
+    "binding_reader": "engine.uckp.resolution",
     "GovernanceEngine": "engine.uckp.governance",
     # self-hosting providers
     "constitutional_objects": "engine.uckp.constitution",

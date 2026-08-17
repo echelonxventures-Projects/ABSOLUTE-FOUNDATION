@@ -94,6 +94,16 @@ def is_terminal(stage: EvolutionStage | str) -> bool:
 #: The vocabulary id under which the stage set is published.
 EVOLUTION_STAGE = "uckp.evolution-stage"
 
+#: The document form :meth:`EvolutionLedger.to_document` emits and
+#: :meth:`EvolutionLedger.from_document` accepts. Named once, so a projection and its
+#: inverse cannot disagree about what they are exchanging, and so a loader can refuse a
+#: document that merely happens to carry a ``records`` array.
+LEDGER_SCHEMA = "ucos-uckp-evolution-ledger"
+
+#: The version of :data:`LEDGER_SCHEMA`. A loader that cannot name the version it accepts
+#: cannot tell a future form from a malformed one.
+LEDGER_VERSION = "1.0.0"
+
 
 def evolution_stage_vocabulary() -> Vocabulary:
     """The stage set as an open vocabulary, derived from :data:`EVOLUTION_CYCLE`.
@@ -231,8 +241,8 @@ class EvolutionLedger:
 
     def to_document(self) -> dict[str, object]:
         return {
-            "schema": "ucos-uckp-evolution-ledger",
-            "version": "1.0.0",
+            "schema": LEDGER_SCHEMA,
+            "version": LEDGER_VERSION,
             "counts": {
                 "records": len(self._records),
                 "cycles": self.cycles(),
@@ -245,6 +255,63 @@ class EvolutionLedger:
             "records": [record.to_dict() for record in self._records],
         }
 
+    @classmethod
+    def from_document(cls, document: object) -> EvolutionLedger:
+        """Rehydrate a ledger from the document :meth:`to_document` produced.
+
+        Article 14 holds that evolution appends, never rewrites and never terminates.
+        Until this method existed that claim was only checkable *inside* the process that
+        did the appending: the ledger could project itself to canonical JSON and had no
+        inverse, so a published evolution history could be read by a human, diffed by CI
+        and trusted by a downstream programme without anything ever re-applying the rules
+        it was supposed to have been built under. An append-only history that cannot be
+        loaded is an append-only history nobody can falsify.
+
+        Loading is therefore a verification rather than a deserialization. Every record is
+        replayed through :meth:`append`, so a history with a skipped stage, a reordered
+        stage, a renumbered cycle or an injected record is refused here exactly as it
+        would have been refused when it was written — and refused with the same error, from
+        the same code path, because there is only one code path. The inverse of a
+        content-addressed projection has to be as strict as the projection or the digest
+        stops meaning anything.
+
+        ``schema`` is checked because a loader that accepts any object carrying a
+        ``records`` array will eventually be handed one that was never a ledger.
+        ``cycle_definition`` is checked against the live cycle because a document written
+        under a different stage set replays into a different history: the stages would be
+        accepted one by one and the whole would silently mean something else. That check is
+        what keeps the open-world stage set (Article 17) from turning into a quiet
+        reinterpretation of an old history.
+        """
+        if not isinstance(document, dict):
+            raise EvolutionError(
+                "an evolution ledger document must be a mapping",
+                received=type(document).__name__,
+            )
+        schema = str(document.get("schema", ""))
+        if schema != LEDGER_SCHEMA:
+            raise EvolutionError(
+                "document is not an evolution ledger",
+                expected=LEDGER_SCHEMA,
+                declared=schema or "<absent>",
+            )
+        declared_cycle = document.get("cycle_definition")
+        if declared_cycle is not None:
+            live_cycle = [stage.value for stage in EVOLUTION_CYCLE]
+            if [str(stage) for stage in declared_cycle] != live_cycle:
+                raise EvolutionError(
+                    "document was written under a different evolution cycle",
+                    expected=",".join(live_cycle),
+                    declared=",".join(str(stage) for stage in declared_cycle),
+                )
+        records = document.get("records", ())
+        if not isinstance(records, list | tuple):
+            raise EvolutionError(
+                "an evolution ledger document must carry a sequence of records",
+                received=type(records).__name__,
+            )
+        return cls(EvolutionRecord.from_dict(record) for record in records)
+
     def fingerprint(self) -> str:
         return content_hash([record.to_dict() for record in self._records])
 
@@ -253,6 +320,8 @@ __all__ = [
     "CYCLE_LENGTH",
     "EVOLUTION_CYCLE",
     "EVOLUTION_STAGE",
+    "LEDGER_SCHEMA",
+    "LEDGER_VERSION",
     "EvolutionLedger",
     "EvolutionRecord",
     "EvolutionStage",

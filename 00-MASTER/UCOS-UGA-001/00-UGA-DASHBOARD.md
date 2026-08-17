@@ -8,14 +8,14 @@
 
 | Object class | Count | Identity authority |
 |---|---:|---|
-| CONFIGURATION_OBJECT | 29 | UCOS-UGA-001 |
-| DATA_OBJECT | 109 | UCOS-UGA-001 |
+| CONFIGURATION_OBJECT | 30 | UCOS-UGA-001 |
+| DATA_OBJECT | 116 | UCOS-UGA-001 |
 | DOCUMENT_ARTIFACT | 1233 | UMB-IMP-001 |
-| EXCLUDED_DOCUMENT | 2390 | UCOS-UGA-001 |
-| EXECUTABLE_OBJECT | 1187 | UCOS-UGA-001 |
-| TEST_OBJECT | 801 | UCOS-UGA-001 |
+| EXCLUDED_DOCUMENT | 2565 | UCOS-UGA-001 |
+| EXECUTABLE_OBJECT | 1218 | UCOS-UGA-001 |
+| TEST_OBJECT | 814 | UCOS-UGA-001 |
 | TOOLING_OBJECT | 36 | UCOS-UGA-001 |
-| **TOTAL** | **5785** | one shared ledger |
+| **TOTAL** | **6012** | one shared ledger |
 
 ## Invariants
 
@@ -53,10 +53,10 @@
 
 ## Graph
 
-- relationship edges: **33025**
-- dependency edges: **9550**
-- producers bound to declared outputs: **40**
-- distinct owners: **245**
+- relationship edges: **34160**
+- dependency edges: **9758**
+- producers bound to declared outputs: **41**
+- distinct owners: **262**
 
 ## Corpus impact
 

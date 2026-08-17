@@ -369,9 +369,13 @@ def test_the_assimilated_universe_holds_the_constitution_and_the_corpus(
     assimilated_universe,
     constitution_object_count,
     corpus_size,
+    uga_projection_size,
 ):
-    assert len(assimilated_universe.objects()) == constitution_object_count + corpus_size
-    assert len(assimilated_universe.discovery.providers_found) == 3
+    assert (
+        len(assimilated_universe.objects())
+        == constitution_object_count + corpus_size + uga_projection_size
+    )
+    assert len(assimilated_universe.discovery.providers_found) == 4
     assert "engine.uckp.assimilation" in assimilated_universe.registry.providers()
 
 
@@ -411,10 +415,15 @@ def test_discovery_finds_exactly_the_declarative_providers():
 
     registry = UniversalKnowledgeRegistry(vocabularies=build_vocabulary_registry())
     report = registry.discover("engine.uckp")
+    # engine.uckp.uga_projection (existence_resolution's declared UGA projection,
+    # PHASE-UCF-005-PROVIDER-INTEGRATION-DETERMINATION.md) joined the three native
+    # providers as of this test's update — an intentional extension through the
+    # existing ucko_objects() protocol, not a regression this lock-down should hide.
     assert report.providers_found == (
         "engine.uckp.alignment",
         "engine.uckp.capabilities",
         "engine.uckp.constitution",
+        "engine.uckp.uga_projection",
     )
 
 

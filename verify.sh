@@ -3,6 +3,7 @@
 # UCOS Ω∞ — Canonical Verification Entry Point.
 #
 #   ./verify.sh              lint + tests/coverage + governance + meta-constitutional gate
+#                            + universal object governance + autonomous evolution gate
 #   ./verify.sh --full       also run the full registration + drift gate (register.sh --guard)
 #   ./verify.sh --failfast   stop at the first failing stage
 #
@@ -172,6 +173,50 @@ run_stage "meta-constitutional conformance (CMG-INV-01..12)" bash 00-CMG/tools/c
 # `bootstrap_gaps` is empty and the exemption is gone with the condition it covered.
 run_stage "universal object governance (UGA-INV-01..10)" \
   "$PY" 00-MASTER/UCOS-UGA-001/uga_engine.py gate
+
+# --- Stage 6c: autonomous universal evolution gate (UAUE-000001) ------------------
+# The evolution declaration binds three of its eleven positions — Execute, Validate and
+# Verify — to `./verify.sh` as their gate, and its Evolve position to `make uaue-gate`.
+# Until this stage existed, that binding was a claim about a pipeline that had never heard
+# of UAUE: the gate was fail-closed, deterministic and green, and it was only ever invoked
+# by hand. AUE-VER-04 (governance integrity) requires that every gate a position names be
+# wired into the repository's verification, and an obligation nothing evaluates is of
+# UNKNOWN compliance rather than satisfied. This stage is that wiring.
+#
+# Every obligation is fail-closed, and the stage name deliberately carries no count: the set
+# grows as more of the declaration becomes measurable, and a number in a label is a stale claim
+# waiting to happen — this stage is named in the canonical validation record, so a count here
+# would make every new obligation a documentation edit in three files. What the obligations are is
+# the gate's own report: the declaration rehydrates; every position resolves to an owner that
+# exists and binds the symbols it is read through; every canonical Article-14 stage is claimed by
+# exactly one position; every dependency resolves and runs forward; conducting the same candidates
+# twice produces byte-identical runs; the declared UNKNOWN subject traverses the whole loop to a
+# settled, certified run requiring no new registry, authority, engine or schema; every declared
+# mandatory invariant is measured against its expectation; every declared register renders bytes
+# that reproduce on another process and another machine; every declared exit criterion of every
+# implementation phase is measured; and — the obligation this stage is the other half of — this
+# pipeline is measured to actually invoke the gate fail-closed, so deleting the stage below closes
+# the gate instead of silently unbinding four positions.
+#
+# Read-only and hermetic. `--gate` conducts and measures; it renders nothing, mutates
+# nothing outside memory, and reaches no clock and no network, so it cannot dirty the tree
+# and cannot flake. Exit 1 means an obligation was refused; exit 2 means no verdict could
+# be reached, which is deliberately not the same answer.
+run_stage "autonomous universal evolution (UAUE gate, every declared obligation)" \
+  "$PY" -m engine.uaue.gate --gate --quiet
+
+# --- Stage 6d: evolution surface replay (UAUE-000001 derived truth) ---------------
+# The nineteen files in 00-MASTER/UAUE-000001/ — the append-only history projection and
+# the eighteen declared registers — are DERIVED TRUTH: the deterministic product of the
+# declaration and the measured tree. This stage regenerates them in memory and compares
+# the committed bytes, so a hand edit is a failure here rather than a fact anywhere.
+#
+# Byte comparison, not parsed comparison: a projection that only matches after
+# normalisation is a projection whose canonical form nobody is holding to. The remedy for
+# a drift report is never to edit the file — it is `make uaue-render`, which reproduces it
+# from the declaration.
+run_stage "evolution surface replay (history + 18 registers)" \
+  "$PY" -m engine.uaue.gate --replay --quiet
 
 # --- Stage 7 (opt-in): full registration transaction + drift gate ----------------
 # register.sh regenerates the synchronized registers and fails on drift; it mutates

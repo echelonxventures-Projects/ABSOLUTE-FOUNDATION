@@ -285,6 +285,13 @@
       "class": "CONSTITUTIONAL-GATE-IDENTITY",
       "constitutional": false,
       "basis": "platform/universal_foundation/convergence.py — the identity of the executable gate that proves UCOS-UFC-001 UFC-15, the article FORBIDDING a parallel constitutional authority. The symbol name ends in AUTHORITY because the article it proves is about authority; the constant is the name of a measurement, not a claim to hold anything. Classified for the same reason as UCAF-TC-03: the discovered population is disclosed in full and narrowed by declaration, never by a filter in code."
+    },
+    {
+      "id": "UCAF-TC-06",
+      "token": "accountable_authority",
+      "class": "RESOLUTION-LEDGER-FIELD",
+      "constitutional": false,
+      "basis": "engine/uckp/intelligence.py — the field name under which an entry of the constitutional `category_ownership_resolution` declares the party accountable for a category's population, read by the declared-versus-measured category integrity join (PHASE-UCF-013). The constant is a JSON key in a resolution record, not a claim to hold authority. What the key names is held distinct from constitutional authority in three separate ways, each already determined: the value is a governance entity accountable for a category's population POLICY, severed by PHASE-UCF-012 D4 from the Ownership.owner value space (Facet 7) precisely so it cannot be aggregated into one; what a category IS remains GOVERNED_CATEGORIES under Article 17, which the ledger cites and never re-declares (PHASE-UCF-012 § 8.2, 'there is no vacancy here'); and the reasoner that reads the key reports at OBSERVATION severity and can move no certification verdict. The resolution sections it belongs to are recognitive, never constitutive — each records a standing that measurement already shows to hold and grants no right (PHASE-UCF-012 § 6.3). Disclosed here rather than renamed in code, for the same reason as UCAF-TC-03 and UCAF-TC-05: the discovered population is narrowed by declaration, never by a filter — and a symbol chosen to fall outside the discovery pattern would be that filter under another name."
     }
   ],
   "realization_bindings": [

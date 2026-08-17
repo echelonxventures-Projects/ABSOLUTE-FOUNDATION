@@ -160,6 +160,10 @@ help:
 	@echo "  make ufep-gate     fail-closed Freeze Eligibility + Constitutional Completion Gate"
 	@echo "  make ufep-self     UCOS-UFEP-001 guards (incl. no-freeze-performed + no-drift)"
 	@echo "  make ufep-replay   prove the committed eligibility registers replay from the declaration"
+	@echo "  make uaue          measure the autonomous evolution capability (every obligation, every run)"
+	@echo "  make uaue-gate     fail-closed Autonomous Universal Evolution Gate (unknown subject traverses)"
+	@echo "  make uaue-render   regenerate the evolution history + 18 registers (DERIVED TRUTH)"
+	@echo "  make uaue-replay   prove the committed evolution surface replays from the declaration"
 	@echo "  make completion    the full ordered convergence: authority -> ratification -> traceability -> certifier -> eligibility"
 	@echo "  make clean         remove build/test caches (venv preserved)"
 	@echo "  make clean-venv    remove the disposable .ec1-venv"
@@ -1942,3 +1946,59 @@ foundation-gate: bootstrap-quiet
 	@$(PY) -m platform.universal_foundation.cli determine --gate >/dev/null \
 	  || { echo "FOUNDATION DETERMINATION NOT CLOSED — run 'make foundation' for the named blockers" >&2; exit 1; }
 	@echo "universal foundation: every blocking measurement policy is satisfied"
+
+
+
+# --- UAUE-000001: Autonomous Universal Evolution ---------------------------------------
+# The gate the register's own final position declares. Until it existed, one verification
+# dimension of UAUE-000001 was bound to a target nothing ran, which is why the register
+# reported itself PARTIALLY_IMPLEMENTED against repository truth: a gate that exists only
+# as a string in a declaration discharges nothing.
+#
+# Every obligation is fail-closed and each is the negation of a way this capability could
+# look present while being absent: the declaration rehydrates; every declared position of
+# the loop resolves to an owner that exists, binds its symbols and names a wired gate;
+# every canonical stage of the perpetual cycle is claimed by exactly one position; every
+# dependency resolves and runs forward; conducting the same candidates twice produces
+# byte-identical runs; the declared UNKNOWN subject — an object in no registry, of no
+# declared class, owned by nobody — traverses every position to a settled, certified run
+# without a new registry, authority, engine or schema; every declared mandatory invariant
+# is measured against its expectation rather than presumed satisfied; every declared
+# register renders bytes that reproduce on another process and another machine; the
+# repository's own verification entry point invokes this gate fail-closed; and every
+# declared exit criterion of every implementation phase is measured rather than asserted.
+#
+# The count is deliberately not written here. It grows as more of the declaration becomes
+# measurable, and `make uaue` prints the whole set with its detail — a number in a comment
+# is a claim that goes stale silently, which is the defect class this register exists to
+# close.
+#
+# The gate mutates nothing. Execution in this register is AUTHORISATION ONLY: the
+# constitutional mutation gateway remains the sole path to repository truth, and the
+# controller records that an execution was authorised to travel it, never that a mutation
+# happened.
+.PHONY: uaue uaue-gate uaue-render uaue-replay
+
+# uaue: the human-readable measurement — every obligation, every run, every refusal named.
+uaue: bootstrap-quiet
+	@$(PY) -m engine.uaue.gate
+
+# uaue-gate: fail-closed — non-zero exit while any obligation is unsatisfied.
+uaue-gate: bootstrap-quiet
+	@$(PY) -m engine.uaue.gate --gate --quiet \
+	  || { echo "UAUE GATE CLOSED — run 'make uaue' for the named obligations" >&2; exit 1; }
+	@echo "uaue-gate: every obligation satisfied (unknown subject traversed, replay stable)"
+
+# uaue-render: regenerate the declared surface — the history projection and the eighteen
+# registers. DERIVED TRUTH: the history is the canonical document of the Article 14
+# append-only ledger and the registers are projections of one measurement; none is ever
+# authored by hand, and a hand edit is drift rather than a fact.
+uaue-render: bootstrap-quiet
+	@$(PY) -m engine.uaue.gate --render --quiet
+
+# uaue-replay: fail-closed — the committed surface must be exactly what the declaration
+# produces. Both halves are compared as bytes: a gate that proved the history replayed
+# while eighteen registers drifted would be measuring the smaller half of its own output.
+uaue-replay: bootstrap-quiet
+	@$(PY) -m engine.uaue.gate --replay --quiet
+	@echo "uaue-replay: the committed surface is the product of the declaration"

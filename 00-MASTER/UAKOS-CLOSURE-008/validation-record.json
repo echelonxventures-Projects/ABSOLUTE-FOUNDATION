@@ -32,7 +32,7 @@
       "verify.sh",
       "scripts/ucos-env.sh"
     ],
-    "stages_digest": "1656580bfd68ae04782a7e607be52a0752f75f72742c6f81cd1f5cb71291b650",
+    "stages_digest": "29dbe4e9999f44e65ecf33d0edfb600b6aec340c7147d2f894be5772f33c95cd",
     "stages_digest_definition": "sha256 over the newline-joined stage names this contract declares, read from verify.sh. A gate added to the contract and not to this record fails the record's own test."
   },
   "result": "PASS",
@@ -67,6 +67,14 @@
     },
     {
       "stage": "universal object governance (UGA-INV-01..10)",
+      "result": "PASS"
+    },
+    {
+      "stage": "autonomous universal evolution (UAUE gate, every declared obligation)",
+      "result": "PASS"
+    },
+    {
+      "stage": "evolution surface replay (history + 18 registers)",
       "result": "PASS"
     }
   ],

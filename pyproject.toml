@@ -228,6 +228,7 @@ addopts = [
   "--cov=engine.provider",
   "--cov=engine.civilization",
   "--cov=engine.uckp",
+  "--cov=engine.uaue",
   "--cov=platform.foundation",
   "--cov=platform.identity",
   "--cov=platform.administration",
@@ -288,7 +289,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

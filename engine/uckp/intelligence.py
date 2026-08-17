@@ -18,7 +18,7 @@ into one deterministic document.
 
 from __future__ import annotations
 
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass, field
 from enum import Enum
 
@@ -27,6 +27,7 @@ from engine.uckp.errors import UCKPValidationError
 from engine.uckp.graph import OBJECT_SCOPE
 from engine.uckp.law import ROOT_LAW
 from engine.uckp.registry import UniversalKnowledgeRegistry
+from engine.uckp.resolution import Resolution, ResolutionReader, binding_reader
 from engine.uckp.ucko import UCKO
 
 #: Similarity at or above which two statements are reported as near-duplicates.
@@ -111,6 +112,399 @@ class ReasoningResult:
         }
 
 
+#: Where a category-integrity observation's evidence is read from. Named in every such
+#: finding so the statement cites its source rather than asserting a conclusion: a reader
+#: can recompute the whole map from these two facets and nothing else.
+CATEGORY_EVIDENCE = "taxonomy.category x discovery.provider"
+
+
+@dataclass(frozen=True, slots=True)
+class CategoryPopulation:
+    """Who actually populates one category, measured over the whole registry.
+
+    ``by_provider`` pairs each distinct, named provider with the number of objects it
+    minted into the category, provider-sorted so the value is deterministic.
+    ``unattributed`` counts objects in the category that name no provider at all.
+
+    That last count is defence in depth rather than a live expectation: ``UCKO.mint``
+    coerces an empty provider to its own module name, so nothing minted lawfully arrives
+    without one. But the guarantee lives in that one coercion, not in the type —
+    ``DiscoveryDescriptor.provider`` is an ordinary string defaulting to empty, and no
+    facet check refuses a blank one, because ``Facet.DISCOVERY`` resolves to the
+    descriptor rather than to the field. Skipping unattributed objects would therefore
+    report a clean attribution for a population this reasoner had not attributed, and
+    would do so silently, the first time anything reached the registry by another path.
+    """
+
+    category: str
+    by_provider: tuple[tuple[str, int], ...]
+    unattributed: int
+
+    @property
+    def providers(self) -> tuple[str, ...]:
+        return tuple(provider for provider, _ in self.by_provider)
+
+    @property
+    def objects(self) -> int:
+        return sum(count for _, count in self.by_provider) + self.unattributed
+
+    def cite(self) -> str:
+        """The providers and their object counts, as a finding may quote them."""
+        return ", ".join(f"{provider} ({count})" for provider, count in self.by_provider)
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "category": self.category,
+            "providers": {provider: count for provider, count in self.by_provider},
+            "unattributed": self.unattributed,
+            "objects": self.objects,
+            "evidence": CATEGORY_EVIDENCE,
+        }
+
+
+def _category_populations(objects: Iterable[UCKO]) -> tuple[CategoryPopulation, ...]:
+    """Every populated category and the providers populating it, in one pass.
+
+    Whole-population by necessity, not by preference: the question is not answerable
+    per object. Two providers populating one category is a lawful admission twice over
+    — the first admits cleanly and the collision only exists once the second has landed
+    — so nothing at admission time can see it, and only a pass over the assembled
+    population can.
+    """
+    counts: dict[str, dict[str, int]] = {}
+    unattributed: dict[str, int] = {}
+    for obj in objects:
+        category = obj.taxonomy.category
+        by_provider = counts.setdefault(category, {})
+        unattributed.setdefault(category, 0)
+        provider = obj.discovery.provider
+        if provider:
+            by_provider[provider] = by_provider.get(provider, 0) + 1
+        else:
+            unattributed[category] += 1
+    return tuple(
+        CategoryPopulation(
+            category,
+            tuple((provider, counts[category][provider]) for provider in sorted(counts[category])),
+            unattributed[category],
+        )
+        for category in sorted(counts)
+    )
+
+
+#: The constitutional resolution section this reasoner consumes when it is declared. It
+#: is *recognitive*, like the six sections beside it: it records the populator a category
+#: already has and the authority accountable for that population, and grants nothing
+#: (`PHASE-UCF-012` D1). This module reads it; it never writes it, and its absence is a
+#: lawful state (:data:`UNKNOWN`), not a defect.
+CATEGORY_OWNERSHIP_RESOLUTION = "category_ownership_resolution"
+
+#: The list the section declares its recognitions under, and the three fields of one
+#: entry. Named here because the consumer and the eventual ledger must agree on exactly
+#: one set of names; a reader that guessed among several would make two shapes lawful.
+RECOGNITIONS = "recognitions"
+RECOGNITION_CATEGORY = "category"
+RECOGNISED_POPULATORS = "recognised_populators"
+ACCOUNTABLE_AUTHORITY = "accountable_authority"
+
+#: The three integrity states of one category. These are *states*, not severities: every
+#: finding this reasoner emits is an :data:`OBSERVATION` whatever the state, because a
+#: recognition is evidence about the repository, not a gate over it.
+#:
+#: :data:`UNKNOWN` is permanent, never transitional (`PHASE-UCF-012` D7). Removing it once
+#: every category is declared would make the check silently pass for any category
+#: populated after the ledger was written — the same blind spot one layer up.
+MATCH = "match"
+CONFLICT = "conflict"
+UNKNOWN = "unknown"
+
+
+@dataclass(frozen=True, slots=True)
+class CategoryRecognition:
+    """One category's recognised population, as a resolution declares it.
+
+    ``accountable_authority`` is deliberately *not* a value from the Facet 7 owner space
+    (`PHASE-UCF-012` D4): object ownership is per-object accountability, and no
+    aggregation of it yields a category owner. It is the governance entity accountable
+    for the category's population policy, and a finding reports it when it turns out to
+    name a measured provider instead.
+    """
+
+    category: str
+    populators: tuple[str, ...]
+    accountable_authority: str
+
+    def recognises(self, provider: str) -> bool:
+        return provider in self.populators
+
+    def cite(self) -> str:
+        """The recognition as a finding may quote it."""
+        return f"[{', '.join(self.populators)}] accountable to {self.accountable_authority}"
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            RECOGNITION_CATEGORY: self.category,
+            RECOGNISED_POPULATORS: list(self.populators),
+            ACCOUNTABLE_AUTHORITY: self.accountable_authority,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class CategoryIntegrity:
+    """Measured reality and recognised resolution for one category, compared.
+
+    Both sides are carried rather than collapsed into a verdict, because the whole point
+    of the comparison is that a reader can recompute it: ``measured`` comes from the two
+    facets :data:`CATEGORY_EVIDENCE` names, ``declared`` from the resolution record, and
+    ``state`` from those two and nothing else.
+    """
+
+    category: str
+    state: str
+    population: CategoryPopulation | None = None
+    recognition: CategoryRecognition | None = None
+
+    @property
+    def measured(self) -> tuple[str, ...]:
+        return self.population.providers if self.population is not None else ()
+
+    @property
+    def declared(self) -> tuple[str, ...]:
+        return self.recognition.populators if self.recognition is not None else ()
+
+    @property
+    def unrecognised(self) -> tuple[str, ...]:
+        """Providers measured in the category that the resolution does not recognise."""
+        declared = frozenset(self.declared)
+        return tuple(provider for provider in self.measured if provider not in declared)
+
+    @property
+    def unmeasured(self) -> tuple[str, ...]:
+        """Populators the resolution recognises that no object measures."""
+        measured = frozenset(self.measured)
+        return tuple(provider for provider in self.declared if provider not in measured)
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "category": self.category,
+            "state": self.state,
+            "measured_populators": list(self.measured),
+            "recognised_populators": list(self.declared),
+            "accountable_authority": (
+                self.recognition.accountable_authority if self.recognition is not None else ""
+            ),
+            "evidence": CATEGORY_EVIDENCE,
+            "resolution": CATEGORY_OWNERSHIP_RESOLUTION,
+        }
+
+
+def _recognition(entry: Mapping[str, object]) -> CategoryRecognition | None:
+    """One ledger entry as a recognition, or None if it cannot be read as one.
+
+    Total and silent about *why*: :func:`_recognitions` reports the reason, because a
+    complaint needs the entry's position and this function does not have it.
+    """
+    category = entry.get(RECOGNITION_CATEGORY)
+    authority = entry.get(ACCOUNTABLE_AUTHORITY)
+    declared = entry.get(RECOGNISED_POPULATORS)
+    if not isinstance(category, str) or not category.strip():
+        return None
+    if not isinstance(authority, str) or not authority.strip():
+        return None
+    if not isinstance(declared, list | tuple) or not declared:
+        return None
+    populators = tuple(str(name).strip() for name in declared)
+    if not all(populators):
+        return None
+    return CategoryRecognition(category.strip(), populators, authority.strip())
+
+
+def _recognitions(
+    resolution: Resolution,
+) -> tuple[dict[str, CategoryRecognition], tuple[str, ...]]:
+    """Every readable recognition in ``resolution``, and every way it could not be read.
+
+    Fail-closed in the only sense available to an advisory stage: an entry that cannot be
+    read is *dropped and reported*, never repaired and never assumed. A dropped entry
+    leaves its category :data:`UNKNOWN`, which is the one disposition that cannot turn an
+    unreadable claim into a pass (`PHASE-UCF-012 § 12.1`).
+
+    An **absent** section produces no complaint. Absence is the repository's present,
+    lawful state — the ledger has not been written — and reporting it once per reasoning
+    pass would be reporting a decision that has already been recorded as deferred. An
+    **unreadable** one always produces a complaint, because that is a claim that exists
+    and could not be checked.
+    """
+    complaints: list[str] = []
+    if not resolution.readable:
+        return {}, (f"could not be read, so no recognition can be resolved: {resolution.detail}",)
+    if not resolution.present:
+        return {}, ()
+
+    entries = resolution.entries(RECOGNITIONS)
+    declared = resolution.declared(RECOGNITIONS)
+    if not declared:
+        complaints.append(f"is declared and states no {RECOGNITIONS}")
+    if len(entries) < declared:
+        complaints.append(
+            f"declares {declared} {RECOGNITIONS}, of which {declared - len(entries)} "
+            "cannot be read as an entry"
+        )
+
+    by_category: dict[str, CategoryRecognition] = {}
+    duplicated: set[str] = set()
+    for index, entry in enumerate(entries):
+        recognition = _recognition(entry)
+        if recognition is None:
+            complaints.append(
+                f"entry {index} names no category, no populator, or no "
+                f"{ACCOUNTABLE_AUTHORITY}, so it recognises nothing"
+            )
+            continue
+        category = recognition.category
+        if category in by_category or category in duplicated:
+            if category not in duplicated:
+                complaints.append(
+                    f"recognises category {category!r} more than once, so no recognition "
+                    "of it can be resolved"
+                )
+            duplicated.add(category)
+            by_category.pop(category, None)
+            continue
+        by_category[category] = recognition
+    return by_category, tuple(complaints)
+
+
+def _category_integrity(
+    populations: Iterable[CategoryPopulation],
+    recognitions: Mapping[str, CategoryRecognition],
+) -> tuple[CategoryIntegrity, ...]:
+    """Compare measured reality with recognised resolution, per category.
+
+    Total over the union of both sides, never over the measured side alone: a recognition
+    of a category nothing populates is exactly as much a divergence as a populator nothing
+    recognises, and a comparison that only iterated what it could measure would report
+    that it had checked something it never looked at.
+
+    :data:`MATCH` requires the measured providers to be non-empty *and* wholly recognised.
+    An empty measured side is not a subset that passes: a category whose objects name no
+    provider at all has nothing to compare against the declaration, and calling that a
+    match would certify a declaration against no evidence.
+    """
+    by_category = {population.category: population for population in populations}
+    states: list[CategoryIntegrity] = []
+    for category in sorted(set(by_category) | set(recognitions)):
+        population = by_category.get(category)
+        recognition = recognitions.get(category)
+        measured = population.providers if population is not None else ()
+        if recognition is None:
+            state = UNKNOWN
+        elif measured and all(recognition.recognises(provider) for provider in measured):
+            state = MATCH
+        else:
+            state = CONFLICT
+        states.append(CategoryIntegrity(category, state, population, recognition))
+    return tuple(states)
+
+
+def _category_findings(
+    integrity: CategoryIntegrity, providers: frozenset[str]
+) -> tuple[Finding, ...]:
+    """What one category's comparison reports. Advisory at every state.
+
+    ``providers`` is every provider measured anywhere in the registry, which is what makes
+    the provider-named-as-owner check possible: naming a provider as the accountable
+    authority for category A is the same substitution whether or not that provider
+    populates A (`PHASE-UCF-012` D5).
+    """
+    subject = f"category:{integrity.category}"
+    population = integrity.population
+    recognition = integrity.recognition
+    findings: list[Finding] = []
+
+    if recognition is None:
+        # UNKNOWN — the observational stage's own statements, unchanged. One populating
+        # provider is not evidence of authority; it is evidence of one populator.
+        if population is None:  # pragma: no cover - not enumerated by _category_integrity
+            return ()
+        if len(population.providers) > 1:
+            findings.append(
+                Finding(
+                    "gap",
+                    OBSERVATION,
+                    subject,
+                    f"is populated by {len(population.providers)} providers "
+                    f"[{population.cite()}] and no declared owner reconciles them; "
+                    f"ownership clarification is required (per {CATEGORY_EVIDENCE})",
+                )
+            )
+        elif population.providers:
+            findings.append(
+                Finding(
+                    "gap",
+                    OBSERVATION,
+                    subject,
+                    f"is populated only by [{population.cite()}], and no owner is "
+                    "declared for it: an undeclared default, not a decision "
+                    f"(per {CATEGORY_EVIDENCE})",
+                )
+            )
+    elif integrity.state == MATCH and population is not None:
+        statement = (
+            f"is populated by [{population.cite()}], every populator of it recognised by "
+            f"{recognition.accountable_authority} in {CATEGORY_OWNERSHIP_RESOLUTION} "
+            f"(per {CATEGORY_EVIDENCE})"
+        )
+        if len(population.providers) > 1:
+            # A plurality that a ledger merely lists is not a plurality that a ledger
+            # reconciles. Recognising both populators must not be the move that makes a
+            # contamination finding disappear (`PHASE-UCF-012` D9).
+            statement += (
+                "; a recognised plurality is reconciled only where the resolution "
+                "declares a bounded question for each populator, so the plurality "
+                "stands reported rather than closed"
+            )
+        findings.append(Finding("gap", OBSERVATION, subject, statement))
+    elif integrity.unrecognised and population is not None:
+        findings.append(
+            Finding(
+                "gap",
+                OBSERVATION,
+                subject,
+                f"is populated by [{population.cite()}], and "
+                f"[{', '.join(integrity.unrecognised)}] is not among the populators "
+                f"{recognition.accountable_authority} recognises "
+                f"[{', '.join(integrity.declared)}] "
+                f"(per {CATEGORY_EVIDENCE} against {CATEGORY_OWNERSHIP_RESOLUTION})",
+            )
+        )
+    else:
+        findings.append(
+            Finding(
+                "gap",
+                OBSERVATION,
+                subject,
+                f"is recognised for [{', '.join(integrity.declared)}] by "
+                f"{recognition.accountable_authority} in {CATEGORY_OWNERSHIP_RESOLUTION}, "
+                "and no object attributes it to any provider "
+                f"(per {CATEGORY_EVIDENCE})",
+            )
+        )
+
+    if recognition is not None and recognition.accountable_authority in providers:
+        findings.append(
+            Finding(
+                "gap",
+                OBSERVATION,
+                subject,
+                f"recognises {recognition.accountable_authority} as accountable for it, and "
+                "that name is a measured provider: a provider is a discovery fact, never "
+                f"an owner (per {CATEGORY_EVIDENCE} against {CATEGORY_OWNERSHIP_RESOLUTION})",
+            )
+        )
+    return tuple(findings)
+
+
 def _tokens(text: str) -> frozenset[str]:
     return frozenset(part for part in str(text).casefold().split() if len(part) > 2)
 
@@ -125,11 +519,47 @@ def _similarity(left: frozenset[str], right: frozenset[str]) -> float:
 class UniversalIntelligence:
     """Reasoning over the canonical universe. Reports; never mutates."""
 
-    __slots__ = ("_registry", "_graph")
+    __slots__ = ("_registry", "_graph", "_resolutions")
 
-    def __init__(self, registry: UniversalKnowledgeRegistry) -> None:
+    def __init__(
+        self,
+        registry: UniversalKnowledgeRegistry,
+        resolutions: ResolutionReader | None = None,
+    ) -> None:
+        """Reason over ``registry``, resolving declarations through ``resolutions``.
+
+        ``resolutions`` defaults to the repository's constitutional binding. Constructing
+        the reader touches no disk — it loads lazily on first read — so an intelligence
+        that never asks a declaration question costs exactly what it did before.
+        """
         self._registry = registry
         self._graph = registry.graph()
+        self._resolutions = binding_reader() if resolutions is None else resolutions
+
+    # --- measurement the reasoners share ----------------------------------------
+
+    def category_populations(self) -> tuple[CategoryPopulation, ...]:
+        """Which providers populate which category, over the whole registry.
+
+        Exposed because it is the evidence behind every category-integrity finding, and
+        a finding whose evidence cannot be recomputed by its reader is an assertion. It
+        derives nothing and owns nothing: ownership is not inferred from population here
+        or anywhere, because a provider that populates a category is a fact about
+        discovery (Facet 21), not a claim of authority (Facet 5) or accountability
+        (Facet 7) — three questions the constitution deliberately keeps apart.
+        """
+        return _category_populations(self._registry.objects())
+
+    def category_integrity(self) -> tuple[CategoryIntegrity, ...]:
+        """Measured population against recognised resolution, one state per category.
+
+        The join `PHASE-UCF-011` could not build, because the declared side did not exist
+        to read. It derives no ownership and confers none: it reports whether what the
+        repository *does* and what a resolution *recognises* are the same thing, and
+        reports :data:`UNKNOWN` — never a pass — wherever there is nothing to compare.
+        """
+        recognitions, _ = _recognitions(self._resolutions.read(CATEGORY_OWNERSHIP_RESOLUTION))
+        return _category_integrity(self.category_populations(), recognitions)
 
     # --- the thirteen reasoners -------------------------------------------------
 
@@ -424,6 +854,49 @@ class UniversalIntelligence:
                     "a governed category with no canonical object yet",
                 )
             )
+        # Provider category integrity, observed rather than enforced. A category is a
+        # classification, not a claim of identity, so two providers populating one is
+        # not a breach of any invariant the law declares — which is precisely why it
+        # went undetected until a provider contaminated three closed categories and was
+        # caught by an unrelated count assertion.
+        #
+        # Two planes, one truth. The population is MEASURED here, over the assembled
+        # registry; ownership is RECOGNISED in a constitutional resolution, read through
+        # engine.uckp.resolution. Neither derives the other, and this reasoner asserts
+        # neither: it reports whether they agree. Every state stays an OBSERVATION,
+        # because a recognition is evidence and not a gate — including CONFLICT, whose
+        # promotion to a verdict is a separate, deliberately separate decision
+        # (`PHASE-UCF-012` D15).
+        populations = self.category_populations()
+        resolution = self._resolutions.read(CATEGORY_OWNERSHIP_RESOLUTION)
+        recognitions, complaints = _recognitions(resolution)
+        for complaint in complaints:
+            findings.append(
+                Finding(
+                    "gap",
+                    OBSERVATION,
+                    f"resolution:{CATEGORY_OWNERSHIP_RESOLUTION}",
+                    f"{complaint} (read from {resolution.source})",
+                )
+            )
+        providers = frozenset(
+            provider for population in populations for provider in population.providers
+        )
+        integrity = _category_integrity(populations, recognitions)
+        for state in integrity:
+            findings.extend(_category_findings(state, providers))
+            population = state.population
+            if population is not None and population.unattributed:
+                findings.append(
+                    Finding(
+                        "gap",
+                        OBSERVATION,
+                        f"category:{population.category}",
+                        f"{population.unattributed} of its {population.objects} objects "
+                        "name no provider, so their category assignment cannot be "
+                        f"attributed to anyone (per {CATEGORY_EVIDENCE})",
+                    )
+                )
         for obj in self._registry.objects():
             for facet in obj.missing_facets():
                 findings.append(
@@ -435,6 +908,25 @@ class UniversalIntelligence:
             {
                 "governed_categories": float(len(ROOT_LAW.governed_categories)),
                 "unpopulated_categories": float(len(missing)),
+                "categories_populated": float(len(populations)),
+                "categories_multi_provider": float(
+                    sum(1 for p in populations if len(p.providers) > 1)
+                ),
+                # Populated, and still nothing recognises the population. Unchanged in
+                # meaning from the observational stage; it simply now has a declared side
+                # that can retire a category from the count instead of no side at all.
+                "categories_without_declared_owner": float(
+                    sum(1 for s in integrity if s.state == UNKNOWN and s.measured)
+                ),
+                "categories_recognised": float(sum(1 for s in integrity if s.state == MATCH)),
+                "categories_ownership_conflict": float(
+                    sum(1 for s in integrity if s.state == CONFLICT)
+                ),
+                "categories_ownership_unknown": float(
+                    sum(1 for s in integrity if s.state == UNKNOWN)
+                ),
+                "category_recognitions": float(len(recognitions)),
+                "categories_unattributed": float(sum(1 for p in populations if p.unattributed)),
                 "coverage": round(
                     len(populated & set(ROOT_LAW.governed_categories))
                     / max(len(ROOT_LAW.governed_categories), 1),
@@ -582,8 +1074,11 @@ class UniversalIntelligence:
         }
 
 
-def build_intelligence(registry: UniversalKnowledgeRegistry) -> UniversalIntelligence:
-    return UniversalIntelligence(registry)
+def build_intelligence(
+    registry: UniversalKnowledgeRegistry,
+    resolutions: ResolutionReader | None = None,
+) -> UniversalIntelligence:
+    return UniversalIntelligence(registry, resolutions)
 
 
 def reasoning_kinds() -> tuple[str, ...]:
@@ -591,9 +1086,21 @@ def reasoning_kinds() -> tuple[str, ...]:
 
 
 __all__ = [
+    "ACCOUNTABLE_AUTHORITY",
+    "CATEGORY_EVIDENCE",
+    "CATEGORY_OWNERSHIP_RESOLUTION",
+    "CONFLICT",
+    "MATCH",
     "NEAR_DUPLICATE_SIMILARITY",
     "OBSERVATION",
+    "RECOGNISED_POPULATORS",
+    "RECOGNITIONS",
+    "RECOGNITION_CATEGORY",
+    "UNKNOWN",
     "VIOLATION",
+    "CategoryIntegrity",
+    "CategoryPopulation",
+    "CategoryRecognition",
     "Finding",
     "ReasoningKind",
     "ReasoningResult",

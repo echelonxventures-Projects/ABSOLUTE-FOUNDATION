@@ -167,6 +167,22 @@ def corpus_size(repo_root: Path) -> int:
 
 
 @pytest.fixture(scope="session")
+def uga_projection_size() -> int:
+    """How many objects engine.uckp.uga_projection contributes right now.
+
+    Measured live from the same UGA registry file the provider itself reads
+    (`00-MASTER/UCOS-UGA-001/02-UNIVERSAL-OBJECT-REGISTRY.json`), for the identical
+    reason `corpus_size` above is measured rather than transcribed: this population
+    grows with the repository, not with a constitutional amendment, so a literal here
+    would join the exact recurrence class P0-BLOCKER-ERADICATION-001 already retired
+    for the corpus count.
+    """
+    from engine.uckp.uga_projection import _load_entries
+
+    return len(_load_entries())
+
+
+@pytest.fixture(scope="session")
 def constitution_object_count() -> int:
     """Objects the constitution mints for itself, independent of the corpus.
 

@@ -6420,15 +6420,18 @@
         "constitution_object_count",
         "corpus_size",
         "doubles",
+        "live_populations",
         "minimal_child",
         "minimal_registry",
         "minimal_root",
         "mint_object",
         "persistence_base",
+        "projected",
         "registry_of",
         "repo_root",
         "root_urn",
         "sample",
+        "sole",
         "test_a_binding_missing_a_declared_section_is_rejected",
         "test_a_binding_that_cannot_be_read_is_a_finding_never_a_pass",
         "test_a_binding_that_disowns_its_own_superior_is_rejected",
@@ -6437,10 +6440,15 @@
         "test_a_binding_that_renames_the_supreme_authority_is_rejected",
         "test_a_binding_without_a_relationship_model_is_rejected",
         "test_a_binding_without_an_identity_resolution_is_rejected",
+        "test_a_category_no_entry_names_stays_unknown_beside_one_that_matches",
+        "test_a_category_recognised_twice_resolves_to_no_recognition_at_all",
+        "test_a_category_whose_objects_name_no_provider_cannot_match_a_declaration",
         "test_a_circular_authority_chain_is_refused",
         "test_a_coherent_graph_has_no_dangling_edge_and_no_orphan",
         "test_a_competing_stage_vocabulary_under_the_same_id_fails_closed",
+        "test_a_conflict_names_both_the_measured_and_the_declared_side",
         "test_a_conflicting_native_vocabulary_under_an_existing_id_fails_closed",
+        "test_a_contaminated_category_is_not_also_reported_as_merely_undeclared",
         "test_a_dangling_edge_cannot_be_executed",
         "test_a_decision_carries_the_arguments_it_depended_on",
         "test_a_decision_explains_itself_in_a_sentence",
@@ -6448,6 +6456,8 @@
         "test_a_decision_produces_an_audit_entry",
         "test_a_decision_says_whether_it_permitted_what_was_asked",
         "test_a_decision_whose_digest_contradicts_its_arguments_is_refused",
+        "test_a_declared_populator_that_matches_the_measurement_reports_match",
+        "test_a_declared_section_that_recognises_nothing_is_reported",
         "test_a_delta_and_a_proof_decode_an_absent_record_to_their_empty_form",
         "test_a_delta_and_a_proof_serialize",
         "test_a_delta_is_derived_from_two_identity_sets_without_regard_to_order",
@@ -6456,6 +6466,11 @@
         "test_a_derivation_field_that_drifts_is_rejected",
         "test_a_derivation_illustration_that_drifts_is_rejected",
         "test_a_different_object_claiming_an_existing_identity_is_refused",
+        "test_a_document_of_another_schema_is_refused",
+        "test_a_document_that_is_not_a_mapping_is_unreadable",
+        "test_a_document_with_no_schema_is_refused",
+        "test_a_document_without_a_cycle_definition_is_accepted",
+        "test_a_document_written_under_a_different_cycle_is_refused",
         "test_a_duplicate_invariant_declaration_is_refused",
         "test_a_facet_holding_none_is_reported_absent",
         "test_a_fault_that_reaches_no_verdict_exits_two",
@@ -6467,19 +6482,30 @@
         "test_a_law_with_an_invariant_no_article_enforces_is_refused",
         "test_a_lawful_object_is_lawful_and_a_broken_one_is_not",
         "test_a_ledger_admits_the_records_it_is_constructed_with_and_reports_its_length",
+        "test_a_live_section_reads_as_present_with_its_body_verbatim",
+        "test_a_loaded_ledger_still_appends",
         "test_a_malformed_instrument_entry_is_rejected",
         "test_a_malformed_kind_binding_is_rejected",
+        "test_a_malformed_source_is_unreadable_rather_than_a_pass",
+        "test_a_match_is_reported_as_a_recognition_and_no_longer_as_undeclared",
+        "test_a_match_produces_no_violation",
+        "test_a_measured_provider_the_resolution_does_not_recognise_is_a_conflict",
         "test_a_minted_object_answers_every_facet",
         "test_a_missing_registry_fails_closed",
         "test_a_missing_rule_is_rejected",
+        "test_a_non_mapping_document_is_refused",
         "test_a_non_mapping_offered_where_a_facet_record_belongs_is_refused",
+        "test_a_partly_attributed_category_reports_both_its_provider_and_its_shortfall",
         "test_a_persistence_mechanism_that_claims_authority_is_refused",
         "test_a_probe_that_cannot_conclude_is_a_violation_not_a_pass",
         "test_a_projection_is_never_authoritative_and_the_question_admits_no_exception",
         "test_a_projection_kind_that_did_not_exist_before_may_be_registered",
         "test_a_projection_that_claims_authority_or_is_not_generated_is_refused",
         "test_a_provider_may_declare_its_objects_as_data_rather_than_a_callable",
+        "test_a_provider_of_another_category_is_also_refused_as_an_authority",
         "test_a_reached_verdict_of_refused_exits_one",
+        "test_a_recognised_plurality_is_reported_rather_than_closed",
+        "test_a_recognition_of_a_category_nothing_populates_is_a_conflict",
         "test_a_record_carrying_no_identity_is_sealed_on_decoding",
         "test_a_record_round_trips",
         "test_a_record_whose_identity_does_not_match_its_content_is_refused",
@@ -6488,7 +6514,10 @@
         "test_a_relation_term_the_model_does_not_hold_is_rejected",
         "test_a_relationship_class_the_model_does_not_hold_is_rejected",
         "test_a_relationship_to_a_nonexistent_object_dangles",
+        "test_a_renumbered_cycle_is_refused",
+        "test_a_reordered_history_is_refused_on_load",
         "test_a_replacement_that_would_duplicate_another_home_is_refused",
+        "test_a_resolution_cites_its_own_name_state_and_source",
         "test_a_role_definition_that_drifts_is_rejected",
         "test_a_role_promoted_to_hold_authority_is_rejected",
         "test_a_role_rebound_to_another_article_is_rejected",
@@ -6499,17 +6528,21 @@
         "test_a_rule_statement_that_drifts_from_the_law_is_rejected",
         "test_a_rule_that_is_not_fail_closed_is_rejected",
         "test_a_sealed_state_round_trips_through_its_record_and_is_verified_on_the_way_in",
+        "test_a_section_declared_as_the_wrong_shape_is_unreadable",
         "test_a_self_grounding_root_does_not_reference_itself",
         "test_a_single_broken_facet_refuses_the_whole_report",
+        "test_a_source_is_loaded_once_and_its_outcome_memoised",
         "test_a_state_carries_all_five_delta_registers",
         "test_a_state_carries_replay_validation_and_verification_proofs",
         "test_a_state_record_that_is_not_a_mapping_is_refused",
         "test_a_stop_condition_is_unmet_when_an_invariant_it_names_is_unmet",
         "test_a_stop_condition_naming_an_undeclared_invariant_is_refused",
+        "test_a_string_field_is_not_read_as_a_list_of_entries",
         "test_a_string_offered_where_a_sequence_belongs_is_refused",
         "test_a_trace_link_whose_upstream_is_the_object_itself_derives_one_edge",
         "test_a_transition_creates_a_successor_and_never_touches_the_parent",
         "test_a_transition_never_mutates_the_object_it_came_from",
+        "test_a_truncated_history_that_no_longer_opens_the_cycle_is_refused",
         "test_a_universe_built_without_a_persistence_root_provides_its_own",
         "test_a_verdict_outside_the_closed_set_is_refused",
         "test_a_vocabulary_admits_an_unknown_future_term_by_registration",
@@ -6521,7 +6554,9 @@
         "test_alignment_fails_closed_when_a_vocabulary_gains_a_term_the_engine_lacks",
         "test_alignment_fails_closed_when_the_engine_declares_an_unregistered_term",
         "test_an_absent_native_category_maps_to_the_unclassified_term",
+        "test_an_absent_resolution_is_unknown_and_is_not_itself_reported",
         "test_an_absent_sequence_or_mapping_decodes_to_the_empty_one",
+        "test_an_absent_source_is_unreadable_rather_than_empty",
         "test_an_adapter_reports_an_unexpected_fault_as_a_failed_result",
         "test_an_adapter_reraises_a_contract_error_rather_than_reporting_a_failed_result",
         "test_an_admission_says_whether_it_created_a_home_and_serializes",
@@ -6535,8 +6570,12 @@
         "test_an_authority_chain_terminates_at_the_self_grounding_root",
         "test_an_authority_chain_that_re_enters_itself_is_refused",
         "test_an_edited_state_fails_its_own_integrity_check",
+        "test_an_empty_ledger_round_trips_to_the_opening_stage",
         "test_an_empty_ledger_still_names_the_stage_it_will_accept_next",
         "test_an_empty_timeline_has_no_head",
+        "test_an_entry_naming_no_accountable_authority_is_reported",
+        "test_an_entry_that_is_not_a_mapping_is_counted_and_reported",
+        "test_an_entry_that_recognises_nothing_is_reported_and_leaves_its_category_unknown",
         "test_an_evolution_state_becomes_a_state_scoped_edge",
         "test_an_executable_relationship_resolves_to_the_object_it_names",
         "test_an_execution_request_is_content_addressed_and_deterministic",
@@ -6551,17 +6590,23 @@
         "test_an_invented_rule_is_rejected",
         "test_an_io_fault_is_reported_as_a_fault_and_never_as_a_verdict",
         "test_an_object_naming_no_owner_derives_no_ownership_edge",
+        "test_an_object_naming_no_provider_is_reported_rather_than_skipped",
         "test_an_object_offered_with_a_replay_proof_keeps_the_one_it_was_given",
         "test_an_object_round_trips_through_its_dict_form",
         "test_an_object_self_describes",
+        "test_an_uncontested_category_is_reported_as_undeclared_not_as_agreed",
+        "test_an_undeclared_section_reads_as_absent_not_as_a_failure",
         "test_an_unknown_command_is_rejected_by_the_parser",
         "test_an_unknown_evolution_stage_is_refused",
         "test_an_unknown_name_raises_attribute_error",
         "test_an_unknown_operation_is_refused",
         "test_an_unknown_projection_kind_is_refused",
         "test_an_unknown_question_is_refused",
+        "test_an_unknown_stage_in_a_document_is_refused_by_the_stage_authority",
         "test_an_unmeasured_invariant_fails_closed_rather_than_reporting_satisfied",
+        "test_an_unpopulated_governed_category_is_not_reported_as_undeclared",
         "test_an_unreadable_registry_fails_closed",
+        "test_an_unreadable_resolution_is_reported_and_never_passes",
         "test_appending_a_state_whose_identity_is_already_in_the_timeline_is_refused",
         "test_article_one_is_the_supremacy_clause",
         "test_articles_enforcing_is_derived_from_the_articles",
@@ -6582,12 +6627,20 @@
         "test_canonical_bytes_is_utf8_of_canonical_json",
         "test_canonical_json_is_order_independent",
         "test_canonical_json_is_sorted_compact_and_unicode_preserving",
+        "test_category_integrity",
+        "test_category_integrity_reasoning_is_deterministic",
+        "test_category_map_is_total_over_every_object_class_uga_actually_emits",
+        "test_category_ownership_resolution",
+        "test_category_usage_discovery_infers_no_ownership",
+        "test_certification_validation_verification_are_present_but_honestly_unattested",
         "test_certify_covers_validation_assimilation_and_the_universe",
         "test_cli_and_package",
         "test_coercing_a_reasoning_kind_that_is_already_one_returns_it",
         "test_consistency_reasoning_reports_a_broken_seal_and_a_broken_replay_proof",
         "test_consistency_reasoning_reports_an_operational_object_that_was_never_validated",
         "test_constitutional_reasoning_reports_a_category_the_law_does_not_govern",
+        "test_contamination_does_not_move_the_universe_verdict",
+        "test_contamination_is_reported_for_each_contested_category_independently",
         "test_content_hash_distinguishes_different_content",
         "test_content_hash_is_deterministic_across_calls",
         "test_contributing_the_stage_vocabulary_twice_reuses_the_identical_one",
@@ -6615,6 +6668,8 @@
         "test_every_article_enforcement_reference_resolves",
         "test_every_artifact_becomes_exactly_one_object",
         "test_every_assimilated_authority_chain_terminates_at_the_law",
+        "test_every_category_finding_names_its_subject_category_and_evidence_source",
+        "test_every_category_integrity_finding_is_an_observation",
         "test_every_declared_invariant_has_a_probe",
         "test_every_declared_operation_is_interchangeable_across_every_technology",
         "test_every_declared_reasoning_kind_has_a_reasoner",
@@ -6628,18 +6683,26 @@
         "test_every_lawful_change_reseals_and_reproves",
         "test_every_mapped_relationship_kind_lands_in_the_real_model",
         "test_every_mechanism_reads_an_empty_universe_before_anything_is_written",
+        "test_every_object_in_this_repository_names_the_provider_that_minted_it",
         "test_every_object_reconstructs_its_source_record_exactly",
         "test_every_persistence_technology_round_trips_the_universe_identically",
+        "test_every_populated_category_counts_as_undeclared_while_no_owner_exists",
+        "test_every_populated_category_now_carries_a_declared_recognition",
+        "test_every_projected_object_answers_all_thirty_three_facets",
         "test_every_projection_matches_the_vocabulary_that_owns_it",
         "test_every_projection_names_the_objects_it_was_generated_from",
         "test_every_projection_regenerates_byte_identically",
         "test_every_recorded_decision_replays_from_itself",
         "test_every_role_and_rule_cites_an_article_the_law_holds",
+        "test_every_state_is_reproducible_from_the_measurement_and_the_record",
+        "test_every_state_reports_at_observation_severity",
         "test_every_stop_condition_is_met_on_the_lawful_universe",
         "test_every_stop_condition_names_only_declared_invariants",
         "test_every_uckp_error_is_a_foundation_error_with_a_stable_code",
+        "test_every_urn_carries_the_uga_universal_id_verbatim",
         "test_every_value_round_trips_through_its_own_dict_form",
         "test_evolution_reasoning_reports_an_object_with_no_temporal_history",
+        "test_evolution_rehydration",
         "test_exactly_one_constitutional_root_is_required",
         "test_exactly_one_role_may_hold_authority",
         "test_execute_proves_interchangeability_for_subject_free_and_subject_bearing_requests",
@@ -6661,6 +6724,7 @@
         "test_governed_and_non_authoritative_categories_are_disjoint",
         "test_governs_and_is_non_authoritative_are_case_insensitive",
         "test_identical_meaning_under_two_identities_is_still_a_violation",
+        "test_identity_is_injective_no_two_entries_derive_one_urn",
         "test_identity_reads_no_clock_and_no_location",
         "test_identity_renders_as_its_urn",
         "test_importing_layer_zero_does_not_drag_in_the_upper_layers",
@@ -6718,6 +6782,8 @@
         "test_layer_zero",
         "test_layer_zero_imports_only_the_standard_library",
         "test_lifecycle_declares_lawful_successors",
+        "test_lifecycle_map_is_total_over_every_value_uga_actually_emits",
+        "test_lifecycle_mapping_is_applied_consistently",
         "test_lifecycle_transition_is_lawful_only_along_declared_successors",
         "test_locate_finds_the_canonical_home_of_a_meaning",
         "test_lookup_by_id_and_refusal_of_unknown_ids",
@@ -6726,90 +6792,24 @@
         "test_mint_refuses_a_malformed_namespace",
         "test_minting_is_deterministic",
         "test_minting_is_pure_and_reproducible",
+        "test_minting_is_pure_same_entry_same_identity_every_call",
         "test_minting_records_a_replay_proof_that_holds",
+        "test_naming_a_measured_provider_as_the_accountable_authority_is_reported",
         "test_native_status_maps_onto_a_term_id",
         "test_native_statuses_are_admitted_by_registration_not_by_amending_the_law",
         "test_native_term_normalises_and_never_returns_empty",
         "test_no_alignment_object_claims_to_be_a_root",
+        "test_no_category_in_this_repository_is_populated_by_two_providers",
         "test_no_execution_technology_owns_knowledge",
+        "test_no_finding_carries_a_confidence_or_an_invented_artifact",
         "test_no_persistence_adapter_owns_knowledge",
         "test_no_probe_measures_something_the_law_does_not_declare",
         "test_no_projected_artifact_may_hold_authority",
+        "test_no_recognition_carries_a_copied_measurement",
+        "test_no_resolution_leaves_every_populated_category_unknown",
         "test_no_two_objects_state_the_identical_definition",
         "test_normalise_arguments_is_ordered_and_stringly_typed",
-        "test_nothing_claims_to_be_operational_without_an_attested_validation",
-        "test_one_cycle_reached_by_two_edges_is_reported_once",
-        "test_one_rule_is_derived_per_article_and_never_enumerated",
-        "test_only_an_object_scoped_edge_resolves_to_an_object",
-        "test_optimization_reasoning_reports_an_object_that_points_at_nothing",
-        "test_parse_is_the_inverse_of_minting",
-        "test_parse_refuses_a_malformed_urn",
-        "test_persist_proves_every_technology_produced_the_same_universe",
-        "test_project_reports_ten_kinds_and_no_authority_claim",
-        "test_projection_payload_digest_is_content_addressed",
-        "test_projection_persistence_execution",
-        "test_provenance_names_both_the_artifact_and_the_registry_it_came_through",
-        "test_reachability_and_neighbours_are_derived_from_the_edges",
-        "test_reachability_from_an_identity_the_graph_does_not_hold_is_empty",
-        "test_reachability_ignores_an_edge_pointing_outside_the_graph",
-        "test_reason_reports_thirteen_reasoners_and_a_clean_verdict",
-        "test_reasoning_is_deterministic",
-        "test_reasoning_refuses_an_unknown_kind",
-        "test_reconstruction_refuses_a_native_record_that_is_not_a_mapping",
-        "test_reconstruction_refuses_an_object_carrying_no_native_record",
-        "test_reconstruction_refuses_an_undecodable_native_record",
-        "test_redefining_a_registered_term_is_refused",
-        "test_redundancy_reasoning_reports_one_definition_stated_twice",
-        "test_referenced_ids_names_every_object_the_object_points_at",
-        "test_registering_a_wholly_new_vocabulary_is_permitted",
-        "test_registering_the_identical_object_twice_is_reuse_not_duplication",
-        "test_registering_the_identical_term_again_returns_the_same_vocabulary",
-        "test_registering_the_same_kind_twice_is_refused",
-        "test_registration_admits_a_lawful_object",
-        "test_registration_is_idempotent_over_the_same_records",
-        "test_registry_digest_covers_every_vocabulary",
-        "test_registry_document_names_every_vocabulary_and_its_purpose",
-        "test_replace_evolves_an_object_under_the_same_identity",
-        "test_replace_refuses_an_identity_that_does_not_exist",
-        "test_replacing_an_object_moves_its_meaning_to_the_same_home",
-        "test_replay_proof_holds_only_for_the_output_it_certifies",
-        "test_replay_reports_states_decisions_and_projections",
-        "test_require_aligned_raises_on_a_drifted_binding",
-        "test_require_coherent_refuses_a_universe_holding_an_object_the_root_cannot_reach",
-        "test_require_coherent_refuses_a_universe_with_a_dangling_relationship",
-        "test_require_lawful_refuses_an_unregistered_term",
-        "test_require_lossless_refuses_a_lossy_report",
-        "test_require_refuses_an_unknown_identity",
-        "test_required_facets_is_derived_from_the_enum_not_restated",
-        "test_requiring_an_unknown_term_fails_closed",
-        "test_requiring_an_unknown_vocabulary_fails_closed",
-        "test_reuse_before_create_refuses_a_second_home_for_existing_knowledge",
-        "test_rule_ids_are_unique",
-        "test_rule_lookup_by_article_and_refusal_of_a_stranger",
-        "test_search_finds_by_free_text",
-        "test_searching_for_nothing_returns_nothing",
-        "test_semantic_definitions_are_unique_even_though_names_collide",
-        "test_semantic_digest_changes_when_meaning_changes",
-        "test_semantic_digest_hashes_meaning_alone_so_renaming_hides_nothing",
-        "test_semantic_identity_digests_meaning_and_normalises_it",
-        "test_shared_names_are_reported_rather_than_absorbed",
-        "test_stage_coercion_accepts_a_name_and_a_member",
-        "test_state_evolution_intelligence_governance",
-        "test_ten_execution_technologies_ship",
-        "test_ten_persistence_technologies_ship",
-        "test_ten_projection_kinds_ship_and_the_declared_list_is_derived_from_them",
-        "test_term_lookup_returns_none_for_a_stranger_and_the_term_otherwise",
-        "test_the_assimilated_universe_holds_the_constitution_and_the_corpus",
-        "test_the_assimilated_universe_is_coherent",
-        "test_the_assimilated_universe_satisfies_all_seventeen_invariants",
-        "test_the_assimilated_universe_still_has_exactly_one_root",
-        "test_the_coherence_guard_can_be_stood_down_to_study_an_incoherent_universe",
-        "test_the_command_list_is_complete_and_every_command_is_accepted",
-        "test_the_constitution_is_present_inside_the_universe_it_governs",
-        "test_the_constitutional_universe_satisfies_all_seventeen_invariants",
-        "test_the_contract_check_detects_a_mechanism_that_loses_an_object",
-        "test_the_contract_check_detects_a_mechanism_that_returns_objects_out_of_order",
-        "test_the_contract_is_identical_across_technologies"
+        "test_nothing_claims_to_be_operational_without_an_attested_validation"
       ],
       "unique_id": "RC-57"
     },
@@ -6825,17 +6825,27 @@
       "reuse": "REUSE_AS_IS/COMPOSE",
       "summary": "",
       "symbols": [
+        "WiredSubstrate",
         "absent_row",
+        "assert_obligation_surface",
+        "authority",
         "better_candidate",
         "bridge",
+        "candidate",
+        "candidates",
         "chain",
         "closure",
         "committed",
+        "context",
+        "controller",
+        "controller_source",
         "conversation",
         "decide",
         "declaration",
+        "declared_gate_obligations",
         "determination",
         "diamond",
+        "discovered",
         "document",
         "engine",
         "evaluate",
@@ -6849,42 +6859,141 @@
         "mutable",
         "obj",
         "platform",
+        "probe",
+        "probe_run",
         "programme",
         "record",
         "repo",
+        "report",
         "row",
         "rows_of",
+        "surface",
         "test_a_baseline_the_registry_does_not_carry_closes_the_gate",
+        "test_a_boolean_never_satisfies_a_numeric_condition",
+        "test_a_boolean_rank_is_not_read_as_an_integer",
+        "test_a_candidate_from_an_undeclared_source_fails_traceability",
+        "test_a_candidate_naming_no_subject_is_refused_at_admission",
+        "test_a_candidate_traverses_every_declared_position",
+        "test_a_candidate_view_round_trips_from_an_object",
+        "test_a_candidate_with_no_identity_is_refused_at_admission",
+        "test_a_candidate_with_no_resolving_evidence_cannot_be_understood",
+        "test_a_candidate_with_no_resolving_evidence_is_refused_at_admission",
         "test_a_canonical_owner_that_does_not_resolve_closes_the_gate",
         "test_a_capability_bound_to_this_programme_is_rejected",
+        "test_a_ceiling_below_one_round_is_refused",
+        "test_a_certification_proof_the_engine_cannot_measure_is_not_satisfied",
+        "test_a_chain_missing_a_phase_object_cannot_project_a_history",
         "test_a_change_class_no_register_admits_closes_the_gate",
+        "test_a_classification_declared_under_an_unimplemented_rule_is_refused",
+        "test_a_context_over_a_position_with_no_owner_is_refused",
         "test_a_contributed_analysis_that_is_not_registered_closes_the_gate",
         "test_a_contributed_analysis_whose_name_is_already_owned_closes_the_gate",
+        "test_a_controller_can_be_resolved_from_repository_truth_alone",
+        "test_a_controller_that_names_a_position_is_measured",
+        "test_a_criterion_declared_twice_is_refused",
         "test_a_cycle_in_the_faculty_relation_closes_the_gate",
         "test_a_declaration_missing_a_required_key_aborts_fail_closed",
+        "test_a_declaration_that_is_not_a_json_object_is_refused",
+        "test_a_declaration_that_is_not_valid_json_is_refused",
         "test_a_declared_dimension_with_no_measurement_fails_closed",
         "test_a_dependency_on_an_undeclared_faculty_closes_the_gate",
+        "test_a_discovery_source_declared_twice_is_refused",
+        "test_a_discovery_source_with_an_unimplemented_form_is_refused",
+        "test_a_discovery_source_with_an_unimplemented_operator_is_refused",
+        "test_a_discovery_source_with_no_selector_is_refused",
+        "test_a_duty_naming_an_undeclared_source_is_refused",
+        "test_a_duty_no_resolving_source_satisfies_is_measured",
+        "test_a_duty_with_no_source_is_refused",
         "test_a_faculty_bound_to_this_programme_is_rejected",
         "test_a_faculty_citing_no_analysis_closes_the_gate",
         "test_a_faculty_referencing_an_undeclared_register_closes_the_gate",
+        "test_a_failed_certification_refuses_the_run",
+        "test_a_failed_validation_refuses_the_run",
+        "test_a_failed_verification_refuses_the_run",
+        "test_a_field_mandated_twice_is_refused",
+        "test_a_foreign_lifecycle_state_fails_verification",
+        "test_a_forged_identity_fails_correctness_and_identity_integrity",
+        "test_a_gate_that_exists_but_is_not_executable_is_not_wired",
+        "test_a_halted_run_is_excluded_from_the_history_projection",
+        "test_a_history_document_must_be_a_mapping",
+        "test_a_history_document_without_the_ledger_is_refused",
+        "test_a_history_not_declaring_itself_append_only_is_refused",
+        "test_a_history_projection_missing_its_loader_is_refused",
+        "test_a_history_projection_owner_that_does_not_resolve_is_refused",
+        "test_a_history_with_no_projection_owner_is_refused",
+        "test_a_history_with_no_recorded_dimension_is_refused",
         "test_a_hold_outranks_an_admission",
         "test_a_home_that_does_not_exist_closes_the_gate",
+        "test_a_list_block_declared_as_a_mapping_closes_the_gate",
+        "test_a_make_gate_is_wired_only_when_the_makefile_declares_the_target",
         "test_a_makefile_target_names_the_engine",
+        "test_a_mandated_object_kind_nothing_produces_is_measured",
+        "test_a_mapping_source_of_the_wrong_shape_is_a_finding",
+        "test_a_measure_that_cannot_be_computed_is_a_refusal_and_never_a_zero",
+        "test_a_measure_this_engine_cannot_compute_is_a_refusal_and_never_a_zero",
+        "test_a_missing_observation_record_is_measured",
+        "test_a_missing_phase_blocks_certification_readiness",
         "test_a_missing_placeholder_resolves_to_the_declared_dash_never_a_blank",
+        "test_a_missing_plan_component_is_measured",
+        "test_a_non_boolean_mandated_flag_closes_the_gate",
+        "test_a_non_executable_simulation_refuses_execution",
+        "test_a_non_numeric_value_fails_a_numeric_condition",
+        "test_a_non_object_entry_inside_a_block_closes_the_gate",
+        "test_a_non_string_field_closes_the_gate",
+        "test_a_phase_and_its_object_kind_disagreeing_is_refused",
+        "test_a_phase_claiming_a_non_canonical_stage_is_refused",
+        "test_a_phase_declared_twice_is_refused",
+        "test_a_phase_declaring_the_same_owner_home_twice_is_refused",
+        "test_a_phase_owning_a_home_inside_this_programme_is_refused",
+        "test_a_phase_whose_gate_is_not_wired_cannot_be_implemented",
+        "test_a_phase_whose_homes_all_fail_to_resolve_is_missing",
+        "test_a_phase_with_an_unbound_symbol_is_partially_implemented",
+        "test_a_phase_with_no_declared_home_is_future_evolution",
+        "test_a_phase_with_non_list_owners_is_refused",
+        "test_a_plan_step_without_a_located_owner_is_refused",
         "test_a_pre_d3_row_deserializes_and_fails_closed",
+        "test_a_projection_that_does_not_rehydrate_is_measured",
         "test_a_protected_owner_is_reused_rather_than_replaced",
         "test_a_register_declared_as_data_that_does_not_parse_closes_the_gate",
+        "test_a_register_declared_twice_is_refused",
+        "test_a_register_filename_outside_canonical_form_is_refused",
+        "test_a_register_missing_its_filename_closes_the_gate",
         "test_a_register_no_faculty_claims_closes_the_gate",
+        "test_a_register_owned_by_an_undeclared_phase_is_refused",
         "test_a_register_referencing_a_path_that_is_gone_closes_the_gate",
         "test_a_register_that_does_not_resolve_closes_the_gate",
         "test_a_release_state_no_register_admits_closes_the_gate",
+        "test_a_removed_classification_is_refused",
+        "test_a_removed_register_is_refused",
+        "test_a_render_into_an_unwritable_destination_is_a_fault",
+        "test_a_rendered_surface_replays_and_a_hand_edit_does_not",
+        "test_a_renumbered_register_is_refused",
+        "test_a_reopened_self_evolution_gap_is_measured",
+        "test_a_reordered_history_is_refused_on_read",
+        "test_a_reordered_phase_ordinal_is_refused",
+        "test_a_reordered_register_list_is_refused",
         "test_a_required_input_that_is_absent_asserts_no_verdict",
+        "test_a_sealed_chain_carries_every_mandated_field_non_empty",
+        "test_a_selector_of_the_wrong_shape_is_a_finding",
+        "test_a_short_chain_fails_traceability",
+        "test_a_source_with_a_non_string_path_is_refused",
+        "test_a_source_with_non_list_include_when_is_refused",
+        "test_a_source_with_non_mapping_fields_is_refused",
+        "test_a_stage_claimed_by_two_phases_is_refused",
+        "test_a_stage_term_the_cycle_already_declares_is_measured",
+        "test_a_symbol_bound_in_a_sibling_home_of_the_same_phase_still_counts",
         "test_a_symbol_that_does_not_exist_closes_the_gate",
+        "test_a_truncated_history_is_refused_on_read",
+        "test_a_validation_dimension_the_engine_cannot_measure_is_not_silently_satisfied",
+        "test_a_verification_dimension_bound_to_no_gate_is_measured",
+        "test_a_verification_dimension_the_engine_cannot_measure_is_not_satisfied",
         "test_a_workflow_names_the_engine",
+        "test_a_zero_identity_width_is_refused",
         "test_absent_or_blank_recorded_head_falls_back_and_never_yields_empty",
         "test_accept_execution_returns_decision_and_evidence",
         "test_accept_execution_strict_raises_when_rejected",
         "test_all_coordination_classes_supported",
+        "test_all_eighteen_declared_registers_are_resolved",
         "test_all_five_mandated_states_are_implemented",
         "test_all_six_mandated_actions_are_implemented",
         "test_all_subclasses_are_foundation_errors",
@@ -6893,17 +7002,63 @@
         "test_allows_engine_and_adr_paths",
         "test_alternate_names_are_measured_as_a_single_source_of_truth_regression",
         "test_an_absent_catalogue_record_closes_the_gate",
+        "test_an_absent_declaration_is_refused",
+        "test_an_absent_home_is_measured_as_absent_not_as_an_error",
+        "test_an_absent_selector_is_a_finding",
         "test_an_analysis_that_is_not_registered_closes_the_gate",
+        "test_an_authority_obligation_naming_no_symbol_is_a_finding",
+        "test_an_authority_surface_gap_becomes_a_candidate",
+        "test_an_empty_criterion_block_is_refused",
+        "test_an_empty_identity_input_is_refused",
+        "test_an_entry_naming_no_subject_is_dropped_with_a_finding",
+        "test_an_executable_gate_is_wired_and_a_missing_one_is_not",
+        "test_an_execution_binding_the_wrong_path_is_measured",
+        "test_an_execution_claiming_a_performed_mutation_is_measured",
+        "test_an_execution_with_no_simulation_is_measured",
+        "test_an_identity_input_declared_twice_is_refused",
+        "test_an_identity_input_the_object_model_lacks_is_refused",
+        "test_an_identity_rule_with_no_inputs_is_refused",
+        "test_an_object_absent_from_the_history_is_measured",
+        "test_an_object_cannot_be_derived_without_evidence",
+        "test_an_object_of_no_declared_class_traverses_the_whole_loop",
+        "test_an_object_refuses_an_unmandated_field_name",
+        "test_an_object_with_an_empty_subject_is_anonymous",
+        "test_an_object_with_no_authority_fails_the_authorisation_proof",
         "test_an_obligation_owner_that_does_not_resolve_closes_the_gate",
         "test_an_obligation_with_no_located_owner_closes_the_gate",
         "test_an_obligation_with_no_named_gate_closes_the_gate",
         "test_an_ontology_anchor_that_is_absent_from_the_register_closes_the_gate",
+        "test_an_owner_that_refuses_halts_the_traversal_and_names_the_refusal",
+        "test_an_unanswered_understanding_question_is_measured",
         "test_an_unbound_faculty_closes_the_gate",
+        "test_an_unclaimed_canonical_stage_is_refused",
+        "test_an_unclassified_position_is_measured",
+        "test_an_unconducted_unknown_probe_is_measured",
+        "test_an_undeclared_gate_is_never_reported_as_wired",
         "test_an_undeclared_obligation_status_closes_the_gate",
         "test_an_undisclosed_gap_closes_the_gate",
+        "test_an_unimplemented_renderer_closes_the_gate",
+        "test_an_unimplemented_renderer_is_measured_by_the_capability_criterion",
+        "test_an_unimplemented_renderer_refuses_the_whole_surface",
+        "test_an_unimplemented_renderer_writes_no_file_at_all",
         "test_an_unknown_disposition_closes_the_gate",
         "test_an_unknown_operation_yields_no_plan_rather_than_a_fabricated_one",
+        "test_an_unknown_probe_forbidding_nothing_is_refused",
+        "test_an_unmeasured_certification_verdict_is_measured",
+        "test_an_unmeasured_validation_verdict_is_measured",
+        "test_an_unmeasured_verification_verdict_is_measured",
+        "test_an_unparseable_module_binds_nothing_rather_than_raising",
+        "test_an_unpermitted_execution_path_refuses_the_authorisation",
+        "test_an_unreadable_artifact_is_a_finding_not_a_crash",
+        "test_an_unrendered_surface_is_drift_for_every_declared_register",
+        "test_an_unresolvable_dependency_makes_the_simulation_non_executable",
+        "test_an_unresolved_dependency_halts_the_traversal_at_the_authorisation_position",
+        "test_an_unsealed_chain_fails_completeness",
         "test_an_unseeded_pipeline_category_closes_the_gate",
+        "test_an_unsettled_run_is_never_certified",
+        "test_an_unusable_declaration_is_a_fault_and_never_a_verdict",
+        "test_an_unwired_execution_gate_refuses_the_authorisation",
+        "test_an_unwired_gate_fails_governance_verification",
         "test_append_is_forward_only_and_immutable",
         "test_apply_sets_and_restores_environment",
         "test_artifact_bad_dependencies_type",
@@ -6928,6 +7083,7 @@
         "test_assurance_to_dict_is_complete",
         "test_attribute_invariants",
         "test_audit_entry_seal_and_hash",
+        "test_authority_accessors_refuse_unknown_names",
         "test_authorization_to_dict",
         "test_authorize_grants_engineering_execution",
         "test_authorize_is_deterministic",
@@ -6954,7 +7110,12 @@
         "test_can_transition_legal_and_illegal",
         "test_canonical_dict_preserves_entity_shape",
         "test_categories_and_programs",
+        "test_certification_fails_when_execution_was_refused",
+        "test_certification_fails_when_the_history_cannot_be_projected",
+        "test_certification_fails_without_a_measured_validation_verdict",
+        "test_certification_fails_without_an_understanding_object",
         "test_certification_must_be_an_object",
+        "test_certification_refuses_a_claimed_mutation",
         "test_certified_lifecycle_membership",
         "test_certify_execution_produces_assurances",
         "test_checkpoint_continue_recover",
@@ -7030,6 +7191,7 @@
         "test_constitutional_regression_outranks_every_adoption",
         "test_consumption_evidence_is_a_tracked_artifact",
         "test_content_digest_stable",
+        "test_context_is_canonical_and_hashable",
         "test_continue_from_reset_reproduces_full_run",
         "test_continue_rejects_foreign_checkpoint",
         "test_continue_reproduces_final_states",
@@ -7062,169 +7224,7 @@
         "test_decision_does_not_mutate_its_inputs",
         "test_decision_gates_are_blocking_and_pass",
         "test_decision_is_deterministic",
-        "test_decision_is_total_and_residual_free_over_the_real_input_space",
-        "test_deduplicates_edges",
-        "test_default_and_bigint_columns",
-        "test_default_data_dir_points_at_book_data",
-        "test_default_provider_resolves_shipped_bp_data_0001",
-        "test_default_resources_bound",
-        "test_degree_and_has_node_and_nodes",
-        "test_dependencies_and_dependents",
-        "test_dependencies_recorded_for_active",
-        "test_dependency_closure_record",
-        "test_dependency_cycle_rejected",
-        "test_dependency_helpers",
-        "test_dependency_link_and_guards",
-        "test_dependency_lock_missing_pyproject",
-        "test_dependency_lock_rejects_runtime_deps",
-        "test_dependency_lock_rejects_unpinned_dev",
-        "test_dependency_lock_verifies_real_pyproject",
-        "test_depth",
-        "test_derive_run_status_failed_takes_precedence",
-        "test_derive_run_status_partial_when_skipped_but_no_failure",
-        "test_derive_run_status_rolled_back_only_when_all_rolled_back",
-        "test_derive_run_status_succeeded_and_empty",
-        "test_descriptor_binds_secret_env_by_reference",
-        "test_descriptor_generates_three_manifests",
-        "test_descriptor_honours_environment_override",
-        "test_descriptor_no_secret_env_when_none",
-        "test_descriptor_refuses_empty_closure",
-        "test_descriptor_refuses_unpinned_package",
-        "test_descriptor_requires_disclosure",
-        "test_descriptor_secret_scan_guard",
-        "test_descriptors_serialise_to_dict",
-        "test_deserialize_rejects_bad_json",
-        "test_detect_cycle_none_for_dag",
-        "test_detect_cycle_revisits_fully_explored_node",
-        "test_detect_direct_cycle",
-        "test_detect_self_loop",
-        "test_detects_frozen_prefixes",
-        "test_deterministic_id_is_stable_and_version_independent",
-        "test_deterministic_sorted_keys",
-        "test_diagnose_clean_when_all_complete",
-        "test_diagnose_operator_skip_reason",
-        "test_diagnose_reports_failure_and_blocked",
-        "test_diagnostics_to_dict",
-        "test_disclosure_present_validation",
-        "test_distinct_inputs_distinct_ids",
-        "test_document_recency_is_stable_when_a_commit_is_appended",
-        "test_document_recency_uses_commit_order_and_breaks_ties_deterministically",
-        "test_double_build_accepts_explicit_signing_key",
-        "test_double_build_accepts_key_ref",
-        "test_double_build_detects_injected_divergence",
-        "test_double_build_failed_build_raises",
-        "test_double_build_is_byte_identical",
-        "test_double_build_report_dict_shape",
-        "test_double_build_strict_raises_on_divergence",
-        "test_double_build_writes_report",
-        "test_duplicate_dependency_rejected",
-        "test_duplicate_edge_id_rejected",
-        "test_duplicate_id_drives_the_check_closed",
-        "test_duplicate_same_content_rejected",
-        "test_duplicate_universal_id_rejected",
-        "test_duplicate_universe_refused",
-        "test_duplicate_version_rejected",
-        "test_each_faculty_has_exactly_one_located_canonical_owner",
-        "test_edge_lookup",
-        "test_edges_from_and_to",
-        "test_edges_of_type",
-        "test_edges_referencing_absent_nodes_are_materialised",
-        "test_empty_composition_refused",
-        "test_empty_declaration_fails_closed",
-        "test_empty_graph_is_valid",
-        "test_empty_graph_plan_has_zero_parallelism",
-        "test_empty_journal_head_is_genesis",
-        "test_empty_log_has_zero_sequence",
-        "test_empty_outcomes_mapping_is_all_complete",
-        "test_end_to_end_run_bundles_observations",
-        "test_engine_exists_and_declares_a_failclosed_path",
-        "test_engine_never_descends_into_a_recognised_export",
-        "test_ensure_supported_rejects_non_data_family",
-        "test_entity_and_provenance_must_be_objects",
-        "test_entity_attributes_must_be_a_list",
-        "test_entity_invariants_and_primary_key",
-        "test_env_defaults_to_development",
-        "test_env_prefix_values_loaded_and_lowercased",
-        "test_env_read_from_ucos_env",
-        "test_environment_from_str_invalid",
-        "test_environment_from_str_valid",
-        "test_error_hierarchy_rooted_in_foundation",
-        "test_errors",
-        "test_evaluation_does_not_mutate_its_inputs",
-        "test_evaluation_is_deterministic",
-        "test_event_from_dict_defaults_detail",
-        "test_event_to_dict_and_from_dict_round_trip",
-        "test_every_capability_carries_exactly_one_declared_disposition",
-        "test_every_committed_decision_is_traceable",
-        "test_every_committed_decision_matches_the_action_its_rule_decides",
-        "test_every_committed_decision_re_derives_from_its_row",
-        "test_every_committed_decision_replays_from_its_recorded_rationale",
-        "test_every_committed_object_carries_a_verdict",
-        "test_every_committed_object_carries_exactly_one_decision",
-        "test_every_committed_owner_is_a_declared_or_presence_assigned_authority",
-        "test_every_contributed_analysis_is_registered_under_this_programme",
-        "test_every_declared_dimension_is_actually_measured",
-        "test_every_declared_guard_passes",
-        "test_every_declared_home_resolves",
-        "test_every_declared_home_resolves_on_disk",
-        "test_every_declared_operation_declares_an_ordered_plan",
-        "test_every_declared_pipeline_category_is_seeded_by_the_framework",
-        "test_every_declared_priority_carries_a_rationale",
-        "test_every_declared_register_resolves_and_is_claimed",
-        "test_every_declared_rule_carries_a_rationale",
-        "test_every_declared_rule_is_complete_and_uniquely_identified",
-        "test_every_declared_symbol_exists_in_one_of_its_homes",
-        "test_every_declared_vocabulary_registrar_exists",
-        "test_every_dimension_measures_both_sides_on_the_declared_scale",
-        "test_every_evolution_obligation_binds_to_a_located_owner_and_gate",
-        "test_every_faculty_carries_exactly_one_declared_disposition",
-        "test_every_faculty_is_realised_by_a_registered_analysis",
-        "test_every_in_repo_conversation_export_is_assimilated",
-        "test_every_obligation_status_comes_from_the_declared_vocabulary",
-        "test_every_ontology_anchor_is_an_element_the_register_already_declares",
-        "test_every_recorded_gap_states_why_it_is_not_closed",
-        "test_every_rendered_target_is_a_plain_filename_inside_the_programme",
-        "test_every_rendered_target_resolves_inside_the_programme",
-        "test_every_requirement_carries_exactly_one_canonical_owner",
-        "test_every_requirement_is_homed_when_the_closure_homes_every_concept",
-        "test_exception_logging",
-        "test_execute_and_observability_methods",
-        "test_execute_composition_honours_outcomes_and_platform",
-        "test_execute_composition_returns_result",
-        "test_execution_auditing",
-        "test_execution_authorization",
-        "test_execution_checkpoint",
-        "test_execution_continuation",
-        "test_execution_coordinator",
-        "test_execution_federation",
-        "test_execution_isolation",
-        "test_execution_lifecycle",
-        "test_execution_observability",
-        "test_execution_persistence",
-        "test_execution_platform",
-        "test_execution_recovery",
-        "test_execution_replay",
-        "test_execution_replay_validation",
-        "test_execution_rollback",
-        "test_execution_scheduler",
-        "test_execution_snapshot",
-        "test_execution_state",
-        "test_exists_and_path_for",
-        "test_export_identity_is_the_payload_content_digest",
-        "test_export_is_recognised_by_payload_structure_not_by_filename",
-        "test_facade_contract_and_summary",
-        "test_facade_export",
-        "test_facade_individual_stages_compose",
-        "test_fail_safe_precedence_every_non_modifying_clause_precedes_every_modifying_one",
-        "test_family_and_status_coercion",
-        "test_federate_projects_composition_links",
-        "test_federate_single_context_has_no_links",
-        "test_federated_link_to_dict",
-        "test_federation_dangling_source",
-        "test_federation_dangling_target",
-        "test_federation_dict",
-        "test_federation_duplicate_refused",
-        "test_federation_same_context_refused"
+        "test_decision_is_total_and_residual_free_over_the_real_input_space"
       ],
       "unique_id": "RC-58"
     },
@@ -7413,6 +7413,137 @@
     },
     {
       "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/uaue",
+      "canonical_name": "engine.uaue",
+      "category": "engine",
+      "description": "UAUE — Universal Autonomous Evolution engine (UAUE-000001).",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "UAUE — Universal Autonomous Evolution engine (UAUE-000001). This package is the machine reader of the canonical evolution declaration at ``00-MASTER/UAUE-000001/uaue-evolution.json`` and nothing else. It legislates no stage, mints no identity, registers no object and issues no certificate: every one of those has a located owner elsewhere in the repository, and the declaration binds each phase of the perpetual evolution cycle to that owner by pointer. The package deliberately carries **no list of registers, phases, stages or classification rules**. Registers, phases and classifications are read from the declaration; the stage set is read from :mod:`engine.uckp.evolution`, the Article 14 authority that owns it. A second copy of any of those here would be a second authority over one subject, which is the exact failure this programme exists to measure. The traversal itself is :mod:`engine.uaue.controller`, which conducts a candidate through every declared position and settles the interdependence between completeness, validation and certification to a fixed point. It is exported here because a capability reachable only through a private module path is a capability nothing can discover. Layering: this package may import from :mod:`engine` only. It never imports ``platform`` or ``intelligence``, and it never imports a ``00-MASTER`` programme engine — those are stdlib-only scripts whose import would execute a measurement as a side effect.",
+      "symbols": [
+        "Boundary",
+        "Classification",
+        "Criterion",
+        "CriterionOutcome",
+        "DeclarationReader",
+        "Dependency",
+        "DiscoveryDuty",
+        "DiscoveryReport",
+        "DiscoverySource",
+        "EvolutionAuthority",
+        "EvolutionAuthorityError",
+        "EvolutionCandidate",
+        "EvolutionChain",
+        "EvolutionContext",
+        "EvolutionController",
+        "EvolutionExecution",
+        "EvolutionObject",
+        "EvolutionObservation",
+        "EvolutionPlan",
+        "EvolutionRefused",
+        "EvolutionRun",
+        "EvolutionSettlement",
+        "EvolutionSimulation",
+        "EvolutionUnderstanding",
+        "ExitCriterion",
+        "Gate",
+        "GateReport",
+        "HistorySpec",
+        "IdentityRule",
+        "Invariant",
+        "LifecycleState",
+        "ObjectKind",
+        "Obligation",
+        "Owner",
+        "Ownership",
+        "Phase",
+        "PlanContract",
+        "PlanStep",
+        "Register",
+        "RequiredField",
+        "SelfEvolution",
+        "SourceCondition",
+        "StageResult",
+        "Substrate",
+        "UnknownProbe",
+        "Verdict",
+        "as_context",
+        "authority",
+        "authority_is_grounded",
+        "build_ledger",
+        "certification",
+        "certification_object",
+        "certify_evolution",
+        "controller",
+        "create_evolution_plan",
+        "declaration_evidence",
+        "declared_entries",
+        "declared_flag",
+        "declared_integer",
+        "declared_mapping",
+        "declared_strings",
+        "declared_text",
+        "dependencies_of",
+        "derive_identity",
+        "discover_evolution_candidates",
+        "discovery",
+        "execute_evolution",
+        "execution",
+        "exit_measures",
+        "exits",
+        "gate",
+        "history",
+        "history_digest",
+        "history_path",
+        "history_records",
+        "identity_inputs",
+        "irreproducible_content",
+        "learning_object",
+        "load_context",
+        "load_evolution_authority",
+        "main",
+        "mandatory_measures",
+        "measurable_dimensions",
+        "measure",
+        "model",
+        "module_symbols",
+        "objects",
+        "observation",
+        "observe_evolution",
+        "phase_object",
+        "planning",
+        "project_history",
+        "query_history",
+        "register_path",
+        "registers",
+        "rehydrate_history",
+        "render",
+        "render_register",
+        "render_registers",
+        "render_surface",
+        "rendered_surface",
+        "replay_drift",
+        "resolution",
+        "resolve_evolution_state",
+        "simulate_evolution",
+        "simulation",
+        "state_transition_object",
+        "surface_digest",
+        "understand_evolution",
+        "understanding",
+        "validate_evolution",
+        "validation",
+        "validation_object",
+        "verification",
+        "verification_object",
+        "verify_evolution"
+      ],
+      "unique_id": "RC-61"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
       "canonical_location": "engine/uckp",
       "canonical_name": "engine.uckp",
       "category": "engine",
@@ -7421,7 +7552,7 @@
       "implementation_status": "CERTIFIED",
       "replacement_prohibited": true,
       "reuse": "REUSE_AS_IS/COMPOSE",
-      "summary": "UCKP — the Universal Constitutional Knowledge Principle, implemented. ``UCKP-LAW-0001``: every constitutional entity exists exactly once as a canonical Universal Constitutional Knowledge Object, and every repository, document, schema, source file, API, database, graph, interface, runtime and future technology is a view of one, an environment that acts on one, or a mechanism that stores one. No architectural authority exists outside that principle. The package is layered strictly bottom-up, and the order is the dependency order: :mod:`~engine.uckp.canonical` the one serialization primitive (stdlib only) :mod:`~engine.uckp.errors` the fail-closed error taxonomy :mod:`~engine.uckp.law` the law itself: 20 articles, 17 invariants, 13 stops :mod:`~engine.uckp.identity` globally unique, time- and storage-independent identity :mod:`~engine.uckp.facets` the 33 questions every object must answer :mod:`~engine.uckp.values` the typed facet values :mod:`~engine.uckp.vocabulary` open vocabularies — extended by registration :mod:`~engine.uckp.ucko` the canonical object :mod:`~engine.uckp.graph` every object a node, every relationship executable :mod:`~engine.uckp.registry` admission, reuse-before-create, automatic discovery :mod:`~engine.uckp.projection` 10 generated views, none authoritative :mod:`~engine.uckp.persistence` 10 interchangeable storage technologies :mod:`~engine.uckp.execution` 10 interchangeable execution technologies :mod:`~engine.uckp.state` immutable, content-addressed constitutional states :mod:`~engine.uckp.evolution` the 15-stage cycle that never terminates :mod:`~engine.uckp.intelligence` 13 ways the universe reasons about itself :mod:`~engine.uckp.governance` decisions that replay from themselves :mod:`~engine.uckp.constitution` the law, re-entered as objects (a provider) :mod:`~engine.uckp.capabilities` every layer capability as objects (a provider) :mod:`~engine.uckp.universe` the assembled whole :mod:`~engine.uckp.validation` the 17 invariants as executable probes :mod:`~engine.uckp.assimilation` every existing UCOS artifact, losslessly :mod:`~engine.uckp.cli` the command surface Two properties are worth knowing before reading any of it. **The law is code, not a document.** :mod:`engine.uckp.law` is the only home of the articles and invariants. Every Markdown register, JSON declaration and certificate that states the law is generated from those values, because Article 11 forbids a generated representation from holding truth — and a law whose on",
+      "summary": "UCKP — the Universal Constitutional Knowledge Principle, implemented. ``UCKP-LAW-0001``: every constitutional entity exists exactly once as a canonical Universal Constitutional Knowledge Object, and every repository, document, schema, source file, API, database, graph, interface, runtime and future technology is a view of one, an environment that acts on one, or a mechanism that stores one. No architectural authority exists outside that principle. The package is layered strictly bottom-up, and the order is the dependency order: :mod:`~engine.uckp.canonical` the one serialization primitive (stdlib only) :mod:`~engine.uckp.errors` the fail-closed error taxonomy :mod:`~engine.uckp.law` the law itself: 20 articles, 17 invariants, 13 stops :mod:`~engine.uckp.identity` globally unique, time- and storage-independent identity :mod:`~engine.uckp.facets` the 33 questions every object must answer :mod:`~engine.uckp.values` the typed facet values :mod:`~engine.uckp.vocabulary` open vocabularies — extended by registration :mod:`~engine.uckp.ucko` the canonical object :mod:`~engine.uckp.graph` every object a node, every relationship executable :mod:`~engine.uckp.registry` admission, reuse-before-create, automatic discovery :mod:`~engine.uckp.projection` 10 generated views, none authoritative :mod:`~engine.uckp.persistence` 10 interchangeable storage technologies :mod:`~engine.uckp.execution` 10 interchangeable execution technologies :mod:`~engine.uckp.state` immutable, content-addressed constitutional states :mod:`~engine.uckp.evolution` the 15-stage cycle that never terminates :mod:`~engine.uckp.resolution` the constitutional resolutions, read as data :mod:`~engine.uckp.intelligence` 13 ways the universe reasons about itself :mod:`~engine.uckp.governance` decisions that replay from themselves :mod:`~engine.uckp.constitution` the law, re-entered as objects (a provider) :mod:`~engine.uckp.capabilities` every layer capability as objects (a provider) :mod:`~engine.uckp.universe` the assembled whole :mod:`~engine.uckp.validation` the 17 invariants as executable probes :mod:`~engine.uckp.assimilation` every existing UCOS artifact, losslessly :mod:`~engine.uckp.cli` the command surface Two properties are worth knowing before reading any of it. **The law is code, not a document.** :mod:`engine.uckp.law` is the only home of the articles and invariants. Every Markdown register, JSON declaration and certificate that states the law is generated from those values, because Article 1",
       "symbols": [
         "Admission",
         "AiAgentExecution",
@@ -7435,6 +7566,9 @@
         "AuditEntry",
         "AuthorityBinding",
         "AuthorityRole",
+        "CategoryIntegrity",
+        "CategoryPopulation",
+        "CategoryRecognition",
         "CircularAuthorityError",
         "CloudPersistence",
         "ConstitutionalDelta",
@@ -7514,6 +7648,8 @@
         "RelationshipError",
         "ReplayProof",
         "RepositoryProjection",
+        "Resolution",
+        "ResolutionReader",
         "RootLaw",
         "RuntimeBinding",
         "RuntimeProjection",
@@ -7535,6 +7671,7 @@
         "UniversalKnowledgeGraph",
         "UniversalKnowledgeRegistry",
         "UnknownObjectError",
+        "UnrecognisedUGAValueError",
         "UserInterfaceProjection",
         "ValidationReport",
         "Vocabulary",
@@ -7549,6 +7686,7 @@
         "assimilate",
         "assimilate_artifact",
         "assimilation",
+        "binding_reader",
         "build_assimilated_universe",
         "build_execution_suite",
         "build_intelligence",
@@ -7610,6 +7748,7 @@
         "require_aligned",
         "require_certified",
         "require_lossless",
+        "resolution",
         "resolve_operation",
         "role_object",
         "root_law_urn",
@@ -7620,6 +7759,7 @@
         "stop_condition_object",
         "ucko",
         "ucko_objects",
+        "uga_projection",
         "universe",
         "universe_digest",
         "universe_execution_request",
@@ -7637,7 +7777,103 @@
         "vocabulary_object",
         "write_projections"
       ],
-      "unique_id": "RC-61"
+      "unique_id": "RC-62"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/uicm",
+      "canonical_name": "engine.uicm",
+      "category": "engine",
+      "description": "UCOS-UICM-000001 — Universal Implementation Closure Matrix.",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "UCOS-UICM-000001 — Universal Implementation Closure Matrix. **Measurement and certification layer only.** This package answers one question that nothing in the repository could answer before it: *is capability X closed on dimension Y?* It owns no registry, mints no identifier, legislates no lifecycle and issues no certificate. Three capabilities were located as genuinely absent and are created here. Everything else UICM needs was already owned, and is consumed rather than rebuilt: created capability x dimension closure matrix engine.uicm.matrix capability-keyed obligation register engine.uicm.obligation closure state machine engine.uicm.model consumed (read, never written) capability identity knowledge/canonical-knowledge.json UCKO-CAP-* artifact identity 00-MASTER/UCOS-UGA-001 UCOS-* universal_id implementation mapping intelligence/UCOS-RIE-CAPABILITY-CATALOG.json invoked (verdict belongs to the owner) certification engine.universal_certification UCOS-EPIC-006 lifecycle stages UCIC-001 bound, never forked canonical digest engine.uckp.canonical the single primitive disclosure engine.foundation.contracts.disclosure Every register here is **append-only and immutable**. A closure state is never edited: a change of state is a new observation appended with explicit lineage to the observation it supersedes, and the record it replaced stays exactly as it was, reported thereafter as ``SUPERSEDED``. There is no update path and no delete path anywhere in the package, and that absence is *measured* over this package's own source (UICM-INV-16) rather than asserted, because an append-only register whose immutability is only a convention is one edit away from not being one. The declaration at ``00-MASTER/UCOS-UICM-000001/uicm.json`` owns every enumeration: the seven states, the seventeen dimensions, the population rule, the source paths, the gap classes and the eighteen invariants. No dimension id, capability name or source path is an executable literal in this package, and UICM-INV-15 measures that too. Admitting a dimension or a capability is an append-only edit to declared data and requires no change here. Imports are lazy so that reading the closure model costs nothing at import time. Note in particular that ``intelligence`` is never imported: that package depends on ``engine``, so its catalogue is consumed as JSON, which is what a reference into another owner's register should be.",
+      "symbols": [
+        "CanonicalOwners",
+        "Capability",
+        "ClosureCell",
+        "ClosureCertification",
+        "ClosureDeclaration",
+        "ClosureDeclarationError",
+        "ClosureError",
+        "ClosureMatrix",
+        "ClosureObligation",
+        "ClosureRun",
+        "ClosureState",
+        "ClosureStateError",
+        "ClosureValidation",
+        "DimensionDeclaration",
+        "Gap",
+        "GapError",
+        "GapRegister",
+        "InvariantResult",
+        "MeasurementError",
+        "ObligationEntry",
+        "ObligationError",
+        "ObligationRegister",
+        "Observation",
+        "ObservationError",
+        "ObservationRegistry",
+        "PopulationError",
+        "ProbeResult",
+        "RepositoryFacts",
+        "ResolutionBinding",
+        "StateDeclaration",
+        "UicmController",
+        "ValidationError",
+        "build_register",
+        "build_registry",
+        "canonical_document",
+        "certification",
+        "classification_reference",
+        "classify",
+        "controller",
+        "digest",
+        "discover_population",
+        "gap",
+        "gap_id",
+        "implemented_invariants",
+        "main",
+        "matrix",
+        "measure",
+        "measure_coordinate",
+        "measurement",
+        "model",
+        "obligation",
+        "obligation_id",
+        "observation",
+        "observation_id",
+        "ownership_function",
+        "probe_architecture",
+        "probe_certification",
+        "probe_contract",
+        "probe_coverage",
+        "probe_dependency",
+        "probe_determinism",
+        "probe_evidence",
+        "probe_evolution",
+        "probe_existence",
+        "probe_governance",
+        "probe_identity",
+        "probe_implementation",
+        "probe_names",
+        "probe_ownership",
+        "probe_registry",
+        "probe_testing",
+        "probe_validation",
+        "probe_verification",
+        "project_certification",
+        "repository_root",
+        "sequence_digest",
+        "state_counts",
+        "tracked_paths",
+        "tracked_roots",
+        "validate",
+        "validation"
+      ],
+      "unique_id": "RC-63"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7718,7 +7954,7 @@
         "pipeline",
         "rules"
       ],
-      "unique_id": "RC-62"
+      "unique_id": "RC-64"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7764,7 +8000,7 @@
         "gates",
         "validate_runtime_unit"
       ],
-      "unique_id": "RC-63"
+      "unique_id": "RC-65"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -8086,7 +8322,7 @@
         "validate_network",
         "validate_storage"
       ],
-      "unique_id": "RC-64"
+      "unique_id": "RC-66"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -8501,7 +8737,7 @@
         "test_untyped_capability_is_rejected_fail_closed",
         "test_untyped_compute_resource_is_rejected_fail_closed"
       ],
-      "unique_id": "RC-65"
+      "unique_id": "RC-67"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8520,7 +8756,7 @@
         "main",
         "portal"
       ],
-      "unique_id": "RC-66"
+      "unique_id": "RC-68"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8574,7 +8810,7 @@
         "subsystem_config",
         "validation"
       ],
-      "unique_id": "RC-67"
+      "unique_id": "RC-69"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8626,7 +8862,7 @@
         "renderers",
         "validation"
       ],
-      "unique_id": "RC-68"
+      "unique_id": "RC-70"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8723,7 +8959,7 @@
         "verify_bundle",
         "verify_seal"
       ],
-      "unique_id": "RC-69"
+      "unique_id": "RC-71"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8757,7 +8993,7 @@
         "schema",
         "tests"
       ],
-      "unique_id": "RC-70"
+      "unique_id": "RC-72"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8800,7 +9036,7 @@
         "standards",
         "validation"
       ],
-      "unique_id": "RC-71"
+      "unique_id": "RC-73"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8854,7 +9090,7 @@
         "sha256_file",
         "sha256_text"
       ],
-      "unique_id": "RC-72"
+      "unique_id": "RC-74"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8989,7 +9225,7 @@
         "test_verify_reports_a_corrupted_artifact",
         "test_write_all_is_deterministic"
       ],
-      "unique_id": "RC-73"
+      "unique_id": "RC-75"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9003,7 +9239,7 @@
       "reuse": "REUSE/COMPOSE",
       "summary": "UCOS EC-2 ``platform`` package root — stdlib-safe shim. The EC-2 Platform Realization Program's authoritative deliverable path is ``platform/foundation/`` (per ``06-IMPLEMENTATION/UCOS-EC-2-PLATFORM-REALIZATION-PROGRAM.md``). Because ``platform`` is also the name of a Python standard-library module, a naive package here would *shadow* the stdlib module for the whole interpreter and break tooling (pytest, coverage, setuptools all ``import platform``). To honor the mandated deliverable path **without** breaking the toolchain, this package is a **transparent shim**: it loads the genuine standard-library ``platform`` module by file location and re-exports its public API into this package namespace. Therefore: * ``import platform`` → exposes the real stdlib API (``system()``, ``python_version()``, ``machine()``, …) — tooling is unaffected; * ``import platform.foundation`` → resolves the EC-2 Platform Foundation, because this remains a real package with a ``__path__``. This shim is additive and reads nothing from the certified corpus. It is *not* an EC-2 foundation module; it exists solely to reconcile the reserved package name.",
       "symbols": [],
-      "unique_id": "RC-74"
+      "unique_id": "RC-76"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9073,7 +9309,7 @@
         "search",
         "service"
       ],
-      "unique_id": "RC-75"
+      "unique_id": "RC-77"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9129,7 +9365,7 @@
         "search",
         "service"
       ],
-      "unique_id": "RC-76"
+      "unique_id": "RC-78"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9226,7 +9462,7 @@
         "validation",
         "versioning"
       ],
-      "unique_id": "RC-77"
+      "unique_id": "RC-79"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9301,7 +9537,7 @@
         "status",
         "validate_governance"
       ],
-      "unique_id": "RC-78"
+      "unique_id": "RC-80"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9444,7 +9680,7 @@
         "sum_money",
         "validation"
       ],
-      "unique_id": "RC-79"
+      "unique_id": "RC-81"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9506,7 +9742,7 @@
         "service",
         "top_level_symbols"
       ],
-      "unique_id": "RC-80"
+      "unique_id": "RC-82"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9556,7 +9792,7 @@
         "service",
         "views"
       ],
-      "unique_id": "RC-81"
+      "unique_id": "RC-83"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9677,7 +9913,7 @@
         "services",
         "trust"
       ],
-      "unique_id": "RC-82"
+      "unique_id": "RC-84"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9752,7 +9988,7 @@
         "status",
         "validate_transition"
       ],
-      "unique_id": "RC-83"
+      "unique_id": "RC-85"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9809,7 +10045,7 @@
         "service",
         "sessions"
       ],
-      "unique_id": "RC-84"
+      "unique_id": "RC-86"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9873,7 +10109,7 @@
         "service",
         "source"
       ],
-      "unique_id": "RC-85"
+      "unique_id": "RC-87"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9932,7 +10168,7 @@
         "service",
         "traces"
       ],
-      "unique_id": "RC-86"
+      "unique_id": "RC-88"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10000,7 +10236,7 @@
         "service",
         "workspace"
       ],
-      "unique_id": "RC-87"
+      "unique_id": "RC-89"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10070,7 +10306,7 @@
         "status",
         "validate_transition"
       ],
-      "unique_id": "RC-88"
+      "unique_id": "RC-90"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10084,7 +10320,7 @@
       "reuse": "REUSE/COMPOSE",
       "summary": "UCOS Ω∞ — Provider implementations and the provider catalog (Terminal-04). This package sits **outside** the Universal Provider Architecture (:mod:`platform.universal_provider`) by design. The framework must not know that any particular provider exists, so provider implementations live here and reach the framework only as **data**: * ``catalog/`` — JSON provider manifests. Discovery reads this directory; the framework has no compiled knowledge of its contents. * ``repository/`` — the Repository provider, the reference implementation. It is built on :class:`~platform.universal_provider.sdk.BaseProvider` and is reached exclusively through the ``entry_point`` string declared in its manifest. * ``TEMPLATE.provider.json`` — the copy-me manifest for a new provider. It is deliberately *not* inside ``catalog/`` so it is never discovered. Onboarding a provider is therefore two acts, neither of which touches the framework: 1. add a manifest to ``catalog/`` declaring identity, capabilities, and entry point; 2. add a module exposing that entry point. The framework's own gate ``PV-02-KIND-OPEN`` scans :mod:`platform.universal_provider` for the provider under validation and fails if it finds it — so this separation is enforced, not merely intended.",
       "symbols": [],
-      "unique_id": "RC-89"
+      "unique_id": "RC-91"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10105,7 +10341,7 @@
         "repository_descriptor",
         "repository_root"
       ],
-      "unique_id": "RC-90"
+      "unique_id": "RC-92"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10230,7 +10466,7 @@
         "validation",
         "validation_records"
       ],
-      "unique_id": "RC-91"
+      "unique_id": "RC-93"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10286,7 +10522,7 @@
         "subjects",
         "subprocess_command_runner"
       ],
-      "unique_id": "RC-92"
+      "unique_id": "RC-94"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10372,7 +10608,7 @@
         "status",
         "validate_governance"
       ],
-      "unique_id": "RC-93"
+      "unique_id": "RC-95"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10460,7 +10696,7 @@
         "validate_trajectory",
         "workflow"
       ],
-      "unique_id": "RC-94"
+      "unique_id": "RC-96"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10588,7 +10824,7 @@
         "zone_may_mutate",
         "zones"
       ],
-      "unique_id": "RC-95"
+      "unique_id": "RC-97"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10808,6 +11044,7 @@
         "relationship",
         "release_policy",
         "render",
+        "repo",
         "repository_operations_helpers",
         "request",
         "result",
@@ -10873,6 +11110,7 @@
         "test_a_basis_outside_the_declared_vocabulary_is_still_tallied",
         "test_a_batch_cap_limits_how_much_one_tick_dispatches",
         "test_a_batch_is_drawn_from_one_wave_only_and_capped",
+        "test_a_blocking_failure_exits_one",
         "test_a_blocking_failure_is_refused_certification",
         "test_a_blocking_failure_outranks_indeterminacy",
         "test_a_blocking_finding_fails_the_report_and_an_advisory_one_does_not",
@@ -10915,6 +11153,7 @@
         "test_a_category_does_not_catch_its_siblings",
         "test_a_certification_execution_is_immutable",
         "test_a_certification_intelligence_report_is_immutable",
+        "test_a_certified_surface_exits_zero",
         "test_a_changed_fact_changes_the_report_identity",
         "test_a_changed_node_is_a_recorded_replacement_not_a_silent_duplicate",
         "test_a_class_body_import_is_resolved_at_import",
@@ -10922,6 +11161,7 @@
         "test_a_collection_key_holding_a_scalar_yields_nothing_rather_than_a_guess",
         "test_a_collection_of_identifiers_is_read_as_many_references",
         "test_a_collector_requires_a_policy",
+        "test_a_command_is_required",
         "test_a_command_that_exceeds_its_timeout_withholds_readiness",
         "test_a_compatibility_analyzer_accepts_an_injected_engine",
         "test_a_compatibility_analyzer_composes_its_own_engine_by_default",
@@ -10942,6 +11182,7 @@
         "test_a_config_dimension_subset_scopes_the_engine",
         "test_a_config_is_immutable",
         "test_a_config_scope_and_an_explicit_suite_intersect",
+        "test_a_config_selects_the_repository",
         "test_a_config_without_dimensions_composes_the_full_suite",
         "test_a_configuration_must_be_a_mapping",
         "test_a_configuration_whose_root_is_not_a_mapping_fails_closed",
@@ -10981,6 +11222,7 @@
         "test_a_custom_analyzer_may_emit_an_advisory_finding",
         "test_a_cycle_is_reported_with_the_nodes_that_could_not_be_placed",
         "test_a_cyclic_node_is_left_unordered_rather_than_given_an_invented_position",
+        "test_a_cyclic_repository_makes_graph_a_finding",
         "test_a_dashboard_is_immutable",
         "test_a_decidable_plan_contributes_no_gate_failures",
         "test_a_decidable_plan_reports_itself_decidable",
@@ -10995,15 +11237,9 @@
         "test_a_declaration_whose_package_cannot_be_imported_refuses_to_locate_itself",
         "test_a_declaration_whose_package_has_no_filesystem_location_is_refused",
         "test_a_declaration_with_a_blank_identity_is_refused",
-        "test_a_declaration_with_no_catalogue_cannot_answer_the_catalogue_token",
-        "test_a_declaration_with_no_catalogue_must_declare_itself_policy_free",
-        "test_a_declaration_with_no_package_dependencies_still_plans",
-        "test_a_declared_but_absent_policy_path_fails_closed_rather_than_falling_back",
-        "test_a_declared_catalogue_that_declares_nothing_fails",
-        "test_a_declared_catalogue_that_does_not_parse_fails",
-        "test_a_declared_catalogue_that_is_absent_fails"
+        "test_a_declaration_with_no_catalogue_cannot_answer_the_catalogue_token"
       ],
-      "unique_id": "RC-96"
+      "unique_id": "RC-98"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11061,7 +11297,7 @@
         "pipeline",
         "register_assimilation"
       ],
-      "unique_id": "RC-97"
+      "unique_id": "RC-99"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11189,7 +11425,7 @@
         "write_bundle",
         "write_json"
       ],
-      "unique_id": "RC-98"
+      "unique_id": "RC-100"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11335,7 +11571,7 @@
         "truth",
         "version"
       ],
-      "unique_id": "RC-99"
+      "unique_id": "RC-101"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11469,7 +11705,7 @@
         "service",
         "specialization"
       ],
-      "unique_id": "RC-100"
+      "unique_id": "RC-102"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11528,7 +11764,7 @@
         "template_fingerprint",
         "templates"
       ],
-      "unique_id": "RC-101"
+      "unique_id": "RC-103"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11568,7 +11804,7 @@
         "record_plan",
         "replays"
       ],
-      "unique_id": "RC-102"
+      "unique_id": "RC-104"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11622,7 +11858,7 @@
         "policy_service_descriptor",
         "register_measurement_policies"
       ],
-      "unique_id": "RC-103"
+      "unique_id": "RC-105"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11694,7 +11930,7 @@
         "recommendation",
         "register_ownership"
       ],
-      "unique_id": "RC-104"
+      "unique_id": "RC-106"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11838,7 +12074,7 @@
         "state_machine",
         "vocabulary"
       ],
-      "unique_id": "RC-105"
+      "unique_id": "RC-107"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11894,7 +12130,7 @@
         "universal_portal_contract",
         "universal_portal_health_report"
       ],
-      "unique_id": "RC-106"
+      "unique_id": "RC-108"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11940,7 +12176,7 @@
         "state_runtime",
         "version_index"
       ],
-      "unique_id": "RC-107"
+      "unique_id": "RC-109"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12062,7 +12298,7 @@
         "version_tuple",
         "write_evidence"
       ],
-      "unique_id": "RC-108"
+      "unique_id": "RC-110"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12115,7 +12351,7 @@
         "truth_contract_names",
         "truth_service_descriptor"
       ],
-      "unique_id": "RC-109"
+      "unique_id": "RC-111"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12184,7 +12420,7 @@
         "rules",
         "service"
       ],
-      "unique_id": "RC-110"
+      "unique_id": "RC-112"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12251,7 +12487,7 @@
         "validation_console_contract",
         "validation_console_health_checks"
       ],
-      "unique_id": "RC-111"
+      "unique_id": "RC-113"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12317,7 +12553,7 @@
         "parse_config",
         "service"
       ],
-      "unique_id": "RC-112"
+      "unique_id": "RC-114"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12384,7 +12620,7 @@
         "workspace_contract",
         "workspace_health_checks"
       ],
-      "unique_id": "RC-113"
+      "unique_id": "RC-115"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -12799,7 +13035,7 @@
         "validate_execution",
         "validate_interface"
       ],
-      "unique_id": "RC-114"
+      "unique_id": "RC-116"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -13214,7 +13450,7 @@
         "test_non_constitutive_check_fails_on_authority",
         "test_non_constitutive_check_fails_on_secret"
       ],
-      "unique_id": "RC-115"
+      "unique_id": "RC-117"
     },
     {
       "authority": "ACTIVE",
@@ -13228,7 +13464,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-116"
+      "unique_id": "RC-118"
     },
     {
       "authority": "ACTIVE",
@@ -13242,7 +13478,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-117"
+      "unique_id": "RC-119"
     },
     {
       "authority": "ACTIVE",
@@ -13256,7 +13492,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-118"
+      "unique_id": "RC-120"
     },
     {
       "authority": "ACTIVE (AUTHORITY=NONE)",
@@ -13270,7 +13506,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-119"
+      "unique_id": "RC-121"
     },
     {
       "authority": "SPEC (AUTHORITY=NONE)",
@@ -13302,8 +13538,8 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "efae05bd79c20090882497fc18a79326501e180a1d713e2ca43391c04f1fdfcc",
-  "count": 121,
+  "content_hash": "68cf01234c236a433fe3603b4a12908ec30a8009ea30ec8b84f156b5a0ba1168",
+  "count": 123,
   "evidence_state": {
     "evidence_files": {
       "00-BOOK/DATA/artifacts.json": "8a49b2f9f5e8ad213d6b0ed9fe17fa1a6ae8493faf77d84ca2b7846e8c324a0c",
