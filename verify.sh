@@ -4,8 +4,24 @@
 #
 #   ./verify.sh              lint + tests/coverage + governance + meta-constitutional gate
 #                            + universal object governance + autonomous evolution gate
-#   ./verify.sh --full       also run the full registration + drift gate (register.sh --guard)
+#                            + universal object birth contract  (THE certification default)
+#   ./verify.sh --fast       developer feedback: lint + impact-selected tests + eligibility
+#   ./verify.sh --change     commit validation: impact-selected tests + every governance gate
+#   ./verify.sh --integration merge validation: whole suite + every governance gate
+#   ./verify.sh --full       release certification: --integration + registration/drift gate
 #   ./verify.sh --failfast   stop at the first failing stage
+#
+# MODE SEMANTICS. The default invocation is unchanged and remains the certification
+# contract: .github/workflows/ec1-ci.yml calls bare `./verify.sh`, so weakening the
+# default would weaken CI silently. --fast and --change are DEVELOPER modes: they run
+# pytest with --no-cov and therefore do NOT own the 90% coverage floor, which stays
+# owned by the default/--integration/--full path. A --fast or --change run is never
+# evidence of certification, and neither prints a certification claim.
+#
+# --change and --fast select tests through engine.verification_impact, which FAILS WIDE:
+# any change it cannot bound by import edges (a declaration, registry, schema, config,
+# document or unregistered file) escalates to the whole suite with coverage. So a
+# selected run is only ever a subset when the subset is provably sufficient.
 #
 # THE one repository-standard command. A brand-new terminal can run this with NO
 # manual `source .../activate` and NO tribal knowledge: it self-heals the canonical
@@ -19,20 +35,40 @@ cd "$(dirname "$0")"
 # shellcheck source=scripts/ucos-env.sh
 source "scripts/ucos-env.sh"
 
+MODE="default"
 FULL=0
 FAILFAST=0
+_mode_set=""
+_set_mode() {
+  if [ -n "$_mode_set" ] && [ "$_mode_set" != "$1" ]; then
+    ucos_die "modes are mutually exclusive: --$_mode_set and --$1"
+  fi
+  _mode_set="$1"
+  MODE="$1"
+}
 for arg in "$@"; do
   case "$arg" in
-    --full) FULL=1 ;;
+    --full) _set_mode full; FULL=1 ;;
+    --integration) _set_mode integration ;;
+    --change) _set_mode change ;;
+    --fast) _set_mode fast ;;
     --failfast) FAILFAST=1 ;;
-    -h|--help) sed -n '3,12p' "$0"; exit 0 ;;
+    -h|--help) sed -n '3,26p' "$0"; exit 0 ;;
     *) ucos_die "unknown option: $arg (see ./verify.sh --help)" ;;
   esac
 done
 
+
 # --- Stage 0: ensure the canonical environment (no activation needed) ------------
 ucos_ensure_venv
 PY="$(ucos_venv_python)"
+
+# Stage labels a --fast run skips: the governance gates. Declared as a pattern so the
+# skip lives inside run_stage and the file still contains exactly ONE `run_stage "…"`
+# line per declared stage — which is what platform/tests/test_canonical_validation_evidence.py
+# reads to derive the verification contract and its digest. A second run_stage literal
+# for the same stage would corrupt that contract.
+_FAST_SKIP_RE='registry validate|meta-constitutional conformance|universal object governance|autonomous universal evolution|evolution surface replay|universal object birth contract'
 
 STAGES_RUN=()
 STAGES_FAIL=()
@@ -40,6 +76,10 @@ STAGES_SECS=()
 VERIFY_START=$SECONDS
 run_stage() {
   local label="$1"; shift
+  if [ "$MODE" = "fast" ] && printf '%s' "$label" | grep -qE "$_FAST_SKIP_RE"; then
+    ucos_log "SKIP (--fast, no governance claim): ${label}"
+    return 0
+  fi
   ucos_log "STAGE: ${label}"
   STAGES_RUN+=("$label")
   local _start=$SECONDS
@@ -77,6 +117,10 @@ summarize_and_exit() {
   done
   printf '  %-52s %3ss\n' "TOTAL (wall clock)" "$((SECONDS - VERIFY_START))" >&2
   printf '%s\n' "=====================================================" >&2
+  if [ "$MODE" = "fast" ] || [ "$MODE" = "change" ]; then
+    printf '  %s\n' "MODE: --${MODE} (developer mode: --no-cov, coverage floor NOT evaluated)" >&2
+    printf '  %s\n' "This run is NOT evidence of certification. Run ./verify.sh for that." >&2
+  fi
   if [ "${#STAGES_FAIL[@]}" -gt 0 ]; then
     ucos_err "VERIFICATION FAILED (${#STAGES_FAIL[@]} stage(s))."
     exit 1
@@ -112,12 +156,49 @@ run_stage "prerequisite generation (knowledge · determinism · closure 1-3)" \
 # --- Stage 2: tests + coverage gate — CD-02 (pytest addopts drive --cov ≥ 90%) ---
 # Running via the venv interpreter guarantees pytest-cov is present, so the --cov
 # arguments in pyproject are always recognized.
-run_stage "pytest + coverage gate (--cov-fail-under=90)" "$PY" -m pytest
+#
+# MODE-AWARE. The default, --integration and --full paths run the whole suite under the
+# 90% floor and are the only certification-eligible paths. --fast and --change ask
+# engine.verification_impact what the change actually reaches, and run only that, with
+# --no-cov so they cannot become a second owner of the floor. The impact engine fails
+# wide: exit 2 means it could not bound the change, and this stage then runs the whole
+# suite WITH coverage rather than proceeding on a subset it cannot justify.
+# The argv is chosen by mode; the STAGE LABEL is not. There is exactly one
+# `run_stage "pytest + coverage gate (--cov-fail-under=90)"` line in this file, because
+# platform/tests/test_canonical_validation_evidence.py derives the verification contract
+# and its sha256 digest from these literals — a per-mode label would make the contract
+# depend on how the run was invoked, which is precisely what a contract must not do.
+PYTEST_ARGV=(-m pytest)
+if [ "$MODE" = "fast" ] || [ "$MODE" = "change" ]; then
+  ucos_log "impact: asking engine.verification_impact what this change reaches"
+  set +e
+  _impact_out="$("$PY" -m engine.verification_impact --quiet --print-tests 2>/dev/null)"
+  _impact_rc=$?
+  set -e
+  _selected="$(printf '%s\n' "$_impact_out" | tr -d '\r' | sed '/^$/d')"
+  if [ "$_impact_rc" -ne 0 ] || [ -z "$_selected" ]; then
+    # Fail wide. Escalation keeps the FULL argv, so an unbounded change is verified
+    # under the coverage floor exactly as the default path would verify it.
+    ucos_log "impact: scope ESCALATED — running the whole suite WITH coverage"
+    "$PY" -m engine.verification_impact || true
+  else
+    _count="$(printf '%s\n' "$_selected" | wc -l | tr -d ' ')"
+    ucos_log "impact: ${_count} test file(s) selected (--no-cov; floor not evaluated in this mode)"
+    # shellcheck disable=SC2206
+    PYTEST_ARGV=(-m pytest -o addopts= --no-cov -q ${_selected})
+  fi
+fi
+run_stage "pytest + coverage gate (--cov-fail-under=90)" "$PY" "${PYTEST_ARGV[@]}"
+
 
 # --- Stage 3: coverage report (explicit coverage tool invocation) ----------------
 # pytest-cov already produced .coverage + coverage.xml above; re-summarize with the
 # coverage CLI to prove the coverage tool itself resolves and to surface the total.
-run_stage "coverage report" "$PY" -m coverage report
+# Skipped in --fast/--change: those modes ran --no-cov, so there is no coverage data to
+# summarise and printing a stale total would be worse than printing none.
+if [ "$MODE" != "fast" ] && [ "$MODE" != "change" ]; then
+  run_stage "coverage report" "$PY" -m coverage report
+fi
 
 # --- Stage 4: governance enforcement (UMB-IMP-001 pre-registration gate) ---------
 # Read-only eligibility/validity/classification gate (same gate CI runs first).
@@ -218,12 +299,42 @@ run_stage "autonomous universal evolution (UAUE gate, every declared obligation)
 run_stage "evolution surface replay (history + 18 registers)" \
   "$PY" -m engine.uaue.gate --replay --quiet
 
+# --- Stage 6e: universal object birth contract (UOBC-000001) ----------------------
+# Identity before existence. Six identity mechanisms existed before UOBC-000001 and all
+# six identify things that ALREADY EXIST — they scan the tree and name what they find,
+# which makes identity a measurement of location that changes when the location does.
+# This gate measures the one thing none of them measures: that every object in the birth
+# ledger was identified before it was instantiated, and that no identity was replaced.
+#
+# The eight laws are each computed, never asserted: UOBC-L-01 identity precedes existence
+# (measured against the declaration's own identity_exists flags), L-02 derived never
+# counted (the ledger must not hold `category_seq`, the declared mint marker, or it would
+# be a second identity authority under CAA-INV-04's own test), L-03 identity immutability
+# (every recorded id is RE-DERIVED from its namespace and local name — a tampered id
+# fails without needing a history), L-04 no anonymous object, L-05 no temporary identity,
+# L-06 no post-creation registration, L-07 evolution under one identity, L-08 append-only
+# history.
+#
+# Read-only and hermetic: it loads the declaration and the ledger, computes, writes
+# nothing, and reads no clock and no network, so it cannot dirty the tree and cannot
+# flake. Exit 1 means a law was measured and refused; exit 2 means no verdict could be
+# reached, which is deliberately a different answer.
+run_stage "universal object birth contract (UOBC-000001, identity before existence)" \
+  "$PY" -m engine.object_birth.gate --gate --quiet
+
 # --- Stage 7 (opt-in): full registration transaction + drift gate ----------------
-# register.sh regenerates the synchronized registers and fails on drift; it mutates
-# generated DATA/REGISTRIES/CONTROL-TOWER/PORTAL, so it is opt-in for local runs.
+# READ-ONLY. Calls register.sh --observe, the verification plane: it answers "is
+# registration state valid?" by reading, and allocates nothing.
+#
+# It used to call --guard, which runs the full transaction — Phase 1 is `ukb build
+# --mint` — and only THEN checked for drift, so it CAUSED the drift it reported. A
+# --guard run over a corpus with 140 unregistered artifacts minted all 140 permanent
+# identities and emitted ~140 PORTAL pages from inside ./verify.sh --full.
+# CORPUS_REGISTRATION is now declared in mutation-governance-boundary.json as governed
+# by REG-AUTO-001 and explicitly NOT by verify.sh. Migration is an explicit transaction.
 if [ "$FULL" = "1" ]; then
-  run_stage "registration + drift gate (register.sh --guard)" \
-    env PYTHON="$PY" bash 00-BOOK/tools/register.sh --guard
+  run_stage "registration observation (register.sh --observe, read-only)" \
+    env PYTHON="$PY" bash 00-BOOK/tools/register.sh --observe
 fi
 
 summarize_and_exit

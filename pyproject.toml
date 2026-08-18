@@ -216,6 +216,19 @@ addopts = [
   "--cov=engine.knowledge",
   "--cov=engine.graph",
   "--cov=engine.context",
+  # CMG-000002 — the Universal Temporal Existence Contract, as executable law. It enters
+  # the denominator because it ships with engine/tests/unit/test_temporal_contract.py, and
+  # because a temporal contract nobody measures is how UTC got hard-coded in the first
+  # place (00-BOOK/tools/ukb.py::_now, gap G1 in the identity-universe determination).
+  "--cov=engine.temporal",
+  # UOBC-000001 — the Universal Object Birth Contract: identity derived before the
+  # artifact exists. Measured for the same reason, and because its eight law checks are
+  # the only executable statement of "no anonymous objects, no post-creation registration".
+  "--cov=engine.object_birth",
+  # The Verification Impact Engine selects which verification a change requires, so it
+  # is measured under the same floor as everything it selects for. An unmeasured
+  # selector could narrow a run on a code path nothing exercised.
+  "--cov=engine.verification_impact",
   # UCOS-CEU-001 — the Constitutional Existence substrate enters the denominator on the
   # same condition every other capability does: it ships with engine/tests/ceu/, so the
   # percentage measures a capability something actually exercises.

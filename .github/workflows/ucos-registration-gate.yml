@@ -57,4 +57,4 @@ jobs:
         run: python3 00-BOOK/tools/ukb.py enforce --pre
 
       - name: Atomic Registration Transaction + drift gate (REG-AUTO-001 / UMB-IMP-001)
-        run: bash 00-BOOK/tools/register.sh --guard
+        run: bash 00-BOOK/tools/register.sh --observe

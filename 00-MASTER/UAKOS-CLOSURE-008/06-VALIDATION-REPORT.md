@@ -59,7 +59,7 @@ The canonical layer records the deterministic RESULT of the gate. The execution 
 | command | `./verify.sh` |
 | invocation | default (the opt-in --full registration stage is outside this contract) |
 | contract artifacts | `verify.sh`, `scripts/ucos-env.sh` |
-| declared-stage digest (sha256) | `29dbe4e9999f44e6` |
+| declared-stage digest (sha256) | `86a04329f95d5edb` |
 | result | **PASS** |
 
 | Gate (declared contract stage) | Result |
@@ -74,6 +74,7 @@ The canonical layer records the deterministic RESULT of the gate. The execution 
 | universal object governance (UGA-INV-01..10) | PASS |
 | autonomous universal evolution (UAUE gate, every declared obligation) | PASS |
 | evolution surface replay (history + 18 registers) | PASS |
+| universal object birth contract (UOBC-000001, identity before existence) | PASS |
 
 Execution evidence `UAKOS-CLOSURE-008/EV-VERIFY-001` (EXECUTION_TRANSCRIPT, NON_CANONICAL) is retained in the archive `00-MASTER/UAKOS-CLOSURE-008/evidence/` as `verify.log`. The archive is preserved and published, and is NOT an input to any canonical artifact: no hash, byte count, timing or captured line from it enters this report.
 

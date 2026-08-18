@@ -2,9 +2,9 @@
   "aeos_verdict": "FOUNDATION-READY — AEOS may begin as a separately authorized program; NOT begun here.",
   "artifact_id": "UCOS-RIE-SNAPSHOT",
   "authority": "NONE (derived truth)",
-  "capability_count": 123,
+  "capability_count": 126,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "24084f66c65af6d05f0522f37297a0de0b89a061eb9ffc652958f9524b9d2c79",
+  "content_hash": "88c6d13e6ef109dd4ab4e5b035aeed5c5e1f608f2051ebeb068eba86c28ced95",
   "dimension_index_reconciled_pct": 26.7,
   "drift": {
     "baseline": false,

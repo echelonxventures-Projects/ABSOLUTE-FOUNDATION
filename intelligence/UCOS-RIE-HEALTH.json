@@ -24,11 +24,11 @@
         "test_functions": 887
       },
       "engine": {
-        "loc": 102666,
+        "loc": 105424,
         "root": "engine",
-        "source_files": 363,
-        "test_files": 274,
-        "test_functions": 4028
+        "source_files": 379,
+        "test_files": 277,
+        "test_functions": 4212
       },
       "infrastructure": {
         "loc": 22599,
@@ -48,8 +48,8 @@
         "loc": 125109,
         "root": "platform",
         "source_files": 446,
-        "test_files": 342,
-        "test_functions": 5567
+        "test_files": 343,
+        "test_functions": 5578
       },
       "service": {
         "loc": 20464,
@@ -59,10 +59,10 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 333971,
-    "total_tests": 13542
+    "total_loc": 336729,
+    "total_tests": 13737
   },
-  "content_hash": "16f9a767721b8eabb3c7f1dc60851a0a9e8b2cf2996a72f6bfc47ee5af4d4645",
+  "content_hash": "faa337916776f285c3fd365acd73e61bc408481e1ae90bb621a6837fd60a727a",
   "corpus": {
     "artifacts": 1233,
     "edges": 12899,

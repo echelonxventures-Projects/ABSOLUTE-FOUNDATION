@@ -7,7 +7,10 @@
     "home": "engine/uckp/law.py",
     "role": "EVIDENCE",
     "relation": "PROJECTION",
-    "articles": ["UCKP-ART-12", "UCKP-ART-16"],
+    "articles": [
+      "UCKP-ART-12",
+      "UCKP-ART-16"
+    ],
     "binding": "00-BOOK/DATA/constitutional-authority-alignment.json",
     "effect": "This record owns the deterministic result of one named validation, kept so the act can be reviewed after the fact. It may never own the standard it validated against: a record of a measurement is not the law the measurement was taken under."
   },
@@ -32,7 +35,7 @@
       "verify.sh",
       "scripts/ucos-env.sh"
     ],
-    "stages_digest": "29dbe4e9999f44e65ecf33d0edfb600b6aec340c7147d2f894be5772f33c95cd",
+    "stages_digest": "86a04329f95d5edb63e5629fa7a6b07c2b6e8a5bce65e602e2301969a96e8de4",
     "stages_digest_definition": "sha256 over the newline-joined stage names this contract declares, read from verify.sh. A gate added to the contract and not to this record fails the record's own test."
   },
   "result": "PASS",
@@ -75,6 +78,10 @@
     },
     {
       "stage": "evolution surface replay (history + 18 registers)",
+      "result": "PASS"
+    },
+    {
+      "stage": "universal object birth contract (UOBC-000001, identity before existence)",
       "result": "PASS"
     }
   ],

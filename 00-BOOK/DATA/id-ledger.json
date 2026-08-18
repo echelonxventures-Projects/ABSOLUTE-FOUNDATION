@@ -8963,11 +8963,11 @@
     "STAGE0": 1,
     "DET": 2,
     "CONFIG": 30,
-    "DATAOBJ": 116,
-    "EXDOC": 2566,
+    "DATAOBJ": 118,
+    "EXDOC": 2574,
     "TOOLING": 36,
-    "ENGINE": 1218,
-    "TESTOBJ": 814,
+    "ENGINE": 1234,
+    "TESTOBJ": 818,
     "OBS": 7
   },
   "discovered_volumes": {
@@ -53420,6 +53420,186 @@
       "object_class": "EXECUTABLE_OBJECT",
       "category": "ENGINE",
       "first_seen": "commit:1f869865d5ff"
+    },
+    "00-MASTER/UOBC-000001/birth-ledger.json": {
+      "universal_id": "UCOS-DATAOBJ-000117",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "00-MASTER/UOBC-000001/uobc-birth-contract.json": {
+      "universal_id": "UCOS-DATAOBJ-000118",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "CMG-000012-IDENTITY-AND-OWNERSHIP-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002567",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "SEMANTIC-LIFECYCLE-RECONCILIATION-REGISTER.md": {
+      "universal_id": "UCOS-EXDOC-002568",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "UNIVERSAL-IDENTITY-UNIVERSE-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002569",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "UNIVERSAL-LIFECYCLE-INHERITANCE-RECONCILIATION-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002570",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/object_birth/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001219",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/object_birth/birth.py": {
+      "universal_id": "UCOS-ENGINE-001220",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/object_birth/contract.py": {
+      "universal_id": "UCOS-ENGINE-001221",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/object_birth/gate.py": {
+      "universal_id": "UCOS-ENGINE-001222",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/object_birth/ledger.py": {
+      "universal_id": "UCOS-ENGINE-001223",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/object_birth/model.py": {
+      "universal_id": "UCOS-ENGINE-001224",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/temporal/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001225",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/temporal/coordinate.py": {
+      "universal_id": "UCOS-ENGINE-001226",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/temporal/facets.py": {
+      "universal_id": "UCOS-ENGINE-001227",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/temporal/operations.py": {
+      "universal_id": "UCOS-ENGINE-001228",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/tests/unit/test_object_birth.py": {
+      "universal_id": "UCOS-TESTOBJ-000815",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/tests/unit/test_temporal_contract.py": {
+      "universal_id": "UCOS-TESTOBJ-000816",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "UNIVERSAL-EVOLUTION-MODEL-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002571",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "UNIVERSAL-IDENTITY-MIGRATION-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002572",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/tests/unit/test_verification_impact.py": {
+      "universal_id": "UCOS-TESTOBJ-000817",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/verification_impact/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001229",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/verification_impact/__main__.py": {
+      "universal_id": "UCOS-ENGINE-001230",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/verification_impact/changes.py": {
+      "universal_id": "UCOS-ENGINE-001231",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/verification_impact/cli.py": {
+      "universal_id": "UCOS-ENGINE-001232",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/verification_impact/graph.py": {
+      "universal_id": "UCOS-ENGINE-001233",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "engine/verification_impact/impact.py": {
+      "universal_id": "UCOS-ENGINE-001234",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "GOVERNED-EVOLUTION-STATE-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002573",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "MUTATION-OWNERSHIP-DISCOVERY-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002574",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:5eb1a704caf3"
+    },
+    "platform/tests/test_verification_purity.py": {
+      "universal_id": "UCOS-TESTOBJ-000818",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:5eb1a704caf3"
     }
   },
   "by_observation": {

@@ -20,6 +20,7 @@
 #
 # Usage:
 #   00-BOOK/tools/register.sh                 # run the full registration transaction
+#   00-BOOK/tools/register.sh --observe        # READ-ONLY: is registration state valid?
 #   00-BOOK/tools/register.sh --guard         # transaction + drift gate (CI/pre-commit)
 #   00-BOOK/tools/register.sh --strict         # also fail on OTHER/MISC-classified artifacts
 #   00-BOOK/tools/register.sh --install-hooks  # install the opt-in git pre-commit gate
@@ -27,6 +28,19 @@
 # --guard additionally fails (exit 3) if, after registration, the generated DATA/
 # REGISTRIES/CONTROL-TOWER/PORTAL differ from what is committed — proving an
 # artifact was created or changed without its registration being committed.
+#
+# TWO PLANES. --observe answers "is registration state valid?"; the transaction answers
+# "perform governed registration". They are different questions and must be different
+# commands, because the transaction MUTATES: Phase 1 is `ukb build --mint`, which
+# allocates permanent Universal IDs. CORPUS_REGISTRATION is declared in
+# 00-BOOK/DATA/mutation-governance-boundary.json as governed by REG-AUTO-001 — this
+# script — and explicitly NOT by verify.sh.
+#
+# --observe does NOT regenerate derived views in order to compare them. Regeneration
+# writes, and a verification path that writes is not a verification path. Detecting
+# latent divergence between committed derived views and a fresh derivation is an
+# evolution-plane concern, reached through `ukb.py build` in observation mode.
+# See GOVERNED-EVOLUTION-STATE-DETERMINATION.md.
 #
 # Standard tooling only: bash + python3 + git.
 
@@ -38,10 +52,12 @@ REPO="$(dirname "$BOOK_DIR")"
 PY="${PYTHON:-python3}"
 
 GUARD=0
+OBSERVE=0
 STRICT=0
 INSTALL_HOOKS=0
 for arg in "$@"; do
   case "$arg" in
+    --observe) OBSERVE=1 ;;
     --guard) GUARD=1 ;;
     --strict) STRICT=1 ;;
     --install-hooks) INSTALL_HOOKS=1 ;;
@@ -75,6 +91,91 @@ EOF
   exit 0
 fi
 
+# ==============================================================================
+# VERIFICATION PLANE — --observe. Read-only. Runs BEFORE the lock, because it takes
+# no lock: it mutates nothing, so it can never race the append-only ledger.
+#
+# Allowed here: read, compare, validate, verify, report. Forbidden: mint, allocate,
+# write a register, regenerate a derived view, update lineage, migrate.
+# ==============================================================================
+if [ "$OBSERVE" = "1" ]; then
+  echo "== REG-AUTO-001 Registration OBSERVATION (verification plane — READ-ONLY) =="
+  echo "   repo: $REPO"
+  echo "   this command allocates no identity and writes nothing under version control"
+  RC=0
+
+  echo "-- Observe 1/4: ukb enforce --pre (eligibility · validity · classification)"
+  "$PY" "$HERE/ukb.py" enforce --pre $STRICT_FLAG || RC=4
+
+  echo "-- Observe 2/4: ukb validate (structural + schema invariants)"
+  "$PY" "$HERE/ukb.py" validate || RC=2
+
+  echo "-- Observe 3/4: ukbx validate (signal ledger integrity)"
+  "$PY" "$HERE/ukbx.py" validate || RC=2
+
+  echo "-- Observe 4/4: ukbx twin --check (digital-twin certification)"
+  "$PY" "$HERE/ukbx.py" twin --check || RC=2
+
+  # Uncommitted synchronized state. WORKTREE-vs-INDEX only: a staged register change is
+  # the registration being committed alongside the artifact that caused it, which is what
+  # REG-AUTO-001 §7 requires of an atomic transaction.
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    DIRTY="$(git status --porcelain -- \
+        00-BOOK/DATA 00-BOOK/REGISTRIES 00-BOOK/CONTROL-TOWER 00-BOOK/PORTAL 2>/dev/null \
+        | awk '{ if (substr($0,1,2) == "??" || substr($0,2,1) != " ") print }' || true)"
+    if [ -n "$DIRTY" ]; then
+      echo "" >&2
+      echo "REGISTRATION DRIFT DETECTED — synchronized state is uncommitted:" >&2
+      echo "$DIRTY" >&2
+      echo "Required action: stage the regenerated registers and recommit, or revert them" >&2
+      echo "if they were produced unintentionally." >&2
+      RC=3
+    fi
+  fi
+
+  # Identity gaps. A gap is a REG-AUTO-001 L2 violation ("Created ≡ Registered"). A gap
+  # a determination has located and scheduled is governed; an undetermined gap is not.
+  # Governed gaps are reported, undetermined gaps block.
+  GAPS="$("$PY" - <<'GAPPY'
+import json, sys, os
+sys.path.insert(0, os.path.join("00-BOOK", "tools"))
+try:
+    import ukb
+    eligible = [rel for _a, rel in ukb._iter_files()]
+    reg = {a["path"] for a in json.load(open("00-BOOK/DATA/artifacts.json"))["artifacts"]}
+    print(len([p for p in eligible if p not in reg]))
+except Exception:
+    print("-1")
+GAPPY
+)"
+  DET="UNIVERSAL-IDENTITY-MIGRATION-DETERMINATION.md"
+  if [ "$GAPS" != "0" ] && [ "$GAPS" != "-1" ]; then
+    echo "" >&2
+    echo "IDENTITY GAP DETECTED" >&2
+    echo "  Eligible but absent from the corpus register : $GAPS" >&2
+    echo "  Missing  : CORPUS_REGISTRATION (by_path allocation + artifacts.json entry)" >&2
+    echo "  Note     : these artifacts already hold UGA identity — they are not anonymous" >&2
+    if [ -f "$REPO/$DET" ]; then
+      echo "  Governed by: $DET" >&2
+      echo "  Required action: run the REG-AUTO-001 transaction (register.sh) to reconcile" >&2
+      echo "  Status   : REPORTED — the gap is determined, not silent" >&2
+    else
+      echo "  Determination: ABSENT" >&2
+      echo "  Required action: create an Evolution Determination enumerating the" >&2
+      echo "                   population, then run the REG-AUTO-001 transaction" >&2
+      echo "  Status   : BLOCKING — an undetermined gap is an ungoverned gap" >&2
+      RC=5
+    fi
+  fi
+
+  if [ "$RC" = "0" ]; then
+    echo "OBSERVATION PASSED — registration state valid; nothing minted, nothing written."
+  else
+    echo "OBSERVATION FAILED (exit $RC) — see remediation above." >&2
+  fi
+  exit "$RC"
+fi
+
 # --- Re-entrancy guard --------------------------------------------------------
 # Registration regenerates .md pages under PORTAL/REGISTRIES; if an authoring hook
 # fires on those creates it would re-enter this script. A lock makes any nested
@@ -105,8 +206,12 @@ echo "-- Phase 0/10: ukb enforce --pre (pre-registration eligibility/validity/cl
 
 # --- Phase 1 — Foundation registration (Artifact Registry + Execution Registry +
 #               Control Tower baseline + Traceability/Knowledge Graph + Deps) -----
-echo "-- Phase 1/10: ukb build (registry, pages, graph, control-tower baseline)"
-"$PY" "$HERE/ukb.py" build            || fail "ukb build failed" 1
+# --mint is EXPLICIT here and nowhere else. This is the REG-AUTO-001 transaction, the
+# declared authority for CORPUS_REGISTRATION mutation, so it is the one place permitted
+# to allocate permanent Universal IDs and page ranges. Without the flag `ukb build`
+# observes. The flag is what makes minting a decision rather than a side effect.
+echo "-- Phase 1/10: ukb build --mint (allocate identity; registry, pages, graph, control tower)"
+"$PY" "$HERE/ukb.py" build --mint     || fail "ukb build failed" 1
 
 # --- Phase 2 — State synchronization (UMB-IMP-004): discover connectors, detect
 #               change since cursor, execute, verify, audit, recover. `--due`

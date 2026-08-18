@@ -7,16 +7,17 @@
     "home": "engine/uckp/law.py",
     "role": "EXECUTION",
     "relation": "PROJECTION",
-    "articles": ["UCKP-ART-10", "UCKP-ART-16"],
+    "articles": [
+      "UCKP-ART-10",
+      "UCKP-ART-16"
+    ],
     "binding": "00-BOOK/DATA/constitutional-authority-alignment.json",
     "effect": "This artifact already said of itself that it creates no authority and governs nothing. UCKP-ART-10 — execution never owns knowledge — is the article that sentence is true UNDER. It owns which mutation classes exist and which authority disposes of each; it may never own knowledge."
   },
   "constitutional_basis": "UCKP-LAW-0001 (engine/uckp/law.py), UCOS-CAA-001, UCOS-CMG-EXEC-000001 Requirement 004, GOV-005, UCOS-CL-016",
   "schema": "ucos-mutation-governance-boundary",
   "version": "1.0.0",
-
   "determination": "OPTION B — SOURCE MUTATIONS ARE OUTSIDE THE CONSTITUTIONAL MUTATION GATEWAY",
-
   "why_this_determination": [
     "The question was live because a source mutation (be46a300, touching intelligence/rie/evidence.py,",
     "scripts/ucos-env.sh and .gitignore) was applied with no gateway record, and the closure matrix",
@@ -41,7 +42,6 @@
     "through a chain that had never been written down. That absence is what made the earlier bypass",
     "unanswerable. It is written down here."
   ],
-
   "authorities": [
     {
       "authority": "UCOS-CMG-EXEC-000001 — Constitutional Mutation Gateway",
@@ -57,14 +57,28 @@
         "the working tree",
         "the git object database"
       ],
-      "lifecycle": ["proposal", "evidence", "validation", "verification", "certification", "registration", "truth_update"],
+      "lifecycle": [
+        "proposal",
+        "evidence",
+        "validation",
+        "verification",
+        "certification",
+        "registration",
+        "truth_update"
+      ],
       "enforcement": "sole producer of a clean StateSeal; engine.constitution.state refuses the five truth operations without one"
     },
     {
       "authority": "pre-commit hook",
       "implementation": "scripts/ucos-env.sh::ucos_ruff_gate",
-      "governs": ["the INTENDED MUTATION boundary — tracked/staged source content at commit time"],
-      "does_not_govern": ["untracked filesystem debris", "generated artifact identity", "repository-wide state"],
+      "governs": [
+        "the INTENDED MUTATION boundary — tracked/staged source content at commit time"
+      ],
+      "does_not_govern": [
+        "untracked filesystem debris",
+        "generated artifact identity",
+        "repository-wide state"
+      ],
       "enforcement": "blocks the commit"
     },
     {
@@ -76,7 +90,11 @@
         "the coverage quality gate (--cov-fail-under=90)",
         "governance enforcement, registry schema validation, meta-constitutional conformance"
       ],
-      "does_not_govern": ["filesystem contamination", "generated artifact convergence", "clone reproducibility"],
+      "does_not_govern": [
+        "filesystem contamination",
+        "generated artifact convergence",
+        "clone reproducibility"
+      ],
       "enforcement": "non-zero exit on any failing stage"
     },
     {
@@ -88,68 +106,117 @@
         "duplicate capability (GATE-09)",
         "validation obligations (GATE-04)"
       ],
-      "does_not_govern": ["source correctness", "test outcomes", "convergence over time"],
+      "does_not_govern": [
+        "source correctness",
+        "test outcomes",
+        "convergence over time"
+      ],
       "enforcement": "rib.json:gate CLOSED"
     },
     {
       "authority": "UCOS-AEE-001 — Autonomous Evolution Engine",
       "implementation": "00-MASTER/UCOS-AEE-001/aee_engine.py",
-      "governs": ["convergence of the observation vector across iterations (CONV-01..07)"],
-      "does_not_govern": ["byte-level repository closure — explicitly disclaimed in its own certification (AEE-F-002)"],
+      "governs": [
+        "convergence of the observation vector across iterations (CONV-01..07)"
+      ],
+      "does_not_govern": [
+        "byte-level repository closure — explicitly disclaimed in its own certification (AEE-F-002)"
+      ],
       "enforcement": "converged=false, gate_exit=1"
     },
     {
       "authority": "Phase 8 — fixed-point verification",
       "implementation": "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py",
-      "governs": ["byte-level idempotence of the canonical chain across consecutive rounds"],
-      "does_not_govern": ["reproducibility in a different environment"],
+      "governs": [
+        "byte-level idempotence of the canonical chain across consecutive rounds"
+      ],
+      "does_not_govern": [
+        "reproducibility in a different environment"
+      ],
       "enforcement": "fixed point not proven"
     },
     {
       "authority": "Phase 9 — pristine-clone certification",
       "implementation": "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py",
-      "governs": ["reproduction of canonical artifacts from a clean clone of the certified commit"],
-      "does_not_govern": ["environmental observational outputs explicitly classified non-canonical"],
+      "governs": [
+        "reproduction of canonical artifacts from a clean clone of the certified commit"
+      ],
+      "does_not_govern": [
+        "environmental observational outputs explicitly classified non-canonical"
+      ],
       "enforcement": "canonical variance non-zero"
     }
   ],
-
   "mutation_classes": [
     {
       "class": "CONSTITUTIONAL_TRUTH",
-      "examples": ["Population amendment", "ConstitutionalMetadata creation"],
+      "examples": [
+        "Population amendment",
+        "ConstitutionalMetadata creation"
+      ],
       "governed_by": "UCOS-CMG-EXEC-000001"
     },
     {
       "class": "SOURCE",
-      "examples": ["engine/**/*.py", "platform/**/*.py", "intelligence/**/*.py", "scripts/*.sh", "pyproject.toml"],
+      "examples": [
+        "engine/**/*.py",
+        "platform/**/*.py",
+        "intelligence/**/*.py",
+        "scripts/*.sh",
+        "pyproject.toml"
+      ],
       "governed_by": "pre-commit → verify.sh → UCOS-RIB-001 → UCOS-AEE-001 → Phase 8 → Phase 9"
     },
     {
       "class": "GENERATED_ARTIFACT",
-      "examples": ["intelligence/UCOS-RIE-*.json", "00-MASTER/UCOS-RIB-001/*.md", "00-MASTER/UCOS-AEE-001/aee.json"],
+      "examples": [
+        "intelligence/UCOS-RIE-*.json",
+        "00-MASTER/UCOS-RIB-001/*.md",
+        "00-MASTER/UCOS-AEE-001/aee.json"
+      ],
       "governed_by": "UCOS-GENERATED-ARTIFACT-REGISTRY-001 → producer → Phase 8 → Phase 9"
     },
     {
       "class": "EXCLUSION",
-      "examples": [".gitignore"],
+      "examples": [
+        ".gitignore"
+      ],
       "governed_by": "UCOS-EXCLUSION-REGISTER-001 → UCOS-RIB-001 GATE-12"
     },
     {
       "class": "REPOSITORY_STATE",
-      "examples": [".git/refs", ".git/index", "working tree contamination"],
+      "examples": [
+        ".git/refs",
+        ".git/index",
+        "working tree contamination"
+      ],
       "governed_by": "UCOS-RIB-001 GATE-02 / GATE-12"
+    },
+    {
+      "class": "CORPUS_REGISTRATION",
+      "examples": [
+        "00-BOOK/DATA/id-ledger.json (by_path allocation, category_seq, page_cursor)",
+        "00-BOOK/DATA/artifacts.json (corpus registration entries)",
+        "Universal ID + page-range allocation for a newly eligible artifact"
+      ],
+      "governed_by": "REG-AUTO-001 → 00-BOOK/tools/register.sh (ukb.py build --mint)",
+      "$why_this_class_was_missing": "Corpus registration was not a declared class at all, so this register's own invariant 'no mutation class is ungoverned' was VACUOUSLY satisfied for it. id-ledger.json is neither an authored input nor a generated output: it carries no generated_at stamp, it never appears as a canonical_path in generated-artifact-registry.json, and allocate() derives sequence numbers from arrival order, a monotone page cursor and a wall clock — so it cannot be recomputed from the tree. Because no authority claimed the class, nothing forbade a verification command from performing it, and register.sh --guard duly minted 140 permanent identities from inside ./verify.sh --full.",
+      "$mutation_is_explicit": "ukb.py build now OBSERVES by default and allocates only under --mint, which register.sh Phase 1 passes and no other caller does. The pattern is taken verbatim from uga_engine.py, which already threads mint: bool through epoch1_identity and build so that cmd_gate can call build(mint=False).",
+      "does_not_govern": [
+        "verify.sh — the verification plane observes CORPUS_REGISTRATION and may never perform it",
+        "any ./verify.sh mode (--fast, --change, --integration, --full)",
+        "constitutional identity (urn:ucos:ucko:…), which is UCKP-ART-05 and is derived, never allocated"
+      ]
     }
   ],
-
   "invariants": [
     "Every mutation class names exactly one governing authority chain.",
     "No mutation class is claimed by two authorities as primary.",
     "No mutation class is ungoverned — there is no class whose governed_by is empty.",
     "Every named authority resolves to an implementation that exists in the tree.",
-    "The EXCLUSION class is governed by a register, never by the exclusion mechanism itself — this is the UCOS-CL-001 correction stated as a boundary rule."
+    "The EXCLUSION class is governed by a register, never by the exclusion mechanism itself — this is the UCOS-CL-001 correction stated as a boundary rule.",
+    "CORPUS_REGISTRATION is performed only under an explicit --mint invocation from the REG-AUTO-001 transaction; a verification path that allocates a Universal ID is a boundary violation regardless of which flag it was reached through."
   ],
-
   "recurrence_prevention": [
     "The bypass at be46a300 was not a rule violation; it was an undeclared boundary. A source",
     "mutation had no gateway to take and no written statement that it did not need one, so the",

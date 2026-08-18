@@ -7,7 +7,7 @@
 #   make bootstrap     create/repair the canonical venv + pinned toolchain, validate it
 #   make doctor        report + validate the environment (Python/pytest/pytest-cov/coverage/ruff)
 #   make verify        THE canonical gate: lint + tests/coverage + governance enforcement
-#   make verify-full   verify + full registration/drift gate (register.sh --guard)
+#   make verify-full   verify + read-only registration observation (register.sh --observe)
 #   make repo-ops      complete repository operational verification (EPIC-PLAT-003, T5)
 #   make lint          ruff only
 #   make test          pytest + coverage gate only
@@ -2002,3 +2002,35 @@ uaue-render: bootstrap-quiet
 uaue-replay: bootstrap-quiet
 	@$(PY) -m engine.uaue.gate --replay --quiet
 	@echo "uaue-replay: the committed surface is the product of the declaration"
+
+
+# ===========================================================================
+# UOBC-000001 — Universal Object Birth Contract
+#
+# AUTHORITY = NONE (DERIVED TRUTH). This programme mints no repository serial,
+# opens no registry, declares no lifecycle and consumes no counter. Identity is
+# DERIVED by delegating to engine/uckp/identity.py, which the repository's own
+# authority alignment declares `role: SUPREME — this IS UCKP-ART-05`. Under that
+# file's second_authority_test — "a mint is recognised by the counter it advances",
+# marker `category_seq` — a derived-identity ledger cannot be a second mint.
+#
+# Stdlib only; no wall clock, no network, no version-control observation; writes
+# nothing outside 00-MASTER/UOBC-000001/ (the gate writes nothing at all).
+# Additive only — no existing target, recipe or dependency above is altered.
+# Exit semantics: 0 OPEN, 1 CLOSED (a law was refused), 2 FAULT (no verdict).
+# ===========================================================================
+.PHONY: birth birth-gate birth-json
+
+# birth: the human-readable measurement — every law, every refusal named.
+birth: bootstrap-quiet
+	@$(PY) -m engine.object_birth.gate
+
+# birth-gate: fail-closed. Wired into ./verify.sh as Stage 6e, so deleting the
+# stage closes the gate rather than silently unbinding the eight laws.
+birth-gate: bootstrap-quiet
+	@$(PY) -m engine.object_birth.gate --gate --quiet
+	@echo "birth-gate: no object exists without identity, and no identity was replaced"
+
+# birth-json: the machine-readable report, for a consumer that needs the law table.
+birth-json: bootstrap-quiet
+	@$(PY) -m engine.object_birth.gate --json

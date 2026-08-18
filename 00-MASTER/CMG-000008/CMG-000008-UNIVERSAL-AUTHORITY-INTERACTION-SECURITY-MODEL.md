@@ -13,8 +13,11 @@
 ## LIFECYCLE METADATA
 
 **Governance Inheritance:**
-- Universal Recursive Constitutional Lifecycle Governance v1.0
-- CMG-000001 Constitutional Meta-Governance v1.0
+- UCIC-001 Universal Capability Implementation Contract v1.0 — lifecycle owner
+- UCL-000001 Universal Constitutional Lifecycle — derived lifecycle truth (stage graph projection; not supreme authority)
+- CEP-009 Constitutional Amendment & Evolution Constitution — governed evolution channel
+- CMG-000001 Constitutional Meta-Governance v1.0 — law owner
+- *(superseded alias, retained for lineage: "Universal Recursive Constitutional Lifecycle Governance v1.0")*
 
 **Lifecycle Compliance:**
 - ✓ Inherits Universal Lifecycle
@@ -982,7 +985,7 @@ Different contexts require different authentication mechanisms. Single authentic
 
 **Primary Owner:** CMG Foundation
 **Constitutional Authority:** CMG-000001
-**Lifecycle Authority:** Universal Recursive Constitutional Lifecycle Governance
+**Lifecycle Authority:** UCIC-001 (owner) — projected as derived truth by UCL-000001
 
 ### 9.2 Amendment Process
 
@@ -1003,7 +1006,7 @@ Amendments follow CMG-000001 constitutional amendment process.
 
 ### 9.3 Evolution Authority
 
-Evolution governed by Universal Recursive Constitutional Lifecycle Governance v1.0.
+Evolution governed by the Article-14 perpetual evolution cycle (engine/uckp/evolution.py) under CEP-009 amendment authority.
 
 No independent evolution authority.
 
@@ -1249,7 +1252,7 @@ Per CMG-000011 evidence model.
 ### 14.1 Lifecycle Compliance
 
 ✓ **Self-Inheritance Confirmed**
-  - Inherits Universal Recursive Constitutional Lifecycle Governance v1.0
+  - Inherits UCIC-001 capability lifecycle; UCL-000001 stage graph is derived truth
   - No independent lifecycle defined
   - Lifecycle authority: CMG Foundation
 
@@ -1298,7 +1301,7 @@ Per CMG-000011 evidence model.
 ✓ **Ownership Defined**
   - Primary: CMG Foundation
   - Constitutional Authority: CMG-000001
-  - Lifecycle Authority: Universal Recursive Constitutional Lifecycle Governance
+  - Lifecycle Authority: UCIC-001 (owner); UCL-000001 (derived); law owner CMG-000001
 
 ✓ **Registry Ownership Defined**
   - Security evidence registry: This document
@@ -1371,7 +1374,7 @@ CMG-000008 — Universal Authority Interaction Security Model has achieved:
 ✓ **Dependency Closure** with all dependencies baselined
 ✓ **Boundary Integrity** with clear separation of concerns
 ✓ **Evidence Completeness** per CMG-000011
-✓ **Lifecycle Compliance** per Universal Recursive Constitutional Lifecycle Governance
+✓ **Lifecycle Compliance** per UCIC-001, measured by UCL gate G-25 (CK-UCL, CK-UCL-SELF)
 ✓ **Governance Alignment** per CMG-000001
 
 ### 15.2 Evolution Baseline Status
@@ -1386,7 +1389,7 @@ Lifecycle State:     ACTIVE
 Evolution State:     ENABLED
 Baseline Date:       2026-08-17
 Scope:               0 → Ω∞
-Governance:          Universal Recursive Constitutional Lifecycle Governance
+Governance:          UCIC-001 (owner) · UCL-000001 (derived) · CMG-000001 (law)
 Dependencies:        ALL SATISFIED
 Boundaries:          ALL ENFORCED
 Evolution:           PERMITTED within constitutional constraints

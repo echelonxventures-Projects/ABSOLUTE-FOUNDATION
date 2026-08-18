@@ -873,11 +873,26 @@ def load_ledger():
                                     "volume_seq": 0, "by_execution": {}})
 
 
-def allocate(ledger, relpath, category, page_count):
-    """Return (universal_id, page_start, page_count), allocating append-only."""
+def allocate(ledger, relpath, category, page_count, mint=True):
+    """Return (universal_id, page_start, page_count), allocating append-only.
+
+    ``mint`` is the verification/evolution boundary. Allocating a permanent identifier
+    is an EVOLUTION act; regenerating a derived view is an OBSERVATION. Identity is born
+    by intent, never discovered by a checker, so allocation must be requested and can
+    never be a side effect. The same parameter is threaded through
+    ``uga_engine.py::epoch1_identity`` and ``build`` for this reason.
+
+    With ``mint=False`` an already-allocated path resolves exactly as before, and an
+    unallocated path returns **None** instead of consuming a sequence number; the caller
+    skips it. Governance: ``CORPUS_REGISTRATION`` in
+    ``00-BOOK/DATA/mutation-governance-boundary.json``. Rationale:
+    ``GOVERNED-EVOLUTION-STATE-DETERMINATION.md``.
+    """
     entry = ledger["by_path"].get(relpath)
     if entry:
         return entry["universal_id"], entry["page_start"], entry["page_count"]
+    if not mint:
+        return None
     # allocate a new immutable identifier for this category
     if relpath == C.BOOK_ROOT_PATH:
         uid = C.BOOK_ROOT_ID
@@ -906,6 +921,10 @@ def upn(n: int) -> str:
 
 
 def cmd_build(args):
+    # Observation is the DEFAULT: no invocation may mutate canonical identity state by
+    # omission. Minting is reserved to the REG-AUTO-001 transaction, which requests it.
+    mint = bool(getattr(args, "mint", False))
+    unminted = []          # observation mode: eligible paths that hold no identity yet
     ledger = load_ledger()
     # Seed the in-process discovered-volume map from the append-only ledger so
     # metadata-declared volumes keep stable serials across builds (UMB-IMP-001).
@@ -928,7 +947,9 @@ def cmd_build(args):
         # Infinite expansion: a metadata-declared volume that is not one of the
         # permanent C.VOLUMES is auto-registered append-only into the ledger and
         # emitted, so unlimited future volumes work without editing config.
-        if volume not in _known_vol_ids and volume not in _DISCOVERED_VOLUMES:
+        if volume not in _known_vol_ids and volume not in _DISCOVERED_VOLUMES and mint:
+            # Discovering a volume serial is an allocation against the same
+            # append-only ledger, so it is gated by mint for the same reason.
             ledger["volume_seq"] = ledger.get("volume_seq", 0) + 1
             serial = _max_serial + ledger["volume_seq"]
             md = read_metadata(abspath)
@@ -942,7 +963,14 @@ def cmd_build(args):
             }
             ledger["discovered_volumes"] = _DISCOVERED_VOLUMES
         pc = page_count_for(abspath, rel)
-        uid, pstart, pc = allocate(ledger, rel, category, pc)
+        _alloc = allocate(ledger, rel, category, pc, mint=mint)
+        if _alloc is None:
+            # Observation mode: this path holds no identity yet, so it is neither minted
+            # nor projected. An unregistered artifact is absent from the derived views by
+            # the same rule that makes it absent from the committed ones.
+            unminted.append(rel)
+            continue
+        uid, pstart, pc = _alloc
         # UMB-IMP-003: capture the self-declared version VERBATIM (scheme-agnostic).
         # The schema-constrained artifact `version` field is populated only when the
         # declared token is a valid semver; the raw token is preserved in the ledger
@@ -1193,6 +1221,10 @@ def cmd_build(args):
     # created as regenerated views, never as an authoritative store (UMB-008 §3;
     # UMB-010 §1). Idempotent: a no-op rebuild appends no snapshot and spawns no
     # git process.
+    # record_snapshots appends to ledger["history"], so it is ledger mutation. In
+    # observation mode the snapshot pass still runs (the derived change/version views
+    # need it) but the ledger is never persisted, so the append is discarded with the
+    # process.
     changed_uids = record_snapshots(ledger, artifacts, raw_versions)
     git_map = {}
     for uid in sorted(changed_uids):
@@ -1239,7 +1271,12 @@ def cmd_build(args):
 
     # ----- persist DATA ---------------------------------------------------
     art_list = sorted(artifacts.values(), key=lambda a: a["page_start"])
-    _dump_json(LEDGER_PATH, ledger)
+    # The identity ledger is GOVERNED EVOLUTION STATE: irreducible, append-only, not
+    # reproducible from the tree. Observation never writes it — not even a no-op rewrite —
+    # because the only sound guarantee that an observation minted nothing is that the
+    # write is unreachable. See GOVERNED-EVOLUTION-STATE-DETERMINATION.md.
+    if mint:
+        _dump_json(LEDGER_PATH, ledger)
     _dump_json(ARTIFACTS_PATH, {"generated_at": _now(),
                                 "generator_version": C.GENERATOR_VERSION,
                                 "count": len(art_list), "artifacts": art_list})
@@ -1261,7 +1298,12 @@ def cmd_build(args):
     write_change_registry(change_ledger, by_uid)
 
     print(f"UKB build complete: {len(art_list)} artifacts, {len(volumes)} volumes, "
-          f"{len(edges)} edges, {ledger['page_cursor']} pages allocated.")
+          f"{len(edges)} edges, {ledger['page_cursor']} pages allocated."
+          + ("" if mint else "  [OBSERVATION — nothing minted, ledger not written]"))
+    if unminted:
+        print(f"  OBSERVATION: {len(unminted)} eligible path(s) hold no identity and were "
+              f"not projected. Minting is an evolution act — run the REG-AUTO-001 "
+              f"transaction (register.sh) to allocate identity for them.")
     _spine_pop = sum(1 for a in art_list
                      if any(a["traceability"][k] for k in a["traceability"]))
     _etypes = Counter(e["type"] for e in edges)
@@ -2350,7 +2392,15 @@ def main():
     ap = argparse.ArgumentParser(prog="ukb", description="UCOS Ω∞ Universal Master Knowledge Book engine.")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    sub.add_parser("build", help="Scan repo, allocate IDs/pages, emit registries + control tower.")
+    bp = sub.add_parser("build",
+                       help="Emit registries + control tower. Observation by default; "
+                            "--mint allocates IDs/pages (evolution).")
+    bp.add_argument("--mint", action="store_true",
+                    help="EVOLUTION: allocate permanent Universal IDs and page ranges for "
+                         "newly eligible artifacts and persist the identity ledger. Reserved "
+                         "for the REG-AUTO-001 registration transaction (register.sh). "
+                         "Without it, build OBSERVES: it allocates nothing, writes no ledger, "
+                         "and regenerates derived views only.")
 
     sp = sub.add_parser("search", help="Search the knowledge base.")
     sp.add_argument("query", nargs="?", default="")
