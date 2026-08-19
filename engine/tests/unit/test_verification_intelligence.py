@@ -24,14 +24,18 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
+import sys
 
 import pytest
 
 from engine.verification_intelligence import gate as uvi_gate
 from engine.verification_intelligence.constitution import (
+    execution_contract,
     load_constitution,
     load_declaration,
     repo_root,
+    verify_source,
 )
 from engine.verification_intelligence.evidence import (
     EVIDENCE_VERSION,
@@ -364,7 +368,7 @@ def test_a_recorded_pass_is_reused_and_a_changed_input_is_not(
 ) -> None:
     mode = constitution.mode("change")
     stage = next(s for s in constitution.stages_for(mode) if s.reusable)
-    digest = input_digest(stage, substrates)
+    digest = input_digest(stage, substrates, contract=execution_contract(stage.label))
     assert digest is not None
 
     reuse, _, _ = decide(mode, stage, substrates, home=str(tmp_path))
@@ -381,7 +385,7 @@ def test_a_recorded_pass_is_reused_and_a_changed_input_is_not(
 def test_a_recorded_failure_is_never_reused(constitution, substrates, tmp_path) -> None:
     mode = constitution.mode("change")
     stage = next(s for s in constitution.stages_for(mode) if s.reusable)
-    digest = input_digest(stage, substrates)
+    digest = input_digest(stage, substrates, contract=execution_contract(stage.label))
     record(str(tmp_path), stage.stage_id, digest, "FAIL")
     reuse, reason, _ = decide(mode, stage, substrates, home=str(tmp_path))
     assert reuse is False and "not PASS" in reason
@@ -392,7 +396,7 @@ def test_an_entry_from_another_engine_version_is_not_a_hit(
 ) -> None:
     """A result produced under a different execution contract answers a different question."""
     stage = next(s for s in constitution.stages if s.reusable)
-    digest = input_digest(stage, substrates)
+    digest = input_digest(stage, substrates, contract=execution_contract(stage.label))
     record(str(tmp_path), stage.stage_id, digest, "PASS")
     target = os.path.join(str(tmp_path), stage.stage_id, f"{digest}.json")
     document = json.loads(open(target, encoding="utf-8").read())
@@ -403,7 +407,7 @@ def test_an_entry_from_another_engine_version_is_not_a_hit(
 
 def test_a_non_reusable_stage_takes_no_digest(constitution, substrates) -> None:
     stage = next(s for s in constitution.stages if not s.reusable)
-    assert input_digest(stage, substrates) is None
+    assert input_digest(stage, substrates, contract=execution_contract(stage.label)) is None
 
 
 def test_a_prefix_matching_no_registered_object_takes_no_digest(constitution, substrates) -> None:
@@ -414,7 +418,203 @@ def test_a_prefix_matching_no_registered_object_takes_no_digest(constitution, su
         next(s for s in constitution.stages if s.reusable),
         reuse_inputs=("a/path/that/is/not/registered/",),
     )
-    assert input_digest(stage, substrates) is None
+    assert input_digest(stage, substrates, contract=("x",)) is None
+
+
+# --- the execution contract in the evidence key (Step 1) ----------------------------
+#
+# The key used to cover what a stage READS but not what it RUNS. A stage is both, and a
+# cache keyed on only one of them answers a question nobody asked. Every test below
+# computes a real key from the real declaration and the real script; none asserts a
+# hardcoded digest, because a hardcoded digest would freeze the composition rather than
+# measure it.
+
+
+def _reusable_keyable(constitution, substrates):
+    """A declared stage that is reusable AND whose declared inputs actually resolve."""
+    for stage in constitution.stages:
+        if not stage.reusable:
+            continue
+        contract = execution_contract(stage.label)
+        if contract and input_digest(stage, substrates, contract=contract):
+            return stage, contract
+    raise AssertionError("no reusable stage takes a digest; the fixture cannot measure reuse")
+
+
+def test_the_contract_of_every_declared_stage_resolves(constitution) -> None:
+    """A stage whose command cannot be read has no identity to key on."""
+    source = verify_source()
+    for stage in constitution.stages:
+        contract = execution_contract(stage.label, source=source)
+        assert contract, f"no execution contract resolved for {stage.stage_id}"
+        assert all(token for token in contract), f"empty argv token in {stage.stage_id}"
+
+
+def test_A_same_inputs_same_command_is_one_key_and_a_hit(
+    constitution, substrates, tmp_path
+) -> None:
+    """A — identical inputs and identical command: identical key, reuse allowed."""
+    stage, contract = _reusable_keyable(constitution, substrates)
+    first = input_digest(stage, substrates, contract=contract)
+    second = input_digest(stage, substrates, contract=contract)
+    assert first == second, "the same contract must produce the same key"
+
+    mode = constitution.mode("change")
+    record(str(tmp_path), stage.stage_id, first, "PASS")
+    reuse, reason, hit = decide(mode, stage, substrates, home=str(tmp_path), verify=verify_source())
+    assert reuse is True and hit == first and "already passed" in reason
+
+
+def test_B_a_changed_command_is_a_different_key_and_a_miss(
+    constitution, substrates, tmp_path
+) -> None:
+    """B — same inputs, changed command: different key, and the recorded PASS is unreachable.
+
+    This is the defect the step closes, performed rather than described: the entry is
+    recorded under the real contract, the command is then edited exactly as a maintainer
+    would edit it, and the edited stage must NOT reach that entry.
+    """
+    stage, contract = _reusable_keyable(constitution, substrates)
+    original = input_digest(stage, substrates, contract=contract)
+    record(str(tmp_path), stage.stage_id, original, "PASS")
+
+    mutations = (
+        contract + ("--newly-added-flag",),
+        contract[:-1],
+        ("different-interpreter",) + contract[1:],
+    )
+    for mutated in mutations:
+        assert mutated != contract
+        key = input_digest(stage, substrates, contract=mutated)
+        assert key is not None
+        assert key != original, f"a changed command produced the same key: {mutated}"
+        assert (
+            lookup(str(tmp_path), stage.stage_id, key) is None
+        ), "a changed command reached a result it never produced"
+
+
+def test_C_argument_order_is_significant(constitution, substrates) -> None:
+    """C — reordering arguments changes the key.
+
+    A shell passes argv in the order written. Nothing here may assume the receiving
+    parser is order-insensitive, so order is part of the identity.
+    """
+    stage, contract = _reusable_keyable(constitution, substrates)
+    flagged = contract + ("--alpha", "--beta")
+    swapped = contract + ("--beta", "--alpha")
+    assert input_digest(stage, substrates, contract=flagged) != input_digest(
+        stage, substrates, contract=swapped
+    )
+
+
+def test_C_token_boundaries_cannot_be_forged(constitution, substrates) -> None:
+    """C — two tokens are never the same key as the one token that concatenates them."""
+    stage, contract = _reusable_keyable(constitution, substrates)
+    split = contract + ("--gate", "--quiet")
+    joined = contract + ("--gate --quiet",)
+    assert input_digest(stage, substrates, contract=split) != input_digest(
+        stage, substrates, contract=joined
+    )
+
+
+def test_D_equivalent_serialisations_of_one_command_are_one_key(constitution, substrates) -> None:
+    """D — how the invocation is WRITTEN does not change the key; what it RUNS does.
+
+    Line-wrapping, indentation, repeated spaces and quoting style are all serialisation.
+    A maintainer who re-wraps a long invocation must not invalidate its evidence.
+    """
+    stage, _ = _reusable_keyable(constitution, substrates)
+    label = stage.label
+    variants = (
+        f'run_stage "{label}" "$PY" -m pkg.mod --gate --quiet\n',
+        f'run_stage "{label}" \\\n  "$PY" -m pkg.mod --gate --quiet\n',
+        f'run_stage "{label}"    $PY    -m   pkg.mod   --gate   --quiet\n',
+        f'run_stage "{label}" \\\n    "$PY" \\\n    -m pkg.mod \\\n    --gate --quiet\n',
+    )
+    contracts = {execution_contract(label, source=v) for v in variants}
+    assert len(contracts) == 1, f"serialisation changed the contract: {contracts}"
+    keys = {input_digest(stage, substrates, contract=c) for c in contracts}
+    assert len(keys) == 1
+
+
+def test_E_no_clock_host_path_or_environment_reaches_the_key(constitution, substrates) -> None:
+    """E — the key carries no observation of the machine that computed it.
+
+    The contract is taken from the script's SOURCE TEXT, so ``"$PY"`` stays the literal
+    ``$PY`` and never becomes this checkout's absolute venv path. Were it otherwise the
+    key would differ between two machines verifying identical trees, and UVI-L-10's
+    prohibition on an absolute path reaching a plan would be broken by the field added
+    to make the plan honest.
+    """
+    source = verify_source()
+    for stage in constitution.stages:
+        contract = execution_contract(stage.label, source=source)
+        assert contract is not None
+        for token in contract:
+            assert not os.path.isabs(token), f"absolute path in contract: {token}"
+            assert repo_root() not in token, f"checkout path in contract: {token}"
+            assert not token.startswith("~"), f"home-relative path in contract: {token}"
+            assert "\n" not in token
+
+    # The key is a pure function of (declaration, registry, script). Recomputing it in a
+    # second process must land on the same value: nothing observed at runtime enters it.
+    stage, contract = _reusable_keyable(constitution, substrates)
+    expected = input_digest(stage, substrates, contract=contract)
+    program = (
+        "from engine.verification_intelligence.constitution import "
+        "load_constitution, execution_contract\n"
+        "from engine.verification_intelligence.registry import load_substrates\n"
+        "from engine.verification_intelligence.evidence import input_digest\n"
+        "c = load_constitution(); s = load_substrates()\n"
+        f"st = next(x for x in c.stages if x.stage_id == {stage.stage_id!r})\n"
+        "print(input_digest(st, s, contract=execution_contract(st.label)))\n"
+    )
+    completed = subprocess.run(  # noqa: S603
+        [sys.executable, "-c", program],
+        cwd=repo_root(),
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert completed.stdout.strip() == expected
+
+
+def test_a_certification_mode_never_resolves_a_contract_at_all(
+    constitution, substrates, tmp_path
+) -> None:
+    """UVI-L-09 is evaluated BEFORE the contract, and this step did not move it.
+
+    A certification-eligible mode must return without reading the script, the store or a
+    digest. Passing a deliberately broken script proves the refusal happens first: if the
+    contract were resolved before the mode check, this would raise or return a digest.
+    """
+    for mode in constitution.modes:
+        if not mode.certification_eligible:
+            continue
+        for stage in constitution.stages_for(mode):
+            reuse, reason, digest = decide(
+                mode, stage, substrates, home=str(tmp_path), verify="not a shell script at all"
+            )
+            assert reuse is False
+            assert digest is None
+            assert "never reuses" in reason
+
+
+def test_an_unresolvable_contract_refuses_the_key_rather_than_guessing(
+    constitution, substrates, tmp_path
+) -> None:
+    """Unknown widens. A label the script does not declare exactly once has no contract."""
+    stage, _ = _reusable_keyable(constitution, substrates)
+    assert execution_contract(stage.label, source="") is None
+    duplicated = f'run_stage "{stage.label}" a\n' f'run_stage "{stage.label}" b\n'
+    assert execution_contract(stage.label, source=duplicated) is None
+    unbalanced = f'run_stage "{stage.label}" "never-closed\n'
+    assert execution_contract(stage.label, source=unbalanced) is None
+
+    mode = constitution.mode("change")
+    reuse, reason, digest = decide(mode, stage, substrates, home=str(tmp_path), verify="")
+    assert reuse is False and digest is None
+    assert "execution contract" in reason
 
 
 # --- the plan -----------------------------------------------------------------------

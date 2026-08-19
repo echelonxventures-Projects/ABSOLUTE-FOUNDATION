@@ -8,11 +8,21 @@ deleting the whole store changes no verdict — it only makes the next run pay a
 The key is computed, never asserted. For a stage declaring ``reuse_inputs``, the digest
 is taken over the ``content_hash`` values that ``00-MASTER/UCOS-UGA-001/01-EXECUTABLE-
 OBJECT-REGISTRY.json`` already publishes for every object under those prefixes, plus the
-stage's own identity and the engine version. So the question "has this exact stage
+stage's own identity, the engine version, and THE EXECUTION CONTRACT — the argv
+``./verify.sh`` runs under that stage's label. So the question "has this exact stage
 already passed over this exact input" is answered from hashes the repository already
 owns rather than from a second measurement of the tree.
 
-Two refusals are structural rather than configurable:
+The execution contract is in the key because without it the question above was answered
+for a stage identified only by name. A stage is what it RUNS as much as what it READS:
+under EVIDENCE_VERSION 1.0 the label ``universal object birth contract (…)`` keyed the
+same entry whether the script ran ``--gate --quiet`` or ``--gate``, so an edit to the
+command was answered by a result the edited command had never produced. The argv is
+taken from the script's own source text rather than from an expanded process argument
+list, which keeps ``"$PY"`` a literal and therefore keeps this machine's absolute venv
+path — and any other host detail — out of every key.
+
+Three refusals are structural rather than configurable:
 
 * **A certification-eligible mode never reaches a reuse decision.** ``integration`` and
   ``full`` declare ``evidence_reuse: false``, and :func:`decide` refuses before it looks
@@ -20,6 +30,9 @@ Two refusals are structural rather than configurable:
 * **An unhashed input is never a hit.** If any object under a declared prefix carries no
   content hash, or the prefix matches no object at all, the digest is refused and the
   stage runs. A cache key that silently covers nothing is a permanent false hit.
+* **An unresolvable command is never a hit.** If the script declares the stage's label
+  no times or more than once, the contract is unknown, the digest is refused and the
+  stage runs. Unknown widens; it never narrows.
 """
 
 from __future__ import annotations
@@ -31,13 +44,20 @@ import tempfile
 from dataclasses import dataclass
 from typing import Any
 
-from engine.verification_intelligence.constitution import repo_root
+from engine.verification_intelligence.constitution import execution_contract, repo_root
 from engine.verification_intelligence.model import Mode, StageSpec
 from engine.verification_intelligence.registry import Substrates
 
 #: Bumping this invalidates every stored entry. It is part of every key, so a change to
 #: how a stage is executed can never be answered by a result produced under the old way.
-EVIDENCE_VERSION = "1.0"
+#:
+#: 2.0 — the key gained the EXECUTION CONTRACT. Under 1.0 the key covered the stage's
+#: identity, its label and its declared inputs, but not the argv ``./verify.sh`` runs
+#: under that label, so editing a stage's command while leaving its label alone produced
+#: a HIT on a result the new command had never produced. Every 1.0 entry is unreachable
+#: from this version, which is the correct migration: those entries record what an
+#: unidentified command did.
+EVIDENCE_VERSION = "2.0"
 
 SCHEMA = "ucos-verification-evidence"
 
@@ -61,21 +81,39 @@ def store_home(root: str | None = None, home: str = ".ucos-verification-evidence
 
 
 def input_digest(
-    stage: StageSpec, substrates: Substrates, *, extra: tuple[str, ...] = ()
+    stage: StageSpec, substrates: Substrates, *, contract: tuple[str, ...] | None
 ) -> str | None:
-    """The content digest of everything ``stage`` reads, or None when it cannot be taken.
+    """The digest of everything ``stage`` reads AND runs, or None when it cannot be taken.
 
-    Returns None — never a placeholder — when the stage declares no reuse inputs, when a
-    declared prefix matches no registered object, or when a matched object carries no
-    content hash. Each of those is a key that would cover less than the stage reads, and
-    a key that covers less than the stage reads is a false hit waiting to happen.
+    ``contract`` is the argv ``./verify.sh`` executes under this stage's label, as
+    :func:`engine.verification_intelligence.constitution.execution_contract` derives it.
+    It is keyword-only and has NO DEFAULT, deliberately. A default would let a caller
+    compute a key that omits the command without saying so, which is precisely the
+    condition this parameter exists to make impossible: under EVIDENCE_VERSION 1.0 the
+    key covered the stage's label but not its command, so changing ``--gate --quiet`` to
+    ``--gate`` while leaving the label alone HIT a result the new command had never
+    produced. An optional key component is a false hit waiting for a forgetful caller.
+
+    Returns None — never a placeholder — when the stage declares no reuse inputs, when
+    the execution contract could not be resolved, when a declared prefix matches no
+    registered object, or when a matched object carries no content hash. Each is a key
+    that would cover less than the stage reads or runs, and such a key is a false hit
+    waiting to happen.
+
+    Order is significant in ``contract`` and insignificant in ``reuse_inputs``. The argv
+    is hashed in the order the script writes it, because a shell passes it in that order
+    and nothing here may assume a flag parser is order-insensitive; the prefixes are
+    sorted, because a set of declared inputs has no order to preserve.
     """
     if not stage.reusable or not stage.reuse_inputs:
         return None
+    if contract is None:
+        return None
     digest = hashlib.sha256()
     digest.update(f"{EVIDENCE_VERSION}\n{stage.stage_id}\n{stage.label}\n".encode())
-    for item in extra:
-        digest.update(f"extra:{item}\n".encode())
+    digest.update(f"argc:{len(contract)}\n".encode())
+    for index, token in enumerate(contract):
+        digest.update(f"argv:{index}:{token}\n".encode())
     for prefix in sorted(stage.reuse_inputs):
         matched = sorted(
             path
@@ -150,18 +188,34 @@ def record(home: str, stage_id: str, digest: str, result: str) -> None:
 
 
 def decide(
-    mode: Mode, stage: StageSpec, substrates: Substrates, *, home: str
+    mode: Mode,
+    stage: StageSpec,
+    substrates: Substrates,
+    *,
+    home: str,
+    root: str | None = None,
+    verify: str | None = None,
 ) -> tuple[bool, str, str | None]:
     """Decide whether ``stage`` may be answered from evidence.
 
     Returns ``(reuse, reason, digest)``. The reason is carried into the plan either way,
     so a run always states why a stage was executed as well as why one was not.
+
+    ``verify`` is the text of ``./verify.sh``. A caller deciding many stages should read
+    it once and pass it, so one plan performs one read rather than one per stage; a
+    caller that omits it gets a correct answer and pays a read. Either way the CERTIFICATION
+    REFUSAL IS EVALUATED FIRST — a certification-eligible mode returns before this
+    function touches the script, the store, or a digest, because a certification that can
+    be made to depend on the contents of a cache directory is not a certification.
     """
     if not mode.evidence_reuse:
         return False, f"{mode.mode_id} is a certification-eligible mode; it never reuses", None
     if not stage.reusable:
         return False, "the stage is declared non-reusable", None
-    digest = input_digest(stage, substrates)
+    contract = execution_contract(stage.label, root=root, source=verify)
+    if contract is None:
+        return False, "the execution contract for this stage could not be resolved", None
+    digest = input_digest(stage, substrates, contract=contract)
     if digest is None:
         return False, "no input digest could be taken over the declared inputs", None
     entry = lookup(home, stage.stage_id, digest)

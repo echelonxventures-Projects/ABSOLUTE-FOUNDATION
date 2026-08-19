@@ -404,7 +404,9 @@ def evidence_reuse_integrity(ctx: _Context) -> Findings:
     home = store_home(ctx.root, ctx.constitution.evidence_home)
     for mode in ctx.constitution.modes:
         for stage in ctx.constitution.stages_for(mode):
-            reuse, reason, _ = decide(mode, stage, ctx.substrates, home=home)
+            reuse, reason, _ = decide(
+                mode, stage, ctx.substrates, home=home, root=ctx.root, verify=ctx.verify
+            )
             if mode.certification_eligible and reuse:
                 findings.append(
                     f"--{mode.mode_id} is certification-eligible and reached a reuse decision "

@@ -18,7 +18,11 @@ import hashlib
 import json
 import os
 
-from engine.verification_intelligence.constitution import Constitution, load_constitution
+from engine.verification_intelligence.constitution import (
+    Constitution,
+    load_constitution,
+    verify_source,
+)
 from engine.verification_intelligence.evidence import decide, store_home
 from engine.verification_intelligence.execution import (
     FALLBACK_MAX_WORKERS,
@@ -196,6 +200,10 @@ def _resolve_stages(
     """
     admitted = {stage.stage_id for stage in constitution.stages_for(mode)}
     home = store_home(root, constitution.evidence_home)
+    # ONE read of the entry point per plan, not one per stage. The execution contract of
+    # every stage comes out of the same file, and a plan that read it fifteen times could
+    # observe fifteen different versions of it if the file were edited mid-plan.
+    verify = verify_source(root)
     decisions: list[StagePlan] = []
     for stage in constitution.stages:
         if stage.stage_id not in admitted:
@@ -222,7 +230,7 @@ def _resolve_stages(
                 )
             )
             continue
-        reuse, reason, digest = decide(mode, stage, substrates, home=home)
+        reuse, reason, digest = decide(mode, stage, substrates, home=home, root=root, verify=verify)
         decisions.append(
             StagePlan(
                 stage=stage,

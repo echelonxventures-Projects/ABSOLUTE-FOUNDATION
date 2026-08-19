@@ -17,6 +17,8 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import shlex
 from dataclasses import dataclass
 from typing import Any
 
@@ -36,10 +38,87 @@ DECLARATION = "00-MASTER/UVI-000001/uvi-declaration.json"
 #: wrong one.
 COST_MODEL = "00-MASTER/UVI-000001/test-cost-model.json"
 
+#: The entry point that IS the execution contract. A stage's identity is not its label
+#: alone — it is the label together with the command the script actually runs under it.
+#: This is the same file ``gate.py`` reads for UVI-L-03, read here for the argv rather
+#: than for the label.
+VERIFY = "verify.sh"
+
+#: ``run_stage "<label>" <argv…>``, after backslash-continuations have been folded away.
+#: The label is interpolated per lookup (and escaped), so no label text lives here.
+_RUN_STAGE = r'^[ \t]*run_stage[ \t]+"{label}"[ \t]*(.*)$'
+
+#: A backslash-continuation and the indentation that follows it. Folding these is what
+#: makes the contract insensitive to how the invocation is WRAPPED while remaining
+#: sensitive to what it RUNS.
+_CONTINUATION = re.compile(r"\\\n[ \t]*")
+
 
 def repo_root() -> str:
     """The repository root, derived from this file's location."""
     return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+
+def verify_source(root: str | None = None) -> str:
+    """The text of ``./verify.sh``.
+
+    Raises:
+        VerificationIntelligenceError: the entry point is unreadable. A contract that
+            cannot be read is a FAULT, never an empty contract — an empty one would
+            make every stage's key agree with every other stage's key.
+    """
+    target = os.path.join(root or repo_root(), VERIFY)
+    try:
+        with open(target, encoding="utf-8") as handle:
+            return handle.read()
+    except OSError as exc:  # pragma: no cover - only on a broken checkout
+        raise VerificationIntelligenceError(f"{VERIFY} is unreadable") from exc
+
+
+def execution_contract(
+    label: str, *, root: str | None = None, source: str | None = None
+) -> tuple[str, ...] | None:
+    """The argv ``./verify.sh`` runs under ``label``, tokenised — or None.
+
+    THE SOURCE TEXT IS THE CONTRACT, AND THAT IS THE POINT. The tokens returned are the
+    ones the script DECLARES, not the ones a process would receive after the shell has
+    expanded them. ``"$PY"`` comes back as the literal ``$PY``, never as
+    ``/…/.ec1-venv/bin/python``. Binding the expanded form would put this machine's
+    absolute venv path into every cache key — the key would stop being comparable
+    between two machines, and UVI-L-10's prohibition on an absolute path reaching a plan
+    would be violated by the very field added to make the plan honest.
+
+    Two normalisations, each chosen so the key tracks WHAT RUNS and not HOW IT IS
+    WRITTEN:
+
+    * backslash-continuations are folded, so re-wrapping a long invocation across lines
+      does not invalidate the cache;
+    * the remainder is tokenised with :mod:`shlex`, so ``"$PY"`` and ``$PY`` are one
+      token and runs of whitespace collapse.
+
+    What it deliberately does NOT normalise is ORDER. ``--gate --quiet`` and
+    ``--quiet --gate`` are different tuples and therefore different keys, because a
+    shell passes them in the order written and nothing here may assume a flag parser
+    is order-insensitive.
+
+    Returns None — never a placeholder, and never an empty tuple standing in for
+    "unknown" — when the label appears no times or more than once. Both are drift
+    between the registry and the script. UVI-L-03 measures that drift and refuses it as
+    a verdict; this function's obligation is narrower and simpler: refuse the key, so
+    the stage runs. A stage that runs when its contract is ambiguous is correct; a
+    stage answered from a cache keyed on a guess is not.
+    """
+    text = source if source is not None else verify_source(root)
+    folded = _CONTINUATION.sub(" ", text)
+    matches = re.findall(_RUN_STAGE.format(label=re.escape(label)), folded, re.M)
+    if len(matches) != 1:
+        return None
+    try:
+        return tuple(shlex.split(matches[0]))
+    except ValueError:
+        # Unbalanced quoting in the invocation. Unparseable is unknown, and unknown
+        # refuses the key rather than guessing at a tokenisation.
+        return None
 
 
 def _text(value: Any, field: str) -> str:

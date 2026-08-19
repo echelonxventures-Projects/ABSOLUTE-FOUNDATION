@@ -7254,6 +7254,12 @@
         "run",
         "substrates",
         "surface",
+        "test_A_same_inputs_same_command_is_one_key_and_a_hit",
+        "test_B_a_changed_command_is_a_different_key_and_a_miss",
+        "test_C_argument_order_is_significant",
+        "test_C_token_boundaries_cannot_be_forged",
+        "test_D_equivalent_serialisations_of_one_command_are_one_key",
+        "test_E_no_clock_host_path_or_environment_reaches_the_key",
         "test_a_baseline_the_registry_does_not_carry_closes_the_gate",
         "test_a_boolean_floor_is_refused",
         "test_a_boolean_never_satisfies_a_numeric_condition",
@@ -7276,6 +7282,7 @@
         "test_a_capability_with_a_birth_record_passes",
         "test_a_ceiling_below_one_round_is_refused",
         "test_a_certification_mode_can_never_reach_a_reuse_decision",
+        "test_a_certification_mode_never_resolves_a_contract_at_all",
         "test_a_certification_proof_the_engine_cannot_measure_is_not_satisfied",
         "test_a_chain_missing_a_phase_object_cannot_project_a_history",
         "test_a_change_class_no_register_admits_closes_the_gate",
@@ -7598,14 +7605,7 @@
         "test_an_unparseable_module_binds_nothing_rather_than_raising",
         "test_an_unparseable_policy_is_a_fault",
         "test_an_unparseable_technology_manifest_is_refused",
-        "test_an_unpermitted_execution_path_refuses_the_authorisation",
-        "test_an_unreadable_artifact_is_a_finding_not_a_crash",
-        "test_an_unreadable_declaration_is_a_fault",
-        "test_an_unreadable_pytest_configuration_is_a_fault",
-        "test_an_unreadable_registry_is_a_fault_and_never_an_empty_selection",
-        "test_an_unreadable_technology_manifest_is_refused",
-        "test_an_unregistered_object_is_detected",
-        "test_an_unregistered_python_file_escalates_and_is_named"
+        "test_an_unpermitted_execution_path_refuses_the_authorisation"
       ],
       "unique_id": "RC-64"
     },
@@ -8462,6 +8462,7 @@
         "evidence_reuse_integrity",
         "exactly_one_default",
         "execution",
+        "execution_contract",
         "fail_wide",
         "gate",
         "input_digest",
@@ -8495,7 +8496,8 @@
         "store_home",
         "topology_neutrality",
         "unbounded_prefixes",
-        "unit_file"
+        "unit_file",
+        "verify_source"
       ],
       "unique_id": "RC-73"
     },
@@ -14035,7 +14037,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "c4f0e6fd31e69361e9532fbb44fea21c13568f7838e875704e8465a8448445c4",
+  "content_hash": "2e7f5efa33d0f301e5da05bf0cb850e23a590c157df3577517fdf816c5cc77bd",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -14410,11 +14412,11 @@
           "test_functions": 887
         },
         "engine": {
-          "loc": 112996,
+          "loc": 113139,
           "root": "engine",
           "source_files": 407,
           "test_files": 284,
-          "test_functions": 4614
+          "test_functions": 4623
         },
         "infrastructure": {
           "loc": 22599,
@@ -14445,8 +14447,8 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 344312,
-      "total_tests": 14147
+      "total_loc": 344455,
+      "total_tests": 14156
     },
     "corpus": {
       "artifacts": 1233,
