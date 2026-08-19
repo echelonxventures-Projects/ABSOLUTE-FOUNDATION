@@ -94,9 +94,23 @@ class StageSpec:
     depends_on: tuple[str, ...]
     modes: tuple[str, ...]
     reusable: bool
+    #: COMPATIBILITY. The field that used to carry both meanings. Retained so a
+    #: declaration written before the separation still resolves; ``read_set`` is what
+    #: everything reads now, and falls back to this when a stage declares no read-set.
     reuse_inputs: tuple[str, ...]
     owner: str
     shardable: bool = False
+    #: WHAT THIS STAGE READS — a dependency relation, declared independently of whether
+    #: the stage may be answered from cache. ``reuse_inputs`` carried both meanings, so a
+    #: stage that must always run declared no inputs and was invisible to impact analysis
+    #: even though its read-set was perfectly well known. ``("**",)`` is the declared
+    #: whole-boundary token, for a stage whose subject genuinely is the tree.
+    read_set: tuple[str, ...] = ()
+
+    @property
+    def reads(self) -> tuple[str, ...]:
+        """The effective read-set: the declared one, or ``reuse_inputs`` in compatibility."""
+        return self.read_set or self.reuse_inputs
 
 
 @dataclass(frozen=True, slots=True)

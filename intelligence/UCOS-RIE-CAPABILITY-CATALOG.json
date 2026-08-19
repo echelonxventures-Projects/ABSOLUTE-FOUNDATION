@@ -8370,8 +8370,10 @@
         "derive",
         "deterministic_planning",
         "every_declared_read_set_resolves",
+        "every_stage_declares_a_read_set",
         "evidence",
         "evidence_home",
+        "evidence_identity_depends_on_the_read_set",
         "evidence_reuse_integrity",
         "exactly_one_default",
         "execution",
@@ -8396,6 +8398,7 @@
         "plan_json",
         "plan_shards",
         "plan_tsv",
+        "read_set_is_independent_of_reuse_policy",
         "record",
         "registry",
         "render",
@@ -8407,6 +8410,7 @@
         "selection",
         "selection_is_derived",
         "stage_registry_reconciliation",
+        "stages_reading",
         "store_home",
         "topology_neutrality",
         "unbounded_prefixes",
@@ -13951,7 +13955,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "2398db851c714fa9c0d57b82f0931d159175b65a72dd45bcca7fb41e4f64f7b4",
+  "content_hash": "1c789c21971140be29f0f9ef68631ce188512326f916b912dab7afd160ec13a1",
   "count": 131,
   "evidence_state": {
     "evidence_files": {

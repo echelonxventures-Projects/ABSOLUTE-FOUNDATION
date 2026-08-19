@@ -39,6 +39,7 @@ from engine.verification_intelligence.constitution import (
 )
 from engine.verification_intelligence.evidence import (
     EVIDENCE_VERSION,
+    WHOLE_BOUNDARY,
     decide,
     input_digest,
     lookup,
@@ -51,7 +52,10 @@ from engine.verification_intelligence.execution import (
     resolve_workers,
     unit_file,
 )
-from engine.verification_intelligence.gate import every_declared_read_set_resolves
+from engine.verification_intelligence.gate import (
+    every_declared_read_set_resolves,
+    every_stage_declares_a_read_set,
+)
 from engine.verification_intelligence.model import (
     Action,
     Coverage,
@@ -71,7 +75,7 @@ from engine.verification_intelligence.registry import (
     is_collectible,
     load_substrates,
 )
-from engine.verification_intelligence.selection import select
+from engine.verification_intelligence.selection import select, stages_reading
 
 REPO = repo_root()
 
@@ -418,9 +422,119 @@ def test_a_prefix_matching_no_registered_object_takes_no_digest(constitution, su
 
     stage = replace(
         next(s for s in constitution.stages if s.reusable),
+        read_set=("a/path/that/is/not/registered/",),
         reuse_inputs=("a/path/that/is/not/registered/",),
     )
     assert input_digest(stage, substrates, contract=("x",)) is None
+
+
+# --- read-set / reuse-policy separation (Step 3) --------------------------------------
+
+
+def test_step3_every_stage_declares_a_read_set(constitution) -> None:
+    """Mandatory for all fifteen, not for the eight that happen to be cacheable."""
+    missing = [s.stage_id for s in constitution.stages if not s.read_set]
+    assert missing == [], f"stages with no read_set: {missing}"
+    non_reusable = [s for s in constitution.stages if not s.reusable]
+    assert non_reusable, "fixture assumption: some stages are non-reusable"
+    assert all(s.read_set for s in non_reusable), "a non-reusable stage must still declare reads"
+
+
+def test_step3_removing_a_read_set_is_refused(constitution, substrates) -> None:
+    """MUTATION — remove read-set → refusal.
+
+    Both refusals matter and they differ: the law refuses the DECLARATION, and
+    ``input_digest`` refuses the KEY. A stage stripped of its read-set must fail both.
+    """
+    from dataclasses import replace
+
+    ctx = uvi_gate._Context()
+    assert every_stage_declares_a_read_set(ctx) == []
+    stripped = replace(ctx.constitution.stages[0], read_set=(), reuse_inputs=())
+    ctx.constitution = replace(ctx.constitution, stages=(stripped, *ctx.constitution.stages[1:]))
+    findings = every_stage_declares_a_read_set(ctx)
+    assert findings and stripped.stage_id in findings[0]
+
+    keyable = next(
+        s
+        for s in constitution.stages
+        if s.reusable and input_digest(s, substrates, contract=execution_contract(s.label))
+    )
+    blank = replace(keyable, read_set=(), reuse_inputs=())
+    assert input_digest(blank, substrates, contract=execution_contract(blank.label)) is None
+
+
+def test_step3_a_read_set_makes_a_previously_invisible_stage_reachable(
+    constitution, substrates
+) -> None:
+    """MUTATION — add a read-set to a previously unbounded stage → the relation changes.
+
+    Before the separation the seven non-reusable stages declared nothing, so no change
+    could be related to them. Measured directly: the same query over the old coupled
+    field and over the declared read-set.
+    """
+    probe = ("00-BOOK/SCHEMAS/artifact.schema.json",)
+    coupled = [
+        s.stage_id
+        for s in constitution.stages
+        if any(set(resolve_prefix(substrates, p)) & set(probe) for p in (s.reuse_inputs or ()))
+    ]
+    declared = stages_reading(constitution.stages, substrates, probe)
+    assert set(coupled) < set(declared), "the read-set must reach strictly more stages"
+    newly = set(declared) - set(coupled)
+    assert any(
+        not next(s for s in constitution.stages if s.stage_id == sid).reusable for sid in newly
+    ), "the stages the separation reveals must include non-reusable ones"
+
+
+def test_step3_toggling_reuse_leaves_the_dependency_relation_unchanged(
+    constitution, substrates
+) -> None:
+    """MUTATION — toggle the reuse flag → dependency relation unchanged, on every stage."""
+    from dataclasses import replace
+
+    probe = ("00-BOOK/SCHEMAS/artifact.schema.json", "engine/uckp/facets.py")
+    before = stages_reading(constitution.stages, substrates, probe)
+    flipped = tuple(replace(s, reusable=not s.reusable) for s in constitution.stages)
+    assert stages_reading(flipped, substrates, probe) == before
+    for original, toggled in zip(constitution.stages, flipped, strict=True):
+        assert original.reads == toggled.reads
+        assert original.reusable is not toggled.reusable
+
+
+def test_step3_changing_the_read_set_changes_the_digest(constitution, substrates) -> None:
+    """MUTATION — change read-set → digest changes, in both directions."""
+    from dataclasses import replace
+
+    stage = next(
+        s
+        for s in constitution.stages
+        if s.reusable
+        and len(s.reads) > 1
+        and input_digest(s, substrates, contract=execution_contract(s.label))
+    )
+    contract = execution_contract(stage.label)
+    baseline = input_digest(stage, substrates, contract=contract)
+    widened = replace(stage, read_set=(*stage.reads, "00-BOOK/tools/"))
+    narrowed = replace(stage, read_set=tuple(sorted(stage.reads))[:-1])
+    assert input_digest(widened, substrates, contract=contract) != baseline
+    assert input_digest(narrowed, substrates, contract=contract) != baseline
+
+
+def test_step3_reuse_inputs_still_resolves_without_a_read_set(constitution, substrates) -> None:
+    """COMPATIBILITY — ``reuse_inputs`` was not removed; a declaration lacking read_set keys."""
+    from dataclasses import replace
+
+    stage = next(s for s in constitution.stages if s.reusable and s.reuse_inputs)
+    legacy = replace(stage, read_set=())
+    assert legacy.reads == stage.reuse_inputs
+    assert input_digest(legacy, substrates, contract=execution_contract(legacy.label)) is not None
+
+
+def test_step3_the_whole_boundary_token_resolves_to_the_whole_boundary(substrates) -> None:
+    """``**`` is the declared token for a stage whose subject IS the tree."""
+    assert set(resolve_prefix(substrates, WHOLE_BOUNDARY)) == set(substrates.universal)
+    assert len(resolve_prefix(substrates, WHOLE_BOUNDARY)) > len(substrates.objects)
 
 
 # --- read-set resolution and withheld hashes (A5 / A6) -------------------------------
@@ -545,7 +659,11 @@ def test_UVI_L_11_fires_on_a_read_set_that_resolves_to_nothing(substrates) -> No
 
     from dataclasses import replace
 
-    bogus = replace(ctx.constitution.stages[0], reuse_inputs=("no/such/tree/",))
+    bogus = replace(
+        ctx.constitution.stages[0],
+        read_set=("no/such/tree/",),
+        reuse_inputs=("no/such/tree/",),
+    )
     ctx.constitution = replace(ctx.constitution, stages=(bogus, *ctx.constitution.stages[1:]))
     findings = every_declared_read_set_resolves(ctx)
     assert findings, "the law did not fire on an unresolvable read-set"

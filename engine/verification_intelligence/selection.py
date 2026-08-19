@@ -33,6 +33,7 @@ from __future__ import annotations
 from engine.verification_impact.changes import changed_paths
 from engine.verification_impact.graph import ImpactError, load_graph
 from engine.verification_impact.impact import UNBOUNDED_PREFIXES, analyse
+from engine.verification_intelligence.evidence import resolve_prefix
 from engine.verification_intelligence.model import (
     Selection,
     SelectionResult,
@@ -336,3 +337,27 @@ def select(
         superseded=superseded,
         layers=tuple(layers),
     )
+
+
+def stages_reading(stages, substrates: Substrates, paths) -> tuple[str, ...]:
+    """The ids of every declared stage whose read-set covers any of ``paths``, sorted.
+
+    THIS IS THE RELATION THE COUPLING HID. ``reuse_inputs`` meant both "what this stage
+    reads" and "what may be answered from cache", so the seven stages that must always
+    run declared no inputs — and a change to the tree could not be related to them at
+    all, even though what they read was perfectly well known. Separating the read-set
+    restores the relation for all fifteen.
+
+    It is a QUERY, not a scheduler. Nothing here decides what runs: ``./verify.sh``
+    still executes the stages its mode admits, and stage-level impact selection is a
+    later step. What this function establishes is that the question "which stages does
+    this change reach" now has an answer for every stage rather than for eight of them.
+    """
+    reached: list[str] = []
+    for stage in stages:
+        covered = set()
+        for prefix in stage.reads:
+            covered |= set(resolve_prefix(substrates, prefix))
+        if covered & set(paths):
+            reached.append(stage.stage_id)
+    return tuple(sorted(reached))

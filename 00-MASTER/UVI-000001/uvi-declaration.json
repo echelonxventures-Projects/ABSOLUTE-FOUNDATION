@@ -111,6 +111,11 @@
         "plane": "READ_ONLY",
         "depends_on": [],
         "modes": ["fast", "change", "integration", "full"],
+        "read_set": [
+          "engine/",
+          "platform/",
+          "pyproject.toml"
+        ],
         "reuse_inputs": ["engine/", "platform/", "pyproject.toml"],
         "reusable": true,
         "owner": "CD-01 / CD-04"
@@ -122,6 +127,17 @@
         "plane": "WRITES_IGNORED",
         "depends_on": [],
         "modes": ["fast", "change", "integration", "full"],
+        "read_set": [
+          "scripts/",
+          "engine/knowledge/",
+          "engine/determinism/",
+          "intelligence/research/",
+          "intelligence/publication/",
+          "intelligence/realization/",
+          "00-MASTER/UAKOS-CLOSURE-002/",
+          "00-MASTER/UAKOS-PHASE-001B/",
+          "00-BOOK/DATA/"
+        ],
         "reusable": false,
         "$not_reusable": "It is a producer. Reusing a producer means not producing, and the consumers of what it produces are in the same run.",
         "owner": "P0-FINAL-CONVERGENCE-001"
@@ -134,6 +150,9 @@
         "plane": "WRITES_EVIDENCE",
         "depends_on": ["prerequisites"],
         "modes": ["fast", "change", "integration", "full"],
+        "read_set": [
+          "**"
+        ],
         "reusable": false,
         "$not_reusable": "The one stage whose result is the point of the run. It is selected, sharded and scheduled — never skipped, never reused.",
         "shardable": true,
@@ -146,6 +165,10 @@
         "plane": "READ_ONLY",
         "depends_on": ["prerequisites"],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "00-BOOK/",
+          "00-SOURCE/"
+        ],
         "reuse_inputs": ["00-BOOK/", "00-SOURCE/"],
         "reusable": true,
         "owner": "UMB-IMP-001"
@@ -157,6 +180,11 @@
         "plane": "READ_ONLY",
         "depends_on": ["prerequisites"],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "00-BOOK/DATA/",
+          "00-BOOK/SCHEMAS/",
+          "00-BOOK/tools/"
+        ],
         "reuse_inputs": ["00-BOOK/DATA/", "00-BOOK/SCHEMAS/", "00-BOOK/tools/"],
         "reusable": true,
         "owner": "CRAP-001 / CAEM-001 S-2"
@@ -168,6 +196,10 @@
         "plane": "READ_ONLY",
         "depends_on": [],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "00-CMG/",
+          "00-BOOK/DATA/"
+        ],
         "reuse_inputs": ["00-CMG/", "00-BOOK/DATA/"],
         "reusable": true,
         "owner": "CMG-000001 Article L"
@@ -179,6 +211,9 @@
         "plane": "READ_ONLY",
         "depends_on": ["prerequisites"],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "**"
+        ],
         "reusable": false,
         "$not_reusable": "Its subject is the whole version-controlled boundary, so its input digest is the tree itself. A cache key that covers everything is never a hit and pretending otherwise would be the one reuse that could hide an unregistered object.",
         "owner": "UCOS-UGA-001"
@@ -190,6 +225,13 @@
         "plane": "READ_ONLY",
         "depends_on": [],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "00-MASTER/UAUE-000001/",
+          "engine/uaue/",
+          "engine/uckp/",
+          "engine/nucleus/",
+          "engine/foundation/"
+        ],
         "reuse_inputs": ["00-MASTER/UAUE-000001/", "engine/uaue/"],
         "reusable": true,
         "owner": "UAUE-000001"
@@ -201,6 +243,13 @@
         "plane": "READ_ONLY",
         "depends_on": [],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "00-MASTER/UAUE-000001/",
+          "engine/uaue/",
+          "engine/uckp/",
+          "engine/nucleus/",
+          "engine/foundation/"
+        ],
         "reuse_inputs": ["00-MASTER/UAUE-000001/", "engine/uaue/"],
         "reusable": true,
         "owner": "UAUE-000001"
@@ -212,6 +261,12 @@
         "plane": "READ_ONLY",
         "depends_on": [],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "00-MASTER/UOBC-000001/",
+          "engine/object_birth/",
+          "engine/uckp/",
+          "engine/foundation/"
+        ],
         "reuse_inputs": ["00-MASTER/UOBC-000001/", "engine/object_birth/"],
         "reusable": true,
         "owner": "UOBC-000001"
@@ -223,6 +278,9 @@
         "plane": "READ_ONLY",
         "depends_on": [],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "**"
+        ],
         "reusable": false,
         "$not_reusable": "It scans declared roots across the whole repository for permanence declarations and closed enumerations, so like UGA its input is the tree.",
         "owner": "UISD-000001"
@@ -234,6 +292,12 @@
         "plane": "READ_ONLY",
         "depends_on": [],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "00-MASTER/UCPA-000001/",
+          "engine/root_ontology/",
+          "engine/uckp/",
+          "engine/foundation/"
+        ],
         "reusable": false,
         "$not_reusable": "The set of files it measures is DECLARED IN DATA, not fixed by this registry: ucpa-declaration.json names the canonical register, the ratification record, the owner binding and every classified projection, and that projection set is expected to grow as further sites are classified. A static reuse_inputs list would therefore go stale silently, which is the one thing a reuse decision must never do, so this stage is recomputed rather than reused.",
         "owner": "UCPA-000001"
@@ -245,6 +309,12 @@
         "plane": "READ_ONLY",
         "depends_on": [],
         "modes": ["change", "integration", "full"],
+        "read_set": [
+          "00-MASTER/UVI-000001/",
+          "engine/verification_intelligence/",
+          "engine/verification_impact/",
+          "verify.sh"
+        ],
         "reuse_inputs": ["00-MASTER/UVI-000001/", "engine/verification_intelligence/", "verify.sh"],
         "reusable": true,
         "owner": "UVI-000001"
@@ -256,6 +326,9 @@
         "plane": "READ_ONLY",
         "depends_on": ["pytest"],
         "modes": ["integration", "full"],
+        "read_set": [
+          "pyproject.toml"
+        ],
         "reusable": false,
         "$modes": "Excluded from fast and change because those modes run --no-cov: there is no coverage data to summarise and a stale total is worse than none.",
         "owner": "CD-02"
@@ -267,6 +340,10 @@
         "plane": "READ_ONLY",
         "depends_on": [],
         "modes": ["full"],
+        "read_set": [
+          "00-BOOK/",
+          "00-SOURCE/"
+        ],
         "reusable": false,
         "owner": "REG-AUTO-001"
       }
@@ -369,7 +446,10 @@
     { "id": "UVI-L-08", "title": "Execution Topology Neutrality", "statement": "Scheduling and sharding change no measured obligation: the union of the shards equals the selection exactly, no test is placed twice, and the coverage floor is evaluated once over combined data.", "check": "topology_neutrality" },
     { "id": "UVI-L-09", "title": "Evidence Reuse Integrity", "statement": "A result may be reused only when the recomputed input digest equals the recorded one, and never by a certification-eligible mode.", "check": "evidence_reuse_integrity" },
     { "id": "UVI-L-10", "title": "Deterministic Planning", "statement": "Planning twice over one repository state produces byte-identical plans, and no wall clock enters a plan.", "check": "deterministic_planning" },
-    { "id": "UVI-L-11", "title": "Every Declared Read-Set Resolves", "statement": "Every prefix a stage declares as a reuse input resolves to at least one registered object. A read-set that matches nothing is a declaration naming a path the repository does not carry, and it silently disables reuse for that stage forever rather than failing.", "check": "every_declared_read_set_resolves" }
+    { "id": "UVI-L-11", "title": "Every Declared Read-Set Resolves", "statement": "Every prefix a stage declares as a reuse input resolves to at least one registered object. A read-set that matches nothing is a declaration naming a path the repository does not carry, and it silently disables reuse for that stage forever rather than failing.", "check": "every_declared_read_set_resolves" },
+    { "id": "UVI-L-12", "title": "Every Stage Declares A Read-Set", "statement": "Every declared stage declares what it reads, whether or not it may be answered from cache. A stage with no read-set is a stage no impact analysis can relate a change to.", "check": "every_stage_declares_a_read_set" },
+    { "id": "UVI-L-13", "title": "Read-Set Is Independent Of Reuse Policy", "statement": "The read-set and the reuse policy are separate declarations and neither determines the other. Every non-reusable stage still resolves to a non-empty object population, and toggling the reuse flag changes neither the read-set nor what it resolves to.", "check": "read_set_is_independent_of_reuse_policy" },
+    { "id": "UVI-L-14", "title": "Evidence Identity Depends On The Read-Set", "statement": "Widening or narrowing a stage's read-set changes its evidence key. A declared read-set that does not reach the key would be a declaration with no consequence.", "check": "evidence_identity_depends_on_the_read_set" }
   ],
   "$law_checks": "Every law names a check that computes it. The contract refuses to construct itself if a law names a check that does not exist, or if a check exists that no law claims — the discipline UISD-000001 and UOBC-000001 already apply.",
 

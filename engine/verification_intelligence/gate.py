@@ -33,11 +33,17 @@ from typing import Any
 
 from engine.verification_intelligence.constitution import (
     Constitution,
+    execution_contract,
     load_constitution,
     load_declaration,
     repo_root,
 )
-from engine.verification_intelligence.evidence import decide, resolve_prefix, store_home
+from engine.verification_intelligence.evidence import (
+    decide,
+    input_digest,
+    resolve_prefix,
+    store_home,
+)
 from engine.verification_intelligence.execution import plan_shards, unit_file
 from engine.verification_intelligence.model import (
     Coverage,
@@ -473,12 +479,100 @@ def every_declared_read_set_resolves(ctx: _Context) -> Findings:
     """
     findings = Findings()
     for stage in ctx.constitution.stages:
-        for prefix in stage.reuse_inputs or ():
+        for prefix in stage.reads:
             if not resolve_prefix(ctx.substrates, prefix):
                 findings.append(
                     f"{stage.stage_id} declares read-set prefix {prefix!r}, which resolves "
                     f"to no registered object"
                 )
+    return findings
+
+
+def every_stage_declares_a_read_set(ctx: _Context) -> Findings:
+    """UVI-L-12 — a stage with no declared read-set is a stage nothing can reason about.
+
+    Mandatory for EVERY stage, not only the cacheable ones. The read-set is a dependency
+    relation; whether the stage may be answered from cache is a separate policy, and a
+    stage that must always run still reads something knowable.
+    """
+    findings = Findings()
+    for stage in ctx.constitution.stages:
+        if not stage.read_set:
+            findings.append(f"{stage.stage_id} declares no read_set")
+    return findings
+
+
+def read_set_is_independent_of_reuse_policy(ctx: _Context) -> Findings:
+    """UVI-L-13 — computed, not asserted: the two declarations do not determine each other.
+
+    Three properties, each of which failed before the separation:
+
+    * a read-set exists for stages on BOTH sides of the reuse policy, so the policy
+      cannot be inferred from the presence of a read-set and vice versa;
+    * every NON-reusable stage resolves to a non-empty object population, so impact
+      analysis can reach a stage that may never be cached;
+    * toggling the reuse flag IN MEMORY changes neither the read-set nor the population
+      it resolves to — performed here rather than described, because the whole defect
+      was that one field silently answered both questions.
+    """
+    import dataclasses
+
+    findings = Findings()
+    reusable = [s for s in ctx.constitution.stages if s.reusable]
+    non_reusable = [s for s in ctx.constitution.stages if not s.reusable]
+    if not reusable or not non_reusable:
+        findings.append("the stage registry cannot demonstrate independence: one side is empty")
+    for stage in non_reusable:
+        if not stage.read_set:
+            findings.append(f"{stage.stage_id} is non-reusable and declares no read-set")
+            continue
+        population: set[str] = set()
+        for prefix in stage.reads:
+            population |= set(resolve_prefix(ctx.substrates, prefix))
+        if not population:
+            findings.append(
+                f"{stage.stage_id} is non-reusable and its read-set reaches no object, so "
+                f"impact analysis cannot relate any change to it"
+            )
+    for stage in ctx.constitution.stages:
+        toggled = dataclasses.replace(stage, reusable=not stage.reusable)
+        if toggled.reads != stage.reads:
+            findings.append(f"{stage.stage_id}: toggling the reuse policy changed the read-set")
+        before = {p for pre in stage.reads for p in resolve_prefix(ctx.substrates, pre)}
+        after = {p for pre in toggled.reads for p in resolve_prefix(ctx.substrates, pre)}
+        if before != after:
+            findings.append(
+                f"{stage.stage_id}: toggling the reuse policy changed the resolved population"
+            )
+    return findings
+
+
+def evidence_identity_depends_on_the_read_set(ctx: _Context) -> Findings:
+    """UVI-L-14 — computed: a changed read-set is a changed evidence identity.
+
+    The read-set is what the digest is taken over, so widening or narrowing it must
+    produce a different key. Performed on every keyable stage rather than argued, because
+    a read-set that did not reach the key would be a declaration with no consequence.
+    """
+    import dataclasses
+
+    findings = Findings()
+    measured = 0
+    for stage in ctx.constitution.stages:
+        contract = execution_contract(stage.label, root=ctx.root, source=ctx.verify)
+        baseline = input_digest(stage, ctx.substrates, contract=contract)
+        if baseline is None:
+            continue
+        measured += 1
+        widened = dataclasses.replace(stage, read_set=(*stage.reads, "00-BOOK/tools/"))
+        if input_digest(widened, ctx.substrates, contract=contract) == baseline:
+            findings.append(f"{stage.stage_id}: widening the read-set did not change the key")
+        if len(stage.reads) > 1:
+            narrowed = dataclasses.replace(stage, read_set=tuple(sorted(stage.reads))[:-1])
+            if input_digest(narrowed, ctx.substrates, contract=contract) == baseline:
+                findings.append(f"{stage.stage_id}: narrowing the read-set did not change the key")
+    if not measured:
+        findings.append("no stage produced a key, so this law measured nothing")
     return findings
 
 
@@ -494,6 +588,9 @@ CHECKS = {
     "evidence_reuse_integrity": evidence_reuse_integrity,
     "deterministic_planning": deterministic_planning,
     "every_declared_read_set_resolves": every_declared_read_set_resolves,
+    "every_stage_declares_a_read_set": every_stage_declares_a_read_set,
+    "read_set_is_independent_of_reuse_policy": read_set_is_independent_of_reuse_policy,
+    "evidence_identity_depends_on_the_read_set": evidence_identity_depends_on_the_read_set,
 }
 
 

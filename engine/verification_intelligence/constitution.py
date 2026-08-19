@@ -256,6 +256,7 @@ def _parse_stage(raw: dict[str, Any]) -> StageSpec:
         reuse_inputs=_tuple(raw.get("reuse_inputs")),
         owner=_text(raw.get("owner"), "stage.owner"),
         shardable=bool(raw.get("shardable")),
+        read_set=_tuple(raw.get("read_set")),
     )
 
 

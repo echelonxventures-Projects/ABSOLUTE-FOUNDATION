@@ -8458,8 +8458,10 @@
         "derive",
         "deterministic_planning",
         "every_declared_read_set_resolves",
+        "every_stage_declares_a_read_set",
         "evidence",
         "evidence_home",
+        "evidence_identity_depends_on_the_read_set",
         "evidence_reuse_integrity",
         "exactly_one_default",
         "execution",
@@ -8484,6 +8486,7 @@
         "plan_json",
         "plan_shards",
         "plan_tsv",
+        "read_set_is_independent_of_reuse_policy",
         "record",
         "registry",
         "render",
@@ -8495,6 +8498,7 @@
         "selection",
         "selection_is_derived",
         "stage_registry_reconciliation",
+        "stages_reading",
         "store_home",
         "topology_neutrality",
         "unbounded_prefixes",
@@ -14040,7 +14044,7 @@
   ],
   "capability_count": 131,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "d1e37384969b2494806f2812475c6671742ba03f35a7642b01e490c07be5db3c",
+  "content_hash": "20df662adcb49398f7c9af41b2fc435d6ea50b3516ac1d3ca55ff1c8f2f19dad",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -14223,11 +14227,11 @@
           "test_functions": 887
         },
         "engine": {
-          "loc": 113219,
+          "loc": 113366,
           "root": "engine",
           "source_files": 407,
           "test_files": 284,
-          "test_functions": 4629
+          "test_functions": 4636
         },
         "infrastructure": {
           "loc": 22599,
@@ -14258,8 +14262,8 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 344535,
-      "total_tests": 14162
+      "total_loc": 344682,
+      "total_tests": 14169
     },
     "corpus": {
       "artifacts": 1233,

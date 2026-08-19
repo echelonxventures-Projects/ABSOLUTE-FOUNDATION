@@ -61,6 +61,14 @@ EVIDENCE_VERSION = "2.0"
 
 SCHEMA = "ucos-verification-evidence"
 
+#: The declared read-set token for a stage whose subject IS the version-controlled
+#: boundary. ``universal-object-governance`` asserts the ten invariants over every
+#: tracked object and ``pytest`` runs the whole suite; enumerating roots for them would
+#: be a list that silently fails to cover a root added later. The token cannot be a
+#: prefix that happens to match everything, because it must remain TRUE when the tree
+#: grows — which is the same openness UISD-000001 requires everywhere else.
+WHOLE_BOUNDARY = "**"
+
 
 @dataclass(frozen=True, slots=True)
 class EvidenceEntry:
@@ -95,6 +103,8 @@ def resolve_prefix(substrates: Substrates, prefix: str) -> list[str]:
     raising — a plan must never crash — but the condition is measured and refused by
     ``UVI-L-11`` so it cannot sit silent again.
     """
+    if prefix == WHOLE_BOUNDARY:
+        return sorted(substrates.universal)
     stem = prefix.rstrip("/")
     return sorted(
         path
@@ -128,7 +138,7 @@ def input_digest(
     and nothing here may assume a flag parser is order-insensitive; the prefixes are
     sorted, because a set of declared inputs has no order to preserve.
     """
-    if not stage.reusable or not stage.reuse_inputs:
+    if not stage.reusable or not stage.reads:
         return None
     if contract is None:
         return None
@@ -137,7 +147,7 @@ def input_digest(
     digest.update(f"argc:{len(contract)}\n".encode())
     for index, token in enumerate(contract):
         digest.update(f"argv:{index}:{token}\n".encode())
-    for prefix in sorted(stage.reuse_inputs):
+    for prefix in sorted(stage.reads):
         matched = resolve_prefix(substrates, prefix)
         if not matched:
             return None
