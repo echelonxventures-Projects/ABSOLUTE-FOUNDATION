@@ -7166,12 +7166,18 @@
         "run",
         "substrates",
         "surface",
+        "test_A5_a_withheld_hash_contributes_a_constant_rather_than_refusing",
+        "test_A5_an_unexplained_missing_hash_still_refuses",
+        "test_A5_withheld_and_hashed_are_not_the_same_key",
+        "test_A6_every_reusable_stage_now_takes_a_key",
+        "test_A6_the_read_set_resolves_against_the_universal_registry",
         "test_A_same_inputs_same_command_is_one_key_and_a_hit",
         "test_B_a_changed_command_is_a_different_key_and_a_miss",
         "test_C_argument_order_is_significant",
         "test_C_token_boundaries_cannot_be_forged",
         "test_D_equivalent_serialisations_of_one_command_are_one_key",
         "test_E_no_clock_host_path_or_environment_reaches_the_key",
+        "test_UVI_L_11_fires_on_a_read_set_that_resolves_to_nothing",
         "test_a_baseline_the_registry_does_not_carry_closes_the_gate",
         "test_a_boolean_floor_is_refused",
         "test_a_boolean_never_satisfies_a_numeric_condition",
@@ -7511,13 +7517,7 @@
         "test_an_unmeasured_certification_verdict_is_measured",
         "test_an_unmeasured_object_is_over_priced_rather_than_assumed_cheap",
         "test_an_unmeasured_validation_verdict_is_measured",
-        "test_an_unmeasured_verification_verdict_is_measured",
-        "test_an_unparseable_classification_is_a_fault",
-        "test_an_unparseable_declaration_is_a_fault",
-        "test_an_unparseable_module_binds_nothing_rather_than_raising",
-        "test_an_unparseable_policy_is_a_fault",
-        "test_an_unparseable_technology_manifest_is_refused",
-        "test_an_unpermitted_execution_path_refuses_the_authorisation"
+        "test_an_unmeasured_verification_verdict_is_measured"
       ],
       "unique_id": "RC-64"
     },
@@ -8369,6 +8369,7 @@
         "decide",
         "derive",
         "deterministic_planning",
+        "every_declared_read_set_resolves",
         "evidence",
         "evidence_home",
         "evidence_reuse_integrity",
@@ -8399,6 +8400,7 @@
         "registry",
         "render",
         "repo_root",
+        "resolve_prefix",
         "resolve_workers",
         "run_tests",
         "select",
@@ -13949,7 +13951,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "7e48ee0521e7ede88daea993763be71edbe567e65545e98c1ccf2f4f1bf6823a",
+  "content_hash": "2398db851c714fa9c0d57b82f0931d159175b65a72dd45bcca7fb41e4f64f7b4",
   "count": 131,
   "evidence_state": {
     "evidence_files": {

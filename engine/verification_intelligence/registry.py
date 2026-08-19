@@ -35,6 +35,13 @@ from engine.verification_intelligence.constitution import COST_MODEL, repo_root
 from engine.verification_intelligence.model import TestObject, VerificationIntelligenceError
 
 EXECUTABLE_REGISTRY = "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json"
+
+#: The registry that is TOTAL over the version-controlled boundary. 01 is the
+#: EXECUTABLE projection of it — a strict subset that omits the 1 233 DOCUMENT_ARTIFACT
+#: objects, which is right for import-edge traversal and wrong for a read-set. A stage
+#: declaring ``00-BOOK/SCHEMAS/`` or ``00-SOURCE/`` reads documents, and resolving those
+#: prefixes against 01 matched NOTHING while 32 tracked, hashed objects sat in 02.
+UNIVERSAL_REGISTRY = "00-MASTER/UCOS-UGA-001/02-UNIVERSAL-OBJECT-REGISTRY.json"
 RELATIONSHIP_GRAPH = "00-MASTER/UCOS-UGA-001/04-RELATIONSHIP-GRAPH.json"
 CAPABILITY_CATALOG = "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json"
 PYPROJECT = "pyproject.toml"
@@ -62,6 +69,10 @@ class Substrates:
     """Every graph selection derives from, loaded once and indexed for reverse walks."""
 
     objects: dict[str, dict] = field(default_factory=dict)
+    #: Every version-controlled object, not only the executable projection. Selection
+    #: walks ``objects`` because import edges live there; the evidence read-set resolves
+    #: against this, because a stage reads documents as readily as it reads code.
+    universal: dict[str, dict] = field(default_factory=dict)
     dependents: dict[str, set[str]] = field(default_factory=lambda: defaultdict(set))
     owner_members: dict[str, set[str]] = field(default_factory=lambda: defaultdict(set))
     by_universal_id: dict[str, str] = field(default_factory=dict)
@@ -131,6 +142,14 @@ def load_substrates(root: str | None = None) -> Substrates:
             "the registry carries no dependency edges, so impact cannot be computed; run "
             "`python 00-MASTER/UCOS-UGA-001/uga_engine.py run` to regenerate it"
         )
+
+    universal = _read_json(os.path.join(base, UNIVERSAL_REGISTRY), "the universal object registry")
+    universal_entries = universal.get("entries")
+    if not isinstance(universal_entries, list) or not universal_entries:
+        raise VerificationIntelligenceError("the universal object registry holds no entries")
+    for entry in universal_entries:
+        if isinstance(entry, dict) and "path" in entry:
+            substrates.universal[str(entry["path"])] = entry
 
     graph = _read_json(os.path.join(base, RELATIONSHIP_GRAPH), "the relationship graph")
     edges = graph.get("relationships")

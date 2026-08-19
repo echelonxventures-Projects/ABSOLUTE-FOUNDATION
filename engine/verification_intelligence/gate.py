@@ -37,7 +37,7 @@ from engine.verification_intelligence.constitution import (
     load_declaration,
     repo_root,
 )
-from engine.verification_intelligence.evidence import decide, store_home
+from engine.verification_intelligence.evidence import decide, resolve_prefix, store_home
 from engine.verification_intelligence.execution import plan_shards, unit_file
 from engine.verification_intelligence.model import (
     Coverage,
@@ -457,6 +457,31 @@ def deterministic_planning(ctx: _Context) -> Findings:
 #: Every implemented check, bound to the declaration by name. The constitution refuses to
 #: construct itself if a law names a check absent here, or if a check here is claimed by
 #: no law — so this table and the declared law list cannot drift apart.
+def every_declared_read_set_resolves(ctx: _Context) -> Findings:
+    """UVI-L-11 — a declared read-set that matches nothing is a defect, not a cache miss.
+
+    The condition this refuses is silent and permanent. ``input_digest`` correctly
+    refuses a key it cannot take, so a prefix matching no registered object makes the
+    stage run — safe, and indistinguishable from a cold cache. Three stages sat in that
+    state indefinitely because two prefixes were resolved against the EXECUTABLE
+    projection while the objects they name are DOCUMENT_ARTIFACTs carried only by the
+    universal registry.
+
+    Measured over every stage that declares reuse inputs, whether or not the stage is
+    currently reusable: a read-set is a statement about what the stage READS, and it
+    must resolve even for a stage policy forbids reusing.
+    """
+    findings = Findings()
+    for stage in ctx.constitution.stages:
+        for prefix in stage.reuse_inputs or ():
+            if not resolve_prefix(ctx.substrates, prefix):
+                findings.append(
+                    f"{stage.stage_id} declares read-set prefix {prefix!r}, which resolves "
+                    f"to no registered object"
+                )
+    return findings
+
+
 CHECKS = {
     "mode_constitution_completeness": mode_constitution_completeness,
     "exactly_one_default": exactly_one_default,
@@ -468,6 +493,7 @@ CHECKS = {
     "topology_neutrality": topology_neutrality,
     "evidence_reuse_integrity": evidence_reuse_integrity,
     "deterministic_planning": deterministic_planning,
+    "every_declared_read_set_resolves": every_declared_read_set_resolves,
 }
 
 

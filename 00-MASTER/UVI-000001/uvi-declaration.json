@@ -368,7 +368,8 @@
     { "id": "UVI-L-07", "title": "Fail Wide", "statement": "Every condition the selector cannot bound escalates to the whole suite under the coverage floor, and names the reason. An unbounded change never produces a narrow plan.", "check": "fail_wide" },
     { "id": "UVI-L-08", "title": "Execution Topology Neutrality", "statement": "Scheduling and sharding change no measured obligation: the union of the shards equals the selection exactly, no test is placed twice, and the coverage floor is evaluated once over combined data.", "check": "topology_neutrality" },
     { "id": "UVI-L-09", "title": "Evidence Reuse Integrity", "statement": "A result may be reused only when the recomputed input digest equals the recorded one, and never by a certification-eligible mode.", "check": "evidence_reuse_integrity" },
-    { "id": "UVI-L-10", "title": "Deterministic Planning", "statement": "Planning twice over one repository state produces byte-identical plans, and no wall clock enters a plan.", "check": "deterministic_planning" }
+    { "id": "UVI-L-10", "title": "Deterministic Planning", "statement": "Planning twice over one repository state produces byte-identical plans, and no wall clock enters a plan.", "check": "deterministic_planning" },
+    { "id": "UVI-L-11", "title": "Every Declared Read-Set Resolves", "statement": "Every prefix a stage declares as a reuse input resolves to at least one registered object. A read-set that matches nothing is a declaration naming a path the repository does not carry, and it silently disables reuse for that stage forever rather than failing.", "check": "every_declared_read_set_resolves" }
   ],
   "$law_checks": "Every law names a check that computes it. The contract refuses to construct itself if a law names a check that does not exist, or if a check exists that no law claims — the discipline UISD-000001 and UOBC-000001 already apply.",
 

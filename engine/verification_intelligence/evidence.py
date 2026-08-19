@@ -80,6 +80,29 @@ def store_home(root: str | None = None, home: str = ".ucos-verification-evidence
     return os.path.join(root or repo_root(), home)
 
 
+def resolve_prefix(substrates: Substrates, prefix: str) -> list[str]:
+    """Every registered object under ``prefix``, sorted — resolved against the UNIVERSAL registry.
+
+    A6 — THE PROJECTION MATTERS. This used to resolve against ``substrates.objects``,
+    which is the EXECUTABLE projection: a strict subset that omits every
+    ``DOCUMENT_ARTIFACT``. Three stages declare read-sets that are wholly or partly
+    documents, and two of their prefixes — ``00-SOURCE/`` and ``00-BOOK/SCHEMAS/`` —
+    matched nothing at all, while 32 tracked, hashed objects sat in the universal
+    registry. The prefixes were never wrong; they were being asked of the wrong register.
+
+    An empty result is now a genuine authoring error: the declaration names a path the
+    repository does not carry. ``input_digest`` still refuses the key rather than
+    raising — a plan must never crash — but the condition is measured and refused by
+    ``UVI-L-11`` so it cannot sit silent again.
+    """
+    stem = prefix.rstrip("/")
+    return sorted(
+        path
+        for path in substrates.universal
+        if path == stem or path.startswith(stem + "/") or path == prefix
+    )
+
+
 def input_digest(
     stage: StageSpec, substrates: Substrates, *, contract: tuple[str, ...] | None
 ) -> str | None:
@@ -115,21 +138,33 @@ def input_digest(
     for index, token in enumerate(contract):
         digest.update(f"argv:{index}:{token}\n".encode())
     for prefix in sorted(stage.reuse_inputs):
-        matched = sorted(
-            path
-            for path in substrates.objects
-            if path == prefix.rstrip("/")
-            or path.startswith(prefix.rstrip("/") + "/")
-            or path == prefix
-        )
+        matched = resolve_prefix(substrates, prefix)
         if not matched:
             return None
         digest.update(f"prefix:{prefix}\n".encode())
         for path in matched:
-            content_hash = substrates.objects[path].get("content_hash")
-            if not content_hash:
-                return None
-            digest.update(f"{path}:{content_hash}\n".encode())
+            entry = substrates.universal[path]
+            content_hash = entry.get("content_hash")
+            if content_hash:
+                digest.update(f"{path}:{content_hash}\n".encode())
+                continue
+            withheld = entry.get("content_hash_withheld")
+            if withheld:
+                # A5 — WITHHELD IS KNOWN, AND KNOWN IS NOT MISSING. Eleven surfaces
+                # carry no hash because they are SELF_REFERENTIAL: the object is the
+                # engine's own output and a file cannot contain its own hash. That is a
+                # declared, permanent property of the object, not an absence of
+                # measurement, so it contributes the declared reason as a constant. It
+                # is a constant on purpose: it can never distinguish two revisions of
+                # that file, so any stage whose read-set is ONLY such objects still
+                # keys on nothing that moves — which is why the prefix's other members
+                # carry the discrimination, and why UGA and infinite-scope, whose
+                # subject IS the whole tree, remain declared non-reusable.
+                digest.update(f"{path}:withheld:{withheld}\n".encode())
+                continue
+            # No hash and no declared reason. Unmeasured is unknown, and unknown
+            # refuses the key rather than keying on an absence.
+            return None
     return digest.hexdigest()
 
 

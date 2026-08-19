@@ -43,6 +43,7 @@ from engine.verification_intelligence.evidence import (
     input_digest,
     lookup,
     record,
+    resolve_prefix,
 )
 from engine.verification_intelligence.execution import (
     assert_topology_neutral,
@@ -50,6 +51,7 @@ from engine.verification_intelligence.execution import (
     resolve_workers,
     unit_file,
 )
+from engine.verification_intelligence.gate import every_declared_read_set_resolves
 from engine.verification_intelligence.model import (
     Action,
     Coverage,
@@ -419,6 +421,135 @@ def test_a_prefix_matching_no_registered_object_takes_no_digest(constitution, su
         reuse_inputs=("a/path/that/is/not/registered/",),
     )
     assert input_digest(stage, substrates, contract=("x",)) is None
+
+
+# --- read-set resolution and withheld hashes (A5 / A6) -------------------------------
+
+
+def test_A6_the_read_set_resolves_against_the_universal_registry(substrates) -> None:
+    """A6 — the executable projection is a subset, and a read-set is not confined to it.
+
+    01 omits every DOCUMENT_ARTIFACT. Two declared prefixes name trees made entirely of
+    documents, so against 01 they matched nothing at all while the objects sat, tracked
+    and hashed, in 02.
+    """
+    assert len(substrates.universal) > len(substrates.objects)
+    assert set(substrates.objects) <= set(substrates.universal), "02 must be a superset of 01"
+    for prefix in ("00-SOURCE/", "00-BOOK/SCHEMAS/"):
+        in_executable = [p for p in substrates.objects if p.startswith(prefix)]
+        resolved = resolve_prefix(substrates, prefix)
+        assert not in_executable, "fixture assumption: these are documents, absent from 01"
+        assert resolved, f"{prefix} must resolve against the universal registry"
+
+
+def test_A6_every_reusable_stage_now_takes_a_key(constitution, substrates) -> None:
+    """A6 — the three permanently-keyless stages are keyless no longer.
+
+    governance-pre, registry-validate and meta-constitutional could never compute a key.
+    Every stage the declaration calls reusable must now produce one, or reuse is a
+    promise the engine cannot keep.
+    """
+    source = verify_source()
+    keyless = [
+        stage.stage_id
+        for stage in constitution.stages
+        if stage.reusable
+        and input_digest(stage, substrates, contract=execution_contract(stage.label, source=source))
+        is None
+    ]
+    assert keyless == [], f"stages declared reusable but unable to key: {keyless}"
+
+
+def test_A5_a_withheld_hash_contributes_a_constant_rather_than_refusing(
+    constitution, substrates
+) -> None:
+    """A5 — withheld is a declared property of the object, not an absent measurement.
+
+    Eleven surfaces carry ``content_hash_withheld: SELF_REFERENTIAL`` because a file
+    cannot contain its own hash. Treating that as "unmeasured" refused the key for every
+    stage whose read-set contained one, permanently and silently.
+    """
+    withheld = {
+        path: entry
+        for path, entry in substrates.universal.items()
+        if not entry.get("content_hash") and entry.get("content_hash_withheld")
+    }
+    assert withheld, "fixture assumption: the registry declares withheld hashes"
+
+    # No object may carry neither a hash nor a declared reason — that is the case that
+    # must still refuse, and it must not exist in a healthy registry.
+    unexplained = [
+        path
+        for path, entry in substrates.universal.items()
+        if not entry.get("content_hash") and not entry.get("content_hash_withheld")
+    ]
+    assert unexplained == [], f"objects with no hash and no declared reason: {unexplained[:5]}"
+
+    # meta-constitutional reads 00-BOOK/DATA/, which contains a withheld object.
+    stage = next(s for s in constitution.stages if s.stage_id == "meta-constitutional")
+    assert any(p in withheld for p in resolve_prefix(substrates, "00-BOOK/DATA/"))
+    assert input_digest(stage, substrates, contract=execution_contract(stage.label)) is not None
+
+
+def test_A5_an_unexplained_missing_hash_still_refuses(constitution, substrates) -> None:
+    """A5 — the distinction is withheld vs MISSING, and missing must still refuse."""
+    from dataclasses import replace
+
+    stage = replace(
+        next(s for s in constitution.stages if s.reusable),
+        reuse_inputs=("engine/verification_intelligence/",),
+    )
+    contract = execution_contract(stage.label)
+    assert input_digest(stage, substrates, contract=contract) is not None
+
+    victim = next(iter(resolve_prefix(substrates, "engine/verification_intelligence/")))
+    original = substrates.universal[victim]
+    substrates.universal[victim] = {
+        k: v for k, v in original.items() if k not in ("content_hash", "content_hash_withheld")
+    }
+    try:
+        assert input_digest(stage, substrates, contract=contract) is None
+    finally:
+        substrates.universal[victim] = original
+
+
+def test_A5_withheld_and_hashed_are_not_the_same_key(constitution, substrates) -> None:
+    """A5 — a withheld marker must not collide with a real hash of the same text."""
+    from dataclasses import replace
+
+    stage = replace(
+        next(s for s in constitution.stages if s.reusable),
+        reuse_inputs=("engine/verification_intelligence/",),
+    )
+    contract = execution_contract(stage.label)
+    victim = next(iter(resolve_prefix(substrates, "engine/verification_intelligence/")))
+    original = substrates.universal[victim]
+    marker = "SELF_REFERENTIAL"
+    try:
+        substrates.universal[victim] = {**original, "content_hash": marker}
+        as_hash = input_digest(stage, substrates, contract=contract)
+        substrates.universal[victim] = {
+            **{k: v for k, v in original.items() if k != "content_hash"},
+            "content_hash_withheld": marker,
+        }
+        as_withheld = input_digest(stage, substrates, contract=contract)
+        assert as_hash != as_withheld
+    finally:
+        substrates.universal[victim] = original
+
+
+def test_UVI_L_11_fires_on_a_read_set_that_resolves_to_nothing(substrates) -> None:
+    """UVI-L-11 — mutation proof: the law must fail when the condition it names is present."""
+    ctx = uvi_gate._Context()
+    assert every_declared_read_set_resolves(ctx) == [], "the law must hold as the tree stands"
+
+    from dataclasses import replace
+
+    bogus = replace(ctx.constitution.stages[0], reuse_inputs=("no/such/tree/",))
+    ctx.constitution = replace(ctx.constitution, stages=(bogus, *ctx.constitution.stages[1:]))
+    findings = every_declared_read_set_resolves(ctx)
+    assert findings, "the law did not fire on an unresolvable read-set"
+    assert "no/such/tree/" in findings[0]
 
 
 # --- the execution contract in the evidence key (Step 1) ----------------------------
@@ -798,7 +929,8 @@ def test_the_gate_exits_zero_when_every_law_holds() -> None:
 def test_the_gate_emits_json_and_a_rendered_report(capsys) -> None:
     assert uvi_gate.main(["--json"]) == uvi_gate.EXIT_COHERENT
     report = json.loads(capsys.readouterr().out)
-    assert report["laws_measured"] == len(report["laws"]) == 10
+    declared = len(load_declaration()["laws"])
+    assert report["laws_measured"] == len(report["laws"]) == declared
     assert uvi_gate.main([]) == uvi_gate.EXIT_COHERENT
     assert "VERDICT" in capsys.readouterr().out
 
@@ -1723,19 +1855,33 @@ def _substrate_fixture(tmp_path, **overrides):
         CAPABILITY_CATALOG,
         EXECUTABLE_REGISTRY,
         RELATIONSHIP_GRAPH,
+        UNIVERSAL_REGISTRY,
     )
 
+    executable_entries = [
+        {"path": "a.py", "object_class": "EXECUTABLE_OBJECT", "dependencies": []},
+        {
+            "path": "engine/tests/test_a.py",
+            "object_class": "TEST_OBJECT",
+            "owner": "engine/tests",
+            "universal_id": "UCOS-TESTOBJ-000001",
+            "dependencies": ["a.py"],
+            "content_hash": "0" * 64,
+        },
+    ]
     surfaces = {
-        EXECUTABLE_REGISTRY: {
+        EXECUTABLE_REGISTRY: {"entries": executable_entries},
+        # 02 is a superset of 01 in the repository, so the fixture models it as one:
+        # the executable objects plus a DOCUMENT_ARTIFACT that 01 never carries.
+        UNIVERSAL_REGISTRY: {
             "entries": [
-                {"path": "a.py", "object_class": "EXECUTABLE_OBJECT", "dependencies": []},
+                *executable_entries,
                 {
-                    "path": "engine/tests/test_a.py",
-                    "object_class": "TEST_OBJECT",
-                    "owner": "engine/tests",
-                    "universal_id": "UCOS-TESTOBJ-000001",
-                    "dependencies": ["a.py"],
-                    "content_hash": "0" * 64,
+                    "path": "doc/a.md",
+                    "object_class": "DOCUMENT_ARTIFACT",
+                    "owner": "doc",
+                    "universal_id": "UCOS-EXDOC-000001",
+                    "content_hash": "1" * 64,
                 },
             ]
         },
