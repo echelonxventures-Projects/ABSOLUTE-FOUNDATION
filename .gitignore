@@ -212,3 +212,11 @@ intelligence/UCOS-UPI-001/
 # (`00-BOOK/DATA/exclusion-register.json`). Deletion is a separate authorized disposition,
 # never an ignore rule. No pattern is reintroduced here, deliberately: the class is
 # platform-neutral and is decided by blob comparison, not by macOS Finder's naming.
+
+# UVI-000001 — the Verification Evidence Registry. A content-addressed CACHE of stage
+# results, keyed by digests over content hashes UCOS-UGA-001 already publishes. It is not
+# repository truth: deleting the whole store changes no verdict, only the cost of reaching
+# one. A cache inside the tracked tree would be a second answer to "did this pass", and
+# UCOS-UGA-001 would measure each entry as an unidentified object — which it did, before
+# this rule existed.
+.ucos-verification-evidence/

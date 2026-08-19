@@ -1,0 +1,578 @@
+"""UVI-000001 Part 08 — the fail-closed verification intelligence gate.
+
+Exit codes follow the repository convention so a caller can distinguish the three
+outcomes that matter:
+
+    0  COHERENT    every law holds
+    1  INCOHERENT  a law was measured and refused
+    2  FAULT       no verdict could be reached (the declaration is unusable)
+
+The distinction between 1 and 2 is deliberate. "A mode claims more than it measures" and
+"the declaration could not be read" are different facts, and collapsing them would let an
+unreadable declaration pass as whichever was more convenient.
+
+OBSERVE MODE — READ ONLY. It loads the declaration, reads ``verify.sh`` and the engine's
+own sources, plans in memory, and writes nothing — including to gitignored paths. No
+clock, no network, no subprocess, so it cannot dirty the tree and cannot flake.
+
+Every law is COMPUTED. UVI-L-07 and UVI-L-08 in particular are behavioural: the gate
+performs a selection over a synthetic unbounded change and checks that it widened, and
+partitions the whole suite at several worker counts and checks that nothing was lost.
+A law about behaviour that is checked by reading a docstring is not checked.
+"""
+
+from __future__ import annotations
+
+import argparse
+import ast
+import json
+import os
+import re
+import sys
+from typing import Any
+
+from engine.verification_intelligence.constitution import (
+    Constitution,
+    load_constitution,
+    load_declaration,
+    repo_root,
+)
+from engine.verification_intelligence.evidence import decide, store_home
+from engine.verification_intelligence.execution import plan_shards, unit_file
+from engine.verification_intelligence.model import (
+    Coverage,
+    Selection,
+    VerificationIntelligenceError,
+)
+from engine.verification_intelligence.plan import build_plan, plan_json
+from engine.verification_intelligence.registry import (
+    Substrates,
+    TestObjectRegistry,
+    build_test_registry,
+    load_substrates,
+)
+from engine.verification_intelligence.selection import select
+
+EXIT_COHERENT = 0
+EXIT_INCOHERENT = 1
+EXIT_FAULT = 2
+
+#: The one entry point whose declared stages this programme classifies.
+VERIFY = "verify.sh"
+
+#: The engine's own sources, scanned by UVI-L-06 for an authored test path.
+ENGINE_DIR = "engine/verification_intelligence"
+
+#: The one declaration path permitted to name a test object — see selection_is_derived.
+SCHEDULING_EXCEPTION = "execution.test_sharding.isolated"
+
+#: A literal naming a specific test FILE. Its presence in the selector would mean a
+#: hand-maintained list wearing an engine's costume, which is the condition L-06 refuses.
+TEST_LITERAL = re.compile(r"\btests?/[\w./-]*test_\w+\.py\b")
+
+
+class Findings(list):
+    """A law's violations. Empty means the law holds."""
+
+
+def _verify_source(root: str) -> str:
+    try:
+        with open(os.path.join(root, VERIFY), encoding="utf-8") as handle:
+            return handle.read()
+    except OSError as exc:  # pragma: no cover - only on a broken checkout
+        raise VerificationIntelligenceError(f"{VERIFY} is unreadable") from exc
+
+
+def _declared_stage_labels(source: str) -> list[str]:
+    """Every ``run_stage "…"`` literal, in source order.
+
+    The same derivation ``platform/tests/test_canonical_validation_evidence.py`` and
+    ``.github/workflows/uisd-gate.yml`` perform, deliberately reproduced rather than
+    imported: three readers agreeing on one regex over one file is the property that
+    keeps the contract, the record and this registry from drifting apart.
+    """
+    return re.findall(r'^\s*run_stage "([^"]+)"', source, re.M)
+
+
+def _accepted_flags(source: str) -> set[str]:
+    """Every mode flag the script's own argument parser admits."""
+    arms = re.findall(r"^\s*(--[a-z]+)\)\s*_set_mode", source, re.M)
+    return set(arms)
+
+
+# --- the laws -----------------------------------------------------------------------
+
+
+def mode_constitution_completeness(ctx: _Context) -> Findings:
+    """UVI-L-01 — the script and the constitution admit exactly the same modes."""
+    findings = Findings()
+    declared = set(ctx.constitution.flags)
+    accepted = _accepted_flags(ctx.verify)
+    for flag in sorted(declared - accepted):
+        findings.append(f"{flag} is declared in the constitution but {VERIFY} does not accept it")
+    for flag in sorted(accepted - declared):
+        findings.append(f"{VERIFY} accepts {flag} but the constitution does not declare it")
+    return findings
+
+
+def exactly_one_default(ctx: _Context) -> Findings:
+    """UVI-L-02 — one declared default, and the bare invocation resolves to it."""
+    findings = Findings()
+    declared = ctx.constitution.default_mode_id
+    initial = re.search(r'^MODE="([a-z]+)"', ctx.verify, re.M)
+    if initial is None:
+        findings.append(f"{VERIFY} declares no initial MODE, so its default cannot be established")
+        return findings
+    if initial.group(1) != declared:
+        findings.append(
+            f"{VERIFY} defaults to {initial.group(1)!r} but the constitution declares "
+            f"{declared!r} as the default mode"
+        )
+    return findings
+
+
+def stage_registry_reconciliation(ctx: _Context) -> Findings:
+    """UVI-L-03 — the registry and the script declare the same stages, in the same order."""
+    findings = Findings()
+    script = _declared_stage_labels(ctx.verify)
+    registry = list(ctx.constitution.stage_labels)
+    if script != registry:
+        for label in registry:
+            if label not in script:
+                findings.append(
+                    f"the registry classifies a stage {VERIFY} does not declare: {label}"
+                )
+        for label in script:
+            if label not in registry:
+                findings.append(
+                    f"{VERIFY} declares a stage the registry does not classify: {label}"
+                )
+        if not findings:
+            findings.append(
+                "the registry and the script declare the same stages in DIFFERENT order; the "
+                "order is part of the contract the canonical validation record digests"
+            )
+    return findings
+
+
+def no_assurance_reduction(ctx: _Context) -> Findings:
+    """UVI-L-04 — every baseline gate still exists and is still certified against."""
+    findings = Findings()
+    baseline = [
+        str(label)
+        for label in (ctx.document.get("no_assurance_reduction") or {}).get("baseline_stages") or ()
+    ]
+    if not baseline:
+        findings.append("no baseline contract is declared, so no reduction could be detected")
+        return findings
+    declared = set(ctx.constitution.stage_labels)
+    certification_modes = [mode for mode in ctx.constitution.modes if mode.certification_eligible]
+    if not certification_modes:
+        findings.append("no mode is certification-eligible, so the contract is owned by nothing")
+    for label in baseline:
+        if label not in declared:
+            findings.append(f"a baseline gate is no longer a declared stage: {label}")
+            continue
+        for mode in certification_modes:
+            admitted = {stage.label for stage in ctx.constitution.stages_for(mode)}
+            if label not in admitted:
+                findings.append(
+                    f"certification-eligible mode --{mode.mode_id} no longer runs a baseline "
+                    f"gate: {label}"
+                )
+    return findings
+
+
+def no_mode_claims_more_than_it_measures(ctx: _Context) -> Findings:
+    """UVI-L-05 — certification needs the whole suite and the floor; nothing else may claim them."""
+    findings = Findings()
+    for mode in ctx.constitution.modes:
+        if mode.certification_eligible:
+            if mode.selection is not Selection.WHOLE_SUITE:
+                findings.append(
+                    f"--{mode.mode_id} is certification-eligible but selects "
+                    f"{mode.selection.value}, so it would certify a subset"
+                )
+            if mode.coverage is not Coverage.FLOOR_90:
+                findings.append(
+                    f"--{mode.mode_id} is certification-eligible but does not evaluate the floor"
+                )
+            if mode.evidence_reuse:
+                findings.append(
+                    f"--{mode.mode_id} is certification-eligible and permits evidence reuse, so "
+                    "it could certify a cache"
+                )
+        else:
+            if not mode.claims_not:
+                findings.append(
+                    f"--{mode.mode_id} is not certification-eligible and states nothing it does "
+                    "not claim, so a reader cannot tell what its green result excludes"
+                )
+            if mode.coverage is Coverage.FLOOR_90:
+                findings.append(
+                    f"--{mode.mode_id} evaluates the coverage floor but is not certification-"
+                    "eligible; the floor would then have two owners"
+                )
+    return findings
+
+
+def selection_is_derived(ctx: _Context) -> Findings:
+    """UVI-L-06 — no authored test path, and every declared substrate is actually read.
+
+    The scan is over STRING CONSTANTS the engine evaluates, not over its source text.
+    A docstring or a comment naming a test file is documentation — this very module's
+    docstrings name several — while a string constant naming one is a hand-maintained
+    selection wearing an engine's costume. Scanning the raw text cannot tell those apart,
+    so it is parsed instead and docstrings are excluded by position.
+    """
+    findings = Findings()
+    root = ctx.root
+    engine_dir = os.path.join(root, ENGINE_DIR)
+    sources: list[str] = []
+    for name in sorted(os.listdir(engine_dir)):
+        if not name.endswith(".py"):
+            continue
+        with open(os.path.join(engine_dir, name), encoding="utf-8") as handle:
+            body = handle.read()
+        sources.append(body)
+        for literal in _evaluated_strings(body, f"{ENGINE_DIR}/{name}", findings):
+            for match in TEST_LITERAL.findall(literal):
+                findings.append(f"{ENGINE_DIR}/{name} names a specific test file: {match}")
+
+    # ONE part of the declaration is allowed to name a test object, and the exception is
+    # narrow on purpose. `execution.test_sharding.isolated` is SCHEDULING: it says an
+    # object may not run beside anything else, never that it may not run. A blanket
+    # exemption would be a hole, so the entries are held to a stricter test instead —
+    # each must resolve to a currently collectible object, so a stale prefix is a failure
+    # rather than a silently inert line, and each must carry the measurement that
+    # justifies the cost of isolating it.
+    for key, value in _declared_strings(ctx.document):
+        if key.startswith(f"{SCHEDULING_EXCEPTION}["):
+            continue
+        for match in TEST_LITERAL.findall(value):
+            findings.append(f"the declaration names a specific test file at {key}: {match}")
+
+    # The declaration states that the evidence store is untracked. That is a claim about
+    # the repository, so it is measured rather than believed: an evidence store inside the
+    # tracked tree is a second answer to "did this pass", and UCOS-UGA-001 measured every
+    # entry in it as an unidentified object the first time this ran without the rule.
+    ignore_file = os.path.join(root, ".gitignore")
+    home = ctx.constitution.evidence_home.rstrip("/")
+    try:
+        with open(ignore_file, encoding="utf-8") as handle:
+            ignored = {line.strip().rstrip("/") for line in handle if not line.startswith("#")}
+    except OSError:
+        ignored = set()
+    if home not in ignored:
+        findings.append(
+            f"the evidence registry home {ctx.constitution.evidence_home} is not excluded by "
+            ".gitignore, so a cache of results would enter the tracked tree"
+        )
+
+    for entry in ctx.constitution.sharding.get("isolated") or ():
+        if not isinstance(entry, dict):
+            findings.append("an isolation entry is not an object")
+            continue
+        prefix = str(entry.get("prefix") or "")
+        if not prefix:
+            findings.append("an isolation entry names no prefix")
+            continue
+        if not any(path.startswith(prefix) for path in ctx.tests.paths):
+            findings.append(
+                f"{prefix} is declared isolated but matches no collectible test object, so the "
+                "declaration is carrying a scheduling exception for something that is not there"
+            )
+        if not str(entry.get("$measured") or "").strip():
+            findings.append(
+                f"{prefix} is declared isolated with no measurement justifying it; isolation "
+                "serialises its cost onto every run and may not rest on a suspicion"
+            )
+
+    joined = "".join(sources)
+    for substrate in ctx.constitution.substrates:
+        source = str(substrate.get("source") or "")
+        if source and source not in joined:
+            findings.append(
+                f"substrate {substrate.get('id')} declares {source} but no module reads it, so "
+                "the declaration claims a derivation that does not happen"
+            )
+    return findings
+
+
+def _evaluated_strings(body: str, where: str, findings: Findings) -> list[str]:
+    """Every string constant the module evaluates, with docstrings excluded."""
+    try:
+        tree = ast.parse(body)
+    except SyntaxError as exc:  # pragma: no cover - ruff would have refused it first
+        findings.append(f"{where} does not parse: {exc}")
+        return []
+    docstrings = {
+        id(node.body[0].value)
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Module | ast.ClassDef | ast.FunctionDef | ast.AsyncFunctionDef)
+        and node.body
+        and isinstance(node.body[0], ast.Expr)
+        and isinstance(node.body[0].value, ast.Constant)
+        and isinstance(node.body[0].value.value, str)
+    }
+    return [
+        node.value
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Constant)
+        and isinstance(node.value, str)
+        and id(node) not in docstrings
+    ]
+
+
+def _declared_strings(document: Any, prefix: str = "") -> list[tuple[str, str]]:
+    """Every string the declaration states, excluding its ``$``-prefixed prose keys.
+
+    A key beginning with ``$`` is this repository's convention for rationale — prose
+    that explains a declaration rather than participating in it. Prose may name a test
+    file; a declared value may not.
+    """
+    found: list[tuple[str, str]] = []
+    if isinstance(document, dict):
+        for key, value in document.items():
+            if str(key).startswith("$"):
+                continue
+            found.extend(_declared_strings(value, f"{prefix}.{key}" if prefix else str(key)))
+    elif isinstance(document, list):
+        for index, value in enumerate(document):
+            found.extend(_declared_strings(value, f"{prefix}[{index}]"))
+    elif isinstance(document, str):
+        found.append((prefix, document))
+    return found
+
+
+def fail_wide(ctx: _Context) -> Findings:
+    """UVI-L-07 — computed, not asserted: an unbounded change must widen.
+
+    Three synthetic change sets, each one a condition no graph in this repository can
+    bound. Every one of them must produce the whole suite. The paths are synthetic on
+    purpose — the law is about the CLASS of change, and a real path would make the check
+    depend on that file continuing to exist.
+    """
+    findings = Findings()
+    cases = {
+        "a declaration or registry with no import edges": "00-BOOK/DATA/uvi-synthetic-probe.json",
+        "a file type that carries no edges at all": "docs/uvi-synthetic-probe.md",
+        "a Python file absent from the executable registry": "engine/uvi_synthetic_probe.py",
+    }
+    for description, path in cases.items():
+        try:
+            result = select((path,), substrates=ctx.substrates, tests=ctx.tests, root=ctx.root)
+        except VerificationIntelligenceError as exc:
+            findings.append(f"selection faulted on {description}: {exc}")
+            continue
+        if result.selection is not Selection.WHOLE_SUITE:
+            findings.append(
+                f"{description} produced a narrow plan of {len(result.test_paths)} test object(s); "
+                "an unbounded change must widen"
+            )
+        if not result.escalations:
+            findings.append(f"{description} widened without naming a reason")
+    return findings
+
+
+def topology_neutrality(ctx: _Context) -> Findings:
+    """UVI-L-08 — computed: no worker count loses, duplicates or invents a test."""
+    findings = Findings()
+    suite = ctx.tests.paths
+    units = ctx.tests.units_for(suite)
+    for workers in (1, 2, 3, 7, 12, len(units)):
+        try:
+            shards = plan_shards(units, ctx.tests, workers)
+        except VerificationIntelligenceError as exc:
+            findings.append(f"partitioning the suite across {workers} shard(s) was refused: {exc}")
+            continue
+        placed = [unit for shard in shards for unit in shard.test_paths]
+        if sorted({unit_file(unit) for unit in placed}) != sorted(suite):
+            findings.append(f"the {workers}-shard partition does not cover exactly the suite")
+        if len(placed) != len(set(placed)):
+            findings.append(f"the {workers}-shard partition places a unit twice")
+    first = plan_shards(units, ctx.tests, 7)
+    second = plan_shards(units, ctx.tests, 7)
+    if [shard.test_paths for shard in first] != [shard.test_paths for shard in second]:
+        findings.append("partitioning the same suite twice produced different shards")
+    return findings
+
+
+def evidence_reuse_integrity(ctx: _Context) -> Findings:
+    """UVI-L-09 — certification never reaches a reuse decision, and a miss is a miss."""
+    findings = Findings()
+    home = store_home(ctx.root, ctx.constitution.evidence_home)
+    for mode in ctx.constitution.modes:
+        for stage in ctx.constitution.stages_for(mode):
+            reuse, reason, _ = decide(mode, stage, ctx.substrates, home=home)
+            if mode.certification_eligible and reuse:
+                findings.append(
+                    f"--{mode.mode_id} is certification-eligible and reached a reuse decision "
+                    f"for {stage.stage_id}: {reason}"
+                )
+            if reuse and not stage.reusable:
+                findings.append(f"{stage.stage_id} is not reusable but was reused")
+    conditions = ctx.constitution.evidence_reuse_conditions
+    for condition in ("input digest", "PASS"):
+        if not any(condition.split()[0] in text for text in conditions):
+            findings.append(f"the declared reuse conditions do not mention {condition}")
+    return findings
+
+
+def deterministic_planning(ctx: _Context) -> Findings:
+    """UVI-L-10 — plan twice, get identical bytes, and carry no observation."""
+    findings = Findings()
+    for mode in ctx.constitution.modes:
+        first = plan_json(
+            build_plan(
+                mode.mode_id,
+                constitution=ctx.constitution,
+                substrates=ctx.substrates,
+                tests=ctx.tests,
+                changed=(),
+                root=ctx.root,
+            )
+        )
+        second = plan_json(
+            build_plan(
+                mode.mode_id,
+                constitution=ctx.constitution,
+                substrates=ctx.substrates,
+                tests=ctx.tests,
+                changed=(),
+                root=ctx.root,
+            )
+        )
+        if first != second:
+            findings.append(f"planning --{mode.mode_id} twice produced different bytes")
+        for stamp in re.findall(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", first):
+            findings.append(f"the --{mode.mode_id} plan carries a wall clock: {stamp}")
+        if ctx.root in first:
+            findings.append(f"the --{mode.mode_id} plan carries an absolute machine path")
+    return findings
+
+
+#: Every implemented check, bound to the declaration by name. The constitution refuses to
+#: construct itself if a law names a check absent here, or if a check here is claimed by
+#: no law — so this table and the declared law list cannot drift apart.
+CHECKS = {
+    "mode_constitution_completeness": mode_constitution_completeness,
+    "exactly_one_default": exactly_one_default,
+    "stage_registry_reconciliation": stage_registry_reconciliation,
+    "no_assurance_reduction": no_assurance_reduction,
+    "no_mode_claims_more_than_it_measures": no_mode_claims_more_than_it_measures,
+    "selection_is_derived": selection_is_derived,
+    "fail_wide": fail_wide,
+    "topology_neutrality": topology_neutrality,
+    "evidence_reuse_integrity": evidence_reuse_integrity,
+    "deterministic_planning": deterministic_planning,
+}
+
+
+class _Context:
+    """Everything the checks read, loaded once."""
+
+    __slots__ = ("constitution", "document", "root", "substrates", "tests", "verify")
+
+    def __init__(self, root: str | None = None, declaration: str | None = None) -> None:
+        self.root = root or repo_root()
+        self.document = load_declaration(declaration)
+        self.constitution: Constitution = load_constitution(declaration, checks=frozenset(CHECKS))
+        self.substrates: Substrates = load_substrates(self.root)
+        self.tests: TestObjectRegistry = build_test_registry(self.substrates, self.root)
+        self.verify = _verify_source(self.root)
+
+
+def measure(root: str | None = None, declaration: str | None = None) -> dict[str, Any]:
+    """Measure every declared law and return the report.
+
+    Raises:
+        VerificationIntelligenceError: the substrate is unusable, which is a FAULT
+            rather than a verdict.
+    """
+    ctx = _Context(root, declaration)
+    laws = []
+    for law in ctx.constitution.laws:
+        violations = list(CHECKS[law.check](ctx))
+        laws.append(
+            {
+                "law_id": law.law_id,
+                "title": law.title,
+                "violations": violations,
+                "holds": not violations,
+            }
+        )
+    refused = [entry for entry in laws if not entry["holds"]]
+    return {
+        "artifact_id": ctx.constitution.artifact_id,
+        "version": ctx.constitution.version,
+        "authority": "NONE — DERIVED TRUTH",
+        "plane": "OBSERVE MODE — READ ONLY",
+        "modes_declared": len(ctx.constitution.modes),
+        "default_mode": ctx.constitution.default_mode_id,
+        "stages_declared": len(ctx.constitution.stages),
+        "test_objects": len(ctx.tests.objects),
+        "test_objects_priced": ctx.tests.priced,
+        "laws": laws,
+        "laws_measured": len(laws),
+        "laws_refused": len(refused),
+        "verdict": "COHERENT" if not refused else "INCOHERENT",
+    }
+
+
+def render(report: dict[str, Any]) -> str:
+    lines = [
+        f"{report['artifact_id']} — {report['plane']}",
+        "-" * 72,
+        f"  modes declared     : {report['modes_declared']} (default --{report['default_mode']})",
+        f"  stages classified  : {report['stages_declared']}",
+        f"  test objects       : {report['test_objects']} ({report['test_objects_priced']} priced)",
+        "-" * 72,
+    ]
+    for law in report["laws"]:
+        mark = "HOLDS " if law["holds"] else "REFUSED"
+        lines.append(f"  {mark} {law['law_id']}  {law['title']}")
+        for violation in law["violations"][:8]:
+            lines.append(f"          - {violation}")
+        remaining = len(law["violations"]) - 8
+        if remaining > 0:
+            lines.append(f"          ... +{remaining} more")
+    lines.append("-" * 72)
+    lines.append(
+        f"  VERDICT: {report['verdict']} "
+        f"({report['laws_measured'] - report['laws_refused']}/{report['laws_measured']} laws hold)"
+    )
+    return "\n".join(lines)
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        prog="python -m engine.verification_intelligence.gate",
+        description="Measure the Universal Verification Intelligence laws (read-only).",
+    )
+    parser.add_argument("--gate", action="store_true", help="fail closed on any refused law")
+    parser.add_argument("--json", action="store_true", help="emit the report as JSON")
+    parser.add_argument("--quiet", action="store_true", help="suppress the rendered report")
+    parser.add_argument("--declaration", default=None, help="declaration path override")
+    args = parser.parse_args(argv)
+
+    try:
+        report = measure(declaration=args.declaration)
+    except VerificationIntelligenceError as exc:
+        print(f"UVI FAULT: {exc}", file=sys.stderr)
+        return EXIT_FAULT
+
+    if args.json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+    elif not args.quiet:
+        print(render(report))
+
+    if report["laws_refused"]:
+        if args.quiet:
+            print(render(report), file=sys.stderr)
+        return EXIT_INCOHERENT if args.gate else EXIT_COHERENT
+    return EXIT_COHERENT
+
+
+if __name__ == "__main__":  # pragma: no cover - CLI dispatch
+    raise SystemExit(main())

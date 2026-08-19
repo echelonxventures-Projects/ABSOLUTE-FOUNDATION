@@ -41,6 +41,12 @@ from platform.identity.permissions import EffectivePermissions, PermissionEngine
 from platform.identity.roles import RoleRegistry
 
 #: The certified corpus path prefixes that are read-only for every role (DP-03).
+#:
+#: These hold an immutable historical baseline, not an exemption from evolution: the
+#: corpus advances by supersession into a new object (CEP-007 XIII) or by amendment of
+#: the governing instrument (CEP-009), never by in-place modification of a certified
+#: artifact. Identity immutable, history append-only, evolution unlimited through those
+#: channels.
 FROZEN_CORPUS_PREFIXES: tuple[str, ...] = ("00-BOOK", "00-SOURCE", "99-FREEZE")
 
 #: The mutating permission verbs (READ is non-mutating).
@@ -59,7 +65,12 @@ def _deny(request: AccessRequest, reason: str) -> AccessDecision:
 def _guard_frozen_corpus_write(
     principal: Principal, request: AccessRequest, effective: EffectivePermissions
 ) -> AccessDecision | None:
-    """DENY any write targeting the certified corpus (invariant i, DP-03)."""
+    """DENY any write targeting the certified corpus (invariant i, DP-03).
+
+    Refuses in-place modification of an immutable historical baseline. It does not
+    refuse evolution: the corpus advances by supersession (CEP-007 XIII) or amendment
+    (CEP-009), which create new objects rather than rewriting certified ones.
+    """
     if request.resource and request.permission in WRITE_PERMISSIONS:
         normalized = request.resource.lstrip("/")
         for prefix in FROZEN_CORPUS_PREFIXES:

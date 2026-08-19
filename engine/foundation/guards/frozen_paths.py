@@ -4,6 +4,22 @@ Enforces DP-03 / C-01: the certified corpus is read-only to implementation. Any
 change touching ``00-BOOK/``, ``00-SOURCE/``, or ``99-FREEZE/`` is a security
 violation. Usable as a library (:func:`assert_no_frozen_write`) and as a CLI
 (``ec1-frozen-guard``) for pre-commit hooks and CI.
+
+What this guard protects, and what it does NOT prohibit
+-------------------------------------------------------
+It protects an **immutable historical baseline**: the certified corpus is the
+append-only record the system evolved *from*, so rewriting it would falsify
+history rather than advance it. It does not place the corpus outside evolution.
+The forward channel is supersession — a new object carrying new identity and a
+lineage edge to what it supersedes (CEP-007 XIII), or amendment of the governing
+instrument (CEP-009), continuing through the Article-14 perpetual cycle
+(``engine/uckp/evolution.py``). Identity is immutable, history is append-only,
+and evolution is unlimited through those channels; only in-place modification of
+a certified artifact is refused.
+
+Stated because a prohibition that names no channel reads as a prohibition on
+change itself (UNIVERSAL-LIFECYCLE-SEMANTIC-RESCAN-REGISTER.md §5). Behaviour is
+unchanged by that clarification: no prefix is removed and no write is admitted.
 """
 
 from __future__ import annotations

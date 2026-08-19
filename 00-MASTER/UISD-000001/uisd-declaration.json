@@ -1,0 +1,373 @@
+{
+  "artifact_id": "UISD-000001",
+  "name": "Universal Infinite Scope and Direction Principle",
+  "version": "1.0",
+  "authority": "NONE — DERIVED TRUTH. This programme legislates nothing. It is not superior to CMG-000001 (law owner), UCIC-001 (lifecycle owner) or CEP-009 (evolution authority); it declares no lifecycle stage, opens no registry, consumes no counter and issues no identifier. It measures a property those instruments already claim — that scope, direction, relationship and evolution capacity are unbounded — including for itself.",
+  "$why_this_exists": "The infinite-scope property was asserted, never computed. 03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md certifies 16 axes unbounded and 04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md certifies 23 axes free of finite assumption, but the latter states its own limit in §4: 'An exhaustive line-by-line proof of absence across all 431 concepts was NOT performed. ASSUMPTION: no hidden finite assumption exists beyond those reviewed', with residual risk confined to the realization layers. A property asserted in a dated document decays; a property computed on every verification run does not. This declaration holds the laws as DATA so the engine contains no law text and no enumeration member, the discipline engine/context/constitution.py applies to CXL-01..12 and engine/object_birth/contract.py applies to UOBC-L-01..08.",
+  "$not_a_second_authority": "CAA-INV-04 recognises a second identity authority by the counter it advances; the declared mint marker is 'category_seq'. This programme holds no counter and no marker. CAA-INV-07 refuses any instrument declaring a rival object model; this programme declares none. AUE-BND-06 refuses declaring lifecycle stages; this programme declares none. Its subject is a property of instruments, never an instrument.",
+
+  "principle": {
+    "statement": "Infinite and unlimited scopes, infinite and unlimited directions, infinite and unlimited relationships, and infinite and unlimited evolution capability apply to every object, capability, universe, registry, dictionary, relationship, lifecycle, constitution, engine and technology in UCOS, and to this principle itself.",
+    "standing": "PERVASIVE PROPERTY, NOT AUTHORITY LAYER",
+    "$standing_rationale": "Read as an authority above the lifecycle, the principle would install a rival supreme instrument over CMG-000001 and UCIC-001 — refused under CAA-INV-04, CAA-INV-07 and CMG Art LXXVI.6 (expansion by reinterpretation). Read as a property every layer must exhibit, it applies to the authority stack without displacing it, which is the only reading that is both faithful to the mission and admissible under the constitution.",
+    "prohibited_condition": "UNDISCLOSED CLOSURE — an enumeration closed in code or data while nothing states what closes it or how a member is admitted.",
+    "$why_not_no_closed_enumerations": "That formulation would be false and would be disabled within a cycle. engine/uckp/facets.py closes 33 facets on purpose, and its own docstring gives the reason: 'The enumeration is closed on purpose while the vocabularies inside facets are open. Adding a thirty-fourth facet is a constitutional amendment ... Adding a new knowledge kind, authority tier, persistence technology or relationship class is registration, and registration must never require an amendment.' Closure of the QUESTION set is what keeps the ANSWER sets open. The failure mode worth prohibiting is silence about closure, not closure."
+  },
+
+  "expansion_axes": [
+    { "id": "ISD-AX-01", "axis": "scope", "capacity": "unbounded", "measured_by": "ISD-L-01" },
+    { "id": "ISD-AX-02", "axis": "direction", "capacity": "unbounded", "measured_by": "ISD-L-02" },
+    { "id": "ISD-AX-03", "axis": "relationship", "capacity": "unbounded", "measured_by": "ISD-L-06" },
+    { "id": "ISD-AX-04", "axis": "evolution", "capacity": "unbounded", "measured_by": "ISD-L-05" },
+    { "id": "ISD-AX-05", "axis": "lifecycle", "capacity": "unbounded", "measured_by": "ISD-L-04" },
+    { "id": "ISD-AX-06", "axis": "capability", "capacity": "unbounded", "measured_by": "ISD-L-10" },
+    { "id": "ISD-AX-07", "axis": "technology", "capacity": "unbounded", "measured_by": "ISD-L-09" },
+    { "id": "ISD-AX-08", "axis": "temporal", "capacity": "unbounded", "measured_by": "ISD-L-08" },
+    { "id": "ISD-AX-09", "axis": "self", "capacity": "unbounded", "measured_by": "ISD-L-03" },
+    { "id": "ISD-AX-10", "axis": "lifecycle-vocabulary", "capacity": "unbounded", "measured_by": "ISD-L-07" }
+  ],
+
+  "laws": [
+    { "id": "ISD-L-01", "title": "Scope Expansion Capacity", "statement": "ScopeExpansionCapacity(object) = infinity. No enumeration claims completeness silently: every closed enumeration discloses both the invariant that closes it and the path by which a member is admitted.", "check": "scope_expansion_capacity" },
+    { "id": "ISD-L-02", "title": "Direction Expansion Capacity", "statement": "DirectionExpansionCapacity(object) = infinity. The relationship type space is pattern-constrained, never enumeration-constrained, and a freeform admission label exists so a new direction requires no schema edit.", "check": "direction_expansion_capacity" },
+    { "id": "ISD-L-03", "title": "The Principle Inherits Its Own Lifecycle", "statement": "This principle is subject to its own laws, declares no independent lifecycle, and holds a birth record like any other object.", "check": "principle_inherits_itself" },
+    { "id": "ISD-L-04", "title": "Lifecycle Applies To Itself", "statement": "The constitutional lifecycle stage graph declares itself open and admits a stage without an engine change, and its executable projection does not diverge from it.", "check": "lifecycle_applies_to_itself" },
+    { "id": "ISD-L-05", "title": "Evolution Applies To Itself", "statement": "The evolution cycle has no terminal stage and returns to its first stage from its last. Evolution cannot exempt itself from continuation.", "check": "evolution_applies_to_itself" },
+    { "id": "ISD-L-06", "title": "Relationship Model Expands", "statement": "EvolutionCapacity(relationship) = infinity and ExpansionCapacity(RelationshipModel) = infinity: the relationship vocabularies admit a new term by registration, without amendment, without mutating the existing vocabulary, and at every tier including the tier that classifies relationship models.", "check": "relationship_model_expands" },
+    { "id": "ISD-L-07", "title": "No Active Permanent Freeze", "statement": "No permanence phrase appears as an active lifecycle declaration in the scanned roots. Every occurrence is a disclosed, classified site, no site is classified A, and no historical, identity-bearing or constitutional site changes its occurrence count.", "check": "no_active_permanence_declaration" },
+    { "id": "ISD-L-08", "title": "Baseline Temporal Qualification", "statement": "Every declared baseline surface either carries a temporal coordinate that parses under CMG-000002, or discloses that it does not and names the owner the qualification is deferred to. Undisclosed non-conformance is refused.", "check": "baseline_temporal_qualification" },
+    { "id": "ISD-L-09", "title": "Technology Is An Evolutionary State", "statement": "No runtime dependency is pinned, the language requirement is a floor with no ceiling, and every verification-toolchain pin is disclosed with a reason. A technology version is an evolutionary state, never a constitutional truth.", "check": "technology_is_evolutionary_state" },
+    { "id": "ISD-L-10", "title": "Capability Seed Openness", "statement": "The capability model is a seed, not a final universe: it declares itself non-final and every declared capability enumeration names its admission path.", "check": "capability_seed_openness" }
+  ],
+  "$law_checks": "Every law names a check that computes its own compliance. A law with no reachable check would be manual governance, so the contract refuses to construct itself if any check is missing, and refuses if a check is implemented but unclaimed by any law.",
+
+  "closed_enumeration_disclosures": [
+    {
+      "id": "ISD-CE-01",
+      "enumeration": "Facet",
+      "declared_at": "engine/uckp/facets.py",
+      "population": 33,
+      "closing_invariant": "UCKP-ART-06 — the facet enumeration is closed on purpose; a facet is the question every constitutional object must answer",
+      "admission": "Constitutional amendment under CEP-009. Deliberately expensive: closure of the question set is what keeps every answer vocabulary open.",
+      "intentional": true
+    },
+    {
+      "id": "ISD-CE-02",
+      "enumeration": "closed_enumerations (CMG)",
+      "declared_at": "00-CMG/CMG-REGISTRY.json",
+      "population": 4,
+      "closing_invariant": "CMG-INV-09 — each of identifier_families (V.3), invariants (XI.13), lifecycle_phases (XXIV.3), unknown_concept_dispositions (LXXVII.3) names its own closing article",
+      "admission": "Amendment of the closing article in CMG-000001, then a registry edit. relationship_types is deliberately NOT in this list and is therefore open.",
+      "intentional": true
+    },
+    {
+      "id": "ISD-CE-03",
+      "enumeration": "RelationType",
+      "declared_at": "engine/knowledge/model.py",
+      "population": 17,
+      "closing_invariant": "A checked projection of RELATION_TYPE_VOCABULARY; engine.uckp.assimilation.verify_vocabulary_alignment fails closed if a projection and its vocabulary diverge",
+      "admission": "Two-sided registration in one change: append a Term to RELATION_TYPE_VOCABULARY in engine/uckp/vocabulary.py AND add the enum member; assign an ACYCLIC_FAMILIES family in engine/knowledge/ukip/relationships.py if the type is to be acyclicity-checked. Registering one side alone fails the alignment check.",
+      "intentional": true
+    },
+    {
+      "id": "ISD-CE-04",
+      "enumeration": "RelationshipKind",
+      "declared_at": "data/relationship_meta.py",
+      "population": 3,
+      "closing_invariant": "DXH-04 / DATA-008 §5 — kind is a three-way classifier, not the type space",
+      "admission": "The open axis in the DATA layer is the free-text type_tag: data/relationship_validation.py RelationshipTypedCheck requires type_tag non-empty and never checks it against any list. A new relationship type needs no enum change.",
+      "intentional": true
+    },
+    {
+      "id": "ISD-CE-05",
+      "enumeration": "object_classes (UGA)",
+      "declared_at": "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+      "population": 7,
+      "closing_invariant": "CAA-INV-07 — object classes are projections of UCKO (UCKP-ART-02) onto the version-control boundary; 'a class added below declares no new model'",
+      "admission": "Append to object_classes, extend _CATEGORY_MAP and _TIER_MAP in engine/uckp/uga_projection.py, re-render the nine UGA evidence surfaces. Deferred determination F-1 (GOVERNED_EVOLUTION_STATE) is the recorded, unexercised instance of this path.",
+      "intentional": true
+    },
+    {
+      "id": "ISD-CE-06",
+      "enumeration": "closure_dimensions (UICM)",
+      "declared_at": "00-MASTER/UCOS-UICM-000001/uicm.json",
+      "population": 17,
+      "closing_invariant": "UICM-INV-02 require_probe_bijection and UICM-INV-13 require_resolution_totality — declared probes and implemented probes must be in exact bijection",
+      "admission": "Declare the dimension, implement its probe, add its resolution binding in ordinal order. The capability axis of the same matrix is open: uicm.json population is 'a rule over the tracked boundary, never a list'.",
+      "intentional": true
+    },
+    {
+      "id": "ISD-CE-07",
+      "enumeration": "RegistryKind",
+      "declared_at": "engine/registry/universal/identity.py",
+      "population": 29,
+      "closing_invariant": "Fail-closed coercer; identity derivation is total over the declared kinds",
+      "admission": "Registration under UCKP-ART-17: add the member; deterministic_id remains a pure function of (kind, namespace, natural_key).",
+      "intentional": true
+    },
+    {
+      "id": "ISD-CE-08",
+      "enumeration": "ClosureState",
+      "declared_at": "engine/uicm/model.py",
+      "population": 7,
+      "closing_invariant": "UICM-INV-01 require_state_conformance — the enum and uicm.json closure_states must agree on membership, pass/evidence/gap semantics and the transition algebra",
+      "admission": "Edit the enum, the _TRANSITIONS algebra and uicm.json together; disagreement fails closed.",
+      "intentional": true
+    },
+    {
+      "id": "ISD-CE-09",
+      "enumeration": "KnowledgeCapability",
+      "declared_at": "engine/knowledge/ukip/constitution.py",
+      "population": 11,
+      "closing_invariant": "NONE DECLARED IN CODE — this is gap ISD-G-01. The enum has no coercer and is frozen into KNOWLEDGE_CAPABILITIES = tuple(KnowledgeCapability), and every KnowledgeLaw.capabilities tuple references it structurally.",
+      "admission": "Owner act by engine/knowledge/ukip/ under CEP-009 amendment. The in-package precedent for the correct shape is ProviderKind in engine/knowledge/ukip/contracts.py, whose docstring declares it 'an open taxonomy of knowledge origins' and which carries a fail-closed coercer.",
+      "intentional": false,
+      "gap": "ISD-G-01"
+    },
+    {
+      "id": "ISD-CE-10",
+      "enumeration": "evidence classes (UGA)",
+      "declared_at": "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+      "population": 5,
+      "closing_invariant": "Declared outright in the declaration: 'closed set ... No sixth class is created' (AUDIT, DEBUG, IMPROVEMENT, EXECUTION, VALIDATION)",
+      "admission": "Amendment of the UGA declaration by its owner. Disclosed closure, not silent closure.",
+      "intentional": true
+    }
+  ],
+  "$disclosure_completeness": "This list is itself open: it enumerates the closed enumerations located at baseline bb9c27d2 and is extended by appending an entry. ISD-L-01 measures that each entry names a closing invariant and an admission path, not that the list is exhaustive — a claim of exhaustiveness would be the very finite assumption the principle prohibits.",
+
+  "direction_expansion": {
+    "edge_schema": "00-BOOK/SCHEMAS/relationship.schema.json",
+    "type_property_path": ["properties", "type"],
+    "forbidden_property_keys": ["enum", "const", "maxLength"],
+    "required_property_keys": ["pattern"],
+    "freeform_admission": {
+      "declared_at": "00-BOOK/tools/config.py",
+      "symbol": "RELATIONSHIP_FREEFORM_LABEL",
+      "expected": "RELATES",
+      "$why": "A front-matter row '| RELATES Federates | UMB-012 |' takes the token verbatim as the edge type and materialises its inverse. A new direction therefore requires no schema edit, no config edit and no engine change — the zero-cost admission path."
+    }
+  },
+
+  "lifecycle_openness": {
+    "manifest": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+    "required_manifest_flags": { "open": true, "closed_enumeration": false },
+    "required_manifest_fields": ["admission", "ordinal_step"],
+    "alignment_module": "engine.nucleus.lifecycle",
+    "alignment_function": "verify_manifest_alignment",
+    "$why": "The stage graph is the one place a lifecycle could silently become finite. manifest.open and closed_enumeration are the declared property; verify_manifest_alignment is the proof that the executable projection has not drifted from it. Both are measured, because a declaration nobody checks and a projection nobody compares are the two halves of the same failure."
+  },
+
+  "evolution_openness": {
+    "module": "engine.uckp.evolution",
+    "cycle_symbol": "EVOLUTION_CYCLE",
+    "terminal_predicate": "is_terminal",
+    "successor_function": "next_stage",
+    "minimum_stages": 2,
+    "$why": "Article-14. is_terminal must return False for every declared stage and next_stage must return the first stage from the last, so the cycle is structurally incapable of ending. Measured over the whole cycle rather than sampled."
+  },
+
+  "relationship_expansion": {
+    "module": "engine.uckp.vocabulary",
+    "term_symbol": "Term",
+    "extension_method": "extended_with",
+    "vocabularies": [
+      { "symbol": "RELATION_TYPE_VOCABULARY", "tier": "relation type", "population_at_baseline": 17 },
+      { "symbol": "RELATIONSHIP_CLASS_VOCABULARY", "tier": "relationship class — the tier that classifies relationship models", "population_at_baseline": 12 }
+    ],
+    "probe_term_id": "isd-openness-probe",
+    "$why": "Openness is proven by performing the extension in memory on every gate run, not by reading a comment that claims it. The probe asserts three things: the extended vocabulary contains the new term, the original does not, and the two are distinct objects — so extension is append-only AND non-mutating. Nothing is written to disk and the probe term is never registered.",
+    "$two_tiers_is_the_self_application": "RELATIONSHIP_CLASS_VOCABULARY is a vocabulary of registers OF relationships. The same extended_with admits a term at either tier, so the relationship model already contains a model of relationship models and 'the relationship model can create new relationship models' holds by construction rather than by assertion."
+  },
+
+  "freeze_scan": {
+    "roots": [".", "00-CEP", "00-CMG", "99-FREEZE", "engine", "platform"],
+    "root_depth_zero_only": ["."],
+    "extensions": [".md", ".py", ".json", ".sh", ".yml", ".toml"],
+    "excluded_directory_names": ["__pycache__"],
+    "excluded_dot_directories": true,
+    "phrases": [
+      "permanent freeze",
+      "permanent-freeze",
+      "permanent_freeze",
+      "permanently frozen",
+      "permanently-frozen",
+      "frozen forever",
+      "frozen in perpetuity",
+      "no future change",
+      "immutable forever"
+    ],
+    "status_pattern": "(?im)^[\\s|>*#-]*(?:\\*\\*)?(?:status|state|lifecycle_state|corpus_status|rollup_status)(?:\\*\\*)?\\s*[:=]\\s*\"?FROZEN",
+    "classes": {
+      "A": "active lifecycle declaration forbidding future change with no channel named — inadmissible",
+      "B": "historical evidence — a record of a past state, preserved verbatim",
+      "C": "identity-bearing artifact — the phrase is in a registered name; a rename is an identity act",
+      "D": "constitutional meaning or declared vocabulary — normative text, or a legitimate member of a declared state machine",
+      "E": "commentary, citation or self-classification — including the registers whose purpose is to quote the vocabulary"
+    },
+    "count_enforced_classes": ["A", "B", "C", "D"],
+    "$count_enforcement_split": "Classes B, C and D are records that must not change, so an exact occurrence count is the correct assertion. Class E files are the classification registers themselves, whose counts legitimately grow as they classify more; freezing them would fail the gate on documentation maintenance, and a gate that fires on documentation maintenance gets disabled rather than fixed — the GP-4 / GP-6 pattern this repository has already recorded twice. Regression enters through NEW sites, and there the ratchet is absolute.",
+    "$excluded_patterns": {
+      "never change": "EXCLUDED. Roughly 55 occurrences are identity-immutability invariants — the exact inverse of freeze semantics: UCKP-ART-05 'an identity, once minted, never changes', UIS-P-04, UVS-P-04, UOBC-L-07, ENG-L-04. engine/uckp/identity.py::require_unchanged fails closed on the property they state, and engine/tests/uckp/test_alignment.py plus platform/tests/test_constitutional_authority_alignment.py assert the wording verbatim. Including the pattern would flag the architecture's strongest guarantee as its worst defect.",
+      "FROZEN as a bare token": "EXCLUDED; only status ASSIGNMENTS are matched. engine/registry/models.py declares FROZEN as a member of the artifact status vocabulary and _CERTIFIED_STATUSES treats it as certified. CEP-007 Article VI defines FROZEN as a state WITH an outgoing transition to SUPERSEDED. A state named in a vocabulary is not a state claimed as terminal.",
+      "00-MASTER": "EXCLUDED from roots. It holds engine-generated derived truth (rib.json corpus_status, ufep.json state, nine UGA registry projections) where a FROZEN value is a rendered consequence of a source status. Scanning it would measure the projection instead of the claim, and a hand edit there is drift the owning engine's gate already catches. Recorded as gap ISD-G-06."
+    },
+    "preserved_sites": [
+      { "id": "R-01", "path": "00-CEP/CEP-007-CONSTITUTIONAL-FREEZE-CONSTITUTION.md", "class": "D", "occurrences": 1, "reason": "VI.6 — the FROZEN to SUPERSEDED transition 'SHALL NOT modify the frozen artifact, which SHALL remain immutable forever'. Governs the superseded historical record, not forward capability. CEP-007 XIII.5 and XV.4 in the same instrument guarantee unbounded successive and infinite future evolution." },
+      { "id": "R-02", "path": "00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md", "class": "D", "occurrences": 1, "reason": "VI.6 — the same clause for preserved evidence. Removing it would destroy append-only history rather than unblock evolution." },
+      { "id": "R-03", "path": "00-CEP/STAGE-02-S2-08-FINALITY-BINDING-ARCHITECTURE.md", "class": "B", "occurrences": 1, "reason": "Finding F-13, 'Permanent-freeze risk absent an exogenous act', status OPEN (risk). The hazard sense — the inverse of a lifecycle claim." },
+      { "id": "R-04", "path": "02-ARCHITECTURAL-STABILITY-CERTIFICATION.md", "class": "E", "occurrences": 1, "reason": "Citation of document 08 by title; must match the cited title. Prior register E-04." },
+      { "id": "R-05", "path": "04-REMEDIATION-GRAPH.md", "class": "E", "occurrences": 1, "reason": "Parenthetical gloss on risk key RR-08; must match RR-08's canonical wording. Prior register E-03." },
+      { "id": "R-06", "path": "08-FOUNDATION-FREEZE-DECISION.md", "class": "D", "occurrences": 2, "reason": "Prior register D-01/D-02. A rendered constitutional decision at baseline ab78f35, 2026-07-23, which itself reserves evolution to CEP-007 XIII supersession and CEP-009 amendment — Governed Evolution Enabled in the older vocabulary. Amending it would falsify the record of what was asked and answered." },
+      { "id": "R-07", "path": "09-DR-RAT-11-ASSESSMENT.md", "class": "B", "occurrences": 2, "reason": "Prior register B-05/B-06. RR-08 residual-risk record, STATUS = BLOCKED. RR-08 is a traceability key across eight documents; substituting here would assert a baseline had been achieved where the record says the corpus was at risk of being unable to evolve." },
+      { "id": "R-08", "path": "99-FREEZE/FREEZE-NOTICE.md", "class": "C", "occurrences": 1, "reason": "Status: FROZEN on the 13-file consolidation source corpus whose content hashes sit beside it — an Immutable Historical Baseline, which is the property the principle requires. Identity-bearing (ledger keyed by path; a rename retires a Universal ID) and inside its own guarded prefix (frozen_paths.py FROZEN_PREFIXES includes 99-FREEZE/), so editing it would require relaxing the guard that protects the corpus it describes. Bound reading recorded in UNIVERSAL-LIFECYCLE-SEMANTIC-RESCAN-REGISTER.md §4." },
+      { "id": "R-09", "path": "FINAL-FREEZE-READINESS-DETERMINATION.md", "class": "B", "occurrences": 1, "reason": "'Status: FROZEN AND HOLDING' is a MEASUREMENT of UCOS-UFEP-001 baseline state inside an evidence determination that declares AUTHORITY: NONE and records freeze-performed = NO." },
+      { "id": "R-10", "path": "SEMANTIC-LIFECYCLE-RECONCILIATION-REGISTER.md", "class": "E", "occurrences": 25, "reason": "The prior cycle's classification register quotes the vocabulary it classifies: pattern lists, classification tables and quoted findings." },
+      { "id": "R-11", "path": "UNIVERSAL-INFINITE-SCOPE-AND-DIRECTION-DETERMINATION.md", "class": "E", "occurrences": 2, "reason": "This cycle's root determination, quoting the vocabulary it refuses." },
+      { "id": "R-12", "path": "UNIVERSAL-LIFECYCLE-SEMANTIC-RESCAN-REGISTER.md", "class": "E", "occurrences": 22, "reason": "This cycle's classification register; self-classifying, quotes every pattern it matches." },
+      { "id": "R-13", "path": "engine/tests/conftest.py", "class": "D", "occurrences": 1, "reason": "Fixture status=\"FROZEN\" exercising the declared registry status vocabulary member (engine/registry/models.py), which _CERTIFIED_STATUSES treats as certified. A status value, not a lifecycle prohibition." },
+      { "id": "R-14", "path": "engine/tests/discovery/conftest.py", "class": "D", "occurrences": 1, "reason": "Same." },
+      { "id": "R-15", "path": "engine/tests/graph/conftest.py", "class": "D", "occurrences": 1, "reason": "Same." },
+      { "id": "R-16", "path": "engine/tests/unit/test_infinite_scope.py", "class": "E", "occurrences": 4, "reason": "The suite that falsifies ISD-L-07 must construct the vocabulary ISD-L-07 detects — a detector with no negative test is decoration. Class E rather than count-enforced because the suite legitimately grows as more violating conditions are covered; the same reasoning as R-10 and R-12." }
+    ]
+  },
+
+  "baseline_temporal_requirement": {
+    "temporal_authority": "CMG-000002 — Universal Temporal Existence Contract (representation-neutral)",
+    "coordinate_resolver_module": "engine.temporal.coordinate",
+    "coordinate_resolver_function": "parse_qualified",
+    "$representation_neutrality": "CMG-000002 §3.1 lists ten representations it DOES NOT MANDATE, including UTC, ISO 8601, Unix epoch, GPS, TAI, the Gregorian calendar, Earth time zones and leap seconds; §3.3 states 'No representation is more correct than another.' This law therefore requires a coordinate to be QUALIFIED — to name its reference system — and never requires a particular system.",
+    "surfaces": [
+      {
+        "id": "ISD-BT-01",
+        "surface": "00-MASTER/UOBC-000001/birth-ledger.json",
+        "field": "creation_timestamp",
+        "qualified": true,
+        "sample": "logical:ucos-repository-history@1#485",
+        "$note": "Caller-supplied and clock-free; deliberately not an identity input, so a birth record replays byte-identically. The primary value is the repository history position, which is derivable rather than read from a clock."
+      },
+      {
+        "id": "ISD-BT-02",
+        "surface": "00-MASTER/BASELINE-001/baseline.json",
+        "field": "date_recorded",
+        "qualified": false,
+        "deferred_to": "BASELINE-001",
+        "gap": "ISD-G-03",
+        "$note": "Records temporality as the BOOLEAN date_recorded over bare calendar dates (2026-07-30, 2026-08-01). baseline_engine.py contains zero occurrences of temporal, TemporalCoordinate, datetime, utcnow or now(, and does not import engine/temporal/. Not retrofitted: BASELINE-REGISTRY.md states 'Records are added, never edited, renumbered, reclassified or withdrawn', and the registers are replay-gated on seal_sha256, so retrofitting would rewrite what was certified. The determined forward shape is that the NEXT appended baseline row carries a qualified coordinate."
+      },
+      {
+        "id": "ISD-BT-03",
+        "surface": "00-BOOK/DATA/id-ledger.json",
+        "field": "by_object.first_seen",
+        "qualified": false,
+        "deferred_to": "engine/temporal/ and UGA",
+        "gap": "ISD-G-02",
+        "$note": "The commit:<sha12> form is declared CONFORMING by GOVERNED-EVOLUTION-STATE-DETERMINATION.md §5 but is REFUSED by parse_qualified, which requires <type>:<identifier>@<version>#<primary>. One of the two formats that determination calls conforming conforms by prose, not by the executable contract."
+      },
+      {
+        "id": "ISD-BT-04",
+        "surface": "00-BOOK/DATA/id-ledger.json",
+        "field": "by_path.first_seen",
+        "qualified": false,
+        "deferred_to": "CORPUS_REGISTRATION / REG-AUTO-001",
+        "gap": "F-5",
+        "$note": "Hard-coded ISO-8601 Earth UTC from ukb.py::_now — the original gap G1. Already recorded NON-CONFORMING by GOVERNED-EVOLUTION-STATE-DETERMINATION.md §5, and deliberately uncorrected there: first_seen is frozen at mint and append-only, so changing its representation would rewrite existing entries. Migration requires its own determination (F-5)."
+      }
+    ],
+    "$why_disclosure_not_conformance": "Requiring every baseline surface to already carry a qualified coordinate would fail on immutable history and be disabled within a cycle. The law instead refuses UNDISCLOSED non-conformance: a surface either parses, or names the owner it is deferred to and the gap it is recorded under. That is the difference between a gate and a wish."
+  },
+
+  "technology_evolution": {
+    "manifest": "pyproject.toml",
+    "runtime_dependencies_must_be_empty": true,
+    "$runtime_rationale": "TP-04 Vendor Neutrality of Core, TP-05 Least Sufficient Technology. dependencies = [] means there is no runtime technology to be locked to.",
+    "requires_python_key": "requires-python",
+    "forbidden_version_operators": ["<", "<=", "=="],
+    "$version_rationale": "A floor admits every future version; a ceiling forbids one. '>=3.12' is an evolutionary state. An upper bound, or an exact pin, would encode 'Technology X forever' — the condition CEP-007 II.2 and XXII.3 reserve out of constitutional jurisdiction.",
+    "declared_pins": [
+      { "requirement": "pytest==8.3.4", "scope": "verification toolchain", "reason": "DE-04 — a floating test runner makes a gate verdict non-reproducible; the pin is the measuring instrument, not the thing measured" },
+      { "requirement": "pytest-cov==6.0.0", "scope": "verification toolchain", "reason": "DE-04 — the coverage floor is only meaningful against a fixed measurement implementation" },
+      { "requirement": "coverage==7.15.2", "scope": "verification toolchain", "reason": "DE-04 — same" },
+      { "requirement": "ruff==0.8.4", "scope": "verification toolchain", "reason": "DE-04 — a lint rule set that drifts silently changes what the gate asserts" },
+      { "requirement": "jsonschema==4.26.0", "scope": "verification toolchain", "reason": "DE-04 — schema validation semantics must be stable for registry validation to replay" }
+    ],
+    "$pins_are_disclosed_not_forbidden": "An undisclosed pin closes the gate. A disclosed pin with a reason is an evolutionary state under review, which is what the technology capability lifecycle requires and what a constitution may not forbid.",
+    "capability_lifecycle_owners": {
+      "observation": "engine/uicm/observation.py; ucl-stage-manifest.json ordinals 120-140",
+      "compatibility_assessment": "uicm.json closure dimensions dependency, contract",
+      "alternative_discovery": "ucl-stage-manifest.json ordinal 110 Reuse Before Create; knowledge/integration/reuse.py",
+      "evolution_decision": "CEP-009; Article-14 impact-analysis then authority-resolution",
+      "migration_planning": "CMG gateway lifecycle proposal..truth_update; engine/uaue/planning.py",
+      "validation_and_verification": "uicm.json closure dimensions validation, verification, testing, coverage, determinism",
+      "certification": "CEP-005; engine/universal_certification/",
+      "upgrade": "Article-14 state-transition then continuation"
+    },
+    "$no_technology_engine": "All eight stages resolve to located owners, so no technology-lifecycle engine is created. A ninth engine measuring technology would be a duplicate capability."
+  },
+
+  "capability_seed_model": {
+    "final": false,
+    "$final_rationale": "CAPABILITY-COVERAGE-CLOSURE-DETERMINATION.md measured the verdict: 'CAPABILITY COVERAGE: NOT CLOSED — PARTIAL'. One of 122 capabilities has a verifiable end-to-end chain, zero carry a stored constitution anchor, zero carry a certification record, and 46 git-tracked Python directories are absent from the catalog. A set in that condition must not be presented as a completed universe.",
+    "enumerations": [
+      { "id": "ISD-CS-01", "enumeration": "RIE capability catalog", "declared_at": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json", "population_at_baseline": 126, "open": true, "admission": "Regenerated by UCOS-RIE-001 from a hash-pinned evidence fingerprint over 00-BOOK/DATA/*.json; authority NONE, derived truth, never hand-authored." },
+      { "id": "ISD-CS-02", "enumeration": "canonical knowledge capabilities", "declared_at": "knowledge/canonical-knowledge.json", "population_at_baseline": null, "open": true, "admission": "Append a UCKO-CAP-* row plus a row in the implementation source; no code change." },
+      { "id": "ISD-CS-03", "enumeration": "UICM capability population", "declared_at": "00-MASTER/UCOS-UICM-000001/uicm.json", "population_at_baseline": null, "open": true, "admission": "Derived by rule over the git-tracked boundary — 'a rule over the tracked boundary, never a list'. Admitting a capability is an append-only edit to the canonical sources and requires no engine change." },
+      { "id": "ISD-CS-04", "enumeration": "UICM closure dimensions", "declared_at": "00-MASTER/UCOS-UICM-000001/uicm.json", "population_at_baseline": 17, "open": false, "admission": "See ISD-CE-06 — declare the dimension, implement its probe, add its resolution binding." },
+      { "id": "ISD-CS-05", "enumeration": "UGA object classes", "declared_at": "00-MASTER/UCOS-UGA-001/uga-declaration.json", "population_at_baseline": 7, "open": false, "admission": "See ISD-CE-05 — declaration append plus two projection maps plus nine surface re-renders." },
+      { "id": "ISD-CS-06", "enumeration": "KnowledgeCapability", "declared_at": "engine/knowledge/ukip/constitution.py", "population_at_baseline": 11, "open": false, "admission": "See ISD-CE-09 — owner act by engine/knowledge/ukip/ under CEP-009; ProviderKind in the same package is the precedent shape. Gap ISD-G-01.", "gap": "ISD-G-01" }
+    ],
+    "$seed_meaning": "These are the capability enumerations DISCOVERED at baseline bb9c27d2. They are not the final universe. Future capabilities remain discoverable through the admission paths named above, and an unknown capability's arrival requires no amendment of this declaration — only an append."
+  },
+
+  "self_application": {
+    "subject_of_own_laws": ["UISD-000001"],
+    "$subject_rationale": "The principle that everything is subject to unlimited evolution cannot exempt the instrument that states it. ISD-L-03 measures that this declaration names itself here, so removing the self-subjection closes the gate.",
+    "birth_identity": "urn:ucos:ucko:ucos.master:UISD-000001",
+    "birth_ledger": "00-MASTER/UOBC-000001/birth-ledger.json",
+    "declares_independent_lifecycle": false,
+    "declares_authority_over": [],
+    "$declares_authority_over_rationale": "Empty by construction and measured empty. A non-empty value would make this an authority layer rather than a pervasive property, which is the reading §0 of the root determination refuses."
+  },
+
+  "lifecycle_inheritance": {
+    "lifecycle_owner": "UCIC-001",
+    "derived_truth": "UCL-000001",
+    "law_owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+    "evolution_channel": ["CEP-009", "engine/uckp/evolution.py Article-14"],
+    "independent_lifecycle_defined": false
+  },
+
+  "gate": {
+    "home": "engine/infinite_scope/gate.py",
+    "invocation": "python -m engine.infinite_scope.gate --quiet",
+    "plane": "OBSERVE MODE — READ ONLY",
+    "fail_closed": true,
+    "hermetic": "reads this declaration and declared files in the tree, imports located modules in-process, computes; reads no clock and no network, spawns no subprocess, and writes nothing anywhere including gitignored paths",
+    "writes": [],
+    "exit_semantics": { "0": "OPEN — every law holds", "1": "CLOSED — a law was measured and refused", "2": "FAULT — no verdict could be reached" },
+    "$no_gate_flag": "No --gate flag is declared. The gate is fail-closed by DEFAULT: the exit code is driven by the verdict, so there is no mode in which a refused law exits 0. A --gate flag that is accepted and never read would be the GP-4 defect recorded in GATE-PURITY-DETERMINATION.md, and the repository already carries two instances of it.",
+    "$no_render_flag": "No --render and no --replay are declared, because a gate that writes nothing has nothing to render and cannot drift."
+  },
+
+  "boundaries": [
+    { "id": "ISD-BND-01", "refuses": "declaring or amending any lifecycle stage, transition or ordering", "owner": "UCIC-001; ucl-stage-manifest.json" },
+    { "id": "ISD-BND-02", "refuses": "issuing any identifier, repository serial or constitutional urn", "owner": "UCKP-ART-05; 00-BOOK/DATA/id-ledger.json" },
+    { "id": "ISD-BND-03", "refuses": "declaring a relationship type, class or facet", "owner": "UCRD-001; engine/uckp/vocabulary.py; engine/uckp/facets.py" },
+    { "id": "ISD-BND-04", "refuses": "certifying any baseline, object or capability", "owner": "CEP-005 certification channel" },
+    { "id": "ISD-BND-05", "refuses": "opening a registry, dictionary or ledger", "owner": "existing located registries; a new one would breach CAA-INV-04" },
+    { "id": "ISD-BND-06", "refuses": "mandating a temporal representation", "owner": "CMG-000002 §3.1" },
+    { "id": "ISD-BND-07", "refuses": "granting or holding authority of any kind", "owner": "nobody — a measurement describes, never grants" },
+    { "id": "ISD-BND-08", "refuses": "performing any mutation, including migration, registration and re-render", "owner": "00-BOOK/DATA/mutation-governance-boundary.json declared classes" }
+  ],
+
+  "gaps": [
+    { "id": "ISD-G-01", "subject": "KnowledgeCapability is a closed enum with no coercer and no declared closing invariant", "owner": "engine/knowledge/ukip/", "measured_by": "ISD-L-01, ISD-L-10" },
+    { "id": "ISD-G-02", "subject": "commit:<sha12> is declared a conforming temporal coordinate in prose but is refused by parse_qualified", "owner": "engine/temporal/ and UGA", "measured_by": "ISD-L-08" },
+    { "id": "ISD-G-03", "subject": "BASELINE-001 records temporality as the boolean date_recorded over bare calendar dates and does not consume engine/temporal/", "owner": "BASELINE-001", "measured_by": "ISD-L-08" },
+    { "id": "ISD-G-04", "subject": "12,899 relationship edges are materialized and no gate validates them against relationship.schema.json", "owner": "UKB / relationship owner", "measured_by": "not measured — recorded only" },
+    { "id": "ISD-G-05", "subject": "00-MASTER/CMG-FOUNDATION-PERMANENT-FREEZE-CERTIFICATION-AUDIT.md is a Category C filename awaiting ARTIFACT-RENAME-DETERMINATION.md, which does not yet exist", "owner": "identity / rename determination", "measured_by": "not measured — outside declared scan roots" },
+    { "id": "ISD-G-06", "subject": "FROZEN status values on derived generated surfaces inside the guarded 00-BOOK prefix and under 00-MASTER", "owner": "owning producers (UKB, RIB, UFEP, UGA)", "measured_by": "not measured — derived projections, excluded by design" }
+  ],
+
+  "certification_boundary": "This programme certifies that the ten declared laws were measured against the declared surfaces at the invocation recorded by the gate. It certifies nothing about the correctness, quality or constitutionality of any object, declares no baseline certified, and does not certify that the disclosure lists it carries are exhaustive — a claim of exhaustiveness would itself be the finite assumption the principle prohibits."
+}

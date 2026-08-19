@@ -79,10 +79,24 @@ class ImpactReport:
     scope: Scope
     escalations: tuple[str, ...]
     unregistered: tuple[str, ...]
+    unbounded: tuple[str, ...] = ()
 
     @property
     def is_full(self) -> bool:
         return self.scope is Scope.FULL
+
+    @property
+    def is_computable(self) -> bool:
+        """True when every changed path was bounded by a graph rather than escaped it.
+
+        The distinction a consumer needs and ``scope`` alone cannot express. Both
+        ``Scope.FULL`` from "this file type has no edges" and ``Scope.INTEGRATION``
+        from "the blast radius is wide" widen the plan, but only the first is an
+        *inability to compute*: the second is a computed answer that happens to be
+        large, and a consumer with more substrates than this engine has may narrow it
+        legitimately. Nothing may narrow the first.
+        """
+        return not self.unbounded
 
     def to_dict(self) -> dict[str, object]:
         return {
@@ -95,6 +109,7 @@ class ImpactReport:
             "scope": self.scope.value,
             "escalations": list(self.escalations),
             "unregistered": list(self.unregistered),
+            "unbounded": list(self.unbounded),
             "counts": {
                 "changed": len(self.changed),
                 "affected_objects": len(self.affected_objects),
@@ -132,10 +147,12 @@ def analyse(graph: ImpactGraph, changed: list[str] | tuple[str, ...]) -> ImpactR
     scope = Scope.CHANGED
     bounded: set[str] = set()
     unregistered: list[str] = []
+    unbounded: list[str] = []
 
     for path in changed_paths:
         if _is_unbounded(path):
             scope = scope.widen(Scope.FULL)
+            unbounded.append(path)
             escalations.append(
                 f"{path}: change is not bounded by import edges "
                 "(declaration, registry, schema, tooling or contract)"
@@ -143,10 +160,12 @@ def analyse(graph: ImpactGraph, changed: list[str] | tuple[str, ...]) -> ImpactR
             continue
         if not _is_bounded(path):
             scope = scope.widen(Scope.FULL)
+            unbounded.append(path)
             escalations.append(f"{path}: no dependency edges exist for this file type")
             continue
         if graph.record(path) is None:
             scope = scope.widen(Scope.FULL)
+            unbounded.append(path)
             escalations.append(
                 f"{path}: not present in the executable object registry, so its "
                 "dependents are unknown"
@@ -198,6 +217,7 @@ def analyse(graph: ImpactGraph, changed: list[str] | tuple[str, ...]) -> ImpactR
         scope=scope,
         escalations=tuple(escalations),
         unregistered=tuple(unregistered),
+        unbounded=tuple(sorted(unbounded)),
     )
 
 
