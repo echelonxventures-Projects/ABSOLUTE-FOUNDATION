@@ -225,10 +225,40 @@ addopts = [
   # artifact exists. Measured for the same reason, and because its eight law checks are
   # the only executable statement of "no anonymous objects, no post-creation registration".
   "--cov=engine.object_birth",
+  # UISD-000001 — Universal Infinite Scope and Direction. It enters the denominator on the
+  # same condition every other capability does: it ships with
+  # engine/tests/unit/test_infinite_scope.py. It is measured for a sharper reason too —
+  # the unboundedness property was previously certified only in prose, and
+  # 04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md §4 states that no exhaustive proof of
+  # absence was performed. An unmeasured law about the absence of finite assumptions is
+  # exactly how a finite assumption survives.
+  "--cov=engine.infinite_scope",
+  # UCPA-000001 — the constitutional primitive alignment gate. Measured under the same
+  # floor for the reason the programme itself exists: the root ontology was RATIFIED and
+  # then went unmeasured, and an unmeasured law about the primitives is exactly how a
+  # superseded primitive form survives. A gate whose own refusal paths are unexercised
+  # cannot be relied on to refuse.
+  "--cov=engine.root_ontology",
+  # ULP — the Universal Lineage Projection. Measured under the same floor because it is a
+  # DERIVED answer: an unmeasured composition can report an ancestry no source declares and
+  # look exactly like a correct one. F-1 was that failure at the projection layer, and the
+  # refusal paths here are what keep it detectable.
+  "--cov=engine.lineage",
+  # RCM — the Registry Coverage Matrix. Measured under the same floor because it is the
+  # instrument that says whether every governed object is registered: an unmeasured
+  # coverage report can answer "fully covered" without ever having computed it, and that
+  # answer is indistinguishable from a correct one.
+  "--cov=engine.registry_coverage",
   # The Verification Impact Engine selects which verification a change requires, so it
   # is measured under the same floor as everything it selects for. An unmeasured
   # selector could narrow a run on a code path nothing exercised.
   "--cov=engine.verification_impact",
+  # UVI-000001 — Universal Verification Intelligence, for the same reason and more
+  # sharply: it decides which stages run, how the suite is partitioned, and whether a
+  # result may be answered from evidence. An unmeasured code path in THAT is a path that
+  # could narrow a run, drop a shard or reuse a stale result, and the symptom of every
+  # one of those is a faster green run.
+  "--cov=engine.verification_intelligence",
   # UCOS-CEU-001 — the Constitutional Existence substrate enters the denominator on the
   # same condition every other capability does: it ships with engine/tests/ceu/, so the
   # percentage measures a capability something actually exercises.
@@ -302,7 +332,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

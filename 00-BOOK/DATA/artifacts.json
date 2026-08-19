@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T15:29:21+00:00",
+  "generated_at": "2026-08-19T05:29:00+00:00",
   "generator_version": "1.0.0",
   "count": 1233,
   "artifacts": [
@@ -52174,7 +52174,7 @@
       ],
       "path": "EVO-USIS-015/02-REPOSITORY-STRUCTURE-REPORT.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "8544d6a638bb3a6eb2ac2ac3bb626c66edc827daa21716930cd51cd390f31ba0",
+      "content_hash": "672a19d1e50c14571c18720026024c102ba33787bf761dd7809939f6f94092fb",
       "traceability": {
         "requirement": [],
         "architecture": [
@@ -52608,12 +52608,11 @@
       ],
       "path": "EVO-USIS-016/02-REPOSITORY-STRUCTURE-REPORT.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "609a8602e71a993ce59243a225b2bfe034f2bc9e0c81afc02895453bd9fa5e08",
+      "content_hash": "53ca027ab1f09a5810342beb3c0ee4eaaba2c15c8aff07f306ea936b1cd6db81",
       "traceability": {
         "requirement": [],
         "architecture": [
           "UCOS-USIS-000001",
-          "UCOS-USIS-0000",
           "UCOS-USIS-000018"
         ],
         "design": [],
@@ -53776,7 +53775,7 @@
       ],
       "path": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "727c913938e4f0cf41f2a002143dca60ce102b0fe731be655ff0e6facab81d33",
+      "content_hash": "9b33335fee3135b21de77f2bb8f9b7fc50aa9e28d266aecbad2b8f30d7638cf5",
       "traceability": {
         "requirement": [
           "UCOS-CON-000032",
@@ -53880,7 +53879,7 @@
       ],
       "path": "00-CMG/CMG-REGISTRY.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "4d8242bbd4405602fe7eaa676f07498ef2980528fd133c2b18fe4818b360bfa3",
+      "content_hash": "83fe5ce03b42b87465267ff6604d7b5a7ac6e7256908219852e4ddfd4feca879",
       "traceability": {
         "requirement": [],
         "architecture": [

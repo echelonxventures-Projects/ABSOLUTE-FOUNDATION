@@ -29,6 +29,12 @@ from engine.object_birth.contract import assess, load_contract, repo_root
 from engine.object_birth.ledger import load as load_ledger
 from engine.object_birth.ledger import records as ledger_records
 from engine.object_birth.model import BirthError
+from engine.object_birth.scope import (
+    assess_scope,
+    load_context,
+    load_policy,
+    summarize,
+)
 
 EXIT_OPEN = 0
 EXIT_CLOSED = 1
@@ -52,6 +58,19 @@ def measure(declaration: str | None = None, ledger_path: str | None = None) -> d
         {"law_id": law_id, "title": title, "violations": list(violations), "holds": not violations}
         for law_id, title, violations in assessments
     ]
+
+    # UOBC-BSP-001 — birth SCOPE, measured in the same gate rather than a new one. Scope
+    # is part of the birth contract: which objects must be born is the same subject as
+    # whether the ones that are born are correct, and a second stage would be a second
+    # place to look for one answer.
+    policy = load_policy()
+    context = load_context()
+    laws.extend(
+        {"law_id": law_id, "title": title, "violations": list(violations), "holds": not violations}
+        for law_id, title, violations in assess_scope(policy, context)
+    )
+    scope = summarize(policy, context)
+
     refused = [entry for entry in laws if not entry["holds"]]
 
     return {
@@ -70,6 +89,7 @@ def measure(declaration: str | None = None, ledger_path: str | None = None) -> d
         "laws": laws,
         "laws_measured": len(laws),
         "laws_refused": len(refused),
+        "scope": scope,
         "verdict": "OPEN" if not refused else "CLOSED",
     }
 
@@ -89,6 +109,13 @@ def _render(report: dict[str, Any]) -> str:
         f"  supersessions         : {report['supersessions']}",
         f"  laws measured         : {report['laws_measured']}",
         f"  laws refused          : {report['laws_refused']}",
+        "-" * 60,
+        f"  birth scope policy    : {report['scope']['policy_id']}",
+        f"  governed objects      : {report['scope']['objects']}",
+        f"  scope verdicts        : "
+        f"PASS {report['scope']['verdicts']['PASS']} · "
+        f"FAIL {report['scope']['verdicts']['FAIL']} · "
+        f"EXCEPTION {report['scope']['verdicts']['EXCEPTION']} (adoption deferred, disclosed)",
         "-" * 60,
     ]
     for entry in report["laws"]:

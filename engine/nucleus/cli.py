@@ -2,14 +2,26 @@
 
 Every subcommand emits canonical JSON on stdout and nothing else, so its output is
 evidence: byte-identical across machines and runs, and directly diffable. Exit code 0 means
-the constitutional condition held; 1 means it did not. The CLI writes no file — a
-determination is materialised by the authority that owns the truth it would enter.
+the constitutional condition held; 1 means it did not.
+
+WRITING, AND THE ONE NARROW EXCEPTION. This CLI wrote no file, on the stated ground that
+"a determination is materialised by the authority that owns the truth it would enter".
+That ground is preserved rather than abandoned: ``dictionary --write`` materialises exactly
+one artifact, into the Operational Memory home of the programme that OWNS it
+(``00-MASTER/UCOS-NUCLEUS-001/``, whose ownership follows the UGA rule "the programme
+directory IS the owner"), and it is the same pattern ``engine/uaue/gate.py`` already uses to
+write nineteen artifacts owned by ``UAUE-000001``. Nothing else writes, no subcommand
+writes without the flag, and the artifact is derived truth that asserts nothing: deleting it
+changes no verdict, only the cost of reaching one. The change is recorded here rather than
+left as drift between a docstring and the code beneath it (B-02).
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
+import sys
 from collections.abc import Sequence
 from typing import Any
 
@@ -25,6 +37,11 @@ from engine.nucleus.errors import NucleusError
 from engine.nucleus.evolution import EvolutionLedger, state_must_grow
 from engine.nucleus.registry import build_seed_registry
 from engine.registry.universal.dictionary import dictionary_for
+
+
+def _repo_root() -> str:
+    """The repository root, derived from this file's location."""
+    return os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 def _emit(payload: Any) -> None:
@@ -110,14 +127,65 @@ def _cmd_lineage(_args: argparse.Namespace) -> int:
     return 0 if ledger.is_intact() and not payload["unrecorded"] else 1
 
 
+#: The one artifact this CLI may materialise, and the programme home that owns it.
+DICTIONARY_ARTIFACT = "00-MASTER/UCOS-NUCLEUS-001/UCOS-NUCLEUS-IDENTIFIER-DICTIONARY.json"
+
+
+def _dictionary_document(registry: Any, dictionary: Any) -> dict[str, Any]:
+    """Return the persisted dictionary document.
+
+    Carries what a reader needs to answer the artifact WITHOUT this process: which
+    registry state it projected (``source.registry_digest``), which projection produced
+    it, which grammar minted the identifiers, and the digest that proves the entries were
+    not edited. No clock and no machine path enter it — the artifact is replayed and
+    compared byte-for-byte, and a timestamp would make two runs of one state differ.
+    """
+    payload = dictionary.to_document()
+    payload["artifact_id"] = "UCOS-NUCLEUS-IDENTIFIER-DICTIONARY"
+    payload["owner"] = "UCOS-NUCLEUS-001"
+    payload["authority"] = (
+        "NONE — DERIVED TRUTH. A projection of the nucleus structural registry through the "
+        "identifier grammar already owned by UCKP-ART-05 and engine/registry/universal/"
+        "identity.py. It mints nothing, advances no counter, and registers no object: every "
+        "entry is re-minted from its own identity tuple by verification, so the artifact "
+        "proves agreement rather than asserting it. Deleting it changes no verdict."
+    )
+    payload["source"] = {
+        "registry": "engine.nucleus.registry.build_seed_registry",
+        "registry_digest": registry.digest(),
+        "projection": "engine.registry.universal.dictionary.dictionary_for",
+        "identifier_grammar": "engine.registry.universal.identity.deterministic_id",
+    }
+    payload["generation_context"] = {
+        "producer": "engine/nucleus/cli.py",
+        "regeneration_command": "python -m engine.nucleus.cli dictionary --write",
+        "lifecycle": "REGENERATED",
+        "determinism": "pure over the registry state; no clock, no network, no machine path",
+    }
+    payload["verification"] = dictionary.verify()
+    payload["digest"] = dictionary.digest()
+    return payload
+
+
 def _cmd_dictionary(args: argparse.Namespace) -> int:
     registry = build_seed_registry()
     dictionary = (
         context.dictionary_with_context(registry) if args.with_context else dictionary_for(registry)
     )
-    payload = dictionary.to_document()
-    payload["verification"] = dictionary.verify()
-    payload["digest"] = dictionary.digest()
+    payload = _dictionary_document(registry, dictionary)
+    if getattr(args, "write", False):
+        if args.with_context:
+            print(
+                "refused: --write materialises the declared artifact, which is the "
+                "context-free projection; --with-context is a different document",
+                file=sys.stderr,
+            )
+            return 1
+        target = os.path.join(_repo_root(), DICTIONARY_ARTIFACT)
+        with open(target, "w", encoding="utf-8") as handle:
+            handle.write(json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
+        print(DICTIONARY_ARTIFACT)
+        return 0 if dictionary.is_verified else 1
     _emit(payload)
     return 0 if dictionary.is_verified else 1
 
@@ -288,6 +356,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--with-context",
         action="store_true",
         help="also enumerate every reference frame and resolved axis identifier",
+    )
+    dictionary.add_argument(
+        "--write",
+        action="store_true",
+        help=f"materialise the declared artifact at {DICTIONARY_ARTIFACT}",
     )
     dictionary.set_defaults(func=_cmd_dictionary)
 

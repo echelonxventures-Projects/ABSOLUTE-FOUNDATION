@@ -15,7 +15,8 @@
 | Canonical ownership | USIS program; single canonical owner of the Evidence tier | USIS-005 §5 (No-Orphan); USIS-INT-001 Part G ("Evidence → USIS-016 (pending)") |
 | Universal identifier allocation | `UCOS-USIS-000019` (append-only, next free after `…000018`) | `id-ledger.json` `category_seq.USIS = 18`; REG-AUTO-001 §8 |
 | Native identifier | USIS-016 | Structure spec §3 sequence |
-| Parent lineage | `Parent` = program root USIS-GOV-000 (non-chained, materialized to `UCOS-USIS-000001`); `Depends-On` USIS-015 (parent tier 21) + spine | USIS-005 §5; USIS-004 tier-22 parent = Certification(21) |
+| PARENT | USIS-GOV-000 | USIS-005 §5 — program root, non-chained; materialized to `UCOS-USIS-000001` |
+| DEPENDS-ON | USIS-015 | USIS-004 tier-22 parent = Certification(21); spine |
 | Registry ownership | Universal mechanism (`ukb build` → `00-BOOK/DATA` + `00-BOOK/REGISTRIES`) | REG-AUTO-001 §2; LAW USIS-02 |
 | Blueprint ownership | USIS-004 meta-model tier **22 (Evidence)**; closure obligation = **evidence closure** (TRACK-001 fail-closed) | USIS-004 Part C tier 22 |
 | Knowledge-Once ownership | Evidence *architecture* here; *law* = CEP-008; *execution* = `ukbx certify`/`ukbx twin` + `00-BOOK/DATA` registers + `.runtime/governance` audit (referenced) | LAW USIS-02 |

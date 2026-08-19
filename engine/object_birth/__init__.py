@@ -65,6 +65,16 @@ from engine.object_birth.model import (
     MandatoryField,
     Namespace,
 )
+from engine.object_birth.scope import (
+    EXCEPTION,
+    FAIL,
+    PASS,
+    ScopePolicy,
+    Verdict,
+    evaluate,
+    load_context,
+    load_policy,
+)
 
 #: The published contract of this package.
 BIRTH_CONTRACT: dict[str, object] = {
@@ -83,6 +93,14 @@ BIRTH_CONTRACT: dict[str, object] = {
 }
 
 __all__ = [
+    "EXCEPTION",
+    "FAIL",
+    "PASS",
+    "ScopePolicy",
+    "Verdict",
+    "evaluate",
+    "load_context",
+    "load_policy",
     "BIRTH_CONTRACT",
     "LAW_CHECKS",
     "MANDATORY_FIELD_NAMES",

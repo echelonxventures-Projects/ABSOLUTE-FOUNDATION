@@ -29,13 +29,13 @@
   "validation_id": "UAKOS-CLOSURE-008.VR-001",
   "contract": {
     "contract_id": "UCOS-VERIFY-001",
-    "command": "./verify.sh",
-    "invocation": "default (the opt-in --full registration stage is outside this contract)",
+    "command": "./verify.sh --full",
+    "invocation": "--full (the certification contract; the bare invocation is --change, a developer mode that certifies nothing)",
     "artifact_references": [
       "verify.sh",
       "scripts/ucos-env.sh"
     ],
-    "stages_digest": "86a04329f95d5edb63e5629fa7a6b07c2b6e8a5bce65e602e2301969a96e8de4",
+    "stages_digest": "6c96d12478e30e5df2bef46290d4feaa02f0b3a6f1984b12e9907329e2649fc9",
     "stages_digest_definition": "sha256 over the newline-joined stage names this contract declares, read from verify.sh. A gate added to the contract and not to this record fails the record's own test."
   },
   "result": "PASS",
@@ -50,10 +50,6 @@
     },
     {
       "stage": "pytest + coverage gate (--cov-fail-under=90)",
-      "result": "PASS"
-    },
-    {
-      "stage": "coverage report",
       "result": "PASS"
     },
     {
@@ -82,6 +78,22 @@
     },
     {
       "stage": "universal object birth contract (UOBC-000001, identity before existence)",
+      "result": "PASS"
+    },
+    {
+      "stage": "universal infinite scope and direction (UISD-000001, unbounded and self-applied)",
+      "result": "PASS"
+    },
+    {
+      "stage": "constitutional primitive alignment (UCPA-000001, root ontology measured and reduced)",
+      "result": "PASS"
+    },
+    {
+      "stage": "universal verification intelligence (UVI-000001, selection derived and assurance preserved)",
+      "result": "PASS"
+    },
+    {
+      "stage": "coverage report",
       "result": "PASS"
     }
   ],

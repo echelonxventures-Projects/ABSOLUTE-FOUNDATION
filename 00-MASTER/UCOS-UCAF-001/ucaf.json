@@ -1006,7 +1006,7 @@
       "measure": "delegations_registered",
       "measured": true,
       "obligation": "every located delegation of a concern to an owner is registered, and its owner resolves",
-      "value": 60
+      "value": 61
     },
     {
       "capability": "Authority Resolution",
@@ -1125,11 +1125,11 @@
     "capabilities": 14,
     "capabilities_discharged": 14,
     "concepts_admitted": 6,
-    "delegations": 60,
+    "delegations": 61,
     "dispositions_owned": 6,
     "minted_collisions": 0,
-    "minted_token_classes": 5,
-    "minted_tokens": 20,
+    "minted_token_classes": 7,
+    "minted_tokens": 22,
     "minted_unclassified": 0,
     "realizations": 1,
     "realizations_bound": 1,
@@ -1542,6 +1542,14 @@
       "owner_resolved": false
     },
     {
+      "concern": "canonical-object-identity-registry-relationship-graph-and-invariant-validation",
+      "disposition": "REUSE",
+      "id": "CMG-DLG-50",
+      "owner": "UCKP-LAW-0001",
+      "owner_named": true,
+      "owner_resolved": false
+    },
+    {
       "concern": "definition-of-constitution-and-constitutional-artifact",
       "disposition": "RETAIN",
       "id": "CMG-RET-01",
@@ -1806,6 +1814,15 @@
       "token": "ENGINEERING-EXECUTION-ONLY"
     },
     {
+      "class": "PROJECTION-ROLE-NAME",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "engine/root_ontology/model.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "ROLE_AUTHORITY",
+      "token": "AUTHORITY"
+    },
+    {
       "class": "ENGINEERING-EXECUTION",
       "classified": true,
       "constitutional_collision": false,
@@ -1822,6 +1839,15 @@
       "source": "UCAF-REAL-01",
       "symbol": "EXECUTION_AUTHORITY",
       "token": "ENGINEERING-EXECUTION-ONLY"
+    },
+    {
+      "class": "RESOLUTION-LEDGER-FIELD",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "engine/uckp/intelligence.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "ACCOUNTABLE_AUTHORITY",
+      "token": "accountable_authority"
     },
     {
       "class": "DELTA-REGISTER-KEY",
@@ -1982,6 +2008,20 @@
       "constitutional": false,
       "id": "UCAF-TC-05",
       "token": "FG-15-NO-PARALLEL-AUTHORITY"
+    },
+    {
+      "basis": "engine/uckp/intelligence.py — the field name under which an entry of the constitutional `category_ownership_resolution` declares the party accountable for a category's population, read by the declared-versus-measured category integrity join (PHASE-UCF-013). The constant is a JSON key in a resolution record, not a claim to hold authority. What the key names is held distinct from constitutional authority in three separate ways, each already determined: the value is a governance entity accountable for a category's population POLICY, severed by PHASE-UCF-012 D4 from the Ownership.owner value space (Facet 7) precisely so it cannot be aggregated into one; what a category IS remains GOVERNED_CATEGORIES under Article 17, which the ledger cites and never re-declares (PHASE-UCF-012 § 8.2, 'there is no vacancy here'); and the reasoner that reads the key reports at OBSERVATION severity and can move no certification verdict. The resolution sections it belongs to are recognitive, never constitutive — each records a standing that measurement already shows to hold and grants no right (PHASE-UCF-012 § 6.3). Disclosed here rather than renamed in code, for the same reason as UCAF-TC-03 and UCAF-TC-05: the discovered population is narrowed by declaration, never by a filter — and a symbol chosen to fall outside the discovery pattern would be that filter under another name.",
+      "class": "RESOLUTION-LEDGER-FIELD",
+      "constitutional": false,
+      "id": "UCAF-TC-06",
+      "token": "accountable_authority"
+    },
+    {
+      "basis": "engine/root_ontology/model.py — the name of one of the four ROLES a site may hold in UCPA-000001's classification of artifacts that state the root ontology (AUTHORITY, RATIFICATION_RECORD, PROJECTION, SUPERSEDED). The constant is a role LABEL compared against declared data, not a claim to hold authority: the programme's own standing is AUTHORITY = NONE (DERIVED TRUTH), it legislates no ontology, and UCPA-L-06 requires the single site bearing this role to be the canonical owner that 00-MASTER/URRC-000001/urrc-bindings.json D-24 already binds — so the label can only ever point at an owner determined elsewhere, and can never vest one. Disclosed here rather than renamed in code for the reason UCAF-TC-06 records: a symbol chosen to fall outside the discovery pattern would be a filter under another name, and the discovered population must be narrowed by declaration only.",
+      "class": "PROJECTION-ROLE-NAME",
+      "constitutional": false,
+      "id": "UCAF-TC-07",
+      "token": "AUTHORITY"
     }
   ],
   "realizations": [
@@ -2337,7 +2377,7 @@
       "rule": "the lattice shall be consistent with, and shall not amend, the four-tier Program authority order already declared by the charter"
     }
   ],
-  "seal_sha256": "9d18009b1c2caa28f7728edf24a3e31f750a9afc8e7967a84c845bf34267ee11",
+  "seal_sha256": "36e22f349666624851c94331fdd11d572dc029366712a0b7ff48e74a2fa5003a",
   "source_token_registers": [
     {
       "id": "UCAF-TOK-01",
@@ -2589,6 +2629,7 @@
       "corroborated": true,
       "corroboration": [
         "canonical-lattice-content",
+        "registered-artifact",
         "located-authority-of-the-same-name",
         "charter-vesting"
       ],
@@ -2989,7 +3030,7 @@
       "owner": "00-CEP/CEP-010-CONSTITUTIONAL-AUDIT-COMPLIANCE-ASSURANCE-CONSTITUTION.md"
     },
     {
-      "digest": "4d8242bbd4405602",
+      "digest": "83fe5ce03b42b874",
       "owner": "00-CMG/CMG-REGISTRY.json"
     },
     {

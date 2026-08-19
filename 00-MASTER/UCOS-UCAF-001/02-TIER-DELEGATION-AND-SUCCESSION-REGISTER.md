@@ -32,7 +32,7 @@ which the meta-constitution forbids and whose disposal belongs to the claim owne
 | `T2` | Program Authority | Program Authority | LOCATED | Located | YES | CEP-000 and its derived CEP instruments; supreme over constitutional-engineering process | canonical-lattice-content, registered-artifact, charter-vesting |
 | `T2I` | Interpretive Authority | Interpretive Authority | LOCATED | Located | YES | AUTH-INF-001; binds reading, enacts nothing; orthogonal to T2 | canonical-lattice-content, registered-artifact |
 | `T3` | Domain Authority | Domain Authority | LOCATED | Located | YES | Domain constitutions governing substance within one domain | canonical-lattice-content, registered-artifact |
-| `T4` | Execution Authority | Execution Authority | LOCATED | Located | YES | Agents and engines acting within a gate | canonical-lattice-content, located-authority-of-the-same-name, charter-vesting |
+| `T4` | Execution Authority | Execution Authority | LOCATED | Located | YES | Agents and engines acting within a gate | canonical-lattice-content, registered-artifact, located-authority-of-the-same-name, charter-vesting |
 | `T5` | Derived-Truth Authority | Derived-Truth Authority | LOCATED | Located | YES | State, checkpoints, evidence, reports, registries, projections — assert nothing | canonical-lattice-content, charter-vesting |
 
 ## Charter tier vesting (the order the lattice may not amend)
@@ -106,6 +106,7 @@ its located owner records it.
 | `CMG-DLG-47` | repository-lifecycle | `CONST-09` | REUSE | no (named, unresolved path) |
 | `CMG-DLG-48` | constitutional-engineering-operational-law-invariants-and-artifact-state-model | `CEP-001` | REUSE | no (named, unresolved path) |
 | `CMG-DLG-49` | deferral-register-lifecycle-states-entry-exit-review-cadence-and-custody | `CEP-002` | REUSE | no (named, unresolved path) |
+| `CMG-DLG-50` | canonical-object-identity-registry-relationship-graph-and-invariant-validation | `UCKP-LAW-0001` | REUSE | no (named, unresolved path) |
 | `CMG-RET-01` | definition-of-constitution-and-constitutional-artifact | `CMG-000001` | RETAIN | no (named, unresolved path) |
 | `CMG-RET-02` | recognition-of-constitutionality-and-the-constitution-registry | `CMG-000001` | RETAIN | no (named, unresolved path) |
 | `CMG-RET-03` | classification-taxonomy-and-ontology-of-constitutional-objects | `CMG-000001` | RETAIN | no (named, unresolved path) |

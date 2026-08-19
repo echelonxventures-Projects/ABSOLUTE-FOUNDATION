@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T15:29:21+00:00",
+  "generated_at": "2026-08-19T05:29:00+00:00",
   "count": 12899,
   "relationships": [
     {
@@ -102446,33 +102446,33 @@
       "edge_id": "UEDGE-000012806",
       "from": "UCOS-EVOUSIS015-000002",
       "to": "UCOS-USIS-000017",
-      "type": "Parent",
+      "type": "Depends-On",
       "inverse_of": null,
-      "note": "metadata:PARENT"
+      "note": "metadata:DEPENDS-ON"
     },
     {
       "edge_id": "UEDGE-000012807",
       "from": "UCOS-USIS-000017",
       "to": "UCOS-EVOUSIS015-000002",
-      "type": "Child",
+      "type": "Required-By",
       "inverse_of": "UEDGE-000012806",
-      "note": "inverse-of Parent (metadata:PARENT)"
+      "note": "inverse-of Depends-On (metadata:DEPENDS-ON)"
     },
     {
       "edge_id": "UEDGE-000012808",
       "from": "UCOS-EVOUSIS016-000002",
       "to": "UCOS-USIS-000018",
-      "type": "Parent",
+      "type": "Depends-On",
       "inverse_of": null,
-      "note": "metadata:PARENT"
+      "note": "metadata:DEPENDS-ON"
     },
     {
       "edge_id": "UEDGE-000012809",
       "from": "UCOS-USIS-000018",
       "to": "UCOS-EVOUSIS016-000002",
-      "type": "Child",
+      "type": "Required-By",
       "inverse_of": "UEDGE-000012808",
-      "note": "inverse-of Parent (metadata:PARENT)"
+      "note": "inverse-of Depends-On (metadata:DEPENDS-ON)"
     },
     {
       "edge_id": "UEDGE-000012810",

@@ -1275,7 +1275,7 @@
       "subject": "EXPORT-ARCHIVE"
     }
   ],
-  "head_commit": "3c1644ab",
+  "head_commit": "bb9c27d2",
   "program": "UKAP-001",
-  "seal_sha256": "fc5ab8c459073795b1ed633862fa80a3ccdffff4daa18381623e6528c66795b8"
+  "seal_sha256": "c335197cfd9bad40539e0bdc66866f541408111f2720641bd9aff0d95e3b4a41"
 }

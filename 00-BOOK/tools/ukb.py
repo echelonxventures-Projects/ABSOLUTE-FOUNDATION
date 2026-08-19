@@ -1838,6 +1838,55 @@ def cmd_validate(args):
             if d not in known:
                 problems.append(f"{a['universal_id']} dep {d} unknown.")
 
+    # LINEAGE PROJECTION CONSISTENCY (F-1).
+    #
+    # The check above proves a declared parent RESOLVES. It never proved that a
+    # projected Parent edge is BACKED by a declared parent, and that silence is how
+    # F-1 survived: a relationship row headed with prose ("Parent lineage") matched the
+    # PARENT label, every reference in the cell was attributed to it, and a `Depends-On`
+    # target was emitted as a second Parent edge. Two artifacts carried two parents each,
+    # and nothing in the corpus could say so.
+    #
+    # A projection may not assert an ancestry its source does not declare. Stated over
+    # the emitted graph rather than over the parser, so it holds however the edge was
+    # produced — no rule here names a label, a document or an artifact.
+    rels = _load_json(RELS_PATH, {"relationships": []})["relationships"]
+    declared_parent = {a["universal_id"]: a["parent"] for a in arts}
+    parents_seen = {}
+    for e in rels:
+        if e.get("type") != "Parent":
+            continue
+        child, parent = e.get("from"), e.get("to")
+        parents_seen.setdefault(child, []).append(parent)
+        if child in declared_parent and declared_parent[child] != parent:
+            problems.append(
+                f"{child} projected Parent {parent} is not the declared parent "
+                f"{declared_parent[child]} (note: {e.get('note')})."
+            )
+    for child, found in parents_seen.items():
+        if len(set(found)) > 1:
+            problems.append(
+                f"{child} has {len(set(found))} conflicting projected parents: {sorted(set(found))}."
+            )
+
+    # RELATION TYPE CORRECTNESS (ULP).
+    #
+    # Every emitted edge must carry a type this file declares. An edge typed outside the
+    # vocabulary is a relation nobody owns: no inverse, no lane, no meaning any consumer
+    # can resolve — and the lineage projection classifies by type, so an unknown type would
+    # be silently invisible to it rather than loudly wrong.
+    declared_relation_types = set()
+    for spec in C.RELATIONSHIP_TYPES:
+        declared_relation_types.add(spec["type"])
+        declared_relation_types.add(spec["inverse"])
+    undeclared = sorted({
+        str(e.get("type")) for e in rels if str(e.get("type")) not in declared_relation_types
+    })
+    for etype in undeclared:
+        problems.append(
+            f"relationship type {etype!r} is emitted but not declared in RELATIONSHIP_TYPES."
+        )
+
     # schema validation (optional)
     try:
         import jsonschema  # type: ignore

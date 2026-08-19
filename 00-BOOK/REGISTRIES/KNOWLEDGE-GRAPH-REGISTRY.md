@@ -8,10 +8,10 @@ Every relationship in the UKB is a first-class, navigable, directional edge. Par
 
 | Edge type | Count |
 |-----------|-------|
-| Depends-On | 4774 |
-| Required-By | 4697 |
-| Parent | 1234 |
-| Child | 1234 |
+| Depends-On | 4776 |
+| Required-By | 4699 |
+| Parent | 1232 |
+| Child | 1232 |
 | Consumes | 316 |
 | Consumed-By | 316 |
 | Authorized-By | 100 |
@@ -12834,10 +12834,10 @@ Every relationship in the UKB is a first-class, navigable, directional edge. Par
 | `UEDGE-000012803` | `UCOS-USIS-000004` | Implemented-By | `UCOS-USIS-000016` | inverse-of Implements (metadata:IMPLEMENTS) |
 | `UEDGE-000012804` | `UCOS-USIS-000001` | Depends-On | `UCOS-SEC-000001` | metadata:DEPENDS-ON |
 | `UEDGE-000012805` | `UCOS-SEC-000001` | Required-By | `UCOS-USIS-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
-| `UEDGE-000012806` | `UCOS-EVOUSIS015-000002` | Parent | `UCOS-USIS-000017` | metadata:PARENT |
-| `UEDGE-000012807` | `UCOS-USIS-000017` | Child | `UCOS-EVOUSIS015-000002` | inverse-of Parent (metadata:PARENT) |
-| `UEDGE-000012808` | `UCOS-EVOUSIS016-000002` | Parent | `UCOS-USIS-000018` | metadata:PARENT |
-| `UEDGE-000012809` | `UCOS-USIS-000018` | Child | `UCOS-EVOUSIS016-000002` | inverse-of Parent (metadata:PARENT) |
+| `UEDGE-000012806` | `UCOS-EVOUSIS015-000002` | Depends-On | `UCOS-USIS-000017` | metadata:DEPENDS-ON |
+| `UEDGE-000012807` | `UCOS-USIS-000017` | Required-By | `UCOS-EVOUSIS015-000002` | inverse-of Depends-On (metadata:DEPENDS-ON) |
+| `UEDGE-000012808` | `UCOS-EVOUSIS016-000002` | Depends-On | `UCOS-USIS-000018` | metadata:DEPENDS-ON |
+| `UEDGE-000012809` | `UCOS-USIS-000018` | Required-By | `UCOS-EVOUSIS016-000002` | inverse-of Depends-On (metadata:DEPENDS-ON) |
 | `UEDGE-000012810` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000001` | metadata:DEPENDS-ON |
 | `UEDGE-000012811` | `UCOS-UMB-000001` | Required-By | `UCOS-UCOSOMEGAINF-000001` | inverse-of Depends-On (metadata:DEPENDS-ON) |
 | `UEDGE-000012812` | `UCOS-UCOSOMEGAINF-000001` | Depends-On | `UCOS-UMB-000002` | metadata:DEPENDS-ON |

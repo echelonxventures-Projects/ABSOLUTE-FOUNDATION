@@ -15,7 +15,8 @@
 | Canonical ownership | USIS program; single canonical owner of the Certification tier | USIS-005 §5 (No-Orphan); USIS-INT-001 Part C ("Certification ownership \| USIS-015 (pending)") |
 | Universal identifier allocation | `UCOS-USIS-000018` (append-only, next free after `…000017`) | `id-ledger.json` `category_seq.USIS = 17`; REG-AUTO-001 §8 |
 | Native identifier | USIS-015 | USIS-005 §3 sequence |
-| Parent lineage | `Parent` = program root USIS-GOV-000 (non-chained); `Depends-On` USIS-014 (parent tier 20) + Wave-2 spine | USIS-005 §5; USIS-004 tier-21 parent = Validation(20) |
+| PARENT | USIS-GOV-000 | USIS-005 §5 — program root, non-chained |
+| DEPENDS-ON | USIS-014 | USIS-004 tier-21 parent = Validation(20); Wave-2 spine |
 | Registry ownership | Universal mechanism (`ukb build` → `00-BOOK/DATA` + `00-BOOK/REGISTRIES`) | REG-AUTO-001 §2; LAW USIS-02 |
 | Blueprint ownership | USIS-004 meta-model tier **21 (Certification)**; closure obligation = **certification closure** | USIS-004 Part C tier 21 |
 | Knowledge-Once ownership | Certification *architecture* here; *law* = CEP-005; *execution* = `ukbx certify` / `engine/universal_certification` / `platform/certification` (referenced) | LAW USIS-02 |

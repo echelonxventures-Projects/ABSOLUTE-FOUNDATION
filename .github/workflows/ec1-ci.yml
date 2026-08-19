@@ -140,8 +140,16 @@ jobs:
       # them the same predicate by construction: it runs the shared
       # ucos_ruff_gate (check AND format --check), pytest with the 90% coverage
       # gate, the coverage report, and `ukb.py enforce --pre`.
-      - name: Canonical verification gate (./verify.sh)
-        run: ./verify.sh
+      #
+      # UVI-000001 made the mode EXPLICIT. The bare invocation used to be the
+      # certification contract and is now --change, a developer mode that runs
+      # impact-selected tests without the coverage floor and certifies nothing.
+      # CI must name the certification mode, and --full is it: the whole suite
+      # under the 90% floor, every governance / identity / lifecycle / evolution
+      # gate, plus the read-only registration observation. Dropping "--full"
+      # here would silently turn this job into a developer check.
+      - name: Canonical verification gate (./verify.sh --full)
+        run: ./verify.sh --full
 
       - name: Build (wheel + sdist)
         run: python -m pip install build==1.2.2 && python -m build

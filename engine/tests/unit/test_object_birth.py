@@ -386,8 +386,27 @@ def test_assess_measures_every_law(contract) -> None:
 def test_gate_measures_the_committed_ledger() -> None:
     report = measure()
     assert report["artifact_id"] == "UOBC-000001"
-    assert report["laws_measured"] == 8
     assert report["births"] >= 8, "the committed ledger must not be vacuous"
+
+
+def test_gate_measures_every_law_both_instruments_declare() -> None:
+    """Derived, never pinned.
+
+    The gate measures the birth CONTRACT and the birth SCOPE policy in one pass, because
+    scope is part of the contract rather than a separate subject. A pinned literal here
+    would have to be edited every time either instrument gained a law, and an expectation
+    that must be edited to stay true is an expectation that stops being checked.
+    """
+    from engine.object_birth.scope import load_policy
+
+    report = measure()
+    expected = len(load_contract().laws) + len(load_policy().laws)
+    assert report["laws_measured"] == expected
+    measured = {law["law_id"] for law in report["laws"]}
+    declared = {law.law_id for law in load_contract().laws} | {
+        law.law_id for law in load_policy().laws
+    }
+    assert measured == declared
 
 
 def test_committed_ledger_passes_every_law() -> None:

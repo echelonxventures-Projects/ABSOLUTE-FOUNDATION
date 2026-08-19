@@ -174,11 +174,37 @@ bootstrap:
 doctor:
 	@./doctor.sh
 
+# UVI-000001 — one command per declared mode. The bare `make verify` is `./verify.sh`,
+# whose default is now --change: impact-selected tests plus every governance gate, and
+# NOT a certification. `make verify-full` is the certification contract and is what CI
+# invokes. `make verify-explain` prints the plan the mode would execute and runs nothing.
 verify:
 	@./verify.sh
 
+verify-fast:
+	@./verify.sh --fast
+
+verify-change:
+	@./verify.sh --change
+
+verify-integration:
+	@./verify.sh --integration
+
 verify-full:
 	@./verify.sh --full
+
+verify-explain:
+	@./verify.sh --explain
+
+# verify-cost-model: RE-MEASURE the shard cost table. It is a measurement, not a fact
+# about the repository: a stale entry makes a plan slower and never wrong, so this is
+# deliberately not wired into any gate. Run it after a change that moves test durations
+# materially, then commit the regenerated table.
+verify-cost-model: bootstrap-quiet
+	@$(PY) -m pytest -o addopts= --no-cov -q --durations=0 \
+	  > .uvi-durations.txt 2>&1 || true
+	@$(PY) -m engine.verification_intelligence.cost_model --from .uvi-durations.txt
+	@rm -f .uvi-durations.txt
 
 # repo-ops: EPIC-PLAT-003 (Terminal T5) — one command performs complete repository
 # operational verification by orchestrating the canonical engines/scripts. Delegates to
@@ -2034,3 +2060,75 @@ birth-gate: bootstrap-quiet
 # birth-json: the machine-readable report, for a consumer that needs the law table.
 birth-json: bootstrap-quiet
 	@$(PY) -m engine.object_birth.gate --json
+
+
+
+# ===========================================================================
+# UISD-000001 — Universal Infinite Scope and Direction
+#
+# AUTHORITY = NONE (DERIVED TRUTH). This programme is NOT superior to CMG-000001
+# (law owner), UCIC-001 (lifecycle owner) or CEP-009 (evolution authority). It
+# declares no lifecycle stage, opens no registry, consumes no counter and issues
+# no identifier, so it cannot become a rival authority under CAA-INV-04 or
+# CAA-INV-07. Its subject is a PROPERTY of instruments, never an instrument.
+#
+# The property was already certified in prose — 16 unbounded axes in
+# 03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md, 23 finite-assumption axes in
+# 04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md — but the latter records in §4 that
+# no exhaustive proof of absence was performed and confines residual risk to the
+# realization layers. These targets compute the property over that space.
+#
+# Ten laws, all held as DATA in 00-MASTER/UISD-000001/uisd-declaration.json; the
+# engine holds no law text and no enumeration member.
+#
+# OBSERVE MODE — READ ONLY. Stdlib only; no wall clock, no network, no subprocess;
+# writes NOTHING anywhere, including gitignored paths. There is deliberately no
+# -render and no -replay target: a gate that writes nothing cannot drift, and a
+# replay target over an empty write set would be a declared-and-unread flag (GP-4).
+# Additive only — no existing target, recipe or dependency above is altered.
+# Exit semantics: 0 OPEN, 1 CLOSED (a law was refused), 2 FAULT (no verdict).
+# ===========================================================================
+.PHONY: infinite-scope infinite-scope-gate infinite-scope-json
+
+# infinite-scope: the human-readable measurement — every law, every refusal named.
+infinite-scope: bootstrap-quiet
+	@$(PY) -m engine.infinite_scope.gate
+
+# infinite-scope-gate: fail-closed. Wired into ./verify.sh as Stage 6f, so deleting
+# the stage closes the gate rather than silently unbinding the ten laws.
+infinite-scope-gate: bootstrap-quiet
+	@$(PY) -m engine.infinite_scope.gate --quiet \
+	  || { echo "INFINITE SCOPE GATE CLOSED — run 'make infinite-scope' for the named refusals" >&2; exit 1; }
+	@echo "infinite-scope-gate: scope, direction, relationship and evolution capacity unbounded; no closure undisclosed"
+
+# infinite-scope-json: the machine-readable report, for a consumer that needs the law table.
+infinite-scope-json: bootstrap-quiet
+	@$(PY) -m engine.infinite_scope.gate --json
+
+
+# ===========================================================================
+# UVI-000001 — Universal Verification Intelligence.
+#
+# The layer that answers "which verification does this change require, and in what
+# order may it be executed". It owns no gate and certifies nothing; what it owns is
+# selection, scheduling and evidence reuse. These targets expose its own law gate,
+# which measures that the intelligence did not quietly reduce what verification means.
+# Additive only — no existing target, recipe or dependency above is altered.
+# Exit semantics: 0 COHERENT, 1 INCOHERENT (a law was refused), 2 FAULT (no verdict).
+# ===========================================================================
+.PHONY: uvi uvi-gate uvi-json verify-fast verify-change verify-integration verify-explain verify-cost-model
+
+# uvi: the human-readable measurement — every law, every refusal named.
+uvi: bootstrap-quiet
+	@$(PY) -m engine.verification_intelligence.gate
+
+# uvi-gate: fail-closed. Wired into ./verify.sh as Stage 6g, so deleting the stage
+# closes the gate rather than silently unbinding the ten laws.
+uvi-gate: bootstrap-quiet
+	@$(PY) -m engine.verification_intelligence.gate --gate --quiet \
+	  || { echo "UVI GATE CLOSED — run 'make uvi' for the named refusals" >&2; exit 1; }
+	@echo "uvi-gate: selection is derived, every baseline gate still certifies, and no mode claims more than it measures"
+
+# uvi-json: the machine-readable report, for a consumer that needs the law table.
+uvi-json: bootstrap-quiet
+	@$(PY) -m engine.verification_intelligence.gate --json

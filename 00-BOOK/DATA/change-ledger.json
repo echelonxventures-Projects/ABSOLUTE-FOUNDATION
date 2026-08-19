@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-10T15:29:21+00:00",
+  "generated_at": "2026-08-19T05:29:00+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1353,
+    "change_events": 1358,
     "versioned_artifacts": 1233,
     "lineage_nodes": 1233,
     "artifacts_with_predecessors": 5,
@@ -10,8 +10,8 @@
   },
   "change_event_histogram": {
     "Created": 1233,
-    "Modified": 115,
-    "Version-Incremented": 5
+    "Modified": 119,
+    "Version-Incremented": 6
   },
   "evolution_timeline": [
     {
@@ -8131,6 +8131,36 @@
       "at": "2026-08-10T15:29:21+00:00",
       "subject": "UCOS-DET-000002",
       "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001354",
+      "at": "2026-08-19T05:29:00+00:00",
+      "subject": "UCOS-CMG-000001",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001355",
+      "at": "2026-08-19T05:29:00+00:00",
+      "subject": "UCOS-CON-000050",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001356",
+      "at": "2026-08-19T05:29:00+00:00",
+      "subject": "UCOS-CON-000050",
+      "kind": "Version-Incremented"
+    },
+    {
+      "change_id": "UCHG-000001357",
+      "at": "2026-08-19T05:29:00+00:00",
+      "subject": "UCOS-EVOUSIS015-000002",
+      "kind": "Modified"
+    },
+    {
+      "change_id": "UCHG-000001358",
+      "at": "2026-08-19T05:29:00+00:00",
+      "subject": "UCOS-EVOUSIS016-000002",
+      "kind": "Modified"
     }
   ],
   "change_events": [
@@ -19972,7 +20002,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": null
+      "commit": {
+        "commit": "527485abf00f",
+        "date": "2026-07-25T15:08:19+05:30",
+        "author": "Bipin Kumar",
+        "subject": "EVO-USIS-W2: Freeze Wave-2 constitutional baseline"
+      }
     },
     {
       "change_id": "UCHG-000001185",
@@ -20072,7 +20107,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": null
+      "commit": {
+        "commit": "527485abf00f",
+        "date": "2026-07-25T15:08:19+05:30",
+        "author": "Bipin Kumar",
+        "subject": "EVO-USIS-W2: Freeze Wave-2 constitutional baseline"
+      }
     },
     {
       "change_id": "UCHG-000001195",
@@ -20322,7 +20362,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "UNDER_REVIEW",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001220",
@@ -20332,7 +20377,12 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001221",
@@ -20352,7 +20402,12 @@
       "snapshot_seq": 2,
       "from": "2e7faa98d98b0ededf84603fcca99175b7e389df4e5fad0cb8e012d1cec8e678",
       "to": "2a4870609d6bbe087d19a12cca77d6c289cb93369cbb86ce995fc4029e6620d0",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001223",
@@ -20612,7 +20667,12 @@
       "snapshot_seq": 2,
       "from": "5d472654434b4b42e912f35015e4199c6f221dbf2105b75b3ebc35d4a020cf0f",
       "to": "3b47ff9b18d346d41323016cc0c0470724ba289931a645f0930bee1ac721dbb6",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001249",
@@ -20632,7 +20692,12 @@
       "snapshot_seq": 3,
       "from": "2a4870609d6bbe087d19a12cca77d6c289cb93369cbb86ce995fc4029e6620d0",
       "to": "0e4637e30bfb9e812e415acdaf96626c20b977febfbadb3b3d36588d31afdac4",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001251",
@@ -20642,7 +20707,12 @@
       "snapshot_seq": 4,
       "from": "0e4637e30bfb9e812e415acdaf96626c20b977febfbadb3b3d36588d31afdac4",
       "to": "20124cbed5ae21befc465709a0c30e152cbf5397b39ad2fd97e31e125d543864",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001252",
@@ -20652,7 +20722,12 @@
       "snapshot_seq": 5,
       "from": "20124cbed5ae21befc465709a0c30e152cbf5397b39ad2fd97e31e125d543864",
       "to": "cbaeb49da4394082c291559e46237d6a009a2150966cf84ad2eefe4e367b7740",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001253",
@@ -20672,7 +20747,12 @@
       "snapshot_seq": 6,
       "from": "cbaeb49da4394082c291559e46237d6a009a2150966cf84ad2eefe4e367b7740",
       "to": "55bb086f5642f7c68bda89a1c202469b9873567347200132698880ab5c47f2cf",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001255",
@@ -20682,7 +20762,12 @@
       "snapshot_seq": 3,
       "from": "3b47ff9b18d346d41323016cc0c0470724ba289931a645f0930bee1ac721dbb6",
       "to": "56f1bbd99b48a34ab481cacb58ae43164974efdae66b21647357e2d829189f60",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001256",
@@ -20762,7 +20847,12 @@
       "snapshot_seq": 4,
       "from": "56f1bbd99b48a34ab481cacb58ae43164974efdae66b21647357e2d829189f60",
       "to": "2cc67f867a2bd07e685a57fd812653ccb8f0eb682ca77a7589dc14b291514d27",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001264",
@@ -20782,7 +20872,12 @@
       "snapshot_seq": 7,
       "from": "55bb086f5642f7c68bda89a1c202469b9873567347200132698880ab5c47f2cf",
       "to": "727c913938e4f0cf41f2a002143dca60ce102b0fe731be655ff0e6facab81d33",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001266",
@@ -20882,7 +20977,12 @@
       "snapshot_seq": 5,
       "from": "2cc67f867a2bd07e685a57fd812653ccb8f0eb682ca77a7589dc14b291514d27",
       "to": "ae12d2d5656583ccb2b5a6c3a2ce2b123c1198faeec7d80dc192b2487dc0463f",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001276",
@@ -21112,7 +21212,12 @@
       "snapshot_seq": 6,
       "from": "ae12d2d5656583ccb2b5a6c3a2ce2b123c1198faeec7d80dc192b2487dc0463f",
       "to": "4d8242bbd4405602fe7eaa676f07498ef2980528fd133c2b18fe4818b360bfa3",
-      "commit": null
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
     },
     {
       "change_id": "UCHG-000001299",
@@ -21663,6 +21768,76 @@
       "from": null,
       "to": "ACTIVE",
       "commit": null
+    },
+    {
+      "change_id": "UCHG-000001354",
+      "subject": "UCOS-CMG-000001",
+      "kind": "Modified",
+      "at": "2026-08-19T05:29:00+00:00",
+      "snapshot_seq": 7,
+      "from": "4d8242bbd4405602fe7eaa676f07498ef2980528fd133c2b18fe4818b360bfa3",
+      "to": "83fe5ce03b42b87465267ff6604d7b5a7ac6e7256908219852e4ddfd4feca879",
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
+    },
+    {
+      "change_id": "UCHG-000001355",
+      "subject": "UCOS-CON-000050",
+      "kind": "Modified",
+      "at": "2026-08-19T05:29:00+00:00",
+      "snapshot_seq": 8,
+      "from": "727c913938e4f0cf41f2a002143dca60ce102b0fe731be655ff0e6facab81d33",
+      "to": "9b33335fee3135b21de77f2bb8f9b7fc50aa9e28d266aecbad2b8f30d7638cf5",
+      "commit": {
+        "commit": "ff57f4c1ff95",
+        "date": "2026-08-13T08:33:36+05:30",
+        "author": "Echelon Ventures",
+        "subject": "UCOS Ω∞: Constitutional Authority Reconciliation — CMG Orthogonal Alignment"
+      }
+    },
+    {
+      "change_id": "UCHG-000001356",
+      "subject": "UCOS-CON-000050",
+      "kind": "Version-Incremented",
+      "at": "2026-08-19T05:29:00+00:00",
+      "snapshot_seq": 8,
+      "from": "1.1",
+      "to": "1.2",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001357",
+      "subject": "UCOS-EVOUSIS015-000002",
+      "kind": "Modified",
+      "at": "2026-08-19T05:29:00+00:00",
+      "snapshot_seq": 2,
+      "from": "8544d6a638bb3a6eb2ac2ac3bb626c66edc827daa21716930cd51cd390f31ba0",
+      "to": "672a19d1e50c14571c18720026024c102ba33787bf761dd7809939f6f94092fb",
+      "commit": {
+        "commit": "527485abf00f",
+        "date": "2026-07-25T15:08:19+05:30",
+        "author": "Bipin Kumar",
+        "subject": "EVO-USIS-W2: Freeze Wave-2 constitutional baseline"
+      }
+    },
+    {
+      "change_id": "UCHG-000001358",
+      "subject": "UCOS-EVOUSIS016-000002",
+      "kind": "Modified",
+      "at": "2026-08-19T05:29:00+00:00",
+      "snapshot_seq": 2,
+      "from": "609a8602e71a993ce59243a225b2bfe034f2bc9e0c81afc02895453bd9fa5e08",
+      "to": "53ca027ab1f09a5810342beb3c0ee4eaaba2c15c8aff07f306ea936b1cd6db81",
+      "commit": {
+        "commit": "527485abf00f",
+        "date": "2026-07-25T15:08:19+05:30",
+        "author": "Bipin Kumar",
+        "subject": "EVO-USIS-W2: Freeze Wave-2 constitutional baseline"
+      }
     }
   ],
   "version_records": {
@@ -37584,7 +37759,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "8544d6a638bb3a6eb2ac2ac3bb626c66edc827daa21716930cd51cd390f31ba0",
+      "content_baseline": "672a19d1e50c14571c18720026024c102ba33787bf761dd7809939f6f94092fb",
       "history": [
         {
           "version": "1.0.0",
@@ -37724,7 +37899,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "609a8602e71a993ce59243a225b2bfe034f2bc9e0c81afc02895453bd9fa5e08",
+      "content_baseline": "53ca027ab1f09a5810342beb3c0ee4eaaba2c15c8aff07f306ea936b1cd6db81",
       "history": [
         {
           "version": "1.0.0",
@@ -38071,10 +38246,10 @@
       ]
     },
     "UCOS-CON-000050": {
-      "current_version": "1.1",
+      "current_version": "1.2",
       "first_version": "1.0",
-      "version_depth": 2,
-      "content_baseline": "727c913938e4f0cf41f2a002143dca60ce102b0fe731be655ff0e6facab81d33",
+      "version_depth": 3,
+      "content_baseline": "9b33335fee3135b21de77f2bb8f9b7fc50aa9e28d266aecbad2b8f30d7638cf5",
       "history": [
         {
           "version": "1.0",
@@ -38087,6 +38262,12 @@
           "content_hash": "cbaeb49da4394082c291559e46237d6a009a2150966cf84ad2eefe4e367b7740",
           "at": "2026-07-26T03:09:12+00:00",
           "snapshot_seq": 5
+        },
+        {
+          "version": "1.2",
+          "content_hash": "9b33335fee3135b21de77f2bb8f9b7fc50aa9e28d266aecbad2b8f30d7638cf5",
+          "at": "2026-08-19T05:29:00+00:00",
+          "snapshot_seq": 8
         }
       ]
     },
@@ -38108,7 +38289,7 @@
       "current_version": "1.0.0",
       "first_version": "1.0.0",
       "version_depth": 1,
-      "content_baseline": "4d8242bbd4405602fe7eaa676f07498ef2980528fd133c2b18fe4818b360bfa3",
+      "content_baseline": "83fe5ce03b42b87465267ff6604d7b5a7ac6e7256908219852e4ddfd4feca879",
       "history": [
         {
           "version": "1.0.0",

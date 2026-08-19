@@ -1,0 +1,83 @@
+{
+  "declaration_id": "ULP-FAMILIES-001",
+  "name": "Universal Lineage Projection — family classification",
+  "version": "1.0",
+  "authority": "NONE — DERIVED TRUTH. This file DECLARES NO RELATIONSHIP TYPE. Every type named here is owned and declared by 00-BOOK/tools/config.py RELATIONSHIP_TYPES (UCOS-UKB-TOOLING); this is a CLASSIFICATION over that vocabulary, checked against it at load time. A type named here that the owner does not declare is refused, so this file cannot invent a relation, rename one, or become a second vocabulary.",
+
+  "$why_this_exists": "engine/knowledge/ukip/relationships.py ACYCLIC_FAMILIES already classifies the KNOWLEDGE-layer RelationType space into dependency, structure, supersession and derivation. Measured against the corpus graph, only 4 of the 16 live corpus edge types appear in that vocabulary at all, so it cannot classify the 12,899 edges where corpus lineage actually lives. The same four family names are reused deliberately — the taxonomy is not re-invented, only applied to the second vocabulary.",
+
+  "$not_a_vocabulary": "A vocabulary declares which relations may exist. This declares which of the ALREADY-DECLARED relations carry ancestry, and in which direction ancestry flows. Deleting this file removes a classification and changes no relation, no edge and no verdict.",
+
+  "$direction_comment": "`ancestor` names the endpoint that came FIRST. For Parent the ancestor is the edge target (a child points at its parent); for Depends-On the ancestor is the dependency. Recorded per type so a traversal never has to guess which way an edge points.",
+
+  "families": [
+    {
+      "family": "structure",
+      "question": "What contains this?",
+      "acyclic": true,
+      "types": [
+        { "type": "Parent", "ancestor": "to" },
+        { "type": "Child", "ancestor": "from" }
+      ]
+    },
+    {
+      "family": "dependency",
+      "question": "What requires this?",
+      "acyclic": true,
+      "types": [
+        { "type": "Depends-On", "ancestor": "to" },
+        { "type": "Required-By", "ancestor": "from" },
+        { "type": "Consumes", "ancestor": "to" },
+        { "type": "Consumed-By", "ancestor": "from" }
+      ]
+    },
+    {
+      "family": "derivation",
+      "question": "What produced this?",
+      "acyclic": true,
+      "types": [
+        { "type": "Derived-From", "ancestor": "to" },
+        { "type": "Derived-Into", "ancestor": "from" },
+        { "type": "Created-From", "ancestor": "to" },
+        { "type": "Created-Into", "ancestor": "from" },
+        { "type": "Forked-From", "ancestor": "to" },
+        { "type": "Forked-Into", "ancestor": "from" },
+        { "type": "Produces", "ancestor": "from" },
+        { "type": "Produced-By", "ancestor": "to" }
+      ]
+    },
+    {
+      "family": "supersession",
+      "question": "What replaced this?",
+      "acyclic": true,
+      "types": [
+        { "type": "Supersedes", "ancestor": "from" },
+        { "type": "Superseded-By", "ancestor": "to" },
+        { "type": "Replaces", "ancestor": "from" },
+        { "type": "Replaced-By", "ancestor": "to" },
+        { "type": "Merged-From", "ancestor": "to" },
+        { "type": "Merged-Into", "ancestor": "from" },
+        { "type": "Evolves-From", "ancestor": "to" },
+        { "type": "Evolves-From-Inverse", "ancestor": "from" },
+        { "type": "Evolves-To", "ancestor": "from" },
+        { "type": "Evolved-From", "ancestor": "to" }
+      ]
+    }
+  ],
+
+  "$non_lineage_comment": "Declared relations that are NOT ancestry. Listed rather than omitted: a relation absent from both lists is a classification gap and ULP-L-02 refuses it, so a new type cannot be silently ignored by the projection.",
+  "non_lineage": [
+    "Authorized-By", "Authorizes",
+    "References", "Referenced-By",
+    "Traces-To", "Traced-From",
+    "Implements", "Implemented-By",
+    "Certifies", "Certified-By",
+    "Registers", "Registered-By",
+    "Publishes", "Published-By",
+    "Secures", "Secured-By",
+    "Tests", "Tested-By",
+    "Deploys", "Deployed-By"
+  ],
+
+  "$transformation_comment": "TRANSFORMATION IS DELIBERATELY NOT A FAMILY. change-ledger change_events answer 'what happened to this object', which is an event stream, not an edge to another object. Forcing it into an edge family would collapse two different questions into one — the meaning-collapse the architecture determination forbids (P-2). The projection exposes events alongside edges, never as edges."
+}

@@ -2881,6 +2881,52 @@
     },
     {
       "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/infinite_scope",
+      "canonical_name": "engine.infinite_scope",
+      "category": "engine",
+      "description": "UISD-000001 — Universal Infinite Scope and Direction, as executable law.",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "UISD-000001 — Universal Infinite Scope and Direction, as executable law. AUTHORITY = NONE (DERIVED TRUTH). This package legislates nothing. It is not superior to CMG-000001 (law owner), UCIC-001 (lifecycle owner) or CEP-009 (evolution authority): it declares no lifecycle stage, opens no registry, consumes no counter and issues no identifier. Its subject is a *property* of instruments, never an instrument. The property: scope, direction, relationship and evolution capacity are unbounded for every UCOS object — and for this principle itself. That was already certified in prose by ``03-CONSTITUTIONAL-UNBOUNDEDNESS-CERTIFICATION.md`` (16 axes) and ``04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md`` (23 axes), but the latter states its own limit in §4 — no exhaustive proof of absence was performed, and residual risk is confined to the realization layers. This package computes the property over exactly that undischarged space, on every ``./verify.sh`` run. What it does NOT assert, because the assertion would be false and would get the gate disabled: that no enumeration is closed anywhere. ``engine/uckp/facets.py`` closes 33 facets deliberately, so that every vocabulary inside them can stay open — closure of the question set is what keeps the answer sets infinite. The prohibited condition is **undisclosed** closure: an enumeration closed in code or data while nothing states what closes it or how a member is admitted. Ten laws, all held as DATA in ``00-MASTER/UISD-000001/uisd-declaration.json``. This package contains no law text, no enumeration member, no path and no phrase. OBSERVE MODE — READ ONLY. Stdlib only; no wall clock, no network, no subprocess; writes nothing anywhere, including gitignored paths.",
+      "symbols": [
+        "BaselineSurface",
+        "CapabilityEnumeration",
+        "ClosedEnumeration",
+        "DeclaredPin",
+        "ExpansionAxis",
+        "FreezeScan",
+        "InfiniteScopeContract",
+        "InfiniteScopeError",
+        "Law",
+        "PreservedSite",
+        "assess",
+        "candidate_files",
+        "check_baseline_temporal_qualification",
+        "check_capability_seed_openness",
+        "check_direction_expansion_capacity",
+        "check_evolution_applies_to_itself",
+        "check_lifecycle_applies_to_itself",
+        "check_no_active_permanence_declaration",
+        "check_principle_inherits_itself",
+        "check_relationship_model_expands",
+        "check_scope_expansion_capacity",
+        "check_technology_is_evolutionary_state",
+        "contract",
+        "gate",
+        "load_contract",
+        "load_declaration",
+        "main",
+        "measure",
+        "model",
+        "repo_root",
+        "scan_occurrences"
+      ],
+      "unique_id": "RC-26"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
       "canonical_location": "engine/kernel",
       "canonical_name": "engine.kernel",
       "category": "engine",
@@ -2939,7 +2985,7 @@
         "registry",
         "seed"
       ],
-      "unique_id": "RC-26"
+      "unique_id": "RC-27"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3038,7 +3084,7 @@
         "validate_base",
         "validation"
       ],
-      "unique_id": "RC-27"
+      "unique_id": "RC-28"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3144,7 +3190,7 @@
         "reuse",
         "traceability"
       ],
-      "unique_id": "RC-28"
+      "unique_id": "RC-29"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3299,7 +3345,47 @@
         "verify_evidence",
         "write_evidence"
       ],
-      "unique_id": "RC-29"
+      "unique_id": "RC-30"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/lineage",
+      "canonical_name": "engine.lineage",
+      "category": "engine",
+      "description": "ULP — the Universal Lineage Projection.",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "ULP — the Universal Lineage Projection. Identity answers **\"what is this?\"**. Lineage answers **\"how did this become this?\"**. This package answers the second by composing governed records that already answer parts of it, and by owning none of them. It is a projection, not an authority. ``UCI-001 Part XVI.5``, carried by lifecycle stage ``UCL-S-0350``, states the law it obeys: *\"lineage and evolution are DERIVED projections over recorded history; no new store is created.\"* Accordingly this package writes no file, mints no identifier, opens no counter and declares no relation. Deleting it removes a way of asking a question; it changes no answer the repository already holds. Four families, each built from the source that owns that meaning, and each keeping its own question distinct: structure what contains this? artifacts.json parent dependency what requires this? declared metadata rows derivation what produced this? generated-artifact-registry supersession what replaced this? change-ledger lineage Transformation — *what happened to this object* — is carried as an EVENT STREAM and never as an edge, because an event is not a pointer at another object.",
+      "symbols": [
+        "Classification",
+        "Family",
+        "LineageEdge",
+        "LineageError",
+        "LineageEvent",
+        "LineageProjection",
+        "RelationRule",
+        "answer",
+        "build",
+        "declared_relations",
+        "digest",
+        "load_classification",
+        "load_sources",
+        "model",
+        "origin_of",
+        "owner_of",
+        "primary_relations",
+        "projection",
+        "query",
+        "rendered",
+        "repo_root",
+        "sources",
+        "to_document",
+        "validate",
+        "verify"
+      ],
+      "unique_id": "RC-31"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3416,7 +3502,7 @@
         "validate",
         "verify_manifest_alignment"
       ],
-      "unique_id": "RC-30"
+      "unique_id": "RC-32"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3436,31 +3522,48 @@
         "BirthRecord",
         "BirthStage",
         "Boundary",
+        "Floor",
+        "Kind",
         "MandatoryField",
         "Namespace",
+        "ScopeLaw",
+        "ScopePolicy",
+        "SubjectRule",
+        "Verdict",
         "append",
         "assess",
+        "assess_scope",
         "birth",
+        "check_adoption_is_disclosed",
         "check_append_only_history",
+        "check_classification_is_total",
+        "check_coverage_does_not_regress",
+        "check_every_birth_subject_may_be_born",
         "check_evolution_preserves_identity",
         "check_identity_immutable",
         "check_identity_precedes_existence",
         "check_no_anonymous_object",
+        "check_no_derived_object_is_born",
         "check_no_post_creation_registration",
         "check_no_rival_counter",
         "check_no_temporary_identity",
+        "check_policy_is_structurally_usable",
+        "classify",
         "contract",
         "derive_identity",
         "dumps",
         "empty_ledger",
+        "evaluate",
         "evolve",
         "expected_urn",
         "gate",
         "identity_uuid",
         "ledger",
         "load",
+        "load_context",
         "load_contract",
         "load_declaration",
+        "load_policy",
         "local_name_of",
         "main",
         "measure",
@@ -3468,10 +3571,13 @@
         "namespace_of",
         "records",
         "repo_root",
+        "resolve_subject",
         "save",
+        "scope",
+        "summarize",
         "supersede"
       ],
-      "unique_id": "RC-31"
+      "unique_id": "RC-33"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3515,7 +3621,7 @@
         "selection",
         "strategy_names"
       ],
-      "unique_id": "RC-32"
+      "unique_id": "RC-34"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3556,7 +3662,7 @@
         "source",
         "volumes"
       ],
-      "unique_id": "RC-33"
+      "unique_id": "RC-35"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3628,7 +3734,77 @@
         "utc_clock",
         "version_ref"
       ],
-      "unique_id": "RC-34"
+      "unique_id": "RC-36"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/registry_coverage",
+      "canonical_name": "engine.registry_coverage",
+      "category": "engine",
+      "description": "RCM — the Registry Coverage Matrix.",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "RCM — the Registry Coverage Matrix. Coverage intelligence over registration, derived on every call and stored nowhere. It answers *what governed objects exist, where are they registered, who owns the registration plane, and what coverage gaps exist* — and it answers by reading the instruments that already hold those answers. It registers nothing, owns nothing and mints nothing; deleting it changes no registration and no verdict. The constraint that shapes every design choice here: **the matrix must never become the 141st registry.** It keeps no object record of its own, because a stored copy would be the duplicate catalogue it exists to detect.",
+      "symbols": [
+        "AuthorityGap",
+        "CoverageError",
+        "Declarations",
+        "Plane",
+        "build",
+        "digest",
+        "load_declarations",
+        "locate_authority",
+        "matrix",
+        "rendered",
+        "repo_root",
+        "validate",
+        "verify"
+      ],
+      "unique_id": "RC-37"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/root_ontology",
+      "canonical_name": "engine.root_ontology",
+      "category": "engine",
+      "description": "UCPA-000001 — Universal Constitutional Primitive Alignment.",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "UCPA-000001 — Universal Constitutional Primitive Alignment. The root ontology was correct and unenforced. ``ONT-02``, ``ONT-03`` and ``ONT-04`` appeared in no ``.py`` and no ``.json`` file anywhere in the repository: the constitutional primitives existed only as markdown prose, so no gate measured them, and the canonical register's own reduction obligation was asserted and never computed. This package supplies the missing measurement and the missing mapping, and nothing else. It holds **no authority**. The root ontology is owned by ``01-WORKING/ONTOLOGY-REGISTER.md`` and was ratified by ``UCOS-RAT-001``; this package reads both and refuses any primitive the register does not already declare. The facet side of the mapping is imported from :mod:`engine.uckp.facets` rather than restated, so the mapping cannot drift from the model it maps — it can only fail. Three parts, in dependency order: * :mod:`engine.root_ontology.model` — the declaration, rehydrated and refused when unusable. * :mod:`engine.root_ontology.contract` — the measurements, one per declared law. * :mod:`engine.root_ontology.gate` — the fail-closed gate, OBSERVE MODE, read-only.",
+      "symbols": [
+        "AlignmentContract",
+        "AlignmentError",
+        "Law",
+        "OntologySource",
+        "Openness",
+        "Primitive",
+        "Projection",
+        "RatifiedStanding",
+        "Reduction",
+        "SelfApplication",
+        "assess",
+        "check_authority_is_single_and_matches_the_owner_binding",
+        "check_facet_reduction_covers_the_facet_model",
+        "check_no_reduction_targets_the_axiom",
+        "check_primitives_are_declared_by_the_register",
+        "check_projections_resolve_and_supersessions_are_real",
+        "check_standing_matches_the_ratification_record",
+        "check_the_primitive_set_admits_a_future_member",
+        "check_the_programme_reduces_to_a_declared_primitive",
+        "contract",
+        "gate",
+        "load_contract",
+        "load_declaration",
+        "main",
+        "measure",
+        "model",
+        "repo_root"
+      ],
+      "unique_id": "RC-38"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3695,7 +3871,7 @@
         "resolve_reference_frames",
         "rollback"
       ],
-      "unique_id": "RC-35"
+      "unique_id": "RC-39"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3725,7 +3901,7 @@
         "record_execution_evidence",
         "validate_execution"
       ],
-      "unique_id": "RC-36"
+      "unique_id": "RC-40"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3832,7 +4008,7 @@
         "validate_replay",
         "verify_continuation"
       ],
-      "unique_id": "RC-37"
+      "unique_id": "RC-41"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3869,7 +4045,7 @@
         "preserve_context",
         "validate_ordering"
       ],
-      "unique_id": "RC-38"
+      "unique_id": "RC-42"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3903,7 +4079,7 @@
         "sample_volumes",
         "source"
       ],
-      "unique_id": "RC-39"
+      "unique_id": "RC-43"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3991,7 +4167,7 @@
         "test_zero_overlap_fails",
         "valid_subject"
       ],
-      "unique_id": "RC-40"
+      "unique_id": "RC-44"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4099,7 +4275,7 @@
         "valid_report",
         "valid_subject"
       ],
-      "unique_id": "RC-41"
+      "unique_id": "RC-45"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4242,7 +4418,7 @@
         "test_unknown_is_a_valid_state_in_every_population_that_declares_one",
         "view"
       ],
-      "unique_id": "RC-42"
+      "unique_id": "RC-46"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4361,7 +4537,7 @@
         "test_validate_rejects_a_record_deriving_from_nothing_registered",
         "test_validate_rejects_an_unresolvable_requirement"
       ],
-      "unique_id": "RC-43"
+      "unique_id": "RC-47"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4491,7 +4667,7 @@
         "test_two_owners_is_as_incomplete_as_none",
         "test_unknown_clause_and_invariant_fail_closed"
       ],
-      "unique_id": "RC-44"
+      "unique_id": "RC-48"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4789,7 +4965,7 @@
         "test_write_evidence_writes_canonically",
         "universal_registry"
       ],
-      "unique_id": "RC-45"
+      "unique_id": "RC-49"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4851,7 +5027,7 @@
         "test_version_parse_and_str",
         "test_version_parse_invalid"
       ],
-      "unique_id": "RC-46"
+      "unique_id": "RC-50"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4939,7 +5115,7 @@
         "test_registry_property",
         "volume"
       ],
-      "unique_id": "RC-47"
+      "unique_id": "RC-51"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5049,7 +5225,7 @@
         "test_withdrawing_an_undeclared_phase_is_refused",
         "workflow_blueprint"
       ],
-      "unique_id": "RC-48"
+      "unique_id": "RC-52"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5120,7 +5296,7 @@
         "valid_input",
         "valid_subject"
       ],
-      "unique_id": "RC-49"
+      "unique_id": "RC-53"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5241,7 +5417,7 @@
         "test_write_evidence_refuses_frozen_corpus",
         "test_write_evidence_to_tmp"
       ],
-      "unique_id": "RC-50"
+      "unique_id": "RC-54"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5484,7 +5660,7 @@
         "test_write_evidence_refuses_frozen_corpus",
         "test_write_evidence_returns_path"
       ],
-      "unique_id": "RC-51"
+      "unique_id": "RC-55"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5530,7 +5706,7 @@
         "test_sbom_verified",
         "test_signature_verified"
       ],
-      "unique_id": "RC-52"
+      "unique_id": "RC-56"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5628,7 +5804,7 @@
         "test_would_cycle_walk_detects_cycle_and_backedge",
         "test_would_cycle_walks_into_unregistered_target"
       ],
-      "unique_id": "RC-53"
+      "unique_id": "RC-57"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5787,7 +5963,7 @@
         "test_verification_packages_are_tagged_and_excluded_from_reuse",
         "test_write_all_is_deterministic"
       ],
-      "unique_id": "RC-54"
+      "unique_id": "RC-58"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5925,7 +6101,7 @@
         "test_vocabularies_stable_and_complete",
         "test_workstreams"
       ],
-      "unique_id": "RC-55"
+      "unique_id": "RC-59"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6253,7 +6429,7 @@
         "test_with_relations_dedupes_and_orders",
         "unit_from"
       ],
-      "unique_id": "RC-56"
+      "unique_id": "RC-60"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6280,12 +6456,15 @@
         "test_a_cyclic_stage_graph_has_no_order",
         "test_a_declared_role_contradicting_the_derived_role_is_refused",
         "test_a_detectably_corrupt_entry_is_reported",
+        "test_a_document_without_entries_is_refused",
+        "test_a_duplicate_entry_is_rejected",
         "test_a_failing_stage_is_recorded_not_swallowed",
         "test_a_future_kind_is_admitted_by_registration_not_by_editing_the_enum",
         "test_a_future_nucleus_needs_no_code_change",
         "test_a_future_structural_role_is_admitted_by_registration",
         "test_a_layer_and_a_nucleus_may_share_a_name",
         "test_a_layer_owned_capability_is_refused",
+        "test_a_mutated_entry_is_detected",
         "test_a_rebase_that_changes_nothing_is_a_gate_failure",
         "test_a_record_that_does_not_reproduce_its_digest_is_refused",
         "test_a_rewritten_lineage_is_detected",
@@ -6303,9 +6482,11 @@
         "test_an_evolution_ledger_adds_the_evolution_context_check",
         "test_an_evolution_recorded_without_a_frame_is_reported",
         "test_an_evolution_without_a_frame_fails_the_context_check",
+        "test_an_identical_re_assignment_is_idempotent",
         "test_an_incomplete_context_cannot_be_bound",
         "test_an_incomplete_context_cannot_bind_lineage",
         "test_an_incomplete_context_cannot_carry_an_evolution",
+        "test_an_invalid_identity_is_rejected",
         "test_an_invalid_population_cannot_be_certified",
         "test_an_owner_that_is_not_registered_is_refused",
         "test_an_unbound_population_is_reported",
@@ -6356,6 +6537,7 @@
         "test_dictionary_context_projection",
         "test_duplicate_capability_is_refused",
         "test_duplicate_registration_is_refused",
+        "test_every_committed_entry_re_mints_from_its_own_tuple",
         "test_every_composition_composes",
         "test_every_composition_selects_only_declared_nuclei",
         "test_every_dictionary_entry_reproduces",
@@ -6376,7 +6558,9 @@
         "test_gate_detects_a_layer_owned_capability",
         "test_gate_passes_over_the_seed_population",
         "test_gate_report_serialises_with_its_population",
+        "test_giving_the_artifact_a_birth_record_is_refused",
         "test_granting_the_faculty_in_ceu_grants_legacy_ownership",
+        "test_identifier_dictionary_persistence",
         "test_identity_convergence",
         "test_identity_is_derived_and_kind_specific",
         "test_kind_registration_refuses_collisions_and_malformed_codes",
@@ -6419,6 +6603,7 @@
         "test_registry_lineage_covers_every_subject_and_assignment",
         "test_registry_refuses_a_binding_that_names_no_frame",
         "test_registry_refuses_a_second_reality",
+        "test_replay_from_a_deleted_artifact_reproduces_it",
         "test_role_coercion_fails_closed",
         "test_role_is_derived_from_the_declaration_itself",
         "test_seed_population_is_registered",
@@ -6428,6 +6613,13 @@
         "test_string_coercion_has_one_authority_and_fails_closed",
         "test_structural_role_terms_are_data",
         "test_supersession_is_recorded_as_such",
+        "test_the_artifact_carries_no_wall_clock",
+        "test_the_artifact_claims_no_authority",
+        "test_the_artifact_declares_the_source_it_projected",
+        "test_the_artifact_exists_where_the_registry_declares_it",
+        "test_the_artifact_holds_no_birth_record",
+        "test_the_artifact_is_the_declared_generated_artifact",
+        "test_the_artifact_stays_open",
         "test_the_authority_document_names_its_source",
         "test_the_authority_is_deterministic",
         "test_the_authority_replays_from_the_reconstructed_substrate",
@@ -6442,6 +6634,7 @@
         "test_the_cli_reports_an_incomplete_frame_as_a_failure",
         "test_the_cli_requires_a_command",
         "test_the_cli_translates_a_constitutional_refusal",
+        "test_the_committed_bytes_equal_a_freshly_computed_projection",
         "test_the_context_axis_is_measured_without_a_frame",
         "test_the_context_evolution_still_writes_lineage",
         "test_the_context_gates_are_absent_until_a_frame_is_named",
@@ -6452,6 +6645,7 @@
         "test_the_detector_does_not_flag_testing_a_role",
         "test_the_detector_ignores_constants_and_prose",
         "test_the_detector_ignores_populations_the_authority_does_not_own",
+        "test_the_dictionary_cannot_mint_identity",
         "test_the_dictionary_enumerates_frames_only_when_asked",
         "test_the_dictionary_is_deterministic",
         "test_the_dictionary_is_idempotent_and_refuses_rebinding",
@@ -6459,6 +6653,7 @@
         "test_the_dictionary_replays_from_its_own_document",
         "test_the_dictionary_reports_its_population_by_kind",
         "test_the_dictionary_resolves_by_identifier_and_by_identity_tuple",
+        "test_the_digest_matches_the_regenerated_projection",
         "test_the_engineering_layers_cannot_reach_the_registration_authority",
         "test_the_engineering_populations_stay_outside_the_registry_namespace",
         "test_the_evolution_population_stays_unclaimed_by_the_authority",
@@ -6477,6 +6672,8 @@
         "test_the_nucleus_package_is_where_we_think_it_is",
         "test_the_ownership_gate_classifies_through_the_canonical_rule",
         "test_the_owning_set_is_discovered_not_enumerated",
+        "test_the_population_is_the_registry_population",
+        "test_the_producer_writes_the_artifact_and_nothing_else",
         "test_the_projection_agrees_with_the_authority_on_both_faculties",
         "test_the_projection_never_exceeds_the_registered_vocabulary",
         "test_the_refusal_names_the_gap_rather_than_merely_reporting_one",
@@ -6492,15 +6689,19 @@
         "test_the_verified_gate_catches_a_forged_binding",
         "test_two_concurrent_live_assignments_are_refused",
         "test_two_frames_fingerprint_differently",
+        "test_two_generations_are_byte_identical",
         "test_unbound_subject_detection",
         "test_unregistered_owner_is_refused",
         "test_unregistered_parent_is_refused",
         "test_validation_includes_evolution_when_supplied",
         "test_validation_measures_the_context_axis_unconditionally",
         "test_validation_reports_context_failures",
-        "test_withdrawing_the_faculty_in_ceu_withdraws_legacy_ownership"
+        "test_verification_passes_over_the_committed_population",
+        "test_withdrawing_the_faculty_in_ceu_withdraws_legacy_ownership",
+        "test_without_the_flag_the_producer_writes_nothing",
+        "test_write_refuses_the_context_projection"
       ],
-      "unique_id": "RC-57"
+      "unique_id": "RC-61"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6576,7 +6777,7 @@
         "test_validate_fails_when_provider_contract_malformed",
         "test_validate_fails_when_provider_has_no_capability"
       ],
-      "unique_id": "RC-58"
+      "unique_id": "RC-62"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6991,7 +7192,7 @@
         "test_normalise_arguments_is_ordered_and_stringly_typed",
         "test_nothing_claims_to_be_operational_without_an_attested_validation"
       ],
-      "unique_id": "RC-59"
+      "unique_id": "RC-63"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7011,11 +7212,13 @@
         "authority",
         "better_candidate",
         "bridge",
+        "build",
         "candidate",
         "candidates",
         "chain",
         "closure",
         "committed",
+        "constitution",
         "context",
         "controller",
         "controller_source",
@@ -7026,6 +7229,7 @@
         "determination",
         "diamond",
         "discovered",
+        "doc",
         "document",
         "engine",
         "evaluate",
@@ -7047,11 +7251,15 @@
         "report",
         "row",
         "rows_of",
+        "run",
+        "substrates",
         "surface",
         "test_a_baseline_the_registry_does_not_carry_closes_the_gate",
+        "test_a_boolean_floor_is_refused",
         "test_a_boolean_never_satisfies_a_numeric_condition",
         "test_a_boolean_rank_is_not_read_as_an_integer",
         "test_a_bounded_change_reaching_no_test_widens_rather_than_skipping",
+        "test_a_bounded_change_selects_a_proper_subset",
         "test_a_bounded_change_selects_only_reachable_tests",
         "test_a_broad_blast_radius_widens_to_integration",
         "test_a_candidate_from_an_undeclared_source_fails_traceability",
@@ -7063,29 +7271,58 @@
         "test_a_candidate_with_no_resolving_evidence_is_refused_at_admission",
         "test_a_canonical_owner_that_does_not_resolve_closes_the_gate",
         "test_a_capability_bound_to_this_programme_is_rejected",
+        "test_a_capability_enumeration_at_a_missing_path_is_refused",
+        "test_a_capability_enumeration_without_an_admission_path_is_refused",
+        "test_a_capability_with_a_birth_record_passes",
         "test_a_ceiling_below_one_round_is_refused",
+        "test_a_certification_mode_can_never_reach_a_reuse_decision",
         "test_a_certification_proof_the_engine_cannot_measure_is_not_satisfied",
         "test_a_chain_missing_a_phase_object_cannot_project_a_history",
         "test_a_change_class_no_register_admits_closes_the_gate",
+        "test_a_change_to_the_selector_itself_escalates",
+        "test_a_changed_count_on_a_commentary_site_is_not_enforced",
+        "test_a_changed_count_on_a_historical_site_is_refused",
+        "test_a_check_no_law_claims_is_refused",
         "test_a_classification_declared_under_an_unimplemented_rule_is_refused",
         "test_a_clean_single_commit_repo_refuses_rather_than_reporting_nothing",
+        "test_a_closure_declared_at_a_missing_path_is_refused",
+        "test_a_closure_with_no_admission_path_is_refused",
+        "test_a_closure_with_no_closing_invariant_is_refused",
+        "test_a_configuration_object_needs_no_birth",
         "test_a_context_over_a_position_with_no_owner_is_refused",
         "test_a_contributed_analysis_that_is_not_registered_closes_the_gate",
         "test_a_contributed_analysis_whose_name_is_already_owned_closes_the_gate",
         "test_a_controller_can_be_resolved_from_repository_truth_alone",
         "test_a_controller_that_names_a_position_is_measured",
+        "test_a_corrupt_cost_model_is_ignored_rather_than_fatal",
+        "test_a_count_enforced_class_that_is_undeclared_is_refused",
         "test_a_criterion_declared_twice_is_refused",
+        "test_a_cycle_in_an_acyclic_family_is_refused",
         "test_a_cycle_in_the_faculty_relation_closes_the_gate",
         "test_a_declaration_missing_a_required_key_aborts_fail_closed",
+        "test_a_declaration_missing_a_section_is_refused",
         "test_a_declaration_that_is_not_a_json_object_is_refused",
+        "test_a_declaration_that_is_not_an_object_is_a_fault",
+        "test_a_declaration_that_is_not_an_object_is_refused",
         "test_a_declaration_that_is_not_valid_json_is_refused",
+        "test_a_declaration_with_no_laws_is_refused",
         "test_a_declared_dimension_with_no_measurement_fails_closed",
+        "test_a_declared_isolated_object_runs_alone_and_first",
         "test_a_dependency_cycle_terminates",
         "test_a_dependency_on_an_undeclared_faculty_closes_the_gate",
+        "test_a_derived_register_is_forbidden_from_being_born",
+        "test_a_developer_mode_that_does_not_escalate_owns_no_floor",
+        "test_a_developer_mode_that_escalates_is_run_under_the_floor",
+        "test_a_disclosed_gap_is_not_reported_as_undeclared",
+        "test_a_disclosure_with_a_non_integer_population_is_a_fault",
         "test_a_discovery_source_declared_twice_is_refused",
         "test_a_discovery_source_with_an_unimplemented_form_is_refused",
         "test_a_discovery_source_with_an_unimplemented_operator_is_refused",
         "test_a_discovery_source_with_no_selector_is_refused",
+        "test_a_diverging_lifecycle_projection_is_refused",
+        "test_a_duplicate_registration_is_detected",
+        "test_a_duplicated_law_id_is_refused",
+        "test_a_duplicated_preserved_path_is_refused",
         "test_a_duty_naming_an_undeclared_source_is_refused",
         "test_a_duty_no_resolving_source_satisfies_is_measured",
         "test_a_duty_with_no_source_is_refused",
@@ -7095,10 +7332,14 @@
         "test_a_failed_certification_refuses_the_run",
         "test_a_failed_validation_refuses_the_run",
         "test_a_failed_verification_refuses_the_run",
+        "test_a_fake_independent_birth_for_a_generated_artifact_fails",
         "test_a_field_mandated_twice_is_refused",
+        "test_a_final_capability_model_is_refused",
         "test_a_foreign_lifecycle_state_fails_verification",
         "test_a_forged_identity_fails_correctness_and_identity_integrity",
         "test_a_gate_that_exists_but_is_not_executable_is_not_wired",
+        "test_a_generated_projection_without_a_birth_record_passes",
+        "test_a_growing_vocabulary_is_not_a_violation",
         "test_a_halted_run_is_excluded_from_the_history_projection",
         "test_a_history_document_must_be_a_mapping",
         "test_a_history_document_without_the_ledger_is_refused",
@@ -7109,22 +7350,59 @@
         "test_a_history_with_no_recorded_dimension_is_refused",
         "test_a_hold_outranks_an_admission",
         "test_a_home_that_does_not_exist_closes_the_gate",
+        "test_a_kind_missing_a_required_field_is_refused",
+        "test_a_kind_with_a_non_boolean_birth_required_is_refused",
+        "test_a_kind_with_an_empty_selector_is_refused",
+        "test_a_law_missing_a_field_is_a_fault",
+        "test_a_law_naming_a_missing_check_is_refused",
+        "test_a_law_naming_a_missing_check_refuses_to_construct",
+        "test_a_law_naming_an_absent_check_is_refused",
+        "test_a_law_without_a_check_is_refused",
+        "test_a_layer_without_an_order_is_refused",
+        "test_a_lifecycle_manifest_declaring_itself_closed_is_refused",
+        "test_a_lifecycle_manifest_without_an_admission_clause_is_refused",
         "test_a_list_block_declared_as_a_mapping_closes_the_gate",
         "test_a_make_gate_is_wired_only_when_the_makefile_declares_the_target",
         "test_a_makefile_target_names_the_engine",
+        "test_a_malformed_urn_resolves_to_nothing",
         "test_a_mandated_object_kind_nothing_produces_is_measured",
+        "test_a_manifest_without_its_manifest_block_is_refused",
         "test_a_mapping_source_of_the_wrong_shape_is_a_finding",
         "test_a_measure_that_cannot_be_computed_is_a_refusal_and_never_a_zero",
         "test_a_measure_this_engine_cannot_compute_is_a_refusal_and_never_a_zero",
+        "test_a_missing_baseline_surface_is_refused",
+        "test_a_missing_birth_ledger_is_refused",
+        "test_a_missing_classification_file_is_a_fault",
+        "test_a_missing_declaration_file_is_a_fault",
+        "test_a_missing_declaration_is_a_fault",
+        "test_a_missing_edge_schema_is_refused",
+        "test_a_missing_freeform_label_is_refused",
+        "test_a_missing_lifecycle_manifest_is_refused",
         "test_a_missing_observation_record_is_measured",
         "test_a_missing_phase_blocks_certification_readiness",
         "test_a_missing_placeholder_resolves_to_the_declared_dash_never_a_blank",
         "test_a_missing_plan_component_is_measured",
+        "test_a_missing_policy_is_a_fault",
+        "test_a_missing_requires_python_is_refused",
+        "test_a_missing_scan_root_is_skipped_not_fatal",
+        "test_a_missing_section_is_a_fault",
+        "test_a_missing_section_is_refused",
+        "test_a_missing_type_property_path_is_refused",
+        "test_a_mode_declaring_an_unknown_stage_selector_is_refused",
+        "test_a_mode_listing_an_undeclared_stage_is_refused",
+        "test_a_negative_floor_is_refused",
         "test_a_non_boolean_mandated_flag_closes_the_gate",
         "test_a_non_executable_simulation_refuses_execution",
+        "test_a_non_mapping_declaration_is_a_fault",
         "test_a_non_numeric_value_fails_a_numeric_condition",
         "test_a_non_object_entry_inside_a_block_closes_the_gate",
+        "test_a_non_reusable_stage_takes_no_digest",
         "test_a_non_string_field_closes_the_gate",
+        "test_a_partition_never_loses_a_test_object",
+        "test_a_partition_that_drops_a_test_object_is_refused",
+        "test_a_partition_that_duplicates_a_unit_is_refused",
+        "test_a_partition_that_splits_a_file_without_a_remainder_shard_is_refused",
+        "test_a_partition_whose_deselects_do_not_match_its_nodes_is_refused",
         "test_a_phase_and_its_object_kind_disagreeing_is_refused",
         "test_a_phase_claiming_a_non_canonical_stage_is_refused",
         "test_a_phase_declared_twice_is_refused",
@@ -7135,10 +7413,29 @@
         "test_a_phase_with_an_unbound_symbol_is_partially_implemented",
         "test_a_phase_with_no_declared_home_is_future_evolution",
         "test_a_phase_with_non_list_owners_is_refused",
+        "test_a_pinned_runtime_dependency_is_refused",
+        "test_a_plan_carries_no_observation_of_the_run",
         "test_a_plan_step_without_a_located_owner_is_refused",
+        "test_a_policy_missing_a_section_is_refused",
+        "test_a_policy_that_is_not_an_object_is_a_fault",
         "test_a_pre_d3_row_deserializes_and_fails_closed",
+        "test_a_prefix_matching_no_registered_object_takes_no_digest",
+        "test_a_primitive_with_an_unknown_standing_is_refused",
+        "test_a_principle_claiming_authority_is_refused",
+        "test_a_principle_declaring_its_own_lifecycle_is_refused",
+        "test_a_principle_that_exempts_itself_is_refused",
+        "test_a_principle_with_no_lifecycle_owner_is_refused",
+        "test_a_principle_without_a_birth_record_is_anonymous",
         "test_a_projection_that_does_not_rehydrate_is_measured",
+        "test_a_projection_with_a_non_string_supersession_is_refused",
         "test_a_protected_owner_is_reused_rather_than_replaced",
+        "test_a_pytest_configuration_declaring_no_testpaths_is_refused",
+        "test_a_qualified_surface_whose_sample_does_not_parse_is_refused",
+        "test_a_qualified_surface_without_a_sample_is_refused",
+        "test_a_ratified_standing_with_an_unknown_requirement_is_refused",
+        "test_a_recorded_failure_is_never_reused",
+        "test_a_recorded_pass_is_reused_and_a_changed_input_is_not",
+        "test_a_reduction_without_a_basis_is_refused",
         "test_a_register_declared_as_data_that_does_not_parse_closes_the_gate",
         "test_a_register_declared_twice_is_refused",
         "test_a_register_filename_outside_canonical_form_is_refused",
@@ -7147,6 +7444,12 @@
         "test_a_register_owned_by_an_undeclared_phase_is_refused",
         "test_a_register_referencing_a_path_that_is_gone_closes_the_gate",
         "test_a_register_that_does_not_resolve_closes_the_gate",
+        "test_a_registry_holding_no_entries_is_refused",
+        "test_a_registry_with_no_dependency_edges_is_refused",
+        "test_a_relation_both_lineage_and_non_lineage_is_refused",
+        "test_a_relation_classified_twice_is_refused",
+        "test_a_relation_the_owner_does_not_declare_is_refused",
+        "test_a_relationship_type_without_a_pattern_is_refused",
         "test_a_release_state_no_register_admits_closes_the_gate",
         "test_a_removed_classification_is_refused",
         "test_a_removed_register_is_refused",
@@ -7158,26 +7461,52 @@
         "test_a_reordered_phase_ordinal_is_refused",
         "test_a_reordered_register_list_is_refused",
         "test_a_required_input_that_is_absent_asserts_no_verdict",
+        "test_a_required_kind_with_mandatory_adoption_and_no_birth_fails",
+        "test_a_reusable_stage_with_no_declared_inputs_refuses_to_construct",
+        "test_a_sample_absent_from_its_surface_is_refused",
+        "test_a_scan_that_would_measure_nothing_is_a_fault",
+        "test_a_scan_without_classes_is_a_fault",
         "test_a_sealed_chain_carries_every_mandated_field_non_empty",
+        "test_a_seed_model_with_no_open_enumeration_cannot_grow",
+        "test_a_selection_fault_is_answered_with_the_whole_suite",
         "test_a_selector_of_the_wrong_shape_is_a_finding",
+        "test_a_shard_plan_with_no_workers_is_refused",
         "test_a_short_chain_fails_traceability",
+        "test_a_shrinking_vocabulary_is_refused",
+        "test_a_site_classified_a_is_refused",
+        "test_a_site_without_a_count_is_a_fault",
         "test_a_source_with_a_non_string_path_is_refused",
         "test_a_source_with_non_list_include_when_is_refused",
         "test_a_source_with_non_mapping_fields_is_refused",
+        "test_a_split_entry_whose_content_hash_moved_falls_back_to_the_whole_file",
+        "test_a_split_file_with_a_remainder_shard_is_accepted",
         "test_a_stage_claimed_by_two_phases_is_refused",
         "test_a_stage_term_the_cycle_already_declares_is_measured",
+        "test_a_stale_disclosed_pin_is_refused",
+        "test_a_store_that_cannot_be_written_does_not_fail_a_verification",
+        "test_a_successor_outside_the_cycle_is_refused",
+        "test_a_surface_that_is_not_an_object_is_a_fault",
         "test_a_symbol_bound_in_a_sibling_home_of_the_same_phase_still_counts",
         "test_a_symbol_that_does_not_exist_closes_the_gate",
+        "test_a_terminal_evolution_stage_is_refused",
+        "test_a_test_object_that_pytest_would_not_collect_is_not_selectable",
+        "test_a_test_suite_with_a_birth_record_passes",
+        "test_a_tree_whose_registry_and_pytest_config_disagree_is_a_fault",
         "test_a_truncated_history_is_refused_on_read",
+        "test_a_valid_substrate_tree_loads",
         "test_a_validation_dimension_the_engine_cannot_measure_is_not_silently_satisfied",
         "test_a_verification_dimension_bound_to_no_gate_is_measured",
         "test_a_verification_dimension_the_engine_cannot_measure_is_not_satisfied",
+        "test_a_version_ceiling_is_refused",
+        "test_a_vocabulary_mutated_by_extension_is_refused",
+        "test_a_vocabulary_that_refuses_a_term_is_a_closed_tier",
         "test_a_workflow_names_the_engine",
         "test_a_zero_identity_width_is_refused",
         "test_absent_ledger_loads_as_empty",
         "test_absent_or_blank_recorded_head_falls_back_and_never_yields_empty",
         "test_accept_execution_returns_decision_and_evidence",
         "test_accept_execution_strict_raises_when_rejected",
+        "test_admission_is_an_append_that_alters_no_sibling",
         "test_all_coordination_classes_supported",
         "test_all_eight_facets_are_declared",
         "test_all_eighteen_declared_registers_are_resolved",
@@ -7189,15 +7518,26 @@
         "test_allows_engine_and_adr_paths",
         "test_alternate_names_are_measured_as_a_single_source_of_truth_regression",
         "test_an_absent_catalogue_record_closes_the_gate",
+        "test_an_absent_cost_model_prices_everything_at_the_default",
+        "test_an_absent_declaration_is_a_fault_and_not_a_default",
         "test_an_absent_declaration_is_refused",
         "test_an_absent_home_is_measured_as_absent_not_as_an_error",
         "test_an_absent_selector_is_a_finding",
         "test_an_analysis_that_is_not_registered_closes_the_gate",
         "test_an_authority_obligation_naming_no_symbol_is_a_finding",
         "test_an_authority_surface_gap_becomes_a_candidate",
+        "test_an_axiom_carrying_a_layer_order_is_refused",
+        "test_an_axis_naming_no_law_is_refused",
         "test_an_empty_criterion_block_is_refused",
+        "test_an_empty_evolution_cycle_reports_and_stops",
         "test_an_empty_identity_input_is_refused",
+        "test_an_empty_plane_is_detected",
+        "test_an_empty_section_is_refused",
+        "test_an_entry_from_another_engine_version_is_not_a_hit",
         "test_an_entry_naming_no_subject_is_dropped_with_a_finding",
+        "test_an_enum_on_relationship_type_closes_the_direction_space",
+        "test_an_evolution_cycle_below_the_minimum_is_refused",
+        "test_an_evolution_cycle_that_does_not_wrap_is_refused",
         "test_an_executable_gate_is_wired_and_a_missing_one_is_not",
         "test_an_execution_binding_the_wrong_path_is_measured",
         "test_an_execution_claiming_a_performed_mutation_is_measured",
@@ -7205,9 +7545,11 @@
         "test_an_identity_input_declared_twice_is_refused",
         "test_an_identity_input_the_object_model_lacks_is_refused",
         "test_an_identity_rule_with_no_inputs_is_refused",
+        "test_an_incoherent_constitution_is_refused",
         "test_an_object_absent_from_the_history_is_measured",
         "test_an_object_cannot_be_derived_without_evidence",
         "test_an_object_of_no_declared_class_traverses_the_whole_loop",
+        "test_an_object_outside_the_governed_registry_fails",
         "test_an_object_refuses_an_unmandated_field_name",
         "test_an_object_with_an_empty_subject_is_anonymous",
         "test_an_object_with_no_authority_fails_the_authorisation_proof",
@@ -7215,198 +7557,57 @@
         "test_an_obligation_with_no_located_owner_closes_the_gate",
         "test_an_obligation_with_no_named_gate_closes_the_gate",
         "test_an_ontology_anchor_that_is_absent_from_the_register_closes_the_gate",
+        "test_an_oversized_test_object_is_split_into_its_nodes",
+        "test_an_owner_below_a_catalogued_capability_resolves_to_it",
         "test_an_owner_that_refuses_halts_the_traversal_and_names_the_refusal",
         "test_an_unanswered_understanding_question_is_measured",
+        "test_an_unavailable_alignment_function_is_refused",
+        "test_an_unavailable_temporal_resolver_is_refused",
+        "test_an_unborn_capability_is_an_exception_naming_its_gap",
         "test_an_unbound_faculty_closes_the_gate",
+        "test_an_unbounded_change_always_widens",
         "test_an_unclaimed_canonical_stage_is_refused",
         "test_an_unclassified_position_is_measured",
         "test_an_unconducted_unknown_probe_is_measured",
+        "test_an_undeclared_class_is_refused",
         "test_an_undeclared_gate_is_never_reported_as_wired",
         "test_an_undeclared_obligation_status_closes_the_gate",
+        "test_an_undeclared_permanence_site_closes_the_gate",
+        "test_an_undeclared_relation_is_refused",
         "test_an_undisclosed_gap_closes_the_gate",
+        "test_an_undisclosed_pin_is_refused",
+        "test_an_undisclosed_registry_without_authority_is_refused",
         "test_an_unimplemented_renderer_closes_the_gate",
         "test_an_unimplemented_renderer_is_measured_by_the_capability_criterion",
         "test_an_unimplemented_renderer_refuses_the_whole_surface",
         "test_an_unimplemented_renderer_writes_no_file_at_all",
+        "test_an_unintentional_closure_without_a_gap_is_refused",
+        "test_an_unknown_ancestor_direction_is_refused",
         "test_an_unknown_disposition_closes_the_gate",
+        "test_an_unknown_node_answers_empty_rather_than_guessing",
+        "test_an_unknown_object_kind_fails",
         "test_an_unknown_operation_yields_no_plan_rather_than_a_fabricated_one",
         "test_an_unknown_probe_forbidding_nothing_is_refused",
+        "test_an_unknown_probe_standing_is_refused",
         "test_an_unmeasured_certification_verdict_is_measured",
+        "test_an_unmeasured_object_is_over_priced_rather_than_assumed_cheap",
         "test_an_unmeasured_validation_verdict_is_measured",
         "test_an_unmeasured_verification_verdict_is_measured",
+        "test_an_unparseable_classification_is_a_fault",
+        "test_an_unparseable_declaration_is_a_fault",
         "test_an_unparseable_module_binds_nothing_rather_than_raising",
+        "test_an_unparseable_policy_is_a_fault",
+        "test_an_unparseable_technology_manifest_is_refused",
         "test_an_unpermitted_execution_path_refuses_the_authorisation",
         "test_an_unreadable_artifact_is_a_finding_not_a_crash",
-        "test_an_unregistered_python_file_escalates_and_is_named",
-        "test_an_unrendered_surface_is_drift_for_every_declared_register",
-        "test_an_unresolvable_dependency_makes_the_simulation_non_executable",
-        "test_an_unresolved_dependency_halts_the_traversal_at_the_authorisation_position",
-        "test_an_unsealed_chain_fails_completeness",
-        "test_an_unseeded_pipeline_category_closes_the_gate",
-        "test_an_unsettled_run_is_never_certified",
-        "test_an_unusable_declaration_is_a_fault_and_never_a_verdict",
-        "test_an_unwired_execution_gate_refuses_the_authorisation",
-        "test_an_unwired_gate_fails_governance_verification",
-        "test_anonymous_check_flags_an_empty_field",
-        "test_append_is_forward_only_and_immutable",
-        "test_append_only_check_flags_a_missing_supersessions_list",
-        "test_append_only_check_flags_a_non_mapping_entry",
-        "test_append_only_check_flags_a_path_keyed_ledger",
-        "test_append_only_check_flags_a_self_duplicating_entry",
-        "test_append_then_read_round_trips",
-        "test_apply_sets_and_restores_environment",
-        "test_archive_then_restoration_is_sound",
-        "test_artifact_bad_dependencies_type",
-        "test_artifact_bad_native_id_type",
-        "test_artifact_bad_page_type",
-        "test_artifact_bool_is_not_int",
-        "test_artifact_empty_string_field_rejected",
-        "test_artifact_full_record",
-        "test_artifact_lookup_missing_kind_raises",
-        "test_artifact_minimal_defaults",
-        "test_artifact_missing_required",
-        "test_artifact_not_a_mapping",
-        "test_assemble_auto_injects_disclosure",
-        "test_assert_acyclic_raises_with_cycle_path",
-        "test_assert_federated_detects_missing_link",
-        "test_assert_federated_intra_context_is_fine",
-        "test_assert_federated_passes_when_authorised",
-        "test_assert_passes_when_clean",
-        "test_assert_raises_on_violation",
-        "test_assess_measures_every_law",
-        "test_assimilated_conversation_absent_from_the_canonical_export_is_rejected",
-        "test_assimilation_targets_depend_on_the_currency_gate",
-        "test_assurance_to_dict_is_complete",
-        "test_attribute_invariants",
-        "test_audit_entry_seal_and_hash",
-        "test_authority_accessors_refuse_unknown_names",
-        "test_authorization_to_dict",
-        "test_authorize_grants_engineering_execution",
-        "test_authorize_is_deterministic",
-        "test_authorize_isolate_federate_schedule",
-        "test_authorize_refuses_missing_disclosure",
-        "test_authorize_subject_changes_identity",
-        "test_bare_value_is_refused",
-        "test_basic_json_record",
-        "test_below_sentinel_raises",
-        "test_better_than_current_against_a_carried_form_is_superseded",
-        "test_better_than_current_requires_a_positive_net_and_no_constitutional_regression",
-        "test_birth_accepts_a_declared_child",
-        "test_birth_produces_all_nine_fields",
-        "test_birth_refuses_a_non_root_without_a_parent",
-        "test_birth_refuses_an_inadmissible_initial_state",
-        "test_birth_refuses_an_undeclared_namespace",
-        "test_birth_refuses_empty_creation_context",
-        "test_blocked_detail_names_dependency",
-        "test_blueprint_ir_create_and_defaults",
-        "test_blueprint_ir_family_prefix_enforced",
-        "test_blueprint_ir_rejects_self_and_duplicate_dependency",
-        "test_blueprint_ir_type_guards",
-        "test_build_disclosure_is_deterministic",
-        "test_build_fails_closed_when_no_corpus_root_resolves",
-        "test_by_category_and_ids",
-        "test_by_category_case_insensitive",
-        "test_by_native_id",
-        "test_by_program",
-        "test_by_status_enum_and_str",
-        "test_by_volume",
-        "test_can_transition_legal_and_illegal",
-        "test_canonical_dict_preserves_entity_shape",
-        "test_categories_and_programs",
-        "test_certification_fails_when_execution_was_refused",
-        "test_certification_fails_when_the_history_cannot_be_projected",
-        "test_certification_fails_without_a_measured_validation_verdict",
-        "test_certification_fails_without_an_understanding_object",
-        "test_certification_must_be_an_object",
-        "test_certification_refuses_a_claimed_mutation",
-        "test_certified_lifecycle_membership",
-        "test_certify_execution_produces_assurances",
-        "test_changed_paths_outside_a_repository_refuses",
-        "test_changed_paths_refuses_an_unresolvable_base",
-        "test_checkpoint_continue_recover",
-        "test_checkpoint_is_deterministic",
-        "test_checkpoint_resume_and_recover",
-        "test_checkpoint_round_trip",
-        "test_children_of",
-        "test_claiming_admission_to_the_meta_constitutional_registry_closes_the_gate",
-        "test_cli_bad_shape_exit_two",
-        "test_cli_bounded_change_exits_zero",
-        "test_cli_build_platform_defaults_namespace",
-        "test_cli_duplicate_registration_exit_one",
-        "test_cli_emits_json",
-        "test_cli_entry_not_object_raises",
-        "test_cli_escalation_exits_two",
-        "test_cli_faults_on_an_unresolvable_base",
-        "test_cli_malformed_registration_exit_two",
-        "test_cli_missing_manifest_exit_two",
-        "test_cli_print_tests_is_empty_when_escalated",
-        "test_cli_renders_a_report",
-        "test_cli_renders_escalations",
-        "test_cli_selects_the_temporal_tests",
-        "test_cli_valid_manifest_exit_zero",
-        "test_closed_validity_period_serialises_both_bounds",
-        "test_closure009_requirement_engine",
-        "test_closure_root_only_by_default",
-        "test_code_classes_cover_the_executable_kinds",
-        "test_coerce_secrets_preserves_existing_secret_ref",
-        "test_collection_views",
-        "test_committed_corpus_record_is_current_and_complete",
-        "test_committed_decisions_are_total_and_all_six_actions_are_reachable",
-        "test_committed_declaration_satisfies_the_check",
-        "test_committed_ledger_passes_every_law",
-        "test_committed_presence_states_are_unchanged_by_the_second_axis",
-        "test_committed_register_measures_the_current_closure_register",
-        "test_committed_schema_declares_the_whole_comparison_model",
-        "test_committed_schema_declares_the_whole_decision_model",
-        "test_committed_verdicts_are_total_and_all_required_states_are_reachable",
-        "test_compare_builds_detects_content_divergence",
-        "test_compare_builds_detects_missing_file",
-        "test_compare_builds_identical",
-        "test_compare_runs_detects_mismatch",
-        "test_comparison_is_a_pure_ordinal_comparison",
-        "test_comparison_uses_reverse_conversion_when_only_that_direction_exists",
-        "test_compile_emits_three_artifacts",
-        "test_compile_is_deterministic",
-        "test_compiler_cycles",
-        "test_compiler_data_compiler",
-        "test_compiler_ir",
-        "test_compiler_optimization",
-        "test_compiler_packaging",
-        "test_compiler_parser",
-        "test_compiler_publishing",
-        "test_compiler_resolver",
-        "test_compiler_serialization",
-        "test_compiler_signing",
-        "test_compiler_validation",
-        "test_compose_binds_bare_runtime_units",
-        "test_compose_builds_full_structure",
-        "test_compose_carries_disclosure",
-        "test_compose_from_facts_mapping",
-        "test_compose_from_repository_subject",
-        "test_compose_is_deterministic",
-        "test_compose_rejects_bad_subject",
-        "test_compose_rejects_empty_universe_set",
-        "test_compose_rejects_foreign_member",
-        "test_composer_builds_incrementally",
-        "test_composer_chaining_and_universes",
-        "test_composer_from_composition_extends_additively",
-        "test_composer_from_composition_preserves_federation",
-        "test_composer_refuses_duplicate",
-        "test_composition_to_dict_serialisable",
-        "test_concurrent_plan_groups_levels",
-        "test_conditional_plan_records_conditions",
-        "test_config",
-        "test_config_is_valid_json_with_provenance",
-        "test_config_repr_and_contains",
-        "test_configure_logging_is_idempotent_without_force",
-        "test_conflicting_append_is_refused",
-        "test_conflicting_conversion_is_refused",
-        "test_conflicting_escalates_to_architecture",
-        "test_conflicting_system_registration_is_refused",
-        "test_conflicting_when_certified_truth_carries_what_evidence_rejects",
-        "test_conflicting_when_the_evidence_contradicts_itself"
+        "test_an_unreadable_declaration_is_a_fault",
+        "test_an_unreadable_pytest_configuration_is_a_fault",
+        "test_an_unreadable_registry_is_a_fault_and_never_an_empty_selection",
+        "test_an_unreadable_technology_manifest_is_refused",
+        "test_an_unregistered_object_is_detected",
+        "test_an_unregistered_python_file_escalates_and_is_named"
       ],
-      "unique_id": "RC-60"
+      "unique_id": "RC-64"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7527,7 +7728,7 @@
         "valid_report",
         "validation_input"
       ],
-      "unique_id": "RC-61"
+      "unique_id": "RC-65"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7589,7 +7790,7 @@
         "test_validate_runtime_unit_convenience",
         "valid_subject"
       ],
-      "unique_id": "RC-62"
+      "unique_id": "RC-66"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7720,7 +7921,7 @@
         "verification_object",
         "verify_evolution"
       ],
-      "unique_id": "RC-63"
+      "unique_id": "RC-67"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7957,7 +8158,7 @@
         "vocabulary_object",
         "write_projections"
       ],
-      "unique_id": "RC-64"
+      "unique_id": "RC-68"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -8053,7 +8254,7 @@
         "validate",
         "validation"
       ],
-      "unique_id": "RC-65"
+      "unique_id": "RC-69"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -8134,7 +8335,7 @@
         "pipeline",
         "rules"
       ],
-      "unique_id": "RC-66"
+      "unique_id": "RC-70"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -8180,7 +8381,7 @@
         "gates",
         "validate_runtime_unit"
       ],
-      "unique_id": "RC-67"
+      "unique_id": "RC-71"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -8213,7 +8414,90 @@
         "repo_root",
         "working_tree_changes"
       ],
-      "unique_id": "RC-68"
+      "unique_id": "RC-72"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/verification_intelligence",
+      "canonical_name": "engine.verification_intelligence",
+      "category": "engine",
+      "description": "Universal Verification Intelligence (UVI-000001) — which verification a change requires.",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "Universal Verification Intelligence (UVI-000001) — which verification a change requires. ``./verify.sh`` executed one plan for every caller. Measured on the certification baseline: 11 628 tests, 97.61%% coverage, every gate green, 2 814 s in pytest and coverage alone — and a developer changing one module paid all of it. The response that destroys assurance is to delete gates. This engine does the other thing: it composes surfaces the repository already publishes into an answer to \"which verification does this change actually require, and in what order may it be executed\", and leaves every obligation exactly where it was. ============================ ========================================================== Component Module ============================ ========================================================== Verification Mode Constitution ``constitution`` — modes as DATA, in the declaration Verification Stage Registry ``constitution`` — every declared stage, classified Test Object Registry ``registry`` — collectible test objects, priced Change Impact Analysis ``engine.verification_impact`` — reused, not re-derived Dependency Driven Selection ``selection`` — five substrates, layered Evidence Reuse ``evidence`` — content-addressed, never for certification Parallel Execution ``execution`` — deterministic shards, one combined floor Deterministic Verification ``plan`` — no clock, no host, byte-identical twice ============================ ========================================================== Authority: NONE — DERIVED TRUTH. It selects and schedules verification; it certifies nothing, owns no gate, and holds no counter.",
+      "symbols": [
+        "Action",
+        "Constitution",
+        "Coverage",
+        "EvidenceEntry",
+        "Findings",
+        "Law",
+        "Mode",
+        "Plan",
+        "Selection",
+        "SelectionResult",
+        "Shard",
+        "ShardOutcome",
+        "StagePlan",
+        "StageSpec",
+        "Substrates",
+        "TestObject",
+        "TestObjectRegistry",
+        "VerificationIntelligenceError",
+        "__main__",
+        "assert_topology_neutral",
+        "build_plan",
+        "build_test_registry",
+        "cli",
+        "collection_roots",
+        "constitution",
+        "cost_model",
+        "decide",
+        "derive",
+        "deterministic_planning",
+        "evidence",
+        "evidence_home",
+        "evidence_reuse_integrity",
+        "exactly_one_default",
+        "execution",
+        "fail_wide",
+        "gate",
+        "input_digest",
+        "is_collectible",
+        "load_constitution",
+        "load_cost_model",
+        "load_declaration",
+        "load_substrates",
+        "lookup",
+        "main",
+        "measure",
+        "mode_constitution_completeness",
+        "model",
+        "no_assurance_reduction",
+        "no_mode_claims_more_than_it_measures",
+        "plan",
+        "plan_digest",
+        "plan_json",
+        "plan_shards",
+        "plan_tsv",
+        "record",
+        "registry",
+        "render",
+        "repo_root",
+        "resolve_workers",
+        "run_tests",
+        "select",
+        "selection",
+        "selection_is_derived",
+        "stage_registry_reconciliation",
+        "store_home",
+        "topology_neutrality",
+        "unbounded_prefixes",
+        "unit_file"
+      ],
+      "unique_id": "RC-73"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -8535,7 +8819,7 @@
         "validate_network",
         "validate_storage"
       ],
-      "unique_id": "RC-69"
+      "unique_id": "RC-74"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -8950,7 +9234,7 @@
         "test_untyped_capability_is_rejected_fail_closed",
         "test_untyped_compute_resource_is_rejected_fail_closed"
       ],
-      "unique_id": "RC-70"
+      "unique_id": "RC-75"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -8969,7 +9253,7 @@
         "main",
         "portal"
       ],
-      "unique_id": "RC-71"
+      "unique_id": "RC-76"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -9023,7 +9307,7 @@
         "subsystem_config",
         "validation"
       ],
-      "unique_id": "RC-72"
+      "unique_id": "RC-77"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -9075,7 +9359,7 @@
         "renderers",
         "validation"
       ],
-      "unique_id": "RC-73"
+      "unique_id": "RC-78"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -9172,7 +9456,7 @@
         "verify_bundle",
         "verify_seal"
       ],
-      "unique_id": "RC-74"
+      "unique_id": "RC-79"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -9206,7 +9490,7 @@
         "schema",
         "tests"
       ],
-      "unique_id": "RC-75"
+      "unique_id": "RC-80"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -9249,7 +9533,7 @@
         "standards",
         "validation"
       ],
-      "unique_id": "RC-76"
+      "unique_id": "RC-81"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -9303,7 +9587,7 @@
         "sha256_file",
         "sha256_text"
       ],
-      "unique_id": "RC-77"
+      "unique_id": "RC-82"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -9438,7 +9722,7 @@
         "test_verify_reports_a_corrupted_artifact",
         "test_write_all_is_deterministic"
       ],
-      "unique_id": "RC-78"
+      "unique_id": "RC-83"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9452,7 +9736,7 @@
       "reuse": "REUSE/COMPOSE",
       "summary": "UCOS EC-2 ``platform`` package root — stdlib-safe shim. The EC-2 Platform Realization Program's authoritative deliverable path is ``platform/foundation/`` (per ``06-IMPLEMENTATION/UCOS-EC-2-PLATFORM-REALIZATION-PROGRAM.md``). Because ``platform`` is also the name of a Python standard-library module, a naive package here would *shadow* the stdlib module for the whole interpreter and break tooling (pytest, coverage, setuptools all ``import platform``). To honor the mandated deliverable path **without** breaking the toolchain, this package is a **transparent shim**: it loads the genuine standard-library ``platform`` module by file location and re-exports its public API into this package namespace. Therefore: * ``import platform`` → exposes the real stdlib API (``system()``, ``python_version()``, ``machine()``, …) — tooling is unaffected; * ``import platform.foundation`` → resolves the EC-2 Platform Foundation, because this remains a real package with a ``__path__``. This shim is additive and reads nothing from the certified corpus. It is *not* an EC-2 foundation module; it exists solely to reconcile the reserved package name.",
       "symbols": [],
-      "unique_id": "RC-79"
+      "unique_id": "RC-84"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9522,7 +9806,7 @@
         "search",
         "service"
       ],
-      "unique_id": "RC-80"
+      "unique_id": "RC-85"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9578,7 +9862,7 @@
         "search",
         "service"
       ],
-      "unique_id": "RC-81"
+      "unique_id": "RC-86"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9675,7 +9959,7 @@
         "validation",
         "versioning"
       ],
-      "unique_id": "RC-82"
+      "unique_id": "RC-87"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9750,7 +10034,7 @@
         "status",
         "validate_governance"
       ],
-      "unique_id": "RC-83"
+      "unique_id": "RC-88"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9893,7 +10177,7 @@
         "sum_money",
         "validation"
       ],
-      "unique_id": "RC-84"
+      "unique_id": "RC-89"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -9955,7 +10239,7 @@
         "service",
         "top_level_symbols"
       ],
-      "unique_id": "RC-85"
+      "unique_id": "RC-90"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10005,7 +10289,7 @@
         "service",
         "views"
       ],
-      "unique_id": "RC-86"
+      "unique_id": "RC-91"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10126,7 +10410,7 @@
         "services",
         "trust"
       ],
-      "unique_id": "RC-87"
+      "unique_id": "RC-92"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10201,7 +10485,7 @@
         "status",
         "validate_transition"
       ],
-      "unique_id": "RC-88"
+      "unique_id": "RC-93"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10258,7 +10542,7 @@
         "service",
         "sessions"
       ],
-      "unique_id": "RC-89"
+      "unique_id": "RC-94"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10322,7 +10606,7 @@
         "service",
         "source"
       ],
-      "unique_id": "RC-90"
+      "unique_id": "RC-95"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10381,7 +10665,7 @@
         "service",
         "traces"
       ],
-      "unique_id": "RC-91"
+      "unique_id": "RC-96"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10449,7 +10733,7 @@
         "service",
         "workspace"
       ],
-      "unique_id": "RC-92"
+      "unique_id": "RC-97"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10519,7 +10803,7 @@
         "status",
         "validate_transition"
       ],
-      "unique_id": "RC-93"
+      "unique_id": "RC-98"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10533,7 +10817,7 @@
       "reuse": "REUSE/COMPOSE",
       "summary": "UCOS Ω∞ — Provider implementations and the provider catalog (Terminal-04). This package sits **outside** the Universal Provider Architecture (:mod:`platform.universal_provider`) by design. The framework must not know that any particular provider exists, so provider implementations live here and reach the framework only as **data**: * ``catalog/`` — JSON provider manifests. Discovery reads this directory; the framework has no compiled knowledge of its contents. * ``repository/`` — the Repository provider, the reference implementation. It is built on :class:`~platform.universal_provider.sdk.BaseProvider` and is reached exclusively through the ``entry_point`` string declared in its manifest. * ``TEMPLATE.provider.json`` — the copy-me manifest for a new provider. It is deliberately *not* inside ``catalog/`` so it is never discovered. Onboarding a provider is therefore two acts, neither of which touches the framework: 1. add a manifest to ``catalog/`` declaring identity, capabilities, and entry point; 2. add a module exposing that entry point. The framework's own gate ``PV-02-KIND-OPEN`` scans :mod:`platform.universal_provider` for the provider under validation and fails if it finds it — so this separation is enforced, not merely intended.",
       "symbols": [],
-      "unique_id": "RC-94"
+      "unique_id": "RC-99"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10554,7 +10838,7 @@
         "repository_descriptor",
         "repository_root"
       ],
-      "unique_id": "RC-95"
+      "unique_id": "RC-100"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10679,7 +10963,7 @@
         "validation",
         "validation_records"
       ],
-      "unique_id": "RC-96"
+      "unique_id": "RC-101"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10735,7 +11019,7 @@
         "subjects",
         "subprocess_command_runner"
       ],
-      "unique_id": "RC-97"
+      "unique_id": "RC-102"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10821,7 +11105,7 @@
         "status",
         "validate_governance"
       ],
-      "unique_id": "RC-98"
+      "unique_id": "RC-103"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -10909,7 +11193,7 @@
         "validate_trajectory",
         "workflow"
       ],
-      "unique_id": "RC-99"
+      "unique_id": "RC-104"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11037,7 +11321,7 @@
         "zone_may_mutate",
         "zones"
       ],
-      "unique_id": "RC-100"
+      "unique_id": "RC-105"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11452,7 +11736,7 @@
         "test_a_declaration_with_a_blank_identity_is_refused",
         "test_a_declaration_with_no_catalogue_cannot_answer_the_catalogue_token"
       ],
-      "unique_id": "RC-101"
+      "unique_id": "RC-106"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11510,7 +11794,7 @@
         "pipeline",
         "register_assimilation"
       ],
-      "unique_id": "RC-102"
+      "unique_id": "RC-107"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11638,7 +11922,7 @@
         "write_bundle",
         "write_json"
       ],
-      "unique_id": "RC-103"
+      "unique_id": "RC-108"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11784,7 +12068,7 @@
         "truth",
         "version"
       ],
-      "unique_id": "RC-104"
+      "unique_id": "RC-109"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11918,7 +12202,7 @@
         "service",
         "specialization"
       ],
-      "unique_id": "RC-105"
+      "unique_id": "RC-110"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11977,7 +12261,7 @@
         "template_fingerprint",
         "templates"
       ],
-      "unique_id": "RC-106"
+      "unique_id": "RC-111"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12017,7 +12301,7 @@
         "record_plan",
         "replays"
       ],
-      "unique_id": "RC-107"
+      "unique_id": "RC-112"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12071,7 +12355,7 @@
         "policy_service_descriptor",
         "register_measurement_policies"
       ],
-      "unique_id": "RC-108"
+      "unique_id": "RC-113"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12143,7 +12427,7 @@
         "recommendation",
         "register_ownership"
       ],
-      "unique_id": "RC-109"
+      "unique_id": "RC-114"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12287,7 +12571,7 @@
         "state_machine",
         "vocabulary"
       ],
-      "unique_id": "RC-110"
+      "unique_id": "RC-115"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12343,7 +12627,7 @@
         "universal_portal_contract",
         "universal_portal_health_report"
       ],
-      "unique_id": "RC-111"
+      "unique_id": "RC-116"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12389,7 +12673,7 @@
         "state_runtime",
         "version_index"
       ],
-      "unique_id": "RC-112"
+      "unique_id": "RC-117"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12511,7 +12795,7 @@
         "version_tuple",
         "write_evidence"
       ],
-      "unique_id": "RC-113"
+      "unique_id": "RC-118"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12564,7 +12848,7 @@
         "truth_contract_names",
         "truth_service_descriptor"
       ],
-      "unique_id": "RC-114"
+      "unique_id": "RC-119"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12633,7 +12917,7 @@
         "rules",
         "service"
       ],
-      "unique_id": "RC-115"
+      "unique_id": "RC-120"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12700,7 +12984,7 @@
         "validation_console_contract",
         "validation_console_health_checks"
       ],
-      "unique_id": "RC-116"
+      "unique_id": "RC-121"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12766,7 +13050,7 @@
         "parse_config",
         "service"
       ],
-      "unique_id": "RC-117"
+      "unique_id": "RC-122"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12833,7 +13117,7 @@
         "workspace_contract",
         "workspace_health_checks"
       ],
-      "unique_id": "RC-118"
+      "unique_id": "RC-123"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -13248,7 +13532,7 @@
         "validate_execution",
         "validate_interface"
       ],
-      "unique_id": "RC-119"
+      "unique_id": "RC-124"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -13663,7 +13947,7 @@
         "test_non_constitutive_check_fails_on_authority",
         "test_non_constitutive_check_fails_on_secret"
       ],
-      "unique_id": "RC-120"
+      "unique_id": "RC-125"
     },
     {
       "authority": "ACTIVE",
@@ -13677,7 +13961,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-121"
+      "unique_id": "RC-126"
     },
     {
       "authority": "ACTIVE",
@@ -13691,7 +13975,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-122"
+      "unique_id": "RC-127"
     },
     {
       "authority": "ACTIVE",
@@ -13705,7 +13989,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-123"
+      "unique_id": "RC-128"
     },
     {
       "authority": "ACTIVE (AUTHORITY=NONE)",
@@ -13719,7 +14003,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-124"
+      "unique_id": "RC-129"
     },
     {
       "authority": "SPEC (AUTHORITY=NONE)",
@@ -13750,9 +14034,9 @@
       "unique_id": "SPEC-CCE"
     }
   ],
-  "capability_count": 126,
+  "capability_count": 131,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "c160498c6aed51c9d88a3f9d9f772402f10365fea0ea30aecd6b480d98cb6cd2",
+  "content_hash": "2c554eafd912c03bce6c1c7775a79497b3dc142bd2bf1789961a7a20e9a0d2f4",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -13866,7 +14150,7 @@
   },
   "evidence_state": {
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "8a49b2f9f5e8ad213d6b0ed9fe17fa1a6ae8493faf77d84ca2b7846e8c324a0c",
+      "00-BOOK/DATA/artifacts.json": "884957a79085ae55c53c4137e44106be02b0c78ce3701d20bc4cb951851deb5d",
       "00-BOOK/DATA/certification.json": "d92e5b4c3ffc9cc9adfc9fdece77a69cb7cfe0057ec146b76bcfeb5d30d46387",
       "00-BOOK/DATA/control-tower.json": "304072e9af5c2e798b559ba460d5e92c87ad388fefcfcccaa292c1ad1e050931",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
@@ -13908,7 +14192,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "0a8ce6bea7823a1bf2f6a9cc4f1bd400b21174b55430c2c6f1894bfec139aec3",
+    "input_hash": "68b08a5ec304a971c15c82ab834d82b8ba1fae659a67e34bbfcd41604c136696",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence file hash, which together pin the tracked state these outputs derive from. Coverage measurement (TEST_EXECUTION_STATE) is excluded per UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input.",
     "output_hash_field": "content_hash"
   },
@@ -13935,11 +14219,11 @@
           "test_functions": 887
         },
         "engine": {
-          "loc": 105424,
+          "loc": 112996,
           "root": "engine",
-          "source_files": 379,
-          "test_files": 277,
-          "test_functions": 4212
+          "source_files": 407,
+          "test_files": 284,
+          "test_functions": 4614
         },
         "infrastructure": {
           "loc": 22599,
@@ -13956,11 +14240,11 @@
           "test_functions": 119
         },
         "platform": {
-          "loc": 125109,
+          "loc": 125120,
           "root": "platform",
           "source_files": 446,
-          "test_files": 343,
-          "test_functions": 5578
+          "test_files": 344,
+          "test_functions": 5586
         },
         "service": {
           "loc": 20464,
@@ -13970,8 +14254,8 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 336729,
-      "total_tests": 13737
+      "total_loc": 344312,
+      "total_tests": 14147
     },
     "corpus": {
       "artifacts": 1233,

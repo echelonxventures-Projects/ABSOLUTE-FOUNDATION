@@ -11594,6 +11594,30 @@
       "validation_owner": "URRC-000001",
       "regeneration_command": "python3 00-MASTER/URRC-000001/urrc_engine.py",
       "certification_role": "PROGRAMME_DELIVERABLE"
+    },
+    {
+      "artifact_id": "UCOS-NUCLEUS-IDENTIFIER-DICTIONARY",
+      "canonical_path": "00-MASTER/UCOS-NUCLEUS-001/UCOS-NUCLEUS-IDENTIFIER-DICTIONARY.json",
+      "title": "Universal Constitutional Identifier Dictionary \u2014 nucleus structural population",
+      "producer": "engine/nucleus/cli.py",
+      "owner": "UCOS-NUCLEUS-001",
+      "capability": "nucleus-ownership",
+      "lifecycle": "REGENERATED",
+      "input_closure": ["engine/nucleus/registry.py", "engine/nucleus/catalog.py", "engine/registry/universal/identity.py", "engine/registry/universal/dictionary.py"],
+      "input_classification": {
+        "engine/nucleus/registry.py": "TRACKED_DETERMINISTIC",
+        "engine/nucleus/catalog.py": "TRACKED_DETERMINISTIC",
+        "engine/registry/universal/identity.py": "TRACKED_DETERMINISTIC",
+        "engine/registry/universal/dictionary.py": "TRACKED_DETERMINISTIC"
+      },
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "validation_owner": "UCOS-NUCLEUS-001",
+      "regeneration_command": "python -m engine.nucleus.cli dictionary --write",
+      "certification_role": "REPLAY_PROVEN"
     }
   ],
   "generated_inputs": [
@@ -11808,6 +11832,12 @@
       "authored_inputs": [
         "UCOS-MXR-001-CHARTER.md"
       ]
+    },
+    {
+      "owner": "UCOS-NUCLEUS-001",
+      "home": "00-MASTER/UCOS-NUCLEUS-001",
+      "producer": "engine/nucleus/cli.py",
+      "authored_inputs": ["01-REPOSITORY-IMPACT-AND-GAP-ANALYSIS.md", "02-NUCLEUS-CONSTITUTIONAL-MODEL.md", "03-CANONICAL-NUCLEI-CATALOG-AND-OWNERSHIP.md", "04-TIME-CALENDAR-COMMISSION-SCOPE.md", "05-PLATFORM-CONFIG-AND-UNIVERSE-COMPOSITION.md", "06-IMPLEMENTATION-ROADMAP-AND-SEQUENCING.md", "07-TRACEABILITY-VALIDATION-CERTIFICATION.md", "08-ZERO-MISSING-COVERAGE-VERIFICATION.md", "README.md"]
     },
     {
       "owner": "UCOS-RIB-001",

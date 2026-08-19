@@ -101,7 +101,21 @@ def test_the_live_record_satisfies_every_invariant() -> None:
 def test_the_live_record_states_a_result_and_references_evidence_it_does_not_contain() -> None:
     record = parse(load(RECORD_PATH))
     assert record.passed
-    assert record.command == "./verify.sh"
+    # The command is asserted as a PROPERTY, not as a literal. UVI-000001 made the
+    # certification mode explicit — the bare invocation is now --change, a developer mode
+    # that certifies nothing — so the record must name a mode the constitution declares
+    # certification-eligible. Pinning the literal would have made this test pass while the
+    # record pointed at a mode that evaluates no coverage floor, which is the failure it
+    # exists to catch.
+    from engine.verification_intelligence.constitution import load_constitution
+
+    command, _, flag = record.command.partition(" ")
+    assert command == "./verify.sh"
+    certifying = {m.flag for m in load_constitution().modes if m.certification_eligible}
+    assert flag in certifying, (
+        f"the canonical record names {record.command!r}, which is not a certification-eligible "
+        f"invocation; one of {sorted(certifying)} is required"
+    )
     ref = record.evidence_reference
     assert ref is not None
     assert ref.classification == "EXECUTION_TRANSCRIPT"
