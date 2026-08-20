@@ -25,13 +25,31 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def test_the_declared_lifecycle_is_the_mandated_chain():
-    assert len(lifecycle.STAGES) == 45
-    names = [s.name for s in lifecycle.STAGES]
-    assert names[0] == "Receive Goal"
-    assert names[-1] == "Begin Next Elevated Engineering Cycle"
-    assert "Reuse Before Create" in names
-    assert "Deterministic Fixed Point" in names
-    assert "Assign Universal Constitutional Identifier" in names
+    """The chain is asserted as a RELATIONSHIP, never as a position or a population.
+
+    A stage admitted anywhere the manifest permits — before the head, in an ordinal gap
+    between two stages, or after the highest ordinal — leaves every assertion below true.
+    Nothing here names a last stage: ``UCL-000001`` declares no terminal stage and the
+    evolution cycle wraps (ISD-L-05), so a positional ``[-1]`` assertion would encode a
+    termination the constitution denies.
+    """
+    assert lifecycle.STAGES, "the lifecycle declares no stage"
+    head, *rest = lifecycle.STAGES
+    assert head.depends_on == (), "the chain head depends on nothing"
+    previous = head
+    for stage in rest:
+        assert stage.depends_on == (previous.stage_id,), f"{stage.stage_id} breaks the chain"
+        assert stage.ordinal > previous.ordinal, f"{stage.stage_id} does not ascend"
+        previous = stage
+    # Mandated members, asserted by membership. Membership claims that these stages exist;
+    # it claims nothing about which others do, so the set stays open.
+    names = {stage.name for stage in lifecycle.STAGES}
+    assert {
+        "Receive Goal",
+        "Reuse Before Create",
+        "Deterministic Fixed Point",
+        "Assign Universal Constitutional Identifier",
+    } <= names
 
 
 def test_stage_order_is_derived_total_and_acyclic():
@@ -81,11 +99,11 @@ def test_execution_runs_every_stage_and_chains_them():
     execution = lifecycle.execute("UCOS-NUC-000000000001")
     assert execution.complete is True
     assert execution.status == "COMPLETE"
-    assert len(execution.outcomes) == 45
+    assert len(execution.outcomes) == len(lifecycle.STAGES)
     assert execution.chain_is_intact() is True
     assert execution.chain_head
     assert execution.failures == ()
-    assert execution.to_dict()["declared_stage_count"] == 45
+    assert execution.to_dict()["declared_stage_count"] == len(lifecycle.STAGES)
 
 
 def test_execution_replays_to_a_deterministic_fixed_point():
@@ -166,7 +184,7 @@ def test_the_lifecycle_applies_to_every_category_of_thing():
 
 def test_lifecycle_document_declares_no_ceiling():
     document = lifecycle.to_document()
-    assert document["stage_count"] == 45
+    assert document["stage_count"] == len(lifecycle.STAGES)
     assert document["closed_set"] is False
     assert document["upper_limit"] is None
     assert lifecycle.digest() == lifecycle.digest()
@@ -174,13 +192,19 @@ def test_lifecycle_document_declares_no_ceiling():
 
 
 def test_an_appended_stage_needs_no_code_change():
-    extended = (
-        *lifecycle.STAGES,
-        Stage("UCL-S-0460", "Federate Across Frames", 460, "ELEVATION", depends_on=("UCL-S-0450",)),
+    """Openness performed. The assertions relate the run to what was appended, not to a count."""
+    appended = Stage(
+        "UCL-S-0460",
+        "Federate Across Frames",
+        460,
+        "ELEVATION",
+        depends_on=(lifecycle.STAGES[-1].stage_id,),
     )
+    extended = (*lifecycle.STAGES, appended)
     execution = lifecycle.execute("subject", stages=extended)
-    assert len(execution.outcomes) == 46
-    assert execution.outcomes[-1].name == "Federate Across Frames"
+    assert len(execution.outcomes) == len(extended)
+    assert [o.stage_id for o in execution.outcomes] == [s.stage_id for s in extended]
+    assert execution.outcomes[-1].name == appended.name
 
 
 # -- lineage ----------------------------------------------------------------- #

@@ -39,7 +39,7 @@ def measured(system: Population) -> dict[str, stages.Measurement]:
 def test_a_faculty_exists_for_every_declared_stage() -> None:
     """A stage the lifecycle declares and nothing can discharge is the defect this closes."""
     declared = [stage.stage_id for stage in ucl.STAGES]
-    assert len(declared) == 45
+    assert declared, "the lifecycle declares no stage, so the assertions below are vacuous"
     assert stages.unrealized(declared) == ()
     assert set(stages.FACULTIES) == set(declared)
 
@@ -157,7 +157,7 @@ def test_the_context_derives_one_shared_view(system: Population) -> None:
 
 def test_the_faculty_set_is_addressable_and_open() -> None:
     document = stages.to_document()
-    assert document["faculty_count"] == 45
+    assert document["faculty_count"] == len(ucl.STAGES)
     assert document["closed_set"] is False
     assert stages.digest() == stages.digest()
 
@@ -174,7 +174,7 @@ def test_the_lifecycle_executes_every_stage_through_the_faculties(system: Popula
         stage_function=evolution.lifecycle_stage_function(system),
         context={"frame": "test"},
     )
-    assert len(execution.outcomes) == 45
+    assert len(execution.outcomes) == len(ucl.STAGES)
     assert execution.complete
     assert execution.chain_is_intact()
     assert not [o for o in execution.outcomes if o.status is ucl.StageStatus.NOT_APPLICABLE]
@@ -195,6 +195,6 @@ def test_the_manifest_records_the_faculty_module_as_evidence() -> None:
     """Probe 2 of the closure engine reads the manifest; the record must be true."""
     ctx = stages.Context(population=catalog.build_population())
     nodes = ctx.manifest
-    assert len(nodes) == 45
+    assert len(nodes) == len(ucl.STAGES)
     for node in nodes:
         assert "engine/constitution/stages.py" in node["evidence"], node["id"]

@@ -208,13 +208,13 @@ def test_the_capability_reading_is_derived_from_measurements(lawful: Population)
 
 
 def test_the_engine_discharges_ucl_000001_rather_than_copying_it(lawful: Population) -> None:
-    """The 45-stage lifecycle keeps its stages and gains an implementation."""
+    """The declared lifecycle keeps its stages and gains an implementation."""
     execution = nucleus_lifecycle.execute(
         "repository",
         stage_function=evolution.lifecycle_stage_function(lawful),
         context={"frame": "test"},
     )
-    assert len(execution.outcomes) == len(nucleus_lifecycle.STAGES) == 45
+    assert len(execution.outcomes) == len(nucleus_lifecycle.STAGES)
     assert execution.complete
     assert execution.chain_is_intact()
     satisfied = [
@@ -227,7 +227,9 @@ def test_the_engine_discharges_ucl_000001_rather_than_copying_it(lawful: Populat
     # because the engine carried one verdict per stage group and had a faculty for only
     # seven of sixteen. engine.constitution.stages now supplies one faculty per declared
     # stage, so nothing is unclaimed — and the honest assertion is the stronger one.
-    assert len(satisfied) == 45, "every declared stage must be discharged by a measurement"
+    assert len(satisfied) == len(
+        execution.outcomes
+    ), "every declared stage must be discharged by a measurement"
     assert unclaimed == [], "a stage with no faculty would be silently unmeasured"
 
 

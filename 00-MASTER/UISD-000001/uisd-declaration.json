@@ -387,9 +387,9 @@
               "declared",
               "satisfied"
             ],
-            "required_owner": "engine/constitution/ and engine/nucleus/ — assertions binding the literal 45",
-            "expected_refusal": "binds 45",
-            "gap": "ISD-G-10"
+            "required_owner": "engine/constitution/ and engine/nucleus/ — CLOSED by the D-3 relational conversion. Retained with no recorded refusal so it works the other way: this consumer now RATCHETS AGAINST REGRESSION. Any literal count reintroduced over a stage population in these four files is a refusal nobody recorded, which ISD-L-11 refuses immediately.",
+            "expected_refusal": "",
+            "gap": ""
           }
         ]
       },

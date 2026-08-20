@@ -15,6 +15,7 @@ import pytest
 
 from engine.constitution import catalog
 from engine.constitution.cli import main
+from engine.nucleus import lifecycle as ucl
 from engine.tests.constitution.conftest import declare, population
 
 REPORTING = ["law", "mandate", "catalog", "gateway", "seal", "replay"]
@@ -84,8 +85,8 @@ def test_the_assimilate_subcommand_gates_on_reuse(capsys) -> None:
 def test_the_lifecycle_subcommand_runs_ucl_000001(capsys) -> None:
     assert main(["lifecycle", "--subject", "repository"]) == 0
     payload = json.loads(capsys.readouterr().out)
-    assert payload["declared_stage_count"] == 45
-    assert payload["stage_count"] == 45
+    assert payload["declared_stage_count"] == len(ucl.STAGES)
+    assert payload["stage_count"] == payload["declared_stage_count"]
 
 
 def test_a_malformed_population_document_fails_closed(tmp_path: Path, capsys) -> None:
