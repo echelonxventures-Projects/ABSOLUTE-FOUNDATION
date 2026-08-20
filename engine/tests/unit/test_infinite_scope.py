@@ -9,7 +9,7 @@ the specific refusal.
 The other load-bearing tests are:
 
 * :func:`test_the_live_declaration_is_sound_and_open` — the committed declaration measures
-  ten laws and refuses none. If this fails, the repository has a real finding.
+  every declared law and refuses none. If this fails, the repository has a real finding.
 * :func:`test_measuring_writes_nothing` — the gate is OBSERVE MODE. Proven by hashing the
   whole scanned surface before and after, not by reading the docstring that claims it.
 * :func:`test_a_check_no_law_claims_is_refused` — dead code wearing the appearance of
@@ -88,10 +88,18 @@ def write_declaration(tmp_path: Any, doc: dict[str, Any]) -> str:
 
 
 def test_the_live_declaration_is_sound_and_open() -> None:
-    """The committed declaration constructs, measures ten laws, and refuses none."""
+    """The committed declaration constructs, measures every declared law, and refuses none.
+
+    The expectation is DERIVED from the declaration, never written here. A literal count
+    would make admitting a law an engine-plane change, which is the hardcoded expectation
+    UCKP-ART-15 exists to prevent and ISD-L-01 exists to measure. What the count was ever
+    worth is already measured by InfiniteScopeContract.validate, which refuses a law with
+    no check AND a check no law claims; the literal only added staleness on top of it.
+    """
+    contract = load_contract()
     report = gate_module.measure()
     assert report["verdict"] == "OPEN", report["laws"]
-    assert report["laws_measured"] == 10
+    assert report["laws_measured"] == len(contract.laws)
     assert report["laws_refused"] == 0
     assert report["self_applied"] is True
     assert report["capability_model_final"] is False
@@ -1000,7 +1008,7 @@ def test_the_gate_emits_json_on_request(capsys) -> None:
     assert gate_module.main(["--json"]) == gate_module.EXIT_OPEN
     report = json.loads(capsys.readouterr().out)
     assert report["verdict"] == "OPEN"
-    assert len(report["laws"]) == 10
+    assert len(report["laws"]) == len(load_contract().laws)
 
 
 def test_quiet_suppresses_the_report_when_open(capsys) -> None:

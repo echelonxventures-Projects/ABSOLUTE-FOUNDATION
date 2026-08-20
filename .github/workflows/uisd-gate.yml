@@ -128,17 +128,27 @@ jobs:
       # A law with no reachable check is manual governance; a check no law claims is dead
       # code wearing the appearance of enforcement. The contract refuses both directions,
       # so reaching this step at all means neither happened — this asserts the shape.
-      - name: Ten laws measured, and the self-application law holds
+      - name: Every declared law is measured, and the self-application law holds
         run: |
           python3 - <<'PY'
           import json, sys
           report = json.load(open("/tmp/uisd-report.json"))
+          declaration = json.load(open("00-MASTER/UISD-000001/uisd-declaration.json"))
+          declared = [law["id"] for law in declaration["laws"]]
           print(f"laws measured : {report['laws_measured']}")
           print(f"laws refused  : {report['laws_refused']}")
           print(f"self applied  : {report['self_applied']}")
           failures = []
-          if report["laws_measured"] != 10:
-              failures.append(f"expected 10 laws, measured {report['laws_measured']}")
+          # The expectation is DERIVED from the committed declaration, never written here.
+          # A literal would make admitting a law an engine-plane change — the hardcoded
+          # expectation UCKP-ART-15 exists to prevent — and this gate of all gates may not
+          # carry the defect its own ISD-L-01 measures. The property asserted is that the
+          # gate measured EVERY law the declaration declares, by id and in declared order.
+          measured = [entry["law_id"] for entry in report["laws"]]
+          if measured != declared:
+              failures.append(
+                  f"the declaration declares {declared}, the gate measured {measured}"
+              )
           if not report["self_applied"]:
               failures.append("the principle does not name itself as subject of its own laws")
           if report["capability_model_final"]:
