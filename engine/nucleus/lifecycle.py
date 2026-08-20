@@ -312,8 +312,23 @@ class LifecycleExecution:
 
     @property
     def complete(self) -> bool:
-        """True iff every declared stage produced an outcome and none failed."""
-        return len(self.outcomes) == len(STAGES) and not self.failures
+        """True iff every stage THIS RUN declared produced an outcome, and none failed.
+
+        The population is :attr:`order` — the execution order derived from the stages this
+        run was actually given — not the module-level :data:`STAGES`. Reading the constant
+        made the predicate a statement about the repository's current stage count rather
+        than about the run: a lawful 46-stage execution reported INCOMPLETE while every one
+        of its stages had in fact been discharged.
+
+        ``order`` is the right authority because it is *derived* on every run rather than
+        stored, so it cannot drift from the run it describes. Carrying a second declared
+        population on the record could disagree with it; deriving from ``order`` makes that
+        disagreement unrepresentable.
+
+        An execution over an empty stage sequence is complete, vacuously and deliberately —
+        see :func:`execute`.
+        """
+        return len(self.outcomes) == len(self.order) and not self.failures
 
     @property
     def status(self) -> str:
@@ -344,7 +359,7 @@ class LifecycleExecution:
             "context_bound": self.context_bound,
             "status": self.status,
             "stage_count": len(self.outcomes),
-            "declared_stage_count": len(STAGES),
+            "declared_stage_count": len(self.order),
             "order": list(self.order),
             "outcomes": [o.to_dict() for o in self.outcomes],
             "chain_head": self.chain_head,
@@ -385,6 +400,17 @@ def execute(
     A stage function that returns :attr:`StageStatus.FAILED` does not abort the run — the
     lifecycle records the failure and continues, because a partial record is evidence and
     an aborted record is not.
+
+    An empty ``stages`` sequence is ACCEPTED and its execution is COMPLETE, vacuously.
+    That is a decision, not an oversight. Nothing in ``UCL-000001`` bounds the stage count
+    from below: the manifest declares ``open`` with ``closed_enumeration`` false and no
+    minimum, :func:`to_document` reports ``upper_limit`` ``None`` and declares no lower
+    limit, and no constitutional instrument prohibits an empty lifecycle. Where the
+    architecture states no prohibition, this module preserves mathematical openness rather
+    than inventing a floor: "every supplied stage produced an outcome" is trivially true
+    over an empty set, and a caller that requires a non-empty lifecycle can measure that
+    itself. Refusing here would be this module legislating a bound its authority never
+    declared — the finite-world assumption in the opposite direction.
 
     Raises:
         LifecycleError: ``subject`` is empty, or a stage function returns a status this
