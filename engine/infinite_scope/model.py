@@ -530,21 +530,7 @@ class InfiniteScopeContract:
         return problems
 
 
-#: The nine mandatory declaration sections, named so a partial declaration fails loudly.
-DECLARATION_SECTIONS: tuple[str, ...] = (
-    "laws",
-    "expansion_axes",
-    "closed_enumeration_disclosures",
-    "direction_expansion",
-    "lifecycle_openness",
-    "evolution_openness",
-    "relationship_expansion",
-    "freeze_scan",
-    "baseline_temporal_requirement",
-)
-
 __all__ = [
-    "DECLARATION_SECTIONS",
     "AdmissionExercise",
     "BaselineSurface",
     "CapabilityEnumeration",

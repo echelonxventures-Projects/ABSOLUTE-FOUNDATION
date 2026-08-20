@@ -39,7 +39,6 @@ from engine.infinite_scope.contract import (
     scan_occurrences,
 )
 from engine.infinite_scope.model import (
-    DECLARATION_SECTIONS,
     AdmissionExercise,
     BaselineSurface,
     CapabilityEnumeration,
@@ -57,7 +56,6 @@ from engine.infinite_scope.model import (
 __all__ = [
     "ADMISSION_FORMS",
     "DECLARATION_PATH",
-    "DECLARATION_SECTIONS",
     "LAW_CHECKS",
     "AdmissionExercise",
     "BaselineSurface",
