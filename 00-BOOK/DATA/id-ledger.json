@@ -8964,7 +8964,7 @@
     "DET": 2,
     "CONFIG": 31,
     "DATAOBJ": 127,
-    "EXDOC": 2600,
+    "EXDOC": 2606,
     "TOOLING": 36,
     "ENGINE": 1262,
     "TESTOBJ": 826,
@@ -54032,6 +54032,42 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:bb9c27d2733a"
+    },
+    "UCOS-CEA-000001-CONSTITUTIONAL-EVOLUTION-ASSIMILATION-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002601",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:8456ede1862e"
+    },
+    "UCOS-CEA-000002-REGENERATED-ROADMAPS-AND-EXECUTION-SEQUENCE.md": {
+      "universal_id": "UCOS-EXDOC-002602",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:8456ede1862e"
+    },
+    "UCOS-MIP-000003-MASTER-IMPLEMENTATION-PLAN-V3.md": {
+      "universal_id": "UCOS-EXDOC-002603",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:8456ede1862e"
+    },
+    "UCOS-UVI-000001-EVIDENCE-KEY-EXECUTION-CONTRACT-IMPLEMENTATION-REPORT.md": {
+      "universal_id": "UCOS-EXDOC-002604",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:8456ede1862e"
+    },
+    "UCOS-UVI-000001-STAGE-READ-SET-SEPARATION-IMPLEMENTATION-REPORT.md": {
+      "universal_id": "UCOS-EXDOC-002605",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:8456ede1862e"
+    },
+    "UCOS-UVI-000001-VERIFICATION-INTELLIGENCE-EVOLUTION-ARCHITECTURE-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002606",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:8456ede1862e"
     }
   },
   "by_observation": {
