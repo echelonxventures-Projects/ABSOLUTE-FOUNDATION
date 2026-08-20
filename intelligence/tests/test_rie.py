@@ -73,10 +73,33 @@ def test_rib_is_a_generated_output() -> None:
     assert outputs["UCOS-IMP-BASELINE-001.rib.json"]["artifact_id"] == "UCOS-IMP-BASELINE-001"
 
 
-def test_engine_writes_only_under_intelligence_dir() -> None:
-    written = _engine().write()
+def test_engine_writes_only_under_intelligence_dir(tmp_path: Path) -> None:
+    """Writes are contained under the configured intelligence directory.
+
+    Proven in two halves, neither of which touches Repository Truth:
+
+      (a) the DEFAULT output directory is under ``intelligence/`` — asserted without
+          writing anything, because the location of a directory is a property of the
+          configuration, not of a file that must exist;
+      (b) an ACTUAL write is contained by the directory it was configured with — proven
+          against a temporary output root, with the real reader and the real model, so
+          the write path is exercised rather than mocked.
+
+    Both halves were previously one line that called ``write()`` against the live
+    repository. It proved the property and, on every certification run, rewrote four
+    tracked artifacts — UCOS-RIE-MODEL, UCOS-RIE-HEALTH, UCOS-RIE-CAPABILITY-CATALOG and
+    UCOS-IMP-BASELINE-001.rib — so ``./verify.sh --full`` could not certify the tree it
+    had measured. A certification that edits what it certifies is not an observation.
+    """
+    assert "intelligence" in RepoConfig.create(REPO).output_dir.parts
+
+    sandbox = tmp_path / "intelligence"
+    engine = RepositoryIntelligenceEngine(replace(RepoConfig.create(REPO), output_dir=sandbox))
+    written = engine.write()
+    assert written, "the engine wrote nothing, so containment is vacuous"
     for path in written:
         assert "intelligence" in Path(path).parts, f"write escaped intelligence/: {path}"
+        assert Path(path).parent == sandbox, f"write escaped its configured directory: {path}"
 
 
 # ---------------------------------------------------------------------------
@@ -117,9 +140,9 @@ def test_canonical_identity_independent_of_coverage() -> None:
     )
 
     # (b) the only key is evidence_files, mapping exactly the 5 canonical DATA files
-    assert set(fp.keys()) == {"evidence_files"}, (
-        f"state_fingerprint() must contain only 'evidence_files', got: {set(fp.keys())}"
-    )
+    assert set(fp.keys()) == {
+        "evidence_files"
+    }, f"state_fingerprint() must contain only 'evidence_files', got: {set(fp.keys())}"
     expected_files = {
         "00-BOOK/DATA/control-tower.json",
         "00-BOOK/DATA/artifacts.json",
@@ -187,8 +210,11 @@ def test_canonical_model_bytes_invariant_under_coverage_presence() -> None:
 
     a, b = canonical_json(with_coverage), canonical_json(without_coverage)
     if a != b:
-        diff = [k for k in set(with_coverage) | set(without_coverage)
-                if with_coverage.get(k) != without_coverage.get(k)]
+        diff = [
+            k
+            for k in set(with_coverage) | set(without_coverage)
+            if with_coverage.get(k) != without_coverage.get(k)
+        ]
         raise AssertionError(
             "canonical model bytes changed with coverage.xml presence — an environmental "
             f"input has reached canonical identity. Divergent top-level sections: {sorted(diff)}"
@@ -222,8 +248,14 @@ def test_no_canonical_output_carries_a_coverage_field() -> None:
     closes that gap by forbidding the key outright, at any depth.
     """
     model = build_model(EvidenceReader(RepoConfig.create(REPO)))
-    forbidden = ("coverage_line_pct", "coverage_branch_pct", "coverage_measurement",
-                 "lines_covered", "lines_valid", "coverage_full")
+    forbidden = (
+        "coverage_line_pct",
+        "coverage_branch_pct",
+        "coverage_measurement",
+        "lines_covered",
+        "lines_valid",
+        "coverage_full",
+    )
     found: list[str] = []
 
     def walk(node: object, path: str) -> None:
