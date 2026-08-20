@@ -1,7 +1,7 @@
 """UISD-000001 — the Universal Infinite Scope and Direction contract, measured.
 
 Organised around the one question that matters for a gate: **can each law fail?** A law
-that cannot be made to fail is decoration, and ten decorative laws would be worse than
+that cannot be made to fail is decoration, and a decorative law would be worse than
 none because they would licence the belief that the property had been checked. So for
 every law there is at least one test that constructs the violating condition and asserts
 the specific refusal.
@@ -989,6 +989,207 @@ def test_no_capability_enumerations_is_vacuous(doc: dict[str, Any]) -> None:
     """An empty enumeration list would pass trivially."""
     doc["capability_seed_model"]["enumerations"] = []
     assert any("unmeasured" in p for p in run("capability_seed_openness", doc))
+
+
+# ------------------------------------------- ISD-L-11 admission path exercisability
+
+
+def exercises(doc: dict[str, Any]) -> list[dict[str, Any]]:
+    """The declared exercises inside a mutable declaration."""
+    return doc["admission_exercisability"]["exercises"]
+
+
+def by_id(doc: dict[str, Any], exercise_id: str) -> dict[str, Any]:
+    """One declared exercise, by id."""
+    return next(entry for entry in exercises(doc) if entry["id"] == exercise_id)
+
+
+def test_an_exercise_naming_an_unimplemented_form_is_refused(doc: dict[str, Any]) -> None:
+    """An admission nobody can perform is an unexercised promise."""
+    exercises(doc)[0]["form"] = "telepathy"
+    problems = build(doc).validate(
+        frozenset(LAW_CHECKS), frozenset(contract_module.ADMISSION_FORMS)
+    )
+    assert any("which is not implemented" in problem for problem in problems)
+
+
+def test_a_form_no_exercise_names_is_refused(doc: dict[str, Any]) -> None:
+    """A handler nothing claims is dead code wearing the appearance of exercisability."""
+    problems = build(doc).validate(
+        frozenset(LAW_CHECKS), frozenset(contract_module.ADMISSION_FORMS) | {"an_orphan_form"}
+    )
+    assert any("no exercise names it" in problem for problem in problems)
+
+
+def test_the_live_contract_supplies_the_form_registry() -> None:
+    """load_contract measures forms; the live path is never the unmeasured one."""
+    contract = load_contract()
+    assert (
+        contract.validate(frozenset(LAW_CHECKS), frozenset(contract_module.ADMISSION_FORMS)) == ()
+    )
+    assert {exercise.form for exercise in contract.admission_exercises} == set(
+        contract_module.ADMISSION_FORMS
+    )
+
+
+def test_an_exercise_whose_declared_owner_is_missing_is_refused(doc: dict[str, Any]) -> None:
+    """An admission path into a document that does not exist cannot be walked."""
+    exercises(doc)[0]["declared_owner"] = "00-MASTER/does/not/exist.json"
+    assert any("does not exist" in problem for problem in run("admission_path_exercisability", doc))
+
+
+def test_an_exercise_with_no_admission_text_is_refused(doc: dict[str, Any]) -> None:
+    """A population whose admission nobody wrote down claims nothing that can be tested."""
+    exercises(doc)[0]["admission"] = "   "
+    assert any(
+        "declares no admission path" in problem
+        for problem in run("admission_path_exercisability", doc)
+    )
+
+
+def test_a_consumer_that_cannot_be_imported_is_reported(doc: dict[str, Any]) -> None:
+    """A surface the law cannot re-read is named, never silently skipped."""
+    consumer = by_id(doc, "ISD-AE-01")["consumers"][0]
+    consumer["function"] = "no_such_function"
+    consumer["expected_refusal"] = "present in manifest, absent from STAGES"
+    assert any(
+        "refuses differently from the record" in problem
+        for problem in run("admission_path_exercisability", doc)
+    )
+
+
+def test_a_refusal_nobody_recorded_is_reported(doc: dict[str, Any]) -> None:
+    """A NEW refusing component fails the law even while the known ones are recorded."""
+    entry = by_id(doc, "ISD-AE-03")
+    entry["consumers"].append(
+        {
+            "kind": "callable",
+            "module": "engine.nucleus.lifecycle",
+            "function": "verify_manifest_alignment",
+            "required_owner": "a component nobody recorded",
+        }
+    )
+    problems = run("admission_path_exercisability", doc)
+    assert any("no refusal is recorded for it" in problem for problem in problems)
+
+
+def test_a_finite_population_assertion_is_located(doc: dict[str, Any]) -> None:
+    """The static arm finds a literal count bound to the population, with file and line."""
+    contract = load_contract()
+    exercise = next(e for e in contract.admission_exercises if e.exercise_id == "ISD-AE-02")
+    consumer = exercise.consumers[0]
+    located = contract_module._population_literals(REPO, consumer)
+    assert located, "the ISD-G-09 assertion is no longer located; the record is stale"
+    assert any("test_infinite_scope.py" in item and "binds 1" in item for item in located)
+
+
+def test_a_recorded_refusal_that_no_longer_occurs_is_refused(doc: dict[str, Any]) -> None:
+    """The ratchet turns the other way too: a stale record fails until it is corrected."""
+    consumer = by_id(doc, "ISD-AE-03")["consumers"][0]
+    consumer["expected_refusal"] = "a refusal that does not happen"
+    consumer["gap"] = "ISD-G-99"
+    problems = run("admission_path_exercisability", doc)
+    assert any("no longer occurs" in problem for problem in problems)
+
+
+def test_an_exercise_expecting_admission_while_recording_a_refusal_is_refused(
+    doc: dict[str, Any],
+) -> None:
+    """A declaration cannot claim both that the path works and that it is blocked."""
+    by_id(doc, "ISD-AE-03")["consumers"][0]["expected_refusal"] = "something"
+    problems = build(doc).validate(
+        frozenset(LAW_CHECKS), frozenset(contract_module.ADMISSION_FORMS)
+    )
+    assert any("expects admission while recording a refusal" in problem for problem in problems)
+
+
+def test_a_recorded_refusal_with_no_gap_is_refused(doc: dict[str, Any]) -> None:
+    """A refusal nobody routed to a gap is an undisclosed finite assumption."""
+    by_id(doc, "ISD-AE-01")["consumers"][0]["gap"] = ""
+    problems = build(doc).validate(
+        frozenset(LAW_CHECKS), frozenset(contract_module.ADMISSION_FORMS)
+    )
+    assert any("names no gap" in problem for problem in problems)
+
+
+def test_an_exercise_expecting_refusal_that_records_none_is_refused(doc: dict[str, Any]) -> None:
+    """Expecting a refusal without naming the refusing component leaves the owner unrouted."""
+    for consumer in by_id(doc, "ISD-AE-02")["consumers"]:
+        consumer["expected_refusal"] = ""
+    problems = build(doc).validate(
+        frozenset(LAW_CHECKS), frozenset(contract_module.ADMISSION_FORMS)
+    )
+    assert any("records none" in problem for problem in problems)
+
+
+def test_an_empty_exercise_list_is_refused(doc: dict[str, Any]) -> None:
+    """A law over zero exercises would be vacuous rather than satisfied."""
+    doc["admission_exercisability"]["exercises"] = []
+    assert any(
+        "would be vacuous" in problem for problem in run("admission_path_exercisability", doc)
+    )
+
+
+def test_a_probe_without_the_declared_prefix_is_refused(doc: dict[str, Any]) -> None:
+    """A probe that could collide with a real member is refused before it is appended."""
+    by_id(doc, "ISD-AE-01")["target"]["probe_overrides"]["id"] = "UCL-S-0455"
+    assert any(
+        "does not carry the declared" in problem
+        for problem in run("admission_path_exercisability", doc)
+    )
+
+
+def test_the_live_exercises_hold_and_the_positive_control_admits() -> None:
+    """ISD-L-11 holds, and at least one declared admission path is measured actually working."""
+    contract = load_contract()
+    assert LAW_CHECKS["admission_path_exercisability"](contract, REPO) == ()
+    admitted = [e for e in contract.admission_exercises if e.expected == "admitted"]
+    assert admitted, "a law that can only ever fail is indistinguishable from a broken law"
+    for exercise in admitted:
+        subject = contract_module.ADMISSION_FORMS[exercise.form](
+            exercise, REPO, contract.probe_id_prefix
+        )
+        for consumer in exercise.consumers:
+            assert contract_module._consumer_refusal(consumer, REPO, subject) == ""
+
+
+def test_the_recorded_refusals_still_occur_and_name_their_owner() -> None:
+    """Every exercise declared to refuse still refuses, and routes an owner and a gap."""
+    contract = load_contract()
+    refusing = [e for e in contract.admission_exercises if e.expected == "refused"]
+    assert refusing
+    for exercise in refusing:
+        subject = contract_module.ADMISSION_FORMS[exercise.form](
+            exercise, REPO, contract.probe_id_prefix
+        )
+        recorded = [c for c in exercise.consumers if c.refuses_today]
+        assert recorded
+        for consumer in recorded:
+            actual = contract_module._consumer_refusal(consumer, REPO, subject)
+            assert consumer.expected_refusal in actual
+            assert consumer.required_owner.strip()
+            assert consumer.gap.strip()
+
+
+def test_exercising_every_admission_mutates_nothing_on_disk() -> None:
+    """OBSERVE MODE across the new law: every declared owner is byte-identical afterwards."""
+    contract = load_contract()
+    watched = [exercise.declared_owner for exercise in contract.admission_exercises] + [
+        "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+        "00-BOOK/DATA/id-ledger.json",
+    ]
+
+    def digests() -> dict[str, str]:
+        out: dict[str, str] = {}
+        for relpath in watched:
+            with open(os.path.join(REPO, relpath), "rb") as handle:
+                out[relpath] = hashlib.sha256(handle.read()).hexdigest()
+        return out
+
+    before = digests()
+    LAW_CHECKS["admission_path_exercisability"](contract, REPO)
+    LAW_CHECKS["admission_path_exercisability"](contract, REPO)
+    assert digests() == before
 
 
 # ------------------------------------------------------------------------ the gate

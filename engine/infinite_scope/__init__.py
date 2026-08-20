@@ -20,7 +20,7 @@ question set is what keeps the answer sets infinite. The prohibited condition is
 **undisclosed** closure: an enumeration closed in code or data while nothing states what
 closes it or how a member is admitted.
 
-Ten laws, all held as DATA in ``00-MASTER/UISD-000001/uisd-declaration.json``. This package
+Eleven laws, all held as DATA in ``00-MASTER/UISD-000001/uisd-declaration.json``. This package
 contains no law text, no enumeration member, no path and no phrase.
 
 OBSERVE MODE — READ ONLY. Stdlib only; no wall clock, no network, no subprocess; writes
@@ -28,6 +28,7 @@ nothing anywhere, including gitignored paths.
 """
 
 from engine.infinite_scope.contract import (
+    ADMISSION_FORMS,
     DECLARATION_PATH,
     LAW_CHECKS,
     assess,
@@ -39,10 +40,12 @@ from engine.infinite_scope.contract import (
 )
 from engine.infinite_scope.model import (
     DECLARATION_SECTIONS,
+    AdmissionExercise,
     BaselineSurface,
     CapabilityEnumeration,
     ClosedEnumeration,
     DeclaredPin,
+    ExerciseConsumer,
     ExpansionAxis,
     FreezeScan,
     InfiniteScopeContract,
@@ -52,13 +55,16 @@ from engine.infinite_scope.model import (
 )
 
 __all__ = [
+    "ADMISSION_FORMS",
     "DECLARATION_PATH",
     "DECLARATION_SECTIONS",
     "LAW_CHECKS",
+    "AdmissionExercise",
     "BaselineSurface",
     "CapabilityEnumeration",
     "ClosedEnumeration",
     "DeclaredPin",
+    "ExerciseConsumer",
     "ExpansionAxis",
     "FreezeScan",
     "InfiniteScopeContract",

@@ -196,7 +196,7 @@ jobs:
 
       # --no-cov: this suite gates the infinite-scope capability, not repository coverage.
       # The coverage floor is owned by ./verify.sh in ec1-ci.yml and is not duplicated here.
-      - name: Infinite scope suite (ten laws, each with a construction that refuses it)
+      - name: Infinite scope suite (every law with a construction that refuses it)
         run: python -m pytest engine/tests/unit/test_infinite_scope.py -q --no-cov
 
       # The two owners whose openness declarations this programme reads. If either breaks,
@@ -220,7 +220,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Universal Infinite Scope and Direction Gate (ten laws, each fail-closed)
+      - name: Universal Infinite Scope and Direction Gate (every law fail-closed)
         run: python3 -m engine.infinite_scope.gate
 
       # OBSERVE MODE, proven rather than declared. The gate is run twice and the whole

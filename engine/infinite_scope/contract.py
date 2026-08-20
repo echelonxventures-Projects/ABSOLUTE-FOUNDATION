@@ -1,4 +1,4 @@
-"""UISD-000001 Part 02 — the ten laws, each with a computable check.
+"""UISD-000001 Part 02 — the eleven laws, each with a computable check.
 
 A law whose compliance nobody computes is manual governance, so every law in
 ``uisd-declaration.json`` names a check, :data:`LAW_CHECKS` implements it, and
@@ -10,7 +10,7 @@ declaration, read declared files, and import declared modules in-process. They r
 clock, open no socket, spawn no subprocess and write nothing, so a verdict is reproducible
 and a gate built on them cannot dirty the tree.
 
-Three checks are worth reading closely, because they are the ones that make the mission's
+Four checks are worth reading closely, because they are the ones that make the mission's
 claims measurable rather than aspirational:
 
 * :func:`check_scope_expansion_capacity` does **not** assert that no enumeration is
@@ -31,15 +31,19 @@ claims measurable rather than aspirational:
 
 from __future__ import annotations
 
+import ast
+import copy
 import importlib
 import json
 import os
 import re
 import tomllib
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from typing import Any
 
 from engine.infinite_scope.model import (
+    AdmissionExercise,
+    ExerciseConsumer,
     FreezeScan,
     InfiniteScopeContract,
     InfiniteScopeError,
@@ -80,7 +84,7 @@ def load_contract(path: str | None = None) -> InfiniteScopeContract:
             because a half-diagnosed contract wastes a cycle.
     """
     contract = InfiniteScopeContract.from_declaration(load_declaration(path))
-    problems = contract.validate(frozenset(LAW_CHECKS))
+    problems = contract.validate(frozenset(LAW_CHECKS), frozenset(ADMISSION_FORMS))
     if problems:
         raise InfiniteScopeError("contract is unsound: " + "; ".join(problems))
     return contract
@@ -533,6 +537,260 @@ def check_capability_seed_openness(contract: InfiniteScopeContract, repo: str) -
     return tuple(problems)
 
 
+# ------------------------------------------------------- ISD-L-11 admission exercises
+# check_relationship_model_expands proves openness by PERFORMING the extension in memory,
+# for one population, through one mechanism. What follows generalises that to every
+# population whose declared admission path claims the change is data alone — the only
+# class where the claim can be falsified. An amendment-bound closure claims nothing of the
+# sort and is deliberately out of scope: a law that demanded exercisability of ISD-CE-01
+# would be false, and a false law gets disabled.
+#
+# Nothing is registered and nothing is written. Every exercise runs on a deep copy or a
+# freshly constructed reader, which is what keeps this inside ISD-BND-08.
+
+
+def _pointer(document: Any, pointer: str) -> Any:
+    """Resolve a slash-delimited pointer into a loaded document, or return None."""
+    node = document
+    for token in [part for part in pointer.split("/") if part]:
+        if not isinstance(node, Mapping) or token not in node:
+            return None
+        node = node[token]
+    return node
+
+
+def _synthetic_member(exercise: AdmissionExercise, population: list[Any], prefix: str) -> Any:
+    """Build the probe member: a declared sibling, with the declared overrides applied.
+
+    Deriving it from a sibling rather than writing a literal is what makes the probe
+    well-formed by construction for a population this engine knows nothing about.
+    """
+    overrides = exercise.target.get("probe_overrides")
+    if not isinstance(overrides, Mapping):
+        raise InfiniteScopeError(f"{exercise.exercise_id}: target declares no probe_overrides")
+    index = exercise.target.get("probe_from_sibling")
+    member: Any
+    if isinstance(index, int) and 0 <= index < len(population):
+        member = copy.deepcopy(population[index])
+    else:
+        member = {}
+    if not isinstance(member, dict):
+        raise InfiniteScopeError(f"{exercise.exercise_id}: sibling member is not a mapping")
+    member.update(copy.deepcopy(dict(overrides)))
+    identifier = str(member.get(str(exercise.target.get("id_field", "id")), ""))
+    if prefix and not identifier.startswith(prefix):
+        raise InfiniteScopeError(
+            f"{exercise.exercise_id}: probe id {identifier!r} does not carry the declared "
+            f"prefix {prefix!r}, so it could collide with a real member"
+        )
+    return member
+
+
+def _appended_document(exercise: AdmissionExercise, repo: str, prefix: str) -> Any:
+    """Return a DEEP COPY of the declared document with one synthetic member appended."""
+    document = _read_json(repo, exercise.declared_owner)
+    if document is None:
+        raise InfiniteScopeError(
+            f"{exercise.exercise_id}: {exercise.declared_owner} is absent or unparseable"
+        )
+    mutated = copy.deepcopy(document)
+    pointer = str(exercise.target.get("pointer", ""))
+    population = _pointer(mutated, pointer)
+    if not isinstance(population, list):
+        raise InfiniteScopeError(
+            f"{exercise.exercise_id}: pointer {pointer!r} does not resolve to a list"
+        )
+    population.append(_synthetic_member(exercise, population, prefix))
+    return mutated
+
+
+def form_document_append(exercise: AdmissionExercise, repo: str, prefix: str) -> Any:
+    """Deliver the appended document to consumers as a plain mapping."""
+    return _appended_document(exercise, repo, prefix)
+
+
+def form_reader_document_append(exercise: AdmissionExercise, repo: str, prefix: str) -> Any:
+    """Deliver the appended document through the owner's own declared reader.
+
+    Distinct from :func:`form_document_append` because the reader is where that owner's
+    structural validation lives: an admission this form admits has passed the owner's real
+    read path, not merely a dictionary update.
+    """
+    mutated = _appended_document(exercise, repo, prefix)
+    module = str(exercise.target.get("reader_module", ""))
+    dotted = str(exercise.target.get("reader_function", ""))
+    if not module or not dotted:
+        raise InfiniteScopeError(f"{exercise.exercise_id}: target declares no reader")
+    head, _, rest = dotted.partition(".")
+    factory = _symbol(module, head)
+    for attribute in [part for part in rest.split(".") if part]:
+        factory = getattr(factory, attribute)
+    return factory(mutated, source=f"<{exercise.exercise_id} in-memory probe>")
+
+
+#: Admission form to the handler that performs it. Two-way, exactly like LAW_CHECKS: an
+#: exercise naming an unimplemented form cannot be performed, and a form no exercise names
+#: is dead code wearing the appearance of exercisability. Disclosed as ISD-CE-11.
+ADMISSION_FORMS: dict[str, Callable[[AdmissionExercise, str, str], Any]] = {
+    "document_append": form_document_append,
+    "reader_document_append": form_reader_document_append,
+}
+
+
+def _callable_refusal(consumer: ExerciseConsumer, subject: Any) -> str:
+    """Re-evaluate one importable consumer over the admitted subject."""
+    try:
+        function = _symbol(consumer.module, consumer.function)
+    except (ImportError, AttributeError) as exc:
+        return f"consumer {consumer.module}.{consumer.function} is unusable: {exc}"
+    try:
+        outcome = function(subject)
+    except Exception as exc:  # noqa: BLE001 - any refusal is the measurement
+        return f"{type(exc).__name__}: {exc}"
+    if isinstance(outcome, str):
+        return outcome
+    if isinstance(outcome, list | tuple):
+        return "; ".join(str(item) for item in outcome)
+    return ""
+
+
+def _population_literals(repo: str, consumer: ExerciseConsumer) -> tuple[str, ...]:
+    """Locate assertions binding a literal count to the declared population.
+
+    A static read, never an execution: the gate spawns no subprocess and runs no test. The
+    subject is resolved through local bindings, so a count over a comprehension derived
+    from the population is found even though the comparison names a local.
+    """
+    found: list[str] = []
+    for relpath in consumer.paths:
+        text = _read_text(repo, relpath)
+        if text is None:
+            found.append(f"{relpath}: declared consumer path is unreadable")
+            continue
+        try:
+            tree = ast.parse(text)
+        except SyntaxError as exc:
+            found.append(f"{relpath}: does not parse: {exc}")
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef):
+                continue
+            bound: dict[str, str] = {}
+            for inner in ast.walk(node):
+                if isinstance(inner, ast.Assign):
+                    for target in inner.targets:
+                        if isinstance(target, ast.Name):
+                            bound[target.id] = ast.unparse(inner.value)
+            for inner in ast.walk(node):
+                located = _literal_count_subject(inner)
+                if located is None:
+                    continue
+                subject, value = located
+                trail = subject
+                for _ in range(6):
+                    base = trail.split("[")[0].split(".")[0].strip()
+                    if base in bound and bound[base] != trail:
+                        trail = bound[base]
+                    else:
+                        break
+                if any(token in trail or token in subject for token in consumer.population_tokens):
+                    found.append(
+                        f"{relpath}:{inner.lineno} binds {value} to {subject!r} "
+                        f"(in {node.name})"
+                    )
+    return tuple(found)
+
+
+def _literal_count_subject(node: ast.AST) -> tuple[str, int] | None:
+    """Return ``(subject, literal)`` when *node* compares a population size to an integer."""
+    if not isinstance(node, ast.Compare) or len(node.ops) != 1:
+        return None
+    if not isinstance(node.ops[0], ast.Eq | ast.NotEq):
+        return None
+    for left, right in ((node.left, node.comparators[0]), (node.comparators[0], node.left)):
+        if not isinstance(right, ast.Constant):
+            continue
+        if not isinstance(right.value, int) or isinstance(right.value, bool):
+            continue
+        if isinstance(left, ast.Call) and isinstance(left.func, ast.Name):
+            if left.func.id == "len" and left.args:
+                return ast.unparse(left.args[0]), right.value
+        subject = ast.unparse(left)
+        if "count" in subject.lower():
+            return subject, right.value
+    return None
+
+
+def _consumer_refusal(consumer: ExerciseConsumer, repo: str, subject: Any) -> str:
+    """Return this consumer's refusal, or an empty string when it admits."""
+    if consumer.kind == "callable":
+        return _callable_refusal(consumer, subject)
+    if consumer.kind == "assertion_scan":
+        return "; ".join(_population_literals(repo, consumer))
+    return f"consumer kind {consumer.kind!r} is not a kind this law can re-evaluate"
+
+
+def check_admission_path_exercisability(
+    contract: InfiniteScopeContract, repo: str
+) -> tuple[str, ...]:
+    """ISD-L-11 — every declared data-only admission path is exercised, and refusals are named."""
+    problems: list[str] = []
+    if not contract.admission_exercises:
+        return (
+            "no admission exercise is declared, so every claim of data-only admission is "
+            "unexercised and this law would be vacuous rather than satisfied",
+        )
+    for exercise in contract.admission_exercises:
+        prefix = f"{exercise.exercise_id}"
+        if not exercise.admission.strip():
+            problems.append(f"{prefix}: declares no admission path")
+        if not _exists(repo, exercise.declared_owner):
+            problems.append(f"{prefix}: declared owner {exercise.declared_owner} does not exist")
+            continue
+        handler = ADMISSION_FORMS.get(exercise.form)
+        if handler is None:
+            problems.append(f"{prefix}: names form {exercise.form!r}, which is not implemented")
+            continue
+        try:
+            subject = handler(exercise, repo, contract.probe_id_prefix)
+        except InfiniteScopeError as exc:
+            problems.append(f"{prefix}: the admission could not be performed: {exc}")
+            continue
+        except Exception as exc:  # noqa: BLE001 - an unperformable admission is a finding
+            problems.append(
+                f"{prefix}: the admission could not be performed: {type(exc).__name__}: {exc}"
+            )
+            continue
+        for consumer in exercise.consumers:
+            actual = _consumer_refusal(consumer, repo, subject)
+            problems.extend(_reconcile(exercise, consumer, actual))
+    return tuple(problems)
+
+
+def _reconcile(exercise: AdmissionExercise, consumer: ExerciseConsumer, actual: str) -> list[str]:
+    """Hold the declared refusal against the measured one, as a ratchet in both directions."""
+    where = f"{exercise.exercise_id} [{exercise.population_id}]"
+    owner = consumer.required_owner
+    if consumer.refuses_today:
+        if not actual:
+            return [
+                f"{where}: the refusal recorded against {owner} no longer occurs, so the "
+                f"record is stale and {consumer.gap} may be closed — correct the declaration"
+            ]
+        if consumer.expected_refusal not in actual:
+            return [
+                f"{where}: {owner} refuses differently from the record. "
+                f"recorded {consumer.expected_refusal!r}, measured {actual!r}"
+            ]
+        return []
+    if actual:
+        return [
+            f"{where}: admission {exercise.admission[:80]!r} is REFUSED by {owner} "
+            f"— {actual} — and no refusal is recorded for it"
+        ]
+    return []
+
+
 #: Law check name to implementation. Every declared law's ``check`` must appear here, and
 #: every entry here must be claimed by a law, or the contract refuses to construct.
 LAW_CHECKS: dict[str, Callable[[InfiniteScopeContract, str], tuple[str, ...]]] = {
@@ -546,6 +804,7 @@ LAW_CHECKS: dict[str, Callable[[InfiniteScopeContract, str], tuple[str, ...]]] =
     "baseline_temporal_qualification": check_baseline_temporal_qualification,
     "technology_is_evolutionary_state": check_technology_is_evolutionary_state,
     "capability_seed_openness": check_capability_seed_openness,
+    "admission_path_exercisability": check_admission_path_exercisability,
 }
 
 

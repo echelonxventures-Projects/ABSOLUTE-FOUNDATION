@@ -478,7 +478,7 @@ run_stage "universal object birth contract (UOBC-000001, identity before existen
 # member is admitted. Ten enumerations are disclosed; one is disclosed as unintentional
 # and carries gap ISD-G-01, which is the honest answer rather than a silent pass.
 #
-# The ten laws are each computed, never asserted: ISD-L-01 scope capacity, L-02 direction
+# The eleven laws are each computed, never asserted: ISD-L-01 scope capacity, L-02 direction
 # capacity (the edge schema's type must be pattern-bound, never enum-bound), L-03 the
 # principle inherits its own lifecycle and holds a birth record, L-04 the lifecycle stage
 # graph declares itself open AND its executable projection has not drifted, L-05 the
@@ -486,7 +486,11 @@ run_stage "universal object birth contract (UOBC-000001, identity before existen
 # new term IN MEMORY without mutating the original — openness performed, not claimed —
 # L-07 no active permanence declaration (a ratchet over 15 classified sites), L-08 every
 # baseline surface parses its coordinate or discloses the owner it is deferred to, L-09 no
-# runtime pin and no version ceiling, L-10 the capability model declares itself non-final.
+# runtime pin and no version ceiling, L-10 the capability model declares itself non-final,
+# L-11 every population whose admission path claims the change is data alone admits a
+# synthetic member through that path IN MEMORY, and every component that refuses is named
+# with the owner that must act — a recorded refusal is evidence, and it is held as a
+# ratchet in both directions so it cannot go stale.
 #
 # OBSERVE MODE. It reads the declaration, reads declared files, imports located modules
 # in-process, computes, and writes nothing — including to gitignored paths. No clock, no

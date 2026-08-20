@@ -273,6 +273,86 @@ class CapabilityEnumeration:
 
 
 @dataclass(frozen=True, slots=True)
+class ExerciseConsumer:
+    """One surface re-evaluated after a synthetic member is admitted, and its owner.
+
+    ``expected_refusal`` is the load-bearing field. A consumer that names one is DECLARED
+    to refuse today, and :func:`~engine.infinite_scope.contract.check_admission_path_exercisability`
+    holds that as a ratchet in both directions: the recorded refusal must still occur, and
+    a refusal nobody recorded is a finding. That is what lets a refusing exercise be
+    evidence rather than a red gate — and what stops the evidence from going stale, because
+    the day an owner corrects the surface the recorded refusal stops occurring and the law
+    refuses until the declaration is corrected too.
+    """
+
+    kind: str
+    required_owner: str
+    module: str
+    function: str
+    paths: tuple[str, ...]
+    population_tokens: tuple[str, ...]
+    expected_refusal: str
+    gap: str
+
+    @classmethod
+    def of(cls, entry: Mapping[str, Any], context: str) -> ExerciseConsumer:
+        """Rehydrate one consumer."""
+        return cls(
+            kind=_require_text(entry, "kind", context),
+            required_owner=_require_text(entry, "required_owner", context),
+            module=str(entry.get("module", "")),
+            function=str(entry.get("function", "")),
+            paths=tuple(str(path) for path in entry.get("paths", ())),
+            population_tokens=tuple(str(token) for token in entry.get("population_tokens", ())),
+            expected_refusal=str(entry.get("expected_refusal", "")),
+            gap=str(entry.get("gap", "")),
+        )
+
+    @property
+    def refuses_today(self) -> bool:
+        """Whether this consumer is declared to refuse the admission as things stand."""
+        return bool(self.expected_refusal.strip())
+
+
+@dataclass(frozen=True, slots=True)
+class AdmissionExercise:
+    """One declared-open population, its admission path, and what re-reads it.
+
+    The five fields a failure must name — population, declared owner, admission path,
+    refusing component and required owner — are all held here or on the consumers, so an
+    evidence record is a projection of the declaration and never a string assembled in the
+    engine.
+    """
+
+    exercise_id: str
+    population_id: str
+    declared_owner: str
+    admission: str
+    form: str
+    target: Mapping[str, Any]
+    consumers: tuple[ExerciseConsumer, ...]
+    expected: str
+
+    @classmethod
+    def of(cls, entry: Mapping[str, Any]) -> AdmissionExercise:
+        """Rehydrate one exercise."""
+        exercise_id = _require_text(entry, "id", "admission exercise")
+        consumers = entry.get("consumers")
+        if not isinstance(consumers, list):
+            raise InfiniteScopeError(f"{exercise_id}: consumers is absent or not a list")
+        return cls(
+            exercise_id=exercise_id,
+            population_id=_require_text(entry, "population_id", exercise_id),
+            declared_owner=_require_text(entry, "declared_owner", exercise_id),
+            admission=str(entry.get("admission", "")),
+            form=_require_text(entry, "form", exercise_id),
+            target=dict(_require_mapping(entry, "target")),
+            consumers=tuple(ExerciseConsumer.of(item, exercise_id) for item in consumers),
+            expected=_require_text(entry, "expected", exercise_id),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class InfiniteScopeContract:
     """The rehydrated UISD-000001 declaration."""
 
@@ -298,6 +378,8 @@ class InfiniteScopeContract:
     self_application: Mapping[str, Any]
     lifecycle_inheritance: Mapping[str, Any]
     gate: Mapping[str, Any]
+    probe_id_prefix: str
+    admission_exercises: tuple[AdmissionExercise, ...]
 
     @classmethod
     def from_declaration(cls, doc: Mapping[str, Any]) -> InfiniteScopeContract:
@@ -307,6 +389,7 @@ class InfiniteScopeContract:
         baseline = _require_mapping(doc, "baseline_temporal_requirement")
         technology = _require_mapping(doc, "technology_evolution")
         capability = _require_mapping(doc, "capability_seed_model")
+        exercisability = _require_mapping(doc, "admission_exercisability")
         return cls(
             artifact_id=_require_text(doc, "artifact_id", "declaration"),
             name=_require_text(doc, "name", "declaration"),
@@ -346,13 +429,29 @@ class InfiniteScopeContract:
             self_application=dict(_require_mapping(doc, "self_application")),
             lifecycle_inheritance=dict(_require_mapping(doc, "lifecycle_inheritance")),
             gate=dict(_require_mapping(doc, "gate")),
+            probe_id_prefix=str(exercisability.get("probe_id_prefix", "")),
+            admission_exercises=tuple(
+                AdmissionExercise.of(entry)
+                for entry in _require_sequence(exercisability, "exercises")
+            ),
         )
 
-    def validate(self, available_checks: Iterable[str]) -> tuple[str, ...]:
+    def validate(
+        self,
+        available_checks: Iterable[str],
+        available_forms: Iterable[str] | None = None,
+    ) -> tuple[str, ...]:
         """Report every reason the contract could not be measured, all at once.
 
         Refuses in both directions: a law whose check is missing cannot be computed, and
-        a check no law claims is dead code wearing the appearance of enforcement.
+        a check no law claims is dead code wearing the appearance of enforcement. The same
+        both-directions rule is applied to admission-exercise forms when *available_forms*
+        is supplied — an exercise naming a form nothing implements cannot be performed, and
+        a form no exercise names is dead code wearing the appearance of exercisability.
+
+        *available_forms* defaults to ``None``, meaning "the caller did not supply the form
+        registry, so do not measure it". :func:`~engine.infinite_scope.contract.load_contract`
+        always supplies it, so the live path is never the unmeasured one.
         """
         available = frozenset(available_checks)
         problems: list[str] = []
@@ -382,7 +481,53 @@ class InfiniteScopeContract:
                 problems.append(
                     f"freeze_scan: count-enforced class {site_class!r} is not a declared class"
                 )
+        problems.extend(self._exercise_problems(available_forms))
         return tuple(problems)
+
+    def _exercise_problems(self, available_forms: Iterable[str] | None) -> list[str]:
+        """Report every reason an admission exercise could not be performed."""
+        problems: list[str] = []
+        seen: set[str] = set()
+        for exercise in self.admission_exercises:
+            if exercise.exercise_id in seen:
+                problems.append(f"{exercise.exercise_id}: declared more than once")
+            seen.add(exercise.exercise_id)
+            if exercise.expected not in ("admitted", "refused"):
+                problems.append(
+                    f"{exercise.exercise_id}: expected is {exercise.expected!r}, "
+                    "which is neither 'admitted' nor 'refused'"
+                )
+            recorded = [consumer for consumer in exercise.consumers if consumer.refuses_today]
+            if exercise.expected == "refused" and not recorded:
+                problems.append(
+                    f"{exercise.exercise_id}: expects a refusal and records none, so the "
+                    "refusing component is unnamed"
+                )
+            if exercise.expected == "admitted" and recorded:
+                problems.append(
+                    f"{exercise.exercise_id}: expects admission while recording a refusal on "
+                    f"{recorded[0].required_owner}"
+                )
+            for consumer in recorded:
+                if not consumer.gap.strip():
+                    problems.append(
+                        f"{exercise.exercise_id}: records a refusal on "
+                        f"{consumer.required_owner} and names no gap, so it is an "
+                        "undisclosed finite assumption"
+                    )
+        if available_forms is None:
+            return problems
+        forms = frozenset(available_forms)
+        claimed = {exercise.form for exercise in self.admission_exercises}
+        for exercise in self.admission_exercises:
+            if exercise.form not in forms:
+                problems.append(
+                    f"{exercise.exercise_id}: names form {exercise.form!r}, "
+                    "which is not implemented"
+                )
+        for orphan in sorted(forms - claimed):
+            problems.append(f"form {orphan!r} is implemented but no exercise names it")
+        return problems
 
 
 #: The nine mandatory declaration sections, named so a partial declaration fails loudly.
@@ -400,10 +545,12 @@ DECLARATION_SECTIONS: tuple[str, ...] = (
 
 __all__ = [
     "DECLARATION_SECTIONS",
+    "AdmissionExercise",
     "BaselineSurface",
     "CapabilityEnumeration",
     "ClosedEnumeration",
     "DeclaredPin",
+    "ExerciseConsumer",
     "ExpansionAxis",
     "FreezeScan",
     "InfiniteScopeContract",

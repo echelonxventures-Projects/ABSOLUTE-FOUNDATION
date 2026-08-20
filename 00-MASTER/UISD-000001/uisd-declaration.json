@@ -24,7 +24,8 @@
     { "id": "ISD-AX-07", "axis": "technology", "capacity": "unbounded", "measured_by": "ISD-L-09" },
     { "id": "ISD-AX-08", "axis": "temporal", "capacity": "unbounded", "measured_by": "ISD-L-08" },
     { "id": "ISD-AX-09", "axis": "self", "capacity": "unbounded", "measured_by": "ISD-L-03" },
-    { "id": "ISD-AX-10", "axis": "lifecycle-vocabulary", "capacity": "unbounded", "measured_by": "ISD-L-07" }
+    { "id": "ISD-AX-10", "axis": "lifecycle-vocabulary", "capacity": "unbounded", "measured_by": "ISD-L-07" },
+    {"id": "ISD-AX-11", "axis": "population", "capacity": "unbounded", "measured_by": "ISD-L-11"}
   ],
 
   "laws": [
@@ -37,7 +38,8 @@
     { "id": "ISD-L-07", "title": "No Active Permanent Freeze", "statement": "No permanence phrase appears as an active lifecycle declaration in the scanned roots. Every occurrence is a disclosed, classified site, no site is classified A, and no historical, identity-bearing or constitutional site changes its occurrence count.", "check": "no_active_permanence_declaration" },
     { "id": "ISD-L-08", "title": "Baseline Temporal Qualification", "statement": "Every declared baseline surface either carries a temporal coordinate that parses under CMG-000002, or discloses that it does not and names the owner the qualification is deferred to. Undisclosed non-conformance is refused.", "check": "baseline_temporal_qualification" },
     { "id": "ISD-L-09", "title": "Technology Is An Evolutionary State", "statement": "No runtime dependency is pinned, the language requirement is a floor with no ceiling, and every verification-toolchain pin is disclosed with a reason. A technology version is an evolutionary state, never a constitutional truth.", "check": "technology_is_evolutionary_state" },
-    { "id": "ISD-L-10", "title": "Capability Seed Openness", "statement": "The capability model is a seed, not a final universe: it declares itself non-final and every declared capability enumeration names its admission path.", "check": "capability_seed_openness" }
+    { "id": "ISD-L-10", "title": "Capability Seed Openness", "statement": "The capability model is a seed, not a final universe: it declares itself non-final and every declared capability enumeration names its admission path.", "check": "capability_seed_openness" },
+    {"id": "ISD-L-11", "title": "Admission Path Exercisability", "statement": "Every population whose declared admission path claims the change is data alone admits a synthetic member through that path, in memory, mutating nothing — and every component that refuses is named together with the owner that must act.", "check": "admission_path_exercisability"}
   ],
   "$law_checks": "Every law names a check that computes its own compliance. A law with no reachable check would be manual governance, so the contract refuses to construct itself if any check is missing, and refuses if a check is implemented but unclaimed by any law.",
 
@@ -131,6 +133,15 @@
       "population": 5,
       "closing_invariant": "Declared outright in the declaration: 'closed set ... No sixth class is created' (AUDIT, DEBUG, IMPROVEMENT, EXECUTION, VALIDATION)",
       "admission": "Amendment of the UGA declaration by its owner. Disclosed closure, not silent closure.",
+      "intentional": true
+    },
+    {
+      "id": "ISD-CE-11",
+      "enumeration": "ADMISSION_FORMS — the admission mechanisms ISD-L-11 can perform",
+      "declared_at": "engine/infinite_scope/contract.py",
+      "population": 2,
+      "closing_invariant": "An exercise naming a form nothing implements cannot be performed, and a form no exercise names is dead code wearing the appearance of exercisability. InfiniteScopeContract.validate refuses both directions, exactly as it does for LAW_CHECKS, so the set cannot drift from its claimants.",
+      "admission": "Two-sided registration in one change, the ISD-CE-03 shape: register a handler in ADMISSION_FORMS and name it from an exercise in admission_exercisability. Registering one side alone fails the contract. The closure is disclosed rather than hidden because a law that measures undisclosed closure may not carry one.",
       "intentional": true
     }
   ],
@@ -319,6 +330,128 @@
       { "id": "ISD-CS-08", "enumeration": "UPF architectural proof categories", "declared_at": "00-MASTER/UPF-000001/upf-provider.json", "population_at_baseline": 11, "open": true, "admission": "Register the category meta-type through engine/provider/framework.py register_category, then append an entry to `architectural_proof_categories` to bring it into the certified proof set. No framework change and no workflow change: .github/workflows/uprf-gate.yml declares that 'a previously unknown provider category is admitted by registration only'. AP-11 UnknownFutureProvider is the declared future receptor. The runtime registration is the proof surface; this declaration is the admission record, because engine/provider holds no persistence and no gate observes a registration that no artifact records." }
     ],
     "$seed_meaning": "These are the capability enumerations DISCOVERED at baseline bb9c27d2. They are not the final universe. Future capabilities remain discoverable through the admission paths named above, and an unknown capability's arrival requires no amendment of this declaration — only an append."
+  },
+
+  "admission_exercisability": {
+    "$why": "Openness declared in an admission string is a promise. This section is the set of promises ISD-L-11 walks, in memory, on every gate run. check_relationship_model_expands already proved one population open by PERFORMING the extension; this generalises that to every population whose admission text claims the change is data alone — the only class where the claim can be falsified. An amendment-bound closure claims nothing of the sort and is deliberately absent: a law demanding exercisability of ISD-CE-01 would be false, and a false law gets disabled.",
+    "$nothing_is_registered": "Every exercise runs on a deep copy or a freshly constructed reader. Nothing is written, nothing is registered and no identifier is allocated, which is what keeps this inside ISD-BND-08. The probe id carries probe_id_prefix so it can never collide with a real member, and the handler refuses a probe whose id does not carry it.",
+    "$a_refusal_is_evidence_not_a_red_gate": "An exercise that refuses today records the refusal against the component that produces it and the gap that owns it. The law then holds that record as a ratchet in BOTH directions: a recorded refusal that stops occurring fails the law until the declaration is corrected, and a refusal nobody recorded fails it immediately. That is what makes a known contradiction admissible evidence rather than a permanently red gate, and what stops the evidence from quietly going stale.",
+    "probe_id_prefix": "isd-admission-probe",
+    "exercises": [
+      {
+        "id": "ISD-AE-01",
+        "population_id": "UCL-MANIFEST-001 — the constitutional stage graph",
+        "declared_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "admission": "Append a node record to `nodes`, or add another manifest matching the located manifest pattern. No engine change, no declaration change, no architectural redesign.",
+        "form": "document_append",
+        "target": {
+          "pointer": "/nodes",
+          "id_field": "id",
+          "probe_from_sibling": 0,
+          "probe_overrides": {
+            "id": "isd-admission-probe-UCL-S-0455",
+            "stage": "In-memory admission probe",
+            "ordinal": 455,
+            "group": "ELEVATION",
+            "depends_on": [],
+            "binds": [],
+            "evidence": []
+          }
+        },
+        "expected": "refused",
+        "consumers": [
+          {
+            "kind": "callable",
+            "module": "engine.nucleus.lifecycle",
+            "function": "verify_manifest_alignment",
+            "required_owner": "engine/nucleus/ — STAGE_DECLARATIONS at lifecycle.py:119 holds forty-five literal tuples",
+            "expected_refusal": "present in manifest, absent from STAGES",
+            "gap": "ISD-G-10"
+          },
+          {
+            "kind": "assertion_scan",
+            "paths": [
+              "engine/tests/constitution/test_stages.py",
+              "engine/tests/constitution/test_cli.py",
+              "engine/tests/constitution/test_acceptance_and_evolution.py",
+              "engine/tests/nucleus/test_lifecycle_lineage_evolution.py"
+            ],
+            "population_tokens": [
+              "STAGES",
+              "stage_count",
+              "faculty_count",
+              "outcomes",
+              "nodes",
+              "declared",
+              "satisfied"
+            ],
+            "required_owner": "engine/constitution/ and engine/nucleus/ — assertions binding the literal 45",
+            "expected_refusal": "binds 45",
+            "gap": "ISD-G-10"
+          }
+        ]
+      },
+      {
+        "id": "ISD-AE-02",
+        "population_id": "closed_enumeration_disclosures — this declaration's own list",
+        "declared_owner": "00-MASTER/UISD-000001/uisd-declaration.json",
+        "admission": "This list is itself open: it enumerates the closed enumerations located at baseline bb9c27d2 and is extended by appending an entry. ISD-L-01 measures that each entry names a closing invariant and an admission path, not that the list is exhaustive.",
+        "form": "document_append",
+        "target": {
+          "pointer": "/closed_enumeration_disclosures",
+          "id_field": "id",
+          "probe_from_sibling": 0,
+          "probe_overrides": {
+            "id": "isd-admission-probe-CE",
+            "enumeration": "in-memory admission probe",
+            "intentional": true
+          }
+        },
+        "expected": "refused",
+        "consumers": [
+          {
+            "kind": "assertion_scan",
+            "paths": [
+              "engine/tests/unit/test_infinite_scope.py"
+            ],
+            "population_tokens": [
+              "unintentional",
+              "closed_enumerations"
+            ],
+            "required_owner": "engine/infinite_scope/ — the suite that measures this declaration",
+            "expected_refusal": "binds 1",
+            "gap": "ISD-G-09"
+          }
+        ]
+      },
+      {
+        "id": "ISD-AE-03",
+        "population_id": "AUE-SRC — UAUE orchestration discovery sources (ISD-CS-07)",
+        "declared_owner": "00-MASTER/UAUE-000001/uaue-evolution.json",
+        "admission": "Append an entry to `discovery_sources` (AUE-SRC-01..09 at baseline); UCOS-UICO-000001 records this same route as its EXTEND disposition, 'data append to discovery_sources[]'.",
+        "form": "reader_document_append",
+        "target": {
+          "pointer": "/discovery_sources",
+          "id_field": "id",
+          "probe_from_sibling": 0,
+          "probe_overrides": {
+            "id": "isd-admission-probe-AUE-SRC"
+          },
+          "reader_module": "engine.uaue.resolution",
+          "reader_function": "DeclarationReader.from_document"
+        },
+        "expected": "admitted",
+        "$why_this_one_matters": "The positive control. A law that can only ever fail is indistinguishable from a broken law, so at least one declared admission path must be measured actually working. This one goes through UAUE's own validating read path, not a dictionary update, so 'admitted' means the owner accepted it.",
+        "consumers": [
+          {
+            "kind": "callable",
+            "module": "engine.uaue.authority",
+            "function": "load_evolution_authority",
+            "required_owner": "engine/uaue/ — no owner act is required; this path works"
+          }
+        ]
+      }
+    ]
   },
 
   "self_application": {
