@@ -192,6 +192,28 @@
       "why_this_is_not_a_demotion": "UGA measured 5757 objects that had no identity, no owner and no lifecycle, and nothing else in the repository could have. That work is untouched. What changes is one sentence about where its warrant comes from — which is the sentence that lets a gate tell it apart from an eighth authority nobody vetted."
     },
     {
+      "id": "UCOS-CEU-001",
+      "instrument": "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
+      "name": "Constitutional Existence Universe",
+      "role": "PROJECTION",
+      "relation": "PROJECTION",
+      "derives_under": ["UCKP-ART-02", "UCKP-ART-07", "UCKP-ART-18"],
+      "owns": "Existence representation — the registration, supersession and resurrection of a unit of any declared form, the declaration of a form nobody has named yet, and the relationship and topology INSTANCES registered as units.",
+      "may_never_own": "What a relationship IS. That is UCKP-ART-07 at engine/uckp/graph.py, and CAA-INV-05 permits exactly one owner of the model. Nor the object model, which is UCKO under UCKP-ART-02 and which this substrate projects. Nor identity allocation, which is UCOS-EPIC-001. Nor context resolution, which is UCXI-000001. Nor lifecycle stages, which are UCKP-ART-14.",
+      "$instance_versus_model": "A relationship INSTANCE is a thing that exists, so it is an entity and it is represented here. A relationship DEFINITION is a semantic contract and stays with the model authority. Separating the two is what keeps one owner for the model while leaving instance registration open, and it is why a new relationship needs no model change and a model refinement needs no re-registration.",
+      "$why_this_binding_was_missing": "The substrate has existed at engine/ceu/ and has been in use by engine/nucleus/authority.py, which resolved a prior duplicate ownership in its favour. It carried no declaration artifact and appeared nowhere in this register, so the one instrument that answers 'what may exist' was the one instrument no gate could tell apart from an authority nobody vetted. This entry recognises it; it transfers nothing."
+    },
+    {
+      "id": "UCXI-000001",
+      "instrument": "00-MASTER/UCXI-000001/ucxi-declaration.json",
+      "name": "Universal Context Intelligence",
+      "role": "PROJECTION",
+      "relation": "PROJECTION",
+      "derives_under": ["UCKP-ART-04", "UCKP-ART-07", "UCKP-ART-13"],
+      "owns": "The reference frame every context resolves in, the open taxonomy of context kinds, the extension mechanism that admits a future kind as data, and context binding resolution.",
+      "may_never_own": "Permission. CXL-10 is that context describes and never grants, and UCKP-ART-04 is the article that sentence is true under. Nor entity existence, which is UCOS-CEU-001. Nor the relationship model, which is UCKP-ART-07 — the eleven declared context relations are instances projecting it. Nor identity allocation, nor governance decisions, which are CEP-002 Article 28 and UCDA-000001."
+    },
+    {
       "id": "UCOS-EVIDENCE-UNIVERSE-001",
       "instrument": "00-BOOK/DATA/evidence-universe.json",
       "name": "Universal Evidence Universe",
@@ -584,16 +606,17 @@
     "authorities": [
       {"id": "UCKP-COMPLETENESS-REGISTRY", "home": "engine/uckp/registry.py", "role": "AUTHORITY", "bounded_question": "Does this object answer all 33 constitutional completeness facets (Article 6)?", "population": "193 objects (measured), scoped to providers under engine.uckp by default discover() root"},
       {"id": "UGA-EXISTENCE-REGISTRY", "home": "00-MASTER/UCOS-UGA-001/uga_engine.py", "role": "AUTHORITY", "bounded_question": "Does this version-controlled artifact exist, and who owns it, at repository scale?", "population": "5,789 objects (measured)"},
+      {"id": "CEU-EXISTENCE-SUBSTRATE", "home": "engine/ceu/", "role": "AUTHORITY", "bounded_question": "What forms of existence are declared, which units hold each form, and which relationship and topology instances hold among them?", "population": "154 units across 51 forms at catalogue bootstrap (measured); the seed is one catalogue, not a fixed vocabulary", "instrument": "00-MASTER/UCOS-CEU-001/ceu-declaration.json"},
       {"id": "REPOSITORY-INTELLIGENCE", "home": "platform/repository_intelligence/", "role": "AUTHORITY", "bounded_question": "What exists, what can be reused, what is missing, what conflicts, what is duplicated, and who owns it — across the whole repository substrate?"}
     ],
     "shared_primitive": {
       "home": "engine/uckp/canonical.py",
-      "note": "All three authorities compute content digests through the one Layer Zero primitive — UCKP directly, UGA transitively, and platform/repository_intelligence transitively via platform/foundation/contracts.py (line 35, re-exports engine.uckp.canonical.content_hash). Sharing the primitive does not transfer or share existence-tracking authority between the three."
+      "note": "All four authorities compute content digests through the one Layer Zero primitive — UCKP and UCOS-CEU-001 directly, UGA transitively, and platform/repository_intelligence transitively via platform/foundation/contracts.py (line 35, re-exports engine.uckp.canonical.content_hash). Sharing the primitive does not transfer or share existence-tracking authority between them."
     },
     "declared_projections": [
       {"from": "UGA-EXISTENCE-REGISTRY", "to": "UCKP-COMPLETENESS-REGISTRY", "facets_covered": ["OWNERSHIP", "IDENTITY", "LIFECYCLE"], "status": "DECLARED, NOT YET IMPLEMENTED", "mechanism": "a ucko_objects() provider reading UGA's existing classification (derive_owner(), classify_object()); no new fact is computed, only an existing one exposed", "note": "implementing this provider is code, out of scope for this binding — see PHASE-UCF-004-COMPLETENESS-GOVERNANCE-BINDING-IMPLEMENTATION-DETERMINATION.md §5"}
     ],
-    "second_authority_test": "A second authority over the SAME bounded question would be a rival. None was found: each of the three answers a structurally different question, confirmed by zero cross-imports in any direction and non-overlapping population definitions. Full analysis in PHASE-UCF-002-COMPLETENESS-ARCHITECTURE-DETERMINATION.md §1, §3."
+    "second_authority_test": "A second authority over the SAME bounded question would be a rival. None was found: each of the four answers a structurally different question, confirmed by zero cross-imports in any direction and non-overlapping population definitions. UCOS-CEU-001 was tested against the same condition when it was bound: it asks which forms of existence are DECLARED, where UGA asks whether a tracked artifact EXISTS and the completeness registry asks whether an object ANSWERS its facets; its 154 declared units overlap neither UGA's 5,789 tracked artifacts nor the registry's 193 objects, and it imports none of the three. Full analysis in PHASE-UCF-002-COMPLETENESS-ARCHITECTURE-DETERMINATION.md §1, §3."
   },
 
   "$lifecycle_comment": [
