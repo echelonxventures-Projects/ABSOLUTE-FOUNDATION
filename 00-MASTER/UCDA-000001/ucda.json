@@ -1,31 +1,31 @@
 {
   "by_disposition": {
-    "IMPLEMENTED": 37,
-    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 18,
+    "IMPLEMENTED": 38,
+    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 24,
     "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION": 11,
-    "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY": 43,
+    "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY": 46,
     "SUPERSEDED": 4
   },
   "by_stage": {
     "CERTIFICATION": 0,
     "CLOSURE": 25,
     "CONSTITUTIONAL-AGREEMENT": 0,
-    "DECISION-REGISTRATION": 0,
+    "DECISION-REGISTRATION": 6,
     "DISCUSSION": 0,
     "IMPLEMENTATION": 0,
-    "REPOSITORY-MAPPING": 45,
-    "REPOSITORY-TRUTH-UPDATE": 43,
+    "REPOSITORY-MAPPING": 48,
+    "REPOSITORY-TRUTH-UPDATE": 44,
     "VALIDATION": 0
   },
   "conversation_only": [],
   "coverage": {
-    "aggregate_percent": 94,
+    "aggregate_percent": 92,
     "by_criterion": {
-      "EQ-1": 45,
-      "EQ-2": 58,
-      "EQ-3": 59,
-      "EQ-4": 59,
-      "EQ-5": 57
+      "EQ-1": 50,
+      "EQ-2": 64,
+      "EQ-3": 64,
+      "EQ-4": 64,
+      "EQ-5": 64
     },
     "completeness_disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
     "criteria": [
@@ -35,11 +35,11 @@
       "EQ-4",
       "EQ-5"
     ],
-    "decisions_fully_covered": 45,
-    "decisions_measured": 59,
-    "decisions_partially_covered": 14,
-    "dimensions_covered": 278,
-    "dimensions_measured": 295,
+    "decisions_fully_covered": 49,
+    "decisions_measured": 66,
+    "decisions_partially_covered": 17,
+    "dimensions_covered": 306,
+    "dimensions_measured": 330,
     "partially_covered": [
       "DEC-ADAM-01",
       "DEC-ADAM-02",
@@ -47,6 +47,9 @@
       "DEC-ADAM-14",
       "DEC-ADAM-16",
       "DEC-ADR-0002",
+      "DEC-ADR-0005",
+      "DEC-ADR-0006",
+      "DEC-ADR-0008",
       "DEC-CAEM-01",
       "DEC-CAEM-02",
       "DEC-CAEM-05",
@@ -56,10 +59,10 @@
       "DEC-CAEM-14",
       "DEC-CAEM-16"
     ],
-    "representation_percent": 76,
+    "representation_percent": 74,
     "scope_decision_class": "architectural"
   },
-  "decision_total": 113,
+  "decision_total": 123,
   "decisions": [
     {
       "action_taken": "",
@@ -9974,11 +9977,881 @@
       "title": "The fifteen Ω-P proposition outcomes ARE dispositioned in the located Ω-P2-R transition matrix, and no second disposition store IS opened for them",
       "undispositioned": false,
       "work_package": null
+    },
+    {
+      "action_taken": "IMPLEMENTED — two declaration artifacts authored and both instruments bound; no authority created, none transferred.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "constitutional",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0003-constitutional-binding-of-ceu-and-ucxi.md",
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
+        "00-MASTER/UCXI-000001/ucxi-declaration.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0003",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Implemented at commit 86f17be4. CEU owns existence representation including relationship and topology INSTANCES; UCKP-ART-07 remains the sole owner of relationship semantics under CAA-INV-05; UCKO remains the sole object model under CAA-INV-07, which CEU projects. CEU is recorded as a fourth bounded authority in existence_resolution, whose declared model is MULTIPLE_INDEPENDENT_AUTHORITIES.",
+      "reasons": [],
+      "source_register": "adr/0003-constitutional-binding-of-ceu-and-ucxi.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Constitutional binding of UCOS-CEU-001 and UCXI-000001 — instance existence separated from semantic ownership",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": true,
+        "covered": 5,
+        "dimensions": [
+          {
+            "covered": true,
+            "criterion": "EQ-1",
+            "declared": [
+              "engine/infinite_scope/gate.py"
+            ],
+            "resolved": [
+              "engine/infinite_scope/gate.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "00-MASTER/UISD-000001/uisd-declaration.json"
+            ],
+            "resolved": [
+              "00-MASTER/UISD-000001/uisd-declaration.json"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "engine/infinite_scope/contract.py"
+            ],
+            "resolved": [
+              "engine/infinite_scope/contract.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-4",
+            "declared": [
+              "00-MASTER/UISD-000001/uisd-declaration.json"
+            ],
+            "resolved": [
+              "00-MASTER/UISD-000001/uisd-declaration.json"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/infinite_scope/model.py"
+            ],
+            "resolved": [
+              "engine/infinite_scope/model.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 100,
+        "shortfall": [],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0004-uisd-scope-extension-to-entity-applicability.md",
+        "00-MASTER/UISD-000001/uisd-declaration.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0004",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "UISD's standing is 'PERVASIVE PROPERTY, NOT AUTHORITY LAYER' and stays so. Measured today, ISD-L-07 scans six roots covering 1,892 of 5,989 eligible files.",
+      "reasons": [],
+      "source_register": "adr/0004-uisd-scope-extension-to-entity-applicability.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "Universal Expansion Principle applies to every Entity; UISD remains a property, not an authority",
+      "undispositioned": false,
+      "work_package": "WP-UCDA-019"
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 3,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "engine/context/taxonomy.py"
+            ],
+            "resolved": [
+              "engine/context/taxonomy.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "engine/context/constitution.py"
+            ],
+            "resolved": [
+              "engine/context/constitution.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/context/taxonomy.py"
+            ],
+            "resolved": [
+              "engine/context/taxonomy.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 60,
+        "shortfall": [
+          "EQ-1",
+          "EQ-4"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0005-measurement-as-a-context-and-entity.md",
+        "00-MASTER/UCXI-000001/ucxi-declaration.json",
+        "00-MASTER/UCOS-CEU-001/ceu-declaration.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0005",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "measurement and scale are already CEU bootstrap forms; the gap is the context kind and the unit population. No measurement engine or authority is created.",
+      "reasons": [],
+      "source_register": "adr/0005-measurement-as-a-context-and-entity.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "MEASUREMENT enters as the sixteenth UCXI context kind and as CEU entities",
+      "undispositioned": false,
+      "work_package": "WP-UCDA-020"
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 3,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "engine/ceu/existence.py"
+            ],
+            "resolved": [
+              "engine/ceu/existence.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-4",
+            "declared": [
+              "10-DATA/DATA-015-DATA-FOUNDATION-FREEZE-DETERMINATION.md"
+            ],
+            "resolved": [
+              "10-DATA/DATA-015-DATA-FOUNDATION-FREEZE-DETERMINATION.md"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/ceu/catalog.py"
+            ],
+            "resolved": [
+              "engine/ceu/catalog.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 60,
+        "shortfall": [
+          "EQ-1",
+          "EQ-3"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0006-entity-classification-authority-moves-to-ceu.md",
+        "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
+        "10-DATA/DATA-015-DATA-FOUNDATION-FREEZE-DETERMINATION.md"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0006",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "data/entity_meta.py declares a closed five-member EntityKind and never imports engine.ceu; platform/portal/contracts.py declares a second EntityKind with seven members. DATA-015 permits additive extension and supersession, never in-place modification.",
+      "reasons": [],
+      "source_register": "adr/0006-entity-classification-authority-moves-to-ceu.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "Entity classification authority moves to CEU; closed enums become derived projections",
+      "undispositioned": false,
+      "work_package": "WP-UCDA-021"
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0007-disclose-every-finite-enumeration.md",
+        "00-MASTER/UISD-000001/uisd-declaration.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0007",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Measured: 224 Enum classes in non-test engine/, platform/, intelligence/ and data/; 9 disclosed. Of the 25 naming entity, relationship, technology, storage or capability categories, 23 are undisclosed.",
+      "reasons": [],
+      "source_register": "adr/0007-disclose-every-finite-enumeration.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "Every finite enumeration is disclosed or migrated; no silent completeness claim survives",
+      "undispositioned": false,
+      "work_package": "WP-UCDA-022"
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 2,
+        "dimensions": [
+          {
+            "covered": true,
+            "criterion": "EQ-1",
+            "declared": [
+              "engine/kernel/compliance.py"
+            ],
+            "resolved": [
+              "engine/kernel/compliance.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/ceu/sufficiency.py"
+            ],
+            "resolved": [
+              "engine/ceu/sufficiency.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 40,
+        "shortfall": [
+          "EQ-2",
+          "EQ-3",
+          "EQ-4"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0008-unified-unknown-admission-verification.md",
+        "engine/kernel/compliance.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0008",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "engine/kernel/compliance.py already proves eleven non-Earth categories with kernel_unchanged True. The suite generalises that mechanism rather than adding a second one.",
+      "reasons": [],
+      "source_register": "adr/0008-unified-unknown-admission-verification.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "One verification suite proves unknown admission across every axis with an unchanged kernel",
+      "undispositioned": false,
+      "work_package": "WP-UCDA-023"
+    },
+    {
+      "action_taken": "REPRESENTED — no work package registered, because the capability is held and measured; the residual planetary default is carried separately by DEC-ADR-0012.",
+      "canonical_owner": "engine/uckp/execution.py (KNOWN_EXECUTION_KINDS, open by registration under UCKP-ART-17) with data/band10.py::_TECH_MARKERS as the fail-closed vendor-name refusal",
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": true,
+        "covered": 5,
+        "dimensions": [
+          {
+            "covered": true,
+            "criterion": "EQ-1",
+            "declared": [
+              "engine/uckp/execution.py"
+            ],
+            "resolved": [
+              "engine/uckp/execution.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "engine/uckp/capabilities.py"
+            ],
+            "resolved": [
+              "engine/uckp/capabilities.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "data/band10.py"
+            ],
+            "resolved": [
+              "data/band10.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-4",
+            "declared": [
+              "engine/uckp/law.py"
+            ],
+            "resolved": [
+              "engine/uckp/law.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/uckp/execution.py"
+            ],
+            "resolved": [
+              "engine/uckp/execution.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 100,
+        "shortfall": [],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "evidence_resolved": [
+        "engine/uckp/execution.py (KNOWN_EXECUTION_KINDS, open by registration under UCKP-ART-17) with data/band10.py::_TECH_MARKERS as the fail-closed vendor-name refusal",
+        "adr/0009-technology-independence-is-already-canonical.md",
+        "engine/uckp/execution.py",
+        "data/band10.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0009",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "KNOWN_EXECUTION_KINDS contains FUTURE_LANGUAGE, FUTURE_COMPUTE, AI_AGENT and QUANTUM and is consumed to generate capability projections, never to reject. Zero hardcoded human languages, currencies or units exist in the scanned surface.",
+      "reasons": [],
+      "source_register": "adr/0009-technology-independence-is-already-canonical.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-MAPPING",
+      "superseded_by": null,
+      "title": "Technology independence is represented by existing canonical capability",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "REPRESENTED — no platform-specific engine exists and none is required.",
+      "canonical_owner": "engine/nucleus/catalog.py (SEED_COMPOSITIONS, data) with engine/civilization/composition.py deriving plans from declarations",
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": true,
+        "covered": 5,
+        "dimensions": [
+          {
+            "covered": true,
+            "criterion": "EQ-1",
+            "declared": [
+              "engine/nucleus/catalog.py"
+            ],
+            "resolved": [
+              "engine/nucleus/catalog.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "engine/civilization/composition.py"
+            ],
+            "resolved": [
+              "engine/civilization/composition.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "engine/kernel/compliance.py"
+            ],
+            "resolved": [
+              "engine/kernel/compliance.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-4",
+            "declared": [
+              "engine/nucleus/lifecycle.py"
+            ],
+            "resolved": [
+              "engine/nucleus/lifecycle.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/nucleus/catalog.py"
+            ],
+            "resolved": [
+              "engine/nucleus/catalog.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 100,
+        "shortfall": [],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "evidence_resolved": [
+        "engine/nucleus/catalog.py (SEED_COMPOSITIONS, data) with engine/civilization/composition.py deriving plans from declarations",
+        "adr/0010-platform-composition-is-already-canonical.md",
+        "engine/nucleus/catalog.py",
+        "engine/civilization/composition.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0010",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Commerce, Amazon, Uber, ERP, CRM, healthcare, government, defence, scientific and research platforms are compositions of registered nuclei plus configuration, not nuclei. No function branches on a platform name — verified.",
+      "reasons": [],
+      "source_register": "adr/0010-platform-composition-is-already-canonical.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-MAPPING",
+      "superseded_by": null,
+      "title": "Platform composition is represented by existing canonical capability",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "REPRESENTED — no second evolution engine is created.",
+      "canonical_owner": "engine/uckp/evolution.py — the UCKP-ART-14 stage vocabulary; UAUE-000001 conducts the traversal and holds no copy of it",
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": true,
+        "covered": 5,
+        "dimensions": [
+          {
+            "covered": true,
+            "criterion": "EQ-1",
+            "declared": [
+              "engine/uaue/controller.py"
+            ],
+            "resolved": [
+              "engine/uaue/controller.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "engine/uckp/evolution.py"
+            ],
+            "resolved": [
+              "engine/uckp/evolution.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "00-MASTER/UAUE-000001/uaue-evolution.json"
+            ],
+            "resolved": [
+              "00-MASTER/UAUE-000001/uaue-evolution.json"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-4",
+            "declared": [
+              "engine/uckp/evolution.py"
+            ],
+            "resolved": [
+              "engine/uckp/evolution.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "00-MASTER/UCL-000001/ucl-stage-manifest.json"
+            ],
+            "resolved": [
+              "00-MASTER/UCL-000001/ucl-stage-manifest.json"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 100,
+        "shortfall": [],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "evidence_resolved": [
+        "engine/uckp/evolution.py — the UCKP-ART-14 stage vocabulary; UAUE-000001 conducts the traversal and holds no copy of it",
+        "adr/0011-self-learning-and-evolution-are-already-canonical.md",
+        "engine/uckp/evolution.py",
+        "00-MASTER/UAUE-000001/uaue-evolution.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0011",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "EVOLUTION_CYCLE declares fifteen stages, no stage is terminal, and the last returns to the first (ISD-L-05). ISD-L-04 holds that the stage graph admits a stage without an engine change, so ADAPTATION — which matches no current stage — would enter as a declaration.",
+      "reasons": [],
+      "source_register": "adr/0011-self-learning-and-evolution-are-already-canonical.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-MAPPING",
+      "superseded_by": null,
+      "title": "Self-learning and self-evolution are represented by existing canonical capability",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0012-remove-residual-planetary-default.md",
+        "engine/uckp/persistence.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0012",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "The single genuine hardcoded finite assumption found in engine/, platform/, intelligence/ and data/. Every other location hit is an anti-Earth-coupling gate, the temporal package's refusal text, or governed build-determinism normalization.",
+      "reasons": [],
+      "source_register": "adr/0012-remove-residual-planetary-default.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "Remove the residual planetary default from cloud persistence",
+      "undispositioned": false,
+      "work_package": "WP-UCDA-024"
     }
   ],
   "declaration_findings": [],
   "determination": "ASSIMILATED",
-  "evidence_references": 423,
+  "evidence_references": 453,
   "gate": "OPEN",
   "gate_exit": 0,
   "programme": {
@@ -10037,7 +10910,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "6f4bd4230c7d8e758ef5211d95be07b000e7125f9efa5c94166f5537fe1d0688",
+  "seal_sha256": "dd1a57a0c305313c382575a6a76c1e8354b3e60961299bc455d05bef926b7b9f",
   "undispositioned": [],
   "unevidenced": [],
   "unindexed": []

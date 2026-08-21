@@ -535,6 +535,72 @@
       "route": "MCOS-000001 supplies the derivation: engine/civilization/composition.py computes an execution order from capability declarations, the requesting context, the policies in force and the supplied evidence, and the rule that derives it is a registered, replaceable strategy. What it deliberately does NOT do is rewrite engine/factory/orchestrator.py::execute(), whose fixed six-step sequence remains the path generation actually takes. That file sits inside the EC-1 certified zone, and UCIC-001 Stage 4 makes an undeclared write to engine/** non-recoverable, so the wiring is an authorized act under its own declared additive surface — not a side effect of this programme. THIS package owns only that wiring. It does not re-register the composition capability, which is already discharged by DEC-MCOS-09, nor the declarative-composition decision, which is already registered as DEC-ADAM-14 against WP-UCDA-006 and is referenced here rather than duplicated.",
       "acceptance": "A single composition path exists: the plan derived by engine/civilization/composition.py is the order the located generation runtime executes, proven by a test that changes the plan through a registration and observes the executed order change; and no second ordering mechanism remains reachable.",
       "authorization_required": true
+    },
+    {
+      "id": "WP-UCDA-019",
+      "title": "Extend the UISD principle subject to Entity applicability and widen its measurement roots",
+      "discharges": [
+        "DEC-ADR-0004"
+      ],
+      "owner": "00-MASTER/UISD-000001/uisd-declaration.json (declaration owner); engine/infinite_scope/ reads it",
+      "route": "Two data edits to one declaration: widen the principle statement's subject from the ten named kinds to Entity-based applicability, and widen freeze_scan.roots beyond the six current roots so the delivery layers are measured. The phrase set gains 'FROZEN · IMMUTABLE', which the current nine phrases do not match. standing stays 'PERVASIVE PROPERTY, NOT AUTHORITY LAYER' — the edit must not touch it, because reading the principle as an authority is refused under CAA-INV-04, CAA-INV-07 and CMG Art LXXVI.6.",
+      "acceptance": "engine/infinite_scope/gate.py reports verdict OPEN with all declared laws holding, and ISD-L-07 measures a file count materially greater than the 1,892 of 5,989 it measures today.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCDA-020",
+      "title": "Admit MEASUREMENT as the sixteenth universal context kind",
+      "discharges": [
+        "DEC-ADR-0005"
+      ],
+      "owner": "UCXI-000001 — engine/context/taxonomy.py and engine/context/catalog.py",
+      "route": "ContextTaxonomy.extend() admits the kind as data, per CXL-02: a future context type is admitted by declaration, never invented at a call site. The catalog gains a seeded measurement context naming a located source. No consumer branches on the kind, so no consumer changes.",
+      "acceptance": "The taxonomy reports sixteen universal kinds, the context constitution still constructs with every one of its twelve laws checked, and a measurement context resolves in a frame.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCDA-021",
+      "title": "Move entity classification authority to CEU and leave the enums as projections",
+      "discharges": [
+        "DEC-ADR-0006"
+      ],
+      "owner": "UCOS-CEU-001 — engine/ceu/; data/*_meta.py and platform/portal/contracts.py hold the projections",
+      "route": "Classification units are registered in CEU for the kinds the closed enums currently own. The enums are retained and re-expressed as derived projections of those units so every existing reference keeps resolving and no knowledge is authored twice (UCKP-ART-03). The data/ family projects the frozen DF-1/DF-2 specification, whose declared change mode is append-only and supersession-only, so migration is additive and no frozen artifact is modified in place. The dependency direction data/ -> engine.ceu must be introduced without a cycle.",
+      "acceptance": "One entity model is reachable repository-wide; data/entity_meta.py:EntityKind and platform/portal/contracts.py:EntityKind both resolve to CEU classification units rather than declaring their own; no import cycle exists; every prior reference still resolves.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCDA-022",
+      "title": "Disclose or migrate every finite enumeration that claims completeness",
+      "discharges": [
+        "DEC-ADR-0007"
+      ],
+      "owner": "UISD-000001 holds the disclosures; the enum owners hold the migrations",
+      "route": "Each of the 25 measured enumerations naming entity types, relationship types, technologies, storage models or capability categories is classified: a true closed governance invariant is disclosed in closed_enumeration_disclosures with its closing invariant and admission path; a projection that can evolve moves authority under DEC-ADR-0006. Enumerations already open by a declared extension mechanism — ContextKind and its siblings, which carry ContextTaxonomy.extend() — are disclosed as known sets rather than migrated. Binary verdict enums make no claim about what can exist and are out of scope.",
+      "acceptance": "Every enumeration that claims completeness about what can exist is either disclosed with an admission path or has moved authority; ISD-L-01 holds with no silent closed enumeration remaining in the measured roots.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCDA-023",
+      "title": "Build one Universal Expansion Verification suite proving unknown admission",
+      "discharges": [
+        "DEC-ADR-0008"
+      ],
+      "owner": "engine/tests/ — reusing engine/kernel/compliance.py::kernel_source_fingerprint",
+      "route": "One suite admits an unknown entity, context, relationship, technology, language, currency, measurement, intelligence, platform composition and future concept through the ordinary registration path, and asserts the kernel source fingerprint is byte-identical before and after each. The mechanism already exists and passes for eleven non-Earth categories; this package generalises it across every axis the principle names rather than introducing a second proof mechanism.",
+      "acceptance": "The suite passes, and each case asserts kernel_unchanged is True; a deliberate regression that requires a code change to admit a concept makes the suite fail.",
+      "authorization_required": true
+    },
+    {
+      "id": "WP-UCDA-024",
+      "title": "Remove the residual planetary default from CloudPersistence",
+      "discharges": [
+        "DEC-ADR-0012"
+      ],
+      "owner": "engine/uckp/persistence.py",
+      "route": "region='planet-earth-1' ceases to be a default. Region becomes caller-supplied or context-resolved, so location is data rather than a value baked into a signature. The constructor is referenced nowhere else in the tree, so the blast radius is the adapter and its tests.",
+      "acceptance": "A repository-wide scan of engine/, platform/, intelligence/ and data/ returns no hardcoded planetary literal outside an anti-coupling gate, a refusal text, or governed build-determinism normalization.",
+      "authorization_required": true
     }
   ],
   "$decisions_comment": [
@@ -3444,6 +3510,254 @@
         "00-MASTER/EVOLUTION-001/Ω-P1-UNIVERSAL-CONSTITUTIONAL-KERNEL-DETERMINATION.md"
       ],
       "note": "Ω-P2-R §7 carries, for every one of the fifteen Ω-P propositions, exactly one replay outcome with its reason, its load-bearing theorems, its Repository Truth evidence, its governing clauses, its verbatim derivation and its adversarial replay: 7 FALSIFIED (R-D-01, R-F-01, R-D-03, R-D-04, R-D-07, R-D-08, R-B-14), 5 PROVEN (R-D-02, R-D-06, R-T-01, R-T-04, R-T-05), 1 UNKNOWN (R-D-05), 1 REUSE (R-T-02) and 1 WITHDRAWN (R-T-03). Its §9 certifies 0 contradictions, 0 cycles, 0 dependency inversions, 0 duplicated authority, 0 uncertified premises, 0 UNKNOWN dependencies and 0 outcomes outside the closed six-value vocabulary; its §11 records the GAP class empty and manufactures none. That is a complete disposition register for those propositions, held by a single located owner now admitted to Repository Truth. Re-recording the fifteen outcomes as fifteen entries here would duplicate a disposition store and create a competing truth, which CMG-INV-02 and the Knowledge Once principle forbid; this decision therefore registers the located owner rather than copying its content. The two questions Ω-P2-R leaves certified-UNKNOWN (R-D-05, and R-D-02 SCOPE-2 referred to AUTH-INF-001 under CL-XII.7) are recorded there as certified outcomes, not as absent dispositions — a certified UNKNOWN is a disposition of the proposition, and the questions themselves remain open for a future epoch. Decision class is constitutional rather than architectural because what is decided is where constitutional determinations are dispositioned, not an architectural mapping."
+    },
+    {
+      "id": "DEC-ADR-0003",
+      "title": "Constitutional binding of UCOS-CEU-001 and UCXI-000001 — instance existence separated from semantic ownership",
+      "decision_class": "constitutional",
+      "source_register": "adr/0003-constitutional-binding-of-ceu-and-ucxi.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0003-constitutional-binding-of-ceu-and-ucxi.md",
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
+        "00-MASTER/UCXI-000001/ucxi-declaration.json"
+      ],
+      "note": "Implemented at commit 86f17be4. CEU owns existence representation including relationship and topology INSTANCES; UCKP-ART-07 remains the sole owner of relationship semantics under CAA-INV-05; UCKO remains the sole object model under CAA-INV-07, which CEU projects. CEU is recorded as a fourth bounded authority in existence_resolution, whose declared model is MULTIPLE_INDEPENDENT_AUTHORITIES.",
+      "action_taken": "IMPLEMENTED — two declaration artifacts authored and both instruments bound; no authority created, none transferred."
+    },
+    {
+      "id": "DEC-ADR-0004",
+      "title": "Universal Expansion Principle applies to every Entity; UISD remains a property, not an authority",
+      "decision_class": "architectural",
+      "source_register": "adr/0004-uisd-scope-extension-to-entity-applicability.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "work_package": "WP-UCDA-019",
+      "evidence": [
+        "adr/0004-uisd-scope-extension-to-entity-applicability.md",
+        "00-MASTER/UISD-000001/uisd-declaration.json"
+      ],
+      "note": "UISD's standing is 'PERVASIVE PROPERTY, NOT AUTHORITY LAYER' and stays so. Measured today, ISD-L-07 scans six roots covering 1,892 of 5,989 eligible files.",
+      "coverage": {
+        "EQ-1": [
+          "engine/infinite_scope/gate.py"
+        ],
+        "EQ-2": [
+          "00-MASTER/UISD-000001/uisd-declaration.json"
+        ],
+        "EQ-3": [
+          "engine/infinite_scope/contract.py"
+        ],
+        "EQ-4": [
+          "00-MASTER/UISD-000001/uisd-declaration.json"
+        ],
+        "EQ-5": [
+          "engine/infinite_scope/model.py"
+        ]
+      }
+    },
+    {
+      "id": "DEC-ADR-0005",
+      "title": "MEASUREMENT enters as the sixteenth UCXI context kind and as CEU entities",
+      "decision_class": "architectural",
+      "source_register": "adr/0005-measurement-as-a-context-and-entity.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "work_package": "WP-UCDA-020",
+      "evidence": [
+        "adr/0005-measurement-as-a-context-and-entity.md",
+        "00-MASTER/UCXI-000001/ucxi-declaration.json",
+        "00-MASTER/UCOS-CEU-001/ceu-declaration.json"
+      ],
+      "note": "measurement and scale are already CEU bootstrap forms; the gap is the context kind and the unit population. No measurement engine or authority is created.",
+      "coverage": {
+        "EQ-2": [
+          "engine/context/taxonomy.py"
+        ],
+        "EQ-3": [
+          "engine/context/constitution.py"
+        ],
+        "EQ-5": [
+          "engine/context/taxonomy.py"
+        ]
+      }
+    },
+    {
+      "id": "DEC-ADR-0006",
+      "title": "Entity classification authority moves to CEU; closed enums become derived projections",
+      "decision_class": "architectural",
+      "source_register": "adr/0006-entity-classification-authority-moves-to-ceu.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "work_package": "WP-UCDA-021",
+      "evidence": [
+        "adr/0006-entity-classification-authority-moves-to-ceu.md",
+        "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
+        "10-DATA/DATA-015-DATA-FOUNDATION-FREEZE-DETERMINATION.md"
+      ],
+      "note": "data/entity_meta.py declares a closed five-member EntityKind and never imports engine.ceu; platform/portal/contracts.py declares a second EntityKind with seven members. DATA-015 permits additive extension and supersession, never in-place modification.",
+      "coverage": {
+        "EQ-2": [
+          "engine/ceu/existence.py"
+        ],
+        "EQ-4": [
+          "10-DATA/DATA-015-DATA-FOUNDATION-FREEZE-DETERMINATION.md"
+        ],
+        "EQ-5": [
+          "engine/ceu/catalog.py"
+        ]
+      }
+    },
+    {
+      "id": "DEC-ADR-0007",
+      "title": "Every finite enumeration is disclosed or migrated; no silent completeness claim survives",
+      "decision_class": "governance",
+      "source_register": "adr/0007-disclose-every-finite-enumeration.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "work_package": "WP-UCDA-022",
+      "evidence": [
+        "adr/0007-disclose-every-finite-enumeration.md",
+        "00-MASTER/UISD-000001/uisd-declaration.json"
+      ],
+      "note": "Measured: 224 Enum classes in non-test engine/, platform/, intelligence/ and data/; 9 disclosed. Of the 25 naming entity, relationship, technology, storage or capability categories, 23 are undisclosed."
+    },
+    {
+      "id": "DEC-ADR-0008",
+      "title": "One verification suite proves unknown admission across every axis with an unchanged kernel",
+      "decision_class": "architectural",
+      "source_register": "adr/0008-unified-unknown-admission-verification.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "work_package": "WP-UCDA-023",
+      "evidence": [
+        "adr/0008-unified-unknown-admission-verification.md",
+        "engine/kernel/compliance.py"
+      ],
+      "note": "engine/kernel/compliance.py already proves eleven non-Earth categories with kernel_unchanged True. The suite generalises that mechanism rather than adding a second one.",
+      "coverage": {
+        "EQ-1": [
+          "engine/kernel/compliance.py"
+        ],
+        "EQ-5": [
+          "engine/ceu/sufficiency.py"
+        ]
+      }
+    },
+    {
+      "id": "DEC-ADR-0009",
+      "title": "Technology independence is represented by existing canonical capability",
+      "decision_class": "architectural",
+      "source_register": "adr/0009-technology-independence-is-already-canonical.md",
+      "stage": "REPOSITORY-MAPPING",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "canonical_owner": "engine/uckp/execution.py (KNOWN_EXECUTION_KINDS, open by registration under UCKP-ART-17) with data/band10.py::_TECH_MARKERS as the fail-closed vendor-name refusal",
+      "evidence": [
+        "adr/0009-technology-independence-is-already-canonical.md",
+        "engine/uckp/execution.py",
+        "data/band10.py"
+      ],
+      "note": "KNOWN_EXECUTION_KINDS contains FUTURE_LANGUAGE, FUTURE_COMPUTE, AI_AGENT and QUANTUM and is consumed to generate capability projections, never to reject. Zero hardcoded human languages, currencies or units exist in the scanned surface.",
+      "action_taken": "REPRESENTED — no work package registered, because the capability is held and measured; the residual planetary default is carried separately by DEC-ADR-0012.",
+      "coverage": {
+        "EQ-1": [
+          "engine/uckp/execution.py"
+        ],
+        "EQ-2": [
+          "engine/uckp/capabilities.py"
+        ],
+        "EQ-3": [
+          "data/band10.py"
+        ],
+        "EQ-4": [
+          "engine/uckp/law.py"
+        ],
+        "EQ-5": [
+          "engine/uckp/execution.py"
+        ]
+      }
+    },
+    {
+      "id": "DEC-ADR-0010",
+      "title": "Platform composition is represented by existing canonical capability",
+      "decision_class": "architectural",
+      "source_register": "adr/0010-platform-composition-is-already-canonical.md",
+      "stage": "REPOSITORY-MAPPING",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "canonical_owner": "engine/nucleus/catalog.py (SEED_COMPOSITIONS, data) with engine/civilization/composition.py deriving plans from declarations",
+      "evidence": [
+        "adr/0010-platform-composition-is-already-canonical.md",
+        "engine/nucleus/catalog.py",
+        "engine/civilization/composition.py"
+      ],
+      "note": "Commerce, Amazon, Uber, ERP, CRM, healthcare, government, defence, scientific and research platforms are compositions of registered nuclei plus configuration, not nuclei. No function branches on a platform name — verified.",
+      "action_taken": "REPRESENTED — no platform-specific engine exists and none is required.",
+      "coverage": {
+        "EQ-1": [
+          "engine/nucleus/catalog.py"
+        ],
+        "EQ-2": [
+          "engine/civilization/composition.py"
+        ],
+        "EQ-3": [
+          "engine/kernel/compliance.py"
+        ],
+        "EQ-4": [
+          "engine/nucleus/lifecycle.py"
+        ],
+        "EQ-5": [
+          "engine/nucleus/catalog.py"
+        ]
+      }
+    },
+    {
+      "id": "DEC-ADR-0011",
+      "title": "Self-learning and self-evolution are represented by existing canonical capability",
+      "decision_class": "architectural",
+      "source_register": "adr/0011-self-learning-and-evolution-are-already-canonical.md",
+      "stage": "REPOSITORY-MAPPING",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "canonical_owner": "engine/uckp/evolution.py — the UCKP-ART-14 stage vocabulary; UAUE-000001 conducts the traversal and holds no copy of it",
+      "evidence": [
+        "adr/0011-self-learning-and-evolution-are-already-canonical.md",
+        "engine/uckp/evolution.py",
+        "00-MASTER/UAUE-000001/uaue-evolution.json"
+      ],
+      "note": "EVOLUTION_CYCLE declares fifteen stages, no stage is terminal, and the last returns to the first (ISD-L-05). ISD-L-04 holds that the stage graph admits a stage without an engine change, so ADAPTATION — which matches no current stage — would enter as a declaration.",
+      "action_taken": "REPRESENTED — no second evolution engine is created.",
+      "coverage": {
+        "EQ-1": [
+          "engine/uaue/controller.py"
+        ],
+        "EQ-2": [
+          "engine/uckp/evolution.py"
+        ],
+        "EQ-3": [
+          "00-MASTER/UAUE-000001/uaue-evolution.json"
+        ],
+        "EQ-4": [
+          "engine/uckp/evolution.py"
+        ],
+        "EQ-5": [
+          "00-MASTER/UCL-000001/ucl-stage-manifest.json"
+        ]
+      }
+    },
+    {
+      "id": "DEC-ADR-0012",
+      "title": "Remove the residual planetary default from cloud persistence",
+      "decision_class": "implementation",
+      "source_register": "adr/0012-remove-residual-planetary-default.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "work_package": "WP-UCDA-024",
+      "evidence": [
+        "adr/0012-remove-residual-planetary-default.md",
+        "engine/uckp/persistence.py"
+      ],
+      "note": "The single genuine hardcoded finite assumption found in engine/, platform/, intelligence/ and data/. Every other location hit is an anti-Earth-coupling gate, the temporal package's refusal text, or governed build-determinism normalization."
     }
   ],
   "$coverage_criteria_comment": [
