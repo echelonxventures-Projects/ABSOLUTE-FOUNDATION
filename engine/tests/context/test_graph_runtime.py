@@ -37,10 +37,10 @@ from engine.tests.context.conftest import declaration, spatial_values
 
 def test_graph_projects_contexts_and_taxa(universal_registry: ContextRegistry) -> None:
     graph = build_context_graph(universal_registry)
-    assert len(graph.contexts()) == 15
-    assert len(graph.taxa()) == 16
-    assert graph.order() == 31
-    assert graph.size() == 30  # 15 taxon-parent edges + 15 classified-as edges
+    assert len(graph.contexts()) == 16
+    assert len(graph.taxa()) == 17
+    assert graph.order() == 33
+    assert graph.size() == 32  # 16 taxon-parent edges + 16 classified-as edges
     assert TAXON_PARENT in graph.graph.edge_types()
     assert graph.validate() == []
     assert graph.summary()["valid"] is True

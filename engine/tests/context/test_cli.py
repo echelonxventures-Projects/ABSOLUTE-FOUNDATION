@@ -36,23 +36,23 @@ def test_constitution_command(capsys: pytest.CaptureFixture[str]) -> None:
 def test_taxonomy_and_ontology_commands(capsys: pytest.CaptureFixture[str]) -> None:
     code, taxonomy = _run(capsys, "taxonomy")
     assert code == 0
-    assert len(taxonomy["universal_kinds"]) == 15
+    assert len(taxonomy["universal_kinds"]) == 16
 
     code, ontology = _run(capsys, "ontology")
     assert code == 0
-    assert len(ontology["dimensions"]) == 15
+    assert len(ontology["dimensions"]) == 16
 
 
 def test_registry_command(capsys: pytest.CaptureFixture[str]) -> None:
     code, payload = _run(capsys, "registry")
     assert code == 0
-    assert payload["summary"]["contexts"] == 15
+    assert payload["summary"]["contexts"] == 16
     assert payload["seal"]
 
     code, verbose = _run(capsys, "--verbose", "registry")
     assert code == 0
-    assert len(verbose["contexts"]) == 15
-    assert len(verbose["audit"]) == 15
+    assert len(verbose["contexts"]) == 16
+    assert len(verbose["audit"]) == 16
 
 
 def test_registry_command_on_an_empty_set(capsys: pytest.CaptureFixture[str]) -> None:
@@ -88,7 +88,7 @@ def test_compose_commands(capsys: pytest.CaptureFixture[str]) -> None:
 
     code, full = _run(capsys, "--verbose", "compose")
     assert code == 0
-    assert len(full["members"]) == 15
+    assert len(full["members"]) == 16
 
     code, payload = _run(capsys, "--empty", "compose")
     assert code == 2  # an empty composition is refused, not merely reported
@@ -118,7 +118,7 @@ def test_runtime_command(capsys: pytest.CaptureFixture[str]) -> None:
     assert code == 0
     assert payload["released"] is True
     assert payload["frames"] == ["ucos-universal"]
-    assert len(payload["kinds"]) == 15
+    assert len(payload["kinds"]) == 16
 
 
 def test_validate_command(capsys: pytest.CaptureFixture[str]) -> None:

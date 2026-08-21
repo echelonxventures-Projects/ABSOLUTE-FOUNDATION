@@ -291,8 +291,8 @@ def test_universal_catalog_validates_cleanly(
     assert report.is_clean
     assert len(report.rules) == 12
     assert report.rules_failed() == ()
-    assert report.metrics["contexts"] == 15
-    assert report.metrics["universal_covered"] == 15
+    assert report.metrics["contexts"] == 16
+    assert report.metrics["universal_covered"] == 16
     assert report.summary()["violations"] == 0
     assert report.to_dict()["is_clean"] is True
     assert sum(report.by_dimension().values()) == 0

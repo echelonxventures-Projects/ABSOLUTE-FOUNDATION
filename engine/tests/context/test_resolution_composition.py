@@ -188,14 +188,14 @@ def test_member_scoping(universal_registry: ContextRegistry) -> None:
 
 def test_resolve_many_and_universal_and_report(universal_registry: ContextRegistry) -> None:
     everything = resolve_many(universal_registry)
-    assert len(everything) == 15
+    assert len(everything) == 16
     universal = resolve_universal(
         universal_registry, observer=Observer(observer_id="o", vantage="v")
     )
-    assert len(universal) == 15
+    assert len(universal) == 16
     assert set(values_of(universal)) == set(universal)
     report = resolution_report(universal_registry)
-    assert report["all_resolvable"] and report["resolvable"] == 15 == report["total"]
+    assert report["all_resolvable"] and report["resolvable"] == 16 == report["total"]
 
 
 def test_resolution_report_marks_unresolvable_kinds(empty_registry: ContextRegistry) -> None:
@@ -223,11 +223,11 @@ def test_request_serialisation() -> None:
 def test_compose_universal_is_bounded_and_complete(universal_registry: ContextRegistry) -> None:
     composed = compose_universal(universal_registry)
     assert isinstance(composed, ComposedContext)
-    assert len(composed.members) == 15
+    assert len(composed.members) == 16
     assert len(composed.frames) == 1
     assert composed.is_universally_complete
     assert composed.missing_universal() == ()
-    assert len(composed.kinds()) == 15
+    assert len(composed.kinds()) == 16
     assert composed.composition_id.startswith("CTXC-")
     assert composed.value("temporal", "ordering")
     assert composed.value("temporal", "nope") is None
@@ -236,7 +236,7 @@ def test_compose_universal_is_bounded_and_complete(universal_registry: ContextRe
     assert composed.frame_of("UCOS-CTX-000000000000") is None
     assert composed.summary()["universally_complete"] is True
     assert composed.to_dict()["content_hash"] == composed.content_hash
-    assert len(projection(composed)) == 15
+    assert len(projection(composed)) == 16
 
 
 def test_composition_is_deterministic(universal_registry: ContextRegistry) -> None:
@@ -257,7 +257,7 @@ def test_require_universal_refuses_an_incomplete_set(empty_registry: ContextRegi
     empty_registry.register(declaration())
     composed = compose(empty_registry)
     assert not composed.is_universally_complete
-    assert len(composed.missing_universal()) == 14
+    assert len(composed.missing_universal()) == 15
     with pytest.raises(ContextCompositionError):
         compose(empty_registry, require_universal=True)
 

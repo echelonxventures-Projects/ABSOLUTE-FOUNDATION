@@ -48,7 +48,7 @@ def test_universal_catalog_certifies(universal_registry: ContextRegistry) -> Non
     assert certificate.failed_dimensions == ()
     assert len(certificate.dimensions) == len(CERTIFICATION_DIMENSIONS) == 8
     assert certificate.certificate_id.startswith("UCOS-CTXCERT-")
-    assert certificate.metrics["universal_covered"] == 15
+    assert certificate.metrics["universal_covered"] == 16
     assert certificate.metrics["laws"] == 12
     assert certificate.metrics["rules"] == 12
     assert certificate.seals["registry"] and certificate.seals["composition"]
@@ -148,9 +148,9 @@ def test_evidence_document_is_complete(universal_registry: ContextRegistry) -> N
     assert evidence["operational"] is True
     assert evidence["certification"]["verdict"] == VERDICT_CERTIFIED
     assert len(evidence["constitution"]["laws"]["laws"]) == 12
-    assert len(evidence["taxonomy"]["taxa"]) == 16
-    assert len(evidence["ontology"]["dimensions"]) == 15
-    assert len(evidence["registry"]["contexts"]) == 15
+    assert len(evidence["taxonomy"]["taxa"]) == 17
+    assert len(evidence["ontology"]["dimensions"]) == 16
+    assert len(evidence["registry"]["contexts"]) == 16
     assert evidence["registry"]["audit_intact"] is True
     assert evidence["resolution"]["all_resolvable"] is True
     assert evidence["composition"]["universally_complete"] is True
@@ -166,13 +166,13 @@ def test_evidence_exemplars_prove_the_layer_operates(universal_registry: Context
     assert exemplars["runtime"]["activated"] is True
     assert exemplars["runtime"]["released"] is True
     assert exemplars["runtime"]["sample_read"]["value"]
-    assert len(exemplars["resolution_order"]) == 15
+    assert len(exemplars["resolution_order"]) == 16
 
 
 def test_evidence_defaults_to_the_bootstrapped_catalog() -> None:
     evidence = build_evidence()
     assert evidence["operational"] is True
-    assert evidence["registry"]["summary"]["contexts"] == 15
+    assert evidence["registry"]["summary"]["contexts"] == 16
 
 
 def test_evidence_is_byte_identical_across_runs(universal_registry: ContextRegistry) -> None:
@@ -196,7 +196,7 @@ def test_evidence_index_is_compact_and_gate_readable(universal_registry: Context
     assert index["schema"] == "ucos-ucxi-context-evidence-index"
     assert index["verdict"] == VERDICT_CERTIFIED
     assert index["seal_sha256"]
-    assert index["universal_coverage"] == index["universal_kinds"] == 15
+    assert index["universal_coverage"] == index["universal_kinds"] == 16
     assert len(index["dimensions"]) == 8
     assert index["operational"] is True
 

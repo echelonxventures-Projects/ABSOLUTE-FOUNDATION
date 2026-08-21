@@ -278,16 +278,16 @@ def test_record_with_lifecycle_preserves_identity(empty_registry: ContextRegistr
 
 
 def test_reads_and_views(universal_registry: ContextRegistry) -> None:
-    assert len(universal_registry) == 15
-    assert len(universal_registry.kinds()) == 15
+    assert len(universal_registry) == 16
+    assert len(universal_registry.kinds()) == 16
     assert universal_registry.boundaries() == ("ucos-universal",)
-    assert len(universal_registry.by_namespace("ucos.context")) == 15
-    assert len(universal_registry.by_boundary("ucos-universal")) == 15
+    assert len(universal_registry.by_namespace("ucos.context")) == 16
+    assert len(universal_registry.by_boundary("ucos-universal")) == 16
     assert len(universal_registry.by_kind(ContextKind.TEMPORAL)) == 1
     assert universal_registry.by_kind("quantum") == ()
     assert universal_registry.is_universally_covered()
     assert all(universal_registry.universal_coverage().values())
-    assert len(universal_registry.bindings()) == 15
+    assert len(universal_registry.bindings()) == 16
 
     a_record = universal_registry.records()[0]
     assert universal_registry.has(a_record.context_id)
@@ -307,7 +307,7 @@ def test_empty_registry_is_not_universally_covered(empty_registry: ContextRegist
 
 def test_audit_chain_is_verifiable_and_deterministic(universal_registry: ContextRegistry) -> None:
     assert universal_registry.verify_audit() == []
-    assert len(universal_registry.audit()) == 15
+    assert len(universal_registry.audit()) == 16
     assert universal_registry.seal() == universal_registry.seal()
     # A second, independently bootstrapped registry seals identically.
     assert bootstrap_registry().seal() == universal_registry.seal()
@@ -347,11 +347,11 @@ def test_verify_audit_reports_a_broken_chain(empty_registry: ContextRegistry) ->
 
 def test_summary_and_serialisation(universal_registry: ContextRegistry) -> None:
     summary = universal_registry.summary()
-    assert summary["contexts"] == 15
-    assert summary["universal_covered"] == 15
+    assert summary["contexts"] == 16
+    assert summary["universal_covered"] == 16
     assert summary["audit_intact"] is True
     payload = universal_registry.to_dict()
-    assert len(payload["contexts"]) == 15
+    assert len(payload["contexts"]) == 16
     assert payload["universal_coverage"]["temporal"] is True
 
 
@@ -365,7 +365,7 @@ def test_catalog_covers_every_universal_kind() -> None:
     assert registry.is_universally_covered()
     # bootstrapping twice is idempotent, not a duplicate refusal
     bootstrap_registry(registry=registry)
-    assert len(registry) == 15
+    assert len(registry) == 16
 
 
 def test_declarations_from_mapping_requires_a_source() -> None:

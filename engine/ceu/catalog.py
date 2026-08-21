@@ -36,6 +36,10 @@ from engine.ceu.existence import (
 )
 from engine.ceu.sufficiency import ATTR_EXPRESSED_BY
 
+#: The attributes a unit declares its measurement system and its quantity in (ADR-0005).
+ATTR_SYSTEM = "system"
+ATTR_QUANTITY = "quantity"
+
 #: The forms of existence, as ``(key, code, title, expressing primitives)``.
 #: A code is ignored when the one identity authority already knows the name — reuse, not
 #: a second grammar. Ordered so a reader can see the constitutional shape at a glance.
@@ -70,6 +74,10 @@ SEED_FORMS: tuple[tuple[str, str, str, tuple[str, ...]], ...] = (
     ("authority", "AUTH", "Authority", ("governance", "identity")),
     ("evidence", "EV", "Evidence", ("evidence",)),
     ("measurement", "MSMT", "Measurement", ("evidence", "context")),
+    # -- what a measurement is expressed in (ADR-0005) -------------------------
+    ("measurement-system", "MSYS", "Measurement System", ("context", "classification")),
+    ("quantity", "QNTY", "Quantity", ("context", "classification")),
+    ("unit", "UNIT", "Unit", ("context", "identity")),
     # -- dependency, constraint, resource (CEU-031, CEU-032) -------------------
     ("dependency", "DEP", "Dependency", ("relationship", "governance")),
     ("constraint", "CNST", "Constraint", ("governance", "relationship")),
@@ -174,6 +182,12 @@ SEED_RELATIONSHIP_TYPES: tuple[tuple[str, str, dict[str, Any]], ...] = (
         "verifies",
         "Independently confirms. What moves a prediction toward truth.",
         {ATTR_TOPOLOGIES: ("knowledge",)},
+    ),
+    (
+        "converts-to",
+        "Expresses the same quantity in another unit. A conversion is a relationship "
+        "carrying its own terms, never a table the substrate knows about (ADR-0005).",
+        {ATTR_TOPOLOGIES: ("graph",)},
     ),
     ("relates-to", "The unconstrained default: anything to anything (CEU-007).", {}),
 )
@@ -293,6 +307,77 @@ SEED_RISK_STATES: tuple[tuple[str, str], ...] = (
     ("transferred", "Assumed by another party."),
 )
 
+#: Quantities (ADR-0005) — *what* is measured, before any unit or system is chosen.
+#: Separating the quantity from the unit is what lets two systems disagree about units
+#: while agreeing about what they are measuring.
+SEED_QUANTITIES: tuple[tuple[str, str], ...] = (
+    ("length", "Extent along one spatial dimension."),
+    ("mass", "Quantity of matter."),
+    ("duration", "Extent along a temporal dimension, in whatever temporal model (CEU-014)."),
+    ("speed", "Length per duration."),
+    ("temperature", "Thermal state."),
+    ("energy", "Capacity to do work."),
+    ("information", "Quantity of distinguishable state."),
+    ("complexity", "Cost of description, or of computation."),
+    ("uncertainty", "The spread of what is not established (CEU-017)."),
+    ("value", "What something is worth, in a stated economic context."),
+    ("count", "Cardinality. Dimensionless."),
+    ("proportion", "A measured part of a measured whole. Dimensionless."),
+    ("unknown", "The quantity measured is not established. Valid, not an absence (CEU-017)."),
+)
+
+#: Measurement systems (ADR-0005). Every row is a peer. SI is one of them and is not the
+#: default; ``non-human`` is declarable before anyone has met one; ``unknown`` is a state,
+#: not an absence. A system nobody has proposed is admitted by appending a row.
+SEED_MEASUREMENT_SYSTEMS: tuple[tuple[str, str], ...] = (
+    ("si", "The International System of Units. One system among many, never the default."),
+    ("imperial", "The imperial system."),
+    ("natural", "Units fixed by physical constants rather than by artefact or convention."),
+    ("planck", "Units derived from the Planck constants."),
+    ("binary-information", "Units of distinguishable state, base two."),
+    ("dimensionless", "Pure numbers — counts, ratios and digests carry no unit."),
+    ("repository", "This platform's own system: commits, files and digests."),
+    ("non-human", "A system originating outside human civilisation (CEU-005, UCKP-ART-20)."),
+    ("unknown", "The system in force is not established (CEU-017)."),
+)
+
+#: Units as ``(key, title, system, quantity)`` (ADR-0005). A unit is an entity that names
+#: the system it belongs to and the quantity it measures — both by registered key, so a
+#: unit of a system this file has never heard of registers exactly the same way.
+SEED_UNITS: tuple[tuple[str, str, str, str], ...] = (
+    ("metre", "Metre", "si", "length"),
+    ("kilogram", "Kilogram", "si", "mass"),
+    ("second", "Second", "si", "duration"),
+    ("kelvin", "Kelvin", "si", "temperature"),
+    ("joule", "Joule", "si", "energy"),
+    ("foot", "Foot", "imperial", "length"),
+    ("pound", "Pound", "imperial", "mass"),
+    ("degree-fahrenheit", "Degree Fahrenheit", "imperial", "temperature"),
+    ("planck-length", "Planck Length", "planck", "length"),
+    ("planck-time", "Planck Time", "planck", "duration"),
+    ("bit", "Bit", "binary-information", "information"),
+    ("byte", "Byte", "binary-information", "information"),
+    ("cardinal", "Cardinal", "dimensionless", "count"),
+    ("ratio", "Ratio", "dimensionless", "proportion"),
+    ("commit-ordinal", "Commit Ordinal", "repository", "duration"),
+)
+
+#: Conversions as ``(source unit, target unit, terms)`` (ADR-0005). Each becomes a
+#: *relationship instance*, not a lookup table: the terms live on the relationship, so a
+#: conversion that needs an offset, a context or a provenance carries it without any
+#: schema here changing. Terms are strings so the registered content is exact and the
+#: substrate never has to interpret a float it did not compute.
+SEED_CONVERSIONS: tuple[tuple[str, str, dict[str, Any]], ...] = (
+    ("foot", "metre", {"factor": "0.3048"}),
+    ("pound", "kilogram", {"factor": "0.45359237"}),
+    ("byte", "bit", {"factor": "8"}),
+    (
+        "degree-fahrenheit",
+        "kelvin",
+        {"factor": "5/9", "offset": "459.67", "form": "(F + offset) * factor"},
+    ),
+)
+
 #: ``form key -> the rows registered under it``. Data, so adding a population is a tuple.
 SEED_POPULATIONS: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
     ("observer", SEED_OBSERVERS),
@@ -303,6 +388,8 @@ SEED_POPULATIONS: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
     ("epistemic-state", SEED_EPISTEMIC_STATES),
     ("scale", SEED_SCALES),
     ("temporal-model", SEED_TEMPORAL_MODELS),
+    ("quantity", SEED_QUANTITIES),
+    ("measurement-system", SEED_MEASUREMENT_SYSTEMS),
 )
 
 
@@ -369,7 +456,58 @@ def bootstrap(registry: ExistenceRegistry | None = None) -> ExistenceRegistry:
                     definition=definition,
                 )
             )
+
+    # Units name the system they belong to and the quantity they measure, both by
+    # registered key. Registered after the populations above so both endpoints exist.
+    for key, title, system, quantity in SEED_UNITS:
+        target.register(
+            ExistenceUnit(
+                form="unit",
+                key=key,
+                title=title,
+                definition=f"A unit of {quantity} in the {system} system.",
+                attributes={ATTR_SYSTEM: system, ATTR_QUANTITY: quantity},
+            )
+        )
+
     return target
+
+
+def register_conversions(
+    registry: ExistenceRegistry, conversions: tuple[tuple[str, str, dict[str, Any]], ...] = ()
+) -> tuple[ExistenceUnit, ...]:
+    """Assert unit conversions as relationship *instances* over a seeded registry.
+
+    Separate from :func:`bootstrap` on purpose. The seed catalogue is vocabulary — forms,
+    types and populations — and asserting an instance is a different act with a different
+    authority, so a deployment that wants SI-to-imperial conversions asks for them rather
+    than inheriting them.
+
+    Each conversion becomes an ordinary unit of the relationship form (ADR-0005): it is
+    identified, journaled, supersedable and evolvable like every other unit, and its terms
+    live on the relationship. Nothing here converts anything — the substrate records the
+    terms, and a caller that needs the arithmetic does the arithmetic. A conversion needing
+    an offset, a context or a provenance carries it without a schema change, which is why
+    conversions are relationships and not a table.
+
+    ``conversions`` defaults to :data:`SEED_CONVERSIONS`; pass another tuple to register a
+    different set, including between units of a system this file has never named.
+    """
+    view = relationship_view(registry)
+    units = {unit.key: unit.universal_id for unit in registry.units(form="unit")}
+    registered: list[ExistenceUnit] = []
+    for source, destination, terms in conversions or SEED_CONVERSIONS:
+        registered.append(
+            view.relate(
+                "converts-to",
+                units[source],
+                units[destination],
+                authority="engine/ceu/catalog.py SEED_CONVERSIONS",
+                attributes=terms,
+                note=f"{source} expressed in {destination}.",
+            )
+        )
+    return tuple(registered)
 
 
 def relationship_view(registry: ExistenceRegistry) -> RelationshipView:
@@ -407,6 +545,13 @@ __all__ = [
     "SEED_EPISTEMIC_STATES",
     "SEED_SCALES",
     "SEED_TEMPORAL_MODELS",
+    "SEED_QUANTITIES",
+    "SEED_MEASUREMENT_SYSTEMS",
+    "SEED_UNITS",
+    "SEED_CONVERSIONS",
+    "register_conversions",
+    "ATTR_SYSTEM",
+    "ATTR_QUANTITY",
     "SEED_CONSENT_STATES",
     "SEED_RISK_STATES",
     "SEED_POPULATIONS",

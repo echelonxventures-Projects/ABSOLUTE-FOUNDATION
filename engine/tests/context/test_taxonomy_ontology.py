@@ -35,10 +35,13 @@ from engine.tests.context.conftest import future_dimensions, future_taxon
 # --------------------------------------------------------------------------- kinds
 
 
-def test_fifteen_universal_kinds_are_declared() -> None:
-    assert len(UNIVERSAL_KINDS) == 15
+def test_sixteen_universal_kinds_are_declared() -> None:
+    assert len(UNIVERSAL_KINDS) == 16
     assert ContextKind.EXISTENCE.value == "existence"
     assert "cultural" in ContextKind.values()
+    # The sixteenth (ADR-0005). Measurement is universal because every assertion is
+    # made in some system of measurement; leaving it implicit assumes one.
+    assert "measurement" in ContextKind.values()
 
 
 def test_unknown_kind_fails_loudly() -> None:
@@ -106,13 +109,13 @@ def test_relation_classes() -> None:
 
 
 def test_universal_taxonomy_shape() -> None:
-    assert len(UNIVERSAL_TAXONOMY) == 16  # the root plus fifteen universal taxa
+    assert len(UNIVERSAL_TAXONOMY) == 17  # the root plus sixteen universal taxa
     assert UNIVERSAL_TAXONOMY.has(ROOT_TAXON)
-    assert len(UNIVERSAL_TAXONOMY.universal_kinds()) == 15
+    assert len(UNIVERSAL_TAXONOMY.universal_kinds()) == 16
     assert UNIVERSAL_TAXONOMY.future_kinds() == ()
     assert UNIVERSAL_TAXONOMY.depth("CTX-TEMPORAL") == 1
     assert UNIVERSAL_TAXONOMY.ancestors("CTX-TEMPORAL") == (ROOT_TAXON,)
-    assert len(UNIVERSAL_TAXONOMY.descendants(ROOT_TAXON)) == 15
+    assert len(UNIVERSAL_TAXONOMY.descendants(ROOT_TAXON)) == 16
     assert UNIVERSAL_TAXONOMY.children(ROOT_TAXON)
 
 
@@ -129,12 +132,12 @@ def test_taxon_lookup_by_kind_and_universality() -> None:
 
 def test_taxonomy_admits_a_future_context_type() -> None:
     extended = UNIVERSAL_TAXONOMY.extend(future_taxon())
-    assert len(extended) == 17
+    assert len(extended) == 18
     assert extended.future_kinds() == ("quantum",)
     assert extended.is_universal("quantum") is False
     assert extended.taxon_for_kind("quantum").title == "Quantum Context"
     # extension is non-mutating: the universal instance is untouched
-    assert len(UNIVERSAL_TAXONOMY) == 16
+    assert len(UNIVERSAL_TAXONOMY) == 17
 
 
 def test_taxonomy_extension_is_bounded() -> None:
@@ -179,7 +182,7 @@ def test_taxonomy_serialises_deterministically() -> None:
     first = UNIVERSAL_TAXONOMY.to_dict()
     assert first == UNIVERSAL_TAXONOMY.to_dict()
     assert first["root"] == ROOT_TAXON
-    assert len(first["taxa"]) == 16
+    assert len(first["taxa"]) == 17
 
 
 # ---------------------------------------------------------------------- ontology

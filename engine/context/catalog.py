@@ -1,6 +1,6 @@
 """UCXI-000001 Part 06 — the Universal Context Catalog (DATA).
 
-The fifteen universal contexts *of this platform*, declared once, as data. This is
+The sixteen universal contexts *of this platform*, declared once, as data. This is
 what makes the layer operational rather than merely definable: a fresh registry can
 be bootstrapped to a state in which every universal kind is present, conformant and
 provenanced, which is the precondition the certifier measures.
@@ -203,13 +203,32 @@ UNIVERSAL_CATALOG: dict[str, tuple[ContextAuthority, str, dict[str, Any]]] = {
             "note": "Culture is recorded because it changes how artifacts are read.",
         },
     ),
+    ContextKind.MEASUREMENT.value: (
+        _ARCHITECTURAL,
+        "platform/universal_measurement/engine.py",
+        {
+            "measurement_system": "dimensionless counting and content-addressing — this "
+            "platform measures cardinalities, ratios and digests, so no physical unit "
+            "system is in force. SI is not assumed and not required.",
+            "units": {
+                "cardinality": "count — a whole number of registered artifacts",
+                "proportion": "ratio of a measured part to a measured total",
+                "integrity": "sha-256 hexadecimal digest",
+                "duration": "commit ordinal — repository history, never a wall clock",
+            },
+            "scale": "human — the repository is measured at the scale of files, commits "
+            "and artifacts (one row of engine/ceu/catalog.py SEED_SCALES, not the default)",
+            "note": "Units and scales are entities and conversions are relationships "
+            "(ADR-0005); nothing here privileges a system, a planet or a civilisation.",
+        },
+    ),
 }
 
 
 def universal_declarations(
     *, namespace: str = UNIVERSAL_NAMESPACE, boundary: str = UNIVERSAL_BOUNDARY
 ) -> tuple[ContextDeclaration, ...]:
-    """Build the fifteen universal context declarations from the catalog."""
+    """Build the sixteen universal context declarations from the catalog."""
     out: list[ContextDeclaration] = []
     for kind in sorted(UNIVERSAL_CATALOG):
         authority, source, values = UNIVERSAL_CATALOG[kind]
@@ -247,7 +266,7 @@ def bootstrap_registry(
     boundary: str = UNIVERSAL_BOUNDARY,
     registry: Any = None,
 ) -> Any:
-    """Return a registry with the fifteen universal contexts registered.
+    """Return a registry with the sixteen universal contexts registered.
 
     The single entry point every surface uses to reach an operational state: the CLI,
     the evidence builder and the certifier all bootstrap from this catalog, so they all

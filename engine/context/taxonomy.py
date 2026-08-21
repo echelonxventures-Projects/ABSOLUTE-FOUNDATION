@@ -7,16 +7,16 @@ duplicate each other.
 
 Two things are provided:
 
-    * :class:`ContextKind` — the fifteen **universal** context kinds (existence,
+    * :class:`ContextKind` — the sixteen **universal** context kinds (existence,
       reality, observer, temporal, spatial, identity, governance, security,
       knowledge, computational, environmental, economic, regulatory, linguistic,
-      cultural). These are the kinds the platform treats as constitutionally
-      present in every situation.
+      cultural, measurement). These are the kinds the platform treats as
+      constitutionally present in every situation.
     * :class:`ContextTaxonomy` — an immutable classification **tree** seeded with
-      those fifteen universal taxa under a single root, and **open by construction**
+      those sixteen universal taxa under a single root, and **open by construction**
       (CXL-02): a *future* context type is admitted through
       :meth:`ContextTaxonomy.extend`, which is a DATA edit, not a code edit. No
-      control flow in this layer branches on a specific kind, so a sixteenth,
+      control flow in this layer branches on a specific kind, so a seventeenth,
       hundredth or thousandth context type needs no change here.
 
 Extension is bounded, not permissive: a future taxon must name a parent that already
@@ -40,13 +40,25 @@ ROOT_TAXON = "CTX-ROOT"
 
 
 class ContextKind(str, Enum):
-    """The fifteen universal context kinds (Part 02 §1).
+    """The sixteen universal context kinds (Part 02 §1).
 
     Universal means *always present*: every situation a system reasons about has an
     existence, reality, observer, temporal, spatial, identity, governance, security,
-    knowledge, computational, environmental, economic, regulatory, linguistic and
-    cultural context, even when a given dimension is unknown. Absence is expressed
-    as an explicit unknown value, never as a missing kind.
+    knowledge, computational, environmental, economic, regulatory, linguistic,
+    cultural and measurement context, even when a given dimension is unknown.
+    Absence is expressed as an explicit unknown value, never as a missing kind.
+
+    ``MEASUREMENT`` is the sixteenth, admitted by ADR-0005. Every assertion is made
+    in some system of measurement, and a system that leaves that implicit has an
+    assumed one — usually SI, usually Earth-human. Naming it as a universal kind
+    makes the assumption declarable and therefore replaceable: SI, imperial and any
+    future or non-human system are peer entities, none privileged. The kind
+    *describes* the frame in force; it grants no authority (CXL-10), and no
+    measurement engine exists behind it.
+
+    That the list moved from fifteen to sixteen is itself the evidence the taxonomy
+    is open: the seed is data, no control flow in this layer branches on a kind, and
+    a seventeenth needs no more than another row.
     """
 
     EXISTENCE = "existence"
@@ -64,6 +76,7 @@ class ContextKind(str, Enum):
     REGULATORY = "regulatory"
     LINGUISTIC = "linguistic"
     CULTURAL = "cultural"
+    MEASUREMENT = "measurement"
 
     @classmethod
     def coerce(cls, value: Any, *, at: str = "context") -> ContextKind:
@@ -86,7 +99,7 @@ class ContextKind(str, Enum):
         return tuple(kind.value for kind in cls)
 
 
-#: Convenience tuple of the fifteen universal kinds in declaration order.
+#: Convenience tuple of the sixteen universal kinds in declaration order.
 UNIVERSAL_KINDS: tuple[ContextKind, ...] = tuple(ContextKind)
 
 
@@ -291,7 +304,7 @@ class ContextTaxon:
 
     ``kind`` is an open string: a universal taxon carries a :class:`ContextKind`
     value, while a future taxon may declare a kind this release has never seen.
-    ``universal`` marks the fifteen constitutionally present taxa, which may never
+    ``universal`` marks the sixteen constitutionally present taxa, which may never
     be redefined or removed.
     """
 
@@ -399,6 +412,11 @@ def _universal_taxa() -> tuple[ContextTaxon, ...]:
             "Cultural Context",
             "Locale, norms and conventions shaping interpretation and acceptability.",
         ),
+        ContextKind.MEASUREMENT: (
+            "Measurement Context",
+            "The system, units and scale in which a quantity is expressed. No system "
+            "is privileged: SI, imperial and any future or non-human system are peers.",
+        ),
     }
     taxa = [root]
     for kind in UNIVERSAL_KINDS:
@@ -416,7 +434,7 @@ def _universal_taxa() -> tuple[ContextTaxon, ...]:
     return tuple(taxa)
 
 
-#: The seed taxonomy: the root plus the fifteen universal taxa (DATA, not code).
+#: The seed taxonomy: the root plus the sixteen universal taxa (DATA, not code).
 UNIVERSAL_TAXA: tuple[ContextTaxon, ...] = _universal_taxa()
 
 
@@ -626,7 +644,7 @@ class ContextTaxonomy:
         }
 
 
-#: The default, universal taxonomy instance (fifteen universal taxa under one root).
+#: The default, universal taxonomy instance (sixteen universal taxa under one root).
 UNIVERSAL_TAXONOMY = ContextTaxonomy()
 
 

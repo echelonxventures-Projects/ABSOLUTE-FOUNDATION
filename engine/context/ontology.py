@@ -232,6 +232,12 @@ UNIVERSAL_DIMENSIONS: dict[str, tuple[DimensionSpec, ...]] = {
         _dim("conventions", "list", "The conventions in force."),
         _NOTE,
     ),
+    ContextKind.MEASUREMENT.value: (
+        _dim("measurement_system", "string", "The system of measurement in force."),
+        _dim("units", "mapping", "Quantity kind -> the unit identity in force for it."),
+        _dim("scale", "string", "The scale frame through which a measurement resolves."),
+        _NOTE,
+    ),
 }
 
 
@@ -484,7 +490,7 @@ class ContextOntology:
         }
 
 
-#: The default ontology: the declared shape of the fifteen universal kinds.
+#: The default ontology: the declared shape of the sixteen universal kinds.
 UNIVERSAL_ONTOLOGY = ContextOntology()
 
 
