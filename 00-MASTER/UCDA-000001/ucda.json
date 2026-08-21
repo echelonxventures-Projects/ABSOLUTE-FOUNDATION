@@ -1,7 +1,7 @@
 {
   "by_disposition": {
-    "IMPLEMENTED": 38,
-    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 24,
+    "IMPLEMENTED": 40,
+    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 23,
     "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION": 11,
     "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY": 46,
     "SUPERSEDED": 4
@@ -10,22 +10,22 @@
     "CERTIFICATION": 0,
     "CLOSURE": 25,
     "CONSTITUTIONAL-AGREEMENT": 0,
-    "DECISION-REGISTRATION": 6,
+    "DECISION-REGISTRATION": 5,
     "DISCUSSION": 0,
     "IMPLEMENTATION": 0,
     "REPOSITORY-MAPPING": 48,
-    "REPOSITORY-TRUTH-UPDATE": 44,
+    "REPOSITORY-TRUTH-UPDATE": 46,
     "VALIDATION": 0
   },
   "conversation_only": [],
   "coverage": {
-    "aggregate_percent": 92,
+    "aggregate_percent": 93,
     "by_criterion": {
-      "EQ-1": 50,
-      "EQ-2": 64,
-      "EQ-3": 64,
-      "EQ-4": 64,
-      "EQ-5": 64
+      "EQ-1": 51,
+      "EQ-2": 66,
+      "EQ-3": 66,
+      "EQ-4": 66,
+      "EQ-5": 65
     },
     "completeness_disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
     "criteria": [
@@ -35,11 +35,11 @@
       "EQ-4",
       "EQ-5"
     ],
-    "decisions_fully_covered": 49,
-    "decisions_measured": 66,
-    "decisions_partially_covered": 17,
-    "dimensions_covered": 306,
-    "dimensions_measured": 330,
+    "decisions_fully_covered": 51,
+    "decisions_measured": 67,
+    "decisions_partially_covered": 16,
+    "dimensions_covered": 314,
+    "dimensions_measured": 335,
     "partially_covered": [
       "DEC-ADAM-01",
       "DEC-ADAM-02",
@@ -49,7 +49,6 @@
       "DEC-ADR-0002",
       "DEC-ADR-0005",
       "DEC-ADR-0006",
-      "DEC-ADR-0008",
       "DEC-CAEM-01",
       "DEC-CAEM-02",
       "DEC-CAEM-05",
@@ -59,10 +58,10 @@
       "DEC-CAEM-14",
       "DEC-CAEM-16"
     ],
-    "representation_percent": 74,
+    "representation_percent": 76,
     "scope_decision_class": "architectural"
   },
-  "decision_total": 123,
+  "decision_total": 124,
   "decisions": [
     {
       "action_taken": "",
@@ -10405,17 +10404,30 @@
       "work_package": "WP-UCDA-022"
     },
     {
-      "action_taken": "",
+      "action_taken": "IMPLEMENTED — engine/tests/expansion/test_universal_expansion_verification.py discharges WP-UCDA-023 with twelve passing cases covering all ten axes the ADR names (entity, context, relationship, technology, language, currency, measurement, intelligence, platform, future concept), each asserting kernel_source_fingerprint is byte-identical before and after admission. A meta-test binds each named axis to a test that must exist, so removing one fails the suite. A twelfth case proves admission is journalled: the append-only hash chain still verifies and leaves nothing unlineaged after admitting concepts no catalog named.",
       "canonical_owner": null,
       "constitutional_basis": null,
       "conversation_only": false,
       "coverage": {
-        "complete": false,
-        "covered": 2,
+        "complete": true,
+        "covered": 5,
         "dimensions": [
           {
             "covered": true,
             "criterion": "EQ-1",
+            "declared": [
+              "engine/kernel/compliance.py",
+              "engine/tests/expansion/test_universal_expansion_verification.py"
+            ],
+            "resolved": [
+              "engine/kernel/compliance.py",
+              "engine/tests/expansion/test_universal_expansion_verification.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
             "declared": [
               "engine/kernel/compliance.py"
             ],
@@ -10425,24 +10437,27 @@
             "unresolved": []
           },
           {
-            "covered": false,
-            "criterion": "EQ-2",
-            "declared": [],
-            "resolved": [],
-            "unresolved": []
-          },
-          {
-            "covered": false,
+            "covered": true,
             "criterion": "EQ-3",
-            "declared": [],
-            "resolved": [],
+            "declared": [
+              "verify.sh",
+              ".github/workflows/ec1-ci.yml"
+            ],
+            "resolved": [
+              "verify.sh",
+              ".github/workflows/ec1-ci.yml"
+            ],
             "unresolved": []
           },
           {
-            "covered": false,
+            "covered": true,
             "criterion": "EQ-4",
-            "declared": [],
-            "resolved": [],
+            "declared": [
+              "engine/ceu/existence.py"
+            ],
+            "resolved": [
+              "engine/ceu/existence.py"
+            ],
             "unresolved": []
           },
           {
@@ -10457,21 +10472,18 @@
             "unresolved": []
           }
         ],
-        "percent": 40,
-        "shortfall": [
-          "EQ-2",
-          "EQ-3",
-          "EQ-4"
-        ],
+        "percent": 100,
+        "shortfall": [],
         "total": 5,
         "unresolved": []
       },
       "coverage_measured": true,
       "decision_class": "architectural",
-      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "disposition": "IMPLEMENTED",
       "evidence_resolved": [
         "adr/0008-unified-unknown-admission-verification.md",
-        "engine/kernel/compliance.py"
+        "engine/kernel/compliance.py",
+        "engine/tests/expansion/test_universal_expansion_verification.py"
       ],
       "evidence_unresolved": [],
       "id": "DEC-ADR-0008",
@@ -10482,11 +10494,11 @@
       "reasons": [],
       "source_register": "adr/0008-unified-unknown-admission-verification.md",
       "source_register_located": true,
-      "stage": "DECISION-REGISTRATION",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
       "superseded_by": null,
       "title": "One verification suite proves unknown admission across every axis with an unchanged kernel",
       "undispositioned": false,
-      "work_package": "WP-UCDA-023"
+      "work_package": null
     },
     {
       "action_taken": "REPRESENTED — no work package registered, because the capability is held and measured; the residual planetary default is carried separately by DEC-ADR-0012.",
@@ -10847,11 +10859,125 @@
       "title": "Remove the residual planetary default from cloud persistence",
       "undispositioned": false,
       "work_package": "WP-UCDA-024"
+    },
+    {
+      "action_taken": "IMPLEMENTED — engine/lineage/memory-layers.json declares the seven layers as DATA (identity, context, relationship, knowledge, evidence, decision, evolution), each naming its located owner, its governed record and its access shape; engine/lineage/memory.py resolves them for any subject and owns nothing it reports. Discharges WP-UCDA-025. Nineteen memory cases and ten platform-composition cases pass. Measured: the projection creates no store (every governed record's sha256 is unchanged across resolutions and no file appears in engine/lineage/), declares no authority (no layer owner names engine/lineage), forks no truth (every entry cites exactly one record), and orphans nothing (every entry carries subject, layer, owner, source and value). An eighth layer over a record that does not exist is admitted by declaration with the kernel fingerprint unchanged, and an undeclared access mode is refused rather than resolving silently empty. The measured Phase 4 gap is closed: engine/lineage/query.py read element [0] of the identity series and discarded the rest, and memory now recovers the full recorded series in the owner's own sequence — ten states for UCOS-CANONICALOWN-000001.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": true,
+        "covered": 5,
+        "dimensions": [
+          {
+            "covered": true,
+            "criterion": "EQ-1",
+            "declared": [
+              "engine/lineage/memory.py",
+              "engine/lineage/query.py"
+            ],
+            "resolved": [
+              "engine/lineage/memory.py",
+              "engine/lineage/query.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "engine/lineage/memory-layers.json",
+              "engine/lineage/__init__.py",
+              "engine/uckp/law.py"
+            ],
+            "resolved": [
+              "engine/lineage/memory-layers.json",
+              "engine/lineage/__init__.py",
+              "engine/uckp/law.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+              "00-MASTER/UCDA-000001/ucda_engine.py"
+            ],
+            "resolved": [
+              "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+              "00-MASTER/UCDA-000001/ucda_engine.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-4",
+            "declared": [
+              "engine/uckp/evolution.py",
+              "engine/uaue/history.py"
+            ],
+            "resolved": [
+              "engine/uckp/evolution.py",
+              "engine/uaue/history.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/lineage/memory-layers.json",
+              "engine/tests/expansion/test_universal_memory_verification.py",
+              "engine/ceu/sufficiency.py"
+            ],
+            "resolved": [
+              "engine/lineage/memory-layers.json",
+              "engine/tests/expansion/test_universal_memory_verification.py",
+              "engine/ceu/sufficiency.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 100,
+        "shortfall": [],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0013-universal-persistent-evolutionary-graph-memory.md",
+        "PHASE-4-CAPABILITY-GAP-MATRIX.md",
+        "PHASE-4-RESUMPTION-STATE-REPORT.md",
+        "engine/lineage/memory-layers.json",
+        "engine/lineage/memory.py",
+        "engine/tests/expansion/test_universal_memory_verification.py",
+        "engine/tests/expansion/test_platform_composition_verification.py",
+        "engine/lineage/projection.py",
+        "engine/uckp/evolution.py",
+        "engine/ceu/existence.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0013",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Ten memory capabilities measured against located owners; zero justified CREATE. The gap is not absent memory — every layer has an owner and every owner already records history — but that no canonical entity can resolve its own memory across those owners. A new engine/memory/ package would be the memory engine Step 3 of the directive prohibits and is refused. Nine findings (P4-F-001..009) that would require amending another owner are referred, not repaired.",
+      "reasons": [],
+      "source_register": "adr/0013-universal-persistent-evolutionary-graph-memory.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Memory is a substrate property resolved by projection, not a memory engine",
+      "undispositioned": false,
+      "work_package": null
     }
   ],
   "declaration_findings": [],
   "determination": "ASSIMILATED",
-  "evidence_references": 453,
+  "evidence_references": 464,
   "gate": "OPEN",
   "gate_exit": 0,
   "programme": {
@@ -10910,7 +11036,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "dd1a57a0c305313c382575a6a76c1e8354b3e60961299bc455d05bef926b7b9f",
+  "seal_sha256": "1f0e34f93e82e66da00f5743de7d52a1835b270cbfcc22630e984486d4926ac5",
   "undispositioned": [],
   "unevidenced": [],
   "unindexed": []

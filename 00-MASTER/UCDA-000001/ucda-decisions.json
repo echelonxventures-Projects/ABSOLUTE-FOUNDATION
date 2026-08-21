@@ -601,6 +601,17 @@
       "route": "region='planet-earth-1' ceases to be a default. Region becomes caller-supplied or context-resolved, so location is data rather than a value baked into a signature. The constructor is referenced nowhere else in the tree, so the blast radius is the adapter and its tests.",
       "acceptance": "A repository-wide scan of engine/, platform/, intelligence/ and data/ returns no hardcoded planetary literal outside an anti-coupling gate, a refusal text, or governed build-determinism normalization.",
       "authorization_required": true
+    },
+    {
+      "id": "WP-UCDA-025",
+      "title": "Resolve seven-layer memory for any subject by extending the Universal Lineage Projection",
+      "discharges": [
+        "DEC-ADR-0013"
+      ],
+      "owner": "engine/lineage/ (ULP) — reusing CEU-001, UCKP ART-07, UCXI, EPIC/REG-AUTO, UKDA/UKIP, UCDA and UAUE as the located owners of each layer",
+      "route": "Ten memory capabilities were measured against located owners and none justified CREATE, so no memory engine, graph memory database, knowledge memory authority or history authority is built. engine/lineage/ already carries the governing discipline — UCI-001 Part XVI.5, 'lineage and evolution are DERIVED projections over recorded history; no new store is created' — so the resolution surface is added there as a projection that owns nothing it reports. The seven layers (identity, context, relationship, knowledge, evidence, decision, evolution) are declared as DATA in engine/lineage/memory-layers.json per ADR-0007, so a future layer is admitted by declaration rather than by amending source. Every resolved value cites the governed record it came from; an unknown subject resolves to empty layers marked recorded=false rather than raising or guessing.",
+      "acceptance": "For any subject identity the projection resolves all seven declared layers, each naming its located owner and citing its source record; an unknown subject resolves without error and without invented content; the projection writes no file, mints no identifier and reads no clock; adding an eighth layer to the declaration requires no code change; and a verification suite proves memory persistence, lineage preservation, historical reconstruction, no duplicate truth, no duplicate authority and no orphan memory.",
+      "authorization_required": true
     }
   ],
   "$decisions_comment": [
@@ -3629,17 +3640,29 @@
       "title": "One verification suite proves unknown admission across every axis with an unchanged kernel",
       "decision_class": "architectural",
       "source_register": "adr/0008-unified-unknown-admission-verification.md",
-      "stage": "DECISION-REGISTRATION",
-      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
-      "work_package": "WP-UCDA-023",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
       "evidence": [
         "adr/0008-unified-unknown-admission-verification.md",
-        "engine/kernel/compliance.py"
+        "engine/kernel/compliance.py",
+        "engine/tests/expansion/test_universal_expansion_verification.py"
       ],
       "note": "engine/kernel/compliance.py already proves eleven non-Earth categories with kernel_unchanged True. The suite generalises that mechanism rather than adding a second one.",
+      "action_taken": "IMPLEMENTED — engine/tests/expansion/test_universal_expansion_verification.py discharges WP-UCDA-023 with twelve passing cases covering all ten axes the ADR names (entity, context, relationship, technology, language, currency, measurement, intelligence, platform, future concept), each asserting kernel_source_fingerprint is byte-identical before and after admission. A meta-test binds each named axis to a test that must exist, so removing one fails the suite. A twelfth case proves admission is journalled: the append-only hash chain still verifies and leaves nothing unlineaged after admitting concepts no catalog named.",
       "coverage": {
         "EQ-1": [
+          "engine/kernel/compliance.py",
+          "engine/tests/expansion/test_universal_expansion_verification.py"
+        ],
+        "EQ-2": [
           "engine/kernel/compliance.py"
+        ],
+        "EQ-3": [
+          "verify.sh",
+          ".github/workflows/ec1-ci.yml"
+        ],
+        "EQ-4": [
+          "engine/ceu/existence.py"
         ],
         "EQ-5": [
           "engine/ceu/sufficiency.py"
@@ -3758,6 +3781,52 @@
         "engine/uckp/persistence.py"
       ],
       "note": "The single genuine hardcoded finite assumption found in engine/, platform/, intelligence/ and data/. Every other location hit is an anti-Earth-coupling gate, the temporal package's refusal text, or governed build-determinism normalization."
+    },
+    {
+      "id": "DEC-ADR-0013",
+      "title": "Memory is a substrate property resolved by projection, not a memory engine",
+      "decision_class": "architectural",
+      "source_register": "adr/0013-universal-persistent-evolutionary-graph-memory.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0013-universal-persistent-evolutionary-graph-memory.md",
+        "PHASE-4-CAPABILITY-GAP-MATRIX.md",
+        "PHASE-4-RESUMPTION-STATE-REPORT.md",
+        "engine/lineage/memory-layers.json",
+        "engine/lineage/memory.py",
+        "engine/tests/expansion/test_universal_memory_verification.py",
+        "engine/tests/expansion/test_platform_composition_verification.py",
+        "engine/lineage/projection.py",
+        "engine/uckp/evolution.py",
+        "engine/ceu/existence.py"
+      ],
+      "note": "Ten memory capabilities measured against located owners; zero justified CREATE. The gap is not absent memory — every layer has an owner and every owner already records history — but that no canonical entity can resolve its own memory across those owners. A new engine/memory/ package would be the memory engine Step 3 of the directive prohibits and is refused. Nine findings (P4-F-001..009) that would require amending another owner are referred, not repaired.",
+      "action_taken": "IMPLEMENTED — engine/lineage/memory-layers.json declares the seven layers as DATA (identity, context, relationship, knowledge, evidence, decision, evolution), each naming its located owner, its governed record and its access shape; engine/lineage/memory.py resolves them for any subject and owns nothing it reports. Discharges WP-UCDA-025. Nineteen memory cases and ten platform-composition cases pass. Measured: the projection creates no store (every governed record's sha256 is unchanged across resolutions and no file appears in engine/lineage/), declares no authority (no layer owner names engine/lineage), forks no truth (every entry cites exactly one record), and orphans nothing (every entry carries subject, layer, owner, source and value). An eighth layer over a record that does not exist is admitted by declaration with the kernel fingerprint unchanged, and an undeclared access mode is refused rather than resolving silently empty. The measured Phase 4 gap is closed: engine/lineage/query.py read element [0] of the identity series and discarded the rest, and memory now recovers the full recorded series in the owner's own sequence — ten states for UCOS-CANONICALOWN-000001.",
+      "coverage": {
+        "EQ-1": [
+          "engine/lineage/memory.py",
+          "engine/lineage/query.py"
+        ],
+        "EQ-2": [
+          "engine/lineage/memory-layers.json",
+          "engine/lineage/__init__.py",
+          "engine/uckp/law.py"
+        ],
+        "EQ-3": [
+          "00-CEP/CEP-002-CONSTITUTIONAL-GOVERNANCE-CONSTITUTION.md",
+          "00-MASTER/UCDA-000001/ucda_engine.py"
+        ],
+        "EQ-4": [
+          "engine/uckp/evolution.py",
+          "engine/uaue/history.py"
+        ],
+        "EQ-5": [
+          "engine/lineage/memory-layers.json",
+          "engine/tests/expansion/test_universal_memory_verification.py",
+          "engine/ceu/sufficiency.py"
+        ]
+      }
     }
   ],
   "$coverage_criteria_comment": [

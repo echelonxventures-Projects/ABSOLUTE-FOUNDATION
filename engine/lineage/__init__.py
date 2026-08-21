@@ -24,6 +24,18 @@ as an edge, because an event is not a pointer at another object.
 
 from __future__ import annotations
 
+from engine.lineage.memory import (
+    LayerMemory,
+    MemoryDeclaration,
+    MemoryEntry,
+    MemoryLayer,
+    SubjectMemory,
+    duplicate_owners,
+    load_declaration,
+    owners,
+    reconstruct,
+    resolve,
+)
 from engine.lineage.model import (
     Classification,
     Family,
@@ -46,17 +58,27 @@ from engine.lineage.query import answer, origin_of, owner_of
 __all__ = [
     "Classification",
     "Family",
+    "LayerMemory",
     "LineageEdge",
     "LineageError",
     "LineageEvent",
     "LineageProjection",
+    "MemoryDeclaration",
+    "MemoryEntry",
+    "MemoryLayer",
     "RelationRule",
+    "SubjectMemory",
     "answer",
     "build",
     "digest",
+    "duplicate_owners",
     "load_classification",
+    "load_declaration",
     "origin_of",
     "owner_of",
+    "owners",
+    "reconstruct",
+    "resolve",
     "to_document",
     "validate",
     "verify",
