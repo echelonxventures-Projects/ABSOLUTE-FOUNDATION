@@ -233,6 +233,9 @@
 ### WP-UCDA-024 — Remove the residual planetary default from CloudPersistence
 
 - **Discharges** — DEC-ADR-0012
+- **Origin finding** — CEA-V-01 (`UCOS-CEA-000001-CONSTITUTIONAL-EVOLUTION-ASSIMILATION-DETERMINATION.md §1.6`)
+- **Previous discovery artifact** — WP-A3 (`UCOS-CEA-000002-REGENERATED-ROADMAPS-AND-EXECUTION-SEQUENCE.md §6.2`) — **SUPERSEDED by this package**
+- **Lineage** — CEA-V-01 (finding) → WP-A3 (initial remediation proposal) → ADR-0012 (architectural decision) → WP-UCDA-024 (governed implementation package) → execution commit → certification
 - **Owner** — `engine/uckp/persistence.py`
 - **Constitutional route** — region='planet-earth-1' ceases to be a default. Region becomes caller-supplied or context-resolved, so location is data rather than a value baked into a signature. The constructor is referenced nowhere else in the tree, so the blast radius is the adapter and its tests.
 - **Acceptance** — A repository-wide scan of engine/, platform/, intelligence/ and data/ returns no hardcoded planetary literal outside an anti-coupling gate, a refusal text, or governed build-determinism normalization.

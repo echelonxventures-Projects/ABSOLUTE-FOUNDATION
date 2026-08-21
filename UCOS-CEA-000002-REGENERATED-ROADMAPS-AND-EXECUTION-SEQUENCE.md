@@ -118,7 +118,7 @@ Ordered by **dependency**, not by value. A stage may not begin until every stage
 |---|---|---|---|---|
 | **WP-A1** | Disclosure-completeness census + `ISD-L-11` (reuse `_closed_enum_offenders`) | **ADDED** | `engine/infinite_scope/` + UISD | Law admission: **Yes** |
 | **WP-A2** | Disclose or open the 255 located closures, in waves by owning directory | **ADDED** | per-directory owners | Per-owner |
-| **WP-A3** | Remove `region="planet-earth-1"` default (`engine/uckp/persistence.py:479`) | **ADDED** | `engine/uckp/` | No |
+| **WP-A3** | Remove `region="planet-earth-1"` default (`engine/uckp/persistence.py:479`) — **SUPERSEDED by WP-UCDA-024** (ADR-0012, CEP-002 Art 28 registration) | **ADDED** | `engine/uckp/` | No |
 | **WP-B1** | Kind↔axis crosswalk gate | **ADDED** | `engine/context/` | No |
 | **WP-B2** | Admit `physical` and `culture` axes | **ADDED** | `engine/context/` | No |
 | **WP-B3** | `physical-law` nucleus + Part 51 + U29 | **ADDED (new capability)** | `UCOS-NUC-001` | **Yes** |

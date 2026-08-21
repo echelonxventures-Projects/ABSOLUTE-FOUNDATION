@@ -472,20 +472,39 @@ class DistributedLedgerPersistence(PersistenceAdapter):
 
 
 class CloudPersistence(PersistenceAdapter):
-    """Region-partitioned object storage — the shape of a managed cloud store."""
+    """Region-partitioned object storage — the shape of a managed cloud store.
+
+    ``region`` is supplied by the caller and never defaulted. It previously carried
+    a single-planet default, which made a planet an architectural assumption baked
+    into a signature rather than data the caller provides (ADR-0012, UCKP-ART-20:
+    the law remains valid across planetary locations and civilizations). A caller
+    that knows where it is says so; a caller that does not know asserts no location
+    at all and the store is unpartitioned, which is the honest reading of absence.
+    A region may name any locality — orbital, lunar, interplanetary or a locality
+    of a kind not yet described — because nothing here interprets the string.
+    """
 
     kind = CLOUD
 
-    def __init__(self, base: str | Path, region: str = "planet-earth-1") -> None:
+    def __init__(self, base: str | Path, region: str | None = None) -> None:
         self._base = Path(base)
         self._region = region
 
     @property
+    def region(self) -> str | None:
+        """The locality the caller supplied, or ``None`` when none was asserted."""
+        return self._region
+
+    @property
     def locator(self) -> str:
+        if self._region is None:
+            return f"cloud://{self._base.name}"
         return f"cloud://{self._region}/{self._base.name}"
 
     @property
     def _region_dir(self) -> Path:
+        if self._region is None:
+            return self._base
         return self._base / self._region
 
     def write(self, objects: Sequence[UCKO]) -> PersistenceReceipt:
@@ -634,7 +653,9 @@ def verify_interchangeable(
     )
 
 
-def build_persistence_suite(base: str | Path) -> tuple[PersistenceAdapter, ...]:
+def build_persistence_suite(
+    base: str | Path, *, cloud_region: str | None = None
+) -> tuple[PersistenceAdapter, ...]:
     """Every mechanism Layer Zero ships, rooted under ``base``.
 
     ``base`` is created if it does not exist. Without this, constructing the suite
@@ -643,6 +664,10 @@ def build_persistence_suite(base: str | Path) -> tuple[PersistenceAdapter, ...]:
     which lets a technology-specific failure escape the abstraction whose entire
     purpose is that no caller needs to know which technologies are inside it
     (Article 9).
+
+    ``cloud_region`` is the seam through which a caller that knows its locality
+    supplies it. It is not defaulted to any locality: a suite built without one
+    asserts no location rather than assuming a planet (ADR-0012).
     """
     root = Path(base)
     root.mkdir(parents=True, exist_ok=True)
@@ -654,7 +679,7 @@ def build_persistence_suite(base: str | Path) -> tuple[PersistenceAdapter, ...]:
         ObjectStoragePersistence(root / "object-storage"),
         KnowledgeGraphPersistence(root / "knowledge-graph"),
         DistributedLedgerPersistence(root / "ledger" / "chain.jsonl"),
-        CloudPersistence(root / "cloud"),
+        CloudPersistence(root / "cloud", cloud_region),
         OfflineArchivePersistence(root / "archive" / "universe.tar.gz"),
         FutureStoragePersistence(root / "future" / "universe.opaque"),
     )

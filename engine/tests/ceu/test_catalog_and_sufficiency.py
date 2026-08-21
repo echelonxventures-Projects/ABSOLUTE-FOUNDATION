@@ -15,15 +15,22 @@ from __future__ import annotations
 import pytest
 
 from engine.ceu.catalog import (
+    ATTR_QUANTITY,
+    ATTR_SYSTEM,
     SEED_CLASSIFICATIONS,
+    SEED_CONVERSIONS,
     SEED_EPISTEMIC_STATES,
     SEED_EXISTENCE_STATES,
     SEED_FORMS,
     SEED_KNOWLEDGE_STATES,
+    SEED_MEASUREMENT_SYSTEMS,
     SEED_OBSERVERS,
+    SEED_QUANTITIES,
     SEED_RELATIONSHIP_TYPES,
     SEED_TOPOLOGIES,
+    SEED_UNITS,
     bootstrap,
+    register_conversions,
     relationship_view,
     to_document,
 )
@@ -354,3 +361,86 @@ def test_the_catalogue_document_declares_no_ceiling():
     assert document["closed_set"] is False
     assert document["upper_limit"] is None
     assert document["counts"]["form"] == len(SEED_FORMS) + 1
+
+
+# --------------------------------------------------------------------------- #
+# Measurement (ADR-0005): systems, quantities and units are entities;           #
+# conversions are relationships. Nothing here is a measurement engine.          #
+# --------------------------------------------------------------------------- #
+
+
+def test_no_measurement_system_is_privileged(seeded: ExistenceRegistry):
+    """SI is a row. If it were the default, every other system would be a special case."""
+    systems = {unit.key for unit in seeded.units(form="measurement-system")}
+    assert systems == {key for key, _ in SEED_MEASUREMENT_SYSTEMS}
+    assert {"si", "imperial", "planck", "non-human", "unknown"} <= systems
+    # Peers: every system is the same form, so none can outrank another by type.
+    assert {unit.form for unit in seeded.units(form="measurement-system")} == {"measurement-system"}
+
+
+def test_a_unit_names_its_system_and_its_quantity(seeded: ExistenceRegistry):
+    """A unit that did not name its system would make the system implicit again."""
+    assert len(seeded.units(form="unit")) == len(SEED_UNITS)
+    systems = {key for key, _ in SEED_MEASUREMENT_SYSTEMS}
+    quantities = {key for key, _ in SEED_QUANTITIES}
+    for unit in seeded.units(form="unit"):
+        attributes = dict(unit.attributes)
+        assert attributes[ATTR_SYSTEM] in systems, unit.key
+        assert attributes[ATTR_QUANTITY] in quantities, unit.key
+        # Both endpoints are registered units, not free strings.
+        seeded.unit("measurement-system", attributes[ATTR_SYSTEM])
+        seeded.unit("quantity", attributes[ATTR_QUANTITY])
+
+
+def test_two_systems_disagree_about_units_while_agreeing_about_the_quantity():
+    """Why quantity is separate from unit: metre and foot measure the same thing."""
+    registry = bootstrap()
+    by_key = {unit.key: dict(unit.attributes) for unit in registry.units(form="unit")}
+    assert by_key["metre"][ATTR_QUANTITY] == by_key["foot"][ATTR_QUANTITY] == "length"
+    assert by_key["metre"][ATTR_SYSTEM] != by_key["foot"][ATTR_SYSTEM]
+
+
+def test_a_conversion_is_a_relationship_instance_carrying_its_own_terms():
+    """Not a lookup table: the terms live on the relationship, so an offset needs no schema."""
+    registry = bootstrap()
+    assert registry.counts().get("relationship", 0) == 0  # the seed is vocabulary only
+    conversions = register_conversions(registry)
+    assert len(conversions) == len(SEED_CONVERSIONS)
+    for conversion in conversions:
+        assert conversion.form == "relationship"
+        assert is_well_formed(conversion.universal_id)
+    terms = [dict(c.attributes) for c in conversions]
+    # A factor-and-offset conversion carries both without any schema here changing.
+    assert any("offset" in t for t in terms)
+    assert all("factor" in t for t in terms)
+
+
+def test_a_unit_system_nobody_has_named_converts_with_zero_code():
+    """The open-world case: an unknown civilisation's unit enters the same way."""
+    registry = bootstrap()
+    registry.register(
+        ExistenceUnit(
+            form="measurement-system",
+            key="third-civilisation-metrology",
+            title="Third Civilisation Metrology",
+            definition="A system of measurement no human has proposed.",
+        )
+    )
+    alien = registry.register(
+        ExistenceUnit(
+            form="unit",
+            key="span",
+            title="Span",
+            definition="A unit of length in a system this file has never named.",
+            attributes={ATTR_SYSTEM: "third-civilisation-metrology", ATTR_QUANTITY: "length"},
+        )
+    )
+    metre = registry.id_of("unit", "metre")
+    registered = register_conversions(
+        registry, (("span", "metre", {"factor": "unknown", "note": "not yet measured"}),)
+    )
+    assert len(registered) == 1
+    assert dict(registered[0].attributes)["source"] == alien.universal_id
+    assert dict(registered[0].attributes)["target"] == metre
+    # An unmeasured factor is a stated unknown, never a missing edge (CEU-017).
+    assert dict(registered[0].attributes)["factor"] == "unknown"
