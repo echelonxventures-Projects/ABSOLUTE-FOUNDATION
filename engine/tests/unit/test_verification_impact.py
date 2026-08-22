@@ -290,14 +290,30 @@ def test_is_full_predicate() -> None:
 
 
 def test_cli_bounded_change_exits_zero(capsys) -> None:
-    assert main(["--path", "engine/temporal/coordinate.py", "--quiet"]) == EXIT_BOUNDED
+    # engine/temporal/coordinate.py is deliberately NOT used here any more: ADR-0015
+    # (relationship temporal validity) gave it real external dependents in
+    # engine/knowledge and engine/uckp, so a change to it now correctly reaches a
+    # subsystem-level blast radius (4 owners > the len(owners) > 3 threshold,
+    # engine/verification_impact/impact.py:204) and escalates — see
+    # test_cli_selects_the_temporal_tests below, which asserts exactly that. This test's
+    # own purpose is unrelated to temporal specifically: it proves the CLI's healthy
+    # path for a change that is still genuinely narrow today.
+    assert main(["--path", "engine/knowledge/ukip/errors.py", "--quiet"]) == EXIT_BOUNDED
 
 
 def test_cli_selects_the_temporal_tests(capsys) -> None:
-    """Live registry: a temporal change must reach its own suite."""
-    main(["--path", "engine/temporal/coordinate.py", "--print-tests"])
-    out = capsys.readouterr().out
-    assert "engine/tests/unit/test_temporal_contract.py" in out
+    """Live registry: a temporal change must reach its own suite.
+
+    engine/temporal/coordinate.py now has real dependents outside its own package
+    (engine/knowledge/ukip/relationships.py and confidence.py, ADR-0015/0016), which
+    correctly escalates it past the bounded-CLI path (--print-tests prints nothing
+    once escalated, per test_cli_print_tests_is_empty_when_escalated) — so this reads
+    the full affected-test set via --json instead of the bounded --print-tests output.
+    """
+    main(["--path", "engine/temporal/coordinate.py", "--json"])
+    body = json.loads(capsys.readouterr().out)
+    assert body["plan"]["run_everything"] is True
+    assert "engine/tests/unit/test_temporal_contract.py" in body["impact"]["affected_tests"]
 
 
 def test_cli_escalation_exits_two(capsys) -> None:
@@ -312,7 +328,8 @@ def test_cli_print_tests_is_empty_when_escalated(capsys) -> None:
 
 
 def test_cli_emits_json(capsys) -> None:
-    main(["--path", "engine/temporal/coordinate.py", "--json"])
+    # See test_cli_bounded_change_exits_zero for why coordinate.py is not the example.
+    main(["--path", "engine/knowledge/ukip/errors.py", "--json"])
     body = json.loads(capsys.readouterr().out)
     assert body["plan"]["scope"] == "changed"
     assert body["impact"]["counts"]["changed"] == 1

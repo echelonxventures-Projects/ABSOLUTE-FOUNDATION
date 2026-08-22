@@ -24,8 +24,23 @@ from engine.knowledge.ukip.relationships import (
     build_relationships,
     relationships_of,
 )
+from engine.temporal.coordinate import TemporalCoordinate, ValidityPeriod
 
 from .conftest import make_unit, register
+
+
+def _coord(counter: int, *, system: str = "test-clock") -> TemporalCoordinate:
+    return TemporalCoordinate.logical(counter, system_identifier=system, authority="test")
+
+
+def _validity(
+    since: int, until: int | None = None, *, system: str = "test-clock"
+) -> ValidityPeriod:
+    return ValidityPeriod(
+        since=_coord(since, system=system),
+        until=None if until is None else _coord(until, system=system),
+    )
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -40,6 +55,7 @@ def _make_rel(
     derived: bool = False,
     path: tuple[str, ...] = (),
     note: str = "",
+    validity: ValidityPeriod | None = None,
 ) -> Relationship:
     return Relationship(
         source=source,
@@ -48,6 +64,7 @@ def _make_rel(
         note=note,
         derived=derived,
         path=path,
+        validity=validity,
     )
 
 
@@ -158,6 +175,95 @@ class TestRelationshipSetDedup:
         rset = RelationshipSet([asserted, derived2])
         assert len(rset) == 1
         assert rset.all()[0].note == "real"
+
+
+class TestRelationshipTemporalValidity:
+    """UCKP-ART-07 temporal validity (P4-F-002): the same (source, target, relation)
+    triple can carry more than one relationship instance over time."""
+
+    def test_non_overlapping_validity_windows_coexist(self) -> None:
+        earlier = _make_rel(note="v1", validity=_validity(0, 10))
+        later = _make_rel(note="v2", validity=_validity(10, None))
+        rset = RelationshipSet([earlier, later])
+        assert len(rset) == 2
+        assert {r.note for r in rset.all()} == {"v1", "v2"}
+
+    def test_overlapping_validity_windows_collapse_asserted_over_derived(self) -> None:
+        derived = _make_rel(derived=True, note="derived", validity=_validity(0, None))
+        asserted = _make_rel(derived=False, note="asserted", validity=_validity(0, None))
+        rset = RelationshipSet([derived, asserted])
+        assert len(rset) == 1
+        assert rset.all()[0].note == "asserted"
+
+    def test_timeless_relationship_still_behaves_as_single_winner(self) -> None:
+        # No validity anywhere in the group: identical to the pre-existing behaviour.
+        derived = _make_rel(derived=True)
+        asserted = _make_rel(derived=False, note="real")
+        rset = RelationshipSet([derived, asserted])
+        assert len(rset) == 1
+        assert rset.all()[0].note == "real"
+
+    def test_incomparable_validity_windows_do_not_collapse(self) -> None:
+        a = _make_rel(note="a", validity=_validity(0, None, system="clock-a"))
+        b = _make_rel(note="b", validity=_validity(0, None, system="clock-b"))
+        rset = RelationshipSet([a, b])
+        assert len(rset) == 2
+
+    def test_valid_at_reconstructs_the_historical_subgraph(self) -> None:
+        superseded = _make_rel(note="old", validity=_validity(0, 10))
+        current = _make_rel(note="new", validity=_validity(10, None))
+        rset = RelationshipSet([superseded, current])
+        assert [r.note for r in rset.valid_at(_coord(5)).all()] == ["old"]
+        assert [r.note for r in rset.valid_at(_coord(15)).all()] == ["new"]
+        # The instant a window opens belongs to the new window (half-open [since, until)).
+        assert [r.note for r in rset.valid_at(_coord(10)).all()] == ["new"]
+
+    def test_valid_at_excludes_incomparable_windows(self) -> None:
+        rel = _make_rel(validity=_validity(0, None, system="clock-a"))
+        rset = RelationshipSet([rel])
+        assert rset.valid_at(_coord(5, system="clock-b")).all() == ()
+
+    def test_timeless_relationship_always_holds(self) -> None:
+        rel = _make_rel()
+        rset = RelationshipSet([rel])
+        assert len(rset.valid_at(_coord(999)).all()) == 1
+
+    def test_identity_distinguishes_temporal_versions(self) -> None:
+        earlier = _make_rel(validity=_validity(0, 10))
+        later = _make_rel(validity=_validity(10, None))
+        assert earlier.key() == later.key()
+        assert earlier.identity() != later.identity()
+
+    def test_seal_changes_when_a_temporal_version_is_added(self) -> None:
+        base = RelationshipSet([_make_rel(validity=_validity(0, 10))])
+        extended = RelationshipSet(
+            [_make_rel(validity=_validity(0, 10)), _make_rel(validity=_validity(10, None))]
+        )
+        assert base.seal() != extended.seal()
+
+    def test_compose_preserves_every_temporal_version_of_the_seed_set(self) -> None:
+        earlier = _make_rel("A", "B", validity=_validity(0, 10))
+        later = _make_rel("A", "B", validity=_validity(10, None))
+        rset = RelationshipSet([earlier, later])
+        composed = rset.compose()
+        assert len([r for r in composed.all() if r.key() == ("A", "B", "depends-on")]) == 2
+
+    def test_build_relationships_threads_declared_validity(self) -> None:
+        window = _validity(0, None)
+        unit_a = make_unit("val-target")
+        unit_b = make_unit(
+            "val-source",
+            relations=(
+                RelationDeclaration(RelationType.DEPENDS_ON, "val-target", validity=window),
+            ),
+        )
+        registry = register((unit_a, unit_b))
+        rset = build_relationships(registry)
+        source_id = next(
+            r.knowledge_id for r in registry.records() if "val-source" in r.canonical_source.locator
+        )
+        edge = rset.outbound(source_id)[0]
+        assert edge.validity == window
 
 
 # ---------------------------------------------------------------------------

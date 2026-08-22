@@ -61,6 +61,26 @@ _BUILD_MANIFESTS = frozenset({"pyproject.toml"})
 _DECLARATION_KEYS = frozenset(
     {"programme", "manifest", "authority", "laws", "expansion_axes", "determination"}
 )
+_MARKDOWN_SUFFIX = ".md"
+
+#: The labels an authored governance document uses to self-declare its owning authority,
+#: checked in this priority order. Both conventions are real and observed: ADRs (adr/*.md)
+#: declare "Deciders"; constitutions and determination/assessment reports declare
+#: "Authority". Neither is guessed — a document naming neither is not classified.
+_OWNER_LABELS = ("authority", "deciders")
+
+#: A document's own self-declared lifecycle stage, when it states one. Open vocabulary —
+#: whatever the document says ("Accepted", "RATIFIED ... LIVING-UNTIL-FROZEN"), never
+#: coerced into a closed set, matching CXL-style "state what's known, don't invent."
+_LIFECYCLE_LABEL = "status"
+
+#: ``**Label:** value`` — the bold-label metadata convention (assessment/determination reports).
+_BOLD_LABEL = re.compile(r"^\*\*\s*([A-Za-z][A-Za-z ]*?)\s*:\*\*\s*(.+)$")
+
+#: ``| Label | value |`` — the two-column metadata table convention (ADRs, constitutions).
+#: A row is excluded when the label is the header word itself or either cell is a separator
+#: (``---``), so the table's own header/rule lines are never read as a declared field.
+_TABLE_ROW = re.compile(r"^\|\s*([A-Za-z][A-Za-z ]*?)\s*\|\s*(.+?)\s*\|\s*$")
 
 
 class ClassificationError(RuntimeError):
@@ -115,16 +135,33 @@ class Repository:
 
     @cached_property
     def tracked(self) -> frozenset[str]:
+        """Every version-controlled path, read NUL-separated so no path is escaped.
+
+        ``-z`` is not an optimisation, it is the correctness condition. Without it git
+        C-quotes and octal-escapes any path holding a non-ASCII byte, so a tracked
+        ``…UCOS-Ω∞-…`` artifact arrives as the literal string
+        ``"…UCOS-\\316\\251\\342\\210\\236-…"`` and never equals its own path. Such a path
+        then tests as *untracked*, and because ``_r01_repository_state`` claims any existing
+        path absent from this set, the artifact is silently absorbed into REPOSITORY_STATE
+        before the rule that actually owns it is ever evaluated — a wrong authority, which
+        is strictly worse than the fail-closed terminal. ``-z`` disables quoting outright,
+        so this does not depend on ``core.quotePath`` being configured any particular way.
+
+        Decoding is byte-safe for the same reason: a path git carries need not be valid
+        UTF-8, and ``surrogateescape`` round-trips those bytes instead of raising or
+        substituting. Same construction as ``ukb._git_ls``, the repository's other
+        version-control boundary query.
+        """
         if "tracked" in self._overrides:
             return frozenset(self._overrides["tracked"])  # type: ignore[arg-type]
         out = subprocess.run(  # noqa: S603
-            ["git", "ls-files"],  # noqa: S607
+            ["git", "ls-files", "-z"],  # noqa: S607
             cwd=self.root,
             capture_output=True,
-            text=True,
             check=False,
         )
-        return frozenset(line for line in out.stdout.splitlines() if line)
+        decoded = out.stdout.decode("utf-8", errors="surrogateescape")
+        return frozenset(path for path in decoded.split("\0") if path)
 
     @cached_property
     def generated(self) -> frozenset[str]:
@@ -178,6 +215,16 @@ class Repository:
         except (OSError, json.JSONDecodeError):
             return None
         return loaded if isinstance(loaded, dict) else None
+
+    def text_of(self, path: str) -> str | None:
+        """The artifact's own text, or None when it cannot be read as one."""
+        overrides = self._overrides.get("markdown_texts")
+        if isinstance(overrides, dict) and path in overrides:
+            return str(overrides[path])
+        try:
+            return (self.root / path).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            return None
 
 
 def load_boundary(repo: Path) -> dict:
@@ -281,6 +328,76 @@ def _r07_source(subject: Subject, repo: Repository, boundary: dict) -> bool:
     return suffix in _EXECUTABLE_SUFFIXES or path.rsplit("/", 1)[-1] in _BUILD_MANIFESTS
 
 
+def _markdown_declared_fields(text: str, *, limit: int = 40) -> dict[str, str]:
+    """The document's own opening metadata fields, first match per label wins.
+
+    Scans only the first ``limit`` lines — a self-declaration lives at the top of every
+    observed convention (immediately after the title), so this stays bounded rather than
+    scanning arbitrarily long prose looking for a label that was never declared.
+    """
+    fields: dict[str, str] = {}
+    for line in text.splitlines()[:limit]:
+        stripped = line.strip()
+        bold = _BOLD_LABEL.match(stripped)
+        if bold:
+            label, value = bold.group(1).strip().lower(), bold.group(2).strip()
+            fields.setdefault(label, value)
+            continue
+        row = _TABLE_ROW.match(stripped)
+        if row:
+            label, value = row.group(1).strip().lower(), row.group(2).strip()
+            if label == "field" or set(label) == {"-"} or set(value) <= {"-"}:
+                continue  # the table's own header row or separator row, not a declared field
+            fields.setdefault(label, value)
+    return fields
+
+
+def authored_document_owner(path: str, repo: Repository) -> str:
+    """The authority the document declares of itself, or ``""`` if it declares none.
+
+    Checked in :data:`_OWNER_LABELS` priority order: "Authority" (constitutions,
+    determination/assessment reports) before "Deciders" (ADRs) — both are real,
+    observed self-declaration conventions, read from the artifact rather than assumed.
+    """
+    text = repo.text_of(path)
+    if text is None:
+        return ""
+    fields = _markdown_declared_fields(text)
+    for label in _OWNER_LABELS:
+        if fields.get(label):
+            return fields[label]
+    return ""
+
+
+def authored_document_lifecycle(path: str, repo: Repository) -> str:
+    """The document's own self-declared lifecycle stage, or ``""`` if it declares none.
+
+    Open vocabulary — whatever the document states ("Accepted", "RATIFIED ...
+    LIVING-UNTIL-FROZEN") — never coerced into a closed set the class does not declare.
+    """
+    text = repo.text_of(path)
+    if text is None:
+        return ""
+    return _markdown_declared_fields(text).get(_LIFECYCLE_LABEL, "")
+
+
+def authored_document_checks(path: str, repo: Repository) -> dict[str, bool]:
+    """Each of Class 7's five membership criteria, individually, mirroring Class 6's shape."""
+    return {
+        "markdown": path.endswith(_MARKDOWN_SUFFIX),
+        "authored": path not in repo.producer_homes,
+        "repository-controlled": path in repo.tracked,
+        "non-generated": path not in repo.generated,
+        "self-declared-authority": bool(authored_document_owner(path, repo)),
+    }
+
+
+def _r08_authored_document(subject: Subject, repo: Repository, boundary: dict) -> bool:
+    if subject.kind != PATH:
+        return False
+    return all(authored_document_checks(subject.identity, repo).values())
+
+
 #: Rule id to predicate. Two-sided, exactly like LAW_CHECKS: a declared rule with no
 #: predicate cannot be evaluated, and a predicate no rule declares is dead code.
 RULE_PREDICATES: dict[str, Callable[[Subject, Repository, dict], bool]] = {
@@ -291,6 +408,7 @@ RULE_PREDICATES: dict[str, Callable[[Subject, Repository, dict], bool]] = {
     "R-05": _r05_constitutional_truth,
     "R-06": _r06_governed_declaration,
     "R-07": _r07_source,
+    "R-08": _r08_authored_document,
 }
 
 
@@ -376,6 +494,9 @@ __all__ = [
     "ClassificationResult",
     "Repository",
     "Subject",
+    "authored_document_checks",
+    "authored_document_lifecycle",
+    "authored_document_owner",
     "authority_for",
     "classify",
     "classify_all",

@@ -164,6 +164,71 @@ def digest(payload: object) -> str:
     return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
+GENESIS_HASH = "0" * 64
+
+
+def record_decision_update(doc: dict, decision_id: str, updates: dict[str, object]) -> dict:
+    """Return a new declaration document with one decision updated and its history
+    entry appended.
+
+    This engine still reads and computes only — it does not write to disk. Persisting
+    the returned document is the caller's responsibility: this function's only job is
+    to make that persisted edit self-documenting and hash-chained instead of an
+    untracked overwrite.
+
+    Raises:
+        ValueError: `decision_id` is not present in `doc["decisions"]`.
+    """
+    decisions = doc.get("decisions") or []
+    index = next((i for i, entry in enumerate(decisions) if entry.get("id") == decision_id), None)
+    if index is None:
+        raise ValueError(f"no such decision: {decision_id}")
+    before = decisions[index]
+    after = {**before, **updates}
+
+    history = {k: list(v) for k, v in (doc.get("decision_history") or {}).items()}
+    chain = history.setdefault(decision_id, [])
+    previous_hash = chain[-1]["entry_hash"] if chain else GENESIS_HASH
+    entry = {
+        "sequence": len(chain) + 1,
+        "decision_id": decision_id,
+        "previous_snapshot_hash": digest(before),
+        "new_snapshot_hash": digest(after),
+        "previous_hash": previous_hash,
+    }
+    entry["entry_hash"] = digest({k: v for k, v in entry.items() if k != "entry_hash"})
+    chain.append(entry)
+
+    new_decisions = list(decisions)
+    new_decisions[index] = after
+    return {**doc, "decisions": new_decisions, "decision_history": history}
+
+
+def verify_decision_history(doc: dict) -> list[str]:
+    """Findings if any decision's append-only history chain is broken (empty = intact).
+
+    Mirrors `engine.context.registry.ContextRegistry.verify_audit()`'s construction —
+    the same shape reused, not a new mechanism invented for this owner.
+    """
+    problems: list[str] = []
+    history = doc.get("decision_history") or {}
+    decision_ids = {d.get("id") for d in (doc.get("decisions") or [])}
+    for decision_id, chain in sorted(history.items()):
+        if decision_id not in decision_ids:
+            problems.append(f"{decision_id}: history exists for a decision no longer declared")
+        previous_hash = GENESIS_HASH
+        for position, entry in enumerate(chain, start=1):
+            if entry.get("sequence") != position:
+                problems.append(f"{decision_id} entry {position}: sequence mismatch")
+            if entry.get("previous_hash") != previous_hash:
+                problems.append(f"{decision_id} entry {position}: previous-hash link broken")
+            expected = digest({k: v for k, v in entry.items() if k != "entry_hash"})
+            if entry.get("entry_hash") != expected:
+                problems.append(f"{decision_id} entry {position}: entry hash does not reproduce")
+            previous_hash = entry.get("entry_hash", "")
+    return problems
+
+
 def git(*args: str) -> str:
     try:
         out = subprocess.run(  # noqa: S603 — fixed argv, no shell, no user input
@@ -737,6 +802,7 @@ SELF_CHECKS = {
     "--check-no-enumeration": check_no_enumeration,
     "--check-write-scope": lambda decl: check_write_scope(decl),
     "--check-determinism": self_determinism,
+    "--check-decision-history": verify_decision_history,
 }
 
 

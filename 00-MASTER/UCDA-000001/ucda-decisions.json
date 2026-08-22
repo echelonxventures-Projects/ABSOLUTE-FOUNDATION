@@ -612,6 +612,17 @@
       "route": "Ten memory capabilities were measured against located owners and none justified CREATE, so no memory engine, graph memory database, knowledge memory authority or history authority is built. engine/lineage/ already carries the governing discipline — UCI-001 Part XVI.5, 'lineage and evolution are DERIVED projections over recorded history; no new store is created' — so the resolution surface is added there as a projection that owns nothing it reports. The seven layers (identity, context, relationship, knowledge, evidence, decision, evolution) are declared as DATA in engine/lineage/memory-layers.json per ADR-0007, so a future layer is admitted by declaration rather than by amending source. Every resolved value cites the governed record it came from; an unknown subject resolves to empty layers marked recorded=false rather than raising or guessing.",
       "acceptance": "For any subject identity the projection resolves all seven declared layers, each naming its located owner and citing its source record; an unknown subject resolves without error and without invented content; the projection writes no file, mints no identifier and reads no clock; adding an eighth layer to the declaration requires no code change; and a verification suite proves memory persistence, lineage preservation, historical reconstruction, no duplicate truth, no duplicate authority and no orphan memory.",
       "authorization_required": true
+    },
+    {
+      "id": "WP-UCDA-028",
+      "title": "Implement the six still-open PHASE-4 capability findings named in ADR-0019 (P4-F-001, 004, 005, 006, 007-remainder, 008, 009-remainder)",
+      "discharges": [
+        "DEC-ADR-0019"
+      ],
+      "owner": "CEU-001 (P4-F-001), UKDA (P4-F-004), UCDA (P4-F-005), UKIP (P4-F-006), engine/temporal owner (P4-F-007 remainder), UAUE (P4-F-008), UCXI (P4-F-009 remainder) — one owner per sub-obligation, no shared owner",
+      "route": "Seven distinct, individually-acceptance-bound obligations, one per finding, each a substantive independent architectural change against a different owner — the same category of work ADR-0015/ADR-0016 each took as a dedicated, individually-tested, individually-registered decision. This package authorizes each to be executed as its own decision at that same granularity, rather than batched into one untested implementation.",
+      "acceptance": "Each sub-obligation is discharged only when its owner substrate carries real, tested, executable evidence for its specific finding: P4-F-001 — CEU-001 supersession history is append-only, not mutated in place (DEC-ADR-0023, IMPLEMENTED); P4-F-004/006 — KnowledgeStore archives replaced versions and persists provenance chains (DEC-ADR-0025, IMPLEMENTED); P4-F-005 — UCDA decision mutations become hash-chained and append-only (DEC-ADR-0024, IMPLEMENTED); P4-F-007 remainder — the rival TemporalEvent at engine/uckp/values.py is resolved; P4-F-008 — a learning object model / evolution transaction object exists in UAUE; P4-F-009 remainder — UCXI per-subject context binding is exercised for a context kind and entity substrate beyond confidence.py's KNOWLEDGE/UKIP pairing (DEC-ADR-0026, IMPLEMENTED — IDENTITY and GOVERNANCE for CEU ExistenceUnit).",
+      "authorization_required": true
     }
   ],
   "$decisions_comment": [
@@ -3827,6 +3838,195 @@
           "engine/ceu/sufficiency.py"
         ]
       }
+    },
+    {
+      "id": "DEC-ADR-0014",
+      "title": "Re-tighten the UCL unadmitted-target ratchet to its measured value",
+      "decision_class": "governance",
+      "source_register": "adr/0014-retighten-the-ucl-unadmitted-target-ratchet.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0014-retighten-the-ucl-unadmitted-target-ratchet.md",
+        "UCL-GAP-CLOSURE-REPORT.md",
+        "00-MASTER/UCL-000001/ucl-declaration.json",
+        "00-MASTER/UCL-000001/ucl_engine.py"
+      ],
+      "note": "UCL-V-41 and UCL-V-42 were the only two failing criteria in UCL-000001; all thirteen self-checks and the other forty criteria pass. The declared rule is a ratchet held at exactly the measured value, re-tightened whenever governed records are lawfully admitted. Delta measured by identity: exactly one artifact added (engine/constitution/stages.py, from commit 8bad683f P0-LIFECYCLE-CLOSURE-001), none removed, and it is ineligible for corpus registration because eligibility_universe() contains no engine/**/*.py at all. Of the 85 unadmitted targets, zero could carry a constitutional identity. Counts are byte-identical with all Phase 4 changes stashed, so the drift is not caused by the work being certified."
+    },
+    {
+      "id": "DEC-ADR-0015",
+      "title": "UCKP-ART-07 relationships carry validity by consuming the existing temporal type, not a new one",
+      "decision_class": "implementation",
+      "source_register": "adr/0015-uckp-art-07-relationship-temporal-validity.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0015-uckp-art-07-relationship-temporal-validity.md",
+        "RELATIONSHIP-TEMPORAL-VALIDITY-DETERMINATION-REPORT.md",
+        "PHASE-4-CAPABILITY-GAP-MATRIX.md",
+        "engine/knowledge/ukip/contracts.py",
+        "engine/knowledge/ukip/relationships.py",
+        "engine/temporal/coordinate.py",
+        "engine/temporal/operations.py",
+        "engine/tests/knowledge/ukip/test_relationships.py"
+      ],
+      "note": "Closes P4-F-002 (owner UCKP ART-07), referred rather than repaired at ADR-0013: \"No relationship representation carries temporal validity, version or supersession.\" Investigated first (RELATIONSHIP-TEMPORAL-VALIDITY-DETERMINATION-REPORT.md): the (source, target, relation) triple in engine/knowledge/ukip/relationships.py genuinely carried one active identity, verified at the actual collapse point in RelationshipSet.__init__, not inferred from documentation. engine/temporal/ (CMG-000002) already provided the needed ValidityPeriod/compare() primitive with no call site anywhere (companion finding P4-F-007) — determination A+B, not C: a real gap, closed by integration with an existing owner's type, not invention of a new one."
+    },
+    {
+      "id": "DEC-ADR-0016",
+      "title": "Knowledge confidence is a UCXI context binding, not a new knowledge field",
+      "decision_class": "implementation",
+      "source_register": "adr/0016-uckp-knowledge-confidence-via-ucxi-context.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0016-uckp-knowledge-confidence-via-ucxi-context.md",
+        "KNOWLEDGE-CONFIDENCE-COMPLETION-DETERMINATION-REPORT.md",
+        "PHASE-4-CAPABILITY-GAP-MATRIX.md",
+        "engine/knowledge/ukip/confidence.py",
+        "engine/context/ontology.py",
+        "engine/context/registry.py",
+        "engine/tests/knowledge/ukip/test_confidence.py"
+      ],
+      "note": "Closes P4-F-003 (owner UKDA/UKIP): \"No confidence field on any knowledge object.\" Investigated first (KNOWLEDGE-CONFIDENCE-COMPLETION-DETERMINATION-REPORT.md), same method as ADR-0015: engine/context/ontology.py already declares a KNOWLEDGE context kind with required source/provenance/confidence dimensions, and engine/context/registry.py's ContextRegistry is a real, complete, append-only, audited registration authority for it, with zero call sites anywhere in engine/knowledge/ before this change. Determination B: represented through existing epistemic state (UCXI context), not missing. KnowledgeAuthority was checked and confirmed not a confidence proxy — a distinct accountability-tier concern."
+    },
+    {
+      "id": "DEC-ADR-0017",
+      "title": "Authorize REG-AUTO-001 to mint identities closing UCL-F-006",
+      "decision_class": "governance",
+      "source_register": "adr/0017-ucl-f-006-identity-minting-authorization.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0017-ucl-f-006-identity-minting-authorization.md",
+        "UCL-GAP-CLOSURE-REPORT.md",
+        "adr/0014-retighten-the-ucl-unadmitted-target-ratchet.md",
+        "00-BOOK/DATA/id-ledger.json"
+      ],
+      "note": "Reverses this session's own prior disposition to leave UCL-F-006 referred, under the explicit follow-up directive ABSOLUTE UNIVERSAL EXPANSION CLOSURE DIRECTIVE Phase 2, issued after full irreversibility disclosure. Authorizes REG-AUTO-001 to mint identities for exactly 24 enumerated objects (2 EXECUTABLE_OBJECT, 4 TEST_OBJECT, 3 DATA_OBJECT, 15 EXCLUDED_DOCUMENT) via uga_engine.py run. Does NOT authorize the separate, larger 192-document CORPUS_REGISTRATION drift (a different authority, UMB-IMP-001) — that stays out of scope exactly as ADR-0014 originally scoped it."
+    },
+    {
+      "id": "DEC-ADR-0018",
+      "title": "Authorize REG-AUTO-001 to mint identities for this session's own new objects",
+      "decision_class": "governance",
+      "source_register": "adr/0018-ucl-f-006-follow-on-identity-minting-authorization.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0018-ucl-f-006-follow-on-identity-minting-authorization.md",
+        "adr/0017-ucl-f-006-identity-minting-authorization.md",
+        "00-BOOK/DATA/id-ledger.json"
+      ],
+      "note": "Follow-on to DEC-ADR-0017, discovered while validating its own execution: uga_engine.py discovers objects via `git ls-files --cached` (the index), so confidence.py and test_confidence.py (Task 3, DEC-ADR-0016) were invisible to UGA-001 entirely because never staged, not counted anonymous and not minted by the prior run. Scoped narrowly to these 2 objects, per ADR-0017's own stated limit against a standing blanket authorization."
+    },
+    {
+      "id": "DEC-ADR-0019",
+      "title": "Formal disposition of every PHASE-4 capability finding not closed by ADR-0015/0016",
+      "decision_class": "governance",
+      "source_register": "adr/0019-residual-phase4-finding-disposition.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "work_package": "WP-UCDA-028",
+      "evidence": [
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "PHASE-4-CAPABILITY-GAP-MATRIX.md",
+        "engine/ceu/existence.py",
+        "engine/knowledge/store.py",
+        "engine/uckp/values.py"
+      ],
+      "note": "Re-opens all ten PHASE-4 findings per the closure directive's Phase 3. Corrects the directive's own mislabel (P4-F-004 is KnowledgeStore's destructive rewrite, not knowledge confidence; P4-F-003 is confidence, already closed by DEC-ADR-0016). P4-F-002/003/010 confirmed CLOSED. P4-F-007 and P4-F-009 confirmed PARTIALLY CLOSED by DEC-ADR-0015/0016 respectively, with the remaining clause of each stated explicitly (rival TemporalEvent at engine/uckp/values.py:268-276, still present; UCXI per-subject binding for context kinds other than KNOWLEDGE, still absent). P4-F-001, 004, 005, 006, 008 confirmed still open by direct re-read of the cited code. The 192-document corpus-registration population and pre-existing CMG/ISD housekeeping items are named as explicitly out of this decision's scope rather than silently omitted."
+    },
+    {
+      "id": "DEC-ADR-0020",
+      "title": "The verification-purity restoration fixture must be state-aware, not a blind checkout",
+      "decision_class": "implementation",
+      "source_register": "adr/0020-state-aware-verification-purity-restoration.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0020-state-aware-verification-purity-restoration.md",
+        "platform/tests/test_verification_purity.py",
+        "adr/0017-ucl-f-006-identity-minting-authorization.md",
+        "adr/0018-ucl-f-006-follow-on-identity-minting-authorization.md"
+      ],
+      "note": "Discovered by direct execution this session: _restore_derived_views's unconditional `git checkout -- 00-BOOK/DATA/ 00-BOOK/REGISTRIES/ 00-BOOK/CONTROL-TOWER/` silently reverted DEC-ADR-0017/0018's minted identity ledger back to HEAD after a full-suite run, with no test failure to signal it. Confirmed sole cause: git diff on id-ledger.json was empty immediately after the run despite independently-verified prior mint."
+    },
+    {
+      "id": "DEC-ADR-0023",
+      "title": "CEU supersession history becomes append-only, not mutated in place",
+      "decision_class": "implementation",
+      "source_register": "adr/0023-ceu-supersession-append-only-history.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0023-ceu-supersession-append-only-history.md",
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "engine/ceu/existence.py",
+        "engine/tests/ceu/test_existence.py"
+      ],
+      "note": "Discharges one of WP-UCDA-028's six independent sub-obligations (P4-F-001, CEU-001), per that work package's own stated route authorizing per-obligation decisions at ADR-0015/0016's granularity. _supersessions widened from dict[str,dict] (mutated in place) to dict[str, list[dict]] (append-only); resurrect() now appends a new snapshot built from the prior one rather than mutating it."
+    },
+    {
+      "id": "DEC-ADR-0024",
+      "title": "UCDA decision mutations become hash-chained and append-only",
+      "decision_class": "implementation",
+      "source_register": "adr/0024-ucda-append-only-decision-history.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0024-ucda-append-only-decision-history.md",
+        "adr/0019-residual-phase4-finding-disposition.md"
+      ],
+      "note": "Initial registration, pre-implementation-confirmation state — this entry's own next transition will be the first live use of record_decision_update() rather than raw JSON editing."
+    },
+    {
+      "id": "DEC-ADR-0025",
+      "title": "KnowledgeStore archives replaced versions and persists provenance chains",
+      "decision_class": "implementation",
+      "source_register": "adr/0025-knowledgestore-archive-and-provenance-persistence.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0025-knowledgestore-archive-and-provenance-persistence.md",
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "engine/knowledge/store.py",
+        "engine/tests/knowledge/test_store.py"
+      ],
+      "note": "Discharges two of WP-UCDA-028's six independent sub-obligations (P4-F-004 UKDA, P4-F-006 UKIP). Found and worked around a real constraint the original discovery missed: KnowledgeBase.replace_object() has 3 live non-test callers all using a same-identity upsert idiom, so the fix moved to the persistence boundary (archive-before-overwrite) rather than routing through supersedes/superseded_by, which would have broken those callers."
+    },
+    {
+      "id": "DEC-ADR-0026",
+      "title": "CEU units bind IDENTITY and GOVERNANCE context through UCXI-000001",
+      "decision_class": "implementation",
+      "source_register": "adr/0026-ceu-context-binding-identity-and-governance.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0026-ceu-context-binding-identity-and-governance.md",
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "engine/ceu/context_binding.py",
+        "engine/tests/ceu/test_context_binding.py"
+      ],
+      "note": "Discharges one more of WP-UCDA-028's six independent sub-obligations (P4-F-009 remainder). Extends the ADR-0016 confidence.py integration shape to a second entity substrate (CEU ExistenceUnit) and two more universal context kinds (IDENTITY, GOVERNANCE), proving one subject can carry more than one bound context kind at once through the same ContextRegistry, no new registry or taxonomy. Discovered during implementation: a GOVERNANCE projection that does not change its natural key on resurrection would assert identical substance under two identities, itself a Context Once (CXL-06) violation -- fixed by projecting resurrection as a distinct governance state, not collapsing it into the state it reverses.",
+      "action_taken": "IMPLEMENTED -- engine/ceu/context_binding.py: bind_identity()/identity_of() bind IDENTITY once per unit, keyed by (form, key), stable across supersession. bind_governance()/resupersede_governance()/governance_history() project ExistenceRegistry.supersede() history into GOVERNANCE, natural-keyed (form:key)@{history length} so a real supersede()/resurrect() always earns a new context identity, mirroring confidence.py @{version} versioning. engine/tests/ceu/test_context_binding.py: 13 tests, all passing -- multi-context binding on one unit, full history reconstruction across supersede+resurrect+resupersede, idempotent re-registration, ontology-shape and duplicate-content refusal not bypassed, unknown-future-context-kind admission re-exercised. engine/tests/ceu/, engine/tests/context/, engine/tests/knowledge/: 1177 passed, no regression."
+    },
+    {
+      "id": "DEC-ADR-0027",
+      "title": "Mutation classification admits AUTHORED_DOCUMENT as its eighth class",
+      "decision_class": "implementation",
+      "source_register": "adr/0027-mutation-classification-authored-document-class.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0027-mutation-classification-authored-document-class.md",
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "platform/repository_intelligence/mutation_classification.py",
+        "platform/tests/test_mutation_classification.py"
+      ],
+      "note": "Closes REQ-39 (UCOS-OMEGA-INFINITY-COMPLETE-REQUIREMENT-MASTER-INDEX.md), a gap discovered independently of adr/0019/WP-UCDA-028 during the requirement-index compilation pass -- CORRECTED: the initial registration of this decision incorrectly described it as discharging one of WP-UCDA-028's six sub-obligations; adr/0019's own list (P4-F-001, 004, 005, 006, 007-remainder, 008, 009-remainder) names no mutation-classification finding, so this decision stands on its own governance basis. Adds Class 7 AUTHORED_DOCUMENT and rule R-08 to the existing seven-rule mutation-governance-boundary.json / mutation_classification.py pair (EX-015/EX-016), reusing the exact owner-parameterised governed_by pattern GOVERNED_DECLARATION (Class 6) established. No new mutation authority, registry, or governance model created. Ownership is read from the artifact's own self-declared Authority (constitutions, determination/assessment reports) or Deciders (ADRs) field, checked in that priority order -- both are real, observed conventions in this repository's own governance documents, not invented. R-06 precedes R-08 and a JSON path never satisfies the markdown criterion, so GOVERNED_DECLARATION and AUTHORED_DOCUMENT are structurally disjoint.",
+      "action_taken": "IMPLEMENTED -- 00-BOOK/DATA/mutation-governance-boundary.json: new AUTHORED_DOCUMENT mutation_classes entry (5 membership_criteria) and new R-08 classification rule (precedence 8, before the UNRESOLVED terminal). platform/repository_intelligence/mutation_classification.py: _r08_authored_document predicate registered in RULE_PREDICATES; authored_document_checks() (evidence generation, mirrors governed_declaration_checks()); authored_document_owner() (canonical owner resolution, Authority-then-Deciders priority); authored_document_lifecycle() (open-vocabulary Status field read); new Repository.text_of() accessor. platform/tests/test_mutation_classification.py: 13 new tests (53 total in file), covering both self-declaration conventions, ownership/authority/lifecycle resolution, per-criterion evidence, fail-closed refusal, structural exclusivity from GOVERNED_DECLARATION and SOURCE, untracked-document refusal, and no-duplicate-mutation-authority between Class 6 and 7. platform/tests/test_mutation_governance_boundary.py: 9 tests, including the no-duplicate-authority register-level invariant, re-exercised against the eight-class register -- all passing. Full platform/tests/: 6649 passed, 2 skipped (pre-existing, unrelated), no regression."
     }
   ],
   "$coverage_criteria_comment": [
@@ -3881,5 +4081,17 @@
       "question": "Can the behaviour absorb a future case as DATA, without redesign and without a code change?",
       "definition": "A future instance is admitted through a declaration, registry or catalog rather than by amending source, so the decision does not embed a finite assumption."
     }
-  ]
+  ],
+  "decision_history": {
+    "DEC-ADR-0027": [
+      {
+        "sequence": 1,
+        "decision_id": "DEC-ADR-0027",
+        "previous_snapshot_hash": "047dbebe8c45e4e449f4490a8dc3b314fc1245a50ba71d0d2d85b7e572378e1e",
+        "new_snapshot_hash": "2d9916caf863e4df87ecb00f7d917e61e3b1a9db5e67ffd06250044a49e6891c",
+        "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "entry_hash": "b0ace5a595fd6aeff979318e1ee7c68aff71622c014f47613eb954258d7b1bd5"
+      }
+    ]
+  }
 }

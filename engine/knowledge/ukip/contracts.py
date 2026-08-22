@@ -47,6 +47,7 @@ from engine.knowledge.model import (
     content_hash,
 )
 from engine.knowledge.ukip.errors import UnitError
+from engine.temporal.coordinate import ValidityPeriod
 
 #: The version of the knowledge-unit wire shape (bumped only on a breaking change).
 UNIT_SCHEMA = "ucos-ukip-knowledge-unit"
@@ -193,11 +194,18 @@ class RelationDeclaration:
     ``target`` is resolved late (at registration) so a provider may cite either a
     peer unit key it also emitted, an existing canonical id, or a derived
     ``UKID-*`` identifier. Unresolvable targets are reported, never silently dropped.
+
+    ``validity`` is the interval over which the claim holds, in the canonical
+    :class:`~engine.temporal.coordinate.ValidityPeriod` (UCKP-ART-07 temporal
+    validity, P4-F-002). ``None`` means timeless, which is the prior behaviour and
+    stays the default: a provider that never mentions time gets exactly today's
+    single-assertion-per-triple semantics.
     """
 
     relation: RelationType
     target: str
     note: str = ""
+    validity: ValidityPeriod | None = None
 
     def __post_init__(self) -> None:
         if not isinstance(self.relation, RelationType):
@@ -205,12 +213,29 @@ class RelationDeclaration:
         _require_text(self.target, field_name="target", at="relation")
 
     def to_dict(self) -> dict[str, Any]:
-        return {"relation": self.relation.value, "target": self.target, "note": self.note}
+        return {
+            "relation": self.relation.value,
+            "target": self.target,
+            "note": self.note,
+            "validity": None if self.validity is None else self.validity.to_dict(),
+        }
 
     @classmethod
     def from_dict(cls, record: Mapping[str, Any]) -> RelationDeclaration:
         if not isinstance(record, Mapping):
             raise UnitError("relation declaration must be an object")
+        if record.get("validity") is not None:
+            # engine/temporal (CMG-000002) declares no ValidityPeriod.from_dict — a
+            # raw-record round trip would have to invent one, which is that owner's
+            # capability to add, not this module's. Referred, not repaired (P4-F-007
+            # companion gap): construct the declaration in code with a real
+            # ValidityPeriod instead of through this wire format until it exists.
+            raise UnitError(
+                "relation declaration validity cannot be rehydrated from a raw record "
+                "(engine.temporal.coordinate has no ValidityPeriod.from_dict yet); "
+                "construct RelationDeclaration(validity=...) directly",
+                at="relation.validity",
+            )
         return cls(
             relation=RelationType.coerce(record.get("relation"), context="relation"),
             target=_require_text(record.get("target"), field_name="target", at="relation"),

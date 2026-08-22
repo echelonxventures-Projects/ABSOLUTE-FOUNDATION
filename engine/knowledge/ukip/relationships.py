@@ -40,6 +40,8 @@ from typing import Any
 from engine.knowledge.model import RelationType, content_hash
 from engine.knowledge.ukip.errors import RelationshipCompositionError
 from engine.knowledge.ukip.registry import KnowledgeRegistry, RegisteredKnowledge
+from engine.temporal.coordinate import Ordering, TemporalCoordinate, ValidityPeriod
+from engine.temporal.operations import TemporalRegistry, compare
 
 #: The symmetric relation types, taken from the UKDA model rather than re-listed.
 SYMMETRIC: frozenset[RelationType] = frozenset(r for r in RelationType if r.is_symmetric)
@@ -112,10 +114,24 @@ class Relationship:
     note: str = ""
     derived: bool = False
     path: tuple[str, ...] = ()
+    validity: ValidityPeriod | None = None
 
     def key(self) -> tuple[str, str, str]:
-        """The stable de-duplication key."""
+        """The stable navigation/grouping key — every temporal version shares one."""
         return (self.source, self.target, self.relation.value)
+
+    def identity(self) -> tuple[str, str, str, str | None]:
+        """The stable per-instance identity, temporal version included.
+
+        :meth:`key` deliberately groups every validity-scoped version of a
+        relationship together, because navigation ("what does A depend on")
+        should not require picking a moment in time. This is the narrower
+        identity used wherever two versions of the same triple must NOT be
+        treated as the same thing — de-duplication and content sealing
+        (UCKP-ART-07 temporal validity, P4-F-002).
+        """
+        marker = None if self.validity is None else self.validity.since.qualified
+        return (*self.key(), marker)
 
     @property
     def is_symmetric(self) -> bool:
@@ -147,6 +163,7 @@ class Relationship:
             "note": self.note,
             "derived": self.derived,
             "path": list(self.path),
+            "validity": None if self.validity is None else self.validity.to_dict(),
         }
 
 
@@ -179,6 +196,68 @@ class Cycle:
         return {"family": self.family, "members": list(self.members)}
 
 
+def _lt(
+    x: TemporalCoordinate, y: TemporalCoordinate, registry: TemporalRegistry | None = None
+) -> bool | None:
+    """Whether ``x`` is provably before ``y``, or ``None`` if that cannot be proven."""
+    verdict = compare(x, y, registry)
+    if verdict is Ordering.INCOMPARABLE:
+        return None
+    return verdict is Ordering.BEFORE
+
+
+def _overlaps(a: ValidityPeriod | None, b: ValidityPeriod | None) -> bool:
+    """Whether two validity windows provably share an instant.
+
+    ``None`` is timeless and overlaps everything — the untimed case behaves exactly
+    as before this field existed. Half-open windows ``[since, until)`` overlap iff
+    each starts before the other ends. When that cannot be *proven* (different
+    reference systems, no declared conversion — Law 7), the pair is treated as NOT
+    overlapping: collapsing two relationships on an unproven claim is the defect
+    UCKP-ART-07 temporal validity exists to remove, so an unproven case is left as
+    two coexisting instances rather than guessed into one (P4-F-002).
+    """
+    if a is None or b is None:
+        return True
+    if not a.since.reference_system.same_system(b.since.reference_system):
+        # No registry is threaded through merge-time dedup, so cross-system
+        # windows are only ever compared via a declared conversion the caller
+        # applied before construction — otherwise they are not provably disjoint,
+        # but neither are they provably the same instant.
+        return False
+    left = True if b.until is None else _lt(a.since, b.until)
+    right = True if a.until is None else _lt(b.since, a.until)
+    if left is None or right is None:
+        return False
+    return left and right
+
+
+def _temporal_sort_key(relationship: Relationship) -> tuple[int, str]:
+    """Deterministic (not temporal) ordering for display/sealing — timeless first."""
+    if relationship.validity is None:
+        return (0, "")
+    return (1, relationship.validity.since.qualified)
+
+
+def _holds_at(
+    validity: ValidityPeriod | None,
+    coordinate: TemporalCoordinate,
+    registry: TemporalRegistry | None,
+) -> bool:
+    """Whether a validity window provably contains ``coordinate``."""
+    if validity is None:
+        return True
+    since_verdict = compare(validity.since, coordinate, registry)
+    if since_verdict is Ordering.AFTER or since_verdict is Ordering.INCOMPARABLE:
+        return False
+    if validity.until is None:
+        return True
+    until_verdict = compare(validity.until, coordinate, registry)
+    if until_verdict is Ordering.INCOMPARABLE:
+        return False
+    return until_verdict is Ordering.AFTER
+
+
 class RelationshipSet:
     """The resolved, symmetrically-closed relationships over a registry."""
 
@@ -189,14 +268,27 @@ class RelationshipSet:
         relationships: Iterable[Relationship] = (),
         dangling: Iterable[DanglingRelationship] = (),
     ) -> None:
-        deduped: dict[tuple[str, str, str], Relationship] = {}
+        # Two relationships that share a (source, target, relation) key coexist
+        # unless their validity windows provably overlap — see _overlaps(). A
+        # timeless relationship (validity=None) overlaps everything, which is
+        # exactly the old single-winner-per-key behaviour when nobody uses
+        # validity at all (UCKP-ART-07 temporal validity, P4-F-002).
+        groups: dict[tuple[str, str, str], list[Relationship]] = {}
         for relationship in relationships:
-            # An asserted relationship always wins over a derived one with the same
-            # key: provider assertion is evidence, composition is inference.
-            existing = deduped.get(relationship.key())
-            if existing is None or (existing.derived and not relationship.derived):
-                deduped[relationship.key()] = relationship
-        self._relationships = tuple(deduped[k] for k in sorted(deduped))
+            group = groups.setdefault(relationship.key(), [])
+            for index, existing in enumerate(group):
+                if _overlaps(existing.validity, relationship.validity):
+                    # An asserted relationship always wins over a derived one
+                    # occupying the same window: provider assertion is evidence,
+                    # composition is inference.
+                    if existing.derived and not relationship.derived:
+                        group[index] = relationship
+                    break
+            else:
+                group.append(relationship)
+        self._relationships = tuple(
+            r for k in sorted(groups) for r in sorted(groups[k], key=_temporal_sort_key)
+        )
         out: dict[str, list[Relationship]] = {}
         inbound: dict[str, list[Relationship]] = {}
         for relationship in self._relationships:
@@ -294,7 +386,12 @@ class RelationshipSet:
         """
         if max_depth < 1:
             raise RelationshipCompositionError("max_depth must be at least 1", depth=max_depth)
-        known: dict[tuple[str, str, str], Relationship] = {r.key(): r for r in self._relationships}
+        # Keyed by identity(), not key(): the seed set may hold several validity-
+        # scoped versions of the same triple, and keying by key() alone would drop
+        # every version but the last one seen (P4-F-002 regression guard).
+        known: dict[tuple[str, str, str, str | None], Relationship] = {
+            r.identity(): r for r in self._relationships
+        }
         frontier = list(self._relationships)
         for _ in range(max_depth):
             produced: list[Relationship] = []
@@ -313,9 +410,9 @@ class RelationshipSet:
                         derived=True,
                         path=(left.source, left.target, right.target),
                     )
-                    if candidate.key() in known:
+                    if candidate.identity() in known:
                         continue
-                    known[candidate.key()] = candidate
+                    known[candidate.identity()] = candidate
                     produced.append(candidate)
             if not produced:
                 break
@@ -397,7 +494,25 @@ class RelationshipSet:
         }
 
     def seal(self) -> str:
-        return content_hash([list(r.key()) for r in self._relationships])
+        # identity(), not key(): two validity-scoped versions of one triple must
+        # produce different content, or the seal could not detect a temporal edit.
+        return content_hash([list(r.identity()) for r in self._relationships])
+
+    # -- temporal (UCKP-ART-07 validity, P4-F-002) ------------------------------
+
+    def valid_at(
+        self, coordinate: TemporalCoordinate, *, registry: TemporalRegistry | None = None
+    ) -> RelationshipSet:
+        """Historical reconstruction: the subgraph that held at ``coordinate``.
+
+        A timeless relationship (``validity=None``) always holds. A relationship
+        whose window cannot be compared to ``coordinate`` — no shared reference
+        system and no declared conversion — is excluded rather than guessed into
+        either state: Law 7 makes that comparison undefined, and an undefined
+        comparison is not evidence of validity.
+        """
+        kept = [r for r in self._relationships if _holds_at(r.validity, coordinate, registry)]
+        return RelationshipSet(kept, self._dangling)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -443,6 +558,7 @@ def build_relationships(
                 target=target,
                 relation=declaration.relation,
                 note=declaration.note,
+                validity=declaration.validity,
             )
             resolved.append(relationship)
             if close_symmetric and relationship.relation.is_symmetric:

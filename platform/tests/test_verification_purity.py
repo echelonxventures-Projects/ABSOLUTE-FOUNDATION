@@ -192,21 +192,87 @@ def test_observation_build_allocates_nothing() -> None:
     # Regeneration of derived views is expected and is reverted by the fixture below.
 
 
-@pytest.fixture(autouse=True)
-def _restore_derived_views():
-    """Revert derived-view regeneration a test may have caused.
+#: The roots this module's tests may cause incidental derived-view regeneration under.
+_GUARDED_ROOTS: tuple[str, ...] = ("00-BOOK/DATA/", "00-BOOK/REGISTRIES/", "00-BOOK/CONTROL-TOWER/")
 
-    A regeneration may legitimately produce different bytes than the committed views;
-    see GOVERNED-EVOLUTION-STATE-DETERMINATION.md §4.1. Either way it must not leak out
-    of this module as working-tree drift.
+
+def _dirty_paths(roots: tuple[str, ...]) -> dict[str, str]:
+    """``{path: XY status}`` for every dirty entry under ``roots`` (NUL-delimited, rename-aware).
+
+    Porcelain ``-z`` emits ``XY PATH\\0`` for ordinary entries and ``XY ORIG\\0NEW\\0`` for a
+    rename/copy (status starting with ``R``/``C``) — the extra field must be consumed or every
+    following path shifts by one.
     """
-    yield
-    subprocess.run(  # noqa: S603
-        ["git", "checkout", "--", "00-BOOK/DATA/", "00-BOOK/REGISTRIES/", "00-BOOK/CONTROL-TOWER/"],  # noqa: S607
+    raw = subprocess.run(  # noqa: S603
+        ["git", "status", "--porcelain=v1", "-z", "--", *roots],  # noqa: S607
         cwd=REPO,
         capture_output=True,
+        text=True,
         check=False,
-    )
+    ).stdout
+    tokens = raw.split("\0")
+    out: dict[str, str] = {}
+    i = 0
+    while i < len(tokens):
+        entry = tokens[i]
+        i += 1
+        if not entry:
+            continue
+        status, path = entry[:2], entry[3:]
+        out[path] = status
+        if status[0] in ("R", "C"):  # rename/copy: the new path follows as its own token
+            if i < len(tokens) and tokens[i]:
+                out[tokens[i]] = status
+                i += 1
+    return out
+
+
+def _read_or_none(rel: str) -> bytes | None:
+    path = REPO / rel
+    return path.read_bytes() if path.is_file() else None
+
+
+@pytest.fixture(autouse=True)
+def _restore_derived_views():
+    """Revert only the derived-view regeneration THIS test caused.
+
+    A regeneration may legitimately produce different bytes than the committed views;
+    see GOVERNED-EVOLUTION-STATE-DETERMINATION.md §4.1. That drift must not leak out of
+    this module as working-tree noise — but a path already dirty *before* this test ran
+    (real, governed, uncommitted work — e.g. an identity mint under REG-AUTO-001) must
+    survive exactly as it stood, never collapsed into `HEAD` by a directory-wide command
+    (ADR-0020, replacing the unconditional `git checkout --` this fixture used to run).
+    """
+    before = _dirty_paths(_GUARDED_ROOTS)
+    before_content = {path: _read_or_none(path) for path in before}
+    yield
+    after = _dirty_paths(_GUARDED_ROOTS)
+
+    newly_dirty = sorted(set(after) - set(before))
+    if newly_dirty:
+        tracked = [p for p in newly_dirty if after[p] != "??"]
+        untracked = [p for p in newly_dirty if after[p] == "??"]
+        if tracked:
+            subprocess.run(  # noqa: S603
+                ["git", "checkout", "--", *tracked],  # noqa: S607
+                cwd=REPO,
+                capture_output=True,
+                check=False,
+            )
+        for rel in untracked:
+            path = REPO / rel
+            if path.is_file():
+                path.unlink()
+
+    for rel in sorted(set(after) & set(before)):
+        if _read_or_none(rel) != before_content[rel]:
+            snapshot = before_content[rel]
+            path = REPO / rel
+            if snapshot is None:
+                if path.is_file():
+                    path.unlink()
+            else:
+                path.write_bytes(snapshot)
 
 
 def test_ukb_build_declares_the_mint_flag() -> None:

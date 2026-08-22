@@ -1,7 +1,7 @@
 {
   "by_disposition": {
-    "IMPLEMENTED": 40,
-    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 23,
+    "IMPLEMENTED": 51,
+    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 24,
     "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION": 11,
     "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY": 46,
     "SUPERSEDED": 4
@@ -10,11 +10,11 @@
     "CERTIFICATION": 0,
     "CLOSURE": 25,
     "CONSTITUTIONAL-AGREEMENT": 0,
-    "DECISION-REGISTRATION": 5,
+    "DECISION-REGISTRATION": 6,
     "DISCUSSION": 0,
     "IMPLEMENTATION": 0,
     "REPOSITORY-MAPPING": 48,
-    "REPOSITORY-TRUTH-UPDATE": 46,
+    "REPOSITORY-TRUTH-UPDATE": 57,
     "VALIDATION": 0
   },
   "conversation_only": [],
@@ -61,7 +61,7 @@
     "representation_percent": 76,
     "scope_decision_class": "architectural"
   },
-  "decision_total": 124,
+  "decision_total": 136,
   "decisions": [
     {
       "action_taken": "",
@@ -10973,11 +10973,977 @@
       "title": "Memory is a substrate property resolved by projection, not a memory engine",
       "undispositioned": false,
       "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0014-retighten-the-ucl-unadmitted-target-ratchet.md",
+        "UCL-GAP-CLOSURE-REPORT.md",
+        "00-MASTER/UCL-000001/ucl-declaration.json",
+        "00-MASTER/UCL-000001/ucl_engine.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0014",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "UCL-V-41 and UCL-V-42 were the only two failing criteria in UCL-000001; all thirteen self-checks and the other forty criteria pass. The declared rule is a ratchet held at exactly the measured value, re-tightened whenever governed records are lawfully admitted. Delta measured by identity: exactly one artifact added (engine/constitution/stages.py, from commit 8bad683f P0-LIFECYCLE-CLOSURE-001), none removed, and it is ineligible for corpus registration because eligibility_universe() contains no engine/**/*.py at all. Of the 85 unadmitted targets, zero could carry a constitutional identity. Counts are byte-identical with all Phase 4 changes stashed, so the drift is not caused by the work being certified.",
+      "reasons": [],
+      "source_register": "adr/0014-retighten-the-ucl-unadmitted-target-ratchet.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Re-tighten the UCL unadmitted-target ratchet to its measured value",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0015-uckp-art-07-relationship-temporal-validity.md",
+        "RELATIONSHIP-TEMPORAL-VALIDITY-DETERMINATION-REPORT.md",
+        "PHASE-4-CAPABILITY-GAP-MATRIX.md",
+        "engine/knowledge/ukip/contracts.py",
+        "engine/knowledge/ukip/relationships.py",
+        "engine/temporal/coordinate.py",
+        "engine/temporal/operations.py",
+        "engine/tests/knowledge/ukip/test_relationships.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0015",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Closes P4-F-002 (owner UCKP ART-07), referred rather than repaired at ADR-0013: \"No relationship representation carries temporal validity, version or supersession.\" Investigated first (RELATIONSHIP-TEMPORAL-VALIDITY-DETERMINATION-REPORT.md): the (source, target, relation) triple in engine/knowledge/ukip/relationships.py genuinely carried one active identity, verified at the actual collapse point in RelationshipSet.__init__, not inferred from documentation. engine/temporal/ (CMG-000002) already provided the needed ValidityPeriod/compare() primitive with no call site anywhere (companion finding P4-F-007) — determination A+B, not C: a real gap, closed by integration with an existing owner's type, not invention of a new one.",
+      "reasons": [],
+      "source_register": "adr/0015-uckp-art-07-relationship-temporal-validity.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "UCKP-ART-07 relationships carry validity by consuming the existing temporal type, not a new one",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0016-uckp-knowledge-confidence-via-ucxi-context.md",
+        "KNOWLEDGE-CONFIDENCE-COMPLETION-DETERMINATION-REPORT.md",
+        "PHASE-4-CAPABILITY-GAP-MATRIX.md",
+        "engine/knowledge/ukip/confidence.py",
+        "engine/context/ontology.py",
+        "engine/context/registry.py",
+        "engine/tests/knowledge/ukip/test_confidence.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0016",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Closes P4-F-003 (owner UKDA/UKIP): \"No confidence field on any knowledge object.\" Investigated first (KNOWLEDGE-CONFIDENCE-COMPLETION-DETERMINATION-REPORT.md), same method as ADR-0015: engine/context/ontology.py already declares a KNOWLEDGE context kind with required source/provenance/confidence dimensions, and engine/context/registry.py's ContextRegistry is a real, complete, append-only, audited registration authority for it, with zero call sites anywhere in engine/knowledge/ before this change. Determination B: represented through existing epistemic state (UCXI context), not missing. KnowledgeAuthority was checked and confirmed not a confidence proxy — a distinct accountability-tier concern.",
+      "reasons": [],
+      "source_register": "adr/0016-uckp-knowledge-confidence-via-ucxi-context.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Knowledge confidence is a UCXI context binding, not a new knowledge field",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0017-ucl-f-006-identity-minting-authorization.md",
+        "UCL-GAP-CLOSURE-REPORT.md",
+        "adr/0014-retighten-the-ucl-unadmitted-target-ratchet.md",
+        "00-BOOK/DATA/id-ledger.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0017",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Reverses this session's own prior disposition to leave UCL-F-006 referred, under the explicit follow-up directive ABSOLUTE UNIVERSAL EXPANSION CLOSURE DIRECTIVE Phase 2, issued after full irreversibility disclosure. Authorizes REG-AUTO-001 to mint identities for exactly 24 enumerated objects (2 EXECUTABLE_OBJECT, 4 TEST_OBJECT, 3 DATA_OBJECT, 15 EXCLUDED_DOCUMENT) via uga_engine.py run. Does NOT authorize the separate, larger 192-document CORPUS_REGISTRATION drift (a different authority, UMB-IMP-001) — that stays out of scope exactly as ADR-0014 originally scoped it.",
+      "reasons": [],
+      "source_register": "adr/0017-ucl-f-006-identity-minting-authorization.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Authorize REG-AUTO-001 to mint identities closing UCL-F-006",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0018-ucl-f-006-follow-on-identity-minting-authorization.md",
+        "adr/0017-ucl-f-006-identity-minting-authorization.md",
+        "00-BOOK/DATA/id-ledger.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0018",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Follow-on to DEC-ADR-0017, discovered while validating its own execution: uga_engine.py discovers objects via `git ls-files --cached` (the index), so confidence.py and test_confidence.py (Task 3, DEC-ADR-0016) were invisible to UGA-001 entirely because never staged, not counted anonymous and not minted by the prior run. Scoped narrowly to these 2 objects, per ADR-0017's own stated limit against a standing blanket authorization.",
+      "reasons": [],
+      "source_register": "adr/0018-ucl-f-006-follow-on-identity-minting-authorization.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Authorize REG-AUTO-001 to mint identities for this session's own new objects",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "PHASE-4-CAPABILITY-GAP-MATRIX.md",
+        "engine/ceu/existence.py",
+        "engine/knowledge/store.py",
+        "engine/uckp/values.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0019",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Re-opens all ten PHASE-4 findings per the closure directive's Phase 3. Corrects the directive's own mislabel (P4-F-004 is KnowledgeStore's destructive rewrite, not knowledge confidence; P4-F-003 is confidence, already closed by DEC-ADR-0016). P4-F-002/003/010 confirmed CLOSED. P4-F-007 and P4-F-009 confirmed PARTIALLY CLOSED by DEC-ADR-0015/0016 respectively, with the remaining clause of each stated explicitly (rival TemporalEvent at engine/uckp/values.py:268-276, still present; UCXI per-subject binding for context kinds other than KNOWLEDGE, still absent). P4-F-001, 004, 005, 006, 008 confirmed still open by direct re-read of the cited code. The 192-document corpus-registration population and pre-existing CMG/ISD housekeeping items are named as explicitly out of this decision's scope rather than silently omitted.",
+      "reasons": [],
+      "source_register": "adr/0019-residual-phase4-finding-disposition.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "Formal disposition of every PHASE-4 capability finding not closed by ADR-0015/0016",
+      "undispositioned": false,
+      "work_package": "WP-UCDA-028"
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0020-state-aware-verification-purity-restoration.md",
+        "platform/tests/test_verification_purity.py",
+        "adr/0017-ucl-f-006-identity-minting-authorization.md",
+        "adr/0018-ucl-f-006-follow-on-identity-minting-authorization.md"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0020",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Discovered by direct execution this session: _restore_derived_views's unconditional `git checkout -- 00-BOOK/DATA/ 00-BOOK/REGISTRIES/ 00-BOOK/CONTROL-TOWER/` silently reverted DEC-ADR-0017/0018's minted identity ledger back to HEAD after a full-suite run, with no test failure to signal it. Confirmed sole cause: git diff on id-ledger.json was empty immediately after the run despite independently-verified prior mint.",
+      "reasons": [],
+      "source_register": "adr/0020-state-aware-verification-purity-restoration.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "The verification-purity restoration fixture must be state-aware, not a blind checkout",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0023-ceu-supersession-append-only-history.md",
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "engine/ceu/existence.py",
+        "engine/tests/ceu/test_existence.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0023",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Discharges one of WP-UCDA-028's six independent sub-obligations (P4-F-001, CEU-001), per that work package's own stated route authorizing per-obligation decisions at ADR-0015/0016's granularity. _supersessions widened from dict[str,dict] (mutated in place) to dict[str, list[dict]] (append-only); resurrect() now appends a new snapshot built from the prior one rather than mutating it.",
+      "reasons": [],
+      "source_register": "adr/0023-ceu-supersession-append-only-history.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "CEU supersession history becomes append-only, not mutated in place",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0024-ucda-append-only-decision-history.md",
+        "adr/0019-residual-phase4-finding-disposition.md"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0024",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Initial registration, pre-implementation-confirmation state — this entry's own next transition will be the first live use of record_decision_update() rather than raw JSON editing.",
+      "reasons": [],
+      "source_register": "adr/0024-ucda-append-only-decision-history.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "UCDA decision mutations become hash-chained and append-only",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0025-knowledgestore-archive-and-provenance-persistence.md",
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "engine/knowledge/store.py",
+        "engine/tests/knowledge/test_store.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0025",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Discharges two of WP-UCDA-028's six independent sub-obligations (P4-F-004 UKDA, P4-F-006 UKIP). Found and worked around a real constraint the original discovery missed: KnowledgeBase.replace_object() has 3 live non-test callers all using a same-identity upsert idiom, so the fix moved to the persistence boundary (archive-before-overwrite) rather than routing through supersedes/superseded_by, which would have broken those callers.",
+      "reasons": [],
+      "source_register": "adr/0025-knowledgestore-archive-and-provenance-persistence.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "KnowledgeStore archives replaced versions and persists provenance chains",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "IMPLEMENTED -- engine/ceu/context_binding.py: bind_identity()/identity_of() bind IDENTITY once per unit, keyed by (form, key), stable across supersession. bind_governance()/resupersede_governance()/governance_history() project ExistenceRegistry.supersede() history into GOVERNANCE, natural-keyed (form:key)@{history length} so a real supersede()/resurrect() always earns a new context identity, mirroring confidence.py @{version} versioning. engine/tests/ceu/test_context_binding.py: 13 tests, all passing -- multi-context binding on one unit, full history reconstruction across supersede+resurrect+resupersede, idempotent re-registration, ontology-shape and duplicate-content refusal not bypassed, unknown-future-context-kind admission re-exercised. engine/tests/ceu/, engine/tests/context/, engine/tests/knowledge/: 1177 passed, no regression.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0026-ceu-context-binding-identity-and-governance.md",
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "engine/ceu/context_binding.py",
+        "engine/tests/ceu/test_context_binding.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0026",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Discharges one more of WP-UCDA-028's six independent sub-obligations (P4-F-009 remainder). Extends the ADR-0016 confidence.py integration shape to a second entity substrate (CEU ExistenceUnit) and two more universal context kinds (IDENTITY, GOVERNANCE), proving one subject can carry more than one bound context kind at once through the same ContextRegistry, no new registry or taxonomy. Discovered during implementation: a GOVERNANCE projection that does not change its natural key on resurrection would assert identical substance under two identities, itself a Context Once (CXL-06) violation -- fixed by projecting resurrection as a distinct governance state, not collapsing it into the state it reverses.",
+      "reasons": [],
+      "source_register": "adr/0026-ceu-context-binding-identity-and-governance.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "CEU units bind IDENTITY and GOVERNANCE context through UCXI-000001",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "IMPLEMENTED -- 00-BOOK/DATA/mutation-governance-boundary.json: new AUTHORED_DOCUMENT mutation_classes entry (5 membership_criteria) and new R-08 classification rule (precedence 8, before the UNRESOLVED terminal). platform/repository_intelligence/mutation_classification.py: _r08_authored_document predicate registered in RULE_PREDICATES; authored_document_checks() (evidence generation, mirrors governed_declaration_checks()); authored_document_owner() (canonical owner resolution, Authority-then-Deciders priority); authored_document_lifecycle() (open-vocabulary Status field read); new Repository.text_of() accessor. platform/tests/test_mutation_classification.py: 13 new tests (53 total in file), covering both self-declaration conventions, ownership/authority/lifecycle resolution, per-criterion evidence, fail-closed refusal, structural exclusivity from GOVERNED_DECLARATION and SOURCE, untracked-document refusal, and no-duplicate-mutation-authority between Class 6 and 7. platform/tests/test_mutation_governance_boundary.py: 9 tests, including the no-duplicate-authority register-level invariant, re-exercised against the eight-class register -- all passing. Full platform/tests/: 6649 passed, 2 skipped (pre-existing, unrelated), no regression.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0027-mutation-classification-authored-document-class.md",
+        "adr/0019-residual-phase4-finding-disposition.md",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "platform/repository_intelligence/mutation_classification.py",
+        "platform/tests/test_mutation_classification.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0027",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Closes REQ-39 (UCOS-OMEGA-INFINITY-COMPLETE-REQUIREMENT-MASTER-INDEX.md), a gap discovered independently of adr/0019/WP-UCDA-028 during the requirement-index compilation pass -- CORRECTED: the initial registration of this decision incorrectly described it as discharging one of WP-UCDA-028's six sub-obligations; adr/0019's own list (P4-F-001, 004, 005, 006, 007-remainder, 008, 009-remainder) names no mutation-classification finding, so this decision stands on its own governance basis. Adds Class 7 AUTHORED_DOCUMENT and rule R-08 to the existing seven-rule mutation-governance-boundary.json / mutation_classification.py pair (EX-015/EX-016), reusing the exact owner-parameterised governed_by pattern GOVERNED_DECLARATION (Class 6) established. No new mutation authority, registry, or governance model created. Ownership is read from the artifact's own self-declared Authority (constitutions, determination/assessment reports) or Deciders (ADRs) field, checked in that priority order -- both are real, observed conventions in this repository's own governance documents, not invented. R-06 precedes R-08 and a JSON path never satisfies the markdown criterion, so GOVERNED_DECLARATION and AUTHORED_DOCUMENT are structurally disjoint.",
+      "reasons": [],
+      "source_register": "adr/0027-mutation-classification-authored-document-class.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Mutation classification admits AUTHORED_DOCUMENT as its eighth class",
+      "undispositioned": false,
+      "work_package": null
     }
   ],
   "declaration_findings": [],
   "determination": "ASSIMILATED",
-  "evidence_references": 464,
+  "evidence_references": 518,
   "gate": "OPEN",
   "gate_exit": 0,
   "programme": {
@@ -11036,7 +12002,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "1f0e34f93e82e66da00f5743de7d52a1835b270cbfcc22630e984486d4926ac5",
+  "seal_sha256": "69bc881a5b2a0132da6ebc44172b236c6415cda30f520903922a35f2a9fecee6",
   "undispositioned": [],
   "unevidenced": [],
   "unindexed": []

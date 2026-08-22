@@ -260,6 +260,54 @@ def test_resurrection_keeps_the_supersession_in_the_journal(registry: ExistenceR
     assert actions == ["register", "supersede", "resurrect"]
 
 
+def test_resurrection_preserves_the_pre_resurrection_field_values(registry: ExistenceRegistry):
+    """P4-F-001: the record right after supersede() must survive resurrect() intact,
+    not just be provable by hash — the actual field values must be readable."""
+    old = _classification(registry, "obsolete")
+    registry.supersede(old.universal_id, authority="GOV", note="first pass")
+    registry.resurrect(old.universal_id, authority="GOV", note="needed again")
+    history = registry.supersession_history(old.universal_id)
+    assert len(history) == 2
+    assert history[0]["active"] is True
+    assert history[0]["note"] == "first pass"
+    assert "resurrected_by" not in history[0]
+    assert history[1]["active"] is False
+    assert history[1]["resurrected_by"] == "GOV"
+    assert history[1]["resurrection_note"] == "needed again"
+    # the resurrection snapshot still carries the original supersession's own note —
+    # it is a new record built from the old one, not an unrelated fresh record
+    assert history[1]["note"] == "first pass"
+
+
+def test_a_split_supersede_and_resurrect_cycle_is_fully_reconstructible(
+    registry: ExistenceRegistry,
+):
+    """A subject superseded, resurrected, then superseded again keeps every snapshot."""
+    old = _classification(registry, "cyclical")
+    registry.supersede(old.universal_id, authority="GOV", note="round one")
+    registry.resurrect(old.universal_id, authority="GOV")
+    registry.supersede(old.universal_id, authority="GOV", note="round two")
+    history = registry.supersession_history(old.universal_id)
+    assert len(history) == 3
+    assert [h["active"] for h in history] == [True, False, True]
+    assert history[0]["note"] == "round one"
+    assert history[2]["note"] == "round two"
+    # supersessions() still reports only the CURRENT state — one row, not three
+    assert len(registry.supersessions()) == 1
+    assert registry.supersessions()[0]["note"] == "round two"
+
+
+def test_supersession_history_survives_reconstruction(registry: ExistenceRegistry):
+    old = _classification(registry, "obsolete")
+    registry.supersede(old.universal_id, authority="GOV", note="first")
+    registry.resurrect(old.universal_id, authority="GOV")
+    rebuilt = ExistenceRegistry.from_document(registry.to_document())
+    assert rebuilt.supersession_history(old.universal_id) == registry.supersession_history(
+        old.universal_id
+    )
+    assert rebuilt.digest() == registry.digest()
+
+
 def test_supersession_refuses_the_unlawful_cases(registry: ExistenceRegistry):
     a = _classification(registry, "a")
     b = _classification(registry, "b")

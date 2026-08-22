@@ -159,7 +159,7 @@
       "kind": "knowledge-object",
       "name": "Canonical knowledge objects",
       "note": "Knowledge Once: extracted knowledge is registered here, never in a register this programme writes",
-      "objects": 130,
+      "objects": 142,
       "pointer": "objects",
       "provider": "PRV-KNOWLEDGE",
       "providers_matched": 1,
@@ -572,10 +572,7 @@
       "role": "the disposition law under which this programme is an EXTEND"
     }
   ],
-  "blocking_failures": [
-    "ACEE-V-07",
-    "ACEE-V-10"
-  ],
+  "blocking_failures": [],
   "bound_hits": [],
   "bounds_slack": [],
   "capabilities": [
@@ -712,7 +709,7 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "cko_identity_collisions": 0,
-    "ckos_discovered": 3501,
+    "ckos_discovered": 3513,
     "ckos_of_unknown_kind": 0,
     "ckos_without_semantic_identity": 0,
     "closed_enumerations_declared": 0,
@@ -739,12 +736,12 @@
     "graph_cycles": 0,
     "graph_types_empty": 0,
     "identities_on_mutable_input": 0,
-    "invariant_property_failures": 1,
+    "invariant_property_failures": 0,
     "invariants_discovered": 48,
     "invariants_dispositioned_create": 0,
     "invariants_owned_here": 0,
     "invariants_unmeasured": 0,
-    "invariants_unsatisfied": 1,
+    "invariants_unsatisfied": 0,
     "invariants_without_anchor": 0,
     "invariants_without_located_owner": 0,
     "limit_tokens_present": 0,
@@ -762,9 +759,9 @@
     "reduction_owners_unresolved": 0,
     "reductions_unachieved": 0,
     "reentry_declarations_absent": 0,
-    "relations_discovered": 650,
-    "relationship_ckos_discovered": 650,
-    "relationships_without_target_identity": 268,
+    "relations_discovered": 695,
+    "relationship_ckos_discovered": 695,
+    "relationships_without_target_identity": 313,
     "self_evolution_steps_owned_here": 0,
     "self_evolution_steps_unbound": 0,
     "semantic_identity_collisions": 0,
@@ -785,7 +782,7 @@
   },
   "cycles": [],
   "dependency_relation": "binds",
-  "determination": "AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-NOT-ESTABLISHED",
+  "determination": "AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-ESTABLISHED",
   "disposition_rules": [
     {
       "disposition": "DEC-REUSE",
@@ -1175,8 +1172,8 @@
       "located": true,
       "measure": "invariants_unsatisfied",
       "owner": "00-MASTER/URRC-000001/07-COMPLETENESS-MATRIX.md",
-      "ready": false,
-      "value": 1
+      "ready": true,
+      "value": 0
     },
     {
       "comparator": "==",
@@ -1614,7 +1611,7 @@
       "measure": "ckos_discovered",
       "measured": true,
       "reusable_as": "a composable object graph any further measurement reads without re-parsing its owners",
-      "value": 3501
+      "value": 3513
     },
     {
       "id": "EK-05",
@@ -1622,7 +1619,7 @@
       "measure": "relationship_ckos_discovered",
       "measured": true,
       "reusable_as": "first-class relationship objects, so a relationship is governed rather than implied",
-      "value": 650
+      "value": 695
     },
     {
       "id": "EK-06",
@@ -1684,7 +1681,7 @@
       "why_not_repaired": "Adding a stage here would create a second lifecycle, which CMG-000001 Art LXXVI.6 forbids. A missing stage is admitted by appending a node to the located owner's manifest, which that owner's own admission clause provides for."
     }
   ],
-  "gate": "CLOSED",
+  "gate": "OPEN",
   "goal_contract": {
     "actuation_owner": "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
     "invokes_capabilities": false,
@@ -5672,7 +5669,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "b2f0dfc514e9307eeadec272acee7b597822852adf4b6254fd4db06ca14ec99d",
+  "graph_digest": "8cd30d136ae33aa487fba33471e3acdc460601c7782ff97ae09e3df720cd5c17",
   "graphs": [
     {
       "composed": true,
@@ -6051,7 +6048,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 130,
+        "measure_value": 142,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6059,7 +6056,7 @@
       "invariant": "Universal Knowledge Discovery",
       "measure": "counters.knowledge_objects_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 130,
+      "measure_value": 142,
       "ordinal": 40,
       "owner": "00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md",
       "properties": {
@@ -6333,7 +6330,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 113,
+        "measure_value": 125,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6341,7 +6338,7 @@
       "invariant": "Universal Alternative Strategy Generation",
       "measure": "decision_total",
       "measure_source": "00-MASTER/UCDA-000001/ucda.json",
-      "measure_value": 113,
+      "measure_value": 125,
       "ordinal": 100,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -6463,26 +6460,26 @@
       "anchor": "convergence",
       "cko_id": "SRC-INVARIANT::ACEE-I-0130",
       "comparator": "==",
-      "disposition": "DEC-EXTEND",
+      "disposition": "DEC-REUSE",
       "disposition_located": true,
-      "disposition_rationale": "an owner is located but the anchor, the measure or the expectation is not yet discharged, so that located owner is extended",
-      "disposition_rule": "DR-INVARIANT-EXTEND",
+      "disposition_rationale": "a located owner outside this programme carries the anchor and the measure is met, so Repository Truth already satisfies the invariant and reimplementing it would duplicate a constitutional capability",
+      "disposition_rule": "DR-INVARIANT-REUSE",
       "expect": 0,
       "facts": {
         "anchor_present": true,
         "machine_readable": true,
         "measure_declared": true,
         "measure_located": true,
-        "measure_met": false,
-        "measure_value": 1,
+        "measure_met": true,
+        "measure_value": 0,
         "outside_own_home": true,
         "owner_located": true,
-        "properties_unmet": true
+        "properties_unmet": false
       },
       "invariant": "Universal Self Challenge",
       "measure": "unsatisfied_criteria",
       "measure_source": "00-MASTER/UCOS-AEE-001/aee.json",
-      "measure_value": 1,
+      "measure_value": 0,
       "ordinal": 130,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -6494,7 +6491,7 @@
         "PROP-MEASURE-LOCATED": true,
         "PROP-OWNED": true,
         "PROP-READABLE": true,
-        "PROP-SATISFIED": false,
+        "PROP-SATISFIED": true,
         "PROP-TRACEABLE": true
       },
       "provenance": {
@@ -7179,7 +7176,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 130,
+        "measure_value": 142,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7187,7 +7184,7 @@
       "invariant": "Universal Knowledge Registration",
       "measure": "count",
       "measure_source": "knowledge/canonical-knowledge.json",
-      "measure_value": 130,
+      "measure_value": 142,
       "ordinal": 280,
       "owner": "knowledge/canonical-knowledge.json",
       "properties": {
@@ -7461,7 +7458,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 4,
+        "measure_value": 2,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7469,7 +7466,7 @@
       "invariant": "Universal Self Assessment",
       "measure": "stable_iterations",
       "measure_source": "00-MASTER/UCOS-AEE-001/aee.json",
-      "measure_value": 4,
+      "measure_value": 2,
       "ordinal": 340,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -7696,7 +7693,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 474,
+        "measure_value": 531,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7704,7 +7701,7 @@
       "invariant": "Universal Engineering Capability Elevation",
       "measure": "counters.relationship_ckos_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 474,
+      "measure_value": 531,
       "ordinal": 390,
       "owner": "00-MASTER/UCL-000001/ucl-declaration.json",
       "properties": {
@@ -8321,7 +8318,7 @@
       "relation": "reenters"
     }
   ],
-  "omega_e05_complete": false,
+  "omega_e05_complete": true,
   "order": [
     "SRC-LIFECYCLE::UCL-S-0010",
     "SRC-LIFECYCLE::UCL-S-0020",
@@ -8889,6 +8886,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0010",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::ee31225efdd3334f3bc6720a5a799234",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|d1e90361fa5a915634fda79bfe7dc88dbc6894e44b1b45518ba7d5855f5473aa|",
+      "relations": [],
+      "semantic_id": "72e641306568f7f9bd8ef3a817542becd2ab0e2f0a1915844701d281fa99af44",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0020",
         "target": "UCL-S-0010",
@@ -8917,6 +8936,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::f8ba51d5bfe5627a14239665be404f29",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|af2c466910035a0101f88d66c3f8045a3e273dfba89441d2f4b4b491e4b614a8|",
+      "relations": [],
+      "semantic_id": "c5bcae45f53d43649d804c57d24a6801d52b9c337693537b5d83d5c3d553f22e",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0020",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::076246c9c992186fe9ffb861947b391f",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -9021,6 +9062,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0030",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::735f715f5f6cf1bf07e0e6ee77ecfacd",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|611862c64d8a299e603fa555f34dd072e943452cd12abc5a0497567da74a6ee5|",
+      "relations": [],
+      "semantic_id": "ef296b098b3225052559b8f943de3b017444f693e7ffeb7f3e9210734b8f3c3f",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0040",
         "target": "UCL-S-0030",
@@ -9093,6 +9156,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::3ce8d011daef4587b8029b8e4f152e5e",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|c60bdc53d32cdaa125381b92b2bdf6c2b888e2694c22c9da9925927943ddc7e7|",
+      "relations": [],
+      "semantic_id": "da5a953c7065c5c6c2267ef9b226aa14fd2c456a104d8ab5c86c83147512d4c0",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0040",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::b9aa94356bb1aa11b87a6b878b85f056",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -9197,6 +9282,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0050",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::2afe3514d65e4ece9428d7c0fe30fbf1",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|18baaf6524d60d3fce4fc7c6c6103effbd9984b05802f08714da08fa740143d2|",
+      "relations": [],
+      "semantic_id": "bbd0eda2c881893313d6b3becdcb9520beacd536c25aff0a60f2cc2086e4c273",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0060",
         "target": "UCL-S-0040",
@@ -9247,6 +9354,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::6eae564fc078ea4a3580cfd03ebaa168",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|da31651979200c56f34fa64694dd59357bedd6d5150fd841031d146dcf1a94b5|",
+      "relations": [],
+      "semantic_id": "ed2845c6f87d55f78faf24682230b298d3c728d43937727f8ff1e8a5a1685c1b",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0060",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::1816aa35fd1d1ffad0d5bd60cd97dc02",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -9329,6 +9458,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0070",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::6c64e73f1ca24a934af4b1a75181efe4",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|abc8f6809c68c53f1c9bb950a4307550c3d50ae84ca96f15502c0a68779f7070|",
+      "relations": [],
+      "semantic_id": "05479b5dc8cc6728065e91bd211d3e6de6cfc74309d98b9d7636626c79c441cb",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0080",
         "target": "UCL-S-0070",
@@ -9392,6 +9543,28 @@
       "relations": [],
       "semantic_id": "d0bad1cd0944ae8db15d9d8f8b811995f81ad281ed3bbae8decc947f3e80d6da",
       "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0080",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::439cce0ca972c680bd7a559c22ad6011",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|6547ba90ba99a65c24de9358abf3d260f22f668b026b410368e8ecaeda9cbd49|",
+      "relations": [],
+      "semantic_id": "56a9600073a3cac95d5533c58571b986c955d7fcf999de86bf1228bcdcf6328f",
+      "target_identified": false
     },
     {
       "attributes": {
@@ -9461,6 +9634,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0090",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::de3cdea5e1e96acd78cb66bbc4102d98",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|10fa45fd1d8555b080e0aee1c1cf2282475993cec0f206dc3686a8d8f591e51e|",
+      "relations": [],
+      "semantic_id": "64a48000a84360faf0e2ab445acbe48c8a85ced75d857157f451c44b2958b391",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0100",
         "target": "UCL-S-0090",
@@ -9524,6 +9719,28 @@
       "relations": [],
       "semantic_id": "31d98e7de919a15dfb1a245de7d8c8957258df9fb02d7d32fed998ca82401e17",
       "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0100",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::6833b9cedda69ce261a3d47e90ac605c",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|bb3d06b6bda47f53d239d7e40ea255264e4ae1abb9a258e16b02b42d07c1bf44|",
+      "relations": [],
+      "semantic_id": "08be3783b21417dda621fd1f2656b5df014e343d8589bfddd0b5fbfaa9f1d339",
+      "target_identified": false
     },
     {
       "attributes": {
@@ -9593,6 +9810,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0110",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::cf9d4ddad458e05652542133e8c5bee7",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|d5cc167f3930777b2f539951b16ef9b9dd514a61a65bc63cf69ecd01a8d63c5e|",
+      "relations": [],
+      "semantic_id": "a60186de58d783a51bbf9d35b5eca74d67c8b4ef6ba0ea000e383219f1e3d90f",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0120",
         "target": "UCL-S-0110",
@@ -9643,6 +9882,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::e276b16279425fdce7c57d569428c9aa",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|b9b1a868e14c039f8f9f848a2287963b2c60865125cd7c55e9a7b51cfe591f7e|",
+      "relations": [],
+      "semantic_id": "b5c984bd91e52f95646f741ac477cce337d4f28e79e7d445f87fa094e21e42dd",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0120",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::123d92fb5f34d5c68bd0145a025c13fc",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -9747,6 +10008,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0130",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::e2ed170f3f87735ebe8fec41ceac1550",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|4f4516bdc5dd2b98fd707d831c51502d46e3ddad2cc592dc8ee954a6f5a10ccb|",
+      "relations": [],
+      "semantic_id": "4030f6f3fcabfbfb9619fb16130361aa41301f7f0434a436d55f1ccccb98b9a0",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0140",
         "target": "UCL-S-0130",
@@ -9813,6 +10096,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0140",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::f60315d2103bbad8b0b913301c828c66",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|86fc1fa03e1daf2c1e27ff9e6e1629ebcd87000c3763d5215068c8707a0714e1|",
+      "relations": [],
+      "semantic_id": "43054cb5c9cc0a3a2eadbafe64c58f49c86cdb2e0a8d806ae813a2caf33ca241",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0150",
         "target": "UCL-S-0140",
@@ -9863,6 +10168,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::105aa73f2bd8cbd2e749813f9607f5b0",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|0f84a59e9fcd56e3ba7461ee4902bebcb32fb8eabd79ab34d6cc54ad0c9799b0|",
+      "relations": [],
+      "semantic_id": "8302a54e6b7c15c7fa620e8e5fc684514de3cf5756220f9da26635b6f38004b0",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0150",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::0af5eb8ee3fa6254b8270877d93a226d",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -9967,6 +10294,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0160",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::4a813fd4dfe2e12087bf3412a172ecb9",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|d3d71ad7bbf8b2a011430cc8896dc81ea92a39141894f8659f79a479d99f24fa|",
+      "relations": [],
+      "semantic_id": "436a41fcee203e2d8b10b365248ea75ab3f6c812b6694a4256dec7cac0ae3abd",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0170",
         "target": "UCL-S-0160",
@@ -10055,6 +10404,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0170",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::4a6c91d11cb1004d4ae156464235a2c3",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|70d044110b795c9da93aedc499029eee887f525c6f18c1d5358eeb6ccd793ed0|",
+      "relations": [],
+      "semantic_id": "0887ff82778f6fa346c106f227e58bdfaacaeb4c49cf5bd645dadebd244d9c14",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0180",
         "target": "UCL-S-0170",
@@ -10121,6 +10492,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0180",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::12417e8d6f27f06d3d60cdfe6e6f1d2d",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|298fe08fd02261e58b09a51f6151db2ddef0b0b0cd3238389516c5b6af4a020e|",
+      "relations": [],
+      "semantic_id": "342cc2511f7f621d1383986c81429320589cd5e654fac337ec2e04e13d32929a",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0190",
         "target": "UCL-S-0180",
@@ -10149,6 +10542,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::89e49cf6e07cfc766e156fb3ab1b332c",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|cb243e451bc4df319e83c228af12c1f27fe21470892a62fafdd2b04bddb0425d|",
+      "relations": [],
+      "semantic_id": "f37b997bed772fdcdc6363e249ac6d68519ef5f9d5011278263184725ae20141",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0190",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::1c123de1fd9f9058751040c5d1865719",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -10209,6 +10624,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0200",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::368ada8b56ddd57dbb0dce5f570a2f07",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|8a416e29f3b38e027d1a35112e65542202f2271b4f11120d3632f0b1987a18fb|",
+      "relations": [],
+      "semantic_id": "7c274e56fd174c34ff08d446bf1193f7261703caa4492d3cffdd8c9aebc55a37",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0210",
         "target": "UCL-S-0200",
@@ -10237,6 +10674,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::e4d6c7dfb61f9b0421405f2edda9edf7",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|08925f9498f38d26e6ecde4e4ec219b2c513d20cdfef7fa5d6a097c7a599dacc|",
+      "relations": [],
+      "semantic_id": "415797a8fc18a358d12451d78c87e40c23958817faab645f93cf4f57156f632e",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0210",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::d4e9fc7a6dcb97ccaf51eea9a4192e3c",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -10319,6 +10778,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0220",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::769509cf44695e3582a6ea6e6f773098",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|0cc221a9e301dce4ea758fb772f15f06839d410ed84adfc4dbbf8c82e39da6a0|",
+      "relations": [],
+      "semantic_id": "98890e683f8c37b33a191731359e973be8eb6301e60fbb529bb0b38801afbdfa",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0230",
         "target": "UCL-S-0220",
@@ -10347,6 +10828,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::a028c7f1f9e81b4f9a0628b69d59bf10",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|bcc656974393a2918915a551a594f977cf70a146dbd9f834fca7a1fde399e743|",
+      "relations": [],
+      "semantic_id": "fdb644547a1c74bf62645bc9bee39e97eb6dc594210e6db9273494d56cf1fe0d",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0230",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::864d5c90e38dd3761c6acb9445fa3668",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -10429,6 +10932,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0240",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::bc6c4c5046a54a42c567d22372bd1521",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|5d56d6e17addfa59ba995082e6f162fa29280ebee74c9f41468c70320dbb56b1|",
+      "relations": [],
+      "semantic_id": "f0d6fb0ceaefe68f45cbf7a099b15696cc478a6d08679af2c73880363cde4a26",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0250",
         "target": "UCL-S-0240",
@@ -10495,6 +11020,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0250",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::82305b12525810e01db33cbc04b99a63",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|c0b83f6946b8b69a593be03a6873b37366408f845bdc7d09159e3a9aa162eff0|",
+      "relations": [],
+      "semantic_id": "9340d2337634f203bc8a496ef0a64530d0440b2592bdc43e8236998ece955967",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0260",
         "target": "UCL-S-0250",
@@ -10545,6 +11092,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::ca358ca2696562aadfa7e6372f298b94",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|40710ddb1c94fc3f16a87c8539bd9905f29c45980594d341f40b451c25c827f8|",
+      "relations": [],
+      "semantic_id": "ac12d8c922a7363241b04cd34dee250a69eefbdfa7e6c16db34812898b8798a8",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0260",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::866841756f95fc4b708dfa25626c85a8",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -10624,6 +11193,28 @@
       "relations": [],
       "semantic_id": "2a539e22f1faeadda3b882bcfc8b4ab2f7d864808678f069b20655a737548465",
       "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0270",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::03a046ce2e889f07638768d25d8e688e",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|b4656e725b3638025b40b4145bedcd6cbcf47cfb9e4f819dcee404942e286bf6|",
+      "relations": [],
+      "semantic_id": "cc8998d858f451461c460bce2c3019cbec40b8738124450b00c413a7cf2ad4b6",
+      "target_identified": false
     },
     {
       "attributes": {
@@ -10715,6 +11306,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0280",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::069995ea43ef1cdabf1fcc2a3864c119",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|02441e9b2f21ca74df17bcd62f0419547235444204a105a500af9f7d269c0c25|",
+      "relations": [],
+      "semantic_id": "8f97c0811708ccc8b61128d33cca8106e544d55141d68d56b49e1e381c551da0",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0290",
         "target": "UCL-S-0280",
@@ -10765,6 +11378,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::cd1493e4f30501293c6e34a6b7159d0e",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|7a8a432342a352ee968dfd40a202e85781abe37dd8bf7791233d817ce4a58489|",
+      "relations": [],
+      "semantic_id": "4130cc61bbdf22ed82c66c29d2b779147397267f6ab650883be3c3ddab72044d",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0290",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::359a18e5417b585de69fff8f0e811846",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -10869,6 +11504,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0300",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::9890dedcfd1ce958856fe0621d1e687d",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|a4e99bf6f4a377fad5b63548e8149c8455c090b2b4eee12a57154e3dd77d057e|",
+      "relations": [],
+      "semantic_id": "07a097ef090c429782030149b746689805b347d2697a074479c260ff4cc3cee3",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0310",
         "target": "UCL-S-0300",
@@ -10957,6 +11614,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0310",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::8fa66fb95e333b6889b40a2cf1039b25",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|4211350980d0160bdeb7a77501e510d573661d52281320d0615ff854e3657d01|",
+      "relations": [],
+      "semantic_id": "78ed2350efb60bc467c268263f8c1f31e30712813685e647c2e6b6b0a8a1c180",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0320",
         "target": "UCL-S-0310",
@@ -11007,6 +11686,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::080dd437fde252cc2456ac3c6d158ccf",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|fb50d0ddc7bcf81a36faebbf5ed2b610e4a98da6864aa81d948b4d56aa26f520|",
+      "relations": [],
+      "semantic_id": "4beed765210d0d58fc599d8d7975fc90bb63572eee877dd4ef7b7f610b4daeeb",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0320",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::73d42a67681197e6d61bccc41ae3dc16",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -11111,6 +11812,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0330",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::d48b1304c2db4ff4c6547e3069943cb6",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|8b2985774bfa7e6e3205c8283b2e95b790fa3ea8de3ba68efa1ccb46acb2235b|",
+      "relations": [],
+      "semantic_id": "61a6a28ff0930e191d3167092122efc3e725c8d2d3333891eebcaf3c7490092a",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0340",
         "target": "UCL-S-0330",
@@ -11177,6 +11900,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0340",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::eb965f4435b97154ccf58b41c7ade266",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|ee641effb97516abd71a029f9ec89818ffeea05045aa6a1b672d264290bcca4e|",
+      "relations": [],
+      "semantic_id": "12f0f7acb8d3366d7b961c9027889432c31c36fb6b5c3d81784040d9f530096c",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0350",
         "target": "UCL-S-0340",
@@ -11240,6 +11985,28 @@
       "relations": [],
       "semantic_id": "2e6f4f8e1f35184fe14e7b0418bb6191f722f213a42537984247417c87756ff2",
       "target_identified": true
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0350",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::6ba9e088db0e452c91ef2da498bb5793",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|c42ca6ae6052e26d3a3e39d23316fd1b81d2dbab5ccd47f726937425251ee605|",
+      "relations": [],
+      "semantic_id": "38431112a62203ab8f50016a7c744b6d6b7988430fbdba6fa5c23ee2942419c7",
+      "target_identified": false
     },
     {
       "attributes": {
@@ -11331,6 +12098,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0360",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::e16b65b8a2276c8ac68e9b1eb03a4269",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|03e39f8d55b62918c24c1923959e6b11c7f67ef40cb00ff7ee341b6141357e84|",
+      "relations": [],
+      "semantic_id": "5f8d1c56b7055b182225bd5b4e931bedcb8a54f9114c513f1d67dc36d371762f",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0370",
         "target": "UCL-S-0360",
@@ -11381,6 +12170,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::a1da43ec3e78f47c996362b96a065eed",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|37648cb5e74e0016c8221721a207753ccd9d7e70fc7c3200cdbbd9a1bfcec946|",
+      "relations": [],
+      "semantic_id": "1f40b3e30d7d64acf9ca0832c9a26ff05d07cd2a99035fd812f7494aa12ed80f",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0370",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::7fe2eced6029c699257ebd471728bc09",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -11463,6 +12274,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0380",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::94878b24ba07bc6c60b5dc1ea6bd42bc",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|3ff97f63b7308630a854ef2f31b218279e69d5b26d9815ccadb0d4dd20b16571|",
+      "relations": [],
+      "semantic_id": "d1edd0fe41ecab76a756ce06a0adb74e8f9ae51ba578bbf21435539fac96118f",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0390",
         "target": "UCL-S-0380",
@@ -11513,6 +12346,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::76c125ac110beabcb63feae53767e7dc",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|2042f0d48b5f0c9e8017bacc8363dafd393cf5085f6d705ac630faf9cacc3b60|",
+      "relations": [],
+      "semantic_id": "57b0d85abbf085ff64556ce9ea72fb4ab38c29fc686da6067e0ea8da1961edb3",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0390",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::fe829967b0f27921b0c1660c64467454",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -11617,6 +12472,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0400",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::ab685b5aa38363528871b0230a925e4a",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|83af4af021a53357f6a952ece0ef798457eea3a1433da1b3f4043720444f98b1|",
+      "relations": [],
+      "semantic_id": "bed12345111b557a4fa90a1bf6014880c919ec76adfbdbe84dabde08070b522a",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0410",
         "target": "UCL-S-0400",
@@ -11689,6 +12566,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::0987544c86b4b9c002b097d93f7ef4ee",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|cfca24833728d949244608a73f34082bafa424edb7a4083abe0fc71abc609aa3|",
+      "relations": [],
+      "semantic_id": "34ed553654a781ade944dbc05d25ac3571204a95ba3a360c763c20b87e286bab",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0410",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::ad1508c3a98a29906a534d1aacec15b3",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -11793,6 +12692,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0420",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::da6286e499fe9f61d1a3bc6b0873a3d8",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|95d1a0b5f04af561eba0903dfcb2e29954accbdc892d6606bef4673c884d19f6|",
+      "relations": [],
+      "semantic_id": "8acde543af37074baa73fc0d9977e4d3d4d0fc02cd3d56524f830f46b00796f9",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0430",
         "target": "UCL-S-0420",
@@ -11843,6 +12764,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::ee4038874aca2dc1a45d9321d3c9805e",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|b18d843282dc5a2c17b402d56be31e1b542d447a147468217dd540945ec91992|",
+      "relations": [],
+      "semantic_id": "372301775b6be40733193dcbb8ab991055a78ff449beb041e5237eaefccb26b9",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0430",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::8d3332126dfa7b637e444923ed0d6fdc",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -11925,6 +12868,28 @@
     },
     {
       "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0440",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::13c0b852aba66603901bf1808cb8c3ba",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|115eeda15436e343d6f16edf60c63e88252c5c7578875af768691c5e19a6e239|",
+      "relations": [],
+      "semantic_id": "a5285efb1d774f1d585f7a70754812b15584b5bd743136fc98d518a33c150f17",
+      "target_identified": false
+    },
+    {
+      "attributes": {
         "relation": "requires",
         "source": "SRC-LIFECYCLE::UCL-S-0450",
         "target": "UCL-S-0440",
@@ -11975,6 +12940,28 @@
         "target_class": "artifact"
       },
       "cko_id": "engineering-relationship::0fdf8197181b8c54fe3bee72c2f356e5",
+      "kind": "engineering-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-LIFECYCLE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-LIFECYCLE",
+        "provider_owner": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|bde0c8303b2a0f4d0266103852a98fb3279e13e5ab8591aa73fad12fd0c81429|",
+      "relations": [],
+      "semantic_id": "f80059c5bfb5976f135cd42c424e0767103817527a2f3ecc794c7d940d314348",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
+        "source": "SRC-LIFECYCLE::UCL-S-0450",
+        "target": "engine/constitution/stages.py",
+        "target_class": "artifact"
+      },
+      "cko_id": "engineering-relationship::8685890ffd18def776c093f1fa2b2b7a",
       "kind": "engineering-relationship",
       "name": "evidenced-by",
       "provenance": {
@@ -23166,7 +24153,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "1ee5ecaa948df803f299c486eb0534f7201c36fc9321318d97cfeb3721776cfd",
+  "seal_sha256": "18a85e421e48a5ee7276601d976794607da610616477aa9671c40c1288476960",
   "self_evolution": [
     {
       "anchor": "determination",
@@ -24347,8 +25334,8 @@
       "expect": 0,
       "id": "ACEE-V-07",
       "measure": "invariants_unsatisfied",
-      "satisfied": false,
-      "value": 1
+      "satisfied": true,
+      "value": 0
     },
     {
       "blocking": true,
@@ -24380,8 +25367,8 @@
       "expect": 0,
       "id": "ACEE-V-10",
       "measure": "invariant_property_failures",
-      "satisfied": false,
-      "value": 1
+      "satisfied": true,
+      "value": 0
     },
     {
       "blocking": true,
@@ -24865,7 +25852,7 @@
       "id": "ACEE-V-54",
       "measure": "relationship_ckos_discovered",
       "satisfied": true,
-      "value": 650
+      "value": 695
     },
     {
       "blocking": true,

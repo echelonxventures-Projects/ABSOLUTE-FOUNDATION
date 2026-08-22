@@ -251,6 +251,34 @@
       ],
       "$why_governed_by_is_owner_parameterised": "Every other class names a fixed authority chain because its members share one authority. Governed declarations do not: UISD-000001 owns its declaration, UCL-000001 owns the stage manifest, UAUE-000001 owns its evolution declaration. A fixed chain would have to name a party that owns none of them — SOURCE's chain observes every one of these files and owns none — which would make programme ownership invisible to mutation governance exactly where it is load-bearing. The authority is therefore read from the artifact, and CEP-009 I.3 supplies the constraint that keeps it single: amendment authority SHALL be single per artifact lineage.",
       "$why_this_class_was_missing": "The register classified by example and its invariants quantified over classes rather than over artifacts, so an artifact belonging to no class violated nothing. uisd-declaration.json matched no example in any of the six classes, is not among the 345 canonical_path entries of generated-artifact-registry.json, and appears as input_closure to none of them — authored, owned, engine-consumed and unclassified. Six certified mutations to it proved execution validity and could not prove governance validity, because no stage of verify.sh evaluates mutation class. This is the same vacuity CORPUS_REGISTRATION records above, relocated rather than closed."
+    },
+    {
+      "class": "AUTHORED_DOCUMENT",
+      "examples": [
+        "adr/*.md (Architectural Decision Records)",
+        "00-CEP/*.md (constitutional instruments)",
+        "*-DETERMINATION-REPORT.md",
+        "*-ASSESSMENT-REPORT.md",
+        "*-CERTIFICATION-REPORT.md",
+        "*-CLOSURE-REPORT.md"
+      ],
+      "governed_by": "the authority the artifact declares of itself (owner-parameterised, read from an Authority or Deciders self-declaration) → verify.sh (observation only) → Phase 8 → Phase 9",
+      "membership_criteria": [
+        "markdown — the path ends .md",
+        "authored — absent from producer_homes",
+        "repository-controlled — tracked by version control",
+        "non-generated — absent from generated-artifact-registry.json canonical_path",
+        "self-declared-authority — carries an Authority or Deciders field in its own opening metadata block, bold-label or two-column-table form"
+      ],
+      "grants_only_mutation_ownership": "Class 7 defines WHO MAY MUTATE an authored governance document and nothing else. It grants no certification authority, no ratification authority and no freeze authority — the same CEP-009 I.1 reservation Class 6 states, applied to prose instead of declarations. Certification remains with the existing chain and freeze with CEP-007.",
+      "does_not_govern": [
+        "certification, ratification or freeze of the artifact — reserved by CEP-009 I.1 and CEP-007",
+        "verify.sh, which observes an authored document and may never author one",
+        "artifacts that are generated, which remain GENERATED_ARTIFACT wherever they live",
+        "JSON declarations already carrying a declaration block — those remain GOVERNED_DECLARATION; R-06 precedes R-08 and a JSON path never satisfies the markdown criterion"
+      ],
+      "$why_governed_by_is_owner_parameterised": "The same reasoning as GOVERNED_DECLARATION, applied to prose: an ADR's Deciders and a constitution's Authority are each self-declared by the artifact, not by a shared external chain, and CEP-009 I.3 keeps that authority single per lineage.",
+      "$why_this_class_was_missing": "The classification rules (EX-015/EX-016) covered paths and JSON declarations but named no rule for markdown. Every constitution, ADR, decision document, determination report and assessment report this program produces — including every ADR registered as a UCDA decision this session — resolved to the UNRESOLVED terminal, exactly the population the terminal's own $conformance_is_not_claimed_here note named as expected: 'root-level *.md including the Master Implementation Plan artifacts.' A tracked, authored, self-attributed governance document is not an unclassified artifact; this closes that gap the same way GOVERNED_DECLARATION closed it for JSON."
     }
   ],
   "classification_rules": {
@@ -305,6 +333,12 @@
         "id": "R-07",
         "class": "SOURCE",
         "predicate": "subject is a tracked executable or build-configuration path: **/*.py, **/*.sh, or a build manifest such as pyproject.toml"
+      },
+      {
+        "precedence": 8,
+        "id": "R-08",
+        "class": "AUTHORED_DOCUMENT",
+        "predicate": "subject is a tracked, non-generated markdown path satisfying every one of the five membership_criteria declared on the AUTHORED_DOCUMENT class"
       }
     ],
     "terminal": {

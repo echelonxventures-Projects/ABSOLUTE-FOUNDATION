@@ -23,7 +23,7 @@ from __future__ import annotations
 import json
 from collections.abc import Iterable, Mapping
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from engine.foundation.guards.frozen_paths import find_frozen_writes
 from engine.knowledge.cko import CanonicalKnowledgeObject, DecisionRecord
@@ -39,11 +39,22 @@ from engine.knowledge.model import (
     Lifecycle,
 )
 
+if TYPE_CHECKING:
+    # Deliberately not imported at module level here: engine.knowledge.ukip's package
+    # __init__ eagerly imports assimilation.py, which imports this module — a real
+    # circular import (confirmed by direct failure, not assumed). The two methods
+    # that construct a ProvenanceChain import it locally, at call time, instead.
+    from engine.knowledge.ukip.provenance import ProvenanceChain
+
 #: Canonical store filenames and envelope schema identifiers.
 CANON_FILE = "canonical-knowledge.json"
 DECISIONS_FILE = "decisions.json"
+HISTORY_FILE = "canonical-knowledge-history.json"
+PROVENANCE_FILE = "provenance.json"
 CANON_SCHEMA = "ucos-ukda-canonical-knowledge"
 DECISIONS_SCHEMA = "ucos-ukda-decisions"
+HISTORY_SCHEMA = "ucos-ukda-canonical-knowledge-history"
+PROVENANCE_SCHEMA = "ucos-ukda-provenance"
 STORE_VERSION = "1.0.0"
 
 #: The default, mutable, non-corpus home for canonical knowledge (repo-root).
@@ -285,19 +296,123 @@ class KnowledgeStore:
         return path
 
     def save(self, base: KnowledgeBase) -> tuple[Path, Path]:
-        """Write the base to the store as two deterministic JSON envelopes."""
+        """Write the base to the store as two deterministic JSON envelopes.
+
+        Before either file is overwritten, any object already on disk whose content
+        is about to change (or which is about to disappear from `base` entirely) is
+        archived to `HISTORY_FILE` — `save()` no longer discards a prior version
+        (P4-F-004, WP-UCDA-028). The live `CANON_FILE` still reflects only the
+        current state, unchanged, exactly as `KnowledgeBase.replace_object()`'s real
+        callers (`engine/runtime/bridge/bridge.py`, `engine/knowledge/integration/
+        pipeline.py`) already rely on for their same-identity upsert pattern — this
+        fix is entirely at the persistence boundary, not a change to that pattern.
+        """
         self._guard_writable()
         self._dir.mkdir(parents=True, exist_ok=True)
+        self._archive_replaced_versions(base)
         canon_path = self._write_json(CANON_FILE, base.to_canon_document())
         decisions_path = self._write_json(DECISIONS_FILE, base.to_decisions_document())
         return canon_path, decisions_path
+
+    def _archive_replaced_versions(self, base: KnowledgeBase) -> None:
+        """Append any on-disk object whose content is about to change to the history file."""
+        if not self._path(CANON_FILE).is_file():
+            return  # nothing on disk yet to lose
+        try:
+            current = self._read_json(CANON_FILE)
+        except KnowledgeSourceError:
+            return  # unreadable prior state cannot be archived; save() proceeds as before
+        current_records = {
+            r["cko_id"]: r
+            for r in _records(current, root_key="objects", filename=CANON_FILE)
+            if isinstance(r, Mapping) and r.get("cko_id")
+        }
+        incoming_hashes = {o.cko_id: o.content_sha256 for o in base.objects()}
+        changed = [
+            record
+            for cko_id, record in current_records.items()
+            if incoming_hashes.get(cko_id) != record.get("content_sha256")
+        ]
+        if not changed:
+            return
+        history_doc: dict[str, Any] = {"schema": HISTORY_SCHEMA, "version": STORE_VERSION}
+        if self._path(HISTORY_FILE).is_file():
+            try:
+                history_doc = self._read_json(HISTORY_FILE)
+            except KnowledgeSourceError:
+                pass
+        versions = history_doc.setdefault("versions", {})
+        if not isinstance(versions, dict):
+            versions = {}
+            history_doc["versions"] = versions
+        for record in changed:
+            versions.setdefault(str(record["cko_id"]), []).append(record)
+        self._write_json(HISTORY_FILE, history_doc)
+
+    def history(self, cko_id: str) -> tuple[CanonicalKnowledgeObject, ...]:
+        """Every prior version of `cko_id` archived by `save()`, oldest first.
+
+        Empty when the object has never been overwritten, or `HISTORY_FILE` does not
+        exist yet — never an error, matching `KnowledgeStore`'s existing fail-soft
+        read discipline for optional files (see `DECISIONS_FILE` in `load()`).
+        """
+        if not self._path(HISTORY_FILE).is_file():
+            return ()
+        doc = self._read_json(HISTORY_FILE)
+        versions = doc.get("versions") or {}
+        records = versions.get(cko_id) or []
+        return tuple(
+            CanonicalKnowledgeObject.from_dict(r) for r in records if isinstance(r, Mapping)
+        )
+
+    # -- provenance persistence (P4-F-006, WP-UCDA-028) -------------------------
+
+    def save_provenance(self, chains: Iterable[ProvenanceChain]) -> Path:
+        """Persist provenance chains, keyed by their own `subject` field.
+
+        Kept out of `CanonicalKnowledgeObject`'s content-addressed core deliberately
+        — embedding a chain there would change every existing CKO's `content_sha256`
+        and duplicate UKIP's own `ProvenanceChain` representation, the same reasoning
+        `ADR-0016` already applied to knowledge confidence. This is a sibling file in
+        the same store, using the same guard and write path as `CANON_FILE`/
+        `DECISIONS_FILE` — not a new store.
+        """
+        self._guard_writable()
+        self._dir.mkdir(parents=True, exist_ok=True)
+        ordered = sorted(chains, key=lambda c: c.subject)
+        document = {
+            "schema": PROVENANCE_SCHEMA,
+            "version": STORE_VERSION,
+            "count": len(ordered),
+            "chains": [c.to_dict() for c in ordered],
+        }
+        return self._write_json(PROVENANCE_FILE, document)
+
+    def load_provenance(self) -> dict[str, ProvenanceChain]:
+        """Every persisted provenance chain, keyed by subject. Empty if never saved."""
+        # local import: see the TYPE_CHECKING block's note near the top of this file
+        from engine.knowledge.ukip.provenance import ProvenanceChain
+
+        if not self._path(PROVENANCE_FILE).is_file():
+            return {}
+        doc = self._read_json(PROVENANCE_FILE)
+        chains = _records(doc, root_key="chains", filename=PROVENANCE_FILE)
+        result: dict[str, ProvenanceChain] = {}
+        for record in chains:
+            chain = ProvenanceChain.from_dict(record)
+            result[chain.subject] = chain
+        return result
 
 
 __all__ = [
     "CANON_FILE",
     "DECISIONS_FILE",
+    "HISTORY_FILE",
+    "PROVENANCE_FILE",
     "CANON_SCHEMA",
     "DECISIONS_SCHEMA",
+    "HISTORY_SCHEMA",
+    "PROVENANCE_SCHEMA",
     "STORE_VERSION",
     "KNOWLEDGE_DIR",
     "default_store_dir",

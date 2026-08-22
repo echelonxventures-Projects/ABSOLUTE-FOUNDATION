@@ -8963,11 +8963,11 @@
     "STAGE0": 1,
     "DET": 2,
     "CONFIG": 31,
-    "DATAOBJ": 127,
-    "EXDOC": 2606,
+    "DATAOBJ": 130,
+    "EXDOC": 2621,
     "TOOLING": 36,
-    "ENGINE": 1262,
-    "TESTOBJ": 826,
+    "ENGINE": 1265,
+    "TESTOBJ": 831,
     "OBS": 7
   },
   "discovered_volumes": {
@@ -54068,6 +54068,162 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:8456ede1862e"
+    },
+    "00-MASTER/UCOS-CEU-001/ceu-declaration.json": {
+      "universal_id": "UCOS-DATAOBJ-000128",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "00-MASTER/UCXI-000001/ucxi-declaration.json": {
+      "universal_id": "UCOS-DATAOBJ-000129",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "PHASE-4-CAPABILITY-GAP-MATRIX.md": {
+      "universal_id": "UCOS-EXDOC-002607",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "PHASE-4-RESUMPTION-STATE-REPORT.md": {
+      "universal_id": "UCOS-EXDOC-002608",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "PHASE-4-VALIDATION-AND-CERTIFICATION-EVIDENCE.md": {
+      "universal_id": "UCOS-EXDOC-002609",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "REPOSITORY-IDENTITY-ALLOCATION-OWNER-DECISION-RECORD.md": {
+      "universal_id": "UCOS-EXDOC-002610",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0003-constitutional-binding-of-ceu-and-ucxi.md": {
+      "universal_id": "UCOS-EXDOC-002611",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0004-uisd-scope-extension-to-entity-applicability.md": {
+      "universal_id": "UCOS-EXDOC-002612",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0005-measurement-as-a-context-and-entity.md": {
+      "universal_id": "UCOS-EXDOC-002613",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0006-entity-classification-authority-moves-to-ceu.md": {
+      "universal_id": "UCOS-EXDOC-002614",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0007-disclose-every-finite-enumeration.md": {
+      "universal_id": "UCOS-EXDOC-002615",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0008-unified-unknown-admission-verification.md": {
+      "universal_id": "UCOS-EXDOC-002616",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0009-technology-independence-is-already-canonical.md": {
+      "universal_id": "UCOS-EXDOC-002617",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0010-platform-composition-is-already-canonical.md": {
+      "universal_id": "UCOS-EXDOC-002618",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0011-self-learning-and-evolution-are-already-canonical.md": {
+      "universal_id": "UCOS-EXDOC-002619",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0012-remove-residual-planetary-default.md": {
+      "universal_id": "UCOS-EXDOC-002620",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "adr/0013-universal-persistent-evolutionary-graph-memory.md": {
+      "universal_id": "UCOS-EXDOC-002621",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "engine/knowledge/ukip/confidence.py": {
+      "universal_id": "UCOS-ENGINE-001263",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "engine/lineage/memory-layers.json": {
+      "universal_id": "UCOS-DATAOBJ-000130",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "engine/lineage/memory.py": {
+      "universal_id": "UCOS-ENGINE-001264",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "engine/tests/expansion/test_platform_composition_verification.py": {
+      "universal_id": "UCOS-TESTOBJ-000827",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "engine/tests/expansion/test_universal_expansion_verification.py": {
+      "universal_id": "UCOS-TESTOBJ-000828",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "engine/tests/expansion/test_universal_memory_verification.py": {
+      "universal_id": "UCOS-TESTOBJ-000829",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "engine/tests/knowledge/ukip/test_confidence.py": {
+      "universal_id": "UCOS-TESTOBJ-000830",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "platform/repository_intelligence/mutation_classification.py": {
+      "universal_id": "UCOS-ENGINE-001265",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:03179308f5cb"
+    },
+    "platform/tests/test_mutation_classification.py": {
+      "universal_id": "UCOS-TESTOBJ-000831",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:03179308f5cb"
     }
   },
   "by_observation": {

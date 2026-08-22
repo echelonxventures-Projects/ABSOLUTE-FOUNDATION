@@ -250,7 +250,12 @@ class ExistenceRegistry:
     def __init__(self, *, root_form: str = ROOT_FORM, root_code: str = ROOT_FORM_CODE) -> None:
         self._units: dict[tuple[str, str], ExistenceUnit] = {}
         self._by_id: dict[str, tuple[str, str]] = {}
-        self._supersessions: dict[str, dict[str, Any]] = {}
+        # One append-only list per subject, not one mutable slot: resurrect() used to
+        # mutate the sole record in place, which made the field-level state right after
+        # supersede() and before resurrect() unrecoverable — only its hash survived
+        # (P4-F-001). Each entry is now a new, complete snapshot; nothing already in the
+        # list is ever edited (WP-UCDA-028).
+        self._supersessions: dict[str, list[dict[str, Any]]] = {}
         self._audit: list[AuditEntry] = []
         self._context: dict[str, Any] = {}
         self._root_form = root_form.strip()
@@ -495,7 +500,8 @@ class ExistenceRegistry:
             "deprecated_outright": not chosen,
             "active": True,
         }
-        existing = self._supersessions.get(universal_id)
+        history = self._supersessions.setdefault(universal_id, [])
+        existing = history[-1] if history else None
         if existing is not None and existing["active"]:
             if {k: existing[k] for k in ("successors", "authority", "note")} == {
                 "successors": list(chosen),
@@ -508,7 +514,7 @@ class ExistenceRegistry:
                 subject=universal_id,
                 existing=existing["successors"],
             )
-        self._supersessions[universal_id] = record
+        history.append(record)
         self._append(ACTION_SUPERSEDE, universal_id, content_hash(record))
         return dict(record)
 
@@ -524,19 +530,30 @@ class ExistenceRegistry:
             ExistenceError: the unit is unregistered, or is not currently superseded.
         """
         self.resolve(universal_id)
-        record = self._supersessions.get(universal_id)
-        if record is None or not record["active"]:
+        history = self._supersessions.get(universal_id) or []
+        latest = history[-1] if history else None
+        if latest is None or not latest["active"]:
             raise ExistenceError("this unit is not superseded", subject=universal_id)
         if not isinstance(authority, str) or not authority.strip():
             raise ExistenceError("a resurrection must name its authority", subject=universal_id)
-        record["active"] = False
-        record["resurrected_by"] = authority.strip()
-        record["resurrection_note"] = note
+        # A new snapshot, appended — not a mutation of `latest`, which stays exactly as
+        # supersede() left it, forever readable at its own position in the history.
+        record = {
+            **latest,
+            "active": False,
+            "resurrected_by": authority.strip(),
+            "resurrection_note": note,
+        }
+        history.append(record)
         self._append(ACTION_RESURRECT, universal_id, content_hash(record))
         return dict(record)
 
+    def _latest_supersession(self, universal_id: str) -> dict[str, Any] | None:
+        history = self._supersessions.get(str(universal_id))
+        return history[-1] if history else None
+
     def is_superseded(self, universal_id: str) -> bool:
-        record = self._supersessions.get(str(universal_id))
+        record = self._latest_supersession(universal_id)
         return bool(record and record["active"])
 
     def is_superseded_key(self, form: str, key: str) -> bool:
@@ -544,7 +561,7 @@ class ExistenceRegistry:
         return bool(unit) and self.is_superseded(unit.universal_id)
 
     def successors_of(self, universal_id: str) -> tuple[str, ...]:
-        record = self._supersessions.get(str(universal_id))
+        record = self._latest_supersession(universal_id)
         return tuple(record["successors"]) if record and record["active"] else ()
 
     def successors_of_key(self, form: str, key: str) -> tuple[str, ...]:
@@ -556,7 +573,13 @@ class ExistenceRegistry:
         return tuple(u for u in self.units(form=form) if not self.is_superseded(u.universal_id))
 
     def supersessions(self) -> tuple[dict[str, Any], ...]:
-        return tuple(dict(self._supersessions[k]) for k in sorted(self._supersessions))
+        """The current state of every subject that has ever been superseded — one per subject."""
+        return tuple(dict(self._supersessions[k][-1]) for k in sorted(self._supersessions))
+
+    def supersession_history(self, universal_id: str) -> tuple[dict[str, Any], ...]:
+        """Every snapshot ever recorded for one subject, oldest first — the field-level
+        reconstruction `supersessions()` alone cannot give (P4-F-001, WP-UCDA-028)."""
+        return tuple(dict(record) for record in self._supersessions.get(str(universal_id), []))
 
     # -- specialization, over any form -------------------------------------- #
 
@@ -716,12 +739,19 @@ class ExistenceRegistry:
                 "units": len(self._units),
                 "forms": len(self.forms()),
                 "admissible": len(self.admissible()),
-                "superseded": sum(1 for r in self._supersessions.values() if r["active"]),
+                "superseded": sum(1 for h in self._supersessions.values() if h and h[-1]["active"]),
                 "by_form": self.counts(),
             },
             "context": dict(self._context),
             "units": [self._units[k].to_dict() for k in sorted(self._units)],
             "supersessions": [dict(s) for s in self.supersessions()],
+            # Every snapshot per subject, not only its current state — the field-level
+            # history `supersessions()` alone collapses to one row per subject (P4-F-001,
+            # WP-UCDA-028). Additive: existing consumers of "supersessions" are unaffected.
+            "supersession_history": {
+                subject: [dict(record) for record in records]
+                for subject, records in sorted(self._supersessions.items())
+            },
             # The whole journal, not just its head. Steering 022: Repository Truth must be
             # *sufficient* to reconstruct constitutional state, and a head alone proves the
             # chain was intact without carrying what it was a chain of.
@@ -801,9 +831,20 @@ class ExistenceRegistry:
             registry._units[(unit.form, unit.key)] = unit
             registry._by_id[unit.universal_id] = (unit.form, unit.key)
 
-        for record in payload.get("supersessions") or []:
-            if isinstance(record, Mapping) and record.get("subject"):
-                registry._supersessions[str(record["subject"])] = dict(record)
+        history_payload = payload.get("supersession_history")
+        if isinstance(history_payload, Mapping):
+            for subject, records in history_payload.items():
+                if isinstance(records, list):
+                    registry._supersessions[str(subject)] = [
+                        dict(r) for r in records if isinstance(r, Mapping)
+                    ]
+        else:
+            # Older document, current-state summaries only (single entry per subject) —
+            # every fresh registry's own to_document() output before this fix took this
+            # exact shape, so this remains a faithful, lossless read of that shape.
+            for record in payload.get("supersessions") or []:
+                if isinstance(record, Mapping) and record.get("subject"):
+                    registry._supersessions[str(record["subject"])] = [dict(record)]
 
         for entry in payload.get("audit") or []:
             if not isinstance(entry, Mapping):
