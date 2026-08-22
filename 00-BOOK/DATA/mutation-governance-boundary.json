@@ -16,7 +16,7 @@
   },
   "constitutional_basis": "UCKP-LAW-0001 (engine/uckp/law.py), UCOS-CAA-001, UCOS-CMG-EXEC-000001 Requirement 004, GOV-005, UCOS-CL-016",
   "schema": "ucos-mutation-governance-boundary",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "determination": "OPTION B — SOURCE MUTATIONS ARE OUTSIDE THE CONSTITUTIONAL MUTATION GATEWAY",
   "why_this_determination": [
     "The question was live because a source mutation (be46a300, touching intelligence/rie/evidence.py,",
@@ -279,6 +279,36 @@
       ],
       "$why_governed_by_is_owner_parameterised": "The same reasoning as GOVERNED_DECLARATION, applied to prose: an ADR's Deciders and a constitution's Authority are each self-declared by the artifact, not by a shared external chain, and CEP-009 I.3 keeps that authority single per lineage.",
       "$why_this_class_was_missing": "The classification rules (EX-015/EX-016) covered paths and JSON declarations but named no rule for markdown. Every constitution, ADR, decision document, determination report and assessment report this program produces — including every ADR registered as a UCDA decision this session — resolved to the UNRESOLVED terminal, exactly the population the terminal's own $conformance_is_not_claimed_here note named as expected: 'root-level *.md including the Master Implementation Plan artifacts.' A tracked, authored, self-attributed governance document is not an unclassified artifact; this closes that gap the same way GOVERNED_DECLARATION closed it for JSON."
+    },
+    {
+      "class": "GOVERNED_ANALYSIS",
+      "examples": [
+        "*-DETERMINATION.md",
+        "*-DETERMINATION-REPORT.md",
+        "*-ANALYSIS.md",
+        "*-ASSESSMENT-DETERMINATION.md",
+        "PHASE-*-EXECUTION-COMPLETION-REPORT.md",
+        "MASTER-EXECUTION-ADMISSION-MATRIX.md",
+        "BLOCKER-ELIMINATION-DETERMINATION.md",
+        "100-PERCENT-IMPLEMENTATION-READINESS-CERTIFICATION.md"
+      ],
+      "governed_by": "the authority the analysis declares of itself (owner-parameterised, read from Authority field) → Repository Intelligence → verify.sh (observation only)",
+      "membership_criteria": [
+        "markdown — the path ends .md",
+        "authored — absent from producer_homes",
+        "repository-controlled — tracked by version control",
+        "non-generated — absent from generated-artifact-registry.json canonical_path",
+        "analysis-artifact — carries determination/analysis/assessment/execution/matrix/readiness/admission/blocker/gap in filename",
+        "self-declared-authority — carries Authority field in opening metadata block"
+      ],
+      "grants_only_mutation_ownership": "Class 8 defines WHO MAY MUTATE a governed analysis artifact and nothing else. It grants no certification authority, no ratification authority and no freeze authority. Certification remains with the existing chain.",
+      "does_not_govern": [
+        "certification, ratification or freeze of the artifact",
+        "verify.sh, which observes an analysis and may never author one",
+        "artifacts that are generated, which remain GENERATED_ARTIFACT"
+      ],
+      "$why_this_class_was_added": "Phase 1B Violation 4 resolution. Determination, analysis, and assessment artifacts are a distinct class from AUTHORED_DOCUMENT (which covers ADRs, constitutions, general documentation). Analysis artifacts follow specific governance patterns: they document findings, they reference evidence, they have determinations, and they are often superseded by newer analyses. Separating them into GOVERNED_ANALYSIS provides explicit governance for analytical work products.",
+      "$distinction_from_authored_document": "AUTHORED_DOCUMENT (Class 7) covers general governance prose (ADRs, constitutions, policy documents). GOVERNED_ANALYSIS (Class 8) covers analytical work products (determinations, assessments, execution reports, matrices). The distinction is functional: analyses document findings and evidence; documents declare policy and decisions. R-09 evaluates before R-08 so analysis artifacts are classified as GOVERNED_ANALYSIS rather than the more general AUTHORED_DOCUMENT."
     }
   ],
   "classification_rules": {
@@ -339,6 +369,12 @@
         "id": "R-08",
         "class": "AUTHORED_DOCUMENT",
         "predicate": "subject is a tracked, non-generated markdown path satisfying every one of the five membership_criteria declared on the AUTHORED_DOCUMENT class"
+      },
+      {
+        "precedence": 9,
+        "id": "R-09",
+        "class": "GOVERNED_ANALYSIS",
+        "predicate": "subject is a tracked, non-generated markdown path with (determination|analysis|assessment|execution|matrix|readiness|admission|blocker|gap) in the filename, satisfying the six membership_criteria declared on GOVERNED_ANALYSIS"
       }
     ],
     "terminal": {
