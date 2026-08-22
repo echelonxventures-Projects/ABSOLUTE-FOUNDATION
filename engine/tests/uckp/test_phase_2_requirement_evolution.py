@@ -13,10 +13,7 @@ Authority: Phase 2 execution authorization, REQ-23 work item closure
 
 from __future__ import annotations
 
-import pytest
-
 from engine.uckp.evolution import (
-    EVOLUTION_CYCLE,
     EVOLUTION_SUBJECT_TYPE,
     REQUIREMENT_EVOLUTION_EVENT,
     EvolutionLedger,
@@ -25,7 +22,6 @@ from engine.uckp.evolution import (
     evolution_subject_type_vocabulary,
     requirement_evolution_event_vocabulary,
 )
-
 
 # -----------------------------------------------------------------------------
 # Phase 2 Test 1: Subject Type Vocabulary
@@ -276,9 +272,8 @@ def test_phase_2_evolution_ledger_subject_type_querying() -> None:
     assert len(unknown_records) == 0
 
     # Validate: records without subject_type excluded
-    all_typed_records = (
-        ledger.subject_type_records("REQUIREMENT")
-        + ledger.subject_type_records("PROGRAMME")
+    all_typed_records = ledger.subject_type_records("REQUIREMENT") + ledger.subject_type_records(
+        "PROGRAMME"
     )
     assert len(all_typed_records) == 2  # excludes untyped record
 
@@ -350,9 +345,7 @@ def test_phase_2_evolution_ledger_event_type_querying() -> None:
     assert len(unknown_records) == 0
 
     # Validate: records without event_type excluded
-    all_event_records = (
-        ledger.event_type_records("CREATED") + ledger.event_type_records("MODIFIED")
-    )
+    all_event_records = ledger.event_type_records("CREATED") + ledger.event_type_records("MODIFIED")
     assert len(all_event_records) == 2  # excludes record without event_type
 
 

@@ -314,9 +314,7 @@ class EvolutionLedger:
         Returns records matching the given subject_type. Records without subject_type
         (pre-Phase 2 records) are excluded from results.
         """
-        return tuple(
-            record for record in self._records if record.subject_type == subject_type
-        )
+        return tuple(record for record in self._records if record.subject_type == subject_type)
 
     def event_type_records(self, event_type: str) -> tuple[EvolutionRecord, ...]:
         """Records for a specific event type (Phase 2 REQ-23 extension).
@@ -324,9 +322,7 @@ class EvolutionLedger:
         Returns records matching the given event_type. Records without event_type
         (pre-Phase 2 records) are excluded from results.
         """
-        return tuple(
-            record for record in self._records if record.event_type == event_type
-        )
+        return tuple(record for record in self._records if record.event_type == event_type)
 
     def findings(self) -> tuple[str, ...]:
         return tuple(finding for record in self._records for finding in record.findings)

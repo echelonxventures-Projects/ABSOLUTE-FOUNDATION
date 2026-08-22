@@ -23,14 +23,10 @@ Owner: Universal Lineage Projection (ULP), engine/lineage/memory.py
 
 from __future__ import annotations
 
-import pytest
-
 from engine.lineage.memory import (
     ACCESS_MODES,
     MODE_LIST_MATCH,
-    MODE_MAP_OF_LISTS,
     MemoryAccess,
-    MemoryDeclaration,
     MemoryLayer,
     duplicate_owners,
     load_declaration,
@@ -38,7 +34,6 @@ from engine.lineage.memory import (
     reconstruct,
     resolve,
 )
-from engine.lineage.model import LineageError
 
 # Test subjects: known artifacts and unknown subject for open-world validation
 KNOWN_SUBJECT = "UCOS-BOOK-000000"
@@ -55,7 +50,8 @@ def test_req_43_memory_declaration_loaded_successfully() -> None:
 
     Validates:
     - Memory layer declaration loads from data file (memory-layers.json)
-    - Seven layers declared: identity, context, relationship, knowledge, evidence, decision, evolution
+    - Seven layers declared: identity, context, relationship, knowledge,
+      evidence, decision, evolution
     - Declaration structure valid (declaration_id, layers, ordinal ordering)
     """
     declaration = load_declaration()
@@ -100,11 +96,11 @@ def test_req_43_memory_layer_structure() -> None:
     # Validate: each layer has one owner
     layer_owners = owners(declaration)
     assert len(layer_owners) == 7
-    for layer_name, owner in layer_owners.items():
+    for _layer_name, owner in layer_owners.items():
         assert owner  # non-empty owner
 
     # Validate: no duplicate owners across layers
-    duplicates = duplicate_owners(declaration)
+    _ = duplicate_owners(declaration)
     # Note: duplicates allowed if different records (CEU owns identity + evolution)
     # Validation: no (owner, record) pair answers two layers
 
@@ -169,7 +165,7 @@ def test_req_43_open_world_unknown_subject_resolves_empty() -> None:
     assert len(memory) == 7
 
     # Validate: all layers empty (unknown subject has no memory)
-    for layer_name, entries in memory.items():
+    for _layer_name, entries in memory.items():
         assert len(entries) == 0  # empty, not error
 
 
@@ -200,7 +196,7 @@ def test_req_43_memory_layers_traversable_in_ordinal_order() -> None:
     assert len(names) == 7
     for name in names:
         # Find layer by name
-        layer = next((l for l in declaration.layers if l.layer == name), None)
+        layer = next((lyr for lyr in declaration.layers if lyr.layer == name), None)
         assert layer is not None
 
 
@@ -216,12 +212,12 @@ def test_req_43_memory_cross_layer_relationships() -> None:
     memory = resolve(KNOWN_SUBJECT, declaration)
 
     # Validate: all entries reference same subject
-    for layer_name, entries in memory.items():
+    for _layer_name, entries in memory.items():
         for entry in entries:
             assert entry.get("subject") == KNOWN_SUBJECT
 
     # Validate: each entry cites one governed record
-    for layer_name, entries in memory.items():
+    for _layer_name, entries in memory.items():
         for entry in entries:
             assert "source" in entry  # one source per entry
 

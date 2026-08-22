@@ -26,13 +26,20 @@ GOVERNED_ANALYSIS_CLASS = {
         "PHASE-*-EXECUTION-COMPLETION-REPORT.md",
         "MASTER-EXECUTION-ADMISSION-MATRIX.md",
     ],
-    "governed_by": "the authority the analysis declares of itself (owner-parameterised, read from Authority field) → Repository Intelligence → verify.sh (observation only)",
+    "governed_by": (
+        "the authority the analysis declares of itself (owner-parameterised, "
+        "read from Authority field) → Repository Intelligence → verify.sh "
+        "(observation only)"
+    ),
     "membership_criteria": [
         "markdown — the path ends .md",
         "authored — absent from producer_homes",
         "repository-controlled — tracked by version control",
         "non-generated — absent from generated-artifact-registry.json canonical_path",
-        "analysis-artifact — carries determination/analysis/assessment in filename or declares analysis type",
+        (
+            "analysis-artifact — carries determination/analysis/assessment in "
+            "filename or declares analysis type"
+        ),
         "self-declared-authority — carries Authority field in opening metadata block",
     ],
     "grants_only_mutation_ownership": (
@@ -100,7 +107,9 @@ def extend_mutation_governance_boundary(
     if "GOVERNED_ANALYSIS" in existing_classes:
         raise ValueError("GOVERNED_ANALYSIS already exists in mutation_classes")
 
-    existing_rules = {rule["id"] for rule in boundary.get("classification_rules", {}).get("rules", [])}
+    existing_rules = {
+        rule["id"] for rule in boundary.get("classification_rules", {}).get("rules", [])
+    }
     if "R-09" in existing_rules:
         raise ValueError("R-09 already exists in classification_rules")
 
@@ -163,7 +172,9 @@ def add_dynamic_class_extension_mechanism() -> dict[str, Any]:
                 "no_duplicate_classes": "extension class name must not exist in base classes",
                 "no_duplicate_rule_ids": "extension rule ID must not exist in base rules",
                 "authority_required": "every extension must name governing authority",
-                "predicate_implementable": "extension predicates must be decidable from repository state",
+                "predicate_implementable": (
+                    "extension predicates must be decidable from repository state"
+                ),
             },
         },
         "example_extension": {

@@ -11,9 +11,6 @@ from __future__ import annotations
 import json
 import tempfile
 from pathlib import Path
-
-import pytest
-
 from platform.repository_intelligence.mutation_class_extension import (
     GOVERNED_ANALYSIS_CLASS,
     GOVERNED_ANALYSIS_RULE,
@@ -21,6 +18,7 @@ from platform.repository_intelligence.mutation_class_extension import (
     extend_mutation_governance_boundary,
 )
 
+import pytest
 
 # -----------------------------------------------------------------------------
 # Violation 4 Test 1: GOVERNED_ANALYSIS Class Definition
@@ -46,7 +44,11 @@ def test_violation_4_governed_analysis_class_structure() -> None:
     # Validate: 6 membership criteria
     assert len(GOVERNED_ANALYSIS_CLASS["membership_criteria"]) == 6
     assert "markdown — the path ends .md" in GOVERNED_ANALYSIS_CLASS["membership_criteria"]
-    assert "analysis-artifact — carries determination/analysis/assessment in filename or declares analysis type" in GOVERNED_ANALYSIS_CLASS["membership_criteria"]
+    analysis_criterion = (
+        "analysis-artifact — carries determination/analysis/assessment in "
+        "filename or declares analysis type"
+    )
+    assert analysis_criterion in GOVERNED_ANALYSIS_CLASS["membership_criteria"]
 
     # Validate: examples are analysis artifacts
     examples = GOVERNED_ANALYSIS_CLASS["examples"]
@@ -193,7 +195,8 @@ def test_violation_4_dynamic_extension_mechanism_specification() -> None:
     assert "specification" in spec
 
     # Validate: extension registry path
-    assert spec["specification"]["extension_registry"] == "00-BOOK/DATA/mutation-class-extensions.json"
+    registry_path = "00-BOOK/DATA/mutation-class-extensions.json"
+    assert spec["specification"]["extension_registry"] == registry_path
 
     # Validate: schema defined
     schema = spec["specification"]["schema"]

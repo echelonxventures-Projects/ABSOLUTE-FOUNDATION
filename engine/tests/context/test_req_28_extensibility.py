@@ -16,11 +16,11 @@ from __future__ import annotations
 
 import pytest
 
+from engine.context.errors import TaxonomyError
 from engine.context.taxonomy import (
     ROOT_TAXON,
     UNIVERSAL_TAXONOMY,
     ContextTaxon,
-    ContextTaxonomy,
 )
 
 
@@ -111,7 +111,7 @@ def test_req_28_extension_mechanism_is_bounded() -> None:
     - Cannot create second root (one root only)
     """
     # Invalid: duplicate taxon ID
-    with pytest.raises(Exception):  # TaxonomyError
+    with pytest.raises(TaxonomyError):
         UNIVERSAL_TAXONOMY.extend(
             ContextTaxon(
                 taxon_id="CTX-TEMPORAL",  # duplicate (universal taxon)
@@ -122,7 +122,7 @@ def test_req_28_extension_mechanism_is_bounded() -> None:
         )
 
     # Invalid: duplicate kind
-    with pytest.raises(Exception):  # TaxonomyError
+    with pytest.raises(TaxonomyError):
         UNIVERSAL_TAXONOMY.extend(
             ContextTaxon(
                 taxon_id="CTX-FUTURE",
@@ -133,7 +133,7 @@ def test_req_28_extension_mechanism_is_bounded() -> None:
         )
 
     # Invalid: claim universality (constitutional, cannot be granted)
-    with pytest.raises(Exception):  # TaxonomyError
+    with pytest.raises(TaxonomyError):
         UNIVERSAL_TAXONOMY.extend(
             ContextTaxon(
                 taxon_id="CTX-FUTURE",
@@ -145,7 +145,7 @@ def test_req_28_extension_mechanism_is_bounded() -> None:
         )
 
     # Invalid: parent does not exist
-    with pytest.raises(Exception):  # TaxonomyError
+    with pytest.raises(TaxonomyError):
         UNIVERSAL_TAXONOMY.extend(
             ContextTaxon(
                 taxon_id="CTX-FUTURE",
@@ -156,7 +156,7 @@ def test_req_28_extension_mechanism_is_bounded() -> None:
         )
 
     # Invalid: second root (parent=None)
-    with pytest.raises(Exception):  # TaxonomyError
+    with pytest.raises(TaxonomyError):
         UNIVERSAL_TAXONOMY.extend(
             ContextTaxon(
                 taxon_id="CTX-FUTURE",
