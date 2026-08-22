@@ -94,6 +94,12 @@ def is_terminal(stage: EvolutionStage | str) -> bool:
 #: The vocabulary id under which the stage set is published.
 EVOLUTION_STAGE = "uckp.evolution-stage"
 
+#: The vocabulary id under which subject types are published (Phase 2 extension).
+EVOLUTION_SUBJECT_TYPE = "uckp.evolution-subject-type"
+
+#: The vocabulary id under which requirement evolution events are published (Phase 2).
+REQUIREMENT_EVOLUTION_EVENT = "uckp.requirement-evolution-event"
+
 #: The document form :meth:`EvolutionLedger.to_document` emits and
 #: :meth:`EvolutionLedger.from_document` accepts. Named once, so a projection and its
 #: inverse cannot disagree about what they are exchanging, and so a loader can refuse a
@@ -102,7 +108,7 @@ LEDGER_SCHEMA = "ucos-uckp-evolution-ledger"
 
 #: The version of :data:`LEDGER_SCHEMA`. A loader that cannot name the version it accepts
 #: cannot tell a future form from a malformed one.
-LEDGER_VERSION = "1.0.0"
+LEDGER_VERSION = "1.1.0"
 
 
 def evolution_stage_vocabulary() -> Vocabulary:
@@ -129,9 +135,66 @@ def evolution_stage_vocabulary() -> Vocabulary:
     )
 
 
+def evolution_subject_type_vocabulary() -> Vocabulary:
+    """Subject types tracked by evolution ledger (Phase 2 REQ-23 extension).
+
+    Extensible vocabulary of subject types that can undergo evolution. Seeded with
+    known types (PROGRAMME, CAPABILITY, DECISION, REQUIREMENT) but open to future
+    types per INV-14 (every vocabulary admits unknown future members).
+
+    This vocabulary enables subject type classification without fixing a closed set,
+    satisfying the Phase 2 requirement that evolution support requirements while
+    preserving infinite expansion capability.
+    """
+    return Vocabulary(
+        EVOLUTION_SUBJECT_TYPE,
+        "types of subjects that undergo constitutional evolution",
+        (
+            Term("PROGRAMME", "a constitutional programme undergoing evolution", rank=0),
+            Term("CAPABILITY", "a capability undergoing evolution", rank=1),
+            Term("DECISION", "a constitutional decision undergoing evolution", rank=2),
+            Term("REQUIREMENT", "a requirement undergoing evolution", rank=3),
+            Term("PRINCIPLE", "a universal principle undergoing evolution", rank=4),
+            Term("KNOWLEDGE", "knowledge undergoing evolution", rank=5),
+        ),
+    )
+
+
+def requirement_evolution_event_vocabulary() -> Vocabulary:
+    """Requirement-specific evolution events (Phase 2 REQ-23 extension).
+
+    Extensible vocabulary of requirement lifecycle events. Seeded with known
+    requirement evolution events but open to future events per INV-14.
+
+    These events track requirement lifecycle: creation, modification, refinement,
+    merging, supersession, deprecation, reactivation, splitting, and relationship
+    changes.
+    """
+    return Vocabulary(
+        REQUIREMENT_EVOLUTION_EVENT,
+        "lifecycle events specific to requirement evolution",
+        (
+            Term("CREATED", "requirement created (initial admission)", rank=0),
+            Term("MODIFIED", "requirement content modified", rank=1),
+            Term("REFINED", "requirement refined (scope/criteria clarified)", rank=2),
+            Term("MERGED", "requirement merged with another requirement", rank=3),
+            Term("SUPERSEDED", "requirement superseded by newer requirement", rank=4),
+            Term("DEPRECATED", "requirement deprecated (no longer applicable)", rank=5),
+            Term("REACTIVATED", "deprecated requirement reactivated", rank=6),
+            Term("SPLIT", "requirement split into multiple requirements", rank=7),
+            Term("RELATION_CHANGED", "requirement relationships changed", rank=8),
+        ),
+    )
+
+
 @dataclass(frozen=True, slots=True)
 class EvolutionRecord:
-    """One appended step of the perpetual cycle."""
+    """One appended step of the perpetual cycle.
+
+    Phase 2 extension: Added optional subject_type and event_type fields to support
+    requirement evolution (REQ-23 work item). Backward compatible: existing records
+    without these fields remain valid.
+    """
 
     cycle: int
     stage: EvolutionStage
@@ -139,9 +202,11 @@ class EvolutionRecord:
     outcome: str
     digest: str
     findings: tuple[str, ...] = field(default_factory=tuple)
+    subject_type: str | None = None
+    event_type: str | None = None
 
     def to_dict(self) -> dict[str, object]:
-        return {
+        result: dict[str, object] = {
             "cycle": self.cycle,
             "stage": self.stage.value,
             "subject": self.subject,
@@ -149,6 +214,11 @@ class EvolutionRecord:
             "digest": self.digest,
             "findings": list(self.findings),
         }
+        if self.subject_type is not None:
+            result["subject_type"] = self.subject_type
+        if self.event_type is not None:
+            result["event_type"] = self.event_type
+        return result
 
     @classmethod
     def from_dict(cls, data: object) -> EvolutionRecord:
@@ -160,6 +230,8 @@ class EvolutionRecord:
             outcome=str(record.get("outcome", "")),
             digest=str(record.get("digest", "")),
             findings=tuple(str(item) for item in record.get("findings") or ()),
+            subject_type=str(record["subject_type"]) if "subject_type" in record else None,
+            event_type=str(record["event_type"]) if "event_type" in record else None,
         )
 
 
@@ -235,6 +307,26 @@ class EvolutionLedger:
     def stage_records(self, stage: EvolutionStage | str) -> tuple[EvolutionRecord, ...]:
         resolved = EvolutionStage.coerce(stage)
         return tuple(record for record in self._records if record.stage is resolved)
+
+    def subject_type_records(self, subject_type: str) -> tuple[EvolutionRecord, ...]:
+        """Records for a specific subject type (Phase 2 REQ-23 extension).
+
+        Returns records matching the given subject_type. Records without subject_type
+        (pre-Phase 2 records) are excluded from results.
+        """
+        return tuple(
+            record for record in self._records if record.subject_type == subject_type
+        )
+
+    def event_type_records(self, event_type: str) -> tuple[EvolutionRecord, ...]:
+        """Records for a specific event type (Phase 2 REQ-23 extension).
+
+        Returns records matching the given event_type. Records without event_type
+        (pre-Phase 2 records) are excluded from results.
+        """
+        return tuple(
+            record for record in self._records if record.event_type == event_type
+        )
 
     def findings(self) -> tuple[str, ...]:
         return tuple(finding for record in self._records for finding in record.findings)
