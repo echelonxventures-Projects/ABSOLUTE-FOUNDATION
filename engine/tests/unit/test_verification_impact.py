@@ -459,3 +459,158 @@ def test_changed_paths_outside_a_repository_refuses(tmp_path) -> None:
 
     with pytest.raises(ImpactError):
         changed_paths(root=str(tmp_path))
+
+
+# ------------------------------------------------- version-control path fidelity
+# Regression cover for the change-set parsing defect. `git diff --name-only` and
+# `git ls-files --others` C-quote and octal-escape any path holding a non-ASCII byte,
+# so a changed `UCOS-Ω∞-T.md` arrived as the literal `"UCOS-\316\251\342\210\236-T.md"`
+# — quote characters included. That string is not a repository path: it matches no
+# UNBOUNDED_PREFIXES entry (it starts with `"`), no BOUNDED_SUFFIXES entry (it ends
+# with `.py"`), and no registry record.
+#
+# Measured consequence: the scope did NOT narrow — an unmatchable path falls through
+# to the unbounded branch and widens to FULL. What broke is the *reason*: the engine
+# reported "no dependency edges exist for this file type" about a registered .py
+# module that has edges, and named a file that does not exist. Escalation that is
+# right by accident and wrong by mechanism is not tracking real coupling, which is
+# what REQ-37 requires of it.
+#
+# Every pre-existing test in this file uses ASCII-only fixture names, which is exactly
+# why none of them could see it.
+
+OMEGA_MODULE = "UCOS-Ω∞-MOD.py"
+OMEGA_DOC = "UCOS-Ω∞-DOC.md"
+OMEGA_NEW = "UCOS-Ω∞-NEW.md"
+
+
+def _assert_unescaped(paths) -> None:
+    """No quoted or octal-escaped path may survive into a change set."""
+    assert not any(p.startswith('"') for p in paths), f"a quoted path survived: {paths}"
+    assert not any(
+        "\\316" in p or "\\342" in p for p in paths
+    ), f"an octal-escaped path survived: {paths}"
+
+
+def test_a_non_ascii_changed_file_is_detected_under_its_real_path(scratch_repo) -> None:
+    """A — unstaged non-ASCII change reaches the selector as `UCOS-Ω∞-DOC.md`."""
+    from engine.verification_impact.changes import working_tree_changes
+
+    root, git = scratch_repo
+    (root / OMEGA_DOC).write_text("# first\n", encoding="utf-8")
+    git("add", "-A")
+    git("commit", "-q", "-m", "add omega doc")
+    (root / OMEGA_DOC).write_text("# changed\n", encoding="utf-8")
+
+    found = working_tree_changes(root=str(root))
+    assert OMEGA_DOC in found
+    _assert_unescaped(found)
+
+
+def test_a_staged_non_ascii_file_is_detected_under_its_real_path(scratch_repo) -> None:
+    """B — the `--cached` branch, which is the pre-commit reality."""
+    from engine.verification_impact.changes import working_tree_changes
+
+    root, git = scratch_repo
+    (root / OMEGA_MODULE).write_text("y = 1\n", encoding="utf-8")
+    git("add", OMEGA_MODULE)
+
+    found = working_tree_changes(root=str(root))
+    assert OMEGA_MODULE in found
+    _assert_unescaped(found)
+
+
+def test_an_untracked_non_ascii_file_is_detected_under_its_real_path(scratch_repo) -> None:
+    """C — the `ls-files --others` branch."""
+    from engine.verification_impact.changes import working_tree_changes
+
+    root, _ = scratch_repo
+    (root / OMEGA_NEW).write_text("# new\n", encoding="utf-8")
+
+    found = working_tree_changes(root=str(root))
+    assert OMEGA_NEW in found
+    _assert_unescaped(found)
+
+
+def test_a_non_ascii_path_survives_every_diff_base_branch(scratch_repo) -> None:
+    """The base and HEAD^ branches carry the same defect as the working-tree ones.
+
+    Not in the reported three, found by reading the module: `changed_paths` resolves
+    through an explicit base, a merge-base, or `HEAD^`, and each parsed paths the same
+    unsafe way. A fix covering only the working tree would leave CI — which supplies a
+    base — still reading escaped names.
+    """
+    from engine.verification_impact.changes import changed_paths
+
+    root, git = scratch_repo
+    (root / OMEGA_MODULE).write_text("y = 1\n", encoding="utf-8")
+    (root / "plain.py").write_text("w = 1\n", encoding="utf-8")
+    git("add", "-A")
+    git("commit", "-q", "-m", "second")
+
+    explicit = changed_paths("HEAD^", root=str(root))
+    assert set(explicit) == {OMEGA_MODULE, "plain.py"}
+    _assert_unescaped(explicit)
+
+    fallback = changed_paths(root=str(root))  # clean tree, no upstream -> HEAD^ branch
+    assert set(fallback) == {OMEGA_MODULE, "plain.py"}
+    _assert_unescaped(fallback)
+
+
+def test_ascii_change_detection_is_unchanged(scratch_repo) -> None:
+    """D — the correction is path spelling only; ASCII behaviour must be identical."""
+    from engine.verification_impact.changes import changed_paths, working_tree_changes
+
+    root, git = scratch_repo
+    (root / "a.py").write_text("x = 2\n", encoding="utf-8")
+    (root / "staged.py").write_text("s = 1\n", encoding="utf-8")
+    git("add", "staged.py")
+    (root / "untracked.py").write_text("u = 1\n", encoding="utf-8")
+
+    assert set(working_tree_changes(root=str(root))) == {"a.py", "staged.py", "untracked.py"}
+    # Working-tree changes still take priority over history resolution.
+    assert set(changed_paths(root=str(root))) == {"a.py", "staged.py", "untracked.py"}
+
+
+def test_path_normalisation_does_not_weaken_escalation(scratch_repo) -> None:
+    """E — escalation rules still fire, and now fire for the *right* reason.
+
+    Two halves, because "not weakened" means both directions:
+
+    * a registered non-ASCII module resolves to its real dependent test instead of
+      escalating with the false claim that it has no dependency edges;
+    * a non-ASCII path under an UNBOUNDED prefix still escalates — the escaped form
+      lost `_is_unbounded` (it starts with `"`) and reached the unbounded branch only
+      by the accident of also failing `_is_bounded`.
+    """
+    from collections import defaultdict
+
+    from engine.verification_impact.impact import _is_bounded, _is_unbounded
+
+    graph = ImpactGraph()
+    test_path = "engine/tests/test_omega.py"
+    graph.objects = {
+        OMEGA_MODULE: _record(OMEGA_MODULE),
+        test_path: _record(test_path, "TEST_OBJECT", deps=(OMEGA_MODULE,)),
+    }
+    graph.dependents = defaultdict(set, {OMEGA_MODULE: {test_path}})
+    graph.owners = defaultdict(set, {"own": {OMEGA_MODULE, test_path}})
+
+    report = analyse(graph, [OMEGA_MODULE])
+    assert report.changed == (OMEGA_MODULE,)
+    assert report.affected_tests == (test_path,), "real coupling must be resolved, not escalated"
+    assert report.unregistered == (), "a registered module must not be reported unregistered"
+    assert not any("no dependency edges" in e for e in report.escalations)
+
+    escaped = '"UCOS-\\316\\251\\342\\210\\236-MOD.py"'
+    stale = analyse(graph, [escaped])
+    assert stale.affected_tests == (), "guard: the escaped form resolves no coupling at all"
+    assert stale.scope is Scope.FULL
+
+    # Unbounded classification survives normalisation; the escaped form loses it.
+    assert _is_unbounded("00-CEP/UCOS-Ω∞-X.md") is True
+    assert _is_bounded("00-CEP/UCOS-Ω∞-X.md") is False
+    assert _is_unbounded('"00-CEP/UCOS-\\316\\251\\342\\210\\236-X.md"') is False
+    unbounded_report = analyse(graph, ["00-CEP/UCOS-Ω∞-X.md"])
+    assert unbounded_report.scope is Scope.FULL
+    assert any("not bounded by import edges" in e for e in unbounded_report.escalations)

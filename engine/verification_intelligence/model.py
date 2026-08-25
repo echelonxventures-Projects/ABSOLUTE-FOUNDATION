@@ -123,6 +123,17 @@ class TestObject:
     capability: str
     content_hash: str | None
     cost_seconds: float
+    registered: bool = True
+    """Whether the executable object registry holds this object.
+
+    False means pytest collects the file and the registry has never heard of it — a NEW
+    test file that has not yet been through registration. It is admitted anyway, because
+    the alternative is what this flag exists to end: an unregistered test object used to
+    be invisible to the selector, so it ran in a serial suite and was silently absent from
+    every shard of a sharded one. A test that disappears when the run is parallelised is
+    the worst failure a verification selector can have, because its symptom is a faster
+    green run.
+    """
 
     @property
     def is_priced(self) -> bool:

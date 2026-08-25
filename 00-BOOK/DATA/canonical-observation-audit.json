@@ -36,7 +36,7 @@
       "artifact": "00-MASTER/UCDA-000001/ucda.json",
       "producer": "00-MASTER/UCDA-000001/ucda_engine.py",
       "observation_type": "ENVIRONMENT_STATE",
-      "current_location": "$.decisions[130].coverage",
+      "current_location": "$.decisions[135].coverage",
       "classification": "CANDIDATE — signature present, not yet under an enforced rule",
       "enforced_by_rule": false,
       "remediation": "replace the reading with the UCDA-000001 observation identity and write the value to that programme's evidence surface",

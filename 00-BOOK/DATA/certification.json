@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T15:29:29+00:00",
+  "generated_at": "2026-08-25T05:15:01+00:00",
   "generator_version": "1.0.0-adv",
   "standard": "UMB-017 Digital Twin Certification (non-terminal; AUTH-INF-001 CR-INF-011)",
   "verdict": "CERTIFIED",
@@ -12,7 +12,7 @@
         {
           "name": "no duplicate Universal IDs",
           "pass": true,
-          "detail": "1233 unique"
+          "detail": "1579 unique"
         },
         {
           "name": "no overlapping page ranges",
@@ -22,7 +22,7 @@
         {
           "name": "ledger page cursor >= max page",
           "pass": true,
-          "detail": "cursor=9826 max_end=9826"
+          "detail": "cursor=12330 max_end=12330"
         }
       ]
     },
@@ -32,7 +32,7 @@
         {
           "name": "every artifact present in id-ledger",
           "pass": true,
-          "detail": "1233 artifacts ledgered"
+          "detail": "1579 artifacts ledgered"
         },
         {
           "name": "every artifact carries name+volume+program",
@@ -57,7 +57,7 @@
         {
           "name": "spine external markers recorded (not dangling edges)",
           "pass": true,
-          "detail": "11 evidence-bound external markers (by design, UMB-007 §5)"
+          "detail": "15 evidence-bound external markers (by design, UMB-007 §5)"
         }
       ]
     },
@@ -67,7 +67,7 @@
         {
           "name": "no dangling edge endpoints",
           "pass": true,
-          "detail": "12899 edges resolve"
+          "detail": "13591 edges resolve"
         },
         {
           "name": "Depends-On graph acyclic",
@@ -82,7 +82,7 @@
         {
           "name": "every change event bound to a real subject",
           "pass": true,
-          "detail": "1353 events node-bound"
+          "detail": "1706 events node-bound"
         },
         {
           "name": "change ids unique",
@@ -92,7 +92,7 @@
         {
           "name": "snapshot history seq monotonic (append-only)",
           "pass": true,
-          "detail": "1264 histories append-only"
+          "detail": "1610 histories append-only"
         }
       ]
     },
@@ -102,7 +102,7 @@
         {
           "name": "current_version matches latest snapshot",
           "pass": true,
-          "detail": "1233 version records consistent"
+          "detail": "1579 version records consistent"
         }
       ]
     },
@@ -112,7 +112,7 @@
         {
           "name": "lineage endpoints resolve + ancestry acyclic",
           "pass": true,
-          "detail": "1233 lineage nodes intact"
+          "detail": "1579 lineage nodes intact"
         }
       ]
     },
@@ -183,11 +183,11 @@
     }
   },
   "scope": {
-    "artifacts": 1233,
-    "edges": 12899,
-    "change_events": 1353,
+    "artifacts": 1579,
+    "edges": 13591,
+    "change_events": 1706,
     "signals": 15,
-    "lineage_nodes": 1233,
+    "lineage_nodes": 1579,
     "executions": 0
   }
 }

@@ -262,6 +262,12 @@ class TestObjectRegistry:
     priced: int = 0
     node_costs: dict[str, float] = field(default_factory=dict)
     splittable: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    unregistered: tuple[str, ...] = ()
+    """Collectible test objects the executable object registry does not hold.
+
+    Reported rather than hidden, and never empty-by-construction: this is the population
+    whose absence UVI-L-08 measured as 130 tests in no shard.
+    """
 
     @property
     def paths(self) -> tuple[str, ...]:
@@ -293,6 +299,28 @@ class TestObjectRegistry:
 
     def total_cost(self, paths: tuple[str, ...] | None = None) -> float:
         return sum(self.cost_of(path) for path in (paths if paths is not None else self.paths))
+
+
+def _collectible_on_disk(base: str, roots: tuple[str, ...]) -> tuple[str, ...]:
+    """Every file under ``roots`` that pytest would collect, read from the tree.
+
+    The tree is the authority on what pytest will collect, and it is the only authority
+    that cannot be stale. ``is_collectible`` decides membership so this function and the
+    registry projection above apply the identical rule rather than two that can drift.
+
+    Sorted, and ``__pycache__`` is pruned so the walk cost stays in the roots that matter.
+    Deterministic by construction: UVI-L-10 requires two plans over one state to produce
+    identical bytes, and an os.walk in filesystem order would not.
+    """
+    found: list[str] = []
+    for root in roots:
+        for dirpath, dirnames, filenames in os.walk(os.path.join(base, root)):
+            dirnames[:] = sorted(d for d in dirnames if d != "__pycache__")
+            for name in sorted(filenames):
+                relative = os.path.relpath(os.path.join(dirpath, name), base)
+                if is_collectible(relative, roots):
+                    found.append(relative)
+    return tuple(sorted(found))
 
 
 def build_test_registry(
@@ -337,6 +365,51 @@ def build_test_registry(
                 for node, seconds in nodes.items():
                     if _is_number(seconds):
                         registry.node_costs[str(node)] = float(seconds)
+
+    # --- FAIL WIDE OVER THE UNREGISTERED --------------------------------------------
+    # Everything above is projected from the executable object registry. That registry is
+    # a REGISTRATION artifact: a test file enters it only when the registration
+    # transaction runs, so a newly written test file is absent from it until then. The
+    # loop above therefore could not see such a file at all, and the consequence was not
+    # that it ran unpriced — it was that it did not run.
+    #
+    # Measured (UVI-L-08, this repository, 2026-08-22): 130 collectible tests across two
+    # files were in NO shard. `pytest` collected them, every shard's argv excluded them,
+    # and the sharded suite reported green over a suite that was 130 tests smaller than
+    # the one the collector found. A serial run passed. That asymmetry is the single most
+    # dangerous defect a verification selector can carry, because parallelising the run
+    # is what makes the tests disappear, and going faster is not a symptom anyone reads
+    # as a failure.
+    #
+    # The correction is this engine's own declared principle applied to itself: FAIL WIDE.
+    # An object the selector cannot bound is INCLUDED, never dropped. So the collectible
+    # set is derived from the declared collection roots and the filesystem, and anything
+    # the registry does not hold is admitted as an unregistered object.
+    #
+    # This is DERIVATION, not authoring, and UVI-L-06 is why the distinction matters: the
+    # roots come from `testpaths` in pyproject and the members come from the tree, so no
+    # code path here names a test file. Traversal is sorted, so planning twice over one
+    # state still produces identical bytes (UVI-L-10).
+    #
+    # It mints nothing. An unregistered object carries no universal id, no owner and no
+    # capability — which is exactly right, because it HAS none until REG-AUTO-001 runs.
+    # Registration remains that authority's act; this only refuses to let the absence of
+    # registration silently shrink a verification run.
+    for path in _collectible_on_disk(base, roots):
+        if path in registry.objects:
+            continue
+        registry.objects[path] = TestObject(
+            path=path,
+            universal_id="",
+            owner="",
+            capability="",
+            content_hash=None,
+            cost_seconds=DEFAULT_COST_SECONDS,
+            registered=False,
+        )
+    registry.unregistered = tuple(
+        sorted(path for path, obj in registry.objects.items() if not obj.registered)
+    )
 
     if not registry.objects:
         raise VerificationIntelligenceError(

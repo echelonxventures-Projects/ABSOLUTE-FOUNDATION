@@ -221,6 +221,14 @@ addopts = [
   # because a temporal contract nobody measures is how UTC got hard-coded in the first
   # place (00-BOOK/tools/ukb.py::_now, gap G1 in the identity-universe determination).
   "--cov=engine.temporal",
+  # UEG-000001 — Universal Execution Governance. It enters the denominator on the same
+  # condition every other capability does: it ships with
+  # engine/tests/unit/test_execution_environment.py. It is measured for a sharper reason
+  # too — it is the gate that decides whether the interpreter running every OTHER gate may
+  # be trusted, and an unmeasured code path in THAT is a path that could admit a wrong
+  # interpreter. The symptom of a broken environment gate is a run that looks exactly like
+  # a correct one.
+  "--cov=engine.execution_environment",
   # UOBC-000001 — the Universal Object Birth Contract: identity derived before the
   # artifact exists. Measured for the same reason, and because its eight law checks are
   # the only executable statement of "no anonymous objects, no post-creation registration".
@@ -332,7 +340,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence", "engine/execution_environment"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 [tool.coverage.report]

@@ -7,37 +7,37 @@
   "evidence_class": "IMPROVEMENT",
   "may_influence_certification": false,
   "observation": {
-    "total_objects": 6145,
+    "total_objects": 6662,
     "by_object_class": {
       "CONFIGURATION_OBJECT": 31,
-      "DATA_OBJECT": 129,
-      "DOCUMENT_ARTIFACT": 1233,
-      "EXCLUDED_DOCUMENT": 2620,
-      "EXECUTABLE_OBJECT": 1265,
-      "TEST_OBJECT": 831,
+      "DATA_OBJECT": 127,
+      "DOCUMENT_ARTIFACT": 1579,
+      "EXCLUDED_DOCUMENT": 2777,
+      "EXECUTABLE_OBJECT": 1275,
+      "TEST_OBJECT": 837,
       "TOOLING_OBJECT": 36
     },
     "by_lifecycle": {
-      "AUTHORED": 5800,
+      "AUTHORED": 6317,
       "GENERATED": 345
     },
-    "distinct_owners": 276,
+    "distinct_owners": 279,
     "top_owners": [
       {
         "owner": "00-BOOK/PORTAL",
-        "objects": 1240
-      },
-      {
-        "owner": "platform/tests",
-        "objects": 345
-      },
-      {
-        "owner": "engine/tests",
-        "objects": 288
+        "objects": 1586
       },
       {
         "owner": "UCOS-REPOSITORY-ROOT",
-        "objects": 286
+        "objects": 425
+      },
+      {
+        "owner": "platform/tests",
+        "objects": 346
+      },
+      {
+        "owner": "engine/tests",
+        "objects": 293
       },
       {
         "owner": "service/_evidence",
@@ -64,16 +64,31 @@
         "objects": 92
       }
     ],
-    "objects_with_dependencies": 1939,
-    "dependency_edges": 9937,
+    "objects_with_dependencies": 1953,
+    "dependency_edges": 9979,
     "producers_bound_to_outputs": 42,
     "retired_identities": 2
   },
   "analysis": {
-    "deviations": []
+    "deviations": [
+      {
+        "invariant": "CAA-INV-02",
+        "name": "EVERY_AUTHORITY_CLAIM_NAMES_ITS_CONSTITUTIONAL_SUPERIOR",
+        "violation_count": 1,
+        "origin": "INTRODUCED_OR_LATENT",
+        "severity": "BLOCKING"
+      }
+    ]
   },
   "planning": {
-    "plans": []
+    "plans": [
+      {
+        "invariant": "CAA-INV-02",
+        "action": "Investigate.",
+        "owner": "UCOS-UGA-001",
+        "evidence": "00-MASTER/UCOS-UGA-001/05-GOVERNANCE-INVARIANTS.json"
+      }
+    ]
   },
   "evolution": {
     "model": [
@@ -90,6 +105,13 @@
     "stage_reached": "Proposal",
     "rule": "This engine emits proposals as evidence (IMPROVEMENT class). It holds no approval authority and mutates no object outside its own surfaces and the append-only identity ledger. Uncontrolled evolution is structurally impossible because the engine has no write path to any other object.",
     "approval_authority": "HUMAN_AUTHORED_DECISION",
-    "proposals": []
+    "proposals": [
+      {
+        "invariant": "CAA-INV-02",
+        "action": "Investigate.",
+        "owner": "UCOS-UGA-001",
+        "evidence": "00-MASTER/UCOS-UGA-001/05-GOVERNANCE-INVARIANTS.json"
+      }
+    ]
   }
 }

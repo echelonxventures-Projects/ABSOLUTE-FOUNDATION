@@ -10,7 +10,7 @@
 | BASELINE | HEAD `e678f53eb71a` · branch `integration/recovery-001` |
 | DERIVED FROM | `UCOS-CEA-000001` (assimilation) + measured Repository Truth |
 | GOVERNING LAW | LAW Ω∞-000 (unchanged) |
-| PARTS | 50 carried forward **by reference, unmodified** + 1 admitted (Part 51) |
+| PARTS | 50 carried forward **by reference, unmodified** + 2 admitted (Part 51, Part 52) |
 | DELIVERABLES | 3 (MIP updated version) · 8 (Reality/Existence) · 9 (Context) · 10 (Dynamic Structure) · 11 (Nucleus Evolution) · 12 (Commerce Composition) |
 
 > **Regeneration doctrine.** MIP v2 declares the anti-duplication directive and marks inherited fields **⟳ inherited** rather than reprinting them. This version applies that directive to itself: **Parts 1–50 are carried forward verbatim by reference** and are not reproduced. Reprinting 2,785 lines to change nine of them would be the exact duplication v2 forbids, and would break the digest by which v2 is registered. What follows is the **delta**, stated in full, plus the five constitutional models the amendment requires.
@@ -32,6 +32,7 @@
 | A9 | **+Part 51 — Universal Physical Law Framework** | extension | P3 | Yes |
 | A10 | **Cross-Cutting Capability Contract gains `situate()` and `disclose()`** | extension | D26, D27 | Yes |
 | A11 | **Per-Part Structure Contract gains a 25th field: `JURISDICTION` (population + coverage)** | extension | D28 | Yes |
+| A12 | **+Part 52 — Universal Execution Governance** | extension | `UEG-000001` · execution-environment assessment `F-1`/`F-2` | Yes |
 
 **Removed: nothing.** No part, universe, directive or law of v2 is withdrawn. The amendment adds; it does not subtract. This is itself a finding — a regeneration that deleted nothing is evidence that v2's architecture was not the constraint.
 
@@ -108,6 +109,59 @@ Rendered in the 24-field per-part contract, plus the admitted 25th (`JURISDICTIO
 | **JURISDICTION** *(new)* | Population: 14 registered frames. Coverage at baseline: **0 / 14 = 0%**. This is the honest starting number and D28 requires it to be published. |
 
 ---
+
+---
+
+## §E2 — PART 52 — UNIVERSAL EXECUTION GOVERNANCE
+
+Admitted by `UEG-000001` (`00-MASTER/UEG-000001/ueg-declaration.json`), derived from
+`UCOS-EXECUTION-ENVIRONMENT-ASSESSMENT.md`. Rendered in the 24-field per-part contract, plus
+the admitted 25th (`JURISDICTION`).
+
+**Category:** Universal Execution Governance · **Capability:** Execution Environment Intelligence
+
+> **Why this is a part and not a script.** Every other subject in this repository — objects,
+> decisions, stages, primitives, lifecycles — has an identity, a declared model, a fail-closed
+> gate and evidence. The interpreter that ran all of those gates had none of it. Two measured
+> consequences justify the admission rather than a patch: a repository root derived from
+> `BASH_SOURCE` resolved to the parent directory under zsh and built a virtual environment
+> **outside the repository**, where it sat unnoticed for sixteen days (`F-2`); and `./verify.sh`
+> could delete and reinstall the very environment it was reporting on, so drift detected was
+> drift erased (`F-1`). An execution environment that can be built in the wrong place, and
+> repaired by the command that is supposed to audit it, is not a governed artifact.
+
+| Field | Determination |
+|---|---|
+| **PURPOSE** | Make the execution environment a **governed artifact**: identity, ownership, verification, evidence and reproducibility, so that no certified execution depends on developer memory, shell history, PATH ordering, an activated environment or an undocumented dependency. |
+| **SCOPE** | Runtime identity · virtual-environment identity · toolchain identity · dependency validation · execution evidence · environment fingerprinting. **Out of scope:** the version pins themselves (`pyproject.toml [dev]` owns them) and the canonical series (`scripts/ucos-env.sh` owns it). This part governs *references to* those authorities and never restates them. |
+| **CONSTITUTIONAL LAWS** | LAW Ω∞-000 (all seven) · **D28 Measured Jurisdiction** (every check publishes the population it measured) · `CAA-INV-04` (no second authority over a version) |
+| **ARCHITECTURAL PRINCIPLES** | (1) **The command that verifies may never repair** — creation and installation belong to bootstrap; verification observes and refuses. (2) The repository root is a **git answer**, never a file-layout derivation. (3) A failure is deterministic and names both sides: expected, detected, and the one command that fixes it. (4) A cache may skip a **measurement** and never a **verdict**. (5) The clock appears in evidence and in no identity. |
+| **CORE COMPONENTS** | `engine/execution_environment/` — `model` (the entity) · `discovery` (the only module that touches the machine) · `contract` (eight declared checks) · `fingerprint` (the cache) · `evidence` · `gate` (fail-closed). Wired at `./verify.sh` Stage 0 through `ucos_env_gate`. |
+| **REGISTRIES** | Reuses `pyproject.toml [dev]` (pins) and `scripts/ucos-env.sh` (series). **No new registry** — a second place holding a version would breach `CAA-INV-04`. |
+| **UNIVERSES** | U14 (Audit and Evidence) owner-adjacent; consumed by every part whose verification runs through `./verify.sh`. |
+| **CAPABILITIES** | `observe()` · `assess()` · `measure()` · fingerprint cache · execution evidence · `ucos_env_gate` · automatic recovery guidance in every refusal |
+| **DEPENDENCIES** | Part 14 (Audit and Evidence) · Part 16 (Runtime Kernel) · `UVI-000001` (which stages run) · `scripts/ucos-env.sh` |
+| **COMPOSITION MODEL** | The gate composes ahead of every other gate and under none. It precedes stage planning, because a stage executes *through* the interpreter this gate decides the trustworthiness of. |
+| **RUNTIME MODEL** | Observe-only. No network, no package installation, no subprocess beyond `git`. Writes exactly two gitignored files. Measured at **0.17 s cold · 0.13 s warm** against a declared 5 s budget. |
+| **GOVERNANCE MODEL** | ⟳ inherited (U03). The separation of powers is declared in `separation_of_powers` and **measured over the source of `verify.sh`** by `engine/tests/unit/test_execution_environment.py`, so re-adding an install fails the suite rather than passing unnoticed. |
+| **SECURITY · MONITORING · METERING · BILLING · AUDIT · COMPLIANCE · CERTIFICATION** | ⟳ inherited from the Cross-Cutting Capability Contract. Audit is discharged concretely: `.ucos/execution-evidence.json` records the eight fields every certified run must publish. |
+| **AUTONOMOUS GENERATION MODEL** | A generated runtime inherits the environment contract of the repository that generates it and may declare its own checks; it may never declare none. |
+| **EVOLUTION MODEL** | Append-only over the check set. A new check is a declaration entry plus an implementation, and `assess` **faults** on a declared check nothing implements — the set cannot grow in the declaration alone. |
+| **SUCCESS CRITERIA** | `./verify.sh` creates no environment and installs nothing · every tool resolves by absolute path · a wrong interpreter is refused deterministically · a missing plugin is refused deterministically · every certified run emits execution evidence · gate overhead under the declared budget |
+| **IMPLEMENTATION READINESS CRITERIA** | Discharged. Discovery → Design → Implementation → Testing → Verification → Certification, each bound to an artifact in `lifecycle.positions`. |
+| **JURISDICTION** *(new)* | Population: **8 declared checks**, 7 blocking. Coverage: **8 / 8 = 100%** computed — measured in both directions, so a check declared and unimplemented is a fault and a check implemented and undeclared is a test failure. Verification entry points measured for separation of powers: **1 / 1** (`verify.sh`). Package coverage under the 90% floor: **95%**. |
+
+**Requirements discharged** (the seven the directive names):
+
+| Requirement | Discharged by |
+|---|---|
+| environment discovery | `engine/execution_environment/discovery.py` · `UCOS-EXECUTION-ENVIRONMENT-ASSESSMENT.md` |
+| runtime identity | `RuntimeIdentity` — version, series, interpreter path, prefix, base prefix |
+| toolchain identity | `Toolchain` — scripts directory, per-tool records derived from each distribution's own `RECORD` |
+| dependency validation | `EEG-06` — pinned version **and** every declared executable present and executable |
+| execution reproducibility | `environment_id`, content-derived and free of both clock and commit |
+| validation certification | `.ucos/execution-evidence.json`, emitted by every certified run |
+| automatic recovery guidance | every refusal prints expected · detected · `Execution blocked.` · `Repair with: ./bootstrap.sh` |
 
 ## §F — DELIVERABLE 8 · UNIVERSAL REALITY / EXISTENCE MODEL
 

@@ -44,10 +44,14 @@
 # data.
 #
 # THE one repository-standard command. A brand-new terminal can run this with NO
-# manual `source .../activate` and NO tribal knowledge: it self-heals the canonical
-# venv (correct Python series + pinned pytest/pytest-cov/coverage/ruff), then runs
-# every gate through the venv interpreter by absolute path. Exits non-zero on any
-# failure.
+# manual `source .../activate` and NO tribal knowledge: Stage 0 verifies the canonical
+# environment (UEG-000001) and every gate then runs through the venv interpreter by
+# absolute path. Exits non-zero on any failure.
+#
+# IT VERIFIES THE ENVIRONMENT; IT DOES NOT REPAIR IT. This script used to self-heal the venv
+# and that capability moved to ./bootstrap.sh, because a command that repairs its own subject
+# cannot report on it — see the Stage 0 comment for the measured reason. A refusal here names
+# what was expected, what was detected, and the one command that fixes it.
 
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -82,8 +86,44 @@ for arg in "$@"; do
 done
 
 
-# --- Stage 0: ensure the canonical environment (no activation needed) ------------
-ucos_ensure_venv
+# --- Stage 0: UEG-000001 environment integrity gate (OBSERVE ONLY) ---------------
+# THIS SCRIPT NO LONGER REPAIRS ITS OWN ENVIRONMENT, AND SAYING SO IS THE POINT.
+#
+# It used to call ucos_ensure_venv here, which will `rm -rf` a virtual environment whose
+# Python series drifted, rebuild it, and `pip install -e ".[dev]"` — over the network. That
+# is a fine thing for a setup command to do and a disqualifying thing for a verification
+# command to do: the run that was supposed to DETECT drift instead erased it and reported
+# green, and the canonical gate acquired a dependency on an index being reachable, so an
+# offline machine got an infrastructure failure reported as a verification failure.
+#
+# The repair capability did not disappear; it moved to the entry point that owns it.
+# ./bootstrap.sh creates and installs, ./doctor.sh --fix repairs on explicit request, and
+# this path observes and refuses. UEG-000001 declares that boundary
+# (00-MASTER/UEG-000001/ueg-declaration.json, separation_of_powers) and
+# engine/tests/unit/test_execution_environment.py measures it over the source of THIS FILE,
+# so re-adding an install here fails the suite rather than passing unnoticed.
+#
+# WHAT THE GATE ACTUALLY CHECKS — eight declared conditions, seven of them blocking: that
+# the running interpreter belongs to THIS repository (a root misresolution once built a venv
+# in the parent directory and nothing noticed for sixteen days), that sys.prefix IS the
+# canonical venv rather than merely near it, that the series matches the one CI pins, that
+# pytest resolves inside this environment, that pytest_cov / coverage / jsonschema actually
+# IMPORT rather than merely record a version, that every pin is installed with every
+# executable its own RECORD declares, and that the configuration it measured against parsed
+# to a non-empty expectation. The eighth reports global shadowing and undeclared
+# executables without blocking.
+#
+# WHY IT IS NOT A run_stage. A run_stage executes THROUGH $PY, and this gate's entire job is
+# to decide whether $PY may be trusted at all — it must precede the stage machinery, not sit
+# inside it. It also precedes planning, so a faulted plan cannot be caused by a broken
+# interpreter and then misread as an intelligence fault. Keeping it out of run_stage
+# additionally leaves the fourteen stage literals below untouched, and those literals are a
+# three-reader contract: this script executes them, UAKOS-CLOSURE-008/validation-record.json
+# digests them, and .github/workflows/uisd-gate.yml re-derives them.
+#
+# COST: measured at 0.17s cold and 0.13s warm on the assessed machine, against a declared
+# budget of 5s. It writes only .ucos/ (gitignored) and reaches no network.
+ucos_env_gate "./verify.sh --${MODE}"
 PY="$(ucos_venv_python)"
 
 # --- Stage 0b: compute the plan, once, before anything executes -------------------

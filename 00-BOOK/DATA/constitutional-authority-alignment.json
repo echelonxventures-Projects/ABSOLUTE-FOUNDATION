@@ -283,6 +283,17 @@
       "owns": "Recognition and classification of constitutional instruments: what counts as a Constitution, how instruments rank against each other under the Constitutional Precedence Lattice, and the recording of vacancies, gaps and open constitutional questions across the corpus. Self-bounded by its own front matter: 'Supreme over META-CONSTITUTIONAL MATTER ONLY... Confers NO authority over constitutional content.'",
       "may_never_own": "What a canonical knowledge object is; identity; the relationship graph model; persistence, execution or projection authority. Those are UCKP-ART-02, UCKP-ART-05, UCKP-ART-07 and UCKP-ART-04, and CMG-000001 Article LXXXI.2 disclaims them in its own text: 'This instrument holds no substantive authority.'",
       "why_orthogonal_not_subordinate": "CMG-000001 never claims authority over the canonical-object axis Article 1 governs, and UCKP-LAW-0001 never claims authority over which instruments are recognized as constitutional (that question is never posed inside the root law). The two claims do not overlap, so neither derives from nor is superior to the other — the same relationship CMG-000001 Article XVI.4 already declares between its own T1M tier and Program Authority (T2). See UCKP-CMG-CONSTITUTIONAL-RECONCILIATION-DETERMINATION.md for the full analysis."
+    },
+    {
+      "id": "UEG-000001",
+      "instrument": "00-MASTER/UEG-000001/ueg-declaration.json",
+      "name": "Universal Execution Governance",
+      "role": "EXECUTION",
+      "relation": "PROJECTION",
+      "derives_under": ["UCKP-ART-10", "UCKP-ART-16"],
+      "owns": "The EXECUTION ENVIRONMENT MODEL — which interpreter, virtual environment, series and toolchain a certified execution runs under, the integrity conditions that execution must satisfy, and the evidence a certified run records about what verified it.",
+      "may_never_own": "Knowledge, and the verdict of anything that runs inside the environment it governs. UCKP-ART-10 is that execution never owns knowledge; the declaration already states the same boundary in its own words (`$not_a_second_authority`: pyproject.toml remains the only place a version is declared), and this entry is where that sentence acquires a superior to be true under.",
+      "why_it_is_bound_here": "It carries a top-level `authority`, so it enters the CAA-INV-02 claim scan the moment it enters version control — it was authored untracked, which is the only reason the scan had not already seen it. Binding it is the declared extension path (`extension_rule.how_to_extend`: a new repository capability declares its role and its articles here and gains a `constitutional_superior` block), not a new authority."
     }
   ],
 

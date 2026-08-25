@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T15:29:21+00:00",
+  "generated_at": "2026-08-25T05:14:51+00:00",
   "count": 25,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 81,
+      "artifact_count": 385,
       "page_range_start": 1,
-      "page_range_end": 9739,
+      "page_range_end": 12330,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -33,9 +33,9 @@
       "description": "Constitutional corpus, consolidation program, freeze, and registers.",
       "category": "CON",
       "status": "ACTIVE",
-      "artifact_count": 113,
+      "artifact_count": 119,
       "page_range_start": 1327,
-      "page_range_end": 9810,
+      "page_range_end": 11830,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-002"
     },
     {
@@ -45,9 +45,9 @@
       "description": "Universal architecture constitutions, catalogs, and engineering foundation.",
       "category": "ARCH",
       "status": "ACTIVE",
-      "artifact_count": 62,
+      "artifact_count": 91,
       "page_range_start": 22,
-      "page_range_end": 9815,
+      "page_range_end": 10865,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-003"
     },
     {
@@ -57,9 +57,9 @@
       "description": "Implementation governance, plans, trackers, and technology constitution.",
       "category": "IMP",
       "status": "ACTIVE",
-      "artifact_count": 18,
+      "artifact_count": 21,
       "page_range_start": 4194,
-      "page_range_end": 9294,
+      "page_range_end": 11011,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-004"
     },
     {
@@ -249,9 +249,9 @@
       "description": "Program control tower and external-execution support.",
       "category": "CTL",
       "status": "ACTIVE",
-      "artifact_count": 69,
+      "artifact_count": 73,
       "page_range_start": 4183,
-      "page_range_end": 9826,
+      "page_range_end": 11106,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-020"
     },
     {

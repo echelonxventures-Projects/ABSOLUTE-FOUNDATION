@@ -518,9 +518,9 @@ def test_a_non_ascii_tracked_path_is_read_unescaped_from_version_control(
     assert "UCOS-Ω∞-FIXTURE.md" in tracked
     assert "plain-ascii.md" in tracked, "ASCII paths must be unaffected by the correction"
     assert not any(p.startswith('"') for p in tracked), f"a quoted path survived: {tracked}"
-    assert not any("\\316" in p or "\\342" in p for p in tracked), (
-        f"an octal-escaped path survived: {tracked}"
-    )
+    assert not any(
+        "\\316" in p or "\\342" in p for p in tracked
+    ), f"an octal-escaped path survived: {tracked}"
 
 
 def test_an_omega_infinity_document_is_not_absorbed_into_repository_state(

@@ -220,3 +220,12 @@ intelligence/UCOS-UPI-001/
 # UCOS-UGA-001 would measure each entry as an unidentified object — which it did, before
 # this rule existed.
 .ucos-verification-evidence/
+
+# UEG-000001 — the execution environment fingerprint cache and the per-run execution
+# evidence. Both describe THIS MACHINE'S environment: an interpreter path, a venv prefix,
+# an installed toolchain. None of it reproduces on another machine, so committing it would
+# publish a claim that is false everywhere except where it was written. The cache may skip
+# exactly one measurement and never a verdict (see the declaration), so deleting the whole
+# directory changes no verdict — only the cost of reaching one. The evidence is emitted
+# fresh by every certified run and is bound into certification from there, not from git.
+.ucos/

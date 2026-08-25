@@ -3,7 +3,7 @@
 | GATE | **OPEN** |
 |---|---|
 | DETERMINATION | **ARCHITECTURAL INTELLIGENCE BOUND — EVERY FACULTY AND EVERY REGISTER RESOLVES IN REPOSITORY TRUTH** |
-| SEAL (sha256) | `d22cb2994927bbe7c9f72d95cdbea014eb2400955ecfcee9234c820cb2d47910` |
+| SEAL (sha256) | `aa9f0c5e75393538b012031cf303085c96f84013fb50263d467168fa7aa3f8dc` |
 | BLOCKING FAILURES | 0 |
 
 | ID | Exit criterion | Standing |
@@ -24,7 +24,7 @@
 - 28 declared symbols resolve by parsing, never by import
 - 18 registered analyses are reused across 10 faculties
 - 20 of 20 declared registers resolve and parse
-- 1478 cross-register references checked, 0 broken
+- 1824 cross-register references checked, 0 broken
 - 3 of 3 ontology anchors are present in the ontology register
 - the faculty relation is acyclic: true
 - 19 of 19 declared dimensions are satisfied and all are measured

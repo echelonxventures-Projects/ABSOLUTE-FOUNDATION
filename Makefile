@@ -14,7 +14,7 @@
 #   make clean-venv    remove the disposable .ec1-venv (recreated on next bootstrap/verify)
 
 .DEFAULT_GOAL := help
-.PHONY: help bootstrap doctor verify verify-full lint test format format-check build clean clean-venv hooks repo-ops closure closure-gate closure-phase2 closure-phase2-gate closure-phase3 closure-phase3-gate
+.PHONY: help bootstrap doctor env env-report verify verify-full lint test format format-check build clean clean-venv hooks repo-ops closure closure-gate closure-phase2 closure-phase2-gate closure-phase3 closure-phase3-gate
 
 VENV := .ec1-venv
 PY   := $(VENV)/bin/python
@@ -23,6 +23,8 @@ help:
 	@echo "UCOS canonical targets:"
 	@echo "  make bootstrap     set up + validate the canonical environment (fresh clone)"
 	@echo "  make doctor        report + validate tool versions"
+	@echo "  make env           UEG-000001 execution environment integrity gate"
+	@echo "  make env-report    the full environment observation as JSON"
 	@echo "  make verify        canonical verification (lint + tests/coverage + governance)"
 	@echo "  make verify-full   verify + full registration/drift gate"
 	@echo "  make repo-ops      complete repository operational verification (EPIC-PLAT-003)"
@@ -173,6 +175,19 @@ bootstrap:
 
 doctor:
 	@./doctor.sh
+
+# UEG-000001 — the execution environment integrity gate, on its own. `make doctor` reports
+# the version table; this reports IDENTITY: is this interpreter inside this repository, is
+# sys.prefix the canonical venv, does pytest resolve here, do the required plugins import.
+# It is what ./verify.sh Stage 0 runs, so a developer can ask the same question the gate
+# asks without paying for a verification run.
+env:
+	@.ec1-venv/bin/python -m engine.execution_environment.gate --gate --command "make env"
+
+# The full observation as JSON — every check, every finding, the fingerprint and the
+# identity. `make env` elides long advisory lists; this never does.
+env-report:
+	@.ec1-venv/bin/python -m engine.execution_environment.gate --json --quiet --command "make env-report"
 
 # UVI-000001 — one command per declared mode. The bare `make verify` is `./verify.sh`,
 # whose default is now --change: impact-selected tests plus every governance gate, and

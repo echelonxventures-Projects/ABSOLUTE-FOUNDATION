@@ -139,6 +139,15 @@ def select(
 
     whole_suite = tests.paths
     if not changed_set:
+        # NO CHANGE STILL SELECTS NOTHING, and the unregistered objects are deliberately
+        # NOT forced in here. This path claims nothing — it reports an empty selection
+        # rather than a verified suite — so nothing is silently skipped by it, and a
+        # contract that claims nothing cannot be made dishonest by omission.
+        #
+        # It is also unreachable for the case that motivated the fail-wide admission: a
+        # newly written test file is untracked or modified, so `changed_paths` reports it
+        # and the selection proceeds through the layered path below, where the
+        # unregistered objects ARE unconditionally included.
         return SelectionResult(
             selection=Selection.IMPACT,
             test_paths=(),
@@ -306,7 +315,28 @@ def select(
             layers=tuple(layers),
         )
 
-    selected = tuple(sorted(path for path in affected if path in tests.objects))
+    # AN UNREGISTERED TEST OBJECT IS ALWAYS SELECTED, AND CANNOT BE ANYTHING ELSE.
+    #
+    # Every layer above bounds a change through a substrate: the dependency graph, the
+    # ownership records, the capability catalogue, the provenance edges. An object the
+    # executable object registry has never heard of appears in NONE of them — it has no
+    # universal id, no owner and no capability, because it has not been through
+    # registration yet. So there is no layer that can decide it is unaffected, and the
+    # only honest answer for a thing the selector cannot bound is the one this engine
+    # already gives everywhere else: run it.
+    #
+    # Included rather than escalated, and that is a proportionality judgement worth
+    # stating. Escalating the WHOLE suite because a new test file exists would make every
+    # developer run a full run for the duration of anyone's unregistered work, and a gate
+    # people route around is not a gate. Running the unregistered objects themselves is
+    # exactly sufficient: it cannot under-verify, because the objects run.
+    #
+    # It is also self-limiting in the right direction. Once REG-AUTO-001 registers the
+    # object, it acquires an owner and edges, the layers above can bound it, and it stops
+    # being unconditionally selected. Nothing here needs to be undone.
+    selected = tuple(
+        sorted({path for path in affected if path in tests.objects} | set(tests.unregistered))
+    )
     if not selected:
         # A bounded change that reaches no test is not "nothing to verify" — it is code
         # that nothing exercises, which is a coverage question and not a licence to skip.

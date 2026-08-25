@@ -36,10 +36,35 @@ set -euo pipefail
 UCOS_PYTHON_SERIES="${UCOS_PYTHON_SERIES:-3.12}"
 
 # --- Repo + venv location --------------------------------------------------------
-# This library lives in <repo>/scripts/, so the repo root is one level up.
+# THE ROOT IS RESOLVED BY GIT, AND THIS IS A CORRECTION RATHER THAN A PREFERENCE.
+#
+# This function used to derive the root purely from ${BASH_SOURCE[0]} on the reasoning that
+# the library lives in <repo>/scripts/, so the root is one level up. That reasoning is sound
+# and the implementation was not: BASH_SOURCE is a bash array, and a shell that does not
+# populate it — zsh, which is the login shell on the machine this was measured on — leaves
+# the expansion empty. `dirname ""` is ".", so the root resolved to the PARENT of the
+# current directory.
+#
+# Measured consequence (UCOS-EXECUTION-ENVIRONMENT-ASSESSMENT.md F-2):
+#
+#     $ zsh -c 'source scripts/ucos-env.sh && ucos_ensure_venv'
+#     == Installing pinned toolchain into /Users/bipin/Desktop/.ec1-venv
+#
+# A virtual environment was created OUTSIDE the repository and sat there unnoticed for
+# sixteen days. Nothing in the repository knew it existed, because nothing could: the only
+# authority on where the repository is was the thing that had just got it wrong.
+#
+# git rev-parse --show-toplevel asks the repository where it is, which cannot be wrong in
+# the way file layout can. The BASH_SOURCE derivation is retained as a fallback for the case
+# git genuinely cannot answer (git absent, or a source export with no .git), and the
+# fallback is guarded so an unset BASH_SOURCE resolves through $PWD instead of through "".
 ucos_repo_root() {
-  local here
-  here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  local root here
+  if root="$(git rev-parse --show-toplevel 2>/dev/null)" && [ -n "$root" ]; then
+    printf '%s\n' "$root"
+    return 0
+  fi
+  here="$(cd "$(dirname "${BASH_SOURCE[0]:-$PWD/scripts/ucos-env.sh}")" && pwd)"
   cd "$here/.." && pwd
 }
 UCOS_REPO="$(ucos_repo_root)"
@@ -228,6 +253,8 @@ ucos_install_deps() {
   "$py" -m pip install --disable-pip-version-check --quiet --upgrade pip >&2
   ( cd "$UCOS_REPO" && "$py" -m pip install --disable-pip-version-check --quiet -e ".[dev]" >&2 )
 
+  ucos_env_cache_invalidate
+
   if ucos_deps_ok 2>/dev/null; then
     return 0
   fi
@@ -354,4 +381,58 @@ ucos_ruff_gate() {
   ( cd "$repo" && xargs -0 "$py" -m ruff format --check < "$list" ) || rc=1
   rm -f "$list"
   return "$rc"
+}
+
+
+# --- UEG-000001 · the environment integrity gate (OBSERVE ONLY) ------------------
+# THE VERIFICATION HALF OF THE SEPARATION OF POWERS. ucos_ensure_venv above is the REPAIR
+# half: it deletes, creates and installs, and bootstrap.sh (plus `doctor.sh --fix`) are the
+# only things allowed to call it. This function is what a verification path calls instead.
+# It observes and refuses. It creates nothing, installs nothing, and reaches no network.
+#
+# Why the distinction is load-bearing rather than stylistic (assessment finding F-1):
+# ./verify.sh used to call ucos_ensure_venv, so a run that was supposed to DETECT toolchain
+# drift would instead `rm -rf` the drifted venv, rebuild it and report green — the drift
+# detected was the drift erased, and the evidence went with it. It also made the canonical
+# gate depend on network reachability, so an offline machine got an infrastructure failure
+# reported as a verification failure.
+#
+# TWO LAYERS, AND THE ORDER MATTERS. The real gate is a Python module, and a Python module
+# cannot report that Python is missing. So this function checks in shell exactly the one
+# condition that would prevent the gate from running at all — a venv interpreter that is
+# absent or not executable — and hands everything else to the module, which can actually
+# introspect the interpreter it is running inside.
+#
+# Usage: ucos_env_gate [command-label]
+# Exit: 0 valid · 1 a blocking check refused · 2 no verdict could be reached.
+ucos_env_gate() {
+  local label="${1:-./verify.sh}"
+  local py
+  py="$(ucos_venv_python)"
+
+  if [ ! -x "$py" ]; then
+    printf '\n%s\n\n' "UCOS EXECUTION ENVIRONMENT FAILURE" >&2
+    printf '%s\n\n' "EEG-00 — the canonical interpreter is absent" >&2
+    printf '%s\n\n    %s\n\n' "Expected:" "$py" >&2
+    printf '%s\n\n    %s\n\n' "Detected:" "<no executable at that path>" >&2
+    printf '%s\n\n' "Execution blocked." >&2
+    printf '%s\n\n' "Repair with: ./bootstrap.sh" >&2
+    return 1
+  fi
+
+  # --evidence writes .ucos/execution-evidence.json, which is what makes a certified run
+  # able to say WHICH interpreter produced it (finding F-5). Both paths it writes are
+  # gitignored, so the gate cannot dirty the tracked tree.
+  "$py" -m engine.execution_environment.gate --gate --quiet --evidence --command "$label"
+}
+
+# --- UEG-000001 · cache invalidation after a repair ------------------------------
+# The fingerprint cache decides "did the dependency state change?" from a trigger key whose
+# dependency component is a directory-mtime proxy. That proxy catches every ordinary path
+# through pip, and the declaration states plainly what it does not catch: an in-place edit
+# inside an already-installed package. The entry points that INSTALL close that gap by
+# dropping the cache outright, which is cheaper and more honest than a proxy straining to
+# be exhaustive. Called by ucos_install_deps, so no caller has to remember it.
+ucos_env_cache_invalidate() {
+  rm -f "$UCOS_REPO/.ucos/environment-fingerprint.json" 2>/dev/null || true
 }

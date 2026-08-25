@@ -78,6 +78,20 @@ while read -r name want; do
 done < <(ucos_expected_deps "$PY")
 printf '%s\n\n' "----------------------------------------------------------------" >&2
 
+# --- Identity (UEG-000001) --------------------------------------------------------
+# Closes assessment finding F-7. Everything above this line compares VERSIONS against the
+# pins, which is necessary and was never sufficient: it cannot tell whether the interpreter
+# it just reported on is inside this repository, whether sys.prefix is actually the canonical
+# venv, or whether a global pytest is shadowing the canonical one on PATH. Those are the
+# three conditions F-2 and F-3 failed on, and a doctor that reports a healthy table while
+# they are false is a doctor people stop believing.
+#
+# Read-only: no --gate, so the doctor's own exit status stays the doctor's determination and
+# a non-blocking advisory never turns a healthy report into a failure.
+if ! "$PY" -m engine.execution_environment.gate --command "./doctor.sh"; then
+  note_fail "environment integrity checks refused (see the UEG-000001 report above)."
+fi
+
 if [ "$FAILURES" -eq 0 ]; then
   ucos_ok "Doctor: ENVIRONMENT READY — canonical verification is reproducible from this shell."
   exit 0

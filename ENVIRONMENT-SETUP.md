@@ -78,7 +78,10 @@ Contributing factors (all now addressed):
 | Missing canonical command | none | `verify.sh` / `make verify` |
 | pyproject dependency gap | `coverage` unpinned (transitive) | `coverage==7.15.2` pinned in `[dev]` |
 | venv Python drift | `.ec1-venv` built with 3.14 vs CI 3.12 | auto-detected + auto-recreated to 3.12 |
-| PATH drift / global pytest shadowing | possible | irrelevant — PATH is never trusted |
+| PATH drift / global pytest shadowing | possible | irrelevant to the pipeline (PATH is never trusted) **and now reported** by `EEG-08` |
+| Environment repaired by the command verifying it | `verify.sh` self-healed | `verify.sh` observes and refuses; `bootstrap.sh` repairs (UEG-000001) |
+| Repo root resolved from `BASH_SOURCE` | built a venv outside the repo under zsh | resolved by `git rev-parse --show-toplevel` |
+| No record of which interpreter certified a run | none | `.ucos/execution-evidence.json`, every run |
 
 ---
 
@@ -95,6 +98,93 @@ points. Its invariants:
    is disposable and `.gitignore`d, so recreation is safe.
 4. **Self-heal the toolchain.** If any pinned tool is missing or version-drifted,
    `pip install -e ".[dev]"` is re-run. Verified against `pyproject.toml [dev]`.
+
+**Invariants 3 and 4 belong to `bootstrap.sh`, not to `verify.sh`, and that boundary
+is now enforced.** See the next section.
+
+---
+
+## Separation of powers (UEG-000001)
+
+`./verify.sh` used to self-heal the environment before running. It no longer does, and
+the reason is measured rather than stylistic: a command that repairs its own subject
+cannot report on it. A run that was supposed to *detect* toolchain drift would instead
+delete the drifted venv, rebuild it, and report green — the drift detected was the drift
+erased. It also made the canonical gate depend on an index being reachable, so an offline
+machine got an infrastructure failure reported as a verification failure.
+
+| Entry point | Creates venv | Installs | Network | Role |
+|---|---|---|---|---|
+| `./bootstrap.sh` | yes | yes | yes | **setup and repair** |
+| `./doctor.sh` | no | no | no | diagnose |
+| `./doctor.sh --fix` | yes | yes | yes | repair, explicitly requested |
+| `./verify.sh` | **no** | **no** | **no** | **observe and refuse** |
+
+The boundary is declared in `00-MASTER/UEG-000001/ueg-declaration.json`
+(`separation_of_powers`) and **measured over the source of `verify.sh`** by
+`engine/tests/unit/test_execution_environment.py`, so re-introducing an install there
+fails the test suite rather than passing unnoticed.
+
+### The environment integrity gate
+
+`./verify.sh` Stage 0 runs `ucos_env_gate`, which is
+`engine.execution_environment.gate`. Eight declared checks, seven of them blocking:
+
+| Check | Refuses when |
+|---|---|
+| `EEG-01` | the running environment's prefix is not inside **this** repository |
+| `EEG-02` | `sys.prefix` is not the canonical `.ec1-venv` (a path that merely *looks* right is not proof) |
+| `EEG-03` | the interpreter series is not the canonical `3.12` |
+| `EEG-04` | `pytest` resolves outside this environment |
+| `EEG-05` | `pytest_cov` / `coverage` / `jsonschema` do not **import** (version metadata alone is not enough) |
+| `EEG-06` | a pin is absent, drifted, or missing an executable its own `RECORD` declares |
+| `EEG-07` | the configuration it measured against is unreadable or parses to an empty expectation |
+| `EEG-08` | *(advisory — reported, never blocking)* a global tool shadows the canonical one, or an undeclared executable sits in the venv |
+
+Run it on its own with **`make env`**, or get the full observation as JSON with
+**`make env-report`**. Measured cost: **0.17 s cold, 0.13 s warm**.
+
+A refusal is deterministic and tells you what to do:
+
+```
+UCOS EXECUTION ENVIRONMENT FAILURE
+
+EEG-03 — correct interpreter
+
+Expected:
+
+    python 3.12
+
+Detected:
+
+    python 3.14.4 at /opt/homebrew/bin/python3
+
+Execution blocked.
+
+Repair with: ./bootstrap.sh
+```
+
+### Repository root resolution
+
+`ucos_repo_root` resolves the root with `git rev-parse --show-toplevel`. It previously
+derived it from `${BASH_SOURCE[0]}`, which a shell that does not populate that array —
+**zsh, the default macOS login shell** — leaves empty, resolving the root to the *parent*
+directory. That built a virtual environment outside the repository, where it went
+unnoticed for sixteen days. The `BASH_SOURCE` derivation is kept only as a fallback for a
+checkout git cannot answer for.
+
+### Execution evidence
+
+Every certified run writes `.ucos/execution-evidence.json` (gitignored) recording the
+interpreter path and version, the pytest path and version, the environment identity, the
+dependency fingerprint, the repository commit and the timestamp. Certification previously
+recorded *what was verified* but never *what verified it*, so two runs under different
+interpreters were indistinguishable in the evidence.
+
+`.ucos/environment-fingerprint.json` caches the one measurably expensive step (the
+distribution `RECORD` scan). It can skip a **measurement** and never a **verdict** —
+`EEG-01`–`EEG-05` are recomputed on every invocation regardless of cache state. Delete the
+directory at any time; it changes no verdict, only the cost of reaching one.
 
 ### Overrides (rarely needed)
 

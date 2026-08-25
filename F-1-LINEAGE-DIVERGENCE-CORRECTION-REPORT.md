@@ -56,10 +56,21 @@ The fused row was split into two properly labelled declaration rows:
 
 | File | Before | After |
 |---|---|---|
-| `EVO-USIS-015/02-REPOSITORY-STRUCTURE-REPORT.md` | `\| Parent lineage \| `Parent` = … USIS-GOV-000 …; `Depends-On` USIS-014 … \|` | `\| PARENT \| USIS-GOV-000 \| …` + `\| DEPENDS-ON \| USIS-014 \| …` |
-| `EVO-USIS-016/02-REPOSITORY-STRUCTURE-REPORT.md` | same shape, `Depends-On` USIS-015 | `\| PARENT \| USIS-GOV-000 \|` + `\| DEPENDS-ON \| USIS-015 \|` |
+| `EVO-USIS-015/02-REPOSITORY-STRUCTURE-REPORT.md` | `&#124; Parent lineage &#124; `Parent` = … USIS-GOV-000 …; `Depends-On` USIS-014 … &#124;` | `&#124; PARENT &#124; USIS-GOV-000 &#124; …` + `&#124; DEPENDS-ON &#124; USIS-014 &#124; …` |
+| `EVO-USIS-016/02-REPOSITORY-STRUCTURE-REPORT.md` | same shape, `Depends-On` USIS-015 | `&#124; PARENT &#124; USIS-GOV-000 &#124;` + `&#124; DEPENDS-ON &#124; USIS-015 &#124;` |
 
 This removes the ambiguity **at its origin** and supplies the `Depends-On` the projection was missing. Both files sit outside every frozen prefix.
+
+**Correction applied to this document (same Option 2 remedy, applied to the quotation).**
+When this report was itself registered as a corpus artifact, the two rows above — which
+*quote* declaration syntax rather than *make* a declaration — were read by
+`read_relationship_rows` as this document's own `PARENT` and `DEPENDS-ON` rows, projecting
+`UCOS-F1LINE-000001 --Parent--> UCOS-USIS-000001` and `--> UCOS-USIS-000017` and failing the
+§5 rule with three conflicting parents. The literal `|` glyphs inside those two quoted cells
+are now written as the HTML entity `&#124;`. The rendered evidence is byte-for-byte the same
+text on the page; only the raw scan surface changes, so the quotation can no longer be read
+as a declaration. The parser is again NOT changed (§4 stands), and no derived projection,
+registry or generated artifact was hand-patched.
 
 ---
 

@@ -268,6 +268,20 @@
       "owner": "git",
       "producer": "git bundle create",
       "rationale": "Version-control transport container — a serialization of the object database for backup or offline transfer, classified CLS-TRANSIENT by UCOS-RFP-001. Bundles belong in durable storage outside the repository; the rule exists so one written into the tree by accident is bounded rather than counted."
+    },
+    {
+      "rule": ".ucos-verification-evidence/",
+      "class": "CACHE",
+      "owner": "UVI-000001",
+      "producer": "engine/verification_intelligence",
+      "rationale": "The Verification Evidence Registry: a content-addressed cache of stage results, keyed by digests over content hashes UCOS-UGA-001 already publishes. Deleting the whole store changes no verdict, only the cost of reaching one, so it holds no information the tracked corpus does not. Its ignore rule predates this entry; the entry is what makes the rule resolve."
+    },
+    {
+      "rule": ".ucos/",
+      "class": "TOOL_OPERATIONAL",
+      "owner": "UEG-000001",
+      "producer": "engine/execution_environment",
+      "rationale": "The execution-environment fingerprint cache and the per-run execution evidence. Both describe THIS MACHINE: an interpreter path, a venv prefix, an installed toolchain — none of which reproduces elsewhere, so committing either would publish a claim true only where it was written. The cache may skip exactly one measurement and never a verdict, and the evidence is emitted fresh by every certified run and bound into certification from there, not from git."
     }
   ]
 }

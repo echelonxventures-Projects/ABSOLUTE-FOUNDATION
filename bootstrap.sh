@@ -30,6 +30,19 @@ ucos_ensure_venv
 ucos_log "Validating environment (doctor)"
 ./doctor.sh
 
+# UEG-000001. bootstrap is the ONLY entry point permitted to create and install, so it is
+# also the one that must prove what it produced. The doctor above compares versions against
+# the pins; this gate answers the questions the doctor never asked and that findings F-2 and
+# F-3 actually failed on — is this interpreter inside THIS repository, is sys.prefix really
+# the canonical venv, does pytest resolve here, do the required plugins IMPORT.
+#
+# --refresh, because the environment was just rewritten: the fingerprint cache must be
+# rebuilt from a full scan rather than from a proxy that could still be describing the
+# environment as it was five seconds ago.
+ucos_log "Verifying environment integrity (UEG-000001)"
+"$(ucos_venv_python)" -m engine.execution_environment.gate \
+  --gate --refresh --evidence --command "./bootstrap.sh"
+
 if [ "$DO_VERIFY" = "1" ]; then
   ucos_log "Running canonical verification"
   exec ./verify.sh

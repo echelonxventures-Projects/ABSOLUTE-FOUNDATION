@@ -217,6 +217,7 @@
     "engine/context/catalog/reference-frames.json",
     "engine/determinism/blueprints/BP-DATA-0001.json",
     "intelligence/UCOS-UPI-001/publications/datasheet--all-research-areas.json",
+    "knowledge/canonical-knowledge-history.json",
     "knowledge/canonical-knowledge.json"
   ]
 }
