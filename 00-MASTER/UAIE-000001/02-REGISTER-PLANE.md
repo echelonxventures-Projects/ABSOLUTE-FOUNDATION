@@ -14,7 +14,7 @@
 | `UAIE-REG-06` | every taxonomy | `10-DATA/DATA-004-UNIVERSAL-DATA-TAXONOMY.md` | markdown | **RESOLVES** | 0 | 0 | UAIE-FAC-02 |
 | `UAIE-REG-07` | every dependency | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | **RESOLVES** | 0 | 0 | UAIE-FAC-03 |
 | `UAIE-REG-08` | every ownership relationship | `02-CANONICAL-OWNERSHIP-MATRIX.md` | markdown | **RESOLVES** | 0 | 0 | UAIE-FAC-04 |
-| `UAIE-REG-09` | every capability | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | **RESOLVES** | 131 | 0 | UAIE-FAC-05, UAIE-FAC-08 |
+| `UAIE-REG-09` | every capability | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | **RESOLVES** | 132 | 0 | UAIE-FAC-05, UAIE-FAC-08 |
 | `UAIE-REG-10` | every analysis | `00-MASTER/UCOS-UAR-001/uar-analyses.json` | json | **RESOLVES** | 45 | 0 | UAIE-FAC-10 |
 | `UAIE-REG-11` | every platform capability binding | `00-MASTER/UAEP-000001/uaep-platform.json` | json | **RESOLVES** | 25 | 0 | UAIE-FAC-08 |
 | `UAIE-REG-12` | every validation | `00-MASTER/UCCEP-000000/uccep-bindings.json` | json | **RESOLVES** | 0 | 0 | UAIE-FAC-09 |
