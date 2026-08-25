@@ -24,11 +24,11 @@
         "test_functions": 887
       },
       "engine": {
-        "loc": 113366,
+        "loc": 117510,
         "root": "engine",
-        "source_files": 407,
-        "test_files": 284,
-        "test_functions": 4636
+        "source_files": 418,
+        "test_files": 293,
+        "test_functions": 4900
       },
       "infrastructure": {
         "loc": 22599,
@@ -45,11 +45,11 @@
         "test_functions": 119
       },
       "platform": {
-        "loc": 125120,
+        "loc": 125833,
         "root": "platform",
-        "source_files": 446,
-        "test_files": 344,
-        "test_functions": 5586
+        "source_files": 448,
+        "test_files": 346,
+        "test_functions": 5644
       },
       "service": {
         "loc": 20464,
@@ -59,18 +59,18 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 344682,
-    "total_tests": 14169
+    "total_loc": 349539,
+    "total_tests": 14491
   },
-  "content_hash": "407f4301fc17fad5fe4eb3467636e6649fd0fb66f63c352ad59d8b993aef7fa7",
+  "content_hash": "14fc43965bf4840ed2dbe3089298e498c90e0b9a7d92c92c251bec4dd0e56325",
   "corpus": {
-    "artifacts": 1233,
-    "edges": 12899,
-    "pages": 9826,
+    "artifacts": 1579,
+    "edges": 13591,
+    "pages": 12330,
     "status_histogram": {
-      "ACTIVE": 1132,
+      "ACTIVE": 1458,
       "CERTIFIED": 7,
-      "COMPLETE": 43,
+      "COMPLETE": 63,
       "FINAL": 9,
       "FROZEN": 27,
       "UNDER_REVIEW": 15
@@ -79,19 +79,19 @@
   },
   "evidence_state": {
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "884957a79085ae55c53c4137e44106be02b0c78ce3701d20bc4cb951851deb5d",
-      "00-BOOK/DATA/certification.json": "d92e5b4c3ffc9cc9adfc9fdece77a69cb7cfe0057ec146b76bcfeb5d30d46387",
-      "00-BOOK/DATA/control-tower.json": "304072e9af5c2e798b559ba460d5e92c87ad388fefcfcccaa292c1ad1e050931",
+      "00-BOOK/DATA/artifacts.json": "7c7c88717c8a266baa3ee76895c8e706190212838418010888e13647472f3eb7",
+      "00-BOOK/DATA/certification.json": "0ffbbb469e25bb5273f1a6f7c23fea52ad84e655b1862d5954c4d9eef28e2854",
+      "00-BOOK/DATA/control-tower.json": "c5a3d9fa655af2fc96d180e4860c2790d3ddb848c13e15811ba83be571151649",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "895355b4082d11f432827ba41517076cc82a1f77095c50e718eda3306121e9ca"
+      "00-BOOK/DATA/volumes.json": "e32b29b0201ccaf79258bb9e3cfd137110cca7c44f9206735a5a60cb80433261"
     }
   },
-  "evidence_timestamp": "2026-08-10T15:29:21+00:00",
+  "evidence_timestamp": "2026-08-25T05:14:51+00:00",
   "generation": {
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "68b08a5ec304a971c15c82ab834d82b8ba1fae659a67e34bbfcd41604c136696",
+    "input_hash": "477150f216675f0481282919da3ccf11d1886879ad38df1df0b6aa55c7142c20",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence file hash, which together pin the tracked state these outputs derive from. Coverage measurement (TEST_EXECUTION_STATE) is excluded per UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input.",
     "output_hash_field": "content_hash"
   },
