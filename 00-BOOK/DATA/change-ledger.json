@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-25T05:15:05+00:00",
+  "generated_at": "2026-08-26T11:33:45+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1706,
-    "versioned_artifacts": 1579,
-    "lineage_nodes": 1579,
+    "change_events": 1724,
+    "versioned_artifacts": 1597,
+    "lineage_nodes": 1597,
     "artifacts_with_predecessors": 5,
     "artifacts_with_successors": 5
   },
   "change_event_histogram": {
-    "Created": 1579,
+    "Created": 1597,
     "Modified": 121,
     "Version-Incremented": 6
   },
@@ -10248,6 +10248,114 @@
       "change_id": "UCHG-000001706",
       "at": "2026-08-25T05:14:49+00:00",
       "subject": "UCOS-UNIVER-000018",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001707",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-CON-000082",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001708",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-CON-000083",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001709",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-CON-000084",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001710",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-CON-000085",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001711",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-DISCOV-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001712",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-DISCOV-000002",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001713",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-MCRFST-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001714",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-PHASEO-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001715",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-PHASER-000001",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001716",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-PHASER-000002",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001717",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-PHASER-000003",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001718",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-PHASER-000004",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001719",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-PHASER-000005",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001720",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-PHASER-000006",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001721",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-PHASER-000007",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001722",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-PHASER-000008",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001723",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-UCOSOM-000078",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001724",
+      "at": "2026-08-26T11:33:44+00:00",
+      "subject": "UCOS-UCOSOM-000079",
       "kind": "Created"
     }
   ],
@@ -27307,6 +27415,186 @@
       "subject": "UCOS-UNIVER-000018",
       "kind": "Created",
       "at": "2026-08-25T05:14:49+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001707",
+      "subject": "UCOS-CON-000082",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001708",
+      "subject": "UCOS-CON-000083",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001709",
+      "subject": "UCOS-CON-000084",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001710",
+      "subject": "UCOS-CON-000085",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001711",
+      "subject": "UCOS-DISCOV-000001",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001712",
+      "subject": "UCOS-DISCOV-000002",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001713",
+      "subject": "UCOS-MCRFST-000001",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001714",
+      "subject": "UCOS-PHASEO-000001",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001715",
+      "subject": "UCOS-PHASER-000001",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001716",
+      "subject": "UCOS-PHASER-000002",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001717",
+      "subject": "UCOS-PHASER-000003",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001718",
+      "subject": "UCOS-PHASER-000004",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001719",
+      "subject": "UCOS-PHASER-000005",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001720",
+      "subject": "UCOS-PHASER-000006",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001721",
+      "subject": "UCOS-PHASER-000007",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001722",
+      "subject": "UCOS-PHASER-000008",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001723",
+      "subject": "UCOS-UCOSOM-000078",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001724",
+      "subject": "UCOS-UCOSOM-000079",
+      "kind": "Created",
+      "at": "2026-08-26T11:33:44+00:00",
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
@@ -49455,6 +49743,258 @@
           "snapshot_seq": 1
         }
       ]
+    },
+    "UCOS-DISCOV-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "936cd61d0295a30c54af70dd0461446f77ed7298bd66d8d889babebbb502490d",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "936cd61d0295a30c54af70dd0461446f77ed7298bd66d8d889babebbb502490d",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-DISCOV-000002": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "7ab6ee206d4c81b9966b2f459d2835f3c42cf19733b1aac16caa661232b3c6ec",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "7ab6ee206d4c81b9966b2f459d2835f3c42cf19733b1aac16caa661232b3c6ec",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-MCRFST-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "a3025e7cf14b6ff35b6d7c1b4885a99347cf65204b9c21307d6e14940f51009b",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "a3025e7cf14b6ff35b6d7c1b4885a99347cf65204b9c21307d6e14940f51009b",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PHASEO-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "f89a42b513047488efa57a8f2548c25ef722bc481e3a4048964bb00aa9d08fe5",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "f89a42b513047488efa57a8f2548c25ef722bc481e3a4048964bb00aa9d08fe5",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000082": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "2bed44a92d762851c8746675b8ab84165765f451b6438b83b7f9b93933ce3616",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "2bed44a92d762851c8746675b8ab84165765f451b6438b83b7f9b93933ce3616",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000083": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "43421fba8e9b4fc149288af8791c20964f8135fe2e4fd2b0e3b3ab44a95f9897",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "43421fba8e9b4fc149288af8791c20964f8135fe2e4fd2b0e3b3ab44a95f9897",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PHASER-000001": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "a7bd0d9081de1fa52ecf407648ec28fab5af5486f66596725fcc9a9e50403d59",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "a7bd0d9081de1fa52ecf407648ec28fab5af5486f66596725fcc9a9e50403d59",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PHASER-000002": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "b6074a52803f6d9187dee6d4e773eb9c2130fe858cd1fb200209c7ee06752d73",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "b6074a52803f6d9187dee6d4e773eb9c2130fe858cd1fb200209c7ee06752d73",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PHASER-000003": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "2de41e055a989d74450248ad8e94e5b36b13eefdda102a46184260872156ba78",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "2de41e055a989d74450248ad8e94e5b36b13eefdda102a46184260872156ba78",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PHASER-000004": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "09d447a37754e82f173d927c46887c230792bdd2b8a04cdfb742d1eb1f387218",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "09d447a37754e82f173d927c46887c230792bdd2b8a04cdfb742d1eb1f387218",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000084": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "3b6558771b61a891f249f82893190714e144bdc342107c85bf144885d7bfcd6d",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "3b6558771b61a891f249f82893190714e144bdc342107c85bf144885d7bfcd6d",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PHASER-000005": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "100ed6cd1a3dd424d659987d80b6b44debeb1dfcfa6db7d1b5688c6ba7c978fc",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "100ed6cd1a3dd424d659987d80b6b44debeb1dfcfa6db7d1b5688c6ba7c978fc",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PHASER-000006": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "20022337d5d75d72c2ec9a33f3f07e050bb2565647e7bcdc738a229be649f34e",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "20022337d5d75d72c2ec9a33f3f07e050bb2565647e7bcdc738a229be649f34e",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PHASER-000007": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "7f931fcdd7f5496017d7a11d8c414018addd5a26b736ed8432cdc5d5e396fc00",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "7f931fcdd7f5496017d7a11d8c414018addd5a26b736ed8432cdc5d5e396fc00",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-PHASER-000008": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "0fd9872fb4635d0d7461e9efb1357e08b15a268f94d0ec4ba123f1f7eb789976",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "0fd9872fb4635d0d7461e9efb1357e08b15a268f94d0ec4ba123f1f7eb789976",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-UCOSOM-000078": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "6b5058d2f886ac90135a42f62090d552d14dfe5ff38e4396bce49f5aa6222ebf",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "6b5058d2f886ac90135a42f62090d552d14dfe5ff38e4396bce49f5aa6222ebf",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-UCOSOM-000079": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "23af85778eb77ba33029c1068ba121bf380b65126cea70e62b36d2f34b9ba66b",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "23af85778eb77ba33029c1068ba121bf380b65126cea70e62b36d2f34b9ba66b",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-CON-000085": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "10ba433c50b195850a06758e2c14091aa624eace53d1fa8e8fe544aa730f198e",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "10ba433c50b195850a06758e2c14091aa624eace53d1fa8e8fe544aa730f198e",
+          "at": "2026-08-26T11:33:44+00:00",
+          "snapshot_seq": 1
+        }
+      ]
     }
   },
   "lineage": {
@@ -53982,6 +54522,22 @@
       "descendant_chain": [],
       "origin": "UCOS-DEPEND-000001"
     },
+    "UCOS-DISCOV-000001": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-DISCOV-000001"
+    },
+    "UCOS-DISCOV-000002": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-DISCOV-000002"
+    },
     "UCOS-ENVIRONMENTS-000001": {
       "birth": "2026-07-17T12:14:10+00:00",
       "predecessors": [],
@@ -55318,6 +55874,14 @@
       "descendant_chain": [],
       "origin": "UCOS-MASTER-000042"
     },
+    "UCOS-MCRFST-000001": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-MCRFST-000001"
+    },
     "UCOS-MUTATI-000001": {
       "birth": "2026-08-23T13:32:44+00:00",
       "predecessors": [],
@@ -55654,6 +56218,22 @@
       "descendant_chain": [],
       "origin": "UCOS-PHASEK-000002"
     },
+    "UCOS-PHASEO-000001": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PHASEO-000001"
+    },
+    "UCOS-CON-000082": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000082"
+    },
     "UCOS-PHASEP-000001": {
       "birth": "2026-08-23T13:32:44+00:00",
       "predecessors": [],
@@ -55685,6 +56265,86 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-PHASEP-000004"
+    },
+    "UCOS-CON-000083": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000083"
+    },
+    "UCOS-PHASER-000001": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PHASER-000001"
+    },
+    "UCOS-PHASER-000002": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PHASER-000002"
+    },
+    "UCOS-PHASER-000003": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PHASER-000003"
+    },
+    "UCOS-PHASER-000004": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PHASER-000004"
+    },
+    "UCOS-CON-000084": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000084"
+    },
+    "UCOS-PHASER-000005": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PHASER-000005"
+    },
+    "UCOS-PHASER-000006": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PHASER-000006"
+    },
+    "UCOS-PHASER-000007": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PHASER-000007"
+    },
+    "UCOS-PHASER-000008": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-PHASER-000008"
     },
     "UCOS-PHASEU-000001": {
       "birth": "2026-08-23T13:32:44+00:00",
@@ -56198,6 +56858,14 @@
       "descendant_chain": [],
       "origin": "UCOS-UCOSOM-000001"
     },
+    "UCOS-UCOSOM-000078": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-UCOSOM-000078"
+    },
     "UCOS-UCOSOM-000007": {
       "birth": "2026-08-25T05:14:49+00:00",
       "predecessors": [],
@@ -56405,6 +57073,14 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-UCOSOM-000031"
+    },
+    "UCOS-UCOSOM-000079": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-UCOSOM-000079"
     },
     "UCOS-UCOSOM-000032": {
       "birth": "2026-08-25T05:14:49+00:00",
@@ -57125,6 +57801,14 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-W34CUN-000001"
+    },
+    "UCOS-CON-000085": {
+      "birth": "2026-08-26T11:33:44+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-CON-000085"
     },
     "UCOS-ADR-000001": {
       "birth": "2026-07-17T02:30:13+00:00",
