@@ -62,7 +62,7 @@
       "meaning": "the evidence class the object's governance records belong to"
     }
   },
-  "count": 37570,
+  "count": 37590,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -73376,6 +73376,106 @@
     },
     {
       "from": "UCOS-ENGINE-001317",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001318",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001318",
+      "kind": "owned_by",
+      "to": "engine/certification_integrity"
+    },
+    {
+      "from": "UCOS-ENGINE-001318",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001318",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001319",
+      "kind": "depends_on",
+      "to": "engine/certification_integrity/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001319",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001319",
+      "kind": "owned_by",
+      "to": "engine/certification_integrity"
+    },
+    {
+      "from": "UCOS-ENGINE-001319",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001319",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001320",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001320",
+      "kind": "owned_by",
+      "to": "engine/certification_integrity"
+    },
+    {
+      "from": "UCOS-ENGINE-001320",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001320",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001321",
+      "kind": "depends_on",
+      "to": "engine/certification_integrity/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001321",
+      "kind": "depends_on",
+      "to": "engine/certification_integrity/coverage_data.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001321",
+      "kind": "depends_on",
+      "to": "engine/certification_integrity/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001321",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001321",
+      "kind": "owned_by",
+      "to": "engine/certification_integrity"
+    },
+    {
+      "from": "UCOS-ENGINE-001321",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001321",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },

@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "3 — Audit Universe",
   "evidence_class": "AUDIT",
-  "count": 5355,
+  "count": 5359,
   "events": [
     {
       "event_id": "UGA-AUD-368c03bec2e5",
@@ -45321,6 +45321,58 @@
       "object_path": "engine/certification/ledger.py",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-ENGINE-000208",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-d5c4be7d6d3e",
+      "timestamp": "commit:3b3067016087",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001318",
+      "object_path": "engine/certification_integrity/__init__.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001318",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-89f6815168ec",
+      "timestamp": "commit:3b3067016087",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001319",
+      "object_path": "engine/certification_integrity/coverage_data.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001319",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-6aeb91c5d9d4",
+      "timestamp": "commit:3b3067016087",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001320",
+      "object_path": "engine/certification_integrity/model.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001320",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-391f77965549",
+      "timestamp": "commit:3b3067016087",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001321",
+      "object_path": "engine/certification_integrity/surface.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001321",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"

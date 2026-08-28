@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 6758,
+  "total_objects": 6762,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -39695,6 +39695,42 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-ENGINE-000208",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "engine/certification_integrity/__init__.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/certification_integrity",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001318",
+      "first_seen": "commit:3b3067016087"
+    },
+    {
+      "path": "engine/certification_integrity/coverage_data.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/certification_integrity",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001319",
+      "first_seen": "commit:3b3067016087"
+    },
+    {
+      "path": "engine/certification_integrity/model.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/certification_integrity",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001320",
+      "first_seen": "commit:3b3067016087"
+    },
+    {
+      "path": "engine/certification_integrity/surface.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/certification_integrity",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001321",
+      "first_seen": "commit:3b3067016087"
     },
     {
       "path": "engine/ceu/__init__.py",
