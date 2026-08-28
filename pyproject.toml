@@ -350,6 +350,18 @@ addopts = [
   # same condition: it ships with platform/tests/test_universal_master_plan.py, so the
   # percentage measures a capability something actually exercises.
   "--cov=platform.universal_master_plan",
+  # UEC-000001 — the Universal Enforcement Closure enters the denominator because it is the
+  # programme that refuses "nothing enforces by existing", and it was itself outside the
+  # denominator: 711 statements of closure mechanism whose covered fraction nothing measured.
+  # A guard-of-guards excluded from the measurement it imposes is the exact self-exemption
+  # UEC-L-09 exists to refuse, occurring one layer up. It ships
+  # engine/tests/unit/test_enforcement_closure.py, so it enters on the same condition as
+  # every other capability here.
+  "--cov=engine.enforcement_closure",
+  # UCL — the constitution engine enters the denominator on the same condition: 1,976
+  # statements across seventeen modules, exercised by twelve test files under
+  # engine/tests/constitution/ and platform/tests/, and measured by none of them until now.
+  "--cov=engine.constitution",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -357,8 +369,28 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/construct", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence", "engine/execution_environment"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/construct", "engine/enforcement_closure", "engine/constitution", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence", "engine/execution_environment"]
 omit = ["engine/tests/*", "platform/tests/*"]
+
+# --- UCOS-COV-SCOPE-001 — the coverage denominator, declared rather than assumed ---------
+#
+# WHY THIS TABLE EXISTS, STATED AS THE MEASUREMENT THAT PRODUCED IT. The scope was declared
+# TWICE and reconciled by nobody: `addopts` carries 69 `--cov=` flags and `[tool.coverage.run]
+# source` carries 69 paths, two independent lists that happened to agree. A package could be
+# dropped from one and kept in the other, or omitted from both, and no gate anywhere would
+# notice. Three packages WERE omitted from both — engine.enforcement_closure (711 statements),
+# engine.constitution (1,976) and engine.uicm (1,893) — 4,580 statements, 5.2% of the source
+# tree, silently outside a denominator that was reporting 97%.
+#
+# A percentage whose denominator is not itself governed is not a measurement, it is a number.
+# So: every package under engine/ and platform/ is either MEASURED or named here with a reason,
+# and platform/tests/test_coverage_scope.py refuses any third possibility in both directions —
+# a package in neither, and a stale entry naming a package that is measured or gone.
+[tool.ucos.coverage_scope]
+excluded_packages = [
+  { package = "engine.uicm", reason = "1,893 statements across ten modules with ZERO test files, and no module under engine/, platform/ or 00-MASTER/ imports it. Admitting it to the denominator would bake in ~1,893 permanently uncovered statements and convert a dead-code finding into a coverage figure, which is measurement laundering. Excluding it silently was how it stayed invisible. It is named here so the omission is arguable: the open question is whether this package is retired and should be deleted, or live and should be tested, and that is an owner decision rather than a coverage setting. Reviewed: 2026-08-28." },
+]
+
 
 [tool.coverage.report]
 show_missing = true

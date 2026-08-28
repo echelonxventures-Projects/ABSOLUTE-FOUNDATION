@@ -853,13 +853,32 @@ def test_lowering_any_discovery_floor_is_refused(document: dict[str, Any]) -> No
     than one artifact, so the non-vacuity guarantee vanished while the measurement kept
     reporting satisfaction. The floors are ratcheted on their total, two-sided.
     """
-    for index in range(len(document["discovery_rules"])):
-        mutated = copy.deepcopy(document)
-        mutated["discovery_rules"][index]["floor"] = 1
-        violations = _run(mutated, "discovery_rules_are_non_vacuous")
-        assert any(
-            "floors total" in item for item in violations
-        ), f"lowering the floor of rule {index} was accepted: {violations}"
+    # LOWERED BY ANY AMOUNT, not assigned a literal. The original mutation set every floor to
+    # 1, which silently stopped being a mutation for a rule whose floor is ALREADY 1 — and a
+    # rule naming a single artifact (UEC-R-07/08/09, the mutation governance plane) can have no
+    # other floor. Against those the assignment was a no-op, the total did not move, and the
+    # test failed while reporting that the lowering had been "accepted".
+    #
+    # TWO REFUSAL PATHS, AND BOTH ARE ASSERTED. Above 1 the floor-total ratchet refuses. At 1
+    # the only lowering available is to 0, and that is refused EARLIER and more strongly — the
+    # declaration will not parse at all, because a floor of zero would permit a rule to match
+    # nothing and still be satisfied. A rule at the minimum is therefore the most tightly
+    # ratcheted, not the least, and the property under test is the one that holds at every
+    # floor: no floor can be lowered by any amount without a refusal.
+    for index, rule in enumerate(document["discovery_rules"]):
+        for lowered in sorted({1, rule["floor"] - 1} & set(range(rule["floor"]))):
+            mutated = copy.deepcopy(document)
+            mutated["discovery_rules"][index]["floor"] = lowered
+            if lowered == 0:
+                # Refused at parse time, and already pinned by
+                # test_l01_refuses_a_floor_of_zero_at_parse_time. Asserting it a second time
+                # here would restate that test rather than add to it.
+                continue
+            violations = _run(mutated, "discovery_rules_are_non_vacuous")
+            assert any("floors total" in item for item in violations), (
+                f"lowering the floor of rule {index} from {rule['floor']} to {lowered} was "
+                f"accepted: {violations}"
+            )
 
     raised = copy.deepcopy(document)
     raised["discovery_rules"][0]["floor"] += 5

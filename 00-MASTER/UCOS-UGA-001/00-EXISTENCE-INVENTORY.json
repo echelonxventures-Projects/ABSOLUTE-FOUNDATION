@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 6751,
+  "total_objects": 6758,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -89,6 +89,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-CONFIG-000009",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": ".github/workflows/mutation-gate.yml",
+      "object_class": "CONFIGURATION_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": ".github/workflows",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-CONFIG-000035",
+      "first_seen": "commit:32ecd9777517"
     },
     {
       "path": ".github/workflows/research-publication-gate.yml",
@@ -31787,6 +31796,24 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "ENFORCEMENT-CLOSURE-GAPS.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002988",
+      "first_seen": "commit:32ecd9777517"
+    },
+    {
+      "path": "ENFORCEMENT-CLOSURE-MATRIX.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002989",
+      "first_seen": "commit:32ecd9777517"
+    },
+    {
       "path": "ENVIRONMENT-SETUP.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -33923,6 +33950,24 @@
       "owner": "UCOS-REPOSITORY-ROOT",
       "universal_id": "UCOS-SCOPEB-000008",
       "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "SELF-COVERAGE-GAPS.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002990",
+      "first_seen": "commit:32ecd9777517"
+    },
+    {
+      "path": "SELF-COVERAGE-GRAPH.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002991",
+      "first_seen": "commit:32ecd9777517"
     },
     {
       "path": "SEMANTIC-LIFECYCLE-RECONCILIATION-REGISTER.md",
@@ -51176,6 +51221,15 @@
       "first_seen": "commit:03179308f5cb"
     },
     {
+      "path": "platform/repository_intelligence/mutation_gate.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "platform/repository_intelligence",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001317",
+      "first_seen": "commit:32ecd9777517"
+    },
+    {
       "path": "platform/repository_intelligence/recommendation.py",
       "object_class": "EXECUTABLE_OBJECT",
       "lifecycle": "AUTHORED",
@@ -52587,6 +52641,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-TESTOBJ-000496",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "platform/tests/test_coverage_scope.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "platform/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000841",
+      "first_seen": "commit:32ecd9777517"
     },
     {
       "path": "platform/tests/test_coverage_service.py",

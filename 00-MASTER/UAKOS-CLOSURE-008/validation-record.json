@@ -35,7 +35,7 @@
       "verify.sh",
       "scripts/ucos-env.sh"
     ],
-    "stages_digest": "7d5ce23b43db34eef4cd221eb63beb35c40139c5053d79883ae9579ab1f930cb",
+    "stages_digest": "f2fdd9c73c135c27764c69d4bdd4ceb9aade79f459676a9685f2a07550887084",
     "stages_digest_definition": "sha256 over the newline-joined stage names this contract declares, read from verify.sh. A gate added to the contract and not to this record fails the record's own test."
   },
   "result": "PASS",
@@ -102,6 +102,10 @@
     },
     {
       "stage": "universal recursive knowledge foundation (URKE-000001, every unknown governed and no mechanism closed against a future domain)",
+      "result": "PASS"
+    },
+    {
+      "stage": "mutation governance boundary decidability (EX-018, every classification rule implemented, reachable and claiming subjects)",
       "result": "PASS"
     },
     {

@@ -11510,12 +11510,12 @@
     "W34CUN": 1,
     "STAGE0": 1,
     "DET": 6,
-    "CONFIG": 34,
+    "CONFIG": 35,
     "DATAOBJ": 135,
-    "EXDOC": 2987,
+    "EXDOC": 2991,
     "TOOLING": 36,
-    "ENGINE": 1316,
-    "TESTOBJ": 840,
+    "ENGINE": 1317,
+    "TESTOBJ": 841,
     "OBS": 7,
     "ASSESS": 2,
     "B01BIR": 1,
@@ -63534,6 +63534,48 @@
       "object_class": "EXECUTABLE_OBJECT",
       "category": "ENGINE",
       "first_seen": "commit:446f8a0f6d95"
+    },
+    ".github/workflows/mutation-gate.yml": {
+      "universal_id": "UCOS-CONFIG-000035",
+      "object_class": "CONFIGURATION_OBJECT",
+      "category": "CONFIG",
+      "first_seen": "commit:32ecd9777517"
+    },
+    "ENFORCEMENT-CLOSURE-GAPS.md": {
+      "universal_id": "UCOS-EXDOC-002988",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:32ecd9777517"
+    },
+    "ENFORCEMENT-CLOSURE-MATRIX.md": {
+      "universal_id": "UCOS-EXDOC-002989",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:32ecd9777517"
+    },
+    "SELF-COVERAGE-GAPS.md": {
+      "universal_id": "UCOS-EXDOC-002990",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:32ecd9777517"
+    },
+    "SELF-COVERAGE-GRAPH.md": {
+      "universal_id": "UCOS-EXDOC-002991",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:32ecd9777517"
+    },
+    "platform/repository_intelligence/mutation_gate.py": {
+      "universal_id": "UCOS-ENGINE-001317",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:32ecd9777517"
+    },
+    "platform/tests/test_coverage_scope.py": {
+      "universal_id": "UCOS-TESTOBJ-000841",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:32ecd9777517"
     }
   },
   "by_observation": {
