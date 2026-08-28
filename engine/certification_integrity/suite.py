@@ -115,11 +115,7 @@ def pytest_argv(
     if shuffle_seed is not None:
         argv += ["-p", "engine.certification_integrity.pytest_shuffle"]
     if coverage:
-        argv += [
-            "--cov-report=",
-            f"--cov-report=xml:{xml_path}",
-            "--cov-fail-under=0",
-        ]
+        argv += [f"--cov-report=xml:{xml_path}", "--cov-fail-under=0"]
     argv += extra or []
     argv += targets or []
     return argv
@@ -146,6 +142,15 @@ def run_in_extraction(
 ) -> tuple[SuiteResult, object]:
     """Run the suite inside a frozen extraction of ``sha`` and read its coverage back."""
     from engine.certification_integrity import immutable
+    from engine.certification_integrity import surface as surface_module
+
+    # Prepare first, so the denominator can be read from the FROZEN tree's own declaration. A
+    # caller-supplied package list would let the measurement be taken over a scope the commit
+    # under test never declared, which is the same defect as an unreconciled second copy of the
+    # scope: the figure would be true of some denominator and attributable to no commit.
+    extraction = immutable.prepare(root, sha, workspace=workspace)
+    if scope_packages is None and coverage:
+        scope_packages = sorted(surface_module.read_scope(extraction.root).flag_packages)
 
     xml_relative = f".uci-coverage-{label}.xml"
     argv = pytest_argv(

@@ -83,10 +83,14 @@ class Extraction:
     python: str
     reused: bool
     prepare_seconds: float
+    #: The sealing commit's SHA. A deterministic function of the archived content, so two
+    #: extractions of one source commit agree on it and a changed byte changes it.
+    sealed_sha: str = ""
 
     def as_record(self) -> dict[str, object]:
         return {
-            "sha": self.sha,
+            "source_sha": self.sha,
+            "sealed_sha": self.sealed_sha,
             "root": self.root,
             "python": self.python,
             "reused": self.reused,
@@ -200,6 +204,72 @@ def extract(root: str, sha: str, destination: str) -> None:
         )
 
 
+#: Fixed identity and timestamp for the extraction's sealing commit. Every field is pinned so the
+#: sealing commit's own SHA is a pure function of the archived CONTENT — which makes it a content
+#: address for the frozen tree, and makes two extractions of one source commit produce the same
+#: sealed SHA on any machine at any time. An unpinned committer or date would make the seal vary
+#: per run and turn Rule 8's equality check into a comparison of clocks.
+SEAL_ENV = {
+    "GIT_AUTHOR_NAME": "UCI-000001",
+    "GIT_AUTHOR_EMAIL": "uci@localhost",
+    "GIT_COMMITTER_NAME": "UCI-000001",
+    "GIT_COMMITTER_EMAIL": "uci@localhost",
+    "GIT_AUTHOR_DATE": "1970-01-01T00:00:00+0000",
+    "GIT_COMMITTER_DATE": "1970-01-01T00:00:00+0000",
+}
+SEAL_MESSAGE = "UCI-000001 frozen extraction"
+
+
+def seal(destination: str) -> str:
+    """Make the extraction a git repository whose HEAD is exactly the archived content.
+
+    WHY THIS IS NECESSARY AND NOT A COMPROMISE OF IMMUTABILITY.
+
+    ``git archive`` emits no ``.git``, and this repository's code requires one. Measured: the suite
+    cannot be collected from a bare extraction at all —
+    ``engine/execution_environment/discovery.py:79`` raises "no repository root could be resolved
+    ... git did not answer and no .git was found" and pytest aborts during collection. It is not an
+    isolated case: ``engine/enforcement_closure/discovery.tracked_paths`` treats a missing work tree
+    as a FAULT by design, and every gate that derives its population from ``git ls-files`` does the
+    same. So an extraction with no git is not a stricter measurement — it is an unmeasurable one.
+
+    A sealed extraction is STRICTER than the working tree it came from, not weaker: the commit
+    contains exactly the tracked content of the source SHA, there are no untracked or ignored files
+    to leak in, ``git status`` is clean by construction, and nothing can advance HEAD because
+    nothing else knows the repository exists. The seal's own SHA is deterministic, so it is
+    reported alongside the source SHA and the pair is the provenance.
+    """
+    env = dict(os.environ)
+    env.update(SEAL_ENV)
+    for args in (
+        ["init", "-q", "--initial-branch=frozen"],
+        ["add", "-A"],
+        ["commit", "-q", "--no-verify", "-m", SEAL_MESSAGE],
+    ):
+        result = subprocess.run(  # noqa: S603
+            ["git", *args],  # noqa: S607
+            cwd=destination,
+            capture_output=True,
+            text=True,
+            check=False,
+            env=env,
+        )
+        if result.returncode != 0:
+            raise IntegrityError(
+                f"could not seal the extraction ({' '.join(args)}): {result.stderr.strip()}"
+            )
+    # The harness's own artifacts land inside the extraction: the virtualenv, the coverage data
+    # files, the readiness marker. They are excluded through .git/info/exclude, which is itself
+    # untracked, so the sealed COMMIT stays exactly the archived content while `git status` inside
+    # the extraction still reports clean. Without this, every purity check run inside an extraction
+    # would report the measurement apparatus as repository contamination.
+    exclude = os.path.join(destination, ".git", "info", "exclude")
+    os.makedirs(os.path.dirname(exclude), exist_ok=True)
+    with open(exclude, "a", encoding="utf-8") as handle:
+        handle.write("\n".join(["", "/.uci-venv/", "/.uci-*", ""]))
+    return _git(destination, "rev-parse", "HEAD").strip()
+
+
 def prepare(
     root: str,
     sha: str,
@@ -230,11 +300,13 @@ def prepare(
                     python=python or sys.executable,
                     reused=True,
                     prepare_seconds=time.monotonic() - started,
+                    sealed_sha=recorded.get("sealed_sha", ""),
                 )
 
     if os.path.exists(destination):
         shutil.rmtree(destination)
     extract(root, sha, destination)
+    sealed = seal(destination)
 
     python = sys.executable
     if build_venv:
@@ -242,7 +314,12 @@ def prepare(
 
     with open(marker, "w", encoding="utf-8") as handle:
         json.dump(
-            {"sha": sha, "dependency_digest": dependency, "python": python},
+            {
+                "sha": sha,
+                "sealed_sha": sealed,
+                "dependency_digest": dependency,
+                "python": python,
+            },
             handle,
             indent=1,
             sort_keys=True,
@@ -253,6 +330,7 @@ def prepare(
         python=python,
         reused=False,
         prepare_seconds=time.monotonic() - started,
+        sealed_sha=sealed,
     )
 
 
