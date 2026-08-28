@@ -189,7 +189,7 @@ def files_with_no_execution_path(inv: inventory_module.Inventory) -> list[str]:
         record.path
         for record in inv.files
         if record.measured
-        and record.statements > 20
+        and record.ast_statements > 20
         and not record.execution_paths
         and record.classification in (FILE_EXECUTABLE, FILE_TOOLING)
     )
@@ -352,6 +352,40 @@ def measure(root: str, *, coverage_xml: str | None = None) -> dict[str, object]:
         },
         "totals": inv.totals,
         "scope_drift": inv.scope_drift,
+        "coverage_document": _coverage_document(root, coverage_xml),
         "laws": [r.as_record() for r in results],
         "inventory_digest": inv.digest(),
+    }
+
+
+def _coverage_document(root: str, coverage_xml: str | None) -> dict[str, object] | None:
+    """Report the coverage document's internal consistency, separately from any law.
+
+    Deliberately NOT a ratcheted law. The defect is in ``coverage xml``'s rendering, not in this
+    repository's code, so a ceiling here would be a ceiling on someone else's bug and tightening
+    it would be outside this repository's control. It is surfaced because it is invisible to every
+    summary: the header totals and the terminal report agree exactly while the body is missing 46%
+    of the files, and a gate that reported only percentages would never see it.
+    """
+    from engine.certification_integrity import coverage_data
+
+    candidate = coverage_xml or os.path.join(root, "coverage.xml")
+    if not os.path.exists(candidate):
+        return None
+    try:
+        report = coverage_data.parse(candidate, repository=root)
+    except IntegrityError:
+        return {"parseable": False}
+    declared = report.declared_statements
+    return {
+        "parseable": True,
+        "declared_statements": declared,
+        "statements": report.statements,
+        "files": len(report.files),
+        "missing_from_body": report.missing_from_body,
+        "missing_percent": (
+            round(report.missing_from_body * 100.0 / declared, 2) if declared else 0.0
+        ),
+        "body_is_incomplete": report.body_is_incomplete,
+        "ambiguous_file_keys": len(report.ambiguous_files),
     }

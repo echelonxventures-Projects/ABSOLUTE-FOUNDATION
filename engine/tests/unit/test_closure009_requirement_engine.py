@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import tomllib
 from pathlib import Path
 
 import pytest
@@ -226,11 +227,16 @@ def test_this_test_is_collected_by_the_canonical_test_runner():
     that this file's own root is declared, and additionally that intelligence/tests is
     declared — the omission that left the RIE coverage-isolation regression collected by
     nothing while it claimed to guard canonical identity.
+
+    UCI-000001 — and it broke again, the same way, for the same reason. Reading ``testpaths``
+    as a single LINE is still a formatting assertion: when the list grew past one line (four
+    more roots were admitted, wiring up 3,995 tests that no runner collected), ``startswith
+    ("testpaths")`` matched ``testpaths = [`` and every root moved to a line this check never
+    read. Twice is a pattern, so the scrape is replaced by a TOML parse. ``tomllib`` answers
+    the question the docstring claims to ask, and no reflow of the file can change its answer.
     """
-    pyproject = (REPO / "pyproject.toml").read_text(encoding="utf-8")
-    testpaths = next(
-        line for line in pyproject.splitlines() if line.strip().startswith("testpaths")
-    )
+    with (REPO / "pyproject.toml").open("rb") as handle:
+        testpaths = tomllib.load(handle)["tool"]["pytest"]["ini_options"]["testpaths"]
     for root in ("engine/tests", "platform/tests", "intelligence/tests"):
-        assert f'"{root}"' in testpaths, f"{root} is not a canonical testpath: {testpaths}"
+        assert root in testpaths, f"{root} is not a canonical testpath: {testpaths}"
     assert Path(__file__).resolve().is_relative_to(REPO / "engine" / "tests")

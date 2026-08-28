@@ -202,7 +202,7 @@ def _inventory_with(
             for f in files
             if not (
                 f.measured
-                and f.statements > 20
+                and f.ast_statements > 20
                 and not f.execution_paths
                 and f.classification in (FILE_EXECUTABLE, FILE_TOOLING)
             )
@@ -223,6 +223,7 @@ def _file(
     statements: int = 10,
     execution_paths: tuple[str, ...] = ("f",),
     invocation_sources: tuple[str, ...] = (),
+    ast_statements: int | None = None,
 ) -> Any:
     from engine.certification_integrity.model import FileRecord
 
@@ -237,6 +238,9 @@ def _file(
         invocation_sources=invocation_sources,
         governing_authority=authority,
         exclusion_reason=None,
+        # UCI-L-06 sizes files by their AST count, never by the coverage-intersected count, so a
+        # synthetic offender must carry it or the law correctly declines to flag it.
+        ast_statements=statements if ast_statements is None else ast_statements,
     )
 
 

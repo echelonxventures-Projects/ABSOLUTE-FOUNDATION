@@ -196,6 +196,12 @@ class FileRecord:
     invocation_sources: tuple[str, ...]
     governing_authority: str
     exclusion_reason: str | None
+    #: Statement count from the AST alone, NEVER intersected with a coverage report. ``statements``
+    #: is intersected when one is present, so a law that used it for a size threshold answered
+    #: differently depending on whether coverage.xml happened to exist — measured: UCI-L-06 moved
+    #: 10 -> 9 on exactly that, with no file changed. A law whose verdict depends on the presence
+    #: of an artifact it does not measure is not a law about the repository.
+    ast_statements: int = 0
 
     @property
     def coverage_percent(self) -> float | None:

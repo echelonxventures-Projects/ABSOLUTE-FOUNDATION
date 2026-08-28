@@ -179,6 +179,7 @@ def build(root: str, *, coverage_xml: str | None = None) -> Inventory:
         )
         objects = by_module.get(path, [])
         statements = sum(o.statements for o in objects)
+        ast_statements = _ast_statements(text)
         covered = sum(o.covered for o in objects)
         measured = scope.measures(path)
         # Execution paths: the callable entry points inside the file. A module with 40 functions
@@ -208,6 +209,7 @@ def build(root: str, *, coverage_xml: str | None = None) -> Inventory:
                 invocation_sources=tuple(sorted(planes)),
                 governing_authority=_authority(path, measured, classification, rule_id),
                 exclusion_reason=exclusion,
+                ast_statements=ast_statements,
             )
         )
 
@@ -240,6 +242,17 @@ def build(root: str, *, coverage_xml: str | None = None) -> Inventory:
         ungoverned_files=ungoverned,
         scope_drift=_scope_drift(scope, surf),
     )
+
+
+def _ast_statements(text: str) -> int:
+    """Statement count from the source alone. Independent of any coverage measurement."""
+    import ast
+
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return 0
+    return len({node.lineno for node in ast.walk(tree) if isinstance(node, ast.stmt)})
 
 
 def _authority(path: str, measured: bool, classification: str, rule_id: str) -> str:

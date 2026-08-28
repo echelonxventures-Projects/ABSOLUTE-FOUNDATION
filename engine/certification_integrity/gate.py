@@ -77,6 +77,20 @@ def _render(report: dict[str, Any]) -> str:
         f"  inventory digest   : {report['inventory_digest'][:16]}",
         f"  STATUS             : {report['status']}",
     ]
+    integrity = report.get("coverage_document")
+    if isinstance(integrity, dict) and integrity.get("body_is_incomplete"):
+        lines[-2:-2] = [
+            "-" * 78,
+            "  !! COVERAGE DOCUMENT IS INTERNALLY INCONSISTENT",
+            f"     root element declares : {integrity['declared_statements']:,} statements",
+            f"     body actually contains: {integrity['statements']:,} in "
+            f"{integrity['files']} files",
+            f"     absent from the body  : {integrity['missing_from_body']:,} "
+            f"({integrity['missing_percent']}%)",
+            "     coverage xml drops files whose relative names collide across source roots.",
+            "     The percentage is unaffected, so every summary agrees; only a per-file",
+            "     consumer sees the loss, and absence renders as nothing rather than as zero.",
+        ]
     if report["status"] == CLOSED:
         lines.append("  a blocking law was measured and REFUSED — see the detail above")
     return "\n".join(lines)
