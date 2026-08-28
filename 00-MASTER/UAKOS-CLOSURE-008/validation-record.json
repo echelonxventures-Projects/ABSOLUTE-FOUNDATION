@@ -35,7 +35,7 @@
       "verify.sh",
       "scripts/ucos-env.sh"
     ],
-    "stages_digest": "6c96d12478e30e5df2bef46290d4feaa02f0b3a6f1984b12e9907329e2649fc9",
+    "stages_digest": "7d5ce23b43db34eef4cd221eb63beb35c40139c5053d79883ae9579ab1f930cb",
     "stages_digest_definition": "sha256 over the newline-joined stage names this contract declares, read from verify.sh. A gate added to the contract and not to this record fails the record's own test."
   },
   "result": "PASS",
@@ -90,6 +90,18 @@
     },
     {
       "stage": "universal verification intelligence (UVI-000001, selection derived and assurance preserved)",
+      "result": "PASS"
+    },
+    {
+      "stage": "universal construct foundation (UCON-000001, every construct disposed and nothing silently ignored)",
+      "result": "PASS"
+    },
+    {
+      "stage": "universal enforcement closure (UEC-000001, every protection governed, invoked twice and covered)",
+      "result": "PASS"
+    },
+    {
+      "stage": "universal recursive knowledge foundation (URKE-000001, every unknown governed and no mechanism closed against a future domain)",
       "result": "PASS"
     },
     {

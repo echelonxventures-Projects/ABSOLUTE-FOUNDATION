@@ -400,6 +400,77 @@ def _r08_authored_document(subject: Subject, repo: Repository, boundary: dict) -
 
 #: Rule id to predicate. Two-sided, exactly like LAW_CHECKS: a declared rule with no
 #: predicate cannot be evaluated, and a predicate no rule declares is dead code.
+#: Matches the alternation R-09 states in its own predicate text, e.g.
+#: "(determination|analysis|assessment|...)". Deriving the markers is what keeps them from
+#: becoming a second vocabulary: a hardcoded tuple beside a declared alternation is two lists
+#: that nobody reconciles, and an unreconciled second list is how R-09 came to be declared with
+#: no predicate at all.
+_ALTERNATION = re.compile(r"\(([a-z]+(?:\|[a-z]+)+)\)")
+
+
+def _analysis_markers(boundary: dict) -> tuple[str, ...]:
+    """The filename markers Class 8's `analysis-artifact` criterion names, read from the register.
+
+    Read from R-09's declared predicate rather than restated here, so the code cannot drift from
+    the rule it implements — the markers can only change by changing the declaration. A register
+    that states no alternation is a fault, not an empty vocabulary: an empty marker set would
+    make the criterion unsatisfiable and Class 8 would silently claim nothing while every report
+    stayed green, which is the vacuity this classifier exists to refuse.
+    """
+    for rule in boundary["classification_rules"]["rules"]:
+        if str(rule.get("id")) != "R-09":
+            continue
+        match = _ALTERNATION.search(str(rule.get("predicate", "")))
+        if not match:
+            raise ClassificationError(
+                "R-09 states no filename-marker alternation in its predicate, so its "
+                "`analysis-artifact` criterion could never be satisfied and Class 8 would claim "
+                "nothing while reporting no error"
+            )
+        return tuple(match.group(1).split("|"))
+    raise ClassificationError("the register declares no rule R-09")
+
+
+def governed_analysis_checks(path: str, repo: Repository, boundary: dict) -> dict[str, bool]:
+    """Each of Class 8's six membership criteria, individually, mirroring Class 6 and 7.
+
+    Five of the six are Class 7's, evaluated through the same helpers rather than restated:
+    a second copy of `authored`, `repository-controlled` or `self-declared-authority` would be
+    a second definition of one criterion, and the two would drift. The sixth — `analysis-artifact`
+    — is what separates an analytical work product from general governance prose.
+    """
+    name = path.rsplit("/", 1)[-1].lower()
+    return {
+        **authored_document_checks(path, repo),
+        "analysis-artifact": any(marker in name for marker in _analysis_markers(boundary)),
+    }
+
+
+def _r09_governed_analysis(subject: Subject, repo: Repository, boundary: dict) -> bool:
+    """R-09 — Class 8, GOVERNED_ANALYSIS.
+
+    THIS PREDICATE DID NOT EXIST, AND ITS ABSENCE DISABLED THE WHOLE CLASSIFIER. The register
+    declared R-01..R-09 and this module implemented R-01..R-08, so `validate_rule_coverage`
+    reported "rule 'R-09' is declared but no predicate implements it" and `classify()` returned
+    ERROR for EVERY subject — not just for an analysis artifact. Twenty-eight tests in this
+    suite failed at HEAD for that one reason, and the failure is the exact shape this suite's
+    own docstring warns about: "a rule nobody evaluates is prose, and prose is what let
+    uisd-declaration.json be authored, owned, engine-consumed and unclassified while six of its
+    mutations were certified."
+
+    PRECEDENCE IS TAKEN FROM THE REGISTER, NOT FROM THE PROSE. R-09 is declared at precedence 9,
+    which places it AFTER R-08 — so a markdown artifact that satisfies both is an
+    AUTHORED_DOCUMENT, and Class 8 takes what R-08 leaves. The class body's
+    `$distinction_from_authored_document` note asserted the opposite ("R-09 evaluates before
+    R-08"); the machine-readable `precedence` field is what `classify()` reads and is therefore
+    the authority, and the prose has been corrected to match rather than the ordering silently
+    changed to match the prose.
+    """
+    if subject.kind != PATH:
+        return False
+    return all(governed_analysis_checks(subject.identity, repo, boundary).values())
+
+
 RULE_PREDICATES: dict[str, Callable[[Subject, Repository, dict], bool]] = {
     "R-01": _r01_repository_state,
     "R-02": _r02_exclusion,
@@ -409,6 +480,7 @@ RULE_PREDICATES: dict[str, Callable[[Subject, Repository, dict], bool]] = {
     "R-06": _r06_governed_declaration,
     "R-07": _r07_source,
     "R-08": _r08_authored_document,
+    "R-09": _r09_governed_analysis,
 }
 
 
@@ -500,6 +572,7 @@ __all__ = [
     "authority_for",
     "classify",
     "classify_all",
+    "governed_analysis_checks",
     "governed_declaration_checks",
     "load_boundary",
     "unresolved",

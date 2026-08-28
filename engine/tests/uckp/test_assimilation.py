@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import dataclasses
 import json
+import re
+from collections import Counter
 
 import pytest
 
@@ -241,9 +243,37 @@ def test_semantic_definitions_are_unique_even_though_names_collide(repo_root):
     assert len(definitions) == len(records)
 
 
-def test_shared_names_are_reported_rather_than_absorbed(assimilation_report):
-    assert len(assimilation_report.shared_semantic_names) == 21
-    assert any("x47" in entry for entry in assimilation_report.shared_semantic_names)
+def test_shared_names_are_reported_rather_than_absorbed(assimilation_report, repo_root):
+    """The property is REPORTING, and the count is a fact about a corpus that keeps growing.
+
+    This assertion used to pin the literal 21. The corpus reached 23 and the test failed for a
+    reason unrelated to anything it names — the report was working exactly as intended. A test
+    that goes red whenever the repository grows teaches its readers to bump the number, and a
+    number people bump on sight is not an assertion.
+
+    So the population is DERIVED from the same registry the report reads, and the two must
+    agree exactly. That is strictly stronger than the literal: it fails if the report drops a
+    collision (absorption, the defect this test exists to catch), it fails if the report invents
+    one, and it cannot go stale.
+    """
+    _, records = load_artifact_registry(repo_root)
+    counts = Counter(str(record.get("name", "")).strip() for record in records)
+    expected = {name for name, total in counts.items() if total > 1}
+
+    reported = assimilation_report.shared_semantic_names
+    assert reported, "no shared name was reported at all, so this test would hold vacuously"
+    assert len(reported) == len(expected), (
+        f"the report names {len(reported)} shared semantic names and the registry carries "
+        f"{len(expected)}; a name that collides and is not reported has been absorbed"
+    )
+
+    # Every entry carries its multiplicity, which is what makes a collision READABLE rather
+    # than merely counted — absorbing a name and reporting the survivor would satisfy a bare
+    # count and lose the fact.
+    for entry in reported:
+        assert re.search(r" x\d+$", entry), f"{entry!r} reports no multiplicity"
+    assert max(counts.values()) > 1
+    assert any(entry.endswith(f" x{max(counts.values())}") for entry in reported)
 
 
 def test_unresolvable_traceability_is_reported_and_never_turned_into_an_edge(

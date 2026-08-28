@@ -525,6 +525,54 @@ def reconstruct(
     return first
 
 
+def declaration_document(declaration: MemoryDeclaration | None = None) -> dict[str, Any]:
+    """The declared layer set as a portable document — the "graph restore" half of REQ-43.
+
+    THIS CAPABILITY WAS CERTIFIED IN A CHECKLIST AND IMPLEMENTED NOWHERE.
+    ``test_req_43_upeg_certification.py`` asserts "Declaration serializable to document" and
+    aggregates that assertion into a certification checklist whose docstring reads
+    "REQ-43 CERTIFIED (UPEG operational)". The only serializer in this module took a
+    :class:`SubjectMemory` — a RESOLUTION — so the test called it with a declaration, raised
+    ``TypeError``, and had been failing for long enough that the whole suite was red. A
+    certification checklist that cannot run certifies nothing, and the gap it hid was real:
+    there was no way to export the declared layer set at all.
+
+    Round-trippable by construction: every key here is one :meth:`MemoryLayer.of` requires, so
+    ``MemoryDeclaration.of(declaration_document(d))`` reconstructs ``d``. That is what makes
+    this a restore path rather than a report.
+
+    Emits no timestamp and reads no clock, so two calls over one declaration produce identical
+    bytes.
+    """
+    declaration = declaration or load_declaration()
+    return {
+        "schema": "ucos-ulp-memory-declaration",
+        "version": "1.0.0",
+        "authority": "NONE — DERIVED TRUTH; a projection of the declared layer set",
+        "projection_of": MEMORY_LAYERS_FILE,
+        "declaration_id": declaration.declaration_id,
+        "layers": [
+            {
+                "layer": layer.layer,
+                "ordinal": layer.ordinal,
+                "question": layer.question,
+                "owner": layer.owner,
+                "record": layer.record,
+                "access": {
+                    "mode": layer.access.mode,
+                    "at": list(layer.access.at),
+                    "match_fields": list(layer.access.match_fields),
+                    "contains_fields": list(layer.access.contains_fields),
+                    "kind_field": layer.access.kind_field,
+                    "sequence_field": layer.access.sequence_field,
+                    "value_fields": list(layer.access.value_fields),
+                },
+            }
+            for layer in declaration.layers
+        ],
+    }
+
+
 def to_document(memory: SubjectMemory) -> dict[str, Any]:
     """The resolution as a portable document. Emits no timestamp, so it is replayable."""
     return {
@@ -552,5 +600,6 @@ __all__ = [
     "owners",
     "reconstruct",
     "resolve",
+    "declaration_document",
     "to_document",
 ]

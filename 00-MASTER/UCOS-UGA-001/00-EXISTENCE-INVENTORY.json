@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 6662,
+  "total_objects": 6751,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -190,6 +190,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": ".github/workflows/ucon-gate.yml",
+      "object_class": "CONFIGURATION_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": ".github/workflows",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-CONFIG-000032",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": ".github/workflows/ucos-registration-gate.yml",
       "object_class": "CONFIGURATION_OBJECT",
       "lifecycle": "AUTHORED",
@@ -197,6 +206,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-CONFIG-000020",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": ".github/workflows/uec-gate.yml",
+      "object_class": "CONFIGURATION_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": ".github/workflows",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-CONFIG-000033",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": ".github/workflows/uei-gate.yml",
@@ -260,6 +278,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-CONFIG-000026",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": ".github/workflows/urke-gate.yml",
+      "object_class": "CONFIGURATION_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": ".github/workflows",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-CONFIG-000034",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": ".github/workflows/urrc-gate.yml",
@@ -4215,6 +4242,42 @@
       "first_seen": "commit:bae59755d7e2"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-CON-000082.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002968",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-CON-000083.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002969",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-CON-000084.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002970",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-CON-000085.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002971",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-CRITICALPATH-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -5680,6 +5743,24 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002679",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-DISCOV-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002972",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-DISCOV-000002.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002973",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-DRRAT11ASSES-000001.md",
@@ -9498,6 +9579,15 @@
       "first_seen": "commit:bae59755d7e2"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-MCRFST-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002974",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-MISC-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -10254,6 +10344,15 @@
       "first_seen": "commit:bae59755d7e2"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002975",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-PHASEP-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -10288,6 +10387,78 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002812",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASER-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002976",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASER-000002.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002977",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASER-000003.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002978",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASER-000004.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002979",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASER-000005.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002980",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASER-000006.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002981",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASER-000007.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002982",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASER-000008.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002983",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-PHASEU-000001.md",
@@ -14311,6 +14482,24 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002939",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-UCOSOM-000078.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002984",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-UCOSOM-000079.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002985",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-UCOSOMEGAINF-000001.md",
@@ -22383,6 +22572,24 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-MASTER/UCON-000001/closure-inventory.json",
+      "object_class": "DATA_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCON-000001",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-DATAOBJ-000133",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-MASTER/UCON-000001/ucon-declaration.json",
+      "object_class": "DATA_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCON-000001",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-DATAOBJ-000132",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "00-MASTER/UCOS-AB-001/01-ARCHITECTURE-BASELINE.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -27036,6 +27243,15 @@
       "first_seen": "commit:03179308f5cb"
     },
     {
+      "path": "00-MASTER/UEC-000001/uec-declaration.json",
+      "object_class": "DATA_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UEC-000001",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-DATAOBJ-000134",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "00-MASTER/UEG-000001/ueg-declaration.json",
       "object_class": "DATA_OBJECT",
       "lifecycle": "AUTHORED",
@@ -27943,6 +28159,24 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002346",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "00-MASTER/URKE-000001/build-declaration.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "URKE-000001",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001297",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-MASTER/URKE-000001/urke-declaration.json",
+      "object_class": "DATA_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "URKE-000001",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-DATAOBJ-000135",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "00-MASTER/URRC-000001/00-URRC-DASHBOARD.md",
@@ -31537,6 +31771,22 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "DISCOVERY-CONSOLIDATION-REPORT.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-DISCOV-000001",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "DISCOVERY-REGISTER.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-DISCOV-000002",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
       "path": "ENVIRONMENT-SETUP.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -32882,6 +33132,14 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "MCRF-STREAM-00-TRACKER.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-MCRFST-000001",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
       "path": "MUTATION-OWNERSHIP-DISCOVERY-DETERMINATION.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -33227,6 +33485,22 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "PHASE-O-RESIDUAL-UNCERTAINTY-ELIMINATION-AND-CARDINALITY-CLOSURE-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-PHASEO-000001",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-P-CONSTITUTIONAL-REPRESENTATION-INTEGRITY-AND-TRUTH-PRESERVATION-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-CON-000082",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
       "path": "PHASE-P0-CLOSURE-DETERMINATION.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -33256,6 +33530,86 @@
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
       "universal_id": "UCOS-PHASEP-000004",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-Q-ACT-ATOMICITY-EVIDENCE-EXHAUSTION-AND-CONSTITUTIONAL-ACT-SEMANTICS-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-CON-000083",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-R0-RESIDUAL-UNCERTAINTY-EXHAUSTION-AND-SEARCH-SPACE-CLOSURE-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-PHASER-000001",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-R1-ROOT-SET-INDEPENDENCE-REDUCTION-AND-CANONICAL-BASIS-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-PHASER-000002",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-R2-SIX-ROOT-META-CAUSE-DECOMPOSITION-AND-ONTOLOGICAL-REDUCTION-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-PHASER-000003",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-R3-META-CAUSE-FUNDAMENTALITY-ONTOLOGICAL-FLOOR-FALSIFICATION-AND-SINGLE-SOURCE-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-PHASER-000004",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-R4-BASIS-MEMBER-EXHAUSTION-MOVABILITY-AND-CONSTITUTIONAL-TRANSFORMATION-CAPACITY-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-CON-000084",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-R5-META-A-TRANSFORMATION-CAPACITY-EXHAUSTION-AND-STATE-SPACE-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-PHASER-000005",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-R6-FLOOR-2-FALSIFICATION-RISK-EXHAUSTION-AND-THIRD-META-CAUSE-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-PHASER-000006",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-R7-END-STATE-REACHABILITY-CEILING-ATTRACTOR-AND-TERMINAL-STATE-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-PHASER-000007",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "PHASE-R7B-COMPETENCE-RESOLUTION-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-PHASER-000008",
       "identity_authority": "UMB-IMP-001"
     },
     {
@@ -33771,6 +34125,14 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "UCOS-OMEGA-INFINITY-ABSOLUTE-END-STATE-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-UCOSOM-000078",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
       "path": "UCOS-OMEGA-INFINITY-ADMISSION-BLOCKER-CLOSURE-PREPARATION-DETERMINATION.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -33875,6 +34237,15 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "UCOS-OMEGA-INFINITY-BLOCKER-ERADICATION-AND-IMPLEMENTATION-READINESS-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002987",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "UCOS-OMEGA-INFINITY-C-1-INTER-VOCABULARY-MAPPING-REPRESENTATION-DETERMINATION.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -33976,6 +34347,14 @@
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
       "universal_id": "UCOS-UCOSOM-000031",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "UCOS-OMEGA-INFINITY-FOUNDATION-UNCONDITIONAL-READINESS-DETERMINATION.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-UCOSOM-000079",
       "identity_authority": "UMB-IMP-001"
     },
     {
@@ -34427,6 +34806,15 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "UCOS-UCON-000001-UNIVERSAL-CONSTRUCT-FOUNDATION-DETERMINATION.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-002986",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "UCOS-UNIVERSAL-ASSIMILATION-STATE-DETERMINATION.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -34696,6 +35084,14 @@
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
       "universal_id": "UCOS-W34CUN-000001",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "WP-001A-CONSTITUTIONAL-INTEGRATION-ANALYSIS.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "universal_id": "UCOS-CON-000085",
       "identity_authority": "UMB-IMP-001"
     },
     {
@@ -39714,6 +40110,132 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "engine/construct/__init__.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001276",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/__main__.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001277",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/audit.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001278",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/cli.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001279",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/contract.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001280",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/declaration.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001281",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/disposition.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001282",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/evidence.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001283",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/extension.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001284",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/gate.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001285",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/model.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001286",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/reality.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001287",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/registry.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001288",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/construct/views.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/construct",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001289",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "engine/context/__init__.py",
       "object_class": "EXECUTABLE_OBJECT",
       "lifecycle": "AUTHORED",
@@ -39997,6 +40519,69 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-ENGINE-000286",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "engine/enforcement_closure/__init__.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/enforcement_closure",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001290",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/enforcement_closure/__main__.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/enforcement_closure",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001291",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/enforcement_closure/contract.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/enforcement_closure",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001292",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/enforcement_closure/declaration.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/enforcement_closure",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001293",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/enforcement_closure/discovery.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/enforcement_closure",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001294",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/enforcement_closure/gate.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/enforcement_closure",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001295",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/enforcement_closure/model.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/enforcement_closure",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001296",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "engine/execution_environment/__init__.py",
@@ -40670,6 +41255,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-ENGINE-001236",
       "first_seen": "commit:bb9c27d2733a"
+    },
+    {
+      "path": "engine/infinite_scope/declaration.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/infinite_scope",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001314",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "engine/infinite_scope/gate.py",
@@ -41534,6 +42128,150 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "engine/recursive_knowledge/admission.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001298",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/bridge.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001299",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/composition.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001300",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/contract.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001301",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/declaration.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001302",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/discovery.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001303",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/evidence.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001304",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/evolution.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001305",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/gate.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001306",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/ledger.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001307",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/model.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001308",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/proposal.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001309",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/research.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001310",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/states.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001311",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/subjects.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001312",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "engine/recursive_knowledge/worlds.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/recursive_knowledge",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001313",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "engine/registry/EPIC-002-COMPLETION-REPORT.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -41745,6 +42483,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-ENGINE-001252",
       "first_seen": "commit:bb9c27d2733a"
+    },
+    {
+      "path": "engine/root_ontology/declaration.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/root_ontology",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001315",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "engine/root_ontology/gate.py",
@@ -44086,6 +44833,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "engine/tests/unit/test_construct_foundation.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000838",
+      "first_seen": "commit:446f8a0f6d95"
+    },
+    {
       "path": "engine/tests/unit/test_corpus_currency.py",
       "object_class": "TEST_OBJECT",
       "lifecycle": "AUTHORED",
@@ -44093,6 +44849,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-TESTOBJ-000296",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "engine/tests/unit/test_enforcement_closure.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000839",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "engine/tests/unit/test_errors.py",
@@ -44327,6 +45092,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-TESTOBJ-000815",
       "first_seen": "commit:5eb1a704caf3"
+    },
+    {
+      "path": "engine/tests/unit/test_recursive_knowledge.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000840",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "engine/tests/unit/test_registry_artifacts.py",
@@ -45092,6 +45866,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-ENGINE-000496",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "engine/uckp/payload.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/uckp",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001316",
+      "first_seen": "commit:446f8a0f6d95"
     },
     {
       "path": "engine/uckp/persistence.py",

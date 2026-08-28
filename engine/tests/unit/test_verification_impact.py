@@ -289,16 +289,44 @@ def test_is_full_predicate() -> None:
 # ------------------------------------------------------------------------- CLI
 
 
-def test_cli_bounded_change_exits_zero(capsys) -> None:
-    # engine/temporal/coordinate.py is deliberately NOT used here any more: ADR-0015
-    # (relationship temporal validity) gave it real external dependents in
-    # engine/knowledge and engine/uckp, so a change to it now correctly reaches a
-    # subsystem-level blast radius (4 owners > the len(owners) > 3 threshold,
-    # engine/verification_impact/impact.py:204) and escalates — see
-    # test_cli_selects_the_temporal_tests below, which asserts exactly that. This test's
-    # own purpose is unrelated to temporal specifically: it proves the CLI's healthy
-    # path for a change that is still genuinely narrow today.
-    assert main(["--path", "engine/knowledge/ukip/errors.py", "--quiet"]) == EXIT_BOUNDED
+@pytest.fixture(scope="module")
+def a_currently_bounded_path() -> str:
+    """A path the LIVE graph bounds today, DERIVED rather than named.
+
+    This fixture exists because naming one has now gone stale twice. The test first named
+    `engine/temporal/coordinate.py`; ADR-0015 gave it real external dependents and it correctly
+    began to escalate, so the name was changed to `engine/knowledge/ukip/errors.py` — which by
+    the time of this reading reaches 11 owners and escalates for exactly the same reason. Both
+    times the ENGINE was right and the TEST was stale, and both times the failure looked like a
+    regression in the thing under test.
+
+    A hardcoded example of "a narrow change" is a claim about a dependency graph that is
+    supposed to keep changing. So the example is now taken FROM the graph: the CLI's healthy
+    path is proven on whatever the engine currently bounds. If the engine bounds nothing at all
+    the fixture fails loudly, which is the right answer — a selector that can no longer bound
+    anything has stopped selecting, and that is a finding rather than a green run.
+    """
+    from engine.verification_impact.cli import main as _main
+
+    candidates = [
+        "engine/verification_impact/render.py",
+        "engine/tests/unit/test_verification_impact.py",
+        "engine/knowledge/ukip/errors.py",
+        "engine/temporal/coordinate.py",
+    ]
+    for path in candidates:
+        if _main(["--path", path, "--quiet"]) == EXIT_BOUNDED:
+            return path
+    pytest.fail(
+        "the live impact engine bounds none of the sampled paths, so the bounded CLI path "
+        "cannot be exercised at all. Either the graph now makes every change subsystem-wide "
+        "or the selector has stopped bounding; both are findings, neither is a pass."
+    )
+
+
+def test_cli_bounded_change_exits_zero(capsys, a_currently_bounded_path: str) -> None:
+    """The CLI's healthy path, on a change the live graph genuinely bounds today."""
+    assert main(["--path", a_currently_bounded_path, "--quiet"]) == EXIT_BOUNDED
 
 
 def test_cli_selects_the_temporal_tests(capsys) -> None:
@@ -327,9 +355,10 @@ def test_cli_print_tests_is_empty_when_escalated(capsys) -> None:
     assert capsys.readouterr().out.strip() == ""
 
 
-def test_cli_emits_json(capsys) -> None:
-    # See test_cli_bounded_change_exits_zero for why coordinate.py is not the example.
-    main(["--path", "engine/knowledge/ukip/errors.py", "--json"])
+def test_cli_emits_json(capsys, a_currently_bounded_path: str) -> None:
+    """The bounded report's shape, on a path the live graph bounds. See the fixture for why
+    the example is derived rather than named."""
+    main(["--path", a_currently_bounded_path, "--json"])
     body = json.loads(capsys.readouterr().out)
     assert body["plan"]["scope"] == "changed"
     assert body["impact"]["counts"]["changed"] == 1

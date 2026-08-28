@@ -606,6 +606,113 @@ run_stage "constitutional primitive alignment (UCPA-000001, root ontology measur
 run_stage "universal verification intelligence (UVI-000001, selection derived and assurance preserved)" \
   "$PY" -m engine.verification_intelligence.gate --gate --quiet
 
+# --- Stage 6i: universal construct foundation (UCON-000001) -----------------------
+# The gate that closes the distance between what the constitution DECLARES about unknown,
+# contradictory and future constructs and what the runtime actually DOES with one.
+#
+# The defect it closes, measured before it existed. A construct whose classifying kind was
+# unregistered raised MetaTypeUnknownError (engine/kernel/errors.py) and left no record, so
+# "we governed a refusal" and "we never saw it" were the same observable state. A
+# contradiction was a three-string finding recomputed on each run with no identity and no
+# lifecycle (engine/knowledge/intelligence.py::ConflictFinding). An unknown was a
+# coercion-failure message. So the foundational principle — any presented construct can be
+# represented, governed, traced, researched and disposed without constitutional redesign —
+# was true of the declarations and false of the runtime, and nothing measured the gap.
+#
+# The sixteen laws are computed, and several PERFORM the property rather than inspect a
+# description of it: UCON-L-01 every construct carries exactly one active disposition and
+# the model refuses a forged construct that does not, L-02/L-03 the rule set is total and its
+# catch-all is non-destructive — ESCALATE, never REJECT, because a REJECT catch-all would
+# silently discard precisely the constructs the rules failed to anticipate while reporting a
+# clean fully-covered run, L-04 operators are bound two-way to the declared rules, L-05
+# nothing is silently ignored, checked by arithmetic (the population cannot exceed the
+# presentations) and by requiring a REJECT to remain readable, L-06 unknowns, contradictions,
+# research and discovery objects are governed objects and any construct is promotable to a
+# research object, L-07 recursive discovery reaches a fixed point, L-08 openness performed —
+# eleven categories this repository has never modelled are registered and the package's own
+# source fingerprint must be unchanged, L-09 all nine declared extension points are performed
+# in memory and nothing narrows, L-10 no disposition and no reality state is terminal and
+# every state strong enough to certify can still fall to one that cannot, L-11 admission and
+# reality are independent — the whole 8x8 cross-product is realised and both modules are
+# parsed to confirm neither imports the other, L-12 a verifier that declares no assumptions
+# or no limitations is refused, L-13/L-15 two ratchets that fail in BOTH directions, on an
+# undeclared guarantee claim or a stale exemption and on an undisclosed closure in governed
+# scope or a stale disclosure, L-14 every reality state binds to a UCOS-CEU-001 row CEU
+# actually carries rather than copying it, L-16 determinism.
+#
+# It also carries the extensibility audit: 1,400+ closure mechanisms across the repository,
+# each joined to its declared risk tier, owner, limitation and migration path. That inventory
+# MEASURES and migrates nothing — the ratchet enforces disclosure inside engine/construct/
+# and a non-rising population everywhere else, because a gate demanding zero closures today
+# would have been closed on the day it was written and would then have been deleted.
+#
+# OBSERVE MODE. Reads the declaration, the repository's committed source and its own
+# fingerprint; writes nothing, including to gitignored paths, unless --evidence is passed and
+# it is not. No clock, no network, no subprocess. Exit 1 means a law was measured and refused;
+# exit 2 means no verdict could be reached, which is deliberately a different answer.
+run_stage "universal construct foundation (UCON-000001, every construct disposed and nothing silently ignored)" \
+  "$PY" -m engine.construct.gate --gate --quiet
+
+# --- Stage 6j (MAIN): universal enforcement closure (UEC-000001) ------------------
+# CLOSURE OVER THE ENFORCEMENT SURFACE ITSELF. Every stage above measures some subject.
+# This one measures whether the STAGES, GATES, WORKFLOWS, ENGINES, DECLARATIONS and TESTS
+# still exist, are still governed, are still invoked from two independent planes, and are
+# still covered by a test.
+#
+# WHY IT IS HERE AND NOT ONLY IN CI. The condition it refuses was measured in an isolated
+# worktree at HEAD: seven workflow files deleted — including ec1-ci.yml, the only CI invoker
+# of this script — plus six fail-closed Makefile gate targets, and `uvi-gate` still exited 0,
+# `uaue-gate` still exited 0, and the test suite produced a byte-identical result. UVI
+# reconciles the CONTENTS of this file against the stage registry (UVI-L-03/L-04); nothing
+# measured whether anything still ran it, or whether the other fifty gate targets and thirty
+# workflows were still present. A CI-only gate would leave the local certification path blind
+# to exactly the deletion that removes the CI gate.
+#
+# ROOT CAUSE it closes: the repository's one closure mechanism (REG-AUTO-001) admits
+# .md/.txt/.docx/.json outside .github/ and 00-MASTER/, so 0 of its 1597 registered artifacts
+# are .py or .yml. The enforcement surface is definitionally outside it. UEC is the
+# complementary plane; UEC-L-10 measures that the two do not overlap.
+#
+# READ_ONLY. No writes at all, not even to gitignored paths: there is no --render and no
+# --write, so the gate cannot drift from an artifact it emitted and cannot be satisfied by
+# regenerating its own expectation. Exit 1 means a blocking law refused; exit 2 means no
+# verdict could be reached (no git work tree, so the tracked-path boundary is unknown), which
+# is deliberately a different answer.
+run_stage "universal enforcement closure (UEC-000001, every protection governed, invoked twice and covered)" \
+  "$PY" -m engine.enforcement_closure.gate --gate --quiet
+
+# --- Stage 6k (MAIN): universal recursive knowledge foundation (URKE-000001) ------
+# THE CAPABILITY THIS STAGE RUNS WAS BUILT AND NEVER INVOKED, AND SAYING SO IS THE POINT.
+# A declaration, a sixteen-module engine, thirty-two laws, a 249-subject governed ledger and a
+# passing suite all existed at once, and NOTHING RAN ANY OF IT: no Makefile target, no workflow,
+# no stage here, and no row in UEC-000001's governed enforcement inventory. The files were
+# untracked, so UEC's discovery — which quantifies over `git ls-files` — could not see them
+# either. Every gate in this repository was green while thirty-two laws measured nothing, which
+# is exactly the observable state UEC-L-04 exists to refuse: nothing enforces by existing.
+#
+# WHAT IT MEASURES. That every identified unknown becomes a governed subject carrying identity,
+# a context, a state, an owner and a governing authority; that residual is representable rather
+# than silently dropped; that histories are append-only and nothing admitted can disappear; that
+# the vocabulary lives in the declaration rather than in the code; that no state is terminal and
+# a future domain is admissible by data alone; that discovery reaches a fixed point and never
+# mutates constitutional truth; that no subject exists outside governance or outside context;
+# that the pipeline cannot be bypassed; that no completeness claim is declared; and that two
+# measurements of one state produce identical bytes.
+#
+# TWO OTHER PLANES INVOKE THE SAME GATE — `make urke-gate` and
+# .github/workflows/urke-gate.yml — which is what UEC-L-06 requires: with three, deleting any
+# one of them leaves a signal instead of a silently smaller verification. Removing THIS line
+# now fails UEC-L-02 and the workflow's own verify.sh-binding step, rather than quietly
+# unbinding thirty-two laws the way it did before the stage existed.
+#
+# OBSERVE MODE. It reads the declaration and the repository's committed source, computes, and
+# writes nothing — including to gitignored paths — because --evidence is not passed. No clock,
+# no network, no subprocess, so it cannot dirty the tree and cannot flake. Exit 1 means a
+# blocking law was measured and refused; exit 2 means no verdict could be reached, which is
+# deliberately a different answer.
+run_stage "universal recursive knowledge foundation (URKE-000001, every unknown governed and no mechanism closed against a future domain)" \
+  "$PY" -m engine.recursive_knowledge.gate --gate --quiet
+
 # --- Stage 7 (POST): coverage report (explicit coverage tool invocation) ---------
 # The pytest stage already produced .coverage + coverage.xml; re-summarize with the
 # coverage CLI to prove the coverage tool itself resolves and to surface the total.

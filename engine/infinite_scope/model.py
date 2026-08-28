@@ -19,6 +19,8 @@ from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
 
+from engine.uckp.payload import canonical_payload
+
 
 class InfiniteScopeError(RuntimeError):
     """The declaration or contract is unusable. A FAULT, never a verdict."""
@@ -352,6 +354,14 @@ class AdmissionExercise:
         )
 
 
+#: Parsed fields deliberately outside the certification identity, each with the reason it
+#: cannot reach a verdict. EMPTY, and that is the honest state rather than an oversight: every
+#: field of :class:`InfiniteScopeContract` is a value some law reads, and the contract holds no
+#: source path — it is rehydrated from an already-parsed document, so there is nothing
+#: reader-dependent to exclude.
+DIGEST_EXCLUSIONS: Mapping[str, str] = {}
+
+
 @dataclass(frozen=True, slots=True)
 class InfiniteScopeContract:
     """The rehydrated UISD-000001 declaration."""
@@ -380,6 +390,18 @@ class InfiniteScopeContract:
     gate: Mapping[str, Any]
     probe_id_prefix: str
     admission_exercises: tuple[AdmissionExercise, ...]
+
+    def digest_payload(self) -> dict[str, Any]:
+        """This contract's certification identity: every parsed field, minus declared exclusions.
+
+        Inclusion is the DEFAULT, derived from :func:`dataclasses.fields`, so a field added to
+        this contract is inside the identity on the day it is written rather than on the day
+        somebody remembers to add it to a list. Omitting one requires naming it in
+        :data:`DIGEST_EXCLUSIONS` with the reason it cannot reach a verdict, and the suite fails
+        in BOTH directions — on an undeclared omission and on an exclusion naming a field this
+        contract no longer has.
+        """
+        return canonical_payload(self, exclude=tuple(DIGEST_EXCLUSIONS))
 
     @classmethod
     def from_declaration(cls, doc: Mapping[str, Any]) -> InfiniteScopeContract:

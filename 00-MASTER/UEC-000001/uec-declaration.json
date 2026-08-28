@@ -1,0 +1,1288 @@
+{
+  "artifact_id": "UEC-000001",
+  "name": "Universal Enforcement Closure",
+  "version": "1.0",
+  "authority": "NONE — DERIVED TRUTH. This programme legislates nothing and owns no gate other than its own. It creates no identifier, allocates no ownership, ratifies nothing, and resolves no constitutional question. It owns the QUESTION 'can a protection disappear, be added outside governance, become vacuous, become untested, or become single-pointed without a fail-closed signal' — never the question 'is this repository compliant', which remains with CMG-000001, UCOS-UGA-001, UAUE-000001, UOBC-000001, UISD-000001, UVI-000001 and the coverage floor.",
+  "constitutional_superior": "REG-AUTO-001 owns closure over CORPUS artifacts. UEC owns closure over the ENFORCEMENT surface REG-AUTO-001's boundary definitionally excludes. The two planes are disjoint by measurement (UEC-L-10), not by assertion.",
+  "principle": "A certification-relevant protection cannot disappear, be added outside governance, become unmeasured, become untested, become single-pointed, become vacuous, or fall below its recorded assurance without producing a fail-closed repository signal. Discovery is by rule and never by list, because a hand-written list of gates would agree with itself forever. The governed expectation and the discovered reality are two independently derived sets, and the gate is their comparison in BOTH directions.",
+  "$comment": "Root cause, measured rather than asserted. The repository possesses exactly one closure mechanism over its objects: REG-AUTO-001 registration, enforced by `00-BOOK/tools/ukb.py enforce --pre` as a verify.sh stage. Its boundary is stated in `00-BOOK/tools/config.py`: INCLUDE_EXTENSIONS = ('.md', '.txt', '.docx', '.json') and EXCLUDE_DIR_PREFIXES contains '.github/', '00-MASTER/' and '00-BOOK/tools/'. Measured over the 1597 entries of `00-BOOK/DATA/artifacts.json`: 0 are .py, 0 are .yml, 0 are under .github/, 0 are under 00-MASTER/. Every gate engine, every workflow, every declaration, every test and verify.sh itself is therefore OUTSIDE the only closure mechanism the repository has, and was outside it before the first gate was written. That single condition is the enabling cause of every measured instance, and '00-BOOK/tools/' is excluded on the stated ground that 'the registry must not list itself' — which is exactly why discovery D-09 records the trust anchor as unregistered. UEC does not extend REG-AUTO-001: that would break its stated invariant and is a registry modification H-06 authorizes under no approval. UEC establishes the complementary plane.",
+  "testpaths": [
+    "engine/tests",
+    "platform/tests",
+    "intelligence/tests"
+  ],
+  "$testpaths": "Copied from `pyproject.toml` testpaths. UEC-L-05 asks whether a collected test names a gate, so the roots must be the roots pytest actually collects: a test outside them is a file, not a test.",
+  "corpus_plane": {
+    "owner": "REG-AUTO-001",
+    "boundary_declared_by": "00-BOOK/tools/config.py",
+    "include_extensions": [
+      ".md",
+      ".txt",
+      ".docx",
+      ".json"
+    ],
+    "exclude_dir_prefixes": [
+      ".git/",
+      ".github/",
+      ".kiro/",
+      "00-BOOK/tools/",
+      "00-BOOK/DATA/",
+      "00-BOOK/REGISTRIES/",
+      "00-BOOK/CONTROL-TOWER/",
+      "00-BOOK/VOLUMES/",
+      "00-BOOK/PORTAL/",
+      "00-MASTER/",
+      "intelligence/"
+    ],
+    "$measured": "0 of 1597 registered artifacts are .py or .yml; 0 are under .github/ or 00-MASTER/. UEC-L-10 measures that no enforcement artifact falls inside this boundary, so the two closure mechanisms cannot each claim one object and answer differently about it."
+  },
+  "discovery_rules": [
+    {
+      "rule_id": "UEC-R-01",
+      "kind": "GATE_ENGINE",
+      "strategy": "tracked_glob",
+      "pattern": "00-MASTER/*/*_engine.py",
+      "floor": 30,
+      "owner": "each programme's own owner",
+      "$floor": "39 located at adoption. The floor is deliberately BELOW the census so a governed retirement does not fault the gate, and deliberately far above zero so a broken glob cannot report an empty enforcement plane as a satisfied one."
+    },
+    {
+      "rule_id": "UEC-R-02",
+      "kind": "MODULE_GATE",
+      "strategy": "tracked_glob",
+      "pattern": "engine/*/gate.py",
+      "floor": 5,
+      "owner": "each capability's own owner",
+      "$floor": "8 located at adoption, including UEC's own gate."
+    },
+    {
+      "rule_id": "UEC-R-03",
+      "kind": "WORKFLOW",
+      "strategy": "tracked_glob",
+      "pattern": ".github/workflows/*.yml",
+      "floor": 25,
+      "owner": "gate owner",
+      "$floor": "31 located at adoption. This is the rule that makes the measured E4 deletion — 7 workflow files removed with a byte-identical test outcome — a fail-closed signal."
+    },
+    {
+      "rule_id": "UEC-R-04",
+      "kind": "MAKE_GATE_TARGET",
+      "strategy": "make_targets",
+      "pattern": ".*-gate$",
+      "floor": 40,
+      "owner": "gate owner",
+      "$floor": "51 located at adoption."
+    },
+    {
+      "rule_id": "UEC-R-05",
+      "kind": "VERIFY_STAGE",
+      "strategy": "verify_stages",
+      "root": "verify.sh",
+      "pattern": "",
+      "floor": 12,
+      "owner": "UVI-000001",
+      "$floor": "17 located at adoption. UVI-L-03 already reconciles this population against the UVI stage registry; UEC additionally requires each stage to be governed, so a stage cannot be removed from BOTH the script and the registry in one consistent edit."
+    },
+    {
+      "rule_id": "UEC-R-06",
+      "kind": "DECLARATION",
+      "strategy": "tracked_glob",
+      "pattern": "00-MASTER/*/*-declaration.json",
+      "floor": 15,
+      "owner": "each programme's own owner",
+      "$floor": "19 located at adoption, including UEC's own."
+    }
+  ],
+  "withdrawals": {
+    "cap": 3,
+    "entries": [],
+    "$cap": "The only reduction path, and deliberately expensive. A withdrawal carries an owner, a reason and a date, is capped at three, and is visible in one `git diff` line. Raising the cap is itself a governed edit to this file. A silent deletion has none of those properties, which is the whole difference UEC-L-02 measures.",
+    "$entries": "Empty at adoption. An empty list is NOT vacuous satisfaction here: UEC-L-12 quantifies over withdrawals to check they are reasoned, while UEC-L-02 quantifies over the governed inventory to check nothing vanished. The population that must be non-empty is the inventory, and UEC-L-01 enforces its floor."
+  },
+  "governed_enforcement": [
+    {
+      "identity": "00-MASTER/ACEE-000001/acee-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/BASELINE-001/baseline-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCL-000001/ucl-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCON-000001/ucon-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCOS-CEU-001/ceu-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCOS-RFP-001/rfp-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCOS-UFEP-001/ufep-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCOS-UGA-001/uga-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCOS-URAT-001/urat-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCOS-URR-001/urr-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCOS-UTCE-001/utce-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCPA-000001/ucpa-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UCXI-000001/ucxi-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UEC-000001/uec-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UEG-000001/ueg-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UIS-001/uis-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UISD-000001/uisd-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/URKE-000001/urke-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/UVI-000001/uvi-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": "00-MASTER/ACEE-000001/acee_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/BASELINE-001/baseline_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/MCOS-000001/mcos_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAEP-000001/uaep_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAIE-000001/uaie_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-CLOSURE-002/closure_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-CLOSURE-008/decision_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-CLOSURE-008/superiority_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-PHASE-001B/provenance_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCCEP-000000/uccep_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCDA-000001/ucda_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCEF-000001/ucef_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCL-000001/ucl_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-AEE-001/aee_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-MXR-001/roadmap_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-RFP-001/rfp_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-RIB-001/rib_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-UAR-001/uar_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-UCAF-001/ucaf_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-UFEP-001/ufep_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-URAT-001/urat_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UCOS-UTCE-001/utce_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UEI-000001/uei_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UER-000001/uer_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UIS-001/uis_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UKAP-001/corpus_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UMK-000001/umk_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/UPF-000001/upf_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "00-MASTER/URRC-000001/urrc_engine.py",
+      "kind": "GATE_ENGINE",
+      "owner": "each programme's own owner",
+      "rule_id": "UEC-R-01"
+    },
+    {
+      "identity": "acee-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "aee-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "assimilate-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "baseline-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "birth-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "closure-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "closure-phase2-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "closure-phase3-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "closure009-baseline-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "closure009-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "cmg-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "constitution-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "convergence-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "corpus-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "final-closure-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "foundation-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "freeze-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "homing-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "infinite-scope-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "lifecycle-closure-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "mcos-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "publication-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "research-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "research-publication-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "rfp-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "rib-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "roadmap-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "rpi-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "selfaware-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uaep-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uaie-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uapf-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uar-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uaue-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "ucaf-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uccep-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "ucda-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "ucef-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "ucl-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "ucon-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "ucpa-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uec-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uei-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uer-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "ufep-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uga-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uis-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "umk-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uprf-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "urat-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "urke-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "urrc-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "utce-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "uvi-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "engine/construct/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "engine/enforcement_closure/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "engine/execution_environment/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "engine/infinite_scope/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "engine/object_birth/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "engine/recursive_knowledge/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "engine/root_ontology/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "engine/uaue/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "engine/verification_intelligence/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "autonomous universal evolution (UAUE gate, every declared obligation)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "constitutional primitive alignment (UCPA-000001, root ontology measured and reduced)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "coverage report",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "evolution surface replay (history + 18 registers)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "governance enforce --pre",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "meta-constitutional conformance (CMG-INV-01..12)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "prerequisite generation (knowledge · determinism · closure 1-3)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "pytest + coverage gate (--cov-fail-under=90)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "registration observation (register.sh --observe, read-only)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "registry validate (schema + integrity)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "ruff lint + format-check (engine + platform)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "universal construct foundation (UCON-000001, every construct disposed and nothing silently ignored)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "universal enforcement closure (UEC-000001, every protection governed, invoked twice and covered)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "universal infinite scope and direction (UISD-000001, unbounded and self-applied)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "universal object birth contract (UOBC-000001, identity before existence)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "universal object governance (UGA-INV-01..10)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "universal recursive knowledge foundation (URKE-000001, every unknown governed and no mechanism closed against a future domain)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "universal verification intelligence (UVI-000001, selection derived and assurance preserved)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": ".github/workflows/acee-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/aee-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/assimilation-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/baseline-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/closure009-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/corpus-currency-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/determinism.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/ec1-ci.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/mcos-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/research-publication-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/rfp-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/rib-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/roadmap-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uaep-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uaie-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uar-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uaue-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uccep-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/ucef-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/ucl-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/ucon-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/ucos-registration-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uec-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uei-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uer-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/ufc-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uis-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uisd-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/umk-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/uprf-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/urke-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/urrc-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    }
+  ],
+  "$governed_enforcement": "165 enforcement artifacts, ADOPTED FROM MEASUREMENT and thereafter governed by hand. `make uec-inventory` prints the discovered surface; nothing writes it here. That asymmetry is the whole mechanism: if the observation could rewrite the expectation, then deleting a workflow and re-running the generator would produce a green gate, which is exactly the bypass this programme closes. Adoption and withdrawal are human edits to this file, and the `git diff` is the record a silent deletion does not leave.",
+  "ratchet": {
+    "$comment": "TWO-SIDED, WITH NO SLACK. Each ratcheted law refuses when measured > ceiling, so a NEW violation fails the build immediately. UEC-L-11 refuses when measured < ceiling, so a REPAIRED violation must tighten the ceiling. The satisfied state is measured == ceiling exactly, which leaves no room for a future violation to occupy silently. This is the half `00-MASTER/BASELINE-001/baseline_engine.py:726` lacks: it computes `vacuous: len(declared) == 0`, renders it, and does not close the gate on it.",
+    "governed_artifacts": 172,
+    "engines_without_a_test": 18,
+    "artifacts_with_one_invocation_plane": 16,
+    "declarations_no_code_consumes": 3,
+    "declarations_without_a_certification_identity": 0,
+    "$engines_without_a_test": "18 of 46 gate engines at adoption. Named in full by `make uec`. This is pre-existing debt, capped so it cannot grow, and every entry is a standing UEC-L-05 finding until its ceiling reaches 0.",
+    "$artifacts_with_one_invocation_plane": "16 of 48 gate engines. It read 12 under the previous invocation matcher and 16 under the corrected one, and the difference is a MEASUREMENT that got stricter rather than a repository that got worse: a package or directory name appearing in prose used to count as an invocation plane. Two of the original fourteen were genuinely repaired in the same programme — 00-MASTER/UCOS-UGA-001/uga_engine.py and engine/root_ontology/gate.py, both blocking stages of the canonical gate that could not be run by name, now reachable through `make uga-gate` and `make ucpa-gate`. A single invocation plane remains a single point of failure: 00-MASTER/UCDA-000001/ucda_engine.py is still reachable from one Makefile stanza with no workflow, no test and no verify.sh stage.",
+    "$declarations_no_code_consumes": "3 at adoption: ceu-declaration.json, urr-declaration.json, ucxi-declaration.json. `ucon-declaration.json:5` names ucxi-declaration.json as UCON's constitutional superior, so one authority chain terminates in a document nothing loads.",
+    "declarations_with_uniform_identity": 5,
+    "$declarations_with_uniform_identity": "5 of 19 governed declarations expose the uniform identity interface — a `declaration` module whose `parse()` returns an object with `digest_payload()` — and UEC-L-13 performs the mutation experiment against all five: engine/construct (UCON-000001), engine/enforcement_closure (UEC-000001), engine/recursive_knowledge (URKE-000001), engine/root_ontology (UCPA-000001) and engine/infinite_scope (UISD-000001). Was 3; the two added are the two that previously had NO certification identity at all, so the same change that closed UEC-L-08's population moved them straight to the sufficient condition rather than to the necessary one. Two-sided, like every ceiling here: a sixth package implementing the interface fails until this number is raised deliberately, and a package that DROPS the interface fails too, because silently leaving the measured population is how a detector stops detecting. The remaining fourteen mint digests through paths of their own shape; UEC-L-08 holds the NECESSARY condition over them and the sufficient condition is RECORDED AS UNPROVEN for them rather than assumed.",
+    "$declarations_without_a_certification_identity": "0. Was 2 at adoption — ucpa-declaration.json and uisd-declaration.json, whose owning packages minted no digest at all, so eleven and eight laws respectively returned a verdict attributable to no state. Both now expose the uniform identity interface and are measured by UEC-L-13, not merely by this law. Closing it exposed a second defect in UCPA that only the sufficient condition could see: `ucpa-declaration.json` declared a name, a version, an authority and a principle about itself and `AlignmentContract` parsed none of them, so rewriting the declared authority left the identity byte-identical at 6c09cf89. They are parsed now. The ceiling is zero and two-sided: a new declaration whose owner mints no digest fails immediately.",
+    "engines_with_no_invoker": 6,
+    "$engines_with_no_invoker": "6 of 48 gate engines are invoked by nothing that could run them: 00-MASTER/UAKOS-CLOSURE-008/decision_engine.py, .../superiority_engine.py, 00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py, 00-MASTER/UAKOS-PHASE-001B/provenance_engine.py, 00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py and 00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py. All six read as INVOKED until a hostile audit showed why: invocation was matched with the same generous needles that answer 'does a test name this engine', so `make uakos-archive` checking that four DIRECTORIES exist counted as invoking the engines inside them. The audit's actual attack was worse — pointing every caller of a live gate at a module that does not exist left UEC-L-04 green — and the fix (`discovery._invocation_needles`) is what surfaced these six. Recording them raises assurance: the law could not fail before and now names, caps and ratchets its population.",
+    "discovery_floor_total": 127,
+    "$discovery_floor_total": "127 — the sum of every declared discovery floor. Ratcheted because a hostile audit set every floor to 1 and UEC-L-01 stayed green: each rule still located far more than one artifact, so the non-vacuity guarantee vanished while the measurement kept reporting satisfaction. Two-sided like every ceiling here, so lowering any floor fails immediately and raising one is the same deliberate act as repairing a violation. A floor that can be edited downward guarantees nothing."
+  },
+  "self_coverage": {
+    "$comment": "Discovery D-09 — 'trust anchor -> REG-AUTO-001, itself unregistered' — promoted from a dependency edge into an executable invariant. Every artifact below must be located by UEC's own discovery rules AND present in UEC's own governed inventory AND satisfy the two-plane and test-binding laws UEC applies to everything else. A closure mechanism outside its own closure is the defect, not the exception to it.",
+    "artifacts": [
+      {
+        "identity": "engine/enforcement_closure/gate.py",
+        "kind": "MODULE_GATE"
+      },
+      {
+        "identity": "00-MASTER/UEC-000001/uec-declaration.json",
+        "kind": "DECLARATION"
+      },
+      {
+        "identity": ".github/workflows/uec-gate.yml",
+        "kind": "WORKFLOW"
+      },
+      {
+        "identity": "uec-gate",
+        "kind": "MAKE_GATE_TARGET"
+      },
+      {
+        "identity": "universal enforcement closure (UEC-000001, every protection governed, invoked twice and covered)",
+        "kind": "VERIFY_STAGE"
+      }
+    ]
+  },
+  "laws": [
+    {
+      "law_id": "UEC-L-01",
+      "check": "discovery_rules_are_non_vacuous",
+      "blocking": true,
+      "concern": "VACUITY",
+      "statement": "Every discovery rule locates at least its declared floor, no floor is zero, and the enforcement plane is non-empty."
+    },
+    {
+      "law_id": "UEC-L-02",
+      "check": "declared_enforcement_exists",
+      "blocking": true,
+      "concern": "DELETION",
+      "statement": "Every governed enforcement artifact is still present. Removing one requires a declared withdrawal with an owner and a reason."
+    },
+    {
+      "law_id": "UEC-L-03",
+      "check": "discovered_enforcement_is_governed",
+      "blocking": true,
+      "concern": "UNGOVERNED ADDITION",
+      "statement": "Every located enforcement artifact is in the governed inventory or explicitly withdrawn. A protection outside governance is one nothing knows it depends on."
+    },
+    {
+      "law_id": "UEC-L-04",
+      "check": "every_engine_has_an_invoker",
+      "blocking": true,
+      "concern": "DEAD ENFORCEMENT",
+      "statement": "Every gate engine is invoked by at least one Makefile target, workflow or verification stage. Nothing enforces by existing."
+    },
+    {
+      "law_id": "UEC-L-05",
+      "check": "every_engine_has_a_test",
+      "blocking": true,
+      "concern": "UNTESTED DETECTOR",
+      "statement": "The number of gate engines no test names may not exceed the declared ceiling. A detector with no test is a detector nobody has shown can fail."
+    },
+    {
+      "law_id": "UEC-L-06",
+      "check": "no_single_invocation_plane",
+      "blocking": true,
+      "concern": "SINGLE POINT OF FAILURE",
+      "statement": "The number of enforcement artifacts reachable from only one invocation plane may not exceed the declared ceiling. Two independent planes mean deleting one leaves a signal."
+    },
+    {
+      "law_id": "UEC-L-07",
+      "check": "every_declaration_is_consumed",
+      "blocking": true,
+      "concern": "INERT DECLARATION",
+      "statement": "The number of declarations no module loads may not exceed the declared ceiling. Every field of an unloaded declaration is unenforced."
+    },
+    {
+      "law_id": "UEC-L-08",
+      "check": "certification_identity_exists",
+      "blocking": true,
+      "concern": "CERTIFICATION IDENTITY",
+      "statement": "The number of declarations whose owner mints no digest at all may not exceed the declared ceiling. A declaration with no certification identity cannot be certified."
+    },
+    {
+      "law_id": "UEC-L-09",
+      "check": "self_coverage_is_a_fixed_point",
+      "blocking": true,
+      "concern": "GUARD OF GUARD",
+      "statement": "UEC's own declaration, gate, workflow, Makefile target and verification stage are located by UEC's own rules, governed by UEC's own inventory, invoked from two planes, and covered by a test."
+    },
+    {
+      "law_id": "UEC-L-10",
+      "check": "planes_are_disjoint",
+      "blocking": true,
+      "concern": "PLANE PARTITION",
+      "statement": "No enforcement artifact falls inside the corpus registration boundary. Two closure mechanisms may not each claim one object."
+    },
+    {
+      "law_id": "UEC-L-11",
+      "check": "no_assurance_reduction",
+      "blocking": true,
+      "concern": "RATCHET SLACK",
+      "statement": "No ratcheted measurement is below its declared ceiling. A repaired violation must tighten the ceiling, so no slack remains for a future violation to occupy."
+    },
+    {
+      "law_id": "UEC-L-12",
+      "check": "withdrawals_are_reasoned_and_capped",
+      "blocking": true,
+      "concern": "ESCAPE HATCH",
+      "statement": "Every withdrawal carries an owner, a reason and a date; the total does not exceed the declared cap; and no withdrawn artifact is still present and still discovered."
+    },
+    {
+      "law_id": "UEC-L-13",
+      "check": "certification_identity_is_complete",
+      "blocking": true,
+      "concern": "CERTIFICATION IDENTITY",
+      "statement": "Every semantic mutation of a governed declaration MOVES its certification identity. UEC-L-08 asks only whether an identity exists; a stable digest over a projection certifies two different declarations with one value."
+    }
+  ],
+  "gate": {
+    "command": "python -m engine.enforcement_closure.gate --gate",
+    "exit_codes": {
+      "0": "OPEN",
+      "1": "CLOSED",
+      "2": "FAULT"
+    },
+    "plane": "READ_ONLY",
+    "invoked_by": [
+      "make uec-gate",
+      ".github/workflows/uec-gate.yml",
+      "verify.sh"
+    ],
+    "$plane": "The gate writes nothing. There is no --render and no --write, deliberately: a gate that emits no artifact cannot drift from it, and cannot be satisfied by regenerating its own expectation. `--inventory` prints to stdout for a human to paste into this file; the diff is the governed record."
+  }
+}

@@ -109,8 +109,32 @@ def test_the_partition_is_exact(matrix) -> None:
     assert sum(governed.values()) == matrix["objects"]["total"]
 
 
-def test_the_two_planes_are_disjoint() -> None:
-    """artifacts.json ∩ id-ledger.by_object must be empty."""
+#: The measured raw-path overlap between the two registries. It is 192 historical identities
+#: minted into `id-ledger.json` for objects the CORPUS plane governs — retained, not governed,
+#: which is a state the declaration already models and the report already prints. It is held as
+#: a RATCHET rather than driven to zero here, because removing an entry from a permanent
+#: append-only identity ledger to make a coverage report green would violate identity
+#: immutability (UOBC-L-03/L-08) and the single-identity-authority invariant (CAA-INV-04) —
+#: repairing a measurement by mutating the thing it measures.
+RETAINED_NOT_GOVERNED_OVERLAP = 192
+
+
+def test_the_two_planes_are_disjoint_IN_GOVERNANCE() -> None:
+    """The property the declaration actually states, measured — plus a ratchet on the rest.
+
+    THIS TEST ASSERTED SOMETHING THE DECLARATION DOES NOT CLAIM, AND FAILED CONTINUOUSLY FOR IT.
+    It required the two registries' raw path sets to be disjoint. But `declarations.json` gives
+    each plane `holds_object_classes` to say WHICH objects it governs, and the matrix's own
+    report carries `$retained_not_governed`: "A plane may hold MORE entries than it holds
+    governed objects, and the difference is not a discrepancy." Raw-path disjointness contradicts
+    the existence of that state. The measured overlap is 192 DOCUMENT_ARTIFACTs carrying a
+    historical identity in the repository ledger while the corpus plane governs them — and the
+    REPOSITORY plane does not declare DOCUMENT_ARTIFACT at all.
+
+    So the assertion is now the declared property: no object is governed by two planes. The raw
+    overlap is kept as a two-sided ratchet so the historical residue cannot grow silently and a
+    reduction must be recorded here.
+    """
     import os
 
     root = repo_root()
@@ -118,7 +142,64 @@ def test_the_two_planes_are_disjoint() -> None:
         corpus = {a["path"] for a in json.load(h)["artifacts"]}
     with open(os.path.join(root, "00-BOOK", "DATA", "id-ledger.json"), encoding="utf-8") as h:
         repository = set(json.load(h)["by_object"])
-    assert corpus & repository == set()
+
+    matrix = build()
+    assert matrix["objects"]["states"][DUPLICATE_REGISTRATION] == 0, [
+        f["path"] for f in matrix["findings"] if f["state"] == DUPLICATE_REGISTRATION
+    ][:5]
+
+    assert len(corpus & repository) == RETAINED_NOT_GOVERNED_OVERLAP, (
+        "the retained-not-governed residue moved. It may only fall, and a fall must be recorded "
+        f"here: measured {len(corpus & repository)}, declared {RETAINED_NOT_GOVERNED_OVERLAP}"
+    )
+
+
+def test_a_class_declared_by_two_planes_is_refused() -> None:
+    """The partition is measured on every build, never assumed.
+
+    `plane_of_class` is a dict comprehension: two planes declaring one class would silently keep
+    the last, and the duplicate rule would lose the ability to see a genuinely double-governed
+    object. The refusal is what makes governance-disjointness enforceable rather than hopeful.
+    """
+    import dataclasses
+
+    declarations = load_declarations()
+    planes = list(declarations.planes)
+    forged = dataclasses.replace(
+        declarations,
+        planes=(
+            dataclasses.replace(
+                planes[0], object_classes=(*planes[0].object_classes, *planes[1].object_classes)
+            ),
+            *planes[1:],
+        ),
+    )
+    with pytest.raises(CoverageError, match="do not partition"):
+        build(declarations=forged)
+
+
+def test_an_object_no_plane_governs_is_still_unregistered() -> None:
+    """The fix reads the declaration; it must not have made the matrix permissive.
+
+    Scoping `planes_holding` by declared class could have been a way to make every object look
+    covered. It is not: a declaration under which no plane governs anything reports the whole
+    population UNREGISTERED and `validate` refuses it.
+    """
+    import dataclasses
+
+    declarations = load_declarations()
+    planes = list(declarations.planes)
+    forged = dataclasses.replace(
+        declarations,
+        planes=(
+            dataclasses.replace(planes[0], object_classes=("A_CLASS_NOTHING_HAS",)),
+            dataclasses.replace(planes[1], object_classes=("ANOTHER_CLASS_NOTHING_HAS",)),
+        ),
+    )
+    matrix = build(declarations=forged)
+    assert matrix["objects"]["states"][UNREGISTERED] == matrix["objects"]["total"]
+    assert matrix["objects"]["states"][COVERED] == 0
+    assert validate(matrix, forged)
 
 
 def test_the_generated_registry_is_contained_in_the_repository_plane() -> None:

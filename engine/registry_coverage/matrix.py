@@ -223,6 +223,27 @@ def build(repo: str | None = None, declarations: Declarations | None = None) -> 
     plane_registries = {p.registry for p in declarations.planes}
     plane_of_class = {c: p for p in declarations.planes for c in p.object_classes}
 
+    # THE PARTITION IS REFUSED, NOT ASSUMED. `plane_of_class` is a dict comprehension, so two
+    # planes declaring one object class would silently keep the LAST one — and with the class
+    # map quietly single-valued, `governs()` below would stop being able to see a genuine
+    # double-governed object at all. The declaration's own $plane_comment says the partition is
+    # "MEASURED on every build, never assumed"; this is the line that makes that true.
+    overlapping = sorted(
+        klass
+        for klass in {c for plane in declarations.planes for c in plane.object_classes}
+        if sum(1 for plane in declarations.planes if klass in plane.object_classes) > 1
+    )
+    if overlapping:
+        raise CoverageError(
+            "the registration planes do not partition the object classes: "
+            f"{overlapping} is declared by more than one plane, so the class-to-plane map is "
+            "not single-valued and duplicate registration could not be detected for it"
+        )
+
+    classes_governed = {
+        plane.name: frozenset(plane.object_classes) for plane in declarations.planes
+    }
+
     registered: dict[str, set[str]] = {}
     for plane in declarations.planes:
         document = _read_json(repo, plane.registry) or {}
@@ -243,7 +264,28 @@ def build(repo: str | None = None, declarations: Declarations | None = None) -> 
     for obj in objects:
         path, klass = str(obj.get("path")), str(obj.get("object_class"))
         holder = plane_of_class.get(klass)
-        planes_holding = [name for name, paths in registered.items() if path in paths]
+        # GOVERNING, NOT MERELY PRESENT — and the difference is the declaration's own.
+        #
+        # This used to be "every plane whose registry contains this path", which conflated
+        # holding an entry with governing an object. The report immediately below it says the
+        # opposite in prose ($retained_not_governed: "A plane may hold MORE entries than it
+        # holds governed objects, and the difference is not a discrepancy"), and each plane
+        # declares `holds_object_classes` precisely to say WHICH objects it governs — a field
+        # this rule did not read. The consequence was measured: 192 root-level
+        # DOCUMENT_ARTIFACTs carry a historical identity in `id-ledger.json` and are governed by
+        # `artifacts.json`, and every one of them was reported DUPLICATE_REGISTRATION even
+        # though the REPOSITORY plane declares it does not hold that class at all. Three tests
+        # failed on it continuously.
+        #
+        # Detection is not weakened by reading the declaration; it is made precise. An object
+        # whose class TWO planes declare is still a duplicate, an object no plane governs is
+        # still UNREGISTERED, and the disjointness refusal above makes the first case
+        # detectable rather than silently collapsed.
+        planes_holding = [
+            name
+            for name, paths in registered.items()
+            if path in paths and klass in classes_governed[name]
+        ]
         if len(planes_holding) > 1:
             state = DUPLICATE_REGISTRATION
             findings.append(

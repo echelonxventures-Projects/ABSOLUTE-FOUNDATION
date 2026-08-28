@@ -62,7 +62,7 @@
       "meaning": "the evidence class the object's governance records belong to"
     }
   },
-  "count": 36982,
+  "count": 37540,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -7125,6 +7125,86 @@
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
     {
+      "from": "UCOS-CON-000082",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-CON-000082",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-CON-000082",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-CON-000082",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-CON-000083",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-CON-000083",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-CON-000083",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-CON-000083",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-CON-000084",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-CON-000084",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-CON-000084",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-CON-000084",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-CON-000085",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-CON-000085",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-CON-000085",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-CON-000085",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
       "from": "UCOS-CONFIG-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -7741,6 +7821,66 @@
     },
     {
       "from": "UCOS-CONFIG-000031",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-CONFIG-000032",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-CONFIG-000032",
+      "kind": "owned_by",
+      "to": ".github/workflows"
+    },
+    {
+      "from": "UCOS-CONFIG-000032",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-CONFIG-000032",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-CONFIG-000033",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-CONFIG-000033",
+      "kind": "owned_by",
+      "to": ".github/workflows"
+    },
+    {
+      "from": "UCOS-CONFIG-000033",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-CONFIG-000033",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-CONFIG-000034",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-CONFIG-000034",
+      "kind": "owned_by",
+      "to": ".github/workflows"
+    },
+    {
+      "from": "UCOS-CONFIG-000034",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-CONFIG-000034",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -13365,6 +13505,86 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
+      "from": "UCOS-DATAOBJ-000132",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000132",
+      "kind": "owned_by",
+      "to": "UCON-000001"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000132",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000132",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000133",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000133",
+      "kind": "owned_by",
+      "to": "UCON-000001"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000133",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000133",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000134",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000134",
+      "kind": "owned_by",
+      "to": "UEC-000001"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000134",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000134",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000135",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000135",
+      "kind": "owned_by",
+      "to": "URKE-000001"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000135",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000135",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
       "from": "UCOS-DEPEND-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -13541,6 +13761,46 @@
     },
     {
       "from": "UCOS-DET-000006",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-DISCOV-000001",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DISCOV-000001",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-DISCOV-000001",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-DISCOV-000001",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-DISCOV-000002",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DISCOV-000002",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-DISCOV-000002",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-DISCOV-000002",
       "kind": "validated_by",
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
@@ -70236,6 +70496,11 @@
     },
     {
       "from": "UCOS-ENGINE-001237",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001237",
       "kind": "evidenced_by",
       "to": "VALIDATION"
     },
@@ -70253,6 +70518,11 @@
       "from": "UCOS-ENGINE-001237",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001238",
+      "kind": "depends_on",
+      "to": "engine/uckp/payload.py"
     },
     {
       "from": "UCOS-ENGINE-001238",
@@ -70796,6 +71066,11 @@
     },
     {
       "from": "UCOS-ENGINE-001253",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001253",
       "kind": "evidenced_by",
       "to": "VALIDATION"
     },
@@ -70813,6 +71088,11 @@
       "from": "UCOS-ENGINE-001253",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001254",
+      "kind": "depends_on",
+      "to": "engine/uckp/payload.py"
     },
     {
       "from": "UCOS-ENGINE-001254",
@@ -71466,6 +71746,1591 @@
     },
     {
       "from": "UCOS-ENGINE-001275",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001276",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001276",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001276",
+      "kind": "depends_on",
+      "to": "engine/construct/registry.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001276",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001276",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001276",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001276",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001277",
+      "kind": "depends_on",
+      "to": "engine/construct/cli.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001277",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001277",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001277",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001277",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001278",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001278",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001278",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001278",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001278",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001278",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001278",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/audit.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/contract.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/disposition.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/evidence.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/extension.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/reality.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/registry.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "depends_on",
+      "to": "engine/construct/views.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001279",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/ceu/catalog.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/construct/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/construct/audit.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/construct/disposition.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/construct/extension.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/construct/reality.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/construct/registry.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/construct/views.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001280",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001281",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001281",
+      "kind": "depends_on",
+      "to": "engine/uckp/payload.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001281",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001281",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001281",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001281",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001282",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001282",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001282",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001282",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001282",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001282",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001283",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001283",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001283",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001283",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001283",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001283",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001284",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001284",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001284",
+      "kind": "depends_on",
+      "to": "engine/construct/registry.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001284",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001284",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001284",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001284",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "depends_on",
+      "to": "engine/construct/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "depends_on",
+      "to": "engine/construct/audit.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "depends_on",
+      "to": "engine/construct/contract.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "depends_on",
+      "to": "engine/construct/evidence.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001285",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001286",
+      "kind": "depends_on",
+      "to": "engine/kernel/identity.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001286",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001286",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001286",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001286",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001286",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001287",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001287",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001287",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001287",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001287",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001287",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "depends_on",
+      "to": "engine/construct/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "depends_on",
+      "to": "engine/construct/disposition.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "depends_on",
+      "to": "engine/construct/reality.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001288",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001289",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001289",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001289",
+      "kind": "depends_on",
+      "to": "engine/construct/registry.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001289",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001289",
+      "kind": "owned_by",
+      "to": "engine/construct"
+    },
+    {
+      "from": "UCOS-ENGINE-001289",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001289",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001290",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/contract.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001290",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001290",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001290",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001290",
+      "kind": "owned_by",
+      "to": "engine/enforcement_closure"
+    },
+    {
+      "from": "UCOS-ENGINE-001290",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001290",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001291",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/gate.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001291",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001291",
+      "kind": "owned_by",
+      "to": "engine/enforcement_closure"
+    },
+    {
+      "from": "UCOS-ENGINE-001291",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001291",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001292",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001292",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001292",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/discovery.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001292",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001292",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001292",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001292",
+      "kind": "owned_by",
+      "to": "engine/enforcement_closure"
+    },
+    {
+      "from": "UCOS-ENGINE-001292",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001292",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001293",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/discovery.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001293",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001293",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001293",
+      "kind": "owned_by",
+      "to": "engine/enforcement_closure"
+    },
+    {
+      "from": "UCOS-ENGINE-001293",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001293",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001294",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001294",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001294",
+      "kind": "owned_by",
+      "to": "engine/enforcement_closure"
+    },
+    {
+      "from": "UCOS-ENGINE-001294",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001294",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001295",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/contract.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001295",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/discovery.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001295",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001295",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001295",
+      "kind": "owned_by",
+      "to": "engine/enforcement_closure"
+    },
+    {
+      "from": "UCOS-ENGINE-001295",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001295",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001296",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001296",
+      "kind": "owned_by",
+      "to": "engine/enforcement_closure"
+    },
+    {
+      "from": "UCOS-ENGINE-001296",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001296",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001297",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001297",
+      "kind": "owned_by",
+      "to": "URKE-000001"
+    },
+    {
+      "from": "UCOS-ENGINE-001297",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001297",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/composition.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/discovery.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/proposal.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001298",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001299",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001299",
+      "kind": "depends_on",
+      "to": "engine/construct/registry.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001299",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001299",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001299",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001299",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001299",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001299",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001300",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001300",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001300",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001300",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001300",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001300",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/admission.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/bridge.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/composition.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/discovery.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/evolution.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/proposal.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/research.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/states.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/subjects.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/worlds.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001301",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001302",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001302",
+      "kind": "depends_on",
+      "to": "engine/uckp/payload.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001302",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001302",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001302",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001302",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/research.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/states.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/subjects.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/worlds.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001303",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001304",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001304",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001304",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001304",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001304",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001304",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001304",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001305",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001305",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001305",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001305",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001305",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001305",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001306",
+      "kind": "depends_on",
+      "to": "engine/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001306",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/contract.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001306",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001306",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/evidence.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001306",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001306",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001306",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001306",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001306",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001307",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/composition.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001307",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001307",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001307",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/subjects.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001307",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001307",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001307",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001307",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001307",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001308",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001308",
+      "kind": "depends_on",
+      "to": "engine/kernel/identity.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001308",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001308",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001308",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001308",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001308",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001309",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/composition.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001309",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001309",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001309",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001309",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001309",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001309",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001309",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001310",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001310",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001310",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/subjects.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001310",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001310",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001310",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001310",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001311",
+      "kind": "depends_on",
+      "to": "engine/ceu/catalog.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001311",
+      "kind": "depends_on",
+      "to": "engine/knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001311",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001311",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001311",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001311",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001311",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001311",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001312",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001312",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001312",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001312",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/research.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001312",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/states.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001312",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001312",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001312",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001312",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001313",
+      "kind": "depends_on",
+      "to": "engine/ceu/catalog.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001313",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001313",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001313",
+      "kind": "depends_on",
+      "to": "engine/temporal/coordinate.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001313",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001313",
+      "kind": "owned_by",
+      "to": "engine/recursive_knowledge"
+    },
+    {
+      "from": "UCOS-ENGINE-001313",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001313",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001314",
+      "kind": "depends_on",
+      "to": "engine/infinite_scope/contract.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001314",
+      "kind": "depends_on",
+      "to": "engine/infinite_scope/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001314",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001314",
+      "kind": "owned_by",
+      "to": "engine/infinite_scope"
+    },
+    {
+      "from": "UCOS-ENGINE-001314",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001314",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001315",
+      "kind": "depends_on",
+      "to": "engine/root_ontology/contract.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001315",
+      "kind": "depends_on",
+      "to": "engine/root_ontology/model.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001315",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001315",
+      "kind": "owned_by",
+      "to": "engine/root_ontology"
+    },
+    {
+      "from": "UCOS-ENGINE-001315",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001315",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001316",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001316",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001316",
+      "kind": "owned_by",
+      "to": "engine/uckp"
+    },
+    {
+      "from": "UCOS-ENGINE-001316",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001316",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -127570,6 +129435,406 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
+      "from": "UCOS-EXDOC-002968",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002968",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002968",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002968",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002969",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002969",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002969",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002969",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002970",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002970",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002970",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002970",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002971",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002971",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002971",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002971",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002972",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002972",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002972",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002972",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002973",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002973",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002973",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002973",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002974",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002974",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002974",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002974",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002975",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002975",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002975",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002975",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002976",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002976",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002976",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002976",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002977",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002977",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002977",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002977",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002978",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002978",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002978",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002978",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002979",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002979",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002979",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002979",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002980",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002980",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002980",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002980",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002981",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002981",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002981",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002981",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002982",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002982",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002982",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002982",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002983",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002983",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002983",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002983",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002984",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002984",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002984",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002984",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002985",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002985",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-002985",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002985",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002986",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002986",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-EXDOC-002986",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002986",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-002987",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-002987",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-EXDOC-002987",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-002987",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
       "from": "UCOS-EXEC-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -134890,6 +137155,26 @@
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
     {
+      "from": "UCOS-MCRFST-000001",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-MCRFST-000001",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-MCRFST-000001",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-MCRFST-000001",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
       "from": "UCOS-MISC-000004",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -136510,6 +138795,26 @@
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
     {
+      "from": "UCOS-PHASEO-000001",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-PHASEO-000001",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-PHASEO-000001",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-PHASEO-000001",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
       "from": "UCOS-PHASEP-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -136586,6 +138891,166 @@
     },
     {
       "from": "UCOS-PHASEP-000004",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-PHASER-000001",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-PHASER-000001",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-PHASER-000001",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-PHASER-000001",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-PHASER-000002",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-PHASER-000002",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-PHASER-000002",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-PHASER-000002",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-PHASER-000003",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-PHASER-000003",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-PHASER-000003",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-PHASER-000003",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-PHASER-000004",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-PHASER-000004",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-PHASER-000004",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-PHASER-000004",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-PHASER-000005",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-PHASER-000005",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-PHASER-000005",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-PHASER-000005",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-PHASER-000006",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-PHASER-000006",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-PHASER-000006",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-PHASER-000006",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-PHASER-000007",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-PHASER-000007",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-PHASER-000007",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-PHASER-000007",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-PHASER-000008",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-PHASER-000008",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-PHASER-000008",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-PHASER-000008",
       "kind": "validated_by",
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
@@ -179527,12 +181992,22 @@
     {
       "from": "UCOS-TESTOBJ-000819",
       "kind": "depends_on",
+      "to": "engine/infinite_scope/declaration.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000819",
+      "kind": "depends_on",
       "to": "engine/infinite_scope/gate.py"
     },
     {
       "from": "UCOS-TESTOBJ-000819",
       "kind": "depends_on",
       "to": "engine/infinite_scope/model.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000819",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
     },
     {
       "from": "UCOS-TESTOBJ-000819",
@@ -179637,12 +182112,22 @@
     {
       "from": "UCOS-TESTOBJ-000821",
       "kind": "depends_on",
+      "to": "engine/root_ontology/declaration.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000821",
+      "kind": "depends_on",
       "to": "engine/root_ontology/gate.py"
     },
     {
       "from": "UCOS-TESTOBJ-000821",
       "kind": "depends_on",
       "to": "engine/root_ontology/model.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000821",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
     },
     {
       "from": "UCOS-TESTOBJ-000821",
@@ -180241,6 +182726,271 @@
     },
     {
       "from": "UCOS-TESTOBJ-000837",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/ceu/catalog.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/__init__.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/audit.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/cli.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/contract.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/disposition.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/evidence.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/extension.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/gate.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/model.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/reality.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/registry.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/construct/views.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "owned_by",
+      "to": "engine/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000838",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "depends_on",
+      "to": "engine/construct/declaration.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/__init__.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/contract.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/declaration.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/discovery.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/gate.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "depends_on",
+      "to": "engine/enforcement_closure/model.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "owned_by",
+      "to": "engine/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000839",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/__init__.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/admission.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/bridge.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/composition.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/contract.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/declaration.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/discovery.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/evidence.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/evolution.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/gate.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/ledger.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/model.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/proposal.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/research.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/states.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/subjects.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/recursive_knowledge/worlds.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "depends_on",
+      "to": "engine/uckp/canonical.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "owned_by",
+      "to": "engine/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000840",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -182811,6 +185561,46 @@
     },
     {
       "from": "UCOS-UCOSOM-000077",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-UCOSOM-000078",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-UCOSOM-000078",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-UCOSOM-000078",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-UCOSOM-000078",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-UCOSOM-000079",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-UCOSOM-000079",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-UCOSOM-000079",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-UCOSOM-000079",
       "kind": "validated_by",
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },

@@ -1272,3 +1272,88 @@ def test_reading_an_unreadable_file_is_survivable(tmp_path: Any) -> None:
     with open(bad, "w", encoding="utf-8") as handle:
         handle.write("{oops")
     assert contract_module._read_json(str(tmp_path), "bad.json") is None
+
+
+# --- certification identity ------------------------------------------------------------------
+#
+# This package measured eleven laws and returned a verdict attributable to NO state: nothing in
+# it minted a digest, so two different declarations reaching two opposite verdicts produced
+# reports that could not be told apart, and a recorded PASS could never say WHICH declaration it
+# was a pass of. UEC-000001 counted it under `declarations_without_a_certification_identity`.
+#
+# Both halves are asserted: the identity must MOVE when the declaration's meaning moves, and
+# must NOT move for anything declared inert.
+
+from engine.infinite_scope.declaration import DIGEST_EXCLUSIONS  # noqa: E402
+from engine.infinite_scope.declaration import parse as parse_declaration  # noqa: E402
+from engine.uckp.canonical import content_hash  # noqa: E402
+
+IDENTITY_MUTATIONS = {
+    "change the declared authority": lambda d: d.__setitem__("authority", "SOMETHING ELSE"),
+    "change the declared version": lambda d: d.__setitem__("version", "9.9.9"),
+    "change the declared name": lambda d: d.__setitem__("name", "Something Else"),
+    "rewrite a law's statement": lambda d: d["laws"][0].__setitem__("statement", "something else"),
+    "rewrite a law's title": lambda d: d["laws"][0].__setitem__("title", "Something Else"),
+    "drop an expansion axis": lambda d: d["expansion_axes"].pop(),
+    "declare the capability model final": lambda d: d["capability_seed_model"].__setitem__(
+        "final", True
+    ),
+    "drop a closed-enumeration disclosure": lambda d: d["closed_enumeration_disclosures"].pop(),
+}
+
+
+def _identity(document: dict[str, Any]) -> str:
+    return content_hash(parse_declaration(document, source="test").digest_payload())
+
+
+@pytest.mark.parametrize("name", sorted(IDENTITY_MUTATIONS))
+def test_every_semantic_mutation_moves_the_certification_identity(
+    doc: dict[str, Any], name: str
+) -> None:
+    """A value that can alter a verdict must be inside the identity that certifies it."""
+    baseline = _identity(copy.deepcopy(doc))
+    mutated = copy.deepcopy(doc)
+    IDENTITY_MUTATIONS[name](mutated)
+    assert _identity(mutated) != baseline, (
+        f"{name!r} changed the declaration's meaning and left the certification identity at "
+        f"{baseline[:16]}…. The same digest now certifies two different declarations."
+    )
+
+
+def test_the_identity_is_independent_of_the_path_it_was_read_from(doc: dict[str, Any]) -> None:
+    """A digest that changed with the reader would not be a digest of the declaration."""
+    left = _identity(copy.deepcopy(doc))
+    right = content_hash(
+        parse_declaration(copy.deepcopy(doc), source="/elsewhere.json").digest_payload()
+    )
+    assert left == right
+
+
+def test_the_identity_covers_every_parsed_field_except_the_declared_exclusions(
+    doc: dict[str, Any],
+) -> None:
+    """Inclusion is the default; an omission must be a declared, reasoned exclusion."""
+    import dataclasses as _dc
+
+    contract = parse_declaration(doc, source="test")
+    payload = contract.digest_payload()
+    parsed = {field.name for field in _dc.fields(contract)}
+    missing = parsed - set(payload)
+    assert missing <= set(DIGEST_EXCLUSIONS), (
+        "fields silently absent from the certification identity: "
+        f"{sorted(missing - set(DIGEST_EXCLUSIONS))}"
+    )
+
+
+def test_a_stale_exclusion_is_refused(doc: dict[str, Any]) -> None:
+    """The other direction. An exclusion matching no field may silently widen later."""
+    import dataclasses as _dc
+
+    contract = parse_declaration(doc, source="test")
+    assert set(DIGEST_EXCLUSIONS) <= {field.name for field in _dc.fields(contract)}
+
+
+def test_the_gate_report_carries_the_certification_identity() -> None:
+    """An identity that never reaches a report certifies nothing."""
+    report = gate_module.measure()
+    assert len(report["declaration_digest"]) == 64

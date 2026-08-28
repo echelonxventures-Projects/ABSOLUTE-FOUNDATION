@@ -2147,3 +2147,206 @@ uvi-gate: bootstrap-quiet
 # uvi-json: the machine-readable report, for a consumer that needs the law table.
 uvi-json: bootstrap-quiet
 	@$(PY) -m engine.verification_intelligence.gate --json
+
+
+# ===========================================================================
+# UCON-000001 — the Universal Construct Foundation.
+#
+# The layer that answers "what happens to a construct nobody anticipated". It owns no
+# ontology, mints no identity scheme and certifies nothing; what it owns is a total,
+# traceable disposition for every presented construct, and a governed home for the
+# unknown, the contradictory and the undecidable.
+#
+# The distinction these targets exist to keep measurable: a REFUSAL must never be
+# indistinguishable from a DROP. Before this capability, a construct whose classifying
+# kind was unregistered raised MetaTypeUnknownError and left no record, so "we governed a
+# refusal" and "we never saw it" were the same observable state. The registry here has no
+# refusal path at all — disposition decides what a construct may DO, never whether it
+# exists in the record — and the arithmetic is measured: the population cannot exceed the
+# presentations.
+#
+# `ucon-audit` is the extensibility inventory: every closure mechanism in the repository
+# joined to its declared risk tier, owner, extensibility limitation and migration path. It
+# MEASURES and migrates nothing. The ratchet enforces disclosure inside engine/construct/
+# and a non-rising population everywhere else, because a gate demanding zero closures on
+# the day it was written would have been closed on that day and deleted on the next.
+#
+# Additive only — no existing target, recipe or dependency above is altered.
+# Exit semantics: 0 OPEN, 1 CLOSED (a law was measured and refused), 2 FAULT (no verdict).
+# ===========================================================================
+.PHONY: ucon ucon-gate ucon-json ucon-audit ucon-inventory ucon-discover
+
+# ucon: the human-readable measurement — all sixteen laws, every refusal named.
+ucon: bootstrap-quiet
+	@$(PY) -m engine.construct.gate
+
+# ucon-gate: fail-closed. Wired into ./verify.sh as Stage 6i, so deleting the stage closes
+# the gate rather than silently unbinding the sixteen laws.
+ucon-gate: bootstrap-quiet
+	@$(PY) -m engine.construct.gate --gate --quiet \
+	  || { echo "UCON GATE CLOSED — run 'make ucon' for the named refusals" >&2; exit 1; }
+	@echo "ucon-gate: every construct disposed, nothing silently ignored, no framework closed against a future it has not met"
+
+# ucon-json: the machine-readable report, for a consumer that needs the law table.
+ucon-json: bootstrap-quiet
+	@$(PY) -m engine.construct.gate --json --quiet
+
+# ucon-audit: the extensibility audit, rendered for a reader — every closure form with its
+# limitation and migration path, the risk-tier distribution, and the heaviest modules.
+ucon-audit: bootstrap-quiet
+	@$(PY) -m engine.construct.cli audit
+
+# ucon-inventory: the same inventory as JSON, written where the caller asks. Used to
+# materialise the audit deliverable outside the untracked evidence home.
+ucon-inventory: bootstrap-quiet
+	@$(PY) -m engine.construct.cli audit --json --out 00-MASTER/UCON-000001/closure-inventory.json
+
+# ucon-discover: run recursive discovery over a seeded registry and report the fixed point.
+ucon-discover: bootstrap-quiet
+	@$(PY) -m engine.construct.cli discover
+
+
+# ===========================================================================
+# UEC-000001 — UNIVERSAL ENFORCEMENT CLOSURE. Closure over the ENFORCEMENT surface.
+#
+# THE DEFECT, MEASURED. In an isolated worktree at HEAD, seven workflow files were deleted —
+# including ec1-ci.yml, the sole CI invoker of `./verify.sh --full` — together with six
+# fail-closed Makefile gate targets. `uvi-gate` exited 0. `uaue-gate` exited 0. A control test
+# run and the post-deletion run were byte-identical: 5 failed, 191 passed, 1 skipped, 3 errors
+# both times. Thirteen enforcement artifacts vanished and the repository said nothing.
+#
+# THE ROOT CAUSE, and why it is not carelessness. The repository has exactly ONE closure
+# mechanism over its objects: REG-AUTO-001 registration. Its boundary, in 00-BOOK/tools/config.py,
+# is INCLUDE_EXTENSIONS = (.md, .txt, .docx, .json) minus EXCLUDE_DIR_PREFIXES, which contains
+# `.github/`, `00-MASTER/` and `00-BOOK/tools/`. Measured over the 1597 entries of
+# 00-BOOK/DATA/artifacts.json: 0 are .py, 0 are .yml, 0 are under .github/, 0 are under
+# 00-MASTER/. Every gate engine, every workflow, every declaration, every test and verify.sh
+# itself is OUTSIDE the only closure mechanism the repository possesses — and was outside it
+# before the first gate was written. `00-BOOK/tools/` is excluded on the stated ground that "the
+# registry must not list itself", which is precisely why discovery D-09 records the trust anchor
+# as unregistered: a designed exclusion whose consequence was never governed.
+#
+# UEC does NOT extend REG-AUTO-001. That would break its stated invariant and is a registry
+# modification H-06 §5.4 authorizes under no approval. UEC is the COMPLEMENTARY plane, and
+# UEC-L-10 measures the disjointness of the two rather than asserting it.
+#
+# THE RATCHET IS TWO-SIDED. Each ratcheted law refuses when measured > ceiling, so a NEW
+# violation fails immediately; UEC-L-11 refuses when measured < ceiling, so a REPAIRED violation
+# must tighten the ceiling. measured == ceiling exactly. There is no slack for a future
+# violation to hide in — the half `00-MASTER/BASELINE-001/baseline_engine.py:726` lacks, where
+# vacuity is computed, rendered, and does not close the gate.
+#
+# Additive only — no existing target, recipe or dependency above is altered.
+# Exit semantics: 0 OPEN, 1 CLOSED (a blocking law refused), 2 FAULT (no verdict reachable).
+# ===========================================================================
+.PHONY: uec uec-gate uec-json uec-inventory uec-self
+
+# uec: the human-readable measurement — all twelve laws, the ratchet table, every refusal named.
+uec: bootstrap-quiet
+	@$(PY) -m engine.enforcement_closure.gate
+
+# uec-gate: fail-closed. Wired into ./verify.sh, so removing the stage closes the gate rather
+# than silently unbinding the twelve laws — and UEC-L-09 refuses if UEC's own Makefile target,
+# workflow, declaration or stage is the thing that went missing.
+uec-gate: bootstrap-quiet
+	@$(PY) -m engine.enforcement_closure.gate --gate --quiet \
+	  || { echo "UEC GATE CLOSED — run 'make uec' for the named refusals" >&2; exit 1; }
+	@echo "uec-gate: every protection governed, invoked from two planes, covered, and inside its own closure"
+
+# uec-json: the machine-readable report, for a consumer that needs the law and ratchet tables.
+uec-json: bootstrap-quiet
+	@$(PY) -m engine.enforcement_closure.gate --json --quiet
+
+# uec-inventory: the DISCOVERED enforcement surface, printed for adoption into the governed
+# declaration by hand. Deliberately not written by any target: if the observation could rewrite
+# the expectation, deleting a workflow and re-running the generator would produce a green gate,
+# which is the bypass this whole programme closes. The `git diff` is the governed record.
+uec-inventory: bootstrap-quiet
+	@$(PY) -m engine.enforcement_closure.gate --inventory
+
+# uec-self: UEC's guard over its own surface — UEC-L-09 alone. A closure mechanism outside its
+# own closure is discovery D-09, so this is the leg that must never be allowed to pass vacuously.
+uec-self: bootstrap-quiet
+	@$(PY) -m engine.enforcement_closure.gate --gate --quiet --law UEC-L-09 \
+	  || { echo "UEC SELF-COVERAGE CLOSED — UEC is not inside its own closure" >&2; exit 1; }
+	@echo "uec-self: the registry is registered, the detector is detected"
+
+# ===========================================================================
+# URKE-000001 — Universal Recursive Knowledge Foundation.
+#
+# THIS PROGRAMME WAS BUILT AND NEVER WIRED, WHICH IS THE FAILURE MODE IT IS ITSELF ABOUT.
+# The declaration, the sixteen-module engine, thirty-two laws, a 249-subject governed ledger
+# and a passing suite all existed, and NOTHING INVOKED ANY OF IT: no Makefile target, no
+# workflow, no ./verify.sh stage, and no row in UEC-000001's governed enforcement inventory.
+# It was untracked, so UEC's discovery — which quantifies over `git ls-files` — could not see
+# it either. A detector nothing runs is indistinguishable, from every gate in this repository,
+# from a detector that does not exist.
+#
+# The targets below are one of the two invocation planes UEC-L-06 requires; the other is
+# `.github/workflows/urke-gate.yml`, and ./verify.sh carries the stage. Deleting any one of
+# them now fails UEC-L-02 (a governed artifact went missing) rather than silently reducing
+# assurance.
+#
+# Exit semantics: 0 OPEN, 1 CLOSED (a blocking law refused), 2 FAULT (no verdict reachable).
+# ===========================================================================
+.PHONY: urke urke-gate urke-json urke-metrics
+
+# urke: the human-readable measurement — all thirty-two laws, every refusal named.
+urke: bootstrap-quiet
+	@$(PY) -m engine.recursive_knowledge.gate
+
+# urke-gate: fail-closed. Wired into ./verify.sh, so removing the stage closes the gate rather
+# than silently unbinding the thirty-two laws.
+urke-gate: bootstrap-quiet
+	@$(PY) -m engine.recursive_knowledge.gate --gate --quiet \
+	  || { echo "URKE GATE CLOSED — run 'make urke' for the named refusals" >&2; exit 1; }
+	@echo "urke-gate: every unknown governed, discovery converges, no mechanism closed against a future domain"
+
+# urke-json: the machine-readable report, for a consumer that needs the law table.
+urke-json: bootstrap-quiet
+	@$(PY) -m engine.recursive_knowledge.gate --json --quiet
+
+# urke-metrics: the complexity metrics alone, for a reader tracking the governed population.
+urke-metrics: bootstrap-quiet
+	@$(PY) -m engine.recursive_knowledge.gate --metrics --quiet
+
+# ===========================================================================
+# SINGLE-INVOCATION-PLANE REMOVAL (UEC-L-06).
+#
+# UEC-000001 measures how many enforcement artifacts are reachable from exactly ONE invocation
+# plane, because one plane is one deletion away from silence: remove the single caller and the
+# gate stops running while every report stays green. Two of the fourteen it counted were
+# reachable only from ./verify.sh — `00-MASTER/UCOS-UGA-001/uga_engine.py`, which asserts the
+# ten universal object invariants over the whole version-controlled boundary, and
+# `engine/root_ontology/gate.py`, which measures the constitutional primitive alignment. Both
+# are blocking stages of the canonical gate, and neither could be run by name.
+#
+# These targets are the second plane. They add no authority, no new gate and no second criteria
+# set: each invokes the identical command ./verify.sh already invokes, so the two planes cannot
+# disagree about what the gate is. After adopting them the measured population falls to twelve
+# and the declared ceiling is tightened to match — UEC-L-11 refuses a ceiling left above its
+# measurement, so a repair cannot leave slack for a future violation to occupy.
+# ===========================================================================
+.PHONY: uga uga-gate ucpa ucpa-gate
+
+# uga: the human-readable measurement — every universal object invariant, every violation named.
+uga: bootstrap-quiet
+	@$(PY) 00-MASTER/UCOS-UGA-001/uga_engine.py gate
+
+# uga-gate: fail-closed. The same command ./verify.sh runs as its universal object governance
+# stage, so this plane and that one measure one thing rather than two.
+uga-gate: bootstrap-quiet
+	@$(PY) 00-MASTER/UCOS-UGA-001/uga_engine.py gate >/dev/null \
+	  || { echo "UGA GATE CLOSED — run 'make uga' for the named violations" >&2; exit 1; }
+	@echo "uga-gate: no anonymous, unowned, unregistered or unaudited object"
+
+# ucpa: the human-readable measurement — the eight constitutional primitive alignment laws.
+ucpa: bootstrap-quiet
+	@$(PY) -m engine.root_ontology.gate
+
+# ucpa-gate: fail-closed. The same command ./verify.sh runs as its constitutional primitive
+# alignment stage.
+ucpa-gate: bootstrap-quiet
+	@$(PY) -m engine.root_ontology.gate --quiet \
+	  || { echo "UCPA GATE CLOSED — run 'make ucpa' for the named refusals" >&2; exit 1; }
+	@echo "ucpa-gate: the root ontology is measured, reduced and singly authored"

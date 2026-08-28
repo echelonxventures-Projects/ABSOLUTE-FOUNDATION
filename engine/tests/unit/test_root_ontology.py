@@ -599,3 +599,90 @@ def test_the_gate_holds_no_ontology_knowledge_in_its_executable_source():
 
 def test_the_extension_probe_is_never_persisted(contract):
     assert contract.primitive(contract.openness.probe_id) is None
+
+
+# --- certification identity ------------------------------------------------------------------
+#
+# This package measured eight laws and returned a verdict attributable to NO state: nothing in
+# it minted a digest, so two different declarations reaching two opposite verdicts produced
+# reports that could not be told apart. UEC-000001 counted it under
+# `declarations_without_a_certification_identity`, and closing that count exposed a second
+# defect only the SUFFICIENT condition could see — the declaration stated a name, a version, an
+# authority and a principle about itself and `AlignmentContract` parsed none of them, so
+# rewriting the declared authority left the identity byte-identical at 6c09cf89….
+#
+# Both halves are asserted here: the identity must MOVE when the declaration's meaning moves,
+# and must NOT move for anything declared inert.
+
+import copy as _copy  # noqa: E402
+
+from engine.root_ontology.declaration import DIGEST_EXCLUSIONS  # noqa: E402
+from engine.root_ontology.declaration import parse as parse_declaration  # noqa: E402
+from engine.uckp.canonical import content_hash  # noqa: E402
+
+IDENTITY_MUTATIONS = {
+    "change the declared authority": lambda d: d.__setitem__("authority", "SOMETHING ELSE"),
+    "change the declared version": lambda d: d.__setitem__("version", "9.9.9"),
+    "change the declared name": lambda d: d.__setitem__("name", "Something Else"),
+    "rewrite the declared principle": lambda d: d.__setitem__("principle", "something else"),
+    "rewrite a law's statement": lambda d: d["laws"][0].__setitem__("statement", "something else"),
+    "rebind a law to another check": lambda d: d["laws"][0].__setitem__("check", "other_check"),
+    "retarget a facet reduction": lambda d: d["facet_reduction"][0].__setitem__(
+        "primitive", "ONT-99"
+    ),
+    "change the canonical owner": lambda d: d["ontology_source"].__setitem__(
+        "canonical_owner", "somewhere/else.md"
+    ),
+}
+
+
+def _identity(document: dict) -> str:
+    return content_hash(parse_declaration(document, source="test").digest_payload())
+
+
+@pytest.mark.parametrize("name", sorted(IDENTITY_MUTATIONS))
+def test_every_semantic_mutation_moves_the_certification_identity(
+    document: dict, name: str
+) -> None:
+    """A value that can alter a verdict must be inside the identity that certifies it."""
+    baseline = _identity(_copy.deepcopy(document))
+    mutated = _copy.deepcopy(document)
+    IDENTITY_MUTATIONS[name](mutated)
+    assert _identity(mutated) != baseline, (
+        f"{name!r} changed the declaration's meaning and left the certification identity at "
+        f"{baseline[:16]}…. The same digest now certifies two different declarations."
+    )
+
+
+def test_the_identity_is_independent_of_the_path_it_was_read_from(document: dict) -> None:
+    """A digest that changed with the reader would not be a digest of the declaration."""
+    left = _identity(_copy.deepcopy(document))
+    right = content_hash(
+        parse_declaration(_copy.deepcopy(document), source="/elsewhere.json").digest_payload()
+    )
+    assert left == right
+
+
+def test_the_identity_covers_every_parsed_field_except_the_declared_exclusions(
+    contract: AlignmentContract,
+) -> None:
+    """Inclusion is the default; an omission must be a declared, reasoned exclusion."""
+    payload = contract.digest_payload()
+    parsed = {field.name for field in dataclasses.fields(contract)}
+    missing = parsed - set(payload)
+    assert missing <= set(DIGEST_EXCLUSIONS), (
+        "fields silently absent from the certification identity: "
+        f"{sorted(missing - set(DIGEST_EXCLUSIONS))}"
+    )
+
+
+def test_a_stale_exclusion_is_refused(contract: AlignmentContract) -> None:
+    """The other direction. An exclusion matching no field may silently widen later."""
+    assert set(DIGEST_EXCLUSIONS) <= {field.name for field in dataclasses.fields(contract)}
+
+
+def test_the_gate_report_carries_the_certification_identity() -> None:
+    """An identity that never reaches a report certifies nothing."""
+    report = measure()
+    assert len(report["declaration_digest"]) == 64
+    assert report["declaration_version"]

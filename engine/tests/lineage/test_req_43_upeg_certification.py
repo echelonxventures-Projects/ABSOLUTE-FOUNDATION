@@ -123,31 +123,34 @@ def test_req_43_resolve_memory_for_known_subject() -> None:
     - Resolution is non-empty for at least one layer (subject exists)
     """
     declaration = load_declaration()
-    memory = resolve(KNOWN_SUBJECT, declaration)
+    memory = resolve(KNOWN_SUBJECT, declaration=declaration)
 
     # Validate: memory resolved for all seven layers
-    assert len(memory) == 7
+    assert len(memory.layers) == 7
 
     # Validate: each layer present (even if empty)
-    assert "identity" in memory
-    assert "context" in memory
-    assert "relationship" in memory
-    assert "knowledge" in memory
-    assert "evidence" in memory
-    assert "decision" in memory
-    assert "evolution" in memory
+    present = {layer.layer for layer in memory.layers}
+    assert present == {
+        "identity",
+        "context",
+        "relationship",
+        "knowledge",
+        "evidence",
+        "decision",
+        "evolution",
+    }
 
-    # Validate: at least one layer has entries (known subject exists)
-    total_entries = sum(len(entries) for entries in memory.values())
-    assert total_entries > 0  # known subject should have memory
+    # Validate: every layer names the owner that answers it and the record it read
+    for layer in memory.layers:
+        assert layer.owner, f"{layer.layer} names no owner"
+        assert layer.source, f"{layer.layer} cites no governed record"
 
-    # Validate: each entry has required fields
-    for layer_name, entries in memory.items():
-        for entry in entries:
-            assert entry.get("subject") == KNOWN_SUBJECT
-            assert entry.get("layer") == layer_name
-            assert "owner" in entry  # owner that declared this
-            assert "source" in entry  # governed record reference
+    # Validate: each entry belongs to the subject and the layer that produced it
+    for layer in memory.layers:
+        for entry in layer.entries:
+            row = entry.as_dict()
+            assert row.get("subject") == KNOWN_SUBJECT
+            assert row.get("layer") == layer.layer
 
 
 def test_req_43_open_world_unknown_subject_resolves_empty() -> None:
@@ -159,14 +162,19 @@ def test_req_43_open_world_unknown_subject_resolves_empty() -> None:
     - Recorded flag indicates owner records nothing (not missing register)
     """
     declaration = load_declaration()
-    memory = resolve(UNKNOWN_SUBJECT, declaration)
+    memory = resolve(UNKNOWN_SUBJECT, declaration=declaration)
 
     # Validate: unknown subject resolves (no error)
-    assert len(memory) == 7
+    assert len(memory.layers) == 7
 
     # Validate: all layers empty (unknown subject has no memory)
-    for _layer_name, entries in memory.items():
-        assert len(entries) == 0  # empty, not error
+    for layer in memory.layers:
+        assert len(layer.entries) == 0  # empty, not error
+
+    # Validate: "the owner recorded nothing" is a DIFFERENT fact from "the record is absent"
+    for layer in memory.layers:
+        assert layer.recorded is False
+    assert memory.is_remembered is False
 
 
 # -----------------------------------------------------------------------------
@@ -209,17 +217,16 @@ def test_req_43_memory_cross_layer_relationships() -> None:
     - Each entry cites one governed record (no duplicate truth)
     """
     declaration = load_declaration()
-    memory = resolve(KNOWN_SUBJECT, declaration)
+    memory = resolve(KNOWN_SUBJECT, declaration=declaration)
 
-    # Validate: all entries reference same subject
-    for _layer_name, entries in memory.items():
-        for entry in entries:
-            assert entry.get("subject") == KNOWN_SUBJECT
+    # Validate: all entries reference same subject (no fork across layers)
+    for layer in memory.layers:
+        for entry in layer.entries:
+            assert entry.as_dict().get("subject") == KNOWN_SUBJECT
 
-    # Validate: each entry cites one governed record
-    for _layer_name, entries in memory.items():
-        for entry in entries:
-            assert "source" in entry  # one source per entry
+    # Validate: each layer cites exactly one governed record (no duplicate truth)
+    for layer in memory.layers:
+        assert isinstance(layer.source, str) and layer.source
 
 
 # -----------------------------------------------------------------------------
@@ -238,13 +245,13 @@ def test_req_43_memory_persists_across_resolutions() -> None:
     declaration = load_declaration()
 
     # Resolve memory twice
-    memory1 = resolve(KNOWN_SUBJECT, declaration)
-    memory2 = resolve(KNOWN_SUBJECT, declaration)
+    memory1 = resolve(KNOWN_SUBJECT, declaration=declaration)
+    memory2 = resolve(KNOWN_SUBJECT, declaration=declaration)
 
-    # Validate: resolutions identical (repeatable)
-    assert memory1.keys() == memory2.keys()
-    for layer_name in memory1:
-        assert len(memory1[layer_name]) == len(memory2[layer_name])
+    # Validate: resolutions byte-identical, not merely the same shape. Comparing only the
+    # layer names and entry counts would pass while the entries themselves differed, which
+    # is exactly the hidden state this test exists to refuse.
+    assert memory1.as_dict() == memory2.as_dict()
 
 
 def test_req_43_historical_reconstruction() -> None:
@@ -257,15 +264,13 @@ def test_req_43_historical_reconstruction() -> None:
     """
     declaration = load_declaration()
 
-    # Reconstruct current state (as_of=None)
-    current = reconstruct(KNOWN_SUBJECT, declaration, as_of=None)
+    # Reconstruct: resolve twice and prove the two resolutions are identical. There is no
+    # `as_of` parameter and there must not be one — the projection reads no clock, so a
+    # point-in-time argument would be a promise nothing in the record could keep.
+    current = reconstruct(KNOWN_SUBJECT, declaration=declaration).as_dict()
 
-    # Validate: reconstruction returns memory document
-    assert "subject" in current
+    # Validate: reconstruction returns the memory document
     assert current["subject"] == KNOWN_SUBJECT
-    assert "layers" in current
-
-    # Validate: layers present
     assert len(current["layers"]) == 7
 
 
@@ -285,9 +290,9 @@ def test_req_43_memory_declaration_serialization() -> None:
     declaration = load_declaration()
 
     # Serialize to document
-    from engine.lineage.memory import to_document
+    from engine.lineage.memory import declaration_document
 
-    document = to_document(declaration)
+    document = declaration_document(declaration)
 
     # Validate: document structure
     assert "declaration_id" in document
@@ -303,6 +308,13 @@ def test_req_43_memory_declaration_serialization() -> None:
         assert "owner" in layer_doc
         assert "record" in layer_doc
         assert "access" in layer_doc
+
+    # Validate: ROUND-TRIP, which is what makes this a restore path rather than a report.
+    # A document that serialises but cannot be read back would satisfy every assertion above
+    # and restore nothing.
+    from engine.lineage.memory import MemoryDeclaration
+
+    assert MemoryDeclaration.of(document) == declaration
 
 
 def test_req_43_memory_layer_extension() -> None:

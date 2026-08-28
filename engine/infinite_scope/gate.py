@@ -27,6 +27,7 @@ from typing import Any
 
 from engine.infinite_scope.contract import assess, load_contract, repo_root
 from engine.infinite_scope.model import InfiniteScopeError
+from engine.uckp.canonical import content_hash
 
 EXIT_OPEN = 0
 EXIT_CLOSED = 1
@@ -57,6 +58,11 @@ def measure(declaration: str | None = None, repository: str | None = None) -> di
 
     return {
         "artifact_id": contract.artifact_id,
+        # THE REPORT NOW NAMES THE STATE IT IS A REPORT OF. Without this the eleven laws below
+        # returned a verdict attributable to nothing: two different declarations reaching two
+        # opposite verdicts produced reports that could not be told apart. UEC-L-13 measures by
+        # mutation that this digest MOVES whenever the declaration's meaning does.
+        "declaration_digest": content_hash(contract.digest_payload()),
         "version": contract.version,
         "authority": "NONE — DERIVED TRUTH",
         "plane": contract.gate.get("plane", "OBSERVE MODE — READ ONLY"),

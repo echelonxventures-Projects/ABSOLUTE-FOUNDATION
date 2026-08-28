@@ -27,6 +27,8 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, replace
 from typing import Any
 
+from engine.uckp.payload import canonical_payload
+
 #: The standing a primitive may hold. AXIOM is supreme as ground but is not an
 #: addressable node in the layered derivation tree; LAYER is a point an object may be
 #: anchored to. Which primitive holds which is declared, never decided here.
@@ -267,11 +269,23 @@ class SelfApplication:
         )
 
 
+#: Parsed fields deliberately outside the certification identity, each with the reason it
+#: cannot reach a verdict. EMPTY, and that is the honest state rather than an oversight: every
+#: field of :class:`AlignmentContract` is a value some law reads, and the contract holds no
+#: source path — it is rehydrated from an already-parsed document, so there is nothing
+#: reader-dependent to exclude.
+DIGEST_EXCLUSIONS: Mapping[str, str] = {}
+
+
 @dataclass(frozen=True, slots=True)
 class AlignmentContract:
     """The whole declaration, rehydrated and structurally usable."""
 
     artifact_id: str
+    name: str
+    version: str
+    authority: str
+    principle: str
     source: OntologySource
     primitives: tuple[Primitive, ...]
     ratified_standing: tuple[RatifiedStanding, ...]
@@ -281,11 +295,33 @@ class AlignmentContract:
     self_application: SelfApplication
     laws: tuple[Law, ...]
 
+    def digest_payload(self) -> dict[str, Any]:
+        """This contract's certification identity: every parsed field, minus declared exclusions.
+
+        Inclusion is the DEFAULT, derived from :func:`dataclasses.fields`, so a field added to
+        this contract is inside the identity on the day it is written rather than on the day
+        somebody remembers to add it to a list. Omitting one requires naming it in
+        :data:`DIGEST_EXCLUSIONS` with the reason it cannot reach a verdict, and the suite fails
+        in BOTH directions — on an undeclared omission and on an exclusion naming a field this
+        contract no longer has.
+        """
+        return canonical_payload(self, exclude=tuple(DIGEST_EXCLUSIONS))
+
     @classmethod
     def of(cls, document: Mapping[str, Any]) -> AlignmentContract:
         """Rehydrate a contract from a parsed declaration."""
         return cls(
             artifact_id=_require_text(document, "artifact_id", "declaration"),
+            # THESE FOUR WERE DECLARED AND UNPARSED, WHICH MADE THEM UNENFORCEABLE AND
+            # UNCERTIFIABLE AT ONCE. `ucpa-declaration.json` states a name, a version, an
+            # authority and a principle about itself, and this contract read none of them — so
+            # UEC-L-13 measured that rewriting the declared authority left the certification
+            # identity byte-identical at 6c09cf89…, and one digest certified two declarations
+            # claiming different authorities. Parsing them puts them inside the identity.
+            name=_require_text(document, "name", "declaration"),
+            version=_require_text(document, "version", "declaration"),
+            authority=_require_text(document, "authority", "declaration"),
+            principle=_require_text(document, "principle", "declaration"),
             source=OntologySource.of(_require_mapping(document, "ontology_source")),
             primitives=tuple(
                 Primitive.of(e) for e in _require_sequence(document, "primitive_binding")
