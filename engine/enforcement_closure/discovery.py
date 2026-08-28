@@ -253,13 +253,30 @@ def source_evidence(text: str) -> str:
 def invocation_corpus(root: str, workflows: Sequence[Artifact]) -> dict[str, str]:
     """Every text in which an invocation of an enforcement artifact could appear.
 
-    Three independent planes: the Makefile (local), the workflow set (CI), and ``verify.sh``
-    (the certification contract). UEC-L-06 requires two of the three, because the repository's
-    present shape — a Makefile target and a workflow step holding two independent COPIES of one
-    command string, neither derived from the other — is not redundancy. It is two single points
-    of failure, and deleting either leaves the other unaware.
+    Four independent planes: the Makefile (local), the workflow set (CI), ``verify.sh`` (the
+    certification contract) and ``scripts/ucos-env.sh`` (the shared gate helper both the
+    canonical path and the pre-commit hook execute). UEC-L-06 requires two of them, because the
+    repository's present shape — a Makefile target and a workflow step holding two independent
+    COPIES of one command string, neither derived from the other — is not redundancy. It is two
+    single points of failure, and deleting either leaves the other unaware.
+
+    ``scripts/ucos-env.sh`` WAS MISSING, AND ITS ABSENCE REPORTED A PROTECTION THAT EXISTS AS ONE
+    THAT DOES NOT. ``verify.sh`` does not name ``engine.execution_environment.gate`` anywhere; it
+    sources this helper, and line 426 of the helper issues the command. So the execution
+    environment gate — the Stage 0 refusal that decides whether the interpreter may be trusted at
+    all — was measured as reachable from the Makefile alone and stood in UEC-L-06's population as
+    a single point of failure it was never a single point of failure of. That is a FALSE
+    DEFICIENCY, and a law that cries wolf is disabled by whoever has to look at it, which is the
+    failure mode ``_needles`` already records as having retired more real gates here than any
+    deletion. Widening the corpus clears exactly that one artifact and adds none, measured; the
+    ceiling moved 16 -> 15 in the same change, because a repair that does not tighten the ratchet
+    leaves slack for a future violation to occupy.
     """
-    corpus = {"Makefile": read_text(root, "Makefile"), "verify.sh": read_text(root, "verify.sh")}
+    corpus = {
+        "Makefile": read_text(root, "Makefile"),
+        "verify.sh": read_text(root, "verify.sh"),
+        "scripts/ucos-env.sh": read_text(root, "scripts/ucos-env.sh"),
+    }
     for workflow in workflows:
         corpus[workflow.identity] = read_text(root, workflow.identity)
     return corpus
