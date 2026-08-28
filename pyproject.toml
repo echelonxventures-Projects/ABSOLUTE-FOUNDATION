@@ -378,6 +378,16 @@ addopts = [
   # (97.90% -> 97.53%), which is the direction that distinguishes correcting a denominator from
   # laundering one; the 90% floor is unchanged and unthreatened.
   "--cov=engine.recursive_knowledge",
+  # UCI-000001 — the certification-integrity surface enters the denominator on the principle
+  # this scope control exists to enforce, and not because it is well covered: it is TRACKED,
+  # EXECUTABLE and part of the repository, so it belongs in the ratio. 481 statements across
+  # four modules with no test importing them (engine/tests/certification/test_integrity.py
+  # imports engine.certification, a different package whose similar name is coincidental).
+  # Admitting it moves the whole-suite figure DOWN by roughly half a point and leaves the 90%
+  # floor unthreatened. Excluding a package because measuring it would lower the number is the
+  # precise defect this control was written to end, so the default is measured and the burden
+  # is on exclusion — see [tool.ucos.coverage_scope], which is where a reasoned exemption goes.
+  "--cov=engine.certification_integrity",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -385,7 +395,7 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/construct", "engine/enforcement_closure", "engine/constitution", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence", "engine/execution_environment", "engine/recursive_knowledge"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/certification_integrity", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/construct", "engine/enforcement_closure", "engine/constitution", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence", "engine/execution_environment", "engine/recursive_knowledge"]
 omit = ["engine/tests/*", "platform/tests/*"]
 
 # --- UCOS-COV-SCOPE-001 — the coverage denominator, declared rather than assumed ---------
