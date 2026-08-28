@@ -41,6 +41,7 @@ anything, which is why ``./verify.sh`` applies the floor after combining every s
 
 from __future__ import annotations
 
+import subprocess
 import tomllib
 from pathlib import Path
 from typing import Any
@@ -78,14 +79,55 @@ def _excluded(config: dict[str, Any]) -> dict[str, str]:
 
 
 def _packages_present() -> set[str]:
-    """Every importable source package in the measured trees, read from the filesystem."""
+    """Every source package in the measured trees, read from the filesystem.
+
+    ENUMERATION IS BY TRACKED MODULE, NOT BY ``__init__.py``, and that distinction is the
+    defect this function was rewritten to close. The original asked ``(child /
+    "__init__.py").exists()``, which is not the question "is this a package Python can
+    import" — it is the question "is this a package of the *regulated* kind". Since PEP 420
+    an implicit namespace directory imports perfectly well without one, so a directory of
+    modules with no ``__init__.py`` was invisible to the control, and being invisible to the
+    control meant being outside the denominator with nothing saying why. That is the exact
+    failure mode the module docstring above describes, reappearing one level up: the guard
+    against unmeasured packages had its own unmeasured-package hole.
+
+    Measured consequence: ``engine/recursive_knowledge`` — 16 modules, 2,849 statements,
+    URKE-000001, a live gate with a ``verify.sh`` stage, a Makefile target, a workflow and a
+    135-test suite — has no ``__init__.py``. It was named by neither scope list and by no
+    exclusion, and every test in this file passed. ``verify.sh`` runs it as
+    ``-m engine.recursive_knowledge.gate``, so the repository imports as a package precisely
+    what this function declined to count as one.
+
+    A directory is therefore a source package if it contains any ``.py`` file at any depth.
+    That predicate is strictly wider than the old one and cannot be satisfied by a naming
+    convention, which is what makes it unable to miss the namespace case again.
+
+    AND THE POPULATION IS ``git ls-files``, NOT THE FILESYSTEM. Widening the predicate without
+    also fixing the boundary immediately produced the mirror-image defect: the wider scan found
+    ``engine/certification_integrity`` — one untracked ``__init__.py``, two statements, absent
+    from a fresh clone — and failed this control on local debris. A guard that decides
+    differently on a working copy than on a clean checkout is not a guard, it is the
+    non-reproducibility it was written to eliminate; the same shape as a test asserting a
+    gitignored artifact. Every other closure mechanism in this repository quantifies over
+    ``git ls-files`` for this reason, and so does this one. Untracked contamination is real and
+    is somebody's problem — it is RIB GATE-12's, which surfaces it as working-tree
+    contamination, and not the coverage denominator's.
+    """
+    tracked = subprocess.run(  # noqa: S603 - fixed argv, no shell
+        ["git", "ls-files", "-z", *SOURCE_TREES],  # noqa: S607 - git from PATH by design
+        cwd=REPO,
+        capture_output=True,
+        check=True,
+    ).stdout.decode("utf-8", errors="surrogateescape")
+
     found: set[str] = set()
-    for tree in SOURCE_TREES:
-        for child in sorted((REPO / tree).iterdir()):
-            if child.name in _NOT_A_SOURCE_PACKAGE or not child.is_dir():
-                continue
-            if (child / "__init__.py").exists():
-                found.add(f"{tree}.{child.name}")
+    for path in tracked.split("\0"):
+        if not path.endswith(".py"):
+            continue
+        parts = path.split("/")
+        if len(parts) < 3 or parts[1] in _NOT_A_SOURCE_PACKAGE:
+            continue
+        found.add(f"{parts[0]}.{parts[1]}")
     return found
 
 
@@ -139,6 +181,27 @@ def test_the_enforcement_closure_programme_is_inside_the_denominator(
 ) -> None:
     """The specific self-exemption this control was written for. Named, so it cannot recur."""
     assert "engine.enforcement_closure" in _flag_scope(config)
+
+
+def test_a_namespace_package_is_counted_as_present() -> None:
+    """The second self-exemption: a package with no ``__init__.py`` must still be seen.
+
+    ``engine.recursive_knowledge`` is the measured instance — 16 modules and no
+    ``__init__.py``, which the previous ``__init__.py``-keyed enumeration could not see. It is
+    named here rather than described so that deleting the widened predicate in
+    ``_packages_present`` fails this test by name instead of silently restoring the hole.
+    """
+    present = _packages_present()
+    assert "engine.recursive_knowledge" in present, (
+        "engine/recursive_knowledge is a directory of tracked modules and must be counted as a "
+        "source package whether or not it carries an __init__.py; enumeration keyed on "
+        "__init__.py is what put 2,849 statements outside the denominator"
+    )
+    assert not (REPO / "engine" / "recursive_knowledge" / "__init__.py").exists(), (
+        "engine/recursive_knowledge has acquired an __init__.py, so it is no longer evidence "
+        "that namespace packages are enumerated; point this test at another namespace package "
+        "or delete it, but do not let it pass vacuously"
+    )
 
 
 # ------------------------------------------------------------------- NON-VACUITY
@@ -209,3 +272,48 @@ def test_an_empty_scope_is_refused() -> None:
     mutated["tool"]["coverage"]["run"]["source"] = []
     with pytest.raises(AssertionError, match="computed over nothing"):
         test_the_two_scope_declarations_agree(mutated)
+
+
+def test_untracked_debris_does_not_enter_the_denominator() -> None:
+    """NON-VACUITY for the tracked boundary, and a regression pin for how it was found.
+
+    Widening the package predicate to catch PEP 420 namespace directories immediately caught
+    something else: ``engine/certification_integrity``, an untracked ``__init__.py`` present on
+    one working copy and in no clone. Enumerating the filesystem made this control's verdict a
+    function of local state, which is the precise failure it exists to eliminate — a guard that
+    is green on a clean checkout and red on a developer's machine gets suppressed, and a
+    suppressed guard measures nothing.
+
+    So: a directory carrying a ``.py`` file that git does not track is not a source package.
+    """
+    present = _packages_present()
+    tracked_dirs = {
+        f"{p.split('/')[0]}.{p.split('/')[1]}"
+        for p in subprocess.run(  # noqa: S603
+            ["git", "ls-files", *SOURCE_TREES],  # noqa: S607
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.splitlines()
+        if p.endswith(".py") and len(p.split("/")) >= 3
+    }
+    assert present <= tracked_dirs, (
+        "the coverage-scope control counted a package git does not track, so its verdict "
+        f"depends on local state: {sorted(present - tracked_dirs)}"
+    )
+
+
+def test_a_namespace_package_is_still_a_source_package() -> None:
+    """NON-VACUITY for the widened predicate. The specific miss, pinned by name.
+
+    ``engine/recursive_knowledge`` has no ``__init__.py`` — it is an implicit namespace package
+    (PEP 420) that ``verify.sh`` runs as ``-m engine.recursive_knowledge.gate``. The original
+    predicate asked whether ``__init__.py`` existed and therefore did not see 2,849 statements
+    across sixteen modules, while every test in this file passed.
+    """
+    assert not (REPO / "engine" / "recursive_knowledge" / "__init__.py").exists(), (
+        "engine/recursive_knowledge now has an __init__.py; this test pins the NAMESPACE case "
+        "and must be repointed at a package that still has none, or withdrawn"
+    )
+    assert "engine.recursive_knowledge" in _packages_present()
