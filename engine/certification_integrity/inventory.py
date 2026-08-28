@@ -182,14 +182,16 @@ def build(root: str, *, coverage_xml: str | None = None) -> Inventory:
         covered = sum(o.covered for o in objects)
         measured = scope.measures(path)
         # Execution paths: the callable entry points inside the file. A module with 40 functions
-        # has 40 ways to be entered, and "the file is 90% covered" says nothing about how many
-        # of them ran, which is why this is recorded per file rather than inferred from a ratio.
+        # has 40 ways to be entered, and "the file is 90% covered" says nothing about how many of
+        # them ran, which is why this is recorded per file rather than inferred from a ratio.
+        #
+        # Derived from the AST structure ALONE, never from statement counts. Statement counts are
+        # intersected with the coverage report when one is present, so filtering on them would make
+        # this field — and UCI-L-06, which reads it — answer differently depending on whether
+        # coverage.xml happened to exist. A law whose verdict depends on the presence of an
+        # artifact it does not measure is not a law about the repository.
         execution_paths = tuple(
-            sorted(
-                o.name
-                for o in objects
-                if o.kind in (KIND_FUNCTION, KIND_METHOD, KIND_CLASS) and o.statements
-            )
+            sorted(o.name for o in objects if o.kind in (KIND_FUNCTION, KIND_METHOD, KIND_CLASS))
         )
         planes: set[str] = set()
         for obj in objects:

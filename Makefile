@@ -2380,3 +2380,54 @@ mutation-gate: bootstrap-quiet
 # mutation-json: the machine-readable report, for a consumer that needs the census.
 mutation-json: bootstrap-quiet
 	@$(PY) -m platform.repository_intelligence.mutation_gate --json --quiet
+
+
+# ===========================================================================
+# UCI-000001 — Universal Certification Integrity.
+#
+# WHAT THIS PROGRAMME MEASURES, AND WHY IT DID NOT EXIST BEFORE.
+#
+# Every coverage gate in this repository governed a NUMERATOR. The denominator was
+# declared twice (`addopts` and `[tool.coverage.run] source`), reconciled by
+# UCOS-COV-SCOPE-001 against each other, and compared to the executable surface by
+# nothing at all. Measured at b51f6f84: the denominator held 905 of 1,524 tracked
+# non-test Python files, so a reported 97.9% was a true statement about 52% of the
+# executable surface, and executable-surface coverage was 44.9%.
+#
+# Outside the denominator: all 39 00-MASTER/*/*_engine.py gate engines (20,359
+# statements, every one an enforcement artifact UEC-000001 governs by name),
+# 00-BOOK/tools including ukb.py (the registration enforcement the whole corpus
+# plane depends on), intelligence/ (in pytest testpaths, in no --cov flag), and
+# engine/recursive_knowledge (an implicit namespace package the scope control could
+# not see because it enumerated by __init__.py).
+#
+# These targets are one of the two invocation planes UEC-L-06 requires; the other
+# is .github/workflows/uci-gate.yml. Deleting either now fails UEC-L-02 (a governed
+# artifact went missing) rather than silently unbinding the six laws.
+#
+# Exit semantics: 0 OPEN, 1 CLOSED (a blocking law refused), 2 FAULT (no verdict).
+# ===========================================================================
+.PHONY: uci uci-gate uci-json uci-inventory
+
+# uci: the human-readable measurement — the denominator against the surface, the
+# scope drift, all six laws and the ratchet table.
+uci: bootstrap-quiet
+	@$(PY) -m engine.certification_integrity.gate
+
+# uci-gate: fail-closed. Every ratchet is two-sided, so this refuses both a new
+# violation AND debt repaid without tightening the ceiling — the second being how a
+# ratchet decays into decoration.
+uci-gate: bootstrap-quiet
+	@$(PY) -m engine.certification_integrity.gate --gate --quiet \
+	  || { echo "UCI GATE CLOSED — run 'make uci' for the named refusals" >&2; exit 1; }
+	@echo "uci-gate: the denominator is governed, the surface is claimed, every ceiling binds"
+
+# uci-json: the machine-readable report, for a consumer that needs the law table.
+uci-json: bootstrap-quiet
+	@$(PY) -m engine.certification_integrity.gate --json --quiet
+
+# uci-inventory: writes coverage_gap_inventory.json, the one artifact this programme
+# emits. No law in the package reads it back, so regenerating it cannot turn a
+# refusal into a pass — the same asymmetry `make uec-inventory` relies on.
+uci-inventory: bootstrap-quiet
+	@$(PY) -m engine.certification_integrity.gate --write-inventory coverage_gap_inventory.json

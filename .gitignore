@@ -229,3 +229,4 @@ intelligence/UCOS-UPI-001/
 # directory changes no verdict — only the cost of reaching one. The evidence is emitted
 # fresh by every certified run and is bound into certification from there, not from git.
 .ucos/
+.uci-evidence/

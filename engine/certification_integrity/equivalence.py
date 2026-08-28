@@ -230,8 +230,12 @@ def partition(items: list[str], shards: int) -> list[list[str]]:
     return groups
 
 
-def test_files(root: str, testpaths: list[str]) -> list[str]:
+def discover_test_modules(root: str, testpaths: list[str]) -> list[str]:
     """Every test module, from the filesystem rather than from pytest's collection.
+
+    NOT named ``test_files``: pytest collects any module-level callable whose name begins with
+    ``test_``, so the original name made this helper a collected test with an unsatisfiable
+    ``root`` fixture, and the shard proof's own helper reported as a suite error.
 
     Reading the filesystem keeps the shard population independent of the plugin set: a collection
     hook that dropped items would otherwise shrink both the shards and the whole run together and
@@ -278,7 +282,7 @@ def shard_equivalence(
 
     extraction = immutable.prepare(root, sha, workspace=workspace)
     scope = surface_module.read_scope(extraction.root)
-    modules = test_files(extraction.root, list(scope.testpaths))
+    modules = discover_test_modules(extraction.root, list(scope.testpaths))
     groups = partition(modules, shards)
 
     whole, _ = suite.run_in_extraction(

@@ -148,6 +148,12 @@
       "rule_id": "UEC-R-06"
     },
     {
+      "identity": "00-MASTER/UCI-000001/uci-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "UCI-000001 (certification integrity)",
+      "rule_id": "UEC-R-06"
+    },
+    {
       "identity": "00-MASTER/UCL-000001/ucl-declaration.json",
       "kind": "DECLARATION",
       "owner": "each programme's own owner",
@@ -724,6 +730,12 @@
       "rule_id": "UEC-R-04"
     },
     {
+      "identity": "uci-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
       "identity": "ucl-gate",
       "kind": "MAKE_GATE_TARGET",
       "owner": "gate owner",
@@ -818,6 +830,12 @@
       "kind": "MAKE_GATE_TARGET",
       "owner": "gate owner",
       "rule_id": "UEC-R-04"
+    },
+    {
+      "identity": "engine/certification_integrity/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-02"
     },
     {
       "identity": "engine/construct/gate.py",
@@ -1120,6 +1138,12 @@
       "rule_id": "UEC-R-03"
     },
     {
+      "identity": ".github/workflows/uci-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "each capability's own owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
       "identity": ".github/workflows/ucl-gate.yml",
       "kind": "WORKFLOW",
       "owner": "gate owner",
@@ -1201,7 +1225,7 @@
   "$governed_enforcement": "165 enforcement artifacts, ADOPTED FROM MEASUREMENT and thereafter governed by hand. `make uec-inventory` prints the discovered surface; nothing writes it here. That asymmetry is the whole mechanism: if the observation could rewrite the expectation, then deleting a workflow and re-running the generator would produce a green gate, which is exactly the bypass this programme closes. Adoption and withdrawal are human edits to this file, and the `git diff` is the record a silent deletion does not leave.",
   "ratchet": {
     "$comment": "TWO-SIDED, WITH NO SLACK. Each ratcheted law refuses when measured > ceiling, so a NEW violation fails the build immediately. UEC-L-11 refuses when measured < ceiling, so a REPAIRED violation must tighten the ceiling. The satisfied state is measured == ceiling exactly, which leaves no room for a future violation to occupy silently. This is the half `00-MASTER/BASELINE-001/baseline_engine.py:726` lacks: it computes `vacuous: len(declared) == 0`, renders it, and does not close the gate on it.",
-    "governed_artifacts": 178,
+    "governed_artifacts": 182,
     "engines_without_a_test": 18,
     "artifacts_with_one_invocation_plane": 15,
     "declarations_no_code_consumes": 3,
