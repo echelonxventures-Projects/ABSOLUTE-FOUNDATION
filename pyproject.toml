@@ -378,15 +378,27 @@ addopts = [
   # (97.90% -> 97.53%), which is the direction that distinguishes correcting a denominator from
   # laundering one; the 90% floor is unchanged and unthreatened.
   "--cov=engine.recursive_knowledge",
-  # UCI-000001 — the certification-integrity surface enters the denominator on the principle
-  # this scope control exists to enforce, and not because it is well covered: it is TRACKED,
-  # EXECUTABLE and part of the repository, so it belongs in the ratio. 481 statements across
-  # four modules with no test importing them (engine/tests/certification/test_integrity.py
-  # imports engine.certification, a different package whose similar name is coincidental).
-  # Admitting it moves the whole-suite figure DOWN by roughly half a point and leaves the 90%
-  # floor unthreatened. Excluding a package because measuring it would lower the number is the
-  # precise defect this control was written to end, so the default is measured and the burden
-  # is on exclusion — see [tool.ucos.coverage_scope], which is where a reasoned exemption goes.
+  # UCI-000001 — declared because it is TRACKED, EXECUTABLE repository content and the ratio is
+  # supposed to be over that. Excluding a package because measuring it would lower the number is
+  # the defect this control exists to end, so the default is measured and the burden is on
+  # exclusion — [tool.ucos.coverage_scope] is where a reasoned one goes.
+  #
+  # AND DECLARING IT CHANGED THE DENOMINATOR BY NOTHING, which is worth recording because the
+  # first version of this comment claimed it would add 481 statements. It does not. Measured on
+  # the certification run at 58f4bd75:
+  #
+  #     CoverageWarning: Module engine.certification_integrity was never imported.
+  #                      (module-not-imported)
+  #     TOTAL  88,665 statements   — unchanged from the run before this entry existed
+  #
+  # coverage.py measures modules that are IMPORTED, and no test imports this package
+  # (engine/tests/certification/test_integrity.py imports engine.certification, a different
+  # package whose similar name is coincidental). So a `--cov=` entry is a statement of INTENT,
+  # not of measurement: the package joins the ratio on the day something first imports it.
+  # platform/tests/test_coverage_scope.py governs whether a package is DECLARED and cannot see
+  # whether it is MEASURED — a gap one level below the one it was built for, recorded as a
+  # residual risk rather than papered over. The entry stays: it is correct about where this
+  # package belongs, and it becomes load-bearing the moment the package acquires a test.
   "--cov=engine.certification_integrity",
   "--cov-report=term-missing",
   "--cov-report=xml",
