@@ -1,8 +1,8 @@
 # Final Certification Report
 
 **Programme** UCI-000001 Universal Certification Integrity
-**Certification SHA** `4f590ddaaa48c2f856fa1e22c31f425a70525665`
-**Frozen-extraction seal** `4f2d11ba34136cb8ce028ec6a82398f176d46517` (content-addressed)
+**Certification SHA** `74d9f8443acd76302e3826bfda47323b0cbe8772`
+**Frozen-extraction seal** `2d66530608871bab06ab3f334169c971df3f8c4e` (content-addressed)
 **Branch** `integration/recovery-001`
 **Inventory digest** `b9a9f3221d1179c4`
 **Authority** NONE — DERIVED TRUTH. Every figure is reproducible with `make uci`.
@@ -264,6 +264,20 @@ UGA-INV-01/INV-10 correctly refused them until registered — self-enforcement w
 obstacle.
 
 **UEC-000001: OPEN**, 182 artifacts, all five ratchets at equality.
+
+**UCON-000001** refused this work and was satisfied properly rather than
+accommodated. The twelve closure constructs the new package introduced pushed four
+outside-scope populations above their baselines, and UCON's rule is that such a
+population "may hold, and it may fall" but never rise. The sanctioned remedy —
+widen `governed_scope`, never raise the baseline — was taken: all twelve are now
+disclosed with a closing invariant and an admission path, and the baseline is
+untouched. Raising it would have bought silence for someone else's future closure
+as well as mine.
+
+**Gate sweep at this SHA**, all exit 0: `certification_integrity`,
+`enforcement_closure`, `recursive_knowledge`, `construct`, `object_birth`,
+`root_ontology`, `uaue`, `verification_intelligence`, `infinite_scope`, `uga`,
+`mutation`.
 
 ---
 
