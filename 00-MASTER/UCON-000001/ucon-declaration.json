@@ -1477,15 +1477,16 @@
       }
     ],
     "governed_scope": [
+      "engine/certification_integrity/",
       "engine/construct/",
-      "engine/recursive_knowledge/",
-      "engine/enforcement_closure/"
+      "engine/enforcement_closure/",
+      "engine/recursive_knowledge/"
     ],
     "undeclared_tier": "R3-LOCAL",
     "deliberate_tier": "R4-DELIBERATE",
     "$deliberate_tier": "The tier a DISCLOSED, intentional closure takes, whatever its module prefix says. Declared because the R4 criterion is a property of the disclosure rather than of the module, and because assigning disclosed closures their prefix tier instead would leave R4 permanently empty — a declared tier nothing can ever occupy is a closure in the risk model itself.",
     "$undeclared_tier": "The tier a module takes when no declared prefix claims it. Declared here rather than defaulted in engine/construct/audit.py because 'what do we assume about code nobody has classified' is an assumption, and an unnamed assumption in a risk classifier is how a constitutional closure comes to be counted as a local one. R3-LOCAL is the conservative choice for a RATCHET — it keeps the closure counted in the backlog without asserting an owner the declaration does not name.",
-    "$governed_scope": "The scope in which an undisclosed closure is a VIOLATION rather than a backlog entry. It began as exactly this capability, because a capability that ratchets everybody else's code before its own has inverted the obligation. Widening this list is how the audit converts backlog into enforcement, one owner at a time, and each widening is a decision with a named owner rather than a sweep. FIRST WIDENING: engine/recursive_knowledge/ (owner URKE-000001), admitted after UCON-000001 had already ratcheted its own eight closures, so the obligation is discharged before it is extended. The widening was not a convenience: URKE-000001 authored four closures outside governed scope, which the ratchet correctly refused as a population increase over the declared baseline. Enforcing disclosure on them is the honest remedy; raising the baseline to accommodate them would have been the dishonest one, and this declaration forbids it.",
+    "$governed_scope": "The scope in which an undisclosed closure is a VIOLATION rather than a backlog entry. It began as exactly this capability, because a capability that ratchets everybody else's code before its own has inverted the obligation. Widening this list is how the audit converts backlog into enforcement, one owner at a time, and each widening is a decision with a named owner rather than a sweep. FIRST WIDENING: engine/recursive_knowledge/ (owner URKE-000001), admitted after UCON-000001 had already ratcheted its own eight closures, so the obligation is discharged before it is extended. The widening was not a convenience: URKE-000001 authored four closures outside governed scope, which the ratchet correctly refused as a population increase over the declared baseline. Enforcing disclosure on them is the honest remedy; raising the baseline to accommodate them would have been the dishonest one, and this declaration forbids it. UCI-000001 joined at d9296d32: engine/certification_integrity/ carries twelve closures, all disclosed below. Widening governed_scope rather than raising the baseline is the sanctioned path recorded in engine/construct/audit.py:31 — outside the scope a population may hold or fall and never rise, so a new capability that adds closures must bring them inside and disclose them.",
     "disclosed_closures": [
       {
         "closure_id": "UCON-CL-01",
@@ -1685,6 +1686,126 @@
         "intentional": true,
         "closing_invariant": "The generic semantic mutations UEC-L-13 applies to every governed declaration exposing the uniform identity interface. Closed in source on purpose: a mutation set that could be EXTENDED BY DATA would let the subject of a measurement choose the measurement, which is the certification bypass this law exists to refuse. Each entry targets a value a programme's own contract reads to reach a verdict — a law's blocking flag, its statement, its bound check, the declared authority, the declared version — so a surviving mutant is a demonstrated bypass rather than a theoretical one. Non-vacuity is held by the ratchet `declarations_with_uniform_identity`, which fails in BOTH directions.",
         "admission": "Add the mutation here, in code, alongside a test that proves it kills on a forged incomplete identity. Adding one is intended to be a source change reviewed as governance: the set is the definition of 'semantic', and widening it silently by data would make the law mean whatever the last edit said it meant.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-21",
+        "module": "engine/certification_integrity/classify.py",
+        "symbol": "RULES",
+        "form": "FIXED_VOCABULARY_TUPLE",
+        "intentional": true,
+        "closing_invariant": "The ordered uncovered-line classification rules. Closed and ORDER-BEARING — first match wins, so a typing-only line is classified impossible before it is classified defensive. The closure IS the safety property: CLASS_EXECUTABLE is the default, so a line can only leave the class that costs work by matching a rule stated here and checkable by a reader.",
+        "admission": "Add a rule carrying its class, id, description and pattern. Widening this set retires coverage debt without writing tests, which is exactly why it is source-closed and reviewed rather than data-driven.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-22",
+        "module": "engine/certification_integrity/contract.py",
+        "symbol": "RATCHETED",
+        "form": "FIXED_DISPATCH_TABLE",
+        "intentional": true,
+        "closing_invariant": "measurement key -> (law id, callable). Closed and TWO-WAY BOUND to uci-declaration.json: contract.measure refuses a declared ceiling that binds no measurement (UCI-L-07), and _ratcheted refuses a measurement with no declared ceiling. Neither side can drift from the other.",
+        "admission": "Implement the measurement so that it returns offending identities, register it here with its law id, and declare its ceiling in the declaration. All three are required — the gate refuses any two of the three.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-23",
+        "module": "engine/certification_integrity/contract.py",
+        "symbol": "LAWS",
+        "form": "FIXED_DISPATCH_TABLE",
+        "intentional": true,
+        "closing_invariant": "law id -> Law. Closed because a law is executable governance: test_every_law_in_the_table_is_declared refuses a law measured here but absent from the declaration, and the workflow's declaration-soundness job refuses any law declared blocking:false.",
+        "admission": "Add the Law here and declare it in the declaration's laws array with blocking true. There is no field to make a law non-blocking, because the switch would be reachable by the mutation the law detects.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-24",
+        "module": "engine/certification_integrity/coverage_data.py",
+        "symbol": "len(unique)",
+        "form": "POPULATION_ASSERTION",
+        "intentional": true,
+        "closing_invariant": "A population assertion inside coverage_data._relative: how many source roots a bare coverage filename resolves under. Closed at 'exactly one' because one is the only case in which the coverage document determines file identity at all. More than one is the measured `coverage xml` defect and resolves to a marked ambiguous key rather than to a guess.",
+        "admission": "Not widenable, and the assertion IS the finding rather than a guard against one: CoverageReport.body_is_incomplete records 57,938 statements absent from a document whose header still claims them.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-25",
+        "module": "engine/certification_integrity/coverage_data.py",
+        "symbol": "len(preferred)",
+        "form": "POPULATION_ASSERTION",
+        "intentional": true,
+        "closing_invariant": "The companion population assertion for the package-hint disambiguation path, with the same standing as the one above: exactly one candidate, or the name is treated as unresolved.",
+        "admission": "Not widenable. Guessing between candidates is what produced a false shard-equivalence finding — 19 files reported present in one run and absent in the other with every line set identical.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-26",
+        "module": "engine/certification_integrity/immutable.py",
+        "symbol": "SEAL_ENV",
+        "form": "FIXED_DISPATCH_TABLE",
+        "intentional": true,
+        "closing_invariant": "The pinned git identity and both timestamps for the frozen extraction's sealing commit. Closed BECAUSE IT MUST BE: every field is fixed so the sealing commit's SHA is a pure function of the archived bytes, verified deterministic across two independent extractions (b2c9f886d56b462b71133c18193a149f1a39a9cd both times). An open set here would make the seal a clock reading rather than a content address.",
+        "admission": "It must not be widened. Any additional or varying field breaks content-addressing, which is the single property that makes a frozen certification run citable.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-27",
+        "module": "engine/certification_integrity/inventory.py",
+        "symbol": "CLASSIFICATION_RULES",
+        "form": "FIXED_VOCABULARY_TUPLE",
+        "intentional": true,
+        "closing_invariant": "The ordered file-classification rules. Closed and ORDER-BEARING for the same reason as classify.RULES: classification decides whether a file's absence from the coverage denominator is a defect or a governed exclusion, so reclassifying is the cheapest possible way to retire debt and must not be addable by data.",
+        "admission": "Add a rule carrying its id, class, description and pattern. FILE_EXECUTABLE remains the default and nothing may reach a cheaper class by omission.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-28",
+        "module": "engine/certification_integrity/model.py",
+        "symbol": "CLASSES_REQUIRING_MEASUREMENT",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "intentional": true,
+        "closing_invariant": "The file classes that MUST be inside the coverage denominator. Closed at exactly {executable, tooling} because those two are the classes for which 'we do not know what fraction of this executed' is not an acceptable answer. tooling is included deliberately: 00-BOOK/tools/ukb.py is the registration enforcement the whole corpus plane depends on, and calling it tooling describes its directory, not a reason its executed fraction may be unknown.",
+        "admission": "Add a class here only with an argument for why its executed fraction must be known. Removing one is how an entire category would leave the denominator silently, so this set is the thing UCI-L-01 quantifies over.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-29",
+        "module": "engine/certification_integrity/model.py",
+        "symbol": "LOCAL_PLANES",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "intentional": true,
+        "closing_invariant": "The invocation planes runnable without CI. Closed because the distinction it draws — can this be verified on a developer's machine — is a fact about the three texts in surface.PLANE_SOURCES, not an open set.",
+        "admission": "Add a plane type to model.PLANE_TYPES and decide which side it falls on. A plane in neither LOCAL_PLANES nor AUTOMATED_PLANES is invisible to the single-point-of-failure question, which is the question these two sets exist to answer.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-30",
+        "module": "engine/certification_integrity/model.py",
+        "symbol": "AUTOMATED_PLANES",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "intentional": true,
+        "closing_invariant": "The invocation planes runnable without a developer. Closed for the same reason as LOCAL_PLANES, and deliberately narrow: every workflow file collapses into one 'ci' plane, which is precisely what makes UCI-L-05 stricter than UEC-L-06 and why an engine invoked from thirty-three workflows still counts as one plane here.",
+        "admission": "As LOCAL_PLANES.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-31",
+        "module": "engine/certification_integrity/model.py",
+        "symbol": "REMEDY",
+        "form": "FIXED_DISPATCH_TABLE",
+        "intentional": true,
+        "closing_invariant": "uncovered-line class -> obliged remedy. Closed and TOTAL over LINE_CLASSES: UncoveredLine.remedy indexes it directly, so a class with no remedy raises rather than defaulting to a cheap one. That is deliberate — a class with no remedy would be a place to put lines.",
+        "admission": "Add the class to LINE_CLASSES and its remedy here. The KeyError on a missing entry is the enforcement, not an oversight.",
+        "gap": null
+      },
+      {
+        "closure_id": "UCON-CL-32",
+        "module": "engine/certification_integrity/surface.py",
+        "symbol": "PLANE_SOURCES",
+        "form": "FIXED_DISPATCH_TABLE",
+        "intentional": true,
+        "closing_invariant": "invoking text -> plane type, for the three fixed texts (Makefile, verify.sh, scripts/ucos-env.sh). Closed and two-way bound to model.PLANE_TYPES. Workflows are deliberately NOT enumerated: they are discovered from git ls-files and all collapse into the single 'ci' plane, so a new workflow requires no edit here.",
+        "admission": "Add the text and its plane type. A text that is none of the three named is a new invocation plane and must be argued as one, because plane COUNT is what UCI-L-05 refuses below two.",
         "gap": null
       }
     ],

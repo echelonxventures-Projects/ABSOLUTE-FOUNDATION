@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "3 — Audit Universe",
   "evidence_class": "AUDIT",
-  "count": 5372,
+  "count": 5374,
   "events": [
     {
       "event_id": "UGA-AUD-368c03bec2e5",
@@ -43532,6 +43532,19 @@
       "status": "ACTIVE"
     },
     {
+      "event_id": "UGA-AUD-471d7628cb5d",
+      "timestamp": "commit:d9296d326bd9",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-EXDOC-002993",
+      "object_path": "coverage_100_plan.md",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-EXDOC-002993",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-1032e902155c",
       "timestamp": "commit:e98f59cd22e9",
       "actor": "UCOS-UGA-001",
@@ -55149,6 +55162,19 @@
       "object_path": "engine/verification_intelligence/selection.py",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-ENGINE-001250",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-48248b1f53f2",
+      "timestamp": "commit:d9296d326bd9",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-EXDOC-002994",
+      "object_path": "final_certification_report.md",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-EXDOC-002994",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"

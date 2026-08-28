@@ -11512,7 +11512,7 @@
     "DET": 6,
     "CONFIG": 36,
     "DATAOBJ": 136,
-    "EXDOC": 2992,
+    "EXDOC": 2994,
     "TOOLING": 36,
     "ENGINE": 1330,
     "TESTOBJ": 842,
@@ -63678,6 +63678,18 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:d190fb1906a4"
+    },
+    "coverage_100_plan.md": {
+      "universal_id": "UCOS-EXDOC-002993",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:d9296d326bd9"
+    },
+    "final_certification_report.md": {
+      "universal_id": "UCOS-EXDOC-002994",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:d9296d326bd9"
     }
   },
   "by_observation": {
