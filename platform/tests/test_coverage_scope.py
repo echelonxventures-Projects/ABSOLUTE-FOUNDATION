@@ -56,6 +56,33 @@ PYPROJECT = REPO / "pyproject.toml"
 SOURCE_TREES = ("engine", "platform")
 _NOT_A_SOURCE_PACKAGE = frozenset({"tests"})
 
+#: Top-level directories that are importable Python packages in their own right, rather than
+#: containers of sub-packages. UCI-000001 added this second control because the first one could
+#: not see them: ``SOURCE_TREES`` is ``engine`` and ``platform``, so a top-level package that is
+#: neither was not a third possibility the control refused — it was a question the control never
+#: asked. Five existed, carrying 35,333 statements and 4,121 passing tests, and four of the five
+#: had test roots that no ``testpaths`` entry collected either.
+#:
+#: Discovered from the filesystem rather than listed, so a sixth layer is governed on the day it
+#: appears. The predicate is ``__init__.py`` at the TOP level, which is the right question here
+#: and the wrong one a level down: it distinguishes an importable library surface from a
+#: directory of scripts, whereas inside an already-measured tree it merely distinguishes a
+#: regular package from a namespace one (see ``_packages_present``).
+_TOP_LEVEL_NON_PACKAGES = frozenset({"tests", "docs", "dist", "build"})
+
+
+def _top_level_packages() -> set[str]:
+    """Every top-level importable Python package in the repository."""
+    found: set[str] = set()
+    for child in sorted(REPO.iterdir()):
+        if not child.is_dir() or child.name.startswith("."):
+            continue
+        if child.name in _TOP_LEVEL_NON_PACKAGES:
+            continue
+        if (child / "__init__.py").exists():
+            found.add(child.name)
+    return found
+
 
 @pytest.fixture(scope="module")
 def config() -> dict[str, Any]:
@@ -171,8 +198,13 @@ def test_no_declared_exclusion_is_stale(config: dict[str, Any]) -> None:
 
 
 def test_the_scope_names_only_packages_that_exist(config: dict[str, Any]) -> None:
-    """A --cov= flag naming nothing contributes nothing and reads as measurement."""
-    ghosts = sorted(_flag_scope(config) - _packages_present())
+    """A --cov= flag naming nothing contributes nothing and reads as measurement.
+
+    Compared against the UNION of the two enumerations. The sub-package enumeration alone would
+    report the five top-level layers as ghosts, since they are packages rather than children of
+    one — the same blind spot, seen from the opposite side.
+    """
+    ghosts = sorted(_flag_scope(config) - _packages_present() - _top_level_packages())
     assert not ghosts, f"the coverage scope names packages absent from the tree: {ghosts}"
 
 
@@ -181,6 +213,55 @@ def test_the_enforcement_closure_programme_is_inside_the_denominator(
 ) -> None:
     """The specific self-exemption this control was written for. Named, so it cannot recur."""
     assert "engine.enforcement_closure" in _flag_scope(config)
+
+
+def test_every_top_level_package_is_measured_or_declared_excluded(
+    config: dict[str, Any],
+) -> None:
+    """A top-level layer may not be outside the denominator with nothing saying why.
+
+    The measured instance: service, data, application and infrastructure carried 29,970
+    statements and 3,995 passing tests that no ``testpaths`` entry collected, and intelligence
+    carried 5,363 statements whose tests DID run while its code was measured by nothing —
+    UCOS-CL-008 admitted intelligence/tests and recorded that the denominator was "a separate
+    question, answered separately below". The separate answer was never given.
+    """
+    measured = _flag_scope(config)
+    excluded = set(_excluded(config))
+    unaccounted = sorted(
+        package
+        for package in _top_level_packages()
+        if package not in measured
+        and package not in excluded
+        and not any(m == package or m.startswith(package + ".") for m in measured)
+    )
+    assert not unaccounted, (
+        "these top-level packages are neither measured nor declared excluded, so they are "
+        f"outside the coverage denominator and nothing says why: {unaccounted}"
+    )
+
+
+def test_every_collected_test_root_has_its_layer_in_the_denominator(
+    config: dict[str, Any],
+) -> None:
+    """Collecting a layer's tests while excluding its code raises the ratio and measures nothing.
+
+    This is the pairing Rule 1 of the closure mandate names as a defect, and it is the exact
+    state intelligence/ was left in for the interval between UCOS-CL-008 and UCI-000001.
+    """
+    measured = _flag_scope(config)
+    testpaths = config["tool"]["pytest"]["ini_options"]["testpaths"]
+    unpaired = []
+    for testpath in testpaths:
+        layer = testpath.split("/", 1)[0]
+        if layer in ("engine", "platform"):
+            continue  # governed per sub-package by the controls above
+        if not any(m == layer or m.startswith(layer + ".") for m in measured):
+            unpaired.append(testpath)
+    assert not unpaired, (
+        "these test roots are collected but the layers they exercise are outside the coverage "
+        f"denominator, so running them raises no measured coverage: {unpaired}"
+    )
 
 
 def test_a_namespace_package_is_counted_as_present() -> None:
@@ -272,6 +353,64 @@ def test_an_empty_scope_is_refused() -> None:
     mutated["tool"]["coverage"]["run"]["source"] = []
     with pytest.raises(AssertionError, match="computed over nothing"):
         test_the_two_scope_declarations_agree(mutated)
+
+
+def test_a_top_level_package_in_neither_list_is_refused() -> None:
+    """Drop a whole layer from the scope: the guard must fire and name it.
+
+    Forged against ``service`` specifically, because ``service`` is one of the four layers that
+    was in this state — 132 modules and 1,070 uncollected tests — while every test in this file
+    passed.
+    """
+    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
+    ini = mutated["tool"]["pytest"]["ini_options"]
+    ini["addopts"] = [a for a in ini["addopts"] if a != "--cov=service"]
+    with pytest.raises(AssertionError, match="neither measured nor declared excluded"):
+        test_every_top_level_package_is_measured_or_declared_excluded(mutated)
+
+
+def test_collecting_a_layers_tests_without_measuring_its_code_is_refused() -> None:
+    """The intelligence/ state, forged. Tests run, code unmeasured, ratio flattered."""
+    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
+    ini = mutated["tool"]["pytest"]["ini_options"]
+    ini["addopts"] = [a for a in ini["addopts"] if a != "--cov=intelligence"]
+    with pytest.raises(AssertionError, match="raises no measured coverage"):
+        test_every_collected_test_root_has_its_layer_in_the_denominator(mutated)
+
+
+def test_the_top_level_package_enumeration_is_not_vacuous() -> None:
+    """A control over an empty set refuses nothing. The seven are named so a drop is visible."""
+    found = _top_level_packages()
+    assert found == {
+        "application",
+        "data",
+        "engine",
+        "infrastructure",
+        "intelligence",
+        "platform",
+        "service",
+    }, f"the top-level package set has changed: {sorted(found)}"
+
+
+def test_every_layer_test_root_is_actually_collected(config: dict[str, Any]) -> None:
+    """The other direction: a layer whose code is measured but whose tests nothing collects.
+
+    Measured instance: all four of service/data/application/infrastructure shipped a tests/
+    directory that appeared in no testpaths entry. 188 modules, 3,995 passing tests, executed by
+    nothing. Absent tests are visible; unwired passing tests are not, which makes this the worse
+    of the two failures.
+    """
+    testpaths = set(config["tool"]["pytest"]["ini_options"]["testpaths"])
+    missing = []
+    for package in _top_level_packages():
+        candidate = REPO / package / "tests"
+        if candidate.is_dir() and any(candidate.rglob("test_*.py")):
+            if f"{package}/tests" not in testpaths:
+                missing.append(f"{package}/tests")
+    assert not missing, (
+        "these layers ship test modules that no testpaths entry collects, so the tests exist "
+        f"and never run: {sorted(missing)}"
+    )
 
 
 def test_untracked_debris_does_not_enter_the_denominator() -> None:

@@ -230,3 +230,4 @@ intelligence/UCOS-UPI-001/
 # fresh by every certified run and is bound into certification from there, not from git.
 .ucos/
 .uci-evidence/
+coverage_gap_inventory.json

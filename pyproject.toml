@@ -205,7 +205,31 @@ minversion = "8.0"
 #
 # The coverage DENOMINATOR is deliberately a separate question, answered separately below:
 # these tests entering collection does not by itself put intelligence/* into --cov.
-testpaths = ["engine/tests", "platform/tests", "intelligence/tests"]
+#
+# --- UCI-000001: four more test roots that were collected by NOTHING -------------------
+#
+# The same defect as intelligence/tests, four more times and at twenty times the scale.
+# Measured: service/tests, data/tests, application/tests and infrastructure/tests hold 188
+# test modules and 3,995 tests. They were named in no testpaths, no Makefile target, no
+# verify.sh stage and no workflow. Every one of them passes, in 14.7 seconds combined.
+#
+# That combination is the worst possible one. A reader who opens data/tests and finds 954
+# passing tests concludes the layer is tested; no gate anywhere executed a line of it. Tests
+# that exist and never run are worse than absent tests, because absence is visible.
+#
+# The four source layers they cover enter --cov below in the same edit. Admitting the tests
+# without admitting the code would put 3,995 passing tests against a denominator that still
+# excluded what they exercise, which would raise the reported percentage while measuring
+# nothing new -- the precise move Rule 1 of the closure mandate names as a defect.
+testpaths = [
+  "engine/tests",
+  "platform/tests",
+  "intelligence/tests",
+  "service/tests",
+  "data/tests",
+  "application/tests",
+  "infrastructure/tests",
+]
 addopts = [
   "-ra",
   "--strict-markers",
@@ -400,6 +424,45 @@ addopts = [
   # residual risk rather than papered over. The entry stays: it is correct about where this
   # package belongs, and it becomes load-bearing the moment the package acquires a test.
   "--cov=engine.certification_integrity",
+  # --- UCI-000001: the five top-level realization layers enter the denominator ------------
+  #
+  # WHY THESE WERE OUTSIDE IT, AND WHY THAT WAS INVISIBLE RATHER THAN MERELY UNNOTICED.
+  #
+  # UCOS-COV-SCOPE-001 governs the packages under engine/ and platform/. Its SOURCE_TREES are
+  # exactly those two, so a top-level Python package that is neither was not a third
+  # possibility the control refused -- it was a question the control never asked. Five existed,
+  # each a tracked, executable layer with its own passing test suite.
+  #
+  # Measured, source only, with each layer's own test root omitted:
+  #
+  #     service          1,070 tests  \
+  #     data               954 tests   |  29,970 statements, 458 missing, 98%
+  #     application      1,094 tests   |  3,995 tests, 14.7 seconds for all four
+  #     infrastructure     877 tests  /
+  #     intelligence       126 tests     5,363 statements, 561 missing, 87%
+  #
+  # The first four are the worse finding, because their TESTS were unwired too: 188 test
+  # modules and 3,995 passing tests named in no testpaths, no Makefile target, no verify.sh
+  # stage and no workflow. A reader who opens data/tests, finds 954 passing tests and concludes
+  # the layer is covered is reading evidence that no gate has ever executed. Tests that exist
+  # and never run are worse than absent tests, because absence is visible and this was not.
+  #
+  # intelligence is the sharpest single case: UCOS-CL-008 admitted intelligence/tests to
+  # testpaths, recorded that the denominator was "deliberately a separate question, answered
+  # separately below", and the separate answer was never given. Its tests have been running and
+  # its statements unmeasured ever since.
+  #
+  # Effect on the reported figure: the denominator grows from roughly 86,000 statements to
+  # roughly 121,300, and the whole-suite percentage moves from about 97.5% to about 97.4%.
+  # intelligence enters BELOW the floor at 87% and is admitted anyway, because the alternative
+  # is to keep reporting a denominator that excludes it. The 90% floor is unchanged and
+  # unthreatened. Admitting the tests without admitting the code would have raised the reported
+  # percentage while measuring nothing new, which Rule 1 of the closure mandate names a defect.
+  "--cov=service",
+  "--cov=data",
+  "--cov=application",
+  "--cov=infrastructure",
+  "--cov=intelligence",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -407,8 +470,19 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/certification_integrity", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/construct", "engine/enforcement_closure", "engine/constitution", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence", "engine/execution_environment", "engine/recursive_knowledge"]
-omit = ["engine/tests/*", "platform/tests/*"]
+source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/certification_integrity", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/construct", "engine/enforcement_closure", "engine/constitution", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence", "engine/execution_environment", "engine/recursive_knowledge", "service", "data", "application", "infrastructure", "intelligence"]
+# Each layer's own test root is omitted for the same reason engine/tests is: a test
+# module is not source under measurement, and counting it would let a suite raise its
+# own coverage by growing.
+omit = [
+  "engine/tests/*",
+  "platform/tests/*",
+  "intelligence/tests/*",
+  "service/tests/*",
+  "data/tests/*",
+  "application/tests/*",
+  "infrastructure/tests/*",
+]
 
 # --- UCOS-COV-SCOPE-001 — the coverage denominator, declared rather than assumed ---------
 #
