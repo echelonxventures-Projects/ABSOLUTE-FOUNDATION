@@ -5,10 +5,10 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "2 — Universal Object Registry (union view)",
   "why": "The single source of truth for EXISTENCE. It unions the document class governed by UMB-IMP-001 with the object classes governed by UCOS-UGA-001. It is a VIEW, not a second registry: it stores no identity of its own and mints nothing.",
-  "count": 6762,
+  "count": 6775,
   "by_authority": {
     "UMB-IMP-001": 1597,
-    "UCOS-UGA-001": 5165
+    "UCOS-UGA-001": 5178
   },
   "entries": [
     {
@@ -372,6 +372,24 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "universal_id": "UCOS-CONFIG-000036",
+      "path": ".github/workflows/uci-gate.yml",
+      "object_class": "CONFIGURATION_OBJECT",
+      "owner": ".github/workflows",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "b4d48cd173921dd509737ba75211f142d37033e7a7b6b8faea61f4b7e15e9d4a",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
       "universal_id": "UCOS-CONFIG-000019",
       "path": ".github/workflows/ucl-gate.yml",
       "object_class": "CONFIGURATION_OBJECT",
@@ -619,7 +637,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "6c59405a160c0a6528a2d332167887781f103b401dcdbf6d8e0ee9b141d7df19",
+      "content_hash": "d08c2fe11fa281ebbea5af8ef4a4c5ddb9fdd591a892873e06081a4dc46c15ca",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -1519,7 +1537,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "849a5c3492535658af06c76378a2f1b3f2588f49cac11cb42002c2c718c02078",
+      "content_hash": "56c9dad54f1a2573fdd2b285a989c57785869afa6e6e1282ad75b1012e4c8047",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -45238,6 +45256,24 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "universal_id": "UCOS-DATAOBJ-000136",
+      "path": "00-MASTER/UCI-000001/uci-declaration.json",
+      "object_class": "DATA_OBJECT",
+      "owner": "UCI-000001",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "eb09d67bd5fcee19b1984fca9fd789cd2c2caf581cfbadcaf8af0adcad4e9db5",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
       "universal_id": "UCOS-EXDOC-001816",
       "path": "00-MASTER/UCIC-001-UNIVERSAL-CAPABILITY-IMPLEMENTATION-CONTRACT.md",
       "object_class": "EXCLUDED_DOCUMENT",
@@ -55063,7 +55099,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "c3dda84abb88dffa35fe3e8321d24ea886bb59f1c7af6ba29c02f11d281f91fa",
+      "content_hash": "485988e3df274667ce62ab8904154c08a917cb52d9154832da576ceb3fb07fb4",
       "content_hash_withheld": null,
       "first_seen": "commit:446f8a0f6d95"
     },
@@ -68209,7 +68245,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "e91bde876f4595ba0a0329ddc33746690a451ca0897de67a21e3222f72995c37",
+      "content_hash": "f0d1b2a1a717732970a8d3b7f6dbc9d08bd56a4bd65236199e98e08ec2b4c996",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -83787,6 +83823,72 @@
       "first_seen": "commit:3b3067016087"
     },
     {
+      "universal_id": "UCOS-ENGINE-001322",
+      "path": "engine/certification_integrity/__main__.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/certification_integrity",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/certification_integrity/gate.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "5df8f22fd6507e3a540348fee8bb17b93163fda74f5ee10f3808bc82211d9c0e",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
+      "universal_id": "UCOS-ENGINE-001323",
+      "path": "engine/certification_integrity/classify.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/certification_integrity",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/certification_integrity/__init__.py",
+        "engine/certification_integrity/inventory.py",
+        "engine/certification_integrity/model.py",
+        "engine/certification_integrity/surface.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "bf0e51a4a839232eeb8df1e84d685ee54c9e11ba41b5da2606233cb0142eabf8",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
+      "universal_id": "UCOS-ENGINE-001324",
+      "path": "engine/certification_integrity/contract.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/certification_integrity",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/certification_integrity/__init__.py",
+        "engine/certification_integrity/coverage_data.py",
+        "engine/certification_integrity/inventory.py",
+        "engine/certification_integrity/model.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "7493cb61e491c18d26928bc4b3aacd7f3e14c1bdce3eb6455d6f192f997d7906",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
       "universal_id": "UCOS-ENGINE-001319",
       "path": "engine/certification_integrity/coverage_data.py",
       "object_class": "EXECUTABLE_OBJECT",
@@ -83802,9 +83904,98 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "3a9d5600209e18eb70566a417feef5cf82339bcea3bf6aebc445de1748b44b8f",
+      "content_hash": "44f449a6c6c8fcb4b7f731e65f77c3eda6bc1147508db3abdfde915fcad0bb9b",
       "content_hash_withheld": null,
       "first_seen": "commit:3b3067016087"
+    },
+    {
+      "universal_id": "UCOS-ENGINE-001325",
+      "path": "engine/certification_integrity/equivalence.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/certification_integrity",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/certification_integrity/__init__.py",
+        "engine/certification_integrity/coverage_data.py",
+        "engine/certification_integrity/immutable.py",
+        "engine/certification_integrity/model.py",
+        "engine/certification_integrity/suite.py",
+        "engine/certification_integrity/surface.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "b118d12be3e271ca0b52f3f1a38d8b7ea316862d5b132615c6f0b453de90ce27",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
+      "universal_id": "UCOS-ENGINE-001326",
+      "path": "engine/certification_integrity/gate.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/certification_integrity",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/certification_integrity/contract.py",
+        "engine/certification_integrity/inventory.py",
+        "engine/certification_integrity/model.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "0d948ff7afab10fc2b6449d0769ce4f712353adb402f1262aa11ec86dfcaf342",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
+      "universal_id": "UCOS-ENGINE-001327",
+      "path": "engine/certification_integrity/immutable.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/certification_integrity",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/certification_integrity/model.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "09f75a5acd9f2abaf1798413718da733c404a7b5314af678f372a0e2eca71ce7",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
+      "universal_id": "UCOS-ENGINE-001328",
+      "path": "engine/certification_integrity/inventory.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/certification_integrity",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/certification_integrity/__init__.py",
+        "engine/certification_integrity/model.py",
+        "engine/certification_integrity/surface.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "f05016bf53f780a27786ba2a2ff0afde7adad9c0fe81023bd447085da1459f59",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
     },
     {
       "universal_id": "UCOS-ENGINE-001320",
@@ -83820,9 +84011,51 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "200f85619f9d9f0c9e3d0d4acaa466f01e190ea03805abfdd0a0589f6ee59ffb",
+      "content_hash": "fc54a53f50904afc4def0d6d00cebd5b9ce937a4c0f08a1fc6324435eb2f84e6",
       "content_hash_withheld": null,
       "first_seen": "commit:3b3067016087"
+    },
+    {
+      "universal_id": "UCOS-ENGINE-001329",
+      "path": "engine/certification_integrity/pytest_shuffle.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/certification_integrity",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "d074077faeadbacf899b19c1d876672c4f4aa1419d885026121293890858cf72",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
+      "universal_id": "UCOS-ENGINE-001330",
+      "path": "engine/certification_integrity/suite.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/certification_integrity",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/certification_integrity/__init__.py",
+        "engine/certification_integrity/coverage_data.py",
+        "engine/certification_integrity/immutable.py",
+        "engine/certification_integrity/model.py",
+        "engine/certification_integrity/surface.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "d1409463607c0079af172971dba7ed9c7a96f8774f77a084899e674a84faaefd",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
     },
     {
       "universal_id": "UCOS-ENGINE-001321",
@@ -96929,6 +97162,34 @@
       "first_seen": "commit:bb9c27d2733a"
     },
     {
+      "universal_id": "UCOS-TESTOBJ-000842",
+      "path": "engine/tests/unit/test_certification_integrity.py",
+      "object_class": "TEST_OBJECT",
+      "owner": "engine/tests",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/certification_integrity/__init__.py",
+        "engine/certification_integrity/contract.py",
+        "engine/certification_integrity/coverage_data.py",
+        "engine/certification_integrity/equivalence.py",
+        "engine/certification_integrity/immutable.py",
+        "engine/certification_integrity/inventory.py",
+        "engine/certification_integrity/model.py",
+        "engine/certification_integrity/pytest_shuffle.py",
+        "engine/certification_integrity/surface.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "6da993d887978b66ff5fae873c0cdaff3a6f65da8d7c80162af5a6265682c304",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
       "universal_id": "UCOS-TESTOBJ-000282",
       "path": "engine/tests/unit/test_closure009_requirement_engine.py",
       "object_class": "TEST_OBJECT",
@@ -96942,7 +97203,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "6587371a1f8d3a103c60a103810f5e28b7300e450b7d7f22f5a3ec0fb4010756",
+      "content_hash": "0d140bf5aa7a9ea5cd1ebfc52d5701fd2d3c1d86fe0be7278ce16be39c515ec9",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -108125,6 +108386,24 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "universal_id": "UCOS-EXDOC-002992",
+      "path": "missing_execution_surface_report.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "c9f642928d03f21acad6ac8738cf85045ba1c90b6c69b79ddc2b8edb96cb87d5",
+      "content_hash_withheld": null,
+      "first_seen": "commit:d190fb1906a4"
+    },
+    {
       "universal_id": "UCOS-PLT-000033",
       "path": "platform/EC2-IMPLEMENTATION-STATUS-DETERMINATION.md",
       "object_class": "DOCUMENT_ARTIFACT",
@@ -117240,7 +117519,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "8d0384a3ea5627bb3ce3d420e07c161ae5c3c9038eddebecf94a8af2380503f9",
+      "content_hash": "823afc9d5aff801245ba281e8cefc364efa080225dcebb2da905ef0e03bc0467",
       "content_hash_withheld": null,
       "first_seen": "commit:32ecd9777517"
     },
@@ -128278,7 +128557,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "6321886c407e8ce0e3bd3df3f974e17f848e56cc8072ed4cde81ef0847a36051",
+      "content_hash": "39ad12a42919a47d82d2569edae95dccf4d8787544d62e8410c4853697c96219",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },

@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "3 — Audit Universe",
   "evidence_class": "AUDIT",
-  "count": 5359,
+  "count": 5372,
   "events": [
     {
       "event_id": "UGA-AUD-368c03bec2e5",
@@ -263,6 +263,19 @@
       "object_path": ".github/workflows/ucef-gate.yml",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-CONFIG-000018",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-5b90d765ccad",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-CONFIG-000036",
+      "object_path": ".github/workflows/uci-gate.yml",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-CONFIG-000036",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"
@@ -30792,6 +30805,19 @@
       "status": "ACTIVE"
     },
     {
+      "event_id": "UGA-AUD-88eb24234b7a",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-DATAOBJ-000136",
+      "object_path": "00-MASTER/UCI-000001/uci-declaration.json",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-DATAOBJ-000136",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-9f78843fb423",
       "timestamp": "commit:e98f59cd22e9",
       "actor": "UCOS-UGA-001",
@@ -45339,6 +45365,45 @@
       "status": "ACTIVE"
     },
     {
+      "event_id": "UGA-AUD-f1fa4ff9d1ed",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001322",
+      "object_path": "engine/certification_integrity/__main__.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001322",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-bb39d80c7ae0",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001323",
+      "object_path": "engine/certification_integrity/classify.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001323",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-49123f8134e6",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001324",
+      "object_path": "engine/certification_integrity/contract.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001324",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-89f6815168ec",
       "timestamp": "commit:3b3067016087",
       "actor": "UCOS-UGA-001",
@@ -45352,6 +45417,58 @@
       "status": "ACTIVE"
     },
     {
+      "event_id": "UGA-AUD-4e50ed829448",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001325",
+      "object_path": "engine/certification_integrity/equivalence.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001325",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-920d0090eb81",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001326",
+      "object_path": "engine/certification_integrity/gate.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001326",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-1475db335825",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001327",
+      "object_path": "engine/certification_integrity/immutable.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001327",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-ada7be256e97",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001328",
+      "object_path": "engine/certification_integrity/inventory.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001328",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-6aeb91c5d9d4",
       "timestamp": "commit:3b3067016087",
       "actor": "UCOS-UGA-001",
@@ -45360,6 +45477,32 @@
       "object_path": "engine/certification_integrity/model.py",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-ENGINE-001320",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-82192b9ec60e",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001329",
+      "object_path": "engine/certification_integrity/pytest_shuffle.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001329",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-ca762d6d1b6f",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-ENGINE-001330",
+      "object_path": "engine/certification_integrity/suite.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-ENGINE-001330",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"
@@ -52580,6 +52723,19 @@
       "status": "ACTIVE"
     },
     {
+      "event_id": "UGA-AUD-2d947acbe507",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-TESTOBJ-000842",
+      "object_path": "engine/tests/unit/test_certification_integrity.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-TESTOBJ-000842",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-9b2981e0f546",
       "timestamp": "commit:e98f59cd22e9",
       "actor": "UCOS-UGA-001",
@@ -57515,6 +57671,19 @@
       "object_path": "intelligence/tests/test_rie.py",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-TESTOBJ-000408",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-0c778344ee6d",
+      "timestamp": "commit:d190fb1906a4",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-EXDOC-002992",
+      "object_path": "missing_execution_surface_report.md",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-EXDOC-002992",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"

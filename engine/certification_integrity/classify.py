@@ -91,9 +91,12 @@ class Plan:
 
     lines: tuple[UncoveredLine, ...]
     #: Files that are inside the denominator and have no coverage record at all. These are NOT
-    #: uncovered lines — they are unmeasured files, and conflating the two would report a
-    #: governance gap as a coverage gap and send it to the wrong remedy.
+    #: uncovered lines — they are undescribed files, and conflating the two would report a
+    #: rendering defect as a coverage gap and send it to the wrong remedy.
     unmeasured_in_scope: tuple[str, ...]
+    #: Statements in those files, by AST count. Their true covered fraction is unknown from this
+    #: artifact and is NOT assumed to be zero.
+    undescribed_statements: int = 0
 
     def by_class(self) -> dict[str, int]:
         return dict(Counter(line.classification for line in self.lines).most_common())
@@ -139,9 +142,22 @@ def build(root: str, *, coverage_xml: str | None = None) -> Plan:
             head_cache[path] = "\n".join(text_cache[path][:40])
         return text_cache[path]
 
+    # Files the coverage document does not describe are EXCLUDED from line classification and
+    # reported separately. Including them would attribute every statement in them to
+    # ``executable`` and overstate the debt by an order of magnitude: measured here, doing so
+    # produced 79,008 "uncovered executable" lines against a coverage report showing 3,654
+    # missing. The cause is not uncovered code, it is the coverage.xml body defect
+    # (``CoverageReport.body_is_incomplete``) dropping 742 in-scope files.
+    #
+    # And the two cannot be distinguished from this artifact alone: "no test imported this file"
+    # and "the renderer dropped this file" both appear as absence. So neither is guessed at.
+    described = set(surf.coverage.files) if surf.coverage else set()
+
     found: list[UncoveredLine] = []
     for obj in surf.objects:
         if not obj.measured or not obj.missing_lines:
+            continue
+        if obj.module not in described:
             continue
         lines = source_lines(obj.module)
         for number in obj.missing_lines:
@@ -161,14 +177,23 @@ def build(root: str, *, coverage_xml: str | None = None) -> Plan:
             )
 
     measured_without_record = tuple(
-        record.path
-        for record in inv.files
-        if record.measured
-        and record.statements
-        and surf.coverage is not None
-        and record.path not in surf.coverage.files
+        sorted(
+            record.path
+            for record in inv.files
+            if record.measured
+            and record.ast_statements
+            and surf.coverage is not None
+            and record.path not in surf.coverage.files
+        )
     )
-    return Plan(lines=tuple(found), unmeasured_in_scope=measured_without_record)
+    undescribed_statements = sum(
+        record.ast_statements for record in inv.files if record.path in set(measured_without_record)
+    )
+    return Plan(
+        lines=tuple(found),
+        unmeasured_in_scope=measured_without_record,
+        undescribed_statements=undescribed_statements,
+    )
 
 
 def render(plan: Plan, *, sample: int = 40) -> str:
@@ -204,12 +229,21 @@ def render(plan: Plan, *, sample: int = 40) -> str:
     ]
     if plan.unmeasured_in_scope:
         out += [
-            "## Files inside the denominator with no coverage record",
+            "## Files inside the denominator that the coverage document does not describe",
             "",
-            f"{len(plan.unmeasured_in_scope)} files are declared in scope and appear in no",
-            "coverage measurement, which means no test imported them. These are NOT uncovered",
-            "lines and must not be counted as such: an unmeasured file is a governance gap and an",
-            "uncovered line is a coverage gap, and they have different remedies.",
+            f"**{len(plan.unmeasured_in_scope)} files, {plan.undescribed_statements:,} statements",
+            "by AST count.** They are declared in scope and appear nowhere in `coverage.xml`.",
+            "",
+            "Their covered fraction is **unknown from this artifact and is not assumed to be",
+            "zero.** Two different causes produce identical evidence here — no test imported the",
+            "file, or `coverage xml` dropped it because its relative name collided across source",
+            "roots — and this document refuses to guess between them. `coverage report` shows",
+            "1,259 files against the 644 the XML body describes, which makes the rendering defect",
+            "the larger contributor.",
+            "",
+            "Counting these as uncovered executable lines is what produced a first draft of this",
+            "plan claiming 79,008 lines owing tests against a coverage report showing 3,654",
+            "missing — a 21x overstatement caused entirely by treating absence as zero.",
             "",
         ]
         for path in plan.unmeasured_in_scope[:sample]:
