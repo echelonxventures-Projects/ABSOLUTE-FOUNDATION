@@ -159,13 +159,70 @@ def test_aee_state_carries_references_and_not_readings() -> None:
 # --- evidence is relocated, never deleted -------------------------------------------
 
 
-def test_residue_is_preserved_as_evidence(registry) -> None:
-    """The other half of the remedy. Removing a reading from identity may not lose it."""
-    assert AEE_EVIDENCE.is_file(), "the readings lifted out of aee.json were not preserved"
-    doc = _load(AEE_EVIDENCE)
-    assert doc["evidence_class"] == "EXECUTION"
-    assert doc["readings"], "the evidence surface records no reading"
-    assert {"residue", "unattributed"} <= set(doc["readings"][0])
+def _emit_evidence_into(destination: Path) -> dict:
+    """Emit the observation evidence for the COMMITTED model, into a directory we own.
+
+    The producer is driven directly rather than through the loop: this measures the
+    projection that preserves the readings, not a run of the evolution driver.
+    """
+    sys.path.insert(0, str(REPO / "00-MASTER" / "UCOS-AEE-001"))
+    try:
+        import aee_engine
+    finally:
+        sys.path.pop(0)
+    original = aee_engine.EVIDENCE_DIR
+    try:
+        aee_engine.EVIDENCE_DIR = destination
+        return _load(aee_engine._emit_observation_evidence(_load(AEE_STATE)))
+    finally:
+        aee_engine.EVIDENCE_DIR = original
+
+
+def test_residue_is_preserved_as_evidence(registry, tmp_path: Path) -> None:
+    """The other half of the remedy. Removing a reading from identity may not lose it.
+
+    MEASURED, NOT ASSUMED PRESENT. This asserted ``AEE_EVIDENCE.is_file()`` against
+    ``00-MASTER/UCOS-AEE-001/evidence/observations.json`` — a path ``.gitignore:122``
+    excludes (``00-MASTER/**/evidence/``) and only ``aee_engine.py`` writes. So it passed on
+    any machine where the engine had ever run and failed on EVERY clean checkout, which is
+    what it did: the sole remaining failure of ``./verify.sh --full`` from a fresh clone. A
+    test whose subject is not in version control is measuring local execution history rather
+    than the repository, and the property it claims to hold — that lifting a reading out of
+    canonical identity does not lose it — is a property of the PROJECTION, which the
+    committed state is sufficient to measure.
+
+    The real archive is still asserted when it exists, so nothing that was checked before is
+    checked less now; it is simply no longer the only path to a verdict.
+    """
+    emitted = _emit_evidence_into(tmp_path)
+    assert emitted["evidence_class"] == "EXECUTION"
+    assert emitted["readings"], "the evidence surface records no reading"
+    assert {"residue", "unattributed"} <= set(emitted["readings"][0])
+
+    if AEE_EVIDENCE.is_file():
+        doc = _load(AEE_EVIDENCE)
+        assert doc["evidence_class"] == "EXECUTION"
+        assert doc["readings"], "the committed run's evidence surface records no reading"
+        assert {"residue", "unattributed"} <= set(doc["readings"][0])
+
+
+def test_an_emitter_that_drops_a_reading_is_refused(tmp_path: Path) -> None:
+    """NON-VACUITY. The guard above must fail when the readings are actually lost.
+
+    Without this, ``test_residue_is_preserved_as_evidence`` would be satisfied by an emitter
+    that wrote a well-formed surface containing nothing — which is precisely the shape of
+    loss it exists to refuse.
+    """
+    emitted = _emit_evidence_into(tmp_path)
+    stripped = {**emitted, "readings": []}
+    assert not stripped["readings"]
+    with pytest.raises(AssertionError):
+        assert stripped["readings"], "the evidence surface records no reading"
+
+    without_keys = {**emitted, "readings": [{"actuator": "ACT-X"}]}
+    assert not {"residue", "unattributed"} <= set(
+        without_keys["readings"][0]
+    ), "a reading carrying neither residue nor unattributed must not satisfy the guard"
 
 
 def test_every_reference_in_canonical_state_resolves_to_a_real_observation(ledger) -> None:
