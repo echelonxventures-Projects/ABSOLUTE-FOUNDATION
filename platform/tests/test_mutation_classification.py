@@ -13,9 +13,12 @@ missing in the first place.
 
 from __future__ import annotations
 
+import copy
+import hashlib
 import subprocess
 from pathlib import Path
 from platform.repository_intelligence import mutation_classification as mc
+from platform.repository_intelligence import mutation_gate as mg
 
 import pytest
 
@@ -597,3 +600,198 @@ def test_repository_state_claims_only_genuinely_untracked_paths(
 
     for path in (OMEGA_NO_AUTHORITY, OMEGA_AUTHORED):
         assert mc.classify(path, repo, boundary).mutation_class != "REPOSITORY_STATE"
+
+
+# ------------------------------------------------- reachability: the third coverage side
+#
+# THE DEFECT THESE PIN. R-09 was declared, implemented, covered — and unreachable. Its six
+# criteria are R-08's five plus `analysis-artifact`, so R-09 strictly implied R-08, and R-08
+# was evaluated first. GOVERNED_ANALYSIS claimed 0 of 6751 tracked paths while
+# `validate_rule_coverage` reported no problem and this suite passed 49/49, because nothing
+# here named R-09 at all. A two-sided declared/implemented check cannot see a rule that is
+# both and still cannot fire; these tests are the side that can.
+
+
+def test_a_shadowed_rule_is_refused_as_unreachable(boundary: dict) -> None:
+    """The exact historical defect, reconstructed: R-08 before R-09 makes Class 8 empty."""
+    doc = copy.deepcopy(boundary)
+    for rule in doc["classification_rules"]["rules"]:
+        if rule["id"] == "R-08":
+            rule["precedence"] = 8
+        elif rule["id"] == "R-09":
+            rule["precedence"] = 9
+    problems = mc.validate_rule_reachability(doc)
+    assert any("'R-09'" in p and "can never match" in p for p in problems)
+    assert any("'R-08'" in p and "plus ['analysis-artifact']" in p for p in problems)
+
+
+def test_an_unreachable_rule_makes_classify_fail_closed(
+    repo: mc.Repository, boundary: dict
+) -> None:
+    """A shadowed register yields ERROR, never a quietly wrong class. FAULT, not verdict."""
+    doc = copy.deepcopy(boundary)
+    for rule in doc["classification_rules"]["rules"]:
+        if rule["id"] == "R-08":
+            rule["precedence"] = 8
+        elif rule["id"] == "R-09":
+            rule["precedence"] = 9
+    result = mc.classify("SELF-COVERAGE-GAPS.md", repo, doc)
+    assert result.status == mc.ERROR
+    assert result.mutation_class == ""
+    assert "can never match" in result.reason
+
+
+def test_two_rules_sharing_a_precedence_are_refused(boundary: dict) -> None:
+    """An undefined order over overlapping predicates makes a class depend on file layout."""
+    doc = copy.deepcopy(boundary)
+    for rule in doc["classification_rules"]["rules"]:
+        if rule["id"] == "R-08":
+            rule["precedence"] = 8
+    problems = mc.validate_rule_reachability(doc)
+    assert any("both declare precedence 8" in p for p in problems)
+
+
+def test_a_rule_with_no_usable_precedence_is_refused(boundary: dict) -> None:
+    doc = copy.deepcopy(boundary)
+    for rule in doc["classification_rules"]["rules"]:
+        if rule["id"] == "R-09":
+            rule["precedence"] = "eighth"
+    problems = mc.validate_rule_reachability(doc)
+    assert any("no usable precedence" in p for p in problems)
+
+
+def test_precedence_decides_evaluation_order_not_the_array_order(boundary: dict) -> None:
+    """`precedence` is the only order there is.
+
+    `classify` once iterated the JSON array, so the declared field was authoritative only
+    while somebody kept the array hand-sorted. Reversing the array must change nothing.
+    """
+    doc = copy.deepcopy(boundary)
+    doc["classification_rules"]["rules"].reverse()
+    assert [r["id"] for r in mc.ordered_rules(doc)] == [r["id"] for r in mc.ordered_rules(boundary)]
+
+
+def test_r09_precedes_r08_so_neither_class_is_vacuous(boundary: dict) -> None:
+    """Specific before general. The reverse order is the only one that empties a class."""
+    order, problems = mc.rule_precedence(boundary)
+    assert problems == ()
+    assert order["R-09"] < order["R-08"]
+
+
+def test_an_artifact_satisfying_both_classes_resolves_to_governed_analysis(
+    repo: mc.Repository, boundary: dict
+) -> None:
+    """The witness that was classified AUTHORED_DOCUMENT while Class 8 claimed nothing."""
+    target = "SELF-COVERAGE-GAPS.md"
+    assert all(mc.governed_analysis_checks(target, repo, boundary).values())
+    assert all(mc.authored_document_checks(target, repo).values())
+    result = mc.classify(target, repo, boundary)
+    assert result.status == mc.CLASSIFIED
+    assert result.mutation_class == "GOVERNED_ANALYSIS"
+    assert result.rule_id == "R-09"
+
+
+# --------------------------------------------- population: reachable AND actually reached
+
+
+def test_every_declared_rule_claims_a_subject_over_the_live_corpus(
+    repo: mc.Repository, boundary: dict
+) -> None:
+    """Reachable in principle is not the same as reached in fact.
+
+    A criterion narrowed until nothing satisfies it passes every static check and still
+    classifies nothing. The register excuses exactly two rules, each with a stated reason;
+    any other rule claiming zero is a refusal here.
+    """
+    results = mc.classify_all(sorted(repo.tracked), repo)
+    assert mc.validate_rule_population(results, boundary) == ()
+
+
+def test_governed_analysis_is_not_vacuous_over_the_live_corpus(repo: mc.Repository) -> None:
+    """The measurement that was 0 of 6751. A regression here means Class 8 is empty again."""
+    results = mc.classify_all(sorted(repo.tracked), repo)
+    claimed = [r.artifact for r in results if r.mutation_class == "GOVERNED_ANALYSIS"]
+    assert claimed, "GOVERNED_ANALYSIS claimed no subject: Class 8 is vacuous again"
+    assert all(r.rule_id == "R-09" for r in results if r.mutation_class == "GOVERNED_ANALYSIS")
+
+
+def test_a_rule_claiming_nothing_without_a_declared_reason_is_refused(
+    repo: mc.Repository, boundary: dict
+) -> None:
+    """Withdraw R-09's excuse-free zero and the population check must notice."""
+    doc = copy.deepcopy(boundary)
+    doc["classification_rules"]["$rules_expected_to_claim_no_tracked_path"] = {}
+    results = tuple(
+        r for r in mc.classify_all(sorted(repo.tracked), repo) if r.rule_id not in {"R-09"}
+    )
+    problems = mc.validate_rule_population(results, doc)
+    assert any("'R-09'" in p and "claimed no subject" in p for p in problems)
+
+
+def test_a_stale_excuse_is_refused(repo: mc.Repository, boundary: dict) -> None:
+    """An excuse that stops being true is itself a refusal, so the list cannot rot."""
+    doc = copy.deepcopy(boundary)
+    doc["classification_rules"]["$rules_expected_to_claim_no_tracked_path"]["R-07"] = "stale"
+    results = mc.classify_all(sorted(repo.tracked), repo)
+    problems = mc.validate_rule_population(results, doc)
+    assert any("'R-07'" in p and "stale" in p for p in problems)
+
+
+# ------------------------------------------------------------------ EX-018, the gate
+#
+# The classifier was decidable and decided nothing: one importer outside its own module, and
+# no row in UEC-000001's inventory, so it and its register could both be deleted with every
+# gate in the repository green. These pin the gate that closed that, including the two
+# refusals whose distinction carries the meaning — CLOSED is "a law refused", FAULT is "no
+# law could be measured", and collapsing them would let an unreadable register pass as
+# whichever answer happened to be convenient.
+
+
+def test_the_gate_is_open_on_the_live_register() -> None:
+    report = mg.measure(REPO)
+    assert report["verdict"] == "OPEN", report["laws"]
+    assert [law["law_id"] for law in report["laws"]] == ["MGB-L-01", "MGB-L-02", "MGB-L-03"]
+    assert all(law["holds"] for law in report["laws"])
+
+
+def test_the_gate_reports_a_non_vacuous_governed_analysis_census() -> None:
+    """The measurement that read 0. A census entry at zero here is Class 8 empty again."""
+    report = mg.measure(REPO)
+    assert report["census"]["GOVERNED_ANALYSIS"] > 0
+    assert report["subjects"] > 0
+
+
+def test_the_gate_reports_the_terminal_without_refusing_on_it() -> None:
+    """UNRESOLVED is a governance question with an owner, not a defect this gate decides.
+
+    Refusing on it would have the gate legislate a policy nobody adopted; hiding it would
+    let the population grow unobserved. It is reported and does not move the verdict.
+    """
+    report = mg.measure(REPO)
+    assert report["unresolved"] > 0
+    assert report["verdict"] == "OPEN"
+    assert "UNRESOLVED" in mg.render(report)
+
+
+def test_an_unreadable_register_is_a_fault_not_a_closed_verdict(tmp_path) -> None:
+    """Exit 2, never exit 1. No law was measured, which is not the same as one refusing."""
+    with pytest.raises(mc.ClassificationError):
+        mg.measure(tmp_path)
+    assert mg.main(["--gate", "--repository", str(tmp_path)]) == mg.EXIT_FAULT
+
+
+def test_the_gate_exits_open_on_the_live_register() -> None:
+    assert mg.main(["--gate", "--quiet", "--repository", str(REPO)]) == mg.EXIT_OPEN
+
+
+def test_the_gate_writes_nothing(tmp_path) -> None:
+    """OBSERVE MODE, proven by hashing the register before and after rather than asserting it."""
+    register = REPO / mc.BOUNDARY_PATH
+    before = hashlib.sha256(register.read_bytes()).hexdigest()
+    mg.main(["--json", "--quiet", "--repository", str(REPO)])
+    assert hashlib.sha256(register.read_bytes()).hexdigest() == before
+
+
+def test_two_measurements_of_one_state_are_identical() -> None:
+    """Determinism: no clock, no environment, no traversal-order dependence."""
+    assert mg.measure(REPO) == mg.measure(REPO)

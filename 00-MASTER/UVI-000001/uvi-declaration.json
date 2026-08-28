@@ -511,6 +511,29 @@
         "owner": "URKE-000001"
       },
       {
+        "id": "mutation-governance-boundary",
+        "label": "mutation governance boundary decidability (EX-018, every classification rule implemented, reachable and claiming subjects)",
+        "phase": "MAIN",
+        "plane": "READ_ONLY",
+        "depends_on": [],
+        "modes": [
+          "change",
+          "integration",
+          "full"
+        ],
+        "read_set": [
+          "platform/repository_intelligence/"
+        ],
+        "reuse_inputs": [
+          "platform/repository_intelligence/"
+        ],
+        "reusable": false,
+        "$comment": "ADDED TO CLOSE THE RULES THAT DECIDE WHO MAY MUTATE WHAT, WHICH WERE DECIDING NOTHING. EX-015 made the mutation classes declarative and EX-016 made them decidable, and then no plane ever called them: `mutation_classification` was imported by exactly one file outside its own module, its own test. Neither it nor its register was in UEC-000001's governed inventory, so both could have been deleted with every gate green. Twice the classifier was effectively broken while every gate stayed green — R-09 declared with no predicate, so classify() returned ERROR for every subject in the corpus; then implemented but shadowed by R-08, so GOVERNED_ANALYSIS claimed 0 of 6751 tracked paths.",
+        "$read_set": "This capability's own source. The stage additionally reads `00-BOOK/DATA/mutation-governance-boundary.json` and the whole `git ls-files` census, and those are deliberately NOT declared here: UVI-L-11 requires each declared prefix to resolve to a registered object, and 00-BOOK/DATA/ is outside the registration boundary by construction while the tracked census is not a prefix at all. Declaring either would fault the law that keeps read-sets honest, which is why the stage is declared NOT reusable instead. Same construction as the universal-enforcement-closure stage, and for the same reason.",
+        "$reuse_inputs": "Narrower than the true input set, and the stage is `reusable: false` regardless. MGB-L-03 is a census over every tracked path, so the verdict is a function of the WHOLE tracked tree: a reuse key computed from one prefix would be reused across the addition of an artifact that empties or fills a class — the precise change this stage exists to see.",
+        "owner": "EX-018"
+      },
+      {
         "id": "coverage-report",
         "label": "coverage report",
         "phase": "POST",

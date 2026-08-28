@@ -713,6 +713,40 @@ run_stage "universal enforcement closure (UEC-000001, every protection governed,
 run_stage "universal recursive knowledge foundation (URKE-000001, every unknown governed and no mechanism closed against a future domain)" \
   "$PY" -m engine.recursive_knowledge.gate --gate --quiet
 
+# --- Stage 6l (MAIN): mutation governance boundary decidability (EX-018) ---------
+# THE RULES THAT DECIDE WHO MAY MUTATE WHAT WERE DECIDING NOTHING. EX-015 made the mutation
+# classes declarative and EX-016 made them decidable, and then no plane in this repository
+# ever called them: a search for importers of `mutation_classification` returned exactly one
+# file outside the module, its own test. Neither the classifier nor its register appeared in
+# UEC-000001's governed inventory, so both could have been deleted with every gate green.
+#
+# WHAT THAT COST, MEASURED TWICE. R-09 was first declared with NO PREDICATE, so
+# `validate_rule_coverage` refused and `classify()` returned ERROR for EVERY subject in the
+# corpus — 28 committed tests failed against committed source. It was then implemented and
+# still could not fire: its six criteria are R-08's five plus one, R-08 was evaluated first,
+# and GOVERNED_ANALYSIS claimed 0 of 6751 tracked paths. Coverage was green through both.
+#
+# THREE LAWS, DELIBERATELY NOT COLLAPSED. MGB-L-01 coverage (a declared rule with no predicate,
+# and a predicate no rule declares). MGB-L-02 reachability (a rule shadowed by an earlier one
+# can never fire, and precedence must be a total order) — the side coverage cannot see.
+# MGB-L-03 population (a reachable rule that claims nothing over the live corpus, unless the
+# register names it with a reason). Any two of these pass while the third fails.
+#
+# UNRESOLVED IS REPORTED, NOT REFUSED. 3612 of 6755 tracked paths reach the fail-closed
+# terminal, almost all for one reason: they declare no Authority. That is a governance question
+# with an owner, not a defect this stage may decide — refusing on it would legislate a policy
+# nobody has adopted. The count prints on every run so it cannot be quietly forgotten.
+#
+# TWO OTHER PLANES INVOKE THE SAME GATE — `make mutation-gate` and
+# .github/workflows/mutation-gate.yml — as UEC-L-06 requires. Removing this line now fails
+# UEC-L-02 rather than silently unbinding the classifier again.
+#
+# OBSERVE MODE. Reads the register and `git ls-files`; writes nothing, takes no clock and no
+# environment. Exit 1 means a law was measured and refused; exit 2 means the register was
+# unreadable so no verdict could be reached — deliberately a different answer.
+run_stage "mutation governance boundary decidability (EX-018, every classification rule implemented, reachable and claiming subjects)" \
+  "$PY" -m platform.repository_intelligence.mutation_gate --gate --quiet
+
 # --- Stage 7 (POST): coverage report (explicit coverage tool invocation) ---------
 # The pytest stage already produced .coverage + coverage.xml; re-summarize with the
 # coverage CLI to prove the coverage tool itself resolves and to surface the total.

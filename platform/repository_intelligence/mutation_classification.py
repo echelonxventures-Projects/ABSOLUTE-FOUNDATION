@@ -1,6 +1,6 @@
 """EX-016 — the executable classifier for the mutation governance boundary.
 
-``00-BOOK/DATA/mutation-governance-boundary.json`` declares seven ordered classification
+``00-BOOK/DATA/mutation-governance-boundary.json`` declares nine ordered classification
 rules and a fail-closed terminal. EX-015 made those rules *declarative*; this module makes
 them *decidable*. Until a rule is evaluated it is prose, and prose is what let
 ``uisd-declaration.json`` be authored, owned, engine-consumed and unclassified while six of
@@ -8,10 +8,17 @@ its mutations were certified.
 
 THE RULES ARE DATA, NOT CODE. This module contains no rule text, no class name ordering and
 no predicate the register does not declare. It loads ``classification_rules.rules``, and
-:func:`validate_rule_coverage` refuses **both** directions — a declared rule with no
-implemented predicate cannot be evaluated, and an implemented predicate no rule declares is
-dead code wearing the appearance of enforcement. That is the same two-sided construction
-``engine.infinite_scope.contract.LAW_CHECKS`` and ``ADMISSION_FORMS`` already use.
+:func:`validate_rule_coverage` refuses **three** ways — a declared rule with no
+implemented predicate cannot be evaluated, an implemented predicate no rule declares is
+dead code wearing the appearance of enforcement, and a rule that is both and still cannot
+be reached classifies nothing at all. The first two are the two-sided construction
+``engine.infinite_scope.contract.LAW_CHECKS`` and ``ADMISSION_FORMS`` already use. The third
+exists because two-sidedness was not enough: R-09 was declared, implemented and covered
+while ``GOVERNED_ANALYSIS`` claimed 0 of 6751 tracked paths, because its criteria were a
+strict superset of R-08's and R-08 was evaluated first. See
+:func:`validate_rule_reachability`, which refuses that shape statically, and
+:func:`validate_rule_population`, which measures whether a reachable rule is actually
+reached.
 
 UNRESOLVED IS NOT A CLASS. It is the declared terminal, it confers no authority, and it must
 never be read as a permissive default — a default would silently grant an authority no owner
@@ -484,8 +491,167 @@ RULE_PREDICATES: dict[str, Callable[[Subject, Repository, dict], bool]] = {
 }
 
 
+#: How a class's declared membership criteria are NAMED: ``markdown — the path ends .md``
+#: states the criterion ``markdown``. The register is the authority on what a class's criteria
+#: are, exactly as it is the authority on the rules themselves, so shadowing is decided from
+#: the declaration and not from a table in this module. A ``{rule: criteria-function}`` table
+#: here would be a second vocabulary nobody reconciles — the shape that let R-09 be declared
+#: with no predicate at all. That the module's ``*_checks`` functions return exactly these
+#: keys is pinned by ``platform/tests/test_mutation_classification.py``, which binds the two
+#: sides without either one having to restate the other.
+_CRITERION_SEPARATOR = " — "
+
+
+def declared_criteria(boundary: dict) -> dict[str, frozenset[str]]:
+    """Each class's declared membership-criteria NAMES, for the classes that declare any.
+
+    A class stating no ``membership_criteria`` is not absent from governance; it simply
+    states its membership as prose the register does not decompose, and shadowing between
+    such a class and another cannot be decided from the declaration. Those classes are
+    omitted rather than assumed disjoint, which is why :func:`validate_rule_population`
+    exists to catch by census what this cannot catch by structure.
+    """
+    criteria: dict[str, frozenset[str]] = {}
+    for entry in boundary.get("mutation_classes", ()):
+        declared = entry.get("membership_criteria") or ()
+        if not declared:
+            continue
+        criteria[str(entry.get("class", ""))] = frozenset(
+            str(item).split(_CRITERION_SEPARATOR, 1)[0].strip() for item in declared
+        )
+    return criteria
+
+
+def rule_precedence(boundary: dict) -> tuple[dict[str, int], tuple[str, ...]]:
+    """Every rule's declared precedence, and the problems that make the order undefined."""
+    order: dict[str, int] = {}
+    claimed: dict[int, str] = {}
+    problems: list[str] = []
+    for rule in boundary["classification_rules"]["rules"]:
+        rule_id = str(rule.get("id", ""))
+        raw = rule.get("precedence")
+        try:
+            precedence = int(raw)  # type: ignore[arg-type]
+        except (TypeError, ValueError):
+            problems.append(
+                f"rule {rule_id!r} declares no usable precedence ({raw!r}), so the order in "
+                f"which it is evaluated is undefined"
+            )
+            continue
+        if precedence in claimed:
+            problems.append(
+                f"rules {claimed[precedence]!r} and {rule_id!r} both declare precedence "
+                f"{precedence}, so their relative order is undefined"
+            )
+        claimed[precedence] = rule_id
+        order[rule_id] = precedence
+    return order, tuple(problems)
+
+
+def ordered_rules(boundary: dict) -> tuple[dict, ...]:
+    """The declared rules in EVALUATION order, which is declared precedence and nothing else.
+
+    ``classify`` used to iterate the JSON array directly, so ``precedence`` was authoritative
+    only for as long as somebody kept the array sorted by hand. Two orderings that agree by
+    convention are one edit away from disagreeing silently, and the one that would have won is
+    the one no reader checks. Sorting here makes the declared field the only order there is.
+    """
+    return tuple(
+        sorted(
+            boundary["classification_rules"]["rules"],
+            key=lambda rule: (int(rule["precedence"]), str(rule.get("id", ""))),
+        )
+    )
+
+
+def validate_rule_reachability(boundary: dict) -> tuple[str, ...]:
+    """Refuse a rule that is declared, implemented — and can never fire.
+
+    THE THIRD SIDE. :func:`validate_rule_coverage` refuses a declared rule with no predicate
+    and a predicate no rule declares. Neither can see the case that actually occurred: R-09 was
+    declared, implemented, covered and UNREACHABLE. Its six criteria are R-08's five plus one,
+    so R-09 strictly implies R-08 — and R-08 was evaluated first. ``GOVERNED_ANALYSIS`` claimed
+    0 of 6751 tracked paths while every report stayed green. That is the vacuity this module
+    exists to refuse, wearing the appearance of coverage.
+
+    Both conditions below are STATIC. They hold whatever the corpus happens to contain today,
+    which is what separates them from :func:`validate_rule_population`:
+
+    * **Precedence is a total order.** A rule with no usable precedence, or two rules sharing
+      one, leaves evaluation order undefined — and an undefined order over overlapping
+      predicates makes a subject's class depend on file layout.
+    * **No rule is shadowed.** If rule X's criteria are a strict superset of an earlier rule
+      Y's, then X ⟹ Y, Y is reached first, and X can never claim a subject in any repository
+      state whatsoever.
+    """
+    order, problems = rule_precedence(boundary)
+    problems = list(problems)
+    criteria = declared_criteria(boundary)
+    # Rules are compared by the CLASS each claims, because criteria are declared on classes.
+    ruled = tuple(
+        (str(rule.get("id", "")), str(rule.get("class", "")))
+        for rule in boundary["classification_rules"]["rules"]
+        if str(rule.get("class", "")) in criteria and str(rule.get("id", "")) in order
+    )
+    for later_id, later_class in ruled:
+        later = criteria[later_class]
+        for earlier_id, earlier_class in ruled:
+            if earlier_id == later_id or order[earlier_id] >= order[later_id]:
+                continue
+            earlier = criteria[earlier_class]
+            if earlier < later:
+                problems.append(
+                    f"rule {later_id!r} ({later_class}, precedence {order[later_id]}) can never "
+                    f"match: its criteria are those of {earlier_id!r} ({earlier_class}, "
+                    f"precedence {order[earlier_id]}) plus {sorted(later - earlier)}, so every "
+                    f"subject it would claim is claimed by {earlier_id!r} first"
+                )
+    return tuple(problems)
+
+
+def validate_rule_population(
+    results: tuple[ClassificationResult, ...], boundary: dict
+) -> tuple[str, ...]:
+    """Refuse a rule that claims nothing over the live corpus and has not declared why.
+
+    :func:`validate_rule_reachability` proves a rule CAN fire. This measures whether it DOES.
+    The two are different questions and a rule can pass the first while failing the second —
+    a criterion narrowed until nothing satisfies it is reachable in principle and vacuous in
+    fact, and the register would still read as a complete classification.
+
+    Zero is not automatically a fault. R-01 claims untracked paths, so it claims none of a
+    tracked corpus by construction; R-05's subjects are constitutional objects rather than
+    paths. Those are legitimate and the register names them in
+    ``$rules_expected_to_claim_no_tracked_path``, each with its reason. Anything else claiming
+    nothing is reported — an expectation stated in the register can be argued with, whereas a
+    silent zero cannot.
+    """
+    excused = boundary["classification_rules"].get("$rules_expected_to_claim_no_tracked_path")
+    excused = excused if isinstance(excused, dict) else {}
+    claimed = {r.rule_id for r in results if r.status == CLASSIFIED}
+    problems: list[str] = []
+    for rule in ordered_rules(boundary):
+        rule_id = str(rule.get("id", ""))
+        if rule_id in claimed or rule_id in excused:
+            continue
+        problems.append(
+            f"rule {rule_id!r} ({rule.get('class', '')}) claimed no subject over the corpus "
+            f"and is not named in $rules_expected_to_claim_no_tracked_path with a reason"
+        )
+    for rule_id in sorted(set(excused) & claimed):
+        problems.append(
+            f"rule {rule_id!r} is excused from claiming subjects but claimed some; the "
+            f"excuse is stale and must be withdrawn"
+        )
+    return tuple(problems)
+
+
 def validate_rule_coverage(boundary: dict) -> tuple[str, ...]:
-    """Refuse in both directions. Empty means the register and this module agree."""
+    """Refuse in every direction. Empty means the register and this module agree.
+
+    Three sides, not two: a declared rule no predicate implements, a predicate no rule
+    declares, and a rule that is both and still cannot be reached.
+    """
     declared = [str(r.get("id", "")) for r in boundary["classification_rules"]["rules"]]
     problems: list[str] = []
     for rule_id in declared:
@@ -493,7 +659,12 @@ def validate_rule_coverage(boundary: dict) -> tuple[str, ...]:
             problems.append(f"rule {rule_id!r} is declared but no predicate implements it")
     for orphan in sorted(set(RULE_PREDICATES) - set(declared)):
         problems.append(f"predicate {orphan!r} is implemented but no rule declares it")
-    return tuple(problems)
+    if problems:
+        # Reachability reads the criteria functions of rules this module implements. With a
+        # rule or a predicate missing, that reading is not yet meaningful — report the gap
+        # that exists rather than a second one derived from it.
+        return tuple(problems)
+    return tuple(problems) + validate_rule_reachability(boundary)
 
 
 def classify(
@@ -511,7 +682,7 @@ def classify(
     if problems:
         return ClassificationResult(subject.identity, "", "", "", ERROR, "; ".join(problems))
 
-    for rule in doc["classification_rules"]["rules"]:
+    for rule in ordered_rules(doc):
         rule_id = str(rule.get("id", ""))
         try:
             matched = RULE_PREDICATES[rule_id](subject, repo, doc)
@@ -572,9 +743,14 @@ __all__ = [
     "authority_for",
     "classify",
     "classify_all",
+    "declared_criteria",
     "governed_analysis_checks",
     "governed_declaration_checks",
     "load_boundary",
+    "ordered_rules",
+    "rule_precedence",
     "unresolved",
     "validate_rule_coverage",
+    "validate_rule_population",
+    "validate_rule_reachability",
 ]

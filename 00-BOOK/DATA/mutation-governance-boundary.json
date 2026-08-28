@@ -308,7 +308,7 @@
         "artifacts that are generated, which remain GENERATED_ARTIFACT"
       ],
       "$why_this_class_was_added": "Phase 1B Violation 4 resolution. Determination, analysis, and assessment artifacts are a distinct class from AUTHORED_DOCUMENT (which covers ADRs, constitutions, general documentation). Analysis artifacts follow specific governance patterns: they document findings, they reference evidence, they have determinations, and they are often superseded by newer analyses. Separating them into GOVERNED_ANALYSIS provides explicit governance for analytical work products.",
-      "$distinction_from_authored_document": "AUTHORED_DOCUMENT (Class 7) covers general governance prose (ADRs, constitutions, policy documents). GOVERNED_ANALYSIS (Class 8) covers analytical work products (determinations, assessments, execution reports, matrices). The distinction is functional: analyses document findings and evidence; documents declare policy and decisions. R-09 is declared at PRECEDENCE 9, which places it AFTER R-08 — so an artifact satisfying both is an AUTHORED_DOCUMENT and Class 8 takes what R-08 leaves. This note previously asserted the opposite ('R-09 evaluates before R-08'), which contradicted the machine-readable `precedence` field that `classify()` actually reads. The prose was corrected to match the ordering rather than the ordering silently changed to match the prose: `precedence` is the authority, and `platform/tests/test_mutation_classification.py` pins R-08 winning for an artifact that satisfies both."
+      "$distinction_from_authored_document": "AUTHORED_DOCUMENT (Class 7) covers general governance prose (ADRs, constitutions, policy documents). GOVERNED_ANALYSIS (Class 8) covers analytical work products (determinations, assessments, execution reports, matrices). The distinction is functional: analyses document findings and evidence; documents declare policy and decisions. R-09 is declared at PRECEDENCE 8 and evaluates BEFORE R-08, so an analysis artifact is classified GOVERNED_ANALYSIS rather than the more general AUTHORED_DOCUMENT, and R-08 takes the authored documents that are not analyses. This is the only ordering under which either class is reachable: R-09's criteria are R-08's plus `analysis-artifact`, so the reverse order makes Class 8 provably empty. See `$why_r09_precedes_r08` on classification_rules. `platform/tests/test_mutation_classification.py` pins R-09 winning for an artifact that satisfies both, and pins a non-zero GOVERNED_ANALYSIS population over the live corpus so the class cannot silently become vacuous again."
     }
   ],
   "classification_rules": {
@@ -366,17 +366,23 @@
       },
       {
         "precedence": 8,
-        "id": "R-08",
-        "class": "AUTHORED_DOCUMENT",
-        "predicate": "subject is a tracked, non-generated markdown path satisfying every one of the five membership_criteria declared on the AUTHORED_DOCUMENT class"
-      },
-      {
-        "precedence": 9,
         "id": "R-09",
         "class": "GOVERNED_ANALYSIS",
         "predicate": "subject is a tracked, non-generated markdown path with (determination|analysis|assessment|execution|matrix|readiness|admission|blocker|gap) in the filename, satisfying the six membership_criteria declared on GOVERNED_ANALYSIS"
+      },
+      {
+        "precedence": 9,
+        "id": "R-08",
+        "class": "AUTHORED_DOCUMENT",
+        "predicate": "subject is a tracked, non-generated markdown path satisfying every one of the five membership_criteria declared on the AUTHORED_DOCUMENT class"
       }
     ],
+    "$why_r09_precedes_r08": "SPECIFIC BEFORE GENERAL — the ordering rule every rule cascade obeys, and the one this register briefly violated. R-09's six membership criteria are R-08's five plus `analysis-artifact`, so R-09 STRICTLY IMPLIES R-08. With R-08 evaluated first, R-09 could never fire for any subject in any repository state: GOVERNED_ANALYSIS was measured at 0 of 6751 tracked paths while `validate_rule_coverage` reported no problem, because a two-sided declared/implemented check cannot see a rule that is declared, implemented and unreachable. Correcting the ORDER rather than weakening either predicate keeps both classes mutually exclusive by construction — R-09 takes the analysis artifacts, R-08 takes the authored documents that are not analyses — and keeps every criterion as declared. It shifts no authority: both classes are owner-parameterised on the artifact's own Authority/Deciders self-declaration, so the artifacts that move from Class 7 to Class 8 keep exactly the mutation owner they already had. `validate_rule_reachability` in platform/repository_intelligence/mutation_classification.py now refuses this shape statically, so the defect cannot be reintroduced by an edit to this file.",
+    "$rules_expected_to_claim_no_tracked_path": {
+      "R-01": "REPOSITORY_STATE claims paths that EXIST but are ABSENT from version control. A corpus enumerated by `git ls-files` therefore contains none of its subjects by construction, and a non-zero count here would mean the tracked-path query itself is wrong. Measured over the working tree rather than the index, this rule does claim subjects.",
+      "R-05": "CONSTITUTIONAL_TRUTH's subjects are Population and ConstitutionalMetadata OBJECTS reached through the gateway, not paths — the class states this in $subject_domain and `_r05_constitutional_truth` refuses any PATH subject outright. It is excused from a path census because a path census is not its domain, never because it has nothing to claim."
+    },
+    "$why_this_excuse_list_exists": "`validate_rule_population` refuses any rule that claims no subject over the live corpus. Zero is not automatically a fault — these two rules claim zero for stated structural reasons — but an unexplained zero always is: R-09 sat at zero over all 6751 tracked paths while every report read green. Naming the exceptions here makes each one arguable and makes every other zero a refusal. An entry that stops being true is itself refused, so this list cannot rot into a blanket exemption.",
     "terminal": {
       "class": "UNRESOLVED",
       "effect": "FAILS CLOSED",
@@ -385,6 +391,39 @@
     },
     "$conformance_is_not_claimed_here": "This section DECLARES the rules. It does not assert that the repository satisfies them, and no such claim may be read from its presence. Evaluation is EX-016, migration of existing artifacts is EX-017, and the gate that measures conformance is EX-018 — none of which is performed by this change. Measured at the commit that introduced this section, the expected UNRESOLVED population is: root-level *.md including the Master Implementation Plan artifacts; the majority of 00-MASTER/**/*.json outside the examples above; and the by_object index of 00-BOOK/DATA/id-ledger.json, which allocates permanent identities from the shared category_seq counter and is not a declared class. The invariants below are therefore a declared TARGET, and the gate that will measure them is expected to fail on first run."
   },
+  "gate": {
+    "artifact_id": "EX-018",
+    "module": "platform.repository_intelligence.mutation_gate",
+    "authority": "NONE — DERIVED TRUTH. The gate owns no mutation class, writes no register and decides no artifact's owner. H-06/CR-09 owns this boundary; EX-018 measures whether it is still decidable.",
+    "$why_the_laws_live_here": "THE LAWS ARE DATA, exactly as the rules are. A law table held as a constant in the gate module would be a second vocabulary beside this register, extendable only by a code edit — the closure form UCON-000001 names FIXED_DISPATCH_TABLE and whose declared migration is 'where it maps data to data, move it to a declaration'. Declaring them here means a new law is a register edit plus a check, and the gate refuses a declared law it cannot measure and a measured law nothing declares, in both directions.",
+    "exit_codes": {
+      "0": "OPEN — every law measured and held",
+      "1": "CLOSED — a law was measured and refused",
+      "2": "FAULT — this register was absent or unreadable, so no law could be measured. Deliberately distinct from 1: collapsing them would let an unreadable register pass as whichever answer happened to be convenient."
+    },
+    "$unresolved_is_reported_not_refused": "The terminal population is printed on every run and does not move the verdict. It is a governance question with an owner — 3612 of 6755 tracked paths reach it, almost all because they declare no Authority — and a gate that refused on it would be legislating a policy nobody has adopted. Reporting it means it cannot be quietly forgotten; refusing on it would mean this gate had taken a decision that is not its to take.",
+    "laws": [
+      {
+        "law_id": "MGB-L-01",
+        "title": "Every declared rule has a predicate, and every predicate a declared rule.",
+        "blocking": true,
+        "$why": "A declared rule nobody evaluates is prose; an implemented predicate no rule declares is dead code wearing the appearance of enforcement. Measured when R-09 was declared with no predicate at all, which made classify() return ERROR for EVERY subject in the corpus rather than only for an analysis artifact."
+      },
+      {
+        "law_id": "MGB-L-02",
+        "title": "No declared rule is unreachable, and precedence is a total order.",
+        "blocking": true,
+        "$why": "The side MGB-L-01 is structurally blind to. A rule whose criteria are a strict superset of an earlier rule's implies that rule, is reached second and can never fire in ANY repository state. R-09 sat in exactly that shape while coverage reported no problem and GOVERNED_ANALYSIS claimed 0 of 6751 tracked paths."
+      },
+      {
+        "law_id": "MGB-L-03",
+        "title": "Every declared rule claims a subject, or the register declares why it cannot.",
+        "blocking": true,
+        "$why": "Reachable in principle is not reached in fact. A criterion narrowed until nothing satisfies it passes every static check and still classifies nothing. Zero is excused only where $rules_expected_to_claim_no_tracked_path names the rule and states the reason, and a stale excuse is itself a refusal."
+      }
+    ]
+  },
+
   "invariants": [
     "Every mutation class names exactly one governing authority chain.",
     "No mutation class is claimed by two authorities as primary.",

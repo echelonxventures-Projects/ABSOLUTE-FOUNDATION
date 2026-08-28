@@ -2350,3 +2350,33 @@ ucpa-gate: bootstrap-quiet
 	@$(PY) -m engine.root_ontology.gate --quiet \
 	  || { echo "UCPA GATE CLOSED — run 'make ucpa' for the named refusals" >&2; exit 1; }
 	@echo "ucpa-gate: the root ontology is measured, reduced and singly authored"
+
+# ===========================================================================
+# EX-018 — MUTATION GOVERNANCE BOUNDARY DECIDABILITY
+#
+# The mutation classes decide WHO MAY MUTATE each artifact. Until this target existed
+# nothing in any plane ran the classifier: `mutation_classification` was imported by
+# exactly one file outside its own module — its own test — and neither it nor its
+# register was in UEC-000001's governed inventory. Both could have been deleted with
+# every gate in the repository still green, and twice they were effectively broken
+# while every gate stayed green: R-09 declared with no predicate (classify() returned
+# ERROR for every subject in the corpus), then implemented but shadowed by R-08 (
+# GOVERNED_ANALYSIS claimed 0 of 6751 tracked paths).
+# ===========================================================================
+.PHONY: mutation mutation-gate mutation-json
+
+# mutation: the human-readable measurement — the class census and all three laws.
+mutation: bootstrap-quiet
+	@$(PY) -m platform.repository_intelligence.mutation_gate
+
+# mutation-gate: fail-closed. The same command ./verify.sh runs as its mutation
+# governance boundary stage, so this plane and that one measure one thing rather
+# than two. Deleting either leaves the other still refusing.
+mutation-gate: bootstrap-quiet
+	@$(PY) -m platform.repository_intelligence.mutation_gate --gate --quiet \
+	  || { echo "MUTATION GATE CLOSED — run 'make mutation' for the named refusals" >&2; exit 1; }
+	@echo "mutation-gate: every classification rule implemented, reachable and claiming subjects"
+
+# mutation-json: the machine-readable report, for a consumer that needs the census.
+mutation-json: bootstrap-quiet
+	@$(PY) -m platform.repository_intelligence.mutation_gate --json --quiet

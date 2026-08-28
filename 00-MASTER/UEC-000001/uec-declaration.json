@@ -91,6 +91,35 @@
       "floor": 15,
       "owner": "each programme's own owner",
       "$floor": "19 located at adoption, including UEC's own."
+    },
+    {
+      "rule_id": "UEC-R-07",
+      "kind": "MODULE_GATE",
+      "strategy": "tracked_glob",
+      "pattern": "platform/repository_intelligence/mutation_gate.py",
+      "floor": 1,
+      "owner": "H-06/CR-09 (the mutation governance boundary)",
+      "$floor": "1, and the pattern names one file because there is one. A floor below the census is the usual construction here; with a census of one there is nowhere below to sit, so this floor carries its guarantee differently: it is the ONLY rule whose floor cannot absorb a deletion, which is exactly right for the gate that would otherwise stop enforcing silently. Deleting the file fails UEC-L-01 (floor unmet) and UEC-L-02 (a governed artifact vanished) at once."
+    },
+    {
+      "rule_id": "UEC-R-08",
+      "kind": "MUTATION_CLASSIFIER",
+      "strategy": "tracked_glob",
+      "pattern": "platform/repository_intelligence/mutation_classification.py",
+      "floor": 1,
+      "owner": "H-06/CR-09 (the mutation governance boundary)",
+      "$kind": "A KIND OF ITS OWN, DELIBERATELY. The kind list is derived from this declaration rather than enumerated in the model, so adding one is the declared extension mechanism and not a workaround. This artifact is the classifier ENGINE behind UEC-R-07's gate, not a gate itself: it exposes no main() and nothing runs it with -m, so registering it as GATE_ENGINE would place it in the engines population and it would immediately and correctly read as having no invoker. The defect that matters here is DISAPPEARANCE, not non-invocation — the classifier was deleteable with every gate green — and UEC-L-02 and UEC-L-03 refuse that for artifacts of every kind.",
+      "$floor": "1. The classifier is one module; the rule exists so that its absence is a fail-closed signal rather than a silence."
+    },
+    {
+      "rule_id": "UEC-R-09",
+      "kind": "DECLARATION",
+      "strategy": "tracked_glob",
+      "pattern": "00-BOOK/DATA/mutation-governance-boundary.json",
+      "floor": 1,
+      "owner": "H-06/CR-09 (the mutation governance boundary)",
+      "$why_not_UEC_R_06": "UEC-R-06 globs `00-MASTER/*/*-declaration.json`. This register is the one governed declaration outside that tree — it lives in 00-BOOK/DATA/ with the other constitutional registers — so the existing rule could not see it, and a register that decides the mutation authority of 6755 artifacts was ungoverned by the mechanism whose whole subject is governance. Widening UEC-R-06's glob would have pulled in every register in 00-BOOK/DATA/, most of which are corpus objects rather than enforcement artifacts; a second rule naming this one file states the claim exactly.",
+      "$disjointness": "00-BOOK/DATA/ is a declared exclude_dir_prefix of the corpus plane, so UEC-L-10 holds: this artifact is in the enforcement plane and not in REG-AUTO-001's, and the two mechanisms cannot each claim it and disagree."
     }
   ],
   "withdrawals": {
@@ -100,6 +129,12 @@
     "$entries": "Empty at adoption. An empty list is NOT vacuous satisfaction here: UEC-L-12 quantifies over withdrawals to check they are reasoned, while UEC-L-02 quantifies over the governed inventory to check nothing vanished. The population that must be non-empty is the inventory, and UEC-L-01 enforces its floor."
   },
   "governed_enforcement": [
+    {
+      "identity": "00-BOOK/DATA/mutation-governance-boundary.json",
+      "kind": "DECLARATION",
+      "owner": "H-06/CR-09 (the mutation governance boundary)",
+      "rule_id": "UEC-R-09"
+    },
     {
       "identity": "00-MASTER/ACEE-000001/acee-declaration.json",
       "kind": "DECLARATION",
@@ -581,6 +616,12 @@
       "rule_id": "UEC-R-04"
     },
     {
+      "identity": "mutation-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
+    },
+    {
       "identity": "publication-gate",
       "kind": "MAKE_GATE_TARGET",
       "owner": "gate owner",
@@ -833,6 +874,18 @@
       "rule_id": "UEC-R-02"
     },
     {
+      "identity": "platform/repository_intelligence/mutation_gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "H-06/CR-09 (the mutation governance boundary)",
+      "rule_id": "UEC-R-07"
+    },
+    {
+      "identity": "platform/repository_intelligence/mutation_classification.py",
+      "kind": "MUTATION_CLASSIFIER",
+      "owner": "H-06/CR-09 (the mutation governance boundary)",
+      "rule_id": "UEC-R-08"
+    },
+    {
       "identity": "autonomous universal evolution (UAUE gate, every declared obligation)",
       "kind": "VERIFY_STAGE",
       "owner": "UVI-000001",
@@ -864,6 +917,12 @@
     },
     {
       "identity": "meta-constitutional conformance (CMG-INV-01..12)",
+      "kind": "VERIFY_STAGE",
+      "owner": "UVI-000001",
+      "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "mutation governance boundary decidability (EX-018, every classification rule implemented, reachable and claiming subjects)",
       "kind": "VERIFY_STAGE",
       "owner": "UVI-000001",
       "rule_id": "UEC-R-05"
@@ -990,6 +1049,12 @@
     },
     {
       "identity": ".github/workflows/mcos-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": ".github/workflows/mutation-gate.yml",
       "kind": "WORKFLOW",
       "owner": "gate owner",
       "rule_id": "UEC-R-03"
@@ -1136,7 +1201,7 @@
   "$governed_enforcement": "165 enforcement artifacts, ADOPTED FROM MEASUREMENT and thereafter governed by hand. `make uec-inventory` prints the discovered surface; nothing writes it here. That asymmetry is the whole mechanism: if the observation could rewrite the expectation, then deleting a workflow and re-running the generator would produce a green gate, which is exactly the bypass this programme closes. Adoption and withdrawal are human edits to this file, and the `git diff` is the record a silent deletion does not leave.",
   "ratchet": {
     "$comment": "TWO-SIDED, WITH NO SLACK. Each ratcheted law refuses when measured > ceiling, so a NEW violation fails the build immediately. UEC-L-11 refuses when measured < ceiling, so a REPAIRED violation must tighten the ceiling. The satisfied state is measured == ceiling exactly, which leaves no room for a future violation to occupy silently. This is the half `00-MASTER/BASELINE-001/baseline_engine.py:726` lacks: it computes `vacuous: len(declared) == 0`, renders it, and does not close the gate on it.",
-    "governed_artifacts": 172,
+    "governed_artifacts": 178,
     "engines_without_a_test": 18,
     "artifacts_with_one_invocation_plane": 16,
     "declarations_no_code_consumes": 3,
@@ -1149,7 +1214,7 @@
     "$declarations_without_a_certification_identity": "0. Was 2 at adoption — ucpa-declaration.json and uisd-declaration.json, whose owning packages minted no digest at all, so eleven and eight laws respectively returned a verdict attributable to no state. Both now expose the uniform identity interface and are measured by UEC-L-13, not merely by this law. Closing it exposed a second defect in UCPA that only the sufficient condition could see: `ucpa-declaration.json` declared a name, a version, an authority and a principle about itself and `AlignmentContract` parsed none of them, so rewriting the declared authority left the identity byte-identical at 6c09cf89. They are parsed now. The ceiling is zero and two-sided: a new declaration whose owner mints no digest fails immediately.",
     "engines_with_no_invoker": 6,
     "$engines_with_no_invoker": "6 of 48 gate engines are invoked by nothing that could run them: 00-MASTER/UAKOS-CLOSURE-008/decision_engine.py, .../superiority_engine.py, 00-MASTER/UAKOS-PHASE-001A-R1/cert_engine.py, 00-MASTER/UAKOS-PHASE-001B/provenance_engine.py, 00-MASTER/UAKOS-PHASE-003R/phase3r_engine.py and 00-MASTER/UCOS-USIS-WAVE0/freeze_c4_engine.py. All six read as INVOKED until a hostile audit showed why: invocation was matched with the same generous needles that answer 'does a test name this engine', so `make uakos-archive` checking that four DIRECTORIES exist counted as invoking the engines inside them. The audit's actual attack was worse — pointing every caller of a live gate at a module that does not exist left UEC-L-04 green — and the fix (`discovery._invocation_needles`) is what surfaced these six. Recording them raises assurance: the law could not fail before and now names, caps and ratchets its population.",
-    "discovery_floor_total": 127,
+    "discovery_floor_total": 130,
     "$discovery_floor_total": "127 — the sum of every declared discovery floor. Ratcheted because a hostile audit set every floor to 1 and UEC-L-01 stayed green: each rule still located far more than one artifact, so the non-vacuity guarantee vanished while the measurement kept reporting satisfaction. Two-sided like every ceiling here, so lowering any floor fails immediately and raising one is the same deliberate act as repairing a violation. A floor that can be edited downward guarantees nothing."
   },
   "self_coverage": {
