@@ -137,7 +137,7 @@
       "kind": "registered-artifact",
       "name": "Registered artifacts",
       "note": "the source of REGISTERED constitutional identity for a relationship target",
-      "objects": 1233,
+      "objects": 1658,
       "pointer": "artifacts",
       "provider": "PRV-REGISTRY",
       "providers_matched": 1,
@@ -148,7 +148,7 @@
       "kind": "lineage-record",
       "name": "Lineage and bookkeeping records",
       "note": "a keyed store: the mapping key IS the identity, which needs no adapter change and no engine change",
-      "objects": 1264,
+      "objects": 1689,
       "pointer": "by_path",
       "provider": "PRV-LEDGER",
       "providers_matched": 1,
@@ -159,7 +159,7 @@
       "kind": "knowledge-object",
       "name": "Canonical knowledge objects",
       "note": "Knowledge Once: extracted knowledge is registered here, never in a register this programme writes",
-      "objects": 142,
+      "objects": 143,
       "pointer": "objects",
       "provider": "PRV-KNOWLEDGE",
       "providers_matched": 1,
@@ -709,7 +709,7 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "cko_identity_collisions": 0,
-    "ckos_discovered": 3513,
+    "ckos_discovered": 4364,
     "ckos_of_unknown_kind": 0,
     "ckos_without_semantic_identity": 0,
     "closed_enumerations_declared": 0,
@@ -749,7 +749,7 @@
     "objects_from_invariants": 48,
     "objects_from_lifecycle": 45,
     "objects_from_pipeline": 35,
-    "objects_from_registry": 1233,
+    "objects_from_registry": 1658,
     "parallel_authority_claims": 0,
     "privileged_branches": 0,
     "providers_not_open": 0,
@@ -1611,7 +1611,7 @@
       "measure": "ckos_discovered",
       "measured": true,
       "reusable_as": "a composable object graph any further measurement reads without re-parsing its owners",
-      "value": 3513
+      "value": 4364
     },
     {
       "id": "EK-05",
@@ -5669,7 +5669,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "8cd30d136ae33aa487fba33471e3acdc460601c7782ff97ae09e3df720cd5c17",
+  "graph_digest": "4d1e899f8b5b01d60c07685747bf4d4c5a527a1dd6a35be7cc669b10e620cf5e",
   "graphs": [
     {
       "composed": true,
@@ -6048,7 +6048,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 142,
+        "measure_value": 143,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6056,7 +6056,7 @@
       "invariant": "Universal Knowledge Discovery",
       "measure": "counters.knowledge_objects_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 142,
+      "measure_value": 143,
       "ordinal": 40,
       "owner": "00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md",
       "properties": {
@@ -6095,7 +6095,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 1254,
+        "measure_value": 1679,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6103,7 +6103,7 @@
       "invariant": "Universal Capability Discovery",
       "measure": "counters.capability_nodes_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 1254,
+      "measure_value": 1679,
       "ordinal": 50,
       "owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
       "properties": {
@@ -6330,7 +6330,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 125,
+        "measure_value": 136,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6338,7 +6338,7 @@
       "invariant": "Universal Alternative Strategy Generation",
       "measure": "decision_total",
       "measure_source": "00-MASTER/UCDA-000001/ucda.json",
-      "measure_value": 125,
+      "measure_value": 136,
       "ordinal": 100,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -7035,7 +7035,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 1233,
+        "measure_value": 1658,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7043,7 +7043,7 @@
       "invariant": "Universal Registration",
       "measure": "counters.registry_artifacts_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 1233,
+      "measure_value": 1658,
       "ordinal": 250,
       "owner": "00-BOOK/MASTER-BOOK/UMB-005-REGISTRY-ARCHITECTURE.md",
       "properties": {
@@ -7176,7 +7176,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 142,
+        "measure_value": 143,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7184,7 +7184,7 @@
       "invariant": "Universal Knowledge Registration",
       "measure": "count",
       "measure_source": "knowledge/canonical-knowledge.json",
-      "measure_value": 142,
+      "measure_value": 143,
       "ordinal": 280,
       "owner": "knowledge/canonical-knowledge.json",
       "properties": {
@@ -7693,7 +7693,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 531,
+        "measure_value": 532,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7701,7 +7701,7 @@
       "invariant": "Universal Engineering Capability Elevation",
       "measure": "counters.relationship_ckos_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 531,
+      "measure_value": 532,
       "ordinal": 390,
       "owner": "00-MASTER/UCL-000001/ucl-declaration.json",
       "properties": {
@@ -24153,7 +24153,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "18a85e421e48a5ee7276601d976794607da610616477aa9671c40c1288476960",
+  "seal_sha256": "58e6608edea53e04ce0e6a1f7579d9a58cc210e2d06cb0224b61955216527092",
   "self_evolution": [
     {
       "anchor": "determination",

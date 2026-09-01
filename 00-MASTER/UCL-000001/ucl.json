@@ -60,7 +60,7 @@
       "kind": "registry-artifact",
       "name": "Universal Registry adapter",
       "note": "Supplies the registration graph and the capability category space.",
-      "objects": 1233,
+      "objects": 1658,
       "pointer": "artifacts",
       "provider": "PRV-REGISTRY",
       "providers_matched": 1,
@@ -71,7 +71,7 @@
       "kind": "lineage-record",
       "name": "Universal Lineage adapter",
       "note": "Supplies the lineage graph as a derived projection over recorded snapshot history. An empty id mapping means the collection key IS the identity, so a keyed store needs no engine change. No new lineage store is created (UCI-001 Part XVI.5).",
-      "objects": 1264,
+      "objects": 1689,
       "pointer": "history",
       "provider": "PRV-LEDGER",
       "providers_matched": 1,
@@ -82,7 +82,7 @@
       "kind": "knowledge-object",
       "name": "Canonical knowledge adapter",
       "note": "Supplies the knowledge graph. The located store already keys its records by canonical knowledge object identity, so the adapter is close to an identity mapping — evidence that the object model is the repository's own and not imposed by this programme.",
-      "objects": 142,
+      "objects": 143,
       "pointer": "objects",
       "provider": "PRV-KNOWLEDGE",
       "providers_matched": 1,
@@ -93,7 +93,7 @@
       "kind": "decision-record",
       "name": "Constitutional decision adapter",
       "note": "Supplies registered engineering knowledge as decisions bound to evidence.",
-      "objects": 125,
+      "objects": 136,
       "pointer": "decisions",
       "provider": "PRV-DECISIONS",
       "providers_matched": 1,
@@ -419,7 +419,9 @@
       "role": "closure is asserted only after the repository reproduces itself from the committed state"
     }
   ],
-  "blocking_failures": [],
+  "blocking_failures": [
+    "UCL-V-41"
+  ],
   "bound_hits": [],
   "bounds_slack": [],
   "capabilities": [
@@ -595,11 +597,11 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "capability_artifacts_unresolved": 0,
-    "capability_nodes_discovered": 1254,
+    "capability_nodes_discovered": 1679,
     "cko_identity_collisions": 0,
     "cko_kind_registry_closed": 0,
     "cko_reference_ambiguities": 0,
-    "ckos_discovered": 3484,
+    "ckos_discovered": 4347,
     "ckos_of_unknown_kind": 0,
     "ckos_without_provenance": 0,
     "ckos_without_semantic_identity": 0,
@@ -616,10 +618,10 @@
     "graph_types_empty": 0,
     "graph_types_unresolved": 0,
     "knowledge_extractions_unmeasured": 0,
-    "knowledge_objects_discovered": 142,
+    "knowledge_objects_discovered": 143,
     "lifecycle_authorities_unresolved": 0,
     "limit_tokens_present": 0,
-    "lineage_records_discovered": 1264,
+    "lineage_records_discovered": 1689,
     "parallel_authority_claims": 0,
     "providers_not_open": 0,
     "providers_unlocated": 0,
@@ -628,11 +630,11 @@
     "readiness_owners_unresolved": 0,
     "record_write_intersections": 0,
     "reentry_declarations_absent": 0,
-    "registry_artifacts_discovered": 1233,
-    "relations_discovered": 531,
+    "registry_artifacts_discovered": 1658,
+    "relations_discovered": 532,
     "relations_of_unknown_type": 0,
-    "relationship_ckos_discovered": 531,
-    "relationships_without_target_identity": 274,
+    "relationship_ckos_discovered": 532,
+    "relationships_without_target_identity": 275,
     "runs_nondeterministic": 0,
     "self_evolution_steps_unbound": 0,
     "semantic_identity_collisions": 0,
@@ -653,7 +655,7 @@
   },
   "cycles": [],
   "dependency_relation": "binds-to",
-  "determination": "UNIVERSAL-CONSTITUTIONAL-LIFECYCLE-EXECUTABLE",
+  "determination": "UNIVERSAL-CONSTITUTIONAL-LIFECYCLE-NOT-ESTABLISHED",
   "elevations": [
     {
       "evidenced": true,
@@ -687,7 +689,7 @@
       "measure": "relationship_ckos_discovered",
       "measured": true,
       "statement": "governed relationships now first-class and composable into graphs without new machinery",
-      "value": 531
+      "value": 532
     },
     {
       "evidenced": true,
@@ -1088,7 +1090,7 @@
       "registration_owner": "knowledge/canonical-knowledge.json",
       "registration_owner_located": true,
       "reusable_as": "the relationship substrate a future graph type composes over without new machinery",
-      "value": 531
+      "value": 532
     },
     {
       "id": "EK-06",
@@ -1158,8 +1160,8 @@
       "why_not_repaired": "Every artifact in the population is one the registry deliberately does not admit, and for three distinct reasons repository law states rather than infers: generated projections are re-derived and never hand-registered (GOV-005 §5.3), operational memory must never consume permanent corpus identities (UCOS-RECON-C1), and the generator must not register its own machinery or its own output. Admitting any of them to obtain an identity would violate the authority that excludes it; for the RIE family it would additionally be unsatisfiable, having no fixpoint. The condition is therefore reported and bounded rather than repaired, and referred to the same registry owner as UCL-F-004."
     }
   ],
-  "gate": "OPEN",
-  "graph_digest": "9cc79c8bb22ae1de62747777b1bf0b606f538ab9af43de46e3bf70b13df18d8d",
+  "gate": "CLOSED",
+  "graph_digest": "fee5826f63834215c969d3c9fc446418935ec97b0c831a4269561d550864470b",
   "graphs": [
     {
       "edge_relations": [
@@ -1189,7 +1191,7 @@
         "governance-programme",
         "registry-artifact"
       ],
-      "nodes": 1254,
+      "nodes": 1679,
       "relations_known": true
     },
     {
@@ -1286,7 +1288,7 @@
       "node_kinds": [
         "registry-artifact"
       ],
-      "nodes": 1233,
+      "nodes": 1658,
       "relations_known": true
     },
     {
@@ -1298,7 +1300,7 @@
       "node_kinds": [
         "lineage-record"
       ],
-      "nodes": 1264,
+      "nodes": 1689,
       "relations_known": true
     },
     {
@@ -1325,7 +1327,7 @@
         "knowledge-object",
         "decision-record"
       ],
-      "nodes": 267,
+      "nodes": 279,
       "relations_known": true
     },
     {
@@ -1337,7 +1339,7 @@
       "node_kinds": [
         "constitutional-relationship"
       ],
-      "nodes": 531,
+      "nodes": 532,
       "relations_known": true
     }
   ],
@@ -1548,7 +1550,7 @@
       "relation": "binds-to"
     }
   ],
-  "omega_e05_authorized": true,
+  "omega_e05_authorized": false,
   "order": [
     "SRC-MANIFEST::UCL-S-0010",
     "SRC-MANIFEST::UCL-S-0020",
@@ -1961,7 +1963,7 @@
       "owner": "00-BOOK/MASTER-BOOK/UMB-010-LINEAGE-ARCHITECTURE.md",
       "owner_located": true,
       "ready": true,
-      "value": 1264
+      "value": 1689
     },
     {
       "comparator": ">=",
@@ -1972,7 +1974,7 @@
       "owner": "knowledge/canonical-knowledge.json",
       "owner_located": true,
       "ready": true,
-      "value": 142
+      "value": 143
     },
     {
       "comparator": ">=",
@@ -2016,7 +2018,7 @@
       "owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "owner_located": true,
       "ready": true,
-      "value": 531
+      "value": 532
     }
   ],
   "records": [
@@ -8513,6 +8515,28 @@
     {
       "attributes": {
         "relation": "evidenced-by",
+        "source": "SRC-KNOWLEDGE::UCKO-CAP-8D53BE34C33F",
+        "target": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
+        "target_class": "artifact"
+      },
+      "cko_id": "constitutional-relationship::cce666947e01974fa1d37c2d58cccf1a",
+      "kind": "constitutional-relationship",
+      "name": "evidenced-by",
+      "provenance": {
+        "adapter": "SRC-KNOWLEDGE",
+        "discovery_class": "constitutional-metadata",
+        "provider": "PRV-KNOWLEDGE",
+        "provider_owner": "knowledge/canonical-knowledge.json",
+        "serialization": "FMT-JSON"
+      },
+      "record_id": "evidenced-by|86a42d138b1103809c099c36be3f7840ab8b7482f37d1afb181ad58092a693d5|",
+      "relations": [],
+      "semantic_id": "7665a2799155ffbc0c36f92b69a41e0d18a2effb131c04d9bdc1b26f0c952d85",
+      "target_identified": false
+    },
+    {
+      "attributes": {
+        "relation": "evidenced-by",
         "source": "SRC-KNOWLEDGE::UCKO-CAP-8D97527B1FCA",
         "target": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
         "target_class": "artifact"
@@ -13775,7 +13799,7 @@
       "goal": "Execute the Universal Constitutional Lifecycle over the Universal Constitutional Lifecycle itself.",
       "id": "GOAL-SELF",
       "note": "Self-application. The lifecycle is the first capability the lifecycle governs, which is what makes it a substrate rather than a description.",
-      "run_id": "97c49795eb8d6a6e29598ce6899532ed23085706a01dfe8e244864493d88042c",
+      "run_id": "c88a3634d57996b50cbe44c1a29f21513cf776615a0566099e76344ecd18c068",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -14281,7 +14305,7 @@
       "goal": "Engineer the Universal Constitutional Engineering Substrate required for the Autonomous Constitutional Engineering Engine.",
       "id": "GOAL-SUBSTRATE",
       "note": "The Ω-E04→Ω-E05 handover goal.",
-      "run_id": "304ee1838860b7e71bb9d2e0bf987b270515cdab30d560214b0c749ef05e59e8",
+      "run_id": "6d656cf6ad1c9f0bb6b131068ac9d1fb22291a9df345e34988cfc545b701bdf8",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -14787,7 +14811,7 @@
       "goal": "Engineer an arbitrary future canonical capability that Repository Truth does not yet record.",
       "id": "GOAL-ARBITRARY-CAPABILITY",
       "note": "Proves universal applicability WITHOUT naming a capability: the traversal is identical for every goal, so no capability needs its own methodology and no capability list exists to be incomplete.",
-      "run_id": "d979815a38da43eb74b4e5a02645233ae9a10b772e8f4e8be764bed60b5f5bbe",
+      "run_id": "1c7d9a3019922b8c1769502eaac544d73531d287a1c9b7555a69cda79f707a76",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -15289,7 +15313,7 @@
       ]
     }
   ],
-  "seal_sha256": "f7ea8eeeebe25d6aef2bb4a79b40bf082c38839b6869e7876934e1f3f1442f5b",
+  "seal_sha256": "05b144bde28cdc2d11064d3b18c043a7b359f59bd9877c38f6fa8681dee69e32",
   "self_evolution": [
     {
       "anchor": "",
@@ -15377,7 +15401,7 @@
       "record_id"
     ],
     "mutable_inputs": [],
-    "relationships_without_target_identity": 274,
+    "relationships_without_target_identity": 275,
     "unadmitted_target_artifacts": [
       ".github/workflows",
       "00-BOOK/CONTROL-TOWER",
@@ -19156,7 +19180,7 @@
       "measure": "capability_nodes_discovered",
       "requirement": "the capability graph is discovered, never enumerated by this programme",
       "satisfied": true,
-      "value": 1254
+      "value": 1679
     },
     {
       "blocking": true,
@@ -19565,7 +19589,7 @@
       "id": "UCL-V-35",
       "measure": "relationship_ckos_discovered",
       "satisfied": true,
-      "value": 531
+      "value": 532
     },
     {
       "blocking": true,
@@ -19630,8 +19654,8 @@
       "expect": 274,
       "id": "UCL-V-41",
       "measure": "relationships_without_target_identity",
-      "satisfied": true,
-      "value": 274
+      "satisfied": false,
+      "value": 275
     },
     {
       "blocking": true,

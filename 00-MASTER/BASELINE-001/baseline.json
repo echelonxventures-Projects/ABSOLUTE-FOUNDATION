@@ -39,7 +39,10 @@
       "state": "CERTIFIED — CURRENT CONSTITUTIONAL BASELINE"
     }
   ],
-  "blocking_failures": [],
+  "blocking_failures": [
+    "BLN-VAL-17",
+    "BLN-VAL-26"
+  ],
   "capabilities": [
     {
       "capability": "Baseline Registry",
@@ -84,7 +87,7 @@
       "measure": "lineage_measured",
       "measured": true,
       "obligation": "the constitutional lineage population is measured, every recorded predecessor resolves, and the declared inheritance relationship type is located rather than assumed",
-      "value": 43
+      "value": 44
     },
     {
       "capability": "Baseline Succession",
@@ -106,7 +109,7 @@
     },
     {
       "capability": "Baseline Version Progression",
-      "discharged": true,
+      "discharged": false,
       "id": "BLN-CAP-08",
       "measure": "versions_succeeded",
       "measured": true,
@@ -178,12 +181,12 @@
     },
     {
       "capability": "Baseline Configuration",
-      "discharged": true,
+      "discharged": false,
       "id": "BLN-CAP-16",
       "measure": "configuration_versions_read",
       "measured": true,
       "obligation": "the constitutional versions the current baseline records are read from the located constitutional register rather than restated",
-      "value": 4
+      "value": 5
     },
     {
       "capability": "Baseline Scope",
@@ -249,7 +252,8 @@
     "CEP-001 1.1",
     "CEP-002 1.2",
     "CEP-009 1.1",
-    "CMG-000001 1.1"
+    "CMG-000001 1.2",
+    "UCKP-LAW-0001 1.0.0"
   ],
   "continuation": {
     "bound": true,
@@ -259,7 +263,7 @@
   "counts": {
     "baselines": 2,
     "capabilities": 20,
-    "capabilities_discharged": 20,
+    "capabilities_discharged": 18,
     "chain_length": 2,
     "criteria": 5,
     "criteria_corroborated": 5,
@@ -267,7 +271,7 @@
     "currency_claims": 4,
     "currency_diverges": 3,
     "inheritance_rules": 12,
-    "lineage_population": 43,
+    "lineage_population": 44,
     "lineage_with_predecessor": 0,
     "non_inheritance_rules": 6,
     "pointers": 68,
@@ -278,7 +282,7 @@
     "scope_rules_bound": 5,
     "surfaces_scanned": 131,
     "unrecorded_citations": 0,
-    "version_progressions": 4,
+    "version_progressions": 5,
     "versions_succeeded": 4
   },
   "currency_claims": [
@@ -338,7 +342,7 @@
   "current": [
     "UCOS-BASELINE-002"
   ],
-  "determination": "BASELINE-INHERITANCE-BOUND",
+  "determination": "BASELINE-INHERITANCE-INCOMPLETE",
   "divergences_referred": [
     "BLN-CUR-01: referred to 00-MASTER/RELEASE-001/RELEASE-LIFECYCLE.md",
     "BLN-CUR-02: referred to 00-MASTER/RELEASE-001/RELEASE-LIFECYCLE.md",
@@ -475,8 +479,8 @@
       "title": "A tag exists in the baseline tag namespace under a convention the located scheme does not declare"
     }
   ],
-  "gate": "OPEN",
-  "gate_exit": 0,
+  "gate": "CLOSED",
+  "gate_exit": 1,
   "immutability": {
     "disjoint": true,
     "intersection": [],
@@ -576,7 +580,7 @@
     "edges": [],
     "inheritance_type_located": true,
     "owner": "00-CMG/CMG-REGISTRY.json",
-    "population": 43,
+    "population": 44,
     "vacuous": true,
     "with_predecessor": 0
   },
@@ -744,7 +748,7 @@
       "rule": "a baseline shall be recomputable and shall yield a byte-identical result on recomputation"
     }
   ],
-  "seal_sha256": "860df8cac85979c1696d07f05005ec92df2d6d7f4acd8864e4b6b22ab7868655",
+  "seal_sha256": "94e5c6ad438ddc2c53cfa0088767f14a6773f1132b06abd85913d9205c391f12",
   "unrecorded_citations": [],
   "validations": [
     {
@@ -910,12 +914,14 @@
     {
       "blocking": true,
       "dimension": "VERSION-SUCCEEDED",
-      "failure_count": 0,
-      "failures": [],
+      "failure_count": 1,
+      "failures": [
+        "UCKP-LAW-0001: no universal identity resolves for its path"
+      ],
       "id": "BLN-VAL-17",
       "measured": true,
       "obligation": "every constitutional artifact whose recorded version exceeds the base version resolves to a universal identity whose located ledger records an increment event reaching that version",
-      "satisfied": true
+      "satisfied": false
     },
     {
       "blocking": true,
@@ -1000,12 +1006,15 @@
     {
       "blocking": true,
       "dimension": "CAPABILITY-DISCHARGED",
-      "failure_count": 0,
-      "failures": [],
+      "failure_count": 2,
+      "failures": [
+        "BLN-CAP-08: versions_succeeded",
+        "BLN-CAP-16: configuration_versions_read"
+      ],
       "id": "BLN-VAL-26",
       "measured": true,
       "obligation": "every declared capability is discharged by a measure that ran",
-      "satisfied": true
+      "satisfied": false
     }
   ],
   "version_progressions": [
@@ -1013,7 +1022,7 @@
       "id": "CMG-000001",
       "identity": "UCOS-CON-000050",
       "increment_recorded": true,
-      "version": "1.1"
+      "version": "1.2"
     },
     {
       "id": "CEP-001",
@@ -1032,6 +1041,12 @@
       "identity": "UCOS-CON-000041",
       "increment_recorded": true,
       "version": "1.1"
+    },
+    {
+      "id": "UCKP-LAW-0001",
+      "identity": null,
+      "increment_recorded": false,
+      "version": "1.0.0"
     }
   ]
 }

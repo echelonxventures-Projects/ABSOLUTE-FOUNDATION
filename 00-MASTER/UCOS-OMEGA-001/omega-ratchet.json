@@ -1,0 +1,72 @@
+{
+  "authority": "NONE — DERIVED TRUTH. Every value here is a measurement, never a choice.",
+  "best": {
+    "authority_of_last_resort": 0.0,
+    "declared_exemptions": 10.0,
+    "import_entropy": 7.979519,
+    "statement_entropy": 6.364474,
+    "unexplained_exemptions": 2.0,
+    "unmeasured_surface_density": 0.094935,
+    "unnameable_exemptions": 49.0,
+    "unreachable_artifacts": 53.0,
+    "unresolved_dynamic_sites": 22.0
+  },
+  "corrections": [
+    {
+      "metric": "import_entropy",
+      "reason": "Import statements per tracked artifact: 8.007283 -> 8.009103, a rise of 0.0018 across 2,197 artifacts, which is four import statements. RE-SEEDED at verification closure. The rise is four import statements and their statements, every one of them required by a LAW rather than chosen: (1) engine/universal_discovery/gate.py gained a main() delegation because UEC-000001 locates every engine/*/gate.py as an enforcement artifact and UEC-L-04 requires it to be invoked by its own module path -- 'nothing enforces by existing'; the alternative was raising the engines_with_no_invoker ceiling from 6 to 7, which is the move Omega-4 exists to refuse. (2) engine/tests/unit/test_certification_integrity.py imports the ratchet module because UCI's six laws are now held to directions rather than ceilings and the tests must supply the sealed state they compare against. (3) engine/tests/unit/test_verification_intelligence.py imports clear_derived_scope_cache and the registry module because the collection set is derived and its fixtures must be real git trees. COMPENSATION WAS ATTEMPTED FIRST AND IS RECORDED: three same-module import statements in surface.py were merged into one node and three function-local imports in the UVI test were hoisted to a single module-level import, recovering five nodes of the nine. Shaving further would be gaming the measurement rather than governing the repository, which is why the remainder is declared here instead of hidden. A JUSTIFICATION WOULD HAVE BEEN THE WRONG INSTRUMENT: it permits every future regression on the metric forever, and what happened here was one bounded, law-driven addition. FINAL VALUE IS THE FORMATTER'S, AND THE TENSION IS RECORDED RATHER THAN RESOLVED IN SECRET: the compensation described above merged three `from engine.universal_discovery import` statements in surface.py into one node, and ruff's import sorting (rule I001, part of the canonical lint gate) requires aliased imports to be split back into separate statements. The lint gate is authoritative for style, so the merge was reverted and the bound is sealed at the count ruff produces. The residual is two import nodes. A repository cannot hold both a formatter that splits imports and a ratchet that counts them without one of them yielding, and the ratchet is the one that yields -- silently fighting the formatter would make every future `ruff format` a governance event. The final sealed value also includes one further import in platform/tests/test_universal_project_state.py, whose test used to grep pyproject.toml for the literal string \"--cov=platform.universal_project_state\" and now asks the derivation instead -- an obsolete premise corrected during closure."
+    },
+    {
+      "metric": "statement_entropy",
+      "reason": "Surface statements per callable: 6.397527 -> 6.398330, a rise of 0.0008. RE-SEEDED at verification closure. The rise is four import statements and their statements, every one of them required by a LAW rather than chosen: (1) engine/universal_discovery/gate.py gained a main() delegation because UEC-000001 locates every engine/*/gate.py as an enforcement artifact and UEC-L-04 requires it to be invoked by its own module path -- 'nothing enforces by existing'; the alternative was raising the engines_with_no_invoker ceiling from 6 to 7, which is the move Omega-4 exists to refuse. (2) engine/tests/unit/test_certification_integrity.py imports the ratchet module because UCI's six laws are now held to directions rather than ceilings and the tests must supply the sealed state they compare against. (3) engine/tests/unit/test_verification_intelligence.py imports clear_derived_scope_cache and the registry module because the collection set is derived and its fixtures must be real git trees. COMPENSATION WAS ATTEMPTED FIRST AND IS RECORDED: three same-module import statements in surface.py were merged into one node and three function-local imports in the UVI test were hoisted to a single module-level import, recovering five nodes of the nine. Shaving further would be gaming the measurement rather than governing the repository, which is why the remainder is declared here instead of hidden. A JUSTIFICATION WOULD HAVE BEEN THE WRONG INSTRUMENT: it permits every future regression on the metric forever, and what happened here was one bounded, law-driven addition. FINAL VALUE IS THE FORMATTER'S, AND THE TENSION IS RECORDED RATHER THAN RESOLVED IN SECRET: the compensation described above merged three `from engine.universal_discovery import` statements in surface.py into one node, and ruff's import sorting (rule I001, part of the canonical lint gate) requires aliased imports to be split back into separate statements. The lint gate is authoritative for style, so the merge was reverted and the bound is sealed at the count ruff produces. The residual is two import nodes. A repository cannot hold both a formatter that splits imports and a ratchet that counts them without one of them yielding, and the ratchet is the one that yields -- silently fighting the formatter would make every future `ruff format` a governance event."
+    },
+    {
+      "metric": "unreachable_artifacts",
+      "reason": "RE-SEEDED after a MEASUREMENT DEFECT was fixed, not after a regression. The bound was 33 and it was wrong. graph.SCRIPT_INVOCATION matched any `*.py` token in an orchestration text and surface._invoking_planes matched it by BASENAME, so a bare filename appearing in PROSE credited every file sharing that basename with the make and ci planes. The Makefile carries the sentence 'invisible to an __init__.py predicate' inside a comment, and that one comment made all 88 package initialisers in the repository report themselves invoked; model.py, config.py, registry.py, ledger.py and ten more inflated the count the same way. Requiring a script invocation to be a PATH (to contain a '/') and matching it as a full path corrected the measurement: the honest value is 53, not 33. A JUSTIFICATION WOULD HAVE BEEN THE WRONG INSTRUMENT -- it would have excused every future regression on this metric forever, when what changed was what the metric MEASURES. Re-seeding is recorded here so the drop is auditable instead of silent."
+    }
+  ],
+  "floors": [
+    {
+      "metric": "unexplained_exemptions",
+      "reason": "The two are engine/__init__.py (2 statements) and platform/__init__.py (15 statements, 4 imports). Both are ROOT package initialisers of trees measured per SUB-package, and that shape is what puts them outside every rule: coverage sources name engine.foundation and platform.identity, never engine or platform, so no source covers the initialiser itself. Naming the roots instead would admit engine.uicm — 1,893 statements with zero test files, declared exempt with a written reason — and convert a dead-code finding into a coverage figure, which is the measurement laundering the exemption register exists to prevent. Ω FOUND THESE: both were absent from coverage.xml under the enumerated denominator and no control could say so. WHAT CLOSES THIS FLOOR: retiring or testing engine.uicm, after which the roots can be measured whole and this metric reaches 0. That is an owner decision about dead code, not a coverage setting.",
+      "value": 2.0
+    },
+    {
+      "metric": "unnameable_exemptions",
+      "reason": "Artifacts whose top-level root is not a Python identifier — 00-MASTER, 00-BOOK and 00-CMG — so NO coverage source could name them, by the language's own rule for identifiers rather than by any policy here. They are governance engines: owned (Ω-2 derives an authority for every one), invoked (verify.sh stages, Makefile targets and workflows all reach them) and unmeasurable by coverage as currently laid out. WHAT CLOSES THIS FLOOR: making those engines importable under test rather than only executable as scripts, which is a real change to how they are structured and not a setting. Until then the population may fall and hold; it may never rise, because a floor accepts the stall and never a regression.",
+      "value": 49.0
+    },
+    {
+      "metric": "unreachable_artifacts",
+      "reason": "Artifacts no import, orchestration plane or entry point reaches. Declared as an OPEN FINDING rather than an acceptable state, so the number is argued about instead of tolerated. Composition as measured: 16 under engine/, 10 under platform/, 15 one-shot UAKOS phase scripts under 00-MASTER whose phases have completed, 10 under 00-BOOK/tools (the connector set and ukbx.py), 1 under 00-CMG/tools and 1 under intelligence/. TWENTY OF THE 53 ARE __init__.py FILES, which is the largest single group and the most tractable: a package initialiser that nothing imports is a package nothing imports. WHAT CLOSES THIS FLOOR: deleting what is finished and wiring what is not, which is a per-file owner decision. The bound still binds in the direction that matters -- a 54th unreachable artifact REGRESSES and is refused, because a floor excuses only the stall and never a regression.",
+      "value": 53.0
+    }
+  ],
+  "holds": {
+    "authority_of_last_resort": 8,
+    "declared_exemptions": 8,
+    "import_entropy": 0,
+    "statement_entropy": 0,
+    "unexplained_exemptions": 8,
+    "unmeasured_surface_density": 0,
+    "unnameable_exemptions": 8,
+    "unreachable_artifacts": 7,
+    "unresolved_dynamic_sites": 5
+  },
+  "how_to_read": "best[m] is the lowest value of metric m this repository has ever recorded. A run measuring more than best[m] is REFUSED unless justifications names m with a reason. A justification permits one run and never moves best[m], so a regression cannot become the new normal by being explained. holds[m] counts consecutive runs at an unchanged value; a CONVERGENT metric held at a non-zero value for 5 runs is reported STALLED, because an exemption class that stops shrinking has become a convention. floors[m] argues that a particular value IS m's floor and so accepts the stall — it does NOT excuse a regression, and it is refused as stale the moment m is measured below it.",
+  "justifications": [],
+  "kinds": {
+    "authority_of_last_resort": "CONVERGENT",
+    "declared_exemptions": "MONOTONIC",
+    "import_entropy": "ENTROPY",
+    "statement_entropy": "ENTROPY",
+    "unexplained_exemptions": "CONVERGENT",
+    "unmeasured_surface_density": "DENSITY",
+    "unnameable_exemptions": "CONVERGENT",
+    "unreachable_artifacts": "CONVERGENT",
+    "unresolved_dynamic_sites": "MONOTONIC"
+  },
+  "producer": "engine/universal_discovery/ratchet.py",
+  "schema": "ucos-omega-ratchet",
+  "version": "1.0.0"
+}

@@ -8,13 +8,13 @@ located edge identifiers so the count is auditable against the corpus.
 
 | Rule | Located type | Read | Lane | Artifacts supported | Already written | Derivable, not written | Cited edges |
 |---|---|---|---|---|---|---|---|
-| `UTCE-DR-01` | `Parent` | from | `architecture` | 1232 | 1232 | 0 | `UEDGE-000000002`, `UEDGE-000000005`, `UEDGE-000000907` |
-| `UTCE-DR-02` | `Depends-On` | from | `architecture` | 296 | 296 | 0 | `UEDGE-000000001`, `UEDGE-000000004`, `UEDGE-000000007` |
-| `UTCE-DR-03` | `Authorized-By` | from | `requirement` | 38 | 38 | 0 | `UEDGE-000003531`, `UEDGE-000003533`, `UEDGE-000003537` |
-| `UTCE-DR-04` | `Implements` | from | `architecture` | 36 | 36 | 0 | `UEDGE-000002995`, `UEDGE-000003063`, `UEDGE-000003133` |
-| `UTCE-DR-05` | `Implemented-By` | from | `implementation` | 17 | 17 | 0 | `UEDGE-000002996`, `UEDGE-000002998`, `UEDGE-000003064` |
-| `UTCE-DR-06` | `Consumes` | from | `architecture` | 24 | 24 | 0 | `UEDGE-000002675`, `UEDGE-000002717`, `UEDGE-000002737` |
-| `UTCE-DR-07` | `Traces-To` | from | `requirement` | 5 | 5 | 0 | `UEDGE-000003045`, `UEDGE-000003117`, `UEDGE-000003183` |
+| `UTCE-DR-01` | `Parent` | from | `architecture` | 1657 | 1657 | 0 | `UEDGE-000000002`, `UEDGE-000000005`, `UEDGE-000000909` |
+| `UTCE-DR-02` | `Depends-On` | from | `architecture` | 298 | 298 | 0 | `UEDGE-000000001`, `UEDGE-000000004`, `UEDGE-000000007` |
+| `UTCE-DR-03` | `Authorized-By` | from | `requirement` | 38 | 38 | 0 | `UEDGE-000004381`, `UEDGE-000004383`, `UEDGE-000004387` |
+| `UTCE-DR-04` | `Implements` | from | `architecture` | 36 | 36 | 0 | `UEDGE-000003845`, `UEDGE-000003913`, `UEDGE-000003983` |
+| `UTCE-DR-05` | `Implemented-By` | from | `implementation` | 17 | 17 | 0 | `UEDGE-000003846`, `UEDGE-000003848`, `UEDGE-000003914` |
+| `UTCE-DR-06` | `Consumes` | from | `architecture` | 24 | 24 | 0 | `UEDGE-000003525`, `UEDGE-000003567`, `UEDGE-000003587` |
+| `UTCE-DR-07` | `Traces-To` | from | `requirement` | 5 | 5 | 0 | `UEDGE-000003895`, `UEDGE-000003967`, `UEDGE-000004033` |
 
 ## Basis of each rule
 
