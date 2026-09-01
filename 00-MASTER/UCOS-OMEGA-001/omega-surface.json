@@ -5516,8 +5516,11 @@
       "imports": 7,
       "module": "engine.certification_integrity.classify",
       "path": "engine/certification_integrity/classify.py",
-      "reachable": false,
-      "reached_by": [],
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "test"
+      ],
       "root": "engine",
       "statements": 81
     },
@@ -5667,7 +5670,7 @@
       "statements": 35
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 8,
       "disposition": "MEASURED",
@@ -5678,7 +5681,8 @@
       "path": "engine/certification_integrity/suite.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "engine",
       "statements": 71
@@ -16295,6 +16299,40 @@
       "statements": 230
     },
     {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 21,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 3,
+      "module": "engine.tests.unit.test_certification_classify",
+      "path": "engine/tests/unit/test_certification_classify.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 95
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 18,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 5,
+      "module": "engine.tests.unit.test_certification_equivalence",
+      "path": "engine/tests/unit/test_certification_equivalence.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 95
+    },
+    {
       "authority": "UCOS-REPOSITORY-ROOT::ci+test",
       "authority_rule": "Ω-A-04",
       "callables": 56,
@@ -17607,6 +17645,23 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
+      "callables": 17,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 6,
+      "module": "engine.tests.unit.test_verification_cost_model",
+      "path": "engine/tests/unit/test_verification_cost_model.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 110
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
       "callables": 55,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
@@ -17911,6 +17966,23 @@
       ],
       "root": "engine",
       "statements": 113
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 19,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 3,
+      "module": "engine.tests.universal_discovery.test_model",
+      "path": "engine/tests/universal_discovery/test_model.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 91
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -19824,7 +19896,7 @@
       "statements": 170
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::make+verify",
+      "authority": "UCOS-REPOSITORY-ROOT::import+make+test+verify",
       "authority_rule": "Ω-A-04",
       "callables": 2,
       "disposition": "MEASURED",
@@ -19835,7 +19907,9 @@
       "path": "engine/verification_intelligence/cost_model.py",
       "reachable": true,
       "reached_by": [
+        "import",
         "make",
+        "test",
         "verify"
       ],
       "root": "engine",
@@ -39697,7 +39771,7 @@
       "platform/tests",
       "service/tests"
     ],
-    "tracked_python": 2246
+    "tracked_python": 2250
   },
   "producer": "engine/universal_discovery/surface.py",
   "ratchet": [
@@ -39737,12 +39811,11 @@
     },
     {
       "best": 53.0,
-      "justification": "Artifacts no import, orchestration plane or entry point reaches. Declared as an OPEN FINDING rather than an acceptable state, so the number is argued about instead of tolerated. Composition as measured: 16 under engine/, 10 under platform/, 15 one-shot UAKOS phase scripts under 00-MASTER whose phases have completed, 10 under 00-BOOK/tools (the connector set and ukbx.py), 1 under 00-CMG/tools and 1 under intelligence/. TWENTY OF THE 53 ARE __init__.py FILES, which is the largest single group and the most tractable: a package initialiser that nothing imports is a package nothing imports. WHAT CLOSES THIS FLOOR: deleting what is finished and wiring what is not, which is a per-file owner decision. The bound still binds in the direction that matters -- a 54th unreachable artifact REGRESSES and is refused, because a floor excuses only the stall and never a regression.",
       "kind": "CONVERGENT",
       "metric": "unreachable_artifacts",
       "subject": "artifacts no import, plane or entry point reaches. Code that cannot run.",
-      "value": 53.0,
-      "verdict": "JUSTIFIED"
+      "value": 52.0,
+      "verdict": "IMPROVED"
     },
     {
       "best": 22.0,
@@ -39753,51 +39826,51 @@
       "verdict": "HELD"
     },
     {
-      "best": 0.096966,
+      "best": 0.094935,
       "kind": "DENSITY",
       "metric": "unmeasured_surface_density",
       "ratio": {
-        "denominator": 265214,
+        "denominator": 265605,
         "numerator": 25178
       },
       "subject": "statements on the executable surface that no measurement covers, over all surface statements. SCALE-FREE: growth cannot breach it and cannot flatter it.",
-      "value": 0.094935,
+      "value": 0.094795,
       "verdict": "IMPROVED"
     },
     {
-      "best": 8.010014,
+      "best": 7.979519,
       "kind": "ENTROPY",
       "metric": "import_entropy",
       "ratio": {
-        "denominator": 2246,
-        "numerator": 17922
+        "denominator": 2250,
+        "numerator": 17939
       },
       "subject": "import statements per tracked artifact. Bounds how tangled the AVERAGE artifact may get, independently of how many artifacts exist.",
-      "value": 7.979519,
+      "value": 7.972889,
       "verdict": "IMPROVED"
     },
     {
-      "best": 6.398355,
+      "best": 6.364474,
       "kind": "ENTROPY",
       "metric": "statement_entropy",
       "ratio": {
-        "denominator": 41671,
-        "numerator": 265214
+        "denominator": 41746,
+        "numerator": 265605
       },
       "subject": "surface statements per callable. Rises when code accretes outside named, testable units, which is the shape unmeasurable code takes.",
-      "value": 6.364474,
+      "value": 6.362406,
       "verdict": "IMPROVED"
     }
   ],
   "schema": "ucos-omega-surface",
   "totals": {
-    "artifacts": 2246,
+    "artifacts": 2250,
     "authority_coverage_percent": 100.0,
     "by_authority_rule": {
       "Ω-A-01": 8,
       "Ω-A-02": 157,
       "Ω-A-03": 17,
-      "Ω-A-04": 2039,
+      "Ω-A-04": 2043,
       "Ω-A-06": 25
     },
     "by_disposition": {
@@ -39814,8 +39887,8 @@
         "statements": 531
       },
       "MEASURED": {
-        "files": 2167,
-        "statements": 240036
+        "files": 2171,
+        "statements": 240427
       },
       "TRANSIENT": {
         "files": 0,
@@ -39825,7 +39898,7 @@
     "by_disposition_rule": {
       "Ω-C-02": 13,
       "Ω-C-03": 5,
-      "Ω-C-04": 2167,
+      "Ω-C-04": 2171,
       "Ω-C-05": 10,
       "Ω-C-06": 49,
       "Ω-C-07": 2
@@ -39834,11 +39907,11 @@
     "discovered_roots": 11,
     "discovered_test_roots": 7,
     "distinct_authorities": 82,
-    "executable_surface_files": 2228,
-    "executable_surface_statements": 265214,
-    "measured_surface_percent": 90.5065,
-    "measured_surface_statements": 240036,
-    "unreachable_files": 53
+    "executable_surface_files": 2232,
+    "executable_surface_statements": 265605,
+    "measured_surface_percent": 90.5205,
+    "measured_surface_statements": 240427,
+    "unreachable_files": 52
   },
   "unparsed": [],
   "unresolved_dynamic_import_sites": {

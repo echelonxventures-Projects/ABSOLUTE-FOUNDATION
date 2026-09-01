@@ -3,12 +3,12 @@
   "best": {
     "authority_of_last_resort": 0.0,
     "declared_exemptions": 10.0,
-    "import_entropy": 7.979519,
-    "statement_entropy": 6.364474,
+    "import_entropy": 7.972889,
+    "statement_entropy": 6.362406,
     "unexplained_exemptions": 2.0,
-    "unmeasured_surface_density": 0.094935,
+    "unmeasured_surface_density": 0.094795,
     "unnameable_exemptions": 49.0,
-    "unreachable_artifacts": 53.0,
+    "unreachable_artifacts": 52.0,
     "unresolved_dynamic_sites": 22.0
   },
   "corrections": [
@@ -38,20 +38,20 @@
     },
     {
       "metric": "unreachable_artifacts",
-      "reason": "Artifacts no import, orchestration plane or entry point reaches. Declared as an OPEN FINDING rather than an acceptable state, so the number is argued about instead of tolerated. Composition as measured: 16 under engine/, 10 under platform/, 15 one-shot UAKOS phase scripts under 00-MASTER whose phases have completed, 10 under 00-BOOK/tools (the connector set and ukbx.py), 1 under 00-CMG/tools and 1 under intelligence/. TWENTY OF THE 53 ARE __init__.py FILES, which is the largest single group and the most tractable: a package initialiser that nothing imports is a package nothing imports. WHAT CLOSES THIS FLOOR: deleting what is finished and wiring what is not, which is a per-file owner decision. The bound still binds in the direction that matters -- a 54th unreachable artifact REGRESSES and is refused, because a floor excuses only the stall and never a regression.",
-      "value": 53.0
+      "reason": "Artifacts no import, orchestration plane or entry point reaches. Declared as an OPEN FINDING rather than an acceptable state, so the number is argued about instead of tolerated. LOWERED 53 -> 52 BECAUSE THE FINDING WAS ACTED ON, NOT BECAUSE THE METRIC MOVED: admitting engine/tests/unit/test_certification_classify.py to the repository gave engine/certification_integrity/classify.py its first importer, so a module that nothing reached is now reached by a suite that runs. That test module existed and was untracked, which is why the artifact read as dead while a passing test already exercised it. Composition as measured: 15 under engine/, 10 under platform/, 15 one-shot UAKOS phase scripts under 00-MASTER whose phases have completed, 10 under 00-BOOK/tools (the connector set and ukbx.py), 1 under 00-CMG/tools and 1 under intelligence/. TWENTY OF THE 52 ARE __init__.py FILES, which is the largest single group and the most tractable: a package initialiser that nothing imports is a package nothing imports. WHAT CLOSES THIS FLOOR: deleting what is finished and wiring what is not, which is a per-file owner decision. The bound still binds in the direction that matters -- a 53rd unreachable artifact REGRESSES and is refused, because a floor excuses only the stall and never a regression.",
+      "value": 52.0
     }
   ],
   "holds": {
-    "authority_of_last_resort": 8,
-    "declared_exemptions": 8,
+    "authority_of_last_resort": 9,
+    "declared_exemptions": 9,
     "import_entropy": 0,
     "statement_entropy": 0,
-    "unexplained_exemptions": 8,
+    "unexplained_exemptions": 9,
     "unmeasured_surface_density": 0,
-    "unnameable_exemptions": 8,
-    "unreachable_artifacts": 7,
-    "unresolved_dynamic_sites": 5
+    "unnameable_exemptions": 9,
+    "unreachable_artifacts": 0,
+    "unresolved_dynamic_sites": 6
   },
   "how_to_read": "best[m] is the lowest value of metric m this repository has ever recorded. A run measuring more than best[m] is REFUSED unless justifications names m with a reason. A justification permits one run and never moves best[m], so a regression cannot become the new normal by being explained. holds[m] counts consecutive runs at an unchanged value; a CONVERGENT metric held at a non-zero value for 5 runs is reported STALLED, because an exemption class that stops shrinking has become a convention. floors[m] argues that a particular value IS m's floor and so accepts the stall — it does NOT excuse a regression, and it is refused as stale the moment m is measured below it.",
   "justifications": [],
