@@ -55,16 +55,38 @@ GUARD=0
 OBSERVE=0
 STRICT=0
 INSTALL_HOOKS=0
+PERMIT="${UKB_PERMIT:-}"
 for arg in "$@"; do
   case "$arg" in
     --observe) OBSERVE=1 ;;
     --guard) GUARD=1 ;;
     --strict) STRICT=1 ;;
     --install-hooks) INSTALL_HOOKS=1 ;;
+    --permit=*) PERMIT="${arg#--permit=}" ;;
     *) echo "unknown option: $arg" >&2; exit 64 ;;
   esac
 done
 STRICT_FLAG=""; [ "$STRICT" = "1" ] && STRICT_FLAG="--strict"
+
+# --- Allocation authorization (UCOS-LEDGER-AUTHORITY-001) -------------------------
+# Phase 1 allocates PERMANENT identifiers, and `ledger_authority.commit` requires an
+# authorization for that write. Passing none is not an omission any more: ukb.py asserts
+# NO_ALLOCATION, which is VERIFIED against the measured pre-image, so a transaction that
+# allocates nothing completes and a transaction that would allocate is REFUSED with the
+# manifest a permit must be obtained for.
+#
+# THIS IS WHY THE FLAG EXISTS RATHER THAN A DEFAULT. Registration is idempotent in steady
+# state, so the common case needs no permit at all. The uncommon case — new artifacts, real
+# identifiers — is a governed decision, and the operator supplies the permit_id that a
+# reviewer bound to that exact manifest, pre-image and HEAD:
+#
+#   00-BOOK/tools/ukb.py build --mint --plan          # read the manifest to be authorized
+#   ...record a permit in 00-BOOK/DATA/allocation-permits.json...
+#   00-BOOK/tools/register.sh --permit=<permit_id>
+#
+# A permit that does not match the manifest is refused by binding, so forwarding one here
+# can approve exactly the allocation it was issued for and no other.
+PERMIT_FLAG=""; [ -n "$PERMIT" ] && PERMIT_FLAG="--permit=$PERMIT"
 
 cd "$REPO"
 
@@ -104,16 +126,33 @@ if [ "$OBSERVE" = "1" ]; then
   echo "   this command allocates no identity and writes nothing under version control"
   RC=0
 
-  echo "-- Observe 1/4: ukb enforce --pre (eligibility · validity · classification)"
+  echo "-- Observe 1/5: ukb enforce --pre (eligibility · validity · classification)"
   "$PY" "$HERE/ukb.py" enforce --pre $STRICT_FLAG || RC=4
 
-  echo "-- Observe 2/4: ukb validate (structural + schema invariants)"
+  # REGISTRATION PARITY (UMB-IMP-001 gate 3). The PRE gate does NOT enforce this, by design and
+  # correctly: it gates whether a NEW artifact is valid and classifiable BEFORE the transaction
+  # registers it, so making "unregistered" a PRE violation would refuse every artifact the very
+  # transaction exists to register — Phase 0 runs before Phase 1 mints.
+  #
+  # Parity is the POST gate's question, and until now POST ran in exactly one place: Phase 9 of
+  # the write transaction. No verification plane invoked it. `verify.sh` runs `enforce --pre`,
+  # `ucos-registration-gate.yml` runs `enforce --pre`, and this observation plane ran `--pre`
+  # too, so "every tracked artifact is registered" was asserted by nothing that runs on its own.
+  # MEASURED CONSEQUENCE: nine artifacts were committed unregistered — including
+  # final_certification_report.md — while every gate reported PASS.
+  #
+  # Read-only, so it belongs here: POST reads registers and appends to the gitignored runtime
+  # audit log. It allocates no identity and writes nothing under version control.
+  echo "-- Observe 2/5: ukb enforce (POST — registration parity: every tracked artifact registered)"
+  "$PY" "$HERE/ukb.py" enforce $STRICT_FLAG || RC=4
+
+  echo "-- Observe 3/5: ukb validate (structural + schema invariants)"
   "$PY" "$HERE/ukb.py" validate || RC=2
 
-  echo "-- Observe 3/4: ukbx validate (signal ledger integrity)"
+  echo "-- Observe 4/5: ukbx validate (signal ledger integrity)"
   "$PY" "$HERE/ukbx.py" validate || RC=2
 
-  echo "-- Observe 4/4: ukbx twin --check (digital-twin certification)"
+  echo "-- Observe 5/5: ukbx twin --check (digital-twin certification)"
   "$PY" "$HERE/ukbx.py" twin --check || RC=2
 
   # Uncommitted synchronized state. WORKTREE-vs-INDEX only: a staged register change is
@@ -157,12 +196,14 @@ GAPPY
     echo "  Note     : these artifacts already hold UGA identity — they are not anonymous" >&2
     if [ -f "$REPO/$DET" ]; then
       echo "  Governed by: $DET" >&2
-      echo "  Required action: run the REG-AUTO-001 transaction (register.sh) to reconcile" >&2
+      echo "  Required action: obtain REG-AUTO-001 authorization to reconcile the gap;" >&2
+      echo "                   allocation is irreversible and is not a remediation" >&2
+      echo "                   this read-only report may authorize" >&2
       echo "  Status   : REPORTED — the gap is determined, not silent" >&2
     else
       echo "  Determination: ABSENT" >&2
       echo "  Required action: create an Evolution Determination enumerating the" >&2
-      echo "                   population, then run the REG-AUTO-001 transaction" >&2
+      echo "                   population, then obtain REG-AUTO-001 authorization" >&2
       echo "  Status   : BLOCKING — an undetermined gap is an ungoverned gap" >&2
       RC=5
     fi
@@ -211,7 +252,7 @@ echo "-- Phase 0/10: ukb enforce --pre (pre-registration eligibility/validity/cl
 # to allocate permanent Universal IDs and page ranges. Without the flag `ukb build`
 # observes. The flag is what makes minting a decision rather than a side effect.
 echo "-- Phase 1/10: ukb build --mint (allocate identity; registry, pages, graph, control tower)"
-"$PY" "$HERE/ukb.py" build --mint     || fail "ukb build failed" 1
+"$PY" "$HERE/ukb.py" build --mint $PERMIT_FLAG || fail "ukb build failed" 1
 
 # --- Phase 2 — State synchronization (UMB-IMP-004): discover connectors, detect
 #               change since cursor, execute, verify, audit, recover. `--due`

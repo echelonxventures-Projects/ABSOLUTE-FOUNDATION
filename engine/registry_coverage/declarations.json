@@ -141,6 +141,36 @@
       "missing": "AUTHORITY_DECLARATION",
       "remediation": "declare in generated-artifact-registry.json, or add an in-file authority field",
       "referred_to": "UCOS-UKB-TOOLING"
+    },
+    {
+      "id": "W5-G1-09",
+      "registry": "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/gaps.json",
+      "producer": "EXTERNAL — vendored, produced outside this repository",
+      "producer_owner": "UAKOS-CLOSURE-008",
+      "missing": "AUTHORITY_DECLARATION",
+      "remediation": "none available in-file; custody is declared in 00-BOOK/DATA/generated-artifact-registry.json as an authored input of UAKOS-CLOSURE-008",
+      "referred_to": "UAKOS-CLOSURE-008",
+      "$why": "VENDORED EXTERNAL EVIDENCE, BYTE-LOCKED. This artifact is not a registry of this repository and declares no object of its own: it is third-party knowledge output vendored under 00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/ and hash-locked by that programme's EVIDENCE-MANIFEST.json. It is registry-SHAPED only because it carries a population key, which is why the syntactic scan finds it. RCM-AM-01 is unavailable BY CONSTRUCTION rather than by preference: adding an `authority` field would change the bytes, break the manifest's hash lock, and make UAKOS-CLOSURE-008 unreplayable — turning a documentation improvement into a verification failure. It is declared as an authored input in 00-BOOK/DATA/generated-artifact-registry.json, which is where its custody is recorded."
+    },
+    {
+      "id": "W5-G1-10",
+      "registry": "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json",
+      "producer": "EXTERNAL — vendored, produced outside this repository",
+      "producer_owner": "UAKOS-CLOSURE-008",
+      "missing": "AUTHORITY_DECLARATION",
+      "remediation": "none available in-file; custody is declared in 00-BOOK/DATA/generated-artifact-registry.json as an authored input of UAKOS-CLOSURE-008",
+      "referred_to": "UAKOS-CLOSURE-008",
+      "$why": "VENDORED EXTERNAL EVIDENCE, BYTE-LOCKED. This artifact is not a registry of this repository and declares no object of its own: it is third-party knowledge output vendored under 00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/ and hash-locked by that programme's EVIDENCE-MANIFEST.json. It is registry-SHAPED only because it carries a population key, which is why the syntactic scan finds it. RCM-AM-01 is unavailable BY CONSTRUCTION rather than by preference: adding an `authority` field would change the bytes, break the manifest's hash lock, and make UAKOS-CLOSURE-008 unreplayable — turning a documentation improvement into a verification failure. It is declared as an authored input in 00-BOOK/DATA/generated-artifact-registry.json, which is where its custody is recorded."
+    },
+    {
+      "id": "W5-G1-11",
+      "registry": "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base_summary.json",
+      "producer": "EXTERNAL — vendored, produced outside this repository",
+      "producer_owner": "UAKOS-CLOSURE-008",
+      "missing": "AUTHORITY_DECLARATION",
+      "remediation": "none available in-file; custody is declared in 00-BOOK/DATA/generated-artifact-registry.json as an authored input of UAKOS-CLOSURE-008",
+      "referred_to": "UAKOS-CLOSURE-008",
+      "$why": "VENDORED EXTERNAL EVIDENCE, BYTE-LOCKED. This artifact is not a registry of this repository and declares no object of its own: it is third-party knowledge output vendored under 00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/ and hash-locked by that programme's EVIDENCE-MANIFEST.json. It is registry-SHAPED only because it carries a population key, which is why the syntactic scan finds it. RCM-AM-01 is unavailable BY CONSTRUCTION rather than by preference: adding an `authority` field would change the bytes, break the manifest's hash lock, and make UAKOS-CLOSURE-008 unreplayable — turning a documentation improvement into a verification failure. It is declared as an authored input in 00-BOOK/DATA/generated-artifact-registry.json, which is where its custody is recorded."
     }
   ],
   "$scan_comment": "Where the matrix looks for registry-shaped artifacts. A registry-shaped artifact is a JSON object carrying a population of at least `minimum_population`; the threshold exists so that a small configuration file is not reported as an undeclared registry.",

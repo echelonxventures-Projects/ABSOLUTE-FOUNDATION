@@ -99,7 +99,23 @@ class Scope:
 
 
 def read_scope(root: str) -> Scope:
-    """Parse the declared denominator. A malformed declaration is a FAULT, never a default."""
+    """The denominator, DERIVED by Ω-1 and no longer parsed from three lists.
+
+    WHAT CHANGED, AND WHY THIS FUNCTION'S NAME NOW OVERSTATES ITS WORK. It used to read three
+    enumerations out of ``pyproject.toml`` — ``addopts`` ``--cov=`` flags, ``[tool.coverage.run]
+    source`` and ``testpaths`` — and its own docstring described the first two as one denominator
+    "declared TWICE and reconciled by nobody". They are gone. ``engine/universal_discovery``
+    derives all three from ``git ls-files '*.py'``, so ``flag_packages`` and ``source_paths`` are
+    now two VIEWS of one derivation rather than two opinions, and ``Scope``'s comment about
+    preserving their disagreement describes a disagreement that can no longer occur.
+
+    WHAT IS STILL READ FROM THE FILE, because both are judgements rather than populations: the
+    declared exemption register, and the coverage floor.
+
+    A DERIVATION FAULT IS AN INTEGRITY FAULT. ``OmegaError`` is re-raised as ``IntegrityError`` so
+    UCI's callers keep one error type, and so that "discovery could not run" can never be read as
+    "discovery found nothing" — the empty-world state in which every no-violations claim is true.
+    """
     path = os.path.join(root, "pyproject.toml")
     try:
         with open(path, "rb") as handle:
@@ -109,25 +125,27 @@ def read_scope(root: str) -> Scope:
             f"the coverage denominator is undeclared or unparseable: {exc}"
         ) from exc
     try:
-        ini = config["tool"]["pytest"]["ini_options"]
-        run = config["tool"]["coverage"]["run"]
         report = config["tool"]["coverage"]["report"]
     except KeyError as exc:
-        raise IntegrityError(f"pyproject.toml declares no coverage scope at {exc}") from exc
-    excluded = {
-        entry["package"]: entry["reason"]
-        for entry in config.get("tool", {})
-        .get("ucos", {})
-        .get("coverage_scope", {})
-        .get("excluded_packages", [])
-    }
+        raise IntegrityError(f"pyproject.toml declares no coverage report policy at {exc}") from exc
+
+    from engine.universal_discovery import discovery as omega_discovery
+    from engine.universal_discovery.model import OmegaError
+
+    try:
+        # Memoised per root: this function is called on every ``surface.build`` and the derivation
+        # walks the whole tracked tree. See ``discovery.derived_scope``.
+        test_roots, packages, excluded, _transient = omega_discovery.derived_scope(root)
+    except OmegaError as exc:
+        raise IntegrityError(f"the Ω-1 denominator derivation failed: {exc}") from exc
+
     return Scope(
-        flag_packages=frozenset(
-            a.split("=", 1)[1] for a in ini["addopts"] if a.startswith("--cov=")
-        ),
-        source_paths=frozenset(run["source"]),
+        flag_packages=frozenset(packages),
+        # ``measures()`` compares PATH prefixes, so the dotted derivation is projected onto paths
+        # here. One derivation, two spellings — never two sources of truth.
+        source_paths=frozenset(package.replace(".", "/") for package in packages),
         excluded_packages=excluded,
-        testpaths=tuple(ini["testpaths"]),
+        testpaths=test_roots,
         fail_under=float(report.get("fail_under", 0)),
     )
 

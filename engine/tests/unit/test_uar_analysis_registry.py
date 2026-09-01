@@ -8,7 +8,7 @@ tooling gates, not author discipline").
 
 What is proven:
 
-  * the declaration is satisfied on the committed repository (a reachable PASS state)
+  * the declaration is satisfied on the measured working tree (a reachable PASS state)
   * a duplicate analysis id drives the check FAIL (ids are actually enforced unique)
   * an unresolvable home drives the check FAIL (a home is actually resolved on disk)
   * an empty declaration FAILS CLOSED rather than reporting success over nothing —

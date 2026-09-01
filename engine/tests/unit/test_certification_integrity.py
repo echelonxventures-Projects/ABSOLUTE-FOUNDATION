@@ -7,14 +7,16 @@ against a fixture it never sees in production is a law tested against a differen
 
 WHAT IS PROVEN
 
-  * the gate is OPEN on the committed repository (a reachable PASS)
+  * the gate is OPEN on the measured working tree (a reachable PASS)
   * every law REFUSES when its debt grows by one (a reachable FAIL, per law)
   * the ratchet is two-sided — repaying debt without tightening the ceiling is itself refused
   * a declared ceiling that binds no measurement is refused
   * the coverage reader reproduces coverage.py's own totals, so it is reading and not guessing
   * the coverage comparison detects a single moved line, which is the granularity Rules 8/10/11
     depend on and the granularity a percentage comparison does not have
-  * statement attribution PARTITIONS: object counts sum to the file's count, never exceeding it
+  * statement attribution PARTITIONS: object counts sum to the set the surface distributed
+    (the AST statements, intersected with coverage's own countable lines when a report names
+    the file), and never exceed the file's AST count
   * the shuffle plugin is inactive without a seed, reproducible with one, and genuinely reorders
   * the extraction seal is deterministic, and the fingerprint detects a moved tree
   * an empty or single shard partition is refused rather than silently measured
@@ -51,6 +53,7 @@ from engine.certification_integrity.model import (
     PLANE_TYPES,
     IntegrityError,
 )
+from engine.universal_discovery import ratchet as omega_ratchet
 
 REPO = Path(__file__).resolve().parents[3]
 
@@ -75,12 +78,31 @@ def report() -> dict[str, Any]:
 # --------------------------------------------------------------- the reachable PASS state
 
 
-def test_the_gate_is_open_on_the_committed_repository(report: dict[str, Any]) -> None:
-    """Without this, every refusal below could be asserting over nothing."""
+def test_the_gate_is_open_on_the_measured_working_tree(report: dict[str, Any]) -> None:
+    """Without this, every refusal below could be asserting over nothing.
+
+    THE SUBJECT IS THE WORKING TREE, NOT THE COMMIT, and saying so is the whole of this change.
+    The `report` fixture is `contract.measure(str(REPO))`, which reads the checkout as it stands —
+    committed, staged and modified content alike. This test was named for "the committed
+    repository" and its failure message said so, which is true only when the tree happens to be
+    clean. On a dirty tree it attributed uncommitted work to HEAD and sent a reader to `git log`
+    for a cause sitting in `git status`; the measured refusal named `00-BOOK/tools/*` offenders
+    that are present in the checkout and absent from the commit.
+
+    MEASURING THE COMMIT INSTEAD WOULD MAKE THE OLD NAME TRUE AND THE TEST VACUOUS, which is why
+    the name was corrected rather than the subject. A frozen extraction of HEAD carries HEAD's
+    declaration, whose ratchet keys are NUMBERS — `contract` refuses that as a FAULT under Ω-4 —
+    and carries no sealed state at all, so `best` is None, no bound can be exceeded, and no law
+    can refuse. A test that cannot fail is not a guard.
+
+    The assertion itself is unchanged: OPEN, or name every refusal.
+    """
+    state = immutable.fingerprint(str(REPO))
     refused = [law for law in report["laws"] if law["status"] == contract.REFUSED]
     assert report["status"] == contract.OPEN, (
-        "the committed repository does not satisfy its own declaration: "
-        f"{[(law['law'], law['detail']) for law in refused]}"
+        f"the WORKING TREE does not satisfy its own declaration — HEAD {state.head[:8]} with "
+        f"{state.dirty_entries} uncommitted path(s), so this verdict is about the checkout and "
+        f"not about the commit: {[(law['law'], law['detail']) for law in refused]}"
     )
 
 
@@ -116,52 +138,84 @@ def test_no_law_is_non_blocking(declaration: contract.Declaration) -> None:
 
 # ------------------------------------------------------------------- NON-VACUITY, per law
 # Each law is forged into failure by growing its own population by one.
+#
+# UNDER Ω-4 THE COMPARISON IS A DIRECTION, NOT A CEILING, so these tests supply the sealed state the
+# comparison reads. What changed is which mutations refuse:
+#
+#   debt GROWS beyond the best-ever value          REFUSED, as before
+#   debt is REPAID below the best-ever value       ACCEPTED — it used to be refused as "slack",
+#                                                  which made every improvement fail the gate until
+#                                                  somebody committed a new number. That fired on
+#                                                  the commit introducing Ω: the denominator went
+#                                                  from 65 to 64 and the gate closed.
+#   the ratchet declares no KIND                   REFUSED, as before
+
+
+def _sealed_state(declaration: contract.Declaration, **best: float) -> omega_ratchet.Ratchet:
+    """A ratchet state holding ``best`` for the given metrics, with the declared kinds."""
+    return omega_ratchet.Ratchet(
+        {
+            "best": dict(best),
+            "kinds": {key: declaration.ratchet[key] for key in best if key in declaration.ratchet},
+            "holds": {},
+            "justifications": [],
+            "floors": [],
+        }
+    )
 
 
 @pytest.mark.parametrize("key", sorted(contract.RATCHETED))
 def test_each_law_refuses_when_its_debt_grows(
     key: str, built: inventory.Inventory, declaration: contract.Declaration
 ) -> None:
-    """One more offender than the ceiling must refuse, and must name the law."""
+    """One more offender than this repository's own best must refuse, and must name the law."""
     law_id, measurement = contract.RATCHETED[key]
     offenders = measurement(built)
     inflated = _inventory_with(built, key, offenders + ["invented/offender.py"])
-    result = contract._ratcheted(inflated, declaration, key)
+    state = _sealed_state(declaration, **{key: float(len(offenders))})
+    result = contract._ratcheted(inflated, declaration, key, state)
     assert result.status == contract.REFUSED, f"{law_id} tolerated a new violation"
-    assert "NEW violation" in result.detail
+    assert "REGRESSED" in result.detail
     assert result.measured == len(offenders) + 1
 
 
 @pytest.mark.parametrize("key", sorted(contract.RATCHETED))
-def test_each_law_refuses_when_debt_is_repaid_without_tightening(
+def test_each_law_accepts_repaid_debt_with_no_edit_anywhere(
     key: str, built: inventory.Inventory, declaration: contract.Declaration
 ) -> None:
-    """The lower side of the ratchet. Slack a regression could occupy silently is refused."""
+    """THE DEFECT Ω-4 REPLACED, asserted as the new behaviour rather than described.
+
+    The two-sided ceiling refused a measurement BELOW the declared value on the grounds that the
+    declaration was carrying slack. The instinct was right and the implementation made improving the
+    repository a chore: every repayment closed the gate until a human committed the new number, and
+    the commit was indistinguishable from a retreat. Improving now requires no edit at all.
+    """
     _law_id, measurement = contract.RATCHETED[key]
     offenders = measurement(built)
     if not offenders:
         pytest.skip(f"{key} is already zero, so there is no debt to repay")
     reduced = _inventory_with(built, key, offenders[:-1])
-    result = contract._ratcheted(reduced, declaration, key)
-    assert result.status == contract.REFUSED
-    assert "slack" in result.detail
-    assert f"to {len(offenders) - 1}" in result.detail
+    state = _sealed_state(declaration, **{key: float(len(offenders))})
+    result = contract._ratcheted(reduced, declaration, key, state)
+    assert result.status == contract.HOLDS, "repaying debt was refused"
+    assert "IMPROVED" in result.detail
+    assert result.measured == len(offenders) - 1
 
 
 @pytest.mark.parametrize("key", sorted(contract.RATCHETED))
-def test_each_law_refuses_when_no_ceiling_is_declared(
+def test_each_law_refuses_when_no_ratchet_kind_is_declared(
     key: str, built: inventory.Inventory, declaration: contract.Declaration
 ) -> None:
-    """A measurement with no ceiling is recorded and enforced by nothing."""
+    """A measurement with no declared direction is recorded and enforced by nothing."""
     stripped = contract.Declaration(
         version=declaration.version,
         ratchet={k: v for k, v in declaration.ratchet.items() if k != key},
         source=declaration.source,
         raw=declaration.raw,
     )
-    result = contract._ratcheted(built, stripped, key)
+    result = contract._ratcheted(built, stripped, key, omega_ratchet.Ratchet({}))
     assert result.status == contract.REFUSED
-    assert "declares no ceiling" in result.detail
+    assert "declares no KIND" in result.detail
 
 
 def _inventory_with(
@@ -258,9 +312,13 @@ def _replace(base: inventory.Inventory, **changes: Any) -> inventory.Inventory:
 
 
 def test_an_orphan_ceiling_is_refused(tmp_path: Path) -> None:
-    """A ceiling naming no measurement looks like enforcement and is not."""
+    """A ratchet naming no measurement looks like enforcement and is not.
+
+    The orphan is now a KIND rather than a number, because Ω-4 refuses a numeric ratchet before it
+    ever reaches the orphan check — so injecting ``3`` would have tested the wrong refusal.
+    """
     document = json.loads((REPO / contract.DECLARATION_RELATIVE).read_text(encoding="utf-8"))
-    document["ratchet"]["invented_measurement"] = 3
+    document["ratchet"]["invented_measurement"] = "CONVERGENT"
     root = tmp_path / "repo"
     (root / os.path.dirname(contract.DECLARATION_RELATIVE)).mkdir(parents=True)
     (root / contract.DECLARATION_RELATIVE).write_text(json.dumps(document), encoding="utf-8")
@@ -269,14 +327,31 @@ def test_an_orphan_ceiling_is_refused(tmp_path: Path) -> None:
     assert set(loaded.ratchet) - set(contract.RATCHETED) == {"invented_measurement"}
 
 
-def test_a_negative_or_non_integer_ceiling_is_refused(tmp_path: Path) -> None:
-    for bad in (-1, "3", 2.5, True):
+def test_a_numeric_ratchet_is_refused(tmp_path: Path) -> None:
+    """Ω-4: a ratchet declares a DIRECTION. A number is a snapshot of one afternoon.
+
+    The premise inverted. This test used to require ceilings to be non-negative integers, which was
+    the right rule for the wrong model: 65, 27, 39, 25, 14 and 10 were all valid under it, and two
+    them had been 607 and 570 a week earlier. Every value below is now refused, including the ones
+    that used to be the only accepted shape.
+    """
+    for bad in (-1, 0, 3, "3", 2.5, True, "WHATEVER", None):
         document = {"version": "1", "ratchet": {"engines_without_tests": bad}}
         root = tmp_path / f"repo-{bad!r}"
         (root / os.path.dirname(contract.DECLARATION_RELATIVE)).mkdir(parents=True)
         (root / contract.DECLARATION_RELATIVE).write_text(json.dumps(document), encoding="utf-8")
-        with pytest.raises(IntegrityError, match="must be a non-negative integer"):
+        with pytest.raises(IntegrityError, match="declares its KIND"):
             contract.load_declaration(str(root))
+
+
+def test_every_declared_ratchet_kind_is_accepted(tmp_path: Path) -> None:
+    """NON-VACUITY for the refusal above: the four legitimate directions must load."""
+    for kind in ("MONOTONIC", "CONVERGENT", "DENSITY", "ENTROPY"):
+        document = {"version": "1", "ratchet": {"engines_without_tests": kind}}
+        root = tmp_path / f"repo-{kind}"
+        (root / os.path.dirname(contract.DECLARATION_RELATIVE)).mkdir(parents=True)
+        (root / contract.DECLARATION_RELATIVE).write_text(json.dumps(document), encoding="utf-8")
+        assert contract.load_declaration(str(root)).ratchet == {"engines_without_tests": kind}
 
 
 def test_an_absent_declaration_is_a_fault(tmp_path: Path) -> None:
@@ -396,7 +471,30 @@ def test_statement_attribution_partitions_rather_than_nests() -> None:
 
     Nesting would let one statement be covered three times and make object totals exceed the
     file, which would silently inflate every aggregate built from them.
+
+    THE COMPARISON IS AGAINST THE SET THE SURFACE ACTUALLY DISTRIBUTES, not against the raw AST
+    statement set, and the difference is the whole reason this test was a false green. `surface`
+    builds the AST set as a deliberate SUPERSET and then joins it (`surface.py:599-601`):
+
+        countable = _statement_lines(tree)
+        if file_coverage is not None:
+            countable &= file_coverage.hit | file_coverage.missed
+
+    so whenever `coverage.xml` names the module, every line coverage.py does not count as a
+    statement is dropped before attribution — for `model.py` that is exactly its 8 docstrings,
+    which `ast.stmt` counts and coverage.py does not. Comparing against the raw AST set
+    therefore asserted `104 == 112` and could only ever pass when NO coverage document named
+    the module.
+
+    That precondition was never stated, and for a long time it was satisfied by accident: under
+    the coverage-source-root collision (fixed in `pytest_scope`), `coverage xml` keyed this file
+    as bare `model.py` rather than `engine/certification_integrity/model.py`, so the lookup
+    missed, no join happened, and the assertion held. Rendering the document correctly unmasked
+    it. One defect was hiding another, so this test is written against the invariant it
+    documents — an exact partition, in BOTH regimes — rather than against one of them.
     """
+    import ast
+
     scope = surface.read_scope(str(REPO))
     built = surface.build(
         str(REPO),
@@ -407,17 +505,36 @@ def test_statement_attribution_partitions_rather_than_nests() -> None:
         ],
     )
     assert scope.flag_packages
+
+    # Read the join through `surface`'s own helpers. A second parser here would make this test
+    # assert that two implementations agree, which is not the property under test.
+    candidate = REPO / "coverage.xml"
+    report = (
+        coverage_data.parse(str(candidate), repository=str(REPO)) if candidate.exists() else None
+    )
+
     for module in ("engine/certification_integrity/model.py",):
         objects = [o for o in built.objects if o.module == module]
         assert objects, f"{module} produced no objects"
         own = sum(o.statements for o in objects)
-        import ast
 
         tree = ast.parse((REPO / module).read_text(encoding="utf-8"))
-        total = len({n.lineno for n in ast.walk(tree) if isinstance(n, ast.stmt)})
-        assert (
-            own == total
-        ), f"attribution does not partition for {module}: objects sum to {own}, file has {total}"
+        countable = surface._statement_lines(tree)
+        ast_total = len(countable)
+        joined = report.files.get(module) if report else None
+        if joined is not None:
+            countable = countable & (set(joined.hit) | set(joined.missed))
+
+        assert own == len(countable), (
+            f"attribution does not partition for {module}: objects sum to {own}, the surface "
+            f"distributed {len(countable)} line(s)"
+        )
+        # The anti-nesting property itself, stated independently of the join: attribution can
+        # never manufacture a line the file does not have.
+        assert own <= ast_total, (
+            f"attribution EXCEEDS the file for {module}: objects sum to {own}, the AST has "
+            f"{ast_total} — a statement is being counted by more than one object"
+        )
 
 
 def test_docstrings_are_not_invocation_evidence() -> None:
@@ -664,5 +781,10 @@ def test_measuring_does_not_mutate_the_declaration_it_reads(
 ) -> None:
     """Guards against a law that repairs its own expectation as a side effect."""
     snapshot = copy.deepcopy(dict(declaration.ratchet))
-    assert report["ratchet_declared"] == snapshot
+    # ``ratchet_declared`` became ``ratchet_kinds`` when the declaration stopped carrying numbers.
+    # The bounds moved to the sealed state and are reported separately as ``ratchet_best``.
+    assert report["ratchet_kinds"] == snapshot
     assert dict(contract.load_declaration(str(REPO)).ratchet) == snapshot
+    assert set(report["ratchet_best"]) == set(
+        contract.RATCHETED
+    ), "every measured law must report the bound it was held to"

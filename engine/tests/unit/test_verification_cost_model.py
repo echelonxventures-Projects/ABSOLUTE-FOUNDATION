@@ -132,9 +132,8 @@ def test_a_path_the_registry_does_not_collect_is_not_priced() -> None:
 
     root = "."
     collectible = COLLECTIBLE[:2]
-    transcript = (
-        "5.00s call     not/a/collected/test_ghost.py::test_x\n"
-        + _transcript(root, collectible)
+    transcript = "5.00s call     not/a/collected/test_ghost.py::test_x\n" + _transcript(
+        root, collectible
     )
     document = derive(transcript, root=root)
     assert "not/a/collected/test_ghost.py" not in document["costs"]

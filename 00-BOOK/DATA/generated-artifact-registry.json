@@ -113,6 +113,25 @@
       "certification_role": "QUALITY_GATE_ONLY"
     }
   ],
+  "$independent_validation_comment": [
+    "MB7 — a producer validated only by its own programme. Across this register validation_owner",
+    "equals owner for every entry, which is the shape of the defect rather than a description of it:",
+    "a producer that is uniformly WRONG emits self-consistent output, and every validator derived",
+    "from that same run agrees with it. Measured on UCOS-UCTX-001, ten uniformly wrong variants of",
+    "the generator — an invented sentence, a reversed rule, a fabricated authority, a permuted table,",
+    "a swapped authority home, a truncated statement, a deleted section, a dropped article — each",
+    "left all fifteen context invariants reporting closure.",
+    "",
+    "`independent_validation` names a validator that does NOT run, import or read the producer, and",
+    "that has been MEASURED to fail when the producer's output is wrong. It is what makes the break",
+    "in the authority loop a fact in this register rather than a claim in prose. Where the field is",
+    "absent the entry is inside a closed loop, which this register now states instead of implying.",
+    "",
+    "It is not a hypothetical defect class. The first run of the independent verifier found",
+    "UCKP-ART-01 (Supremacy) absent from every agent surface and all nineteen remaining article",
+    "statements truncated at their final line — both reported as closure by the fifteen invariants",
+    "for the entire life of the capability."
+  ],
   "entries": [
     {
       "artifact_id": "ACEE-000001.00-AUTONOMOUS-CONSTITUTIONAL-ENGINEERING-DASHBOARD.md",
@@ -8302,6 +8321,7 @@
       "consumers": [],
       "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
       "validation_owner": "UCOS-URAT-001",
+      "independent_validation": "00-BOOK/tools/ufi.py (00-BOOK/DATA/independence/urat.json)",
       "regeneration_command": "python3 00-MASTER/UCOS-URAT-001/urat_engine.py",
       "certification_role": "PROGRAMME_DELIVERABLE"
     },
@@ -8328,6 +8348,7 @@
       "consumers": [],
       "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
       "validation_owner": "UCOS-URAT-001",
+      "independent_validation": "00-BOOK/tools/ufi.py (00-BOOK/DATA/independence/urat.json)",
       "regeneration_command": "python3 00-MASTER/UCOS-URAT-001/urat_engine.py",
       "certification_role": "PROGRAMME_DELIVERABLE"
     },
@@ -8354,6 +8375,7 @@
       "consumers": [],
       "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
       "validation_owner": "UCOS-URAT-001",
+      "independent_validation": "00-BOOK/tools/ufi.py (00-BOOK/DATA/independence/urat.json)",
       "regeneration_command": "python3 00-MASTER/UCOS-URAT-001/urat_engine.py",
       "certification_role": "PROGRAMME_DELIVERABLE"
     },
@@ -8380,6 +8402,7 @@
       "consumers": [],
       "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
       "validation_owner": "UCOS-URAT-001",
+      "independent_validation": "00-BOOK/tools/ufi.py (00-BOOK/DATA/independence/urat.json)",
       "regeneration_command": "python3 00-MASTER/UCOS-URAT-001/urat_engine.py",
       "certification_role": "PROGRAMME_DELIVERABLE"
     },
@@ -8406,6 +8429,7 @@
       "consumers": [],
       "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
       "validation_owner": "UCOS-URAT-001",
+      "independent_validation": "00-BOOK/tools/ufi.py (00-BOOK/DATA/independence/urat.json)",
       "regeneration_command": "python3 00-MASTER/UCOS-URAT-001/urat_engine.py",
       "certification_role": "PROGRAMME_DELIVERABLE"
     },
@@ -11618,6 +11642,857 @@
       "validation_owner": "UCOS-NUCLEUS-001",
       "regeneration_command": "python -m engine.nucleus.cli dictionary --write",
       "certification_role": "REPLAY_PROVEN"
+    },
+    {
+      "artifact_id": "UCOS-UCTX-001..claude.CLAUDE.md",
+      "canonical_path": ".claude/CLAUDE.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001..cursor.rules.ucos.mdc",
+      "canonical_path": ".cursor/rules/ucos.mdc",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001..github.copilot-instructions.md",
+      "canonical_path": ".github/copilot-instructions.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001..kiro.steering.ucos.md",
+      "canonical_path": ".kiro/steering/ucos.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.00-CONTEXT-INDEX.md",
+      "canonical_path": "00-BOOK/CONTEXT/00-CONTEXT-INDEX.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.MANIFEST.json",
+      "canonical_path": "00-BOOK/CONTEXT/MANIFEST.json",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.agent_policy.md",
+      "canonical_path": "00-BOOK/CONTEXT/agent_policy.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.architecture.md",
+      "canonical_path": "00-BOOK/CONTEXT/architecture.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.branch_policy.md",
+      "canonical_path": "00-BOOK/CONTEXT/branch_policy.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.certification.md",
+      "canonical_path": "00-BOOK/CONTEXT/certification.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.development_policy.md",
+      "canonical_path": "00-BOOK/CONTEXT/development_policy.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.evidence.md",
+      "canonical_path": "00-BOOK/CONTEXT/evidence.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.execution.md",
+      "canonical_path": "00-BOOK/CONTEXT/execution.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.governance.md",
+      "canonical_path": "00-BOOK/CONTEXT/governance.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.identity.md",
+      "canonical_path": "00-BOOK/CONTEXT/identity.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.knowledge.md",
+      "canonical_path": "00-BOOK/CONTEXT/knowledge.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.lifecycle.md",
+      "canonical_path": "00-BOOK/CONTEXT/lifecycle.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.mutation_policy.md",
+      "canonical_path": "00-BOOK/CONTEXT/mutation_policy.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.observations.md",
+      "canonical_path": "00-BOOK/CONTEXT/observations.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.registries.md",
+      "canonical_path": "00-BOOK/CONTEXT/registries.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.repository_policy.md",
+      "canonical_path": "00-BOOK/CONTEXT/repository_policy.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.workflows.md",
+      "canonical_path": "00-BOOK/CONTEXT/workflows.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "00-BOOK/CONTEXT/MANIFEST.json"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+{
+      "artifact_id": "UCOS-UCTX-001.AGENTS.md",
+      "canonical_path": "AGENTS.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "CANONICAL",
+      "consumers": [
+        "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
     }
   ],
   "generated_inputs": [
@@ -11710,6 +12585,60 @@
       "tracked": false,
       "deterministic": true,
       "note": "Generated realization artifacts. Deterministic in ONE pass as of UCOS-UGA-001: the per-file `action` was an execution observation sealed into UCOS-URI-MANIFEST.json, so a pristine clone and a steady-state tree produced different bytes. It is now excluded from the seal and the manifest (UAKOS-CLOSURE-008) and retained as evidence."
+    },
+    {
+      "path": "00-BOOK/CONTEXT/",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "bootstrap_command": "python3 00-BOOK/tools/ukctx.py build",
+      "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh",
+      "tracked": false,
+      "deterministic": true,
+      "note": "UCOS-UCTX-001 generated context projection — the canonical context root — index, sixteen domain pages, projection manifest. Model B: the authored declaration at 00-BOOK/DATA/context-authority.json is the canonical authority and this is its product. Untracked by design and classified GENERATED_DETERMINISTIC in 00-BOOK/DATA/exclusion-register.json. Listing it HERE is what makes the bootstrap obligation machine-checked: UGA-INV-06 refuses a generated input with no bootstrap path, so a clone that cannot obtain its own agent context is a gate failure rather than a quiet absence."
+    },
+    {
+      "path": "AGENTS.md",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "bootstrap_command": "python3 00-BOOK/tools/ukctx.py build",
+      "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh",
+      "tracked": false,
+      "deterministic": true,
+      "note": "UCOS-UCTX-001 generated context projection — the cross-vendor agents.md surface. Model B: the authored declaration at 00-BOOK/DATA/context-authority.json is the canonical authority and this is its product. Untracked by design and classified GENERATED_DETERMINISTIC in 00-BOOK/DATA/exclusion-register.json. Listing it HERE is what makes the bootstrap obligation machine-checked: UGA-INV-06 refuses a generated input with no bootstrap path, so a clone that cannot obtain its own agent context is a gate failure rather than a quiet absence."
+    },
+    {
+      "path": ".claude/CLAUDE.md",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "bootstrap_command": "python3 00-BOOK/tools/ukctx.py build",
+      "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh",
+      "tracked": false,
+      "deterministic": true,
+      "note": "UCOS-UCTX-001 generated context projection — the Claude Code surface. Model B: the authored declaration at 00-BOOK/DATA/context-authority.json is the canonical authority and this is its product. Untracked by design and classified GENERATED_DETERMINISTIC in 00-BOOK/DATA/exclusion-register.json. Listing it HERE is what makes the bootstrap obligation machine-checked: UGA-INV-06 refuses a generated input with no bootstrap path, so a clone that cannot obtain its own agent context is a gate failure rather than a quiet absence."
+    },
+    {
+      "path": ".cursor/rules/ucos.mdc",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "bootstrap_command": "python3 00-BOOK/tools/ukctx.py build",
+      "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh",
+      "tracked": false,
+      "deterministic": true,
+      "note": "UCOS-UCTX-001 generated context projection — the Cursor rules surface. Model B: the authored declaration at 00-BOOK/DATA/context-authority.json is the canonical authority and this is its product. Untracked by design and classified GENERATED_DETERMINISTIC in 00-BOOK/DATA/exclusion-register.json. Listing it HERE is what makes the bootstrap obligation machine-checked: UGA-INV-06 refuses a generated input with no bootstrap path, so a clone that cannot obtain its own agent context is a gate failure rather than a quiet absence."
+    },
+    {
+      "path": ".kiro/steering/ucos.md",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "bootstrap_command": "python3 00-BOOK/tools/ukctx.py build",
+      "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh",
+      "tracked": false,
+      "deterministic": true,
+      "note": "UCOS-UCTX-001 generated context projection — the Kiro steering surface. Model B: the authored declaration at 00-BOOK/DATA/context-authority.json is the canonical authority and this is its product. Untracked by design and classified GENERATED_DETERMINISTIC in 00-BOOK/DATA/exclusion-register.json. Listing it HERE is what makes the bootstrap obligation machine-checked: UGA-INV-06 refuses a generated input with no bootstrap path, so a clone that cannot obtain its own agent context is a gate failure rather than a quiet absence."
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "bootstrap_command": "python3 00-BOOK/tools/ukctx.py build",
+      "bootstrap_stage": "verify.sh stage 1b — scripts/generate-prerequisites.sh",
+      "tracked": false,
+      "deterministic": true,
+      "note": "UCOS-UCTX-001 generated context projection — the GitHub Copilot surface. Model B: the authored declaration at 00-BOOK/DATA/context-authority.json is the canonical authority and this is its product. Untracked by design and classified GENERATED_DETERMINISTIC in 00-BOOK/DATA/exclusion-register.json. Listing it HERE is what makes the bootstrap obligation machine-checked: UGA-INV-06 refuses a generated input with no bootstrap path, so a clone that cannot obtain its own agent context is a gate failure rather than a quiet absence."
     }
   ],
   "bootstrap_gaps": [],
@@ -11757,9 +12686,16 @@
       "owner": "UAKOS-CLOSURE-008",
       "home": "00-MASTER/UAKOS-CLOSURE-008",
       "producer": "00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py",
+      "$authored_inputs": "The evidence-vendored/ tree is an AUTHORED INPUT rather than a generated artifact, and the distinction is what makes UAKOS-CLOSURE-008 replayable: assimilation_engine.py READS it (VENDORED_EVIDENCE_ROOT) and EVIDENCE-MANIFEST.json hash-locks all six files, so the engine cannot produce them and a replay must find them byte-identical. They were tracked without being declared, which left six files inside a declared home that the register did not know about — a hole in every view derived from the register, and exactly what EVERY_CANONICAL_ARTIFACT_REGISTERED exists to refuse.",
       "authored_inputs": [
         "UAKOS-CLOSURE-008-CHARTER.md",
         "decision_engine.py",
+        "evidence-vendored/evidence/TRI-SOURCE-VERIFICATION-DETERMINATION.md",
+        "evidence-vendored/output/knowledge/FINAL_DETERMINATION.md",
+        "evidence-vendored/output/knowledge/gaps.json",
+        "evidence-vendored/output/knowledge/knowledge_base.json",
+        "evidence-vendored/output/knowledge/knowledge_base_summary.json",
+        "evidence-vendored/output/knowledge/reports/GAP_REPORT.md",
         "superiority_engine.py",
         "validation-record.json"
       ]
@@ -11987,6 +12923,14 @@
       "producer": "00-MASTER/UAIE-000001/uaie_engine.py",
       "authored_inputs": [
         "uaie-architecture.json"
+      ]
+    },
+    {
+      "owner": "UCOS-UCTX-001",
+      "home": "00-BOOK/CONTEXT",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "authored_inputs": [
+        "../DATA/context-authority.json"
       ]
     }
   ],

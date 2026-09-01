@@ -92,13 +92,26 @@ class SchedulerEngine:
                 deps[rec.from_id].add(rec.to_id)
 
         # Detect cycles in the restricted graph.
+        #
+        # THE TRAVERSAL IS SORTED, AND THAT IS A DETERMINISM FIX RATHER THAN A STYLE CHOICE.
+        # `item_ids` and every value of `deps` are SETS, whose iteration order varies with
+        # PYTHONHASHSEED — so the depth-first walk visited nodes in a different order on every
+        # process. The schedule it produces was unaffected (wave numbers are a `max` over
+        # dependencies, and each wave is re-sorted by priority then id), which is exactly why this
+        # went unnoticed: nothing about the OUTPUT moved. What moved was the walk, and it surfaced
+        # as the one row that differed between two whole-suite coverage reports over an identical
+        # tree — `105->101` in one run and `103->101` in the next, same 108 statements, same 99%.
+        # A verification artifact that changes between runs cannot be evidence of determinism, so
+        # the order is made a property of the data rather than of the interpreter's hash seed.
+        # It also fixes a real, if narrow, behavioural non-determinism: WHICH cycle is found first
+        # in a graph containing several was previously a matter of hash seed.
         visited: set[str] = set()
         in_stack: set[str] = set()
 
         def _has_cycle(n: str) -> bool:
             visited.add(n)
             in_stack.add(n)
-            for nb in deps.get(n, set()):
+            for nb in sorted(deps.get(n, set())):
                 if nb not in visited:
                     if _has_cycle(nb):
                         return True
@@ -107,7 +120,7 @@ class SchedulerEngine:
             in_stack.discard(n)
             return False
 
-        for iid in item_ids:
+        for iid in sorted(item_ids):
             if iid not in visited and _has_cycle(iid):
                 raise SchedulerError(
                     "dependency cycle detected among scheduled items; cannot schedule"
@@ -126,7 +139,7 @@ class SchedulerEngine:
             wave[iid] = w
             return w
 
-        for iid in item_ids:
+        for iid in sorted(item_ids):
             _wave(iid)
 
         # Sort items within each wave by priority then ID.

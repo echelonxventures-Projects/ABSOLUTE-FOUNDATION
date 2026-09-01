@@ -11396,9 +11396,436 @@
       "page_start": 12504,
       "page_count": 4,
       "first_seen": "2026-08-26T11:33:44+00:00"
+    },
+    "ARBITRATION_ACCEPTANCE_RECORD.md": {
+      "universal_id": "UCOS-ARBITR-000001",
+      "category": "ARBITR",
+      "page_start": 12508,
+      "page_count": 6,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "COVERAGE_EXECUTION_FLOW.md": {
+      "universal_id": "UCOS-COVERA-000001",
+      "category": "COVERA",
+      "page_start": 12514,
+      "page_count": 6,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "ENFORCEMENT-CLOSURE-GAPS.md": {
+      "universal_id": "UCOS-ENFORC-000001",
+      "category": "ENFORC",
+      "page_start": 12520,
+      "page_count": 30,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "ENFORCEMENT-CLOSURE-MATRIX.md": {
+      "universal_id": "UCOS-ENFORC-000002",
+      "category": "ENFORC",
+      "page_start": 12550,
+      "page_count": 24,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "IMPLEMENTATION-READINESS-DETERMINATION-FINAL.md": {
+      "universal_id": "UCOS-IMP-000028",
+      "category": "IMP",
+      "page_start": 12574,
+      "page_count": 6,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "IMPLEMENTATION_BASELINE_ACCEPTED.md": {
+      "universal_id": "UCOS-IMP-000029",
+      "category": "IMP",
+      "page_start": 12580,
+      "page_count": 10,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "IMPLEMENTATION_SCOPE.md": {
+      "universal_id": "UCOS-IMP-000030",
+      "category": "IMP",
+      "page_start": 12590,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE-0-GOVERNANCE-SAFETY-BASELINE.md": {
+      "universal_id": "UCOS-PHASE0-000003",
+      "category": "PHASE0",
+      "page_start": 12594,
+      "page_count": 10,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE-A-STATUS-REPORT.md": {
+      "universal_id": "UCOS-PHASEA-000001",
+      "category": "PHASEA",
+      "page_start": 12604,
+      "page_count": 3,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE0-E1-ATOMICITY-REPORT.md": {
+      "universal_id": "UCOS-PHASE0-000004",
+      "category": "PHASE0",
+      "page_start": 12607,
+      "page_count": 7,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE0-E2-CORRESPONDENCE-REPORT.md": {
+      "universal_id": "UCOS-PHASE0-000005",
+      "category": "PHASE0",
+      "page_start": 12614,
+      "page_count": 6,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE0-E3-CLAIM-INTEGRITY-REPORT.md": {
+      "universal_id": "UCOS-PHASE0-000006",
+      "category": "PHASE0",
+      "page_start": 12620,
+      "page_count": 5,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE0-E4A-ISSUANCE-PATH-REPORT.md": {
+      "universal_id": "UCOS-PHASE0-000007",
+      "category": "PHASE0",
+      "page_start": 12625,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE0-GOVERNANCE-INDEPENDENT-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASE0-000008",
+      "category": "PHASE0",
+      "page_start": 12629,
+      "page_count": 6,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE0-REPOSITORY-TRUTH-REPORT.md": {
+      "universal_id": "UCOS-PHASE0-000009",
+      "category": "PHASE0",
+      "page_start": 12635,
+      "page_count": 6,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE05-GOVERNANCE-INDEPENDENT-REMEDIATION.md": {
+      "universal_id": "UCOS-PHASE0-000010",
+      "category": "PHASE0",
+      "page_start": 12641,
+      "page_count": 33,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE1-GOVERNANCE-INDEPENDENT-IMPLEMENTATION-REPORT.md": {
+      "universal_id": "UCOS-PHASE1-000006",
+      "category": "PHASE1",
+      "page_start": 12674,
+      "page_count": 13,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE1-VERIFICATION-ARCHITECTURE-REPORT.md": {
+      "universal_id": "UCOS-PHASE1-000007",
+      "category": "PHASE1",
+      "page_start": 12687,
+      "page_count": 10,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE1_ARCHITECTURE.md": {
+      "universal_id": "UCOS-PHASE1-000008",
+      "category": "PHASE1",
+      "page_start": 12697,
+      "page_count": 5,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE1_ARTIFACT_MODEL.md": {
+      "universal_id": "UCOS-PHASE1-000009",
+      "category": "PHASE1",
+      "page_start": 12702,
+      "page_count": 5,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE1_KNOWLEDGE_SPACE_MODEL.md": {
+      "universal_id": "UCOS-PHASE1-000010",
+      "category": "PHASE1",
+      "page_start": 12707,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE1_MIGRATION_PLAN.md": {
+      "universal_id": "UCOS-PHASE1-000011",
+      "category": "PHASE1",
+      "page_start": 12711,
+      "page_count": 5,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE1_PROVIDER_MODEL.md": {
+      "universal_id": "UCOS-PHASE1-000012",
+      "category": "PHASE1",
+      "page_start": 12716,
+      "page_count": 5,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE2-GOVERNANCE-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASE2-000003",
+      "category": "PHASE2",
+      "page_start": 12721,
+      "page_count": 12,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE2-GOVERNANCE-DEPENDENCY-MAP.md": {
+      "universal_id": "UCOS-PHASE2-000004",
+      "category": "PHASE2",
+      "page_start": 12733,
+      "page_count": 21,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE2-HEAD-VERIFICATION-REPORT.md": {
+      "universal_id": "UCOS-PHASE2-000005",
+      "category": "PHASE2",
+      "page_start": 12754,
+      "page_count": 8,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE3-IMPLEMENTATION-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASE3-000003",
+      "category": "PHASE3",
+      "page_start": 12762,
+      "page_count": 15,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE4-EXECUTION-VALIDATION-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASE4-000004",
+      "category": "PHASE4",
+      "page_start": 12777,
+      "page_count": 17,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE5-EXECUTION-TRANSITION-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASE5-000001",
+      "category": "PHASE5",
+      "page_start": 12794,
+      "page_count": 26,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE6-EXECUTION-AUTHORIZATION-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASE6-000001",
+      "category": "PHASE6",
+      "page_start": 12820,
+      "page_count": 24,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE7-EXECUTION-COMPLETION-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASE7-000001",
+      "category": "PHASE7",
+      "page_start": 12844,
+      "page_count": 30,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE8-MINIMUM-CLOSURE-SET-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASE8-000001",
+      "category": "PHASE8",
+      "page_start": 12874,
+      "page_count": 20,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE9-TERMINAL-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASE9-000001",
+      "category": "PHASE9",
+      "page_start": 12894,
+      "page_count": 11,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASEA-RESIDUAL-ELIMINATION-DESIGN-DETERMINATION.md": {
+      "universal_id": "UCOS-PHASEA-000002",
+      "category": "PHASEA",
+      "page_start": 12905,
+      "page_count": 11,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_A_ARCHITECTURAL_CORE_PROPOSAL.md": {
+      "universal_id": "UCOS-PHASEO-000002",
+      "category": "PHASEO",
+      "page_start": 12916,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_A_ASSUMPTION_REGISTER.md": {
+      "universal_id": "UCOS-PHASEO-000003",
+      "category": "PHASEO",
+      "page_start": 12920,
+      "page_count": 7,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_A_BOUNDARY_REGISTER.md": {
+      "universal_id": "UCOS-PHASEO-000004",
+      "category": "PHASEO",
+      "page_start": 12927,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_A_CLOSED_WORLD_REGISTER.md": {
+      "universal_id": "UCOS-PHASEO-000005",
+      "category": "PHASEO",
+      "page_start": 12931,
+      "page_count": 3,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_A_EXPANSION_BARRIER_REGISTER.md": {
+      "universal_id": "UCOS-PHASEO-000006",
+      "category": "PHASEO",
+      "page_start": 12934,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_A_INFINITE_EXPANSION_GAP_ANALYSIS.md": {
+      "universal_id": "UCOS-PHASEO-000007",
+      "category": "PHASEO",
+      "page_start": 12938,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_A_OPEN_WORLD_READINESS.md": {
+      "universal_id": "UCOS-PHASEO-000008",
+      "category": "PHASEO",
+      "page_start": 12942,
+      "page_count": 3,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_A_REMAINING_FUNDAMENTAL_CONSTRAINTS.md": {
+      "universal_id": "UCOS-PHASEO-000009",
+      "category": "PHASEO",
+      "page_start": 12945,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_A_ROADMAP.md": {
+      "universal_id": "UCOS-PHASEO-000010",
+      "category": "PHASEO",
+      "page_start": 12949,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_BLOCKER_RESOLUTION_MATRIX.md": {
+      "universal_id": "UCOS-PHASEO-000011",
+      "category": "PHASEO",
+      "page_start": 12953,
+      "page_count": 7,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_CERTIFICATION_EXTENSIBILITY_REPORT.md": {
+      "universal_id": "UCOS-PHASEO-000012",
+      "category": "PHASEO",
+      "page_start": 12960,
+      "page_count": 7,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_COST_OF_DELAY_PRIORITIZATION.md": {
+      "universal_id": "UCOS-PHASEO-000013",
+      "category": "PHASEO",
+      "page_start": 12967,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_CRITICAL_ASSUMPTION_CLOSURE_MATRIX.md": {
+      "universal_id": "UCOS-PHASEO-000014",
+      "category": "PHASEO",
+      "page_start": 12971,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_FUNDAMENTAL_CONSTRAINT_MATRIX.md": {
+      "universal_id": "UCOS-PHASEO-000015",
+      "category": "PHASEO",
+      "page_start": 12975,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_GOVERNANCE_EXPRESSIVENESS_REPORT.md": {
+      "universal_id": "UCOS-PHASEO-000016",
+      "category": "PHASEO",
+      "page_start": 12979,
+      "page_count": 7,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_PHASE_C_ENTRY_CRITERIA.md": {
+      "universal_id": "UCOS-PHASEO-000017",
+      "category": "PHASEO",
+      "page_start": 12986,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_PROOF_TRACTABILITY_REPORT.md": {
+      "universal_id": "UCOS-PHASEO-000018",
+      "category": "PHASEO",
+      "page_start": 12990,
+      "page_count": 8,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_SEMANTIC_OPENNESS_REPORT.md": {
+      "universal_id": "UCOS-PHASEO-000019",
+      "category": "PHASEO",
+      "page_start": 12998,
+      "page_count": 7,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_TEMPORAL_NEUTRALITY_REPORT.md": {
+      "universal_id": "UCOS-PHASEO-000020",
+      "category": "PHASEO",
+      "page_start": 13005,
+      "page_count": 9,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "PHASE_OMEGA_B_TRANSFORMATION_OPENNESS_REPORT.md": {
+      "universal_id": "UCOS-PHASEO-000021",
+      "category": "PHASEO",
+      "page_start": 13014,
+      "page_count": 8,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "SELF-COVERAGE-GAPS.md": {
+      "universal_id": "UCOS-SELFCO-000001",
+      "category": "SELFCO",
+      "page_start": 13022,
+      "page_count": 9,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "SELF-COVERAGE-GRAPH.md": {
+      "universal_id": "UCOS-SELFCO-000002",
+      "category": "SELFCO",
+      "page_start": 13031,
+      "page_count": 8,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "UCOS-OMEGA-INFINITY-BLOCKER-ERADICATION-AND-IMPLEMENTATION-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-UCOSOM-000080",
+      "category": "UCOSOM",
+      "page_start": 13039,
+      "page_count": 6,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "UCOS-UCON-000001-UNIVERSAL-CONSTRUCT-FOUNDATION-DETERMINATION.md": {
+      "universal_id": "UCOS-UCOSUC-000002",
+      "category": "UCOSUC",
+      "page_start": 13045,
+      "page_count": 14,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "coverage_100_plan.md": {
+      "universal_id": "UCOS-COVERA-000002",
+      "category": "COVERA",
+      "page_start": 13059,
+      "page_count": 3,
+      "first_seen": "2026-08-31T10:09:10+00:00"
+    },
+    "final_certification_report.md": {
+      "universal_id": "UCOS-FINALC-000001",
+      "category": "FINALC",
+      "page_start": 13062,
+      "page_count": 7,
+      "first_seen": "2026-08-31T10:09:11+00:00"
+    },
+    "missing_execution_surface_report.md": {
+      "universal_id": "UCOS-MISSIN-000001",
+      "category": "MISSIN",
+      "page_start": 13069,
+      "page_count": 4,
+      "first_seen": "2026-08-31T10:09:11+00:00"
     }
   },
-  "page_cursor": 12507,
+  "page_cursor": 13072,
   "category_seq": {
     "BOOK": 1,
     "REG": 19,
@@ -11408,7 +11835,7 @@
     "VSN": 3,
     "IDX": 1,
     "EES": 2,
-    "IMP": 27,
+    "IMP": 30,
     "CAT": 7,
     "REF": 21,
     "GEN": 7,
@@ -11500,7 +11927,7 @@
     "CEPMOD": 1,
     "P0CLOS": 1,
     "P0DECL": 1,
-    "UCOSUC": 1,
+    "UCOSUC": 2,
     "UNAF00": 1,
     "P0REGI": 1,
     "P0FINA": 1,
@@ -11510,12 +11937,12 @@
     "W34CUN": 1,
     "STAGE0": 1,
     "DET": 6,
-    "CONFIG": 36,
-    "DATAOBJ": 136,
-    "EXDOC": 2994,
-    "TOOLING": 36,
-    "ENGINE": 1330,
-    "TESTOBJ": 842,
+    "CONFIG": 37,
+    "DATAOBJ": 142,
+    "EXDOC": 3003,
+    "TOOLING": 38,
+    "ENGINE": 1374,
+    "TESTOBJ": 873,
     "OBS": 7,
     "ASSESS": 2,
     "B01BIR": 1,
@@ -11566,10 +11993,10 @@
     "P1A01R": 1,
     "P1A02R": 1,
     "P4F007": 1,
-    "PHASE0": 2,
-    "PHASE1": 5,
-    "PHASE3": 2,
-    "PHASE4": 3,
+    "PHASE0": 10,
+    "PHASE1": 12,
+    "PHASE3": 3,
+    "PHASE4": 4,
     "PHASEC": 4,
     "PHASEG": 2,
     "PHASEI": 2,
@@ -11592,7 +12019,7 @@
     "UCOSAR": 2,
     "UCOSCE": 1,
     "UCOSMI": 1,
-    "UCOSOM": 79,
+    "UCOSOM": 80,
     "UCOSPO": 1,
     "UCOSUV": 3,
     "UCOSFI": 1,
@@ -11606,7 +12033,7 @@
     "FINALI": 1,
     "IDENTI": 2,
     "INFINI": 3,
-    "PHASE2": 2,
+    "PHASE2": 5,
     "REGAUT": 1,
     "REQUIR": 1,
     "STABIL": 1,
@@ -11615,8 +12042,20 @@
     "UCOSUN": 1,
     "DISCOV": 2,
     "MCRFST": 1,
-    "PHASEO": 1,
-    "PHASER": 8
+    "PHASEO": 21,
+    "PHASER": 8,
+    "ARBITR": 1,
+    "COVERA": 2,
+    "ENFORC": 2,
+    "PHASEA": 2,
+    "PHASE5": 1,
+    "PHASE6": 1,
+    "PHASE7": 1,
+    "PHASE8": 1,
+    "PHASE9": 1,
+    "SELFCO": 2,
+    "FINALC": 1,
+    "MISSIN": 1
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -31443,6 +31882,677 @@
         "status": "ACTIVE",
         "path": "WP-001A-CONSTITUTIONAL-INTEGRATION-ANALYSIS.md",
         "name": "CONSTITUTIONAL INTEGRATION ANALYSIS — MCRF / STREAM-00 / WP-001A"
+      }
+    ],
+    "UCOS-ARBITR-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "84be501d667fe7408c11d2e38b1713b5496282d862a5b7b93a72183239115774",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "ARBITRATION_ACCEPTANCE_RECORD.md",
+        "name": "PHASE 0 — ARBITRATION ACCEPTANCE RECORD"
+      }
+    ],
+    "UCOS-COVERA-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "17d5c80bde82283609ee7273ddaa758672cc38d39d3a8b9cbd1da72e4294b903",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "COVERAGE_EXECUTION_FLOW.md",
+        "name": "COVERAGE EXECUTION FLOW — VERIFIED TRUTH"
+      }
+    ],
+    "UCOS-ENFORC-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "1a35cc81c49f2bb1243cdf40b2610a0d98ab682122debf966fd5f4fdc2b382e7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "ENFORCEMENT-CLOSURE-GAPS.md",
+        "name": "ENFORCEMENT CLOSURE GAPS"
+      }
+    ],
+    "UCOS-ENFORC-000002": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "566bb26db897aab9526f51410cc0010d794c50f3220ddef8a7f4354de8a3162f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "ENFORCEMENT-CLOSURE-MATRIX.md",
+        "name": "ENFORCEMENT CLOSURE MATRIX"
+      }
+    ],
+    "UCOS-IMP-000028": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "5092efb6556c9f344f635556a69897e01b5383c20e542751e1cb0aae840d9f0e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IMPLEMENTATION-READINESS-DETERMINATION-FINAL.md",
+        "name": "IMPLEMENTATION READINESS DETERMINATION — FINAL VERDICT"
+      }
+    ],
+    "UCOS-IMP-000029": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "c9f926eafa86e281e68f6abbd21176bc1740bf29ab4583ddf1d3d4814b8208fa",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IMPLEMENTATION_BASELINE_ACCEPTED.md",
+        "name": "PHASE 0 — IMPLEMENTATION BASELINE ACCEPTED"
+      }
+    ],
+    "UCOS-IMP-000030": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "f8dc3a8645182ef227a6bd8d2b93857a854edd2a6a6b7f06891d8461841fddb8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "IMPLEMENTATION_SCOPE.md",
+        "name": "PHASE 0 — IMPLEMENTATION SCOPE"
+      }
+    ],
+    "UCOS-PHASE0-000003": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "b8cb92d4967f6b80d84b22c3815f827b90276d8aca1c57de50a819dca4645479",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE-0-GOVERNANCE-SAFETY-BASELINE.md",
+        "name": "PHASE 0 — GOVERNANCE SAFETY BASELINE"
+      }
+    ],
+    "UCOS-PHASEA-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "2641b1ddefb038fe9859638215a715a44d94222ccdad5a2a712f29bbdb745e71",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE-A-STATUS-REPORT.md",
+        "name": "PHASE A STATUS REPORT — COVERAGE CONTRADICTION RESOLVED"
+      }
+    ],
+    "UCOS-PHASE0-000004": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "4242d8985226c84629ea10fd7b6dd57d141c5b394e7423f0d21fa130d5e199ba",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE0-E1-ATOMICITY-REPORT.md",
+        "name": "PHASE0-E1 — VERIFICATION → WRITE ATOMICITY REPORT"
+      }
+    ],
+    "UCOS-PHASE0-000005": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "b1aad7144fd835f78fd5eb5e02b2f9cb28dfe656856c67f939bef8b5b012b567",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE0-E2-CORRESPONDENCE-REPORT.md",
+        "name": "PHASE0-E2 — WRITER ↔ AUTHORIZATION CORRESPONDENCE REPORT"
+      }
+    ],
+    "UCOS-PHASE0-000006": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "fc70182d84a99ad3f37d9df34c033e84ea1189635834a08e8b69cb97b61bc995",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE0-E3-CLAIM-INTEGRITY-REPORT.md",
+        "name": "PHASE0-E3 — UGA-INV-10 CLAIM INTEGRITY REPORT"
+      }
+    ],
+    "UCOS-PHASE0-000007": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "7a2f30203ab9a96748f375172a66b52049b71dc5dcefe09307dafcb972c61861",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE0-E4A-ISSUANCE-PATH-REPORT.md",
+        "name": "PHASE0-E4A — PERMIT ISSUANCE EXISTENCE PATH REPORT"
+      }
+    ],
+    "UCOS-PHASE0-000008": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "6499ddcc3fa4cef8776de791ca52a925196fc949272c508ca2695ece4eb37a49",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE0-GOVERNANCE-INDEPENDENT-DETERMINATION.md",
+        "name": "PHASE0 — GOVERNANCE-INDEPENDENT DETERMINATION"
+      }
+    ],
+    "UCOS-PHASE0-000009": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "0f29ad14a7ffb8ebf8b4a018871d9823fbdd7e3c87cb0ba11eedd4f2d4052310",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE0-REPOSITORY-TRUTH-REPORT.md",
+        "name": "PHASE 0 — REPOSITORY TRUTH REPORT"
+      }
+    ],
+    "UCOS-PHASE0-000010": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "29f5d8ba382dfe6f0dccbac25c4ee301bbc731815c7a0d6abc3778bfed2911d6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE05-GOVERNANCE-INDEPENDENT-REMEDIATION.md",
+        "name": "PHASE 0.5 — GOVERNANCE-INDEPENDENT REMEDIATION SPECIFICATION"
+      }
+    ],
+    "UCOS-PHASE1-000006": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "0de488c56d1b4bfcd23c392aa75dd15fba7f16bd169e9a2a03306221326e508c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE1-GOVERNANCE-INDEPENDENT-IMPLEMENTATION-REPORT.md",
+        "name": "PHASE 1 — GOVERNANCE-INDEPENDENT REMEDIATION IMPLEMENTATION REPORT"
+      }
+    ],
+    "UCOS-PHASE1-000007": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "a9271250ca60f3044ec2cd16736c15a32b67c5759bc500b90e65d8b5fb4afceb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE1-VERIFICATION-ARCHITECTURE-REPORT.md",
+        "name": "PHASE 1 — VERIFICATION ARCHITECTURE REPORT"
+      }
+    ],
+    "UCOS-PHASE1-000008": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "ca971e22b7ad847502c75d607b03f6e3982ea24bfbc34b91c080c8cb1c15a8f2",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE1_ARCHITECTURE.md",
+        "name": "UCOS Ω∞ — PHASE 1 ARCHITECTURE"
+      }
+    ],
+    "UCOS-PHASE1-000009": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "36f99152a3fd6abf6b1b2117fe67eb9be446579d4a8b5966d53bba4fa00819e7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE1_ARTIFACT_MODEL.md",
+        "name": "UCOS Ω∞ — PHASE 1 ARTIFACT MODEL"
+      }
+    ],
+    "UCOS-PHASE1-000010": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "575b9b060abe17f45e87b6d7caba16dd8d578c98d6294dbd9fb4e13a5985a786",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE1_KNOWLEDGE_SPACE_MODEL.md",
+        "name": "UCOS Ω∞ — PHASE 1 KNOWLEDGE SPACE MODEL"
+      }
+    ],
+    "UCOS-PHASE1-000011": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "aeda6548977e810d98edf3811dd8197f506051d618ee8eb1431eaae643714175",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE1_MIGRATION_PLAN.md",
+        "name": "UCOS Ω∞ — PHASE 1 MIGRATION PLAN"
+      }
+    ],
+    "UCOS-PHASE1-000012": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "333dd120985228a900406e0254446752727e0bd8da58ff37b360a07a1c72627a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE1_PROVIDER_MODEL.md",
+        "name": "UCOS Ω∞ — PHASE 1 PROVIDER MODEL"
+      }
+    ],
+    "UCOS-PHASE2-000003": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "6d2851a7005bd0779abdd4c482e612309e834869cb7e855113d2c10cddeda06a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE2-GOVERNANCE-CLOSURE-DETERMINATION.md",
+        "name": "PHASE 2 — GOVERNANCE CLOSURE DETERMINATION"
+      }
+    ],
+    "UCOS-PHASE2-000004": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "e6aee8a63888b4414d2aa362c283f5f3af74cfbeab4827ca066185b9b89beb6c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE2-GOVERNANCE-DEPENDENCY-MAP.md",
+        "name": "PHASE 2 — GOVERNANCE DEPENDENCY MAP"
+      }
+    ],
+    "UCOS-PHASE2-000005": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "b6091c3af77968767ad137ac65189d7ef2c1785bc8271e1896e6515d747b426b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE2-HEAD-VERIFICATION-REPORT.md",
+        "name": "PHASE 2 — FRESH VERIFICATION REPORT (HEAD BASELINE)"
+      }
+    ],
+    "UCOS-PHASE3-000003": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "accf62be3868bd28334578388ac6309bca17d5973466149b5f96fbd617c051ab",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE3-IMPLEMENTATION-READINESS-DETERMINATION.md",
+        "name": "PHASE 3 — IMPLEMENTATION READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-PHASE4-000004": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "1e2fa887edbad52b5fc44372c4fc20ab992b891d02008904d35d46abb4265792",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE4-EXECUTION-VALIDATION-DETERMINATION.md",
+        "name": "PHASE 4 — EXECUTION VALIDATION DETERMINATION"
+      }
+    ],
+    "UCOS-PHASE5-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "690c978641f45f44a50ba95c2b7452a8582de801fc5e4c3b5e0c54d9047b7c71",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE5-EXECUTION-TRANSITION-DETERMINATION.md",
+        "name": "PHASE 5 — EXECUTION TRANSITION DETERMINATION"
+      }
+    ],
+    "UCOS-PHASE6-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "153f4cebf4a9295ddbb1a30c804f2522a5624f7c1967f27cd3835a1ec54b3f2e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE6-EXECUTION-AUTHORIZATION-CLOSURE-DETERMINATION.md",
+        "name": "PHASE 6 — EXECUTION AUTHORIZATION CLOSURE DETERMINATION"
+      }
+    ],
+    "UCOS-PHASE7-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "e17b8eadf34779f2a27822850175c621dfef48db085278ac6b4e8210c2f18195",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE7-EXECUTION-COMPLETION-CLOSURE-DETERMINATION.md",
+        "name": "PHASE 7 — EXECUTION COMPLETION CLOSURE DETERMINATION"
+      }
+    ],
+    "UCOS-PHASE8-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "7b65f0a0a7835761928d1051bf9ba3e19e8bad6b8fbaecfe73fa563d87cbefef",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE8-MINIMUM-CLOSURE-SET-DETERMINATION.md",
+        "name": "PHASE 8 — MINIMUM CLOSURE-SET DETERMINATION"
+      }
+    ],
+    "UCOS-PHASE9-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "3215f5b6f5854ecec29a8de74b80cb99ccc8d9768088947b29f9778842bcafae",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE9-TERMINAL-DETERMINATION.md",
+        "name": "PHASE 9 — TERMINAL DETERMINATION"
+      }
+    ],
+    "UCOS-PHASEA-000002": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "ae242bb9ff5d049f00942fef5e99c3aa0b3053aa7543e979a43918fbb6c234aa",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASEA-RESIDUAL-ELIMINATION-DESIGN-DETERMINATION.md",
+        "name": "PHASE A — RESIDUAL ELIMINATION DESIGN DETERMINATION"
+      }
+    ],
+    "UCOS-PHASEO-000002": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "f895f86efd1f796e3d1382fc9a55f1e285482b7ea2159933ca18de49d3c65a4a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_A_ARCHITECTURAL_CORE_PROPOSAL.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-A, DELIVERABLE 7"
+      }
+    ],
+    "UCOS-PHASEO-000003": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "9286916f956f92d628d686dd0cc5c97e7a43add960a0d010415aea55897fbf4e",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_A_ASSUMPTION_REGISTER.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-A, DELIVERABLE 1"
+      }
+    ],
+    "UCOS-PHASEO-000004": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "aefb54bd6feeee8a17fbd9cc17cfa2b2e0106461401ec08aa68aa1082d61fea7",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_A_BOUNDARY_REGISTER.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-A, DELIVERABLE 2"
+      }
+    ],
+    "UCOS-PHASEO-000005": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "2c7fadc66e65718cd1a1c31ed56841c9fbda4d388fa5fcba76167ba208fa70ba",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_A_CLOSED_WORLD_REGISTER.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-A, DELIVERABLE 4"
+      }
+    ],
+    "UCOS-PHASEO-000006": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "1a8355311a0a00cb53c3d3c10b349e0b7cf9dcde40227b2a8509764f34bf39ff",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_A_EXPANSION_BARRIER_REGISTER.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-A, DELIVERABLE 3"
+      }
+    ],
+    "UCOS-PHASEO-000007": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "be28d5f3e53309e0a23db089afc6ce6b977eea667d73e8a007570afcb7abed94",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_A_INFINITE_EXPANSION_GAP_ANALYSIS.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-A, DELIVERABLE 6"
+      }
+    ],
+    "UCOS-PHASEO-000008": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "ad470fb0b15be931351251e982af0453ae058f5b02380b6588fae2ba5d8c3ed5",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_A_OPEN_WORLD_READINESS.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-A, DELIVERABLE 5"
+      }
+    ],
+    "UCOS-PHASEO-000009": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "1f93078fa0ec0bcdfc219b703c019f17fdf389c7111090c67d61ca136dc97569",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_A_REMAINING_FUNDAMENTAL_CONSTRAINTS.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-A, DELIVERABLE 8"
+      }
+    ],
+    "UCOS-PHASEO-000010": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "5f5e74171fec29d820d51f4a9e498440d1d269777060bbe75fc988af598c9ff5",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_A_ROADMAP.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-A, DELIVERABLE 9"
+      }
+    ],
+    "UCOS-PHASEO-000011": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "833c6b9621db12cddac616be3a6b9747e6afd01711b047db099511b428dbca16",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_BLOCKER_RESOLUTION_MATRIX.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 1"
+      }
+    ],
+    "UCOS-PHASEO-000012": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "1beadcb66920b1e12d73fb9a96de75de471b5672aad781fac0e93c441133579c",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_CERTIFICATION_EXTENSIBILITY_REPORT.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 8"
+      }
+    ],
+    "UCOS-PHASEO-000013": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "09ef073b0e0f4d5179d4e198fe27d280527d3e166b922567a7c6a9b74d612418",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_COST_OF_DELAY_PRIORITIZATION.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 10"
+      }
+    ],
+    "UCOS-PHASEO-000014": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "40fd217ac6644d5bb16a22cc64eacdcb9ce06adcb11b83f6ebc51865eac6b9d1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_CRITICAL_ASSUMPTION_CLOSURE_MATRIX.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 2"
+      }
+    ],
+    "UCOS-PHASEO-000015": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "0f9ebd3097b85171f501226faed5ffbb501a309c12da3234bd1fcf820521e810",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_FUNDAMENTAL_CONSTRAINT_MATRIX.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 3"
+      }
+    ],
+    "UCOS-PHASEO-000016": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "6ea2ac60a44746eb673b6ae58fab9615a4435d0192130b86234ea6f1084d13db",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_GOVERNANCE_EXPRESSIVENESS_REPORT.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 5"
+      }
+    ],
+    "UCOS-PHASEO-000017": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "29a986197e6ad8c7b1ce76d6e0c777647cbe3b694a5b6c1f86aa285459a2e041",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_PHASE_C_ENTRY_CRITERIA.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 11"
+      }
+    ],
+    "UCOS-PHASEO-000018": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "cefe439b7e06bdc009a28a297f12e37af3a3347bd9d2d98e915cc3202c66b395",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_PROOF_TRACTABILITY_REPORT.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 4"
+      }
+    ],
+    "UCOS-PHASEO-000019": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "a1ce6791098f8f1502aab2cef9cf6c8b123f683b7f4e0267e638c6b55e9c9f54",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_SEMANTIC_OPENNESS_REPORT.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 6"
+      }
+    ],
+    "UCOS-PHASEO-000020": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "5e25f36b3259aba1c8a06506df584cb6db3cfb5a536fa97c794793cf772c60a4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_TEMPORAL_NEUTRALITY_REPORT.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 9"
+      }
+    ],
+    "UCOS-PHASEO-000021": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "ebb64063180be527da68b46e02b301e3869faf108f2cef3baaef13bcff70c48b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "PHASE_OMEGA_B_TRANSFORMATION_OPENNESS_REPORT.md",
+        "name": "UCOS Ω∞ — PHASE Ω∞-B, DELIVERABLE 7"
+      }
+    ],
+    "UCOS-SELFCO-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "124cd4e64fd2469502c99f42dee2b083d8bfda8520b68d605fca10ac40d4f249",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "SELF-COVERAGE-GAPS.md",
+        "name": "Self-Coverage Closure — Gap Register"
+      }
+    ],
+    "UCOS-SELFCO-000002": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "a9e87669f84f04a3a41482605100bf7dd3c8be32b35a2150db9d5bc0f6967da3",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "SELF-COVERAGE-GRAPH.md",
+        "name": "Self-Coverage Closure — Certification Graph"
+      }
+    ],
+    "UCOS-UCOSOM-000080": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "a84395004d0c4222f674f1302cf04dcd9fb0067045b7b6228e835cf99fd77361",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-OMEGA-INFINITY-BLOCKER-ERADICATION-AND-IMPLEMENTATION-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — Blocker Eradication and Implementation Readiness Determination"
+      }
+    ],
+    "UCOS-UCOSUC-000002": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "7996517646f7a6748de5834c5325ece9ca88b7c82e91ac871bc60136ce9a3ddb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UCOS-UCON-000001-UNIVERSAL-CONSTRUCT-FOUNDATION-DETERMINATION.md",
+        "name": "UCOS-UCON-000001 — UNIVERSAL CONSTRUCT FOUNDATION DETERMINATION"
+      }
+    ],
+    "UCOS-COVERA-000002": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:10+00:00",
+        "content_hash": "35376e6bccd73cf96a04f2ecd70ecb46f7e358106de511735bc869369cbc73b1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "coverage_100_plan.md",
+        "name": "Coverage 100 Plan"
+      }
+    ],
+    "UCOS-FINALC-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:11+00:00",
+        "content_hash": "fb0acc2c99d5d385a2650e4c825bdc1e0ec9cf1d86b1b61a506580828f1f5c01",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "final_certification_report.md",
+        "name": "Final Certification Report"
+      }
+    ],
+    "UCOS-MISSIN-000001": [
+      {
+        "seq": 1,
+        "at": "2026-08-31T10:09:11+00:00",
+        "content_hash": "c9f642928d03f21acad6ac8738cf85045ba1c90b6c69b79ddc2b8edb96cb87d5",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "missing_execution_surface_report.md",
+        "name": "Missing Execution Surface Report"
       }
     ]
   },
@@ -63690,6 +64800,564 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:d9296d326bd9"
+    },
+    ".github/workflows/omega-gate.yml": {
+      "universal_id": "UCOS-CONFIG-000037",
+      "object_class": "CONFIGURATION_OBJECT",
+      "category": "CONFIG",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-BOOK/DATA/allocation-permits.json": {
+      "universal_id": "UCOS-TOOLING-000037",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-BOOK/tools/ledger_authority.py": {
+      "universal_id": "UCOS-TOOLING-000038",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/evidence/TRI-SOURCE-VERIFICATION-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002995",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/FINAL_DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-002996",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/gaps.json": {
+      "universal_id": "UCOS-DATAOBJ-000137",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base.json": {
+      "universal_id": "UCOS-DATAOBJ-000138",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/knowledge_base_summary.json": {
+      "universal_id": "UCOS-DATAOBJ-000139",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/output/knowledge/reports/GAP_REPORT.md": {
+      "universal_id": "UCOS-EXDOC-002997",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCI-000001/uci-ratchet.json": {
+      "universal_id": "UCOS-DATAOBJ-000140",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-001/OMEGA-CLOSURE-REPORT.md": {
+      "universal_id": "UCOS-EXDOC-002998",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-001/omega-ratchet.json": {
+      "universal_id": "UCOS-DATAOBJ-000141",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-001/omega-surface.json": {
+      "universal_id": "UCOS-DATAOBJ-000142",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b01-output.txt": {
+      "universal_id": "UCOS-EXDOC-002999",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b01_proof_tractability.py": {
+      "universal_id": "UCOS-ENGINE-001331",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b02-b05-output.txt": {
+      "universal_id": "UCOS-EXDOC-003000",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b02_b05_governance_certification.py": {
+      "universal_id": "UCOS-ENGINE-001332",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b03-b04-output.txt": {
+      "universal_id": "UCOS-EXDOC-003001",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b03_b04_semantic_transformation.py": {
+      "universal_id": "UCOS-ENGINE-001333",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b06-output.txt": {
+      "universal_id": "UCOS-EXDOC-003002",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b06_temporal_neutrality.py": {
+      "universal_id": "UCOS-ENGINE-001334",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b07-output.txt": {
+      "universal_id": "UCOS-EXDOC-003003",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:77798202d2df"
+    },
+    "00-MASTER/UCOS-OMEGA-B-001/probes/b07_removability_validation.py": {
+      "universal_id": "UCOS-ENGINE-001335",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001336",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/authority.py": {
+      "universal_id": "UCOS-ENGINE-001337",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/reference/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001338",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/reference/capability.py": {
+      "universal_id": "UCOS-ENGINE-001339",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/reference/domain.py": {
+      "universal_id": "UCOS-ENGINE-001340",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/reference/encoding.py": {
+      "universal_id": "UCOS-ENGINE-001341",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/reference/transformation.py": {
+      "universal_id": "UCOS-ENGINE-001342",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/state.py": {
+      "universal_id": "UCOS-ENGINE-001343",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/temporal/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001344",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/temporal/calendars.py": {
+      "universal_id": "UCOS-ENGINE-001345",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/temporal/clocks.py": {
+      "universal_id": "UCOS-ENGINE-001346",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/temporal/coordinate.py": {
+      "universal_id": "UCOS-ENGINE-001347",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/temporal/frames.py": {
+      "universal_id": "UCOS-ENGINE-001348",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_governance/temporal/ordering.py": {
+      "universal_id": "UCOS-ENGINE-001349",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001350",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/__main__.py": {
+      "universal_id": "UCOS-ENGINE-001351",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/artifact.py": {
+      "universal_id": "UCOS-ENGINE-001352",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/capability.py": {
+      "universal_id": "UCOS-ENGINE-001353",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/classification.py": {
+      "universal_id": "UCOS-ENGINE-001354",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/compat.py": {
+      "universal_id": "UCOS-ENGINE-001355",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/evidence.py": {
+      "universal_id": "UCOS-ENGINE-001356",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/filesystem_provider.py": {
+      "universal_id": "UCOS-ENGINE-001357",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/git_provider.py": {
+      "universal_id": "UCOS-ENGINE-001358",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/knowledge_space.py": {
+      "universal_id": "UCOS-ENGINE-001359",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/omega_infinite/provider.py": {
+      "universal_id": "UCOS-ENGINE-001360",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_infinite/__init__.py": {
+      "universal_id": "UCOS-TESTOBJ-000843",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_infinite/conftest.py": {
+      "universal_id": "UCOS-TESTOBJ-000844",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_infinite/test_artifact.py": {
+      "universal_id": "UCOS-TESTOBJ-000845",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_infinite/test_capability.py": {
+      "universal_id": "UCOS-TESTOBJ-000846",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_infinite/test_classification.py": {
+      "universal_id": "UCOS-TESTOBJ-000847",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_infinite/test_compat_and_evidence.py": {
+      "universal_id": "UCOS-TESTOBJ-000848",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_infinite/test_knowledge_space.py": {
+      "universal_id": "UCOS-TESTOBJ-000849",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_infinite/test_provider.py": {
+      "universal_id": "UCOS-TESTOBJ-000850",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_infinite/test_providers_concrete.py": {
+      "universal_id": "UCOS-TESTOBJ-000851",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/universal_discovery/__init__.py": {
+      "universal_id": "UCOS-TESTOBJ-000852",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/universal_discovery/conftest.py": {
+      "universal_id": "UCOS-TESTOBJ-000853",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/universal_discovery/test_authority.py": {
+      "universal_id": "UCOS-TESTOBJ-000854",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/universal_discovery/test_classification.py": {
+      "universal_id": "UCOS-TESTOBJ-000855",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/universal_discovery/test_discovery.py": {
+      "universal_id": "UCOS-TESTOBJ-000856",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/universal_discovery/test_graph.py": {
+      "universal_id": "UCOS-TESTOBJ-000857",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/universal_discovery/test_ratchet.py": {
+      "universal_id": "UCOS-TESTOBJ-000858",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/universal_discovery/test_surface_and_gate.py": {
+      "universal_id": "UCOS-TESTOBJ-000859",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001361",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/__main__.py": {
+      "universal_id": "UCOS-ENGINE-001362",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/authority.py": {
+      "universal_id": "UCOS-ENGINE-001363",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/classification.py": {
+      "universal_id": "UCOS-ENGINE-001364",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/discovery.py": {
+      "universal_id": "UCOS-ENGINE-001365",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/gate.py": {
+      "universal_id": "UCOS-ENGINE-001366",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/graph.py": {
+      "universal_id": "UCOS-ENGINE-001367",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/model.py": {
+      "universal_id": "UCOS-ENGINE-001368",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/pytest_scope.py": {
+      "universal_id": "UCOS-ENGINE-001369",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/ratchet.py": {
+      "universal_id": "UCOS-ENGINE-001370",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/relocation.py": {
+      "universal_id": "UCOS-ENGINE-001371",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/universal_discovery/surface.py": {
+      "universal_id": "UCOS-ENGINE-001372",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "platform/tests/test_ledger_authority.py": {
+      "universal_id": "UCOS-TESTOBJ-000860",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "scripts/omega-infinite.sh": {
+      "universal_id": "UCOS-ENGINE-001373",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/ledger_authority/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001374",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/__init__.py": {
+      "universal_id": "UCOS-TESTOBJ-000861",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/conftest.py": {
+      "universal_id": "UCOS-TESTOBJ-000862",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_authority.py": {
+      "universal_id": "UCOS-TESTOBJ-000863",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_package_architecture.py": {
+      "universal_id": "UCOS-TESTOBJ-000864",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_reference_capability.py": {
+      "universal_id": "UCOS-TESTOBJ-000865",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_reference_domain.py": {
+      "universal_id": "UCOS-TESTOBJ-000866",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_reference_encoding.py": {
+      "universal_id": "UCOS-TESTOBJ-000867",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_reference_transformation.py": {
+      "universal_id": "UCOS-TESTOBJ-000868",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_refusal_surface.py": {
+      "universal_id": "UCOS-TESTOBJ-000869",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_state.py": {
+      "universal_id": "UCOS-TESTOBJ-000870",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_temporal_calendars.py": {
+      "universal_id": "UCOS-TESTOBJ-000871",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_temporal_coordinate_and_clocks.py": {
+      "universal_id": "UCOS-TESTOBJ-000872",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
+    },
+    "engine/tests/omega_governance/test_temporal_frames_and_ordering.py": {
+      "universal_id": "UCOS-TESTOBJ-000873",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:77798202d2df"
     }
   },
   "by_observation": {

@@ -1128,8 +1128,8 @@
     "delegations": 61,
     "dispositions_owned": 6,
     "minted_collisions": 0,
-    "minted_token_classes": 7,
-    "minted_tokens": 22,
+    "minted_token_classes": 9,
+    "minted_tokens": 27,
     "minted_unclassified": 0,
     "realizations": 1,
     "realizations_bound": 1,
@@ -1814,6 +1814,42 @@
       "token": "ENGINEERING-EXECUTION-ONLY"
     },
     {
+      "class": "DERIVED-TRUTH",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "engine/omega_governance/__init__.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "AUTHORITY",
+      "token": "NONE (DERIVED TRUTH)"
+    },
+    {
+      "class": "DERIVED-AUTHORITY-OF-LAST-RESORT",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "engine/omega_governance/authority.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "UNIVERSAL_FALLBACK_AUTHORITY",
+      "token": "UCOS-UNIVERSAL-AUTHORITY"
+    },
+    {
+      "class": "DERIVED-TRUTH",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "engine/omega_governance/reference/__init__.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "AUTHORITY",
+      "token": "NONE (DERIVED TRUTH)"
+    },
+    {
+      "class": "DERIVED-TRUTH",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "engine/omega_governance/temporal/__init__.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "AUTHORITY",
+      "token": "NONE (DERIVED TRUTH)"
+    },
+    {
       "class": "PROJECTION-ROLE-NAME",
       "classified": true,
       "constitutional_collision": false,
@@ -1866,6 +1902,15 @@
       "source": "UCAF-REAL-01",
       "symbol": "UCERT_AUTHORITY",
       "token": "ENGINEERING-EXECUTION-ONLY"
+    },
+    {
+      "class": "DERIVED-OWNERSHIP-OF-LAST-RESORT",
+      "classified": true,
+      "constitutional_collision": false,
+      "owner": "engine/universal_discovery/authority.py",
+      "source": "UCAF-REAL-01",
+      "symbol": "REPOSITORY_AUTHORITY",
+      "token": "UCOS-REPOSITORY-ROOT"
     },
     {
       "class": "ENGINEERING-EXECUTION",
@@ -2022,6 +2067,20 @@
       "constitutional": false,
       "id": "UCAF-TC-07",
       "token": "AUTHORITY"
+    },
+    {
+      "basis": "00-MASTER/UCOS-UGA-001 declares the repository's ownership function TOTAL: its last rule is unconditional, so every path resolves to exactly one owner and 'unowned' is structurally unreachable. UCOS-OMEGA-001's Ω-A-07 is that last rule in executable form, and this token is the owner it names -- the repository owning what nothing more specific claims. It legislates nothing and asserts nothing about the artifact beyond the fact that no declaration, programme home, invocation plane or importer claimed it. MEASURED PROPERTY OF THIS TOKEN IN THE CURRENT TREE: Ω-A-07 fires zero times, so the token is minted as a definition and reached by no artifact. That is the intended state -- the rule exists to make the function total, and the rule being UNUSED is what makes the derivation informative rather than vacuous. The authority_of_last_resort ratchet is CONVERGENT at 0 and refuses the first artifact that reaches it.",
+      "class": "DERIVED-OWNERSHIP-OF-LAST-RESORT",
+      "constitutional": false,
+      "id": "UCAF-TC-08",
+      "token": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "basis": "engine/omega_governance/authority.py — the owner UCOS-OMEGA-001's authority resolver names when all seven of its tiers have been consulted and every one abstained. It is the terminal rung of a resolution walk and its purpose is TOTALITY: a resolver returning nothing for an unclaimed artifact hands every caller the same decision to make separately, and they do not make it the same way. THE TOKEN LEGISLATES NOTHING AND VESTS NOTHING, and the module is built so it cannot be read as though it did: every arrival is recorded as a FallbackEvent carrying the tiers consulted and the tiers that actually had sources, counted by the scale-free `fallback_density` and named subject-by-subject by `unattributed`, precisely so 'nobody owns this' can never be mistaken for 'the universal authority owns this'. It marks an unowned artifact; it does not claim one. This is the omega_governance analogue of UCAF-TC-08's UCOS-REPOSITORY-ROOT, and it is disclosed here rather than renamed in code for the reason UCAF-TC-06 records: the discovered population is narrowed by declaration only, and a symbol chosen to fall outside the discovery pattern would be a filter under another name.",
+      "class": "DERIVED-AUTHORITY-OF-LAST-RESORT",
+      "constitutional": false,
+      "id": "UCAF-TC-09",
+      "token": "UCOS-UNIVERSAL-AUTHORITY"
     }
   ],
   "realizations": [
@@ -2377,7 +2436,7 @@
       "rule": "the lattice shall be consistent with, and shall not amend, the four-tier Program authority order already declared by the charter"
     }
   ],
-  "seal_sha256": "36e22f349666624851c94331fdd11d572dc029366712a0b7ff48e74a2fa5003a",
+  "seal_sha256": "adbc878d3b436b3db99e4601bc4f757808130e7b63299cb64b618a2a5d986d16",
   "source_token_registers": [
     {
       "id": "UCAF-TOK-01",

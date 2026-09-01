@@ -2101,7 +2101,23 @@ def main(argv: list[str] | None = None) -> int:
         print(f"UCOS-UCAF-001 ABORT: {exc}", file=sys.stderr)
         return 2
 
-    written = write_registers(model)
+    # A gate VERIFIES; it does not produce. `--gate` used to regenerate every register
+    # and ucaf.json here — unconditionally and without change detection — and only then
+    # evaluate `args.gate` below, so the verdict was computed against a tree the verdict
+    # run had itself just rewritten. That is why a read-only-sounding flag left
+    # 00-MASTER/UCOS-UCAF-001/ dirty, and it defeats any clean-tree precondition placed
+    # in front of an irreversible operation.
+    #
+    # `--render` is the honestly-named writing verb and is unaffected, including when
+    # combined with `--gate` — that pair is an explicit request to render AND return a
+    # verdict, so it still writes. No target in the repository uses the pair today:
+    # `make ucaf-gate` is `--gate` alone and `make ucaf-replay` is `--render --quiet`,
+    # so nothing depends on the combination; it is preserved because `--render` means
+    # what it says, not because a caller relies on it. A bare invocation still renders,
+    # so `make ucaf` is unchanged. Only the gate-without-render path becomes what its
+    # name claims.
+    gate_only = args.gate and not args.render
+    written = [] if gate_only else write_registers(model)
     counts = model["counts"]
     if not args.quiet:
         print(
@@ -2117,7 +2133,11 @@ def main(argv: list[str] | None = None) -> int:
             f"| reconciliation-required={counts['reconciliation_required']} "
             f"| gate={model['gate']} | seal={model['seal_sha256'][:16]}"
         )
-        print(f"wrote {len(written)} artifacts to {HERE.relative_to(REPO).as_posix()}")
+        if gate_only:
+            print(f"verified {len(render(model))+1} artifacts in "
+                  f"{HERE.relative_to(REPO).as_posix()} — read-only, nothing written")
+        else:
+            print(f"wrote {len(written)} artifacts to {HERE.relative_to(REPO).as_posix()}")
         for entry in model["validations"]:
             if entry["blocking"] and not entry["satisfied"]:
                 print(f"  BLOCKING {entry['id']} {entry['dimension']}: {entry['failure_count']}", file=sys.stderr)

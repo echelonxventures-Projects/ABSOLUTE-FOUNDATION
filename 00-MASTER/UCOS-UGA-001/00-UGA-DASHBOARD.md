@@ -8,14 +8,14 @@
 
 | Object class | Count | Identity authority |
 |---|---:|---|
-| CONFIGURATION_OBJECT | 36 | UCOS-UGA-001 |
-| DATA_OBJECT | 132 | UCOS-UGA-001 |
-| DOCUMENT_ARTIFACT | 1597 | UMB-IMP-001 |
+| CONFIGURATION_OBJECT | 37 | UCOS-UGA-001 |
+| DATA_OBJECT | 138 | UCOS-UGA-001 |
+| DOCUMENT_ARTIFACT | 1658 | UMB-IMP-001 |
 | EXCLUDED_DOCUMENT | 2804 | UCOS-UGA-001 |
-| EXECUTABLE_OBJECT | 1330 | UCOS-UGA-001 |
-| TEST_OBJECT | 842 | UCOS-UGA-001 |
-| TOOLING_OBJECT | 36 | UCOS-UGA-001 |
-| **TOTAL** | **6777** | one shared ledger |
+| EXECUTABLE_OBJECT | 1369 | UCOS-UGA-001 |
+| TEST_OBJECT | 873 | UCOS-UGA-001 |
+| TOOLING_OBJECT | 37 | UCOS-UGA-001 |
+| **TOTAL** | **6916** | one shared ledger |
 
 ## Invariants
 
@@ -31,6 +31,7 @@
 | UGA-INV-08 | `NO_CANONICAL_ARTIFACT_DEPENDS_ON_UNCLASSIFIED_OBSERVATION` | PASS | 0 |
 | UGA-INV-09 | `NO_ARCHITECTURE_DEPENDS_ON_FINITE_INSTANCE` | PASS | 0 |
 | UGA-INV-10 | `EVERY_MUTATION_HAS_AUDIT_EVENT` | PASS | 0 |
+| LEDGER-INV-01 | `IDENTITY_LEDGER_HAS_ONE_WRITE_PATH` | PASS | 0 |
 | OBS-INV-01 | `EVERY_OBSERVATION_HAS_UNIVERSAL_IDENTITY` | PASS | 0 |
 | OBS-INV-02 | `NO_CANONICAL_ARTIFACT_EMBEDS_AN_OBSERVATION_VALUE` | PASS | 0 |
 | OBS-INV-03 | `EVERY_OBSERVATION_REFERENCE_RESOLVES_TO_A_DECLARED_KIND` | PASS | 0 |
@@ -53,10 +54,10 @@
 
 ## Graph
 
-- relationship edges: **37686**
-- dependency edges: **10223**
+- relationship edges: **38476**
+- dependency edges: **10457**
 - producers bound to declared outputs: **42**
-- distinct owners: **287**
+- distinct owners: **293**
 
 ## Corpus impact
 

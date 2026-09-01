@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T11:33:45+00:00",
+  "generated_at": "2026-08-31T10:09:12+00:00",
   "count": 25,
   "volumes": [
     {
@@ -9,9 +9,9 @@
       "description": "Root navigation, master index, and book infrastructure.",
       "category": "IDX",
       "status": "ACTIVE",
-      "artifact_count": 399,
+      "artifact_count": 457,
       "page_range_start": 1,
-      "page_range_end": 12503,
+      "page_range_end": 13072,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-000"
     },
     {
@@ -57,9 +57,9 @@
       "description": "Implementation governance, plans, trackers, and technology constitution.",
       "category": "IMP",
       "status": "ACTIVE",
-      "artifact_count": 21,
+      "artifact_count": 24,
       "page_range_start": 4194,
-      "page_range_end": 11011,
+      "page_range_end": 12593,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-004"
     },
     {

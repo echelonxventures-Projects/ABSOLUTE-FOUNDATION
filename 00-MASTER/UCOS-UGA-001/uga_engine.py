@@ -38,9 +38,14 @@ a no-op on disk, which is what makes Phase-8 fixed point and Phase-9 pristine
 clone checkable by plain byte comparison.
 
 USAGE
-    uga_engine.py run     mint identities and emit all surfaces
     uga_engine.py gate    verify invariants; mutate nothing; exit 1 on violation
     uga_engine.py stats   print the current measured state
+    uga_engine.py run     GOVERNED / IRREVERSIBLE. Allocates permanent identity into the
+                          append-only 00-BOOK/DATA/id-ledger.json. This is a
+                          CORPUS_REGISTRATION-class mutation reserved for REG-AUTO-001
+                          authorization (00-BOOK/DATA/mutation-governance-boundary.json).
+                          It is NOT an operator remediation: diagnose with `gate`, obtain
+                          authorization, and let the authorized transaction allocate.
 """
 
 from __future__ import annotations
@@ -56,6 +61,16 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
+
+# The identity-ledger write chokepoint (UCOS-LEDGER-AUTHORITY-001). It used to live under
+# 00-BOOK/tools and be imported by explicit path, because that directory is a script
+# directory rather than an importable package. `python_imports` resolved that edge, but Ω-3's
+# import graph could not, and the chokepoint every irreversible allocation passes through was
+# therefore measured as unreachable. It is now a named package; the import below is an
+# ordinary one that every graph in the repository can resolve. Only the root needs adding to
+# sys.path, because this engine is invoked as a script rather than as a module.
+sys.path.insert(0, REPO)
+from engine import ledger_authority as LA  # noqa: E402
 
 DECLARATION = os.path.join(HERE, "uga-declaration.json")
 LEDGER_PATH = os.path.join(REPO, "00-BOOK", "DATA", "id-ledger.json")
@@ -373,6 +388,17 @@ def python_imports(abspath: str, rel: str, index: dict, tracked: set) -> list[st
             sib = os.path.normpath(sib)
             if sib in tracked and sib != rel:
                 found.add(sib)
+                return
+        # corpus tooling reached through an explicit sys.path insert. 00-BOOK/tools is a
+        # script directory, not a CODE_ROOT package, so the module index cannot carry it
+        # and the sibling rule above cannot see it from another directory. Checked LAST,
+        # so a module of the same name in the importer's own directory still wins. Without
+        # this, an engine routing its ledger write through `ledger_authority` would carry
+        # an unresolved edge — the invisible dependency Epoch 4 exists to eliminate.
+        for cand in (f"{top}.py", os.path.join(top, "__init__.py")):
+            tool = os.path.normpath(os.path.join("00-BOOK", "tools", cand))
+            if tool in tracked and tool != rel:
+                found.add(tool)
                 return
 
     for node in ast.walk(tree):
@@ -1043,6 +1069,145 @@ def alignment_state(caa, paths, ledger, rel_edges, evidence, obs_decl):
 # ---------------------------------------------------------------------------
 # EPOCH 5 — executable governance invariants
 # ---------------------------------------------------------------------------
+#: The ONE sanctioned identity-ledger write path. Named once, here, so LEDGER-INV-01 and
+#: the runtime import cannot drift apart.
+LEDGER_AUTHORITY_REL = "engine/ledger_authority/__init__.py"
+
+#: A ledger reference passed to a Python write primitive. `LA.commit` is absent by design:
+#: routing through the chokepoint is the compliant construction, so it must not match.
+#: The `(?<![A-Z_])` guard is load-bearing — without it `CHANGE_LEDGER_PATH`
+#: (00-BOOK/DATA/change-ledger.json, a derived view) matches on the substring and the
+#: invariant reports a violation against a file that is not the identity ledger at all.
+_LEDGER_REF = r"(?:(?<![A-Z_])LEDGER_PATH\b|id-ledger\.json)"
+
+#: The same vocabulary, compiled for use against a rendered AST expression rather than a
+#: source line. One definition, two consumers — a second pattern would be a second scope.
+_LEDGER_REF_RE = re.compile(_LEDGER_REF)
+
+_PY_LEDGER_WRITE = re.compile(
+    r"(?:_dump_json|_dump|_write_text|_atomic_write|json\.dump|write_text|os\.replace)"
+    r"\s*\(\s*[^\n]{0,120}?" + _LEDGER_REF)
+
+#: `open(<ledger>, "w"|"a"|"x")` in any argument order.
+_PY_LEDGER_OPEN = re.compile(
+    r"open\s*\(\s*[^\n]{0,120}?" + _LEDGER_REF + r"[^\n]{0,60}?['\"][wax]")
+
+#: Shell redirection or tee onto the ledger.
+_SH_LEDGER_WRITE = re.compile(r"(?:>>?|\btee\b)\s*[^\n|;&]{0,80}?id-ledger\.json")
+
+#: Write sinks that take their destination as a positional argument, mapped to the index
+#: of that argument. `open` is handled separately because its mode decides whether it is
+#: a write at all.
+_PARAM_WRITE_SINKS: dict[str, int] = {"json.dump": 1, "os.replace": 1, "shutil.move": 1}
+
+
+def _param_writing_functions(tree) -> dict[str, set[tuple[int, str]]]:
+    """{function name: {(parameter index, sink)}} for functions that write a PARAMETER.
+
+    The lexical patterns above require the ledger to be named on the same source line as
+    a write primitive. A function that receives the path as a parameter never names it,
+    so `helper(LEDGER_PATH, doc)` — where `helper` writes its first argument — is a
+    second write path that no line of source shows. This is the shape both production
+    writers have, which is why they are correctly unmatched by the lexical patterns, and
+    it is also the shape a NEW direct write would most plausibly arrive in.
+    """
+    out: dict[str, set[tuple[int, str]]] = {}
+    for fn in [n for n in ast.walk(tree)
+               if isinstance(n, ast.FunctionDef | ast.AsyncFunctionDef)]:
+        params = [a.arg for a in fn.args.args]
+        if not params:
+            continue
+        for call in [n for n in ast.walk(fn) if isinstance(n, ast.Call)]:
+            name = ast.unparse(call.func)
+            if name == "open":
+                if not call.args or not isinstance(call.args[0], ast.Name):
+                    continue
+                if call.args[0].id not in params:
+                    continue
+                mode = ast.unparse(call.args[1]) if len(call.args) > 1 else "'r'"
+                if any(flag in mode for flag in ("w", "a", "x")):
+                    out.setdefault(fn.name, set()).add((params.index(call.args[0].id), "open"))
+            elif name in _PARAM_WRITE_SINKS:
+                index = _PARAM_WRITE_SINKS[name]
+                for arg in call.args[: index + 1]:
+                    if isinstance(arg, ast.Name) and arg.id in params:
+                        out.setdefault(fn.name, set()).add((params.index(arg.id), name))
+    return out
+
+
+def indirect_ledger_writes(rel: str, source: str) -> list[str]:
+    """LEDGER-INV-01, the indirection half: a ledger reference handed to a writer.
+
+    Reports a violation when a ledger reference is passed as an argument that the callee
+    writes. Unparseable source is a violation, never a pass — the same treatment
+    `_direct_ledger_writes` gives unreadable source, and for the same reason.
+
+    Measured one call deep. That bound is real and is stated rather than implied: a
+    two-hop indirection is not caught here, and what has no depth bound is the runtime
+    check in `ledger_authority.commit`, which compares the persisted document against
+    the authorized one whatever the writer did to produce it.
+    """
+    try:
+        tree = ast.parse(source)
+    except SyntaxError as exc:
+        return [f"{rel}: source does not parse, compliance unprovable ({exc})"]
+    writers = _param_writing_functions(tree)
+    if not writers:
+        return []
+    violations = []
+    for call in [n for n in ast.walk(tree) if isinstance(n, ast.Call)]:
+        name = ast.unparse(call.func).split(".")[-1]
+        if name not in writers:
+            continue
+        for index, sink in sorted(writers[name]):
+            if index >= len(call.args):
+                continue
+            rendered = ast.unparse(call.args[index])
+            if _LEDGER_REF_RE.search(rendered):
+                violations.append(
+                    f"{rel}:{getattr(call, 'lineno', 0)}: indirect ledger write — "
+                    f"{name}() writes param #{index} via {sink} and is called with "
+                    f"{rendered[:60]}; route it through {LEDGER_AUTHORITY_REL}"
+                )
+    return violations
+
+
+def _direct_ledger_writes(entries):
+    """LEDGER-INV-01 — every identity-ledger write outside the ONE authority.
+
+    Reads the version-controlled source text, so it measures the repository rather than
+    this process. Unreadable source is a violation, never a pass: a file that cannot be
+    checked cannot be shown to be compliant.
+    """
+    violations = []
+    for e in entries:
+        rel = e["path"]
+        if not rel.endswith((".py", ".sh")):
+            continue
+        if rel == LEDGER_AUTHORITY_REL:
+            continue                    # the authority is the sanctioned write path
+        abspath = os.path.join(REPO, rel)
+        try:
+            with open(abspath, encoding="utf-8") as fh:
+                text = fh.read()
+        except (OSError, UnicodeDecodeError) as exc:
+            violations.append(f"{rel}: source unreadable, compliance unprovable ({exc})")
+            continue
+        lines = text.splitlines()
+        pats = ((_SH_LEDGER_WRITE,) if rel.endswith(".sh")
+                else (_PY_LEDGER_WRITE, _PY_LEDGER_OPEN))
+        for n, line in enumerate(lines, 1):
+            if any(p.search(line) for p in pats):
+                violations.append(f"{rel}:{n}: direct ledger write — route through "
+                                  f"{LEDGER_AUTHORITY_REL} ({line.strip()[:100]})")
+        if rel.endswith(".py"):
+            # The lexical patterns above see a write only where the ledger is NAMED on
+            # the same line. A write reached through a path PARAMETER names it nowhere,
+            # so it needs a measurement over structure rather than over text.
+            violations.extend(indirect_ledger_writes(rel, text))
+    return violations
+
+
 def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, retired,
                       obs_decl, obs_rows, obs_anonymous, obs_undeclared_kind,
                       obs_value_findings, ledger, obs_audit, caa, align, lineage):
@@ -1170,6 +1335,38 @@ def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, re
     audited = {ev["object_path"] for ev in audit_events}
     v = sorted(mutated - audited)
     add("UGA-INV-10", "EVERY_MUTATION_HAS_AUDIT_EVENT", v, len(mutated))
+
+    # 11 — the identity ledger has exactly ONE write path.
+    #
+    # This is the structural half of the D0.1 remediation. Routing today's four writers
+    # through UCOS-LEDGER-AUTHORITY-001 fixes the four writers that exist; it does not
+    # stop a fifth from being added next month with its own private counter and its own
+    # private idea of what "minted" means. That is how the original defect arrived, so
+    # closing it needs a MEASUREMENT, not a convention.
+    #
+    # Deliberately lexical rather than an import graph: the failure mode being prevented
+    # is a NEW direct write, and a new direct write is visible in the source text before
+    # it is ever executed. A file that names the ledger inside a write primitive is a
+    # second write path regardless of how it was reached at runtime.
+    #
+    # Lexical matching alone was not enough, and the gap was not hypothetical: a write
+    # reached through a path PARAMETER names the ledger nowhere, so no line matches. Both
+    # sanctioned writers have exactly that shape — correctly, because they receive the
+    # path from the chokepoint — but so would a new UNSANCTIONED writer called as
+    # `helper(LEDGER_PATH, doc)`. `indirect_ledger_writes` adds that measurement over
+    # structure, one call deep.
+    v = _direct_ledger_writes(entries)
+    add("LEDGER-INV-01", "IDENTITY_LEDGER_HAS_ONE_WRITE_PATH", v,
+        len([e for e in entries if e["path"].endswith((".py", ".sh"))]),
+        f"Every identity-ledger write must route through {LEDGER_AUTHORITY_REL} so the "
+        "allocation report is derived from the on-disk pre-image. A direct write can "
+        "report an allocation it does not know it made — the defect that let a run print "
+        "minted=0 while permanently allocating an observation identity. SCOPE: this "
+        "measures source-visible write paths — the ledger named beside a write primitive, "
+        "and a ledger reference handed one call deep to a function that writes its "
+        "parameter. It does NOT establish what a writer does once the chokepoint hands it "
+        "the path; that is enforced at runtime, where commit() compares the persisted "
+        "document against the authorized one and restores the pre-image on divergence.")
 
     # ---- Observation Universe (UCOS-OBSERVATION-UNIVERSE-001) --------------------
     # The separation of Identity Truth from Observation Truth. These are the invariants
@@ -1540,16 +1737,24 @@ def epochs6_9(entries, invariants, objects, retired):
         plans.append({
             "invariant": d["invariant"],
             "action": {
-                "UGA-INV-01": "Run `uga_engine.py run` to mint identities for unminted "
-                              "objects.",
+                "UGA-INV-01": "Anonymous objects need IDENTITY ALLOCATION, which is an "
+                              "irreversible CORPUS_REGISTRATION-class mutation of "
+                              "00-BOOK/DATA/id-ledger.json governed by REG-AUTO-001 "
+                              "(00-BOOK/DATA/mutation-governance-boundary.json). Obtain "
+                              "that authorization first; it is not a remediation an "
+                              "operator may perform on the strength of this message. "
+                              "Diagnose with the read-only `uga_engine.py gate`.",
                 "UGA-INV-02": "Extend ownership_rules in uga-declaration.json; the rule "
                               "set must stay total.",
-                "UGA-INV-03": "Re-run the engine; the registry is derived from the same "
-                              "boundary it checks.",
+                "UGA-INV-03": "The registry is derived from the same boundary it checks, "
+                              "so this resolves when the surfaces are next regenerated "
+                              "under authorized allocation. Do not invoke allocation to "
+                              "clear a reporting gap.",
                 "UGA-INV-04": "Author the missing input_closure in the generated-artifact "
                               "registry.",
-                "UGA-INV-05": "Declare the producer, then re-run so it is minted an "
-                              "identity.",
+                "UGA-INV-05": "Declare the producer. It gains identity at the next "
+                              "AUTHORIZED allocation (REG-AUTO-001); declaring is the "
+                              "operator action, allocating is not.",
                 "UGA-INV-06": "Add the missing producer invocation to "
                               "scripts/generate-prerequisites.sh so a pristine clone can "
                               "obtain the input.",
@@ -1559,8 +1764,14 @@ def epochs6_9(entries, invariants, objects, retired):
                               "input_classification map.",
                 "UGA-INV-09": "Remove the finite instance from the structural term; "
                               "express it as a context value.",
-                "UGA-INV-10": "Re-run the engine; audit events are derived from ledger "
-                              "first_seen.",
+                "UGA-INV-10": "Audit events are derived from ledger first_seen, so this "
+                              "resolves once the referenced identities exist under "
+                              "authorized allocation (REG-AUTO-001). Not operator-"
+                              "remediable by invoking allocation.",
+                "LEDGER-INV-01": "Route the reported write through "
+                                 "engine/ledger_authority::commit so its "
+                                 "allocation is measured against the on-disk pre-image. "
+                                 "Reversible source edit; no allocation involved.",
             }.get(d["invariant"], "Investigate."),
             "owner": "UCOS-UGA-001",
             "evidence": os.path.relpath(OUT["invariants"], REPO),
@@ -1863,11 +2074,34 @@ def emit(st):
 
 def cmd_run(args):
     st = build(mint=True)
+    if getattr(args, "plan", False):
+        # READ-ONLY preview. `build(mint=True)` mints into the IN-MEMORY ledger only;
+        # nothing has reached disk at this point (the first write is the LA.commit
+        # below), so returning here writes nothing and allocates nothing.
+        m = LA.plan(LEDGER_PATH, st["ledger"], actor="UCOS-UGA-001 :: uga_engine.py run")
+        print(LA.format_report(m))
+        print(f"  manifest_digest : {m['digest']}")
+        print(f"  preimage_digest : {m['preimage_digest']}")
+        print(f"  head            : {m['head']}")
+        print("PLAN ONLY — nothing written, no identity allocated.")
+        return 0
     # Persist the shared ledger FIRST: an identity must exist before the registry
     # that references it, never after.
-    minted = len(st["minted"])
-    if _dump(LEDGER_PATH, st["ledger"]):
-        print(f"identity ledger updated: {minted} minted")
+    #
+    # Routed through the ONE chokepoint (UCOS-LEDGER-AUTHORITY-001). This is the fix for
+    # the reporting defect, not a stylistic change: `epoch1_identity` counts `by_object`
+    # only, while this single write ALSO persists the `by_observation` identities minted
+    # by `epoch_observation_universe` and the shared `category_seq` advances behind both.
+    # Reporting from a caller-side counter could therefore print `minted=0` while
+    # permanently allocating `UCOS-OBS-NNNNNN`. `LA.commit` derives its report from the
+    # on-disk pre-image, so the number below measures every map the write touches and
+    # cannot understate an allocation.
+    report = LA.commit(LEDGER_PATH, st["ledger"],
+                       actor="UCOS-UGA-001 :: uga_engine.py run",
+                       writer=lambda p, o: _dump(p, o),
+                       permit=getattr(args, "permit", None))
+    print(LA.format_report(report))
+    if report["bytes_changed"]:
         # The ledger is itself a governed TOOLING_OBJECT, so the registry records a
         # content_hash for it — and minting is what just changed those bytes. The
         # first pass therefore recorded the PRE-mint hash of a file that minting
@@ -1877,8 +2111,12 @@ def cmd_run(args):
         # internally consistent and the second run is a no-op by construction.
         st = build(mint=False)
     changed = emit(st)
-    st["minted"] = [None] * minted          # preserve the count for the report
-    print(f"UGA run — objects={len(st['entries'])} minted={len(st['minted'])} "
+    # Reported from the transaction scope, never reconstructed from a local count: the
+    # allocation total and its per-map breakdown are the chokepoint's measurement.
+    print(f"UGA run — objects={len(st['entries'])} "
+          f"allocated={report['total_allocations']} "
+          f"objects_minted={len(report['allocated'].get('by_object', []))} "
+          f"observations_minted={len(report['allocated'].get('by_observation', []))} "
           f"retired={len(st['retired'])}")
     passed = sum(1 for i in st["invariants"] if i["result"] == "PASS")
     print(f"invariants {passed}/{len(st['invariants'])} passing")
@@ -1905,7 +2143,16 @@ def cmd_gate(args):
               f"(violations={i['violation_count']}, measured={i['measured']})")
     print("-" * 60)
     if st["anonymous"]:
-        print(f"  ANONYMOUS OBJECTS: {len(st['anonymous'])} — run `uga_engine.py run`")
+        # A READ-ONLY gate must not hand the operator an irreversible command. The
+        # count is the finding; allocating identities to clear it is a
+        # CORPUS_REGISTRATION-class mutation of the append-only
+        # 00-BOOK/DATA/id-ledger.json, governed by REG-AUTO-001 — not a remediation
+        # this message may authorize. Naming the verb here is what turned a diagnostic
+        # into 25 permanent identifiers; the authorization flow is named instead.
+        print(f"  ANONYMOUS OBJECTS: {len(st['anonymous'])} — identity allocation "
+              f"required, which is IRREVERSIBLE and NOT operator-remediable. Obtain "
+              f"REG-AUTO-001 authorization "
+              f"(00-BOOK/DATA/mutation-governance-boundary.json) before any allocation.")
     if blocking:
         print(f"GATE FAILED — {len(blocking)} blocking invariant(s).")
         for i in blocking:
@@ -1925,7 +2172,17 @@ def cmd_stats(args):
 def main():
     ap = argparse.ArgumentParser(description="UCOS-UGA-001 Universal Governance Assimilation")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("run", help="mint identities and emit all surfaces")
+    run_p = sub.add_parser("run",
+                           help="GOVERNED/IRREVERSIBLE: allocates permanent identity and "
+                                "emits all surfaces. Reserved for REG-AUTO-001 "
+                                "authorization; use `gate` to diagnose.")
+    run_p.add_argument("--permit", default=None,
+                       help="permit_id from 00-BOOK/DATA/allocation-permits.json "
+                            "authorizing this allocation. The authority refuses an "
+                            "unauthorized write before anything is persisted.")
+    run_p.add_argument("--plan", action="store_true",
+                       help="READ-ONLY: measure and print exactly what `run` would "
+                            "allocate and write nothing.")
     sub.add_parser("gate", help="verify invariants, mutate nothing")
     sub.add_parser("stats", help="print measured state")
     args = ap.parse_args()

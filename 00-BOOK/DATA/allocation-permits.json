@@ -1,0 +1,70 @@
+{
+  "artifact_id": "UCOS-ALLOCATION-PERMIT-REGISTER-001",
+  "title": "Allocation Permit Register — the written authorization behind every irreversible identity allocation",
+  "authority": "UCOS-LEDGER-AUTHORITY-001 (engine/ledger_authority/__init__.py). The register is READ by `_verify_permit` and written by no engine: an operator issues a permit, the chokepoint verifies it against the measured manifest, and a write that no permit authorizes is refused before anything reaches disk. This file therefore holds authorization, never authority — it creates no power to allocate and only records that a named operator approved one specific, digest-bound allocation.",
+  "constitutional_superior": {
+    "authority": "UCKP-LAW-0001",
+    "home": "engine/uckp/law.py",
+    "role": "EVIDENCE",
+    "relation": "PROJECTION",
+    "articles": [
+      "UCKP-ART-05",
+      "UCKP-ART-12",
+      "UCKP-ART-16"
+    ],
+    "binding": "00-BOOK/DATA/constitutional-authority-alignment.json",
+    "effect": "This register already said of itself that it holds authorization and never authority. UCKP-ART-05 — identity is owned by the root law, not by whoever writes a record of it — is the article that sentence is true UNDER. It owns the record of who approved which digest-bound allocation; it may never own the power to allocate, and a permit whose bindings do not match the measured manifest authorizes nothing at all."
+  },
+  "$why_this_is_declared_here": "RCM-AM-01, the rank-1 mechanism, because this artifact is registry-shaped and any other route would state its authority somewhere the file itself does not carry. The register is the audit trail for acts that cannot be undone; a reader holding only this file must be able to see whose authority it answers to without resolving a second document.",
+  "$append_only": "Permits accumulate and are never edited or removed. A spent permit stays because the record of what was authorized is the point: `preimage_digest` self-invalidates the moment the ledger moves, so a spent permit is refused by verification rather than by deletion, and deleting it would erase the evidence of an irreversible act.",
+  "permits": [
+    {
+      "permit_id": "P-UCOS-RECOVERY-001",
+      "actor": "UMB-IMP-001 :: ukb.py build --mint",
+      "manifest_digest": "40cdaf6ce06c61431431477ce200d4424af18c8fb15042f55fd7f1973927bc0c",
+      "preimage_digest": "3a2a2532e006c3268efaab65410de9386dae007d0c2c2e5051a7698fbc42bcf4",
+      "head": "77798202d2df43285760b3277f230ebde4b52bbc",
+      "scope": {
+        "maps": [
+          "by_path"
+        ],
+        "max_allocations": 61
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "Operator-authorized identity allocation for RC-0001 elimination. Approves the one manifest the read-only --plan path measured and the operator named: 61 permanent by_path identifiers for the 52 determination documents bound to version control in this transaction plus the 9 artifacts that were committed unregistered. Bound to manifest_digest, preimage_digest and head, so it authorizes this allocation and no other. Single-use: the pre-image binding is spent the moment the ledger moves, so a replay of this permit is refused by _verify_permit rather than by convention."
+    },
+    {
+      "permit_id": "P-UCOS-RECOVERY-002",
+      "actor": "UCOS-UGA-001 :: uga_engine.py run",
+      "manifest_digest": "5ae1762b8f41e7f566c7802935b6e27e76ec34fbf05af217354a95c10740851a",
+      "preimage_digest": "cd0d3637711527db9bcceadff6e504851547b645e27e2bd775988d8eb628abab",
+      "head": "77798202d2df43285760b3277f230ebde4b52bbc",
+      "scope": {
+        "maps": [
+          "by_object"
+        ],
+        "max_allocations": 79
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "Operator-authorized identity allocation clearing UGA-INV-01 and UGA-INV-10. Approves the one manifest `uga_engine.py run --plan` measured over the index at head 77798202: 79 permanent by_object identifiers for the artifacts bound to version control in this transaction — the universal_discovery, omega_infinite and omega_governance packages and their suites, the Omega and UCI gate artifacts, the vendored UAKOS-CLOSURE-008 evidence, ledger_authority.py, and this permit register itself, which must be tracked because it is the audit record of every irreversible allocation and cannot authorize what it does not survive. Scoped to by_object alone: by_path is UMB-IMP-001's map and this permit grants nothing there. Bound to manifest_digest, preimage_digest and head, so it authorizes this allocation and no other. Single-use: the pre-image binding is spent the moment the ledger moves, so a replay is refused by _verify_permit rather than by convention."
+    },
+    {
+      "permit_id": "P-UCOS-RECOVERY-003",
+      "actor": "UCOS-UGA-001 :: uga_engine.py run",
+      "manifest_digest": "7619ca7926f06b15ddbd84f0ac2d47a4875411b51c7b307724b2488288cfc69c",
+      "preimage_digest": "e414078534af01ce6032a7008609494b4ec0cdb17d71c87ebd65d598edff1b3b",
+      "head": "77798202d2df43285760b3277f230ebde4b52bbc",
+      "scope": {
+        "maps": [
+          "by_object"
+        ],
+        "max_allocations": 14
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "Operator-authorized identity allocation completing the recovery integration, under the same authority as P-UCOS-RECOVERY-002. Approves the one manifest `uga_engine.py run --plan` measured over the index: 14 permanent by_object identifiers for the objects this transaction's remedial work created - engine/ledger_authority/__init__.py at its new path, and the thirteen modules of engine/tests/omega_governance/, the suite that makes engine/omega_governance/ reachable and measured rather than code no import, plane or entry point reaches. The identifier the authority held at 00-BOOK/tools/ledger_authority.py is RETIRED rather than reissued, which is what append-only means for a move: the old path keeps its identity forever and the new path gets its own. Scoped to by_object alone. Bound to manifest_digest, preimage_digest and head, so it authorizes this allocation and no other. Single-use: the pre-image binding is spent the moment the ledger moves."
+    }
+  ]
+}

@@ -66,7 +66,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Every declared ceiling binds a measurement, and every law blocks
+      - name: Every declared ratchet binds a measurement, declares a KIND, and every law blocks
         run: |
           python3 - <<'PY'
           import json
@@ -82,21 +82,56 @@ jobs:
           for law in document["laws"]:
               assert law["blocking"] is True, f"{law['id']} is declared non-blocking"
 
+          # Ω-4. Each key declares a DIRECTION, never a number. A numeric value here would be a
+          # measurement taken on one afternoon, and this repository has twice had to rewrite such
+          # values (607 -> 65, 570 -> 27) with the rewrite indistinguishable from a retreat. The
+          # bound each run is held to lives in 00-MASTER/UCI-000001/uci-ratchet.json and is sealed
+          # FROM a measurement, so it cannot be authored.
+          KINDS = {"MONOTONIC", "CONVERGENT", "DENSITY", "ENTROPY"}
           ratchet = {k: v for k, v in document["ratchet"].items() if not k.startswith("$")}
-          assert ratchet, "the declaration carries no ceilings, so it enforces nothing"
+          assert ratchet, "the declaration carries no ratchets, so it enforces nothing"
           for key, value in ratchet.items():
-              assert isinstance(value, int) and not isinstance(value, bool) and value >= 0, (
-                  f"ratchet.{key} = {value!r}; a ceiling must be a non-negative integer or the "
-                  "comparison enforcing it has no meaning"
+              assert value in KINDS, (
+                  f"ratchet.{key} = {value!r}; under Ω-4 a ratchet declares one of {sorted(KINDS)} "
+                  "and never a numeric ceiling"
+              )
+              assert not isinstance(value, (int, float)), (
+                  f"ratchet.{key} is a number again; a static ceiling is a historical snapshot "
+                  "that any change of scale forces somebody to rewrite"
               )
 
           # Two-way binding: the declaration and the measurement table must name one set. A
-          # ceiling with no measurement looks like enforcement and is not; a measurement with no
-          # ceiling is recorded and enforced by nothing.
+          # ratchet with no measurement looks like enforcement and is not; a measurement with no
+          # ratchet is recorded and enforced by nothing.
           measures = {law["measure"] for law in document["laws"]}
           orphan = sorted(set(ratchet) - measures)
-          assert not orphan, f"these ceilings bind no declared law: {orphan}"
-          print(f"declaration sound: {len(document['laws'])} laws, {len(ratchet)} ceilings")
+          assert not orphan, f"these ratchets bind no declared law: {orphan}"
+          print(f"declaration sound: {len(document['laws'])} laws, {len(ratchet)} ratchet directions")
+          PY
+
+      - name: The sealed bounds are measurements, not authored numbers
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          state = Path("00-MASTER/UCI-000001/uci-ratchet.json")
+          assert state.is_file(), "the Ω-4 sealed state is absent, so no bound is enforced"
+          document = json.loads(state.read_text(encoding="utf-8"))
+          assert document["schema"] == "ucos-omega-ratchet", document["schema"]
+          assert document["best"], "the sealed state records no best-ever value"
+          for metric, reason in (
+              (entry["metric"], entry["reason"]) for entry in document.get("justifications", [])
+          ):
+              assert reason.strip(), (
+                  f"the regression justification for {metric} states no reason; an unexplained "
+                  "regression is the ceiling rewrite Ω-4 exists to replace"
+              )
+              assert metric in document["best"], (
+                  f"{metric} is justified but has no measured bound, so the justification excuses "
+                  "nothing that is measured"
+              )
+          print(f"sealed state sound: {len(document['best'])} measured bounds")
           PY
 
   non-vacuity:

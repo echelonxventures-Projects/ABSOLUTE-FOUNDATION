@@ -38,6 +38,8 @@ from engine.certification_integrity.model import (
     FILE_TOOLING,
     IntegrityError,
 )
+from engine.universal_discovery import ratchet as omega_ratchet
+from engine.universal_discovery.model import RATCHET_KINDS
 
 DECLARATION_RELATIVE = "00-MASTER/UCI-000001/uci-declaration.json"
 
@@ -89,10 +91,20 @@ class LawResult:
 
 @dataclass
 class Declaration:
-    """The governed expectation. Data, so that changing it is a reviewable diff."""
+    """The governed expectation. Data, so that changing it is a reviewable diff.
+
+    ``ratchet`` USED TO HOLD SIX NUMBERS and now holds six KINDS. The numbers were 65, 27, 39, 25,
+    14 and 10, and two of them had been 607 and 570 a week earlier — measurements taken on the
+    afternoon somebody took them, carried in a file that needed a changelog to explain itself. A
+    threshold that needs a changelog is a diary, not a threshold.
+
+    Ω-4 replaces the number with a DIRECTION. What the declaration now states per law is which
+    direction is better and how strictly, and the value each run is held to is this repository's
+    own best-ever measurement, sealed by ``--seal`` from a measurement rather than typed.
+    """
 
     version: str
-    ratchet: Mapping[str, int]
+    ratchet: Mapping[str, str]
     source: str
     raw: Mapping[str, object] = field(default_factory=dict)
 
@@ -115,10 +127,11 @@ def load_declaration(root: str) -> Declaration:
         if not key.startswith("$")
     }
     for key, value in ratchet.items():
-        if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+        if value not in RATCHET_KINDS:
             raise IntegrityError(
-                f"ratchet.{key} is {value!r}; a ceiling must be a non-negative integer or the "
-                "comparison that enforces it has no meaning"
+                f"ratchet.{key} is {value!r}; under Ω-4 a ratchet declares its KIND — one of "
+                f"{', '.join(RATCHET_KINDS)} — and never a numeric ceiling. A number here would be "
+                "a historical snapshot that a repository of any other size has to rewrite."
             )
     return Declaration(
         version=str(document.get("version", "0")),
@@ -240,14 +253,42 @@ LAWS: Mapping[str, Law] = {
 }
 
 
-def _ratcheted(inv: inventory_module.Inventory, declaration: Declaration, key: str) -> LawResult:
+#: Where UCI's own best-ever values are sealed. Inside the programme home, so Ω-A-03 assigns its
+#: authority by the same ancestry rule as every other programme artifact.
+RATCHET_STATE_RELATIVE = os.path.join("00-MASTER", "UCI-000001", "uci-ratchet.json")
+
+
+def _ratcheted(
+    inv: inventory_module.Inventory,
+    declaration: Declaration,
+    key: str,
+    state: omega_ratchet.Ratchet,
+) -> LawResult:
+    """Compare one measurement against this repository's own best, not against a chosen number.
+
+    THE FOUR OUTCOMES, and why only two of them refuse:
+
+      IMPROVED / SEEDED  the measurement is better than anything recorded, or is the first
+                         recording. HOLDS, and no file needs editing to permit it. Under the
+                         previous two-sided ceiling this was a REFUSAL — repaying debt failed the
+                         gate until somebody committed the new number, which is how a mechanism
+                         meant to prevent regression became a tax on improvement. It failed exactly
+                         that way on the commit that introduced Ω: the denominator improved 65→64
+                         and the gate closed.
+      HELD               equal to the best. HOLDS.
+      JUSTIFIED          worse, and the sealed state names this key with a written reason. HOLDS,
+                         and the reason is visible in a diff forever. ``best`` does NOT move, so
+                         the repository is still held to what it once achieved.
+      REGRESSED/STALLED  worse with no reason, or a CONVERGENT metric that has stopped falling.
+                         REFUSED.
+    """
     law_id, measurement = RATCHETED[key]
     law = LAWS[law_id]
     offenders = tuple(measurement(inv))
     measured = len(offenders)
-    ceiling = declaration.ratchet.get(key)
+    kind = declaration.ratchet.get(key)
 
-    if ceiling is None:
+    if kind is None:
         return LawResult(
             law_id=law_id,
             name=law.name,
@@ -257,49 +298,65 @@ def _ratcheted(inv: inventory_module.Inventory, declaration: Declaration, key: s
             ceiling=None,
             offenders=offenders,
             detail=(
-                f"ratchet.{key} declares no ceiling, so this measurement is recorded and enforced "
-                "by nothing. Declare it in "
-                f"{DECLARATION_RELATIVE} at the measured value {measured}."
+                f"ratchet.{key} declares no KIND, so this measurement is recorded and enforced by "
+                f"nothing. Declare it in {DECLARATION_RELATIVE} as one of "
+                f"{', '.join(RATCHET_KINDS)}."
             ),
         )
-    if measured > ceiling:
+
+    observation = state.observe(key, kind, float(measured), law.question)
+    best = None if observation.best is None else int(observation.best)
+
+    if observation.refused:
+        detail = (
+            f"{observation.verdict}: measured {measured} against a best-ever {best}. "
+            f"{measured - (best or 0)} unit(s) of new debt. First offenders: "
+            f"{', '.join(offenders[:8])}"
+            if observation.verdict == omega_ratchet.REGRESSED
+            else (
+                f"STALLED: a CONVERGENT ratchet has held at {measured} for "
+                f"{omega_ratchet.STALL_OBSERVATIONS} runs without falling. Either reduce it, or "
+                f"record in {RATCHET_STATE_RELATIVE} justifications why {measured} is its floor."
+            )
+        )
         return LawResult(
             law_id=law_id,
             name=law.name,
             question=law.question,
             status=REFUSED,
             measured=measured,
-            ceiling=ceiling,
+            ceiling=best,
             offenders=offenders,
-            detail=(
-                f"{measured - ceiling} NEW violation(s) above the declared ceiling {ceiling}. "
-                f"First offenders: {', '.join(offenders[:8])}"
-            ),
+            detail=detail,
         )
-    if measured < ceiling:
-        return LawResult(
-            law_id=law_id,
-            name=law.name,
-            question=law.question,
-            status=REFUSED,
-            measured=measured,
-            ceiling=ceiling,
-            offenders=offenders,
-            detail=(
-                f"the debt was repaid to {measured} and the ceiling is still {ceiling}, so the "
-                f"declaration carries {ceiling - measured} unit(s) of slack a future regression "
-                f"could occupy silently. Lower ratchet.{key} to {measured}."
-            ),
+
+    if observation.verdict == omega_ratchet.IMPROVED:
+        detail = (
+            f"IMPROVED: {best} -> {measured}. Nothing needs editing to permit this; "
+            "`make uci-seal` records the new best."
         )
+    elif observation.verdict == omega_ratchet.SEEDED:
+        detail = (
+            f"SEEDED at {measured}. Every future run is held to this value or better, with no "
+            "number authored by hand."
+        )
+    elif observation.verdict == omega_ratchet.JUSTIFIED:
+        detail = (
+            f"JUSTIFIED: measured {measured} above the best-ever {best} on a written reason — "
+            f"{observation.justification}"
+        )
+    else:
+        detail = f"HELD at the best-ever {measured}"
+
     return LawResult(
         law_id=law_id,
         name=law.name,
         question=law.question,
         status=HOLDS,
         measured=measured,
-        ceiling=ceiling,
+        ceiling=best,
         offenders=offenders,
-        detail=f"measured {measured}, exactly at the declared ceiling",
+        detail=detail,
     )
 
 
@@ -307,20 +364,21 @@ def measure(root: str, *, coverage_xml: str | None = None) -> dict[str, object]:
     """Measure every law. Returns the report; the caller decides the exit code."""
     declaration = load_declaration(root)
     inv = inventory_module.build(root, coverage_xml=coverage_xml)
+    state = omega_ratchet.load(os.path.join(root, RATCHET_STATE_RELATIVE))
 
-    results = [_ratcheted(inv, declaration, key) for key in sorted(RATCHETED)]
+    results = [_ratcheted(inv, declaration, key, state) for key in sorted(RATCHETED)]
     refused = [r for r in results if not r.holds]
 
     declared_keys = set(declaration.ratchet)
     known_keys = set(RATCHETED)
     orphan_ceilings = sorted(declared_keys - known_keys)
     if orphan_ceilings:
-        # A ceiling with no measurement is a number that looks like enforcement and is not.
+        # A ratchet with no measurement is a declaration that looks like enforcement and is not.
         results.append(
             LawResult(
                 law_id="UCI-L-07",
                 name="every_ceiling_binds_a_measurement",
-                question="does every declared ceiling bind a measurement that exists?",
+                question="does every declared ratchet bind a measurement that exists?",
                 status=REFUSED,
                 measured=len(orphan_ceilings),
                 ceiling=0,
@@ -346,7 +404,8 @@ def measure(root: str, *, coverage_xml: str | None = None) -> dict[str, object]:
             "files": len(inv.files),
             "objects": len(inv.objects),
         },
-        "ratchet_declared": dict(sorted(declaration.ratchet.items())),
+        "ratchet_kinds": dict(sorted(declaration.ratchet.items())),
+        "ratchet_best": {key: state.best.get(key) for key in sorted(RATCHETED)},
         "ratchet_measured": {
             key: len(measurement(inv)) for key, (_law, measurement) in sorted(RATCHETED.items())
         },
@@ -356,6 +415,34 @@ def measure(root: str, *, coverage_xml: str | None = None) -> dict[str, object]:
         "laws": [r.as_record() for r in results],
         "inventory_digest": inv.digest(),
     }
+
+
+def seal_ratchet(root: str, *, coverage_xml: str | None = None) -> str:
+    """Advance UCI's best-ever values from a measurement. The one writing path for the ratchet.
+
+    Sealing is not a way to make a refusal pass: ``sealed`` only ever moves ``best`` DOWNWARD, and
+    ``assert_sealed_from_measurement`` refuses a state file looser than the run that wrote it. A
+    regression therefore cannot be sealed away — it can only be justified, in writing, and the
+    justification never moves the bound.
+    """
+    declaration = load_declaration(root)
+    inv = inventory_module.build(root, coverage_xml=coverage_xml)
+    path = os.path.join(root, RATCHET_STATE_RELATIVE)
+    state = omega_ratchet.load(path)
+    observations = [
+        state.observe(
+            key,
+            declaration.ratchet[key],
+            float(len(measurement(inv))),
+            LAWS[law].question,
+        )
+        for key, (law, measurement) in sorted(RATCHETED.items())
+        if key in declaration.ratchet
+    ]
+    document = state.sealed(observations)
+    omega_ratchet.assert_sealed_from_measurement(document, observations)
+    omega_ratchet.write(path, document)
+    return RATCHET_STATE_RELATIVE
 
 
 def _coverage_document(root: str, coverage_xml: str | None) -> dict[str, object] | None:

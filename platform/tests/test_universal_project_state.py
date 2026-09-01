@@ -631,10 +631,21 @@ def test_an_ineligible_subject_is_not_certified_rather_than_failed():
 
 
 def test_the_package_is_in_the_coverage_denominator_it_claims():
-    """A capability that is not measured cannot claim to be verified."""
-    pyproject = (REPO / "pyproject.toml").read_text(encoding="utf-8")
-    assert '"--cov=platform.universal_project_state",' in pyproject
-    assert '"platform/universal_project_state"' in pyproject
+    """A capability that is not measured cannot claim to be verified.
+
+    ASKED OF THE DERIVATION, not of ``pyproject.toml``. This test used to grep the file for the
+    literal ``"--cov=platform.universal_project_state",`` and a matching ``source`` path — two
+    searches against two hand-written lists. UCOS-OMEGA-001 removed both lists: the denominator is
+    derived from ``git ls-files '*.py'``, so the honest question is whether the derivation contains
+    this package, and the answer no longer depends on how a TOML file happens to be formatted.
+    """
+    from engine.universal_discovery.discovery import derived_scope
+
+    _test_roots, packages, _exemptions, _transient = derived_scope(str(REPO))
+    assert "platform.universal_project_state" in packages, (
+        "the package is outside the derived coverage denominator, so its coverage figure is a "
+        f"number about something else: {sorted(packages)[:5]}…"
+    )
 
 
 def test_every_declared_wave_module_exists_and_is_importable():

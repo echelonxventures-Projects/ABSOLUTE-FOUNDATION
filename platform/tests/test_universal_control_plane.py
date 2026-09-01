@@ -789,6 +789,49 @@ class TestScheduler:
         with pytest.raises(SchedulerError):
             Scheduler().schedule(items, dep_reg, agt_reg)
 
+    def test_the_cycle_walk_iterates_in_a_sorted_order(self):
+        """Determinism of the WALK, which no test of the schedule output can reach.
+
+        THE DEFECT. ``item_ids`` and every value of ``deps`` are sets, and the cycle walk iterated
+        them directly, so its depth-first order was a function of PYTHONHASHSEED.
+
+        WHY THIS TEST IS STRUCTURAL, AND WHY THE OBVIOUS TEST IS WORTHLESS HERE. The first version
+        of this test ran ``schedule()`` under three hash seeds and compared the results. It passed
+        against the BROKEN code, because the schedule genuinely is order-independent: a wave number
+        is a ``max`` over dependencies, and each wave is re-sorted by priority then id before it is
+        emitted. That is exactly why the defect survived — the output was stable while the traversal
+        wandered, so every behavioural test agreed.
+
+        What actually moved was a VERIFICATION ARTIFACT. Two whole-suite coverage reports taken over
+        an identical tree differed by one row on this module, ``105->101`` against
+        ``103->101``, with the same 108 statements and the same 99%. A report that changes between
+        runs cannot be
+        evidence of determinism, which is the guarantee this walk has to carry.
+
+        So the property is asserted where it lives — in the source, over the parsed function rather
+        than a text search, so a rename cannot quietly satisfy it.
+        """
+        import ast
+        import inspect
+        import textwrap
+
+        tree = ast.parse(textwrap.dedent(inspect.getsource(Scheduler.schedule)))
+        unsorted = []
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.For):
+                continue
+            iterated = node.iter
+            if isinstance(iterated, ast.Call) and getattr(iterated.func, "id", "") == "sorted":
+                continue
+            rendered = ast.unparse(iterated)
+            # The set-valued iterables here: the id population and the adjacency map.
+            if "item_ids" in rendered or "deps" in rendered:
+                unsorted.append(f"line {node.lineno}: for ... in {rendered}")
+        assert not unsorted, (
+            "Scheduler.schedule iterates a set without sorting it, so its traversal order is a "
+            f"function of PYTHONHASHSEED again: {unsorted}"
+        )
+
     def test_schedule_to_dict(self, item, agt_reg, dep_reg):
         sched = Scheduler().schedule([item], dep_reg, agt_reg)
         d = sched.to_dict()

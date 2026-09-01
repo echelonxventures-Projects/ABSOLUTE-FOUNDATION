@@ -455,3 +455,50 @@ def test_assimilation_targets_depend_on_the_currency_gate():
     for target in ("assimilate", "assimilate-replay", "assimilate-gate"):
         assert f"\n{target}: corpus-gate\n" in makefile, f"{target} bypasses corpus-gate"
     assert "\ncorpus-gate:\n" in makefile
+
+
+# ------------------------------------------------- RC-0014: no machine paths in governed output
+
+
+def test_governed_artifacts_carry_no_machine_path():
+    """A governed artifact must not name one machine's filesystem.
+
+    Five capabilities already refuse a `/Users/` fragment in their reports (uci, ucon, uec, urke
+    and mutation gates). UKAP-001 and UAKOS-CLOSURE-008 had no such assertion and were the two
+    that leaked: 29 occurrences across four COMMITTED artifacts, every one pointing at
+    `/Users/<somebody>/Desktop/KNOWLEDGE-ASSIMILATION`. `corpus.json` additionally stored an
+    ABSOLUTE path under a key named `relative`.
+
+    The archives are ~4 GB and cannot be vendored, so the remedy is not relocation: the export is
+    identified by its payload digest, which is machine-independent and is what CC-04/CC-05 verify
+    against. This test is the control that keeps it that way.
+    """
+    repo = Path(__file__).resolve().parents[3]
+    governed = [
+        repo / "00-MASTER" / "UKAP-001" / "corpus.json",
+        repo / "00-MASTER" / "UKAP-001" / "EVIDENCE-MANIFEST.json",
+        repo / "00-MASTER" / "UAKOS-CLOSURE-008" / "assimilation.json",
+        repo / "00-MASTER" / "UAKOS-CLOSURE-008" / "EVIDENCE-MANIFEST.json",
+    ]
+    present = [p for p in governed if p.exists()]
+    assert present, "no governed artifact found — a vacuous pass would prove nothing"
+    for path in present:
+        body = path.read_text(encoding="utf-8")
+        for fragment in ("/Users/", "/home/", "/private/var/"):
+            assert fragment not in body, (
+                f"{path.relative_to(repo)} names a machine path ({fragment}); a governed "
+                f"artifact must identify evidence by digest, not by where one machine kept it"
+            )
+
+
+def test_no_absolute_path_hides_under_a_relative_key():
+    """`relative` must mean relative. It held an absolute export location for twelve records."""
+    repo = Path(__file__).resolve().parents[3]
+    manifest = repo / "00-MASTER" / "UKAP-001" / "EVIDENCE-MANIFEST.json"
+    if not manifest.exists():
+        pytest.skip("UKAP-001 evidence manifest not generated in this checkout")
+    files = json.loads(manifest.read_text(encoding="utf-8")).get("files", {})
+    assert files, "manifest carries no files — refusing a vacuous pass"
+    for key, record in files.items():
+        value = record.get("relative", "")
+        assert not value.startswith("/"), f"{key}: `relative` holds the absolute path {value!r}"

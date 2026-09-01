@@ -1,0 +1,191 @@
+"""UCOS Ω∞ Phase 1, Deliverable 2a — Git, demoted from architecture to provider.
+
+AUTHORITY = NONE (DERIVED TRUTH).
+
+WHAT CHANGED, AND IT IS ONLY THIS: git is still how this repository is discovered, and it is no
+longer how UCOS discovers. The mechanism moved from the middle of the system to behind a contract,
+so the sentence "UCOS requires git" became "this provider requires git, and says so".
+
+WHY GIT REMAINS THE PREFERRED PROVIDER HERE, stated so the demotion is not mistaken for a
+downgrade. ``platform/tests/test_coverage_scope.py`` records the measurement: a control that
+enumerates the working copy decides differently on a developer's machine than on a clean checkout,
+and a control whose verdict depends on local debris gets suppressed. Version control is an
+ELIGIBILITY BOUNDARY, and that boundary is a real governance property — which is why this provider
+declares ``TRACKED_CONTENT`` and carries ``priority = 100``. Resolution by capability then prefers
+it automatically, with no call site naming it.
+
+THE ONE BEHAVIOURAL DIFFERENCE FROM Ω-1, AND IT IS DELIBERATE. ``discovery.tracked_python`` asks
+git for ``'*.py'``. This provider asks for EVERYTHING and lets the caller narrow with a
+``Selector``. The filter was the hard-coded assumption; moving it to the caller is the deliverable.
+``compat.py`` demonstrates that passing ``Selector(patterns=("*.py",))`` reproduces the Ω-1
+population exactly, so nothing is lost by widening the default.
+
+WHAT THIS PROVIDER DOES NOT DO. It does not classify (Deliverable 4 does), it does not derive
+authority (it merely declares that git CAN supply ownership facts, and exposes them on request),
+and it does not decide what a knowledge space is (Deliverable 5 does). One question only.
+"""
+
+from __future__ import annotations
+
+import os
+import subprocess
+from collections.abc import Iterable
+
+from engine.omega_infinite.artifact import Artifact, Location
+from engine.omega_infinite.capability import (
+    AUTHORITY_METADATA,
+    CONTENT_HASHING,
+    LOCAL_STORAGE,
+    TRACKED_CONTENT,
+    VERSIONED_CONTENT,
+    CapabilitySet,
+)
+from engine.omega_infinite.provider import (
+    BaseProvider,
+    ProviderError,
+    ProviderMetadata,
+    Selector,
+)
+
+IDENTIFIER = "git"
+
+#: What git genuinely offers. Declared once, here, by the component that can actually deliver it —
+#: which is the Deliverable 6 rule: providers self-describe, and nobody describes them.
+CAPABILITIES = CapabilitySet.of(
+    TRACKED_CONTENT,
+    VERSIONED_CONTENT,
+    LOCAL_STORAGE,
+    CONTENT_HASHING,
+    AUTHORITY_METADATA,
+)
+
+#: Fixed argv prefix. No shell, ever, and no interpolation of caller data into a command string.
+_LS_FILES = ("git", "ls-files", "-z", "--cached", "--exclude-standard")
+
+
+def _run(root: str, *arguments: str) -> str:
+    """One subprocess call site, so quoting and failure handling exist in exactly one place."""
+    try:
+        completed = subprocess.run(  # noqa: S603 - fixed argv, no shell, caller data never spliced
+            ["git", *arguments],  # noqa: S607 - git resolved from PATH by design, as in Ω-1
+            cwd=root,
+            capture_output=True,
+            check=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise ProviderError(f"git failed in {root!r} running {arguments}: {exc}") from exc
+    return completed.stdout.decode("utf-8", errors="surrogateescape")
+
+
+class GitDiscoveryProvider(BaseProvider):
+    """Enumerates content a git index admits. ONE implementation of ``DiscoveryProvider``."""
+
+    #: Above the filesystem provider, because tracked content is a stronger guarantee than
+    #: whatever happens to be on disk. Expressed as a NUMBER rather than as a branch in the
+    #: registry, so a future provider with better guarantees outranks this one without an edit.
+    priority = 100
+
+    def __init__(self, root: str) -> None:
+        self.root = root
+
+    # ------------------------------------------------------------------------- the contract
+
+    def identifier(self) -> str:
+        return IDENTIFIER
+
+    def capabilities(self) -> CapabilitySet:
+        return CAPABILITIES
+
+    def metadata(self) -> ProviderMetadata:
+        return ProviderMetadata(
+            identifier=IDENTIFIER,
+            binding=self.root,
+            mechanism="git ls-files --cached --exclude-standard",
+            revision=self.revision(),
+            details={
+                "eligibility_boundary": "the git index, so untracked working-copy debris cannot "
+                "change a verdict",
+                "selector_default": "everything the index admits; Ω-1's '*.py' is now a caller "
+                "supplied Selector rather than a hard-coded query",
+            },
+        )
+
+    def collect(self, selector: Selector) -> Iterable[Artifact]:
+        """Every tracked locator, as a universal Artifact. Ordering is ``BaseProvider``'s job."""
+        revision = self.revision()
+        for locator in self._tracked(selector):
+            yield Artifact(
+                identifier=f"{IDENTIFIER}:{locator}",
+                location=Location(IDENTIFIER, locator, revision),
+                metadata={"tracked": "true"},
+            )
+
+    # -------------------------------------------------------------------------- git specifics
+
+    def _tracked(self, selector: Selector) -> tuple[str, ...]:
+        """``git ls-files``, narrowed BY THE CALLER rather than by this module.
+
+        The pattern is passed to git when the selector supplies one, so a narrow enumeration stays
+        cheap; the result is filtered again by ``BaseProvider.enumerate`` because git's pathspec
+        matching and ``fnmatch`` are not identical and the caller's selector is the authority.
+        """
+        arguments = [*_LS_FILES[1:], *selector.patterns]
+        raw = _run(self.root, *arguments)
+        return tuple(sorted(entry for entry in raw.split("\0") if entry))
+
+    def revision(self) -> str:
+        """The committed revision, or "" in a repository with no commits yet.
+
+        EMPTY IS HONEST. A fresh ``git init`` has no HEAD, and inventing an identifier for it would
+        make an unreproducible enumeration look reproducible — the same defect as reporting 100%
+        coverage over an empty denominator.
+        """
+        try:
+            return _run(self.root, "rev-parse", "HEAD").strip()
+        except ProviderError:
+            return ""
+
+    def content_hash(self, locator: str) -> str:
+        """The index's own object id for a locator. Requires ``CONTENT_HASHING``, and asks first.
+
+        ``require`` is called even though this class declares the capability unconditionally, and
+        that is not ceremony: it is the pattern every provider method that depends on a capability
+        must follow, and a method that skipped it would be the template someone copies.
+        """
+        self.require(CONTENT_HASHING)
+        raw = _run(self.root, "rev-parse", f"HEAD:{locator}").strip()
+        if not raw:
+            raise ProviderError(f"git resolved no object for {locator!r} at HEAD")
+        return raw
+
+    def authority_metadata(self, locator: str) -> dict[str, str]:
+        """Ownership facts git already holds. Requires ``AUTHORITY_METADATA``.
+
+        ON DEMAND, NEVER DURING ENUMERATION. One ``git log`` per artifact would make enumerating a
+        large repository cost thousands of subprocesses — so the capability declares that these
+        facts are AVAILABLE, not that they are eagerly collected. A capability is a promise about
+        what can be asked, not about what has already been paid for.
+        """
+        self.require(AUTHORITY_METADATA)
+        raw = _run(self.root, "log", "-1", "--format=%an%x00%ae", "--", locator)
+        parts = raw.strip().split("\0")
+        if len(parts) != 2 or not parts[0]:
+            return {}
+        return {"last_author_name": parts[0], "last_author_email": parts[1]}
+
+
+def available(root: str) -> bool:
+    """Whether this provider can serve ``root`` at all.
+
+    THE QUESTION Ω-1 CANNOT ASK. ``discovery.tracked_python`` raises when git is absent, because it
+    has no notion of a provider being unavailable — there is nothing else it could do. A registry
+    that must choose between providers needs a probe that answers rather than raises, and this is
+    it: a directory with no git available, or no repository, is not an error here. It is a fact that
+    makes the filesystem provider the resolution.
+    """
+    if not os.path.isdir(root):
+        return False
+    try:
+        return _run(root, "rev-parse", "--is-inside-work-tree").strip() == "true"
+    except ProviderError:
+        return False

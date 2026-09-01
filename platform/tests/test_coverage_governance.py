@@ -41,7 +41,7 @@ def test_real_repository_is_deterministic_and_fail_closed():
     svc = bootstrap_coverage()
     # Deterministic recompute.
     assert svc.fingerprint() == bootstrap_coverage().fingerprint()
-    # Structural integrity holds on the committed repository (fail-closed verify).
+    # Structural integrity holds on the measured working tree (fail-closed verify).
     v = svc.verify()
     assert v.ok
     # Baseline certification (structural + determinism) succeeds; strict reflects gaps.

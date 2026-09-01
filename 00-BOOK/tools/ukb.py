@@ -48,6 +48,8 @@ SCHEMA_DIR = os.path.join(BOOK_DIR, "SCHEMAS")
 sys.path.insert(0, HERE)
 import config as C  # noqa: E402
 import governance_telemetry as T  # noqa: E402  (the one runtime-telemetry authority)
+sys.path.insert(0, REPO)  # the repository root, so `engine.*` resolves from a script run
+from engine import ledger_authority as LA  # noqa: E402  (the one identity-ledger write chokepoint)
 
 LEDGER_PATH = os.path.join(DATA_DIR, "id-ledger.json")
 ARTIFACTS_PATH = os.path.join(DATA_DIR, "artifacts.json")
@@ -920,10 +922,47 @@ def upn(n: int) -> str:
     return f"UPN-{n:09d}"
 
 
+def _authorization(args):
+    """The permit a ledger write is authorized by, or the VERIFIED claim that it allocates none.
+
+    WHY THIS EXISTS. `permit` is a REQUIRED argument of `ledger_authority.commit` with no
+    default, deliberately: its docstring records that a default "would convert the loudest
+    possible failure into a silent bypass". The call sites here passed
+    `getattr(args, "permit", None)`, and `None` is not an authorization — it is the absence of
+    one. Every `ukb.py build --mint` therefore died with
+
+        PermitRefused: permit must be a permit_id string or NO_ALLOCATION; got None
+
+    which is accurate and useless. It fired on the IDEMPOTENT re-runs too, the ones that
+    allocate nothing at all, so `register.sh` — the "single, idempotent, all-or-nothing"
+    registration transaction — could not complete even when there was nothing to authorize.
+    That is the deadlock: the only path that registers artifacts was unreachable, which is why
+    tracked artifacts stayed unregistered while the PRE gate reported PASS.
+
+    WHY SUBSTITUTING THE SENTINEL IS NOT A BYPASS, which is the whole question. NO_ALLOCATION is
+    not a weaker permit; it is a CLAIM THAT IS CHECKED. `_verify_permit` measures the proposed
+    write against the on-disk pre-image and refuses the sentinel the moment the write allocates
+    OR mutates any top-level key, naming the manifest a permit must be obtained for. So:
+
+      * a re-run that allocates nothing proceeds, and is verified to have allocated nothing;
+      * a real allocation is still REFUSED unless `--permit` names a permit bound to that exact
+        manifest, pre-image and HEAD;
+      * the operator gets an actionable message instead of a type complaint.
+
+    The authority of the permit register is unchanged. What changes is that asking for no
+    authorization now means "I assert this needs none, prove me wrong" rather than "I forgot".
+    """
+    permit = getattr(args, "permit", None)
+    return permit if permit else LA.NO_ALLOCATION
+
+
 def cmd_build(args):
     # Observation is the DEFAULT: no invocation may mutate canonical identity state by
     # omission. Minting is reserved to the REG-AUTO-001 transaction, which requests it.
-    mint = bool(getattr(args, "mint", False))
+    # `--plan` previews what `--mint` WOULD allocate, so it must take the minting code
+    # path in memory. It returns before the first write (see the `if mint:` block below),
+    # so an operator can obtain a manifest digest without typing the irreversible verb.
+    mint = bool(getattr(args, "mint", False)) or bool(getattr(args, "plan", False))
     unminted = []          # observation mode: eligible paths that hold no identity yet
     ledger = load_ledger()
     # Seed the in-process discovered-volume map from the append-only ledger so
@@ -1276,7 +1315,27 @@ def cmd_build(args):
     # because the only sound guarantee that an observation minted nothing is that the
     # write is unreachable. See GOVERNED-EVOLUTION-STATE-DETERMINATION.md.
     if mint:
-        _dump_json(LEDGER_PATH, ledger)
+        # THE chokepoint (UCOS-LEDGER-AUTHORITY-001). Routed rather than written
+        # directly so the allocation report is derived from the on-disk pre-image
+        # instead of from this function's own bookkeeping — a mint here can no longer
+        # be reported as a no-op by a counter that does not know about it.
+        _actor = "UMB-IMP-001 :: ukb.py build --mint"
+        if getattr(args, "plan", False):
+            # READ-ONLY preview. Returns BEFORE the ledger write and before every
+            # derived view below, so `--plan` writes nothing at all. Safe because no
+            # write precedes this point in cmd_build.
+            _m = LA.plan(LEDGER_PATH, ledger, actor=_actor)
+            print(LA.format_report(_m))
+            print(f"  manifest_digest : {_m['digest']}")
+            print(f"  preimage_digest : {_m['preimage_digest']}")
+            print(f"  head            : {_m['head']}")
+            print("PLAN ONLY — nothing written, no identity allocated.")
+            return 0
+        print(LA.format_report(LA.commit(
+            LEDGER_PATH, ledger,
+            actor=_actor,
+            writer=_dump_json,
+            permit=_authorization(args))))
     _dump_json(ARTIFACTS_PATH, {"generated_at": _now(),
                                 "generator_version": C.GENERATOR_VERSION,
                                 "count": len(art_list), "artifacts": art_list})
@@ -1302,8 +1361,11 @@ def cmd_build(args):
           + ("" if mint else "  [OBSERVATION — nothing minted, ledger not written]"))
     if unminted:
         print(f"  OBSERVATION: {len(unminted)} eligible path(s) hold no identity and were "
-              f"not projected. Minting is an evolution act — run the REG-AUTO-001 "
-              f"transaction (register.sh) to allocate identity for them.")
+              "not projected. Identity allocation is an IRREVERSIBLE evolution act "
+              "governed by REG-AUTO-001 "
+              "(00-BOOK/DATA/mutation-governance-boundary.json). Obtain that "
+              "authorization; this observation does not authorize an operator to "
+              "invoke allocation.")
     _spine_pop = sum(1 for a in art_list
                      if any(a["traceability"][k] for k in a["traceability"]))
     _etypes = Counter(e["type"] for e in edges)
@@ -2112,8 +2174,30 @@ def cmd_enforce(args):
         for v in violations[:20]:
             print("  -", v)
         sys.exit(1)
-    print(f"ENFORCEMENT PASSED — no unregistered or invalid artifact "
-          f"can silently enter the corpus.")
+    # THE PASS MESSAGE STATES WHAT THIS MODE MEASURED, which the single sentence it replaces did
+    # not. PRE printed "no unregistered or invalid artifact can silently enter the corpus" while
+    # `hard` deliberately excludes registration: in PRE, an artifact is a violation only if it is
+    # unregistered AND invalid/unclassified/unreconciled. That is the right gate — a gate that
+    # refused every unregistered artifact would refuse the ones the transaction exists to
+    # register — but the claim was parity, and parity is the POST gate's question. Nine artifacts
+    # were committed unregistered while this line reported that none could be.
+    if pre:
+        pending = len(unregistered)
+        note = (
+            f" {pending} eligible artifact(s) await registration; PARITY is asserted by the "
+            f"POST gate (`ukb.py enforce`), not here."
+            if pending
+            else " Nothing awaits registration."
+        )
+        print(
+            f"ENFORCEMENT PASSED [{gate_label}] — every artifact awaiting registration is "
+            f"valid, classified and reconciled.{note}"
+        )
+    else:
+        print(
+            f"ENFORCEMENT PASSED [{gate_label}] — every eligible artifact is registered, "
+            f"valid, classified and reconciled; no unregistered artifact is in the corpus."
+        )
 
 
 def cmd_eligibility(args):
@@ -2341,7 +2425,20 @@ def _exec_declare(args):
                      "(declare dependencies first; EXL-17 closed/acyclic)")
     eid = allocate_execution(ledger, args.key)
     if eid in doc["executions"]:
-        _dump_json(LEDGER_PATH, ledger)          # idempotent re-declare — no-op
+        # idempotent re-declare — no-op. Still routed through the chokepoint so that
+        # "no allocation" is a MEASURED statement about the pre-image rather than an
+        # assumption this branch makes about itself.
+        #
+        # NO_ALLOCATION is correct HERE BY CONSTRUCTION, not by assumption: this branch
+        # is reached only when `allocate_execution` resolved an EXISTING key, which
+        # returns without touching `category_seq` or `by_execution`. The sentinel is
+        # still verified against the measured pre-image, so if that ever stops being
+        # true the write is refused rather than silently permitted.
+        print(LA.format_report(LA.commit(
+            LEDGER_PATH, ledger,
+            actor="EXEC-REG-001 :: ukb.py exec declare (idempotent)",
+            writer=_dump_json,
+            permit=LA.NO_ALLOCATION)))
         print(f"execution already declared: {eid} (idempotent no-op)")
         return
     now = _now()
@@ -2358,7 +2455,11 @@ def _exec_declare(args):
                          "at": now, "note": args.note or "declared"}],
         "first_seen": now, "last_transition_at": now, "last_transition_seq": 1,
     }
-    _dump_json(LEDGER_PATH, ledger)
+    print(LA.format_report(LA.commit(
+        LEDGER_PATH, ledger,
+        actor="EXEC-REG-001 :: ukb.py exec declare",
+        writer=_dump_json,
+        permit=_authorization(args))))
     _exec_save(doc)
     print(f"declared {eid}  [{etype}/{ecat}] subject={subject or '—'} state=declared")
 
@@ -2450,6 +2551,14 @@ def main():
                          "for the REG-AUTO-001 registration transaction (register.sh). "
                          "Without it, build OBSERVES: it allocates nothing, writes no ledger, "
                          "and regenerates derived views only.")
+    bp.add_argument("--permit", default=None,
+                    help="permit_id from 00-BOOK/DATA/allocation-permits.json authorizing "
+                         "this allocation. Required with --mint: the authority refuses an "
+                         "unauthorized write before anything is persisted.")
+    bp.add_argument("--plan", action="store_true",
+                    help="READ-ONLY: measure and print exactly what --mint would allocate "
+                         "(identifiers, counter advances, manifest digest) and write "
+                         "nothing. Use this to obtain the digest a permit must quote.")
 
     sp = sub.add_parser("search", help="Search the knowledge base.")
     sp.add_argument("query", nargs="?", default="")
@@ -2500,6 +2609,11 @@ def main():
     xp.add_argument("--note", help="Transition/declaration note (recorded, secret-free).")
     xp.add_argument("--depends", nargs="*", help="Execution dependencies (existing UCOS-EXEC-* ids).")
     xp.add_argument("--state", help="Filter `list` by lifecycle state.")
+    xp.add_argument("--permit", default=None,
+                    help="permit_id from 00-BOOK/DATA/allocation-permits.json authorizing a "
+                         "`declare` that allocates a new execution identity. Not needed for "
+                         "an idempotent re-declare, which allocates nothing and is verified "
+                         "as such by the authority.")
 
     args = ap.parse_args()
     handler = {"build": cmd_build, "search": cmd_search, "trace": cmd_trace,

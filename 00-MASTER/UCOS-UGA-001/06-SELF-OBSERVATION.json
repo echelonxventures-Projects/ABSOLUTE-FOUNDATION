@@ -7,21 +7,21 @@
   "evidence_class": "IMPROVEMENT",
   "may_influence_certification": false,
   "observation": {
-    "total_objects": 6777,
+    "total_objects": 6916,
     "by_object_class": {
-      "CONFIGURATION_OBJECT": 36,
-      "DATA_OBJECT": 132,
-      "DOCUMENT_ARTIFACT": 1597,
+      "CONFIGURATION_OBJECT": 37,
+      "DATA_OBJECT": 138,
+      "DOCUMENT_ARTIFACT": 1658,
       "EXCLUDED_DOCUMENT": 2804,
-      "EXECUTABLE_OBJECT": 1330,
-      "TEST_OBJECT": 842,
-      "TOOLING_OBJECT": 36
+      "EXECUTABLE_OBJECT": 1369,
+      "TEST_OBJECT": 873,
+      "TOOLING_OBJECT": 37
     },
     "by_lifecycle": {
-      "AUTHORED": 6432,
+      "AUTHORED": 6571,
       "GENERATED": 345
     },
-    "distinct_owners": 287,
+    "distinct_owners": 293,
     "top_owners": [
       {
         "owner": "00-BOOK/PORTAL",
@@ -29,15 +29,15 @@
       },
       {
         "owner": "UCOS-REPOSITORY-ROOT",
-        "objects": 452
+        "objects": 504
       },
       {
         "owner": "platform/tests",
-        "objects": 347
+        "objects": 348
       },
       {
         "owner": "engine/tests",
-        "objects": 297
+        "objects": 327
       },
       {
         "owner": "service/_evidence",
@@ -64,10 +64,10 @@
         "objects": 92
       }
     ],
-    "objects_with_dependencies": 2009,
-    "dependency_edges": 10223,
+    "objects_with_dependencies": 2070,
+    "dependency_edges": 10457,
     "producers_bound_to_outputs": 42,
-    "retired_identities": 2
+    "retired_identities": 8
   },
   "analysis": {
     "deviations": []

@@ -1,0 +1,34 @@
+{
+  "authority": "NONE — DERIVED TRUTH. Every value here is a measurement, never a choice.",
+  "best": {
+    "engines_without_tests": 25.0,
+    "executable_outside_denominator": 64.0,
+    "files_with_no_execution_path": 10.0,
+    "single_plane_engines": 14.0,
+    "ungoverned_executables": 26.0,
+    "unmeasured_governance_engines": 39.0
+  },
+  "corrections": [],
+  "floors": [],
+  "holds": {
+    "engines_without_tests": 2,
+    "executable_outside_denominator": 2,
+    "files_with_no_execution_path": 2,
+    "single_plane_engines": 2,
+    "ungoverned_executables": 2,
+    "unmeasured_governance_engines": 2
+  },
+  "how_to_read": "best[m] is the lowest value of metric m this repository has ever recorded. A run measuring more than best[m] is REFUSED unless justifications names m with a reason. A justification permits one run and never moves best[m], so a regression cannot become the new normal by being explained. holds[m] counts consecutive runs at an unchanged value; a CONVERGENT metric held at a non-zero value for 5 runs is reported STALLED, because an exemption class that stops shrinking has become a convention. floors[m] argues that a particular value IS m's floor and so accepts the stall — it does NOT excuse a regression, and it is refused as stale the moment m is measured below it.",
+  "justifications": [],
+  "kinds": {
+    "engines_without_tests": "CONVERGENT",
+    "executable_outside_denominator": "CONVERGENT",
+    "files_with_no_execution_path": "MONOTONIC",
+    "single_plane_engines": "CONVERGENT",
+    "ungoverned_executables": "CONVERGENT",
+    "unmeasured_governance_engines": "CONVERGENT"
+  },
+  "producer": "engine/universal_discovery/ratchet.py",
+  "schema": "ucos-omega-ratchet",
+  "version": "1.0.0"
+}

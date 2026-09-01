@@ -138,7 +138,21 @@ DEC = _load_decision_engine()
 ACTION_MODIFIES = {a: bool(spec["modifies_knowledge"])
                    for a, spec in DEC.ACTION_REGISTRY.items()}
 
-DEFAULT_EVIDENCE_ROOT = Path.home() / "Desktop" / "KNOWLEDGE-ASSIMILATION"
+# --- Evidence roots, in resolution order (RC-0014) --------------------------------------------
+#
+# WHY THIS CHANGED. The evidence lived at ~/Desktop/KNOWLEDGE-ASSIMILATION — outside the
+# repository, on one machine, untracked. Measured consequence: a clean checkout could REPLAY the
+# registers (`--render`) but could never RE-DERIVE them, because the engine fail-closes without
+# the tree. The chain of custody from evidence to the 23,859 assimilated objects was therefore
+# unverifiable anywhere but here, and every register and certification downstream of it inherited
+# that. Absolute paths from that root were also written into four committed governed artifacts.
+#
+# The six files the engine actually reads total ~37 MB, so they are now VENDORED and tracked.
+# The 4 GB of EXPORT-ARCHIVEs that UKAP-001 consumes are not, and cannot be — those remain
+# digest-verified external evidence, which is a different contract handled in corpus_engine.py.
+VENDORED_EVIDENCE_ROOT = HERE / "evidence-vendored"
+LEGACY_EVIDENCE_ROOT = Path.home() / "Desktop" / "KNOWLEDGE-ASSIMILATION"
+DEFAULT_EVIDENCE_ROOT = LEGACY_EVIDENCE_ROOT
 EVIDENCE_FILES = {
     "knowledge_base": "output/knowledge/knowledge_base.json",
     "gaps": "output/knowledge/gaps.json",
@@ -476,8 +490,45 @@ def head_commit() -> str:
     return (git("rev-parse", "--short", "HEAD") or "unknown").strip()
 
 
+def repo_relative(path: Path) -> str:
+    """``path`` relative to the repository when it is inside it, else the absolute path.
+
+    A governed artifact records WHAT it consumed, and a machine-specific absolute path answers
+    that question only on one machine. Evidence that genuinely lives outside the repository is
+    still reported absolutely — hiding that would be worse than stating it, because the reader
+    must be able to see that the input was external.
+    """
+    try:
+        return str(path.resolve().relative_to(REPO.resolve()))
+    except ValueError:
+        return str(path)
+
+
 def evidence_root() -> Path:
-    return Path(os.environ.get("UAKOS_EVIDENCE_ROOT", str(DEFAULT_EVIDENCE_ROOT))).expanduser()
+    """Where the frozen evidence is read from. In-repo by default, so a clean clone can measure.
+
+    ORDER, and each position earns its place:
+
+      1. ``$UAKOS_EVIDENCE_ROOT`` — an EXPLICIT operator override always wins, so a caller
+         measuring against a different evidence set says so, and so the absent-evidence path
+         stays reachable and testable.
+      2. ``evidence-vendored/`` beside this engine — tracked, hash-locked by
+         ``EVIDENCE-MANIFEST.json`` and by git itself. This is what makes full measurement
+         reproducible from a fresh clone with no external tree and no configuration.
+      3. ``~/Desktop/KNOWLEDGE-ASSIMILATION`` — the legacy machine-local root, kept only so an
+         existing checkout that has not yet fetched the vendored evidence still resolves. It is
+         last, so it can no longer shadow the governed copy.
+
+    Position 2 is what closes RC-0014 for this capability: the engine's inputs are now inside the
+    artifact that depends on them, which is the only arrangement under which "regenerate from a
+    clean checkout and compare" is a question a fresh clone can even ask.
+    """
+    override = os.environ.get("UAKOS_EVIDENCE_ROOT")
+    if override:
+        return Path(override).expanduser()
+    if (VENDORED_EVIDENCE_ROOT / EVIDENCE_FILES["knowledge_base"]).is_file():
+        return VENDORED_EVIDENCE_ROOT
+    return LEGACY_EVIDENCE_ROOT.expanduser()
 
 
 def norm_tokens(text: str, acronyms: dict[str, str]) -> tuple[str, ...]:
@@ -1187,7 +1238,13 @@ def build(evroot: Path) -> dict:
             raise SystemExit(
                 f"{PROGRAM}: FAIL-CLOSED — external evidence missing: {path}\n"
                 f"  set UAKOS_EVIDENCE_ROOT, or run with --render to replay from assimilation.json")
-        manifest[key] = dict(path=str(path), relative=rel, bytes=path.stat().st_size,
+        # `path` IS REPOSITORY-RELATIVE WHENEVER IT CAN BE, and absolute only when the evidence
+        # genuinely sits outside the repository. It used to be `str(path)` unconditionally, which
+        # wrote `/Users/<somebody>/Desktop/…` into a COMMITTED governed artifact — an attestation
+        # naming a location that exists on one machine. Five other capabilities already refuse a
+        # `/Users/` fragment in their reports (uci, ucon, uec, urke, mutation gates); this one
+        # emitted them. A relative path is also the only form a fresh clone can resolve.
+        manifest[key] = dict(path=repo_relative(path), relative=rel, bytes=path.stat().st_size,
                              sha256=sha256_file(path))
 
     kb = json.loads((evroot / EVIDENCE_FILES["knowledge_base"]).read_text(encoding="utf-8"))
@@ -1216,7 +1273,7 @@ def build(evroot: Path) -> dict:
         mission="Constitutional assimilation & repository completion (final closure)",
         authority="NONE — DERIVED TRUTH (fail-closed, TRACK-001)",
         head_commit=head_commit(),
-        evidence_root=str(evroot),
+        evidence_root=repo_relative(evroot),
         evidence_manifest=manifest,
         repository_index=idx_stats,
         verified_objects=len(rows),
@@ -2646,6 +2703,40 @@ def main() -> int:
             encoding="utf-8")
 
     written = render(payload)
+
+    # --- RC-0008: payload currency, DETECTED and REPORTED ------------------------------------
+    #
+    # THE DEFECT THIS MEASURES. `--render` replays a stored payload and rewrites the registers
+    # from it, and the CI drift gate then asserts `rendered output == recorded payload`. That is
+    # internal consistency; it says nothing about whether the payload still describes the
+    # repository. Measured: the committed payload recorded HEAD `bb9c27d2` while HEAD was
+    # `77798202` — 56 commits of drift, through which every gate reported PASS, because no check
+    # anywhere compared the two. A payload of any age renders to a self-consistent fixed point
+    # forever.
+    #
+    # NON-BLOCKING BY DESIGN, AND THE REASON IS A DEPENDENCY, NOT TIMIDITY. Refusing on drift
+    # requires that re-derivation be possible wherever the gate runs. For this capability that is
+    # now true — the evidence is vendored — but the currency contract is shared with UKAP-001,
+    # whose ~4 GB corpus stays external. Making it blocking before that lands would fail CI for
+    # every checkout that does not hold the corpus, which is precisely why enforcement was never
+    # added and the drift went unseen. So: measured, printed, recorded in the payload, and
+    # promotable to blocking by changing one flag once RC-0014 closes for UKAP-001.
+    # NOT PERSISTED, deliberately. Currency is a relation between a stored payload and the live
+    # repository, not a property of the payload. Writing it in would make `assimilation.json`
+    # change every time HEAD moves, which would break the register drift gate that compares the
+    # rendered output against the recorded payload — trading a silent staleness for a permanent
+    # false positive. It is measured and reported on every run instead.
+    recorded = str(payload.get("head_commit") or "")
+    live = head_commit()
+    if recorded and recorded != live:
+        distance = (git("rev-list", "--count", f"{recorded}..HEAD") or "").strip() or "unknown"
+        print(
+            f"  CURRENCY DRIFT (reported, not blocking): payload records HEAD {recorded}, "
+            f"repository is at {live} — {distance} commit(s) ahead. The registers describe a "
+            f"tree that is no longer this one; regenerate with a full measure to refresh them.",
+            file=sys.stderr,
+        )
+
     st = payload["states"]
     da = payload["decision_actions"]
     print(f"{PROGRAM}: {payload['determination']} | objects={payload['verified_objects']} "

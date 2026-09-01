@@ -29,6 +29,7 @@ import sys
 
 import pytest
 
+from engine.universal_discovery.discovery import clear_derived_scope_cache
 from engine.verification_intelligence import gate as uvi_gate
 from engine.verification_intelligence.constitution import (
     execution_contract,
@@ -1218,16 +1219,64 @@ def test_the_floor_is_evaluated_over_combined_data_and_refuses_when_there_is_non
     assert "no coverage data" in stream.getvalue()
 
 
+def test_the_floor_refuses_an_interpreter_that_cannot_measure_it(tmp_path) -> None:
+    """A toolchain that cannot evaluate the floor must FAULT, not fail thirteen times.
+
+    Every shard inherits the caller's interpreter, and every floor-mode argv carries pytest-cov's
+    options. Under an interpreter without pytest-cov all shards exit 4 on `unrecognized
+    arguments` before collecting anything, and the run reported `shard(s) FAILED` — which reads
+    as a test failure rather than as a toolchain that cannot measure. Measured: a bare `python3`
+    on a machine whose default series is not the pinned one reproduces it exactly.
+    """
+    import io
+    import stat
+
+    from engine.verification_intelligence.execution import run_tests
+
+    # An "interpreter" that cannot import pytest_cov. Standing in for a real one keeps the test
+    # portable: the probe only asks whether `<python> -c "import pytest_cov"` succeeds.
+    shim = tmp_path / "python-without-pytest-cov"
+    shim.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
+    shim.chmod(shim.stat().st_mode | stat.S_IEXEC)
+
+    shard = Shard(index=0, test_paths=("a/test_x.py",), cost_seconds=1.0)
+    out = io.StringIO()
+    code = run_tests((shard,), Coverage.FLOOR_90, python=str(shim), stream=out)
+
+    assert code == 2, "an unmeasurable floor is a FAULT (2), never a test failure (1)"
+    assert "cannot import pytest_cov" in out.getvalue()
+    assert (
+        "shard" not in out.getvalue().lower().split("cannot import")[0]
+    ), "the refusal must come BEFORE any shard is spawned"
+
+    # Without the floor the plugin is not needed, so the same interpreter must NOT be refused
+    # here — requiring it would reject developer runs that would have worked.
+    without = io.StringIO()
+    assert (
+        run_tests((shard,), Coverage.NOT_EVALUATED, python=str(shim), stream=without) != 2
+        or "cannot import pytest_cov" not in without.getvalue()
+    )
+
+
 def test_the_shard_command_keeps_addopts_under_the_floor_and_drops_them_without_it() -> None:
     """The denominator must not depend on how the run was scheduled."""
     from engine.verification_intelligence.execution import _shard_argv
 
     shard = Shard(index=0, test_paths=("a/test_x.py",), cost_seconds=1.0)
-    under_floor = _shard_argv("py", shard, Coverage.FLOOR_90)
+    under_floor = _shard_argv("py", shard, Coverage.FLOOR_90, report_path="uvi-coverage-x/s0.xml")
     assert "-o" not in under_floor, "clearing addopts would drop every --cov argument"
     assert "--cov-fail-under=0" in under_floor, "the floor is evaluated once, over combined data"
-    assert "--cov-report=" in under_floor
+    # The XML report is REDIRECTED, never cleared. `--cov-report=` does not suppress
+    # anything once addopts has already named a report: pytest-cov keys reports by TYPE
+    # and only collapses to none when the empty entry is the only one. Naming `xml` again
+    # replaces it, which is what keeps twelve concurrent shards from each writing
+    # `coverage.xml` into the repository root — the file the UCI gate reads as evidence.
+    assert "--cov-report=xml:uvi-coverage-x/s0.xml" in under_floor
+    assert "--cov-report=" not in under_floor, "an empty report entry suppresses nothing here"
     assert under_floor[-1] == "a/test_x.py"
+
+    # No report path is still accepted, and still never writes into the repository.
+    assert "--cov-report=" in _shard_argv("py", shard, Coverage.FLOOR_90)
 
     without = _shard_argv("py", shard, Coverage.NOT_EVALUATED)
     assert without[3:5] == ["-o", "addopts="] and "--no-cov" in without
@@ -1528,9 +1577,32 @@ def test_a_registry_holding_no_entries_is_refused(tmp_path) -> None:
         load_substrates(str(tmp_path))
 
 
-def test_a_pytest_configuration_declaring_no_testpaths_is_refused(tmp_path) -> None:
-    (tmp_path / "pyproject.toml").write_text("[tool.pytest.ini_options]\n", encoding="utf-8")
-    with pytest.raises(VerificationIntelligenceError, match="no testpaths"):
+def test_a_tree_with_no_discoverable_suite_is_refused(tmp_path) -> None:
+    """The premise moved from a declaration to a measurement, and the refusal is unchanged.
+
+    This test used to write an empty ``[tool.pytest.ini_options]`` and require "no testpaths". Under
+    UCOS-OMEGA-001 the collection set is derived from which directories hold suites, so the way to
+    have no collectible set is to have no suite — and that is what is built here. A tree whose suite
+    is invisible would be certified by running nothing, which is the state this refuses.
+    """
+    (tmp_path / "pyproject.toml").write_text("[tool.ucos]\n", encoding="utf-8")
+    source = tmp_path / "layer" / "core"
+    source.mkdir(parents=True)
+    (source / "mod.py").write_text("VALUE = 1\n", encoding="utf-8")
+    subprocess.run(  # noqa: S603
+        ["git", "init", "-q"],  # noqa: S607
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(  # noqa: S603
+        ["git", "add", "-A"],  # noqa: S607
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+    )
+    clear_derived_scope_cache()
+    with pytest.raises(VerificationIntelligenceError, match="invisible to discovery|no test root"):
         collection_roots(str(tmp_path))
 
 
@@ -1943,7 +2015,25 @@ def test_the_shards_collect_exactly_the_tests_the_whole_suite_collects() -> None
             if "::" in line and not line.startswith(" ")
         }
 
-    serial = _collect([sys.executable, "-m", "pytest", "-o", "addopts=", "--no-cov", "-q"])
+    # `-o addopts=` blanks the configured options, and under UCOS-OMEGA-001 that removes the
+    # `-p engine.universal_discovery.pytest_scope` entry that DERIVES the collection set. So the
+    # plugin is re-supplied explicitly: without it this baseline has neither the derived roots nor
+    # a `testpaths` to fall back on, pytest collects the whole rootdir instead, and the gitignored
+    # generated tree `realization/tests` contributes 90 tests that no shard can contain — a
+    # difference in the BASELINE reported as tests missing from the shards.
+    serial = _collect(
+        [
+            sys.executable,
+            "-m",
+            "pytest",
+            "-o",
+            "addopts=",
+            "-p",
+            "engine.universal_discovery.pytest_scope",
+            "--no-cov",
+            "-q",
+        ]
+    )
     assert serial, "the whole suite collected nothing; the comparison would be vacuous"
 
     plan = build_plan("integration")
@@ -2013,9 +2103,39 @@ def _substrate_fixture(tmp_path, **overrides):
         target = tmp_path / name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(json.dumps(document), encoding="utf-8")
-    (tmp_path / "pyproject.toml").write_text(
-        '[tool.pytest.ini_options]\ntestpaths = ["engine/tests"]\n', encoding="utf-8"
+    (tmp_path / "pyproject.toml").write_text("[tool.ucos]\n", encoding="utf-8")
+
+    # THE COLLECTION SET IS NOW DERIVED, so this fixture must give the derivation something to
+    # derive FROM. It used to declare `testpaths = ["engine/tests"]` and that was enough, because
+    # `collection_roots` read the list. Under UCOS-OMEGA-001 there is no list: the roots come from
+    # which directories hold suites in the TRACKED population, so the fixture writes a real test
+    # module and initialises a real git repository. That is the same boundary the gate uses, and a
+    # fixture that skipped git would exercise a path the gate never takes.
+    suite = tmp_path / "engine" / "tests"
+    suite.mkdir(parents=True, exist_ok=True)
+    (suite / "test_a.py").write_text("def test_a():\n    pass\n", encoding="utf-8")
+    (tmp_path / "a.py").write_text("VALUE = 1\n", encoding="utf-8")
+    # A source package, so the derivation has a non-empty denominator. A repository with a suite and
+    # no measurable source is refused by Ω-1 as "a number about nothing", which is correct for a
+    # repository and wrong for a fixture claiming to be a VALID substrate tree.
+    core = tmp_path / "engine" / "core"
+    core.mkdir(parents=True, exist_ok=True)
+    (core / "mod.py").write_text("def run():\n    return 1\n", encoding="utf-8")
+    subprocess.run(  # noqa: S603 - fixed argv, no shell
+        ["git", "init", "-q"],  # noqa: S607 - git from PATH by design
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
     )
+    subprocess.run(  # noqa: S603
+        ["git", "add", "-A"],  # noqa: S607
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+    )
+    # The derivation memoises per root. Each fixture gets a fresh tmp_path so the key differs, but
+    # clearing is cheap and makes the fixture independent of that fact.
+    clear_derived_scope_cache()
     return tmp_path
 
 
@@ -2095,19 +2215,72 @@ def test_malformed_entries_are_skipped_rather_than_crashing(tmp_path) -> None:
     assert substrates.capability_of_owner == {"engine": "engine"}
 
 
-def test_a_tree_whose_registry_and_pytest_config_disagree_is_a_fault(tmp_path) -> None:
+def test_a_moved_suite_is_still_collected_rather_than_silently_dropped(tmp_path) -> None:
+    """FAIL WIDE, re-asserted after the collection set became derived.
+
+    The premise of the original test is now unreachable, and that is an improvement worth stating.
+    It wrote ``testpaths = ["somewhere/else"]`` and expected "no collectible test object" — a
+    registry projecting nothing because the declared root did not exist. Under UCOS-OMEGA-001 the
+    roots are DERIVED FROM the test files themselves, so a discovered root always contains at least
+    one collectible module and "points at nothing" is not a state a declaration can produce.
+
+    What must still hold is the law that mattered: a test the registry does not know about is
+    ADMITTED as unregistered, never dropped. So the suite is moved out from under its registry entry
+    and the registry must contain the moved file and not the stale one.
+    """
     root = _substrate_fixture(tmp_path)
-    (root / "pyproject.toml").write_text(
-        '[tool.pytest.ini_options]\ntestpaths = ["somewhere/else"]\n', encoding="utf-8"
+    moved = root / "elsewhere" / "checks"
+    moved.mkdir(parents=True, exist_ok=True)
+    (moved / "test_a.py").write_text("def test_a():\n    pass\n", encoding="utf-8")
+    (root / "engine" / "tests" / "test_a.py").unlink()
+    subprocess.run(  # noqa: S603
+        ["git", "add", "-A"],  # noqa: S607
+        cwd=root,
+        check=True,
+        capture_output=True,
     )
+    clear_derived_scope_cache()
+    assert collection_roots(str(root)) == (
+        "elsewhere",
+    ), "the suite moved and discovery did not follow it, so this test proves nothing"
+
+    registry = build_test_registry(load_substrates(str(root)), str(root))
+    assert (
+        "elsewhere/checks/test_a.py" in registry.paths
+    ), "the moved test was dropped from the run, which is the defect FAIL WIDE exists to prevent"
+    assert (
+        "engine/tests/test_a.py" not in registry.paths
+    ), "a registry entry for a file that no longer exists was projected as collectible"
+    assert (
+        "elsewhere/checks/test_a.py" in registry.unregistered
+    ), "the moved test carries a registration it never received"
+
+
+def test_a_registry_that_projects_nothing_is_still_a_fault(tmp_path, monkeypatch) -> None:
+    """The refusal above must remain REACHABLE, or removing it would cost nothing.
+
+    Discovery can no longer produce a root that holds no test module, so the branch is driven
+    directly: a root that does not exist yields no collectible object and the projection must fault
+    rather than return an empty run.
+    """
+    root = _substrate_fixture(tmp_path)
+    from engine.verification_intelligence import registry as registry_module
+
+    monkeypatch.setattr(registry_module, "collection_roots", lambda _root=None: ("nowhere/at/all",))
     with pytest.raises(VerificationIntelligenceError, match="no collectible test object"):
         build_test_registry(load_substrates(str(root)), str(root))
 
 
-def test_an_unreadable_pytest_configuration_is_a_fault(tmp_path) -> None:
+def test_an_unreadable_declaration_is_a_fault(tmp_path) -> None:
+    """A malformed ``pyproject.toml`` is a FAULT, never a default.
+
+    The declared inputs Ω-1 still reads from that file — the exemption register and the coverage
+    floor — are judgements, and an unparseable judgement must not silently become "no exemptions".
+    """
     root = _substrate_fixture(tmp_path)
     (root / "pyproject.toml").write_text("[tool.pytest\n", encoding="utf-8")
-    with pytest.raises(VerificationIntelligenceError, match="unreadable"):
+    clear_derived_scope_cache()
+    with pytest.raises(VerificationIntelligenceError, match="unreadable|could not be derived"):
         collection_roots(str(root))
 
 

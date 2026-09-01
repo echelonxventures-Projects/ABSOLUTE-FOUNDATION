@@ -363,13 +363,13 @@
       "locations": [
         {
           "form": "DIRECTORY",
-          "location": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION/46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-08-02-36-04-5fc64362b35342e1ba7e6f1eba6ed88c",
-          "root": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION"
+          "location": "external:46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-08-02-36-04-5fc64362b35342e1ba7e6f1eba6ed88c",
+          "root": "external:KNOWLEDGE-ASSIMILATION"
         },
         {
           "form": "ZIP",
-          "location": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION/46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-08-02-36-04-5fc64362b35342e1ba7e6f1eba6ed88c.zip",
-          "root": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION"
+          "location": "external:46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-08-02-36-04-5fc64362b35342e1ba7e6f1eba6ed88c.zip",
+          "root": "external:KNOWLEDGE-ASSIMILATION"
         }
       ],
       "members": [
@@ -800,13 +800,13 @@
       "locations": [
         {
           "form": "DIRECTORY",
-          "location": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION/46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-29-12-03-41-1d48b6b6d0504018bba29c16b1c54e80",
-          "root": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION"
+          "location": "external:46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-29-12-03-41-1d48b6b6d0504018bba29c16b1c54e80",
+          "root": "external:KNOWLEDGE-ASSIMILATION"
         },
         {
           "form": "ZIP",
-          "location": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION/46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-29-12-03-41-1d48b6b6d0504018bba29c16b1c54e80.zip",
-          "root": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION"
+          "location": "external:46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-29-12-03-41-1d48b6b6d0504018bba29c16b1c54e80.zip",
+          "root": "external:KNOWLEDGE-ASSIMILATION"
         }
       ],
       "members": [
@@ -1120,10 +1120,10 @@
     "source": "00-MASTER/UAKOS-PHASE-001B/01-SOURCE-PROVENANCE-REGISTER.md"
   },
   "corpus_roots": [
-    "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION"
+    "external:KNOWLEDGE-ASSIMILATION"
   ],
   "corpus_roots_resolved": [
-    "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION"
+    "external:KNOWLEDGE-ASSIMILATION"
   ],
   "determination": "CORPUS CURRENT",
   "determination_id": "D-1",
@@ -1171,18 +1171,20 @@
   ],
   "evidence_manifest": {
     "assimilation_baseline": {
-      "bytes": 9317315,
+      "bytes": 9337855,
       "relative": "00-MASTER/UAKOS-CLOSURE-008/assimilation.json",
-      "sha256": "68ffba46ab06db0385b46c1e67dbb4ba8c56f970c6ade901a431377ae701fcdb"
+      "sha256": "3d733b1cac02746265b5a9ec8063f7ac518116310a2ededb86635d27c3de6061"
     },
     "export::31b621b2cecc55e8": {
       "bytes": 351,
-      "relative": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION/46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-08-02-36-04-5fc64362b35342e1ba7e6f1eba6ed88c",
+      "external": true,
+      "relative": "external:export/31b621b2cecc55e8",
       "sha256": "31b621b2cecc55e878c8a844ef4748803ef23e9587d88e3fd649dea365d12e84"
     },
     "export::ac1451ac4015cf8b": {
       "bytes": 382,
-      "relative": "/Users/bipin/Desktop/KNOWLEDGE-ASSIMILATION/46244e1f09989bb95cd3e4415961d3e48dbe841d2f72c46166e91c44cbb2ec95-2026-07-29-12-03-41-1d48b6b6d0504018bba29c16b1c54e80",
+      "external": true,
+      "relative": "external:export/ac1451ac4015cf8b",
       "sha256": "ac1451ac4015cf8b05a40856002b673ed175f33d08b9637fa3455a3f25da2fa8"
     },
     "provenance_baseline": {
@@ -1275,7 +1277,7 @@
       "subject": "EXPORT-ARCHIVE"
     }
   ],
-  "head_commit": "bb9c27d2",
+  "head_commit": "77798202",
   "program": "UKAP-001",
-  "seal_sha256": "c335197cfd9bad40539e0bdc66866f541408111f2720641bd9aff0d95e3b4a41"
+  "seal_sha256": "8a8143db552d9ac733fae6288f425bde1c1e6ecc5a397ae917335d985a9763e5"
 }

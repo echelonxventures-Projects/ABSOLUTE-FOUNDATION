@@ -1,42 +1,42 @@
-"""UCOS-COV-SCOPE-001 — the coverage denominator is governed, not assumed.
+"""UCOS-COV-SCOPE-001, under Ω-1 — the coverage denominator is DERIVED, and the derivation is total.
 
-WHY THIS FILE EXISTS, STATED AS THE MEASUREMENT THAT PRODUCED IT.
+WHAT THIS FILE USED TO BE, AND WHY IT WAS NOT ENOUGH.
 
-A coverage percentage is a ratio, and this repository governed only its numerator. The
-denominator was declared **twice** — ``addopts`` carries one ``--cov=`` flag per package,
-``[tool.coverage.run] source`` carries one path per package — two independent lists reconciled
-by nobody. They happened to agree. Nothing required them to, and nothing would have reported it
-if they had stopped.
+It governed two hand-written lists. ``addopts`` carried 78 ``--cov=`` flags, ``[tool.coverage.run]
+source`` carried 78 paths, and this control refused a disagreement between them or an omission from
+both. That was a real improvement over nothing, and it caught real defects. It also had the defect
+of its own kind, twice over, and the second time is the one that mattered:
 
-Worse, a package could be absent from *both* and simply not be measured. Three were:
+    SOURCE_TREES = ("engine", "platform")
 
-    engine.enforcement_closure      711 statements   ← UEC-000001, the closure programme itself
-    engine.constitution           1,976 statements
-    engine.uicm                   1,893 statements   ← and zero test files
+Every question this file asked was scoped by that tuple, so a top-level tree that was neither was
+not a possibility the control REFUSED — it was a question the control never ASKED. Five existed.
+They carried 35,333 statements and 4,121 passing tests, four of the five had test roots that no
+``testpaths`` entry collected, and every test in this file passed throughout. The fix at the time
+was to add a second control and a second enumeration predicate, which bought correctness for the
+sixth tree and nothing for the seventh.
 
-4,580 statements — 5.2% of the source tree — outside a denominator that was reporting 97%. The
-number was not wrong; it was answering a smaller question than it appeared to. UEC-000001 being
-one of the three is the sharpest form of it: the programme that refuses "nothing enforces by
-existing" was itself outside the measurement it imposes.
+Then ``_top_level_packages`` was keyed on ``__init__.py``, and ``engine/recursive_knowledge`` — a
+PEP 420 namespace directory with sixteen modules, 2,849 statements, a live gate, a ``verify.sh``
+stage, a workflow and a 135-test suite — was invisible to it. And ``scripts/``, 281 statements, was
+in no list at all and was found by discovery on its first run.
 
-WHAT THIS FILE REFUSES, in both directions:
+WHAT THIS FILE IS NOW. The lists are gone. ``engine/universal_discovery`` derives the denominator
+and the collection set from ``git ls-files '*.py'``, and this control governs the DERIVATION:
 
-* a package under ``engine/`` or ``platform/`` that is measured by neither list;
-* a package in one scope list and not the other;
-* a declared exclusion that is stale — naming a package that is now measured, or gone.
+  * that it is total — no source package is measured by neither the derivation nor an exemption;
+  * that it is honest — no exemption is stale, and every one carries a reason;
+  * that it is not vacuous — the specific historical misses are pinned BY NAME, so restoring any
+    of the old predicates fails a test that says which defect it reintroduced;
+  * and that it is UNBOUNDED, which is the Ω-1 success criterion and is proved by experiment:
+    ``test_a_tree_that_does_not_exist_yet_is_already_governed`` builds five top-level trees nobody
+    has ever registered and measures that discovery governs all five with zero configuration.
 
-THE EXCLUSION LIST IS THE POINT. Excluding ``engine.uicm`` silently is what kept it invisible.
-Naming it in ``[tool.ucos.coverage_scope]`` with a reason makes the omission arguable, which is
-the only honest form an exclusion can take. An entry that stops being true is itself a refusal,
-so the list cannot rot into a blanket exemption — the same construction
-``$rules_expected_to_claim_no_tracked_path`` uses in the mutation governance boundary.
-
-WHAT THIS FILE DOES NOT CLAIM. It does not measure coverage and does not assert a percentage.
-It governs the SET the percentage is computed over. A partial test run reports a low percentage
-against this same scope and that is arithmetic, not regression: measured on one test file the
-suite reports 23%, on another 0%, and on the whole suite 97%. Only the whole-suite figure means
-anything, which is why ``./verify.sh`` applies the floor after combining every shard and passes
-``--cov-fail-under=0`` to each shard individually.
+WHAT IS STILL DECLARED, AND WHY THAT IS NOT A REGRESSION. ``[tool.ucos.coverage_scope]``
+``excluded_packages`` remains, and must. Ω-5 permits an artifact to sit outside measurement only
+under a disposition that STATES a reason; a silent exclusion is the defect and an arguable one is
+the remedy. It is a register of judgements, not an enumeration of what exists — which is why a
+stale entry is refused in both directions below.
 """
 
 from __future__ import annotations
@@ -48,40 +48,11 @@ from typing import Any
 
 import pytest
 
+from engine.universal_discovery import discovery, graph
+from engine.universal_discovery.model import OmegaError
+
 REPO = Path(__file__).resolve().parents[2]
 PYPROJECT = REPO / "pyproject.toml"
-
-#: The trees whose packages are subject to the denominator. Test packages are excluded by
-#: ``[tool.coverage.run] omit`` and are not source under measurement.
-SOURCE_TREES = ("engine", "platform")
-_NOT_A_SOURCE_PACKAGE = frozenset({"tests"})
-
-#: Top-level directories that are importable Python packages in their own right, rather than
-#: containers of sub-packages. UCI-000001 added this second control because the first one could
-#: not see them: ``SOURCE_TREES`` is ``engine`` and ``platform``, so a top-level package that is
-#: neither was not a third possibility the control refused — it was a question the control never
-#: asked. Five existed, carrying 35,333 statements and 4,121 passing tests, and four of the five
-#: had test roots that no ``testpaths`` entry collected either.
-#:
-#: Discovered from the filesystem rather than listed, so a sixth layer is governed on the day it
-#: appears. The predicate is ``__init__.py`` at the TOP level, which is the right question here
-#: and the wrong one a level down: it distinguishes an importable library surface from a
-#: directory of scripts, whereas inside an already-measured tree it merely distinguishes a
-#: regular package from a namespace one (see ``_packages_present``).
-_TOP_LEVEL_NON_PACKAGES = frozenset({"tests", "docs", "dist", "build"})
-
-
-def _top_level_packages() -> set[str]:
-    """Every top-level importable Python package in the repository."""
-    found: set[str] = set()
-    for child in sorted(REPO.iterdir()):
-        if not child.is_dir() or child.name.startswith("."):
-            continue
-        if child.name in _TOP_LEVEL_NON_PACKAGES:
-            continue
-        if (child / "__init__.py").exists():
-            found.add(child.name)
-    return found
 
 
 @pytest.fixture(scope="module")
@@ -89,370 +60,454 @@ def config() -> dict[str, Any]:
     return tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
 
 
-def _flag_scope(config: dict[str, Any]) -> set[str]:
-    """The packages ``addopts`` measures, as dotted names."""
+@pytest.fixture(scope="module")
+def derived() -> tuple[tuple[str, ...], tuple[str, ...], dict[str, str]]:
+    """``(measurable packages, test roots, declared exemptions)`` — computed, never read.
+
+    Module-scoped because the derivation walks 2,177 files and parses every one of them; asking it
+    once per test would make this file the slowest in the suite for no additional truth.
+    """
+    paths = discovery.tracked_python(str(REPO))
+    import_graph = graph.ImportGraph(str(REPO), paths)
+    test_roots = discovery.derive_test_roots(paths, graph.imported_by_path(import_graph, paths))
+    exemptions, _transient = discovery.read_declared(str(REPO))
+    packages = discovery.derive_measurable_packages(paths, test_roots, exemptions=exemptions)
+    return packages, test_roots, exemptions
+
+
+def _packages_present(paths: tuple[str, ...], test_roots: tuple[str, ...]) -> set[str]:
+    """Every source package the tree actually holds, derived the same way the denominator is.
+
+    NO TREE LIST, and that absence is the whole point of the rewrite. The predicate is "a tracked
+    ``.py`` file at any depth under an importable root, outside a discovered test root", which is
+    strictly wider than ``__init__.py`` (so PEP 420 namespace directories are seen) and strictly
+    narrower than the filesystem (so untracked debris is not).
+    """
+    return set(discovery.derive_measurable_packages(paths, test_roots, exemptions={}))
+
+
+# --------------------------------------------------------------- Ω-1: the derivation is installed
+
+
+def test_the_denominator_is_derived_rather_than_declared(config: dict[str, Any]) -> None:
+    """No enumeration of the denominator may survive in configuration, in either of its two homes.
+
+    Both copies are named because both existed and they were reconciled by nobody. If either comes
+    back, the repository has two answers to one question again, and the one that is wrong will be
+    the one nothing consults.
+    """
+    ini = config["tool"]["pytest"]["ini_options"]
+    flags = [a for a in ini["addopts"] if a.startswith("--cov=")]
+    assert not flags, (
+        "the coverage denominator is enumerated in addopts again; it is derived by "
+        f"engine/universal_discovery and must not be listed: {flags}"
+    )
+    assert "testpaths" not in ini, (
+        "testpaths is declared again; the collection set is derived from which directories hold "
+        "suites, and a static list is what left 3,995 passing tests collected by nothing"
+    )
+    assert "source" not in config["tool"]["coverage"]["run"], (
+        "[tool.coverage.run] source is declared again; it was the second of two lists that had to "
+        "agree and were reconciled by nobody"
+    )
+
+
+def test_the_derivation_is_actually_wired_into_the_test_run(config: dict[str, Any]) -> None:
+    """A derivation nothing invokes is a library, not a control.
+
+    This is the non-vacuity guard for the whole file: every test below could pass while the suite
+    itself measured nothing, if the plugin were simply not loaded.
+    """
     addopts = config["tool"]["pytest"]["ini_options"]["addopts"]
-    return {a.split("=", 1)[1] for a in addopts if a.startswith("--cov=")}
-
-
-def _source_scope(config: dict[str, Any]) -> set[str]:
-    """The packages ``[tool.coverage.run] source`` measures, as dotted names."""
-    return {p.replace("/", ".") for p in config["tool"]["coverage"]["run"]["source"]}
-
-
-def _excluded(config: dict[str, Any]) -> dict[str, str]:
-    declared = config["tool"]["ucos"]["coverage_scope"]["excluded_packages"]
-    return {entry["package"]: entry["reason"] for entry in declared}
-
-
-def _packages_present() -> set[str]:
-    """Every source package in the measured trees, read from the filesystem.
-
-    ENUMERATION IS BY TRACKED MODULE, NOT BY ``__init__.py``, and that distinction is the
-    defect this function was rewritten to close. The original asked ``(child /
-    "__init__.py").exists()``, which is not the question "is this a package Python can
-    import" — it is the question "is this a package of the *regulated* kind". Since PEP 420
-    an implicit namespace directory imports perfectly well without one, so a directory of
-    modules with no ``__init__.py`` was invisible to the control, and being invisible to the
-    control meant being outside the denominator with nothing saying why. That is the exact
-    failure mode the module docstring above describes, reappearing one level up: the guard
-    against unmeasured packages had its own unmeasured-package hole.
-
-    Measured consequence: ``engine/recursive_knowledge`` — 16 modules, 2,849 statements,
-    URKE-000001, a live gate with a ``verify.sh`` stage, a Makefile target, a workflow and a
-    135-test suite — has no ``__init__.py``. It was named by neither scope list and by no
-    exclusion, and every test in this file passed. ``verify.sh`` runs it as
-    ``-m engine.recursive_knowledge.gate``, so the repository imports as a package precisely
-    what this function declined to count as one.
-
-    A directory is therefore a source package if it contains any ``.py`` file at any depth.
-    That predicate is strictly wider than the old one and cannot be satisfied by a naming
-    convention, which is what makes it unable to miss the namespace case again.
-
-    AND THE POPULATION IS ``git ls-files``, NOT THE FILESYSTEM. Widening the predicate without
-    also fixing the boundary immediately produced the mirror-image defect: the wider scan found
-    ``engine/certification_integrity`` — one untracked ``__init__.py``, two statements, absent
-    from a fresh clone — and failed this control on local debris. A guard that decides
-    differently on a working copy than on a clean checkout is not a guard, it is the
-    non-reproducibility it was written to eliminate; the same shape as a test asserting a
-    gitignored artifact. Every other closure mechanism in this repository quantifies over
-    ``git ls-files`` for this reason, and so does this one. Untracked contamination is real and
-    is somebody's problem — it is RIB GATE-12's, which surfaces it as working-tree
-    contamination, and not the coverage denominator's.
-    """
-    tracked = subprocess.run(  # noqa: S603 - fixed argv, no shell
-        ["git", "ls-files", "-z", *SOURCE_TREES],  # noqa: S607 - git from PATH by design
-        cwd=REPO,
-        capture_output=True,
-        check=True,
-    ).stdout.decode("utf-8", errors="surrogateescape")
-
-    found: set[str] = set()
-    for path in tracked.split("\0"):
-        if not path.endswith(".py"):
-            continue
-        parts = path.split("/")
-        if len(parts) < 3 or parts[1] in _NOT_A_SOURCE_PACKAGE:
-            continue
-        found.add(f"{parts[0]}.{parts[1]}")
-    return found
-
-
-# --------------------------------------------------------------- the reachable PASS
-# Without these, every refusal below could be asserting over nothing.
-
-
-def test_the_two_scope_declarations_agree(config: dict[str, Any]) -> None:
-    """One denominator, declared twice. Neither copy may drift from the other."""
-    flags, source = _flag_scope(config), _source_scope(config)
-    assert flags == source, (
-        f"the coverage scope disagrees with itself — only in --cov=: {sorted(flags - source)}; "
-        f"only in [tool.coverage.run] source: {sorted(source - flags)}"
+    assert "engine.universal_discovery.pytest_scope" in addopts, (
+        "the scope-injection plugin is not in addopts, so pytest-cov receives no derived "
+        "denominator and coverage would measure whatever it happened to import"
     )
-    assert flags, "the coverage scope is empty, so the percentage is computed over nothing"
+    assert (
+        addopts[addopts.index("engine.universal_discovery.pytest_scope") - 1] == "-p"
+    ), "the plugin name appears in addopts but not as the value of -p, so it is not loaded"
 
 
-def test_every_source_package_is_measured_or_declared_excluded(config: dict[str, Any]) -> None:
+# ------------------------------------------------------------------ Ω-1: the derivation is total
+
+
+def test_every_source_package_is_measured_or_declared_exempt(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
     """The whole control. A third possibility is what let 4,580 statements go unmeasured."""
-    unaccounted = sorted(_packages_present() - _flag_scope(config) - set(_excluded(config)))
+    packages, test_roots, exemptions = derived
+    paths = discovery.tracked_python(str(REPO))
+    unaccounted = sorted(_packages_present(paths, test_roots) - set(packages) - set(exemptions))
     assert not unaccounted, (
-        "these packages are neither measured nor declared excluded, so they are outside the "
-        f"coverage denominator and nothing says why: {unaccounted}. Add them to the scope, or "
-        "name them in [tool.ucos.coverage_scope] with a reason."
+        "these packages are neither in the derived denominator nor declared exempt, so they are "
+        f"outside the coverage measurement and nothing says why: {unaccounted}"
     )
 
 
-def test_no_declared_exclusion_is_stale(config: dict[str, Any]) -> None:
-    """An excuse that stops being true is a refusal, so the list cannot rot."""
-    present, measured = _packages_present(), _flag_scope(config)
-    for package, reason in _excluded(config).items():
+def test_the_derived_scope_names_only_packages_that_exist(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
+    """A denominator entry measuring nothing reads as measurement and contributes none."""
+    packages, test_roots, _exemptions = derived
+    paths = discovery.tracked_python(str(REPO))
+    ghosts = sorted(set(packages) - _packages_present(paths, test_roots))
+    assert not ghosts, f"the derived denominator names packages absent from the tree: {ghosts}"
+
+
+def test_no_declared_exemption_is_stale(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
+    """An excuse that stops being true is a refusal, so the register cannot rot into a blanket."""
+    packages, test_roots, exemptions = derived
+    paths = discovery.tracked_python(str(REPO))
+    present = _packages_present(paths, test_roots)
+    for package, reason in exemptions.items():
         assert package in present, (
-            f"{package} is declared excluded from coverage but is not present in the tree; "
-            "the exclusion is stale and must be withdrawn"
+            f"{package} is declared exempt from coverage but is not present in the tree; the "
+            "exemption is stale and must be withdrawn"
         )
-        assert package not in measured, (
-            f"{package} is declared excluded from coverage AND measured by --cov=; the "
-            "exclusion is stale and must be withdrawn"
+        assert package not in set(packages), (
+            f"{package} is declared exempt AND appears in the derived denominator; the exemption "
+            "is stale in the other direction and must be withdrawn"
         )
-        assert reason.strip(), f"{package} is excluded with no stated reason"
+        assert reason.strip(), f"{package} is exempt with no stated reason"
 
 
-def test_the_scope_names_only_packages_that_exist(config: dict[str, Any]) -> None:
-    """A --cov= flag naming nothing contributes nothing and reads as measurement.
-
-    Compared against the UNION of the two enumerations. The sub-package enumeration alone would
-    report the five top-level layers as ghosts, since they are packages rather than children of
-    one — the same blind spot, seen from the opposite side.
-    """
-    ghosts = sorted(_flag_scope(config) - _packages_present() - _top_level_packages())
-    assert not ghosts, f"the coverage scope names packages absent from the tree: {ghosts}"
-
-
-def test_the_enforcement_closure_programme_is_inside_the_denominator(
-    config: dict[str, Any],
-) -> None:
-    """The specific self-exemption this control was written for. Named, so it cannot recur."""
-    assert "engine.enforcement_closure" in _flag_scope(config)
-
-
-def test_every_top_level_package_is_measured_or_declared_excluded(
-    config: dict[str, Any],
-) -> None:
-    """A top-level layer may not be outside the denominator with nothing saying why.
-
-    The measured instance: service, data, application and infrastructure carried 29,970
-    statements and 3,995 passing tests that no ``testpaths`` entry collected, and intelligence
-    carried 5,363 statements whose tests DID run while its code was measured by nothing —
-    UCOS-CL-008 admitted intelligence/tests and recorded that the denominator was "a separate
-    question, answered separately below". The separate answer was never given.
-    """
-    measured = _flag_scope(config)
-    excluded = set(_excluded(config))
-    unaccounted = sorted(
-        package
-        for package in _top_level_packages()
-        if package not in measured
-        and package not in excluded
-        and not any(m == package or m.startswith(package + ".") for m in measured)
-    )
-    assert not unaccounted, (
-        "these top-level packages are neither measured nor declared excluded, so they are "
-        f"outside the coverage denominator and nothing says why: {unaccounted}"
-    )
-
-
-def test_every_collected_test_root_has_its_layer_in_the_denominator(
-    config: dict[str, Any],
+def test_every_discovered_test_root_has_its_code_in_the_denominator(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
 ) -> None:
     """Collecting a layer's tests while excluding its code raises the ratio and measures nothing.
 
-    This is the pairing Rule 1 of the closure mandate names as a defect, and it is the exact
-    state intelligence/ was left in for the interval between UCOS-CL-008 and UCI-000001.
+    This is the pairing Rule 1 of the closure mandate names as a defect, and it is the exact state
+    ``intelligence/`` was left in for the interval between UCOS-CL-008 and UCI-000001. Under Ω-1 it
+    cannot recur by omission, because both sides of the pairing come from one derivation — so this
+    test now guards the DERIVATION rather than two lists.
     """
-    measured = _flag_scope(config)
-    testpaths = config["tool"]["pytest"]["ini_options"]["testpaths"]
+    packages, test_roots, exemptions = derived
     unpaired = []
-    for testpath in testpaths:
-        layer = testpath.split("/", 1)[0]
-        if layer in ("engine", "platform"):
-            continue  # governed per sub-package by the controls above
-        if not any(m == layer or m.startswith(layer + ".") for m in measured):
-            unpaired.append(testpath)
+    for test_root in test_roots:
+        layer = test_root.split("/", 1)[0]
+        if any(p == layer or p.startswith(layer + ".") for p in packages):
+            continue
+        if any(e == layer or e.startswith(layer + ".") for e in exemptions):
+            continue
+        unpaired.append(test_root)
     assert not unpaired, (
-        "these test roots are collected but the layers they exercise are outside the coverage "
-        f"denominator, so running them raises no measured coverage: {unpaired}"
+        "these test roots are collected but the code they exercise is in no measurement, so "
+        f"running them raises no measured coverage: {unpaired}"
     )
 
 
-def test_a_namespace_package_is_counted_as_present() -> None:
-    """The second self-exemption: a package with no ``__init__.py`` must still be seen.
+def test_the_denominator_is_not_vacuous(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
+    """A denominator over nothing reports 100% forever. The degenerate case, refused."""
+    packages, _test_roots, _exemptions = derived
+    assert len(packages) > 1, (
+        f"the derived denominator holds {len(packages)} packages; a measurement over one package "
+        "is not a measurement of this repository"
+    )
 
-    ``engine.recursive_knowledge`` is the measured instance — 16 modules and no
-    ``__init__.py``, which the previous ``__init__.py``-keyed enumeration could not see. It is
-    named here rather than described so that deleting the widened predicate in
-    ``_packages_present`` fails this test by name instead of silently restoring the hole.
+
+# ------------------------------------------------- Ω-1 SUCCESS CRITERION, discharged by experiment
+
+
+def _git(repository: Path, *arguments: str) -> None:
+    subprocess.run(  # noqa: S603 - fixed argv, no shell
+        ["git", *arguments],  # noqa: S607 - git from PATH by design
+        cwd=repository,
+        check=True,
+        capture_output=True,
+    )
+
+
+@pytest.fixture
+def unregistered_trees(tmp_path: Path) -> Path:
+    """A repository holding five top-level trees that no configuration anywhere mentions.
+
+    Built as a real git repository because the discovery boundary is ``git ls-files`` and a
+    filesystem-only fixture would test a code path the gate does not use. Each tree carries the
+    shapes that historically defeated enumeration: a namespace package with no ``__init__.py``, a
+    layer holding modules directly, a suite whose helper carries no ``test_`` prefix.
     """
-    present = _packages_present()
-    assert "engine.recursive_knowledge" in present, (
-        "engine/recursive_knowledge is a directory of tracked modules and must be counted as a "
-        "source package whether or not it carries an __init__.py; enumeration keyed on "
-        "__init__.py is what put 2,849 statements outside the denominator"
+    repository = tmp_path / "unbounded"
+    (repository / "quantum" / "entanglement").mkdir(parents=True)
+    (repository / "quantum" / "entanglement" / "state.py").write_text("X = 1\n")
+    (repository / "quantum" / "tests").mkdir(parents=True)
+    (repository / "quantum" / "tests" / "test_state.py").write_text("def test_x():\n    pass\n")
+    (repository / "quantum" / "tests" / "helpers.py").write_text("def build():\n    return 1\n")
+
+    (repository / "mars").mkdir(parents=True)
+    (repository / "mars" / "__init__.py").write_text("")
+    (repository / "mars" / "habitat.py").write_text("Y = 2\n")
+
+    for name in ("civilization", "planetary", "interstellar"):
+        (repository / name / "core").mkdir(parents=True)
+        (repository / name / "core" / "engine.py").write_text(f"NAME = {name!r}\n")
+
+    (repository / "pyproject.toml").write_text("[tool.ucos]\n")
+    _git(repository, "init", "-q")
+    _git(repository, "add", "-A")
+    return repository
+
+
+def test_a_tree_that_does_not_exist_yet_is_already_governed(unregistered_trees: Path) -> None:
+    """Ω-1's success criterion: 0 code changes, 0 configuration changes, 0 registration.
+
+    Five top-level trees are created in a repository whose configuration is an empty table. No
+    file in this repository mentions ``quantum``, ``mars``, ``civilization``, ``planetary`` or
+    ``interstellar``. Discovery must nonetheless place every one of them inside the denominator and
+    collect its suite — using exactly the code that ships, with no edit and no registration.
+
+    THIS IS THE TEST THE OLD CONTROL COULD NOT HAVE PASSED. ``SOURCE_TREES = ("engine",
+    "platform")`` would have returned an empty answer for all five, and the assertion that would
+    have caught it did not exist because the possibility had no name.
+    """
+    root = str(unregistered_trees)
+    paths = discovery.tracked_python(root)
+    import_graph = graph.ImportGraph(root, paths)
+    test_roots = discovery.derive_test_roots(paths, graph.imported_by_path(import_graph, paths))
+    packages = discovery.derive_measurable_packages(paths, test_roots)
+
+    assert set(discovery.derive_roots(paths)) == {
+        "civilization",
+        "interstellar",
+        "mars",
+        "planetary",
+        "quantum",
+    }, "discovery did not find every tracked top-level tree"
+
+    # A tree holding sub-packages is measured per sub-package; a tree holding modules directly is
+    # measured whole. Both shapes appear here, and both are derived rather than configured.
+    assert "quantum.entanglement" in packages, (
+        "a namespace sub-package with no __init__.py is outside the derived denominator — the "
+        "engine/recursive_knowledge defect, reintroduced"
     )
-    assert not (REPO / "engine" / "recursive_knowledge" / "__init__.py").exists(), (
-        "engine/recursive_knowledge has acquired an __init__.py, so it is no longer evidence "
-        "that namespace packages are enumerated; point this test at another namespace package "
-        "or delete it, but do not let it pass vacuously"
-    )
+    assert "mars" in packages, "a layer holding modules directly is outside the denominator"
+    for name in ("civilization", "planetary", "interstellar"):
+        assert f"{name}.core" in packages, f"{name} is outside the derived denominator"
+
+    assert test_roots == (
+        "quantum/tests",
+    ), f"the suite of an unregistered tree was not discovered: {test_roots}"
+    assert (
+        "quantum.tests" not in packages
+    ), "a suite entered the coverage denominator, which would let tests raise their own coverage"
 
 
-# ------------------------------------------------------------------- NON-VACUITY
-# Every guard above is now forged into failure. A control that cannot refuse is decoration,
-# and decoration is worse than nothing because it licenses the belief that something was checked.
+def test_the_experiment_is_not_passing_by_accident(unregistered_trees: Path) -> None:
+    """NON-VACUITY for the criterion above: no configuration in the fixture names any tree.
+
+    Without this, the previous test could be passing because the fixture quietly registered what it
+    then claimed was discovered — which is exactly the shape of the defect being fixed.
+    """
+    declared = (unregistered_trees / "pyproject.toml").read_text(encoding="utf-8")
+    for name in ("quantum", "mars", "civilization", "planetary", "interstellar"):
+        assert name not in declared, f"the fixture registers {name}, so discovery proved nothing"
+    assert "cov" not in declared and "testpaths" not in declared
 
 
-def test_a_package_in_neither_list_is_refused(config: dict[str, Any]) -> None:
-    """Drop a measured package from the scope without excluding it: the guard must fire."""
-    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    ini = mutated["tool"]["pytest"]["ini_options"]
-    ini["addopts"] = [a for a in ini["addopts"] if a != "--cov=engine.enforcement_closure"]
-    with pytest.raises(AssertionError, match="neither measured nor declared excluded"):
-        test_every_source_package_is_measured_or_declared_excluded(mutated)
+def test_this_repository_names_none_of_the_five_trees_anywhere() -> None:
+    """The criterion asserted against the REAL repository's own configuration and orchestration.
 
+    The experiment above runs in a temporary tree, which proves the derivation is general. This
+    proves the complementary half: nothing in THIS repository's configuration, build or CI mentions
+    ``quantum``, ``mars``, ``planetary`` or ``interstellar``, so when those trees were created here
+    and measured — 20 artifacts, every one classified, every one owned, all five suites collected
+    and passing under the bare ``pytest`` invocation — no registration made it happen.
 
-def test_scope_lists_that_disagree_are_refused(config: dict[str, Any]) -> None:
-    """Remove one package from one copy only — the exact drift two lists invite."""
-    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    run = mutated["tool"]["coverage"]["run"]
-    run["source"] = [p for p in run["source"] if p != "engine/enforcement_closure"]
-    with pytest.raises(AssertionError, match="disagrees with itself"):
-        test_the_two_scope_declarations_agree(mutated)
-
-
-def test_an_exclusion_for_a_measured_package_is_refused() -> None:
-    """Excluding something that is also measured is a claim about the past, not the present."""
-    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    mutated["tool"]["ucos"]["coverage_scope"]["excluded_packages"].append(
-        {"package": "engine.construct", "reason": "stale"}
-    )
-    with pytest.raises(AssertionError, match="stale"):
-        test_no_declared_exclusion_is_stale(mutated)
-
-
-def test_an_exclusion_for_an_absent_package_is_refused() -> None:
-    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    mutated["tool"]["ucos"]["coverage_scope"]["excluded_packages"].append(
-        {"package": "engine.no_such_package", "reason": "invented"}
-    )
-    with pytest.raises(AssertionError, match="not present in the tree"):
-        test_no_declared_exclusion_is_stale(mutated)
-
-
-def test_an_exclusion_with_no_reason_is_refused() -> None:
-    """A reason is what makes an exclusion arguable rather than merely present."""
-    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    mutated["tool"]["ucos"]["coverage_scope"]["excluded_packages"] = [
-        {"package": "engine.uicm", "reason": "   "}
+    ``civilization`` is deliberately absent from the list: ``engine/civilization`` is a real package
+    in this repository, so the token legitimately appears and asserting otherwise would be a test
+    that fails for the wrong reason.
+    """
+    governance_texts = [
+        REPO / "pyproject.toml",
+        REPO / "Makefile",
+        REPO / "verify.sh",
+        *sorted((REPO / ".github" / "workflows").glob("*.yml")),
     ]
-    with pytest.raises(AssertionError, match="no stated reason"):
-        test_no_declared_exclusion_is_stale(mutated)
+    for name in ("quantum", "mars", "planetary", "interstellar"):
+        for path in governance_texts:
+            body = path.read_text(encoding="utf-8", errors="surrogateescape")
+            # The proof narrative names the trees in prose; a REGISTRATION would name them in a
+            # scope list, a testpath, a --cov flag or a make target. Only the latter would falsify
+            # the criterion, so the assertion is over declarations rather than over the word.
+            for line in body.splitlines():
+                stripped = line.strip()
+                if stripped.startswith("#") or stripped.startswith("//"):
+                    continue
+                assert f'"{name}"' not in line and f"--cov={name}" not in line, (
+                    f"{path.name} registers {name!r} outside a comment, so the Ω-1 criterion "
+                    f"'0 configuration changes' is no longer what is being measured: {line.strip()}"
+                )
 
 
-def test_a_scope_entry_naming_a_missing_package_is_refused() -> None:
-    """A flag that measures nothing must not read as measurement."""
-    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    mutated["tool"]["pytest"]["ini_options"]["addopts"].append("--cov=engine.does_not_exist")
-    with pytest.raises(AssertionError, match="absent from the tree"):
-        test_the_scope_names_only_packages_that_exist(mutated)
+# ------------------------------------------------------------------------------- NON-VACUITY
+# Every guard above is forged into failure, and every historical miss is pinned BY NAME so that
+# restoring an old predicate fails a test that says which defect it brought back.
 
 
-def test_an_empty_scope_is_refused() -> None:
-    """The degenerate case: a denominator over nothing would report 100% forever."""
-    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    ini = mutated["tool"]["pytest"]["ini_options"]
-    ini["addopts"] = [a for a in ini["addopts"] if not a.startswith("--cov=")]
-    mutated["tool"]["coverage"]["run"]["source"] = []
-    with pytest.raises(AssertionError, match="computed over nothing"):
-        test_the_two_scope_declarations_agree(mutated)
-
-
-def test_a_top_level_package_in_neither_list_is_refused() -> None:
-    """Drop a whole layer from the scope: the guard must fire and name it.
-
-    Forged against ``service`` specifically, because ``service`` is one of the four layers that
-    was in this state — 132 modules and 1,070 uncollected tests — while every test in this file
-    passed.
-    """
-    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    ini = mutated["tool"]["pytest"]["ini_options"]
-    ini["addopts"] = [a for a in ini["addopts"] if a != "--cov=service"]
-    with pytest.raises(AssertionError, match="neither measured nor declared excluded"):
-        test_every_top_level_package_is_measured_or_declared_excluded(mutated)
-
-
-def test_collecting_a_layers_tests_without_measuring_its_code_is_refused() -> None:
-    """The intelligence/ state, forged. Tests run, code unmeasured, ratio flattered."""
-    mutated = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    ini = mutated["tool"]["pytest"]["ini_options"]
-    ini["addopts"] = [a for a in ini["addopts"] if a != "--cov=intelligence"]
-    with pytest.raises(AssertionError, match="raises no measured coverage"):
-        test_every_collected_test_root_has_its_layer_in_the_denominator(mutated)
-
-
-def test_the_top_level_package_enumeration_is_not_vacuous() -> None:
-    """A control over an empty set refuses nothing. The seven are named so a drop is visible."""
-    found = _top_level_packages()
-    assert found == {
-        "application",
-        "data",
-        "engine",
-        "infrastructure",
-        "intelligence",
-        "platform",
-        "service",
-    }, f"the top-level package set has changed: {sorted(found)}"
-
-
-def test_every_layer_test_root_is_actually_collected(config: dict[str, Any]) -> None:
-    """The other direction: a layer whose code is measured but whose tests nothing collects.
-
-    Measured instance: all four of service/data/application/infrastructure shipped a tests/
-    directory that appeared in no testpaths entry. 188 modules, 3,995 passing tests, executed by
-    nothing. Absent tests are visible; unwired passing tests are not, which makes this the worse
-    of the two failures.
-    """
-    testpaths = set(config["tool"]["pytest"]["ini_options"]["testpaths"])
-    missing = []
-    for package in _top_level_packages():
-        candidate = REPO / package / "tests"
-        if candidate.is_dir() and any(candidate.rglob("test_*.py")):
-            if f"{package}/tests" not in testpaths:
-                missing.append(f"{package}/tests")
-    assert not missing, (
-        "these layers ship test modules that no testpaths entry collects, so the tests exist "
-        f"and never run: {sorted(missing)}"
+def test_a_namespace_package_is_counted_as_present(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
+    """The ``__init__.py``-keyed predicate, pinned. 2,849 statements were invisible to it."""
+    packages, _test_roots, _exemptions = derived
+    assert "engine.recursive_knowledge" in packages, (
+        "engine/recursive_knowledge is a directory of tracked modules and must be in the derived "
+        "denominator whether or not it carries an __init__.py; enumeration keyed on __init__.py "
+        "is what put 2,849 statements outside the measurement"
     )
-
-
-def test_untracked_debris_does_not_enter_the_denominator() -> None:
-    """NON-VACUITY for the tracked boundary, and a regression pin for how it was found.
-
-    Widening the package predicate to catch PEP 420 namespace directories immediately caught
-    something else: ``engine/certification_integrity``, an untracked ``__init__.py`` present on
-    one working copy and in no clone. Enumerating the filesystem made this control's verdict a
-    function of local state, which is the precise failure it exists to eliminate — a guard that
-    is green on a clean checkout and red on a developer's machine gets suppressed, and a
-    suppressed guard measures nothing.
-
-    So: a directory carrying a ``.py`` file that git does not track is not a source package.
-    """
-    present = _packages_present()
-    tracked_dirs = {
-        f"{p.split('/')[0]}.{p.split('/')[1]}"
-        for p in subprocess.run(  # noqa: S603
-            ["git", "ls-files", *SOURCE_TREES],  # noqa: S607
-            cwd=REPO,
-            capture_output=True,
-            text=True,
-            check=True,
-        ).stdout.splitlines()
-        if p.endswith(".py") and len(p.split("/")) >= 3
-    }
-    assert present <= tracked_dirs, (
-        "the coverage-scope control counted a package git does not track, so its verdict "
-        f"depends on local state: {sorted(present - tracked_dirs)}"
-    )
-
-
-def test_a_namespace_package_is_still_a_source_package() -> None:
-    """NON-VACUITY for the widened predicate. The specific miss, pinned by name.
-
-    ``engine/recursive_knowledge`` has no ``__init__.py`` — it is an implicit namespace package
-    (PEP 420) that ``verify.sh`` runs as ``-m engine.recursive_knowledge.gate``. The original
-    predicate asked whether ``__init__.py`` existed and therefore did not see 2,849 statements
-    across sixteen modules, while every test in this file passed.
-    """
     assert not (REPO / "engine" / "recursive_knowledge" / "__init__.py").exists(), (
-        "engine/recursive_knowledge now has an __init__.py; this test pins the NAMESPACE case "
-        "and must be repointed at a package that still has none, or withdrawn"
+        "engine/recursive_knowledge has acquired an __init__.py, so it is no longer evidence that "
+        "namespace packages are discovered; point this test at another namespace package or "
+        "withdraw it, but do not let it pass vacuously"
     )
-    assert "engine.recursive_knowledge" in _packages_present()
+
+
+def test_the_enforcement_closure_programme_is_inside_the_denominator(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
+    """The original self-exemption: the closure programme, outside the measurement it imposes."""
+    packages, _test_roots, _exemptions = derived
+    assert "engine.enforcement_closure" in packages
+
+
+def test_the_five_late_layers_are_inside_the_denominator(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
+    """The ``SOURCE_TREES`` defect, pinned by name rather than described.
+
+    These five were outside a denominator scoped to ``engine`` and ``platform``. They are named
+    here so that narrowing the derivation back to two trees fails a test that says so, instead of
+    quietly reproducing the state in which 35,333 statements were unmeasured.
+    """
+    packages, _test_roots, _exemptions = derived
+    for layer in ("application", "data", "infrastructure", "intelligence", "service"):
+        assert layer in packages, f"{layer} has left the derived denominator"
+
+
+def test_the_tooling_root_discovery_found_is_inside_the_denominator(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
+    """``scripts/`` was in NO list — not addopts, not source, not testpaths, not an exemption.
+
+    It was found by the first run of discovery, which is the clearest single piece of evidence that
+    a derived denominator sees what an enumerated one cannot. 281 statements.
+    """
+    packages, _test_roots, _exemptions = derived
+    assert "scripts" in packages, (
+        "scripts/ has left the derived denominator; it is the root that no enumeration ever "
+        "contained and its presence is what proves discovery is wider than the lists it replaced"
+    )
+
+
+def test_a_suite_helper_is_not_measured_as_source(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
+    """The eighteen helpers with no ``test_`` prefix, pinned.
+
+    A naming-keyed test-root predicate declared ``platform/tests`` and ``engine/tests`` to be
+    source, which would put 234 test modules into the coverage denominator and let the suite raise
+    its own coverage by growing. The import relation is what answers correctly, so this test also
+    pins the reason ``derive_test_roots`` takes a graph at all.
+    """
+    packages, test_roots, _exemptions = derived
+    assert (
+        "platform.tests" not in packages and "engine.tests" not in packages
+    ), "a test tree entered the coverage denominator"
+    assert "platform/tests" in test_roots and "engine/tests" in test_roots
+    assert (REPO / "platform" / "tests" / "_coverage_helpers.py").exists(), (
+        "the helper this test is pinned to is gone; repoint it at another suite module carrying no "
+        "test_ prefix, or withdraw it, but do not let it pass vacuously"
+    )
+
+
+def test_untracked_debris_does_not_enter_the_denominator(
+    derived: tuple[tuple[str, ...], tuple[str, ...], dict[str, str]],
+) -> None:
+    """A guard whose verdict depends on local state gets suppressed, and measures nothing."""
+    packages, _test_roots, _exemptions = derived
+    tracked = discovery.tracked_python(str(REPO))
+    roots_with_tracked_python = {p.split("/", 1)[0] for p in tracked if "/" in p}
+    stray = sorted(p for p in packages if p.split(".", 1)[0] not in roots_with_tracked_python)
+    assert not stray, (
+        "the derived denominator names a package git does not track, so its verdict depends on "
+        f"local state: {stray}"
+    )
+
+
+def test_an_empty_population_is_refused(tmp_path: Path) -> None:
+    """The degenerate world. Every Ω invariant is true over it, so it must be a FAULT.
+
+    This is the single most dangerous defect the discovery layer could have: an empty answer would
+    convert "this repository is ungoverned" into "this repository is fully governed".
+    """
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    _git(empty, "init", "-q")
+    with pytest.raises(OmegaError, match="empty population"):
+        discovery.tracked_python(str(empty))
+
+
+def test_a_repository_git_does_not_track_is_refused(tmp_path: Path) -> None:
+    """Not a git work tree at all — refused rather than answered from the filesystem."""
+    with pytest.raises(OmegaError, match="could not be read from git|empty population"):
+        discovery.tracked_python(str(tmp_path / "absent"))
+
+
+def test_a_denominator_emptied_by_exemptions_is_refused() -> None:
+    """Exempting everything would report a perfect percentage over nothing."""
+    paths = ("alpha/beta/module.py", "alpha/tests/test_module.py")
+    with pytest.raises(OmegaError, match="computed over nothing|empty"):
+        discovery.derive_measurable_packages(
+            paths, ("alpha/tests",), exemptions={"alpha.beta": "everything"}
+        )
+
+
+def test_an_exemption_without_a_reason_is_refused(tmp_path: Path) -> None:
+    """A reason is what makes an exemption arguable rather than merely present."""
+    (tmp_path / "pyproject.toml").write_text(
+        '[tool.ucos.coverage_scope]\nexcluded_packages = [{ package = "a.b", reason = "   " }]\n',
+        encoding="utf-8",
+    )
+    with pytest.raises(OmegaError, match="no reason"):
+        discovery.read_declared(str(tmp_path))
+
+
+def test_a_repository_with_no_suite_is_refused_at_the_gate(tmp_path: Path) -> None:
+    """The suite fault lives where a REPOSITORY is governed, and it must still fire there.
+
+    Moving it out of ``derive_test_roots`` made the primitive composable; this test is what stops
+    that from having quietly removed the refusal altogether.
+    """
+    with pytest.raises(OmegaError, match="invisible to discovery"):
+        discovery.assert_suite_exists(())
+
+
+def test_a_directory_called_tests_that_holds_source_is_not_dropped(tmp_path: Path) -> None:
+    """The mirror-image defect of the one above, and the reason the predicate reads no names.
+
+    A name-keyed rule would omit any directory called ``tests`` from the denominator, which is a
+    free way to retire coverage debt: move code into ``tests/`` and it stops being measured. The
+    derived rule asks whether the directory's contents belong to a suite, so production code
+    sitting under that name stays measured.
+    """
+    repository = tmp_path / "misnamed"
+    (repository / "layer" / "tests").mkdir(parents=True)
+    (repository / "layer" / "tests" / "production.py").write_text("VALUE = 1\n")
+    (repository / "layer" / "consumer.py").write_text("from layer.tests.production import VALUE\n")
+    (repository / "pyproject.toml").write_text("[tool.ucos]\n")
+    _git(repository, "init", "-q")
+    _git(repository, "add", "-A")
+
+    root = str(repository)
+    paths = discovery.tracked_python(root)
+    import_graph = graph.ImportGraph(root, paths)
+    test_roots = discovery.derive_test_roots(paths, graph.imported_by_path(import_graph, paths))
+    assert (
+        test_roots == ()
+    ), f"a directory named tests holding production code was treated as a suite: {test_roots}"
+    assert "layer" in discovery.derive_measurable_packages(paths, test_roots), (
+        "production code under a directory called tests left the denominator, which would make "
+        "renaming a directory a way to retire coverage debt"
+    )

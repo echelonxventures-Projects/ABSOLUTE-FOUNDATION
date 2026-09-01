@@ -936,6 +936,26 @@ EXCLUDE_DIR_PREFIXES = (
     # RETAINED-BUT-RETIRED in the id-ledger per derive_change_events (UMB-017 C-05).
     "intelligence/UCOS-RIE-",
     "intelligence/UCOS-IMP-BASELINE-001.",
+    # Generated Context Projections (UCOS-UCTX-001) — the canonical context root and
+    # every agent-facing surface derived from it. Same class and same reason as the
+    # PORTAL / REGISTRIES / CONTROL-TOWER entries above: these are GENERATED VIEWS of
+    # instruments that already hold the knowledge, emitted by 00-BOOK/tools/ukctx.py
+    # and declared in 00-BOOK/DATA/generated-artifact-registry.json. Under GOV-005
+    # §5.3 a generated artifact is regenerated, never hand-registered, so it is not an
+    # eligible repository artifact and must not consume a permanent corpus identity.
+    #
+    # Registering them would also be UNSATISFIABLE in the same way the RIE family is:
+    # 00-BOOK/CONTEXT/MANIFEST.json records the content digest of every sibling
+    # projection, and corpus registration would add a registry entry whose own hash is
+    # an input to the manifest that registration just recorded — no fixpoint.
+    #
+    # These are NOT excluded from UCOS-UGA-001 object identity. Every one is still a
+    # tracked object and still carries a by_object Universal ID; exclusion here is a
+    # statement about which REGISTER lists them, never a licence to exist anonymously.
+    "00-BOOK/CONTEXT/",
+    ".claude/",
+    ".cursor/",
+    "AGENTS.md",
 )
 
 # Only these file extensions are registered as artifacts.

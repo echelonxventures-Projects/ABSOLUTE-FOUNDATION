@@ -109,14 +109,33 @@ def test_the_partition_is_exact(matrix) -> None:
     assert sum(governed.values()) == matrix["objects"]["total"]
 
 
-#: The measured raw-path overlap between the two registries. It is 192 historical identities
-#: minted into `id-ledger.json` for objects the CORPUS plane governs — retained, not governed,
-#: which is a state the declaration already models and the report already prints. It is held as
-#: a RATCHET rather than driven to zero here, because removing an entry from a permanent
-#: append-only identity ledger to make a coverage report green would violate identity
-#: immutability (UOBC-L-03/L-08) and the single-identity-authority invariant (CAA-INV-04) —
-#: repairing a measurement by mutating the thing it measures.
-RETAINED_NOT_GOVERNED_OVERLAP = 192
+#: The measured raw-path overlap between the two registries: historical identities minted into
+#: `id-ledger.json` for objects the CORPUS plane governs — retained, not governed, which is a state
+#: the declaration already models and the report already prints. It is held as a RATCHET rather than
+#: driven to zero here, because removing an entry from a permanent append-only identity ledger to
+#: make a coverage report green would violate identity immutability (UOBC-L-03/L-08) and the
+#: single-identity-authority invariant (CAA-INV-04) — repairing a measurement by mutating the thing
+#: it measures.
+#:
+#: THE RULE, STATED PRECISELY. This number may not move SILENTLY. A fall is always welcome and must
+#: be recorded. A rise is admissible only when it is measured, explained, and shown to be
+#: unpreventable — because both maps that produce it are append-only, so a rise this ratchet could
+#: forbid outright would be a ratchet demanding an act the constitution refuses. An unexplained rise
+#: is still a failure, and MOVEMENTS below is what separates the two.
+#:
+#: MOVEMENTS
+#:   192 -> 201  (+9)  Recovery integration. Permit P-UCOS-RECOVERY-001 registered 61 documents
+#:                     into the CORPUS plane, and nine of them already carried a REPOSITORY-plane
+#:                     identity: UCOS-EXDOC-002986/7/8/9/90/91/92/93/94, minted in commits 446…,
+#:                     32e…, d19… and d92… long before this transaction. Registering a document the
+#:                     repository ledger had already seen puts it in both raw path sets by
+#:                     construction. Every one of the nine is EXCLUDED_DOCUMENT, so the REPOSITORY
+#:                     plane retains an identity for it and governs nothing — the identical shape as
+#:                     the original 192, not a new kind of overlap, and `DUPLICATE_REGISTRATION`
+#:                     remains 0. It is irreversible in both directions: `by_object` is append-only
+#:                     (UOBC-L-03/L-08) and the corpus registration was an authorized, permanent
+#:                     `by_path` allocation. Measured composition at 201: 198 EXDOC, 3 DATAOBJ.
+RETAINED_NOT_GOVERNED_OVERLAP = 201
 
 
 def test_the_two_planes_are_disjoint_IN_GOVERNANCE() -> None:

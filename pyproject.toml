@@ -221,248 +221,51 @@ minversion = "8.0"
 # without admitting the code would put 3,995 passing tests against a denominator that still
 # excluded what they exercise, which would raise the reported percentage while measuring
 # nothing new -- the precise move Rule 1 of the closure mandate names as a defect.
-testpaths = [
-  "engine/tests",
-  "platform/tests",
-  "intelligence/tests",
-  "service/tests",
-  "data/tests",
-  "application/tests",
-  "infrastructure/tests",
-]
+# --- UCOS-OMEGA-001 (Ω-1) — THE COLLECTION SET AND THE DENOMINATOR ARE DERIVED -----------
+#
+# `testpaths` USED TO BE DECLARED HERE, and 78 `--cov=` flags with it. Both are gone, and the
+# reason is the measurement that produced Ω-1 rather than a preference for shorter files.
+#
+# WHAT THE THREE LISTS COST. This file carried the same fact three times: `testpaths` named the
+# test roots, `addopts` named 78 packages, and `[tool.coverage.run] source` named 78 paths.
+# Three enumerations, reconciled by nobody, and each one silently wrong at a different moment:
+#
+#   engine.enforcement_closure, engine.constitution, engine.uicm   in NEITHER --cov list
+#     4,580 statements, 5.2% of the tree, outside a denominator reporting 97%
+#   service, data, application, infrastructure, intelligence       no testpaths entry
+#     188 test modules and 3,995 PASSING tests that no runner collected, for months
+#   engine/recursive_knowledge                                     no __init__.py, so invisible
+#     2,849 statements behind a live gate, a verify.sh stage, a workflow and 135 tests
+#   scripts/                                                       never in any list at all
+#     found by discovery on its first run, having been outside every enumeration since it existed
+#
+# Four omissions, one root cause: a list of what exists agrees with itself forever. It has no
+# term for what it leaves out, so it cannot report its own incompleteness — and every one of the
+# omissions above was found by READING the lists, never by a control firing.
+#
+# WHAT REPLACES THEM. `engine/universal_discovery/pytest_scope.py` derives both sets from
+# `git ls-files '*.py'` before pytest-cov starts its collector: the test roots from which
+# directories hold suites, and the denominator from which packages hold source. There is now ONE
+# derivation, so drift between the copies is not a thing that is checked for — it is a thing that
+# cannot occur.
+#
+# THE PROPERTY THIS BUYS, which is the whole point: adding `quantum/` — or `mars/`, or
+# `interstellar/` — is governed on the commit that creates it, with ZERO edits to this file, zero
+# registration and zero code changes. `platform/tests/test_coverage_scope.py` proves that by
+# creating such a tree and measuring that discovery already accounts for it.
+#
+# WHAT IS STILL DECLARED HERE, AND WHY THAT IS CORRECT. Judgements, never populations. The
+# coverage floor is a policy. `[tool.ucos.coverage_scope] excluded_packages` is an owner's
+# argued decision that something stay outside measurement, and Ω-5 REQUIRES it to be written
+# down: a silent exclusion is the defect, an arguable one is the remedy.
 addopts = [
   "-ra",
   "--strict-markers",
-  "--cov=engine.foundation",
-  "--cov=engine.registry",
-  "--cov=engine.discovery",
-  "--cov=engine.compiler",
-  "--cov=engine.determinism",
-  "--cov=engine.runtime",
-  "--cov=engine.factory",
-  "--cov=engine.validation",
-  "--cov=engine.certification",
-  "--cov=engine.universal_certification",
-  "--cov=engine.acceptance",
-  "--cov=engine.governance",
-  "--cov=engine.knowledge",
-  "--cov=engine.graph",
-  "--cov=engine.context",
-  # CMG-000002 — the Universal Temporal Existence Contract, as executable law. It enters
-  # the denominator because it ships with engine/tests/unit/test_temporal_contract.py, and
-  # because a temporal contract nobody measures is how UTC got hard-coded in the first
-  # place (00-BOOK/tools/ukb.py::_now, gap G1 in the identity-universe determination).
-  "--cov=engine.temporal",
-  # UEG-000001 — Universal Execution Governance. It enters the denominator on the same
-  # condition every other capability does: it ships with
-  # engine/tests/unit/test_execution_environment.py. It is measured for a sharper reason
-  # too — it is the gate that decides whether the interpreter running every OTHER gate may
-  # be trusted, and an unmeasured code path in THAT is a path that could admit a wrong
-  # interpreter. The symptom of a broken environment gate is a run that looks exactly like
-  # a correct one.
-  "--cov=engine.execution_environment",
-  # UOBC-000001 — the Universal Object Birth Contract: identity derived before the
-  # artifact exists. Measured for the same reason, and because its eight law checks are
-  # the only executable statement of "no anonymous objects, no post-creation registration".
-  "--cov=engine.object_birth",
-  # UISD-000001 — Universal Infinite Scope and Direction. It enters the denominator on the
-  # same condition every other capability does: it ships with
-  # engine/tests/unit/test_infinite_scope.py. It is measured for a sharper reason too —
-  # the unboundedness property was previously certified only in prose, and
-  # 04-HIDDEN-FINITE-ASSUMPTION-CERTIFICATION.md §4 states that no exhaustive proof of
-  # absence was performed. An unmeasured law about the absence of finite assumptions is
-  # exactly how a finite assumption survives.
-  "--cov=engine.infinite_scope",
-  # UCPA-000001 — the constitutional primitive alignment gate. Measured under the same
-  # floor for the reason the programme itself exists: the root ontology was RATIFIED and
-  # then went unmeasured, and an unmeasured law about the primitives is exactly how a
-  # superseded primitive form survives. A gate whose own refusal paths are unexercised
-  # cannot be relied on to refuse.
-  "--cov=engine.root_ontology",
-  # ULP — the Universal Lineage Projection. Measured under the same floor because it is a
-  # DERIVED answer: an unmeasured composition can report an ancestry no source declares and
-  # look exactly like a correct one. F-1 was that failure at the projection layer, and the
-  # refusal paths here are what keep it detectable.
-  "--cov=engine.lineage",
-  # RCM — the Registry Coverage Matrix. Measured under the same floor because it is the
-  # instrument that says whether every governed object is registered: an unmeasured
-  # coverage report can answer "fully covered" without ever having computed it, and that
-  # answer is indistinguishable from a correct one.
-  "--cov=engine.registry_coverage",
-  # The Verification Impact Engine selects which verification a change requires, so it
-  # is measured under the same floor as everything it selects for. An unmeasured
-  # selector could narrow a run on a code path nothing exercised.
-  "--cov=engine.verification_impact",
-  # UVI-000001 — Universal Verification Intelligence, for the same reason and more
-  # sharply: it decides which stages run, how the suite is partitioned, and whether a
-  # result may be answered from evidence. An unmeasured code path in THAT is a path that
-  # could narrow a run, drop a shard or reuse a stale result, and the symptom of every
-  # one of those is a faster green run.
-  "--cov=engine.verification_intelligence",
-  # UCOS-CEU-001 — the Constitutional Existence substrate enters the denominator on the
-  # same condition every other capability does: it ships with engine/tests/ceu/, so the
-  # percentage measures a capability something actually exercises.
-  "--cov=engine.ceu",
-  # UCOS-NUC-001 — the Nucleus Ownership Authority enters the denominator on the same
-  # condition W3-4c applied: it ships with engine/tests/nucleus/, so the percentage
-  # measures a capability something actually exercises.
-  "--cov=engine.nucleus",
-  "--cov=engine.kernel",
-  "--cov=engine.provider",
-  "--cov=engine.civilization",
-  "--cov=engine.uckp",
-  # UCON-000001 — the Universal Construct Foundation enters the denominator on the same
-  # condition every other capability does: it ships with
-  # engine/tests/unit/test_construct_foundation.py. It is measured for a sharper reason too.
-  # This is the capability that decides what happens to a construct nobody anticipated, and its
-  # catch-all rule is the single line standing between "an authority must decide this" and "this
-  # was silently discarded". An unmeasured code path THERE is a path that could drop a construct
-  # while the run stayed green — and the whole artifact exists because that failure mode was
-  # previously indistinguishable from success.
-  "--cov=engine.construct",
-  "--cov=engine.uaue",
-  "--cov=platform.foundation",
-  "--cov=platform.identity",
-  "--cov=platform.administration",
-  "--cov=platform.security",
-  "--cov=platform.projects",
-  "--cov=platform.blueprints",
-  "--cov=platform.generation",
-  "--cov=platform.artifact_explorer",
-  "--cov=platform.execution_dashboard",
-  "--cov=platform.coverage",
-  "--cov=platform.measurement",
-  "--cov=platform.validation",
-  "--cov=platform.certification",
-  "--cov=platform.runtime_operations",
-  "--cov=platform.repository_operations",
-  "--cov=platform.universal_validation",
-  "--cov=platform.validation_intelligence",
-  "--cov=platform.universal_portal",
-  "--cov=platform.runtime_platform",
-  "--cov=platform.universal_pipeline",
-  "--cov=platform.universal_truth",
-  "--cov=platform.universal_ownership",
-  "--cov=platform.universal_assimilation",
-  "--cov=platform.universal_measurement",
-  "--cov=platform.universal_foundation",
-  "--cov=platform.universal_generator",
-  # W3-4 — capabilities that were tested but absent from the denominator, so the gate
-  # reported a percentage of a corpus smaller than the one that ships. platform.providers
-  # joined once it had tests (W3-4b); platform.universal_assurance joins here (W3-4c) on
-  # the same condition, now satisfied — all fourteen modules carry suites, so the gate
-  # measures a capability that something actually tests rather than absorbing 2,297
-  # unexercised statements as a `capability-unregistered-coverage` advisory.
-  "--cov=platform.universal_assurance",
-  "--cov=platform.commercial_intelligence",
-  "--cov=platform.observability",
-  "--cov=platform.portal",
-  "--cov=platform.providers",
-  "--cov=platform.repository_intelligence",
-  "--cov=platform.universal_provider",
-  "--cov=platform.workspace",
-  # UCOS-CTRL-000001 — the Universal Control Plane joins the denominator on the same
-  # condition W3-4c applied to platform.universal_assurance: it enters the gate carrying
-  # its own suite (platform/tests/test_universal_control_plane.py), so the percentage
-  # measures a capability something actually exercises.
-  "--cov=platform.universal_control_plane",
-  # UCOS-CTRL-STATE-000001 (Wave 11) — Universal Project State enters the denominator on the
-  # same condition: it ships with platform/tests/test_universal_project_state.py, so the
-  # percentage measures a capability something actually exercises.
-  "--cov=platform.universal_project_state",
-  # UCOS-CTRL-PLAN-000001 (Wave 12) — the Master Plan Engine enters the denominator on the
-  # same condition: it ships with platform/tests/test_universal_master_plan.py, so the
-  # percentage measures a capability something actually exercises.
-  "--cov=platform.universal_master_plan",
-  # UEC-000001 — the Universal Enforcement Closure enters the denominator because it is the
-  # programme that refuses "nothing enforces by existing", and it was itself outside the
-  # denominator: 711 statements of closure mechanism whose covered fraction nothing measured.
-  # A guard-of-guards excluded from the measurement it imposes is the exact self-exemption
-  # UEC-L-09 exists to refuse, occurring one layer up. It ships
-  # engine/tests/unit/test_enforcement_closure.py, so it enters on the same condition as
-  # every other capability here.
-  "--cov=engine.enforcement_closure",
-  # UCL — the constitution engine enters the denominator on the same condition: 1,976
-  # statements across seventeen modules, exercised by twelve test files under
-  # engine/tests/constitution/ and platform/tests/, and measured by none of them until now.
-  "--cov=engine.constitution",
-  # URKE-000001 — the Universal Recursive Knowledge foundation enters the denominator because
-  # it was outside it for a reason no reader could have found: engine/recursive_knowledge has
-  # no __init__.py. It is an implicit namespace package (PEP 420), which imports exactly like
-  # any other — verify.sh line 713 runs `-m engine.recursive_knowledge.gate` as a certification
-  # stage, urke-gate.yml runs it in CI, and `make urke-gate` runs it locally — but
-  # platform/tests/test_coverage_scope.py enumerated candidate packages by asking whether
-  # `__init__.py` existed. So the guard written to refuse unmeasured packages had an
-  # unmeasured-package hole of its own shape, and 2,849 statements across sixteen modules sat
-  # in neither scope list nor the exclusion list while every scope test passed.
-  #
-  # Measured before admission, on its own 135-test suite: 2,849 statements, 381 missing, 83%.
-  # It therefore ENTERS BELOW THE FLOOR and is admitted anyway, because the alternative is to
-  # keep reporting a denominator that excludes it. Admission moves the whole-suite figure DOWN
-  # (97.90% -> 97.53%), which is the direction that distinguishes correcting a denominator from
-  # laundering one; the 90% floor is unchanged and unthreatened.
-  "--cov=engine.recursive_knowledge",
-  # UCI-000001 — declared because it is TRACKED, EXECUTABLE repository content and the ratio is
-  # supposed to be over that. Excluding a package because measuring it would lower the number is
-  # the defect this control exists to end, so the default is measured and the burden is on
-  # exclusion — [tool.ucos.coverage_scope] is where a reasoned one goes.
-  #
-  # AND DECLARING IT CHANGED THE DENOMINATOR BY NOTHING, which is worth recording because the
-  # first version of this comment claimed it would add 481 statements. It does not. Measured on
-  # the certification run at 58f4bd75:
-  #
-  #     CoverageWarning: Module engine.certification_integrity was never imported.
-  #                      (module-not-imported)
-  #     TOTAL  88,665 statements   — unchanged from the run before this entry existed
-  #
-  # coverage.py measures modules that are IMPORTED, and no test imports this package
-  # (engine/tests/certification/test_integrity.py imports engine.certification, a different
-  # package whose similar name is coincidental). So a `--cov=` entry is a statement of INTENT,
-  # not of measurement: the package joins the ratio on the day something first imports it.
-  # platform/tests/test_coverage_scope.py governs whether a package is DECLARED and cannot see
-  # whether it is MEASURED — a gap one level below the one it was built for, recorded as a
-  # residual risk rather than papered over. The entry stays: it is correct about where this
-  # package belongs, and it becomes load-bearing the moment the package acquires a test.
-  "--cov=engine.certification_integrity",
-  # --- UCI-000001: the five top-level realization layers enter the denominator ------------
-  #
-  # WHY THESE WERE OUTSIDE IT, AND WHY THAT WAS INVISIBLE RATHER THAN MERELY UNNOTICED.
-  #
-  # UCOS-COV-SCOPE-001 governs the packages under engine/ and platform/. Its SOURCE_TREES are
-  # exactly those two, so a top-level Python package that is neither was not a third
-  # possibility the control refused -- it was a question the control never asked. Five existed,
-  # each a tracked, executable layer with its own passing test suite.
-  #
-  # Measured, source only, with each layer's own test root omitted:
-  #
-  #     service          1,070 tests  \
-  #     data               954 tests   |  29,970 statements, 458 missing, 98%
-  #     application      1,094 tests   |  3,995 tests, 14.7 seconds for all four
-  #     infrastructure     877 tests  /
-  #     intelligence       126 tests     5,363 statements, 561 missing, 87%
-  #
-  # The first four are the worse finding, because their TESTS were unwired too: 188 test
-  # modules and 3,995 passing tests named in no testpaths, no Makefile target, no verify.sh
-  # stage and no workflow. A reader who opens data/tests, finds 954 passing tests and concludes
-  # the layer is covered is reading evidence that no gate has ever executed. Tests that exist
-  # and never run are worse than absent tests, because absence is visible and this was not.
-  #
-  # intelligence is the sharpest single case: UCOS-CL-008 admitted intelligence/tests to
-  # testpaths, recorded that the denominator was "deliberately a separate question, answered
-  # separately below", and the separate answer was never given. Its tests have been running and
-  # its statements unmeasured ever since.
-  #
-  # Effect on the reported figure: the denominator grows from roughly 86,000 statements to
-  # roughly 121,300, and the whole-suite percentage moves from about 97.5% to about 97.4%.
-  # intelligence enters BELOW the floor at 87% and is admitted anyway, because the alternative
-  # is to keep reporting a denominator that excludes it. The 90% floor is unchanged and
-  # unthreatened. Admitting the tests without admitting the code would have raised the reported
-  # percentage while measuring nothing new, which Rule 1 of the closure mandate names a defect.
-  "--cov=service",
-  "--cov=data",
-  "--cov=application",
-  "--cov=infrastructure",
-  "--cov=intelligence",
+  # Ω-1. Loaded with `-p` so it registers before the entry-point plugins, and implemented as a
+  # HOOKWRAPPER so it runs ahead of pytest-cov's own `tryfirst` hook. Both details are
+  # load-bearing; the module docstring states what breaks if either changes.
+  "-p",
+  "engine.universal_discovery.pytest_scope",
   "--cov-report=term-missing",
   "--cov-report=xml",
   "--cov-fail-under=90",
@@ -470,18 +273,19 @@ addopts = [
 
 [tool.coverage.run]
 branch = true
-source = ["engine/foundation", "engine/registry", "engine/graph", "engine/context", "engine/ceu", "engine/nucleus", "engine/kernel", "engine/provider", "engine/civilization", "engine/discovery", "engine/compiler", "engine/determinism", "engine/runtime", "engine/factory", "engine/validation", "engine/certification", "engine/certification_integrity", "engine/universal_certification", "engine/acceptance", "engine/governance", "engine/knowledge", "engine/uckp", "engine/uaue", "engine/construct", "engine/enforcement_closure", "engine/constitution", "engine/infinite_scope", "engine/root_ontology", "engine/lineage", "engine/registry_coverage", "platform/foundation", "platform/identity", "platform/administration", "platform/security", "platform/projects", "platform/blueprints", "platform/generation", "platform/artifact_explorer", "platform/execution_dashboard", "platform/coverage", "platform/measurement", "platform/validation", "platform/certification", "platform/runtime_operations", "platform/repository_operations", "platform/universal_validation", "platform/universal_portal", "platform/runtime_platform", "platform/validation_intelligence", "platform/universal_pipeline", "platform/universal_truth", "platform/universal_ownership", "platform/universal_assimilation", "platform/universal_measurement", "platform/universal_foundation", "platform/universal_generator", "platform/universal_assurance", "platform/commercial_intelligence", "platform/observability", "platform/portal", "platform/providers", "platform/repository_intelligence", "platform/universal_provider", "platform/workspace", "platform/universal_control_plane", "platform/universal_project_state", "platform/universal_master_plan", "engine/object_birth", "engine/temporal", "engine/verification_impact", "engine/verification_intelligence", "engine/execution_environment", "engine/recursive_knowledge", "service", "data", "application", "infrastructure", "intelligence"]
-# Each layer's own test root is omitted for the same reason engine/tests is: a test
-# module is not source under measurement, and counting it would let a suite raise its
-# own coverage by growing.
+# `source` IS DELIBERATELY ABSENT. It was the second of the three enumerations described above —
+# 78 paths that had to agree with 78 flags and were reconciled by nobody. pytest-cov passes the
+# derived denominator to coverage explicitly, so a `source` here would be a stale second opinion
+# that only ever spoke when the two disagreed. Deleting it does not widen the denominator; it
+# removes a copy of it. `python -m engine.universal_discovery --scope` prints what is measured.
+#
+# `omit` is PATTERNS, not paths, and that distinction is the Ω-1 property applied here: a suite
+# under a tree nobody has created yet is already omitted, because the pattern does not name a
+# tree. A test module is not source under measurement — counting it would let a suite raise its
+# own coverage by growing, which is the one way to make the number go up while measuring less.
 omit = [
-  "engine/tests/*",
-  "platform/tests/*",
-  "intelligence/tests/*",
-  "service/tests/*",
-  "data/tests/*",
-  "application/tests/*",
-  "infrastructure/tests/*",
+  "*/tests/*",
+  "*/conftest.py",
 ]
 
 # --- UCOS-COV-SCOPE-001 — the coverage denominator, declared rather than assumed ---------

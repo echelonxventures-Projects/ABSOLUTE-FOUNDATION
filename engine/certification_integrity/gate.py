@@ -25,7 +25,7 @@ import json
 import sys
 from typing import Any
 
-from engine.certification_integrity.contract import CLOSED, REFUSED, measure
+from engine.certification_integrity.contract import CLOSED, REFUSED, measure, seal_ratchet
 from engine.certification_integrity.inventory import build as build_inventory
 from engine.certification_integrity.inventory import write as write_inventory
 from engine.certification_integrity.model import IntegrityError
@@ -117,6 +117,14 @@ def main(argv: list[str] | None = None) -> int:
         help="read coverage from PATH instead of ./coverage.xml",
     )
     parser.add_argument("--quiet", action="store_true", help="suppress the human render")
+    parser.add_argument(
+        "--seal-ratchet",
+        action="store_true",
+        help=(
+            "advance the Ω-4 best-ever values from this measurement. Moves each bound only "
+            "DOWNWARD, so this cannot turn a refusal into a pass"
+        ),
+    )
     args = parser.parse_args(argv)
 
     root = "."
@@ -138,6 +146,11 @@ def main(argv: list[str] | None = None) -> int:
                 print(json.dumps(inventory.as_document(), indent=1, sort_keys=True))
             if not args.gate:
                 return EXIT_OPEN
+
+        if args.seal_ratchet:
+            sealed = seal_ratchet(root, coverage_xml=args.coverage_xml)
+            if not args.quiet:
+                print(f"sealed {sealed}", file=sys.stderr)
 
         report = measure(root, coverage_xml=args.coverage_xml)
     except IntegrityError as exc:

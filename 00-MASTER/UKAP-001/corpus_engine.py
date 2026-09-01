@@ -673,6 +673,17 @@ def build(replay: dict | None) -> dict:
     model["canonical_document"] = next(
         (d["export_id"] for d in documents if d.get("canonical")), "")
     model["evidence_manifest"] = evidence_manifest(archives)
+
+    # LOCATIONS BECOME PORTABLE BEFORE THE SEAL IS TAKEN, and the order is the whole point.
+    # Discovery needs real paths — `payload_for` opens `loc["location"]` — so the model carries
+    # absolute paths right up to here. Sealing them would make the seal a function of WHERE the
+    # corpus sat, so `build(serialize(model))` would not reproduce `build(...)`: measured, the
+    # replay test saw 9ac4a8ab… against 4c105593…. Sealing the portable form makes the seal a
+    # function of the evidence's IDENTITY instead, which is what replay can reproduce and what a
+    # second machine holding the same corpus will compute. `_portable` is idempotent, so a replay
+    # that is already portable is unchanged by it.
+    model = _portable(model)
+
     seal_src = json.dumps({k: v for k, v in model.items() if k != "seal_sha256"},
                           sort_keys=True, separators=(",", ":"))
     model["seal_sha256"] = hashlib.sha256(seal_src.encode("utf-8")).hexdigest()
@@ -689,19 +700,90 @@ def evidence_manifest(archives: list[dict]) -> dict:
             manifest[key] = {"relative": str(path.relative_to(REPO)),
                              "bytes": path.stat().st_size, "sha256": sha256_file(path)}
     for exp in archives:
+        # EXTERNAL EVIDENCE IS NAMED AS EXTERNAL (RC-0014). This wrote the archive's ABSOLUTE
+        # filesystem location under a key called `relative`, so a committed governed artifact
+        # asserted `/Users/<somebody>/Desktop/…` as a relative path — false in form and
+        # unresolvable on any other machine. The archives are ~4 GB of chat exports and cannot
+        # be vendored, so the honest record is: identify them by CONTENT, state plainly that
+        # the bytes are external, and keep the digest that lets any holder of the corpus verify
+        # they have the same evidence this determination rests on.
+        #
+        # `relative` is retained and set to the logical, machine-independent identity so every
+        # existing reader keeps working; the absolute location moves to `external_location`,
+        # which says what it is.
+        # The absolute location is deliberately NOT recorded. `export_id` is the payload's own
+        # content digest and `sha256` is what CC-04/CC-05 verify against, so the artifact already
+        # identifies the evidence completely. A path would only say which machine held it.
         manifest[f"export::{exp['export_id']}"] = {
-            "relative": exp["locations"][0]["location"],
+            "relative": f"external:export/{exp['export_id']}",
+            "external": True,
             "bytes": sum(m.get("records", 0) for m in exp["members"]),
             "sha256": exp["payload_digest"]}
     return manifest
 
 
 # --------------------------------------------------------------------------- serialization
+def portable_location(value: str) -> str:
+    """A filesystem location as a governed artifact may record it.
+
+    Inside the repository -> repository-relative. Outside -> a CONTENT-SCOPED token naming the
+    external root rather than one machine's path to it.
+
+    WHY (RC-0014). The model carries real absolute paths because the engine RE-READS the archives
+    while measuring — `payload_for` opens `loc["location"]`. That is correct at runtime and wrong
+    on disk: serializing it wrote `/Users/<somebody>/Desktop/KNOWLEDGE-ASSIMILATION/…` into
+    `corpus.json`, a committed governed artifact, twelve times. The bytes are ~4 GB of chat
+    exports and cannot be vendored, so the remedy is not to relocate them but to stop asserting
+    a machine's path as if it were repository truth: the archive is identified by its payload
+    digest, which is what CC-04/CC-05 actually verify against, and the digest is machine-
+    independent. Sanitizing HERE rather than in the model keeps runtime resolution intact and
+    makes the on-disk form portable by construction.
+    """
+    if not value.startswith("/"):
+        return value
+    path = Path(value)
+    try:
+        return str(path.resolve().relative_to(REPO.resolve()))
+    except ValueError:
+        return f"external:{path.name}" if path.name else "external:"
+
+
+#: Keys whose STRING value is a filesystem location.
+LOCATION_KEYS = ("location", "root", "external_location")
+#: Keys whose LIST value is a list of filesystem locations. Named separately because they carry
+#: bare strings rather than records, so the recursive walk would otherwise never see them — which
+#: is exactly how `corpus_roots` kept leaking after the record-level locations were fixed.
+LOCATION_LIST_KEYS = ("corpus_roots", "corpus_roots_resolved")
+
+
+def _portable(node):
+    """Recursively rewrite the location-bearing keys of a model for serialization."""
+    if isinstance(node, dict):
+        out = {}
+        for key, value in node.items():
+            if key in LOCATION_KEYS and isinstance(value, str):
+                out[key] = portable_location(value)
+            elif key in LOCATION_LIST_KEYS and isinstance(value, list):
+                out[key] = [
+                    portable_location(x) if isinstance(x, str) else _portable(x) for x in value
+                ]
+            else:
+                out[key] = _portable(value)
+        return out
+    if isinstance(node, list):
+        return [_portable(x) for x in node]
+    return node
+
+
 def serialize(model: dict) -> str:
     """Deterministic, diffable JSON: sorted keys, two-space indent, single trailing newline.
     Conversation-id lists are the evidence CC-04/CC-05 replay from, so they are recorded in
-    full — the artifact must be sufficient to re-derive the determination with no corpus."""
-    return json.dumps(model, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    full — the artifact must be sufficient to re-derive the determination with no corpus.
+
+    Locations are made PORTABLE on the way out (see `portable_location`): the artifact records
+    what was consumed and its digest, never one machine's path to it.
+    """
+    return json.dumps(_portable(model), indent=2, sort_keys=True, ensure_ascii=False) + "\n"
 
 
 def deserialize(raw: str) -> dict:
@@ -1067,7 +1149,7 @@ def main() -> int:
         EVIDENCE_MANIFEST.write_text(
             json.dumps(dict(program=PROGRAM, determination_id=DETERMINATION_ID,
                             head_commit=model["head_commit"],
-                            corpus_roots=model["corpus_roots"],
+                            corpus_roots=[portable_location(r) for r in model["corpus_roots"]],
                             canonical_archive=model["canonical_archive"],
                             canonical_document=model["canonical_document"],
                             files=model["evidence_manifest"]),

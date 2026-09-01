@@ -1480,13 +1480,17 @@
       "engine/certification_integrity/",
       "engine/construct/",
       "engine/enforcement_closure/",
-      "engine/recursive_knowledge/"
+      "engine/ledger_authority/",
+      "engine/omega_governance/",
+      "engine/omega_infinite/",
+      "engine/recursive_knowledge/",
+      "engine/universal_discovery/"
     ],
     "undeclared_tier": "R3-LOCAL",
     "deliberate_tier": "R4-DELIBERATE",
     "$deliberate_tier": "The tier a DISCLOSED, intentional closure takes, whatever its module prefix says. Declared because the R4 criterion is a property of the disclosure rather than of the module, and because assigning disclosed closures their prefix tier instead would leave R4 permanently empty — a declared tier nothing can ever occupy is a closure in the risk model itself.",
     "$undeclared_tier": "The tier a module takes when no declared prefix claims it. Declared here rather than defaulted in engine/construct/audit.py because 'what do we assume about code nobody has classified' is an assumption, and an unnamed assumption in a risk classifier is how a constitutional closure comes to be counted as a local one. R3-LOCAL is the conservative choice for a RATCHET — it keeps the closure counted in the backlog without asserting an owner the declaration does not name.",
-    "$governed_scope": "The scope in which an undisclosed closure is a VIOLATION rather than a backlog entry. It began as exactly this capability, because a capability that ratchets everybody else's code before its own has inverted the obligation. Widening this list is how the audit converts backlog into enforcement, one owner at a time, and each widening is a decision with a named owner rather than a sweep. FIRST WIDENING: engine/recursive_knowledge/ (owner URKE-000001), admitted after UCON-000001 had already ratcheted its own eight closures, so the obligation is discharged before it is extended. The widening was not a convenience: URKE-000001 authored four closures outside governed scope, which the ratchet correctly refused as a population increase over the declared baseline. Enforcing disclosure on them is the honest remedy; raising the baseline to accommodate them would have been the dishonest one, and this declaration forbids it. UCI-000001 joined at d9296d32: engine/certification_integrity/ carries twelve closures, all disclosed below. Widening governed_scope rather than raising the baseline is the sanctioned path recorded in engine/construct/audit.py:31 — outside the scope a population may hold or fall and never rise, so a new capability that adds closures must bring them inside and disclose them.",
+    "$governed_scope": "The scope in which an undisclosed closure is a VIOLATION rather than a backlog entry. It began as exactly this capability, because a capability that ratchets everybody else's code before its own has inverted the obligation. Widening this list is how the audit converts backlog into enforcement, one owner at a time, and each widening is a decision with a named owner rather than a sweep. FIRST WIDENING: engine/recursive_knowledge/ (owner URKE-000001), admitted after UCON-000001 had already ratcheted its own eight closures, so the obligation is discharged before it is extended. The widening was not a convenience: URKE-000001 authored four closures outside governed scope, which the ratchet correctly refused as a population increase over the declared baseline. Enforcing disclosure on them is the honest remedy; raising the baseline to accommodate them would have been the dishonest one, and this declaration forbids it. UCI-000001 joined at d9296d32: engine/certification_integrity/ carries twelve closures, all disclosed below. Widening governed_scope rather than raising the baseline is the sanctioned path recorded in engine/construct/audit.py:31 — outside the scope a population may hold or fall and never rise, so a new capability that adds closures must bring them inside and disclose them. UCI-000001 joined at d9296d32: engine/certification_integrity/ carries twelve closures, all disclosed below. Widening governed_scope rather than raising the baseline is the sanctioned path recorded in engine/construct/audit.py:31 -- outside the scope a population may hold or fall and never rise, so a new capability that adds closures must bring them inside and disclose them. UCOS-OMEGA-001 joined during the recovery integration: engine/universal_discovery/, engine/omega_governance/ and engine/omega_infinite/ carry sixteen closures between them (UCON-CL-33..48), every one disclosed here. The ratchet had correctly refused them as a population increase over the declared baseline and the baseline was NOT touched, because this declaration forbids that remedy. The packages were measured before admission: all reachable, all MEASURED under Omega-5, and carrying no closures beyond these sixteen, so the widening admits exactly the obligation it discharges and brings no backlog with it. UCOS-LEDGER-AUTHORITY-001 joined in the same integration, and its admission is the clearest case this list has recorded: the module did not gain three closures, it gained a MEASUREMENT. It was 00-BOOK/tools/ledger_authority.py, outside every audit root, so IDENTITY_MAPS, MONOTONIC_COUNTERS and NON_ALLOCATION_KEYS had always existed and had never been counted. Relocating it into engine/ so a coverage source could name it (UCI-L-01) also brought its closures into view, and the ratchet correctly refused them -- FIXED_DISPATCH_TABLE 446->447, FIXED_VOCABULARY_TUPLE 477->478, FROZEN_MEMBERSHIP_SET 239->240. Raising the baseline to absorb newly VISIBLE debt would convert an improvement in measurement into a permanent allowance, which is precisely the dishonest remedy this declaration forbids. All three are disclosed as UCON-CL-49..51.",
     "disclosed_closures": [
       {
         "closure_id": "UCON-CL-01",
@@ -1807,6 +1811,196 @@
         "closing_invariant": "invoking text -> plane type, for the three fixed texts (Makefile, verify.sh, scripts/ucos-env.sh). Closed and two-way bound to model.PLANE_TYPES. Workflows are deliberately NOT enumerated: they are discovered from git ls-files and all collapse into the single 'ci' plane, so a new workflow requires no edit here.",
         "admission": "Add the text and its plane type. A text that is none of the three named is a new invocation plane and must be argued as one, because plane COUNT is what UCI-L-05 refuses below two.",
         "gap": null
+      },
+      {
+        "admission": "A disposition joins when it is one under which an unowned artifact is a defect. Removing one requires the argument TRANSIENT already carries: a written reason why an artifact in that disposition cannot have a durable owner.",
+        "closing_invariant": "The dispositions under which a MISSING authority is a finding rather than a fact. Closed because its complement is the whole content: exactly one disposition (TRANSIENT) may carry authority NONE, and it may because transience is the only self-justifying claim -- an artifact declared not to persist cannot acquire a durable owner. A fifth disposition admitted to this set would be a fifth way to own nothing, which is the finding Omega-2 exists to count.",
+        "closure_id": "UCON-CL-33",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/universal_discovery/model.py",
+        "symbol": "AUTHORITY_REQUIRED"
+      },
+      {
+        "admission": "A disposition joins only with a stated reason why artifacts holding it belong in a coverage denominator. Widening it makes the measured percentage HARDER to satisfy, which is the safe direction; narrowing it requires a measured property, never a preference.",
+        "closing_invariant": "The dispositions that enter the executable-surface DENOMINATOR. Closed because it is a denominator: GENERATED and ARCHIVED are excluded because their bytes are owned elsewhere and TRANSIENT because it does not persist, so the ratio cannot be flattered by reclassification alone -- moving an artifact out of the denominator requires it to measurably acquire one of those properties.",
+        "closure_id": "UCON-CL-34",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/universal_discovery/model.py",
+        "symbol": "SURFACE_DISPOSITIONS"
+      },
+      {
+        "admission": "A kind joins when it is declared in RATCHET_KINDS and falls toward better. A kind whose better direction is up is not added here -- it is expressed as its complement, so this set stays equal to the kind vocabulary rather than becoming a second, divergent one.",
+        "closing_invariant": "The ratchet kinds whose better direction is DOWN, which is currently all four. Closed so ONE comparison serves every kind: a metric whose better direction is up is expressed as its complement rather than given a per-metric sign, because a sign convention held per metric is a convention that gets got wrong exactly once and then reports a regression as an improvement.",
+        "closure_id": "UCON-CL-35",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/universal_discovery/model.py",
+        "symbol": "LOWER_IS_BETTER"
+      },
+      {
+        "admission": "A kind joins when its value is a ratio. The entry is a rendering decision and carries no governance consequence, so the amendment is a one-line edit with no migration.",
+        "closing_invariant": "The kinds whose value is a ratio rather than a count, consulted only for FORMATTING. Closed deliberately in one place: the alternative is a second table in the reporting path, and two tables describing one vocabulary is exactly the divergence that lets a density be printed as a count.",
+        "closure_id": "UCON-CL-36",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/universal_discovery/ratchet.py",
+        "symbol": "RATIO_KINDS"
+      },
+      {
+        "admission": "A basename joins only if Python itself gives it module identity. The set tracks the language's rule, so it changes when Python does and not otherwise.",
+        "closing_invariant": "The dunder basenames that ARE real module identities. Closed by the LANGUAGE rather than by preference: __init__ is what makes a directory a package and __main__ is what `python -m` executes. Measured consequence of omitting them -- every __main__.py in the repository read as unreachable while verify.sh, the Makefile and CI all invoked it, costing eight CLI entry points their reachability verdict.",
+        "closure_id": "UCON-CL-37",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/universal_discovery/discovery.py",
+        "symbol": "IMPORTABLE_DUNDERS"
+      },
+      {
+        "admission": "A basename joins when the test runner itself gives it a support role. It tracks pytest's mechanism rather than this repository's conventions, so a project layout change does not reach it.",
+        "closing_invariant": "Modules that support a suite without being one, so a directory holding only these plus test modules is still a test directory. Closed on pytest's own mechanisms: conftest.py is its fixture mechanism and __init__.py is how a test tree becomes importable, so neither is source under measurement.",
+        "closure_id": "UCON-CL-38",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "gap": "Detected as a closure and it is one: a runner other than pytest would name different support modules. Disclosed rather than parameterised because the repository declares pytest as its collection plane, and a parameter nothing varies is a wider surface with no second caller.",
+        "intentional": true,
+        "module": "engine/universal_discovery/discovery.py",
+        "symbol": "TEST_SUPPORT_MODULES"
+      },
+      {
+        "admission": "The literal changes only if the meaning of a path segment changes. It bounds no population and must never be widened to stand for one.",
+        "closing_invariant": "Not a population bound. `len(parts)` counts the SEGMENTS of one path being classified -- `len(parts) < 2` skips a root-level file and `len(parts) == 2` recognises a direct child -- so the literal is the depth at which a package name becomes derivable, not a bound on anything discovered.",
+        "closure_id": "UCON-CL-39",
+        "form": "POPULATION_ASSERTION",
+        "gap": "Detected because the detector is deliberately syntactic: it sees `len(...) == N` and cannot tell a path arity from a population count. An exemption would need a semantic rule the audit does not have, so it is disclosed instead.",
+        "intentional": true,
+        "module": "engine/universal_discovery/discovery.py",
+        "symbol": "len(parts)"
+      },
+      {
+        "admission": "The literal changes only if 'exactly one claimant' stops meaning unambiguous. It bounds no discovered population.",
+        "closing_invariant": "Not a population bound. `len(inherited) == 1` is the UNAMBIGUITY test for authority inheritance: exactly one importer authority means the artifact inherits it, and two or more means the question is contested and resolution must fall through to the next rule. The literal is the definition of unambiguous, not a limit on importers.",
+        "closure_id": "UCON-CL-40",
+        "form": "POPULATION_ASSERTION",
+        "gap": "Detected as a closure because the detector is syntactic. Disclosed rather than exempted, as with every other arity test in this inventory.",
+        "intentional": true,
+        "module": "engine/universal_discovery/authority.py",
+        "symbol": "len(inherited)"
+      },
+      {
+        "admission": "The literal changes only if the depth at which ancestry becomes derivable changes. It bounds no discovered population.",
+        "closing_invariant": "Not a population bound. `len(parts) > 2` and `len(parts) == 2` distinguish a module nested inside a sub-package from one directly under a root, which is what decides whether ancestry names `root.subpackage` or `root`. Path arity, not population.",
+        "closure_id": "UCON-CL-41",
+        "form": "POPULATION_ASSERTION",
+        "gap": "Detected syntactically, as with UCON-CL-39. Disclosed for the same reason.",
+        "intentional": true,
+        "module": "engine/universal_discovery/authority.py",
+        "symbol": "len(parts)"
+      },
+      {
+        "admission": "A pair joins when a new KIND of orchestration text exists -- not when a new file of an existing kind is added, which the prefix matching already covers.",
+        "closing_invariant": "Orchestration TEXTS grouped into the plane type each belongs to. Closed over KINDS of text rather than over this repository's particular files, and that is what keeps it open in the direction that matters: every workflow collapses into `ci`, so a new workflow or a new shell entry point joins its plane with no edit here. The tuple would only need amending if a genuinely new KIND of orchestration appeared.",
+        "closure_id": "UCON-CL-42",
+        "form": "FIXED_VOCABULARY_TUPLE",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/universal_discovery/graph.py",
+        "symbol": "ORCHESTRATION_PLANES"
+      },
+      {
+        "admission": "A name joins if the language gains another dynamic-import primitive. It tracks Python, not this repository.",
+        "closing_invariant": "The two Python functions that import by computed name. Closed because the language closes it: `importlib.import_module` and `__import__` are what dynamic import IS, and the match is made on the AST callee rather than on the source text -- a string containing the pattern is data and only a call is a call.",
+        "closure_id": "UCON-CL-43",
+        "form": "FIXED_VOCABULARY_TUPLE",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/universal_discovery/graph.py",
+        "symbol": "_DYNAMIC_FUNCTIONS"
+      },
+      {
+        "admission": "A name joins when a directive names a further state as required. Removing one is a constitutional act, because it retires a concept the vocabulary promised to carry.",
+        "closing_invariant": "The thirteen states the Phase 2 directive names as its MINIMUM set. Closed on purpose and in the safe direction: it is a floor rather than a ceiling, so the registry may hold any number of further states and this tuple only asserts that none of the thirteen has been renamed away. Holding it as data is what makes 'every required state is a declared first-class entity' checkable by execution instead of by a reviewer.",
+        "closure_id": "UCON-CL-44",
+        "form": "FIXED_VOCABULARY_TUPLE",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/omega_governance/state.py",
+        "symbol": "REQUIRED_STATE_NAMES"
+      },
+      {
+        "admission": "A combination joins when a deliverable requires a further separation to be expressible. The list constrains nothing an artifact may hold -- it only names what the model must not be unable to say.",
+        "closing_invariant": "The five combinations Deliverable Omega-2.5 requires the model to be able to express, each named as a pair of positions a single-slot disposition cannot hold at once. Closed because it is a REQUIREMENTS list rather than a vocabulary: it states what must be expressible, and `separation_report` discharges it by execution rather than by a paragraph asserting it.",
+        "closure_id": "UCON-CL-45",
+        "form": "FIXED_VOCABULARY_TUPLE",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/omega_governance/state.py",
+        "symbol": "SEPARATIONS"
+      },
+      {
+        "admission": "The literal changes only when the probe's own fixture changes. It is not a bound on any discovered population and must never be widened to stand for one.",
+        "closing_invariant": "len(population) == 1 over a SYNTHETIC one-artifact stream built inside this probe. Closed because the fixture is closed: the probe declares the provider, the provider yields exactly one artifact, and the assertion proves discovery neither dropped nor invented one. It bounds no repository population.",
+        "closure_id": "UCON-CL-46",
+        "form": "POPULATION_ASSERTION",
+        "gap": "Detected as a closure but it is an assertion inside a self-proof, not a vocabulary. The probe constructs a one-artifact synthetic stream and checks that the space returned exactly what the provider produced, so the population it bounds is the probe's own fixture and it cannot constrain any repository population. Disclosed rather than exempted because the detector is deliberately syntactic, and an exemption would need a semantic rule the audit does not have.",
+        "intentional": true,
+        "module": "engine/omega_infinite/evidence.py",
+        "symbol": "len(population)"
+      },
+      {
+        "admission": "A directory joins when it is a tool's cache or metadata store rather than content. Because the value is a default rather than a rule, the honest alternative is always available: pass a different set at construction and metadata() records it.",
+        "closing_invariant": "A DEFAULT, not a policy, and that distinction is what makes the closure safe: the set is replaceable per instance and is ALWAYS reported in metadata(), so a caller who discovers under different exclusions says so in the evidence rather than silently. Its members are version-control and tool-cache directories, whose contents are never the artifacts a discovery is about.",
+        "closure_id": "UCON-CL-47",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/omega_infinite/filesystem_provider.py",
+        "symbol": "DEFAULT_EXCLUSIONS"
+      },
+      {
+        "admission": "A flag joins only if enumerating tracked content requires it, and it must be a literal here rather than a parameter: a caller-supplied argument would reintroduce the injection surface this tuple exists to remove.",
+        "closing_invariant": "The fixed argv prefix for enumerating tracked content: git ls-files -z --cached --exclude-standard. CLOSED AS A SECURITY PROPERTY rather than as a vocabulary -- no shell, ever, and no interpolation of caller data into a command string. The tuple is the single place the command exists, so 'what does this run' has one answer, and the -z form is load-bearing because a path containing a newline must not split a record.",
+        "closure_id": "UCON-CL-48",
+        "form": "FIXED_VOCABULARY_TUPLE",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/omega_infinite/git_provider.py",
+        "symbol": "_LS_FILES"
+      },
+      {
+        "admission": "A map joins when the ledger gains one, and the entry states which field of its records holds the permanent identifier. That is the whole amendment: no code changes, because every measurement in this module reads this table rather than naming a map.",
+        "closing_invariant": "The append-only identity maps the ledger carries, each bound to the field holding its PERMANENT identifier. CLOSED BECAUSE ALLOCATION SCOPE MUST BE ONE SCOPE -- the D0.1 defect was a run reporting from `by_object` while also allocating into `by_observation`, which a second, divergent list of maps is exactly how you reintroduce. A map absent from this table is not silently ignored: commit() surfaces it as `unmeasured_maps` and refuses the write rather than measuring it against a vocabulary that does not describe it.",
+        "closure_id": "UCON-CL-49",
+        "form": "FIXED_DISPATCH_TABLE",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/ledger_authority/__init__.py",
+        "symbol": "IDENTITY_MAPS"
+      },
+      {
+        "admission": "A cursor joins when the ledger gains a scalar that may only ever increase. Adding one is a one-line edit here and needs no change to the append-only check, which quantifies over this tuple.",
+        "closing_invariant": "The scalar allocation cursors, whose defining property is monotonicity. CLOSED AS AN APPEND-ONLY PROPERTY: a rewound cursor reissues an identifier that has already been handed out, so the set of names that rule covers has to be stated somewhere a reader can check rather than inferred from a naming convention a future key could silently fail to match.",
+        "closure_id": "UCON-CL-50",
+        "form": "FIXED_VOCABULARY_TUPLE",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/ledger_authority/__init__.py",
+        "symbol": "MONOTONIC_COUNTERS"
+      },
+      {
+        "admission": "A key joins only with a written reason for why its movement is not an allocation, as `history` carries in a comment at the declaration site. The conservative direction is the default: anything absent here is surfaced rather than excused.",
+        "closing_invariant": "Top-level ledger keys whose movement is NOT an identity allocation. CLOSED IN THE SAFE DIRECTION, which is what makes it admissible: an unknown key is not covered by this set and is therefore reported as `unmeasured_maps`, so forgetting to add a member causes a REFUSAL rather than a silent pass. The set can only ever make the measurement narrower, never broader, and every member is a key that carries no permanent identifier.",
+        "closure_id": "UCON-CL-51",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/ledger_authority/__init__.py",
+        "symbol": "NON_ALLOCATION_KEYS"
       }
     ],
     "baseline": {

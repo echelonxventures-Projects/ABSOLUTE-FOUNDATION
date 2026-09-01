@@ -1615,8 +1615,12 @@ def _observation_id(subject: str) -> str:
     if not record:
         raise SystemExit(
             f"UCOS-AEE-001: observation {key!r} holds no Universal Identity. "
-            f"Run `python3 00-MASTER/UCOS-UGA-001/uga_engine.py run` to mint it. "
-            f"Refusing to serialize an anonymous observation."
+            "An identity is obtained only at an AUTHORIZED allocation — an "
+            "irreversible CORPUS_REGISTRATION-class mutation of "
+            "00-BOOK/DATA/id-ledger.json governed by REG-AUTO-001 "
+            "(00-BOOK/DATA/mutation-governance-boundary.json). Obtain that "
+            "authorization; this message does not authorize invoking allocation. "
+            "Refusing to serialize an anonymous observation."
         )
     return record["observation_id"]
 

@@ -12,7 +12,7 @@ otherwise pass silently.
 
 What is proven, per programme:
 
-  * the gate is OPEN on the committed repository (a reachable PASS state)
+  * the gate is OPEN on the measured working tree (a reachable PASS state)
   * each declared blocking dimension can be driven to CLOSED by a mutation that targets it
   * a declared validation dimension the engine does not measure FAILS CLOSED rather than
     reporting satisfied — absence of a measurement is never evidence of compliance
@@ -85,7 +85,7 @@ def test_engine_exists_and_declares_a_failclosed_path(programme: tuple[str, Any,
     assert "check-declaration" in engine.GUARDS
 
 
-def test_gate_is_open_on_the_committed_repository(programme: tuple[str, Any, dict]) -> None:
+def test_gate_is_open_on_the_measured_working_tree(programme: tuple[str, Any, dict]) -> None:
     """A reachable PASS state. Without this, every CLOSED result below would be vacuous.
 
     UFEP is excluded on purpose. Its gate reads the aggregate certifier's sealed model, and that
@@ -100,7 +100,7 @@ def test_gate_is_open_on_the_committed_repository(programme: tuple[str, Any, dic
     model = engine.measure(document)
     assert (
         model["gate"] == "OPEN"
-    ), f"{name}: gate CLOSED on the committed repository — {model['blocking_failures']}"
+    ), f"{name}: gate CLOSED on the measured WORKING TREE — {model['blocking_failures']}"
     assert model["gate_exit"] == 0
 
 

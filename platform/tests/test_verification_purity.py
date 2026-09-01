@@ -378,3 +378,114 @@ def test_register_sh_remains_the_transaction_owner() -> None:
     assert "build --mint" in source, "register.sh must remain the one minting caller"
     for phase in ("Phase 1/10", "Phase 9/10", "Phase 10/10"):
         assert phase in source, f"the transaction lost {phase} — phases must be preserved"
+
+
+# ---------------------------------------------------------------------------------------
+# UCOS-UCAF-001 — a gate flag that wrote.
+#
+# `ucaf_engine.py --gate` regenerated every register and `ucaf.json` unconditionally and
+# only then evaluated the verdict, so the verdict was computed against a tree the verdict
+# run had just rewritten, and a read-only-sounding flag left 00-MASTER/UCOS-UCAF-001/
+# dirty. The fix routes the write behind `gate_only`. These two guards hold it there: one
+# runs the gate and measures the tree, one proves the write is unreachable without running
+# anything. The structural guard is the one that survives a machine where the gate cannot
+# be executed.
+
+UCAF_ENGINE = REPO / "00-MASTER" / "UCOS-UCAF-001" / "ucaf_engine.py"
+UCAF_HOME = "00-MASTER/UCOS-UCAF-001"
+
+
+def _ucaf_tree_digest() -> dict[str, str]:
+    """Content digest of every file in the UCAF home, tracked or not."""
+    root = REPO / UCAF_HOME
+    return {
+        path.relative_to(REPO).as_posix(): _digest(path)
+        for path in sorted(root.rglob("*"))
+        if path.is_file() and "__pycache__" not in path.parts
+    }
+
+
+def test_ucaf_gate_writes_nothing() -> None:
+    """Behavioural. `--gate` is a verdict, so the bytes it measures must outlive it.
+
+    Asserts on CONTENT, not just `git status`: a write that happens to reproduce the
+    committed bytes is still a write, and it is the one that would slip past a
+    porcelain-only check on a clean tree.
+    """
+    before, before_dirty = _ucaf_tree_digest(), _dirty_paths((UCAF_HOME,))
+    completed = subprocess.run(  # noqa: S603
+        [sys.executable, str(UCAF_ENGINE), "--gate"],  # noqa: S607
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    # The verdict itself may be OPEN or CLOSED — that is the corpus's business, not this
+    # test's. Only an ABORT (2) means the gate never ran and the assertions are vacuous.
+    assert completed.returncode in (
+        0,
+        1,
+    ), f"ucaf gate aborted (rc={completed.returncode}); purity unproven\n{completed.stderr}"
+    assert _ucaf_tree_digest() == before, "ucaf_engine.py --gate rewrote its own home"
+    assert _dirty_paths((UCAF_HOME,)) == before_dirty, "ucaf_engine.py --gate dirtied the tree"
+    assert (
+        "nothing written" in completed.stdout
+    ), "the gate no longer reports itself read-only — the guard and the engine disagree"
+
+
+def _gate_reachable_calls() -> tuple[set[str], list[str]]:
+    """Callees reachable from ``main()`` when ``gate_only`` is True.
+
+    A recursive descent, NOT ``ast.walk``: walk yields the children of a pruned branch
+    anyway, which silently reports the write as reachable and makes the guard useless.
+    """
+    import ast
+
+    tree = ast.parse(UCAF_ENGINE.read_text(encoding="utf-8"))
+    funcs = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
+
+    def collect(node: object, out: list[str]) -> None:
+        if isinstance(node, ast.IfExp) and ast.unparse(node.test) == "gate_only":
+            collect(node.test, out)
+            collect(node.body, out)  # taken under gate_only; `orelse` is unreachable
+            return
+        if isinstance(node, ast.Call):
+            func = node.func
+            out.append(func.id if isinstance(func, ast.Name) else ast.unparse(func))
+        for child in ast.iter_child_nodes(node):  # type: ignore[arg-type]
+            collect(child, out)
+
+    seen: set[str] = set()
+    calls: list[str] = []
+    stack = ["main"]
+    while stack:
+        name = stack.pop()
+        if name in seen or name not in funcs:
+            continue
+        seen.add(name)
+        found: list[str] = []
+        collect(funcs[name], found)
+        calls.extend(found)
+        stack.extend(f for f in found if f in funcs)
+    return seen, calls
+
+
+def test_ucaf_gate_path_cannot_reach_a_write_primitive() -> None:
+    """Structural. No execution needed: the write must not be in the gate's call graph."""
+    reachable, calls = _gate_reachable_calls()
+    assert (
+        "measure" in reachable
+    ), "the gate path no longer reaches measure() — the walk broke, not the engine"
+    assert (
+        "write_registers" not in reachable
+    ), "write_registers() is reachable from the --gate path; a gate verifies, it does not produce"
+    forbidden = sorted(
+        {
+            call
+            for call in calls
+            if call.split(".")[-1]
+            in {"write_text", "write_bytes", "writelines", "touch", "mkdir", "dump"}
+            or call in {"open", "write_registers", "emit"}
+        }
+    )
+    assert not forbidden, f"the --gate path reaches write primitive(s): {forbidden}"

@@ -250,13 +250,34 @@ class ShardOutcome:
     tests: int
 
 
-def _shard_argv(python: str, shard: Shard, coverage: Coverage) -> list[str]:
+def _shard_argv(
+    python: str, shard: Shard, coverage: Coverage, *, report_path: str | None = None
+) -> list[str]:
     """The pytest invocation for one shard.
 
-    Under the floor, ``addopts`` is left INTACT so every ``--cov`` argument in
-    ``pyproject.toml`` still applies — the denominator must not depend on how the run
-    was scheduled. Only two things are overridden: the per-shard floor (evaluated once,
-    later, over combined data) and the per-shard report (a partial report is noise).
+    Under the floor, ``addopts`` is left INTACT so the derived ``--cov`` set in
+    ``pyproject.toml`` still applies — the denominator must not depend on how the run was
+    scheduled. Only two things are overridden: the per-shard floor (evaluated once, later,
+    over combined data) and the per-shard XML report.
+
+    THE REPORT IS REDIRECTED, NOT CLEARED, AND THE DIFFERENCE WAS MEASURED. This built
+    ``--cov-report=`` and its docstring claimed that suppressed the report. It does not.
+    ``pytest_cov/plugin.py`` stores reports in a DICT keyed by type (``StoreReport``,
+    line 76) and only collapses to "no reports" when the empty entry is the ONLY one
+    (line 228). Arriving after ``--cov-report=term-missing --cov-report=xml`` from
+    ``addopts`` it is the third key, so both earlier reports stayed in force: every shard
+    rendered a full term-missing table, and every shard wrote ``coverage.xml`` to the
+    REPOSITORY ROOT — twelve concurrent writers on one path, on the very file the UCI gate
+    reads as its coverage evidence. ``test_the_inventory_document_is_deterministic`` failed
+    under sharding while passing in isolation for exactly this reason.
+
+    Because the store is keyed by type, naming the type again REPLACES it. Redirecting
+    ``xml`` to a shard-private path is therefore a real override, and it needs no change to
+    ``addopts`` — so the plugin that derives the denominator is still loaded, which matters:
+    clearing ``addopts`` would require re-adding ``-p engine.universal_discovery.pytest_scope``
+    by module path, and a shard executing against a tree where that package is not importable
+    would die on plugin import rather than run.
+
     Without the floor, ``addopts`` is cleared and coverage is off, which is what makes a
     developer mode fast and is exactly why a developer mode may not claim the floor.
     """
@@ -269,7 +290,7 @@ def _shard_argv(python: str, shard: Shard, coverage: Coverage) -> list[str]:
             "-m",
             "pytest",
             "--cov-fail-under=0",
-            "--cov-report=",
+            f"--cov-report=xml:{report_path}" if report_path else "--cov-report=",
             "-q",
             *deselect,
             *shard.test_paths,
@@ -315,6 +336,44 @@ def run_tests(
         )
         return 1
 
+    # --- the interpreter must be able to evaluate the floor it is about to claim -----------
+    #
+    # Every shard inherits THIS process's interpreter (`sys.executable`, threaded through as
+    # `python`), and every floor-mode shard argv carries `--cov-fail-under` and `--cov-report`.
+    # Those are pytest-cov's options. Run under an interpreter without pytest-cov installed and
+    # all thirteen shards die identically before collecting anything:
+    #
+    #     pytest: error: unrecognized arguments: --cov-report=term-missing --cov-report=xml
+    #                                            --cov-fail-under=90 --cov-fail-under=0 …
+    #     exit 4
+    #
+    # Thirteen usage errors are a legible symptom of an illegible cause, and the run reports
+    # "shard(s) FAILED" — which reads as a test failure rather than as a toolchain that cannot
+    # measure. The canonical planes all pass the repository venv (`verify.sh` and every Makefile
+    # target use `$(VENV)/bin/python`), so this is reachable by invoking the CLI with a bare
+    # `python3`; on a machine whose `python3` is a different series from the pinned toolchain
+    # that is one keystroke away. Refusing HERE costs one import check and converts an
+    # unreadable failure into a named one, before any subprocess is spawned.
+    #
+    # Checked only under the floor: the developer modes pass `--no-cov` and are correct without
+    # the plugin, so requiring it there would refuse runs that would have worked.
+    if coverage is Coverage.FLOOR_90:
+        probe = subprocess.run(  # noqa: S603
+            [interpreter, "-c", "import pytest_cov"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if probe.returncode != 0:
+            print(
+                f"UVI FAULT: {interpreter} cannot import pytest_cov, so the coverage floor "
+                f"cannot be evaluated and every shard would exit 4 on unrecognized arguments. "
+                f"Run through the repository venv (./verify.sh, or make uvi) rather than a "
+                f"bare interpreter.",
+                file=out,
+            )
+            return 2
+
     # Deliberately NOT inside the repository. The first implementation passed `dir=base`
     # for no better reason than filesystem locality, and an interrupted run left
     # `uvi-logs-*` and `uvi-coverage-*` directories in the tree — which UCOS-UGA-001 then
@@ -340,7 +399,16 @@ def run_tests(
                 log_path = os.path.join(log_dir, f"shard-{shard.index}.log")
                 handle = open(log_path, "wb")  # noqa: SIM115 - closed in the wait loop below
                 process = subprocess.Popen(  # noqa: S603
-                    _shard_argv(interpreter, shard, coverage),
+                    _shard_argv(
+                        interpreter,
+                        shard,
+                        coverage,
+                        # Shard-private, outside the repository, and discarded with the
+                        # rest of `data_dir`. The combined document is written once, later,
+                        # by `_combine_and_evaluate`; a shard's partial XML is not evidence
+                        # and must not land where anything reads it.
+                        report_path=os.path.join(data_dir, f"shard-{shard.index}.xml"),
+                    ),
                     cwd=base,
                     env=env,
                     stdout=handle,

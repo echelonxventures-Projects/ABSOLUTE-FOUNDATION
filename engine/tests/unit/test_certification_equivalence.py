@@ -34,7 +34,6 @@ from engine.certification_integrity.equivalence import (
 )
 from engine.certification_integrity.model import IntegrityError
 
-
 # ------------------------------------------------------------------------------- partition
 
 
@@ -173,7 +172,7 @@ def test_the_record_copies_its_lists_so_a_reader_cannot_mutate_the_finding() -> 
 
 
 def test_a_run_that_produced_no_coverage_is_not_identical_to_anything() -> None:
-    """"The runs agreed" and "a run measured nothing" must never be the same answer: the second is
+    """ "The runs agreed" and "a run measured nothing" must never be the same answer: the second is
     an absent measurement, and treating absence as agreement is how a broken run certifies."""
     identical, comparisons = _compare_all([_result("a"), _result("b")])
     assert identical is False

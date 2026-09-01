@@ -1,0 +1,25 @@
+{
+  "artifact_id": "UCOS-UFI-ADOPTION-BASELINE-001",
+  "title": "Independence declaration — BASELINE-001",
+  "authority": "NONE — DERIVED TRUTH. This file confers no authority and states no rule. It names which instruments BASELINE-001's surfaces must be verified AGAINST, and where the reviewed templates for those surfaces live.",
+  "constitutional_superior": "UCKP-LAW-0001",
+  "schema": "ucos-independence-declaration",
+  "version": "1.0.0",
+  "owner": "BASELINE-001",
+  "framework": "00-BOOK/tools/ufi.py",
+  "$why_pointers": [
+    "Every field below is a POINTER into an instrument that already holds the list, never a",
+    "copy of it. UCKP-ART-03 makes a second authoring of the same knowledge void, so adopting",
+    "the framework may not require restating data that baseline.json or the registry already declares."
+  ],
+  "authorities": [
+    "00-BOOK/DATA/baseline-authority.json",
+    "00-MASTER/BASELINE-001/baseline.json",
+    "00-MASTER/BASELINE-001/baseline-declaration.json"
+  ],
+  "surfaces": {
+    "from": "00-BOOK/DATA/generated-artifact-registry.json",
+    "json_path": "entries[?owner=='BASELINE-001'].canonical_path"
+  },
+  "manifest": "00-BOOK/DATA/independence/baseline-template-manifest.json"
+}

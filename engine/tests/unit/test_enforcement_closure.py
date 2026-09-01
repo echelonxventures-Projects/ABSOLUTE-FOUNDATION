@@ -76,10 +76,10 @@ def _run(document: dict[str, Any], check: str) -> list[str]:
 # a reachable PASS. Without this, every refusal assertion below would be vacuous.
 
 
-def test_the_gate_is_open_on_the_committed_repository(report: dict[str, Any]) -> None:
+def test_the_gate_is_open_on_the_measured_working_tree(report: dict[str, Any]) -> None:
     """The adopted state must be reachable, or the ratchet was declared against fiction."""
     refusals = [row for row in report["laws"] if row["verdict"] == REFUSED and row["blocking"]]
-    assert not refusals, "blocking refusals on the committed tree: " + json.dumps(
+    assert not refusals, "blocking refusals on the measured WORKING TREE: " + json.dumps(
         [{"law": row["law_id"], "violations": row["violations"][:4]} for row in refusals], indent=1
     )
     assert report["status"] == "OPEN"
@@ -342,7 +342,7 @@ def test_l11_refuses_a_governed_count_that_disagrees_with_the_inventory(
 # UEC-L-09 — self-coverage. Discovery D-09 as an executable invariant.
 
 
-def test_l09_holds_on_the_committed_repository() -> None:
+def test_l09_holds_on_the_measured_working_tree() -> None:
     """UEC is inside UEC. If this ever fails, the closure mechanism has left its own closure."""
     report = measure(repository=ROOT, laws=["UEC-L-09"])
     row = report["laws"][0]
@@ -677,7 +677,7 @@ def test_declaration_module_exposes_no_hardcoded_authority() -> None:
 # pass, then an independent forged violation for each way it can be defeated.
 
 
-def test_l13_passes_over_the_committed_repository(report: dict[str, Any]) -> None:
+def test_l13_passes_over_the_measured_working_tree(report: dict[str, Any]) -> None:
     """The reachable PASS. Without it every refusal below would be vacuous."""
     row = next(r for r in report["laws"] if r["law_id"] == "UEC-L-13")
     assert row["verdict"] != REFUSED, row["violations"]

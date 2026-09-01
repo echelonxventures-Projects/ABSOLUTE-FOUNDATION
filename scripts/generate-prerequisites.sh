@@ -117,3 +117,24 @@ PY="${PYTHON:-python3}"
 "$PY" -m intelligence.realization realize >/dev/null
 
 echo "generated prerequisites: knowledge · determinism-evidence · closure phases 1-3 · research · publication · provenance · realization" >&2
+
+# UCOS-UCTX-001 — the generated context projections (Model B).
+#
+# Decision-01 made every context projection a PRODUCT rather than tracked truth, so a fresh
+# clone arrives with no CLAUDE.md, no AGENTS.md, no .cursor rule and no context root at all.
+# That is the correct storage posture and a dangerous default: the condition this whole
+# capability exists to prevent is an agent operating with no governed context.
+#
+# This line is what keeps the two facts from becoming the same thing. The projections are
+# declared in generated_inputs with this exact bootstrap_command, so UGA-INV-06 refuses the
+# declaration if this stage stops producing them — the bootstrap obligation is measured, not
+# remembered. It runs before the context gate stage, so a clone is in a governed state by the
+# time anything reads it.
+#
+# Deterministic and idempotent: identical inputs produce identical bytes and a second run
+# writes nothing, so wiring it here injects no variance into the Phase-8 fixed point.
+# Writes only the paths the exclusion register classifies GENERATED_DETERMINISTIC, so it
+# cannot dirty the tracked working tree.
+"$PY" 00-BOOK/tools/ukctx.py build >/dev/null
+
+echo "generated prerequisites: context projections (UCOS-UCTX-001)" >&2

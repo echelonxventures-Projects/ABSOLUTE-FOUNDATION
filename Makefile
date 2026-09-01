@@ -2431,3 +2431,69 @@ uci-json: bootstrap-quiet
 # refusal into a pass — the same asymmetry `make uec-inventory` relies on.
 uci-inventory: bootstrap-quiet
 	@$(PY) -m engine.certification_integrity.gate --write-inventory coverage_gap_inventory.json
+
+
+
+# ===========================================================================
+# UCOS-OMEGA-001 — Universal Discovery. Governance derived from executable reality.
+#
+# WHAT THIS PROGRAMME REPLACED. Every governance control in this repository used to
+# quantify over a list somebody wrote. The lists were correct when written and
+# silently wrong afterwards, and the omissions were found by READING them rather
+# than by any control firing: SOURCE_TREES = ("engine", "platform") while five other
+# roots existed; engine/recursive_knowledge invisible to an __init__.py predicate;
+# 3,995 passing tests in four layers that no testpaths entry collected; scripts/ in
+# no list at all. One root cause — a list has no term for what it omits, so it cannot
+# report its own incompleteness.
+#
+# The five phases, each measured on every run of `make omega`:
+#   Ω-1  scope, test roots and the coverage denominator DERIVED from git ls-files
+#   Ω-2  authority derived by a chain whose last rule is unconditional (NONE is unreachable)
+#   Ω-3  reachability over the execution graph, proved location-independent by experiment
+#   Ω-4  ratchets that are DIRECTIONS, not the 65/27/39/25/14/10 snapshots they replaced
+#   Ω-5  exactly one disposition per tracked artifact — no orphan, unknown or unowned state
+#
+# These targets are one of the two invocation planes UEC-L-06 requires; the other is
+# .github/workflows/omega-gate.yml. Deleting either now fails UEC-L-02.
+#
+# Exit semantics: 0 all five criteria hold, 1 a criterion refused, 2 FAULT (no verdict).
+# ===========================================================================
+.PHONY: omega omega-gate omega-json omega-scope omega-seal
+
+# omega: the human-readable measurement — every phase, every ratchet, every note.
+omega: bootstrap-quiet
+	@$(PY) -m engine.universal_discovery
+
+# omega-gate: fail-closed. Refuses an artifact with no disposition, an artifact with no
+# authority, a relocation that changes a verdict, and any ratchet worse than this
+# repository's own best with no written justification.
+#
+# INVOKED BY ITS OWN MODULE PATH, and that is UEC-L-04's requirement rather than a style
+# choice: UEC-000001 locates every `engine/*/gate.py` as an enforcement artifact and
+# requires each to be invoked by a Makefile target, a workflow or a verify.sh stage.
+# Reaching it only as `-m engine.universal_discovery` left the module UEC names with no
+# invoker under the name UEC uses.
+omega-gate: bootstrap-quiet
+	@$(PY) -m engine.universal_discovery.gate >/dev/null \
+	  || { echo "OMEGA GATE CLOSED — run 'make omega' for the named refusals" >&2; exit 1; }
+	@echo "omega-gate: scope derived, authority total, graph invariant, every ratchet holds"
+
+# omega-json: the machine-readable surface, for a consumer that needs the artifact table.
+omega-json: bootstrap-quiet
+	@$(PY) -m engine.universal_discovery --json
+
+# omega-scope: what replaced the 78 --cov= flags, the 78 source paths and the 7 testpaths.
+# Printed rather than described, so a reader can check the denominator the suite runs under.
+omega-scope: bootstrap-quiet
+	@$(PY) -m engine.universal_discovery --scope
+
+# omega-seal: advance the Ω-4 best-ever values and write the surface evidence. Sealing moves
+# each bound only DOWNWARD and is refused if the sealed document is looser than the run that
+# wrote it, so this cannot turn a refusal into a pass — it can only record an improvement.
+omega-seal: bootstrap-quiet
+	@$(PY) -m engine.universal_discovery --seal
+
+# omega-uci-seal: the same, for the six UCI laws now held to directions rather than ceilings.
+.PHONY: uci-seal
+uci-seal: bootstrap-quiet
+	@$(PY) -m engine.certification_integrity.gate --seal-ratchet --quiet

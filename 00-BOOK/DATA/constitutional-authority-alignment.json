@@ -274,6 +274,17 @@
       "may_never_own": "The standard it validated against. A record of a measurement is not the law the measurement was taken under."
     },
     {
+      "id": "UCOS-ALLOCATION-PERMIT-REGISTER-001",
+      "instrument": "00-BOOK/DATA/allocation-permits.json",
+      "name": "Allocation Permit Register",
+      "role": "EVIDENCE",
+      "relation": "PROJECTION",
+      "derives_under": ["UCKP-ART-05", "UCKP-ART-12", "UCKP-ART-16"],
+      "owns": "The written record of which operator authorized which specific, digest-bound identity allocation, retained so an irreversible act can be reviewed after the fact.",
+      "may_never_own": "The power to allocate. A permit is verified by UCOS-LEDGER-AUTHORITY-001 against the manifest the write actually measures, and a permit binding a digest the write does not produce authorizes nothing — so the register records authorization and confers no authority, exactly as a validation record records a measurement without being the law it was taken under.",
+      "why_it_is_evidence_and_not_execution": "It executes nothing. `engine/ledger_authority` READS it and refuses; no engine writes it, and an operator issuing a permit is acting outside the repository. Filing it as EXECUTION would say the register performs allocations, which is the precise misreading its content-bound, single-use verification exists to make impossible."
+    },
+    {
       "id": "CMG-000001",
       "instrument": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
       "name": "Constitutional Meta Governance Constitution",
@@ -294,6 +305,17 @@
       "owns": "The EXECUTION ENVIRONMENT MODEL — which interpreter, virtual environment, series and toolchain a certified execution runs under, the integrity conditions that execution must satisfy, and the evidence a certified run records about what verified it.",
       "may_never_own": "Knowledge, and the verdict of anything that runs inside the environment it governs. UCKP-ART-10 is that execution never owns knowledge; the declaration already states the same boundary in its own words (`$not_a_second_authority`: pyproject.toml remains the only place a version is declared), and this entry is where that sentence acquires a superior to be true under.",
       "why_it_is_bound_here": "It carries a top-level `authority`, so it enters the CAA-INV-02 claim scan the moment it enters version control — it was authored untracked, which is the only reason the scan had not already seen it. Binding it is the declared extension path (`extension_rule.how_to_extend`: a new repository capability declares its role and its articles here and gains a `constitutional_superior` block), not a new authority."
+    },
+    {
+      "id": "UCOS-UCTX-001",
+      "instrument": "00-BOOK/DATA/context-authority.json",
+      "name": "Universal Context Authority",
+      "role": "PROJECTION",
+      "relation": "PROJECTION",
+      "derives_under": ["UCKP-ART-03", "UCKP-ART-04", "UCKP-ART-11", "UCKP-ART-13", "UCKP-ART-18"],
+      "owns": "Which existing authority answers each context domain, and the declaration that every agent-facing context surface is a generated projection of those authorities.",
+      "may_never_own": "Truth, and any domain an existing instrument already answers. It NAMES authorities under UCKP-ART-18 and declares none. Its two self-answered domains (branch_policy, agent_policy) are statements about context DISTRIBUTION — where context may live and who may hold it — and neither states a rule about the objects any other instrument governs.",
+      "why_it_binds_itself": "It carries a top-level `authority`, so it enters the CAA-INV-02 claim scan the moment it enters version control. Binding it is the declared extension path (`extension_rule.how_to_extend`), not a new authority. The `agents` domain was measured ownerless at fce3cb9b — the single unknown_authority_domain of the twelve — and an ownerless domain is the condition in which the first hand-written agent file becomes an unregistered, branch-local, rival authority under UCKP-ART-03. This instrument occupies that domain as a PROJECTION so that nothing else can occupy it as a law."
     }
   ],
 

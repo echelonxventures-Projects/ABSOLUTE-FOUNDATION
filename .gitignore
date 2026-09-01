@@ -123,6 +123,21 @@ intelligence/die/
 00-MASTER/UAKOS-PHASE-001B/provenance.json
 00-MASTER/UAKOS-PHASE-004/10-UNIVERSAL-GAP-DEPENDENCY-GRAPH.json
 
+# EXCEPTION (RC-0014): vendored INPUT evidence, which is the opposite of the case above.
+# The rule immediately preceding ignores generated evidence OUTPUT. UAKOS-CLOSURE-008's
+# `evidence-vendored/` tree is the frozen INPUT the assimilation determination rests on —
+# ~37 MB, previously read from ~/Desktop/KNOWLEDGE-ASSIMILATION, i.e. outside the repository
+# and present on one machine. A clean clone could replay the registers but never re-derive
+# them, so the chain of custody behind 23,859 assimilated objects was unverifiable anywhere
+# else. It is tracked so that "regenerate from a clean checkout and compare" is a question a
+# fresh clone can answer.
+#
+# The nested `evidence/` directory name is inherited from the external tree's own layout and
+# is what collides with the pattern above; it is re-included explicitly rather than by
+# renaming, so the vendored copy stays byte-identical to the evidence the committed
+# EVIDENCE-MANIFEST.json digests.
+!00-MASTER/UAKOS-CLOSURE-008/evidence-vendored/evidence/
+
 
 
 # URI-000001 (Universal Realization Intelligence) — generated realization artifacts and
@@ -231,3 +246,63 @@ intelligence/UCOS-UPI-001/
 .ucos/
 .uci-evidence/
 coverage_gap_inventory.json
+
+# ---------------------------------------------------------------------------
+# UCOS-UCTX-001 — GENERATED CONTEXT PROJECTIONS (Model B).
+#
+# Every path below is emitted by 00-BOOK/tools/ukctx.py from the authored
+# declaration at 00-BOOK/DATA/context-authority.json. Under Decision-01 a
+# projection is a PRODUCT, never tracked truth: the canonical authority is the
+# authored source, and a product that is also tracked is a second copy of a
+# truth that already exists (UCKP-ART-03) and a permanent identity spent on
+# something re-derivable in one command (UCKP-ART-11).
+#
+# EXCLUSION COSTS A DECLARATION. Every rule here resolves to a
+# GENERATED_DETERMINISTIC entry in 00-BOOK/DATA/exclusion-register.json naming
+# this producer, its regeneration command and its fixed-point proof. An ignored
+# path with no declared class is `ignored_unclassified` and fails closed, so
+# these lines REMOVE no obligation — they move it.
+#
+# A FRESH CLONE HAS NO CONTEXT UNTIL IT GENERATES. That is enforced, not
+# assumed: scripts/generate-prerequisites.sh emits them at verify.sh stage 1b,
+# and the context gate refuses a tree in which a declared surface is missing.
+# Regenerate at any time with: python3 00-BOOK/tools/ukctx.py build
+# ---------------------------------------------------------------------------
+/00-BOOK/CONTEXT/
+/AGENTS.md
+/.claude/CLAUDE.md
+/.cursor/rules/ucos.mdc
+/.kiro/steering/ucos.md
+/.github/copilot-instructions.md
+
+# ---------------------------------------------------------------------------
+# CLAUDE CODE OPERATIONAL STATE (MB9).
+#
+# These paths were excluded ONLY by non-versioned mechanisms — `.git/info/exclude`
+# for most of them and this developer's global `~/.config/git/ignore` for
+# settings.local.json. Neither travels with a clone, so the repository's ignore
+# posture differed between machines: paths that were excluded here were untracked
+# and unignored anywhere else. UCOS-UCTX-001 INV-CTX-12 walks agent directories
+# ignored-inclusive, so an unclassified operational file is a gate REFUSAL — which
+# turned a per-workstation accident into a failure whose cause was invisible.
+#
+# Declaring them here makes the exclusion travel with the repository. Every rule
+# resolves to a TOOL_OPERATIONAL entry in 00-BOOK/DATA/exclusion-register.json and
+# to an agent_surface_rule in 00-BOOK/DATA/context-authority.json, so this REMOVES
+# no obligation: an ignored path with no declared class still fails closed.
+#
+# These are per-developer runtime state — a lock, a mailbox, a daemon's own record
+# of itself. They are never shared and never repository truth, which is the same
+# class the register already assigns to settings.local.json.
+# ---------------------------------------------------------------------------
+**/.claude/settings.local.json
+**/.claude/scheduled_tasks.lock
+**/.claude/scheduled_tasks.json
+**/.claude/routines/.state/
+**/.claude/worktrees/
+**/.claude/checkpoints/
+**/.claude/mailbox/
+**/.claude/agent-registry.json
+**/.claude/agent-memory-local
+**/.claude/first-run
+**/.claude/assistant-daemon-state.json

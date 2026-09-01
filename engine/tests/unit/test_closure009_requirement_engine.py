@@ -28,7 +28,6 @@ from __future__ import annotations
 
 import importlib.util
 import json
-import tomllib
 from pathlib import Path
 
 import pytest
@@ -219,24 +218,45 @@ def test_a_workflow_names_the_engine():
 
 
 def test_this_test_is_collected_by_the_canonical_test_runner():
-    """This file sits inside a declared testpath, so `pytest` with no arguments runs it.
+    """This file sits inside a DISCOVERED test root, so `pytest` with no arguments runs it.
 
     UCOS-CL-008 — the assertion was a literal match on the full testpaths line, which made
     it a change-detector for that string rather than a check of the property it names: a
-    legitimate ADDITION to the canonical collection broke it. It now asserts what it means,
-    that this file's own root is declared, and additionally that intelligence/tests is
-    declared — the omission that left the RIE coverage-isolation regression collected by
-    nothing while it claimed to guard canonical identity.
+    legitimate ADDITION to the canonical collection broke it.
 
     UCI-000001 — and it broke again, the same way, for the same reason. Reading ``testpaths``
     as a single LINE is still a formatting assertion: when the list grew past one line (four
     more roots were admitted, wiring up 3,995 tests that no runner collected), ``startswith
     ("testpaths")`` matched ``testpaths = [`` and every root moved to a line this check never
-    read. Twice is a pattern, so the scrape is replaced by a TOML parse. ``tomllib`` answers
-    the question the docstring claims to ask, and no reflow of the file can change its answer.
+    read. Twice is a pattern, so the scrape was replaced by a TOML parse.
+
+    UCOS-OMEGA-001 — and a TOML parse broke it a THIRD time, because it was still a question
+    about a LIST. ``testpaths`` no longer exists: Ω-1 derives the collection set from which
+    directories hold suites, so the honest form of this check is to ask the derivation whether it
+    collects this file. That question has no formatting to be sensitive to and no list to fall out
+    of, and it now also covers the roots the old three-name check never mentioned.
     """
-    with (REPO / "pyproject.toml").open("rb") as handle:
-        testpaths = tomllib.load(handle)["tool"]["pytest"]["ini_options"]["testpaths"]
-    for root in ("engine/tests", "platform/tests", "intelligence/tests"):
-        assert root in testpaths, f"{root} is not a canonical testpath: {testpaths}"
-    assert Path(__file__).resolve().is_relative_to(REPO / "engine" / "tests")
+    from engine.universal_discovery import discovery, graph
+
+    tracked = discovery.tracked_python(str(REPO))
+    import_graph = graph.ImportGraph(str(REPO), tracked)
+    test_roots = discovery.derive_test_roots(tracked, graph.imported_by_path(import_graph, tracked))
+    discovery.assert_suite_exists(test_roots)
+
+    relative = Path(__file__).resolve().relative_to(REPO).as_posix()
+    assert any(relative.startswith(root + "/") for root in test_roots), (
+        f"{relative} is inside no discovered test root, so the canonical runner does not collect "
+        f"it: {test_roots}"
+    )
+    # The omission that left the RIE coverage-isolation regression collected by nothing, pinned by
+    # name rather than described — and the four layers whose 3,995 passing tests no runner ran.
+    for root in (
+        "engine/tests",
+        "platform/tests",
+        "intelligence/tests",
+        "service/tests",
+        "data/tests",
+        "application/tests",
+        "infrastructure/tests",
+    ):
+        assert root in test_roots, f"{root} is not discovered as a test root: {test_roots}"

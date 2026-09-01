@@ -103,10 +103,42 @@ class Inventory:
     scope_drift: dict[str, object]
 
     def digest(self) -> str:
-        """Content hash over the inventory, for the Rule 7 provenance record."""
+        """Content hash over the inventory, for the Rule 7 provenance record.
+
+        TAKEN OVER THE COVERAGE-INDEPENDENT PROJECTION, and that is the fix rather than a
+        detail. This digest is quoted in certification reports as an attestation of a COMMIT,
+        but it was computed over `as_record()`, whose `measured_statements`,
+        `covered_statements`, `missing_statements` and `coverage_percent` all derive from
+        `coverage.xml` — a file that is gitignored, is rewritten by any pytest invocation, and
+        is absent entirely on a fresh clone. One unchanged tree therefore produced three
+        different digests depending on which coverage document happened to be lying around,
+        so the attestation covered the commit PLUS an unrecorded local artifact.
+
+        `ast_statements` is used instead of `statements` for the reason its own comment gives:
+        `statements` is intersected with a coverage report whenever one is present. The
+        precedent is UCI-L-06, which answered 10 or 9 on one unchanged tree on exactly that.
+
+        The projection is built here rather than as a `FileRecord` method deliberately: the
+        surface attributes statements per object, and `platform`-side tests require that
+        attribution to PARTITION each module exactly, so adding a method to `model.py` changes
+        a measured population. A digest has no business moving a measurement.
+
+        `totals` is no longer folded in — its coverage fields carried the same dependency, and
+        its structural fields are already a function of the records.
+        """
         payload = {
-            "files": [f.as_record() for f in self.files],
-            "totals": self.totals,
+            "files": [
+                {
+                    "path": f.path,
+                    "classification": f.classification,
+                    "ast_statements": f.ast_statements,
+                    "execution_paths": list(f.execution_paths),
+                    "invocation_sources": list(f.invocation_sources),
+                    "governing_authority": f.governing_authority,
+                    "exclusion_reason": f.exclusion_reason,
+                }
+                for f in self.files
+            ]
         }
         encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
         return hashlib.sha256(encoded).hexdigest()
@@ -118,8 +150,12 @@ class Inventory:
             "authority": "NONE — DERIVED TRUTH. Measurement of tracked repository state.",
             "producer": "engine/certification_integrity/inventory.py",
             "determinism": (
-                "No wall clock, no commit identity, no working-tree status. The bytes are a "
-                "pure function of tracked content, so two runs over one tree are identical."
+                "No wall clock, no commit identity, no working-tree status. The DIGEST is a "
+                "pure function of tracked content — it is taken over the coverage-independent "
+                "projection of each file, so it is identical whether coverage.xml is current, "
+                "stale or absent. The coverage fields in `totals` and in each file record are "
+                "reported here but are NOT part of that identity, because a measurement of how "
+                "much of the tree was executed is not a property of the tree."
             ),
             "totals": self.totals,
             "findings": {

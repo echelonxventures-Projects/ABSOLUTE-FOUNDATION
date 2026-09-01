@@ -272,7 +272,16 @@
     },
     {"producer": "00-MASTER/MCOS-000001/mcos_engine.py", "canonical_artifacts": 9, "sources": [], "discharge": ["NONE"], "note": "Audited clean; the coverage match is a docstring recording UCOS-CL-005."},
     {"producer": "00-MASTER/UPF-000001/upf_engine.py", "canonical_artifacts": 9, "sources": [], "discharge": ["NONE"], "note": "Audited clean; same docstring."},
-    {"producer": "00-MASTER/UMK-000001/umk_engine.py", "canonical_artifacts": 9, "sources": [], "discharge": ["NONE"], "note": "Audited clean; same docstring."}
+    {"producer": "00-MASTER/UMK-000001/umk_engine.py", "canonical_artifacts": 9, "sources": [], "discharge": ["NONE"], "note": "Audited clean; same docstring."},
+    {
+      "producer": "00-BOOK/tools/ukctx.py",
+      "canonical_artifacts": 23,
+      "sources": [],
+      "discharge": [
+        "NONE"
+      ],
+      "note": "Audited clean BY CONSTRUCTION, and the construction is the point. The first version of this capability put the generator and its closure gate in one module, and OBS-INV-12 refused it: `reads WORKING_TREE and declares no observation source`. The reading was real — `git status --porcelain` for INV-CTX-09 and the ref list for INV-CTX-08 — so the answer was not to declare it but to move it. The observing half is now 00-BOOK/tools/ukctx_gate.py, which holds no canonical output and therefore is not measured here. This producer reads the declaration and the tracked instruments it names, and nothing else: no git, no working tree, no clock, no environment."
+    }
   ],
 
   "$ancestry_comment": [

@@ -380,6 +380,27 @@ fi
 run_stage "pytest + coverage gate (--cov-fail-under=90)" "$PY" "${PYTEST_ARGV[@]}"
 
 
+# --- Stage 3a: UCOS-OMEGA-001 — governance derived from executable reality --------
+# WHY THIS STAGE SITS HERE, immediately after the coverage gate. The gate above reports a
+# percentage; this stage governs the SET that percentage is computed over, and it is the
+# stage that computed it — the same derivation that fed pytest-cov its --cov targets runs
+# again here and is checked for totality. Placing it after the coverage gate means the
+# denominator is verified against the tree in the same run that measured against it.
+#
+# WHAT IT REFUSES, one condition per phase and each the negation of that phase's criterion:
+#   Ω-1  a discovered artifact that no measurement, exemption or declaration accounts for
+#   Ω-2  an artifact resolving to authority = NONE without a transient declaration
+#   Ω-3  a relocation that changes a governance verdict — proved by moving the largest
+#        root to a root that does not exist and requiring every verdict to be unchanged
+#   Ω-4  a metric worse than this repository's own best with no written justification
+#   Ω-5  an artifact carrying no disposition, or more than one
+#
+# READ-ONLY. Writing is `make omega-seal`, never this stage, so a certification run cannot
+# advance the bounds it is being measured against.
+run_stage "omega gate (discovery · authority · reachability · ratchets · disposition)" \
+  "$PY" -m engine.universal_discovery
+
+
 # --- Stage 4: governance enforcement (UMB-IMP-001 pre-registration gate) ---------
 # Read-only eligibility/validity/classification gate (same gate CI runs first).
 run_stage "governance enforce --pre" "$PY" 00-BOOK/tools/ukb.py enforce --pre
@@ -434,6 +455,88 @@ run_stage "meta-constitutional conformance (CMG-INV-01..12)" bash 00-CMG/tools/c
 # `bootstrap_gaps` is empty and the exemption is gone with the condition it covered.
 run_stage "universal object governance (UGA-INV-01..10)" \
   "$PY" 00-MASTER/UCOS-UGA-001/uga_engine.py gate
+
+# --- Stage 6b-ctx: universal context closure gate (UCOS-UCTX-001 INV-CTX-01..11) --
+# The stage above governs OBJECT identity. This one governs CONTEXT authority, and it
+# exists because those are different questions with different failure modes.
+#
+# WHAT WAS MEASURED BEFORE IT EXISTED, at fce3cb9b: `.claude/` held zero tracked files,
+# `.cursor/` did not exist, all seven `.kiro/` hooks were frozen, and no CLAUDE.md,
+# steering file or rules directory existed anywhere in the tree. No agent surface
+# claimed authority — and none received any context either. `agents` was the single
+# knowledge domain of twelve with NO declared authority.
+#
+# An ownerless context domain is not a safe steady state. It is the state in which the
+# first hand-written agent instruction file becomes repository truth — on one branch,
+# under no authority, listed in no register — and every later agent inherits it. Under
+# UCKP-ART-03 that file is void the moment it restates a rule the constitution already
+# holds, but "void" is a property nothing was measuring.
+#
+# This stage measures it. Every agent surface is now a GENERATED projection of
+# 00-BOOK/DATA/context-authority.json, so a hand edit is drift (INV-CTX-07) rather than
+# a new rule, and a branch or worktree carrying context the declaration does not produce
+# is a refusal (INV-CTX-08 / INV-CTX-09) rather than a divergence nobody noticed.
+#
+# Read-only and fail-closed. The gate is a SEPARATE module from the generator on
+# purpose: it reads `git status --porcelain` and the ref list, and a producer that reads
+# the working tree is an undeclared observer under UGA OBS-INV-12. The generator writes
+# and never observes; this gate observes and never writes.
+run_stage "universal context closure (INV-CTX-01..11)" \
+  "$PY" 00-BOOK/tools/ukctx_gate.py
+
+# --- Stage 6b-prov: independent context verification (UCOS-UCTX-001, MB7) -------
+# The stage above is computed BY the generator's own derivation, so it cannot detect a
+# generator that is uniformly wrong. Measured: ten variants — an injected sentence, a
+# reversed rule, a fabricated authority, a permuted table, a swapped authority home, a
+# truncated statement, a deleted section, a dropped article — each left all fifteen
+# invariants green, because all fifteen are computed from the run that produced the error.
+#
+# That is MB7, and it is not specific to this capability: the generated-artifact registry
+# records validation_owner == owner for every entry, 13 of 33 producers have no validator
+# outside their own home, and 18 of the 19 that do import or execute the producer they
+# validate. Module separation is not authority separation.
+#
+# This stage is the independent leg. It does not import ukctx, run it, or read its source.
+# It asks three questions of the emitted surfaces: does every LINE trace to a declared
+# source (a reviewed template, or a string a declared authority already holds); is every
+# declared RECORD projected whole rather than re-paired; is every declared OBLIGATION
+# carried rather than quietly dropped. Five of the ten variants emit no undeclared text at
+# all, which is why one question would not have been enough.
+#
+# It found two live defects on its first run, both of which the fifteen invariants had
+# reported as closure: UCKP-ART-01 (Supremacy) absent from every agent surface, and all
+# nineteen remaining article statements truncated at their final line.
+#
+# WHAT IT DOES NOT CLAIM. It does not prove the manifest's first population was right —
+# that was reviewed in the commit that introduced it. It guarantees that nothing is added
+# afterwards without the same review, which moves the attack from "edit one script" to
+# "edit a script AND an authored instrument".
+run_stage "independent context provenance (MB7)" \
+  "$PY" 00-BOOK/tools/ukctx_verify.py
+
+# --- Stage 6b-ufi: independent verification, every declared adopter (MB7 rollup) --
+# The stage above closes MB7 for ONE capability. Measured across the repository, that is
+# where the defect lives generally: `validation_owner` equals `owner` for every entry of
+# the generated-artifact registry, NO producer has a test inside its own home, and 16 of
+# 33 producers have no producer-specific validator anywhere. A verifier written 33 times
+# would be 33 new things that can each be uniformly wrong, so the checks were extracted
+# into one implementation (00-BOOK/tools/ufi.py) that a producer ADOPTS by declaring its
+# own authorities and its own manifest.
+#
+# The framework shares CODE and never AUTHORITY: ufi.py holds no list of any adopter's
+# authorities, surfaces or templates, and a shared authority source would be the rival
+# authority UCKP-ART-03 voids.
+#
+# This stage carries no count and names no adopter. Adoption is adding a declaration to
+# 00-BOOK/DATA/independence/, and a stage that had to be edited to admit its next adopter
+# would make adoption a documentation change in three files. It fails closed on an empty
+# adopter set, because a framework that passes by verifying nothing is the defect again.
+#
+# UCOS-UCTX-001 is deliberately verified here AND by the stage above. That is not
+# redundancy to remove: it is the second invocation plane UEC-L-06 asks for, so deleting
+# either leg still leaves the check running.
+run_stage "independent producer verification (UFI, every declared adopter)" \
+  "$PY" 00-BOOK/tools/ufi.py --all
 
 # --- Stage 6c: autonomous universal evolution gate (UAUE-000001) ------------------
 # The evolution declaration binds three of its eleven positions — Execute, Validate and
