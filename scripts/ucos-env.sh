@@ -436,3 +436,102 @@ ucos_env_gate() {
 ucos_env_cache_invalidate() {
   rm -f "$UCOS_REPO/.ucos/environment-fingerprint.json" 2>/dev/null || true
 }
+
+# --- Working-tree lease (AEOS G-04) ----------------------------------------------
+# WHY THIS EXISTS. Multiple agent sessions write to this tree with no lock, and it has
+# corrupted a certification measurement at least twice: final_certification_report.md §14
+# records a second process that "advanced HEAD twice, and committed my uncommitted edits
+# into its own commit while deleting untracked files I had created", and a later
+# integration run failed test_verification_purity because three tracked files moved
+# under it twenty-two minutes before the run began. Neither was a defect in the
+# verification plane. Both were the absence of this.
+#
+# WHAT A LEASE BUYS THAT A LOCK DOES NOT. Mutual exclusion is the smaller half. The
+# larger half is ATTRIBUTABILITY: a measurement taken while another process mutates the
+# tree is attributable to no commit, so the lease records HEAD and the porcelain digest
+# at acquisition and ucos_lease_verify re-measures them at release. A run whose subject
+# moved underneath it must say so rather than report a verdict about a state that never
+# existed as a whole.
+#
+# IT REFUSES; IT DOES NOT KILL. A live holder is reported with its pid and age and the
+# run stops. Reaping another process is not a verification command's business, and a
+# lease that kills is a lease that loses work.
+#
+# STALE LEASES ARE RECLAIMED, NOT OBEYED. A lease whose pid is gone is an artifact of a
+# crash, and refusing forever on it would make every crash require manual cleanup — the
+# failure mode that teaches people to delete lockfiles reflexively.
+UCOS_LEASE_FILE="${UCOS_LEASE_FILE:-}"
+
+_ucos_lease_path() {
+  if [ -n "$UCOS_LEASE_FILE" ]; then printf '%s\n' "$UCOS_LEASE_FILE"; return; fi
+  printf '%s\n' "$(ucos_repo_root)/.ucos/verify.lease"
+}
+
+_ucos_head()      { git -C "$(ucos_repo_root)" rev-parse HEAD 2>/dev/null || printf 'none\n'; }
+_ucos_porcelain() { git -C "$(ucos_repo_root)" status --porcelain 2>/dev/null | shasum -a 256 | cut -d' ' -f1; }
+_ucos_lease_field() { sed -n "s/^$2=//p" "$1" 2>/dev/null | head -1; }
+
+# LIVENESS IS `ps`, NOT `kill -0`, AND THE DIFFERENCE IS A SILENT WRONG ANSWER. `kill -0`
+# fails in two unrelated ways: ESRCH (no such process) and EPERM (it exists but belongs to
+# somebody else). The shell collapses both to "non-zero", so a lease held by another
+# user's live run was read as stale and reclaimed underneath them — the exact corruption
+# the lease exists to prevent, caused by the lease. `ps -p` answers the question actually
+# being asked: does this pid exist. Measured in the failure direction against pid 1.
+_ucos_pid_alive() { ps -p "$1" -o pid= >/dev/null 2>&1; }
+
+ucos_lease_acquire() {
+  local mode="${1:-unknown}" lease pid held_mode age now
+  lease="$(_ucos_lease_path)"
+  mkdir -p "$(dirname "$lease")" 2>/dev/null || true
+  if [ -f "$lease" ]; then
+    pid="$(_ucos_lease_field "$lease" pid)"
+    held_mode="$(_ucos_lease_field "$lease" mode)"
+    if [ -n "$pid" ] && [ "$pid" != "$$" ] && _ucos_pid_alive "$pid"; then
+      now=$(date +%s); age=$(( now - $(_ucos_lease_field "$lease" epoch) ))
+      ucos_err "the working tree is leased by another run."
+      ucos_err "  holder      : pid $pid (--$held_mode), ${age}s ago"
+      ucos_err "  lease       : $lease"
+      ucos_err "  why refused : a measurement taken while another process mutates this tree is"
+      ucos_err "                attributable to no commit. Wait for pid $pid, or stop it."
+      exit 1
+    fi
+    # Only a lease held by a DIFFERENT, dead pid is a reclaim. Re-acquiring our own is
+    # ordinary — reporting it as a stale reclaim would train the reader to ignore the one
+    # message that means another run died holding the tree.
+    if [ -n "$pid" ] && [ "$pid" != "$$" ]; then
+      ucos_warn "reclaiming a stale lease from pid $pid (no longer running)"
+    fi
+  fi
+  {
+    printf 'pid=%s\n' "$$"
+    printf 'mode=%s\n' "$mode"
+    printf 'epoch=%s\n' "$(date +%s)"
+    printf 'head=%s\n' "$(_ucos_head)"
+    printf 'porcelain=%s\n' "$(_ucos_porcelain)"
+  } > "$lease"
+}
+
+ucos_lease_release() {
+  local lease; lease="$(_ucos_lease_path)"
+  [ -f "$lease" ] || return 0
+  [ "$(_ucos_lease_field "$lease" pid)" = "$$" ] && rm -f "$lease"
+  return 0
+}
+
+# Re-measure the subject. Non-zero when the tree moved under the run, which makes every
+# verdict this run produced unattributable — reported, never silently tolerated.
+ucos_lease_verify() {
+  local lease was_head was_dirty now_head now_dirty; lease="$(_ucos_lease_path)"
+  [ -f "$lease" ] || return 0
+  [ "$(_ucos_lease_field "$lease" pid)" = "$$" ] || return 0
+  was_head="$(_ucos_lease_field "$lease" head)";      now_head="$(_ucos_head)"
+  was_dirty="$(_ucos_lease_field "$lease" porcelain)"; now_dirty="$(_ucos_porcelain)"
+  if [ "$was_head" != "$now_head" ] || [ "$was_dirty" != "$now_dirty" ]; then
+    ucos_err "the working tree MOVED during this run — the result is attributable to no commit."
+    [ "$was_head" != "$now_head" ] && ucos_err "  HEAD      : $was_head -> $now_head"
+    [ "$was_dirty" != "$now_dirty" ] && ucos_err "  worktree  : porcelain digest changed"
+    ucos_err "  Re-run against a tree no other process is writing."
+    return 1
+  fi
+  return 0
+}

@@ -489,3 +489,133 @@ def test_ucaf_gate_path_cannot_reach_a_write_primitive() -> None:
         }
     )
     assert not forbidden, f"the --gate path reaches write primitive(s): {forbidden}"
+
+
+# --------------------------------------------------------------------------- lease
+# THE LEASE IS WHY THIS FILE'S LAST TEST KEPT FAILING FOR A REASON THAT WAS NOT A DEFECT.
+#
+# `test_verification_leaves_guarded_state_identical` compares `git status --porcelain`
+# across a run. It fired on a tree where three tracked files moved twenty-two minutes
+# BEFORE the run started, written by one of four other agent sessions live on the same
+# machine. The verification plane had mutated nothing; the subject had. §14 of
+# final_certification_report.md records the same hazard doing real damage — a second
+# process that "advanced HEAD twice, and committed my uncommitted edits into its own
+# commit while deleting untracked files I had created".
+#
+# AEOS gap G-04 names the fix and scripts/ucos-env.sh now implements it. These tests hold
+# it in both directions, because a lease that only ever grants is not a lease.
+ENV_SH = REPO / "scripts" / "ucos-env.sh"
+
+
+def _lease_sh(body: str, lease: Path) -> subprocess.CompletedProcess:
+    """Run `body` against the real lease implementation with an isolated lease file."""
+    script = f'set +e\ncd "{REPO}"\nsource "{ENV_SH}"\nexport UCOS_LEASE_FILE="{lease}"\n{body}\n'
+    # Absolute path rather than a PATH lookup: this test asserts things about a shell
+    # implementation, so which shell ran it may not depend on the caller's environment.
+    return subprocess.run(  # noqa: S603
+        ["/bin/bash", "-c", script], capture_output=True, text=True, cwd=REPO
+    )
+
+
+def test_verify_sh_takes_a_lease_before_it_measures_anything() -> None:
+    """The lease must be acquired, and acquired before any stage runs."""
+    src = VERIFY.read_text(encoding="utf-8")
+    assert "ucos_lease_acquire" in src, (
+        "verify.sh takes no working-tree lease. Every stage reports on this tree, and a "
+        "report about a tree another process is editing describes a state that never "
+        "existed as a whole."
+    )
+    first_stage = re.search(r"^run_stage ", src, re.M)
+    assert first_stage is not None
+    assert src.index("ucos_lease_acquire") < first_stage.start(), (
+        "the lease is acquired after a stage has already run — the unmeasured window is "
+        "exactly where the corruption happens"
+    )
+
+
+def test_verify_sh_releases_the_lease_on_every_exit() -> None:
+    src = VERIFY.read_text(encoding="utf-8")
+    assert re.search(r"trap\s+'[^']*ucos_lease_release[^']*'\s+EXIT", src), (
+        "the lease is not released from an EXIT trap, so an interrupted run leaves the "
+        "tree locked against its own next invocation"
+    )
+
+
+def test_every_verdict_path_re_measures_the_subject() -> None:
+    """VOID is a third outcome, and it must gate PASS and FAIL alike."""
+    src = VERIFY.read_text(encoding="utf-8")
+    body = src[src.index("summarize_and_exit() {") :]
+    verify_at = body.index("ucos_lease_verify")
+    assert verify_at < body.index("VERIFICATION FAILED"), "the lease check must precede the verdict"
+    assert verify_at < body.index("VERIFICATION PASSED"), "the lease check must precede the verdict"
+
+
+def test_lease_refuses_a_live_holder(tmp_path: Path) -> None:
+    lease = tmp_path / "verify.lease"
+    _lease_sh("ucos_lease_acquire integration", lease)
+    # pid 1 always exists and never belongs to us: a live holder we cannot signal.
+    lease.write_text(re.sub(r"^pid=.*$", "pid=1", lease.read_text(), flags=re.M))
+    got = _lease_sh("ucos_lease_acquire integration", lease)
+    assert got.returncode == 1, "a live holder was not refused"
+    assert "leased by another run" in got.stderr
+
+
+def test_lease_liveness_does_not_confuse_eperm_with_death(tmp_path: Path) -> None:
+    """The bug this guards: `kill -0` fails with EPERM for a process we do not own, and
+    the shell collapses that to the same non-zero as ESRCH. Reading EPERM as "dead"
+    reclaims a lease from another user's LIVE run — the lease causing the corruption it
+    exists to prevent."""
+    got = _lease_sh("_ucos_pid_alive 1 && echo ALIVE || echo DEAD", tmp_path / "l")
+    assert "ALIVE" in got.stdout, "pid 1 reported dead — liveness is answering EPERM, not existence"
+
+
+def test_lease_reclaims_a_dead_holder(tmp_path: Path) -> None:
+    """A crash must not require manual cleanup: a lockfile that outlives every crash is
+    the lockfile people learn to delete reflexively."""
+    lease = tmp_path / "verify.lease"
+    _lease_sh("ucos_lease_acquire integration", lease)
+    lease.write_text(re.sub(r"^pid=.*$", "pid=999999", lease.read_text(), flags=re.M))
+    got = _lease_sh("ucos_lease_acquire integration", lease)
+    assert got.returncode == 0, "a stale lease was obeyed"
+    assert "reclaiming a stale lease" in got.stderr
+
+
+def test_lease_does_not_report_its_own_reacquisition_as_a_reclaim(tmp_path: Path) -> None:
+    twice = "ucos_lease_acquire integration; ucos_lease_acquire integration"
+    got = _lease_sh(twice, tmp_path / "l")
+    assert "reclaiming" not in got.stderr, (
+        "re-acquiring our own lease reported a stale reclaim, which trains the reader to "
+        "ignore the one message that means another run died holding the tree"
+    )
+
+
+def test_lease_verify_refuses_when_head_moved(tmp_path: Path) -> None:
+    # One shell: ucos_lease_verify answers only about a lease THIS pid holds, so acquiring
+    # in a second process would make the check a no-op and the test vacuously green.
+    got = _lease_sh(
+        "ucos_lease_acquire integration\n"
+        'sed -i "" "s/^head=.*/head=' + "de" * 20 + '/" "$UCOS_LEASE_FILE"\n'
+        "ucos_lease_verify",
+        tmp_path / "verify.lease",
+    )
+    assert got.returncode == 1, "a run whose HEAD moved was reported as attributable"
+    assert "MOVED during this run" in got.stderr
+
+
+def test_lease_verify_accepts_an_unmoved_tree(tmp_path: Path) -> None:
+    """The other direction: a lease that always refuses is as useless as one that always
+    grants, and would make VOID the permanent verdict."""
+    got = _lease_sh("ucos_lease_acquire integration; ucos_lease_verify", tmp_path / "verify.lease")
+    assert got.returncode == 0, got.stderr
+
+
+def test_lease_release_removes_only_our_own(tmp_path: Path) -> None:
+    lease = tmp_path / "verify.lease"
+    got = _lease_sh(
+        "ucos_lease_acquire integration\n"
+        'sed -i "" "s/^pid=.*/pid=1/" "$UCOS_LEASE_FILE"\n'
+        "ucos_lease_release",
+        lease,
+    )
+    assert got.returncode == 0
+    assert lease.exists(), "released a lease held by another run"

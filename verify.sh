@@ -140,7 +140,22 @@ PY="$(ucos_venv_python)"
 # it.
 UVI_PLAN="$(mktemp -t ucos-verify-plan)"
 UVI_PLAN_OK=1
-trap 'rm -f "$UVI_PLAN"' EXIT
+trap 'rm -f "$UVI_PLAN"; ucos_lease_release' EXIT
+
+# --- The working-tree lease (AEOS G-04) ------------------------------------------
+# TAKEN BEFORE ANYTHING MEASURES ANYTHING. Every stage below reports on the state of this
+# tree, and a report about a tree another process is editing is a report about a state
+# that never existed as a whole. Not hypothetical: §14 of final_certification_report.md
+# records a second agent process advancing HEAD twice and committing another session's
+# uncommitted edits, and a later integration run failed test_verification_purity because
+# three tracked files moved under it. Neither was a defect in the verification plane;
+# both were the absence of this line.
+#
+# It REFUSES a live holder and RECLAIMS a dead one. Reaping another process is not a
+# verification command's business, and a lease that kills is a lease that loses work;
+# a lease that obeys a crashed holder forever is the lockfile people learn to delete
+# reflexively, which is how a lock stops meaning anything.
+ucos_lease_acquire "$MODE"
 if ! "$PY" -m engine.verification_intelligence plan --mode "$MODE" --tsv --out "$UVI_PLAN" 2>/dev/null; then
   ucos_warn "verification intelligence faulted; every stage will run and the whole suite will be verified under the coverage floor"
   : > "$UVI_PLAN"
@@ -294,6 +309,16 @@ run_stage() {
 
 summarize_and_exit() {
   uvi_drain
+  # THE SUBJECT IS RE-MEASURED BEFORE ANY VERDICT IS ANNOUNCED, on every exit path this
+  # function serves — including the --failfast ones. The lease recorded HEAD and the
+  # porcelain digest at acquisition; if either moved, every stage above measured a moving
+  # target and no verdict below is attributable to a commit. A green run over a tree that
+  # changed underneath it is precisely the false green this file exists to prevent, so
+  # the answer is VOID rather than PASS or FAIL.
+  if ! ucos_lease_verify; then
+    ucos_err "VERIFICATION VOID — the subject changed while it was being measured."
+    exit 1
+  fi
   printf '\n%s\n' "================ VERIFICATION SUMMARY ================" >&2
   local i s dur
   for i in "${!STAGES_RUN[@]}"; do

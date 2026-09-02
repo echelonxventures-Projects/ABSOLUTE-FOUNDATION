@@ -283,8 +283,8 @@
       "rule": ".ucos/",
       "class": "TOOL_OPERATIONAL",
       "owner": "UEG-000001",
-      "producer": "engine/execution_environment",
-      "rationale": "The execution-environment fingerprint cache and the per-run execution evidence. Both describe THIS MACHINE: an interpreter path, a venv prefix, an installed toolchain — none of which reproduces elsewhere, so committing either would publish a claim true only where it was written. The cache may skip exactly one measurement and never a verdict, and the evidence is emitted fresh by every certified run and bound into certification from there, not from git."
+      "producer": "engine/execution_environment; scripts/ucos-env.sh (verify.lease)",
+      "rationale": "The execution-environment fingerprint cache and the per-run execution evidence. Both describe THIS MACHINE: an interpreter path, a venv prefix, an installed toolchain — none of which reproduces elsewhere, so committing either would publish a claim true only where it was written. The cache may skip exactly one measurement and never a verdict, and the evidence is emitted fresh by every certified run and bound into certification from there, not from git. It also holds verify.lease, the working-tree lease AEOS G-04 names (scripts/ucos-env.sh, acquired by verify.sh before any stage runs). The class is unchanged and correct: a lease records THIS MACHINE's pid, the HEAD it measured and the porcelain digest it measured, none of which reproduces elsewhere, and it is owned by the process that writes it for exactly the duration of one run. Committing it would publish a claim about a process that no longer exists."
     },
     {
       "rule": "00-BOOK/CONTEXT/",
