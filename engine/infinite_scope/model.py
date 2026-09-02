@@ -374,6 +374,7 @@ class InfiniteScopeContract:
     axes: tuple[ExpansionAxis, ...]
     closed_enumerations: tuple[ClosedEnumeration, ...]
     direction_expansion: Mapping[str, Any]
+    closure_detection: Mapping[str, Any]
     lifecycle_openness: Mapping[str, Any]
     evolution_openness: Mapping[str, Any]
     relationship_expansion: Mapping[str, Any]
@@ -426,6 +427,7 @@ class InfiniteScopeContract:
                 for entry in _require_sequence(doc, "closed_enumeration_disclosures")
             ),
             direction_expansion=dict(_require_mapping(doc, "direction_expansion")),
+            closure_detection=dict(_require_mapping(doc, "closure_detection")),
             lifecycle_openness=dict(_require_mapping(doc, "lifecycle_openness")),
             evolution_openness=dict(_require_mapping(doc, "evolution_openness")),
             relationship_expansion=dict(_require_mapping(doc, "relationship_expansion")),

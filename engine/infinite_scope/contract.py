@@ -41,6 +41,7 @@ import tomllib
 from collections.abc import Callable, Mapping
 from typing import Any
 
+from engine.infinite_scope import detector
 from engine.infinite_scope.model import (
     AdmissionExercise,
     ExerciseConsumer,
@@ -198,7 +199,67 @@ def check_scope_expansion_capacity(contract: InfiniteScopeContract, repo: str) -
                 f"{disclosure.disclosure_id}: closure is not intentional and names no gap, "
                 "so it is an undisclosed finite assumption"
             )
+    # The law says EVERY closed enumeration, not every disclosed one. Validating only the
+    # disclosures measured the list against itself and could never see the repository.
+    problems.extend(_undisclosed_closure_ceiling(contract, repo))
     return tuple(problems)
+
+
+def _undisclosed_closure_ceiling(contract: InfiniteScopeContract, repo: str) -> tuple[str, ...]:
+    """The second half of ISD-L-01: closures the disclosure list does not cover.
+
+    ISD-L-01 measures the disclosures. Nothing measured the gap between the disclosures and
+    the repository, and the declaration says why it cannot be closed by assertion: a claim
+    of exhaustiveness would be the finite assumption the principle prohibits. So this law
+    does not claim exhaustiveness. It enumerates the SHAPES a closed enumeration takes in
+    Python, counts the occurrences no disclosure covers, and holds that count as a
+    two-sided ratchet.
+
+    TWO-SIDED, AND THE LOWER SIDE IS THE POINT. Above the ceiling is new debt: an
+    enumeration entered the tree undisclosed. Below it is debt repaid without tightening —
+    slack a future regression can occupy in silence. The same discipline UEC-L-11 applies
+    to its five counters, applied to this one, because a ceiling that only ever refuses
+    upward is a budget rather than a ratchet.
+
+    IT IS DELIBERATELY NOT ZERO TODAY. The measured population is in the hundreds, and a
+    law that fails on the day it lands is a law somebody disables. Starting at the measured
+    value makes every NEW closure fail immediately while the standing population is driven
+    down by disclosure, which is the only direction the ratchet permits.
+    """
+    config = contract.closure_detection
+    ceiling = config.get("undisclosed_ceiling")
+    if not isinstance(ceiling, int):
+        return ("closure_detection declares no integer undisclosed_ceiling",)
+    found = detector.detect(
+        repo,
+        tuple(config.get("roots", ())),
+        frozenset(config.get("excluded_directory_names", ())),
+        tuple(config.get("excluded_path_fragments", ())),
+    )
+    if not found:
+        return (
+            "the detector located no closed enumeration at all; a detector that finds "
+            "nothing is broken rather than satisfied",
+        )
+    disclosed = frozenset((d.declared_at, d.enumeration) for d in contract.closed_enumerations)
+    open_ones = detector.undisclosed(found, disclosed)
+    measured = len(open_ones)
+    if measured > ceiling:
+        sample = "; ".join(c.describe() for c in open_ones[:5])
+        return (
+            f"{measured} undisclosed closed enumeration(s) exceed the declared ceiling "
+            f"{ceiling}. Each names a set whose membership can only change by editing the "
+            f"module, which UCKP-ART-17 refuses. Disclose it with a closing invariant and "
+            f"an admission path, or open it. First: {sample}",
+        )
+    if measured < ceiling:
+        return (
+            f"{measured} undisclosed closed enumeration(s) is BELOW the declared ceiling "
+            f"{ceiling}. Debt was repaid without tightening the ratchet, leaving slack a "
+            f"future regression can occupy in silence. Lower undisclosed_ceiling to "
+            f"{measured}.",
+        )
+    return ()
 
 
 def check_direction_expansion_capacity(

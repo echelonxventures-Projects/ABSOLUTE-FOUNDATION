@@ -35,12 +35,14 @@ from engine.infinite_scope.contract import (
     LAW_CHECKS,
     assess,
     candidate_files,
+    check_scope_expansion_capacity,
     load_contract,
     load_declaration,
     repo_root,
     scan_occurrences,
 )
 from engine.infinite_scope.model import (
+    ExerciseConsumer,
     FreezeScan,
     InfiniteScopeContract,
     InfiniteScopeError,
@@ -325,12 +327,23 @@ def test_an_unintentional_closure_without_a_gap_is_refused(doc: dict[str, Any]) 
 
 
 def test_the_live_disclosures_record_their_one_unintentional_closure() -> None:
-    """The single unintentional closure is disclosed with its gap, not hidden."""
+    """Every unintentional closure is disclosed WITH its gap, not hidden.
+
+    This asserted a count of one until the axis list disclosed itself. A count was the
+    wrong assertion: it made an honest new disclosure fail, which is backwards — the
+    incentive it creates is to leave a closure undisclosed rather than to record it. The
+    obligation ISD-L-01 actually carries is that an unintentional closure names the gap
+    that owns it, and that is what is asserted now, over all of them.
+    """
     contract = load_contract()
     unintentional = [d for d in contract.closed_enumerations if not d.intentional]
-    assert len(unintentional) == 1
-    assert unintentional[0].gap == "ISD-G-01"
-    assert "KnowledgeCapability" in unintentional[0].enumeration
+    assert (
+        unintentional
+    ), "no unintentional closure is recorded, which would be a claim of completeness"
+    for disclosure in unintentional:
+        assert disclosure.gap, f"{disclosure.disclosure_id}: unintentional closure names no gap"
+    by_name = {d.enumeration: d for d in unintentional}
+    assert by_name["KnowledgeCapability"].gap == "ISD-G-01"
 
 
 # --------------------------------------------------- ISD-L-02 direction expansion
@@ -1073,14 +1086,30 @@ def test_a_refusal_nobody_recorded_is_reported(doc: dict[str, Any]) -> None:
     assert any("no refusal is recorded for it" in problem for problem in problems)
 
 
-def test_a_finite_population_assertion_is_located(doc: dict[str, Any]) -> None:
-    """The static arm finds a literal count bound to the population, with file and line."""
-    contract = load_contract()
-    exercise = next(e for e in contract.admission_exercises if e.exercise_id == "ISD-AE-02")
-    consumer = exercise.consumers[0]
-    located = contract_module._population_literals(REPO, consumer)
-    assert located, "the ISD-G-09 assertion is no longer located; the record is stale"
-    assert any("test_infinite_scope.py" in item and "binds 1" in item for item in located)
+def test_a_finite_population_assertion_is_located(tmp_path: Any, doc: dict[str, Any]) -> None:
+    """The static arm finds a literal count bound to the population, with file and line.
+
+    Measured against a synthetic source, not against the live suite. This test used to
+    require ISD-G-09's real assertion to still be present, which made it fail the moment
+    the gap it recorded was CLOSED — a test that resists its own fix, and an incentive to
+    leave the defect in place. What is under test is the locator's capability; the
+    presence of a violation is what the ratchet is for.
+    """
+    source = tmp_path / "offender.py"
+    source.write_text("def t():\n    assert len(unintentional) == 1\n", encoding="utf-8")
+    consumer = ExerciseConsumer(
+        kind="assertion_scan",
+        module="",
+        function="",
+        paths=(str(source.relative_to(tmp_path)),),
+        population_tokens=("unintentional",),
+        required_owner="synthetic",
+        expected_refusal="binds 1",
+        gap="",
+    )
+    located = contract_module._population_literals(str(tmp_path), consumer)
+    assert located, "the locator no longer finds a literal count bound to a population"
+    assert any("binds 1" in item for item in located)
 
 
 def test_a_recorded_refusal_that_no_longer_occurs_is_refused(doc: dict[str, Any]) -> None:
@@ -1114,7 +1143,9 @@ def test_a_recorded_refusal_with_no_gap_is_refused(doc: dict[str, Any]) -> None:
 
 def test_an_exercise_expecting_refusal_that_records_none_is_refused(doc: dict[str, Any]) -> None:
     """Expecting a refusal without naming the refusing component leaves the owner unrouted."""
-    for consumer in by_id(doc, "ISD-AE-02")["consumers"]:
+    exercise = by_id(doc, "ISD-AE-02")
+    exercise["expected"] = "refused"
+    for consumer in exercise["consumers"]:
         consumer["expected_refusal"] = ""
     problems = build(doc).validate(
         frozenset(LAW_CHECKS), frozenset(contract_module.ADMISSION_FORMS)
@@ -1357,3 +1388,106 @@ def test_the_gate_report_carries_the_certification_identity() -> None:
     """An identity that never reaches a report certifies nothing."""
     report = gate_module.measure()
     assert len(report["declaration_digest"]) == 64
+
+
+# --------------------------------------------------------------------------------
+# ISD-L-01, second half — the closure detector and its ratchet
+#
+# ISD-L-01 used to validate the DISCLOSURES and nothing else: each named a closing
+# invariant, an admission path and an existing file. That measured the list against
+# itself. The repository structurally contains 895 closed enumerations and the list
+# covered six of them, so "no enumeration is closed silently" was true of the eleven
+# somebody had remembered and unmeasured everywhere else — including
+# KNOWN_EXECUTION_KINDS in the constitutional kernel, whose comment claims "Open by
+# registration (Article 17)" over a frozen tuple no registration function can extend.
+# --------------------------------------------------------------------------------
+from engine.infinite_scope import detector as _detector  # noqa: E402
+
+
+def _ceiling(doc: dict, value: int) -> dict:
+    out = copy.deepcopy(doc)
+    out["closure_detection"]["undisclosed_ceiling"] = value
+    return out
+
+
+def test_detector_finds_each_declared_shape() -> None:
+    """All three shapes, and nothing that merely resembles them."""
+    found = _detector.closures_in_source(
+        "import enum\n"
+        "class Kind(enum.Enum):\n    A = 'a'\n    B = 'b'\n"
+        "NAMES = ('x', 'y', 'z')\n"
+        "FROZEN = frozenset({'p', 'q'})\n"
+        "ONE = ('solo',)\n"  # below MIN_MEMBERS: a value, not a set
+        "NUMS = (1, 2, 3)\n"  # not an identifier space
+        "OPEN = registry.load()\n"  # built by calling, therefore open
+        "lower = ('a', 'b')\n",  # a local value, not a declared constant
+        "sample.py",
+    )
+    assert {(c.shape, c.name) for c in found} == {
+        ("enum", "Kind"),
+        ("literal-set", "NAMES"),
+        ("literal-set", "FROZEN"),
+    }
+
+
+def test_the_detector_is_not_its_own_first_finding(doc: dict) -> None:
+    """check_no_active_permanence_declaration records what happens when a detector
+    matches its own source. This module has the same exposure and answers it by shape
+    rather than evasion — a docstring naming a shape is not an instance of it."""
+    config = doc["closure_detection"]
+    found = _detector.detect(
+        REPO,
+        tuple(config["roots"]),
+        frozenset(config["excluded_directory_names"]),
+        tuple(config["excluded_path_fragments"]),
+    )
+    mine = [c for c in found if c.path.endswith("infinite_scope/detector.py")]
+    assert mine == [], f"the detector detected itself: {[c.describe() for c in mine]}"
+
+
+def test_the_ratchet_refuses_a_new_undisclosed_closure(doc: dict) -> None:
+    measured = doc["closure_detection"]["undisclosed_ceiling"]
+    problems = check_scope_expansion_capacity(
+        InfiniteScopeContract.from_declaration(_ceiling(doc, measured - 1)), REPO
+    )
+    assert any("exceed the declared ceiling" in p for p in problems)
+
+
+def test_the_ratchet_refuses_slack_beneath_the_ceiling(doc: dict) -> None:
+    """The lower side is the half that gets forgotten. Debt repaid without tightening
+    leaves room a future regression occupies in silence."""
+    measured = doc["closure_detection"]["undisclosed_ceiling"]
+    problems = check_scope_expansion_capacity(
+        InfiniteScopeContract.from_declaration(_ceiling(doc, measured + 11)), REPO
+    )
+    assert any("BELOW the declared ceiling" in p for p in problems)
+
+
+def test_a_detector_that_finds_nothing_is_broken_not_satisfied(doc: dict) -> None:
+    doc["closure_detection"]["roots"] = ["00-BOOK/DATA"]  # real, and holds no Python
+    problems = check_scope_expansion_capacity(InfiniteScopeContract.from_declaration(doc), REPO)
+    assert any("found nothing" in p or "located no closed enumeration" in p for p in problems)
+
+
+def test_a_disclosure_covers_one_binding_not_a_whole_file() -> None:
+    """Matching on the file alone would let one disclosure absolve every enumeration in
+    a module, which is how a disclosure list becomes a suppression list."""
+    found = [
+        _detector.Closure("m.py", 1, "enum", "Disclosed", 3),
+        _detector.Closure("m.py", 9, "literal-set", "UNDISCLOSED", 4),
+    ]
+    left = _detector.undisclosed(found, frozenset({("m.py", "Disclosed")}))
+    assert [c.name for c in left] == ["UNDISCLOSED"]
+
+
+def test_the_axis_list_discloses_itself(doc: dict) -> None:
+    """The principle declares infinite directions; its own instrument enumerated eleven
+    and did not disclose that it had. ISD-L-01 requires every closed enumeration to name
+    what closes it, and nothing closes this one."""
+    axes = [
+        d for d in doc["closed_enumeration_disclosures"] if d["enumeration"] == "expansion_axes"
+    ]
+    assert axes, "expansion_axes is a closed enumeration this declaration does not disclose"
+    assert axes[0]["admission"], "disclosed with no admission path"
+    exercises = {e["id"] for e in doc["admission_exercisability"]["exercises"]}
+    assert "ISD-AE-04" in exercises, "the axis admission path is asserted, never exercised"
