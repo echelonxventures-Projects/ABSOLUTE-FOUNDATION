@@ -441,3 +441,78 @@ def federated_composition(make_runtime_unit):
     a = Universe.of(make_runtime_unit("A"), context_id="ctx1")
     b = Universe.of(make_runtime_unit("B"), context_id="ctx2", depends_on=["A"])
     return compose([a, b], coordination="sequential", federations=[Federation("B", "A")])
+
+
+# --------------------------------------------------------------------------------
+# Governance engines: one loader, not twenty-one.
+#
+# The 39 engines under 00-MASTER/ are executable scripts in directories whose names are
+# not Python identifiers ("00-MASTER", "UCI-000001"), so no import statement and no
+# coverage source can name them. Ω-4 measures the consequence as `unnameable_exemptions`
+# and states what closes it: "making those engines importable under test rather than only
+# executable as scripts".
+#
+# Twenty-one test modules had already solved that privately, each with its own copy of the
+# same eight lines of importlib. Twenty-one authorings of one mechanism is what UCKP-ART-03
+# voids, and it had a practical cost as well as a constitutional one: a new engine test
+# started by copying the boilerplate, so the cheapest thing to write was another copy and
+# the most expensive was the first shared one.
+#
+# This is that shared one. It does not make the engines importable by NAME — nothing can,
+# short of moving them — but it makes loading one a single call, so the marginal cost of
+# testing the 25 engines no test currently reaches is a test rather than a test plus a
+# loader.
+# --------------------------------------------------------------------------------
+import importlib.util as _importlib_util  # noqa: E402
+from types import ModuleType as _ModuleType  # noqa: E402
+
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_GOVERNANCE_ROOT = _REPO_ROOT / "00-MASTER"
+
+
+def load_governance_engine(program: str, engine: str | None = None) -> _ModuleType:
+    """Load ``00-MASTER/<program>/<engine>.py`` as a module, executed in-process.
+
+    ``engine`` defaults to the single ``*_engine.py`` in the program directory, because
+    naming it at every call site would be one more thing to keep in step with the tree.
+
+    The module name is suffixed rather than bare: an engine loaded as ``aee_engine`` would
+    collide in ``sys.modules`` with any other engine of that stem, and two programs already
+    ship a ``closure_engine``. It is deliberately NOT registered in ``sys.modules`` — a test
+    that mutates a loaded engine must not leak that into the next test's import.
+    """
+    directory = _GOVERNANCE_ROOT / program
+    if not directory.is_dir():
+        raise AssertionError(f"no governance program at 00-MASTER/{program}")
+    if engine is None:
+        candidates = sorted(directory.glob("*_engine.py"))
+        if len(candidates) != 1:
+            raise AssertionError(
+                f"00-MASTER/{program} holds {len(candidates)} *_engine.py files; name one "
+                f"explicitly: {[c.name for c in candidates]}"
+            )
+        path = candidates[0]
+    else:
+        path = directory / (engine if engine.endswith(".py") else f"{engine}.py")
+    if not path.is_file():
+        raise AssertionError(f"no engine at {path.relative_to(_REPO_ROOT)}")
+    spec = _importlib_util.spec_from_file_location(f"{program}.{path.stem}_under_test", path)
+    if spec is None or spec.loader is None:
+        raise AssertionError(f"{path.relative_to(_REPO_ROOT)} is not loadable as a module")
+    module = _importlib_util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+@pytest.fixture(scope="session")
+def governance_engine():
+    """``governance_engine("UCOS-AEE-001")`` -> the loaded module, cached per session."""
+    cache: dict[tuple[str, str | None], _ModuleType] = {}
+
+    def load(program: str, engine: str | None = None) -> _ModuleType:
+        key = (program, engine)
+        if key not in cache:
+            cache[key] = load_governance_engine(program, engine)
+        return cache[key]
+
+    return load
