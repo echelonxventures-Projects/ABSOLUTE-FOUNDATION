@@ -137,4 +137,19 @@ echo "generated prerequisites: knowledge · determinism-evidence · closure phas
 # cannot dirty the tracked working tree.
 "$PY" 00-BOOK/tools/ukctx.py build >/dev/null
 
-echo "generated prerequisites: context projections (UCOS-UCTX-001)" >&2
+# THE CERTIFICATE IS GENERATED HERE FOR THE SAME REASON THE PROJECTIONS ARE, AND IT WAS NOT.
+# `.gitignore:276` excludes /00-BOOK/CONTEXT-CERTIFICATION/ on the stated grounds that it is
+# regenerated each run, and the Phase-10 stage then runs `ukctx_certify.py --check`, which
+# REFUSES when the certificate on disk is not what the current measurement derives. Nothing
+# produced it. That is the exact defect this file's header describes — an ignore authority
+# asserting a regeneration that no entry point performs — recurring one artifact later, and
+# it fails in two directions: on a pristine clone the certificate is absent, and on a
+# developer machine it persists from an earlier run and goes stale the moment an invariant is
+# added. Adding INV-CTX-16 and INV-CTX-17 did exactly that and closed the stage.
+#
+# The generator writes and never observes; --check observes and never writes. Running the
+# writer here keeps that separation intact rather than letting the gate repair its own
+# subject, which is the Stage 0 argument applied to a different artifact.
+"$PY" 00-BOOK/tools/ukctx_certify.py >/dev/null
+
+echo "generated prerequisites: context projections + closure certificate (UCOS-UCTX-001)" >&2
