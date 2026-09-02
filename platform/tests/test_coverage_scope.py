@@ -76,14 +76,58 @@ def derived() -> tuple[tuple[str, ...], tuple[str, ...], dict[str, str]]:
 
 
 def _packages_present(paths: tuple[str, ...], test_roots: tuple[str, ...]) -> set[str]:
-    """Every source package the tree actually holds, derived the same way the denominator is.
+    """Every source package the tree actually holds — an INDEPENDENT oracle, not the derivation.
 
-    NO TREE LIST, and that absence is the whole point of the rewrite. The predicate is "a tracked
-    ``.py`` file at any depth under an importable root, outside a discovered test root", which is
-    strictly wider than ``__init__.py`` (so PEP 420 namespace directories are seen) and strictly
-    narrower than the filesystem (so untracked debris is not).
+    NO TREE LIST, and that absence is the whole point. The predicate is "a tracked ``.py`` file at
+    any depth under an importable root, outside a discovered test root", which is strictly wider
+    than ``__init__.py`` (so PEP 420 namespace directories are seen) and strictly narrower than the
+    filesystem (so untracked debris is not).
+
+    WHY IT DOES NOT CALL ``derive_measurable_packages``, WHICH WOULD BE SHORTER. It used to, with
+    ``exemptions={}``, and that made ``test_every_source_package_is_measured_or_declared_exempt``
+    TRUE BY CONSTRUCTION: the derivation with no exemptions minus the derivation with them is a
+    subset of the exemptions, always, whatever either one computes. The control read as the
+    strongest test in this file and asked nothing. A control over a derivation needs a second
+    opinion the derivation cannot influence, which is the same reason ``ukctx_verify.py`` does not
+    import ``ukctx.py`` — a verifier sharing its subject's implementation agrees with it uniformly,
+    including where it is uniformly wrong (MB7). This re-derivation is that second opinion, and it
+    is not the duplication UCKP-ART-03 voids: it authors no knowledge and holds no authority over
+    the denominator, it only observes the tree the denominator claims to cover.
+
+    IT IS DELIBERATELY WIDER IN ONE PLACE. ``derive_measurable_packages`` keeps a second-level
+    directory only when ``is_importable_name`` admits it; this does not. Python code under a
+    directory coverage cannot name is still code that nothing measures, so it must surface as
+    unaccounted and be answered — by a declared exemption stating why, or by moving it — rather
+    than disappear because the derivation could not have found it. Roots are still filtered, on
+    the same predicate the derivation uses, because a non-importable ROOT gives its children no
+    dotted name at all.
     """
-    return set(discovery.derive_measurable_packages(paths, test_roots, exemptions={}))
+    from engine.universal_discovery.discovery import is_importable_name
+
+    direct: set[str] = set()  # roots holding modules directly — measured as the root itself
+    children: dict[str, set[str]] = {}
+
+    for path in paths:
+        if any(path == root or path.startswith(root.rstrip("/") + "/") for root in test_roots):
+            continue
+        parts = path.split("/")
+        if len(parts) < 2 or not is_importable_name(parts[0]):
+            continue
+        root = parts[0]
+        children.setdefault(root, set())
+        if len(parts) == 2:
+            if parts[1] != "__init__.py":
+                direct.add(root)
+            continue
+        children[root].add(parts[1])
+
+    present: set[str] = set()
+    for root, kids in children.items():
+        if root in direct:
+            present.add(root)
+        else:
+            present.update(f"{root}.{kid}" for kid in kids)
+    return present
 
 
 # --------------------------------------------------------------- Ω-1: the derivation is installed

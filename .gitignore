@@ -275,6 +275,7 @@ coverage_gap_inventory.json
 # `python3 00-BOOK/tools/ukctx_certify.py`; `--check` refuses a stale one.
 /00-BOOK/CONTEXT-CERTIFICATION/
 /AGENTS.md
+/README.md
 /.claude/CLAUDE.md
 /.cursor/rules/ucos.mdc
 /.kiro/steering/ucos.md

@@ -2,7 +2,7 @@
 """
 UCOS Ω∞ — Context Closure Gate (UCOS-UCTX-001).
 
-Evaluates INV-CTX-01..11 over the emitted context state and REFUSES the commit
+Evaluates INV-CTX-01..17 over the emitted context state and REFUSES the commit
 when any of them is violated. Every invariant fails closed.
 
 WHY THIS IS NOT IN ukctx.py. The generator WRITES canonical artifacts, so under
@@ -26,7 +26,7 @@ evidence/observation separation UCOS-CAA-001 records as CAA-INV-06, applied to
 context.
 
 Usage:
-    python3 00-BOOK/tools/ukctx_gate.py            # evaluate INV-CTX-01..11
+    python3 00-BOOK/tools/ukctx_gate.py            # evaluate INV-CTX-01..17
     python3 00-BOOK/tools/ukctx_gate.py --strict-branch
 
 Standard library only. Exit 0 = closed, 1 = refused.
@@ -563,6 +563,42 @@ def verify(strict_branch: bool) -> tuple[list[dict], dict]:
                  "disambiguation is a false assurance")
     add("INV-CTX-15", "NO_UNDISAMBIGUATED_CONTEXT_KIND_COLLISION", v, len(kinds))
 
+    # INV-CTX-16 — no proposal ever projected
+    #
+    # The proposal lane routes IN to proposer folders; projections route OUT from one
+    # authority. A proposal becoming context without assimilation would bypass the four
+    # declared gates.
+    v = []
+    proposal_class = "PROPOSAL"
+    if proposal_class in decl.get("agent_surface_classes", {}):
+        for relpath in sorted(emitted):
+            classes = _agent_classes(relpath, decl, emitted)
+            if proposal_class in classes:
+                v.append(f"projection includes a PROPOSAL file: {relpath}")
+    add("INV-CTX-16", "NO_PROPOSAL_EVER_PROJECTED", v, len(emitted))
+
+    # INV-CTX-17 — every assimilation identified and gated
+    #
+    # Every assimilated contribution must carry a Universal ID minted under REG-AUTO-001
+    # with an operator-issued permit, and must have passed all four declared gates. This
+    # invariant is DECLARED but not yet MEASURED: the assimilation register does not exist,
+    # so the gate cannot verify it. When the first contribution is assimilated and the
+    # register is created, this check will read it.
+    v = []
+    assimilation_register_path = "00-BOOK/DATA/assimilation-register.json"
+    if exists(assimilation_register_path):
+        try:
+            reg = load_json(os.path.join(REPO, assimilation_register_path))
+            for entry in reg.get("assimilated_contributions", []):
+                where = entry.get("proposal_path")
+                if not entry.get("universal_id"):
+                    v.append(f"assimilated contribution has no Universal ID: {where}")
+                if not entry.get("gates_passed"):
+                    v.append(f"assimilated contribution has no gate record: {where}")
+        except (OSError, ValueError) as exc:
+            v.append(f"assimilation register unreadable: {exc}")
+    add("INV-CTX-17", "EVERY_ASSIMILATION_IDENTIFIED_AND_GATED", v, 0)
+
     summary = {
         "invariants": len(results),
         "failed": sum(1 for r in results if r["violations"]),
@@ -593,7 +629,7 @@ def cmd_verify(args) -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(
         prog="ukctx_gate.py",
-        description="UCOS-UCTX-001 Context Closure Gate — INV-CTX-01..11, fail-closed.")
+        description="UCOS-UCTX-001 Context Closure Gate — INV-CTX-01..17, fail-closed.")
     ap.add_argument("--strict-branch", action="store_true",
                     help="Also require presence parity of context across every ref.")
     return cmd_verify(ap.parse_args(argv))

@@ -47,7 +47,7 @@ concurrency:
 
 jobs:
   context-closure:
-    name: Context closure (INV-CTX-01..11)
+    name: Context closure (every declared invariant)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

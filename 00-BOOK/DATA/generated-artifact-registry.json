@@ -58,7 +58,8 @@
     "EVERY_CANONICAL_ARTIFACT_REGISTERED — every tracked file inside a declared producer home is the producer, a declared authored input, or a declared generated artifact.",
     "GENERATED_INPUT_HAS_PRODUCER_AND_BOOTSTRAP — every GENERATED_DETERMINISTIC input resolves to a generated_inputs entry carrying a producer and a bootstrap path; a CANONICAL artifact may not consume one whose bootstrap path is incomplete.",
     "EVIDENCE_INPUT_MUST_BE_DECLARED — every input classified as an execution observation resolves to a surface declared in 00-BOOK/DATA/evidence-universe.json.",
-    "CERTIFICATION_EVIDENCE_CLASS — no artifact carrying a certification role consumes a DEBUG or IMPROVEMENT evidence surface (R-EV-4)."
+    "CERTIFICATION_EVIDENCE_CLASS — no artifact carrying a certification role consumes a DEBUG or IMPROVEMENT evidence surface (R-EV-4).",
+  "EXCLUDED_ARTIFACTS_CONSUME_NO_IDENTITY — an entry declaring `tracked: false` is EXCLUDED from canonical identity and from corpus registration, carries an exclusion_register_class, and holds NO entry in 00-BOOK/DATA/id-ledger.json. Under GOV-005 \u00a75.3 a generated artifact is regenerated, never hand-registered, so it consumes no permanent identity — and no clone ever commits it, so an identity minted for it would name a path the repository does not hold. Every other entry names a path the repository materialises and therefore carries a repository-plane identity. Both directions are measured: a tracked entry missing from the ledger is unregistered output, and an excluded entry present in it is an irreversible allocation nothing authorized."
   ],
   "environmental_artifacts": [
     {
@@ -12494,6 +12495,43 @@
       "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
+      ],
+      "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
+      "tracked": false,
+      "exclusion_register_class": "GENERATED_DETERMINISTIC",
+      "validation_owner": "UCOS-UCTX-001",
+      "independent_validation": "00-BOOK/tools/ukctx_verify.py",
+      "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
+      "certification_role": "CONTEXT_PROJECTION"
+    },
+    {
+      "artifact_id": "UCOS-UCTX-001.README.md",
+      "canonical_path": "README.md",
+      "title": "",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "owner": "UCOS-UCTX-001",
+      "capability": "universal-context-projection",
+      "lifecycle": "REGENERATED",
+      "input_closure": [
+        "00-BOOK/DATA/constitutional-authority-alignment.json",
+        "00-BOOK/DATA/context-authority.json",
+        "00-BOOK/DATA/exclusion-register.json",
+        "00-BOOK/DATA/mutation-governance-boundary.json",
+        "engine/uckp/law.py"
+      ],
+      "input_classification": {
+        "00-BOOK/DATA/constitutional-authority-alignment.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/context-authority.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/exclusion-register.json": "TRACKED_DETERMINISTIC",
+        "00-BOOK/DATA/mutation-governance-boundary.json": "TRACKED_DETERMINISTIC",
+        "engine/uckp/law.py": "TRACKED_DETERMINISTIC"
+      },
+      "build_mode_inputs": [],
+      "deterministic": true,
+      "environmental_dependencies": [],
+      "canonical_identity_role": "EXCLUDED",
+      "consumers": [
+        "a human arriving at the repository before any agent surface is read"
       ],
       "registration_status": "EXCLUDED_FROM_CORPUS_REGISTRATION",
       "tracked": false,

@@ -392,6 +392,18 @@
       "name": "NO_UNDISAMBIGUATED_CONTEXT_KIND_COLLISION",
       "statement": "Every domain whose name collides with a UCXI-000001 universal context kind, recomputed from engine/context/taxonomy.py on each run, carries a ucxi_disambiguation naming UCXI's source, both answers and why the sources differ. A new collision FAILS until stated.",
       "fails_closed": true
+    },
+    {
+      "id": "INV-CTX-16",
+      "name": "NO_PROPOSAL_EVER_PROJECTED",
+      "statement": "No file classified PROPOSAL ever appears in any agent projection. The proposal lane routes IN; the projection lane routes OUT. A proposal that becomes context must pass through the assimilation pipeline first.",
+      "fails_closed": true
+    },
+    {
+      "id": "INV-CTX-17",
+      "name": "EVERY_ASSIMILATION_IDENTIFIED_AND_GATED",
+      "statement": "Every assimilated contribution carries a Universal ID minted under REG-AUTO-001 with an operator-issued permit, and every assimilation passed all four declared gates. An assimilated contribution with no ID or no gate record is void.",
+      "fails_closed": true
     }
   ],
   "non_goals": [
@@ -622,7 +634,135 @@
     "WORKFLOW": "A CI workflow definition. Runs an engine that holds authority; holds none itself.",
     "FROZEN_HOOK": "An agent hook deliberately inert (`hooks: []`), preserved verbatim under a Phase-1A freeze determination. It fires nothing and legislates nothing.",
     "TOOL_OPERATIONAL": "Per-developer operational state of a tool. Never shared, never repository truth. Same class the exclusion register already uses.",
-    "AGENT_ASSET": "A non-instructional supporting file consumed by tooling (schema, icon, lockfile). Carries no instruction to any agent."
+    "AGENT_ASSET": "A non-instructional supporting file consumed by tooling (schema, icon, lockfile). Carries no instruction to any agent.",
+    "PROPOSAL": "A contribution proposal from an agent or developer. Routes IN to the proposer's folder, awaiting assimilation. Never projected; never becomes authority until assimilated."
+  },
+  "$proposal_lane_comment": [
+    "TWO LANES, AND THE ROAD BETWEEN THEM. Proposals route IN to the proposer's own folder;",
+    "implementation routes OUT from this one authority through generated projections. Until the",
+    "inbound lane existed there was no lawful way to add context at all: hand-editing a projection",
+    "is the drift INV-CTX-07 refuses, editing this file directly is an ungated mutation, and writing",
+    "context anywhere else is the rival authority UCKP-ART-03 voids. A proposal is free to write and",
+    "costs nothing; it simply is not context until it has passed the four gates.",
+    "",
+    "THE AGENT LANE IS DERIVED, NEVER ENUMERATED. `agent_paths` is a pattern over",
+    "`agent_directories`, so a new agent brings its proposal folder with it and nothing here is",
+    "edited (UCKP-ART-08). Enumerating one path per agent would be the stale list this instrument",
+    "exists to refuse."
+  ],
+  "proposal_lane": {
+    "model": "TWO_LANE_CONTEXT_FLOW",
+    "agent_paths": [
+      "{agent_directory}/proposals"
+    ],
+    "developer_path": "proposals/developers/{author}",
+    "suffixes": [
+      ".md"
+    ],
+    "naming_convention": "<lane>/YYYY-MM-DD-<slug>.md",
+    "inbound": {
+      "description": "Discussion, input and proposals route IN to the proposer's own folder",
+      "class": "PROPOSAL",
+      "status": "untracked, awaiting assimilation",
+      "effect": "A proposal never projects to an agent surface and never becomes context until it has passed every gate assimilation_pipeline declares"
+    },
+    "outbound": {
+      "description": "Implementation routes OUT from one canonical authority through generated projections",
+      "authority": "UCOS-UCTX-001",
+      "class": "PROJECTION",
+      "status": "generated, deterministic, a pure function of the declared inputs"
+    },
+    "boundary": "The assimilation pipeline sits between IN and OUT, running every declared gate before any byte is written"
+  },
+  "assimilation_pipeline": {
+    "owner": "UCOS-UCTX-001",
+    "home": "00-BOOK/tools/ukctx_assimilate.py",
+    "gate_command": "python3 00-BOOK/tools/ukctx_assimilate.py --gate",
+    "description": "Every gate runs against the MERGED result BEFORE anything is written, inverting the build-then-check order that can detect drift but cannot stop the authority absorbing a duplicate.",
+    "$order_comment": [
+      "`order` is the executable declaration and `gates` is the reason for each entry. The tool reads",
+      "`order` and nothing else, so the sequence a run actually takes is declared here rather than",
+      "hardcoded in the tool — which is what makes the order reviewable instead of incidental."
+    ],
+    "order": [
+      "validate",
+      "duplication",
+      "overlap",
+      "verification"
+    ],
+    "gates": [
+      {
+        "id": "validate",
+        "refuses": "malformed front matter, an undeclared domain, an unattributed contribution, a proposal that states nothing"
+      },
+      {
+        "id": "duplication",
+        "refuses": "a sentence the authority already states (UCKP-ART-03: a second authoring is void)"
+      },
+      {
+        "id": "overlap",
+        "refuses": "an answer asserted in a domain other than the one the proposal declares — one bounded question, one owner"
+      },
+      {
+        "id": "verification",
+        "refuses": "a merge the independent verifier will not certify as a faithful projection"
+      }
+    ],
+    "identity_allocation": {
+      "authority": "REG-AUTO-001",
+      "permit_source": "00-BOOK/DATA/allocation-permits.json",
+      "requirement": "Every assimilated contribution receives a Universal ID; minting is irreversible and requires an operator-issued permit, so the tool plans by default and may never self-authorize an allocation"
+    },
+    "exit_contracts": {
+      "bare_cli_no_lane": "exit 2 (refuses an undeclared lane)",
+      "bare_cli_with_lane": "exit 0 or 1 (discovers proposals, runs every declared gate)",
+      "gate_mode_no_proposals": "exit 0 (nothing to refuse)",
+      "gate_mode_with_refusals": "exit 1"
+    }
+  },
+  "$entry_points_comment": [
+    "AN ENTRY POINT IS NOT AN AGENT SURFACE, AND ONE OF THESE IS BOTH. AGENTS.md carries the same",
+    "body every agent surface carries — INV-CTX-13 measures that the surfaces do not diverge, so a",
+    "bespoke rendering of one of them is a divergence by construction. `surface_binding` records",
+    "that, and the producer skips any entry point that declares it rather than writing the file a",
+    "second time.",
+    "",
+    "NEITHER IS TRACKED, AND THAT IS THE SAME DECISION EVERY OTHER PROJECTION TAKES. Under GOV-005",
+    "5.3 a generated artifact is regenerated, never hand-registered, so it consumes no permanent",
+    "identity; both are classified GENERATED_DETERMINISTIC in 00-BOOK/DATA/exclusion-register.json",
+    "and emitted by scripts/generate-prerequisites.sh at verify.sh stage 1b. A cold clone obtains",
+    "them by running ./bootstrap.sh — which is exactly the one instruction an entry point has to",
+    "carry, and the only one it cannot carry to a reader who has not run it yet. Making either file",
+    "TRACKED would put a README in a clone before any command is typed; it is an irreversible",
+    "identity allocation under REG-AUTO-001 and needs an operator-issued permit, so it is not a",
+    "change this producer or any agent may make for itself.",
+    "",
+    "THE KEY IS `role`, NOT `purpose`, AND THAT IS NOT A STYLE CHOICE. UFI builds its provenance",
+    "corpus from every string in this file INCLUDING dict keys, and normalises a surface by",
+    "replacing each corpus string with a slot. A key that is also a common English word therefore",
+    "erases that word from every reviewed template: `purpose` (7 characters, over the MIN_SLOT",
+    "floor of 6) turned `the generator and the gate are separate modules on purpose` into",
+    "`... on {}` and unprovenanced the sentence on all five agent surfaces. Raising MIN_SLOT was",
+    "measured and is strictly worse — it takes UCOS-UCTX-001 from 0 findings to 209 by demoting",
+    "real declared values out of slot range. Keep declaration keys either specific enough not to",
+    "collide or shorter than the floor."
+  ],
+  "entry_points": {
+    "README.md": {
+      "status": "generated, excluded from version control",
+      "generated": true,
+      "producer": "00-BOOK/tools/ukctx.py",
+      "role": "The door a human opens: the commands to run and the paths that hold the answers",
+      "content": "Pointers only — every line is a command an operator types or a path read from this declaration. It states no rule and paraphrases no instrument, because UCKP-ART-03 makes a second authoring void."
+    },
+    "AGENTS.md": {
+      "status": "generated, excluded from version control",
+      "generated": true,
+      "producer": "00-BOOK/tools/ukctx.py",
+      "role": "The context an agent is given, under the cross-vendor agents.md convention",
+      "content": "The identical projection body every other agent surface carries",
+      "surface_binding": "Declared in agent_surfaces; emitted by the agent-surface loop, never by an entry-point renderer"
+    }
   },
   "agent_surface_rules": [
     {
@@ -699,6 +839,16 @@
       "pattern": ".claude/assistant-daemon-state.json",
       "class": "TOOL_OPERATIONAL",
       "basis": "Claude Code operational state — the local daemon's record of itself. Classified TOOL_OPERATIONAL in 00-BOOK/DATA/exclusion-register.json and ignored by the versioned .gitignore, so the classification travels with the repository instead of depending on .git/info/exclude or a developer's global git ignore (MB9)."
+    },
+    {
+      "pattern": "*/proposals/*",
+      "class": "PROPOSAL",
+      "basis": "The agent lane of proposal_lane, matched as a PATTERN rather than one rule per agent directory: proposal_lane.agent_paths derives the folder from agent_directories, so a rule that enumerated `.claude/proposals/*` and its four siblings would go stale the moment a fifth agent arrived (UCKP-ART-08). A file here is a contribution awaiting assimilation, never an instruction to the agent whose directory holds it — which is why INV-CTX-16 refuses to project it and INV-CTX-12 still demands it resolve to exactly this one class."
+    },
+    {
+      "pattern": "proposals/developers/*",
+      "class": "PROPOSAL",
+      "basis": "The developer lane of proposal_lane. It sits outside every agent directory on purpose: a developer is not an agent surface, and putting the human lane inside `.claude/` would make one vendor's directory the home of a repository-wide facility."
     }
   ],
   "$normalization_comment": [

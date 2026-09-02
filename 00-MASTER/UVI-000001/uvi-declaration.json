@@ -554,7 +554,7 @@
         "$not_reusable": "Its subject includes the working tree and every ref, so its input digest is the repository state itself rather than a file set. A cache hit here would be precisely the hit that hides a hand-edited agent surface.",
         "depends_on": [],
         "id": "universal-context-closure",
-        "label": "universal context closure (INV-CTX-01..11)",
+        "label": "universal context closure (every declared context invariant)",
         "modes": [
           "change",
           "integration",

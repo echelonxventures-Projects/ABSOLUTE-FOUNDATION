@@ -301,6 +301,13 @@
       "rationale": "Generated context projection — the cross-vendor agents.md surface, the one a future agent inherits without this register being edited. Deterministically re-derived from the authored declaration at 00-BOOK/DATA/context-authority.json; byte-identical from the same tracked inputs (UCKP-ART-13). Under GOV-005 §5.3 a generated artifact is regenerated, never hand-registered, so it is not an eligible repository artifact and consumes no permanent identity. Regenerate: `python3 00-BOOK/tools/ukctx.py build`. Bootstrap: emitted by scripts/generate-prerequisites.sh at verify.sh stage 1b, so a pristine clone obtains it before any gate reads it. Fixed point proved by INV-CTX-11 and by the CI job 'Fixed point — a build over the committed tree writes no byte'; absence or drift is refused by INV-CTX-06 and INV-CTX-07. This entry is what makes the ignore rule lawful: exclusion here is a statement about STORAGE, never about whether the context exists."
     },
     {
+      "rule": "README.md",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "UCOS-UCTX-001",
+      "producer": "00-BOOK/tools/ukctx.py",
+      "rationale": "Generated context projection — the repository entry point, the door a human opens before any agent surface is read. It is POINTERS ONLY: every line is a command an operator types or a path read from the declaration, because a README that restates a rule is the second authoring UCKP-ART-03 voids. Deterministically re-derived from the authored declaration at 00-BOOK/DATA/context-authority.json; byte-identical from the same tracked inputs (UCKP-ART-13). Under GOV-005 §5.3 a generated artifact is regenerated, never hand-registered, so it is not an eligible repository artifact and consumes no permanent identity. Regenerate: `python3 00-BOOK/tools/ukctx.py build`. Bootstrap: emitted by scripts/generate-prerequisites.sh at verify.sh stage 1b, so a pristine clone obtains it before any gate reads it. Fixed point proved by INV-CTX-11 and by the CI job 'Fixed point — a build over the committed tree writes no byte'; absence or drift is refused by INV-CTX-06 and INV-CTX-07. This entry is what makes the ignore rule lawful: exclusion here is a statement about STORAGE, never about whether the context exists."
+    },
+    {
       "rule": ".claude/CLAUDE.md",
       "class": "GENERATED_DETERMINISTIC",
       "owner": "UCOS-UCTX-001",

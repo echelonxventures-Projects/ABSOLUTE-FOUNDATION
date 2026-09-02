@@ -222,16 +222,53 @@ def test_an_object_no_plane_governs_is_still_unregistered() -> None:
 
 
 def test_the_generated_registry_is_contained_in_the_repository_plane() -> None:
+    """Containment, over the entries that HAVE a repository plane to be contained in.
+
+    THIS TEST ASSERTED SOMETHING THE DECLARATION DOES NOT CLAIM, in the same shape as
+    ``test_the_two_planes_are_disjoint_IN_GOVERNANCE`` above. It required every generated
+    artifact to hold a `by_object` identity. Twenty-three do not and may not: the
+    UCOS-UCTX-001 context projections declare ``tracked: false``,
+    ``canonical_identity_role: EXCLUDED`` and ``registration_status:
+    EXCLUDED_FROM_CORPUS_REGISTRATION``, and no clone ever commits one — so an identity in
+    the ledger would name a path the repository does not hold, and minting one to make this
+    assertion green would be an irreversible allocation performed to satisfy a measurement.
+    GOV-005 §5.3 states the rule the entries are already following: a generated artifact is
+    regenerated, never hand-registered, and consumes no permanent identity.
+
+    So the assertion is now the declared property, EXCLUDED_ARTIFACTS_CONSUME_NO_IDENTITY,
+    and it is two-sided — which is what keeps the exemption from being a hole. An entry may
+    leave the containment requirement only by declaring itself excluded, that declaration
+    must be complete, and an excluded entry that acquires an identity anyway fails here.
+    """
     import os
 
     root = repo_root()
     with open(
         os.path.join(root, "00-BOOK", "DATA", "generated-artifact-registry.json"), encoding="utf-8"
     ) as h:
-        generated = {e["canonical_path"] for e in json.load(h)["entries"]}
+        entries = json.load(h)["entries"]
     with open(os.path.join(root, "00-BOOK", "DATA", "id-ledger.json"), encoding="utf-8") as h:
         repository = set(json.load(h)["by_object"])
-    assert generated <= repository, sorted(generated - repository)[:5]
+
+    # Absence of the key means the repository materialises the path: 345 of 369 entries are
+    # written that way and every one of them carries an identity.
+    materialised = {e["canonical_path"] for e in entries if e.get("tracked", True)}
+    excluded = [e for e in entries if not e.get("tracked", True)]
+
+    assert materialised <= repository, sorted(materialised - repository)[:5]
+    assert excluded, (
+        "no entry declares itself excluded, so the exemption below is measuring nothing; if "
+        "the excluded family was withdrawn, withdraw this half of the control with it"
+    )
+    for entry in excluded:
+        path = entry["canonical_path"]
+        assert entry["canonical_identity_role"] == "EXCLUDED", path
+        assert entry["registration_status"] == "EXCLUDED_FROM_CORPUS_REGISTRATION", path
+        assert entry["exclusion_register_class"], path
+        assert path not in repository, (
+            f"{path} declares tracked:false yet holds a repository-plane identity; an "
+            "excluded artifact that acquires one is an allocation nothing authorized"
+        )
 
 
 def test_retained_entries_are_reported_separately(matrix) -> None:

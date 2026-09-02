@@ -26,6 +26,15 @@ REPO = Path(__file__).resolve().parents[2]
 
 UISD = "00-MASTER/UISD-000001/uisd-declaration.json"
 
+#: The subject the terminal tests classify, and it deliberately names nothing that exists.
+#: It used to be `README.md`, chosen because nothing classified it -- and then UCOS-UCTX-001
+#: began emitting a README as a generated projection, the exclusion register gave it a class,
+#: and three tests about the UNRESOLVED terminal started asserting that a correctly classified
+#: artifact was unclassifiable. An example picked because the repository happens not to hold it
+#: is a test that fails the day the repository grows one. No rule can ever claim this path: it
+#: sits under no declared home and carries no declared extension.
+UNCLASSIFIABLE = "no-such-declared-home/nothing-claims-this.unknown"
+
 
 @pytest.fixture(scope="module")
 def repo() -> mc.Repository:
@@ -316,7 +325,7 @@ def test_class_7_no_duplicate_mutation_authority_with_class_6(boundary: dict) ->
 
 
 def test_an_unknown_artifact_returns_unresolved(repo: mc.Repository, boundary: dict) -> None:
-    result = mc.classify("README.md", repo, boundary)
+    result = mc.classify(UNCLASSIFIABLE, repo, boundary)
     assert result.status == mc.UNRESOLVED
     assert result.mutation_class == ""
     assert result.rule_id == ""
@@ -327,7 +336,7 @@ def test_an_unknown_artifact_returns_unresolved(repo: mc.Repository, boundary: d
 def test_unresolved_confers_no_class_and_no_authority(repo: mc.Repository, boundary: dict) -> None:
     """UNRESOLVED is diagnostic. It must never read as a permissive default."""
     declared = {e["class"] for e in boundary["mutation_classes"]}
-    result = mc.classify("README.md", repo, boundary)
+    result = mc.classify(UNCLASSIFIABLE, repo, boundary)
     assert result.mutation_class not in declared
     assert mc.UNRESOLVED not in declared
 
@@ -335,15 +344,15 @@ def test_unresolved_confers_no_class_and_no_authority(repo: mc.Repository, bound
 def test_unresolved_reports_the_subjects_for_a_fail_closed_consumer(
     repo: mc.Repository,
 ) -> None:
-    results = mc.classify_all(["README.md", UISD], repo)
-    assert mc.unresolved(results) == ("README.md",)
+    results = mc.classify_all([UNCLASSIFIABLE, UISD], repo)
+    assert mc.unresolved(results) == (UNCLASSIFIABLE,)
 
 
 # -------------------------------------------------------------------- determinism
 
 
 def test_repeated_evaluation_is_identical(repo: mc.Repository, boundary: dict) -> None:
-    for path in (UISD, "engine/nucleus/lifecycle.py", "README.md", ".gitignore"):
+    for path in (UISD, "engine/nucleus/lifecycle.py", UNCLASSIFIABLE, ".gitignore"):
         first = mc.classify(path, repo, boundary)
         second = mc.classify(path, repo, boundary)
         assert first == second, path
@@ -352,8 +361,8 @@ def test_repeated_evaluation_is_identical(repo: mc.Repository, boundary: dict) -
 def test_result_is_independent_of_the_order_subjects_are_presented(
     repo: mc.Repository,
 ) -> None:
-    forward = mc.classify_all([UISD, "README.md", ".gitignore"], repo)
-    reverse = mc.classify_all([".gitignore", "README.md", UISD], repo)
+    forward = mc.classify_all([UISD, UNCLASSIFIABLE, ".gitignore"], repo)
+    reverse = mc.classify_all([".gitignore", UNCLASSIFIABLE, UISD], repo)
     assert forward == reverse
 
 

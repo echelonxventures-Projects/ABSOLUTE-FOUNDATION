@@ -456,7 +456,7 @@ run_stage "meta-constitutional conformance (CMG-INV-01..12)" bash 00-CMG/tools/c
 run_stage "universal object governance (UGA-INV-01..10)" \
   "$PY" 00-MASTER/UCOS-UGA-001/uga_engine.py gate
 
-# --- Stage 6b-ctx: universal context closure gate (UCOS-UCTX-001 INV-CTX-01..11) --
+# --- Stage 6b-ctx: universal context closure gate (UCOS-UCTX-001, every invariant) -
 # The stage above governs OBJECT identity. This one governs CONTEXT authority, and it
 # exists because those are different questions with different failure modes.
 #
@@ -481,7 +481,7 @@ run_stage "universal object governance (UGA-INV-01..10)" \
 # purpose: it reads `git status --porcelain` and the ref list, and a producer that reads
 # the working tree is an undeclared observer under UGA OBS-INV-12. The generator writes
 # and never observes; this gate observes and never writes.
-run_stage "universal context closure (INV-CTX-01..11)" \
+run_stage "universal context closure (every declared context invariant)" \
   "$PY" 00-BOOK/tools/ukctx_gate.py
 
 # --- Stage 6b-cert: context closure certification (UCOS-UCTX-001, Phase 10) -----

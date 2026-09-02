@@ -285,6 +285,7 @@ AGENT_PREAMBLE = (
 def render_agent(decl: dict, surface: dict, articles: list[dict],
                  mut: list[dict], excl: list[dict]) -> str:
     sup = decl["constitutional_superior"]
+    inv_ids = sorted(i["id"] for i in decl["invariants"])
     L = [f"# UCOS Ω∞ — repository context ({surface['agent']})", "",
          GENERATED_BANNER, "", AGENT_PREAMBLE, "",
          "## The one rule that explains every other one", "",
@@ -337,10 +338,16 @@ def render_agent(decl: dict, surface: dict, articles: list[dict],
                    ["`./verify.sh --integration`",
                     "merge validation: whole suite under the floor + every gate"],
                    ["`./verify.sh --full`", "release certification; this is what CI runs"]]), "",
-         "Context specifically: `python3 00-BOOK/tools/ukctx_gate.py` evaluates "
-         "INV-CTX-01..11. Regenerate context with `python3 00-BOOK/tools/ukctx.py build` — "
-         "the generator and the gate are separate modules on purpose: the generator writes "
-         "and never observes, the gate observes and never writes.",
+         # THE RANGE IS DERIVED, AND NAMES BOTH ENDS IN FULL. It used to read "INV-CTX-01..11"
+         # with the last number typed in, so every new invariant made the sentence false and
+         # the manifest template stale in the same edit. Both endpoints are now declared
+         # invariant ids, which are corpus strings — so UFI normalises them to slots and the
+         # reviewed template stops depending on how many invariants there happen to be.
+         f"Context specifically: `python3 00-BOOK/tools/ukctx_gate.py` evaluates "
+         f"{inv_ids[0]} through {inv_ids[-1]}. Regenerate context with "
+         "`python3 00-BOOK/tools/ukctx.py build` — the generator and the gate are separate "
+         "modules on purpose: the generator writes and never observes, the gate observes "
+         "and never writes.",
          "", "## Articles of the root law", "",
          md_table(["Article", "Title", "Statement"],
                   [[a["id"], a["title"], a["text"]] for a in articles]), "",
@@ -359,6 +366,70 @@ def render_mdc(body: str) -> str:
             "description: UCOS Ω∞ repository context (generated projection)\n"
             "alwaysApply: true\n"
             "---\n\n") + body
+
+
+def render_readme(decl: dict) -> str:
+    """README.md — the repository entry point, and NOTHING BUT POINTERS.
+
+    A README is where a repository re-authors itself: it restates the law in friendlier
+    words, lists the principles again, and becomes a second answer to questions the
+    declarations already answer. UCKP-ART-03 makes that second authoring void, so this
+    one states no rule, summarises no article and paraphrases no instrument. Every line
+    below is either a command an operator types or a path to the object that holds the
+    answer, and every one of those is READ FROM THE DECLARATION rather than typed here.
+
+    IT IS NOT AN AGENT SURFACE. `AGENTS.md` is, and it carries the same body as every
+    other agent projection — INV-CTX-13 measures that the surfaces do not diverge, so a
+    bespoke rendering of one of them is a divergence by construction. The two files
+    answer different questions: AGENTS.md is the context an agent is given, README.md is
+    the door a human opens.
+    """
+    root = decl["context_root"]["path"]
+    sup = decl["constitutional_superior"]
+    surfaces = sorted(decl["agent_surfaces"], key=lambda s: s["agent"])
+    lane = decl.get("proposal_lane", {})
+    lines = [
+        "# UCOS \u03a9\u221e",
+        "",
+        GENERATED_BANNER,
+        "",
+        "## Start here",
+        "",
+        "```bash",
+        "./bootstrap.sh      # prepare the canonical environment",
+        "./verify.sh --fast  # developer feedback",
+        "./verify.sh         # commit validation",
+        "```",
+        "",
+        f"`./verify.sh` is the one repository-standard command; `{rel(DECLARATION)}` "
+        "declares what each mode claims.",
+        "",
+        "## Where the answers live",
+        "",
+        f"- Supreme authority — **{sup['authority']}**, `{sup['home']}`",
+        f"- Context index — `{root}/00-CONTEXT-INDEX.md`, projected from "
+        f"`{rel(DECLARATION)}`",
+        f"- Bounded questions — one file per domain under `{root}/`",
+        "",
+        "## Agent surfaces",
+        "",
+        "The same context, projected to every agent that reads a different path:",
+        "",
+    ]
+    lines += [f"- `{s['surface']}` — {s['consumed_by']}" for s in surfaces]
+    if lane:
+        lines += [
+            "",
+            "## Contributing",
+            "",
+            f"{lane['inbound']['description']}: `{lane['developer_path']}`. "
+            f"{lane['boundary']}.",
+            "",
+            "```bash",
+            "python3 00-BOOK/tools/ukctx_assimilate.py   # plan every discovered proposal",
+            "```",
+        ]
+    return "\n".join(lines) + "\n"
 
 
 # ---------------------------------------------------------------------------
@@ -383,6 +454,23 @@ def compute_outputs() -> tuple[dict, dict]:
     for s in sorted(decl["agent_surfaces"], key=lambda x: x["agent"]):
         body = render_agent(decl, s, articles, mut, excl)
         out[s["surface"]] = render_mdc(body) if s["format"] == "mdc" else body
+
+    # THE ENTRY POINT IS DECLARED, NOT ASSUMED. `entry_points` names the files a reader
+    # arrives at, and each one says which producer emits it. AGENTS.md is NOT emitted
+    # here: it is an agent surface, so the loop above already wrote it with the same body
+    # every other surface carries, and writing it twice would be the divergence INV-CTX-13
+    # refuses. An entry point that names a surface is a cross-reference, never a second
+    # rendering.
+    renderers = {"README.md": render_readme}
+    for path, entry in sorted(decl.get("entry_points", {}).items()):
+        if entry.get("surface_binding"):
+            continue
+        if path not in renderers:
+            raise SystemExit(
+                f"REFUSED — entry point {path!r} is declared but no renderer emits it, and "
+                "it binds to no agent surface either. A declared entry point nothing writes "
+                "is a promise of a file that will never exist.")
+        out[path] = renderers[path](decl)
 
     # THE DECLARED CLOSURE IS THE MEASURED CLOSURE (D-R6). This list used to be
     # computed from every domain's authority_home, which produced 14 entries of which
