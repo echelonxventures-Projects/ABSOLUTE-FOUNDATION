@@ -108,12 +108,32 @@ class Probe:
         self._tests: dict[str, tuple[str, ...]] = {
             a.key(): discovery.test_bindings(a, self.tests) for a in self.artifacts
         }
+        self._refusals: dict[str, frozenset[str]] = {}
         self._consumers: dict[str, tuple[str, ...]] = {
             a.key(): discovery.consumers(a, self.sources) for a in self.declarations
         }
 
     def invokers(self, artifact: Artifact) -> tuple[str, ...]:
         return self._invokers[artifact.key()]
+
+    def refusal_shapes(self, where: str) -> frozenset[str]:
+        """The refusal shapes one test module contains, read from its AST and memoised.
+
+        Deliberately NOT read from ``self.tests``: that corpus holds ``source_evidence``,
+        which keeps string constants and imports and therefore cannot see a call or an
+        assertion. A forged refusal is a code shape.
+        """
+        cached = self._refusals.get(where)
+        if cached is None:
+            witness = self.declaration.refusal_witness
+            cached = discovery.refusal_shapes(
+                discovery.read_text(self.root, where),
+                raise_names=witness.get("raise_names", ()),
+                finding_names=witness.get("finding_names", ()),
+                closed_exits=witness.get("closed_exit_values", ()),
+            )
+            self._refusals[where] = cached
+        return cached
 
     def test_bindings(self, artifact: Artifact) -> tuple[str, ...]:
         return self._tests[artifact.key()]
@@ -150,6 +170,42 @@ def engines_with_no_invoker(probe: Probe) -> list[str]:
 
 def engines_without_a_test(probe: Probe) -> list[str]:
     return sorted(a.identity for a in probe.engines if not probe.test_bindings(a))
+
+
+def engines_without_a_refusal_witness(probe: Probe) -> list[str]:
+    """Verifiers no OTHER verifier has shown can refuse. UEC-L-14.
+
+    THE GAP THIS CLOSES IS ONE THIS MODULE ALREADY NAMED. ``test_bindings`` says it plainly:
+    "Naming is necessary and not sufficient: a test that references an engine has not been
+    shown to kill a mutant in it. UEC-L-05 measures the necessary condition and says so."
+    Nothing measured the sufficient side, so a verifier could be invoked from two planes,
+    named by a test, counted as governed — and still be incapable of refusing anything. A
+    verifier that cannot refuse certifies nothing, and a green tick from one is worse than no
+    tick, because it licenses the belief that the property was checked.
+
+    A WITNESS FORGES THE VIOLATION. Not "a test mentions this engine" but "a test constructs
+    the condition this engine must refuse and observes the refusal". The shapes that count are
+    declared in ``refusal_witness_patterns``, never written here: a raised refusal, an
+    assertion that findings are non-empty, an assertion of the closed exit code. Holding the
+    patterns in data is what lets a future verification plane — one that refuses in a way
+    nobody has invented — be admitted by registration rather than by editing this function.
+
+    IT IS EXTERNAL BY CONSTRUCTION. ``test_bindings`` already excludes the artifact's own
+    identity, so no verifier can witness itself. That is the property D6 asks for — no
+    verifier is self-authoritative — expressed as something this repository can measure,
+    rather than as a cycle of mutual attestations nothing could compute.
+    """
+    witness = probe.declaration.refusal_witness
+    accepted = frozenset(witness.get("accepted_shapes", ()))
+    if not accepted:
+        return sorted(a.identity for a in probe.engines)
+    unwitnessed: list[str] = []
+    for artifact in probe.engines:
+        if not any(
+            probe.refusal_shapes(where) & accepted for where in probe.test_bindings(artifact)
+        ):
+            unwitnessed.append(artifact.identity)
+    return sorted(unwitnessed)
 
 
 def artifacts_with_one_invocation_plane(probe: Probe) -> list[str]:
@@ -209,6 +265,7 @@ def declarations_without_a_certification_identity(probe: Probe) -> list[str]:
 RATCHETED: Mapping[str, tuple[str, Callable[[Probe], list[str]]]] = {
     "engines_with_no_invoker": ("UEC-L-04", engines_with_no_invoker),
     "engines_without_a_test": ("UEC-L-05", engines_without_a_test),
+    "engines_without_a_refusal_witness": ("UEC-L-14", engines_without_a_refusal_witness),
     "artifacts_with_one_invocation_plane": ("UEC-L-06", artifacts_with_one_invocation_plane),
     "declarations_no_code_consumes": ("UEC-L-07", declarations_no_code_consumes),
     "declarations_without_a_certification_identity": (
@@ -345,6 +402,11 @@ def _ratcheted(probe: Probe, key: str) -> Findings:
             + (f" … +{len(offenders) - 8} more" if len(offenders) > 8 else "")
         )
     return findings
+
+
+def every_engine_is_witnessed_refusing(probe: Probe) -> Findings:
+    """UEC-L-14 — no verifier is trusted on the strength of being named."""
+    return _ratcheted(probe, "engines_without_a_refusal_witness")
 
 
 def every_engine_has_a_test(probe: Probe) -> Findings:
@@ -703,6 +765,7 @@ LAW_CHECKS: Mapping[str, Callable[[Probe], Findings]] = {
     "discovered_enforcement_is_governed": discovered_enforcement_is_governed,
     "every_engine_has_an_invoker": every_engine_has_an_invoker,
     "every_engine_has_a_test": every_engine_has_a_test,
+    "every_engine_is_witnessed_refusing": every_engine_is_witnessed_refusing,
     "no_single_invocation_plane": no_single_invocation_plane,
     "every_declaration_is_consumed": every_declaration_is_consumed,
     "certification_identity_exists": certification_identity_exists,

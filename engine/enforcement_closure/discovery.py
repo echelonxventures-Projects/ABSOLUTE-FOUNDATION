@@ -417,6 +417,58 @@ def source_corpus(
     return corpus
 
 
+def refusal_shapes(
+    text: str,
+    *,
+    raise_names: Sequence[str],
+    finding_names: Sequence[str],
+    closed_exits: Sequence[int],
+) -> frozenset[str]:
+    """Which REFUSAL shapes a test module actually contains, read structurally.
+
+    ``source_evidence`` cannot answer this — it keeps string constants and imports, and a
+    forged refusal is a code shape, not a string. Raw text cannot answer it either, for the
+    reason that module records: a docstring explaining that a test asserts ``pytest.raises``
+    would count as the test doing so, which is the detector being satisfied by prose. So this
+    reads the AST, where a docstring is a value and a call is a call.
+
+    Three shapes, and the vocabulary of each is supplied by the caller from the declaration
+    rather than written here — a verification plane that refuses in a way nobody has yet
+    invented is admitted by naming its vocabulary, not by editing this function.
+    """
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return frozenset()
+    raises, findings, exits = set(raise_names), set(finding_names), set(closed_exits)
+    found: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            func = node.func
+            name = func.attr if isinstance(func, ast.Attribute) else getattr(func, "id", "")
+            if name in raises:
+                found.add("raises")
+        elif isinstance(node, ast.Assert):
+            for inner in ast.walk(node.test):
+                ident = (
+                    inner.attr
+                    if isinstance(inner, ast.Attribute)
+                    else getattr(inner, "id", "")
+                    if isinstance(inner, ast.Name)
+                    else ""
+                )
+                if ident in findings:
+                    found.add("asserts_findings")
+                if (
+                    isinstance(inner, ast.Constant)
+                    and isinstance(inner.value, int)
+                    and not isinstance(inner.value, bool)
+                    and inner.value in exits
+                ):
+                    found.add("asserts_closed_exit")
+    return frozenset(found)
+
+
 def test_corpus(root: str, paths: Sequence[str], testpaths: Sequence[str]) -> dict[str, str]:
     """``source_evidence`` for every tracked test module under the declared test roots."""
     corpus: dict[str, str] = {}

@@ -916,3 +916,93 @@ def test_invocation_needles_require_an_executable_form(document: dict[str, Any])
     # The generous set is unchanged: it also answers "does a TEST name this engine", where a
     # package is honest evidence. Narrowing that would report false test deficiencies.
     assert "engine.recursive_knowledge" in set(_needles(gate))
+
+
+# --------------------------------------------------------------------------------
+# UEC-L-14 — no verifier is trusted on the strength of being named.
+#
+# This module's own `test_bindings` states the gap it closes: "Naming is necessary and not
+# sufficient: a test that references an engine has not been shown to kill a mutant in it.
+# UEC-L-05 measures the necessary condition and says so." Nothing measured the other side,
+# so a verifier could be invoked from two planes, named by a test, counted as governed — and
+# still incapable of refusing anything.
+# --------------------------------------------------------------------------------
+_WITNESS = {
+    "raise_names": ("raises",),
+    "finding_names": ("problems", "findings", "violations"),
+    "closed_exits": (1, 2),
+}
+
+
+def test_refusal_shapes_reads_a_raised_refusal() -> None:
+    got = discovery.refusal_shapes(
+        "import pytest\ndef t():\n    with pytest.raises(ValueError):\n        run()\n", **_WITNESS
+    )
+    assert "raises" in got
+
+
+def test_refusal_shapes_reads_an_asserted_finding() -> None:
+    got = discovery.refusal_shapes("def t():\n    assert problems\n", **_WITNESS)
+    assert "asserts_findings" in got
+
+
+def test_refusal_shapes_reads_an_asserted_closed_exit() -> None:
+    got = discovery.refusal_shapes("def t():\n    assert main() == 1\n", **_WITNESS)
+    assert "asserts_closed_exit" in got
+
+
+def test_prose_describing_a_refusal_is_not_a_refusal() -> None:
+    """The defect `source_evidence` exists to refuse, reproduced one layer up.
+
+    Raw-text scanning would count a docstring that EXPLAINS a forged refusal as performing
+    one — the detector satisfied by its own prose. Reading the AST is what separates a value
+    from a call.
+    """
+    prose = '''
+def t():
+    """This test uses pytest.raises and asserts problems and checks == 1."""
+    run()
+'''
+    assert discovery.refusal_shapes(prose, **_WITNESS) == frozenset()
+
+
+def test_a_test_that_only_names_an_engine_is_not_a_witness() -> None:
+    """Naming is the necessary condition UEC-L-05 already holds. This is the other half."""
+    naming_only = 'def t():\n    engine = "00-MASTER/X-000001/x_engine.py"\n    assert engine\n'
+    assert discovery.refusal_shapes(naming_only, **_WITNESS) == frozenset()
+
+
+@pytest.fixture(scope="module")
+def live_probe(document: dict[str, Any]) -> Probe:
+    """One probe for the witness laws. Building it walks the tree, so it is built once."""
+    return _probe(document)
+
+
+def test_the_witness_population_is_measured_and_is_not_everything(live_probe: Probe) -> None:
+    """A measurement that returns every engine, or none, is broken rather than satisfied."""
+    probe = live_probe
+    unwitnessed = contract.engines_without_a_refusal_witness(probe)
+    assert 0 < len(unwitnessed) < len(probe.engines)
+
+
+def test_being_named_is_strictly_weaker_than_being_witnessed(live_probe: Probe) -> None:
+    """The gap between the two counters is the finding, and it must never invert.
+
+    engines_without_a_test counts engines no test mentions. This counts engines no test has
+    been shown to make refuse. The second set must CONTAIN the first: an engine nothing names
+    cannot have been witnessed. An inversion would mean an unnamed engine was somehow
+    witnessed, which would mean the witness is not external.
+    """
+    probe = live_probe
+    named_by_nothing = set(contract.engines_without_a_test(probe))
+    unwitnessed = set(contract.engines_without_a_refusal_witness(probe))
+    assert (
+        named_by_nothing <= unwitnessed
+    ), "an engine no test names was counted as witnessed, so the witness is not external"
+
+
+def test_no_verifier_can_witness_itself(live_probe: Probe) -> None:
+    """`test_bindings` excludes the artifact's own identity, which is what makes 'no verifier
+    is self-authoritative' computable rather than a cycle of mutual attestations."""
+    for artifact in live_probe.engines:
+        assert artifact.identity not in live_probe.test_bindings(artifact)

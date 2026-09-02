@@ -93,6 +93,7 @@ class Declaration:
     corpus_plane: Mapping[str, Any]
     self_coverage: Mapping[str, Any]
     testpaths: tuple[str, ...]
+    refusal_witness: Mapping[str, Any]
     gate: Mapping[str, Any]
     document: Mapping[str, Any]
     source: str
@@ -256,6 +257,7 @@ def parse(document: Mapping[str, Any], *, source: str) -> Declaration:
         corpus_plane=dict(_require(document, "corpus_plane")),
         self_coverage=dict(_require(document, "self_coverage")),
         testpaths=testpaths,
+        refusal_witness=dict(_require(document, "refusal_witness")),
         gate=dict(_require(document, "gate")),
         document=dict(document),
         source=source,
