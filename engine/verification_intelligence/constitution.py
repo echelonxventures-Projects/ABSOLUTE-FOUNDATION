@@ -367,6 +367,20 @@ def load_constitution(path: str | None = None, *, checks: frozenset[str] | None 
     )
     if not laws:
         raise VerificationIntelligenceError("the declaration states no laws")
+    # A DUPLICATE LAW ID IS A SHADOWED VERDICT, AND IT WAS ACCEPTED SILENTLY. Adding a law
+    # that reused an existing id produced a report reading "15/15 laws hold" over fourteen
+    # distinct ids: two different obligations answered to one name, so a reader auditing the
+    # verdict for a given id could be shown either. Refused at LOAD rather than as a law,
+    # for the reason recorded on the sibling refusals here — a law that can be switched off
+    # by the data it reads is not a law, and this one's subject is the law list itself.
+    duplicate_ids = sorted(
+        {law.law_id for law in laws if [x.law_id for x in laws].count(law.law_id) > 1}
+    )
+    if duplicate_ids:
+        raise VerificationIntelligenceError(
+            f"law id(s) declared more than once: {duplicate_ids}. Two obligations answering to "
+            "one identity means one verdict shadows the other."
+        )
     if checks is not None:
         claimed = {law.check for law in laws}
         unimplemented = sorted(claimed - checks)

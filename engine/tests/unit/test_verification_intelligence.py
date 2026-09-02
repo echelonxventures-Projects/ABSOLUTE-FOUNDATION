@@ -2289,3 +2289,72 @@ def test_total_cost_prices_the_whole_suite_by_default(tests_registry) -> None:
         tests_registry.total_cost(tests_registry.paths)
     )
     assert tests_registry.total_cost(()) == 0
+
+
+# --------------------------------------------------------------------------------
+# UVI-L-15 — non-reuse is argued, and law identities are unique.
+#
+# constitution.py refuses a stage declared REUSABLE that names no read-set, because its
+# cache key would cover nothing and every run would be a false hit. Nothing refused the
+# mirror omission, and six stages were non-reusable with no recorded reason — paying full
+# cost on every run for an argument nobody had made.
+# --------------------------------------------------------------------------------
+def _declaration() -> dict:
+    """The live declaration, read through the loader that owns its location."""
+    from engine.verification_intelligence.constitution import load_declaration
+
+    return load_declaration()
+
+
+def _stages(document: dict) -> list[dict]:
+    registry = document["stage_registry"]
+    return registry["stages"] if isinstance(registry, dict) else registry
+
+
+def _write(tmp_path, document: dict) -> str:
+    path = tmp_path / "forged.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    return str(path)
+
+
+def test_every_non_reusable_stage_records_a_reason() -> None:
+    """The live declaration, held to its own law."""
+    findings = uvi_gate.non_reuse_is_argued(type("Ctx", (), {"document": _declaration()})())
+    assert list(findings) == []
+
+
+def test_a_non_reusable_stage_with_no_reason_is_refused() -> None:
+    document = _declaration()
+    for stage in _stages(document):
+        if not stage.get("reusable"):
+            stage.pop("$not_reusable", None)
+            break
+    findings = list(uvi_gate.non_reuse_is_argued(type("Ctx", (), {"document": document})()))
+    assert findings and "records no reason" in findings[0]
+
+
+def test_a_law_over_no_non_reusable_stage_would_be_vacuous() -> None:
+    """Every stage reusable means this law measured nothing, which is not the same as holding."""
+    document = _declaration()
+    for stage in _stages(document):
+        stage["reusable"] = True
+    findings = list(uvi_gate.non_reuse_is_argued(type("Ctx", (), {"document": document})()))
+    assert findings and "measured nothing" in findings[0]
+
+
+def test_a_duplicate_law_id_is_refused_at_load(tmp_path) -> None:
+    """A shadowed verdict, accepted silently until it was forged.
+
+    Adding a law that reused an existing id produced a report reading "15/15 laws hold" over
+    fourteen distinct ids: two obligations answering to one name, so a reader auditing the
+    verdict for that id could be shown either one.
+    """
+    document = _declaration()
+    document["laws"][-1]["id"] = document["laws"][0]["id"]
+    with pytest.raises(VerificationIntelligenceError, match="declared more than once"):
+        load_constitution(_write(tmp_path, document))
+
+
+def test_the_live_declaration_has_unique_law_ids() -> None:
+    ids = [law["id"] for law in _declaration()["laws"]]
+    assert len(ids) == len(set(ids))

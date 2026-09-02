@@ -148,6 +148,12 @@
       "id": "UVI-L-14",
       "statement": "Widening or narrowing a stage's read-set changes its evidence key. A declared read-set that does not reach the key would be a declaration with no consequence.",
       "title": "Evidence Identity Depends On The Read-Set"
+    },
+    {
+      "id": "UVI-L-15",
+      "title": "Non-reuse is argued, never defaulted",
+      "statement": "Every stage that is not reusable declares why it cannot be. constitution.py already refuses a REUSABLE stage that names no read-set, because its cache would cover nothing and every run would be a false hit; this refuses the mirror omission. A stage non-reusable for no recorded reason pays full cost on every run because nobody argued the alternative, and the argument is exactly where a reader learns whether a sound key is possible at all.",
+      "check": "non_reuse_is_argued"
     }
   ],
   "mode_constitution": {
@@ -456,7 +462,8 @@
           "**"
         ],
         "reusable": false,
-        "shardable": false
+        "shardable": false,
+        "$not_reusable": "Its subject is the tracked corpus itself: the gate derives scope from `git ls-files`, parses every module and measures five ratchets across the whole tree, so an honest cache key is every tracked file — and a key that broad hits only when nothing changed at all. It also depends on pytest and reads the coverage data THIS run produced, so a reused verdict would describe another run's denominator."
       },
       {
         "depends_on": [
@@ -830,7 +837,8 @@
         "reusable": false,
         "reuse_inputs": [
           "00-MASTER/UEC-000001/"
-        ]
+        ],
+        "$not_reusable": "Its subject is every enforcement artifact in the repository. The read-set it declares (00-MASTER/UEC-000001/) is an IMPACT set — what must change for this stage to be selected — not a cache key; UVI-L-13 requires a read-set on both sides of the reuse policy and measures that the two declarations cannot be inferred from each other. A sound cache key here would have to cover the whole corpus, because adding an ungoverned engine anywhere is exactly what this gate exists to catch."
       },
       {
         "$comment": "ADDED TO CLOSE A CAPABILITY THAT WAS BUILT AND NEVER INVOKED. The declaration, the sixteen-module engine, thirty-two laws and a passing suite all existed while no Makefile target, no workflow and no stage ran any of them, and the files were untracked so UEC's discovery could not see them either. Thirty-two laws measured nothing and every gate reported green.",
@@ -853,7 +861,8 @@
         "reusable": false,
         "reuse_inputs": [
           "00-MASTER/URKE-000001/"
-        ]
+        ],
+        "$not_reusable": "Same shape as UEC. It measures that no mechanism is closed against a future domain, which is a property of the whole declared universe rather than of 00-MASTER/URKE-000001/, so no key narrower than the corpus is sound."
       },
       {
         "$comment": "ADDED TO CLOSE THE RULES THAT DECIDE WHO MAY MUTATE WHAT, WHICH WERE DECIDING NOTHING. EX-015 made the mutation classes declarative and EX-016 made them decidable, and then no plane ever called them: `mutation_classification` was imported by exactly one file outside its own module, its own test. Neither it nor its register was in UEC-000001's governed inventory, so both could have been deleted with every gate green. Twice the classifier was effectively broken while every gate stayed green — R-09 declared with no predicate, so classify() returned ERROR for every subject in the corpus; then implemented but shadowed by R-08, so GOVERNED_ANALYSIS claimed 0 of 6751 tracked paths.",
@@ -876,7 +885,8 @@
         "reusable": false,
         "reuse_inputs": [
           "platform/repository_intelligence/"
-        ]
+        ],
+        "$not_reusable": "EX-018 measures that every classification rule is implemented, reachable and claims subjects. Reachability and subject-claiming are properties of the tracked corpus, so a key naming the classifier would not cover the classified."
       },
       {
         "$modes": "Excluded from fast and change because those modes run --no-cov: there is no coverage data to summarise and a stale total is worse than none.",
@@ -895,7 +905,8 @@
         "read_set": [
           "pyproject.toml"
         ],
-        "reusable": false
+        "reusable": false,
+        "$not_reusable": "It is a projection of THIS run's coverage data, produced by the pytest stage it depends on. A reused report would print a previous run's totals under the current run's verdict — not a stale result but a wrong one."
       },
       {
         "depends_on": [],
@@ -911,7 +922,8 @@
           "00-BOOK/",
           "00-SOURCE/"
         ],
-        "reusable": false
+        "reusable": false,
+        "$not_reusable": "Its subject is repository state at the moment it runs, not a file set. It is admitted only by --full, and UVI-L-09 already computes that a certification-eligible mode can never reach a reuse decision, so the flag here is not merely unset but unreachable."
       }
     ]
   },

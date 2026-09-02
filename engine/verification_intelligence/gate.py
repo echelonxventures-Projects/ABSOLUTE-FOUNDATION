@@ -576,7 +576,42 @@ def evidence_identity_depends_on_the_read_set(ctx: _Context) -> Findings:
     return findings
 
 
+def non_reuse_is_argued(ctx: _Context) -> Findings:
+    """UVI-L-14 — a stage that cannot be reused says why.
+
+    THE MIRROR OF A REFUSAL THAT ALREADY EXISTS. ``constitution.py`` refuses a stage declared
+    reusable that names no read-set, on the ground that its cache key would cover nothing and
+    every run would be a false hit. Nothing refused the other omission, and six stages were
+    non-reusable with no recorded reason — paying full cost on every run because the
+    alternative had never been argued.
+
+    THE ARGUMENT IS THE POINT, NOT THE FLAG. Reading the six reasons is how anyone learns
+    whether a sound key is possible at all: the omega gate's subject is the tracked corpus, so
+    no key narrower than every file is honest; the coverage report projects THIS run's data,
+    so a reused one is wrong rather than stale; registration observation is --full only, where
+    UVI-L-09 has already made reuse unreachable. Those are three different reasons and a bare
+    ``false`` records none of them.
+    """
+    findings = Findings()
+    stages = ctx.document.get("stage_registry", {})
+    stages = stages.get("stages", stages) if isinstance(stages, dict) else stages
+    measured = 0
+    for stage in stages:
+        if stage.get("reusable"):
+            continue
+        measured += 1
+        if not str(stage.get("$not_reusable", "")).strip():
+            findings.append(
+                f"stage {stage.get('id')!r} is not reusable and records no reason, so its cost "
+                "is paid on every run for an argument nobody has made"
+            )
+    if not measured:
+        findings.append("no stage is non-reusable, so this law measured nothing")
+    return findings
+
+
 CHECKS = {
+    "non_reuse_is_argued": non_reuse_is_argued,
     "mode_constitution_completeness": mode_constitution_completeness,
     "exactly_one_default": exactly_one_default,
     "stage_registry_reconciliation": stage_registry_reconciliation,
