@@ -308,6 +308,15 @@ def main(argv=None) -> int:
         action="store_true",
         help="merge admitted proposals (requires an allocation permit)",
     )
+    ap.add_argument(
+        "--gate",
+        action="store_true",
+        help=(
+            "CI mode: refuse only when a discovered proposal is refused. An undeclared "
+            "lane is the committed state, not a fault, so it passes here while the bare "
+            "CLI still reports it as a refusal."
+        ),
+    )
     args = ap.parse_args(argv)
 
     record = plan()
@@ -328,7 +337,12 @@ def main(argv=None) -> int:
     else:
         print(render(record), end="")
     if not record.get("lane_declared", True):
-        return 2
+        # A GATE AND A CLI ASK DIFFERENT QUESTIONS. The gate asks "is any proposal in a
+        # bad state?" — with no lane there are no proposals, so nothing is wrong, and a
+        # stage that failed for a subsystem the repository has not adopted would be
+        # refusing its own roadmap. The bare CLI asks "can you assimilate?", and there
+        # the honest answer is no.
+        return 0 if args.gate else 2
     return 0 if record["refused"] == 0 else 1
 
 

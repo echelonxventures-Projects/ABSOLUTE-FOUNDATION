@@ -484,6 +484,32 @@ run_stage "universal object governance (UGA-INV-01..10)" \
 run_stage "universal context closure (INV-CTX-01..11)" \
   "$PY" 00-BOOK/tools/ukctx_gate.py
 
+# --- Stage 6b-cert: context closure certification (UCOS-UCTX-001, Phase 10) -----
+# The gate above measures the invariants. This one measures whether the CERTIFICATE that
+# reports them is still the certificate the current measurement derives — Phase 10 of the
+# context consolidation asked for CI enforcement with no bypass and no warning-only mode.
+#
+# --check writes nothing. It re-derives the certificate and refuses if what is on disk
+# differs, which makes a stale certification a build failure rather than a document nobody
+# re-read. The certificate carries no clock precisely so that this comparison is possible:
+# a timestamped one would differ on every run and could never be checked at all.
+run_stage "context closure certification (UCOS-UCTX-001, Phase 10 claims at fixed point)" \
+  "$PY" 00-BOOK/tools/ukctx_certify.py --check
+
+# --- Stage 6b-prop: context proposal gate (UCOS-UCTX-001 assimilation lane) -----
+# Refuses when a discovered proposal fails any of the four declared gates — validate,
+# duplication, overlap, verification — so a draft can never reach the authority without
+# passing them in order.
+#
+# WHY IT PASSES WHILE THE LANE IS UNDECLARED. `proposal_lane` is not yet in
+# context-authority.json, so there are no proposals and nothing is in a bad state. A stage
+# that refused here would be failing the build for a subsystem the repository has
+# deliberately not adopted yet. The bare CLI still reports the undeclared lane as a refusal,
+# because a human asking "can you assimilate?" deserves the honest no; only --gate, whose
+# question is "is any proposal wrong?", treats an empty lane as clean.
+run_stage "context proposal gate (four declared gates, every discovered proposal)" \
+  "$PY" 00-BOOK/tools/ukctx_assimilate.py --gate
+
 # --- Stage 6b-prov: independent context verification (UCOS-UCTX-001, MB7) -------
 # The stage above is computed BY the generator's own derivation, so it cannot detect a
 # generator that is uniformly wrong. Measured: ten variants — an injected sentence, a
