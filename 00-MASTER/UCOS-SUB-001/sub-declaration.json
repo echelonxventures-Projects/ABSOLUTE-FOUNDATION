@@ -1,0 +1,45 @@
+{
+  "artifact_id": "UCOS-SUB-001",
+  "name": "Substrate Consumption",
+  "authority": "NONE — DERIVED TRUTH. This declares that UCOS CONSUMES the UAKP substrate and what it holds itself to as a consumer. It legislates nothing, owns no capability the substrate owns, and creates no rival to any located UCOS instrument.",
+  "$why_this_exists": [
+    "UCOS Ω∞'s own constitution requires a universal platform that UCOS becomes a CONSUMER of,",
+    "and states the platform shall not be developed as part of UCOS. It was. The substrate is",
+    "now extracted and this is the binding back.",
+    "",
+    "THE DIRECTION OF THE DEPENDENCY IS THE PROPERTY WORTH PROTECTING. UAKP contains no path,",
+    "register or declaration name belonging to UCOS, and a test in that repository refuses",
+    "their appearance. Everything UCOS-specific lives in engine/substrate/. An adapter placed",
+    "in the substrate would undo the extraction in one commit."
+  ],
+  "$not_a_runtime_dependency": "pyproject.toml declares dependencies = [] on constitutional grounds (TP-04, TP-05); ISD-L-09 refuses a pinned runtime dependency; and test_infinite_scope.py asserts the list is empty. Consumption therefore happens in the GOVERNANCE plane, where declared tooling already lives. The runtime core remains stdlib-only and is untouched by this programme.",
+  "$fails_closed": "The substrate has published no release and is installed from a local path. A gate that PASSED when its subject could not be imported would be the silent false green this apparatus exists to prevent, so an absent substrate is a FAULT — exit 2, no verdict — and never a pass.",
+  "requires": "uakp>=0.0.1",
+  "adapter": "engine.substrate.adapter",
+  "rules": "uakp.rules.SHIPPED",
+  "$authorities_comment": [
+    "Three UCOS instruments are translated into substrate authorities, and each was added",
+    "because omitting it made the measurement lie:",
+    "",
+    "artifacts.json  — the corpus register. Permit-gated and deliberately narrow.",
+    "exclusion-register.json — exclusion IS governance, not its absence. Omitting it reported",
+    "  5,470 ungoverned artifacts, most of which UCOS had already argued for in writing.",
+    "id-ledger.json — UGA's object map, filtered to paths that still exist. An append-only",
+    "  ledger records identity and does not claim presence: UCKP-ART-05 makes an identity",
+    "  permanent, so a retired path keeps its entry forever. Treating history as a claim",
+    "  reported thirteen 'claims over things that do not exist' — all genuinely absent, none",
+    "  of them a defect, one of them the deliberate retirement of ledger_authority.py."
+  ],
+  "ratchet": {
+    "contradictions": 320,
+    "$contradictions": "Measured at the commit that introduced this 320 319 artifacts that exist and that no UCOS authority claims. It may fall and may never rise. Deliberately not zero — a gate that fails on the day it lands is a gate somebody disables, so every NEW ungoverned artifact fails immediately while the standing population is driven down. The count includes this programme's own files, which are ungoverned until the allocation permit that mints their identities is issued: the gate measuring itself as debt is correct."
+  },
+  "gate": {
+    "module": "engine.substrate.gate",
+    "exit_codes": {
+      "0": "OPEN — the ratchet holds",
+      "1": "CLOSED — the ratchet refused",
+      "2": "FAULT — no verdict could be reached"
+    }
+  }
+}

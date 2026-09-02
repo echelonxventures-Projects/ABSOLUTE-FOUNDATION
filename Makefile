@@ -2497,3 +2497,9 @@ omega-seal: bootstrap-quiet
 .PHONY: uci-seal
 uci-seal: bootstrap-quiet
 	@$(PY) -m engine.certification_integrity.gate --seal-ratchet --quiet
+
+# UCOS-SUB-001 — UCOS measured by the substrate it consumes. Exit 2 (FAULT) when the
+# substrate is not importable, because a gate that passes without examining its subject is
+# the false green every instrument here exists to refuse.
+substrate:
+	@$(PYTHON) -m engine.substrate
