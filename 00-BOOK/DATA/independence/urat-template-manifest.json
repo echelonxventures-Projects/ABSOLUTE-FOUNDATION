@@ -11,6 +11,7 @@
     "it guarantees that nothing is added afterwards without a reviewable diff to this file."
   ],
   "allowed_cells": [
+    "0",
     "0266fca4373724be",
     "0c65160ca13e63ad",
     "1 recorded · 4 derived",
@@ -23,6 +24,7 @@
     "34fe102d51106d71",
     "3625ea5f92c8acc1",
     "49bd9552a81482a0",
+    "5",
     "5/5 valid",
     "50b9928cfab95531",
     "6/6",
@@ -60,6 +62,7 @@
     "Measured",
     "NO — out-of-corpus finality authority",
     "Named in clause",
+    "OPEN",
     "Obligation",
     "Outcome as determined",
     "Owner",
@@ -102,6 +105,7 @@
     "URAT-VAL-14` COVERAGE-ACCOUNTED",
     "URAT-VAL-15` BOOT-RECONCILED",
     "VERSION",
+    "Valid",
     "Value",
     "YES",
     "a89e6457095f41f7",
@@ -115,6 +119,7 @@
     "f11fc9555a41515f",
     "f1eadbd72b84301a",
     "fd0bafb2c8d184fe",
+    "no",
     "urat_engine.py — regenerated, never hand-authored"
   ],
   "allowed_lines": [
@@ -196,5 +201,24 @@
     "the cheapest uniform error: emitting less. What must appear cannot be derived from the",
     "output, so it is declared here — and every entry is a POINTER into the declaration, so a",
     "record added there becomes an obligation with no edit to this file."
+  ],
+  "$allowed_cells_comment": [
+    "SHORT GENERATOR TOKENS, DECLARED BECAUSE THEY CANNOT NORMALISE. MIN_SLOT is 6: a",
+    "declared string shorter than that may not stand in for a template slot, because a",
+    "corpus hit on 'no' or '5' would be coincidence and normalising on it would erase the",
+    "sentence rather than its values. So every sub-MIN_SLOT cell the generator emits has to",
+    "be declared here by hand or CHECK 1 reports it as unprovenanced.",
+    "",
+    "These five were an oversight of exactly that kind, and the asymmetry shows it: 'YES'",
+    "was declared and 'no' was not, though the state machine table emits them in pairs;",
+    "'GATE' was declared and its value 'OPEN' was not; 'RECORDS ADMITTING FREEZE' was",
+    "declared and its count was not. The labels were captured and several of their values",
+    "were missed.",
+    "",
+    "'0' and '5' are counts and will change. Declaring the digit is weaker than declaring a",
+    "pattern, and this mechanism has no pattern form — the alternative was to pin whole",
+    "lines carrying today's counts in allowed_lines, which goes stale the next time a record",
+    "is registered. A cell holding only a digit carries no normative text, so the weaker",
+    "declaration costs nothing this check is defending."
   ]
 }
