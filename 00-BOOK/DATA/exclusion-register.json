@@ -7,7 +7,10 @@
     "home": "engine/uckp/law.py",
     "role": "PERSISTENCE",
     "relation": "PROJECTION",
-    "articles": ["UCKP-ART-04", "UCKP-ART-09"],
+    "articles": [
+      "UCKP-ART-04",
+      "UCKP-ART-09"
+    ],
     "binding": "00-BOOK/DATA/constitutional-authority-alignment.json",
     "effect": "UCKP-ART-09 makes the repository one persistence mechanism among several, so exclusion from it is a statement about STORAGE and never about whether a thing exists. This register owns which bytes the version-control binding carries; it may never own existence."
   },
@@ -394,6 +397,13 @@
       "owner": "developer workstation",
       "producer": "Claude Code",
       "rationale": "Per-developer operational state of the local agent runtime — the local daemon's record of itself. Never shared, never repository truth, and never an input to canonical identity. Declared here because it was previously excluded ONLY by .git/info/exclude, which no clone carries: the path was ignored on one machine and untracked-and-unignored on every other. UCOS-UCTX-001 INV-CTX-12 walks agent directories ignored-inclusive and refuses an unclassified file, so the missing declaration made the context gate fail for a reason that had nothing to do with governance. Same class the register already assigns to settings.local.json; distinct from GENERATED_DETERMINISTIC because nothing produces these from a declared input and no command reproduces them."
+    },
+    {
+      "rule": "/00-BOOK/CONTEXT-CERTIFICATION/",
+      "class": "GENERATED_DETERMINISTIC",
+      "owner": "UCOS-UCTX-001",
+      "producer": "python3 00-BOOK/tools/ukctx_certify.py",
+      "rationale": "Phase 10 context closure certification. Carries no clock, so it is byte-identical from identical tracked inputs and reaches a fixed point its own --check proves. It is a measurement ABOUT the context authority, never an input to one, so it is product rather than truth and is excluded under the same Model B decision that excludes the projections themselves."
     }
   ]
 }

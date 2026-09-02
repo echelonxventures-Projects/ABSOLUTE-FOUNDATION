@@ -269,6 +269,11 @@ coverage_gap_inventory.json
 # Regenerate at any time with: python3 00-BOOK/tools/ukctx.py build
 # ---------------------------------------------------------------------------
 /00-BOOK/CONTEXT/
+
+# UCOS-UCTX-001 — PHASE 10 CERTIFICATION (Model B, same decision as the projections).
+# A measurement ABOUT the context authority, never an input to one. Rebuilt by
+# `python3 00-BOOK/tools/ukctx_certify.py`; `--check` refuses a stale one.
+/00-BOOK/CONTEXT-CERTIFICATION/
 /AGENTS.md
 /.claude/CLAUDE.md
 /.cursor/rules/ucos.mdc
