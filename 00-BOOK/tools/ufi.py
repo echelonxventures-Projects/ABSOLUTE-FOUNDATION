@@ -80,15 +80,64 @@ def read(path: str) -> str:
 # ---------------------------------------------------------------------------
 # Declaration resolution
 # ---------------------------------------------------------------------------
+class UnsupportedPointer(Exception):
+    """A json_path this resolver cannot answer.
+
+    It is its own type so that an unreadable POINTER is reported as a refusal naming the
+    adopter and the pointer, and never escapes as a traceback. A framework that dies with
+    a KeyError has said nothing about the adopter it was asked to verify, and "said
+    nothing" is indistinguishable from "found nothing" in a CI log — which is the
+    vacuous pass this framework exists to prevent.
+    """
+
+    def __init__(self, path: str, at: str):
+        super().__init__(f"unsupported json_path {path!r} at {at!r}")
+        self.path, self.at = path, at
+
+
+#: ONE step of a pointer: a key, optionally followed by `[]` (map over the list it names)
+#: or by `[?key=='value']` (keep the records of that list whose field equals value).
+#:
+#: The filter form is resolved HERE rather than by rewriting the one declaration that used
+#: it. Two adopters already point with `[]`, the registry groups its entries by owner, and
+#: every future adopter that wants "my rows out of a shared register" wants exactly this
+#: predicate — so the declaration was not wrong, the resolver was incomplete.
+_STEP = re.compile(
+    r"(?P<name>[^.\[\]]+)"
+    r"(?:(?P<map>\[\])|\[\?(?P<key>[^.\[\]=]+)\s*==\s*'(?P<value>[^']*)'\])?"
+)
+
+
 def _walk_json_path(node, path: str):
-    """Resolve "a.b[].c" against a loaded document. [] maps over a list."""
-    for step in path.split("."):
-        if step.endswith("[]"):
-            node = [x for x in node[step[:-2]]]
-        elif isinstance(node, list):
-            node = [x[step] for x in node]
-        else:
-            node = node[step]
+    """Resolve "a.b[].c" or "entries[?owner=='X'].canonical_path" against a document.
+
+    `[]` maps over a list; `[?key=='value']` selects from one. The path is tokenised
+    whole before anything is walked, so an unsupported pointer refuses up front instead
+    of half-resolving and failing later as a KeyError against a literal step.
+    """
+    steps, pos = [], 0
+    while pos < len(path):
+        step = _STEP.match(path, pos)
+        if not step:
+            raise UnsupportedPointer(path, path[pos:])
+        steps.append(step)
+        pos = step.end()
+        if pos < len(path):
+            if path[pos] != ".":
+                raise UnsupportedPointer(path, path[pos:])
+            pos += 1
+
+    for step in steps:
+        name = step.group("name")
+        try:
+            node = [x[name] for x in node] if isinstance(node, list) else node[name]
+        except (KeyError, IndexError, TypeError) as exc:
+            raise UnsupportedPointer(path, name) from exc
+        if step.group("map"):
+            node = list(node)
+        elif step.group("key"):
+            key, value = step.group("key"), step.group("value")
+            node = [x for x in node if str(x.get(key)) == value]
     return node
 
 
@@ -457,8 +506,14 @@ def completeness(manifest: dict, surfaces: list, texts: dict, repo: str) -> list
 def verify(decl_path: str, repo: str = REPO, report_only: bool = False) -> int:
     decl = json.loads(read(decl_path))
     owner = decl["owner"]
-    authorities = resolve(decl["authorities"], repo)
-    surfaces = sorted(set(resolve(decl["surfaces"], repo)))
+    try:
+        authorities = resolve(decl["authorities"], repo)
+        surfaces = sorted(set(resolve(decl["surfaces"], repo)))
+    except UnsupportedPointer as bad:
+        print(f"FAIL — {owner}: {bad}")
+        print("       The declaration points at a surface list this resolver cannot read, so")
+        print("       nothing about this adopter was measured. That fails closed.")
+        return 1
     man_path = os.path.join(repo, decl["manifest"])
     if not os.path.isfile(man_path):
         print(f"FAIL — {owner}: the template manifest is absent: {decl['manifest']}")

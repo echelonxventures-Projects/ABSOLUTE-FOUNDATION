@@ -43,6 +43,16 @@ ucos_log "Verifying environment integrity (UEG-000001)"
 "$(ucos_venv_python)" -m engine.execution_environment.gate \
   --gate --refresh --evidence --command "./bootstrap.sh"
 
+# THE COMMIT GATE IS PART OF THE ENVIRONMENT, NOT A LOCAL HABIT. `.git/hooks/` is not
+# tracked, so until this ran the pre-commit gate existed only on machines whose operator
+# had heard of scripts/install-hooks.sh. A clone therefore had no lint gate at all, and
+# the RC-1 invariant ("verify.sh passes => pre-commit passes") held over an empty set.
+# HEAD 3c1a2530 committed a file that `ruff format --check` refuses, which is what that
+# gap looks like once. Installing here makes the gate a property of a bootstrapped
+# checkout rather than of the person who made it.
+ucos_log "Installing the canonical pre-commit hook"
+./scripts/install-hooks.sh
+
 if [ "$DO_VERIFY" = "1" ]; then
   ucos_log "Running canonical verification"
   exec ./verify.sh

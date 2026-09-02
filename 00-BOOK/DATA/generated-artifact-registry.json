@@ -7,7 +7,11 @@
     "home": "engine/uckp/law.py",
     "role": "PROJECTION",
     "relation": "PROJECTION",
-    "articles": ["UCKP-ART-04", "UCKP-ART-11", "UCKP-ART-13"],
+    "articles": [
+      "UCKP-ART-04",
+      "UCKP-ART-11",
+      "UCKP-ART-13"
+    ],
     "binding": "00-BOOK/DATA/constitutional-authority-alignment.json",
     "effect": "UCKP-ART-11 is explicit that generated output never owns truth. This register is the machine form of that article over the corpus: it says which artifacts are generated, by which producer, from which input closure, under which input classification. It may never own truth itself."
   },
@@ -11622,12 +11626,17 @@
     {
       "artifact_id": "UCOS-NUCLEUS-IDENTIFIER-DICTIONARY",
       "canonical_path": "00-MASTER/UCOS-NUCLEUS-001/UCOS-NUCLEUS-IDENTIFIER-DICTIONARY.json",
-      "title": "Universal Constitutional Identifier Dictionary \u2014 nucleus structural population",
+      "title": "Universal Constitutional Identifier Dictionary — nucleus structural population",
       "producer": "engine/nucleus/cli.py",
       "owner": "UCOS-NUCLEUS-001",
       "capability": "nucleus-ownership",
       "lifecycle": "REGENERATED",
-      "input_closure": ["engine/nucleus/registry.py", "engine/nucleus/catalog.py", "engine/registry/universal/identity.py", "engine/registry/universal/dictionary.py"],
+      "input_closure": [
+        "engine/nucleus/registry.py",
+        "engine/nucleus/catalog.py",
+        "engine/registry/universal/identity.py",
+        "engine/registry/universal/dictionary.py"
+      ],
       "input_classification": {
         "engine/nucleus/registry.py": "TRACKED_DETERMINISTIC",
         "engine/nucleus/catalog.py": "TRACKED_DETERMINISTIC",
@@ -11668,7 +11677,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
       ],
@@ -11680,7 +11689,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001..cursor.rules.ucos.mdc",
       "canonical_path": ".cursor/rules/ucos.mdc",
       "title": "",
@@ -11705,7 +11714,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
       ],
@@ -11717,7 +11726,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001..github.copilot-instructions.md",
       "canonical_path": ".github/copilot-instructions.md",
       "title": "",
@@ -11742,7 +11751,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
       ],
@@ -11754,7 +11763,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001..kiro.steering.ucos.md",
       "canonical_path": ".kiro/steering/ucos.md",
       "title": "",
@@ -11779,7 +11788,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
       ],
@@ -11791,7 +11800,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.00-CONTEXT-INDEX.md",
       "canonical_path": "00-BOOK/CONTEXT/00-CONTEXT-INDEX.md",
       "title": "",
@@ -11816,7 +11825,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -11828,7 +11837,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.MANIFEST.json",
       "canonical_path": "00-BOOK/CONTEXT/MANIFEST.json",
       "title": "",
@@ -11853,7 +11862,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -11865,7 +11874,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.agent_policy.md",
       "canonical_path": "00-BOOK/CONTEXT/agent_policy.md",
       "title": "",
@@ -11890,7 +11899,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -11902,7 +11911,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.architecture.md",
       "canonical_path": "00-BOOK/CONTEXT/architecture.md",
       "title": "",
@@ -11927,7 +11936,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -11939,7 +11948,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.branch_policy.md",
       "canonical_path": "00-BOOK/CONTEXT/branch_policy.md",
       "title": "",
@@ -11964,7 +11973,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -11976,7 +11985,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.certification.md",
       "canonical_path": "00-BOOK/CONTEXT/certification.md",
       "title": "",
@@ -12001,7 +12010,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12013,7 +12022,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.development_policy.md",
       "canonical_path": "00-BOOK/CONTEXT/development_policy.md",
       "title": "",
@@ -12038,7 +12047,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12050,7 +12059,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.evidence.md",
       "canonical_path": "00-BOOK/CONTEXT/evidence.md",
       "title": "",
@@ -12075,7 +12084,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12087,7 +12096,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.execution.md",
       "canonical_path": "00-BOOK/CONTEXT/execution.md",
       "title": "",
@@ -12112,7 +12121,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12124,7 +12133,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.governance.md",
       "canonical_path": "00-BOOK/CONTEXT/governance.md",
       "title": "",
@@ -12149,7 +12158,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12161,7 +12170,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.identity.md",
       "canonical_path": "00-BOOK/CONTEXT/identity.md",
       "title": "",
@@ -12186,7 +12195,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12198,7 +12207,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.knowledge.md",
       "canonical_path": "00-BOOK/CONTEXT/knowledge.md",
       "title": "",
@@ -12223,7 +12232,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12235,7 +12244,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.lifecycle.md",
       "canonical_path": "00-BOOK/CONTEXT/lifecycle.md",
       "title": "",
@@ -12260,7 +12269,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12272,7 +12281,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.mutation_policy.md",
       "canonical_path": "00-BOOK/CONTEXT/mutation_policy.md",
       "title": "",
@@ -12297,7 +12306,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12309,7 +12318,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.observations.md",
       "canonical_path": "00-BOOK/CONTEXT/observations.md",
       "title": "",
@@ -12334,7 +12343,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12346,7 +12355,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.registries.md",
       "canonical_path": "00-BOOK/CONTEXT/registries.md",
       "title": "",
@@ -12371,7 +12380,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12383,7 +12392,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.repository_policy.md",
       "canonical_path": "00-BOOK/CONTEXT/repository_policy.md",
       "title": "",
@@ -12408,7 +12417,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12420,7 +12429,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.00-BOOK.CONTEXT.workflows.md",
       "canonical_path": "00-BOOK/CONTEXT/workflows.md",
       "title": "",
@@ -12445,7 +12454,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "00-BOOK/CONTEXT/MANIFEST.json"
       ],
@@ -12457,7 +12466,7 @@
       "regeneration_command": "python3 00-BOOK/tools/ukctx.py build",
       "certification_role": "CONTEXT_PROJECTION"
     },
-{
+    {
       "artifact_id": "UCOS-UCTX-001.AGENTS.md",
       "canonical_path": "AGENTS.md",
       "title": "",
@@ -12482,7 +12491,7 @@
       "build_mode_inputs": [],
       "deterministic": true,
       "environmental_dependencies": [],
-      "canonical_identity_role": "CANONICAL",
+      "canonical_identity_role": "EXCLUDED",
       "consumers": [
         "the agent named in 00-BOOK/DATA/context-authority.json agent_surfaces"
       ],
@@ -12773,7 +12782,17 @@
       "owner": "UCOS-NUCLEUS-001",
       "home": "00-MASTER/UCOS-NUCLEUS-001",
       "producer": "engine/nucleus/cli.py",
-      "authored_inputs": ["01-REPOSITORY-IMPACT-AND-GAP-ANALYSIS.md", "02-NUCLEUS-CONSTITUTIONAL-MODEL.md", "03-CANONICAL-NUCLEI-CATALOG-AND-OWNERSHIP.md", "04-TIME-CALENDAR-COMMISSION-SCOPE.md", "05-PLATFORM-CONFIG-AND-UNIVERSE-COMPOSITION.md", "06-IMPLEMENTATION-ROADMAP-AND-SEQUENCING.md", "07-TRACEABILITY-VALIDATION-CERTIFICATION.md", "08-ZERO-MISSING-COVERAGE-VERIFICATION.md", "README.md"]
+      "authored_inputs": [
+        "01-REPOSITORY-IMPACT-AND-GAP-ANALYSIS.md",
+        "02-NUCLEUS-CONSTITUTIONAL-MODEL.md",
+        "03-CANONICAL-NUCLEI-CATALOG-AND-OWNERSHIP.md",
+        "04-TIME-CALENDAR-COMMISSION-SCOPE.md",
+        "05-PLATFORM-CONFIG-AND-UNIVERSE-COMPOSITION.md",
+        "06-IMPLEMENTATION-ROADMAP-AND-SEQUENCING.md",
+        "07-TRACEABILITY-VALIDATION-CERTIFICATION.md",
+        "08-ZERO-MISSING-COVERAGE-VERIFICATION.md",
+        "README.md"
+      ]
     },
     {
       "owner": "UCOS-RIB-001",

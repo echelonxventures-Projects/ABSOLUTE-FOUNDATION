@@ -162,7 +162,6 @@ def test_an_object_over_the_threshold_is_split_and_records_the_hash_it_was_measu
 
 
 def test_an_object_under_the_threshold_is_placed_whole() -> None:
-
     root = "."
     target = COLLECTIBLE[0]
     transcript = f"5.00s call     {target}::test_a\n100 passed in 900.00s\n"
@@ -170,7 +169,6 @@ def test_an_object_under_the_threshold_is_placed_whole() -> None:
 
 
 def test_the_threshold_is_a_parameter_so_a_caller_can_measure_a_different_shape() -> None:
-
     root = "."
     hashed = HASHED
     target = hashed[0]
@@ -201,7 +199,6 @@ def test_the_costs_and_split_tables_are_emitted_in_sorted_order() -> None:
 
 
 def test_the_cli_writes_the_table_where_it_is_told(tmp_path) -> None:
-
     source = tmp_path / "durations.txt"
     source.write_text(_transcript(".", COLLECTIBLE[:2]), encoding="utf-8")
     out = tmp_path / "cost.json"
