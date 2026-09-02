@@ -90,22 +90,54 @@
   ],
   "required_projections": [
     {
-      "surfaces": ["ALL_SURFACES"],
       "source": "00-MASTER/BASELINE-001/baseline.json",
       "collection": "baselines",
-      "field": "id"
+      "field": "id",
+      "surfaces": [
+        "00-MASTER/BASELINE-001/01-SUCCESSION-AND-ADDRESSABILITY-REGISTER.md",
+        "00-MASTER/BASELINE-001/03-CURRENCY-AND-CITATION-REGISTER.md"
+      ],
+      "$why": "a baseline that succeeds another must be named where succession and currency are recorded, or a superseded baseline keeps being cited as current"
     },
     {
-      "surfaces": ["ALL_SURFACES"],
       "source": "00-MASTER/BASELINE-001/baseline.json",
       "collection": "capabilities",
-      "field": "id"
+      "field": "id",
+      "surfaces": [
+        "00-MASTER/BASELINE-001/00-BASELINE-INHERITANCE-DASHBOARD.md"
+      ],
+      "$why": "the dashboard is the aggregate view of what the baseline confers; a capability absent from it is a capability nothing reports as inherited"
     },
     {
-      "surfaces": ["ALL_SURFACES"],
       "source": "00-MASTER/BASELINE-001/baseline.json",
       "collection": "validations",
-      "field": "id"
+      "field": "id",
+      "surfaces": [
+        "00-MASTER/BASELINE-001/05-VALIDATION-REPORT.md"
+      ],
+      "$why": "a validation absent from the report it is reported in is an unrun check that reads as passed"
     }
+  ],
+  "$required_projections_comment": [
+    "TARGETED, NOT ALL_SURFACES, AND THE DIFFERENCE IS THE WHOLE OBLIGATION. Every entry",
+    "below used to name ALL_SURFACES, which asserted that all 46 declared ids appear in all",
+    "seven surfaces. They do not and should not: these surfaces answer different questions,",
+    "so the obligation was unsatisfiable by construction and CHECK 3 stood permanently red",
+    "while protecting nothing. A check that cannot pass cannot fail informatively either.",
+    "",
+    "The reference adopter shows the correct form. UCOS-UCTX-001 points at",
+    "`agent_surfaces[].surface` — a HOMOGENEOUS family whose members INV-CTX-13 measures",
+    "for divergence, so every member carrying every value is a true statement. ALL_SURFACES",
+    "is that same claim made against a heterogeneous set, where it is simply false.",
+    "",
+    "Each collection is now bound to the surface that actually projects it, measured rather",
+    "than assumed: capabilities 20/20 in the dashboard, validations 26/26 in the validation",
+    "report, baselines 2/2 in the succession and currency registers. The obligation is now",
+    "both TRUE and LOAD-BEARING — dropping one capability from the dashboard fires CHECK 3,",
+    "which is exactly the producer-emits-less defect the check exists to catch.",
+    "",
+    "The alternative was to write the missing ids into the six documents that do not carry",
+    "them. That would have been a generator minting normative text to satisfy its own",
+    "verifier, which is the first failure UFI's own header names."
   ]
 }
