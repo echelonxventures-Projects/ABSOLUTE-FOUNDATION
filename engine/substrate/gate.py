@@ -16,12 +16,34 @@ not examine its subject is the defect every instrument here exists to refuse.
 from __future__ import annotations
 
 import collections
+import hashlib
 import json
 import os
 import sys
+from typing import Any
 
 DECLARATION = os.path.join("00-MASTER", "UCOS-SUB-001", "sub-declaration.json")
 EXIT_OPEN, EXIT_CLOSED, EXIT_FAULT = 0, 1, 2
+
+
+def declaration_digest(declaration: dict[str, Any]) -> str:
+    """The certification identity of UCOS-SUB-001's declaration.
+
+    UEC-L-08 asks whether the package that OWNS a declaration mints a digest at all, and
+    UEC-L-13 asks the harder question: whether a semantic edit MOVES it. Hashing the canonical
+    form of the WHOLE document answers both, and the choice is deliberate. A digest over a
+    projection — the ratchet alone, or a curated subset of fields — certifies two different
+    declarations with one value, which is the defect UEC-L-13 exists to catch and which
+    engine/construct was measured carrying: flipping a law's `blocking` flag left its
+    declaration_digest byte-identical while the verdict depended on it.
+
+    Canonical form is `json.dumps(sort_keys=True)` per UCKP-ART-13, so identical inputs
+    produce identical bytes on any machine, in any interpreter, in any order the file was
+    written. Commentary keys participate too: a `$why` that no longer describes what the
+    instrument does is a semantic change, and a digest that ignored it would say otherwise.
+    """
+    canonical = json.dumps(declaration, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -63,9 +85,10 @@ def main(argv: list[str] | None = None) -> int:
     measured = len(findings)
     by_rule = collections.Counter(finding.rule for finding in findings)
     print("UCOS-SUB-001 — UCOS measured by the substrate it consumes")
+    print(f"  declaration     : {declaration_digest(declaration)}")
     print(f"  artifacts       : {len(graph.artifacts):,}")
     for name, authority in sorted(graph.authorities.items()):
-        print(f"  {name:24} governs {len(authority.governs):,}")
+        print(f"  {name:26} governs {len(authority.governs):,}")
     print(f"  contradictions  : {measured} (ceiling {ceiling})")
     for rule, count in by_rule.most_common():
         print(f"      {count:5}  {rule}")

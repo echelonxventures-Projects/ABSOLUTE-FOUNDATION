@@ -172,3 +172,18 @@ def test_attribute_to_dict_records_substrate_reuse():
 
 def test_attribute_type_is_the_realized_construct():
     assert isinstance(_attr(), Attribute)
+
+
+# --------------------------------------------------------------------------------------
+# Every constructor guard, shown refusing (see data/tests/test_schema.py for the argument).
+# --------------------------------------------------------------------------------------
+
+from engine.tests import assert_every_guard_can_refuse  # noqa: E402
+
+
+def test_every_datum_value_ref_guard_can_refuse():
+    assert_every_guard_can_refuse(_attr().value_ref)
+
+
+def test_every_attribute_guard_can_refuse():
+    assert_every_guard_can_refuse(_attr())

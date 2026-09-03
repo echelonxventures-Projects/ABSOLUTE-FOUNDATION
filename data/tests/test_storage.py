@@ -240,3 +240,40 @@ def test_storage_to_dict_records_substrate_reuse():
 
 def test_storage_type_is_the_realized_construct():
     assert isinstance(_storage(), Storage)
+
+
+# --------------------------------------------------------------------------------------
+# Every constructor guard, shown refusing (see data/tests/test_schema.py for the argument).
+# --------------------------------------------------------------------------------------
+
+from engine.tests import assert_every_guard_can_refuse  # noqa: E402
+
+
+def test_every_persisted_entity_ref_guard_can_refuse():
+    assert_every_guard_can_refuse(_storage().persisted_refs[0])
+
+
+def test_every_storage_guard_can_refuse():
+    """Three modes, because the topology rules are mutually exclusive: a Local storage
+    cannot reach the distributed-cardinality guard and vice versa.
+
+    Two guards are named as unreachable BY ARGUMENT MUTATION and proven directly below:
+    the schema-alignment rule lives on a member of ``persisted_refs`` rather than on a
+    declared field of the storage, and the technology scan reads the rendered document
+    rather than any single value. Naming them here is what keeps the claim checkable
+    instead of silently dropping two guards.
+    """
+    from dataclasses import replace as _replace
+
+    local = _storage()
+    distributed = _storage(kind=StorageKind.DISTRIBUTED, loci=("locus.a", "locus.b"))
+    tiered = _storage(kind=StorageKind.TIERED, durability=DurabilityLevel.TIERED)
+    witnesses = assert_every_guard_can_refuse(local, distributed, tiered, unreachable=(292, 311))
+    assert witnesses
+
+    # the two named guards, reached the only way they can be
+    misaligned = _replace(local.persisted_refs[0], schema_ref="not-a-schema-id")
+    with pytest.raises(StorageError, match="not schema-aligned"):
+        _replace(local, persisted_refs=(misaligned,))
+    with pytest.raises(StorageError, match="storage technology"):
+        _storage(name="ucos.demo.postgres")

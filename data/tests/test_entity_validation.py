@@ -14,7 +14,9 @@ from data.entity_validation import (
     entity_checks,
     validate_entity,
 )
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
+from engine.validation.executor import ValidationEngine
 
 ENTITY_NAME = "ucos.demo.entity"
 
@@ -125,8 +127,6 @@ def test_untraced_entity_fails_traceability_gate():
     e = _entity()
     subject = EntityValidationSubject.from_entity(e, _trace(e))
     subject = replace(subject, provenance_chain=())  # orphaned lineage
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(entity_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "traceability-rooted" in {f.check_id for f in report.blocking_failures}
@@ -159,8 +159,13 @@ def test_boundary_ownership_gate_on_subject_mutation():
     e = _entity()
     subject = EntityValidationSubject.from_entity(e, _trace(e))
     subject = replace(subject, attribute_bearing_refs=("UCOS-ENTITY-REF:foreign",))
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(entity_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "entity-boundary-ownership" in {f.check_id for f in report.blocking_failures}
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    e = _entity()
+    subject = EntityValidationSubject.from_entity(e, _trace(e))
+    assert_every_check_can_refuse(subject, entity_checks())

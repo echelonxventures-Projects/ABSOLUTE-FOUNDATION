@@ -16,7 +16,9 @@ from data.storage_validation import (
     storage_checks,
     validate_storage,
 )
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
+from engine.validation.executor import ValidationEngine
 
 ENTITY_NAME = "ucos.demo.entity"
 STORAGE_NAME = "ucos.demo.storage"
@@ -151,8 +153,6 @@ def test_untraced_storage_fails_traceability_gate():
     s = _storage()
     subject = StorageValidationSubject.from_storage(s, _trace(s))
     subject = replace(subject, provenance_chain=())  # orphaned lineage
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(storage_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "traceability-rooted" in {f.check_id for f in report.blocking_failures}
@@ -169,8 +169,6 @@ def test_technology_naming_subject_fails_independence_gate():
     s = _storage()
     subject = StorageValidationSubject.from_storage(s, _trace(s))
     subject = replace(subject, names_technology=True)
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(storage_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "storage-independence" in {f.check_id for f in report.blocking_failures}
@@ -180,8 +178,6 @@ def test_non_schema_aligned_subject_fails_gate():
     s = _storage()
     subject = StorageValidationSubject.from_storage(s, _trace(s))
     subject = replace(subject, schema_aligned=False, schema_refs=("not-a-schema",))
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(storage_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "storage-schema-aligned" in {f.check_id for f in report.blocking_failures}
@@ -191,8 +187,6 @@ def test_self_referencing_founding_subject_fails_acyclic_gate():
     s = _storage()
     subject = StorageValidationSubject.from_storage(s, _trace(s))
     subject = replace(subject, founding_acyclic=False)
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(storage_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "founding-acyclic" in {f.check_id for f in report.blocking_failures}
@@ -202,8 +196,6 @@ def test_placement_not_decidable_subject_fails_gate():
     s = _storage()
     subject = StorageValidationSubject.from_storage(s, _trace(s))
     subject = replace(subject, placement_explicit=False)
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(storage_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "storage-placement-explicit" in {f.check_id for f in report.blocking_failures}
@@ -213,8 +205,14 @@ def test_non_runtime_binding_subject_fails_persistence_gate():
     s = _storage()
     subject = StorageValidationSubject.from_storage(s, _trace(s))
     subject = replace(subject, binds_runtime_by_reference=False)
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(storage_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "storage-persistence-by-reference" in {f.check_id for f in report.blocking_failures}
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    _s = _storage()
+    assert_every_check_can_refuse(
+        StorageValidationSubject.from_storage(_s, _trace(_s)), storage_checks()
+    )

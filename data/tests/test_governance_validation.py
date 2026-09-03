@@ -17,6 +17,7 @@ from data.governance_validation import (
     governance_checks,
     validate_governance,
 )
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
 from engine.validation.executor import ValidationEngine
 
@@ -304,3 +305,8 @@ def test_non_runtime_policy_ref_fails_reuse_integrity_gate():
     report = _run(subject)
     assert report.verdict is Verdict.FAIL
     assert "foundation-reuse-integrity" in {f.check_id for f in report.blocking_failures}
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    assert_every_check_can_refuse(_subject(), governance_checks())

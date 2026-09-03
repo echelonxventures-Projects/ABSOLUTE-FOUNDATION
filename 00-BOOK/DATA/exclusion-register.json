@@ -287,6 +287,20 @@
       "rationale": "The execution-environment fingerprint cache and the per-run execution evidence. Both describe THIS MACHINE: an interpreter path, a venv prefix, an installed toolchain — none of which reproduces elsewhere, so committing either would publish a claim true only where it was written. The cache may skip exactly one measurement and never a verdict, and the evidence is emitted fresh by every certified run and bound into certification from there, not from git. It also holds verify.lease, the working-tree lease AEOS G-04 names (scripts/ucos-env.sh, acquired by verify.sh before any stage runs). The class is unchanged and correct: a lease records THIS MACHINE's pid, the HEAD it measured and the porcelain digest it measured, none of which reproduces elsewhere, and it is owned by the process that writes it for exactly the duration of one run. Committing it would publish a claim about a process that no longer exists."
     },
     {
+      "rule": ".uci-evidence/",
+      "class": "GENERATED_ENVIRONMENTAL",
+      "owner": "UCI-000001",
+      "producer": "engine/certification_integrity; the programme's own measurement drivers (driver_baseline.py, driver_equivalence.py, driver_subset.py)",
+      "rationale": "The measurement record of the certification-integrity programme: two whole-repository Cobertura reports, the full-suite and sharded pytest transcripts, the derived offender and equivalence tables, and one deliberately preserved corruption. Every byte of it is a property of the run that produced it — a coverage report names this machine's file paths and this interpreter's line arcs, a transcript carries wall-clock durations — so it is GENERATED_ENVIRONMENTAL and not GENERATED_DETERMINISTIC: re-running the drivers produces an equivalent measurement, never identical bytes. Nothing reachable from a canonical render reads it. It is retained rather than deleted because `coverage.xml.truncated-by-concurrent-run` is cited BY IDENTITY in 00-MASTER/UCI-000001/uci-declaration.json:false_green_recovered as the evidence for why that programme measures inside a frozen extraction, and a declaration that names a file is entitled to have it exist. Its ignore rule (.gitignore:247) predates this entry; the entry is what makes the rule resolve. Retention rather than deletion is the correct disposition precisely because the declaration cites a member by identity: this register may not be used as a disposal mechanism, and here it is not asked to be."
+    },
+    {
+      "rule": "coverage_gap_inventory.json",
+      "class": "GENERATED_ENVIRONMENTAL",
+      "owner": "engine/certification_integrity",
+      "producer": "make uci-inventory — `python -m engine.certification_integrity.gate --write-inventory coverage_gap_inventory.json`",
+      "rationale": "The per-line coverage-gap inventory: every unexecuted statement and untaken branch in the repository, named by module and line. Bytes are a function of the coverage measurement of one run on one machine, so the class is GENERATED_ENVIRONMENTAL. The producer's own Makefile note records the asymmetry that makes excluding it safe — `no law in the package reads it back, so regenerating it cannot turn a refusal into a pass` — which is the same property .ucos-verification-evidence/ relies on: the artifact is an output of a verdict and never an input to one. Its ignore rule (.gitignore:248) predates this entry; the entry is what makes the rule resolve."
+    },
+    {
       "rule": "00-BOOK/CONTEXT/",
       "class": "GENERATED_DETERMINISTIC",
       "owner": "UCOS-UCTX-001",
@@ -294,14 +308,14 @@
       "rationale": "Generated context projection — the canonical context root — index, sixteen domain pages and the projection manifest. Deterministically re-derived from the authored declaration at 00-BOOK/DATA/context-authority.json; byte-identical from the same tracked inputs (UCKP-ART-13). Under GOV-005 §5.3 a generated artifact is regenerated, never hand-registered, so it is not an eligible repository artifact and consumes no permanent identity. Regenerate: `python3 00-BOOK/tools/ukctx.py build`. Bootstrap: emitted by scripts/generate-prerequisites.sh at verify.sh stage 1b, so a pristine clone obtains it before any gate reads it. Fixed point proved by INV-CTX-11 and by the CI job 'Fixed point — a build over the committed tree writes no byte'; absence or drift is refused by INV-CTX-06 and INV-CTX-07. This entry is what makes the ignore rule lawful: exclusion here is a statement about STORAGE, never about whether the context exists."
     },
     {
-      "rule": "AGENTS.md",
+      "rule": "/AGENTS.md",
       "class": "GENERATED_DETERMINISTIC",
       "owner": "UCOS-UCTX-001",
       "producer": "00-BOOK/tools/ukctx.py",
       "rationale": "Generated context projection — the cross-vendor agents.md surface, the one a future agent inherits without this register being edited. Deterministically re-derived from the authored declaration at 00-BOOK/DATA/context-authority.json; byte-identical from the same tracked inputs (UCKP-ART-13). Under GOV-005 §5.3 a generated artifact is regenerated, never hand-registered, so it is not an eligible repository artifact and consumes no permanent identity. Regenerate: `python3 00-BOOK/tools/ukctx.py build`. Bootstrap: emitted by scripts/generate-prerequisites.sh at verify.sh stage 1b, so a pristine clone obtains it before any gate reads it. Fixed point proved by INV-CTX-11 and by the CI job 'Fixed point — a build over the committed tree writes no byte'; absence or drift is refused by INV-CTX-06 and INV-CTX-07. This entry is what makes the ignore rule lawful: exclusion here is a statement about STORAGE, never about whether the context exists."
     },
     {
-      "rule": "README.md",
+      "rule": "/README.md",
       "class": "GENERATED_DETERMINISTIC",
       "owner": "UCOS-UCTX-001",
       "producer": "00-BOOK/tools/ukctx.py",

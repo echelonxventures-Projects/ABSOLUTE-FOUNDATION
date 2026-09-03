@@ -275,3 +275,45 @@ def test_schema_to_dict_records_substrate_reuse():
 
 def test_schema_type_is_the_realized_construct():
     assert isinstance(_schema(), Schema)
+
+
+# --------------------------------------------------------------------------------------
+# Every constructor guard, shown refusing.
+#
+# WHY THIS EXISTS. `Schema.__post_init__`, `SchemaElement.__post_init__` and
+# `DescribedRef.__post_init__` between them declare more than twenty `raise` statements —
+# one per rule the construct claims to enforce at construction. The suite above builds
+# valid constructs and asserts what they then do, so those guards were observed only NOT
+# firing. A guard that never fires is `pass` with a docstring.
+#
+# The witnesses are DERIVED rather than enumerated (`engine.tests.assert_every_guard_can_refuse`
+# mutates one declared field at a time and attributes each raise to the exact `raise`
+# statement that executed, through the traceback rather than through the message text) so a
+# guard added to any of these classes is proven on the commit that adds it, and a reworded
+# message cannot silently retire a proof.
+# --------------------------------------------------------------------------------------
+
+from engine.tests import assert_every_guard_can_refuse  # noqa: E402
+
+
+def test_every_schema_element_guard_can_refuse():
+    assert_every_guard_can_refuse(element("field", "ucos.core.string"))
+
+
+def test_every_described_ref_guard_can_refuse():
+    assert_every_guard_can_refuse(_schema().described_refs[0])
+
+
+def test_every_schema_guard_can_refuse():
+    """Two modes, because an Aggregate-Schema and an Entity-Schema reach different guards:
+    the member-composition rules are unreachable from a construct in the other mode."""
+    entity_schema = _schema()
+    aggregate = make_schema(
+        "ucos.demo.aggregate",
+        "ucos.core.schema",
+        (element("x", "ucos.core.string"),),
+        (_entity(),),
+        kind=SchemaKind.AGGREGATE,
+        member_schema_refs=("UCOS-SCHEMA-member-one",),
+    )
+    assert_every_guard_can_refuse(entity_schema, aggregate)

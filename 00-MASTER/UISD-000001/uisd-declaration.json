@@ -260,6 +260,16 @@
       "admission": "Append an axis record to `expansion_axes` naming the law that measures it. Data alone: no engine change, no schema change, no amendment. ISD-AE-04 exercises the path on every gate run rather than trusting this sentence.",
       "intentional": false,
       "gap": "ISD-AX-11 was admitted this way and $axis_ratification records it as 'an additive constitutional extension ... discovered through constitutional self-application'. The mechanism therefore works and had simply never been measured, which by this declaration's own standard makes it asserted rather than computed."
+    },
+    {
+      "id": "ISD-CE-13",
+      "enumeration": "AMBIENT_MEASUREMENT_VARS",
+      "declared_at": "engine/certification_integrity/immutable.py",
+      "population": 5,
+      "closing_invariant": "The set is closed by an authority outside this repository and may not be derived inside it. It names the environment variables through which coverage.py and pytest-cov bootstrap a measuring subprocess — COVERAGE_FILE plus the four COV_CORE_* variables written by pytest-cov's .pth — and nothing in this tree can enumerate them, because they are that tool's published contract and not this repository's vocabulary. Correctness is therefore held behaviourally rather than structurally: engine/tests/unit/test_certification_integrity_execution.py runs a real measuring subprocess under forged bootstrap variables and refuses if any data file appears beside the outer session's, so a variable that matters and is missing from this tuple fails a test rather than silently corrupting a measurement. That is the honest closing invariant: the set cannot be proven exhaustive, and the consequence of it being wrong is caught where the consequence occurs.",
+      "admission": "Append the variable name to the tuple. Data alone: no engine change, no schema change, no amendment, and every one of the three spawn sites reads the same tuple through immutable.clean_environment, so admitting a variable admits it everywhere at once. The admission path is exercised rather than asserted — test_the_stripped_set_names_both_families_and_not_just_the_one_that_was_found_first pins both families, which is what makes a sixth variable an edit to one line instead of a search for three call sites.",
+      "intentional": true,
+      "gap": "The tuple exists because this closure was already the defect. Stripping COVERAGE_FILE alone was the fix for the first occurrence and was NOT enough for the second: pytest-cov's .pth auto-started an unconfigured coverage in every subprocess the COV_CORE_* variables reached, which wrote statement-only data beside the parent's branch data, and `coverage combine` refuses to merge the two. Four of thirteen shards then died with an INTERNALERROR AFTER every test in them had passed and the coverage gate reported a figure that measured nothing. Naming the set here is what makes the second family checkable instead of remembered."
     }
   ],
   "$disclosure_completeness": "This list is itself open: it enumerates the closed enumerations located at baseline bb9c27d2 and is extended by appending an entry. ISD-L-01 measures that each entry names a closing invariant and an admission path, not that the list is exhaustive — a claim of exhaustiveness would be the very finite assumption the principle prohibits.",

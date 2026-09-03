@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 
+from engine.tests import assert_every_check_can_refuse
 from infrastructure.band13 import make_band13_completion
 from infrastructure.band13_meta import EXPECTED_UNITS
 from infrastructure.band13_traceability import build_band13_traceability
@@ -218,3 +219,8 @@ def test_traceability_rooted_check():
         .passed
         is False
     )
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    assert_every_check_can_refuse(_subject(), band13_checks())

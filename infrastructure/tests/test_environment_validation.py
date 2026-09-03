@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
 from engine.validation.executor import ValidationEngine
 from infrastructure.environment import (
@@ -109,9 +110,9 @@ def test_provisioning_process_binds_runtime_check_holds():
 
 def test_subject_projection_is_deterministic():
     e = _env()
-    assert EnvValidationSubject.from_construct(
+    assert EnvValidationSubject.from_construct(e, _trace(e)) == EnvValidationSubject.from_construct(
         e, _trace(e)
-    ) == EnvValidationSubject.from_construct(e, _trace(e))
+    )
 
 
 def test_active_construct_still_validates():
@@ -135,9 +136,7 @@ def test_missing_digest_fails_identified_gate():
 
 
 def test_missing_mandatory_attribute_fails_identified_gate():
-    assert _fails(
-        _subject(declares_mandatory_attributes=False), "infra-env-identified-objectbound"
-    )
+    assert _fails(_subject(declares_mandatory_attributes=False), "infra-env-identified-objectbound")
 
 
 def test_bad_digest_fails_value_fidelity_gate():
@@ -176,9 +175,7 @@ def test_environment_without_boundary_fails_bounded_isolated_gate():
 
 
 def test_hosting_structure_without_locality_fails_located_gate():
-    assert _fails(
-        _subject(applies_locality=True, located_by_reference=False), "infra-env-located"
-    )
+    assert _fails(_subject(applies_locality=True, located_by_reference=False), "infra-env-located")
 
 
 def test_empty_containment_fails_containment_by_reference_gate():
@@ -288,3 +285,8 @@ def test_non_applicable_flags_pass_vacuously_for_foundational_constructs():
     assert passed["infra-env-located"]
     assert passed["infra-env-containment-by-reference"]
     assert passed["infra-env-provisioning-binds-runtime"]
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    assert_every_check_can_refuse(_subject(), environment_checks())

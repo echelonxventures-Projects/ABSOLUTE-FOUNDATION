@@ -46,6 +46,7 @@ from platform.universal_ownership.errors import (
     OwnershipFabricationError,
     OwnershipProviderConflictError,
 )
+from platform.universal_ownership.evidence import EvidenceRefusal, RoleLocatorProvider
 from platform.universal_truth import Subject, TruthPolicy, TruthZone, default_truth_policy
 
 import pytest
@@ -703,8 +704,6 @@ def _gated_home(*registered: str):
 
 
 def test_a_refusal_requires_a_located_provenance_and_reason() -> None:
-    from platform.universal_ownership.evidence import EvidenceRefusal
-
     refusal = EvidenceRefusal(
         provider_id="p", subject_id="S", locator="a/b.md", reason="LOCATOR-NOT-REGISTERED"
     )
@@ -741,8 +740,6 @@ def test_an_admitted_candidate_is_never_also_a_refusal() -> None:
 
 def test_a_role_provider_and_an_identity_provider_diagnose_through_the_same_gate() -> None:
     """One eligibility gate, written once: three providers cannot answer it differently."""
-    from platform.universal_ownership.evidence import RoleLocatorProvider
-
     home = _gated_home()
     subject = Subject.create(
         "UCOS-COMP-000002", locators=(UNREGISTERED_HOME,), roles={"home": (UNREGISTERED_HOME,)}
@@ -766,8 +763,6 @@ def test_a_faulting_diagnosis_is_contained_and_never_silent() -> None:
 
 
 def test_a_provider_may_not_forge_a_refusal_for_another_provider_or_subject() -> None:
-    from platform.universal_ownership.evidence import EvidenceRefusal
-
     class Forger(DefinitionalLocatorProvider):
         def refusals(self, subject: Subject):
             return (
@@ -803,8 +798,6 @@ def test_a_provider_may_not_forge_a_refusal_for_another_provider_or_subject() ->
 
 
 def test_the_registry_aggregates_refusals_deterministically() -> None:
-    from platform.universal_ownership.evidence import RoleLocatorProvider
-
     home = _gated_home()
     subject = Subject.create(
         "UCOS-COMP-000002", locators=(UNREGISTERED_HOME,), roles={"home": (UNREGISTERED_HOME,)}
@@ -898,3 +891,116 @@ def test_the_population_projection_publishes_the_diagnosis() -> None:
     }
     assert [record.subject_id for record in determination.remediable] == ["UCOS-COMP-000001"]
     assert determination.to_dict()["by_refusal"] == determination.by_refusal()
+
+
+# --------------------------------------------------------------------------- cli: the
+# specialised commands
+#
+# WHY THESE EXIST. `contract`, `providers` and `determine` were exercised; `homing` and
+# `recommend` were not, and they are the two that carry the project's DECLARED
+# SPECIALISATION — the composition path where the population, the ledger, the eligibility
+# rules and the ownership grain all come from one document. Every line of that path, and
+# the whole `recommend` summary an operator reads, was unexecuted. So was the fault arm
+# that refuses a specialisation projecting no population, which is the one thing that
+# stands between this command and a vacuous determination over nothing.
+
+
+def test_cli_homing_determines_over_the_declared_specialisation(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    assert ownership_main(["homing", "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["subjects"] > 0
+    assert payload["counts"]["total"] == payload["subjects"]
+    assert payload["providers"]["provider_count"] >= 1
+    # the summary, not the detail: per-record rows are withheld unless asked for
+    assert "records" not in payload
+
+
+def test_cli_homing_detail_carries_the_per_record_rows(capsys: pytest.CaptureFixture[str]) -> None:
+    assert ownership_main(["homing", "--detail", "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert len(payload["records"]) == payload["counts"]["total"]
+
+
+def test_cli_homing_summarises_the_determination_on_stderr(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    assert ownership_main(["homing"]) == 0
+    captured = capsys.readouterr()
+    assert "UCOS-UOF-001 CANONICAL OWNERSHIP" in captured.err
+    assert "command: homing" in captured.err
+    assert "subjects:" in captured.err
+    assert "coverage:" in captured.err
+    assert captured.out == ""
+
+
+def test_cli_recommend_reduces_the_governance_workload(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    assert ownership_main(["recommend", "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    counts = payload["counts"]
+    assert counts["open"] >= counts["governance_minimum"]
+    assert 0.0 <= payload["reduction_percentage"] <= 100.0
+    assert 0.0 <= payload["determinable_percentage"] <= 100.0
+
+
+def test_cli_recommend_summarises_the_reduction_it_computed(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    assert ownership_main(["recommend"]) == 0
+    err = capsys.readouterr().err
+    assert "command: recommend" in err
+    assert "open subjects:" in err
+    assert "governance min:" in err
+    assert "reduction:" in err
+    assert "determinable:" in err
+
+
+def test_cli_recommend_detail_and_draft_are_different_documents(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    assert ownership_main(["recommend", "--detail", "--json"]) == 0
+    detail = json.loads(capsys.readouterr().out)
+    assert ownership_main(["recommend", "--draft", "--json"]) == 0
+    draft = json.loads(capsys.readouterr().out)
+    assert detail != draft
+    # a draft is a non-binding proposal a governing authority would review, and says so
+    assert "NOT BINDING" in draft["$comment"]
+    assert "assignments" in draft
+    assert "$comment" not in detail
+
+
+def test_cli_recommend_is_deterministic(capsys: pytest.CaptureFixture[str]) -> None:
+    ownership_main(["recommend", "--json"])
+    first = capsys.readouterr().out
+    ownership_main(["recommend", "--json"])
+    assert capsys.readouterr().out == first
+
+
+def test_cli_refuses_a_specialisation_that_projects_no_population(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A determination over an empty population would report perfect closure over nothing,
+    which is the vacuous pass the whole framework exists to refuse."""
+    (tmp_path / "population.json").write_text(json.dumps({"concepts": []}), "utf-8")
+    document = tmp_path / "specialisation.json"
+    document.write_text(
+        json.dumps(
+            {
+                "project_id": "EMPTY-PROJECT",
+                "population_document": "population.json",
+                "projection": {
+                    "collection": "concepts",
+                    "identity_field": "id",
+                    "locator_fields": ["files"],
+                },
+            }
+        ),
+        "utf-8",
+    )
+    assert (
+        ownership_main(["homing", "--specialization", str(document), "--root", str(tmp_path)]) == 2
+    )
+    assert "projects no population" in capsys.readouterr().err

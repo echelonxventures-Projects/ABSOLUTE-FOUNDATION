@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
 from engine.validation.executor import ValidationEngine
 from infrastructure.network import make_network_resource
@@ -287,3 +288,8 @@ def test_real_technology_bearing_resource_is_rejected():
     result = validate_network(r, _trace(r))
     assert result.accepted is False
     assert "technology-independence" in {f.check_id for f in result.report.blocking_failures}
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    assert_every_check_can_refuse(_subject(), network_checks())

@@ -14,7 +14,9 @@ from data.schema_validation import (
     schema_checks,
     validate_schema,
 )
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
+from engine.validation.executor import ValidationEngine
 
 ENTITY_NAME = "ucos.demo.entity"
 SCHEMA_NAME = "ucos.demo.schema"
@@ -125,8 +127,6 @@ def test_untraced_schema_fails_traceability_gate():
     s = _schema()
     subject = SchemaValidationSubject.from_schema(s, _trace(s))
     subject = replace(subject, provenance_chain=())  # orphaned lineage
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(schema_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "traceability-rooted" in {f.check_id for f in report.blocking_failures}
@@ -143,8 +143,6 @@ def test_untyped_element_subject_fails_elements_typed_gate():
     s = _schema()
     subject = SchemaValidationSubject.from_schema(s, _trace(s))
     subject = replace(subject, elements_typed=False, element_type_tags=("",))
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(schema_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "schema-elements-typed" in {f.check_id for f in report.blocking_failures}
@@ -154,8 +152,6 @@ def test_non_decidable_conformance_subject_fails_gate():
     s = _schema()
     subject = SchemaValidationSubject.from_schema(s, _trace(s))
     subject = replace(subject, conformance_decidable=False)
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(schema_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "schema-conformance-decidable" in {f.check_id for f in report.blocking_failures}
@@ -165,8 +161,14 @@ def test_self_composing_schema_fails_acyclic_gate():
     s = _schema()
     subject = SchemaValidationSubject.from_schema(s, _trace(s))
     subject = replace(subject, member_schema_refs=(subject.target_id,))
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(schema_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "schema-composition-acyclic" in {f.check_id for f in report.blocking_failures}
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    _s = _schema()
+    assert_every_check_can_refuse(
+        SchemaValidationSubject.from_schema(_s, _trace(_s)), schema_checks()
+    )

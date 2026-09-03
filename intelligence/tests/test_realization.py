@@ -17,7 +17,9 @@ Run: .ec1-venv/bin/python -m pytest intelligence/tests/test_realization.py -q
 
 from __future__ import annotations
 
+import importlib.util
 import json
+from pathlib import Path
 
 import pytest
 
@@ -44,6 +46,7 @@ from intelligence.realization import (
     TraceabilityEngine,
     build_evidence,
     enforce_realization,
+    materialize_artifacts,
     registry_manifest,
     verify_bundle,
 )
@@ -262,9 +265,7 @@ def test_all_seven_families_are_generated(pipeline) -> None:
 
 def test_generated_python_artifacts_compile(pipeline) -> None:
     _intake, _plan, _composition, _findings, manifest = pipeline
-    python_artifacts = [
-        art for art in manifest.artifacts if art.media is MediaKind.PYTHON
-    ]
+    python_artifacts = [art for art in manifest.artifacts if art.media is MediaKind.PYTHON]
     assert python_artifacts
     for artifact in python_artifacts:
         compile(artifact.content, artifact.relative_path, "exec")
@@ -594,9 +595,7 @@ def test_evidence_varies_only_where_the_materialization_pass_differs(engine) -> 
     # what the filesystem held first — so the same knowledge yields one id, always.
     assert first.record.seal == second.record.seal
     assert first.record.implementation_id == second.record.implementation_id
-    assert (
-        first.evidence.documents[GOVERNANCE_FILE] == second.evidence.documents[GOVERNANCE_FILE]
-    )
+    assert first.evidence.documents[GOVERNANCE_FILE] == second.evidence.documents[GOVERNANCE_FILE]
     # The governance verdict itself is unchanged — only the id it cites moved.
     assert first.decision.verdict == second.decision.verdict == VERDICT_GOVERNED
     assert [gate.to_dict() for gate in first.decision.gates] == [
@@ -604,9 +603,7 @@ def test_evidence_varies_only_where_the_materialization_pass_differs(engine) -> 
     ]
 
 
-def test_knowledge_derived_evidence_is_independent_of_the_output_location(
-    engine, tmp_path
-) -> None:
+def test_knowledge_derived_evidence_is_independent_of_the_output_location(engine, tmp_path) -> None:
     """The knowledge-derived documents must not depend on where output happens to land.
 
     Only the implementation record legitimately differs between two output roots — it
@@ -649,8 +646,6 @@ def test_verify_reports_a_corrupted_artifact(engine) -> None:
 
 def test_generated_runtime_boots_against_canonical_knowledge(engine) -> None:
     """The emitted runtime module is executable and enforces its own checks."""
-    import importlib.util
-
     result = engine.realize()
     runtime_modules = [
         art.relative_path
@@ -669,8 +664,6 @@ def test_generated_runtime_boots_against_canonical_knowledge(engine) -> None:
 
 
 def test_generated_api_route_table_dispatches(engine) -> None:
-    import importlib.util
-
     result = engine.realize()
     route_modules = [
         art.relative_path
@@ -775,3 +768,142 @@ def test_cli_realize_writes_into_the_configured_roots(tmp_path, capsys) -> None:
     assert payload["verdict"] == VERDICT_GOVERNED
     assert (artifacts / "UCOS-URI-MANIFEST.json").is_file()
     assert (evidence / "realization-evidence-record.json").is_file()
+
+
+# --------------------------------------------------------------------------- #
+# implementation: verification, pruning and the convenience entry point        #
+#                                                                             #
+# WHY THESE EXIST. Materialization was exercised end to end, so its happy path #
+# was covered and none of its refusals were: the byte-level verification that  #
+# catches an artifact edited after it was sealed, the bounded pruning of files #
+# a previous pass generated, and the module-level entry point the CLI documents#
+# were all unexecuted. A verifier nothing has caught out is not a verifier.    #
+# --------------------------------------------------------------------------- #
+
+
+def test_verify_reports_a_present_artifact_that_no_longer_matches_its_seal(
+    tmp_path, pipeline
+) -> None:
+    manifest = _manifest_with("checked.json", pipeline)
+    implementer = ImplementationEngine(_config(tmp_path))
+    implementer.materialize(manifest)
+
+    target = implementer.config.artifact_root / "checked.json"
+    target.write_text('{"edited": true}\n', encoding="utf-8")
+
+    report = implementer.verify(manifest)
+    assert report["verified"] is False
+    assert report["checked"] == 1
+    assert report["failed"][0]["path"] == "checked.json"
+    assert report["failed"][0]["present"] is True
+
+
+def test_verify_reports_an_artifact_that_is_absent_entirely(tmp_path, pipeline) -> None:
+    manifest = _manifest_with("never-written.json", pipeline)
+    report = ImplementationEngine(_config(tmp_path)).verify(manifest)
+    assert report["verified"] is False
+    assert report["failed"][0]["actual"] is None
+    assert report["failed"][0]["present"] is False
+
+
+def test_materialization_raises_when_the_bytes_on_disk_disagree_with_the_seal(
+    tmp_path, pipeline, monkeypatch
+) -> None:
+    """The raising verification inside ``materialize`` is the one that must never be
+    skipped: it is what makes the returned record an attestation rather than a log. It
+    is forged by corrupting the write, because a correct write cannot reach it."""
+    manifest = _manifest_with("corrupted.json", pipeline)
+    implementer = ImplementationEngine(_config(tmp_path))
+
+    real_write = Path.write_text
+
+    def _short_write(self, data, *args, **kwargs):
+        if self.name == "corrupted.json":
+            return real_write(self, "{}", *args, **kwargs)
+        return real_write(self, data, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "write_text", _short_write)
+    with pytest.raises(ImplementationError) as excinfo:
+        implementer.materialize(manifest)
+    assert "do not match" in str(excinfo.value)
+
+
+def test_an_artifact_root_that_is_not_a_parent_of_the_resolved_path_is_refused(
+    tmp_path, pipeline
+) -> None:
+    """A path that survives the traversal and absolute checks but still resolves outside
+    the artifact root — here through a symlink — is refused by the containment check."""
+    config = _config(tmp_path)
+    config.artifact_root.mkdir(parents=True, exist_ok=True)
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    (config.artifact_root / "link").symlink_to(outside, target_is_directory=True)
+
+    implementer = ImplementationEngine(config)
+    with pytest.raises(ImplementationError, match="outside the artifact root"):
+        implementer.preflight(_manifest_with("link", pipeline))
+
+
+def test_nothing_is_stale_before_a_first_pass_has_written_a_manifest(tmp_path, pipeline) -> None:
+    implementer = ImplementationEngine(_config(tmp_path))
+    assert implementer.stale_artifacts(_manifest_with("a.json", pipeline)) == ()
+
+
+def test_an_unreadable_manifest_of_record_yields_no_previous_paths(tmp_path, pipeline) -> None:
+    """A corrupt manifest must not make pruning claim that every current artifact is
+    stale; it yields nothing, which is the fail-safe direction for a delete."""
+    implementer = ImplementationEngine(_config(tmp_path))
+    implementer.manifest_path().parent.mkdir(parents=True, exist_ok=True)
+    implementer.manifest_path().write_text("{ not json", encoding="utf-8")
+    assert implementer.stale_artifacts(_manifest_with("a.json", pipeline)) == ()
+
+
+def test_an_artifact_a_previous_pass_claimed_and_this_one_does_not_is_stale(
+    tmp_path, pipeline
+) -> None:
+    implementer = ImplementationEngine(_config(tmp_path))
+    implementer.materialize(_manifest_with("first.json", pipeline))
+
+    current = _manifest_with("second.json", pipeline)
+    assert implementer.stale_artifacts(current) == ("first.json",)
+
+
+def test_pruning_is_a_dry_run_by_default_and_removes_nothing(tmp_path, pipeline) -> None:
+    implementer = ImplementationEngine(_config(tmp_path))
+    implementer.materialize(_manifest_with("first.json", pipeline))
+    stale_path = implementer.config.artifact_root / "first.json"
+
+    report = implementer.prune(_manifest_with("second.json", pipeline))
+    assert report["dry_run"] is True
+    assert report["stale"] == ["first.json"]
+    assert report["removed"] == ["first.json"]
+    assert stale_path.is_file()
+
+
+def test_pruning_removes_the_stale_artifact_when_it_is_not_a_dry_run(tmp_path, pipeline) -> None:
+    implementer = ImplementationEngine(_config(tmp_path))
+    implementer.materialize(_manifest_with("first.json", pipeline))
+    stale_path = implementer.config.artifact_root / "first.json"
+
+    report = implementer.prune(_manifest_with("second.json", pipeline), dry_run=False)
+    assert report["removed"] == ["first.json"]
+    assert not stale_path.exists()
+
+
+def test_a_stale_entry_whose_file_is_already_gone_is_not_reported_as_removed(
+    tmp_path, pipeline
+) -> None:
+    implementer = ImplementationEngine(_config(tmp_path))
+    implementer.materialize(_manifest_with("first.json", pipeline))
+    (implementer.config.artifact_root / "first.json").unlink()
+
+    report = implementer.prune(_manifest_with("second.json", pipeline), dry_run=False)
+    assert report["stale"] == ["first.json"]
+    assert report["removed"] == []
+
+
+def test_the_convenience_entry_point_materializes_the_same_manifest(tmp_path, pipeline) -> None:
+    config = _config(tmp_path)
+    record = materialize_artifacts(_manifest_with("direct.json", pipeline), config)
+    assert record.verified is True
+    assert (config.artifact_root / "direct.json").is_file()

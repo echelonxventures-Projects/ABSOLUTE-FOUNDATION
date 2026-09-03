@@ -18,15 +18,18 @@ from pathlib import Path
 
 import pytest
 
+from engine.knowledge.errors import KnowledgeSourceError
 from intelligence.kernel.canonical import canonical_json
 from intelligence.kernel.config import MemorySink, subsystem_config
 from intelligence.kernel.errors import (
     DuplicateRecordError,
     KnowledgeOnceViolation,
+    SubstrateUnavailableError,
     UnresolvedReferenceError,
 )
 from intelligence.kernel.ids import ArtifactClass, artifact_id, parse_class
 from intelligence.kernel.ledger import GENESIS_HASH, LedgerRegistry
+from intelligence.research.__main__ import main as cli_main
 from intelligence.research.engine import OUTPUT_DIR, ResearchIntelligenceEngine
 from intelligence.research.model import CONFORMANCE_NON_CONFORMANT
 
@@ -116,21 +119,25 @@ def test_all_outputs_are_valid_json_and_sealed(engine) -> None:
 def test_no_research_record_carries_canonical_prose(engine) -> None:
     resolver = engine.resolver
     corpus = engine.corpus()
-    for group in (corpus.claims, corpus.findings, corpus.contributions, corpus.standards,
-                  corpus.units, corpus.sources):
+    for group in (
+        corpus.claims,
+        corpus.findings,
+        corpus.contributions,
+        corpus.standards,
+        corpus.units,
+        corpus.sources,
+    ):
         for record in group:
-            assert resolver.copied_prose(canonical_json(record.to_dict())) == [], (
-                f"canonical prose copied into {type(record).__name__}"
-            )
+            assert (
+                resolver.copied_prose(canonical_json(record.to_dict())) == []
+            ), f"canonical prose copied into {type(record).__name__}"
 
 
 def test_claims_reference_prose_instead_of_storing_it(engine) -> None:
     for claim in engine.corpus().claims:
         payload = claim.to_dict()
         assert claim.claim_ref.startswith(("cko:", "decision:"))
-        long_text_fields = {
-            k for k, v in payload.items() if isinstance(v, str) and len(v) > 200
-        }
+        long_text_fields = {k for k, v in payload.items() if isinstance(v, str) and len(v) > 200}
         assert long_text_fields == set()
         resolved = engine.resolver.resolve(claim.claim_ref)
         assert resolved.text
@@ -235,3 +242,95 @@ def test_engine_writes_only_inside_its_own_directory() -> None:
         parts = Path(path).parts
         assert "intelligence" in parts
         assert OUTPUT_DIR in parts, f"write escaped {OUTPUT_DIR}: {path}"
+
+
+# --------------------------------------------------------------------------- the CLI
+#
+# ``python -m intelligence.research`` was 55 statements at 0.0%: eight subcommands and three
+# documented exit codes, none of which anything executed. The exit codes are asserted as LITERAL
+# integers here — a test that compares against the module's own constant passes equally well when
+# both are wrong.
+
+
+def _run(capsys: pytest.CaptureFixture[str], *argv: str) -> tuple[int, str, str]:
+    code = cli_main(list(argv))
+    captured = capsys.readouterr()
+    return code, captured.out, captured.err
+
+
+def test_every_read_only_subcommand_emits_a_document(capsys: pytest.CaptureFixture[str]) -> None:
+    for command in ("corpus", "registry", "standards", "snapshot"):
+        code, out, _ = _run(capsys, command)
+        assert code == 0, command
+        assert json.loads(out), f"{command} emitted an empty document"
+
+
+def test_the_cli_validation_returns_the_reports_own_verdict(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    code, out, _ = _run(capsys, "validate")
+    report = json.loads(out)
+    assert (code == 0) is (report["gate"] == "OPEN")
+    assert code in (0, 1)
+
+
+def test_the_cli_gate_agrees_with_the_engine_gate(capsys: pytest.CaptureFixture[str]) -> None:
+    expected, line = _engine().gate()
+    code, out, _ = _run(capsys, "gate")
+    assert code == expected
+    assert code in (0, 1)
+    assert out.strip() == line.strip()
+
+
+def test_the_cli_verify_proves_deterministic_regeneration(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    code, out, _ = _run(capsys, "verify")
+    assert code == 0
+    assert json.loads(out)["deterministic"] is True
+
+
+def test_the_cli_build_reports_what_it_wrote(capsys: pytest.CaptureFixture[str]) -> None:
+    code, out, _ = _run(capsys, "build")
+    assert code == 0
+    assert "URI: regenerated" in out
+    assert out.count("  - ") >= 1
+
+
+def test_a_kernel_error_is_a_fail_closed_abort_and_not_a_pass(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Exit 2 is "no verdict was reachable", and it is not the same answer as a closed gate.
+
+    The condition is FORGED rather than waited for. Every substrate failure this CLI can suffer
+    today happens to raise from a lower layer, so the one handler that turns a fail-closed
+    condition into the documented exit code was never executed by anything.
+    """
+
+    def refuse(self: ResearchIntelligenceEngine) -> None:
+        raise SubstrateUnavailableError("the research substrate is unreadable", surface="corpus")
+
+    monkeypatch.setattr(ResearchIntelligenceEngine, "corpus", refuse)
+    code, _out, err = _run(capsys, "corpus")
+    assert code == 2
+    assert "FAIL-CLOSED ABORT" in err
+    assert "unreadable" in err, "a refusal that does not say what failed cannot be acted on"
+
+
+def test_a_directory_that_is_not_a_repository_reaches_no_verdict(tmp_path: Path) -> None:
+    """``--repo <empty dir>`` raises out of the knowledge layer rather than returning a code.
+
+    Recorded as an assertion rather than repaired here: the CLI catches ``KernelError``, and the
+    substrate it reads raises ``engine.knowledge``'s own taxonomy, so an operator who points the
+    tool at the wrong directory gets a traceback where the docstring promises exit 2. Widening
+    the handler is a change to the fail-closed contract of every kernel CLI at once, which is a
+    decision for the subsystem's owner and not a side effect of a coverage pass.
+    """
+    with pytest.raises(KnowledgeSourceError):
+        cli_main(["--repo", str(tmp_path), "corpus"])
+
+
+def test_a_subcommand_is_required() -> None:
+    with pytest.raises(SystemExit) as raised:
+        cli_main([])
+    assert raised.value.code == 2

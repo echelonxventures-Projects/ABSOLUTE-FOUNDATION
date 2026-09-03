@@ -15,6 +15,7 @@ from data.lifecycle_validation import (
     lifecycle_checks,
     validate_lifecycle,
 )
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
 
 ENTITY_NAME = "ucos.demo.entity"
@@ -139,8 +140,6 @@ def test_untraced_lifecycle_fails_traceability_gate():
     lc = _lifecycle()
     subject = LifecycleValidationSubject.from_lifecycle(lc, _trace(lc))
     subject = replace(subject, provenance_chain=())  # orphaned lineage
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(lifecycle_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "traceability-rooted" in {f.check_id for f in report.blocking_failures}
@@ -157,8 +156,6 @@ def test_technology_naming_subject_fails_independence_gate():
     lc = _lifecycle()
     subject = LifecycleValidationSubject.from_lifecycle(lc, _trace(lc))
     subject = replace(subject, names_technology=True)
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(lifecycle_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "lifecycle-independence" in {f.check_id for f in report.blocking_failures}
@@ -167,11 +164,7 @@ def test_technology_naming_subject_fails_independence_gate():
 def test_non_forward_only_subject_fails_gate():
     lc = _lifecycle()
     subject = LifecycleValidationSubject.from_lifecycle(lc, _trace(lc))
-    subject = replace(
-        subject, forward_only=False, transition_pairs=(("ACTIVE", "DEFINED"),)
-    )
-    from engine.validation.executor import ValidationEngine
-
+    subject = replace(subject, forward_only=False, transition_pairs=(("ACTIVE", "DEFINED"),))
     report = ValidationEngine(lifecycle_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "lifecycle-forward-only" in {f.check_id for f in report.blocking_failures}
@@ -181,8 +174,6 @@ def test_unguarded_subject_fails_gate():
     lc = _lifecycle()
     subject = LifecycleValidationSubject.from_lifecycle(lc, _trace(lc))
     subject = replace(subject, transitions_guarded=False, guard_refs=("not-a-guard",))
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(lifecycle_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "lifecycle-transitions-guarded" in {f.check_id for f in report.blocking_failures}
@@ -192,8 +183,6 @@ def test_unrecorded_subject_fails_gate():
     lc = _lifecycle()
     subject = LifecycleValidationSubject.from_lifecycle(lc, _trace(lc))
     subject = replace(subject, transitions_recorded=False, event_refs=("not-an-event",))
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(lifecycle_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "lifecycle-transitions-recorded" in {f.check_id for f in report.blocking_failures}
@@ -203,8 +192,6 @@ def test_self_referencing_founding_subject_fails_acyclic_gate():
     lc = _lifecycle()
     subject = LifecycleValidationSubject.from_lifecycle(lc, _trace(lc))
     subject = replace(subject, founding_acyclic=False)
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(lifecycle_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "founding-acyclic" in {f.check_id for f in report.blocking_failures}
@@ -214,8 +201,6 @@ def test_non_runtime_binding_subject_fails_behavior_gate():
     lc = _lifecycle()
     subject = LifecycleValidationSubject.from_lifecycle(lc, _trace(lc))
     subject = replace(subject, binds_runtime_by_reference=False)
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(lifecycle_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "lifecycle-behaves-by-reference" in {f.check_id for f in report.blocking_failures}
@@ -225,12 +210,9 @@ def test_non_certified_subject_fails_transitions_subject_gate():
     lc = _lifecycle()
     subject = LifecycleValidationSubject.from_lifecycle(lc, _trace(lc))
     subject = replace(subject, transitioned_entity_id="NOT-AN-ENTITY")
-    from engine.validation.executor import ValidationEngine
-
     report = ValidationEngine(lifecycle_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
     assert "lifecycle-transitions-subject" in {f.check_id for f in report.blocking_failures}
-
 
 
 import pytest
@@ -310,3 +292,8 @@ def test_absorbing_subject_fails_transitions_subject_gate():
     report = _run(subject)
     assert report.verdict is Verdict.FAIL
     assert "lifecycle-transitions-subject" in {f.check_id for f in report.blocking_failures}
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    assert_every_check_can_refuse(_subject(), lifecycle_checks())

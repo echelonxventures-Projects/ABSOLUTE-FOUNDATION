@@ -117,6 +117,13 @@ REQUIRED_COVERAGE_DIMENSIONS: tuple[str, ...] = (
 #: The primary pytest-cov gate minimum (pyproject `--cov-fail-under`).
 PRIMARY_COVERAGE_GATE_MIN = 90.0
 
+EXIT_OK = 0
+EXIT_REFUSED = 1
+#: No verdict could be reached. Distinct from REFUSED on purpose: "this band is not certifiable"
+#: and "this band could not be measured" are different facts, and a conductor that collapsed them
+#: would certify an empty report. See :func:`unmeasured_targets`.
+EXIT_FAULT = 2
+
 
 @dataclass(frozen=True)
 class Target:
@@ -349,6 +356,30 @@ def measure_component_coverage(
         public_api=pa,
         repository=repository,
     )
+
+
+def unmeasured_targets(coverage: dict[str, FileCoverage]) -> list[str]:
+    """The band units the coverage document says nothing at all about.
+
+    UNMEASURED IS NOT COVERED, AND THIS IS WHY THE CHECK EXISTS AT ALL. Every ratio in this
+    generator reads ``100.0 if total == 0``, and ``complete`` reads ``covered >= total``, so a
+    component absent from the report scores 100% on all six dimensions, passes the acceptance
+    CoverageGate, and lands in the evidence as READY / FREEZE. An empty Cobertura document —
+    one ``<packages/>`` element, which is exactly what a mis-scoped or failed pytest-cov run
+    emits — therefore certified all four units at 100% and returned 0.
+
+    The ratios are left alone: a module with no branches genuinely has 0/0 branches, and
+    rewriting that to 0% would report a defect where there is none. What may not be tolerated is
+    the ANTECEDENT — a report that names none of the component's files. That is the one condition
+    under which every dimension is vacuous at once, it is decidable here, and its answer is
+    FAULT rather than a verdict.
+    """
+    absent = []
+    for target in TARGETS:
+        prefix = target.path + "/"
+        if not any(name == target.path or name.startswith(prefix) for name in coverage):
+            absent.append(f"{target.unit_id} {target.module} ({target.path})")
+    return absent
 
 
 # ---------------------------------------------------------------------------
@@ -723,6 +754,26 @@ def main(argv: list[str] | None = None) -> int:
             f"--cov-report=xml:{coverage_xml} --cov-fail-under=0"
         )
 
+    # THE SUBJECT IS CONFIRMED PRESENT BEFORE IT IS JUDGED. A readable document is not a
+    # measurement of anything in particular, and every dimension below is vacuously complete
+    # when the report names none of a unit's files.
+    absent = unmeasured_targets(_parse_coverage_xml(coverage_xml))
+    if absent:
+        print(
+            f"UCOS-CERT-004 FAULT: {coverage_xml} contains no coverage data for "
+            f"{len(absent)} of {len(TARGETS)} band unit(s), so their six dimensions would each "
+            "score 100% of nothing:",
+            file=sys.stderr,
+        )
+        for entry in absent:
+            print(f"    - {entry}", file=sys.stderr)
+        print(
+            "  This is a FAULT and never a pass: certifying an unmeasured component is the one "
+            "outcome this band exists to make impossible.",
+            file=sys.stderr,
+        )
+        return EXIT_FAULT
+
     # Determinism: build the band twice in-process and prove byte-identical.
     band_a = run_band(repo_root, coverage_xml)
     band_b = run_band(repo_root, coverage_xml)
@@ -771,8 +822,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if not determinism["byte_identical"]:
         print("ERROR: band build is not byte-identical (determinism violation)", file=sys.stderr)
-        return 1
-    return 0
+        return EXIT_REFUSED
+    return EXIT_OK
 
 
 if __name__ == "__main__":

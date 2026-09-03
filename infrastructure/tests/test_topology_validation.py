@@ -6,14 +6,15 @@ Covers meta-validity (WF-1…12), UIL conformance (UIL-01…15), and governing o
 
 from __future__ import annotations
 
-import pytest
-
+from engine.tests import assert_every_check_can_refuse
+from engine.validation.executor import ValidationEngine
+from engine.validation.gates import enforce_acceptance
 from infrastructure.topology import (
-    make_topology,
+    make_delivery_arrangement,
+    make_distribution_arrangement,
     make_locality_map,
     make_placement_rule,
-    make_distribution_arrangement,
-    make_delivery_arrangement,
+    make_topology,
 )
 from infrastructure.topology_meta import REALIZATION_UNIT
 from infrastructure.topology_traceability import build_traceability
@@ -22,8 +23,6 @@ from infrastructure.topology_validation import (
     topology_checks,
     validate_construct,
 )
-from engine.validation.executor import ValidationEngine
-from engine.validation.gates import enforce_acceptance
 
 
 def _trace_for(construct):
@@ -77,7 +76,6 @@ class TestDistributionValidation:
         trace = _trace_for(d)
         subject = TopologyValidationSubject.from_construct(d, trace)
         checks = topology_checks()
-        from engine.validation.checks import ValidationCheck
         # Find and check the distribution-hosts check
         host_check = [c for c in checks if c.check_id == "infra-topology-distribution-hosts"]
         assert len(host_check) == 1
@@ -86,7 +84,6 @@ class TestDistributionValidation:
 
 
 class TestLocalityMapValidation:
-
     def test_locality_map_valid(self):
         lm = make_locality_map("test.lm")
         trace = _trace_for(lm)
@@ -95,7 +92,6 @@ class TestLocalityMapValidation:
 
 
 class TestPlacementRuleValidation:
-
     def test_placement_rule_valid(self):
         pr = make_placement_rule("test.pr")
         trace = _trace_for(pr)
@@ -135,3 +131,11 @@ class TestAllChecks:
         ]
         for c in constructs:
             assert not c.redefines_foundation()
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    _c = make_topology("test.topology.foundation")
+    assert_every_check_can_refuse(
+        TopologyValidationSubject.from_construct(_c, _trace_for(_c)), topology_checks()
+    )

@@ -37,6 +37,7 @@ from platform.universal_measurement import (
     policy_contract_names,
     register_measurement_policies,
 )
+from platform.universal_measurement.cli import main as cli_main
 from platform.universal_measurement.errors import (
     MeasurementContextError,
     MeasurementPolicyContractError,
@@ -443,3 +444,65 @@ def test_contract_surface_and_service_registration() -> None:
     descriptor = register_measurement_policies(registry)
     assert descriptor.name == "universal.measurement.policy"
     assert isinstance(registry.resolve("universal.measurement.policy"), PolicyMeasurementEngine)
+
+
+# --------------------------------------------------------------------------- the CLI
+#
+# WHY THIS SECTION EXISTS. `ucos-measurement` is a PUBLISHED console script — the one
+# command this capability names for itself — and nothing had ever invoked it. Its summary
+# writer, its JSON writer and its fail-closed exit-2 arm were unexecuted, so the surface an
+# operator actually types was the least measured part of the capability.
+
+
+def test_the_policies_command_summarises_every_declared_policy(capsys) -> None:
+    assert cli_main(["policies"]) == 0
+    captured = capsys.readouterr()
+    assert "UCOS-UMPF-001 MEASUREMENT POLICIES" in captured.err
+    assert "command: policies" in captured.err
+    assert f"declared policies: {bootstrap_measurement_policies().registry.count}" in captured.err
+    assert "BLOCKING" in captured.err
+    assert captured.out == ""
+
+
+def test_the_contracts_command_summarises_the_published_surface(capsys) -> None:
+    assert cli_main(["contracts"]) == 0
+    captured = capsys.readouterr()
+    assert "command: contracts" in captured.err
+    for name in policy_contract_names():
+        assert name in captured.err
+
+
+def test_the_json_form_carries_the_same_payload_the_summary_describes(capsys) -> None:
+    import json
+
+    assert cli_main(["policies", "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["policy_count"] == bootstrap_measurement_policies().registry.count
+    assert len(payload["policies"]) == payload["policy_count"]
+    assert len(payload["fingerprint"]) == 64
+
+    assert cli_main(["contracts", "--json"]) == 0
+    contracts = json.loads(capsys.readouterr().out)
+    assert contracts["version"]
+    assert len(contracts["contracts"]) == len(POLICY_CONTRACTS)
+
+
+def test_the_two_commands_are_deterministic(capsys) -> None:
+    cli_main(["policies", "--json"])
+    first = capsys.readouterr().out
+    cli_main(["policies", "--json"])
+    assert capsys.readouterr().out == first
+
+
+def test_an_unreadable_declared_composition_is_a_fault_and_never_a_pass(capsys) -> None:
+    """Exit 2 is the whole reason this surface is safe to run anywhere: it never reports a
+    policy set it could not read."""
+    assert cli_main(["policies", "--document", "/nonexistent/policies.json"]) == 2
+    assert "measurement error:" in capsys.readouterr().err
+
+
+def test_an_unknown_command_is_refused_by_the_parser() -> None:
+    import pytest
+
+    with pytest.raises(SystemExit):
+        cli_main(["not-a-command"])

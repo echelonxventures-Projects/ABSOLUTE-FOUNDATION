@@ -20,7 +20,7 @@
   "command": "./verify.sh --full",
   "contract_id": "UCOS-VERIFY-001",
   "invocation": "--full (the certification contract; the bare invocation is --change, a developer mode that certifies nothing)",
-  "stages_digest": "acf9f51676c06efc6452ac78eaf2efab774dc53992187fb25d4efd30d977af43",
+  "stages_digest": "4dc04f28aa98e872bdcc760b72d2b323bbe445e4463e19ab042ca05387e07c5f",
   "stages_digest_definition": "sha256 over the newline-joined stage names this contract declares, read from verify.sh. A gate added to the contract and not to this record fails the record's own test."
  },
  "evidence_reference": {
@@ -65,6 +65,26 @@
   {
    "result": "PASS",
    "stage": "universal object governance (UGA-INV-01..10)"
+  },
+  {
+   "result": "PASS",
+   "stage": "universal context closure (every declared context invariant)"
+  },
+  {
+   "result": "PASS",
+   "stage": "context closure certification (UCOS-UCTX-001, Phase 10 claims at fixed point)"
+  },
+  {
+   "result": "PASS",
+   "stage": "context proposal gate (four declared gates, every discovered proposal)"
+  },
+  {
+   "result": "PASS",
+   "stage": "independent context provenance (MB7)"
+  },
+  {
+   "result": "PASS",
+   "stage": "independent producer verification (UFI, every declared adopter)"
   },
   {
    "result": "PASS",

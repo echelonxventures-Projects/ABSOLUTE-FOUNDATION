@@ -33,7 +33,8 @@ from typing import Any
 
 import pytest
 
-from engine.enforcement_closure import contract, discovery
+from engine.construct.declaration import Declaration as ConstructDeclaration
+from engine.enforcement_closure import contract, discovery, gate
 from engine.enforcement_closure.contract import LAW_CHECKS, Probe, load_contract, measure
 from engine.enforcement_closure.declaration import DIGEST_EXCLUSIONS, load, parse
 from engine.enforcement_closure.model import REFUSED, DeclarationError, EnforcementError
@@ -640,16 +641,12 @@ def test_the_inventory_command_does_not_rewrite_the_declaration() -> None:
 
 
 def test_the_gate_module_declares_three_distinct_exit_codes() -> None:
-    from engine.enforcement_closure import gate
-
     assert (gate.EXIT_OPEN, gate.EXIT_CLOSED, gate.EXIT_FAULT) == (0, 1, 2)
 
 
 def test_a_fault_is_not_reported_as_a_pass(tmp_path) -> None:
     """exit 2 must be reachable and must differ from exit 0. Collapsing them would let an
     unreadable declaration pass as whichever answer happened to be convenient."""
-    from engine.enforcement_closure import gate
-
     broken = tmp_path / "uec-declaration.json"
     broken.write_text("{ not json", encoding="utf-8")
     assert gate.main(["--gate", "--quiet", "--declaration", str(broken)]) == gate.EXIT_FAULT
@@ -702,8 +699,6 @@ def test_l13_refuses_a_declaration_whose_identity_is_a_projection(
     that projection here must be refused, or the law would not have detected the defect it was
     written for.
     """
-    from engine.construct.declaration import Declaration as ConstructDeclaration
-
     monkeypatch.setattr(
         ConstructDeclaration,
         "digest_payload",
@@ -774,7 +769,6 @@ def test_l13_treats_an_unmeasurable_identity_as_a_failure_not_a_pass(
     document: dict[str, Any], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Fail-closed. An identity that cannot be measured is never silently accepted."""
-    from engine.construct.declaration import Declaration as ConstructDeclaration
 
     def explode(self: Any) -> dict[str, Any]:
         raise RuntimeError("the identity cannot be computed")
@@ -1006,3 +1000,168 @@ def test_no_verifier_can_witness_itself(live_probe: Probe) -> None:
     is self-authoritative' computable rather than a cycle of mutual attestations."""
     for artifact in live_probe.engines:
         assert artifact.identity not in live_probe.test_bindings(artifact)
+
+
+# ---------------------------------------------------------------------------------------
+# the gate's SURFACE — the renderer and the argument plane
+#
+# WHY THESE EXIST. Every test above measures the LAWS. Nothing measured the thing an
+# operator actually sees: `_render` builds the whole human-readable determination — the
+# ratchet table, the per-law rows, the truncated violation list — and no test had ever
+# executed a line of it. A gate whose report is unexercised can print anything at all,
+# including a verdict that disagrees with the report it was handed, and the suite would
+# stay green. The renderer is driven here from a SYNTHETIC report, so the three shapes
+# that only appear when something is wrong (a broken ratchet, a refused blocking law, a
+# refused non-blocking one, more violations than fit) are shown rather than waited for.
+# ---------------------------------------------------------------------------------------
+
+
+def _synthetic_report(**overrides: Any) -> dict[str, Any]:
+    report: dict[str, Any] = {
+        "declaration": "UEC-000001",
+        "declaration_version": "1.0.0",
+        "declaration_digest": "0" * 64,
+        "counts": {
+            "laws": 2,
+            "holds": 1,
+            "refused": 1,
+            "tracked": 7,
+            "artifacts": 5,
+            "governed": 4,
+            "withdrawn": 1,
+            "engines": 3,
+            "declarations": 2,
+            "tests": 6,
+        },
+        "by_kind": {"gate_engine": 3, "workflow": 2},
+        "ratchet_declared": {"engines_with_no_invoker": 6, "withdrawn": 1},
+        "ratchet_measured": {"engines_with_no_invoker": 6, "withdrawn": 2},
+        "laws": [
+            {
+                "law_id": "UEC-L-01",
+                "statement": "every protection is governed",
+                "verdict": "HOLDS",
+                "blocking": True,
+                "violations": [],
+            },
+            {
+                "law_id": "UEC-L-02",
+                "statement": "every engine is invoked twice",
+                "verdict": REFUSED,
+                "blocking": True,
+                "violations": [f"violation {n}" for n in range(9)],
+            },
+            {
+                "law_id": "UEC-L-99",
+                "statement": "an advisory law",
+                "verdict": REFUSED,
+                "blocking": False,
+                "violations": ["one advisory violation"],
+            },
+        ],
+        "status": "CLOSED",
+    }
+    report.update(overrides)
+    return report
+
+
+def test_the_renderer_marks_a_ratchet_that_moved_and_one_that_did_not() -> None:
+    text = gate._render(_synthetic_report())
+    assert "  ok  engines_with_no_invoker" in text.replace("   ", "  ")
+    assert "XX " in text  # the measured `withdrawn` disagrees with its declared ceiling
+    assert "2 / 1" in text
+
+
+def test_the_renderer_distinguishes_a_blocking_refusal_from_an_advisory_one() -> None:
+    rows = {
+        line.split()[1]: line.split()[0]
+        for line in gate._render(_synthetic_report()).splitlines()
+        if line.startswith(("  ok  UEC", "  XX  UEC", "  !!  UEC"))
+    }
+    assert rows["UEC-L-01"] == "ok"
+    assert rows["UEC-L-02"] == "XX"
+    assert rows["UEC-L-99"] == "!!"
+
+
+def test_the_renderer_truncates_a_long_violation_list_and_says_how_many_it_dropped() -> None:
+    text = gate._render(_synthetic_report())
+    assert "- violation 5" in text
+    assert "- violation 6" not in text
+    assert "... +3 more" in text
+
+
+def test_the_renderer_reports_the_counts_and_the_verdict_it_was_handed() -> None:
+    text = gate._render(_synthetic_report(status="OPEN"))
+    assert "laws measured      : 2   holds 1   refused 1" in text
+    assert "tracked paths      : 7" in text
+    assert "5 artifacts   (4 governed, 1 withdrawn)" in text
+    assert "gate_engine          3" in text
+    assert text.strip().endswith("verdict: OPEN")
+
+
+def test_a_fault_names_the_repair_command_and_refuses_to_read_as_a_pass() -> None:
+    text = gate._render_fault("the declaration is unreadable")
+    assert "the declaration is unreadable" in text
+    assert "NOT a pass and NOT a refusal" in text
+    assert gate.REPAIR_COMMAND in text
+
+
+def test_the_inventory_command_prints_json_and_exits_open(monkeypatch, capsys) -> None:
+    monkeypatch.setattr(gate, "inventory", lambda _decl, repository: {"artifacts": ["a"]})
+    assert gate.main(["--inventory"]) == gate.EXIT_OPEN
+    assert json.loads(capsys.readouterr().out) == {"artifacts": ["a"]}
+
+
+def test_an_open_gate_is_quiet_when_asked_to_be(monkeypatch, capsys) -> None:
+    monkeypatch.setattr(
+        gate, "measure", lambda _decl, repository, laws: _synthetic_report(status="OPEN")
+    )
+    assert gate.main(["--quiet"]) == gate.EXIT_OPEN
+    captured = capsys.readouterr()
+    assert captured.err == ""
+    assert captured.out == ""
+
+
+def test_a_closed_gate_reports_even_when_asked_to_be_quiet(monkeypatch, capsys) -> None:
+    """`--quiet` suppresses the summary of a gate that is OPEN. Suppressing the summary of
+    one that is CLOSED would hide the only explanation of the refusal."""
+    monkeypatch.setattr(gate, "measure", lambda _decl, repository, laws: _synthetic_report())
+    assert gate.main(["--quiet"]) == gate.EXIT_OPEN  # reporting is not refusing
+    assert "verdict: CLOSED" in capsys.readouterr().err
+
+
+def test_only_the_gate_flag_turns_a_closed_measurement_into_a_refusal(monkeypatch, capsys) -> None:
+    monkeypatch.setattr(gate, "measure", lambda _decl, repository, laws: _synthetic_report())
+    assert gate.main(["--gate"]) == gate.EXIT_CLOSED
+    capsys.readouterr()
+
+
+def test_the_json_report_is_the_report_the_summary_describes(monkeypatch, capsys) -> None:
+    monkeypatch.setattr(gate, "measure", lambda _decl, repository, laws: _synthetic_report())
+    assert gate.main(["--json"]) == gate.EXIT_OPEN
+    captured = capsys.readouterr()
+    assert json.loads(captured.out)["status"] == "CLOSED"
+    assert "verdict: CLOSED" in captured.err
+
+
+def test_an_enforcement_error_is_a_fault_and_never_a_verdict(monkeypatch, capsys) -> None:
+    def _raise(*_args: Any, **_kwargs: Any) -> None:
+        raise EnforcementError("the declaration names an unknown discovery strategy")
+
+    monkeypatch.setattr(gate, "measure", _raise)
+    assert gate.main([]) == gate.EXIT_FAULT
+    assert "unknown discovery strategy" in capsys.readouterr().err
+
+
+def test_a_law_filter_is_passed_through_to_the_measurement(monkeypatch) -> None:
+    seen: dict[str, Any] = {}
+
+    def _capture(declaration, repository, laws):
+        seen.update(declaration=declaration, repository=repository, laws=laws)
+        return _synthetic_report(status="OPEN")
+
+    monkeypatch.setattr(gate, "measure", _capture)
+    gate.main(["--quiet", "--repository", "elsewhere", "--law", "UEC-L-01", "--law", "UEC-L-02"])
+    assert seen["repository"] == "elsewhere"
+    assert seen["laws"] == ["UEC-L-01", "UEC-L-02"]
+    assert seen["declaration"] is None

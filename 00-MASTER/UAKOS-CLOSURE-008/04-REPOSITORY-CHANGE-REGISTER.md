@@ -25,7 +25,7 @@ This engine writes none of the paths below and amends no ratified text in them, 
 
 | Path | What it contributes | At HEAD | sha256 (first 16) | Why it is required |
 |---|---|---|---|---|
-| `Makefile` | targets `assimilate`, `assimilate-replay`, `assimilate-gate` | present | c150ce229fe06754 | runs this engine from the repository's canonical entry point; `assimilate-gate` is the validation command the roadmap cites for every assimilated item |
+| `Makefile` | targets `assimilate`, `assimilate-replay`, `assimilate-gate` | present | 0a59401489e4be75 | runs this engine from the repository's canonical entry point; `assimilate-gate` is the validation command the roadmap cites for every assimilated item |
 | `.github/workflows/assimilation-gate.yml` | CI completion gate (`--render --gate`) + committed-register drift gate | present | d26f798642a2ca17 | proves on every push that the committed registers ARE the rendered fixed point of `assimilation.json`, with the external evidence tree absent |
 
 ## Artifacts created
@@ -36,7 +36,7 @@ This engine writes none of the paths below and amends no ratified text in them, 
 | `02-SEMANTIC-EQUIVALENCE-REGISTER.md` | register / report | 15711 | 530e9ab5aea5bccb |
 | `03-ASSIMILATION-REGISTER.md` | register / report | 86834 | 924b3c5a82d6656f |
 | `05-TRACEABILITY-REGISTER.md` | register / report | 11298 | c2f350a4662ced7c |
-| `06-VALIDATION-REPORT.md` | register / report | 13199 | 34fe2affb65ec2e9 |
+| `06-VALIDATION-REPORT.md` | register / report | 13565 | 52e0dc03c55bfcf7 |
 | `07-CERTIFICATION-REPORT.md` | register / report | 5487 | 85daa2c82b5a5156 |
 | `08-REPOSITORY-COMPLETION-REPORT.md` | register / report | 3753 | ba5ad2d3088b54df |
 | `09-SUPERIORITY-EVALUATION-REGISTER.md` | register / report | 39101 | 666a3dd95588bcaa |
@@ -48,7 +48,7 @@ This engine writes none of the paths below and amends no ratified text in them, 
 | `assimilation_engine.py` | engine | 155814 | f1e61f02a4f76a2b |
 | `decision_engine.py` | engine | 45288 | 60bd5939744811f4 |
 | `superiority_engine.py` | engine | 28769 | 427fa83dd467693c |
-| `validation-record.json` | authored input (not engine output) | 5093 | b6d3e1359d687afd |
+| `validation-record.json` | authored input (not engine output) | 5624 | 395f671e70cc2626 |
 
 `04-REPOSITORY-CHANGE-REGISTER.md` is itself excluded from the table above — a file cannot carry its own content hash.
 

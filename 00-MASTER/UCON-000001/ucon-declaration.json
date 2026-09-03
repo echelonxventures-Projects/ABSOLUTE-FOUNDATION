@@ -2001,6 +2001,16 @@
         "intentional": true,
         "module": "engine/ledger_authority/__init__.py",
         "symbol": "NON_ALLOCATION_KEYS"
+      },
+      {
+        "admission": "Append the variable name to the tuple. Data alone, and all three subprocess spawn sites in this package read the same tuple through immutable.clean_environment, so admitting a variable admits it at every site at once rather than at the one whose failure was noticed. engine/tests/unit/test_certification_integrity_execution.py exercises the path instead of asserting it: one test pins both families, and one runs a real measuring subprocess under forged bootstrap variables and refuses if any data file appears beside the outer session's.",
+        "closing_invariant": "CLOSED BY AN AUTHORITY OUTSIDE THIS REPOSITORY, which is why it cannot be derived here. The members are the environment variables through which coverage.py and pytest-cov bootstrap a measuring subprocess — COVERAGE_FILE plus the four COV_CORE_* variables written by pytest-cov's .pth — and that is the tool's published contract, not this repository's vocabulary. Nothing in this tree can enumerate them, so exhaustiveness is not claimed. Correctness is held BEHAVIOURALLY instead: a variable that matters and is missing from this tuple causes a measuring subprocess to contribute data to a file it does not own, and the end-to-end test above refuses on exactly that, so the failure is caught where the consequence occurs rather than asserted where the list is written.",
+        "closure_id": "UCON-CL-52",
+        "form": "FIXED_VOCABULARY_TUPLE",
+        "gap": null,
+        "intentional": true,
+        "module": "engine/certification_integrity/immutable.py",
+        "symbol": "AMBIENT_MEASUREMENT_VARS"
       }
     ],
     "baseline": {

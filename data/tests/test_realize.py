@@ -91,3 +91,44 @@ def test_cli_main_returns_zero(tmp_path, capsys):
     # the emitted bundle on disk is the authoritative machine-readable summary
     bundle = json.loads((tmp_path / "realization-evidence.json").read_text())
     assert bundle["determination"] == "COMPLETE"
+
+
+def test_determination_degrades_to_conditions_and_then_refuses():
+    """The three determinations are a ladder, and only the top rung had ever been reached.
+    A realization that is accepted, certified and traced but NOT byte-identical is
+    COMPLETE WITH CONDITIONS — a real, reportable state — and one whose acceptance was
+    withheld is NOT COMPLETE. Collapsing either into the other makes the top rung
+    meaningless."""
+    from dataclasses import replace as _replace
+
+    result = realize()
+    assert result.determination(byte_identical=True) == "COMPLETE"
+    assert result.determination(byte_identical=False) == "COMPLETE WITH CONDITIONS"
+
+    validation = result.validation
+    rejected = _replace(
+        result,
+        validation=_replace(validation, decision=_replace(validation.decision, accepted=False)),
+    )
+    assert rejected.validation.accepted is False
+    assert rejected.determination(byte_identical=True) == "NOT COMPLETE"
+
+
+def test_the_cli_refuses_a_determination_short_of_complete(tmp_path, capsys, monkeypatch):
+    """The exit code is the whole point of the entry point: a run that emits evidence and
+    exits zero regardless of what the evidence says is a reporter, not a gate."""
+    from data import realize as module
+
+    monkeypatch.setattr(
+        module,
+        "emit_evidence",
+        lambda _dir: {
+            "determination": "NOT COMPLETE",
+            "validation_accepted": False,
+            "certified": False,
+            "traceability_closed": False,
+            "byte_identical": False,
+        },
+    )
+    assert main(["--evidence-dir", str(tmp_path)]) == 1
+    assert "[FAIL]" in capsys.readouterr().out

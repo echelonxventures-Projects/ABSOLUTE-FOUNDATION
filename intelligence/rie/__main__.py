@@ -49,13 +49,18 @@ def _cmd_answer(args: argparse.Namespace) -> int:
     eng = _engine(args)
     m = eng.model()
     f = m["execution_frontier"]
+    # NO COVERAGE FIGURE IS QUOTED HERE, AND THAT IS THE POINT. UCOS-CL-005 removed
+    # ``coverage_line_pct`` from the canonical model because coverage.xml is
+    # TEST_EXECUTION_STATE — absent from every pristine clone — and an answer whose text
+    # moved with it would make this projection a function of whether the suite had been run.
+    # This line read ``m['health']['code']['coverage_line_pct']`` until that key went away,
+    # after which the documented ``answer`` subcommand raised KeyError on every invocation.
     answers = {
         "what_exists": f"{m['capability_count']} realized/spec capabilities; "
                        f"{m['health']['corpus']['artifacts']} corpus artifacts",
         "what_is_implemented": f"engine EC-1 + platform EC-2 "
                                f"({m['health']['code']['total_loc']} LOC, "
-                               f"{m['health']['code']['total_tests']} tests, "
-                               f"{m['health']['code']['coverage_line_pct']}% coverage)",
+                               f"{m['health']['code']['total_tests']} tests)",
         "what_remains": [g["missing"] for g in m["aeos_readiness"]["known_spine_gaps"]],
         "what_is_blocked": f.get("blocked", []),
         "what_is_executable": f.get("next_executable_capability"),

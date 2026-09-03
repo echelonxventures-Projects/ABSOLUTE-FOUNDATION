@@ -11,10 +11,12 @@ from __future__ import annotations
 
 import pytest
 
-from infrastructure.security import SecurityFacetKind, make_security_facet
+from engine.tests import assert_every_check_can_refuse
+from infrastructure.security import SecurityFacet, SecurityFacetKind, make_security_facet
 from infrastructure.security_meta import REALIZATION_UNIT
 from infrastructure.security_traceability import build_traceability
 from infrastructure.security_validation import (
+    SecurityValidationSubject,
     security_checks,
     validate_construct,
 )
@@ -65,8 +67,6 @@ def test_all_checks_blocking() -> None:
 
 
 def test_no_secret_material_check_fails_on_secret() -> None:
-    from infrastructure.security import SecurityFacet
-
     sf = SecurityFacet(
         type_tag="t.leak",
         facet=SecurityFacetKind.CONFIDENTIALITY,
@@ -80,8 +80,6 @@ def test_no_secret_material_check_fails_on_secret() -> None:
 
 
 def test_technology_independence_check_fails_on_technology() -> None:
-    from infrastructure.security import SecurityFacet
-
     sf = SecurityFacet(
         type_tag="t.tech",
         facet=SecurityFacetKind.AUTHENTICATION,
@@ -106,3 +104,12 @@ def test_validation_is_deterministic() -> None:
     b = _validate(SecurityFacetKind.INTEGRITY)
     assert a.report.to_dict() == b.report.to_dict()
     assert a.evidence.to_dict() == b.evidence.to_dict()
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    _c = make_security_facet("t.isolation", SecurityFacetKind.ISOLATION)
+    _t = build_traceability(_c, unit=REALIZATION_UNIT, forward=(_c.construct_id, "EVID"))
+    assert_every_check_can_refuse(
+        SecurityValidationSubject.from_construct(_c, _t), security_checks()
+    )

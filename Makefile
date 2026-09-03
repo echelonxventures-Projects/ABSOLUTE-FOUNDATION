@@ -2501,5 +2501,15 @@ uci-seal: bootstrap-quiet
 # UCOS-SUB-001 — UCOS measured by the substrate it consumes. Exit 2 (FAULT) when the
 # substrate is not importable, because a gate that passes without examining its subject is
 # the false green every instrument here exists to refuse.
-substrate:
-	@$(PYTHON) -m engine.substrate
+#
+# IT NAMED `$(PYTHON)`, WHICH THIS MAKEFILE DOES NOT DEFINE. The recipe expanded to
+# ` -m engine.substrate` and could never have run: `make -n substrate` printed
+# `m engine.substrate`. It also carried no `.PHONY` and no `bootstrap-quiet`, so it was the
+# only gate target that neither guaranteed an interpreter nor guaranteed being rebuilt. A
+# target that cannot execute is not an invocation plane, and UEC-L-04 counted it as none.
+# IT WAS NAMED `substrate`, WHICH PUT IT OUTSIDE GOVERNANCE. UEC-R-04 discovers make gate
+# targets by the pattern `.*-gate$`; all fifty-seven others match it and this one did not, so
+# the only Makefile target that ran a gate was also the only one no inventory could see.
+.PHONY: substrate-gate
+substrate-gate: bootstrap-quiet
+	@$(PY) -m engine.substrate.gate

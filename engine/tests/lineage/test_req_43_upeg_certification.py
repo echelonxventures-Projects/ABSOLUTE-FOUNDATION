@@ -23,6 +23,11 @@ Owner: Universal Lineage Projection (ULP), engine/lineage/memory.py
 
 from __future__ import annotations
 
+import json
+
+import pytest
+
+from engine.lineage import memory as memory_module
 from engine.lineage.memory import (
     ACCESS_MODES,
     MODE_LIST_MATCH,
@@ -34,6 +39,7 @@ from engine.lineage.memory import (
     reconstruct,
     resolve,
 )
+from engine.lineage.model import LineageError
 
 # Test subjects: known artifacts and unknown subject for open-world validation
 KNOWN_SUBJECT = "UCOS-BOOK-000000"
@@ -419,3 +425,227 @@ __all__ = [
     "test_req_43_memory_layer_extension",
     "test_req_43_certification_checklist",
 ]
+
+
+# --------------------------------------------------------------------------------------
+# The projection's own primitives, and every fact it declines to treat as a fault.
+#
+# WHY THIS SECTION EXISTS. The certification above measures UPEG over THIS repository's
+# governed records, which are present, well-formed and shaped exactly as the declaration
+# says. Every branch that exists for a record that is none of those things was therefore
+# unexecuted: the absent declaration, the unparseable one, the record that is not JSON,
+# the holder that is the wrong shape, the sequence field that carries something that is
+# not a number, and every rendering `_scalar` performs for a value that is not a string.
+# An open-world projection is defined by what it declines to call a fault, so the
+# declining is the behaviour under test.
+# --------------------------------------------------------------------------------------
+
+
+def test_an_absent_layer_declaration_is_a_fault_and_names_what_it_looked_for(tmp_path):
+    with pytest.raises(LineageError) as excinfo:
+        load_declaration(str(tmp_path / "absent.json"))
+    assert "absent" in str(excinfo.value)
+
+
+def test_a_layer_declaration_that_is_not_json_is_a_fault(tmp_path):
+    path = tmp_path / "layers.json"
+    path.write_text("{ not json", encoding="utf-8")
+    with pytest.raises(LineageError, match="not valid JSON"):
+        load_declaration(str(path))
+
+
+def test_an_absent_record_is_a_fact_and_a_malformed_one_is_a_fault(tmp_path):
+    assert memory_module._read_record(str(tmp_path), "nothing/here.json") is None
+    (tmp_path / "broken.json").write_text("{ not json", encoding="utf-8")
+    with pytest.raises(LineageError, match="not valid JSON"):
+        memory_module._read_record(str(tmp_path), "broken.json")
+
+
+def test_descending_a_path_that_is_not_there_yields_nothing_rather_than_raising():
+    document = {"a": {"b": {"c": 1}}}
+    assert memory_module._descend(document, ("a", "b", "c")) == 1
+    assert memory_module._descend(document, ("a", "missing")) is None
+    assert memory_module._descend(document, ("a", "b", "c", "deeper")) is None
+    assert memory_module._descend(document, ()) is document
+
+
+@pytest.mark.parametrize(
+    ("value", "rendered"),
+    [
+        (None, ""),
+        ("text", "text"),
+        (True, "true"),
+        (False, "false"),
+        (7, "7"),
+        (1.5, "1.5"),
+        (["a", 2], '["a", "2"]'),
+        ({"b": 1, "a": "x"}, '{"a": "x", "b": "1"}'),
+    ],
+)
+def test_every_field_renders_as_an_opaque_string_and_is_never_parsed(value, rendered):
+    assert memory_module._scalar(value) == rendered
+
+
+def test_a_value_of_an_unrenderable_type_still_renders_as_itself():
+    class _Opaque:
+        def __str__(self) -> str:
+            return "opaque"
+
+    assert memory_module._scalar(_Opaque()) == "opaque"
+
+
+def test_the_chosen_fields_default_to_every_field_the_record_carries():
+    record = {"b": 2, "a": "x"}
+    assert memory_module._values(record, ()) == (("a", "x"), ("b", "2"))
+    assert memory_module._values(record, ("a", "absent")) == (("a", "x"),)
+
+
+@pytest.mark.parametrize(
+    ("raw", "expected"),
+    [(None, 9), (True, 9), (3, 3), ("4", 4), ("  -5 ", -5), ("not-a-number", 9), ([], 9)],
+)
+def test_a_sequence_field_falls_back_when_it_carries_no_usable_number(raw, expected):
+    """The owner's own recorded sequence is used when there is one; the positional
+    fallback is what keeps an un-sequenced record orderable without inventing a clock."""
+    assert memory_module._sequence({"seq": raw}, "seq", 9) == expected
+
+
+def test_an_undeclared_sequence_field_always_falls_back():
+    assert memory_module._sequence({"seq": 3}, "", 9) == 9
+
+
+def test_a_record_matches_its_subject_by_field_or_by_membership():
+    access = MemoryAccess(
+        mode=MODE_LIST_MATCH,
+        at=(),
+        match_fields=("id",),
+        contains_fields=("members", "single"),
+        kind_field="",
+        sequence_field="",
+        value_fields=(),
+    )
+    assert memory_module._matches({"id": "S"}, "S", access) is True
+    assert memory_module._matches({"id": "OTHER"}, "S", access) is False
+    assert memory_module._matches({"members": ["A", "S"]}, "S", access) is True
+    assert memory_module._matches({"members": ["A"]}, "S", access) is False
+    assert memory_module._matches({"single": "S"}, "S", access) is True
+    assert memory_module._matches({"single": {"S": 1}}, "S", access) is False
+    assert memory_module._matches({}, "S", access) is False
+
+
+def _layer(**overrides) -> MemoryLayer:
+    fields = {
+        "layer": "identity",
+        "ordinal": 1,
+        "question": "what is remembered?",
+        "owner": "OWNER",
+        "record": "records/identity.json",
+        "access": MemoryAccess(
+            mode=memory_module.MODE_MAP_OF_LISTS,
+            at=("by_subject",),
+            match_fields=(),
+            contains_fields=(),
+            kind_field="kind",
+            sequence_field="seq",
+            value_fields=("value",),
+        ),
+    }
+    fields.update(overrides)
+    return MemoryLayer(**fields)
+
+
+def test_a_holder_the_declaration_cannot_find_yields_no_entries():
+    assert memory_module._entries_for("S", _layer(), {"elsewhere": {}}) == ()
+
+
+def test_a_holder_of_the_wrong_shape_yields_no_entries_rather_than_raising():
+    assert memory_module._entries_for("S", _layer(), {"by_subject": ["not", "a", "map"]}) == ()
+
+
+def test_a_subject_the_holder_does_not_carry_yields_no_entries():
+    assert memory_module._entries_for("S", _layer(), {"by_subject": {"OTHER": []}}) == ()
+
+
+def test_a_single_recorded_row_is_read_as_a_one_row_list():
+    entries = memory_module._entries_for(
+        "S", _layer(), {"by_subject": {"S": {"value": "v", "kind": "k"}}}
+    )
+    assert len(entries) == 1
+    assert entries[0].kind == "k"
+    assert entries[0].sequence == 1
+
+
+def test_a_row_that_is_not_a_mapping_is_skipped_rather_than_failing_the_layer():
+    entries = memory_module._entries_for(
+        "S", _layer(), {"by_subject": {"S": ["not-a-row", {"value": "v", "seq": 5}]}}
+    )
+    assert len(entries) == 1
+    assert entries[0].sequence == 5
+
+
+def test_the_declaration_document_round_trips_through_its_own_projection():
+    declaration = load_declaration()
+    document = memory_module.declaration_document(declaration)
+    assert "layers" in document
+    rebuilt = memory_module.MemoryDeclaration.of(
+        {"declaration_id": document["declaration_id"], "layers": document["layers"]}
+    )
+    assert rebuilt.names == declaration.names
+    assert declaration.layer_of(declaration.names[0]) is not None
+    assert declaration.layer_of("no-such-layer") is None
+
+
+def test_two_layers_sharing_an_ordinal_make_the_resolution_order_ambiguous():
+    declaration = load_declaration()
+    document = memory_module.declaration_document(declaration)
+    layers = json.loads(json.dumps(document["layers"]))
+    layers[1]["ordinal"] = layers[0]["ordinal"]
+    with pytest.raises(LineageError, match="ordinal"):
+        memory_module.MemoryDeclaration.of({"declaration_id": "X", "layers": layers})
+
+
+def test_one_layer_declared_twice_is_refused():
+    declaration = load_declaration()
+    document = memory_module.declaration_document(declaration)
+    layers = json.loads(json.dumps(document["layers"]))
+    layers[1]["layer"] = layers[0]["layer"]
+    with pytest.raises(LineageError, match="declared twice"):
+        memory_module.MemoryDeclaration.of({"declaration_id": "X", "layers": layers})
+
+
+@pytest.mark.parametrize("field", ["layer", "ordinal", "question", "owner", "record", "access"])
+def test_a_layer_missing_any_required_field_is_refused(field):
+    declaration = load_declaration()
+    document = memory_module.declaration_document(declaration)
+    layers = json.loads(json.dumps(document["layers"]))
+    del layers[0][field]
+    with pytest.raises(LineageError):
+        memory_module.MemoryDeclaration.of({"declaration_id": "X", "layers": layers})
+
+
+def test_an_undeclared_access_mode_is_refused():
+    declaration = load_declaration()
+    document = memory_module.declaration_document(declaration)
+    layers = json.loads(json.dumps(document["layers"]))
+    layers[0]["access"]["mode"] = "telepathy"
+    with pytest.raises(LineageError, match="not a declared access mode"):
+        memory_module.MemoryDeclaration.of({"declaration_id": "X", "layers": layers})
+
+
+def test_a_list_match_layer_that_names_no_match_field_is_refused():
+    declaration = load_declaration()
+    document = memory_module.declaration_document(declaration)
+    layers = json.loads(json.dumps(document["layers"]))
+    layers[0]["access"]["mode"] = MODE_LIST_MATCH
+    layers[0]["access"]["match_fields"] = []
+    with pytest.raises(LineageError, match="requires match_fields"):
+        memory_module.MemoryDeclaration.of({"declaration_id": "X", "layers": layers})
+
+
+def test_a_declaration_can_be_extended_without_mutating_the_one_it_came_from():
+    declaration = load_declaration()
+    ordinal = max(layer.ordinal for layer in declaration.layers) + 1
+    extended = declaration.extend(_layer(layer="synthetic", owner="TEST", ordinal=ordinal))
+    assert "synthetic" in extended.names
+    assert "synthetic" not in declaration.names
+    assert extended.layer_of("synthetic") is not None

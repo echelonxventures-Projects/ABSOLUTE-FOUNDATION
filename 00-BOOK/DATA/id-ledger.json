@@ -11937,12 +11937,12 @@
     "W34CUN": 1,
     "STAGE0": 1,
     "DET": 6,
-    "CONFIG": 37,
-    "DATAOBJ": 142,
-    "EXDOC": 3003,
-    "TOOLING": 38,
-    "ENGINE": 1374,
-    "TESTOBJ": 873,
+    "CONFIG": 40,
+    "DATAOBJ": 144,
+    "EXDOC": 3056,
+    "TOOLING": 52,
+    "ENGINE": 1380,
+    "TESTOBJ": 896,
     "OBS": 7,
     "ASSESS": 2,
     "B01BIR": 1,
@@ -65358,6 +65358,612 @@
       "object_class": "TEST_OBJECT",
       "category": "TESTOBJ",
       "first_seen": "commit:77798202d2df"
+    },
+    ".github/workflows/sub-gate.yml": {
+      "universal_id": "UCOS-CONFIG-000038",
+      "object_class": "CONFIGURATION_OBJECT",
+      "category": "CONFIG",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    ".github/workflows/uctx-gate.yml": {
+      "universal_id": "UCOS-CONFIG-000039",
+      "object_class": "CONFIGURATION_OBJECT",
+      "category": "CONFIG",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    ".github/workflows/ufi-gate.yml": {
+      "universal_id": "UCOS-CONFIG-000040",
+      "object_class": "CONFIGURATION_OBJECT",
+      "category": "CONFIG",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/DATA/baseline-authority.json": {
+      "universal_id": "UCOS-TOOLING-000039",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/DATA/context-authority.json": {
+      "universal_id": "UCOS-TOOLING-000040",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/DATA/context-template-manifest.json": {
+      "universal_id": "UCOS-TOOLING-000041",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/DATA/independence/baseline-template-manifest.json": {
+      "universal_id": "UCOS-TOOLING-000042",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/DATA/independence/baseline.json": {
+      "universal_id": "UCOS-TOOLING-000043",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/DATA/independence/uctx.json": {
+      "universal_id": "UCOS-TOOLING-000044",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/DATA/independence/urat-template-manifest.json": {
+      "universal_id": "UCOS-TOOLING-000045",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/DATA/independence/urat.json": {
+      "universal_id": "UCOS-TOOLING-000046",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/tools/ufi.py": {
+      "universal_id": "UCOS-TOOLING-000047",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/tools/ukctx.py": {
+      "universal_id": "UCOS-TOOLING-000048",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/tools/ukctx_assimilate.py": {
+      "universal_id": "UCOS-TOOLING-000049",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/tools/ukctx_certify.py": {
+      "universal_id": "UCOS-TOOLING-000050",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/tools/ukctx_gate.py": {
+      "universal_id": "UCOS-TOOLING-000051",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/tools/ukctx_verify.py": {
+      "universal_id": "UCOS-TOOLING-000052",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/BACKLOG-CONSISTENCY-REPORT.md": {
+      "universal_id": "UCOS-EXDOC-003004",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C11-CERTIFICATION-GAP-REGISTER.md": {
+      "universal_id": "UCOS-EXDOC-003005",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C11-DETECTION-GAP-REGISTER.md": {
+      "universal_id": "UCOS-EXDOC-003006",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C11-OPERATIONAL-RISK-SUMMARY.md": {
+      "universal_id": "UCOS-EXDOC-003007",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C11-REAL-DEFECT-REGISTER.md": {
+      "universal_id": "UCOS-EXDOC-003008",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C11-STOP-CONDITION-REPORT.md": {
+      "universal_id": "UCOS-EXDOC-003009",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C11-THEORETICAL-THREAT-REGISTER.md": {
+      "universal_id": "UCOS-EXDOC-003010",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C12-ACTIVE-DEFECT-VALIDATION.md": {
+      "universal_id": "UCOS-EXDOC-003011",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C13-CRITICAL-PATH-COLLAPSE.md": {
+      "universal_id": "UCOS-EXDOC-003012",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C13-FINAL-VERDICT.md": {
+      "universal_id": "UCOS-EXDOC-003013",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C13-MB17-GOVERNANCE-MATRIX.md": {
+      "universal_id": "UCOS-EXDOC-003014",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C13-MB7-REUSE-MATRIX.md": {
+      "universal_id": "UCOS-EXDOC-003015",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C13-TRUE-CLOSURE-COST.md": {
+      "universal_id": "UCOS-EXDOC-003016",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C7-COMPLETION-REPORT.md": {
+      "universal_id": "UCOS-EXDOC-003017",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C7-REPOSITORY-CLOSURE-MATRIX.md": {
+      "universal_id": "UCOS-EXDOC-003018",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C8-MB7-17-ACTUAL-VS-FEASIBLE.md": {
+      "universal_id": "UCOS-EXDOC-003019",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/C9-REMAINING-WORK-LEDGER.md": {
+      "universal_id": "UCOS-EXDOC-003020",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/CERTIFICATION-READINESS-MODEL.md": {
+      "universal_id": "UCOS-EXDOC-003021",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/CRITICAL-PATH-ANALYSIS.md": {
+      "universal_id": "UCOS-EXDOC-003022",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/CRITICAL-PATH-VALIDATION.md": {
+      "universal_id": "UCOS-EXDOC-003023",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/DAG-BACKLOG-RECONCILIATION.md": {
+      "universal_id": "UCOS-EXDOC-003024",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/EXECUTION-BACKLOG.json": {
+      "universal_id": "UCOS-DATAOBJ-000143",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/EXECUTION-READINESS-VERDICT.md": {
+      "universal_id": "UCOS-EXDOC-003025",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/FALSE-COMPLETION-ANALYSIS.md": {
+      "universal_id": "UCOS-EXDOC-003026",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/MB18-MB25-CANDIDATE-REGISTRY.md": {
+      "universal_id": "UCOS-EXDOC-003027",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/MB18-MB25-VALIDATION-MATRIX.md": {
+      "universal_id": "UCOS-EXDOC-003028",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/OPTIMIZED-EXECUTION-SEQUENCE.md": {
+      "universal_id": "UCOS-EXDOC-003029",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/PRODUCER-CLOSURE-TOPOLOGY.md": {
+      "universal_id": "UCOS-EXDOC-003030",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/REPOSITORY-CLOSURE-DAG.md": {
+      "universal_id": "UCOS-EXDOC-003031",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/REPOSITORY-CLOSURE-WAVES.md": {
+      "universal_id": "UCOS-EXDOC-003032",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/THREAT-COVERAGE-PROOF.md": {
+      "universal_id": "UCOS-EXDOC-003033",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/TRUTH-REPORT-C8.md": {
+      "universal_id": "UCOS-EXDOC-003034",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/UCOS-SUB-001/sub-declaration.json": {
+      "universal_id": "UCOS-DATAOBJ-000144",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/UCTX-001-ATTACK-VALIDATION-EVIDENCE.md": {
+      "universal_id": "UCOS-EXDOC-003035",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W1-ATTACK-RESULTS.md": {
+      "universal_id": "UCOS-EXDOC-003036",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W1-CONVERSION-SET.md": {
+      "universal_id": "UCOS-EXDOC-003037",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W1-FAILURE-LEDGER.md": {
+      "universal_id": "UCOS-EXDOC-003038",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W1-INTEGRATION-REPORT.md": {
+      "universal_id": "UCOS-EXDOC-003039",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W1-MB7-REMEASUREMENT.md": {
+      "universal_id": "UCOS-EXDOC-003040",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W2-BLOCKER-REGISTER.md": {
+      "universal_id": "UCOS-EXDOC-003041",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W2-CLOSURE-MATRIX.md": {
+      "universal_id": "UCOS-EXDOC-003042",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W2-CONVERSION-LOG.md": {
+      "universal_id": "UCOS-EXDOC-003043",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W2-REPOSITORY-STATUS.md": {
+      "universal_id": "UCOS-EXDOC-003044",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W3-NEXT-ACTION-QUEUE.md": {
+      "universal_id": "UCOS-EXDOC-003045",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/W3-REPOSITORY-IMPLEMENTATION-MATRIX.md": {
+      "universal_id": "UCOS-EXDOC-003046",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-MASTER/WAVE0-READY-TASKS.md": {
+      "universal_id": "UCOS-EXDOC-003047",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "CHANGE-SET-CERTIFICATION-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-003048",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "COMMIT-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-003049",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "GENERATED-ARTIFACT-COMMIT-AUTHORITY-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-003050",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "ROOT-CAUSE-ANALYSIS.md": {
+      "universal_id": "UCOS-EXDOC-003051",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "SHELL-OBSERVABILITY-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-003052",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "UFI-NO-CELL-ROOT-CAUSE.md": {
+      "universal_id": "UCOS-EXDOC-003053",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "UNCONDITIONAL-COMMIT-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-003054",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "UNIVERSAL-CERTIFICATION-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-EXDOC-003055",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "W4-UFI-FAILURE-MATRIX.md": {
+      "universal_id": "UCOS-EXDOC-003056",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/infinite_scope/detector.py": {
+      "universal_id": "UCOS-ENGINE-001375",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/omega_infinite/contradiction.py": {
+      "universal_id": "UCOS-ENGINE-001376",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/substrate/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001377",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/substrate/__main__.py": {
+      "universal_id": "UCOS-ENGINE-001378",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/substrate/adapter.py": {
+      "universal_id": "UCOS-ENGINE-001379",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/substrate/gate.py": {
+      "universal_id": "UCOS-ENGINE-001380",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/knowledge/ukip/test_assimilation_failures.py": {
+      "universal_id": "UCOS-TESTOBJ-000874",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/knowledge/ukip/test_certification_paths.py": {
+      "universal_id": "UCOS-TESTOBJ-000875",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/knowledge/ukip/test_discovery.py": {
+      "universal_id": "UCOS-TESTOBJ-000876",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/knowledge/ukip/test_evidence.py": {
+      "universal_id": "UCOS-TESTOBJ-000877",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/knowledge/ukip/test_graph.py": {
+      "universal_id": "UCOS-TESTOBJ-000878",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/knowledge/ukip/test_validation_failures.py": {
+      "universal_id": "UCOS-TESTOBJ-000879",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/omega_infinite/test_contradiction.py": {
+      "universal_id": "UCOS-TESTOBJ-000880",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/unit/test_cert004_expansion.py": {
+      "universal_id": "UCOS-TESTOBJ-000881",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/unit/test_certification_classify.py": {
+      "universal_id": "UCOS-TESTOBJ-000882",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/unit/test_certification_equivalence.py": {
+      "universal_id": "UCOS-TESTOBJ-000883",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/unit/test_certification_integrity_execution.py": {
+      "universal_id": "UCOS-TESTOBJ-000884",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/unit/test_governance_engines.py": {
+      "universal_id": "UCOS-TESTOBJ-000885",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/unit/test_recursive_knowledge_declaration.py": {
+      "universal_id": "UCOS-TESTOBJ-000886",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/unit/test_recursive_knowledge_gate.py": {
+      "universal_id": "UCOS-TESTOBJ-000887",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/unit/test_substrate_consumption.py": {
+      "universal_id": "UCOS-TESTOBJ-000888",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/unit/test_verification_cost_model.py": {
+      "universal_id": "UCOS-TESTOBJ-000889",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "engine/tests/universal_discovery/test_model.py": {
+      "universal_id": "UCOS-TESTOBJ-000890",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "infrastructure/tests/test_certification_gate_refusals.py": {
+      "universal_id": "UCOS-TESTOBJ-000891",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "infrastructure/tests/test_realize_cli.py": {
+      "universal_id": "UCOS-TESTOBJ-000892",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "intelligence/tests/test_kernel.py": {
+      "universal_id": "UCOS-TESTOBJ-000893",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "platform/tests/test_provider_framework.py": {
+      "universal_id": "UCOS-TESTOBJ-000894",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "platform/tests/test_repository_intelligence_dimensions.py": {
+      "universal_id": "UCOS-TESTOBJ-000895",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
+    },
+    "platform/tests/test_repository_intelligence_substrate.py": {
+      "universal_id": "UCOS-TESTOBJ-000896",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:a4f56e83e73f"
     }
   },
   "by_observation": {

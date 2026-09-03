@@ -14,6 +14,8 @@ Run: .ec1-venv/bin/python -m pytest intelligence/tests -q
 
 from __future__ import annotations
 
+from dataclasses import replace
+
 import pytest
 
 from intelligence.portal import (
@@ -35,8 +37,10 @@ from intelligence.portal import (
     VALIDATION_PORTAL,
     WORKSTREAMS_PORTAL,
     RepositoryIntelligencePortal,
+    _freeze_blockers,
     build_acceptance_facts,
 )
+from intelligence.portal import main as portal_main
 from intelligence.rie.config import RepoConfig
 from intelligence.rie.engine import RepositoryIntelligenceEngine
 
@@ -233,3 +237,109 @@ def test_write_all_is_deterministic(tmp_path) -> None:
     assert len(a) == 16
     for filename in _ALL_PAGES:
         assert (tmp_path / "a" / filename).read_text() == (tmp_path / "b" / filename).read_text()
+
+
+# --------------------------------------------------------------------------- #
+# the empty repository — every page's "nothing to report" branch               #
+#                                                                             #
+# WHY THESE EXIST. Every page above is rendered over THIS repository, which has#
+# certified capabilities, blocked dimensions, drift and a critical path. The   #
+# branch each page takes when its section is EMPTY was therefore never taken,  #
+# and an empty section is exactly the state a page must survive: a portal that #
+# renders only when there is something to render is a portal that breaks on the#
+# day the news is good.                                                        #
+# --------------------------------------------------------------------------- #
+
+
+def _emptied(portal: RepositoryIntelligencePortal) -> RepositoryIntelligencePortal:
+    """The same portal over a model that reports nothing.
+
+    The model is replaced rather than the engine stubbed, because the pages under test
+    are a projection of the model and nothing else — which is the property the portal
+    claims for itself ("zero re-derivation").
+    """
+    empty = RepositoryIntelligencePortal.__new__(RepositoryIntelligencePortal)
+    empty._engine = portal._engine
+    empty._repo_id = portal._repo_id
+    empty._outputs = portal._outputs
+    empty._model = {}
+    empty._drift = {}
+    empty._decision = portal._decision
+    empty._readiness = portal._readiness
+    return empty
+
+
+def test_every_page_renders_over_a_model_that_reports_nothing(portal) -> None:
+    pages = _emptied(portal).render_all()
+    assert set(pages) == _ALL_PAGES
+    for filename, content in pages.items():
+        assert content.strip(), filename
+        assert "GENERATED REPOSITORY INTELLIGENCE PORTAL" in content
+
+
+def test_the_empty_pages_say_so_rather_than_rendering_an_empty_table(portal) -> None:
+    pages = _emptied(portal).render_all()
+    assert "| _none_ | — | — |" in pages[CERTIFICATION_PORTAL]
+    assert "_Nothing blocked._" in pages[FRONTIER_PORTAL]
+    assert "_No critical path derived._" in pages[FRONTIER_PORTAL]
+
+
+def test_a_validation_dimension_the_model_does_not_carry_is_skipped(portal) -> None:
+    """The page iterates the dimension NAMES it declares and reads each from the model;
+    a name the model has no entry for is skipped rather than rendered as a blank row."""
+    partial = _emptied(portal)
+    partial._model = {"progress": {"per_dimension": {}}}
+    assert "| None |" not in partial.validation()
+
+
+def test_constitutional_finality_that_is_blocked_is_reported_as_a_freeze_blocker() -> None:
+    blockers = _freeze_blockers(
+        {},
+        [],
+        {"constitutional_finality": "BLOCKED — three gaps remain"},
+        {},
+    )
+    assert blockers == ["constitutional finality BLOCKED — three gaps remain"]
+
+
+def test_finality_that_is_not_blocked_contributes_no_freeze_blocker() -> None:
+    assert _freeze_blockers({}, [], {"constitutional_finality": "ACHIEVED"}, {}) == []
+    assert _freeze_blockers({}, [], {}, {}) == []
+
+
+# --------------------------------------------------------------------------- #
+# the CLI                                                                      #
+# --------------------------------------------------------------------------- #
+
+
+def test_cli_writes_every_page_into_the_directory_it_was_given(tmp_path, capsys) -> None:
+    out = tmp_path / "portal"
+    assert portal_main(["--repo", str(REPO), "--out", str(out)]) == 0
+    written = {path.name for path in out.iterdir()}
+    assert written == _ALL_PAGES
+    printed = capsys.readouterr().out
+    assert f"generated {len(_ALL_PAGES)} pages" in printed
+    assert PORTAL_INDEX in printed
+
+
+def test_cli_defaults_the_output_directory_under_the_engine_output_root(
+    tmp_path, capsys, monkeypatch
+) -> None:
+    """The default is derived from the engine's configured output directory, so pointing
+    the repository elsewhere moves the pages with it and never writes into this tree."""
+    engine = RepositoryIntelligenceEngine(RepoConfig.create(REPO))
+    monkeypatch.setattr(
+        "intelligence.portal.RepoConfig",
+        type(
+            "_Redirected",
+            (),
+            {
+                "create": staticmethod(
+                    lambda root=None: replace(engine.config, output_dir=tmp_path / "out")
+                )
+            },
+        ),
+    )
+    assert portal_main(["--repo", str(REPO)]) == 0
+    assert (tmp_path / "out" / "portal" / PORTAL_INDEX).is_file()
+    capsys.readouterr()

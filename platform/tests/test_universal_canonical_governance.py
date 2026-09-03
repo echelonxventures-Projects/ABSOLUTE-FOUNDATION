@@ -319,3 +319,270 @@ def test_5_structural_an_incomplete_bootstrap_path_is_refused(tmp_path: Path) ->
         ],
     )
     assert any("bootstrap path is incomplete" in f for f in validate(repo))
+
+
+# --- the two registries' own refusals, over BUILT registries -------------------------------
+#
+# WHY THIS SECTION EXISTS. Both `validate` functions are measured over THIS repository, which
+# satisfies every rule they state — so every finding they can produce was unexecuted, and an
+# invariant that has only ever been observed holding is an invariant nobody has shown can
+# refuse. Each rule below is driven from a registry BUILT to violate exactly one of them, so
+# the finding is attributable to the rule rather than to a soup of defects.
+
+
+def _universe(repo: Path, surfaces: list[dict], **sections) -> Path:
+    (repo / "00-BOOK" / "DATA").mkdir(parents=True, exist_ok=True)
+    document = {
+        "schema": evidence_universe.SCHEMA,
+        "evidence_classes": dict.fromkeys(evidence_universe.EVIDENCE_CLASSES, "x"),
+        "surfaces": surfaces,
+        **sections,
+    }
+    (repo / evidence_universe.REGISTRY_PATH).write_text(json.dumps(document), encoding="utf-8")
+    return repo
+
+
+def _surface(**overrides) -> dict:
+    surface = {
+        "surface_id": "EV-1",
+        "path_pattern": "evidence/",
+        "evidence_class": "AUDIT",
+        "owner": "OWNER",
+        "producer": "producer.py",
+        "retention": "forever",
+        "input_classification": "EXECUTION_TRANSCRIPT",
+        "canonical_identity_role": evidence_universe.REQUIRED_IDENTITY_ROLE,
+        "may_affect_certification": False,
+    }
+    surface.update(overrides)
+    return surface
+
+
+def test_a_universe_declaring_a_foreign_schema_is_refused(tmp_path: Path) -> None:
+    repo = _universe(tmp_path / "r", [_surface()])
+    document = json.loads((repo / evidence_universe.REGISTRY_PATH).read_text(encoding="utf-8"))
+    document["schema"] = "some-other-schema"
+    (repo / evidence_universe.REGISTRY_PATH).write_text(json.dumps(document), encoding="utf-8")
+    assert any("schema is" in f for f in evidence_universe.validate(repo))
+
+
+def test_a_universe_whose_declared_classes_are_not_the_universe_is_refused(tmp_path: Path) -> None:
+    repo = _universe(tmp_path / "r", [_surface()], evidence_classes={"AUDIT": "x"})
+    assert any("do not match the universe" in f for f in evidence_universe.validate(repo))
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected"),
+    [
+        ({"surface_id": ""}, "no surface_id"),
+        ({"path_pattern": ""}, "no path_pattern"),
+        ({"evidence_class": "RUMOUR"}, "outside the universe"),
+        ({"owner": ""}, "no owner"),
+        ({"producer": ""}, "no producer"),
+        ({"retention": ""}, "no retention"),
+        ({"input_classification": ""}, "no input_classification"),
+        ({"canonical_identity_role": "CANONICAL"}, "R-EV-2"),
+    ],
+)
+def test_every_evidence_surface_rule_refuses_the_declaration_that_breaks_it(
+    tmp_path: Path, mutation: dict, expected: str
+) -> None:
+    repo = _universe(tmp_path / "r", [_surface(**mutation)])
+    assert any(expected in f for f in evidence_universe.validate(repo))
+
+
+def test_a_surface_declared_twice_is_refused(tmp_path: Path) -> None:
+    repo = _universe(tmp_path / "r", [_surface(), _surface(path_pattern="other/")])
+    assert any("declared twice" in f for f in evidence_universe.validate(repo))
+
+
+def test_only_a_derived_result_may_carry_a_deterministic_classification(tmp_path: Path) -> None:
+    """R-EV-3. An AUDIT trail declared TRACKED_DETERMINISTIC would be admissible into
+    canonical identity, which is exactly the crossing this rule exists to prevent."""
+    repo = _universe(
+        tmp_path / "r",
+        [_surface(evidence_class="AUDIT", input_classification="TRACKED_DETERMINISTIC")],
+    )
+    assert any("R-EV-3" in f for f in evidence_universe.validate(repo))
+
+    eligible = sorted(evidence_universe.DETERMINISTIC_ELIGIBLE_CLASSES)[0]
+    ok = _universe(
+        tmp_path / "ok",
+        [_surface(evidence_class=eligible, input_classification="TRACKED_DETERMINISTIC")],
+    )
+    assert evidence_universe.validate(ok) == []
+
+
+@pytest.mark.parametrize("forbidden", sorted(evidence_universe.CERTIFICATION_FORBIDDEN_CLASSES))
+def test_debug_and_improvement_evidence_may_never_reach_certification(
+    tmp_path: Path, forbidden: str
+) -> None:
+    repo = _universe(
+        tmp_path / forbidden,
+        [_surface(evidence_class=forbidden, may_affect_certification=True)],
+    )
+    assert any("R-EV-4" in f for f in evidence_universe.validate(repo))
+
+
+def test_the_longest_matching_pattern_wins_and_an_unmatched_path_is_not_evidence(
+    tmp_path: Path,
+) -> None:
+    repo = _universe(
+        tmp_path / "r",
+        [
+            _surface(surface_id="EV-DIR", path_pattern="evidence/"),
+            _surface(surface_id="EV-FILE", path_pattern="evidence/verify.log"),
+        ],
+    )
+    assert evidence_universe.surface_for(repo, "evidence/verify.log").surface_id == "EV-FILE"
+    assert evidence_universe.surface_for(repo, "evidence/other.log").surface_id == "EV-DIR"
+    assert evidence_universe.surface_for(repo, "src/module.py") is None
+
+
+def test_the_class_census_names_every_class_including_the_empty_ones(tmp_path: Path) -> None:
+    repo = _universe(tmp_path / "r", [_surface(evidence_class="AUDIT")])
+    census = evidence_universe.classes_present(repo)
+    assert set(census) == set(evidence_universe.EVIDENCE_CLASSES)
+    assert census["AUDIT"] == 1
+    assert all(census[name] == 0 for name in census if name != "AUDIT")
+
+
+# --- the generated-artifact register's remaining refusals ---------------------------------
+
+
+def test_a_registered_artifact_with_no_canonical_path_is_refused_and_examined_no_further(
+    tmp_path: Path,
+) -> None:
+    repo = _registry(tmp_path / "r", [_entry(canonical_path="", producer="")])
+    findings = validate(repo)
+    assert any("no canonical_path" in f for f in findings)
+    # the entry is skipped rather than re-reported under every other rule it also breaks
+    assert not any("no producer" in f for f in findings)
+
+
+def test_one_canonical_path_claimed_by_two_producers_is_refused(tmp_path: Path) -> None:
+    repo = _registry(
+        tmp_path / "r",
+        [
+            _entry(artifact_id="A", producer="one/engine.py"),
+            _entry(artifact_id="B", producer="two/engine.py"),
+        ],
+    )
+    assert any("claimed by two producers" in f for f in validate(repo))
+
+
+@pytest.mark.parametrize("field", ["producer", "owner", "lifecycle"])
+def test_an_artifact_that_names_no_accountable_field_is_refused(tmp_path: Path, field: str) -> None:
+    repo = _registry(tmp_path / field, [_entry(**{field: ""})])
+    assert any(f"no {field}" in f for f in validate(repo))
+
+
+def test_an_artifact_with_an_empty_input_closure_is_refused(tmp_path: Path) -> None:
+    """An artifact that declares no inputs cannot be regenerated from anything, so its
+    identity rests on nothing that can be checked."""
+    repo = _registry(tmp_path / "r", [_entry(input_closure=[], input_classification={})])
+    assert any("empty input_closure" in f for f in validate(repo))
+
+
+def test_an_input_with_no_classification_or_an_unknown_one_is_refused(tmp_path: Path) -> None:
+    unclassified = _registry(
+        tmp_path / "u", [_entry(input_closure=["a.json"], input_classification={})]
+    )
+    assert any("has no classification" in f for f in validate(unclassified))
+
+    foreign = _registry(
+        tmp_path / "f",
+        [_entry(input_closure=["a.json"], input_classification={"a.json": "VIBES"})],
+    )
+    assert any("VIBES" in f for f in validate(foreign))
+
+
+def test_a_canonical_artifact_may_declare_no_environmental_dependency(tmp_path: Path) -> None:
+    repo = _registry(
+        tmp_path / "r", [_entry(environmental_dependencies=["the machine's hostname"])]
+    )
+    assert any("dependencies" in f for f in validate(repo))
+
+
+def test_a_canonical_artifact_that_is_not_deterministic_is_refused(tmp_path: Path) -> None:
+    repo = _registry(tmp_path / "r", [_entry(deterministic=False)])
+    assert any("not deterministic" in f for f in validate(repo))
+
+
+def test_a_generated_input_whose_declaration_names_no_producer_is_refused(tmp_path: Path) -> None:
+    repo = _registry(
+        tmp_path / "r",
+        [
+            _entry(
+                input_closure=["knowledge/"],
+                input_classification={"knowledge/": "GENERATED_DETERMINISTIC"},
+            )
+        ],
+        generated_inputs=[
+            {"path": "knowledge/", "producer": "", "bootstrap_command": "", "tracked": False}
+        ],
+    )
+    findings = validate(repo)
+    assert any("declares no producer" in f for f in findings)
+
+
+def test_an_evidence_surface_that_claims_identity_is_refused_at_the_reader(tmp_path: Path) -> None:
+    """The register reads the evidence universe rather than restating it, so a surface that
+    claims canonical identity is refused where a canonical artifact READS it."""
+    repo = tmp_path / "r"
+    _universe(
+        repo,
+        [
+            _surface(
+                surface_id="EV-BAD",
+                path_pattern="some/where/run.log",
+                canonical_identity_role="CANONICAL",
+            )
+        ],
+    )
+    _registry(
+        repo,
+        [
+            _entry(
+                canonical_identity_role="NON_CANONICAL",
+                deterministic=False,
+                input_closure=["some/where/run.log"],
+                input_classification={"some/where/run.log": "EXECUTION_TRANSCRIPT"},
+            )
+        ],
+    )
+    assert any("EV-BAD" in f for f in validate(repo))
+
+
+def test_a_producer_and_the_register_are_reconciled_in_both_directions(tmp_path: Path) -> None:
+    """A one-directional reconciliation would let a producer quietly emit an artifact the
+    register never declared, which is the omission the register exists to make impossible."""
+    from platform.repository_intelligence.generated_artifacts import reconcile_owner_view
+
+    repo = _registry(
+        tmp_path / "r",
+        [_entry(owner="PROGRAMME", canonical_path="programme/OUT.md")],
+    )
+    assert reconcile_owner_view(repo, "PROGRAMME", ["programme/OUT.md"]) == []
+
+    missing = reconcile_owner_view(repo, "PROGRAMME", [])
+    assert missing == [
+        "PROGRAMME: registry declares programme/OUT.md but the engine does not claim it"
+    ]
+
+    extra = reconcile_owner_view(repo, "PROGRAMME", ["programme/OUT.md", "programme/EXTRA.md"])
+    assert extra == [
+        "PROGRAMME: engine claims programme/EXTRA.md but the registry does not declare it"
+    ]
+
+
+def test_the_producer_of_a_path_the_register_does_not_declare_is_nobody(tmp_path: Path) -> None:
+    from platform.repository_intelligence.generated_artifacts import (
+        canonical_paths,
+        producer_of,
+    )
+
+    repo = _registry(tmp_path / "r", [_entry()])
+    assert producer_of(repo, "programme/OUT.md") == "programme/engine.py"
+    assert producer_of(repo, "nothing/declares/this.md") is None
+    assert canonical_paths(repo) == {"programme/OUT.md"}

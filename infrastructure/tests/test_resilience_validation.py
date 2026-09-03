@@ -7,8 +7,7 @@ evaluative non-enforcing; UIL-15 — technology independence).
 
 from __future__ import annotations
 
-import pytest
-
+from engine.tests import assert_every_check_can_refuse
 from infrastructure.resilience import (
     make_availability_topology,
     make_scaling_arrangement,
@@ -20,8 +19,6 @@ from infrastructure.resilience_validation import (
     resilience_checks,
     validate_construct,
 )
-from engine.validation.executor import ValidationEngine
-from engine.validation.gates import enforce_acceptance
 
 
 def _trace_for(construct):
@@ -118,3 +115,11 @@ class TestAllChecks:
         for c in constructs:
             assert c.is_evaluative_facet()
             assert not c.enacts_enforcement()
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    _c = make_availability_topology("test.availability.foundation")
+    assert_every_check_can_refuse(
+        ResilienceValidationSubject.from_construct(_c, _trace_for(_c)), resilience_checks()
+    )

@@ -162,7 +162,13 @@ def resolve(value, repo: str) -> list:
         got = list(got) if isinstance(got, list) else [got]
         # a declaration may name its registers by bare filename; the prefix is where
         # they live, which is the one thing the pointer cannot read out of the document
-        return [value.get("prefix", "") + str(g) for g in got]
+        out = [value.get("prefix", "") + str(g) for g in got]
+        # `suffix` narrows by FORMAT, which is the other thing the pointed-at document
+        # does not record. BASELINE-001's registry entries are identical in every field
+        # for its dashboard and for baseline.json, so no filter expression can separate
+        # a prose projection from a record file; the alternative is copying the list of
+        # surfaces into the adoption, which is the second authoring UCKP-ART-03 voids.
+        return [o for o in out if o.endswith(value["suffix"])] if "suffix" in value else out
     return [value]
 
 

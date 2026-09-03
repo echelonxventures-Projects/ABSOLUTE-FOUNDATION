@@ -9,7 +9,9 @@ WHAT IS PROVEN
 
   * the gate is OPEN on the measured working tree (a reachable PASS)
   * every law REFUSES when its debt grows by one (a reachable FAIL, per law)
-  * the ratchet is two-sided — repaying debt without tightening the ceiling is itself refused
+  * the ratchet is ONE-sided — a repayment is accepted with no edit anywhere, because Ω-4 replaced
+    a two-sided ceiling that refused any measurement below the declared value and so made every
+    improvement a chore indistinguishable from a retreat
   * a declared ceiling that binds no measurement is refused
   * the coverage reader reproduces coverage.py's own totals, so it is reading and not guessing
   * the coverage comparison detects a single moved line, which is the granularity Rules 8/10/11

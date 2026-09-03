@@ -121,3 +121,23 @@ def test_cli_main_returns_zero(tmp_path, capsys):
     bundle = json.loads((tmp_path / "realization-evidence.json").read_text())
     assert bundle["determination"] == "COMPLETE"
     assert bundle["meta_class"] == "DMC-02"
+
+
+def test_determination_degrades_to_conditions_and_then_refuses():
+    """The three determinations are a ladder, and only the top rung had ever been reached.
+    A realization that is accepted, certified and traced but NOT byte-identical is
+    COMPLETE WITH CONDITIONS — a real, reportable state — and one that fails validation is
+    NOT COMPLETE. Collapsing either into the other would make the top rung meaningless."""
+    from dataclasses import replace as _replace
+
+    result = realize()
+    assert result.determination(byte_identical=True) == "COMPLETE"
+    assert result.determination(byte_identical=False) == "COMPLETE WITH CONDITIONS"
+
+    validation = result.validation
+    rejected = _replace(
+        result,
+        validation=_replace(validation, decision=_replace(validation.decision, accepted=False)),
+    )
+    assert rejected.validation.accepted is False
+    assert rejected.determination(byte_identical=True) == "NOT COMPLETE"

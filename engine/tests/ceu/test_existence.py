@@ -535,3 +535,170 @@ def test_the_journal_detects_tampering(registry: ExistenceRegistry):
         prev_hash="y",
     )
     assert registry.verify_audit()
+
+
+# --------------------------------------------------------------------------- #
+# The registry's own surface, and every refusal it is built to make            #
+#                                                                             #
+# WHY THIS SECTION EXISTS. The suite above proves the SUBSTRATE's properties   #
+# — existence precedes entity, a relationship is a unit, a classification can  #
+# come back. It reaches those properties through a small, happy subset of the  #
+# registry's API, so the accessors the rest of the repository actually calls   #
+# (`resolve` on an unknown id, `register_all`, `identifiers`, `form_id_of`,    #
+# `successors_of_key`, `require_context`) and the refusals that make the       #
+# append-only claim mean anything (rewriting an active supersession, a         #
+# resurrection with no authority, a cycle in the specialization graph) were    #
+# never executed. An append-only registry that has never refused a rewrite is  #
+# a registry that has only ever been asked nicely.                             #
+# --------------------------------------------------------------------------- #
+
+
+def test_a_registry_must_name_its_root_form():
+    with pytest.raises(ExistenceError, match="root form must be named"):
+        ExistenceRegistry(root_form="   ")
+
+
+def test_resolving_an_identifier_nothing_registered_fails_closed(registry):
+    with pytest.raises(ExistenceError, match="not registered"):
+        registry.resolve("UCOS-ENTY-ffffffffffff")
+    assert registry.find("UCOS-ENTY-ffffffffffff") is None
+    assert registry.form_id_of("UCOS-ENTY-ffffffffffff") is None
+
+
+def test_a_batch_registration_registers_every_unit_it_is_given(registry):
+    units = (
+        ExistenceUnit(form="entity", key="batch-a", title="A"),
+        ExistenceUnit(form="entity", key="batch-b", title="B"),
+    )
+    registered = registry.register_all(units)
+    assert [u.key for u in registered] == ["batch-a", "batch-b"]
+    assert registry.counts()["entity"] == 2
+    assert set(registry.identifiers()) >= {u.universal_id for u in registered}
+    assert registry.identifiers() == tuple(sorted(registry.identifiers()))
+
+
+def test_the_form_of_a_registered_identifier_is_answerable(registry):
+    unit = _entity(registry, "addressed")
+    assert registry.form_id_of(unit.universal_id) == "entity"
+    assert registry.id_of("entity", "addressed") == unit.universal_id
+
+
+def test_a_superseded_form_admits_no_new_units(registry):
+    form = registry.form_of("entity")
+    successor = registry.declare_form("successor-entity", title="Successor", code="SENT")
+    registry.supersede(form.universal_id, successors=(successor.universal_id,), authority="GOV")
+    assert registry.is_superseded_key(registry.root_form, "entity") is True
+    assert registry.successors_of_key(registry.root_form, "entity") == (successor.universal_id,)
+    with pytest.raises(ExistenceRegistrationError, match="superseded form"):
+        _entity(registry, "too-late")
+
+
+def test_a_key_nothing_registered_is_neither_superseded_nor_has_successors(registry):
+    assert registry.is_superseded_key("entity", "never-existed") is False
+    assert registry.successors_of_key("entity", "never-existed") == ()
+
+
+def test_repeating_an_identical_supersession_is_the_same_act_and_not_a_second_one(registry):
+    unit = _entity(registry, "twice")
+    first = registry.supersede(unit.universal_id, authority="GOV", note="n")
+    again = registry.supersede(unit.universal_id, authority="GOV", note="n")
+    assert again == first
+    assert len(registry.supersessions()) == 1
+
+
+def test_an_active_supersession_may_not_be_rewritten(registry):
+    """The whole of what append-only means here: the record stands until a resurrection
+    appends the next one."""
+    unit = _entity(registry, "rewritten")
+    other = _entity(registry, "other")
+    registry.supersede(unit.universal_id, authority="GOV")
+    with pytest.raises(ExistenceError, match="may not be rewritten"):
+        registry.supersede(unit.universal_id, successors=(other.universal_id,), authority="GOV")
+
+
+def test_a_resurrection_must_name_its_authority(registry):
+    unit = _entity(registry, "returning")
+    registry.supersede(unit.universal_id, authority="GOV")
+    for absent in ("", "   "):
+        with pytest.raises(ExistenceError, match="must name its authority"):
+            registry.resurrect(unit.universal_id, authority=absent)
+
+
+def test_a_unit_that_is_not_superseded_cannot_be_resurrected(registry):
+    unit = _entity(registry, "never-gone")
+    with pytest.raises(ExistenceError, match="not superseded"):
+        registry.resurrect(unit.universal_id, authority="GOV")
+
+
+def test_a_cycle_in_the_specialization_graph_is_refused(registry):
+    """Forged: the chain walker is the one traversal every hierarchy uses, so a cycle in
+    it would loop forever rather than report."""
+    from dataclasses import replace
+
+    first = _classification(registry, "first")
+    second = _classification(registry, "second", specializes=first.universal_id)
+    looped = replace(first, attributes={ATTR_SPECIALIZES: second.universal_id})
+    registry._units[("classification", "first")] = looped
+    registry._by_id[first.universal_id] = ("classification", "first")
+    with pytest.raises(ExistenceError, match="cycle in the specialization graph"):
+        registry.ancestry(first.universal_id)
+
+
+def test_an_unbound_substrate_names_no_reference_frame(registry):
+    assert registry.is_context_bound is False
+    assert registry.context == {}
+    with pytest.raises(ExistenceError, match="not bound to any reference frame"):
+        registry.require_context()
+
+
+def test_the_seal_is_the_digest_and_both_move_only_with_the_registry(registry):
+    before = registry.seal()
+    assert before == registry.digest()
+    _entity(registry, "moves-the-seal")
+    assert registry.seal() != before
+
+
+def test_the_relationship_view_reads_the_registry_it_was_given(registry, view):
+    assert view.registry is registry
+
+
+def test_a_relationship_type_may_narrow_by_classification(registry, view):
+    a, b = _wire(registry, view)
+    permitted = _classification(registry, "permitted")
+    tagged = _entity(registry, "tagged", classification=permitted.universal_id)
+    registry.register(
+        ExistenceUnit(
+            form="relationship-type",
+            key="classified-only",
+            title="Classified Only",
+            attributes={"source_classifications": (permitted.universal_id,)},
+        )
+    )
+    assert view.relate("classified-only", tagged.universal_id, b, authority="T")
+    with pytest.raises(RelationshipAdmissibilityError, match="classification"):
+        view.relate("classified-only", a, b, authority="T")
+
+
+def test_the_view_answers_inbound_and_outbound_neighbourhoods(registry, view):
+    a, b = _wire(registry, view)
+    c = _entity(registry, "c").universal_id
+    view.relate("composes", a, b, authority="T")
+    view.relate("composes", b, c, authority="T")
+    assert view.neighbours(a) == (b,)
+    assert view.inbound(c) == (b,)
+    assert view.inbound(a) == ()
+    assert view.relationships(source=a, target=b)
+    assert view.relationships(source=a, target=c) == ()
+    assert view.reachable(a, "composes") == tuple(sorted((b, c)))
+    assert view.dangling() == ()
+
+
+def test_the_view_serialises_an_open_set_with_no_upper_limit(registry, view):
+    a, b = _wire(registry, view)
+    view.relate("composes", a, b, authority="T")
+    document = view.to_document()
+    assert document["count"] == 1
+    assert document["closed_set"] is False
+    assert document["upper_limit"] is None
+    assert document["dangling"] == []
+    assert len(view.digest()) == 64

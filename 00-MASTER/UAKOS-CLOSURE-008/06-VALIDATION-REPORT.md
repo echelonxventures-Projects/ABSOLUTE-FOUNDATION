@@ -59,7 +59,7 @@ The canonical layer records the deterministic RESULT of the gate. The execution 
 | command | `./verify.sh --full` |
 | invocation | --full (the certification contract; the bare invocation is --change, a developer mode that certifies nothing) |
 | contract artifacts | `verify.sh`, `scripts/ucos-env.sh` |
-| declared-stage digest (sha256) | `acf9f51676c06efc` |
+| declared-stage digest (sha256) | `4dc04f28aa98e872` |
 | result | **PASS** |
 
 | Gate (declared contract stage) | Result |
@@ -72,6 +72,11 @@ The canonical layer records the deterministic RESULT of the gate. The execution 
 | registry validate (schema + integrity) | PASS |
 | meta-constitutional conformance (CMG-INV-01..12) | PASS |
 | universal object governance (UGA-INV-01..10) | PASS |
+| universal context closure (every declared context invariant) | PASS |
+| context closure certification (UCOS-UCTX-001, Phase 10 claims at fixed point) | PASS |
+| context proposal gate (four declared gates, every discovered proposal) | PASS |
+| independent context provenance (MB7) | PASS |
+| independent producer verification (UFI, every declared adopter) | PASS |
 | autonomous universal evolution (UAUE gate, every declared obligation) | PASS |
 | evolution surface replay (history + 18 registers) | PASS |
 | universal object birth contract (UOBC-000001, identity before existence) | PASS |

@@ -675,3 +675,130 @@ def test_the_query_operation_gate_binding_is_enforced() -> None:
     assert exc.value.code == "UPA-CAPABILITY"
     assert "not bound to the QUERY operation" in exc.value.message
     assert ProviderOperation.VERIFY.value == "verify"
+
+
+# --------------------------------------------------------------------------------------
+# The refusals the gates carry that no test had ever produced.
+#
+# WHY THESE EXIST. Every gate above has a passing path and "at least one failing path" —
+# which is exactly the gap: a gate that reports SEVERAL distinct findings had only ever
+# produced one of them, so the others were unexecuted. A finding nobody has seen is a
+# sentence nobody has checked, and the whole value of a gate is the specificity of what it
+# says when it refuses.
+#
+# THE DESCRIPTORS ARE FORGED, and that is the finding restated. `ProviderDescriptor` and
+# `ProviderIdentity` refuse every one of these malformations at CONSTRUCTION, which is why
+# no test could reach the gate that also refuses them: the constructor gets there first.
+# The gate is not therefore redundant — a descriptor arriving from a catalog manifest, a
+# future release, or a hand-edited file has not passed through this process's constructor —
+# so the only way to show it working is to hand it the state the constructor forbids.
+# --------------------------------------------------------------------------------------
+
+
+def _forced(descriptor=None, **fields):
+    """A descriptor carrying a value its own constructor refuses."""
+    import copy
+
+    forged = copy.copy(descriptor if descriptor is not None else memo_descriptor())
+    identity_fields = {k: v for k, v in fields.items() if k in {"name", "authority", "kind"}}
+    if identity_fields:
+        identity = copy.copy(forged.identity)
+        for key, value in identity_fields.items():
+            object.__setattr__(identity, key, value)
+        object.__setattr__(forged, "identity", identity)
+    for key, value in fields.items():
+        if key not in identity_fields:
+            object.__setattr__(forged, key, value)
+    return forged
+
+
+def test_pv1_names_the_interface_the_descriptor_actually_declares() -> None:
+    descriptor = _forced(interface="some.other.interface")
+    result = InterfaceCompleteGate().evaluate(
+        _subject(descriptor=descriptor, instance=MemoProvider(memo_descriptor()))
+    )
+    assert result.status is GateStatus.FAIL
+    assert any("some.other.interface" in finding for finding in result.findings)
+
+
+def test_pv2_reports_a_malformed_kind_as_malformed_rather_than_absent() -> None:
+    result = KindOpenGate().evaluate(_subject(descriptor=_forced(kind="  ")))
+    assert result.status is GateStatus.FAIL
+    assert any("kind is malformed" in finding for finding in result.findings)
+
+
+@pytest.mark.parametrize(
+    ("field", "expected"),
+    [
+        ("name", "declares no name"),
+        ("authority", "declares no authority"),
+        ("source_of_record", "declares no source of record"),
+    ],
+)
+def test_pv3_names_each_missing_part_of_a_declared_identity(field, expected) -> None:
+    result = IdentityDeclaredGate().evaluate(_subject(descriptor=_forced(**{field: "   "})))
+    assert result.status is GateStatus.FAIL
+    assert any(expected in finding for finding in result.findings)
+
+
+def test_pv5_refuses_a_query_that_does_not_return_a_response() -> None:
+    """Determinism cannot be measured over something that is not a response, and reporting
+    "not deterministic" for it would be a wrong answer rather than no answer."""
+
+    class NotAResponse(MemoProvider):
+        def query(self, request):  # type: ignore[override]
+            return "not a ProviderResponse"
+
+    descriptor = memo_descriptor()
+    result = DeterminismGate().evaluate(
+        _subject(descriptor=descriptor, instance=NotAResponse(descriptor))
+    )
+    assert result.status is GateStatus.FAIL
+    assert any("did not return a ProviderResponse" in finding for finding in result.findings)
+
+
+def test_pv6_reports_a_refused_query_rather_than_an_unprovenanced_resource() -> None:
+    descriptor = memo_descriptor()
+    result = ProvenanceGate().evaluate(
+        _subject(descriptor=descriptor, instance=FaultyProvider(descriptor))
+    )
+    assert result.status is GateStatus.FAIL
+    assert any("query refused" in finding for finding in result.findings)
+
+
+def test_pv13_reports_a_kind_that_changed_inside_one_major_version_line() -> None:
+    """Removing a capability and changing the kind are different breaks, and a successor
+    that did both would otherwise be reported as only one of them."""
+    registry = ProviderRegistry()
+    registry.register(memo_descriptor(version="1.0.0"))
+    successor = _forced(memo_descriptor(version="1.1.0"), kind="memo.other")
+    result = AdditiveEvolutionGate().evaluate(_subject(descriptor=successor, registry=registry))
+    assert result.status is GateStatus.FAIL
+    assert any("declares kind" in finding for finding in result.findings)
+
+
+def test_pv14_refuses_a_descriptor_that_cannot_be_rebuilt_from_its_own_data(monkeypatch) -> None:
+    """Forged at the boundary the gate reads through: a descriptor whose serialisation
+    cannot be parsed back is a provider that is not expressible as data, and the gate must
+    say so rather than crash."""
+    from platform.universal_provider import validation as module
+
+    class _Unrebuildable:
+        @staticmethod
+        def from_dict(_payload):
+            raise ProviderValidationError("descriptor cannot be rebuilt", {})
+
+    # the subject is built FIRST: `ValidationSubject` type-checks through the same
+    # module-level name the gate rebuilds through, so patching before construction would
+    # forge the wrong boundary and refuse the subject instead of the round trip.
+    subject = _subject()
+    monkeypatch.setattr(module, "ProviderDescriptor", _Unrebuildable)
+    result = ExtensibilityGate().evaluate(subject)
+    assert result.status is GateStatus.FAIL
+    assert any("cannot be rebuilt" in finding for finding in result.findings)
+
+
+def test_the_validator_publishes_the_gates_it_will_run() -> None:
+    validator = ProviderValidator()
+    assert tuple(gate.gate_id for gate in validator.gates) == validator.gate_ids()
+    assert len(validator.gates) == len(default_gates())

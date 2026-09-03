@@ -12,6 +12,7 @@ from data.validation import (
     datum_checks,
     validate_datum,
 )
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
 
 
@@ -100,3 +101,10 @@ def test_active_datum_still_validates():
 def test_composite_datum_validates():
     d = make_datum("t", {"a": 1, "b": [2, 3]}, kind=DatumKind.COMPOSITE)
     assert validate_datum(d, _trace(d)).accepted
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    d = make_datum("ucos.core.string", "hello")
+    subject = DatumValidationSubject.from_datum(d, _trace(d))
+    assert_every_check_can_refuse(subject, datum_checks())

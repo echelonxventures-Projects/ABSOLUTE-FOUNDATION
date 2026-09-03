@@ -205,8 +205,23 @@ class KnowledgeDiscovery:
     # -- addressing ------------------------------------------------------------
 
     def locate(self, reference: str) -> RegisteredKnowledge | None:
-        """Resolve any address form to a record: id, provider:key, key, or digest."""
-        return self._registry.resolve(reference)
+        """Resolve any address form to a record: id, provider:key, key, or digest.
+
+        THE BARE PROVIDER-LOCAL KEY WAS AN ADDRESS THIS METHOD REFUSED. ``reference_map``
+        admits it while it stays unambiguous — that is what lets a provider cite a peer by
+        the peer's own key — and :meth:`addresses_of` therefore REPORTED it, under a
+        docstring promising every address it returns resolves. ``KnowledgeRegistry.resolve``
+        consults only the ``provider:key`` index, so the bare form resolved in relationship
+        resolution and not here: one address, two answers, and the discoverability check
+        (:meth:`is_discoverable`) could never see the disagreement because it addresses by
+        identifier. The alias map this object already holds is consulted as the last step,
+        so every address discovery advertises is an address discovery answers to.
+        """
+        direct = self._registry.resolve(reference)
+        if direct is not None:
+            return direct
+        alias = self._aliases.get(reference)
+        return self._registry.get(alias) if alias else None
 
     def addresses_of(self, knowledge_id: str) -> tuple[str, ...]:
         """Every address that resolves to this record."""

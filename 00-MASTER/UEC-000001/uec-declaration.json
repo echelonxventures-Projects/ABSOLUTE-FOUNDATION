@@ -1288,6 +1288,30 @@
       "kind": "VERIFY_STAGE",
       "owner": "UCOS-UCTX-001",
       "rule_id": "UEC-R-05"
+    },
+    {
+      "identity": "engine/substrate/gate.py",
+      "kind": "MODULE_GATE",
+      "owner": "UCOS-SUB-001 (substrate consumption)",
+      "rule_id": "UEC-R-02"
+    },
+    {
+      "identity": "00-MASTER/UCOS-SUB-001/sub-declaration.json",
+      "kind": "DECLARATION",
+      "owner": "UCOS-SUB-001 (substrate consumption)",
+      "rule_id": "UEC-R-06"
+    },
+    {
+      "identity": ".github/workflows/sub-gate.yml",
+      "kind": "WORKFLOW",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-03"
+    },
+    {
+      "identity": "substrate-gate",
+      "kind": "MAKE_GATE_TARGET",
+      "owner": "gate owner",
+      "rule_id": "UEC-R-04"
     }
   ],
   "laws": [
@@ -1409,9 +1433,9 @@
     "discovery_floor_total": 130,
     "engines_with_no_invoker": 6,
     "engines_without_a_test": 18,
-    "governed_artifacts": 193,
-    "engines_without_a_refusal_witness": 20,
-    "$engines_without_a_refusal_witness": "20 of 51 verifiers at the commit that introduced UEC-L-14. Two more are NAMED by a test that never forges a refusal — the green tick without a law that test_bindings warns about, now visible as the gap between engines_without_a_test (18) and this counter (20). May fall; may never rise."
+    "governed_artifacts": 197,
+    "engines_without_a_refusal_witness": 19,
+    "$engines_without_a_refusal_witness": "20 of 51 verifiers at the commit that introduced UEC-L-14. Now 19 of 52: UCOS-SUB-001 registered engine/substrate/gate.py as a governed MODULE_GATE and test_substrate_consumption.py forges its refusal, so it left this list in the same edit that added it to the inventory. One engine is still NAMED by a test that never forges a refusal — the green tick without a law that test_bindings warns about, visible as the gap between engines_without_a_test (18) and this counter (19). May fall; may never rise."
   },
   "self_coverage": {
     "$comment": "Discovery D-09 — 'trust anchor -> REG-AUTO-001, itself unregistered' — promoted from a dependency edge into an executable invariant. Every artifact below must be located by UEC's own discovery rules AND present in UEC's own governed inventory AND satisfy the two-plane and test-binding laws UEC applies to everything else. A closure mechanism outside its own closure is the defect, not the exception to it.",

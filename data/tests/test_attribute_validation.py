@@ -4,8 +4,10 @@ from __future__ import annotations
 
 from dataclasses import replace
 
+import pytest
+
 from data.attribute import make_attribute
-from data.attribute_meta import AttributeKind, AttributeState
+from data.attribute_meta import ATTRIBUTE_META_CLASS, AttributeKind, AttributeState
 from data.attribute_traceability import build_attribute_traceability
 from data.attribute_validation import (
     AttributeValidationSubject,
@@ -13,7 +15,9 @@ from data.attribute_validation import (
     validate_attribute,
 )
 from data.datum import make_datum
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
+from engine.validation.executor import ValidationEngine
 
 
 def _value_datum():
@@ -119,7 +123,6 @@ def test_untraced_attribute_fails_traceability_gate():
     trace = _trace(a)
     subject = AttributeValidationSubject.from_attribute(a, trace)
     subject = replace(subject, provenance_chain=())  # orphaned lineage
-    from engine.validation.executor import ValidationEngine
 
     report = ValidationEngine(attribute_checks()).validate(subject)
     assert report.verdict is Verdict.FAIL
@@ -152,3 +155,89 @@ def test_derived_attribute_with_provenance_validates():
 def test_active_attribute_still_validates():
     a = _attr(state=AttributeState.ACTIVE)
     assert validate_attribute(a, _trace(a)).accepted
+
+
+# --- Refusal witnesses ------------------------------------------------------------
+# Every check above was only ever observed PASSING. A check whose failure arm is never
+# executed is an unproven refusal: it would satisfy the suite just as well by returning
+# `self._passed()` unconditionally. Each row below forges the one condition the named
+# check exists to catch, and asserts that check is among the blocking failures — `among`
+# and not `equals`, because one malformed field legitimately offends several checks
+# (an empty type_tag fails attr-typed AND the DAA-K1 half of meta-constraints).
+
+REFUSALS = [
+    ({"type_tag": "   "}, "attr-typed"),
+    ({"name": " "}, "attr-named"),
+    ({"target_id": "ATTR-1"}, "attr-identified"),
+    ({"value_digest": "cafe"}, "data-value-fidelity"),  # wrong length
+    ({"value_digest": "z" * 64}, "data-value-fidelity"),  # right length, not hex
+    ({"value_datum_id": "UCOS-THING-1"}, "attr-values-datum"),
+    ({"absorbs_value": True}, "attr-values-datum"),  # DMX-02: absorbed, not referenced
+    ({"bearing_entity_ref": ""}, "attr-single-bearing"),
+    ({"nullability_declared": False}, "attr-nullability-declared"),
+    ({"kind": "ucos.attribute.kind.invented"}, "attr-classified"),
+    ({"kind": AttributeKind.RELATIONAL.value}, "attr-relational-by-reference"),  # no target
+    ({"references_entity": "UCOS-ENTITY-REF:x"}, "attr-relational-by-reference"),  # not relational
+    ({"kind": AttributeKind.DERIVED.value}, "attr-derivation-provenance"),  # no provenance
+    ({"derived_from": ("UCOS-ATTR-x-0",)}, "attr-derivation-provenance"),  # not derived
+    ({"meta_class": "DMC-99"}, "meta-class-single"),
+    ({"relationships": ("DMR-99-invented",)}, "meta-relationships-closed"),
+    ({"name": "", "type_tag": ""}, "meta-constraints"),
+    ({"founding_acyclic": False}, "founding-acyclic"),
+    ({"lifecycle_state": "molten"}, "lifecycle-valid"),
+    ({"redefines_el1": True}, "foundation-reuse-integrity"),
+    ({"substrate_refs": ()}, "foundation-reuse-integrity"),
+    ({"storage_selected": True}, "storage-independence"),
+    ({"selects_technology": True}, "storage-independence"),
+    ({"image_reference": "postgres:16"}, "storage-independence"),
+    ({"confers_authority": True}, "non-constitutive"),
+    ({"embeds_secret": True}, "non-constitutive"),
+    ({"disclosure": {}}, "provisional-state-disclosure"),
+    ({"provenance_chain": ()}, "traceability-rooted"),
+    ({"provenance_chain": ("something-else", "10-DATA@1")}, "traceability-rooted"),  # unrooted
+    ({"provenance_chain": (ATTRIBUTE_META_CLASS,)}, "traceability-rooted"),  # never reaches 10-DATA
+]
+
+
+@pytest.mark.parametrize(
+    ("mutation", "check_id"), REFUSALS, ids=[f"{cid}-{i}" for i, (_, cid) in enumerate(REFUSALS)]
+)
+def test_each_check_refuses_the_condition_it_polices(mutation, check_id):
+    a = _attr()
+    subject = replace(AttributeValidationSubject.from_attribute(a, _trace(a)), **mutation)
+    report = ValidationEngine(attribute_checks()).validate(subject)
+    assert report.verdict is Verdict.FAIL
+    assert check_id in {f.check_id for f in report.blocking_failures}
+
+
+def test_a_relational_attribute_with_a_target_and_a_derived_one_with_provenance_pass():
+    """The satisfied arms of the two conditional checks, so the table above proves refusal
+    and not merely that the branch is hostile to every input."""
+    a = _attr()
+    base = AttributeValidationSubject.from_attribute(a, _trace(a))
+    relational = replace(
+        base, kind=AttributeKind.RELATIONAL.value, references_entity="UCOS-ENTITY-REF:other"
+    )
+    derived = replace(base, kind=AttributeKind.DERIVED.value, derived_from=("UCOS-ATTR-x-0",))
+    for subject in (relational, derived):
+        assert ValidationEngine(attribute_checks()).validate(subject).verdict is Verdict.PASS
+
+
+# --- Every check, not only the ones the table above remembered --------------------------
+#
+# The REFUSALS table proves the checks it names. It cannot prove the ones it forgot, and it
+# cannot notice a check ADDED after it was written: a new arm inherits the table's silence and
+# the suite stays green over a refusal nobody ever saw refuse. So the same argument is made a
+# second way, deriving both sides — the checks from `attribute_checks()` and the corruptions
+# from the subject's own declared fields — with the driver authored once in `engine/tests`
+# (UCKP-ART-03) and shared with every other check suite in the repository.
+#
+# The table stays. It is the READABLE half: each row says which condition a named check exists
+# to catch, which is a claim about intent that a derived sweep cannot make. This test is the
+# COMPLETE half, and completeness is what the table cannot promise.
+
+
+def test_every_attribute_check_refuses_something():
+    a = _attr()
+    subject = AttributeValidationSubject.from_attribute(a, _trace(a))
+    assert_every_check_can_refuse(subject, attribute_checks())

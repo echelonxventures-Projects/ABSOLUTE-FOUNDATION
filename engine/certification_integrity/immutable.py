@@ -56,6 +56,50 @@ READY_MARKER = ".uci-extraction-ready.json"
 PYTHON_PLACEHOLDER = "{python}"
 
 
+#: The ambient measurement environment a measuring subprocess must never inherit.
+#:
+#: ``COVERAGE_FILE`` was already named here: an inherited value corrupts a parent's data file, and
+#: engine/verification_intelligence/execution.py records the repository paying for that once. The
+#: ``COV_CORE_*`` triple is the same defect one layer down and it cost a second time. pytest-cov
+#: installs a ``.pth`` that AUTO-STARTS coverage in every Python subprocess these variables reach,
+#: and it starts it with pytest-cov's own settings rather than this repository's — so a subprocess
+#: spawned from inside a pytest-cov session wrote STATEMENT-ONLY data, in the parallel filename
+#: form, beside the parent's data file. `[tool.coverage.run] branch = true` never applied to it,
+#: because the bootstrap does not read this repository's configuration.
+#:
+#: MEASURED, AND THE FAILURE IS WORSE THAN A WRONG NUMBER. `coverage combine` refuses to merge
+#: statement data with branch data, so pytest-cov's own teardown raised
+#: ``DataError: Can't combine statement coverage data with branch data`` and took the whole shard
+#: down with an INTERNALERROR — after every test in it had passed. Four of thirteen shards died
+#: that way, the combine over the survivors then failed too, and `./verify.sh` reported the
+#: coverage gate as FAILED with a figure (71%) that was not a measurement of anything.
+#:
+#: This is stripped rather than overridden because there is no correct value: a subprocess this
+#: package launches is measuring a FROZEN EXTRACTION on its own terms, and any contribution to the
+#: outer session's data file is contamination of exactly the kind Rule 7 exists to prevent.
+AMBIENT_MEASUREMENT_VARS = (
+    "COVERAGE_FILE",
+    "COV_CORE_SOURCE",
+    "COV_CORE_CONFIG",
+    "COV_CORE_DATAFILE",
+    "COV_CORE_CONTEXT",
+)
+
+
+def clean_environment(**overrides: str) -> dict[str, str]:
+    """The parent environment with every ambient measurement variable removed.
+
+    One authoring, used by every site that spawns a measuring subprocess (UCKP-ART-03): the
+    extraction runner, the shard combiner, and the suites that exercise them. A second copy of
+    this list is exactly how one of the sites would silently keep leaking.
+    """
+    environment = {
+        key: value for key, value in os.environ.items() if key not in AMBIENT_MEASUREMENT_VARS
+    }
+    environment.update(overrides)
+    return environment
+
+
 @dataclass(frozen=True)
 class Fingerprint:
     """An outer-repository state sample. Equality is the whole point of the type."""
@@ -387,11 +431,9 @@ def run(
     extraction = prepare(root, resolved, workspace=workspace, build_venv=build_venv, reuse=reuse)
 
     argv = [extraction.python if part == PYTHON_PLACEHOLDER else part for part in command]
-    environment = dict(os.environ)
-    # The extraction must not inherit a COVERAGE_FILE pointing at the outer tree. The repository
-    # has already paid for an inherited value once: engine/verification_intelligence/execution.py
-    # records that an ambient COVERAGE_FILE corrupted a parent's data file.
-    environment.pop("COVERAGE_FILE", None)
+    # The extraction must inherit no ambient measurement environment at all — see
+    # AMBIENT_MEASUREMENT_VARS for what each variable does and what each one cost.
+    environment = clean_environment()
     environment["PYTHONHASHSEED"] = environment.get("PYTHONHASHSEED", "0")
     if env:
         environment.update(env)

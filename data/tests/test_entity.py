@@ -80,7 +80,10 @@ def test_attribute_ref_projects_only_identity_and_fingerprint():
 def test_entity_identity_is_deterministic_and_structure_derived():
     a = _entity()
     b = _entity()
-    c = _entity(name="different.entity", attributes=(_borne_attr(bearing=entity_ref_for("different.entity")),))
+    c = _entity(
+        name="different.entity",
+        attributes=(_borne_attr(bearing=entity_ref_for("different.entity")),),
+    )
     assert a.entity_id == b.entity_id  # same structure → same ENG-001 identity
     assert a.entity_id != c.entity_id  # different name/structure → different identity
 
@@ -192,3 +195,18 @@ def test_multi_attribute_entity_is_bounded():
     assert e.attribute_count == 2
     assert e.is_bounded() is True
     assert set(e.borne_attribute_ids()) == {a1.attribute_id, a2.attribute_id}
+
+
+# --------------------------------------------------------------------------------------
+# Every constructor guard, shown refusing (see data/tests/test_schema.py for the argument).
+# --------------------------------------------------------------------------------------
+
+from engine.tests import assert_every_guard_can_refuse  # noqa: E402
+
+
+def test_every_attribute_ref_guard_can_refuse():
+    assert_every_guard_can_refuse(_entity().attribute_refs[0])
+
+
+def test_every_entity_guard_can_refuse():
+    assert_every_guard_can_refuse(_entity())

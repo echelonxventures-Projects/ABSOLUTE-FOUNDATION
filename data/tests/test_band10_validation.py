@@ -31,6 +31,7 @@ from data.band10_validation import (
     band10_checks,
     validate_band10,
 )
+from engine.tests import assert_every_check_can_refuse
 
 _FULL_INTEGRATION = {
     "all_members_certified": True,
@@ -110,12 +111,18 @@ def test_value_fidelity_fails_on_bad_digest():
 
 
 def test_inventory_complete_fails():
-    assert _passes(BandInventoryCompleteCheck(), replace(_subject(), inventory_complete=False)) is False
+    assert (
+        _passes(BandInventoryCompleteCheck(), replace(_subject(), inventory_complete=False))
+        is False
+    )
     assert _passes(BandInventoryCompleteCheck(), replace(_subject(), unit_count=3)) is False
 
 
 def test_all_units_certified_fails():
-    assert _passes(BandAllUnitsCertifiedCheck(), replace(_subject(), all_units_certified=False)) is False
+    assert (
+        _passes(BandAllUnitsCertifiedCheck(), replace(_subject(), all_units_certified=False))
+        is False
+    )
 
 
 def test_meta_class_coverage_fails():
@@ -124,15 +131,23 @@ def test_meta_class_coverage_fails():
 
 
 def test_relationship_closure_fails():
-    assert _passes(BandRelationshipClosureCheck(), replace(_subject(), integration_closed=False)) is False
+    assert (
+        _passes(BandRelationshipClosureCheck(), replace(_subject(), integration_closed=False))
+        is False
+    )
 
 
 def test_metamodel_integration_fails():
-    assert _passes(BandMetaModelIntegrationCheck(), replace(_subject(), integration_closed=False)) is False
+    assert (
+        _passes(BandMetaModelIntegrationCheck(), replace(_subject(), integration_closed=False))
+        is False
+    )
 
 
 def test_founding_acyclic_fails():
-    assert _passes(BandFoundingAcyclicCheck(), replace(_subject(), dependency_acyclic=False)) is False
+    assert (
+        _passes(BandFoundingAcyclicCheck(), replace(_subject(), dependency_acyclic=False)) is False
+    )
 
 
 def test_versioned_fails():
@@ -203,3 +218,8 @@ def test_validate_band10_strict_raises_on_bad_completion():
     trace = build_band10_traceability(short, unit="EC3-B10-U12", forward=("a", "b"))
     with pytest.raises(Exception):
         validate_band10(short, trace, strict=True)
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    assert_every_check_can_refuse(_subject(), band10_checks())

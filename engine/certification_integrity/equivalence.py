@@ -34,7 +34,7 @@ import os
 import subprocess
 from dataclasses import dataclass, field
 
-from engine.certification_integrity import coverage_data, suite
+from engine.certification_integrity import coverage_data, immutable, suite
 from engine.certification_integrity.model import IntegrityError
 
 
@@ -358,8 +358,11 @@ def _combine(root: str, python: str, data_files: list[str]) -> str:
             "nothing, which is the failure engine/verification_intelligence/execution.py also "
             "refuses by name"
         )
-    env = dict(os.environ)
-    env["COVERAGE_FILE"] = os.path.join(root, ".uci-combined.data")
+    # No ambient measurement environment reaches these subprocesses: pytest-cov's bootstrap
+    # would otherwise auto-start a second, unconfigured coverage inside `coverage combine`
+    # itself and write statement-only data beside the caller's branch data. The set stripped
+    # is named once, in immutable.AMBIENT_MEASUREMENT_VARS.
+    env = immutable.clean_environment(COVERAGE_FILE=os.path.join(root, ".uci-combined.data"))
     env.pop("PYTHONHASHSEED", None)
     combine = subprocess.run(  # noqa: S603
         [python, "-m", "coverage", "combine", "--keep", *present],

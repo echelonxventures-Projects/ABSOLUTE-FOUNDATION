@@ -11,6 +11,7 @@ from data.relationship_validation import (
     relationship_checks,
     validate_relationship,
 )
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Severity
 
 UNIT = "EC3-B10-U10"
@@ -127,9 +128,7 @@ def test_directionality_check_fails_when_undeclared():
 
 
 def test_referential_integrity_fails_when_unresolved():
-    assert (
-        _run(_subject(endpoints_resolve=False))["relationship-referential-integrity"] is False
-    )
+    assert _run(_subject(endpoints_resolve=False))["relationship-referential-integrity"] is False
 
 
 def test_founding_acyclic_rule_fails_when_self_founding():
@@ -143,9 +142,7 @@ def test_non_absorbing_fails_when_absorbing():
 
 
 def test_binds_policy_fails_on_bad_ref():
-    assert (
-        _run(_subject(policy_ref="nope"))["relationship-binds-policy-by-reference"] is False
-    )
+    assert _run(_subject(policy_ref="nope"))["relationship-binds-policy-by-reference"] is False
 
 
 def test_binds_policy_fails_when_not_by_reference():
@@ -233,3 +230,8 @@ def test_traceability_rooted_fails_on_wrong_root():
 
 def test_traceability_rooted_fails_without_anchor():
     assert _run(_subject(provenance_chain=("DMC-04", "DATA-008")))["traceability-rooted"] is False
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    assert_every_check_can_refuse(_subject(), relationship_checks())

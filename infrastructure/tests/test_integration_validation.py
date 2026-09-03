@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from engine.tests import assert_every_check_can_refuse
 from infrastructure.integration import make_dependency
 from infrastructure.integration_meta import REALIZATION_UNIT
 from infrastructure.integration_traceability import build_traceability
 from infrastructure.integration_validation import (
+    IntegrationValidationSubject,
     integration_checks,
     validate_dependency,
 )
@@ -31,7 +33,6 @@ def _trace(edge):
 
 
 class TestValidationSuite:
-
     def test_suite_has_eighteen_checks(self):
         assert len(integration_checks()) == 18
 
@@ -70,3 +71,11 @@ class TestValidationSuite:
         passed = {f.check_id: f.passed for f in result.report.findings}
         assert not passed["dependency-endpoints-resolve"]
         assert not result.accepted
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    _e = _edge()
+    assert_every_check_can_refuse(
+        IntegrationValidationSubject.from_construct(_e, _trace(_e)), integration_checks()
+    )

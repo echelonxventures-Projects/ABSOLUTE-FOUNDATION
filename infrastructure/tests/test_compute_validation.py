@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 
+from engine.tests import assert_every_check_can_refuse
 from engine.validation.contracts import Verdict
 from engine.validation.executor import ValidationEngine
 from infrastructure.compute import make_compute_resource
@@ -165,9 +166,7 @@ def test_missing_execution_host_fails_hosts_execution_gate():
         _subject(hosts_execution_by_reference=False),
         "infra-compute-hosts-execution-by-reference",
     )
-    assert _fails(
-        _subject(execution_host_ref="   "), "infra-compute-hosts-execution-by-reference"
-    )
+    assert _fails(_subject(execution_host_ref="   "), "infra-compute-hosts-execution-by-reference")
 
 
 def test_wrong_meta_class_fails_meta_class_gate():
@@ -270,3 +269,8 @@ def test_real_technology_bearing_resource_is_rejected():
     result = validate_compute(r, _trace(r))
     assert result.accepted is False
     assert "technology-independence" in {f.check_id for f in result.report.blocking_failures}
+
+
+def test_every_check_can_refuse_something():
+    """Each declared check has a reachable failure arm — see engine/tests/__init__.py."""
+    assert_every_check_can_refuse(_subject(), compute_checks())

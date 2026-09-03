@@ -15,6 +15,9 @@ import json
 from dataclasses import replace
 from pathlib import Path
 
+import pytest
+
+from intelligence.rie.__main__ import main as cli_main
 from intelligence.rie.canonical import canonical_json, sha256_text
 from intelligence.rie.config import MemorySink, RepoConfig
 from intelligence.rie.engine import RepositoryIntelligenceEngine, build_model
@@ -273,3 +276,119 @@ def test_no_canonical_output_carries_a_coverage_field() -> None:
         "canonical model carries coverage-derived fields, which makes its identity a "
         f"function of test-execution state: {found}"
     )
+
+
+# --------------------------------------------------------------------------- the CLI
+#
+# ``python -m intelligence.rie`` was 62 units at 0.0%, and the cost of that was not academic:
+# ``answer`` — one of the five subcommands its own docstring documents — raised
+# ``KeyError: 'coverage_line_pct'`` on every invocation. UCOS-CL-005 correctly removed that key
+# from the canonical model (see the four tests above); the projection that read it was never
+# updated, and nothing executed the projection, so a broken documented command shipped.
+#
+# Each test below therefore calls ``main`` with the argv an operator would type, and the first
+# one asserts the whole answer document is serialisable rather than only that the call returned 0.
+
+
+def _run(capsys, *argv: str) -> tuple[int, str]:  # noqa: ANN001 - pytest fixture type
+    code = cli_main(list(argv))
+    return code, capsys.readouterr().out
+
+
+def test_the_answer_subcommand_answers_instead_of_raising(capsys) -> None:  # noqa: ANN001
+    """The regression witness for ``KeyError: 'coverage_line_pct'``."""
+    code, out = _run(capsys, "answer")
+    assert code == 0
+    answers = json.loads(out)
+    assert set(answers) == {
+        "what_exists",
+        "what_is_implemented",
+        "what_remains",
+        "what_is_blocked",
+        "what_is_executable",
+        "critical_path",
+        "current_repository_state",
+        "is_aeos_ready",
+    }
+    assert "coverage" not in canonical_json(answers), (
+        "the answer document must not quote a coverage figure: coverage.xml is "
+        "TEST_EXECUTION_STATE, so an answer carrying it would differ in a pristine clone"
+    )
+    assert answers["what_is_implemented"].startswith("engine EC-1 + platform EC-2")
+
+
+def test_the_snapshot_subcommand_emits_the_sealed_snapshot(capsys) -> None:  # noqa: ANN001
+    code, out = _run(capsys, "snapshot")
+    assert code == 0
+    snapshot = json.loads(out)
+    assert snapshot["authority"] == "NONE (derived truth)"
+    assert snapshot["content_hash"] == _engine().outputs()["UCOS-RIE-SNAPSHOT.json"]["content_hash"]
+
+
+def test_the_verify_subcommand_returns_the_determinism_verdict(capsys) -> None:  # noqa: ANN001
+    code, out = _run(capsys, "verify")
+    result = json.loads(out)
+    assert (code == 0) is (result["deterministic"] is True), (
+        "the exit code must be the report's own verdict; deciding it separately would let the "
+        "shell and the document disagree about one run"
+    )
+    assert code == 0
+
+
+def test_the_build_subcommand_writes_into_the_repo_it_is_given(
+    tmp_path: Path,
+    capsys,  # noqa: ANN001
+) -> None:
+    """``--repo`` is honoured, so the build is provable without touching Repository Truth.
+
+    ``build`` against the live tree would rewrite four tracked artifacts mid-certification —
+    the defect ``test_engine_writes_only_under_intelligence_dir`` above exists to prevent — so
+    the subcommand is exercised against a copy of the evidence the engine reads.
+    """
+    for relative in (
+        "00-BOOK/DATA/control-tower.json",
+        "00-BOOK/DATA/artifacts.json",
+        "00-BOOK/DATA/certification.json",
+        "00-BOOK/DATA/twin.json",
+        "00-BOOK/DATA/volumes.json",
+    ):
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((REPO / relative).read_bytes())
+
+    code, out = _run(capsys, "--repo", str(tmp_path), "build")
+    assert code == 0
+    assert "RIE: regenerated" in out
+    assert out.count("  - ") >= 1, "a build that names no artifact reports nothing"
+    written = sorted(p.name for p in (tmp_path / "intelligence").rglob("*.json"))
+    assert written, "the build reported outputs it did not write"
+    assert not list((REPO / "intelligence").glob("__absent__")), "sanity: no stray write path"
+
+
+def test_the_portal_subcommand_generates_pages_where_it_is_told(
+    tmp_path: Path,
+    capsys,  # noqa: ANN001
+) -> None:
+    out_dir = tmp_path / "portal"
+    code, out = _run(capsys, "portal", "--out", str(out_dir))
+    assert code == 0
+    assert "RIE portal: generated" in out
+    pages = sorted(p.name for p in out_dir.iterdir())
+    assert pages, "the portal reported pages it did not write"
+    for page in pages:
+        assert f"  - {page}" in out, f"{page} was written but not reported"
+
+
+def test_an_explicit_repo_root_is_resolved_rather_than_assumed(capsys) -> None:  # noqa: ANN001
+    """``--repo .`` must reach the same snapshot as the auto-resolved default."""
+    code, explicit = _run(capsys, "--repo", str(REPO), "snapshot")
+    assert code == 0
+    code, implicit = _run(capsys, "snapshot")
+    assert code == 0
+    assert json.loads(explicit)["content_hash"] == json.loads(implicit)["content_hash"]
+
+
+def test_a_subcommand_is_required() -> None:
+    with pytest.raises(SystemExit) as raised:
+        cli_main([])
+    assert raised.value.code == 2, "argparse.error exits 2; a caller must not read it as a pass"

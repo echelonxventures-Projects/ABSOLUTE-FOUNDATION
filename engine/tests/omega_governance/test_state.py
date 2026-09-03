@@ -42,6 +42,7 @@ from engine.omega_governance.state import (
     Transition,
     TransitionGraph,
     advance,
+    assert_total,
     census,
     check,
     default_graph,
@@ -339,14 +340,10 @@ def test_assert_total_refuses_a_population_silent_about_a_registered_axis() -> N
         # Import the __init__ so the package's own module executes under measurement.
         __import__("engine.omega_governance")
         raise_if = GovernanceStatus((UNKNOWN,))
-        from engine.omega_governance.state import assert_total
-
         assert_total([("a", raise_if)], registry)
 
 
 def test_assert_total_accepts_a_population_with_a_position_on_every_axis() -> None:
-    from engine.omega_governance.state import assert_total
-
     registry = default_states()
     assert_total([("a", initial_status(registry)), ("b", initial_status(registry))], registry)
 
@@ -392,3 +389,128 @@ def test_an_empty_registry_reports_no_axes_rather_than_raising() -> None:
     empty = StateRegistry(seed=())
     assert len(empty) == 0
     assert empty.axes() == ()
+
+
+# --------------------------------------------------------------------------------------
+# The refusals the vocabulary itself carries.
+#
+# WHY THESE EXIST. The suite above proves what the SIX AXES mean and what the graph
+# permits. The registry and the transition record carry their own refusals — a name
+# redeclared with a different meaning, a transition from a state to itself, a transition
+# with no rule id, two transitions claiming one rule id — and none of them had ever fired.
+# Each refuses a way the vocabulary could quietly stop meaning one thing, which is the
+# failure mode a vocabulary has.
+# --------------------------------------------------------------------------------------
+
+
+def test_redeclaring_a_state_identically_is_the_same_declaration(tmp_axis=None):
+    registry = StateRegistry()
+    first = registry.declare(GOVERNED)
+    assert registry.declare(GOVERNED) is first
+    assert GOVERNED in registry.known()
+
+
+def test_one_name_may_not_carry_two_meanings():
+    """A name that means two things makes every rule about it unenforceable."""
+    from dataclasses import replace
+
+    registry = StateRegistry()
+    registry.declare(GOVERNED)
+    with pytest.raises(StateError, match="different"):
+        registry.declare(replace(GOVERNED, description="something else entirely"))
+    with pytest.raises(StateError, match="different"):
+        registry.declare(replace(GOVERNED, initial=not GOVERNED.initial))
+
+
+def test_extra_states_are_declared_into_the_default_registry():
+    extra = GovernanceState(
+        axis=GOVERNED.axis, name="PROVISIONALLY_GOVERNED", description="a future position."
+    )
+    registry = default_states((extra,))
+    assert extra in registry.known()
+    assert registry.known() == tuple(sorted(registry.known()))
+
+
+def test_a_transition_from_a_state_to_itself_is_refused():
+    with pytest.raises(StateError):
+        Transition(source=GOVERNED, target=GOVERNED, rule="Ω-R-SELF")
+
+
+def test_a_transition_with_no_rule_id_cannot_be_cited_by_an_audit_record():
+    with pytest.raises(StateError, match="rule id"):
+        Transition(source=UNGOVERNED, target=GOVERNED, rule="   ")
+
+
+def _synthetic_axis():
+    axis = Axis(name="SYNTHETIC", description="An axis declared by this test alone.")
+    start = GovernanceState(axis=axis, name="SYN_START", description="start.", initial=True)
+    middle = GovernanceState(axis=axis, name="SYN_MIDDLE", description="middle.")
+    end = GovernanceState(axis=axis, name="SYN_END", description="end.")
+    return start, middle, end
+
+
+def test_two_transitions_may_not_claim_one_rule_id():
+    """A rule id is what an audit record cites, so two edges under one id make the record
+    ambiguous about which change it authorised."""
+    start, middle, end = _synthetic_axis()
+    graph = TransitionGraph()
+    graph.register(Transition(source=start, target=middle, rule="Ω-R-SYNTHETIC"))
+    with pytest.raises(StateError, match="ambiguous"):
+        graph.register(Transition(source=middle, target=end, rule="Ω-R-SYNTHETIC"))
+
+
+def test_one_edge_may_not_be_declared_twice():
+    start, middle, _end = _synthetic_axis()
+    graph = TransitionGraph()
+    graph.register(Transition(source=start, target=middle, rule="Ω-R-ONE"))
+    with pytest.raises(StateError, match="table order"):
+        graph.register(Transition(source=start, target=middle, rule="Ω-R-TWO"))
+
+
+def test_extra_transitions_are_registered_into_the_default_graph():
+    start, middle, _end = _synthetic_axis()
+    extra = Transition(source=start, target=middle, rule="Ω-R-SYNTHETIC-EXTRA")
+    graph = default_graph((extra,))
+    assert graph.edge(start, middle) is extra
+    assert len(graph) > 1
+
+
+def test_a_status_reports_its_axes_and_its_record():
+    status = initial_status(default_states())
+    assert status.axes() == tuple(sorted(status.axes()))
+    assert len(status.axes()) == len(status.states)
+    record = status.as_record()
+    assert set(record) == {axis.name for axis in status.axes()}
+    assert all(state in status for state in status.states)
+    _start, middle, _end = _synthetic_axis()
+    assert middle not in status
+    assert "not a state" not in status
+
+
+def test_a_change_that_cannot_be_made_is_reported_rather_than_performed():
+    """A gate must report every refusal in a population rather than stop at the first, which
+    is why the refusal comes back as a reason and never as an exception."""
+    graph = default_graph()
+    status = initial_status(default_states())
+
+    already = status.position(GOVERNED.axis)
+    change, reason = check(status, already, graph=graph)
+    assert change is None
+    assert "already at" in reason
+
+    change, reason = check(status, CERTIFIED, graph=TransitionGraph())
+    assert change is None
+    assert reason
+
+    _start, middle, _end = _synthetic_axis()
+    change, reason = check(status, middle, graph=graph)
+    assert change is None
+    assert reason
+
+
+def test_advancing_a_subject_with_no_identity_is_refused():
+    """An audit record about an unnamed artifact cannot be joined to the artifact it
+    describes, so the record and the change are refused together."""
+    status = initial_status(default_states())
+    with pytest.raises(StateError, match="name its subject"):
+        advance(status, GOVERNED, subject="   ", graph=default_graph())

@@ -19,7 +19,16 @@
     "unmeasured_governance_engines": 2
   },
   "how_to_read": "best[m] is the lowest value of metric m this repository has ever recorded. A run measuring more than best[m] is REFUSED unless justifications names m with a reason. A justification permits one run and never moves best[m], so a regression cannot become the new normal by being explained. holds[m] counts consecutive runs at an unchanged value; a CONVERGENT metric held at a non-zero value for 5 runs is reported STALLED, because an exemption class that stops shrinking has become a convention. floors[m] argues that a particular value IS m's floor and so accepts the stall — it does NOT excuse a regression, and it is refused as stale the moment m is measured below it.",
-  "justifications": [],
+  "justifications": [
+    {
+      "metric": "executable_outside_denominator",
+      "reason": "UCOS-UCTX-001 added six executables under 00-BOOK/tools/ after this bound was sealed at 3c1a2530 — ufi.py, ukctx.py, ukctx_gate.py, ukctx_verify.py, ukctx_assimilate.py and ukctx_certify.py. The debt is REAL and is not disputed here: every one of them is invoked (verify.sh runs ukctx_gate.py; ukctx.py build regenerates the context projection) and none of them is measured. It cannot be repaid by a coverage setting. Ω-1 derives the denominator from tracked module paths, and derive_measurable_packages skips any root that is not a Python identifier — '00-BOOK' never can be — so no --cov flag, no source path and no declared exemption can reach these files; an excluded_packages entry naming 00-BOOK.tools would additionally be refused as stale by platform/tests/test_coverage_scope.py, which requires an exempt package to be one the derivation could otherwise have measured. The two routes that would actually repay it are relocating the six into an importable package behind thin 00-BOOK/tools/ shims, or admitting a path-shaped source root to the derivation. Both change the producer chain of generated artifacts and the Ω-1 derivation contract, which is an owner decision and not a side effect of a coverage pass. This is recorded as a JUSTIFICATION and not as a floor or a re-seed precisely because a justification does not move best: the repository is still held to the 64 it achieved, the measurement is reported rather than ratified, and the next run that measures 65 or more is refused for the same reason this one was."
+    },
+    {
+      "metric": "ungoverned_executables",
+      "reason": "The same six 00-BOOK/tools/ executables from UCOS-UCTX-001, measured a second way. They are unclaimed because inventory._authority recognises exactly five claimants — UEC-000001 engines, the UCOS-COV-SCOPE-001 denominator, that declaration's argued exclusions, the pytest omit list and the DP-03 frozen-path guard — and repository TOOLING under 00-BOOK/tools/ (UCI-C-04) is none of them. One cause, two measurements of it, and the repayment is the same relocation described under executable_outside_denominator. best stays at 26."
+    }
+  ],
   "kinds": {
     "engines_without_tests": "CONVERGENT",
     "executable_outside_denominator": "CONVERGENT",
