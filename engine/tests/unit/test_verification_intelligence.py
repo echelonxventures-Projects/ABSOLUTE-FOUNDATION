@@ -29,6 +29,7 @@ import sys
 
 import pytest
 
+from engine.certification_integrity import immutable
 from engine.universal_discovery.discovery import clear_derived_scope_cache
 from engine.verification_intelligence import gate as uvi_gate
 from engine.verification_intelligence.constitution import (
@@ -48,9 +49,12 @@ from engine.verification_intelligence.evidence import (
     resolve_prefix,
 )
 from engine.verification_intelligence.execution import (
+    _combine_and_evaluate,
+    _shard_argv,
     assert_topology_neutral,
     plan_shards,
     resolve_workers,
+    run_tests,
     unit_file,
 )
 from engine.verification_intelligence.gate import (
@@ -1056,8 +1060,6 @@ def test_the_gate_emits_json_and_a_rendered_report(capsys) -> None:
 
 def test_the_gate_writes_nothing(tmp_path) -> None:
     """OBSERVE MODE. A gate that writes can drift, and this one measures drift."""
-    import subprocess
-    import sys
 
     before = subprocess.run(  # noqa: S603
         ["git", "status", "--porcelain"],  # noqa: S607
@@ -1127,9 +1129,6 @@ def _throwaway_suite(tmp_path, *, failing: bool = False) -> tuple:
 
 def test_run_tests_executes_every_shard_and_passes_when_they_pass(tmp_path) -> None:
     import io
-    import sys
-
-    from engine.verification_intelligence.execution import run_tests
 
     shards = _throwaway_suite(tmp_path)
     stream = io.StringIO()
@@ -1149,9 +1148,6 @@ def test_run_tests_executes_every_shard_and_passes_when_they_pass(tmp_path) -> N
 
 def test_run_tests_fails_when_any_shard_fails(tmp_path) -> None:
     import io
-    import sys
-
-    from engine.verification_intelligence.execution import run_tests
 
     shards = _throwaway_suite(tmp_path, failing=True)
     stream = io.StringIO()
@@ -1170,9 +1166,6 @@ def test_run_tests_fails_when_any_shard_fails(tmp_path) -> None:
 def test_run_tests_refuses_a_partition_that_is_not_the_selection(tmp_path) -> None:
     """The check that stands between a dropped shard and a green run."""
     import io
-    import sys
-
-    from engine.verification_intelligence.execution import run_tests
 
     shards = _throwaway_suite(tmp_path)[:1]
     with pytest.raises(VerificationIntelligenceError, match="missing"):
@@ -1189,9 +1182,6 @@ def test_run_tests_refuses_a_partition_that_is_not_the_selection(tmp_path) -> No
 def test_run_tests_refuses_to_report_a_pass_over_nothing(tmp_path) -> None:
     """An empty partition is the one thing that must never look like success."""
     import io
-    import sys
-
-    from engine.verification_intelligence.execution import run_tests
 
     stream = io.StringIO()
     assert (
@@ -1208,9 +1198,6 @@ def test_the_floor_is_evaluated_over_combined_data_and_refuses_when_there_is_non
 ) -> None:
     """No coverage data cannot be answered with a pass; the floor would be a claim about air."""
     import io
-    import sys
-
-    from engine.verification_intelligence.execution import _combine_and_evaluate
 
     stream = io.StringIO()
     empty = tmp_path / "no-data"
@@ -1230,8 +1217,6 @@ def test_the_floor_refuses_an_interpreter_that_cannot_measure_it(tmp_path) -> No
     """
     import io
     import stat
-
-    from engine.verification_intelligence.execution import run_tests
 
     # An "interpreter" that cannot import pytest_cov. Standing in for a real one keeps the test
     # portable: the probe only asks whether `<python> -c "import pytest_cov"` succeeds.
@@ -1260,7 +1245,6 @@ def test_the_floor_refuses_an_interpreter_that_cannot_measure_it(tmp_path) -> No
 
 def test_the_shard_command_keeps_addopts_under_the_floor_and_drops_them_without_it() -> None:
     """The denominator must not depend on how the run was scheduled."""
-    from engine.verification_intelligence.execution import _shard_argv
 
     shard = Shard(index=0, test_paths=("a/test_x.py",), cost_seconds=1.0)
     under_floor = _shard_argv("py", shard, Coverage.FLOOR_90, report_path="uvi-coverage-x/s0.xml")
@@ -1772,10 +1756,7 @@ def test_a_mode_declaring_an_unknown_stage_selector_is_refused(tmp_path) -> None
 def test_the_floor_is_evaluated_once_over_the_union_of_the_shards(tmp_path) -> None:
     """Two shards, one combined total, one verdict — the property sharding must not break."""
     import io
-    import sys
     import textwrap
-
-    from engine.verification_intelligence.execution import run_tests
 
     (tmp_path / "measured.py").write_text(
         textwrap.dedent(
@@ -1934,9 +1915,6 @@ def test_l06_refuses_an_isolation_entry_with_no_measurement(tmp_path, constituti
 def test_running_the_tests_leaves_nothing_in_the_repository(tmp_path) -> None:
     """A verification run must not be able to dirty the thing it is verifying."""
     import io
-    import sys
-
-    from engine.verification_intelligence.execution import run_tests
 
     shards = _throwaway_suite(tmp_path)
     before = sorted(os.listdir(tmp_path))
@@ -1996,18 +1974,34 @@ def test_the_shards_collect_exactly_the_tests_the_whole_suite_collects() -> None
     as a pass. No amount of reasoning about the cost model would have found that; only
     asking the collector did.
     """
-    import subprocess
-    import sys
-
-    from engine.verification_intelligence.execution import _shard_argv
 
     def _collect(argv: list[str]) -> set[str]:
+        # A COLLECTING SUBPROCESS MUST NOT INHERIT THE OUTER MEASUREMENT BOOTSTRAP, AND THE
+        # REASON IS A NAME COLLISION THIS REPOSITORY CANNOT AVOID. `platform/` here is a local
+        # package that SHADOWS the standard library's `platform`. pytest-cov's `.pth` restarts
+        # coverage at interpreter startup in every child the `COV_CORE_*` variables reach, and
+        # coverage imports the stdlib `platform` while doing it — so `sys.modules['platform']`
+        # is bound to the stdlib module BEFORE the local package can win, and every later
+        # `from platform.<anything> import ...` dies with "'platform' is not a package".
+        #
+        # 340 test modules import the local package, so a child that inherits the bootstrap
+        # aborts collection on the first of them: pytest reports `Interrupted: 1 error during
+        # collection`, exits 4 and prints NO node ids. This function would then read that empty
+        # stdout as "the shard collects nothing" and the assertion below would report thousands
+        # of tests as lost — a false alarm about the one property it exists to prove, which is
+        # the worst possible failure for a correctness check. It was observed as exactly that:
+        # "8360 test(s) are in no shard", while the shards themselves ran and passed in full.
+        #
+        # Stripping is correct rather than convenient: this subprocess is asked what pytest
+        # COLLECTS, and coverage has no part in that answer. The parent's measurement is
+        # unaffected — it is still running, and this child was never going to contribute to it.
         result = subprocess.run(  # noqa: S603
             [*argv[: argv.index("-q") + 1], "--collect-only", *argv[argv.index("-q") + 1 :]],
             cwd=REPO,
             capture_output=True,
             text=True,
             check=False,
+            env=immutable.clean_environment(),
         )
         return {
             line.strip()

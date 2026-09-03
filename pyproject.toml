@@ -266,7 +266,49 @@ addopts = [
   # load-bearing; the module docstring states what breaks if either changes.
   "-p",
   "engine.universal_discovery.pytest_scope",
-  "--cov-report=term-missing",
+  # NO `--cov-report=term-missing` HERE, AND THE REASON IS THAT A PER-SHARD TABLE IS A LIE.
+  # pytest-cov stores reports in a dict keyed by type (`StoreReport`), so a report named in
+  # `addopts` reaches EVERY sharded invocation and cannot be removed from the command line —
+  # naming a type again replaces it, and there is no spelling that deletes one. UVI exploits
+  # that to redirect `xml` to a shard-private path; `term-missing` had no such escape, so all
+  # thirteen shards rendered a full table.
+  #
+  # Each of those tables measures the WHOLE denominator against ONE THIRTEENTH of the suite,
+  # so each reports 19%-57% and names tens of thousands of statements as missed that another
+  # shard covers. Fifteen thousand eight hundred and ninety of a 17,827-line verification log
+  # were those rows: 89% of the output, every line of it inviting the reader to fix a miss
+  # that does not exist. That is not verbosity, it is a measurement presented at a scope where
+  # it is false, and it was read that way.
+  #
+  # The combined table -- the only one that means anything -- is rendered by the declared
+  # `coverage report` stage (verify.sh), which invokes the coverage CLI directly and does not
+  # consult `addopts` at all. Nothing is lost here and one true table survives. A developer who
+  # wants the table interactively runs `python -m coverage report` after the suite, which is
+  # the same command that stage runs.
+  # WITHOUT THIS, EVERY SUBPROCESS WRITES COVERAGE DATA THAT CAN NEVER BE COMBINED, AND THE
+  # PROOF IS ONE ENVIRONMENT VARIABLE. pytest-cov exports the config path to child processes in
+  # `CovController.set_env` (pytest_cov/engine.py:111) so its `.pth` can restart coverage there,
+  # but ONLY if the path exists: otherwise it exports the sentinel `COV_CORE_CONFIG=':'`, meaning
+  # "no config file". The default is `.coveragerc`, this repository has none, and `branch = true`
+  # lives in `[tool.coverage.run]` BELOW — so every child started coverage with branch mode OFF
+  # and wrote `has_arcs=0` data beside a parent writing `has_arcs=1`.
+  #
+  # `coverage combine` refuses that pair outright: `DataError: Can't combine statement coverage
+  # data with branch data`. It surfaces as an INTERNALERROR during pytest-cov's teardown, AFTER
+  # every test in the shard has PASSED, so the shard reports "1404 passed" and then dies — and
+  # the coverage gate reports a number computed from whichever shards happened to survive. It was
+  # measured at 71% against a true 98%: not a low number, a meaningless one.
+  #
+  # Naming the config here makes the path exist, so the child resolves it, reads `branch = true`
+  # and writes branch data that combines. Verified by probe: `has_arcs` goes 0 -> 1. The path is
+  # relative and that is safe — `set_env` calls `Path.resolve()` before exporting, so a child that
+  # chdirs still receives an absolute path.
+  #
+  # THIS IS THE GENERAL FIX AND IT DID NOT REPLACE THE SPECIFIC ONE. `immutable.clean_environment`
+  # strips this bootstrap from UCI's own measuring subprocesses, which is a different obligation:
+  # a subprocess whose PURPOSE is to measure something must not also contribute to the outer
+  # session's data file, whatever format it would write. Both are correct and both stay.
+  "--cov-config=pyproject.toml",
   "--cov-report=xml",
   "--cov-fail-under=90",
 ]
