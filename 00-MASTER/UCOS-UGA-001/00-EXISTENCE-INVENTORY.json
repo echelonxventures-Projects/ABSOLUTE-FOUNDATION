@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7017,
+  "total_objects": 7087,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -2721,6 +2721,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-ARBITR-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003057",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-ARCH-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -3603,6 +3612,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-CHANGE-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003058",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-CMG-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -3628,6 +3646,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002666",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-COMMIT-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003059",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-COMPLE-000001.md",
@@ -4411,6 +4438,24 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002971",
       "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-COVERA-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003060",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-COVERA-000002.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003061",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-CRITICALPATH-000001.md",
@@ -5934,6 +5979,24 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-ENFORC-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003062",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ENFORC-000002.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003063",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-ENG-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -6519,6 +6582,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-FINALC-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003064",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-FINALCERTIFI-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -6715,6 +6787,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-000553",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-GENERA-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003065",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-GOV-000001.md",
@@ -8101,6 +8182,33 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002770",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-IMP-000028.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003066",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-IMP-000029.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003067",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-IMP-000030.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003068",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-IMPLEMENTATI-000001.md",
@@ -10137,6 +10245,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-MISSIN-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003069",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-MUTATI-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -10281,6 +10398,78 @@
       "first_seen": "commit:bae59755d7e2"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE0-000003.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003070",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE0-000004.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003071",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE0-000005.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003072",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE0-000006.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003073",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE0-000007.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003074",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE0-000008.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003075",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE0-000009.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003076",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE0-000010.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003077",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-PHASE1-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -10326,6 +10515,69 @@
       "first_seen": "commit:bae59755d7e2"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE1-000006.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003078",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE1-000007.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003079",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE1-000008.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003080",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE1-000009.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003081",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE1-000010.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003082",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE1-000011.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003083",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE1-000012.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003084",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-PHASE2-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -10344,6 +10596,33 @@
       "first_seen": "commit:bae59755d7e2"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE2-000003.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003085",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE2-000004.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003086",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE2-000005.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003087",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-PHASE3-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -10360,6 +10639,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002795",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE3-000003.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003088",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-PHASE4-000001.md",
@@ -10387,6 +10675,78 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002798",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE4-000004.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003089",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE5-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003090",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE6-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003091",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE7-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003092",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE8-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003093",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASE9-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003094",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEA-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003095",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEA-000002.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003096",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-PHASEC-000001.md",
@@ -10486,6 +10846,186 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002975",
       "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000002.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003097",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000003.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003098",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000004.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003099",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000005.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003100",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000006.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003101",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000007.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003102",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000008.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003103",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000009.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003104",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000010.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003105",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000011.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003106",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000012.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003107",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000013.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003108",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000014.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003109",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000015.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003110",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000016.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003111",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000017.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003112",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000018.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003113",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000019.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003114",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000020.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003115",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-PHASEO-000021.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003116",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-PHASEP-000001.md",
@@ -11928,6 +12468,15 @@
       "first_seen": "commit:bae59755d7e2"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-ROOTCA-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003117",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-ROOTCAUSEANA-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -12223,6 +12772,24 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-000997",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-SELFCO-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003118",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-SELFCO-000002.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003119",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-SEMANT-000001.md",
@@ -13575,6 +14142,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-SHELLO-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003120",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-SRC-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -14637,6 +15213,15 @@
       "first_seen": "commit:446f8a0f6d95"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-UCOSOM-000080.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003121",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-UCOSOMEGAINF-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -14662,6 +15247,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-001173",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-UCOSUC-000002.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003122",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-UCOSUN-000001.md",
@@ -14698,6 +15292,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002944",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-UFINOC-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003123",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-UKAPUR-000001.md",
@@ -14997,6 +15600,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-UNCOND-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003124",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-UNIVER-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -15157,6 +15769,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002963",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-UNIVER-000019.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003125",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-UNREALIZEDCK-000001.md",
@@ -15589,6 +16210,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-001249",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-W4UFIF-000001.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003126",
+      "first_seen": "commit:e77aa5e444e8"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-WAVE01EXECUT-000001.md",
@@ -32487,12 +33117,11 @@
     },
     {
       "path": "CHANGE-SET-CERTIFICATION-DETERMINATION.md",
-      "object_class": "EXCLUDED_DOCUMENT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-EXDOC-003048",
-      "first_seen": "commit:a4f56e83e73f"
+      "universal_id": "UCOS-CHANGE-000001",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "CMG-000012-IDENTITY-AND-OWNERSHIP-DETERMINATION.md",
@@ -32504,12 +33133,11 @@
     },
     {
       "path": "COMMIT-CLOSURE-DETERMINATION.md",
-      "object_class": "EXCLUDED_DOCUMENT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-EXDOC-003049",
-      "first_seen": "commit:a4f56e83e73f"
+      "universal_id": "UCOS-COMMIT-000001",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "COMPLETE-ASSIMILATION-CLOSURE-DETERMINATION.md",
@@ -32865,12 +33493,11 @@
     },
     {
       "path": "GENERATED-ARTIFACT-COMMIT-AUTHORITY-DETERMINATION.md",
-      "object_class": "EXCLUDED_DOCUMENT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-EXDOC-003050",
-      "first_seen": "commit:a4f56e83e73f"
+      "universal_id": "UCOS-GENERA-000001",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "GOVERNED-EVOLUTION-STATE-DETERMINATION.md",
@@ -35060,12 +35687,11 @@
     },
     {
       "path": "ROOT-CAUSE-ANALYSIS.md",
-      "object_class": "EXCLUDED_DOCUMENT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-EXDOC-003051",
-      "first_seen": "commit:a4f56e83e73f"
+      "universal_id": "UCOS-ROOTCA-000001",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "RTBD-001-REPOSITORY-TRUTH-BOUNDARY-DETERMINATION.md",
@@ -35165,12 +35791,11 @@
     },
     {
       "path": "SHELL-OBSERVABILITY-CLOSURE-DETERMINATION.md",
-      "object_class": "EXCLUDED_DOCUMENT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-EXDOC-003052",
-      "first_seen": "commit:a4f56e83e73f"
+      "universal_id": "UCOS-SHELLO-000001",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "STABILITY-REQUIREMENTS-DETERMINATION.md",
@@ -36110,12 +36735,11 @@
     },
     {
       "path": "UFI-NO-CELL-ROOT-CAUSE.md",
-      "object_class": "EXCLUDED_DOCUMENT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-EXDOC-003053",
-      "first_seen": "commit:a4f56e83e73f"
+      "universal_id": "UCOS-UFINOC-000001",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "UKAP-UREE-CAPABILITY-ADMISSION-REASSESSMENT-DETERMINATION.md",
@@ -36143,12 +36767,11 @@
     },
     {
       "path": "UNCONDITIONAL-COMMIT-READINESS-DETERMINATION.md",
-      "object_class": "EXCLUDED_DOCUMENT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-EXDOC-003054",
-      "first_seen": "commit:a4f56e83e73f"
+      "universal_id": "UCOS-UNCOND-000001",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "UNIVERSAL-ARTIFACT-LIFECYCLE-DETERMINATION.md",
@@ -36176,12 +36799,11 @@
     },
     {
       "path": "UNIVERSAL-CERTIFICATION-CLOSURE-DETERMINATION.md",
-      "object_class": "EXCLUDED_DOCUMENT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-EXDOC-003055",
-      "first_seen": "commit:a4f56e83e73f"
+      "universal_id": "UCOS-UNIVER-000019",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "UNIVERSAL-EVOLUTION-FOUNDATION-GAP-ANALYSIS.md",
@@ -36353,12 +36975,11 @@
     },
     {
       "path": "W4-UFI-FAILURE-MATRIX.md",
-      "object_class": "EXCLUDED_DOCUMENT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "UCOS-REPOSITORY-ROOT",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-EXDOC-003056",
-      "first_seen": "commit:a4f56e83e73f"
+      "universal_id": "UCOS-W4UFIF-000001",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "WP-001A-CONSTITUTIONAL-INTEGRATION-ANALYSIS.md",

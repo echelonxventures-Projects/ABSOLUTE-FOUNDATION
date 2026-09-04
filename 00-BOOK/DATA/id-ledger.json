@@ -12002,7 +12002,7 @@
     "DET": 6,
     "CONFIG": 40,
     "DATAOBJ": 144,
-    "EXDOC": 3056,
+    "EXDOC": 3126,
     "TOOLING": 52,
     "ENGINE": 1380,
     "TESTOBJ": 896,
@@ -66143,6 +66143,426 @@
       "object_class": "TEST_OBJECT",
       "category": "TESTOBJ",
       "first_seen": "commit:a4f56e83e73f"
+    },
+    "00-BOOK/PORTAL/UCOS-ARBITR-000001.md": {
+      "universal_id": "UCOS-EXDOC-003057",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-CHANGE-000001.md": {
+      "universal_id": "UCOS-EXDOC-003058",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-COMMIT-000001.md": {
+      "universal_id": "UCOS-EXDOC-003059",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-COVERA-000001.md": {
+      "universal_id": "UCOS-EXDOC-003060",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-COVERA-000002.md": {
+      "universal_id": "UCOS-EXDOC-003061",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-ENFORC-000001.md": {
+      "universal_id": "UCOS-EXDOC-003062",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-ENFORC-000002.md": {
+      "universal_id": "UCOS-EXDOC-003063",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-FINALC-000001.md": {
+      "universal_id": "UCOS-EXDOC-003064",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-GENERA-000001.md": {
+      "universal_id": "UCOS-EXDOC-003065",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-IMP-000028.md": {
+      "universal_id": "UCOS-EXDOC-003066",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-IMP-000029.md": {
+      "universal_id": "UCOS-EXDOC-003067",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-IMP-000030.md": {
+      "universal_id": "UCOS-EXDOC-003068",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-MISSIN-000001.md": {
+      "universal_id": "UCOS-EXDOC-003069",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE0-000003.md": {
+      "universal_id": "UCOS-EXDOC-003070",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE0-000004.md": {
+      "universal_id": "UCOS-EXDOC-003071",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE0-000005.md": {
+      "universal_id": "UCOS-EXDOC-003072",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE0-000006.md": {
+      "universal_id": "UCOS-EXDOC-003073",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE0-000007.md": {
+      "universal_id": "UCOS-EXDOC-003074",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE0-000008.md": {
+      "universal_id": "UCOS-EXDOC-003075",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE0-000009.md": {
+      "universal_id": "UCOS-EXDOC-003076",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE0-000010.md": {
+      "universal_id": "UCOS-EXDOC-003077",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE1-000006.md": {
+      "universal_id": "UCOS-EXDOC-003078",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE1-000007.md": {
+      "universal_id": "UCOS-EXDOC-003079",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE1-000008.md": {
+      "universal_id": "UCOS-EXDOC-003080",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE1-000009.md": {
+      "universal_id": "UCOS-EXDOC-003081",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE1-000010.md": {
+      "universal_id": "UCOS-EXDOC-003082",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE1-000011.md": {
+      "universal_id": "UCOS-EXDOC-003083",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE1-000012.md": {
+      "universal_id": "UCOS-EXDOC-003084",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE2-000003.md": {
+      "universal_id": "UCOS-EXDOC-003085",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE2-000004.md": {
+      "universal_id": "UCOS-EXDOC-003086",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE2-000005.md": {
+      "universal_id": "UCOS-EXDOC-003087",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE3-000003.md": {
+      "universal_id": "UCOS-EXDOC-003088",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE4-000004.md": {
+      "universal_id": "UCOS-EXDOC-003089",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE5-000001.md": {
+      "universal_id": "UCOS-EXDOC-003090",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE6-000001.md": {
+      "universal_id": "UCOS-EXDOC-003091",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE7-000001.md": {
+      "universal_id": "UCOS-EXDOC-003092",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE8-000001.md": {
+      "universal_id": "UCOS-EXDOC-003093",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASE9-000001.md": {
+      "universal_id": "UCOS-EXDOC-003094",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEA-000001.md": {
+      "universal_id": "UCOS-EXDOC-003095",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEA-000002.md": {
+      "universal_id": "UCOS-EXDOC-003096",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000002.md": {
+      "universal_id": "UCOS-EXDOC-003097",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000003.md": {
+      "universal_id": "UCOS-EXDOC-003098",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000004.md": {
+      "universal_id": "UCOS-EXDOC-003099",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000005.md": {
+      "universal_id": "UCOS-EXDOC-003100",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000006.md": {
+      "universal_id": "UCOS-EXDOC-003101",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000007.md": {
+      "universal_id": "UCOS-EXDOC-003102",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000008.md": {
+      "universal_id": "UCOS-EXDOC-003103",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000009.md": {
+      "universal_id": "UCOS-EXDOC-003104",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000010.md": {
+      "universal_id": "UCOS-EXDOC-003105",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000011.md": {
+      "universal_id": "UCOS-EXDOC-003106",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000012.md": {
+      "universal_id": "UCOS-EXDOC-003107",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000013.md": {
+      "universal_id": "UCOS-EXDOC-003108",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000014.md": {
+      "universal_id": "UCOS-EXDOC-003109",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000015.md": {
+      "universal_id": "UCOS-EXDOC-003110",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000016.md": {
+      "universal_id": "UCOS-EXDOC-003111",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000017.md": {
+      "universal_id": "UCOS-EXDOC-003112",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000018.md": {
+      "universal_id": "UCOS-EXDOC-003113",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000019.md": {
+      "universal_id": "UCOS-EXDOC-003114",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000020.md": {
+      "universal_id": "UCOS-EXDOC-003115",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-PHASEO-000021.md": {
+      "universal_id": "UCOS-EXDOC-003116",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-ROOTCA-000001.md": {
+      "universal_id": "UCOS-EXDOC-003117",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-SELFCO-000001.md": {
+      "universal_id": "UCOS-EXDOC-003118",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-SELFCO-000002.md": {
+      "universal_id": "UCOS-EXDOC-003119",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-SHELLO-000001.md": {
+      "universal_id": "UCOS-EXDOC-003120",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-UCOSOM-000080.md": {
+      "universal_id": "UCOS-EXDOC-003121",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-UCOSUC-000002.md": {
+      "universal_id": "UCOS-EXDOC-003122",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-UFINOC-000001.md": {
+      "universal_id": "UCOS-EXDOC-003123",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-UNCOND-000001.md": {
+      "universal_id": "UCOS-EXDOC-003124",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-UNIVER-000019.md": {
+      "universal_id": "UCOS-EXDOC-003125",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
+    },
+    "00-BOOK/PORTAL/UCOS-W4UFIF-000001.md": {
+      "universal_id": "UCOS-EXDOC-003126",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:e77aa5e444e8"
     }
   },
   "by_observation": {

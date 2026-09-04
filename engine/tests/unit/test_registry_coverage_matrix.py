@@ -135,7 +135,19 @@ def test_the_partition_is_exact(matrix) -> None:
 #:                     remains 0. It is irreversible in both directions: `by_object` is append-only
 #:                     (UOBC-L-03/L-08) and the corpus registration was an authorized, permanent
 #:                     `by_path` allocation. Measured composition at 201: 198 EXDOC, 3 DATAOBJ.
-RETAINED_NOT_GOVERNED_OVERLAP = 201
+#:   201 -> 210  (+9)  Corpus-registration completion. Permit P-UCOS-CORPUS-003 registered nine
+#:                     root-level determination documents into the CORPUS plane, and every one of
+#:                     them already carried a REPOSITORY-plane identity minted three commits
+#:                     earlier at a4f56e83: UCOS-EXDOC-003048 through UCOS-EXDOC-003056. The shape
+#:                     is the 192 -> 201 movement exactly — a document the repository ledger had
+#:                     already seen entering the corpus plane puts it in both raw path sets by
+#:                     construction — not a new kind of overlap. All nine are EXCLUDED_DOCUMENT, so
+#:                     the REPOSITORY plane retains an identity and governs nothing, and
+#:                     `DUPLICATE_REGISTRATION` remains 0. Unpreventable in the sense this rule
+#:                     requires: refusing the rise would mean refusing either the by_object mint
+#:                     (already permanent) or the authorized by_path allocation, and both maps are
+#:                     append-only. Measured composition at 210: 207 EXDOC, 3 DATAOBJ.
+RETAINED_NOT_GOVERNED_OVERLAP = 210
 
 
 def test_the_two_planes_are_disjoint_IN_GOVERNANCE() -> None:
