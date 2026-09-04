@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-04T12:10:47+00:00",
+  "generated_at": "2026-09-04T17:40:29+00:00",
   "generator_version": "1.0.0",
-  "count": 1679,
+  "count": 1682,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -65671,7 +65671,7 @@
       ],
       "path": "engine/lineage/families.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "498f8b096bb4340b4ce6695b466d5ea325684b6e3cd8a7c632fb6de9ebba9e64",
+      "content_hash": "befaab176323a03af591427bd605ee542a8331676a4d717deddaba6d52760f56",
       "traceability": {
         "requirement": [],
         "architecture": [
@@ -74709,11 +74709,134 @@
       ],
       "path": "adr/0039-agnosticism-axis-dispositions.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
-      "content_hash": "bdb5d74e1fe98cc506a7e23c54c859bf7483d954a94c4688e0ebe1256f0ed9b4",
+      "content_hash": "9e2e1794b3172806f402646d6b3c6aba535bc993ef0f3d389914e82e356a92e8",
       "traceability": {
         "requirement": [],
         "architecture": [
           "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000041",
+      "native_id": null,
+      "name": "ADR-0040: Agnosticism is measured, and a contract that cannot fail proves nothing",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13164,
+      "page_end": 13165,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0040-agnosticism-is-measured-not-declared.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "fe7758eefa2b5b37f2c72f77fe953084c4e3daf811146aa27aaabe17912840ee",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000042",
+      "native_id": null,
+      "name": "ADR-0041: A rule is not enforced by being right — six instances of a measurement that did not reach",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13166,
+      "page_end": 13167,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0041-a-rule-whose-measurement-does-not-reach-it.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "f8b87b9122fdc29533a6be30c6d3e4370a9167cead3025f8cc0c2ac23914929f",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ENG-000026",
+      "native_id": null,
+      "name": "Axis Register",
+      "description": "",
+      "category": "ENG",
+      "volume": "VOL-003",
+      "page_start": 13168,
+      "page_end": 13169,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-ENG-000003",
+      "dependencies": [],
+      "program": "ENG",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ENG",
+        "ENG",
+        "VOL-003"
+      ],
+      "path": "engine/conformance/axis-register.json",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "d30d56141de734d9043985bf3105c2fdbef0eb9c59206733d4f0c104adf48d4d",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-ENG-000003"
         ],
         "design": [],
         "implementation": [],

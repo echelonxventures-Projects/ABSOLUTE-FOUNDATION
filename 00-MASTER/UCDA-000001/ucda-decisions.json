@@ -4281,6 +4281,70 @@
       "work_package": "WP-W5-001",
       "note": "Measured against one bar: an abstraction with one implementation is an assumption, and one its own callers bypass is decoration. 20 non-test modules invoke git directly against 2 using the git provider; 1,732 direct sha256 call sites against a crypto-agility registry governing almost none of them. Four axes convert from unproven claims to declared absences, which is citable rather than recurring.",
       "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0040",
+      "coverage": {
+        "EQ-1": [
+          "engine/conformance/measure.py"
+        ],
+        "EQ-2": [
+          "engine/conformance/axis-register.json"
+        ],
+        "EQ-3": [
+          "adr/0021-uap-001-universal-agnostic-architecture-principle.md"
+        ],
+        "EQ-4": [
+          "engine/tests/conformance/test_agnosticism_conformance.py"
+        ],
+        "EQ-5": [
+          "engine/uckp/execution.py",
+          "engine/uckp/persistence.py"
+        ]
+      },
+      "title": "Agnosticism is measured, and a contract that cannot fail proves nothing",
+      "decision_class": "architectural",
+      "source_register": "adr/0040-agnosticism-is-measured-not-declared.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0040-agnosticism-is-measured-not-declared.md",
+        "engine/conformance/measure.py",
+        "engine/conformance/axis-register.json",
+        "engine/tests/conformance/test_agnosticism_conformance.py"
+      ],
+      "work_package": "WP-W4-002",
+      "note": "adr/0021 declared in its own Consequences that nothing enforced the Universal Agnostic Architecture Principle; UAC-000001 is that enforcement, fourteen days later. An axis is scored on two properties because one over-reports: how many implementations define the contract's own abstract methods, and whether the contract can fail at all. Measured: persistence PROVEN at 10/10 behind a contract that round-trips the universe and refuses a mechanism storing nothing; execution ENVELOPE_ONLY at 2/11 behind a contract demanding only a serialisation, where nine adapters share one transcribe() and execute() discards the payload to call the Python resolver. Across the repository 42 abstraction boundaries exist and 20 carry two or more implementations, but most are rule registries where swapping changes which rule runs, not which technology runs it — counting those as agnosticism is the over-report this instrument refuses. Lands as MEASUREMENT: it refuses nothing and changes no test's verdict.",
+      "action_taken": "Built engine/conformance as one harness over a declared axis register, naming no technology, discovering implementations rather than reading a roster, resolving contracts from sys.modules and importing none. Six tests, two of which guard the design rather than the output. Landed under P-UCOS-UGA-005 and P-UCOS-UGA-006 at bb0012d8. Whether ENVELOPE_ONLY becomes a refusal is left open and is not taken by this decision."
+    },
+    {
+      "id": "DEC-ADR-0041",
+      "coverage": {
+        "EQ-1": [
+          "adr/0041-a-rule-whose-measurement-does-not-reach-it.md"
+        ],
+        "EQ-3": [
+          "00-BOOK/DATA/constitutional-authority-alignment.json"
+        ],
+        "EQ-5": [
+          "engine/verification_impact/impact.py",
+          "engine/verification_intelligence/registry.py"
+        ]
+      },
+      "title": "A rule is not enforced by being right: six instances of a measurement that did not reach",
+      "decision_class": "architectural",
+      "source_register": "adr/0041-a-rule-whose-measurement-does-not-reach-it.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0041-a-rule-whose-measurement-does-not-reach-it.md",
+        "engine/verification_impact/impact.py",
+        "engine/verification_intelligence/registry.py",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
+      ],
+      "work_package": "WP-W4-003",
+      "note": "Six defects in one session shared a shape none of them announced: a rule that was right, an instrument that existed, and a measurement that did not reach where the rule applied. adr/0039's git ratio measured the provider's scope rather than anyone's compliance; the impact selector named a mechanism it had not consulted; CAA-INV-05 read one graph while its rule covered every emitting surface, passing at measured=6 against 32; the split table degraded silently and surfaced four commits later; adr/0021 disclosed its own lack of enforcement and kept it for fourteen days; and an interchangeability test passed over ten technologies sharing one body. Distinct from INV-SIL silent drift: that is a change nobody observed, this is a scope nobody stated.",
+      "action_taken": "Named the class and recorded three obligations on future instruments rather than a new gate, because a gate for this would need a scope and inherit the same defect: an instrument states the population it measured, a verdict names only a mechanism that was measured, and a silent fallback is reported even when lawful. A meta-gate was rejected as requiring a second declaration of every rule, which UCKP-ART-03 makes a rival authority."
     }
   ],
   "$coverage_criteria_comment": [

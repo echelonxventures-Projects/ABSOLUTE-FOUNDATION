@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 13163  ·  **Page cursor (next free):** UPN-000013164
+**Pages allocated:** 13169  ·  **Page cursor (next free):** UPN-000013170
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1687,5 +1687,8 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000013159 | UPN-000013159 | 1 | `UCOS-ADR-000038` | 003 | ADR-0037: Decisions D-01…D-12 and their succe… |
 | UPN-000013160 | UPN-000013161 | 2 | `UCOS-ADR-000039` | 003 | ADR-0038: The three-part hardcoding test, and… |
 | UPN-000013162 | UPN-000013163 | 2 | `UCOS-ADR-000040` | 003 | ADR-0039: Fourteen agnosticism axes, each pro… |
+| UPN-000013164 | UPN-000013165 | 2 | `UCOS-ADR-000041` | 003 | ADR-0040: Agnosticism is measured, and a cont… |
+| UPN-000013166 | UPN-000013167 | 2 | `UCOS-ADR-000042` | 003 | ADR-0041: A rule is not enforced by being rig… |
+| UPN-000013168 | UPN-000013169 | 2 | `UCOS-ENG-000026` | 003 | Axis Register |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

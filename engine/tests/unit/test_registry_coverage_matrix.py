@@ -147,7 +147,31 @@ def test_the_partition_is_exact(matrix) -> None:
 #:                     requires: refusing the rise would mean refusing either the by_object mint
 #:                     (already permanent) or the authorized by_path allocation, and both maps are
 #:                     append-only. Measured composition at 210: 207 EXDOC, 3 DATAOBJ.
-RETAINED_NOT_GOVERNED_OVERLAP = 210
+#:   210 -> 211  (+1)  UAC-000001, the agnosticism conformance harness. Permit P-UCOS-UGA-005
+#:                     minted `engine/conformance/axis-register.json` into the REPOSITORY plane as
+#:                     UCOS-DATAOBJ-000145, and P-UCOS-CORPUS-006 then registered the same file
+#:                     into the CORPUS plane as an ENG declaration document, beside
+#:                     `engine/lineage/families.json` and `memory-layers.json`, which is the
+#:                     established shape for an engine declaration. A file the repository ledger
+#:                     had already seen entering the corpus plane puts it in both raw path sets by
+#:                     construction — the same shape as 192 -> 201 and 201 -> 210, not a new kind
+#:                     of overlap, and `DUPLICATE_REGISTRATION` remains 0. Measured composition at
+#:                     211: 207 EXDOC, 4 DATAOBJ.
+#:
+#:                     UNPREVENTABLE NOW, AND AVOIDABLE THEN — recorded because this rule asks for
+#:                     unpreventability and the honest answer is qualified. Both allocations are
+#:                     operator-authorized and permanent, and both maps are append-only, so
+#:                     nothing can undo it: unpreventable in exactly the sense the rule requires.
+#:                     But the ORDER was a choice. Registering the file into the corpus FIRST
+#:                     would likely have removed the by_object requirement entirely — measured in
+#:                     the same session, immediately after: registering ADR-0040 and ADR-0041 into
+#:                     the corpus left `uga_engine.py run --plan` at total_allocations=0, because
+#:                     a document the corpus registry carries is not UGA's subject. The by_object
+#:                     mint came first only because the harness was landed before it was
+#:                     registered. A future engine declaration should be registered into the
+#:                     corpus before any by_object identity is minted for it, and this entry
+#:                     exists so that lesson is attached to the number it moved.
+RETAINED_NOT_GOVERNED_OVERLAP = 211
 
 
 def test_the_two_planes_are_disjoint_IN_GOVERNANCE() -> None:

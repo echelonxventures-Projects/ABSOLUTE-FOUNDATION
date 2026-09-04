@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1679
+**Total artifacts:** 1682
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1687,5 +1687,8 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1677 | `UCOS-ADR-000038` | ADR-0037: Decisions D-01…D-12 and their successors are th… | — | 003 | UPN-000013159–UPN-000013159 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0037-only-the-operator-decides.md) |
 | 1678 | `UCOS-ADR-000039` | ADR-0038: The three-part hardcoding test, and a closed fi… | — | 003 | UPN-000013160–UPN-000013161 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0038-what-counts-as-hardcoding.md) |
 | 1679 | `UCOS-ADR-000040` | ADR-0039: Fourteen agnosticism axes, each proven, abstrac… | — | 003 | UPN-000013162–UPN-000013163 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0039-agnosticism-axis-dispositions.md) |
+| 1680 | `UCOS-ADR-000041` | ADR-0040: Agnosticism is measured, and a contract that ca… | — | 003 | UPN-000013164–UPN-000013165 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0040-agnosticism-is-measured-not-declared.md) |
+| 1681 | `UCOS-ADR-000042` | ADR-0041: A rule is not enforced by being right — six ins… | — | 003 | UPN-000013166–UPN-000013167 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0041-a-rule-whose-measurement-does-not-reach-it.md) |
+| 1682 | `UCOS-ENG-000026` | Axis Register | — | 003 | UPN-000013168–UPN-000013169 | ACTIVE | `UCOS-ENG-000003` | 0 | [↗](../../engine/conformance/axis-register.json) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

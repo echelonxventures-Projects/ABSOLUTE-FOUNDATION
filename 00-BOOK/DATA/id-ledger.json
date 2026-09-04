@@ -11970,9 +11970,30 @@
       "page_start": 13162,
       "page_count": 2,
       "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0040-agnosticism-is-measured-not-declared.md": {
+      "universal_id": "UCOS-ADR-000041",
+      "category": "ADR",
+      "page_start": 13164,
+      "page_count": 2,
+      "first_seen": "2026-09-04T17:40:28+00:00"
+    },
+    "adr/0041-a-rule-whose-measurement-does-not-reach-it.md": {
+      "universal_id": "UCOS-ADR-000042",
+      "category": "ADR",
+      "page_start": 13166,
+      "page_count": 2,
+      "first_seen": "2026-09-04T17:40:28+00:00"
+    },
+    "engine/conformance/axis-register.json": {
+      "universal_id": "UCOS-ENG-000026",
+      "category": "ENG",
+      "page_start": 13168,
+      "page_count": 2,
+      "first_seen": "2026-09-04T17:40:28+00:00"
     }
   },
-  "page_cursor": 13163,
+  "page_cursor": 13169,
   "category_seq": {
     "BOOK": 1,
     "REG": 19,
@@ -11986,7 +12007,7 @@
     "CAT": 7,
     "REF": 21,
     "GEN": 7,
-    "ENG": 25,
+    "ENG": 26,
     "RUN": 18,
     "FRZ": 3,
     "MISC": 46,
@@ -11998,7 +12019,7 @@
     "APP": 2,
     "EXEC": 4,
     "GOV": 6,
-    "ADR": 40,
+    "ADR": 42,
     "MASTER": 42,
     "ENVIRONMENTS": 1,
     "VERIFICATION": 1,
@@ -30519,6 +30540,15 @@
         "status": "ACTIVE",
         "path": "engine/lineage/families.json",
         "name": "Families"
+      },
+      {
+        "seq": 2,
+        "at": "2026-09-04T17:40:28+00:00",
+        "content_hash": "befaab176323a03af591427bd605ee542a8331676a4d717deddaba6d52760f56",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "engine/lineage/families.json",
+        "name": "Families"
       }
     ],
     "UCOS-ENG-000024": [
@@ -32966,6 +32996,48 @@
         "status": "ACTIVE",
         "path": "adr/0039-agnosticism-axis-dispositions.md",
         "name": "ADR-0039: Fourteen agnosticism axes, each proven, abstracted, bypassed or declared absent"
+      },
+      {
+        "seq": 2,
+        "at": "2026-09-04T17:40:28+00:00",
+        "content_hash": "9e2e1794b3172806f402646d6b3c6aba535bc993ef0f3d389914e82e356a92e8",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0039-agnosticism-axis-dispositions.md",
+        "name": "ADR-0039: Fourteen agnosticism axes, each proven, abstracted, bypassed or declared absent"
+      }
+    ],
+    "UCOS-ADR-000041": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T17:40:28+00:00",
+        "content_hash": "fe7758eefa2b5b37f2c72f77fe953084c4e3daf811146aa27aaabe17912840ee",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0040-agnosticism-is-measured-not-declared.md",
+        "name": "ADR-0040: Agnosticism is measured, and a contract that cannot fail proves nothing"
+      }
+    ],
+    "UCOS-ADR-000042": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T17:40:28+00:00",
+        "content_hash": "f8b87b9122fdc29533a6be30c6d3e4370a9167cead3025f8cc0c2ac23914929f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0041-a-rule-whose-measurement-does-not-reach-it.md",
+        "name": "ADR-0041: A rule is not enforced by being right — six instances of a measurement that did not reach"
+      }
+    ],
+    "UCOS-ENG-000026": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T17:40:28+00:00",
+        "content_hash": "d30d56141de734d9043985bf3105c2fdbef0eb9c59206733d4f0c104adf48d4d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "engine/conformance/axis-register.json",
+        "name": "Axis Register"
       }
     ]
   },
