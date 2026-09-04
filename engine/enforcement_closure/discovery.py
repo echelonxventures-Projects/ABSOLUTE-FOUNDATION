@@ -17,6 +17,7 @@ bind the new plane's correctness to a module the old plane cannot see.
 from __future__ import annotations
 
 import ast
+import functools
 import os
 import re
 import subprocess
@@ -46,7 +47,7 @@ def repo_root() -> str:
     return os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-def tracked_paths(root: str) -> tuple[str, ...]:
+def _tracked_paths_uncached(root: str) -> tuple[str, ...]:
     """Every path version control carries, sorted. The eligibility boundary for every rule.
 
     A missing git work tree is a FAULT, not an empty world. Falling back to a filesystem walk
@@ -250,7 +251,7 @@ def source_evidence(text: str) -> str:
     return "\n".join(parts)
 
 
-def invocation_corpus(root: str, workflows: Sequence[Artifact]) -> dict[str, str]:
+def _invocation_corpus_uncached(root: str, workflows: Sequence[Artifact]) -> dict[str, str]:
     """Every text in which an invocation of an enforcement artifact could appear.
 
     Four independent planes: the Makefile (local), the workflow set (CI), ``verify.sh`` (the
@@ -401,7 +402,7 @@ def consumers(artifact: Artifact, sources: Mapping[str, str]) -> tuple[str, ...]
     return tuple(sorted(where for where, evidence in sources.items() if name in evidence))
 
 
-def source_corpus(
+def _source_corpus_uncached(
     root: str, paths: Sequence[str], *, exclude: Sequence[str] = ()
 ) -> dict[str, str]:
     """``source_evidence`` for every tracked Python module outside the excluded prefixes."""
@@ -469,7 +470,9 @@ def refusal_shapes(
     return frozenset(found)
 
 
-def test_corpus(root: str, paths: Sequence[str], testpaths: Sequence[str]) -> dict[str, str]:
+def _test_corpus_uncached(
+    root: str, paths: Sequence[str], testpaths: Sequence[str]
+) -> dict[str, str]:
     """``source_evidence`` for every tracked test module under the declared test roots."""
     corpus: dict[str, str] = {}
     for path in paths:
@@ -482,3 +485,89 @@ def test_corpus(root: str, paths: Sequence[str], testpaths: Sequence[str]) -> di
         if os.path.basename(path).startswith("test_") or path.endswith("conftest.py"):
             corpus[path] = source_evidence(read_text(root, path))
     return corpus
+
+
+# ---------------------------------------------------------------------------
+# Memoized repository scans.
+#
+# WHY THESE ARE CACHED AND `discover` IS NOT. `Probe.__init__` computes everything the laws
+# measure, once per probe — which is right, because a law that re-derives its own population is
+# a law whose population can disagree with its neighbour's. But the mutation suites build MANY
+# probes over ONE repository: `test_lowering_any_discovery_floor_is_refused` constructs a probe
+# per discovery rule per lowered floor, and each construction re-ran the repository-wide scans
+# that the mutation cannot affect. Measured, that test alone cost 221s and its file 1,048s, on
+# the critical path of a sharded run whose wall clock is its slowest shard.
+#
+# `discover` is deliberately NOT cached: it takes `declaration.rules`, which is exactly what a
+# mutation changes, so caching it would be caching the thing under test.
+#
+# WHAT MAKES THE CACHE SOUND. The key is the FULL argument tuple, not just the root. Any change
+# to what should be scanned — a different repository, a different tracked-path set, different
+# testpaths or excludes — is a different key and recomputes. The 221s test recomputed identical
+# results only because it varies `floor`, which appears in none of these signatures.
+#
+# THE ONE CONDITION THIS DOES NOT COVER, STATED RATHER THAN ASSUMED. Repository CONTENT changing
+# inside one process is invisible to these caches. No caller does that: the enforcement suites
+# mutate an in-memory declaration and never the tree, and the verification-purity suite exists to
+# prove the tooling does not write what it did not dirty. `clear_caches` is the escape hatch for
+# any future caller that needs one, and `test_the_memoized_scans_equal_their_uncached_form`
+# measures the equality rather than asserting it in prose.
+#
+# DICTS ARE COPIED OUT. A cached mutable mapping shared across probes would let one probe's
+# consumer alias another's. Copying a few thousand string entries is nothing against re-reading
+# and re-parsing the files that produced them.
+
+
+@functools.cache
+def _tracked_paths_memo(root: str) -> tuple[str, ...]:
+    return _tracked_paths_uncached(root)
+
+
+@functools.cache
+def _source_corpus_memo(
+    root: str, paths: tuple[str, ...], exclude: tuple[str, ...]
+) -> dict[str, str]:
+    return _source_corpus_uncached(root, paths, exclude=exclude)
+
+
+@functools.cache
+def _test_corpus_memo(
+    root: str, paths: tuple[str, ...], testpaths: tuple[str, ...]
+) -> dict[str, str]:
+    return _test_corpus_uncached(root, paths, testpaths)
+
+
+def tracked_paths(root: str) -> tuple[str, ...]:
+    """Every path version control carries, sorted. Memoized per repository root."""
+    return _tracked_paths_memo(root)
+
+
+def invocation_corpus(root: str, workflows: Sequence[Artifact]) -> dict[str, str]:
+    """Every text in which an invocation could appear. NOT memoized, deliberately.
+
+    `Artifact` carries a `detail: dict` field, so it is frozen but not hashable and cannot key
+    a cache without a surrogate. That surrogate is not worth building: this scan reads the
+    Makefile, `verify.sh`, `scripts/ucos-env.sh` and the workflow set — on the order of forty
+    files, against the two thousand-odd that `source_corpus` reads. Excluding it keeps the
+    memoization free of a hand-rolled key whose correctness would have to be argued separately.
+    """
+    return _invocation_corpus_uncached(root, workflows)
+
+
+def source_corpus(
+    root: str, paths: Sequence[str], *, exclude: Sequence[str] = ()
+) -> dict[str, str]:
+    """``source_evidence`` per tracked module outside ``exclude``. Memoized on all three."""
+    return dict(_source_corpus_memo(root, tuple(paths), tuple(exclude)))
+
+
+def test_corpus(root: str, paths: Sequence[str], testpaths: Sequence[str]) -> dict[str, str]:
+    """``source_evidence`` per tracked test module. Memoized on all three."""
+    return dict(_test_corpus_memo(root, tuple(paths), tuple(testpaths)))
+
+
+def clear_caches() -> None:
+    """Drop every memoized repository scan. For a caller that changes the tree in-process."""
+    _tracked_paths_memo.cache_clear()
+    _source_corpus_memo.cache_clear()
+    _test_corpus_memo.cache_clear()

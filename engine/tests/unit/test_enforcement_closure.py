@@ -1165,3 +1165,45 @@ def test_a_law_filter_is_passed_through_to_the_measurement(monkeypatch) -> None:
     assert seen["repository"] == "elsewhere"
     assert seen["laws"] == ["UEC-L-01", "UEC-L-02"]
     assert seen["declaration"] is None
+
+
+def test_the_memoized_scans_equal_their_uncached_form(document: dict[str, Any]) -> None:
+    """The cache is measured against the thing it replaces, not argued for in a comment.
+
+    `discovery` memoizes three repository-wide scans so that a mutation suite building many
+    probes over one repository stops re-reading the same two thousand files per probe. The
+    property that makes that sound — a cached result is the result the uncached function would
+    have returned — is asserted here, because a cache justified only by prose is a cache nobody
+    can refute.
+
+    `invocation_corpus` is deliberately absent: it is not memoized, for the reason its own
+    docstring records.
+    """
+    declaration = parse(document, source="test")
+    paths = discovery.tracked_paths(ROOT)
+    testpaths = tuple(declaration.testpaths)
+
+    assert paths == discovery._tracked_paths_uncached(ROOT)
+    assert discovery.source_corpus(ROOT, paths, exclude=testpaths) == (
+        discovery._source_corpus_uncached(ROOT, paths, exclude=testpaths)
+    )
+    assert discovery.test_corpus(ROOT, paths, testpaths) == (
+        discovery._test_corpus_uncached(ROOT, paths, testpaths)
+    )
+
+
+def test_a_cached_mapping_cannot_be_aliased_by_its_consumer(document: dict[str, Any]) -> None:
+    """Two callers must not share one mutable dict, or one probe's consumer edits another's.
+
+    The scans return `dict`, and a cache handing out the same instance twice would make that
+    aliasing possible for the first time. The public functions copy on the way out; this
+    measures the copy rather than trusting it.
+    """
+    paths = discovery.tracked_paths(ROOT)
+    testpaths = tuple(parse(document, source="test").testpaths)
+    first = discovery.test_corpus(ROOT, paths, testpaths)
+    second = discovery.test_corpus(ROOT, paths, testpaths)
+    assert first == second
+    assert first is not second
+    first.clear()
+    assert discovery.test_corpus(ROOT, paths, testpaths) == second
