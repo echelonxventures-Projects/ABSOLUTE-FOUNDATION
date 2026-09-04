@@ -58,6 +58,107 @@ PY="${PYTHON:-python3}"
 # That made register content depend on WHICH generation steps had been run rather than on
 # repository state alone, which is drift by definition. All three steps are idempotent and
 # write only inside the ignored `knowledge/` tree.
+# --- stamp: skip when tracked state and every declared output are unchanged -----------
+#
+# Every producer below is declared `deterministic: true` in the generated-artifact registry,
+# so it reads tracked state and writes a pure function of it. When no tracked byte has moved
+# since a previous successful run AND every declared output is still present, running them
+# again is measurement without information.
+#
+# THE KEY IS DELIBERATELY COARSE. Any tracked change invalidates it and the stage runs in
+# full. Five of these producers — knowledge/, determinism-evidence/, the closure engines,
+# research/publication and realization/ — have NO declared input_closure anywhere in the
+# registry, so a per-producer skip would have to invent what they read. A wrong closure skips
+# a regeneration whose absence this stage exists to prevent: 50 failures and 3 errors in CI,
+# recorded in verify.sh at the stage that calls this script. Declaring those five closures is
+# real work and is deliberately not done here.
+#
+# INLINE, NOT A MODULE. A separate helper would be a new tracked object requiring an
+# irreversible UGA identity allocation for forty lines of build tooling, and this script is
+# already the ONE definition the certification path and the CI workflows share.
+#
+# The stamp lives under .runtime/, declared TOOL_OPERATIONAL by the exclusion register, so
+# this adds no tracked file and cannot dirty the working tree.
+STAMP=".runtime/prerequisites.stamp"
+_stamp_key() {
+  "$PY" - <<'STAMPPY' 2>/dev/null || true
+import hashlib, json, os, subprocess, sys
+
+try:
+    with open("00-BOOK/DATA/generated-artifact-registry.json", encoding="utf-8") as handle:
+        declared = json.load(handle)["generated_inputs"]
+except (OSError, KeyError, json.JSONDecodeError):
+    sys.exit(0)  # no declaration to check against: regenerate, never guess
+
+paths = sorted(entry["path"] for entry in declared)
+for path in paths:
+    if not os.path.exists(path):
+        sys.exit(0)  # a declared output is absent — the stage must run
+
+
+def hash_output(digest, path):
+    """Fold a declared output into the key: its CONTENT, not merely its presence.
+
+    These outputs are gitignored, so `git status` cannot see them change — a corrupted or
+    hand-edited artifact is invisible to a key built only from tracked state, and the stage
+    would skip over exactly the condition it exists to prevent. The suite itself regenerates
+    derived views, so this is a live condition and not a hypothetical one.
+    """
+    if os.path.isfile(path):
+        with open(path, "rb") as handle:
+            digest.update(path.encode())
+            digest.update(hashlib.sha256(handle.read()).digest())
+        return
+    for root, dirs, files in os.walk(path):
+        dirs.sort()
+        for name in sorted(files):
+            full = os.path.join(root, name)
+            try:
+                with open(full, "rb") as handle:
+                    digest.update(full.encode())
+                    digest.update(hashlib.sha256(handle.read()).digest())
+            except OSError:
+                sys.exit(0)  # unreadable output — regenerate rather than key on a guess
+
+
+def git(*args):
+    return subprocess.run(  # noqa: S603,S607
+        ["git", *args], capture_output=True, text=True, check=True
+    ).stdout
+
+
+try:
+    digest = hashlib.sha256(git("rev-parse", "HEAD").encode())
+    porcelain = git("status", "--porcelain=v1", "-z")
+except (OSError, subprocess.CalledProcessError):
+    sys.exit(0)  # no work tree to key on
+
+digest.update(porcelain.encode())
+for record in porcelain.split("\0"):
+    if len(record) < 4:
+        continue
+    path = record[3:]
+    if os.path.isfile(path):
+        with open(path, "rb") as handle:
+            digest.update(hashlib.sha256(handle.read()).digest())
+
+for path in paths:
+    hash_output(digest, path)
+
+sys.stdout.write(digest.hexdigest())
+STAMPPY
+}
+
+# The key is taken TWICE and the second one is what is stored. Taken only before
+# generation, it would record the outputs as they were BEFORE the producers rewrote
+# them, so the next run would compute a different key and never skip — measured, and
+# the reason this function exists rather than one inline invocation.
+KEY="$(_stamp_key)"
+if [ -n "$KEY" ] && [ -f "$STAMP" ] && [ "$KEY" = "$(cat "$STAMP" 2>/dev/null)" ]; then
+  echo "prerequisites: unchanged tracked state and every declared output present — skipped" >&2
+  exit 0
+fi
+
 "$PY" -m engine.knowledge.cli init --force            >/dev/null
 "$PY" -m engine.knowledge.cli capabilities --write    >/dev/null
 "$PY" -m engine.knowledge.cli docs                    >/dev/null
@@ -153,3 +254,9 @@ echo "generated prerequisites: knowledge · determinism-evidence · closure phas
 "$PY" 00-BOOK/tools/ukctx_certify.py >/dev/null
 
 echo "generated prerequisites: context projections + closure certificate (UCOS-UCTX-001)" >&2
+
+FINAL_KEY="$(_stamp_key)"
+if [ -n "$FINAL_KEY" ]; then
+  mkdir -p "$(dirname "$STAMP")"
+  printf '%s' "$FINAL_KEY" > "$STAMP"
+fi
