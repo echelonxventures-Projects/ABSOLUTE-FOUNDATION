@@ -221,6 +221,17 @@ verify-cost-model: bootstrap-quiet
 	@$(PY) -m engine.verification_intelligence.cost_model --from .uvi-durations.txt
 	@rm -f .uvi-durations.txt
 
+# merge-drivers: prove the ledger merge driver still does the two things it exists for.
+#
+# A merge driver runs ONLY during a merge, so nothing else would notice if it stopped working —
+# and the failure is silent in the worst way: git falls back to a text merge and writes an
+# identity ledger neither branch produced, which can resolve a collision by picking a side.
+# ART-05 forbids that outright. This target is also what makes the driver REACHABLE: an artifact
+# no import, plane or entry point reaches is code that cannot run, and Ω-4 refuses a rise in that
+# population. Invoking it here is a real check, not a reachability formality.
+merge-drivers: bootstrap-quiet
+	@$(PY) 00-BOOK/tools/merge-union-ledger.py --selftest
+
 # repo-ops: EPIC-PLAT-003 (Terminal T5) — one command performs complete repository
 # operational verification by orchestrating the canonical engines/scripts. Delegates to
 # repo-ops.sh, which self-heals the venv first (no parallel tooling).

@@ -5,10 +5,19 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7087,
+  "total_objects": 7094,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
+    {
+      "path": ".gitattributes",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003127",
+      "first_seen": "commit:bf91d269a0c6"
+    },
     {
       "path": ".github/workflows/acee-gate.yml",
       "object_class": "CONFIGURATION_OBJECT",
@@ -746,6 +755,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "00-BOOK/DATA/claims.jsonl",
+      "object_class": "TOOLING_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-UKB-TOOLING",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TOOLING-000053",
+      "first_seen": "commit:bf91d269a0c6"
+    },
+    {
       "path": "00-BOOK/DATA/connector-cursors.json",
       "object_class": "TOOLING_OBJECT",
       "lifecycle": "AUTHORED",
@@ -872,6 +890,15 @@
       "first_seen": "commit:a4f56e83e73f"
     },
     {
+      "path": "00-BOOK/DATA/mint-requests.jsonl",
+      "object_class": "TOOLING_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-UKB-TOOLING",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TOOLING-000054",
+      "first_seen": "commit:bf91d269a0c6"
+    },
+    {
       "path": "00-BOOK/DATA/mutation-governance-boundary.json",
       "object_class": "TOOLING_OBJECT",
       "lifecycle": "AUTHORED",
@@ -924,6 +951,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-TOOLING-000014",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "00-BOOK/DATA/workspace-coordination.json",
+      "object_class": "TOOLING_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-UKB-TOOLING",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TOOLING-000055",
+      "first_seen": "commit:bf91d269a0c6"
     },
     {
       "path": "00-BOOK/DECISIONS/ADR-0006-KNOWLEDGEKIND-CLOSURE-AFFIRMATION.md",
@@ -16604,6 +16640,24 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-TOOLING-000030",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "00-BOOK/tools/merge-regenerate.sh",
+      "object_class": "TOOLING_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-UKB-TOOLING",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TOOLING-000056",
+      "first_seen": "commit:bf91d269a0c6"
+    },
+    {
+      "path": "00-BOOK/tools/merge-union-ledger.py",
+      "object_class": "TOOLING_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-UKB-TOOLING",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TOOLING-000057",
+      "first_seen": "commit:bf91d269a0c6"
     },
     {
       "path": "00-BOOK/tools/register.sh",
@@ -33130,6 +33184,15 @@
       "owner": "UCOS-REPOSITORY-ROOT",
       "universal_id": "UCOS-CMG000-000001",
       "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "CODEOWNERS",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "UCOS-REPOSITORY-ROOT",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003128",
+      "first_seen": "commit:bf91d269a0c6"
     },
     {
       "path": "COMMIT-CLOSURE-DETERMINATION.md",

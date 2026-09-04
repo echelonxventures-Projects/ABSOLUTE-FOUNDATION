@@ -7,18 +7,18 @@
   "evidence_class": "IMPROVEMENT",
   "may_influence_certification": false,
   "observation": {
-    "total_objects": 7087,
+    "total_objects": 7094,
     "by_object_class": {
       "CONFIGURATION_OBJECT": 40,
       "DATA_OBJECT": 140,
       "DOCUMENT_ARTIFACT": 1667,
-      "EXCLUDED_DOCUMENT": 2918,
+      "EXCLUDED_DOCUMENT": 2920,
       "EXECUTABLE_OBJECT": 1375,
       "TEST_OBJECT": 896,
-      "TOOLING_OBJECT": 51
+      "TOOLING_OBJECT": 56
     },
     "by_lifecycle": {
-      "AUTHORED": 6742,
+      "AUTHORED": 6749,
       "GENERATED": 345
     },
     "distinct_owners": 295,
@@ -29,7 +29,7 @@
       },
       {
         "owner": "UCOS-REPOSITORY-ROOT",
-        "objects": 513
+        "objects": 515
       },
       {
         "owner": "platform/tests",
@@ -65,15 +65,30 @@
       }
     ],
     "objects_with_dependencies": 2099,
-    "dependency_edges": 10647,
+    "dependency_edges": 10648,
     "producers_bound_to_outputs": 43,
     "retired_identities": 8
   },
   "analysis": {
-    "deviations": []
+    "deviations": [
+      {
+        "invariant": "CAA-INV-03",
+        "name": "NO_SUBORDINATE_INSTRUMENT_CLAIMS_INDEPENDENT_AUTHORITY",
+        "violation_count": 1,
+        "origin": "INTRODUCED_OR_LATENT",
+        "severity": "BLOCKING"
+      }
+    ]
   },
   "planning": {
-    "plans": []
+    "plans": [
+      {
+        "invariant": "CAA-INV-03",
+        "action": "Investigate.",
+        "owner": "UCOS-UGA-001",
+        "evidence": "00-MASTER/UCOS-UGA-001/05-GOVERNANCE-INVARIANTS.json"
+      }
+    ]
   },
   "evolution": {
     "model": [
@@ -90,6 +105,13 @@
     "stage_reached": "Proposal",
     "rule": "This engine emits proposals as evidence (IMPROVEMENT class). It holds no approval authority and mutates no object outside its own surfaces and the append-only identity ledger. Uncontrolled evolution is structurally impossible because the engine has no write path to any other object.",
     "approval_authority": "HUMAN_AUTHORED_DECISION",
-    "proposals": []
+    "proposals": [
+      {
+        "invariant": "CAA-INV-03",
+        "action": "Investigate.",
+        "owner": "UCOS-UGA-001",
+        "evidence": "00-MASTER/UCOS-UGA-001/05-GOVERNANCE-INVARIANTS.json"
+      }
+    ]
   }
 }

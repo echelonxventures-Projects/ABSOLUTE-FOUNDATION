@@ -398,6 +398,22 @@
       "owns": "The enumerated work items derived from the measured MB7-MB24 closure gap, ordered into waves with their evidence and closure criteria.",
       "may_never_own": "An authority, a certification or a determination. A backlog records what remains to be done; it may not decide that anything is done.",
       "why_it_binds_itself": "It carries a top-level `authority` naming a programme phase, which the claim scan reads as an authority claim. It is a derived work plan and holds no standing of its own."
+    },
+    {
+      "id": "UCOS-WORKSPACE-COORDINATION-001",
+      "instrument": "00-BOOK/DATA/workspace-coordination.json",
+      "name": "Workspace Coordination Register",
+      "role": "PERSISTENCE",
+      "relation": "PROJECTION",
+      "derives_under": [
+        "UCKP-ART-04",
+        "UCKP-ART-05",
+        "UCKP-ART-13",
+        "UCKP-ART-16"
+      ],
+      "owns": "How concurrent actors coordinate over one governed corpus: the merge class of each register, the claim on an authority home, the mint window, and the measurement window a certification may not span.",
+      "may_never_own": "What an actor may change. Every mutation remains its own class owner's question under 00-BOOK/DATA/mutation-governance-boundary.json; this register decides only how two actors avoid destroying each other's work while doing it. It confers no permit and grants no identity.",
+      "why_it_binds_itself": "It carries a top-level `authority`, which the claim scan reads as an authority claim. It is a subordinate persistence instrument deriving under ART-04 (a persistence mechanism holds no independent authority), ART-05 (identity is irreversible, which is why minting is scheduled rather than concurrent), ART-13 (one canonical form, which is why a derived register is regenerated rather than merged) and ART-16 (governance is executable, which is why the merge classes are enforced by drivers rather than by convention)."
     }
   ],
   "$scan_comment": [

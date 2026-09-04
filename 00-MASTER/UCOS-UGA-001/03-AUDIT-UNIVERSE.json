@@ -5,8 +5,21 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "3 — Audit Universe",
   "evidence_class": "AUDIT",
-  "count": 5638,
+  "count": 5645,
   "events": [
+    {
+      "event_id": "UGA-AUD-618cd5b83d62",
+      "timestamp": "commit:bf91d269a0c6",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-EXDOC-003127",
+      "object_path": ".gitattributes",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-EXDOC-003127",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
     {
       "event_id": "UGA-AUD-368c03bec2e5",
       "timestamp": "commit:e98f59cd22e9",
@@ -853,6 +866,19 @@
       "status": "ACTIVE"
     },
     {
+      "event_id": "UGA-AUD-5db7e449f5c4",
+      "timestamp": "commit:bf91d269a0c6",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-TOOLING-000053",
+      "object_path": "00-BOOK/DATA/claims.jsonl",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-TOOLING-000053",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-18d939165661",
       "timestamp": "commit:e98f59cd22e9",
       "actor": "UCOS-UGA-001",
@@ -1035,6 +1061,19 @@
       "status": "ACTIVE"
     },
     {
+      "event_id": "UGA-AUD-8e809961cd32",
+      "timestamp": "commit:bf91d269a0c6",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-TOOLING-000054",
+      "object_path": "00-BOOK/DATA/mint-requests.jsonl",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-TOOLING-000054",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-5ee2f5d5dd0c",
       "timestamp": "commit:e98f59cd22e9",
       "actor": "UCOS-UGA-001",
@@ -1108,6 +1147,19 @@
       "object_path": "00-BOOK/DATA/volumes.json",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-TOOLING-000014",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-65c418afc186",
+      "timestamp": "commit:bf91d269a0c6",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-TOOLING-000055",
+      "object_path": "00-BOOK/DATA/workspace-coordination.json",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-TOOLING-000055",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"
@@ -23174,6 +23226,32 @@
       "status": "RETIRED"
     },
     {
+      "event_id": "UGA-AUD-71eab19e5932",
+      "timestamp": "commit:bf91d269a0c6",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-TOOLING-000056",
+      "object_path": "00-BOOK/tools/merge-regenerate.sh",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-TOOLING-000056",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-60b7aeca1a6a",
+      "timestamp": "commit:bf91d269a0c6",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-TOOLING-000057",
+      "object_path": "00-BOOK/tools/merge-union-ledger.py",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-TOOLING-000057",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
       "event_id": "UGA-AUD-40778d405de7",
       "timestamp": "commit:e98f59cd22e9",
       "actor": "UCOS-UGA-001",
@@ -41707,6 +41785,19 @@
       "object_path": "CMG-000012-IDENTITY-AND-OWNERSHIP-DETERMINATION.md",
       "before_state": "ANONYMOUS",
       "after_state": "UCOS-EXDOC-002567",
+      "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
+      "validation_result": "ADMITTED",
+      "status": "ACTIVE"
+    },
+    {
+      "event_id": "UGA-AUD-fcf14c4b7b34",
+      "timestamp": "commit:bf91d269a0c6",
+      "actor": "UCOS-UGA-001",
+      "action": "IDENTITY_MINTED",
+      "object_id": "UCOS-EXDOC-003128",
+      "object_path": "CODEOWNERS",
+      "before_state": "ANONYMOUS",
+      "after_state": "UCOS-EXDOC-003128",
       "evidence_reference": "00-MASTER/UCOS-UGA-001/01-EXECUTABLE-OBJECT-REGISTRY.json",
       "validation_result": "ADMITTED",
       "status": "ACTIVE"

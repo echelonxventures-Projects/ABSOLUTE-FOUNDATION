@@ -12002,8 +12002,8 @@
     "DET": 6,
     "CONFIG": 40,
     "DATAOBJ": 144,
-    "EXDOC": 3126,
-    "TOOLING": 52,
+    "EXDOC": 3128,
+    "TOOLING": 57,
     "ENGINE": 1380,
     "TESTOBJ": 896,
     "OBS": 7,
@@ -66563,6 +66563,48 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:e77aa5e444e8"
+    },
+    ".gitattributes": {
+      "universal_id": "UCOS-EXDOC-003127",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:bf91d269a0c6"
+    },
+    "00-BOOK/DATA/claims.jsonl": {
+      "universal_id": "UCOS-TOOLING-000053",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:bf91d269a0c6"
+    },
+    "00-BOOK/DATA/mint-requests.jsonl": {
+      "universal_id": "UCOS-TOOLING-000054",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:bf91d269a0c6"
+    },
+    "00-BOOK/DATA/workspace-coordination.json": {
+      "universal_id": "UCOS-TOOLING-000055",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:bf91d269a0c6"
+    },
+    "00-BOOK/tools/merge-regenerate.sh": {
+      "universal_id": "UCOS-TOOLING-000056",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:bf91d269a0c6"
+    },
+    "00-BOOK/tools/merge-union-ledger.py": {
+      "universal_id": "UCOS-TOOLING-000057",
+      "object_class": "TOOLING_OBJECT",
+      "category": "TOOLING",
+      "first_seen": "commit:bf91d269a0c6"
+    },
+    "CODEOWNERS": {
+      "universal_id": "UCOS-EXDOC-003128",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:bf91d269a0c6"
     }
   },
   "by_observation": {

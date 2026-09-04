@@ -62,7 +62,7 @@
       "meaning": "the evidence class the object's governance records belong to"
     }
   },
-  "count": 39380,
+  "count": 39409,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -134600,6 +134600,46 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
+      "from": "UCOS-EXDOC-003127",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003127",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-EXDOC-003127",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003127",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003128",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003128",
+      "kind": "owned_by",
+      "to": "UCOS-REPOSITORY-ROOT"
+    },
+    {
+      "from": "UCOS-EXDOC-003128",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003128",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
       "from": "UCOS-EXEC-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -163338,6 +163378,11 @@
       "from": "UCOS-TESTOBJ-000270",
       "kind": "depends_on",
       "to": "engine/uckp/universe.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000270",
+      "kind": "depends_on",
+      "to": "engine/uckp/validation.py"
     },
     {
       "from": "UCOS-TESTOBJ-000270",
@@ -192821,6 +192866,106 @@
     },
     {
       "from": "UCOS-TOOLING-000052",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TOOLING-000053",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TOOLING-000053",
+      "kind": "owned_by",
+      "to": "UCOS-UKB-TOOLING"
+    },
+    {
+      "from": "UCOS-TOOLING-000053",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TOOLING-000053",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TOOLING-000054",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TOOLING-000054",
+      "kind": "owned_by",
+      "to": "UCOS-UKB-TOOLING"
+    },
+    {
+      "from": "UCOS-TOOLING-000054",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TOOLING-000054",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TOOLING-000055",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TOOLING-000055",
+      "kind": "owned_by",
+      "to": "UCOS-UKB-TOOLING"
+    },
+    {
+      "from": "UCOS-TOOLING-000055",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TOOLING-000055",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TOOLING-000056",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TOOLING-000056",
+      "kind": "owned_by",
+      "to": "UCOS-UKB-TOOLING"
+    },
+    {
+      "from": "UCOS-TOOLING-000056",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TOOLING-000056",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TOOLING-000057",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TOOLING-000057",
+      "kind": "owned_by",
+      "to": "UCOS-UKB-TOOLING"
+    },
+    {
+      "from": "UCOS-TOOLING-000057",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TOOLING-000057",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },

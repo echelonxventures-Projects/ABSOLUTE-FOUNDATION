@@ -109,8 +109,26 @@ exec "$(git rev-parse --show-toplevel)/00-BOOK/tools/register.sh" --guard
 EOF
   chmod +x "$HOOK"
   echo "Installed commit-time enforcement gate: $HOOK"
+
   echo "(uninstall by deleting that file; git config was not modified.)"
   exit 0
+fi
+
+# Every driver `.gitattributes` names must be configured in THIS clone, or the class it
+# declares is silently a default text merge. Reported, never repaired: configuring a driver
+# is the operator's opt-in act (--install-hooks), so this states the condition and leaves
+# the decision where it belongs.
+if [ -f .gitattributes ]; then
+  MISSING=""
+  for drv in $(grep -oE 'merge=[a-z-]+' .gitattributes 2>/dev/null | sed 's/merge=//' | sort -u); do
+    [ "$drv" = "union" ] && continue   # git's own built-in; needs no configuration
+    git config --get "merge.$drv.driver" >/dev/null 2>&1 || MISSING="$MISSING $drv"
+  done
+  if [ -n "$MISSING" ]; then
+    echo "WARNING: .gitattributes declares merge driver(s) this clone has not configured:$MISSING" >&2
+    echo "  Those paths will fall back to a DEFAULT TEXT MERGE, silently." >&2
+    echo "  Configure them: bash 00-BOOK/tools/register.sh --install-hooks" >&2
+  fi
 fi
 
 # ==============================================================================

@@ -4,20 +4,28 @@
   "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "10-11 — Certification / Phase 8 / Phase 9",
-  "verdict": "CERTIFIED",
-  "blocking_deviations": [],
+  "verdict": "NOT_CERTIFIED",
+  "blocking_deviations": [
+    {
+      "invariant": "CAA-INV-03",
+      "name": "NO_SUBORDINATE_INSTRUMENT_CLAIMS_INDEPENDENT_AUTHORITY",
+      "violation_count": 1,
+      "origin": "INTRODUCED_OR_LATENT",
+      "severity": "BLOCKING"
+    }
+  ],
   "declared_open": [],
   "proof": {
-    "existence_digest": "58cb61f08103691fa33d72e24b870c838370f4db15a7b2f690e8a30728f11949",
-    "identity_digest": "acc53d8588e7f1545198b63473c72b0196c0756c495ce123c4543fd7128c2721",
-    "registry_digest": "2c2a85224d5149607838ff6be230a1eb2d5456e7281f574c1c9d9206fa916a73",
-    "graph_digest": "e4bd31d9d1e47d2e8423c4c4c373b93064b91318a0e87af2bd753d4efa9d82a1",
-    "invariant_digest": "6c9683ea63efa56a804aa8447b97addeb4c144560b4e28cbfc90ba469db17d97"
+    "existence_digest": "fe706501e79257dbf6a30c74d1406681c24f0dd7f3fcfe421979dfd72e9364cd",
+    "identity_digest": "b9e9e2bbe73df3bdf8b187c38d460432c70e0922fb1623b137e414145012b23e",
+    "registry_digest": "02e6a82fee3881522be8f1972d1e253c2532021580d98145d3d4733fef209da8",
+    "graph_digest": "a66795037039b2e56109db77238141198ad51e4f6fa59f908fd0b15f0c9ed47a",
+    "invariant_digest": "6861bdd3d8a35753eccdfaa9db616cf521792cd4557c020e25d807810e74f29f"
   },
   "fixed_point_property": "Outputs contain no wall clock, so a second run over an unchanged repository rewrites no byte. Fixed point is checkable by comparison.",
   "scope": {
-    "objects_governed": 7087,
-    "minted_by_this_programme": 5420,
+    "objects_governed": 7094,
+    "minted_by_this_programme": 5427,
     "corpus_bytes_touched": 0
   }
 }
