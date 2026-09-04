@@ -381,11 +381,16 @@ def prepare(
 def _build_venv(destination: str) -> str:
     """Create a virtualenv inside the extraction and install the extraction into it."""
     venv_dir = os.path.join(destination, ".uci-venv")
+    # Scrubbed for the same reason `run_frozen` is: `python -m venv` is a Python subprocess, so
+    # pytest-cov's `.pth` restarts coverage inside it and it writes a parallel data file into
+    # whatever directory it is run from. Building an environment is not a measurement and must
+    # contribute nothing to one.
     result = subprocess.run(  # noqa: S603
         [sys.executable, "-m", "venv", venv_dir],
         capture_output=True,
         text=True,
         check=False,
+        env=clean_environment(),
     )
     if result.returncode != 0:
         raise IntegrityError(f"could not create a virtualenv in the extraction: {result.stderr}")

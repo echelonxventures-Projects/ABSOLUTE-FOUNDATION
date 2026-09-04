@@ -66,6 +66,7 @@ from engine.certification_integrity.model import (
 )
 
 REPO = Path(__file__).resolve().parents[3]
+REPO_STR = str(REPO)
 
 # --------------------------------------------------------------------------- shared fixtures
 #
@@ -1868,3 +1869,252 @@ def test_a_real_measuring_subprocess_writes_no_data_file_beside_the_outer_sessio
     leaked = sorted(p.name for p in measurable.glob(".outer-session.data*"))
     assert leaked == [], f"the child contributed to a data file it does not own: {leaked}"
     assert (measurable / ".uci-shard-1.data").exists(), "and it still measured its own run"
+
+
+# ------------------------------------------------------------------ the spawn-scrub ratchet
+#
+# WHY A RATCHET AND NOT A BAN. A Python subprocess that inherits `COV_CORE_*` restarts coverage
+# at interpreter startup, and this repository has a second, worse consequence than stray data:
+# `platform/` here SHADOWS the standard library's `platform`, coverage imports the stdlib module
+# while bootstrapping, and `sys.modules['platform']` is then bound to it before the local package
+# can win. Every later `from platform.<anything> import ...` in that child dies with "'platform'
+# is not a package" — and 340 test modules import the local package. It has already been observed
+# aborting a child's collection entirely, which made THE test that proves no test is silently
+# skipped report 8,360 tests lost while the shards themselves ran and passed in full.
+#
+# The population cannot go to zero today: several of these sites live in 00-BOOK tools and
+# 00-MASTER engines that this suite does not own, and some tests deliberately measure the ambient
+# environment. So it is bounded instead, on the terms this repository uses everywhere else — the
+# count may FALL and may never RISE, and a fall must tighten the ceiling rather than leave slack a
+# regression can occupy in silence.
+
+
+def _unscrubbed_spawn_sites() -> list[str]:
+    """Every `sys.executable` subprocess in the tree that passes no `env=`.
+
+    Measured over `git ls-files` rather than a directory walk, so an untracked scratch file
+    cannot change the number and a tracked one always does.
+    """
+    import ast
+    import subprocess as sp
+
+    # `git` is resolved from PATH exactly as every other tool in this repository resolves it;
+    # pinning an absolute path would make the measurement machine-specific.
+    listed = sp.run(  # noqa: S603
+        ["git", "ls-files", "*.py"],  # noqa: S607
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=False,
+        env=immutable.clean_environment(),
+    )
+    sites: list[str] = []
+    for rel in listed.stdout.split():
+        source = (Path(REPO) / rel).read_text(encoding="utf-8")
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+            name = getattr(node.func, "attr", None) or getattr(node.func, "id", None)
+            if name not in {"run", "Popen", "check_output", "call", "check_call"}:
+                continue
+            segment = ast.get_source_segment(source, node) or ""
+            if "sys.executable" not in segment:
+                continue
+            if any(kw.arg == "env" for kw in node.keywords):
+                continue
+            sites.append(f"{rel}:{node.lineno}")
+    return sorted(sites)
+
+
+#: Measured at the commit that introduced this check. IT MAY FALL AND MAY NEVER RISE.
+UNSCRUBBED_SPAWN_CEILING = 16
+
+
+def test_no_new_subprocess_inherits_the_measurement_environment() -> None:
+    sites = _unscrubbed_spawn_sites()
+    assert len(sites) <= UNSCRUBBED_SPAWN_CEILING, (
+        f"{len(sites)} unscrubbed `sys.executable` spawn(s) exceed the ceiling "
+        f"{UNSCRUBBED_SPAWN_CEILING}. A new one inherits COV_CORE_* and will bind "
+        f"sys.modules['platform'] to the STDLIB module, breaking every later import of this "
+        f"repository's own platform package inside that child. Pass "
+        f"`env=immutable.clean_environment()`. New site(s): "
+        f"{sorted(set(sites) - set(_KNOWN_UNSCRUBBED))}"
+    )
+
+
+def test_a_repaid_spawn_site_tightens_the_ceiling() -> None:
+    """The lower half of the ratchet: debt repaid without tightening is refused exactly as new
+    debt is, because a ceiling above the measurement licenses that many silent regressions."""
+    sites = _unscrubbed_spawn_sites()
+    assert len(sites) >= UNSCRUBBED_SPAWN_CEILING, (
+        f"{len(sites)} unscrubbed spawn(s) is BELOW the ceiling {UNSCRUBBED_SPAWN_CEILING} — "
+        f"lower UNSCRUBBED_SPAWN_CEILING to {len(sites)} and record why it fell."
+    )
+
+
+#: The sites the ceiling stands on, so a failure names what is NEW rather than what is known.
+_KNOWN_UNSCRUBBED = (
+    "00-BOOK/tools/ukctx_assimilate.py:170",
+    "00-BOOK/tools/ukctx_certify.py:116",
+    "00-MASTER/P0-FINAL-CLOSURE-002/final_closure_engine.py:280",
+    "00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py:333",
+    "00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py:354",
+    "engine/tests/uckp/test_cli_and_package.py:238",
+    "engine/tests/unit/test_enforcement_closure.py:615",
+    "engine/tests/unit/test_verification_intelligence.py:826",
+    "engine/tests/unit/test_verification_intelligence.py:1071",
+    "platform/tests/test_canonical_validation_evidence.py:219",
+    "platform/tests/test_constitutional_authority_alignment.py:296",
+    "platform/tests/test_ledger_authority.py:760",
+    "platform/tests/test_observation_universe.py:241",
+    "platform/tests/test_verification_purity.py:180",
+    "platform/tests/test_verification_purity.py:280",
+    "platform/tests/test_verification_purity.py:416",
+)
+
+
+# --------------------------------------------------------------- the real extraction paths
+#
+# WHY THESE WERE UNTESTED, AND WHY THAT WAS THE WRONG TRADE. `prepare`, `extract`, `seal` and
+# `run` are the machinery that makes a certification claim mean anything: they take a commit,
+# rebuild it from `git archive` into a workspace nobody has written to, seal it to a digest that
+# is a function of the archived bytes alone, and execute a command inside it. The module sat at
+# 53% because exercising them costs a real extraction — and the paths that were skipped are
+# precisely the ones a wrong answer would travel through.
+#
+# The venv construction and its `pip install` remain unexercised ON PURPOSE: they cost tens of
+# seconds and can reach the network, and this suite already made the whole run 32% cheaper by
+# refusing to carry avoidable cost. Everything reachable with `build_venv=False` is covered here,
+# which is every path except the two that build an interpreter.
+
+
+def test_a_fingerprint_records_the_four_things_that_make_a_tree_citable() -> None:
+    fp = immutable.fingerprint(REPO_STR)
+    record = fp.as_record()
+    assert set(record) == {"head", "porcelain_digest", "tracked_digest", "dirty_entries"}
+    assert len(str(record["head"])) == 40, "a head that is not a full sha cannot address a tree"
+    assert isinstance(record["dirty_entries"], int)
+    assert immutable.fingerprint(REPO_STR) == fp, "two samples of one tree must be equal"
+
+
+def test_a_git_failure_is_reported_as_an_integrity_error_not_a_traceback() -> None:
+    """`_git` wraps OSError and CalledProcessError, because a caller that cannot tell 'the tree
+    moved' from 'git is missing' cannot decide what to do about either."""
+    with pytest.raises(immutable.IntegrityError):
+        immutable.resolve_sha(REPO_STR, "refs/heads/a-branch-that-does-not-exist")
+
+
+def test_the_dependency_digest_reads_pyproject_at_the_SHA_not_on_disk() -> None:
+    """The declared dependency set belongs to the commit under certification. Reading the working
+    tree instead would let an uncommitted edit change what a past commit is said to have needed."""
+    head = immutable.resolve_sha(REPO_STR)
+    digest = immutable._dependency_digest(REPO_STR, head)
+    assert len(digest) == 64, "a dependency digest is a sha256 over the pinned set"
+    assert immutable._dependency_digest(REPO_STR, head) == digest
+
+
+def test_extract_rebuilds_the_commit_and_seal_digests_the_archived_bytes(tmp_path: Path) -> None:
+    head = immutable.resolve_sha(REPO_STR)
+    destination = str(tmp_path / "extraction")
+    immutable.extract(REPO_STR, head, destination)
+
+    assert (Path(destination) / "pyproject.toml").exists(), "the archive did not land"
+    assert (Path(destination) / "engine").is_dir()
+
+    # `seal` makes a SEALING COMMIT over the extracted tree, so this is a 40-char git object
+    # id, not a content hash — the identity is git's, which is what makes it addressable.
+    sealed = immutable.seal(destination)
+    assert len(sealed) == 40
+
+    # Sealed identity is a function of CONTENT. A second extraction of the same commit into a
+    # different directory must agree, or two certifications of one commit could disagree.
+    other = str(tmp_path / "extraction-2")
+    immutable.extract(REPO_STR, head, other)
+    assert immutable.seal(other) == sealed, "the seal is not a function of the archived bytes"
+
+    # And a changed byte must move it, or the seal would certify nothing.
+    (Path(other) / "pyproject.toml").write_text("# perturbed\n", encoding="utf-8")
+    assert immutable.seal(other) != sealed
+
+
+def test_extract_refuses_a_sha_that_does_not_exist(tmp_path: Path) -> None:
+    with pytest.raises(immutable.IntegrityError):
+        immutable.extract(REPO_STR, "0" * 40, str(tmp_path / "nowhere"))
+
+
+def test_prepare_reuses_an_extraction_and_says_so(tmp_path: Path) -> None:
+    """Reuse is an optimisation that must never be silent: `reused` is on the record, so a run
+    that was measured against a cached tree can be told apart from one that rebuilt it."""
+    head = immutable.resolve_sha(REPO_STR)
+    workspace = str(tmp_path / "ws")
+
+    first = immutable.prepare(REPO_STR, head, workspace=workspace, build_venv=False)
+    assert first.reused is False
+    assert first.sealed_sha and len(first.sealed_sha) == 40
+    assert first.python == sys.executable, "build_venv=False measures with the caller's python"
+
+    second = immutable.prepare(REPO_STR, head, workspace=workspace, build_venv=False)
+    assert second.reused is True, "a prepared extraction was rebuilt instead of reused"
+    assert second.sealed_sha == first.sealed_sha, "reuse changed the sealed identity"
+    assert second.prepare_seconds <= first.prepare_seconds + 5
+
+
+def test_prepare_rebuilds_when_reuse_is_refused(tmp_path: Path) -> None:
+    head = immutable.resolve_sha(REPO_STR)
+    workspace = str(tmp_path / "ws")
+    immutable.prepare(REPO_STR, head, workspace=workspace, build_venv=False)
+    again = immutable.prepare(REPO_STR, head, workspace=workspace, build_venv=False, reuse=False)
+    assert again.reused is False, "reuse=False still served a cached extraction"
+
+
+def test_an_extraction_record_carries_both_shas(tmp_path: Path) -> None:
+    head = immutable.resolve_sha(REPO_STR)
+    record = immutable.prepare(
+        REPO_STR, head, workspace=str(tmp_path / "ws"), build_venv=False
+    ).as_record()
+    assert record["source_sha"] == head
+    assert record["sealed_sha"] != record["source_sha"], (
+        "source and sealed identity must be distinguishable — one names where the bytes came "
+        "from, the other names what they are"
+    )
+
+
+def test_run_executes_inside_the_extraction_and_collects_what_it_names(tmp_path: Path) -> None:
+    """The end-to-end claim: a command runs against the FROZEN tree, not the working tree, and
+    an artifact it produced can be cited afterwards because it was copied out."""
+    head = immutable.resolve_sha(REPO_STR)
+    outcome = immutable.run(
+        REPO_STR,
+        [
+            immutable.PYTHON_PLACEHOLDER,
+            "-c",
+            "import pathlib,os;"
+            "pathlib.Path('evidence.txt').write_text(os.path.basename(os.getcwd()));"
+            "print('ran')",
+        ],
+        sha=head,
+        workspace=str(tmp_path / "ws"),
+        build_venv=False,
+        collect={"evidence.txt": str(tmp_path / "collected.txt")},
+    )
+    assert outcome.exit_code == 0, outcome.stderr_tail
+    assert "ran" in outcome.stdout_tail
+    assert (tmp_path / "collected.txt").exists(), "a named artifact was not collected out"
+
+
+def test_run_reports_a_failing_command_without_raising(tmp_path: Path) -> None:
+    """A non-zero exit is a MEASUREMENT, not an error: the certification engine needs the record
+    of what failed, and an exception here would discard it."""
+    outcome = immutable.run(
+        REPO_STR,
+        [immutable.PYTHON_PLACEHOLDER, "-c", "raise SystemExit(3)"],
+        sha=immutable.resolve_sha(REPO_STR),
+        workspace=str(tmp_path / "ws"),
+        build_venv=False,
+    )
+    assert outcome.exit_code == 3
+    assert outcome.duration_seconds >= 0
