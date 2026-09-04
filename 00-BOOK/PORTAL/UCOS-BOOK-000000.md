@@ -944,6 +944,18 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - [UCOS-UNCOND-000001](UCOS-UNCOND-000001.md) UCOS Ω∞ — UNCONDITIONAL COMMIT READINESS DETERMINA
 - [UCOS-UNIVER-000019](UCOS-UNIVER-000019.md) UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DETERMIN
 - [UCOS-W4UFIF-000001](UCOS-W4UFIF-000001.md) W4 — UFI FAILURE MATRIX
+- [UCOS-ADR-000029](UCOS-ADR-000029.md) ADR-0028: Plane B is the requirement authority; ev
+- [UCOS-ADR-000030](UCOS-ADR-000030.md) ADR-0029: `RR-<concept_id>` survives the join; `RE
+- [UCOS-ADR-000031](UCOS-ADR-000031.md) ADR-0030: A deliberate gap is a record, not a defe
+- [UCOS-ADR-000032](UCOS-ADR-000032.md) ADR-0031: A discussion is not captured until its o
+- [UCOS-ADR-000033](UCOS-ADR-000033.md) ADR-0032: Four merge classes: derived regenerates,
+- [UCOS-ADR-000034](UCOS-ADR-000034.md) ADR-0033: Actors queue mint requests; the operator
+- [UCOS-ADR-000035](UCOS-ADR-000035.md) ADR-0034: An actor's unit of work is one authority
+- [UCOS-ADR-000036](UCOS-ADR-000036.md) ADR-0035: Four verification lanes, and which claim
+- [UCOS-ADR-000037](UCOS-ADR-000037.md) ADR-0036: A determination survives by being regene
+- [UCOS-ADR-000038](UCOS-ADR-000038.md) ADR-0037: Decisions D-01…D-12 and their successors
+- [UCOS-ADR-000039](UCOS-ADR-000039.md) ADR-0038: The three-part hardcoding test, and a cl
+- [UCOS-ADR-000040](UCOS-ADR-000040.md) ADR-0039: Fourteen agnosticism axes, each proven, 
 
 ## Backlinks (reverse)
 - [UCOS-ADV-000001](UCOS-ADV-000001.md) —Parent→
@@ -1625,6 +1637,18 @@ Breadcrumbs: [UCOS-BOOK-000000](UCOS-BOOK-000000.md)
 - [UCOS-ADR-000026](UCOS-ADR-000026.md) —Parent→
 - [UCOS-ADR-000027](UCOS-ADR-000027.md) —Parent→
 - [UCOS-ADR-000028](UCOS-ADR-000028.md) —Parent→
+- [UCOS-ADR-000029](UCOS-ADR-000029.md) —Parent→
+- [UCOS-ADR-000030](UCOS-ADR-000030.md) —Parent→
+- [UCOS-ADR-000031](UCOS-ADR-000031.md) —Parent→
+- [UCOS-ADR-000032](UCOS-ADR-000032.md) —Parent→
+- [UCOS-ADR-000033](UCOS-ADR-000033.md) —Parent→
+- [UCOS-ADR-000034](UCOS-ADR-000034.md) —Parent→
+- [UCOS-ADR-000035](UCOS-ADR-000035.md) —Parent→
+- [UCOS-ADR-000036](UCOS-ADR-000036.md) —Parent→
+- [UCOS-ADR-000037](UCOS-ADR-000037.md) —Parent→
+- [UCOS-ADR-000038](UCOS-ADR-000038.md) —Parent→
+- [UCOS-ADR-000039](UCOS-ADR-000039.md) —Parent→
+- [UCOS-ADR-000040](UCOS-ADR-000040.md) —Parent→
 - [UCOS-APPLICATION-000001](UCOS-APPLICATION-000001.md) —Parent→
 - [UCOS-APPLICATION-000012](UCOS-APPLICATION-000012.md) —Parent→
 - [UCOS-APPLICATION-000023](UCOS-APPLICATION-000023.md) —Parent→

@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-09-04T04:41:15+00:00 by ukbx portal. 1667 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-09-04T11:34:55+00:00 by ukbx portal. 1679 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1671,3 +1671,15 @@
 | [UCOS-UNCOND-000001](UCOS-UNCOND-000001.md) | UCOS Ω∞ — UNCONDITIONAL COMMIT READINESS DETERMINATION | VOL-000 | ACTIVE |
 | [UCOS-UNIVER-000019](UCOS-UNIVER-000019.md) | UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DETERMINATION | VOL-000 | ACTIVE |
 | [UCOS-W4UFIF-000001](UCOS-W4UFIF-000001.md) | W4 — UFI FAILURE MATRIX | VOL-000 | ACTIVE |
+| [UCOS-ADR-000029](UCOS-ADR-000029.md) | ADR-0028: Plane B is the requirement authority; every other  | VOL-003 | ACTIVE |
+| [UCOS-ADR-000030](UCOS-ADR-000030.md) | ADR-0029: `RR-<concept_id>` survives the join; `REQ-NN` beco | VOL-003 | ACTIVE |
+| [UCOS-ADR-000031](UCOS-ADR-000031.md) | ADR-0030: A deliberate gap is a record, not a defect: `DECLA | VOL-003 | ACTIVE |
+| [UCOS-ADR-000032](UCOS-ADR-000032.md) | ADR-0031: A discussion is not captured until its obligations | VOL-003 | ACTIVE |
+| [UCOS-ADR-000033](UCOS-ADR-000033.md) | ADR-0032: Four merge classes: derived regenerates, ledgers u | VOL-003 | ACTIVE |
+| [UCOS-ADR-000034](UCOS-ADR-000034.md) | ADR-0033: Actors queue mint requests; the operator mints in  | VOL-003 | ACTIVE |
+| [UCOS-ADR-000035](UCOS-ADR-000035.md) | ADR-0034: An actor's unit of work is one authority home, cla | VOL-003 | ACTIVE |
+| [UCOS-ADR-000036](UCOS-ADR-000036.md) | ADR-0035: Four verification lanes, and which claim each may  | VOL-003 | ACTIVE |
+| [UCOS-ADR-000037](UCOS-ADR-000037.md) | ADR-0036: A determination survives by being regenerated or a | VOL-003 | ACTIVE |
+| [UCOS-ADR-000038](UCOS-ADR-000038.md) | ADR-0037: Decisions D-01…D-12 and their successors are the o | VOL-003 | ACTIVE |
+| [UCOS-ADR-000039](UCOS-ADR-000039.md) | ADR-0038: The three-part hardcoding test, and a closed five- | VOL-003 | ACTIVE |
+| [UCOS-ADR-000040](UCOS-ADR-000040.md) | ADR-0039: Fourteen agnosticism axes, each proven, abstracted | VOL-003 | ACTIVE |

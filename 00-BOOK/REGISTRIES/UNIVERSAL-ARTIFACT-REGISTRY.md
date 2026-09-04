@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1667
+**Total artifacts:** 1679
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1675,5 +1675,17 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1665 | `UCOS-UNCOND-000001` | UCOS Ω∞ — UNCONDITIONAL COMMIT READINESS DETERMINATION | — | 000 | UPN-000013120–UPN-000013128 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UNCONDITIONAL-COMMIT-READINESS-DETERMINATION.md) |
 | 1666 | `UCOS-UNIVER-000019` | UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DETERMINATION | — | 000 | UPN-000013129–UPN-000013138 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UNIVERSAL-CERTIFICATION-CLOSURE-DETERMINATION.md) |
 | 1667 | `UCOS-W4UFIF-000001` | W4 — UFI FAILURE MATRIX | — | 000 | UPN-000013139–UPN-000013144 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../W4-UFI-FAILURE-MATRIX.md) |
+| 1668 | `UCOS-ADR-000029` | ADR-0028: Plane B is the requirement authority; every oth… | — | 003 | UPN-000013145–UPN-000013146 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0028-requirement-authority-is-plane-b.md) |
+| 1669 | `UCOS-ADR-000030` | ADR-0029: `RR-<concept_id>` survives the join; `REQ-NN` b… | — | 003 | UPN-000013147–UPN-000013147 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0029-requirement-identifier-scheme-survives-the-join.md) |
+| 1670 | `UCOS-ADR-000031` | ADR-0030: A deliberate gap is a record, not a defect: `DE… | — | 003 | UPN-000013148–UPN-000013149 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0030-declared-absent-is-a-lawful-disposition.md) |
+| 1671 | `UCOS-ADR-000032` | ADR-0031: A discussion is not captured until its obligati… | — | 003 | UPN-000013150–UPN-000013150 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0031-capture-obligations-as-candidates.md) |
+| 1672 | `UCOS-ADR-000033` | ADR-0032: Four merge classes: derived regenerates, ledger… | — | 003 | UPN-000013151–UPN-000013152 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0032-merge-classes-for-concurrent-actors.md) |
+| 1673 | `UCOS-ADR-000034` | ADR-0033: Actors queue mint requests; the operator mints … | — | 003 | UPN-000013153–UPN-000013154 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0033-identity-minting-is-scheduled.md) |
+| 1674 | `UCOS-ADR-000035` | ADR-0034: An actor's unit of work is one authority home, … | — | 003 | UPN-000013155–UPN-000013155 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0034-one-authority-home-per-actor.md) |
+| 1675 | `UCOS-ADR-000036` | ADR-0035: Four verification lanes, and which claim each m… | — | 003 | UPN-000013156–UPN-000013156 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0035-verification-lane-per-role.md) |
+| 1676 | `UCOS-ADR-000037` | ADR-0036: A determination survives by being regenerated o… | — | 003 | UPN-000013157–UPN-000013158 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0036-determination-documents-default-to-archive.md) |
+| 1677 | `UCOS-ADR-000038` | ADR-0037: Decisions D-01…D-12 and their successors are th… | — | 003 | UPN-000013159–UPN-000013159 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0037-only-the-operator-decides.md) |
+| 1678 | `UCOS-ADR-000039` | ADR-0038: The three-part hardcoding test, and a closed fi… | — | 003 | UPN-000013160–UPN-000013161 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0038-what-counts-as-hardcoding.md) |
+| 1679 | `UCOS-ADR-000040` | ADR-0039: Fourteen agnosticism axes, each proven, abstrac… | — | 003 | UPN-000013162–UPN-000013163 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0039-agnosticism-axis-dispositions.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

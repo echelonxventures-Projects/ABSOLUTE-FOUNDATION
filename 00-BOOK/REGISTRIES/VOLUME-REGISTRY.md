@@ -9,7 +9,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 466 | UPN-000000001–UPN-000013144 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 123 | UPN-000001327–UPN-000012507 |
-| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 91 | UPN-000000022–UPN-000010865 |
+| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 103 | UPN-000000022–UPN-000013163 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 24 | UPN-000004194–UPN-000012593 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
 | `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 83 | UPN-000004559–UPN-000009787 |
@@ -652,7 +652,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 
 *Universal architecture constitutions, catalogs, and engineering foundation.*  \
-**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 91
+**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 103
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -747,6 +747,18 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-ENG-000024` | Memory Layers | — | ACTIVE |
 | `UCOS-ENG-000025` | Declarations | — | ACTIVE |
 | `UCOS-ARCH-000025` | UNIVERSAL ARCHITECTURAL ASSUMPTION DETECTOR DETERMINATION | — | ACTIVE |
+| `UCOS-ADR-000029` | ADR-0028: Plane B is the requirement authority; every other r… | — | ACTIVE |
+| `UCOS-ADR-000030` | ADR-0029: `RR-<concept_id>` survives the join; `REQ-NN` becom… | — | ACTIVE |
+| `UCOS-ADR-000031` | ADR-0030: A deliberate gap is a record, not a defect: `DECLAR… | — | ACTIVE |
+| `UCOS-ADR-000032` | ADR-0031: A discussion is not captured until its obligations … | — | ACTIVE |
+| `UCOS-ADR-000033` | ADR-0032: Four merge classes: derived regenerates, ledgers un… | — | ACTIVE |
+| `UCOS-ADR-000034` | ADR-0033: Actors queue mint requests; the operator mints in s… | — | ACTIVE |
+| `UCOS-ADR-000035` | ADR-0034: An actor's unit of work is one authority home, clai… | — | ACTIVE |
+| `UCOS-ADR-000036` | ADR-0035: Four verification lanes, and which claim each may b… | — | ACTIVE |
+| `UCOS-ADR-000037` | ADR-0036: A determination survives by being regenerated or ad… | — | ACTIVE |
+| `UCOS-ADR-000038` | ADR-0037: Decisions D-01…D-12 and their successors are the op… | — | ACTIVE |
+| `UCOS-ADR-000039` | ADR-0038: The three-part hardcoding test, and a closed five-i… | — | ACTIVE |
+| `UCOS-ADR-000040` | ADR-0039: Fourteen agnosticism axes, each proven, abstracted,… | — | ACTIVE |
 
 ### VOL-004 — IMPLEMENTATION <a id="vol-004"></a>
 

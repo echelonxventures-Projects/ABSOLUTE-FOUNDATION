@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 13144  ·  **Page cursor (next free):** UPN-000013145
+**Pages allocated:** 13163  ·  **Page cursor (next free):** UPN-000013164
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1675,5 +1675,17 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000013120 | UPN-000013128 | 9 | `UCOS-UNCOND-000001` | 000 | UCOS Ω∞ — UNCONDITIONAL COMMIT READINESS DETE… |
 | UPN-000013129 | UPN-000013138 | 10 | `UCOS-UNIVER-000019` | 000 | UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DET… |
 | UPN-000013139 | UPN-000013144 | 6 | `UCOS-W4UFIF-000001` | 000 | W4 — UFI FAILURE MATRIX |
+| UPN-000013145 | UPN-000013146 | 2 | `UCOS-ADR-000029` | 003 | ADR-0028: Plane B is the requirement authorit… |
+| UPN-000013147 | UPN-000013147 | 1 | `UCOS-ADR-000030` | 003 | ADR-0029: `RR-<concept_id>` survives the join… |
+| UPN-000013148 | UPN-000013149 | 2 | `UCOS-ADR-000031` | 003 | ADR-0030: A deliberate gap is a record, not a… |
+| UPN-000013150 | UPN-000013150 | 1 | `UCOS-ADR-000032` | 003 | ADR-0031: A discussion is not captured until … |
+| UPN-000013151 | UPN-000013152 | 2 | `UCOS-ADR-000033` | 003 | ADR-0032: Four merge classes: derived regener… |
+| UPN-000013153 | UPN-000013154 | 2 | `UCOS-ADR-000034` | 003 | ADR-0033: Actors queue mint requests; the ope… |
+| UPN-000013155 | UPN-000013155 | 1 | `UCOS-ADR-000035` | 003 | ADR-0034: An actor's unit of work is one auth… |
+| UPN-000013156 | UPN-000013156 | 1 | `UCOS-ADR-000036` | 003 | ADR-0035: Four verification lanes, and which … |
+| UPN-000013157 | UPN-000013158 | 2 | `UCOS-ADR-000037` | 003 | ADR-0036: A determination survives by being r… |
+| UPN-000013159 | UPN-000013159 | 1 | `UCOS-ADR-000038` | 003 | ADR-0037: Decisions D-01…D-12 and their succe… |
+| UPN-000013160 | UPN-000013161 | 2 | `UCOS-ADR-000039` | 003 | ADR-0038: The three-part hardcoding test, and… |
+| UPN-000013162 | UPN-000013163 | 2 | `UCOS-ADR-000040` | 003 | ADR-0039: Fourteen agnosticism axes, each pro… |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

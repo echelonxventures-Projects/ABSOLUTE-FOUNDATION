@@ -1,31 +1,31 @@
 {
   "by_disposition": {
-    "IMPLEMENTED": 51,
-    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 24,
+    "IMPLEMENTED": 53,
+    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 32,
     "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION": 11,
-    "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY": 46,
+    "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY": 48,
     "SUPERSEDED": 4
   },
   "by_stage": {
     "CERTIFICATION": 0,
     "CLOSURE": 25,
     "CONSTITUTIONAL-AGREEMENT": 0,
-    "DECISION-REGISTRATION": 6,
+    "DECISION-REGISTRATION": 14,
     "DISCUSSION": 0,
     "IMPLEMENTATION": 0,
-    "REPOSITORY-MAPPING": 48,
-    "REPOSITORY-TRUTH-UPDATE": 57,
+    "REPOSITORY-MAPPING": 50,
+    "REPOSITORY-TRUTH-UPDATE": 59,
     "VALIDATION": 0
   },
   "conversation_only": [],
   "coverage": {
-    "aggregate_percent": 93,
+    "aggregate_percent": 92,
     "by_criterion": {
       "EQ-1": 51,
-      "EQ-2": 66,
-      "EQ-3": 66,
+      "EQ-2": 68,
+      "EQ-3": 67,
       "EQ-4": 66,
-      "EQ-5": 65
+      "EQ-5": 67
     },
     "completeness_disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
     "criteria": [
@@ -36,10 +36,10 @@
       "EQ-5"
     ],
     "decisions_fully_covered": 51,
-    "decisions_measured": 67,
-    "decisions_partially_covered": 16,
-    "dimensions_covered": 314,
-    "dimensions_measured": 335,
+    "decisions_measured": 69,
+    "decisions_partially_covered": 18,
+    "dimensions_covered": 319,
+    "dimensions_measured": 345,
     "partially_covered": [
       "DEC-ADAM-01",
       "DEC-ADAM-02",
@@ -49,6 +49,8 @@
       "DEC-ADR-0002",
       "DEC-ADR-0005",
       "DEC-ADR-0006",
+      "DEC-ADR-0038",
+      "DEC-ADR-0039",
       "DEC-CAEM-01",
       "DEC-CAEM-02",
       "DEC-CAEM-05",
@@ -58,10 +60,10 @@
       "DEC-CAEM-14",
       "DEC-CAEM-16"
     ],
-    "representation_percent": 76,
+    "representation_percent": 73,
     "scope_decision_class": "architectural"
   },
-  "decision_total": 136,
+  "decision_total": 148,
   "decisions": [
     {
       "action_taken": "",
@@ -11939,11 +11941,977 @@
       "title": "Mutation classification admits AUTHORED_DOCUMENT as its eighth class",
       "undispositioned": false,
       "work_package": null
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "constitutional",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0028-requirement-authority-is-plane-b.md",
+        "00-MASTER/UAKOS-CLOSURE-009/requirements.json",
+        "REQUIREMENT-UNIVERSE-INTEGRATION-DESIGN-ANALYSIS.md"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0028",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Takes the population-authority choice CEP-002 Art 14.2 expressly reserved and every derived engine declined to make. Two planes were measured -- 49 REQ-NN rows in hand-maintained markdown and 549 RR- records in engine-generated JSON, with no join key. Plane B is chosen because it is already data, already engine-produced and already carries authority NONE-DERIVED-TRUTH, so promoting it is a governed act rather than a rewrite.",
+      "reasons": [],
+      "source_register": "adr/0028-requirement-authority-is-plane-b.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "Plane B is the requirement authority; every other requirement surface projects from it",
+      "undispositioned": false,
+      "work_package": "WP-W3-001"
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "constitutional",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0029-requirement-identifier-scheme-survives-the-join.md",
+        "00-MASTER/UAKOS-CLOSURE-009/requirements.json",
+        "UCOS-OMEGA-INFINITY-COMPLETE-REQUIREMENT-MASTER-INDEX.md"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0029",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Consequential to DEC-ADR-0028. Renumbering 549 engine-minted identifiers to match 49 would reissue identity, which UCKP-ART-05 forbids; dropping REQ-NN would break every determination citing it. The alias keeps both true.",
+      "reasons": [],
+      "source_register": "adr/0029-requirement-identifier-scheme-survives-the-join.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "RR-<concept_id> survives the join; REQ-NN become recorded aliases",
+      "undispositioned": false,
+      "work_package": "WP-W3-001"
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0030-declared-absent-is-a-lawful-disposition.md",
+        "00-BOOK/DATA/exclusion-register.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0030",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Most recurring requirement arguments are about whether something missing is a defect or a decision. The exclusion register already refuses an ignored path with no declared class, on the stated ground that an exemption without a reason is a silent one; requirements gain the same discipline.",
+      "reasons": [],
+      "source_register": "adr/0030-declared-absent-is-a-lawful-disposition.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "A deliberate gap is a record, not a defect: DECLARED_ABSENT with a reason",
+      "undispositioned": false,
+      "work_package": "WP-W5-001"
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0031-capture-obligations-as-candidates.md",
+        "UNIVERSAL-REQUIREMENT-ADMISSION-PROCESS-DETERMINATION.md"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0031",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Extends CEP-002 Art 28.5's treatment of conversation-only decisions to requirements. An untriaged candidate becomes a gate failure, so forgetting is structurally impossible rather than discouraged.",
+      "reasons": [],
+      "source_register": "adr/0031-capture-obligations-as-candidates.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "A discussion is not captured until its obligations exist as CANDIDATE records",
+      "undispositioned": false,
+      "work_package": "WP-W3-001"
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "implementation",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0032-merge-classes-for-concurrent-actors.md",
+        "00-BOOK/DATA/workspace-coordination.json",
+        ".gitattributes",
+        "00-BOOK/tools/merge-union-ledger.py",
+        "00-BOOK/tools/merge-regenerate.sh",
+        "Makefile"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0032",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Implemented at c0c43f88. Measured cause: relationships.json 2.9 MB, id-ledger.json 2.3 MB and artifacts.json 2.1 MB are rewritten by every actor that registers anything. The union driver was exercised on a real two-branch git merge -- disjoint allocations unioned with page_cursor reconciled to the maximum, and one key carrying two values refused with exit 1 because ART-05 forbids resolving an identity collision automatically.",
+      "reasons": [],
+      "source_register": "adr/0032-merge-classes-for-concurrent-actors.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Four merge classes: derived regenerates, ledgers union and refuse, declarations merge by hand",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0033-identity-minting-is-scheduled.md",
+        "00-BOOK/DATA/mint-requests.jsonl",
+        "00-BOOK/DATA/allocation-permits.json",
+        "00-BOOK/DATA/workspace-coordination.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0033",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "A permit is single_use and head-bound, so any commit invalidates every outstanding permit. P-UCOS-CORPUS-001 was lost exactly that way and P-UCOS-CORPUS-003 nearly was. Three permits were exercised under this discipline in the session that recorded it, each issued by the operator against a manifest the agent measured and presented.",
+      "reasons": [],
+      "source_register": "adr/0033-identity-minting-is-scheduled.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "superseded_by": null,
+      "title": "Actors queue mint requests; the operator mints in scheduled windows",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0034-one-authority-home-per-actor.md",
+        "00-BOOK/DATA/claims.jsonl",
+        "00-BOOK/DATA/workspace-coordination.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0034",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "The ledger exists and is declared APPEND_ONLY, so claiming is an append and never conflicts; the refusal of a second open claim is the work package. UCOS-CAA-001 already partitions the repository one authority per instrument, so this reuses that partition rather than inventing a second.",
+      "reasons": [],
+      "source_register": "adr/0034-one-authority-home-per-actor.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "An actor's unit of work is one authority home, claimed from an append-only ledger",
+      "undispositioned": false,
+      "work_package": "WP-W1-002"
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": "00-MASTER/UVI-000001/uvi-declaration.json",
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "evidence_resolved": [
+        "00-MASTER/UVI-000001/uvi-declaration.json",
+        "adr/0035-verification-lane-per-role.md",
+        "00-MASTER/UVI-000001/uvi-declaration.json",
+        "verify.sh"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0035",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "UVI-L-05 already refuses any mode that claims more than it measures; this records the consumer-side obligation that matches it. Measured in the session that recorded it: nine verification runs, of which exactly one was --full and it failed, while --integration greens were being treated as satisfying a --full exit criterion.",
+      "reasons": [],
+      "source_register": "adr/0035-verification-lane-per-role.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-MAPPING",
+      "superseded_by": null,
+      "title": "Four verification lanes, and which claim each may be cited for",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "governance",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0036-determination-documents-default-to-archive.md",
+        "00-BOOK/DATA/generated-artifact-registry.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0036",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "UCKP-ART-11 already settles that documents are generated views and generated output never owns truth. The registry carries 369 entries under exactly this contract, so the mechanism is extended rather than invented. Roughly 300 root determinations are in scope, at least one of which records a finding later work corrected.",
+      "reasons": [],
+      "source_register": "adr/0036-determination-documents-default-to-archive.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "A determination survives by being regenerated or admitted; otherwise it is archived",
+      "undispositioned": false,
+      "work_package": "WP-W6-001"
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 0,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-5",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          }
+        ],
+        "percent": 0,
+        "shortfall": [
+          "EQ-1",
+          "EQ-2",
+          "EQ-3",
+          "EQ-4",
+          "EQ-5"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": false,
+      "decision_class": "constitutional",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "evidence_resolved": [
+        "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "adr/0037-only-the-operator-decides.md",
+        "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "00-BOOK/DATA/allocation-permits.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0037",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "CMG-000001 XLIV.5 prohibits self-ratification and CEP-002 Art 14.2 reserves this decision class; this records the working rule that follows from both. The three permits in the register carry authorization prose stating the agent recorded the operator's instruction rather than originating it.",
+      "reasons": [],
+      "source_register": "adr/0037-only-the-operator-decides.md",
+      "source_register_located": true,
+      "stage": "REPOSITORY-MAPPING",
+      "superseded_by": null,
+      "title": "Decisions of this class are the operator's; agents propose",
+      "undispositioned": false,
+      "work_package": null
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 2,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "00-MASTER/UCPA-000001/ucpa-declaration.json"
+            ],
+            "resolved": [
+              "00-MASTER/UCPA-000001/ucpa-declaration.json"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-3",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/uckp/vocabulary.py"
+            ],
+            "resolved": [
+              "engine/uckp/vocabulary.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 40,
+        "shortfall": [
+          "EQ-1",
+          "EQ-3",
+          "EQ-4"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0038-what-counts-as-hardcoding.md",
+        "engine/omega_governance/reference/domain.py",
+        "00-MASTER/UCPA-000001/ucpa-declaration.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0038",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "The test is generalized from reference/domain.py's own standard -- nothing branches on a domain name, and nothing quantifies over the shipped set. Measured baseline: 346 behaviour-deciding string comparisons, 87 literal membership sets, 85 repository paths in code and 32 numeric thresholds. UCPA-000001's treatment of BEING as a non-addressable axiom is the precedent for declaring a residue rather than claiming zero.",
+      "reasons": [],
+      "source_register": "adr/0038-what-counts-as-hardcoding.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "The three-part hardcoding test, and a closed five-item kernel residue",
+      "undispositioned": false,
+      "work_package": "WP-W5-001"
+    },
+    {
+      "action_taken": "Registered in this transaction with its ADR as located source register.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 3,
+        "dimensions": [
+          {
+            "covered": false,
+            "criterion": "EQ-1",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "engine/omega_governance/reference/domain.py"
+            ],
+            "resolved": [
+              "engine/omega_governance/reference/domain.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "00-MASTER/UEG-000001/ueg-declaration.json"
+            ],
+            "resolved": [
+              "00-MASTER/UEG-000001/ueg-declaration.json"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/omega_governance/reference/domain.py"
+            ],
+            "resolved": [
+              "engine/omega_governance/reference/domain.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 60,
+        "shortfall": [
+          "EQ-1",
+          "EQ-4"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0039-agnosticism-axis-dispositions.md",
+        "00-MASTER/UEG-000001/ueg-declaration.json",
+        "engine/omega_governance/reference/domain.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0039",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Measured against one bar: an abstraction with one implementation is an assumption, and one its own callers bypass is decoration. 20 non-test modules invoke git directly against 2 using the git provider; 1,732 direct sha256 call sites against a crypto-agility registry governing almost none of them. Four axes convert from unproven claims to declared absences, which is citable rather than recurring.",
+      "reasons": [],
+      "source_register": "adr/0039-agnosticism-axis-dispositions.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "Fourteen agnosticism axes, each proven, abstracted, bypassed or declared absent",
+      "undispositioned": false,
+      "work_package": "WP-W5-001"
     }
   ],
   "declaration_findings": [],
   "determination": "ASSIMILATED",
-  "evidence_references": 518,
+  "evidence_references": 557,
   "gate": "OPEN",
   "gate_exit": 0,
   "programme": {
@@ -12002,7 +12970,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "69bc881a5b2a0132da6ebc44172b236c6415cda30f520903922a35f2a9fecee6",
+  "seal_sha256": "2e8bdc73d1d9a898d5f9afc8250725b99e2c59df6ff14dd76322c58700fb2b49",
   "undispositioned": [],
   "unevidenced": [],
   "unindexed": []

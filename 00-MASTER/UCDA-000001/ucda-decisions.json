@@ -623,6 +623,50 @@
       "route": "Seven distinct, individually-acceptance-bound obligations, one per finding, each a substantive independent architectural change against a different owner — the same category of work ADR-0015/ADR-0016 each took as a dedicated, individually-tested, individually-registered decision. This package authorizes each to be executed as its own decision at that same granularity, rather than batched into one untested implementation.",
       "acceptance": "Each sub-obligation is discharged only when its owner substrate carries real, tested, executable evidence for its specific finding: P4-F-001 — CEU-001 supersession history is append-only, not mutated in place (DEC-ADR-0023, IMPLEMENTED); P4-F-004/006 — KnowledgeStore archives replaced versions and persists provenance chains (DEC-ADR-0025, IMPLEMENTED); P4-F-005 — UCDA decision mutations become hash-chained and append-only (DEC-ADR-0024, IMPLEMENTED); P4-F-007 remainder — the rival TemporalEvent at engine/uckp/values.py is resolved; P4-F-008 — a learning object model / evolution transaction object exists in UAUE; P4-F-009 remainder — UCXI per-subject context binding is exercised for a context kind and entity substrate beyond confidence.py's KNOWLEDGE/UKIP pairing (DEC-ADR-0026, IMPLEMENTED — IDENTITY and GOVERNANCE for CEU ExistenceUnit).",
       "authorization_required": true
+    },
+    {
+      "id": "WP-W3-001",
+      "title": "Establish the requirement authority and admit the corpus into it",
+      "discharges": [
+        "DEC-ADR-0028",
+        "DEC-ADR-0029",
+        "DEC-ADR-0031"
+      ],
+      "owner": "operator - carried by wave W3 of the implementation sequence",
+      "route": "DEC-ADR-0028 names Plane B the authority -> normalize both populations to one deterministic normal form and collapse duplicates by content hash -> admit Plane A's 49 and the conformance corpus as CANDIDATE records -> triage every candidate to one of the four admission states",
+      "acceptance": "One population, zero unresolved duplicates, every conflict naming both subjects and a disposition, zero untriaged candidates."
+    },
+    {
+      "id": "WP-W5-001",
+      "title": "Land the requirement, agnosticism and hardcoding invariants as a verification stage",
+      "discharges": [
+        "DEC-ADR-0030",
+        "DEC-ADR-0038",
+        "DEC-ADR-0039"
+      ],
+      "owner": "operator - carried by wave W5 of the implementation sequence",
+      "route": "INV-REQ-01..08 derive requirement status from owner + evidence key + gate -> INV-AGN-01/02 measure two implementations per declared axis or a declared absence -> INV-HC-01..04 ratchet the hardcoding candidate count from its measured baseline -> one run_stage line in verify.sh and one workflow",
+      "acceptance": "A synthetic unmapped clause fails the build; an unproven agnosticism claim fails; the literal count can only fall."
+    },
+    {
+      "id": "WP-W1-002",
+      "title": "Enforce one authority home per actor over the claim ledger",
+      "discharges": [
+        "DEC-ADR-0034"
+      ],
+      "owner": "operator - carried by wave W1 of the implementation sequence",
+      "route": "00-BOOK/DATA/claims.jsonl exists and is declared APPEND_ONLY -> add the refusal of a second open claim on a held authority home -> bind it to the workspace epoch",
+      "acceptance": "Two open claims on one authority home are refused; claiming remains an append and therefore never conflicts."
+    },
+    {
+      "id": "WP-W6-001",
+      "title": "Disposition every root determination document",
+      "discharges": [
+        "DEC-ADR-0036"
+      ],
+      "owner": "operator - carried by wave W6 of the implementation sequence",
+      "route": "Register the requirement documents as generated artifacts with producers and input closures -> sweep the root determinations, admitting content or archiving -> a document that is neither was describing a requirement nobody owns",
+      "acceptance": "Hand-editing a requirement document fails the build; the repository root holds instruments and projections."
     }
   ],
   "$decisions_comment": [
@@ -4027,6 +4071,216 @@
       ],
       "note": "Closes REQ-39 (UCOS-OMEGA-INFINITY-COMPLETE-REQUIREMENT-MASTER-INDEX.md), a gap discovered independently of adr/0019/WP-UCDA-028 during the requirement-index compilation pass -- CORRECTED: the initial registration of this decision incorrectly described it as discharging one of WP-UCDA-028's six sub-obligations; adr/0019's own list (P4-F-001, 004, 005, 006, 007-remainder, 008, 009-remainder) names no mutation-classification finding, so this decision stands on its own governance basis. Adds Class 7 AUTHORED_DOCUMENT and rule R-08 to the existing seven-rule mutation-governance-boundary.json / mutation_classification.py pair (EX-015/EX-016), reusing the exact owner-parameterised governed_by pattern GOVERNED_DECLARATION (Class 6) established. No new mutation authority, registry, or governance model created. Ownership is read from the artifact's own self-declared Authority (constitutions, determination/assessment reports) or Deciders (ADRs) field, checked in that priority order -- both are real, observed conventions in this repository's own governance documents, not invented. R-06 precedes R-08 and a JSON path never satisfies the markdown criterion, so GOVERNED_DECLARATION and AUTHORED_DOCUMENT are structurally disjoint.",
       "action_taken": "IMPLEMENTED -- 00-BOOK/DATA/mutation-governance-boundary.json: new AUTHORED_DOCUMENT mutation_classes entry (5 membership_criteria) and new R-08 classification rule (precedence 8, before the UNRESOLVED terminal). platform/repository_intelligence/mutation_classification.py: _r08_authored_document predicate registered in RULE_PREDICATES; authored_document_checks() (evidence generation, mirrors governed_declaration_checks()); authored_document_owner() (canonical owner resolution, Authority-then-Deciders priority); authored_document_lifecycle() (open-vocabulary Status field read); new Repository.text_of() accessor. platform/tests/test_mutation_classification.py: 13 new tests (53 total in file), covering both self-declaration conventions, ownership/authority/lifecycle resolution, per-criterion evidence, fail-closed refusal, structural exclusivity from GOVERNED_DECLARATION and SOURCE, untracked-document refusal, and no-duplicate-mutation-authority between Class 6 and 7. platform/tests/test_mutation_governance_boundary.py: 9 tests, including the no-duplicate-authority register-level invariant, re-exercised against the eight-class register -- all passing. Full platform/tests/: 6649 passed, 2 skipped (pre-existing, unrelated), no regression."
+    },
+    {
+      "id": "DEC-ADR-0028",
+      "title": "Plane B is the requirement authority; every other requirement surface projects from it",
+      "decision_class": "constitutional",
+      "source_register": "adr/0028-requirement-authority-is-plane-b.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0028-requirement-authority-is-plane-b.md",
+        "00-MASTER/UAKOS-CLOSURE-009/requirements.json",
+        "REQUIREMENT-UNIVERSE-INTEGRATION-DESIGN-ANALYSIS.md"
+      ],
+      "work_package": "WP-W3-001",
+      "note": "Takes the population-authority choice CEP-002 Art 14.2 expressly reserved and every derived engine declined to make. Two planes were measured -- 49 REQ-NN rows in hand-maintained markdown and 549 RR- records in engine-generated JSON, with no join key. Plane B is chosen because it is already data, already engine-produced and already carries authority NONE-DERIVED-TRUTH, so promoting it is a governed act rather than a rewrite.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0029",
+      "title": "RR-<concept_id> survives the join; REQ-NN become recorded aliases",
+      "decision_class": "constitutional",
+      "source_register": "adr/0029-requirement-identifier-scheme-survives-the-join.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0029-requirement-identifier-scheme-survives-the-join.md",
+        "00-MASTER/UAKOS-CLOSURE-009/requirements.json",
+        "UCOS-OMEGA-INFINITY-COMPLETE-REQUIREMENT-MASTER-INDEX.md"
+      ],
+      "work_package": "WP-W3-001",
+      "note": "Consequential to DEC-ADR-0028. Renumbering 549 engine-minted identifiers to match 49 would reissue identity, which UCKP-ART-05 forbids; dropping REQ-NN would break every determination citing it. The alias keeps both true.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0030",
+      "title": "A deliberate gap is a record, not a defect: DECLARED_ABSENT with a reason",
+      "decision_class": "governance",
+      "source_register": "adr/0030-declared-absent-is-a-lawful-disposition.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0030-declared-absent-is-a-lawful-disposition.md",
+        "00-BOOK/DATA/exclusion-register.json"
+      ],
+      "work_package": "WP-W5-001",
+      "note": "Most recurring requirement arguments are about whether something missing is a defect or a decision. The exclusion register already refuses an ignored path with no declared class, on the stated ground that an exemption without a reason is a silent one; requirements gain the same discipline.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0031",
+      "title": "A discussion is not captured until its obligations exist as CANDIDATE records",
+      "decision_class": "governance",
+      "source_register": "adr/0031-capture-obligations-as-candidates.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0031-capture-obligations-as-candidates.md",
+        "UNIVERSAL-REQUIREMENT-ADMISSION-PROCESS-DETERMINATION.md"
+      ],
+      "work_package": "WP-W3-001",
+      "note": "Extends CEP-002 Art 28.5's treatment of conversation-only decisions to requirements. An untriaged candidate becomes a gate failure, so forgetting is structurally impossible rather than discouraged.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0032",
+      "title": "Four merge classes: derived regenerates, ledgers union and refuse, declarations merge by hand",
+      "decision_class": "implementation",
+      "source_register": "adr/0032-merge-classes-for-concurrent-actors.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0032-merge-classes-for-concurrent-actors.md",
+        "00-BOOK/DATA/workspace-coordination.json",
+        ".gitattributes",
+        "00-BOOK/tools/merge-union-ledger.py",
+        "00-BOOK/tools/merge-regenerate.sh",
+        "Makefile"
+      ],
+      "note": "Implemented at c0c43f88. Measured cause: relationships.json 2.9 MB, id-ledger.json 2.3 MB and artifacts.json 2.1 MB are rewritten by every actor that registers anything. The union driver was exercised on a real two-branch git merge -- disjoint allocations unioned with page_cursor reconciled to the maximum, and one key carrying two values refused with exit 1 because ART-05 forbids resolving an identity collision automatically.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0033",
+      "title": "Actors queue mint requests; the operator mints in scheduled windows",
+      "decision_class": "governance",
+      "source_register": "adr/0033-identity-minting-is-scheduled.md",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
+      "disposition": "IMPLEMENTED",
+      "evidence": [
+        "adr/0033-identity-minting-is-scheduled.md",
+        "00-BOOK/DATA/mint-requests.jsonl",
+        "00-BOOK/DATA/allocation-permits.json",
+        "00-BOOK/DATA/workspace-coordination.json"
+      ],
+      "note": "A permit is single_use and head-bound, so any commit invalidates every outstanding permit. P-UCOS-CORPUS-001 was lost exactly that way and P-UCOS-CORPUS-003 nearly was. Three permits were exercised under this discipline in the session that recorded it, each issued by the operator against a manifest the agent measured and presented.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0034",
+      "title": "An actor's unit of work is one authority home, claimed from an append-only ledger",
+      "decision_class": "governance",
+      "source_register": "adr/0034-one-authority-home-per-actor.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0034-one-authority-home-per-actor.md",
+        "00-BOOK/DATA/claims.jsonl",
+        "00-BOOK/DATA/workspace-coordination.json"
+      ],
+      "work_package": "WP-W1-002",
+      "note": "The ledger exists and is declared APPEND_ONLY, so claiming is an append and never conflicts; the refusal of a second open claim is the work package. UCOS-CAA-001 already partitions the repository one authority per instrument, so this reuses that partition rather than inventing a second.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0035",
+      "title": "Four verification lanes, and which claim each may be cited for",
+      "decision_class": "governance",
+      "source_register": "adr/0035-verification-lane-per-role.md",
+      "stage": "REPOSITORY-MAPPING",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "evidence": [
+        "adr/0035-verification-lane-per-role.md",
+        "00-MASTER/UVI-000001/uvi-declaration.json",
+        "verify.sh"
+      ],
+      "canonical_owner": "00-MASTER/UVI-000001/uvi-declaration.json",
+      "note": "UVI-L-05 already refuses any mode that claims more than it measures; this records the consumer-side obligation that matches it. Measured in the session that recorded it: nine verification runs, of which exactly one was --full and it failed, while --integration greens were being treated as satisfying a --full exit criterion.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0036",
+      "title": "A determination survives by being regenerated or admitted; otherwise it is archived",
+      "decision_class": "governance",
+      "source_register": "adr/0036-determination-documents-default-to-archive.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0036-determination-documents-default-to-archive.md",
+        "00-BOOK/DATA/generated-artifact-registry.json"
+      ],
+      "work_package": "WP-W6-001",
+      "note": "UCKP-ART-11 already settles that documents are generated views and generated output never owns truth. The registry carries 369 entries under exactly this contract, so the mechanism is extended rather than invented. Roughly 300 root determinations are in scope, at least one of which records a finding later work corrected.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0037",
+      "title": "Decisions of this class are the operator's; agents propose",
+      "decision_class": "constitutional",
+      "source_register": "adr/0037-only-the-operator-decides.md",
+      "stage": "REPOSITORY-MAPPING",
+      "disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
+      "evidence": [
+        "adr/0037-only-the-operator-decides.md",
+        "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+        "00-BOOK/DATA/allocation-permits.json"
+      ],
+      "canonical_owner": "00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md",
+      "note": "CMG-000001 XLIV.5 prohibits self-ratification and CEP-002 Art 14.2 reserves this decision class; this records the working rule that follows from both. The three permits in the register carry authorization prose stating the agent recorded the operator's instruction rather than originating it.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0038",
+      "coverage": {
+        "EQ-2": [
+          "00-MASTER/UCPA-000001/ucpa-declaration.json"
+        ],
+        "EQ-5": [
+          "engine/uckp/vocabulary.py"
+        ]
+      },
+      "title": "The three-part hardcoding test, and a closed five-item kernel residue",
+      "decision_class": "architectural",
+      "source_register": "adr/0038-what-counts-as-hardcoding.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0038-what-counts-as-hardcoding.md",
+        "engine/omega_governance/reference/domain.py",
+        "00-MASTER/UCPA-000001/ucpa-declaration.json"
+      ],
+      "work_package": "WP-W5-001",
+      "note": "The test is generalized from reference/domain.py's own standard -- nothing branches on a domain name, and nothing quantifies over the shipped set. Measured baseline: 346 behaviour-deciding string comparisons, 87 literal membership sets, 85 repository paths in code and 32 numeric thresholds. UCPA-000001's treatment of BEING as a non-addressable axiom is the precedent for declaring a residue rather than claiming zero.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
+    },
+    {
+      "id": "DEC-ADR-0039",
+      "coverage": {
+        "EQ-2": [
+          "engine/omega_governance/reference/domain.py"
+        ],
+        "EQ-3": [
+          "00-MASTER/UEG-000001/ueg-declaration.json"
+        ],
+        "EQ-5": [
+          "engine/omega_governance/reference/domain.py"
+        ]
+      },
+      "title": "Fourteen agnosticism axes, each proven, abstracted, bypassed or declared absent",
+      "decision_class": "architectural",
+      "source_register": "adr/0039-agnosticism-axis-dispositions.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0039-agnosticism-axis-dispositions.md",
+        "00-MASTER/UEG-000001/ueg-declaration.json",
+        "engine/omega_governance/reference/domain.py"
+      ],
+      "work_package": "WP-W5-001",
+      "note": "Measured against one bar: an abstraction with one implementation is an assumption, and one its own callers bypass is decoration. 20 non-test modules invoke git directly against 2 using the git provider; 1,732 direct sha256 call sites against a crypto-agility registry governing almost none of them. Four axes convert from unproven claims to declared absences, which is citable rather than recurring.",
+      "action_taken": "Registered in this transaction with its ADR as located source register."
     }
   ],
   "$coverage_criteria_comment": [

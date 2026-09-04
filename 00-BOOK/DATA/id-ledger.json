@@ -11886,9 +11886,93 @@
       "page_start": 13139,
       "page_count": 6,
       "first_seen": "2026-09-04T04:41:05+00:00"
+    },
+    "adr/0028-requirement-authority-is-plane-b.md": {
+      "universal_id": "UCOS-ADR-000029",
+      "category": "ADR",
+      "page_start": 13145,
+      "page_count": 2,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0029-requirement-identifier-scheme-survives-the-join.md": {
+      "universal_id": "UCOS-ADR-000030",
+      "category": "ADR",
+      "page_start": 13147,
+      "page_count": 1,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0030-declared-absent-is-a-lawful-disposition.md": {
+      "universal_id": "UCOS-ADR-000031",
+      "category": "ADR",
+      "page_start": 13148,
+      "page_count": 2,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0031-capture-obligations-as-candidates.md": {
+      "universal_id": "UCOS-ADR-000032",
+      "category": "ADR",
+      "page_start": 13150,
+      "page_count": 1,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0032-merge-classes-for-concurrent-actors.md": {
+      "universal_id": "UCOS-ADR-000033",
+      "category": "ADR",
+      "page_start": 13151,
+      "page_count": 2,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0033-identity-minting-is-scheduled.md": {
+      "universal_id": "UCOS-ADR-000034",
+      "category": "ADR",
+      "page_start": 13153,
+      "page_count": 2,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0034-one-authority-home-per-actor.md": {
+      "universal_id": "UCOS-ADR-000035",
+      "category": "ADR",
+      "page_start": 13155,
+      "page_count": 1,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0035-verification-lane-per-role.md": {
+      "universal_id": "UCOS-ADR-000036",
+      "category": "ADR",
+      "page_start": 13156,
+      "page_count": 1,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0036-determination-documents-default-to-archive.md": {
+      "universal_id": "UCOS-ADR-000037",
+      "category": "ADR",
+      "page_start": 13157,
+      "page_count": 2,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0037-only-the-operator-decides.md": {
+      "universal_id": "UCOS-ADR-000038",
+      "category": "ADR",
+      "page_start": 13159,
+      "page_count": 1,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0038-what-counts-as-hardcoding.md": {
+      "universal_id": "UCOS-ADR-000039",
+      "category": "ADR",
+      "page_start": 13160,
+      "page_count": 2,
+      "first_seen": "2026-09-04T11:34:44+00:00"
+    },
+    "adr/0039-agnosticism-axis-dispositions.md": {
+      "universal_id": "UCOS-ADR-000040",
+      "category": "ADR",
+      "page_start": 13162,
+      "page_count": 2,
+      "first_seen": "2026-09-04T11:34:44+00:00"
     }
   },
-  "page_cursor": 13144,
+  "page_cursor": 13163,
   "category_seq": {
     "BOOK": 1,
     "REG": 19,
@@ -11914,7 +11998,7 @@
     "APP": 2,
     "EXEC": 4,
     "GOV": 6,
-    "ADR": 28,
+    "ADR": 40,
     "MASTER": 42,
     "ENVIRONMENTS": 1,
     "VERIFICATION": 1,
@@ -12002,7 +12086,7 @@
     "DET": 6,
     "CONFIG": 40,
     "DATAOBJ": 144,
-    "EXDOC": 3128,
+    "EXDOC": 3140,
     "TOOLING": 57,
     "ENGINE": 1380,
     "TESTOBJ": 896,
@@ -32732,6 +32816,156 @@
         "status": "ACTIVE",
         "path": "W4-UFI-FAILURE-MATRIX.md",
         "name": "W4 — UFI FAILURE MATRIX"
+      }
+    ],
+    "UCOS-ADR-000029": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "d2317fc5b077297c38ab8a041028be1177da092efa093e8417b41d1dd9a919ce",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0028-requirement-authority-is-plane-b.md",
+        "name": "ADR-0028: Plane B is the requirement authority; every other requirement surface projects from it"
+      },
+      {
+        "seq": 2,
+        "at": "2026-09-04T12:10:47+00:00",
+        "content_hash": "754650b81c356c1fee6e15a3a7874114ad49ab4f936c6a5dd6c8d16cce2d8e30",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0028-requirement-authority-is-plane-b.md",
+        "name": "ADR-0028: Plane B is the requirement authority; every other requirement surface projects from it"
+      }
+    ],
+    "UCOS-ADR-000030": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "c184fc07b7f4b42b82bf881609878ba9c85fcf181d7e2b64a6c02ae56bfa62fb",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0029-requirement-identifier-scheme-survives-the-join.md",
+        "name": "ADR-0029: `RR-<concept_id>` survives the join; `REQ-NN` become recorded aliases"
+      },
+      {
+        "seq": 2,
+        "at": "2026-09-04T12:10:47+00:00",
+        "content_hash": "8138e3d5a9a610ba8b6e39fec0af3d79c0a5f445c9de69df39f5a1351377d22f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0029-requirement-identifier-scheme-survives-the-join.md",
+        "name": "ADR-0029: `RR-<concept_id>` survives the join; `REQ-NN` become recorded aliases"
+      }
+    ],
+    "UCOS-ADR-000031": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "c00ec305c5eea729fe7dc9ff4d943474121de43f1052113f062a7deb2aa334d9",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0030-declared-absent-is-a-lawful-disposition.md",
+        "name": "ADR-0030: A deliberate gap is a record, not a defect: `DECLARED_ABSENT` with a reason"
+      }
+    ],
+    "UCOS-ADR-000032": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "e709d094d85239e656f7a1a5e9df0425fbcf302932cbbde31e0d9d06799a1fbe",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0031-capture-obligations-as-candidates.md",
+        "name": "ADR-0031: A discussion is not captured until its obligations exist as `CANDIDATE` records"
+      }
+    ],
+    "UCOS-ADR-000033": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "ccb92a128f5172d54c0ab47e5136e7b80528a6c16522dd57cb7aa35bd153c037",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0032-merge-classes-for-concurrent-actors.md",
+        "name": "ADR-0032: Four merge classes: derived regenerates, ledgers union and refuse, declarations merge by hand"
+      }
+    ],
+    "UCOS-ADR-000034": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "9b132d7f4348145ffe59620debbc59c7d92084fbdd99b0dd6b0642961565b27f",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0033-identity-minting-is-scheduled.md",
+        "name": "ADR-0033: Actors queue mint requests; the operator mints in scheduled windows"
+      }
+    ],
+    "UCOS-ADR-000035": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "71bf3ab40fbd420d4476715152eb77528645f7d734eed839e86b5e00362c25e6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0034-one-authority-home-per-actor.md",
+        "name": "ADR-0034: An actor's unit of work is one authority home, claimed from an append-only ledger"
+      }
+    ],
+    "UCOS-ADR-000036": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "36b5c6f6ff0ae5a1161836a01a6aa2a55504dd9be07a27170fd775545864a5e6",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0035-verification-lane-per-role.md",
+        "name": "ADR-0035: Four verification lanes, and which claim each may be cited for"
+      }
+    ],
+    "UCOS-ADR-000037": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "ccc441b4d782bb62b29388247a0879893cc8fd973d8728e12afa5b01acde84ad",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0036-determination-documents-default-to-archive.md",
+        "name": "ADR-0036: A determination survives by being regenerated or admitted; otherwise it is archived"
+      }
+    ],
+    "UCOS-ADR-000038": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "3f349178184c754dffdc46d3a7892191acd638f2e029cdc2f9db5c07dc64de0b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0037-only-the-operator-decides.md",
+        "name": "ADR-0037: Decisions D-01…D-12 and their successors are the operator's; agents propose"
+      }
+    ],
+    "UCOS-ADR-000039": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "099668482f22fd4a6eda477155bc90ae9efb80104630daccc57a7e18be83e108",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0038-what-counts-as-hardcoding.md",
+        "name": "ADR-0038: The three-part hardcoding test, and a closed five-item kernel residue"
+      }
+    ],
+    "UCOS-ADR-000040": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T11:34:44+00:00",
+        "content_hash": "bdb5d74e1fe98cc506a7e23c54c859bf7483d954a94c4688e0ebe1256f0ed9b4",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "adr/0039-agnosticism-axis-dispositions.md",
+        "name": "ADR-0039: Fourteen agnosticism axes, each proven, abstracted, bypassed or declared absent"
       }
     ]
   },
@@ -66605,6 +66839,78 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:bf91d269a0c6"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000029.md": {
+      "universal_id": "UCOS-EXDOC-003129",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000030.md": {
+      "universal_id": "UCOS-EXDOC-003130",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000031.md": {
+      "universal_id": "UCOS-EXDOC-003131",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000032.md": {
+      "universal_id": "UCOS-EXDOC-003132",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000033.md": {
+      "universal_id": "UCOS-EXDOC-003133",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000034.md": {
+      "universal_id": "UCOS-EXDOC-003134",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000035.md": {
+      "universal_id": "UCOS-EXDOC-003135",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000036.md": {
+      "universal_id": "UCOS-EXDOC-003136",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000037.md": {
+      "universal_id": "UCOS-EXDOC-003137",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000038.md": {
+      "universal_id": "UCOS-EXDOC-003138",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000039.md": {
+      "universal_id": "UCOS-EXDOC-003139",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000040.md": {
+      "universal_id": "UCOS-EXDOC-003140",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:c0c43f88f6c9"
     }
   },
   "by_observation": {

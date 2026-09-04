@@ -161,6 +161,52 @@
    "expires_at": null,
    "single_use": true,
    "$authorization": "Operator-authorized UGA allocation for the W1 concurrency foundation: the seven objects that make one governed corpus safe for more than one actor. WHAT THE SEVEN ARE. `.gitattributes` (four declared merge classes), 00-BOOK/tools/merge-regenerate.sh and merge-union-ledger.py (their drivers), 00-BOOK/DATA/workspace-coordination.json (the register that legislates them, bound under CAA as UCOS-WORKSPACE-COORDINATION-001), claims.jsonl and mint-requests.jsonl (append-only coordination state, union-merged so two actors appending never conflict) and CODEOWNERS (declared as a Wave-0 deliverable by REPOSITORY-CLOSURE-WAVES.md and never landed). WHY THIS IS WORTH AN IRREVERSIBLE ALLOCATION. Three collision points were measured on this repository, not assumed: relationships.json is 2.9 MB, id-ledger.json 2.3 MB and artifacts.json 2.1 MB, and every actor that registers anything rewrites all three, so every parallel branch collides; a permit is single_use and head-bound, so one actor's merge invalidates another's outstanding permit, which is how P-UCOS-CORPUS-001 was lost and how P-UCOS-CORPUS-003 nearly was; and DEC-ADR-0020 records verification tooling that silently reverted a mint it did not make. WHAT WAS PROVEN BEFORE ASKING. The union driver was exercised on a real two-branch git merge and unioned disjoint allocations while reconciling page_cursor to the maximum; given one key carrying two different values it REFUSED with exit 1 rather than choosing a side, because ART-05 forbids resolving an identity collision automatically. The unconfigured-driver check was shown to fire before installation and fall silent after, which matters because a named driver is inert without merge.<name>.driver in each clone and git says nothing when it falls back to a default text merge. WHAT THIS AUTHORIZES AND NOTHING ELSE. 7 by_object identifiers, category_seq EXDOC 3126->3128 and TOOLING 52->57, measured by `uga_engine.py run --plan` over head bf91d269a0c698ad8cf192e25c44d10c8a74cb0f. Scoped to by_object alone, so it grants nothing in by_path. Bound to manifest_digest, preimage_digest and head, so it authorizes this allocation and no other. Single-use. PROVENANCE OF THE AUTHORIZATION: the operator was shown this manifest, these digests, this head, the CAA-INV-02 and UGA-INV-01 gate output, and the outstanding installer requirement, and instructed `go ahead with the permit`. The agent recorded that instruction; it did not originate it."
+  },
+  {
+   "permit_id": "P-UCOS-CORPUS-004",
+   "actor": "UMB-IMP-001 :: ukb.py build --mint",
+   "manifest_digest": "339d57c03d87ed9712b9c95dfa6f6d9b520c86911c897f319b85388b9a5c129b",
+   "preimage_digest": "ff56af2f8ef697851cb3d434532246a53ff3dfb878b1c6f430bd18c945a6af80",
+   "head": "c0c43f88f6c91648453fec54ab1eb72663d824db",
+   "scope": {
+    "maps": [
+     "by_path"
+    ],
+    "max_allocations": 12
+   },
+   "expires_at": null,
+   "single_use": true,
+   "$authorization": "Operator-authorized CORPUS_REGISTRATION for the twelve W2 decision documents adr/0028 through adr/0039, which record decisions D-01 to D-12. WHY THEY EXIST AT ALL. CEP-002 Art 28.5 refuses a decision whose trace is only conversational, and all 136 prior records resolve to a located adr/NNNN-*.md. The twelve decisions existed only in a session transcript, so recording them lawfully required the documents first. WHAT THE MEASUREMENT TAUGHT, RECORDED BECAUSE IT WAS AN ERROR. An earlier plan measured zero allocations and was read as `no permit needed`. That measurement was taken while the files were UNTRACKED, when `ukb enforce --pre` reports them as `awaiting VCS binding - not repository artifacts until git add`. Once staged the true requirement appeared: twelve by_path identifiers here, and twelve by_object identifiers under a separate authority. ./verify.sh --full is what caught it, as twelve `owned_by_nobody` contradictions against a ratchet whose ceiling is zero -- an unregistered document is precisely a thing no authority claims. WHAT THIS AUTHORIZES AND NOTHING ELSE. 12 permanent by_path identifiers, category_seq ADR 28->40, page_cursor 13144->13163, measured by `ukb.py build --mint --plan` over head c0c43f88f6c91648453fec54ab1eb72663d824db with the twelve files staged. Scoped to by_path alone, so it grants nothing in by_object -- the projections this registration EMITS will require their own authorization measured after the fact, as P-UCOS-UGA-002 did for the seventy PORTAL files the previous corpus registration produced. Bound to manifest_digest, preimage_digest and head. Single-use. PROVENANCE: the operator was shown both manifests, the failing ratchet, and the warning that the by_object manifest would grow once this permit is spent, and instructed `go ahead with both permits`. The agent recorded that instruction; it did not originate it."
+  },
+  {
+   "permit_id": "P-UCOS-UGA-004",
+   "actor": "UCOS-UGA-001 :: uga_engine.py run",
+   "manifest_digest": "d9c9478ffd5a560f0bb2d4bcba61af331d4190387cf643c89d91cbd0f7b4360e",
+   "preimage_digest": "6351935b80571e8f8ff8454578a91f993b461605fe4fd15c5ad1b504c6da02b0",
+   "head": "c0c43f88f6c91648453fec54ab1eb72663d824db",
+   "scope": {
+    "maps": [
+     "by_object"
+    ],
+    "max_allocations": 12
+   },
+   "expires_at": null,
+   "single_use": true,
+   "$authorization": "Operator-authorized UGA allocation completing the W2 decision registration that P-UCOS-CORPUS-004 began. WHAT THE SUBJECTS ARE, AND THAT THEY ARE NOT THE ADRs. Registering the twelve ADR documents into the corpus REMOVED their by_object requirement -- a document the corpus registry carries is not UGA's subject, since EXCLUDED_DOCUMENT means precisely a readable document the corpus registry does NOT carry. What needs identity instead is the twelve PORTAL projections `register.sh` emitted for them, which are generated views no corpus registration covers. This is the same shape as P-UCOS-UGA-002, which allocated for the seventy PORTAL files the previous corpus registration produced. WHY IT WAS MEASURED TWICE. The by_object manifest was first measured before the corpus mint and quoted to the operator at 12 identifiers; spending the corpus permit moved the ledger, so the pre-image changed from ff56af2f to 6351935b while the manifest digest and the allocation shape held at 12, EXDOC 3128->3140. The operator was warned in advance that this manifest would move and authorized on that basis. WHAT THIS AUTHORIZES AND NOTHING ELSE. 12 permanent by_object identifiers, category_seq EXDOC 3128->3140, measured by `uga_engine.py run --plan` over head c0c43f88f6c91648453fec54ab1eb72663d824db with every affected path staged. Scoped to by_object alone. Bound to manifest_digest, preimage_digest and head. Single-use. PROVENANCE: the operator instructed `go ahead with both permits` after being shown both manifests and the warning that this one would grow. The agent recorded that instruction; it did not originate it."
+  },
+  {
+   "permit_id": "P-UCOS-CORPUS-005",
+   "actor": "UMB-IMP-001 :: ukb.py build --mint",
+   "manifest_digest": "34d7709cd1c099baa26ecad31c6a6d51c43e73e0a0e69744350dac38a3c6a354",
+   "preimage_digest": "c53c23a1fa4147d20395753fd7a4d4c520dd447815101981a67dcb9fc72c10e7",
+   "head": "c0c43f88f6c91648453fec54ab1eb72663d824db",
+   "scope": {
+    "maps": [],
+    "max_allocations": 0
+   },
+   "expires_at": null,
+   "single_use": true,
+   "$authorization": "Operator-authorized ledger re-derivation with ZERO allocation, correcting a lineage cycle this programme introduced. WHAT WENT WRONG. adr/0028 was written with `| Supersedes | none - takes a decision CEP-002 Art 14.2 expressly reserved |`. The lineage derivation reads references OUT of that field, so `CEP-002` became the declared ORIGIN of adr/0028; since adr/0028's own origin resolves to the same instrument, the supersession family closed on itself and `test_verify_reports_determinism_and_passes` refused with `supersession family is not acyclic: UCOS-ADR-000029 -> UCOS-CON-000034 -> UCOS-ADR-000029`. A field whose value is `none` may carry no citation, because a parser cannot distinguish an explanation mentioning a document from a reference to it -- the same defect adr/0027 records about its own guard, where a stage label mentioning a flag was indistinguishable from an invocation of it. WHY A PERMIT IS REQUIRED FOR A WRITE THAT ALLOCATES NOTHING. The correction edits documents that were already minted and registered, so their content hashes move and the ledger's `history` differs from the pre-image. NO_ALLOCATION refused it in terms: `the sentinel asserts that nothing changes, not merely that nothing is allocated`. The underlying error is that content was registered before it was correct; had the Supersedes field been written plainly, this write would not exist. WHAT THIS AUTHORIZES AND NOTHING ELSE. One `ukb.py build` re-derivation over head c0c43f88f6c91648453fec54ab1eb72663d824db with total_allocations=0 -- no identifier is minted, reissued or reused, and no map gains an entry. Bound to manifest_digest, preimage_digest and head. Single-use. PROVENANCE: the operator was shown the cycle, the refusal, this manifest and the rejected alternative (reverting the text, which would leave a non-acyclic supersession family standing), and instructed `go`. The agent recorded that instruction; it did not originate it."
   }
  ]
 }

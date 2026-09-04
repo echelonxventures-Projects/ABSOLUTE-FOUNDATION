@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7094,
+  "total_objects": 7118,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -1468,6 +1468,114 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002646",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000029.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003129",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000030.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003130",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000031.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003131",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000032.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003132",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000033.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003133",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000034.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003134",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000035.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003135",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000036.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003136",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000037.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003137",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000038.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003138",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000039.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003139",
+      "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000040.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003140",
+      "first_seen": "commit:c0c43f88f6c9"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-ADV-000001.md",
@@ -37274,6 +37382,102 @@
       "lifecycle": "AUTHORED",
       "owner": "adr",
       "universal_id": "UCOS-ADR-000028",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0028-requirement-authority-is-plane-b.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000029",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0029-requirement-identifier-scheme-survives-the-join.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000030",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0030-declared-absent-is-a-lawful-disposition.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000031",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0031-capture-obligations-as-candidates.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000032",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0032-merge-classes-for-concurrent-actors.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000033",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0033-identity-minting-is-scheduled.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000034",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0034-one-authority-home-per-actor.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000035",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0035-verification-lane-per-role.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000036",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0036-determination-documents-default-to-archive.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000037",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0037-only-the-operator-decides.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000038",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0038-what-counts-as-hardcoding.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000039",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "adr/0039-agnosticism-axis-dispositions.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000040",
       "identity_authority": "UMB-IMP-001"
     },
     {

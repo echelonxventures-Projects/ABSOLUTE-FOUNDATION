@@ -62,7 +62,7 @@
       "meaning": "the evidence class the object's governance records belong to"
     }
   },
-  "count": 39409,
+  "count": 39505,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -621,6 +621,246 @@
     },
     {
       "from": "UCOS-ADR-000028",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000029",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000029",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000029",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000029",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000030",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000030",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000030",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000030",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000031",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000031",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000031",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000031",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000032",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000032",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000032",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000032",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000033",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000033",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000033",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000033",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000034",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000034",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000034",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000034",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000035",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000035",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000035",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000035",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000036",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000036",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000036",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000036",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000037",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000037",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000037",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000037",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000038",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000038",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000038",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000038",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000039",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000039",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000039",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000039",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000040",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000040",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000040",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000040",
       "kind": "validated_by",
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
@@ -134636,6 +134876,246 @@
     },
     {
       "from": "UCOS-EXDOC-003128",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003129",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003129",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003129",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003129",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003130",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003130",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003130",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003130",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003131",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003131",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003131",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003131",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003132",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003132",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003132",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003132",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003133",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003133",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003133",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003133",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003134",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003134",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003134",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003134",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003135",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003135",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003135",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003135",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003136",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003136",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003136",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003136",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003137",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003137",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003137",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003137",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003138",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003138",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003138",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003138",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003139",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003139",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003139",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003139",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-EXDOC-003140",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-EXDOC-003140",
+      "kind": "owned_by",
+      "to": "00-BOOK/PORTAL"
+    },
+    {
+      "from": "UCOS-EXDOC-003140",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-EXDOC-003140",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },

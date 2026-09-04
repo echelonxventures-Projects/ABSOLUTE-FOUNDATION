@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-04T04:41:06+00:00",
+  "generated_at": "2026-09-04T12:10:47+00:00",
   "generator_version": "1.0.0",
-  "count": 1667,
+  "count": 1679,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -74218,6 +74218,498 @@
       "path": "W4-UFI-FAILURE-MATRIX.md",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
       "content_hash": "308c3b54c2ccedcde2c3c9463cbd0fe7593e68012116df840481b899cf17eb98",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000029",
+      "native_id": null,
+      "name": "ADR-0028: Plane B is the requirement authority; every other requirement surface projects from it",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13145,
+      "page_end": 13146,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0028-requirement-authority-is-plane-b.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "754650b81c356c1fee6e15a3a7874114ad49ab4f936c6a5dd6c8d16cce2d8e30",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000030",
+      "native_id": null,
+      "name": "ADR-0029: `RR-<concept_id>` survives the join; `REQ-NN` become recorded aliases",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13147,
+      "page_end": 13147,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0029-requirement-identifier-scheme-survives-the-join.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "8138e3d5a9a610ba8b6e39fec0af3d79c0a5f445c9de69df39f5a1351377d22f",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000031",
+      "native_id": null,
+      "name": "ADR-0030: A deliberate gap is a record, not a defect: `DECLARED_ABSENT` with a reason",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13148,
+      "page_end": 13149,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0030-declared-absent-is-a-lawful-disposition.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "c00ec305c5eea729fe7dc9ff4d943474121de43f1052113f062a7deb2aa334d9",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000032",
+      "native_id": null,
+      "name": "ADR-0031: A discussion is not captured until its obligations exist as `CANDIDATE` records",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13150,
+      "page_end": 13150,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0031-capture-obligations-as-candidates.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "e709d094d85239e656f7a1a5e9df0425fbcf302932cbbde31e0d9d06799a1fbe",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000033",
+      "native_id": null,
+      "name": "ADR-0032: Four merge classes: derived regenerates, ledgers union and refuse, declarations merge by hand",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13151,
+      "page_end": 13152,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0032-merge-classes-for-concurrent-actors.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "ccb92a128f5172d54c0ab47e5136e7b80528a6c16522dd57cb7aa35bd153c037",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000034",
+      "native_id": null,
+      "name": "ADR-0033: Actors queue mint requests; the operator mints in scheduled windows",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13153,
+      "page_end": 13154,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0033-identity-minting-is-scheduled.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "9b132d7f4348145ffe59620debbc59c7d92084fbdd99b0dd6b0642961565b27f",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000035",
+      "native_id": null,
+      "name": "ADR-0034: An actor's unit of work is one authority home, claimed from an append-only ledger",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13155,
+      "page_end": 13155,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0034-one-authority-home-per-actor.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "71bf3ab40fbd420d4476715152eb77528645f7d734eed839e86b5e00362c25e6",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000036",
+      "native_id": null,
+      "name": "ADR-0035: Four verification lanes, and which claim each may be cited for",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13156,
+      "page_end": 13156,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0035-verification-lane-per-role.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "36b5c6f6ff0ae5a1161836a01a6aa2a55504dd9be07a27170fd775545864a5e6",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000037",
+      "native_id": null,
+      "name": "ADR-0036: A determination survives by being regenerated or admitted; otherwise it is archived",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13157,
+      "page_end": 13158,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0036-determination-documents-default-to-archive.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "ccc441b4d782bb62b29388247a0879893cc8fd973d8728e12afa5b01acde84ad",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000038",
+      "native_id": null,
+      "name": "ADR-0037: Decisions D-01…D-12 and their successors are the operator's; agents propose",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13159,
+      "page_end": 13159,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0037-only-the-operator-decides.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "3f349178184c754dffdc46d3a7892191acd638f2e029cdc2f9db5c07dc64de0b",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000039",
+      "native_id": null,
+      "name": "ADR-0038: The three-part hardcoding test, and a closed five-item kernel residue",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13160,
+      "page_end": 13161,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0038-what-counts-as-hardcoding.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "099668482f22fd4a6eda477155bc90ae9efb80104630daccc57a7e18be83e108",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000040",
+      "native_id": null,
+      "name": "ADR-0039: Fourteen agnosticism axes, each proven, abstracted, bypassed or declared absent",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13162,
+      "page_end": 13163,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0039-agnosticism-axis-dispositions.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "bdb5d74e1fe98cc506a7e23c54c859bf7483d954a94c4688e0ebe1256f0ed9b4",
       "traceability": {
         "requirement": [],
         "architecture": [

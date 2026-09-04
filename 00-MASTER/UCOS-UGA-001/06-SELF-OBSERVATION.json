@@ -7,25 +7,25 @@
   "evidence_class": "IMPROVEMENT",
   "may_influence_certification": false,
   "observation": {
-    "total_objects": 7094,
+    "total_objects": 7118,
     "by_object_class": {
       "CONFIGURATION_OBJECT": 40,
       "DATA_OBJECT": 140,
-      "DOCUMENT_ARTIFACT": 1667,
-      "EXCLUDED_DOCUMENT": 2920,
+      "DOCUMENT_ARTIFACT": 1679,
+      "EXCLUDED_DOCUMENT": 2932,
       "EXECUTABLE_OBJECT": 1375,
       "TEST_OBJECT": 896,
       "TOOLING_OBJECT": 56
     },
     "by_lifecycle": {
-      "AUTHORED": 6749,
+      "AUTHORED": 6773,
       "GENERATED": 345
     },
     "distinct_owners": 295,
     "top_owners": [
       {
         "owner": "00-BOOK/PORTAL",
-        "objects": 1674
+        "objects": 1686
       },
       {
         "owner": "UCOS-REPOSITORY-ROOT",
@@ -70,25 +70,10 @@
     "retired_identities": 8
   },
   "analysis": {
-    "deviations": [
-      {
-        "invariant": "CAA-INV-03",
-        "name": "NO_SUBORDINATE_INSTRUMENT_CLAIMS_INDEPENDENT_AUTHORITY",
-        "violation_count": 1,
-        "origin": "INTRODUCED_OR_LATENT",
-        "severity": "BLOCKING"
-      }
-    ]
+    "deviations": []
   },
   "planning": {
-    "plans": [
-      {
-        "invariant": "CAA-INV-03",
-        "action": "Investigate.",
-        "owner": "UCOS-UGA-001",
-        "evidence": "00-MASTER/UCOS-UGA-001/05-GOVERNANCE-INVARIANTS.json"
-      }
-    ]
+    "plans": []
   },
   "evolution": {
     "model": [
@@ -105,13 +90,6 @@
     "stage_reached": "Proposal",
     "rule": "This engine emits proposals as evidence (IMPROVEMENT class). It holds no approval authority and mutates no object outside its own surfaces and the append-only identity ledger. Uncontrolled evolution is structurally impossible because the engine has no write path to any other object.",
     "approval_authority": "HUMAN_AUTHORED_DECISION",
-    "proposals": [
-      {
-        "invariant": "CAA-INV-03",
-        "action": "Investigate.",
-        "owner": "UCOS-UGA-001",
-        "evidence": "00-MASTER/UCOS-UGA-001/05-GOVERNANCE-INVARIANTS.json"
-      }
-    ]
+    "proposals": []
   }
 }
