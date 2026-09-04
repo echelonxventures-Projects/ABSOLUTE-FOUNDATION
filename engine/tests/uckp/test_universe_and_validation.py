@@ -179,8 +179,8 @@ def test_no_probe_measures_something_the_law_does_not_declare(universe):
 # --- the validator: the lawful universe -----------------------------------------
 
 
-def test_the_constitutional_universe_satisfies_all_seventeen_invariants(universe):
-    report = validate_universe(universe)
+def test_the_constitutional_universe_satisfies_all_seventeen_invariants(validated_universe):
+    report = validated_universe
     assert report.verdict == CERTIFIED
     assert report.satisfied_count() == 17
     assert report.blocking_failures() == ()
@@ -188,15 +188,17 @@ def test_the_constitutional_universe_satisfies_all_seventeen_invariants(universe
     require_certified(report)
 
 
-def test_every_stop_condition_is_met_on_the_lawful_universe(universe):
-    report = validate_universe(universe)
+def test_every_stop_condition_is_met_on_the_lawful_universe(validated_universe):
+    report = validated_universe
     assert report.all_stop_conditions_met()
     assert len(report.stop_conditions()) == 13
 
 
 @pytest.mark.parametrize("invariant_id", list(ROOT_LAW.invariant_ids()))
-def test_each_invariant_reports_the_measurements_its_verdict_rests_on(universe, invariant_id):
-    result = validate_universe(universe).result(invariant_id)
+def test_each_invariant_reports_the_measurements_its_verdict_rests_on(
+    validated_universe, invariant_id
+):
+    result = validated_universe.result(invariant_id)
     assert result.verdict == SATISFIED
     assert result.evidence, f"{invariant_id} reports a verdict with no measurements"
     assert result.statement == ROOT_LAW.invariant(invariant_id).statement
@@ -209,8 +211,8 @@ def test_the_report_is_deterministic_and_content_addressed(universe):
     assert report_json(left) == report_json(right)
 
 
-def test_the_report_serializes_and_summarizes(universe):
-    report = validate_universe(universe)
+def test_the_report_serializes_and_summarizes(validated_universe):
+    report = validated_universe
     record = report.to_dict()
     assert record["verdict"] == CERTIFIED
     assert record["counts"]["invariants"] == 17
@@ -220,9 +222,9 @@ def test_the_report_serializes_and_summarizes(universe):
     assert "13/13" in summary
 
 
-def test_asking_for_an_unknown_invariant_is_refused(universe):
+def test_asking_for_an_unknown_invariant_is_refused(validated_universe):
     with pytest.raises(UCKPValidationError):
-        validate_universe(universe).result("UCKP-INV-99")
+        validated_universe.result("UCKP-INV-99")
 
 
 # --- the validator: reachable failure -------------------------------------------

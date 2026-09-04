@@ -22,6 +22,7 @@ from engine.uckp.identity import urn_for
 from engine.uckp.registry import UniversalKnowledgeRegistry
 from engine.uckp.ucko import UCKO
 from engine.uckp.universe import ConstitutionalUniverse, build_universe
+from engine.uckp.validation import validate_universe
 from engine.uckp.values import Relationship
 from engine.uckp.vocabulary import VocabularyRegistry, build_vocabulary_registry
 
@@ -116,6 +117,29 @@ def persistence_base(tmp_path_factory) -> Path:
 def universe(persistence_base: Path) -> ConstitutionalUniverse:
     """The constitutional universe: discovered, coherent, no assimilated corpus."""
     return build_universe(persistence_base=persistence_base)
+
+
+@pytest.fixture(scope="session")
+def validated_universe(universe: ConstitutionalUniverse):
+    """The validation report for the lawful universe, measured once for the session.
+
+    WHY CACHING THIS IS NOT A WEAKENING, AND WHAT LICENSES IT. `validate_universe` is a pure
+    function of an immutable universe, and the suite does not take that on trust:
+    `test_the_report_is_deterministic_and_content_addressed` calls it TWICE and asserts the two
+    reports share a digest and serialize identically. That test is the licence for this fixture
+    and must keep calling the function directly — the moment it consumes the cache instead, the
+    property that makes the cache sound stops being measured.
+
+    WHAT IT COST TO NOT HAVE THIS. Measured across a full sharded run: this one call was the
+    largest single cost in the suite, roughly 70s per invocation against a session-scoped
+    universe that had already been built. `test_each_invariant_reports_the_measurements_its_
+    verdict_rests_on` is parametrized over all seventeen invariants, so it alone paid that
+    seventeen times to ask seventeen questions of one immutable report.
+
+    The report is consumed through read-only accessors (`result`, `to_dict`, `summary`,
+    `digest`), so sharing one instance changes what is measured in no way.
+    """
+    return validate_universe(universe)
 
 
 @pytest.fixture(scope="session")
