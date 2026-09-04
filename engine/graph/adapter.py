@@ -228,4 +228,20 @@ class KnowledgeGraphAdapter:
         }
 
 
-__all__ = ["KnowledgeGraphAdapter", "KNOWLEDGE_GRAPH_CONTRACT"]
+def emitted_kinds() -> tuple[str, ...]:
+    """Every relationship kind this surface actually emits, read off the graphs it builds.
+
+    Declared as the `reporter` for this surface in the CAA register's `emitting_surfaces`, and
+    CALLED rather than trusted: CAA-INV-05 requires every emitted kind to resolve into the one
+    relationship model (UCKP-ART-07), and a declared list would answer for the code it was
+    written beside rather than the code that runs. Building the ten projections is the only way
+    to know what they emit.
+    """
+    adapter = KnowledgeGraphAdapter.open()
+    kinds: set[str] = set()
+    for name in PROJECTION_NAMES:
+        kinds |= set(adapter.projection(name).graph.edge_types())
+    return tuple(sorted(kinds))
+
+
+__all__ = ["emitted_kinds", "KnowledgeGraphAdapter", "KNOWLEDGE_GRAPH_CONTRACT"]

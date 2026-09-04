@@ -615,8 +615,221 @@
         "direction": "forward",
         "article": "UCKP-ART-12",
         "meaning": "the evidence class the object's governance records belong to"
+      },
+      "Affects": {
+        "uckp_class": "constitutional",
+        "uckp_relation": "depends-on",
+        "direction": "inverse",
+        "article": "UCKP-ART-07",
+        "meaning": "blast radius: what a change to this object reaches, which is the dependency edge traversed in reverse and never a relation of its own"
+      },
+      "Authorized-By": {
+        "uckp_class": "authority",
+        "uckp_relation": "governs",
+        "direction": "inverse",
+        "article": "UCKP-ART-01",
+        "meaning": "from whom the right to exist is derived — the authority relation the model requires to stay acyclic (UCKP-INV-04)"
+      },
+      "Authorizes": {
+        "uckp_class": "authority",
+        "uckp_relation": "governs",
+        "direction": "forward",
+        "article": "UCKP-ART-01",
+        "meaning": "holds decision authority over the object"
+      },
+      "Certifies": {
+        "uckp_class": "validation",
+        "uckp_relation": "certifies",
+        "direction": "forward",
+        "article": "UCKP-ART-16",
+        "meaning": "attests to the completeness of the certified surface"
+      },
+      "Child": {
+        "uckp_class": "constitutional",
+        "uckp_relation": "depends-on",
+        "direction": "inverse",
+        "article": "UCKP-ART-07",
+        "meaning": "the same containment read from the container toward what it contains"
+      },
+      "Consumed-By": {
+        "uckp_class": "knowledge",
+        "uckp_relation": "consumes",
+        "direction": "inverse",
+        "article": "UCKP-ART-07",
+        "meaning": "the same consumption read from the producer toward its consumer"
+      },
+      "Consumes": {
+        "uckp_class": "knowledge",
+        "uckp_relation": "consumes",
+        "direction": "forward",
+        "article": "UCKP-ART-07",
+        "meaning": "reads or depends on the output of another object"
+      },
+      "Depends-On": {
+        "uckp_class": "constitutional",
+        "uckp_relation": "depends-on",
+        "direction": "forward",
+        "article": "UCKP-ART-07",
+        "meaning": "what must exist for the object to exist — the same class depends_on carries in the UGA projection, at a different grain"
+      },
+      "Evidences": {
+        "uckp_class": "constitutional",
+        "uckp_relation": "references",
+        "direction": "inverse",
+        "article": "UCKP-ART-12",
+        "meaning": "the evidence record pointing at what it evidences — the forward sense of evidenced_by"
+      },
+      "Evolves-From": {
+        "uckp_class": "evolution",
+        "uckp_relation": "derived-from",
+        "direction": "forward",
+        "article": "UCKP-ART-14",
+        "meaning": "the prior state this one was computed from"
+      },
+      "Evolves-From-Inverse": {
+        "uckp_class": "evolution",
+        "uckp_relation": "derived-from",
+        "direction": "inverse",
+        "article": "UCKP-ART-14",
+        "meaning": "the same evolution read from the prior state toward its successor"
+      },
+      "Implemented-By": {
+        "uckp_class": "traceability",
+        "uckp_relation": "implements",
+        "direction": "inverse",
+        "article": "UCKP-ART-16",
+        "meaning": "the same conformance read from the specification toward what realises it"
+      },
+      "Implements": {
+        "uckp_class": "traceability",
+        "uckp_relation": "implements",
+        "direction": "forward",
+        "article": "UCKP-ART-16",
+        "meaning": "realises a specification without being derived from it — conformance, which is why the lineage classification excludes it from ancestry"
+      },
+      "Implements-Stage": {
+        "uckp_class": "traceability",
+        "uckp_relation": "implements",
+        "direction": "forward",
+        "article": "UCKP-ART-14",
+        "meaning": "realises a declared lifecycle stage rather than another object"
+      },
+      "In-Program": {
+        "uckp_class": "ownership",
+        "uckp_relation": "owns",
+        "direction": "inverse",
+        "article": "UCKP-ART-06",
+        "meaning": "the programme accountable for the artifact, read from the artifact toward its programme"
+      },
+      "In-Volume": {
+        "uckp_class": "constitutional",
+        "uckp_relation": "depends-on",
+        "direction": "forward",
+        "article": "UCKP-ART-07",
+        "meaning": "the volume the artifact is bound into, the coarsest containment the corpus declares"
+      },
+      "Of-Category": {
+        "uckp_class": "semantic",
+        "uckp_relation": "inherits",
+        "direction": "forward",
+        "article": "UCKP-ART-06",
+        "meaning": "the taxonomy anchor whose properties the artifact takes — the category facet, synthesised as a node so the classification is traversable rather than only readable"
+      },
+      "Parent": {
+        "uckp_class": "constitutional",
+        "uckp_relation": "depends-on",
+        "direction": "forward",
+        "article": "UCKP-ART-07",
+        "meaning": "the containing object this one cannot exist outside of — structural containment is a dependency, which is why it binds to the dependency class rather than inventing a containment term"
+      },
+      "Required-By": {
+        "uckp_class": "constitutional",
+        "uckp_relation": "depends-on",
+        "direction": "inverse",
+        "article": "UCKP-ART-07",
+        "meaning": "the same dependency read from the dependency toward its dependent"
+      },
+      "Requirement-Of": {
+        "uckp_class": "traceability",
+        "uckp_relation": "depends-on",
+        "direction": "inverse",
+        "article": "UCKP-ART-16",
+        "meaning": "the object a requirement binds, read from the requirement toward what must satisfy it"
+      },
+      "Traced-From": {
+        "uckp_class": "traceability",
+        "uckp_relation": "references",
+        "direction": "inverse",
+        "article": "UCKP-ART-16",
+        "meaning": "the same trace read from intent toward effect"
+      },
+      "Traces-Stage:architecture": {
+        "uckp_class": "traceability",
+        "uckp_relation": "references",
+        "direction": "forward",
+        "article": "UCKP-ART-14",
+        "meaning": "trace into the architecture stage of the declared lifecycle"
+      },
+      "Traces-Stage:implementation": {
+        "uckp_class": "traceability",
+        "uckp_relation": "references",
+        "direction": "forward",
+        "article": "UCKP-ART-14",
+        "meaning": "trace into the implementation stage of the declared lifecycle"
+      },
+      "Traces-Stage:requirement": {
+        "uckp_class": "traceability",
+        "uckp_relation": "references",
+        "direction": "forward",
+        "article": "UCKP-ART-14",
+        "meaning": "trace into the requirement stage of the declared lifecycle"
+      },
+      "Traces-To": {
+        "uckp_class": "traceability",
+        "uckp_relation": "references",
+        "direction": "forward",
+        "article": "UCKP-ART-16",
+        "meaning": "upstream intent this object points at — a coverage overlay, not a provenance edge"
+      },
+      "Validates": {
+        "uckp_class": "validation",
+        "uckp_relation": "validates",
+        "direction": "forward",
+        "article": "UCKP-ART-16",
+        "meaning": "checks the shape of another object — the forward sense of the contract validated_by names inversely"
       }
     },
+    "$emitting_surface_comment": [
+      "WHY THIS LIST EXISTS. CAA-INV-05 read the kinds off ONE graph — the UGA relationship",
+      "projection — and the rule it enforces applies to every surface that emits a relationship",
+      "kind. engine/graph emitted 26 kinds, none of them bound, and passed, because the",
+      "measurement never reached it. The rule was right and did not reach where it applies.",
+      "",
+      "engine/graph is not in the `projections` list above and should not be: that list",
+      "enumerates PERSISTED artifacts with producers, and engine/graph persists none (it writes",
+      "only to an operator-named path and refuses the frozen corpus). It is an in-memory query",
+      "surface — which changes where its output lives, not whether its kinds must resolve into",
+      "the one model. Hence a second list, of SURFACES rather than artifacts.",
+      "",
+      "Each surface names a `reporter`: a callable returning the kinds that surface actually",
+      "emits, resolved and CALLED at measurement time. Never a declared list — a surface that",
+      "quietly emits a 27th kind is the case worth catching, and a declared list would report 26",
+      "either way. A surface whose reporter cannot be resolved is a violation, not a skip."
+    ],
+    "emitting_surfaces": [
+      {
+        "surface": "00-MASTER/UCOS-UGA-001/04-RELATIONSHIP-GRAPH.json",
+        "home": "00-MASTER/UCOS-UGA-001/uga_engine.py",
+        "reporter": null,
+        "$in_process": "Measured in process by the engine that derives it; its kinds are read off the edges this run produced, before the invariants are evaluated."
+      },
+      {
+        "surface": "engine/graph — the EPIC-002 knowledge graph and its ten projections",
+        "home": "engine/graph/adapter.py",
+        "reporter": "engine.graph.adapter.emitted_kinds",
+        "$persists_nothing": "Builds in memory and persists no registered artifact, which is why it is a surface here and not a projection above."
+      }
+    ],
     "second_model_test": "A second relationship model would be a second declaration of what a relationship IS. CAA-INV-05 measures that exactly one instrument declares the model and that every emitted kind resolves into it."
   },
   "$dependency_evidence_comment": [

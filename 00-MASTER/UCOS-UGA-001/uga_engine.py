@@ -1619,22 +1619,53 @@ def epoch5_invariants(entries, objects, genreg, evidence, decl, audit_events, re
     v = unknown_articles([owner["authority"]], "the relationship model owner")
     if not os.path.isfile(os.path.join(REPO, owner["home"])):
         v.append(f"the declared relationship model owner does not exist: {owner['home']}")
-    for kind in align["emitted_kinds"]:
+    # EVERY DECLARED SURFACE, NOT ONE GRAPH. This read the kinds off the UGA relationship
+    # projection alone, so a surface the rule plainly covers could emit unbound kinds and pass:
+    # engine/graph emitted 26, bound none, and was never measured. The rule was right and did
+    # not reach where it applies. Each surface names a reporter that is RESOLVED AND CALLED —
+    # never a declared list, for the reason the closing note has always given.
+    emitted = set(align["emitted_kinds"])
+    for surface in graph_res.get("emitting_surfaces") or []:
+        reporter = surface.get("reporter")
+        name = surface.get("surface") or "an unnamed surface"
+        if not reporter:
+            continue      # measured in process; its kinds are already in `emitted`
+        module_name, _, attribute = str(reporter).rpartition(".")
+        # STATIC IMPORT PLUS A sys.modules LOOKUP, NEVER importlib WITH A COMPUTED ARGUMENT.
+        # Omega-4 holds unresolved_dynamic_sites MONOTONIC, and a computed import argument is by
+        # definition an edge nothing can measure — the first draft of this block took the metric
+        # from 22 to 23 and was refused. The omega-ratchet record names this exact conversion as
+        # the remedy already applied to two earlier sites. The register still decides WHICH
+        # reporter runs; the static import only makes the edge visible, and a declared surface
+        # whose module this engine does not import is a violation rather than a silent skip —
+        # which is the right reading of a surface that declares a reporter nothing can reach.
+        import engine.graph.adapter  # noqa: F401 - the reporter resolved by name below
+        module = sys.modules.get(module_name)
+        if module is None:
+            v.append(f"{name}: its declared reporter {reporter} names a module this engine "
+                     "does not import, so the surface cannot be measured")
+            continue
+        try:
+            emitted |= {str(kind) for kind in getattr(module, attribute)()}
+        except Exception as exc:                      # noqa: BLE001 - any failure is a violation
+            v.append(f"{name}: its declared reporter {reporter} could not be measured ({exc})")
+    for kind in sorted(emitted):
         binding = kind_bindings.get(kind)
         if not isinstance(binding, dict):
-            v.append(f"{kind}: emitted by this projection and bound to no class of the model")
+            v.append(f"{kind}: emitted by a declared surface and bound to no class of the model")
             continue
         v += [f"{kind}: binding declares no {field}"
               for field in ("uckp_class", "uckp_relation", "direction")
               if not binding.get(field)]
         v += unknown_articles([binding.get("article")], f"relationship kind {kind}")
     v += [f"{kind}: bound in the register and emitted by nothing"
-          for kind in sorted(set(kind_bindings) - set(align["emitted_kinds"]))]
+          for kind in sorted(set(kind_bindings) - emitted)]
     add("CAA-INV-05", "EXACTLY_ONE_RELATIONSHIP_GRAPH_MODEL_OWNER", sorted(set(v)),
-        len(align["emitted_kinds"]),
-        "The emitted kinds are read off the graph this run actually produced, never off a "
-        "declared list — a projection that quietly emits an eighth kind is the case worth "
-        "catching, and a list of six would report six either way.")
+        len(emitted),
+        "The emitted kinds are read off the graphs this run actually produced, across every "
+        "surface the register declares, never off a declared list — a surface that quietly "
+        "emits one more kind is the case worth catching, and a list would report itself either "
+        "way. A surface whose reporter cannot be measured is a violation, never a skip.")
 
     # CAA-06 — evidence and observation remain separate truths
     separation = caa["evidence_observation_separation"]
