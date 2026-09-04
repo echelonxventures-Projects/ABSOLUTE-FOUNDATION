@@ -85,6 +85,9 @@ class Classification:
     declaration_id: str
     families: tuple[Family, ...]
     non_lineage: frozenset[str]
+    #: Why each non-lineage relation is not ancestry, in declaration order. Carried as pairs
+    #: rather than a dict so the classification stays an immutable value.
+    non_lineage_reasons: tuple[tuple[str, str], ...] = ()
 
     @classmethod
     def of(cls, document: Mapping[str, Any]) -> Classification:
@@ -98,7 +101,24 @@ class Classification:
                         f"({seen[rule.relation]}, {family.name})"
                     )
                 seen[rule.relation] = family.name
-        non_lineage = frozenset(str(x) for x in document.get("non_lineage") or ())
+        # A NON-LINEAGE ENTRY MUST ARGUE ITSELF. Listing a relation here stops it being
+        # silently ignored, but a bare name still leaves the exclusion asserted rather than
+        # measured — and the exclusions that matter are exactly the ones a reader would
+        # otherwise assume were oversights. Requiring the reason makes the refusal load-time.
+        reasons: list[tuple[str, str]] = []
+        for index, entry in enumerate(document.get("non_lineage") or ()):
+            if not isinstance(entry, Mapping):
+                raise LineageError(
+                    "a non-lineage relation must be a record carrying its reason, not a bare name",
+                    subject=str(entry),
+                )
+            relation = str(_require(entry, "type", f"non_lineage[{index}]"))
+            reason = str(_require(entry, "reason", f"non_lineage[{relation}]"))
+            reasons.append((relation, reason))
+        duplicated = sorted({r for r, _ in reasons if [x for x, _ in reasons].count(r) > 1})
+        if duplicated:
+            raise LineageError(f"relations excluded from lineage more than once: {duplicated}")
+        non_lineage = frozenset(relation for relation, _ in reasons)
         overlap = sorted(non_lineage & set(seen))
         if overlap:
             raise LineageError(f"relations classified as both lineage and non-lineage: {overlap}")
@@ -106,6 +126,7 @@ class Classification:
             declaration_id=str(_require(document, "declaration_id", "classification")),
             families=families,
             non_lineage=non_lineage,
+            non_lineage_reasons=tuple(reasons),
         )
 
     @property
@@ -117,6 +138,11 @@ class Classification:
     def classified(self) -> frozenset[str]:
         """Every relation this classification accounts for, lineage or not."""
         return frozenset(self.rules) | self.non_lineage
+
+    @property
+    def exclusions(self) -> dict[str, str]:
+        """Every non-lineage relation, keyed to the reason it is not ancestry."""
+        return dict(self.non_lineage_reasons)
 
     def family_of(self, relation: str) -> str | None:
         rule = self.rules.get(relation)

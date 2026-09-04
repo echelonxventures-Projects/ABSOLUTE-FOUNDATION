@@ -225,7 +225,24 @@ def test_unbounded_paths_escalate_to_full(path: str) -> None:
 def test_non_python_changes_escalate_to_full() -> None:
     report = analyse(_graph(_record("core.py")), ["00-MASTER/X/register.md"])
     assert report.scope is Scope.FULL
-    assert any("no dependency edges exist" in e for e in report.escalations)
+    assert any("not present in the executable object registry" in e for e in report.escalations)
+
+
+def test_a_registered_non_python_object_escalates_for_its_recorded_reason() -> None:
+    """The escalation names the object class it measured, not the file extension.
+
+    `engine/lineage/families.json` is the live case: registered as UCOS-ENG-000023 with an
+    explicitly empty dependency list. Reporting "no dependency edges exist for this file
+    type" about it asserted a property of `.json` that 172 registered `.json` objects
+    contradict, and asserted it before consulting the registry at all.
+    """
+    data = _record("engine/lineage/families.json", "DOCUMENT_ARTIFACT")
+    report = analyse(_graph(_record("core.py"), data), ["engine/lineage/families.json"])
+    assert report.scope is Scope.FULL
+    assert report.unregistered == (), "a registered object must not be reported unregistered"
+    reasons = [e for e in report.escalations if "families.json" in e]
+    assert reasons and "DOCUMENT_ARTIFACT" in reasons[0]
+    assert not any("file type" in e for e in report.escalations)
 
 
 def test_an_unregistered_python_file_escalates_and_is_named() -> None:

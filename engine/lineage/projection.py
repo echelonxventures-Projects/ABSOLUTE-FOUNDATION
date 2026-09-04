@@ -247,6 +247,15 @@ def to_document(projection: LineageProjection) -> dict[str, Any]:
             }
             for family in projection.classification.families
         ],
+        # WHY THE EXCLUSIONS ARE IN THE REPORT AND NOT ONLY IN THE CLASSIFICATION. A reader
+        # counting 8,773 lineage edges against 13,791 typed ones will ask where the difference
+        # went, and a report that answers "some relations are not ancestry" without saying which
+        # or why invites the reader to assume an omission. Carrying the reasons here makes the
+        # boundary of lineage as citable as its contents.
+        "non_lineage": [
+            {"relation": relation, "reason": reason}
+            for relation, reason in projection.classification.non_lineage_reasons
+        ],
         "counts": {
             "edges": len(projection.edges),
             "events": len(projection.events),

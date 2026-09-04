@@ -328,9 +328,42 @@ def test_a_relation_classified_twice_is_refused(document) -> None:
 
 
 def test_a_relation_both_lineage_and_non_lineage_is_refused(document) -> None:
-    document["non_lineage"].append(document["families"][0]["types"][0]["type"])
+    document["non_lineage"].append(
+        {"type": document["families"][0]["types"][0]["type"], "reason": "claimed twice"}
+    )
     with pytest.raises(LineageError, match="both lineage and non-lineage"):
         Classification.of(document)
+
+
+# --- an exclusion argues itself, or it is not an exclusion --------------------------------
+#
+# Listing a relation as non-lineage stops it being silently ignored, but a bare name leaves the
+# exclusion asserted rather than measured — and an unexplained exclusion is indistinguishable
+# from an oversight to every later reader. These three make the reason load-bearing.
+
+
+def test_a_non_lineage_relation_named_without_a_reason_is_refused(document) -> None:
+    document["non_lineage"][0] = {"type": document["non_lineage"][0]["type"]}
+    with pytest.raises(LineageError, match="reason"):
+        Classification.of(document)
+
+
+def test_a_bare_relation_name_is_not_an_exclusion(document) -> None:
+    document["non_lineage"][0] = document["non_lineage"][0]["type"]
+    with pytest.raises(LineageError, match="not a bare name"):
+        Classification.of(document)
+
+
+def test_the_same_relation_excluded_twice_is_refused(document) -> None:
+    document["non_lineage"].append(dict(document["non_lineage"][0]))
+    with pytest.raises(LineageError, match="more than once"):
+        Classification.of(document)
+
+
+def test_every_excluded_relation_carries_its_reason(classification) -> None:
+    """The live classification, not a fixture: each exclusion says why it is not ancestry."""
+    assert set(classification.exclusions) == set(classification.non_lineage)
+    assert all(len(reason) > 40 for reason in classification.exclusions.values())
 
 
 def test_an_unknown_ancestor_direction_is_refused(document) -> None:

@@ -15,10 +15,20 @@ one bar — *an abstraction with one implementation is an assumption; an abstrac
 callers bypass is decoration* — fourteen axes score: 2 proven, 4 abstracted, 4 bypassed,
 4 hardcoded.
 
-Concrete findings: 20 non-test modules invoke `git` directly against 2 that use the git
-provider; 1,732 direct `sha256` call sites against a crypto-agility registry that governs
-almost none of them; `DeploymentDescriptor.kubernetes` is a typed field rather than a provider;
-and there is no numeric-system reference domain.
+Concrete findings: 1,732 direct `sha256` call sites against a crypto-agility registry that
+governs almost none of them; `DeploymentDescriptor.kubernetes` is a typed field rather than a
+provider; and there is no numeric-system reference domain.
+
+On version control the first measurement was 20 non-test modules invoking `git` as a subprocess
+against 2 that use `engine/omega_infinite/git_provider.py`, and that ratio was read as evidence
+that the provider is bypassed. **It is not evidence of that, and the re-measurement below is why.**
+`DiscoveryProvider` answers exactly one question — enumerate the artifacts a selector admits —
+and the provider says so itself: *"One question only."* Splitting the 20 by the question they
+actually ask gives 15 modules invoking `git ls-files`, which *is* that question and therefore *is*
+a bypass. The remaining invocations — `status` (19 sites), `archive` (8), `rev-parse` (5),
+`log` (4), `diff` (3), `check-ignore` (2) — ask questions no provider protocol covers, so there
+is nothing there for them to bypass. A ratio that counts both populations together measures the
+provider's *scope*, not anyone's compliance with it.
 
 ## Decision
 
@@ -30,9 +40,13 @@ remaining unproven claims:
 - **numerics** — no numeric-system domain is registered;
 - **OS/shell** — POSIX is assumed by every entry point.
 
-**Version control** is declared git-bound with a reason: `git ls-files` *is* the discovery
-boundary and `git archive` defines pristine-clone certification, so substituting a VCS is three
-constitutional redefinitions rather than an adapter swap.
+**Version control** is declared git-bound, and the reason is constitutional rather than
+numerical: `git ls-files` *is* the eligibility boundary that decides which paths are governed at
+all, and `git archive` *defines* pristine-clone certification. Substituting a VCS is therefore
+three constitutional redefinitions rather than an adapter swap. The call-site ratio is expressly
+**not** part of this reasoning — 15 enumeration bypasses are a closable gap that would leave the
+disposition exactly where it stands, because the binding is in what those two commands *mean* to
+the constitution, not in how many modules happen to call them.
 
 The remaining axes keep their measured status and close by acquiring a second implementation.
 
@@ -48,6 +62,10 @@ genuinely proven, and the property is the architecture's point.
 
 - A second implementation lands on any axis, which moves it from abstracted to proven and
   should be recorded as a movement rather than a silent upgrade.
+- The 15 `git ls-files` call sites route through `DiscoveryProvider`, or the provider protocol
+  grows a second question (working-tree state, or archive export) and the split above is
+  re-measured against the widened scope. Neither moves the disposition on its own; both change
+  what the axis costs to revisit.
 - The interpreter moves to a version where `sys.monitoring` can measure branches, which would
   reopen the coverage-provider axis that is currently blocked.
 
@@ -68,5 +86,8 @@ absences, since an undeclared assumption is what fails first when the environmen
 ## Validation evidence
 
 Counts measured at this commit by direct search over `engine`, `platform`, `intelligence`,
-`infrastructure` and `service`, excluding tests. The `sysmon` constraint is read directly from
+`infrastructure` and `service`, excluding tests. The version-control split is measured twice: 20
+modules that both name `git` and invoke a subprocess, then the 15 of those that pass `ls-files`,
+with subcommand frequencies counted over the same population. The provider's declared scope is
+read from its own module docstring rather than inferred from its callers. The `sysmon` constraint is read directly from
 `coverage/core.py`: `branch_right_left = pep669 and (PYVERSION > (3, 14, 0, "alpha", 5, 0))`.

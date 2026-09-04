@@ -17,6 +17,20 @@ informative:
   constitutional document has no import edges, so its blast radius is not computable
   from the dependency graph. Those escalate rather than resolving to an empty set —
   which is exactly the case where a naive engine reports "no tests affected".
+* **An escalation states what was measured.** Widening is safe; naming a reason that was
+  never measured is not, because the reason is what a reader uses to decide whether the
+  coupling is real. Every branch in :func:`analyse` consults the registry before it
+  characterises a path.
+
+DECLARED LIMIT — DATA EDGES ARE NOT IN THE SUBSTRATE. The object registry resolves
+dependencies through ``uga_engine.py::python_imports``, so no record carries a non-``.py``
+dependency: measured at this commit, the count of non-``.py`` dependency edges across all
+5 439 entries is zero. A module that reads a governed data file — ``engine/lineage/
+projection.py`` naming ``engine/lineage/families.json``, for one — therefore has a real
+coupling that the substrate does not record, and this engine escalates rather than
+inventing the edge. Deriving data edges here would build the second dependency graph this
+package exists not to build (``OBS-INV-13``); closing it belongs to the registry's producer,
+not to its reader.
 """
 
 from __future__ import annotations
@@ -158,12 +172,19 @@ def analyse(graph: ImpactGraph, changed: list[str] | tuple[str, ...]) -> ImpactR
                 "(declaration, registry, schema, tooling or contract)"
             )
             continue
-        if not _is_bounded(path):
-            scope = scope.widen(Scope.FULL)
-            unbounded.append(path)
-            escalations.append(f"{path}: no dependency edges exist for this file type")
-            continue
-        if graph.record(path) is None:
+        # THE REGISTRY IS CONSULTED BEFORE THE FILE TYPE, AND THE ORDER IS THE POINT.
+        # The earlier form asked `_is_bounded` first and, for anything that was not `.py`,
+        # reported "no dependency edges exist for this file type" — a claim about the type,
+        # asserted before anything was measured. It was false in both directions:
+        # `engine/lineage/families.json` is registered as UCOS-ENG-000023 with an explicitly
+        # empty `dependencies` list, which is a MEASURED emptiness rather than a type-level
+        # absence, and 172 registered `.json` objects show the type carries records at all.
+        # Every branch below still widens to FULL, so no run narrows — what changes is that
+        # each escalation now states what was actually measured. This is the same defect
+        # class the non-ASCII path fix retired: escalation that is right by accident and
+        # wrong by mechanism is not tracking real coupling.
+        record = graph.record(path)
+        if record is None:
             scope = scope.widen(Scope.FULL)
             unbounded.append(path)
             escalations.append(
@@ -171,6 +192,14 @@ def analyse(graph: ImpactGraph, changed: list[str] | tuple[str, ...]) -> ImpactR
                 "dependents are unknown"
             )
             unregistered.append(path)
+            continue
+        if not _is_bounded(path):
+            scope = scope.widen(Scope.FULL)
+            unbounded.append(path)
+            escalations.append(
+                f"{path}: recorded as {record.object_class}, a class the object registry "
+                "does not resolve dependency edges for, so its dependents are unknown"
+            )
             continue
         bounded.add(path)
 
