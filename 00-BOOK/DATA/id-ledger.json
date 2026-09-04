@@ -11823,9 +11823,72 @@
       "page_start": 13069,
       "page_count": 4,
       "first_seen": "2026-08-31T10:09:11+00:00"
+    },
+    "CHANGE-SET-CERTIFICATION-DETERMINATION.md": {
+      "universal_id": "UCOS-CHANGE-000001",
+      "category": "CHANGE",
+      "page_start": 13073,
+      "page_count": 7,
+      "first_seen": "2026-09-04T04:41:05+00:00"
+    },
+    "COMMIT-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-COMMIT-000001",
+      "category": "COMMIT",
+      "page_start": 13080,
+      "page_count": 8,
+      "first_seen": "2026-09-04T04:41:05+00:00"
+    },
+    "GENERATED-ARTIFACT-COMMIT-AUTHORITY-DETERMINATION.md": {
+      "universal_id": "UCOS-GENERA-000001",
+      "category": "GENERA",
+      "page_start": 13088,
+      "page_count": 6,
+      "first_seen": "2026-09-04T04:41:05+00:00"
+    },
+    "ROOT-CAUSE-ANALYSIS.md": {
+      "universal_id": "UCOS-ROOTCA-000001",
+      "category": "ROOTCA",
+      "page_start": 13094,
+      "page_count": 7,
+      "first_seen": "2026-09-04T04:41:05+00:00"
+    },
+    "SHELL-OBSERVABILITY-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-SHELLO-000001",
+      "category": "SHELLO",
+      "page_start": 13101,
+      "page_count": 14,
+      "first_seen": "2026-09-04T04:41:05+00:00"
+    },
+    "UFI-NO-CELL-ROOT-CAUSE.md": {
+      "universal_id": "UCOS-UFINOC-000001",
+      "category": "UFINOC",
+      "page_start": 13115,
+      "page_count": 5,
+      "first_seen": "2026-09-04T04:41:05+00:00"
+    },
+    "UNCONDITIONAL-COMMIT-READINESS-DETERMINATION.md": {
+      "universal_id": "UCOS-UNCOND-000001",
+      "category": "UNCOND",
+      "page_start": 13120,
+      "page_count": 9,
+      "first_seen": "2026-09-04T04:41:05+00:00"
+    },
+    "UNIVERSAL-CERTIFICATION-CLOSURE-DETERMINATION.md": {
+      "universal_id": "UCOS-UNIVER-000019",
+      "category": "UNIVER",
+      "page_start": 13129,
+      "page_count": 10,
+      "first_seen": "2026-09-04T04:41:05+00:00"
+    },
+    "W4-UFI-FAILURE-MATRIX.md": {
+      "universal_id": "UCOS-W4UFIF-000001",
+      "category": "W4UFIF",
+      "page_start": 13139,
+      "page_count": 6,
+      "first_seen": "2026-09-04T04:41:05+00:00"
     }
   },
-  "page_cursor": 13072,
+  "page_cursor": 13144,
   "category_seq": {
     "BOOK": 1,
     "REG": 19,
@@ -12024,7 +12087,7 @@
     "UCOSUV": 3,
     "UCOSFI": 1,
     "UKAPUR": 1,
-    "UNIVER": 18,
+    "UNIVER": 19,
     "UOBCBS": 1,
     "VERIFI": 3,
     "PERCEN": 2,
@@ -12055,7 +12118,15 @@
     "PHASE9": 1,
     "SELFCO": 2,
     "FINALC": 1,
-    "MISSIN": 1
+    "MISSIN": 1,
+    "CHANGE": 1,
+    "COMMIT": 1,
+    "GENERA": 1,
+    "ROOTCA": 1,
+    "SHELLO": 1,
+    "UFINOC": 1,
+    "UNCOND": 1,
+    "W4UFIF": 1
   },
   "discovered_volumes": {
     "VOL-023": {
@@ -30386,6 +30457,15 @@
         "status": "ACTIVE",
         "path": "engine/registry_coverage/declarations.json",
         "name": "Declarations"
+      },
+      {
+        "seq": 2,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "0e921b441215b4ab0ed8db73348381c386d667ecc2c30714949e3c1b5389e923",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "engine/registry_coverage/declarations.json",
+        "name": "Declarations"
       }
     ],
     "UCOS-PERCEN-000001": [
@@ -32553,6 +32633,105 @@
         "status": "ACTIVE",
         "path": "missing_execution_surface_report.md",
         "name": "Missing Execution Surface Report"
+      }
+    ],
+    "UCOS-CHANGE-000001": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "8964a7ae0a0b18222d8446cf9f0aa11e1028668248dc92d84db796f78e24561a",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "CHANGE-SET-CERTIFICATION-DETERMINATION.md",
+        "name": "UCOS Ω∞ — CHANGE-SET CERTIFICATION DETERMINATION"
+      }
+    ],
+    "UCOS-COMMIT-000001": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "2c439c0f2df9a26edb104e5cc7c82a964173841c60682e457f7e43f07d1b9887",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "COMMIT-CLOSURE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — COMMIT-CLOSURE DETERMINATION"
+      }
+    ],
+    "UCOS-GENERA-000001": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "309c30934ca4f3b788609a237e40c5c914712a27f76654fe1d57e13723af3f75",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "GENERATED-ARTIFACT-COMMIT-AUTHORITY-DETERMINATION.md",
+        "name": "UCOS Ω∞ — GENERATED-ARTIFACT COMMIT AUTHORITY DETERMINATION"
+      }
+    ],
+    "UCOS-ROOTCA-000001": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "e4357bbd28568362e3263fa96c456360276ebd568c6156c49dd879b825dd3e8b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "ROOT-CAUSE-ANALYSIS.md",
+        "name": "UCTX-001 UFI PROVENANCE FAILURE ROOT CAUSE ANALYSIS"
+      }
+    ],
+    "UCOS-SHELLO-000001": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "986bc8e9cca6ff807a211b3dabad1c426dc635ecf0c9bb9ef43131c6d18f9cf0",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "SHELL-OBSERVABILITY-CLOSURE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — Shell Observability Closure Determination"
+      }
+    ],
+    "UCOS-UFINOC-000001": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "80c4fb593989317c4f94a2b472cafdf0f9d2b0b3184780e7dcd4a418743d0356",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UFI-NO-CELL-ROOT-CAUSE.md",
+        "name": "UFI \"no\" CELL FAILURE ROOT CAUSE ANALYSIS"
+      }
+    ],
+    "UCOS-UNCOND-000001": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "6202fa5eb47bdaa41da3de1b4435d13321c7fedecf11d1bef5f142738f9c1fee",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UNCONDITIONAL-COMMIT-READINESS-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNCONDITIONAL COMMIT READINESS DETERMINATION"
+      }
+    ],
+    "UCOS-UNIVER-000019": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "f8ba4ebf435f2c02960445b07518eaaf5de8feb2962e3c6622b444faa9d196b1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "UNIVERSAL-CERTIFICATION-CLOSURE-DETERMINATION.md",
+        "name": "UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DETERMINATION"
+      }
+    ],
+    "UCOS-W4UFIF-000001": [
+      {
+        "seq": 1,
+        "at": "2026-09-04T04:41:05+00:00",
+        "content_hash": "308c3b54c2ccedcde2c3c9463cbd0fe7593e68012116df840481b899cf17eb98",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "W4-UFI-FAILURE-MATRIX.md",
+        "name": "W4 — UFI FAILURE MATRIX"
       }
     ]
   },

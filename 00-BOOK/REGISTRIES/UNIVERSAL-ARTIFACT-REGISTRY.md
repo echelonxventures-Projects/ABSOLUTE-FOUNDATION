@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1658
+**Total artifacts:** 1667
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1666,5 +1666,14 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1656 | `UCOS-COVERA-000002` | Coverage 100 Plan | — | 000 | UPN-000013059–UPN-000013061 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../coverage_100_plan.md) |
 | 1657 | `UCOS-FINALC-000001` | Final Certification Report | — | 000 | UPN-000013062–UPN-000013068 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../final_certification_report.md) |
 | 1658 | `UCOS-MISSIN-000001` | Missing Execution Surface Report | — | 000 | UPN-000013069–UPN-000013072 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../missing_execution_surface_report.md) |
+| 1659 | `UCOS-CHANGE-000001` | UCOS Ω∞ — CHANGE-SET CERTIFICATION DETERMINATION | — | 000 | UPN-000013073–UPN-000013079 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../CHANGE-SET-CERTIFICATION-DETERMINATION.md) |
+| 1660 | `UCOS-COMMIT-000001` | UCOS Ω∞ — COMMIT-CLOSURE DETERMINATION | — | 000 | UPN-000013080–UPN-000013087 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../COMMIT-CLOSURE-DETERMINATION.md) |
+| 1661 | `UCOS-GENERA-000001` | UCOS Ω∞ — GENERATED-ARTIFACT COMMIT AUTHORITY DETERMINATION | — | 000 | UPN-000013088–UPN-000013093 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../GENERATED-ARTIFACT-COMMIT-AUTHORITY-DETERMINATION.md) |
+| 1662 | `UCOS-ROOTCA-000001` | UCTX-001 UFI PROVENANCE FAILURE ROOT CAUSE ANALYSIS | — | 000 | UPN-000013094–UPN-000013100 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../ROOT-CAUSE-ANALYSIS.md) |
+| 1663 | `UCOS-SHELLO-000001` | UCOS Ω∞ — Shell Observability Closure Determination | — | 000 | UPN-000013101–UPN-000013114 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../SHELL-OBSERVABILITY-CLOSURE-DETERMINATION.md) |
+| 1664 | `UCOS-UFINOC-000001` | UFI "no" CELL FAILURE ROOT CAUSE ANALYSIS | — | 000 | UPN-000013115–UPN-000013119 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UFI-NO-CELL-ROOT-CAUSE.md) |
+| 1665 | `UCOS-UNCOND-000001` | UCOS Ω∞ — UNCONDITIONAL COMMIT READINESS DETERMINATION | — | 000 | UPN-000013120–UPN-000013128 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UNCONDITIONAL-COMMIT-READINESS-DETERMINATION.md) |
+| 1666 | `UCOS-UNIVER-000019` | UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DETERMINATION | — | 000 | UPN-000013129–UPN-000013138 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../UNIVERSAL-CERTIFICATION-CLOSURE-DETERMINATION.md) |
+| 1667 | `UCOS-W4UFIF-000001` | W4 — UFI FAILURE MATRIX | — | 000 | UPN-000013139–UPN-000013144 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../W4-UFI-FAILURE-MATRIX.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

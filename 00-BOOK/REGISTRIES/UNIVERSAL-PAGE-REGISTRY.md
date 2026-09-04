@@ -4,7 +4,7 @@
 
 Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A page number is never reused and never renumbered. Each artifact owns a contiguous, permanently-fixed UPN range assigned at first registration; new artifacts append after the current page cursor.
 
-**Pages allocated:** 13072  ·  **Page cursor (next free):** UPN-000013073
+**Pages allocated:** 13144  ·  **Page cursor (next free):** UPN-000013145
 
 | UPN Start | UPN End | Count | Universal ID | Volume | Artifact |
 |-----------|---------|-------|--------------|--------|----------|
@@ -1666,5 +1666,14 @@ Universal Page Numbers (UPN) are globally unique, immutable, and append-only. A 
 | UPN-000013059 | UPN-000013061 | 3 | `UCOS-COVERA-000002` | 000 | Coverage 100 Plan |
 | UPN-000013062 | UPN-000013068 | 7 | `UCOS-FINALC-000001` | 000 | Final Certification Report |
 | UPN-000013069 | UPN-000013072 | 4 | `UCOS-MISSIN-000001` | 000 | Missing Execution Surface Report |
+| UPN-000013073 | UPN-000013079 | 7 | `UCOS-CHANGE-000001` | 000 | UCOS Ω∞ — CHANGE-SET CERTIFICATION DETERMINATION |
+| UPN-000013080 | UPN-000013087 | 8 | `UCOS-COMMIT-000001` | 000 | UCOS Ω∞ — COMMIT-CLOSURE DETERMINATION |
+| UPN-000013088 | UPN-000013093 | 6 | `UCOS-GENERA-000001` | 000 | UCOS Ω∞ — GENERATED-ARTIFACT COMMIT AUTHORITY… |
+| UPN-000013094 | UPN-000013100 | 7 | `UCOS-ROOTCA-000001` | 000 | UCTX-001 UFI PROVENANCE FAILURE ROOT CAUSE AN… |
+| UPN-000013101 | UPN-000013114 | 14 | `UCOS-SHELLO-000001` | 000 | UCOS Ω∞ — Shell Observability Closure Determi… |
+| UPN-000013115 | UPN-000013119 | 5 | `UCOS-UFINOC-000001` | 000 | UFI "no" CELL FAILURE ROOT CAUSE ANALYSIS |
+| UPN-000013120 | UPN-000013128 | 9 | `UCOS-UNCOND-000001` | 000 | UCOS Ω∞ — UNCONDITIONAL COMMIT READINESS DETE… |
+| UPN-000013129 | UPN-000013138 | 10 | `UCOS-UNIVER-000019` | 000 | UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DET… |
+| UPN-000013139 | UPN-000013144 | 6 | `UCOS-W4UFIF-000001` | 000 | W4 — UFI FAILURE MATRIX |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

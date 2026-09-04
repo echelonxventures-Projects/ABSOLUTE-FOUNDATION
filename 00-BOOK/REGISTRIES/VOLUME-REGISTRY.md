@@ -6,7 +6,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 457 | UPN-000000001–UPN-000013072 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 466 | UPN-000000001–UPN-000013144 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 123 | UPN-000001327–UPN-000012507 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 91 | UPN-000000022–UPN-000010865 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 457
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 466
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -497,6 +497,15 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-COVERA-000002` | Coverage 100 Plan | — | ACTIVE |
 | `UCOS-FINALC-000001` | Final Certification Report | — | ACTIVE |
 | `UCOS-MISSIN-000001` | Missing Execution Surface Report | — | ACTIVE |
+| `UCOS-CHANGE-000001` | UCOS Ω∞ — CHANGE-SET CERTIFICATION DETERMINATION | — | ACTIVE |
+| `UCOS-COMMIT-000001` | UCOS Ω∞ — COMMIT-CLOSURE DETERMINATION | — | ACTIVE |
+| `UCOS-GENERA-000001` | UCOS Ω∞ — GENERATED-ARTIFACT COMMIT AUTHORITY DETERMINATION | — | ACTIVE |
+| `UCOS-ROOTCA-000001` | UCTX-001 UFI PROVENANCE FAILURE ROOT CAUSE ANALYSIS | — | ACTIVE |
+| `UCOS-SHELLO-000001` | UCOS Ω∞ — Shell Observability Closure Determination | — | ACTIVE |
+| `UCOS-UFINOC-000001` | UFI "no" CELL FAILURE ROOT CAUSE ANALYSIS | — | ACTIVE |
+| `UCOS-UNCOND-000001` | UCOS Ω∞ — UNCONDITIONAL COMMIT READINESS DETERMINATION | — | ACTIVE |
+| `UCOS-UNIVER-000019` | UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DETERMINATION | — | ACTIVE |
+| `UCOS-W4UFIF-000001` | W4 — UFI FAILURE MATRIX | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
