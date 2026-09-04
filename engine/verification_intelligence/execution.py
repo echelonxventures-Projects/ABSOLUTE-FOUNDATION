@@ -63,6 +63,23 @@ def resolve_workers(count: int, *, max_workers: int, override: str | None = None
     return max(1, min(max_workers, cpus, count or 1))
 
 
+def split_currency(registry: TestObjectRegistry) -> str:
+    """One line saying how much of the split table the planner could actually use.
+
+    Emitted beside the wave header because the alternative — what happened before this
+    existed — is that a stale entry silently costs the run its largest object's
+    divisibility and the run looks exactly the same. Not a gate: a stale entry makes a
+    plan slower and never wrong, and this reports it rather than refusing it.
+    """
+    usable, stale = len(registry.splittable), len(registry.stale_splits)
+    if not usable and not stale:
+        return ""
+    line = f"UVI: split table {usable}/{usable + stale} current"
+    if stale:
+        line += " — stale, placed whole: " + ", ".join(registry.stale_splits)
+    return line
+
+
 def plan_shards(
     test_paths: tuple[str, ...],
     registry: TestObjectRegistry,

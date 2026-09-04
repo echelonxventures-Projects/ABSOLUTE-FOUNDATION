@@ -12085,11 +12085,11 @@
     "STAGE0": 1,
     "DET": 6,
     "CONFIG": 40,
-    "DATAOBJ": 144,
+    "DATAOBJ": 145,
     "EXDOC": 3140,
     "TOOLING": 57,
-    "ENGINE": 1380,
-    "TESTOBJ": 896,
+    "ENGINE": 1382,
+    "TESTOBJ": 897,
     "OBS": 7,
     "ASSESS": 2,
     "B01BIR": 1,
@@ -66911,6 +66911,30 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:c0c43f88f6c9"
+    },
+    "engine/conformance/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001381",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:3dd9256687e2"
+    },
+    "engine/conformance/axis-register.json": {
+      "universal_id": "UCOS-DATAOBJ-000145",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:3dd9256687e2"
+    },
+    "engine/conformance/measure.py": {
+      "universal_id": "UCOS-ENGINE-001382",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:3dd9256687e2"
+    },
+    "engine/tests/conformance/test_agnosticism_conformance.py": {
+      "universal_id": "UCOS-TESTOBJ-000897",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:3dd9256687e2"
     }
   },
   "by_observation": {

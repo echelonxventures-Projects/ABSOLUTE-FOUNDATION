@@ -207,6 +207,38 @@
    "expires_at": null,
    "single_use": true,
    "$authorization": "Operator-authorized ledger re-derivation with ZERO allocation, correcting a lineage cycle this programme introduced. WHAT WENT WRONG. adr/0028 was written with `| Supersedes | none - takes a decision CEP-002 Art 14.2 expressly reserved |`. The lineage derivation reads references OUT of that field, so `CEP-002` became the declared ORIGIN of adr/0028; since adr/0028's own origin resolves to the same instrument, the supersession family closed on itself and `test_verify_reports_determinism_and_passes` refused with `supersession family is not acyclic: UCOS-ADR-000029 -> UCOS-CON-000034 -> UCOS-ADR-000029`. A field whose value is `none` may carry no citation, because a parser cannot distinguish an explanation mentioning a document from a reference to it -- the same defect adr/0027 records about its own guard, where a stage label mentioning a flag was indistinguishable from an invocation of it. WHY A PERMIT IS REQUIRED FOR A WRITE THAT ALLOCATES NOTHING. The correction edits documents that were already minted and registered, so their content hashes move and the ledger's `history` differs from the pre-image. NO_ALLOCATION refused it in terms: `the sentinel asserts that nothing changes, not merely that nothing is allocated`. The underlying error is that content was registered before it was correct; had the Supersedes field been written plainly, this write would not exist. WHAT THIS AUTHORIZES AND NOTHING ELSE. One `ukb.py build` re-derivation over head c0c43f88f6c91648453fec54ab1eb72663d824db with total_allocations=0 -- no identifier is minted, reissued or reused, and no map gains an entry. Bound to manifest_digest, preimage_digest and head. Single-use. PROVENANCE: the operator was shown the cycle, the refusal, this manifest and the rejected alternative (reverting the text, which would leave a non-acyclic supersession family standing), and instructed `go`. The agent recorded that instruction; it did not originate it."
+  },
+  {
+   "permit_id": "P-UCOS-UGA-005",
+   "actor": "UCOS-UGA-001 :: uga_engine.py run",
+   "manifest_digest": "0b76886474ce705454ff70f71da38e18da7bc683f2ff6231b978ff580821b39e",
+   "preimage_digest": "be6fbee4a9a18e341eed7a172319268f076453b42c9389ea691e3fa175529d75",
+   "head": "3dd9256687e21d896cca48cc63501c5483de5989",
+   "scope": {
+    "maps": [
+     "by_object"
+    ],
+    "max_allocations": 3
+   },
+   "expires_at": null,
+   "single_use": true,
+   "$authorization": "Operator-authorized UGA allocation for UAC-000001, the agnosticism conformance harness. WHAT IT IS AND WHY IT EXISTS. adr/0021 (UAP-001) states the Universal Agnostic Architecture Principle and then discloses in its own Consequences that nothing enforces it: 'a principle with no enforcement mechanism can be ignored without consequence... no gate, invariant, or certification currently checks conformance to this statement, and none is created by this document.' adr/0039 later scored fourteen axes by hand against a bar -- an abstraction with one implementation is an assumption; an abstraction its own callers bypass is decoration -- which established the bar and left the scoring unrepeatable. These three files make it repeatable: one harness over a declared axis register, naming no technology, computing every verdict from the code rather than reading one from a field. WHAT THE OPERATOR WAS TOLD BEFORE AUTHORIZING, STATED HERE SO THE RECORD CARRIES IT. The first measurement returns PROVEN for persistence (10 implementations, each defining the contract's own methods, behind a contract that round-trips the universe and so refuses a placeholder) and ENVELOPE_ONLY for execution (nine of ten adapters inherit one transcribe() returning identical canonical JSON with a different comment line, and ExecutionAdapter.execute discards the payload and calls the Python resolver regardless). The existing verify_execution_interchangeable passes over all ten and cannot do otherwise. So this allocation admits an instrument whose first act is to contradict a surface that currently reports green. The operator was shown that verdict, and the alternative of holding the harness untracked to avoid recording it, and chose to land it. WHAT THIS AUTHORIZES AND NOTHING ELSE. 3 permanent by_object identifiers, category_seq DATAOBJ 144->145 and ENGINE 1380->1382, measured by `uga_engine.py run --plan` over head 3dd9256687e21d896cca48cc63501c5483de5989 with all three paths staged. Scoped to by_object alone; the corpus plan confirms no by_path allocation. It admits a MEASUREMENT and creates no gate: the harness refuses nothing, changes no test's pass/fail state, and whether ENVELOPE_ONLY becomes a refusal is a separate operator decision (D-14) this permit does not prejudge. Bound to manifest_digest, preimage_digest and head. Single-use. PROVENANCE: the operator was shown the three refused paths, the permit parameters, the verdict the harness would produce and three sequencing options, and instructed 'OK for Option 1'. The agent recorded that instruction; it did not originate it."
+  },
+  {
+   "permit_id": "P-UCOS-UGA-006",
+   "actor": "UCOS-UGA-001 :: uga_engine.py run",
+   "manifest_digest": "f4a87dceb09d218f192e6dc4d45e644ed152236d24401548cfa62b0c230b227d",
+   "preimage_digest": "3376ef9c47639f03aaa60029aa4996dee27b1d2bd5dc5e5cb3d85f4df7827bdc",
+   "head": "3dd9256687e21d896cca48cc63501c5483de5989",
+   "scope": {
+    "maps": [
+     "by_object"
+    ],
+    "max_allocations": 1
+   },
+   "expires_at": null,
+   "single_use": true,
+   "$authorization": "Operator-authorized UGA allocation completing UAC-000001, the agnosticism conformance harness that P-UCOS-UGA-005 began. WHY A SECOND PERMIT EXISTS, AND THAT IT IS A SEQUENCING ERROR RATHER THAN A CHANGE OF SCOPE. P-UCOS-UGA-005 was measured over three files and spent. Omega-4 then REFUSED the result on unreachable_artifacts, 51 -> 52: engine/conformance was code no import, plane or entry point reached, and an instrument nothing invokes proves nothing however well written. Making it reachable required a test module, and that module is a fourth object needing identity the first manifest could not have covered. The requirement was foreseeable: the same pattern was resolved earlier the same day for 00-BOOK/tools/merge-union-ledger.py, which was reached only through a git config string and needed a --selftest and a Makefile target before it could stand. The agent knew that precedent and spent the permit before satisfying it. Nothing about what the operator approved has changed; the manifest was simply measured too early. WHAT THIS AUTHORIZES AND NOTHING ELSE. 1 permanent by_object identifier, category_seq TESTOBJ 896->897, for the test module that reaches the harness, measured by `uga_engine.py run --plan` over head 3dd9256687e21d896cca48cc63501c5483de5989 with every affected path staged. Scoped to by_object alone. It admits no new instrument and no new authority: the harness itself was admitted under P-UCOS-UGA-005 and remains a MEASUREMENT that refuses nothing, with whether ENVELOPE_ONLY becomes a refusal left to a separate operator decision. Bound to manifest_digest, preimage_digest and head. Single-use. PROVENANCE: the operator was shown the single remaining violation, the permit parameters and a statement that this permit exists because of an agent sequencing error, and instructed 'ok'. The agent recorded that instruction; it did not originate it."
   }
  ]
 }

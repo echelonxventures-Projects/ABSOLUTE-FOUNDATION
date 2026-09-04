@@ -7,21 +7,21 @@
   "evidence_class": "IMPROVEMENT",
   "may_influence_certification": false,
   "observation": {
-    "total_objects": 7118,
+    "total_objects": 7122,
     "by_object_class": {
       "CONFIGURATION_OBJECT": 40,
-      "DATA_OBJECT": 140,
+      "DATA_OBJECT": 141,
       "DOCUMENT_ARTIFACT": 1679,
       "EXCLUDED_DOCUMENT": 2932,
-      "EXECUTABLE_OBJECT": 1375,
-      "TEST_OBJECT": 896,
+      "EXECUTABLE_OBJECT": 1377,
+      "TEST_OBJECT": 897,
       "TOOLING_OBJECT": 56
     },
     "by_lifecycle": {
-      "AUTHORED": 6773,
+      "AUTHORED": 6777,
       "GENERATED": 345
     },
-    "distinct_owners": 295,
+    "distinct_owners": 296,
     "top_owners": [
       {
         "owner": "00-BOOK/PORTAL",
@@ -37,7 +37,7 @@
       },
       {
         "owner": "engine/tests",
-        "objects": 344
+        "objects": 345
       },
       {
         "owner": "service/_evidence",
@@ -64,8 +64,8 @@
         "objects": 92
       }
     ],
-    "objects_with_dependencies": 2099,
-    "dependency_edges": 10648,
+    "objects_with_dependencies": 2102,
+    "dependency_edges": 10656,
     "producers_bound_to_outputs": 43,
     "retired_identities": 8
   },

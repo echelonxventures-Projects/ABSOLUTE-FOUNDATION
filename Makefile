@@ -215,6 +215,14 @@ verify-explain:
 # about the repository: a stale entry makes a plan slower and never wrong, so this is
 # deliberately not wired into any gate. Run it after a change that moves test durations
 # materially, then commit the regenerated table.
+# conformance: MEASURE the agnosticism axes. adr/0021 (UAP-001) declares that nothing enforces
+# the Universal Agnostic Architecture Principle; this is the measurement that changes it. It is
+# deliberately not a gate — it reports dispositions and refuses nothing, and whether
+# ENVELOPE_ONLY becomes a refusal is an operator decision this target does not take.
+.PHONY: conformance
+conformance: bootstrap-quiet
+	@$(PY) -m engine.conformance.measure
+
 verify-cost-model: bootstrap-quiet
 	@$(PY) -m pytest -o addopts= --no-cov -q --durations=0 \
 	  > .uvi-durations.txt 2>&1 || true

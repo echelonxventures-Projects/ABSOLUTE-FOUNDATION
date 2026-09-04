@@ -279,6 +279,31 @@ class TestObjectRegistry:
     priced: int = 0
     node_costs: dict[str, float] = field(default_factory=dict)
     splittable: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    stale_splits: tuple[str, ...] = ()
+    """Objects the cost model declares splittable whose recorded hash no longer matches.
+
+    A STALE ENTRY IS NOT A FAULT, AND THAT IS EXACTLY WHY IT NEEDS REPORTING. Splitting is
+    hash-gated: an object whose content moved falls back to whole-file placement, which is
+    slower and never wrong — the cost model's own authority text says so and this does not
+    contest it. What was missing is that the fallback was SILENT. The comparison happened,
+    the plan quietly got worse, and the run looked identical.
+
+    Measured when this was added: one object — the second-most-expensive in the suite, 168.4s
+    over 24 nodes — had been placed whole since a commit four earlier moved its hash. The floor
+    that put under every wave went unnoticed until someone asked why a wave felt slow.
+
+    THE OBJECT IS DESCRIBED AND NOT NAMED, AND UVI-L-06 IS WHY. "Selection Is Derived, Never
+    Authored" refuses any specific test file named anywhere in this module, and it refused the
+    first draft of this docstring, which cited the path as evidence. The law is right and the
+    prose was wrong: a scanner cannot distinguish a filename in a comment from one in a
+    constant, and a selection engine that names a test file has stopped deriving its selection.
+    The path belongs in the commit message and in the run's own report, both of which compute
+    it. Whatever object is stale appears in `stale_splits` at runtime, measured, never typed.
+
+    Reported, never gated. Making it fail would contradict "slower, never wrong"; making it
+    visible is a different claim, and the only one the measurement supports.
+    """
+
     unregistered: tuple[str, ...] = ()
     """Collectible test objects the executable object registry does not hold.
 
@@ -350,6 +375,7 @@ def build_test_registry(
     costs, split, threshold = load_cost_model(base)
 
     registry = TestObjectRegistry(roots=roots)
+    stale: list[str] = []
     for path, entry in substrates.objects.items():
         if entry.get("object_class") != "TEST_OBJECT" or not is_collectible(path, roots):
             continue
@@ -370,18 +396,18 @@ def build_test_registry(
         if measured is not None:
             registry.priced += 1
         entry_split = split.get(path)
-        if (
-            entry_split is not None
-            and threshold > 0
-            and (measured or 0.0) > threshold
-            and entry_split.get("content_hash") == test_object.content_hash
-        ):
-            nodes = entry_split.get("nodes")
-            if isinstance(nodes, dict) and nodes:
-                registry.splittable[path] = tuple(sorted(str(node) for node in nodes))
-                for node, seconds in nodes.items():
-                    if _is_number(seconds):
-                        registry.node_costs[str(node)] = float(seconds)
+        if entry_split is not None and threshold > 0 and (measured or 0.0) > threshold:
+            if entry_split.get("content_hash") != test_object.content_hash:
+                # The fallback that used to be silent. See `stale_splits` for why this is
+                # observed rather than refused.
+                stale.append(path)
+            else:
+                nodes = entry_split.get("nodes")
+                if isinstance(nodes, dict) and nodes:
+                    registry.splittable[path] = tuple(sorted(str(node) for node in nodes))
+                    for node, seconds in nodes.items():
+                        if _is_number(seconds):
+                            registry.node_costs[str(node)] = float(seconds)
 
     # --- FAIL WIDE OVER THE UNREGISTERED --------------------------------------------
     # Everything above is projected from the executable object registry. That registry is
@@ -427,6 +453,7 @@ def build_test_registry(
     registry.unregistered = tuple(
         sorted(path for path, obj in registry.objects.items() if not obj.registered)
     )
+    registry.stale_splits = tuple(sorted(stale))
 
     if not registry.objects:
         raise VerificationIntelligenceError(

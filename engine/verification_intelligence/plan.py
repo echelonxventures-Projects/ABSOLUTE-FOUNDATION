@@ -28,6 +28,7 @@ from engine.verification_intelligence.execution import (
     FALLBACK_MAX_WORKERS,
     plan_shards,
     resolve_workers,
+    split_currency,
 )
 from engine.verification_intelligence.model import (
     Action,
@@ -72,6 +73,14 @@ def build_plan(
             "the selection escalated, so this run is executed under the coverage floor "
             "exactly as a certification-eligible mode would execute it"
         )
+
+    # THE SPLIT TABLE'S CURRENCY IS A PROPERTY OF THE PLAN, so it is reported with the plan.
+    # Splitting is hash-gated and the fallback used to be silent: an object whose content moved
+    # was placed whole, the plan quietly lost its largest object's divisibility, and the run
+    # read identically. Not a gate — a stale entry makes a plan slower and never wrong — but a
+    # plan that cannot say which prices it could actually use is reporting less than it knows.
+    if currency := split_currency(tests):
+        notes.append(currency)
 
     shards, workers = _resolve_shards(constitution, selection, tests, mode, workers_override)
     stages = _resolve_stages(constitution, mode, substrates, coverage, root)

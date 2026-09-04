@@ -60,9 +60,191 @@
       "direction": "forward",
       "article": "UCKP-ART-12",
       "meaning": "the evidence class the object's governance records belong to"
+    },
+    "Affects": {
+      "uckp_class": "constitutional",
+      "uckp_relation": "depends-on",
+      "direction": "inverse",
+      "article": "UCKP-ART-07",
+      "meaning": "blast radius: what a change to this object reaches, which is the dependency edge traversed in reverse and never a relation of its own"
+    },
+    "Authorized-By": {
+      "uckp_class": "authority",
+      "uckp_relation": "governs",
+      "direction": "inverse",
+      "article": "UCKP-ART-01",
+      "meaning": "from whom the right to exist is derived — the authority relation the model requires to stay acyclic (UCKP-INV-04)"
+    },
+    "Authorizes": {
+      "uckp_class": "authority",
+      "uckp_relation": "governs",
+      "direction": "forward",
+      "article": "UCKP-ART-01",
+      "meaning": "holds decision authority over the object"
+    },
+    "Certifies": {
+      "uckp_class": "validation",
+      "uckp_relation": "certifies",
+      "direction": "forward",
+      "article": "UCKP-ART-16",
+      "meaning": "attests to the completeness of the certified surface"
+    },
+    "Child": {
+      "uckp_class": "constitutional",
+      "uckp_relation": "depends-on",
+      "direction": "inverse",
+      "article": "UCKP-ART-07",
+      "meaning": "the same containment read from the container toward what it contains"
+    },
+    "Consumed-By": {
+      "uckp_class": "knowledge",
+      "uckp_relation": "consumes",
+      "direction": "inverse",
+      "article": "UCKP-ART-07",
+      "meaning": "the same consumption read from the producer toward its consumer"
+    },
+    "Consumes": {
+      "uckp_class": "knowledge",
+      "uckp_relation": "consumes",
+      "direction": "forward",
+      "article": "UCKP-ART-07",
+      "meaning": "reads or depends on the output of another object"
+    },
+    "Depends-On": {
+      "uckp_class": "constitutional",
+      "uckp_relation": "depends-on",
+      "direction": "forward",
+      "article": "UCKP-ART-07",
+      "meaning": "what must exist for the object to exist — the same class depends_on carries in the UGA projection, at a different grain"
+    },
+    "Evidences": {
+      "uckp_class": "constitutional",
+      "uckp_relation": "references",
+      "direction": "inverse",
+      "article": "UCKP-ART-12",
+      "meaning": "the evidence record pointing at what it evidences — the forward sense of evidenced_by"
+    },
+    "Evolves-From": {
+      "uckp_class": "evolution",
+      "uckp_relation": "derived-from",
+      "direction": "forward",
+      "article": "UCKP-ART-14",
+      "meaning": "the prior state this one was computed from"
+    },
+    "Evolves-From-Inverse": {
+      "uckp_class": "evolution",
+      "uckp_relation": "derived-from",
+      "direction": "inverse",
+      "article": "UCKP-ART-14",
+      "meaning": "the same evolution read from the prior state toward its successor"
+    },
+    "Implemented-By": {
+      "uckp_class": "traceability",
+      "uckp_relation": "implements",
+      "direction": "inverse",
+      "article": "UCKP-ART-16",
+      "meaning": "the same conformance read from the specification toward what realises it"
+    },
+    "Implements": {
+      "uckp_class": "traceability",
+      "uckp_relation": "implements",
+      "direction": "forward",
+      "article": "UCKP-ART-16",
+      "meaning": "realises a specification without being derived from it — conformance, which is why the lineage classification excludes it from ancestry"
+    },
+    "Implements-Stage": {
+      "uckp_class": "traceability",
+      "uckp_relation": "implements",
+      "direction": "forward",
+      "article": "UCKP-ART-14",
+      "meaning": "realises a declared lifecycle stage rather than another object"
+    },
+    "In-Program": {
+      "uckp_class": "ownership",
+      "uckp_relation": "owns",
+      "direction": "inverse",
+      "article": "UCKP-ART-06",
+      "meaning": "the programme accountable for the artifact, read from the artifact toward its programme"
+    },
+    "In-Volume": {
+      "uckp_class": "constitutional",
+      "uckp_relation": "depends-on",
+      "direction": "forward",
+      "article": "UCKP-ART-07",
+      "meaning": "the volume the artifact is bound into, the coarsest containment the corpus declares"
+    },
+    "Of-Category": {
+      "uckp_class": "semantic",
+      "uckp_relation": "inherits",
+      "direction": "forward",
+      "article": "UCKP-ART-06",
+      "meaning": "the taxonomy anchor whose properties the artifact takes — the category facet, synthesised as a node so the classification is traversable rather than only readable"
+    },
+    "Parent": {
+      "uckp_class": "constitutional",
+      "uckp_relation": "depends-on",
+      "direction": "forward",
+      "article": "UCKP-ART-07",
+      "meaning": "the containing object this one cannot exist outside of — structural containment is a dependency, which is why it binds to the dependency class rather than inventing a containment term"
+    },
+    "Required-By": {
+      "uckp_class": "constitutional",
+      "uckp_relation": "depends-on",
+      "direction": "inverse",
+      "article": "UCKP-ART-07",
+      "meaning": "the same dependency read from the dependency toward its dependent"
+    },
+    "Requirement-Of": {
+      "uckp_class": "traceability",
+      "uckp_relation": "depends-on",
+      "direction": "inverse",
+      "article": "UCKP-ART-16",
+      "meaning": "the object a requirement binds, read from the requirement toward what must satisfy it"
+    },
+    "Traced-From": {
+      "uckp_class": "traceability",
+      "uckp_relation": "references",
+      "direction": "inverse",
+      "article": "UCKP-ART-16",
+      "meaning": "the same trace read from intent toward effect"
+    },
+    "Traces-Stage:architecture": {
+      "uckp_class": "traceability",
+      "uckp_relation": "references",
+      "direction": "forward",
+      "article": "UCKP-ART-14",
+      "meaning": "trace into the architecture stage of the declared lifecycle"
+    },
+    "Traces-Stage:implementation": {
+      "uckp_class": "traceability",
+      "uckp_relation": "references",
+      "direction": "forward",
+      "article": "UCKP-ART-14",
+      "meaning": "trace into the implementation stage of the declared lifecycle"
+    },
+    "Traces-Stage:requirement": {
+      "uckp_class": "traceability",
+      "uckp_relation": "references",
+      "direction": "forward",
+      "article": "UCKP-ART-14",
+      "meaning": "trace into the requirement stage of the declared lifecycle"
+    },
+    "Traces-To": {
+      "uckp_class": "traceability",
+      "uckp_relation": "references",
+      "direction": "forward",
+      "article": "UCKP-ART-16",
+      "meaning": "upstream intent this object points at — a coverage overlay, not a provenance edge"
+    },
+    "Validates": {
+      "uckp_class": "validation",
+      "uckp_relation": "validates",
+      "direction": "forward",
+      "article": "UCKP-ART-16",
+      "meaning": "checks the shape of another object — the forward sense of the contract validated_by names inversely"
     }
   },
-  "count": 39505,
+  "count": 39529,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -14221,6 +14403,26 @@
     },
     {
       "from": "UCOS-DATAOBJ-000144",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000145",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000145",
+      "kind": "owned_by",
+      "to": "engine/conformance"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000145",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000145",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -69197,6 +69399,11 @@
     {
       "from": "UCOS-ENGINE-001186",
       "kind": "depends_on",
+      "to": "engine/graph/adapter.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001186",
+      "kind": "depends_on",
       "to": "engine/ledger_authority/__init__.py"
     },
     {
@@ -75916,6 +76123,61 @@
     },
     {
       "from": "UCOS-ENGINE-001380",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001381",
+      "kind": "depends_on",
+      "to": "engine/conformance/measure.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001381",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001381",
+      "kind": "owned_by",
+      "to": "engine/conformance"
+    },
+    {
+      "from": "UCOS-ENGINE-001381",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001381",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001382",
+      "kind": "depends_on",
+      "to": "engine/uckp/execution.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001382",
+      "kind": "depends_on",
+      "to": "engine/uckp/persistence.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001382",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001382",
+      "kind": "owned_by",
+      "to": "engine/conformance"
+    },
+    {
+      "from": "UCOS-ENGINE-001382",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001382",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -192116,6 +192378,46 @@
     },
     {
       "from": "UCOS-TESTOBJ-000896",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000897",
+      "kind": "depends_on",
+      "to": "engine/conformance/__init__.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000897",
+      "kind": "depends_on",
+      "to": "engine/conformance/measure.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000897",
+      "kind": "depends_on",
+      "to": "engine/uckp/execution.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000897",
+      "kind": "depends_on",
+      "to": "engine/uckp/persistence.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000897",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000897",
+      "kind": "owned_by",
+      "to": "engine/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000897",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000897",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
