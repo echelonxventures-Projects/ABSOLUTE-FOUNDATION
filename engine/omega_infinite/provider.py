@@ -170,6 +170,48 @@ class BaseProvider:
         ordered = tuple(collected[key] for key in sorted(collected))
         return chosen.apply(ordered)
 
+    #: How a capability's name becomes the method that delivers it. One rule, so a new capability
+    #: is a declaration plus a method and never a change to this class.
+    SUPPLY_PREFIX = "supply_"
+
+    def supply(self, capability: Capability, selector: Selector | None = None) -> object:
+        """Deliver what ``capability`` promises, or refuse.
+
+        WHY THIS EXISTS. Measured before it did: the git provider declared five capabilities and
+        the protocol offered ONE data method, ``enumerate``. Four of the five — VERSIONED_CONTENT,
+        CONTENT_HASHING, AUTHORITY_METADATA, LOCAL_STORAGE — could not be obtained through any
+        call, so `AUTHORITY_METADATA`, which the provider's own docstring says it "exposes on
+        request", had no request to make. Callers that needed those facts went to the tool
+        directly, and were then counted as bypassing an abstraction that did not cover them.
+
+        A DECLARATION NOW COSTS SOMETHING. `verify_capabilities` refuses a provider declaring a
+        capability it cannot supply, so declaring one is a promise the class must keep rather than
+        a line in a report. That is the property `ENVELOPE_ONLY` was defined to catch, applied
+        here before the axis is registered rather than after.
+        """
+        self.require(capability)
+        method = getattr(self, self.SUPPLY_PREFIX + capability.name.lower(), None)
+        if method is None:
+            raise ProviderError(
+                f"provider {self.identifier()!r} declares {capability.name} and supplies no "
+                f"{self.SUPPLY_PREFIX}{capability.name.lower()}"
+            )
+        return method(selector or Selector())
+
+    def verify_capabilities(self) -> tuple[str, ...]:
+        """Every declared capability this provider cannot deliver. Empty is the contract.
+
+        TRACKED_CONTENT is satisfied by ``collect``/``enumerate`` rather than a supply method,
+        because enumeration IS the protocol's one required question and predates this dispatch.
+        """
+        missing = []
+        for cap in sorted(self.capabilities(), key=lambda c: c.name):
+            if cap.name == "TRACKED_CONTENT":
+                continue
+            if getattr(self, self.SUPPLY_PREFIX + cap.name.lower(), None) is None:
+                missing.append(cap.name)
+        return tuple(missing)
+
     def require(self, *capabilities: Capability) -> None:
         """Refuse an operation this provider never claimed to support."""
         self.capabilities().require(*capabilities, subject=f"provider {self.identifier()!r}")

@@ -38,6 +38,7 @@ from engine.omega_infinite.capability import (
     LOCAL_STORAGE,
     TRACKED_CONTENT,
     VERSIONED_CONTENT,
+    WORKING_TREE_STATE,
     CapabilitySet,
 )
 from engine.omega_infinite.provider import (
@@ -53,6 +54,7 @@ IDENTIFIER = "git"
 #: which is the Deliverable 6 rule: providers self-describe, and nobody describes them.
 CAPABILITIES = CapabilitySet.of(
     TRACKED_CONTENT,
+    WORKING_TREE_STATE,
     VERSIONED_CONTENT,
     LOCAL_STORAGE,
     CONTENT_HASHING,
@@ -132,6 +134,70 @@ class GitDiscoveryProvider(BaseProvider):
         arguments = [*_LS_FILES[1:], *selector.patterns]
         raw = _run(self.root, *arguments)
         return tuple(sorted(entry for entry in raw.split("\0") if entry))
+
+    # ------------------------------------------------------------------- capability delivery
+    #
+    # ONE METHOD PER DECLARED CAPABILITY. Before these existed the provider declared five
+    # capabilities and delivered one, so every caller needing a content hash, an owner or the
+    # working tree went to git directly — and was then counted as bypassing an abstraction that
+    # did not answer its question. `verify_capabilities` now refuses a declaration without a
+    # delivery, which is what makes the count meaningful.
+
+    def supply_working_tree_state(self, selector: Selector) -> tuple[str, ...]:
+        """Paths the working copy holds that the tracked population does not.
+
+        `--others` is a DIFFERENT QUESTION from `--cached`, not a wider filter on it: a verdict
+        that must not depend on local debris asks for tracked content, and a tool reporting what
+        an operator has yet to commit asks for this. Callers that need both ask for both, and the
+        union is theirs to make, because a provider merging them would hide which half a verdict
+        rested on.
+        """
+        raw = _run(
+            self.root, "ls-files", "-z", "--others", "--exclude-standard", *selector.patterns
+        )
+        return tuple(sorted(entry for entry in raw.split("\0") if entry))
+
+    def supply_content_hashing(self, selector: Selector) -> dict[str, str]:
+        """Each tracked path mapped to the blob hash the index records for it.
+
+        Read from `ls-files -s`, which is what the index already holds, rather than by reading and
+        hashing the bytes: the index's answer is the one every other git-derived verdict rests on,
+        and computing a second one would be a rival answer to a question already settled.
+        """
+        raw = _run(self.root, "ls-files", "-s", "-z", *selector.patterns)
+        out: dict[str, str] = {}
+        for entry in raw.split("\0"):
+            if not entry:
+                continue
+            meta, _, path = entry.partition("\t")
+            parts = meta.split()
+            if len(parts) >= 2 and path:
+                out[path] = parts[1]
+        return out
+
+    def supply_authority_metadata(self, selector: Selector) -> dict[str, str]:
+        """The last committer of each selected path — the ownership fact git actually carries.
+
+        The module docstring says this provider "declares that git CAN supply ownership facts, and
+        exposes them on request". Until now there was no request to make. This is that request,
+        and it stays a FACT rather than a derivation: who last touched a path is not who owns it,
+        and the authority derivation consults this instead of inferring from structure.
+        """
+        owners: dict[str, str] = {}
+        for path in self._tracked(selector):
+            try:
+                owners[path] = _run(self.root, "log", "-1", "--format=%an", "--", path).strip()
+            except ProviderError:  # pragma: no cover - a path with no history
+                owners[path] = ""
+        return owners
+
+    def supply_versioned_content(self, selector: Selector) -> str:
+        """The revision the enumeration is reproducible against."""
+        return self.revision()
+
+    def supply_local_storage(self, selector: Selector) -> str:
+        """Where the bytes are, on this machine, with no network call."""
+        return str(self.root)
 
     def revision(self) -> str:
         """The committed revision, or "" in a repository with no commits yet.

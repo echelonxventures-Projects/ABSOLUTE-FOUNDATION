@@ -209,6 +209,7 @@ def test_the_evidence_document_carries_the_capability_matrix(built: evidence.Evi
             "LOCAL_STORAGE",
             "TRACKED_CONTENT",
             "VERSIONED_CONTENT",
+            "WORKING_TREE_STATE",
         ]
     }
 

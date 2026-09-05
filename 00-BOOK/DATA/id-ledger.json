@@ -12109,8 +12109,8 @@
     "DATAOBJ": 145,
     "EXDOC": 3140,
     "TOOLING": 57,
-    "ENGINE": 1382,
-    "TESTOBJ": 897,
+    "ENGINE": 1383,
+    "TESTOBJ": 898,
     "OBS": 7,
     "ASSESS": 2,
     "B01BIR": 1,
@@ -67007,6 +67007,18 @@
       "object_class": "TEST_OBJECT",
       "category": "TESTOBJ",
       "first_seen": "commit:3dd9256687e2"
+    },
+    "engine/omega_infinite/direct_callers.py": {
+      "universal_id": "UCOS-ENGINE-001383",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:2a241db73aab"
+    },
+    "engine/tests/omega_infinite/test_direct_caller_ratchet.py": {
+      "universal_id": "UCOS-TESTOBJ-000898",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:2a241db73aab"
     }
   },
   "by_observation": {

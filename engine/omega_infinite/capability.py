@@ -96,6 +96,15 @@ CONTENT_HASHING = Capability(
     "The provider can produce a stable content digest for an artifact without the caller reading "
     "the bytes itself.",
 )
+WORKING_TREE_STATE = Capability(
+    "WORKING_TREE_STATE",
+    "The provider can report what the local working copy holds that the tracked population does "
+    "not — additions not yet indexed, and modifications not yet recorded. A DIFFERENT QUESTION "
+    "from TRACKED_CONTENT rather than a wider filter on it: a verdict that must not depend on "
+    "local debris asks the first, and a tool reporting what an operator has yet to commit asks "
+    "the second. Conflating them is what made four callers reach past the provider for an answer "
+    "it never offered.",
+)
 AUTHORITY_METADATA = Capability(
     "AUTHORITY_METADATA",
     "The provider carries ownership information of its own — a committer, an owner field, an ACL "

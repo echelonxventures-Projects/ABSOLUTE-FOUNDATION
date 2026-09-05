@@ -170,6 +170,11 @@ def test_the_git_provider_declares_what_git_actually_offers(tracked_tree: Path) 
         "LOCAL_STORAGE",
         "TRACKED_CONTENT",
         "VERSIONED_CONTENT",
+        # Added when every declared capability acquired a delivery method. It is a DIFFERENT
+        # QUESTION from TRACKED_CONTENT, not a wider filter: four callers were reaching past the
+        # provider for `--others` because no capability covered what the working copy holds and
+        # the index does not.
+        "WORKING_TREE_STATE",
     )
 
 
@@ -236,7 +241,12 @@ def test_the_two_providers_differ_only_in_what_they_declare(tracked_tree: Path) 
     lost = tracked.missing(*plain.capabilities) or ()
     gap = tuple(sorted(c.name for c in tracked.capabilities - plain.capabilities))
     assert lost == ()
-    assert gap == ("AUTHORITY_METADATA", "TRACKED_CONTENT", "VERSIONED_CONTENT")
+    assert gap == (
+        "AUTHORITY_METADATA",
+        "TRACKED_CONTENT",
+        "VERSIONED_CONTENT",
+        "WORKING_TREE_STATE",
+    )
     assert plain.supports(LOCAL_STORAGE) and plain.supports(CONTENT_HASHING)
 
 

@@ -244,7 +244,7 @@
       "meaning": "checks the shape of another object — the forward sense of the contract validated_by names inversely"
     }
   },
-  "count": 39529,
+  "count": 39549,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -1043,6 +1043,46 @@
     },
     {
       "from": "UCOS-ADR-000040",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000041",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000041",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000041",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000041",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000042",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000042",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000042",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000042",
       "kind": "validated_by",
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
@@ -14407,26 +14447,6 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
-      "from": "UCOS-DATAOBJ-000145",
-      "kind": "evidenced_by",
-      "to": "VALIDATION"
-    },
-    {
-      "from": "UCOS-DATAOBJ-000145",
-      "kind": "owned_by",
-      "to": "engine/conformance"
-    },
-    {
-      "from": "UCOS-DATAOBJ-000145",
-      "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
-    },
-    {
-      "from": "UCOS-DATAOBJ-000145",
-      "kind": "validated_by",
-      "to": "UCOS-UGA-001 §UGA-INV-01..10"
-    },
-    {
       "from": "UCOS-DEPEND-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -15263,6 +15283,26 @@
     },
     {
       "from": "UCOS-ENG-000025",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ENG-000026",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENG-000026",
+      "kind": "owned_by",
+      "to": "engine/conformance"
+    },
+    {
+      "from": "UCOS-ENG-000026",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENG-000026",
       "kind": "validated_by",
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
@@ -76178,6 +76218,26 @@
     },
     {
       "from": "UCOS-ENGINE-001382",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001383",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001383",
+      "kind": "owned_by",
+      "to": "engine/omega_infinite"
+    },
+    {
+      "from": "UCOS-ENGINE-001383",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001383",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -192418,6 +192478,46 @@
     },
     {
       "from": "UCOS-TESTOBJ-000897",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000898",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/capability.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000898",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/direct_callers.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000898",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000898",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000898",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000898",
+      "kind": "owned_by",
+      "to": "engine/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000898",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000898",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
