@@ -20,7 +20,6 @@ import ast
 import functools
 import os
 import re
-import subprocess
 from collections.abc import Iterable, Mapping, Sequence
 
 from engine.enforcement_closure.model import (
@@ -31,6 +30,8 @@ from engine.enforcement_closure.model import (
     EnforcementError,
     Rule,
 )
+from engine.omega_infinite.git_provider import GitDiscoveryProvider
+from engine.omega_infinite.provider import ProviderError
 
 #: ``run_stage "<label>"`` — the same regex ``engine/verification_intelligence/gate.py:100``,
 #: ``platform/tests/test_canonical_validation_evidence.py`` and
@@ -54,19 +55,22 @@ def _tracked_paths_uncached(root: str) -> tuple[str, ...]:
     would make the enforcement plane's population depend on whatever happened to be lying in
     the directory, which is the vacuity this programme exists to refuse.
     """
+    # THE PROVIDER, NOT THE TOOL. This asks TRACKED_CONTENT with the provider's own flags, and it
+    # keeps the property the docstring above insists on: the provider RAISES rather than returning
+    # an empty tuple, so a missing work tree stays a fault and never becomes an empty world.
+    #
+    # The module docstring's reason for copying rather than importing was about `ukb.py`, which
+    # lives under an EXCLUDE_DIR_PREFIXES entry the enforcement plane cannot see. That reason does
+    # not reach the provider: engine/omega_infinite is in governed scope, and the import graph was
+    # walked before this change to confirm nothing there imports back into this package.
     try:
-        out = subprocess.run(  # noqa: S603 - fixed argv, no shell, no interpolated input
-            ["git", "ls-files", "--cached", "--exclude-standard", "-z"],  # noqa: S607 - git from PATH by design; the boundary must be VCS's own answer
-            cwd=root,
-            capture_output=True,
-            check=True,
-        ).stdout
-    except (OSError, subprocess.CalledProcessError) as exc:  # pragma: no cover - environment
+        artifacts = GitDiscoveryProvider(root=root).enumerate()
+    except ProviderError as exc:  # pragma: no cover - environment
         raise EnforcementError(
             "the enforcement plane cannot be measured without a git work tree: "
-            "`git ls-files` did not resolve, so the population of tracked artifacts is unknown"
+            "the tracked-content provider did not resolve, so the population is unknown"
         ) from exc
-    return tuple(sorted(p for p in out.decode("utf-8").split("\0") if p))
+    return tuple(sorted(a.location.locator for a in artifacts))
 
 
 def read_text(root: str, relative: str) -> str:

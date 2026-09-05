@@ -93,6 +93,21 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #: direct invocation is a CHOICE, and this counts choices.
 #:
 #: MOVEMENTS
+#:   10 -> 7    (-3)  The three that were migratable and had been left. All proven
+#:                     population-identical before the swap, which is the bar every migration
+#:                     here has met: engine/enforcement_closure/discovery.py at 7,133 tracked
+#:                     paths, engine/universal_discovery/discovery.py at 2,292 Python paths, and
+#:                     engine/ledger_authority's git_head against a live rev-parse.
+#:                     THE LEDGER ONE NEARLY BROKE PERMIT BINDING. `revision()` returns "" where
+#:                     git_head returned None, and git_head's result becomes `manifest["head"]` —
+#:                     which every allocation permit is BOUND to. An empty string and a null are
+#:                     different JSON, so a silent swap would have moved the manifest digest and
+#:                     invalidated permit binding in a repository with no commits. The empty
+#:                     answer is mapped back to None so the contract is byte-identical.
+#:                     Each kept its refusal: all three raise rather than returning an empty
+#:                     population, because an empty world satisfies every invariant and would
+#:                     turn "ungoverned" into "fully governed".
+#:
 #:   12 -> 10   (-2)  A DETECTOR CORRECTION, NOT PROGRESS, and recorded apart from the
 #:                     migrations for that reason. engine/uckp/assimilation.py and
 #:                     engine/uckp/constitution.py were never callers: both name the tool in
@@ -164,7 +179,7 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #:                     above. Six of the nineteen were invisible to the flag-based scan that
 #:                     preceded this one, which matched `ls-files` argument lists and therefore
 #:                     missed every caller using another subcommand.
-DIRECT_CALLER_CEILING = 10
+DIRECT_CALLER_CEILING = 7
 
 #: A SECOND CEILING, BECAUSE THE FIRST HAS A LOOPHOLE. Declaring a caller lowers the direct count
 #: without changing one line of behaviour, so a ratchet on that count alone can always be

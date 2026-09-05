@@ -38,10 +38,11 @@ tests — outside the denominator while every scope test passed.
 from __future__ import annotations
 
 import os
-import subprocess
 import tomllib
 from collections.abc import Mapping
 
+from engine.omega_infinite.git_provider import GitDiscoveryProvider
+from engine.omega_infinite.provider import ProviderError, Selector
 from engine.universal_discovery.model import OmegaError
 
 #: ``root -> (test_roots, measurable_packages, exemptions, transient)``.
@@ -70,19 +71,24 @@ def tracked_python(root: str) -> tuple[str, ...]:
     invariant, so returning one would convert "this repository is ungoverned" into "this
     repository is fully governed" — the single most dangerous defect this package could have.
     """
+    # THE PROVIDER, NOT THE TOOL. The selector carries the same `*.py` narrowing, and the
+    # provider raises rather than returning an empty tuple — which is what the paragraph above
+    # requires, since an empty population satisfies every Ω invariant and would turn "ungoverned"
+    # into "fully governed".
+    #
+    # Proven identical before the swap: 2,292 paths both ways, sets equal. The pathspec/fnmatch
+    # divergence that widened rie/config.py's answer does not arise here, because `*.py` means the
+    # same thing to both and the endswith filter below makes the population exact either way.
     try:
-        completed = subprocess.run(  # noqa: S603 - fixed argv, no shell
-            ["git", "ls-files", "-z", "--cached", "--exclude-standard", "*.py"],  # noqa: S607
-            cwd=root,
-            capture_output=True,
-            check=True,
-        )
-    except (OSError, subprocess.CalledProcessError) as exc:
+        artifacts = GitDiscoveryProvider(root=root).enumerate(Selector(patterns=("*.py",)))
+    except ProviderError as exc:
         raise OmegaError(
-            f"the tracked Python population could not be read from git at {root!r}: {exc}"
+            "the tracked Python population could not be read from the tracked-content "
+            f"provider at {root!r}: {exc}"
         ) from exc
-    raw = completed.stdout.decode("utf-8", errors="surrogateescape")
-    paths = tuple(sorted(p for p in raw.split("\0") if p.endswith(".py")))
+    paths = tuple(
+        sorted(a.location.locator for a in artifacts if a.location.locator.endswith(".py"))
+    )
     if not paths:
         raise OmegaError(
             f"git tracks no Python under {root!r}; refusing to govern an empty population"

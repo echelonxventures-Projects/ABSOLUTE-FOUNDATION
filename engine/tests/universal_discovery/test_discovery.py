@@ -48,7 +48,9 @@ def test_an_empty_population_is_a_fault_and_not_a_pass(tmp_path: Path) -> None:
 
 
 def test_a_missing_work_tree_raises_rather_than_answering(tmp_path: Path) -> None:
-    with pytest.raises(OmegaError, match="could not be read from git|empty population"):
+    with pytest.raises(
+        OmegaError, match="could not be read from the tracked-content provider|empty population"
+    ):
         discovery.tracked_python(str(tmp_path / "nowhere"))
 
 

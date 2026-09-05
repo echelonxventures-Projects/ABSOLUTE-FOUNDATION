@@ -495,7 +495,9 @@ def test_an_empty_population_is_refused(tmp_path: Path) -> None:
 
 def test_a_repository_git_does_not_track_is_refused(tmp_path: Path) -> None:
     """Not a git work tree at all — refused rather than answered from the filesystem."""
-    with pytest.raises(OmegaError, match="could not be read from git|empty population"):
+    with pytest.raises(
+        OmegaError, match="could not be read from the tracked-content provider|empty population"
+    ):
         discovery.tracked_python(str(tmp_path / "absent"))
 
 

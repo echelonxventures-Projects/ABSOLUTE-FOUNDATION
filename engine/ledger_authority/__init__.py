@@ -87,7 +87,6 @@ import datetime as _dt
 import hashlib
 import json
 import os
-import subprocess
 import time
 
 try:
@@ -599,18 +598,22 @@ def git_head(near_path: str) -> str | None:
     the fail-closed direction — while a permit with `head: null` declines the binding.
     """
     directory = os.path.dirname(os.path.abspath(near_path)) or "."
+    # THE PROVIDER, NOT THE TOOL. VERSIONED_CONTENT is the capability that names a revision, and
+    # the provider supplies it.
+    #
+    # NONE IS PRESERVED DELIBERATELY, AND IT IS NOT COSMETIC. `revision()` returns "" where this
+    # returned None, and the result of this function goes into `manifest["head"]` — which every
+    # allocation permit is BOUND to. An empty string and a null are different JSON, so a silent
+    # swap would move the manifest digest and invalidate permit binding for a repository with no
+    # commits. The empty answer is mapped back to None so the contract is byte-identical.
+    from engine.omega_infinite.capability import VERSIONED_CONTENT
+    from engine.omega_infinite.git_provider import GitDiscoveryProvider
+
     try:
-        out = subprocess.run(  # noqa: S603
-            ["git", "-C", directory, "rev-parse", "HEAD"],  # noqa: S607
-            capture_output=True,
-            text=True,
-            check=False,
-            timeout=15,
-        )
-    except (OSError, subprocess.SubprocessError):
+        head = str(GitDiscoveryProvider(root=directory).supply(VERSIONED_CONTENT) or "").strip()
+    except Exception:  # noqa: BLE001 - any failure is "no head", exactly as before
         return None
-    head = out.stdout.strip()
-    return head if out.returncode == 0 and head else None
+    return head or None
 
 
 def permit_register_path(ledger_path: str) -> str:
