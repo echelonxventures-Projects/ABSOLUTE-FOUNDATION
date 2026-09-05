@@ -20,6 +20,7 @@ from engine.omega_infinite.capability import (
 )
 from engine.omega_infinite.direct_callers import (
     DECLARED_DIRECT,
+    DECLARED_DIRECT_CEILING,
     DIRECT_CALLER_CEILING,
     direct_callers,
 )
@@ -122,6 +123,21 @@ def test_a_fall_must_be_recorded() -> None:
     assert measured == DIRECT_CALLER_CEILING, (
         f"the ceiling is {DIRECT_CALLER_CEILING} and {measured} callers remain. A fall is welcome "
         "and must be recorded in MOVEMENTS with what was migrated and where it went."
+    )
+
+
+def test_declarations_are_ratcheted_too() -> None:
+    """The loophole in the first ratchet, closed.
+
+    Declaring a caller lowers the direct count without changing one line of behaviour, so a
+    ratchet on that count alone can always be satisfied by writing a paragraph. Every declaration
+    is a claim that the provider CANNOT answer the question — not that nobody routed it yet — and
+    a claim that cheap deserves a ceiling of its own.
+    """
+    assert len(DECLARED_DIRECT) <= DECLARED_DIRECT_CEILING, (
+        "a caller was declared rather than migrated. That is lawful when the provider genuinely "
+        "cannot answer the question, and it must be recorded as a rise here rather than absorbed "
+        "into a falling direct count:\n  " + "\n  ".join(sorted(DECLARED_DIRECT))
     )
 
 

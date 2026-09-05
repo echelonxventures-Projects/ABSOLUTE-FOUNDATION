@@ -29,6 +29,19 @@ DECLARED_DIRECT: dict[str, str] = {
     "engine/omega_infinite/git_provider.py": (
         "IS the provider. Its whole purpose is to be the one place the tool is invoked."
     ),
+    "platform/repository_intelligence/contamination.py": (
+        "ASKS QUESTIONS THAT ARE VERSION-CONTROL CONCEPTS, NOT DISCOVERY CONCEPTS. It needs "
+        "ignored paths with their status codes (`status --porcelain --ignored=matching`) and "
+        "WHICH IGNORE RULE matched each path (`check-ignore`). A discovery provider enumerates "
+        "content; neither of these is content. Declaring capabilities for them would create "
+        "abstractions with exactly one implementation on an axis adr/0039 declares git-bound for "
+        "a constitutional reason, which is the bar adr/0039 itself sets — an abstraction with one "
+        "implementation is an assumption — and the checklist-driven abstraction adr/0021 warns "
+        "against. Making this count fall that way would corrupt the measurement it reports. Its "
+        "one `ls-files` call site could migrate alone, and that was deliberately not done: a "
+        "partial migration leaves the module a direct caller anyway, so it would buy no fall and "
+        "cost a second way of asking the same question."
+    ),
     "engine/execution_environment/discovery.py": (
         "LOCATES THE REPOSITORY ROOT, which is the step that makes a provider constructible. A "
         "provider is rooted at a path before it can answer anything about that path, so asking "
@@ -75,6 +88,12 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #: direct invocation is a CHOICE, and this counts choices.
 #:
 #: MOVEMENTS
+#:   13 -> 12   (-1)  platform/repository_intelligence/contamination.py, and it was DECLARED
+#:                     rather than migrated — so this fall is matched by a rise in
+#:                     DECLARED_DIRECT_CEILING and buys no behaviour change at all. Recorded that
+#:                     way on purpose: a fall by declaration and a fall by migration are different
+#:                     facts and collapsing them would let the ratchet be satisfied by writing.
+#:
 #:   14 -> 13   (-1)  platform/repository_intelligence/mutation_classification.py, and this one
 #:                     CHANGED A FAILURE MODE deliberately rather than incidentally. The call ran
 #:                     with `check=False`, so a non-git tree produced an EMPTY tracked set — and
@@ -128,7 +147,27 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #:                     above. Six of the nineteen were invisible to the flag-based scan that
 #:                     preceded this one, which matched `ls-files` argument lists and therefore
 #:                     missed every caller using another subcommand.
-DIRECT_CALLER_CEILING = 13
+DIRECT_CALLER_CEILING = 12
+
+#: A SECOND CEILING, BECAUSE THE FIRST HAS A LOOPHOLE. Declaring a caller lowers the direct count
+#: without changing one line of behaviour, so a ratchet on that count alone can always be
+#: satisfied by writing a paragraph. That is the gaming the Omega-4 note refuses in its own terms,
+#: available here by construction — and a ratchet that can be satisfied by explaining is not
+#: measuring anything.
+#:
+#: So declarations are ratcheted too. This may only rise with a reason a reader can check, and
+#: every rise is a claim that the provider CANNOT answer the question rather than that nobody
+#: routed it yet. The two numbers together are the honest statement: how many callers reach past
+#: the abstraction, and how many questions the abstraction admits it does not cover.
+#:
+#: MOVEMENTS
+#:   2 -> 3   engine/execution_environment/discovery.py — locates the repository root, which must
+#:            happen before a provider can be rooted at it. A bootstrap, not a bypass.
+#:   3 -> 4   platform/repository_intelligence/contamination.py — needs ignored paths with status
+#:            codes and ignore-rule attribution. Neither is content, so neither is a discovery
+#:            question; capabilities for them would have one implementation each on an axis
+#:            adr/0039 declares git-bound.
+DECLARED_DIRECT_CEILING = 4
 
 
 def _invokes_tool_directly(path: pathlib.Path) -> bool:
@@ -169,4 +208,10 @@ def direct_callers(root: str | None = None) -> tuple[str, ...]:
     return tuple(sorted(found))
 
 
-__all__ = ["DECLARED_DIRECT", "DIRECT_CALLER_CEILING", "direct_callers", "roots"]
+__all__ = [
+    "DECLARED_DIRECT",
+    "DECLARED_DIRECT_CEILING",
+    "DIRECT_CALLER_CEILING",
+    "direct_callers",
+    "roots",
+]
