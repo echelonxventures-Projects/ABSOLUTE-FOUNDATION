@@ -36,6 +36,7 @@ not to its reader.
 from __future__ import annotations
 
 import enum
+import os
 from dataclasses import dataclass, field
 
 from engine.verification_impact.graph import ImpactGraph
@@ -55,8 +56,32 @@ UNBOUNDED_PREFIXES: tuple[str, ...] = (
     "scripts/",
 )
 
-#: Suffixes that carry import edges and can therefore be bounded.
-BOUNDED_SUFFIXES: tuple[str, ...] = (".py",)
+#: The FALLBACK when the registry cannot be consulted. Not a policy and not a language choice —
+#: the value the derivation below produces today, kept so a caller holding no graph still gets the
+#: current answer rather than an empty one.
+FALLBACK_BOUNDED_SUFFIXES: tuple[str, ...] = (".py",)
+
+
+def bounded_suffixes(graph: ImpactGraph) -> tuple[str, ...]:
+    """Which suffixes carry dependency edges, MEASURED from the registry rather than declared.
+
+    THIS WAS A LITERAL, AND THE LITERAL WAS A LANGUAGE ASSUMPTION. `BOUNDED_SUFFIXES = (".py",)`
+    said that only Python files have edges an impact analysis can follow. That is true today and
+    is not a property of impact analysis: it is a property of the registry's edge derivation,
+    which resolves imports through `uga_engine.py::python_imports` and nothing else. Measured at
+    this commit, `.py` is the only suffix carrying a dependency edge — 2,106 objects — out of
+    2,924 `.md`, 2,290 `.py`, 173 `.json`, 38 `.yml` and 11 `.sh`.
+
+    Deriving it means the day a second language acquires an edge deriver, its files stop
+    escalating every change to FULL without anyone editing this module. That is UCKP-ART-15: no
+    conclusion rests on a hardcoded assumption, every finding derived from the declared universe.
+    A file type whose edges nobody derives is still unbounded, and correctly so — the conclusion
+    is unchanged, its BASIS is now measured.
+    """
+    measured = {
+        os.path.splitext(path)[1] for path, record in graph.objects.items() if record.dependencies
+    }
+    return tuple(sorted(measured)) or FALLBACK_BOUNDED_SUFFIXES
 
 
 class Scope(str, enum.Enum):
@@ -137,8 +162,8 @@ def _is_unbounded(path: str) -> bool:
     return path.startswith(UNBOUNDED_PREFIXES)
 
 
-def _is_bounded(path: str) -> bool:
-    return path.endswith(BOUNDED_SUFFIXES)
+def _is_bounded(path: str, suffixes: tuple[str, ...] = FALLBACK_BOUNDED_SUFFIXES) -> bool:
+    return path.endswith(suffixes)
 
 
 def analyse(graph: ImpactGraph, changed: list[str] | tuple[str, ...]) -> ImpactReport:
@@ -157,6 +182,7 @@ def analyse(graph: ImpactGraph, changed: list[str] | tuple[str, ...]) -> ImpactR
             unregistered=(),
         )
 
+    suffixes = bounded_suffixes(graph)
     escalations: list[str] = []
     scope = Scope.CHANGED
     bounded: set[str] = set()
@@ -193,7 +219,7 @@ def analyse(graph: ImpactGraph, changed: list[str] | tuple[str, ...]) -> ImpactR
             )
             unregistered.append(path)
             continue
-        if not _is_bounded(path):
+        if not _is_bounded(path, suffixes):
             scope = scope.widen(Scope.FULL)
             unbounded.append(path)
             escalations.append(

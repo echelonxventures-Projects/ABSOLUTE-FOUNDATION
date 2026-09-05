@@ -222,6 +222,51 @@ def test_unbounded_paths_escalate_to_full(path: str) -> None:
     assert plan(report).run_everything is True
 
 
+def test_bounded_suffixes_are_measured_not_declared() -> None:
+    """The literal that was a language assumption, now a measurement.
+
+    `BOUNDED_SUFFIXES = (".py",)` said only Python files carry edges an impact analysis can
+    follow. That is true today and is NOT a property of impact analysis — it is a property of the
+    registry's edge derivation, which resolves Python imports and nothing else. Measured at the
+    commit that changed it: `.py` was the only suffix carrying a dependency edge, across 2,924
+    `.md`, 2,290 `.py`, 173 `.json`, 38 `.yml` and 11 `.sh` objects.
+    """
+    from engine.verification_impact.impact import FALLBACK_BOUNDED_SUFFIXES, bounded_suffixes
+
+    graph = _graph(_record("core.py", deps=("dep.py",)), _record("dep.py"))
+    assert bounded_suffixes(graph) == FALLBACK_BOUNDED_SUFFIXES
+
+
+def test_a_second_language_with_edges_becomes_bounded_without_an_edit() -> None:
+    """THE POINT OF DERIVING IT, and the case a literal could never satisfy.
+
+    A registry carrying edges for another suffix must make that suffix bounded, so the day an
+    edge deriver lands for a second language its files stop escalating every change to FULL —
+    with no edit to the selector. UCKP-ART-15: no conclusion rests on a hardcoded assumption.
+    """
+    from engine.verification_impact.impact import bounded_suffixes
+
+    graph = _graph(
+        _record("core.py", deps=("dep.py",)),
+        _record("lib.rs", deps=("other.rs",)),
+        _record("other.rs"),
+    )
+    assert bounded_suffixes(graph) == (".py", ".rs")
+
+
+def test_a_suffix_whose_edges_nobody_derives_stays_unbounded() -> None:
+    """The conclusion is unchanged; only its basis is measured.
+
+    A file type present in the registry but carrying no edges is still unbounded, because nothing
+    can follow its dependencies. Escalation for it remains correct — and is now correct for a
+    stated reason rather than because a tuple happened not to list it.
+    """
+    from engine.verification_impact.impact import bounded_suffixes
+
+    graph = _graph(_record("core.py", deps=("dep.py",)), _record("notes.md"), _record("dep.py"))
+    assert ".md" not in bounded_suffixes(graph)
+
+
 def test_non_python_changes_escalate_to_full() -> None:
     report = analyse(_graph(_record("core.py")), ["00-MASTER/X/register.md"])
     assert report.scope is Scope.FULL
