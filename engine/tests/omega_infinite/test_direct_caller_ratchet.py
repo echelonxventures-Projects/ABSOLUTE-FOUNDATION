@@ -47,6 +47,26 @@ def test_every_declared_capability_returns_something(provider) -> None:
         assert provider.supply(capability, Selector(patterns=("engine/conformance/*",))) is not None
 
 
+def test_a_capability_delivers_everything_its_description_claims(provider) -> None:
+    """The failing case for the defect this suite did not catch the first time.
+
+    WORKING_TREE_STATE's description promises "additions not yet indexed, AND modifications not
+    yet recorded". The first implementation ran `--others` alone and reported no modifications at
+    all — a capability claiming more than its method delivers, which is the ENVELOPE_ONLY shape
+    this package exists to measure, written inside the package that measures it. The earlier
+    tests all passed over it, because they asserted the call returned something rather than that
+    it returned what was promised.
+
+    Asserting the KEYS is what makes the promise checkable: a merged set would satisfy "returns
+    something" while losing which half a path came from.
+    """
+    state = provider.supply(WORKING_TREE_STATE)
+    assert set(state) == {"untracked", "modified"}, (
+        "the description promises both halves; a result that cannot distinguish them keeps the "
+        "promise only by the reader's charity"
+    )
+
+
 def test_an_undeclared_capability_is_refused(provider) -> None:
     """The provider answers for what it claims and refuses what it does not.
 

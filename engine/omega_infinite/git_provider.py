@@ -143,19 +143,30 @@ class GitDiscoveryProvider(BaseProvider):
     # did not answer its question. `verify_capabilities` now refuses a declaration without a
     # delivery, which is what makes the count meaningful.
 
-    def supply_working_tree_state(self, selector: Selector) -> tuple[str, ...]:
-        """Paths the working copy holds that the tracked population does not.
+    def supply_working_tree_state(self, selector: Selector) -> dict[str, tuple[str, ...]]:
+        """What the working copy holds that the recorded population does not.
 
-        `--others` is a DIFFERENT QUESTION from `--cached`, not a wider filter on it: a verdict
-        that must not depend on local debris asks for tracked content, and a tool reporting what
-        an operator has yet to commit asks for this. Callers that need both ask for both, and the
-        union is theirs to make, because a provider merging them would hide which half a verdict
-        rested on.
+        A DIFFERENT QUESTION from `--cached`, not a wider filter on it: a verdict that must not
+        depend on local debris asks for tracked content, and a tool reporting what an operator has
+        yet to commit asks for this.
+
+        THE TWO HALVES ARE RETURNED SEPARATELY, AND THE FIRST DRAFT RETURNED ONLY ONE. This
+        capability's declared description promises "additions not yet indexed, and modifications
+        not yet recorded"; the first implementation ran `--others` alone and reported no
+        modifications at all. A capability whose description claims more than its method delivers
+        is the ENVELOPE_ONLY shape this package exists to measure, committed inside the package
+        that measures it. Both halves are supplied now, KEYED RATHER THAN MERGED, because a caller
+        needing the union can take it while one needing to know which half a path came from could
+        not recover that from a merged set.
         """
-        raw = _run(
+        untracked = _run(
             self.root, "ls-files", "-z", "--others", "--exclude-standard", *selector.patterns
         )
-        return tuple(sorted(entry for entry in raw.split("\0") if entry))
+        modified = _run(self.root, "ls-files", "-z", "-m", *selector.patterns)
+        return {
+            "untracked": tuple(sorted(e for e in untracked.split("\0") if e)),
+            "modified": tuple(sorted(e for e in modified.split("\0") if e)),
+        }
 
     def supply_content_hashing(self, selector: Selector) -> dict[str, str]:
         """Each tracked path mapped to the blob hash the index records for it.
