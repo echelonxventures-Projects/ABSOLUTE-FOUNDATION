@@ -1447,7 +1447,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "b5db82753fa4d9c35ed241c87f0575453ffd22498b93fceb487a4f55074b279a",
+      "content_hash": "05ae96ffa15f8b35e4b7b1710b5906a5b626c786da0ea04b66ece2a63aff4950",
       "content_hash_withheld": null,
       "first_seen": "commit:77798202d2df"
     },
@@ -52234,7 +52234,9 @@
       "dependencies": [
         "engine/__init__.py",
         "engine/graph/adapter.py",
-        "engine/ledger_authority/__init__.py"
+        "engine/ledger_authority/__init__.py",
+        "engine/omega_infinite/artifact.py",
+        "engine/omega_infinite/classification.py"
       ],
       "produces": [
         "00-MASTER/UCOS-UGA-001/00-EXISTENCE-INVENTORY.json",
@@ -52252,7 +52254,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "ec8e6787455a2473b698bb6f2e73cd5c16de128d40ba25c9709c53ae8a5c1823",
+      "content_hash": "b8b91529a51ba7aff56a3e94c46ea1ddc5ac37a1e9af2b8252ff757e3c629747",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },

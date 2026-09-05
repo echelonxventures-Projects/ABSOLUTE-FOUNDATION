@@ -10,8 +10,8 @@
   "proof": {
     "existence_digest": "32dedee0eb731c2572649aee80ebaa011064c85b2504e6fd92ca8ffbe0c8496a",
     "identity_digest": "3e9dee72be98e5db7aaf83ed96e0061e9cf73fe495a6b7b850a03ae64abba4a9",
-    "registry_digest": "7a09900f04eeb4be363cbfb6eecda1e9d8cc63b1b914783c4894a4ddce6e493f",
-    "graph_digest": "a6673292677e8fe12ae391c8df507426f25e1f2a21741b146eee44642d8c9db7",
+    "registry_digest": "d2a9ab30dfcd4e9db8a5e9cd8d5ddfbf0b78fdfd24903ce916ad1046b74bd2a4",
+    "graph_digest": "afb8d366f2c0cf662fc9dc8d14c31dad5eeda90a193f93fae9c51a644ebbef22",
     "invariant_digest": "92350fa826fc7e50f9dec95c36ed412b08fdb3b68ab80197ff0ae7f4f85c8e87"
   },
   "fixed_point_property": "Outputs contain no wall clock, so a second run over an unchanged repository rewrites no byte. Fixed point is checkable by comparison.",

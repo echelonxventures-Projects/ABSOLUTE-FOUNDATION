@@ -244,7 +244,7 @@
       "meaning": "checks the shape of another object — the forward sense of the contract validated_by names inversely"
     }
   },
-  "count": 39581,
+  "count": 39583,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -69500,6 +69500,16 @@
       "from": "UCOS-ENGINE-001186",
       "kind": "depends_on",
       "to": "engine/ledger_authority/__init__.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001186",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/artifact.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001186",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/classification.py"
     },
     {
       "from": "UCOS-ENGINE-001186",

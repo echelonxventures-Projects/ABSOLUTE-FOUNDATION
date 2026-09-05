@@ -54,8 +54,8 @@
 
 ## Graph
 
-- relationship edges: **39581**
-- dependency edges: **10672**
+- relationship edges: **39583**
+- dependency edges: **10674**
 - producers bound to declared outputs: **43**
 - distinct owners: **297**
 

@@ -65,7 +65,7 @@
       }
     ],
     "objects_with_dependencies": 2106,
-    "dependency_edges": 10672,
+    "dependency_edges": 10674,
     "producers_bound_to_outputs": 43,
     "retired_identities": 8
   },

@@ -367,13 +367,46 @@ def register_edge_deriver(suffix: str, deriver) -> None:
     EDGE_DERIVERS[suffix] = deriver
 
 
-def derive_edges(rel: str, abspath: str, index: dict, tracked: set) -> list:
-    """Dependency edges for one object, from whichever deriver claims its suffix.
+def artifact_type_of(rel: str, abspath: str) -> str:
+    """What this artifact IS, asked of the entity rather than of its filename.
 
-    A suffix nobody claims yields no edges — the same answer the hardcoded branch gave, reached
-    now because nothing derives them rather than because the engine declined to ask.
+    THE SUFFIX IS THE LAST RESORT RULE, NOT THE FIRST. engine/omega_infinite/classification.py
+    declares four rules in precedence order — Ω∞-T-01 provider-declared, Ω∞-T-02 content
+    interpreter, Ω∞-T-03 content structure, Ω∞-T-04 suffix — and the first version of the deriver
+    registry keyed on the fourth. A Python file with no `.py` extension and a
+    `#!/usr/bin/env python3` line is typed PYTHON by rule Ω∞-T-02 and would have carried no
+    dependency edges, because its NAME did not end the right way.
+
+    Measured when this changed: no tracked file is currently reclassified by asking properly —
+    zero non-`.py` files carry a Python shebang — so this moves no edge today. It is structural,
+    and the structure is the point: a provider that declares its artifacts' types makes them
+    derivable without anyone editing a table of suffixes.
+
+    Falls back to the suffix when the classifier cannot be reached, because this engine must run
+    in a checkout where the classification package is absent; a fallback that degrades to the
+    previous behaviour is the honest failure mode.
     """
-    deriver = EDGE_DERIVERS.get(os.path.splitext(rel)[1])
+    try:
+        from engine.omega_infinite.artifact import Artifact, Location
+        from engine.omega_infinite.classification import default_pipeline
+    except ImportError:  # pragma: no cover - classification package absent
+        return os.path.splitext(rel)[1]
+    try:
+        with open(abspath, encoding="utf-8", errors="surrogateescape") as handle:
+            content = handle.read(4096)
+    except OSError:  # pragma: no cover - unreadable file
+        content = None
+    artifact = Artifact(identifier=rel, location=Location("uga", rel, ""))
+    return default_pipeline().classify(artifact, content).artifact_type.name
+
+
+def derive_edges(rel: str, abspath: str, index: dict, tracked: set) -> list:
+    """Dependency edges for one object, from whichever deriver claims its TYPE.
+
+    A type nobody claims yields no edges — the same answer the hardcoded branch gave, reached
+    because nothing derives them rather than because the engine declined to ask.
+    """
+    deriver = EDGE_DERIVERS.get(artifact_type_of(rel, abspath))
     return list(deriver(abspath, rel, index, tracked)) if deriver else []
 
 
@@ -469,8 +502,10 @@ EVIDENCE_FOR_CLASS = {
 
 
 
-#: The one deriver that exists today. A second language is a second call to this.
-register_edge_deriver(".py", python_imports)
+#: Keyed by ARTIFACT TYPE, not suffix: the type is what the entity is, decided by the four
+#: declared classification rules with the filename consulted last. A second language is a
+#: second call to this, and a provider declaring its own types needs no call at all.
+register_edge_deriver("PYTHON", python_imports)
 
 def epoch2_registry(objects, index, producer_of, consumers_of, decl, tracked):
     # This engine's OWN emitted surfaces. Once they are version-controlled they are
