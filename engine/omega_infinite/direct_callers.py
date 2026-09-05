@@ -75,6 +75,20 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #: direct invocation is a CHOICE, and this counts choices.
 #:
 #: MOVEMENTS
+#:   14 -> 13   (-1)  platform/repository_intelligence/mutation_classification.py, and this one
+#:                     CHANGED A FAILURE MODE deliberately rather than incidentally. The call ran
+#:                     with `check=False`, so a non-git tree produced an EMPTY tracked set — and
+#:                     `_r01_repository_state` claims any existing path absent from that set, so
+#:                     every subject in the repository would have been absorbed into
+#:                     REPOSITORY_STATE before the rule that owns it was evaluated. The module's
+#:                     own docstring calls precisely that outcome "a wrong authority, which is
+#:                     strictly worse than the fail-closed terminal". It argued for fail-closed
+#:                     and implemented fail-open; the provider raises, so it now does what it
+#:                     said. Byte-safety is preserved and not re-argued: the provider's single
+#:                     subprocess call site decodes with surrogateescape exactly as this did, so
+#:                     a path that is not valid UTF-8 still round-trips. Populations proven
+#:                     identical first: 7,126 both ways.
+#:
 #:   15 -> 14   (-1)  intelligence/rie/config.py, and it is recorded separately because the
 #:                     migration was NOT mechanical. It asked `:(glob)*/__init__.py`, where git's
 #:                     pathspec magic stops `*` at a separator; Selector matches with fnmatch,
@@ -114,7 +128,7 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #:                     above. Six of the nineteen were invisible to the flag-based scan that
 #:                     preceded this one, which matched `ls-files` argument lists and therefore
 #:                     missed every caller using another subcommand.
-DIRECT_CALLER_CEILING = 14
+DIRECT_CALLER_CEILING = 13
 
 
 def _invokes_tool_directly(path: pathlib.Path) -> bool:

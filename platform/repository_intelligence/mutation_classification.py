@@ -35,12 +35,13 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
 from platform.repository_intelligence import generated_artifacts
+
+from engine.omega_infinite.git_provider import GitDiscoveryProvider
 
 #: A Python string literal. Used to index what the corpus names, never to parse code.
 _LITERAL = re.compile(r"""["']([^"'\n]{1,300})["']""")
@@ -161,14 +162,21 @@ class Repository:
         """
         if "tracked" in self._overrides:
             return frozenset(self._overrides["tracked"])  # type: ignore[arg-type]
-        out = subprocess.run(  # noqa: S603
-            ["git", "ls-files", "-z"],  # noqa: S607
-            cwd=self.root,
-            capture_output=True,
-            check=False,
+        # THE PROVIDER, AND IT NOW FAILS CLOSED — which is what the paragraph above argues for
+        # and what this call previously did not do. `check=False` meant a non-git tree yielded an
+        # EMPTY tracked set, and `_r01_repository_state` claims any existing path absent from
+        # that set: every subject in the repository would be absorbed into REPOSITORY_STATE
+        # before the rule that owns it was ever evaluated. That is the "wrong authority, strictly
+        # worse than the fail-closed terminal" this docstring names, produced by the tolerance
+        # rather than prevented by it.
+        #
+        # Byte-safety is preserved rather than re-argued: the provider's one subprocess call site
+        # decodes with `errors="surrogateescape"` exactly as this call did, so a path git carries
+        # that is not valid UTF-8 still round-trips instead of raising or substituting.
+        return frozenset(
+            artifact.location.locator
+            for artifact in GitDiscoveryProvider(root=str(self.root)).enumerate()
         )
-        decoded = out.stdout.decode("utf-8", errors="surrogateescape")
-        return frozenset(path for path in decoded.split("\0") if path)
 
     @cached_property
     def generated(self) -> frozenset[str]:
