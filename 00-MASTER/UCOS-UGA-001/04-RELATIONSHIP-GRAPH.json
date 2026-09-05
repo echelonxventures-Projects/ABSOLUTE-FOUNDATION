@@ -244,7 +244,7 @@
       "meaning": "checks the shape of another object — the forward sense of the contract validated_by names inversely"
     }
   },
-  "count": 39549,
+  "count": 39576,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -14443,6 +14443,26 @@
     },
     {
       "from": "UCOS-DATAOBJ-000144",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000146",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000146",
+      "kind": "owned_by",
+      "to": "engine/zero_class"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000146",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-DATAOBJ-000146",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -44583,6 +44603,16 @@
     },
     {
       "from": "UCOS-ENGINE-000649",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000649",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000649",
       "kind": "evidenced_by",
       "to": "VALIDATION"
     },
@@ -54145,6 +54175,11 @@
       "from": "UCOS-ENGINE-000851",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-000852",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
     },
     {
       "from": "UCOS-ENGINE-000852",
@@ -70719,6 +70754,16 @@
     {
       "from": "UCOS-ENGINE-001213",
       "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001213",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001213",
+      "kind": "depends_on",
       "to": "engine/uicm/model.py"
     },
     {
@@ -72385,6 +72430,11 @@
       "from": "UCOS-ENGINE-001264",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001265",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
     },
     {
       "from": "UCOS-ENGINE-001265",
@@ -74409,6 +74459,16 @@
     {
       "from": "UCOS-ENGINE-001321",
       "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001321",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001321",
+      "kind": "depends_on",
       "to": "engine/universal_discovery/__init__.py"
     },
     {
@@ -76238,6 +76298,51 @@
     },
     {
       "from": "UCOS-ENGINE-001383",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001384",
+      "kind": "depends_on",
+      "to": "engine/zero_class/measure.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001384",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001384",
+      "kind": "owned_by",
+      "to": "engine/zero_class"
+    },
+    {
+      "from": "UCOS-ENGINE-001384",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001384",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001385",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001385",
+      "kind": "owned_by",
+      "to": "engine/zero_class"
+    },
+    {
+      "from": "UCOS-ENGINE-001385",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001385",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -192518,6 +192623,36 @@
     },
     {
       "from": "UCOS-TESTOBJ-000898",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000899",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/direct_callers.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000899",
+      "kind": "depends_on",
+      "to": "engine/zero_class/measure.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000899",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000899",
+      "kind": "owned_by",
+      "to": "engine/tests"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000899",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000899",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },

@@ -12106,11 +12106,11 @@
     "STAGE0": 1,
     "DET": 6,
     "CONFIG": 40,
-    "DATAOBJ": 145,
+    "DATAOBJ": 146,
     "EXDOC": 3140,
     "TOOLING": 57,
-    "ENGINE": 1383,
-    "TESTOBJ": 898,
+    "ENGINE": 1385,
+    "TESTOBJ": 899,
     "OBS": 7,
     "ASSESS": 2,
     "B01BIR": 1,
@@ -67019,6 +67019,30 @@
       "object_class": "TEST_OBJECT",
       "category": "TESTOBJ",
       "first_seen": "commit:2a241db73aab"
+    },
+    "engine/tests/zero_class/test_zero_class_register.py": {
+      "universal_id": "UCOS-TESTOBJ-000899",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:d54d6ffa0cb2"
+    },
+    "engine/zero_class/__init__.py": {
+      "universal_id": "UCOS-ENGINE-001384",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:d54d6ffa0cb2"
+    },
+    "engine/zero_class/measure.py": {
+      "universal_id": "UCOS-ENGINE-001385",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:d54d6ffa0cb2"
+    },
+    "engine/zero_class/zero-class-register.json": {
+      "universal_id": "UCOS-DATAOBJ-000146",
+      "object_class": "DATA_OBJECT",
+      "category": "DATAOBJ",
+      "first_seen": "commit:d54d6ffa0cb2"
     }
   },
   "by_observation": {

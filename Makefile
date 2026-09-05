@@ -215,6 +215,16 @@ verify-explain:
 # about the repository: a stale entry makes a plan slower and never wrong, so this is
 # deliberately not wired into any gate. Run it after a change that moves test durations
 # materially, then commit the regenerated table.
+# zero-classes: STAGE every declared residue class. adr/0021 stated a principle and disclosed
+# that nothing enforced it; the Zero-X programme reproduced that one level up, governing twelve
+# classes with a plan document and no gate. This is that gate. It reports and refuses nothing —
+# the refusals live in each class's own ratchet, where they can name the file.
+.PHONY: zero-classes
+zero-classes: bootstrap-quiet
+	@$(PY) -c "import engine.omega_infinite.direct_callers, json; \
+from engine.zero_class.measure import measure; \
+print(json.dumps([r.to_dict() for r in measure()], indent=2))"
+
 # conformance: MEASURE the agnosticism axes. adr/0021 (UAP-001) declares that nothing enforces
 # the Universal Agnostic Architecture Principle; this is the measurement that changes it. It is
 # deliberately not a gate — it reports dispositions and refuses nothing, and whether

@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7126,
+  "total_objects": 7130,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -48629,6 +48629,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "engine/tests/zero_class/test_zero_class_register.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000899",
+      "first_seen": "commit:d54d6ffa0cb2"
+    },
+    {
       "path": "engine/uaue/__init__.py",
       "object_class": "EXECUTABLE_OBJECT",
       "lifecycle": "AUTHORED",
@@ -49579,6 +49588,33 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-ENGINE-001250",
       "first_seen": "commit:bb9c27d2733a"
+    },
+    {
+      "path": "engine/zero_class/__init__.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/zero_class",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001384",
+      "first_seen": "commit:d54d6ffa0cb2"
+    },
+    {
+      "path": "engine/zero_class/measure.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/zero_class",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001385",
+      "first_seen": "commit:d54d6ffa0cb2"
+    },
+    {
+      "path": "engine/zero_class/zero-class-register.json",
+      "object_class": "DATA_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/zero_class",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-DATAOBJ-000146",
+      "first_seen": "commit:d54d6ffa0cb2"
     },
     {
       "path": "final_certification_report.md",
