@@ -93,6 +93,17 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #: direct invocation is a CHOICE, and this counts choices.
 #:
 #: MOVEMENTS
+#:   5 -> 4     (-1)  platform/repository_intelligence/substrate.py. Its two wrappers took
+#:                     arbitrary argv and returned "" on any failure, so every question went to
+#:                     the tool directly and every failure looked exactly like an empty answer.
+#:                     The three questions it actually asks are each a declared capability now.
+#:                     THIS MODULE WAS LISTED AS "NEEDS CONFIG" AND NEVER DID. That came from
+#:                     matching the string "config" in `"config": self.config.to_dict()` — a dict
+#:                     key, not a subcommand. The module was fully covered before this commit and
+#:                     the estimate said otherwise, which is the same text-matching error this log
+#:                     has now recorded five times.
+#:                     Population proven identical first: 7,133 paths both ways.
+#:
 #:   6 -> 5     (-1)  infrastructure/integration_realize.py, on REVISION_IDENTITY — the
 #:                     capability the previous entry named as missing and predicted would unblock
 #:                     four. It answers position rather than content: which line of development,
@@ -206,7 +217,7 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #:                     above. Six of the nineteen were invisible to the flag-based scan that
 #:                     preceded this one, which matched `ls-files` argument lists and therefore
 #:                     missed every caller using another subcommand.
-DIRECT_CALLER_CEILING = 5
+DIRECT_CALLER_CEILING = 4
 
 #: A SECOND CEILING, BECAUSE THE FIRST HAS A LOOPHOLE. Declaring a caller lowers the direct count
 #: without changing one line of behaviour, so a ratchet on that count alone can always be

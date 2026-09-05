@@ -35,7 +35,6 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
-import subprocess
 import tomllib
 from collections.abc import Mapping
 from dataclasses import dataclass, field
@@ -304,25 +303,18 @@ class RepositorySubstrate:
 # ---------------------------------------------------------------------------
 # readers
 # ---------------------------------------------------------------------------
-def _git(cfg: RepositoryIntelligenceConfig, *args: str) -> str:
-    """Run a fixed-argv git command in the repository root; empty string on any failure."""
-    return _git_raw(cfg, *args).strip()
+def _provider(cfg: RepositoryIntelligenceConfig):
+    """The declared discovery provider for this repository root.
 
+    THE TWO WRAPPERS THIS REPLACED RAN ARBITRARY ARGV. `_git` and `_git_raw` took `*args` and
+    returned "" on any failure, so every question this module asked went to the tool directly and
+    every failure looked identical to an empty answer. The three questions it actually asks —
+    the tracked-and-untracked population, the abbreviated revision, the branch — are each a
+    declared capability now, and a failure raises where the caller decides what to do with it.
+    """
+    from engine.omega_infinite.git_provider import GitDiscoveryProvider
 
-def _git_raw(cfg: RepositoryIntelligenceConfig, *args: str) -> str:
-    """As :func:`_git` but preserving stdout verbatim (needed for NUL-delimited output)."""
-    try:
-        result = subprocess.run(  # noqa: S603 - fixed argv, no shell
-            ["git", *args],  # noqa: S607 - resolved from PATH by design, no shell
-            cwd=cfg.repository_root,
-            capture_output=True,
-            text=True,
-            timeout=60,
-            check=False,
-        )
-    except (OSError, subprocess.SubprocessError):
-        return ""
-    return result.stdout if result.returncode == 0 else ""
+    return GitDiscoveryProvider(root=str(cfg.repository_root))
 
 
 def _tracked_files(cfg: RepositoryIntelligenceConfig) -> tuple[str, ...]:
@@ -335,7 +327,30 @@ def _tracked_files(cfg: RepositoryIntelligenceConfig) -> tuple[str, ...]:
     bytes, which would corrupt zone identities. A deterministic filesystem walk is the
     fallback for a non-git export.
     """
-    listing = _git_raw(cfg, "ls-files", "-z", "--cached", "--others", "--exclude-standard")
+    # TRACKED plus UNTRACKED, which is two capabilities and not a wider filter on one: this
+    # module reports on the working copy as an operator sees it, so debris counts here where it
+    # must not count in a governance verdict.
+    # THE EMPTY ANSWER TRIGGERS THE WALK BELOW; IT IS NOT THE ANSWER. The docstring says a
+    # filesystem walk is the fallback for a non-git export, and the wrappers this replaced returned
+    # "" on failure precisely so that branch would run. A first version returned an empty tuple
+    # here and skipped the fallback, which turned "not a working copy" into "an empty repository"
+    # for 58 tests — the vacuity this substrate is supposed to avoid, introduced while removing a
+    # direct call.
+    #
+    # A REPORTING MODULE AND A GOVERNING MODULE WANT DIFFERENT ANSWERS TO THE SAME FAILURE. This
+    # one reports on a working copy, so it degrades to walking it. mutation_classification governs
+    # authority, so an empty tracked set there silently assigned every subject the wrong one and
+    # raising was the fix. Neither should inherit the other's failure mode.
+    from engine.omega_infinite.capability import WORKING_TREE_STATE
+    from engine.omega_infinite.provider import ProviderError
+
+    provider = _provider(cfg)
+    try:
+        tracked = [a.location.locator for a in provider.enumerate()]
+        untracked = list(provider.supply(WORKING_TREE_STATE)["untracked"])
+    except ProviderError:
+        tracked, untracked = [], []
+    listing = "\0".join([*tracked, *untracked])
     if listing:
         paths = [line for line in listing.split("\0") if line]
     else:
@@ -657,10 +672,17 @@ def _normalize_catalog_entry(entry: Mapping[str, Any]) -> dict[str, Any]:
 
 def _provenance(cfg: RepositoryIntelligenceConfig, tracked_count: int) -> dict[str, str]:
     """Audit-only provenance (never part of the substrate digest)."""
-    head = _git(cfg, "rev-parse", "--short", "HEAD")
+    from engine.omega_infinite.capability import REVISION_IDENTITY
+    from engine.omega_infinite.provider import ProviderError
+
+    try:
+        position = _provider(cfg).supply(REVISION_IDENTITY)
+    except ProviderError:
+        position = {}
+    head = str(position.get("short") or "")
     return {
         "head": head or "UNKNOWN",
-        "branch": _git(cfg, "rev-parse", "--abbrev-ref", "HEAD") or "UNKNOWN",
+        "branch": str(position.get("branch") or "") or "UNKNOWN",
         "tracked_files": str(tracked_count),
         "file_listing_source": "git ls-files" if head else "filesystem",
     }

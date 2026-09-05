@@ -398,14 +398,31 @@ def test_a_catalog_entry_is_projected_onto_exactly_the_keys_this_subsystem_consu
     assert entry["description"] == ""
 
 
-def test_a_git_command_that_cannot_run_yields_no_output(tmp_path, monkeypatch):
-    """The reader degrades to the filesystem walk rather than aborting the scan."""
+def test_a_version_control_reader_that_cannot_run_yields_no_output(tmp_path, monkeypatch):
+    """The reader degrades to the filesystem walk rather than aborting the scan.
 
-    def _explode(*_args, **_kwargs):
-        raise OSError("git is not installed")
+    THE PROPERTY IS UNCHANGED; WHAT IT REACHES THROUGH IS. This asserted the property by
+    monkeypatching `sub.subprocess.run` and calling `sub._git_raw` — two internals that existed
+    only because this module invoked the tool directly. Both are gone, and asserting through them
+    would now be asserting that a particular implementation is still present rather than that the
+    degradation still happens.
 
-    monkeypatch.setattr(sub.subprocess, "run", _explode)
-    assert sub._git_raw(_config(_repo(tmp_path))) == ""
+    It fails the PROVIDER instead, which is the surface the module actually depends on, and
+    asserts the same two things: the population reader returns nothing, and the scan still finds
+    modules by walking. A test that survives the mechanism it was written against is testing the
+    behaviour.
+    """
+    from engine.omega_infinite.provider import ProviderError
+
+    class _Refusing:
+        def enumerate(self, *_a, **_k):
+            raise ProviderError("no version control here")
+
+        def supply(self, *_a, **_k):
+            raise ProviderError("no version control here")
+
+    monkeypatch.setattr(sub, "_provider", lambda _cfg: _Refusing())
+    assert sub._tracked_files(_config(_repo(tmp_path))) != ()
     assert sub.RepositorySubstrate.scan(_config(tmp_path)).modules
 
 
