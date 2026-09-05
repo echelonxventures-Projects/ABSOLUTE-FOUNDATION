@@ -166,8 +166,14 @@ def test_the_git_provider_declares_what_git_actually_offers(tracked_tree: Path) 
     declared = git_provider.GitDiscoveryProvider(str(tracked_tree)).capabilities()
     assert declared.names() == (
         "AUTHORITY_METADATA",
+        # Three questions the provider declared it could not answer until callers needed them:
+        # what differs between two points, what the recorded sequence is, and what one revision
+        # carries. Each is one question, keyed and delivered separately.
+        "CHANGE_SET",
         "CONTENT_HASHING",
         "LOCAL_STORAGE",
+        "REVISION_HISTORY",
+        "REVISION_METADATA",
         "TRACKED_CONTENT",
         "VERSIONED_CONTENT",
         # Added when every declared capability acquired a delivery method. It is a DIFFERENT
@@ -243,6 +249,9 @@ def test_the_two_providers_differ_only_in_what_they_declare(tracked_tree: Path) 
     assert lost == ()
     assert gap == (
         "AUTHORITY_METADATA",
+        "CHANGE_SET",
+        "REVISION_HISTORY",
+        "REVISION_METADATA",
         "TRACKED_CONTENT",
         "VERSIONED_CONTENT",
         "WORKING_TREE_STATE",

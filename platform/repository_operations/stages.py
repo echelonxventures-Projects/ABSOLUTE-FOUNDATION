@@ -13,7 +13,6 @@ definition raises :class:`~platform.repository_operations.errors.StageExecutionE
 
 from __future__ import annotations
 
-import subprocess  # noqa: S404 — fixed argv, no shell; used only to read git's own view
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from platform.foundation.contracts import content_hash
@@ -207,31 +206,6 @@ def _run_certification(spec: StageSpec) -> StageResult:
     )
 
 
-def _git_paths(repo_root: str | Path, argv: Sequence[str], *, stage_id: str) -> list[str]:
-    """Read a NUL-delimited path list from git, fail-closed on any git failure."""
-    try:
-        completed = subprocess.run(  # noqa: S603 — fixed argv, no shell, no user input
-            ["git", *argv],  # noqa: S607 — resolved from PATH by design, as CI does
-            cwd=str(repo_root),
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-    except OSError as exc:  # git absent or not executable
-        raise StageExecutionError(
-            "freeze stage could not consult git to determine the write set",
-            stage_id=stage_id,
-            detail=str(exc),
-        ) from exc
-    if completed.returncode != 0:
-        raise StageExecutionError(
-            "freeze stage could not determine the write set from git",
-            stage_id=stage_id,
-            detail=(completed.stderr or "").strip() or f"git exited {completed.returncode}",
-        )
-    return [entry for entry in completed.stdout.split("\0") if entry]
-
-
 def _working_tree_write_set(repo_root: str | Path, *, stage_id: str) -> list[str]:
     """Every path this working tree has written relative to HEAD.
 
@@ -239,11 +213,30 @@ def _working_tree_write_set(repo_root: str | Path, *, stage_id: str) -> list[str
     without it git quotes any path containing a non-ASCII byte, and a quoted path is
     not the path.
     """
-    modified = _git_paths(repo_root, ("diff", "--name-only", "-z", "HEAD"), stage_id=stage_id)
-    untracked = _git_paths(
-        repo_root, ("ls-files", "--others", "--exclude-standard", "-z"), stage_id=stage_id
-    )
-    return sorted(set(modified) | set(untracked))
+    # THE PROVIDER, NOT THE TOOL. Two capabilities, each answering the question it names:
+    # CHANGE_SET for what differs from the recorded point, WORKING_TREE_STATE for what the working
+    # copy holds that no recorded point does. The union is made HERE, deliberately — a provider
+    # merging them would hide which half a write-set entry came from, and this stage's whole
+    # purpose is to know what it is about to freeze.
+    #
+    # Fail-closed is preserved: the provider raises, and the raise is translated into the same
+    # StageExecutionError this function already promised, because an empty write set would make
+    # the freeze guard a guaranteed PASS over nothing — the defect EIP-018 records.
+    from engine.omega_infinite.capability import CHANGE_SET, WORKING_TREE_STATE
+    from engine.omega_infinite.git_provider import GitDiscoveryProvider
+    from engine.omega_infinite.provider import ProviderError
+
+    provider = GitDiscoveryProvider(root=str(repo_root))
+    try:
+        modified = provider.supply(CHANGE_SET)
+        working = provider.supply(WORKING_TREE_STATE)
+    except ProviderError as exc:
+        raise StageExecutionError(
+            "freeze stage could not determine the write set",
+            stage_id=stage_id,
+            detail=str(exc),
+        ) from exc
+    return sorted(set(modified) | set(working["untracked"]))
 
 
 def _run_freeze(spec: StageSpec, repo_root: str | Path) -> StageResult:

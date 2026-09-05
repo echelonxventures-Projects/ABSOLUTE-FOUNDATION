@@ -174,7 +174,9 @@ class BaseProvider:
     #: is a declaration plus a method and never a change to this class.
     SUPPLY_PREFIX = "supply_"
 
-    def supply(self, capability: Capability, selector: Selector | None = None) -> object:
+    def supply(
+        self, capability: Capability, selector: Selector | None = None, **arguments: object
+    ) -> object:
         """Deliver what ``capability`` promises, or refuse.
 
         WHY THIS EXISTS. Measured before it did: the git provider declared five capabilities and
@@ -196,7 +198,11 @@ class BaseProvider:
                 f"provider {self.identifier()!r} declares {capability.name} and supplies no "
                 f"{self.SUPPLY_PREFIX}{capability.name.lower()}"
             )
-        return method(selector or Selector())
+        # KEYWORD ARGUMENTS PASS THROUGH, because not every question is a pattern. A change set
+        # is asked between two recorded points and a revision's metadata is asked of one revision;
+        # forcing either through a Selector would make the selector mean different things to
+        # different capabilities, which is how a contract stops being one contract.
+        return method(selector or Selector(), **arguments)
 
     def verify_capabilities(self) -> tuple[str, ...]:
         """Every declared capability this provider cannot deliver. Empty is the contract.

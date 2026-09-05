@@ -105,6 +105,23 @@ WORKING_TREE_STATE = Capability(
     "the second. Conflating them is what made four callers reach past the provider for an answer "
     "it never offered.",
 )
+CHANGE_SET = Capability(
+    "CHANGE_SET",
+    "The provider can name the artifacts that DIFFER between two recorded points, or between a "
+    "recorded point and the working copy. A different question from TRACKED_CONTENT, which names "
+    "what exists, and from WORKING_TREE_STATE, which names what is uncommitted: this one is about "
+    "the delta itself, and an impact selector asks it on every run.",
+)
+REVISION_HISTORY = Capability(
+    "REVISION_HISTORY",
+    "The provider can enumerate the recorded revisions and the named lines of development that "
+    "reach them. What VERSIONED_CONTENT names as one revision, this walks as a sequence.",
+)
+REVISION_METADATA = Capability(
+    "REVISION_METADATA",
+    "The provider can report the facts a recorded revision carries — when it was made, what it "
+    "was called — without the caller parsing the tool's output format itself.",
+)
 AUTHORITY_METADATA = Capability(
     "AUTHORITY_METADATA",
     "The provider carries ownership information of its own — a committer, an owner field, an ACL "

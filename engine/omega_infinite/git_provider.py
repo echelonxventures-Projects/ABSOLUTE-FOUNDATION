@@ -34,8 +34,11 @@ from collections.abc import Iterable
 from engine.omega_infinite.artifact import Artifact, Location
 from engine.omega_infinite.capability import (
     AUTHORITY_METADATA,
+    CHANGE_SET,
     CONTENT_HASHING,
     LOCAL_STORAGE,
+    REVISION_HISTORY,
+    REVISION_METADATA,
     TRACKED_CONTENT,
     VERSIONED_CONTENT,
     WORKING_TREE_STATE,
@@ -54,6 +57,9 @@ IDENTIFIER = "git"
 #: which is the Deliverable 6 rule: providers self-describe, and nobody describes them.
 CAPABILITIES = CapabilitySet.of(
     TRACKED_CONTENT,
+    CHANGE_SET,
+    REVISION_HISTORY,
+    REVISION_METADATA,
     WORKING_TREE_STATE,
     VERSIONED_CONTENT,
     LOCAL_STORAGE,
@@ -167,6 +173,65 @@ class GitDiscoveryProvider(BaseProvider):
             "untracked": tuple(sorted(e for e in untracked.split("\0") if e)),
             "modified": tuple(sorted(e for e in modified.split("\0") if e)),
         }
+
+    def supply_change_set(
+        self,
+        selector: Selector,
+        *,
+        against: str = "HEAD",
+        staged: bool = False,
+        merge_base: bool = False,
+    ) -> tuple[str, ...]:
+        """Artifacts that DIFFER between a recorded point and the working copy or index.
+
+        `against` names the point, `staged` asks the index rather than the working copy, and
+        `merge_base` compares from where the branches diverged rather than from the tip — the
+        three shapes the impact selector and the freeze stage between them actually ask for.
+
+        `-z` throughout, so a path carrying a byte that is not valid UTF-8 arrives as itself
+        rather than as an escaped rendering of itself. That is the same defect the change-set
+        parser was corrected for once already: a quoted path matches no repository path at all.
+        """
+        target = f"{against}...HEAD" if merge_base else against
+        arguments = ["diff", "--name-only", "-z"]
+        if staged:
+            arguments.append("--cached")
+        arguments.append(target)
+        raw = _run(self.root, *arguments, *selector.patterns)
+        return tuple(sorted(entry for entry in raw.split("\0") if entry))
+
+    def supply_revision_history(
+        self, selector: Selector, *, limit: int = 0, refs: bool = False
+    ) -> tuple[tuple[str, str], ...]:
+        """The recorded revisions, or the named lines of development that reach them.
+
+        Returned as (identifier, subject) pairs so a caller never parses a format string of its
+        own; the separator stays inside this method, which is the point of asking a provider.
+        """
+        if refs:
+            raw = _run(self.root, "for-each-ref", "--format=%(refname:short)")
+            return tuple(sorted((name.strip(), "") for name in raw.splitlines() if name.strip()))
+        arguments = ["log", "--format=%H%x1f%s"]
+        if limit:
+            arguments.insert(1, f"-{int(limit)}")
+        raw = _run(self.root, *arguments)
+        out = []
+        for line in raw.splitlines():
+            identifier, _, subject = line.partition("\x1f")
+            if identifier:
+                out.append((identifier, subject))
+        return tuple(out)
+
+    def supply_revision_metadata(
+        self, selector: Selector, *, revision: str = "HEAD"
+    ) -> dict[str, str]:
+        """What a recorded revision carries: when it was made, and what it was called."""
+        try:
+            raw = _run(self.root, "show", "-s", "--format=%cI%x1f%s", revision).strip()
+        except ProviderError:
+            return {}
+        committed, _, subject = raw.partition("\x1f")
+        return {"revision": revision, "committed_at": committed, "subject": subject}
 
     def supply_content_hashing(self, selector: Selector) -> dict[str, str]:
         """Each tracked path mapped to the blob hash the index records for it.

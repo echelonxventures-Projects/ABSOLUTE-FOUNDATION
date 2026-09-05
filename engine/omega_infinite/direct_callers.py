@@ -93,6 +93,21 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #: direct invocation is a CHOICE, and this counts choices.
 #:
 #: MOVEMENTS
+#:   7 -> 6     (-1)  platform/repository_operations/stages.py, and it took THREE NEW
+#:                     CAPABILITIES to move one caller — CHANGE_SET, REVISION_HISTORY and
+#:                     REVISION_METADATA, each answering one question the provider declared it
+#:                     could not answer before.
+#:                     THE ESTIMATE THAT PRECEDED THIS WAS WRONG, and the correction is the
+#:                     useful record. "One history capability unblocks four" was measured from
+#:                     the subcommands each module names, not from every call site each module
+#:                     makes. Enumerating the call sites showed four of the five also ask
+#:                     `rev-parse --abbrev-ref HEAD` for the current branch, three ask
+#:                     `rev-parse --short`, and one each ask merge-base, @{u} and
+#:                     --is-inside-work-tree. Those are a REVISION IDENTITY cluster, distinct
+#:                     from history, and until it exists those four modules keep a call with no
+#:                     home — so they stay direct callers however much else is migrated.
+#:                     A module falls only when EVERY question it asks has somewhere to go.
+#:
 #:   10 -> 7    (-3)  The three that were migratable and had been left. All proven
 #:                     population-identical before the swap, which is the bar every migration
 #:                     here has met: engine/enforcement_closure/discovery.py at 7,133 tracked
@@ -179,7 +194,7 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #:                     above. Six of the nineteen were invisible to the flag-based scan that
 #:                     preceded this one, which matched `ls-files` argument lists and therefore
 #:                     missed every caller using another subcommand.
-DIRECT_CALLER_CEILING = 7
+DIRECT_CALLER_CEILING = 6
 
 #: A SECOND CEILING, BECAUSE THE FIRST HAS A LOOPHOLE. Declaring a caller lowers the direct count
 #: without changing one line of behaviour, so a ratchet on that count alone can always be
