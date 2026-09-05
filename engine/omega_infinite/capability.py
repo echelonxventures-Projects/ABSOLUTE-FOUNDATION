@@ -105,6 +105,15 @@ WORKING_TREE_STATE = Capability(
     "the second. Conflating them is what made four callers reach past the provider for an answer "
     "it never offered.",
 )
+REVISION_IDENTITY = Capability(
+    "REVISION_IDENTITY",
+    "The provider can say how this working copy names itself and where it stands: the line of "
+    "development it is on, the abbreviated form of its current revision, whether it is a working "
+    "copy at all, the upstream it tracks, whether a named reference resolves, and where two "
+    "references diverged. Distinct from VERSIONED_CONTENT, which names ONE revision so an "
+    "enumeration is reproducible — this answers POSITION, which is what a tool reporting on the "
+    "work in progress needs and what an impact selector needs to find a comparison point.",
+)
 CHANGE_SET = Capability(
     "CHANGE_SET",
     "The provider can name the artifacts that DIFFER between two recorded points, or between a "

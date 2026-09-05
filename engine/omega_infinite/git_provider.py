@@ -38,6 +38,7 @@ from engine.omega_infinite.capability import (
     CONTENT_HASHING,
     LOCAL_STORAGE,
     REVISION_HISTORY,
+    REVISION_IDENTITY,
     REVISION_METADATA,
     TRACKED_CONTENT,
     VERSIONED_CONTENT,
@@ -58,6 +59,7 @@ IDENTIFIER = "git"
 CAPABILITIES = CapabilitySet.of(
     TRACKED_CONTENT,
     CHANGE_SET,
+    REVISION_IDENTITY,
     REVISION_HISTORY,
     REVISION_METADATA,
     WORKING_TREE_STATE,
@@ -172,6 +174,51 @@ class GitDiscoveryProvider(BaseProvider):
         return {
             "untracked": tuple(sorted(e for e in untracked.split("\0") if e)),
             "modified": tuple(sorted(e for e in modified.split("\0") if e)),
+        }
+
+    def supply_revision_identity(
+        self,
+        selector: Selector,
+        *,
+        ref: str = "",
+        diverged_from: str = "",
+    ) -> dict[str, str | bool]:
+        """Where this working copy stands, and how it names itself.
+
+        The default answer carries the position facts a caller normally wants together, because
+        four modules asked for two or three of them each and every one paid a separate process to
+        get them. `ref` verifies that a named reference resolves; `diverged_from` reports where
+        two references parted.
+
+        EVERY FIELD IS ANSWERED OR EMPTY, NEVER ABSENT. A repository with no commits has no
+        revision and no branch, and a caller must be able to tell "no revision" from "the provider
+        declined to say" — which is the same reason `revision()` returns "" rather than raising.
+        """
+        if ref:
+            try:
+                _run(self.root, "rev-parse", "--verify", "--quiet", ref)
+            except ProviderError:
+                return {"ref": ref, "resolves": False}
+            return {"ref": ref, "resolves": True}
+        if diverged_from:
+            try:
+                base = _run(self.root, "merge-base", diverged_from, "HEAD").strip()
+            except ProviderError:
+                base = ""
+            return {"diverged_from": diverged_from, "merge_base": base}
+
+        def _ask(*arguments: str) -> str:
+            try:
+                return _run(self.root, *arguments).strip()
+            except ProviderError:
+                return ""
+
+        return {
+            "revision": self.revision(),
+            "short": _ask("rev-parse", "--short", "HEAD"),
+            "branch": _ask("rev-parse", "--abbrev-ref", "HEAD"),
+            "upstream": _ask("rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}"),
+            "is_work_tree": _ask("rev-parse", "--is-inside-work-tree") == "true",
         }
 
     def supply_change_set(

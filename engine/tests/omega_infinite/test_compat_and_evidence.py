@@ -209,6 +209,7 @@ def test_the_evidence_document_carries_the_capability_matrix(built: evidence.Evi
             "CONTENT_HASHING",
             "LOCAL_STORAGE",
             "REVISION_HISTORY",
+            "REVISION_IDENTITY",
             "REVISION_METADATA",
             "TRACKED_CONTENT",
             "VERSIONED_CONTENT",

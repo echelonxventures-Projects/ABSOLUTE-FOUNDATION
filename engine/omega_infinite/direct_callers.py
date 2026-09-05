@@ -93,6 +93,18 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #: direct invocation is a CHOICE, and this counts choices.
 #:
 #: MOVEMENTS
+#:   6 -> 5     (-1)  infrastructure/integration_realize.py, on REVISION_IDENTITY — the
+#:                     capability the previous entry named as missing and predicted would unblock
+#:                     four. It answers position rather than content: which line of development,
+#:                     the abbreviated revision, whether this is a working copy, the upstream it
+#:                     tracks, whether a reference resolves, and where two references diverged.
+#:                     Every field answered or empty, never absent, so a caller can tell "no
+#:                     revision" from "the provider declined to say".
+#:                     One behaviour was restated rather than copied: `clean` was
+#:                     `porcelain == ""`, true when the tool printed nothing. It is now the union
+#:                     of untracked and modified being empty — the same condition expressed in
+#:                     terms of what it means, and verified identical against the original.
+#:
 #:   7 -> 6     (-1)  platform/repository_operations/stages.py, and it took THREE NEW
 #:                     CAPABILITIES to move one caller — CHANGE_SET, REVISION_HISTORY and
 #:                     REVISION_METADATA, each answering one question the provider declared it
@@ -194,7 +206,7 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #:                     above. Six of the nineteen were invisible to the flag-based scan that
 #:                     preceded this one, which matched `ls-files` argument lists and therefore
 #:                     missed every caller using another subcommand.
-DIRECT_CALLER_CEILING = 6
+DIRECT_CALLER_CEILING = 5
 
 #: A SECOND CEILING, BECAUSE THE FIRST HAS A LOOPHOLE. Declaring a caller lowers the direct count
 #: without changing one line of behaviour, so a ratchet on that count alone can always be

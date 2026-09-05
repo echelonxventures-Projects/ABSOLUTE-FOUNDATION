@@ -29,7 +29,6 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
-import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -136,15 +135,17 @@ def bind_certified_concerns() -> tuple[dict[str, Any], ...]:
             determination = module.realize().determination(byte_identical=True)
         except Exception as exc:  # noqa: BLE001 - fail-closed: any error ⇒ not certified
             determination = f"ERROR:{type(exc).__name__}"
-        bindings.append({
-            "unit": concern.unit,
-            "module": concern.module,
-            "title": concern.title,
-            "meta_classes": list(concern.meta_classes),
-            "ref": concern.ref,
-            "determination": determination,
-            "certified": determination == "COMPLETE",
-        })
+        bindings.append(
+            {
+                "unit": concern.unit,
+                "module": concern.module,
+                "title": concern.title,
+                "meta_classes": list(concern.meta_classes),
+                "ref": concern.ref,
+                "determination": determination,
+                "certified": determination == "COMPLETE",
+            }
+        )
     return tuple(bindings)
 
 
@@ -259,9 +260,7 @@ class RealizationResult:
 
     def graph_is_acyclic(self) -> bool:
         # All edges strictly decrease the founding index ⇒ the dependsOn graph is a DAG (WF-3).
-        return all(
-            r.dependency.source_index > r.dependency.target_index for r in self.realizations
-        )
+        return all(r.dependency.source_index > r.dependency.target_index for r in self.realizations)
 
     def nodes_covered(self) -> tuple[str, ...]:
         nodes: set[str] = set()
@@ -280,9 +279,7 @@ class RealizationResult:
         return leaf_closure_complete()
 
     def single_identifier_family(self) -> bool:
-        return all(
-            r.dependency.construct_id.startswith("UCOS-INFRA-") for r in self.realizations
-        )
+        return all(r.dependency.construct_id.startswith("UCOS-INFRA-") for r in self.realizations)
 
     def no_duplication(self) -> dict[str, bool]:
         """The mission's VERIFY block — structural non-duplication guarantees."""
@@ -305,8 +302,7 @@ class RealizationResult:
             "AC-1": self.all_accepted(),
             "AC-2": self._passed_all("foundation-reuse-integrity"),
             "AC-3": (
-                self._passed_all("dependency-typed")
-                and self._passed_all("dependency-identified")
+                self._passed_all("dependency-typed") and self._passed_all("dependency-identified")
             ),
             "AC-4": self._passed_all("technology-independence"),
             "AC-5": self._passed_all("non-constitutive"),
@@ -378,8 +374,13 @@ class RealizationResult:
                 "service/**, application/** and Band-13 U01…U09 strictly by reference (UIL-02)."
             ),
             "founding_layers": [
-                {"layer": c.index, "unit": c.unit, "module": c.module, "title": c.title,
-                 "meta_classes": list(c.meta_classes)}
+                {
+                    "layer": c.index,
+                    "unit": c.unit,
+                    "module": c.module,
+                    "title": c.title,
+                    "meta_classes": list(c.meta_classes),
+                }
                 for c in CONCERN_REGISTRY
             ],
             "integration_rules": INTEGRATION_CONCERN_RULES,
@@ -455,8 +456,7 @@ class RealizationResult:
             t = ref_to_module[r.dependency.target_ref]
             basis_by_pair[(s, t)] = r.dependency.basis
         matrix = {
-            src: {tgt: basis_by_pair.get((src, tgt), "") for tgt in modules}
-            for src in modules
+            src: {tgt: basis_by_pair.get((src, tgt), "") for tgt in modules} for src in modules
         }
         return {
             "artifact": "EC3-B13-U10-CAPABILITY-INTERACTION-MATRIX",
@@ -479,9 +479,7 @@ class RealizationResult:
             "classification": "registration-only; transcribes status; append-only (REG-AUTO-001)",
             "constitutional_anchor": CONSTITUTIONAL_ANCHOR,
             "implementation_anchor": IMPLEMENTATION_ANCHOR,
-            "concern_units": [
-                {**b} for b in self.concern_bindings
-            ],
+            "concern_units": [{**b} for b in self.concern_bindings],
             "dependency_constructs": [
                 {
                     "construct_id": r.dependency.construct_id,
@@ -586,27 +584,33 @@ def _write_json(path: Path, payload: Any) -> None:
 
 def _repo_verification() -> dict[str, Any]:
     """Deliverable 1 — Repository Verification (live git state; recorded, not hashed)."""
-    def _git(*args: str) -> str:
-        try:
-            return subprocess.run(  # noqa: S603 - fixed argv, no shell
-                ["git", *args],  # noqa: S607 - git resolved on PATH by design
-                cwd=Path(__file__).resolve().parent.parent,
-                capture_output=True,
-                text=True,
-                check=False,
-            ).stdout.strip()
-        except Exception:  # noqa: BLE001
-            return ""
+    # THE PROVIDER, NOT THE TOOL. Two capabilities answer all three questions, and they answer
+    # them in two calls rather than three processes: REVISION_IDENTITY carries the branch and the
+    # abbreviated revision together, and WORKING_TREE_STATE says whether anything is uncommitted.
+    #
+    # `clean` was `porcelain == ""` — true when git reported no lines at all. The provider reports
+    # the two populations separately, so cleanliness is the union being empty, which is the same
+    # condition stated in terms of what it actually means.
+    from engine.omega_infinite.capability import REVISION_IDENTITY, WORKING_TREE_STATE
+    from engine.omega_infinite.git_provider import GitDiscoveryProvider
+    from engine.omega_infinite.provider import ProviderError
 
-    branch = _git("rev-parse", "--abbrev-ref", "HEAD")
-    head = _git("rev-parse", "--short", "HEAD")
-    porcelain = _git("status", "--porcelain")
+    provider = GitDiscoveryProvider(root=str(Path(__file__).resolve().parent.parent))
+    try:
+        position = provider.supply(REVISION_IDENTITY)
+        working = provider.supply(WORKING_TREE_STATE)
+    except ProviderError:  # pragma: no cover - environment
+        position, working = {}, {"untracked": (), "modified": ()}
+    branch = str(position.get("branch") or "")
+    head = str(position.get("short") or "")
+    clean = not (working["untracked"] or working["modified"])
+
     return {
         "artifact": "EC3-B13-U10-REPOSITORY-VERIFICATION",
         "unit": REALIZATION_UNIT,
         "branch": branch,
         "head": head,
-        "clean": porcelain == "",
+        "clean": clean,
         "constitutional_anchor": CONSTITUTIONAL_ANCHOR,
         "expected_branch": "governance-reconciliation",
         "branch_ok": branch == "governance-reconciliation",
