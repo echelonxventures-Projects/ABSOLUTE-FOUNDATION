@@ -4345,6 +4345,33 @@
       "work_package": "WP-W4-003",
       "note": "Six defects in one session shared a shape none of them announced: a rule that was right, an instrument that existed, and a measurement that did not reach where the rule applied. adr/0039's git ratio measured the provider's scope rather than anyone's compliance; the impact selector named a mechanism it had not consulted; CAA-INV-05 read one graph while its rule covered every emitting surface, passing at measured=6 against 32; the split table degraded silently and surfaced four commits later; adr/0021 disclosed its own lack of enforcement and kept it for fourteen days; and an interchangeability test passed over ten technologies sharing one body. Distinct from INV-SIL silent drift: that is a change nobody observed, this is a scope nobody stated.",
       "action_taken": "Named the class and recorded three obligations on future instruments rather than a new gate, because a gate for this would need a scope and inherit the same defect: an instrument states the population it measured, a verdict names only a mechanism that was measured, and a silent fallback is reported even when lawful. A meta-gate was rejected as requiring a second declaration of every rule, which UCKP-ART-03 makes a rival authority."
+    },
+    {
+      "id": "DEC-ADR-0042",
+      "coverage": {
+        "EQ-1": [
+          "adr/0042-the-sequencing-rule-and-what-zero-means.md"
+        ],
+        "EQ-3": [
+          "engine/zero_class/zero-class-register.json"
+        ],
+        "EQ-5": [
+          "engine/omega_infinite/direct_callers.py"
+        ]
+      },
+      "title": "The sequencing rule, and how a count reaches zero honestly",
+      "decision_class": "architectural",
+      "source_register": "adr/0042-the-sequencing-rule-and-what-zero-means.md",
+      "stage": "DECISION-REGISTRATION",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence": [
+        "adr/0042-the-sequencing-rule-and-what-zero-means.md",
+        "engine/omega_infinite/direct_callers.py",
+        "engine/zero_class/zero-class-register.json"
+      ],
+      "work_package": "WP-W4-004",
+      "note": "Two rules governed thirteen commits and existed only in conversation, which CEP-002 Article 28.5 holds is not recorded at all. The first is sequencing: implement, test to a full pass, commit; on failure fix, test to a full pass, commit, and only then the next item. The second is what zero means, and it needed stating because a residue count fell twice this session without any work happening and both falls were lawful. Zero is reached by declaring, not by pretending: a class reaches it when every remaining instance carries a recorded, checkable disposition. Four instances are complete without being migrated, including a bootstrap that locates the repository root before a provider can be rooted at it.",
+      "action_taken": "Recorded the rule, the meaning of zero, and three consequences each learned from a defect: counts and declarations ratchet separately, because one ratchet can be satisfied by writing a paragraph; MOVEMENTS distinguishes migration, declaration and correction, because collapsing them lets a number imply work that did not happen; and a detector is trusted only with failing cases in both directions, because false positives make a floor unreachable. Making it a gate was rejected for the reason adr/0041 gives about its own class."
     }
   ],
   "$coverage_criteria_comment": [

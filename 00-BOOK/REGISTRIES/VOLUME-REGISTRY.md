@@ -9,7 +9,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 466 | UPN-000000001–UPN-000013144 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 123 | UPN-000001327–UPN-000012507 |
-| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 106 | UPN-000000022–UPN-000013169 |
+| `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 108 | UPN-000000022–UPN-000013173 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 24 | UPN-000004194–UPN-000012593 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
 | `VOL-006` | 6 | PLATFORM | PLT | ACTIVE | 83 | UPN-000004559–UPN-000009787 |
@@ -652,7 +652,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 
 *Universal architecture constitutions, catalogs, and engineering foundation.*  \
-**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 106
+**Category:** ARCH · **Status:** ACTIVE · **Artifacts:** 108
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -762,6 +762,8 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-ADR-000041` | ADR-0040: Agnosticism is measured, and a contract that cannot… | — | ACTIVE |
 | `UCOS-ADR-000042` | ADR-0041: A rule is not enforced by being right — six instanc… | — | ACTIVE |
 | `UCOS-ENG-000026` | Axis Register | — | ACTIVE |
+| `UCOS-ADR-000043` | ADR-0042: The sequencing rule, and how a count reaches zero h… | — | ACTIVE |
+| `UCOS-ENG-000027` | Zero Class Register | — | ACTIVE |
 
 ### VOL-004 — IMPLEMENTATION <a id="vol-004"></a>
 

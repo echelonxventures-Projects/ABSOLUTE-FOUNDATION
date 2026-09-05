@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-04T17:40:28+00:00",
+  "generated_at": "2026-09-05T06:38:23+00:00",
   "generator_version": "1.0.0",
   "counts": {
-    "change_events": 1814,
-    "versioned_artifacts": 1682,
-    "lineage_nodes": 1682,
+    "change_events": 1816,
+    "versioned_artifacts": 1684,
+    "lineage_nodes": 1684,
     "artifacts_with_predecessors": 5,
     "artifacts_with_successors": 5
   },
   "change_event_histogram": {
-    "Created": 1682,
+    "Created": 1684,
     "Modified": 126,
     "Version-Incremented": 6
   },
@@ -10896,6 +10896,18 @@
       "change_id": "UCHG-000001814",
       "at": "2026-09-04T17:40:28+00:00",
       "subject": "UCOS-ENG-000026",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001815",
+      "at": "2026-09-05T06:38:23+00:00",
+      "subject": "UCOS-ADR-000043",
+      "kind": "Created"
+    },
+    {
+      "change_id": "UCHG-000001816",
+      "at": "2026-09-05T06:38:23+00:00",
+      "subject": "UCOS-ENG-000027",
       "kind": "Created"
     }
   ],
@@ -24888,12 +24900,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "5fa9afb4627e",
-        "date": "2026-09-04T18:57:21+05:30",
-        "author": "Echelon Ventures",
-        "subject": "Three claims stop being asserted and start naming what was measured"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001400",
@@ -28973,12 +28980,7 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
-      "commit": {
-        "commit": "5fa9afb4627e",
-        "date": "2026-09-04T18:57:21+05:30",
-        "author": "Echelon Ventures",
-        "subject": "Three claims stop being asserted and start naming what was measured"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001808",
@@ -29008,12 +29010,7 @@
       "snapshot_seq": 2,
       "from": "bdb5d74e1fe98cc506a7e23c54c859bf7483d954a94c4688e0ebe1256f0ed9b4",
       "to": "9e2e1794b3172806f402646d6b3c6aba535bc993ef0f3d389914e82e356a92e8",
-      "commit": {
-        "commit": "5fa9afb4627e",
-        "date": "2026-09-04T18:57:21+05:30",
-        "author": "Echelon Ventures",
-        "subject": "Three claims stop being asserted and start naming what was measured"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001811",
@@ -29043,12 +29040,7 @@
       "snapshot_seq": 2,
       "from": "498f8b096bb4340b4ce6695b466d5ea325684b6e3cd8a7c632fb6de9ebba9e64",
       "to": "befaab176323a03af591427bd605ee542a8331676a4d717deddaba6d52760f56",
-      "commit": {
-        "commit": "5fa9afb4627e",
-        "date": "2026-09-04T18:57:21+05:30",
-        "author": "Echelon Ventures",
-        "subject": "Three claims stop being asserted and start naming what was measured"
-      }
+      "commit": null
     },
     {
       "change_id": "UCHG-000001814",
@@ -29058,11 +29050,31 @@
       "snapshot_seq": 1,
       "from": null,
       "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001815",
+      "subject": "UCOS-ADR-000043",
+      "kind": "Created",
+      "at": "2026-09-05T06:38:23+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
+      "commit": null
+    },
+    {
+      "change_id": "UCHG-000001816",
+      "subject": "UCOS-ENG-000027",
+      "kind": "Created",
+      "at": "2026-09-05T06:38:23+00:00",
+      "snapshot_seq": 1,
+      "from": null,
+      "to": "ACTIVE",
       "commit": {
-        "commit": "bb0012d831b0",
-        "date": "2026-09-04T22:44:56+05:30",
+        "commit": "7e1a817aec72",
+        "date": "2026-09-05T11:35:16+05:30",
         "author": "Echelon Ventures",
-        "subject": "UAP-001 gets the enforcement it declared it did not have, and its first verdict is uncomfortable"
+        "subject": "The Zero-X programme gets the enforcement it was about to go without"
       }
     }
   ],
@@ -52650,6 +52662,34 @@
           "snapshot_seq": 1
         }
       ]
+    },
+    "UCOS-ADR-000043": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "1c655dbf3bf9183489be9c6090be3d6f57315729a12ed07c7d37ca14d47ddcd9",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "1c655dbf3bf9183489be9c6090be3d6f57315729a12ed07c7d37ca14d47ddcd9",
+          "at": "2026-09-05T06:38:23+00:00",
+          "snapshot_seq": 1
+        }
+      ]
+    },
+    "UCOS-ENG-000027": {
+      "current_version": "1.0.0",
+      "first_version": "1.0.0",
+      "version_depth": 1,
+      "content_baseline": "664cdab5339ebeee3d468b0e5d4a9d58c750d93563ab012e07115239e0e006b1",
+      "history": [
+        {
+          "version": "1.0.0",
+          "content_hash": "664cdab5339ebeee3d468b0e5d4a9d58c750d93563ab012e07115239e0e006b1",
+          "at": "2026-09-05T06:38:23+00:00",
+          "snapshot_seq": 1
+        }
+      ]
     }
   },
   "lineage": {
@@ -61337,6 +61377,14 @@
       "descendant_chain": [],
       "origin": "UCOS-ADR-000042"
     },
+    "UCOS-ADR-000043": {
+      "birth": "2026-09-05T06:38:23+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-ADR-000043"
+    },
     "UCOS-APPLICATION-000001": {
       "birth": "2026-07-19T12:04:25+00:00",
       "predecessors": [],
@@ -63520,6 +63568,14 @@
       "ancestor_chain": [],
       "descendant_chain": [],
       "origin": "UCOS-ENG-000017"
+    },
+    "UCOS-ENG-000027": {
+      "birth": "2026-09-05T06:38:23+00:00",
+      "predecessors": [],
+      "successors": [],
+      "ancestor_chain": [],
+      "descendant_chain": [],
+      "origin": "UCOS-ENG-000027"
     },
     "UCOS-FINALC-000001": {
       "birth": "2026-08-31T10:09:11+00:00",

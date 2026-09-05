@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-04T17:40:29+00:00",
+  "generated_at": "2026-09-05T06:38:24+00:00",
   "generator_version": "1.0.0",
-  "count": 1682,
+  "count": 1684,
   "artifacts": [
     {
       "universal_id": "UCOS-BOOK-000000",
@@ -74833,6 +74833,88 @@
       "path": "engine/conformance/axis-register.json",
       "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
       "content_hash": "d30d56141de734d9043985bf3105c2fdbef0eb9c59206733d4f0c104adf48d4d",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-ENG-000003"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ADR-000043",
+      "native_id": null,
+      "name": "ADR-0042: The sequencing rule, and how a count reaches zero honestly",
+      "description": "",
+      "category": "ADR",
+      "volume": "VOL-003",
+      "page_start": 13170,
+      "page_end": 13171,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-BOOK-000000",
+      "dependencies": [],
+      "program": "ADR",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ADR",
+        "ADR",
+        "VOL-003"
+      ],
+      "path": "adr/0042-the-sequencing-rule-and-what-zero-means.md",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "1c655dbf3bf9183489be9c6090be3d6f57315729a12ed07c7d37ca14d47ddcd9",
+      "traceability": {
+        "requirement": [],
+        "architecture": [
+          "UCOS-BOOK-000000"
+        ],
+        "design": [],
+        "implementation": [],
+        "source_code": [],
+        "unit_test": [],
+        "integration_test": [],
+        "functional_test": [],
+        "security_test": [],
+        "certification": [],
+        "deployment": [],
+        "production": [],
+        "operations": []
+      }
+    },
+    {
+      "universal_id": "UCOS-ENG-000027",
+      "native_id": null,
+      "name": "Zero Class Register",
+      "description": "",
+      "category": "ENG",
+      "volume": "VOL-003",
+      "page_start": 13172,
+      "page_end": 13173,
+      "status": "ACTIVE",
+      "version": "1.0.0",
+      "parent": "UCOS-ENG-000003",
+      "dependencies": [],
+      "program": "ENG",
+      "owner": "UCOS-PROGRAM-CUSTODIAN",
+      "tags": [
+        "ENG",
+        "ENG",
+        "VOL-003"
+      ],
+      "path": "engine/zero_class/zero-class-register.json",
+      "return_link": "00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md",
+      "content_hash": "664cdab5339ebeee3d468b0e5d4a9d58c750d93563ab012e07115239e0e006b1",
       "traceability": {
         "requirement": [],
         "architecture": [

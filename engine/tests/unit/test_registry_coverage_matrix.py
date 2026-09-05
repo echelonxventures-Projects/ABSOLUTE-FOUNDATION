@@ -171,7 +171,24 @@ def test_the_partition_is_exact(matrix) -> None:
 #:                     registered. A future engine declaration should be registered into the
 #:                     corpus before any by_object identity is minted for it, and this entry
 #:                     exists so that lesson is attached to the number it moved.
-RETAINED_NOT_GOVERNED_OVERLAP = 211
+#:   211 -> 212  (+1)  engine/zero_class/zero-class-register.json, and this rise is a REPEAT of a
+#:                     mistake the 210 -> 211 entry above already recorded. That entry ends: "a
+#:                     future engine declaration should be registered into the corpus before any
+#:                     by_object identity is minted for it, and this entry exists so that lesson
+#:                     is attached to the number it moved." The lesson was attached, and then not
+#:                     applied: P-UCOS-UGA-008 minted the register into the REPOSITORY plane on
+#:                     the day it was written, and P-UCOS-CORPUS-007 registered it into the CORPUS
+#:                     plane hours later. Same file, same order, same result.
+#:                     Unpreventable now for the same reason as before — both allocations are
+#:                     operator-authorized and both maps are append-only, so nothing can undo it —
+#:                     and avoidable then for the same reason. Measured composition at 212: 207
+#:                     EXDOC, 5 DATAOBJ. DUPLICATE_REGISTRATION remains 0.
+#:                     WHAT WOULD ACTUALLY PREVENT THE THIRD: a check, not a comment. An engine
+#:                     declaration is any .json under a package directory carrying a top-level
+#:                     `authority` field; minting one into by_object before it is corpus-registered
+#:                     is detectable at plan time. A note in a MOVEMENTS log is documentation, and
+#:                     this is now the second consecutive entry proving documentation did not hold.
+RETAINED_NOT_GOVERNED_OVERLAP = 212
 
 
 def test_the_two_planes_are_disjoint_IN_GOVERNANCE() -> None:

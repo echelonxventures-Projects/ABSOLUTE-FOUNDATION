@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T17:40:29+00:00",
+  "generated_at": "2026-09-05T06:38:24+00:00",
   "count": 25,
   "volumes": [
     {
@@ -45,9 +45,9 @@
       "description": "Universal architecture constitutions, catalogs, and engineering foundation.",
       "category": "ARCH",
       "status": "ACTIVE",
-      "artifact_count": 106,
+      "artifact_count": 108,
       "page_range_start": 22,
-      "page_range_end": 13169,
+      "page_range_end": 13173,
       "index_path": "00-BOOK/REGISTRIES/VOLUME-REGISTRY.md#vol-003"
     },
     {
