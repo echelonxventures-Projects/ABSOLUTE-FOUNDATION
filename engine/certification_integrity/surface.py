@@ -29,7 +29,6 @@ from __future__ import annotations
 import ast
 import os
 import re
-import subprocess
 import tomllib
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
@@ -53,6 +52,8 @@ from engine.certification_integrity.model import (
     ExecutableObject,
     IntegrityError,
 )
+from engine.omega_infinite.git_provider import GitDiscoveryProvider
+from engine.omega_infinite.provider import ProviderError
 
 #: The invoking texts, grouped into the plane TYPE each belongs to. Grouping is what makes this
 #: measurement stricter than a count of texts: every workflow file collapses into one ``ci``
@@ -156,17 +157,17 @@ def tracked_paths(root: str) -> tuple[str, ...]:
     A missing work tree raises rather than returning an empty tuple, because an empty world is
     the state in which every "no violations" claim is true.
     """
+    # THE PROVIDER, NOT THE TOOL. This asks TRACKED_CONTENT, which is the one question
+    # DiscoveryProvider has always answered, and the provider issues the same
+    # `--cached --exclude-standard -z`. `enumerate` sorts and deduplicates, which this call site
+    # did by hand, so the population is identical and no verdict can move. The failure semantics
+    # match too: the provider raises rather than returning an empty world, which is what the
+    # docstring above requires.
     try:
-        completed = subprocess.run(  # noqa: S603 - fixed argv, no shell, no interpolated input
-            ["git", "ls-files", "--cached", "--exclude-standard", "-z"],  # noqa: S607 - git from PATH by design; the boundary must be VCS's own answer
-            cwd=root,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-    except (OSError, subprocess.CalledProcessError) as exc:
+        artifacts = GitDiscoveryProvider(root=root).enumerate()
+    except ProviderError as exc:
         raise IntegrityError(f"the tracked-path boundary could not be established: {exc}") from exc
-    paths = tuple(sorted(p for p in completed.stdout.split("\0") if p))
+    paths = tuple(sorted(artifact.location.locator for artifact in artifacts))
     if not paths:
         raise IntegrityError("git reports no tracked paths — refusing to measure an empty world")
     return paths

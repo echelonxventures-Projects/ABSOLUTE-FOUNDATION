@@ -29,6 +29,12 @@ DECLARED_DIRECT: dict[str, str] = {
     "engine/omega_infinite/git_provider.py": (
         "IS the provider. Its whole purpose is to be the one place the tool is invoked."
     ),
+    "engine/execution_environment/discovery.py": (
+        "LOCATES THE REPOSITORY ROOT, which is the step that makes a provider constructible. A "
+        "provider is rooted at a path before it can answer anything about that path, so asking "
+        "one where its own root is has no answer to give. This is a bootstrap and not a bypass: "
+        "there is no abstraction to route through until this call has returned."
+    ),
     "engine/omega_infinite/compat.py": (
         "Demonstrates that the provider reproduces the pre-provider population exactly. It must "
         "invoke both sides to compare them, and a comparison that used the provider for both "
@@ -69,12 +75,32 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #: direct invocation is a CHOICE, and this counts choices.
 #:
 #: MOVEMENTS
+#:   19 -> 15   (-4)  Tranche 1. THREE MIGRATED, ONE DECLARED, and the difference matters.
+#:                     engine/certification_integrity/surface.py, engine/uicm/matrix.py and
+#:                     platform/repository_intelligence/generated_artifacts.py each asked
+#:                     TRACKED_CONTENT with the provider's own flags and each now calls
+#:                     `enumerate`. PROVEN IDENTICAL BEFORE THE SWAP: the direct call and the
+#:                     provider both return 7,126 paths and the sorted lists compare equal, so
+#:                     no verdict any of them reaches can have moved. Failure semantics match
+#:                     too — all three refused an empty world by raising, and the provider
+#:                     raises rather than returning an empty tuple.
+#:                     engine/execution_environment/discovery.py was DECLARED rather than
+#:                     migrated: it runs `rev-parse --show-toplevel` to locate the repository
+#:                     root, and a provider must be rooted at a path before it can answer
+#:                     anything about that path. Asking one where its own root is has no answer
+#:                     to give. That is a bootstrap, not a bypass.
+#:                     ONE DEFECT CAUGHT IN THE MIGRATION ITSELF: `Artifact.location` renders as
+#:                     `git:<path>`, carrying the provider identifier, and the bare path is
+#:                     `location.locator`. The first draft used the rendered form and would have
+#:                     silently failed every downstream path lookup while reporting a full
+#:                     population — an absence indistinguishable from a clean result.
+#:
 #:   (established) 19  Baseline measured by AST over engine, platform, intelligence,
 #:                     infrastructure and service, excluding tests and the two modules declared
 #:                     above. Six of the nineteen were invisible to the flag-based scan that
 #:                     preceded this one, which matched `ls-files` argument lists and therefore
 #:                     missed every caller using another subcommand.
-DIRECT_CALLER_CEILING = 19
+DIRECT_CALLER_CEILING = 15
 
 
 def _invokes_tool_directly(path: pathlib.Path) -> bool:

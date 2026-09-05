@@ -29,13 +29,14 @@ format, which is exactly what a reference into another owner's register should b
 from __future__ import annotations
 
 import json
-import subprocess
 import tomllib
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from engine.omega_infinite.git_provider import GitDiscoveryProvider
+from engine.omega_infinite.provider import ProviderError
 from engine.uicm.model import (
     Capability,
     ClosureCell,
@@ -77,28 +78,15 @@ def tracked_paths(repo: Path) -> tuple[str, ...]:
     an absence. Failure to resolve the boundary is refused rather than guessed: a
     population measured against an unknown boundary is not a measurement.
     """
+    # THE PROVIDER, NOT THE TOOL. Same question (TRACKED_CONTENT), same flags, and the same
+    # refusal: the provider raises rather than guessing a boundary, which is what the docstring
+    # above demands. The `-z` handling that keeps `Ω` and `∞` paths unquoted is the provider's
+    # too, so the non-ASCII property this module depends on is preserved rather than reimplemented.
     try:
-        completed = subprocess.run(  # noqa: S603 — fixed argv, no shell, no user input
-            [  # noqa: S607 — resolved from PATH, exactly as the other gates do
-                "git",
-                "-C",
-                str(repo),
-                "ls-files",
-                "-z",
-                "--cached",
-                "--exclude-standard",
-            ],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-    except OSError as exc:
-        raise PopulationError("git is unavailable; the artifact boundary is undefined") from exc
-    if completed.returncode != 0:
-        raise PopulationError(
-            "not a git work tree; the artifact boundary is undefined and will not be guessed"
-        )
-    return tuple(sorted(p for p in completed.stdout.split("\0") if p))
+        artifacts = GitDiscoveryProvider(root=str(repo)).enumerate()
+    except ProviderError as exc:
+        raise PopulationError("the artifact boundary is undefined and will not be guessed") from exc
+    return tuple(sorted(artifact.location.locator for artifact in artifacts))
 
 
 @dataclass(frozen=True, slots=True)

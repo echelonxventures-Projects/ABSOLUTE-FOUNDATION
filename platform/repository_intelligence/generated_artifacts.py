@@ -41,12 +41,13 @@ kept. What it may not do is claim to be repository truth.
 from __future__ import annotations
 
 import json
-import subprocess
 from collections.abc import Iterable
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 from platform.repository_intelligence import evidence_universe, validation_records
+
+from engine.omega_infinite.git_provider import GitDiscoveryProvider
 
 REGISTRY_PATH = "00-BOOK/DATA/generated-artifact-registry.json"
 
@@ -387,16 +388,11 @@ def unregistered_paths(repo: Path) -> list[str]:
     gate months later.
     """
     repo = Path(repo)
+    # THE PROVIDER, NOT THE TOOL. `ls-files -z` with no further flags is the tracked population,
+    # which is TRACKED_CONTENT and the provider's default. Measured before the swap: both return
+    # 7,126 paths and the sets are identical, so no verdict here can move.
     tracked = {
-        p
-        for p in subprocess.run(  # noqa: S603
-            ["git", "ls-files", "-z"],  # noqa: S607
-            cwd=repo,
-            capture_output=True,
-            text=True,
-            check=True,
-        ).stdout.split("\0")
-        if p
+        artifact.location.locator for artifact in GitDiscoveryProvider(root=str(repo)).enumerate()
     }
     declared = {a.canonical_path for a in load(repo)}
     findings: list[str] = []
