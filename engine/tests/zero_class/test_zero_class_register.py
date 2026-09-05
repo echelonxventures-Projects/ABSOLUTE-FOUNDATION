@@ -11,6 +11,7 @@ from __future__ import annotations
 import pytest
 
 import engine.omega_infinite.direct_callers  # noqa: F401 - the caller loads what the register names
+import engine.zero_class.entity_derivation  # noqa: F401 - ZX-02's detector, loaded for the same reason
 
 # Imported through the PACKAGE, not the module. Ω-4 counted engine/zero_class/__init__.py as an
 # unreachable artifact when this reached past it — code no import, plane or entry point touches —

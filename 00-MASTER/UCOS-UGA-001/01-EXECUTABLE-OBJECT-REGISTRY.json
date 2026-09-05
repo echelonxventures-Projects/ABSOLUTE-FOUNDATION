@@ -4,7 +4,7 @@
   "producer": "00-MASTER/UCOS-UGA-001/uga_engine.py",
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "1-2 — Identity + Executable Object Registry",
-  "count": 5447,
+  "count": 5449,
   "identity_authority": {
     "ledger": "00-BOOK/DATA/id-ledger.json",
     "rule": "There is exactly ONE identity authority. This programme mints from the SAME ledger and the SAME category_seq counter as the corpus. It creates no second authority and no second sequence.",
@@ -1098,7 +1098,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "05ae96ffa15f8b35e4b7b1710b5906a5b626c786da0ea04b66ece2a63aff4950",
+      "content_hash": "c62b60310785e104c0dcb2e723a485df2dce291bfcef2540e73edfcfbf23a8ec",
       "content_hash_withheld": null,
       "first_seen": "commit:77798202d2df"
     },
@@ -1368,7 +1368,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "bd6c66f80e628aa158667211a42bc22951c84a197bafdd0733d8b16751f52ab7",
+      "content_hash": "973ab291bf28b3ea3f3699f806ff6d96144b905dfbe06b7585343a132b27fcf1",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -81426,6 +81426,26 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "universal_id": "UCOS-TESTOBJ-000900",
+      "path": "engine/tests/zero_class/test_entity_derivation.py",
+      "object_class": "TEST_OBJECT",
+      "owner": "engine/tests",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [
+        "engine/zero_class/entity_derivation.py"
+      ],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "bd358ac306f33237f00123b890a3c6a65063d8254dbb250470b3d39ed23dfa19",
+      "content_hash_withheld": null,
+      "first_seen": "commit:f2bb7c6637cf"
+    },
+    {
       "universal_id": "UCOS-TESTOBJ-000899",
       "path": "engine/tests/zero_class/test_zero_class_register.py",
       "object_class": "TEST_OBJECT",
@@ -83860,6 +83880,24 @@
       "content_hash": "9396c1fcb0fefc924b4d0eac3eec0cb92635c1fc1bdcf080cfb61448de9e14fc",
       "content_hash_withheld": null,
       "first_seen": "commit:d54d6ffa0cb2"
+    },
+    {
+      "universal_id": "UCOS-ENGINE-001386",
+      "path": "engine/zero_class/entity_derivation.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "owner": "engine/zero_class",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UCOS-UGA-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "certification_status": "GOVERNED",
+      "content_hash": "e97d15ad1a5e4cc921a6710110a0b2b5a64be5a22f79af46606c4efbb291e003",
+      "content_hash_withheld": null,
+      "first_seen": "commit:f2bb7c6637cf"
     },
     {
       "universal_id": "UCOS-ENGINE-001385",

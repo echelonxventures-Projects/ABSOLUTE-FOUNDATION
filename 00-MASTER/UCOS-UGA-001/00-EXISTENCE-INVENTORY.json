@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7131,
+  "total_objects": 7133,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -48637,6 +48637,15 @@
       "first_seen": "commit:e98f59cd22e9"
     },
     {
+      "path": "engine/tests/zero_class/test_entity_derivation.py",
+      "object_class": "TEST_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/tests",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-TESTOBJ-000900",
+      "first_seen": "commit:f2bb7c6637cf"
+    },
+    {
       "path": "engine/tests/zero_class/test_zero_class_register.py",
       "object_class": "TEST_OBJECT",
       "lifecycle": "AUTHORED",
@@ -49605,6 +49614,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-ENGINE-001384",
       "first_seen": "commit:d54d6ffa0cb2"
+    },
+    {
+      "path": "engine/zero_class/entity_derivation.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/zero_class",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001386",
+      "first_seen": "commit:f2bb7c6637cf"
     },
     {
       "path": "engine/zero_class/measure.py",

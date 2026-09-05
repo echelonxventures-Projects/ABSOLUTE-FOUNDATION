@@ -12123,8 +12123,8 @@
     "DATAOBJ": 146,
     "EXDOC": 3140,
     "TOOLING": 57,
-    "ENGINE": 1385,
-    "TESTOBJ": 899,
+    "ENGINE": 1386,
+    "TESTOBJ": 900,
     "OBS": 7,
     "ASSESS": 2,
     "B01BIR": 1,
@@ -67079,6 +67079,18 @@
       "object_class": "DATA_OBJECT",
       "category": "DATAOBJ",
       "first_seen": "commit:d54d6ffa0cb2"
+    },
+    "engine/tests/zero_class/test_entity_derivation.py": {
+      "universal_id": "UCOS-TESTOBJ-000900",
+      "object_class": "TEST_OBJECT",
+      "category": "TESTOBJ",
+      "first_seen": "commit:f2bb7c6637cf"
+    },
+    "engine/zero_class/entity_derivation.py": {
+      "universal_id": "UCOS-ENGINE-001386",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:f2bb7c6637cf"
     }
   },
   "by_observation": {
