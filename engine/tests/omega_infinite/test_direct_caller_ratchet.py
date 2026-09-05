@@ -102,6 +102,39 @@ def test_supplying_a_declared_capability_without_a_method_is_refused() -> None:
         hollow.supply(CONTENT_HASHING)
 
 
+@pytest.mark.parametrize(
+    ("label", "source", "expected"),
+    [
+        ("inline argv", 'import subprocess\nsubprocess.run(["git", "status"])\n', True),
+        ("argv in a variable", 'import subprocess\nc = ["git", "s"]\nsubprocess.run(c)\n', True),
+        (
+            "argv with a splat",
+            'import subprocess\ndef f(*a):\n    subprocess.run(["git", *a])\n',
+            True,
+        ),
+        ("a declaration naming it", 'PersistenceBinding("git", "p", False)\n', False),
+        ("a docstring naming it", '"""we do not run git here."""\n', False),
+    ],
+)
+def test_the_detector_separates_spawning_from_naming(tmp_path, label, source, expected) -> None:
+    """Both defects this predicate had, pinned in both directions.
+
+    It first flagged any call whose arguments held the string, so `PersistenceBinding("git", ...)`
+    counted two modules as callers that spawn nothing — and a ratchet with false positives can
+    never honestly reach its floor. Narrowing to "first argument of a spawn call" fixed that and
+    opened a worse hole: an argv assigned to a variable escaped entirely, which is an evasion
+    anyone could perform by accident.
+
+    The cases below are the contract. A guard that can be evaded by an assignment is not a guard,
+    and one that counts declarations can never be satisfied.
+    """
+    from engine.omega_infinite.direct_callers import _invokes_tool_directly
+
+    module = tmp_path / "subject.py"
+    module.write_text(source, encoding="utf-8")
+    assert _invokes_tool_directly(module) is expected, label
+
+
 def test_direct_callers_may_only_fall() -> None:
     """A new module reaching past the provider is refused.
 

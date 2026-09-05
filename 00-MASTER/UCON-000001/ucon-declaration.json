@@ -2020,6 +2020,15 @@
         "intentional": true,
         "closing_invariant": "The modules permitted to invoke the version-control tool directly. Closed in source and TWO-WAY BOUND to the measured population by INV-AGN-02: a declared module that no longer invokes the tool is a stale exemption, and an invoking module absent from this table raises the direct-caller count above its ceiling. Neither side can drift from the other. The sibling closure this module began with, a hardcoded tuple of source roots, was OPENED rather than disclosed — it now reads audit.roots from this declaration, which removed a closed enumeration and a second answer to a question this file already answers.",
         "admission": "Append an entry naming the module and a written reason why it must invoke the tool directly. The reason is required and a test refuses one shorter than a sentence, which is the intended cost: an exemption without a stated reason is a silent one, and this table exists to end that silence for a facility the repository declares substitutable."
+      },
+      {
+        "closure_id": "UCON-CL-54",
+        "module": "engine/omega_infinite/direct_callers.py",
+        "symbol": "_SPAWNS",
+        "form": "FROZEN_MEMBERSHIP_SET",
+        "intentional": true,
+        "closing_invariant": "The standard library's process-starting entry points. Closed because the runtime closed it: these are the names `subprocess` and `os` actually expose to start a process, and the set is a fact about the interpreter rather than a policy of this repository. It exists so the direct-caller detector can tell a module that SPAWNS the tool from one that merely NAMES it — a distinction two modules were miscounted on before this predicate required it.",
+        "admission": "Append the name when the runtime gains a new way to start a process, or when a repository policy admits a spawning wrapper of its own. Both are deliberate acts: a name absent here is invisible to the ratchet, so adding one widens what the guard can see and leaving one out narrows it silently, which is why the set is stated rather than inferred from imports."
       }
     ],
     "baseline": {

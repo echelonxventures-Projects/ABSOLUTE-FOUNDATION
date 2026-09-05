@@ -270,6 +270,15 @@
       "admission": "Append the variable name to the tuple. Data alone: no engine change, no schema change, no amendment, and every one of the three spawn sites reads the same tuple through immutable.clean_environment, so admitting a variable admits it everywhere at once. The admission path is exercised rather than asserted — test_the_stripped_set_names_both_families_and_not_just_the_one_that_was_found_first pins both families, which is what makes a sixth variable an edit to one line instead of a search for three call sites.",
       "intentional": true,
       "gap": "The tuple exists because this closure was already the defect. Stripping COVERAGE_FILE alone was the fix for the first occurrence and was NOT enough for the second: pytest-cov's .pth auto-started an unconfigured coverage in every subprocess the COV_CORE_* variables reached, which wrote statement-only data beside the parent's branch data, and `coverage combine` refuses to merge the two. Four of thirteen shards then died with an INTERNALERROR AFTER every test in them had passed and the coverage gate reported a figure that measured nothing. Naming the set here is what makes the second family checkable instead of remembered."
+    },
+    {
+      "id": "ISD-CE-14",
+      "enumeration": "_SPAWNS",
+      "declared_at": "engine/omega_infinite/direct_callers.py",
+      "population": 6,
+      "closing_invariant": "Closed by an authority outside this repository and not derivable inside it, exactly as ISD-CE-13 is. It names the standard library's process-starting entry points — subprocess.run, Popen, check_output, call, check_call and getoutput — which are the interpreter's published surface rather than this repository's vocabulary. Nothing in this tree can enumerate 'the functions that start a process' by inspection; the property is documented, not introspectable.",
+      "admission": "Append the name when the runtime gains a new way to start a process. The set exists so the direct-caller ratchet can distinguish a module that SPAWNS the tool from one that merely NAMES it — a distinction two modules were miscounted on before this predicate required it — so a name absent here is invisible to that guard and adding one widens what it can see.",
+      "intentional": true
     }
   ],
   "$disclosure_completeness": "This list is itself open: it enumerates the closed enumerations located at baseline bb9c27d2 and is extended by appending an entry. ISD-L-01 measures that each entry names a closing invariant and an admission path, not that the list is exhaustive — a claim of exhaustiveness would be the very finite assumption the principle prohibits.",

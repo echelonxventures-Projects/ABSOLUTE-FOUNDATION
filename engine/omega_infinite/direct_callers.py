@@ -64,6 +64,11 @@ DECLARED_DIRECT: dict[str, str] = {
 #: MEASURED BEFORE ADOPTING IT: the declared list is broader than the tuple it replaced — eight
 #: roots against five — and the direct-caller count is 19 under both. Widening the scan changed
 #: no verdict, which is what made the replacement safe rather than merely tidier.
+#: The call names that actually start a process. A module that merely NAMES the tool — in a
+#: declaration, a docstring or a persistence binding — spawns nothing, and counting it would put
+#: entries in the ratchet that no migration could ever remove.
+_SPAWNS = frozenset({"run", "Popen", "check_output", "call", "check_call", "getoutput"})
+
 UCON_DECLARATION = "00-MASTER/UCON-000001/ucon-declaration.json"
 
 
@@ -88,6 +93,18 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #: direct invocation is a CHOICE, and this counts choices.
 #:
 #: MOVEMENTS
+#:   12 -> 10   (-2)  A DETECTOR CORRECTION, NOT PROGRESS, and recorded apart from the
+#:                     migrations for that reason. engine/uckp/assimilation.py and
+#:                     engine/uckp/constitution.py were never callers: both name the tool in
+#:                     `PersistenceBinding("git", ...)`, a persistence mechanism, and neither
+#:                     spawns anything. The predicate counted a declaration as an invocation.
+#:                     Narrowing it then opened the opposite hole — an argv assigned to a
+#:                     variable escaped the check entirely — so the predicate is now a
+#:                     conjunction of two module-level facts: it spawns a process, and it builds
+#:                     a vector headed by the tool. Five cases pin both directions in the suite.
+#:                     NO CODE MOVED for this fall. Two entries left the count because they
+#:                     should never have been in it.
+#:
 #:   13 -> 12   (-1)  platform/repository_intelligence/contamination.py, and it was DECLARED
 #:                     rather than migrated — so this fall is matched by a rise in
 #:                     DECLARED_DIRECT_CEILING and buys no behaviour change at all. Recorded that
@@ -147,7 +164,7 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #:                     above. Six of the nineteen were invisible to the flag-based scan that
 #:                     preceded this one, which matched `ls-files` argument lists and therefore
 #:                     missed every caller using another subcommand.
-DIRECT_CALLER_CEILING = 12
+DIRECT_CALLER_CEILING = 10
 
 #: A SECOND CEILING, BECAUSE THE FIRST HAS A LOOPHOLE. Declaring a caller lowers the direct count
 #: without changing one line of behaviour, so a ratchet on that count alone can always be
@@ -171,24 +188,49 @@ DECLARED_DIRECT_CEILING = 4
 
 
 def _invokes_tool_directly(path: pathlib.Path) -> bool:
-    """True when this module names the tool in a call argument list.
+    """True when this module SPAWNS the tool, not merely when it names it.
 
-    AST rather than text: a module DISCUSSING the tool in a docstring is not invoking it, and the
-    distinction is the one UVI-L-06 makes about a selection engine naming a test file. A comment
-    cannot execute.
+    AST rather than text, for the reason UVI-L-06 gives about a selection engine naming a test
+    file: a module discussing the tool in a docstring is not invoking it, and a comment cannot
+    execute.
+
+    TWO DEFECTS WERE FOUND IN THIS PREDICATE, IN OPPOSITE DIRECTIONS, AND BOTH ARE WHY IT LOOKS
+    LIKE THIS.
+
+    FALSE POSITIVES. The first version flagged any call whose argument list held the string, so a
+    DECLARATION naming the tool was indistinguishable from an INVOCATION of it.
+    `PersistenceBinding("git", path, False)` names a persistence mechanism and spawns nothing, yet
+    two modules were counted as callers for it. A ratchet carrying false positives can never
+    honestly reach its floor: the last entries are unremovable, and the only way to close it would
+    be to declare modules that never had a bypass to declare.
+
+    FALSE NEGATIVES. Narrowing to "the tool is the first argument of a spawn call" fixed that and
+    opened a worse hole: `cmd = ["git", "status"]` followed by `run(cmd)` was no longer caught. A
+    guard against new bypasses that anyone evades by assigning to a variable is not a guard.
+
+    So the test is a CONJUNCTION of two module-level facts: the module spawns a process somewhere,
+    and it builds an argument vector whose first element is the tool. A declaration fails the
+    second (its "git" is a call argument, not the head of a vector); a docstring fails both; and
+    an argv assigned to a name passes both, wherever the assignment sits.
     """
     try:
         tree = ast.parse(path.read_text(encoding="utf-8", errors="ignore"))
     except (SyntaxError, OSError):  # pragma: no cover - unparseable file
         return False
+    spawns = False
+    builds_argv = False
     for node in ast.walk(tree):
-        if not isinstance(node, ast.Call):
-            continue
-        for arg in list(node.args) + [kw.value for kw in node.keywords]:
-            elements = arg.elts if isinstance(arg, ast.List | ast.Tuple) else [arg]
-            for element in elements:
-                if isinstance(element, ast.Constant) and element.value == "git":
-                    return True
+        if isinstance(node, ast.Call):
+            target = node.func
+            name = target.attr if isinstance(target, ast.Attribute) else getattr(target, "id", "")
+            if name in _SPAWNS:
+                spawns = True
+        elif isinstance(node, ast.List | ast.Tuple) and node.elts:
+            head = node.elts[0]
+            if isinstance(head, ast.Constant) and head.value == "git":
+                builds_argv = True
+        if spawns and builds_argv:
+            return True
     return False
 
 
