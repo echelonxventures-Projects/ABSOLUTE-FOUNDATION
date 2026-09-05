@@ -327,6 +327,7 @@ def epoch1_identity(objects, ledger, mint: bool, now: str):
 # ---------------------------------------------------------------------------
 # EPOCH 4 (computed early — the registry embeds dependencies)
 # ---------------------------------------------------------------------------
+
 def _module_name(rel: str) -> str | None:
     if not rel.endswith(".py"):
         return None
@@ -343,6 +344,37 @@ def build_import_index(paths):
         if mod and rel.split("/")[0] in CODE_ROOTS:
             index[mod] = rel
     return index
+
+
+#: WHICH SUFFIXES HAVE AN EDGE DERIVER, and how a language acquires one.
+#:
+#: This was `if rel.endswith(".py")` at the single call site, which meant a file in any other
+#: language could never carry a dependency edge — not because its dependencies are unknowable,
+#: but because nothing was ever asked. The consequence reached further than this engine: the
+#: impact selector derives its bounded suffixes from which suffixes actually carry edges, so a
+#: Rust file escalated every change to FULL forever, and no amount of Rust tooling could have
+#: changed that while this line read `.py`.
+#:
+#: REGISTERING A DERIVER IS HOW A LANGUAGE BECOMES VISIBLE (UCKP-ART-08, UCKP-ART-17: admitted by
+#: registration, never by amendment). A deriver takes the same four arguments and returns
+#: repository-relative paths that RESOLVE to tracked files; edges to anything outside the
+#: repository boundary are not repository dependencies and are not emitted.
+EDGE_DERIVERS: dict[str, object] = {}
+
+
+def register_edge_deriver(suffix: str, deriver) -> None:
+    """Admit a language to dependency analysis. Idempotent; last registration wins."""
+    EDGE_DERIVERS[suffix] = deriver
+
+
+def derive_edges(rel: str, abspath: str, index: dict, tracked: set) -> list:
+    """Dependency edges for one object, from whichever deriver claims its suffix.
+
+    A suffix nobody claims yields no edges — the same answer the hardcoded branch gave, reached
+    now because nothing derives them rather than because the engine declined to ask.
+    """
+    deriver = EDGE_DERIVERS.get(os.path.splitext(rel)[1])
+    return list(deriver(abspath, rel, index, tracked)) if deriver else []
 
 
 def python_imports(abspath: str, rel: str, index: dict, tracked: set) -> list[str]:
@@ -436,6 +468,10 @@ EVIDENCE_FOR_CLASS = {
 }
 
 
+
+#: The one deriver that exists today. A second language is a second call to this.
+register_edge_deriver(".py", python_imports)
+
 def epoch2_registry(objects, index, producer_of, consumers_of, decl, tracked):
     # This engine's OWN emitted surfaces. Once they are version-controlled they are
     # objects like any other and MUST hold identity — but their content_hash is
@@ -450,9 +486,7 @@ def epoch2_registry(objects, index, producer_of, consumers_of, decl, tracked):
     for o in objects:
         rel = o["path"]
         abspath = os.path.join(REPO, rel)
-        deps = []
-        if rel.endswith(".py"):
-            deps = python_imports(abspath, rel, index, tracked)
+        deps = derive_edges(rel, abspath, index, tracked)
 
         governed = o["object_class"] != "DOCUMENT_ARTIFACT"
         entries.append({

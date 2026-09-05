@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7130,
+  "total_objects": 7131,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -37497,6 +37497,14 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "adr/0042-the-sequencing-rule-and-what-zero-means.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "adr",
+      "universal_id": "UCOS-ADR-000043",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
       "path": "application/EC3-B12-U01-COMPLETION-REPORT.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -49609,12 +49617,11 @@
     },
     {
       "path": "engine/zero_class/zero-class-register.json",
-      "object_class": "DATA_OBJECT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
       "owner": "engine/zero_class",
-      "identity_authority": "UCOS-UGA-001",
-      "universal_id": "UCOS-DATAOBJ-000146",
-      "first_seen": "commit:d54d6ffa0cb2"
+      "universal_id": "UCOS-ENG-000027",
+      "identity_authority": "UMB-IMP-001"
     },
     {
       "path": "final_certification_report.md",

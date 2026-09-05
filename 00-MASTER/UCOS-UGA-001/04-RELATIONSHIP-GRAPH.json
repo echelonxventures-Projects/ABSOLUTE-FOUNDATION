@@ -244,7 +244,7 @@
       "meaning": "checks the shape of another object — the forward sense of the contract validated_by names inversely"
     }
   },
-  "count": 39576,
+  "count": 39581,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -1083,6 +1083,26 @@
     },
     {
       "from": "UCOS-ADR-000042",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ADR-000043",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ADR-000043",
+      "kind": "owned_by",
+      "to": "adr"
+    },
+    {
+      "from": "UCOS-ADR-000043",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ADR-000043",
       "kind": "validated_by",
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
@@ -14447,26 +14467,6 @@
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
     {
-      "from": "UCOS-DATAOBJ-000146",
-      "kind": "evidenced_by",
-      "to": "VALIDATION"
-    },
-    {
-      "from": "UCOS-DATAOBJ-000146",
-      "kind": "owned_by",
-      "to": "engine/zero_class"
-    },
-    {
-      "from": "UCOS-DATAOBJ-000146",
-      "kind": "produced_by",
-      "to": "HUMAN_AUTHORED"
-    },
-    {
-      "from": "UCOS-DATAOBJ-000146",
-      "kind": "validated_by",
-      "to": "UCOS-UGA-001 §UGA-INV-01..10"
-    },
-    {
       "from": "UCOS-DEPEND-000001",
       "kind": "evidenced_by",
       "to": "VALIDATION"
@@ -15323,6 +15323,26 @@
     },
     {
       "from": "UCOS-ENG-000026",
+      "kind": "validated_by",
+      "to": "UMB-IMP-001 ENFORCEMENT_GATES"
+    },
+    {
+      "from": "UCOS-ENG-000027",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENG-000027",
+      "kind": "owned_by",
+      "to": "engine/zero_class"
+    },
+    {
+      "from": "UCOS-ENG-000027",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENG-000027",
       "kind": "validated_by",
       "to": "UMB-IMP-001 ENFORCEMENT_GATES"
     },
@@ -192630,6 +192650,11 @@
       "from": "UCOS-TESTOBJ-000899",
       "kind": "depends_on",
       "to": "engine/omega_infinite/direct_callers.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000899",
+      "kind": "depends_on",
+      "to": "engine/zero_class/__init__.py"
     },
     {
       "from": "UCOS-TESTOBJ-000899",

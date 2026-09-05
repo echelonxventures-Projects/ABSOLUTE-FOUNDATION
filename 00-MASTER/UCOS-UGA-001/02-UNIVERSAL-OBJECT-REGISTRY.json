@@ -5,10 +5,10 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "2 — Universal Object Registry (union view)",
   "why": "The single source of truth for EXISTENCE. It unions the document class governed by UMB-IMP-001 with the object classes governed by UCOS-UGA-001. It is a VIEW, not a second registry: it stores no identity of its own and mints nothing.",
-  "count": 7130,
+  "count": 7131,
   "by_authority": {
-    "UMB-IMP-001": 1682,
-    "UCOS-UGA-001": 5448
+    "UMB-IMP-001": 1684,
+    "UCOS-UGA-001": 5447
   },
   "entries": [
     {
@@ -1231,7 +1231,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "ca02850eab477758f552633dfa2f7af5dd406bfe10c1fa37010f2fb08a9a7354",
+      "content_hash": "b8b9c2c584033debe05c55a30e93bc5e5a9bbccfaa6312b76adaba9810c26ae4",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -1447,7 +1447,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "ee64d2db2a1527801b8bfbbfe2727543c6e29eeba4ef8c687aaffdc25e534ede",
+      "content_hash": "b5db82753fa4d9c35ed241c87f0575453ffd22498b93fceb487a4f55074b279a",
       "content_hash_withheld": null,
       "first_seen": "commit:77798202d2df"
     },
@@ -1465,7 +1465,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "b7dfb889e463729952c2b3f097592a2ce3073afe6d5246c0e645612b19c24ec8",
+      "content_hash": "627a678d1382144799bc2a0f39e5876748d60294782b3cf856718c51d9661876",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -1537,7 +1537,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "dc0b87677f2aa33641e97703a053616f44060dcb3c78649c1d7abba22862df25",
+      "content_hash": "2ce90a6b2c39e41c4aa937465e9cc2a7f113a46fb4b28745a225e2c1a48fad8a",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -1645,7 +1645,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "5d1e5b61f16bf90ed001d136f3f2699d0b3ab291f3a41603deabd28cb9462859",
+      "content_hash": "d2c0d720b545d475a723d490ae1158fa3d09850a868625d6dd89e2edbe15410a",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -1717,7 +1717,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "42adefc2e9991c3c24ef97c318003473f63e35775d8ff46dff98805f4a36a9b3",
+      "content_hash": "bd6c66f80e628aa158667211a42bc22951c84a197bafdd0733d8b16751f52ab7",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -1879,7 +1879,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "344a76e648f784b336bbeb4904e659c2de38f4ba833eb77a5976d95e0e21277b",
+      "content_hash": "415afd51891b2d4182e555f426dcbf8040a991082450fd3d46908e121ddce4e3",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -1933,7 +1933,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "cd1134082ebb1b007de0bbc67fbfe0e36dde9fc1556d29ee601b18be188587f8",
+      "content_hash": "337384d910c3654dbe586df938337558715647e49e7359ef1171ce32d1c1dd7a",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -32911,7 +32911,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "4391a548ce096680494ec57a15a9f8420452c04fddf1ef5f2912758a081e5d06",
+      "content_hash": "ed914161c8c9b8808d456d0877a8510771ac91ecb957fe236b06ca1791b5c40e",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -32929,7 +32929,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "7270bc9c6e526fb842e53d708cca7a60ddbe0679709730fd0b7c58c35494bd07",
+      "content_hash": "1b9e7c9899619807d0c0e375c17972c19a4d410951d5dad67b11f14cc449c032",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -32947,7 +32947,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "12e8549f707133de8b2c6ebe254c6869b174e826785a07396d4d9fe055190a3f",
+      "content_hash": "c1e3c3446f1bd072ae62fa86a116b91577859d0aa03e94100647f212c7aeb0dd",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -32965,7 +32965,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "f3e4438cc0e7536da5a7c1fe30e52d50d9e5a63a90a5269c42e21cd3196f1a59",
+      "content_hash": "7fb962539b987a9d2f628bcbddae26ef6dd35896bb12ec22fa2a8770fdef0439",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -32983,7 +32983,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "e0065655202a5c5ed3df4e211daec86b25d32fc12460445e2c1333331531a64a",
+      "content_hash": "8f486649c9561e043cfee3856455c5627f892f8e5405811b7386c9feb5c5bd40",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -41142,7 +41142,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "b102fc4f78eaa186a018443c5a0fdaa1ee279626da60beb3609ba79170a8d659",
+      "content_hash": "0f9968af1fbf23ccfbef632b21362f4a5ee3947e580d25dfc8f9904ba3217983",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -41178,7 +41178,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "00bc7273b00648cfa6abfc62fc5cdfc3d562ef1c0f238a8f088a2d9dad01c8ba",
+      "content_hash": "d1355705297a0f0cf026977c3d7e35b3c253506870b17c5511dbf2ed552787cb",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -41196,7 +41196,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "48abc84c0705904f65b1ffd98e94ccaf552a13a9cb8bc976437d2f04a0f05de5",
+      "content_hash": "3363a9270d40041843c69a37c0a97add8f32832684ff2abd0ef34d7cb48443fa",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -41232,7 +41232,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "31e6002ee7c14a6fd8e9aedc94a725845b26dd9b2d45b7cd32e83556e292a593",
+      "content_hash": "f443420725074f1c0c36c295ba97957c05416b8eeb695a3847e607315fb438dc",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -41250,7 +41250,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "862830b9b22a48b77f19d691a5f2413a00a8b9e73cc1e246d7db868deacceea2",
+      "content_hash": "be7a77b274832fc111f4df85d93eb0a36fd3f8ccbaccd8a6fa4a487807427cd5",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -41322,7 +41322,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "4e7deea9e9cc98fa2787462aa28f5940073f35c09fc6b96b98c71c7727804252",
+      "content_hash": "f971dbe8c4b45477e4ccba5a9189307ef6519c78fe826a5a16fdf9349549a6e9",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -47555,7 +47555,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "1eef5394dadf4eb84779f067aa379596e2da59a02d0fa64f67e53ba6ec47cea2",
+      "content_hash": "85be223b141d3492ebaa40c968990bd7d02009cb77446700cfb853e5a73855ba",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -52252,7 +52252,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "27498dfaf7a04a24fd40367764f246b7bac25e746c77bd2b7150b476cae9f770",
+      "content_hash": "ec8e6787455a2473b698bb6f2e73cd5c16de128d40ba25c9709c53ae8a5c1823",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -77587,6 +77587,24 @@
       "first_seen": null
     },
     {
+      "universal_id": "UCOS-ADR-000043",
+      "path": "adr/0042-the-sequencing-rule-and-what-zero-means.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "owner": "adr",
+      "producer": "HUMAN_AUTHORED",
+      "identity_authority": "UMB-IMP-001",
+      "lifecycle": "AUTHORED",
+      "dependencies": [],
+      "produces": [],
+      "evidence_class": "VALIDATION",
+      "evidence_boundary": "NON_CANONICAL",
+      "validation_contract": "UMB-IMP-001 ENFORCEMENT_GATES",
+      "certification_status": "GOVERNED",
+      "content_hash": "1c655dbf3bf9183489be9c6090be3d6f57315729a12ed07c7d37ca14d47ddcd9",
+      "content_hash_withheld": null,
+      "first_seen": null
+    },
+    {
       "universal_id": "UCOS-APPLICATION-000001",
       "path": "application/EC3-B12-U01-COMPLETION-REPORT.md",
       "object_class": "DOCUMENT_ARTIFACT",
@@ -89381,7 +89399,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UMB-IMP-001 ENFORCEMENT_GATES",
       "certification_status": "GOVERNED",
-      "content_hash": "d30d56141de734d9043985bf3105c2fdbef0eb9c59206733d4f0c104adf48d4d",
+      "content_hash": "f22b22d0f9e891f8b2507b7bcf3ca9cdf238e422d30fbdbc01211ef945c50755",
       "content_hash_withheld": null,
       "first_seen": null
     },
@@ -98453,7 +98471,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "3e1c4696d238c4c180dc24bee5801804b41730bed07f9f867e0d0cd0b350741b",
+      "content_hash": "92eb7757f004c90687d7ece30ca9548f6ccdddad89182690a213239a697db9e3",
       "content_hash_withheld": null,
       "first_seen": "commit:3dd9256687e2"
     },
@@ -102918,7 +102936,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "3890cfde23501058a7aa7fce29c518c8aad4bd75e8706f2b4b906b0ea7425bd0",
+      "content_hash": "279fd364bc89b2fd014a076fc7b5f1e7d65191006bea3d11b4c311890ceb4d6c",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -104349,7 +104367,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "c404e8dcd84472af04ed731d5143267b2c2d1ac2d63599e138215cf91f6c65f9",
+      "content_hash": "f554c71a85a56c6e88e1f81529ab851838c82150da6d2ad21a235f6f3a3ad7c3",
       "content_hash_withheld": null,
       "first_seen": "commit:bb9c27d2733a"
     },
@@ -105092,7 +105110,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "29a49b9ab0cf5a63f22fb3cd93db89866e5418a0bd72fb7182cf1842abe07be1",
+      "content_hash": "71afcc9c34f8ac277a826236c749ae759ce9c945b99c47c6e6105c756dbd1028",
       "content_hash_withheld": null,
       "first_seen": "commit:5eb1a704caf3"
     },
@@ -105704,6 +105722,7 @@
       "lifecycle": "AUTHORED",
       "dependencies": [
         "engine/omega_infinite/direct_callers.py",
+        "engine/zero_class/__init__.py",
         "engine/zero_class/measure.py"
       ],
       "produces": [],
@@ -105711,7 +105730,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "ccd883932a5ac3f3debccd7b55a255c3bb2501f0d68d502038406ea4a892d245",
+      "content_hash": "6462e62fc4c88bf4e9ddcabb0f560a67252611d3d9a619d5473986657b3d5ae1",
       "content_hash_withheld": null,
       "first_seen": "commit:d54d6ffa0cb2"
     },
@@ -106419,7 +106438,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "fc57632532d8474de5f598e6eb26de2b0b9f870bcce9ec5c0c4f046019b3fe25",
+      "content_hash": "a83efa7ada0f86ce54d45822957347832d5b2bb426f921c26bebc13e49fa61c2",
       "content_hash_withheld": null,
       "first_seen": "commit:e98f59cd22e9"
     },
@@ -107869,7 +107888,7 @@
       "evidence_boundary": "NON_CANONICAL",
       "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
       "certification_status": "GOVERNED",
-      "content_hash": "1b7e89b37f0401a58cd439c6d5c254965a790c4cab0c1cad34ee21806cc1c21e",
+      "content_hash": "e4860fd066a468408c389d75954eee95ce44e3b655bbaf980725a2c2a0cc29b4",
       "content_hash_withheld": null,
       "first_seen": "commit:5eb1a704caf3"
     },
@@ -108184,22 +108203,22 @@
       "first_seen": "commit:d54d6ffa0cb2"
     },
     {
-      "universal_id": "UCOS-DATAOBJ-000146",
+      "universal_id": "UCOS-ENG-000027",
       "path": "engine/zero_class/zero-class-register.json",
-      "object_class": "DATA_OBJECT",
+      "object_class": "DOCUMENT_ARTIFACT",
       "owner": "engine/zero_class",
       "producer": "HUMAN_AUTHORED",
-      "identity_authority": "UCOS-UGA-001",
+      "identity_authority": "UMB-IMP-001",
       "lifecycle": "AUTHORED",
       "dependencies": [],
       "produces": [],
       "evidence_class": "VALIDATION",
       "evidence_boundary": "NON_CANONICAL",
-      "validation_contract": "UCOS-UGA-001 §UGA-INV-01..10",
+      "validation_contract": "UMB-IMP-001 ENFORCEMENT_GATES",
       "certification_status": "GOVERNED",
       "content_hash": "664cdab5339ebeee3d468b0e5d4a9d58c750d93563ab012e07115239e0e006b1",
       "content_hash_withheld": null,
-      "first_seen": "commit:d54d6ffa0cb2"
+      "first_seen": null
     },
     {
       "universal_id": "UCOS-FINALC-000001",
