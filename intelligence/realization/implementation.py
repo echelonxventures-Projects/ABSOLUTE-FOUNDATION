@@ -68,9 +68,7 @@ class ImplementationEngine:
             )
         candidate = Path(relative_path)
         if candidate.is_absolute() or ".." in candidate.parts:
-            raise ImplementationError(
-                "artifact path escapes the artifact root", path=relative_path
-            )
+            raise ImplementationError("artifact path escapes the artifact root", path=relative_path)
         root = self.config.artifact_root
         resolved = (root / candidate).resolve()
         if root.resolve() not in resolved.parents:
@@ -104,9 +102,7 @@ class ImplementationEngine:
                 "generation manifest is empty; nothing to materialize",
                 generation_id=manifest.generation_id,
             )
-        return tuple(
-            self._resolve(artifact.relative_path) for artifact in manifest.artifacts
-        )
+        return tuple(self._resolve(artifact.relative_path) for artifact in manifest.artifacts)
 
     # -- materialization ------------------------------------------------------
 
@@ -145,9 +141,7 @@ class ImplementationEngine:
             )
             return record
 
-    def _write(
-        self, artifact: GeneratedArtifact, path: Path, *, dry_run: bool
-    ) -> MaterializedFile:
+    def _write(self, artifact: GeneratedArtifact, path: Path, *, dry_run: bool) -> MaterializedFile:
         digest = artifact.content_sha256
         existing = self._existing_hash(path)
         if dry_run:
@@ -226,9 +220,7 @@ class ImplementationEngine:
     def manifest_path(self) -> Path:
         return self.config.artifact_root / MANIFEST_FILENAME
 
-    def _write_manifest(
-        self, manifest: GenerationManifest, record: ImplementationRecord
-    ) -> Path:
+    def _write_manifest(self, manifest: GenerationManifest, record: ImplementationRecord) -> Path:
         path = self.manifest_path()
         self._assert_not_frozen(path.resolve(), MANIFEST_FILENAME)
         payload = sealed(
@@ -273,9 +265,7 @@ class ImplementationEngine:
             if isinstance(entry, dict) and entry.get("relative_path")
         }
 
-    def prune(
-        self, manifest: GenerationManifest, *, dry_run: bool = True
-    ) -> dict[str, object]:
+    def prune(self, manifest: GenerationManifest, *, dry_run: bool = True) -> dict[str, object]:
         """Remove artifacts a previous pass generated that are no longer claimed."""
         stale = self.stale_artifacts(manifest)
         removed: list[str] = []

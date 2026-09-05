@@ -111,9 +111,7 @@ class ResearchIntelligenceEngine:
                 },
                 "units": [u.to_dict() for u in corpus.units],
                 "standards_summary": {
-                    k: v
-                    for k, v in self.standards().model().items()
-                    if k != "standards"
+                    k: v for k, v in self.standards().model().items() if k != "standards"
                 },
                 "validation": {
                     "verdict": validation.verdict,
@@ -176,8 +174,7 @@ class ResearchIntelligenceEngine:
     def write(self, sink: OutputSink | None = None) -> list[str]:
         target = sink or NestedFileSink(self.config.output_dir)
         written = [
-            target.emit(name, canonical_json(payload))
-            for name, payload in self.outputs().items()
+            target.emit(name, canonical_json(payload)) for name, payload in self.outputs().items()
         ]
         return sorted(written)
 

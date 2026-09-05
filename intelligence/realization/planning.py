@@ -45,9 +45,7 @@ def _step_id(target: RealizationTarget, family: ArtifactFamily) -> str:
     return f"URI-STEP-{target.path_slug.upper()}-{family.value.upper()}"
 
 
-def _dependency_universes(
-    intake: KnowledgeIntake, target: RealizationTarget
-) -> tuple[str, ...]:
+def _dependency_universes(intake: KnowledgeIntake, target: RealizationTarget) -> tuple[str, ...]:
     """Universes this target depends on, read from canonical dependency links.
 
     A target depends on another universe when any of its objects declares a
@@ -150,9 +148,7 @@ class PlanningEngine:
     def _steps(self, intake: KnowledgeIntake) -> tuple[PlanStep, ...]:
         """One step per (target × family), wired to its intra- and inter-target deps."""
         by_universe = {t.universe: t for t in intake.targets}
-        upstream = {
-            t.universe: _dependency_universes(intake, t) for t in intake.targets
-        }
+        upstream = {t.universe: _dependency_universes(intake, t) for t in intake.targets}
         steps: list[PlanStep] = []
         for target in intake.targets:
             for family in self.families:
@@ -178,9 +174,7 @@ class PlanningEngine:
                 )
         return tuple(sorted(steps, key=lambda s: s.step_id))
 
-    def coverage_gaps(
-        self, intake: KnowledgeIntake, steps: Sequence[PlanStep]
-    ) -> tuple[str, ...]:
+    def coverage_gaps(self, intake: KnowledgeIntake, steps: Sequence[PlanStep]) -> tuple[str, ...]:
         """Realizable canonical objects that no plan step claims (reported, never hidden)."""
         claimed = {cko for step in steps for cko in step.source_ckos}
         return dedupe(cko for cko in intake.realizable_ids() if cko not in claimed)

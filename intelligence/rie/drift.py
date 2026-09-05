@@ -65,8 +65,8 @@ def _impl_drift(cur: dict[str, Any], prior: dict[str, Any]) -> list[dict[str, st
 
 
 def _cert_drift(cur: dict[str, Any], prior: dict[str, Any]) -> list[dict[str, Any]]:
-    cnow = (cur.get("health", {}).get("certification", {}) or {})
-    cwas = (prior.get("health", {}).get("certification", {}) or {})
+    cnow = cur.get("health", {}).get("certification", {}) or {}
+    cwas = prior.get("health", {}).get("certification", {}) or {}
     drift = []
     for key in ("digital_twin_verdict", "domains"):
         if cnow.get(key) != cwas.get(key):
@@ -92,11 +92,13 @@ def _duplicates(model: dict[str, Any]) -> list[dict[str, Any]]:
     findings = []
     for short, names in sorted(by_name.items()):
         if len(names) > 1:
-            findings.append({
-                "name": short,
-                "locations": sorted(names),
-                "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
-            })
+            findings.append(
+                {
+                    "name": short,
+                    "locations": sorted(names),
+                    "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+                }
+            )
     return findings
 
 

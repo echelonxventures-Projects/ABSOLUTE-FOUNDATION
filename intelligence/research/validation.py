@@ -151,8 +151,11 @@ class ResearchValidationEngine:
             "Contribution areas reconcile",
             "Contribution area counts must sum to the declared concept total.",
             int(declared) == summed,
-            detail={"declared_total": declared, "summed": summed,
-                    "areas": len(self.corpus.contributions)},
+            detail={
+                "declared_total": declared,
+                "summed": summed,
+                "areas": len(self.corpus.contributions),
+            },
         )
 
     def _rv08(self) -> Check:
@@ -197,8 +200,10 @@ class ResearchValidationEngine:
             "No research record may carry canonical prose; canonical content is "
             "referenced and materialised only at render time (UCKO-PRIN-0001).",
             not violations,
-            detail={"violations": violations, "prose_shingles_indexed":
-                    len(self.resolver.prose_index())},
+            detail={
+                "violations": violations,
+                "prose_shingles_indexed": len(self.resolver.prose_index()),
+            },
         )
 
     def _rv10(self) -> Check:
@@ -270,9 +275,7 @@ class ResearchValidationEngine:
             for c in self.corpus.contributions
             if c.contribution_id not in member_ids
         ]
-        orphans += [
-            s.standard_id for s in self.corpus.standards if s.standard_id not in member_ids
-        ]
+        orphans += [s.standard_id for s in self.corpus.standards if s.standard_id not in member_ids]
         return Check(
             "RV-13",
             "No orphan research record",

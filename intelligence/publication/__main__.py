@@ -125,8 +125,7 @@ def main(argv: list[str] | None = None) -> int:
     parser_generate = sub.add_parser("generate", help="render a single publication to stdout")
     parser_generate.add_argument(
         "format",
-        help="format id or named deliverable "
-             f"({', '.join(sorted(NAMED_DELIVERABLES))})",
+        help="format id or named deliverable " f"({', '.join(sorted(NAMED_DELIVERABLES))})",
     )
     parser_generate.set_defaults(func=_cmd_generate)
     args = parser.parse_args(argv)

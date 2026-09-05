@@ -250,9 +250,7 @@ class RealizationGovernor:
 
     @staticmethod
     def _knowledge_integrity(intake: KnowledgeIntake) -> GateOutcome:
-        failures = [
-            str(record["id"]) for record in intake.integrity if not record["verified"]
-        ]
+        failures = [str(record["id"]) for record in intake.integrity if not record["verified"]]
         return GateOutcome.of(
             "KNOWLEDGE_INTEGRITY",
             checked=len(intake.integrity),
@@ -261,15 +259,11 @@ class RealizationGovernor:
         )
 
     @staticmethod
-    def _knowledge_authority(
-        intake: KnowledgeIntake, plan: RealizationPlan
-    ) -> GateOutcome:
+    def _knowledge_authority(intake: KnowledgeIntake, plan: RealizationPlan) -> GateOutcome:
         failures = []
         for target in plan.targets:
             active = [
-                cko_id
-                for cko_id in target.cko_ids
-                if intake.base.require_object(cko_id).is_active
+                cko_id for cko_id in target.cko_ids if intake.base.require_object(cko_id).is_active
             ]
             if not active:
                 failures.append(target.target_id)

@@ -229,20 +229,12 @@ class PublicationGenerator:
 
     def _subject_refs(self, scope: PublicationScope) -> tuple[str, ...]:
         return tuple(
-            sorted(
-                {
-                    c.subject_ref
-                    for c in scope.claims
-                    if self.resolver.exists(c.subject_ref)
-                }
-            )
+            sorted({c.subject_ref for c in scope.claims if self.resolver.exists(c.subject_ref)})
         )
 
     # -- generation ------------------------------------------------------------
 
-    def build(
-        self, format_id: str, scope: PublicationScope | None = None
-    ) -> PublicationSpec:
+    def build(self, format_id: str, scope: PublicationScope | None = None) -> PublicationSpec:
         """Build the specification for one publication in one registered format."""
         descriptor = self.formats.get(format_id)
         target_scope = scope or PublicationScope.whole_corpus(self.corpus)

@@ -79,9 +79,7 @@ def _cmd_generate(args: argparse.Namespace) -> int:
         payload["contents"] = {
             artifact.relative_path: artifact.content for artifact in manifest.artifacts
         }
-    payload["determinism"] = engine.generator.verify_determinism(
-        intake, plan, composition
-    )
+    payload["determinism"] = engine.generator.verify_determinism(intake, plan, composition)
     _emit(payload)
     return 0 if payload["determinism"]["deterministic"] else 1
 
@@ -160,9 +158,7 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument("--repo", help="repository root (default: auto-resolve)")
-    parser.add_argument(
-        "--knowledge-dir", help="canonical knowledge store directory (read-only)"
-    )
+    parser.add_argument("--knowledge-dir", help="canonical knowledge store directory (read-only)")
     parser.add_argument(
         "--artifact-root", help="generated-artifact root (default: <repo>/realization)"
     )
@@ -183,9 +179,7 @@ def build_parser() -> argparse.ArgumentParser:
         node = sub.add_parser(name, help=help_text)
         node.set_defaults(func=handler)
 
-    node_generate = sub.add_parser(
-        "generate", help="generate artifacts in memory without writing"
-    )
+    node_generate = sub.add_parser("generate", help="generate artifacts in memory without writing")
     node_generate.add_argument(
         "--show-content",
         action="store_true",

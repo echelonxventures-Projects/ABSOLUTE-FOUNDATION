@@ -88,9 +88,7 @@ class TraceLedger:
             "knowledge_seal": self.knowledge_seal,
             "edge_count": len(self.edges),
             "relations": self.relations(),
-            "spine": [
-                {"from": src, "relation": rel.value, "to": dst} for src, rel, dst in SPINE
-            ],
+            "spine": [{"from": src, "relation": rel.value, "to": dst} for src, rel, dst in SPINE],
             "forward_gaps": list(self.forward_gaps),
             "orphan_artifacts": list(self.orphan_artifacts),
             "unmaterialized": list(self.unmaterialized),
@@ -167,9 +165,7 @@ class TraceabilityEngine:
                 )
 
         return TraceLedger(
-            edges=tuple(
-                sorted(edges, key=lambda e: (e.relation, e.source, e.target))
-            ),
+            edges=tuple(sorted(edges, key=lambda e: (e.relation, e.source, e.target))),
             knowledge_seal=intake.knowledge_seal,
             forward_gaps=self._forward_gaps(intake, manifest),
             orphan_artifacts=self._orphans(manifest),
@@ -179,18 +175,12 @@ class TraceabilityEngine:
     # -- closure checks -------------------------------------------------------
 
     @staticmethod
-    def _forward_gaps(
-        intake: KnowledgeIntake, manifest: GenerationManifest
-    ) -> tuple[str, ...]:
+    def _forward_gaps(intake: KnowledgeIntake, manifest: GenerationManifest) -> tuple[str, ...]:
         """Realizable canonical objects that no artifact cites as a source."""
         realized = {
-            cko_id
-            for artifact in manifest.artifacts
-            for cko_id in artifact.provenance.source_ckos
+            cko_id for artifact in manifest.artifacts for cko_id in artifact.provenance.source_ckos
         }
-        return tuple(
-            sorted(cko for cko in intake.realizable_ids() if cko not in realized)
-        )
+        return tuple(sorted(cko for cko in intake.realizable_ids() if cko not in realized))
 
     @staticmethod
     def _orphans(manifest: GenerationManifest) -> tuple[str, ...]:
@@ -212,9 +202,7 @@ class TraceabilityEngine:
         """Generated artifacts that never reached a file (skipped when no pass ran)."""
         if record is None or record.dry_run:
             return ()
-        return tuple(
-            sorted(path for path in manifest.paths() if path not in materialized)
-        )
+        return tuple(sorted(path for path in manifest.paths() if path not in materialized))
 
 
 def build_trace(
@@ -236,9 +224,7 @@ def coverage_summary(ledger: TraceLedger, intake: KnowledgeIntake) -> Mapping[st
         "realizable": len(realizable),
         "realized": len(realized),
         "gaps": len(ledger.forward_gaps),
-        "coverage_pct": round(100.0 * len(realized) / len(realizable), 2)
-        if realizable
-        else 0.0,
+        "coverage_pct": round(100.0 * len(realized) / len(realizable), 2) if realizable else 0.0,
         "closed": ledger.closed,
     }
 

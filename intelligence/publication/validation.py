@@ -1,20 +1,20 @@
 """Publication Validation — fourteen fail-closed obligations over the generated set.
 
-  PV-01  every publication names a registered format
-  PV-02  every required section of every format is satisfied with resolved content
-  PV-03  every reference in every publication resolves — nothing is unresolved
-  PV-04  ZERO DUPLICATION: no publication specification carries canonical prose
-  PV-05  every rendered block carries complete provenance (locator + content hash)
-  PV-06  every citation traces to a registered research record
-  PV-07  no publication repeats a reference across two of its own sections
-  PV-08  composition and rendering are deterministic (byte-identical on repeat)
-  PV-09  every format's renderer is registered
-  PV-10  no empty section is rendered — an unfillable optional section is omitted
-  PV-11  every rendered document carries the generated-artifact banner
-  PV-12  the publication registry chain recomputes and Knowledge-Once holds
-  PV-13  citation records are shared, not duplicated, across publications
-  PV-14  the format space is open — a format registered at runtime generates and
-         validates with no code change (executed as a live probe, not asserted)
+PV-01  every publication names a registered format
+PV-02  every required section of every format is satisfied with resolved content
+PV-03  every reference in every publication resolves — nothing is unresolved
+PV-04  ZERO DUPLICATION: no publication specification carries canonical prose
+PV-05  every rendered block carries complete provenance (locator + content hash)
+PV-06  every citation traces to a registered research record
+PV-07  no publication repeats a reference across two of its own sections
+PV-08  composition and rendering are deterministic (byte-identical on repeat)
+PV-09  every format's renderer is registered
+PV-10  no empty section is rendered — an unfillable optional section is omitted
+PV-11  every rendered document carries the generated-artifact banner
+PV-12  the publication registry chain recomputes and Knowledge-Once holds
+PV-13  citation records are shared, not duplicated, across publications
+PV-14  the format space is open — a format registered at runtime generates and
+       validates with no code change (executed as a live probe, not asserted)
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ from intelligence.research.registry import ResearchRegistry
 _HEADING_MARKUP: dict[str, tuple[str, ...]] = {
     "markdown": ("## {heading}",),
     "latex": (r"\section*{{{heading}}}",),
-    "html": ('<section><h2>{heading}</h2><ul>', "<section><h2>{heading}</h2>"),
+    "html": ("<section><h2>{heading}</h2><ul>", "<section><h2>{heading}</h2>"),
     "plaintext": ("{upper}",),
 }
 
@@ -256,8 +256,9 @@ class PublicationValidationEngine:
             for block in document.blocks:
                 if block.structural or not block.is_empty or not block.heading:
                     continue
-                if any(marker in lines for marker in _heading_markers(document.renderer,
-                                                                      block.heading)):
+                if any(
+                    marker in lines for marker in _heading_markers(document.renderer, block.heading)
+                ):
                     rendered_empty.append(
                         {"format_id": document.format_id, "section": block.section_key}
                     )

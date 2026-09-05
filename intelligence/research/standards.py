@@ -117,8 +117,11 @@ def analyse_standard(
         + [make_ref("cko", ref, "statement") for ref in obj.dependencies if ref]
     )
     declared = sorted_unique(
-        [*obj.evidence, *( (obj.certification,) if obj.certification else ()),
-         *((obj.validation,) if obj.validation else ())]
+        [
+            *obj.evidence,
+            *((obj.certification,) if obj.certification else ()),
+            *((obj.validation,) if obj.validation else ()),
+        ]
     )
     resolved = tuple(r for r in declared if _resolves(r, resolver))
     unresolved = tuple(r for r in declared if r not in resolved)
@@ -150,9 +153,7 @@ def analyse_standard(
 
 def analyse_all(resolver: CanonicalKnowledgeResolver) -> tuple[StandardsRecord, ...]:
     return tuple(
-        analyse_standard(obj, resolver)
-        for obj in resolver.objects()
-        if is_standards_bearing(obj)
+        analyse_standard(obj, resolver) for obj in resolver.objects() if is_standards_bearing(obj)
     )
 
 
@@ -233,7 +234,7 @@ class StandardsAnalysisEngine:
             "programme_instruments": self.programme_instruments(),
             "external_cross_reference": {
                 "classification": "CURATED — non-authoritative reading aid; asserts no "
-                                  "conformance to, or certification by, any external body",
+                "conformance to, or certification by, any external body",
                 "table": self.external_cross_reference(),
             },
             "standards": [r.to_dict() for r in self.corpus.standards],
@@ -245,8 +246,9 @@ def curated_overlay() -> Mapping[str, Any]:
     return {
         "classification": "CURATED",
         "authority": "NONE — reading aid only",
-        "external_standard_families": {k: list(v) for k, v in sorted(
-            EXTERNAL_STANDARD_FAMILIES.items())},
+        "external_standard_families": {
+            k: list(v) for k, v in sorted(EXTERNAL_STANDARD_FAMILIES.items())
+        },
         "integrity_standard_families": list(INTEGRITY_STANDARD_FAMILIES),
     }
 

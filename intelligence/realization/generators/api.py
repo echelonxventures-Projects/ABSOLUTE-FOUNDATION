@@ -157,9 +157,7 @@ class ApiGenerator(Generator):
             if op.get("response_schema") is not None:
                 inner = op["response_schema"]
                 success = (
-                    {"type": "array", "items": inner}
-                    if op.get("response_is_array")
-                    else inner
+                    {"type": "array", "items": inner} if op.get("response_is_array") else inner
                 )
             elif op["collection"]:
                 success = {"type": "array", "items": record_schema}
@@ -177,9 +175,7 @@ class ApiGenerator(Generator):
                     "404": {
                         "description": "No such canonical object in this universe.",
                         "content": {
-                            "application/json": {
-                                "schema": {"$ref": "#/components/schemas/Error"}
-                            }
+                            "application/json": {"schema": {"$ref": "#/components/schemas/Error"}}
                         },
                     },
                 },
@@ -264,8 +260,7 @@ class ApiGenerator(Generator):
         target = context.target
         lines = self.provenance_comment(context, "#")
         lines += [
-            '"""Read-only route table for the '
-            f'{target.universe} canonical knowledge universe.',
+            '"""Read-only route table for the ' f"{target.universe} canonical knowledge universe.",
             "",
             "Framework-neutral: ROUTES maps (method, path template) to a handler that takes",
             "the canonical knowledge base and the resolved path parameters. Bind it to any",
@@ -295,7 +290,7 @@ class ApiGenerator(Generator):
                 f'        "cko_id": "{inv.cko_id}",',
                 f'        "kind": "{inv.kind}",',
                 f'        "authority": "{inv.authority}",',
-                f"        \"statement\": {inv.statement!r},",
+                f'        "statement": {inv.statement!r},',
                 "    },",
             ]
         lines += [
@@ -362,16 +357,14 @@ class ApiGenerator(Generator):
         ]
         for op in self._operations(context):
             handler = op["operation_id"]
-            lines.append(
-                f'    ("{op["method"].upper()}", "{op["path"]}"): {handler},'
-            )
+            lines.append(f'    ("{op["method"].upper()}", "{op["path"]}"): {handler},')
         lines += [
             "}",
             "",
             "",
             "def dispatch(method: str, template: str, base: Any, **params: str) -> Any:",
             '    """Invoke the handler bound to (method, template). Read-only by design."""',
-            '    key = (method.upper(), template)',
+            "    key = (method.upper(), template)",
             "    handler = ROUTES.get(key)",
             "    if handler is None:",
             "        from engine.knowledge.errors import KnowledgeNotFoundError",
@@ -394,9 +387,7 @@ class ApiGenerator(Generator):
             '    "dispatch",',
             '    "load_base",',
         ]
-        lines += [
-            f'    "{op["operation_id"]}",' for op in self._operations(context)
-        ]
+        lines += [f'    "{op["operation_id"]}",' for op in self._operations(context)]
         lines.append("]")
         lines.append("")
         return lines

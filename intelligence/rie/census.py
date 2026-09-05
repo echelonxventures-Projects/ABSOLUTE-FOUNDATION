@@ -36,9 +36,7 @@ def _iter_py(reader: EvidenceReader, root: str) -> list[Path]:
     if tracked:
         return [base / p for p in tracked]
     # Fallback: deterministic filesystem walk.
-    return sorted(
-        p for p in (base / root).rglob("*.py") if "__pycache__" not in p.parts
-    )
+    return sorted(p for p in (base / root).rglob("*.py") if "__pycache__" not in p.parts)
 
 
 def census_for(reader: EvidenceReader, root: str) -> RootCensus:

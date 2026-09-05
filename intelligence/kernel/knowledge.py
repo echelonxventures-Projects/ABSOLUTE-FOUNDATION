@@ -78,34 +78,90 @@ CONCEPT_FIELDS: frozenset[str] = frozenset(
 #: THE declared derived-measurement table. Every ``metric:`` reference resolves
 #: here; adding a measurement is a data edit and requires NO engine change.
 METRIC_DECLARATION: tuple[dict[str, Any], ...] = (
-    {"key": "knowledge.objects", "surface": "canonical-knowledge", "path": ("count",),
-     "unit": "canonical knowledge objects"},
-    {"key": "knowledge.decisions", "surface": "canonical-decisions", "path": ("count",),
-     "unit": "decision records"},
-    {"key": "concepts.total", "surface": "concept-closure", "path": ("concept_total",),
-     "unit": "concepts"},
-    {"key": "concepts.gaps", "surface": "concept-closure", "path": ("gap_total",),
-     "unit": "open concept gaps"},
-    {"key": "concepts.determination", "surface": "concept-closure", "path": ("determination",),
-     "unit": "closure determination"},
-    {"key": "corpus.artifacts", "surface": "corpus-control-tower",
-     "path": ("portfolio", "total_artifacts"), "unit": "artifacts"},
-    {"key": "corpus.pages", "surface": "corpus-control-tower",
-     "path": ("portfolio", "total_pages"), "unit": "pages"},
-    {"key": "corpus.volumes", "surface": "corpus-control-tower",
-     "path": ("portfolio", "total_volumes"), "unit": "volumes"},
-    {"key": "corpus.edges", "surface": "corpus-control-tower",
-     "path": ("portfolio", "total_edges"), "unit": "graph edges"},
-    {"key": "graph.relationships", "surface": "concept-graph", "path": ("count",),
-     "unit": "typed relationships"},
-    {"key": "certification.verdict", "surface": "corpus-certification", "path": ("verdict",),
-     "unit": "certification verdict"},
-    {"key": "certification.domains_passed", "surface": "corpus-certification",
-     "path": ("domains_passed",), "unit": "certified domains"},
-    {"key": "certification.domains_total", "surface": "corpus-certification",
-     "path": ("domains_total",), "unit": "certification domains"},
-    {"key": "certification.standard", "surface": "corpus-certification", "path": ("standard",),
-     "unit": "certification standard"},
+    {
+        "key": "knowledge.objects",
+        "surface": "canonical-knowledge",
+        "path": ("count",),
+        "unit": "canonical knowledge objects",
+    },
+    {
+        "key": "knowledge.decisions",
+        "surface": "canonical-decisions",
+        "path": ("count",),
+        "unit": "decision records",
+    },
+    {
+        "key": "concepts.total",
+        "surface": "concept-closure",
+        "path": ("concept_total",),
+        "unit": "concepts",
+    },
+    {
+        "key": "concepts.gaps",
+        "surface": "concept-closure",
+        "path": ("gap_total",),
+        "unit": "open concept gaps",
+    },
+    {
+        "key": "concepts.determination",
+        "surface": "concept-closure",
+        "path": ("determination",),
+        "unit": "closure determination",
+    },
+    {
+        "key": "corpus.artifacts",
+        "surface": "corpus-control-tower",
+        "path": ("portfolio", "total_artifacts"),
+        "unit": "artifacts",
+    },
+    {
+        "key": "corpus.pages",
+        "surface": "corpus-control-tower",
+        "path": ("portfolio", "total_pages"),
+        "unit": "pages",
+    },
+    {
+        "key": "corpus.volumes",
+        "surface": "corpus-control-tower",
+        "path": ("portfolio", "total_volumes"),
+        "unit": "volumes",
+    },
+    {
+        "key": "corpus.edges",
+        "surface": "corpus-control-tower",
+        "path": ("portfolio", "total_edges"),
+        "unit": "graph edges",
+    },
+    {
+        "key": "graph.relationships",
+        "surface": "concept-graph",
+        "path": ("count",),
+        "unit": "typed relationships",
+    },
+    {
+        "key": "certification.verdict",
+        "surface": "corpus-certification",
+        "path": ("verdict",),
+        "unit": "certification verdict",
+    },
+    {
+        "key": "certification.domains_passed",
+        "surface": "corpus-certification",
+        "path": ("domains_passed",),
+        "unit": "certified domains",
+    },
+    {
+        "key": "certification.domains_total",
+        "surface": "corpus-certification",
+        "path": ("domains_total",),
+        "unit": "certification domains",
+    },
+    {
+        "key": "certification.standard",
+        "surface": "corpus-certification",
+        "path": ("standard",),
+        "unit": "certification standard",
+    },
 )
 
 #: Coverage attributes resolvable through the ``coverage:`` space. Coverage is read
@@ -241,8 +297,9 @@ class CanonicalKnowledgeResolver:
     def _resolve_cko(self, ref: str, target: str, field: str) -> ResolvedContent:
         obj = self.base.get_object(target)
         if obj is None:
-            raise UnresolvedReferenceError("canonical knowledge object not found", ref=ref,
-                                           cko_id=target)
+            raise UnresolvedReferenceError(
+                "canonical knowledge object not found", ref=ref, cko_id=target
+            )
         return self._field_content(
             ref=ref,
             space="cko",
@@ -257,8 +314,7 @@ class CanonicalKnowledgeResolver:
     def _resolve_decision(self, ref: str, target: str, field: str) -> ResolvedContent:
         dec = self.base.get_decision(target)
         if dec is None:
-            raise UnresolvedReferenceError("decision record not found", ref=ref,
-                                           decision_id=target)
+            raise UnresolvedReferenceError("decision record not found", ref=ref, decision_id=target)
         return self._field_content(
             ref=ref,
             space="decision",
@@ -295,57 +351,93 @@ class CanonicalKnowledgeResolver:
         if field in lists:
             items = [str(v) for v in (value or []) if str(v)]
             if not items:
-                raise UnresolvedReferenceError("referenced list field is empty", ref=ref,
-                                               field=field, target=target)
-            return ResolvedContent(ref, space, target, field, "\n".join(items), "list",
-                                   locator, authority, content_sha256)
+                raise UnresolvedReferenceError(
+                    "referenced list field is empty", ref=ref, field=field, target=target
+                )
+            return ResolvedContent(
+                ref,
+                space,
+                target,
+                field,
+                "\n".join(items),
+                "list",
+                locator,
+                authority,
+                content_sha256,
+            )
         text = str(value or "").strip()
         if not text:
-            raise UnresolvedReferenceError("referenced prose field is empty", ref=ref,
-                                           field=field, target=target)
-        return ResolvedContent(ref, space, target, field, text, "prose", locator, authority,
-                               content_sha256)
+            raise UnresolvedReferenceError(
+                "referenced prose field is empty", ref=ref, field=field, target=target
+            )
+        return ResolvedContent(
+            ref, space, target, field, text, "prose", locator, authority, content_sha256
+        )
 
     def _resolve_concept(self, ref: str, target: str, field: str) -> ResolvedContent:
         row = self.concepts().get(target)
         if row is None:
-            raise UnresolvedReferenceError("concept not found in the concept closure", ref=ref,
-                                           concept=target)
+            raise UnresolvedReferenceError(
+                "concept not found in the concept closure", ref=ref, concept=target
+            )
         if field not in CONCEPT_FIELDS:
-            raise UnresolvedReferenceError("field is not resolvable on a concept", ref=ref,
-                                           field=field, allowed=sorted(CONCEPT_FIELDS))
+            raise UnresolvedReferenceError(
+                "field is not resolvable on a concept",
+                ref=ref,
+                field=field,
+                allowed=sorted(CONCEPT_FIELDS),
+            )
         if field not in row:
-            raise UnresolvedReferenceError("concept record has no such field", ref=ref,
-                                           field=field, concept=target)
+            raise UnresolvedReferenceError(
+                "concept record has no such field", ref=ref, field=field, concept=target
+            )
         surface = self.substrate.surface("concept-closure")
         return ResolvedContent(
-            ref, "concept", target, field, str(row[field]), "label",
-            f"{surface.locator}#{target}", surface.authority, surface.content_sha256,
+            ref,
+            "concept",
+            target,
+            field,
+            str(row[field]),
+            "label",
+            f"{surface.locator}#{target}",
+            surface.authority,
+            surface.content_sha256,
         )
 
     def _resolve_metric(self, ref: str, target: str) -> ResolvedContent:
         declaration = _METRICS.get(target)
         if declaration is None:
-            raise UnresolvedReferenceError("metric is not declared", ref=ref, metric=target,
-                                           allowed=sorted(_METRICS))
+            raise UnresolvedReferenceError(
+                "metric is not declared", ref=ref, metric=target, allowed=sorted(_METRICS)
+            )
         surface = self.substrate.surface(declaration["surface"])
         if not surface.available:
             raise UnresolvedReferenceError(
                 "metric substrate surface is unavailable — value may not be invented",
-                ref=ref, metric=target, locator=surface.locator,
+                ref=ref,
+                metric=target,
+                locator=surface.locator,
             )
         node: Any = self.substrate.payload(declaration["surface"])
         for step in declaration["path"]:
             if not isinstance(node, Mapping) or step not in node:
-                raise UnresolvedReferenceError("metric path does not resolve", ref=ref,
-                                               metric=target, step=step)
+                raise UnresolvedReferenceError(
+                    "metric path does not resolve", ref=ref, metric=target, step=step
+                )
             node = node[step]
         if isinstance(node, dict | list):
-            raise UnresolvedReferenceError("metric path resolves to a container, not a value",
-                                           ref=ref, metric=target)
+            raise UnresolvedReferenceError(
+                "metric path resolves to a container, not a value", ref=ref, metric=target
+            )
         return ResolvedContent(
-            ref, "metric", target, declaration["path"][-1], str(node), "scalar",
-            f"{surface.locator}#{'.'.join(declaration['path'])}", surface.authority,
+            ref,
+            "metric",
+            target,
+            declaration["path"][-1],
+            str(node),
+            "scalar",
+            f"{surface.locator}#{'.'.join(declaration['path'])}",
+            surface.authority,
             surface.content_sha256,
         )
 
@@ -361,19 +453,30 @@ class CanonicalKnowledgeResolver:
 
     def _resolve_coverage(self, ref: str, target: str) -> ResolvedContent:
         if target not in COVERAGE_ATTRIBUTES:
-            raise UnresolvedReferenceError("coverage attribute is not declared", ref=ref,
-                                           attribute=target,
-                                           allowed=sorted(COVERAGE_ATTRIBUTES))
+            raise UnresolvedReferenceError(
+                "coverage attribute is not declared",
+                ref=ref,
+                attribute=target,
+                allowed=sorted(COVERAGE_ATTRIBUTES),
+            )
         coverage = self.coverage()
         if coverage is None or not coverage.available:
             raise UnresolvedReferenceError(
-                "coverage evidence is unavailable — value may not be invented", ref=ref,
+                "coverage evidence is unavailable — value may not be invented",
+                ref=ref,
                 attribute=target,
             )
         path = self.substrate.config.coverage_xml
         return ResolvedContent(
-            ref, "coverage", target, target, str(getattr(coverage, target)), "scalar",
-            self.substrate.config.rel(path), "GENERATED", sha256_file(path),
+            ref,
+            "coverage",
+            target,
+            target,
+            str(getattr(coverage, target)),
+            "scalar",
+            self.substrate.config.rel(path),
+            "GENERATED",
+            sha256_file(path),
         )
 
     # -- metrics ---------------------------------------------------------------

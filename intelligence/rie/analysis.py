@@ -59,7 +59,9 @@ def repository_health(reader: EvidenceReader, census: dict[str, RootCensus]) -> 
             "twin_certified": cert.get("verdict") == "CERTIFIED",
             "corpus_present": bool(portfolio.get("total_artifacts")),
         },
-        "overall": "HEALTHY" if (cert.get("verdict") == "CERTIFIED" and portfolio.get("total_artifacts")) else "INDETERMINATE",
+        "overall": "HEALTHY"
+        if (cert.get("verdict") == "CERTIFIED" and portfolio.get("total_artifacts"))
+        else "INDETERMINATE",
     }
 
 
@@ -136,30 +138,50 @@ def execution_frontier(reader: EvidenceReader) -> dict[str, Any]:
         "single_active_frontier": None,
     }
     if ec3_admitted:
-        frontier.update({
-            "next_executable_capability": "EC-3 Band 10 (Data) realization",
-            "why": "CIOA/lane authority admitted Band 10 as RUNNABLE root; EC-1/EC-2 predecessors CERTIFIED",
-            "ready": ["EC-3 Band 10 (Data) class-I realization"],
-            "blocked": [
-                {"capability": "EC-3 Bands 11/12/13", "blocked_by": "sequential band realization (await Band 10)"},
-                {"capability": "Constitutional finality (RAT-01..10)", "blocked_by": "DR-RAT-11 (exogenous)"},
-            ],
-            "critical_path": ["Band 10 Data", "Band 11 Service", "Band 12 Application",
-                              "Band 13 Infrastructure", "EC-3 go-live + closure"],
-            "single_active_frontier": "EC-3 Band 10 (Data)",
-            "evidence": [cfg.rel(cfg.repo_root / d) for d in cfg.ec3_determinations
-                         if (cfg.repo_root / d).exists()],
-            "data_program_artifacts": data_prog.get("artifact_count"),
-        })
+        frontier.update(
+            {
+                "next_executable_capability": "EC-3 Band 10 (Data) realization",
+                "why": "CIOA/lane authority admitted Band 10 as RUNNABLE root; EC-1/EC-2 predecessors CERTIFIED",
+                "ready": ["EC-3 Band 10 (Data) class-I realization"],
+                "blocked": [
+                    {
+                        "capability": "EC-3 Bands 11/12/13",
+                        "blocked_by": "sequential band realization (await Band 10)",
+                    },
+                    {
+                        "capability": "Constitutional finality (RAT-01..10)",
+                        "blocked_by": "DR-RAT-11 (exogenous)",
+                    },
+                ],
+                "critical_path": [
+                    "Band 10 Data",
+                    "Band 11 Service",
+                    "Band 12 Application",
+                    "Band 13 Infrastructure",
+                    "EC-3 go-live + closure",
+                ],
+                "single_active_frontier": "EC-3 Band 10 (Data)",
+                "evidence": [
+                    cfg.rel(cfg.repo_root / d)
+                    for d in cfg.ec3_determinations
+                    if (cfg.repo_root / d).exists()
+                ],
+                "data_program_artifacts": data_prog.get("artifact_count"),
+            }
+        )
     return frontier
 
 
-def digital_twin_snapshot(reader: EvidenceReader, health: dict[str, Any], progress_rep: dict[str, Any]) -> dict[str, Any]:
+def digital_twin_snapshot(
+    reader: EvidenceReader, health: dict[str, Any], progress_rep: dict[str, Any]
+) -> dict[str, Any]:
     cert = reader.certification()
     return {
         "note": "Projection view; EXTENDS 00-BOOK/DATA/twin.json — no second twin store.",
         "repository_health": health["overall"],
-        "certification_health": "HEALTHY-ENGINEERING" if cert.get("verdict") == "CERTIFIED" else "INDETERMINATE",
+        "certification_health": "HEALTHY-ENGINEERING"
+        if cert.get("verdict") == "CERTIFIED"
+        else "INDETERMINATE",
         "constitutional_finality": "BLOCKED (DR-RAT-11)",
         # UCOS-CL-005: was `"HEALTHY-UNIT · HIGHER-ORDER MISSING" if coverage_full else
         # "PARTIAL"`, i.e. a canonical field switched by coverage.xml. It is now derived
@@ -182,8 +204,11 @@ def _dimension_status(reader: EvidenceReader, name: str) -> str:
 
 
 def aeos_readiness(reader: EvidenceReader, capabilities: list[dict[str, Any]]) -> dict[str, Any]:
-    spec_only = [c for c in capabilities if c.get("implementation_status") == "PLANNED"
-                 and c.get("category") == "orchestration_spec"]
+    spec_only = [
+        c
+        for c in capabilities
+        if c.get("implementation_status") == "PLANNED" and c.get("category") == "orchestration_spec"
+    ]
     return {
         "verdict": "FOUNDATION-READY — AEOS may begin as a separately authorized program; NOT begun here.",
         "ready_because": [
@@ -194,7 +219,8 @@ def aeos_readiness(reader: EvidenceReader, capabilities: list[dict[str, Any]]) -
         ],
         "not_ready_because": [
             f"{c['canonical_name']} is specification-only (no executable code)." for c in spec_only
-        ] + [f"{g['id']} {g['missing']} not implemented." for g in KNOWN_SPINE_GAPS],
+        ]
+        + [f"{g['id']} {g['missing']} not implemented." for g in KNOWN_SPINE_GAPS],
         "authorization_required": "CIOA/lane authority + GOV-004 (this engine authorizes nothing).",
         "known_spine_gaps": KNOWN_SPINE_GAPS,
     }

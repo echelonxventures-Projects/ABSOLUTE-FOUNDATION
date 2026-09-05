@@ -98,12 +98,8 @@ class TestGenerator(Generator):
         lines += [
             ")",
             "CANONICAL_KINDS = (" + "".join(f'"{k}", ' for k in target.kinds) + ")",
-            "CANONICAL_LAYERS = ("
-            + "".join(f'"{a}", ' for a in target.authorities)
-            + ")",
-            "INVARIANT_IDS = ("
-            + "".join(f'"{inv.cko_id}", ' for inv in target.invariants)
-            + ")",
+            "CANONICAL_LAYERS = (" + "".join(f'"{a}", ' for a in target.authorities) + ")",
+            "INVARIANT_IDS = (" + "".join(f'"{inv.cko_id}", ' for inv in target.invariants) + ")",
             "EXPECTED_ARTIFACTS = (",
         ]
         lines += [f'    "{path}",' for path in self._expected_artifacts(context)]
@@ -179,7 +175,7 @@ class TestGenerator(Generator):
             '@pytest.mark.parametrize("relative", EXPECTED_ARTIFACTS)',
             "def test_expected_artifact_exists(relative: str) -> None:",
             '    """Every artifact planned for this target was materialized."""',
-            "    assert (ROOT / relative).is_file(), f\"missing artifact: {relative}\"",
+            '    assert (ROOT / relative).is_file(), f"missing artifact: {relative}"',
             "",
             "",
             '@pytest.mark.parametrize("relative", [',

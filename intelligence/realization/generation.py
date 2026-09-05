@@ -83,9 +83,7 @@ class GenerationEngine:
                 composition_seal=composition.seal,
                 plan_id=composition.plan_id,
                 knowledge_seal=composition.knowledge_seal,
-                artifacts=tuple(
-                    sorted(artifacts, key=lambda art: art.relative_path)
-                ),
+                artifacts=tuple(sorted(artifacts, key=lambda art: art.relative_path)),
             )
             _logger.info(
                 "realization.generated",
@@ -183,9 +181,7 @@ class GenerationEngine:
         left = {a.relative_path: a.content_sha256 for a in first.artifacts}
         right = {a.relative_path: a.content_sha256 for a in second.artifacts}
         mismatches = sorted(
-            path
-            for path in set(left) | set(right)
-            if left.get(path) != right.get(path)
+            path for path in set(left) | set(right) if left.get(path) != right.get(path)
         )
         return {
             "deterministic": not mismatches and first.seal == second.seal,

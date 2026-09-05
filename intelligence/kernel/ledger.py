@@ -227,11 +227,14 @@ class LedgerRegistry:
     def require_integrity(self) -> None:
         report = self.verify()
         if not report["intact"]:
-            raise LedgerIntegrityError("ledger integrity check failed", **{
-                "registry": self.registry_id,
-                "broken_links": report["broken_links"],
-                "content_collisions": sorted(report["content_collisions"]),
-            })
+            raise LedgerIntegrityError(
+                "ledger integrity check failed",
+                **{
+                    "registry": self.registry_id,
+                    "broken_links": report["broken_links"],
+                    "content_collisions": sorted(report["content_collisions"]),
+                },
+            )
 
     # -- serialization ---------------------------------------------------------
 

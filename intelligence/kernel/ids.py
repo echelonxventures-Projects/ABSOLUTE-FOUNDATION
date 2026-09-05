@@ -131,8 +131,7 @@ def parse_class(identifier: str) -> ArtifactClass:
 def class_codes() -> dict[str, str]:
     """The artifact-class → id-code table (published in every catalog output)."""
     return {
-        cls.value: code
-        for cls, code in sorted(_CLASS_CODES.items(), key=lambda kv: kv[0].value)
+        cls.value: code for cls, code in sorted(_CLASS_CODES.items(), key=lambda kv: kv[0].value)
     }
 
 

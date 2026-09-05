@@ -85,19 +85,39 @@ EVIDENCE_PORTAL = "EVIDENCE-PORTAL.md"
 PAGES: tuple[tuple[str, str, str], ...] = (
     (HEALTH_PORTAL, "Health", "Corpus, code, and certification health of the repository."),
     (READINESS_PORTAL, "Readiness", "Fail-closed acceptance verdict + AEOS foundation readiness."),
-    (EXECUTION_PORTAL, "Execution", "Per-dimension execution status + the digital-twin projection."),
+    (
+        EXECUTION_PORTAL,
+        "Execution",
+        "Per-dimension execution status + the digital-twin projection.",
+    ),
     (ACCEPTANCE_PORTAL, "Acceptance", "The T3 acceptance decision: every gate + the certificate."),
-    (VALIDATION_PORTAL, "Validation", "Validation status: unit validation + per-dimension signals."),
-    (CERTIFICATION_PORTAL, "Certification", "Certification status: twin verdict, domains, code gate."),
+    (
+        VALIDATION_PORTAL,
+        "Validation",
+        "Validation status: unit validation + per-dimension signals.",
+    ),
+    (
+        CERTIFICATION_PORTAL,
+        "Certification",
+        "Certification status: twin verdict, domains, code gate.",
+    ),
     (FRONTIER_PORTAL, "Frontier", "The implementation frontier: next executable + critical path."),
-    (WORKSTREAMS_PORTAL, "Workstreams", "Active workstreams: ready, blocked, single active frontier."),
+    (
+        WORKSTREAMS_PORTAL,
+        "Workstreams",
+        "Active workstreams: ready, blocked, single active frontier.",
+    ),
     (DRIFT_PORTAL, "Drift", "Repository drift vs the last snapshot + duplicate/stale findings."),
     (COVERAGE_PORTAL, "Coverage", "Coverage of the substrate: line/branch %, tests, and LOC."),
     (FREEZE_PORTAL, "Freeze", "Architecture freeze readiness: the freeze gate + spine gaps."),
     (CAPABILITY_PORTAL, "Capability", "The realized capability catalog and its reuse policy."),
     (DEPENDENCY_PORTAL, "Dependency", "Program dependency graph + the layered architecture."),
     (SEARCH_PORTAL, "Search", "A deterministic, offline inverted index over the intelligence."),
-    (EVIDENCE_PORTAL, "Evidence", "The evidence fingerprint every number on every page derives from."),
+    (
+        EVIDENCE_PORTAL,
+        "Evidence",
+        "The evidence fingerprint every number on every page derives from.",
+    ),
 )
 
 #: Title lookup by filename (includes the portal home).
@@ -174,7 +194,10 @@ def build_acceptance_facts(model: Mapping[str, Any], repository_id: str) -> dict
     inventory = _inventory_facts(impl_caps)
     coverage = _coverage_facts(code)
     freeze_blockers = _freeze_blockers(aeos, spec_caps, twin, model.get("progress", {}))
-    warnings = [f"{d['dimension']} evidence is stale ({d['source']})" for d in drift.get("stale_evidence", [])]
+    warnings = [
+        f"{d['dimension']} evidence is stale ({d['source']})"
+        for d in drift.get("stale_evidence", [])
+    ]
 
     return {
         "repository_id": repository_id,
@@ -190,7 +213,9 @@ def build_acceptance_facts(model: Mapping[str, Any], repository_id: str) -> dict
         "integrations": [],
         "architecture_violations": [],
         "health": {
-            "critical_issues": [] if health.get("overall") == "HEALTHY" else ["repository health is INDETERMINATE"],
+            "critical_issues": []
+            if health.get("overall") == "HEALTHY"
+            else ["repository health is INDETERMINATE"],
             "warnings": sorted(set(warnings)),
         },
         "freeze_blockers": freeze_blockers,
@@ -594,7 +619,12 @@ class RepositoryIntelligencePortal:
     def validation(self) -> str:
         progress = self._model.get("progress", {})
         twin = self._model.get("digital_twin", {})
-        val_dims = ("unit_testing", "integration_testing", "functional_testing", "performance_testing")
+        val_dims = (
+            "unit_testing",
+            "integration_testing",
+            "functional_testing",
+            "performance_testing",
+        )
         per_dim = progress.get("per_dimension", {})
         body = [
             f"- **Unit validation:** {progress.get('unit_validation_pct')}%",
@@ -614,7 +644,9 @@ class RepositoryIntelligencePortal:
                 f"| {_flag(d.get('stale'))} | {d.get('reconciled_score')} |"
             )
         # Validation gate finding from the T3 decision (single source of the verdict).
-        finding = next((f for f in self._decision.findings if f.gate_id == "validation-passed"), None)
+        finding = next(
+            (f for f in self._decision.findings if f.gate_id == "validation-passed"), None
+        )
         if finding is not None:
             body.extend(
                 [
@@ -633,9 +665,12 @@ class RepositoryIntelligencePortal:
 
     def certification(self) -> str:
         cert = self._model.get("health", {}).get("certification", {})
-        finding = next((f for f in self._decision.findings if f.gate_id == "certification-passed"), None)
+        finding = next(
+            (f for f in self._decision.findings if f.gate_id == "certification-passed"), None
+        )
         certified = [
-            c for c in self._model.get("capabilities", [])
+            c
+            for c in self._model.get("capabilities", [])
             if c.get("implementation_status") == "CERTIFIED"
         ]
         body = [
@@ -729,7 +764,9 @@ class RepositoryIntelligencePortal:
             body.append("_No blocked workstreams._")
         if frontier.get("data_program_artifacts") is not None:
             body.append("")
-            body.append(f"- **Active-frontier program artifacts:** {frontier.get('data_program_artifacts')}")
+            body.append(
+                f"- **Active-frontier program artifacts:** {frontier.get('data_program_artifacts')}"
+            )
         return self._page(
             WORKSTREAMS_PORTAL,
             "Projected from UCOS-RIE-EXECUTION-FRONTIER (the single-active-frontier discipline).",
@@ -746,13 +783,25 @@ class RepositoryIntelligencePortal:
             "",
         ]
         impl = drift.get("implementation_drift", [])
-        body.append(_cell(f"{d.get('capability')}:{d.get('change')}" for d in impl) if impl else "_No implementation drift._")
+        body.append(
+            _cell(f"{d.get('capability')}:{d.get('change')}" for d in impl)
+            if impl
+            else "_No implementation drift._"
+        )
         body.extend(["", "## Certification drift", ""])
         cert = drift.get("certification_drift", [])
-        body.append(_cell(f"{d.get('field')} {d.get('from')}→{d.get('to')}" for d in cert) if cert else "_No certification drift._")
+        body.append(
+            _cell(f"{d.get('field')} {d.get('from')}→{d.get('to')}" for d in cert)
+            if cert
+            else "_No certification drift._"
+        )
         body.extend(["", "## Dependency drift", ""])
         dep = drift.get("dependency_drift", [])
-        body.append(_cell(f"{d.get('metric')} {d.get('from')}→{d.get('to')}" for d in dep) if dep else "_No dependency drift._")
+        body.append(
+            _cell(f"{d.get('metric')} {d.get('from')}→{d.get('to')}" for d in dep)
+            if dep
+            else "_No dependency drift._"
+        )
 
         body.extend(["", "## Duplicate findings", ""])
         dups = drift.get("duplicate_findings", [])
@@ -760,7 +809,9 @@ class RepositoryIntelligencePortal:
             body.append("| Name | Locations | Assessment |")
             body.append("| --- | --- | --- |")
             for f in dups:
-                body.append(f"| {f.get('name')} | {_cell(f.get('locations', []))} | {f.get('assessment')} |")
+                body.append(
+                    f"| {f.get('name')} | {_cell(f.get('locations', []))} | {f.get('assessment')} |"
+                )
         else:
             body.append("_No duplicate findings._")
 
@@ -770,7 +821,9 @@ class RepositoryIntelligencePortal:
             body.append("| Dimension | Status | As of | Source |")
             body.append("| --- | --- | --- | --- |")
             for s in stale:
-                body.append(f"| {s.get('dimension')} | {s.get('status')} | {s.get('as_of')} | {s.get('source')} |")
+                body.append(
+                    f"| {s.get('dimension')} | {s.get('status')} | {s.get('as_of')} | {s.get('source')} |"
+                )
         else:
             body.append("_No stale evidence._")
         return self._page(
@@ -781,7 +834,9 @@ class RepositoryIntelligencePortal:
 
     def coverage(self) -> str:
         code = self._model.get("health", {}).get("code", {})
-        finding = next((f for f in self._decision.findings if f.gate_id == "coverage-complete"), None)
+        finding = next(
+            (f for f in self._decision.findings if f.gate_id == "coverage-complete"), None
+        )
         body = [
             f"- **Line coverage:** {code.get('coverage_line_pct')}%",
             f"- **Branch coverage:** {code.get('coverage_branch_pct')}%",
@@ -818,7 +873,9 @@ class RepositoryIntelligencePortal:
     def freeze(self) -> str:
         readiness = self._readiness
         aeos = self._model.get("aeos_readiness", {})
-        finding = next((f for f in self._decision.findings if f.gate_id == "freeze-readiness"), None)
+        finding = next(
+            (f for f in self._decision.findings if f.gate_id == "freeze-readiness"), None
+        )
         blockers = finding.details.get("freeze_blockers", []) if finding else []
         body = [
             f"- **Freeze verdict:** {readiness.verdict}",

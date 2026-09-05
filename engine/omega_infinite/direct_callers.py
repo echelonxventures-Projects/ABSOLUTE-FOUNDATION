@@ -75,6 +75,20 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #: direct invocation is a CHOICE, and this counts choices.
 #:
 #: MOVEMENTS
+#:   15 -> 14   (-1)  intelligence/rie/config.py, and it is recorded separately because the
+#:                     migration was NOT mechanical. It asked `:(glob)*/__init__.py`, where git's
+#:                     pathspec magic stops `*` at a separator; Selector matches with fnmatch,
+#:                     where `*` crosses one. The same pattern through the provider returned an
+#:                     EXTRA root — `00-BOOK`, from a nested package — which would have widened
+#:                     RIE's capability catalogue silently. Measured: 7 roots the old way, 8 the
+#:                     naive way, 7 again with depth-1 stated explicitly as `count("/") == 1`.
+#:                     The filesystem fallback was RETAINED. It is what makes the function work in
+#:                     a non-git checkout, and FilesystemProvider does not declare TRACKED_CONTENT
+#:                     — correctly, since a filesystem cannot guarantee it — so resolving by
+#:                     capability would find git alone and leave a non-git checkout with nothing.
+#:                     Routing the fallback through a provider that cannot answer the question
+#:                     would have been the appearance of abstraction, not the thing.
+#:
 #:   19 -> 15   (-4)  Tranche 1. THREE MIGRATED, ONE DECLARED, and the difference matters.
 #:                     engine/certification_integrity/surface.py, engine/uicm/matrix.py and
 #:                     platform/repository_intelligence/generated_artifacts.py each asked
@@ -100,7 +114,7 @@ def roots(base: pathlib.Path) -> tuple[str, ...]:
 #:                     above. Six of the nineteen were invisible to the flag-based scan that
 #:                     preceded this one, which matched `ls-files` argument lists and therefore
 #:                     missed every caller using another subcommand.
-DIRECT_CALLER_CEILING = 15
+DIRECT_CALLER_CEILING = 14
 
 
 def _invokes_tool_directly(path: pathlib.Path) -> bool:

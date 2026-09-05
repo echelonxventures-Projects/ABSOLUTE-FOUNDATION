@@ -64,16 +64,12 @@ class GenerationContext:
     @property
     def objects(self) -> tuple[CanonicalKnowledgeObject, ...]:
         """The canonical objects bound to this unit, ordered by id."""
-        return tuple(
-            self.intake.base.require_object(cko_id) for cko_id in self.unit.bound_ckos
-        )
+        return tuple(self.intake.base.require_object(cko_id) for cko_id in self.unit.bound_ckos)
 
     @property
     def decisions(self) -> tuple[DecisionRecord, ...]:
         """The canonical decisions this unit's knowledge cites."""
-        return tuple(
-            self.intake.base.require_decision(did) for did in self.unit.bound_decisions
-        )
+        return tuple(self.intake.base.require_decision(did) for did in self.unit.bound_decisions)
 
     @property
     def invariants(self) -> tuple[Invariant, ...]:
@@ -88,9 +84,7 @@ class GenerationContext:
 
     def upstream_paths(self, family: ArtifactFamily) -> tuple[str, ...]:
         """Paths already produced for ``family`` in this target — for cross-references."""
-        return tuple(
-            sorted(art.relative_path for art in self.upstream.get(family.value, ()))
-        )
+        return tuple(sorted(art.relative_path for art in self.upstream.get(family.value, ())))
 
     def upstream_artifact(self, family: ArtifactFamily, suffix: str) -> str | None:
         """The single upstream artifact path in ``family`` ending with ``suffix``."""

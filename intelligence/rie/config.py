@@ -16,9 +16,11 @@ engine.
 
 from __future__ import annotations
 
-import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
+
+from engine.omega_infinite.git_provider import GitDiscoveryProvider
+from engine.omega_infinite.provider import ProviderError, Selector
 
 _MARKERS = ("00-BOOK/DATA", "engine")
 
@@ -46,21 +48,32 @@ def discover_code_roots(repo_root: Path) -> tuple[str, ...]:
     was written were invisible to discovery, so their packages could never be
     catalogued and capability coverage silently fell behind the repository.
     """
+    # THE PROVIDER, NOT THE TOOL, AND THE DEPTH CONSTRAINT IS NOW EXPLICIT. This asked
+    # `:(glob)*/__init__.py`, where git's pathspec magic stops `*` at a separator. Selector
+    # matches with fnmatch, where `*` crosses one — so the same pattern through the provider
+    # returns an EXTRA root, `00-BOOK`, from a nested package. Measured before the swap: 7 roots
+    # the old way, 8 the naive way, and 7 again once depth-1 is stated as `count("/") == 1`.
+    # Stating it in the caller is clearer than relying on pathspec magic to imply it, and it is
+    # what keeps this migration a migration rather than a widening.
+    #
+    # The filesystem fallback below is retained deliberately. It is what makes this function work
+    # in a non-git checkout, and the declared FilesystemProvider does NOT offer TRACKED_CONTENT —
+    # correctly, since a filesystem cannot guarantee it — so resolution by capability would find
+    # git alone and leave a non-git checkout with nothing.
     names: set[str] = set()
     try:
-        res = subprocess.run(  # noqa: S603
-            ["git", "ls-files", ":(glob)*/__init__.py"],  # noqa: S607 - fixed argv, no shell
-            cwd=repo_root,
-            capture_output=True,
-            text=True,
-            timeout=30,
-            check=False,
+        artifacts = GitDiscoveryProvider(root=str(repo_root)).enumerate(
+            Selector(patterns=("*/__init__.py",))
         )
-    except (OSError, subprocess.SubprocessError):
-        res = None
-    if res is not None and res.returncode == 0 and res.stdout.strip():
-        names = {line.split("/", 1)[0] for line in res.stdout.split() if "/" in line}
-    else:
+    except ProviderError:
+        artifacts = ()
+    if artifacts:
+        names = {
+            artifact.location.locator.split("/", 1)[0]
+            for artifact in artifacts
+            if artifact.location.locator.count("/") == 1
+        }
+    if not names:
         names = {
             child.name
             for child in repo_root.iterdir()

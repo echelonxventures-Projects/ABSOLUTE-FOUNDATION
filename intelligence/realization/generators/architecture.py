@@ -75,12 +75,8 @@ class ArchitectureGenerator(Generator):
                     "statement": obj.statement,
                     "depends_on": sorted(obj.dependencies),
                     "consumers": sorted(obj.consumers),
-                    "internal_links": sorted(
-                        ref for ref in obj.all_links() if ref in members
-                    ),
-                    "external_links": sorted(
-                        ref for ref in obj.all_links() if ref not in members
-                    ),
+                    "internal_links": sorted(ref for ref in obj.all_links() if ref in members),
+                    "external_links": sorted(ref for ref in obj.all_links() if ref not in members),
                     "content_sha256": obj.content_sha256,
                 }
             )
@@ -90,9 +86,7 @@ class ArchitectureGenerator(Generator):
         layers = []
         for authority in context.target.authorities:
             members = sorted(
-                obj.cko_id
-                for obj in context.objects
-                if obj.authority.value == authority
+                obj.cko_id for obj in context.objects if obj.authority.value == authority
             )
             layers.append(
                 {
@@ -119,14 +113,11 @@ class ArchitectureGenerator(Generator):
                         "to": target,
                         "finding": "authority-inversion",
                         "detail": (
-                            "a more authoritative component points at a less "
-                            "authoritative one"
+                            "a more authoritative component points at a less " "authoritative one"
                         ),
                     }
                 )
-        return sorted(
-            inversions, key=lambda entry: (entry["from"], entry["relation"], entry["to"])
-        )
+        return sorted(inversions, key=lambda entry: (entry["from"], entry["relation"], entry["to"]))
 
     def _descriptor(self, context: GenerationContext) -> dict[str, Any]:
         target = context.target
@@ -152,8 +143,7 @@ class ArchitectureGenerator(Generator):
                 "components": components,
                 "component_count": len(components),
                 "edges": [
-                    {"from": src, "relation": rel, "to": dst}
-                    for src, rel, dst in target.edges
+                    {"from": src, "relation": rel, "to": dst} for src, rel, dst in target.edges
                 ],
                 "edge_count": len(target.edges),
                 "boundary_findings": inversions,
@@ -180,9 +170,7 @@ class ArchitectureGenerator(Generator):
 
     # -- rendering ------------------------------------------------------------
 
-    def _markdown(
-        self, context: GenerationContext, descriptor: dict[str, Any]
-    ) -> list[str]:
+    def _markdown(self, context: GenerationContext, descriptor: dict[str, Any]) -> list[str]:
         target = context.target
         lines = self.provenance_comment(context, "<!--")
         lines = [f"{line} -->" for line in lines]
@@ -201,9 +189,7 @@ class ArchitectureGenerator(Generator):
             "|-----:|-------|-----------:|",
         ]
         for layer in descriptor["layers"]:
-            lines.append(
-                f"| {layer['rank']} | {layer['layer']} | {layer['component_count']} |"
-            )
+            lines.append(f"| {layer['rank']} | {layer['layer']} | {layer['component_count']} |")
         lines += [
             "",
             f"> {descriptor['layering_rule']}",
@@ -222,9 +208,7 @@ class ArchitectureGenerator(Generator):
         if descriptor["edges"]:
             lines += ["| From | Relation | To |", "|------|----------|----|"]
             for edge in descriptor["edges"]:
-                lines.append(
-                    f"| `{edge['from']}` | {edge['relation']} | `{edge['to']}` |"
-                )
+                lines.append(f"| `{edge['from']}` | {edge['relation']} | `{edge['to']}` |")
         else:
             lines.append("_No edges internal to this universe._")
         lines += ["", "## Boundary findings", ""]

@@ -1,10 +1,10 @@
 """RIE command-line interface (AI-agnostic, head-less).
 
-    python -m intelligence.rie build     # regenerate all machine-readable outputs
-    python -m intelligence.rie verify     # prove deterministic regeneration
-    python -m intelligence.rie snapshot   # print the compact intelligence snapshot
-    python -m intelligence.rie answer      # answer the success-criteria questions
-    python -m intelligence.rie portal      # generate the Repository Intelligence Portal (DOC-003)
+python -m intelligence.rie build     # regenerate all machine-readable outputs
+python -m intelligence.rie verify     # prove deterministic regeneration
+python -m intelligence.rie snapshot   # print the compact intelligence snapshot
+python -m intelligence.rie answer      # answer the success-criteria questions
+python -m intelligence.rie portal      # generate the Repository Intelligence Portal (DOC-003)
 """
 
 from __future__ import annotations
@@ -57,10 +57,10 @@ def _cmd_answer(args: argparse.Namespace) -> int:
     # after which the documented ``answer`` subcommand raised KeyError on every invocation.
     answers = {
         "what_exists": f"{m['capability_count']} realized/spec capabilities; "
-                       f"{m['health']['corpus']['artifacts']} corpus artifacts",
+        f"{m['health']['corpus']['artifacts']} corpus artifacts",
         "what_is_implemented": f"engine EC-1 + platform EC-2 "
-                               f"({m['health']['code']['total_loc']} LOC, "
-                               f"{m['health']['code']['total_tests']} tests)",
+        f"({m['health']['code']['total_loc']} LOC, "
+        f"{m['health']['code']['total_tests']} tests)",
         "what_remains": [g["missing"] for g in m["aeos_readiness"]["known_spine_gaps"]],
         "what_is_blocked": f.get("blocked", []),
         "what_is_executable": f.get("next_executable_capability"),
@@ -90,14 +90,22 @@ def _cmd_portal(args: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="intelligence.rie", description="Repository Intelligence Engine")
+    parser = argparse.ArgumentParser(
+        prog="intelligence.rie", description="Repository Intelligence Engine"
+    )
     parser.add_argument("--repo", help="repository root (default: auto-resolve)")
     sub = parser.add_subparsers(dest="command", required=True)
-    for name, fn in (("build", _cmd_build), ("verify", _cmd_verify),
-                     ("snapshot", _cmd_snapshot), ("answer", _cmd_answer)):
+    for name, fn in (
+        ("build", _cmd_build),
+        ("verify", _cmd_verify),
+        ("snapshot", _cmd_snapshot),
+        ("answer", _cmd_answer),
+    ):
         p = sub.add_parser(name)
         p.set_defaults(func=fn)
-    p_portal = sub.add_parser("portal", help="generate the Repository Intelligence Portal (DOC-003)")
+    p_portal = sub.add_parser(
+        "portal", help="generate the Repository Intelligence Portal (DOC-003)"
+    )
     p_portal.add_argument("--out", help="output directory (default: <repo>/intelligence/portal)")
     p_portal.set_defaults(func=_cmd_portal)
     args = parser.parse_args(argv)

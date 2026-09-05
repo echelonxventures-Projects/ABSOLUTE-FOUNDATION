@@ -68,7 +68,7 @@ _PROBE_FORMAT: dict[str, Any] = {
     "citation_style": "canonical-id",
     "audience": "self-verification",
     "notes": "Registered at runtime from a data declaration to prove that adding a "
-             "publication format requires no engine change.",
+    "publication format requires no engine change.",
 }
 
 
@@ -86,12 +86,8 @@ class PublicationIntelligenceEngine:
         )
         self.resolver = self.research.resolver
         self.formats = formats or self._load_formats()
-        self.generator = PublicationGenerator(
-            self.research.corpus(), self.resolver, self.formats
-        )
-        self.composer = PublicationComposer(
-            self.resolver, self.formats, self.research.registry()
-        )
+        self.generator = PublicationGenerator(self.research.corpus(), self.resolver, self.formats)
+        self.composer = PublicationComposer(self.resolver, self.formats, self.research.registry())
         self._publications: PublicationSet | None = None
         self._registry: PublicationRegistry | None = None
 
@@ -150,17 +146,14 @@ class PublicationIntelligenceEngine:
         """Register a format at runtime, generate it, render it — proof for PV-14."""
         probe_registry = FormatRegistry()
         descriptor = probe_registry.register_format(_PROBE_FORMAT)
-        generator = PublicationGenerator(
-            self.research.corpus(), self.resolver, probe_registry
-        )
+        generator = PublicationGenerator(self.research.corpus(), self.resolver, probe_registry)
         composer = PublicationComposer(self.resolver, probe_registry, self.research.registry())
         spec = generator.build(descriptor.format_id, self.scope())
         document, body = composer.render(spec)
         satisfied = [
             block.section_key
             for block in document.blocks
-            if block.section_key in descriptor.required
-            and (block.structural or not block.is_empty)
+            if block.section_key in descriptor.required and (block.structural or not block.is_empty)
         ]
         return {
             "format_id": descriptor.format_id,
@@ -299,12 +292,9 @@ class PublicationIntelligenceEngine:
     def write(self, sink: OutputSink | None = None) -> list[str]:
         target = sink or NestedFileSink(self.config.output_dir)
         written = [
-            target.emit(name, canonical_json(payload))
-            for name, payload in self.outputs().items()
+            target.emit(name, canonical_json(payload)) for name, payload in self.outputs().items()
         ]
-        written.extend(
-            target.emit(name, body) for name, body in self.rendered_documents().items()
-        )
+        written.extend(target.emit(name, body) for name, body in self.rendered_documents().items())
         return sorted(written)
 
     # -- determinism -----------------------------------------------------------
@@ -325,7 +315,8 @@ class PublicationIntelligenceEngine:
         )
         return {
             "programme": PROGRAMME,
-            "deterministic": not json_mismatches and not doc_mismatches
+            "deterministic": not json_mismatches
+            and not doc_mismatches
             and sorted(first_json) == sorted(second_json)
             and sorted(first_docs) == sorted(second_docs),
             "outputs_checked": sorted(first_json),

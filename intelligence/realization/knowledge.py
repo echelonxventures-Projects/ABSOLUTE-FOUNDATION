@@ -224,10 +224,7 @@ def _derive_targets(base: KnowledgeBase) -> tuple[RealizationTarget, ...]:
         objects = sorted(base.by_universe(universe), key=lambda o: o.cko_id)
         members = {o.cko_id for o in objects}
         decision_ids = dedupe(
-            link
-            for obj in objects
-            for link in obj.decision_links
-            if base.has_decision(link)
+            link for obj in objects for link in obj.decision_links if base.has_decision(link)
         )
         invariants = tuple(
             Invariant(
@@ -253,10 +250,7 @@ def _derive_targets(base: KnowledgeBase) -> tuple[RealizationTarget, ...]:
                 decision_ids=decision_ids,
                 kinds=dedupe(o.kind.value for o in objects),
                 authorities=tuple(
-                    a.value
-                    for a in sorted(
-                        {o.authority for o in objects}, key=lambda a: a.rank
-                    )
+                    a.value for a in sorted({o.authority for o in objects}, key=lambda a: a.rank)
                 ),
                 lifecycles=dedupe(o.lifecycle.value for o in objects),
                 owners=dedupe(o.owner for o in objects),

@@ -83,9 +83,7 @@ class RuntimeGenerator(Generator):
                     "mechanical_checks": list(MECHANICAL_CHECKS),
                     "declared_validation": obj.validation,
                     "declared_certification": obj.certification,
-                    "enforcement": "mechanical+declared"
-                    if obj.validation
-                    else "mechanical",
+                    "enforcement": "mechanical+declared" if obj.validation else "mechanical",
                     "content_sha256": obj.content_sha256,
                 }
             )
@@ -132,9 +130,7 @@ class RuntimeGenerator(Generator):
                     "service_id": f"ucos-knowledge-{target.path_slug}",
                     "universe": target.universe,
                     "target_id": target.target_id,
-                    "entrypoint": (
-                        f"runtime/{identifier(target.universe)}_runtime.py:boot"
-                    ),
+                    "entrypoint": (f"runtime/{identifier(target.universe)}_runtime.py:boot"),
                     "stateless": True,
                     "read_only": True,
                     "vendor_neutral": True,
@@ -190,9 +186,7 @@ class RuntimeGenerator(Generator):
 
     # -- executable binding ---------------------------------------------------
 
-    def _runtime_module(
-        self, context: GenerationContext, descriptor: dict[str, Any]
-    ) -> list[str]:
+    def _runtime_module(self, context: GenerationContext, descriptor: dict[str, Any]) -> list[str]:
         target = context.target
         ranks = {obj.cko_id: obj.authority.rank for obj in context.objects}
         lines = self.provenance_comment(context, "#")
@@ -326,7 +320,7 @@ class RuntimeGenerator(Generator):
             "def health(base: Any) -> dict[str, Any]:",
             '    """Readiness report. ``ready`` is fail-closed: all checks must pass."""',
             "    results = check_invariants(base)",
-            "    failed = [r for r in results if not r[\"passed\"]]",
+            '    failed = [r for r in results if not r["passed"]]',
             "    return {",
             '        "service_id": SERVICE_ID,',
             '        "universe": UNIVERSE,',

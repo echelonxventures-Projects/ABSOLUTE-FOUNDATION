@@ -59,7 +59,9 @@ class EvidenceReader:
     def data(self, name: str) -> dict[str, Any]:
         if name not in self._cache:
             path = self.config.data_file(name)
-            self._cache[name] = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+            self._cache[name] = (
+                json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+            )
         return self._cache[name]
 
     def control_tower(self) -> dict[str, Any]:

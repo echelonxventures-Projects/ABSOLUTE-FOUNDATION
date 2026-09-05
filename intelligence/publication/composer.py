@@ -86,14 +86,20 @@ class PublicationComposer:
 
     def _title(self, spec: PublicationSpec, unresolved: list[dict[str, str]]) -> str:
         if not spec.title_ref:
-            unresolved.append({"ref": "", "section": "title-block",
-                               "reason": "the scope contains no resolvable title subject"})
+            unresolved.append(
+                {
+                    "ref": "",
+                    "section": "title-block",
+                    "reason": "the scope contains no resolvable title subject",
+                }
+            )
             return spec.area_label
         try:
             return self.resolver.resolve(spec.title_ref).text
         except UnresolvedReferenceError as exc:
-            unresolved.append({"ref": spec.title_ref, "section": "title-block",
-                               "reason": exc.message})
+            unresolved.append(
+                {"ref": spec.title_ref, "section": "title-block", "reason": exc.message}
+            )
             return spec.area_label
 
     def _citations(

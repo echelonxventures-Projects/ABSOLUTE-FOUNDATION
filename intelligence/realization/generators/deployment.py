@@ -135,9 +135,7 @@ class DeploymentGenerator(Generator):
     def _stages(
         self, context: GenerationContext, deployables: Sequence[Mapping[str, Any]]
     ) -> list[dict[str, Any]]:
-        runtime_descriptor = context.upstream_artifact(
-            ArtifactFamily.RUNTIME, "-runtime.json"
-        )
+        runtime_descriptor = context.upstream_artifact(ArtifactFamily.RUNTIME, "-runtime.json")
         runtime_module = context.upstream_artifact(ArtifactFamily.RUNTIME, "_runtime.py")
         stages: list[dict[str, Any]] = []
         for index, (gate, condition) in enumerate(UCIC_GATES, start=1):
@@ -191,9 +189,7 @@ class DeploymentGenerator(Generator):
                 "operation": "boot-runtime",
                 "detail": "boot the generated runtime and require a ready health report",
                 "runtime_descriptor": runtime_descriptor,
-                "runtime_entrypoint": (
-                    f"{runtime_module}:boot" if runtime_module else None
-                ),
+                "runtime_entrypoint": (f"{runtime_module}:boot" if runtime_module else None),
             },
         }
         return actions[gate]
@@ -214,8 +210,7 @@ class DeploymentGenerator(Generator):
                 "target_seal": target.seal,
                 "gate_ladder_source": _GATE_SOURCE,
                 "gate_ladder": [
-                    {"gate": gate, "condition": condition}
-                    for gate, condition in UCIC_GATES
+                    {"gate": gate, "condition": condition} for gate, condition in UCIC_GATES
                 ],
                 "stages": stages,
                 "stage_count": len(stages),
@@ -252,9 +247,7 @@ class DeploymentGenerator(Generator):
 
     # -- pipeline -------------------------------------------------------------
 
-    def _pipeline(
-        self, context: GenerationContext, descriptor: Mapping[str, Any]
-    ) -> list[str]:
+    def _pipeline(self, context: GenerationContext, descriptor: Mapping[str, Any]) -> list[str]:
         target = context.target
         lines = self.provenance_comment(context, "#")
         pipeline: dict[str, Any] = {

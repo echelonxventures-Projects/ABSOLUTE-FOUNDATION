@@ -58,8 +58,11 @@ RESEARCH_CLASS_EMPIRICAL = "empirical"
 #: reader (the registered owner of coverage parsing — never re-implemented here).
 COVERAGE_FINDINGS: tuple[dict[str, str], ...] = (
     {"key": "coverage.line_pct", "attribute": "line_pct", "unit": "percent of lines covered"},
-    {"key": "coverage.branch_pct", "attribute": "branch_pct",
-     "unit": "percent of branches covered"},
+    {
+        "key": "coverage.branch_pct",
+        "attribute": "branch_pct",
+        "unit": "percent of branches covered",
+    },
     {"key": "coverage.lines_covered", "attribute": "lines_covered", "unit": "covered lines"},
     {"key": "coverage.lines_valid", "attribute": "lines_valid", "unit": "measured lines"},
 )
@@ -189,9 +192,7 @@ class ResearchAssimilationEngine:
             owner=dec.owner,
             lifecycle=dec.lifecycle.value,
             version=dec.version,
-            novelty_class=(
-                NOVELTY_SUPERSEDING if dec.supersedes else NOVELTY_PRIOR_ART_LINKED
-            ),
+            novelty_class=(NOVELTY_SUPERSEDING if dec.supersedes else NOVELTY_PRIOR_ART_LINKED),
             support_refs=support,
             source_id=source_id,
             source_locator=locator,
@@ -201,9 +202,7 @@ class ResearchAssimilationEngine:
     # -- findings --------------------------------------------------------------
 
     def findings(self) -> tuple[ResearchFinding, ...]:
-        findings = [
-            self._finding_from_metric(key) for key in self.resolver.available_metrics()
-        ]
+        findings = [self._finding_from_metric(key) for key in self.resolver.available_metrics()]
         findings.extend(self._coverage_findings())
         return tuple(sorted(findings, key=lambda f: f.metric_key))
 
@@ -277,9 +276,7 @@ class ResearchAssimilationEngine:
             )
             out.append(
                 ResearchContribution(
-                    contribution_id=artifact_id(
-                        ArtifactClass.RESEARCH_CONTRIBUTION, slug(family)
-                    ),
+                    contribution_id=artifact_id(ArtifactClass.RESEARCH_CONTRIBUTION, slug(family)),
                     area=family,
                     concept_count=len(rows),
                     disposition_histogram=dispositions,
@@ -395,7 +392,7 @@ class ResearchAssimilationEngine:
                     "locator": self.substrate.config.rel(self.substrate.config.coverage_xml),
                     "required": False,
                     "consequence": "empirical validation findings are not produced "
-                                   "(run the coverage gate to materialise them)",
+                    "(run the coverage gate to materialise them)",
                 }
             )
         return gaps

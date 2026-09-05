@@ -55,9 +55,7 @@ class ResearchRegistry:
     def _register_all(self) -> None:
         for artifact_class in _REGISTRATION_ORDER:
             for record, refs in self._population(artifact_class):
-                entry = self._ledger.register(
-                    artifact_class, record.natural_key, record.to_dict()
-                )
+                entry = self._ledger.register(artifact_class, record.natural_key, record.to_dict())
                 if entry.record_id != record.record_id:
                     raise IdentityDivergenceError(
                         "registered identity diverges from the assimilated identity — "
@@ -73,9 +71,7 @@ class ResearchRegistry:
                     else:
                         self._by_locator.setdefault(ref, entry.record_id)
 
-    def _population(
-        self, artifact_class: ArtifactClass
-    ) -> Iterable[tuple[Any, tuple[str, ...]]]:
+    def _population(self, artifact_class: ArtifactClass) -> Iterable[tuple[Any, tuple[str, ...]]]:
         corpus = self.corpus
         if artifact_class is ArtifactClass.RESEARCH_SOURCE:
             return [(s, (s.locator,)) for s in corpus.sources]

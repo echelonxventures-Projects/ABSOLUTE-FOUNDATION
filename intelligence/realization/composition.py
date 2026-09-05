@@ -100,18 +100,12 @@ class CompositionEngine:
 
     # -- derivation -----------------------------------------------------------
 
-    def _units(
-        self, intake: KnowledgeIntake, plan: RealizationPlan
-    ) -> tuple[CompositionUnit, ...]:
+    def _units(self, intake: KnowledgeIntake, plan: RealizationPlan) -> tuple[CompositionUnit, ...]:
         units: list[CompositionUnit] = []
         for step in plan.steps:
             target = plan.target(step.target_id)
-            bound_ckos = dedupe(
-                cko for cko in step.source_ckos if intake.base.has_object(cko)
-            )
-            missing = tuple(
-                cko for cko in step.source_ckos if not intake.base.has_object(cko)
-            )
+            bound_ckos = dedupe(cko for cko in step.source_ckos if intake.base.has_object(cko))
+            missing = tuple(cko for cko in step.source_ckos if not intake.base.has_object(cko))
             if missing:
                 raise CompositionError(
                     "plan step binds a canonical object absent from the store",
@@ -128,9 +122,7 @@ class CompositionEngine:
                     bound_ckos=bound_ckos,
                     bound_decisions=target.decision_ids,
                     upstream_units=dedupe(_unit_id(dep) for dep in step.depends_on),
-                    consumed_families=tuple(
-                        f.value for f in FAMILY_DEPENDENCIES[step.family]
-                    ),
+                    consumed_families=tuple(f.value for f in FAMILY_DEPENDENCIES[step.family]),
                 )
             )
         return tuple(sorted(units, key=lambda u: u.unit_id))
@@ -171,9 +163,7 @@ class CompositionEngine:
             for left, right in declared:
                 if left in members and right in members:
                     co_bound.add((left, right))
-        duplicates = tuple(
-            group for group in intake.semantic_index().values() if len(group) > 1
-        )
+        duplicates = tuple(group for group in intake.semantic_index().values() if len(group) > 1)
         unbound = tuple(sorted(u.step_id for u in units if not u.bound_ckos))
         return CompositionFindings(
             conflicts=tuple(sorted(co_bound)),

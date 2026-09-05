@@ -108,8 +108,13 @@ def _markdown_structural(document: ComposedDocument, block: ComposedBlock) -> li
             "of canonical content; regenerating it after a canonical change reproduces "
             "the change exactly."
         )
-        lines.extend(["", "| Canonical reference | Locator | Source content hash |",
-                      "|---------------------|---------|---------------------|"])
+        lines.extend(
+            [
+                "",
+                "| Canonical reference | Locator | Source content hash |",
+                "|---------------------|---------|---------------------|",
+            ]
+        )
         for entry in document.provenance_index():
             lines.append(
                 f"| `{entry['ref']}` | `{entry['source_locator']}` | "
@@ -228,7 +233,7 @@ def render_html(document: ComposedDocument, descriptor: FormatDescriptor) -> str
         "<table><tbody>",
     ]
     for key, value in _metadata(document):
-        out.append(f"<tr><th scope=\"row\">{esc(key)}</th><td>{esc(value)}</td></tr>")
+        out.append(f'<tr><th scope="row">{esc(key)}</th><td>{esc(value)}</td></tr>')
     out.append("</tbody></table>")
     if descriptor.notes:
         out.append(f"<blockquote>{esc(descriptor.notes)}</blockquote>")
@@ -243,9 +248,7 @@ def render_html(document: ComposedDocument, descriptor: FormatDescriptor) -> str
         out.append(f"<section><h2>{esc(block.heading)}</h2><ul>")
         for resolved in block.resolved:
             for item in _items(resolved):
-                out.append(
-                    f"<li>{esc(item)} <code>{esc(_attribution(resolved))}</code></li>"
-                )
+                out.append(f"<li>{esc(item)} <code>{esc(_attribution(resolved))}</code></li>")
         out.append("</ul></section>")
     out.extend(["</body>", "</html>", ""])
     return "\n".join(out)
@@ -275,8 +278,13 @@ def _html_structural(document: ComposedDocument, block: ComposedBlock) -> list[s
 
 
 def render_plaintext(document: ComposedDocument, descriptor: FormatDescriptor) -> str:
-    out = [GENERATED_BANNER, "=" * 78, f"{document.format_label.upper()}: {document.title}",
-           "=" * 78, ""]
+    out = [
+        GENERATED_BANNER,
+        "=" * 78,
+        f"{document.format_label.upper()}: {document.title}",
+        "=" * 78,
+        "",
+    ]
     for key, value in _metadata(document):
         out.append(f"{key + ':':<32}{value}")
     if descriptor.notes:
@@ -306,8 +314,7 @@ def _plaintext_structural(document: ComposedDocument, block: ComposedBlock) -> l
         ]
     elif block.section_key == "provenance":
         rows = [
-            f"{e['ref']}  sha256:{e['source_content_sha256']}"
-            for e in document.provenance_index()
+            f"{e['ref']}  sha256:{e['source_content_sha256']}" for e in document.provenance_index()
         ]
     else:
         return []
@@ -353,8 +360,9 @@ def renderer_ids() -> list[str]:
 def get_renderer(renderer_id: str) -> Renderer:
     renderer = _RENDERERS.get(renderer_id)
     if renderer is None:
-        raise KernelError("renderer is not registered", renderer_id=renderer_id,
-                          registered=renderer_ids())
+        raise KernelError(
+            "renderer is not registered", renderer_id=renderer_id, registered=renderer_ids()
+        )
     return renderer
 
 

@@ -105,11 +105,16 @@ def policy_for(category: str) -> dict[str, object]:
     """Return the declared policy for *category*, or the fail-closed fallback."""
     return CATEGORY_POLICY.get(category, UNCLASSIFIED_POLICY)
 
+
 # Known AEOS execution-spine gaps (curated from ADR-0002 determination). The
 # engine reports these as PLANNED work; it does NOT implement them.
 KNOWN_SPINE_GAPS: list[dict[str, str]] = [
     {"id": "G-01", "missing": "Executable CCE (completeness runtime)", "severity": "HIGH"},
-    {"id": "G-02", "missing": "Executable CIOA (state/critical-path/next/forecast runtime)", "severity": "HIGH"},
+    {
+        "id": "G-02",
+        "missing": "Executable CIOA (state/critical-path/next/forecast runtime)",
+        "severity": "HIGH",
+    },
     {"id": "G-03", "missing": "Execution scheduler", "severity": "HIGH"},
     {"id": "G-04", "missing": "Lease manager (concurrency)", "severity": "MEDIUM"},
     {"id": "G-05", "missing": "Execution transaction manager", "severity": "MEDIUM"},

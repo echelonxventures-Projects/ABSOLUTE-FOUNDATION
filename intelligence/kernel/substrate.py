@@ -157,17 +157,21 @@ def _validate(entry: Mapping[str, Any]) -> None:
         raise SubstrateDeclarationError("unknown substrate declaration keys", keys=unknown)
     for field in ("key", "locator", "media", "authority", "role"):
         if not isinstance(entry.get(field), str) or not entry[field]:
-            raise SubstrateDeclarationError("substrate field must be a non-empty string",
-                                            field=field, entry=entry.get("key"))
+            raise SubstrateDeclarationError(
+                "substrate field must be a non-empty string", field=field, entry=entry.get("key")
+            )
     if entry["media"] not in _MEDIA:
-        raise SubstrateDeclarationError("unknown substrate media", media=entry["media"],
-                                        allowed=sorted(_MEDIA))
+        raise SubstrateDeclarationError(
+            "unknown substrate media", media=entry["media"], allowed=sorted(_MEDIA)
+        )
     if entry["authority"] not in _AUTHORITY:
-        raise SubstrateDeclarationError("unknown substrate authority",
-                                        authority=entry["authority"], allowed=sorted(_AUTHORITY))
+        raise SubstrateDeclarationError(
+            "unknown substrate authority", authority=entry["authority"], allowed=sorted(_AUTHORITY)
+        )
     if not isinstance(entry.get("required"), bool):
-        raise SubstrateDeclarationError("substrate 'required' must be a boolean",
-                                        entry=entry.get("key"))
+        raise SubstrateDeclarationError(
+            "substrate 'required' must be a boolean", entry=entry.get("key")
+        )
 
 
 class SubstrateReader:

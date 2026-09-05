@@ -66,9 +66,7 @@ class RealizationConfig:
         root = Path(repo_root).resolve() if repo_root else resolve_repo_root()
         return cls(
             repo_root=root,
-            knowledge_dir=Path(knowledge_dir).resolve()
-            if knowledge_dir
-            else root / "knowledge",
+            knowledge_dir=Path(knowledge_dir).resolve() if knowledge_dir else root / "knowledge",
             artifact_root=Path(artifact_root).resolve()
             if artifact_root
             else root / ARTIFACT_DIRNAME,

@@ -107,9 +107,7 @@ class RealizationEvidence:
 
     @property
     def record_hash(self) -> str:
-        return content_hash(
-            {name: self.documents[name] for name in sorted(self.documents)}
-        )
+        return content_hash({name: self.documents[name] for name in sorted(self.documents)})
 
     def missing(self) -> tuple[str, ...]:
         return tuple(name for name in REQUIRED_FILES if name not in self.documents)
@@ -193,9 +191,7 @@ def build_evidence(
         {
             **_envelope("UCOS-URI-EVIDENCE-RECORD", "Realization Evidence Record", seal),
             "bundle": sorted(documents),
-            "bundle_hashes": {
-                name: body[name]["content_sha256"] for name in sorted(body)
-            },
+            "bundle_hashes": {name: body[name]["content_sha256"] for name in sorted(body)},
             "bundle_hash": content_hash(body),
             "verdict": decision.verdict,
             "gates_passed": f"{decision.passed_count}/{len(decision.gates)}",
@@ -271,9 +267,7 @@ def verify_bundle(config: RealizationConfig | None = None) -> dict[str, Any]:
         except (OSError, json.JSONDecodeError):
             results.append({"file": name, "present": True, "sealed": False})
             continue
-        results.append(
-            {"file": name, "present": True, "sealed": verify_seal(document)}
-        )
+        results.append({"file": name, "present": True, "sealed": verify_seal(document)})
     failed = [entry for entry in results if not (entry["present"] and entry["sealed"])]
     return {
         "complete": not failed,

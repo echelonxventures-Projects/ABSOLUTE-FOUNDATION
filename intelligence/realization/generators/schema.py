@@ -155,9 +155,7 @@ class SchemaGenerator(Generator):
                 "x-ucos-inference": {
                     "record_count": len(context.objects),
                     "field_count": len(fields),
-                    "enumerated_fields": sorted(
-                        f["name"] for f in fields if "enum" in f
-                    ),
+                    "enumerated_fields": sorted(f["name"] for f in fields if "enum" in f),
                     "source_ckos": list(target.cko_ids),
                     "target_seal": target.seal,
                 },

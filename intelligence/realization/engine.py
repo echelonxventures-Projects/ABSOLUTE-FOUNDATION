@@ -138,7 +138,9 @@ class RealizationIntelligenceEngine:
         resolved_plan = plan or self.planner.plan(resolved_intake)
         return self.composer.compose(resolved_intake, resolved_plan)
 
-    def generate(self) -> tuple[
+    def generate(
+        self,
+    ) -> tuple[
         KnowledgeIntake,
         RealizationPlan,
         RealizationComposition,
@@ -186,9 +188,7 @@ class RealizationIntelligenceEngine:
             ledger = pre_ledger
             if decision.governed:
                 record = self.implementer.materialize(manifest, dry_run=dry_run)
-                ledger = self.tracer.build(
-                    intake, plan, composition, manifest, record
-                )
+                ledger = self.tracer.build(intake, plan, composition, manifest, record)
                 if prune and not dry_run:
                     self.implementer.prune(manifest, dry_run=False)
                 # Re-adjudicate with the materialization evidence in hand so the recorded

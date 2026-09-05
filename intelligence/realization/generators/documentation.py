@@ -158,9 +158,7 @@ class DocumentationGenerator(Generator):
 
     def _decisions(self, context: GenerationContext) -> list[str]:
         target = context.target
-        lines = self._header(
-            context, f"{target.universe} — Canonical Decision Digest (generated)"
-        )
+        lines = self._header(context, f"{target.universe} — Canonical Decision Digest (generated)")
         lines += [
             "> A decision is recorded once and never rediscovered. Rejected options are",
             "> retained **with their reasons** so a future reader cannot re-litigate a",
@@ -203,9 +201,7 @@ class DocumentationGenerator(Generator):
                 lines.append("")
             if dec.rejected_options:
                 lines += ["**Rejected options and why.**", ""]
-                lines += [
-                    f"- _{opt.option}_ — {opt.reason}" for opt in dec.rejected_options
-                ]
+                lines += [f"- _{opt.option}_ — {opt.reason}" for opt in dec.rejected_options]
                 lines.append("")
             for label, values in (
                 ("Evaluation criteria", dec.evaluation_criteria),
@@ -225,9 +221,7 @@ class DocumentationGenerator(Generator):
 
     def _realization_map(self, context: GenerationContext) -> list[str]:
         target = context.target
-        lines = self._header(
-            context, f"{target.universe} — Realization Map (generated)"
-        )
+        lines = self._header(context, f"{target.universe} — Realization Map (generated)")
         lines += [
             "> Which artifact realizes this universe, in which family, and from which",
             "> canonical objects. This is the human-readable face of the traceability",

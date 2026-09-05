@@ -78,9 +78,7 @@ class PublicationRegistry:
                     continue
                 payload = citation.to_dict()
                 payload.pop("citation_key", None)  # per-document ordinal, not identity
-                entry = self._ledger.register(
-                    ArtifactClass.CITATION, citation.natural_key, payload
-                )
+                entry = self._ledger.register(ArtifactClass.CITATION, citation.natural_key, payload)
                 self._citation_ids[citation.ref] = entry.record_id
 
     @staticmethod
