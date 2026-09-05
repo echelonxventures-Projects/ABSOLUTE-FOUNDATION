@@ -13,8 +13,8 @@ import pytest
 import engine.uckp.execution  # noqa: F401 - the caller loads what the register names
 import engine.uckp.persistence  # noqa: F401
 from engine.conformance import (
-    ENVELOPE_ONLY,
     PROVEN,
+    SINGLE,
     ConformanceError,
     measure,
     measure_axis,
@@ -49,33 +49,41 @@ def test_persistence_is_proven_because_its_contract_can_refuse_a_placeholder(res
     assert axis.shared_bodies == ()
 
 
-def test_execution_is_envelope_only_however_many_adapters_it_declares(results) -> None:
-    """The finding this instrument was built to make sayable.
+def test_execution_is_single_and_no_longer_envelope_only(results) -> None:
+    """The verdict this suite was written to make sayable, and then the fix that moved it.
 
-    engine/uckp/execution.py declares ten technologies and verify_execution_interchangeable
-    passes over all of them. It cannot do otherwise: nine inherit one transcribe() returning
-    identical canonical JSON with a different comment line, and execute() discards the payload
-    and calls the Python resolver regardless. Ten names, one implementation, a green test.
+    WRITTEN AS ENVELOPE_ONLY, AND THAT WAS CORRECT AT THE TIME. engine/uckp/execution.py declared
+    ten technologies and verify_execution_interchangeable passed over all of them, because no
+    adapter overrode `execute` — every call reached the same resolve_operation that produced the
+    expected digest, so the check compared Python's answer to Python's answer once per adapter
+    name and could not refuse anything.
 
-    This test asserts the verdict AND its cause, so that adding a tenth adapter does not quietly
-    turn it green: the disposition rests on the contract being unable to fail, not on a count.
+    THE CONTRACT NOW DISCRIMINATES, so the axis moved. `computes()` defaults to False, claiming
+    computation is an act rather than an inheritance, and a claimant returning a different digest
+    is named in failures. One adapter claims it. Nine are transcription targets, reported as such
+    rather than counted as agreement, and deliberately not deleted: UCKP-ART-17 admits an unknown
+    future category by registration, and those declarations are that mechanism working.
+
+    SINGLE IS NOT PROVEN, AND THE TEST SAYS SO. One implementation is an assumption — adr/0039's
+    own bar — and this asserts the axis has not quietly been credited with more than it earned.
     """
     axis = _axis(results, "execution")
-    assert axis.disposition == ENVELOPE_ONLY
-    assert axis.discriminating is False
-    assert len(axis.shared_bodies) >= 2, "the shared bodies are the evidence, and must be named"
+    assert axis.disposition == SINGLE, "the axis is not PROVEN; one implementation is an assumption"
+    assert axis.discriminating is True, "the contract must be able to refuse a false claimant"
+    assert len(axis.distinct) == 1
 
 
-def test_a_count_alone_would_have_reported_execution_as_proven(results) -> None:
-    """Why the harness measures two properties and not one.
+def test_a_second_implementation_is_now_provable_rather_than_assertable(results) -> None:
+    """Why the move from ENVELOPE_ONLY to SINGLE is progress and not a relabelling.
 
-    Distinctness alone scores execution at two distinct implementations, which reads as
-    healthy. The second property — whether the contract can refuse anything — is what separates
-    a swappable technology from a plugin list, and removing it would restore exactly the
-    over-report that let nine envelopes accumulate.
+    Under ENVELOPE_ONLY no number of implementations could be distinguished, so a Rust engine
+    would have passed the interchangeability check by transcribing and computing nothing. The
+    axis now carries a discriminator, which is exactly the bar a second implementation must clear
+    to move it to PROVEN — by evidence rather than by declaration.
     """
     axis = _axis(results, "execution")
-    assert len(axis.distinct) >= 2 and axis.disposition != PROVEN
+    assert axis.discriminating, "without a discriminator, a second implementation proves nothing"
+    assert axis.disposition != PROVEN, "two claimants are required, and there is one"
 
 
 def test_an_unloaded_contract_is_unmeasurable_and_never_silently_skipped() -> None:

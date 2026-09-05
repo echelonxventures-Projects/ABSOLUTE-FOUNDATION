@@ -15,6 +15,7 @@ from engine.uckp.execution import (
     KNOWN_EXECUTION_KINDS,
     OPERATIONS,
     ExecutionRequest,
+    PythonExecution,
     build_execution_suite,
     resolve_operation,
     verify_execution_interchangeable,
@@ -260,8 +261,52 @@ def test_every_declared_operation_is_interchangeable_across_every_technology(uni
     request = ExecutionRequest.of(operation, subject)
     report = verify_execution_interchangeable(universe.execution, request, universe.registry)
     assert report.failures == ()
-    assert len(report.kinds()) == 10
+    # ONE CLAIMANT, NINE TRANSCRIPTION TARGETS, AND THE OLD ASSERTION WAS A TAUTOLOGY. This
+    # asserted all ten kinds agreed on one digest. They could not do otherwise: no adapter
+    # overrides `execute`, so every one called the same `resolve_operation` that produced the
+    # expected digest, and the report compared Python's answer to Python's answer once per
+    # adapter name. Claiming computation is now an act rather than an inheritance.
+    assert report.kinds() == ("python",)
+    assert len(report.transcription_only) == 9
     assert len({digest for _, digest in report.observed}) == 1
+
+
+def test_an_adapter_that_claims_computation_and_disagrees_is_refused(universe):
+    """THE CASE THAT COULD NOT EXIST BEFORE, and the reason the check means anything now.
+
+    Every adapter's `execute` calls the base resolver, so comparing all of them compared one
+    answer to itself once per name — a report that could not refuse any adapter, present or
+    future, which is what engine/conformance scores as ENVELOPE_ONLY.
+
+    This constructs an adapter that CLAIMS computation and returns a different digest. It must be
+    named in `failures`. Without this test, `failures == ()` in the test above would be
+    indistinguishable from a check that cannot produce a failure at all.
+    """
+    import dataclasses
+
+    class LyingExecution(PythonExecution):
+        kind = "liar"
+
+        def execute(self, request, registry):
+            answer = super().execute(request, registry)
+            return dataclasses.replace(answer, output_digest="0" * 64)
+
+    report = verify_execution_interchangeable(
+        [*universe.execution, LyingExecution()],
+        ExecutionRequest.of("universe-seal"),
+        universe.registry,
+    )
+    assert report.interchangeable is False
+    assert any(f.startswith("liar:") for f in report.failures), report.failures
+
+
+def test_a_transcription_target_is_reported_rather_than_counted_as_agreement(universe):
+    """A technology that computes nothing is not broken, and is not agreement either."""
+    report = verify_execution_interchangeable(
+        universe.execution, ExecutionRequest.of("universe-seal"), universe.registry
+    )
+    assert set(report.transcription_only).isdisjoint(report.kinds())
+    assert len(report.transcription_only) + len(report.kinds()) == len(universe.execution)
 
 
 def test_no_execution_technology_owns_knowledge(universe):

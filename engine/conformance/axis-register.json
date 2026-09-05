@@ -53,9 +53,9 @@
       "axis": "execution",
       "question": "Which technology carries out an operation, and does it produce the same answer?",
       "contract": "engine.uckp.execution.ExecutionAdapter",
-      "abstract_methods": ["transcribe"],
-      "discriminator": null,
-      "$discriminator_why": "NONE EXISTS TODAY, and that is the finding rather than an omission in this file. transcribe() asks for a serialisation; execute() then discards it and calls resolve_operation in Python. No case written against this contract can distinguish a Rust implementation from a comment string. Closing it means the contract must demand a COMPUTED answer — a semantic digest an envelope cannot produce — which is a change to the contract, not to this register.",
+      "abstract_methods": ["transcribe", "computes"],
+      "discriminator": "engine.uckp.execution.verify_execution_interchangeable",
+      "$discriminator_why": "IT EXISTS NOW, AND IT DID NOT WHEN THIS REGISTER WAS WRITTEN. The original entry recorded the absence as the finding: transcribe() asked for a serialisation, execute() discarded it and called resolve_operation in Python, and the interchangeability check compared Python's answer to Python's answer once per adapter name. No case written against that contract could fail. The contract now requires an adapter to CLAIM computation, and a claimant returning a digest other than the one the operation resolves to is named in failures — demonstrated by a test that constructs exactly such an adapter. `computes` joins the measured methods for the same reason: distinctness must count adapters that claim to produce the answer, not adapters that define a way to render the request.",
       "article": "UCKP-ART-10"
     }
   ]

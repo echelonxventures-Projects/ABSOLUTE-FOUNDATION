@@ -191,6 +191,24 @@ class ExecutionAdapter(ABC):
         """Always false. An adapter that answered true would violate Article 10."""
         return False
 
+    def computes(self) -> bool:
+        """Whether THIS TECHNOLOGY produces the answer, or merely receives the request.
+
+        DEFAULTS TO FALSE, AND THE DEFAULT IS THE POINT. Measured before this existed:
+        `verify_execution_interchangeable` computed `expected` by calling `resolve_operation`,
+        then called each adapter's `execute`, which discards its transcription and calls THE SAME
+        FUNCTION. Ten technologies were compared against Python's answer by re-running Python's
+        answer, once per adapter name. The check could not fail for any adapter, present or
+        future — which is exactly what engine/conformance scores as ENVELOPE_ONLY.
+
+        An adapter that receives a language-neutral envelope and computes nothing is not broken:
+        it is a TRANSCRIPTION TARGET, and it does that job correctly. What it must not do is have
+        its transcription counted as agreement with a result it never produced. Claiming
+        computation is therefore an act, not an inheritance, and a claimant is HELD TO IT: a
+        false claim now produces a failure rather than a silent pass.
+        """
+        return False
+
     @abstractmethod
     def transcribe(self, request: ExecutionRequest) -> str:
         """Render the request as the payload this technology would receive."""
@@ -239,9 +257,18 @@ class ExecutionAdapter(ABC):
 
 
 class PythonExecution(ExecutionAdapter):
-    """Native execution. One implementation among many, with no special standing."""
+    """Native execution. One implementation among many, with no special standing.
+
+    THE ONE ADAPTER THAT CLAIMS COMPUTATION TODAY, and the claim is precise rather than
+    flattering: no adapter overrides `execute`, so the answer is produced by the base class's
+    `resolve_operation` — in Python. This is the adapter for which that IS the technology's own
+    answer, so it claims computation and every other adapter does not.
+    """
 
     kind = PYTHON
+
+    def computes(self) -> bool:
+        return True
 
     def transcribe(self, request: ExecutionRequest) -> str:
         return canonical_json(request.envelope())
@@ -311,6 +338,10 @@ class ExecutionInterchangeReport:
     observed: tuple[tuple[str, str], ...]
     knowledge_owners: tuple[str, ...] = ()
     failures: tuple[str, ...] = ()
+    #: Adapters that received the request and computed nothing. Reported rather than dropped: a
+    #: transcription target does its job correctly, and hiding it would make the population look
+    #: smaller than it is instead of making the claim smaller than it was.
+    transcription_only: tuple[str, ...] = ()
 
     @property
     def interchangeable(self) -> bool:
@@ -336,16 +367,27 @@ class ExecutionInterchangeReport:
         }
 
 
+def _CLAIMS_NOTHING() -> bool:  # noqa: N802 - a sentinel, named for what it means at the call site
+    """The default claim for an adapter that declares none."""
+    return False
+
+
 def verify_execution_interchangeable(
     adapters: Sequence[ExecutionAdapter],
     request: ExecutionRequest,
     registry: UniversalKnowledgeRegistry,
 ) -> ExecutionInterchangeReport:
     """Execute the identical request on every technology and compare (Article 10)."""
+    # ONLY CLAIMANTS ARE COMPARED, AND THAT IS WHAT MAKES THIS ABLE TO FAIL. Previously every
+    # adapter was compared, and every adapter's `execute` called the same `resolve_operation` that
+    # produced `expected` — so the report compared Python's answer to Python's answer once per
+    # adapter name and could not refuse anything. A transcription target is now checked for what
+    # it actually does: its payload must be non-empty, which `execute` already enforces.
     expected = content_hash(resolve_operation(request, registry))
     observed: list[tuple[str, str]] = []
     failures: list[str] = []
     owners: list[str] = []
+    transcribers: list[str] = []
     for adapter in adapters:
         if adapter.owns_knowledge():
             owners.append(adapter.kind)
@@ -353,12 +395,27 @@ def verify_execution_interchangeable(
         if not result.succeeded:
             failures.append(f"{adapter.kind}: {result.outcome}")
             continue
+        # A CLAIM ABSENT IS NOT A CLAIM MADE. The contract is a Protocol precisely so a
+        # third-party adapter needs no dependency on the base class, and such an adapter has no
+        # `computes` to call. Treating that as "does not claim computation" is the conservative
+        # reading and the correct one: an adapter is compared against the canonical answer only
+        # when it has said it produces one.
+        if not getattr(adapter, "computes", _CLAIMS_NOTHING)():
+            transcribers.append(adapter.kind)
+            continue
+        if result.output_digest != expected:
+            failures.append(
+                f"{adapter.kind}: claims computation and returned {result.output_digest[:12]} "
+                f"where the operation resolves to {expected[:12]}"
+            )
+            continue
         observed.append((adapter.kind, result.output_digest))
     return ExecutionInterchangeReport(
         operation=request.operation,
         subject=request.subject,
         expected_digest=expected,
         observed=tuple(sorted(observed)),
+        transcription_only=tuple(sorted(transcribers)),
         knowledge_owners=tuple(sorted(owners)),
         failures=tuple(sorted(failures)),
     )
