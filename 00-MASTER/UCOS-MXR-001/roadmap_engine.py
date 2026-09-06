@@ -489,9 +489,15 @@ def build_backlog(data: dict) -> list[dict]:
         wid = wp["id"]
         is_rat = "ratification" in wp["title"].lower() or "DR-RAT-11" in " ".join(wp["discharges"])
         is_aeos = "AEOS" in wp["title"]
-        iid = f"MXR-WP-{wid.split('-')[-1]}"
+        # THE STREAM SEGMENT IS PART OF THE IDENTITY, NOT DECORATION. Taking only the last
+        # segment collapsed WP-UCDA-001, WP-W3-001, WP-W5-001 and WP-W6-001 onto one id and
+        # WP-UCDA-002, WP-W1-002 onto another. graph_analysis keys by id, so the duplicates
+        # vanished into the dict and `len(items) - len(topological_order)` reported them as
+        # three unordered items — a UCKP-ART-03 duplication surfacing as an ordering fault,
+        # which is why the gate named the wrong defect. The source id is unique; carry it.
+        iid = f"MXR-{wid}"
         if is_rat:
-            iid = f"MXR-RAT-{wid.split('-')[-1]}"
+            iid = f"MXR-RAT-{wid.removeprefix('WP-')}"
             items.append(new_item(
                 id=iid, title=wp["title"], item_class="RAT",
                 source=f"{SRC['ucda']} work_packages {wid}",
