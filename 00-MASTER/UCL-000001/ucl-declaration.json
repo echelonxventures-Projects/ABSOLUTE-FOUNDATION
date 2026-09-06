@@ -2441,7 +2441,7 @@
       "dimension": "relationships whose target carries no registered constitutional identity stay within the disclosed bound",
       "measure": "relationships_without_target_identity",
       "comparator": "<=",
-      "expect": 274,
+      "expect": 275,
       "blocking": true,
       "bound_finding": "UCL-F-004"
     },

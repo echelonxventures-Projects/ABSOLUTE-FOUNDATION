@@ -60,7 +60,7 @@
       "kind": "registry-artifact",
       "name": "Universal Registry adapter",
       "note": "Supplies the registration graph and the capability category space.",
-      "objects": 1658,
+      "objects": 1684,
       "pointer": "artifacts",
       "provider": "PRV-REGISTRY",
       "providers_matched": 1,
@@ -71,7 +71,7 @@
       "kind": "lineage-record",
       "name": "Universal Lineage adapter",
       "note": "Supplies the lineage graph as a derived projection over recorded snapshot history. An empty id mapping means the collection key IS the identity, so a keyed store needs no engine change. No new lineage store is created (UCI-001 Part XVI.5).",
-      "objects": 1689,
+      "objects": 1715,
       "pointer": "history",
       "provider": "PRV-LEDGER",
       "providers_matched": 1,
@@ -93,7 +93,7 @@
       "kind": "decision-record",
       "name": "Constitutional decision adapter",
       "note": "Supplies registered engineering knowledge as decisions bound to evidence.",
-      "objects": 136,
+      "objects": 151,
       "pointer": "decisions",
       "provider": "PRV-DECISIONS",
       "providers_matched": 1,
@@ -419,9 +419,7 @@
       "role": "closure is asserted only after the repository reproduces itself from the committed state"
     }
   ],
-  "blocking_failures": [
-    "UCL-V-41"
-  ],
+  "blocking_failures": [],
   "bound_hits": [],
   "bounds_slack": [],
   "capabilities": [
@@ -597,11 +595,11 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "capability_artifacts_unresolved": 0,
-    "capability_nodes_discovered": 1679,
+    "capability_nodes_discovered": 1705,
     "cko_identity_collisions": 0,
     "cko_kind_registry_closed": 0,
     "cko_reference_ambiguities": 0,
-    "ckos_discovered": 4347,
+    "ckos_discovered": 4414,
     "ckos_of_unknown_kind": 0,
     "ckos_without_provenance": 0,
     "ckos_without_semantic_identity": 0,
@@ -621,7 +619,7 @@
     "knowledge_objects_discovered": 143,
     "lifecycle_authorities_unresolved": 0,
     "limit_tokens_present": 0,
-    "lineage_records_discovered": 1689,
+    "lineage_records_discovered": 1715,
     "parallel_authority_claims": 0,
     "providers_not_open": 0,
     "providers_unlocated": 0,
@@ -630,7 +628,7 @@
     "readiness_owners_unresolved": 0,
     "record_write_intersections": 0,
     "reentry_declarations_absent": 0,
-    "registry_artifacts_discovered": 1658,
+    "registry_artifacts_discovered": 1684,
     "relations_discovered": 532,
     "relations_of_unknown_type": 0,
     "relationship_ckos_discovered": 532,
@@ -655,7 +653,7 @@
   },
   "cycles": [],
   "dependency_relation": "binds-to",
-  "determination": "UNIVERSAL-CONSTITUTIONAL-LIFECYCLE-NOT-ESTABLISHED",
+  "determination": "UNIVERSAL-CONSTITUTIONAL-LIFECYCLE-EXECUTABLE",
   "elevations": [
     {
       "evidenced": true,
@@ -1160,8 +1158,8 @@
       "why_not_repaired": "Every artifact in the population is one the registry deliberately does not admit, and for three distinct reasons repository law states rather than infers: generated projections are re-derived and never hand-registered (GOV-005 §5.3), operational memory must never consume permanent corpus identities (UCOS-RECON-C1), and the generator must not register its own machinery or its own output. Admitting any of them to obtain an identity would violate the authority that excludes it; for the RIE family it would additionally be unsatisfiable, having no fixpoint. The condition is therefore reported and bounded rather than repaired, and referred to the same registry owner as UCL-F-004."
     }
   ],
-  "gate": "CLOSED",
-  "graph_digest": "fee5826f63834215c969d3c9fc446418935ec97b0c831a4269561d550864470b",
+  "gate": "OPEN",
+  "graph_digest": "711955395b2df9e4b3011008dd760c80e7b2f398e63cce97ec70ceb6114c4931",
   "graphs": [
     {
       "edge_relations": [
@@ -1191,7 +1189,7 @@
         "governance-programme",
         "registry-artifact"
       ],
-      "nodes": 1679,
+      "nodes": 1705,
       "relations_known": true
     },
     {
@@ -1288,7 +1286,7 @@
       "node_kinds": [
         "registry-artifact"
       ],
-      "nodes": 1658,
+      "nodes": 1684,
       "relations_known": true
     },
     {
@@ -1300,7 +1298,7 @@
       "node_kinds": [
         "lineage-record"
       ],
-      "nodes": 1689,
+      "nodes": 1715,
       "relations_known": true
     },
     {
@@ -1327,7 +1325,7 @@
         "knowledge-object",
         "decision-record"
       ],
-      "nodes": 279,
+      "nodes": 294,
       "relations_known": true
     },
     {
@@ -1550,7 +1548,7 @@
       "relation": "binds-to"
     }
   ],
-  "omega_e05_authorized": false,
+  "omega_e05_authorized": true,
   "order": [
     "SRC-MANIFEST::UCL-S-0010",
     "SRC-MANIFEST::UCL-S-0020",
@@ -1963,7 +1961,7 @@
       "owner": "00-BOOK/MASTER-BOOK/UMB-010-LINEAGE-ARCHITECTURE.md",
       "owner_located": true,
       "ready": true,
-      "value": 1689
+      "value": 1715
     },
     {
       "comparator": ">=",
@@ -13799,7 +13797,7 @@
       "goal": "Execute the Universal Constitutional Lifecycle over the Universal Constitutional Lifecycle itself.",
       "id": "GOAL-SELF",
       "note": "Self-application. The lifecycle is the first capability the lifecycle governs, which is what makes it a substrate rather than a description.",
-      "run_id": "c88a3634d57996b50cbe44c1a29f21513cf776615a0566099e76344ecd18c068",
+      "run_id": "56dc1560ca3d6ae8e14d2b7a81b98641f9a43cecc76bf261dc258cb395980dbf",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -14305,7 +14303,7 @@
       "goal": "Engineer the Universal Constitutional Engineering Substrate required for the Autonomous Constitutional Engineering Engine.",
       "id": "GOAL-SUBSTRATE",
       "note": "The Ω-E04→Ω-E05 handover goal.",
-      "run_id": "6d656cf6ad1c9f0bb6b131068ac9d1fb22291a9df345e34988cfc545b701bdf8",
+      "run_id": "6af73a7b29ea70ff3b168b951f931cab73cf53c7fd90c349458c21c41ec33ec2",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -14811,7 +14809,7 @@
       "goal": "Engineer an arbitrary future canonical capability that Repository Truth does not yet record.",
       "id": "GOAL-ARBITRARY-CAPABILITY",
       "note": "Proves universal applicability WITHOUT naming a capability: the traversal is identical for every goal, so no capability needs its own methodology and no capability list exists to be incomplete.",
-      "run_id": "1c7d9a3019922b8c1769502eaac544d73531d287a1c9b7555a69cda79f707a76",
+      "run_id": "10a1c319be62bb4053bcecaba8e731a5a523b13c172c06877990ad998a20f372",
       "stages_admitted": 45,
       "stages_traversed": 45,
       "steps": [
@@ -15313,7 +15311,7 @@
       ]
     }
   ],
-  "seal_sha256": "05b144bde28cdc2d11064d3b18c043a7b359f59bd9877c38f6fa8681dee69e32",
+  "seal_sha256": "a1f76cedd8e60163f63be586ff376dbfb7258978446eaf16fb9c23cf458f596d",
   "self_evolution": [
     {
       "anchor": "",
@@ -19180,7 +19178,7 @@
       "measure": "capability_nodes_discovered",
       "requirement": "the capability graph is discovered, never enumerated by this programme",
       "satisfied": true,
-      "value": 1679
+      "value": 1705
     },
     {
       "blocking": true,
@@ -19651,10 +19649,10 @@
       "bound_finding": "UCL-F-004",
       "comparator": "<=",
       "dimension": "relationships whose target carries no registered constitutional identity stay within the disclosed bound",
-      "expect": 274,
+      "expect": 275,
       "id": "UCL-V-41",
       "measure": "relationships_without_target_identity",
-      "satisfied": false,
+      "satisfied": true,
       "value": 275
     },
     {
