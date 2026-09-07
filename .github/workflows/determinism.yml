@@ -59,7 +59,16 @@ jobs:
             --evidence-dir determinism-evidence
 
       - name: Determinism integration tests (double-build + divergence detection)
-        run: python -m pytest engine/tests/integration/test_determinism.py engine/tests/unit/test_reproduce.py engine/tests/unit/test_hermetic.py -q
+        # --no-cov BECAUSE THE FLOOR IS THE WHOLE SUITE'S, NOT THIS SUBSET'S. pyproject's
+        # addopts carry --cov-fail-under=90, derived over the entire corpus; three test
+        # files exercise a fraction of it and reported "total of 27 is less than
+        # fail-under=90". The job then failed for measuring less than everything, which is
+        # what it was asked to do. The coverage floor belongs to ./verify.sh in ec1-ci.yml
+        # and is deliberately not duplicated here — the same reasoning mutation-gate.yml
+        # already records, and the form fourteen other workflows already use.
+        run: >
+          python -m pytest engine/tests/integration/test_determinism.py
+          engine/tests/unit/test_reproduce.py engine/tests/unit/test_hermetic.py -q --no-cov
 
       - name: Publish reproducibility & determinism evidence
         if: always()
