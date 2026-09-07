@@ -14,7 +14,6 @@ identity, and the change ledger that records the increment event.
 | `CEP-001` | 1.1 | `UCOS-CON-000033` | YES |
 | `CEP-002` | 1.2 | `UCOS-CON-000034` | YES |
 | `CEP-009` | 1.1 | `UCOS-CON-000041` | YES |
-| `UCKP-LAW-0001` | 1.0.0 | `UCOS-ENGINE-000496` | **NO** |
 
 ## Configuration in force at the current baseline
 
@@ -22,7 +21,6 @@ identity, and the change ledger that records the increment event.
 - `CEP-002 1.2`
 - `CEP-009 1.1`
 - `CMG-000001 1.2`
-- `UCKP-LAW-0001 1.0.0`
 
 ## Constitutional lineage
 

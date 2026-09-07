@@ -39,10 +39,7 @@
       "state": "CERTIFIED — CURRENT CONSTITUTIONAL BASELINE"
     }
   ],
-  "blocking_failures": [
-    "BLN-VAL-17",
-    "BLN-VAL-26"
-  ],
+  "blocking_failures": [],
   "capabilities": [
     {
       "capability": "Baseline Registry",
@@ -109,7 +106,7 @@
     },
     {
       "capability": "Baseline Version Progression",
-      "discharged": false,
+      "discharged": true,
       "id": "BLN-CAP-08",
       "measure": "versions_succeeded",
       "measured": true,
@@ -181,12 +178,12 @@
     },
     {
       "capability": "Baseline Configuration",
-      "discharged": false,
+      "discharged": true,
       "id": "BLN-CAP-16",
       "measure": "configuration_versions_read",
       "measured": true,
       "obligation": "the constitutional versions the current baseline records are read from the located constitutional register rather than restated",
-      "value": 5
+      "value": 4
     },
     {
       "capability": "Baseline Scope",
@@ -252,8 +249,7 @@
     "CEP-001 1.1",
     "CEP-002 1.2",
     "CEP-009 1.1",
-    "CMG-000001 1.2",
-    "UCKP-LAW-0001 1.0.0"
+    "CMG-000001 1.2"
   ],
   "continuation": {
     "bound": true,
@@ -263,7 +259,7 @@
   "counts": {
     "baselines": 2,
     "capabilities": 20,
-    "capabilities_discharged": 18,
+    "capabilities_discharged": 20,
     "chain_length": 2,
     "criteria": 5,
     "criteria_corroborated": 5,
@@ -282,7 +278,7 @@
     "scope_rules_bound": 5,
     "surfaces_scanned": 131,
     "unrecorded_citations": 0,
-    "version_progressions": 5,
+    "version_progressions": 4,
     "versions_succeeded": 4
   },
   "currency_claims": [
@@ -342,7 +338,7 @@
   "current": [
     "UCOS-BASELINE-002"
   ],
-  "determination": "BASELINE-INHERITANCE-INCOMPLETE",
+  "determination": "BASELINE-INHERITANCE-BOUND",
   "divergences_referred": [
     "BLN-CUR-01: referred to 00-MASTER/RELEASE-001/RELEASE-LIFECYCLE.md",
     "BLN-CUR-02: referred to 00-MASTER/RELEASE-001/RELEASE-LIFECYCLE.md",
@@ -479,8 +475,8 @@
       "title": "A tag exists in the baseline tag namespace under a convention the located scheme does not declare"
     }
   ],
-  "gate": "CLOSED",
-  "gate_exit": 1,
+  "gate": "OPEN",
+  "gate_exit": 0,
   "immutability": {
     "disjoint": true,
     "intersection": [],
@@ -748,7 +744,7 @@
       "rule": "a baseline shall be recomputable and shall yield a byte-identical result on recomputation"
     }
   ],
-  "seal_sha256": "4a7759434ff0f47297e027dd0d5c210bac11c2f59b84892fb8fccf84cda5a090",
+  "seal_sha256": "1b7d50aebef5f93c2e39de8d3249c097924f6b01c67ed3e9c1a03b84a7182d9e",
   "unrecorded_citations": [],
   "validations": [
     {
@@ -914,14 +910,12 @@
     {
       "blocking": true,
       "dimension": "VERSION-SUCCEEDED",
-      "failure_count": 1,
-      "failures": [
-        "UCKP-LAW-0001: no recorded increment reaches its version"
-      ],
+      "failure_count": 0,
+      "failures": [],
       "id": "BLN-VAL-17",
       "measured": true,
       "obligation": "every constitutional artifact whose recorded version exceeds the base version resolves to a universal identity whose located ledger records an increment event reaching that version",
-      "satisfied": false
+      "satisfied": true
     },
     {
       "blocking": true,
@@ -1006,15 +1000,12 @@
     {
       "blocking": true,
       "dimension": "CAPABILITY-DISCHARGED",
-      "failure_count": 2,
-      "failures": [
-        "BLN-CAP-08: versions_succeeded",
-        "BLN-CAP-16: configuration_versions_read"
-      ],
+      "failure_count": 0,
+      "failures": [],
       "id": "BLN-VAL-26",
       "measured": true,
       "obligation": "every declared capability is discharged by a measure that ran",
-      "satisfied": false
+      "satisfied": true
     }
   ],
   "version_progressions": [
@@ -1041,12 +1032,6 @@
       "identity": "UCOS-CON-000041",
       "increment_recorded": true,
       "version": "1.1"
-    },
-    {
-      "id": "UCKP-LAW-0001",
-      "identity": "UCOS-ENGINE-000496",
-      "increment_recorded": false,
-      "version": "1.0.0"
     }
   ]
 }

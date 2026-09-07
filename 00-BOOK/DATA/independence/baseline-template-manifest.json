@@ -121,7 +121,9 @@
     "| VERSION PROGRESSION | {} |",
     "| VERSION | {} |",
     "| `{}` {} | {} | `{}` | {} | {} |",
-    "|---|---|"
+    "|---|---|",
+    "None.",
+    "None. Every blocking validation is satisfied."
   ],
   "$allowed_lines_comment": [
     "TEMPLATES, IN NORMALISED FORM. Every declared value of six characters or more is",
@@ -152,12 +154,14 @@
     "18/20",
     "2 · chain length 2",
     "20",
+    "20/20",
     "21",
     "27",
     "3",
     "3/3 corroborated",
     "4",
     "4 · 1 agree · 3 referred",
+    "4/4 recorded",
     "4/5 recorded",
     "44",
     "5",
@@ -398,5 +402,6 @@
     "The alternative was to write the missing ids into the six documents that do not carry",
     "them. That would have been a generator minting normative text to satisfy its own",
     "verifier, which is the first failure UFI's own header names."
-  ]
+  ],
+  "$baseline_all_clear_entries": "FOUR STRINGS DECLARED BECAUSE BASELINE-001 STARTED PASSING. This manifest's own comment predicted them: composed measurements 'pin today's numbers, so the day a measurement moves this gate fails until somebody reviews the new value. That is the intended cost.' The measurement moved. '18/20' and '3/4 recorded' were the failing values and were declared; '20/20' and '4/4 recorded' are the passing ones and had never been emitted, because BLN-VAL-17 and BLN-VAL-26 had never both been satisfied. 'None.' and 'None. Every blocking validation is satisfied.' are the empty-findings text of the same all-clear state. WHAT CHANGED WAS NOT THE GENERATOR: UCKP-LAW-0001 carried version '1.0.0' where every other artifact of 44 carries two components, so a string comparison against base '1.0' read a progression that never happened and demanded an increment event the ledger correctly does not hold. Normalising the format cleared both validations. These four are reviewed and declared here rather than the verifier being relaxed, which is the route the failure message itself names."
 }

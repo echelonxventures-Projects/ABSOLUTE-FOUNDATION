@@ -22,7 +22,7 @@ compliance.
 | `BLN-VAL-14` NON-INHERITANCE-BOUND | every declared non-inheritance rule binds to a located clause whose text is present | YES | YES | YES | 0 |
 | `BLN-VAL-15` NO-ELEVATION | no recorded baseline carries the terminal finality token, and every declared elevation prohibition binds to a located clause | YES | YES | YES | 0 |
 | `BLN-VAL-16` CEILING-DISCLOSED | the located ceiling clause is present, the recorded vacancy is located, and the register discloses the ceiling token | YES | YES | YES | 0 |
-| `BLN-VAL-17` VERSION-SUCCEEDED | every constitutional artifact whose recorded version exceeds the base version resolves to a universal identity whose located ledger records an increment event reaching that version | YES | YES | **NO** | 1 |
+| `BLN-VAL-17` VERSION-SUCCEEDED | every constitutional artifact whose recorded version exceeds the base version resolves to a universal identity whose located ledger records an increment event reaching that version | YES | YES | YES | 0 |
 | `BLN-VAL-18` LINEAGE-MEASURED | the constitutional lineage population is measured, every recorded predecessor resolves to a present artifact, and the declared inheritance relationship type is located | YES | YES | YES | 0 |
 | `BLN-VAL-19` RELEASE-CORROBORATED | every evolution release the current baseline claims in its chain is recorded in the located evolution register | YES | YES | YES | 0 |
 | `BLN-VAL-20` RECORD-IMMUTABLE | this measurement's write set is disjoint from the located record set, so no append-only baseline record can be modified by it | YES | YES | YES | 0 |
@@ -31,16 +31,8 @@ compliance.
 | `BLN-VAL-23` STATE-VOCABULARY | every recorded baseline state names at least one token of the located lifecycle-status vocabulary | YES | YES | YES | 0 |
 | `BLN-VAL-24` AUTHORITY-DISCLOSED | the located register discloses that it holds no authority, it declares itself append-only, and this measurement discloses the same | YES | YES | YES | 0 |
 | `BLN-VAL-25` CONTINUATION-BOUND | the located continuation record resolves and its anchor is present, so the baseline is not read as a claim of completeness beyond its scope | YES | YES | YES | 0 |
-| `BLN-VAL-26` CAPABILITY-DISCHARGED | every declared capability is discharged by a measure that ran | YES | YES | **NO** | 2 |
+| `BLN-VAL-26` CAPABILITY-DISCHARGED | every declared capability is discharged by a measure that ran | YES | YES | YES | 0 |
 
 ## Measured failures
 
-### `BLN-VAL-17` VERSION-SUCCEEDED
-
-- UCKP-LAW-0001: no recorded increment reaches its version
-
-### `BLN-VAL-26` CAPABILITY-DISCHARGED
-
-- BLN-CAP-08: versions_succeeded
-- BLN-CAP-16: configuration_versions_read
-
+None.
