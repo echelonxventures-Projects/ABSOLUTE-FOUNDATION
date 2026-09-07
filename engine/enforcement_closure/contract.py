@@ -336,11 +336,118 @@ def engines_outside_the_canonical_lane(probe: Probe) -> list[str]:
     return sorted(outside)
 
 
+def workflows_that_cannot_run(probe: Probe) -> list[str]:
+    """Workflows a runner would reject before executing a step. UEC-L-16.
+
+    TWO REAL DEFECTS, BOTH FROM THIS REPOSITORY, MOTIVATE THIS.
+
+    ``uec-gate.yml`` carried an unquoted plain scalar containing ": " ::
+
+        run: echo "enforcement closure: governed, self-covered, and mutation-resistant"
+
+    YAML forbids that, GitHub could not parse the file, and the run failed with NO step
+    name — so UEC-000001, the programme that measures whether every protection is invoked
+    from two independent planes, HAD NEVER RUN IN CI. Its own UEC-L-09 asserts that plane
+    exists and passed the whole time, because it measures that the workflow file is present
+    and names the engine, never that a runner could execute it.
+
+    ``urke-gate.yml`` was then broken a second way, by me, hours after the first was found:
+    an edit cut from a step to the next ``- name:`` at the same indent, and because that
+    step was the LAST in its job the cut removed the following job's header, ``runs-on``
+    and ``steps``, merging its remainder into the previous job. The file still parsed as
+    YAML. A parse check alone would not have caught it.
+
+    So this measures BOTH: the scalar shape a parser rejects, and the structure a runner
+    requires. It is stdlib-only by necessity — PyYAML is not in the pinned toolchain and
+    adding a dependency to measure YAML would engage ISD-L-09.
+
+    IT IS A NECESSARY CONDITION AND NOT A SUFFICIENT ONE, and that is stated rather than
+    implied: this is not GitHub's parser, and a workflow passing here can still be rejected
+    for something neither defect resembles. The same relationship UEC-L-05 has to UEC-L-14 —
+    naming is weaker than witnessing — holds here between "no known-fatal shape" and "a
+    runner accepted it". The ceiling is zero because both known shapes are fatal.
+    """
+    problems: list[str] = []
+    for artifact in probe.artifacts:
+        if not artifact.identity.startswith(".github/workflows/"):
+            continue
+        text = discovery.read_text(probe.root, artifact.identity)
+        if not text:
+            continue
+        problems.extend(_workflow_defects(artifact.identity, text))
+    return sorted(problems)
+
+
+def _plain_scalar_holds_a_colon(value: str) -> bool:
+    """A plain (unquoted) scalar may not contain ": ". Quoted or block scalars may."""
+    value = value.strip()
+    if not value or value[0] in "\"'|>&*!{[":
+        return False
+    return ": " in value
+
+
+def _workflow_defects(name: str, text: str) -> list[str]:
+    """The two shapes a runner refuses, found without a YAML library."""
+    found: list[str] = []
+    lines = text.splitlines()
+
+    for number, line in enumerate(lines, start=1):
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        stripped = line.strip()
+        if stripped.startswith("- "):
+            stripped = stripped[2:]
+        key, separator, value = stripped.partition(": ")
+        if separator and key and " " not in key and _plain_scalar_holds_a_colon(value):
+            found.append(
+                f"{name}:{number}: unquoted scalar contains ': ', which no YAML parser "
+                f"accepts: {key}"
+            )
+
+    in_jobs = False
+    current: str | None = None
+    declared: list[str] = []
+    needed: list[tuple[str, str]] = []
+    for line in lines:
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        indent = len(line) - len(line.lstrip())
+        stripped = line.strip()
+        if indent == 0:
+            in_jobs = stripped.startswith("jobs:")
+            current = None
+            continue
+        if not in_jobs:
+            continue
+        if indent == 2 and stripped.endswith(":") and not stripped.startswith("- "):
+            current = stripped[:-1]
+            declared.append(current)
+        elif current and indent == 4 and stripped.startswith("needs:"):
+            value = stripped.partition(":")[2].strip().strip("[]")
+            for dependency in (item.strip().strip("\"'") for item in value.split(",")):
+                if dependency:
+                    needed.append((current, dependency))
+
+    # A `needs:` naming a job that does not exist is refused by the runner BEFORE any step
+    # runs, and it is how urke-gate.yml broke: the deleted job was still depended upon, so
+    # a file that parsed perfectly was rejected. This is the rule the structural guess
+    # missed — the remaining jobs each had runs-on and steps and were entirely well formed.
+    known = set(declared)
+    for job, dependency in needed:
+        if dependency not in known:
+            found.append(
+                f"{name}: job {job!r} needs {dependency!r}, which this workflow does not "
+                f"declare"
+            )
+    return found
+
+
 RATCHETED: Mapping[str, tuple[str, Callable[[Probe], list[str]]]] = {
     "engines_with_no_invoker": ("UEC-L-04", engines_with_no_invoker),
     "engines_without_a_test": ("UEC-L-05", engines_without_a_test),
     "engines_without_a_refusal_witness": ("UEC-L-14", engines_without_a_refusal_witness),
     "engines_outside_the_canonical_lane": ("UEC-L-15", engines_outside_the_canonical_lane),
+    "workflows_that_cannot_run": ("UEC-L-16", workflows_that_cannot_run),
     "artifacts_with_one_invocation_plane": ("UEC-L-06", artifacts_with_one_invocation_plane),
     "declarations_no_code_consumes": ("UEC-L-07", declarations_no_code_consumes),
     "declarations_without_a_certification_identity": (
@@ -477,6 +584,11 @@ def _ratcheted(probe: Probe, key: str) -> Findings:
             + (f" … +{len(offenders) - 8} more" if len(offenders) > 8 else "")
         )
     return findings
+
+
+def every_workflow_can_run(probe: Probe) -> Findings:
+    """UEC-L-16 — a workflow a runner rejects is a plane that does not exist."""
+    return _ratcheted(probe, "workflows_that_cannot_run")
 
 
 def every_ci_gate_is_reachable_from_the_canonical_lane(probe: Probe) -> Findings:
@@ -849,6 +961,7 @@ LAW_CHECKS: Mapping[str, Callable[[Probe], Findings]] = {
     "every_ci_gate_is_reachable_from_the_canonical_lane": (
         every_ci_gate_is_reachable_from_the_canonical_lane
     ),
+    "every_workflow_can_run": every_workflow_can_run,
     "no_single_invocation_plane": no_single_invocation_plane,
     "every_declaration_is_consumed": every_declaration_is_consumed,
     "certification_identity_exists": certification_identity_exists,

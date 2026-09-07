@@ -1272,3 +1272,75 @@ def test_the_law_refuses_when_the_lane_cannot_be_read(live_probe: Probe) -> None
     assert with_ci, "no engine is invoked by a workflow, so this law measures nothing"
     for artifact in with_ci[:5]:
         assert not probe.reaches_canonical_lane(artifact, "")
+
+
+# UEC-L-16 — a workflow a runner rejects is a plane that does not exist.
+
+
+BROKEN_SCALAR = """name: x
+on: [push]
+jobs:
+  a:
+    runs-on: ubuntu-latest
+    steps:
+      - name: s
+        run: echo "enforcement closure: governed, self-covered, and mutation-resistant"
+"""
+
+DANGLING_NEEDS = """name: x
+on: [push]
+jobs:
+  a:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'true'
+  b:
+    needs: [a, deleted-job]
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'true'
+"""
+
+WELL_FORMED = """name: x
+on: [push]
+jobs:
+  a:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "one: two"' 
+  b:
+    needs: [a]
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'true'
+"""
+
+
+def test_l16_catches_the_two_shapes_that_actually_broke_this_repository() -> None:
+    """Both fixtures are the real defects, reduced. Neither is invented.
+
+    The first is uec-gate.yml's unquoted scalar, which no parser accepts and which meant
+    UEC-000001 had never run in CI. The second is urke-gate.yml's dangling needs after
+    an edit deleted the job it depended on — that file PARSED, so a parse check alone would
+    have passed it.
+    """
+    assert contract._workflow_defects("w", BROKEN_SCALAR)
+    assert contract._workflow_defects("w", DANGLING_NEEDS)
+
+
+def test_l16_spares_a_quoted_colon_and_a_resolved_need() -> None:
+    """It must spare, or its floor of zero is unreachable except by deleting workflows.
+
+    run: echo "one: two" is a QUOTED scalar and legal; a needs naming a declared
+    job is the ordinary case. A detector that cannot spare these would refuse most of the
+    repository's real workflows.
+    """
+    assert contract._workflow_defects("w", WELL_FORMED) == []
+
+
+def test_l16_the_live_workflow_set_is_measured_and_clean(live_probe: Probe) -> None:
+    """And the measurement reaches the real population rather than an empty one."""
+    probe = live_probe
+    workflows = [a for a in probe.artifacts if a.identity.startswith(".github/workflows/")]
+    assert len(workflows) > 30, "the workflow population was not discovered"
+    assert contract.workflows_that_cannot_run(probe) == []
