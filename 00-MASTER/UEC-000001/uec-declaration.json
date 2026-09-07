@@ -1412,6 +1412,13 @@
       "concern": "VACUITY",
       "law_id": "UEC-L-14",
       "statement": "The number of gate engines no test has been shown to make REFUSE may not exceed the declared ceiling. UEC-L-05 measures that a test names the engine; this measures that a test forges the violating condition and observes the refusal. A verifier nothing has shown can refuse certifies nothing."
+    },
+    {
+      "blocking": true,
+      "check": "every_ci_gate_is_reachable_from_the_canonical_lane",
+      "concern": "REACH",
+      "law_id": "UEC-L-15",
+      "statement": "The number of gate engines a CI workflow can refuse on and the canonical verification entry point cannot reach may not exceed the declared ceiling. UEC-L-04 measures that an engine is invoked at all and UEC-L-06 that more than one plane reaches it; neither measures whether the CANONICAL plane does. A gate only CI can run is invisible to the command every contributor is told to run, and UCL-000001 stayed breached on a blocking ratchet for seventy-seven commits for exactly that reason — every one landed on a green ./verify.sh. The measure is narrow on purpose: a mutation authority must not run inside a read-only lane, so what is refused is only the shape that hid UCL-V-41."
     }
   ],
   "name": "Universal Enforcement Closure",
@@ -1435,7 +1442,8 @@
     "engines_without_a_test": 16,
     "governed_artifacts": 197,
     "engines_without_a_refusal_witness": 17,
-    "$engines_without_a_refusal_witness": "17 of 52 verifiers. LOWERED 19 -> 17 in the same edit and for the same reason as `engines_without_a_test`: the new extraction tests do not merely NAME those engines, they force each to refuse — a corrupted archive, a sha that does not exist, a command that exits non-zero — so both counters fell together. UEC-L-05 asks whether a test names the engine; this asks whether a test has shown it REFUSE, and the gap between the two counters is still one engine that is named by a test which never forges a refusal. May fall; may never rise."
+    "$engines_without_a_refusal_witness": "17 of 52 verifiers. LOWERED 19 -> 17 in the same edit and for the same reason as `engines_without_a_test`: the new extraction tests do not merely NAME those engines, they force each to refuse — a corrupted archive, a sha that does not exist, a command that exits non-zero — so both counters fell together. UEC-L-05 asks whether a test names the engine; this asks whether a test has shown it REFUSE, and the gap between the two counters is still one engine that is named by a test which never forges a refusal. May fall; may never rise.",
+    "engines_outside_the_canonical_lane": 26
   },
   "self_coverage": {
     "$comment": "Discovery D-09 — 'trust anchor -> REG-AUTO-001, itself unregistered' — promoted from a dependency edge into an executable invariant. Every artifact below must be located by UEC's own discovery rules AND present in UEC's own governed inventory AND satisfy the two-plane and test-binding laws UEC applies to everything else. A closure mechanism outside its own closure is the defect, not the exception to it.",

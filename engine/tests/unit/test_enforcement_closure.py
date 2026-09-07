@@ -1207,3 +1207,68 @@ def test_a_cached_mapping_cannot_be_aliased_by_its_consumer(document: dict[str, 
     assert first is not second
     first.clear()
     assert discovery.test_corpus(ROOT, paths, testpaths) == second
+
+
+# UEC-L-15 — a gate only CI can run is one the standard command cannot see.
+
+
+def test_the_canonical_lane_population_is_measured_and_is_not_everything(
+    live_probe: Probe,
+) -> None:
+    """A measure returning every engine, or none, is broken rather than satisfied."""
+    probe = live_probe
+    outside = contract.engines_outside_the_canonical_lane(probe)
+    assert 0 < len(outside) < len(probe.engines)
+
+
+def test_an_engine_invoked_by_nothing_is_not_counted_as_ci_only(live_probe: Probe) -> None:
+    """UEC-L-04 owns 'invoked by nothing'. This law owns 'CI can, the lane cannot'.
+
+    Counting the uninvoked here would double-count them and make the two ceilings move
+    together, so a single migration would appear to buy two improvements.
+    """
+    probe = live_probe
+    uninvoked = set(contract.engines_with_no_invoker(probe))
+    outside = set(contract.engines_outside_the_canonical_lane(probe))
+    assert not (uninvoked & outside), "an engine no plane invokes was counted as CI-only"
+
+
+def test_reachability_counts_the_module_form_not_only_the_path(live_probe: Probe) -> None:
+    """verify.sh invokes engines as `-m engine.<package>`, never by gate-file path.
+
+    THE FIRST VERSION OF THIS MEASURE MATCHED PATHS ONLY and reported 42 engines outside
+    the lane against a true 41 — a false gap of one, produced by the matcher rather than
+    the repository. A detector that cannot spare cannot reach its floor honestly, so both
+    forms are pinned here.
+    """
+    probe = live_probe
+    lane = probe.canonical_lane_text()
+    assert lane, "the declared canonical entry point did not resolve"
+    module_form = [
+        artifact
+        for artifact in probe.engines
+        if probe.reaches_canonical_lane(artifact, lane)
+        and artifact.key().split("::", 1)[-1] not in lane
+    ]
+    assert module_form, (
+        "no engine resolved by its module form, so the matcher is path-only and would "
+        "report a false gap"
+    )
+
+
+def test_the_law_refuses_when_the_lane_cannot_be_read(live_probe: Probe) -> None:
+    """Forge the violation: an unreadable lane must not read as full reachability.
+
+    An entry point that does not resolve means NOTHING is reachable from it, and the law
+    must say so rather than silently pass. A measure that treats an absent lane as a clean
+    one is the vacuity UEC-L-14 exists to refuse, arriving through a missing file.
+    """
+    probe = live_probe
+    with_ci = [
+        artifact
+        for artifact in probe.engines
+        if any(str(name).startswith(".github/workflows/") for name in probe.invokers(artifact))
+    ]
+    assert with_ci, "no engine is invoked by a workflow, so this law measures nothing"
+    for artifact in with_ci[:5]:
+        assert not probe.reaches_canonical_lane(artifact, "")

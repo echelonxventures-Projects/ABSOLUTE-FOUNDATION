@@ -92,6 +92,10 @@ class Declaration:
     ratchet: Mapping[str, int]
     corpus_plane: Mapping[str, Any]
     self_coverage: Mapping[str, Any]
+    #: The command CLAUDE.md names as the one repository-standard entry point. Declared so
+    #: UEC-L-15 measures reach against a NAMED lane rather than a constant in the engine —
+    #: a repository that renames it says so here.
+    canonical_entry_point: str
     testpaths: tuple[str, ...]
     refusal_witness: Mapping[str, Any]
     gate: Mapping[str, Any]
@@ -256,6 +260,9 @@ def parse(document: Mapping[str, Any], *, source: str) -> Declaration:
         ratchet=ratchet,
         corpus_plane=dict(_require(document, "corpus_plane")),
         self_coverage=dict(_require(document, "self_coverage")),
+        canonical_entry_point=str(
+            (document.get("programme") or {}).get("canonical_entry_point") or "verify.sh"
+        ),
         testpaths=testpaths,
         refusal_witness=dict(_require(document, "refusal_witness")),
         gate=dict(_require(document, "gate")),

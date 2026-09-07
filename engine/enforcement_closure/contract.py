@@ -37,6 +37,8 @@ import copy
 import importlib
 import json
 import os
+import pathlib
+import re
 from collections.abc import Callable, Mapping, Sequence
 from typing import Any
 
@@ -115,6 +117,40 @@ class Probe:
 
     def invokers(self, artifact: Artifact) -> tuple[str, ...]:
         return self._invokers[artifact.key()]
+
+    def canonical_lane_text(self) -> str:
+        """The canonical verification entry point's own source, read once.
+
+        Declared rather than hardcoded: the path comes from the declaration, so a repository
+        that renames its entry point says so there and not here.
+        """
+        entry = str(self.declaration.canonical_entry_point or "verify.sh")
+        target = pathlib.Path(self.root) / entry
+        try:
+            return target.read_text(encoding="utf-8")
+        except OSError:
+            return ""
+
+    def reaches_canonical_lane(self, artifact: Artifact, lane: str) -> bool:
+        """True iff the canonical lane invokes this engine, by path OR by module form.
+
+        Both forms count because verify.sh uses both: `$PY -m engine.universal_discovery`
+        never names engine/universal_discovery/gate.py. Matching paths alone reported a
+        false gap when this was first measured.
+        """
+        if not lane:
+            return False
+        path = artifact.key().split("::", 1)[-1]
+        if path in lane:
+            return True
+        if any(str(name).endswith("verify.sh") for name in self.invokers(artifact)):
+            return True
+        parts = path.split("/")
+        if len(parts) >= 2:
+            package = f"{parts[0]}.{parts[1]}"
+            if re.search(r"-m\s+" + re.escape(package) + r"\b", lane):
+                return True
+        return False
 
     def refusal_shapes(self, where: str) -> frozenset[str]:
         """The refusal shapes one test module contains, read from its AST and memoised.
@@ -262,10 +298,49 @@ def declarations_without_a_certification_identity(probe: Probe) -> list[str]:
     return sorted(missing)
 
 
+def engines_outside_the_canonical_lane(probe: Probe) -> list[str]:
+    """Gate engines CI can refuse on and ./verify.sh cannot reach. UEC-L-15.
+
+    UEC-L-04 asks whether an engine is invoked by ANY plane, and UEC-L-06 whether it is
+    reachable from more than one. Neither asks whether the CANONICAL one reaches it, and
+    that gap has a measured cost. UCL-000001 breached its blocking UCL-V-41 ratchet and
+    stayed breached for seventy-seven commits: every one of them landed on a green
+    ./verify.sh, because verify.sh has no UCL stage and the gate lives only in a workflow.
+    CLAUDE.md tells every contributor that ./verify.sh is the one repository-standard
+    command; a gate outside it is a gate the discipline that governs commits cannot see.
+
+    SO THE MEASURE IS NARROW ON PURPOSE. Not "every engine belongs in verify.sh" — several
+    are mutation authorities (AEE, RIB, CMG) that must never run inside a read-only lane,
+    and forcing them in would be worse than the gap. What is refused is the specific shape
+    that let UCL-V-41 hide: CI can fail the build on this engine and the local lane cannot
+    tell you so.
+
+    REACHABILITY IS NOT A PATH MATCH. verify.sh invokes several engines as
+    `$PY -m engine.<package>`, never by gate-file path, so a matcher keyed on paths reports
+    a false gap. That error was made while first measuring this: it read 42 outside the lane
+    before the module form was counted, and 41 after. Both forms count here.
+
+    Declaring an engine CI-only is lawful and ratcheted SEPARATELY, for the reason
+    DECLARED_DIRECT_CEILING gives in engine/omega_infinite/direct_callers.py: a single
+    ceiling can always be satisfied by writing a paragraph, and a ratchet satisfiable by
+    explaining measures nothing.
+    """
+    lane = probe.canonical_lane_text()
+    outside: list[str] = []
+    for artifact in probe.engines:
+        if probe.reaches_canonical_lane(artifact, lane):
+            continue
+        if not any(str(name).startswith(".github/workflows/") for name in probe.invokers(artifact)):
+            continue  # UEC-L-04 owns "invoked by nothing"; this law owns "CI only".
+        outside.append(artifact.identity)
+    return sorted(outside)
+
+
 RATCHETED: Mapping[str, tuple[str, Callable[[Probe], list[str]]]] = {
     "engines_with_no_invoker": ("UEC-L-04", engines_with_no_invoker),
     "engines_without_a_test": ("UEC-L-05", engines_without_a_test),
     "engines_without_a_refusal_witness": ("UEC-L-14", engines_without_a_refusal_witness),
+    "engines_outside_the_canonical_lane": ("UEC-L-15", engines_outside_the_canonical_lane),
     "artifacts_with_one_invocation_plane": ("UEC-L-06", artifacts_with_one_invocation_plane),
     "declarations_no_code_consumes": ("UEC-L-07", declarations_no_code_consumes),
     "declarations_without_a_certification_identity": (
@@ -402,6 +477,11 @@ def _ratcheted(probe: Probe, key: str) -> Findings:
             + (f" … +{len(offenders) - 8} more" if len(offenders) > 8 else "")
         )
     return findings
+
+
+def every_ci_gate_is_reachable_from_the_canonical_lane(probe: Probe) -> Findings:
+    """UEC-L-15 — a gate only CI can run is one the standard command cannot see."""
+    return _ratcheted(probe, "engines_outside_the_canonical_lane")
 
 
 def every_engine_is_witnessed_refusing(probe: Probe) -> Findings:
@@ -766,6 +846,9 @@ LAW_CHECKS: Mapping[str, Callable[[Probe], Findings]] = {
     "every_engine_has_an_invoker": every_engine_has_an_invoker,
     "every_engine_has_a_test": every_engine_has_a_test,
     "every_engine_is_witnessed_refusing": every_engine_is_witnessed_refusing,
+    "every_ci_gate_is_reachable_from_the_canonical_lane": (
+        every_ci_gate_is_reachable_from_the_canonical_lane
+    ),
     "no_single_invocation_plane": no_single_invocation_plane,
     "every_declaration_is_consumed": every_declaration_is_consumed,
     "certification_identity_exists": certification_identity_exists,
