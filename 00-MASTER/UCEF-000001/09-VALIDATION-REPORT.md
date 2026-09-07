@@ -29,7 +29,7 @@ Every dimension is computed from Repository Truth. `UNVERIFIED` is **fail-closed
 | UCEF-VAL-06 | Complete dependency closure | PASS | 15/15 stages reachable from a single entry stage; every dependency is itself a declared stage — closure is complete |
 | UCEF-VAL-07 | Complete ontology synchronization | PASS | the ontology owner is located at 00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md |
 | UCEF-VAL-08 | Complete taxonomy synchronization | PASS | 24 kinds recognized and the kind set is absent from the 4 closed enumerations — the taxonomy remains open to append |
-| UCEF-VAL-09 | Complete registry synchronization | PASS | 1658 registered artifacts, declared count agrees, identities unique — the registry projection is internally synchronized |
+| UCEF-VAL-09 | Complete registry synchronization | PASS | 1684 registered artifacts, declared count agrees, identities unique — the registry projection is internally synchronized |
 | UCEF-VAL-10 | Complete constitutional traceability | PASS | 139/139 traceability links closed — zero orphan links |
 | UCEF-VAL-11 | Construct register is open | PASS | the register is declared open and non-exhaustive over 33 named classes; an unnamed class is admitted by the same procedure, and absence is no ground of rejection |
 | UCEF-VAL-12 | No expansion axis declares a finite bound | PASS | 17/17 expansion axes declare no finite bound |

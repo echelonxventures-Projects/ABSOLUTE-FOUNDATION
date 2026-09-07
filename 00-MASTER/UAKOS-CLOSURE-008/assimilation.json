@@ -6,8 +6,8 @@
     "4": 36,
     "5": 179,
     "6": 17,
-    "7": 6,
-    "F": 11137
+    "7": 5,
+    "F": 11131
   },
   "authority": "NONE \u2014 DERIVED TRUTH (fail-closed, TRACK-001)",
   "curated_mappings": [
@@ -113,10 +113,10 @@
     }
   ],
   "decision_actions": {
-    "ACCEPT": 513,
-    "DEFER": 11053,
-    "ESCALATE_ARCHITECTURE": 6020,
-    "MERGE": 331,
+    "ACCEPT": 512,
+    "DEFER": 11047,
+    "ESCALATE_ARCHITECTURE": 6025,
+    "MERGE": 333,
     "REJECT": 5807,
     "SUPERSEDE": 135
   },
@@ -263,14 +263,14 @@
     }
   ],
   "decision_operations": {
-    "COMPLETE-EXISTING-REPRESENTATION": 331,
+    "COMPLETE-EXISTING-REPRESENTATION": 333,
     "DISCARD-OBSOLETE": 331,
-    "HOME-NEW-KNOWLEDGE": 513,
+    "HOME-NEW-KNOWLEDGE": 512,
     "PRESERVE-RETIREMENT": 6,
     "REFER-ARCHITECTURAL-REVIEW": 2899,
     "REFER-CONFLICT": 1010,
-    "REFER-CONSTITUTIONAL-REGRESSION": 2111,
-    "REGISTER-AND-HOLD": 11053,
+    "REFER-CONSTITUTIONAL-REGRESSION": 2116,
+    "REGISTER-AND-HOLD": 11047,
     "REPLACE-CURRENT-FORM": 135,
     "RETAIN-AS-HISTORY": 5468,
     "RETAIN-CURRENT-FORM": 2
@@ -281,9 +281,9 @@
     "Architecture Decision Record Authority (adr/)": 30,
     "Assimilation Decision Register (00-MASTER/UAKOS-CLOSURE-008)": 6339,
     "CI Gate Authority (.github/)": 17,
-    "Canonical Catalog Authority (03-CATALOGS)": 1907,
+    "Canonical Catalog Authority (03-CATALOGS)": 1904,
     "Canonical Reference Authority (04-REFERENCE)": 59,
-    "Constitutional Certification Authority (UCOS-CVER-001)": 308,
+    "Constitutional Certification Authority (UCOS-CVER-001)": 305,
     "Constitutional Engineering Programme Authority (00-CEP)": 401,
     "Constitutional Meta-Governance Authority (00-CMG)": 60,
     "Constitutional Reconciliation Authority (01-WORKING)": 757,
@@ -291,11 +291,11 @@
     "Data Authority (10-DATA)": 52,
     "Data Implementation Authority (data/)": 9,
     "Determinism Evidence Authority (determinism-evidence/)": 1,
-    "Engine Implementation Authority (engine/)": 2601,
+    "Engine Implementation Authority (engine/)": 2600,
     "Engineering Architecture Authority (07-ENGINEERING)": 4267,
     "Evolution Programme Authority (EVO-USIS-014)": 3,
     "Generation / Factory Authority (05-GENERATION)": 127,
-    "Implementation Authority (06-IMPLEMENTATION)": 145,
+    "Implementation Authority (06-IMPLEMENTATION)": 144,
     "Infrastructure Authority (13-INFRASTRUCTURE)": 16,
     "Infrastructure Implementation Authority (infrastructure/)": 7,
     "Integrated Assimilation Programme Authority (IAC-001A)": 5,
@@ -304,11 +304,11 @@
     "Integrated Assimilation Programme Authority (IAC-001D)": 4,
     "Integrated Assimilation Programme Authority (IAC-001E)": 2,
     "Intelligence Implementation Authority (intelligence/)": 14,
-    "Master Execution Authority (MCP)": 367,
-    "Master Program Authority (00-MASTER)": 1464,
+    "Master Execution Authority (MCP)": 366,
+    "Master Program Authority (00-MASTER)": 1475,
     "Master Program Authority (02-MASTER)": 771,
     "Platform Implementation Authority (platform/)": 162,
-    "Repository Root Authority (repository root)": 266,
+    "Repository Root Authority (repository root)": 264,
     "Runtime Authority (08-RUNTIME)": 67,
     "Runtime Operational Memory Authority (.runtime/)": 155,
     "Security Authority (14-SECURITY)": 96,
@@ -672,7 +672,7 @@
       "implementation_action": "REFER-CONFLICT",
       "implementation_owner": "Engine Implementation Authority (engine/)",
       "implementation_priority": "IMMEDIATE",
-      "objects": 7,
+      "objects": 8,
       "steps": [
         "refer the contradiction to {owner}",
         "the evidence contradicts itself, or certified Repository Truth carries what the evidence rejects \u2014 this engine resolves neither",
@@ -687,7 +687,7 @@
       "implementation_action": "REFER-CONSTITUTIONAL-REGRESSION",
       "implementation_owner": "Engine Implementation Authority (engine/)",
       "implementation_priority": "IMMEDIATE",
-      "objects": 95,
+      "objects": 94,
       "steps": [
         "refer to {owner}: acting mechanically here would regress a CONSTITUTIONAL dimension",
         "the regressing dimensions are recorded in the superiority profile `{profile}`",
@@ -777,7 +777,7 @@
       "implementation_action": "REFER-CONSTITUTIONAL-REGRESSION",
       "implementation_owner": "Implementation Authority (06-IMPLEMENTATION)",
       "implementation_priority": "IMMEDIATE",
-      "objects": 83,
+      "objects": 82,
       "steps": [
         "refer to {owner}: acting mechanically here would regress a CONSTITUTIONAL dimension",
         "the regressing dimensions are recorded in the superiority profile `{profile}`",
@@ -942,7 +942,7 @@
       "implementation_action": "REFER-CONSTITUTIONAL-REGRESSION",
       "implementation_owner": "Master Program Authority (00-MASTER)",
       "implementation_priority": "IMMEDIATE",
-      "objects": 529,
+      "objects": 536,
       "steps": [
         "refer to {owner}: acting mechanically here would regress a CONSTITUTIONAL dimension",
         "the regressing dimensions are recorded in the superiority profile `{profile}`",
@@ -1032,7 +1032,7 @@
       "implementation_action": "REFER-CONSTITUTIONAL-REGRESSION",
       "implementation_owner": "Repository Root Authority (repository root)",
       "implementation_priority": "IMMEDIATE",
-      "objects": 150,
+      "objects": 149,
       "steps": [
         "refer to {owner}: acting mechanically here would regress a CONSTITUTIONAL dimension",
         "the regressing dimensions are recorded in the superiority profile `{profile}`",
@@ -1182,7 +1182,7 @@
       "implementation_action": "REFER-CONFLICT",
       "implementation_owner": "Universal Master Book Authority (00-BOOK)",
       "implementation_priority": "IMMEDIATE",
-      "objects": 72,
+      "objects": 71,
       "steps": [
         "refer the contradiction to {owner}",
         "the evidence contradicts itself, or certified Repository Truth carries what the evidence rejects \u2014 this engine resolves neither",
@@ -1197,7 +1197,7 @@
       "implementation_action": "REFER-CONSTITUTIONAL-REGRESSION",
       "implementation_owner": "Universal Master Book Authority (00-BOOK)",
       "implementation_priority": "IMMEDIATE",
-      "objects": 256,
+      "objects": 257,
       "steps": [
         "refer to {owner}: acting mechanically here would regress a CONSTITUTIONAL dimension",
         "the regressing dimensions are recorded in the superiority profile `{profile}`",
@@ -2387,11 +2387,11 @@
     },
     {
       "decision": "ACCEPT",
-      "first_object": "UCOS-KA-001624",
+      "first_object": "UCOS-KA-002994",
       "implementation_action": "HOME-NEW-KNOWLEDGE",
       "implementation_owner": "Constitutional Certification Authority (UCOS-CVER-001)",
       "implementation_priority": "SCHEDULED",
-      "objects": 6,
+      "objects": 5,
       "steps": [
         "{owner} re-confirms at the current HEAD that Repository Truth still carries no form of this object",
         "author the knowledge at `{destination}`, governed by `{authority}`",
@@ -2503,7 +2503,7 @@
       "implementation_action": "COMPLETE-EXISTING-REPRESENTATION",
       "implementation_owner": "Engine Implementation Authority (engine/)",
       "implementation_priority": "SCHEDULED",
-      "objects": 30,
+      "objects": 29,
       "steps": [
         "{owner} opens the resolving anchor `{anchor}`",
         "read the superiority profile `{profile}` to identify precisely which declared dimensions the current form does not yet satisfy",
@@ -2615,7 +2615,7 @@
       "implementation_action": "COMPLETE-EXISTING-REPRESENTATION",
       "implementation_owner": "Master Program Authority (00-MASTER)",
       "implementation_priority": "SCHEDULED",
-      "objects": 73,
+      "objects": 77,
       "steps": [
         "{owner} opens the resolving anchor `{anchor}`",
         "read the superiority profile `{profile}` to identify precisely which declared dimensions the current form does not yet satisfy",
@@ -2663,7 +2663,7 @@
       "implementation_action": "COMPLETE-EXISTING-REPRESENTATION",
       "implementation_owner": "Repository Root Authority (repository root)",
       "implementation_priority": "SCHEDULED",
-      "objects": 51,
+      "objects": 50,
       "steps": [
         "{owner} opens the resolving anchor `{anchor}`",
         "read the superiority profile `{profile}` to identify precisely which declared dimensions the current form does not yet satisfy",
@@ -2775,7 +2775,7 @@
       "implementation_action": "REGISTER-AND-HOLD",
       "implementation_owner": "Canonical Catalog Authority (03-CATALOGS)",
       "implementation_priority": "HELD",
-      "objects": 1747,
+      "objects": 1744,
       "steps": [
         "the object is REGISTERED at `{destination}` under {owner}, and HELD",
         "the hold is the presence axis's Wave F: the maturity evidence carries no human commitment, so scheduling it would fabricate one",
@@ -2790,7 +2790,7 @@
       "implementation_action": "REGISTER-AND-HOLD",
       "implementation_owner": "Constitutional Certification Authority (UCOS-CVER-001)",
       "implementation_priority": "HELD",
-      "objects": 302,
+      "objects": 300,
       "steps": [
         "the object is REGISTERED at `{destination}` under {owner}, and HELD",
         "the hold is the presence axis's Wave F: the maturity evidence carries no human commitment, so scheduling it would fabricate one",
@@ -2880,7 +2880,7 @@
       "implementation_action": "REGISTER-AND-HOLD",
       "implementation_owner": "Master Execution Authority (MCP)",
       "implementation_priority": "HELD",
-      "objects": 343,
+      "objects": 342,
       "steps": [
         "the object is REGISTERED at `{destination}` under {owner}, and HELD",
         "the hold is the presence axis's Wave F: the maturity evidence carries no human commitment, so scheduling it would fabricate one",
@@ -3265,11 +3265,11 @@
     "RETIRED"
   ],
   "decision_priorities": {
-    "HELD": 11053,
+    "HELD": 11047,
     "HIGH": 3770,
-    "IMMEDIATE": 2385,
+    "IMMEDIATE": 2390,
     "NONE": 5807,
-    "SCHEDULED": 844
+    "SCHEDULED": 845
   },
   "decision_priority_declaration": [
     {
@@ -3404,12 +3404,12 @@
     "DEC-01": 1010,
     "DEC-02": 331,
     "DEC-03": 6,
-    "DEC-04": 2111,
+    "DEC-04": 2116,
     "DEC-05": 5468,
-    "DEC-06": 11053,
-    "DEC-07": 331,
+    "DEC-06": 11047,
+    "DEC-07": 333,
     "DEC-08": 135,
-    "DEC-10": 513,
+    "DEC-10": 512,
     "DEC-11": 2899,
     "DEC-12": 2
   },
@@ -3724,7 +3724,7 @@
         "OBSOLETE=331",
         "REQUIRES_ARCHITECTURAL_REVIEW=4425",
         "BETTER_THAN_CURRENT=135",
-        "PARTIALLY_ASSIMILATED=1229"
+        "PARTIALLY_ASSIMILATED=1236"
       ],
       "gate": "Superiority findings referred to their owners (conflicting / obsolete / review)",
       "result": "REPORTED"
@@ -3867,18 +3867,18 @@
       "blocking": false,
       "count": 23859,
       "detail": [
-        "ACCEPT=513",
-        "MERGE=331",
+        "ACCEPT=512",
+        "MERGE=333",
         "SUPERSEDE=135",
         "REJECT=5807",
-        "ESCALATE_ARCHITECTURE=6020",
-        "DEFER=11053"
+        "ESCALATE_ARCHITECTURE=6025",
+        "DEFER=11047"
       ],
       "gate": "Repository actions referred to their owners",
       "result": "REPORTED"
     }
   ],
-  "head_commit": "77798202",
+  "head_commit": "42f519e9",
   "mission": "Constitutional assimilation & repository completion (final closure)",
   "presence_corrections": 322,
   "program": "UAKOS-CLOSURE-008",
@@ -3945,8 +3945,8 @@
   },
   "remaining_approved_promotion_candidates": 0,
   "repository_index": {
-    "concepts": 65120,
-    "files": 5893
+    "concepts": 67631,
+    "files": 6075
   },
   "row_columns": [
     "kid",
@@ -4000,26 +4000,26 @@
     "R1": 32,
     "R2": 4894,
     "R4": 6176,
-    "R6": 11697,
+    "R6": 11690,
     "SE-1": 9,
-    "SE-2": 260,
-    "SE-3": 660
+    "SE-2": 266,
+    "SE-3": 661
   },
-  "seal_sha256": "1f820d0a87eecd92507151f6525b0ef7ed49d9e6bf619f03a898962ebd044d33",
+  "seal_sha256": "3a0a82c6139cc616cb595499a08f52e2cba91af85cbfe7ee8d1350e6eb4b9876",
   "semantic_rules": {
     "SE-1": 4,
-    "SE-2": 260,
-    "SE-3": 660
+    "SE-2": 266,
+    "SE-3": 661
   },
   "states": {
     "ALREADY-REPRESENTED": 4894,
-    "ASSIMILATED": 11697,
+    "ASSIMILATED": 11690,
     "HISTORICAL-EVIDENCE-ONLY": 6176,
     "REJECTED": 131,
-    "SEMANTICALLY-REPRESENTED": 924,
+    "SEMANTICALLY-REPRESENTED": 931,
     "SUPERSEDED": 37
   },
-  "superiority_constitutional_objections": 2405,
+  "superiority_constitutional_objections": 2410,
   "superiority_dimension_count": 16,
   "superiority_dimensions": [
     {
@@ -4137,21 +4137,21 @@
   ],
   "superiority_outcomes": {
     "D-01": {
-      "EQUIVALENT": 8689,
+      "EQUIVALENT": 8687,
       "INFERIOR": 2672,
-      "SUPERIOR": 12498,
+      "SUPERIOR": 12500,
       "UNDECIDABLE": 0
     },
     "D-02": {
-      "EQUIVALENT": 17092,
-      "INFERIOR": 5736,
+      "EQUIVALENT": 17085,
+      "INFERIOR": 5743,
       "SUPERIOR": 1031,
       "UNDECIDABLE": 0
     },
     "D-03": {
-      "EQUIVALENT": 5916,
+      "EQUIVALENT": 5924,
       "INFERIOR": 2,
-      "SUPERIOR": 17941,
+      "SUPERIOR": 17933,
       "UNDECIDABLE": 0
     },
     "D-04": {
@@ -4161,33 +4161,33 @@
       "UNDECIDABLE": 0
     },
     "D-05": {
-      "EQUIVALENT": 16746,
-      "INFERIOR": 5264,
-      "SUPERIOR": 1849,
+      "EQUIVALENT": 16743,
+      "INFERIOR": 5269,
+      "SUPERIOR": 1847,
       "UNDECIDABLE": 0
     },
     "D-06": {
-      "EQUIVALENT": 7373,
+      "EQUIVALENT": 7378,
       "INFERIOR": 2907,
-      "SUPERIOR": 13579,
+      "SUPERIOR": 13574,
       "UNDECIDABLE": 0
     },
     "D-07": {
-      "EQUIVALENT": 2072,
-      "INFERIOR": 4081,
-      "SUPERIOR": 17706,
+      "EQUIVALENT": 2073,
+      "INFERIOR": 4087,
+      "SUPERIOR": 17699,
       "UNDECIDABLE": 0
     },
     "D-08": {
-      "EQUIVALENT": 14040,
-      "INFERIOR": 3289,
-      "SUPERIOR": 6530,
+      "EQUIVALENT": 14035,
+      "INFERIOR": 3295,
+      "SUPERIOR": 6529,
       "UNDECIDABLE": 0
     },
     "D-09": {
-      "EQUIVALENT": 17252,
-      "INFERIOR": 5949,
-      "SUPERIOR": 658,
+      "EQUIVALENT": 17248,
+      "INFERIOR": 5954,
+      "SUPERIOR": 657,
       "UNDECIDABLE": 0
     },
     "D-10": {
@@ -4197,38 +4197,38 @@
       "UNDECIDABLE": 0
     },
     "D-11": {
-      "EQUIVALENT": 2493,
+      "EQUIVALENT": 2499,
       "INFERIOR": 2,
-      "SUPERIOR": 21364,
+      "SUPERIOR": 21358,
       "UNDECIDABLE": 0
     },
     "D-12": {
-      "EQUIVALENT": 2533,
-      "INFERIOR": 529,
-      "SUPERIOR": 20797,
+      "EQUIVALENT": 2537,
+      "INFERIOR": 531,
+      "SUPERIOR": 20791,
       "UNDECIDABLE": 0
     },
     "D-13": {
-      "EQUIVALENT": 6207,
+      "EQUIVALENT": 6214,
       "INFERIOR": 0,
-      "SUPERIOR": 17652,
+      "SUPERIOR": 17645,
       "UNDECIDABLE": 0
     },
     "D-14": {
-      "EQUIVALENT": 4307,
-      "INFERIOR": 1813,
-      "SUPERIOR": 17739,
+      "EQUIVALENT": 4310,
+      "INFERIOR": 1817,
+      "SUPERIOR": 17732,
       "UNDECIDABLE": 0
     },
     "D-15": {
-      "EQUIVALENT": 17114,
-      "INFERIOR": 5938,
-      "SUPERIOR": 807,
+      "EQUIVALENT": 17107,
+      "INFERIOR": 5944,
+      "SUPERIOR": 808,
       "UNDECIDABLE": 0
     },
     "D-16": {
-      "EQUIVALENT": 14414,
-      "INFERIOR": 4286,
+      "EQUIVALENT": 14408,
+      "INFERIOR": 4292,
       "SUPERIOR": 5159,
       "UNDECIDABLE": 0
     }
@@ -4258,8 +4258,8 @@
   "superiority_rules": {
     "SUP-1": 331,
     "SUP-2": 1010,
-    "SUP-3": 16722,
-    "SUP-4": 1229,
+    "SUP-3": 16715,
+    "SUP-4": 1236,
     "SUP-5": 4425,
     "SUP-6": 135,
     "SUP-7": 7
@@ -4268,9 +4268,9 @@
     "BETTER_THAN_CURRENT": 135,
     "CONFLICTING": 1010,
     "NOT_SUPERIOR": 7,
-    "NO_CURRENT_FORM": 16722,
+    "NO_CURRENT_FORM": 16715,
     "OBSOLETE": 331,
-    "PARTIALLY_ASSIMILATED": 1229,
+    "PARTIALLY_ASSIMILATED": 1236,
     "REQUIRES_ARCHITECTURAL_REVIEW": 4425
   },
   "superiority_thresholds": {
@@ -5138,7 +5138,7 @@
     ["UCOS-KA-000851","CGR-CORE-02","VALIDATION","NOT-UCOS","ACCEPTED","P2","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,30,14,1,105.3,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],["UCOS-KA-001365","UCOS-KA-000755","UCOS-KA-000888"],"CONFLICTING",11,"=++===+++=++++++","SUP-2","ESCALATE_ARCHITECTURE","DEC-01","P:NP|Q:HE|S:CFL|C:0|N:+11|D:C|T:U|W:-","REFER-CONFLICT","HIGH"],
     ["UCOS-KA-000852","Deployment Model","ARCHITECTURE","ARCHITECTURE","REPO-DOCUMENTED","P1","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",1,false,false,83,21,1,105.2,31,"69439a57-0ef4-8325-bdc8-1bf7c204bfe8",9,"","",["04-REFERENCE/UCOS-\u03a9\u221e-UNIVERSAL-REFERENCE-SERVICE-ARCHITECTURE.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",2,"=-=+=+===+=-==+=","SUP-5","ESCALATE_ARCHITECTURE","DEC-04","P:PR|Q:AR|S:RAR|C:1|N:+2|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-000853","ID-06","REGISTRY","REGISTRY","REPO-DOCUMENTED","P2","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",1,false,false,136,39,2,105.2,13,"6980b340-36a8-8320-8f4c-ebc887d5bb1b",13,"","",["00-MASTER/IMR-0000/03-UNIVERSAL-OBJECT-MODEL.md"],["UCOS-KA-000467","UCOS-KA-000070","UCOS-KA-000508","UCOS-KA-000312"],"BETTER_THAN_CURRENT",4,"+==+-+===+====+=","SUP-6","SUPERSEDE","DEC-08","P:PR|Q:AR|S:BTC|C:0|N:+4|D:C|T:T|W:-","REPLACE-CURRENT-FORM","HIGH"],
-    ["UCOS-KA-000854","Authority Registry","REGISTRY","REGISTRY","ACCEPTED","P1","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,155,38,1,105.2,16,"69842564-7398-8322-ac18-49fadd760f16",13,"STRUCTURAL (token-set identity)","",["00-BOOK/tools/ledger_authority.py","00-MASTER/UCOS-UCAF-001/01-AUTHORITY-REGISTER.md","01-WORKING/AUTHORITY-REGISTER.md"],["UCOS-KA-000406","UCOS-KA-000546","UCOS-KA-000569","UCOS-KA-000025"],"CONFLICTING",-1,"==++-==---+=====","SUP-2","ESCALATE_ARCHITECTURE","DEC-01","P:PP|Q:SR|S:CFL|C:1|N:-1|D:C|T:T|W:-","REFER-CONFLICT","IMMEDIATE"],
+    ["UCOS-KA-000854","Authority Registry","REGISTRY","REGISTRY","ACCEPTED","P1","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,155,38,1,105.2,16,"69842564-7398-8322-ac18-49fadd760f16",13,"STRUCTURAL (token-set identity)","",["00-MASTER/C13-MB17-GOVERNANCE-MATRIX.md","00-MASTER/UCOS-UCAF-001/01-AUTHORITY-REGISTER.md","01-WORKING/AUTHORITY-REGISTER.md"],["UCOS-KA-000406","UCOS-KA-000546","UCOS-KA-000569","UCOS-KA-000025"],"CONFLICTING",3,"+==+=+=-=-+===+=","SUP-2","ESCALATE_ARCHITECTURE","DEC-01","P:PP|Q:SR|S:CFL|C:1|N:+3|D:C|T:T|W:-","REFER-CONFLICT","IMMEDIATE"],
     ["UCOS-KA-000855","Civilization Self-Evolution Engine","ENGINE","ENGINE","ACCEPTED","P2","ASSIMILATED","R6","engine",5,"ABSENT",0,false,false,76,13,0,105.2,3,"69a451ca-dc3c-8323-841c-fe35ca70536c",12,"","",[],["UCOS-KA-000559","UCOS-KA-000933","UCOS-KA-000895","UCOS-KA-000081"],"NO_CURRENT_FORM",13,"+++++++==+++++=+","SUP-3","ACCEPT","DEC-10","P:NP|Q:AS|S:NCF|C:0|N:+13|D:C|T:T|W:5","HOME-NEW-KNOWLEDGE","SCHEDULED"],
     ["UCOS-KA-000856","UCOS-PEA-9","DECISION","NOT-UCOS","ACCEPTED","P1","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,130,85,0,105.2,3,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],["UCOS-KA-002049","UCOS-KA-002695"],"NO_CURRENT_FORM",11,"=+++==++=+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+11|D:C|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-000857","PCAMG-RUNTIME-0010-CONSTRUCTION-PROGRAM","ROADMAP","NOT-UCOS","ACCEPTED","P2","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,26,22,0,105.1,3,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],["UCOS-KA-000841"],"NO_CURRENT_FORM",11,"=+++==++=+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+11|D:C|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
@@ -5908,7 +5908,7 @@
     ["UCOS-KA-001621","EC3-B11-U09","POLICY","NOT-UCOS","REPO-OPERATIONAL","P3","ALREADY-REPRESENTED","R2","","","REPO-OPERATIONAL",66,false,true,50,30,0,65.4,2,"6a5b4705-577c-83ee-8605-236e16856f1a",14,"","",["00-BOOK/DATA/artifacts.json","00-BOOK/DATA/id-ledger.json"],["UCOS-KA-001305","UCOS-KA-001099","UCOS-KA-002400","UCOS-KA-001828"],"REQUIRES_ARCHITECTURAL_REVIEW",-3,"-==---==-=++==-+","SUP-5","ESCALATE_ARCHITECTURE","DEC-11","P:PR|Q:AR|S:RAR|C:0|N:-3|D:C|T:T|W:-","REFER-ARCHITECTURAL-REVIEW","HIGH"],
     ["UCOS-KA-001622","EC3-B13-P02","UNIVERSE","NOT-UCOS","REPO-OPERATIONAL","P3","ALREADY-REPRESENTED","R2","","","REPO-OPERATIONAL",24,false,true,52,22,0,65.4,2,"6a5b4705-577c-83ee-8605-236e16856f1a",7,"","",["00-MASTER/CHECKPOINTS/CKPT-2026-07-20-EC3-B13-P02.md","00-MASTER/CHECKPOINTS/CKPT-2026-07-20-EC3-B13-U01.md"],["UCOS-KA-000007"],"REQUIRES_ARCHITECTURAL_REVIEW",-4,"--=---==-=++==-+","SUP-5","ESCALATE_ARCHITECTURE","DEC-11","P:PR|Q:AR|S:RAR|C:0|N:-4|D:C|T:T|W:-","REFER-ARCHITECTURAL-REVIEW","HIGH"],
     ["UCOS-KA-001623","VOL-023","SECURITY","NOT-UCOS","REPO-OPERATIONAL","P3","ALREADY-REPRESENTED","R2","","","REPO-OPERATIONAL",61,false,true,41,35,0,65.4,2,"6a5b4705-577c-83ee-8605-236e16856f1a",14,"","",["00-BOOK/DATA/artifacts.json","00-BOOK/DATA/id-ledger.json"],[],"CONFLICTING",-6,"--=---==--++==-=","SUP-2","ESCALATE_ARCHITECTURE","DEC-01","P:PR|Q:AR|S:CFL|C:1|N:-6|D:N|T:T|W:-","REFER-CONFLICT","IMMEDIATE"],
-    ["UCOS-KA-001624","Execution Gate","CERTIFICATION","CERTIFICATION","ACCEPTED","P1","ASSIMILATED","R6","00-MASTER/UCOS-CVER-001",7,"ABSENT",0,false,false,41,2,1,65.3,21,"69779b8c-db8c-8320-9447-9572ef3e6273",14,"","",[],[],"NO_CURRENT_FORM",14,"+=+++++=++++++++","SUP-3","ACCEPT","DEC-10","P:NP|Q:AS|S:NCF|C:0|N:+14|D:N|T:T|W:7","HOME-NEW-KNOWLEDGE","SCHEDULED"],
+    ["UCOS-KA-001624","Execution Gate","CERTIFICATION","CERTIFICATION","ACCEPTED","P1","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,41,2,1,65.3,21,"69779b8c-db8c-8320-9447-9572ef3e6273",14,"STRUCTURAL (token-set identity)","",["00-MASTER/UCTX-001-ATTACK-VALIDATION-EVIDENCE.md"],[],"PARTIALLY_ASSIMILATED",2,"+-=+===-=+=-==++","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:+2|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-001625","GL-05","VALIDATION","NOT-UCOS","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",1,false,true,35,11,1,65.3,8,"698188ad-8d04-8321-ba80-2822d3cb292f",14,"","",["00-BOOK/CONTROL-TOWER/UCOS-\u03a9\u221e-UCI-001-UNIVERSAL-CHANGE-INTELLIGENCE-AND-REGENERATION-STANDARD.md"],["UCOS-KA-000303","UCOS-KA-001791","UCOS-KA-001597","UCOS-KA-001451"],"REQUIRES_ARCHITECTURAL_REVIEW",-2,"-==+--===+=====-","SUP-5","ESCALATE_ARCHITECTURE","DEC-11","P:PR|Q:AR|S:RAR|C:0|N:-2|D:C|T:T|W:-","REFER-ARCHITECTURAL-REVIEW","HIGH"],
     ["UCOS-KA-001626","REAL-C-05-SOURCE","VALIDATION","NOT-UCOS","ACCEPTED","P2","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,13,12,0,65.3,3,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",10,"==++==++=+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+10|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-001627","Constitutional Governance Runtime","RUNTIME","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,43,9,0,65.3,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",10,"+=+==++==+++++=+","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -7459,7 +7459,7 @@
     ["UCOS-KA-003172","Revenue Model","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P2","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,33,6,0,33.2,13,"695e8ae7-bae8-8323-887d-585ef057c08a",9,"","",[],[],"NO_CURRENT_FORM",12,"+=+++++==+++++=+","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+12|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-003173","Single Authority","GOVERNANCE","ARCHITECTURE","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",10,false,false,18,3,0,33.2,11,"696875e1-7ed4-8321-9269-dc7651897c8d",13,"","",["00-CMG/CMG-000001-CONSTITUTIONAL-META-GOVERNANCE-CONSTITUTION.md","00-MASTER/UAKOS-CLOSURE-007/14-UNIVERSAL-CENSUS-DASHBOARD.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-1,"=-===+=--++===-=","SUP-5","ESCALATE_ARCHITECTURE","DEC-11","P:PR|Q:AR|S:RAR|C:0|N:-1|D:N|T:T|W:-","REFER-ARCHITECTURAL-REVIEW","HIGH"],
     ["UCOS-KA-003174","REG-03","POLICY","NOT-UCOS","REPO-IMPLEMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-IMPLEMENTED",6,false,true,30,18,0,33.2,5,"6980b340-36a8-8320-8f4c-ebc887d5bb1b",14,"","",["00-MASTER/IMR-0000/00-MISSION-REGISTRATION-RECORD.md","00-MASTER/IMR-0000/07-CANONICAL-REGISTRY-FRAMEWORK.md"],["UCOS-KA-003273","UCOS-KA-003347","UCOS-KA-003346","UCOS-KA-003134"],"REQUIRES_ARCHITECTURAL_REVIEW",-5,"-===---=-=++==--","SUP-5","ESCALATE_ARCHITECTURE","DEC-11","P:PR|Q:AR|S:RAR|C:0|N:-5|D:C|T:T|W:-","REFER-ARCHITECTURAL-REVIEW","HIGH"],
-    ["UCOS-KA-003175","Identity Authority","GOVERNANCE","ARCHITECTURE","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,25,3,0,33.2,8,"698ae94d-eeec-8320-ab44-98b4eb305433",13,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/UIS-001/02-IDENTITY-LAW-BINDING-REGISTER.md"],[],"CONFLICTING",-4,"+-=+=+----=-==-=","SUP-2","ESCALATE_ARCHITECTURE","DEC-01","P:PP|Q:SR|S:CFL|C:1|N:-4|D:N|T:T|W:-","REFER-CONFLICT","IMMEDIATE"],
+    ["UCOS-KA-003175","Identity Authority","GOVERNANCE","ARCHITECTURE","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,25,3,0,33.2,8,"698ae94d-eeec-8320-ab44-98b4eb305433",13,"STRUCTURAL (token-set identity)","",["engine/substrate/adapter.py"],[],"CONFLICTING",-7,"=-=+-=----=-==-=","SUP-2","ESCALATE_ARCHITECTURE","DEC-01","P:PP|Q:SR|S:CFL|C:1|N:-7|D:N|T:T|W:-","REFER-CONFLICT","IMMEDIATE"],
     ["UCOS-KA-003176","Healthcare Platform","PLATFORM","PLATFORM","PROPOSAL","P2","ASSIMILATED","R6","09-PLATFORM","F","ABSENT",0,false,false,55,12,0,33.2,12,"698ead33-4f30-8321-8e8d-d621d6f2117a",10,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-003177","Universal Intelligence Operating System","COMPONENT","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,8,4,0,33.2,4,"69f08be8-abe0-8323-b7bd-75cf1467988f",15,"","",[],[],"NO_CURRENT_FORM",12,"+=++=+++=+++++=+","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+12|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-003178","W1-004","PRINCIPLE","CONSTITUTIONAL","ACCEPTED","P1","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,9,9,0,33.2,1,"6a412b2d-95a8-83e8-9527-4748db824c80",4,"","",[],[],"CONFLICTING",8,"==+===++==++++=+","SUP-2","ESCALATE_ARCHITECTURE","DEC-01","P:NP|Q:HE|S:CFL|C:0|N:+8|D:N|T:U|W:-","REFER-CONFLICT","HIGH"],
@@ -9676,7 +9676,7 @@
     ["UCOS-KA-005389","Governance Lifecycle","WORKFLOW","ARCHITECTURE","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,22,0,0,19.8,9,"69a451ca-dc3c-8323-841c-fe35ca70536c",14,"STRUCTURAL (token-set identity)","",["00-MASTER/UAKOS-PHASE-003R/02-REALIZATION-LIFECYCLE-REGISTER.md"],[],"PARTIALLY_ASSIMILATED",-4,"+-=+-=---+====--","SUP-4","MERGE","DEC-07","P:PP|Q:SR|S:PAS|C:0|N:-4|D:N|T:T|W:-","COMPLETE-EXISTING-REPRESENTATION","SCHEDULED"],
     ["UCOS-KA-005390","Growth Layer","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,16,5,0,19.8,5,"69ab1c5e-5088-8323-a2e4-89f3a5b60908",9,"","",[],[],"NO_CURRENT_FORM",11,"+=++=+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-005391","Operational System","COMPONENT","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,17,7,0,19.8,5,"69af7c2e-76f8-8322-bacf-5974925a44d2",15,"","",[],[],"NO_CURRENT_FORM",12,"+=++++++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+12|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-005392","Closure Matrix","SPECIFICATION","DOCUMENTATION","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,22,3,0,19.8,5,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"STRUCTURAL (token-set identity)","",["engine/uicm/matrix.py"],[],"PARTIALLY_ASSIMILATED",-4,"=-=+-----+====-+","SUP-4","MERGE","DEC-07","P:PP|Q:SR|S:PAS|C:0|N:-4|D:N|T:T|W:-","COMPLETE-EXISTING-REPRESENTATION","SCHEDULED"],
+    ["UCOS-KA-005392","Closure Matrix","SPECIFICATION","DOCUMENTATION","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,22,3,0,19.8,5,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"STRUCTURAL (token-set identity)","",["00-MASTER/C7-REPOSITORY-CLOSURE-MATRIX.md","engine/uicm/matrix.py"],[],"PARTIALLY_ASSIMILATED",-2,"=-=+-----+++==-+","SUP-4","MERGE","DEC-07","P:PP|Q:SR|S:PAS|C:0|N:-2|D:N|T:T|W:-","COMPLETE-EXISTING-REPRESENTATION","SCHEDULED"],
     ["UCOS-KA-005393","PCAMG-RT-C-02","PRINCIPLE","CONSTITUTIONAL","IDEA","P2","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,7,5,0,19.8,1,"6a412b2d-95a8-83e8-9527-4748db824c80",4,"","",[],[],"NO_CURRENT_FORM",8,"==+===++=+++++==","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+8|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-005394","PCAMG-RT-C-06","REGISTRY","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,5,3,0,19.8,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",[],[],"NO_CURRENT_FORM",9,"==+===++=+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+9|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-005395","PCAMG-RT-C-10","REGISTRY","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,5,3,0,19.8,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",[],[],"NO_CURRENT_FORM",9,"==+===++=+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+9|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
@@ -9960,7 +9960,7 @@
     ["UCOS-KA-005673","EVOLUTION-001","EVOLUTION","NOT-UCOS","REPO-OPERATIONAL","P3","ALREADY-REPRESENTED","R2","","","REPO-OPERATIONAL",27,false,true,14,4,0,18.6,1,"6a6089bf-1ea4-83ee-bae8-0a4a9f9c6a51",14,"","",["00-MASTER/EVOLUTION-001/EVOLUTION-GOVERNANCE-MODEL.md","00-MASTER/IMPLEMENT-001/02-WAVE-COMPOSITION-AND-EXECUTION-MODEL.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-5,"--=---==-=++=--+","SUP-5","ESCALATE_ARCHITECTURE","DEC-04","P:PR|Q:AR|S:RAR|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-005674","Overall Architecture","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,11,1,0,18.5,9,"69439a57-0ef4-8325-bdc8-1bf7c204bfe8",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-005675","Safety Rules","POLICY","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,11,1,0,18.5,9,"69439a57-0ef4-8325-bdc8-1bf7c204bfe8",14,"SUBSUMPTION (repository artifact is more specific)","",["H-06-IMPLEMENTATION-TASK-BREAKDOWN-PACKAGE.md"],[],"PARTIALLY_ASSIMILATED",-6,"=-=+-=---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-6|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
-    ["UCOS-KA-005676","Execution Strategy","ROADMAP","ROADMAP","PROPOSAL","P3","ASSIMILATED","R6","00-MASTER/MCP-003-MASTER-EXECUTION.md","F","ABSENT",0,false,false,11,1,0,18.5,9,"695fed70-e108-8328-b834-7a40e7bad090",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
+    ["UCOS-KA-005676","Execution Strategy","ROADMAP","ROADMAP","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,11,1,0,18.5,9,"695fed70-e108-8328-b834-7a40e7bad090",14,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/REPOSITORY-CLOSURE-WAVES.md"],[],"PARTIALLY_ASSIMILATED",-5,"+-=+-=---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-005677","Product Lifecycle Engine","ENGINE","ENGINE","PROPOSAL","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,14,9,0,18.5,7,"697b5a08-d4fc-8323-9c7a-609df2d9d191",12,"","",[],[],"NO_CURRENT_FORM",11,"+=++=+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-005678","A4 Capability","CAPABILITY","CAPABILITY","IDEA","P3","ASSIMILATED","R6","00-MASTER/MIP-W1-P001/07-UNIVERSAL-CAPABILITY-CATALOG.md","F","ABSENT",0,false,false,3,2,0,18.5,2,"6982c6e3-9efc-8322-8763-c23dfb3e1348",8,"","",[],[],"NO_CURRENT_FORM",8,"+==+=+=+=+==++=+","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+8|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-005679","Chaos Mutation Engine","ENGINE","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,6,1,0,18.5,2,"698463aa-e5f4-8322-9cfb-c7cfa36cbc24",12,"","",[],["UCOS-KA-003529","UCOS-KA-004042","UCOS-KA-003716","UCOS-KA-004041"],"NO_CURRENT_FORM",11,"++++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:C|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -11315,7 +11315,7 @@
     ["UCOS-KA-007028","Cosmic Architecture","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,11,2,0,14.3,2,"69af7c2e-76f8-8322-bacf-5974925a44d2",9,"","",[],["UCOS-KA-001268","UCOS-KA-001509","UCOS-KA-001425","UCOS-KA-001140"],"NO_CURRENT_FORM",11,"++++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:C|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-007029","Capability Registry Loader Engine","ENGINE","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,7,6,0,14.3,2,"69b29c79-cf48-8320-81aa-f1474f22c14e",12,"","",[],[],"NO_CURRENT_FORM",11,"+=++=+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-007030","API Standards","POLICY","REGISTRY","PROPOSAL","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,9,1,0,14.3,5,"6a2e6ddd-7f28-83ee-93c0-1a79e912de34",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-007031","Evidence Inventory","REGISTRY","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,24,3,0,14.3,6,"6a39eed3-188c-83e8-bde5-6ad158c99a8f",13,"SUBSUMPTION (repository artifact is more specific)","",["UCOS-OMEGA-INFINITY-FOUNDATION-UNCONDITIONAL-READINESS-DETERMINATION.md"],[],"PARTIALLY_ASSIMILATED",-4,"=-=+-+---+====--","SUP-4","MERGE","DEC-07","P:PP|Q:SR|S:PAS|C:0|N:-4|D:N|T:T|W:-","COMPLETE-EXISTING-REPRESENTATION","SCHEDULED"],
+    ["UCOS-KA-007031","Evidence Inventory","REGISTRY","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,24,3,0,14.3,6,"6a39eed3-188c-83e8-bde5-6ad158c99a8f",13,"STRUCTURAL (token-set identity)","",["00-MASTER/C7-REPOSITORY-CLOSURE-MATRIX.md"],[],"PARTIALLY_ASSIMILATED",-3,"+-=+-+---+====--","SUP-4","MERGE","DEC-07","P:PP|Q:SR|S:PAS|C:0|N:-3|D:N|T:T|W:-","COMPLETE-EXISTING-REPRESENTATION","SCHEDULED"],
     ["UCOS-KA-007032","Deprecation Rules","POLICY","REGISTRY","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",3,false,false,12,2,0,14.3,6,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",["02-MASTER/UCOS-\u03a9\u221e-UNIVERSAL-API-ARCHITECTURE-CONSTITUTION.md","03-CATALOGS/UCOS-\u03a9\u221e-UNIVERSAL-CANONICAL-RUNTIME-CATALOG-CONSTITUTION.md"],[],"OBSOLETE",-3,"=-=+-=---+++==--","SUP-1","REJECT","DEC-02","P:PR|Q:AR|S:OBS|C:0|N:-3|D:N|T:T|W:-","DISCARD-OBSOLETE","NONE"],
     ["UCOS-KA-007033","Ultimate Architecture Certification","CERTIFICATION","CERTIFICATION","IDEA","P3","ASSIMILATED","R6","00-MASTER/UCOS-CVER-001","F","ABSENT",0,false,false,8,2,0,14.3,2,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",11,"+=++=+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-007034","RC-059","REQUIREMENT","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,13,3,0,14.3,1,"6a412b2d-95a8-83e8-9527-4748db824c80",15,"","",[],[],"NO_CURRENT_FORM",8,"==+===+==+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+8|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
@@ -11489,7 +11489,7 @@
     ["UCOS-KA-007202","Discovery Models","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,13,0,0,14.0,7,"6a412b2d-95a8-83e8-9527-4748db824c80",9,"SUBSUMPTION (repository artifact is more specific)","",["PHASE-UCF-011-PROVIDER-CATEGORY-INTEGRITY-OBSERVATIONAL-IMPLEMENTATION.md"],[],"PARTIALLY_ASSIMILATED",-5,"=-=+=+---+=-=---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-007203","Registry Taxonomy","TAXONOMY","REGISTRY","PROPOSAL","P2","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,15,0,0,14.0,7,"6a412b2d-95a8-83e8-9527-4748db824c80",6,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-007204","REG-ABS-001-REGISTRY-ABSOLUTISM","REGISTRY","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,12,12,0,14.0,3,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",[],[],"NO_CURRENT_FORM",9,"==++==++=+++++==","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+9|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
-    ["UCOS-KA-007205","Authority Certification","CERTIFICATION","CERTIFICATION","PROPOSAL","P3","ASSIMILATED","R6","00-MASTER/UCOS-CVER-001","F","ABSENT",0,false,false,18,0,0,14.0,7,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
+    ["UCOS-KA-007205","Authority Certification","CERTIFICATION","CERTIFICATION","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,18,0,0,14.0,7,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"STRUCTURAL (token-set identity)","",["00-MASTER/CERTIFICATION-READINESS-MODEL.md"],[],"PARTIALLY_ASSIMILATED",-5,"+-=+-=---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-007206","Integration Models","ARCHITECTURE","ARCHITECTURE","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",1,false,false,19,0,0,14.0,7,"6a412b2d-95a8-83e8-9527-4748db824c80",9,"","",["02-MASTER/UCOS-\u03a9\u221e-UNIVERSAL-ARCHITECTURAL-QUALITY-CONSTITUTION.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-5,"=-=+=+---+=-=---","SUP-5","ESCALATE_ARCHITECTURE","DEC-04","P:PR|Q:AR|S:RAR|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-007207","Traceability Registry","REGISTRY","REGISTRY","REPO-OPERATIONAL","P3","ALREADY-REPRESENTED","R2","","","REPO-OPERATIONAL",5,false,false,18,0,0,14.0,7,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",["00-BOOK/CONTROL-TOWER/UCOS-\u03a9\u221e-UCI-OPT-001-UCI-001-PRE-IMPLEMENTATION-OPTIMIZATION-DETERMINATION.md","00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-5,"=-===+---=+==---","SUP-5","ESCALATE_ARCHITECTURE","DEC-04","P:PR|Q:AR|S:RAR|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-007208","RC-065","CONSTITUTION","CONSTITUTIONAL","IDEA","P2","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,9,2,0,14.0,1,"6a412b2d-95a8-83e8-9527-4748db824c80",5,"","",[],[],"NO_CURRENT_FORM",8,"==+===+==+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+8|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
@@ -11812,7 +11812,7 @@
     ["UCOS-KA-007525","Delivery Contract","SERVICE","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,9,0,0,13.2,3,"6a3bfbf3-5d64-83ee-9b56-081646bce486",15,"","",[],[],"NO_CURRENT_FORM",12,"+=+++++==+++++=+","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+12|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-007526","Future Domains","DOMAIN","UNIVERSE","PROPOSAL","P3","ASSIMILATED","R6","15-UNIVERSAL-SCIENCE-INTELLIGENCE","F","ABSENT",0,false,false,23,0,0,13.2,6,"6a3f95e2-efb8-83ee-af70-78ab1a61278a",9,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-007527","DOC-2038","CONSTITUTION","CONSTITUTIONAL","IDEA","P2","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,13,0,0,13.2,1,"6a3f95e2-efb8-83ee-af70-78ab1a61278a",5,"","",[],["UCOS-KA-006577"],"NO_CURRENT_FORM",8,"=++===+==+++++==","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+8|D:C|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
-    ["UCOS-KA-007528","Readiness Model","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,10,3,0,13.2,5,"6a412b2d-95a8-83e8-9527-4748db824c80",9,"SUBSUMPTION (repository artifact is more specific)","",["06-IMPLEMENTATION/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-IMPLEMENTATION.md"],[],"PARTIALLY_ASSIMILATED",-3,"=-=+=+-=-+=-==--","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-3|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
+    ["UCOS-KA-007528","Readiness Model","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,10,3,0,13.2,5,"6a412b2d-95a8-83e8-9527-4748db824c80",9,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/CERTIFICATION-READINESS-MODEL.md"],[],"PARTIALLY_ASSIMILATED",-2,"+-=+=+-=-+=-==--","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-2|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-007529","TM-CTRL-001","WORKFLOW","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,14,9,0,13.2,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",9,"==+===++=+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+9|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-007530","Authorization Matrix","SPECIFICATION","DOCUMENTATION","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",1,false,false,13,4,0,13.2,3,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",["00-MASTER/UCOS-USIS-WAVE2-AUTH/03-DEPENDENCY-AUTHORIZATION-REPORT.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-3,"+-=+-=-=-+====--","SUP-5","ESCALATE_ARCHITECTURE","DEC-11","P:PR|Q:AR|S:RAR|C:0|N:-3|D:N|T:T|W:-","REFER-ARCHITECTURAL-REVIEW","HIGH"],
     ["UCOS-KA-007531","BLK-2","CERTIFICATION","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,6,6,0,13.2,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",9,"==+===++=+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+9|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
@@ -12038,7 +12038,7 @@
     ["UCOS-KA-007751","PCAMG-RUNTIME-0103","VALIDATION","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,15,4,0,12.7,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",8,"==+===++=+++++==","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+8|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-007752","Constitutional Compiler","ENGINE","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,7,0,0,12.7,3,"6a412b2d-95a8-83e8-9527-4748db824c80",12,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-007753","Reality Architecture","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,14,2,0,12.7,4,"6a412b2d-95a8-83e8-9527-4748db824c80",9,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-007754","W1 Registry","REGISTRY","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,8,3,0,12.7,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",[],[],"NO_CURRENT_FORM",10,"+=+==+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
+    ["UCOS-KA-007754","W1 Registry","REGISTRY","REGISTRY","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,8,3,0,12.7,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/W1-FAILURE-LEDGER.md"],[],"PARTIALLY_ASSIMILATED",-3,"+-==-+-=-+====--","SUP-4","MERGE","DEC-07","P:PP|Q:SR|S:PAS|C:0|N:-3|D:N|T:T|W:-","COMPLETE-EXISTING-REPRESENTATION","SCHEDULED"],
     ["UCOS-KA-007755","W2 Domain","DOMAIN","UNIVERSE","IDEA","P3","ASSIMILATED","R6","15-UNIVERSAL-SCIENCE-INTELLIGENCE","F","ABSENT",0,false,false,8,3,0,12.7,1,"6a412b2d-95a8-83e8-9527-4748db824c80",9,"","",[],[],"NO_CURRENT_FORM",10,"+=+==+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-007756","W3 Policy","POLICY","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,7,3,0,12.7,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",10,"+=+==+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-007757","NFR-AUTH-016","REQUIREMENT","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,5,4,1,12.7,1,"6a412b2d-95a8-83e8-9527-4748db824c80",15,"","",[],[],"NO_CURRENT_FORM",10,"==+===+++++++++=","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+10|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
@@ -15126,7 +15126,7 @@
     ["UCOS-KA-010839","LDR-001","GOVERNANCE","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,6,3,0,8.5,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",[],[],"NO_CURRENT_FORM",8,"==+===++=+++++==","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+8|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-010840","LDR-017","GOVERNANCE","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,5,3,0,8.5,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",[],[],"NO_CURRENT_FORM",8,"==+===++=+++++==","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+8|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-010841","Physical Data Wave","ROADMAP","ROADMAP","IDEA","P3","ASSIMILATED","R6","00-MASTER/MCP-003-MASTER-EXECUTION.md","F","ABSENT",0,false,false,3,2,0,8.5,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",10,"+=+==+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-010842","Governance Matrix","SPECIFICATION","DOCUMENTATION","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,7,1,0,8.5,4,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/UCOS-UICM-000001/UICM-EXECUTION-GOVERNANCE-MATRIX.md"],[],"PARTIALLY_ASSIMILATED",-5,"+-=+==---+=-=---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
+    ["UCOS-KA-010842","Governance Matrix","SPECIFICATION","DOCUMENTATION","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,7,1,0,8.5,4,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/C13-MB17-GOVERNANCE-MATRIX.md"],[],"PARTIALLY_ASSIMILATED",-5,"+-=+==---+=-=---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-010843","Readiness Gate","CERTIFICATION","CERTIFICATION","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",1,false,false,7,1,0,8.5,4,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",["02-MASTER/UCOS-\u03a9\u221e-EXTERNAL-ACTOR-QUALIFICATION-FRAMEWORK.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-6,"=-=+==---+=-=---","SUP-5","ESCALATE_ARCHITECTURE","DEC-04","P:PR|Q:AR|S:RAR|C:1|N:-6|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-010844","TM-IMP-CERT-001","CONSTITUTION","CONSTITUTIONAL","IDEA","P2","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,11,6,0,8.5,1,"6a412b2d-95a8-83e8-9527-4748db824c80",5,"","",[],[],"NO_CURRENT_FORM",9,"==+===++=+++++=+","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+9|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-010845","Child Capabilities","CAPABILITY","CAPABILITY","IDEA","P3","ASSIMILATED","R6","00-MASTER/MIP-W1-P001/07-UNIVERSAL-CAPABILITY-CATALOG.md","F","ABSENT",0,false,false,12,5,0,8.5,3,"6a412b2d-95a8-83e8-9527-4748db824c80",8,"","",[],[],"NO_CURRENT_FORM",11,"+=++=+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -15744,7 +15744,7 @@
     ["UCOS-KA-011457","Fully Autonomous AI System","COMPONENT","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,14,1,0,8.0,1,"69be10c7-00c4-8323-95a6-53797ab9d365",15,"","",[],[],"NO_CURRENT_FORM",9,"+=+==++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+9|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-011458","Page Registry","REGISTRY","REGISTRY","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",4,false,false,6,0,0,8.0,4,"69d061a5-3140-8322-9687-a5a0e56e8641",13,"","",["00-MASTER/UCOS-USIS-WAVE2/MISSION-006-USIS-006/02-REGISTRATION-REPORT.md","00-MASTER/UCOS-USIS-WAVE2/MISSION-007-USIS-007/02-REGISTRATION-REPORT.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-3,"+-==-+---+++=---","SUP-5","ESCALATE_ARCHITECTURE","DEC-04","P:PR|Q:AR|S:RAR|C:1|N:-3|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-011459","Git Engine","ENGINE","ENGINE","PROPOSAL","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,5,0,0,8.0,4,"69d2978f-d39c-8321-8b66-e4fc76cd095e",12,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-011460","Build Graph","GRAPH","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,4,0,0,8.0,4,"69d2978f-d39c-8321-8b66-e4fc76cd095e",13,"STRUCTURAL (token-set identity)","",["engine/knowledge/ukip/graph.py","platform/repository_intelligence/graph.py"],[],"PARTIALLY_ASSIMILATED",-4,"=-=+-=---+++=---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-4|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
+    ["UCOS-KA-011460","Build Graph","GRAPH","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,4,0,0,8.0,4,"69d2978f-d39c-8321-8b66-e4fc76cd095e",13,"STRUCTURAL (token-set identity)","",["00-MASTER/CERTIFICATION-READINESS-MODEL.md","engine/knowledge/ukip/graph.py","platform/repository_intelligence/graph.py"],[],"PARTIALLY_ASSIMILATED",-3,"=-++-=---+++=---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-3|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-011461","Dynamic Model","ARCHITECTURE","ARCHITECTURE","PROPOSAL","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,10,0,0,8.0,4,"69d3ca4c-04f0-83a7-bdd2-b6083bf300f0",9,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-011462","Risk Rules","POLICY","REGISTRY","PROPOSAL","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,6,0,0,8.0,4,"69d8940e-7cf8-8320-a833-361d6d876a95",14,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-011463","Business Policies","POLICY","REGISTRY","PROPOSAL","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,10,0,0,8.0,4,"69e34477-d0bc-8320-a68c-e2949c019f85",14,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -15956,7 +15956,7 @@
     ["UCOS-KA-011669","Governance Standards","POLICY","REGISTRY","PROPOSAL","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,16,0,0,8.0,4,"6a507885-d3d8-83e8-8701-aae8aaca1268",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-011670","Evidence Ontology","ONTOLOGY","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,5,0,0,8.0,4,"6a507885-d3d8-83e8-8701-aae8aaca1268",6,"SUBSUMPTION (repository artifact is more specific)","",["14-SECURITY/SECURITY-003-UNIVERSAL-SECURITY-ONTOLOGY.md"],[],"PARTIALLY_ASSIMILATED",-5,"=-=+-+---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-011671","Evidence Taxonomy","TAXONOMY","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,5,0,0,8.0,4,"6a507885-d3d8-83e8-8701-aae8aaca1268",6,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/CMG-000011/CMG-000011-UNIVERSAL-EVIDENCE-EXISTENCE-MODEL.md"],[],"PARTIALLY_ASSIMILATED",-4,"+-=+-+---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-4|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
-    ["UCOS-KA-011672","Evidence Standards","POLICY","REGISTRY","PROPOSAL","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,4,0,0,8.0,4,"6a507885-d3d8-83e8-8701-aae8aaca1268",14,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
+    ["UCOS-KA-011672","Evidence Standards","POLICY","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,4,0,0,8.0,4,"6a507885-d3d8-83e8-8701-aae8aaca1268",14,"STRUCTURAL (token-set identity)","",["00-MASTER/C7-COMPLETION-REPORT.md"],[],"PARTIALLY_ASSIMILATED",-5,"+-=+==---+=-=---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-011673","Certification Standards","POLICY","REGISTRY","PROPOSAL","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,8,0,0,8.0,4,"6a507885-d3d8-83e8-8701-aae8aaca1268",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-011674","Certification Ontology","ONTOLOGY","REGISTRY","PROPOSAL","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,10,0,0,8.0,4,"6a507885-d3d8-83e8-8701-aae8aaca1268",6,"SUBSUMPTION (repository artifact is more specific)","",["15-UNIVERSAL-SCIENCE-INTELLIGENCE/16-CERTIFICATION/USIS-015-CERTIFICATION-ARCHITECTURE.md"],[],"PARTIALLY_ASSIMILATED",-5,"=-=+-+---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-011675","Certification Catalogs","REGISTRY","REGISTRY","PROPOSAL","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,6,0,0,8.0,4,"6a507885-d3d8-83e8-8701-aae8aaca1268",13,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -19251,7 +19251,7 @@
     ["UCOS-KA-014964","UNI-071","UNIVERSE","NOT-UCOS","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",6,false,true,2,2,0,6.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",7,"","",["02-MASTER/BUC-002-BUSINESS-CAPABILITY-UNIVERSE-REALIZATION-PREPARATION-DETERMINATION.md","02-MASTER/T04-TEE-001-UNIVERSAL-TRANSACTION-AND-ENTERPRISE-EXISTENCE-DISCOVERY-DETERMINATION.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-6,"--=----=-+++==--","SUP-5","ESCALATE_ARCHITECTURE","DEC-11","P:PR|Q:AR|S:RAR|C:0|N:-6|D:N|T:T|W:-","REFER-ARCHITECTURAL-REVIEW","HIGH"],
     ["UCOS-KA-014965","UNI-074","UNIVERSE","NOT-UCOS","REPO-DOCUMENTED","P3","ALREADY-REPRESENTED","R2","","","REPO-DOCUMENTED",5,false,true,2,2,0,6.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",7,"","",["02-MASTER/T04-TEE-001-UNIVERSAL-TRANSACTION-AND-ENTERPRISE-EXISTENCE-DISCOVERY-DETERMINATION.md","02-MASTER/UCOS-\u03a9\u221e-UNIVERSAL-CAPABILITY-CATALOG.md"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-6,"--=----=-+++==--","SUP-5","ESCALATE_ARCHITECTURE","DEC-11","P:PR|Q:AR|S:RAR|C:0|N:-6|D:N|T:T|W:-","REFER-ARCHITECTURAL-REVIEW","HIGH"],
     ["UCOS-KA-014966","STAGE-04-S4-06","CONSTITUTION","CONSTITUTIONAL","REPO-OPERATIONAL","P2","ALREADY-REPRESENTED","R2","","","REPO-OPERATIONAL",12,false,true,2,2,0,6.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",5,"","",[".runtime/governance/enforcement-audit.json","00-BOOK/DATA/artifacts.json"],[],"REQUIRES_ARCHITECTURAL_REVIEW",-6,"--=---==-=++==--","SUP-5","ESCALATE_ARCHITECTURE","DEC-11","P:PR|Q:AR|S:RAR|C:0|N:-6|D:N|T:T|W:-","REFER-ARCHITECTURAL-REVIEW","HIGH"],
-    ["UCOS-KA-014967","Formal Certification","CERTIFICATION","CERTIFICATION","IDEA","P3","ASSIMILATED","R6","00-MASTER/UCOS-CVER-001","F","ABSENT",0,false,false,3,0,0,6.0,3,"6a5b4705-577c-83ee-8605-236e16856f1a",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
+    ["UCOS-KA-014967","Formal Certification","CERTIFICATION","CERTIFICATION","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,3,0,0,6.0,3,"6a5b4705-577c-83ee-8605-236e16856f1a",14,"STRUCTURAL (token-set identity)","",["00-MASTER/C11-STOP-CONDITION-REPORT.md"],[],"PARTIALLY_ASSIMILATED",-5,"+-=+-=---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-014968","Generate Digital Twin","COMPONENT","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,5,0,0,6.0,3,"6a5b4705-577c-83ee-8605-236e16856f1a",15,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-014969","Universal Infrastructure Integration Certification","CERTIFICATION","CERTIFICATION","IDEA","P3","ASSIMILATED","R6","00-MASTER/UCOS-CVER-001","F","ABSENT",0,false,false,4,0,0,6.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-014970","Downstream Consumption Rules","POLICY","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,6,4,0,6.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",14,"","",[],[],"NO_CURRENT_FORM",11,"+=++=+++=+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -20201,7 +20201,7 @@
     ["UCOS-KA-015914","CGR-W2-GEL","CONSTRAINT","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,3,2,0,5.2,1,"6a412b2d-95a8-83e8-9527-4748db824c80",15,"","",[],[],"NO_CURRENT_FORM",8,"==+===++=+++++==","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+8|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-015915","AGP-D4","ARCHITECTURE","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,5,1,0,5.2,1,"6a412b2d-95a8-83e8-9527-4748db824c80",9,"","",[],[],"NO_CURRENT_FORM",7,"==+===+==+++++==","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+7|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-015916","Runtime Kernel Specification","SPECIFICATION","DOCUMENTATION","IDEA","P3","ASSIMILATED","R6","00-BOOK/MASTER-BOOK","F","ABSENT",0,false,false,5,0,0,5.2,2,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-015917","W2 Ledger","REGISTRY","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,11,1,0,5.2,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"","",[],[],"NO_CURRENT_FORM",9,"+=+==++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+9|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
+    ["UCOS-KA-015917","W2 Ledger","REGISTRY","REGISTRY","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,11,1,0,5.2,1,"6a412b2d-95a8-83e8-9527-4748db824c80",13,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/W2-BLOCKER-REGISTER.md"],[],"PARTIALLY_ASSIMILATED",-4,"+-==-+---+====--","SUP-4","MERGE","DEC-07","P:PP|Q:SR|S:PAS|C:0|N:-4|D:N|T:T|W:-","COMPLETE-EXISTING-REPRESENTATION","SCHEDULED"],
     ["UCOS-KA-015918","EVR-R-003","VALIDATION","NOT-UCOS","IDEA","P3","HISTORICAL-EVIDENCE-ONLY","R4","","","ABSENT",0,false,true,2,2,0,5.2,1,"6a412b2d-95a8-83e8-9527-4748db824c80",14,"","",[],[],"NO_CURRENT_FORM",8,"==+===++=+++++==","SUP-3","REJECT","DEC-05","P:NP|Q:HE|S:NCF|C:0|N:+8|D:N|T:U|W:-","RETAIN-AS-HISTORY","NONE"],
     ["UCOS-KA-015919","Universal Policy Framework","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,5.2,2,"6a507885-d3d8-83e8-8701-aae8aaca1268",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-015920","Universal Contract Framework","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,5.2,2,"6a507885-d3d8-83e8-8701-aae8aaca1268",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -22469,7 +22469,7 @@
     ["UCOS-KA-018182","Create New Constitution","CONSTITUTION","CONSTITUTIONAL","IDEA","P2","ASSIMILATED","R6","01-WORKING/LAW-REGISTER.md","F","ABSENT",0,false,false,3,0,0,4.0,2,"699542c4-afa0-83aa-881c-9a39a4711c22",5,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018183","Bootstrap Strategy","ROADMAP","ROADMAP","IDEA","P3","ASSIMILATED","R6","00-MASTER/MCP-003-MASTER-EXECUTION.md","F","ABSENT",0,false,false,2,0,0,4.0,2,"699542c4-afa0-83aa-881c-9a39a4711c22",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018184","Infinite Scope Architecture","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"699542c4-afa0-83aa-881c-9a39a4711c22",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-018185","Baseline Authority","GOVERNANCE","ARCHITECTURE","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,23,0,0,4.0,2,"699542c4-afa0-83aa-881c-9a39a4711c22",13,"SUBSUMPTION (repository artifact is more specific)","",["UNIVERSAL-BASELINE-TEMPORAL-CERTIFICATION-DETERMINATION.md"],[],"PARTIALLY_ASSIMILATED",-5,"=-=+-+---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
+    ["UCOS-KA-018185","Baseline Authority","GOVERNANCE","ARCHITECTURE","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,23,0,0,4.0,2,"699542c4-afa0-83aa-881c-9a39a4711c22",13,"STRUCTURAL (token-set identity)","",["00-BOOK/DATA/baseline-authority.json"],[],"PARTIALLY_ASSIMILATED",-6,"=-=+-=---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-6|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-018186","Governance Simulation Layer","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"699542c4-afa0-83aa-881c-9a39a4711c22",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018187","Sandbox Layer","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,3,0,0,4.0,2,"699542c4-afa0-83aa-881c-9a39a4711c22",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018188","Governance Replay Engine","ENGINE","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,2,0,0,4.0,2,"699542c4-afa0-83aa-881c-9a39a4711c22",12,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -22547,7 +22547,7 @@
     ["UCOS-KA-018260","Status of System","COMPONENT","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"69a451ca-dc3c-8323-841c-fe35ca70536c",15,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018261","Migration Law","LAW","CONSTITUTIONAL","IDEA","P2","ASSIMILATED","R6","01-WORKING/LAW-REGISTER.md","F","ABSENT",0,false,false,2,0,0,4.0,2,"69a451ca-dc3c-8323-841c-fe35ca70536c",5,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018262","Authoritative Ledger","REGISTRY","REGISTRY","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,2,0,0,4.0,2,"69a451ca-dc3c-8323-841c-fe35ca70536c",13,"SUBSUMPTION (repository artifact is more specific)","",["00-MASTER/UAKOS-CLOSURE-002/02-AUTHORITATIVE-SOURCE-REGISTER.md"],[],"PARTIALLY_ASSIMILATED",-4,"+-=+-+---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-4|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
-    ["UCOS-KA-018263","Register Authority","GOVERNANCE","ARCHITECTURE","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,3,0,0,4.0,2,"69a451ca-dc3c-8323-841c-fe35ca70536c",13,"STRUCTURAL (token-set identity)","",["00-BOOK/tools/ledger_authority.py","00-MASTER/UCOS-UCAF-001/01-AUTHORITY-REGISTER.md","01-WORKING/AUTHORITY-REGISTER.md"],[],"PARTIALLY_ASSIMILATED",-3,"=-++-=---+++=---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-3|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
+    ["UCOS-KA-018263","Register Authority","GOVERNANCE","ARCHITECTURE","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,3,0,0,4.0,2,"69a451ca-dc3c-8323-841c-fe35ca70536c",13,"STRUCTURAL (token-set identity)","",["00-MASTER/C13-MB17-GOVERNANCE-MATRIX.md","00-MASTER/UCOS-UCAF-001/01-AUTHORITY-REGISTER.md","01-WORKING/AUTHORITY-REGISTER.md"],[],"PARTIALLY_ASSIMILATED",-2,"+-=+-+---+++=---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-2|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-018264","Replay Model","ARCHITECTURE","ARCHITECTURE","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,4,0,0,4.0,2,"69a451ca-dc3c-8323-841c-fe35ca70536c",9,"SUBSUMPTION (repository artifact is more specific)","",["UCOS-OMEGA-INFINITY-UNIVERSAL-IDENTITY-CONVERGENCE-CLOSURE-DETERMINATION.md"],[],"PARTIALLY_ASSIMILATED",-5,"=-=+-+---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-018265","Root Dependency Graph","GRAPH","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,2,0,0,4.0,2,"69a451ca-dc3c-8323-841c-fe35ca70536c",13,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018266","Programmable Merkle Authority Graph","GRAPH","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,3,0,0,4.0,2,"69a451ca-dc3c-8323-841c-fe35ca70536c",13,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -22836,7 +22836,7 @@
     ["UCOS-KA-018549","Communication Capabilities","CAPABILITY","CAPABILITY","IDEA","P3","ASSIMILATED","R6","00-MASTER/MIP-W1-P001/07-UNIVERSAL-CAPABILITY-CATALOG.md","F","ABSENT",0,false,false,5,0,0,4.0,2,"69af7c2e-76f8-8322-bacf-5974925a44d2",8,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018550","L1 Runtime","RUNTIME","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,8,0,0,4.0,2,"69af7c2e-76f8-8322-bacf-5974925a44d2",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018551","Processing Capabilities","CAPABILITY","CAPABILITY","IDEA","P3","ASSIMILATED","R6","00-MASTER/MIP-W1-P001/07-UNIVERSAL-CAPABILITY-CATALOG.md","F","ABSENT",0,false,false,2,0,0,4.0,2,"69af7c2e-76f8-8322-bacf-5974925a44d2",8,"","",[],[],"NO_CURRENT_FORM",11,"+=+++++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+11|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-018552","Hypergraph Registry","REGISTRY","REGISTRY","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,2,0,0,4.0,2,"69af7c2e-76f8-8322-bacf-5974925a44d2",13,"STRUCTURAL (token-set identity)","",["00-MASTER/UCOS-OMEGA-B-001/probes/b07_removability_validation.py"],[],"PARTIALLY_ASSIMILATED",-5,"+-=+-=---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-5|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
+    ["UCOS-KA-018552","Hypergraph Registry","REGISTRY","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,2,0,0,4.0,2,"69af7c2e-76f8-8322-bacf-5974925a44d2",13,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018553","Detection Layer","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"69af7c2e-76f8-8322-bacf-5974925a44d2",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018554","Remaining Architecture","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"69af7c2e-76f8-8322-bacf-5974925a44d2",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018555","Architecture Graph System","COMPONENT","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"69af7c2e-76f8-8322-bacf-5974925a44d2",15,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -22933,7 +22933,7 @@
     ["UCOS-KA-018646","Entity Engine","ENGINE","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,5,0,0,4.0,2,"69b3fa89-0c98-8321-a5e1-340e518ac373",12,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018647","Entity Type Registry","REGISTRY","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,6,0,0,4.0,2,"69b3fa89-0c98-8321-a5e1-340e518ac373",13,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018648","Universal Attribute Model","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"69b3fa89-0c98-8321-a5e1-340e518ac373",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-018649","Load Registries","REGISTRY","REGISTRY","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,4,0,0,4.0,2,"69b3fa89-0c98-8321-a5e1-340e518ac373",13,"STRUCTURAL (token-set identity)","",["00-BOOK/tools/ukb.py","00-CMG/tools/cmg_validate.py","engine/uaue/authority.py"],[],"PARTIALLY_ASSIMILATED",-4,"=-++-=---++==---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-4|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
+    ["UCOS-KA-018649","Load Registries","REGISTRY","REGISTRY","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-2","","","ABSENT",0,false,false,4,0,0,4.0,2,"69b3fa89-0c98-8321-a5e1-340e518ac373",13,"STRUCTURAL (token-set identity)","",["00-BOOK/tools/ukb.py","00-CMG/tools/cmg_validate.py","engine/conformance/measure.py"],[],"PARTIALLY_ASSIMILATED",-4,"=-++-=---++==---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-4|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-018650","Modular Architecture","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"69b3fa89-0c98-8321-a5e1-340e518ac373",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018651","Launch Strategy","ROADMAP","ROADMAP","IDEA","P3","ASSIMILATED","R6","00-MASTER/MCP-003-MASTER-EXECUTION.md","F","ABSENT",0,false,false,2,0,0,4.0,2,"69b3fa89-0c98-8321-a5e1-340e518ac373",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-018652","Frontend Layer","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"69b3fa89-0c98-8321-a5e1-340e518ac373",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
@@ -26323,7 +26323,7 @@
     ["UCOS-KA-022036","Workspace Transaction Layer","ARCHITECTURE","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",9,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-022037","Workspace Twin","COMPONENT","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",15,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-022038","Workspace Certification","CERTIFICATION","CERTIFICATION","IDEA","P3","ASSIMILATED","R6","00-MASTER/UCOS-CVER-001","F","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
-    ["UCOS-KA-022039","Merge Registry","REGISTRY","REGISTRY","IDEA","P3","ASSIMILATED","R6","03-CATALOGS","F","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",13,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
+    ["UCOS-KA-022039","Merge Registry","REGISTRY","REGISTRY","IDEA","P3","SEMANTICALLY-REPRESENTED","SE-3","","","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",13,"SUBSUMPTION (repository artifact is more specific)","",["00-BOOK/tools/merge-union-ledger.py"],[],"PARTIALLY_ASSIMILATED",-6,"=-=+-=---+===---","SUP-4","ESCALATE_ARCHITECTURE","DEC-04","P:PP|Q:SR|S:PAS|C:1|N:-6|D:N|T:T|W:-","REFER-CONSTITUTIONAL-REGRESSION","IMMEDIATE"],
     ["UCOS-KA-022040","Distributed Digital Twins","COMPONENT","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,4,0,0,4.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",15,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-022041","Deterministic Merge Engine","ENGINE","ENGINE","IDEA","P3","ASSIMILATED","R6","engine","F","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",12,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
     ["UCOS-KA-022042","Merge Pipeline","WORKFLOW","ARCHITECTURE","IDEA","P3","ASSIMILATED","R6","07-ENGINEERING","F","ABSENT",0,false,false,2,0,0,4.0,2,"6a5b4705-577c-83ee-8605-236e16856f1a",14,"","",[],[],"NO_CURRENT_FORM",10,"+=++=++==+++++==","SUP-3","DEFER","DEC-06","P:NP|Q:AS|S:NCF|C:0|N:+10|D:N|T:T|W:F","REGISTER-AND-HOLD","HELD"],
