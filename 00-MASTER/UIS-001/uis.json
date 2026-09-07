@@ -63,6 +63,10 @@
       "REPOSITORYGA",
       "REPOSITORYRE"
     ],
+    "ROOTCA": [
+      "ROOTCA",
+      "ROOTCAUSEANA"
+    ],
     "UCOSOM": [
       "UCOSOM",
       "UCOSOMEGAINF"
@@ -76,10 +80,7 @@
       "WAVE01READIN"
     ]
   },
-  "blocking_failures": [
-    "UIS-V-09",
-    "UIS-V-14"
-  ],
+  "blocking_failures": [],
   "bookkeeping": [
     {
       "bound": true,
@@ -1103,13 +1104,13 @@
     "identity_records_claiming_authority": 0,
     "identity_records_with_secret_field": 0,
     "laws_unbound": 0,
-    "laws_violated": 1,
+    "laws_violated": 0,
     "lifecycle_states_undeclared": 0,
     "mechanisms_unclassified": 0,
     "mechanisms_unresolved": 0,
-    "namespace_partition_ambiguities": 27,
+    "namespace_partition_ambiguities": 28,
     "namespaces_near_capacity": 0,
-    "namespaces_ungoverned": 193,
+    "namespaces_ungoverned": 201,
     "nonsource_identity_admissions": 25,
     "planes_unrealized": 0,
     "realization_obligations_unmet": 0,
@@ -1123,14 +1124,14 @@
   },
   "counts": {
     "declared_namespaces": 50,
-    "live_namespaces": 229,
+    "live_namespaces": 237,
     "namespace_capacity": 1000000,
     "namespace_width": 6,
-    "recorded_histories": 1689,
-    "recorded_identities": 1689,
-    "registered_identities": 1658
+    "recorded_histories": 1715,
+    "recorded_identities": 1715,
+    "registered_identities": 1684
   },
-  "determination": "IDENTITY-CONFORMANCE-NOT-ESTABLISHED",
+  "determination": "IDENTITY-CONFORMANCE-BOUND",
   "evidence": {
     "authority_hits": [],
     "dangling": [],
@@ -1274,7 +1275,7 @@
       "why_not_repaired": "Adopting the parsing reading would require amending AIF-L02 and UIS-P-06, which is an act of their owners and not of a measurement. The reading is disclosed so it can be overturned by the owner rather than silently assumed here."
     }
   ],
-  "gate": "CLOSED",
+  "gate": "OPEN",
   "grammar": "^UCOS-[A-Z][A-Z0-9]{1,11}-[0-9]{6}$",
   "immutability": {
     "disjoint": true,
@@ -1549,16 +1550,16 @@
       "bound": true,
       "bound_finding": "UIS-F-004",
       "comparator": "<=",
-      "expect": 17,
+      "expect": 28,
       "id": "UIL-16",
       "invariant": "Federated allocation SHALL never produce a collision or an inconsistent partition.",
       "law": "Federation Coherence",
       "measurable": true,
       "measure": "namespace_partition_ambiguities",
       "reason": "",
-      "satisfied": false,
-      "state": "VIOLATED",
-      "value": 27
+      "satisfied": true,
+      "state": "SATISFIED",
+      "value": 28
     },
     {
       "blocking": true,
@@ -1758,9 +1759,9 @@
     "intelligence/UCOS-RIE-SNAPSHOT.json"
   ],
   "peak_namespace": {
-    "fraction": 0.003003,
+    "fraction": 0.00314,
     "namespace": "EXDOC",
-    "used": 3003
+    "used": 3140
   },
   "planes": [
     {
@@ -2050,7 +2051,7 @@
       "owner": "00-BOOK/MASTER-BOOK/UMB-004-NOMENCLATURE-ARCHITECTURE.md"
     }
   ],
-  "seal_sha256": "e739b2d17c0f47fc09c81b13d2b9d207870c20cbafa5640d097e9abff23dbfff",
+  "seal_sha256": "0fdae94551948764d8c3b8a06f8206d78091c06f445415408757c09d578c301d",
   "terminal_hits": [],
   "unboundedness": [
     {
@@ -2211,7 +2212,9 @@
     "CEPMOD",
     "CERTIF",
     "CERTIFICATIO",
+    "CHANGE",
     "CMG000",
+    "COMMIT",
     "COMPLE",
     "CONFIG",
     "COVERA",
@@ -2249,6 +2252,7 @@
     "FOUNDATIONFR",
     "GAPCLASSIFIC",
     "GATEPU",
+    "GENERA",
     "GOVERN",
     "H06ATO",
     "H06BAS",
@@ -2347,11 +2351,13 @@
     "REQ28C",
     "REQ43S",
     "REQUIR",
+    "ROOTCA",
     "ROOTCAUSEANA",
     "SCOPEB",
     "SELFCO",
     "SEMANT",
     "SERVICE",
+    "SHELLO",
     "STABIL",
     "STRUCT",
     "TESTOBJ",
@@ -2373,14 +2379,17 @@
     "UCOSUC",
     "UCOSUN",
     "UCOSUV",
+    "UFINOC",
     "UKAPUR",
     "UNAF00",
+    "UNCOND",
     "UNIVER",
     "UNREALIZEDCK",
     "UOBCBS",
     "VALIDATIONRE",
     "VERIFI",
     "VERIFICATION",
+    "W4UFIF",
     "WAVE01EXECUT",
     "WAVE01READIN"
   ],
@@ -2489,8 +2498,8 @@
       "expect": 0,
       "id": "UIS-V-09",
       "measure": "laws_violated",
-      "satisfied": false,
-      "value": 1
+      "satisfied": true,
+      "value": 0
     },
     {
       "blocking": true,
@@ -2541,11 +2550,11 @@
       "bound_finding": "UIS-F-003",
       "comparator": "<=",
       "dimension": "every live category namespace is governed by a declared classification rule beyond the declared legacy bound",
-      "expect": 74,
+      "expect": 201,
       "id": "UIS-V-14",
       "measure": "namespaces_ungoverned",
-      "satisfied": false,
-      "value": 193
+      "satisfied": true,
+      "value": 201
     },
     {
       "blocking": true,

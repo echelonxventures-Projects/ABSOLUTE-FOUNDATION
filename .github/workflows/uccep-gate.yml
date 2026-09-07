@@ -47,6 +47,15 @@ jobs:
           python-version: "3.12"
 
       # Stdlib only — the guards install nothing. Each is fail-closed on its own.
+
+      # This gate reads artifacts .gitignore excludes as "regenerated each run" — the census
+      # roots include data/, intelligence/ and 00-MASTER/, which hold declared generated
+      # inputs. Without them the population measured in CI is smaller than the one the
+      # ratchets were declared against, so the gate fails for a reason that has nothing to do
+      # with truth. verify.sh:364: a prerequisite generated after the gate that consumes it is
+      # not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Declaration integrity (every reference resolves · one disposition each · no manual gate)
         run: python3 00-MASTER/UCCEP-000000/uccep_engine.py --check-declaration
 
@@ -94,6 +103,15 @@ jobs:
       # Bootstrapping the canonical venv is the fix: it is the same environment owner
       # (`scripts/ucos-env.sh`) that `verify.sh` and `repo-ops.sh` use, so CI and local
       # execution are now the same predicate rather than two similar ones.
+
+      # This gate reads artifacts .gitignore excludes as "regenerated each run" — the census
+      # roots include data/, intelligence/ and 00-MASTER/, which hold declared generated
+      # inputs. Without them the population measured in CI is smaller than the one the
+      # ratchets were declared against, so the gate fails for a reason that has nothing to do
+      # with truth. verify.sh:364: a prerequisite generated after the gate that consumes it is
+      # not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Bootstrap the canonical environment (creates .ec1-venv so $PY resolves)
         run: ./bootstrap.sh
 

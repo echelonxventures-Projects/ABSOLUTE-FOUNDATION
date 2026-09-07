@@ -63,6 +63,15 @@ jobs:
       # a DELEGATES surface must really import the canonical owner (measured over its import
       # graph), a GOVERNED narrower authority must restate none of the canonical law, and a
       # PROJECTION must hold no executable determination.
+
+      # This gate reads artifacts .gitignore excludes as "regenerated each run" — the census
+      # roots include data/, intelligence/ and 00-MASTER/, which hold declared generated
+      # inputs. Without them the population measured in CI is smaller than the one the
+      # ratchets were declared against, so the gate fails for a reason that has nothing to do
+      # with truth. verify.sh:364: a prerequisite generated after the gate that consumes it is
+      # not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Convergence gate (FG-14 exactly-once · FG-15 no-parallel-authority · FG-16 one-measurement)
         run: make convergence-gate
 
@@ -99,6 +108,15 @@ jobs:
       # version-checked, services are registered into a fresh certified registry and resolved,
       # import purity is measured by AST inspection, determinism by building twice and comparing
       # fingerprints, and specialisation by searching module sources for repository locators.
+
+      # This gate reads artifacts .gitignore excludes as "regenerated each run" — the census
+      # roots include data/, intelligence/ and 00-MASTER/, which hold declared generated
+      # inputs. Without them the population measured in CI is smaller than the one the
+      # ratchets were declared against, so the gate fails for a reason that has nothing to do
+      # with truth. verify.sh:364: a prerequisite generated after the gate that consumes it is
+      # not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Constitution gate (sixteen articles, one executable probe each)
         run: make constitution-gate
 
@@ -135,6 +153,15 @@ jobs:
       # The converged determination must REPRODUCE the retired engine-side measurement, not
       # merely replace it. The suite pins that reproduction, so a change that quietly altered the
       # measurement while retiring the second implementation would fail here.
+
+      # This gate reads artifacts .gitignore excludes as "regenerated each run" — the census
+      # roots include data/, intelligence/ and 00-MASTER/, which hold declared generated
+      # inputs. Without them the population measured in CI is smaller than the one the
+      # ratchets were declared against, so the gate fails for a reason that has nothing to do
+      # with truth. verify.sh:364: a prerequisite generated after the gate that consumes it is
+      # not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Install pinned test toolchain
         run: python -m pip install --disable-pip-version-check "pytest==8.3.4" "pytest-cov==6.0.0" "coverage==7.15.2"
 
@@ -165,6 +192,15 @@ jobs:
         with:
           python-version: "3.12"
 
+
+      # This gate reads artifacts .gitignore excludes as "regenerated each run" — the census
+      # roots include data/, intelligence/ and 00-MASTER/, which hold declared generated
+      # inputs. Without them the population measured in CI is smaller than the one the
+      # ratchets were declared against, so the gate fails for a reason that has nothing to do
+      # with truth. verify.sh:364: a prerequisite generated after the gate that consumes it is
+      # not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Install pinned test toolchain
         run: python -m pip install --disable-pip-version-check "pytest==8.3.4" "pytest-cov==6.0.0" "coverage==7.15.2"
 
@@ -202,6 +238,15 @@ jobs:
       # freeze decision is taken, and taking that decision is a constituent act rather than a
       # side effect of a green pipeline. `make freeze-gate` is the fail-closed form for the
       # moment a freeze is actually proposed.
+
+      # This gate reads artifacts .gitignore excludes as "regenerated each run" — the census
+      # roots include data/, intelligence/ and 00-MASTER/, which hold declared generated
+      # inputs. Without them the population measured in CI is smaller than the one the
+      # ratchets were declared against, so the gate fails for a reason that has nothing to do
+      # with truth. verify.sh:364: a prerequisite generated after the gate that consumes it is
+      # not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Freeze readiness determination (declares eligibility; performs no freeze)
         run: make freeze
 

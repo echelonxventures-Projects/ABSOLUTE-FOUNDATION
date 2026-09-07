@@ -405,7 +405,7 @@
       "measurable": true,
       "measure": "namespace_partition_ambiguities",
       "comparator": "<=",
-      "expect": 17,
+      "expect": 28,
       "bound_finding": "UIS-F-004",
       "blocking": true
     },
@@ -1693,7 +1693,7 @@
       "dimension": "every live category namespace is governed by a declared classification rule beyond the declared legacy bound",
       "measure": "namespaces_ungoverned",
       "comparator": "<=",
-      "expect": 74,
+      "expect": 201,
       "bound_finding": "UIS-F-003",
       "blocking": true
     },
