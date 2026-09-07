@@ -138,7 +138,12 @@ PY="$(ucos_venv_python)"
 # the whole suite under the coverage floor. An intelligence layer that cannot compute a
 # plan must never be able to cause LESS verification than there would have been without
 # it.
-UVI_PLAN="$(mktemp -t ucos-verify-plan)"
+# PORTABLE TEMPLATE, NOT `mktemp -t <prefix>`. BSD mktemp treats the -t argument as a
+# prefix and appends randomness; GNU mktemp treats it as a template and refuses one with
+# fewer than three trailing X's. So `-t ucos-verify-plan` worked on macOS and failed on
+# every Linux runner with "mktemp: too few X's in template", which is why ./verify.sh --full
+# never completed a single CI run. A full template path is accepted by both.
+UVI_PLAN="$(mktemp "${TMPDIR:-/tmp}/ucos-verify-plan.XXXXXX")"
 UVI_PLAN_OK=1
 trap 'rm -f "$UVI_PLAN"; ucos_lease_release' EXIT
 
@@ -281,7 +286,7 @@ run_stage() {
     # read-only gate finishes in seconds and is reaped after the pytest stage, so the
     # first version of this summary reported eleven gates at 441s each. A summary that
     # misattributes 440 seconds to a gate that took one is worse than no summary.
-    local log; log="$(mktemp -t ucos-verify-stage)"
+    local log; log="$(mktemp "${TMPDIR:-/tmp}/ucos-verify-stage.XXXXXX")"
     ( cd "$UCOS_REPO"; _s=$SECONDS; "$@"; _rc=$?; printf '%s' "$((SECONDS - _s))" > "${log}.secs"; exit "$_rc" ) > "$log" 2>&1 &
     _BG_PIDS+=("$!")
     _BG_LABELS+=("$label")

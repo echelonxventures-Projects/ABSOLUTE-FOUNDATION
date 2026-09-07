@@ -94,6 +94,13 @@ jobs:
           python-version: "3.12"
 
       # Stdlib only — the capability installs nothing.
+
+      # test_the_module_entry_point_is_reachable spawns .ec1-venv/bin/python directly, so a
+      # runner without the canonical venv fails it with FileNotFoundError — an environment
+      # fault reported as a construct-foundation defect. Bootstrapping through the same
+      # environment owner verify.sh uses keeps CI and local execution the same predicate.
+      - name: Bootstrap the canonical environment (creates .ec1-venv)
+        run: ./bootstrap.sh
       - name: The declaration is coherent against every implemented registry
         run: |
           python3 - <<'PY'
@@ -190,6 +197,13 @@ jobs:
 
       # The coverage floor belongs to ./verify.sh in ec1-ci.yml and is deliberately not
       # duplicated here; this job measures the suite, not the denominator.
+
+      # test_the_module_entry_point_is_reachable spawns .ec1-venv/bin/python directly, so a
+      # runner without the canonical venv fails it with FileNotFoundError — an environment
+      # fault reported as a construct-foundation defect. Bootstrapping through the same
+      # environment owner verify.sh uses keeps CI and local execution the same predicate.
+      - name: Bootstrap the canonical environment (creates .ec1-venv)
+        run: ./bootstrap.sh
       - name: Install the pinned test toolchain
         run: |
           python -m pip install --disable-pip-version-check \
@@ -209,6 +223,13 @@ jobs:
         with:
           python-version: "3.12"
 
+
+      # test_the_module_entry_point_is_reachable spawns .ec1-venv/bin/python directly, so a
+      # runner without the canonical venv fails it with FileNotFoundError — an environment
+      # fault reported as a construct-foundation defect. Bootstrapping through the same
+      # environment owner verify.sh uses keeps CI and local execution the same predicate.
+      - name: Bootstrap the canonical environment (creates .ec1-venv)
+        run: ./bootstrap.sh
       - name: Sixteen laws, measured and refused if they do not hold
         run: python3 -m engine.construct.gate --gate --quiet
 
