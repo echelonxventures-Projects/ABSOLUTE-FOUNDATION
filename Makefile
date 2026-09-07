@@ -273,14 +273,19 @@ determinism-evidence: bootstrap-quiet
 # closure: UAKOS-CLOSURE-002 — regenerate the Vision-to-Repository closure artifacts
 # (source inventory, concept inventory, coverage/traceability matrices, gap register,
 # closure certificates). Deterministic, stdlib-only; never mutates the frozen corpus.
-# CLOSURE_SKIP_CORPUS=1 skips the external corpus scan for a fast repo-only pass.
+# SCOPE DECLARATION. CLOSURE_SKIP_CORPUS=1 is set on every invocation below, and on every
+# other invocation site of this engine, as a STANDING DECLARATION rather than a speed
+# option. The external corpus at ../UCOS is not present in any clone, so an undeclared
+# run records `repo-only (undeclared - corpus absent)` with population_complete=False:
+# the same population, bounded by accident instead of by declaration. Declaring it makes
+# the disclosure identical here and in CI, which is what lets a reader trust it.
 closure:
-	@python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py
+	@CLOSURE_SKIP_CORPUS=1 python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py
 
 # closure-gate: fail-closed standing gate — exits non-zero while any constitutional
 # gap remains (conversation-only / upload-only / unhomed / duplicate / orphan).
 closure-gate:
-	@python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py --gate
+	@CLOSURE_SKIP_CORPUS=1 python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py --gate
 
 # closure-phase2: UAKOS-CLOSURE-002 · PHASE-002 — regenerate the concept-graph
 # reconciliation views (outputs 20-35 + phase2.json) by REUSING the Phase-001 model

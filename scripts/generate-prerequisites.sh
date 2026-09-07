@@ -163,7 +163,10 @@ fi
 "$PY" -m engine.knowledge.cli capabilities --write    >/dev/null
 "$PY" -m engine.knowledge.cli docs                    >/dev/null
 "$PY" -m engine.determinism.reproduce                 >/dev/null
-"$PY" 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py   >/dev/null
+# Scope declaration, not a speed option: ../UCOS is absent in every clone, so an undeclared
+# run bounds the same population by accident (population_complete=False) instead of by
+# declaration. Every invocation site of this engine declares it, and a test refuses one that does not.
+CLOSURE_SKIP_CORPUS=1 "$PY" 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py   >/dev/null
 "$PY" 00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py    >/dev/null
 "$PY" 00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py    >/dev/null
 

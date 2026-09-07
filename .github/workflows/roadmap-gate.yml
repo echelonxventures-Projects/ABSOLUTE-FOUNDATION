@@ -81,6 +81,10 @@ jobs:
         # it is regenerated from the corpus rather than committed. The derivability gate below
         # reads it, so it is regenerated here from the repository's own entry point. Nothing is
         # discovered or reconciled — this is the same command `make closure` runs locally.
+        # Scope declaration (see the Makefile `closure` target): ../UCOS is absent on every
+        # runner, so without this the disclosure differs between CI and a developer clone.
+        env:
+          CLOSURE_SKIP_CORPUS: "1"
         run: python3 00-MASTER/UAKOS-CLOSURE-002/closure_engine.py
 
       - name: Roadmap gate (graph acyclic · deps resolved · order total · items executable)

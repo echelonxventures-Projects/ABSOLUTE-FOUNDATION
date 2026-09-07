@@ -15,13 +15,20 @@ import sys
 
 import pytest
 
-from engine.substrate import adapter, gate
+# THE GUARD MUST PRECEDE THE IMPORT IT GUARDS. `engine.substrate` imports `uakp` at module
+# scope, so importing it first raises ModuleNotFoundError before `importorskip` can convert
+# that absence into a skip. The substrate is an EXTERNAL project by constitutional design —
+# it is installed here as an editable checkout and is present in no clone and on no runner —
+# so this module is unimportable exactly where the suite matters most. A collection error
+# aborts the ENTIRE pytest run rather than this one module, which is why an absence the
+# author had already declared lawful still failed `./verify.sh --full` in CI.
+uakp = pytest.importorskip("uakp", reason="the substrate is not installed in this environment")
+
+from engine.substrate import adapter, gate  # noqa: E402 — guarded by the skip above
 
 REPO = pathlib.Path(__file__).resolve().parents[3]
 DECLARATION = REPO / "00-MASTER" / "UCOS-SUB-001" / "sub-declaration.json"
 CONSUMER = REPO / "engine" / "substrate"
-
-uakp = pytest.importorskip("uakp", reason="the substrate is not installed in this environment")
 
 
 def _declaration() -> dict:

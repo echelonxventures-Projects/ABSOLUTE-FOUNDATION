@@ -165,6 +165,24 @@ def _head_commit(replay: dict | None) -> str:
     return _git("rev-parse", "--short", "HEAD") or "unknown"
 
 
+def _replayed_input_fact(replay: dict | None, key: str, live: str) -> str:
+    """A fact of the REGENERATED input, preserved across a replay.
+
+    ``00-MASTER/UAKOS-CLOSURE-002/closure.json`` is gitignored (.gitignore:59) and rebuilt by
+    whichever site ran last, so its ``baseline_commit`` and ``branch`` describe THAT run's
+    environment rather than the repository. Re-reading them makes the committed register drift
+    by exactly those fields on every commit and on every runner — precisely the defect
+    ``_head_commit`` already prevents for the head one field below, which this reuses for the
+    inherited fields it forgot. A genuine regeneration (``make closure009``, no ``--render``)
+    still advances them; only a replay preserves what the register recorded.
+    """
+    if replay is not None:
+        recorded = str((replay.get("baseline") or {}).get(key) or "").strip()
+        if recorded:
+            return recorded
+    return live
+
+
 def _fence(header: list[str], rows: list[list], note: str = "") -> str:
     out = ["| " + " | ".join(header) + " |", "|" + "|".join(["---"] * len(header)) + "|"]
     for r in rows:
@@ -824,8 +842,11 @@ def build(inputs: dict, replay: dict | None = None) -> dict:
         waves.setdefault(p["wave"], []).append(p["work_package_id"])
 
     baseline_meta = {
-        "closure_baseline_commit": closure.get("baseline_commit", "unknown"),
-        "branch": closure.get("branch", "unknown"),
+        # Inherited from the gitignored, per-run closure.json — replayed, never re-read.
+        "closure_baseline_commit": _replayed_input_fact(
+            replay, "closure_baseline_commit", closure.get("baseline_commit", "unknown")
+        ),
+        "branch": _replayed_input_fact(replay, "branch", closure.get("branch", "unknown")),
         # The RECORDED head is replayed, never re-read: a committed artifact can never
         # carry the sha of the commit that carries it, so a replay must preserve the
         # recorded HEAD or every register drifts on every commit (UKAP-001 precedent).
