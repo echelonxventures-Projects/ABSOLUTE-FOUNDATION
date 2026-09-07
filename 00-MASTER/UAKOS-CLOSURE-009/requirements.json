@@ -12,7 +12,7 @@
   "baseline": {
     "branch": "integration/recovery-001",
     "classifier_source": "00-BOOK/tools/config.py::CLASSIFY_RULES",
-    "closure_baseline_commit": "f8d33435",
+    "closure_baseline_commit": "42f519e9",
     "closure_determination": "CLOSED",
     "closure_gap_total": 0,
     "concept_total": 549,
@@ -16892,7 +16892,7 @@
       ],
       "dependency_count": 7,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 72,
+      "evidence_files": 71,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -34513,7 +34513,7 @@
       "volume": "UNCLASSIFIED"
     }
   ],
-  "seal_sha256": "04873341cf09e574875de0995ea9e9aa5fbc7419f00f3c3f085375c8f9bf4cb9",
+  "seal_sha256": "733f3a1624745dd88c494bd04dc86afab77285a541877616b86a56a4c55dd0f2",
   "systemic_findings": [
     {
       "id": "RG-S01",

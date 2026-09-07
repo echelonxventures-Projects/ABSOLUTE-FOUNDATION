@@ -152,7 +152,13 @@ ALLOWED_KEYS: dict[str, set[str]] = {
     },
     "verifications": {"id", "name", "criterion", "metric", "expect"},
     "validations": {"id", "name", "criterion", "metric", "expect"},
-    "gates": {"id", "name", "blocking", "criterion", "metrics"},
+    # `basis` is inert documentation: it names the authority a gate rests on and, where one
+    # exists, the measurement defect that shaped it. Nothing reads it and it is dropped from
+    # the generated rib.json, so it carries no obligation and smuggles no claim — which is the
+    # only thing this allow-list exists to prevent. GATE-12 records under it why the gate
+    # measures the ignored-inclusive filesystem rather than `git status --porcelain`, a finding
+    # that would be destroyed rather than declared if the key were simply removed.
+    "gates": {"id", "name", "blocking", "criterion", "metrics", "basis"},
     "outputs": {"id", "file", "title", "purpose"},
     "severities": {"id", "severity", "rank", "definition"},
     "compliance": {"id", "requirement", "gate", "severity_on_fail", "remediation"},
