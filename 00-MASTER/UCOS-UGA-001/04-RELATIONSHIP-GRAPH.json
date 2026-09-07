@@ -244,7 +244,7 @@
       "meaning": "checks the shape of another object — the forward sense of the contract validated_by names inversely"
     }
   },
-  "count": 39592,
+  "count": 39614,
   "relationships": [
     {
       "from": "UCOS-ADR-000001",
@@ -27739,6 +27739,16 @@
     {
       "from": "UCOS-ENGINE-000262",
       "kind": "depends_on",
+      "to": "engine/compiler/cycles.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000262",
+      "kind": "depends_on",
+      "to": "engine/compiler/partition.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000262",
+      "kind": "depends_on",
       "to": "engine/context/errors.py"
     },
     {
@@ -27770,21 +27780,6 @@
       "from": "UCOS-ENGINE-000262",
       "kind": "depends_on",
       "to": "engine/foundation/obs/telemetry.py"
-    },
-    {
-      "from": "UCOS-ENGINE-000262",
-      "kind": "depends_on",
-      "to": "engine/runtime/context.py"
-    },
-    {
-      "from": "UCOS-ENGINE-000262",
-      "kind": "depends_on",
-      "to": "engine/runtime/errors.py"
-    },
-    {
-      "from": "UCOS-ENGINE-000262",
-      "kind": "depends_on",
-      "to": "engine/runtime/graph.py"
     },
     {
       "from": "UCOS-ENGINE-000262",
@@ -36079,6 +36074,11 @@
     {
       "from": "UCOS-ENGINE-000452",
       "kind": "depends_on",
+      "to": "engine/compiler/partition.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000452",
+      "kind": "depends_on",
       "to": "engine/foundation/obs/logging.py"
     },
     {
@@ -40665,6 +40665,21 @@
       "from": "UCOS-ENGINE-000557",
       "kind": "depends_on",
       "to": "engine/certification/ledger.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000557",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/capability.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000557",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000557",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
     },
     {
       "from": "UCOS-ENGINE-000557",
@@ -54449,6 +54464,21 @@
     {
       "from": "UCOS-ENGINE-000857",
       "kind": "depends_on",
+      "to": "engine/omega_infinite/capability.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000857",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000857",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000857",
+      "kind": "depends_on",
       "to": "intelligence/rie/config.py"
     },
     {
@@ -54960,6 +54990,21 @@
       "from": "UCOS-ENGINE-000870",
       "kind": "depends_on",
       "to": "engine/foundation/guards/frozen_paths.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000870",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/capability.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000870",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-000870",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
     },
     {
       "from": "UCOS-ENGINE-000870",
@@ -73503,6 +73548,16 @@
     },
     {
       "from": "UCOS-ENGINE-001294",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001294",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001294",
       "kind": "evidenced_by",
       "to": "VALIDATION"
     },
@@ -75794,6 +75849,16 @@
     {
       "from": "UCOS-ENGINE-001365",
       "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001365",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001365",
+      "kind": "depends_on",
       "to": "engine/universal_discovery/__init__.py"
     },
     {
@@ -76098,6 +76163,16 @@
     },
     {
       "from": "UCOS-ENGINE-001374",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/capability.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001374",
+      "kind": "depends_on",
+      "to": "engine/omega_infinite/git_provider.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001374",
       "kind": "evidenced_by",
       "to": "VALIDATION"
     },
@@ -76393,6 +76468,31 @@
     },
     {
       "from": "UCOS-ENGINE-001386",
+      "kind": "validated_by",
+      "to": "UCOS-UGA-001 §UGA-INV-01..10"
+    },
+    {
+      "from": "UCOS-ENGINE-001387",
+      "kind": "depends_on",
+      "to": "engine/compiler/errors.py"
+    },
+    {
+      "from": "UCOS-ENGINE-001387",
+      "kind": "evidenced_by",
+      "to": "VALIDATION"
+    },
+    {
+      "from": "UCOS-ENGINE-001387",
+      "kind": "owned_by",
+      "to": "engine/compiler"
+    },
+    {
+      "from": "UCOS-ENGINE-001387",
+      "kind": "produced_by",
+      "to": "HUMAN_AUTHORED"
+    },
+    {
+      "from": "UCOS-ENGINE-001387",
       "kind": "validated_by",
       "to": "UCOS-UGA-001 §UGA-INV-01..10"
     },
@@ -192544,6 +192644,11 @@
     {
       "from": "UCOS-TESTOBJ-000896",
       "kind": "depends_on",
+      "to": "engine/omega_infinite/provider.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000896",
+      "kind": "depends_on",
       "to": "platform/repository_intelligence/__init__.py"
     },
     {
@@ -192685,6 +192790,11 @@
       "from": "UCOS-TESTOBJ-000899",
       "kind": "depends_on",
       "to": "engine/zero_class/__init__.py"
+    },
+    {
+      "from": "UCOS-TESTOBJ-000899",
+      "kind": "depends_on",
+      "to": "engine/zero_class/entity_derivation.py"
     },
     {
       "from": "UCOS-TESTOBJ-000899",

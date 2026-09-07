@@ -12123,7 +12123,7 @@
     "DATAOBJ": 146,
     "EXDOC": 3140,
     "TOOLING": 57,
-    "ENGINE": 1386,
+    "ENGINE": 1387,
     "TESTOBJ": 900,
     "OBS": 7,
     "ASSESS": 2,
@@ -67091,6 +67091,12 @@
       "object_class": "EXECUTABLE_OBJECT",
       "category": "ENGINE",
       "first_seen": "commit:f2bb7c6637cf"
+    },
+    "engine/compiler/partition.py": {
+      "universal_id": "UCOS-ENGINE-001387",
+      "object_class": "EXECUTABLE_OBJECT",
+      "category": "ENGINE",
+      "first_seen": "commit:776455a5afc4"
     }
   },
   "by_observation": {

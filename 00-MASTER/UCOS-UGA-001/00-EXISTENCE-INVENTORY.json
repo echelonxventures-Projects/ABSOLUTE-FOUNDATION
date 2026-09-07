@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7133,
+  "total_objects": 7134,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -42203,6 +42203,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-ENGINE-000233",
       "first_seen": "commit:e98f59cd22e9"
+    },
+    {
+      "path": "engine/compiler/partition.py",
+      "object_class": "EXECUTABLE_OBJECT",
+      "lifecycle": "AUTHORED",
+      "owner": "engine/compiler",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-ENGINE-001387",
+      "first_seen": "commit:776455a5afc4"
     },
     {
       "path": "engine/compiler/pipeline.py",
