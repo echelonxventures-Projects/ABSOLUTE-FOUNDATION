@@ -109,8 +109,21 @@ jobs:
             || { echo "UCOS-UAR-001 REPLAY DRIFT — the committed register is not the product of the declaration" >&2; exit 1; }
           echo "UCOS-UAR-001 replay: no drift"
 
+      # THE JOB RAN PYTEST WITHOUT INSTALLING IT. python3 on the runner is the hosted
+      # interpreter, which carries no pytest, so this step failed with "No module named
+      # pytest" — an environment fault reported as a registry-binding failure. It passes
+      # locally only because a developer's venv already has the toolchain, which is the
+      # same local-versus-CI divergence EIP-018 records for verify.sh itself.
+      - name: Install the pinned test toolchain
+        run: |
+          python -m pip install --disable-pip-version-check \
+            "pytest==8.3.4" "pytest-cov==6.0.0" "coverage==7.15.2"
+
+      # --no-cov because pyproject's addopts carry a 90% floor derived over the whole
+      # corpus; one test file cannot reach it and would fail for measuring less than
+      # everything, exactly as the determinism job did.
       - name: Registry binding test (the gate is reachable in both directions)
-        run: python3 -m pytest engine/tests/unit/test_uar_analysis_registry.py -q
+        run: python -m pytest engine/tests/unit/test_uar_analysis_registry.py -q --no-cov
 
       - name: Publish the analysis registry determination
         if: always()
