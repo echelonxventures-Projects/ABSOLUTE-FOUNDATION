@@ -311,10 +311,10 @@
       "required": true,
       "pointers": [
         "project.scripts",
-        "tool.coverage.run.source",
-        "tool.pytest.ini_options.testpaths"
+        "tool.pytest.ini_options.addopts",
+        "tool.coverage.run.omit"
       ],
-      "purpose": "the declared interface surface (console entry points) and the declared verification scope"
+      "purpose": "the declared interface surface (console entry points) and the declared verification scope. POINTERS CORRECTED: this declared tool.coverage.run.source and tool.pytest.ini_options.testpaths, and pyproject.toml records that BOTH were deliberately removed — `source` because it was a second enumeration of 78 paths reconciled by nobody, and testpaths because the roots are carried in addopts. A pointer at a key its own target documents as deliberately absent measures nothing and reported two integrity findings for years of it being right."
     }
   ],
   "discovery": [

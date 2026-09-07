@@ -21,16 +21,16 @@ The canonical history is the JSON projection named by the declaration's `history
 | ledger owner | engine/uckp/evolution.py::EvolutionLedger |
 | written through | to_document |
 | read back through | from_document |
-| projection digest | 5fde51cc167102b4 |
+| projection digest | 066f362024d2942a |
 
 ## Ledger counts
 
 | Count | Value |
 |---|---|
-| completed_cycles | 52 |
-| cycles | 52 |
-| findings | 8580 |
-| records | 780 |
+| completed_cycles | 55 |
+| cycles | 55 |
+| findings | 9075 |
+| records | 825 |
 
 ## Recorded dimensions
 

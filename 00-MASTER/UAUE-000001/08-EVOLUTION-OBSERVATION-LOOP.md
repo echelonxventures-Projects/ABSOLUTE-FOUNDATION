@@ -80,6 +80,9 @@
 | UCOS-EVO-f752c0192242 | security | replay | 9e8797e0befc7eb6 | PASS | — |
 | UCOS-EVO-0608c9f389ad | unit_testing | replay | a6594054b532a2e4 | PASS | — |
 | UCOS-EVO-d0f674d9c12d | 00-MASTER/UCCEP-000000/uccep_engine.py | replay | 4fa9ef110771412a | PASS | — |
+| UCOS-EVO-fd8fc9a15a73 | 00-MASTER/UCDA-000001/ucda_engine.py | replay | d0a87003d9c82bd5 | PASS | — |
+| UCOS-EVO-30e175669b19 | 00-MASTER/UCOS-RIB-001/rib_engine.py | replay | a03b8a785ad3d370 | PASS | — |
+| UCOS-EVO-6be817d8c83c | 00-MASTER/UCDA-000001/ucda_engine.py | replay | 61b41a268bbaeb23 | PASS | — |
 | UCOS-EVO-34be58e0be48 | Band 10 Data | replay | 9a36e887cf94e294 | PASS | — |
 | UCOS-EVO-5c6b791d981d | Band 11 Service | replay | 0e0c6f6a82d4e26a | PASS | — |
 | UCOS-EVO-b88b91bc4a42 | Band 12 Application | replay | 67a6cce2af60a96a | PASS | — |

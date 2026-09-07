@@ -21,35 +21,35 @@
         "root": "data",
         "source_files": 73,
         "test_files": 49,
-        "test_functions": 887
+        "test_functions": 916
       },
       "engine": {
-        "loc": 117510,
+        "loc": 153340,
         "root": "engine",
-        "source_files": 418,
-        "test_files": 293,
-        "test_functions": 4900
+        "source_files": 521,
+        "test_files": 348,
+        "test_functions": 6415
       },
       "infrastructure": {
-        "loc": 22599,
+        "loc": 22603,
         "root": "infrastructure",
         "source_files": 67,
-        "test_files": 45,
-        "test_functions": 821
+        "test_files": 47,
+        "test_functions": 847
       },
       "intelligence": {
-        "loc": 15815,
+        "loc": 16247,
         "root": "intelligence",
         "source_files": 65,
-        "test_files": 6,
-        "test_functions": 119
+        "test_files": 7,
+        "test_functions": 228
       },
       "platform": {
-        "loc": 125833,
+        "loc": 126331,
         "root": "platform",
-        "source_files": 448,
-        "test_files": 346,
-        "test_functions": 5644
+        "source_files": 449,
+        "test_files": 351,
+        "test_functions": 5939
       },
       "service": {
         "loc": 20464,
@@ -59,16 +59,16 @@
         "test_functions": 1038
       }
     },
-    "total_loc": 349539,
-    "total_tests": 14491
+    "total_loc": 386303,
+    "total_tests": 16465
   },
-  "content_hash": "14fc43965bf4840ed2dbe3089298e498c90e0b9a7d92c92c251bec4dd0e56325",
+  "content_hash": "db478375e31b00883b4b1128ea48c42af2f2df9a0a4032b7ce9f6edadcaae1a8",
   "corpus": {
-    "artifacts": 1579,
-    "edges": 13591,
-    "pages": 12330,
+    "artifacts": 1684,
+    "edges": 13801,
+    "pages": 13173,
     "status_histogram": {
-      "ACTIVE": 1458,
+      "ACTIVE": 1563,
       "CERTIFIED": 7,
       "COMPLETE": 63,
       "FINAL": 9,
@@ -79,19 +79,19 @@
   },
   "evidence_state": {
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "7c7c88717c8a266baa3ee76895c8e706190212838418010888e13647472f3eb7",
-      "00-BOOK/DATA/certification.json": "0ffbbb469e25bb5273f1a6f7c23fea52ad84e655b1862d5954c4d9eef28e2854",
-      "00-BOOK/DATA/control-tower.json": "c5a3d9fa655af2fc96d180e4860c2790d3ddb848c13e15811ba83be571151649",
+      "00-BOOK/DATA/artifacts.json": "627a678d1382144799bc2a0f39e5876748d60294782b3cf856718c51d9661876",
+      "00-BOOK/DATA/certification.json": "acea9004a7430f21bd2fbededaec0f3950438f6aa28e6c654c046a3a8133c48d",
+      "00-BOOK/DATA/control-tower.json": "d2c0d720b545d475a723d490ae1158fa3d09850a868625d6dd89e2edbe15410a",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "e32b29b0201ccaf79258bb9e3cfd137110cca7c44f9206735a5a60cb80433261"
+      "00-BOOK/DATA/volumes.json": "337384d910c3654dbe586df938337558715647e49e7359ef1171ce32d1c1dd7a"
     }
   },
-  "evidence_timestamp": "2026-08-25T05:14:51+00:00",
+  "evidence_timestamp": "2026-09-05T06:38:24+00:00",
   "generation": {
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "477150f216675f0481282919da3ccf11d1886879ad38df1df0b6aa55c7142c20",
+    "input_hash": "d207c4a35676350267102360f0be73082f02c3a276a205e8892ae0c5d5ba112f",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence file hash, which together pin the tracked state these outputs derive from. Coverage measurement (TEST_EXECUTION_STATE) is excluded per UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input.",
     "output_hash_field": "content_hash"
   },

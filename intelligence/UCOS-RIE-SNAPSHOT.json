@@ -2,18 +2,18 @@
   "aeos_verdict": "FOUNDATION-READY — AEOS may begin as a separately authorized program; NOT begun here.",
   "artifact_id": "UCOS-RIE-SNAPSHOT",
   "authority": "NONE (derived truth)",
-  "capability_count": 132,
+  "capability_count": 147,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "8a6926fecf01794c8af4c538a610fc448799d03048ca75605fe44cba0bd924a5",
+  "content_hash": "4044ae08b19cdb16fc8cfd4653335869e914902af978ffb2a94675c070c6cd0a",
   "dimension_index_reconciled_pct": 26.7,
   "drift": {
     "baseline": false,
     "certification_drift": [],
     "dependency_drift": [
       {
-        "from": 12899,
+        "from": 13591,
         "metric": "corpus_edges",
-        "to": 13591
+        "to": 13801
       }
     ],
     "duplicate_findings": [
@@ -151,6 +151,22 @@
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
         "locations": [
+          "engine.omega_governance",
+          "engine.tests.omega_governance"
+        ],
+        "name": "omega_governance"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.omega_infinite",
+          "engine.tests.omega_infinite"
+        ],
+        "name": "omega_infinite"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
           "engine.provider",
           "engine.tests.provider"
         ],
@@ -163,6 +179,14 @@
           "automation/ukbx.py"
         ],
         "name": "py"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
+          "engine.omega_governance.temporal",
+          "engine.temporal"
+        ],
+        "name": "temporal"
       },
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
@@ -204,6 +228,14 @@
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
         "locations": [
+          "engine.tests.universal_discovery",
+          "engine.universal_discovery"
+        ],
+        "name": "universal_discovery"
+      },
+      {
+        "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
+        "locations": [
           "engine.tests.validation",
           "engine.validation",
           "platform.validation"
@@ -213,7 +245,77 @@
     ],
     "implementation_drift": [
       {
-        "capability": "engine.execution_environment",
+        "capability": "engine.certification_integrity",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.conformance",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.construct",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.enforcement_closure",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.ledger_authority",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.omega_governance",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.omega_governance.reference",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.omega_governance.temporal",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.omega_infinite",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.substrate",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.tests.omega_governance",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.tests.omega_infinite",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.tests.universal_discovery",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.universal_discovery",
+        "change": "ADDED",
+        "status": "CERTIFIED"
+      },
+      {
+        "capability": "engine.zero_class",
         "change": "ADDED",
         "status": "CERTIFIED"
       }
@@ -265,19 +367,19 @@
   },
   "evidence_state": {
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "7c7c88717c8a266baa3ee76895c8e706190212838418010888e13647472f3eb7",
-      "00-BOOK/DATA/certification.json": "0ffbbb469e25bb5273f1a6f7c23fea52ad84e655b1862d5954c4d9eef28e2854",
-      "00-BOOK/DATA/control-tower.json": "c5a3d9fa655af2fc96d180e4860c2790d3ddb848c13e15811ba83be571151649",
+      "00-BOOK/DATA/artifacts.json": "627a678d1382144799bc2a0f39e5876748d60294782b3cf856718c51d9661876",
+      "00-BOOK/DATA/certification.json": "acea9004a7430f21bd2fbededaec0f3950438f6aa28e6c654c046a3a8133c48d",
+      "00-BOOK/DATA/control-tower.json": "d2c0d720b545d475a723d490ae1158fa3d09850a868625d6dd89e2edbe15410a",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "e32b29b0201ccaf79258bb9e3cfd137110cca7c44f9206735a5a60cb80433261"
+      "00-BOOK/DATA/volumes.json": "337384d910c3654dbe586df938337558715647e49e7359ef1171ce32d1c1dd7a"
     }
   },
-  "evidence_timestamp": "2026-08-25T05:14:51+00:00",
+  "evidence_timestamp": "2026-09-05T06:38:24+00:00",
   "generation": {
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "477150f216675f0481282919da3ccf11d1886879ad38df1df0b6aa55c7142c20",
+    "input_hash": "d207c4a35676350267102360f0be73082f02c3a276a205e8892ae0c5d5ba112f",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence file hash, which together pin the tracked state these outputs derive from. Coverage measurement (TEST_EXECUTION_STATE) is excluded per UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input.",
     "output_hash_field": "content_hash"
   },

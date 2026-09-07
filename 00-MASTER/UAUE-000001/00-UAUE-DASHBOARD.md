@@ -17,9 +17,9 @@
 | UAUE-GATE-02 | PASS | all 11 positions resolve with their symbols and every declared gate is wired |
 | UAUE-GATE-03 | PASS | all 15 canonical stages of engine/uckp/evolution.py are claimed exactly once |
 | UAUE-GATE-04 | PASS | all 44 dependency edges resolve and run forward |
-| UAUE-GATE-05 | PASS | 52 runs replay byte-identically, every one settling within [3] rounds |
+| UAUE-GATE-05 | PASS | 55 runs replay byte-identically, every one settling within [3] rounds |
 | UAUE-GATE-06 | PASS | uaue.unknown-subject/1.0.0 traversed 11 positions and settled in 3 rounds under 33 pre-existing owner homes |
-| UAUE-GATE-07 | PASS | all 10 mandatory invariants measured and satisfied over 572 evolution objects in 52 runs |
+| UAUE-GATE-07 | PASS | all 10 mandatory invariants measured and satisfied over 605 evolution objects in 55 runs |
 | UAUE-GATE-08 | PASS | all 18 declared registers render through 14 implemented renderers, carrying no memory address, wall clock or absolute path |
 | UAUE-GATE-09 | PASS | verify.sh invokes engine.uaue.gate --gate, gating the 3 positions that name it |
 | UAUE-GATE-10 | PASS | all 15 exit criteria across 15 implementation phases measured and satisfied |
@@ -28,14 +28,14 @@
 
 | Measure | Value |
 |---|---|
-| runs conducted | 52 |
-| runs certified | 52 |
+| runs conducted | 55 |
+| runs certified | 55 |
 | runs halted | 0 |
 | positions per run | 11 |
 | canonical stages | 15 |
 | owner homes | 33 |
 | declared registers | 18 |
-| evolution objects | 572 |
+| evolution objects | 605 |
 
 ## Mandatory invariants
 

@@ -439,7 +439,7 @@
     "ontology_anchors": 3,
     "ontology_anchors_present": 3,
     "owners": 10,
-    "register_references": 1930,
+    "register_references": 1945,
     "register_references_unresolved": 0,
     "registers": 20,
     "registers_resolved": 20,
@@ -932,7 +932,7 @@
       "owner": "intelligence/rie/engine.py",
       "path": "intelligence/UCOS-RIE-CAPABILITY-CATALOG.json",
       "problem": "",
-      "references": 132,
+      "references": 147,
       "references_unresolved": 0,
       "resolves": true,
       "role": "capability-catalogue",
@@ -1104,7 +1104,7 @@
       "subject": "every baseline"
     }
   ],
-  "seal_sha256": "7c07105028fc942e00af22edae0f337394f8913d6f553e0a0b01a5b63c0f4433",
+  "seal_sha256": "3b43af3f41313691db76a4d4e0d394b7a348376d76e1791f2e62ccb89d45a185",
   "validations": [
     {
       "blocking": true,
