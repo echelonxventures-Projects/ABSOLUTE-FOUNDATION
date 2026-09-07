@@ -25,7 +25,7 @@ This engine writes none of the paths below and amends no ratified text in them, 
 
 | Path | What it contributes | At HEAD | sha256 (first 16) | Why it is required |
 |---|---|---|---|---|
-| `Makefile` | targets `assimilate`, `assimilate-replay`, `assimilate-gate` | present | 2d02a466b87ed9c9 | runs this engine from the repository's canonical entry point; `assimilate-gate` is the validation command the roadmap cites for every assimilated item |
+| `Makefile` | targets `assimilate`, `assimilate-replay`, `assimilate-gate` | present | e80842b449a07b7d | runs this engine from the repository's canonical entry point; `assimilate-gate` is the validation command the roadmap cites for every assimilated item |
 | `.github/workflows/assimilation-gate.yml` | CI completion gate (`--render --gate`) + committed-register drift gate | present | 390deb7adcca7737 | proves on every push that the committed registers ARE the rendered fixed point of `assimilation.json`, with the external evidence tree absent |
 
 ## Artifacts created
