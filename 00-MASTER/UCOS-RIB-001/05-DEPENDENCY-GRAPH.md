@@ -30,7 +30,7 @@
 |---|---|
 | Kind | `python_import_graph` |
 | Nodes | 99 |
-| Edges | 358 |
+| Edges | 357 |
 | Unresolved edges | 0 |
 | Cycles | 0 |
 | Cycles of a non-benign class | 0 |

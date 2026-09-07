@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `44cb9736cf27e08d824ac627fa2a9d6f` |
+| SEAL | `2ff2408cf2e5fc57ea4bd931c4faa255` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > The loop's phases are not authored here. They are READ from the located declarations that already own them, and each is bound to whatever discharges it. A phase appended to a source appears here on the next run.

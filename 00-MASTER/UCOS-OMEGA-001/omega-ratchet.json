@@ -1,14 +1,14 @@
 {
-  "authority": "NONE \u2014 DERIVED TRUTH. Every value here is a measurement, never a choice.",
+  "authority": "NONE — DERIVED TRUTH. Every value here is a measurement, never a choice.",
   "best": {
     "authority_of_last_resort": 0.0,
     "declared_exemptions": 10.0,
-    "import_entropy": 7.993862,
-    "statement_entropy": 6.362406,
+    "import_entropy": 7.985602,
+    "statement_entropy": 6.355292,
     "unexplained_exemptions": 2.0,
-    "unmeasured_surface_density": 0.094795,
+    "unmeasured_surface_density": 0.092405,
     "unnameable_exemptions": 49.0,
-    "unreachable_artifacts": 51.0,
+    "unreachable_artifacts": 50.0,
     "unresolved_dynamic_sites": 22.0
   },
   "corrections": [
@@ -28,32 +28,32 @@
   "floors": [
     {
       "metric": "unexplained_exemptions",
-      "reason": "The two are engine/__init__.py (2 statements) and platform/__init__.py (15 statements, 4 imports). Both are ROOT package initialisers of trees measured per SUB-package, and that shape is what puts them outside every rule: coverage sources name engine.foundation and platform.identity, never engine or platform, so no source covers the initialiser itself. Naming the roots instead would admit engine.uicm \u2014 1,893 statements with zero test files, declared exempt with a written reason \u2014 and convert a dead-code finding into a coverage figure, which is the measurement laundering the exemption register exists to prevent. \u03a9 FOUND THESE: both were absent from coverage.xml under the enumerated denominator and no control could say so. WHAT CLOSES THIS FLOOR: retiring or testing engine.uicm, after which the roots can be measured whole and this metric reaches 0. That is an owner decision about dead code, not a coverage setting.",
+      "reason": "The two are engine/__init__.py (2 statements) and platform/__init__.py (15 statements, 4 imports). Both are ROOT package initialisers of trees measured per SUB-package, and that shape is what puts them outside every rule: coverage sources name engine.foundation and platform.identity, never engine or platform, so no source covers the initialiser itself. Naming the roots instead would admit engine.uicm — 1,893 statements with zero test files, declared exempt with a written reason — and convert a dead-code finding into a coverage figure, which is the measurement laundering the exemption register exists to prevent. Ω FOUND THESE: both were absent from coverage.xml under the enumerated denominator and no control could say so. WHAT CLOSES THIS FLOOR: retiring or testing engine.uicm, after which the roots can be measured whole and this metric reaches 0. That is an owner decision about dead code, not a coverage setting.",
       "value": 2.0
     },
     {
       "metric": "unnameable_exemptions",
-      "reason": "Artifacts whose top-level root is not a Python identifier \u2014 00-MASTER, 00-BOOK and 00-CMG \u2014 so NO coverage source could name them, by the language's own rule for identifiers rather than by any policy here. They are governance engines: owned (\u03a9-2 derives an authority for every one), invoked (verify.sh stages, Makefile targets and workflows all reach them) and unmeasurable by coverage as currently laid out. WHAT CLOSES THIS FLOOR: making those engines importable under test rather than only executable as scripts, which is a real change to how they are structured and not a setting. Until then the population may fall and hold; it may never rise, because a floor accepts the stall and never a regression.",
+      "reason": "Artifacts whose top-level root is not a Python identifier — 00-MASTER, 00-BOOK and 00-CMG — so NO coverage source could name them, by the language's own rule for identifiers rather than by any policy here. They are governance engines: owned (Ω-2 derives an authority for every one), invoked (verify.sh stages, Makefile targets and workflows all reach them) and unmeasurable by coverage as currently laid out. WHAT CLOSES THIS FLOOR: making those engines importable under test rather than only executable as scripts, which is a real change to how they are structured and not a setting. Until then the population may fall and hold; it may never rise, because a floor accepts the stall and never a regression.",
       "value": 49.0
     },
     {
       "metric": "unreachable_artifacts",
-      "reason": "Artifacts no import, orchestration plane or entry point reaches. Declared as an OPEN FINDING rather than an acceptable state, so the number is argued about instead of tolerated. LOWERED 52 -> 51 BECAUSE THE FINDING WAS ACTED ON, NOT BECAUSE THE METRIC MOVED: the coverage programme admitted a suite that imports a module nothing had reached, so an artifact that read as dead is now reached by a test that runs. That is the second time this floor has fallen for exactly that reason, and the mechanism is the same both times - a floor is not a ceiling, and assert_floors_live refuses a declared floor the work has overtaken. TWENTY OF THE REMAINDER ARE __init__.py FILES, which is still the largest single group and the most tractable: a package initialiser that nothing imports is a package nothing imports. WHAT CLOSES THIS FLOOR: deleting what is finished and wiring what is not, which is a per-file owner decision. The bound still binds in the direction that matters - one more unreachable artifact REGRESSES and is refused, because a floor excuses the stall and never a regression.",
-      "value": 51.0
+      "reason": "Artifacts no import, orchestration plane or entry point reaches. Declared as an OPEN FINDING rather than an acceptable state, so the number is argued about instead of tolerated. LOWERED 51 -> 50 BECAUSE THE FINDING WAS ACTED ON, NOT BECAUSE THE METRIC MOVED. The third fall, and the first from a LAYERING correction rather than a new test: engine.context.composition stopped importing engine.runtime, the general partition and visibility rules moved to engine.compiler.partition, and an artifact that no import reached is now reached from the shared substrate. The prior fall was 52 -> 51: the coverage programme admitted a suite that imports a module nothing had reached, so an artifact that read as dead is now reached by a test that runs. That is the third time this floor has fallen for exactly that reason, and the mechanism is the same both times - a floor is not a ceiling, and assert_floors_live refuses a declared floor the work has overtaken. TWENTY OF THE REMAINDER ARE __init__.py FILES, which is still the largest single group and the most tractable: a package initialiser that nothing imports is a package nothing imports. WHAT CLOSES THIS FLOOR: deleting what is finished and wiring what is not, which is a per-file owner decision. The bound still binds in the direction that matters - one more unreachable artifact REGRESSES and is refused, because a floor excuses the stall and never a regression.",
+      "value": 50.0
     }
   ],
   "holds": {
-    "authority_of_last_resort": 9,
-    "declared_exemptions": 9,
+    "authority_of_last_resort": 10,
+    "declared_exemptions": 10,
     "import_entropy": 0,
     "statement_entropy": 0,
-    "unexplained_exemptions": 9,
+    "unexplained_exemptions": 10,
     "unmeasured_surface_density": 0,
-    "unnameable_exemptions": 9,
+    "unnameable_exemptions": 10,
     "unreachable_artifacts": 0,
-    "unresolved_dynamic_sites": 6
+    "unresolved_dynamic_sites": 7
   },
-  "how_to_read": "best[m] is the lowest value of metric m this repository has ever recorded. A run measuring more than best[m] is REFUSED unless justifications names m with a reason. A justification permits one run and never moves best[m], so a regression cannot become the new normal by being explained. holds[m] counts consecutive runs at an unchanged value; a CONVERGENT metric held at a non-zero value for 5 runs is reported STALLED, because an exemption class that stops shrinking has become a convention. floors[m] argues that a particular value IS m's floor and so accepts the stall \u2014 it does NOT excuse a regression, and it is refused as stale the moment m is measured below it.",
+  "how_to_read": "best[m] is the lowest value of metric m this repository has ever recorded. A run measuring more than best[m] is REFUSED unless justifications names m with a reason. A justification permits one run and never moves best[m], so a regression cannot become the new normal by being explained. holds[m] counts consecutive runs at an unchanged value; a CONVERGENT metric held at a non-zero value for 5 runs is reported STALLED, because an exemption class that stops shrinking has become a convention. floors[m] argues that a particular value IS m's floor and so accepts the stall — it does NOT excuse a regression, and it is refused as stale the moment m is measured below it.",
   "justifications": [],
   "kinds": {
     "authority_of_last_resort": "CONVERGENT",

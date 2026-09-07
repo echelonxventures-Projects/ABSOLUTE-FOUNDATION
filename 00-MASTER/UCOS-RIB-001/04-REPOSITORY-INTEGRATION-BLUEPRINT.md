@@ -1247,11 +1247,11 @@ the measured dependency, consumer and provider degree of every unit
 | UCOS-RIB-001-CAP-0300 | engine.certification_integrity | 2 | 11 | 2 |
 | UCOS-RIB-001-CAP-0301 | engine.ceu | 4 | 2 | 4 |
 | UCOS-RIB-001-CAP-0302 | engine.civilization | 9 | 2 | 9 |
-| UCOS-RIB-001-CAP-0303 | engine.compiler | 17 | 6 | 17 |
+| UCOS-RIB-001-CAP-0303 | engine.compiler | 17 | 8 | 17 |
 | UCOS-RIB-001-CAP-0304 | engine.conformance | 2 | 2 | 2 |
 | UCOS-RIB-001-CAP-0305 | engine.constitution | 18 | 17 | 18 |
 | UCOS-RIB-001-CAP-0306 | engine.construct | 5 | 7 | 5 |
-| UCOS-RIB-001-CAP-0307 | engine.context | 21 | 5 | 21 |
+| UCOS-RIB-001-CAP-0307 | engine.context | 21 | 4 | 21 |
 | UCOS-RIB-001-CAP-0308 | engine.determinism | 6 | 3 | 6 |
 | UCOS-RIB-001-CAP-0309 | engine.discovery | 8 | 1 | 8 |
 | UCOS-RIB-001-CAP-0310 | engine.enforcement_closure | 5 | 3 | 5 |
@@ -1285,7 +1285,7 @@ the measured dependency, consumer and provider degree of every unit
 | UCOS-RIB-001-CAP-0338 | engine.registry.universal | 6 | 1 | 6 |
 | UCOS-RIB-001-CAP-0339 | engine.registry_coverage | 2 | 1 | 2 |
 | UCOS-RIB-001-CAP-0340 | engine.root_ontology | 2 | 2 | 2 |
-| UCOS-RIB-001-CAP-0341 | engine.runtime | 16 | 25 | 16 |
+| UCOS-RIB-001-CAP-0341 | engine.runtime | 15 | 25 | 15 |
 | UCOS-RIB-001-CAP-0342 | engine.runtime.bridge | 3 | 2 | 3 |
 | UCOS-RIB-001-CAP-0343 | engine.runtime.execution | 22 | 0 | 22 |
 | UCOS-RIB-001-CAP-0344 | engine.substrate | 0 | 2 | 0 |

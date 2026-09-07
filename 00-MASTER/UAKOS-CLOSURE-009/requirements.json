@@ -12,38 +12,38 @@
   "baseline": {
     "branch": "integration/recovery-001",
     "classifier_source": "00-BOOK/tools/config.py::CLASSIFY_RULES",
-    "closure_baseline_commit": "42f519e9",
+    "closure_baseline_commit": "38b2573f",
     "closure_determination": "CLOSED",
     "closure_gap_total": 0,
     "concept_total": 549,
-    "head_commit": "42f519e9",
+    "head_commit": "38b2573f",
     "tracked_total": 7133
   },
   "baseline_conditions": [
     {
       "id": "BC-01",
-      "measured": "319/549 present in code; 35 absent, 154 deferred, 41 rejected",
+      "measured": "318/549 present in code; 35 absent, 154 deferred, 42 rejected",
       "name": "100% implementation",
       "owner": "closure.json",
       "verdict": "FAIL"
     },
     {
       "id": "BC-02",
-      "measured": "94 implemented requirements without validation evidence",
+      "measured": "93 implemented requirements without validation evidence",
       "name": "100% validation",
       "owner": "CEP-004",
       "verdict": "FAIL"
     },
     {
       "id": "BC-03",
-      "measured": "71 implemented requirements without verification evidence",
+      "measured": "70 implemented requirements without verification evidence",
       "name": "100% verification",
       "owner": "CEP-008",
       "verdict": "FAIL"
     },
     {
       "id": "BC-04",
-      "measured": "94 code-without-certification, 16 certified-without-located-code",
+      "measured": "93 code-without-certification, 16 certified-without-located-code",
       "name": "100% certification",
       "owner": "CEP-005",
       "verdict": "FAIL"
@@ -57,7 +57,7 @@
     },
     {
       "id": "BC-06",
-      "measured": "0 of 319 implemented requirements carry determinism evidence; 1 blueprint result(s) recorded",
+      "measured": "0 of 318 implemented requirements carry determinism evidence; 1 blueprint result(s) recorded",
       "name": "100% deterministic replay",
       "owner": "determinism-evidence/",
       "verdict": "FAIL"
@@ -92,7 +92,7 @@
     },
     {
       "id": "BC-11",
-      "measured": "143 canonical knowledge objects against 549 requirements",
+      "measured": "158 canonical knowledge objects against 549 requirements",
       "name": "100% knowledge extraction",
       "owner": "knowledge/canonical-knowledge.json",
       "verdict": "FAIL"
@@ -960,7 +960,7 @@
     {
       "canonical_owner": "00-MASTER/UAKOS-CLOSURE-004",
       "class": "CERTIFICATION",
-      "count": 94,
+      "count": 93,
       "gap_id": "RG-C03",
       "members": [
         "RR-APPLICATION-016",
@@ -1006,7 +1006,6 @@
         "RR-PLATFORM-001",
         "RR-PLATFORM-008",
         "RR-PLATFORM-011",
-        "RR-RUNTIME-012",
         "RR-RUNTIME-013",
         "RR-SERVICE-002",
         "RR-SERVICE-016",
@@ -1064,7 +1063,7 @@
     {
       "canonical_owner": "00-CEP/CEP-004-CONSTITUTIONAL-VALIDATION-CONSTITUTION.md",
       "class": "VALIDATION",
-      "count": 94,
+      "count": 93,
       "gap_id": "RG-D01",
       "members": [
         "RR-AMC-11",
@@ -1129,7 +1128,6 @@
         "RR-PLATFORM-001",
         "RR-PLATFORM-012",
         "RR-RUNTIME-007",
-        "RR-RUNTIME-012",
         "RR-SERVICE-002",
         "RR-SERVICE-003",
         "RR-SERVICE-004",
@@ -1168,7 +1166,7 @@
     {
       "canonical_owner": "00-CEP/CEP-008-CONSTITUTIONAL-EVIDENCE-TRACEABILITY-CONSTITUTION.md",
       "class": "VERIFICATION",
-      "count": 71,
+      "count": 70,
       "gap_id": "RG-D02",
       "members": [
         "RR-APPLICATION-018",
@@ -1196,7 +1194,6 @@
         "RR-INFRASTRUCTURE-015",
         "RR-INFRASTRUCTURE-017",
         "RR-PLATFORM-001",
-        "RR-RUNTIME-012",
         "RR-SERVICE-002",
         "RR-SERVICE-018",
         "RR-UCKO-ALIAS-0001",
@@ -2533,23 +2530,23 @@
     "implementation_status": {
       "ABSENT": 35,
       "DEFERRED": 154,
-      "PRESENT-IN-CODE": 319,
-      "REJECTED": 41
+      "PRESENT-IN-CODE": 318,
+      "REJECTED": 42
     },
     "maturity": {
       "CERTIFIED-PROVISIONAL": 161,
       "DEFERRED": 154,
-      "IMPLEMENTED": 100,
-      "REJECTED": 41,
+      "IMPLEMENTED": 99,
+      "REJECTED": 42,
       "SPECIFIED": 35,
       "TEST-EVIDENCED": 43,
       "VALIDATED-OR-VERIFIED": 15
     },
     "maturity_level": {
-      "M0": 41,
+      "M0": 42,
       "M1": 154,
       "M2": 35,
-      "M3": 100,
+      "M3": 99,
       "M4": 43,
       "M5": 15,
       "M6": 161
@@ -22250,8 +22247,8 @@
         "UCOS-RUN-000015"
       ],
       "dependency_count": 19,
-      "disposition": "IMPLEMENTED",
-      "evidence_files": 53,
+      "disposition": "REJECTED",
+      "evidence_files": 52,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -22260,9 +22257,9 @@
       "exact_homes": [],
       "family": "RUNTIME",
       "homed": true,
-      "implementation_status": "PRESENT-IN-CODE",
-      "maturity": "IMPLEMENTED",
-      "maturity_level": "M3",
+      "implementation_status": "REJECTED",
+      "maturity": "REJECTED",
+      "maturity_level": "M0",
       "orphan": false,
       "ownership": "DECLARED",
       "program": "RUN",
@@ -22281,13 +22278,13 @@
         "certification": false,
         "constitution": true,
         "evidence": false,
-        "implementation": true,
+        "implementation": false,
         "principle": true,
         "requirement": true,
         "test": false,
         "vision": false
       },
-      "traceability_tiers_present": 4,
+      "traceability_tiers_present": 3,
       "universal_id": "UCOS-RUN-000012",
       "validation_status": "NOT-EVIDENCED",
       "verification_status": "NOT-EVIDENCED",
@@ -34513,7 +34510,7 @@
       "volume": "UNCLASSIFIED"
     }
   ],
-  "seal_sha256": "733f3a1624745dd88c494bd04dc86afab77285a541877616b86a56a4c55dd0f2",
+  "seal_sha256": "45792c637b28c17d8404d3e728b5cc7858d0fc2523c5a87acd0deb685c44b0f3",
   "systemic_findings": [
     {
       "id": "RG-S01",
@@ -34563,7 +34560,7 @@
     "certification": 241,
     "constitution": 227,
     "evidence": 255,
-    "implementation": 319,
+    "implementation": 318,
     "principle": 227,
     "requirement": 549,
     "test": 219,
@@ -34716,7 +34713,7 @@
       "class": "VALIDATION",
       "gap_id": "RG-D01",
       "priority": 9,
-      "scope_count": 94,
+      "scope_count": 93,
       "title": "NO-VALIDATION-EVIDENCE",
       "wave": "W07",
       "work_package_id": "WP-UAKOS-CLOSURE-009-009"
@@ -34729,7 +34726,7 @@
       "class": "VERIFICATION",
       "gap_id": "RG-D02",
       "priority": 10,
-      "scope_count": 71,
+      "scope_count": 70,
       "title": "NO-VERIFICATION-EVIDENCE",
       "wave": "W08",
       "work_package_id": "WP-UAKOS-CLOSURE-009-010"
@@ -34742,7 +34739,7 @@
       "class": "CERTIFICATION",
       "gap_id": "RG-C03",
       "priority": 11,
-      "scope_count": 94,
+      "scope_count": 93,
       "title": "CODE-WITHOUT-CERTIFICATION",
       "wave": "W09",
       "work_package_id": "WP-UAKOS-CLOSURE-009-011"

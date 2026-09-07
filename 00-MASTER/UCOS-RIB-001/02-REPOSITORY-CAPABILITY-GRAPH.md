@@ -330,11 +330,11 @@
 | `UCOS-RIB-001-CAP-0300` | `engine.certification_integrity` | IMPLEMENTATION | `engine/certification_integrity` | 12 | 2 | 11 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0301` | `engine.ceu` | IMPLEMENTATION | `engine/ceu` | 6 | 4 | 2 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0302` | `engine.civilization` | IMPLEMENTATION | `engine/civilization` | 9 | 9 | 2 | 1 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
-| `UCOS-RIB-001-CAP-0303` | `engine.compiler` | IMPLEMENTATION | `engine/compiler` | 15 | 17 | 6 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
+| `UCOS-RIB-001-CAP-0303` | `engine.compiler` | IMPLEMENTATION | `engine/compiler` | 15 | 17 | 8 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0304` | `engine.conformance` | IMPLEMENTATION | `engine/conformance` | 1 | 2 | 2 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0305` | `engine.constitution` | IMPLEMENTATION | `engine/constitution` | 16 | 18 | 17 | 1 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0306` | `engine.construct` | IMPLEMENTATION | `engine/construct` | 13 | 5 | 7 | 1 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
-| `UCOS-RIB-001-CAP-0307` | `engine.context` | IMPLEMENTATION | `engine/context` | 17 | 21 | 5 | 1 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
+| `UCOS-RIB-001-CAP-0307` | `engine.context` | IMPLEMENTATION | `engine/context` | 17 | 21 | 4 | 1 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0308` | `engine.determinism` | IMPLEMENTATION | `engine/determinism` | 3 | 6 | 3 | 1 | 2 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0309` | `engine.discovery` | IMPLEMENTATION | `engine/discovery` | 6 | 8 | 1 | 1 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0310` | `engine.enforcement_closure` | IMPLEMENTATION | `engine/enforcement_closure` | 6 | 5 | 3 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
@@ -368,7 +368,7 @@
 | `UCOS-RIB-001-CAP-0338` | `engine.registry.universal` | CAPABILITY | `engine/registry/universal` | 8 | 6 | 1 | 1 | 1 | 0 | no | CERTIFIED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0339` | `engine.registry_coverage` | IMPLEMENTATION | `engine/registry_coverage` | 1 | 2 | 1 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0340` | `engine.root_ontology` | IMPLEMENTATION | `engine/root_ontology` | 4 | 2 | 2 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
-| `UCOS-RIB-001-CAP-0341` | `engine.runtime` | IMPLEMENTATION | `engine/runtime` | 9 | 16 | 25 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
+| `UCOS-RIB-001-CAP-0341` | `engine.runtime` | IMPLEMENTATION | `engine/runtime` | 9 | 15 | 25 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0342` | `engine.runtime.bridge` | CAPABILITY | `engine/runtime/bridge` | 3 | 3 | 2 | 0 | 0 | 0 | no | CERTIFIED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0343` | `engine.runtime.execution` | CAPABILITY | `engine/runtime/execution` | 22 | 22 | 0 | 0 | 0 | 0 | no | CERTIFIED | **REUSE** | `RUL-10` |
 | `UCOS-RIB-001-CAP-0344` | `engine.substrate` | IMPLEMENTATION | `engine/substrate` | 3 | 0 | 2 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |

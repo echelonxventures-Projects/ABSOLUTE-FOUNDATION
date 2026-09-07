@@ -81,7 +81,6 @@
 | UCOS-EVO-d6365db82626 | unit_testing | implementation | a9be1c3b81d51e95 | PASS | — |
 | UCOS-EVO-9c3281cb3ee8 | 00-MASTER/UCCEP-000000/uccep_engine.py | implementation | 8dfc64d329531f19 | PASS | — |
 | UCOS-EVO-95c79a14210b | 00-MASTER/UCDA-000001/ucda_engine.py | implementation | 8f6f5d2d487464b9 | PASS | — |
-| UCOS-EVO-e64dd0eecb25 | 00-MASTER/UCOS-RIB-001/rib_engine.py | implementation | 64d8e74f4984fd7a | PASS | — |
 | UCOS-EVO-74c84477c960 | 00-MASTER/UCDA-000001/ucda_engine.py | implementation | ad214642422c6554 | PASS | — |
 | UCOS-EVO-ff06e6b87f0e | Band 10 Data | implementation | 6212bf1872e3e552 | PASS | — |
 | UCOS-EVO-314bc4c79f52 | Band 11 Service | implementation | 04dfd0a4e885d9da | PASS | — |

@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `44cb9736cf27e08d824ac627fa2a9d6f` |
+| SEAL | `2ff2408cf2e5fc57ea4bd931c4faa255` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Every finding receives a decision from the declared rules, with the located evidence that justifies it. A decision whose evidence obligation is unmet is withheld rather than asserted.
@@ -55,20 +55,6 @@ The governing finding records that no located authority is competent to close th
 | LOCATED OWNER | `00-MASTER/UCDA-000001/ucda_engine.py` |
 | GOVERNING FINDING | — |
 | EVIDENCE | `00-MASTER/UCDA-000001/ucda.json` |
-| MEASURED | `"CLOSED"` |
-
-A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.
-
-### `OBS-BLUEPRINT-GATE` — The architectural blueprint gate is open
-
-| Field | Value |
-|---|---|
-| DECISION | **IMPLEMENT** |
-| CLASS | Defect correction |
-| MATCHED RULE | `CR-BLOCKING-REGRESSION` |
-| LOCATED OWNER | `00-MASTER/UCOS-RIB-001/rib_engine.py` |
-| GOVERNING FINDING | — |
-| EVIDENCE | `00-MASTER/UCOS-RIB-001/rib.json` |
 | MEASURED | `"CLOSED"` |
 
 A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.

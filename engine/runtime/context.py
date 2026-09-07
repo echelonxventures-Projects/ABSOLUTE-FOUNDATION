@@ -30,24 +30,22 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
 
-from engine.context.composition import (
-    CompositionFederation as Federation,
+from engine.compiler.partition import (
+    Federation,
+    IsolationError,
+    UnboundedMemberError,
 )
-from engine.context.composition import (
-    CompositionFrame as ReferenceFrame,
+from engine.compiler.partition import (
+    Frame as ReferenceFrame,
 )
-from engine.context.composition import (
-    CompositionPartition as RuntimeContext,
+from engine.compiler.partition import (
+    Partition as RuntimeContext,
 )
-from engine.context.composition import (
-    resolve_partition_frames as _resolve_partition_frames,
+from engine.compiler.partition import (
+    resolve_frames as _resolve_frames,
 )
-from engine.context.composition import (
+from engine.compiler.partition import (
     resolve_partitions as _resolve_partitions,
-)
-from engine.context.errors import (
-    ContextCompositionError,
-    ContextIsolationError,
 )
 from engine.foundation.obs.logging import get_logger
 from engine.foundation.obs.telemetry import trace
@@ -92,7 +90,7 @@ def resolve_contexts(bindings: Mapping[str, str]) -> tuple[RuntimeContext, ...]:
     with trace("runtime.context.resolve", universes=len(bindings)):
         try:
             contexts = _resolve_partitions(bindings)
-        except ContextCompositionError as exc:
+        except UnboundedMemberError as exc:
             raise ContextResolutionError(
                 "universe is not bound to a context (unbounded orchestration)",
                 detail=str(exc),
@@ -112,12 +110,26 @@ def resolve_reference_frames(
     """
     with trace("runtime.context.frames", universes=graph.count()):
         try:
-            frames = _resolve_partition_frames(
-                bindings, graph.nodes(), graph.dependencies_of, federations
-            )
-        except ContextIsolationError as exc:
-            raise ReferenceFrameError(str(exc)) from exc
-        except ContextCompositionError as exc:
+            frames = _resolve_frames(bindings, graph.nodes(), graph.dependencies_of, federations)
+        except IsolationError as exc:
+            # VOCABULARY TRANSLATION, not just a type change. The shared rule speaks of
+            # partitions; this layer's declared contract speaks of contexts and reports an
+            # "isolation leak", and callers assert on that wording. A boundary that keeps
+            # the type and drops the vocabulary would still break the contract.
+            raise ReferenceFrameError(
+                str(exc)
+                .replace(
+                    "cross-partition dependency without a federation",
+                    "cross-context dependency without a federation reference "
+                    "(context isolation leak)",
+                )
+                .replace(
+                    "federation endpoints share a partition",
+                    "federation endpoints share a context (federation is cross-context)",
+                )
+                .replace("partition", "context")
+            ) from exc
+        except UnboundedMemberError as exc:
             raise ContextResolutionError(str(exc)) from exc
     _logger.info("runtime.context.frames.resolved", frames=len(frames))
     return frames

@@ -171,7 +171,42 @@
       "statements": 76
     },
     {
-      "authority": "UCCEP-000000",
+      "authority": "tools",
+      "authority_rule": "Ω-A-03",
+      "callables": 5,
+      "disposition": "ARCHIVED",
+      "disposition_reason": "inside a prefix the DP-03 frozen-path guard protects, so writing to it is already refused and measuring it would measure a state no commit can change",
+      "disposition_rule": "Ω-C-02",
+      "imports": 4,
+      "module": "",
+      "path": "00-BOOK/tools/merge-union-ledger.py",
+      "reachable": true,
+      "reached_by": [
+        "make"
+      ],
+      "root": "00-BOOK",
+      "statements": 72
+    },
+    {
+      "authority": "tools",
+      "authority_rule": "Ω-A-03",
+      "callables": 24,
+      "disposition": "ARCHIVED",
+      "disposition_reason": "inside a prefix the DP-03 frozen-path guard protects, so writing to it is already refused and measuring it would measure a state no commit can change",
+      "disposition_rule": "Ω-C-02",
+      "imports": 7,
+      "module": "",
+      "path": "00-BOOK/tools/ufi.py",
+      "reachable": true,
+      "reached_by": [
+        "ci",
+        "verify"
+      ],
+      "root": "00-BOOK",
+      "statements": 422
+    },
+    {
+      "authority": "DATA",
       "authority_rule": "Ω-A-02",
       "callables": 84,
       "disposition": "ARCHIVED",
@@ -203,6 +238,95 @@
       "reached_by": [],
       "root": "00-BOOK",
       "statements": 826
+    },
+    {
+      "authority": "DATA",
+      "authority_rule": "Ω-A-02",
+      "callables": 21,
+      "disposition": "ARCHIVED",
+      "disposition_reason": "inside a prefix the DP-03 frozen-path guard protects, so writing to it is already refused and measuring it would measure a state no commit can change",
+      "disposition_rule": "Ω-C-02",
+      "imports": 7,
+      "module": "",
+      "path": "00-BOOK/tools/ukctx.py",
+      "reachable": true,
+      "reached_by": [
+        "ci",
+        "python"
+      ],
+      "root": "00-BOOK",
+      "statements": 177
+    },
+    {
+      "authority": "DATA",
+      "authority_rule": "Ω-A-02",
+      "callables": 14,
+      "disposition": "ARCHIVED",
+      "disposition_reason": "inside a prefix the DP-03 frozen-path guard protects, so writing to it is already refused and measuring it would measure a state no commit can change",
+      "disposition_rule": "Ω-C-02",
+      "imports": 8,
+      "module": "",
+      "path": "00-BOOK/tools/ukctx_assimilate.py",
+      "reachable": true,
+      "reached_by": [
+        "verify"
+      ],
+      "root": "00-BOOK",
+      "statements": 162
+    },
+    {
+      "authority": "tools",
+      "authority_rule": "Ω-A-03",
+      "callables": 8,
+      "disposition": "ARCHIVED",
+      "disposition_reason": "inside a prefix the DP-03 frozen-path guard protects, so writing to it is already refused and measuring it would measure a state no commit can change",
+      "disposition_rule": "Ω-C-02",
+      "imports": 9,
+      "module": "",
+      "path": "00-BOOK/tools/ukctx_certify.py",
+      "reachable": true,
+      "reached_by": [
+        "python",
+        "verify"
+      ],
+      "root": "00-BOOK",
+      "statements": 119
+    },
+    {
+      "authority": "DATA",
+      "authority_rule": "Ω-A-02",
+      "callables": 12,
+      "disposition": "ARCHIVED",
+      "disposition_reason": "inside a prefix the DP-03 frozen-path guard protects, so writing to it is already refused and measuring it would measure a state no commit can change",
+      "disposition_rule": "Ω-C-02",
+      "imports": 9,
+      "module": "",
+      "path": "00-BOOK/tools/ukctx_gate.py",
+      "reachable": true,
+      "reached_by": [
+        "ci",
+        "verify"
+      ],
+      "root": "00-BOOK",
+      "statements": 371
+    },
+    {
+      "authority": "tools",
+      "authority_rule": "Ω-A-03",
+      "callables": 1,
+      "disposition": "ARCHIVED",
+      "disposition_reason": "inside a prefix the DP-03 frozen-path guard protects, so writing to it is already refused and measuring it would measure a state no commit can change",
+      "disposition_rule": "Ω-C-02",
+      "imports": 4,
+      "module": "",
+      "path": "00-BOOK/tools/ukctx_verify.py",
+      "reachable": true,
+      "reached_by": [
+        "ci",
+        "verify"
+      ],
+      "root": "00-BOOK",
+      "statements": 12
     },
     {
       "authority": "tools",
@@ -774,11 +898,11 @@
     {
       "authority": "UCCEP-000000",
       "authority_rule": "Ω-A-02",
-      "callables": 86,
+      "callables": 87,
       "disposition": "EXEMPTED",
       "disposition_reason": "its root '00-MASTER' is not a Python identifier, so no coverage source could name it; it is reached and owned through the execution graph instead",
       "disposition_rule": "Ω-C-06",
-      "imports": 14,
+      "imports": 16,
       "module": "",
       "path": "00-MASTER/UCOS-RIB-001/rib_engine.py",
       "reachable": true,
@@ -787,7 +911,7 @@
         "make"
       ],
       "root": "00-MASTER",
-      "statements": 1434
+      "statements": 1451
     },
     {
       "authority": "UCOS-AEE-001",
@@ -844,11 +968,11 @@
     {
       "authority": "UEC-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 43,
+      "callables": 46,
       "disposition": "EXEMPTED",
       "disposition_reason": "its root '00-MASTER' is not a Python identifier, so no coverage source could name it; it is reached and owned through the execution graph instead",
       "disposition_rule": "Ω-C-06",
-      "imports": 11,
+      "imports": 14,
       "module": "",
       "path": "00-MASTER/UCOS-UGA-001/uga_engine.py",
       "reachable": true,
@@ -857,7 +981,7 @@
         "verify"
       ],
       "root": "00-MASTER",
-      "statements": 980
+      "statements": 1014
     },
     {
       "authority": "UCCEP-000000",
@@ -871,6 +995,7 @@
       "path": "00-MASTER/UCOS-URAT-001/urat_engine.py",
       "reachable": true,
       "reached_by": [
+        "ci",
         "make"
       ],
       "root": "00-MASTER",
@@ -4319,11 +4444,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 21,
+      "callables": 23,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 5,
+      "imports": 6,
       "module": "data.tests.test_attribute",
       "path": "data/tests/test_attribute.py",
       "reachable": true,
@@ -4331,7 +4456,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 107
+      "statements": 112
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -4370,11 +4495,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 14,
+      "callables": 17,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 9,
+      "imports": 11,
       "module": "data.tests.test_attribute_validation",
       "path": "data/tests/test_attribute_validation.py",
       "reachable": true,
@@ -4382,7 +4507,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 85
+      "statements": 106
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -4438,11 +4563,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 24,
+      "callables": 25,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 7,
+      "imports": 8,
       "module": "data.tests.test_band10_validation",
       "path": "data/tests/test_band10_validation.py",
       "reachable": true,
@@ -4450,7 +4575,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 85
+      "statements": 89
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -4489,11 +4614,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 23,
+      "callables": 25,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 6,
+      "imports": 7,
       "module": "data.tests.test_entity",
       "path": "data/tests/test_entity.py",
       "reachable": true,
@@ -4501,7 +4626,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 119
+      "statements": 124
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -4523,11 +4648,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 13,
+      "callables": 14,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 3,
+      "imports": 4,
       "module": "data.tests.test_entity_realize",
       "path": "data/tests/test_entity_realize.py",
       "reachable": true,
@@ -4535,12 +4660,12 @@
         "test"
       ],
       "root": "data",
-      "statements": 73
+      "statements": 83
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 14,
+      "callables": 15,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
@@ -4552,7 +4677,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 92
+      "statements": 97
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -4608,11 +4733,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 33,
+      "callables": 34,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 12,
+      "imports": 13,
       "module": "data.tests.test_governance_validation",
       "path": "data/tests/test_governance_validation.py",
       "reachable": true,
@@ -4620,7 +4745,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 172
+      "statements": 176
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -4659,11 +4784,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 13,
+      "callables": 14,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 3,
+      "imports": 4,
       "module": "data.tests.test_lifecycle_realize",
       "path": "data/tests/test_lifecycle_realize.py",
       "reachable": true,
@@ -4671,16 +4796,16 @@
         "test"
       ],
       "root": "data",
-      "statements": 78
+      "statements": 88
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 27,
+      "callables": 28,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 20,
+      "imports": 13,
       "module": "data.tests.test_lifecycle_validation",
       "path": "data/tests/test_lifecycle_validation.py",
       "reachable": true,
@@ -4688,7 +4813,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 179
+      "statements": 175
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -4745,11 +4870,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 26,
+      "callables": 27,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 7,
+      "imports": 8,
       "module": "data.tests.test_model_validation",
       "path": "data/tests/test_model_validation.py",
       "reachable": true,
@@ -4757,7 +4882,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 102
+      "statements": 106
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -4813,11 +4938,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 36,
+      "callables": 37,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 12,
+      "imports": 13,
       "module": "data.tests.test_quality_validation",
       "path": "data/tests/test_quality_validation.py",
       "reachable": true,
@@ -4825,16 +4950,16 @@
         "test"
       ],
       "root": "data",
-      "statements": 183
+      "statements": 187
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 9,
+      "callables": 11,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 3,
+      "imports": 5,
       "module": "data.tests.test_realize",
       "path": "data/tests/test_realize.py",
       "reachable": true,
@@ -4842,7 +4967,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 54
+      "statements": 70
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -4898,11 +5023,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 44,
+      "callables": 45,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 6,
+      "imports": 7,
       "module": "data.tests.test_relationship_validation",
       "path": "data/tests/test_relationship_validation.py",
       "reachable": true,
@@ -4910,16 +5035,16 @@
         "test"
       ],
       "root": "data",
-      "statements": 107
+      "statements": 111
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 29,
+      "callables": 32,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 7,
+      "imports": 8,
       "module": "data.tests.test_schema",
       "path": "data/tests/test_schema.py",
       "reachable": true,
@@ -4927,7 +5052,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 144
+      "statements": 154
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -4949,11 +5074,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 14,
+      "callables": 15,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 4,
+      "imports": 5,
       "module": "data.tests.test_schema_realize",
       "path": "data/tests/test_schema_realize.py",
       "reachable": true,
@@ -4961,16 +5086,16 @@
         "test"
       ],
       "root": "data",
-      "statements": 81
+      "statements": 91
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 14,
+      "callables": 15,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 13,
+      "imports": 11,
       "module": "data.tests.test_schema_validation",
       "path": "data/tests/test_schema_validation.py",
       "reachable": true,
@@ -4978,7 +5103,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 96
+      "statements": 98
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -5034,11 +5159,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 37,
+      "callables": 38,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 12,
+      "imports": 13,
       "module": "data.tests.test_security_validation",
       "path": "data/tests/test_security_validation.py",
       "reachable": true,
@@ -5046,16 +5171,16 @@
         "test"
       ],
       "root": "data",
-      "statements": 186
+      "statements": 190
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 30,
+      "callables": 32,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 10,
       "module": "data.tests.test_storage",
       "path": "data/tests/test_storage.py",
       "reachable": true,
@@ -5063,7 +5188,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 150
+      "statements": 166
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -5085,11 +5210,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 14,
+      "callables": 15,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 3,
+      "imports": 4,
       "module": "data.tests.test_storage_realize",
       "path": "data/tests/test_storage_realize.py",
       "reachable": true,
@@ -5097,16 +5222,16 @@
         "test"
       ],
       "root": "data",
-      "statements": 81
+      "statements": 91
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 18,
+      "callables": 19,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 17,
+      "imports": 13,
       "module": "data.tests.test_storage_validation",
       "path": "data/tests/test_storage_validation.py",
       "reachable": true,
@@ -5119,11 +5244,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 10,
+      "callables": 11,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 9,
       "module": "data.tests.test_validation",
       "path": "data/tests/test_validation.py",
       "reachable": true,
@@ -5131,7 +5256,7 @@
         "test"
       ],
       "root": "data",
-      "statements": 65
+      "statements": 71
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -5492,8 +5617,8 @@
       "statements": 3
     },
     {
-      "authority": "engine.certification_integrity",
-      "authority_rule": "Ω-A-06",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
+      "authority_rule": "Ω-A-04",
       "callables": 0,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
@@ -5501,8 +5626,11 @@
       "imports": 2,
       "module": "engine.certification_integrity.__main__",
       "path": "engine/certification_integrity/__main__.py",
-      "reachable": false,
-      "reached_by": [],
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "test"
+      ],
       "root": "engine",
       "statements": 5
     },
@@ -5576,7 +5704,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 156
+      "statements": 155
     },
     {
       "authority": "UEC-000001",
@@ -5592,7 +5720,8 @@
       "reached_by": [
         "ci",
         "import",
-        "make"
+        "make",
+        "test"
       ],
       "root": "engine",
       "statements": 69
@@ -5600,7 +5729,7 @@
     {
       "authority": "UCON-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 17,
+      "callables": 18,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -5613,7 +5742,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 160
+      "statements": 165
     },
     {
       "authority": "UCON-000001",
@@ -5694,7 +5823,7 @@
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 12,
+      "imports": 13,
       "module": "engine.certification_integrity.surface",
       "path": "engine/certification_integrity/surface.py",
       "reachable": true,
@@ -5703,7 +5832,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 280
+      "statements": 281
     },
     {
       "authority": "engine.ceu",
@@ -6013,8 +6142,8 @@
       "statements": 11
     },
     {
-      "authority": "engine.compiler",
-      "authority_rule": "Ω-A-06",
+      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority_rule": "Ω-A-04",
       "callables": 0,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
@@ -6022,8 +6151,10 @@
       "imports": 16,
       "module": "engine.compiler",
       "path": "engine/compiler/__init__.py",
-      "reachable": false,
-      "reached_by": [],
+      "reachable": true,
+      "reached_by": [
+        "import"
+      ],
       "root": "engine",
       "statements": 18
     },
@@ -6297,6 +6428,43 @@
       ],
       "root": "engine",
       "statements": 63
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
+      "authority_rule": "Ω-A-04",
+      "callables": 0,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 1,
+      "module": "engine.conformance",
+      "path": "engine/conformance/__init__.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 3
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::import+make+test",
+      "authority_rule": "Ω-A-04",
+      "callables": 10,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
+      "module": "engine.conformance.measure",
+      "path": "engine/conformance/measure.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "make",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 101
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::cli+import+test",
@@ -6882,7 +7050,7 @@
       "statements": 21
     },
     {
-      "authority": "UCXI-000001",
+      "authority": "DATA",
       "authority_rule": "Ω-A-02",
       "callables": 3,
       "disposition": "MEASURED",
@@ -6943,7 +7111,7 @@
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 14,
+      "imports": 13,
       "module": "engine.context.composition",
       "path": "engine/context/composition.py",
       "reachable": true,
@@ -6952,7 +7120,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 137
+      "statements": 144
     },
     {
       "authority": "UCXI-000001",
@@ -7427,7 +7595,7 @@
     {
       "authority": "UCON-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 32,
+      "callables": 35,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -7440,7 +7608,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 292
+      "statements": 315
     },
     {
       "authority": "UCON-000001",
@@ -7458,16 +7626,16 @@
         "test"
       ],
       "root": "engine",
-      "statements": 151
+      "statements": 152
     },
     {
       "authority": "UCON-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 18,
+      "callables": 27,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 7,
+      "imports": 9,
       "module": "engine.enforcement_closure.discovery",
       "path": "engine/enforcement_closure/discovery.py",
       "reachable": true,
@@ -7476,7 +7644,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 176
+      "statements": 222
     },
     {
       "authority": "UEC-000001",
@@ -8372,7 +8540,7 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
-      "callables": 25,
+      "callables": 26,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -8385,7 +8553,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 105
+      "statements": 112
     },
     {
       "authority": "engine.graph",
@@ -8802,11 +8970,11 @@
     {
       "authority": "UISD-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 31,
+      "callables": 32,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 11,
+      "imports": 12,
       "module": "engine.infinite_scope.contract",
       "path": "engine/infinite_scope/contract.py",
       "reachable": true,
@@ -8815,7 +8983,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 510
+      "statements": 530
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -8834,6 +9002,24 @@
       ],
       "root": "engine",
       "statements": 13
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
+      "authority_rule": "Ω-A-04",
+      "callables": 7,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 4,
+      "module": "engine.infinite_scope.detector",
+      "path": "engine/infinite_scope/detector.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 86
     },
     {
       "authority": "UEC-000001",
@@ -8872,7 +9058,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 267
+      "statements": 268
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::cli",
@@ -9533,7 +9719,7 @@
       "statements": 176
     },
     {
-      "authority": "UISD-000001",
+      "authority": "DATA",
       "authority_rule": "Ω-A-02",
       "callables": 15,
       "disposition": "MEASURED",
@@ -9641,7 +9827,7 @@
       "statements": 142
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 24,
       "disposition": "MEASURED",
@@ -9652,7 +9838,8 @@
       "path": "engine/knowledge/ukip/certification.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "engine",
       "statements": 122
@@ -9749,7 +9936,7 @@
       "statements": 195
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 35,
       "disposition": "MEASURED",
@@ -9760,10 +9947,11 @@
       "path": "engine/knowledge/ukip/discovery.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "engine",
-      "statements": 201
+      "statements": 205
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -9784,7 +9972,7 @@
       "statements": 40
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 13,
       "disposition": "MEASURED",
@@ -9795,7 +9983,8 @@
       "path": "engine/knowledge/ukip/evidence.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "engine",
       "statements": 125
@@ -9891,7 +10080,7 @@
       "statements": 266
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 54,
       "disposition": "MEASURED",
@@ -9902,7 +10091,8 @@
       "path": "engine/knowledge/ukip/validation.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "engine",
       "statements": 272
@@ -9932,7 +10122,7 @@
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 9,
+      "imports": 10,
       "module": "engine.ledger_authority",
       "path": "engine/ledger_authority/__init__.py",
       "reachable": true,
@@ -9982,7 +10172,7 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
-      "callables": 21,
+      "callables": 22,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -9995,7 +10185,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 100
+      "statements": 114
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -10761,7 +10951,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 78
+      "statements": 83
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+python+test",
@@ -10800,6 +10990,44 @@
       ],
       "root": "engine",
       "statements": 43
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::import+python+test",
+      "authority_rule": "Ω-A-04",
+      "callables": 36,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 6,
+      "module": "engine.omega_infinite.contradiction",
+      "path": "engine/omega_infinite/contradiction.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "python",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 173
+    },
+    {
+      "authority": "UCON-000001",
+      "authority_rule": "Ω-A-02",
+      "callables": 3,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 5,
+      "module": "engine.omega_infinite.direct_callers",
+      "path": "engine/omega_infinite/direct_callers.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "python",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 53
     },
     {
       "authority": "UCON-000001",
@@ -10842,7 +11070,7 @@
     {
       "authority": "UCON-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 12,
+      "callables": 22,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -10856,7 +11084,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 65
+      "statements": 144
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+python+test",
@@ -10880,7 +11108,7 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+python+test",
       "authority_rule": "Ω-A-04",
-      "callables": 36,
+      "callables": 38,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -10894,7 +11122,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 132
+      "statements": 149
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::cli",
@@ -11081,7 +11309,7 @@
     {
       "authority": "UCON-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 52,
+      "callables": 55,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -11094,7 +11322,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 798
+      "statements": 835
     },
     {
       "authority": "UCON-000001",
@@ -11550,7 +11778,7 @@
       "statements": 31
     },
     {
-      "authority": "UIS-001",
+      "authority": "DATA",
       "authority_rule": "Ω-A-02",
       "callables": 13,
       "disposition": "MEASURED",
@@ -11872,11 +12100,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
-      "callables": 12,
+      "callables": 2,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 7,
+      "imports": 11,
       "module": "engine.runtime.context",
       "path": "engine/runtime/context.py",
       "reachable": true,
@@ -11885,7 +12113,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 94
+      "statements": 32
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -12407,6 +12635,81 @@
       "statements": 46
     },
     {
+      "authority": "UCOS-REPOSITORY-ROOT::import+make+test",
+      "authority_rule": "Ω-A-04",
+      "callables": 0,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 1,
+      "module": "engine.substrate",
+      "path": "engine/substrate/__init__.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "make",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 4
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::make",
+      "authority_rule": "Ω-A-04",
+      "callables": 0,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 1,
+      "module": "engine.substrate.__main__",
+      "path": "engine/substrate/__main__.py",
+      "reachable": true,
+      "reached_by": [
+        "make"
+      ],
+      "root": "engine",
+      "statements": 2
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::import+make+test",
+      "authority_rule": "Ω-A-04",
+      "callables": 10,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
+      "module": "engine.substrate.adapter",
+      "path": "engine/substrate/adapter.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "make",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 145
+    },
+    {
+      "authority": "UEC-000001",
+      "authority_rule": "Ω-A-02",
+      "callables": 2,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 11,
+      "module": "engine.substrate.gate",
+      "path": "engine/substrate/gate.py",
+      "reachable": true,
+      "reached_by": [
+        "ci",
+        "import",
+        "make",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 56
+    },
+    {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 0,
@@ -12479,21 +12782,22 @@
       "statements": 95
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
-      "callables": 0,
+      "callables": 40,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 0,
+      "imports": 9,
       "module": "engine.tests",
       "path": "engine/tests/__init__.py",
       "reachable": true,
       "reached_by": [
+        "import",
         "test"
       ],
       "root": "engine",
-      "statements": 0
+      "statements": 491
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -12823,11 +13127,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 53,
+      "callables": 70,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 5,
+      "imports": 6,
       "module": "engine.tests.ceu.test_existence",
       "path": "engine/tests/ceu/test_existence.py",
       "reachable": true,
@@ -12835,7 +13139,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 305
+      "statements": 409
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -13008,21 +13312,39 @@
       "statements": 83
     },
     {
-      "authority": "UISD-000001",
-      "authority_rule": "Ω-A-02",
-      "callables": 23,
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 8,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 13,
-      "module": "engine.tests.conftest",
-      "path": "engine/tests/conftest.py",
+      "imports": 7,
+      "module": "engine.tests.conformance.test_agnosticism_conformance",
+      "path": "engine/tests/conformance/test_agnosticism_conformance.py",
       "reachable": true,
       "reached_by": [
         "test"
       ],
       "root": "engine",
-      "statements": 111
+      "statements": 42
+    },
+    {
+      "authority": "UISD-000001",
+      "authority_rule": "Ω-A-02",
+      "callables": 26,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 15,
+      "module": "engine.tests.conftest",
+      "path": "engine/tests/conftest.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 143
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -15125,6 +15447,40 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
+      "callables": 19,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
+      "module": "engine.tests.knowledge.ukip.test_assimilation_failures",
+      "path": "engine/tests/knowledge/ukip/test_assimilation_failures.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 108
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 11,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 6,
+      "module": "engine.tests.knowledge.ukip.test_certification_paths",
+      "path": "engine/tests/knowledge/ukip/test_certification_paths.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 77
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
       "callables": 24,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
@@ -15210,6 +15566,57 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
+      "callables": 32,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
+      "module": "engine.tests.knowledge.ukip.test_discovery",
+      "path": "engine/tests/knowledge/ukip/test_discovery.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 189
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 29,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
+      "module": "engine.tests.knowledge.ukip.test_evidence",
+      "path": "engine/tests/knowledge/ukip/test_evidence.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 141
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 26,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
+      "module": "engine.tests.knowledge.ukip.test_graph",
+      "path": "engine/tests/knowledge/ukip/test_graph.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 161
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
       "callables": 66,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
@@ -15278,11 +15685,28 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 11,
+      "callables": 38,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 4,
+      "imports": 11,
+      "module": "engine.tests.knowledge.ukip.test_validation_failures",
+      "path": "engine/tests/knowledge/ukip/test_validation_failures.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 196
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 36,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
       "module": "engine.tests.lineage.test_req_43_upeg_certification",
       "path": "engine/tests/lineage/test_req_43_upeg_certification.py",
       "reachable": true,
@@ -15290,7 +15714,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 126
+      "statements": 245
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -15635,11 +16059,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 37,
+      "callables": 49,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 6,
+      "imports": 5,
       "module": "engine.tests.omega_governance.test_state",
       "path": "engine/tests/omega_governance/test_state.py",
       "reachable": true,
@@ -15647,7 +16071,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 213
+      "statements": 291
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -15802,6 +16226,40 @@
       ],
       "root": "engine",
       "statements": 202
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 37,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 4,
+      "module": "engine.tests.omega_infinite.test_contradiction",
+      "path": "engine/tests/omega_infinite/test_contradiction.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 180
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 14,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 9,
+      "module": "engine.tests.omega_infinite.test_direct_caller_ratchet",
+      "path": "engine/tests/omega_infinite/test_direct_caller_ratchet.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 57
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -15976,11 +16434,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 16,
+      "callables": 17,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 12,
+      "imports": 13,
       "module": "engine.tests.uckp.conftest",
       "path": "engine/tests/uckp/conftest.py",
       "reachable": true,
@@ -15988,7 +16446,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 64
+      "statements": 68
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -16165,11 +16623,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 61,
+      "callables": 65,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 13,
+      "imports": 14,
       "module": "engine.tests.uckp.test_projection_persistence_execution",
       "path": "engine/tests/uckp/test_projection_persistence_execution.py",
       "reachable": true,
@@ -16177,7 +16635,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 281
+      "statements": 298
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -16301,6 +16759,23 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
+      "callables": 19,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 6,
+      "module": "engine.tests.unit.test_cert004_expansion",
+      "path": "engine/tests/unit/test_cert004_expansion.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 162
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
       "callables": 21,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
@@ -16349,6 +16824,23 @@
       ],
       "root": "engine",
       "statements": 352
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 136,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 14,
+      "module": "engine.tests.unit.test_certification_integrity_execution",
+      "path": "engine/tests/unit/test_certification_integrity_execution.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 867
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -16627,11 +17119,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::ci+test",
       "authority_rule": "Ω-A-04",
-      "callables": 67,
+      "callables": 93,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 20,
+      "imports": 17,
       "module": "engine.tests.unit.test_enforcement_closure",
       "path": "engine/tests/unit/test_enforcement_closure.py",
       "reachable": true,
@@ -16640,7 +17132,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 399
+      "statements": 522
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -17001,6 +17493,23 @@
       "statements": 33
     },
     {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 8,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 5,
+      "module": "engine.tests.unit.test_governance_engines",
+      "path": "engine/tests/unit/test_governance_engines.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 49
+    },
+    {
       "authority": "UCOS-REPOSITORY-ROOT::ci+test",
       "authority_rule": "Ω-A-04",
       "callables": 17,
@@ -17021,11 +17530,11 @@
     {
       "authority": "UISD-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 142,
+      "callables": 150,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 19,
+      "imports": 20,
       "module": "engine.tests.unit.test_infinite_scope",
       "path": "engine/tests/unit/test_infinite_scope.py",
       "reachable": true,
@@ -17034,12 +17543,12 @@
         "test"
       ],
       "root": "engine",
-      "statements": 814
+      "statements": 858
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 37,
+      "callables": 41,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
@@ -17051,7 +17560,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 186
+      "statements": 202
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -17090,11 +17599,11 @@
     {
       "authority": "URKE-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 121,
+      "callables": 124,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 13,
+      "imports": 14,
       "module": "engine.tests.unit.test_recursive_knowledge",
       "path": "engine/tests/unit/test_recursive_knowledge.py",
       "reachable": true,
@@ -17103,7 +17612,41 @@
         "test"
       ],
       "root": "engine",
-      "statements": 456
+      "statements": 471
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 30,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 11,
+      "module": "engine.tests.unit.test_recursive_knowledge_declaration",
+      "path": "engine/tests/unit/test_recursive_knowledge_declaration.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 172
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 27,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
+      "module": "engine.tests.unit.test_recursive_knowledge_gate",
+      "path": "engine/tests/unit/test_recursive_knowledge_gate.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 189
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -17137,7 +17680,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 177
+      "statements": 187
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -17415,6 +17958,23 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
+      "callables": 16,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 10,
+      "module": "engine.tests.unit.test_substrate_consumption",
+      "path": "engine/tests/unit/test_substrate_consumption.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 110
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
       "callables": 42,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
@@ -17662,11 +18222,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 55,
+      "callables": 59,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 25,
+      "imports": 28,
       "module": "engine.tests.unit.test_verification_impact",
       "path": "engine/tests/unit/test_verification_impact.py",
       "reachable": true,
@@ -17674,16 +18234,16 @@
         "test"
       ],
       "root": "engine",
-      "statements": 315
+      "statements": 339
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 165,
+      "callables": 173,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 79,
+      "imports": 60,
       "module": "engine.tests.unit.test_verification_intelligence",
       "path": "engine/tests/unit/test_verification_intelligence.py",
       "reachable": true,
@@ -17691,7 +18251,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 1063
+      "statements": 1082
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -18137,6 +18697,40 @@
       ],
       "root": "engine",
       "statements": 32
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 5,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 3,
+      "module": "engine.tests.zero_class.test_entity_derivation",
+      "path": "engine/tests/zero_class/test_entity_derivation.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 21
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 11,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 6,
+      "module": "engine.tests.zero_class.test_zero_class_register",
+      "path": "engine/tests/zero_class/test_zero_class_register.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "engine",
+      "statements": 55
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -18649,7 +19243,7 @@
     {
       "authority": "UCL-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 42,
+      "callables": 45,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -18662,7 +19256,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 165
+      "statements": 181
     },
     {
       "authority": "UCL-000001",
@@ -18759,7 +19353,7 @@
       "statements": 399
     },
     {
-      "authority": "UCOS-CEU-001",
+      "authority": "DATA",
       "authority_rule": "Ω-A-02",
       "callables": 17,
       "disposition": "MEASURED",
@@ -19065,7 +19659,7 @@
       "disposition": "EXEMPTED",
       "disposition_reason": "declared exempt with a reason: 1,893 statements across ten modules with ZERO test files, and no module under engine/, platform/ or 00-MASTER/ imports it. Admitting it to the denominator would bake in ~1,893 permanently uncovered statements and convert a dead-code finding into a coverage figure, which is measurement laundering. Excluding it silently was how it stayed invisible. It is named here so the omission is arguable: the open question is whether this package is retired and should be deleted, or live and should be tested, and that is an owner decision rather than a coverage setting. Reviewed: 2026-08-28.",
       "disposition_rule": "Ω-C-05",
-      "imports": 10,
+      "imports": 11,
       "module": "engine.uicm.matrix",
       "path": "engine/uicm/matrix.py",
       "reachable": true,
@@ -19073,7 +19667,7 @@
         "import"
       ],
       "root": "engine",
-      "statements": 205
+      "statements": 204
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import",
@@ -19428,7 +20022,7 @@
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 9,
       "module": "engine.universal_discovery.discovery",
       "path": "engine/universal_discovery/discovery.py",
       "reachable": true,
@@ -19806,11 +20400,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
-      "callables": 13,
+      "callables": 14,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 4,
+      "imports": 5,
       "module": "engine.verification_impact.impact",
       "path": "engine/verification_impact/impact.py",
       "reachable": true,
@@ -19819,7 +20413,7 @@
         "test"
       ],
       "root": "engine",
-      "statements": 97
+      "statements": 104
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test+verify",
@@ -19893,7 +20487,7 @@
         "verify"
       ],
       "root": "engine",
-      "statements": 170
+      "statements": 173
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+make+test+verify",
@@ -19937,7 +20531,7 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test+verify",
       "authority_rule": "Ω-A-04",
-      "callables": 11,
+      "callables": 12,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -19951,12 +20545,12 @@
         "verify"
       ],
       "root": "engine",
-      "statements": 185
+      "statements": 194
     },
     {
       "authority": "UEC-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 25,
+      "callables": 26,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -19971,7 +20565,7 @@
         "verify"
       ],
       "root": "engine",
-      "statements": 357
+      "statements": 372
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test+verify",
@@ -20009,7 +20603,7 @@
         "verify"
       ],
       "root": "engine",
-      "statements": 81
+      "statements": 83
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test+verify",
@@ -20028,7 +20622,7 @@
         "verify"
       ],
       "root": "engine",
-      "statements": 219
+      "statements": 225
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test+verify",
@@ -20048,6 +20642,60 @@
       ],
       "root": "engine",
       "statements": 107
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
+      "authority_rule": "Ω-A-04",
+      "callables": 0,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 1,
+      "module": "engine.zero_class",
+      "path": "engine/zero_class/__init__.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 3
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
+      "authority_rule": "Ω-A-04",
+      "callables": 6,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 5,
+      "module": "engine.zero_class.entity_derivation",
+      "path": "engine/zero_class/entity_derivation.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 79
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
+      "authority_rule": "Ω-A-04",
+      "callables": 9,
+      "disposition": "MEASURED",
+      "disposition_reason": "the derived coverage denominator names its package",
+      "disposition_rule": "Ω-C-04",
+      "imports": 7,
+      "module": "engine.zero_class.measure",
+      "path": "engine/zero_class/measure.py",
+      "reachable": true,
+      "reached_by": [
+        "import",
+        "test"
+      ],
+      "root": "engine",
+      "statements": 115
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -20664,11 +21312,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
-      "callables": 47,
+      "callables": 46,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 15,
+      "imports": 17,
       "module": "infrastructure.integration_realize",
       "path": "infrastructure/integration_realize.py",
       "reachable": true,
@@ -20677,7 +21325,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 236
+      "statements": 239
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -21218,11 +21866,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 17,
+      "callables": 18,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 6,
+      "imports": 7,
       "module": "infrastructure.tests.test_band13_validation",
       "path": "infrastructure/tests/test_band13_validation.py",
       "reachable": true,
@@ -21230,7 +21878,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 99
+      "statements": 103
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21286,11 +21934,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 41,
+      "callables": 42,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 9,
       "module": "infrastructure.tests.test_capability_validation",
       "path": "infrastructure/tests/test_capability_validation.py",
       "reachable": true,
@@ -21298,7 +21946,24 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 126
+      "statements": 130
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 11,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
+      "module": "infrastructure.tests.test_certification_gate_refusals",
+      "path": "infrastructure/tests/test_certification_gate_refusals.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "infrastructure",
+      "statements": 77
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21354,11 +22019,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 43,
+      "callables": 44,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 9,
       "module": "infrastructure.tests.test_compute_validation",
       "path": "infrastructure/tests/test_compute_validation.py",
       "reachable": true,
@@ -21366,7 +22031,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 128
+      "statements": 132
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21422,11 +22087,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 45,
+      "callables": 46,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 9,
       "module": "infrastructure.tests.test_environment_validation",
       "path": "infrastructure/tests/test_environment_validation.py",
       "reachable": true,
@@ -21434,7 +22099,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 137
+      "statements": 141
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21490,11 +22155,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 9,
+      "callables": 10,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 9,
+      "imports": 8,
       "module": "infrastructure.tests.test_governance_validation",
       "path": "infrastructure/tests/test_governance_validation.py",
       "reachable": true,
@@ -21502,7 +22167,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 54
+      "statements": 58
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21558,11 +22223,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 9,
+      "callables": 10,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 5,
+      "imports": 6,
       "module": "infrastructure.tests.test_integration_validation",
       "path": "infrastructure/tests/test_integration_validation.py",
       "reachable": true,
@@ -21570,7 +22235,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 36
+      "statements": 41
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21626,11 +22291,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 46,
+      "callables": 47,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 9,
       "module": "infrastructure.tests.test_network_validation",
       "path": "infrastructure/tests/test_network_validation.py",
       "reachable": true,
@@ -21638,7 +22303,24 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 133
+      "statements": 137
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 7,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 8,
+      "module": "infrastructure.tests.test_realize_cli",
+      "path": "infrastructure/tests/test_realize_cli.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "infrastructure",
+      "statements": 58
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21694,11 +22376,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 13,
+      "callables": 14,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 6,
       "module": "infrastructure.tests.test_resilience_validation",
       "path": "infrastructure/tests/test_resilience_validation.py",
       "reachable": true,
@@ -21706,7 +22388,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 75
+      "statements": 77
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21762,11 +22444,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 8,
+      "callables": 9,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 9,
+      "imports": 8,
       "module": "infrastructure.tests.test_security_validation",
       "path": "infrastructure/tests/test_security_validation.py",
       "reachable": true,
@@ -21774,7 +22456,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 52
+      "statements": 56
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21830,11 +22512,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 44,
+      "callables": 45,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 9,
       "module": "infrastructure.tests.test_storage_validation",
       "path": "infrastructure/tests/test_storage_validation.py",
       "reachable": true,
@@ -21842,7 +22524,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 131
+      "statements": 135
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -21898,11 +22580,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 16,
+      "callables": 17,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 9,
+      "imports": 8,
       "module": "infrastructure.tests.test_topology_validation",
       "path": "infrastructure/tests/test_topology_validation.py",
       "reachable": true,
@@ -21910,7 +22592,7 @@
         "test"
       ],
       "root": "infrastructure",
-      "statements": 79
+      "statements": 82
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -22125,7 +22807,7 @@
       "statements": 52
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 27,
       "disposition": "MEASURED",
@@ -22136,7 +22818,8 @@
       "path": "intelligence/kernel/knowledge.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "intelligence",
       "statements": 183
@@ -22160,7 +22843,7 @@
       "statements": 104
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 18,
       "disposition": "MEASURED",
@@ -22171,13 +22854,14 @@
       "path": "intelligence/kernel/substrate.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "intelligence",
       "statements": 130
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 14,
       "disposition": "MEASURED",
@@ -22188,7 +22872,8 @@
       "path": "intelligence/kernel/validation.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "intelligence",
       "statements": 56
@@ -22233,7 +22918,7 @@
       "statements": 7
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::ci+make+python",
+      "authority": "UCOS-REPOSITORY-ROOT::ci+import+make+python+test",
       "authority_rule": "Ω-A-04",
       "callables": 12,
       "disposition": "MEASURED",
@@ -22245,8 +22930,10 @@
       "reachable": true,
       "reached_by": [
         "ci",
+        "import",
         "make",
-        "python"
+        "python",
+        "test"
       ],
       "root": "intelligence",
       "statements": 75
@@ -22335,7 +23022,7 @@
       "statements": 155
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::ci+import+make+python",
+      "authority": "UCOS-REPOSITORY-ROOT::ci+import+make+python+test",
       "authority_rule": "Ω-A-04",
       "callables": 33,
       "disposition": "MEASURED",
@@ -22349,7 +23036,8 @@
         "ci",
         "import",
         "make",
-        "python"
+        "python",
+        "test"
       ],
       "root": "intelligence",
       "statements": 135
@@ -22890,7 +23578,7 @@
       "statements": 6
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::ci+make+python",
+      "authority": "UCOS-REPOSITORY-ROOT::ci+import+make+python+test",
       "authority_rule": "Ω-A-04",
       "callables": 11,
       "disposition": "MEASURED",
@@ -22902,8 +23590,10 @@
       "reachable": true,
       "reached_by": [
         "ci",
+        "import",
         "make",
-        "python"
+        "python",
+        "test"
       ],
       "root": "intelligence",
       "statements": 57
@@ -23049,7 +23739,7 @@
       "statements": 4
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::make",
+      "authority": "UCOS-REPOSITORY-ROOT::import+make+test",
       "authority_rule": "Ω-A-04",
       "callables": 7,
       "disposition": "MEASURED",
@@ -23060,7 +23750,9 @@
       "path": "intelligence/rie/__main__.py",
       "reachable": true,
       "reached_by": [
-        "make"
+        "import",
+        "make",
+        "test"
       ],
       "root": "intelligence",
       "statements": 59
@@ -23127,7 +23819,7 @@
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 4,
+      "imports": 5,
       "module": "intelligence.rie.config",
       "path": "intelligence/rie/config.py",
       "reachable": true,
@@ -23137,7 +23829,7 @@
         "test"
       ],
       "root": "intelligence",
-      "statements": 61
+      "statements": 63
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+make",
@@ -23251,11 +23943,28 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 15,
+      "callables": 59,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 5,
+      "imports": 13,
+      "module": "intelligence.tests.test_kernel",
+      "path": "intelligence/tests/test_kernel.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "intelligence",
+      "statements": 335
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 23,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 7,
       "module": "intelligence.tests.test_portal",
       "path": "intelligence/tests/test_portal.py",
       "reachable": true,
@@ -23263,16 +23972,16 @@
         "test"
       ],
       "root": "intelligence",
-      "statements": 108
+      "statements": 158
     },
     {
       "authority": "UVI-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 30,
+      "callables": 56,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 12,
+      "imports": 20,
       "module": "intelligence.tests.test_publication_intelligence",
       "path": "intelligence/tests/test_publication_intelligence.py",
       "reachable": true,
@@ -23281,12 +23990,12 @@
         "test"
       ],
       "root": "intelligence",
-      "statements": 181
+      "statements": 324
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 53,
+      "callables": 65,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
@@ -23298,16 +24007,16 @@
         "test"
       ],
       "root": "intelligence",
-      "statements": 352
+      "statements": 434
     },
     {
       "authority": "UVI-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 24,
+      "callables": 34,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 11,
+      "imports": 13,
       "module": "intelligence.tests.test_research_intelligence",
       "path": "intelligence/tests/test_research_intelligence.py",
       "reachable": true,
@@ -23316,16 +24025,16 @@
         "test"
       ],
       "root": "intelligence",
-      "statements": 134
+      "statements": 182
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::python+test",
       "authority_rule": "Ω-A-04",
-      "callables": 14,
+      "callables": 22,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 9,
+      "imports": 11,
       "module": "intelligence.tests.test_rie",
       "path": "intelligence/tests/test_rie.py",
       "reachable": true,
@@ -23334,10 +24043,10 @@
         "test"
       ],
       "root": "intelligence",
-      "statements": 106
+      "statements": 163
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::cli+import",
+      "authority": "UCOS-REPOSITORY-ROOT::cli+import+test",
       "authority_rule": "Ω-A-04",
       "callables": 0,
       "disposition": "EXEMPTED",
@@ -23349,7 +24058,8 @@
       "reachable": true,
       "reached_by": [
         "cli",
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 15
@@ -24342,7 +25052,7 @@
       "statements": 116
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::cli",
+      "authority": "UCOS-REPOSITORY-ROOT::cli+import+test",
       "authority_rule": "Ω-A-04",
       "callables": 0,
       "disposition": "MEASURED",
@@ -24353,13 +25063,15 @@
       "path": "platform/commercial_intelligence/__init__.py",
       "reachable": true,
       "reached_by": [
-        "cli"
+        "cli",
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 21
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 23,
       "disposition": "MEASURED",
@@ -24370,7 +25082,8 @@
       "path": "platform/commercial_intelligence/approval.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 147
@@ -24412,7 +25125,7 @@
       "statements": 63
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 9,
       "disposition": "MEASURED",
@@ -24423,7 +25136,8 @@
       "path": "platform/commercial_intelligence/config.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 76
@@ -24447,7 +25161,7 @@
       "statements": 276
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 20,
       "disposition": "MEASURED",
@@ -24458,13 +25172,14 @@
       "path": "platform/commercial_intelligence/customer.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 113
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 19,
       "disposition": "MEASURED",
@@ -24475,7 +25190,8 @@
       "path": "platform/commercial_intelligence/documentation.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 112
@@ -24499,7 +25215,7 @@
       "statements": 55
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 18,
       "disposition": "MEASURED",
@@ -24510,13 +25226,14 @@
       "path": "platform/commercial_intelligence/evidence.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 98
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 13,
       "disposition": "MEASURED",
@@ -24527,13 +25244,14 @@
       "path": "platform/commercial_intelligence/investment.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 85
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 25,
       "disposition": "MEASURED",
@@ -24544,13 +25262,14 @@
       "path": "platform/commercial_intelligence/licensing.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 141
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 21,
       "disposition": "MEASURED",
@@ -24561,13 +25280,14 @@
       "path": "platform/commercial_intelligence/marketplace.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 104
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 7,
       "disposition": "MEASURED",
@@ -24578,13 +25298,14 @@
       "path": "platform/commercial_intelligence/packages.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 82
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 27,
       "disposition": "MEASURED",
@@ -24595,13 +25316,14 @@
       "path": "platform/commercial_intelligence/policy.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 136
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 12,
       "disposition": "MEASURED",
@@ -24612,13 +25334,14 @@
       "path": "platform/commercial_intelligence/portfolio.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 66
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 24,
       "disposition": "MEASURED",
@@ -24629,7 +25352,8 @@
       "path": "platform/commercial_intelligence/pricing.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 161
@@ -24670,7 +25394,7 @@
       "statements": 57
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 40,
       "disposition": "MEASURED",
@@ -24681,7 +25405,8 @@
       "path": "platform/commercial_intelligence/validation.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 415
@@ -26760,7 +27485,7 @@
       "statements": 126
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 61,
       "disposition": "MEASURED",
@@ -26771,7 +27496,8 @@
       "path": "platform/repository_intelligence/contracts.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 267
@@ -26795,7 +27521,7 @@
       "statements": 447
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 8,
       "disposition": "MEASURED",
@@ -26806,7 +27532,8 @@
       "path": "platform/repository_intelligence/errors.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 28
@@ -26865,7 +27592,7 @@
       "statements": 166
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 32,
       "disposition": "MEASURED",
@@ -26876,7 +27603,8 @@
       "path": "platform/repository_intelligence/graph.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 253
@@ -26915,7 +27643,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 324
+      "statements": 322
     },
     {
       "authority": "UEC-000001",
@@ -26939,7 +27667,7 @@
       "statements": 71
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 17,
       "disposition": "MEASURED",
@@ -26950,13 +27678,14 @@
       "path": "platform/repository_intelligence/recommendation.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 167
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 15,
       "disposition": "MEASURED",
@@ -26967,13 +27696,14 @@
       "path": "platform/repository_intelligence/runtime.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 103
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 20,
       "disposition": "MEASURED",
@@ -26984,7 +27714,8 @@
       "path": "platform/repository_intelligence/service.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 68
@@ -26992,11 +27723,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
-      "callables": 43,
+      "callables": 42,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 16,
+      "imports": 20,
       "module": "platform.repository_intelligence.substrate",
       "path": "platform/repository_intelligence/substrate.py",
       "reachable": true,
@@ -27005,7 +27736,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 292
+      "statements": 298
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import",
@@ -27225,11 +27956,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
-      "callables": 11,
+      "callables": 10,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
-      "imports": 19,
+      "imports": 21,
       "module": "platform.repository_operations.stages",
       "path": "platform/repository_operations/stages.py",
       "reachable": true,
@@ -27238,7 +27969,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 120
+      "statements": 117
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -29177,11 +29908,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 24,
+      "callables": 41,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 4,
+      "imports": 14,
       "module": "platform.tests.test_commercial_contracts",
       "path": "platform/tests/test_commercial_contracts.py",
       "reachable": true,
@@ -29189,7 +29920,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 146
+      "statements": 254
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -29538,7 +30269,7 @@
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 8,
+      "imports": 9,
       "module": "platform.tests.test_coverage_scope",
       "path": "platform/tests/test_coverage_scope.py",
       "reachable": true,
@@ -29547,7 +30278,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 195
+      "statements": 216
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -30449,7 +31180,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 409
+      "statements": 410
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -31100,6 +31831,23 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
+      "callables": 23,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 11,
+      "module": "platform.tests.test_provider_framework",
+      "path": "platform/tests/test_provider_framework.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "platform",
+      "statements": 168
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
       "callables": 19,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
@@ -31151,11 +31899,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 86,
+      "callables": 99,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 12,
+      "imports": 14,
       "module": "platform.tests.test_provider_validation",
       "path": "platform/tests/test_provider_validation.py",
       "reachable": true,
@@ -31163,7 +31911,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 362
+      "statements": 426
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -31219,6 +31967,23 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
+      "callables": 69,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 12,
+      "module": "platform.tests.test_repository_intelligence_dimensions",
+      "path": "platform/tests/test_repository_intelligence_dimensions.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "platform",
+      "statements": 435
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
       "callables": 19,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
@@ -31232,6 +31997,23 @@
       ],
       "root": "platform",
       "statements": 86
+    },
+    {
+      "authority": "UCOS-REPOSITORY-ROOT::test",
+      "authority_rule": "Ω-A-04",
+      "callables": 46,
+      "disposition": "MEASURED",
+      "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
+      "disposition_rule": "Ω-C-04",
+      "imports": 11,
+      "module": "platform.tests.test_repository_intelligence_substrate",
+      "path": "platform/tests/test_repository_intelligence_substrate.py",
+      "reachable": true,
+      "reached_by": [
+        "test"
+      ],
+      "root": "platform",
+      "statements": 304
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -32427,11 +33209,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
       "authority_rule": "Ω-A-04",
-      "callables": 19,
+      "callables": 40,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 7,
+      "imports": 9,
       "module": "platform.tests.test_universal_canonical_governance",
       "path": "platform/tests/test_universal_canonical_governance.py",
       "reachable": true,
@@ -32439,7 +33221,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 111
+      "statements": 207
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -32701,11 +33483,11 @@
     {
       "authority": "UCOS-REPOSITORY-ROOT::ci+test",
       "authority_rule": "Ω-A-04",
-      "callables": 29,
+      "callables": 35,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 9,
+      "imports": 12,
       "module": "platform.tests.test_universal_measurement",
       "path": "platform/tests/test_universal_measurement.py",
       "reachable": true,
@@ -32714,16 +33496,16 @@
         "test"
       ],
       "root": "platform",
-      "statements": 261
+      "statements": 300
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::ci+test",
       "authority_rule": "Ω-A-04",
-      "callables": 59,
+      "callables": 67,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
-      "imports": 16,
+      "imports": 13,
       "module": "platform.tests.test_universal_ownership",
       "path": "platform/tests/test_universal_ownership.py",
       "reachable": true,
@@ -32732,7 +33514,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 469
+      "statements": 521
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::ci+test",
@@ -33606,7 +34388,7 @@
     {
       "authority": "UVI-000001",
       "authority_rule": "Ω-A-02",
-      "callables": 24,
+      "callables": 35,
       "disposition": "MEASURED",
       "disposition_reason": "a module of a discovered suite; the suite executes it on every run, which is a measurement of it even though coverage omits it from its own denominator",
       "disposition_rule": "Ω-C-04",
@@ -33618,7 +34400,7 @@
         "test"
       ],
       "root": "platform",
-      "statements": 220
+      "statements": 278
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::test",
@@ -35210,7 +35992,7 @@
       "statements": 22
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::cli",
+      "authority": "UCOS-REPOSITORY-ROOT::cli+import+test",
       "authority_rule": "Ω-A-04",
       "callables": 4,
       "disposition": "MEASURED",
@@ -35221,7 +36003,9 @@
       "path": "platform/universal_measurement/cli.py",
       "reachable": true,
       "reached_by": [
-        "cli"
+        "cli",
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 47
@@ -36086,7 +36870,7 @@
       "statements": 124
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::cli",
+      "authority": "UCOS-REPOSITORY-ROOT::cli+import+test",
       "authority_rule": "Ω-A-04",
       "callables": 0,
       "disposition": "MEASURED",
@@ -36097,7 +36881,9 @@
       "path": "platform/universal_provider/__init__.py",
       "reachable": true,
       "reached_by": [
-        "cli"
+        "cli",
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 16
@@ -36248,7 +37034,7 @@
       "statements": 82
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::import",
+      "authority": "UCOS-REPOSITORY-ROOT::import+test",
       "authority_rule": "Ω-A-04",
       "callables": 32,
       "disposition": "MEASURED",
@@ -36259,7 +37045,8 @@
       "path": "platform/universal_provider/framework.py",
       "reachable": true,
       "reached_by": [
-        "import"
+        "import",
+        "test"
       ],
       "root": "platform",
       "statements": 177
@@ -37310,9 +38097,9 @@
       "statements": 226
     },
     {
-      "authority": "UCOS-REPOSITORY-ROOT::python",
+      "authority": "UCOS-REPOSITORY-ROOT::import+python+test",
       "authority_rule": "Ω-A-04",
-      "callables": 26,
+      "callables": 27,
       "disposition": "MEASURED",
       "disposition_reason": "the derived coverage denominator names its package",
       "disposition_rule": "Ω-C-04",
@@ -37321,10 +38108,12 @@
       "path": "scripts/cert004_expansion.py",
       "reachable": true,
       "reached_by": [
-        "python"
+        "import",
+        "python",
+        "test"
       ],
       "root": "scripts",
-      "statements": 281
+      "statements": 299
     },
     {
       "authority": "UCOS-REPOSITORY-ROOT::import+test",
@@ -39673,6 +40462,7 @@
       "engine.ceu",
       "engine.civilization",
       "engine.compiler",
+      "engine.conformance",
       "engine.constitution",
       "engine.construct",
       "engine.context",
@@ -39699,6 +40489,7 @@
       "engine.registry_coverage",
       "engine.root_ontology",
       "engine.runtime",
+      "engine.substrate",
       "engine.temporal",
       "engine.uaue",
       "engine.uckp",
@@ -39707,6 +40498,7 @@
       "engine.validation",
       "engine.verification_impact",
       "engine.verification_intelligence",
+      "engine.zero_class",
       "infrastructure",
       "intelligence",
       "platform.administration",
@@ -39771,7 +40563,7 @@
       "platform/tests",
       "service/tests"
     ],
-    "tracked_python": 2250
+    "tracked_python": 2292
   },
   "producer": "engine/universal_discovery/surface.py",
   "ratchet": [
@@ -39810,11 +40602,11 @@
       "verdict": "HELD"
     },
     {
-      "best": 53.0,
+      "best": 51.0,
       "kind": "CONVERGENT",
       "metric": "unreachable_artifacts",
       "subject": "artifacts no import, plane or entry point reaches. Code that cannot run.",
-      "value": 52.0,
+      "value": 50.0,
       "verdict": "IMPROVED"
     },
     {
@@ -39826,69 +40618,69 @@
       "verdict": "HELD"
     },
     {
-      "best": 0.094935,
+      "best": 0.094795,
       "kind": "DENSITY",
       "metric": "unmeasured_surface_density",
       "ratio": {
-        "denominator": 265605,
-        "numerator": 25178
+        "denominator": 273017,
+        "numerator": 25228
       },
       "subject": "statements on the executable surface that no measurement covers, over all surface statements. SCALE-FREE: growth cannot breach it and cannot flatter it.",
-      "value": 0.094795,
+      "value": 0.092405,
       "verdict": "IMPROVED"
     },
     {
-      "best": 7.979519,
+      "best": 7.993862,
       "kind": "ENTROPY",
       "metric": "import_entropy",
       "ratio": {
-        "denominator": 2250,
-        "numerator": 17939
+        "denominator": 2292,
+        "numerator": 18303
       },
       "subject": "import statements per tracked artifact. Bounds how tangled the AVERAGE artifact may get, independently of how many artifacts exist.",
-      "value": 7.972889,
+      "value": 7.985602,
       "verdict": "IMPROVED"
     },
     {
-      "best": 6.364474,
+      "best": 6.362406,
       "kind": "ENTROPY",
       "metric": "statement_entropy",
       "ratio": {
-        "denominator": 41746,
-        "numerator": 265605
+        "denominator": 42959,
+        "numerator": 273017
       },
       "subject": "surface statements per callable. Rises when code accretes outside named, testable units, which is the shape unmeasurable code takes.",
-      "value": 6.362406,
+      "value": 6.355292,
       "verdict": "IMPROVED"
     }
   ],
   "schema": "ucos-omega-surface",
   "totals": {
-    "artifacts": 2250,
+    "artifacts": 2292,
     "authority_coverage_percent": 100.0,
     "by_authority_rule": {
       "Ω-A-01": 8,
-      "Ω-A-02": 157,
-      "Ω-A-03": 17,
-      "Ω-A-04": 2043,
-      "Ω-A-06": 25
+      "Ω-A-02": 162,
+      "Ω-A-03": 21,
+      "Ω-A-04": 2078,
+      "Ω-A-06": 23
     },
     "by_disposition": {
       "ARCHIVED": {
-        "files": 13,
-        "statements": 2758
+        "files": 20,
+        "statements": 4093
       },
       "EXEMPTED": {
         "files": 61,
-        "statements": 25178
+        "statements": 25228
       },
       "GENERATED": {
         "files": 5,
         "statements": 531
       },
       "MEASURED": {
-        "files": 2171,
-        "statements": 240427
+        "files": 2206,
+        "statements": 247789
       },
       "TRANSIENT": {
         "files": 0,
@@ -39896,22 +40688,22 @@
       }
     },
     "by_disposition_rule": {
-      "Ω-C-02": 13,
+      "Ω-C-02": 20,
       "Ω-C-03": 5,
-      "Ω-C-04": 2171,
+      "Ω-C-04": 2206,
       "Ω-C-05": 10,
       "Ω-C-06": 49,
       "Ω-C-07": 2
     },
-    "discovered_measurable_packages": 83,
+    "discovered_measurable_packages": 86,
     "discovered_roots": 11,
     "discovered_test_roots": 7,
-    "distinct_authorities": 82,
-    "executable_surface_files": 2232,
-    "executable_surface_statements": 265605,
-    "measured_surface_percent": 90.5205,
-    "measured_surface_statements": 240427,
-    "unreachable_files": 52
+    "distinct_authorities": 79,
+    "executable_surface_files": 2267,
+    "executable_surface_statements": 273017,
+    "measured_surface_percent": 90.7595,
+    "measured_surface_statements": 247789,
+    "unreachable_files": 50
   },
   "unparsed": [],
   "unresolved_dynamic_import_sites": {

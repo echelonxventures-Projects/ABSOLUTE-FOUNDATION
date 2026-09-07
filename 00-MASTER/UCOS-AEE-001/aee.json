@@ -23,7 +23,7 @@
       "expect": 0,
       "id": "CONV-02",
       "measure": "blocking_violations",
-      "measured": 2,
+      "measured": 1,
       "verdict": "VIOLATED"
     },
     {
@@ -152,22 +152,6 @@
       "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
       "rule": "CR-BLOCKING-REGRESSION",
       "subject": "The constitutional decision gate is open"
-    },
-    {
-      "blocking": true,
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "detail": "the measured value does not meet the declared expectation",
-      "evidence": [
-        "00-MASTER/UCOS-RIB-001/rib.json"
-      ],
-      "governed_by_finding": null,
-      "id": "OBS-BLUEPRINT-GATE",
-      "observed": "CLOSED",
-      "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-      "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-      "rule": "CR-BLOCKING-REGRESSION",
-      "subject": "The architectural blueprint gate is open"
     },
     {
       "blocking": true,
@@ -557,7 +541,6 @@
         }
       ],
       "blocking_violations": [
-        "OBS-BLUEPRINT-GATE",
         "OBS-DECISION-GATE"
       ],
       "findings": [
@@ -595,22 +578,6 @@
           "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
           "rule": "CR-BLOCKING-REGRESSION",
           "subject": "The constitutional decision gate is open"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The architectural blueprint gate is open"
         },
         {
           "blocking": true,
@@ -1122,12 +1089,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "CLOSED",
+          "observed": "OPEN",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -1223,7 +1190,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6"
+      "vector_digest": "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8"
     },
     {
       "actuator_failures": [
@@ -1593,7 +1560,6 @@
         }
       ],
       "blocking_violations": [
-        "OBS-BLUEPRINT-GATE",
         "OBS-DECISION-GATE"
       ],
       "findings": [
@@ -1631,22 +1597,6 @@
           "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
           "rule": "CR-BLOCKING-REGRESSION",
           "subject": "The constitutional decision gate is open"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The architectural blueprint gate is open"
         },
         {
           "blocking": true,
@@ -2158,12 +2108,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "CLOSED",
+          "observed": "OPEN",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -2259,7 +2209,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6"
+      "vector_digest": "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8"
     },
     {
       "actuator_failures": [
@@ -2629,7 +2579,6 @@
         }
       ],
       "blocking_violations": [
-        "OBS-BLUEPRINT-GATE",
         "OBS-DECISION-GATE"
       ],
       "findings": [
@@ -2667,22 +2616,6 @@
           "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
           "rule": "CR-BLOCKING-REGRESSION",
           "subject": "The constitutional decision gate is open"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The architectural blueprint gate is open"
         },
         {
           "blocking": true,
@@ -3194,12 +3127,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "CLOSED",
+          "observed": "OPEN",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -3295,7 +3228,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6"
+      "vector_digest": "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8"
     },
     {
       "actuator_failures": [
@@ -3665,7 +3598,6 @@
         }
       ],
       "blocking_violations": [
-        "OBS-BLUEPRINT-GATE",
         "OBS-DECISION-GATE"
       ],
       "findings": [
@@ -3703,22 +3635,6 @@
           "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
           "rule": "CR-BLOCKING-REGRESSION",
           "subject": "The constitutional decision gate is open"
-        },
-        {
-          "blocking": true,
-          "class": "Defect correction",
-          "decision": "IMPLEMENT",
-          "detail": "the measured value does not meet the declared expectation",
-          "evidence": [
-            "00-MASTER/UCOS-RIB-001/rib.json"
-          ],
-          "governed_by_finding": null,
-          "id": "OBS-BLUEPRINT-GATE",
-          "observed": "CLOSED",
-          "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
-          "rationale": "A blocking expectation that no located finding governs was satisfied by construction when the expectation was declared. Its violation is therefore a regression against Repository Truth and closes by engineering.",
-          "rule": "CR-BLOCKING-REGRESSION",
-          "subject": "The architectural blueprint gate is open"
         },
         {
           "blocking": true,
@@ -4230,12 +4146,12 @@
             "UEI-CON-07"
           ],
           "name": "The architectural blueprint gate is open",
-          "observed": "CLOSED",
+          "observed": "OPEN",
           "owner": "00-MASTER/UCOS-RIB-001/rib_engine.py",
           "pointer": "gate",
-          "reason": "the measured value does not meet the declared expectation",
+          "reason": "",
           "source": "00-MASTER/UCOS-RIB-001/rib.json",
-          "verdict": "VIOLATED"
+          "verdict": "SATISFIED"
         },
         {
           "blocking": true,
@@ -4331,7 +4247,7 @@
           "verdict": "SATISFIED"
         }
       ],
-      "vector_digest": "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6"
+      "vector_digest": "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8"
     }
   ],
   "learning": {
@@ -4427,10 +4343,10 @@
       "iteration_total": 4,
       "stable_iterations": 4,
       "vector_digests": [
-        "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6",
-        "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6",
-        "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6",
-        "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6"
+        "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8",
+        "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8",
+        "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8",
+        "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8"
       ]
     },
     "decision": {
@@ -4443,11 +4359,6 @@
         "class": "Constitutional amendment",
         "decision": "ESCALATE",
         "rule": "CR-ESCALATED-CEILING"
-      },
-      "OBS-BLUEPRINT-GATE": {
-        "class": "Defect correction",
-        "decision": "IMPLEMENT",
-        "rule": "CR-BLOCKING-REGRESSION"
       },
       "OBS-DECISION-GATE": {
         "class": "Defect correction",
@@ -4717,8 +4628,8 @@
         "verdict": "SATISFIED"
       },
       "OBS-BLUEPRINT-GATE": {
-        "observed": "CLOSED",
-        "verdict": "VIOLATED"
+        "observed": "OPEN",
+        "verdict": "SATISFIED"
       },
       "OBS-CORPUS-CURRENCY": {
         "observed": "CORPUS CURRENT",
@@ -5422,7 +5333,7 @@
   },
   "measured": {
     "actuator_failures": 1,
-    "blocking_violations": 2,
+    "blocking_violations": 1,
     "unattributed_residue_observation": "UCOS-OBS-000002",
     "unclassified_findings": 0,
     "unresolved_mandate_bindings": 0,
@@ -5465,7 +5376,7 @@
     "version": "1.0"
   },
   "required_stable_iterations": 2,
-  "seal_sha256": "44cb9736cf27e08d824ac627fa2a9d6f75f02e4df690fc29a91425a6dbc1783c",
+  "seal_sha256": "2ff2408cf2e5fc57ea4bd931c4faa255d588214f5e43430df1cd539a858a71a7",
   "stable_iterations": 4,
   "tier": "standard",
   "unattributed_residue_observation": "UCOS-OBS-000002",
@@ -5476,9 +5387,9 @@
     "CONV-03"
   ],
   "vector_digests": [
-    "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6",
-    "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6",
-    "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6",
-    "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6"
+    "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8",
+    "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8",
+    "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8",
+    "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8"
   ]
 }

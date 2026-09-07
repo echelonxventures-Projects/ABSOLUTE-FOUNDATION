@@ -2961,10 +2961,8 @@
         ],
         "engine.runtime -> engine.compiler": [
           "engine/runtime/assembly.py",
+          "engine/runtime/context.py",
           "engine/runtime/graph.py"
-        ],
-        "engine.runtime -> engine.context": [
-          "engine/runtime/context.py"
         ],
         "engine.runtime -> engine.foundation": [
           "engine/runtime/assembly.py",
@@ -4162,7 +4160,7 @@
           "service/tests/test_band11_freeze.py"
         ]
       },
-      "edges": 358,
+      "edges": 357,
       "id": "PLN-CODE",
       "kind": "python_import_graph",
       "nodes": 99,
@@ -21950,15 +21948,17 @@
       "consumer_units": [
         "engine.ceu",
         "engine.context",
+        "engine.context.composition",
         "engine.determinism",
         "engine.factory",
         "engine.runtime",
+        "engine.runtime.context",
         "engine.tests"
       ],
-      "consumers": 6,
+      "consumers": 8,
       "corpus_artifacts": 0,
       "declared": "engine.compiler",
-      "degree": 23,
+      "degree": 25,
       "dependencies": 17,
       "dependency_units": [
         "engine.compiler.cycles",
@@ -22288,13 +22288,12 @@
         "engine.ceu",
         "engine.knowledge",
         "engine.nucleus",
-        "engine.runtime",
         "engine.tests"
       ],
-      "consumers": 5,
+      "consumers": 4,
       "corpus_artifacts": 0,
       "declared": "engine.context",
-      "degree": 26,
+      "degree": 25,
       "dependencies": 21,
       "dependency_units": [
         "engine.compiler",
@@ -24848,13 +24847,12 @@
       "consumers": 25,
       "corpus_artifacts": 0,
       "declared": "engine.runtime",
-      "degree": 41,
-      "dependencies": 16,
+      "degree": 40,
+      "dependencies": 15,
       "dependency_units": [
         "engine.acceptance",
         "engine.certification",
         "engine.compiler",
-        "engine.context",
         "engine.foundation",
         "engine.knowledge",
         "engine.runtime.assembly",
@@ -24891,7 +24889,7 @@
         "PLN-MODULE"
       ],
       "program": "engine",
-      "providers": 16,
+      "providers": 15,
       "reachable": true,
       "reachable_by": [
         "consumers",

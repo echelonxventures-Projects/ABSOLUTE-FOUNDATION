@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `44cb9736cf27e08d824ac627fa2a9d6f` |
+| SEAL | `2ff2408cf2e5fc57ea4bd931c4faa255` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > A finding is an observation that diverged from its declared expectation, or a required actuator that did not succeed. The set is discovered from Repository Truth; no finding is listed by hand and none is classified by hand.
@@ -29,5 +29,4 @@
 |---|---|---|---|---|
 | `OBS-AGGREGATE-CEILING` | No standing finding bounds the attainable certification | no | Constitutional amendment | `CR-ESCALATED-CEILING` |
 | `OBS-DECISION-GATE` | The constitutional decision gate is open | yes | Defect correction | `CR-BLOCKING-REGRESSION` |
-| `OBS-BLUEPRINT-GATE` | The architectural blueprint gate is open | yes | Defect correction | `CR-BLOCKING-REGRESSION` |
 | `ACT-DECISION-ASSIMILATION` | Constitutional decision register and disposition | yes | Defect correction | `CR-ACTUATOR-FAILURE` |

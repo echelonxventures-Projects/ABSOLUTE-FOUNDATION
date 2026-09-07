@@ -6,7 +6,7 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
 | DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `44cb9736cf27e08d824ac627fa2a9d6f` |
+| SEAL | `2ff2408cf2e5fc57ea4bd931c4faa255` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > One pass proves nothing about stability. The loop compares consecutive observation vectors and stops only when the required number of consecutive iterations agree and every blocking criterion is satisfied.
@@ -15,9 +15,9 @@
 
 | Iteration | Observation-vector digest | Blocking violations | Actuator failures |
 |---|---|---|---|
-| 1 | `f5defa27196b1ade7384f90dd2d96d19` | `OBS-BLUEPRINT-GATE`, `OBS-DECISION-GATE` | `ACT-DECISION-ASSIMILATION` |
-| 2 | `f5defa27196b1ade7384f90dd2d96d19` | `OBS-BLUEPRINT-GATE`, `OBS-DECISION-GATE` | `ACT-DECISION-ASSIMILATION` |
-| 3 | `f5defa27196b1ade7384f90dd2d96d19` | `OBS-BLUEPRINT-GATE`, `OBS-DECISION-GATE` | `ACT-DECISION-ASSIMILATION` |
-| 4 | `f5defa27196b1ade7384f90dd2d96d19` | `OBS-BLUEPRINT-GATE`, `OBS-DECISION-GATE` | `ACT-DECISION-ASSIMILATION` |
+| 1 | `616ffcf6fb22c4f20d2db31b53264756` | `OBS-DECISION-GATE` | `ACT-DECISION-ASSIMILATION` |
+| 2 | `616ffcf6fb22c4f20d2db31b53264756` | `OBS-DECISION-GATE` | `ACT-DECISION-ASSIMILATION` |
+| 3 | `616ffcf6fb22c4f20d2db31b53264756` | `OBS-DECISION-GATE` | `ACT-DECISION-ASSIMILATION` |
+| 4 | `616ffcf6fb22c4f20d2db31b53264756` | `OBS-DECISION-GATE` | `ACT-DECISION-ASSIMILATION` |
 
 Trailing agreement: **4** consecutive iteration(s); **2** required.
