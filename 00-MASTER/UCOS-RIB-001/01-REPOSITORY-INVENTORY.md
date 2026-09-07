@@ -52,10 +52,10 @@
 | `SUB-RIE-CAPS` | `intelligence/UCOS-RIE-CAPABILITY-CATALOG.json` | json | YES | YES | 2/2 | 147 | `4ac230f20236` |
 | `SUB-RIE-DEPS` | `intelligence/UCOS-RIE-DEPENDENCY-GRAPH.json` | json | YES | YES | 3/3 | 27 | `228525e81cee` |
 | `SUB-RIE-FRONTIER` | `intelligence/UCOS-RIE-EXECUTION-FRONTIER.json` | json | YES | YES | 4/4 | 8 | `fe325b05b00c` |
-| `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 151 | `772be9cce730` |
+| `SUB-UCDA` | `00-MASTER/UCDA-000001/ucda.json` | json | YES | YES | 1/1 | 151 | `2b8530624ef4` |
 | `SUB-UEI` | `00-MASTER/UEI-000001/uei.json` | json | YES | YES | 2/2 | 15 | `50e80b680d9f` |
 | `SUB-UER` | `00-MASTER/UER-000001/uer.json` | json | YES | YES | 2/2 | 10 | `0ae82cb58fdb` |
-| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `8d7b56609edb` |
+| `SUB-URRC` | `00-MASTER/URRC-000001/urrc.json` | json | YES | YES | 4/4 | 61 | `4f193c4f1194` |
 
 ## Enrichment
 
@@ -68,8 +68,8 @@
 
 | Measure | Kind | Field | Units with a value | Total | Purpose |
 |---|---|---|---|---|---|
-| `MSR-SOURCE` | `owned_source_count` | `source_files` | 175 | 2131 | the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree |
-| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 253 | 7303 | every version-controlled file homed inside the unit |
+| `MSR-SOURCE` | `owned_source_count` | `source_files` | 175 | 2132 | the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree |
+| `MSR-ALLFILES` | `tracked_glob_count` | `tracked_files` | 253 | 7305 | every version-controlled file homed inside the unit |
 | `MSR-UNITTEST` | `tracked_glob_count` | `unit_tests` | 45 | 400 | verification assets located for the unit itself |
 | `MSR-EVIDENCE` | `tracked_glob_count` | `evidence_assets` | 8 | 980 | the realization-evidence surface located for the unit's root |
 | `MSR-COVERAGE` | `substrate_list_member` | `in_coverage_scope` | 0 | 0 | whether the unit lies inside the declared coverage scope |
@@ -93,7 +93,7 @@
 | Merge conflicts | 0 |
 | Interrupted operations | none |
 | Broken symlinks | 0 |
-| Version-controlled files | 7133 |
+| Version-controlled files | 7134 |
 
 ---
 

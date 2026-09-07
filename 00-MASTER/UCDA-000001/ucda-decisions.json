@@ -667,6 +667,26 @@
       "owner": "operator - carried by wave W6 of the implementation sequence",
       "route": "Register the requirement documents as generated artifacts with producers and input closures -> sweep the root determinations, admitting content or archiving -> a document that is neither was describing a requirement nobody owns",
       "acceptance": "Hand-editing a requirement document fails the build; the repository root holds instruments and projections."
+    },
+    {
+      "id": "WP-W4-003",
+      "title": "Give every instrument a stated population, so a rule's reach is auditable",
+      "discharges": [
+        "DEC-ADR-0041"
+      ],
+      "owner": "operator — carried by wave W4 of the implementation sequence",
+      "route": "adr/0041 names the class — a rule whose measurement does not reach it — and declines to make it a gate, because a gate for this needs a scope and would inherit the defect it exists to prevent. So the route is obligations on instruments, not a new check: an instrument states the population it measured; a verdict names only a mechanism that was measured; a silent fallback is reported. Three of the six named instances are closed — URKE's vocabulary rule moved out of workflow YAML into URKE-L-33 with both directions pinned, RIB's check-no-enumeration stopped counting prose, and measure() now refuses a --law selector matching nothing. Three remain.",
+      "acceptance": "Each of the six instances either reaches the population its rule covers or discloses the narrower population it measured, with the disclosure carried where the instrument reports rather than in commentary."
+    },
+    {
+      "id": "WP-W4-004",
+      "title": "Carry the sequencing rule and the meaning of zero as citable discipline",
+      "discharges": [
+        "DEC-ADR-0042"
+      ],
+      "owner": "operator — carried by wave W4 of the implementation sequence",
+      "route": "adr/0042 records two rules that governed thirteen commits and existed only in conversation, which CEP-002 Art 28.5 holds is not recorded at all. Its own Consequences state that neither is mechanically checkable without a scope that would itself be the gap, and that a gate for the sequencing rule would inherit the defect it exists to prevent. What IS gateable is already gated: each residue class carries its own two-sided ratchet, and UZX-000001 enforces the both-directions requirement on detectors. This package carries the remainder as discipline that can be cited, so a departure reads as a departure.",
+      "acceptance": "The sequencing rule and the meaning of zero are citable from the decision register; every residue class ratchets its count and its declarations separately; and MOVEMENTS distinguishes migration, declaration and correction so a falling number cannot imply work that did not happen."
     }
   ],
   "$decisions_comment": [
@@ -4305,7 +4325,7 @@
       "title": "Agnosticism is measured, and a contract that cannot fail proves nothing",
       "decision_class": "architectural",
       "source_register": "adr/0040-agnosticism-is-measured-not-declared.md",
-      "stage": "DECISION-REGISTRATION",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
       "disposition": "IMPLEMENTED",
       "evidence": [
         "adr/0040-agnosticism-is-measured-not-declared.md",
@@ -4313,8 +4333,7 @@
         "engine/conformance/axis-register.json",
         "engine/tests/conformance/test_agnosticism_conformance.py"
       ],
-      "work_package": "WP-W4-002",
-      "note": "adr/0021 declared in its own Consequences that nothing enforced the Universal Agnostic Architecture Principle; UAC-000001 is that enforcement, fourteen days later. An axis is scored on two properties because one over-reports: how many implementations define the contract's own abstract methods, and whether the contract can fail at all. Measured: persistence PROVEN at 10/10 behind a contract that round-trips the universe and refuses a mechanism storing nothing; execution ENVELOPE_ONLY at 2/11 behind a contract demanding only a serialisation, where nine adapters share one transcribe() and execute() discards the payload to call the Python resolver. Across the repository 42 abstraction boundaries exist and 20 carry two or more implementations, but most are rule registries where swapping changes which rule runs, not which technology runs it — counting those as agnosticism is the over-report this instrument refuses. Lands as MEASUREMENT: it refuses nothing and changes no test's verdict.",
+      "note": "adr/0021 declared in its own Consequences that nothing enforced the Universal Agnostic Architecture Principle; UAC-000001 is that enforcement, fourteen days later. An axis is scored on two properties because one over-reports: how many implementations define the contract's own abstract methods, and whether the contract can fail at all. Measured: persistence PROVEN at 10/10 behind a contract that round-trips the universe and refuses a mechanism storing nothing; execution ENVELOPE_ONLY at 2/11 behind a contract demanding only a serialisation, where nine adapters share one transcribe() and execute() discards the payload to call the Python resolver. Across the repository 42 abstraction boundaries exist and 20 carry two or more implementations, but most are rule registries where swapping changes which rule runs, not which technology runs it — counting those as agnosticism is the over-report this instrument refuses. Lands as MEASUREMENT: it refuses nothing and changes no test's verdict. STAGE AND FIELD CORRECTED: this carried stage DECISION-REGISTRATION and a work_package, and DP-1 admits neither — IMPLEMENTED requires REPOSITORY-TRUTH-UPDATE and takes evidence, not a work package. The disposition was already true when it was written: engine/conformance is committed, action_taken names the landing commit bb0012d8, and every coverage entry EQ-1..EQ-5 resolves. What was wrong was the stage claiming less than the repository already held, and a field asserting work that was done. WP-W4-002 was named by this decision alone and is referenced nowhere else, so nothing is orphaned by its removal.",
       "action_taken": "Built engine/conformance as one harness over a declared axis register, naming no technology, discovering implementations rather than reading a roster, resolving contracts from sys.modules and importing none. Six tests, two of which guard the design rather than the output. Landed under P-UCOS-UGA-005 and P-UCOS-UGA-006 at bb0012d8. Whether ENVELOPE_ONLY becomes a refusal is left open and is not taken by this decision."
     },
     {

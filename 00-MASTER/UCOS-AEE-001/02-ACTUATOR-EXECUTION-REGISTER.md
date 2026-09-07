@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
-| DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `2ff2408cf2e5fc57ea4bd931c4faa255` |
+| DETERMINATION | **CONVERGED-PROVISIONAL** |
+| SEAL | `8ff810a249eb199e3f6cb93a0fe20fcb` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Every actuator is a located owner's own entry point, invoked so that owner regenerates its own determination. This programme authored none of them and writes none of their homes.
@@ -18,7 +18,7 @@
 | `ACT-KNOWLEDGE-CLOSURE` | `00-MASTER/UAKOS-CLOSURE-002/closure_engine.py` | `standard` | yes | PASS | 0 | none |
 | `ACT-KNOWLEDGE-GAP-PLAN` | `00-MASTER/UAKOS-CLOSURE-002/phase2_engine.py` | `standard` | yes | PASS | 0 | none |
 | `ACT-READINESS-PROJECTION` | `00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py` | `standard` | yes | PASS | 0 | none |
-| `ACT-DECISION-ASSIMILATION` | `00-MASTER/UCDA-000001/ucda_engine.py` | `standard` | yes | **FAIL** | 0 | none |
+| `ACT-DECISION-ASSIMILATION` | `00-MASTER/UCDA-000001/ucda_engine.py` | `standard` | yes | PASS | 0 | none |
 | `ACT-EVOLUTION-INTELLIGENCE` | `00-MASTER/UEI-000001/uei_engine.py` | `standard` | yes | PASS | 0 | none |
 | `ACT-EXECUTION-RESILIENCE` | `00-MASTER/UER-000001/uer_engine.py` | `standard` | yes | PASS | 0 | none |
 | `ACT-REPOSITORY-REALITY` | `00-MASTER/URRC-000001/urrc_engine.py` | `standard` | yes | PASS | 0 | none |

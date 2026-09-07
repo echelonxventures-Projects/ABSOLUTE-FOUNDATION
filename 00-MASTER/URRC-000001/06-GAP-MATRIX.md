@@ -246,12 +246,12 @@ Deliverable, executability, dimension, traceability and open-work gaps.
 **`DV-38`** — Work packages registered by decision disposition.
 
 - **Primitive** — `record_count`
-- **Result** — 30 records
+- **Result** — 32 records
 - **Substrate evidence** — `S-09`
 
 | Key | Value |
 |---|---|
-| records | 30 |
+| records | 32 |
 
 **`DV-50`** — Recorded execution blockers in operational state.
 

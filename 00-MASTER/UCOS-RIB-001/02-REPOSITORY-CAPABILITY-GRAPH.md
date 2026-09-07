@@ -330,7 +330,7 @@
 | `UCOS-RIB-001-CAP-0300` | `engine.certification_integrity` | IMPLEMENTATION | `engine/certification_integrity` | 12 | 2 | 11 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0301` | `engine.ceu` | IMPLEMENTATION | `engine/ceu` | 6 | 4 | 2 | 0 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0302` | `engine.civilization` | IMPLEMENTATION | `engine/civilization` | 9 | 9 | 2 | 1 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
-| `UCOS-RIB-001-CAP-0303` | `engine.compiler` | IMPLEMENTATION | `engine/compiler` | 15 | 17 | 8 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
+| `UCOS-RIB-001-CAP-0303` | `engine.compiler` | IMPLEMENTATION | `engine/compiler` | 16 | 17 | 6 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0304` | `engine.conformance` | IMPLEMENTATION | `engine/conformance` | 1 | 2 | 2 | 0 | 1 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0305` | `engine.constitution` | IMPLEMENTATION | `engine/constitution` | 16 | 18 | 17 | 1 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |
 | `UCOS-RIB-001-CAP-0306` | `engine.construct` | IMPLEMENTATION | `engine/construct` | 13 | 5 | 7 | 1 | 0 | 0 | no | CERTIFIED | **EXTEND** | `RUL-09` |

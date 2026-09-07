@@ -59,11 +59,11 @@ Decision lifecycle and disposition occupancy, and deliverable-to-decision covera
 | `CERTIFICATION` | 0 |
 | `CLOSURE` | 25 |
 | `CONSTITUTIONAL-AGREEMENT` | 0 |
-| `DECISION-REGISTRATION` | 17 |
+| `DECISION-REGISTRATION` | 16 |
 | `DISCUSSION` | 0 |
 | `IMPLEMENTATION` | 0 |
 | `REPOSITORY-MAPPING` | 50 |
-| `REPOSITORY-TRUTH-UPDATE` | 59 |
+| `REPOSITORY-TRUTH-UPDATE` | 60 |
 | `VALIDATION` | 0 |
 | **total** | **151** |
 
@@ -95,12 +95,12 @@ Decision lifecycle and disposition occupancy, and deliverable-to-decision covera
 **`DV-38`** — Work packages registered by decision disposition.
 
 - **Primitive** — `record_count`
-- **Result** — 30 records
+- **Result** — 32 records
 - **Substrate evidence** — `S-09`
 
 | Key | Value |
 |---|---|
-| records | 30 |
+| records | 32 |
 
 
 ---

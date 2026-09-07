@@ -22,7 +22,7 @@
     },
     "ACT-DECISION-ASSIMILATION": {
       "residue_total_observation": "UCOS-OBS-000001",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "zones_exercised": []
     },
     "ACT-EVOLUTION-FRAMEWORK": {
@@ -87,31 +87,19 @@
     }
   },
   "convergence": {
-    "determination": "NOT-CONVERGED",
-    "iteration_total": 4,
-    "stable_iterations": 4,
+    "determination": "CONVERGED-PROVISIONAL",
+    "iteration_total": 2,
+    "stable_iterations": 2,
     "vector_digests": [
-      "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8",
-      "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8",
-      "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8",
-      "616ffcf6fb22c4f20d2db31b53264756ec101ed0e309897aa5b32bb93427bea8"
+      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b",
+      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b"
     ]
   },
   "decision": {
-    "ACT-DECISION-ASSIMILATION": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-ACTUATOR-FAILURE"
-    },
     "OBS-AGGREGATE-CEILING": {
       "class": "Constitutional amendment",
       "decision": "ESCALATE",
       "rule": "CR-ESCALATED-CEILING"
-    },
-    "OBS-DECISION-GATE": {
-      "class": "Defect correction",
-      "decision": "IMPLEMENT",
-      "rule": "CR-BLOCKING-REGRESSION"
     }
   },
   "dimensions": [
@@ -388,8 +376,8 @@
       "verdict": "SATISFIED"
     },
     "OBS-DECISION-GATE": {
-      "observed": "CLOSED",
-      "verdict": "VIOLATED"
+      "observed": "OPEN",
+      "verdict": "SATISFIED"
     },
     "OBS-DECISION-UNDISPOSITIONED": {
       "observed": [],

@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
-| DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `2ff2408cf2e5fc57ea4bd931c4faa255` |
+| DETERMINATION | **CONVERGED-PROVISIONAL** |
+| SEAL | `8ff810a249eb199e3f6cb93a0fe20fcb` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > What this programme certifies, and — equally — what it does not. A verdict that could not be reached in both directions would carry no evidentiary value.
@@ -17,7 +17,7 @@
 
 | Subject | Evidence | Verdict |
 |---|---|---|
-| The loop is closed and its convergence is measured | `06-ITERATION-LEDGER.md` · `07-CONVERGENCE-CERTIFICATION.md` | NOT-CONVERGED |
+| The loop is closed and its convergence is measured | `06-ITERATION-LEDGER.md` · `07-CONVERGENCE-CERTIFICATION.md` | CONVERGED-PROVISIONAL |
 | Every actuator is a located owner, none authored here | `02-ACTUATOR-EXECUTION-REGISTER.md` · `--check-reuse-before-create` | CERTIFIED |
 | Every reading comes from a located owner's sealed output | `03-OBSERVATION-REGISTER.md` | CERTIFIED |
 | Every loop phase is read, not restated | `01-MANDATE-COVERAGE-REGISTER.md` · `--check-mandate-coverage` | CERTIFIED |

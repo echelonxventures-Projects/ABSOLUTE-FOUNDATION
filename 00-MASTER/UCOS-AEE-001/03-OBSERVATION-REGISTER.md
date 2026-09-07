@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
-| DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `2ff2408cf2e5fc57ea4bd931c4faa255` |
+| DETERMINATION | **CONVERGED-PROVISIONAL** |
+| SEAL | `8ff810a249eb199e3f6cb93a0fe20fcb` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > Each reading is taken from a located owner's own sealed output. This programme measures nothing itself; it reports what its owners determined.
@@ -28,7 +28,7 @@
 | `OBS-READINESS-BLOCKING-GAPS` | `00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py` | `located_blocking_gaps` | `equals` | SATISFIED | `0` |
 | `OBS-READINESS-UNRESOLVED` | `00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py` | `unresolved_total` | `equals` | SATISFIED | `0` |
 | `OBS-READINESS-WRITE-SCOPE` | `00-MASTER/UAKOS-CLOSURE-002/phase3_engine.py` | `wrote_outside_own_memory` | `is_empty` | SATISFIED | `[]` |
-| `OBS-DECISION-GATE` | `00-MASTER/UCDA-000001/ucda_engine.py` | `gate` | `equals` | **VIOLATED** | `"CLOSED"` |
+| `OBS-DECISION-GATE` | `00-MASTER/UCDA-000001/ucda_engine.py` | `gate` | `equals` | SATISFIED | `"OPEN"` |
 | `OBS-DECISION-UNDISPOSITIONED` | `00-MASTER/UCDA-000001/ucda_engine.py` | `undispositioned` | `is_empty` | SATISFIED | `[]` |
 | `OBS-DECISION-UNEVIDENCED` | `00-MASTER/UCDA-000001/ucda_engine.py` | `unevidenced` | `is_empty` | SATISFIED | `[]` |
 | `OBS-DECISION-CONVERSATION-ONLY` | `00-MASTER/UCDA-000001/ucda_engine.py` | `conversation_only` | `is_empty` | SATISFIED | `[]` |

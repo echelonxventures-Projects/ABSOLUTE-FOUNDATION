@@ -10,11 +10,11 @@
     "CERTIFICATION": 0,
     "CLOSURE": 25,
     "CONSTITUTIONAL-AGREEMENT": 0,
-    "DECISION-REGISTRATION": 17,
+    "DECISION-REGISTRATION": 16,
     "DISCUSSION": 0,
     "IMPLEMENTATION": 0,
     "REPOSITORY-MAPPING": 50,
-    "REPOSITORY-TRUTH-UPDATE": 59,
+    "REPOSITORY-TRUTH-UPDATE": 60,
     "VALIDATION": 0
   },
   "conversation_only": [],
@@ -12996,15 +12996,15 @@
       "index": "",
       "index_located": false,
       "justification": null,
-      "note": "adr/0021 declared in its own Consequences that nothing enforced the Universal Agnostic Architecture Principle; UAC-000001 is that enforcement, fourteen days later. An axis is scored on two properties because one over-reports: how many implementations define the contract's own abstract methods, and whether the contract can fail at all. Measured: persistence PROVEN at 10/10 behind a contract that round-trips the universe and refuses a mechanism storing nothing; execution ENVELOPE_ONLY at 2/11 behind a contract demanding only a serialisation, where nine adapters share one transcribe() and execute() discards the payload to call the Python resolver. Across the repository 42 abstraction boundaries exist and 20 carry two or more implementations, but most are rule registries where swapping changes which rule runs, not which technology runs it — counting those as agnosticism is the over-report this instrument refuses. Lands as MEASUREMENT: it refuses nothing and changes no test's verdict.",
+      "note": "adr/0021 declared in its own Consequences that nothing enforced the Universal Agnostic Architecture Principle; UAC-000001 is that enforcement, fourteen days later. An axis is scored on two properties because one over-reports: how many implementations define the contract's own abstract methods, and whether the contract can fail at all. Measured: persistence PROVEN at 10/10 behind a contract that round-trips the universe and refuses a mechanism storing nothing; execution ENVELOPE_ONLY at 2/11 behind a contract demanding only a serialisation, where nine adapters share one transcribe() and execute() discards the payload to call the Python resolver. Across the repository 42 abstraction boundaries exist and 20 carry two or more implementations, but most are rule registries where swapping changes which rule runs, not which technology runs it — counting those as agnosticism is the over-report this instrument refuses. Lands as MEASUREMENT: it refuses nothing and changes no test's verdict. STAGE AND FIELD CORRECTED: this carried stage DECISION-REGISTRATION and a work_package, and DP-1 admits neither — IMPLEMENTED requires REPOSITORY-TRUTH-UPDATE and takes evidence, not a work package. The disposition was already true when it was written: engine/conformance is committed, action_taken names the landing commit bb0012d8, and every coverage entry EQ-1..EQ-5 resolves. What was wrong was the stage claiming less than the repository already held, and a field asserting work that was done. WP-W4-002 was named by this decision alone and is referenced nowhere else, so nothing is orphaned by its removal.",
       "reasons": [],
       "source_register": "adr/0040-agnosticism-is-measured-not-declared.md",
       "source_register_located": true,
-      "stage": "DECISION-REGISTRATION",
+      "stage": "REPOSITORY-TRUTH-UPDATE",
       "superseded_by": null,
       "title": "Agnosticism is measured, and a contract that cannot fail proves nothing",
       "undispositioned": false,
-      "work_package": "WP-W4-002"
+      "work_package": null
     },
     {
       "action_taken": "Named the class and recorded three obligations on future instruments rather than a new gate, because a gate for this would need a scope and inherit the same defect: an instrument states the population it measured, a verdict names only a mechanism that was measured, and a silent fallback is reported even when lawful. A meta-gate was rejected as requiring a second declaration of every rule, which UCKP-ART-03 makes a rival authority.",
@@ -13186,16 +13186,11 @@
       "work_package": "WP-W4-004"
     }
   ],
-  "declaration_findings": [
-    "DEC-ADR-0040: asserts 'work_package', which its disposition does not admit — exactly one disposition, with exactly its own obligations",
-    "DEC-ADR-0040: disposition may not be asserted before stage 'REPOSITORY-TRUTH-UPDATE'",
-    "DEC-ADR-0041: 'work_package' names WP-W4-003, which is not a declared work package",
-    "DEC-ADR-0042: 'work_package' names WP-W4-004, which is not a declared work package"
-  ],
-  "determination": "NOT-ASSIMILATED",
+  "declaration_findings": [],
+  "determination": "ASSIMILATED",
   "evidence_references": 568,
-  "gate": "CLOSED",
-  "gate_exit": 1,
+  "gate": "OPEN",
+  "gate_exit": 0,
   "programme": {
     "$external_work_package_sources_comment": "Located declarations whose own work packages are honoured as declared here. A decision whose work is already registered elsewhere references that package instead of duplicating it (Zero Duplication, CEP-002 8.3).",
     "aggregate_gate_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
@@ -13252,7 +13247,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "fc968f2d8218618833335e4b4afb8bd8f1dc4890167a6b2c1730368a6f6c5f9a",
+  "seal_sha256": "08ff3168ea6882f05f6b5b7122000c4e0df8b897741be914c45f40ee1cb5b24a",
   "undispositioned": [],
   "unevidenced": [],
   "unindexed": []

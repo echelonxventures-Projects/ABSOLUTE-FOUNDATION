@@ -2386,7 +2386,7 @@
       "id": "MSR-SOURCE",
       "kind": "owned_source_count",
       "purpose": "the implemented source surface the unit actually owns — every version-controlled module attributed to the deepest unit that contains it, excluding package initializers, so no root swallows the packages beneath it and no package loses its own subtree",
-      "total": 2131,
+      "total": 2132,
       "units_with_value": 175
     },
     {
@@ -2394,7 +2394,7 @@
       "id": "MSR-ALLFILES",
       "kind": "tracked_glob_count",
       "purpose": "every version-controlled file homed inside the unit",
-      "total": 7303,
+      "total": 7305,
       "units_with_value": 253
     },
     {
@@ -4331,10 +4331,10 @@
         }
       ],
       "edge_sites": {},
-      "edges": 9793,
+      "edges": 9794,
       "id": "PLN-MODULE",
       "kind": "python_module_graph",
-      "nodes": 2221,
+      "nodes": 2222,
       "purpose": "the module-granularity import plane, where a true Python import cycle would break execution",
       "unit_class": "IMPLEMENTATION",
       "unresolved_edges": 0
@@ -5883,7 +5883,7 @@
     "fsck_errors": [],
     "interrupted_operations": [],
     "modified": "UCOS-OBS-000003",
-    "tracked_files": 7133,
+    "tracked_files": 7134,
     "untracked": "UCOS-OBS-000003",
     "working_tree": "UCOS-OBS-000003"
   },
@@ -6184,7 +6184,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "772be9cce730fb83a0cb39efa2e740aa1c026e7d6eb11a662a3180b574bc8a6e",
+      "content_sha256": "2b8530624ef4cb3fb4e263b6af6eded3d4f65ec72259dfd4404fe5b6a8a49385",
       "exists": true,
       "generated": false,
       "id": "SUB-UCDA",
@@ -6248,7 +6248,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "8d7b56609edbdb4021d16ec8fcad0f6d20dc1c50865a1519a9abf15434fdad27",
+      "content_sha256": "4f193c4f1194ff1ff098e526fca9108880e7ae1b3d33476f9fdc84055f665507",
       "exists": true,
       "generated": false,
       "id": "SUB-URRC",
@@ -21542,7 +21542,7 @@
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 887,
+      "tracked_files": 888,
       "unique_id": "UCOS-RIB-001-CAP-0297",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "engine",
@@ -21948,17 +21948,15 @@
       "consumer_units": [
         "engine.ceu",
         "engine.context",
-        "engine.context.composition",
         "engine.determinism",
         "engine.factory",
         "engine.runtime",
-        "engine.runtime.context",
         "engine.tests"
       ],
-      "consumers": 8,
+      "consumers": 6,
       "corpus_artifacts": 0,
       "declared": "engine.compiler",
-      "degree": 25,
+      "degree": 23,
       "dependencies": 17,
       "dependency_units": [
         "engine.compiler.cycles",
@@ -22019,13 +22017,13 @@
       "rie_reuse": "REUSE_AS_IS/COMPOSE",
       "rie_status": "CERTIFIED",
       "root": "engine",
-      "source_files": 15,
+      "source_files": 16,
       "sources": [
         "DSC-CODE-PACKAGE",
         "DSC-RIE-CAPABILITY"
       ],
       "superseded_by": "",
-      "tracked_files": 17,
+      "tracked_files": 18,
       "unique_id": "UCOS-RIB-001-CAP-0303",
       "unit_class": "IMPLEMENTATION",
       "unit_key": "engine.compiler",

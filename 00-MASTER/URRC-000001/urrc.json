@@ -1699,7 +1699,7 @@
         ],
         [
           "`DECISION-REGISTRATION`",
-          "17"
+          "16"
         ],
         [
           "`DISCUSSION`",
@@ -1715,7 +1715,7 @@
         ],
         [
           "`REPOSITORY-TRUTH-UPDATE`",
-          "59"
+          "60"
         ],
         [
           "`VALIDATION`",
@@ -1783,18 +1783,18 @@
       "unknown": false
     },
     {
-      "count": 30,
+      "count": 32,
       "evidence": [
         "S-09"
       ],
-      "headline": "30 records",
+      "headline": "32 records",
       "id": "DV-38",
       "primitive": "record_count",
       "purpose": "Work packages registered by decision disposition.",
       "rows": [
         [
           "records",
-          "30"
+          "32"
         ]
       ],
       "unknown": false
@@ -2381,7 +2381,7 @@
           "YES",
           "2/2",
           "1952",
-          "`973ab291bf28`"
+          "`3a9e80888a94`"
         ],
         [
           "`S-06`",
@@ -2420,8 +2420,8 @@
           "YES",
           "YES",
           "4/4",
-          "195",
-          "`85be223b141d`"
+          "197",
+          "`b389218f2268`"
         ],
         [
           "`S-10`",
@@ -2430,8 +2430,8 @@
           "YES",
           "YES",
           "6/6",
-          "754",
-          "`772be9cce730`"
+          "748",
+          "`2b8530624ef4`"
         ],
         [
           "`S-11`",
@@ -3480,7 +3480,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "973ab291bf28b3ea3f3699f806ff6d96144b905dfbe06b7585343a132b27fcf1",
+      "content_sha256": "3a9e80888a946413cabd1724d3297dcb7383ac2b5b70570dd545ff9a3c45f778",
       "exists": true,
       "id": "S-05",
       "kind": "identity ledger",
@@ -3592,7 +3592,7 @@
       "tracked": true
     },
     {
-      "content_sha256": "85be223b141d3492ebaa40c968990bd7d02009cb77446700cfb853e5a73855ba",
+      "content_sha256": "b389218f226847eea68a764cb3c5b139e86fde6e472bb026c08d4f9b80a19943",
       "exists": true,
       "id": "S-09",
       "kind": "decision register declaration",
@@ -3612,12 +3612,12 @@
       ],
       "pointers_unresolved": [],
       "purpose": "The constitutional decision register: lifecycle, closed disposition set, decisions.",
-      "records": 195,
+      "records": 197,
       "required": true,
       "tracked": true
     },
     {
-      "content_sha256": "772be9cce730fb83a0cb39efa2e740aa1c026e7d6eb11a662a3180b574bc8a6e",
+      "content_sha256": "2b8530624ef4cb3fb4e263b6af6eded3d4f65ec72259dfd4404fe5b6a8a49385",
       "exists": true,
       "id": "S-10",
       "kind": "decision determination",
@@ -3641,7 +3641,7 @@
       ],
       "pointers_unresolved": [],
       "purpose": "Computed decision lifecycle and disposition occupancy.",
-      "records": 754,
+      "records": 748,
       "required": true,
       "tracked": true
     },

@@ -5,8 +5,8 @@
 | PROGRAMME | `UCOS-AEE-001` — Autonomous Evolution Engine v1.0 |
 | AUTHORITY | **NONE — DERIVED TRUTH. This programme legislates nothing, registers nothing, certifies nothing and owns no capability. It sequences located owners, reads their sealed determinations, and asserts convergence over what they report.** |
 | TIER | `standard` |
-| DETERMINATION | **NOT-CONVERGED** |
-| SEAL | `2ff2408cf2e5fc57ea4bd931c4faa255` |
+| DETERMINATION | **CONVERGED-PROVISIONAL** |
+| SEAL | `8ff810a249eb199e3f6cb93a0fe20fcb` |
 | REPOSITORY ANCHOR | the containing commit — owned by version control, never restated here |
 
 > What an iteration establishes is retained so a later run resolves an identical finding by lookup instead of rediscovery. This is a deterministic knowledge projection, not a statistical model.
@@ -31,7 +31,7 @@
 | `ACT-CIVILIZATION-PLATFORM` | PASS | 0 | none |
 | `ACT-CONSTITUTIONAL-ASSIMILATION` | PASS | 0 | none |
 | `ACT-CORPUS-CURRENCY` | PASS | 0 | none |
-| `ACT-DECISION-ASSIMILATION` | FAIL | 0 | none |
+| `ACT-DECISION-ASSIMILATION` | PASS | 0 | none |
 | `ACT-EVOLUTION-FRAMEWORK` | PASS | 0 | none |
 | `ACT-EVOLUTION-INTELLIGENCE` | PASS | 0 | none |
 | `ACT-EXECUTION-RESILIENCE` | PASS | 0 | none |
