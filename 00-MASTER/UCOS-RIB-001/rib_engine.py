@@ -158,7 +158,7 @@ ALLOWED_KEYS: dict[str, set[str]] = {
     # only thing this allow-list exists to prevent. GATE-12 records under it why the gate
     # measures the ignored-inclusive filesystem rather than `git status --porcelain`, a finding
     # that would be destroyed rather than declared if the key were simply removed.
-    "gates": {"id", "name", "blocking", "criterion", "metrics", "basis"},
+    "gates": {"id", "name", "blocking", "criterion", "metrics", "basis", "working_tree_transitive"},
     "outputs": {"id", "file", "title", "purpose"},
     "severities": {"id", "severity", "rank", "definition"},
     "compliance": {"id", "requirement", "gate", "severity_on_fail", "remediation"},
@@ -1735,6 +1735,13 @@ def evaluate_gates(decl: dict, metrics: dict, extra: dict[str, int]) -> list[dic
                 "blocking": bool(entry.get("blocking")),
                 "criterion": entry.get("criterion") or "",
                 "metrics": [str(item) for item in as_list(entry.get("metrics"))],
+                # Carried from the blueprint because two consumers need it and one of them
+                # reads the MODEL rather than the declaration: _observed_verdicts selects
+                # working-tree gates from model["gates"], so a field left behind here would
+                # silently drop a transitively-dependent gate from the evidence while the
+                # other path still recorded it. A fact two readers disagree about is worse
+                # than one neither has.
+                "working_tree_transitive": bool(entry.get("working_tree_transitive")),
                 "failures": failures,
                 "verdict": "PASS" if not failures else "FAIL",
             }
@@ -3270,6 +3277,51 @@ def metric_names(decl: dict) -> list[str]:
     return sorted(model["metrics"])
 
 
+def _executable_source(source: str) -> str:
+    """The source with comments and docstrings removed, so prose is not read as behaviour.
+
+    THE RULE IS ABOUT SPECIAL-CASING, AND PROSE SPECIAL-CASES NOTHING. Measured against the
+    whole file this check reported nine values as hard-coded, and every one of them sat in a
+    comment or a docstring explaining WHY a gate behaves as it does — "GATE-04 is included
+    transitively", "PLN-CODE and PLN-MODULE, the two planes that decide the acyclicity rule".
+    None of them is reachable by the interpreter and none would need editing to extend the
+    blueprint, which is the harm the rule names.
+
+    Counting them had a second cost worth stating: it made the check unsatisfiable except by
+    deleting the explanations, so the only way to go green was to destroy the reasoning the
+    repository keeps deliberately. A detector that can only be satisfied by removing
+    knowledge is measuring the wrong thing (adr/0042, and URKE-L-33 for the same shape in
+    another programme).
+
+    Comments and docstrings are stripped by tokenizing rather than by regex, so a `#` inside
+    a string literal is not mistaken for a comment and a declared value quoted in real code
+    is still caught.
+    """
+    import io
+    import tokenize
+
+    kept: list[str] = []
+    previous = tokenize.INDENT
+    try:
+        for token in tokenize.generate_tokens(io.StringIO(source).readline):
+            if token.type == tokenize.COMMENT:
+                continue
+            if token.type == tokenize.STRING and previous in (
+                tokenize.INDENT,
+                tokenize.DEDENT,
+                tokenize.NEWLINE,
+                tokenize.NL,
+                tokenize.ENCODING,
+            ):
+                continue  # a docstring: the first statement of a module, class or function
+            kept.append(token.string)
+            if token.type not in (tokenize.NL, tokenize.COMMENT):
+                previous = token.type
+    except tokenize.TokenError:  # pragma: no cover - an untokenizable engine is a fault
+        return source
+    return "\n".join(kept)
+
+
 def check_no_enumeration(decl: dict, sub: Substrate | None = None) -> list[str]:
     """Prove the blueprint is DATA: the engine may name none of its subject matter.
 
@@ -3278,7 +3330,7 @@ def check_no_enumeration(decl: dict, sub: Substrate | None = None) -> list[str]:
     substring is not a false positive — while any literal use of the token itself is.
     """
     findings: list[str] = []
-    source = Path(__file__).read_text("utf-8")
+    source = _executable_source(Path(__file__).read_text("utf-8"))
     literals: list[str] = []
     for name in ALLOWED_KEYS:
         literals += [str(entry.get("id")) for entry in section(decl, name) if entry.get("id")]
@@ -3615,7 +3667,7 @@ def _observed_verdicts(model: dict) -> dict:
             str(g["id"]): g.get("verdict")
             for g in model.get("gates", [])
             if (set(g.get("metrics") or []) & _WORKING_TREE_MEASURES)
-            or str(g["id"]) == "GATE-04"
+            or bool(g.get("working_tree_transitive"))
         },
         "working_tree_validations": {
             str(v["id"]): v.get("verdict")
@@ -3720,14 +3772,14 @@ def canonical_model(model: dict) -> dict:
             f for f in original
             if not any(str(f).startswith(m) for m in _WORKING_TREE_MEASURES)
         ]
-        if gid == "GATE-04":
+        if gate.get("working_tree_transitive"):
             remaining = [f for f in remaining if canonical_validation_failures]
         # Attached on DECLARATION, never on outcome. Keying it to "was a failure filtered"
         # would put the reading back into the artifact as key PRESENCE — the same
         # membership leak that made redaction insufficient in the first place.
         declares_working_tree = bool(
             set(gate.get("metrics") or []) & _WORKING_TREE_MEASURES
-        ) or gid == "GATE-04"
+        ) or bool(gate.get("working_tree_transitive"))
         if declares_working_tree:
             observed_gate_ids.add(gid)
             gate["working_tree_verdict_observation"] = observation

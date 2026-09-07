@@ -104,6 +104,13 @@ def _runtime_model(
             "name": "Repository Validation",
             "blocking": True,
             "metrics": ["validations_failed"],
+            # Mirrors rib-blueprint.json. GATE-04's working-tree dependence is TRANSITIVE —
+            # it gates on validations_failed, which aggregates the validations remaining once
+            # the working-tree ones are set aside — so no metrics intersection can find it.
+            # The engine used to carry this as a literal `gid == "GATE-04"` in three places,
+            # which check-no-enumeration refuses: extending the blueprint must never require
+            # a code change. The fact is declared now, so the fixture declares it too.
+            "working_tree_transitive": True,
             "failures": gate04_failures,
             "verdict": "PASS" if not gate04_failures else "FAIL",
             "criterion": "every validation obligation met",

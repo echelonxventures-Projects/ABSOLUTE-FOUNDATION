@@ -1463,7 +1463,9 @@
       "criterion": "every validation obligation met",
       "metrics": [
         "validations_failed"
-      ]
+      ],
+      "working_tree_transitive": true,
+      "basis": "Declared rather than special-cased in the engine. GATE-04 gates on `validations_failed`, which aggregates the validations remaining once the working-tree ones are set aside, so its working-tree dependence is TRANSITIVE and invisible to a metrics intersection. The engine named it as a literal in three places, which UCOS-RIB-001 check-no-enumeration refuses: extending the blueprint must never require a code change."
     },
     {
       "id": "GATE-05",
