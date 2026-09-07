@@ -594,7 +594,16 @@ def test_lease_verify_refuses_when_head_moved(tmp_path: Path) -> None:
     # in a second process would make the check a no-op and the test vacuously green.
     got = _lease_sh(
         "ucos_lease_acquire integration\n"
-        'sed -i "" "s/^head=.*/head=' + "de" * 20 + '/" "$UCOS_LEASE_FILE"\n'
+        # PORTABLE REWRITE, NOT `sed -i ""`. The empty backup argument is BSD sed; GNU sed
+        # reads it as the SCRIPT and then treats the real script as a filename, so the
+        # command fails and the shell exits 2 instead of the 1 this asserts. That is why
+        # both lease tests passed on macOS and failed on every Linux runner — the same
+        # BSD-ism as verify.sh's `mktemp -t`, surfacing only once CI could reach the code.
+        "printf '%s\\n' \"$(sed \"s|^head=.*|head="
+        + "de"
+        * 20
+        + '|" "$UCOS_LEASE_FILE")" > "$UCOS_LEASE_FILE.tmp"\n'
+        'mv "$UCOS_LEASE_FILE.tmp" "$UCOS_LEASE_FILE"\n'
         "ucos_lease_verify",
         tmp_path / "verify.lease",
     )
@@ -613,7 +622,9 @@ def test_lease_release_removes_only_our_own(tmp_path: Path) -> None:
     lease = tmp_path / "verify.lease"
     got = _lease_sh(
         "ucos_lease_acquire integration\n"
-        'sed -i "" "s/^pid=.*/pid=1/" "$UCOS_LEASE_FILE"\n'
+        'printf \'%s\\n\' "$(sed "s|^pid=.*|pid=1|" "$UCOS_LEASE_FILE")"'
+        ' > "$UCOS_LEASE_FILE.tmp"\n'
+        'mv "$UCOS_LEASE_FILE.tmp" "$UCOS_LEASE_FILE"\n'
         "ucos_lease_release",
         lease,
     )
