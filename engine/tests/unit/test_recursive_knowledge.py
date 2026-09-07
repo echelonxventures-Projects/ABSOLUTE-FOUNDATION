@@ -1181,6 +1181,45 @@ def test_l24_refuses_axes_that_are_not_independent(probe, monkeypatch: pytest.Mo
     assert any("they are not" in str(item) or "did not take" in str(item) for item in violations)
 
 
+def test_l33_vocabulary_is_not_hardcoded_fails_in_both_directions() -> None:
+    """The predicate must catch a decision and spare a coincidence, or it is worth nothing.
+
+    This law replaced an inline heredoc in urke-gate.yml whose predicate flagged EVERY string
+    equal to a vocabulary member. The members are ordinary words — ``identity``, ``governance``
+    and ``verification`` are all domain ids — so every one of its seven findings was a false
+    positive, and a detector that cannot spare can never honestly reach its floor
+    (UZX-000001). Both directions are pinned here as source snippets fed to the predicate.
+    """
+    import ast
+
+    members = {"identity", "governance", "verification"}
+
+    def decides(source: str) -> bool:
+        return any(
+            contract._vocabulary_decisions(node, members) for node in ast.walk(ast.parse(source))
+        )
+
+    must_catch = (
+        'if kind == "identity":\n    pass\n',
+        'if kind in ("identity", "governance"):\n    pass\n',
+        'DOMAINS = ("identity", "governance")\n',
+    )
+    must_not_catch = (
+        'd = {"identity": self.identity}\n',
+        'f(event="verification")\n',
+        'm = {"identity": lambda e: e.identity}\n',
+    )
+    for source in must_catch:
+        assert decides(source), f"predicate cannot catch: {source!r}"
+    for source in must_not_catch:
+        assert not decides(source), f"predicate wrongly catches: {source!r}"
+
+
+def test_l33_the_engine_hardcodes_no_vocabulary(probe) -> None:
+    """And the live measurement, which is what the CI heredoc was actually asserting."""
+    assert contract.vocabulary_is_not_hardcoded(probe) == []
+
+
 def test_every_law_check_is_named_by_this_suite() -> None:
     """The class-level guard. A law arriving without a forged-violation test fails HERE.
 

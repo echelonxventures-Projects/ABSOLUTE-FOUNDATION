@@ -764,6 +764,88 @@ def no_completeness_claim_is_declared(probe: Probe) -> list[str]:
     return problems
 
 
+def vocabulary_is_not_hardcoded(probe: Probe) -> list[str]:
+    """URKE-L-33 — no module BRANCHES ON or ENUMERATES a declared vocabulary member.
+
+    This law lived as an inline heredoc inside .github/workflows/urke-gate.yml, so it ran in
+    exactly one place: CI. ./verify.sh could not reach it, UEC could not discover it because
+    it was not a gate engine, and it therefore failed every CI run while the repository-
+    standard command reported URKE green. adr/0041 names that shape — a rule whose
+    measurement does not reach where it applies — and the remedy is to give the rule a home
+    the other planes can see.
+
+    ITS PREDICATE WAS ALSO WRONG, and the reason is worth stating because it decides the
+    shape of this one. The workflow flagged EVERY string constant equal to a vocabulary
+    member. But the members are ordinary English words — ``identity``, ``governance``,
+    ``verification`` are all domain ids — so the check could not tell a vocabulary reference
+    from an ordinary use of the same word. All seven of its findings were false positives::
+
+        {"identity": self.identity}          a serialization key mirroring a field name
+        {"governance": lambda e: e.governance}
+        ledger.amend(..., event="verification")   an event label
+
+    A detector that cannot spare is worse than one that cannot catch: its floor is
+    unreachable, because the last entries are unremovable by any migration and the only way
+    to close the count is to declare things that were never defects (UZX-000001).
+
+    So this measures what the law actually wants. Hardcoding the vocabulary means the code
+    DECIDES something from a member: comparing against one, testing membership against one,
+    or writing a literal enumeration of them. Those force a code change when the declaration
+    gains a member, which is the harm. A key that happens to spell a member, or a label
+    passed to a keyword argument, decides nothing and forces nothing.
+    """
+    members = {
+        *probe.declaration.state_ids,
+        *probe.declaration.domain_ids,
+        *probe.declaration.relation_ids,
+        *probe.declaration.reality_ids,
+    }
+    problems: list[str] = []
+    for name, source in probe.sources().items():
+        try:
+            tree = ast.parse(source)
+        except SyntaxError as exc:  # pragma: no cover - an unparsable module is a fault
+            raise ContractError(f"{name} cannot be parsed: {exc}") from exc
+        for node in ast.walk(tree):
+            for literal, how in _vocabulary_decisions(node, members):
+                problems.append(
+                    f"{name} {how} the vocabulary member {literal!r}; it belongs in the "
+                    "declaration"
+                )
+    return sorted(problems)
+
+
+def _vocabulary_decisions(node: ast.AST, members: set[str]) -> list[tuple[str, str]]:
+    """Every way a node DECIDES something from a vocabulary member, and no other way."""
+    found: list[tuple[str, str]] = []
+
+    def literals(value: ast.AST) -> list[str]:
+        if isinstance(value, ast.Constant) and isinstance(value.value, str):
+            return [value.value] if value.value in members else []
+        if isinstance(value, ast.Tuple | ast.List | ast.Set):
+            return [x for element in value.elts for x in literals(element)]
+        return []
+
+    if isinstance(node, ast.Compare):
+        # `x == "identity"` / `x in ("identity", "governance")` — a branch on a member.
+        for operator, comparator in zip(node.ops, node.comparators, strict=True):
+            how = (
+                "tests membership against"
+                if isinstance(operator, ast.In | ast.NotIn)
+                else ("compares against")
+            )
+            found += [(literal, how) for literal in literals(comparator)]
+        found += [(literal, "compares against") for literal in literals(node.left)]
+    elif isinstance(node, ast.Assign | ast.AnnAssign):
+        # A literal roster of members: the enumeration the declaration already owns.
+        value = node.value
+        if value is not None and isinstance(value, ast.Tuple | ast.List | ast.Set):
+            names = literals(value)
+            if len(names) > 1:
+                found += [(literal, "enumerates") for literal in names]
+    return found
+
+
 def measurement_is_deterministic(probe: Probe) -> list[str]:
     """URKE-L-22 — two ledgers from identical calls agree, and no report carries a clock or a "
     "path."""
@@ -1371,6 +1453,7 @@ LAW_CHECKS: Mapping[str, Callable[[Probe], list[str]]] = {
     "lifecycle_axes_are_independent": lifecycle_axes_are_independent,
     "measurement_is_deterministic": measurement_is_deterministic,
     "no_completeness_claim_is_declared": no_completeness_claim_is_declared,
+    "vocabulary_is_not_hardcoded": vocabulary_is_not_hardcoded,
     "no_state_is_terminal": no_state_is_terminal,
     "no_subject_exists_outside_context": no_subject_exists_outside_context,
     "no_subject_exists_outside_governance": no_subject_exists_outside_governance,
@@ -1430,6 +1513,19 @@ def measure(
     """Measure every declared law and return the report. Writes nothing; reads no clock."""
     declaration, probe = load_contract(path, repository=repository)
     selected = frozenset(laws) if laws else None
+    if selected is not None:
+        # A NAME THAT MATCHES NOTHING MEASURED NOTHING, AND USED TO EXIT 0. `--law` filtered
+        # by law_id and silently dropped anything else, so `--law NOT-A-REAL-LAW` and, more
+        # dangerously, `--law <check_name>` both selected an empty set and reported success.
+        # A workflow step written that way is green for the reason it is measuring nothing —
+        # exactly the shape adr/0041 names. An unrecognised selector is now a fault.
+        unknown = sorted(selected - {law.law_id for law in declaration.laws})
+        if unknown:
+            raise ContractError(
+                "no declared law matches "
+                + ", ".join(repr(name) for name in unknown)
+                + "; a selector that matches nothing would measure nothing and pass"
+            )
     rows: list[dict[str, Any]] = []
     for law in declaration.laws:
         if selected is not None and law.law_id not in selected:

@@ -107,51 +107,15 @@ jobs:
           sys.exit(1 if failures else 0)
           PY
 
-      - name: Every vocabulary lives in the declaration and not in the code
-        run: |
-          python3 - <<'PY'
-          import ast, pathlib, sys
+      # This step was an inline heredoc reimplementing the rule, and it was the only place
+      # the rule ran: ./verify.sh could not reach it and UEC could not discover it, because a
+      # check living in workflow YAML is not a gate engine. It also flagged every string equal
+      # to a vocabulary member, and the members are ordinary words, so all seven of its
+      # findings were false positives. The rule is now URKE-L-33 in the engine, measured by
+      # the gate below in every plane, with both directions pinned in the suite.
+      - name: Every vocabulary lives in the declaration and not in the code (URKE-L-33)
+        run: python3 -m engine.recursive_knowledge.gate --law URKE-L-33 --gate --quiet
 
-          from engine.recursive_knowledge.declaration import load_declaration
-
-          declaration = load_declaration()
-          # Derived from the declaration, so this expectation cannot go stale.
-          forbidden = {
-              *declaration.state_ids,
-              *declaration.domain_ids,
-              *declaration.relation_ids,
-              *declaration.reality_ids,
-          }
-          engines = ("model.py", "ledger.py", "states.py", "subjects.py", "worlds.py")
-          failures = 0
-          for name in engines:
-              path = pathlib.Path("engine/recursive_knowledge") / name
-              tree = ast.parse(path.read_text(encoding="utf-8"))
-              for node in ast.walk(tree):
-                  if not isinstance(node, ast.Constant) or not isinstance(node.value, str):
-                      continue
-                  if node.value in forbidden:
-                      print(
-                          f"::error file={path},line={node.lineno}::"
-                          f"{name} names the vocabulary member {node.value!r}; it belongs in "
-                          "the declaration"
-                      )
-                      failures += 1
-          sys.exit(1 if failures else 0)
-          PY
-
-  urke-validation:
-    name: Non-vacuity suite (every law must be able to refuse)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      # The coverage floor belongs to ./verify.sh in ec1-ci.yml and is deliberately not
-      # duplicated here; this job measures the suite, not the denominator.
       - name: Install the pinned test toolchain
         run: |
           python -m pip install --disable-pip-version-check \

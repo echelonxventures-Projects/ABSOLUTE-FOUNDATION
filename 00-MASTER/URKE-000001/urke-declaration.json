@@ -4734,6 +4734,12 @@
       "statement": "Stability is measured rather than claimed: every declared stability property resolves to a live measurement, every detected instability is admitted as a governed subject eligible for research, and no stability mechanism is exempt from review.",
       "check": "stability_is_measured_and_instability_is_governed",
       "blocking": true
+    },
+    {
+      "law_id": "URKE-L-33",
+      "statement": "The declared vocabulary is not hardcoded: no module compares against, tests membership against, or enumerates a declared state, domain, relation or reality member. A member may be spelled in code as a serialization key or a label, which decides nothing; deciding from one forces a code change whenever the declaration gains a member, which is the harm this law names.",
+      "check": "vocabulary_is_not_hardcoded",
+      "blocking": true
     }
   ],
   "evidence": {
