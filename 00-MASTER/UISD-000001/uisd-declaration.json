@@ -1049,7 +1049,7 @@
     "future regression can occupy in silence, exactly as UEC-L-11 holds its five counters."
   ],
   "closure_detection": {
-    "undisclosed_ceiling": 889,
+    "undisclosed_ceiling": 888,
     "$ceiling_basis": "Measured at the commit that introduced this section. It may fall and may never rise; both directions are refused by check_scope_expansion_capacity.",
     "roots": [
       "engine",
@@ -1072,9 +1072,12 @@
       "/tests/",
       "/test_",
       "tests/",
-      "conftest.py"
+      "conftest.py",
+      "intelligence/die/"
     ],
     "$test_exclusion_reason": "A test that pins a vocabulary asserts a fact ABOUT the vocabulary; the obligation to disclose lives where the vocabulary is declared. Counting the assertion would double-count one boundary and make the ceiling meaningless.",
-    "detector": "engine.infinite_scope.detector"
+    "detector": "engine.infinite_scope.detector",
+    "$why_intelligence_die_is_excluded": "THE CENSUS WALKS THE FILESYSTEM, NOT THE TRACKED SET, so a gitignored path is measured on a developer's machine and absent from every clone. intelligence/die/ is declared EXPLICITLY_AUTHORIZED_EXTERNAL in 00-BOOK/DATA/exclusion-register.json — an 'unverified orphan: no __init__.py, no importers, no tests, not packaged or covered', held outside the RC-1 baseline until it is wired. Its single module carried one closed enumeration, so ISD-L-01 measured 889 locally and 888 in CI. The two-sided ratchet then refused CI for a DROP that was never a change to the repository, only a change of machine. A population that differs by environment cannot be ratcheted at an exact integer in both places at once. Excluding a path the repository has already declared outside its verified surface makes the census reproducible; it does not widen it — anything wired and tested leaves that class and is measured again.",
+    "$ceiling_movement": "LOWERED 889 -> 888, and the count did not change — the SCOPE did. intelligence/die/ is now excluded from the census because it is gitignored and declared EXPLICITLY_AUTHORIZED_EXTERNAL, so it was measured on a developer's machine and on no clone. 888 is the value CI has reported consistently and is now the value both environments produce. The ratchet stays two-sided and still refuses a rise; what it no longer refuses is a difference of machine."
   }
 }
