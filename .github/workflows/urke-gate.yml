@@ -116,6 +116,18 @@ jobs:
       - name: Every vocabulary lives in the declaration and not in the code (URKE-L-33)
         run: python3 -m engine.recursive_knowledge.gate --law URKE-L-33 --gate --quiet
 
+  urke-validation:
+    name: Non-vacuity suite (every law must be able to refuse)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # The coverage floor belongs to ./verify.sh in ec1-ci.yml and is deliberately not
+      # duplicated here; this job measures the suite, not the denominator.
       - name: Install the pinned test toolchain
         run: |
           python -m pip install --disable-pip-version-check \
