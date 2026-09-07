@@ -148,6 +148,24 @@ jobs:
       # under the 90% floor, every governance / identity / lifecycle / evolution
       # gate, plus the read-only registration observation. Dropping "--full"
       # here would silently turn this job into a developer check.
+      # EEG-00 refused every run of this job: verify.sh resolves its interpreter through
+      # scripts/ucos-env.sh, which requires .ec1-venv, and this workflow installed into the
+      # runner's system Python instead. The gate never reached a single stage — it printed
+      # "the canonical interpreter is absent" and exited 1. Bootstrapping through the same
+      # environment owner verify.sh uses keeps CI and local execution the same predicate
+      # rather than two similar ones (the reasoning aee-gate.yml already records).
+      - name: Bootstrap the canonical environment (creates .ec1-venv)
+        run: ./bootstrap.sh
+
+      - name: Assert the canonical interpreter resolves (fail-closed)
+        run: |
+          test -x .ec1-venv/bin/python || {
+            echo "canonical venv interpreter absent after bootstrap; verify.sh would refuse" \
+                 "at EEG-00 and the job would report an environment fault as a gate result." >&2
+            exit 1
+          }
+          .ec1-venv/bin/python --version
+
       - name: Canonical verification gate (./verify.sh --full)
         run: ./verify.sh --full
 

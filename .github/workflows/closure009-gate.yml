@@ -57,6 +57,15 @@ jobs:
       # A committed artifact can never carry the sha of the commit that carries it, so
       # without the replayed head this diff would be red on every commit for a reason that
       # has nothing to do with truth. Stdlib only — nothing is installed.
+
+      # The gate below READS artifacts .gitignore excludes as "regenerated each run", and
+      # nothing in this workflow regenerated them: on a fresh clone they do not exist. UCL
+      # failed exactly this way — "PRV-KNOWLEDGE: provider owner does not resolve:
+      # knowledge/canonical-knowledge.json" — while passing locally, where the artifacts
+      # persist from earlier runs. verify.sh:364 already states the ordering rule this obeys:
+      # a prerequisite generated after the gate that consumes it is not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Replay the registers and diff byte-for-byte
         run: make closure009-replay
 
@@ -79,6 +88,15 @@ jobs:
       # 0 NOT assimilated: the gate is the standing measurement of how far realisation has
       # to go, and marking it blocking today would only mean the workflow is permanently red
       # while implementation continues. It becomes blocking when the measurement says it can.
+
+      # The gate below READS artifacts .gitignore excludes as "regenerated each run", and
+      # nothing in this workflow regenerated them: on a fresh clone they do not exist. UCL
+      # failed exactly this way — "PRV-KNOWLEDGE: provider owner does not resolve:
+      # knowledge/canonical-knowledge.json" — while passing locally, where the artifacts
+      # persist from earlier runs. verify.sh:364 already states the ordering rule this obeys:
+      # a prerequisite generated after the gate that consumes it is not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Assimilation gate (reported)
         continue-on-error: true
         run: python3 00-MASTER/UAKOS-CLOSURE-009/requirement_engine.py --gate

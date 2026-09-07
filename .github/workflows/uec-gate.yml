@@ -261,4 +261,4 @@ jobs:
     needs: [uec-gate, uec-self-coverage, uec-mutation]
     steps:
       - name: All three legs held
-        run: echo "enforcement closure: governed, self-covered, and mutation-resistant"
+        run: 'echo "enforcement closure: governed, self-covered, and mutation-resistant"'

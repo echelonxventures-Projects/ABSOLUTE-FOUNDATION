@@ -61,6 +61,15 @@ jobs:
       # Stdlib only — the gate installs nothing.
       # ORDER MATTERS: the replay/drift check runs BEFORE the recompile, because the recompile
       # rewrites roadmap.json with the checked-out commit's own sha.
+
+      # The gate below READS artifacts .gitignore excludes as "regenerated each run", and
+      # nothing in this workflow regenerated them: on a fresh clone they do not exist. UCL
+      # failed exactly this way — "PRV-KNOWLEDGE: provider owner does not resolve:
+      # knowledge/canonical-knowledge.json" — while passing locally, where the artifacts
+      # persist from earlier runs. verify.sh:364 already states the ordering rule this obeys:
+      # a prerequisite generated after the gate that consumes it is not a prerequisite.
+      - name: Generate the declared prerequisites (knowledge · determinism · closure 1-3)
+        run: env PYTHON=python3 bash scripts/generate-prerequisites.sh
       - name: Drift gate (committed registers must be the replay of roadmap.json)
         run: |
           python3 00-MASTER/UCOS-MXR-001/roadmap_engine.py --render
