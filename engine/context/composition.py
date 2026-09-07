@@ -24,10 +24,11 @@ error taxonomy.
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass
 from typing import Any
 
+from engine.compiler.cycles import assert_acyclic
 from engine.context.errors import (
     ContextCompositionError,
     ContextIsolationError,
@@ -38,17 +39,182 @@ from engine.context.resolution import ContextRequest, resolve
 from engine.context.taxonomy import ContextRelation
 from engine.foundation.obs.logging import get_logger
 from engine.foundation.obs.telemetry import trace
-from engine.runtime.context import (
-    Federation,
-    ReferenceFrame,
-    RuntimeContext,
-    resolve_contexts,
-    resolve_reference_frames,
-)
-from engine.runtime.errors import ContextResolutionError, ReferenceFrameError
-from engine.runtime.graph import RuntimeGraph
 
 _logger = get_logger("context.composition")
+
+
+# --------------------------------------------------------------------------- #
+# Boundedness (CXL-03) and isolation (CXL-04) — owned here, not delegated      #
+# --------------------------------------------------------------------------- #
+#
+# THESE WERE IMPLEMENTED IN engine.runtime AND IMPORTED UPWARD FROM HERE. This module's
+# own docstring calls boundedness and isolation "the layer's two hardest guarantees",
+# and UCXI-000001 declares them (CXL-03, CXL-04) — so the layer that OWNS the concept
+# was reaching into an execution layer to borrow its implementation. That single import
+# was the whole of the CYC-ARCHITECTURAL cycle RIB GATE-10 refused:
+#
+#   engine.runtime -> engine.knowledge -> engine.context -> engine.runtime
+#
+# The other two edges are correct: a bridge to knowledge belongs in the runtime, and
+# UKIP reusing UCXI's KNOWLEDGE context kind is reuse-before-create working. Only this
+# edge pointed the wrong way, and relocating the bridge would have moved a symptom.
+#
+# The algorithm is generic — partition members, then compute visibility over a
+# dependency relation with explicit cross-partition authorisation. It is stated over a
+# node set and a `dependencies_of` callable rather than over any one graph class, so it
+# binds to no layer. engine.runtime.context now imports these and re-exports them under
+# its own names, which inverts the edge and changes no caller anywhere.
+
+
+@dataclass(frozen=True, slots=True)
+class CompositionPartition:
+    """One bounded partition: a frame id and the members bound to it (CXL-03)."""
+
+    context_id: str
+    members: tuple[str, ...]
+
+    def contains(self, universe_id: str) -> bool:
+        """True iff ``universe_id`` is bound to this partition."""
+        return universe_id in self.members
+
+    def to_dict(self) -> dict[str, object]:
+        return {"context_id": self.context_id, "members": list(self.members)}
+
+
+@dataclass(frozen=True, slots=True)
+class CompositionFederation:
+    """An explicit cross-partition authorisation. Without one, a crossing is refused."""
+
+    source: str
+    target: str
+
+    def to_dict(self) -> dict[str, str]:
+        return {"source": self.source, "target": self.target}
+
+
+@dataclass(frozen=True, slots=True)
+class CompositionFrame:
+    """What one member may reference: same-partition peers plus federated targets."""
+
+    universe_id: str
+    context_id: str
+    visible: tuple[str, ...]
+    federated: tuple[str, ...]
+
+    def can_reference(self, other: str) -> bool:
+        """True iff ``other`` is visible from this frame (CXL-04)."""
+        return other in self.visible
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "universe_id": self.universe_id,
+            "context_id": self.context_id,
+            "visible": list(self.visible),
+            "federated": list(self.federated),
+        }
+
+
+def resolve_partitions(bindings: Mapping[str, str]) -> tuple[CompositionPartition, ...]:
+    """Group members into their partitions. An unbound member is refused (CXL-03)."""
+    groups: dict[str, list[str]] = {}
+    for member in sorted(bindings):
+        partition = bindings[member]
+        if not isinstance(partition, str) or not partition:
+            raise ContextCompositionError(
+                "member is not bound to a frame (unbounded composition)", member=member
+            )
+        groups.setdefault(partition, []).append(member)
+    return tuple(
+        CompositionPartition(context_id=cid, members=tuple(sorted(members)))
+        for cid, members in sorted(groups.items())
+    )
+
+
+def _authorised_crossings(
+    bindings: Mapping[str, str], federations: Iterable[CompositionFederation]
+) -> dict[str, frozenset[str]]:
+    """Validate federations and index them by source. Refuses dangling, self and duplicate."""
+    seen: set[tuple[str, str]] = set()
+    targets: dict[str, set[str]] = {}
+    for federation in federations:
+        source, target = federation.source, federation.target
+        if source not in bindings:
+            raise ContextIsolationError(
+                "federation source is not a member of the composition", source=source
+            )
+        if target not in bindings:
+            raise ContextIsolationError(
+                "federation target is not a member of the composition", target=target
+            )
+        if source == target:
+            raise ContextIsolationError("a universe cannot federate with itself", member=source)
+        if bindings[source] == bindings[target]:
+            raise ContextIsolationError(
+                "federation endpoints share a context (federation is cross-context)",
+                source=source,
+                target=target,
+            )
+        if (source, target) in seen:
+            raise ContextIsolationError(
+                "duplicate federation reference (collision)", source=source, target=target
+            )
+        seen.add((source, target))
+        targets.setdefault(source, set()).add(target)
+    return {source: frozenset(t) for source, t in targets.items()}
+
+
+def resolve_partition_frames(
+    bindings: Mapping[str, str],
+    nodes: Iterable[str],
+    dependencies_of: Callable[[str], Iterable[str]],
+    federations: Iterable[CompositionFederation] = (),
+) -> tuple[CompositionFrame, ...]:
+    """Resolve each member's frame and enforce isolation (CXL-04).
+
+    Stated over ``nodes`` and ``dependencies_of`` rather than a graph class, so the
+    caller's graph type is its own business and this function belongs to no layer.
+    """
+    ordered = tuple(nodes)
+    for node in ordered:
+        if node not in bindings:
+            raise ContextCompositionError("graph member has no frame binding", member=node)
+    authorised = _authorised_crossings(bindings, federations)
+    by_partition: dict[str, list[str]] = {}
+    for node in ordered:
+        by_partition.setdefault(bindings[node], []).append(node)
+
+    frames: list[CompositionFrame] = []
+    for member in ordered:
+        partition = bindings[member]
+        for dependency in dependencies_of(member):
+            if bindings[dependency] != partition and dependency not in authorised.get(
+                member, frozenset()
+            ):
+                raise ContextIsolationError(
+                    "cross-context dependency without a federation reference "
+                    "(context isolation leak)",
+                    member=member,
+                    dependency=dependency,
+                )
+        peers = set(by_partition.get(partition, ())) - {member}
+        federated = authorised.get(member, frozenset())
+        frames.append(
+            CompositionFrame(
+                universe_id=member,
+                context_id=partition,
+                visible=tuple(sorted(peers | set(federated))),
+                federated=tuple(sorted(federated)),
+            )
+        )
+    return tuple(frames)
+
+
+#: Names the runtime re-exports. Kept so engine.runtime.context's public API is
+#: unchanged by the inversion — no caller of the runtime moves.
+RuntimeContext = CompositionPartition
+Federation = CompositionFederation
+ReferenceFrame = CompositionFrame
+resolve_contexts = resolve_partitions
 
 #: The relations that make one context depend on another for its own resolution.
 DEPENDENCY_RELATIONS: tuple[ContextRelation, ...] = (
@@ -235,26 +401,22 @@ def compose(
             raise ContextCompositionError("a composition must have at least one member")
 
         bindings = {cid: registry.get(cid).boundary for cid in members}
-        try:
-            frames = resolve_contexts(bindings)
-        except ContextResolutionError as exc:
-            raise ContextCompositionError(
-                "composition member is not bound to a frame", detail=str(exc)
-            ) from exc
+        frames = resolve_partitions(bindings)
 
-        graph = RuntimeGraph(_dependency_edges(registry, members))
+        edges = _dependency_edges(registry, members)
+        assert_acyclic(edges)
         all_federations = tuple(
             sorted(
                 set(_declared_federations(registry, members)) | set(federations),
                 key=lambda f: (f.source, f.target),
             )
         )
-        try:
-            reference_frames = resolve_reference_frames(bindings, graph, all_federations)
-        except ReferenceFrameError as exc:
-            raise ContextIsolationError(
-                "context isolation is not satisfied by the composition", detail=str(exc)
-            ) from exc
+        reference_frames = resolve_partition_frames(
+            bindings,
+            sorted(edges),
+            lambda member: edges.get(member, ()),
+            all_federations,
+        )
 
         kinds = sorted({registry.get(cid).kind for cid in members})
         resolved = tuple(
@@ -333,10 +495,7 @@ def projection(composed: ComposedContext) -> dict[str, dict[str, Any]]:
 
 def frames_of(bindings: Mapping[str, str]) -> tuple[RuntimeContext, ...]:
     """Group a ``context_id -> frame`` binding into frames (thin reuse wrapper)."""
-    try:
-        return resolve_contexts(bindings)
-    except ContextResolutionError as exc:
-        raise ContextCompositionError("unbounded context binding", detail=str(exc)) from exc
+    return resolve_partitions(bindings)
 
 
 __all__ = [

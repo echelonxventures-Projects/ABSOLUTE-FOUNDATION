@@ -1,24 +1,5 @@
 {
-  "compliance": [
-    {
-      "finding": "architectural_cycles=1",
-      "gate": "GATE-10",
-      "id": "CMP-ACYCLIC",
-      "rank": 2,
-      "remediation": "break the named cycle by extracting the mediating module into the lower layer both participants already depend on",
-      "requirement": "zero circular dependency",
-      "severity": "HIGH"
-    },
-    {
-      "finding": "verifications_failed=1",
-      "gate": "GATE-03",
-      "id": "CMP-VERIFY",
-      "rank": 2,
-      "remediation": "discharge the named verification obligation",
-      "requirement": "verification must pass",
-      "severity": "HIGH"
-    }
-  ],
+  "compliance": [],
   "cycle_classes": [
     {
       "benign": true,
@@ -35,7 +16,7 @@
       "rule": "cross_unit"
     }
   ],
-  "determination": "BLUEPRINT NOT CERTIFIED — REPOSITORY MUST STOP",
+  "determination": "BLUEPRINT CERTIFIED — REPOSITORY MAY PROCEED",
   "discovery": [
     {
       "class": "IMPLEMENTATION",
@@ -1919,8 +1900,8 @@
       "subject": "operational programmes whose engine no declared entry point names"
     }
   ],
-  "gate": "CLOSED",
-  "gate_exit": 1,
+  "gate": "OPEN",
+  "gate_exit": 0,
   "gates": [
     {
       "blocking": true,
@@ -1949,15 +1930,13 @@
     {
       "blocking": true,
       "criterion": "every verification obligation met",
-      "failures": [
-        "verifications_failed=1"
-      ],
+      "failures": [],
       "id": "GATE-03",
       "metrics": [
         "verifications_failed"
       ],
       "name": "Repository Verification",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "working_tree_transitive": false
     },
     {
@@ -2039,15 +2018,13 @@
     {
       "blocking": true,
       "criterion": "no cycle of a non-benign declared class in any plane",
-      "failures": [
-        "architectural_cycles=1"
-      ],
+      "failures": [],
       "id": "GATE-10",
       "metrics": [
         "architectural_cycles"
       ],
       "name": "Zero Circular Dependency",
-      "verdict": "FAIL",
+      "verdict": "PASS",
       "working_tree_transitive": false
     },
     {
@@ -2483,12 +2460,9 @@
     "absent_unbounded:phase": 0,
     "absent_unbounded:superseded_by": 0,
     "advisory_duplicate_signals": 29,
-    "architectural_cycles": 1,
+    "architectural_cycles": 0,
     "benign_cycles": 13,
-    "blocking_failed": [
-      "GATE-03",
-      "GATE-10"
-    ],
+    "blocking_failed": [],
     "catalogue_records": 147,
     "certification_domains_failed": 0,
     "certification_verdict_absent": 0,
@@ -2502,7 +2476,7 @@
     },
     "closure_duplicate_homes": 0,
     "closure_gaps": 0,
-    "compliance_findings": 2,
+    "compliance_findings": 0,
     "contamination_available": true,
     "contamination_entries": "UCOS-OBS-000003",
     "contamination_shadowed_members": [],
@@ -2542,7 +2516,7 @@
     "gap_count:GAP-VERIFICATION": 388,
     "gap_findings": 1199,
     "gate_total": 12,
-    "gates_passed": 10,
+    "gates_passed": 12,
     "generated_artifact_paths": [
       "00-MASTER/UCOS-RIB-001/00-RIB-DASHBOARD.md",
       "00-MASTER/UCOS-RIB-001/01-REPOSITORY-INVENTORY.md",
@@ -2589,8 +2563,8 @@
     "unresolved_catalogue_records": 0,
     "unresolved_dependency_edges": 0,
     "validations_failed": 0,
-    "verifications_failed": 1,
-    "wave_total": 9
+    "verifications_failed": 0,
+    "wave_total": 12
   },
   "non_derivable": [
     {
@@ -2631,40 +2605,8 @@
   ],
   "planes": [
     {
-      "architectural_cycles": [
-        {
-          "benign": false,
-          "class": "CYC-ARCHITECTURAL",
-          "cycle": [
-            "engine.runtime",
-            "engine.knowledge",
-            "engine.context",
-            "engine.runtime"
-          ],
-          "units": [
-            "engine.context",
-            "engine.knowledge",
-            "engine.runtime"
-          ]
-        }
-      ],
-      "cycles": [
-        {
-          "benign": false,
-          "class": "CYC-ARCHITECTURAL",
-          "cycle": [
-            "engine.runtime",
-            "engine.knowledge",
-            "engine.context",
-            "engine.runtime"
-          ],
-          "units": [
-            "engine.context",
-            "engine.knowledge",
-            "engine.runtime"
-          ]
-        }
-      ],
+      "architectural_cycles": [],
+      "cycles": [],
       "edge_sites": {
         "application -> engine.certification": [
           "application/application.py",
@@ -2828,6 +2770,7 @@
           "engine/construct/declaration.py"
         ],
         "engine.context -> engine.compiler": [
+          "engine/context/composition.py",
           "engine/context/graph.py",
           "engine/context/registry.py"
         ],
@@ -2843,9 +2786,6 @@
           "engine/context/location.py",
           "engine/context/location_assurance.py",
           "engine/context/model.py"
-        ],
-        "engine.context -> engine.runtime": [
-          "engine/context/composition.py"
         ],
         "engine.context -> engine.uckp": [
           "engine/context/location.py"
@@ -3022,6 +2962,9 @@
         "engine.runtime -> engine.compiler": [
           "engine/runtime/assembly.py",
           "engine/runtime/graph.py"
+        ],
+        "engine.runtime -> engine.context": [
+          "engine/runtime/context.py"
         ],
         "engine.runtime -> engine.foundation": [
           "engine/runtime/assembly.py",
@@ -4477,13 +4420,13 @@
       "engine.uckp",
       "engine.registry",
       "platform.foundation",
+      "engine.compiler",
+      "engine.graph",
+      "engine.context",
       "engine.validation",
       "engine.certification",
-      "engine.acceptance",
-      "engine.compiler",
       "engine.temporal",
-      "engine.graph",
-      "engine.context"
+      "engine.acceptance"
     ],
     "max_parallel": 52,
     "priority": [
@@ -4495,14 +4438,14 @@
         "wave": 1
       },
       {
-        "dependents": 36,
+        "dependents": 31,
         "disposition": "EXTEND",
         "rank": 2,
         "unit_key": "engine.validation",
         "wave": 1
       },
       {
-        "dependents": 33,
+        "dependents": 29,
         "disposition": "EXTEND",
         "rank": 3,
         "unit_key": "engine.temporal",
@@ -4866,14 +4809,14 @@
         "wave": 2
       },
       {
-        "dependents": 35,
+        "dependents": 30,
         "disposition": "EXTEND",
         "rank": 55,
         "unit_key": "engine.certification",
         "wave": 2
       },
       {
-        "dependents": 34,
+        "dependents": 29,
         "disposition": "EXTEND",
         "rank": 56,
         "unit_key": "engine.acceptance",
@@ -5069,382 +5012,382 @@
         "wave": 3
       },
       {
-        "dependents": 11,
+        "dependents": 32,
         "disposition": "EXTEND",
         "rank": 84,
+        "unit_key": "engine.context",
+        "wave": 4
+      },
+      {
+        "dependents": 11,
+        "disposition": "EXTEND",
+        "rank": 85,
         "unit_key": "platform.workspace",
         "wave": 4
       },
       {
         "dependents": 5,
         "disposition": "EXTEND",
-        "rank": 85,
+        "rank": 86,
         "unit_key": "engine.determinism",
         "wave": 4
       },
       {
         "dependents": 4,
         "disposition": "EXTEND",
-        "rank": 86,
+        "rank": 87,
         "unit_key": "engine",
         "wave": 4
       },
       {
         "dependents": 4,
         "disposition": "EXTEND",
-        "rank": 87,
+        "rank": 88,
         "unit_key": "platform.universal_assimilation",
         "wave": 4
       },
       {
         "dependents": 4,
         "disposition": "EXTEND",
-        "rank": 88,
+        "rank": 89,
         "unit_key": "platform.universal_ownership",
         "wave": 4
       },
       {
         "dependents": 4,
         "disposition": "EXTEND",
-        "rank": 89,
+        "rank": 90,
         "unit_key": "platform.measurement",
         "wave": 4
       },
       {
         "dependents": 2,
         "disposition": "EXTEND",
-        "rank": 90,
+        "rank": 91,
         "unit_key": "platform.coverage",
         "wave": 4
       },
       {
         "dependents": 2,
         "disposition": "EXTEND",
-        "rank": 91,
+        "rank": 92,
         "unit_key": "platform.portal",
         "wave": 4
       },
       {
         "dependents": 1,
         "disposition": "EXTEND",
-        "rank": 92,
+        "rank": 93,
         "unit_key": "platform.security",
         "wave": 4
       },
       {
+        "dependents": 28,
+        "disposition": "EXTEND",
+        "rank": 94,
+        "unit_key": "engine.knowledge",
+        "wave": 5
+      },
+      {
+        "dependents": 6,
+        "disposition": "EXTEND",
+        "rank": 95,
+        "unit_key": "engine.ceu",
+        "wave": 5
+      },
+      {
         "dependents": 5,
         "disposition": "EXTEND",
-        "rank": 93,
+        "rank": 96,
         "unit_key": "platform.projects",
         "wave": 5
       },
       {
         "dependents": 3,
         "disposition": "EXTEND",
-        "rank": 94,
+        "rank": 97,
         "unit_key": "platform.certification",
         "wave": 5
       },
       {
         "dependents": 3,
         "disposition": "EXTEND",
-        "rank": 95,
+        "rank": 98,
         "unit_key": "platform.universal_measurement",
         "wave": 5
       },
       {
         "dependents": 2,
         "disposition": "EXTEND",
-        "rank": 96,
+        "rank": 99,
         "unit_key": "platform.validation",
         "wave": 5
       },
       {
         "dependents": 2,
         "disposition": "EXTEND",
-        "rank": 97,
+        "rank": 100,
         "unit_key": "platform.administration",
         "wave": 5
       },
       {
+        "dependents": 27,
+        "disposition": "EXTEND",
+        "rank": 101,
+        "unit_key": "engine.runtime",
+        "wave": 6
+      },
+      {
+        "dependents": 5,
+        "disposition": "EXTEND",
+        "rank": 102,
+        "unit_key": "engine.nucleus",
+        "wave": 6
+      },
+      {
         "dependents": 4,
         "disposition": "EXTEND",
-        "rank": 98,
+        "rank": 103,
         "unit_key": "platform.blueprints",
         "wave": 6
       },
       {
         "dependents": 2,
         "disposition": "EXTEND",
-        "rank": 99,
+        "rank": 104,
         "unit_key": "platform.universal_foundation",
         "wave": 6
       },
       {
         "dependents": 1,
         "disposition": "EXTEND",
-        "rank": 100,
+        "rank": 105,
         "unit_key": "platform.universal_portal",
         "wave": 6
       },
       {
+        "dependents": 7,
+        "disposition": "EXTEND",
+        "rank": 106,
+        "unit_key": "platform.repository_operations",
+        "wave": 7
+      },
+      {
+        "dependents": 6,
+        "disposition": "EXTEND",
+        "rank": 107,
+        "unit_key": "engine.universal_certification",
+        "wave": 7
+      },
+      {
+        "dependents": 4,
+        "disposition": "EXTEND",
+        "rank": 108,
+        "unit_key": "engine.constitution",
+        "wave": 7
+      },
+      {
+        "dependents": 4,
+        "disposition": "EXTEND",
+        "rank": 109,
+        "unit_key": "engine.factory",
+        "wave": 7
+      },
+      {
+        "dependents": 4,
+        "disposition": "EXTEND",
+        "rank": 110,
+        "unit_key": "engine.governance",
+        "wave": 7
+      },
+      {
         "dependents": 3,
         "disposition": "EXTEND",
-        "rank": 101,
+        "rank": 111,
         "unit_key": "platform.generation",
         "wave": 7
       },
       {
-        "dependents": 1,
+        "dependents": 3,
         "disposition": "EXTEND",
-        "rank": 102,
-        "unit_key": "platform.universal_generator",
+        "rank": 112,
+        "unit_key": "platform.validation_intelligence",
+        "wave": 7
+      },
+      {
+        "dependents": 2,
+        "disposition": "EXTEND",
+        "rank": 113,
+        "unit_key": "platform.universal_validation",
         "wave": 7
       },
       {
         "dependents": 1,
         "disposition": "EXTEND",
-        "rank": 103,
+        "rank": 114,
+        "unit_key": "service",
+        "wave": 7
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
+        "rank": 115,
+        "unit_key": "data",
+        "wave": 7
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
+        "rank": 116,
+        "unit_key": "infrastructure",
+        "wave": 7
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
+        "rank": 117,
+        "unit_key": "application",
+        "wave": 7
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
+        "rank": 118,
+        "unit_key": "platform.commercial_intelligence",
+        "wave": 7
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
+        "rank": 119,
+        "unit_key": "platform.runtime_operations",
+        "wave": 7
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
+        "rank": 120,
+        "unit_key": "platform.universal_generator",
+        "wave": 7
+      },
+      {
+        "dependents": 5,
+        "disposition": "EXTEND",
+        "rank": 121,
+        "unit_key": "intelligence.rie",
+        "wave": 8
+      },
+      {
+        "dependents": 3,
+        "disposition": "CONFIGURE",
+        "rank": 122,
+        "unit_key": "engine.tests",
+        "wave": 8
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
+        "rank": 123,
+        "unit_key": "platform.repository_intelligence",
+        "wave": 8
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
+        "rank": 124,
+        "unit_key": "platform.universal_assurance",
+        "wave": 8
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
+        "rank": 125,
         "unit_key": "platform.artifact_explorer",
         "wave": 8
       },
       {
         "dependents": 1,
         "disposition": "EXTEND",
-        "rank": 104,
+        "rank": 126,
         "unit_key": "platform.execution_dashboard",
         "wave": 8
       },
       {
-        "dependents": 33,
+        "dependents": 0,
         "disposition": "EXTEND",
-        "rank": 105,
-        "unit_key": "engine.runtime",
-        "wave": 9
+        "rank": 127,
+        "unit_key": "engine.uicm",
+        "wave": 8
       },
       {
-        "dependents": 33,
-        "disposition": "EXTEND",
-        "rank": 106,
-        "unit_key": "engine.knowledge",
-        "wave": 9
-      },
-      {
-        "dependents": 33,
-        "disposition": "EXTEND",
-        "rank": 107,
-        "unit_key": "engine.context",
-        "wave": 9
-      },
-      {
-        "dependents": 7,
-        "disposition": "EXTEND",
-        "rank": 108,
-        "unit_key": "platform.repository_operations",
-        "wave": 9
-      },
-      {
-        "dependents": 6,
-        "disposition": "EXTEND",
-        "rank": 109,
-        "unit_key": "engine.universal_certification",
-        "wave": 9
-      },
-      {
-        "dependents": 6,
-        "disposition": "EXTEND",
-        "rank": 110,
-        "unit_key": "engine.ceu",
-        "wave": 9
-      },
-      {
-        "dependents": 5,
-        "disposition": "EXTEND",
-        "rank": 111,
-        "unit_key": "engine.nucleus",
-        "wave": 9
-      },
-      {
-        "dependents": 5,
-        "disposition": "EXTEND",
-        "rank": 112,
-        "unit_key": "intelligence.rie",
-        "wave": 9
-      },
-      {
-        "dependents": 4,
-        "disposition": "EXTEND",
-        "rank": 113,
-        "unit_key": "engine.constitution",
-        "wave": 9
-      },
-      {
-        "dependents": 4,
-        "disposition": "EXTEND",
-        "rank": 114,
-        "unit_key": "engine.factory",
-        "wave": 9
-      },
-      {
-        "dependents": 4,
-        "disposition": "EXTEND",
-        "rank": 115,
-        "unit_key": "engine.governance",
-        "wave": 9
-      },
-      {
-        "dependents": 3,
+        "dependents": 0,
         "disposition": "CONFIGURE",
-        "rank": 116,
-        "unit_key": "engine.tests",
-        "wave": 9
+        "rank": 128,
+        "unit_key": "application.tests",
+        "wave": 8
+      },
+      {
+        "dependents": 0,
+        "disposition": "CONFIGURE",
+        "rank": 129,
+        "unit_key": "service.tests",
+        "wave": 8
       },
       {
         "dependents": 3,
         "disposition": "EXTEND",
-        "rank": 117,
+        "rank": 130,
         "unit_key": "intelligence.kernel",
         "wave": 9
       },
       {
-        "dependents": 3,
-        "disposition": "EXTEND",
-        "rank": 118,
-        "unit_key": "platform.validation_intelligence",
-        "wave": 9
-      },
-      {
-        "dependents": 2,
-        "disposition": "EXTEND",
-        "rank": 119,
-        "unit_key": "intelligence.research",
-        "wave": 9
-      },
-      {
-        "dependents": 2,
-        "disposition": "EXTEND",
-        "rank": 120,
-        "unit_key": "platform.universal_validation",
-        "wave": 9
-      },
-      {
         "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 121,
-        "unit_key": "service",
-        "wave": 9
-      },
-      {
-        "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 122,
-        "unit_key": "platform.repository_intelligence",
-        "wave": 9
-      },
-      {
-        "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 123,
-        "unit_key": "data",
-        "wave": 9
-      },
-      {
-        "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 124,
-        "unit_key": "infrastructure",
-        "wave": 9
-      },
-      {
-        "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 125,
-        "unit_key": "intelligence.publication",
-        "wave": 9
-      },
-      {
-        "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 126,
-        "unit_key": "application",
-        "wave": 9
-      },
-      {
-        "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 127,
-        "unit_key": "intelligence.realization",
-        "wave": 9
-      },
-      {
-        "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 128,
-        "unit_key": "platform.commercial_intelligence",
-        "wave": 9
-      },
-      {
-        "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 129,
-        "unit_key": "platform.universal_assurance",
-        "wave": 9
-      },
-      {
-        "dependents": 1,
-        "disposition": "EXTEND",
-        "rank": 130,
-        "unit_key": "platform.runtime_operations",
-        "wave": 9
-      },
-      {
-        "dependents": 0,
         "disposition": "EXTEND",
         "rank": 131,
-        "unit_key": "engine.uicm",
+        "unit_key": "intelligence.realization",
         "wave": 9
       },
       {
         "dependents": 0,
         "disposition": "CONFIGURE",
         "rank": 132,
-        "unit_key": "application.tests",
-        "wave": 9
-      },
-      {
-        "dependents": 0,
-        "disposition": "CONFIGURE",
-        "rank": 133,
         "unit_key": "data.tests",
         "wave": 9
       },
       {
         "dependents": 0,
         "disposition": "CONFIGURE",
-        "rank": 134,
+        "rank": 133,
         "unit_key": "infrastructure.tests",
         "wave": 9
       },
       {
         "dependents": 0,
         "disposition": "CONFIGURE",
-        "rank": 135,
-        "unit_key": "intelligence.tests",
+        "rank": 134,
+        "unit_key": "platform.tests",
         "wave": 9
       },
       {
-        "dependents": 0,
-        "disposition": "CONFIGURE",
+        "dependents": 2,
+        "disposition": "EXTEND",
+        "rank": 135,
+        "unit_key": "intelligence.research",
+        "wave": 10
+      },
+      {
+        "dependents": 1,
+        "disposition": "EXTEND",
         "rank": 136,
-        "unit_key": "platform.tests",
-        "wave": 9
+        "unit_key": "intelligence.publication",
+        "wave": 11
       },
       {
         "dependents": 0,
         "disposition": "CONFIGURE",
         "rank": 137,
-        "unit_key": "service.tests",
-        "wave": 9
+        "unit_key": "intelligence.tests",
+        "wave": 12
       }
     ],
     "queued_total": 137,
@@ -5572,6 +5515,7 @@
         "blocked_by": [
           "engine.compiler",
           "engine.construct",
+          "engine.graph",
           "engine.kernel",
           "engine.registry",
           "engine.uckp",
@@ -5580,9 +5524,10 @@
           "platform.observability",
           "platform.universal_truth"
         ],
-        "parallel": 9,
+        "parallel": 10,
         "units": [
           "engine",
+          "engine.context",
           "engine.determinism",
           "platform.coverage",
           "platform.measurement",
@@ -5597,6 +5542,11 @@
       {
         "blocked_by": [
           "engine.certification",
+          "engine.compiler",
+          "engine.context",
+          "engine.registry",
+          "engine.temporal",
+          "engine.uckp",
           "engine.validation",
           "platform.foundation",
           "platform.identity",
@@ -5607,8 +5557,10 @@
           "platform.universal_truth",
           "platform.workspace"
         ],
-        "parallel": 5,
+        "parallel": 7,
         "units": [
+          "engine.ceu",
+          "engine.knowledge",
           "platform.administration",
           "platform.certification",
           "platform.projects",
@@ -5619,6 +5571,15 @@
       },
       {
         "blocked_by": [
+          "engine.acceptance",
+          "engine.certification",
+          "engine.ceu",
+          "engine.compiler",
+          "engine.context",
+          "engine.knowledge",
+          "engine.registry",
+          "engine.uckp",
+          "engine.validation",
           "platform.administration",
           "platform.certification",
           "platform.coverage",
@@ -5634,8 +5595,10 @@
           "platform.validation",
           "platform.workspace"
         ],
-        "parallel": 3,
+        "parallel": 5,
         "units": [
+          "engine.nucleus",
+          "engine.runtime",
           "platform.blueprints",
           "platform.universal_foundation",
           "platform.universal_portal"
@@ -5644,54 +5607,69 @@
       },
       {
         "blocked_by": [
+          "engine.acceptance",
+          "engine.certification",
+          "engine.compiler",
+          "engine.determinism",
+          "engine.nucleus",
+          "engine.registry",
+          "engine.runtime",
+          "engine.uckp",
+          "engine.validation",
           "platform.blueprints",
+          "platform.certification",
           "platform.foundation",
           "platform.identity",
           "platform.observability",
           "platform.universal_foundation",
           "platform.workspace"
         ],
-        "parallel": 2,
+        "parallel": 15,
         "units": [
+          "application",
+          "data",
+          "engine.constitution",
+          "engine.factory",
+          "engine.governance",
+          "engine.universal_certification",
+          "infrastructure",
+          "platform.commercial_intelligence",
           "platform.generation",
-          "platform.universal_generator"
+          "platform.repository_operations",
+          "platform.runtime_operations",
+          "platform.universal_generator",
+          "platform.universal_validation",
+          "platform.validation_intelligence",
+          "service"
         ],
         "wave": 7
       },
       {
         "blocked_by": [
-          "platform.blueprints",
-          "platform.foundation",
-          "platform.generation",
-          "platform.identity",
-          "platform.observability",
-          "platform.workspace"
-        ],
-        "parallel": 2,
-        "units": [
-          "platform.artifact_explorer",
-          "platform.execution_dashboard"
-        ],
-        "wave": 8
-      },
-      {
-        "blocked_by": [
+          "application",
           "engine",
           "engine.acceptance",
           "engine.certification",
           "engine.certification_integrity",
+          "engine.ceu",
           "engine.civilization",
           "engine.compiler",
           "engine.conformance",
+          "engine.constitution",
           "engine.construct",
+          "engine.context",
           "engine.determinism",
           "engine.discovery",
           "engine.enforcement_closure",
           "engine.execution_environment",
+          "engine.factory",
+          "engine.governance",
           "engine.graph",
           "engine.infinite_scope",
           "engine.kernel",
+          "engine.knowledge",
           "engine.lineage",
+          "engine.nucleus",
           "engine.object_birth",
           "engine.omega_governance",
           "engine.omega_infinite",
@@ -5699,21 +5677,63 @@
           "engine.registry",
           "engine.registry_coverage",
           "engine.root_ontology",
+          "engine.runtime",
           "engine.substrate",
           "engine.temporal",
           "engine.uaue",
           "engine.uckp",
+          "engine.universal_certification",
           "engine.universal_discovery",
           "engine.validation",
           "engine.verification_impact",
           "engine.verification_intelligence",
           "engine.zero_class",
-          "intelligence",
+          "platform.blueprints",
+          "platform.foundation",
+          "platform.generation",
+          "platform.identity",
+          "platform.observability",
+          "platform.repository_operations",
+          "platform.universal_validation",
+          "platform.validation_intelligence",
+          "platform.workspace",
+          "service"
+        ],
+        "parallel": 9,
+        "units": [
+          "application.tests",
+          "engine.tests",
+          "engine.uicm",
+          "intelligence.rie",
+          "platform.artifact_explorer",
+          "platform.execution_dashboard",
+          "platform.repository_intelligence",
+          "platform.universal_assurance",
+          "service.tests"
+        ],
+        "wave": 8
+      },
+      {
+        "blocked_by": [
+          "data",
+          "engine",
+          "engine.certification",
+          "engine.knowledge",
+          "engine.registry",
+          "engine.runtime",
+          "engine.tests",
+          "engine.uckp",
+          "engine.universal_certification",
+          "engine.universal_discovery",
+          "engine.validation",
+          "infrastructure",
           "intelligence.realization.generators",
+          "intelligence.rie",
           "platform.administration",
           "platform.artifact_explorer",
           "platform.blueprints",
           "platform.certification",
+          "platform.commercial_intelligence",
           "platform.coverage",
           "platform.execution_dashboard",
           "platform.foundation",
@@ -5723,9 +5743,13 @@
           "platform.observability",
           "platform.portal",
           "platform.projects",
+          "platform.repository_intelligence",
+          "platform.repository_operations",
+          "platform.runtime_operations",
           "platform.runtime_platform",
           "platform.security",
           "platform.universal_assimilation",
+          "platform.universal_assurance",
           "platform.universal_control_plane",
           "platform.universal_foundation",
           "platform.universal_generator",
@@ -5737,46 +5761,58 @@
           "platform.universal_project_state",
           "platform.universal_provider",
           "platform.universal_truth",
+          "platform.universal_validation",
           "platform.validation",
+          "platform.validation_intelligence",
           "platform.workspace"
         ],
-        "parallel": 33,
+        "parallel": 5,
         "units": [
-          "application",
-          "application.tests",
-          "data",
           "data.tests",
-          "engine.ceu",
-          "engine.constitution",
-          "engine.context",
-          "engine.factory",
-          "engine.governance",
-          "engine.knowledge",
-          "engine.nucleus",
-          "engine.runtime",
-          "engine.tests",
-          "engine.uicm",
-          "engine.universal_certification",
-          "infrastructure",
           "infrastructure.tests",
+          "intelligence.kernel",
+          "intelligence.realization",
+          "platform.tests"
+        ],
+        "wave": 9
+      },
+      {
+        "blocked_by": [
+          "engine.knowledge",
+          "intelligence.kernel"
+        ],
+        "parallel": 1,
+        "units": [
+          "intelligence.research"
+        ],
+        "wave": 10
+      },
+      {
+        "blocked_by": [
+          "intelligence.kernel",
+          "intelligence.research"
+        ],
+        "parallel": 1,
+        "units": [
+          "intelligence.publication"
+        ],
+        "wave": 11
+      },
+      {
+        "blocked_by": [
+          "engine.knowledge",
+          "intelligence",
           "intelligence.kernel",
           "intelligence.publication",
           "intelligence.realization",
           "intelligence.research",
-          "intelligence.rie",
-          "intelligence.tests",
-          "platform.commercial_intelligence",
-          "platform.repository_intelligence",
-          "platform.repository_operations",
-          "platform.runtime_operations",
-          "platform.tests",
-          "platform.universal_assurance",
-          "platform.universal_validation",
-          "platform.validation_intelligence",
-          "service",
-          "service.tests"
+          "intelligence.rie"
         ],
-        "wave": 9
+        "parallel": 1,
+        "units": [
+          "intelligence.tests"
+        ],
+        "wave": 12
       }
     ]
   },
@@ -5853,7 +5889,7 @@
     "untracked": "UCOS-OBS-000003",
     "working_tree": "UCOS-OBS-000003"
   },
-  "seal_sha256": "32093576549932d7084035bf76a8bd20f8941d72eeec97e03da86231f2c69178",
+  "seal_sha256": "e356d313f692001615e52cbf527d449f2dd0bf0d7292bc071f049e55253ad426",
   "severities": [
     {
       "definition": "the repository cannot proceed: a blocking gate over repository integrity, cleanliness, discovery or dependency closure is failing",
@@ -21541,7 +21577,7 @@
         "engine.foundation",
         "engine.uckp"
       ],
-      "dependents": 34,
+      "dependents": 29,
       "disposition": "EXTEND",
       "disposition_reason": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
       "disposition_rule": "RUL-09",
@@ -21631,7 +21667,7 @@
         "engine.foundation",
         "engine.uckp"
       ],
-      "dependents": 35,
+      "dependents": 30,
       "disposition": "EXTEND",
       "disposition_reason": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
       "disposition_rule": "RUL-09",
@@ -22252,13 +22288,14 @@
         "engine.ceu",
         "engine.knowledge",
         "engine.nucleus",
+        "engine.runtime",
         "engine.tests"
       ],
-      "consumers": 4,
+      "consumers": 5,
       "corpus_artifacts": 0,
       "declared": "engine.context",
       "degree": 26,
-      "dependencies": 22,
+      "dependencies": 21,
       "dependency_units": [
         "engine.compiler",
         "engine.context.catalog",
@@ -22280,10 +22317,9 @@
         "engine.foundation",
         "engine.graph",
         "engine.registry",
-        "engine.runtime",
         "engine.uckp"
       ],
-      "dependents": 33,
+      "dependents": 32,
       "disposition": "EXTEND",
       "disposition_reason": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
       "disposition_rule": "RUL-09",
@@ -22308,7 +22344,7 @@
         "PLN-MODULE"
       ],
       "program": "engine",
-      "providers": 22,
+      "providers": 21,
       "reachable": true,
       "reachable_by": [
         "consumers",
@@ -23626,7 +23662,7 @@
         "engine.temporal",
         "engine.uckp"
       ],
-      "dependents": 33,
+      "dependents": 28,
       "disposition": "EXTEND",
       "disposition_reason": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
       "disposition_rule": "RUL-09",
@@ -24785,7 +24821,6 @@
       "consumer_units": [
         "application",
         "data",
-        "engine.context",
         "engine.factory",
         "engine.factory.orchestrator",
         "engine.governance",
@@ -24810,15 +24845,16 @@
         "service",
         "service.tests"
       ],
-      "consumers": 26,
+      "consumers": 25,
       "corpus_artifacts": 0,
       "declared": "engine.runtime",
       "degree": 41,
-      "dependencies": 15,
+      "dependencies": 16,
       "dependency_units": [
         "engine.acceptance",
         "engine.certification",
         "engine.compiler",
+        "engine.context",
         "engine.foundation",
         "engine.knowledge",
         "engine.runtime.assembly",
@@ -24832,7 +24868,7 @@
         "engine.runtime.planner",
         "engine.validation"
       ],
-      "dependents": 33,
+      "dependents": 27,
       "disposition": "EXTEND",
       "disposition_reason": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
       "disposition_rule": "RUL-09",
@@ -24855,7 +24891,7 @@
         "PLN-MODULE"
       ],
       "program": "engine",
-      "providers": 15,
+      "providers": 16,
       "reachable": true,
       "reachable_by": [
         "consumers",
@@ -25117,7 +25153,7 @@
         "engine.temporal.facets",
         "engine.temporal.operations"
       ],
-      "dependents": 33,
+      "dependents": 29,
       "disposition": "EXTEND",
       "disposition_reason": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
       "disposition_rule": "RUL-09",
@@ -27267,7 +27303,7 @@
         "engine.validation.executor",
         "engine.validation.gates"
       ],
-      "dependents": 36,
+      "dependents": 31,
       "disposition": "EXTEND",
       "disposition_reason": "the unit is implemented and consumed but lies outside the declared verification scope, so the surface it must still provide is its own verification binding",
       "disposition_rule": "RUL-09",
@@ -31881,10 +31917,10 @@
       "criterion": "no cycle of a non-benign declared class is present in any plane",
       "expect": 0,
       "id": "VER-08",
-      "measured": 1,
+      "measured": 0,
       "metric": "architectural_cycles",
       "name": "No circular dependency",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     {
       "criterion": "no unit is unreachable in every declared reachability dimension",
