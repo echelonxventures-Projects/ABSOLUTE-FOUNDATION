@@ -159,7 +159,7 @@
       "kind": "knowledge-object",
       "name": "Canonical knowledge objects",
       "note": "Knowledge Once: extracted knowledge is registered here, never in a register this programme writes",
-      "objects": 143,
+      "objects": 158,
       "pointer": "objects",
       "provider": "PRV-KNOWLEDGE",
       "providers_matched": 1,
@@ -709,7 +709,7 @@
     "capabilities_created": 0,
     "capabilities_unowned": 0,
     "cko_identity_collisions": 0,
-    "ckos_discovered": 4416,
+    "ckos_discovered": 4431,
     "ckos_of_unknown_kind": 0,
     "ckos_without_semantic_identity": 0,
     "closed_enumerations_declared": 0,
@@ -1611,7 +1611,7 @@
       "measure": "ckos_discovered",
       "measured": true,
       "reusable_as": "a composable object graph any further measurement reads without re-parsing its owners",
-      "value": 4416
+      "value": 4431
     },
     {
       "id": "EK-05",
@@ -5669,7 +5669,7 @@
       "subject_located": true
     }
   ],
-  "graph_digest": "00229b2b86f2deef0dc9a42a6ef586370b1f8cd05e6a751d4a3d272b767964a4",
+  "graph_digest": "8a59eb3ab763818ab706471989eac3d83e0272c957d461d7b0fc29caa5a0a265",
   "graphs": [
     {
       "composed": true,
@@ -6048,7 +6048,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 143,
+        "measure_value": 158,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6056,7 +6056,7 @@
       "invariant": "Universal Knowledge Discovery",
       "measure": "counters.knowledge_objects_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 143,
+      "measure_value": 158,
       "ordinal": 40,
       "owner": "00-BOOK/MASTER-BOOK/UMB-006-KNOWLEDGE-GRAPH-ARCHITECTURE.md",
       "properties": {
@@ -6330,7 +6330,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 148,
+        "measure_value": 151,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -6338,7 +6338,7 @@
       "invariant": "Universal Alternative Strategy Generation",
       "measure": "decision_total",
       "measure_source": "00-MASTER/UCDA-000001/ucda.json",
-      "measure_value": 148,
+      "measure_value": 151,
       "ordinal": 100,
       "owner": "00-MASTER/UCOS-AEE-001/aee-declaration.json",
       "properties": {
@@ -7176,7 +7176,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 143,
+        "measure_value": 158,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7184,7 +7184,7 @@
       "invariant": "Universal Knowledge Registration",
       "measure": "count",
       "measure_source": "knowledge/canonical-knowledge.json",
-      "measure_value": 143,
+      "measure_value": 158,
       "ordinal": 280,
       "owner": "knowledge/canonical-knowledge.json",
       "properties": {
@@ -7693,7 +7693,7 @@
         "measure_declared": true,
         "measure_located": true,
         "measure_met": true,
-        "measure_value": 532,
+        "measure_value": 547,
         "outside_own_home": true,
         "owner_located": true,
         "properties_unmet": false
@@ -7701,7 +7701,7 @@
       "invariant": "Universal Engineering Capability Elevation",
       "measure": "counters.relationship_ckos_discovered",
       "measure_source": "00-MASTER/UCL-000001/ucl.json",
-      "measure_value": 532,
+      "measure_value": 547,
       "ordinal": 390,
       "owner": "00-MASTER/UCL-000001/ucl-declaration.json",
       "properties": {
@@ -24153,7 +24153,7 @@
       "target_identified": true
     }
   ],
-  "seal_sha256": "755dfb399c6da16aef5fee234f90b82784e96616a3754f7a9b2bd9e2b30d9ce0",
+  "seal_sha256": "a22886fb02de371d722978a5519f7e2ede167e116def652e677cb06bb481cd65",
   "self_evolution": [
     {
       "anchor": "determination",

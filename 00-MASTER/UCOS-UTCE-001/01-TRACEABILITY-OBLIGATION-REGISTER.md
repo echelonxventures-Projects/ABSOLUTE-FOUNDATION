@@ -8,19 +8,19 @@ therefore undischargeable until the vocabulary owner adds one.
 
 | Lane | Populated | Unevidenced | Collection labels (located) | Obligation class |
 |---|---|---|---|---|
-| `requirement` | 94 | 1564 | `AUTHORITY`, `AUTHORITIES`, `AUTHORIZED-BY`, `GOVERNED-BY`, `TRACES-TO`, `TRACES TO` | DISCHARGEABLE |
-| `architecture` | 1657 | 1 | `PARENT`, `DEPENDS-ON`, `DEPENDS ON`, `IMPLEMENTS`, `REALIZES`, `CONSUMES`, `USES`, `READS` | DISCHARGEABLE |
-| `design` | 0 | 1658 | — none | MECHANISM-ABSENT |
-| `implementation` | 17 | 1641 | `IMPLEMENTS`, `REALIZES` | DISCHARGEABLE |
-| `source_code` | 0 | 1658 | — none | MECHANISM-ABSENT |
-| `unit_test` | 0 | 1658 | `TESTS` | DISCHARGEABLE |
-| `integration_test` | 0 | 1658 | — none | MECHANISM-ABSENT |
-| `functional_test` | 0 | 1658 | — none | MECHANISM-ABSENT |
-| `security_test` | 0 | 1658 | `SECURES` | DISCHARGEABLE |
-| `certification` | 0 | 1658 | `CERTIFIES` | DISCHARGEABLE |
-| `deployment` | 0 | 1658 | `DEPLOYS` | DISCHARGEABLE |
-| `production` | 0 | 1658 | `PRODUCES`, `EMITS`, `WRITES`, `PUBLISHES` | DISCHARGEABLE |
-| `operations` | 0 | 1658 | — none | MECHANISM-ABSENT |
+| `requirement` | 94 | 1590 | `AUTHORITY`, `AUTHORITIES`, `AUTHORIZED-BY`, `GOVERNED-BY`, `TRACES-TO`, `TRACES TO` | DISCHARGEABLE |
+| `architecture` | 1683 | 1 | `PARENT`, `DEPENDS-ON`, `DEPENDS ON`, `IMPLEMENTS`, `REALIZES`, `CONSUMES`, `USES`, `READS` | DISCHARGEABLE |
+| `design` | 0 | 1684 | — none | MECHANISM-ABSENT |
+| `implementation` | 17 | 1667 | `IMPLEMENTS`, `REALIZES` | DISCHARGEABLE |
+| `source_code` | 0 | 1684 | — none | MECHANISM-ABSENT |
+| `unit_test` | 0 | 1684 | `TESTS` | DISCHARGEABLE |
+| `integration_test` | 0 | 1684 | — none | MECHANISM-ABSENT |
+| `functional_test` | 0 | 1684 | — none | MECHANISM-ABSENT |
+| `security_test` | 0 | 1684 | `SECURES` | DISCHARGEABLE |
+| `certification` | 0 | 1684 | `CERTIFIES` | DISCHARGEABLE |
+| `deployment` | 0 | 1684 | `DEPLOYS` | DISCHARGEABLE |
+| `production` | 0 | 1684 | `PRODUCES`, `EMITS`, `WRITES`, `PUBLISHES` | DISCHARGEABLE |
+| `operations` | 0 | 1684 | — none | MECHANISM-ABSENT |
 
 ## Obligation classes
 

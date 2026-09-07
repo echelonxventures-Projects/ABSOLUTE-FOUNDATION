@@ -748,7 +748,7 @@
       "rule": "a baseline shall be recomputable and shall yield a byte-identical result on recomputation"
     }
   ],
-  "seal_sha256": "94e5c6ad438ddc2c53cfa0088767f14a6773f1132b06abd85913d9205c391f12",
+  "seal_sha256": "4a7759434ff0f47297e027dd0d5c210bac11c2f59b84892fb8fccf84cda5a090",
   "unrecorded_citations": [],
   "validations": [
     {
@@ -916,7 +916,7 @@
       "dimension": "VERSION-SUCCEEDED",
       "failure_count": 1,
       "failures": [
-        "UCKP-LAW-0001: no universal identity resolves for its path"
+        "UCKP-LAW-0001: no recorded increment reaches its version"
       ],
       "id": "BLN-VAL-17",
       "measured": true,
@@ -1044,7 +1044,7 @@
     },
     {
       "id": "UCKP-LAW-0001",
-      "identity": null,
+      "identity": "UCOS-ENGINE-000496",
       "increment_recorded": false,
       "version": "1.0.0"
     }

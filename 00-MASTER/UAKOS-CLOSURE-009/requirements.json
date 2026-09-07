@@ -12,12 +12,12 @@
   "baseline": {
     "branch": "integration/recovery-001",
     "classifier_source": "00-BOOK/tools/config.py::CLASSIFY_RULES",
-    "closure_baseline_commit": "38b2573f",
+    "closure_baseline_commit": "1713d64d",
     "closure_determination": "CLOSED",
     "closure_gap_total": 0,
     "concept_total": 549,
-    "head_commit": "38b2573f",
-    "tracked_total": 7133
+    "head_commit": "ef2ad9b2",
+    "tracked_total": 7134
   },
   "baseline_conditions": [
     {
@@ -34510,7 +34510,7 @@
       "volume": "UNCLASSIFIED"
     }
   ],
-  "seal_sha256": "45792c637b28c17d8404d3e728b5cc7858d0fc2523c5a87acd0deb685c44b0f3",
+  "seal_sha256": "9eaa6b4980da13819e5ee35b5b5450c4995b81e22277d7640392695237b4bda7",
   "systemic_findings": [
     {
       "id": "RG-S01",

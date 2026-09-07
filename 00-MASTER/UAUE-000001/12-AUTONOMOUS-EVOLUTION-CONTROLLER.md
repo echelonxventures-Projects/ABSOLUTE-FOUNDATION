@@ -91,10 +91,8 @@ The controller traverses every position for every candidate with no phase-specif
 | 0e10c3f5f9f0abd7 | security | 3 | 8 | PASS | 238ed1e426733643 |
 | 0e25120f16c01f54 | unit_testing | 3 | 8 | PASS | 7a8204ed25015cd2 |
 | 079e11b7b2d68751 | 00-MASTER/UCCEP-000000/uccep_engine.py | 3 | 8 | PASS | 1fe9cef778a8024b |
-| 4db0dbdd7d5471b3 | 00-MASTER/UCDA-000001/ucda_engine.py | 3 | 8 | PASS | 4b37ce729722d224 |
-| 3fa966a80261690a | 00-MASTER/UCDA-000001/ucda_engine.py | 3 | 8 | PASS | a850d70f1149d2a6 |
-| dc965d04c4abe77a | Band 10 Data | 3 | 8 | PASS | 943e947a5eeadfdb |
-| 61fa784b5a8e8810 | Band 11 Service | 3 | 8 | PASS | 6ad2c9d6cb298b87 |
-| 145935a0f818b48c | Band 12 Application | 3 | 8 | PASS | ae0a9269753d7140 |
-| 78f1211714e3c036 | Band 13 Infrastructure | 3 | 8 | PASS | 621cc8be0e81e9aa |
-| b5c969abacde4b5a | EC-3 go-live + closure | 3 | 8 | PASS | 1dced51ce65b05b6 |
+| 1a06f14072c5d848 | Band 10 Data | 3 | 8 | PASS | 943e947a5eeadfdb |
+| fe2cb86f2d0c2d15 | Band 11 Service | 3 | 8 | PASS | 6ad2c9d6cb298b87 |
+| ebf27a9430f6ed7d | Band 12 Application | 3 | 8 | PASS | ae0a9269753d7140 |
+| 21327c10cd6841b6 | Band 13 Infrastructure | 3 | 8 | PASS | 621cc8be0e81e9aa |
+| 2fe48fe63b0522ad | EC-3 go-live + closure | 3 | 8 | PASS | 1dced51ce65b05b6 |

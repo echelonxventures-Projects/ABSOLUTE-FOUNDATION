@@ -76,8 +76,6 @@ What discovery found, from which owner's measurement, and why each is a candidat
 | UCOS-EVO-4558c739d7bb | OPTIMIZATION | security | 11 | PASS | — |
 | UCOS-EVO-f4a33f0bce39 | OPTIMIZATION | unit_testing | 11 | PASS | — |
 | UCOS-EVO-421db2ae4476 | GOVERNANCE_FINDING | 00-MASTER/UCCEP-000000/uccep_engine.py | 11 | PASS | — |
-| UCOS-EVO-23b67bb0e45c | GOVERNANCE_FINDING | 00-MASTER/UCDA-000001/ucda_engine.py | 11 | PASS | — |
-| UCOS-EVO-5413fa082340 | GOVERNANCE_FINDING | 00-MASTER/UCDA-000001/ucda_engine.py | 11 | PASS | — |
 | UCOS-EVO-64207389482b | RELATIONSHIP | Band 10 Data | 11 | PASS | — |
 | UCOS-EVO-ddcaa436507b | RELATIONSHIP | Band 11 Service | 11 | PASS | — |
 | UCOS-EVO-83200db91042 | RELATIONSHIP | Band 12 Application | 11 | PASS | — |

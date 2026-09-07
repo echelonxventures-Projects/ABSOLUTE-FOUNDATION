@@ -37,7 +37,7 @@ compliance.
 
 ### `BLN-VAL-17` VERSION-SUCCEEDED
 
-- UCKP-LAW-0001: no universal identity resolves for its path
+- UCKP-LAW-0001: no recorded increment reaches its version
 
 ### `BLN-VAL-26` CAPABILITY-DISCHARGED
 

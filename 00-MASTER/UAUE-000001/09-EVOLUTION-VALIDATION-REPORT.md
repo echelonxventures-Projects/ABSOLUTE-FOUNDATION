@@ -71,8 +71,6 @@
 | UCOS-EVO-4558c739d7bb | security | PASS | every criterion satisfied |
 | UCOS-EVO-f4a33f0bce39 | unit_testing | PASS | every criterion satisfied |
 | UCOS-EVO-421db2ae4476 | 00-MASTER/UCCEP-000000/uccep_engine.py | PASS | every criterion satisfied |
-| UCOS-EVO-23b67bb0e45c | 00-MASTER/UCDA-000001/ucda_engine.py | PASS | every criterion satisfied |
-| UCOS-EVO-5413fa082340 | 00-MASTER/UCDA-000001/ucda_engine.py | PASS | every criterion satisfied |
 | UCOS-EVO-64207389482b | Band 10 Data | PASS | every criterion satisfied |
 | UCOS-EVO-ddcaa436507b | Band 11 Service | PASS | every criterion satisfied |
 | UCOS-EVO-83200db91042 | Band 12 Application | PASS | every criterion satisfied |
@@ -83,9 +81,9 @@
 
 | Criterion | Satisfied | Measured | Verdict |
 |---|---|---|---|
-| AUE-VAL-01 | 54 | 54 | PASS |
-| AUE-VAL-02 | 54 | 54 | PASS |
-| AUE-VAL-03 | 54 | 54 | PASS |
-| AUE-VAL-04 | 54 | 54 | PASS |
-| AUE-VAL-05 | 54 | 54 | PASS |
-| AUE-VAL-06 | 54 | 54 | PASS |
+| AUE-VAL-01 | 52 | 52 | PASS |
+| AUE-VAL-02 | 52 | 52 | PASS |
+| AUE-VAL-03 | 52 | 52 | PASS |
+| AUE-VAL-04 | 52 | 52 | PASS |
+| AUE-VAL-05 | 52 | 52 | PASS |
+| AUE-VAL-06 | 52 | 52 | PASS |

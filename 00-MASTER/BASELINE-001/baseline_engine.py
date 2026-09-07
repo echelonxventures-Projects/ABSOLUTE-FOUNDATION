@@ -282,6 +282,26 @@ def read_json_collection(owner: str, pointer: str) -> tuple[list[dict], str | No
     return [entry for entry in collection if isinstance(entry, dict)], None
 
 
+def read_json_mapping(owner: str, pointer: str) -> tuple[dict[str, dict], str | None]:
+    """Read a PATH-KEYED MAPPING source, the shape the object ledger uses.
+
+    read_json_collection requires a list, and the identity of an executable object is not
+    held in one. 00-BOOK/DATA/id-ledger.json keys by_object BY PATH, so a source declared
+    against it needs this shape rather than a collection pointer.
+    """
+    text = read_text(owner)
+    if text is None:
+        return {}, f"owner does not resolve: {owner}"
+    try:
+        document = json.loads(text)
+    except json.JSONDecodeError as exc:
+        return {}, f"owner is not valid JSON: {exc}"
+    mapping = document.get(pointer)
+    if not isinstance(mapping, dict):
+        return {}, f"pointer does not resolve to a mapping: {pointer}"
+    return {k: v for k, v in mapping.items() if isinstance(v, dict)}, None
+
+
 def read_json_pointer(owner: str, pointer: str) -> tuple[str | None, str | None]:
     """Read a dotted path out of a located JSON declaration. Never raises."""
     text = read_text(owner)
@@ -643,7 +663,28 @@ def measure_versions(document: dict) -> tuple[list[dict], list[str], list[str]]:
         identity["owner"], identity["collection_pointer"]
     )
     events, ledger_reason = read_json_collection(ledger["owner"], ledger["collection_pointer"])
-    problems: list[str] = []
+    # THE CORPUS REGISTRY CANNOT HOLD AN EXECUTABLE OBJECT, AND UCKP-LAW-0001 IS ONE.
+    # `identity` resolves paths through 00-BOOK/DATA/artifacts.json, whose registration
+    # boundary admits .md/.txt/.docx/.json and excludes .py by declaration — measured, zero
+    # of its 1684 artifacts are .py. So BLN-VAL-17 asked whether the supreme law's path
+    # resolved to a universal identity in the one map that structurally can never contain
+    # it, and reported "no universal identity resolves for its path" about an object that
+    # HAS one: engine/uckp/law.py is UCOS-ENGINE-000496 in the ledger's by_object map.
+    # The second source is declared rather than hardcoded, and absence of the map is a
+    # reason like any other rather than a silent empty merge.
+    executable = document["version_sources"].get("executable_identity")
+    executable_ids: dict[str, dict] = {}
+    if executable:
+        executable_ids, executable_reason = read_json_mapping(
+            executable["owner"], executable["collection_pointer"]
+        )
+        if executable_reason:
+            problems_pre = f"{executable['id']}: {executable_reason}"
+        else:
+            problems_pre = ""
+    else:
+        problems_pre = ""
+    problems: list[str] = [problems_pre] if problems_pre else []
     for reason, source in (
         (artifact_reason, constitutional),
         (identity_reason, identity),
@@ -655,6 +696,10 @@ def measure_versions(document: dict) -> tuple[list[dict], list[str], list[str]]:
         str(entry.get(identity["path_field"])): str(entry.get(identity["id_field"]))
         for entry in identities
     }
+    for path_key, record in executable_ids.items():
+        by_path.setdefault(
+            str(path_key), str(record.get(executable["id_field"])) if executable else ""
+        )
     increments: dict[str, set[str]] = {}
     for event in events:
         if str(event.get(ledger["kind_field"])) != ledger["increment_token"]:

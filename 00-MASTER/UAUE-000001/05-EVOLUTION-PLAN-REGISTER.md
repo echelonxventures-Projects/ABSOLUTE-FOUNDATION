@@ -80,8 +80,6 @@
 | UCOS-EVO-4fb15438797d | security | reason | 1cc4fe8d11bb3f06 | PASS | — |
 | UCOS-EVO-01b0b2c38b6f | unit_testing | reason | 5f8317675c8c9f4c | PASS | — |
 | UCOS-EVO-2d3b389f3d3b | 00-MASTER/UCCEP-000000/uccep_engine.py | reason | 164d43925e4caacf | PASS | — |
-| UCOS-EVO-279402b88764 | 00-MASTER/UCDA-000001/ucda_engine.py | reason | 60e9b5af07ad7ae4 | PASS | — |
-| UCOS-EVO-d637a7bb9108 | 00-MASTER/UCDA-000001/ucda_engine.py | reason | aacc17fb6acd29ba | PASS | — |
 | UCOS-EVO-e62d1328b493 | Band 10 Data | reason | 8f49647860101ded | PASS | — |
 | UCOS-EVO-56ba8c454b63 | Band 11 Service | reason | 7137e8895303f3bd | PASS | — |
 | UCOS-EVO-c940b6debdf9 | Band 12 Application | reason | 4ec2c99d4961fad4 | PASS | — |
