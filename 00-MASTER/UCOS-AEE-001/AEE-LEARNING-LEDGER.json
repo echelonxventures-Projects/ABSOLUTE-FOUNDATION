@@ -22,7 +22,7 @@
     },
     "ACT-DECISION-ASSIMILATION": {
       "residue_total_observation": "UCOS-OBS-000001",
-      "verdict": "PASS",
+      "verdict": "FAIL",
       "zones_exercised": []
     },
     "ACT-EVOLUTION-FRAMEWORK": {
@@ -87,19 +87,36 @@
     }
   },
   "convergence": {
-    "determination": "CONVERGED-PROVISIONAL",
-    "iteration_total": 2,
-    "stable_iterations": 2,
+    "determination": "NOT-CONVERGED",
+    "iteration_total": 4,
+    "stable_iterations": 4,
     "vector_digests": [
-      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b",
-      "bab3039c86f8b1a0cb6686316db57a4708403795beac403b74034d8d4c1e716b"
+      "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6",
+      "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6",
+      "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6",
+      "f5defa27196b1ade7384f90dd2d96d19d2558406215e22bc66493bfd206d82a6"
     ]
   },
   "decision": {
+    "ACT-DECISION-ASSIMILATION": {
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "rule": "CR-ACTUATOR-FAILURE"
+    },
     "OBS-AGGREGATE-CEILING": {
       "class": "Constitutional amendment",
       "decision": "ESCALATE",
       "rule": "CR-ESCALATED-CEILING"
+    },
+    "OBS-BLUEPRINT-GATE": {
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "rule": "CR-BLOCKING-REGRESSION"
+    },
+    "OBS-DECISION-GATE": {
+      "class": "Defect correction",
+      "decision": "IMPLEMENT",
+      "rule": "CR-BLOCKING-REGRESSION"
     }
   },
   "dimensions": [
@@ -364,8 +381,8 @@
       "verdict": "SATISFIED"
     },
     "OBS-BLUEPRINT-GATE": {
-      "observed": "OPEN",
-      "verdict": "SATISFIED"
+      "observed": "CLOSED",
+      "verdict": "VIOLATED"
     },
     "OBS-CORPUS-CURRENCY": {
       "observed": "CORPUS CURRENT",
@@ -376,8 +393,8 @@
       "verdict": "SATISFIED"
     },
     "OBS-DECISION-GATE": {
-      "observed": "OPEN",
-      "verdict": "SATISFIED"
+      "observed": "CLOSED",
+      "verdict": "VIOLATED"
     },
     "OBS-DECISION-UNDISPOSITIONED": {
       "observed": [],

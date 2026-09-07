@@ -76,32 +76,32 @@ Per-dimension completeness, declared as a lower bound.
 **`DV-11`** — Traceability completeness across the thirteen traceability dimensions of every registered artifact.
 
 - **Primitive** — `subdict_fill_ratio`
-- **Result** — 1330/16029 dimension slots populated (8.29%) · 1232/1233 record(s) carry at least one trace (99.91%) · 0 record(s) fully traced · 1 with none
+- **Result** — 1794/21892 dimension slots populated (8.19%) · 1683/1684 record(s) carry at least one trace (99.94%) · 0 record(s) fully traced · 1 with none
 - **Substrate evidence** — `S-01`
 
 | Key | Value |
 |---|---|
-| records measured | 1233 |
-| dimension slots | 16029 |
-| slots populated | 1330 |
-| populated share (%) | 8.29 |
+| records measured | 1684 |
+| dimension slots | 21892 |
+| slots populated | 1794 |
+| populated share (%) | 8.19 |
 | records fully traced | 0 |
 | records with no trace | 1 |
-| records with at least one trace | 1232 |
-| traced-record share (%) | 99.91 |
-| dimension `architecture` | 1232/1233 |
-| dimension `certification` | 0/1233 |
-| dimension `deployment` | 0/1233 |
-| dimension `design` | 0/1233 |
-| dimension `functional_test` | 0/1233 |
-| dimension `implementation` | 17/1233 |
-| dimension `integration_test` | 0/1233 |
-| dimension `operations` | 0/1233 |
-| dimension `production` | 0/1233 |
-| dimension `requirement` | 81/1233 |
-| dimension `security_test` | 0/1233 |
-| dimension `source_code` | 0/1233 |
-| dimension `unit_test` | 0/1233 |
+| records with at least one trace | 1683 |
+| traced-record share (%) | 99.94 |
+| dimension `architecture` | 1683/1684 |
+| dimension `certification` | 0/1684 |
+| dimension `deployment` | 0/1684 |
+| dimension `design` | 0/1684 |
+| dimension `functional_test` | 0/1684 |
+| dimension `implementation` | 17/1684 |
+| dimension `integration_test` | 0/1684 |
+| dimension `operations` | 0/1684 |
+| dimension `production` | 0/1684 |
+| dimension `requirement` | 94/1684 |
+| dimension `security_test` | 0/1684 |
+| dimension `source_code` | 0/1684 |
+| dimension `unit_test` | 0/1684 |
 
 **`DV-20`** — Certification domains passed against domains declared.
 

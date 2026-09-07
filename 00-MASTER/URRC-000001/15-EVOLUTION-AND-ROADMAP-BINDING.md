@@ -124,12 +124,12 @@ Evolution and master-roadmap owners; executable-owner delta.
 **`DV-18`** — Programmes carrying a portfolio rollup.
 
 - **Primitive** — `record_count`
-- **Result** — 70 records
+- **Result** — 180 records
 - **Substrate evidence** — `S-03`
 
 | Key | Value |
 |---|---|
-| records | 70 |
+| records | 180 |
 
 
 ---

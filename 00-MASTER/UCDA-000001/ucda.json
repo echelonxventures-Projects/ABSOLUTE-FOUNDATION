@@ -1,7 +1,7 @@
 {
   "by_disposition": {
-    "IMPLEMENTED": 53,
-    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 32,
+    "IMPLEMENTED": 54,
+    "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE": 34,
     "REJECTED-WITH-CONSTITUTIONAL-JUSTIFICATION": 11,
     "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY": 48,
     "SUPERSEDED": 4
@@ -10,7 +10,7 @@
     "CERTIFICATION": 0,
     "CLOSURE": 25,
     "CONSTITUTIONAL-AGREEMENT": 0,
-    "DECISION-REGISTRATION": 14,
+    "DECISION-REGISTRATION": 17,
     "DISCUSSION": 0,
     "IMPLEMENTATION": 0,
     "REPOSITORY-MAPPING": 50,
@@ -19,13 +19,13 @@
   },
   "conversation_only": [],
   "coverage": {
-    "aggregate_percent": 92,
+    "aggregate_percent": 91,
     "by_criterion": {
-      "EQ-1": 51,
-      "EQ-2": 68,
-      "EQ-3": 67,
-      "EQ-4": 66,
-      "EQ-5": 67
+      "EQ-1": 54,
+      "EQ-2": 69,
+      "EQ-3": 70,
+      "EQ-4": 67,
+      "EQ-5": 70
     },
     "completeness_disposition": "REPRESENTED-BY-EXISTING-CANONICAL-CAPABILITY",
     "criteria": [
@@ -35,11 +35,11 @@
       "EQ-4",
       "EQ-5"
     ],
-    "decisions_fully_covered": 51,
-    "decisions_measured": 69,
-    "decisions_partially_covered": 18,
-    "dimensions_covered": 319,
-    "dimensions_measured": 345,
+    "decisions_fully_covered": 52,
+    "decisions_measured": 72,
+    "decisions_partially_covered": 20,
+    "dimensions_covered": 330,
+    "dimensions_measured": 360,
     "partially_covered": [
       "DEC-ADAM-01",
       "DEC-ADAM-02",
@@ -51,6 +51,8 @@
       "DEC-ADR-0006",
       "DEC-ADR-0038",
       "DEC-ADR-0039",
+      "DEC-ADR-0041",
+      "DEC-ADR-0042",
       "DEC-CAEM-01",
       "DEC-CAEM-02",
       "DEC-CAEM-05",
@@ -60,10 +62,10 @@
       "DEC-CAEM-14",
       "DEC-CAEM-16"
     ],
-    "representation_percent": 73,
+    "representation_percent": 72,
     "scope_decision_class": "architectural"
   },
-  "decision_total": 148,
+  "decision_total": 151,
   "decisions": [
     {
       "action_taken": "",
@@ -12907,13 +12909,293 @@
       "title": "Fourteen agnosticism axes, each proven, abstracted, bypassed or declared absent",
       "undispositioned": false,
       "work_package": "WP-W5-001"
+    },
+    {
+      "action_taken": "Built engine/conformance as one harness over a declared axis register, naming no technology, discovering implementations rather than reading a roster, resolving contracts from sys.modules and importing none. Six tests, two of which guard the design rather than the output. Landed under P-UCOS-UGA-005 and P-UCOS-UGA-006 at bb0012d8. Whether ENVELOPE_ONLY becomes a refusal is left open and is not taken by this decision.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": true,
+        "covered": 5,
+        "dimensions": [
+          {
+            "covered": true,
+            "criterion": "EQ-1",
+            "declared": [
+              "engine/conformance/measure.py"
+            ],
+            "resolved": [
+              "engine/conformance/measure.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-2",
+            "declared": [
+              "engine/conformance/axis-register.json"
+            ],
+            "resolved": [
+              "engine/conformance/axis-register.json"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "adr/0021-uap-001-universal-agnostic-architecture-principle.md"
+            ],
+            "resolved": [
+              "adr/0021-uap-001-universal-agnostic-architecture-principle.md"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-4",
+            "declared": [
+              "engine/tests/conformance/test_agnosticism_conformance.py"
+            ],
+            "resolved": [
+              "engine/tests/conformance/test_agnosticism_conformance.py"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/uckp/execution.py",
+              "engine/uckp/persistence.py"
+            ],
+            "resolved": [
+              "engine/uckp/execution.py",
+              "engine/uckp/persistence.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 100,
+        "shortfall": [],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "IMPLEMENTED",
+      "evidence_resolved": [
+        "adr/0040-agnosticism-is-measured-not-declared.md",
+        "engine/conformance/measure.py",
+        "engine/conformance/axis-register.json",
+        "engine/tests/conformance/test_agnosticism_conformance.py"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0040",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "adr/0021 declared in its own Consequences that nothing enforced the Universal Agnostic Architecture Principle; UAC-000001 is that enforcement, fourteen days later. An axis is scored on two properties because one over-reports: how many implementations define the contract's own abstract methods, and whether the contract can fail at all. Measured: persistence PROVEN at 10/10 behind a contract that round-trips the universe and refuses a mechanism storing nothing; execution ENVELOPE_ONLY at 2/11 behind a contract demanding only a serialisation, where nine adapters share one transcribe() and execute() discards the payload to call the Python resolver. Across the repository 42 abstraction boundaries exist and 20 carry two or more implementations, but most are rule registries where swapping changes which rule runs, not which technology runs it — counting those as agnosticism is the over-report this instrument refuses. Lands as MEASUREMENT: it refuses nothing and changes no test's verdict.",
+      "reasons": [],
+      "source_register": "adr/0040-agnosticism-is-measured-not-declared.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "Agnosticism is measured, and a contract that cannot fail proves nothing",
+      "undispositioned": false,
+      "work_package": "WP-W4-002"
+    },
+    {
+      "action_taken": "Named the class and recorded three obligations on future instruments rather than a new gate, because a gate for this would need a scope and inherit the same defect: an instrument states the population it measured, a verdict names only a mechanism that was measured, and a silent fallback is reported even when lawful. A meta-gate was rejected as requiring a second declaration of every rule, which UCKP-ART-03 makes a rival authority.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 3,
+        "dimensions": [
+          {
+            "covered": true,
+            "criterion": "EQ-1",
+            "declared": [
+              "adr/0041-a-rule-whose-measurement-does-not-reach-it.md"
+            ],
+            "resolved": [
+              "adr/0041-a-rule-whose-measurement-does-not-reach-it.md"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "00-BOOK/DATA/constitutional-authority-alignment.json"
+            ],
+            "resolved": [
+              "00-BOOK/DATA/constitutional-authority-alignment.json"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/verification_impact/impact.py",
+              "engine/verification_intelligence/registry.py"
+            ],
+            "resolved": [
+              "engine/verification_impact/impact.py",
+              "engine/verification_intelligence/registry.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 60,
+        "shortfall": [
+          "EQ-2",
+          "EQ-4"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0041-a-rule-whose-measurement-does-not-reach-it.md",
+        "engine/verification_impact/impact.py",
+        "engine/verification_intelligence/registry.py",
+        "00-BOOK/DATA/constitutional-authority-alignment.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0041",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Six defects in one session shared a shape none of them announced: a rule that was right, an instrument that existed, and a measurement that did not reach where the rule applied. adr/0039's git ratio measured the provider's scope rather than anyone's compliance; the impact selector named a mechanism it had not consulted; CAA-INV-05 read one graph while its rule covered every emitting surface, passing at measured=6 against 32; the split table degraded silently and surfaced four commits later; adr/0021 disclosed its own lack of enforcement and kept it for fourteen days; and an interchangeability test passed over ten technologies sharing one body. Distinct from INV-SIL silent drift: that is a change nobody observed, this is a scope nobody stated.",
+      "reasons": [],
+      "source_register": "adr/0041-a-rule-whose-measurement-does-not-reach-it.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "A rule is not enforced by being right: six instances of a measurement that did not reach",
+      "undispositioned": false,
+      "work_package": "WP-W4-003"
+    },
+    {
+      "action_taken": "Recorded the rule, the meaning of zero, and three consequences each learned from a defect: counts and declarations ratchet separately, because one ratchet can be satisfied by writing a paragraph; MOVEMENTS distinguishes migration, declaration and correction, because collapsing them lets a number imply work that did not happen; and a detector is trusted only with failing cases in both directions, because false positives make a floor unreachable. Making it a gate was rejected for the reason adr/0041 gives about its own class.",
+      "canonical_owner": null,
+      "constitutional_basis": null,
+      "conversation_only": false,
+      "coverage": {
+        "complete": false,
+        "covered": 3,
+        "dimensions": [
+          {
+            "covered": true,
+            "criterion": "EQ-1",
+            "declared": [
+              "adr/0042-the-sequencing-rule-and-what-zero-means.md"
+            ],
+            "resolved": [
+              "adr/0042-the-sequencing-rule-and-what-zero-means.md"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-2",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-3",
+            "declared": [
+              "engine/zero_class/zero-class-register.json"
+            ],
+            "resolved": [
+              "engine/zero_class/zero-class-register.json"
+            ],
+            "unresolved": []
+          },
+          {
+            "covered": false,
+            "criterion": "EQ-4",
+            "declared": [],
+            "resolved": [],
+            "unresolved": []
+          },
+          {
+            "covered": true,
+            "criterion": "EQ-5",
+            "declared": [
+              "engine/omega_infinite/direct_callers.py"
+            ],
+            "resolved": [
+              "engine/omega_infinite/direct_callers.py"
+            ],
+            "unresolved": []
+          }
+        ],
+        "percent": 60,
+        "shortfall": [
+          "EQ-2",
+          "EQ-4"
+        ],
+        "total": 5,
+        "unresolved": []
+      },
+      "coverage_measured": true,
+      "decision_class": "architectural",
+      "disposition": "REGISTERED-AS-IMPLEMENTATION-WORK-PACKAGE",
+      "evidence_resolved": [
+        "adr/0042-the-sequencing-rule-and-what-zero-means.md",
+        "engine/omega_infinite/direct_callers.py",
+        "engine/zero_class/zero-class-register.json"
+      ],
+      "evidence_unresolved": [],
+      "id": "DEC-ADR-0042",
+      "index": "",
+      "index_located": false,
+      "justification": null,
+      "note": "Two rules governed thirteen commits and existed only in conversation, which CEP-002 Article 28.5 holds is not recorded at all. The first is sequencing: implement, test to a full pass, commit; on failure fix, test to a full pass, commit, and only then the next item. The second is what zero means, and it needed stating because a residue count fell twice this session without any work happening and both falls were lawful. Zero is reached by declaring, not by pretending: a class reaches it when every remaining instance carries a recorded, checkable disposition. Four instances are complete without being migrated, including a bootstrap that locates the repository root before a provider can be rooted at it.",
+      "reasons": [],
+      "source_register": "adr/0042-the-sequencing-rule-and-what-zero-means.md",
+      "source_register_located": true,
+      "stage": "DECISION-REGISTRATION",
+      "superseded_by": null,
+      "title": "The sequencing rule, and how a count reaches zero honestly",
+      "undispositioned": false,
+      "work_package": "WP-W4-004"
     }
   ],
-  "declaration_findings": [],
-  "determination": "ASSIMILATED",
-  "evidence_references": 557,
-  "gate": "OPEN",
-  "gate_exit": 0,
+  "declaration_findings": [
+    "DEC-ADR-0040: asserts 'work_package', which its disposition does not admit — exactly one disposition, with exactly its own obligations",
+    "DEC-ADR-0040: disposition may not be asserted before stage 'REPOSITORY-TRUTH-UPDATE'",
+    "DEC-ADR-0041: 'work_package' names WP-W4-003, which is not a declared work package",
+    "DEC-ADR-0042: 'work_package' names WP-W4-004, which is not a declared work package"
+  ],
+  "determination": "NOT-ASSIMILATED",
+  "evidence_references": 568,
+  "gate": "CLOSED",
+  "gate_exit": 1,
   "programme": {
     "$external_work_package_sources_comment": "Located declarations whose own work packages are honoured as declared here. A decision whose work is already registered elsewhere references that package instead of duplicating it (Zero Duplication, CEP-002 8.3).",
     "aggregate_gate_owner": "00-MASTER/UCCEP-000000/uccep-bindings.json",
@@ -12970,7 +13252,7 @@
     "anchor": "the containing commit — owned by version control, never restated here",
     "basis": "UCOS-RFP-001 RFP-2 (no commit self-reference) and RFP-3 (no working-tree self-observation)"
   },
-  "seal_sha256": "2e8bdc73d1d9a898d5f9afc8250725b99e2c59df6ff14dd76322c58700fb2b49",
+  "seal_sha256": "fc968f2d8218618833335e4b4afb8bd8f1dc4890167a6b2c1730368a6f6c5f9a",
   "undispositioned": [],
   "unevidenced": [],
   "unindexed": []
