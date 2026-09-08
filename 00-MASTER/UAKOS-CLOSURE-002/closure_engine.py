@@ -277,13 +277,39 @@ def _heading_home_eligible(rel: str, zone: str, text: str) -> bool:
             and not _PROJECTION.search(text[:2000]))
 
 
+# A document that states its own identity settles which concept it is the home OF.
+# `UCOS-COMP-000000-GLOBAL-IMPLEMENTATION-GRAPH-DETERMINATION.md` declares
+# `ARTIFACT ID | UCOS-COMP-000000-GIG` — it is the home of GIG, not of UCOS-COMP-000000,
+# whose own home declares `ARTIFACT ID | UCOS-COMP-000000` two files away.
+_DECLARED_ID = re.compile(
+    r"^\|\s*\**\s*(?:ARTIFACT\s+ID|Artifact\s+Identifier)\s*\**\s*\|\s*[`*]*\s*"
+    r"([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*)\s*[`*]*\s*\|",
+    re.M | re.I,
+)
+
+
+def _declared_artifact_id(text: str) -> str:
+    """The identity a document claims for ITSELF, or "" when it claims none."""
+    m = _DECLARED_ID.search(text[:4000])
+    return m.group(1).strip() if m else ""
+
+
 def _is_def_home(rel: str, cid: str) -> bool:
     """A definitional home: a truth-root file whose basename is (or starts with) the id,
-    excluding derived/evidence/checkpoint artifacts."""
+    excluding derived/evidence/checkpoint artifacts.
+
+    A basename PREFIX is not an identity. Three files begin `UCOS-COMP-000000-` and the rule
+    read all three as homes of UCOS-COMP-000000, reporting a competition that does not exist:
+    two of them declare themselves `-GIG` and `-ISR`, artifacts of their own that merely share
+    a prefix. Where a document states its own ARTIFACT ID, that statement decides — it is the
+    home of the id it claims and of no prefix of it. Documents claiming no identity keep the
+    basename rule, so this can only ever withdraw a home a document itself disclaims.
+    """
     if any(seg in rel for seg in DERIVED_SEG):
         return False
     if _top(rel) not in TRUTH_ROOTS:
         return False
+
     stem = rel.rsplit("/", 1)[-1].upper()
     cu = cid.upper()
     return stem == cu or stem.startswith(cu + "-") or stem.startswith(cu + ".") or stem.startswith(cu + "_")
@@ -319,6 +345,7 @@ def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone:
             continue
         top = _top(rel)
         name_upper = rel.upper()
+        declared_id = _declared_artifact_id(text) if zone == "repo" else ""
         # line-local pass: attribute disposition markers only to ids on the same line
         for line in text.splitlines() if "\n" in text else [text]:
             ids_here: list[tuple[str, str]] = []
@@ -387,6 +414,8 @@ def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone:
                         rec["homed"] = True
                         rec["in_filename"] = True
                         rec["def_homes"].add(rel)
+                        if declared_id:
+                            rec.setdefault("home_claims", {})[rel] = declared_id
                         stem = rel.rsplit("/", 1)[-1].rsplit(".", 1)[0].upper()
                         if stem == cid.upper():
                             rec["exact_homes"].add(rel)
@@ -440,6 +469,31 @@ def build_concepts(sources: dict) -> tuple[dict, dict]:
     # do, the multiplicity is a real competition for someone to resolve, and this engine
     # records nothing rather than picking a winner: choosing between two authored declarations
     # is a determination, and this engine measures.
+    # A BASENAME PREFIX IS NOT AN IDENTITY.
+    # Three files begin `UCOS-COMP-000000-` and the basename rule read all three as homes of
+    # UCOS-COMP-000000, reporting a competition that does not exist. Two of them state their
+    # own identity as `UCOS-COMP-000000-GIG` and `-ISR`: artifacts of their own that merely
+    # share a prefix. The third states `UCOS-COMP-000000` exactly, and is the home.
+    #
+    # The exclusion applies ONLY when some candidate claims the bare id, because claiming a
+    # longer id is not by itself a disclaimer. `EC-3-AP-1-EXECUTOR-DESIGNATION-DETERMINATION.md`
+    # states that whole string as its ARTIFACT ID — a document naming itself by its filename,
+    # not a distinct artifact — and it is the only candidate EC-3-AP-1 has. Withdrawing it
+    # would strip a home from a concept whose document nobody disputes, so where no candidate
+    # claims the bare id the basename rule stands untouched.
+    for cid, rec in concepts.items():
+        homes = rec["def_homes"]
+        claims = rec.get("home_claims") or {}
+        if len(homes) < 2 or not claims:
+            continue
+        exact = {h for h in homes if claims.get(h, "").upper() == cid.upper()}
+        if not exact:
+            continue
+        disclaimed = {h for h in homes if h not in exact and claims.get(h)}
+        if disclaimed:
+            rec["def_homes"] = homes - disclaimed
+            rec["prefix_collisions"] = sorted(disclaimed)
+
     # AN IMPLEMENTATION IS A FACET, NOT A RIVAL DEFINITION.
     # `UCOS-COMP-000001` carried two filename homes — its constitution in 02-MASTER and its
     # `-IMPLEMENTATION` companion in 06-IMPLEMENTATION — and the count-of-homes rule read that
