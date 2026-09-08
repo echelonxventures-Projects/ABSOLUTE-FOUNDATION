@@ -12,11 +12,11 @@
   "baseline": {
     "branch": "integration/recovery-001",
     "classifier_source": "00-BOOK/tools/config.py::CLASSIFY_RULES",
-    "closure_baseline_commit": "b239389e",
+    "closure_baseline_commit": "cbc91bbe",
     "closure_determination": "CLOSED",
     "closure_gap_total": 0,
     "concept_total": 549,
-    "head_commit": "b239389e",
+    "head_commit": "cbc91bbe",
     "tracked_total": 7145
   },
   "baseline_conditions": [
@@ -29,7 +29,7 @@
     },
     {
       "id": "BC-02",
-      "measured": "89 implemented requirements without validation evidence",
+      "measured": "88 implemented requirements without validation evidence",
       "name": "100% validation",
       "owner": "CEP-004",
       "verdict": "FAIL"
@@ -912,7 +912,7 @@
     {
       "canonical_owner": "00-CEP/CEP-004-CONSTITUTIONAL-VALIDATION-CONSTITUTION.md",
       "class": "VALIDATION",
-      "count": 89,
+      "count": 88,
       "gap_id": "RG-D01",
       "members": [
         "RR-AMC-11",
@@ -1002,8 +1002,7 @@
         "RR-UCOS-GOV-006",
         "RR-UCOS-RAT-001",
         "RR-UKDA-DEC-0002",
-        "RR-UKDA-DEC-0003",
-        "RR-Ω∞-000"
+        "RR-UKDA-DEC-0003"
       ],
       "name": "NO-VALIDATION-EVIDENCE",
       "required_action": "Attach validation evidence at the canonical evidence location."
@@ -2136,19 +2135,19 @@
     "maturity": {
       "CERTIFIED-PROVISIONAL": 162,
       "DEFERRED": 154,
-      "IMPLEMENTED": 98,
+      "IMPLEMENTED": 97,
       "REJECTED": 42,
       "SPECIFIED": 35,
       "TEST-EVIDENCED": 42,
-      "VALIDATED-OR-VERIFIED": 16
+      "VALIDATED-OR-VERIFIED": 17
     },
     "maturity_level": {
       "M0": 42,
       "M1": 154,
       "M2": 35,
-      "M3": 98,
+      "M3": 97,
       "M4": 42,
-      "M5": 16,
+      "M5": 17,
       "M6": 162
     },
     "ownership": {
@@ -2160,8 +2159,8 @@
     },
     "validation_status": {
       "EVIDENCED": 142,
-      "NOT-EVIDENCED": 319,
-      "TEST-ONLY": 88
+      "NOT-EVIDENCED": 318,
+      "TEST-ONLY": 89
     },
     "verification_status": {
       "EVIDENCED": 261,
@@ -38760,20 +38759,21 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 144,
+      "evidence_files": 145,
       "evidence_kinds": [
         "certificate",
         "constitution",
         "plan",
         "registry",
+        "test",
         "verification"
       ],
       "exact_homes": [],
       "family": "LAW",
       "homed": true,
       "implementation_status": "PRESENT-IN-CODE",
-      "maturity": "IMPLEMENTED",
-      "maturity_level": "M3",
+      "maturity": "VALIDATED-OR-VERIFIED",
+      "maturity_level": "M5",
       "orphan": false,
       "ownership": "DECLARED",
       "program": "CONSOLIDATION",
@@ -38793,12 +38793,12 @@
         "implementation": true,
         "principle": true,
         "requirement": true,
-        "test": false,
+        "test": true,
         "vision": true
       },
-      "traceability_tiers_present": 6,
+      "traceability_tiers_present": 7,
       "universal_id": "UCOS-CON-000086",
-      "validation_status": "NOT-EVIDENCED",
+      "validation_status": "TEST-ONLY",
       "verification_status": "EVIDENCED",
       "volume": "VOL-002"
     },
@@ -39867,7 +39867,7 @@
       "volume": "VOL-002"
     }
   ],
-  "seal_sha256": "32096c5ccad1f307e6d51afed57fc2a7019fc3f40347da08f7688469fc4c2a7d",
+  "seal_sha256": "b22cdda79f7e66cc94d7ddc5092022effc1bf4ac7bbc2f2320060623a6380953",
   "systemic_findings": [
     {
       "id": "RG-S01",
@@ -39920,7 +39920,7 @@
     "implementation": 318,
     "principle": 362,
     "requirement": 549,
-    "test": 220,
+    "test": 221,
     "vision": 116
   },
   "waves": {
@@ -40056,7 +40056,7 @@
       "class": "VALIDATION",
       "gap_id": "RG-D01",
       "priority": 8,
-      "scope_count": 89,
+      "scope_count": 88,
       "title": "NO-VALIDATION-EVIDENCE",
       "wave": "W07",
       "work_package_id": "WP-UAKOS-CLOSURE-009-008"
