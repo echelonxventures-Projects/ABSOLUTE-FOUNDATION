@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1684
+**Total artifacts:** 1685
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1692,5 +1692,6 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1682 | `UCOS-ENG-000026` | Axis Register | — | 003 | UPN-000013168–UPN-000013169 | ACTIVE | `UCOS-ENG-000003` | 0 | [↗](../../engine/conformance/axis-register.json) |
 | 1683 | `UCOS-ADR-000043` | ADR-0042: The sequencing rule, and how a count reaches ze… | — | 003 | UPN-000013170–UPN-000013171 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0042-the-sequencing-rule-and-what-zero-means.md) |
 | 1684 | `UCOS-ENG-000027` | Zero Class Register | — | 003 | UPN-000013172–UPN-000013173 | ACTIVE | `UCOS-ENG-000003` | 0 | [↗](../../engine/zero_class/zero-class-register.json) |
+| 1685 | `UCOS-MASTER-000043` | UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER | EC-3 | 000 | UPN-000013174–UPN-000013175 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

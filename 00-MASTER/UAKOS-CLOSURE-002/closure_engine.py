@@ -285,8 +285,29 @@ _PROJECTION = re.compile(r"^\s*[-*]?\s*Source:\s*\[", re.M)
 _CODE_AUTHORED = re.compile(r"""^["']([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+)["'],?$""")
 
 
+# `*/_evidence/<concept-id>/` is a STRUCTURAL claim of ownership: the directory name says
+# whose evidence this is, and says it more plainly than a mention inside the file would.
+_EVIDENCE_DIR = re.compile(r"(?:^|/)_evidence/([^/]+)/")
+
+
+def _evidence_subject(rel: str) -> str:
+    """The concept a file's evidence directory names, or "" when it names none."""
+    m = _EVIDENCE_DIR.search(rel)
+    return m.group(1) if m else ""
+
+
 def _code_author_eligible(rel: str, zone: str) -> bool:
-    return (zone == "repo" and _top(rel) in CODE_ROOTS and rel.endswith(".py")
+    """Eligible to AUTHOR a concept: a code-root file that is neither test nor derived.
+
+    Deliberately no suffix test. `rel.endswith(".py")` would be a type decided by filename,
+    which ZX-02 refuses — engine/omega_infinite/classification.py types an artifact by four
+    declared rules with the suffix consulted LAST — and it is not needed here: the claim
+    already requires the concept to be a knowledge object carrying a statement AND exactly one
+    file to author it. Measured both ways over 1,444 candidate files, the two agree exactly
+    (UCKO-PRIN-0001…0005), because a data file listing the same id makes the count two and
+    disqualifies it. The narrower predicate was buying nothing but a violation.
+    """
+    return (zone == "repo" and _top(rel) in CODE_ROOTS
             and "/tests/" not in rel and "/test_" not in rel
             and not any(seg in rel for seg in DERIVED_SEG))
 
@@ -373,7 +394,8 @@ def _definitional_body_id(line: str) -> str | None:
 def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone: str,
           heading_index: dict[str, set] | None = None,
           body_index: dict[str, set] | None = None,
-          code_index: dict[str, set] | None = None) -> None:
+          code_index: dict[str, set] | None = None,
+          evidence_index: dict[str, set] | None = None) -> None:
     """Populate concept occurrences with line-local disposition markers. zone in {repo, source, corpus}."""
     for rel, abspath in paths:
         text = _read_text(abspath)
@@ -382,6 +404,10 @@ def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone:
         top = _top(rel)
         name_upper = rel.upper()
         declared_id = _declared_artifact_id(text) if zone == "repo" else ""
+        if evidence_index is not None and zone == "repo":
+            subject = _evidence_subject(rel)
+            if subject:
+                evidence_index.setdefault(subject, set()).add(rel)
         # line-local pass: attribute disposition markers only to ids on the same line
         for line in text.splitlines() if "\n" in text else [text]:
             ids_here: list[tuple[str, str]] = []
@@ -493,7 +519,9 @@ def build_concepts(sources: dict) -> tuple[dict, dict]:
     heading_index: dict[str, set] = {}
     body_index: dict[str, set] = {}
     code_index: dict[str, set] = {}
-    _scan(repo_paths, concepts, cert_index, "repo", heading_index, body_index, code_index)
+    evidence_index: dict[str, set] = {}
+    _scan(repo_paths, concepts, cert_index, "repo", heading_index, body_index, code_index,
+          evidence_index)
     _scan(source_paths, concepts, cert_index, "source")
     _scan(corpus_paths, concepts, cert_index, "corpus")
 
@@ -511,6 +539,20 @@ def build_concepts(sources: dict) -> tuple[dict, dict]:
     # do, the multiplicity is a real competition for someone to resolve, and this engine
     # records nothing rather than picking a winner: choosing between two authored declarations
     # is a determination, and this engine measures.
+    # EVIDENCE FILED UNDER A CONCEPT'S OWN DIRECTORY BELONGS TO IT.
+    # The scan associates a file with a concept when the file MENTIONS it, which misses the
+    # plainest statement of ownership the repository makes: `data/_evidence/EC3-B10-U01/`.
+    # Inside that directory, determinism.json and realization-evidence.json happen to repeat
+    # the unit id and were credited; validation-evidence.json and validation-report.json do
+    # not, and were invisible — so 45 concepts were reported as carrying no validation
+    # evidence while their validation reports sat in a directory named after them. The
+    # directory name is the claim; it does not become truer for being restated inside.
+    for cid, rels in evidence_index.items():
+        rec = concepts.get(cid)
+        if rec is None:
+            continue
+        rec["files"].update(rels)
+
     # A CONCEPT AUTHORED IN CODE IS HOMED WHERE IT WAS WRITTEN.
     # Claimed only for a concept the canonical store records WITH A STATEMENT, authored in
     # exactly one module. Both halves are needed. Store membership proves the id names a

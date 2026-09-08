@@ -70,6 +70,10 @@ INPUTS = {
     "phase2": ("00-MASTER/UAKOS-CLOSURE-002/phase2.json", True),
     "phase3": ("00-MASTER/UAKOS-CLOSURE-002/phase3.json", True),
     "artifacts": ("00-BOOK/DATA/artifacts.json", True),
+    # The identity authority. artifacts.json is the CORPUS REGISTRY and answers a different
+    # question: which files are Repository Corpus. UCKP-ART-05's home for "what identifies an
+    # object" is the ledger, and the two populations differ by design.
+    "id_ledger": ("00-BOOK/DATA/id-ledger.json", True),
     "relationships": ("00-BOOK/DATA/relationships.json", True),
     "control_tower": ("00-BOOK/DATA/control-tower.json", True),
     "certification": ("00-BOOK/DATA/certification.json", True),
@@ -88,9 +92,24 @@ INPUTS = {
 # needs no other change, and an unmatched path simply contributes no kind.
 EVIDENCE_KINDS = (
     ("test", re.compile(r"(^|/)tests?/|(^|/)test_[^/]+\.py$")),
-    ("validation", re.compile(r"validation-(?:report|evidence)[^/]*\.json$|(^|/)validation[^/]*\.json$")),
-    ("verification", re.compile(r"-COMPLETION-REPORT\.md$|realization-evidence\.json$|verification[^/]*\.json$")),
-    ("determinism", re.compile(r"determinism-evidence|reproducibility_report")),
+    # Both kinds accept a Markdown report, symmetrically. Verification already did — but only
+    # for the one name `-COMPLETION-REPORT.md` — while validation accepted `.json` alone, so
+    # `05-VALIDATION-REPORT.md` and `08-ARCHITECTURE-VERIFICATION-REPORT.md` were invisible
+    # while their `.json` siblings counted. No principle separated them; it is the same shape
+    # as matching `determinism-evidence` and missing `determinism.json`.
+    ("validation", re.compile(
+        r"validation-(?:report|evidence)[^/]*\.json$|(^|/)validation[^/]*\.json$"
+        r"|-VALIDATION-REPORT\.md$")),
+    ("verification", re.compile(
+        r"-COMPLETION-REPORT\.md$|realization-evidence\.json$|verification[^/]*\.json$"
+        r"|-VERIFICATION-REPORT\.md$")),
+    # `determinism.json` is the per-unit form and carries `determinism_evidence: true` with two
+    # bundle hashes proving byte-identical replay; the hyphenated form is the programme-level
+    # one. Matching only the latter made BC-06 report "0 of 318 implemented requirements carry
+    # determinism evidence" while 47 such files sat under */_evidence/ — a false zero, and the
+    # same defect as a rule fluent in one of the repository's naming conventions and blind to
+    # the other.
+    ("determinism", re.compile(r"determinism-evidence|reproducibility_report|(^|/)determinism\.json$")),
     ("compliance", re.compile(r"compliance\.json$|-compliance[^/]*\.json$")),
     ("interaction", re.compile(r"interaction-matrix\.json$")),
     ("registry", re.compile(r"(^|/)DATA/[^/]+\.json$|-MASTER-REGISTRY\.md$")),
@@ -278,6 +297,22 @@ def build(inputs: dict, replay: dict | None = None) -> dict:
     arts = (inputs["artifacts"] or {}).get("artifacts", []) or []
     by_path = {a.get("path", ""): a for a in arts}
     uid_of = {p: a.get("universal_id", "") for p, a in by_path.items()}
+    # IDENTITY IS ASKED OF THE IDENTITY AUTHORITY, not of the corpus registry.
+    # Reading only artifacts.json reported 15 requirements as having a canonical home that
+    # "carries no universal identity" when every one of them holds one. Their homes live under
+    # 00-MASTER/, which config.py excludes from registration BY DETERMINATION — UCOS-RECON-C1
+    # classes the Master Context System as Operational Memory, "execution state, not corpus: it
+    # must never consume permanent corpus identities". So the remedy RG-E03 demanded could not
+    # exist: registering them is the one thing that declaration forbids. The same declaration
+    # says what does hold for them — "any identifier already allocated to a now-excluded path is
+    # RETAINED-BUT-RETIRED in the id-ledger" — so the identity persists while corpus membership
+    # does not. The ledger is consulted second, so a corpus artifact still answers as before.
+    ledger = inputs["id_ledger"] or {}
+    for _map in ("by_path", "by_object"):
+        for path, entry in (ledger.get(_map) or {}).items():
+            recorded = str((entry or {}).get("universal_id") or "").strip()
+            if recorded and not uid_of.get(path):
+                uid_of[path] = recorded
     edges = (inputs["relationships"] or {}).get("relationships", []) or []
     out_edges: dict[str, list] = {}
     in_edges: dict[str, list] = {}

@@ -12005,9 +12005,16 @@
       "page_start": 13172,
       "page_count": 2,
       "first_seen": "2026-09-05T06:38:23+00:00"
+    },
+    "02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md": {
+      "universal_id": "UCOS-MASTER-000043",
+      "category": "MASTER",
+      "page_start": 13174,
+      "page_count": 2,
+      "first_seen": "2026-09-08T07:21:18+00:00"
     }
   },
-  "page_cursor": 13173,
+  "page_cursor": 13175,
   "category_seq": {
     "BOOK": 1,
     "REG": 19,
@@ -12034,7 +12041,7 @@
     "EXEC": 4,
     "GOV": 6,
     "ADR": 43,
-    "MASTER": 42,
+    "MASTER": 43,
     "ENVIRONMENTS": 1,
     "VERIFICATION": 1,
     "UCOSOMEGAINF": 1,
@@ -12121,7 +12128,7 @@
     "DET": 6,
     "CONFIG": 40,
     "DATAOBJ": 146,
-    "EXDOC": 3140,
+    "EXDOC": 3146,
     "TOOLING": 57,
     "ENGINE": 1387,
     "TESTOBJ": 900,
@@ -27246,6 +27253,15 @@
         "status": "ACTIVE",
         "path": "00-CMG/CMG-REGISTRY.json",
         "name": "Cmg Registry"
+      },
+      {
+        "seq": 8,
+        "at": "2026-09-08T07:21:19+00:00",
+        "content_hash": "19d8602a8e1acb471b13087c27eb9f8437a22ad3fcb904a4b6f300f0996ab54b",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "00-CMG/CMG-REGISTRY.json",
+        "name": "Cmg Registry"
       }
     ],
     "UCOS-CON-000052": [
@@ -33052,6 +33068,15 @@
         "status": "ACTIVE",
         "path": "engine/conformance/axis-register.json",
         "name": "Axis Register"
+      },
+      {
+        "seq": 2,
+        "at": "2026-09-08T07:21:19+00:00",
+        "content_hash": "f22b22d0f9e891f8b2507b7bcf3ca9cdf238e422d30fbdbc01211ef945c50755",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "engine/conformance/axis-register.json",
+        "name": "Axis Register"
       }
     ],
     "UCOS-ADR-000043": [
@@ -33074,6 +33099,26 @@
         "status": "ACTIVE",
         "path": "engine/zero_class/zero-class-register.json",
         "name": "Zero Class Register"
+      },
+      {
+        "seq": 2,
+        "at": "2026-09-08T07:21:19+00:00",
+        "content_hash": "47c5e14afdd92e2b65257eae51cca7756998c560ef44a08213c0f3ebd1d4f60d",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "engine/zero_class/zero-class-register.json",
+        "name": "Zero Class Register"
+      }
+    ],
+    "UCOS-MASTER-000043": [
+      {
+        "seq": 1,
+        "at": "2026-09-08T07:21:18+00:00",
+        "content_hash": "bc72423a744f2930030aeeed2b5f1fa214b35bab5891f878e0bdad35e97817e1",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md",
+        "name": "UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER"
       }
     ]
   },
@@ -67097,6 +67142,42 @@
       "object_class": "EXECUTABLE_OBJECT",
       "category": "ENGINE",
       "first_seen": "commit:776455a5afc4"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000041.md": {
+      "universal_id": "UCOS-EXDOC-003141",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:7b8b69a2b97e"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000042.md": {
+      "universal_id": "UCOS-EXDOC-003142",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:7b8b69a2b97e"
+    },
+    "00-BOOK/PORTAL/UCOS-ADR-000043.md": {
+      "universal_id": "UCOS-EXDOC-003143",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:7b8b69a2b97e"
+    },
+    "00-BOOK/PORTAL/UCOS-ENG-000026.md": {
+      "universal_id": "UCOS-EXDOC-003144",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:7b8b69a2b97e"
+    },
+    "00-BOOK/PORTAL/UCOS-ENG-000027.md": {
+      "universal_id": "UCOS-EXDOC-003145",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:7b8b69a2b97e"
+    },
+    "00-BOOK/PORTAL/UCOS-MASTER-000043.md": {
+      "universal_id": "UCOS-EXDOC-003146",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:7b8b69a2b97e"
     }
   },
   "by_observation": {

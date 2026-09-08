@@ -363,6 +363,38 @@
       "expires_at": null,
       "single_use": true,
       "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. The operator was given the measured cost of this act — one EXECUTABLE_OBJECT identity, the three digests below, and its irreversibility under UCKP-ART-05 — declined the cheaper alternative of leaving the primitive inside a consumer module, and directed the allocation explicitly. Recorded here because CEP-002 Art 28.5 holds that a decision whose trace is only conversational is not recorded; the agent's part is the transcript, not the decision. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. WHAT IT ALLOCATES. One identity for engine/compiler/partition.py, the shared substrate holding boundedness and federated visibility. Both engine.context.composition (which declares CXL-03 and CXL-04) and engine.runtime.context (ORL-05/ORL-12/ORL-13) now depend DOWNWARD on it, which closes the CYC-ARCHITECTURAL cycle engine.runtime -> engine.knowledge -> engine.context -> engine.runtime that UCOS-RIB-001 GATE-10 refuses. WHY ONE AND NOT FOUR. The alternative considered and reverted was relocating engine/runtime/bridge to engine/bridge, which minted four identities and orphaned four more — by_object is path-keyed and append-only — while fixing a symptom rather than the inversion. This mints one for a genuinely new object and orphans nothing."
+    },
+    {
+      "permit_id": "P-UCOS-CORPUS-008",
+      "actor": "UMB-IMP-001 :: ukb.py build --mint",
+      "manifest_digest": "083b865b2011232ecd6c8a7445ce47764d04219fba6335f2a7eadd5b57b4c9d8",
+      "preimage_digest": "d4f63113e252a8aea807ccb739f9cdb2a304103e0c98c635a64e0e21294a6c93",
+      "head": "7b8b69a2b97eaa1bc45ce88c09ee9036cb483f62",
+      "scope": {
+        "maps": [
+          "by_path"
+        ],
+        "max_allocations": 1
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. WHAT IT ALLOCATES. One corpus identity for 02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md, category_seq MASTER 42->43, scoped to by_path alone, bound to the three digests above and single-use. WHAT THE DOCUMENT DOES. It becomes the definitional home of 47 EC-3 band realization units that UAKOS-CLOSURE-009 measured as CANONICAL-OWNERSHIP-INFERRED — certified, evidenced under */_evidence/, and owned by no document. Band 13's charter comes closest and disclaims the role in its own words: its unit table sits under 'Recommended default WBS ... Recommended, not binding', and a recommendation is not a definition. Every cell of the register is transcribed from an evidence file named in its input closure; the three units with no evidence directory are recorded as gaps rather than given rows they cannot support. Nothing in it is authored, which is what makes it assimilation under UCKP-ART-19 rather than invention. WHAT THE OPERATOR WAS TOLD BEFORE DIRECTING IT. The measured effect (assimilation 43.3515% -> 51.9%), the three digests, the irreversibility of allocation under UCKP-ART-05, and a review raising two objections AGAINST the act: first, that a register recording what each unit REALIZES may be traceability rather than definition — the same charge this session used to refuse evidence registers and a range citation as homes, so it applies to this document too; second, that its content is derived from evidence yet committed static, so it can silently go stale exactly as CLOSURE-009's registers once did, unless a test re-derives it from the evidence and refuses drift. The cheaper alternative — leaving the 47 units unowned and the number at 43.3515% — was stated. The operator directed installation explicitly. Recorded here because CEP-002 Art 28.5 holds that a decision whose trace is only conversational is not recorded; the agent's part is the transcript, not the decision."
+    },
+    {
+      "permit_id": "P-UCOS-UGA-013",
+      "actor": "UCOS-UGA-001 :: uga_engine.py run",
+      "manifest_digest": "63261ff1a7f40f01df9753a7f79bb1a58f8d498e49d32cecb0a21deec67f83f9",
+      "preimage_digest": "10dfb4d63741bbec9bd554ab6f10e5c9fffaf648819402d451df181a88e23fb2",
+      "head": "7b8b69a2b97eaa1bc45ce88c09ee9036cb483f62",
+      "scope": {
+        "maps": [
+          "by_object"
+        ],
+        "max_allocations": 6
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. WHAT IT ALLOCATES. Six by_object identities, category_seq EXDOC 3140->3146, for six navigation pages the REG-AUTO-001 transaction under P-UCOS-CORPUS-008 generated: 00-BOOK/PORTAL/UCOS-MASTER-000043.md, UCOS-ADR-000041.md, UCOS-ADR-000042.md, UCOS-ADR-000043.md, UCOS-ENG-000026.md and UCOS-ENG-000027.md. Portal pages are by_object artifacts — all 1686 existing ones are — so UGA-INV-01 EVERY_OBJECT_HAS_UNIVERSAL_ID and UGA-INV-10 EVERY_MUTATION_HAS_AUDIT_EVENT both refuse while they are anonymous, and four tests fail with them. WHY THIS IS A SECOND PERMIT AND NOT PART OF THE FIRST. The agent told the operator that installing the band unit register cost ONE identity. That was wrong: it costs one by_path plus six by_object, seven in total, and the error was discovered only when the post-installation suite refused. Only ONE of the six pages belongs to the register — UCOS-MASTER-000043 is its navigation page. The other five are pre-existing debt: ADR-000041/42/43 and ENG-000026/27 are pages for artifacts that already held identity and had never had a portal page rendered, and the registration transaction regenerated the portal and surfaced them. They would have surfaced on the next registration of any artifact whatsoever. The operator was shown the corrected cost, that five of the six are not attributable to this session's act, and the standing alternative of reverting the register instead, and directed the allocation explicitly. Recorded here because CEP-002 Art 28.5 holds that a decision whose trace is only conversational is not recorded, and because UCKP-ART-05 makes an allocated identity permanent."
     }
   ]
 }

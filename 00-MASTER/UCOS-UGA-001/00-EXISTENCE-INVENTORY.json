@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7134,
+  "total_objects": 7141,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -1576,6 +1576,33 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-003140",
       "first_seen": "commit:c0c43f88f6c9"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000041.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003141",
+      "first_seen": "commit:7b8b69a2b97e"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000042.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003142",
+      "first_seen": "commit:7b8b69a2b97e"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ADR-000043.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003143",
+      "first_seen": "commit:7b8b69a2b97e"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-ADV-000001.md",
@@ -6366,6 +6393,24 @@
       "first_seen": "commit:bae59755d7e2"
     },
     {
+      "path": "00-BOOK/PORTAL/UCOS-ENG-000026.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003144",
+      "first_seen": "commit:7b8b69a2b97e"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-ENG-000027.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003145",
+      "first_seen": "commit:7b8b69a2b97e"
+    },
+    {
       "path": "00-BOOK/PORTAL/UCOS-ENVIRONMENTS-000001.md",
       "object_class": "EXCLUDED_DOCUMENT",
       "lifecycle": "AUTHORED",
@@ -9964,6 +10009,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002778",
       "first_seen": "commit:bae59755d7e2"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-MASTER-000043.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003146",
+      "first_seen": "commit:7b8b69a2b97e"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-MCRFST-000001.md",
@@ -30315,6 +30369,14 @@
       "lifecycle": "AUTHORED",
       "owner": "02-MASTER",
       "universal_id": "UCOS-MASTER-000033",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "02-MASTER",
+      "universal_id": "UCOS-MASTER-000043",
       "identity_authority": "UMB-IMP-001"
     },
     {

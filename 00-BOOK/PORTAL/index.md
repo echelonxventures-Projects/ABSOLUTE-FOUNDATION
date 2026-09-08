@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-09-04T11:34:55+00:00 by ukbx portal. 1679 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-09-08T07:21:20+00:00 by ukbx portal. 1685 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1683,3 +1683,9 @@
 | [UCOS-ADR-000038](UCOS-ADR-000038.md) | ADR-0037: Decisions D-01…D-12 and their successors are the o | VOL-003 | ACTIVE |
 | [UCOS-ADR-000039](UCOS-ADR-000039.md) | ADR-0038: The three-part hardcoding test, and a closed five- | VOL-003 | ACTIVE |
 | [UCOS-ADR-000040](UCOS-ADR-000040.md) | ADR-0039: Fourteen agnosticism axes, each proven, abstracted | VOL-003 | ACTIVE |
+| [UCOS-ADR-000041](UCOS-ADR-000041.md) | ADR-0040: Agnosticism is measured, and a contract that canno | VOL-003 | ACTIVE |
+| [UCOS-ADR-000042](UCOS-ADR-000042.md) | ADR-0041: A rule is not enforced by being right — six instan | VOL-003 | ACTIVE |
+| [UCOS-ENG-000026](UCOS-ENG-000026.md) | Axis Register | VOL-003 | ACTIVE |
+| [UCOS-ADR-000043](UCOS-ADR-000043.md) | ADR-0042: The sequencing rule, and how a count reaches zero  | VOL-003 | ACTIVE |
+| [UCOS-ENG-000027](UCOS-ENG-000027.md) | Zero Class Register | VOL-003 | ACTIVE |
+| [UCOS-MASTER-000043](UCOS-MASTER-000043.md) | UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER | VOL-000 | ACTIVE |

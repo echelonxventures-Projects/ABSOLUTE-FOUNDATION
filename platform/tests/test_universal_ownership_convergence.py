@@ -109,7 +109,17 @@ PROJECTION = "00-BOOK/DATA/artifacts.json"
 #: Projections are excluded on the same principle:
 #: a document naming another as its `Source:` is a generated view, and UCKP-ART-11 is explicit
 #: that generated output never owns truth.
-RETIRED_MEASUREMENT = {"total": 549, "declared": 241, "contested": 0, "unresolved": 308}
+#:
+#: CLOSURE-HOME-002 advances it once more, and for the same reason as CLOSURE-HOME-001: the
+#: resolver is untouched and the evidence moved. 02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md
+#: was installed under permit P-UCOS-CORPUS-008 as the definitional home of 47 EC-3 band
+#: realization units — concepts that were certified, evidenced under */_evidence/, and owned by
+#: no document, because Band 13's charter puts its unit table under "Recommended default WBS ...
+#: Recommended, not binding" and a recommendation does not define. declared moves 241 -> 288 and
+#: unresolved 308 -> 261 by exactly 47, total (549) and contested (0) hold, and the movement is
+#: CONSERVED — every concept that moved went from unresolved to declared, which is what
+#: separates an evidence delta from a resolver regression.
+RETIRED_MEASUREMENT = {"total": 549, "declared": 288, "contested": 0, "unresolved": 261}
 
 
 def _home(*registered: str, **kwargs) -> CanonicalHomePolicy:

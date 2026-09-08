@@ -29,6 +29,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import re
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -146,6 +147,167 @@ def test_inherited_closure_facts_are_replayed_rather_than_re_read():
     record = {"baseline": {"closure_baseline_commit": "1713d64d", "branch": "main"}}
     assert re_._replayed_input_fact(record, "closure_baseline_commit", "0df90e1a") == "1713d64d"
     assert re_._replayed_input_fact(record, "branch", "some/other-branch") == "main"
+
+
+#: Data artifacts sitting in an evidence position that no EVIDENCE_KINDS pattern reaches.
+#: A ceiling, not a target: it equals the measurement, because headroom above a measurement is
+#: exactly where a new blind spot lives unnoticed. Lower it by widening a pattern or by showing
+#: the artifact is not evidence; never raise it to accommodate one.
+EVIDENCE_BLIND_SPOT_CEILING = 56
+
+
+def _evidence_blind_spots() -> list[str]:
+    """Artifacts the repository files as evidence that the kind patterns cannot see."""
+    position = re.compile(
+        r"(?:^|/)_?evidence/|-evidence[^/]*\.json$|-report[^/]*\.(?:json|md)$"
+        r"|(?:^|/)determinism|(?:^|/)certification|(?:^|/)validation|(?:^|/)verification",
+        re.I,
+    )
+    tracked = subprocess.run(  # noqa: S603 - fixed argv, no shell
+        ["git", "ls-files"],  # noqa: S607 - git from PATH, as the suite does elsewhere
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.split()
+    blind: list[str] = []
+    for kind, pattern in re_.EVIDENCE_KINDS:
+        for path in tracked:
+            if (
+                path.endswith((".json", ".md"))
+                and kind.lower() in path.lower()
+                and position.search(path)
+                and not pattern.search(path)
+            ):
+                blind.append(f"{kind}: {path}")
+    return sorted(blind)
+
+
+def test_no_new_evidence_the_kind_patterns_cannot_see():
+    """The census. Four blind spots were found by accident this session; this finds the fifth.
+
+    Every one had the same shape — a pattern reading a narrower world than the repository
+    writes. `determinism-evidence` matched while `determinism.json` did not, so BC-06 reported
+    "0 of 318 implemented requirements carry determinism evidence" with 47 such files on disk.
+    Validation accepted only `.json` while verification already accepted one `.md` name, so
+    `05-VALIDATION-REPORT.md` was invisible beside its counted sibling. Each was discovered
+    while chasing something else, which is not a method.
+
+    A blind spot is not proof of a defect — an artifact may name a kind and not be evidence of
+    it. It is proof that somebody should LOOK. The ratchet refuses growth so the looking
+    happens when the artifact appears, rather than years later when a gate reports a zero
+    nobody believes.
+    """
+    blind = _evidence_blind_spots()
+    assert len(blind) <= EVIDENCE_BLIND_SPOT_CEILING, (
+        f"{len(blind)} evidence artifacts are unreachable by any kind pattern, ceiling is "
+        f"{EVIDENCE_BLIND_SPOT_CEILING}. Either widen the pattern or establish that these are "
+        "not evidence:\n  " + "\n  ".join(blind[:15])
+    )
+
+
+def test_the_blind_spot_ceiling_equals_the_measurement():
+    """A ceiling above the measurement is room a regression occupies in silence."""
+    assert len(_evidence_blind_spots()) == EVIDENCE_BLIND_SPOT_CEILING
+
+
+def test_identity_is_asked_of_the_identity_authority_not_the_corpus_registry():
+    """A home outside the corpus still holds an identity, and RG-E03 must not deny it.
+
+    `00-BOOK/DATA/artifacts.json` is the CORPUS REGISTRY: it answers which files are
+    Repository Corpus. `00-BOOK/DATA/id-ledger.json` is the identity authority under
+    UCKP-ART-05. The two populations differ BY DETERMINATION — config.py excludes 00-MASTER/
+    because UCOS-RECON-C1 classes the Master Context System as Operational Memory, "execution
+    state, not corpus: it must never consume permanent corpus identities".
+
+    Reading identity from the registry alone therefore reported 15 requirements as having a
+    canonical home carrying no universal identity when every one held one, and demanded a
+    remedy — register them — that the same declaration forbids. That is a gap nobody could
+    ever close by doing the thing it asked for. This pins the fix: every requirement whose
+    home appears in the ledger resolves an identity, whichever register carries it.
+    """
+    record = json.loads(
+        (REPO / "00-MASTER/UAKOS-CLOSURE-009/requirements.json").read_text(encoding="utf-8")
+    )
+    ledger = json.loads((REPO / "00-BOOK/DATA/id-ledger.json").read_text(encoding="utf-8"))
+    identified = {
+        path
+        for scope in ("by_path", "by_object")
+        for path, entry in (ledger.get(scope) or {}).items()
+        if str((entry or {}).get("universal_id") or "").strip()
+    }
+
+    denied = [
+        r["requirement_id"]
+        for r in record["requirements"]
+        if r["universal_id"] == "UNREGISTERED"
+        and any(home in identified for home in (r.get("definitional_homes") or []))
+    ]
+    assert not denied, (
+        "these requirements hold a home the id-ledger identifies, yet are reported as carrying "
+        "no universal identity:\n  "
+        + "\n  ".join(denied[:12])
+        + "\nIdentity is the ledger's question; corpus membership is the registry's."
+    )
+
+    homeless = [r for r in record["requirements"] if not (r.get("definitional_homes") or [])]
+    unregistered = [r for r in record["requirements"] if r["universal_id"] == "UNREGISTERED"]
+    assert len(unregistered) == len(homeless), (
+        f"{len(unregistered)} requirements are reported unregistered but {len(homeless)} have no "
+        "home at all — the count must be one thing measured once, not two conflated"
+    )
+
+
+def test_the_band_unit_register_still_agrees_with_the_evidence_it_transcribes():
+    """A register transcribed from evidence goes stale the moment the evidence moves.
+
+    `02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md` is the definitional home of 47 EC-3
+    band realization units, and every cell in it was transcribed from `*/_evidence/<unit>/`.
+    It is committed rather than generated, deliberately: a generated artifact here is
+    gitignored, absent from a fresh clone, and therefore cannot be a home. The cost of that
+    choice is that nothing re-derives it, which is exactly how this programme's own registers
+    were left rendered against a stale HEAD reporting 89 gaps Repository Truth had closed.
+
+    So the transcription is checked rather than trusted: every unit the register claims must
+    still have its evidence directory, and the blueprint and verdict it prints must still be
+    what the evidence says. A unit whose evidence is deleted or whose acceptance changes
+    fails here rather than being discovered later as an unowned concept.
+    """
+    register = REPO / "02-MASTER" / "EC-3-BAND-REALIZATION-UNIT-REGISTER.md"
+    if not register.is_file():
+        pytest.skip("the band unit register is not installed in this working tree")
+
+    rows = re.findall(
+        r"^\|\s*\*\*(EC3-B\d+-U\d+)\*\*\s*\|\s*`([^`]+)`\s*\|[^|]*\|\s*([^|]+?)\s*\|",
+        register.read_text(encoding="utf-8"),
+        re.M,
+    )
+    assert rows, "the register claims no units — the transcription check would be vacuous"
+
+    drift = []
+    for unit, blueprint, verdict in rows:
+        matches = sorted(REPO.glob(f"*/_evidence/{unit}/acceptance-decision.json"))
+        if not matches:
+            drift.append(f"{unit}: register claims it, but no acceptance-decision.json remains")
+            continue
+        decision = json.loads(matches[0].read_text(encoding="utf-8"))
+        if str(decision.get("blueprint_id")) != blueprint:
+            drift.append(
+                f"{unit}: register prints blueprint {blueprint}, evidence says "
+                f"{decision.get('blueprint_id')}"
+            )
+        if str(decision.get("verdict")) != verdict.strip():
+            drift.append(
+                f"{unit}: register prints verdict {verdict.strip()}, evidence says "
+                f"{decision.get('verdict')}"
+            )
+
+    assert not drift, (
+        "the band unit register no longer agrees with the evidence it transcribes:\n  "
+        + "\n  ".join(drift)
+        + "\nRe-derive the register from */_evidence/ — a transcription nobody re-checks is a "
+        "register that silently stops being true."
+    )
 
 
 def test_a_genuine_regeneration_still_advances_the_inherited_facts():

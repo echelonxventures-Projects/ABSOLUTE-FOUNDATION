@@ -6,7 +6,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 466 | UPN-000000001–UPN-000013144 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 467 | UPN-000000001–UPN-000013175 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
 | `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 123 | UPN-000001327–UPN-000012507 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 108 | UPN-000000022–UPN-000013173 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 466
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 467
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -506,6 +506,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-UNCOND-000001` | UCOS Ω∞ — UNCONDITIONAL COMMIT READINESS DETERMINATION | — | ACTIVE |
 | `UCOS-UNIVER-000019` | UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DETERMINATION | — | ACTIVE |
 | `UCOS-W4UFIF-000001` | W4 — UFI FAILURE MATRIX | — | ACTIVE |
+| `UCOS-MASTER-000043` | UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER | EC-3 | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
