@@ -39,6 +39,7 @@ Standard library only.
 from __future__ import annotations
 
 import argparse
+import contextlib
 import hashlib
 import json
 import os
@@ -927,6 +928,29 @@ def run_pipeline_pass(decl: dict, stages: list[dict], env: dict[str, str], skip_
     return failures, attribution
 
 
+class _Tee:
+    """Write the gate's report to stdout AND to a file, as it is produced.
+
+    Buffering the whole report and writing it at the end was the obvious alternative and is
+    wrong here: this gate runs for hours, and a CI log that shows nothing until the verdict
+    gives an operator no way to tell a working run from a hung one. Every line goes to both
+    places immediately.
+    """
+
+    def __init__(self, stream, handle) -> None:
+        self._stream, self._handle = stream, handle
+
+    def write(self, text: str) -> int:
+        self._stream.write(text)
+        self._handle.write(text)
+        self._handle.flush()
+        return len(text)
+
+    def flush(self) -> None:
+        self._stream.flush()
+        self._handle.flush()
+
+
 def cmd_gate(
     decl: dict, *, detect_only: bool = False, fast: bool = False, keep_residue: bool = False
 ) -> int:
@@ -1460,6 +1484,17 @@ def main() -> int:
     ap.add_argument("--detect", action="store_true", help="classify self-reference topologies (never fails)")
     ap.add_argument("--fast", action="store_true", help="skip stages declared heavy (never used by the gate)")
     ap.add_argument(
+        "--report",
+        default=None,
+        metavar="PATH",
+        help=(
+            "also write this run's report to PATH, so a later step can NAME the residue "
+            "without recomputing it. Never defaulted: this programme writes only where an "
+            "operator tells it to, and its own CLO-05 refuses an untracked entry left in "
+            "the tree, so PATH belongs outside the repository."
+        ),
+    )
+    ap.add_argument(
         "--keep-residue",
         action="store_true",
         help="leave a divergence in place for inspection (diagnostic; the gate always restores)",
@@ -1488,6 +1523,21 @@ def main() -> int:
             return 0
 
     if args.gate or args.detect:
+        # THE RESIDUE IS COMPUTED ONCE. `--detect` is `--gate` with the exit code
+        # suppressed -- the same passes over the same stages -- so a workflow that gates and
+        # then detects pays for one identical 62-line report twice. Measured on run
+        # 34195803725, the two blocks differ only in a pid inside one incidental error
+        # string. Writing the report out lets the diagnostic step READ what the gate already
+        # found, which is the difference between naming residue and re-deriving it.
+        if args.report:
+            with open(args.report, "w", encoding="utf-8") as handle:
+                with contextlib.redirect_stdout(_Tee(sys.stdout, handle)):
+                    return cmd_gate(
+                        decl,
+                        detect_only=args.detect,
+                        fast=args.fast,
+                        keep_residue=args.keep_residue,
+                    )
         return cmd_gate(
             decl, detect_only=args.detect, fast=args.fast, keep_residue=args.keep_residue
         )

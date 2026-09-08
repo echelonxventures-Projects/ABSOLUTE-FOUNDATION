@@ -117,13 +117,31 @@ jobs:
           echo "checkout clean — a fixed point may be asserted over this committed state"
 
       - name: Repository Fixed-Point Gate (fail-closed)
-        run: python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --gate
+        run: |
+          python3 00-MASTER/UCOS-RFP-001/rfp_engine.py \
+            --gate --report "${RUNNER_TEMP}/rfp-residue.txt"
 
       # Diagnostic only, and only when the gate has already failed: names the residue and
       # the topology behind it so the failure is actionable without a local reproduction.
+      #
+      # IT READS WHAT THE GATE FOUND RATHER THAN RE-DERIVING IT. `--detect` is `--gate` with
+      # the exit code suppressed: the same convergence passes over the same 35 stages, which
+      # on this repository is hours, and one of those stages (UCCEP) spends its full 3600s
+      # timeout on every pass. Measured on run 34195803725, the gate block and the detect
+      # block were 62 identical lines apart from a pid in one incidental error string -- so
+      # the second run cost 2h46m to print what the first had already printed. The git lines
+      # below are additive and instant, and are the reason this step still exists.
       - name: Name the residue and its topology
         if: failure()
         run: |
           git status --porcelain || true
           git diff --stat || true
-          python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --detect || true
+          if [ -s "${RUNNER_TEMP}/rfp-residue.txt" ]; then
+            echo "── residue as the gate found it (not recomputed) ──"
+            cat "${RUNNER_TEMP}/rfp-residue.txt"
+          else
+            # The gate produced no report -- it failed before writing one, so there is
+            # nothing to reuse and the residue has to be derived.
+            echo "── no gate report to reuse; deriving the residue ──"
+            python3 00-MASTER/UCOS-RFP-001/rfp_engine.py --detect || true
+          fi
