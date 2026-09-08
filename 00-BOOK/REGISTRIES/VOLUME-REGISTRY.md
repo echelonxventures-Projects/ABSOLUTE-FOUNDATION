@@ -6,9 +6,9 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 
 | Volume | Serial | Name | Category | Status | Artifacts | Page Range |
 |--------|--------|------|----------|--------|-----------|------------|
-| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 467 | UPN-000000001–UPN-000013175 |
+| `VOL-000` | 0 | MASTER INDEX | IDX | ACTIVE | 468 | UPN-000000001–UPN-000013179 |
 | `VOL-001` | 1 | VISION | VSN | ACTIVE | 3 | UPN-000004086–UPN-000004112 |
-| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 123 | UPN-000001327–UPN-000012507 |
+| `VOL-002` | 2 | CONSTITUTION | CON | ACTIVE | 124 | UPN-000001327–UPN-000013176 |
 | `VOL-003` | 3 | ARCHITECTURE | ARCH | ACTIVE | 108 | UPN-000000022–UPN-000013173 |
 | `VOL-004` | 4 | IMPLEMENTATION | IMP | ACTIVE | 24 | UPN-000004194–UPN-000012593 |
 | `VOL-005` | 5 | RUNTIME | RUN | ACTIVE | 22 | UPN-000004429–UPN-000004937 |
@@ -36,7 +36,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-000 — MASTER INDEX <a id="vol-000"></a>
 
 *Root navigation, master index, and book infrastructure.*  \
-**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 467
+**Category:** IDX · **Status:** ACTIVE · **Artifacts:** 468
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -507,6 +507,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-UNIVER-000019` | UCOS Ω∞ — UNIVERSAL CERTIFICATION CLOSURE DETERMINATION | — | ACTIVE |
 | `UCOS-W4UFIF-000001` | W4 — UFI FAILURE MATRIX | — | ACTIVE |
 | `UCOS-MASTER-000043` | UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER | EC-3 | ACTIVE |
+| `UCOS-MASTER-000044` | UCOS Ω∞ — COMPILER COMPONENT REGISTER | — | ACTIVE |
 
 ### VOL-001 — VISION <a id="vol-001"></a>
 
@@ -522,7 +523,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 ### VOL-002 — CONSTITUTION <a id="vol-002"></a>
 
 *Constitutional corpus, consolidation program, freeze, and registers.*  \
-**Category:** CON · **Status:** ACTIVE · **Artifacts:** 123
+**Category:** CON · **Status:** ACTIVE · **Artifacts:** 124
 
 | Universal ID | Name | Native | Status |
 |--------------|------|--------|--------|
@@ -649,6 +650,7 @@ The 25 root volumes of the Universal Master Knowledge Book. Volumes are permanen
 | `UCOS-CON-000083` | PHASE Q — ACT ATOMICITY EVIDENCE EXHAUSTION & CONSTITUTIONAL … | — | ACTIVE |
 | `UCOS-CON-000084` | PHASE R4 — BASIS MEMBER EXHAUSTION, MOVABILITY DETERMINATION,… | — | ACTIVE |
 | `UCOS-CON-000085` | CONSTITUTIONAL INTEGRATION ANALYSIS — MCRF / STREAM-00 / WP-001A | — | ACTIVE |
+| `UCOS-CON-000086` | UCOS Ω∞ — ABSOLUTE CONSTITUTIONAL LAWS REGISTER | — | ACTIVE |
 
 ### VOL-003 — ARCHITECTURE <a id="vol-003"></a>
 

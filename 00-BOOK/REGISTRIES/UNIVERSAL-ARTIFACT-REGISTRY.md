@@ -4,7 +4,7 @@
 
 The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Universal Artifact ID**, volume, page range, native program identifier, status, parent, dependencies, and direct/return links. Universal IDs and page numbers are append-only and never reused or renumbered; native identifiers are preserved verbatim.
 
-**Total artifacts:** 1685
+**Total artifacts:** 1687
 
 | # | Universal ID | Name | Native ID | Vol | Pages | Status | Parent | Deps | Link |
 |---|--------------|------|-----------|-----|-------|--------|--------|------|------|
@@ -1693,5 +1693,7 @@ The authoritative crosswalk from every reachable UCOS Ω∞ artifact to its **Un
 | 1683 | `UCOS-ADR-000043` | ADR-0042: The sequencing rule, and how a count reaches ze… | — | 003 | UPN-000013170–UPN-000013171 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../adr/0042-the-sequencing-rule-and-what-zero-means.md) |
 | 1684 | `UCOS-ENG-000027` | Zero Class Register | — | 003 | UPN-000013172–UPN-000013173 | ACTIVE | `UCOS-ENG-000003` | 0 | [↗](../../engine/zero_class/zero-class-register.json) |
 | 1685 | `UCOS-MASTER-000043` | UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER | EC-3 | 000 | UPN-000013174–UPN-000013175 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md) |
+| 1686 | `UCOS-CON-000086` | UCOS Ω∞ — ABSOLUTE CONSTITUTIONAL LAWS REGISTER | — | 002 | UPN-000013176–UPN-000013176 | ACTIVE | `UCOS-IDX-000001` | 0 | [↗](../../02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md) |
+| 1687 | `UCOS-MASTER-000044` | UCOS Ω∞ — COMPILER COMPONENT REGISTER | — | 000 | UPN-000013177–UPN-000013179 | ACTIVE | `UCOS-BOOK-000000` | 0 | [↗](../../02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md) |
 
 *Return: [UCOS-BOOK-000000 Master Index](../../00-BOOK/UCOS-BOOK-000000-UNIVERSAL-MASTER-KNOWLEDGE-BOOK.md)*

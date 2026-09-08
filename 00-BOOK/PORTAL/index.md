@@ -1,6 +1,6 @@
 # UCOS Ω∞ — Navigation Portal (generated)
 
-*Generated 2026-09-08T07:21:20+00:00 by ukbx portal. 1685 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
+*Generated 2026-09-08T11:50:06+00:00 by ukbx portal. 1687 artifacts. No dead ends: every page links parent, children, backlinks, and master index.*
 
 | Universal ID | Name | Volume | Status |
 |--------------|------|--------|--------|
@@ -1689,3 +1689,5 @@
 | [UCOS-ADR-000043](UCOS-ADR-000043.md) | ADR-0042: The sequencing rule, and how a count reaches zero  | VOL-003 | ACTIVE |
 | [UCOS-ENG-000027](UCOS-ENG-000027.md) | Zero Class Register | VOL-003 | ACTIVE |
 | [UCOS-MASTER-000043](UCOS-MASTER-000043.md) | UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER | VOL-000 | ACTIVE |
+| [UCOS-CON-000086](UCOS-CON-000086.md) | UCOS Ω∞ — ABSOLUTE CONSTITUTIONAL LAWS REGISTER | VOL-002 | ACTIVE |
+| [UCOS-MASTER-000044](UCOS-MASTER-000044.md) | UCOS Ω∞ — COMPILER COMPONENT REGISTER | VOL-000 | ACTIVE |

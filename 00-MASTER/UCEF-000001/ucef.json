@@ -1,5 +1,5 @@
 {
-  "assessment_digest": "6531526553146492cc973bbef833d9d90f9506db7b74c4cb339823e195acc232",
+  "assessment_digest": "1d4d77975f40fefc7fdaee44c51404b6cb4ce7ccfec88088a3ea4a072a1999c2",
   "counts": {
     "construct_classes": 33,
     "criteria": 16,
@@ -559,7 +559,7 @@
     {
       "clause": "00-BOOK/CONTROL-TOWER/UCOS-Ω∞-REG-AUTO-001-AUTOMATIC-ARTIFACT-REGISTRATION-STANDARD.md §16.3",
       "dimension": "Complete registry synchronization",
-      "evidence": "1684 registered artifacts, declared count agrees, identities unique — the registry projection is internally synchronized",
+      "evidence": "1687 registered artifacts, declared count agrees, identities unique — the registry projection is internally synchronized",
       "id": "UCEF-VAL-09",
       "probe": "registry_synchronized",
       "satisfied": true,

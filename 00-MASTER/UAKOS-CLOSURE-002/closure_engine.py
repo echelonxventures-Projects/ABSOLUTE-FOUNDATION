@@ -262,8 +262,13 @@ DERIVED_SEG = ("_evidence/", "/outputs/", "outputs/", "determinism-evidence/",
 # and `EC3-B10-U01\u2026U12`, and a range over the second is as much a declaration as over the
 # first. Reading only the bare-numeral form made the rule fluent in one of the repository's
 # conventions and blind to the other.
+# The stem admits this repository's own sigil. Its LAW family is written `\u03a9\u221e-001`, and an
+# `[A-Z]`-anchored stem cannot match a character outside ASCII — so the range
+# `(\u03a9\u221e-001\u2026020)` was unreadable while `(AMR-01\u202614)` was not. Third time this rule proved
+# fluent in one of the repository's conventions and blind to another; the first two were the
+# letter-prefixed numbering and the mention-versus-declaration line.
 _HEAD_RANGE = re.compile(
-    r"\b([A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*)-([A-Z]*)(\d+)"
+    r"\b([A-Z\u03a9][A-Z0-9\u03a9\u221e]*(?:-[A-Z0-9]+)*)-([A-Z]*)(\d+)"
     r"\s*(?:\u2026|\.\.\.|\u2013|\u2014)\s*(?:\1-)?\2?(\d+)\b"
 )
 # A programme that MEASURES concepts cannot be the definitional home of the concepts it

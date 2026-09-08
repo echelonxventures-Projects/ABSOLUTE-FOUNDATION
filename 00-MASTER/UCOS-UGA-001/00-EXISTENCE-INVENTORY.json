@@ -5,7 +5,7 @@
   "determinism": "No wall clock. Timestamps are ledger first_seen values.",
   "epoch": "0 — Existence Discovery",
   "success_condition": "unknown_objects == 0",
-  "total_objects": 7141,
+  "total_objects": 7145,
   "unknown_objects": 0,
   "classifier_property": "TOTAL — the final branch is unconditional, so UNKNOWN is structurally unreachable.",
   "objects": [
@@ -4609,6 +4609,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-002971",
       "first_seen": "commit:446f8a0f6d95"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-CON-000086.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003147",
+      "first_seen": "commit:b239389ed9ff"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-COVERA-000001.md",
@@ -10018,6 +10027,15 @@
       "identity_authority": "UCOS-UGA-001",
       "universal_id": "UCOS-EXDOC-003146",
       "first_seen": "commit:7b8b69a2b97e"
+    },
+    {
+      "path": "00-BOOK/PORTAL/UCOS-MASTER-000044.md",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "lifecycle": "AUTHORED",
+      "owner": "00-BOOK/PORTAL",
+      "identity_authority": "UCOS-UGA-001",
+      "universal_id": "UCOS-EXDOC-003148",
+      "first_seen": "commit:b239389ed9ff"
     },
     {
       "path": "00-BOOK/PORTAL/UCOS-MCRFST-000001.md",
@@ -30444,6 +30462,14 @@
       "identity_authority": "UMB-IMP-001"
     },
     {
+      "path": "02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "02-MASTER",
+      "universal_id": "UCOS-CON-000086",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
       "path": "02-MASTER/UCOS-COMP-000000-CONSTITUTIONAL-IMPLEMENTATION-ORCHESTRATION-AUTHORITY.md",
       "object_class": "DOCUMENT_ARTIFACT",
       "lifecycle": "AUTHORED",
@@ -30473,6 +30499,14 @@
       "lifecycle": "AUTHORED",
       "owner": "02-MASTER",
       "universal_id": "UCOS-CON-000026",
+      "identity_authority": "UMB-IMP-001"
+    },
+    {
+      "path": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+      "object_class": "DOCUMENT_ARTIFACT",
+      "lifecycle": "AUTHORED",
+      "owner": "02-MASTER",
+      "universal_id": "UCOS-MASTER-000044",
       "identity_authority": "UMB-IMP-001"
     },
     {

@@ -395,6 +395,70 @@
       "expires_at": null,
       "single_use": true,
       "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. WHAT IT ALLOCATES. Six by_object identities, category_seq EXDOC 3140->3146, for six navigation pages the REG-AUTO-001 transaction under P-UCOS-CORPUS-008 generated: 00-BOOK/PORTAL/UCOS-MASTER-000043.md, UCOS-ADR-000041.md, UCOS-ADR-000042.md, UCOS-ADR-000043.md, UCOS-ENG-000026.md and UCOS-ENG-000027.md. Portal pages are by_object artifacts — all 1686 existing ones are — so UGA-INV-01 EVERY_OBJECT_HAS_UNIVERSAL_ID and UGA-INV-10 EVERY_MUTATION_HAS_AUDIT_EVENT both refuse while they are anonymous, and four tests fail with them. WHY THIS IS A SECOND PERMIT AND NOT PART OF THE FIRST. The agent told the operator that installing the band unit register cost ONE identity. That was wrong: it costs one by_path plus six by_object, seven in total, and the error was discovered only when the post-installation suite refused. Only ONE of the six pages belongs to the register — UCOS-MASTER-000043 is its navigation page. The other five are pre-existing debt: ADR-000041/42/43 and ENG-000026/27 are pages for artifacts that already held identity and had never had a portal page rendered, and the registration transaction regenerated the portal and surfaced them. They would have surfaced on the next registration of any artifact whatsoever. The operator was shown the corrected cost, that five of the six are not attributable to this session's act, and the standing alternative of reverting the register instead, and directed the allocation explicitly. Recorded here because CEP-002 Art 28.5 holds that a decision whose trace is only conversational is not recorded, and because UCKP-ART-05 makes an allocated identity permanent."
+    },
+    {
+      "permit_id": "P-UCOS-CORPUS-009",
+      "actor": "UMB-IMP-001 :: ukb.py build --mint",
+      "manifest_digest": "ecf65dd1746d1669e944d515fd68cd766be482edb2007d5c95774e9a06812c40",
+      "preimage_digest": "778eaf4d66cf343b4976ba96ea281448822d8a17d1adc2947ff5ff1c6044ed86",
+      "head": "b239389ed9ffac3c629c1d9c5af05901fc3f77bf",
+      "scope": {
+        "maps": [
+          "by_path"
+        ],
+        "max_allocations": 1
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. WHAT IT ALLOCATES. One corpus identity for 02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md, category_seq CON, scoped to by_path alone, bound to the three digests above and single-use. WHAT THE DOCUMENT DOES. It becomes the definitional home of LAW omega-infinity 001 through 020, twenty constitutional laws that UAKOS-CLOSURE-009 measured as CANONICAL-OWNERSHIP-INFERRED. They are cited as binding across the corpus — 'by LAW omega-infinity-000 and the 25 Constitutional Directives, every entity must' — and owned by no document. Every file carrying them was a gap register, an implementation-wave list or an inventory: they appeared only in records of what was missing. 01-UNREALIZED-CKO-INVENTORY.md had already recorded all twenty as unrealized constitutional knowledge objects, marked each READY, and located the source. NOTHING IN IT IS AUTHORED. Each statement is transcribed verbatim from PART XVI 'The Absolute Constitutional Laws' of 00-SOURCE/VISION/Missing 2.docx, the UCOS Omega-Infinity Absolute Architectural Constitution. No law is worded, numbered, ordered or interpreted by the register; that is what makes it assimilation under UCKP-ART-19 rather than enactment, and the register declares AUTHORITY = NONE on its face. WHAT IT DELIBERATELY OMITS. LAW omega-infinity-000 is cited elsewhere as carrying seven properties and does NOT appear in PART XVI. The register therefore does not claim it, and says so: a law it cannot transcribe is a law it does not claim. Writing a plausible statement for it would have been the difference between assimilation and invention. WHAT THE OPERATOR WAS TOLD. The source was located and read before drafting; the measured effect is assimilation 285 -> 305 of 549; the allocation is irreversible under UCKP-ART-05. Recorded here because CEP-002 Art 28.5 holds that a decision whose trace is only conversational is not recorded; the agent's part is the transcript, not the decision."
+    },
+    {
+      "permit_id": "P-UCOS-UGA-014",
+      "actor": "UCOS-UGA-001 :: uga_engine.py run",
+      "manifest_digest": "03905175f17cade0a2a511f2505c55565d10ef168a109c12b33cc03d6ac38fc3",
+      "preimage_digest": "9e324330133d8c30c6c20d191f919365cadc98e26a451313a98608799aa3bf47",
+      "head": "b239389ed9ffac3c629c1d9c5af05901fc3f77bf",
+      "scope": {
+        "maps": [
+          "by_object"
+        ],
+        "max_allocations": 1
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. WHAT IT ALLOCATES. One by_object identity for 00-BOOK/PORTAL/UCOS-CON-000086.md, the navigation page REG-AUTO-001 generated when 02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md was registered under P-UCOS-CORPUS-009. Portal pages are by_object artifacts — all 1686 existing ones are — so UGA-INV-01 EVERY_OBJECT_HAS_UNIVERSAL_ID and UGA-INV-10 EVERY_MUTATION_HAS_AUDIT_EVENT both refuse while it is anonymous. THIS ONE WAS PREDICTED. The previous registration produced six such pages and needed an unforeseen second permit; the agent told the operator before this registration ran that a portal page would follow and a small by_object permit would be needed. It is one page rather than six because the five extra pages last time were pre-existing debt for artifacts that already held identity and had never had a page rendered — that backlog is now discharged, so this registration created only its own. TOTAL COST OF THE LAWS REGISTER: two identities, one by_path and one by_object, against the twenty constitutional laws it homes. Recorded here because CEP-002 Art 28.5 holds that a decision whose trace is only conversational is not recorded, and because UCKP-ART-05 makes an allocated identity permanent."
+    },
+    {
+      "permit_id": "P-UCOS-CORPUS-010",
+      "actor": "UMB-IMP-001 :: ukb.py build --mint",
+      "manifest_digest": "10515b81aad15b93a217b74d805b3ba6580757e4ca667e9ecdb1fd694142e9e9",
+      "preimage_digest": "3a897ccaa1d53ed276e4a9f678abd04ea00c39389179e2f673d17dc0a241bd6a",
+      "head": "b239389ed9ffac3c629c1d9c5af05901fc3f77bf",
+      "scope": {
+        "maps": [
+          "by_path"
+        ],
+        "max_allocations": 1
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. WHAT IT ALLOCATES. One corpus identity for 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md, category_seq MASTER, scoped to by_path alone, bound to the three digests above and single-use. WHAT THE DOCUMENT DOES. It becomes the definitional home of 85 UCOS-COMP compiler components across nine families that UAKOS-CLOSURE-009 measured as CANONICAL-OWNERSHIP-INFERRED. UCOS-COMP is referenced by 100 identifiers across the corpus and only two have ever had a document; the rest appeared solely in gap registers, implementation-wave lists and backlogs, which are records of what is missing. NOTHING IN IT IS AUTHORED. Each Purpose is transcribed from the Purpose field the source states for that component, trimmed to its first sentence and to nothing else, from 00-SOURCE/ARCHITECTURE/UCOS Omega-Infinity - Universal Platform.docx, PHASE-003 Documents 02 through 10. No component is named, numbered, ordered, specified or interpreted by the register, which is what makes it assimilation under UCKP-ART-19 rather than design, and it declares AUTHORITY = NONE on its face. WHAT IT DELIBERATELY OMITS. Nine identifiers ending in -000 (001000, 002000 through 009000) are absent. They carry no Purpose in the source because they are section headings introducing each family, not components. A heading is not a component, and an identifier the register cannot transcribe is one it does not claim, which is the same rule that kept LAW Omega-Infinity-000 out of the constitutional laws register under P-UCOS-CORPUS-009. WHAT THE OPERATOR WAS TOLD. The source was read before drafting and four entries spot-checked verbatim against it; the extraction is mechanical over a 4.2-million-character document and a sample should be reviewed; homing was verified using the engine's own _HEAD_RANGE and _definitional_body_id rather than a reimplementation, after a hand-written regex gave a false confirmation for the laws register and had to be corrected; the measured effect is assimilation 305 to 390 of 549; and a by_object permit for the navigation page will follow, as it did for both registers before this. Recorded here because CEP-002 Art 28.5 holds that a decision whose trace is only conversational is not recorded."
+    },
+    {
+      "permit_id": "P-UCOS-UGA-015",
+      "actor": "UCOS-UGA-001 :: uga_engine.py run",
+      "manifest_digest": "e3d765de3a6436dc128f783350746dcc6f9bfe28ceb46c3dff8342fbe4c4ff24",
+      "preimage_digest": "66b47b845fc39499844e9e576b3419fe37912bdbfef2f7cd9021337e39ed97c7",
+      "head": "b239389ed9ffac3c629c1d9c5af05901fc3f77bf",
+      "scope": {
+        "maps": [
+          "by_object"
+        ],
+        "max_allocations": 1
+      },
+      "expires_at": null,
+      "single_use": true,
+      "$authorization": "OPERATOR-AUTHORIZED IN SESSION, transcribed by the agent rather than composed by it. Session: https://claude.ai/code/session_011nUoToanLMNTaZdnmYL1sW. WHAT IT ALLOCATES. One by_object identity for 00-BOOK/PORTAL/UCOS-MASTER-000044.md, the navigation page for 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md registered under P-UCOS-CORPUS-010. Portal pages are by_object artifacts, so UGA-INV-01 and UGA-INV-10 both refuse while it is anonymous. WHEN IT APPEARED, AND A CORRECTION. The agent told the operator this permit would follow, then checked immediately after the registration transaction, saw UGA pass with no anonymous object, and reported that the prediction had been wrong. It had not been: the page is rendered by the downstream register regeneration rather than by the transaction itself, so it appeared on the next pass and the original prediction held. The correction was issued too early on one observation, and is recorded here rather than left as a retracted claim, because the sequence matters for anyone registering the next artifact: registration allocates the corpus identity, the following regeneration renders the page, and the page needs its own identity. Two permits per register, in that order. Recorded because CEP-002 Art 28.5 holds that a decision whose trace is only conversational is not recorded, and because UCKP-ART-05 makes an allocated identity permanent."
     }
   ]
 }

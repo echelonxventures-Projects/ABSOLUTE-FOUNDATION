@@ -119,7 +119,17 @@ PROJECTION = "00-BOOK/DATA/artifacts.json"
 #: unresolved 308 -> 261 by exactly 47, total (549) and contested (0) hold, and the movement is
 #: CONSERVED — every concept that moved went from unresolved to declared, which is what
 #: separates an evidence delta from a resolver regression.
-RETIRED_MEASUREMENT = {"total": 549, "declared": 288, "contested": 0, "unresolved": 261}
+#:
+#: CLOSURE-HOME-003 advances it a third time, and the reason is unchanged: the resolver is
+#: untouched and the evidence moved again. Two registers were installed and one was completed
+#: from a second source — 85 compiler components transcribed from PHASE-003 of the Universal
+#: Platform document, 21 constitutional laws from PART XVI of Missing 2.docx plus LAW Ω∞-000
+#: from the Universal Reality Compiler Constitution. declared moves 288 -> 394 and unresolved
+#: 261 -> 155 by exactly 106, total (549) and contested (0) hold, and the movement is CONSERVED:
+#: every concept that moved went from unresolved to declared. None of those 106 was authored.
+#: Each was transcribed from a source document that already stated it, which is what keeps this
+#: an evidence delta rather than a resolver regression.
+RETIRED_MEASUREMENT = {"total": 549, "declared": 394, "contested": 0, "unresolved": 155}
 
 
 def _home(*registered: str, **kwargs) -> CanonicalHomePolicy:

@@ -12012,15 +12012,29 @@
       "page_start": 13174,
       "page_count": 2,
       "first_seen": "2026-09-08T07:21:18+00:00"
+    },
+    "02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md": {
+      "universal_id": "UCOS-CON-000086",
+      "category": "CON",
+      "page_start": 13176,
+      "page_count": 1,
+      "first_seen": "2026-09-08T11:04:29+00:00"
+    },
+    "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md": {
+      "universal_id": "UCOS-MASTER-000044",
+      "category": "MASTER",
+      "page_start": 13177,
+      "page_count": 3,
+      "first_seen": "2026-09-08T11:50:05+00:00"
     }
   },
-  "page_cursor": 13175,
+  "page_cursor": 13179,
   "category_seq": {
     "BOOK": 1,
     "REG": 19,
     "SRC": 2,
     "ARCH": 25,
-    "CON": 85,
+    "CON": 86,
     "VSN": 3,
     "IDX": 1,
     "EES": 2,
@@ -12041,7 +12055,7 @@
     "EXEC": 4,
     "GOV": 6,
     "ADR": 43,
-    "MASTER": 43,
+    "MASTER": 44,
     "ENVIRONMENTS": 1,
     "VERIFICATION": 1,
     "UCOSOMEGAINF": 1,
@@ -12128,7 +12142,7 @@
     "DET": 6,
     "CONFIG": 40,
     "DATAOBJ": 146,
-    "EXDOC": 3146,
+    "EXDOC": 3148,
     "TOOLING": 57,
     "ENGINE": 1387,
     "TESTOBJ": 900,
@@ -33119,6 +33133,28 @@
         "status": "ACTIVE",
         "path": "02-MASTER/EC-3-BAND-REALIZATION-UNIT-REGISTER.md",
         "name": "UCOS Ω∞ — EC-3 BAND REALIZATION UNIT REGISTER"
+      }
+    ],
+    "UCOS-CON-000086": [
+      {
+        "seq": 1,
+        "at": "2026-09-08T11:04:29+00:00",
+        "content_hash": "e9aa8e43ad071aab1cc97a781618428de91e113fec88fd27e31a0f29446eb890",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-ABSOLUTE-CONSTITUTIONAL-LAWS-REGISTER.md",
+        "name": "UCOS Ω∞ — ABSOLUTE CONSTITUTIONAL LAWS REGISTER"
+      }
+    ],
+    "UCOS-MASTER-000044": [
+      {
+        "seq": 1,
+        "at": "2026-09-08T11:50:05+00:00",
+        "content_hash": "4df6dbf01e0ca2e35c387e52b4f21b85ec6f703841d6082f1cb57971adeecf46",
+        "version": "1.0.0",
+        "status": "ACTIVE",
+        "path": "02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md",
+        "name": "UCOS Ω∞ — COMPILER COMPONENT REGISTER"
       }
     ]
   },
@@ -67178,6 +67214,18 @@
       "object_class": "EXCLUDED_DOCUMENT",
       "category": "EXDOC",
       "first_seen": "commit:7b8b69a2b97e"
+    },
+    "00-BOOK/PORTAL/UCOS-CON-000086.md": {
+      "universal_id": "UCOS-EXDOC-003147",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:b239389ed9ff"
+    },
+    "00-BOOK/PORTAL/UCOS-MASTER-000044.md": {
+      "universal_id": "UCOS-EXDOC-003148",
+      "object_class": "EXCLUDED_DOCUMENT",
+      "category": "EXDOC",
+      "first_seen": "commit:b239389ed9ff"
     }
   },
   "by_observation": {
