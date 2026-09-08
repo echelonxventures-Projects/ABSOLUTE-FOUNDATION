@@ -52,6 +52,7 @@ from engine.verification_intelligence.execution import (
     _combine_and_evaluate,
     _shard_argv,
     assert_topology_neutral,
+    combine_shards,
     plan_shards,
     resolve_workers,
     run_tests,
@@ -2352,3 +2353,202 @@ def test_a_duplicate_law_id_is_refused_at_load(tmp_path) -> None:
 def test_the_live_declaration_has_unique_law_ids() -> None:
     ids = [law["id"] for law in _declaration()["laws"]]
     assert len(ids) == len(set(ids))
+
+
+# --- cross-job sharding: one shard is a JOB rather than a process ------------------------
+#
+# The properties below hold for free inside one process and stop holding the moment a shard
+# becomes a job, because a job sees its neighbours' ARTIFACTS and never their exit codes.
+
+
+def test_only_executes_exactly_one_shard_of_the_plan(tmp_path) -> None:
+    import io
+
+    shards = _throwaway_suite(tmp_path)
+    stream = io.StringIO()
+    code = run_tests(
+        shards,
+        Coverage.NOT_EVALUATED,
+        root=str(tmp_path),
+        python=sys.executable,
+        selection=("test_alpha.py", "test_beta.py"),
+        stream=stream,
+        only=1,
+    )
+    body = stream.getvalue()
+    assert code == 0
+    assert "shard 1" in body
+    assert "shard 0" not in body
+    # The whole plan is still proved before the narrowing, so a job that cannot prove the
+    # partition whole does not run its part of it.
+    assert "1 shard(s) running concurrently" in body
+
+
+def test_a_shard_index_the_plan_does_not_contain_is_refused(tmp_path) -> None:
+    import io
+
+    shards = _throwaway_suite(tmp_path)
+    stream = io.StringIO()
+    code = run_tests(
+        shards,
+        Coverage.NOT_EVALUATED,
+        root=str(tmp_path),
+        python=sys.executable,
+        selection=("test_alpha.py", "test_beta.py"),
+        stream=stream,
+        only=2,
+    )
+    # `plan_shards` returns one shard per worker PLUS one per isolated wave, so a matrix
+    # built from the worker count addresses one fewer shard than the plan holds. That loss
+    # is silent — every job's topology proof passes, because it measures the plan and not
+    # what was executed — so the index itself has to be refused.
+    assert code == 2
+    assert "not in this plan" in stream.getvalue()
+
+
+def test_one_shard_under_the_floor_must_be_given_somewhere_to_leave_its_data(tmp_path) -> None:
+    import io
+
+    shards = _throwaway_suite(tmp_path)
+    stream = io.StringIO()
+    code = run_tests(
+        shards,
+        Coverage.FLOOR_90,
+        root=str(tmp_path),
+        python=sys.executable,
+        selection=("test_alpha.py", "test_beta.py"),
+        stream=stream,
+        only=0,
+    )
+    assert code == 2
+    assert "partial data and no verdict" in stream.getvalue()
+
+
+def test_shard_data_is_named_by_the_index_that_produced_it(tmp_path) -> None:
+    import io
+
+    from engine.verification_intelligence.execution import (
+        _export_shard_data,
+        shard_indices_present,
+    )
+
+    produced = tmp_path / "produced"
+    produced.mkdir()
+    (produced / ".coverage.7").write_text("data", encoding="utf-8")
+    out = tmp_path / "exported"
+    assert _export_shard_data(str(produced), 7, str(out), io.StringIO()) == 0
+    # The combine's fails-closed question is "which shards arrived", and only a name that
+    # carries the shard's identity can answer it.
+    assert shard_indices_present(str(out)) == (7,)
+
+
+def test_a_shard_that_measured_nothing_does_not_export_silence(tmp_path) -> None:
+    import io
+
+    from engine.verification_intelligence.execution import _export_shard_data
+
+    empty = tmp_path / "produced"
+    empty.mkdir()
+    stream = io.StringIO()
+    assert _export_shard_data(str(empty), 3, str(tmp_path / "out"), stream) == 1
+    assert "produced no coverage data" in stream.getvalue()
+
+
+def test_combine_refuses_when_a_shard_left_no_data(tmp_path) -> None:
+    import io
+
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / ".coverage.shard-0").write_text("x", encoding="utf-8")
+    stream = io.StringIO()
+    # In one process a shard that dies before writing data also exits non-zero, so the run
+    # is already failing. A combine job has no such backstop: a cancelled or skipped job is
+    # indistinguishable from one that measured nothing, and the floor would be reported
+    # over the fragment that arrived.
+    assert combine_shards((0, 1, 2), str(data), root=str(tmp_path), stream=stream) == 1
+    body = stream.getvalue()
+    assert "left no coverage data: [1, 2]" in body
+    assert "Refusing" in body
+
+
+def test_combine_refuses_data_from_a_shard_the_plan_does_not_contain(tmp_path) -> None:
+    import io
+
+    data = tmp_path / "data"
+    data.mkdir()
+    for index in (0, 1, 9):
+        (data / f".coverage.shard-{index}").write_text("x", encoding="utf-8")
+    stream = io.StringIO()
+    assert combine_shards((0, 1), str(data), root=str(tmp_path), stream=stream) == 1
+    assert "does not contain" in stream.getvalue()
+
+
+def test_combine_refuses_when_no_shard_was_expected(tmp_path) -> None:
+    import io
+
+    stream = io.StringIO()
+    assert combine_shards((), str(tmp_path), root=str(tmp_path), stream=stream) == 1
+    assert "no shard was expected" in stream.getvalue()
+
+
+def test_combine_refuses_a_data_directory_that_is_not_there(tmp_path) -> None:
+    import io
+
+    stream = io.StringIO()
+    missing = tmp_path / "never-downloaded"
+    assert combine_shards((0,), str(missing), root=str(tmp_path), stream=stream) == 1
+    assert "no coverage data directory" in stream.getvalue()
+
+
+def test_a_whole_suite_plan_may_be_sharded_and_an_impact_plan_may_not() -> None:
+    # An impact selection is derived from the diff, so two runners with different fetch
+    # depths would partition different suites while each proved its own plan whole.
+    assert build_plan("full").selection_is_impact is False
+    assert build_plan("change").selection_is_impact is True
+
+
+def test_the_ci_matrix_is_built_from_the_plan_and_not_from_the_worker_count() -> None:
+    """The addressing defect would live in the workflow, so it is guarded there.
+
+    `plan_shards` returns one shard per worker PLUS one per isolated wave. A matrix built
+    from the worker count therefore addresses `range(workers)` and never names the last
+    shard, whose tests then run nowhere — while every job's topology proof still passes,
+    because that proof measures the plan and not what was executed. Nothing inside the
+    engine can catch that; only the workflow can be wrong in this particular way.
+    """
+    workflow = os.path.join(uvi_gate.repo_root(), ".github", "workflows", "ec1-ci.yml")
+    with open(workflow, encoding="utf-8") as handle:
+        text = handle.read()
+
+    # The matrix comes from the plan's own shard indices.
+    assert "shard: ${{ fromJSON(needs.plan.outputs.shards) }}" in text
+    assert 'print("shards=" + json.dumps([shard.index for shard in plan.shards]))' in text
+
+    # The topology is declared rather than inherited from whichever runner was allocated,
+    # so the plan job and the shard jobs cannot partition differently.
+    assert 'UVI_WORKERS: "12"' in text
+
+    # The data files begin with a dot and upload-artifact has excluded dotfiles since
+    # v4.4; without this the artifact uploads empty and combine refuses a shard that
+    # actually measured everything asked of it.
+    assert "include-hidden-files: true" in text
+
+    # The floor is evaluated once, by a job that fails closed on a missing shard.
+    assert "engine.verification_intelligence combine" in text
+    assert "--plan-digest" in text
+    # A sharded job must not also evaluate the floor itself.
+    assert "UVI_SHARD: ${{ matrix.shard }}" in text
+
+
+def test_a_sharded_run_records_no_stage_evidence() -> None:
+    """Evidence is keyed by stage label and input digest, and neither knows about shards.
+
+    A job that ran one shard and exited 0 would otherwise record PASS against the SAME key
+    a whole-suite run writes, for the coverage stage, having evaluated no floor at all — and
+    a later --change or --fast run may reuse a stored PASS.
+    """
+    with open(os.path.join(uvi_gate.repo_root(), "verify.sh"), encoding="utf-8") as handle:
+        text = handle.read()
+    guard = text.index('if [ -n "${UVI_SHARD:-}" ]; then\n    return 0')
+    record = text.index("-m engine.verification_intelligence record")
+    assert guard < record, "the sharded-run guard must precede the evidence write"

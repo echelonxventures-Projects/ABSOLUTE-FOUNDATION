@@ -25,10 +25,12 @@ from __future__ import annotations
 
 import argparse
 import ast
+import io
 import json
 import os
 import re
 import sys
+import tempfile
 from typing import Any
 
 from engine.verification_intelligence.constitution import (
@@ -44,7 +46,12 @@ from engine.verification_intelligence.evidence import (
     resolve_prefix,
     store_home,
 )
-from engine.verification_intelligence.execution import plan_shards, unit_file
+from engine.verification_intelligence.execution import (
+    combine_shards,
+    plan_shards,
+    run_tests,
+    unit_file,
+)
 from engine.verification_intelligence.model import (
     Coverage,
     Selection,
@@ -401,6 +408,65 @@ def topology_neutrality(ctx: _Context) -> Findings:
     second = plan_shards(units, ctx.tests, 7)
     if [shard.test_paths for shard in first] != [shard.test_paths for shard in second]:
         findings.append("partitioning the same suite twice produced different shards")
+
+    # --- the same law where a shard is a JOB rather than a process ----------------------
+    #
+    # Sharding across jobs obeys this law on a WEAKER substrate, and the weakness is the
+    # reason these are measured rather than argued. In one process a shard that dies
+    # before writing coverage data also exits non-zero, so the run is already failing and
+    # nothing false can be minted. A combine job sees ARTIFACTS, NOT EXIT CODES: a shard
+    # that was cancelled, skipped, or whose upload failed is indistinguishable from one
+    # that measured nothing, and the coverage tool would happily report a floor over the
+    # fragment that arrived.
+    for workers in (1, 2, 3, 7, 12):
+        shards = plan_shards(units, ctx.tests, workers)
+        indices = sorted(shard.index for shard in shards)
+        # ADDRESSING MUST BE TOTAL. A CI matrix names shards by index, and the obvious
+        # matrix is built from the worker count — but `plan_shards` returns one shard per
+        # worker PLUS one per isolated wave, so `range(workers)` does not name every
+        # shard. The loss is silent: the unaddressed shard's tests simply never run, while
+        # every job's topology proof still passes, because that proof measures the PLAN
+        # and not which shards were EXECUTED. Requiring contiguity from zero is what makes
+        # `range(len(shards))` a total addressing, so a matrix built from the plan's own
+        # length cannot skip one.
+        if indices != list(range(len(shards))):
+            findings.append(
+                f"the {workers}-shard plan is not addressable by index: it holds "
+                f"{indices}, so a matrix over range({len(shards)}) would not name every shard"
+            )
+        # Narrowing to one shard per job must lose nothing the whole plan placed.
+        per_job = [
+            unit
+            for index in indices
+            for shard in shards
+            if shard.index == index
+            for unit in shard.test_paths
+        ]
+        whole = [unit for shard in shards for unit in shard.test_paths]
+        if sorted(per_job) != sorted(whole):
+            findings.append(
+                f"executing the {workers}-shard plan one shard per job does not cover "
+                f"what the plan places"
+            )
+
+    # A shard index the plan does not contain must FAULT, not run something else.
+    unaddressable = max(shard.index for shard in first) + 1
+    refused = run_tests(
+        first,
+        Coverage.FLOOR_90,
+        only=unaddressable,
+        coverage_out=os.devnull,
+        stream=io.StringIO(),
+    )
+    if refused == 0:
+        findings.append(
+            f"executing shard {unaddressable}, which the plan does not contain, was not refused"
+        )
+
+    # A combine that is missing a shard must refuse rather than report a floor.
+    with tempfile.TemporaryDirectory() as empty:
+        if combine_shards(tuple(indices), empty, stream=io.StringIO()) == 0:
+            findings.append("combining coverage with every shard's data missing reported a verdict")
     return findings
 
 

@@ -219,6 +219,19 @@ _record_result() {
   fi
   # The evidence registry is a cache of results, so it records what happened either way:
   # storing only passes would make a failure look like an absent measurement next run.
+  # A SHARDED RUN MINTS NO EVIDENCE, and this is the load-bearing line of cross-job
+  # sharding rather than a precaution. Evidence is keyed by stage label and input digest,
+  # and neither depends on how the run was scheduled — so a job that ran one shard of the
+  # pytest stage and exited 0 would record PASS against the SAME key a whole-suite run
+  # writes, for the stage label "pytest + coverage gate (--cov-fail-under=90)", having
+  # evaluated no floor at all. A later --change or --fast run may reuse a stored PASS
+  # (UVI-L-09 only keeps certification-eligible modes away from reuse), and would then
+  # skip the coverage gate on the strength of a shard. The floor is evaluated once, by
+  # `combine`, over every shard's data; until that has happened this run knows nothing
+  # about the suite, and a run that knows nothing records nothing.
+  if [ -n "${UVI_SHARD:-}" ]; then
+    return 0
+  fi
   if [ "$digest" != "-" ] && [ -n "$digest" ] && [ "$UVI_PLAN_OK" = "1" ]; then
     "$PY" -m engine.verification_intelligence record \
       --stage-label "$label" --digest "$digest" \
@@ -402,6 +415,19 @@ run_stage "prerequisite generation (knowledge · determinism · closure 1-3)" \
 # and its sha256 digest from these literals — a per-mode label would make the contract
 # depend on how the run was invoked, which is precisely what a contract must not do.
 PYTEST_ARGV=(-m engine.verification_intelligence run-tests --mode "$MODE")
+# Cross-job sharding: this run executes ONE shard of the plan and leaves its coverage data
+# for the combine job. The mode is unchanged and the plan is still computed in full — the
+# job re-derives the whole partition and re-proves that it unions to the selection before
+# narrowing to its own shard — so this is the same measurement, taken one part at a time.
+# The STAGE LABEL below is deliberately not varied by this; see the note above.
+if [ -n "${UVI_SHARD:-}" ]; then
+  PYTEST_ARGV+=(--shard "$UVI_SHARD" --coverage-out "${UVI_COVERAGE_OUT:?UVI_SHARD needs UVI_COVERAGE_OUT}")
+  # A plain `[ ... ] && ...` here would be the last command of this branch, so an unset
+  # digest would make the `if` compound exit 1 and `set -e` would abort the whole run.
+  if [ -n "${UVI_PLAN_DIGEST:-}" ]; then
+    PYTEST_ARGV+=(--plan-digest "$UVI_PLAN_DIGEST")
+  fi
+fi
 if [ "$UVI_PLAN_OK" != "1" ]; then
   # No plan was produced, so there is no selection to trust. Run everything, under the
   # floor, exactly as the certification path would.
@@ -920,7 +946,19 @@ run_stage "mutation governance boundary decidability (EX-018, every classificati
 # data to summarise, and printing a stale total would be worse than printing none. A
 # developer run whose selection ESCALATED is the exception — it ran under the floor, so
 # the plan turns this stage back on.
-run_stage "coverage report" "$PY" -m coverage report
+# A SHARDED JOB HAS NO TOTAL TO REPORT. This stage reads the canonical `.coverage` beside
+# the repository root, and a shard never writes one — its data goes to UVI_COVERAGE_OUT for
+# the combine job, which runs `coverage report` itself over the combined union. Running it
+# here would fail on absent data, or, worse, summarise a fragment as if it were the suite.
+# The `run_stage "coverage report"` literal stays in this file either way: the verification
+# contract in platform/tests/test_canonical_validation_evidence.py is derived from these
+# literals, and a stage label that appeared only in some runs would make the contract
+# depend on how the run was invoked.
+if [ -n "${UVI_SHARD:-}" ]; then
+  ucos_log "SKIP (this run measured one shard; the combine job reports the total): coverage report"
+else
+  run_stage "coverage report" "$PY" -m coverage report
+fi
 
 # --- Stage 7 (opt-in): full registration transaction + drift gate ----------------
 # READ-ONLY. Calls register.sh --observe, the verification plane: it answers "is

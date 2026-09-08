@@ -26,6 +26,8 @@ overrides.
 from __future__ import annotations
 
 import os
+import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -333,12 +335,40 @@ def run_tests(
     python: str | None = None,
     selection: tuple[str, ...] | None = None,
     stream: object = None,
+    only: int | None = None,
+    coverage_out: str | None = None,
 ) -> int:
     """Execute every shard concurrently and return a single exit status.
 
     Under the coverage floor the shard data files are combined and the floor is
     evaluated once, by the coverage tool, over the union. Any shard failure fails the
     run; the floor is still evaluated so a run reports both facts rather than the first.
+
+    ``only`` executes exactly ONE shard of the plan and is what makes a shard a CI job
+    rather than a process. Three properties make that safe, and each is enforced here
+    rather than assumed:
+
+    * **The plan is still proved whole.** ``assert_topology_neutral`` runs over the FULL
+      plan before ``only`` narrows anything, so every job independently re-derives the
+      same partition and re-proves that it unions to exactly the selection. A job that
+      cannot prove the whole plan does not run its part of it.
+    * **The index is addressed, never counted.** ``only`` must name a shard the plan
+      actually contains. This is the failure that motivated the check: ``plan_shards``
+      returns ``workers + 1`` shards whenever an isolated object is declared — the
+      isolated shard is additional to the concurrent body — so a matrix built from the
+      worker count addresses ``0..workers-1`` and never runs the last shard, while every
+      job's topology proof still passes, because that proof measures the PLAN and not
+      which shards were executed. Refusing an unaddressable index converts that silent
+      loss into a fault; ``UVI-L-08`` measures the same property from outside.
+    * **The floor is never claimed by a part.** Under the floor a single shard produces
+      partial data and no verdict. It must therefore be given ``coverage_out`` to leave
+      that data in, and it evaluates nothing; :func:`combine_shards` evaluates the floor
+      once, over data from every shard, after all of them have landed.
+
+    Wave ordering needs no cross-job equivalent. A wave exists because an isolated object
+    must observe the tree as verification found it rather than the tree eleven thousand
+    tests left behind, and a job that runs one shard alone in a fresh checkout satisfies
+    that more strongly than ordering within a shared runner ever did.
     """
     out = stream or sys.stderr
     base = root or repo_root()
@@ -352,6 +382,27 @@ def run_tests(
             file=out,
         )
         return 1
+
+    if only is not None:
+        addressable = sorted(shard.index for shard in shards)
+        if only not in addressable:
+            print(
+                f"UVI FAULT: shard {only} is not in this plan, which holds shard(s) "
+                f"{addressable}. A matrix addressed by worker count rather than by the "
+                f"plan's own indices would lose the shard(s) it never names, and every "
+                f"job's topology proof would still pass. Refusing.",
+                file=out,
+            )
+            return 2
+        if coverage is Coverage.FLOOR_90 and not coverage_out:
+            print(
+                "UVI FAULT: one shard under the coverage floor produces partial data and "
+                "no verdict. Give it --coverage-out to leave that data in, and evaluate "
+                "the floor once with `combine` over every shard.",
+                file=out,
+            )
+            return 2
+        shards = tuple(shard for shard in shards if shard.index == only)
 
     # --- the interpreter must be able to evaluate the floor it is about to claim -----------
     #
@@ -458,7 +509,10 @@ def run_tests(
             print(f"\nUVI: shard(s) FAILED: {sorted(failed)}", file=out)
 
         if coverage is Coverage.FLOOR_90:
-            status = _combine_and_evaluate(interpreter, base, data_dir, out) or status
+            if only is None:
+                status = _combine_and_evaluate(interpreter, base, data_dir, out) or status
+            else:
+                status = _export_shard_data(data_dir, only, str(coverage_out), out) or status
         return status
     finally:
         _remove_tree(data_dir)
@@ -522,7 +576,108 @@ def _combine_and_evaluate(python: str, base: str, data_dir: str, out: object) ->
     return 0
 
 
-def _remove_tree(path: str) -> None:
-    import shutil
+def _export_shard_data(data_dir: str, index: int, out_dir: str, out: object) -> int:
+    """Leave one shard's coverage data where the combine step can collect it.
 
+    Named by SHARD INDEX rather than by pid or hostname, because the combine step's
+    fails-closed check is `which shards arrived`, and it can only ask that of a name that
+    carries the shard's identity. The exported names still begin with ``.coverage`` so the
+    coverage tool's own combine treats them as data files.
+    """
+    produced = sorted(name for name in os.listdir(data_dir) if name.startswith(".coverage"))
+    if not produced:
+        print(
+            f"UVI: shard {index} produced no coverage data — refusing to export a shard "
+            f"that measured nothing, because the combine step would then evaluate the "
+            f"floor over a denominator this shard never contributed to",
+            file=out,
+        )
+        return 1
+    os.makedirs(out_dir, exist_ok=True)
+    # The ordinal is unconditional. Naming the single-file case differently would make the
+    # exported name depend on HOW MANY files a shard produced — a population the exporter
+    # would then be asserting rather than reporting, which is the closure form UCON-L-15
+    # refuses. The combine reads the shard index out of the name either way.
+    for ordinal, name in enumerate(produced):
+        shutil.copyfile(
+            os.path.join(data_dir, name),
+            os.path.join(out_dir, f".coverage.shard-{index}.{ordinal}"),
+        )
+    print(
+        f"UVI: shard {index} exported {len(produced)} coverage data file(s) to {out_dir}; "
+        f"the floor is not evaluated by a shard",
+        file=out,
+    )
+    return 0
+
+
+def shard_indices_present(data_dir: str) -> tuple[int, ...]:
+    """Which shards left data in ``data_dir``, by the index in their exported names."""
+    seen: set[int] = set()
+    for name in os.listdir(data_dir):
+        match = re.match(r"^\.coverage\.shard-(\d+)(?:\.\d+)?$", name)
+        if match:
+            seen.add(int(match.group(1)))
+    return tuple(sorted(seen))
+
+
+def combine_shards(
+    expected: tuple[int, ...],
+    data_dir: str,
+    *,
+    root: str | None = None,
+    python: str | None = None,
+    stream: object = None,
+) -> int:
+    """Combine cross-job shard data and evaluate the coverage floor exactly once.
+
+    THIS FAILS CLOSED ON A MISSING SHARD, and that is the whole reason it exists rather
+    than the in-process path being pointed at a download directory. In one process a shard
+    that dies before writing data also exits non-zero, so the run is already failing and
+    the missing file cannot mint a false pass. A combine job has no such backstop: it sees
+    artifacts, not exit codes. A job that was cancelled, skipped, or whose upload failed
+    contributes nothing, and the coverage tool would happily combine what did arrive and
+    report a floor over a suite fragment — a green verdict for a run that never measured
+    the missing shard's code. So the expected indices are named by the plan, and every one
+    of them must have arrived before any verdict is computed.
+
+    ``expected`` comes from the plan's own shard indices, never from a worker count; see
+    :func:`run_tests` for why those two numbers differ.
+    """
+    out = stream or sys.stderr
+    base = root or repo_root()
+    interpreter = python or sys.executable
+    if not expected:
+        print("UVI: no shard was expected — refusing to claim the floor", file=out)
+        return 1
+    if not os.path.isdir(data_dir):
+        print(f"UVI: no coverage data directory at {data_dir}", file=out)
+        return 1
+    arrived = shard_indices_present(data_dir)
+    missing = sorted(set(expected) - set(arrived))
+    unexpected = sorted(set(arrived) - set(expected))
+    if missing:
+        print(
+            f"UVI: {len(missing)} of {len(expected)} shard(s) left no coverage data: "
+            f"{missing}. The floor is a property of the whole suite and cannot be "
+            f"evaluated over the part that arrived. Refusing.",
+            file=out,
+        )
+        return 1
+    if unexpected:
+        print(
+            f"UVI: coverage data arrived from shard(s) {unexpected} that this plan does "
+            f"not contain, so the data and the plan disagree about what ran. Refusing.",
+            file=out,
+        )
+        return 1
+    print(
+        f"UVI: all {len(expected)} shard(s) reported; combining and evaluating the floor "
+        f"once over the union",
+        file=out,
+    )
+    return _combine_and_evaluate(interpreter, base, data_dir, out)
+
+
+def _remove_tree(path: str) -> None:
     shutil.rmtree(path, ignore_errors=True)

@@ -267,6 +267,18 @@ class Plan:
     escalated_coverage: bool = False
     notes: tuple[str, ...] = field(default_factory=tuple)
 
+    @property
+    def selection_is_impact(self) -> bool:
+        """Whether this plan's selection is derived from the diff rather than the suite.
+
+        Cross-job sharding needs a selection every job computes identically. A whole-suite
+        selection is such a thing. An impact selection is not: it is derived from the
+        diff, and two runners need not see the same diff — a shallow fetch alone is enough
+        to make them disagree. Each job would then prove its OWN plan whole while
+        partitioning a different suite from its neighbours.
+        """
+        return self.mode.selection is not Selection.WHOLE_SUITE
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "artifact_id": "UVI-000001",

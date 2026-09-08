@@ -25,7 +25,7 @@ import sys
 from engine.verification_intelligence.constitution import load_constitution, repo_root
 from engine.verification_intelligence.evidence import record as record_evidence
 from engine.verification_intelligence.evidence import store_home
-from engine.verification_intelligence.execution import run_tests
+from engine.verification_intelligence.execution import combine_shards, run_tests
 from engine.verification_intelligence.model import VerificationIntelligenceError
 from engine.verification_intelligence.plan import (
     build_plan,
@@ -99,6 +99,7 @@ def main(argv: list[str] | None = None) -> int:
         ("plan", "compute the plan for a mode"),
         ("report", "explain what a mode would do and why"),
         ("run-tests", "execute the pytest stage of a mode"),
+        ("combine", "combine cross-job shard coverage and evaluate the floor once"),
     ):
         node = sub.add_parser(name, help=help_text)
         node.add_argument(
@@ -110,6 +111,30 @@ def main(argv: list[str] | None = None) -> int:
             node.add_argument("--tsv", action="store_true", help="emit action/phase/label rows")
             node.add_argument("--json", action="store_true", help="emit the plan as JSON")
             node.add_argument("--out", default=None, help="write to this file instead of stdout")
+        if name in ("run-tests", "combine"):
+            # Every job recomputes the plan. The digest is how a job PROVES it computed
+            # the same one, rather than relying on the argument that it must have.
+            node.add_argument(
+                "--plan-digest",
+                default=None,
+                help="refuse unless the locally computed plan has this digest",
+            )
+        if name == "run-tests":
+            node.add_argument(
+                "--shard",
+                type=int,
+                default=None,
+                help="execute only this shard index of the plan (for a CI matrix)",
+            )
+            node.add_argument(
+                "--coverage-out",
+                default=None,
+                help="directory to leave this shard's coverage data in",
+            )
+        if name == "combine":
+            node.add_argument(
+                "--data-dir", required=True, help="directory holding every shard's exported data"
+            )
 
     node = sub.add_parser("record", help="store one stage result in the evidence registry")
     node.add_argument("--stage-label", required=True, help="the declared stage label")
@@ -137,6 +162,34 @@ def main(argv: list[str] | None = None) -> int:
             return EXIT_OK
 
         plan = _plan_for(args)
+        expected_digest = getattr(args, "plan_digest", None)
+        if expected_digest:
+            actual = plan_digest(plan)
+            if actual != expected_digest:
+                print(
+                    f"UVI FAULT: this job computed plan {actual}, but was told to expect "
+                    f"{expected_digest}. The jobs of one run are partitioning the suite "
+                    f"differently, so their shards no longer union to the selection.",
+                    file=sys.stderr,
+                )
+                return EXIT_FAULT
+        if getattr(args, "shard", None) is not None and plan.selection_is_impact:
+            print(
+                f"UVI FAULT: --{plan.mode.mode_id} selects by impact, and an impact "
+                f"selection is derived from the diff. Two jobs with different fetch "
+                f"depths would select different suites, so their shards would partition "
+                f"different things while each proved its own plan whole. Shard a "
+                f"whole-suite mode.",
+                file=sys.stderr,
+            )
+            return EXIT_FAULT
+        if args.command == "combine":
+            return combine_shards(
+                tuple(shard.index for shard in plan.shards),
+                args.data_dir,
+                root=repo_root(),
+                python=sys.executable,
+            )
         if args.command == "report":
             print(_render_plan(plan))
             return EXIT_OK
@@ -162,6 +215,8 @@ def main(argv: list[str] | None = None) -> int:
             root=repo_root(),
             python=sys.executable,
             selection=plan.selection.test_paths,
+            only=getattr(args, "shard", None),
+            coverage_out=getattr(args, "coverage_out", None),
         )
     except VerificationIntelligenceError as exc:
         print(f"UVI FAULT: {exc}", file=sys.stderr)
