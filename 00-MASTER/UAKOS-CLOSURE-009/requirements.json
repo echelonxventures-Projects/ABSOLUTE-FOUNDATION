@@ -12,11 +12,11 @@
   "baseline": {
     "branch": "integration/recovery-001",
     "classifier_source": "00-BOOK/tools/config.py::CLASSIFY_RULES",
-    "closure_baseline_commit": "f7aa6bbf",
+    "closure_baseline_commit": "7a288641",
     "closure_determination": "CLOSED",
     "closure_gap_total": 0,
     "concept_total": 549,
-    "head_commit": "f7aa6bbf",
+    "head_commit": "7a288641",
     "tracked_total": 7134
   },
   "baseline_conditions": [
@@ -26384,7 +26384,7 @@
       ],
       "dependency_count": 57,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 170,
+      "evidence_files": 171,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -27457,7 +27457,7 @@
       ],
       "dependency_count": 66,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 90,
+      "evidence_files": 91,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -29162,7 +29162,7 @@
       ],
       "dependency_count": 57,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 131,
+      "evidence_files": 132,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -39266,7 +39266,7 @@
       "volume": "UNCLASSIFIED"
     }
   ],
-  "seal_sha256": "e7db23a90afe64ce60a8f12cc186cd43de8927a67c6a65ac38cfc06033a93d90",
+  "seal_sha256": "d2e06cfa7239c47eaf82cbf2b18d8d29e8b5020a9cd148ea91ede67e49c17b74",
   "systemic_findings": [
     {
       "id": "RG-S01",
