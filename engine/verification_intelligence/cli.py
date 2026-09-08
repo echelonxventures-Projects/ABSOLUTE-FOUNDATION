@@ -110,6 +110,11 @@ def main(argv: list[str] | None = None) -> int:
         if name == "plan":
             node.add_argument("--tsv", action="store_true", help="emit action/phase/label rows")
             node.add_argument("--json", action="store_true", help="emit the plan as JSON")
+            node.add_argument(
+                "--digest",
+                action="store_true",
+                help="emit only the plan digest, so a caller can bind other jobs to THIS plan",
+            )
             node.add_argument("--out", default=None, help="write to this file instead of stdout")
         if name in ("run-tests", "combine"):
             # Every job recomputes the plan. The digest is how a job PROVES it computed
@@ -194,6 +199,11 @@ def main(argv: list[str] | None = None) -> int:
             print(_render_plan(plan))
             return EXIT_OK
         if args.command == "plan":
+            # Before --json, because a caller asking for the identity of the plan wants that
+            # and nothing else on stdout.
+            if args.digest:
+                print(plan_digest(plan))
+                return EXIT_OK
             if args.json:
                 text = plan_json(plan)
             elif args.tsv:

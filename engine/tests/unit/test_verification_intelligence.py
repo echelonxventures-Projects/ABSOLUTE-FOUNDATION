@@ -2522,7 +2522,22 @@ def test_the_ci_matrix_is_built_from_the_plan_and_not_from_the_worker_count() ->
 
     # The matrix comes from the plan's own shard indices.
     assert "shard: ${{ fromJSON(needs.plan.outputs.shards) }}" in text
-    assert 'print("shards=" + json.dumps([shard.index for shard in plan.shards]))' in text
+
+    # AND THAT PLAN IS BUILT BY THE CLI, NOT BY THE WORKFLOW. `workers_override` is an
+    # explicit parameter that `build_plan` never reads from the environment, so a step that
+    # constructs its own plan silently resolves workers from os.cpu_count() while every
+    # shard job, going through the CLI, reads UVI_WORKERS -- and the matrix is then built
+    # from one plan and executed against another. That is not hypothetical: it is what this
+    # workflow did on its first run, and only the digest guard turned it into a red run
+    # rather than a green one missing eight shards' tests.
+    assert "plan --mode full --json" in text
+    assert "plan --mode full --digest" in text
+    # Stated as "imports no plan constructor" rather than "does not mention build_plan",
+    # because the step's own comment names build_plan while explaining why it must not call
+    # it, and an assertion that cannot tell prose from code would forbid the explanation.
+    assert (
+        "verification_intelligence.plan import" not in text
+    ), "the workflow must not construct a plan of its own"
 
     # The topology is declared rather than inherited from whichever runner was allocated,
     # so the plan job and the shard jobs cannot partition differently.

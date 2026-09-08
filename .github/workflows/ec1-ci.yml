@@ -55,20 +55,33 @@ jobs:
       - name: Install (pinned dev dependencies)
         run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
 
+      # THROUGH THE CLI, NOT AROUND IT. The first version of this step built the plan
+      # itself with `build_plan("full")` -- and `workers_override` is an explicit parameter
+      # that `build_plan` never reads from the environment, so this job silently resolved
+      # workers from os.cpu_count() (4 on this runner, giving 5 shards) while every shard
+      # job went through the CLI, read UVI_WORKERS=12, and computed 13. The matrix was
+      # therefore built from one plan and executed against another. Reimplementing the
+      # CLI's plan construction in YAML is what made that possible, so this step now runs
+      # the same command the shard jobs do, and the plan is constructed in exactly one
+      # place. The digest guard caught it -- every shard refused rather than running a
+      # partition it could not prove -- which is why this was a red run and not a green one
+      # missing eight shards' tests.
       - name: Compute the partition and its digest
         id: partition
         run: |
           set -euo pipefail
-          python - <<'PY' >> "$GITHUB_OUTPUT"
-          import json
-          from engine.verification_intelligence.plan import build_plan, plan_digest
-          # --full: whole-suite selection, so every job computes it identically. An
-          # impact-selected mode is derived from the diff and is refused for sharding.
-          plan = build_plan("full")
-          print("shards=" + json.dumps([shard.index for shard in plan.shards]))
-          print("digest=" + plan_digest(plan))
-          PY
-          cat "$GITHUB_OUTPUT"
+          export PLAN
+          UVI="python -m engine.verification_intelligence"
+          # --full selects the whole suite, so every job computes the same plan. An
+          # impact-selected mode is derived from the diff and the CLI refuses to shard it.
+          PLAN="${RUNNER_TEMP}/plan.json"
+          $UVI plan --mode full --json --out "$PLAN"
+          SHARDS="$(python -c 'import json,os;print(json.dumps([s["index"] for s in json.load(open(os.environ["PLAN"]))["shards"]]))')"
+          DIGEST="$($UVI plan --mode full --digest)"
+          echo "shards=${SHARDS}" >> "$GITHUB_OUTPUT"
+          echo "digest=${DIGEST}" >> "$GITHUB_OUTPUT"
+          echo "matrix: ${SHARDS}"
+          echo "digest: ${DIGEST}"
 
   foundation:
     name: Foundation (shard ${{ matrix.shard }})
