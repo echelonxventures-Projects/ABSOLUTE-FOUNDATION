@@ -624,7 +624,10 @@
       "exit_semantics": {
         "0": "all gates green",
         "1": "one or more stages failed"
-      }
+      },
+      "reentrancy_env": "UCOS_RFP_ACTIVE",
+      "reentrancy_reason": "the fixed-point pipeline runs this same gate as a stage of its own, so a nested copy measures it twice; with that pipeline's guard armed this run asserts nothing of its own about it",
+      "timeout_seconds": 5400
     },
     {
       "id": "CK-DETERMINISM-BUILD",

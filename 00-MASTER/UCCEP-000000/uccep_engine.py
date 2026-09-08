@@ -84,6 +84,9 @@ ALLOWED_KEYS = {
         "exit_semantics",
         "json_stdout",
         "json_assertions",
+        "reentrancy_env",
+        "reentrancy_reason",
+        "timeout_seconds",
         "$assertion_comment",
     },
     "gates": {"id", "name", "owner", "checks"},
@@ -612,7 +615,27 @@ def run_check(check: dict, resolved_tier: str, interp: dict) -> dict:
     }
     if TIER_ORDER[check["tier"]] > TIER_ORDER[resolved_tier]:
         record["in_scope"] = False
+        record["excluded_by"] = "tier"
         record["reason"] = f"tier {check['tier']} above the selected tier {resolved_tier}"
+        return record
+
+    # A check whose declared guard variable is set is already being run BY THE CALLER, so
+    # running it here measures the same thing a second time. The aggregate is bound as a
+    # stage of a pipeline that also runs this gate directly; with the guard armed the
+    # nested copy is skipped, exactly as that pipeline's own guard skips the aggregate.
+    #
+    # Excluded from scope rather than passed: this run produced no evidence of its own for
+    # it, so it caps the certification this run may assert, in the same way a tier
+    # exclusion does. Which variable guards which check is DECLARED — the engine names
+    # neither the pipeline nor the gate, so a new topology is admitted by data alone.
+    guard = str(check.get("reentrancy_env") or "")
+    if guard and os.environ.get(guard):
+        record["in_scope"] = False
+        record["excluded_by"] = "reentrancy"
+        record["reason"] = str(
+            check.get("reentrancy_reason")
+            or f"{guard} is set, so the caller is already running this gate"
+        )
         return record
 
     argv = list(check["argv"])
@@ -636,9 +659,27 @@ def run_check(check: dict, resolved_tier: str, interp: dict) -> dict:
     # are executed here.
     # noqa: S603 — argv comes from the declaration (Repository Truth), never from user
     # input, and is executed as a list with no shell.
-    completed = subprocess.run(  # noqa: S603
-        argv, cwd=REPO, capture_output=True, text=True, check=False, env=env
-    )
+    # BOUNDED, because an unbounded child cannot be told apart from a hung one. Without a
+    # bound the aggregate inherits its child's runtime with no ceiling of its own: a gate
+    # that never returns takes the whole run with it, and the CALLER's timeout then kills
+    # the aggregate without ever naming which gate was responsible. Declared per check; a
+    # check that declares no bound is unbounded exactly as before.
+    limit = check.get("timeout_seconds")
+    try:
+        completed = subprocess.run(  # noqa: S603
+            argv,
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            check=False,
+            env=env,
+            timeout=float(limit) if limit else None,
+        )
+    except subprocess.TimeoutExpired:
+        record["executed"] = True
+        record["verdict"] = "FAIL"
+        record["reason"] = f"exceeded its declared bound of {limit}s and was stopped"
+        return record
     record["executed"] = True
     record["exit_code"] = completed.returncode
     stdout = completed.stdout or ""
@@ -716,7 +757,27 @@ def run_self_check(check: dict, decl: dict, resolved_tier: str) -> dict:
     }
     if TIER_ORDER[check["tier"]] > TIER_ORDER[resolved_tier]:
         record["in_scope"] = False
+        record["excluded_by"] = "tier"
         record["reason"] = f"tier {check['tier']} above the selected tier {resolved_tier}"
+        return record
+
+    # A check whose declared guard variable is set is already being run BY THE CALLER, so
+    # running it here measures the same thing a second time. The aggregate is bound as a
+    # stage of a pipeline that also runs this gate directly; with the guard armed the
+    # nested copy is skipped, exactly as that pipeline's own guard skips the aggregate.
+    #
+    # Excluded from scope rather than passed: this run produced no evidence of its own for
+    # it, so it caps the certification this run may assert, in the same way a tier
+    # exclusion does. Which variable guards which check is DECLARED — the engine names
+    # neither the pipeline nor the gate, so a new topology is admitted by data alone.
+    guard = str(check.get("reentrancy_env") or "")
+    if guard and os.environ.get(guard):
+        record["in_scope"] = False
+        record["excluded_by"] = "reentrancy"
+        record["reason"] = str(
+            check.get("reentrancy_reason")
+            or f"{guard} is set, so the caller is already running this gate"
+        )
         return record
     handler = SELF_CHECKS[check["argv"][1]]
     findings = handler(decl)
@@ -879,7 +940,22 @@ def assemble(decl: dict, records: dict[str, dict], resolved_tier: str, repo_stat
     # Blocking checks deliberately excluded by tier. Not a failure, but a scope limit
     # that must cap the certification this run may assert.
     blocking_out_of_tier = sorted(
-        rec["id"] for rec in ordered if not rec["in_scope"] and not rec["advisory"]
+        rec["id"]
+        for rec in ordered
+        if not rec["in_scope"]
+        and not rec["advisory"]
+        and rec.get("excluded_by") != "reentrancy"
+    )
+    # Kept apart from the tier exclusions because the two cap the certification for
+    # DIFFERENT reasons, and a ceiling that misstates its reason is not a disclosure. A
+    # tier exclusion says this run was never asked to measure the check; a re-entrancy
+    # exclusion says the caller is measuring it right now.
+    blocking_reentrant = sorted(
+        rec["id"]
+        for rec in ordered
+        if not rec["in_scope"]
+        and not rec["advisory"]
+        and rec.get("excluded_by") == "reentrancy"
     )
     # Fail-closed subject: a failed check and an unproven check are equally blocking.
     gate_blocking = sorted(set(blocking_failures) | set(unproven))
@@ -894,6 +970,13 @@ def assemble(decl: dict, records: dict[str, dict], resolved_tier: str, repo_stat
             f"tier `{resolved_tier}` excluded {len(blocking_out_of_tier)} blocking check(s) "
             f"from this run: {', '.join(f'`{cid}`' for cid in blocking_out_of_tier)} — "
             "a tier-limited run may not assert unqualified certification"
+        ]
+    if blocking_reentrant:
+        ceiling = ceiling + [
+            f"{len(blocking_reentrant)} blocking check(s) were already running in the "
+            f"caller and were not run again here: "
+            f"{', '.join(f'`{cid}`' for cid in blocking_reentrant)} — this run asserts "
+            "nothing of its own about them"
         ]
     if gate_blocking:
         certification = "NOT-CERTIFIED"
