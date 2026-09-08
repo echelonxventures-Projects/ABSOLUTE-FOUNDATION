@@ -39,8 +39,19 @@ permissions:
   contents: read
 
 concurrency:
+  # A fixed point is a property of a COMMITTED state, so a run cancelled by the next push
+  # asserts nothing at all. Under `cancel-in-progress: true` this gate never once returned a
+  # verdict: eight consecutive runs were cancelled after 2m, 16m, 17m, 1h18m, 1h26m, 1h39m and
+  # 2h33m, each killed by the following commit, because the gate takes longer than the interval
+  # between pushes. A fail-closed gate that never asserts a verdict enforces nothing — the same
+  # shape as a workflow that cannot parse.
+  #
+  # `false` lets the in-flight run finish. The queue cannot grow without bound: GitHub keeps at
+  # most one PENDING run per concurrency group and a newly queued run supersedes the pending
+  # one, so this settles at one running plus one waiting. The verdict then lags HEAD by however
+  # long the run takes, which is correct for a certification of a committed state.
   group: rfp-gate-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   self-guards:
