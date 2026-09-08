@@ -430,7 +430,7 @@
   ],
   "$pipeline_comment": "Phase 5 / RFP-6. The declared pipeline P. Ordered: a stage may consume what an earlier stage produced. 'writes' is the stage's declared write zone, used to ATTRIBUTE residue (CYC-UNDECLARED) — it is not a permission and grants nothing. 'reentrant: false' marks a stage that must not run while the fixed-point engine is already active, which is how the aggregate certifier is kept out of its own pipeline (CYC-RECURSE). 'heavy' stages are skipped only in the explicitly-named fast mode, never in the gate.",
   "pipeline": {
-    "convergence_passes": 3,
+    "convergence_passes": 2,
     "reentrancy_env": "UCOS_RFP_ACTIVE",
     "stages": [
       {

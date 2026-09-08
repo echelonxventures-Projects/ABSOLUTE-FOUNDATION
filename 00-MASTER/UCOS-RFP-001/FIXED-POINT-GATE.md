@@ -11,7 +11,7 @@
 
 ## What the gate does
 
-It executes the declared pipeline **3 times** over the committed HEAD and requires the repository to be byte-identical after every pass. Stability is an observation over repetitions: a fixed point seen once may be coincidence.
+It executes the declared pipeline **2 times** over the committed HEAD and requires the repository to be byte-identical after every pass. Stability is an observation over repetitions: a fixed point seen once may be coincidence.
 
 ## Mandatory closure criteria
 

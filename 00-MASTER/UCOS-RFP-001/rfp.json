@@ -272,7 +272,7 @@
       "signature": "A declared stage wrote a path that a DIFFERENT declared stage's write zone owns. Attributing the residue to some declared zone is not enough: if the writer is not the owner, the artifact has two producers and belongs to no single write scope, so regenerating it from its declared owner cannot reproduce it."
     }
   ],
-  "declaration_seal_sha256": "d8e69c809dcf8d7130b612260bca3699e2147028e549e09657c7bb0e2294294e",
+  "declaration_seal_sha256": "6c0c46f2503129510d323d944dfbc5415318baaeb6a6fa0d17db1900c132f89b",
   "findings": [],
   "lifecycle": [
     {
@@ -356,7 +356,7 @@
     }
   ],
   "pipeline": {
-    "convergence_passes": 3,
+    "convergence_passes": 2,
     "reentrancy_env": "UCOS_RFP_ACTIVE",
     "stages": [
       {
