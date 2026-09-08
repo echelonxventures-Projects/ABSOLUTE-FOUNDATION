@@ -258,7 +258,14 @@ DERIVED_SEG = ("_evidence/", "/outputs/", "outputs/", "determinism-evidence/",
 # the document defines: `## SECTION 3 — META-RELATIONSHIPS (AMR-01…14)`. It is read, never
 # inferred — which is why the same header correctly withholds AMC-11 from a section that
 # declares AMC-01…10.
-_HEAD_RANGE = re.compile(r"\b([A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*)-(\d+)\s*(?:\u2026|\.\.\.|\u2013|\u2014)\s*(?:\1-)?(\d+)\b")
+# The numbering segment may carry a letter prefix — this repository writes both `AMR-01\u202614`
+# and `EC3-B10-U01\u2026U12`, and a range over the second is as much a declaration as over the
+# first. Reading only the bare-numeral form made the rule fluent in one of the repository's
+# conventions and blind to the other.
+_HEAD_RANGE = re.compile(
+    r"\b([A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*)-([A-Z]*)(\d+)"
+    r"\s*(?:\u2026|\.\.\.|\u2013|\u2014)\s*(?:\1-)?\2?(\d+)\b"
+)
 # A programme that MEASURES concepts cannot be the definitional home of the concepts it
 # measures; its registers list and score them and define none.
 _MEASUREMENT_HOME = re.compile(r"00-MASTER/(UAKOS-|P0-|UCOS-MXR-|UCOS-RIB-|UCOS-AEE-)")
@@ -268,6 +275,34 @@ _MEASUREMENT_HOME = re.compile(r"00-MASTER/(UAKOS-|P0-|UCOS-MXR-|UCOS-RIB-|UCOS-
 # that generated output never owns truth, so a projection cannot be a definitional home — and
 # the document says so itself, which keeps this read rather than inferred.
 _PROJECTION = re.compile(r"^\s*[-*]?\s*Source:\s*\[", re.M)
+
+
+# A concept AUTHORED in code: its id standing alone as a constructor argument, in a module
+# that is not a test and not derived. `engine/knowledge/seed.py` writes UCKO-PRIN-0001 with
+# its title, statement, rationale and authority as literal source; the canonical knowledge
+# store is generated FROM that, so under UCKP-ART-11 the seed is the home and the store is a
+# projection of it. CLOSURE-002 already holds that "implementation is a valid canonical home".
+_CODE_AUTHORED = re.compile(r"""^["']([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+)["'],?$""")
+
+
+def _code_author_eligible(rel: str, zone: str) -> bool:
+    return (zone == "repo" and _top(rel) in CODE_ROOTS and rel.endswith(".py")
+            and "/tests/" not in rel and "/test_" not in rel
+            and not any(seg in rel for seg in DERIVED_SEG))
+
+
+def _defined_knowledge_objects() -> set[str]:
+    """Ids the canonical store records WITH a statement — i.e. carrying a definition."""
+    store = REPO / "knowledge" / "canonical-knowledge.json"
+    try:
+        data = json.loads(store.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return set()
+    return {
+        str(o.get("cko_id") or "")
+        for o in (data.get("objects") or [])
+        if isinstance(o, dict) and str(o.get("statement") or "").strip()
+    } - {""}
 
 
 def _heading_home_eligible(rel: str, zone: str, text: str) -> bool:
@@ -337,7 +372,8 @@ def _definitional_body_id(line: str) -> str | None:
 
 def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone: str,
           heading_index: dict[str, set] | None = None,
-          body_index: dict[str, set] | None = None) -> None:
+          body_index: dict[str, set] | None = None,
+          code_index: dict[str, set] | None = None) -> None:
     """Populate concept occurrences with line-local disposition markers. zone in {repo, source, corpus}."""
     for rel, abspath in paths:
         text = _read_text(abspath)
@@ -354,6 +390,10 @@ def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone:
                     if _SENTINEL.search(cid):  # wildcard/example ids (…-99, …-999) are not concepts
                         continue
                     ids_here.append((cid, fam))
+            if code_index is not None and _code_author_eligible(rel, zone):
+                m = _CODE_AUTHORED.match(line.strip())
+                if m:
+                    code_index.setdefault(m.group(1), set()).add(rel)
             if body_index is not None and not line.lstrip().startswith("#") \
                     and _heading_home_eligible(rel, zone, text):
                 delivered = _definitional_body_id(line)
@@ -370,11 +410,12 @@ def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone:
                     if re.match(r"#{1,6}\s+[*_`]*" + re.escape(cid) + r"\b", line.strip()):
                         heading_index.setdefault(cid, set()).add(rel)
                 for m in _HEAD_RANGE.finditer(line):
-                    stem, first, last = m.group(1), m.group(2), m.group(3)
+                    stem, mark, first, last = m.group(1), m.group(2), m.group(3), m.group(4)
                     if not (0 <= int(last) - int(first) <= 60):
                         continue
                     for n in range(int(first), int(last) + 1):
-                        heading_index.setdefault(f"{stem}-{str(n).zfill(len(first))}", set()).add(rel)
+                        cid_n = f"{stem}-{mark}{str(n).zfill(len(first))}"
+                        heading_index.setdefault(cid_n, set()).add(rel)
             if not ids_here:
                 continue
             reject = bool(REJECT_MARK.search(line))
@@ -451,7 +492,8 @@ def build_concepts(sources: dict) -> tuple[dict, dict]:
     # First pass over repo to build cert_index, then classify.
     heading_index: dict[str, set] = {}
     body_index: dict[str, set] = {}
-    _scan(repo_paths, concepts, cert_index, "repo", heading_index, body_index)
+    code_index: dict[str, set] = {}
+    _scan(repo_paths, concepts, cert_index, "repo", heading_index, body_index, code_index)
     _scan(source_paths, concepts, cert_index, "source")
     _scan(corpus_paths, concepts, cert_index, "corpus")
 
@@ -469,6 +511,24 @@ def build_concepts(sources: dict) -> tuple[dict, dict]:
     # do, the multiplicity is a real competition for someone to resolve, and this engine
     # records nothing rather than picking a winner: choosing between two authored declarations
     # is a determination, and this engine measures.
+    # A CONCEPT AUTHORED IN CODE IS HOMED WHERE IT WAS WRITTEN.
+    # Claimed only for a concept the canonical store records WITH A STATEMENT, authored in
+    # exactly one module. Both halves are needed. Store membership proves the id names a
+    # knowledge object carrying a definition rather than a row in a list — without it,
+    # `infrastructure/band13_meta.py` qualifies, and its own comment says its entries name
+    # "the frozen architecture the unit realizes": an inventory pointing AT definitions, not
+    # a definition. One module is needed because a concept written in two places has no
+    # single home to name, and that is a competition rather than a determination for this
+    # engine to settle.
+    defined_objects = _defined_knowledge_objects()
+    for cid, rels in code_index.items():
+        rec = concepts.get(cid)
+        if rec is None or rec["def_homes"] or cid not in defined_objects or len(rels) != 1:
+            continue
+        rec["def_homes"].add(next(iter(rels)))
+        rec["code_home"] = True
+        rec["homed"] = True
+
     # A BASENAME PREFIX IS NOT AN IDENTITY.
     # Three files begin `UCOS-COMP-000000-` and the basename rule read all three as homes of
     # UCOS-COMP-000000, reporting a competition that does not exist. Two of them state their

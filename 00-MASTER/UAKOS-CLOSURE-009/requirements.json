@@ -2,21 +2,21 @@
   "assimilation": {
     "complete": false,
     "created_concepts": 0,
-    "fully": 233,
+    "fully": 238,
     "not": 0,
-    "partially": 316,
-    "percent_fully": 42.4408,
+    "partially": 311,
+    "percent_fully": 43.3515,
     "reused_concepts": 549
   },
   "authority": "NONE-DERIVED-TRUTH",
   "baseline": {
     "branch": "integration/recovery-001",
     "classifier_source": "00-BOOK/tools/config.py::CLASSIFY_RULES",
-    "closure_baseline_commit": "43557978",
+    "closure_baseline_commit": "d82b3101",
     "closure_determination": "CLOSED",
     "closure_gap_total": 0,
     "concept_total": 549,
-    "head_commit": "43557978",
+    "head_commit": "d82b3101",
     "tracked_total": 7134
   },
   "baseline_conditions": [
@@ -64,7 +64,7 @@
     },
     {
       "id": "BC-07",
-      "measured": "planning fixed point reached; assimilation fixed point 233/549",
+      "measured": "planning fixed point reached; assimilation fixed point 238/549",
       "name": "100% fixed point",
       "owner": "phase3.json",
       "verdict": "FAIL"
@@ -174,7 +174,7 @@
     {
       "canonical_owner": "00-MASTER/UAKOS-CLOSURE-002/22-CANONICAL-HOME-REGISTER.md",
       "class": "OWNERSHIP",
-      "count": 316,
+      "count": 311,
       "gap_id": "RG-B01",
       "members": [
         "RR-AF-3",
@@ -335,11 +335,6 @@
         "RR-UCKO-OTHER-0001",
         "RR-UCKO-PAT-0001",
         "RR-UCKO-PEER-0001",
-        "RR-UCKO-PRIN-0001",
-        "RR-UCKO-PRIN-0002",
-        "RR-UCKO-PRIN-0003",
-        "RR-UCKO-PRIN-0004",
-        "RR-UCKO-PRIN-0005",
         "RR-UCKO-RULE-0001",
         "RR-UCKO-STD-0001",
         "RR-UCKO-T-0001",
@@ -509,7 +504,7 @@
     {
       "canonical_owner": "00-CEP/CEP-001-CONSTITUTIONAL-ENGINEERING-CONSTITUTION.md",
       "class": "AUTHORITY",
-      "count": 208,
+      "count": 213,
       "gap_id": "RG-B03",
       "members": [
         "RR-AMC-01",
@@ -712,6 +707,11 @@
         "RR-SMR-11",
         "RR-SMR-12",
         "RR-SMR-13",
+        "RR-UCKO-PRIN-0001",
+        "RR-UCKO-PRIN-0002",
+        "RR-UCKO-PRIN-0003",
+        "RR-UCKO-PRIN-0004",
+        "RR-UCKO-PRIN-0005",
         "RR-UCOS-EXEC-001",
         "RR-UCOS-EXEC-002",
         "RR-UCOS-GOV-001",
@@ -2409,7 +2409,7 @@
       ".github": 1,
       "00-BOOK": 92,
       "00-CEP": 15,
-      "00-MASTER": 229,
+      "00-MASTER": 224,
       "02-MASTER": 18,
       "07-ENGINEERING": 1,
       "08-RUNTIME": 14,
@@ -2417,15 +2417,16 @@
       "10-DATA": 40,
       "11-SERVICE": 41,
       "12-APPLICATION": 42,
-      "13-INFRASTRUCTURE": 38
+      "13-INFRASTRUCTURE": 38,
+      "engine": 5
     },
     "certification_status": {
       "CERTIFIED-PROVISIONAL": 241,
       "UNCERTIFIED": 308
     },
     "coverage": {
-      "FULLY ASSIMILATED": 233,
-      "PARTIALLY ASSIMILATED": 316
+      "FULLY ASSIMILATED": 238,
+      "PARTIALLY ASSIMILATED": 311
     },
     "family": {
       "APPLICATION": 21,
@@ -2480,8 +2481,8 @@
       "M6": 162
     },
     "ownership": {
-      "DECLARED": 233,
-      "INFERRED": 316
+      "DECLARED": 238,
+      "INFERRED": 311
     },
     "runtime_status": {
       "NO-RUNTIME-EVIDENCE": 549
@@ -14574,9 +14575,10 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 104,
+      "evidence_files": 105,
       "evidence_kinds": [
         "certificate",
+        "engine",
         "registry",
         "test",
         "verification"
@@ -14592,7 +14594,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 104 evidence files · zones 00-BOOK+00-MASTER+06-IMPLEMENTATION+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-UNIVERSAL-KNOWLEDGE-ASSIMILATION-COMPLETENESS-DETERMINATION.md+data+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 105 evidence files · zones 00-BOOK+00-MASTER+06-IMPLEMENTATION+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-UNIVERSAL-KNOWLEDGE-ASSIMILATION-COMPLETENESS-DETERMINATION.md+data+intelligence+knowledge)",
       "requirement_id": "RR-EC3-B10-U01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -31027,13 +31029,15 @@
     },
     {
       "assimilation_action": "REUSED",
-      "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "00-MASTER",
-      "category": "UNCLASSIFIED",
+      "authority": "UNDECLARED-AT-CANONICAL-HOME",
+      "canonical_owner": "engine",
+      "category": "ENG",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-PRIN-0001",
-      "coverage": "PARTIALLY ASSIMILATED",
-      "definitional_homes": [],
+      "coverage": "FULLY ASSIMILATED",
+      "definitional_homes": [
+        "engine/knowledge/seed.py"
+      ],
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
@@ -31051,11 +31055,11 @@
       "maturity": "TEST-EVIDENCED",
       "maturity_level": "M4",
       "orphan": false,
-      "ownership": "INFERRED",
-      "program": "UNCLASSIFIED",
+      "ownership": "DECLARED",
+      "program": "ENG",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 87 evidence files · zones 00-MASTER+02-MASTER+03-ARCHITECTURAL-DECISION-ASSIMILATION-MATRIX.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+PHASE-IDENTITY-NAMESPACE-OWNERSHIP-DETERMINATION.md+PHASE-KNOWLEDGE-IDENTITY-RELATIONSHIP-DETERMINATION.md+UNIVERSAL-PRINCIPLE-ASSIMILATION-ANALYSIS.md+engine+intelligence+knowledge)",
+      "repository_location": "engine/knowledge/seed.py",
       "requirement_id": "RR-UCKO-PRIN-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -31073,17 +31077,19 @@
       "universal_id": "UNREGISTERED",
       "validation_status": "TEST-ONLY",
       "verification_status": "NOT-EVIDENCED",
-      "volume": "UNCLASSIFIED"
+      "volume": "VOL-003"
     },
     {
       "assimilation_action": "REUSED",
-      "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "00-MASTER",
-      "category": "UNCLASSIFIED",
+      "authority": "UNDECLARED-AT-CANONICAL-HOME",
+      "canonical_owner": "engine",
+      "category": "ENG",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-PRIN-0002",
-      "coverage": "PARTIALLY ASSIMILATED",
-      "definitional_homes": [],
+      "coverage": "FULLY ASSIMILATED",
+      "definitional_homes": [
+        "engine/knowledge/seed.py"
+      ],
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
@@ -31099,11 +31105,11 @@
       "maturity": "IMPLEMENTED",
       "maturity_level": "M3",
       "orphan": false,
-      "ownership": "INFERRED",
-      "program": "UNCLASSIFIED",
+      "ownership": "DECLARED",
+      "program": "ENG",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 44 evidence files · zones 00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine+intelligence+knowledge)",
+      "repository_location": "engine/knowledge/seed.py",
       "requirement_id": "RR-UCKO-PRIN-0002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -31121,17 +31127,19 @@
       "universal_id": "UNREGISTERED",
       "validation_status": "NOT-EVIDENCED",
       "verification_status": "NOT-EVIDENCED",
-      "volume": "UNCLASSIFIED"
+      "volume": "VOL-003"
     },
     {
       "assimilation_action": "REUSED",
-      "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "00-MASTER",
-      "category": "UNCLASSIFIED",
+      "authority": "UNDECLARED-AT-CANONICAL-HOME",
+      "canonical_owner": "engine",
+      "category": "ENG",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-PRIN-0003",
-      "coverage": "PARTIALLY ASSIMILATED",
-      "definitional_homes": [],
+      "coverage": "FULLY ASSIMILATED",
+      "definitional_homes": [
+        "engine/knowledge/seed.py"
+      ],
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
@@ -31148,11 +31156,11 @@
       "maturity": "IMPLEMENTED",
       "maturity_level": "M3",
       "orphan": false,
-      "ownership": "INFERRED",
-      "program": "UNCLASSIFIED",
+      "ownership": "DECLARED",
+      "program": "ENG",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 39 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine+intelligence+knowledge)",
+      "repository_location": "engine/knowledge/seed.py",
       "requirement_id": "RR-UCKO-PRIN-0003",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -31170,17 +31178,19 @@
       "universal_id": "UNREGISTERED",
       "validation_status": "NOT-EVIDENCED",
       "verification_status": "NOT-EVIDENCED",
-      "volume": "UNCLASSIFIED"
+      "volume": "VOL-003"
     },
     {
       "assimilation_action": "REUSED",
-      "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "00-MASTER",
-      "category": "UNCLASSIFIED",
+      "authority": "UNDECLARED-AT-CANONICAL-HOME",
+      "canonical_owner": "engine",
+      "category": "ENG",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-PRIN-0004",
-      "coverage": "PARTIALLY ASSIMILATED",
-      "definitional_homes": [],
+      "coverage": "FULLY ASSIMILATED",
+      "definitional_homes": [
+        "engine/knowledge/seed.py"
+      ],
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
@@ -31196,11 +31206,11 @@
       "maturity": "IMPLEMENTED",
       "maturity_level": "M3",
       "orphan": false,
-      "ownership": "INFERRED",
-      "program": "UNCLASSIFIED",
+      "ownership": "DECLARED",
+      "program": "ENG",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 31 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine+knowledge)",
+      "repository_location": "engine/knowledge/seed.py",
       "requirement_id": "RR-UCKO-PRIN-0004",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -31218,17 +31228,19 @@
       "universal_id": "UNREGISTERED",
       "validation_status": "NOT-EVIDENCED",
       "verification_status": "NOT-EVIDENCED",
-      "volume": "UNCLASSIFIED"
+      "volume": "VOL-003"
     },
     {
       "assimilation_action": "REUSED",
-      "authority": "NO-CANONICAL-HOME",
-      "canonical_owner": "00-MASTER",
-      "category": "UNCLASSIFIED",
+      "authority": "UNDECLARED-AT-CANONICAL-HOME",
+      "canonical_owner": "engine",
+      "category": "ENG",
       "certification_status": "UNCERTIFIED",
       "concept_id": "UCKO-PRIN-0005",
-      "coverage": "PARTIALLY ASSIMILATED",
-      "definitional_homes": [],
+      "coverage": "FULLY ASSIMILATED",
+      "definitional_homes": [
+        "engine/knowledge/seed.py"
+      ],
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
@@ -31245,11 +31257,11 @@
       "maturity": "IMPLEMENTED",
       "maturity_level": "M3",
       "orphan": false,
-      "ownership": "INFERRED",
-      "program": "UNCLASSIFIED",
+      "ownership": "DECLARED",
+      "program": "ENG",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 48 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine+intelligence+knowledge)",
+      "repository_location": "engine/knowledge/seed.py",
       "requirement_id": "RR-UCKO-PRIN-0005",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -31267,7 +31279,7 @@
       "universal_id": "UNREGISTERED",
       "validation_status": "NOT-EVIDENCED",
       "verification_status": "NOT-EVIDENCED",
-      "volume": "UNCLASSIFIED"
+      "volume": "VOL-003"
     },
     {
       "assimilation_action": "REUSED",
@@ -39260,7 +39272,7 @@
       "volume": "UNCLASSIFIED"
     }
   ],
-  "seal_sha256": "16e74b31b499e924ffdbd494909a42bccb07293a6101ae8290bc73ce35f81708",
+  "seal_sha256": "426ddd52a8b825e1ca4dcb49168439b5ae0bdabb7a82eb5f95840a632ff34578",
   "systemic_findings": [
     {
       "id": "RG-S01",
@@ -39358,7 +39370,7 @@
       "class": "OWNERSHIP",
       "gap_id": "RG-B01",
       "priority": 1,
-      "scope_count": 316,
+      "scope_count": 311,
       "title": "CANONICAL-OWNERSHIP-INFERRED",
       "wave": "W01",
       "work_package_id": "WP-UAKOS-CLOSURE-009-001"
@@ -39371,7 +39383,7 @@
       "class": "AUTHORITY",
       "gap_id": "RG-B03",
       "priority": 2,
-      "scope_count": 208,
+      "scope_count": 213,
       "title": "AUTHORITY-UNDECLARED-AT-CANONICAL-HOME",
       "wave": "W02",
       "work_package_id": "WP-UAKOS-CLOSURE-009-002"
