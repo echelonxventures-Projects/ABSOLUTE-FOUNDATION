@@ -241,7 +241,7 @@ def scan_disclosure(sources: dict) -> dict:
 def _new_rec(cid: str, fam: str) -> dict:
     return {
         "id": cid, "family": fam, "zones": set(), "tops": set(),
-        "homed": False, "in_filename": False, "in_code": False, "in_book": False,
+        "homed": False, "in_filename": False, "heading_home": False, "in_code": False, "in_book": False,
         "in_spec": False, "in_constitution": False, "in_plan": False,
         "deferred": False, "rejected": False, "certified": False,
         "files": set(), "def_homes": set(), "exact_homes": set(),
@@ -252,6 +252,29 @@ def _new_rec(cid: str, fam: str) -> dict:
 # derived / non-definitional path segments: presence here is evidence, never a canonical home
 DERIVED_SEG = ("_evidence/", "/outputs/", "outputs/", "determinism-evidence/",
                "CHECKPOINTS/", "/__pycache__/", ".egg-info/")
+
+
+# A heading that names an id, or a range containing it, is an AUTHORED DECLARATION of what
+# the document defines: `## SECTION 3 — META-RELATIONSHIPS (AMR-01…14)`. It is read, never
+# inferred — which is why the same header correctly withholds AMC-11 from a section that
+# declares AMC-01…10.
+_HEAD_RANGE = re.compile(r"\b([A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*)-(\d+)\s*(?:\u2026|\.\.\.|\u2013|\u2014)\s*(?:\1-)?(\d+)\b")
+# A programme that MEASURES concepts cannot be the definitional home of the concepts it
+# measures; its registers list and score them and define none.
+_MEASUREMENT_HOME = re.compile(r"00-MASTER/(UAKOS-|P0-|UCOS-MXR-|UCOS-RIB-|UCOS-AEE-)")
+
+
+# A document that names another as its `Source:` is a PROJECTION of it. UCKP-ART-11 is explicit
+# that generated output never owns truth, so a projection cannot be a definitional home — and
+# the document says so itself, which keeps this read rather than inferred.
+_PROJECTION = re.compile(r"^\s*[-*]?\s*Source:\s*\[", re.M)
+
+
+def _heading_home_eligible(rel: str, zone: str, text: str) -> bool:
+    return (zone == "repo" and _top(rel) in TRUTH_ROOTS
+            and not any(seg in rel for seg in DERIVED_SEG)
+            and not _MEASUREMENT_HOME.match(rel)
+            and not _PROJECTION.search(text[:2000]))
 
 
 def _is_def_home(rel: str, cid: str) -> bool:
@@ -266,7 +289,29 @@ def _is_def_home(rel: str, cid: str) -> bool:
     return stem == cu or stem.startswith(cu + "-") or stem.startswith(cu + ".") or stem.startswith(cu + "_")
 
 
-def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone: str) -> None:
+def _definitional_body_id(line: str) -> str | None:
+    """The id this line DELIVERS a definition for, if any.
+
+    A definition occupies a structural position: the whole first cell of a table row, or the
+    defined term leading a line. An id appearing later in a row is a reference to it.
+    """
+    s = line.strip()
+    if s.startswith("|"):
+        parts = s.split("|")
+        if len(parts) > 1:
+            cell = parts[1].strip().strip("*`_ ").strip()
+            return cell or None
+        return None
+    m = re.match(
+        r"^[*`_]*([A-Za-z\u03a9][A-Za-z0-9\u03a9\u221e]*(?:-[A-Za-z0-9]+)+)[*`_]*\s*[\u2014:-]\s+\S",
+        s,
+    )
+    return m.group(1) if m else None
+
+
+def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone: str,
+          heading_index: dict[str, set] | None = None,
+          body_index: dict[str, set] | None = None) -> None:
     """Populate concept occurrences with line-local disposition markers. zone in {repo, source, corpus}."""
     for rel, abspath in paths:
         text = _read_text(abspath)
@@ -282,6 +327,27 @@ def _scan(paths: list[tuple[str, Path]], concepts: dict, cert_index: dict, zone:
                     if _SENTINEL.search(cid):  # wildcard/example ids (…-99, …-999) are not concepts
                         continue
                     ids_here.append((cid, fam))
+            if body_index is not None and not line.lstrip().startswith("#") \
+                    and _heading_home_eligible(rel, zone, text):
+                delivered = _definitional_body_id(line)
+                if delivered:
+                    body_index.setdefault(delivered, set()).add(rel)
+            if heading_index is not None and line.lstrip().startswith("#") \
+                    and _heading_home_eligible(rel, zone, text):
+                # A heading DECLARES what the document defines only when the id leads it
+                # (`## AMC-11 — ...`) or falls inside a declared range. An id that merely
+                # appears somewhere in a heading is a mention: `## EC3-B10 DATA REALIZATION
+                # PACKAGE (ARCH-DATA-001)` is a heading about work on a concept, not a claim
+                # to define it, and two such packages would both claim the same concept.
+                for cid, _fam in ids_here:
+                    if re.match(r"#{1,6}\s+[*_`]*" + re.escape(cid) + r"\b", line.strip()):
+                        heading_index.setdefault(cid, set()).add(rel)
+                for m in _HEAD_RANGE.finditer(line):
+                    stem, first, last = m.group(1), m.group(2), m.group(3)
+                    if not (0 <= int(last) - int(first) <= 60):
+                        continue
+                    for n in range(int(first), int(last) + 1):
+                        heading_index.setdefault(f"{stem}-{str(n).zfill(len(first))}", set()).add(rel)
             if not ids_here:
                 continue
             reject = bool(REJECT_MARK.search(line))
@@ -354,9 +420,62 @@ def build_concepts(sources: dict) -> tuple[dict, dict]:
             corpus_paths.append((rel, CORPUS / rel))
 
     # First pass over repo to build cert_index, then classify.
-    _scan(repo_paths, concepts, cert_index, "repo")
+    heading_index: dict[str, set] = {}
+    body_index: dict[str, set] = {}
+    _scan(repo_paths, concepts, cert_index, "repo", heading_index, body_index)
     _scan(source_paths, concepts, cert_index, "source")
     _scan(corpus_paths, concepts, cert_index, "corpus")
+
+    # A SECOND LAWFUL FORM OF DEFINITIONAL HOME, read rather than inferred.
+    # The filename rule above fits one of this repository's two id conventions — one document
+    # per id (`APPLICATION-005`, `UCOS-COMP-000000`). The other convention defines a whole
+    # family inside one document and says so in a heading: `## SECTION 3 — META-RELATIONSHIPS
+    # (AMR-01…14)`. Under the filename rule alone those concepts are homed by evidence zone
+    # and never DECLARED, so the ownership determination reported them as unowned while their
+    # definition sat under a header naming their exact range. That is a rule whose measurement
+    # does not reach it (adr/0041), not an absent definition — and authoring `AMR-01-*.md` to
+    # satisfy it would be a second authoring of existing knowledge, which UCKP-ART-03 voids.
+    #
+    # A heading home is claimed ONLY when exactly one document declares the id. Where several
+    # do, the multiplicity is a real competition for someone to resolve, and this engine
+    # records nothing rather than picking a winner: choosing between two authored declarations
+    # is a determination, and this engine measures.
+    # AN IMPLEMENTATION IS A FACET, NOT A RIVAL DEFINITION.
+    # `UCOS-COMP-000001` carried two filename homes — its constitution in 02-MASTER and its
+    # `-IMPLEMENTATION` companion in 06-IMPLEMENTATION — and the count-of-homes rule read that
+    # as two competing definitions. UCKP-ART-01/04 settle it: an execution environment or
+    # implementation of an entity is a VIEW of it and holds no independent authority, so it
+    # cannot compete with the document that defines it. Where a concept is defined in a
+    # constitutional zone AND implemented in 06-IMPLEMENTATION, the definition is the home and
+    # the implementation is a facet. Concepts whose homes genuinely compete WITHIN one zone are
+    # untouched: that multiplicity is real and only a determination can reduce it.
+    for rec in concepts.values():
+        homes = rec["def_homes"]
+        if len(homes) < 2:
+            continue
+        defining = {h for h in homes if _top(h) in ("02-MASTER", "00-CEP")}
+        facets = {h for h in homes if _top(h) == "06-IMPLEMENTATION"}
+        if defining and facets:
+            rec["def_homes"] = homes - facets
+            rec["implementation_facets"] = sorted(facets)
+
+    # A HEADING DECLARES SCOPE; THE BODY DELIVERS THE DEFINITION. Both are required.
+    # `SERVICE-005` declares `## SECTION 3 — META-RELATIONSHIPS (SMR-01…13)` and carries the
+    # thirteen defining rows. `SERVICE-014` cites the same range in `### 15.2 Relationship
+    # consistency — all within SOR-01…13 / SMR-01…13` and carries none: a consistency check
+    # referencing a range is not a claim to define it. Requiring delivery as well as
+    # declaration separates them, and without it the two documents compete for the same concepts and
+    # neither could be its home.
+    for cid, rels in heading_index.items():
+        rec = concepts.get(cid)
+        if rec is None or rec["def_homes"]:
+            continue
+        rels = rels & body_index.get(cid, set())
+        if len(rels) != 1:
+            continue
+        rec["def_homes"].add(next(iter(rels)))
+        rec["heading_home"] = True
+        rec["homed"] = True
 
     # resolve certification from co-located cert evidence
     for cid, rec in concepts.items():

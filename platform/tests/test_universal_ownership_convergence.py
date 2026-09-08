@@ -80,7 +80,36 @@ PROJECTION = "00-BOOK/DATA/artifacts.json"
 #: seven stand unresolved, so total moves 542 → 549 and unresolved 391 → 398 by exactly the
 #: measured population delta, while declared (151) and contested (0) hold still. Those two
 #: are the convergence claim: the retired resolver's answer is still reproduced exactly.
-RETIRED_MEASUREMENT = {"total": 549, "declared": 151, "contested": 0, "unresolved": 398}
+#:
+#: CLOSURE-HOME-001 advances `declared` for the first time, and the reason it may is that the
+#: RESOLVER did not change — the evidence did. This pin compares two implementations of one
+#: rule; both read `population_document: 00-MASTER/UAKOS-CLOSURE-002/closure.json`, and the
+#: retired resolver, given the input below, would answer identically. What changed is upstream:
+#: UAKOS-CLOSURE-002 previously recognised a definitional home ONLY when a file's basename
+#: carried the concept id. That fits one of this repository's two id conventions. The other
+#: defines a whole family inside one document and declares the range in a heading —
+#: `## SECTION 3 — META-RELATIONSHIPS (AMR-01…14)`. Those concepts were homed by evidence zone
+#: and never declared, so the determination reported them unowned while their definition sat
+#: under a header naming their exact range. Authoring `AMR-01-*.md` to satisfy the old rule
+#: would have been a second authoring of existing knowledge, which UCKP-ART-03 voids.
+#:
+#: 90 concepts hold such a declaration and exactly one document making it, so declared moves
+#: 151 → 241 and unresolved 398 → 308 by exactly that amount. The movement is CONSERVED —
+#: every concept that moved went from unresolved to declared, and total (549) and contested (0)
+#: hold still — which is what distinguishes an evidence delta from a resolver regression. A
+#: heading counts only when it declares scope: an id leading its own heading, or falling inside
+#: a declared range. An id merely appearing in a heading is a mention, and `## EC3-B10 DATA
+#: REALIZATION PACKAGE (ARCH-DATA-001)` is a heading about work on a concept, not a claim to
+#: define it — reading those as declarations wrongly moved 51 further concepts, and two such
+#: packages then both claimed ARCH-DATA-001. A declaration must also be DELIVERED: SERVICE-005
+#: declares `## SECTION 3 — META-RELATIONSHIPS (SMR-01…13)` and carries the thirteen defining
+#: rows, while SERVICE-014 cites the same range under `### 15.2 Relationship consistency — all
+#: within SOR-01…13 / SMR-01…13` and carries none. Without requiring delivery the two compete
+#: and neither can be the home, which is why SMR-01…13 stood unowned beside their definitions.
+#: Projections are excluded on the same principle:
+#: a document naming another as its `Source:` is a generated view, and UCKP-ART-11 is explicit
+#: that generated output never owns truth.
+RETIRED_MEASUREMENT = {"total": 549, "declared": 241, "contested": 0, "unresolved": 308}
 
 
 def _home(*registered: str, **kwargs) -> CanonicalHomePolicy:
