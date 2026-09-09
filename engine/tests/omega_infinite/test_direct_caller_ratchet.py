@@ -178,3 +178,21 @@ def test_every_declared_exception_states_a_reason() -> None:
     """An exemption without a stated reason is a silent one."""
     assert DECLARED_DIRECT
     assert all(len(reason) > 40 for reason in DECLARED_DIRECT.values())
+
+
+def test_a_declaration_naming_no_audit_root_is_a_fault_rather_than_an_empty_scan(
+    tmp_path,
+) -> None:
+    """The roots come from the declaration that already names them, which is what stops this
+    module carrying a second list of where the source is. An empty one must fault: a scan over no
+    root finds no direct caller, and the ratchet would read that as a clean repository."""
+    import json
+    import pathlib
+
+    from engine.omega_infinite.direct_callers import UCON_DECLARATION, roots
+
+    target = pathlib.Path(tmp_path) / UCON_DECLARATION
+    target.parent.mkdir(parents=True)
+    target.write_text(json.dumps({"audit": {"roots": []}}), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="declares no audit roots"):
+        roots(pathlib.Path(tmp_path))

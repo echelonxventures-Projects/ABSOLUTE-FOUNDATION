@@ -338,3 +338,149 @@ def test_an_empty_hash_answer_is_a_fault_rather_than_an_empty_digest(
     monkeypatch.setattr(git_provider, "_run", lambda *arguments: "\n")
     with pytest.raises(ProviderError, match="resolved no object"):
         git_provider.GitDiscoveryProvider(str(tracked_tree)).content_hash("src/module.py")
+
+
+# --------------------------------------------- the capabilities that had a declaration and no call
+
+
+def test_a_named_reference_is_reported_as_resolving_or_not(tracked_tree: Path) -> None:
+    """A caller binding work to a reference needs to know whether it exists, and "it does not"
+    must be an answer rather than an exception — the same reason `revision()` returns ""."""
+    from engine.omega_infinite.capability import REVISION_IDENTITY
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    assert provider.supply(REVISION_IDENTITY, ref="HEAD") == {"ref": "HEAD", "resolves": True}
+    assert provider.supply(REVISION_IDENTITY, ref="refs/heads/never-created") == {
+        "ref": "refs/heads/never-created",
+        "resolves": False,
+    }
+
+
+def test_where_two_references_parted_is_reported_or_left_empty(tracked_tree: Path) -> None:
+    """A merge base that cannot be computed is empty rather than absent: a caller must be able to
+    tell "they never met" from "the provider declined to say"."""
+    from engine.omega_infinite.capability import REVISION_IDENTITY
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    same = provider.supply(REVISION_IDENTITY, diverged_from="HEAD")
+    assert same["diverged_from"] == "HEAD"
+    assert len(str(same["merge_base"])) == 40
+    unrelated = provider.supply(REVISION_IDENTITY, diverged_from="refs/heads/never-created")
+    assert unrelated == {"diverged_from": "refs/heads/never-created", "merge_base": ""}
+
+
+def test_the_change_set_can_be_asked_of_the_index_rather_than_the_working_copy(
+    tracked_tree: Path,
+) -> None:
+    """`--cached` is a different question, not a filter: a verdict about what has been RECORDED
+    must not move when an operator saves a file."""
+    from engine.omega_infinite.capability import CHANGE_SET
+    from engine.tests.omega_infinite.conftest import git
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    (tracked_tree / "src" / "module.py").write_text("VALUE = 2\n", encoding="utf-8")
+    assert "src/module.py" in provider.supply(CHANGE_SET, PYTHON_ONLY)
+    assert provider.supply(CHANGE_SET, PYTHON_ONLY, staged=True) == ()
+    git(tracked_tree, "add", "src/module.py")
+    assert provider.supply(CHANGE_SET, PYTHON_ONLY, staged=True) == ("src/module.py",)
+
+
+def test_the_recorded_revisions_are_returned_as_pairs_the_caller_never_parses(
+    tracked_tree: Path,
+) -> None:
+    """The separator stays inside the provider. A caller given a format string would be parsing
+    git's output, which is the whole thing asking a provider is for."""
+    from engine.omega_infinite.capability import REVISION_HISTORY
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    history = provider.supply(REVISION_HISTORY)
+    assert len(history) == 1
+    identifier, subject = history[0]
+    assert len(identifier) == 40
+    assert subject
+    assert provider.supply(REVISION_HISTORY, limit=1) == history
+
+
+def test_the_named_lines_of_development_are_a_different_question_from_the_revisions(
+    tracked_tree: Path,
+) -> None:
+    """A ref carries no subject, and pairing it with an empty one keeps the shape the caller
+    unpacks identical whichever question it asked."""
+    from engine.omega_infinite.capability import REVISION_HISTORY
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    refs = provider.supply(REVISION_HISTORY, refs=True)
+    assert refs
+    assert all(subject == "" for _, subject in refs)
+
+
+def test_a_revisions_metadata_is_supplied_and_an_unknown_revision_answers_empty(
+    tracked_tree: Path,
+) -> None:
+    """An unknown revision has no metadata, and inventing a committed_at for it would put a
+    fabricated instant into whatever the caller records."""
+    from engine.omega_infinite.capability import REVISION_METADATA
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    metadata = provider.supply(REVISION_METADATA)
+    assert metadata["revision"] == "HEAD"
+    assert metadata["committed_at"]
+    assert metadata["subject"]
+    assert provider.supply(REVISION_METADATA, revision="0" * 40) == {}
+
+
+def test_an_index_row_this_provider_cannot_read_contributes_no_hash(
+    tracked_tree: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The index's answer is the one every other git-derived verdict rests on. A row this parser
+    cannot read must contribute nothing rather than a partial entry, because a path mapped to the
+    wrong blob is worse than a path with no hash at all."""
+    from engine.omega_infinite.capability import CONTENT_HASHING
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    monkeypatch.setattr(git_provider, "_run", lambda *arguments: "100644\tsrc/module.py\0")
+    assert provider.supply(CONTENT_HASHING, PYTHON_ONLY) == {}
+
+
+def test_where_the_bytes_are_is_answered_without_a_network_call(tracked_tree: Path) -> None:
+    """LOCAL_STORAGE was declared and had no delivery. A declaration with no call is the
+    ENVELOPE_ONLY shape this package exists to measure."""
+    from engine.omega_infinite.capability import LOCAL_STORAGE as LOCAL
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    assert provider.supply(LOCAL) == str(tracked_tree)
+
+
+def test_the_default_position_answer_carries_every_field_or_leaves_it_empty(
+    tracked_tree: Path,
+) -> None:
+    """Four modules used to pay a separate process for two or three of these each. Asked together,
+    a field git cannot answer here — an upstream a local branch does not have — is EMPTY rather
+    than absent, so a caller can tell "no upstream" from "the provider declined to say"."""
+    from engine.omega_infinite.capability import REVISION_IDENTITY
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    position = provider.supply(REVISION_IDENTITY)
+    assert set(position) == {"revision", "short", "branch", "upstream", "is_work_tree"}
+    assert len(str(position["revision"])) == 40
+    assert position["is_work_tree"] is True
+    assert position["upstream"] == "", "a local branch with no upstream must answer empty"
+
+
+def test_a_history_line_carrying_no_identifier_is_dropped(
+    tracked_tree: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A blank line in the log output is not a revision, and a pair whose identifier is "" would
+    compare equal to every other such pair — two unrelated blanks reading as one revision."""
+    from engine.omega_infinite.capability import REVISION_HISTORY
+
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    monkeypatch.setattr(git_provider, "_run", lambda *arguments: "\n\nabc\x1fa subject\n")
+    assert provider.supply(REVISION_HISTORY) == (("abc", "a subject"),)
+
+
+def test_the_revision_the_enumeration_reproduces_against_is_supplied(tracked_tree: Path) -> None:
+    """VERSIONED_CONTENT is what every allocation permit is bound to. Declaring it and offering no
+    call is the shape that sent four callers to the tool directly."""
+    provider = git_provider.GitDiscoveryProvider(str(tracked_tree))
+    assert provider.supply(VERSIONED_CONTENT) == provider.revision()
