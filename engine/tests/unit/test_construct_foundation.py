@@ -2968,3 +2968,107 @@ def test_an_inventory_embedding_a_clock_or_a_path_is_refused(declaration, monkey
     monkeypatch.setattr(audit, "rendered", lambda inventory: "measured at T00:00:00")
     problems = contract.measurement_is_deterministic(Probe(declaration=declaration, repo=REPO))
     assert any("makes the measurement unrepeatable elsewhere" in p for p in problems), problems
+
+
+# --- UCON-L-14: vocabulary is bound, never copied ---------------------------------------------
+
+
+def test_a_reality_state_binding_to_no_ceu_row_and_disclosing_no_gap_is_refused(declaration):
+    unbound = (
+        dataclasses.replace(declaration.reality_states[0], ceu_binding=None, binding_gap={}),
+        *declaration.reality_states[1:],
+    )
+    problems = contract.vocabulary_is_not_duplicated(
+        Probe(declaration=dataclasses.replace(declaration, reality_states=unbound), repo=REPO)
+    )
+    assert any("discloses no gap_id" in p for p in problems), problems
+
+
+def test_a_reality_state_binding_to_an_undeclared_ceu_population_is_refused(declaration):
+    rebound = (
+        dataclasses.replace(
+            declaration.reality_states[0],
+            ceu_binding={"population": "a-population-CEU-never-declared", "member": "x"},
+        ),
+        *declaration.reality_states[1:],
+    )
+    problems = contract.vocabulary_is_not_duplicated(
+        Probe(declaration=dataclasses.replace(declaration, reality_states=rebound), repo=REPO)
+    )
+    assert any("does not declare" in p for p in problems), problems
+
+
+def test_a_reality_state_binding_to_a_member_ceu_does_not_carry_is_refused(declaration):
+    binding = dict(declaration.reality_states[0].ceu_binding or {})
+    binding["member"] = "a-member-CEU-never-carried"
+    rebound = (
+        dataclasses.replace(declaration.reality_states[0], ceu_binding=binding),
+        *declaration.reality_states[1:],
+    )
+    problems = contract.vocabulary_is_not_duplicated(
+        Probe(declaration=dataclasses.replace(declaration, reality_states=rebound), repo=REPO)
+    )
+    assert any("does not carry" in p for p in problems), problems
+
+
+def test_the_report_digest_is_a_function_of_the_report(declaration):
+    # `digest` is the identity the whole report is recorded under: two identical reports must
+    # digest identically and a changed one must not.
+    report = {"laws": [{"law_id": "UCON-L-01", "holds": True}]}
+    assert contract.digest(report) == contract.digest(dict(report))
+    assert contract.digest(report) != contract.digest({"laws": []})
+
+
+def test_an_extension_that_drops_a_declared_kind_is_refused(declaration):
+    # Extension must be additive. A registry whose declaration comes back missing something it
+    # started with has narrowed the world under the guise of extending it.
+    real = ConstructRegistry(declaration)
+    thinner = dataclasses.replace(declaration, kinds=declaration.kinds[1:])
+
+    class _Narrowing:
+        declaration = thinner
+
+        def __getattr__(self, name):
+            return getattr(real, name)
+
+    probe = _ProbeWithRegistry(declaration, _Narrowing())
+    problems = contract.extension_points_are_exercisable(probe)
+    assert any("was altered or dropped by an extension" in p for p in problems), problems
+
+
+def test_an_extension_that_drops_a_declared_disposition_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    thinner = dataclasses.replace(declaration, dispositions=declaration.dispositions[1:])
+
+    class _Narrowing:
+        declaration = thinner
+
+        def __getattr__(self, name):
+            return getattr(real, name)
+
+    probe = _ProbeWithRegistry(declaration, _Narrowing())
+    problems = contract.extension_points_are_exercisable(probe)
+    assert any("disposition" in p and "was altered or dropped" in p for p in problems), problems
+
+
+def test_an_extension_that_drops_a_declared_reality_state_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    thinner = dataclasses.replace(declaration, reality_states=declaration.reality_states[1:])
+
+    class _Narrowing:
+        declaration = thinner
+
+        def __getattr__(self, name):
+            return getattr(real, name)
+
+    probe = _ProbeWithRegistry(declaration, _Narrowing())
+    problems = contract.extension_points_are_exercisable(probe)
+    assert any("reality state" in p and "was altered or dropped" in p for p in problems), problems
+
+
+def test_adopting_a_narrowed_declaration_must_be_refused(declaration, monkeypatch):
+    # The law asserts a REFUSAL: adopt() must reject a declaration that dropped a disposition.
+    # The violation is an adopt() that accepts one.
+    monkeypatch.setattr(ConstructRegistry, "adopt", lambda self, declaration: None)
+    problems = contract.extension_points_are_exercisable(Probe(declaration=declaration, repo=REPO))
+    assert any("dropped a disposition was adopted" in p for p in problems), problems
