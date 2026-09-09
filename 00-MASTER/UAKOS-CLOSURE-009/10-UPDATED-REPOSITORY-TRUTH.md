@@ -45,7 +45,7 @@
 | BC-08 | 100% dependency closure | FAIL | 158 requirements whose canonical home carries no universal identity and therefore no graph participation |
 | BC-09 | 100% lineage closure | FAIL | lineage_with_predecessor=0 of lineage_population=44 |
 | BC-10 | 100% registry closure | FAIL | 158 unregistered canonical homes |
-| BC-11 | 100% knowledge extraction | FAIL | 158 canonical knowledge objects against 549 requirements |
+| BC-11 | 100% knowledge extraction | FAIL | 159 canonical knowledge objects against 549 requirements |
 | BC-12 | 100% capability elevation | FAIL | 470 requirements with an unpopulated capability tier |
 
 **DO NOT CREATE A BASELINE.** 12 preconditions fail: BC-01, BC-02, BC-03, BC-04, BC-05, BC-06, BC-07, BC-08, BC-09, BC-10, BC-11, BC-12.

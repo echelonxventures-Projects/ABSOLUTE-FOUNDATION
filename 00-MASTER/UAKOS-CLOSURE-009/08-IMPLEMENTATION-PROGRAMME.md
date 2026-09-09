@@ -56,7 +56,7 @@ Wave order is constitutional precedence, not convenience: ownership and authorit
 | 100% dependency closure | 158 requirements whose canonical home carries no universal identity and therefore no graph participation | PASS |
 | 100% lineage closure | lineage_with_predecessor=0 of lineage_population=44 | PASS |
 | 100% registry closure | 158 unregistered canonical homes | PASS |
-| 100% knowledge extraction | 158 canonical knowledge objects against 549 requirements | PASS |
+| 100% knowledge extraction | 159 canonical knowledge objects against 549 requirements | PASS |
 | 100% capability elevation | 470 requirements with an unpopulated capability tier | PASS |
 
 *Seal `5d5ab43d677f17f3` · END 08 · AUTHORITY = NONE (DERIVED TRUTH).*

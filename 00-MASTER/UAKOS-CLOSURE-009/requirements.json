@@ -92,7 +92,7 @@
     },
     {
       "id": "BC-11",
-      "measured": "158 canonical knowledge objects against 549 requirements",
+      "measured": "159 canonical knowledge objects against 549 requirements",
       "name": "100% knowledge extraction",
       "owner": "knowledge/canonical-knowledge.json",
       "verdict": "FAIL"
@@ -2688,7 +2688,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 117,
+      "evidence_files": 118,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -2952,7 +2952,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 69,
+      "evidence_files": 70,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -3084,7 +3084,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 101,
+      "evidence_files": 102,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -3216,7 +3216,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 87,
+      "evidence_files": 88,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -3348,7 +3348,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 77,
+      "evidence_files": 78,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -3480,7 +3480,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 75,
+      "evidence_files": 76,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -3927,7 +3927,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 83,
+      "evidence_files": 84,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -4189,7 +4189,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 54,
+      "evidence_files": 55,
       "evidence_kinds": [
         "certificate",
         "test",
@@ -4319,7 +4319,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 72,
+      "evidence_files": 73,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -5365,7 +5365,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 94,
+      "evidence_files": 95,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -5496,7 +5496,7 @@
       ],
       "dependency_count": 72,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 114,
+      "evidence_files": 115,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -5671,7 +5671,7 @@
       ],
       "dependency_count": 68,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 273,
+      "evidence_files": 274,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -5803,7 +5803,7 @@
       ],
       "dependency_count": 69,
       "disposition": "REJECTED",
-      "evidence_files": 52,
+      "evidence_files": 45,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -6059,7 +6059,7 @@
       ],
       "dependency_count": 71,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 73,
+      "evidence_files": 74,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -6321,7 +6321,7 @@
       ],
       "dependency_count": 74,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 57,
+      "evidence_files": 58,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -6454,7 +6454,7 @@
       ],
       "dependency_count": 75,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 47,
+      "evidence_files": 48,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -6723,7 +6723,7 @@
       ],
       "dependency_count": 77,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 47,
+      "evidence_files": 48,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -7271,7 +7271,7 @@
       ],
       "dependency_count": 81,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 83,
+      "evidence_files": 84,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -7882,7 +7882,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 78,
+      "evidence_files": 76,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -7900,7 +7900,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 78 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-ARCHITECTURAL-COMPLETENESS.md+03-CATALOGS+03-FINAL-CERTIFICATION.md+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-CERTIFICATION-READINESS.md+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+10-FINAL-CERTIFICATION.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 76 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-ARCHITECTURAL-COMPLETENESS.md+03-CATALOGS+03-FINAL-CERTIFICATION.md+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-CERTIFICATION-READINESS.md+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+10-FINAL-CERTIFICATION.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-AI-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -7932,7 +7932,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 68,
+      "evidence_files": 66,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -7950,7 +7950,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 68 evidence files · zones 00-BOOK+00-MASTER+01-BLOCKER-VERIFICATION.md+01-UNREALIZED-CKO-INVENTORY.md+02-IMPLEMENTATION-MANIFEST.md+02-MASTER+02-ROOT-CAUSE-ANALYSIS.md+03-CATALOGS+03-READY-SELECTION-RULES.md+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+06-PARALLEL-EXECUTION-GROUPS.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 66 evidence files · zones 00-BOOK+00-MASTER+01-BLOCKER-VERIFICATION.md+01-UNREALIZED-CKO-INVENTORY.md+02-IMPLEMENTATION-MANIFEST.md+02-MASTER+02-ROOT-CAUSE-ANALYSIS.md+03-CATALOGS+03-READY-SELECTION-RULES.md+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+06-PARALLEL-EXECUTION-GROUPS.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-API-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -7982,7 +7982,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 129,
+      "evidence_files": 130,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8001,7 +8001,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 129 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+application+service)",
+      "repository_location": "(non-filename home · 130 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+application+service)",
       "requirement_id": "RR-ARCH-APPLICATION-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8033,7 +8033,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 68,
+      "evidence_files": 66,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8051,7 +8051,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 68 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 66 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-BCDR-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8083,7 +8083,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 79,
+      "evidence_files": 77,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8101,7 +8101,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 79 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 77 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-CERT-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8133,7 +8133,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 149,
+      "evidence_files": 150,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8154,7 +8154,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 149 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+07-ENGINEERING+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+data+platform)",
+      "repository_location": "(non-filename home · 150 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+07-ENGINEERING+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+data+platform)",
       "requirement_id": "RR-ARCH-DATA-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8186,7 +8186,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 9,
+      "evidence_files": 16,
       "evidence_kinds": [
         "constitution",
         "plan"
@@ -8202,7 +8202,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 16 evidence files · zones 00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-DEPLOYMENT-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8332,7 +8332,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 119,
+      "evidence_files": 120,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8350,7 +8350,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 119 evidence files · zones 00-BOOK+00-MASTER+01-READINESS-ASSESSMENT.md+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+06-IMPLEMENTATION+07-CERTIFICATION-RECONCILIATION.md+07-ENGINEERING+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+IAC-001D+engine)",
+      "repository_location": "(non-filename home · 120 evidence files · zones 00-BOOK+00-MASTER+01-READINESS-ASSESSMENT.md+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+06-IMPLEMENTATION+07-CERTIFICATION-RECONCILIATION.md+07-ENGINEERING+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+IAC-001D+engine)",
       "requirement_id": "RR-ARCH-GOV-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8382,7 +8382,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 64,
+      "evidence_files": 62,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8400,7 +8400,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 64 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 62 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-INFRA-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8581,7 +8581,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 80,
+      "evidence_files": 78,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8599,7 +8599,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 80 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md)",
+      "repository_location": "(non-filename home · 78 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-ACFV-000001-ABSOLUTE-ARCHITECTURAL-COMPLETENESS-DETERMINATION.md)",
       "requirement_id": "RR-ARCH-OBS-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8681,7 +8681,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 9,
+      "evidence_files": 16,
       "evidence_kinds": [
         "constitution",
         "plan"
@@ -8697,7 +8697,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 16 evidence files · zones 00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-PLATFORM-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8729,7 +8729,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 9,
+      "evidence_files": 16,
       "evidence_kinds": [
         "constitution",
         "plan"
@@ -8745,7 +8745,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 16 evidence files · zones 00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-PRODUCTION-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8827,7 +8827,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 99,
+      "evidence_files": 97,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8845,7 +8845,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 99 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-IMPLEMENTATION-MANIFEST.md+02-MASTER+02-ROOT-CAUSE-ANALYSIS.md+03-CATALOGS+03-READY-SELECTION-RULES.md+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 97 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-IMPLEMENTATION-MANIFEST.md+02-MASTER+02-ROOT-CAUSE-ANALYSIS.md+03-CATALOGS+03-READY-SELECTION-RULES.md+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-RUNTIME-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8877,7 +8877,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 123,
+      "evidence_files": 124,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8896,7 +8896,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 123 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+06-IMPLEMENTATION+07-CERTIFICATION-RECONCILIATION.md+07-ENGINEERING+14-SECURITY+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-100-PERCENT-CLOSURE-MASTER-REGISTER.md+UCOS-OMEGA-INFINITY-ADMISSION-BLOCKER-CLOSURE-PREPARATION-DETERMINATION.md+UCOS-OMEGA-INFINITY-CLOSURE-DEPENDENCY-GRAPH-DETERMINATION.md+UCOS-OMEGA-INFINITY-FOUNDATION-UNCONDITIONAL-READINESS-DETERMINATION.md+UCOS-OMEGA-INFINITY-IMPLEMENTATION-ADMISSION-READINESS-DETERMINATION.md+UCOS-OMEGA-INFINITY-IMPLEMENTATION-SEQUENCE-MASTER-PLAN.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+UCOS-OMEGA-INFINITY-UNIVERSAL-IMPLEMENTATION-PLANNING-DETERMINATION.md+UCOS-OMEGA-INFINITY-UNIVERSAL-INFINITE-EXISTENCE-REALITY-KNOWLEDGE-CAPABILITY-EVOLUTION-COMPLETENESS-DETERMINATION.md+intelligence+knowledge+platform)",
+      "repository_location": "(non-filename home · 124 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+06-IMPLEMENTATION+07-CERTIFICATION-RECONCILIATION.md+07-ENGINEERING+14-SECURITY+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-100-PERCENT-CLOSURE-MASTER-REGISTER.md+UCOS-OMEGA-INFINITY-ADMISSION-BLOCKER-CLOSURE-PREPARATION-DETERMINATION.md+UCOS-OMEGA-INFINITY-CLOSURE-DEPENDENCY-GRAPH-DETERMINATION.md+UCOS-OMEGA-INFINITY-FOUNDATION-UNCONDITIONAL-READINESS-DETERMINATION.md+UCOS-OMEGA-INFINITY-IMPLEMENTATION-ADMISSION-READINESS-DETERMINATION.md+UCOS-OMEGA-INFINITY-IMPLEMENTATION-SEQUENCE-MASTER-PLAN.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+UCOS-OMEGA-INFINITY-UNIVERSAL-IMPLEMENTATION-PLANNING-DETERMINATION.md+UCOS-OMEGA-INFINITY-UNIVERSAL-INFINITE-EXISTENCE-REALITY-KNOWLEDGE-CAPABILITY-EVOLUTION-COMPLETENESS-DETERMINATION.md+intelligence+knowledge+platform)",
       "requirement_id": "RR-ARCH-SECURITY-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8928,7 +8928,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 134,
+      "evidence_files": 135,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8947,7 +8947,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 134 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+05-REALIZATION-GAP-VERIFICATION.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+data+service)",
+      "repository_location": "(non-filename home · 135 evidence files · zones 00-BOOK+00-CEP+00-MASTER+02-MASTER+03-CATALOGS+04-REFERENCE+05-GENERATION+05-REALIZATION-GAP-VERIFICATION.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+data+service)",
       "requirement_id": "RR-ARCH-SERVICE-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -8979,7 +8979,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 79,
+      "evidence_files": 77,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -8997,7 +8997,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 79 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 77 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-CATALOGS+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+07-ENGINEERING+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-TEST-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -9029,7 +9029,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 63,
+      "evidence_files": 61,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -9047,7 +9047,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 63 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-IMPLEMENTATION-MANIFEST.md+02-MASTER+02-ROOT-CAUSE-ANALYSIS.md+03-CATALOGS+03-READY-SELECTION-RULES.md+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+06-PARALLEL-EXECUTION-GROUPS.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 61 evidence files · zones 00-BOOK+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-IMPLEMENTATION-MANIFEST.md+02-MASTER+02-ROOT-CAUSE-ANALYSIS.md+03-CATALOGS+03-READY-SELECTION-RULES.md+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-GENERATION+05-IMPLEMENTATION-ORDER.md+05-REALIZATION-GAP-VERIFICATION.md+06-IMPLEMENTATION+06-PARALLEL-EXECUTION-GROUPS.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-ARCH-WORKFLOW-001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -9376,7 +9376,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 253,
+      "evidence_files": 257,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -9439,7 +9439,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 307,
+      "evidence_files": 309,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -9626,7 +9626,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 239,
+      "evidence_files": 243,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -10051,7 +10051,7 @@
       ],
       "dependency_count": 39,
       "disposition": "REJECTED",
-      "evidence_files": 53,
+      "evidence_files": 46,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -10148,7 +10148,7 @@
       ],
       "dependency_count": 40,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 70,
+      "evidence_files": 71,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -10248,7 +10248,7 @@
       ],
       "dependency_count": 41,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 84,
+      "evidence_files": 85,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -10348,7 +10348,7 @@
       ],
       "dependency_count": 42,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 167,
+      "evidence_files": 168,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -10552,7 +10552,7 @@
       ],
       "dependency_count": 44,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 56,
+      "evidence_files": 57,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -10758,7 +10758,7 @@
       ],
       "dependency_count": 46,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 57,
+      "evidence_files": 58,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -10862,7 +10862,7 @@
       ],
       "dependency_count": 47,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 89,
+      "evidence_files": 90,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -10970,7 +10970,7 @@
       ],
       "dependency_count": 48,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 54,
+      "evidence_files": 55,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -11184,7 +11184,7 @@
       ],
       "dependency_count": 50,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 51,
+      "evidence_files": 52,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -11293,7 +11293,7 @@
       ],
       "dependency_count": 51,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 120,
+      "evidence_files": 121,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -11530,7 +11530,7 @@
       ],
       "dependency_count": 21,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 104,
+      "evidence_files": 105,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -11611,7 +11611,7 @@
       ],
       "dependency_count": 23,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 59,
+      "evidence_files": 60,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -11812,7 +11812,7 @@
       ],
       "dependency_count": 42,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 170,
+      "evidence_files": 171,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -11913,7 +11913,7 @@
       ],
       "dependency_count": 42,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 132,
+      "evidence_files": 133,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -12015,7 +12015,7 @@
       ],
       "dependency_count": 42,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 101,
+      "evidence_files": 102,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -12217,7 +12217,7 @@
       ],
       "dependency_count": 42,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 85,
+      "evidence_files": 86,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -12824,7 +12824,7 @@
       ],
       "dependency_count": 42,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 126,
+      "evidence_files": 127,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -12926,7 +12926,7 @@
       ],
       "dependency_count": 42,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 77,
+      "evidence_files": 78,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -13986,7 +13986,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 56,
+      "evidence_files": 50,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -14041,7 +14041,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 63,
+      "evidence_files": 64,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -14095,7 +14095,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 72,
+      "evidence_files": 73,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -14316,7 +14316,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 100,
+      "evidence_files": 101,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -14374,7 +14374,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 109,
+      "evidence_files": 110,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -14838,7 +14838,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 69,
+      "evidence_files": 70,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15014,7 +15014,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 83,
+      "evidence_files": 84,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15072,7 +15072,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 78,
+      "evidence_files": 79,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15130,7 +15130,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 78,
+      "evidence_files": 79,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15188,7 +15188,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 79,
+      "evidence_files": 80,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15246,7 +15246,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 79,
+      "evidence_files": 80,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15304,7 +15304,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 79,
+      "evidence_files": 80,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15362,7 +15362,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 75,
+      "evidence_files": 76,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15536,7 +15536,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 75,
+      "evidence_files": 76,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15828,7 +15828,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 77,
+      "evidence_files": 78,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15886,7 +15886,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 80,
+      "evidence_files": 81,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -15944,7 +15944,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 72,
+      "evidence_files": 73,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -16002,7 +16002,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 72,
+      "evidence_files": 73,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -16118,7 +16118,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 71,
+      "evidence_files": 72,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -16176,7 +16176,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 76,
+      "evidence_files": 77,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -17886,7 +17886,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 31,
+      "evidence_files": 32,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -17903,7 +17903,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 31 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
+      "repository_location": "(non-filename home · 32 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
       "requirement_id": "RR-EPIC-UKDA-004",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -17983,7 +17983,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 68,
+      "evidence_files": 69,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -18003,7 +18003,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 68 evidence files · zones 00-BOOK+00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine+intelligence+knowledge)",
+      "repository_location": "(non-filename home · 69 evidence files · zones 00-BOOK+00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine+intelligence+knowledge)",
       "requirement_id": "RR-EPIC-VAL-002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -18132,7 +18132,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 384,
+      "evidence_files": 381,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -18153,7 +18153,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 384 evidence files · zones 00-BOOK+00-CEP+00-MASTER+01-INCREMENTAL-KNOWLEDGE-INVENTORY.md+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-ASSIMILATION-IMPACT.md+04-IMPLEMENTATION-BACKLOG.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+08-IMPLEMENTATION-READINESS-MATRIX.md+09-DR-RAT-11-ASSESSMENT.md+09-IMPLEMENTATION-BACKLOG.md+09-PLATFORM+10-DATA+11-SERVICE+12-APPLICATION+13-INFRASTRUCTURE+14-SECURITY+15-UNIVERSAL-SCIENCE-INTELLIGENCE+CAPABILITY-COVERAGE-CLOSURE-DETERMINATION.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+EVO-USIS-014+EVO-USIS-015+EVO-USIS-016+F-1-LINEAGE-DIVERGENCE-CORRECTION-REPORT.md+F-1-LINEAGE-DIVERGENCE-DISPOSITION-DETERMINATION.md+IAC-001A+IAC-001B+IAC-001C+IAC-001D+IAC-001E+UCOS-OMEGA-INFINITY-ASSIMILATION-COMPOSITION-AUTHORITY-RESOLUTION-DETERMINATION.md+UCOS-OMEGA-INFINITY-ASSIMILATION-FABRIC-AUTHORITY-BOUNDARY-DETERMINATION.md+UCOS-OMEGA-INFINITY-ASSIMILATION-INFINITE-INTELLIGENCE-INTEGRATION-DETERMINATION.md+UCOS-OMEGA-INFINITY-CANONICAL-KNOWLEDGE-RUNTIME-TRUTH-BOUNDARY-DETERMINATION.md+UCOS-OMEGA-INFINITY-UNIVERSAL-ASSIMILATION-AUTHORITY-OWNERSHIP-DETERMINATION.md+UCOS-OMEGA-INFINITY-UNIVERSAL-EVOLUTION-COMPLETENESS-AUDIT-DETERMINATION.md+engine+infrastructure)",
+      "repository_location": "(non-filename home · 381 evidence files · zones 00-BOOK+00-CEP+00-MASTER+01-INCREMENTAL-KNOWLEDGE-INVENTORY.md+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+03-ASSIMILATION-IMPACT.md+04-IMPLEMENTATION-BACKLOG.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+06-IMPLEMENTATION+08-IMPLEMENTATION-READINESS-MATRIX.md+09-DR-RAT-11-ASSESSMENT.md+09-IMPLEMENTATION-BACKLOG.md+09-PLATFORM+10-DATA+11-SERVICE+12-APPLICATION+13-INFRASTRUCTURE+14-SECURITY+15-UNIVERSAL-SCIENCE-INTELLIGENCE+CAPABILITY-COVERAGE-CLOSURE-DETERMINATION.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+EVO-USIS-014+EVO-USIS-015+EVO-USIS-016+F-1-LINEAGE-DIVERGENCE-CORRECTION-REPORT.md+F-1-LINEAGE-DIVERGENCE-DISPOSITION-DETERMINATION.md+IAC-001A+IAC-001B+IAC-001C+IAC-001D+IAC-001E+UCOS-OMEGA-INFINITY-ASSIMILATION-COMPOSITION-AUTHORITY-RESOLUTION-DETERMINATION.md+UCOS-OMEGA-INFINITY-ASSIMILATION-FABRIC-AUTHORITY-BOUNDARY-DETERMINATION.md+UCOS-OMEGA-INFINITY-ASSIMILATION-INFINITE-INTELLIGENCE-INTEGRATION-DETERMINATION.md+UCOS-OMEGA-INFINITY-CANONICAL-KNOWLEDGE-RUNTIME-TRUTH-BOUNDARY-DETERMINATION.md+UCOS-OMEGA-INFINITY-UNIVERSAL-ASSIMILATION-AUTHORITY-OWNERSHIP-DETERMINATION.md+UCOS-OMEGA-INFINITY-UNIVERSAL-EVOLUTION-COMPLETENESS-AUDIT-DETERMINATION.md+engine+infrastructure)",
       "requirement_id": "RR-GOV-000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -18187,7 +18187,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 436,
+      "evidence_files": 429,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -18298,7 +18298,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 208,
+      "evidence_files": 201,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -18319,7 +18319,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 208 evidence files · zones 00-BOOK+00-CEP+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-IMPLEMENTATION-ORDER.md+07-ENGINEERING+08-RUNTIME+09-PLATFORM+10-DATA+11-SERVICE+12-APPLICATION+13-INFRASTRUCTURE+14-SECURITY+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+infrastructure+platform)",
+      "repository_location": "(non-filename home · 201 evidence files · zones 00-BOOK+00-CEP+00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+02-MASTER+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-IMPLEMENTATION-ORDER.md+07-ENGINEERING+08-RUNTIME+09-PLATFORM+10-DATA+11-SERVICE+12-APPLICATION+13-INFRASTRUCTURE+14-SECURITY+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+infrastructure+platform)",
       "requirement_id": "RR-GOV-003",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -18351,7 +18351,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 78,
+      "evidence_files": 79,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -18370,7 +18370,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 78 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+06-IMPLEMENTATION+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+adr+intelligence+platform)",
+      "repository_location": "(non-filename home · 79 evidence files · zones 00-BOOK+00-MASTER+02-MASTER+06-IMPLEMENTATION+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+adr+intelligence+platform)",
       "requirement_id": "RR-GOV-004",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -19869,7 +19869,7 @@
       ],
       "dependency_count": 8,
       "disposition": "REJECTED",
-      "evidence_files": 43,
+      "evidence_files": 36,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -19935,7 +19935,7 @@
       ],
       "dependency_count": 8,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 77,
+      "evidence_files": 78,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -21653,7 +21653,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 117,
+      "evidence_files": 111,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -21904,7 +21904,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 71,
+      "evidence_files": 72,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -21922,7 +21922,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 71 evidence files · zones 00-CEP+00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+data)",
+      "repository_location": "(non-filename home · 72 evidence files · zones 00-CEP+00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+data)",
       "requirement_id": "RR-MEP-01",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -22351,7 +22351,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 42,
+      "evidence_files": 43,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -22368,7 +22368,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 42 evidence files · zones 00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-FOUNDATION-UNCONDITIONAL-READINESS-DETERMINATION.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+data+service)",
+      "repository_location": "(non-filename home · 43 evidence files · zones 00-MASTER+02-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+UCOS-OMEGA-INFINITY-FOUNDATION-UNCONDITIONAL-READINESS-DETERMINATION.md+UCOS-OMEGA-INFINITY-READY-UNCONDITIONAL-CLOSURE-DETERMINATION.md+data+service)",
       "requirement_id": "RR-MEP-10",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -22577,7 +22577,7 @@
       ],
       "dependency_count": 23,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 156,
+      "evidence_files": 157,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -22910,7 +22910,7 @@
       ],
       "dependency_count": 27,
       "disposition": "REJECTED",
-      "evidence_files": 94,
+      "evidence_files": 87,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -23356,7 +23356,7 @@
       ],
       "dependency_count": 32,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 97,
+      "evidence_files": 98,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -24040,7 +24040,7 @@
       ],
       "dependency_count": 22,
       "disposition": "REJECTED",
-      "evidence_files": 54,
+      "evidence_files": 47,
       "evidence_kinds": [
         "certificate",
         "registry"
@@ -24093,7 +24093,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 49,
+      "evidence_files": 48,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -24110,7 +24110,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 49 evidence files · zones 00-BOOK+00-CMG+00-MASTER+00-SOURCE-MANIFEST+01-WORKING+02-MASTER+04-REFERENCE+99-FREEZE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 48 evidence files · zones 00-BOOK+00-CMG+00-MASTER+00-SOURCE-MANIFEST+01-WORKING+02-MASTER+04-REFERENCE+99-FREEZE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-Phase-000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -24241,7 +24241,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 41,
+      "evidence_files": 40,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -24258,7 +24258,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 41 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 40 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-Phase-003",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -24437,7 +24437,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 46,
+      "evidence_files": 45,
       "evidence_kinds": [
         "certificate",
         "registry"
@@ -24453,7 +24453,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 46 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE-MANIFEST+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-IMPLEMENTATION-ORDER.md+99-FREEZE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 45 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE-MANIFEST+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+04-REFERENCE+05-IMPLEMENTATION-ORDER.md+99-FREEZE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-Phase-020",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -24533,7 +24533,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 39,
+      "evidence_files": 38,
       "evidence_kinds": [
         "certificate",
         "registry"
@@ -24549,7 +24549,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 39 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE-MANIFEST+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+06-PARALLEL-EXECUTION-GROUPS.md+99-FREEZE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 38 evidence files · zones 00-BOOK+00-MASTER+00-SOURCE-MANIFEST+01-UNREALIZED-CKO-INVENTORY.md+01-WORKING+02-MASTER+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+06-PARALLEL-EXECUTION-GROUPS.md+99-FREEZE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-Phase-024",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -24790,7 +24790,7 @@
       ],
       "dependency_count": 7,
       "disposition": "REJECTED",
-      "evidence_files": 245,
+      "evidence_files": 238,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -24858,7 +24858,7 @@
       ],
       "dependency_count": 7,
       "disposition": "REJECTED",
-      "evidence_files": 58,
+      "evidence_files": 51,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -24923,7 +24923,7 @@
       ],
       "dependency_count": 8,
       "disposition": "REJECTED",
-      "evidence_files": 61,
+      "evidence_files": 54,
       "evidence_kinds": [
         "certificate",
         "registry"
@@ -24988,7 +24988,7 @@
       ],
       "dependency_count": 9,
       "disposition": "REJECTED",
-      "evidence_files": 52,
+      "evidence_files": 45,
       "evidence_kinds": [
         "certificate",
         "registry"
@@ -25575,7 +25575,7 @@
       ],
       "dependency_count": 19,
       "disposition": "REJECTED",
-      "evidence_files": 50,
+      "evidence_files": 41,
       "evidence_kinds": [
         "certificate",
         "registry"
@@ -25785,7 +25785,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 9,
+      "evidence_files": 21,
       "evidence_kinds": [
         "constitution",
         "plan"
@@ -25801,7 +25801,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-BOOK+00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 21 evidence files · zones 00-BOOK+00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-RUNTIME-015",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -25985,7 +25985,7 @@
       ],
       "dependency_count": 53,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 300,
+      "evidence_files": 301,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -27596,7 +27596,7 @@
       ],
       "dependency_count": 20,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 52,
+      "evidence_files": 53,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -28006,7 +28006,7 @@
       ],
       "dependency_count": 57,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 136,
+      "evidence_files": 137,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -28822,7 +28822,7 @@
       ],
       "dependency_count": 57,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 84,
+      "evidence_files": 85,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -28939,7 +28939,7 @@
       ],
       "dependency_count": 57,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 71,
+      "evidence_files": 72,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -29055,7 +29055,7 @@
       ],
       "dependency_count": 57,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 77,
+      "evidence_files": 78,
       "evidence_kinds": [
         "certificate",
         "registry",
@@ -29219,7 +29219,7 @@
       ],
       "dependency_count": 57,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 132,
+      "evidence_files": 133,
       "evidence_kinds": [
         "certificate",
         "compliance",
@@ -30664,7 +30664,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 9,
+      "evidence_files": 17,
       "evidence_kinds": [
         "plan",
         "test"
@@ -30680,7 +30680,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
+      "repository_location": "(non-filename home · 17 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
       "requirement_id": "RR-UCKO-ALIAS-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -30858,7 +30858,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 9,
+      "evidence_files": 17,
       "evidence_kinds": [
         "plan",
         "test"
@@ -30874,7 +30874,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
+      "repository_location": "(non-filename home · 17 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
       "requirement_id": "RR-UCKO-EXPLICIT-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -30906,7 +30906,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 9,
+      "evidence_files": 17,
       "evidence_kinds": [
         "plan",
         "test"
@@ -30922,7 +30922,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
+      "repository_location": "(non-filename home · 17 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
       "requirement_id": "RR-UCKO-NOBODY-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -30954,7 +30954,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 8,
+      "evidence_files": 19,
       "evidence_kinds": [
         "plan"
       ],
@@ -30969,7 +30969,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 8 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 19 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCKO-OTHER-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -31049,7 +31049,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 9,
+      "evidence_files": 17,
       "evidence_kinds": [
         "plan",
         "test"
@@ -31065,7 +31065,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
+      "repository_location": "(non-filename home · 17 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
       "requirement_id": "RR-UCKO-PEER-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -31099,7 +31099,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 87,
+      "evidence_files": 88,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -31151,7 +31151,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 44,
+      "evidence_files": 45,
       "evidence_kinds": [
         "certificate",
         "plan"
@@ -31201,7 +31201,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 39,
+      "evidence_files": 40,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -31302,7 +31302,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 48,
+      "evidence_files": 49,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -32038,7 +32038,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 9,
+      "evidence_files": 17,
       "evidence_kinds": [
         "plan",
         "test"
@@ -32054,7 +32054,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
+      "repository_location": "(non-filename home · 17 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
       "requirement_id": "RR-UCKO-TARGET-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -32135,7 +32135,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 9,
+      "evidence_files": 17,
       "evidence_kinds": [
         "plan",
         "test"
@@ -32151,7 +32151,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
+      "repository_location": "(non-filename home · 17 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
       "requirement_id": "RR-UCKO-WRONG-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -32183,7 +32183,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 9,
+      "evidence_files": 17,
       "evidence_kinds": [
         "plan",
         "test"
@@ -32199,7 +32199,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
+      "repository_location": "(non-filename home · 17 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+engine)",
       "requirement_id": "RR-UCKO-X-0001",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -32281,7 +32281,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 147,
+      "evidence_files": 146,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -32338,7 +32338,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 131,
+      "evidence_files": 130,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -32393,7 +32393,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 9,
+      "evidence_files": 22,
       "evidence_kinds": [
         "plan",
         "test"
@@ -32409,7 +32409,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+platform)",
+      "repository_location": "(non-filename home · 22 evidence files · zones 00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+platform)",
       "requirement_id": "RR-UCOS-COMP-000002",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -32546,7 +32546,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -32598,7 +32598,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -32650,7 +32650,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -32702,7 +32702,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -32754,7 +32754,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -32806,7 +32806,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -32858,7 +32858,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -32910,7 +32910,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33014,7 +33014,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -33029,7 +33029,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 10 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 24 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-COMP-002000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -33063,7 +33063,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33115,7 +33115,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33167,7 +33167,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33219,7 +33219,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33271,7 +33271,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33323,7 +33323,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33375,7 +33375,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33427,7 +33427,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33479,7 +33479,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33529,7 +33529,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -33544,7 +33544,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 10 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 24 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-COMP-003000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -33578,7 +33578,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33630,7 +33630,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33682,7 +33682,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33734,7 +33734,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33786,7 +33786,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33838,7 +33838,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33890,7 +33890,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33942,7 +33942,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -33994,7 +33994,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -34044,7 +34044,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34059,7 +34059,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 10 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 24 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-COMP-004000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -34093,7 +34093,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -34145,7 +34145,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -34197,7 +34197,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -34249,7 +34249,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -34301,7 +34301,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -34353,7 +34353,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 25,
       "evidence_kinds": [
         "plan"
       ],
@@ -34405,7 +34405,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34457,7 +34457,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34509,7 +34509,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34559,7 +34559,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 23,
       "evidence_kinds": [
         "plan"
       ],
@@ -34574,7 +34574,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 10 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 23 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-COMP-005000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -34608,7 +34608,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34660,7 +34660,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34712,7 +34712,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34764,7 +34764,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34816,7 +34816,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34868,7 +34868,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34920,7 +34920,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -34972,7 +34972,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -35024,7 +35024,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -35076,7 +35076,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -35126,7 +35126,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 23,
       "evidence_kinds": [
         "plan"
       ],
@@ -35141,7 +35141,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 10 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 23 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-COMP-006000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -35175,7 +35175,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -35227,7 +35227,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -35279,7 +35279,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -35331,7 +35331,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -35383,7 +35383,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 24,
       "evidence_kinds": [
         "plan"
       ],
@@ -35435,7 +35435,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 23,
       "evidence_kinds": [
         "plan"
       ],
@@ -35487,7 +35487,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 23,
       "evidence_kinds": [
         "plan"
       ],
@@ -35539,7 +35539,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 23,
       "evidence_kinds": [
         "plan"
       ],
@@ -35591,7 +35591,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 23,
       "evidence_kinds": [
         "plan"
       ],
@@ -35643,7 +35643,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 11,
+      "evidence_files": 23,
       "evidence_kinds": [
         "plan"
       ],
@@ -35693,7 +35693,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [
         "plan"
       ],
@@ -35708,7 +35708,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 10 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 22 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-COMP-007000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -35742,7 +35742,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -35792,7 +35792,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -35842,7 +35842,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -35892,7 +35892,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -35942,7 +35942,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -35992,7 +35992,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36042,7 +36042,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36092,7 +36092,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36142,7 +36142,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36190,7 +36190,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 9,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36203,7 +36203,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 21 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-COMP-008000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -36237,7 +36237,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36287,7 +36287,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36337,7 +36337,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36387,7 +36387,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36437,7 +36437,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 22,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36487,7 +36487,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36537,7 +36537,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36587,7 +36587,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36637,7 +36637,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36685,7 +36685,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 9,
+      "evidence_files": 20,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36698,7 +36698,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 9 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 20 evidence files · zones 00-MASTER+00-SOURCE+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-COMP-009000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -36732,7 +36732,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36782,7 +36782,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36832,7 +36832,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36882,7 +36882,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36932,7 +36932,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -36982,7 +36982,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -37032,7 +37032,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -37082,7 +37082,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 10,
+      "evidence_files": 21,
       "evidence_kinds": [],
       "exact_homes": [],
       "family": "UCOS-COMP",
@@ -37132,7 +37132,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 36,
+      "evidence_files": 33,
       "evidence_kinds": [
         "certificate"
       ],
@@ -37184,7 +37184,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 37,
+      "evidence_files": 34,
       "evidence_kinds": [
         "certificate",
         "engine"
@@ -37235,7 +37235,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 32,
+      "evidence_files": 31,
       "evidence_kinds": [
         "certificate",
         "plan"
@@ -37251,7 +37251,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 32 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 31 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-EXEC-000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -37831,7 +37831,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 40,
+      "evidence_files": 37,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -37848,7 +37848,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 40 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 37 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-GOV-000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -37882,7 +37882,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 79,
+      "evidence_files": 70,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -37937,7 +37937,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 60,
+      "evidence_files": 61,
       "evidence_kinds": [
         "certificate",
         "plan",
@@ -37991,7 +37991,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 57,
+      "evidence_files": 48,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -38100,7 +38100,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 45,
+      "evidence_files": 44,
       "evidence_kinds": [
         "certificate",
         "engine",
@@ -38206,7 +38206,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "DEFERRED",
-      "evidence_files": 35,
+      "evidence_files": 34,
       "evidence_kinds": [
         "certificate",
         "plan"
@@ -38222,7 +38222,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 35 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 34 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-RAT-000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -38256,7 +38256,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 91,
+      "evidence_files": 88,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -38310,7 +38310,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 38,
+      "evidence_files": 32,
       "evidence_kinds": [
         "certificate",
         "plan"
@@ -38326,7 +38326,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 38 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+07-CRITICAL-PATH-ANALYSIS.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
+      "repository_location": "(non-filename home · 32 evidence files · zones 00-MASTER+01-UNREALIZED-CKO-INVENTORY.md+04-IMPLEMENTATION-WAVES.md+05-IMPLEMENTATION-ORDER.md+07-CRITICAL-PATH-ANALYSIS.md+08-IMPLEMENTATION-READINESS-MATRIX.md+09-IMPLEMENTATION-BACKLOG.md+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md)",
       "requirement_id": "RR-UCOS-RECON-0000",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -38457,7 +38457,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 115,
+      "evidence_files": 112,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -38511,7 +38511,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 44,
+      "evidence_files": 48,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -38531,7 +38531,7 @@
       "program": "UNCLASSIFIED",
       "relationship_count": 0,
       "relationships": {},
-      "repository_location": "(non-filename home · 44 evidence files · zones 00-BOOK+00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+platform)",
+      "repository_location": "(non-filename home · 48 evidence files · zones 00-BOOK+00-MASTER+ENFORCEMENT-CLOSURE-GAPS.md+ENFORCEMENT-CLOSURE-MATRIX.md+platform)",
       "requirement_id": "RR-UCOS-RECON-C2",
       "runtime_status": "NO-RUNTIME-EVIDENCE",
       "traceability": {
@@ -38759,7 +38759,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "IMPLEMENTED",
-      "evidence_files": 149,
+      "evidence_files": 150,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -38816,7 +38816,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "REJECTED",
-      "evidence_files": 91,
+      "evidence_files": 82,
       "evidence_kinds": [
         "certificate",
         "constitution",
@@ -38873,7 +38873,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 43,
+      "evidence_files": 42,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -38926,7 +38926,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 43,
+      "evidence_files": 42,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -38979,7 +38979,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 43,
+      "evidence_files": 42,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39032,7 +39032,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 48,
+      "evidence_files": 47,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39085,7 +39085,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 41,
+      "evidence_files": 40,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39138,7 +39138,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 43,
+      "evidence_files": 42,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39191,7 +39191,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 66,
+      "evidence_files": 65,
       "evidence_kinds": [
         "certificate",
         "registry"
@@ -39244,7 +39244,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 49,
+      "evidence_files": 48,
       "evidence_kinds": [
         "certificate",
         "registry"
@@ -39297,7 +39297,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 43,
+      "evidence_files": 42,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39350,7 +39350,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 40,
+      "evidence_files": 39,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39403,7 +39403,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 40,
+      "evidence_files": 39,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39456,7 +39456,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 39,
+      "evidence_files": 38,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39509,7 +39509,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 39,
+      "evidence_files": 38,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39562,7 +39562,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 39,
+      "evidence_files": 38,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39615,7 +39615,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 38,
+      "evidence_files": 37,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39668,7 +39668,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 38,
+      "evidence_files": 37,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39721,7 +39721,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 44,
+      "evidence_files": 43,
       "evidence_kinds": [
         "certificate"
       ],
@@ -39773,7 +39773,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 37,
+      "evidence_files": 36,
       "evidence_kinds": [
         "certificate",
         "constitution"
@@ -39826,7 +39826,7 @@
       "dependencies": [],
       "dependency_count": 0,
       "disposition": "SPECIFIED",
-      "evidence_files": 52,
+      "evidence_files": 51,
       "evidence_kinds": [
         "certificate",
         "constitution",
