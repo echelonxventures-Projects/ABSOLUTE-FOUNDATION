@@ -21,6 +21,7 @@ from engine.knowledge.store import (
     KnowledgeStore,
     default_store_dir,
 )
+from engine.knowledge.ukip.provenance import ProvenanceChain
 
 from .conftest import make_cko, make_decision
 
@@ -212,8 +213,6 @@ def test_history_file_is_absent_until_first_archive(store_dir):
 
 
 def test_provenance_round_trips(store_dir):
-    from engine.knowledge.ukip.provenance import ProvenanceChain
-
     store = KnowledgeStore(store_dir)
     chain_a = ProvenanceChain(subject="A")
     chain_b = ProvenanceChain(subject="B")
@@ -232,8 +231,6 @@ def test_provenance_is_empty_when_never_saved(store_dir):
 
 
 def test_provenance_does_not_touch_the_canon_or_history_files(store_dir):
-    from engine.knowledge.ukip.provenance import ProvenanceChain
-
     store = KnowledgeStore(store_dir)
     store.save(KnowledgeBase([make_cko("A")]))
     before = (store_dir / CANON_FILE).read_text()
@@ -243,8 +240,67 @@ def test_provenance_does_not_touch_the_canon_or_history_files(store_dir):
 
 
 def test_provenance_save_refuses_frozen_corpus_write():
-    from engine.knowledge.ukip.provenance import ProvenanceChain
-
     store = KnowledgeStore(default_store_dir().parent / "00-BOOK")
     with pytest.raises(KnowledgeSourceError):
         store.save_provenance([ProvenanceChain(subject="A")])
+
+
+def test_a_directory_inside_the_repository_but_outside_the_freeze_is_writable(store_dir):
+    """The frozen-corpus guard has TWO answers and only the refusal had a test.
+
+    ``_guard_writable`` returns early for a directory outside the repository — every other
+    store test uses ``tmp_path``, so that early return is the only path they exercised, and
+    the *permitted* case for a directory INSIDE the repository was never taken. Without it
+    the guard could refuse every in-repository write and no test here would notice, because
+    no test here writes inside the repository.
+    """
+    inside = default_store_dir()
+    KnowledgeStore(inside)._guard_writable()
+
+    with pytest.raises(KnowledgeSourceError, match="frozen corpus"):
+        KnowledgeStore(default_store_dir().parent / "00-BOOK")._guard_writable()
+
+
+def test_an_unreadable_prior_state_is_not_archived_and_does_not_block_the_save(store_dir):
+    """A corrupt canonical file cannot be archived, and refusing to save because of it would
+    leave the store stuck at the very state that cannot be read. The prior version is lost —
+    which is honest, because it was already unreadable — and the save proceeds."""
+    store = KnowledgeStore(store_dir)
+    store.save(KnowledgeBase([make_cko("A", title="v1")]))
+    (store_dir / CANON_FILE).write_text("{ not json", encoding="utf-8")
+
+    store.save(KnowledgeBase([make_cko("A", title="v2")]))
+    assert store.load().require_object("A").title == "v2"
+    assert store.history("A") == ()
+
+
+def test_an_unreadable_history_file_is_replaced_rather_than_appended_to(store_dir):
+    """A history that cannot be parsed is not a history. Appending to it would mean writing
+    a document built on a shape nobody read, so the archive starts again from the schema —
+    losing what was already unreadable and keeping the save working."""
+    store = KnowledgeStore(store_dir)
+    store.save(KnowledgeBase([make_cko("A", title="v1")]))
+    store.save(KnowledgeBase([make_cko("A", title="v2")]))
+    assert len(store.history("A")) == 1
+
+    (store_dir / HISTORY_FILE).write_text("{ not json", encoding="utf-8")
+    store.save(KnowledgeBase([make_cko("A", title="v3")]))
+    assert [h.title for h in store.history("A")] == ["v2"]
+
+
+def test_a_history_whose_versions_key_is_the_wrong_shape_is_rebuilt(store_dir):
+    """``versions`` must be an object keyed by cko_id. A list there parses as JSON and then
+    ``setdefault`` would raise ``AttributeError`` mid-save, so the wrong shape is replaced
+    rather than trusted — a readable document is not automatically a usable one."""
+    store = KnowledgeStore(store_dir)
+    store.save(KnowledgeBase([make_cko("A", title="v1")]))
+    store.save(KnowledgeBase([make_cko("A", title="v2")]))
+
+    document = json.loads((store_dir / HISTORY_FILE).read_text(encoding="utf-8"))
+    document["versions"] = ["not", "a", "mapping"]
+    (store_dir / HISTORY_FILE).write_text(json.dumps(document), encoding="utf-8")
+
+    store.save(KnowledgeBase([make_cko("A", title="v3")]))
+    rebuilt = json.loads((store_dir / HISTORY_FILE).read_text(encoding="utf-8"))
+    assert isinstance(rebuilt["versions"], dict)
+    assert [h.title for h in store.history("A")] == ["v2"]

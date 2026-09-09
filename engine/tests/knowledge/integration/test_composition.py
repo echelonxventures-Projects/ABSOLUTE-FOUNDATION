@@ -6,6 +6,7 @@ import pytest
 
 from engine.knowledge.integration.composition import AutonomousComposer
 from engine.knowledge.integration.errors import CompositionError
+from engine.knowledge.model import KnowledgeKind
 
 from .conftest import make_intent
 
@@ -49,3 +50,37 @@ def test_require_raises_when_insufficient(base):
         composer.require(make_intent("NEW"))
     # a sufficient intent returns a result
     assert composer.require(_compose_intent()).sufficient
+
+
+def test_an_intent_that_states_its_own_rationale_keeps_it(base):
+    """The composer SUPPLIES a rationale only where the kind requires one and the intent
+    gave none. Overwriting a stated rationale would replace an author's reason with a
+    generated sentence, which is the one thing a composition must not do — the rationale is
+    the part a reader uses to decide whether the composition was right."""
+    stated = make_intent(
+        "COMPOSED",
+        title="Zeta",
+        statement="orchestrating flows via bindings",
+        dependencies=("COMP-A", "COMP-B"),
+        rationale="Because the two components already answer this question together.",
+    )
+    result = AutonomousComposer(base).compose(stated)
+    assert result.sufficient, result.reasons
+    assert result.composed is not None
+    assert result.composed["rationale"] == stated.rationale
+    assert "autonomous constitutional composition" not in result.composed["rationale"]
+
+    # The other arm, for contrast: no stated rationale and a kind that REQUIRES one.
+    # PATTERN does not, which is why every existing composition test left the supplied
+    # sentence unexecuted — the requirement is declared for DECISION, RULE and PRINCIPLE.
+
+    needs_one = make_intent(
+        "SUPPLIED",
+        kind=KnowledgeKind.PRINCIPLE,
+        title="Zeta",
+        statement="orchestrating flows via bindings",
+        dependencies=("COMP-A", "COMP-B"),
+    )
+    supplied = AutonomousComposer(base).compose(needs_one)
+    assert supplied.composed is not None
+    assert "autonomous constitutional composition" in supplied.composed["rationale"]

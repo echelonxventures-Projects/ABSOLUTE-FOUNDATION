@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from engine.knowledge.capability import (
     KNOWLEDGE_ONCE_PRINCIPLE,
     CapabilityRecord,
@@ -264,3 +266,93 @@ def test_candidate_ordering_is_deterministic():
     first = [c.cko_id for c in engine.assess(intent).candidates]
     second = [c.cko_id for c in ReuseEngine(base).assess(intent).candidates]
     assert first == second
+
+
+def test_similarity_is_zero_when_nothing_is_shared_and_when_a_vector_has_no_length():
+    """TWO ZEROS FOR TWO DIFFERENT REASONS, and both are short-circuits.
+
+    No shared term means the cosine's numerator is zero, and computing the norms first
+    would be arithmetic over vocabularies that cannot agree — the answer is decided before
+    the division. A zero norm is the arithmetic guard: it happens when every term a
+    document carries appears in EVERY document, so its inverse document frequency is zero
+    and the vector has no length. Dividing there is a ZeroDivisionError, and the honest
+    answer is that a term shared by everything distinguishes nothing.
+    """
+    engine = ReuseEngine(KnowledgeBase([]))
+
+    assert engine._similarity(frozenset({"alpha"}), frozenset({"beta"}), {}) == 0.0
+
+    ubiquitous = {"shared": 0.0}
+    assert engine._similarity(frozenset({"shared"}), frozenset({"shared"}), ubiquitous) == 0.0
+
+    real = {"alpha": 1.0, "beta": 1.0}
+    assert engine._similarity(
+        frozenset({"alpha", "beta"}), frozenset({"alpha", "beta"}), real
+    ) == pytest.approx(1.0)
+
+
+def test_a_capability_never_proposes_itself_as_its_own_reuse_candidate():
+    """The intent's own id is skipped, and the reason is that it would always win.
+
+    An intent scored against the capability recorded under its own id compares a document
+    with itself, which is a perfect match — so without the skip every MODIFY of an existing
+    capability would be told to reuse the thing it is modifying, and the strongest candidate
+    on every such assessment would be the subject of the assessment.
+    """
+    base = _capability_base(
+        _capability_record(),
+        _capability_record(
+            unique_id="RC-02",
+            canonical_name="engine.knowledge.other",
+            canonical_location="engine/knowledge/other",
+        ),
+    )
+    engine = ReuseEngine(base)
+    projected = [obj.cko_id for obj in base.objects() if is_capability(obj)]
+    assert len(projected) == 2
+
+    intent = make_intent(
+        projected[0],
+        title="Universal Knowledge Provenance",
+        statement="Record a hash chained provenance chain for every knowledge record.",
+    )
+    named = {c.cko_id for c in engine._capability_candidates(intent)}
+    assert projected[0] not in named, "the intent was offered itself for reuse"
+    assert projected[1] in named
+
+
+def test_a_capability_sharing_no_vocabulary_with_the_intent_is_not_ranked_at_all():
+    """A zero score is not a weak candidate — it is not a candidate.
+
+    Keeping it would put every capability in the repository on every ranked list, ordered
+    by a number that says nothing, and the caller adjudicating those candidates would be
+    reading a list whose tail is noise. Only capabilities that actually share vocabulary
+    with the intent are scored in.
+    """
+    base = _capability_base(
+        _capability_record(),
+        _capability_record(
+            unique_id="RC-02",
+            canonical_name="platform.palette.chooser",
+            canonical_location="platform/palette/chooser",
+            description="Colour palette selection.",
+            summary="Chooses colour palettes for diagrams and charts.",
+            symbols=["PaletteChooser"],
+        ),
+    )
+    engine = ReuseEngine(base)
+    # THE INTENT USES ONLY DISTINCTIVE VOCABULARY, and that is what makes the test work.
+    # Every projected capability fact shares a large boilerplate ("canonical", "owner",
+    # "implemented", ...), and the inverse-document-frequency weighting is smoothed, so a
+    # single boilerplate word in common is enough to score ABOVE zero. Only an intent whose
+    # terms are absent from a document entirely reaches the exclusion.
+    intent = make_intent("NEW", title="Provenance", statement="Hash chained provenance.")
+    named = {c.cko_id for c in engine._capability_candidates(intent)}
+    projected = {obj.cko_id: obj for obj in base.objects() if is_capability(obj)}
+    unrelated = next(
+        cko_id
+        for cko_id, obj in projected.items()
+        if "palette" in (obj.statement + obj.title).lower()
+    )
+    assert unrelated not in named, "a capability sharing no vocabulary was ranked anyway"
+    assert named, "every capability was excluded, so the exclusion proves nothing"

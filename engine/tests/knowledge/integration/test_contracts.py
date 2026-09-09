@@ -12,6 +12,7 @@ from engine.knowledge.integration.contracts import (
     ConstitutionalLayer,
     Operation,
     SequenceStage,
+    _as_opt_str,
 )
 from engine.knowledge.integration.errors import IntentError
 from engine.knowledge.model import KnowledgeAuthority, KnowledgeKind, Lifecycle
@@ -101,3 +102,35 @@ def test_from_dict_rejects_bad_input():
         ArtifactIntent.from_dict({**base, "dependencies": "notalist"})
     with pytest.raises(IntentError):
         ArtifactIntent.from_dict({**base, "parent": 5})
+
+
+def test_an_optional_string_field_accepts_a_string_a_null_and_nothing_else():
+    """Three answers, and the accepting one had no test.
+
+    ``_as_opt_str`` is what makes ``parent`` optional rather than absent-or-broken. Only the
+    refusals were exercised, so the arm that lets a real value through was dead — a parser
+    whose accepting path is untested is one that could reject everything and still look
+    correct from its own suite.
+    """
+
+    assert _as_opt_str("UCKO-PARENT", field_name="parent") == "UCKO-PARENT"
+    assert _as_opt_str(None, field_name="parent") is None
+    with pytest.raises(IntentError) as excinfo:
+        _as_opt_str(7, field_name="parent")
+    assert excinfo.value.context["field"] == "parent"
+
+
+def test_an_intent_that_declares_a_parent_lists_it_first_among_its_references():
+    """``references`` is the ordered outbound closure a registration plan is built from, and
+    the parent is part of it. An intent with no parent was the only shape tested, so a parent
+    could have been dropped from every plan without a failure."""
+    parented = make_intent(
+        "CHILD",
+        parent="UCKO-PARENT",
+        dependencies=("UCKO-DEP",),
+        knowledge_links=("UCKO-DEP",),
+    )
+    assert parented.references() == ("UCKO-PARENT", "UCKO-DEP")
+
+    orphan = make_intent("ORPHAN", dependencies=("UCKO-DEP",))
+    assert orphan.references() == ("UCKO-DEP",)

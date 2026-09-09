@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from engine.knowledge.model import KnowledgeKind
+from engine.knowledge.model import KnowledgeKind, RelationType
 from engine.knowledge.ukip.contracts import KnowledgeUnit, ProviderKind, SourceRef
 from engine.knowledge.ukip.errors import ProviderConflictError, ProviderError
 from engine.knowledge.ukip.providers import (
@@ -23,6 +23,7 @@ from engine.knowledge.ukip.providers import (
     default_providers,
     default_registry,
 )
+from engine.tests.knowledge.conftest import make_cko, make_decision
 from engine.tests.knowledge.ukip.conftest import make_provider, make_source, make_unit
 
 # ---------------------------------------------------------------------------
@@ -423,3 +424,116 @@ def test_document_provider_tolerates_undecodable_bytes(tmp_path):
     path.write_bytes(b"## Heading\n\xff\xfe body\n")
     units = DocumentProvider(tmp_path).units()
     assert len(units) == 1
+
+
+# ---------------------------------------------------------------------------
+# the arms an authoritative provider never takes
+# ---------------------------------------------------------------------------
+
+
+def test_a_provider_returning_something_that_is_not_iterable_at_all_is_rejected():
+    """``CallableProvider`` cannot reach this arm and a custom provider can.
+
+    ``CallableProvider.provide`` materialises its supplier's result, so a non-iterable
+    fails inside ``provide`` and is reported as a provider FAILURE. A provider written by
+    hand returns whatever it returns, and the contract check in ``units()`` is the only
+    thing standing between that and ``tuple(7)`` raising a ``TypeError`` out of the
+    registry — an error naming no provider, which is the one thing the wrapping exists to
+    prevent.
+    """
+
+    class _Wrong(KnowledgeProvider):
+        def descriptor(self) -> ProviderDescriptor:
+            return ProviderDescriptor(provider_id="wrong", kind=ProviderKind.EXTERNAL, title="t")
+
+        def provide(self):  # type: ignore[override]
+            return 7
+
+    with pytest.raises(ProviderError) as excinfo:
+        _Wrong().units()
+    assert excinfo.value.context["provider_id"] == "wrong"
+    assert "iterable" in str(excinfo.value)
+
+
+def test_a_provider_returning_a_string_is_rejected_before_it_is_iterated():
+    """A string IS iterable, so without the explicit check it would be admitted as a
+    sequence of one-character "units" and fail later with a message about characters."""
+
+    class _Stringly(KnowledgeProvider):
+        def descriptor(self) -> ProviderDescriptor:
+            return ProviderDescriptor(provider_id="stringly", kind=ProviderKind.EXTERNAL, title="t")
+
+        def provide(self):  # type: ignore[override]
+            return "not units"
+
+    with pytest.raises(ProviderError, match="iterable of knowledge units"):
+        _Stringly().units()
+
+
+def test_every_declared_link_on_an_object_becomes_a_relation(seed_base):
+    """The seed corpus exercises three of the seven link kinds, so four projections were
+    dead. A link a provider does not project is a relationship the graph cannot resolve,
+    and UKIP's own law is that a relationship that cannot be resolved is not a relationship.
+    """
+
+    linked = make_cko(
+        "UCKO-TEST-LINKS",
+        parent="UCKO-TEST-PARENT",
+        dependencies=("UCKO-TEST-DEP",),
+        consumers=("UCKO-TEST-CONSUMER",),
+        supersedes=("UCKO-TEST-OLD",),
+        knowledge_links=("UCKO-TEST-RELATED",),
+        conflicts_with=("UCKO-TEST-RIVAL",),
+        decision_links=("UDR-TEST-0001",),
+    )
+    relations = CanonicalStoreProvider._relations(linked)
+    by_type = {(r.relation, r.target): r.note for r in relations}
+
+    assert by_type[(RelationType.EXTENDS, "UCKO-TEST-PARENT")] == "cko:parent"
+    assert by_type[(RelationType.DEPENDS_ON, "UCKO-TEST-DEP")] == "cko:dependency"
+    assert by_type[(RelationType.CONSUMES, "UCKO-TEST-CONSUMER")] == "cko:consumer"
+    assert by_type[(RelationType.SUPERSEDES, "UCKO-TEST-OLD")] == "cko:supersedes"
+    assert by_type[(RelationType.RELATED_TO, "UCKO-TEST-RELATED")] == "cko:knowledge-link"
+    assert by_type[(RelationType.CONFLICTS_WITH, "UCKO-TEST-RIVAL")] == "cko:conflict"
+    assert by_type[(RelationType.REFERENCES, "UDR-TEST-0001")] == "cko:decision-link"
+    assert len(relations) == 7
+
+    assert CanonicalStoreProvider._relations(make_cko("UCKO-TEST-BARE")) == ()
+
+
+def test_a_decision_that_supersedes_another_declares_it(seed_base):
+    """Supersession is the one relation a decision carries beyond its dependencies, and it
+    is what makes the decision log a chain rather than a set."""
+
+    superseding = make_decision(
+        "UDR-TEST-0002", dependencies=("UCKO-TEST-DEP",), supersedes="UDR-TEST-0001"
+    )
+    relations = DecisionLogProvider._relations(superseding)
+    assert (RelationType.SUPERSEDES, "UDR-TEST-0001") in {(r.relation, r.target) for r in relations}
+
+    standalone = make_decision("UDR-TEST-0003", dependencies=("UCKO-TEST-DEP",))
+    assert all(
+        r.relation is not RelationType.SUPERSEDES
+        for r in DecisionLogProvider._relations(standalone)
+    )
+
+
+def test_a_document_that_cannot_be_read_names_itself_in_the_failure(tmp_path):
+    """One unreadable document must not fail anonymously.
+
+    The provider is pointed at whole trees, so a path it collected and cannot open is a
+    realistic state — and a ``PermissionError`` escaping with no provider id and no path
+    would send the reader looking through the registry instead of at the file.
+    """
+    readable = tmp_path / "good.md"
+    readable.write_text("## Heading\nBody.\n", encoding="utf-8")
+    unreadable = tmp_path / "locked.md"
+    unreadable.write_text("## Heading\nBody.\n", encoding="utf-8")
+    unreadable.chmod(0o000)
+    try:
+        with pytest.raises(ProviderError) as excinfo:
+            DocumentProvider(tmp_path).units()
+        assert excinfo.value.context["path"] == str(unreadable)
+        assert excinfo.value.context["provider_id"] == "repository-documents"
+    finally:
+        unreadable.chmod(0o644)

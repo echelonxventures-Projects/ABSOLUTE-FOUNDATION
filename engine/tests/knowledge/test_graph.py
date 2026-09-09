@@ -90,3 +90,24 @@ def test_edges_from_to_type_filter():
     assert len(g.edges_to("B", type=RelationType.DEPENDS_ON)) == 1
     assert g.successors("A", type=RelationType.RELATED_TO) == ("C",)
     assert g.predecessors("C") == ("A",)
+
+
+def test_a_node_reachable_by_two_routes_is_walked_once():
+    """The visited set is what stops a diamond from being traversed twice, and a knowledge
+    graph is full of diamonds — two objects depending on one shared foundation is the normal
+    shape. Without the guard the walk re-enters the shared node on every route into it, and
+    the traversal cost doubles for each additional path rather than the answer changing."""
+    graph = KnowledgeGraph.from_objects(
+        [
+            make_cko("TOP", dependencies=("LEFT", "RIGHT")),
+            make_cko("LEFT", dependencies=("SHARED",)),
+            make_cko("RIGHT", dependencies=("SHARED",)),
+            make_cko("SHARED"),
+        ]
+    )
+    reached = graph.reachable_from("TOP")
+    assert sorted(reached) == ["LEFT", "RIGHT", "SHARED"]
+    assert len(reached) == len(set(reached)), "a node was walked more than once"
+    affected = graph.impact_of("SHARED")
+    assert sorted(affected) == ["LEFT", "RIGHT", "TOP"]
+    assert len(affected) == len(set(affected))

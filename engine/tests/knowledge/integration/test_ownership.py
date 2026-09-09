@@ -7,7 +7,7 @@ import pytest
 from engine.knowledge.integration.contracts import Operation
 from engine.knowledge.integration.errors import OwnershipViolationError
 from engine.knowledge.integration.ownership import OwnershipProtocol
-from engine.knowledge.model import KnowledgeAuthority, KnowledgeKind
+from engine.knowledge.model import KnowledgeAuthority, KnowledgeKind, Lifecycle
 from engine.knowledge.store import KnowledgeBase
 
 from .conftest import make_cko, make_intent
@@ -78,3 +78,28 @@ def test_find_overlaps():
     # single owner -> no overlap
     solo = KnowledgeBase([make_cko("S-1"), make_cko("S-2", statement="different")])
     assert proto.find_overlaps(solo) == ()
+
+
+def test_a_retired_object_does_not_carry_its_owner_into_an_overlap():
+    """Overlap is about who claims the SAME LIVE knowledge, not who ever claimed it.
+
+    A DEPRECATED object keeps its owner and its semantic hash, so including it would report a
+    permanent overlap between the team that gave a claim up and the team that replaced it —
+    a contradiction that can never be resolved, because deprecating is exactly how a claim is
+    given up. The active twin is still detected, so the filter narrows the answer without
+    hiding one.
+    """
+
+    retired = make_cko("OLD", owner="TEAM-A", statement="one shared substance")
+    retired = retired.transition_to(Lifecycle.DEPRECATED)
+    assert not retired.is_active
+    live = make_cko("NEW", owner="TEAM-B", statement="one shared substance")
+    other = make_cko("ALSO", owner="TEAM-C", statement="one shared substance")
+
+    protocol = OwnershipProtocol()
+    with_retired = protocol.find_overlaps(KnowledgeBase([retired, live]))
+    assert with_retired == ()
+
+    both_live = protocol.find_overlaps(KnowledgeBase([live, other]))
+    assert len(both_live) == 1
+    assert set(both_live[0].owners) == {"TEAM-B", "TEAM-C"}

@@ -297,3 +297,24 @@ def test_unit_document_is_deterministic_and_ordered():
     assert document["count"] == 2
     assert [u["source"]["provider_id"] for u in document["units"]] == ["a", "b"]
     assert unit_document(units) == unit_document(reversed(units))
+
+
+def test_a_raw_record_carrying_a_validity_window_is_refused_rather_than_guessed():
+    """REFERRED, NOT REPAIRED — and the refusal is the honest form of that.
+
+    ``engine.temporal`` (CMG-000002) declares no ``ValidityPeriod.from_dict``, so rehydrating
+    a window from a wire record would mean inventing a parse for another owner's type. The
+    two dishonest alternatives are both worse than raising: dropping the field silently
+    turns a time-bounded claim into a timeless one, and guessing a parse authors a second
+    definition of a primitive that already has an owner.
+
+    A record with no validity still round-trips, so the refusal is about the gap and not
+    about the wire format.
+    """
+    timeless = RelationDeclaration(RelationType.DEPENDS_ON, "UCKO-T", "note").to_dict()
+    assert RelationDeclaration.from_dict(timeless).target == "UCKO-T"
+
+    with pytest.raises(UnitError) as excinfo:
+        RelationDeclaration.from_dict({**timeless, "validity": {"since": {}, "until": None}})
+    assert "ValidityPeriod.from_dict" in str(excinfo.value)
+    assert excinfo.value.context["at"] == "relation.validity"

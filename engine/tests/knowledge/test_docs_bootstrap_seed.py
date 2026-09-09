@@ -17,11 +17,12 @@ from engine.knowledge.docs import (
     TRACEABILITY_REPORT,
     DocumentationEngine,
 )
+from engine.knowledge.model import KnowledgeKind
 from engine.knowledge.seed import build_seed_base
 from engine.knowledge.store import KnowledgeBase
 from engine.knowledge.validation import validate_base
 
-from .conftest import make_cko
+from .conftest import make_cko, make_decision
 
 # -- docs ---------------------------------------------------------------------
 
@@ -121,8 +122,6 @@ def test_docs_on_empty_base_renders_placeholders():
 
 
 def test_governance_handbook_renders_exceptions_and_skips_empty_kinds():
-    from engine.knowledge.model import KnowledgeKind  # noqa: PLC0415
-
     base = KnowledgeBase(
         [
             make_cko("R1", kind=KnowledgeKind.RULE, rationale="r"),
@@ -171,3 +170,59 @@ def test_seed_validates_and_certifies():
 
 def test_make_cko_helper_is_sane():
     assert make_cko("Z").verify_integrity()
+
+
+def test_the_decision_handbook_omits_every_section_the_decision_left_empty():
+    """FOUR OPTIONAL SECTIONS, and each of them omitted rather than rendered empty.
+
+    Rejected options, consequences, risks and mitigations are all optional on a decision
+    record, and the handbook is what a reader consults to decide whether a decision still
+    holds. A **Risks.** heading with nothing under it reads as "no risks were identified",
+    which is a claim; omitting the heading reads as "this decision does not record risks",
+    which is the truth. The seed corpus fills all four, so all four omissions were dead.
+    """
+
+    bare = make_decision(
+        "UDR-BARE",
+        rejected_options=(),
+        consequences=(),
+        risks=(),
+        mitigations=(),
+    )
+    rendered = DocumentationEngine(KnowledgeBase([], [bare])).render_all()[DECISION_HANDBOOK]
+    for heading in ("Rejected options", "Consequences", "Risks", "Mitigations"):
+        assert f"**{heading}.**" not in rendered, heading
+    # The mandatory parts are still there, so the omissions are not a blank document.
+    assert "The chosen architecture." in rendered
+    assert "**Rationale.**" in rendered
+    assert "**Supersession rules.**" in rendered
+
+    full = make_decision(
+        "UDR-FULL",
+        consequences=("a consequence",),
+        risks=("a risk",),
+        mitigations=("a mitigation",),
+    )
+    complete = DocumentationEngine(KnowledgeBase([], [full])).render_all()[DECISION_HANDBOOK]
+    for heading in ("Rejected options", "Consequences", "Risks", "Mitigations"):
+        assert f"**{heading}.**" in complete, heading
+
+
+def test_a_graph_node_that_is_neither_an_object_nor_a_decision_is_labelled_by_its_id():
+    """The label falls back to the id, and the fallback is the honest answer.
+
+    A node reached through a reference to something the base does not hold has no title to
+    show. Rendering nothing would produce an unlabelled node in the knowledge graph, and
+    inventing a title would name an object that does not exist — so the id, which is the one
+    true thing known about it, is what the reader sees.
+    """
+
+    base = KnowledgeBase(
+        [make_cko("A", dependencies=("MISSING-TARGET",))],
+        [make_decision("UDR-1")],
+    )
+    engine = DocumentationEngine(base)
+    assert engine._node_label("A") == "Title A"
+    assert engine._node_label("UDR-1") == "Decision UDR-1"
+    assert engine._node_label("MISSING-TARGET") == "MISSING-TARGET"
+    assert "MISSING-TARGET" in engine.render_all()[KNOWLEDGE_GRAPH]

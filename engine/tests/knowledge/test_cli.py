@@ -100,3 +100,92 @@ def test_error_path_returns_exit_2(tmp_path, capsys):
 def test_missing_command_exits_nonzero():
     with pytest.raises(SystemExit):
         main([])
+
+
+def _catalog(tmp_path, *, name="engine.knowledge.ukip", location="engine/knowledge/ukip"):
+    """A one-entry capability catalogue, written where the command can be pointed at it."""
+    path = tmp_path / "catalog.json"
+    path.write_text(
+        json.dumps(
+            {
+                "capabilities": [
+                    {
+                        "unique_id": "RC-01",
+                        "canonical_name": name,
+                        "canonical_location": location,
+                        "category": "engine",
+                        "authority": "EC-1 CERTIFIED",
+                        "reuse": "REUSE_AS_IS/COMPOSE",
+                        "replacement_prohibited": True,
+                        "implementation_status": "CERTIFIED",
+                        "description": "Universal Knowledge Intelligence Platform.",
+                        "evidence_present": True,
+                        "summary": "Admits knowledge from an unbounded number of providers.",
+                        "symbols": ["KnowledgeRegistry"],
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    return str(path)
+
+
+def test_capabilities_projects_read_only_and_reports_what_would_change(tmp_path, capsys):
+    """REPOSITORY SELF-AWARENESS, and the reason the default is read-only.
+
+    The projection exists so a gate can notice that the canonical layer has fallen behind
+    the repository — a capability added without its canonical knowledge. That only works if
+    running it changes nothing: a command that wrote by default would repair the drift it
+    was asked to detect, and the gate could never fail.
+
+    The whole command was unexecuted, which is the shape that matters here: it is the one
+    surface through which the canonical layer learns what the repository contains.
+    """
+    store = str(tmp_path / "k")
+    _run(["--store", store, "init"], capsys)
+    before = (tmp_path / "k" / CANON_FILE).read_text(encoding="utf-8")
+
+    code, out = _run(["--store", store, "capabilities", "--catalog", _catalog(tmp_path)], capsys)
+    payload = json.loads(out)
+    assert code == 0
+    assert payload["discovered"] == 1
+    created = payload["assimilation"]["created"]
+    # The identity is CONTENT-ADDRESSED, so it is asserted as a shape rather than as a
+    # literal: pinning the digest would make this test fail on any edit to the record.
+    assert len(created) == 1 and created[0].startswith("UCKO-CAP-")
+    assert payload["coverage_before"] != payload["coverage_after"]
+    assert "wrote" not in payload
+    assert (tmp_path / "k" / CANON_FILE).read_text(encoding="utf-8") == before
+
+
+def test_capabilities_gates_on_a_canonical_layer_that_has_fallen_behind(tmp_path, capsys):
+    """Exit 1 when the layer is stale, so a capability added without its canonical knowledge
+    fails closed rather than being noticed by whoever happens to read the report."""
+    store = str(tmp_path / "k")
+    _run(["--store", store, "init"], capsys)
+    catalog = _catalog(tmp_path)
+
+    code, _ = _run(["--store", store, "capabilities", "--catalog", catalog, "--gate"], capsys)
+    assert code == 1
+
+
+def test_capabilities_write_persists_and_makes_the_gate_pass(tmp_path, capsys):
+    """The write is what closes the gate, and re-running it is a no-op — which is the
+    property that makes the projection safe to run on every commit rather than once."""
+    store = str(tmp_path / "k")
+    _run(["--store", store, "init"], capsys)
+    catalog = _catalog(tmp_path)
+
+    code, out = _run(["--store", store, "capabilities", "--catalog", catalog, "--write"], capsys)
+    payload = json.loads(out)
+    assert code == 0
+    assert len(payload["wrote"]) == 2
+    assert all(str(tmp_path) in written for written in payload["wrote"])
+
+    code, out = _run(["--store", store, "capabilities", "--catalog", catalog, "--gate"], capsys)
+    assert code == 0, "the projection did not settle, so re-running it is not a no-op"
+    settled = json.loads(out)["assimilation"]
+    assert settled["created"] == [] and settled["updated"] == []
+    assert settled["retired"] == []
+    assert settled["unchanged"]

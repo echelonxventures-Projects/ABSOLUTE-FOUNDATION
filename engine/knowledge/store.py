@@ -39,7 +39,7 @@ from engine.knowledge.model import (
     Lifecycle,
 )
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover - typing only, avoids an import cycle
     # Deliberately not imported at module level here: engine.knowledge.ukip's package
     # __init__ eagerly imports assimilation.py, which imports this module — a real
     # circular import (confirmed by direct failure, not assumed). The two methods

@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from engine.knowledge.integration.cli import build_parser, main
+from engine.knowledge.integration.cli import _load_base, build_parser, main
 
 
 @pytest.fixture
@@ -84,3 +84,20 @@ def test_malformed_intent_exits_2(store, tmp_path):
     bad = tmp_path / "bad.json"
     bad.write_text(json.dumps({"intent_id": "X"}), encoding="utf-8")  # missing fields
     assert _run(store, "discover", "--intent", str(bad)) == 2
+
+
+def test_the_constitution_is_extended_into_the_base_unless_it_is_declined(store):
+    """``--no-constitution`` is the OPT-OUT, so the default path was the untested one.
+
+    Every test above passes the flag to keep its fixtures small, which left the ordinary
+    invocation — the one an operator actually runs — taking a branch nothing exercised. The
+    constitution is what the governance and grounding commands resolve references against,
+    so a default that silently loaded nothing would make those commands answer over a base
+    missing the very objects they are meant to check against.
+    """
+
+    declined = _load_base(store, with_constitution=False)
+    extended = _load_base(store, with_constitution=True)
+
+    assert len(extended.objects()) > len(declined.objects())
+    assert set(declined.object_ids()) < set(extended.object_ids())

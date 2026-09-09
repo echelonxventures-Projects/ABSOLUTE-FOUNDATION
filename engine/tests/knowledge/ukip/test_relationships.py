@@ -21,10 +21,19 @@ from engine.knowledge.ukip.relationships import (
     DanglingRelationship,
     Relationship,
     RelationshipSet,
+    _lt,
     build_relationships,
     relationships_of,
 )
-from engine.temporal.coordinate import TemporalCoordinate, ValidityPeriod
+from engine.temporal.coordinate import (
+    CreationMethod,
+    Precision,
+    Provenance,
+    ReferenceSystem,
+    SystemType,
+    TemporalCoordinate,
+    ValidityPeriod,
+)
 
 from .conftest import make_unit, register
 
@@ -635,7 +644,6 @@ class TestBuildRelationships:
     def test_self_relation_is_silently_dropped(self) -> None:
         # line 440: target == record.knowledge_id → skip
         # Build a registry where a unit declares a relation to itself via its own key
-        from engine.knowledge.ukip.contracts import RelationDeclaration
 
         unit_a = make_unit(
             "self-ref",
@@ -768,3 +776,78 @@ class TestModuleConstants:
     def test_acyclic_families_are_non_empty(self) -> None:
         for _name, types in ACYCLIC_FAMILIES.items():
             assert len(types) > 0
+
+
+# ---------------------------------------------------------------------------
+# Law 7: a partial order, where "before" is not a question every pair answers
+# ---------------------------------------------------------------------------
+#
+# Every temporal test above uses a TOTAL order, where any two coordinates are ordered and
+# INCOMPARABLE only arises across systems — which the cross-system guards catch first. A
+# system that declares `total_order=False` produces INCOMPARABLE for two coordinates in the
+# SAME frame, which is the case the three guards below were written for and the only one
+# that reaches them. Vector clocks and causal orders are exactly this shape, so it is a
+# repository this package is meant to serve rather than a contrivance.
+
+
+def _partial(counter: int) -> TemporalCoordinate:
+    """A coordinate in a declared PARTIAL order: comparable to itself and nothing else."""
+
+    return TemporalCoordinate(
+        primary=str(counter),
+        reference_system=ReferenceSystem(
+            system_type=SystemType.LOGICAL,
+            system_identifier="causal-clock",
+            total_order=False,
+            causality_tracking=True,
+        ),
+        precision=Precision(resolution="tick"),
+        provenance=Provenance(
+            creation_authority="test", creation_method=CreationMethod.COMPUTATION
+        ),
+    )
+
+
+def test_before_is_unprovable_rather_than_false_in_a_partial_order() -> None:
+    """``None``, never ``False``. "Not provably before" and "provably not before" are
+    different answers, and collapsing them would let an unprovable ordering be read as a
+    proven one — the whole reason ``Ordering`` carries an INCOMPARABLE member."""
+
+    assert _lt(_partial(1), _partial(2)) is None
+    assert _lt(_coord(1), _coord(2)) is True
+    assert _lt(_coord(2), _coord(1)) is False
+
+
+def test_windows_that_cannot_be_ordered_are_not_merged() -> None:
+    """Deduplication merges relationships whose windows provably overlap. Two windows in a
+    partial order provably overlap with nothing, so they stay separate — merging them would
+    assert a shared instant that no comparison established."""
+    a = _make_rel(note="a", validity=ValidityPeriod(since=_partial(1), until=_partial(9)))
+    b = _make_rel(note="b", validity=ValidityPeriod(since=_partial(2), until=_partial(8)))
+    rset = RelationshipSet([a, b])
+    assert len(rset) == 2
+    assert {r.note for r in rset.all()} == {"a", "b"}
+
+
+def test_a_window_whose_end_cannot_be_ordered_holds_at_no_instant() -> None:
+    """The closing bound is checked separately from the opening one, and an unprovable end
+    excludes the relationship. Admitting it would mean reporting a historical subgraph that
+    includes an assertion nobody can show was still in force."""
+    rel = _make_rel(validity=ValidityPeriod(since=_partial(1), until=_partial(9)))
+    rset = RelationshipSet([rel])
+    assert rset.valid_at(_partial(5)).all() == ()
+
+
+def test_a_window_that_opens_exactly_now_but_ends_unprovably_still_excludes() -> None:
+    """The opening and closing bounds are checked SEPARATELY, and this is the only shape
+    that reaches the second check in a partial order.
+
+    A coordinate compares EQUAL to itself even where the order is partial, so a window whose
+    ``since`` IS the instant being asked about passes the opening check — and its ``until``,
+    being a different coordinate in the same partial frame, is then INCOMPARABLE. Without the
+    second check the relationship would be reported as in force at an instant no comparison
+    ever placed inside its window.
+    """
+    rel = _make_rel(validity=ValidityPeriod(since=_partial(5), until=_partial(9)))
+    rset = RelationshipSet([rel])
+    assert rset.valid_at(_partial(5)).all() == ()

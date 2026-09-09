@@ -6,7 +6,13 @@ import dataclasses
 
 import pytest
 
-from engine.knowledge.cko import CanonicalKnowledgeObject, DecisionRecord, RejectedOption
+from engine.knowledge.cko import (
+    CanonicalKnowledgeObject,
+    DecisionRecord,
+    RejectedOption,
+    _as_str,
+    _as_str_list,
+)
 from engine.knowledge.errors import (
     KnowledgeIntegrityError,
     KnowledgeValidationError,
@@ -168,3 +174,80 @@ def test_kind_and_authority_are_enforced_on_parse():
     payload["kind"] = "bogus"
     with pytest.raises(KnowledgeValidationError):
         CanonicalKnowledgeObject.from_dict(payload)
+
+
+def test_a_required_string_field_must_be_a_non_empty_string():
+    """``_as_str`` is the parser's floor. Every seed and fixture record is well formed, so
+    the refusal never ran — and the shapes it refuses are exactly what a hand-edited or
+    round-tripped store produces: a null where a title belongs, an integer id, an empty
+    string that reads as present and carries nothing."""
+
+    assert _as_str("a title", field_name="title", at="X") == "a title"
+    for wrong in ("", None, 7, ["a title"], {"title": "a title"}):
+        with pytest.raises(KnowledgeValidationError) as excinfo:
+            _as_str(wrong, field_name="title", at="X")
+        assert excinfo.value.context["field"] == "title"
+
+
+def test_an_absent_string_list_is_an_empty_tuple_and_not_a_refusal():
+    """Optional list fields are ABSENT, not empty-by-mistake. Refusing ``None`` would make
+    every optional link field mandatory, and a record that declares no consumers would be
+    unparseable rather than simply unlinked."""
+
+    assert _as_str_list(None, field_name="consumers", at="X") == ()
+    assert _as_str_list([], field_name="consumers", at="X") == ()
+    assert _as_str_list(["a", "b"], field_name="consumers", at="X") == ("a", "b")
+    with pytest.raises(KnowledgeValidationError):
+        _as_str_list(["a", 7], field_name="consumers", at="X")
+
+
+def test_a_record_carrying_no_content_hash_is_sealed_rather_than_verified():
+    """TWO WAYS IN, and only the verifying one had a test.
+
+    A record that already carries a content hash is checked against it, because a stored
+    object whose bytes no longer match its seal has been edited. A record that carries none
+    has nothing to check — it is being admitted for the first time — so it is SEALED, and
+    the resulting object then verifies. Refusing it would make the parser unable to admit
+    any record a producer had not already sealed.
+    """
+    original = make_cko("A")
+    record = original.to_dict()
+    assert record["content_sha256"]
+
+    unsealed = dict(record)
+    unsealed.pop("content_sha256")
+    admitted = CanonicalKnowledgeObject.from_dict(unsealed)
+    assert admitted.content_sha256 == original.content_sha256
+    assert admitted.verify_integrity()
+
+    verified = CanonicalKnowledgeObject.from_dict(record)
+    assert verified.content_sha256 == original.content_sha256
+
+    tampered = dict(record)
+    tampered["title"] = "a title the seal was not computed over"
+    with pytest.raises(KnowledgeIntegrityError):
+        CanonicalKnowledgeObject.from_dict(tampered)
+
+
+def test_a_decision_record_carrying_no_content_hash_is_sealed_rather_than_verified():
+    """The same two-way admission as an object's, on the type that records decisions.
+
+    ``DecisionRecord`` seals its own content, and its parser has to admit a record a producer
+    has not sealed — otherwise a decision could only ever be read back, never authored from a
+    plain document. The verifying arm was covered by every round-trip; the sealing arm, which
+    is the one an author takes, was not.
+    """
+    original = make_decision("UDR-SEAL")
+    record = original.to_dict()
+    assert record["content_sha256"]
+
+    unsealed = dict(record)
+    unsealed.pop("content_sha256")
+    admitted = DecisionRecord.from_dict(unsealed)
+    assert admitted.content_sha256 == original.content_sha256
+    assert admitted.verify_integrity()
+
+    tampered = dict(record)
+    tampered["rationale"] = "a rationale the seal was not computed over"
+    with pytest.raises(KnowledgeIntegrityError):
+        DecisionRecord.from_dict(tampered)

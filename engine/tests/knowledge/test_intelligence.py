@@ -112,3 +112,39 @@ def test_coverage_report():
     assert "A" in d["objects_missing_rationale"]
     assert "B" in d["objects_missing_owner"]
     assert d["by_kind"]
+
+
+def test_a_conflict_pair_is_reported_only_while_both_sides_are_live():
+    """A conflict is a contradiction between two things that are BOTH in force.
+
+    A declared conflict with an object that has been deprecated is a resolved conflict —
+    the two claims no longer both stand — so reporting it would keep a finished argument
+    permanently open. The loop moves on rather than recording it, and the same pair with
+    both sides active is still reported, so the filter narrows the answer without hiding one.
+    """
+
+    live = make_cko("LIVE", conflicts_with=("RIVAL",))
+    rival = make_cko("RIVAL")
+    both_active = KnowledgeIntelligence(KnowledgeBase([live, rival])).find_conflicts()
+    assert {tuple(sorted((f.left, f.right))) for f in both_active} == {("LIVE", "RIVAL")}
+
+    retired = rival.transition_to(Lifecycle.DEPRECATED)
+    assert not retired.is_active
+    resolved = KnowledgeIntelligence(KnowledgeBase([live, retired])).find_conflicts()
+    assert not any({f.left, f.right} == {"LIVE", "RIVAL"} for f in resolved)
+
+
+def test_a_decision_link_naming_no_recorded_decision_is_a_broken_reference():
+    """Decision links are resolved against the DECISION ids, not the object ids.
+
+    They are checked in a second loop for that reason, and it was the loop with no test: an
+    object citing a decision the base does not record would have read as fully grounded,
+    which is the shape that lets a decision link point at nothing indefinitely.
+    """
+
+    recorded = make_decision("UDR-1")
+    citing = make_cko("A", decision_links=("UDR-1", "UDR-ABSENT"))
+    broken = KnowledgeIntelligence(KnowledgeBase([citing], [recorded])).find_broken_references()
+
+    assert ("A", "UDR-ABSENT") in broken
+    assert ("A", "UDR-1") not in broken

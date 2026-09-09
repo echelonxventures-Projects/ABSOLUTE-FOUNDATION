@@ -14,7 +14,7 @@ from engine.knowledge.validation import (
     validate_base,
 )
 
-from .conftest import make_cko
+from .conftest import make_cko, make_decision
 
 
 def _finding(report, check_id):
@@ -113,3 +113,25 @@ def test_custom_check_list_and_ids():
     validator = KnowledgeValidator([NoDuplicateKnowledgeCheck()])
     assert validator.check_ids == ("no-duplicate-knowledge",)
     assert len(default_checks()) == 9
+
+
+def test_a_decision_whose_seal_no_longer_matches_is_named_as_an_offender():
+    """OBJECTS AND DECISIONS ARE CHECKED SEPARATELY, and only the object arm had a test.
+
+    A decision record is content-addressed exactly as an object is, and the integrity rule
+    exists so that a store edited outside the engine is refused rather than trusted. With
+    only the object loop exercised, a decision could have been edited in place and the rule
+    would have reported a clean base — the offender list would simply never mention it.
+    """
+
+    sound = make_decision("UDR-1")
+    assert validate_base(KnowledgeBase([], [sound])).accepted
+
+    edited = dataclasses.replace(sound, rationale="a rationale the seal was not computed over")
+    assert not edited.verify_integrity()
+
+    report = validate_base(KnowledgeBase([], [edited]))
+    assert not report.accepted
+    integrity = _finding(report, "integrity-sealed")
+    assert not integrity.passed
+    assert "UDR-1" in integrity.offenders

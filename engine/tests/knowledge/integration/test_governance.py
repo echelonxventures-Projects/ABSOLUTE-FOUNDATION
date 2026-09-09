@@ -90,3 +90,32 @@ def test_bind_decision():
     assert ref.grounded
     # advisory issue recorded for missing evidence
     assert any("evidence" in issue for issue in ref.issues)
+
+
+def test_governance_reads_the_authority_and_kind_of_each_knowledge_reference(base):
+    """THREE FACTS PER REFERENCE, and only one of them had a test.
+
+    A reference is knowledge; a reference whose object is CONSTITUTIONAL is also a law; a
+    reference whose object is EVIDENCE is also evidence. Those are not exclusive, and each
+    is read from the object rather than from the reference — so a citation cannot claim to
+    be a law by naming itself one. A reference to an object the base does not hold is
+    skipped entirely, because a governance chain may not cite what it cannot resolve.
+    """
+    citing = make_cko(
+        "CITES",
+        dependencies=("COMP-A", "LAW-1", "EV-1", "NOT-IN-THE-BASE"),
+    )
+    populated = KnowledgeBase(
+        [
+            *base.objects(),
+            make_cko("LAW-1", authority=KnowledgeAuthority.CONSTITUTIONAL),
+            make_cko("EV-1", kind=KnowledgeKind.EVIDENCE),
+            citing,
+        ]
+    )
+    reference = GovernanceIntegration(populated).bind_object("CITES")
+
+    assert set(reference.knowledge) == {"COMP-A", "LAW-1", "EV-1"}
+    assert "NOT-IN-THE-BASE" not in reference.knowledge
+    assert reference.laws == ("LAW-1",)
+    assert reference.evidence == ("EV-1",)
