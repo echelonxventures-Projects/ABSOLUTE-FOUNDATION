@@ -1344,3 +1344,352 @@ def test_l16_the_live_workflow_set_is_measured_and_clean(live_probe: Probe) -> N
     workflows = [a for a in probe.artifacts if a.identity.startswith(".github/workflows/")]
     assert len(workflows) > 30, "the workflow population was not discovered"
     assert contract.workflows_that_cannot_run(probe) == []
+
+
+# ---------------------------------------------------------------------------
+# the declaration reader's own refusals
+#
+# Every one of these is a shape the reader must FAULT on rather than absorb. A section
+# absorbed at the wrong type does not stay wrong quietly: `_rows` over a string iterates
+# its characters, and every later check then quantifies over single letters and passes.
+
+
+def test_the_module_entry_point_reaches_the_gate() -> None:
+    """``python -m engine.enforcement_closure`` is a second invocation plane, and UEC-L-06
+    requires two. A dispatcher that stopped importing its gate would fail at run time in CI
+    rather than here."""
+    import importlib
+
+    module = importlib.import_module("engine.enforcement_closure.__main__")
+    assert module.main is gate.main
+
+
+def test_a_discovery_rule_with_no_identity_is_refused() -> None:
+    """The model refuses it as well as the reader. A rule with no id cannot be named by a
+    governed entry, so nothing could ever be attributed to it."""
+    from engine.enforcement_closure.model import Rule
+
+    with pytest.raises(DeclarationError, match="needs a rule_id"):
+        Rule(rule_id="", kind="gate", strategy="glob", floor=1)
+
+
+def test_a_declaration_that_is_not_an_object_is_refused() -> None:
+    with pytest.raises(DeclarationError, match="must be a JSON object"):
+        parse(["not", "an", "object"], source="test")  # type: ignore[arg-type]
+
+
+@pytest.mark.parametrize(
+    ("mutate", "message"),
+    [
+        (
+            lambda d: d.__setitem__("discovery_rules", "a string where a list belongs"),
+            "must be a non-empty list",
+        ),
+        (
+            lambda d: d.__setitem__("discovery_rules", ["not a mapping"]),
+            "must be an object",
+        ),
+        (
+            lambda d: d["discovery_rules"].append(copy.deepcopy(d["discovery_rules"][0])),
+            "share a rule_id",
+        ),
+        (lambda d: d.__setitem__("withdrawals", ["not an object"]), "must be an object"),
+        (lambda d: d["withdrawals"].__setitem__("cap", "many"), "non-negative integer"),
+        (lambda d: d["withdrawals"].__setitem__("cap", -1), "non-negative integer"),
+        (
+            lambda d: d["withdrawals"].__setitem__("entries", "a string"),
+            "'withdrawals.entries' must be a list",
+        ),
+        (lambda d: d["laws"].append(copy.deepcopy(d["laws"][0])), "share a law_id"),
+        (lambda d: d.__setitem__("ratchet", ["not an object"]), "'ratchet' must be an object"),
+        (
+            lambda d: d["ratchet"].__setitem__("a_ceiling", -1),
+            "must be a non-negative integer",
+        ),
+        (
+            lambda d: d.__setitem__("testpaths", "engine/tests"),
+            "must be a list of strings",
+        ),
+        (lambda d: d.__setitem__("testpaths", ["   "]), "must be a non-empty string"),
+    ],
+    ids=[
+        "rules-not-a-list",
+        "rule-row-not-an-object",
+        "duplicate-rule-id",
+        "withdrawals-not-an-object",
+        "cap-not-an-integer",
+        "cap-negative",
+        "entries-not-a-list",
+        "duplicate-law-id",
+        "ratchet-not-an-object",
+        "ratchet-value-negative",
+        "testpaths-not-a-list",
+        "testpaths-entry-empty",
+    ],
+)
+def test_the_reader_refuses_every_malformed_section(
+    document: dict[str, Any], mutate: Callable[[dict[str, Any]], None], message: str
+) -> None:
+    forged = copy.deepcopy(document)
+    mutate(forged)
+    with pytest.raises(DeclarationError, match=message):
+        parse(forged, source="test")
+
+
+def test_a_governed_entry_naming_a_kind_no_rule_locates_is_refused(
+    document: dict[str, Any],
+) -> None:
+    """The rule_id and the kind are two independent bindings. An entry naming a declared rule
+    under a kind nothing locates would be governed by a discovery that can never find it."""
+    forged = copy.deepcopy(document)
+    forged["governed_enforcement"][0]["kind"] = "a-kind-no-rule-locates"
+    with pytest.raises(DeclarationError, match="which no discovery rule locates"):
+        parse(forged, source="test")
+
+
+def test_a_declared_rule_resolves_by_id_and_an_undeclared_one_refuses(
+    document: dict[str, Any],
+) -> None:
+    """Both halves of the accessor. The refusal is what stops a governed entry from silently
+    naming nothing; the resolution is what every caller depends on."""
+    declaration = parse(copy.deepcopy(document), source="test")
+    first = declaration.rules[0]
+    assert declaration.rule(first.rule_id) is first
+    with pytest.raises(DeclarationError, match="no discovery rule"):
+        declaration.rule("a-rule-nobody-declared")
+
+
+# ---------------------------------------------------------------------------
+# discovery: the substrate reader, and the shapes a healthy tree never presents
+
+
+def test_a_substrate_that_does_not_resolve_is_a_fault(tmp_path: Path) -> None:
+    """A missing substrate is a FAULT and never an empty population: an unread Makefile would
+    locate no target, and no target is what a repository with nothing to enforce looks like."""
+    with pytest.raises(EnforcementError, match="does not resolve"):
+        discovery.read_text(str(tmp_path), "a-file-nobody-wrote")
+
+
+def test_a_target_declared_twice_is_located_once(tmp_path: Path) -> None:
+    """`make help` echoes every target name, and a target may be defined twice. Two artifacts
+    under one identity would make every per-artifact law count the same thing twice."""
+    from engine.enforcement_closure.model import Rule
+
+    (tmp_path / "Makefile").write_text(
+        "uec-gate:\n\t@echo first\n\nuec-gate:\n\t@echo second\n", encoding="utf-8"
+    )
+    rule = Rule(
+        rule_id="r", kind="make_target", strategy="make_targets", floor=1, pattern=r"uec-.*"
+    )
+    located = discovery.locate_make_targets(rule, str(tmp_path))
+    assert [artifact.identity for artifact in located] == ["uec-gate"]
+    assert "first" in located[0].detail["recipe"], "the first definition is the one make honours"
+
+
+def test_a_module_that_will_not_parse_contributes_no_evidence() -> None:
+    """It contributes nothing rather than contributing its comments. A raw-text fallback would
+    let a docstring naming an engine count as something loading it, which is the exact defect
+    this detector exists to refuse."""
+    assert discovery.source_evidence("def (:::\n") == ""
+    assert discovery.refusal_shapes("def (:::\n", **_WITNESS) == frozenset()
+
+
+def test_a_module_with_no_body_contributes_no_docstring() -> None:
+    """An empty module has no first statement to read as a docstring, and indexing one would
+    take the whole corpus scan down on the first empty ``__init__.py``."""
+    assert discovery.source_evidence("") == ""
+
+
+def test_an_index_entry_with_no_working_tree_file_is_skipped(tmp_path: Path) -> None:
+    """A tracked path with no file is an ordinary state — a deletion staged, or a checkout in
+    progress — and reading it would turn the corpus scan into a fault over a working tree that
+    is merely mid-edit."""
+    discovery.clear_caches()
+    absent = ("engine/a-module-no-checkout-carries.py",)
+    assert discovery.source_corpus(str(tmp_path), absent) == {}
+    assert discovery.test_corpus(str(tmp_path), absent, ("engine/",)) == {}
+
+
+def test_the_memoized_scans_can_be_dropped_for_a_caller_that_changes_the_tree() -> None:
+    """The scans are memoized per root, so a caller that mutates the tree in-process would keep
+    reading the pre-mutation answer. Clearing is what makes an in-process worktree test honest."""
+    discovery.clear_caches()
+    assert discovery.tracked_paths(ROOT), "the tracked population is empty after clearing"
+
+
+# ---------------------------------------------------------------------------
+# the laws' remaining refusals, and the probe's own edges
+
+
+@pytest.fixture(scope="module", name="probe")
+def _live_probe(document: dict[str, Any]) -> Probe:
+    return Probe(parse(copy.deepcopy(document), source="test"), repository=ROOT)
+
+
+def test_an_unreadable_canonical_entry_point_reads_as_empty_rather_than_faulting(
+    document: dict[str, Any],
+) -> None:
+    """The lane's path comes from the declaration, so a repository that renames its entry point
+    says so there. A rename this reader could not follow must produce an empty lane — under
+    which UEC-L-15 refuses every engine — rather than an exception that takes the gate down."""
+    forged = copy.deepcopy(document)
+    forged["programme"] = {"canonical_entry_point": "an-entry-point-nobody-wrote.sh"}
+    assert Probe(parse(forged, source="test"), repository=ROOT).canonical_lane_text() == ""
+
+
+def test_an_artifact_whose_identity_is_not_a_path_has_no_module_form(probe: Probe) -> None:
+    """A make target's identity is a target name, not a path, so there is no `package.module`
+    to look for in the lane. Splitting one anyway would compare the lane against a package
+    named after half a target."""
+    from engine.enforcement_closure.model import KIND_MAKE_TARGET, Artifact
+
+    artifact = Artifact(identity="uec-probe-target", kind=KIND_MAKE_TARGET, rule_id="probe")
+    probe._invokers[artifact.key()] = ()
+    assert probe.reaches_canonical_lane(artifact, "a lane that names nothing") is False
+
+
+def test_a_witness_declaring_no_accepted_shape_refuses_every_engine(
+    document: dict[str, Any],
+) -> None:
+    """The accepted shapes are the whole vocabulary of the law. With none declared, no test
+    could ever witness a refusal — so the honest answer is that every engine is unwitnessed,
+    not that the law holds."""
+    forged = copy.deepcopy(document)
+    forged["refusal_witness"]["accepted_shapes"] = []
+    findings = _run(forged, "every_engine_is_witnessed_refusing")
+    assert findings, "an empty witness vocabulary reported no unwitnessed engine"
+
+
+def test_a_declaration_no_package_digests_is_reported(probe: Probe, monkeypatch) -> None:
+    """Three markers, because the repository mints digests three ways. A law recognising one of
+    them would report a false absence for two thirds of the surface — which is why the markers
+    are the thing under test rather than the law's arithmetic."""
+    monkeypatch.setattr(contract, "DIGEST_MARKERS", ("a-marker-no-module-carries",))
+    assert contract.declarations_without_a_certification_identity(probe)
+
+
+def test_a_workflow_file_that_reads_as_empty_is_skipped(probe: Probe, monkeypatch) -> None:
+    """An empty read is not a defect-free workflow: it is a workflow nobody read. Reporting it
+    as clean and reporting it as broken are both wrong, so it contributes nothing and the
+    population laws above account for its absence."""
+    monkeypatch.setattr(discovery, "read_text", lambda root, relative: "")
+    assert contract.workflows_that_cannot_run(probe) == []
+
+
+def test_a_needs_list_with_a_trailing_separator_names_no_extra_job() -> None:
+    """`needs: [a, ]` splits to a name and an empty string. An empty dependency compared against
+    the declared jobs would report every well-formed workflow as depending on a job called ""."""
+    workflow = (
+        "on: push\njobs:\n"
+        "  a:\n    runs-on: ubuntu-latest\n    steps:\n      - run: 'true'\n"
+        "  b:\n    needs: [a, ]\n    runs-on: ubuntu-latest\n    steps:\n      - run: 'true'\n"
+    )
+    assert contract._workflow_defects("w", workflow) == []
+
+
+def test_an_empty_enforcement_plane_is_refused(probe: Probe) -> None:
+    """Every law below UEC-L-01 quantifies over the located population. Over an empty one they
+    all hold, which is the vacuity the whole programme exists to refuse."""
+    hollow = copy.copy(probe)
+    hollow.artifacts = ()
+    hollow.located = {}
+    findings = contract.discovery_rules_are_non_vacuous(hollow)
+    assert any("the enforcement plane is empty" in f for f in findings)
+
+
+def test_an_artifact_both_governed_and_withdrawn_is_refused(document: dict[str, Any]) -> None:
+    """Withdrawal releases an artifact from the inventory. An entry that is both required and
+    released leaves the reader no way to decide whether its absence is a defect."""
+    forged = copy.deepcopy(document)
+    row = copy.deepcopy(forged["governed_enforcement"][0])
+    row["identity"] = "engine/enforcement_closure/a-file-nobody-wrote.py"
+    forged["governed_enforcement"].append(row)
+    forged["withdrawals"]["cap"] = max(2, forged["withdrawals"].get("cap", 0))
+    forged["withdrawals"]["entries"].append(
+        {
+            "identity": row["identity"],
+            "kind": row["kind"],
+            "reason": "a withdrawal declared for an artifact the inventory still requires",
+            "owner": "test",
+            "date": "2026-09-09",
+        }
+    )
+    findings = _run(forged, "declared_enforcement_exists")
+    assert any("both governed and withdrawn" in f for f in findings)
+
+
+def test_a_package_exposing_no_uniform_parse_is_counted_rather_than_faulted(
+    probe: Probe, monkeypatch
+) -> None:
+    """A package with no `declaration.parse` does not expose the uniform interface, which is a
+    measured fact reported by the ratchet. Nothing is logged, because a log line is an output
+    and an output varying with the import environment would make two measurements differ."""
+    import types
+
+    monkeypatch.setattr(
+        contract.importlib, "import_module", lambda name: types.ModuleType("hollow")
+    )
+    assert contract._uniform_identity_owners(probe) == {}
+
+
+def test_a_mutation_the_declaration_refuses_is_a_killed_mutant_not_a_finding(
+    probe: Probe, monkeypatch
+) -> None:
+    """A declaration that REFUSES the edit at parse is a declaration that edit cannot silently
+    pass through — the property under test. The failure this law reports is the opposite case:
+    an edit that parsed cleanly and left the identity where it was."""
+
+    def _refusing(document: dict[str, Any]) -> None:
+        raise DeclarationError("this edit is refused at parse")
+
+    monkeypatch.setattr(
+        contract, "IDENTITY_MUTATIONS", {"refused": (lambda document: True, _refusing)}
+    )
+    monkeypatch.setattr(contract, "IDENTITY_MUTATION_FLOOR", 1)
+    assert contract.certification_identity_is_complete(probe) == []
+
+
+def test_a_declaration_no_meaningful_edit_reaches_is_refused(probe: Probe, monkeypatch) -> None:
+    """Below the floor the law holds by describing nothing: no semantic mutation applied, so its
+    identity was never shown to move under ANY edit that changes what it means."""
+    monkeypatch.setattr(
+        contract, "IDENTITY_MUTATIONS", {"absent": (lambda document: False, lambda d: None)}
+    )
+    findings = contract.certification_identity_is_complete(probe)
+    assert any("below the floor" in f for f in findings)
+
+
+def test_uec_own_artifact_that_its_rules_do_not_locate_is_refused(
+    document: dict[str, Any],
+) -> None:
+    """A closure mechanism outside its own closure is the D-09 defect, named and made
+    executable: UEC lists itself, and refuses if its own rules cannot find what it listed."""
+    forged = copy.deepcopy(document)
+    entry = copy.deepcopy(forged["self_coverage"]["artifacts"][0])
+    entry["identity"] = "MAKE-TARGET-UEC-NEVER-DECLARED"
+    entry["kind"] = "MAKE_GATE_TARGET"
+    forged["self_coverage"]["artifacts"].append(entry)
+    findings = _run(forged, "self_coverage_is_a_fixed_point")
+    assert any("not located by UEC's own discovery rules" in f for f in findings)
+
+
+def test_uec_own_gate_without_a_test_or_two_planes_is_refused(probe: Probe) -> None:
+    """The registrar must satisfy the laws it applies to everything else, and both of its own
+    obligations are measured by removing the evidence for them rather than by assertion."""
+    hollow = copy.copy(probe)
+    hollow._tests = dict.fromkeys(probe._tests, ())
+    hollow._invokers = dict.fromkeys(probe._invokers, ())
+    findings = contract.self_coverage_is_a_fixed_point(hollow)
+    assert any("has no test binding" in f for f in findings)
+    assert any("fewer than two invocation planes" in f for f in findings)
+
+
+def test_a_ratchet_key_nobody_declared_is_skipped_rather_than_read_as_zero(
+    document: dict[str, Any],
+) -> None:
+    """A ceiling of zero and no ceiling at all are different. Reading an absent key as zero would
+    make every measured violation an assurance reduction on a law nobody has ratcheted yet."""
+    forged = copy.deepcopy(document)
+    for key in list(contract.RATCHETED):
+        forged["ratchet"].pop(key, None)
+    assert _run(forged, "no_assurance_reduction") == []
