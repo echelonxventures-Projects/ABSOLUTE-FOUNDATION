@@ -1,6 +1,6 @@
 # 06 — Origin Uniqueness Register
 
-> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · closure baseline `05342cb` (branch `integration/recovery-001`) · corrected Authoritative-Origin model (Phase-001B) · AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · derived from provenance baseline `05342cb` by `cert_engine.py`.
+> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · closure baseline `8444c995` (branch `integration/recovery-001`) · corrected Authoritative-Origin model (Phase-001B) · AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · derived from provenance baseline `8444c995` by `cert_engine.py`.
 >
 > Proof that every object has exactly one valid origin.
 >
@@ -14,6 +14,6 @@
 | Objects with CONFLICTING origins | 0 | PASS |
 | Objects with CIRCULAR origins | 0 | PASS |
 | Objects with INVALID origins | 0 | PASS |
-| Objects with EXACTLY ONE valid origin | 447 | PASS |
+| Objects with EXACTLY ONE valid origin | 549 | PASS |
 
-**Origin Integrity = 100.0%** (447/447 objects with exactly one valid authoritative origin).
+**Origin Integrity = 100.0%** (549/549 objects with exactly one valid authoritative origin).

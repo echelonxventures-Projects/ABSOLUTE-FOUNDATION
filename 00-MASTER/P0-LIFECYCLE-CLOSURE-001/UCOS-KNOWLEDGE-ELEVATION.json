@@ -2,19 +2,26 @@
   "authority": "NONE — DERIVED TRUTH",
   "closures": [
     {
-      "blocking": [],
-      "closed": true,
+      "blocking": [
+        "Extract Engineering Knowledge",
+        "Register Engineering Knowledge"
+      ],
+      "closed": false,
       "closure": "knowledge_closure",
       "members": [
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Extract Engineering Knowledge",
           "stage_id": "UCL-S-0390"
         },
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Register Engineering Knowledge",
           "stage_id": "UCL-S-0400"
         }
@@ -25,19 +32,26 @@
       ]
     },
     {
-      "blocking": [],
-      "closed": true,
+      "blocking": [
+        "Increase Constitutional Capability",
+        "Increase Engineering Capability"
+      ],
+      "closed": false,
       "closure": "capability_closure",
       "members": [
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Increase Constitutional Capability",
           "stage_id": "UCL-S-0420"
         },
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Increase Engineering Capability",
           "stage_id": "UCL-S-0430"
         }
@@ -48,25 +62,35 @@
       ]
     },
     {
-      "blocking": [],
-      "closed": true,
+      "blocking": [
+        "Begin Next Elevated Engineering Cycle",
+        "Elevate",
+        "Update Repository Truth"
+      ],
+      "closed": false,
       "closure": "evolution_closure",
       "members": [
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Update Repository Truth",
           "stage_id": "UCL-S-0360"
         },
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Elevate",
           "stage_id": "UCL-S-0410"
         },
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Begin Next Elevated Engineering Cycle",
           "stage_id": "UCL-S-0450"
         }
@@ -78,31 +102,44 @@
       ]
     },
     {
-      "blocking": [],
-      "closed": true,
+      "blocking": [
+        "Improve",
+        "Learn",
+        "Reason",
+        "Reflect"
+      ],
+      "closed": false,
       "closure": "learning_closure",
       "members": [
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Learn",
           "stage_id": "UCL-S-0180"
         },
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Reason",
           "stage_id": "UCL-S-0190"
         },
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Reflect",
           "stage_id": "UCL-S-0200"
         },
         {
-          "failed_probes": [],
-          "realization": "IMPLEMENTED",
+          "failed_probes": [
+            "test_coverage"
+          ],
+          "realization": "PARTIALLY_IMPLEMENTED",
           "stage": "Improve",
           "stage_id": "UCL-S-0230"
         }
@@ -115,12 +152,12 @@
       ]
     }
   ],
-  "digest": "aed8e468fbc4d2d13aca8a91474f5f70aef333152fb46e752703557cbb5bdd53",
+  "digest": "825a5519bfe091f3014d31c0a27cbf878e2b3b0556359805274d57b0c10ac47f",
   "measurements": {
-    "closed": 4,
+    "closed": 0,
     "closures": 4,
-    "manual_intervention_required": false,
-    "open": 0
+    "manual_intervention_required": true,
+    "open": 4
   },
   "phase": 7,
   "programme": "P0-LIFECYCLE-CLOSURE-001",

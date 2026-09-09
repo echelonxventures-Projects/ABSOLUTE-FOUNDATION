@@ -1,6 +1,6 @@
 {
   "authority": "NONE — DERIVED TRUTH",
-  "digest": "0f7034127aa7414805ec5412120a9da55f15bd469e4fb542d5d18e850293345f",
+  "digest": "8da7e3554038b55bc4912a066a9d5ab0433e2a999213ff6b52dbc2f961a93746",
   "lifecycle_authority": "UCL-000001",
   "manifest": "00-MASTER/UCL-000001/ucl-stage-manifest.json",
   "measurements": {
@@ -55,7 +55,8 @@
       "stage_name": "Receive Goal",
       "tests": [
         "engine/tests/constitution/test_acceptance_and_evolution.py",
-        "engine/tests/constitution/test_stages.py"
+        "engine/tests/constitution/test_stages.py",
+        "platform/tests/test_observation_universe.py"
       ]
     },
     {
@@ -126,8 +127,11 @@
         "engine/tests/constitution/test_acceptance_and_evolution.py",
         "engine/tests/constitution/test_stages.py",
         "engine/tests/unit/test_corpus_currency.py",
+        "engine/tests/unit/test_governance_engines.py",
         "engine/tests/unit/test_repository_decision.py",
-        "engine/tests/unit/test_superiority_evaluation.py"
+        "engine/tests/unit/test_superiority_evaluation.py",
+        "platform/tests/test_canonical_validation_evidence.py",
+        "platform/tests/test_observation_universe.py"
       ]
     },
     {
@@ -166,7 +170,9 @@
         "engine/tests/constitution/test_acceptance_and_evolution.py",
         "engine/tests/constitution/test_stages.py",
         "engine/tests/knowledge/test_capability.py",
+        "engine/tests/unit/test_certification_integrity_execution.py",
         "engine/tests/unit/test_closure009_requirement_engine.py",
+        "platform/tests/test_universal_ownership_convergence.py",
         "platform/tests/test_universal_truth.py"
       ]
     },
@@ -621,8 +627,26 @@
       "tests": [
         "engine/tests/constitution/test_acceptance_and_evolution.py",
         "engine/tests/constitution/test_stages.py",
+        "engine/tests/unit/test_certification_integrity_execution.py",
         "engine/tests/unit/test_closure009_requirement_engine.py",
-        "platform/tests/test_repository_operations_commands.py"
+        "engine/tests/unit/test_enforcement_closure.py",
+        "engine/tests/unit/test_execution_environment.py",
+        "engine/tests/unit/test_substrate_consumption.py",
+        "engine/tests/unit/test_uaue_controller.py",
+        "engine/tests/unit/test_uaue_engine_refusals.py",
+        "engine/tests/unit/test_uaue_evolution_authority.py",
+        "engine/tests/unit/test_verification_impact.py",
+        "engine/tests/unit/test_verification_intelligence.py",
+        "engine/tests/universal_discovery/test_graph.py",
+        "platform/tests/test_canonical_validation_evidence.py",
+        "platform/tests/test_constitutional_authority_alignment.py",
+        "platform/tests/test_coverage_scope.py",
+        "platform/tests/test_ledger_authority.py",
+        "platform/tests/test_mutation_classification.py",
+        "platform/tests/test_mutation_governance_boundary.py",
+        "platform/tests/test_observation_universe.py",
+        "platform/tests/test_repository_operations_commands.py",
+        "platform/tests/test_verification_purity.py"
       ]
     },
     {
@@ -691,7 +715,10 @@
       "tests": [
         "engine/tests/constitution/test_acceptance_and_evolution.py",
         "engine/tests/constitution/test_stages.py",
+        "engine/tests/uckp/test_category_integrity.py",
+        "engine/tests/uckp/test_category_ownership_resolution.py",
         "engine/tests/uckp/test_state_evolution_intelligence_governance.py",
+        "engine/tests/unit/test_certification_integrity_execution.py",
         "platform/tests/test_security_readiness.py"
       ]
     },
@@ -926,7 +953,10 @@
       "stage_name": "Test",
       "tests": [
         "engine/tests/constitution/test_acceptance_and_evolution.py",
-        "engine/tests/constitution/test_stages.py"
+        "engine/tests/constitution/test_stages.py",
+        "engine/tests/unit/test_certification_equivalence.py",
+        "engine/tests/unit/test_certification_integrity_execution.py",
+        "engine/tests/unit/test_governance_engines.py"
       ]
     },
     {
@@ -960,7 +990,8 @@
       "stage_name": "Govern",
       "tests": [
         "engine/tests/constitution/test_acceptance_and_evolution.py",
-        "engine/tests/constitution/test_stages.py"
+        "engine/tests/constitution/test_stages.py",
+        "platform/tests/test_mutation_classification.py"
       ]
     },
     {
@@ -1068,7 +1099,11 @@
       "stage_name": "Register",
       "tests": [
         "engine/tests/constitution/test_acceptance_and_evolution.py",
-        "engine/tests/constitution/test_stages.py"
+        "engine/tests/constitution/test_stages.py",
+        "engine/tests/unit/test_certification_integrity_execution.py",
+        "engine/tests/unit/test_verification_impact.py",
+        "platform/tests/test_ledger_authority.py",
+        "platform/tests/test_verification_purity.py"
       ]
     },
     {
@@ -1103,7 +1138,18 @@
       "stage_name": "Assign Universal Constitutional Identifier",
       "tests": [
         "engine/tests/constitution/test_acceptance_and_evolution.py",
-        "engine/tests/constitution/test_stages.py"
+        "engine/tests/constitution/test_stages.py",
+        "engine/tests/expansion/test_universal_memory_verification.py",
+        "engine/tests/uckp/test_alignment.py",
+        "engine/tests/unit/test_closure009_requirement_engine.py",
+        "engine/tests/unit/test_infinite_scope.py",
+        "engine/tests/unit/test_registry_coverage_matrix.py",
+        "engine/tests/unit/test_verification_impact.py",
+        "platform/tests/test_constitutional_authority_alignment.py",
+        "platform/tests/test_ledger_authority.py",
+        "platform/tests/test_mutation_classification.py",
+        "platform/tests/test_observation_universe.py",
+        "platform/tests/test_verification_purity.py"
       ]
     },
     {
@@ -1146,7 +1192,8 @@
         "engine/tests/uckp/test_state_evolution_intelligence_governance.py",
         "engine/tests/uckp/test_ucko_graph_registry.py",
         "engine/tests/uckp/test_universe_and_validation.py",
-        "engine/tests/uckp/test_validation_failure_paths.py"
+        "engine/tests/uckp/test_validation_failure_paths.py",
+        "engine/tests/unit/test_uaue_controller.py"
       ]
     },
     {
@@ -1183,11 +1230,17 @@
         "engine/tests/constitution/test_acceptance_and_evolution.py",
         "engine/tests/constitution/test_stages.py",
         "engine/tests/discovery/test_contracts.py",
+        "engine/tests/unit/test_closure009_requirement_engine.py",
         "engine/tests/unit/test_frozen_paths.py",
+        "engine/tests/unit/test_registry_coverage_matrix.py",
+        "engine/tests/unit/test_substrate_consumption.py",
         "platform/tests/test_control_plane_truth.py",
+        "platform/tests/test_lineage_projection_consistency.py",
         "platform/tests/test_measurement_cli.py",
+        "platform/tests/test_mutation_classification.py",
         "platform/tests/test_universal_ownership_convergence.py",
-        "platform/tests/test_validation_intelligence_analyzers.py"
+        "platform/tests/test_validation_intelligence_analyzers.py",
+        "platform/tests/test_verification_purity.py"
       ]
     },
     {
@@ -1221,7 +1274,18 @@
       "stage_name": "Update Universal Bookkeeping",
       "tests": [
         "engine/tests/constitution/test_acceptance_and_evolution.py",
-        "engine/tests/constitution/test_stages.py"
+        "engine/tests/constitution/test_stages.py",
+        "engine/tests/expansion/test_universal_memory_verification.py",
+        "engine/tests/uckp/test_alignment.py",
+        "engine/tests/unit/test_closure009_requirement_engine.py",
+        "engine/tests/unit/test_infinite_scope.py",
+        "engine/tests/unit/test_registry_coverage_matrix.py",
+        "engine/tests/unit/test_verification_impact.py",
+        "platform/tests/test_constitutional_authority_alignment.py",
+        "platform/tests/test_ledger_authority.py",
+        "platform/tests/test_mutation_classification.py",
+        "platform/tests/test_observation_universe.py",
+        "platform/tests/test_verification_purity.py"
       ]
     },
     {
@@ -1292,6 +1356,7 @@
         "engine/tests/constitution/test_acceptance_and_evolution.py",
         "engine/tests/constitution/test_stages.py",
         "engine/tests/unit/test_closure009_requirement_engine.py",
+        "platform/tests/test_universal_ownership_convergence.py",
         "platform/tests/test_universal_truth.py"
       ]
     },

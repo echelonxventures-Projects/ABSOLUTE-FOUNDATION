@@ -51,5 +51,5 @@
 | `OBS-CORPUS-CURRENCY` | `00-MASTER/UKAP-001/corpus_engine.py` | `determination` | `equals` | SATISFIED | `"CORPUS CURRENT"` |
 | `OBS-ASSIMILATION-DETERMINATION` | `00-MASTER/UAKOS-CLOSURE-008/assimilation_engine.py` | `determination` | `equals` | SATISFIED | `"REPOSITORY CONSTITUTIONALLY COMPLETE"` |
 | `OBS-ROADMAP-VERDICT` | `00-MASTER/UCOS-MXR-001/roadmap_engine.py` | `verdict` | `not_empty` | SATISFIED | `"CONDITIONAL GO"` |
-| `OBS-FIXED-POINT-DECLARATION-SEAL` | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | `declaration_seal_sha256` | `not_empty` | SATISFIED | `"d8e69c809dcf8d7130b612260bca3699e2147028e549e09657c7bb0e2294294e"` |
+| `OBS-FIXED-POINT-DECLARATION-SEAL` | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | `declaration_seal_sha256` | `not_empty` | SATISFIED | `"6c0c46f2503129510d323d944dfbc5415318baaeb6a6fa0d17db1900c132f89b"` |
 | `OBS-FIXED-POINT-FINDINGS` | `00-MASTER/UCOS-RFP-001/rfp_engine.py` | `findings` | `is_empty` | SATISFIED | `[]` |

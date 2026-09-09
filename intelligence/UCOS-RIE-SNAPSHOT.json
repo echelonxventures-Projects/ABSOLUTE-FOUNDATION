@@ -4,18 +4,12 @@
   "authority": "NONE (derived truth)",
   "capability_count": 148,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "7303421acd2ab880f0f5a3782c3687ff21ce5ece44701c9f68482774a2987364",
+  "content_hash": "7bb73ea782051b6380887d16215ddcc16c9be790b59883b243c07eb65efce96a",
   "dimension_index_reconciled_pct": 26.7,
   "drift": {
     "baseline": false,
     "certification_drift": [],
-    "dependency_drift": [
-      {
-        "from": 13801,
-        "metric": "corpus_edges",
-        "to": 13807
-      }
-    ],
+    "dependency_drift": [],
     "duplicate_findings": [
       {
         "assessment": "INTENTIONAL (layered engine/platform pair) — KEEP/COMPOSE",
@@ -243,13 +237,7 @@
         "name": "validation"
       }
     ],
-    "implementation_drift": [
-      {
-        "capability": "engine.coordinate_framework",
-        "change": "ADDED",
-        "status": "CERTIFIED"
-      }
-    ],
+    "implementation_drift": [],
     "stale_evidence": [
       {
         "as_of": "2026-07-15T08:05:00Z",

@@ -1,6 +1,6 @@
 # 10 — Manual Audit Register
 
-> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · closure baseline `05342cb` (branch `integration/recovery-001`) · corrected Authoritative-Origin model (Phase-001B) · AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · derived from provenance baseline `05342cb` by `cert_engine.py`.
+> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · closure baseline `8444c995` (branch `integration/recovery-001`) · corrected Authoritative-Origin model (Phase-001B) · AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · derived from provenance baseline `8444c995` by `cert_engine.py`.
 >
 > Worked, reproducible end-to-end traces per origin type: Knowledge Object → Authoritative Origin → Evidence → Repository Mapping → Validation → Certification (+ Document→…→Text if source-derived).
 >
@@ -11,17 +11,9 @@
 
 - **Authoritative origin** → 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md
 - **Origin evidence** → repository canonical home 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md (registered)
-- **Repository mapping** → 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md (121 files cite it)
+- **Repository mapping** → 02-MASTER/EC-3-AP-5-BAND-13-ADMISSION-DETERMINATION.md (129 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=True · provenance certification=PASS
-
-#### ARCH-EVENT-001 · family ARCH · origin **IMPORTED_REFERENCE** · confidence MEDIUM
-
-- **Authoritative origin** → 04-REFERENCE/02-REFERENCE-ASSIMILATION-MATRIX.md
-- **Origin evidence** → imported reference home 04-REFERENCE/02-REFERENCE-ASSIMILATION-MATRIX.md
-- **Repository mapping** → 04-REFERENCE/02-REFERENCE-ASSIMILATION-MATRIX.md (34 files cite it)
-- **Validation** → specification=True, implementation=False
-- **Certification** → certified=False · provenance certification=PASS
 
 #### DATA-001 · family DATA · origin **REFERENCE_ARCHITECTURE** · confidence MEDIUM
 
@@ -30,7 +22,7 @@
   - Document → `04-REFERENCE/ARCHITECTURAL-SOURCES/UCOS Ω∞ MASTER END-TO-END PROGRAM.docx`
   - Page → 4 · Section → PHASE-004 / DATA FOUNDATION · Paragraph → 115
   - Original text → "DATA-001 Constitution"
-- **Repository mapping** → 10-DATA/DATA-001-UNIVERSAL-DATA-CONSTITUTION.md (256 files cite it)
+- **Repository mapping** → 10-DATA/DATA-001-UNIVERSAL-DATA-CONSTITUTION.md (338 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=True · provenance certification=PASS
 
@@ -38,7 +30,7 @@
 
 - **Authoritative origin** → 02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md
 - **Origin evidence** → governance determination (GOV) at 02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md
-- **Repository mapping** → 02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md (359 files cite it)
+- **Repository mapping** → 02-MASTER/EC-3-AP-3-BAND-11-ADMISSION-DETERMINATION.md (381 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=True · provenance certification=PASS
 
@@ -46,7 +38,18 @@
 
 - **Authoritative origin** → 00-MASTER/UCOS-MXR-001/roadmap.json
 - **Origin evidence** → master evolution path proposal (MEP) at 00-MASTER/UCOS-MXR-001/roadmap.json
-- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (29 files cite it)
+- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (35 files cite it)
+- **Validation** → specification=True, implementation=False
+- **Certification** → certified=False · provenance certification=PASS
+
+#### Phase-000 · family PHASE · origin **IMPORTED_REFERENCE** · confidence MEDIUM
+
+- **Authoritative origin** → 04-REFERENCE/UCOS Ω - references.docx
+- **Origin evidence** → imported reference page 1, paragraph 4
+  - Document → `04-REFERENCE/UCOS Ω - references.docx`
+  - Page → 1 · Section → (preamble/unsectioned) · Paragraph → 4
+  - Original text → "<w:tab w:val="right" w:pos="360"/><w:tab w:val="left" w:pos="520"/></w:tabs><w:autoSpaceDE w:val="0"/><w:autoSpaceDN w:val="0"/><w:adjustRightInd w:va"
+- **Repository mapping** → 02-MASTER/UCOS-Ω∞-CONSTITUTIONAL-DECISION-REGISTER.md (48 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -57,7 +60,7 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2043 · Section → PHASE-002 COMPLETE / UCOS-COMP-000001 · Paragraph → 76904
   - Original text → "UCOS-COMP-000001"
-- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (109 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (130 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -65,7 +68,7 @@
 
 - **Authoritative origin** → 00-MASTER/UCOS-MXR-001/roadmap.json
 - **Origin evidence** → ratified determination / decision authority (UCOS-RAT) at 00-MASTER/UCOS-MXR-001/roadmap.json
-- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (30 files cite it)
+- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (34 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -76,7 +79,7 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2043 · Section → PHASE-002 COMPLETE / UCOS-COMP-000001 · Paragraph → 76904
   - Original text → "UCOS-COMP-000001"
-- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (109 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMP-000001-CONSTITUTIONAL-COMPLETENESS-ENGINE-CONSTITUTION.md (130 files cite it)
 - **Validation** → specification=True, implementation=True
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -87,7 +90,7 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2057 · Section → Stage 9 / 17. DOCUMENT STATUS / UCOS-COMP-001000 · Paragraph → 77638
   - Original text → "UCOS-COMP-001000"
-- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (35 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (44 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
@@ -98,28 +101,28 @@
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
   - Page → 2063 · Section → Stage 9 / 5. ONTOLOGY GRAMMAR / UCOS-COMP-001001 · Paragraph → 77873
   - Original text → "UCOS-COMP-001001"
-- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (10 files cite it)
+- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (40 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
-#### UCOS-COMP-001010 · family UCOS-COMP · origin **SOURCE_DOCUMENT** · confidence HIGH
+#### UCOS-COMP-001002 · family UCOS-COMP · origin **SOURCE_DOCUMENT** · confidence HIGH
 
 - **Authoritative origin** → 00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx
-- **Origin evidence** → page 2068, section 'Stage 9 / 14. ONTOLOGY RUNTIME GENERATOR / UCOS-COMP-001010', paragraph 78213, original text present
+- **Origin evidence** → page 2064, section 'Stage 9 / 6. ONTOLOGY LEXER / UCOS-COMP-001002', paragraph 77924, original text present
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
-  - Page → 2068 · Section → Stage 9 / 14. ONTOLOGY RUNTIME GENERATOR / UCOS-COMP-001010 · Paragraph → 78213
-  - Original text → "UCOS-COMP-001010"
-- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (30 files cite it)
+  - Page → 2064 · Section → Stage 9 / 6. ONTOLOGY LEXER / UCOS-COMP-001002 · Paragraph → 77924
+  - Original text → "UCOS-COMP-001002"
+- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (25 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS
 
-#### UCOS-COMP-009009 · family UCOS-COMP · origin **SOURCE_DOCUMENT** · confidence HIGH
+#### UCOS-COMP-001003 · family UCOS-COMP · origin **SOURCE_DOCUMENT** · confidence HIGH
 
 - **Authoritative origin** → 00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx
-- **Origin evidence** → page 2211, section 'Stage 9 / 13. UNIVERSAL DEPLOYMENT ENGINE / UCOS-COMP-009009', paragraph 84092, original text present
+- **Origin evidence** → page 2065, section 'Stage 9 / 7. ONTOLOGY PARSER / UCOS-COMP-001003', paragraph 77963, original text present
   - Document → `00-SOURCE/PHASES/UCOS Ω∞ - Universal Civilization Operating System_Part-001(Phase-000-019).docx`
-  - Page → 2211 · Section → Stage 9 / 13. UNIVERSAL DEPLOYMENT ENGINE / UCOS-COMP-009009 · Paragraph → 84092
-  - Original text → "UCOS-COMP-009009"
-- **Repository mapping** → 00-MASTER/UCOS-MXR-001/roadmap.json (8 files cite it)
+  - Page → 2065 · Section → Stage 9 / 7. ONTOLOGY PARSER / UCOS-COMP-001003 · Paragraph → 77963
+  - Original text → "UCOS-COMP-001003"
+- **Repository mapping** → 02-MASTER/UCOS-COMPILER-COMPONENT-REGISTER.md (25 files cite it)
 - **Validation** → specification=True, implementation=False
 - **Certification** → certified=False · provenance certification=PASS

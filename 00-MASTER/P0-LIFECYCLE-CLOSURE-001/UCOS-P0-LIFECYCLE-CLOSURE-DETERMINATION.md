@@ -6,8 +6,8 @@
 | AUTHORITY | **NONE — DERIVED TRUTH. This determination legislates nothing, registers nothing and certifies nothing. Every verdict below is the output of an executed probe.** |
 | LIFECYCLE AUTHORITY | `UCL-000001` (45 stages) |
 | ENGINE | `00-MASTER/P0-LIFECYCLE-CLOSURE-001/lifecycle_closure_engine.py` |
-| DETERMINATION | **CLOSED** |
-| CLOSURE CLAIMS PROVEN | 12 / 12 |
+| DETERMINATION | **NOT CLOSED** |
+| CLOSURE CLAIMS PROVEN | 2 / 12 |
 | REPOSITORY ANCHOR | the containing commit — owned by version control |
 
 > Declarations were treated as claims to be tested. A stage is IMPLEMENTED only where five executed probes agree; the manifest is never accepted as evidence for itself.
@@ -17,32 +17,32 @@
 | Measure | Value |
 |---|---|
 | Lifecycle stages | 45 |
-| IMPLEMENTED | **45** |
-| PARTIALLY_IMPLEMENTED | 0 |
+| IMPLEMENTED | **0** |
+| PARTIALLY_IMPLEMENTED | 45 |
 | DECLARED_ONLY | 0 |
 | MISSING | 0 |
 | Stages with an executable engine | 45 |
 | Stages whose evidence is a document only | 0 |
 | Fully traceable stages | 45 |
 | Replay status (10 rounds) | REPLAYABLE |
-| Autonomous capabilities | 8 / 8 |
+| Autonomous capabilities | 0 / 8 |
 
 ## Phase 10 — closure claims
 
 | Claim | Verdict | Deciding measurement |
 |---|---|---|
-| 100% Constitutional Correctness | PROVEN | 45/45 stages realized; 45 ownership ambiguities |
+| 100% Constitutional Correctness | **NOT_PROVEN** | 0/45 stages realized; 45 ownership ambiguities |
 | 100% Architectural Correctness | PROVEN | acyclic=True, cycles=0, skipped_prerequisites=0 |
-| 100% Implementation Correctness | PROVEN | 0 DECLARED_ONLY, 0 PARTIALLY_IMPLEMENTED, 0 MISSING |
-| 100% Determinism | PROVEN | 0 unstable dimensions over 10 rounds; realization 45/45 |
-| 100% Replayability | PROVEN | replay=REPLAYABLE over the discharged subset only (45/45 stages realized) |
+| 100% Implementation Correctness | **NOT_PROVEN** | 0 DECLARED_ONLY, 45 PARTIALLY_IMPLEMENTED, 0 MISSING |
+| 100% Determinism | **NOT_PROVEN** | 0 unstable dimensions over 10 rounds; realization 0/45 |
+| 100% Replayability | **NOT_PROVEN** | replay=REPLAYABLE over the discharged subset only (0/45 stages realized) |
 | 100% Traceability | PROVEN | 45/45 stages trace end to end |
-| 100% Governability | PROVEN | governance declared for 100.0% of stages; 45/45 realized |
-| 100% Evolvability | PROVEN | 8/8 capabilities AUTONOMOUS, 0 NONE |
-| 100% Observability | PROVEN | 0 stages emit no executable observation |
-| 100% Recoverability | PROVEN | recovery requires every stage to be reproducible from evidence; 45/45 are |
-| 100% Reproducibility | PROVEN | 0 drift dimensions; coverage_measured=True |
-| 100% Capability Coverage | PROVEN | lifecycle 100.0%, capability 100.0% |
+| 100% Governability | **NOT_PROVEN** | governance declared for 100.0% of stages; 0/45 realized |
+| 100% Evolvability | **NOT_PROVEN** | 0/8 capabilities AUTONOMOUS, 0 NONE |
+| 100% Observability | **NOT_PROVEN** | 0 stages emit no executable observation |
+| 100% Recoverability | **NOT_PROVEN** | recovery requires every stage to be reproducible from evidence; 0/45 are |
+| 100% Reproducibility | **NOT_PROVEN** | 0 drift dimensions; coverage_measured=False |
+| 100% Capability Coverage | **NOT_PROVEN** | lifecycle 0.0%, capability 0.0% |
 
 ## Phase-by-phase measurement
 
@@ -61,7 +61,7 @@
 | `executable_engine` | 0 |
 | `executably_discharged` | 0 |
 | `ownership_resolves` | 0 |
-| `test_coverage` | 0 |
+| `test_coverage` | 45 |
 
 ### Phase 4 — execution graph
 - 45 nodes, 44 edges, cycles 0, skipped prerequisites 0.
@@ -74,22 +74,22 @@
 ### Phase 6 — autonomous evolution
 | Capability | Level | Basis |
 |---|---|---|
-| Observe | **AUTONOMOUS** | executably discharged, deterministic and tested |
-| Learn | **AUTONOMOUS** | executably discharged, deterministic and tested |
-| Reason | **AUTONOMOUS** | executably discharged, deterministic and tested |
-| Reflect | **AUTONOMOUS** | executably discharged, deterministic and tested |
-| Challenge | **AUTONOMOUS** | executably discharged, deterministic and tested |
-| Correct | **AUTONOMOUS** | executably discharged, deterministic and tested |
-| Improve | **AUTONOMOUS** | executably discharged, deterministic and tested |
-| Elevate | **AUTONOMOUS** | executably discharged, deterministic and tested |
+| Observe | **ASSISTED** | an executable provider discharges it; realization is incomplete |
+| Learn | **ASSISTED** | an executable provider discharges it; realization is incomplete |
+| Reason | **ASSISTED** | an executable provider discharges it; realization is incomplete |
+| Reflect | **ASSISTED** | an executable provider discharges it; realization is incomplete |
+| Challenge | **ASSISTED** | an executable provider discharges it; realization is incomplete |
+| Correct | **ASSISTED** | an executable provider discharges it; realization is incomplete |
+| Improve | **ASSISTED** | an executable provider discharges it; realization is incomplete |
+| Elevate | **ASSISTED** | an executable provider discharges it; realization is incomplete |
 
 ### Phase 7 — knowledge elevation
 | Closure | Closed | Blocking stages |
 |---|---|---|
-| `knowledge_closure` | YES | — |
-| `capability_closure` | YES | — |
-| `evolution_closure` | YES | — |
-| `learning_closure` | YES | — |
+| `knowledge_closure` | **NO** | Extract Engineering Knowledge, Register Engineering Knowledge |
+| `capability_closure` | **NO** | Increase Constitutional Capability, Increase Engineering Capability |
+| `evolution_closure` | **NO** | Begin Next Elevated Engineering Cycle, Elevate, Update Repository Truth |
+| `learning_closure` | **NO** | Improve, Learn, Reason, Reflect |
 
 ### Phase 8 — traceability
 | Link | Stages broken |
@@ -108,27 +108,28 @@
 ### Phase 9 — coverage
 | Dimension | Value |
 |---|---|
-| `branch_count` | 17842 |
-| `branch_coverage_percent` | 38.93 |
-| `branches_covered` | 6945 |
-| `capability_coverage_percent` | 100.0 |
-| `coverage_measured` | True |
-| `evolution_coverage_percent` | 100.0 |
+| `branch_count` | 0 |
+| `branch_coverage_percent` | 0.0 |
+| `branches_covered` | 0 |
+| `capability_coverage_percent` | 0.0 |
+| `coverage_measured` | False |
+| `evolution_coverage_percent` | 0.0 |
 | `governance_coverage_percent` | 100.0 |
-| `knowledge_coverage_percent` | 100.0 |
-| `lifecycle_coverage_percent` | 100.0 |
+| `knowledge_coverage_percent` | 0.0 |
+| `lifecycle_coverage_percent` | 0.0 |
 | `path_coverage_percent` | None |
-| `statement_coverage_percent` | 40.94 |
-| `statements` | 78114 |
-| `statements_covered` | 32341 |
+| `statement_coverage_percent` | 0.0 |
+| `statements` | 0 |
+| `statements_covered` | 0 |
 | `test_referenced_stages` | 45 |
-| `test_suite_passed` | True |
+| `test_suite_passed` | None |
 | `traceability_coverage_percent` | 100.0 |
 
 > Path coverage: not measured: no path-coverage instrument exists in this repository, so the value is withheld rather than approximated by branch coverage
 
 | Uncovered point | Count |
 |---|---|
+| Missing Test | 45 |
 
 ## Gaps, explicitly
 
@@ -136,8 +137,53 @@ Every stage that is not IMPLEMENTED, with the probes that failed:
 
 | Stage | Name | Realization | Failed probes |
 |---|---|---|---|
+| `UCL-S-0010` | Receive Goal | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0020` | Understand | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0030` | Context Assimilation | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0040` | Repository Truth Discovery | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0050` | Knowledge Discovery | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0060` | Canonical Owner Discovery | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0070` | Capability Discovery | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0080` | Dependency Discovery | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0090` | Constraint Discovery | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0100` | Gap Discovery | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0110` | Reuse Before Create | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0120` | Observe | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0130` | Perceive | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0140` | Measure | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0150` | Evidence | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0160` | Validate | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0170` | Verify | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0180` | Learn | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0190` | Reason | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0200` | Reflect | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0210` | Challenge | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0220` | Correct | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0230` | Improve | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0240` | Architect | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0250` | Engineer | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0260` | Test | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0270` | Govern | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0280` | Certify | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0290` | Integrate | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0300` | Register | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0310` | Assign Universal Constitutional Identifier | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0320` | Update Universal Constitutional Identifier Dictionary | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0330` | Update Universal Registry | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0340` | Update Universal Bookkeeping | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0350` | Update Universal Lineage | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0360` | Update Repository Truth | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0370` | Replay | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0380` | Deterministic Fixed Point | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0390` | Extract Engineering Knowledge | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0400` | Register Engineering Knowledge | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0410` | Elevate | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0420` | Increase Constitutional Capability | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0430` | Increase Engineering Capability | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0440` | Increase Autonomous Engineering Capability | PARTIALLY_IMPLEMENTED | test_coverage |
+| `UCL-S-0450` | Begin Next Elevated Engineering Cycle | PARTIALLY_IMPLEMENTED | test_coverage |
 
 ## Success condition
 
-**MET.** The directive requires every stage to be canonically owned, executably realized, governed, tested, traceable, replayable, deterministic and evolution-capable, with every gap explicitly identified. The gap table above is complete and machine-generated; the realization requirement is 45/45.
+**NOT MET.** The directive requires every stage to be canonically owned, executably realized, governed, tested, traceable, replayable, deterministic and evolution-capable, with every gap explicitly identified. The gap table above is complete and machine-generated; the realization requirement is 0/45.
 

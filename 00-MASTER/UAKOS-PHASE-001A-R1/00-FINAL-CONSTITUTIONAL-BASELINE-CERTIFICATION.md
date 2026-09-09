@@ -1,6 +1,6 @@
 # 00 — FINAL CONSTITUTIONAL BASELINE CERTIFICATION
 
-> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · closure baseline `05342cb` (branch `integration/recovery-001`) · corrected Authoritative-Origin model (Phase-001B) · AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · derived from provenance baseline `05342cb` by `cert_engine.py`.
+> PROGRAM **UAKOS PHASE-001A-R1** — Constitutional Baseline Re-Certification · closure baseline `8444c995` (branch `integration/recovery-001`) · corrected Authoritative-Origin model (Phase-001B) · AUTHORITY = **NONE (DERIVED / CERTIFIED TRUTH)** · **READ-ONLY** · derived from provenance baseline `8444c995` by `cert_engine.py`.
 >
 > The single-page determination of the Constitutional Knowledge Baseline under the corrected Authoritative-Origin model.
 >
@@ -10,14 +10,14 @@
 
 | Dimension | Value |
 |---|---|
-| Knowledge objects | 447 |
-| Source-derived | 88 |
-| Repository-derived | 359 |
-| — SOURCE_DOCUMENT | 27 |
+| Knowledge objects | 549 |
+| Source-derived | 176 |
+| Repository-derived | 373 |
+| — SOURCE_DOCUMENT | 116 |
 | — REFERENCE_ARCHITECTURE | 57 |
-| — IMPORTED_REFERENCE | 4 |
+| — IMPORTED_REFERENCE | 3 |
 | — HISTORICAL_DISCUSSION | 0 |
-| — REPOSITORY_CANONICAL_HOME | 326 |
+| — REPOSITORY_CANONICAL_HOME | 340 |
 | — GOVERNANCE_DETERMINATION | 15 |
 | — RATIFIED_DETERMINATION | 6 |
 | — CONSTITUTIONAL_EVOLUTION_PROPOSAL | 12 |
@@ -32,7 +32,7 @@
 | Machine Verification | PASS |
 | Knowledge Loss | 0 |
 | Origin Integrity | 100.0% |
-| Certification seal (sha256) | `6561a96a959d9deebf1a732d37116afa7cd2c771d8330e488170dfb33cb29338` |
+| Certification seal (sha256) | `57a948f2791d0d4bb9a36a4c8725fb2df5586195c3c3ad965335fa98d8bdf6cd` |
 
 ## Success criteria
 
