@@ -117,3 +117,41 @@ def test_health_report_create_direct():
     assert report.status is HealthStatus.UNHEALTHY
     # results sorted by name
     assert [r.name for r in report.results] == ["a", "b"]
+
+
+def test_a_result_that_is_not_a_health_status_is_refused():
+    """A STATUS IS AN ENUM MEMBER, NEVER THE STRING THAT SPELLS ONE.
+
+    Every caller supplies real ``HealthStatus`` members, so the guard had no case — and it is
+    what stands between the report and a status the aggregation cannot compare. ``"healthy"``
+    is not ``HealthStatus.HEALTHY``: the report's overall verdict is derived by comparing
+    members, so a raw string would be neither healthy nor unhealthy and the endpoint would
+    publish a status nothing in the system can act on.
+    """
+    registry = HealthRegistry()
+    registry.register(HealthCheck("test.check", description="a check"))
+
+    assert registry.report({"test.check": HealthStatus.HEALTHY}).healthy is True
+
+    with pytest.raises(HealthError, match="must be a HealthStatus"):
+        registry.report({"test.check": "healthy"})  # type: ignore[dict-item]
+
+
+def test_the_registry_serialises_the_checks_it_holds():
+    """THE REGISTRATION IS EVIDENCE AND HAD NO READER.
+
+    ``endpoint`` publishes the RESULTS; this publishes what is registered to be checked at
+    all — the names, their descriptions and which of them are critical. Without it an
+    evidence bundle records health verdicts with no record of what was in scope to be
+    verdicted, so a check that was silently never registered is indistinguishable from one
+    that passed.
+    """
+    registry = HealthRegistry()
+    registry.register(HealthCheck("test.critical", description="must hold", critical=True))
+    registry.register(HealthCheck("test.advisory", description="informational", critical=False))
+
+    rendered = registry.to_dict()
+
+    assert rendered["check_count"] == 2
+    assert [c["name"] for c in rendered["checks"]] == ["test.advisory", "test.critical"]
+    assert [c["critical"] for c in rendered["checks"]] == [False, True]

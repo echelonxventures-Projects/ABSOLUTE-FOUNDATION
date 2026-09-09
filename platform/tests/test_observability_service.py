@@ -25,6 +25,16 @@ from platform.observability.service import (
 
 import pytest
 
+#: The class each composed component must be an instance of, as the refusal names it.
+_COMPONENT_NAMES = {
+    "metrics": "MetricRegistry",
+    "logs": "LogBuffer",
+    "traces": "TraceRecorder",
+    "health": "HealthRegistry",
+    "alerts": "AlertEngine",
+    "audit": "AuditTrail",
+}
+
 
 def test_telemetry_covers_100_percent_of_governed_actions():
     bus = EventBus()
@@ -143,3 +153,79 @@ def test_ec1_integrity_preserved_metric_mirror_is_additive():
     reg.counter("platform.governed_actions", 1.0, event_type="t")
     assert "counters" in telemetry.metrics_snapshot()
     telemetry.reset_metrics()
+
+
+def test_every_component_the_service_composes_is_type_checked_by_name():
+    """SIX COMPONENTS, SIX REFUSALS, AND ONE TEST THAT ONLY EVER REACHED THE FIRST.
+
+    The existing case passes ``metrics="nope"`` with everything else ``None``, so the very
+    first check refuses and the other five are never evaluated. Each names its own component,
+    which is the whole point of checking them separately: a service composed with a mis-wired
+    trace recorder must say so, rather than failing later inside a method whose stack trace
+    points at telemetry that was assembled correctly.
+    """
+    sound = build_observability_service()
+    parts = {
+        "metrics": sound.metrics,
+        "logs": sound.logs,
+        "traces": sound.traces,
+        "health": sound.health,
+        "alerts": sound.alerts,
+        "audit": sound.audit,
+    }
+
+    for name in parts:
+        with pytest.raises(ObservabilityServiceError, match=f"valid {_COMPONENT_NAMES[name]}"):
+            ObservabilityService(**{**parts, name: "not-a-component"})  # type: ignore[arg-type]
+
+    with pytest.raises(ObservabilityServiceError, match="events must be an EventBus"):
+        ObservabilityService(**parts, events="not-a-bus")  # type: ignore[arg-type]
+
+
+def test_a_bound_service_that_has_seen_nothing_is_vacuously_complete():
+    """ZERO OF ZERO GOVERNED ACTIONS IS COMPLETE COVERAGE, NOT NO COVERAGE.
+
+    Every coverage test publishes events first, so the empty case had never been evaluated —
+    and it is the state every service is in at the moment it binds. Dividing by zero would
+    raise; reporting ``0.0`` would say telemetry MISSED every governed action when there were
+    none, and a bootstrap gate reading that fraction would refuse a platform that has simply
+    not done anything yet. ``0.0`` is reserved for the genuinely different fact that the
+    service is not bound at all.
+    """
+    bus = EventBus()
+    service = build_observability_service(events=bus)
+
+    assert service.governed_action_count == 0
+    assert service.observed_fraction() == 1.0
+
+    bus.publish("generation.requested", source="platform.api", subject="req-1")
+    assert service.observed_fraction() == 1.0
+
+
+def test_the_service_renders_every_subsystem_it_composes():
+    """THE ONE RENDER THAT CARRIES ALL SIX SUBSYSTEMS, and nothing called it.
+
+    ``evidence()`` fingerprints them; this is the readable projection an operator or an
+    evidence bundle stores beside those fingerprints. A fingerprint with no document behind
+    it pins bytes nobody can read, so the two are only useful together — and the render
+    carries the governed-action count and the evidence block itself, so the document and its
+    seal travel as one.
+    """
+    bus = EventBus()
+    service = build_observability_service(events=bus)
+    bus.publish("generation.requested", source="platform.api", subject="req-1")
+
+    rendered = service.to_dict()
+
+    assert set(rendered) >= {
+        "metrics",
+        "logs",
+        "traces",
+        "health",
+        "alerts",
+        "audit",
+        "governed_action_count",
+        "evidence",
+    }
+    assert rendered["governed_action_count"] == 1
+    assert rendered["evidence"] == service.evidence().to_dict()

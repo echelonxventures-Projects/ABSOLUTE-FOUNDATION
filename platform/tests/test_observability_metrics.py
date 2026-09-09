@@ -91,3 +91,58 @@ def test_mirror_to_ec1_is_reused_additively():
     snap = telemetry.metrics_snapshot()
     assert any("mirrored" == name for name in snap["counters"])
     telemetry.reset_metrics()
+
+
+def test_a_sample_refuses_a_kind_that_is_not_a_metric_kind():
+    """A KIND IS AN ENUM MEMBER, NEVER THE STRING THAT SPELLS ONE.
+
+    Every registry path passes a real ``MetricKind``, so the guard on the sample constructor
+    had no case — and it is the one place a sample built by hand or rehydrated from a
+    document arrives. A raw string would enter the content-addressed ``sample_id`` and
+    compare unequal to the same sample built through the registry, so two records of the same
+    measurement would carry two identities.
+    """
+    good = MetricSample.create("test.metric", MetricKind.COUNTER, 1.0)
+    assert good.kind is MetricKind.COUNTER
+
+    with pytest.raises(MetricError, match="must be a MetricKind"):
+        MetricSample.create("test.metric", "counter", 1.0)  # type: ignore[arg-type]
+
+
+def test_a_series_may_not_change_kind_under_the_same_name_and_labels():
+    """ONE NAME AND ONE LABEL SET IS ONE SERIES, AND ITS KIND IS PART OF WHAT IT IS.
+
+    The gauge refusal was tested; the counter's and the histogram's were not, so two of the
+    three ways to collide had never been shown to refuse. Allowing the change would silently
+    reinterpret every value already recorded: a counter's monotonic total read as a gauge's
+    last value, or a histogram's samples discarded because the new kind has none.
+    """
+    registry = MetricRegistry()
+    registry.gauge("test.conflict", 5.0)
+
+    with pytest.raises(MetricError, match="metric kind conflict"):
+        registry.counter("test.conflict")
+    with pytest.raises(MetricError, match="metric kind conflict"):
+        registry.histogram("test.conflict", 1.0)
+
+    # the original series is untouched by either refusal
+    assert registry.value_of("test.conflict") == 5.0
+
+
+def test_the_registry_counts_its_series_and_every_observation_in_them():
+    """TWO DIFFERENT COUNTS, AND THE NON-HISTOGRAM ARM OF THE SECOND HAD NEVER RUN.
+
+    ``len`` is how many series exist; ``total_count`` is how many observations they hold. A
+    histogram holds one observation per sample and every other kind holds exactly one however
+    many times it was written — which is why the two numbers differ, and why counting a
+    counter as its VALUE rather than as one observation would make a counter incremented a
+    thousand times look like a thousand measurements.
+    """
+    registry = MetricRegistry()
+    registry.counter("test.count.counter", 7.0)
+    registry.gauge("test.count.gauge", 3.0)
+    registry.histogram("test.count.hist", 1.0)
+    registry.histogram("test.count.hist", 2.0)
+
+    assert len(registry) == 3
+    assert registry.total_count() == 4

@@ -91,3 +91,22 @@ def test_engine_fingerprint_and_alert_content_address():
     assert a1.alert_id == a2.alert_id
     assert engine.to_dict()["fired_count"] == 1
     assert isinstance(engine.fingerprint(), str)
+
+
+def test_the_engine_reports_which_rules_it_holds_and_how_many():
+    """A RULE SET NOBODY CAN INSPECT IS A RULE SET NOBODY CAN AUDIT.
+
+    Every test here evaluates rules and reads the alerts they produced, so the two readers
+    that answer "is this rule registered" and "how many are" had no caller — and those are
+    what a bootstrap checks before registering, and what evidence records as the alerting
+    surface that was actually in force when a verdict was taken.
+    """
+    engine = AlertEngine()
+    assert len(engine) == 0
+    assert "test.rule" not in engine
+
+    engine.register(AlertRule("test.rule", lambda o: o.get("v", 0) > 1, Severity.WARNING))
+
+    assert "test.rule" in engine
+    assert "test.absent" not in engine
+    assert len(engine) == 1

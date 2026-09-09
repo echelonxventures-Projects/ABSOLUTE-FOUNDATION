@@ -75,3 +75,31 @@ def test_verify_detects_tampering():
     tampered = AuditEvent.create("MUTATED", "u", "s", 0, GENESIS_HASH)
     trail._events[0] = tampered  # noqa: SLF001 — deliberate tamper to prove detection
     assert trail.verify() is False
+
+
+def test_a_trail_whose_recorded_ordinal_or_content_was_altered_does_not_verify():
+    """THE CHAIN HAS THREE INVARIANTS AND ONLY THE LINK HAD BEEN FALSIFIED.
+
+    A broken ``prev_hash`` was tested; the other two were not. An event's SEQUENCE is its
+    position, so an event whose ordinal disagrees with where it sits is a record that has
+    been reordered or removed — the hash links can still check out while the trail no longer
+    says what happened in what order. And an event whose stored hash no longer recomputes
+    over its own content is one whose content was edited in place, which is the append-only
+    guarantee itself. Verification must fail closed on each, or "the chain is intact" would
+    only ever mean "the links agree with each other".
+    """
+    trail = AuditTrail()
+    trail.record("generation.requested", actor="platform.api", subject="req-1")
+    trail.record("generation.completed", actor="platform.api", subject="req-1")
+    assert trail.verify() is True
+
+    reordered = AuditTrail()
+    reordered.record("generation.requested", actor="platform.api", subject="req-1")
+    original = reordered.events[0]
+    object.__setattr__(original, "sequence", 7)
+    assert reordered.verify() is False
+
+    edited = AuditTrail()
+    edited.record("generation.requested", actor="platform.api", subject="req-1")
+    object.__setattr__(edited.events[0], "subject", "req-tampered")
+    assert edited.verify() is False

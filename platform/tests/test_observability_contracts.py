@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from platform.foundation.contracts import Contract
+from platform.foundation.errors import PlatformContractError
 from platform.observability.contracts import (
     OBSERVABILITY_CONTRACT_VERSION,
     OBSERVABILITY_CONTRACTS,
@@ -63,3 +64,27 @@ def test_health_status_worst_is_fail_closed():
 def test_health_status_worst_rejects_non_status():
     with pytest.raises(ObservabilityContractError):
         HealthStatus.worst(["healthy"])
+
+
+def test_a_platform_contract_fault_is_reported_in_the_observability_taxonomy(monkeypatch):
+    """ONE CALLER, ONE ERROR FAMILY — which is what the normalisation is for.
+
+    The wrapper validates the name itself and supplies the version from a module constant,
+    so today nothing it passes to the platform builder can be refused and the translation arm
+    is unreachable through any caller. It is the boundary that keeps a change in the platform
+    contract layer — a stricter name rule, a version format that stops parsing — from
+    surfacing to observability callers as a foreign exception class, and it carries the name
+    so the refusal still says which contract failed.
+    """
+    assert observability_contract("test.contract").name == "test.contract"
+
+    def _refuse(_name: str, _version: str, _description: str = "") -> Contract:
+        raise PlatformContractError("the platform layer refuses this one")
+
+    monkeypatch.setattr("platform.observability.contracts.platform_contract", _refuse)
+
+    with pytest.raises(ObservabilityContractError) as raised:
+        observability_contract("test.contract")
+
+    assert "refuses this one" in str(raised.value)
+    assert raised.value.context["name"] == "test.contract"
