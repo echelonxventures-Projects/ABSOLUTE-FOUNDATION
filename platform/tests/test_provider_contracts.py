@@ -27,6 +27,7 @@ from platform.universal_provider.contracts import (
     ProviderResource,
     ProviderResponse,
     ProviderState,
+    _freeze_mapping,
     canonical_json,
     content_hash,
     provider_operations,
@@ -330,3 +331,75 @@ def test_capabilities_fixture_declares_every_substrate_operation() -> None:
         ProviderOperation.FETCH,
         ProviderOperation.VERIFY,
     }
+
+
+# --------------------------------------------------------------------------- #
+# The contract refusals a well-formed declaration never reaches
+# --------------------------------------------------------------------------- #
+
+
+def test_an_absent_mapping_field_is_an_empty_mapping_and_not_a_refusal() -> None:
+    """OPTIONAL MEANS ABSENT, and absent means empty.
+
+    Every mapping field on a contract is optional, so ``None`` has to mean "nothing was
+    declared" rather than "this is malformed". Refusing it would make every optional field
+    mandatory; coercing something that is not a mapping would silently accept a declaration
+    nobody could read back.
+    """
+
+    assert _freeze_mapping(None, field_name="metadata") == {}
+    assert _freeze_mapping({"a": 1}, field_name="metadata") == {"a": 1}
+
+    with pytest.raises(ProviderContractError, match="must be a mapping") as excinfo:
+        _freeze_mapping(["a", 1], field_name="metadata")
+    assert excinfo.value.detail["field"] == "metadata"
+
+
+def test_an_identity_authority_that_is_not_a_string_is_refused() -> None:
+    """The authority is the answer to "who says this provider is what it claims", and it is
+    carried into every certificate and every ledger entry. A non-string would be rendered by
+    whatever formatted it, so the same authority could appear two different ways in two
+    artifacts that are meant to be comparable."""
+    with pytest.raises(ProviderContractError, match="authority must be a string"):
+        ProviderIdentity(
+            provider_id="fixture.memo",
+            kind="memo",
+            version="1.0.0",
+            name="Memo",
+            authority=object(),  # type: ignore[arg-type]
+        )
+
+
+def test_a_capability_or_dependency_payload_of_the_wrong_shape_is_refused() -> None:
+    """The ``from_dict`` boundary is where a JSON catalogue becomes a contract, and a payload
+    that is not a mapping cannot be one. Every field read would return the default, and the
+    result would be a capability declaring nothing rather than a refusal to build one."""
+    with pytest.raises(ProviderContractError, match="capability payload must be a mapping"):
+        ProviderCapability.from_dict(["memo.notes"])  # type: ignore[arg-type]
+
+    with pytest.raises(ProviderContractError, match="optionality must be a boolean"):
+        ProviderDependency(
+            provider_id="fixture.other",
+            min_version="1.0.0",
+            optional="yes",  # type: ignore[arg-type]
+        )
+
+
+def test_a_descriptor_reads_its_identity_from_a_nested_block_or_from_the_payload_itself() -> None:
+    """TWO CATALOGUE SHAPES, ONE DESCRIPTOR.
+
+    A descriptor may carry its identity under an ``identity`` key or state the identity
+    fields at the top level, and both are real forms a JSON catalogue takes. Supporting only
+    the flat one would make a nested catalogue read as a descriptor with no identity at all,
+    which then fails a later check naming the missing provider id rather than the shape.
+    """
+    nested = memo_descriptor().to_dict()
+    assert isinstance(nested.get("identity"), dict)
+    from_nested = ProviderDescriptor.from_dict(nested)
+
+    flat = {**nested.pop("identity"), **nested}
+    flat.pop("identity", None)
+    from_flat = ProviderDescriptor.from_dict(flat)
+
+    assert from_nested.qualified_id == from_flat.qualified_id
+    assert from_nested.content_hash() == from_flat.content_hash()

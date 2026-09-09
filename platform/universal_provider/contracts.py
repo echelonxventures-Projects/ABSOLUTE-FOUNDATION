@@ -724,27 +724,27 @@ class Provider(Protocol):
     here; they never bind to a provider.
     """
 
-    def describe(self) -> ProviderDescriptor:
+    def describe(self) -> ProviderDescriptor:  # pragma: no cover - protocol
         """Return this provider's own content-addressed declaration."""
         ...
 
-    def capabilities(self) -> Sequence[ProviderCapability]:
+    def capabilities(self) -> Sequence[ProviderCapability]:  # pragma: no cover - protocol
         """Return the declared capability set (the provider's authority surface)."""
         ...
 
-    def health(self) -> ProviderHealth:
+    def health(self) -> ProviderHealth:  # pragma: no cover - protocol
         """Return structural serviceability without invoking a domain operation."""
         ...
 
-    def query(self, request: ProviderQuery) -> ProviderResponse:
+    def query(self, request: ProviderQuery) -> ProviderResponse:  # pragma: no cover - protocol
         """Return zero or more resources matching ``request`` (read-many)."""
         ...
 
-    def fetch(self, resource_id: str) -> ProviderResource:
+    def fetch(self, resource_id: str) -> ProviderResource:  # pragma: no cover - protocol
         """Return exactly one resource, or fail closed (read-one)."""
         ...
 
-    def verify(self, resource_id: str) -> ProviderAttestation:
+    def verify(self, resource_id: str) -> ProviderAttestation:  # pragma: no cover - protocol
         """Return an integrity + provenance attestation over ``resource_id``."""
         ...
 

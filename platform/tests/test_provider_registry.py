@@ -229,3 +229,22 @@ def test_a_provider_declaring_no_capabilities_is_still_registrable() -> None:
     registry = ProviderRegistry()
     bare = declare_provider("bare.provider", "memo", "1.0.0")
     assert registry.register(bare).qualified_id == "bare.provider@1.0.0"
+
+
+def test_heads_keeps_the_highest_version_whichever_order_the_records_arrive_in() -> None:
+    """THE HEAD IS THE HIGHEST VERSION, NOT THE LAST ONE SEEN.
+
+    ``heads`` walks the record map and keeps the greater version per provider id, so both
+    arms of that comparison have to run: the first record for an id (nothing to compare
+    with) and a later one that is LOWER than what is already held. Registering ascending
+    only ever takes the first arm, which is why the "keep what I have" arm was dead — and it
+    is the one that stops a stale version from becoming the head by being registered second.
+    """
+    registry = ProviderRegistry()
+    registry.register(memo_descriptor(version="2.0.0"))
+    registry.register(memo_descriptor(version="1.0.0"))
+    registry.register(memo_descriptor(version="1.5.0"))
+
+    heads = registry.heads()
+    assert len(heads) == 1
+    assert heads[0].version == "2.0.0"

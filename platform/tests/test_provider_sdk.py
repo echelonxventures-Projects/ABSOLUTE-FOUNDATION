@@ -24,11 +24,13 @@ from platform.universal_provider.contracts import (
     ProviderResource,
     ProviderState,
 )
+from platform.universal_provider.discovery import RegistrySource
 from platform.universal_provider.errors import (
     ProviderCapabilityError,
     ProviderContractError,
     ProviderExecutionError,
 )
+from platform.universal_provider.registry import ProviderRegistry
 from platform.universal_provider.sdk import (
     BaseProvider,
     declare_capability,
@@ -290,3 +292,61 @@ def test_a_non_deterministic_capability_is_not_reordered() -> None:
 def test_base_provider_is_abstract() -> None:
     with pytest.raises(TypeError):
         BaseProvider(memo_descriptor())  # type: ignore[abstract]
+
+
+def test_a_provider_declaring_no_health_checks_is_serving() -> None:
+    """AN EMPTY PROBE IS A PASS, NOT AN ABSENCE.
+
+    ``probe`` is the SDK's extension point for substrate health, and a provider with nothing
+    to check must report serviceable rather than unknown — otherwise every provider would
+    have to implement a probe to be usable, which would make the default the one thing that
+    cannot ship. The memo fixture overrides it, which is why the default had never run.
+    """
+    descriptor = memo_descriptor()
+
+    class _NoProbe(BaseProvider):
+        def resolve_query(self, capability, request):
+            return ()
+
+        def resolve_resource(self, resource_id: str):
+            return None
+
+    provider = _NoProbe(descriptor)
+    assert provider.probe() == {}
+    assert provider.health().serving is True
+
+
+def test_a_framework_error_from_inside_a_provider_is_re_raised_unchanged() -> None:
+    """FAULT ISOLATION CONVERTS THE UNTYPED, AND PASSES THE TYPED THROUGH.
+
+    A provider that already refused in the framework's own vocabulary has said exactly what
+    went wrong; wrapping it again would bury a precise code inside a generic execution error
+    and the caller would have to unwrap two layers to find out that the resource simply does
+    not exist. Only the untyped arm had been driven.
+    """
+
+    descriptor = memo_descriptor()
+
+    class _Typed(BaseProvider):
+        def resolve_query(self, capability, request):
+            return ()
+
+        def resolve_resource(self, resource_id: str):
+            raise ProviderCapabilityError("no such note", {"resource_id": resource_id})
+
+    with pytest.raises(ProviderCapabilityError) as excinfo:
+        _Typed(descriptor).fetch("note-a")
+    assert not isinstance(excinfo.value, ProviderExecutionError)
+    assert excinfo.value.detail["resource_id"] == "note-a"
+
+
+def test_a_registry_source_reports_the_name_every_discovery_is_recorded_under() -> None:
+    """The source name is what a discovery record is attributed to, so a discovery whose
+    source could not be named would be a provider that appeared from nowhere. The declaration
+    source's name had a caller; the registry source's did not."""
+
+    registry = ProviderRegistry.from_descriptors([memo_descriptor()])
+
+    assert RegistrySource(registry).name == "registry"
+    assert RegistrySource(registry, name="upstream").name == "upstream"
+    assert all(d.source == "upstream" for d in RegistrySource(registry, "upstream").discover())

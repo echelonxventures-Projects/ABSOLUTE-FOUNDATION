@@ -92,11 +92,11 @@ class DiscoverySource(Protocol):
     """
 
     @property
-    def name(self) -> str:
+    def name(self) -> str:  # pragma: no cover - protocol
         """Return the stable source name recorded on every discovery."""
         ...
 
-    def discover(self) -> Iterable[DiscoveredProvider]:
+    def discover(self) -> Iterable[DiscoveredProvider]:  # pragma: no cover - protocol
         """Yield every provider declaration this source holds."""
         ...
 

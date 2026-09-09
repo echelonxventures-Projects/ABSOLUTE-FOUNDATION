@@ -7,7 +7,10 @@ three-valued verdict is tested directly: a declared-but-unbuilt provider must co
 
 from __future__ import annotations
 
+import copy
+import dataclasses
 from collections.abc import Iterable
+from dataclasses import replace
 from pathlib import Path
 from platform.tests.universal_provider_helpers import (
     MEMO_RESOURCE_KIND,
@@ -16,9 +19,12 @@ from platform.tests.universal_provider_helpers import (
     memo_capabilities,
     memo_descriptor,
 )
+from platform.universal_provider import validation as module
+from platform.universal_provider import validation as validation_module
 from platform.universal_provider.constitution import ProviderOperation
 from platform.universal_provider.contracts import (
     ProviderCapability,
+    ProviderDescriptor,
     ProviderHealth,
     ProviderQuery,
     ProviderResource,
@@ -697,7 +703,6 @@ def test_the_query_operation_gate_binding_is_enforced() -> None:
 
 def _forced(descriptor=None, **fields):
     """A descriptor carrying a value its own constructor refuses."""
-    import copy
 
     forged = copy.copy(descriptor if descriptor is not None else memo_descriptor())
     identity_fields = {k: v for k, v in fields.items() if k in {"name", "authority", "kind"}}
@@ -781,7 +786,6 @@ def test_pv14_refuses_a_descriptor_that_cannot_be_rebuilt_from_its_own_data(monk
     """Forged at the boundary the gate reads through: a descriptor whose serialisation
     cannot be parsed back is a provider that is not expressible as data, and the gate must
     say so rather than crash."""
-    from platform.universal_provider import validation as module
 
     class _Unrebuildable:
         @staticmethod
@@ -802,3 +806,215 @@ def test_the_validator_publishes_the_gates_it_will_run() -> None:
     validator = ProviderValidator()
     assert tuple(gate.gate_id for gate in validator.gates) == validator.gate_ids()
     assert len(validator.gates) == len(default_gates())
+
+
+# --------------------------------------------------------------------------- #
+# The gate findings a WELL-FORMED provider never produces
+#
+# Every gate above is exercised against the memo provider, which satisfies all of them —
+# that is the claim. It also means each gate's finding arms were dead, and a gate whose
+# refusal has never executed is a gate nobody has checked. Each is reached by handing the
+# gate a subject that is defective in exactly the one way the finding names.
+# --------------------------------------------------------------------------- #
+
+
+class _Unstable(ProviderDescriptor):
+    """A descriptor whose content hash changes between two computations.
+
+    A real descriptor cannot do this — the hash is a pure function of the declaration —
+    which is exactly why the check had never fired and why the subject type is preserved:
+    the gate must be given something it accepts as a descriptor.
+    """
+
+    def content_hash(self) -> str:
+        _COUNTER.append(len(_COUNTER))
+        return f"{super().content_hash()}-{len(_COUNTER)}"
+
+
+_COUNTER: list[int] = []
+
+
+def test_a_descriptor_whose_hash_is_not_stable_is_refused() -> None:
+    """CONTENT ADDRESSING IS THE WHOLE IDENTITY CLAIM.
+
+    A descriptor is identified by the digest of its own declaration, so a hash that differs
+    between two computations means the identity is not a function of the content — after
+    which every registry lookup, every ledger entry and every certificate points at a
+    provider whose identity changes while it is being read.
+    """
+    genuine = memo_descriptor()
+    unstable = _Unstable(**{f.name: getattr(genuine, f.name) for f in dataclasses.fields(genuine)})
+    result = IdentityDeclaredGate().evaluate(_subject(descriptor=unstable))
+
+    assert result.status is GateStatus.FAIL
+    assert any("not stable" in f for f in result.findings)
+
+
+def test_provenance_skips_a_capability_that_requires_a_selector() -> None:
+    """A CAPABILITY THAT REQUIRES A SELECTOR CANNOT BE SAMPLED BLIND.
+
+    The provenance gate samples QUERY capabilities by issuing a selector-less query. One
+    that declares required selector keys would refuse that query — correctly — and the
+    refusal would be recorded as a provenance finding against a provider doing exactly what
+    it declared. So it is skipped, and the sampling stays a measurement of the capabilities
+    it can actually reach.
+    """
+    descriptor = memo_descriptor(
+        capabilities=(
+            declare_capability(
+                "memo.filtered",
+                ProviderOperation.QUERY,
+                resource_kind="memo.note",
+                description="Enumerate notes for one tag.",
+                selector_keys=("tag",),
+                required_selector_keys=("tag",),
+                deterministic=True,
+                effects=("mem:read",),
+            ),
+            *memo_capabilities(),
+        )
+    )
+    subject = _governed(descriptor)
+    result = ProvenanceGate().evaluate(subject)
+
+    assert result.status is not GateStatus.FAIL, result.findings
+    assert not any("memo.filtered" in f for f in result.findings)
+
+
+def test_provenance_refuses_a_resource_with_no_source_no_hash_or_no_type() -> None:
+    """THREE THINGS MAKE A RESOURCE ATTRIBUTABLE, and each absence is reported separately.
+
+    A value that is not a resource at all cannot be attributed to anything. A resource with
+    no source of record cannot be traced back to where it came from. A resource with no
+    content hash cannot be shown to be the thing that was fetched. Each stops the walk for
+    that resource — checking a hash on a value that is not a resource would raise inside a
+    gate whose job is to report, not to fail.
+
+    THE FIRST OF THE THREE CANNOT ARRIVE IN A REAL RESPONSE. `ProviderResponse.__post_init__`
+    already refuses a non-resource, so the gate's check is a second defence over a response
+    assembled some other way — a rehydrated one, or a provider that returns a response-shaped
+    object of its own. It is reached here with exactly that: a stand-in exposing `.resources`
+    without the contract type's constructor between it and the gate.
+    """
+
+    class _LooseResponse:
+        def __init__(self, resources) -> None:
+            self.resources = resources
+
+    class _Hashless(ProviderResource):
+        """A resource whose content hash is empty.
+
+        ``resource_hash`` is a computed PROPERTY, so a real resource can never have one —
+        which is why the gate's check had never fired. It is the second defence for a
+        resource that arrives already hashless from somewhere the property does not govern.
+        """
+
+        @property
+        def resource_hash(self) -> str:
+            return ""
+
+    def _sourceless(resource):
+        """A resource whose provenance names no source of record."""
+        clone = replace(resource)
+        object.__setattr__(clone, "provenance", {**resource.provenance, "source_of_record": ""})
+        return clone
+
+    class _Loose(MemoProvider):
+        def query(self, request):
+            genuine = super().query(request).resources[0]
+            return _LooseResponse(
+                (
+                    "not a resource at all",
+                    _sourceless(genuine),
+                    _Hashless(
+                        **{f.name: getattr(genuine, f.name) for f in dataclasses.fields(genuine)}
+                    ),
+                )
+            )
+
+    descriptor = memo_descriptor()
+    governed = _governed(descriptor)
+    result = ProvenanceGate().evaluate(
+        ValidationSubject(
+            descriptor=descriptor,
+            instance=_Loose(descriptor),
+            registry=governed.registry,
+            lifecycle=governed.lifecycle,
+        )
+    )
+
+    assert result.status is GateStatus.FAIL
+    assert any("non-resource value returned" in f for f in result.findings)
+    assert any("no source of record" in f for f in result.findings)
+    assert any("no content hash" in f for f in result.findings)
+
+
+def test_lifecycle_refuses_a_ledger_recording_a_transition_the_law_forbids() -> None:
+    """THE LEDGER IS EVIDENCE, SO IT IS CHECKED AGAINST THE LAW IT RECORDS.
+
+    `ProviderLifecycle.transition` refuses an illegal move, so a ledger built through it can
+    never hold one — which is why this arm was dead. It is the check that would notice a
+    ledger assembled some other way: rehydrated from data, or written by a future caller. A
+    ledger whose entries are trusted because the API that usually writes them is careful is
+    not evidence, it is an assumption.
+    """
+    descriptor = memo_descriptor()
+    subject = _governed(descriptor)
+    history = subject.lifecycle.history(descriptor.qualified_id)
+    forged = replace(
+        history[0], from_phase=ProviderPhase.REGISTERED, to_phase=ProviderPhase.DECLARED
+    )
+
+    class _Forged:
+        def __init__(self, real) -> None:
+            self._real = real
+
+        def history(self, qualified_id: str):
+            return (forged,)
+
+        def __getattr__(self, name: str):
+            return getattr(self._real, name)
+
+    result = LifecycleGovernedGate().evaluate(
+        ValidationSubject(
+            descriptor=descriptor,
+            instance=subject.instance,
+            registry=subject.registry,
+            lifecycle=_Forged(subject.lifecycle),
+        )
+    )
+
+    assert result.status is GateStatus.FAIL
+    assert any("illegal transition" in f for f in result.findings)
+
+
+def test_a_descriptor_that_round_trips_lossily_is_refused() -> None:
+    """EXPRESSIBLE AS DATA MEANS THE DATA IS THE WHOLE PROVIDER.
+
+    The gate serializes a descriptor, rebuilds it, and compares content hashes. A rebuild
+    that raises is one failure and a rebuild that SUCCEEDS with a different hash is another
+    — the second is worse, because nothing refused and a catalogue round trip would silently
+    drop whatever did not survive. A real descriptor cannot do this, which is why the arm was
+    dead; it is reached with a descriptor whose rebuild is deliberately not itself.
+    """
+
+    genuine = memo_descriptor()
+
+    class _Lossy(ProviderDescriptor):
+        @classmethod
+        def from_dict(cls, payload):
+            rebuilt = ProviderDescriptor.from_dict(payload)
+            return replace(rebuilt, description=f"{rebuilt.description} (lost something)")
+
+    # The subject is built BEFORE the patch: `ValidationSubject` type-checks its descriptor
+    # against the same name, so patching first would refuse a genuine descriptor.
+    subject = _subject(descriptor=genuine)
+    original = validation_module.ProviderDescriptor
+    try:
+        validation_module.ProviderDescriptor = _Lossy
+        result = ExtensibilityGate().evaluate(subject)
+    finally:
+        validation_module.ProviderDescriptor = original
+
+    assert result.status is GateStatus.FAIL
+    assert any("round trip through data is lossy" in f for f in result.findings)

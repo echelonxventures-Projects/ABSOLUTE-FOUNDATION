@@ -25,9 +25,16 @@ from platform.tests.universal_provider_helpers import (
 from platform.universal_provider.certification import CertificationTier
 from platform.universal_provider.composition import CompositionStrategy
 from platform.universal_provider.errors import (
+    ProviderEvidenceError,
     ProviderFrameworkError,
     ProviderLifecycleError,
     ProviderRegistryError,
+)
+from platform.universal_provider.evidence import (
+    MANIFEST_FILENAME,
+    build_evidence,
+    verify_evidence,
+    write_evidence,
 )
 from platform.universal_provider.framework import (
     PROVIDER_FRAMEWORK_VERSION,
@@ -286,3 +293,190 @@ def test_an_unrealized_result_serialises_as_a_reported_absence():
 
 def test_the_entry_point_the_fixture_declares_is_the_one_resolved(framework):
     assert memo_descriptor().entry_point == MEMO_ENTRY_POINT
+
+
+# --------------------------------------------------------------------------- #
+# The evidence bundle: what it refuses, and what it reports as unverifiable
+# --------------------------------------------------------------------------- #
+
+
+def test_evidence_requires_the_real_types_and_says_what_it_received(framework, tmp_path) -> None:
+    """A DUCK-TYPED FRAMEWORK IS NOT A FRAMEWORK.
+
+    Both entry points read attributes the caller cannot be assumed to have — the framework's
+    state, the bundle's artifacts — and an object that merely looks similar would produce a
+    bundle that is missing pieces rather than one that failed to be built. The refusal names
+    the type that arrived, so the caller is told what they passed instead of what is wrong
+    with it.
+    """
+
+    with pytest.raises(ProviderEvidenceError) as excinfo:
+        build_evidence("not a framework")
+    assert excinfo.value.detail["received"] == "str"
+
+    with pytest.raises(ProviderEvidenceError) as excinfo:
+        write_evidence({"manifest": {}}, tmp_path)
+    assert excinfo.value.detail["received"] == "dict"
+
+
+def test_an_evidence_bundle_renders_both_halves_of_itself(framework) -> None:
+    """``to_dict`` is how a bundle is handed to anything that is not this module. Without it
+    a consumer would rebuild the pairing of manifest and artifacts itself, and the two would
+    be able to drift — which is exactly what a manifest exists to prevent."""
+
+    bundle = build_evidence(framework)
+    rendered = bundle.to_dict()
+
+    assert rendered["manifest"] == bundle.manifest()
+    assert rendered["artifacts"] == bundle.artifacts()
+    assert rendered == bundle.to_dict()
+
+
+def test_a_directory_that_cannot_be_created_or_written_is_a_typed_refusal(
+    framework, tmp_path
+) -> None:
+    """AN OSError FROM THE FILESYSTEM IS NOT A PROVIDER FAULT UNTIL IT IS TYPED.
+
+    A caller writing evidence gets one error class from this module whatever went wrong, and
+    the path and the reason are carried on it. Letting the raw OSError escape would make the
+    caller catch two unrelated exception families to write one bundle, and the message would
+    name a path with no indication that evidence was what was being written.
+    """
+
+    bundle = build_evidence(framework)
+
+    blocked = tmp_path / "blocked"
+    blocked.write_text("a file where a directory must go", encoding="utf-8")
+    with pytest.raises(ProviderEvidenceError, match="directory could not be created") as excinfo:
+        write_evidence(bundle, blocked)
+    assert excinfo.value.detail["directory"] == str(blocked)
+
+    # An artifact name already taken by a DIRECTORY: the target directory is created and
+    # the individual write is what fails, which is the second arm.
+    occupied = tmp_path / "occupied"
+    occupied.mkdir()
+    first_artifact = sorted(bundle.artifacts())[0]
+    (occupied / first_artifact).mkdir()
+    with pytest.raises(ProviderEvidenceError, match="artifact could not be written") as excinfo:
+        write_evidence(bundle, occupied)
+    assert excinfo.value.detail["path"].endswith(first_artifact)
+
+
+def test_a_materialized_bundle_that_no_longer_matches_its_manifest_does_not_verify(
+    framework, tmp_path
+) -> None:
+    """VERIFICATION IS ABOUT THE BYTES ON DISK, and there are three ways for them to stop
+    matching: a declared artifact that is gone, one that is no longer readable as JSON, and
+    one whose content hash has moved. Each answers ``False`` — a missing or corrupt artifact
+    is a bundle that does not verify, not an error, because "does this still match" is a
+    question with a boolean answer.
+    """
+
+    bundle = build_evidence(framework)
+
+    intact = tmp_path / "intact"
+    write_evidence(bundle, intact)
+    assert verify_evidence(intact) is True
+
+    manifest = json.loads((intact / MANIFEST_FILENAME).read_text(encoding="utf-8"))
+    artifact = sorted(manifest["artifacts"])[0]
+
+    removed = tmp_path / "removed"
+    write_evidence(bundle, removed)
+    (removed / artifact).unlink()
+    assert verify_evidence(removed) is False
+
+    unreadable = tmp_path / "unreadable"
+    write_evidence(bundle, unreadable)
+    (unreadable / artifact).write_text("{ not json", encoding="utf-8")
+    assert verify_evidence(unreadable) is False
+
+    altered = tmp_path / "altered"
+    write_evidence(bundle, altered)
+    (altered / artifact).write_text(json.dumps({"replaced": True}) + "\n", encoding="utf-8")
+    assert verify_evidence(altered) is False
+
+
+def test_a_bundle_with_no_manifest_or_an_unusable_one_is_a_refusal(framework, tmp_path) -> None:
+    """A MISSING ARTIFACT IS A FALSE; A MISSING MANIFEST IS AN ERROR.
+
+    The distinction is the point. Without a manifest there is nothing to verify against, so
+    "does this bundle match itself" cannot be answered at all — returning ``False`` would say
+    the bundle is corrupt when what actually happened is that the caller pointed at a
+    directory that is not a bundle. The same holds for a manifest that will not parse or
+    declares no artifacts.
+    """
+
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    with pytest.raises(ProviderEvidenceError, match="has no manifest"):
+        verify_evidence(empty)
+
+    corrupt = tmp_path / "corrupt"
+    write_evidence(build_evidence(framework), corrupt)
+    (corrupt / MANIFEST_FILENAME).write_text("{ not json", encoding="utf-8")
+    with pytest.raises(ProviderEvidenceError, match="manifest is unreadable"):
+        verify_evidence(corrupt)
+
+    artifactless = tmp_path / "artifactless"
+    write_evidence(build_evidence(framework), artifactless)
+    (artifactless / MANIFEST_FILENAME).write_text(
+        json.dumps({"artifacts": "not a mapping"}), encoding="utf-8"
+    )
+    with pytest.raises(ProviderEvidenceError, match="declares no artifacts"):
+        verify_evidence(artifactless)
+
+
+def test_a_provider_permitted_to_serve_but_never_realized_is_refused(framework) -> None:
+    """SERVING IS TWO FACTS: the lifecycle permits it, and an instance exists.
+
+    The framework realizes an instance during onboarding, so the two normally move together
+    — which is why this arm was dead. It is the check that separates "not allowed to serve"
+    from "allowed, and there is nothing here", and collapsing them would return ``None`` to a
+    consumer that asked for a provider and was told it could have one.
+    """
+
+    result = _onboarded(framework)
+    qualified_id = result.qualified_id
+    assert framework.provider(qualified_id) is not None
+
+    framework._instances.pop(qualified_id)  # noqa: SLF001 - deliberate corruption
+    with pytest.raises(ProviderLifecycleError, match="has not been realized") as excinfo:
+        framework.provider(qualified_id)
+    assert excinfo.value.detail["qualified_id"] == qualified_id
+
+
+def test_admission_marks_a_refused_provider_rejected_unless_it_is_already_serving(
+    framework,
+) -> None:
+    """A DECLARED PROVIDER THAT NEVER REGISTERS MUST NOT STAY DECLARED — but a provider that
+    is already ACTIVE must not be demoted by a second declaration either.
+
+    ``admit`` declares first and registers second, so a registration refusal would otherwise
+    leave a provider the lifecycle has heard of and nothing has decided about. It is moved to
+    REJECTED with the refusal's own code as the reason, and the error still propagates: the
+    caller learns why, and the ledger records that the provider was considered and refused.
+
+    The guard on that transition is what stops the second case from becoming a regression.
+    Re-admitting a provider that is already serving is refused too — registration is
+    append-only — and rejecting it would take a live provider out of service because somebody
+    tried to register its id twice. The lifecycle refuses ACTIVE→REJECTED, so the transition
+    is skipped and only the error is raised.
+    """
+
+    fresh = memo_descriptor(provider_id="fixture.refused")
+    framework.admit(fresh)
+    collision = memo_descriptor(provider_id="fixture.refused", name="A Second Declaration")
+    with pytest.raises(ProviderRegistryError):
+        framework.admit(collision)
+    history = framework.lifecycle.history(collision.qualified_id)
+    assert any("registration refused" in (entry.reason or "") for entry in history)
+    assert framework.lifecycle.phase(collision.qualified_id) is ProviderPhase.REJECTED
+
+    # An ACTIVE provider is refused the same way and stays active.
+    active = _onboarded(framework, provider_id="fixture.serving")
+    assert framework.lifecycle.phase(active.qualified_id) is ProviderPhase.ACTIVE
+    again = memo_descriptor(provider_id="fixture.serving", name="Another Declaration")
+    with pytest.raises(ProviderRegistryError):
+        framework.admit(again)
+    assert framework.lifecycle.phase(again.qualified_id) is ProviderPhase.ACTIVE

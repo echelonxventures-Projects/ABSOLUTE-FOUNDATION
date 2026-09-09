@@ -7,6 +7,7 @@ concentrate on the soundness refusals and on the tier→authority mapping.
 
 from __future__ import annotations
 
+from dataclasses import replace
 from platform.tests.universal_provider_helpers import MemoProvider, memo_descriptor
 from platform.universal_provider.certification import (
     SEAL_LENGTH,
@@ -234,3 +235,49 @@ def test_the_certificate_summary_is_the_corpus_idiomatic_one_liner() -> None:
     assert "gates=14/14 PASS" in summary
     assert "blocking=none" in summary
     assert "seal=" in summary
+
+
+def test_a_ledger_whose_sequence_or_link_is_wrong_does_not_verify() -> None:
+    """THREE WAYS A CHAIN BREAKS, and only the third had a test.
+
+    A wrong sequence is an entry out of order; a wrong previous-hash is a splice; a wrong
+    entry hash is an edit in place. The first two are checked together because both are
+    facts about an entry's POSITION rather than its content — and an entry whose own hash
+    still recomputes correctly would pass the third check while sitting in the wrong place.
+    """
+    certifier = ProviderCertifier()
+    descriptor, report = _passing_report()
+    certifier.certify(descriptor, report)
+    certifier.certify(descriptor, report)
+    ledger = certifier.ledger
+    assert ledger.verify() is True
+
+    entries = ledger._entries  # noqa: SLF001 - deliberate corruption
+    genuine = entries[1]
+
+    entries[1] = replace(genuine, sequence=99)
+    assert ledger.verify() is False
+
+    entries[1] = replace(genuine, previous_hash="0" * 64)
+    assert ledger.verify() is False
+
+    entries[1] = genuine
+    assert ledger.verify() is True
+
+
+def test_the_ledger_answers_for_a_provider_it_has_certified_and_one_it_has_not() -> None:
+    """``latest`` walks backwards so the most recent certification wins, and only its
+    "nothing found" arm had run. A lookup whose success path is unexercised is one that could
+    return the WRONG entry — an earlier certification for the same provider, or another
+    provider's — and every consumer reading a tier would read it from that."""
+    certifier = ProviderCertifier()
+    descriptor, report = _passing_report()
+    certifier.certify(descriptor, report)
+    certifier.certify(descriptor, report)
+    ledger = certifier.ledger
+
+    found = ledger.latest(descriptor.qualified_id)
+    assert found is ledger._entries[-1]  # noqa: SLF001 - the most recent entry wins
+    assert found is not ledger._entries[0]  # noqa: SLF001
+    assert ledger.latest("fixture.never-certified@1.0.0") is None
+    assert len(ledger.certificates()) == 2

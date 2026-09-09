@@ -531,3 +531,62 @@ def test_the_composition_hash_pins_members_and_strategy() -> None:
     assert payload["capabilities"] == ["memo.notes", "memo.note", "memo.attestation"]
     assert len(first.members) == 2
     assert [c.name for c in first.capabilities()] == payload["capabilities"]
+
+
+def test_a_member_raising_an_untyped_fault_is_isolated_and_attributed() -> None:
+    """PC-09 FAULT ISOLATION IS ABOUT THE UNTYPED CASE.
+
+    A member raising a framework error is already handled: the composite records its code
+    and tries the next member. A member raising something else — a library's own exception,
+    an AttributeError from a half-built substrate — must not escape the composite, or one
+    misbehaving member takes down every consumer of the composition. It is recorded under
+    its TYPE NAME, so the fail-closed refusal still says which member did what.
+
+    Both loops isolate: ``fetch``, which attributes each attempt, and ``verify``, which
+    probes members and moves on. A real member cannot reach either arm, because the SDK's
+    own ``_isolate`` converts untyped faults before they leave the provider — so this is the
+    second defence for a member that is not an SDK provider at all.
+    """
+
+    class _Untyped:
+        def __init__(self, descriptor) -> None:
+            self._descriptor = descriptor
+
+        def describe(self):
+            return self._descriptor
+
+        def capabilities(self):
+            return self._descriptor.capabilities
+
+        def health(self):
+            return MemoProvider(self._descriptor).health()
+
+        def query(self, request):
+            raise ZeroDivisionError("the substrate is half-built")
+
+        def fetch(self, resource_id):
+            raise ZeroDivisionError("the substrate is half-built")
+
+        def verify(self, resource_id):
+            raise ZeroDivisionError("the substrate is half-built")
+
+    composite = compose_providers(
+        "fixture.faulty-fabric",
+        "fabric",
+        "1.0.0",
+        [_Untyped(memo_descriptor(provider_id="fixture.untyped")), _left()],
+        strategy=CompositionStrategy.FALLBACK,
+        authority="TEST",
+        description="a composition holding one misbehaving member",
+    )
+
+    resolved = composite.fetch("left-1")
+    assert resolved.resource_id == "left-1"
+
+    attestation = composite.verify("left-1")
+    assert attestation.verified
+
+    with pytest.raises(ProviderExecutionError) as excinfo:
+        composite.fetch("note-does-not-exist")
+    attempts = excinfo.value.detail["attempts"]
+    assert any(str(v).startswith("untyped:ZeroDivisionError") for v in attempts.values())
