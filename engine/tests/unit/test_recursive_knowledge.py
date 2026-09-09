@@ -36,6 +36,7 @@ from engine.recursive_knowledge import (
 )
 from engine.recursive_knowledge.declaration import (
     DIGEST_EXCLUSIONS,
+    DeclarationError,
     load_declaration,
     parse,
     repo_root,
@@ -2273,3 +2274,112 @@ def test_a_reversal_that_removes_the_lesson_is_refused(declaration, monkeypatch)
     )
     problems = contract.learning_pipeline_cannot_be_bypassed(_forge(declaration))
     assert any("removed the lesson instead of superseding it" in p for p in problems), problems
+
+
+# --- the remaining refusals ------------------------------------------------------------------
+
+
+def _drifting_fingerprint(monkeypatch):
+    calls = {"n": 0}
+
+    def drifting(self):
+        calls["n"] += 1
+        return f"fingerprint-{calls['n']}"
+
+    monkeypatch.setattr(contract.Probe, "fingerprint", drifting)
+
+
+def test_a_refusal_of_the_wrong_error_type_is_still_reported(declaration):
+    # A refusal is required; a refusal by TypeError is a refusal for the wrong reason, and
+    # `_refused` names that rather than accepting it as success.
+    def raise_the_wrong_type():
+        raise TypeError("wrong shape entirely")
+
+    assert "unexpected error type: TypeError" in contract._refused(raise_the_wrong_type)
+
+
+def test_an_unknown_carrying_no_governance_field_is_refused(declaration, monkeypatch):
+    real = subjects.record_gap
+
+    def hollow(store, **kwargs):
+        return dataclasses.replace(real(store, **kwargs), owner="  ")
+
+    monkeypatch.setattr(subjects, "record_gap", hollow)
+    problems = contract.every_identified_unknown_is_governed(_forge(declaration))
+    assert any("carries no owner" in p for p in problems), problems
+
+
+def test_an_unknown_the_ledger_did_not_retain_is_refused(declaration, monkeypatch):
+    real = subjects.record_gap
+
+    def forgotten(store, **kwargs):
+        gap = real(store, **kwargs)
+        return dataclasses.replace(gap, identity=gap.identity + "-never-recorded")
+
+    monkeypatch.setattr(subjects, "record_gap", forgotten)
+    problems = contract.every_identified_unknown_is_governed(_forge(declaration))
+    assert any("was not retained" in p for p in problems), problems
+
+
+def test_admitting_a_future_domain_that_changes_the_package_is_refused(declaration, monkeypatch):
+    _drifting_fingerprint(monkeypatch)
+    problems = contract.future_domain_is_admissible(_forge(declaration))
+    assert any("admitting a future domain changed this package" in p for p in problems), problems
+
+
+def test_admitting_a_reality_that_changes_the_package_is_refused(declaration, monkeypatch):
+    _drifting_fingerprint(monkeypatch)
+    problems = contract.worlds_are_data_driven(_forge(declaration))
+    assert any("changed this package" in p for p in problems), problems
+
+
+def test_an_unscannable_vocabulary_is_a_fault_not_a_verdict(declaration, monkeypatch):
+    # A vocabulary that cannot be scanned yields no verdict about hardcoding, so the law
+    # raises rather than reporting "no literals found" over a scan that never happened.
+    def refuse(decl):
+        raise DeclarationError("vocabulary could not be scanned")
+
+    monkeypatch.setattr(contract, "scanned_vocabulary", refuse)
+    with pytest.raises(contract.ContractError, match="could not be scanned"):
+        contract.vocabulary_is_declared_not_coded(_forge(declaration))
+
+
+def test_a_settled_state_that_cannot_be_reopened_is_refused(declaration, monkeypatch):
+    # Settled is not terminal: a settled subject must remain reopenable, or the lattice has a
+    # one-way door in it.
+    real = states.successors
+    settled = declaration.settled_states[0]
+    monkeypatch.setattr(
+        states,
+        "successors",
+        lambda decl, identifier: () if identifier == settled else real(decl, identifier),
+    )
+    problems = contract.no_state_is_terminal(_forge(declaration))
+    assert any(f"settled state {settled!r} cannot be reopened" in p for p in problems), problems
+
+
+def test_a_gap_missing_its_required_attributes_must_be_refused(declaration):
+    # The law asserts a REFUSAL, and the refusal happens at `store.admit`, so the violation is
+    # a ledger that admits a subject carrying none of its profile's required attributes.
+    probe = _ledger_probe(declaration, admit=lambda subject: subject)
+    problems = contract.profile_requirements_are_enforced(probe)
+    assert any("carrying none of its required attributes" in p for p in problems), problems
+
+
+def test_a_subject_owned_by_an_undeclared_role_must_be_refused(declaration):
+    probe = _ledger_probe(declaration, admit=lambda subject: subject)
+    problems = contract.profile_requirements_are_enforced(probe)
+    assert any("owned by an undeclared role" in p for p in problems), problems
+
+
+def test_a_gap_with_no_closure_criterion_must_be_refused(declaration, monkeypatch):
+    real = subjects.record_gap
+
+    def permissive(store, **call):
+        if not call.get("criteria"):
+            call["criteria"] = ("filled in by a permissive ledger",)
+        return real(store, **call)
+
+    monkeypatch.setattr(subjects, "record_gap", permissive)
+    problems = contract.profile_requirements_are_enforced(_forge(declaration))
+    assert any("with no closure criterion" in p for p in problems), problems
