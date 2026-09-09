@@ -2782,3 +2782,75 @@ def test_a_verifier_declaring_no_assumptions_must_be_refused(declaration, monkey
     monkeypatch.setattr(extension, "register_verifier", permissive)
     problems = contract.verification_is_itself_verifiable(Probe(declaration=declaration, repo=REPO))
     assert any("was admitted" in p for p in problems), problems
+
+
+# --- UCON-L-11: admission and reality are independent -------------------------------------
+
+
+def test_a_module_importing_across_the_admission_reality_boundary_is_refused(
+    declaration, monkeypatch
+):
+    # If reality.py can import the disposition engine, one axis can be derived from the other
+    # and the independence the law asserts is structurally impossible.
+    monkeypatch.setattr(Probe, "source", lambda self, name: "import engine.construct.disposition\n")
+    problems = contract.reality_is_independent_of_admission(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("can be derived from" in p for p in problems), problems
+
+
+def test_an_unrepresentable_disposition_reality_pair_is_reported(declaration, monkeypatch):
+    real = ConstructRegistry.reassess
+
+    def refuse_only_the_pairs(self, identity, status, **kwargs):
+        # Narrow on purpose: the law reassesses again further down, OUTSIDE any try, so a
+        # blanket refusal escapes the law instead of being reported by it.
+        if self.get(identity).presentation.natural_key.startswith("pair-"):
+            raise ConstructError("reassessment refused for the test")
+        return real(self, identity, status, **kwargs)
+
+    monkeypatch.setattr(ConstructRegistry, "reassess", refuse_only_the_pairs)
+    problems = contract.reality_is_independent_of_admission(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("is not representable" in p for p in problems), problems
+
+
+def test_admission_that_confers_truth_is_refused(declaration, monkeypatch):
+    # "Admission does not imply truth" is the whole conjunction: an ADMITted construct in a
+    # hypothetical reality state must not be certifiable.
+    monkeypatch.setattr(reality, "permits", lambda decl, construct, act: True)
+    problems = contract.reality_is_independent_of_admission(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("admission implies truth" in p for p in problems), problems
+
+
+def test_an_admitted_construct_that_cannot_be_referenced_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(reality, "permits", lambda decl, construct, act: False)
+    problems = contract.reality_is_independent_of_admission(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("cannot be referenced" in p for p in problems), problems
+
+
+def test_reassessing_evidence_that_changes_the_disposition_is_refused(declaration, monkeypatch):
+    # Reality must not drive admission. A reassessment that moves the disposition has made the
+    # two axes one.
+    real = ConstructRegistry.reassess
+    other = [d for d in declaration.disposition_ids if d != "ADMIT"][0]
+
+    def drifting(self, identity, status, **kwargs):
+        reassessed = real(self, identity, status, **kwargs)
+        if status != "VERIFIED":
+            return reassessed
+        return dataclasses.replace(
+            reassessed,
+            dispositions=(dataclasses.replace(reassessed.disposition, disposition=other),),
+        )
+
+    monkeypatch.setattr(ConstructRegistry, "reassess", drifting)
+    problems = contract.reality_is_independent_of_admission(
+        Probe(declaration=declaration, repo=REPO)
+    )
+    assert any("reality drives admission" in p for p in problems), problems
