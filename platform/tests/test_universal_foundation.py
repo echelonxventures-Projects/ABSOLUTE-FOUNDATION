@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from platform.foundation.services import ServiceRegistry
-from platform.universal_assimilation import KIND_MARKDOWN, SourceInput
+from platform.universal_assimilation import KIND_MARKDOWN, SourceInput, bootstrap_assimilation
 from platform.universal_foundation import (
     COMPOSED_CAPABILITIES,
     FoundationDetermination,
@@ -18,7 +18,16 @@ from platform.universal_foundation import (
     load_specialization,
     register_universal_foundation,
 )
+from platform.universal_foundation.bootstrap import (
+    FOUNDATION_CONTRACTS,
+    _read_document,
+    bootstrap_foundation_constitution,
+    foundation_contract_names,
+    foundation_fingerprint,
+)
 from platform.universal_foundation.cli import main as foundation_main
+from platform.universal_foundation.conformance import default_capability_register
+from platform.universal_foundation.constitution import foundation_constitution
 from platform.universal_foundation.errors import (
     FoundationCompositionError,
     SpecializationError,
@@ -185,7 +194,6 @@ def test_composition_guards() -> None:
     truth = default_truth_policy()
     ownership = bootstrap_ownership(policy=truth)
     policies = bootstrap_measurement_policies()
-    from platform.universal_assimilation import bootstrap_assimilation
 
     assimilation = bootstrap_assimilation(policy=truth)
     good = (declared, truth, ownership, assimilation, policies)
@@ -382,3 +390,204 @@ def test_cli_determine_executes_from_declared_truth(
     detail = json.loads(capsys.readouterr().out)
     assert detail["ownership"]["records"]
     assert foundation_main(["capabilities", "--specialization", str(tmp_path / "no.json")]) == 2
+
+
+# --------------------------------------------------------------------------- composition arms
+#
+# The packaged specialisation declares no eligibility ledger and no registration projection, so
+# every composition test runs the shape this repository happens to declare. The arms below are
+# the ones a project declaring registration takes.
+
+
+def _registered_project(tmp_path: Path, **extra: object) -> Path:
+    """A project that declares a registration document, its projection, and eligibility."""
+    register = tmp_path / "registered.json"
+    register.write_text(
+        json.dumps({"entries": [{"id": "UCOS-COMP-000000", "files": [HOME]}]}), "utf-8"
+    )
+    specialization = tmp_path / "registered-spec.json"
+    specialization.write_text(
+        json.dumps(
+            {
+                "project_id": "registered",
+                "truth_policy": "packaged:",
+                "require_registration": True,
+                "registration_document": "registered.json",
+                "registration_projection": {
+                    "collection": "entries",
+                    "identity_field": "id",
+                    "locator_fields": ["files"],
+                },
+                "eligibility": {"ledger_id": "test.eligibility", "require_registration": True},
+                **extra,
+            }
+        ),
+        "utf-8",
+    )
+    return specialization
+
+
+def test_a_declared_registration_ledger_reaches_both_the_home_policy_and_the_evidence(
+    tmp_path: Path,
+) -> None:
+    """THE REGISTERED SET IS PROJECTED ONCE AND USED TWICE.
+
+    A project that declares a registration document has its locators projected into the
+    eligibility ledger (deciding which locators may hold ownership at all) AND into an
+    evidence provider (so registration is itself evidence of ownership). Neither arm had run,
+    because the packaged specialisation declares no registration projection — which left the
+    repository's own composition proving only the shape where registration is absent.
+    """
+    foundation = bootstrap_universal_foundation(_registered_project(tmp_path), root=tmp_path)
+
+    subject = Subject.create("UCOS-COMP-000000", locators=[HOME])
+    record = foundation.ownership.determine_subject(subject)
+
+    # The same subject against a project declaring the requirement and no register is
+    # refused for want of registration; here the register is projected and it is not.
+    assert "SUBJECT-NOT-REGISTERED" not in record.reasons
+    assert record.reasons
+
+
+def test_declaring_a_registration_requirement_with_no_projection_to_satisfy_it_is_refused(
+    tmp_path: Path,
+) -> None:
+    """A REQUIREMENT WITH NOTHING TO MEASURE IT AGAINST IS REFUSED, NOT SILENTLY RELAXED.
+
+    An eligibility ledger declaring ``require_registration`` and a specialisation declaring
+    no registration projection are individually valid and jointly unusable: every subject
+    would fail eligibility for want of a set that no declaration says how to build. Composing
+    it anyway would look identical to a project whose register is simply empty, which is the
+    Zero Silent Repair failure this refusal exists to prevent.
+    """
+    specialization = tmp_path / "spec.json"
+    specialization.write_text(
+        json.dumps(
+            {
+                "project_id": "unsatisfiable",
+                "truth_policy": "packaged:",
+                "eligibility": {"ledger_id": "test.eligibility", "require_registration": True},
+            }
+        ),
+        "utf-8",
+    )
+
+    with pytest.raises(FoundationCompositionError, match="no registration projection"):
+        bootstrap_universal_foundation(specialization, root=tmp_path)
+
+
+def test_the_conformance_engine_accepts_a_register_object_as_well_as_a_path(
+    tmp_path: Path,
+) -> None:
+    """THREE WAYS TO NAME A REGISTER AND THE MIDDLE ONE HAD NO CALLER.
+
+    ``None`` takes the packaged default and a path is loaded; a register the caller already
+    holds is used as it stands. That arm is what lets a caller compose an engine over a
+    register it built or amended in memory — without it, the only way to measure a modified
+    register would be to write it to disk first, which makes an in-process composition
+    impossible to express.
+    """
+    register = default_capability_register()
+
+    engine = bootstrap_foundation_constitution(register, project_root=tmp_path)
+
+    assert engine.register is register
+
+
+def test_a_declared_document_that_cannot_be_read_or_is_not_a_mapping_is_refused(
+    tmp_path: Path,
+) -> None:
+    """THE FAIL-CLOSED DOCUMENT READER, WHICH NOTHING IN THIS PACKAGE CURRENTLY CALLS.
+
+    It is the composition layer's declared way of reading a JSON document — an absent or
+    unparseable file and a file whose root is a list are three different ways of not being a
+    declaration, and all three are refused with the path and the reason rather than being
+    allowed to become an AttributeError somewhere downstream. Recorded here rather than
+    removed: whether a reader with no caller should exist is a decision for the package's
+    owner, and it is measured either way.
+    """
+
+    good = tmp_path / "good.json"
+    good.write_text(json.dumps({"declared": True}), "utf-8")
+    assert _read_document(good, what="a declaration") == {"declared": True}
+
+    with pytest.raises(FoundationCompositionError, match="could not be read"):
+        _read_document(tmp_path / "absent.json", what="a declaration")
+
+    malformed = tmp_path / "malformed.json"
+    malformed.write_text("{ not json", "utf-8")
+    with pytest.raises(FoundationCompositionError, match="could not be read"):
+        _read_document(malformed, what="a declaration")
+
+    listed = tmp_path / "listed.json"
+    listed.write_text("[]", "utf-8")
+    with pytest.raises(FoundationCompositionError, match="must be a mapping"):
+        _read_document(listed, what="a declaration")
+
+
+def test_the_published_contract_names_and_the_law_fingerprint_are_readable() -> None:
+    """A PUBLISHED SURFACE NOBODY READS BACK IS AN API NOBODY HAS CHECKED.
+
+    ``foundation_contract_names`` is the declaration order of the composed platform's
+    contracts, and ``foundation_fingerprint`` is what a certificate cites to say which law it
+    was issued under. Both are the outward-facing half of the composition and neither had a
+    caller in the suite, so the contract tuple and the names could have disagreed.
+    """
+    names = foundation_contract_names()
+
+    assert names
+    assert [ref.name for ref in FOUNDATION_CONTRACTS] == list(names)
+    assert foundation_fingerprint() == foundation_fingerprint()
+    assert foundation_fingerprint(foundation_constitution()) == foundation_fingerprint()
+
+
+def test_a_registration_projection_declared_without_a_document_is_refused() -> None:
+    """A PROJECTION IS A RULE FOR READING A DOCUMENT, and without one it reads nothing.
+
+    The two fields are declared separately and each is optional, so the pair is the thing
+    that has to be checked. A projection with no document would project the empty set, and a
+    project declaring registration would silently get a register of zero locators — every
+    subject unregistered, for a reason nothing in the declaration reveals.
+    """
+    assert FoundationSpecialization.create("p").registration_projection is None
+
+    with pytest.raises(SpecializationError, match="without a registration document"):
+        FoundationSpecialization.create(
+            "p",
+            registration_projection={
+                "collection": "entries",
+                "identity_field": "id",
+                "locator_fields": ["id"],
+            },
+        )
+
+
+def test_the_cli_summary_is_written_without_json_and_omits_absent_ownership(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """THE SUMMARY IS THE DEFAULT OUTPUT AND EVERY CLI TEST PASSED ``--json``.
+
+    Two arms follow from that. The human summary is written to stderr on every run and JSON
+    only on request, so a run without ``--json`` had never been shown to produce anything at
+    all. And a determination over a project whose declared population is empty carries no
+    ownership section — printing the counts line anyway would report "0/0 declared" for an
+    ownership determination that was never made, which reads as a measured zero rather than
+    as nothing measured.
+    """
+    specialization = tmp_path / "empty-spec.json"
+    specialization.write_text(
+        json.dumps({"project_id": "empty", "truth_policy": "packaged:"}), "utf-8"
+    )
+
+    assert (
+        foundation_main(
+            ["determine", "--specialization", str(specialization), "--root", str(tmp_path)]
+        )
+        == 0
+    )
+
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert "UNIVERSAL FOUNDATION" in captured.err
+    assert "determination:" in captured.err
+    assert "ownership:" not in captured.err

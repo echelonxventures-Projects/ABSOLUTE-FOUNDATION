@@ -14,7 +14,9 @@ looked.
 
 from __future__ import annotations
 
+import dataclasses
 import json
+import sys
 from platform.foundation.services import ServiceRegistry
 from platform.universal_foundation.bootstrap import (
     bootstrap_foundation_constitution,
@@ -40,15 +42,21 @@ from platform.universal_foundation.conformance import (
     catalog_path as conformance_catalog_path,
 )
 from platform.universal_foundation.constitution import (
+    CONSTITUTION_CONTRACTS,
     FOUNDATION_ARTICLES,
     MATURITY_GATES,
     ArticleScope,
     ConstitutionalDomain,
+    FoundationArticle,
+    FoundationConstitution,
     MaturityAxis,
     article,
     article_for_gate,
     articles_of_domain,
+    articles_of_scope,
+    constitution_contract_names,
     foundation_constitution,
+    maturity_axes,
     require_gates,
 )
 from platform.universal_foundation.convergence import (
@@ -604,7 +612,6 @@ def test_a_replay_target_without_a_declared_write_is_refused():
 
 def test_a_phantom_writer_fails_because_its_source_cannot_discharge_the_claim():
     """A declaration is measured against the capability's own source, in both directions."""
-    import dataclasses
 
     register = default_capability_register()
     engine = ConformanceEngine(register)
@@ -679,7 +686,6 @@ def test_a_byte_identical_duplicate_in_a_governed_package_fails_exactly_once(tmp
     by its own definition — thirty-six byte-identical siblings declared nothing. This is the
     measurement that sees them.
     """
-    import sys
 
     package = tmp_path / "governed_pkg"
     package.mkdir()
@@ -721,7 +727,6 @@ def test_a_byte_identical_duplicate_in_a_governed_package_fails_exactly_once(tmp
 
 def test_empty_package_markers_are_excluded_by_declaration(tmp_path, monkeypatch):
     """Two empty markers are not two implementations — and the exclusion is declared, not coded."""
-    import sys
 
     package = tmp_path / "marker_pkg"
     (package / "inner").mkdir(parents=True)
@@ -773,3 +778,130 @@ def test_the_convergence_determination_is_replay_identical_with_duplication():
     first, second = bootstrap_convergence().measure(), bootstrap_convergence().measure()
     assert first.fingerprint() == second.fingerprint()
     assert first.determination_id == second.determination_id
+
+
+# --------------------------------------------------------------------------------------
+# the law's own construction
+# --------------------------------------------------------------------------------------
+#
+# Every test above reads the constitution the module declares, which is well formed by
+# construction. The refusals that keep an ill-formed one from existing — and the accessors a
+# consumer of the law uses rather than the law itself — had no caller.
+
+
+def test_coercion_accepts_the_enum_it_returns_and_refuses_a_non_string():
+    """COERCION HAS THREE ANSWERS AND ONLY THE STRING PATHS WERE MEASURED.
+
+    A value that is already the enum is returned unchanged, which is what lets every caller
+    accept ``domain | str`` without asking which it was handed. Anything that is neither is
+    refused rather than passed to ``cls(value)``, because the ValueError that would raise
+    from inside says "not a valid ConstitutionalDomain" about an integer or a None — an
+    error naming the wrong problem, at a boundary whose contract is to name it exactly.
+    """
+    assert ConstitutionalDomain.coerce(ConstitutionalDomain.GOVERNANCE) is (
+        ConstitutionalDomain.GOVERNANCE
+    )
+    assert ArticleScope.coerce(ArticleScope.PLATFORM) is ArticleScope.PLATFORM
+
+    with pytest.raises(FoundationConstitutionError, match="must be a string"):
+        ConstitutionalDomain.coerce(17)
+    with pytest.raises(FoundationConstitutionError, match="must be a string"):
+        ArticleScope.coerce(None)
+
+
+def test_an_article_missing_a_field_or_carrying_a_raw_string_is_refused():
+    """AN ARTICLE VALIDATES ITSELF AT CONSTRUCTION, and none of its three refusals had run.
+
+    The declared articles are all well formed, so the checks only ever answered about them.
+    Each guards a different way the law could be weakened: an article with a blank mandate or
+    gate is unenforceable prose; one whose domain is a raw string would compare unequal to
+    every declared domain, so ``articles_of_domain`` would silently omit it and the
+    "every domain is governed" test would still pass; and one whose scope is a raw string
+    would be neither capability- nor platform-scoped, so no engine would ever measure it.
+    """
+    sound = {
+        "article_id": "UFC-TEST",
+        "domain": ConstitutionalDomain.GOVERNANCE,
+        "title": "a test article",
+        "mandate": "it must hold",
+        "gate": "FG-TEST",
+    }
+    assert FoundationArticle(**sound).article_id == "UFC-TEST"
+
+    for blank in ("article_id", "title", "mandate", "gate"):
+        with pytest.raises(FoundationConstitutionError, match="is required"):
+            FoundationArticle(**{**sound, blank: "   "})
+
+    with pytest.raises(FoundationConstitutionError, match="must be a ConstitutionalDomain"):
+        FoundationArticle(**{**sound, "domain": "governance"})
+    with pytest.raises(FoundationConstitutionError, match="must be an ArticleScope"):
+        FoundationArticle(**{**sound, "scope": "platform"})
+
+
+def test_an_article_reports_its_scope_and_its_own_fingerprint():
+    """The law is content-addressed article by article, not only as a whole.
+
+    ``platform_scoped`` is how an engine decides whether to measure an article once or per
+    capability, and ``fingerprint`` is what lets a determination cite the exact article it
+    was made against. Both were reachable only through the whole-constitution accessors,
+    which meant a determination could name an article it could not pin.
+    """
+    law = foundation_constitution()
+    platform_article = law.platform_articles()[0]
+    capability_article = law.capability_articles()[0]
+
+    assert platform_article.platform_scoped is True
+    assert capability_article.platform_scoped is False
+
+    assert platform_article.fingerprint() == platform_article.fingerprint()
+    assert platform_article.fingerprint() != capability_article.fingerprint()
+
+
+def test_the_law_is_queryable_by_scope_axis_and_published_contract():
+    """Three declared reader functions, none of which anything called.
+
+    ``articles_of_scope`` is the scope-side twin of ``articles_of_domain`` — the query an
+    engine makes to find the articles it is responsible for. ``maturity_axes`` is the
+    declared order of the axes, which is what stops a report from listing them in whatever
+    order a set happened to iterate. And the Constitution's published contract names are the
+    surface a consumer binds to; a published contract nobody reads back is a claim about an
+    API that has never been checked against the API.
+    """
+    law = foundation_constitution()
+
+    assert set(articles_of_scope(ArticleScope.PLATFORM)) == set(law.platform_articles())
+    assert set(articles_of_scope("capability")) == set(law.capability_articles())
+
+    assert maturity_axes() == tuple(MaturityAxis)
+
+    names = constitution_contract_names()
+    assert names
+    assert [ref.name for ref in CONSTITUTION_CONTRACTS] == list(names)
+
+
+def test_a_constitution_that_leaves_a_domain_ungoverned_or_doubles_a_gate_is_refused():
+    """THE CONSTITUTION VALIDATES ITSELF, and both refusals answered only about the
+    well-formed law the module declares.
+
+    A declared domain no article governs is a domain the law only claims to govern — the
+    exact condition ``test_the_constitution_governs_every_declared_domain`` asserts is absent,
+    now shown to be REFUSED rather than merely absent. Two articles sharing one gate is the
+    other direction: ``article_for_gate`` would answer with whichever came first, so one of
+    the two articles would be unprovable while the gate reported a pass.
+    """
+    law = foundation_constitution()
+
+    with pytest.raises(FoundationConstitutionError, match="no article governs"):
+        FoundationConstitution(articles=law.articles[:1])
+
+    doubled = law.articles[0]
+    twin = FoundationArticle(
+        article_id=f"{doubled.article_id}-TWIN",
+        domain=doubled.domain,
+        title=doubled.title,
+        mandate=doubled.mandate,
+        gate=doubled.gate,
+        scope=doubled.scope,
+    )
+    with pytest.raises(FoundationConstitutionError, match="same gate"):
+        FoundationConstitution(articles=(*law.articles, twin))
