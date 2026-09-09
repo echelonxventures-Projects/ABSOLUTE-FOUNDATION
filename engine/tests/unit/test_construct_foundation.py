@@ -2648,3 +2648,137 @@ def test_a_declared_admission_that_fails_is_reported(declaration, monkeypatch):
     monkeypatch.setattr(extension, "exercise", refuse)
     problems = contract.extension_points_are_exercisable(Probe(declaration=declaration, repo=REPO))
     assert any("the declared admission failed" in p for p in problems), problems
+
+
+# --- UCON-L-07: the fixed-point refusals ------------------------------------------------------
+
+
+def test_discovery_that_does_not_converge_is_refused(declaration, monkeypatch):
+    real = views.discover
+    calls = {"n": 0}
+
+    def never_settles(registry):
+        calls["n"] += 1
+        found = real(registry)
+        # Every pass mints something: the walk never reaches a state it stops adding to.
+        return found if found else [registry.all()[0]]
+
+    monkeypatch.setattr(views, "discover", never_settles)
+    problems = contract.discovery_reaches_a_fixed_point(Probe(declaration=declaration, repo=REPO))
+    assert any("does not converge" in p for p in problems), problems
+
+
+def test_a_second_discovery_pass_that_changes_the_registry_is_refused(declaration, monkeypatch):
+    digests = {"n": 0}
+
+    def drifting_digest(self):
+        digests["n"] += 1
+        return f"digest-{digests['n']}"
+
+    monkeypatch.setattr(ConstructRegistry, "digest", drifting_digest)
+    problems = contract.discovery_reaches_a_fixed_point(Probe(declaration=declaration, repo=REPO))
+    assert any("there is no fixed point" in p for p in problems), problems
+
+
+def test_a_discovery_object_naming_no_subject_is_refused(declaration, monkeypatch):
+    real = views.discover
+    calls = {"n": 0}
+
+    def unlineaged(registry):
+        calls["n"] += 1
+        found = real(registry)
+        if calls["n"] != 1:
+            return found
+        return [
+            dataclasses.replace(
+                item,
+                presentation=dataclasses.replace(
+                    item.presentation,
+                    lineage=dataclasses.replace(item.presentation.lineage, derived_from=()),
+                ),
+            )
+            for item in found
+        ]
+
+    monkeypatch.setattr(views, "discover", unlineaged)
+    problems = contract.discovery_reaches_a_fixed_point(Probe(declaration=declaration, repo=REPO))
+    assert any("naming no subject" in p for p in problems), problems
+
+
+# --- UCON-L-08: the future-kind refusals ------------------------------------------------------
+
+
+def test_a_registered_kind_not_reported_as_registered_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(
+        type(ConstructRegistry(declaration)), "registered_kinds", property(lambda self: ())
+    )
+    problems = contract.future_kinds_need_no_redesign(Probe(declaration=declaration, repo=REPO))
+    assert any("is not reported as a registered kind" in p for p in problems), problems
+
+
+def test_an_instance_not_reporting_its_kind_as_registered_is_refused(declaration, monkeypatch):
+    real = ConstructRegistry.present
+
+    def unregistered(self, presentation):
+        return dataclasses.replace(real(self, presentation), kind_registered=False)
+
+    monkeypatch.setattr(ConstructRegistry, "present", unregistered)
+    problems = contract.future_kinds_need_no_redesign(Probe(declaration=declaration, repo=REPO))
+    assert any("does not report its kind as registered" in p for p in problems), problems
+
+
+# --- UCON-L-12: the verifier refusals ---------------------------------------------------------
+
+
+def test_a_verifier_carrying_no_assumptions_is_refused(declaration, monkeypatch):
+    real = extension.register_verifier
+
+    def stripped(registry, **kwargs):
+        registered = real(registry, **kwargs)
+        payload = {**registered.presentation.payload, "assumptions": ()}
+        return dataclasses.replace(
+            registered,
+            presentation=dataclasses.replace(registered.presentation, payload=payload),
+        )
+
+    monkeypatch.setattr(extension, "register_verifier", stripped)
+    problems = contract.verification_is_itself_verifiable(Probe(declaration=declaration, repo=REPO))
+    assert any("verifier carries no assumptions" in p for p in problems), problems
+
+
+def test_a_verifier_that_cannot_name_what_it_verifies_is_refused(declaration, monkeypatch):
+    # Verification has to be recursive: a verifier that cannot name the verifier it verifies
+    # makes the chain unexpressible, and nothing can check the checkers.
+    real = extension.register_verifier
+
+    def lineageless(registry, **kwargs):
+        registered = real(registry, **kwargs)
+        lineage = dataclasses.replace(registered.presentation.lineage, derived_from=())
+        return dataclasses.replace(
+            registered,
+            presentation=dataclasses.replace(registered.presentation, lineage=lineage),
+        )
+
+    monkeypatch.setattr(extension, "register_verifier", lineageless)
+    problems = contract.verification_is_itself_verifiable(Probe(declaration=declaration, repo=REPO))
+    assert any("lineage is not expressible" in p for p in problems), problems
+
+
+def test_a_verifier_declaring_no_assumptions_must_be_refused(declaration, monkeypatch):
+    # The law asserts a REFUSAL: a verifier with no assumptions or no limitations claims to
+    # have measured something under no conditions and with no bounds. The violation is a
+    # register_verifier that accepts one.
+    real = extension.register_verifier
+
+    def permissive(registry, **kwargs):
+        if not kwargs.get("assumptions") or not any(
+            str(item).strip() for item in kwargs.get("assumptions", ())
+        ):
+            kwargs["assumptions"] = ("filled in by a permissive registrar",)
+        if not kwargs.get("limitations"):
+            kwargs["limitations"] = ("filled in by a permissive registrar",)
+        return real(registry, **kwargs)
+
+    monkeypatch.setattr(extension, "register_verifier", permissive)
+    problems = contract.verification_is_itself_verifiable(Probe(declaration=declaration, repo=REPO))
+    assert any("was admitted" in p for p in problems), problems
