@@ -9,11 +9,22 @@ being quietly executable-but-not-certifiable.
 from __future__ import annotations
 
 import dataclasses
-import importlib
 
 import pytest
 
-from engine.constitution import law, metadata
+from engine.constitution import (
+    acceptance,
+    assimilation,
+    authority,
+    evolution,
+    gateway,
+    law,
+    legality,
+    metadata,
+    planner,
+    replay,
+    state,
+)
 from engine.constitution.errors import ConstitutionalError, MetadataIncomplete
 from engine.tests.constitution.conftest import declare, population
 
@@ -123,21 +134,32 @@ def test_declarations_normalize_deterministically() -> None:
 # with no failure anywhere — the exact shape of an unmeasured claim.
 
 
+#: The nine engines that publish one, named as MODULE OBJECTS rather than as strings.
+#
+# A string list would have to be resolved with `importlib.import_module`, whose argument
+# is then computed — and Ω-3 counts a dynamic import with a computed argument as an
+# UNRESOLVED site, because no edge can be measured through it. Four such calls raised
+# `unresolved_dynamic_sites` from 22 to 26 and the Ω-4 ratchet refused the run. Naming the
+# modules is the same test with a resolvable import graph.
 CONSTITUTIONAL_DOCUMENTS = (
-    "acceptance",
-    "assimilation",
-    "authority",
-    "evolution",
-    "gateway",
-    "legality",
-    "planner",
-    "replay",
-    "state",
+    acceptance,
+    assimilation,
+    authority,
+    evolution,
+    gateway,
+    legality,
+    planner,
+    replay,
+    state,
 )
 
 
-@pytest.mark.parametrize("module_name", CONSTITUTIONAL_DOCUMENTS)
-def test_every_engine_publishes_a_deterministic_self_description(module_name: str) -> None:
+@pytest.mark.parametrize(
+    "module",
+    CONSTITUTIONAL_DOCUMENTS,
+    ids=[m.__name__.rsplit(".", 1)[-1] for m in CONSTITUTIONAL_DOCUMENTS],
+)
+def test_every_engine_publishes_a_deterministic_self_description(module) -> None:
     """Each document names its own schema and its own engine, and hashes to one value.
 
     DETERMINISM IS THE PART THAT MATTERS. These digests are what an external gate compares
@@ -146,9 +168,6 @@ def test_every_engine_publishes_a_deterministic_self_description(module_name: st
     fixed. Two calls in one process is the cheapest witness that the bytes are a function of
     the declaration and of nothing else.
     """
-
-    module = importlib.import_module(f"engine.constitution.{module_name}")
-
     document = module.to_document()
     assert document["schema"].startswith("ucos-constitutional-")
     assert document["version"]
@@ -166,17 +185,10 @@ def test_no_two_engines_claim_the_same_schema_or_the_same_digest() -> None:
     which would let one be swapped for the other under a comparison that still passed.
     """
 
-    documents = {
-        name: importlib.import_module(f"engine.constitution.{name}").to_document()
-        for name in CONSTITUTIONAL_DOCUMENTS
-    }
-    schemas = [d["schema"] for d in documents.values()]
+    schemas = [module.to_document()["schema"] for module in CONSTITUTIONAL_DOCUMENTS]
     assert len(set(schemas)) == len(schemas), sorted(schemas)
 
-    digests = [
-        importlib.import_module(f"engine.constitution.{name}").digest()
-        for name in CONSTITUTIONAL_DOCUMENTS
-    ]
+    digests = [module.digest() for module in CONSTITUTIONAL_DOCUMENTS]
     assert len(set(digests)) == len(digests)
 
 
@@ -195,11 +207,11 @@ def test_every_engine_declares_its_set_open_to_registration() -> None:
     """
 
     declaring = 0
-    for name in CONSTITUTIONAL_DOCUMENTS:
-        document = importlib.import_module(f"engine.constitution.{name}").to_document()
+    for module in CONSTITUTIONAL_DOCUMENTS:
+        document = module.to_document()
         if "closed_set" in document:
             declaring += 1
-            assert document["closed_set"] is False, name
+            assert document["closed_set"] is False, module.__name__
     assert declaring >= len(CONSTITUTIONAL_DOCUMENTS) - 1
 
 
