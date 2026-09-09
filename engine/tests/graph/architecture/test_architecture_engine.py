@@ -187,3 +187,14 @@ def test_register_contract(kg):
     engine.register_contract(registry)
     registered = registry.get(ARCHITECTURE_INTELLIGENCE_CONTRACT.name)
     assert registered is not None
+
+
+def test_the_engine_opens_over_the_default_corpus():
+    """``open`` is the constructor every operational caller uses — the CLI, the evidence
+    builder, anything that has a data directory rather than an adapter. Every test above
+    constructs the engine from a prepared ``kg`` fixture instead, which left the one entry
+    point a real invocation takes with no caller at all."""
+    engine = ArchitectureIntelligenceEngine.open()
+
+    assert engine.core.order() > 0
+    assert engine.dependency is not None

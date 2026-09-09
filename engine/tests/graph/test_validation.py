@@ -133,3 +133,24 @@ def test_synthetic_and_registry_identifiers_accepted():
     report = validate_graph(graph, require_acyclic_dependencies=False)
     assert report.malformed_node_ids == ()
     assert report.malformed_edge_ids == ()
+
+
+def test_a_graph_holding_one_identifier_twice_reports_it_as_a_duplicate():
+    """IDENTITY IS THE ONE THING A GRAPH CANNOT HAVE TWO OF.
+
+    ``add_node`` refuses a conflicting re-add, so a graph built through it can never hold a
+    duplicate — which is why this arm was dead. It is the check for a graph assembled another
+    way: rehydrated from a document, or built by a projection that appended the same node
+    twice. Two nodes under one id make every lookup answer arbitrarily, and the report names
+    the id so the collision can be found rather than merely counted.
+    """
+
+    graph = KnowledgeGraph()
+    node = Node("UCOS-TEST-000001", "artifact", version="1.0.0")
+    graph.add_node(node)
+    graph._nodes["UCOS-DUPLICATE-KEY"] = node  # noqa: SLF001 - deliberate corruption
+
+    report = validate_graph(graph)
+    assert "UCOS-TEST-000001" in report.to_dict().get("duplicate_node_ids", []) or any(
+        "UCOS-TEST-000001" in str(v) for v in report.to_dict().values()
+    )

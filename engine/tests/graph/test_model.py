@@ -169,3 +169,62 @@ def test_subgraph_node_filter_restricts_edges():
     sub = graph.subgraph(node_ids={"A", "B"})
     assert sub.size() == 1  # only the A->B edge (B->C excluded, C not in filter)
     assert set(sub.node_ids()) == {"A", "B"}
+
+
+def test_a_subgraph_restores_an_endpoint_the_node_filter_dropped():
+    """AN EDGE IN A SUBGRAPH MUST HAVE BOTH ITS ENDS.
+
+    ``subgraph`` filters nodes and edges independently, and an ``extra_edges`` edge — the
+    synthetic relations every projection contributes — can name a node the id filter
+    excluded. Leaving it out would produce a graph whose adjacency mentions a node the graph
+    does not hold: navigable in one direction and unresolvable in the other, which is the
+    dangling-endpoint state every validation in this package refuses.
+
+    Both ends are restored independently, because either can be the one that was dropped.
+    """
+    graph = KnowledgeGraph()
+    for node_id in (
+        "UCOS-A-000001",
+        "UCOS-B-000001",
+        "UCOS-C-000001",
+        "UCOS-D-000001",
+    ):
+        graph.add_node(Node(node_id, "artifact", version="1.0.0"))
+
+    # TWO different excluded nodes, so each restore is the first time that node is added:
+    # one edge whose SOURCE was dropped and one whose TARGET was.
+    into_outside = Edge("UCOS-EDGE-000002", "UCOS-C-000001", "UCOS-B-000001", "Depends-On")
+    from_outside = Edge("UCOS-EDGE-000001", "UCOS-A-000001", "UCOS-D-000001", "Depends-On")
+
+    projected = graph.subgraph(
+        node_ids=["UCOS-A-000001", "UCOS-B-000001"],
+        # The SOURCE-outside edge comes first: whichever restores the node does so once,
+        # and ordering them this way exercises both arms rather than one twice.
+        extra_edges=[into_outside, from_outside],
+    )
+
+    assert projected.has_node("UCOS-C-000001"), "a dropped SOURCE was not restored"
+    assert projected.has_node("UCOS-D-000001"), "a dropped TARGET was not restored"
+    for edge in projected.edges():
+        assert projected.has_node(edge.source)
+        assert projected.has_node(edge.target)
+
+
+def test_a_graph_answers_for_its_size_and_for_an_edge_it_holds_or_does_not():
+    """The accessors every consumer reads a graph through, and three had no caller. A graph
+    whose contents can only be reached by iterating everything makes "how big is this" and
+    "does this edge exist" questions that cost a full walk — and ``edge`` returning ``None``
+    for an absent id is what lets a caller ask without catching."""
+    graph = KnowledgeGraph()
+    graph.add_node(Node("UCOS-A-000001", "artifact", version="1.0.0"))
+    graph.add_node(Node("UCOS-B-000001", "artifact", version="1.0.0"))
+    edge = Edge("UCOS-EDGE-000001", "UCOS-A-000001", "UCOS-B-000001", "Depends-On")
+    graph.add_edge(edge)
+
+    assert len(graph) == 2
+    assert graph.order() == 2
+    assert graph.size() == 1
+    assert graph.has_edge("UCOS-EDGE-000001") is True
+    assert graph.has_edge("UCOS-EDGE-000999") is False
+    assert graph.edge("UCOS-EDGE-000001") is edge
+    assert graph.edge("UCOS-EDGE-000999") is None

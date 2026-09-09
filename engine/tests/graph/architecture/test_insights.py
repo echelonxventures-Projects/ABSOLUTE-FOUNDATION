@@ -7,7 +7,11 @@ and circular dependencies.
 
 from __future__ import annotations
 
+from engine.graph.architecture.blast_radius import BlastRadiusEngine
+from engine.graph.architecture.critical_path import CriticalPathEngine
+from engine.graph.architecture.dependency_intelligence import DependencyIntelligence
 from engine.graph.architecture.insights import INSIGHTS_VERSION, build_insights_report
+from engine.graph.architecture.layers import LayerDependencyGraph
 from engine.graph.model import KIND_ARTIFACT, Edge, KnowledgeGraph, Node
 
 
@@ -55,11 +59,6 @@ def test_report_with_real_corpus(core):
 
 
 def test_with_prebuilt_engines(core):
-    from engine.graph.architecture.blast_radius import BlastRadiusEngine
-    from engine.graph.architecture.critical_path import CriticalPathEngine
-    from engine.graph.architecture.dependency_intelligence import DependencyIntelligence
-    from engine.graph.architecture.layers import LayerDependencyGraph
-
     dependency = DependencyIntelligence(core)
     layers = LayerDependencyGraph(core)
     critical = CriticalPathEngine(core)
@@ -125,3 +124,28 @@ def test_blast_radius_section_present():
     br = report["blast_radius"]
     assert "impactable_nodes" in br
     assert "top" in br
+
+
+def test_findings_layer_cycle():
+    """A CYCLE BETWEEN LAYERS IS NOT THE SAME FINDING AS A CYCLE BETWEEN ARTIFACTS.
+
+    ``layer_inversion`` says one layer depends upward on another; ``circular_dependency``
+    says two artifacts depend on each other. ``layer_cycle`` is the third thing: two LAYERS
+    that each depend on the other, which no single inversion describes and no artifact cycle
+    implies. Its loop had never run, because the fixtures produce inversions and artifact
+    cycles but never a mutual layer dependency.
+    """
+    nodes = [
+        _artifact("CON-1", "CON"),
+        _artifact("IMP-1", "IMP"),
+    ]
+    edges = [
+        _depends("E1", "CON-1", "IMP-1"),
+        _depends("E2", "IMP-1", "CON-1"),
+    ]
+    report = build_insights_report(KnowledgeGraph(nodes, edges))
+    kinds = [f["kind"] for f in report["findings"]]
+
+    assert "layer_cycle" in kinds
+    detail = next(f["detail"] for f in report["findings"] if f["kind"] == "layer_cycle")
+    assert isinstance(detail, list) and detail

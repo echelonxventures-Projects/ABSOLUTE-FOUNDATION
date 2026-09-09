@@ -11,6 +11,7 @@ from engine.graph.architecture.dependency_intelligence import (
     CapabilityDependencyGraph,
     CircularDependencyReport,
     DependencyIntelligence,
+    _closure,
     detect_circular_dependencies,
 )
 from engine.graph.model import KIND_ARTIFACT, Edge, KnowledgeGraph, Node
@@ -224,3 +225,25 @@ def test_dep_intel_summary(core):
     assert "capability" in s
     assert "circular" in s
     assert "top_hubs" in s
+
+
+def test_the_transitive_closure_visits_a_diamond_once_and_never_returns_to_its_origin():
+    """TWO GUARDS, TWO DIFFERENT NON-TERMINATIONS, and an acyclic tree trips neither.
+
+    ``current in seen`` stops a DIAMOND from being expanded once per route into it — the
+    answer is the same either way, which is exactly why the guard is invisible until a graph
+    offers a second path. ``current == start`` stops a CYCLE from putting the origin into its
+    own closure, which would make every capability in a cycle report itself as one of its own
+    transitive dependencies.
+    """
+
+    adjacency = {
+        "A": ("B", "C"),
+        "B": ("D",),
+        "C": ("D",),
+        "D": ("A",),
+    }
+    reached = _closure(adjacency, "A")
+
+    assert reached == ("B", "C", "D")
+    assert "A" not in reached

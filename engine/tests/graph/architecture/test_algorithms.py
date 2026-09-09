@@ -336,3 +336,30 @@ def test_reconstruct_path_guards_against_repetition():
 
 def test_reconstruct_path_from_an_unknown_start_yields_just_that_node():
     assert reconstruct_path({}, "ghost") == ("ghost",)
+
+
+def test_condensation_ignores_an_adjacency_source_no_component_holds(monkeypatch) -> None:
+    """THE CONDENSATION IS OVER THE COMPONENTS IT COMPUTED, not over every key the adjacency
+    carries — and today those are the same set, which is why the guard has never fired.
+
+    ``strongly_connected_components`` is computed from the same adjacency, so every source
+    has a component. The guard is what stands between that invariant and a ``KeyError``
+    inside a function whose whole job is to summarise a graph: the day the component set is
+    computed some other way — restricted to one layer, or supplied by a caller — a source
+    outside it is skipped rather than crashing the summary.
+    """
+
+    adjacency = {"a": ("b",), "b": ()}
+    dag, member_of, members = condensation(adjacency)
+    assert set(members) == {"SCC::a", "SCC::b"}
+    assert dag["SCC::a"] == ("SCC::b",)
+
+    monkeypatch.setattr(
+        f"{condensation.__module__}.strongly_connected_components",
+        lambda _adjacency: (("b",),),
+    )
+    narrowed_dag, narrowed_member_of, narrowed_members = condensation(adjacency)
+
+    assert set(narrowed_members) == {"SCC::b"}
+    assert "a" not in narrowed_member_of
+    assert narrowed_dag == {"SCC::b": set()} or narrowed_dag == {"SCC::b": ()}

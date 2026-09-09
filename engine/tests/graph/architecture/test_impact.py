@@ -191,3 +191,55 @@ def test_accepts_prebuilt_impact_and_layers(core):
     engine = ArchitectureImpactEngine(core, impact=impact, layers=layers)
     pred = engine.predict(["UCOS-CON-000001"])
     assert isinstance(pred, ImpactPrediction)
+
+
+def test_a_prediction_over_a_diamond_measures_each_node_once():
+    """THE DISTANCE MAP IS WHAT MAKES THE TRAVERSAL TERMINATE AND THE DEPTH HONEST.
+
+    A node reachable by two routes must keep the FIRST distance it was assigned — the
+    breadth-first one, which is the shortest — and must not be re-queued. Without the guard
+    the depth would be whichever route happened to arrive last and the work would compound
+    at every level; on a cycle the walk would not terminate at all.
+    """
+    nodes = [_artifact(n) for n in ("A", "B", "C", "D")]
+    edges = [
+        _depends("E1", "B", "A"),
+        _depends("E2", "C", "A"),
+        _depends("E3", "D", "B"),
+        _depends("E4", "D", "C"),
+    ]
+    graph = KnowledgeGraph(nodes, edges)
+    prediction = ArchitectureImpactEngine(graph).predict(["A"])
+    assert set(prediction.impacted) == {"B", "C", "D"}
+    assert len(prediction.impacted) == len(set(prediction.impacted))
+
+
+def test_an_impacted_node_the_layer_model_cannot_place_contributes_no_layer(monkeypatch):
+    """A LAYER IS READ FROM THE ARTIFACT, and the guard is for a node that answers with none.
+
+    ``layer_of`` never does today — a node with no category is placed in ``unclassified``,
+    which is a real layer and the correct answer — so the skip has never fired. It is what
+    stands between a future layer model that returns "" and a prediction reporting an extra
+    "layer" affected: an empty string in the layer set, counted alongside real layers and
+    growing with the graph's untidiness rather than with the blast radius.
+
+    The node stays impacted either way; it simply contributes no layer.
+    """
+
+    placed = _artifact("CON-1", category="CON")
+    unplaceable = _artifact("UNK-1")
+    graph = KnowledgeGraph([placed, unplaceable], [_depends("E1", "UNK-1", "CON-1")])
+
+    assert LayerDependencyGraph(graph).layer_of("UNK-1") == "unclassified"
+    placed_layers = ArchitectureImpactEngine(graph).predict(["CON-1"]).layers
+    assert placed_layers == ("unclassified",)
+
+    monkeypatch.setattr(
+        LayerDependencyGraph,
+        "layer_of",
+        lambda self, node_id: "" if node_id == "UNK-1" else "constitution",
+    )
+    prediction = ArchitectureImpactEngine(graph).predict(["CON-1"])
+
+    assert "UNK-1" in prediction.impacted
+    assert prediction.layers == (), "an unplaceable node contributed a layer anyway"

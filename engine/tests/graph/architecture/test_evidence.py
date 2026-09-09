@@ -16,6 +16,7 @@ from engine.graph.architecture.engine import ArchitectureIntelligenceEngine
 from engine.graph.architecture.errors import InsightsWriteError
 from engine.graph.architecture.evidence import (
     EVIDENCE_VERSION,
+    _assert_writable,
     build_evidence,
     write_evidence,
 )
@@ -107,3 +108,46 @@ def test_write_evidence_outside_repo_is_allowed(tmp_path, kg):
     target = tmp_path / "external" / "evidence.json"
     result = write_evidence(doc, target)
     assert result.exists()
+
+
+def test_the_subject_section_is_omitted_when_nothing_has_a_blast_radius(kg, monkeypatch):
+    """A SUBJECT IS THE ARTIFACT WITH THE LARGEST BLAST RADIUS, and a corpus where nothing
+    reaches anything has none. Emitting the four analysis fields anyway would report a
+    prediction, a reachability summary and a radius for the empty string — measurements about
+    a node that does not exist — so they are omitted and ``subject`` is empty.
+    """
+
+    engine = ArchitectureIntelligenceEngine(kg)
+    real_blast = engine.blast_radius
+
+    class _NoTop:
+        @staticmethod
+        def top(limit: int = 1):
+            return ()
+
+        def __getattr__(self, name: str):
+            return getattr(real_blast, name)
+
+    class _Engine:
+        blast_radius = _NoTop()
+
+        def __getattr__(self, name: str):
+            return getattr(engine, name)
+
+    document = build_evidence(_Engine())
+
+    assert document["exemplars"]["subject"] == ""
+    assert "blast_radius" not in document["exemplars"]
+    assert "critical_path_length" in document["exemplars"]
+
+
+def test_writing_architecture_insights_inside_the_repository_is_allowed():
+    """The permitted half of the frozen-corpus guard. Every other test writes under
+    ``tmp_path``, which takes the "outside the repository" early return, so the in-repository
+    case a real run takes had never been exercised."""
+
+    repo_root = Path(__file__).resolve().parents[4]
+    _assert_writable(repo_root / ".runtime" / "architecture" / "insights.json")
+
+    with pytest.raises(InsightsWriteError, match="frozen corpus"):
+        _assert_writable(repo_root / "00-BOOK" / "insights.json")

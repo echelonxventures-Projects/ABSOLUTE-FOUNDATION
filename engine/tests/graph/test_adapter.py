@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from engine.foundation.contracts.contract import ContractRegistry, Version
-from engine.graph.adapter import KNOWLEDGE_GRAPH_CONTRACT
+from engine.graph.adapter import KNOWLEDGE_GRAPH_CONTRACT, emitted_kinds
 from engine.graph.projections import (
     PROJECTION_NAMES,
     CapabilityGraph,
@@ -79,3 +79,24 @@ def test_build_all(kg):
 def test_registry_property(kg):
     assert kg.registry is not None
     assert kg.registry.artifacts.count() == 7
+
+
+def test_the_surface_reports_the_relationship_kinds_it_actually_emits():
+    """CAA-INV-05 REQUIRES EVERY EMITTED KIND TO RESOLVE INTO ONE RELATIONSHIP MODEL, and
+    this function is what the register consults to find out which kinds those are.
+
+    It is declared as this surface's ``reporter`` and it is CALLED rather than trusted: a
+    declared list would answer for the code it was written beside rather than the code that
+    runs, which is the enumerated-governance failure the repository has already paid for
+    elsewhere. Building the ten projections is the only way to know what they emit — and
+    that also means the function had no caller in the suite, so the register's reporter was
+    itself unmeasured.
+    """
+
+    kinds = emitted_kinds()
+
+    assert kinds
+    assert kinds == tuple(sorted(kinds))
+    assert len(set(kinds)) == len(kinds)
+    assert all(isinstance(kind, str) and kind for kind in kinds)
+    assert emitted_kinds() == kinds, "the reported kinds are not stable"

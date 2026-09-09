@@ -75,3 +75,57 @@ def test_connected_component():
 def test_self_loop_cycle():
     g = KnowledgeGraph(nodes=[Node("A", "Artifact")], edges=[Edge("E", "A", "A", "Depends-On")])
     assert queries.find_cycle(g, types=["Depends-On"]) == ("A", "A")
+
+
+def test_a_shortest_path_search_does_not_re_enter_a_node_it_has_already_reached():
+    """THE VISITED SET IS WHAT MAKES A BREADTH-FIRST SEARCH TERMINATE.
+
+    A diamond — two routes into one node — re-queues that node once per route without the
+    guard, and every subsequent level compounds it. On a cycle it never terminates at all.
+    The answer is unchanged either way, which is exactly why the guard is invisible until a
+    graph gives the search a second way in.
+    """
+    graph = KnowledgeGraph()
+    for node_id in ("UCOS-A-000001", "UCOS-B-000001", "UCOS-C-000001", "UCOS-D-000001"):
+        graph.add_node(Node(node_id, "artifact", version="1.0.0"))
+    for index, (src, dst) in enumerate(
+        (
+            ("UCOS-A-000001", "UCOS-B-000001"),
+            ("UCOS-A-000001", "UCOS-C-000001"),
+            ("UCOS-B-000001", "UCOS-D-000001"),
+            ("UCOS-C-000001", "UCOS-D-000001"),
+            ("UCOS-D-000001", "UCOS-A-000001"),
+        ),
+        start=1,
+    ):
+        graph.add_edge(Edge(f"UCOS-EDGE-{index:06d}", src, dst, "Depends-On"))
+
+    # A goal REACHED THROUGH THE SECOND ROUTE: the search must find D once, not twice.
+    path = queries.shortest_path(graph, "UCOS-B-000001", "UCOS-C-000001")
+    assert path[0] == "UCOS-B-000001" and path[-1] == "UCOS-C-000001"
+    assert len(path) == len(set(path))
+
+    path = queries.shortest_path(graph, "UCOS-A-000001", "UCOS-D-000001")
+    assert path[0] == "UCOS-A-000001"
+    assert path[-1] == "UCOS-D-000001"
+    assert len(path) == len(set(path)), "the search walked a node twice"
+    assert len(path) == 3
+
+
+def test_a_topological_order_ignores_an_edge_whose_endpoint_is_outside_the_subgraph():
+    """ORDERING IS OVER THE NODES IT WAS GIVEN, NOT OVER EVERY EDGE THE GRAPH HOLDS.
+
+    An edge can legitimately point outside the node set being ordered — a projection, or an
+    ordering restricted to one kind. Counting its in-degree would credit a node that is not
+    being ordered, and the ready set would then never include the node that depends on it:
+    the order would silently come back short.
+    """
+    graph = KnowledgeGraph()
+    for node_id in ("UCOS-A-000001", "UCOS-B-000001"):
+        graph.add_node(Node(node_id, "artifact", version="1.0.0"))
+    graph.add_edge(Edge("UCOS-EDGE-000001", "UCOS-A-000001", "UCOS-B-000001", "Depends-On"))
+    graph.add_edge(Edge("UCOS-EDGE-000002", "UCOS-OUTSIDE-000001", "UCOS-B-000001", "Depends-On"))
+
+    order = queries.topological_order(graph)
+    assert set(order) == {"UCOS-A-000001", "UCOS-B-000001"}
+    assert order.index("UCOS-A-000001") < order.index("UCOS-B-000001")
