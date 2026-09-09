@@ -13,10 +13,12 @@ name gets switched off rather than fixed, so the segment-matching behaviour is p
 
 from __future__ import annotations
 
+import dataclasses
 import json
 
 import pytest
 
+import engine.object_birth.model as model
 from engine.object_birth import (
     BIRTH_CONTRACT,
     LAW_CHECKS,
@@ -37,11 +39,15 @@ from engine.object_birth import (
     local_name_of,
     namespace_of,
     records,
+    save,
     supersede,
 )
 from engine.object_birth.contract import load_declaration
+from engine.object_birth.contract import load_declaration as loader
 from engine.object_birth.gate import EXIT_CLOSED, EXIT_FAULT, EXIT_OPEN, main, measure
 from engine.object_birth.ledger import FORBIDDEN_MINT_MARKER, LEDGER_SCHEMA
+from engine.object_birth.model import BirthContract
+from engine.object_birth.scope import load_policy
 from engine.temporal import TemporalCoordinate
 
 STAMP = TemporalCoordinate.logical(
@@ -112,15 +118,12 @@ def test_declaration_delegates_to_the_supreme_identity_plane(contract) -> None:
 def test_unsound_contract_is_refused() -> None:
     doc = load_declaration()
     doc["stages"][0]["identity_exists"] = True  # identity before intent discovery
-    from engine.object_birth.model import BirthContract
 
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
     assert any("first stage already holds identity" in p for p in problems)
 
 
 def test_declaration_missing_a_key_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     with pytest.raises(BirthError, match="unusable"):
         BirthContract.from_declaration({"artifact_id": "X"})
 
@@ -397,7 +400,6 @@ def test_gate_measures_every_law_both_instruments_declare() -> None:
     would have to be edited every time either instrument gained a law, and an expectation
     that must be edited to stay true is an expectation that stops being checked.
     """
-    from engine.object_birth.scope import load_policy
 
     report = measure()
     expected = len(load_contract().laws) + len(load_policy().laws)
@@ -460,16 +462,12 @@ def test_gate_closes_on_a_violating_ledger(tmp_path, capsys) -> None:
     ],
 )
 def test_declaration_entries_fail_closed(cls_name: str, payload: dict) -> None:
-    import engine.object_birth.model as model
-
     cls = getattr(model, cls_name)
     with pytest.raises(BirthError, match="unusable"):
         cls.from_declaration(payload)
 
 
 def test_contract_without_stages_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["stages"] = []
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -477,8 +475,6 @@ def test_contract_without_stages_is_refused() -> None:
 
 
 def test_contract_with_unordered_stages_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["stages"] = list(reversed(doc["stages"]))
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -486,8 +482,6 @@ def test_contract_with_unordered_stages_is_refused() -> None:
 
 
 def test_contract_with_duplicate_ordinals_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["stages"][1]["ordinal"] = doc["stages"][0]["ordinal"]
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -495,8 +489,6 @@ def test_contract_with_duplicate_ordinals_is_refused() -> None:
 
 
 def test_contract_whose_final_stage_lacks_identity_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["stages"][-1]["identity_exists"] = False
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -504,8 +496,6 @@ def test_contract_whose_final_stage_lacks_identity_is_refused() -> None:
 
 
 def test_contract_with_extra_flips_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["stages"][5]["identity_exists"] = False  # True, True, False, True
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -513,8 +503,6 @@ def test_contract_with_extra_flips_is_refused() -> None:
 
 
 def test_contract_with_mismatched_fields_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["mandatory_fields"] = doc["mandatory_fields"][:-1]
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -522,8 +510,6 @@ def test_contract_with_mismatched_fields_is_refused() -> None:
 
 
 def test_contract_with_no_laws_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["laws"] = []
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -531,8 +517,6 @@ def test_contract_with_no_laws_is_refused() -> None:
 
 
 def test_contract_naming_an_unimplemented_check_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["laws"][0]["check"] = "no_such_check"
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -540,8 +524,6 @@ def test_contract_naming_an_unimplemented_check_is_refused() -> None:
 
 
 def test_contract_claiming_a_counter_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["identity_plane"]["counter_consumed"] = True
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -549,8 +531,6 @@ def test_contract_claiming_a_counter_is_refused() -> None:
 
 
 def test_contract_with_no_initial_states_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["initial_states"] = []
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -558,8 +538,6 @@ def test_contract_with_no_initial_states_is_refused() -> None:
 
 
 def test_contract_with_an_unrecorded_identity_input_is_refused() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["identity_inputs"] = ["namespace", "not_a_field"]
     problems = BirthContract.from_declaration(doc).validate(frozenset(LAW_CHECKS))
@@ -567,8 +545,6 @@ def test_contract_with_an_unrecorded_identity_input_is_refused() -> None:
 
 
 def test_contract_with_no_identity_stage_raises() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     for stage in doc["stages"]:
         stage["identity_exists"] = False
@@ -578,8 +554,6 @@ def test_contract_with_no_identity_stage_raises() -> None:
 
 
 def test_unreadable_declaration_is_refused(tmp_path) -> None:
-    from engine.object_birth.contract import load_declaration as loader
-
     path = tmp_path / "broken.json"
     path.write_text("{oops")
     with pytest.raises(BirthError, match="unreadable"):
@@ -587,8 +561,6 @@ def test_unreadable_declaration_is_refused(tmp_path) -> None:
 
 
 def test_non_mapping_declaration_is_refused(tmp_path) -> None:
-    from engine.object_birth.contract import load_declaration as loader
-
     path = tmp_path / "list.json"
     path.write_text("[]")
     with pytest.raises(BirthError, match="not a mapping"):
@@ -608,8 +580,6 @@ def test_load_contract_refuses_an_unsound_declaration(tmp_path) -> None:
 
 
 def test_identity_precedes_existence_without_an_instantiation_stage(contract) -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     for stage in doc["stages"]:
         if stage["produces"] == "artifact":
@@ -620,8 +590,6 @@ def test_identity_precedes_existence_without_an_instantiation_stage(contract) ->
 
 
 def test_identity_precedes_existence_flags_early_instantiation() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["stages"][0]["produces"] = "artifact"  # ordinal 10, before identity at 40
     altered = BirthContract.from_declaration(doc)
@@ -631,8 +599,6 @@ def test_identity_precedes_existence_flags_early_instantiation() -> None:
 
 
 def test_no_post_creation_registration_without_a_registration_stage() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     for stage in doc["stages"]:
         if stage["produces"] == "registry_entry":
@@ -643,8 +609,6 @@ def test_no_post_creation_registration_without_a_registration_stage() -> None:
 
 
 def test_no_post_creation_registration_flags_early_registration() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["stages"][0]["produces"] = "registry_entry"
     altered = BirthContract.from_declaration(doc)
@@ -653,8 +617,6 @@ def test_no_post_creation_registration_flags_early_registration() -> None:
 
 
 def test_rival_counter_check_flags_a_wrong_identity_home() -> None:
-    from engine.object_birth.model import BirthContract
-
     doc = load_declaration()
     doc["identity_plane"]["home"] = "engine/somewhere_else.py"
     altered = BirthContract.from_declaration(doc)
@@ -767,8 +729,6 @@ def test_record_with_non_mapping_context_is_refused() -> None:
 
 
 def test_save_and_reload_round_trips(tmp_path, contract) -> None:
-    from engine.object_birth import save
-
     path = tmp_path / "nested" / "ledger.json"
     ledger = append(empty_ledger(), _birth(contract))
     save(str(path), ledger)
@@ -777,3 +737,135 @@ def test_save_and_reload_round_trips(tmp_path, contract) -> None:
 
 def test_expected_urn_matches_derived_identity() -> None:
     assert expected_urn("ucos.cmg", "Z") == derive_identity("ucos.cmg", "Z")
+
+
+# ------------------------------------------------- the laws' remaining refusals
+#
+# Each law below is measured over the committed ledger, which satisfies all eight. The arms
+# reached here are the ones that answer for a ledger or a declaration that does not.
+
+
+def test_local_name_of_refuses_a_urn_that_is_not_a_ucko_identity() -> None:
+    """BOTH ACCESSORS REFUSE, AND ONLY ONE HAD BEEN SHOWN TO.
+
+    ``check_identity_immutable`` calls ``namespace_of`` first, so a malformed identity is
+    always refused there and ``local_name_of``'s own guard never ran — while it is called
+    directly by ``check_no_temporary_identity`` and by the scope resolver, where nothing has
+    validated the urn beforehand. Returning ``parts[4]`` from a string of the wrong shape
+    would hand back an arbitrary substring, or raise IndexError, in place of a local name.
+    """
+    assert local_name_of("urn:ucos:ucko:ucos.determination:TEST-OBJECT") == "TEST-OBJECT"
+
+    for malformed in ("not-a-urn", "urn:ucos:ucko:only-four", "urn:ucos:other:ns:LOCAL"):
+        with pytest.raises(BirthError, match="not a UCKO universal identity"):
+            local_name_of(malformed)
+
+
+def test_a_contract_claiming_to_consume_a_counter_is_a_rival_mint(contract) -> None:
+    """UOBC-L-02 REFUSES A SECOND MINT, and its first violation had no case.
+
+    ``from_declaration`` already refuses a declaration claiming a counter, so a contract
+    holding that flag cannot be loaded — which is exactly why the law's own check for it had
+    never run. The law is what measures a contract handed to it any other way, and the
+    distinction it protects is the whole point of the birth plane: birth RECORDS an identity
+    that ``engine/uckp/identity.py`` derived, and a plane that advanced a counter of its own
+    would be a second source of identity for the same objects.
+    """
+    rival = dataclasses.replace(contract, counter_consumed=True)
+
+    violations = LAW_CHECKS["no_rival_counter"](rival, empty_ledger(), ())
+
+    assert any("claims to consume a counter" in v for v in violations)
+
+
+def test_an_identity_that_does_not_re_derive_from_its_own_inputs_is_refused(
+    contract, monkeypatch
+) -> None:
+    """UOBC-L-03 IS THE PURITY CHECK, and purity is why it cannot fail today.
+
+    ``derive_identity`` is a total function of the namespace and local name, and both are
+    read back OUT of the urn being checked — so the recomputation reproduces the urn by
+    construction and this arm is unreachable through any record. It is reached here by making
+    identity derivation impure, which is the one condition it exists to detect: the day
+    derivation acquires a clock, a counter or a path, every existing record stops re-deriving
+    and this is the check that says so instead of the ledger quietly becoming unreplayable.
+    """
+    record = _birth(contract)
+    monkeypatch.setattr(
+        "engine.object_birth.contract.derive_identity",
+        lambda namespace, local: f"urn:ucos:ucko:{namespace}:{local}-DRIFTED",
+    )
+
+    violations = LAW_CHECKS["identity_immutable"](contract, empty_ledger(), (record,))
+
+    assert any("does not re-derive from its own inputs" in v for v in violations)
+
+
+def test_an_undeclared_namespace_and_an_inadmissible_state_are_both_refused(contract) -> None:
+    """UOBC-L-05 CARRIES FOUR VIOLATIONS AND TWO HAD NEVER RUN.
+
+    A namespace nobody declared has no owner, so a record in it names an object no authority
+    answers for — the anonymous object UGA-INV-01 exists to prevent, arriving through the
+    ledger instead of through the filesystem. An initial state outside the declared set is
+    the same failure at the lifecycle end: the record would enter the ledger in a state no
+    transition table can move it out of. Neither can be produced by ``birth()``, which
+    refuses both up front; both are reachable by a record rehydrated from a ledger.
+    """
+    record = _birth(contract)
+    body = record.to_dict()
+    stray = BirthRecord.from_dict(
+        {
+            **body,
+            "universal_id": "urn:ucos:ucko:ucos.namespace.nobody.declared:STRAY",
+            "namespace": "ucos.namespace.nobody.declared",
+            "initial_state": "PROVISIONALLY-ALIVE",
+        }
+    )
+
+    violations = LAW_CHECKS["no_temporary_identity"](contract, empty_ledger(), (stray,))
+
+    assert any("is undeclared" in v for v in violations)
+    assert any("is inadmissible" in v for v in violations)
+
+
+def test_a_malformed_identity_stops_the_temporary_name_scan_for_that_record(contract) -> None:
+    """A RECORD WHOSE URN CANNOT BE READ IS REPORTED ONCE AND NOT SCANNED FURTHER.
+
+    ``check_no_temporary_identity`` has to read the local name out of the urn before it can
+    look for provisional segments in it. When that read fails the record is reported and the
+    walk moves on, because scanning a name that could not be extracted would either invent
+    segments or raise out of a law whose contract is to return every problem it found. The
+    namespace problem raised above it is still reported — the record is refused for both
+    reasons, not for whichever was noticed first.
+    """
+    record = _birth(contract)
+    broken = BirthRecord(
+        **{
+            **record.to_dict(),
+            "universal_id": "not-a-urn",
+            "creation_context": record.creation_context,
+        }
+    )
+
+    violations = LAW_CHECKS["no_temporary_identity"](contract, empty_ledger(), (broken,))
+
+    assert any("not a UCKO universal identity" in v for v in violations)
+
+
+def test_a_closed_gate_renders_its_report_once_and_not_twice(tmp_path, capsys) -> None:
+    """THE REPORT GOES TO STDERR ONLY WHEN NOTHING ELSE PRINTED IT.
+
+    ``--quiet`` suppresses the report on the way through and the closed path re-emits it on
+    stderr, so a quiet run still says WHY it closed. Without ``--quiet`` the report has
+    already been printed to stdout, and the guard is what stops it being printed a second
+    time — a duplicated report reads as two findings, and the diff of a gate log stops being
+    a diff of what the gate found.
+    """
+    path = tmp_path / "bad-ledger.json"
+    path.write_text(dumps({**empty_ledger(), "keyed_by": "path"}))
+
+    assert main(["--ledger", str(path)]) == EXIT_CLOSED
+
+    captured = capsys.readouterr()
+    assert "GATE" in captured.out
+    assert captured.err == ""

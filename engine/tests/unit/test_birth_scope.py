@@ -12,11 +12,16 @@ independent birth for a generated artifact FAILs; and an unknown object kind FAI
 
 from __future__ import annotations
 
+import ast
 import dataclasses
 import json
+import os
+import pathlib
+from types import MappingProxyType
 
 import pytest
 
+from engine.object_birth import scope
 from engine.object_birth.model import BirthError
 from engine.object_birth.scope import (
     EXCEPTION,
@@ -50,8 +55,6 @@ def _ctx() -> dict:
 
 @pytest.fixture(name="document")
 def _document() -> dict:
-    import os
-
     with open(
         os.path.join(repo_root(), "00-MASTER", "UOBC-000001", "birth-scope-policy.json"),
         encoding="utf-8",
@@ -414,8 +417,6 @@ def test_a_policy_that_is_not_an_object_is_a_fault(tmp_path):
 
 def test_the_module_holds_no_object_kind_path_or_gap_in_executable_code(policy):
     """Kinds, gap ids and repository paths are DATA. Only generic operators are code."""
-    import ast
-    import pathlib
 
     source = (pathlib.Path(repo_root()) / "engine" / "object_birth" / "scope.py").read_text(
         encoding="utf-8"
@@ -437,3 +438,179 @@ def test_the_module_holds_no_object_kind_path_or_gap_in_executable_code(policy):
     for literal in literals:
         for needle in forbidden:
             assert needle not in literal, f"scope.py hard-codes {needle!r} in {literal!r}"
+
+
+# --- the readers underneath the laws --------------------------------------------------
+#
+# The six laws are exercised above. The helpers they are built from — the kind lookup, the
+# registry readers, the subject resolver's error arms and the two ledger walks — are reached
+# only through a repository whose registries are all present, well formed and in agreement,
+# so each helper's "and if it is not" arm had never executed.
+
+
+def test_an_undeclared_kind_is_absent_rather_than_invented(policy):
+    """The lookup answers None for a kind the policy does not declare.
+
+    Every caller in this module asks about a kind that classification just produced, so the
+    miss arm was dead — and returning anything other than None (the first kind, a synthetic
+    one) would give an undeclared kind an enforcement mode nobody wrote down.
+    """
+    declared = policy.kinds[0]
+
+    assert policy.kind(declared.object_kind) is declared
+    assert policy.kind("A-KIND-NO-POLICY-DECLARES") is None
+
+
+def test_a_registry_that_cannot_be_read_is_absent_and_never_empty(tmp_path):
+    """READING IS BEST-EFFORT AND THE ABSENCE IS THE ANSWER.
+
+    ``load_context`` turns each None into an empty registry with ``or {}``, so an unreadable
+    registry and an empty one are treated alike at the call site — but only after the reader
+    has said which it was. All four refusals matter: a file that is not there, a directory
+    where a file was expected, one the process may not read, and one that is not JSON. Any of
+    them raising instead would make the scope gate unusable on a partial checkout; any of
+    them returning ``{}`` from inside the reader would be indistinguishable from a registry
+    that exists and declares nothing.
+    """
+    assert scope._read_json(str(tmp_path), "absent.json") is None
+    assert scope._read_json(str(tmp_path), ".") is None
+
+    malformed = tmp_path / "malformed.json"
+    malformed.write_text("{ not json", encoding="utf-8")
+    assert scope._read_json(str(tmp_path), "malformed.json") is None
+
+    good = tmp_path / "good.json"
+    good.write_text('{"a": 1}', encoding="utf-8")
+    assert scope._read_json(str(tmp_path), "good.json") == {"a": 1}
+
+
+def test_a_subject_rule_that_cannot_be_compiled_or_applied_resolves_nothing(policy):
+    """A SELECTOR THAT CANNOT BE EVALUATED MATCHES NOTHING — it never matches everything.
+
+    Two arms, both dead against the declared policy because every rule in it compiles and
+    every ``path_from`` it names is implemented. A pattern that is not a valid regular
+    expression is skipped rather than allowed to raise out of a resolver that walks the whole
+    ledger, and a rule naming a path form this module does not implement resolves to None
+    rather than falling through to the next rule — because the namespace already matched, and
+    continuing would resolve the urn under a rule that was not written for it.
+    """
+    urn = "urn:ucos:ucko:test.namespace:SOMETHING"
+
+    uncompilable = dataclasses.replace(
+        policy.subject_rules[0],
+        namespace="test.namespace",
+        local_name_pattern="(unclosed",
+    )
+    assert resolve_subject(dataclasses.replace(policy, subject_rules=(uncompilable,)), urn) is None
+
+    unimplemented = dataclasses.replace(
+        policy.subject_rules[0],
+        namespace="test.namespace",
+        local_name_pattern=".",
+        path_from="a_path_form_nothing_implements",
+    )
+    assert resolve_subject(dataclasses.replace(policy, subject_rules=(unimplemented,)), urn) is None
+
+
+def test_a_test_suite_on_disk_but_not_in_the_registry_is_found_by_walking(policy, tmp_path):
+    """REGISTRY LAG IS A LEGITIMATE STATE, and the walk is what keeps it from reading as a
+    missing subject.
+
+    A test suite added in a change is on disk immediately and enters the object registry
+    later, so the index is the fast path and the filesystem is the truth. Every existing case
+    resolves through the index, which left the whole fallback — the walk, the ``.git`` skip
+    and the not-found answer — unexecuted. The ``.git`` skip is not an optimisation: a
+    checkout's object store holds files under arbitrary names, and matching one would report
+    a subject as present because git happened to be storing something.
+    """
+    rule = next(r for r in policy.subject_rules if r.path_from == "test_basename")
+    repo = str(tmp_path)
+    (tmp_path / "suite").mkdir()
+    (tmp_path / "suite" / "test_walked.py").write_text("", encoding="utf-8")
+    (tmp_path / ".git" / "objects").mkdir(parents=True)
+    (tmp_path / ".git" / "objects" / "test_hidden.py").write_text("", encoding="utf-8")
+
+    # the index answers first, and answers without touching the filesystem
+    assert scope._subject_exists(repo, rule, "test_indexed.py", {"test_indexed.py": ["x/y.py"]})
+    # absent from the index, present on disk
+    assert scope._subject_exists(repo, rule, "test_walked.py", {})
+    # present only inside .git, which is not the repository's content
+    assert not scope._subject_exists(repo, rule, "test_hidden.py", {})
+    assert not scope._subject_exists(repo, rule, "test_never_written.py", {})
+
+
+def test_the_registry_lookup_scans_when_it_is_handed_no_index(ctx):
+    """THE INDEX IS AN OPTIMISATION AND THE SCAN IS THE DEFINITION.
+
+    ``load_context`` always builds ``by_path``, so the scan below it had no caller — and it
+    is what keeps ``_object_at`` correct for a context assembled any other way, including the
+    hand-built contexts these laws are tested against. An index-only lookup would answer None
+    for every object in such a context and every law reading it would silently see an empty
+    repository.
+    """
+    path = str(ctx["objects"][0]["path"])
+    without_index = {k: v for k, v in ctx.items() if k != "by_path"}
+
+    assert scope._object_at(path, without_index) == ctx["by_path"][path]
+    assert scope._object_at("no/such/path.txt", without_index) is None
+    assert scope._object_at("no/such/path.txt", ctx) is None
+
+
+def test_a_birth_no_rule_resolves_is_skipped_by_both_ledger_readers(policy, ctx):
+    """A URN THE POLICY CANNOT PLACE IS NOT A PATH AND NOT A SUBJECT CLASS.
+
+    Every birth in the committed ledger resolves — BSP-L-04 refuses one that does not — so
+    both walks had only ever seen resolvable urns. Counting an unresolvable one anyway would
+    put ``None`` into the born-path set (making coverage look higher than it is) or into the
+    subject-class histogram under a key nothing declared.
+    """
+    unresolvable = "urn:ucos:ucko:namespace.no.rule.declares:SUBJECT"
+    unknown = {**ctx, "births": {unresolvable: {}}}
+
+    assert scope._born_paths(policy, unknown) == set()
+    assert scope._births_by_subject_class(policy, unknown) == {}
+
+
+def test_the_born_path_cache_is_only_written_where_it_can_be_written(policy, ctx):
+    """THE CACHE IS AN OPTIMISATION AND MUST NEVER BE A REQUIREMENT.
+
+    The result is memoised into the context, which is a plain dict on every real call — so
+    the guard was dead. A read-only mapping is a legitimate context (it is how a caller says
+    "answer about this, do not touch it"), and writing into one would raise from inside a
+    helper whose contract is to read. The answer is identical either way; only the cache is
+    not kept.
+    """
+    read_only = MappingProxyType(dict(ctx))
+
+    answer = scope._born_paths(policy, read_only)
+
+    assert answer == scope._born_paths(policy, dict(ctx))
+    assert "_born_paths" not in read_only
+
+
+def test_a_birth_naming_a_generated_artifact_is_refused_by_bsp_l_04(policy, ctx):
+    """BSP-L-04 HAS THREE VIOLATIONS AND ONLY TWO HAD RUN.
+
+    An unresolvable urn and a subject that does not exist were both tested. The third is the
+    one the determination exists for: a birth record naming a subject that RESOLVES, EXISTS
+    and is a kind whose enforcement is MANDATORY_ABSENCE. That is a generated artifact given
+    an independent constitutional identity — the precise failure §1.2 was written to prevent
+    — and it cannot be caught by either of the other two arms, because nothing about the urn
+    or the path is wrong.
+    """
+    # Derived, never named: the kind whose enforcement is MANDATORY_ABSENCE is DATA in the
+    # policy, and the ``name_plus_md`` rule is the one subject form that can resolve to it.
+    rule = next(r for r in policy.subject_rules if r.path_from == "name_plus_md")
+    generated = next(
+        str(obj["path"])
+        for obj in ctx["objects"]
+        if str(obj.get("path", "")).endswith(".md")
+        and (kind := classify(policy, obj, ctx)) is not None
+        and kind.enforcement == MANDATORY_ABSENCE
+    )
+    urn = f"urn:ucos:ucko:{rule.namespace}:{generated[: -len('.md')]}"
+
+    violations = _run("every_birth_subject_may_be_born", policy, {**ctx, "births": {urn: {}}})
+
+    assert any("may not be born" in v for v in violations), violations
+    assert any(generated in v for v in violations)
