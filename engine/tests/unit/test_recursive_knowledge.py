@@ -1886,3 +1886,84 @@ def test_an_operator_naming_an_unimplemented_function_is_refused(declaration):
         _forge(declaration, operators=broken)
     )
     assert any("names an unimplemented function" in p for p in problems), problems
+
+
+# --- URKE-L-13: the traceable-evolution refusals -------------------------------------------------
+
+
+@pytest.mark.parametrize("key", ["subject", "operator", "before", "after"])
+def test_an_evolution_step_recording_no_field_is_refused(declaration, monkeypatch, key):
+    real = evolution.evolve
+
+    def hollow(*args, **kwargs):
+        step = real(*args, **kwargs)
+        return dataclasses.replace(step, payload={**step.payload, key: "  "})
+
+    monkeypatch.setattr(evolution, "evolve", hollow)
+    problems = contract.evolution_is_one_traceable_mechanism(_forge(declaration))
+    assert any(f"records no {key}" in p for p in problems), problems
+
+
+def test_an_evolution_step_recording_no_basis_is_refused(declaration, monkeypatch):
+    real = evolution.evolve
+
+    def unevidenced(*args, **kwargs):
+        return dataclasses.replace(real(*args, **kwargs), evidence=())
+
+    monkeypatch.setattr(evolution, "evolve", unevidenced)
+    problems = contract.evolution_is_one_traceable_mechanism(_forge(declaration))
+    assert any("records no basis as evidence" in p for p in problems), problems
+
+
+def test_a_step_recording_no_change_must_be_refused(declaration, monkeypatch):
+    # A before that equals its after records nothing, so accepting it is the violation.
+    real = evolution.evolve
+
+    def permissive(store, **kwargs):
+        if kwargs.get("before") == kwargs.get("after"):
+            kwargs = {**kwargs, "after": content_hash(["different-after"])}
+        return real(store, **kwargs)
+
+    monkeypatch.setattr(evolution, "evolve", permissive)
+    problems = contract.evolution_is_one_traceable_mechanism(_forge(declaration))
+    assert any("a step recording no change" in p for p in problems), problems
+
+
+def test_a_chain_not_intact_after_evolution_is_refused(declaration):
+    probe = _ledger_probe(declaration, chain_is_intact=lambda: False)
+    problems = contract.evolution_is_one_traceable_mechanism(probe)
+    assert any("chain is not intact after a recorded evolution" in p for p in problems), problems
+
+
+def test_evolution_naming_a_subject_as_a_special_case_is_refused(declaration, monkeypatch):
+    # One mechanism, no per-subject branch: a subject identifier appearing as a literal in
+    # evolution.py is a special case by definition.
+    identifier = declaration.evolution_subjects[0].identifier
+    source = f"SPECIAL_CASE = {identifier!r}\n"
+    monkeypatch.setattr(contract.Probe, "source", lambda self, name: source)
+    problems = contract.evolution_is_one_traceable_mechanism(_forge(declaration))
+    assert any("which is a special case" in p for p in problems), problems
+
+
+# --- URKE-L-23/32: the composition refusals --------------------------------------------------
+
+
+def test_a_condition_that_cannot_be_composed_is_reported(declaration, monkeypatch):
+    from engine.recursive_knowledge import composition as composition_module
+
+    def refuse(decl, condition):
+        raise RecursiveKnowledgeError("composition refused for the test")
+
+    monkeypatch.setattr(composition_module, "express_condition", refuse)
+    problems = contract.expressiveness_is_preserved_within_bounds(_forge(declaration))
+    assert any("cannot be composed" in p for p in problems), problems
+
+
+def test_two_conditions_with_the_same_signature_are_refused(declaration, monkeypatch):
+    # Two catalogue entries composing to one expression means the catalogue claims more
+    # distinctions than it can express.
+    from engine.recursive_knowledge import composition as composition_module
+
+    monkeypatch.setattr(composition_module, "signature", lambda expression: "one-signature")
+    problems = contract.expressiveness_is_preserved_within_bounds(_forge(declaration))
+    assert any("catalogue collision" in p for p in problems), problems
