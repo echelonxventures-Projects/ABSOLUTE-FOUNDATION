@@ -19,12 +19,20 @@ from typing import Any
 
 import pytest
 
+from engine.uaue import validation as validation_module
+from engine.uaue import verification as verification_module
 from engine.uaue.authority import load_evolution_authority
 from engine.uaue.certification import certification_object, certify_evolution
 from engine.uaue.discovery import discover_evolution_candidates
 from engine.uaue.execution import execute_evolution
-from engine.uaue.history import learning_object, project_history, state_transition_object
-from engine.uaue.model import EvolutionAuthority, EvolutionAuthorityError
+from engine.uaue.history import (
+    history_digest,
+    learning_object,
+    project_history,
+    rehydrate_history,
+    state_transition_object,
+)
+from engine.uaue.model import Dependency, EvolutionAuthority, EvolutionAuthorityError
 from engine.uaue.objects import (
     EvolutionCandidate,
     EvolutionChain,
@@ -653,8 +661,6 @@ def test_judgement_objects_refuse_an_empty_chain(
 
 
 def test_a_history_document_must_be_a_mapping() -> None:
-    from engine.uaue.history import rehydrate_history
-
     with pytest.raises(EvolutionAuthorityError, match="must be a mapping"):
         rehydrate_history(["not", "a", "mapping"])
 
@@ -662,8 +668,6 @@ def test_a_history_document_must_be_a_mapping() -> None:
 def test_the_history_digest_is_stable(
     authority: EvolutionAuthority, candidate: EvolutionCandidate
 ) -> None:
-    from engine.uaue.history import history_digest
-
     document = {"schema": authority.history.schema, "ledger": {"records": []}}
     assert history_digest(document) == history_digest(dict(document))
 
@@ -786,8 +790,6 @@ def test_an_object_whose_identity_inputs_cannot_be_read_is_anonymous(
 ) -> None:
     """Unidentifiable is not merely mismatched: an object that cannot present its own identity
     inputs cannot be shown to be the object its identity claims."""
-    from engine.uaue import validation as validation_module
-    from engine.uaue import verification as verification_module
 
     def _unreadable(rule, obj):  # noqa: ANN001, ANN202
         raise EvolutionAuthorityError("the identity inputs could not be read")
@@ -821,7 +823,6 @@ def test_a_backward_phase_dependency_fails_verification(
     edges some other way, and reaching it means handing the verifier an edge set the deriver
     cannot currently build.
     """
-    from engine.uaue.model import Dependency
 
     forward = Dependency(
         phase=authority.phases[0].identifier,

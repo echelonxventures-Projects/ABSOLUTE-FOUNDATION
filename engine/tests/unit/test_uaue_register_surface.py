@@ -40,6 +40,8 @@ from engine.uaue.model import EvolutionAuthorityError, Invariant
 from engine.uaue.registers import (
     DERIVED_TRUTH,
     RENDERERS,
+    _relative,
+    _unknown_satisfied,
     irreproducible_content,
     mandatory_measures,
     register_path,
@@ -365,7 +367,6 @@ def test_a_path_outside_the_measured_root_is_left_as_it_was_given(tmp_path: Path
     """Rendered paths are made repository-relative so a register reproduces on any machine. A
     path that is not under the root has no relative form, and inventing one would put a
     fabricated location into the surface — so it is carried through unchanged."""
-    from engine.uaue.registers import _relative
 
     assert _relative(tmp_path / "inside" / "register.md", tmp_path) == "inside/register.md"
     assert _relative("/elsewhere/register.md", tmp_path) == "/elsewhere/register.md"
@@ -377,7 +378,6 @@ def test_two_phases_declaring_one_owner_set_are_counted_as_a_duplicate_authority
     """Two positions answering to exactly the same owners are one authority wearing two names,
     and the measure exists so that collapse is visible rather than inferred from a reading of
     the declaration."""
-    from engine.uaue.registers import mandatory_measures
 
     authority = report.context.authority
     first, second = authority.phases[0], authority.phases[1]
@@ -398,7 +398,6 @@ def test_a_ledger_row_of_another_shape_contributes_no_history_identity(
     """The history identities are read out of the projection the run produced. A row this reader
     cannot read must contribute nothing rather than a partial identity, because a partial one
     would count an object as recorded that nothing recorded."""
-    from engine.uaue.registers import mandatory_measures
 
     baseline = mandatory_measures(report)
     projection = {
@@ -422,7 +421,6 @@ def test_the_unknown_obligation_is_unsatisfied_when_no_run_carries_the_probe_sub
     """Selected by the probe's own subject rather than by an obligation identifier, so the
     register is not coupled to the gate's numbering — and with no run carrying that subject the
     obligation is unsatisfied rather than silently absent."""
-    from engine.uaue.registers import _unknown_satisfied
 
     assert _unknown_satisfied(report) is True
     assert _unknown_satisfied(replace(report, runs=())) is False
@@ -434,7 +432,6 @@ def test_a_run_of_another_subject_does_not_answer_for_the_unknown_obligation(
     """The obligation is about ONE declared subject. A run of some other candidate must not
     answer for it — neither by satisfying it nor by refusing it — or the measure would report
     whatever the last run happened to do."""
-    from engine.uaue.registers import _unknown_satisfied
 
     other = replace(report.runs[0], subject_identity="a-subject-the-probe-never-names")
     assert _unknown_satisfied(replace(report, runs=(other,))) is False

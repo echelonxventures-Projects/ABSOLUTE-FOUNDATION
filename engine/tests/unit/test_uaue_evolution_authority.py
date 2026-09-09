@@ -27,13 +27,17 @@ that :mod:`engine.uckp.evolution` owns.
 
 from __future__ import annotations
 
+import ast
 import copy
 import json
+import re
 from pathlib import Path
+from pathlib import Path as _Path
 from typing import Any
 
 import pytest
 
+from engine.uaue import authority as authority_module
 from engine.uaue.authority import (
     REQUIRED_RULES,
     authority_is_grounded,
@@ -673,7 +677,6 @@ def test_no_engine_source_file_names_a_canonical_register(
 
 def _uaue_code_literals(path: Path) -> tuple[tuple[int, str], ...]:
     """Every string literal in a module that is not a docstring."""
-    import ast
 
     tree = ast.parse(path.read_text("utf-8"))
     docstrings: set[str] = set()
@@ -767,9 +770,6 @@ def test_the_contiguity_proof_still_fires_when_the_position_check_is_disabled(
     that survives a future loader that reorders before it counts. Numbering the enumeration by
     the declared ordinal is exactly the weakening the guard exists for.
     """
-    import re
-
-    from engine.uaue import authority as authority_module
 
     del mutable["registers"][1]
 
@@ -876,7 +876,6 @@ def test_a_discovery_source_declaring_no_candidate_class_closes_the_gate(
     field as optional, and reaching it means declining that refusal — which is what the stand-in
     below does, and nothing else.
     """
-    from engine.uaue import authority as authority_module
 
     real = authority_module.declared_text
 
@@ -949,7 +948,6 @@ def test_a_home_the_filesystem_cannot_answer_for_is_unreadable_rather_than_absen
     """Absent and unreadable are different governance facts. A home the filesystem refuses to
     answer for — a permission wall, a stale mount — must not be reported as one nobody wrote,
     because the second is a finding somebody can close and the first is not."""
-    from pathlib import Path as _Path
 
     def _refusing(self: _Path) -> bool:
         raise OSError("the filesystem declined to answer")

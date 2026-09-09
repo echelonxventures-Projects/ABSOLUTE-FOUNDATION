@@ -24,16 +24,20 @@ What this suite measures, and the failure each property closes:
 from __future__ import annotations
 
 import ast
+import json
 from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
+from engine.uaue import exits, registers
 from engine.uaue import gate as gate_module
 from engine.uaue.exits import MEASURES, exit_measures
 from engine.uaue.gate import GateReport, measure
 from engine.uaue.model import EvolutionAuthorityError, ExitCriterion
+from engine.uaue.registers import RENDERERS
 from engine.uaue.resolution import REPO_ROOT
+from engine.uckp import vocabulary as vocabulary_module
 
 EXITS_SOURCE = REPO_ROOT / "engine" / "uaue" / "exits.py"
 
@@ -168,7 +172,6 @@ def test_the_certification_report_withholds_the_verdict_when_a_criterion_is_unme
     report: GateReport, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """The published determination must follow the measurement, not the other way round."""
-    from engine.uaue import registers
 
     authority = report.context.authority
     entry = authority.exit_criteria[0]
@@ -225,8 +228,6 @@ def test_an_unclassified_position_is_measured(report: GateReport) -> None:
 def test_an_unimplemented_renderer_is_measured_by_the_capability_criterion(
     report: GateReport, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    from engine.uaue.registers import RENDERERS
-
     monkeypatch.delitem(RENDERERS, report.context.authority.registers[0].renderer)
     assert _one_measure(report, "unclassified_capability_surface")
 
@@ -343,7 +344,6 @@ def test_a_controller_that_names_a_position_is_measured(
     report: GateReport, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Measured against a controller that does name one, in a tree of this test's making."""
-    from engine.uaue import exits
 
     package = tmp_path / "engine" / "uaue"
     package.mkdir(parents=True)
@@ -359,7 +359,6 @@ def test_prose_naming_a_position_is_not_measured_as_a_branch(
     report: GateReport, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """The other direction, which is what makes the measure usable: a docstring may say so."""
-    from engine.uaue import exits
 
     package = tmp_path / "engine" / "uaue"
     package.mkdir(parents=True)
@@ -452,7 +451,6 @@ def test_the_declaration_binds_a_measure_to_every_criterion_on_disk() -> None:
     tolerate a criterion with no measure, and this is the assertion that says the *declaration*
     is what carries the binding.
     """
-    import json
 
     document = json.loads(
         (REPO_ROOT / "00-MASTER" / "UAUE-000001" / "uaue-evolution.json").read_text("utf-8")
@@ -665,7 +663,6 @@ def test_a_vocabulary_that_refuses_the_term_or_mutates_itself_is_measured(
     """Three things are required of the extension surface: it admits the term, the extension
     carries it, and the ORIGINAL vocabulary is unchanged. A surface that mutated the base would
     be a legislative act rather than an admission."""
-    from engine.uckp import vocabulary as vocabulary_module
 
     real = vocabulary_module.LIFECYCLE_STAGE_VOCABULARY
 

@@ -36,6 +36,8 @@ from pathlib import Path
 
 import pytest
 
+from engine.ceu import catalog
+from engine.ceu.catalog import SEED_POPULATIONS
 from engine.construct import audit, contract, evidence, extension, reality, views
 from engine.construct import cli as construct_cli
 from engine.construct import gate as construct_gate
@@ -43,10 +45,13 @@ from engine.construct.contract import (
     HOLDS,
     LAW_CHECKS,
     REFUSED,
+    ContractError,
     Probe,
+    _package_fingerprint,
     available_checks,
     load_contract,
     measure,
+    rendered,
 )
 from engine.construct.declaration import (
     DIGEST_EXCLUSIONS,
@@ -1332,7 +1337,6 @@ def test_admitting_a_future_category_changes_no_source_byte(probe: Probe) -> Non
         )
         assert instance.kind_registered
         assert instance.disposition.disposition != "TRANSFORM"
-    from engine.construct.contract import _package_fingerprint  # noqa: PLC0415
 
     assert _package_fingerprint(probe.repo) == before
 
@@ -1341,7 +1345,6 @@ def test_the_reality_vocabulary_binds_to_the_owner_rather_than_copying_it(
     declaration: Declaration,
 ) -> None:
     """UCOS-CEU-001 owns the existence and epistemic states; this declaration references them."""
-    from engine.ceu.catalog import SEED_POPULATIONS  # noqa: PLC0415
 
     populations = {str(name): {str(row[0]) for row in rows} for name, rows in SEED_POPULATIONS}
     bound = 0
@@ -1440,8 +1443,6 @@ def test_the_report_embeds_no_absolute_machine_path(report: dict) -> None:
 
 
 def test_two_measurements_of_one_state_are_byte_identical() -> None:
-    from engine.construct.contract import rendered  # noqa: PLC0415
-
     assert rendered(measure(laws=["UCON-L-10"])) == rendered(measure(laws=["UCON-L-10"]))
 
 
@@ -1647,8 +1648,6 @@ def test_the_closure_law_refuses_an_undisclosed_closure_in_scope(
 def test_the_openness_law_refuses_a_package_it_cannot_read(
     declaration: Declaration, tmp_path
 ) -> None:
-    from engine.construct.contract import ContractError  # noqa: PLC0415
-
     with pytest.raises(ContractError, match="absent"):
         LAW_CHECKS["future_kinds_need_no_redesign"](
             Probe(declaration=declaration, repo=str(tmp_path))
@@ -3292,7 +3291,6 @@ def test_a_reality_vocabulary_that_contains_a_whole_ceu_population_is_refused(
 ):
     # Binding to somebody else's vocabulary and copying it whole are indistinguishable from the
     # outside until the owner changes one row. Holding the whole population is the copy.
-    from engine.ceu import catalog
 
     ours = tuple((identifier.lower(), "") for identifier in declaration.reality_ids[:2])
     monkeypatch.setattr(catalog, "SEED_POPULATIONS", (("a-copied-population", ours),))

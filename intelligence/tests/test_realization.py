@@ -17,13 +17,19 @@ Run: .ec1-venv/bin/python -m pytest intelligence/tests/test_realization.py -q
 
 from __future__ import annotations
 
+import dataclasses
 import importlib.util
 import json
+import runpy
+from dataclasses import replace as _replace
 from pathlib import Path
 
 import pytest
 
-from engine.knowledge.cko import CanonicalKnowledgeObject
+import intelligence.realization.engine as engine_module
+import intelligence.realization.governance as governance_module
+from engine.knowledge import KnowledgeError
+from engine.knowledge.cko import CanonicalKnowledgeObject, DecisionRecord, RejectedOption
 from engine.knowledge.model import KnowledgeAuthority, KnowledgeKind, Lifecycle
 from engine.knowledge.store import KnowledgeBase
 from intelligence.realization import (
@@ -50,14 +56,48 @@ from intelligence.realization import (
     registry_manifest,
     verify_bundle,
 )
+from intelligence.realization import cli as cli_module
+from intelligence.realization import knowledge as knowledge_module
+from intelligence.realization.canonical import verify_seal
 from intelligence.realization.cli import main as cli_main
+from intelligence.realization.composition import compose_plan
+from intelligence.realization.config import resolve_repo_root
+from intelligence.realization.contracts import identifier, slug
+from intelligence.realization.engine import realize as realize_repository
 from intelligence.realization.errors import (
+    CompositionError,
+    EvidenceError,
     FrozenSurfaceError,
+    GenerationError,
     GovernanceRejectedError,
     ImplementationError,
     KnowledgeIntakeError,
     PlanningError,
 )
+from intelligence.realization.errors import KnowledgeIntakeError as _Fault
+from intelligence.realization.evidence import (
+    COMPOSITION_FILE,
+    GENERATION_FILE,
+    GOVERNANCE_FILE,
+    IMPLEMENTATION_FILE,
+    INTAKE_FILE,
+    PLAN_FILE,
+    RECORD_FILE,
+    REQUIRED_FILES,
+    TRACEABILITY_FILE,
+    RealizationEvidence,
+    _guard_writable,
+    emit_evidence,
+)
+from intelligence.realization.generation import artifact_index, generate_artifacts
+from intelligence.realization.generators import GENERATORS, _build_registry, generator_for
+from intelligence.realization.generators.architecture import ArchitectureGenerator
+from intelligence.realization.generators.base import GenerationContext
+from intelligence.realization.generators.deployment import _yaml_lines, _yaml_scalar
+from intelligence.realization.generators.schema import SchemaGenerator, _json_type
+from intelligence.realization.governance import RealizationGovernor as _Governor
+from intelligence.realization.planning import _topological_waves, build_plan
+from intelligence.realization.traceability import build_trace
 
 REPO = RealizationConfig.create().repo_root
 
@@ -129,7 +169,6 @@ def test_intake_derives_one_target_per_knowledge_universe() -> None:
 
 def test_intake_refuses_mutated_canonical_knowledge() -> None:
     """A record whose hash no longer matches must fail intake, not propagate."""
-    import dataclasses
 
     good = _object("UCKO-TEST-0001")
     tampered = dataclasses.replace(good, statement="mutated after sealing")
@@ -532,8 +571,6 @@ def test_realize_is_idempotent(engine) -> None:
 
 
 def test_realize_emits_the_complete_evidence_bundle(engine) -> None:
-    from intelligence.realization.evidence import REQUIRED_FILES
-
     result = engine.realize()
     assert result.evidence.missing() == ()
     assert sorted(result.emitted) == sorted(REQUIRED_FILES)
@@ -544,8 +581,6 @@ def test_realize_emits_the_complete_evidence_bundle(engine) -> None:
 
 
 def test_evidence_documents_are_individually_sealed(engine) -> None:
-    from intelligence.realization.canonical import verify_seal
-
     result = engine.realize()
     for name, path in result.emitted.items():
         with open(path, encoding="utf-8") as handle:
@@ -575,11 +610,6 @@ def test_evidence_varies_only_where_the_materialization_pass_differs(engine) -> 
     where it belongs — on the returned record, in the structured log, and in these two
     evidence documents.
     """
-    from intelligence.realization.evidence import (
-        GOVERNANCE_FILE,
-        IMPLEMENTATION_FILE,
-        RECORD_FILE,
-    )
 
     first = engine.realize()
     second = engine.realize()
@@ -611,13 +641,6 @@ def test_knowledge_derived_evidence_is_independent_of_the_output_location(engine
     records the path it actually wrote to. Everything upstream of materialization is a
     pure function of canonical knowledge and must be byte-identical.
     """
-    from intelligence.realization.evidence import (
-        COMPOSITION_FILE,
-        GENERATION_FILE,
-        INTAKE_FILE,
-        PLAN_FILE,
-        TRACEABILITY_FILE,
-    )
 
     first = engine.realize()
     other = RealizationIntelligenceEngine(_config(tmp_path / "elsewhere"))
@@ -919,7 +942,6 @@ def test_a_slug_collapses_a_run_of_separators_into_one_and_never_renders_empty()
     """Every artifact path and every target identity is built from this. A slug that emitted one
     dash per separator would make two universes differing only in punctuation produce different
     paths for the same thing, and one that could render empty would produce a path with no name."""
-    from intelligence.realization.contracts import identifier, slug
 
     assert slug("Universe  of --- Things") == "universe-of-things"
     assert slug("///") == "unnamed"
@@ -972,7 +994,6 @@ def test_an_intake_over_a_store_that_does_not_exist_falls_back_to_the_seed(
     """A repository with no canonical store still has knowledge — the engine's own seed — and
     realizing from it is different from realizing from nothing. Reading an absent store as an
     empty one would generate an empty, governed, meaningless bundle."""
-    from intelligence.realization import knowledge as knowledge_module
 
     class _Absent:
         def exists(self) -> bool:
@@ -987,8 +1008,6 @@ def test_an_intake_over_a_store_that_does_not_exist_falls_back_to_the_seed(
 def test_an_intake_whose_knowledge_cannot_be_read_is_a_fault(monkeypatch) -> None:
     """A store that refuses is not an empty store, and reading it as one would seal a bundle
     over knowledge nobody could load."""
-    from engine.knowledge import KnowledgeError
-    from intelligence.realization import knowledge as knowledge_module
 
     class _Refusing:
         def exists(self) -> bool:
@@ -1005,8 +1024,6 @@ def test_an_intake_whose_knowledge_cannot_be_read_is_a_fault(monkeypatch) -> Non
 def test_an_evidence_bundle_reports_completeness_and_refuses_a_partial_emit(tmp_path) -> None:
     """A partial bundle is worse than none: a reader finding four of five documents cannot tell
     a bundle that was never finished from one whose fifth document was removed."""
-    from intelligence.realization.errors import EvidenceError
-    from intelligence.realization.evidence import RealizationEvidence, emit_evidence
 
     partial = RealizationEvidence(knowledge_seal="a" * 64, documents={})
     assert not partial.complete()
@@ -1018,8 +1035,6 @@ def test_an_evidence_bundle_reports_completeness_and_refuses_a_partial_emit(tmp_
 def test_evidence_may_not_be_written_into_the_frozen_corpus(tmp_path) -> None:
     """DP-03 owns the frozen corpus. An evidence bundle written into it would make the certified
     corpus a place this engine writes, which is the one thing it may never be."""
-    from intelligence.realization.errors import EvidenceError
-    from intelligence.realization.evidence import _guard_writable
 
     config = RealizationConfig.create(REPO, artifact_root=tmp_path, evidence_dir=tmp_path)
     with pytest.raises(EvidenceError, match="frozen corpus"):
@@ -1030,7 +1045,6 @@ def test_an_unreadable_evidence_document_is_reported_as_unsealed(tmp_path) -> No
     """Present and unreadable is a third state beside absent and sealed. Reporting it as sealed
     would certify a document nobody could parse; reporting it as absent would hide that
     something is there."""
-    from intelligence.realization.evidence import REQUIRED_FILES
 
     config = _config(tmp_path)
     config.evidence_dir.mkdir(parents=True, exist_ok=True)
@@ -1045,7 +1059,6 @@ def test_an_unreadable_evidence_document_is_reported_as_unsealed(tmp_path) -> No
 def test_the_convenience_traceability_entry_point_builds_the_same_ledger(tmp_path, pipeline):
     """The module-level function is what a caller outside this package uses. One that drifted
     from the engine would give two answers to "is the closure complete"."""
-    from intelligence.realization.traceability import build_trace
 
     intake, plan, composition, _findings, manifest = pipeline
     implementer = ImplementationEngine(_config(tmp_path))
@@ -1062,7 +1075,6 @@ def test_the_config_resolves_an_artifact_path_and_a_repo_root_of_last_resort(tmp
     The
     fallback root is what keeps the engine usable outside a repository whose marker it can find,
     rather than failing to construct at all."""
-    from intelligence.realization.config import resolve_repo_root
 
     config = _config(tmp_path)
     assert config.artifact_path("a/b.json") == config.artifact_root / "a/b.json"
@@ -1072,9 +1084,6 @@ def test_the_config_resolves_an_artifact_path_and_a_repo_root_of_last_resort(tmp
 def test_the_module_entry_point_dispatches_to_the_cli(monkeypatch) -> None:
     """``python -m intelligence.realization`` is a second entry point and a dispatcher rather
     than a copy: two copies of an entry point are two things to keep in step."""
-    import runpy
-
-    from intelligence.realization import cli as cli_module
 
     calls: list[int] = []
     monkeypatch.setattr(cli_module, "main", lambda: calls.append(1) or 0)
@@ -1139,9 +1148,6 @@ def test_the_evidence_command_checks_a_bundle_and_emits_one(tmp_path, capsys) ->
 def test_a_foundation_fault_exits_two_rather_than_reporting_a_verdict(tmp_path, capsys) -> None:
     """Exit 2 is "I could not tell", and it must not be spelled the same way as exit 1, which is
     "I told you and the answer is no"."""
-    import intelligence.realization.engine as engine_module
-    from intelligence.realization import cli as cli_module
-    from intelligence.realization.errors import KnowledgeIntakeError as _Fault
 
     def _faulting(self, *args, **kwargs):  # noqa: ANN001, ANN002, ANN003, ANN202
         raise _Fault("the canonical store cannot be read")
@@ -1161,7 +1167,6 @@ def test_a_rejected_governance_decision_is_reported_by_the_realize_command(
 ) -> None:
     """The command reports the rejection rather than raising it: a caller reading stdout must
     see WHICH gate refused, not a traceback that names the raising line."""
-    import intelligence.realization.engine as engine_module
 
     def _rejecting(self, **kwargs):  # noqa: ANN001, ANN003, ANN202
         raise GovernanceRejectedError("a gate refused", gate="URI-GATE-TEST")
@@ -1180,9 +1185,7 @@ def test_generation_refuses_stages_derived_from_different_states(pipeline) -> No
     """A plan, a composition and an intake are three derivations of one knowledge state. Mixing
     two states would generate artifacts anchored to objects the manifest does not cite, and the
     seals would still all verify — each against its own half."""
-    from dataclasses import replace as _replace
 
-    from intelligence.realization.errors import GenerationError
     from intelligence.realization.generation import GenerationEngine
 
     intake, plan, composition, _findings, _manifest = pipeline
@@ -1203,10 +1206,8 @@ def test_a_generator_that_emits_nothing_or_the_wrong_family_is_refused(pipeline)
     step, producing something outside its own family, and producing something anchored to no
     canonical object. Each would leave the manifest describing a realization that did not
     happen."""
-    from dataclasses import replace as _replace
 
     from intelligence.realization.contracts import ArtifactFamily
-    from intelligence.realization.errors import GenerationError
     from intelligence.realization.generation import GenerationEngine
 
     _intake, _plan, composition, _findings, manifest = pipeline
@@ -1256,7 +1257,6 @@ def test_a_generator_that_emits_nothing_or_the_wrong_family_is_refused(pipeline)
 def test_two_units_claiming_one_output_path_are_refused(pipeline) -> None:
     """Two units writing one path is a silent overwrite: the manifest would carry one entry and
     the tree would carry whichever unit ran last."""
-    from intelligence.realization.errors import GenerationError
     from intelligence.realization.generation import GenerationEngine
 
     _intake, _plan, _composition, _findings, manifest = pipeline
@@ -1270,9 +1270,6 @@ def test_two_units_claiming_one_output_path_are_refused(pipeline) -> None:
 def test_the_convenience_entry_points_produce_what_their_engines_produce() -> None:
     """Each is what a caller outside this package uses. One that drifted from its engine would
     give two answers to the same question — and both would seal."""
-    from intelligence.realization.composition import compose_plan
-    from intelligence.realization.generation import artifact_index, generate_artifacts
-    from intelligence.realization.planning import build_plan
 
     intake = KnowledgeIntake.load()
     plan = build_plan(intake)
@@ -1290,7 +1287,6 @@ def test_planning_refuses_an_intake_with_no_target(pipeline) -> None:
 
     The intake refuses an empty store outright, so the targetless intake has to be built from a
     populated one — which is the guard that survives a future intake admitting one."""
-    from dataclasses import replace as _replace
 
     intake, _plan, _composition, _findings, _manifest = pipeline
     with pytest.raises(PlanningError, match="no realization targets"):
@@ -1300,7 +1296,6 @@ def test_planning_refuses_an_intake_with_no_target(pipeline) -> None:
 def test_a_dependency_graph_with_an_unknown_step_or_a_cycle_is_refused() -> None:
     """Both make the wave order undefined. An unknown dependency would silently never be
     satisfied; a cycle would spin. Refusing names which node is at fault."""
-    from intelligence.realization.planning import _topological_waves
 
     with pytest.raises(PlanningError, match="depends on an unknown step"):
         _topological_waves(["a"], {"a": ("nobody-planned",)})
@@ -1310,10 +1305,6 @@ def test_a_dependency_graph_with_an_unknown_step_or_a_cycle_is_refused() -> None
 
 
 def test_composition_refuses_a_plan_from_another_knowledge_state(pipeline) -> None:
-    from dataclasses import replace as _replace
-
-    from intelligence.realization.errors import CompositionError
-
     intake, plan, _composition, _findings, _manifest = pipeline
     with pytest.raises(CompositionError, match="different canonical knowledge state"):
         CompositionEngine().compose(intake, _replace(plan, knowledge_seal="a" * 64))
@@ -1322,9 +1313,6 @@ def test_composition_refuses_a_plan_from_another_knowledge_state(pipeline) -> No
 def test_a_composition_graph_with_an_unknown_upstream_or_a_cycle_is_refused(pipeline) -> None:
     """The same two failures one stage down. A unit depending on nothing that exists would never
     be ordered; a cycle would never settle."""
-    from dataclasses import replace as _replace
-
-    from intelligence.realization.errors import CompositionError
 
     _intake, _plan, composition, _findings, _manifest = pipeline
     first, second = composition.units[0], composition.units[1]
@@ -1343,7 +1331,6 @@ def test_a_composition_graph_with_an_unknown_upstream_or_a_cycle_is_refused(pipe
 def test_a_gate_set_that_is_incomplete_or_duplicated_is_refused(pipeline) -> None:
     """The gate set is closed. A missing gate is an unasked question reported as governed; a
     duplicated one is one question counted twice."""
-    from intelligence.realization.governance import RealizationGovernor as _Governor
 
     decision = RealizationIntelligenceEngine().govern()
     outcomes = decision.gates
@@ -1356,7 +1343,6 @@ def test_a_gate_set_that_is_incomplete_or_duplicated_is_refused(pipeline) -> Non
 def test_a_determinism_proof_that_says_nothing_still_fails_the_gate() -> None:
     """A proof reporting `deterministic: false` with no mismatch names nothing an operator can
     chase, so the gate supplies the one fact it does know: the seals disagreed."""
-    from intelligence.realization.governance import RealizationGovernor as _Governor
 
     outcome = _Governor._generation_determinism(
         {"deterministic": False, "mismatches": [], "artifact_count": 3}
@@ -1388,7 +1374,6 @@ def test_a_yaml_scalar_quotes_only_when_it_must(value, expected) -> None:
     """The deployment manifests are YAML this repository writes rather than a library's. A
     scalar quoted too little parses as something else; one quoted too much changes the bytes on
     every run for no reason, and the artifacts are compared by byte."""
-    from intelligence.realization.generators.deployment import _yaml_scalar
 
     assert _yaml_scalar(value) == expected
 
@@ -1396,7 +1381,6 @@ def test_a_yaml_scalar_quotes_only_when_it_must(value, expected) -> None:
 def test_yaml_renders_empty_collections_and_bare_scalars() -> None:
     """An empty list is a declared-and-empty field, which is a different fact from an absent
     one. Emitting nothing for it would make the two indistinguishable in the rendered manifest."""
-    from intelligence.realization.generators.deployment import _yaml_lines
 
     assert _yaml_lines({"empty_list": [], "empty_map": {}}) == [
         "empty_list: []",
@@ -1414,7 +1398,6 @@ def test_a_schema_type_reads_a_bool_before_an_int(value, expected) -> None:
     """`True` is an int in Python, so a type reader that asked `isinstance(int)` first would
     declare every boolean field an integer — and every consumer would then validate against a
     type the value does not have."""
-    from intelligence.realization.generators.schema import _json_type
 
     assert _json_type(value) == expected
 
@@ -1424,8 +1407,6 @@ def test_the_generator_registry_refuses_a_duplicated_or_missing_family() -> None
     failures are refused at import rather than reported later: a duplicated family would make
     the emitting generator depend on iteration order, and a missing one would silently produce
     no artifact for a planned step."""
-    from intelligence.realization.errors import GenerationError
-    from intelligence.realization.generators import GENERATORS, _build_registry
 
     with pytest.MonkeyPatch.context() as patch:
         patch.setattr(
@@ -1443,8 +1424,6 @@ def test_content_that_is_not_newline_terminated_is_refused(pipeline) -> None:
     """Every artifact is compared by byte and most are read by line-oriented tools. A file
     without a trailing newline differs from the same file with one, and the difference would
     show up as drift rather than as the authoring slip it is."""
-    from intelligence.realization.errors import GenerationError
-    from intelligence.realization.generators import generator_for
 
     _intake, _plan, _composition, _findings, manifest = pipeline
     artifact = manifest.artifacts[0]
@@ -1463,7 +1442,6 @@ def test_a_generation_context_projects_its_target_and_finds_no_absent_upstream(p
     an ordinary state during the first waves. Raising instead would make every generator that
     cross-references an upstream family unusable before that family had run."""
     from intelligence.realization.contracts import ArtifactFamily
-    from intelligence.realization.generators.base import GenerationContext
 
     intake, plan, composition, _findings, _manifest = pipeline
     unit = composition.units[0]
@@ -1490,8 +1468,6 @@ def test_a_generation_context_projects_its_target_and_finds_no_absent_upstream(p
 
 
 def _decision(decision_id: str, **overrides) -> DecisionRecord:  # noqa: F821
-    from engine.knowledge.cko import DecisionRecord, RejectedOption
-
     fields = {
         "decision_id": decision_id,
         "title": f"Decision {decision_id}",
@@ -1526,7 +1502,6 @@ def _two_universe_intake() -> KnowledgeIntake:
     The repository's own canonical knowledge exercises one shape of each of those; this
     exercises the other, which is what the branches below are.
     """
-    from engine.knowledge.store import KnowledgeBase
 
     upstream = _object(
         "UCOS-TEST-UP-0001",
@@ -1628,8 +1603,6 @@ def test_the_whole_pipeline_runs_over_a_synthetic_state_and_governs_itself(tmp_p
 def test_a_target_citing_only_inactive_knowledge_fails_the_authority_gate() -> None:
     """A target whose every object is retired cites knowledge nobody stands behind, and
     realizing it would generate artifacts anchored to superseded truth."""
-    from engine.knowledge.store import KnowledgeBase
-    from intelligence.realization.governance import RealizationGovernor as _Governor
 
     retired = _object("UCOS-TEST-RETIRED-0001", universe="RETIRED", lifecycle=Lifecycle.SUPERSEDED)
     intake = KnowledgeIntake.from_base(KnowledgeBase((retired,)), source="test")
@@ -1642,9 +1615,6 @@ def test_a_target_citing_only_inactive_knowledge_fails_the_authority_gate() -> N
 def test_a_plan_missing_a_family_for_a_target_fails_the_completeness_gate(pipeline) -> None:
     """Realization is total, not selective: every target is realized into every family. A plan
     short one family would leave that target partly realized and fully governed."""
-    from dataclasses import replace as _replace
-
-    from intelligence.realization.governance import RealizationGovernor as _Governor
 
     _intake, plan, _composition, _findings, _manifest = pipeline
     target = plan.targets[0]
@@ -1662,7 +1632,6 @@ def test_an_artifact_path_that_would_escape_the_artifact_root_fails_the_frozen_g
     """`..` in a relative path is a traversal out of the artifact root, and a path inside the
     frozen corpus is a write DP-03 forbids. Both are refused by the same gate, because both
     make the artifact root a claim rather than a boundary."""
-    from dataclasses import replace as _replace
 
     _intake, _plan, _composition, _findings, manifest = pipeline
     artifact = manifest.artifacts[0]
@@ -1697,7 +1666,6 @@ def test_an_authority_inversion_between_two_objects_is_a_boundary_finding(tmp_pa
     lower one inverts the hierarchy, and the descriptor names it rather than ordering it away.
     An edge whose far end is outside this unit is skipped, because this universe's descriptor
     can say nothing about a rank it does not hold."""
-    from engine.knowledge.store import KnowledgeBase
 
     low = _object(
         "UCOS-TEST-LOW-0001", universe="INVERTED", authority=KnowledgeAuthority.ENGINEERING
@@ -1724,9 +1692,6 @@ def test_a_plan_step_binding_an_object_the_store_does_not_hold_is_refused(pipeli
     """Composition binds a step to canonical objects. A step citing one the store never held
     would produce a unit anchored to an id nothing can resolve, and the artifact's provenance
     would name it anyway."""
-    from dataclasses import replace as _replace
-
-    from intelligence.realization.errors import CompositionError
 
     intake, plan, _composition, _findings, _manifest = pipeline
     step = plan.steps[0]
@@ -1747,7 +1712,6 @@ def test_a_path_inside_the_repository_and_outside_the_frozen_corpus_is_permitted
     """The refusals are measured elsewhere. This is the other half: a path under the repository
     that is NOT frozen must pass, or the guard would refuse every in-repository artifact root
     and the engine could only ever write outside the tree it belongs to."""
-    from intelligence.realization.evidence import _guard_writable
 
     implementer = ImplementationEngine(RealizationConfig.create(REPO, artifact_root=REPO))
     implementer._assert_not_frozen(REPO / "engine" / "probe.json", "engine/probe.json")
@@ -1766,7 +1730,6 @@ def test_the_engine_composes_from_a_state_it_derives_for_itself() -> None:
 def test_the_convenience_realize_entry_point_runs_the_whole_pipeline(tmp_path) -> None:
     """The module-level function is what a caller outside this package uses; one that drifted
     from the engine would give two answers to "was this realization governed"."""
-    from intelligence.realization.engine import realize as realize_repository
 
     result = realize_repository(_config(tmp_path), dry_run=True, emit=False)
     assert result.governed
@@ -1776,13 +1739,10 @@ def test_the_convenience_realize_entry_point_runs_the_whole_pipeline(tmp_path) -
 def test_a_refused_decision_materializes_nothing(tmp_path, monkeypatch) -> None:
     """Governance is a precondition of materialization, not a report about it. A run that wrote
     first and adjudicated afterwards would leave a refused realization on disk."""
-    import intelligence.realization.governance as governance_module
 
     real = governance_module.RealizationGovernor.adjudicate
 
     def _refusing(self, **kwargs):  # noqa: ANN001, ANN003, ANN202
-        from dataclasses import replace as _replace
-
         decision = real(self, **kwargs)
         # `governed` is DERIVED from the gates, so refusing means failing one — there is no
         # verdict field to set, which is the point of deriving it.
@@ -1814,10 +1774,6 @@ def test_pruning_runs_only_on_a_materializing_run(tmp_path) -> None:
 def test_a_boundary_rule_skips_an_edge_whose_far_end_this_unit_does_not_hold(pipeline) -> None:
     """The descriptor speaks for one unit. An edge reaching an object the unit does not bind has
     no rank here, and ranking it anyway would compare an authority this descriptor never read."""
-    from dataclasses import replace as _replace
-
-    from intelligence.realization.generators.architecture import ArchitectureGenerator
-    from intelligence.realization.generators.base import GenerationContext
 
     intake, plan, composition, _findings, _manifest = pipeline
     unit = next(
@@ -1836,7 +1792,6 @@ def test_a_boundary_rule_skips_an_edge_whose_far_end_this_unit_does_not_hold(pip
 def test_a_plan_whose_upstream_universe_has_no_target_orders_what_it_can(pipeline) -> None:
     """A dependency into a universe the intake did not derive a target for cannot be ordered
     against, and inventing a step for it would put a phantom into the wave graph."""
-    from dataclasses import replace as _replace
 
     intake = _two_universe_intake()
     downstream_only = _replace(
@@ -1850,8 +1805,6 @@ def test_the_sql_projection_indexes_only_the_columns_the_record_carries(pipeline
     """Three columns are indexed because every canonical record carries them. A projection over
     a record that does not would emit an index on a column that is not in the table, and the
     DDL would not execute."""
-    from intelligence.realization.generators.base import GenerationContext
-    from intelligence.realization.generators.schema import SchemaGenerator
 
     intake, plan, composition, _findings, _manifest = pipeline
     unit = composition.units[0]

@@ -18,6 +18,7 @@ import json
 
 import pytest
 
+from engine.verification_intelligence import cost_model
 from engine.verification_intelligence.cost_model import (
     DEFAULT_SPLIT_THRESHOLD,
     DURATION,
@@ -224,7 +225,6 @@ def test_an_object_with_no_published_content_hash_is_placed_whole(monkeypatch) -
     """The split entry records the hash it was measured at, so an object with no published hash
     has nothing to record. Splitting it anyway would produce node ids the planner could never
     check for currency, which is the stale-split failure with the detection removed."""
-    from engine.verification_intelligence import cost_model
 
     root = "."
     target = HASHED[0]

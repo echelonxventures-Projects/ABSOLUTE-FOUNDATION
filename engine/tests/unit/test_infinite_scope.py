@@ -1364,7 +1364,6 @@ def test_the_identity_covers_every_parsed_field_except_the_declared_exclusions(
     doc: dict[str, Any],
 ) -> None:
     """Inclusion is the default; an omission must be a declared, reasoned exclusion."""
-    import dataclasses as _dc
 
     contract = parse_declaration(doc, source="test")
     payload = contract.digest_payload()
@@ -1378,7 +1377,6 @@ def test_the_identity_covers_every_parsed_field_except_the_declared_exclusions(
 
 def test_a_stale_exclusion_is_refused(doc: dict[str, Any]) -> None:
     """The other direction. An exclusion matching no field may silently widen later."""
-    import dataclasses as _dc
 
     contract = parse_declaration(doc, source="test")
     assert set(DIGEST_EXCLUSIONS) <= {field.name for field in _dc.fields(contract)}
@@ -1401,7 +1399,11 @@ def test_the_gate_report_carries_the_certification_identity() -> None:
 # KNOWN_EXECUTION_KINDS in the constitutional kernel, whose comment claims "Open by
 # registration (Article 17)" over a frozen tuple no registration function can extend.
 # --------------------------------------------------------------------------------
+import dataclasses as _dc  # noqa: E402
+
 from engine.infinite_scope import detector as _detector  # noqa: E402
+from engine.infinite_scope.declaration import load  # noqa: E402
+from engine.infinite_scope.detector import closures_in_source, detect  # noqa: E402
 
 
 def _ceiling(doc: dict, value: int) -> dict:
@@ -1772,7 +1774,6 @@ def test_an_exercise_expecting_something_other_than_admission_or_refusal_is_refu
 def test_the_committed_declaration_is_loadable_by_path(tmp_path: Any, doc: dict[str, Any]) -> None:
     """`load` is the reader every caller outside this package uses; `parse` is the one the tests
     use. Measuring only the second would leave the real entry point unexercised."""
-    from engine.infinite_scope.declaration import load
 
     contract = load(write_declaration(tmp_path, doc))
     assert contract.laws
@@ -1784,7 +1785,6 @@ def test_the_committed_declaration_is_loadable_by_path(tmp_path: Any, doc: dict[
 def test_a_module_that_does_not_parse_yields_no_closure() -> None:
     """A syntax error is a different defect, owned by the lint gate. Reporting it here would
     attribute it to the wrong law and put a permanent finding in the closure census."""
-    from engine.infinite_scope.detector import closures_in_source
 
     assert closures_in_source("def (:::\n", "broken.py") == []
 
@@ -1792,7 +1792,6 @@ def test_a_module_that_does_not_parse_yields_no_closure() -> None:
 def test_a_literal_type_carrying_a_non_constant_member_is_not_a_closure() -> None:
     """`Literal[SOME_NAME]` names something resolved elsewhere, so the set of values it admits
     is not visible here. Counting it would put a number on a population nobody enumerated."""
-    from engine.infinite_scope.detector import closures_in_source
 
     source = "from typing import Literal\nA = 1\nB = 2\nKind = Literal[A, B, 'c']\n"
     assert not [c for c in closures_in_source(source, "m.py") if c.kind == "literal-type"]
@@ -1803,7 +1802,6 @@ def test_a_module_that_cannot_be_opened_is_skipped_rather_than_crashing_the_dete
 ) -> None:
     """The census walks the whole repository. One unreadable file must not be the reason the
     ceiling cannot be measured at all."""
-    from engine.infinite_scope.detector import detect
 
     root = os.path.join(str(tmp_path), "layer")
     os.makedirs(root)

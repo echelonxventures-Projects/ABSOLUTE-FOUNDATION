@@ -9,23 +9,31 @@ gap to its callers.
 
 from __future__ import annotations
 
+import json
+import pathlib
+
 import pytest
 
 from engine.omega_infinite.capability import (
     AUTHORITY_METADATA,
     CONTENT_HASHING,
     REMOTE_STORAGE,
+    TRACKED_CONTENT,
     WORKING_TREE_STATE,
     CapabilityError,
+    CapabilitySet,
 )
 from engine.omega_infinite.direct_callers import (
     DECLARED_DIRECT,
     DECLARED_DIRECT_CEILING,
     DIRECT_CALLER_CEILING,
+    UCON_DECLARATION,
+    _invokes_tool_directly,
     direct_callers,
+    roots,
 )
 from engine.omega_infinite.git_provider import GitDiscoveryProvider
-from engine.omega_infinite.provider import ProviderError, Selector
+from engine.omega_infinite.provider import BaseProvider, ProviderError, Selector
 
 
 @pytest.fixture(scope="module")
@@ -86,8 +94,6 @@ def test_supplying_a_declared_capability_without_a_method_is_refused() -> None:
     nothing can fail it. This constructs a provider that declares a capability and supplies no
     method, and asserts the refusal by name.
     """
-    from engine.omega_infinite.capability import TRACKED_CONTENT, CapabilitySet
-    from engine.omega_infinite.provider import BaseProvider
 
     class Hollow(BaseProvider):
         def identifier(self) -> str:
@@ -128,7 +134,6 @@ def test_the_detector_separates_spawning_from_naming(tmp_path, label, source, ex
     The cases below are the contract. A guard that can be evaded by an assignment is not a guard,
     and one that counts declarations can never be satisfied.
     """
-    from engine.omega_infinite.direct_callers import _invokes_tool_directly
 
     module = tmp_path / "subject.py"
     module.write_text(source, encoding="utf-8")
@@ -186,10 +191,6 @@ def test_a_declaration_naming_no_audit_root_is_a_fault_rather_than_an_empty_scan
     """The roots come from the declaration that already names them, which is what stops this
     module carrying a second list of where the source is. An empty one must fault: a scan over no
     root finds no direct caller, and the ratchet would read that as a clean repository."""
-    import json
-    import pathlib
-
-    from engine.omega_infinite.direct_callers import UCON_DECLARATION, roots
 
     target = pathlib.Path(tmp_path) / UCON_DECLARATION
     target.parent.mkdir(parents=True)

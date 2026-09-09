@@ -30,9 +30,13 @@ file a second, slower copy of them.
 
 from __future__ import annotations
 
+import ast
 import copy
+import dataclasses
 import json
 import os
+import random
+import re
 import subprocess
 import textwrap
 from pathlib import Path
@@ -50,12 +54,21 @@ from engine.certification_integrity import (
 )
 from engine.certification_integrity.equivalence import discover_test_modules, partition
 from engine.certification_integrity.model import (
+    FILE_ARCHIVED,
     FILE_EXECUTABLE,
+    FILE_TEST,
     FILE_TOOLING,
     PLANE_TYPES,
+    REMEDY,
+    FileRecord,
     IntegrityError,
+    Provenance,
+    UncoveredLine,
 )
+from engine.universal_discovery import discovery as omega_discovery
 from engine.universal_discovery import ratchet as omega_ratchet
+from engine.universal_discovery import ratchet as ratchet_module
+from engine.universal_discovery.model import OmegaError
 
 REPO = Path(__file__).resolve().parents[3]
 
@@ -281,8 +294,6 @@ def _file(
     invocation_sources: tuple[str, ...] = (),
     ast_statements: int | None = None,
 ) -> Any:
-    from engine.certification_integrity.model import FileRecord
-
     return FileRecord(
         path=path,
         classification=FILE_EXECUTABLE,
@@ -495,7 +506,6 @@ def test_statement_attribution_partitions_rather_than_nests() -> None:
     it. One defect was hiding another, so this test is written against the invariant it
     documents — an exact partition, in BOTH regimes — rather than against one of them.
     """
-    import ast
 
     scope = surface.read_scope(str(REPO))
     built = surface.build(
@@ -610,7 +620,6 @@ def test_the_shuffle_reports_its_seed(monkeypatch: pytest.MonkeyPatch) -> None:
 
 def test_the_shuffle_does_not_disturb_the_global_random_stream() -> None:
     """Seeding the global stream would make this measurement a cause of instability."""
-    import random
 
     random.seed(99)
     expected = [random.random() for _ in range(3)]  # noqa: S311 - stream identity, not crypto
@@ -773,7 +782,6 @@ def test_no_wall_clock_or_machine_path_leaks_into_the_inventory(
     """A register carrying a timestamp cannot be a fixed point."""
     encoded = json.dumps(built.as_document())
     assert str(REPO) not in encoded, "an absolute machine path leaked into the inventory"
-    import re
 
     assert not re.search(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", encoded), "a timestamp leaked in"
 
@@ -983,8 +991,6 @@ def test_a_derivation_that_faults_is_reported_as_an_integrity_fault(
     """`OmegaError` is re-raised as `IntegrityError` so "discovery could not run" can never be
     read as "discovery found nothing" — the empty-world state in which every no-violations claim
     is true."""
-    from engine.universal_discovery import discovery as omega_discovery
-    from engine.universal_discovery.model import OmegaError
 
     (tmp_path / "pyproject.toml").write_text(
         "[tool.coverage.report]\nfail_under = 90\n", encoding="utf-8"
@@ -1083,8 +1089,6 @@ def test_an_orphan_ceiling_closes_the_gate_that_declares_it(monkeypatch: pytest.
         return replace_declaration(declaration)
 
     def replace_declaration(declaration: contract.Declaration) -> contract.Declaration:
-        import dataclasses
-
         return dataclasses.replace(
             declaration,
             ratchet={**declaration.ratchet, "invented_measurement": "CONVERGENT"},
@@ -1101,7 +1105,6 @@ def test_a_first_measurement_of_a_key_is_seeded_rather_than_refused(tmp_path: Pa
     """SEEDED is the state a ratchet enters the first time a key is measured: every future run
     is held to this value or better, with no number authored by hand. Refusing it would make a
     new law unaddable without hand-writing the ceiling the whole design removes."""
-    from engine.universal_discovery import ratchet as ratchet_module
 
     state = ratchet_module.load(str(tmp_path / "absent.json"))
     key = sorted(contract.RATCHETED)[0]
@@ -1117,7 +1120,6 @@ def test_sealing_advances_the_ratchet_from_a_measurement_and_writes_one_path(
     """Sealing is not a way to make a refusal pass: `sealed` only ever moves `best` DOWNWARD and
     `assert_sealed_from_measurement` refuses a state looser than the run that wrote it. The write
     is redirected here because this test measures the SEAL, not the repository's own state file."""
-    from engine.universal_discovery import ratchet as ratchet_module
 
     written: dict[str, object] = {}
     monkeypatch.setattr(inventory, "build", lambda root, coverage_xml=None: built)
@@ -1163,7 +1165,6 @@ def test_the_inventory_writes_one_document_and_returns_what_it_wrote(
 def test_a_test_module_is_classified_as_one_and_owned_by_the_scope_that_omits_it() -> None:
     """A test file is not executable surface: it is the thing that exercises it. Classifying it
     as executable would put every test module into the denominator it is measuring."""
-    from engine.certification_integrity.model import FILE_TEST
 
     classification, rule_id, reason = inventory._classify(
         "engine/tests/unit/test_x.py", text="", excluded_packages={}, is_test=True
@@ -1179,7 +1180,6 @@ def test_a_test_module_is_classified_as_one_and_owned_by_the_scope_that_omits_it
 def test_an_archived_file_is_owned_by_the_frozen_path_guard() -> None:
     """DP-03 owns the frozen corpus. Reporting it as unowned would put the certified corpus into
     the undeclared-surface finding, which is a governance claim about somebody else's decision."""
-    from engine.certification_integrity.model import FILE_ARCHIVED
 
     assert "frozen-path guard" in inventory._authority(
         "99-FREEZE/a.py", False, FILE_ARCHIVED, "UCI-C-04"
@@ -1214,7 +1214,6 @@ def test_the_shuffle_reorders_only_when_a_seed_is_present(monkeypatch: pytest.Mo
 def test_an_uncovered_line_carries_its_remedy_and_records_itself() -> None:
     """The remedy is derived from the classification rather than written per line, so a
     classification that changed meaning cannot leave a line carrying the previous remedy."""
-    from engine.certification_integrity.model import REMEDY, UncoveredLine
 
     classification = sorted(REMEDY)[0]
     line = UncoveredLine(
@@ -1540,7 +1539,6 @@ def test_an_extraction_prepared_with_an_interpreter_reuses_it_on_the_next_call(
 def test_a_coverage_figure_records_what_it_is_a_figure_of() -> None:
     """A percentage with no provenance is not reproducible even in principle: it does not say
     which tree it measured, which interpreter ran it, or how many tests contributed."""
-    from engine.certification_integrity.model import Provenance
 
     record = Provenance(
         commit_sha="a" * 40,
@@ -1595,7 +1593,6 @@ def test_a_key_measured_for_the_first_time_is_seeded_rather_than_refused(
     """SEEDED is the state a ratchet enters the first time a key is measured, and it must HOLD:
     refusing it would make a new law unaddable without hand-writing the ceiling this whole design
     exists to remove. Every future run is then held to the seeded value or better."""
-    from engine.universal_discovery import ratchet as ratchet_module
 
     key = sorted(contract.RATCHETED)[0]
     empty = ratchet_module.load("/nonexistent/uci-ratchet.json")

@@ -24,6 +24,7 @@ from engine.omega_governance.reference.encoding import (
     Sha256Identity,
     default_encoding,
 )
+from engine.omega_governance.temporal import coordinate as coordinate_module
 from engine.omega_governance.temporal.clocks import (
     ClockError,
     ClockRegistry,
@@ -422,7 +423,6 @@ def test_a_coordinate_that_does_not_survive_a_round_trip_is_refused(monkeypatch)
     """A register whose records change on read cannot be audited, so the round trip is performed
     rather than argued — and the guard has to be shown to fire, or performing it proves nothing."""
     coordinate = TemporalCoordinate(LOGICAL_FRAME, LOGICAL_TICK, TOTAL, (0,), "logical")
-    from engine.omega_governance.temporal import coordinate as coordinate_module
 
     monkeypatch.setattr(
         coordinate_module,

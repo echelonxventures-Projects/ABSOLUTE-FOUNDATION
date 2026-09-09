@@ -44,12 +44,13 @@ TOOLS = REPO / "00-BOOK" / "tools"
 AUTHORITY_REL = "engine/ledger_authority/__init__.py"
 AUTHORITY_SOURCE = REPO / AUTHORITY_REL
 
+import importlib.util  # noqa: E402
+
 from engine import ledger_authority as LA  # noqa: E402
+from engine.omega_infinite import git_provider  # noqa: E402
 
 
 def _write(tmp_path: Path, obj: dict) -> str:
-    import json
-
     path = tmp_path / "id-ledger.json"
     path.write_text(json.dumps(obj, indent=2) + "\n", encoding="utf-8")
     return str(path)
@@ -57,7 +58,6 @@ def _write(tmp_path: Path, obj: dict) -> str:
 
 def _writer(path, ledger):
     """A minimal stand-in for each caller's own serializer."""
-    import json
 
     Path(path).write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
@@ -69,7 +69,6 @@ def _issue(path, ledger, actor="test", **overrides):
     a digest independently would be asserting that two implementations agree, which is the
     very thing the design removes.
     """
-    import json
 
     manifest = LA.plan(path, ledger, actor=actor)
     permit = {
@@ -1416,7 +1415,6 @@ def test_a_first_mint_into_a_nonexistent_tree_still_works(tmp_path: Path) -> Non
 
 def _ukb_authorization():
     """``ukb.py``'s permit resolver, loaded without executing the script's CLI."""
-    import importlib.util
 
     spec = importlib.util.spec_from_file_location("_ukb_under_test", TOOLS / "ukb.py")
     module = importlib.util.module_from_spec(spec)
@@ -1662,7 +1660,6 @@ def test_a_head_that_cannot_be_determined_is_none_rather_than_a_failure(
     `git_head` feeds `manifest["head"]`, which every permit is bound to. A provider that
     raised here would turn an unreadable repository into a crash inside the chokepoint.
     """
-    from engine.omega_infinite import git_provider
 
     def refusing(*args, **kwargs):
         raise RuntimeError("the provider cannot answer here")

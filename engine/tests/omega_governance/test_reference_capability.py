@@ -127,7 +127,6 @@ def test_an_empty_set_declares_nothing_and_therefore_permits_nothing() -> None:
 def test_the_registry_reports_the_capabilities_it_holds_in_a_stable_order() -> None:
     """The known set is what a report is rendered from, so two renderings of one registry must
     order it the same way — otherwise the document's bytes would depend on insertion order."""
-    from engine.omega_governance.reference.capability import default_registry
 
     known = default_registry().known()
     assert known == tuple(sorted(known))

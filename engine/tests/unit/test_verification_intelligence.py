@@ -22,17 +22,37 @@ The four that matter most:
 
 from __future__ import annotations
 
+import dataclasses
+import io
+import itertools
 import json
 import os
+import re
+import runpy
+import stat
 import subprocess
+import subprocess as subprocess_module
 import sys
+import textwrap
+from dataclasses import replace
 
 import pytest
 
 from engine.certification_integrity import immutable
+from engine.universal_discovery import discovery as discovery_module
 from engine.universal_discovery.discovery import clear_derived_scope_cache
+from engine.verification_impact.graph import ImpactError
+from engine.verification_intelligence import cli, evidence
+from engine.verification_intelligence import evidence as evidence_module
+from engine.verification_intelligence import execution as execution_module
+from engine.verification_intelligence import gate as gate_module
 from engine.verification_intelligence import gate as uvi_gate
+from engine.verification_intelligence import plan as plan_module
+from engine.verification_intelligence import registry as registry_module
+from engine.verification_intelligence import selection as selection_module
+from engine.verification_intelligence.cli import main
 from engine.verification_intelligence.constitution import (
+    COST_MODEL,
     execution_contract,
     load_constitution,
     load_declaration,
@@ -50,12 +70,14 @@ from engine.verification_intelligence.evidence import (
 )
 from engine.verification_intelligence.execution import (
     _combine_and_evaluate,
+    _export_shard_data,
     _shard_argv,
     assert_topology_neutral,
     combine_shards,
     plan_shards,
     resolve_workers,
     run_tests,
+    shard_indices_present,
     split_currency,
     unit_file,
 )
@@ -67,22 +89,39 @@ from engine.verification_intelligence.model import (
     Action,
     Coverage,
     Selection,
+    SelectionResult,
     Shard,
     VerificationIntelligenceError,
 )
 from engine.verification_intelligence.plan import (
     build_plan,
+    evidence_home,
     plan_digest,
     plan_json,
     plan_tsv,
 )
 from engine.verification_intelligence.registry import (
+    CAPABILITY_CATALOG,
+    DEFAULT_COST_SECONDS,
+    EXECUTABLE_REGISTRY,
+    RELATIONSHIP_GRAPH,
+    UNIVERSAL_REGISTRY,
+    TestObjectRegistry,
     build_test_registry,
     collection_roots,
     is_collectible,
+    load_cost_model,
     load_substrates,
 )
-from engine.verification_intelligence.selection import select, stages_reading
+from engine.verification_intelligence.selection import (
+    SELF_PREFIXES,
+    UNBOUNDED_PREFIXES,
+    _capability_location,
+    _test_mirror,
+    select,
+    stages_reading,
+    unbounded_prefixes,
+)
 
 REPO = repo_root()
 
@@ -193,7 +232,6 @@ def test_a_test_object_that_pytest_would_not_collect_is_not_selectable() -> None
 
 def test_an_unmeasured_object_is_over_priced_rather_than_assumed_cheap(tests_registry) -> None:
     """Under-pricing an unknown packs it into a shard the whole run then waits on."""
-    from engine.verification_intelligence.registry import DEFAULT_COST_SECONDS
 
     assert tests_registry.cost_of("engine/tests/unit/a_file_nobody_measured.py") == (
         DEFAULT_COST_SECONDS
@@ -425,7 +463,6 @@ def test_a_non_reusable_stage_takes_no_digest(constitution, substrates) -> None:
 
 def test_a_prefix_matching_no_registered_object_takes_no_digest(constitution, substrates) -> None:
     """A key that covers nothing would be a hit on every run, forever."""
-    from dataclasses import replace
 
     stage = replace(
         next(s for s in constitution.stages if s.reusable),
@@ -453,7 +490,6 @@ def test_step3_removing_a_read_set_is_refused(constitution, substrates) -> None:
     Both refusals matter and they differ: the law refuses the DECLARATION, and
     ``input_digest`` refuses the KEY. A stage stripped of its read-set must fail both.
     """
-    from dataclasses import replace
 
     ctx = uvi_gate._Context()
     assert every_stage_declares_a_read_set(ctx) == []
@@ -498,7 +534,6 @@ def test_step3_toggling_reuse_leaves_the_dependency_relation_unchanged(
     constitution, substrates
 ) -> None:
     """MUTATION — toggle the reuse flag → dependency relation unchanged, on every stage."""
-    from dataclasses import replace
 
     probe = ("00-BOOK/SCHEMAS/artifact.schema.json", "engine/uckp/facets.py")
     before = stages_reading(constitution.stages, substrates, probe)
@@ -511,7 +546,6 @@ def test_step3_toggling_reuse_leaves_the_dependency_relation_unchanged(
 
 def test_step3_changing_the_read_set_changes_the_digest(constitution, substrates) -> None:
     """MUTATION — change read-set → digest changes, in both directions."""
-    from dataclasses import replace
 
     stage = next(
         s
@@ -530,7 +564,6 @@ def test_step3_changing_the_read_set_changes_the_digest(constitution, substrates
 
 def test_step3_reuse_inputs_still_resolves_without_a_read_set(constitution, substrates) -> None:
     """COMPATIBILITY — ``reuse_inputs`` was not removed; a declaration lacking read_set keys."""
-    from dataclasses import replace
 
     stage = next(s for s in constitution.stages if s.reusable and s.reuse_inputs)
     legacy = replace(stage, read_set=())
@@ -614,7 +647,6 @@ def test_A5_a_withheld_hash_contributes_a_constant_rather_than_refusing(
 
 def test_A5_an_unexplained_missing_hash_still_refuses(constitution, substrates) -> None:
     """A5 — the distinction is withheld vs MISSING, and missing must still refuse."""
-    from dataclasses import replace
 
     stage = replace(
         next(s for s in constitution.stages if s.reusable),
@@ -636,7 +668,6 @@ def test_A5_an_unexplained_missing_hash_still_refuses(constitution, substrates) 
 
 def test_A5_withheld_and_hashed_are_not_the_same_key(constitution, substrates) -> None:
     """A5 — a withheld marker must not collide with a real hash of the same text."""
-    from dataclasses import replace
 
     stage = replace(
         next(s for s in constitution.stages if s.reusable),
@@ -663,8 +694,6 @@ def test_UVI_L_11_fires_on_a_read_set_that_resolves_to_nothing(substrates) -> No
     """UVI-L-11 — mutation proof: the law must fail when the condition it names is present."""
     ctx = uvi_gate._Context()
     assert every_declared_read_set_resolves(ctx) == [], "the law must hold as the tree stands"
-
-    from dataclasses import replace
 
     bogus = replace(
         ctx.constitution.stages[0],
@@ -893,7 +922,6 @@ def test_a_plan_carries_no_observation_of_the_run(
     mode_id, constitution, substrates, tests_registry
 ) -> None:
     """A clock or a machine path would make two plans of one state differ."""
-    import re
 
     body = plan_json(
         build_plan(
@@ -1091,8 +1119,6 @@ def test_the_gate_writes_nothing(tmp_path) -> None:
 
 
 def test_the_cli_emits_a_plan_the_shell_can_read(tmp_path) -> None:
-    from engine.verification_intelligence.cli import main
-
     out = tmp_path / "plan.tsv"
     assert main(["plan", "--mode", "full", "--tsv", "--out", str(out), "--path", "README.md"]) == 0
     rows = [line.split("\t") for line in out.read_text(encoding="utf-8").strip().splitlines()]
@@ -1100,8 +1126,6 @@ def test_the_cli_emits_a_plan_the_shell_can_read(tmp_path) -> None:
 
 
 def test_the_cli_refuses_to_record_against_an_undeclared_stage() -> None:
-    from engine.verification_intelligence.cli import main
-
     assert (
         main(["record", "--stage-label", "no such stage", "--result", "PASS", "--digest", "x"]) == 2
     )
@@ -1130,8 +1154,6 @@ def _throwaway_suite(tmp_path, *, failing: bool = False) -> tuple:
 
 
 def test_run_tests_executes_every_shard_and_passes_when_they_pass(tmp_path) -> None:
-    import io
-
     shards = _throwaway_suite(tmp_path)
     stream = io.StringIO()
     code = run_tests(
@@ -1149,8 +1171,6 @@ def test_run_tests_executes_every_shard_and_passes_when_they_pass(tmp_path) -> N
 
 
 def test_run_tests_fails_when_any_shard_fails(tmp_path) -> None:
-    import io
-
     shards = _throwaway_suite(tmp_path, failing=True)
     stream = io.StringIO()
     code = run_tests(
@@ -1167,7 +1187,6 @@ def test_run_tests_fails_when_any_shard_fails(tmp_path) -> None:
 
 def test_run_tests_refuses_a_partition_that_is_not_the_selection(tmp_path) -> None:
     """The check that stands between a dropped shard and a green run."""
-    import io
 
     shards = _throwaway_suite(tmp_path)[:1]
     with pytest.raises(VerificationIntelligenceError, match="missing"):
@@ -1183,7 +1202,6 @@ def test_run_tests_refuses_a_partition_that_is_not_the_selection(tmp_path) -> No
 
 def test_run_tests_refuses_to_report_a_pass_over_nothing(tmp_path) -> None:
     """An empty partition is the one thing that must never look like success."""
-    import io
 
     stream = io.StringIO()
     assert (
@@ -1199,7 +1217,6 @@ def test_the_floor_is_evaluated_over_combined_data_and_refuses_when_there_is_non
     tmp_path,
 ) -> None:
     """No coverage data cannot be answered with a pass; the floor would be a claim about air."""
-    import io
 
     stream = io.StringIO()
     empty = tmp_path / "no-data"
@@ -1217,8 +1234,6 @@ def test_the_floor_refuses_an_interpreter_that_cannot_measure_it(tmp_path) -> No
     as a test failure rather than as a toolchain that cannot measure. Measured: a bare `python3`
     on a machine whose default series is not the pinned one reproduces it exactly.
     """
-    import io
-    import stat
 
     # An "interpreter" that cannot import pytest_cov. Standing in for a real one keeps the test
     # portable: the probe only asks whether `<python> -c "import pytest_cov"` succeeds.
@@ -1426,14 +1441,12 @@ def test_l09_refuses_reuse_conditions_that_omit_the_digest_or_the_result(tmp_pat
 
 def test_l10_refuses_a_plan_that_is_not_reproducible(tmp_path, monkeypatch) -> None:
     """The law must be able to see non-determinism, or it is decoration."""
-    import itertools
 
     counter = itertools.count()
     real = uvi_gate.build_plan
 
     def _drifting(*args, **kwargs):
         plan = real(*args, **kwargs)
-        from dataclasses import replace
 
         return replace(plan, notes=(f"run {next(counter)}",))
 
@@ -1466,7 +1479,6 @@ def test_without_the_gate_flag_a_refusal_is_reported_but_does_not_fail(tmp_path)
 
 def test_the_report_surface_explains_the_plan_it_would_execute(capsys) -> None:
     """`--explain` is only useful if it shows the same decision run-tests will act on."""
-    from engine.verification_intelligence.cli import main
 
     assert main(["report", "--mode", "change", "--path", "engine/uaue/gate.py"]) == 0
     body = capsys.readouterr().out
@@ -1478,8 +1490,6 @@ def test_the_report_surface_explains_the_plan_it_would_execute(capsys) -> None:
 
 
 def test_the_report_names_every_escalation_it_widened_on(capsys) -> None:
-    from engine.verification_intelligence.cli import main
-
     assert main(["report", "--mode", "change", "--path", "00-BOOK/DATA/uvi-probe.json"]) == 0
     body = capsys.readouterr().out
     assert "escalations:" in body
@@ -1487,8 +1497,6 @@ def test_the_report_names_every_escalation_it_widened_on(capsys) -> None:
 
 
 def test_the_plan_surface_emits_json_and_a_rendered_form(capsys) -> None:
-    from engine.verification_intelligence.cli import main
-
     assert main(["plan", "--mode", "full", "--json", "--path", "README.md"]) == 0
     document = json.loads(capsys.readouterr().out)
     assert document["artifact_id"] == "UVI-000001"
@@ -1498,8 +1506,6 @@ def test_the_plan_surface_emits_json_and_a_rendered_form(capsys) -> None:
 
 
 def test_the_cli_reports_a_fault_rather_than_a_narrow_plan(monkeypatch, capsys) -> None:
-    from engine.verification_intelligence import cli
-
     def _fault(*args, **kwargs):
         raise VerificationIntelligenceError("the substrate is unreadable")
 
@@ -1509,8 +1515,6 @@ def test_the_cli_reports_a_fault_rather_than_a_narrow_plan(monkeypatch, capsys) 
 
 
 def test_recording_a_result_round_trips_through_the_declared_store(tmp_path, monkeypatch) -> None:
-    from engine.verification_intelligence import cli, evidence
-
     monkeypatch.setattr(evidence, "store_home", lambda *a, **k: str(tmp_path))
     monkeypatch.setattr(cli, "store_home", lambda *a, **k: str(tmp_path))
     constitution = load_constitution()
@@ -1541,8 +1545,6 @@ def test_an_unreadable_registry_is_a_fault_and_never_an_empty_selection(tmp_path
 
 
 def test_a_registry_with_no_dependency_edges_is_refused(tmp_path) -> None:
-    from engine.verification_intelligence.registry import EXECUTABLE_REGISTRY
-
     target = tmp_path / EXECUTABLE_REGISTRY
     target.parent.mkdir(parents=True)
     target.write_text(
@@ -1554,8 +1556,6 @@ def test_a_registry_with_no_dependency_edges_is_refused(tmp_path) -> None:
 
 
 def test_a_registry_holding_no_entries_is_refused(tmp_path) -> None:
-    from engine.verification_intelligence.registry import EXECUTABLE_REGISTRY
-
     target = tmp_path / EXECUTABLE_REGISTRY
     target.parent.mkdir(parents=True)
     target.write_text(json.dumps({"entries": []}), encoding="utf-8")
@@ -1594,16 +1594,12 @@ def test_a_tree_with_no_discoverable_suite_is_refused(tmp_path) -> None:
 
 def test_an_absent_cost_model_prices_everything_at_the_default(tmp_path, substrates) -> None:
     """A missing measurement makes a plan slower, never wrong."""
-    from engine.verification_intelligence.registry import load_cost_model
 
     costs, split, threshold = load_cost_model(str(tmp_path))
     assert costs == {} and split == {} and threshold == 0.0
 
 
 def test_a_corrupt_cost_model_is_ignored_rather_than_fatal(tmp_path) -> None:
-    from engine.verification_intelligence.constitution import COST_MODEL
-    from engine.verification_intelligence.registry import load_cost_model
-
     target = tmp_path / COST_MODEL
     target.parent.mkdir(parents=True)
     target.write_text("{not json", encoding="utf-8")
@@ -1614,7 +1610,6 @@ def test_a_split_entry_whose_content_hash_moved_falls_back_to_the_whole_file(
     substrates, monkeypatch
 ) -> None:
     """Stale node ids would fail a run; whole-file placement is slower and always correct."""
-    from engine.verification_intelligence import registry as registry_module
 
     real = registry_module.load_cost_model
 
@@ -1757,8 +1752,6 @@ def test_a_mode_declaring_an_unknown_stage_selector_is_refused(tmp_path) -> None
 
 def test_the_floor_is_evaluated_once_over_the_union_of_the_shards(tmp_path) -> None:
     """Two shards, one combined total, one verdict — the property sharding must not break."""
-    import io
-    import textwrap
 
     (tmp_path / "measured.py").write_text(
         textwrap.dedent(
@@ -1827,7 +1820,6 @@ def test_the_floor_is_evaluated_once_over_the_union_of_the_shards(tmp_path) -> N
 
 def test_an_owner_below_a_catalogued_capability_resolves_to_it(substrates) -> None:
     """A new subpackage under a known capability is attributed, not escalated."""
-    from engine.verification_intelligence.selection import _capability_location
 
     catalogued = next(iter(sorted(substrates.capability_of_owner)))
     assert _capability_location(substrates, catalogued) == catalogued
@@ -1836,8 +1828,6 @@ def test_an_owner_below_a_catalogued_capability_resolves_to_it(substrates) -> No
 
 
 def test_the_test_mirror_is_derived_from_the_catalogue_shape() -> None:
-    from engine.verification_intelligence.selection import _test_mirror
-
     assert _test_mirror("engine/uckp") == "engine/tests/uckp"
     assert _test_mirror("engine") == "engine/tests"
     assert _test_mirror("engine/tests") is None, "a test location has no test mirror"
@@ -1916,7 +1906,6 @@ def test_l06_refuses_an_isolation_entry_with_no_measurement(tmp_path, constituti
 
 def test_running_the_tests_leaves_nothing_in_the_repository(tmp_path) -> None:
     """A verification run must not be able to dirty the thing it is verifying."""
-    import io
 
     shards = _throwaway_suite(tmp_path)
     before = sorted(os.listdir(tmp_path))
@@ -2055,12 +2044,6 @@ def test_the_shards_collect_exactly_the_tests_the_whole_suite_collects() -> None
 
 def _substrate_fixture(tmp_path, **overrides):
     """A minimal but valid substrate tree, with one surface replaced by the caller."""
-    from engine.verification_intelligence.registry import (
-        CAPABILITY_CATALOG,
-        EXECUTABLE_REGISTRY,
-        RELATIONSHIP_GRAPH,
-        UNIVERSAL_REGISTRY,
-    )
 
     executable_entries = [
         {"path": "a.py", "object_class": "EXECUTABLE_OBJECT", "dependencies": []},
@@ -2155,16 +2138,12 @@ def test_a_valid_substrate_tree_loads(tmp_path) -> None:
     ],
 )
 def test_an_unusable_substrate_is_a_fault(surface, document, message, tmp_path) -> None:
-    from engine.verification_intelligence import registry as registry_module
-
     root = _substrate_fixture(tmp_path, **{getattr(registry_module, surface): document})
     with pytest.raises(VerificationIntelligenceError, match=message):
         load_substrates(str(root))
 
 
 def test_a_surface_that_is_not_an_object_is_a_fault(tmp_path) -> None:
-    from engine.verification_intelligence.registry import EXECUTABLE_REGISTRY
-
     root = _substrate_fixture(tmp_path)
     (root / EXECUTABLE_REGISTRY).write_text("[]", encoding="utf-8")
     with pytest.raises(VerificationIntelligenceError, match="not an object"):
@@ -2173,11 +2152,6 @@ def test_a_surface_that_is_not_an_object_is_a_fault(tmp_path) -> None:
 
 def test_malformed_entries_are_skipped_rather_than_crashing(tmp_path) -> None:
     """A surface may carry a row this engine does not understand; it may not carry none."""
-    from engine.verification_intelligence.registry import (
-        CAPABILITY_CATALOG,
-        EXECUTABLE_REGISTRY,
-        RELATIONSHIP_GRAPH,
-    )
 
     root = _substrate_fixture(
         tmp_path,
@@ -2260,7 +2234,6 @@ def test_a_registry_that_projects_nothing_is_still_a_fault(tmp_path, monkeypatch
     rather than return an empty run.
     """
     root = _substrate_fixture(tmp_path)
-    from engine.verification_intelligence import registry as registry_module
 
     monkeypatch.setattr(registry_module, "collection_roots", lambda _root=None: ("nowhere/at/all",))
     with pytest.raises(VerificationIntelligenceError, match="no collectible test object"):
@@ -2297,7 +2270,6 @@ def test_total_cost_prices_the_whole_suite_by_default(tests_registry) -> None:
 # --------------------------------------------------------------------------------
 def _declaration() -> dict:
     """The live declaration, read through the loader that owns its location."""
-    from engine.verification_intelligence.constitution import load_declaration
 
     return load_declaration()
 
@@ -2363,8 +2335,6 @@ def test_the_live_declaration_has_unique_law_ids() -> None:
 
 
 def test_only_executes_exactly_one_shard_of_the_plan(tmp_path) -> None:
-    import io
-
     shards = _throwaway_suite(tmp_path)
     stream = io.StringIO()
     code = run_tests(
@@ -2386,8 +2356,6 @@ def test_only_executes_exactly_one_shard_of_the_plan(tmp_path) -> None:
 
 
 def test_a_shard_index_the_plan_does_not_contain_is_refused(tmp_path) -> None:
-    import io
-
     shards = _throwaway_suite(tmp_path)
     stream = io.StringIO()
     code = run_tests(
@@ -2408,8 +2376,6 @@ def test_a_shard_index_the_plan_does_not_contain_is_refused(tmp_path) -> None:
 
 
 def test_one_shard_under_the_floor_must_be_given_somewhere_to_leave_its_data(tmp_path) -> None:
-    import io
-
     shards = _throwaway_suite(tmp_path)
     stream = io.StringIO()
     code = run_tests(
@@ -2426,13 +2392,6 @@ def test_one_shard_under_the_floor_must_be_given_somewhere_to_leave_its_data(tmp
 
 
 def test_shard_data_is_named_by_the_index_that_produced_it(tmp_path) -> None:
-    import io
-
-    from engine.verification_intelligence.execution import (
-        _export_shard_data,
-        shard_indices_present,
-    )
-
     produced = tmp_path / "produced"
     produced.mkdir()
     (produced / ".coverage.7").write_text("data", encoding="utf-8")
@@ -2444,10 +2403,6 @@ def test_shard_data_is_named_by_the_index_that_produced_it(tmp_path) -> None:
 
 
 def test_a_shard_that_measured_nothing_does_not_export_silence(tmp_path) -> None:
-    import io
-
-    from engine.verification_intelligence.execution import _export_shard_data
-
     empty = tmp_path / "produced"
     empty.mkdir()
     stream = io.StringIO()
@@ -2456,8 +2411,6 @@ def test_a_shard_that_measured_nothing_does_not_export_silence(tmp_path) -> None
 
 
 def test_combine_refuses_when_a_shard_left_no_data(tmp_path) -> None:
-    import io
-
     data = tmp_path / "data"
     data.mkdir()
     (data / ".coverage.shard-0").write_text("x", encoding="utf-8")
@@ -2473,8 +2426,6 @@ def test_combine_refuses_when_a_shard_left_no_data(tmp_path) -> None:
 
 
 def test_combine_refuses_data_from_a_shard_the_plan_does_not_contain(tmp_path) -> None:
-    import io
-
     data = tmp_path / "data"
     data.mkdir()
     for index in (0, 1, 9):
@@ -2485,16 +2436,12 @@ def test_combine_refuses_data_from_a_shard_the_plan_does_not_contain(tmp_path) -
 
 
 def test_combine_refuses_when_no_shard_was_expected(tmp_path) -> None:
-    import io
-
     stream = io.StringIO()
     assert combine_shards((), str(tmp_path), root=str(tmp_path), stream=stream) == 1
     assert "no shard was expected" in stream.getvalue()
 
 
 def test_combine_refuses_a_data_directory_that_is_not_there(tmp_path) -> None:
-    import io
-
     stream = io.StringIO()
     missing = tmp_path / "never-downloaded"
     assert combine_shards((0,), str(missing), root=str(tmp_path), stream=stream) == 1
@@ -2577,9 +2524,6 @@ def test_the_module_entry_point_dispatches_to_the_cli(monkeypatch) -> None:
     """``python -m engine.verification_intelligence`` is a second entry point, and a dispatcher
     rather than a copy. If it stopped reaching ``cli.main`` the two would drift silently — the
     module runs, exits 0, and verifies nothing."""
-    import runpy
-
-    from engine.verification_intelligence import cli
 
     calls: list[int] = []
     monkeypatch.setattr(cli, "main", lambda: calls.append(1) or 0)
@@ -2628,7 +2572,6 @@ def test_a_declaration_field_that_is_not_a_list_refuses_to_construct(tmp_path) -
 def test_the_evidence_home_is_resolved_under_the_declared_store(constitution) -> None:
     """The plan reports where a reusable result would be read from. A home nobody can name is a
     cache nobody can inspect, clear or audit."""
-    from engine.verification_intelligence.plan import evidence_home
 
     assert evidence_home(constitution, REPO).startswith(REPO)
 
@@ -2638,7 +2581,6 @@ def test_a_plan_whose_split_table_says_nothing_carries_no_currency_note(
 ) -> None:
     """A repository with no cost model has no split table, and a note saying `0/0 current` would
     be a line about nothing on every plan such a repository ever renders."""
-    from engine.verification_intelligence import plan as plan_module
 
     monkeypatch.setattr(plan_module, "split_currency", lambda registry: "")
     built = build_plan(
@@ -2657,7 +2599,6 @@ def test_a_plan_whose_split_table_says_nothing_carries_no_currency_note(
 def test_a_universal_registry_holding_no_entries_is_refused(tmp_path) -> None:
     """02 is the registry the identity layer reads. Empty, every identity resolves to nothing and
     the identity layer of selection silently contributes no objects."""
-    from engine.verification_intelligence.registry import UNIVERSAL_REGISTRY
 
     root = _substrate_fixture(tmp_path, **{UNIVERSAL_REGISTRY: {"entries": []}})
     with pytest.raises(VerificationIntelligenceError, match="no entries"):
@@ -2667,7 +2608,6 @@ def test_a_universal_registry_holding_no_entries_is_refused(tmp_path) -> None:
 def test_a_universal_entry_with_no_path_is_skipped_rather_than_crashing(tmp_path) -> None:
     """A published surface may carry a row this engine does not understand. It may not carry
     none, and it may not take the selector down."""
-    from engine.verification_intelligence.registry import EXECUTABLE_REGISTRY, UNIVERSAL_REGISTRY
 
     root = _substrate_fixture(tmp_path)
     document = json.loads((root / UNIVERSAL_REGISTRY).read_text(encoding="utf-8"))
@@ -2681,7 +2621,6 @@ def test_a_universal_entry_with_no_path_is_skipped_rather_than_crashing(tmp_path
 def test_a_discovery_that_returns_no_test_root_is_refused(tmp_path, monkeypatch) -> None:
     """Discovery raising and discovery returning nothing are different failures. The second is
     the more dangerous one: it is a well-formed answer meaning "collect nothing"."""
-    from engine.universal_discovery import discovery as discovery_module
 
     monkeypatch.setattr(discovery_module, "derived_scope", lambda base: ((), (), (), ()))
     with pytest.raises(VerificationIntelligenceError, match="no test root"):
@@ -2727,7 +2666,6 @@ def test_a_stage_that_produces_no_key_is_executed_rather_than_reused(
 ) -> None:
     """No key means nothing to look the result up by. Reusing on that basis would be reusing on
     the basis of the stage's name, which every input change leaves unchanged."""
-    from engine.verification_intelligence import evidence as evidence_module
 
     mode = next(m for m in constitution.modes if m.evidence_reuse)
     stage = next(s for s in constitution.stages if s.reusable and s.reads)
@@ -2744,11 +2682,6 @@ def test_a_stage_that_produces_no_key_is_executed_rather_than_reused(
 def test_every_unbounded_prefix_is_reported_as_one_set(substrates, tests_registry) -> None:
     """The two families — what no graph can bound, and the selector's own surfaces — are declared
     separately and must be READABLE as one, or a caller checking "is this bounded" checks half."""
-    from engine.verification_intelligence.selection import (
-        SELF_PREFIXES,
-        UNBOUNDED_PREFIXES,
-        unbounded_prefixes,
-    )
 
     combined = unbounded_prefixes()
     assert set(combined) == set(UNBOUNDED_PREFIXES) | set(SELF_PREFIXES)
@@ -2760,8 +2693,6 @@ def test_an_unreadable_impact_graph_is_a_fault_and_never_a_narrow_selection(
 ) -> None:
     """Every caller resolves a fault to the whole suite. Letting the ImpactError through as its
     own type would reach a caller that does not know to widen for it."""
-    from engine.verification_impact.graph import ImpactError
-    from engine.verification_intelligence import selection as selection_module
 
     def refusing(root=None):
         raise ImpactError("the relationship graph cannot be read")
@@ -2777,7 +2708,6 @@ def test_a_change_whose_owner_the_catalogue_does_not_know_widens(
     """The capability layer is what bounds a blast radius beyond the import graph. An owner the
     catalogue has never heard of has no radius this engine can compute, and the only honest
     answer for a thing it cannot bound is the whole suite."""
-    from engine.verification_intelligence import selection as selection_module
 
     monkeypatch.setattr(selection_module, "_capability_location", lambda substrates, owner: None)
     result = select(("engine/uaue/gate.py",), substrates=substrates, tests=tests_registry)
@@ -2801,7 +2731,6 @@ def test_a_bounded_change_reaching_no_test_widens_rather_than_verifying_nothing(
 ) -> None:
     """Not "nothing to verify" — code that nothing exercises. That is a coverage question, and
     reading it as a licence to skip is the one failure this whole engine exists to refuse."""
-    from engine.verification_intelligence.registry import TestObjectRegistry
 
     empty = TestObjectRegistry(roots=tests_registry.roots)
     result = select(("engine/uaue/gate.py",), substrates=substrates, tests=empty)
@@ -2813,7 +2742,6 @@ def test_a_split_entry_carrying_no_nodes_is_placed_whole(substrates, monkeypatch
     """A current hash and an empty node list is a table that says "divisible" and names no
     division. Registering the object as splittable on that basis would produce a shard plan
     referring to nodes nobody measured."""
-    from engine.verification_intelligence import registry as registry_module
 
     real = registry_module.load_cost_model
 
@@ -2833,7 +2761,6 @@ def test_a_node_priced_with_something_that_is_not_a_number_is_not_priced(
 ) -> None:
     """The object is still splittable — the node ids are current — but a node whose price is not
     a number contributes no cost. Coercing it would put an invented number into the packer."""
-    from engine.verification_intelligence import registry as registry_module
 
     real = registry_module.load_cost_model
 
@@ -2857,7 +2784,6 @@ def test_a_registry_with_no_split_table_says_nothing_rather_than_zero_of_zero(
 ) -> None:
     """`0/0 current` on every plan a repository without a cost model renders would be a line
     about nothing, printed forever."""
-    from engine.verification_intelligence.registry import TestObjectRegistry
 
     assert split_currency(TestObjectRegistry()) == ""
 
@@ -2865,7 +2791,6 @@ def test_a_registry_with_no_split_table_says_nothing_rather_than_zero_of_zero(
 def test_a_split_table_with_nothing_stale_reports_only_what_it_can_use(tests_registry) -> None:
     """The stale clause is appended, not substituted. A currency line that named stale objects
     unconditionally would say `— stale, placed whole:` with nothing after it."""
-    from engine.verification_intelligence.registry import TestObjectRegistry
 
     current = TestObjectRegistry(splittable={"a/test_x.py": ("a/test_x.py::one",)})
     line = split_currency(current)
@@ -2905,7 +2830,6 @@ def test_the_whole_file_guard_still_fires_when_the_unit_guard_is_disabled(monkey
     first is ever narrowed the second must still refuse. Neutralising the first check's
     set-comparison is the only way to ask the second whether it works.
     """
-    from engine.verification_intelligence import execution as execution_module
 
     monkeypatch.setattr(execution_module, "set", list, raising=False)
     shards = (
@@ -2921,10 +2845,6 @@ def test_a_shard_whose_process_reports_no_stdout_is_still_reaped(tmp_path, monke
     to a pipe, which is exactly what this runner does — the handle is re-attached by hand purely
     so it can be closed. A shard whose process does not carry it must still be waited on and
     still have its log read, or a removed line of bookkeeping would turn into a leaked handle."""
-    import io
-    import subprocess as subprocess_module
-
-    from engine.verification_intelligence import execution as execution_module
 
     real_popen = subprocess_module.Popen
 
@@ -2955,7 +2875,6 @@ def test_a_shard_whose_process_reports_no_stdout_is_still_reaped(tmp_path, monke
 def test_a_single_shard_under_the_floor_exports_its_data_instead_of_judging(tmp_path) -> None:
     """A shard has measured one thirteenth of the suite. The floor is a property of the whole,
     so the shard leaves its data where the combine job can collect it and computes no verdict."""
-    import io
 
     shards = _throwaway_suite(tmp_path)
     exported = tmp_path / "exported"
@@ -2981,9 +2900,6 @@ def _canned_coverage(monkeypatch, results):
     The alternative is producing real coverage data whose combine, xml and report steps fail on
     demand, which measures the coverage tool rather than this function's handling of it.
     """
-    import subprocess as subprocess_module
-
-    from engine.verification_intelligence import execution as execution_module
 
     calls: list[list[str]] = []
     scripted = iter(results)
@@ -3007,7 +2923,6 @@ def _with_shard_data(tmp_path):
 def test_a_combine_that_fails_refuses_rather_than_reporting_a_floor(tmp_path, monkeypatch):
     """Unusable shard data is not a low number; it is no number, and a floor computed over what
     happened to combine would be a verdict over a suite fragment."""
-    import io
 
     _canned_coverage(monkeypatch, [(1, "", "cannot combine")])
     stream = io.StringIO()
@@ -3019,7 +2934,6 @@ def test_a_combine_that_fails_refuses_rather_than_reporting_a_floor(tmp_path, mo
 def test_an_xml_step_that_fails_refuses_rather_than_reporting_a_floor(tmp_path, monkeypatch):
     """The artifact and the verdict are separate obligations, and an unwritten artifact must not
     be reported as a met floor."""
-    import io
 
     _canned_coverage(monkeypatch, [(0, "", ""), (1, "", "cannot write xml")])
     stream = io.StringIO()
@@ -3032,7 +2946,6 @@ def test_a_met_floor_returns_zero_and_relays_what_the_tool_said(tmp_path, monkey
     """The success path, and the tool's stderr with it: a warning the coverage tool emits while
     still succeeding is the only notice that the measurement was partial, and swallowing it
     would make the one line worth reading the one line nobody sees."""
-    import io
 
     calls = _canned_coverage(
         monkeypatch,
@@ -3052,7 +2965,6 @@ def test_a_met_floor_returns_zero_and_relays_what_the_tool_said(tmp_path, monkey
 def test_a_file_that_is_not_shard_data_is_not_read_as_a_shard(tmp_path) -> None:
     """The combine's fails-closed question is "which shards arrived", asked of file names. A name
     that does not carry a shard index answers it with nothing rather than with a guess."""
-    from engine.verification_intelligence.execution import shard_indices_present
 
     data = tmp_path / "data"
     data.mkdir()
@@ -3065,7 +2977,6 @@ def test_a_file_that_is_not_shard_data_is_not_read_as_a_shard(tmp_path) -> None:
 def test_data_from_a_shard_the_plan_does_not_contain_is_refused(tmp_path) -> None:
     """The data and the plan then disagree about what ran, and combining them would evaluate the
     floor over a suite neither of them describes."""
-    import io
 
     data = tmp_path / "data"
     data.mkdir()
@@ -3079,7 +2990,6 @@ def test_data_from_a_shard_the_plan_does_not_contain_is_refused(tmp_path) -> Non
 def test_every_expected_shard_present_combines_once_over_the_union(tmp_path, monkeypatch) -> None:
     """The only path on which a floor verdict is computed at all, and the one no test reached:
     every refusal above was measured and the acceptance was not."""
-    import io
 
     data = tmp_path / "data"
     data.mkdir()
@@ -3097,7 +3007,6 @@ def test_every_expected_shard_present_combines_once_over_the_union(tmp_path, mon
 def test_the_plan_digest_is_emitted_alone_so_a_caller_can_bind_other_jobs_to_it(capsys):
     """`--digest` comes before `--json` on purpose: a caller asking for the identity of a plan
     wants that and nothing else on stdout, because it is about to pass it to another job."""
-    from engine.verification_intelligence import cli
 
     assert cli.main(["plan", "--mode", "fast", "--digest"]) == 0
     printed = capsys.readouterr().out.strip().splitlines()
@@ -3108,7 +3017,6 @@ def test_the_plan_digest_is_emitted_alone_so_a_caller_can_bind_other_jobs_to_it(
 def test_a_job_computing_a_different_plan_than_it_was_told_to_expect_faults(capsys) -> None:
     """Two jobs of one run partitioning the suite differently is the failure the digest exists to
     catch: each job proves its own plan whole, and their shards union to neither selection."""
-    from engine.verification_intelligence import cli
 
     code = cli.main(
         ["combine", "--mode", "full", "--data-dir", "nowhere", "--plan-digest", "0" * 64]
@@ -3120,7 +3028,6 @@ def test_a_job_computing_a_different_plan_than_it_was_told_to_expect_faults(caps
 def test_sharding_an_impact_selection_is_refused(capsys) -> None:
     """An impact selection is derived from the diff, so two jobs with different fetch depths
     partition different things while each proves its own plan whole."""
-    from engine.verification_intelligence import cli
 
     code = cli.main(
         ["run-tests", "--mode", "fast", "--path", "engine/uaue/gate.py", "--shard", "0"]
@@ -3133,7 +3040,6 @@ def test_the_combine_command_binds_the_expected_shards_to_the_plan(monkeypatch, 
     """`expected` comes from the plan's own shard indices and never from a worker count — the two
     differ whenever a wave is exclusive, and a matrix built from the second addresses one fewer
     shard than the plan holds."""
-    from engine.verification_intelligence import cli
 
     seen: dict[str, object] = {}
 
@@ -3151,7 +3057,6 @@ def test_the_combine_command_binds_the_expected_shards_to_the_plan(monkeypatch, 
 def test_run_tests_receives_the_plan_it_printed(monkeypatch, capsys) -> None:
     """The rendered plan goes to stderr and the run happens on stdout's terms: an operator must
     be able to read what is about to run WHILE it runs, not after it finishes."""
-    from engine.verification_intelligence import cli
 
     seen: dict[str, object] = {}
 
@@ -3170,7 +3075,6 @@ def test_run_tests_receives_the_plan_it_printed(monkeypatch, capsys) -> None:
 def test_a_report_naming_more_escalations_than_it_prints_says_how_many_more(capsys) -> None:
     """Eight are shown and the rest are counted. Printing all of them would bury the verdict;
     printing eight in silence would report a smaller widening than the one that was measured."""
-    from engine.verification_intelligence import cli
 
     argv = ["report", "--mode", "fast"]
     for index in range(9):
@@ -3183,7 +3087,6 @@ def test_a_report_naming_more_escalations_than_it_prints_says_how_many_more(caps
 def test_a_whole_suite_report_names_no_selection_layer(capsys) -> None:
     """A mode that runs everything computes no layers, and a `selection layers:` heading with
     nothing under it would suggest the layers ran and reached nothing."""
-    from engine.verification_intelligence import cli
 
     assert cli.main(["report", "--mode", "full"]) == 0
     body = capsys.readouterr().out
@@ -3251,7 +3154,6 @@ def test_l06_refuses_a_malformed_isolation_entry(tmp_path, entry, message) -> No
 def test_l07_reports_a_selection_that_faults_rather_than_crashing(tmp_path, monkeypatch) -> None:
     """A law that raised where it was supposed to report would leave the gate with no verdict on
     fail-wide at all — which reads, from the outside, exactly like the law holding."""
-    from engine.verification_intelligence import gate as gate_module
 
     def refusing(*args, **kwargs):
         raise VerificationIntelligenceError("the substrate is unreadable")
@@ -3264,7 +3166,6 @@ def test_l07_reports_a_selection_that_faults_rather_than_crashing(tmp_path, monk
 def test_l07_refuses_an_unbounded_change_that_produced_a_narrow_plan(tmp_path, monkeypatch):
     """THE asymmetry, falsified. A selector that narrowed on an unbounded change would skip the
     affected test, and a skipped test is indistinguishable from a passing one."""
-    from engine.verification_intelligence.model import SelectionResult
 
     narrow = SelectionResult(
         selection=Selection.IMPACT,
@@ -3279,7 +3180,6 @@ def test_l07_refuses_an_unbounded_change_that_produced_a_narrow_plan(tmp_path, m
         superseded=(),
         layers=(),
     )
-    from engine.verification_intelligence import gate as gate_module
 
     monkeypatch.setattr(gate_module, "select", lambda *a, **k: narrow)
     findings = uvi_gate.fail_wide(_ctx(tmp_path, lambda document: None))
@@ -3290,7 +3190,6 @@ def test_l07_refuses_an_unbounded_change_that_produced_a_narrow_plan(tmp_path, m
 def test_l08_reports_a_partition_that_is_refused_rather_than_crashing(tmp_path, monkeypatch):
     """The partitioner refusing is a finding about the plan. Letting it out as an exception would
     take the whole gate down with no verdict on any law after this one."""
-    from engine.verification_intelligence import gate as gate_module
 
     real = gate_module.plan_shards
     calls = {"n": 0}
@@ -3312,7 +3211,6 @@ def test_l08_refuses_a_partition_that_loses_duplicates_or_misaddresses_a_test(
     """Every failure this law exists for, produced at once: a partition that does not cover the
     suite, one that places a unit twice, one whose indices are not a total addressing, and a
     partitioner that answers differently the second time it is asked."""
-    from engine.verification_intelligence import gate as gate_module
 
     calls = {"n": 0}
 
@@ -3345,7 +3243,6 @@ def test_l08_refuses_a_partition_a_job_at_a_time_cannot_reproduce(tmp_path, monk
     something else, while a combine missing every shard's data must refuse rather than report a
     floor over nothing — neither of which any test had shown these laws can detect.
     """
-    from engine.verification_intelligence import gate as gate_module
 
     def colliding(units, registry, workers, **kwargs):
         return (
@@ -3365,7 +3262,6 @@ def test_l08_refuses_a_partition_a_job_at_a_time_cannot_reproduce(tmp_path, monk
 def test_l09_refuses_a_certification_mode_that_reached_a_reuse_decision(tmp_path, monkeypatch):
     """A certification that reuses a result certifies a cache. Nothing in the declaration can
     make this true today, which is exactly why the law has to be shown to fire."""
-    from engine.verification_intelligence import gate as gate_module
 
     monkeypatch.setattr(gate_module, "decide", lambda *a, **k: (True, "a cached PASS", "d" * 64))
     findings = uvi_gate.evidence_reuse_integrity(_ctx(tmp_path, lambda document: None))
@@ -3376,7 +3272,6 @@ def test_l09_refuses_a_certification_mode_that_reached_a_reuse_decision(tmp_path
 def test_l10_refuses_a_plan_carrying_a_clock_or_a_machine_path(tmp_path, monkeypatch) -> None:
     """Two plans of one repository must agree byte for byte. A wall clock makes them disagree on
     every run, and an absolute path makes them disagree between machines."""
-    from engine.verification_intelligence import gate as gate_module
 
     ctx = _ctx(tmp_path, lambda document: None)
     monkeypatch.setattr(
@@ -3430,7 +3325,6 @@ def test_l13_refuses_a_read_set_that_resolves_to_nothing(tmp_path) -> None:
 def test_l13_refuses_a_read_set_that_follows_the_reuse_policy(tmp_path, monkeypatch) -> None:
     """The defect the separation was for: one field silently answering both questions, so that
     toggling the policy changed the read-set and the two could never be measured apart."""
-    import dataclasses
 
     ctx = _ctx(tmp_path, lambda document: None)
     real = dataclasses.replace
@@ -3452,7 +3346,6 @@ def test_l13_refuses_a_read_set_that_follows_the_reuse_policy(tmp_path, monkeypa
 def test_l14_refuses_a_key_that_does_not_move_with_the_read_set(tmp_path, monkeypatch) -> None:
     """The read-set is what the key is taken over. A key indifferent to it would hit across two
     stages reading different things, which is a cache answering for a run that never happened."""
-    from engine.verification_intelligence import gate as gate_module
 
     monkeypatch.setattr(gate_module, "input_digest", lambda *a, **k: "a-key-that-never-moves")
     findings = uvi_gate.evidence_identity_depends_on_the_read_set(
@@ -3465,7 +3358,6 @@ def test_l14_refuses_a_key_that_does_not_move_with_the_read_set(tmp_path, monkey
 def test_l14_refuses_a_registry_in_which_no_stage_produces_a_key(tmp_path, monkeypatch) -> None:
     """A law measuring nothing reports HOLDS, and HOLDS over an empty population is the shape
     every check in this package is written to refuse."""
-    from engine.verification_intelligence import gate as gate_module
 
     monkeypatch.setattr(gate_module, "input_digest", lambda *a, **k: None)
     findings = uvi_gate.evidence_identity_depends_on_the_read_set(
@@ -3500,7 +3392,6 @@ def test_a_refusal_is_rendered_once_to_stdout_when_the_gate_is_not_quiet(tmp_pat
 def test_a_job_computing_the_plan_it_was_told_to_expect_proceeds(monkeypatch, capsys) -> None:
     """The digest is a proof obligation, not a veto: a job that recomputed the same plan must
     carry on, or binding jobs together would make every run refuse itself."""
-    from engine.verification_intelligence import cli
 
     assert cli.main(["plan", "--mode", "full", "--digest"]) == 0
     digest = capsys.readouterr().out.strip()

@@ -14,6 +14,8 @@ returns an audit record naming the rule that permitted it.
 
 from __future__ import annotations
 
+from dataclasses import replace
+
 import pytest
 
 from engine.omega_governance.state import (
@@ -412,7 +414,6 @@ def test_redeclaring_a_state_identically_is_the_same_declaration(tmp_axis=None):
 
 def test_one_name_may_not_carry_two_meanings():
     """A name that means two things makes every rule about it unenforceable."""
-    from dataclasses import replace
 
     registry = StateRegistry()
     registry.declare(GOVERNED)
@@ -529,7 +530,6 @@ def test_a_change_record_carries_a_coordinate_only_when_a_clock_supplied_one() -
     """A record that always carried the key would make "this deployment has no clock" and "the
     clock declined to answer" the same document — and keeping Time unprivileged is the whole
     reason a deployment with no clock has to stay expressible."""
-    from engine.omega_governance.temporal.clocks import LogicalClock
 
     graph = default_graph()
     status = initial_status(default_states())

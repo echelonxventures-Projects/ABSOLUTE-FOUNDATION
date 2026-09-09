@@ -24,9 +24,11 @@ never to the repository under test.
 from __future__ import annotations
 
 import copy
+import importlib
 import json
 import subprocess
 import sys
+import types
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -37,7 +39,16 @@ from engine.construct.declaration import Declaration as ConstructDeclaration
 from engine.enforcement_closure import contract, discovery, gate
 from engine.enforcement_closure.contract import LAW_CHECKS, Probe, load_contract, measure
 from engine.enforcement_closure.declaration import DIGEST_EXCLUSIONS, load, parse
-from engine.enforcement_closure.model import REFUSED, DeclarationError, EnforcementError
+from engine.enforcement_closure.discovery import _invocation_needles, _needles
+from engine.enforcement_closure.model import (
+    KIND_MAKE_TARGET,
+    KIND_MODULE_GATE,
+    REFUSED,
+    Artifact,
+    DeclarationError,
+    EnforcementError,
+    Rule,
+)
 from engine.uckp.canonical import content_hash
 
 ROOT = discovery.repo_root()
@@ -895,8 +906,6 @@ def test_invocation_needles_require_an_executable_form(document: dict[str, Any])
     the bare package was still a needle and still appeared in every one of those lines. The gate
     had stopped running and nothing said so.
     """
-    from engine.enforcement_closure.discovery import _invocation_needles, _needles
-    from engine.enforcement_closure.model import KIND_MODULE_GATE, Artifact
 
     gate = Artifact(
         identity="engine/recursive_knowledge/gate.py", kind=KIND_MODULE_GATE, rule_id="UEC-R-02"
@@ -1358,7 +1367,6 @@ def test_the_module_entry_point_reaches_the_gate() -> None:
     """``python -m engine.enforcement_closure`` is a second invocation plane, and UEC-L-06
     requires two. A dispatcher that stopped importing its gate would fail at run time in CI
     rather than here."""
-    import importlib
 
     module = importlib.import_module("engine.enforcement_closure.__main__")
     assert module.main is gate.main
@@ -1367,7 +1375,6 @@ def test_the_module_entry_point_reaches_the_gate() -> None:
 def test_a_discovery_rule_with_no_identity_is_refused() -> None:
     """The model refuses it as well as the reader. A rule with no id cannot be named by a
     governed entry, so nothing could ever be attributed to it."""
-    from engine.enforcement_closure.model import Rule
 
     with pytest.raises(DeclarationError, match="needs a rule_id"):
         Rule(rule_id="", kind="gate", strategy="glob", floor=1)
@@ -1473,7 +1480,6 @@ def test_a_substrate_that_does_not_resolve_is_a_fault(tmp_path: Path) -> None:
 def test_a_target_declared_twice_is_located_once(tmp_path: Path) -> None:
     """`make help` echoes every target name, and a target may be defined twice. Two artifacts
     under one identity would make every per-artifact law count the same thing twice."""
-    from engine.enforcement_closure.model import Rule
 
     (tmp_path / "Makefile").write_text(
         "uec-gate:\n\t@echo first\n\nuec-gate:\n\t@echo second\n", encoding="utf-8"
@@ -1541,7 +1547,6 @@ def test_an_artifact_whose_identity_is_not_a_path_has_no_module_form(probe: Prob
     """A make target's identity is a target name, not a path, so there is no `package.module`
     to look for in the lane. Splitting one anyway would compare the lane against a package
     named after half a target."""
-    from engine.enforcement_closure.model import KIND_MAKE_TARGET, Artifact
 
     artifact = Artifact(identity="uec-probe-target", kind=KIND_MAKE_TARGET, rule_id="probe")
     probe._invokers[artifact.key()] = ()
@@ -1624,7 +1629,6 @@ def test_a_package_exposing_no_uniform_parse_is_counted_rather_than_faulted(
     """A package with no `declaration.parse` does not expose the uniform interface, which is a
     measured fact reported by the ratchet. Nothing is logged, because a log line is an output
     and an output varying with the import environment would make two measurements differ."""
-    import types
 
     monkeypatch.setattr(
         contract.importlib, "import_module", lambda name: types.ModuleType("hollow")

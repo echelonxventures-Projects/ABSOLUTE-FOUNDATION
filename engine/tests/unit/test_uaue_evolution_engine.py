@@ -26,18 +26,31 @@ phase, register or stage** — every one is resolved from the authority.
 
 from __future__ import annotations
 
+import ast
 import copy
+import json
 from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
 import pytest
 
+from engine.uaue import history as history_module
 from engine.uaue.authority import load_evolution_authority
 from engine.uaue.certification import certification_object, certify_evolution
-from engine.uaue.discovery import discover_evolution_candidates
+from engine.uaue.discovery import (
+    _artifact_candidates,
+    _compare,
+    _internal_candidates,
+    _load_artifact,
+    _text_of,
+    declaration_evidence,
+    discover_evolution_candidates,
+)
 from engine.uaue.execution import execute_evolution
+from engine.uaue.gate import history_path, measure, render, render_surface
 from engine.uaue.history import (
+    _dimension_value,
     build_ledger,
     history_records,
     learning_object,
@@ -56,7 +69,13 @@ from engine.uaue.objects import (
 )
 from engine.uaue.observation import observe_evolution
 from engine.uaue.planning import create_evolution_plan
-from engine.uaue.resolution import REPO_ROOT, DeclarationReader, Substrate
+from engine.uaue.resolution import (
+    DECLARATION_PATH,
+    PROGRAMME_HOME,
+    REPO_ROOT,
+    DeclarationReader,
+    Substrate,
+)
 from engine.uaue.simulation import simulate_evolution
 from engine.uaue.understanding import understand_evolution
 from engine.uaue.validation import validate_evolution, validation_object
@@ -97,10 +116,6 @@ def wired_authority(wired: Substrate) -> EvolutionAuthority:
 
 @pytest.fixture(scope="module")
 def declaration() -> dict[str, Any]:
-    import json
-
-    from engine.uaue.resolution import DECLARATION_PATH
-
     return json.loads((REPO_ROOT / DECLARATION_PATH).read_text("utf-8"))
 
 
@@ -861,7 +876,6 @@ def _code_literals(path: Path) -> tuple[tuple[int, str], ...]:
     docstring that could not say so would be useless. What must not appear is a *code* literal,
     because that is the form a hard-coded declaration takes.
     """
-    import ast
 
     tree = ast.parse(path.read_text("utf-8"))
     docstrings: set[str] = set()
@@ -902,7 +916,6 @@ def test_no_engine_module_enumerates_the_canonical_stage_set(
     prefixes of declared dimension names. None of those is a stage list. What would be a stage
     list is a literal sequence of stage names, and that is what this refuses.
     """
-    import ast
 
     stages = {state.name for state in authority.lifecycle_states}
     for path in UAUE_PACKAGE.glob("*.py"):
@@ -921,7 +934,6 @@ def test_no_engine_module_enumerates_the_canonical_stage_set(
 
 def test_the_stage_set_is_imported_from_its_owner_not_restated() -> None:
     """Exactly one module reaches the canonical cycle, and it does so by import."""
-    import ast
 
     importers: set[str] = set()
     for path in UAUE_PACKAGE.glob("*.py"):
@@ -961,7 +973,6 @@ def test_no_lifecycle_module_writes_to_the_repository() -> None:
     renderers each holding a destination — would make "what may this programme mutate, and where"
     a question answered by reading every renderer, which is the same as having no answer.
     """
-    import ast
 
     forbidden = {"write_text", "write_bytes", "mkdir", "unlink", "rmtree", "rename", "touch"}
     for path in UAUE_PACKAGE.glob("*.py"):
@@ -982,8 +993,6 @@ def test_the_only_writer_writes_only_inside_the_programme_home(tmp_path: Path) -
     rendering into a temporary tree and requiring that the only path touched is the file the
     declaration names, under the operational home the declaration names.
     """
-    from engine.uaue.gate import history_path, measure, render
-    from engine.uaue.resolution import PROGRAMME_HOME
 
     report = measure()
     target = tmp_path / PROGRAMME_HOME / report.context.authority.history.file
@@ -1015,8 +1024,6 @@ def test_the_whole_rendered_surface_writes_only_declared_files_inside_the_home(
     declared registers resolving to one path would silently render seventeen files and report
     eighteen.
     """
-    from engine.uaue.gate import measure, render_surface
-    from engine.uaue.resolution import PROGRAMME_HOME
 
     report = measure()
     authority = report.context.authority
@@ -1035,7 +1042,6 @@ def test_the_whole_rendered_surface_writes_only_declared_files_inside_the_home(
 
 def test_the_engine_imports_no_platform_or_intelligence_module() -> None:
     """Layering: engine must not depend on platform or intelligence."""
-    import ast
 
     for path in UAUE_PACKAGE.glob("*.py"):
         tree = ast.parse(path.read_text("utf-8"))
@@ -1064,7 +1070,6 @@ def test_context_is_canonical_and_hashable() -> None:
 def test_an_artifact_that_cannot_be_opened_is_a_finding_and_never_a_raise(tmp_path: Path) -> None:
     """A source whose artifact is unreadable is reported, not raised. Discovery reads eleven
     declared artifacts, and one unreadable file must not take the other ten with it."""
-    from engine.uaue.discovery import _load_artifact
 
     unreadable = tmp_path / "sealed.json"
     unreadable.write_text("{}", encoding="utf-8")
@@ -1095,7 +1100,6 @@ def test_every_declared_comparison_is_implemented_and_coerces_nothing(
     """A string that looks like a number is not silently coerced: a source whose field changed
     type would otherwise be filtered under a comparison nobody declared. A non-comparable pair
     fails the condition, which excludes the entry rather than including it on a technicality."""
-    from engine.uaue.discovery import _compare
 
     assert _compare(left, op, right) is expected
 
@@ -1116,7 +1120,6 @@ def test_a_source_value_renders_without_inventing_content_for_an_absent_one(
 ) -> None:
     """An absent field renders as nothing rather than as "None", which would become a candidate
     subject naming a Python repr. A structure renders canonically, so two runs agree."""
-    from engine.uaue.discovery import _text_of
 
     assert _text_of(value) == expected
 
@@ -1127,7 +1130,6 @@ def test_a_list_form_pointed_at_something_that_is_not_a_list_is_reported(
 ) -> None:
     """The form is a claim about the artifact's shape. Reading a mapping as a list would iterate
     its keys and emit a candidate per key name."""
-    from engine.uaue.discovery import _artifact_candidates
 
     source = replace(
         next(entry for entry in authority.discovery_sources if not entry.internal), form=form
@@ -1150,8 +1152,6 @@ def test_a_list_form_pointed_at_something_that_is_not_a_list_is_reported(
 def test_a_mapping_form_pointed_at_something_that_is_not_a_mapping_is_reported(
     authority: EvolutionAuthority,
 ) -> None:
-    from engine.uaue.discovery import _artifact_candidates
-
     source = replace(
         next(entry for entry in authority.discovery_sources if not entry.internal),
         form="mapping_of_objects",
@@ -1178,7 +1178,6 @@ def test_an_artifact_form_this_reader_does_not_implement_is_reported(
 ) -> None:
     """A declared form with no reader would yield no candidate, and no candidate is what a
     source that found nothing also looks like. The two must not be spelled the same way."""
-    from engine.uaue.discovery import _artifact_candidates
 
     source = replace(
         next(entry for entry in authority.discovery_sources if not entry.internal),
@@ -1206,7 +1205,6 @@ def test_an_internal_form_this_reader_does_not_implement_is_reported(
 ) -> None:
     """The same distinction on the internal side, where the sources select from the declaration
     itself rather than from a sealed artifact."""
-    from engine.uaue.discovery import _internal_candidates
 
     source = replace(
         next(entry for entry in authority.discovery_sources if entry.internal),
@@ -1232,8 +1230,6 @@ def test_an_internal_form_this_reader_does_not_implement_is_reported(
 def test_the_internal_sources_cite_the_declaration_as_their_own_evidence() -> None:
     """An internal source's evidence is the declaration it selected from — anything else would
     cite an artifact the candidate did not come out of."""
-    from engine.uaue.discovery import declaration_evidence
-    from engine.uaue.resolution import DECLARATION_PATH
 
     assert declaration_evidence() == DECLARATION_PATH
 
@@ -1333,7 +1329,6 @@ def test_an_object_absent_from_the_history_projection_is_not_certified(
     """Measured by actually projecting and rehydrating through the ledger that owns the append
     rules, so the proof fails if the history cannot be read back under the rules that wrote it —
     rather than passing because a file exists."""
-    from engine.uaue import history as history_module
 
     real = history_module.rehydrate_history
 
@@ -1369,7 +1364,6 @@ def test_every_declared_history_dimension_produces_a_value(
     string, so an underivable dimension is VISIBLE in the history instead of looking like an
     absent one. Both halves are measured: every declared dimension resolves, and a dimension
     nobody declared renders as the marker."""
-    from engine.uaue.history import _dimension_value
 
     obj = unknown_chain.objects[-1]
     for dimension in wired_authority.history.dimensions:
@@ -1404,7 +1398,6 @@ def test_a_verdict_dimension_falls_back_to_the_chain_verdict_it_summarises(
     """An object sealed before its verdict existed carries no result of its own, so the
     dimension reads the chain's. Reading it as empty would make "not yet measured" and "measured
     and found nothing" the same history entry."""
-    from engine.uaue.history import _dimension_value
 
     unsealed = replace(
         unknown_chain.objects[0],

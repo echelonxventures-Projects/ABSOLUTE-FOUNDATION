@@ -8,6 +8,7 @@ could not be made to fail would be thirty-two sentences.
 
 from __future__ import annotations
 
+import ast
 import copy
 import dataclasses
 import json
@@ -16,6 +17,7 @@ from pathlib import Path
 
 import pytest
 
+from engine.construct.model import Construct
 from engine.recursive_knowledge import (
     admission,
     bridge,
@@ -31,6 +33,8 @@ from engine.recursive_knowledge import (
     subjects,
     worlds,
 )
+from engine.recursive_knowledge import bridge as bridge_module
+from engine.recursive_knowledge import composition as composition_module
 from engine.recursive_knowledge import (
     ledger as ledger_module,
 )
@@ -47,6 +51,7 @@ from engine.recursive_knowledge.model import (
     ClosureCriterion,
     Position,
     RecursiveKnowledgeError,
+    ResolutionStep,
     ReviewPoint,
     StateTransition,
     VerificationEvent,
@@ -1192,7 +1197,6 @@ def test_l33_vocabulary_is_not_hardcoded_fails_in_both_directions() -> None:
     positive, and a detector that cannot spare can never honestly reach its floor
     (UZX-000001). Both directions are pinned here as source snippets fed to the predicate.
     """
-    import ast
 
     members = {"identity", "governance", "verification"}
 
@@ -1413,7 +1417,6 @@ def test_a_declared_residual_domain_that_cannot_be_composed_is_reported(declarat
     by injecting the failure its contract exists to absorb, rather than deleted because
     today's data happens not to trigger it.
     """
-    from engine.recursive_knowledge import composition as composition_module
 
     def _refuse(*args, **kwargs):
         raise RecursiveKnowledgeError("composition refused for the test")
@@ -1951,8 +1954,6 @@ def test_evolution_naming_a_subject_as_a_special_case_is_refused(declaration, mo
 
 
 def test_a_condition_that_cannot_be_composed_is_reported(declaration, monkeypatch):
-    from engine.recursive_knowledge import composition as composition_module
-
     def refuse(decl, condition):
         raise RecursiveKnowledgeError("composition refused for the test")
 
@@ -1964,7 +1965,6 @@ def test_a_condition_that_cannot_be_composed_is_reported(declaration, monkeypatc
 def test_two_conditions_with_the_same_signature_are_refused(declaration, monkeypatch):
     # Two catalogue entries composing to one expression means the catalogue claims more
     # distinctions than it can express.
-    from engine.recursive_knowledge import composition as composition_module
 
     monkeypatch.setattr(composition_module, "signature", lambda expression: "one-signature")
     problems = contract.expressiveness_is_preserved_within_bounds(_forge(declaration))
@@ -2723,8 +2723,6 @@ def test_a_position_that_names_nobody_or_claims_nothing_is_refused(kwargs, messa
 
 @pytest.mark.parametrize("absent", ["action", "actor", "basis"])
 def test_a_resolution_step_missing_any_of_its_three_facts_is_refused(absent) -> None:
-    from engine.recursive_knowledge.model import ResolutionStep
-
     fields = {
         "action": "investigated",
         "actor": "someone",
@@ -3163,7 +3161,6 @@ def test_an_evolution_step_with_no_basis_is_refused(store, declaration):
 def test_the_proposal_register_reads_the_ledger_rather_than_a_list(store, declaration):
     """Empty means the foundation has not been asked, and that is a reading of the ledger rather
     than a second register somebody would have to keep in step."""
-    from engine.recursive_knowledge import proposal
 
     assert proposal.proposals(store) == ()
     admission.admit_architecture_proposal(
@@ -3181,7 +3178,6 @@ def test_the_evidence_records_are_bound_to_the_declaration_in_both_directions(de
     """A record the declaration names and nothing produces is a file no run will ever write; a
     record produced and undeclared is a file appearing in the evidence home that nothing reads.
     Both are refused, which is what makes the record list a binding rather than a note."""
-    from engine.recursive_knowledge import evidence
 
     fewer = dataclasses.replace(declaration, evidence_records=declaration.evidence_records[:-1])
     with pytest.raises(RecursiveKnowledgeError, match="the declaration does not name"):
@@ -3200,7 +3196,6 @@ def test_the_evidence_records_are_bound_to_the_declaration_in_both_directions(de
 def test_a_declaration_naming_no_evidence_home_cannot_be_written(declaration, tmp_path):
     """The home is declared data. Defaulting it here would put the evidence somewhere the
     declaration never named, which is exactly where nobody would look for it."""
-    from engine.recursive_knowledge import evidence
 
     homeless = dataclasses.replace(declaration, evidence_home="")
     with pytest.raises(RecursiveKnowledgeError, match="names no evidence home"):
@@ -3213,7 +3208,6 @@ def test_both_declared_records_are_written_atomically_under_the_declared_home(
     """Atomically because a reader seeing a half-written file would read truncated JSON as
     corrupt, and "the evidence is corrupt" must never be confusable with "the evidence says the
     gate closed"."""
-    from engine.recursive_knowledge import evidence
 
     report = {"schema": "test", "counts": {}}
     written = evidence.write(declaration, report, store, repository=str(tmp_path), command="test")
@@ -3401,8 +3395,6 @@ def test_a_construct_the_bridge_leaves_undisposed_is_reported(store, monkeypatch
     """The bridge is what makes a knowledge subject a governed construct. A construct that came
     back with no active disposition is one the bridge did not govern, and counting it under a
     disposition it does not carry would be the drop this whole ledger refuses."""
-    from engine.construct.model import Construct
-    from engine.recursive_knowledge import bridge as bridge_module
 
     class _Undisposed:
         def __init__(self, construct):

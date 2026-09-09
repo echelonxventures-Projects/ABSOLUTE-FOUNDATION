@@ -33,6 +33,8 @@ The properties measured here, and the failure each one closes:
 
 from __future__ import annotations
 
+import ast
+import io
 import json
 import re
 from collections.abc import Sequence
@@ -42,6 +44,10 @@ from typing import Any
 
 import pytest
 
+import engine.uaue.controller as module
+from engine.uaue import controller as controller_module
+from engine.uaue import gate as gate_module
+from engine.uaue.authority import load_evolution_authority
 from engine.uaue.controller import (
     MAX_SETTLEMENT_ROUNDS,
     EvolutionContext,
@@ -50,9 +56,33 @@ from engine.uaue.controller import (
     EvolutionRun,
     resolve_evolution_state,
 )
-from engine.uaue.model import EvolutionAuthority
+from engine.uaue.gate import (
+    FAIL_CLOSED_FLAG,
+    MODULE_PATH,
+    history_path,
+    main,
+    measure,
+    replay_drift,
+)
+from engine.uaue.history import query_history, rehydrate_history
+from engine.uaue.model import (
+    ABSENT,
+    Criterion,
+    Dependency,
+    EvolutionAuthority,
+    EvolutionAuthorityError,
+    Phase,
+)
 from engine.uaue.objects import EvolutionCandidate, as_context, derive_identity
-from engine.uaue.resolution import DECLARATION_PATH, REPO_ROOT, Substrate
+from engine.uaue.resolution import (
+    DECLARATION_PATH,
+    PROGRAMME_HOME,
+    REPO_ROOT,
+    DeclarationReader,
+    Substrate,
+)
+from engine.uckp.evolution import CYCLE_LENGTH
+from engine.uckp.vocabulary import LIFECYCLE_STAGE, Term, build_vocabulary_registry
 
 CONTROLLER_SOURCE = REPO_ROOT / "engine" / "uaue" / "controller.py"
 GATE_SOURCE = REPO_ROOT / "engine" / "uaue" / "gate.py"
@@ -68,7 +98,6 @@ def declared_gate_obligations() -> set[str]:
     it produces, which closes both directions at once: an obligation dropped from ``measure`` is
     a failure, and so is an obligation function that exists and is never called.
     """
-    import ast
 
     found: set[str] = set()
     tree = ast.parse(GATE_SOURCE.read_text("utf-8"))
@@ -226,9 +255,6 @@ def test_every_declared_criterion_is_measured_and_satisfied(
 
 
 def test_the_run_carries_a_rehydratable_history_projection(probe_run: EvolutionRun) -> None:
-    from engine.uaue.history import rehydrate_history
-    from engine.uckp.evolution import CYCLE_LENGTH
-
     ledger = rehydrate_history(probe_run.history)
     assert len(ledger) == CYCLE_LENGTH
     recorded = {record.subject for record in ledger.records()}
@@ -302,7 +328,6 @@ def test_the_history_projection_is_deterministic_over_many_runs(
     runs = controller.run_all([probe, probe])
     assert controller.project_history(runs) == controller.project_history(runs)
     # Two cycles, so the append-only ledger's cycle-advance rule is exercised rather than assumed.
-    from engine.uaue.history import rehydrate_history
 
     assert rehydrate_history(controller.project_history(runs)).cycles() == 2
 
@@ -374,7 +399,6 @@ def test_the_stage_vocabulary_admits_a_term_no_stage_declares(
     closed set, an unknown subject could never occupy a stage nobody had legislated, and the whole
     unknown-evolution claim would be false for a reason no amount of controller code could fix.
     """
-    from engine.uckp.vocabulary import LIFECYCLE_STAGE, Term, build_vocabulary_registry
 
     term = authority.unknown_probe.unknown_stage_term
     canonical = {state.name for state in authority.lifecycle_states}
@@ -428,8 +452,6 @@ def test_an_unresolved_dependency_halts_the_traversal_at_the_authorisation_posit
             self._missing = missing
 
         def state(self, path: str) -> str:
-            from engine.uaue.model import ABSENT
-
             return ABSENT if path == self._missing else super().state(path)
 
     lost = context.authority.phase_by_ordinal(4).homes[0]
@@ -458,7 +480,6 @@ def test_an_owner_that_refuses_halts_the_traversal_and_names_the_refusal(
     An exception escaping the traversal would lose both the position that called the owner and the
     obligation the owner refused on, which is the whole content of the finding.
     """
-    from engine.uaue.model import Phase
 
     composed = context.authority.phase_by_ordinal(3)
     ownerless = replace(composed, owners=())
@@ -508,9 +529,6 @@ def test_an_unwired_execution_gate_refuses_the_authorisation(
         def gate_state(self, command: str) -> tuple[bool, str]:
             return False, "no gate is wired in this tree"
 
-    from engine.uaue.authority import load_evolution_authority
-    from engine.uaue.resolution import DeclarationReader
-
     substrate = GatesGone(context.substrate.root)
     unwired = replace(
         context,
@@ -531,7 +549,6 @@ def test_a_failed_validation_refuses_the_run(
     validation owner reports unsatisfied rather than skipping — absence of evidence is never
     evidence.
     """
-    from engine.uaue.model import Criterion
 
     invented = Criterion(
         identifier="AUE-VAL-XX",
@@ -554,8 +571,6 @@ def test_a_failed_validation_refuses_the_run(
 def test_a_failed_verification_refuses_the_run(
     context: EvolutionContext, probe: EvolutionCandidate
 ) -> None:
-    from engine.uaue.model import Criterion
-
     invented = Criterion(
         identifier="AUE-VER-XX",
         subject="a dimension no engine measures",
@@ -579,8 +594,6 @@ def test_a_failed_verification_refuses_the_run(
 def test_a_failed_certification_refuses_the_run(
     context: EvolutionContext, probe: EvolutionCandidate
 ) -> None:
-    from engine.uaue.model import Criterion
-
     invented = Criterion(
         identifier="AUE-CER-XX",
         subject="a proof no engine measures",
@@ -602,7 +615,6 @@ def test_a_failed_certification_refuses_the_run(
 
 def test_a_context_over_a_position_with_no_owner_is_refused(context: EvolutionContext) -> None:
     """No located owner for the execution position means no execution could ever be authorised."""
-    from engine.uaue.model import Phase
 
     executor = context.authority.phase_by_ordinal(5)
     ownerless = Phase(
@@ -827,7 +839,6 @@ def test_the_controller_names_no_domain_at_all(controller_source: str) -> None:
 
 def test_the_controller_holds_no_module_level_mutable_state() -> None:
     """A conductor with memory could not replay, so there must be nothing to remember."""
-    import engine.uaue.controller as module
 
     mutable = [
         name
@@ -855,8 +866,6 @@ def test_the_controller_writes_nothing(
 
 
 def test_the_gate_is_open_over_repository_truth() -> None:
-    from engine.uaue.gate import measure
-
     report = measure()
     assert report.open, [entry.to_dict() for entry in report.failures]
     assert_obligation_surface([entry.identifier for entry in report.obligations])
@@ -868,12 +877,9 @@ def test_the_gate_is_open_over_repository_truth() -> None:
 
 def test_the_gate_can_close(context: EvolutionContext) -> None:
     """A gate that cannot fail measures nothing. Three obligations driven to CLOSED at once."""
-    from engine.uaue.gate import measure
 
     class NothingResolves(Substrate):
         def state(self, path: str) -> str:
-            from engine.uaue.model import ABSENT
-
             return ABSENT
 
         def gate_state(self, command: str) -> tuple[bool, str]:
@@ -896,10 +902,6 @@ def test_the_position_obligation_can_close(context: EvolutionContext) -> None:
     absent, rather than by editing the authority object: the classification of a position is the
     loader's to determine, and a hand-built authority would be measuring this test's opinion.
     """
-    from engine.uaue.authority import load_evolution_authority
-    from engine.uaue.gate import measure
-    from engine.uaue.model import ABSENT
-    from engine.uaue.resolution import DeclarationReader
 
     lost = context.authority.phase_by_ordinal(3).homes[0]
 
@@ -930,7 +932,6 @@ def test_the_repository_verification_path_actually_runs_this_gate(
     so the gate could report every declared gate wired over a pipeline that had never heard of
     this programme.
     """
-    from engine.uaue.gate import FAIL_CLOSED_FLAG, MODULE_PATH
 
     entry_points = {
         context.substrate.entry_point(phase.gate.command) for phase in context.authority.phases
@@ -946,7 +947,6 @@ def test_the_integration_obligation_closes_when_the_pipeline_does_not_run_the_ga
     context: EvolutionContext,
 ) -> None:
     """Measured through the whole gate, because the verdict is what a consumer sees."""
-    from engine.uaue.gate import measure
 
     class PipelineIgnoresThisProgramme(Substrate):
         def invokes(self, path: str, token: str) -> bool:
@@ -964,7 +964,6 @@ def test_the_integration_obligation_closes_when_the_pipeline_ignores_the_exit_st
     context: EvolutionContext,
 ) -> None:
     """Running the gate and discarding its verdict is a report, not a gate."""
-    from engine.uaue import gate as gate_module
 
     class PipelineRunsItButNotFailClosed(Substrate):
         def invokes(self, path: str, token: str) -> bool:
@@ -980,7 +979,6 @@ def test_the_integration_obligation_closes_when_no_entry_point_is_declared(
     context: EvolutionContext,
 ) -> None:
     """An "every entry point runs this gate" claim over an empty set measures nothing."""
-    from engine.uaue import gate as gate_module
 
     class NoPipelineIsNamed(Substrate):
         def entry_point(self, command: str) -> str | None:
@@ -994,7 +992,6 @@ def test_the_integration_obligation_closes_when_no_entry_point_is_declared(
 
 def test_the_committed_history_projection_is_a_replay(context: EvolutionContext) -> None:
     """The committed file must be exactly what the declaration produces, byte for byte."""
-    from engine.uaue.gate import history_path, measure, replay_drift
 
     report = measure(context)
     assert Path(history_path(context)).is_file()
@@ -1004,9 +1001,6 @@ def test_the_committed_history_projection_is_a_replay(context: EvolutionContext)
 def test_the_committed_history_projection_rehydrates_and_is_queryable(
     context: EvolutionContext,
 ) -> None:
-    from engine.uaue.gate import history_path
-    from engine.uaue.history import query_history, rehydrate_history
-
     document = json.loads(Path(history_path(context)).read_text("utf-8"))
     ledger = rehydrate_history(document)
     assert len(ledger) > 0
@@ -1022,8 +1016,6 @@ def test_the_committed_history_projection_rehydrates_and_is_queryable(
 def test_the_history_projection_is_written_only_inside_the_programme_home(
     context: EvolutionContext,
 ) -> None:
-    from engine.uaue.gate import history_path
-
     target = Path(history_path(context)).resolve()
     home = (Path(context.substrate.root) / "00-MASTER" / context.authority.programme_id).resolve()
     assert target.parent == home
@@ -1036,8 +1028,6 @@ def test_the_history_projection_is_written_only_inside_the_programme_home(
 
 
 def test_the_gate_command_exits_zero_when_every_obligation_is_satisfied(capsys) -> None:
-    from engine.uaue.gate import main
-
     assert main([]) == 0
     assert main(["--gate", "--quiet"]) == 0
     report = capsys.readouterr()
@@ -1046,8 +1036,6 @@ def test_the_gate_command_exits_zero_when_every_obligation_is_satisfied(capsys) 
 
 
 def test_the_gate_command_emits_a_machine_readable_report(capsys) -> None:
-    from engine.uaue.gate import main
-
     assert main(["--json", "--quiet"]) == 0
     document = json.loads(capsys.readouterr().out)
     assert document["gate"] == "uaue-gate"
@@ -1072,7 +1060,6 @@ def test_the_gate_command_exits_non_zero_when_an_obligation_is_refused(
     monkeypatch, context: EvolutionContext
 ) -> None:
     """The only thing a gate is consumed through is its exit status, so it must be measured."""
-    from engine.uaue import gate as gate_module
 
     refused = gate_module.GateReport(
         obligations=(
@@ -1094,8 +1081,6 @@ def test_the_gate_command_exits_non_zero_when_an_obligation_is_refused(
 
 def test_an_unusable_declaration_is_a_fault_and_never_a_verdict(monkeypatch) -> None:
     """ "The gate is closed" and "I could not tell" are different answers, with different codes."""
-    from engine.uaue import gate as gate_module
-    from engine.uaue.model import EvolutionAuthorityError
 
     def unusable(*_: Any, **__: Any) -> None:
         raise EvolutionAuthorityError("the declaration is unusable")
@@ -1114,8 +1099,6 @@ def test_the_render_command_writes_the_projection_and_the_replay_command_checks_
     monkeypatch, tmp_path: Path, capsys
 ) -> None:
     """Render, then replay, then mutate one byte and prove the replay refuses it."""
-    from engine.uaue import gate as gate_module
-    from engine.uaue.resolution import PROGRAMME_HOME
 
     target = tmp_path / PROGRAMME_HOME / "UAUE-EVOLUTION-HISTORY.json"
     monkeypatch.setattr(gate_module, "history_path", lambda *_, **__: target)
@@ -1133,8 +1116,6 @@ def test_the_render_command_writes_the_projection_and_the_replay_command_checks_
 
 
 def test_a_render_into_an_unwritable_destination_is_a_fault(monkeypatch, tmp_path: Path) -> None:
-    from engine.uaue import gate as gate_module
-
     blocked = tmp_path / "not-a-directory"
     blocked.write_text("", encoding="utf-8")
     monkeypatch.setattr(gate_module, "history_path", lambda *_, **__: blocked / "history.json")
@@ -1145,7 +1126,6 @@ def test_the_replay_check_reports_an_unreadable_projection(
     monkeypatch, tmp_path: Path, context: EvolutionContext
 ) -> None:
     """An unreadable committed projection is a drift finding, never a silent pass."""
-    from engine.uaue.gate import measure, replay_drift
 
     report = measure(context)
     assert replay_drift(report, tmp_path / "absent.json").startswith("the history projection has")
@@ -1169,7 +1149,6 @@ def test_an_evaluation_that_did_not_settle_halts_before_authorisation(
     authorised past an unsettled evaluation would perform an act nobody predicted the impact of.
     The reason is carried through by name so an operator can see WHICH of the three conditions
     withheld the authorisation."""
-    from engine.uaue import controller as controller_module
 
     real = controller_module.simulate_evolution
 
@@ -1188,7 +1167,6 @@ def test_an_execution_claiming_a_mutation_is_refused_twice_over(
     """This controller never performs a mutation, so a record claiming one came from somewhere
     it does not control. Refused at the authorisation position AND again when the run is sealed,
     because the two are different readers and neither may rely on the other having looked."""
-    from engine.uaue import controller as controller_module
 
     real = controller_module.execute_evolution
 
@@ -1206,8 +1184,6 @@ def test_a_history_that_cannot_be_projected_is_a_refusal_and_not_a_crash(
 ) -> None:
     """The run is the unit an operator reads. A projection failure that escaped as an exception
     would take the whole run's record with it, including every refusal already collected."""
-    from engine.uaue import controller as controller_module
-    from engine.uaue.model import EvolutionAuthorityError
 
     def _unprojectable(chain, authority):  # noqa: ANN001, ANN202
         raise EvolutionAuthorityError("the ledger refused the projection")
@@ -1227,8 +1203,6 @@ def test_a_history_that_cannot_be_projected_is_a_refusal_and_not_a_crash(
 
 
 def _obligation(context: EvolutionContext, builder: str):
-    from engine.uaue import gate as gate_module
-
     return getattr(gate_module, builder)(context)
 
 
@@ -1288,7 +1262,6 @@ def test_a_backward_or_unresolved_dependency_closes_the_dependency_obligation(
     with its position, so no declaration can produce the first. Handing the obligation an edge
     set the deriver cannot build is what shows the guard still works if a future deriver could.
     """
-    from engine.uaue.model import Dependency
 
     authority = context.authority
     forward = Dependency(
@@ -1325,7 +1298,6 @@ def test_a_replay_that_does_not_reproduce_the_run_closes_the_replay_obligation(
     different run digest, a different run identity, and a settlement that took a different
     number of rounds. Collapsing them would report "the replay differs" and say nothing an
     operator could act on."""
-    from engine.uaue import gate as gate_module
 
     first = controller.run(probe)
     drifted = replace(
@@ -1347,8 +1319,6 @@ def test_a_run_recording_a_mutation_or_inventing_an_owner_home_closes_the_unknow
     """Nothing new was required, and "nothing new" is measured two ways: no mutation was
     performed, and no owner home lies inside this programme's own home. The second is what
     would make the register its own authority."""
-    from engine.uaue import gate as gate_module
-    from engine.uaue.resolution import PROGRAMME_HOME
 
     mutating = replace(probe_run, mutation_performed=True)
     obligation = gate_module._unknown_obligation(mutating, context)
@@ -1372,9 +1342,6 @@ def test_the_report_names_the_replay_drift_it_found(capsys) -> None:
     """The drift line is the one an operator acts on. A report that computed the drift and did
     not print it would leave the committed projection's disagreement discoverable only by
     running the gate again with different flags."""
-    import io
-
-    from engine.uaue import gate as gate_module
 
     context = EvolutionContext.resolve()
     report = gate_module.measure(context)
@@ -1386,8 +1353,6 @@ def test_the_report_names_the_replay_drift_it_found(capsys) -> None:
 def test_a_render_the_declaration_refuses_is_a_fault_and_never_a_verdict(monkeypatch) -> None:
     """An IO failure and a declaration failure are different faults on the same command, and
     both must exit FAULT rather than reporting a gate verdict about a surface nobody wrote."""
-    from engine.uaue import gate as gate_module
-    from engine.uaue.model import EvolutionAuthorityError
 
     def _refusing(*_: Any, **__: Any) -> None:
         raise EvolutionAuthorityError("the surface cannot be rendered")

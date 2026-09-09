@@ -55,11 +55,13 @@ from platform.commercial_intelligence.errors import (
     AnalyzerDefinitionError,
     CommercialConfigError,
     CommercialTargetError,
+    MarketplaceError,
     MoneyError,
     PackageError,
     PricingError,
 )
-from platform.commercial_intelligence.evidence import build_commercial_evidence
+from platform.commercial_intelligence.evidence import EvidenceIndex, build_commercial_evidence
+from platform.commercial_intelligence.investment import InvestmentCase
 from platform.commercial_intelligence.licensing import EntitlementRequest, LicenseRegister
 from platform.commercial_intelligence.marketplace import (
     Listing,
@@ -67,7 +69,13 @@ from platform.commercial_intelligence.marketplace import (
     MarketplaceRegistry,
 )
 from platform.commercial_intelligence.policy import PolicyRegister, PolicyRequest
-from platform.commercial_intelligence.pricing import PriceBook, QuoteLineRequest
+from platform.commercial_intelligence.portfolio import Portfolio
+from platform.commercial_intelligence.pricing import (
+    DiscountRule,
+    PriceBook,
+    QuoteLineRequest,
+    price_line,
+)
 from platform.commercial_intelligence.product import ProductCatalog
 from platform.commercial_intelligence.service import CommercialIntelligenceService
 from platform.commercial_intelligence.validation import (
@@ -86,6 +94,7 @@ from platform.tests.commercial_helpers import (
     grant_b,
     listings,
     money,
+    package_spec,
     price_book,
     products,
     release_policy,
@@ -835,7 +844,6 @@ def _register_target(facts: dict[str, Any] | None = None) -> CommercialTarget:
 def test_a_listing_state_nobody_declared_is_refused_and_names_what_is_supported() -> None:
     """The vocabulary is closed and the refusal carries the closed set, so a caller reading the
     error learns the whole answer rather than that its guess was wrong."""
-    from platform.commercial_intelligence.errors import MarketplaceError
 
     with pytest.raises(MarketplaceError):
         ListingState.parse("on-sale")
@@ -845,7 +853,6 @@ def test_a_listing_state_nobody_declared_is_refused_and_names_what_is_supported(
 def test_a_listing_transitions_only_where_the_map_permits_and_keeps_its_identity() -> None:
     """A listing that changed identity on transition would break every reference to it; one that
     moved to an undeclared state would put the register into a state nothing describes."""
-    from platform.commercial_intelligence.errors import MarketplaceError
 
     listing = Listing.from_mapping(listings()[1])
     assert listing.state is ListingState.DRAFT
@@ -1039,8 +1046,6 @@ def test_a_chain_finds_its_stages_and_refuses_self_approval() -> None:
 
 
 def test_a_policy_register_finds_its_policies_and_digests_its_population() -> None:
-    from platform.tests.commercial_helpers import discount_policy, release_policy
-
     register = PolicyRegister.from_sequence([release_policy(), discount_policy()])
     assert register.get("POL-RELEASE") is not None
     assert register.get("A-POLICY-NOBODY-WROTE") is None
@@ -1084,7 +1089,6 @@ def test_a_price_book_digests_its_content_and_a_negative_net_amount_is_refused()
     survives a future rule admitting a larger basis-point range. Reaching it means handing
     `price_line` a rule the constructor would not have built.
     """
-    from platform.commercial_intelligence.pricing import DiscountRule, price_line
 
     book = PriceBook.from_mapping(price_book())
     assert book.digest() == PriceBook.from_mapping(price_book()).digest()
@@ -1234,7 +1238,6 @@ def test_every_projection_of_one_analysis_digests_and_reports_itself() -> None:
     certificate = certify(report)
     assert evidence.to_dict()
     assert certificate.digest() == certificate.certificate_sha256
-    from platform.commercial_intelligence.contracts import DomainKind
 
     for kind in DomainKind:
         assert isinstance(certificate.kind_certified(kind), bool)
@@ -1249,8 +1252,6 @@ def test_an_assembled_package_reports_its_currency_constituents_and_digest() -> 
     """The constituents map IS the package's audit surface: it is how a reader establishes that
     the quote, grant, documentation and governance decision inside one package are the ones that
     were assembled, without re-deriving any of them."""
-    from platform.commercial_intelligence.validation import _assemble_declared_package
-    from platform.tests.commercial_helpers import package_spec
 
     package = _assemble_declared_package(package_spec())
     assert package.currency == package.quote.currency
@@ -1270,8 +1271,6 @@ def test_an_assembled_package_reports_its_currency_constituents_and_digest() -> 
 def test_a_portfolio_and_an_investment_case_each_digest_their_own_content() -> None:
     """Both are read by an analyzer and cited by the evidence record. A digest that did not move
     with the content would let two different portfolios be cited under one identity."""
-    from platform.commercial_intelligence.investment import InvestmentCase
-    from platform.commercial_intelligence.portfolio import Portfolio
 
     facts = valid_facts()
     portfolio = Portfolio.from_mapping(facts[CommercialDomain.PORTFOLIO_INTELLIGENCE.value])
@@ -1292,7 +1291,6 @@ def test_the_evidence_index_reports_the_kinds_it_holds_and_records_itself() -> N
     """The kinds are what an auditor reads first — they say what classes of evidence exist
     before anything is opened. An index that could not report them would have to be walked
     entry by entry to answer a question about its shape."""
-    from platform.commercial_intelligence.evidence import EvidenceIndex
 
     facts = valid_facts()
     index = EvidenceIndex.from_sequence(facts[CommercialDomain.BUSINESS_EVIDENCE.value]["entries"])
