@@ -1491,3 +1491,324 @@ def test_the_axis_list_discloses_itself(doc: dict) -> None:
     assert axes[0]["admission"], "disclosed with no admission path"
     exercises = {e["id"] for e in doc["admission_exercisability"]["exercises"]}
     assert "ISD-AE-04" in exercises, "the axis admission path is asserted, never exercised"
+
+
+# ------------------------------------------------ the branches a sound repository never takes
+
+
+def test_a_scanned_file_that_cannot_be_read_is_skipped_rather_than_counted(
+    declaration: dict[str, Any], monkeypatch: Any
+) -> None:
+    """A file the scanner cannot read has no occurrences to count, and counting it as zero and
+    counting it as unreadable are the same number. Skipping it is what keeps the permanence
+    census a count of what was read rather than of what was looked for."""
+    scan = build(copy.deepcopy(declaration)).freeze_scan
+    monkeypatch.setattr(contract_module, "_read_text", lambda repo, relpath: None)
+    assert scan_occurrences(REPO, scan) == {}
+
+
+def test_a_closure_ceiling_that_is_not_an_integer_is_refused(doc: dict[str, Any]) -> None:
+    """The ceiling is a ratchet, and a ratchet compared against a non-number is a comparison
+    nobody can lose. Refusing up front is what stops the law from silently holding."""
+    doc["closure_detection"]["undisclosed_ceiling"] = "as few as possible"
+    assert any(
+        "no integer undisclosed_ceiling" in problem
+        for problem in run("scope_expansion_capacity", doc)
+    )
+
+
+def test_an_edge_schema_whose_type_property_is_not_a_mapping_is_refused(
+    tmp_path: Any, doc: dict[str, Any]
+) -> None:
+    """The forbidden and required key checks are membership tests over that mapping. Against a
+    string they are substring tests, and `"enum" in "some string"` decides nothing about the
+    direction space."""
+    with open(os.path.join(str(tmp_path), "schema.json"), "w", encoding="utf-8") as handle:
+        json.dump({"properties": {"type": "a string where an object belongs"}}, handle)
+    doc["direction_expansion"]["edge_schema"] = "schema.json"
+    problems = run("direction_expansion_capacity", doc, str(tmp_path))
+    assert any("the type property is not a mapping" in problem for problem in problems)
+
+
+# ------------------------------------------------------- the admission probe's own refusals
+
+
+def _lone_exercise(doc: dict[str, Any], tmp_path: Any, **target: Any) -> dict[str, Any]:
+    """Replace every declared exercise with one synthetic exercise over a scratch document.
+
+    Deriving the probe from the live declaration would tie these tests to whichever population
+    happens to be declared today; the failures under measurement are properties of the probe
+    builder, not of any particular owner.
+    """
+    owner = "probe-owner.json"
+    with open(os.path.join(str(tmp_path), owner), "w", encoding="utf-8") as handle:
+        json.dump({"nodes": [{"id": "real-member"}]}, handle)
+    exercise = {
+        "id": "ISD-AE-PROBE",
+        "population_id": "a scratch population",
+        "declared_owner": owner,
+        "admission": "append a member",
+        "form": "document_append",
+        "target": {
+            "pointer": "/nodes",
+            "id_field": "id",
+            "probe_from_sibling": 0,
+            "probe_overrides": {"id": "isd-admission-probe-1"},
+        },
+        "expected": "admitted",
+        "consumers": [],
+    }
+    exercise["target"].update(target)
+    doc["admission_exercisability"]["exercises"] = [exercise]
+    return exercise
+
+
+def test_a_probe_target_declaring_no_overrides_is_refused(doc: dict[str, Any], tmp_path: Any):
+    """The overrides are what make the probe a probe: without them the appended member is a
+    byte-identical copy of a real one, and admitting it would prove nothing about a NEW member."""
+    exercise = _lone_exercise(doc, tmp_path)
+    exercise["target"].pop("probe_overrides")
+    problems = run("admission_path_exercisability", doc, str(tmp_path))
+    assert any("declares no probe_overrides" in problem for problem in problems)
+
+
+def test_a_probe_with_no_declared_sibling_is_built_from_nothing(doc: dict[str, Any], tmp_path: Any):
+    """A population whose members this engine cannot pattern-match still gets a probe — built
+    from the overrides alone. Refusing instead would make the law unusable for exactly the
+    populations it exists to measure."""
+    _lone_exercise(doc, tmp_path, probe_from_sibling=99)
+    assert run("admission_path_exercisability", doc, str(tmp_path)) == ()
+
+
+def test_a_sibling_that_is_not_a_mapping_is_refused(doc: dict[str, Any], tmp_path: Any) -> None:
+    """A probe derived from a string cannot carry the declared overrides, and appending the
+    overrides alone would silently measure a different population shape."""
+    owner = "scalar-owner.json"
+    with open(os.path.join(str(tmp_path), owner), "w", encoding="utf-8") as handle:
+        json.dump({"nodes": ["a bare string member"]}, handle)
+    _lone_exercise(doc, tmp_path)
+    doc["admission_exercisability"]["exercises"][0]["declared_owner"] = owner
+    problems = run("admission_path_exercisability", doc, str(tmp_path))
+    assert any("sibling member is not a mapping" in problem for problem in problems)
+
+
+def test_an_owner_that_exists_and_does_not_parse_is_refused(doc: dict[str, Any], tmp_path: Any):
+    """Absent and unparseable are different failures. The absence check above cannot see the
+    second, because the file is right there."""
+    owner = "broken-owner.json"
+    with open(os.path.join(str(tmp_path), owner), "w", encoding="utf-8") as handle:
+        handle.write("{ not json")
+    _lone_exercise(doc, tmp_path)
+    doc["admission_exercisability"]["exercises"][0]["declared_owner"] = owner
+    problems = run("admission_path_exercisability", doc, str(tmp_path))
+    assert any("absent or unparseable" in problem for problem in problems)
+
+
+def test_a_pointer_that_resolves_to_no_list_is_refused(doc: dict[str, Any], tmp_path: Any) -> None:
+    """A pointer into nothing and a pointer into a scalar both mean the same thing: there is no
+    population here to append a member to, so the admission path cannot be walked."""
+    _lone_exercise(doc, tmp_path, pointer="/nodes/not/a/population")
+    problems = run("admission_path_exercisability", doc, str(tmp_path))
+    assert any("does not resolve to a list" in problem for problem in problems)
+
+
+def test_a_reader_form_declaring_no_reader_is_refused(doc: dict[str, Any], tmp_path: Any) -> None:
+    """The reader form exists because the reader is where the owner's structural validation
+    lives. Naming the form and not the reader claims that validation without invoking it."""
+    _lone_exercise(doc, tmp_path)
+    doc["admission_exercisability"]["exercises"][0]["form"] = "reader_document_append"
+    problems = run("admission_path_exercisability", doc, str(tmp_path))
+    assert any("declares no reader" in problem for problem in problems)
+
+
+def test_an_exercise_naming_a_form_nothing_implements_is_named_by_the_law(
+    doc: dict[str, Any], tmp_path: Any
+) -> None:
+    """`validate` refuses this at load time. The law refuses it again at measurement time, and
+    the second refusal is what protects a caller that reached the check some other way."""
+    _lone_exercise(doc, tmp_path)
+    doc["admission_exercisability"]["exercises"][0]["form"] = "telepathy"
+    problems = run("admission_path_exercisability", doc, str(tmp_path))
+    assert any("which is not implemented" in problem for problem in problems)
+
+
+def test_an_admission_that_fails_in_an_unexpected_way_is_a_finding_not_a_crash(
+    doc: dict[str, Any], tmp_path: Any
+) -> None:
+    """The handler is given a declaration this engine did not write. Every way it can fail is a
+    finding about the declaration; letting one out as an exception would take the gate down with
+    no verdict on this law or any law after it."""
+    _lone_exercise(doc, tmp_path, reader_module="a.module.nobody.installed", reader_function="read")
+    doc["admission_exercisability"]["exercises"][0]["form"] = "reader_document_append"
+    problems = run("admission_path_exercisability", doc, str(tmp_path))
+    assert any("ModuleNotFoundError" in problem for problem in problems)
+
+
+def test_a_consumer_kind_this_law_cannot_re_evaluate_is_named(doc: dict[str, Any], tmp_path: Any):
+    """A kind nobody can re-evaluate must not read as an admission: silence from an unrunnable
+    consumer is indistinguishable from silence from one that admitted."""
+    _lone_exercise(doc, tmp_path)
+    doc["admission_exercisability"]["exercises"][0]["consumers"] = [
+        {
+            "kind": "divination",
+            "required_owner": "somewhere",
+            "expected_refusal": "",
+            "gap": "",
+        }
+    ]
+    problems = run("admission_path_exercisability", doc, str(tmp_path))
+    assert any("is not a kind this law can re-evaluate" in problem for problem in problems)
+
+
+def test_a_consumer_returning_a_single_refusal_string_is_read_as_one_refusal(
+    doc: dict[str, Any],
+) -> None:
+    """Consumers answer in three shapes — a string, a sequence, or nothing — and a string that
+    was joined character by character would report a refusal per letter."""
+    consumer = ExerciseConsumer(
+        kind="callable",
+        module="os.path",
+        function="basename",
+        paths=(),
+        population_tokens=(),
+        required_owner="synthetic",
+        expected_refusal="",
+        gap="",
+    )
+    assert contract_module._callable_refusal(consumer, "a/refusal") == "refusal"
+
+
+def test_a_consumer_path_that_cannot_be_read_or_parsed_is_reported(tmp_path: Any) -> None:
+    """The assertion scan is a static read over declared paths. A path it cannot read is a stale
+    declaration, and one that does not parse is a different defect owned by the lint gate —
+    both of which must be said out loud rather than counted as "no literal found"."""
+    unreadable = os.path.join(str(tmp_path), "unreadable.py")
+    with open(unreadable, "w", encoding="utf-8") as handle:
+        handle.write("COUNT = 1\n")
+    os.chmod(unreadable, 0o000)
+    with open(os.path.join(str(tmp_path), "broken.py"), "w", encoding="utf-8") as handle:
+        handle.write("def (:::\n")
+    consumer = ExerciseConsumer(
+        kind="assertion_scan",
+        module="",
+        function="",
+        paths=("unreadable.py", "broken.py"),
+        population_tokens=("COUNT",),
+        required_owner="synthetic",
+        expected_refusal="",
+        gap="",
+    )
+    located = contract_module._population_literals(str(tmp_path), consumer)
+    assert any("is unreadable" in item for item in located)
+    assert any("does not parse" in item for item in located)
+
+
+def test_a_binding_chain_longer_than_the_locator_follows_is_not_followed_forever(
+    tmp_path: Any,
+) -> None:
+    """The subject is resolved through local bindings, and the walk is bounded. An unbounded one
+    would loop on a self-referential binding; a bounded one stops and reports nothing, which is
+    the conservative direction for a locator whose findings are refusals."""
+    source = os.path.join(str(tmp_path), "chained.py")
+    with open(source, "w", encoding="utf-8") as handle:
+        handle.write(
+            "def test_chain():\n"
+            "    a = STAGES\n"
+            "    b = a\n"
+            "    c = b\n"
+            "    d = c\n"
+            "    e = d\n"
+            "    f = e\n"
+            "    g = f\n"
+            "    h = g\n"
+            "    assert len(h) == 45\n"
+        )
+    consumer = ExerciseConsumer(
+        kind="assertion_scan",
+        module="",
+        function="",
+        paths=("chained.py",),
+        population_tokens=("STAGES",),
+        required_owner="synthetic",
+        expected_refusal="",
+        gap="",
+    )
+    assert contract_module._population_literals(str(tmp_path), consumer) == ()
+
+
+# --------------------------------------------------------- the declaration's own refusals
+
+
+def test_an_exercise_whose_consumers_are_not_a_list_is_a_fault(doc: dict[str, Any]) -> None:
+    """A mapping where a list belongs would iterate its keys, and every consumer would be a
+    string this engine then failed to read as a consumer."""
+    exercises(doc)[0]["consumers"] = {"kind": "callable"}
+    with pytest.raises(InfiniteScopeError, match="consumers is absent or not a list"):
+        build(doc)
+
+
+def test_a_duplicated_exercise_id_is_refused(doc: dict[str, Any]) -> None:
+    """Two exercises under one id make the evidence unattributable: a recorded refusal cannot
+    be routed back to the exercise that produced it."""
+    exercises(doc).append(copy.deepcopy(exercises(doc)[0]))
+    problems = build(doc).validate(
+        frozenset(LAW_CHECKS), frozenset(contract_module.ADMISSION_FORMS)
+    )
+    assert any("declared more than once" in problem for problem in problems)
+
+
+def test_an_exercise_expecting_something_other_than_admission_or_refusal_is_refused(
+    doc: dict[str, Any],
+) -> None:
+    """Those are the two outcomes the ratchet is defined over. A third would be an expectation
+    no measurement can confirm or contradict."""
+    exercises(doc)[0]["expected"] = "probably fine"
+    problems = build(doc).validate(
+        frozenset(LAW_CHECKS), frozenset(contract_module.ADMISSION_FORMS)
+    )
+    assert any("expected" in problem for problem in problems)
+
+
+def test_the_committed_declaration_is_loadable_by_path(tmp_path: Any, doc: dict[str, Any]) -> None:
+    """`load` is the reader every caller outside this package uses; `parse` is the one the tests
+    use. Measuring only the second would leave the real entry point unexercised."""
+    from engine.infinite_scope.declaration import load
+
+    contract = load(write_declaration(tmp_path, doc))
+    assert contract.laws
+
+
+# ------------------------------------------------------------ the closure detector's edges
+
+
+def test_a_module_that_does_not_parse_yields_no_closure() -> None:
+    """A syntax error is a different defect, owned by the lint gate. Reporting it here would
+    attribute it to the wrong law and put a permanent finding in the closure census."""
+    from engine.infinite_scope.detector import closures_in_source
+
+    assert closures_in_source("def (:::\n", "broken.py") == []
+
+
+def test_a_literal_type_carrying_a_non_constant_member_is_not_a_closure() -> None:
+    """`Literal[SOME_NAME]` names something resolved elsewhere, so the set of values it admits
+    is not visible here. Counting it would put a number on a population nobody enumerated."""
+    from engine.infinite_scope.detector import closures_in_source
+
+    source = "from typing import Literal\nA = 1\nB = 2\nKind = Literal[A, B, 'c']\n"
+    assert not [c for c in closures_in_source(source, "m.py") if c.kind == "literal-type"]
+
+
+def test_a_module_that_cannot_be_opened_is_skipped_rather_than_crashing_the_detector(
+    tmp_path: Any,
+) -> None:
+    """The census walks the whole repository. One unreadable file must not be the reason the
+    ceiling cannot be measured at all."""
+    from engine.infinite_scope.detector import detect
+
+    root = os.path.join(str(tmp_path), "layer")
+    os.makedirs(root)
+    unreadable = os.path.join(root, "closed.py")
+    with open(unreadable, "w", encoding="utf-8") as handle:
+        handle.write("MEMBERS = ('a', 'b', 'c', 'd', 'e')\n")
+    os.chmod(unreadable, 0o000)
+    assert detect(str(tmp_path), ("layer",), frozenset(), ()) == []
