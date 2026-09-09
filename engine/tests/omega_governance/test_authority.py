@@ -316,3 +316,108 @@ def test_the_resolver_report_describes_what_it_holds() -> None:
     report = resolver.report()
     assert isinstance(report, dict)
     assert len(resolver) == 1
+
+
+# ------------------------------------------------ the refusals a well-formed hierarchy never needs
+
+
+def test_a_tier_ranked_below_one_is_refused() -> None:
+    """Ranks start at 1 so 0 stays available as "no tier resolved", which must never be a legal
+    outcome — a rank of zero would make the absent answer indistinguishable from the first one."""
+    with pytest.raises(AuthorityError, match="ranks start at 1"):
+        AuthorityTier(name="ZERO", rank=0, rule="TEST-R-00")
+
+
+def test_a_tier_renders_as_its_name() -> None:
+    """The tier appears inside a chain's own explanation, so it has to read as the name a
+    reviewer knows rather than as a dataclass repr."""
+    assert str(ARTIFACT_AUTHORITY) == ARTIFACT_AUTHORITY.name
+
+
+def test_a_chain_must_name_the_subject_it_resolves_and_the_rule_it_cites() -> None:
+    """An attribution that names no subject cannot be joined to the artifact it is about, and one
+    citing no rule cannot be checked against the hierarchy that produced it."""
+    with pytest.raises(AuthorityError, match="must name the subject"):
+        AuthorityChain(subject="  ", authority="somebody", tier="ARTIFACT", rule="R")
+    with pytest.raises(AuthorityError, match="cites no rule"):
+        AuthorityChain(subject="a/path", authority="somebody", tier="ARTIFACT", rule="  ")
+
+
+def test_a_chain_no_registered_tier_abstained_on_carries_no_abstention_clause() -> None:
+    """The explanation is assembled from what happened. A chain with an abstaining tier names it;
+    one with none must not carry the sentence with an empty list after it."""
+    # With no source registered anywhere, the only consulted tier is the fallback — and it
+    # answered rather than abstaining, so there is nothing to list.
+    assert "abstaining tiers:" not in _resolver().resolve("a/path").explanation()
+    wider = _resolver(
+        MappingSource("specific", ARTIFACT_AUTHORITY, {"other/path": "somebody"}),
+        MappingSource("broad", DOMAIN_AUTHORITY, {"a/path": "somebody-else"}),
+    )
+    assert "abstaining tiers:" in wider.resolve("a/path").explanation()
+
+
+def test_a_contested_chain_names_the_tiers_that_disagreed() -> None:
+    """Picking one of two claims by sort order would settle a governance dispute by alphabet, so
+    the disagreement travels in the explanation rather than being resolved out of it."""
+    resolver = _resolver(
+        MappingSource("one", ARTIFACT_AUTHORITY, {"a/path": "somebody"}),
+        MappingSource("two", ARTIFACT_AUTHORITY, {"a/path": "somebody-else"}),
+    )
+    chain = resolver.resolve("a/path")
+    assert chain.contested_tiers
+    assert "CONTESTED at" in chain.explanation()
+
+
+def test_a_fallback_event_records_its_coordinate_only_when_a_clock_supplied_one() -> None:
+    """A record that always carried the key would make "no clock was injected" indistinguishable
+    from "the clock answered nothing", and this package keeps Time unprivileged precisely so a
+    deployment with no clock stays expressible."""
+    unstamped = _resolver()
+    assert unstamped.resolve("unclaimed/path").authority == UNIVERSAL_FALLBACK_AUTHORITY
+    assert "coordinate" not in unstamped.fallback_events()[-1].as_record()
+    stamped = _resolver(clock=LogicalClock("test"))
+    stamped.resolve("unclaimed/path")
+    record = stamped.fallback_events()[-1].as_record()
+    assert record["coordinate"]
+    assert record["subject"] == "unclaimed/path"
+    assert record["authority"] == UNIVERSAL_FALLBACK_AUTHORITY
+
+
+def test_a_resolver_with_no_fallback_authority_or_no_fallback_tier_is_refused() -> None:
+    """Both are the same defect at two levels: a hierarchy whose last rung is conditional can
+    reach the end with no answer, which is the one path Ω-2.2 forbids."""
+    with pytest.raises(AuthorityError, match="terminate with NONE"):
+        AuthorityResolver(fallback_authority="   ")
+    with pytest.raises(AuthorityError, match="declares no fallback tier"):
+        AuthorityResolver(tiers=(ARTIFACT_AUTHORITY,))
+
+
+def test_a_source_registering_at_the_fallback_tier_is_refused() -> None:
+    """The fallback tier is constructed by the resolver and admits no source: a registerable
+    fallback is a removable fallback."""
+    with pytest.raises(AuthorityError, match="registerable fallback is a removable fallback"):
+        _resolver(MappingSource("last", UNIVERSAL_FALLBACK, {"a/path": "somebody"}))
+
+
+def test_resolving_an_unnamed_subject_is_refused() -> None:
+    with pytest.raises(AuthorityError, match="unnamed subject"):
+        _resolver().resolve("   ")
+
+
+def test_a_source_that_identifies_itself_as_nothing_cannot_enter_a_chain() -> None:
+    """MappingSource refuses this at construction, so the resolver's own guard has never run. It
+    is the one that protects a source arriving from somewhere the constructor did not build — and
+    an unidentifiable source is one no chain could cite as the reason for its attribution."""
+
+    class _Anonymous:
+        def identifier(self) -> str:
+            return "   "
+
+        def tier(self) -> AuthorityTier:
+            return ARTIFACT_AUTHORITY
+
+        def claim(self, subject: str) -> str:
+            return ABSTAIN
+
+    with pytest.raises(AuthorityError, match="must identify itself"):
+        _resolver().register(_Anonymous())

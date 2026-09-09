@@ -514,3 +514,28 @@ def test_advancing_a_subject_with_no_identity_is_refused():
     status = initial_status(default_states())
     with pytest.raises(StateError, match="name its subject"):
         advance(status, GOVERNED, subject="   ", graph=default_graph())
+
+
+def test_an_edge_the_graph_does_not_declare_is_refused_by_its_absence() -> None:
+    """The edge's absence IS the refusal. A graph holding no transitions permits nothing, and
+    adding one is a deliberate widening of what this graph allows rather than a default."""
+    status = initial_status(default_states())
+    change, reason = check(status, DISCOVERED, graph=TransitionGraph(()))
+    assert change is None
+    assert "no declared transition from UNKNOWN to DISCOVERED" in reason
+
+
+def test_a_change_record_carries_a_coordinate_only_when_a_clock_supplied_one() -> None:
+    """A record that always carried the key would make "this deployment has no clock" and "the
+    clock declined to answer" the same document — and keeping Time unprivileged is the whole
+    reason a deployment with no clock has to stay expressible."""
+    from engine.omega_governance.temporal.clocks import LogicalClock
+
+    graph = default_graph()
+    status = initial_status(default_states())
+    _, unstamped = advance(status, DISCOVERED, subject="a/path", graph=graph)
+    assert "coordinate" not in unstamped.as_record()
+    _, stamped = advance(
+        status, DISCOVERED, subject="a/path", graph=graph, clock=LogicalClock("test")
+    )
+    assert stamped.as_record()["coordinate"]

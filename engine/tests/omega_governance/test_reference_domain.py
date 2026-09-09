@@ -247,3 +247,147 @@ def test_the_time_domain_declares_the_capabilities_the_temporal_package_relies_o
     assert not TIME_DOMAIN.supports(
         QUANTITATIVE
     ), "TIME must not claim magnitude: a Lamport counter has order and no duration"
+
+
+# ---------------------------------------------------- the refusals a well-formed vocabulary avoids
+
+
+def test_a_field_that_states_no_kind_is_refused() -> None:
+    """A field whose kind is unstated is a field every consumer will guess the shape of, and two
+    consumers guessing differently is the ambiguity the schema exists to remove."""
+    with pytest.raises(DomainError, match="declares no kind"):
+        Field(name="magnitude", kind="   ")
+
+
+def test_a_schema_declaring_one_field_twice_is_refused() -> None:
+    """Two declarations of one name make the applicable kind depend on table order, so a record
+    would validate or not according to how the schema happened to be sorted."""
+    with pytest.raises(DomainError, match="more than once"):
+        Schema(
+            identifier="duplicated",
+            fields=(Field(name="unit", kind="str"), Field(name="unit", kind="int")),
+        )
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "message"),
+    [
+        ({"identifier": "  "}, "cannot be cited by a finding"),
+        ({"statement": "  "}, "states nothing"),
+    ],
+    ids=["unnamed", "unstated"],
+)
+def test_an_invariant_that_cannot_be_cited_or_read_is_refused(kwargs, message) -> None:
+    """An invariant whose content lives only in a predicate cannot be reviewed by anyone who
+    cannot run it, and one with no identifier cannot be named by the finding it produces."""
+    fields = {"identifier": "INV-01", "statement": "the magnitude is non-negative"}
+    fields.update(kwargs)
+    with pytest.raises(DomainError, match=message):
+        Invariant(**fields)
+
+
+def test_a_value_that_names_no_domain_is_refused() -> None:
+    """A value whose domain is unknown validates against no schema, holds no invariant and
+    answers to no authority."""
+    with pytest.raises(DomainError, match="must name its domain"):
+        Value(domain="   ")
+
+
+def test_a_domain_with_no_name_is_refused() -> None:
+    with pytest.raises(DomainError, match="cannot be registered or cited"):
+        ReferenceDomain(name="  ", authority="the suite", schema=Schema(identifier="s"))
+
+
+def test_a_record_carries_the_optional_halves_only_when_they_are_present() -> None:
+    """`recorded_at`, `attributes` and `provenance` are each absent-or-present, and a record that
+    always carried the key would make "declared and empty" indistinguishable from "not declared"."""
+    bare = Provenance(declared_by="the suite", rule="TEST-R-01")
+    assert "recorded_at" not in bare.as_record()
+    stamped = Provenance(
+        declared_by="the suite",
+        rule="TEST-R-01",
+        recorded_at=Value(domain="TIME", components=(1,)),
+    )
+    assert stamped.as_record()["recorded_at"]["domain"] == "TIME"
+    assert "attributes" not in Value(domain="TIME").as_record()
+    assert Value(domain="TIME", attributes={"unit": "tick"}).as_record()["attributes"] == {
+        "unit": "tick"
+    }
+    plain = ReferenceDomain(name="D", authority="the suite", schema=Schema(identifier="s"))
+    assert "provenance" not in plain.as_record()
+    sourced = ReferenceDomain(
+        name="D", authority="the suite", schema=Schema(identifier="s"), provenance=bare
+    )
+    assert sourced.as_record()["provenance"]["declared_by"] == "the suite"
+
+
+def test_validating_a_value_of_another_domain_reports_that_and_nothing_else() -> None:
+    """The schema findings of a foreign value would be findings about a shape it never claimed, so
+    the mismatch is reported alone rather than alongside them."""
+    domain = ReferenceDomain(
+        name="D",
+        authority="the suite",
+        schema=Schema(identifier="s", fields=(Field(name="unit", kind="str"),)),
+    )
+    findings = domain.validate(Value(domain="ELSEWHERE"))
+    assert findings == ("value declares domain 'ELSEWHERE' and was validated against 'D'",)
+
+
+def test_an_invariant_that_does_not_hold_is_named_by_its_identifier() -> None:
+    """Three outcomes, and this is the false one. An invariant reported as unchecked when it was
+    checked and failed would be the one reading that turns a finding into a silence."""
+    domain = ReferenceDomain(
+        name="D",
+        authority="the suite",
+        schema=Schema(identifier="s"),
+        invariants=(
+            Invariant(
+                identifier="INV-NEG",
+                statement="the value carries a component",
+                predicate=lambda value: bool(value.components),
+            ),
+        ),
+    )
+    assert domain.validate(Value(domain="D", components=(1,))) == ()
+    assert domain.validate(Value(domain="D")) == (
+        "INV-NEG does not hold: the value carries a component",
+    )
+
+
+def test_declaring_one_name_with_two_schemas_is_refused_and_redeclaring_the_same_is_not() -> None:
+    """One name with two schemas makes every value citing it ambiguous about which shape it
+    claims. Re-declaring the identical domain is idempotent, or a registry could not be seeded
+    twice from the same vocabulary."""
+    registry = DomainRegistry()
+    first = ReferenceDomain(name="D", authority="the suite", schema=Schema(identifier="s"))
+    assert registry.declare(first) is first
+    assert registry.declare(first) is first
+    with pytest.raises(DomainError, match="already declared with different content"):
+        registry.declare(
+            ReferenceDomain(name="D", authority="somebody else", schema=Schema(identifier="s"))
+        )
+
+
+def test_a_registry_holding_a_domain_nobody_answers_for_is_refused() -> None:
+    """Construction already refuses an empty authority, so this can only fire for a domain built
+    by a future path that bypasses the constructor — which is exactly why it lives where the
+    population is held rather than where the domain is made."""
+    registry = default_domains()
+    orphan = ReferenceDomain(name="D", authority="the suite", schema=Schema(identifier="s"))
+    object.__setattr__(orphan, "authority", "   ")
+    registry.declare(orphan)
+    with pytest.raises(DomainError, match="name no authority"):
+        registry.assert_authority_total()
+
+
+def test_the_factory_admits_a_domain_this_repository_did_not_choose() -> None:
+    """The fourteen are THIS repository's starting vocabulary and the only place that choice is
+    made. A caller's own domain enters the same registry through the same door."""
+    extra = ReferenceDomain(
+        name="A-DOMAIN-THIS-REPOSITORY-NEVER-CHOSE",
+        authority="the suite",
+        schema=Schema(identifier="s"),
+    )
+    registry = default_domains((extra,))
+    assert len(registry) == 15
+    assert extra in registry.known()
