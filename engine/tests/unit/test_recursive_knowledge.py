@@ -1714,3 +1714,102 @@ def test_a_substrate_nothing_requires_is_refused(declaration):
         _forge(declaration, substrate_elements=extra)
     )
     assert any("nothing requires it" in p for p in problems), problems
+
+
+# --- URKE-L-22/27/28/29: the parity and review refusals ---------------------------------------
+
+
+def test_a_reality_probe_divergence_is_reported(declaration, monkeypatch):
+    real = discovery.probe_all
+    monkeypatch.setattr(
+        discovery,
+        "probe_all",
+        lambda decl, repository=None: {
+            **real(decl, repository=repository),
+            "invented-probe": ("the world and the record disagree",),
+        },
+    )
+    problems = contract.reality_parity_and_review_are_enforced(_forge(declaration))
+    assert any("the world and the record disagree" in p for p in problems), problems
+
+
+def test_not_performing_every_declared_probe_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(discovery, "probe_all", lambda decl, repository=None: {})
+    problems = contract.reality_parity_and_review_are_enforced(_forge(declaration))
+    assert any("not every declared probe was performed" in p for p in problems), problems
+
+
+def test_a_parity_layer_naming_an_unimplemented_measure_is_refused(declaration):
+    broken = (
+        dataclasses.replace(declaration.parity_layers[0], measured_by="no_such_measure"),
+        *declaration.parity_layers[1:],
+    )
+    problems = contract.reality_parity_and_review_are_enforced(
+        _forge(declaration, parity_layers=broken)
+    )
+    assert any("names an unimplemented measure" in p for p in problems), problems
+
+
+def test_a_parity_layer_whose_evidence_is_absent_is_refused(declaration):
+    broken = (
+        dataclasses.replace(declaration.parity_layers[0], evidence="no/such/evidence.py"),
+        *declaration.parity_layers[1:],
+    )
+    problems = contract.reality_parity_and_review_are_enforced(
+        _forge(declaration, parity_layers=broken)
+    )
+    assert any("is absent" in p for p in problems), problems
+
+
+def test_a_non_empty_review_exemption_list_is_refused(declaration):
+    problems = contract.reality_parity_and_review_are_enforced(
+        _forge(declaration, review_exemptions=("somebody",))
+    )
+    assert any("review exemption list is not empty" in p for p in problems), problems
+
+
+def test_a_capability_carrying_no_review_obligation_of_its_own_is_refused(declaration):
+    problems = contract.reality_parity_and_review_are_enforced(
+        _forge(declaration, self_review_gap="not-a-disclosed-gap")
+    )
+    assert any("no review obligation of its own" in p for p in problems), problems
+
+
+# --- URKE-L-29: the proposal refusals ----------------------------------------------------------
+
+
+def test_an_expressible_condition_reported_unrepresentable_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(proposal, "representability", lambda *a, **k: {"representable": False})
+    problems = contract.architectural_change_requires_a_governed_proposal(_forge(declaration))
+    assert any("reported unrepresentable" in p for p in problems), problems
+
+
+def test_an_undeclared_state_reported_representable_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(proposal, "representability", lambda *a, **k: {"representable": True})
+    problems = contract.architectural_change_requires_a_governed_proposal(_forge(declaration))
+    assert any("reported representable" in p for p in problems), problems
+
+
+def test_a_complete_proposal_that_is_refused_is_itself_a_problem(declaration, monkeypatch):
+    # The law measures both directions: a complete proposal must be ACCEPTED, so the
+    # violation is a proposer that rejects one.
+    def refuse(*args, **kwargs):
+        raise RecursiveKnowledgeError("proposal refused for the test")
+
+    monkeypatch.setattr(proposal, "propose", refuse)
+    problems = contract.architectural_change_requires_a_governed_proposal(_forge(declaration))
+    assert any("a complete proposal was refused" in p for p in problems), problems
+
+
+def test_declaring_no_proposal_requirement_is_refused(declaration):
+    problems = contract.architectural_change_requires_a_governed_proposal(
+        _forge(declaration, proposal_requirements=())
+    )
+    assert any("no proposal requirement is declared" in p for p in problems), problems
+
+
+def test_declaring_no_default_rule_is_refused(declaration):
+    problems = contract.architectural_change_requires_a_governed_proposal(
+        _forge(declaration, default_rule="")
+    )
+    assert any("no default rule is declared" in p for p in problems), problems
