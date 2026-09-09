@@ -34,9 +34,22 @@ are recorded as an open coverage residue rather than silently skipped.
 
 from __future__ import annotations
 
+import argparse
+import dataclasses
 import json
+import sys
 from pathlib import Path
-from platform.repository_intelligence.cli import _COMMANDS, _REGISTERS, _build_parser, main
+from platform.repository_intelligence.cli import (
+    _COMMANDS,
+    _REGISTERS,
+    _build_parser,
+    _cmd_advise,
+    _print_cycle,
+    main,
+)
+from platform.repository_intelligence.config import RepositoryIntelligenceConfig
+from platform.repository_intelligence.contracts import Recommendation, RecommendationAction
+from platform.repository_intelligence.runtime import run_once
 from typing import Any
 
 import pytest
@@ -534,3 +547,68 @@ def test_an_absent_repository_is_a_fault(
 ) -> None:
     assert main(["--repo", str(tmp_path / "no-such-repo"), "scan"]) == EXIT_FAULT
     assert "repository intelligence error" in capsys.readouterr().err
+
+
+# --------------------------------------------------------------- the two rendering arms
+#
+# Both are arms the CLI cannot reach through a real cycle, and both are worth keeping. The
+# summary prints a "next" line only when there IS one, and the advisory prints a target only
+# when the advice names a place — a CLI that printed "next: None" or a bare "->" would be
+# reporting a value it does not have.
+
+
+def test_the_summary_omits_the_next_line_when_there_is_no_next_action(
+    writable_repo: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """``recommend()`` never returns empty — it emits NO_ACTION instead — so this arm cannot
+    be produced by a scan. It is reached by handing the printer a report with no
+    recommendations, which is the state the guard exists for: the alternative to the guard is
+    an ``IndexError`` inside the summary of an otherwise successful cycle.
+    """
+
+    cycle = run_once(RepositoryIntelligenceConfig.create(writable_repo))
+    assert cycle.report.recommendations, "the fixture produced no recommendation to remove"
+
+    _print_cycle(cycle, sys.stderr)
+    assert "next:" in capsys.readouterr().err
+
+    without = dataclasses.replace(
+        cycle, report=dataclasses.replace(cycle.report, recommendations=())
+    )
+    _print_cycle(without, sys.stderr)
+    rendered = capsys.readouterr().err
+    assert "next:" not in rendered
+    assert "DETERMINATION:" in rendered, "the rest of the summary must still be printed"
+
+
+def test_advice_that_names_no_place_prints_no_arrow(capsys: pytest.CaptureFixture[str]) -> None:
+    """Every action the engine can return carries a target except NO_ACTION, so a real
+    ``advise`` always has one. The arrow is still conditional, because ``->`` followed by
+    nothing reads as advice that was truncated rather than advice that names no place."""
+
+    class _Advising:
+        def __init__(self, recommendation: Recommendation) -> None:
+            self._recommendation = recommendation
+
+        def advise(self, name: str, about: str) -> Recommendation:
+            return self._recommendation
+
+    placeless = Recommendation(
+        action=RecommendationAction.CREATE,
+        subject="engine.novel",
+        priority=1,
+        rationale="nothing existing matches",
+    )
+    args = argparse.Namespace(name="engine.novel", about="", as_json=False)
+    assert _cmd_advise(_Advising(placeless), args) == EXIT_OK
+    assert "  -> " not in capsys.readouterr().err
+
+    located = Recommendation(
+        action=RecommendationAction.CREATE,
+        subject="engine.novel",
+        priority=1,
+        rationale="nothing existing matches",
+        target="platform/novel",
+    )
+    assert _cmd_advise(_Advising(located), args) == EXIT_OK
+    assert "  -> platform/novel" in capsys.readouterr().err

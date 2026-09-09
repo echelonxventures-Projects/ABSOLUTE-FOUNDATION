@@ -15,9 +15,17 @@ about the SUBSTRATE rather than about the tree the suite happens to run in.
 
 from __future__ import annotations
 
+import dataclasses
 import json
+import sys
 from pathlib import Path
 from platform.repository_intelligence import substrate as sub
+from platform.repository_intelligence.certification import (
+    GATE_CLOSED,
+    GATE_OPEN,
+    RepositoryCertificate,
+    certify,
+)
 from platform.repository_intelligence.config import (
     DEFAULT_CONVENTION_MODULES,
     DEFAULT_IGNORED_DIRS,
@@ -26,11 +34,15 @@ from platform.repository_intelligence.config import (
     parse_config,
     resolve_repository_root,
 )
-from platform.repository_intelligence.contracts import DiscoveryDimension
+from platform.repository_intelligence.contracts import Determination, DiscoveryDimension
+from platform.repository_intelligence.discovery import discover_all
 from platform.repository_intelligence.errors import (
     IntelligenceConfigurationError,
+    RepositoryCertificationError,
+    RepositoryValidationError,
     SubstrateError,
 )
+from platform.repository_intelligence.recommendation import build_recommendations
 from platform.repository_intelligence.runtime import (
     RepositoryIntelligenceRuntime,
     detect_drift,
@@ -38,8 +50,12 @@ from platform.repository_intelligence.runtime import (
     run_once,
 )
 from platform.repository_intelligence.service import build_repository_intelligence_service
+from platform.repository_intelligence.validation import RepositoryValidator, validate_report
 
 import pytest
+
+from engine.omega_infinite.provider import ProviderError
+from intelligence.rie import discovery as rie_discovery
 
 PYPROJECT = """
 [project]
@@ -337,6 +353,113 @@ def test_a_deferred_import_is_recorded_as_an_import_and_not_as_an_import_time_on
     assert set(facts.deferred_imports) == {"engine.beta", "engine.gamma"}
 
 
+def test_an_import_nested_inside_a_type_checking_block_is_still_deferred(tmp_path):
+    """A TYPE_CHECKING body holds STATEMENTS, and only some of them are imports.
+
+    The guarded body is walked statement by statement so the deferral is applied to each,
+    and a statement that is not itself an import has to be descended into rather than
+    skipped — a ``try/except ImportError`` around a typing-only import is the ordinary way
+    that block is written, and treating it as opaque would drop the dependency entirely.
+    """
+    _repo(tmp_path)
+    (tmp_path / "engine" / "alpha" / "core.py").write_text(
+        "from typing import TYPE_CHECKING\n"
+        "if TYPE_CHECKING:\n"
+        "    try:\n"
+        "        import engine.beta\n"
+        "    except ImportError:\n"
+        "        engine = None\n"
+        "else:\n"
+        "    import engine.delta\n",
+        encoding="utf-8",
+    )
+    facts = sub.RepositorySubstrate.scan(_config(tmp_path)).module_index()["engine.alpha.core"]
+    assert {"engine.beta", "engine.delta"} <= set(facts.imports)
+    assert "engine.beta" in facts.deferred_imports
+    assert "engine.delta" in facts.import_time_imports
+
+
+def test_the_else_arm_of_a_type_checking_block_can_carry_a_nested_import(tmp_path):
+    """The ``else:`` arm is the branch that DOES run at import, and it is walked with the
+    caller's deferral rather than with the guard's. A nested statement there must therefore
+    reach the same descent — deferring it would erase a real dependency, which is the same
+    error as the body's in the opposite direction."""
+    _repo(tmp_path)
+    (tmp_path / "engine" / "alpha" / "core.py").write_text(
+        "from typing import TYPE_CHECKING\n"
+        "if TYPE_CHECKING:\n"
+        "    import engine.beta\n"
+        "else:\n"
+        "    try:\n"
+        "        import engine.delta\n"
+        "    except ImportError:\n"
+        "        pass\n",
+        encoding="utf-8",
+    )
+    facts = sub.RepositorySubstrate.scan(_config(tmp_path)).module_index()["engine.alpha.core"]
+    assert "engine.delta" in facts.import_time_imports
+    assert "engine.beta" in facts.deferred_imports
+
+
+def test_a_module_path_that_cannot_be_read_is_dropped_rather_than_crashing_the_scan(tmp_path):
+    """One unreadable path must not be the reason the whole substrate cannot be measured.
+
+    A DIRECTORY NAMED LIKE A MODULE IS THE REALISTIC CASE, and it is what the walk actually
+    hands to ``_module_fact``: the fallback enumerates every file, a caller can create
+    ``engine/alpha/plugin.py/`` as a directory, and ``read_text`` on it raises ``IsADirectoryError``
+    — an ``OSError``. The scan keeps every module it could read.
+    """
+    _repo(tmp_path)
+    (tmp_path / "engine" / "alpha" / "readable.py").write_text("X = 1\n", encoding="utf-8")
+    assert sub._module_fact(_config(tmp_path), "engine/alpha") is None
+    assert sub._module_fact(_config(tmp_path), "engine/alpha/absent.py") is None
+    assert sub._module_fact(_config(tmp_path), "engine/alpha/readable.py") is not None
+
+
+def test_the_tracked_population_comes_from_the_provider_when_there_is_one():
+    """The provider path, over the one repository that HAS a provider to answer.
+
+    Every other substrate test builds a tree with no ``.git``, so the provider always raised
+    and only the filesystem fallback ever ran. That leaves the primary path — the one every
+    real invocation takes — measured by nothing, and the fallback's own comment records what
+    that costs: returning an empty tuple instead of falling back once turned "not a working
+    copy" into "an empty repository" for 58 tests.
+    """
+    root = Path(__file__).resolve().parents[2]
+    paths = sub._tracked_files(RepositoryIntelligenceConfig.create(root))
+    assert len(paths) > 1000, "the provider answered with a population too small to be this repo"
+    assert "platform/repository_intelligence/substrate.py" in paths
+    assert paths == tuple(sorted(paths))
+    assert not any(".ec1-venv" in path for path in paths)
+
+
+def test_a_producer_this_repository_cannot_import_falls_back_instead_of_failing(monkeypatch):
+    """The ``intelligence`` root is importable HERE, so the ImportError arm never ran.
+
+    It is not decoration: this subsystem is meant to be usable against a repository that
+    carries no UCOS-RIE-001 producer at all, and the answer there is "no live catalog", not
+    a crash. ``sys.modules[name] = None`` is the interpreter's own way of making an import
+    of *name* raise ImportError, so the arm is reached by the failure it was written for
+    rather than by a stubbed function that returns the answer.
+    """
+
+    monkeypatch.setitem(sys.modules, "intelligence.rie.config", None)
+    assert sub._catalog_from_producer(_config(Path(__file__).resolve().parents[2])) == ()
+
+
+def test_a_producer_that_faults_falls_back_to_the_sealed_artifact(monkeypatch):
+    """DEFENSIVE, AND DELIBERATELY BROAD. The producer is another programme's code running
+    inside this measurement; whatever it raises, the honest answer is that no live catalog
+    was obtained — not that repository intelligence cannot run. The bare ``except`` is the
+    boundary between two subsystems, and this is the failure it exists for."""
+
+    def faulting(_reader):
+        raise ValueError("the producer could not read its own evidence")
+
+    monkeypatch.setattr(rie_discovery, "discover", faulting)
+    assert sub._catalog_from_producer(_config(Path(__file__).resolve().parents[2])) == ()
+
+
 def test_a_sealed_catalog_artifact_is_read_when_the_producer_is_unavailable(tmp_path, monkeypatch):
     _repo(tmp_path)
     catalog = tmp_path / "catalog.json"
@@ -412,7 +535,6 @@ def test_a_version_control_reader_that_cannot_run_yields_no_output(tmp_path, mon
     modules by walking. A test that survives the mechanism it was written against is testing the
     behaviour.
     """
-    from engine.omega_infinite.provider import ProviderError
 
     class _Refusing:
         def enumerate(self, *_a, **_k):
@@ -559,3 +681,85 @@ def test_the_service_composes_the_runtime_without_a_second_derivation(tmp_path):
     assert "engine" in service.hook_line() or service.hook_line()
     assert service.emit()
     assert service.verify_determinism()["deterministic"] is True
+
+
+# -- the three module-level wrappers, and the refusals that make the seal mean something ---
+#
+# The runtime composes `RepositoryValidator`, `RepositoryCertificate.issue` and
+# `RepositoryRecommendationEngine` directly, so the module-level convenience functions each
+# subsystem exports were never called by anything. A published entry point nothing invokes is
+# a second way of asking a question that nobody has checked answers the same way.
+
+
+def _cycle(tmp_path: Path):
+    _repo(tmp_path)
+    return run_once(_config(tmp_path, output_subdir=".ri"))
+
+
+def test_the_published_wrappers_answer_exactly_as_the_composed_objects_do(tmp_path) -> None:
+    """Same inputs, same answer. If they ever diverge, one of them is the wrong entry point."""
+
+    cycle = _cycle(tmp_path)
+
+    assert validate_report(cycle.report).counts() == cycle.validation.counts()
+    assert certify(cycle.report, cycle.validation).seal_sha256 == cycle.certificate.seal_sha256
+    outcome = discover_all(cycle.substrate)
+    assert build_recommendations(cycle.substrate, outcome, cycle.graph) == (
+        cycle.report.recommendations
+    )
+
+
+def test_certifying_a_report_against_someone_elses_validation_is_refused(tmp_path) -> None:
+    """THE SEAL IS THE CLAIM, so what it is a claim ABOUT has to be checked.
+
+    A certificate binds a determination to a report by digest. Issuing one from a validation
+    of a different report would seal a true statement about the wrong subject — the gate would
+    open on evidence that was never examined, and every field of the certificate would still
+    verify.
+    """
+
+    cycle = _cycle(tmp_path)
+    foreign = dataclasses.replace(cycle.validation, report_sha256="a" * 64)
+    with pytest.raises(RepositoryCertificationError) as excinfo:
+        RepositoryCertificate.issue(cycle.report, foreign)
+    assert excinfo.value.context["report_sha256"] == cycle.report.report_sha256
+    assert excinfo.value.context["validated_sha256"] == "a" * 64
+
+
+def test_a_certificate_edited_after_issue_fails_its_own_integrity_check(tmp_path) -> None:
+    """The seal is over the certificate's own fields, so flipping the determination without
+    reissuing is detectable — which is the only reason a stored certificate is worth reading
+    later. `gate_open` is asserted alongside it because the gate and the determination are two
+    projections of one decision and must never be readable as disagreeing."""
+
+    cycle = _cycle(tmp_path)
+    genuine = cycle.certificate
+    assert genuine.verify_integrity() is True
+    genuine.require_integrity()
+    assert genuine.gate_open is (genuine.gate == GATE_OPEN)
+    assert genuine.gate_open is genuine.certified
+
+    forged = dataclasses.replace(
+        genuine, determination=Determination.CERTIFIED_INTELLIGENT, gate=GATE_OPEN
+    )
+    assert forged.gate_open is True
+    assert forged.verify_integrity() is False
+    with pytest.raises(RepositoryCertificationError) as excinfo:
+        forged.require_integrity()
+    assert excinfo.value.context["expected"] == genuine.seal_sha256
+    assert excinfo.value.context["actual"] == forged.recompute_seal()
+
+    resealed = RepositoryCertificate.issue(cycle.report, cycle.validation)
+    assert resealed.seal_sha256 == genuine.seal_sha256
+    assert resealed.gate in (GATE_OPEN, GATE_CLOSED)
+
+
+def test_validation_refuses_anything_that_is_not_an_intelligence_report(tmp_path) -> None:
+    """A mapping that looks like a report is the realistic mistake — a caller who round-tripped
+    one through JSON. Every gate below would then read attributes off a dict, find nothing, and
+    produce a PASS over a report that was never examined."""
+
+    cycle = _cycle(tmp_path)
+    with pytest.raises(RepositoryValidationError) as excinfo:
+        RepositoryValidator(cycle.report.to_dict())
+    assert excinfo.value.context["received"] == "dict"

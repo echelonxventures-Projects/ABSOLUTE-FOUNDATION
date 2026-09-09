@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import json
 import subprocess
 from pathlib import Path
 from platform.repository_intelligence import mutation_classification as mc
@@ -804,3 +805,199 @@ def test_the_gate_writes_nothing(tmp_path) -> None:
 def test_two_measurements_of_one_state_are_identical() -> None:
     """Determinism: no clock, no environment, no traversal-order dependence."""
     assert mg.measure(REPO) == mg.measure(REPO)
+
+
+# --- the gate's own refusals, over a register doctored one field at a time ----------------
+#
+# Every gate test above measures the LIVE register, which is complete and correct, so the
+# arms that refuse an incomplete one never ran. The two-sided binding between declared laws
+# and implemented measurements is the part that matters most and was the part with no test:
+# it is the construction that stops a law from being declared and never evaluated, which is
+# the exact defect — "a rule nobody evaluates is prose" — that this whole subsystem exists
+# to end. A binding check nobody has seen refuse is prose about prose.
+
+
+def _register(tmp_path: Path, boundary: dict) -> Path:
+    """A real work tree holding nothing but a doctored boundary register.
+
+    ``git init`` IS NOT OPTIONAL HERE. The population law classifies ``repository.tracked``,
+    which is ``git ls-files``, so a plain directory makes the provider raise before any law
+    is reached and the test would report a git failure instead of the refusal it is about.
+    """
+    root = tmp_path / "repo"
+    (root / Path(mc.BOUNDARY_PATH).parent).mkdir(parents=True)
+    (root / mc.BOUNDARY_PATH).write_text(json.dumps(boundary), encoding="utf-8")
+    _git_repo_with(root)
+    return root
+
+
+def test_a_register_declaring_no_laws_is_a_fault_rather_than_an_open_gate(
+    tmp_path: Path, boundary: dict
+) -> None:
+    """With no declared law the verdict would be this module's opinion, not a measurement.
+
+    And it would be an OPEN one: nothing declared means nothing refused, so the failure mode
+    of a benign answer here is a gate that passes on a register that governs nothing at all.
+    """
+    doctored = copy.deepcopy(boundary)
+    doctored["gate"] = {"laws": []}
+    with pytest.raises(mc.ClassificationError, match="declares no gate.laws"):
+        mg.measure(str(_register(tmp_path, doctored)))
+
+
+def test_a_declared_law_this_gate_cannot_measure_is_refused(tmp_path: Path, boundary: dict) -> None:
+    """ "A declared law nobody evaluates is prose" — asserted against the gate itself.
+
+    This is the register's own standard turned on the implementation that reads it: adding a
+    law to the declaration and no measurement for it must fail loudly, or the register grows
+    laws that are satisfied by not being checked.
+    """
+    doctored = copy.deepcopy(boundary)
+    doctored["gate"]["laws"].append({"law_id": "MGB-L-99", "title": "measured by nothing"})
+    with pytest.raises(mc.ClassificationError, match="MGB-L-99"):
+        mg.measure(str(_register(tmp_path, doctored)))
+
+
+def test_a_measurement_no_declaration_claims_is_refused(tmp_path: Path, boundary: dict) -> None:
+    """The other direction, and the one a reader is likelier to forget. A finding attributed
+    to no declared law is a verdict attributable to nothing — the gate would refuse, and the
+    register a reader consults to find out why would not mention the law that refused."""
+    doctored = copy.deepcopy(boundary)
+    doctored["gate"]["laws"] = [
+        law for law in doctored["gate"]["laws"] if law.get("law_id") != "MGB-L-03"
+    ]
+    with pytest.raises(mc.ClassificationError, match="MGB-L-03"):
+        mg.measure(str(_register(tmp_path, doctored)))
+
+
+def test_a_coverage_failure_stops_the_population_measurement_from_running(
+    tmp_path: Path, boundary: dict
+) -> None:
+    """ORDERING, AND WHY IT IS NOT AN OPTIMISATION. Reading criteria functions for a rule that
+    has no predicate is not meaningful, so MGB-L-03 is not measured when MGB-L-01 has already
+    refused. The report still carries all three laws, with the un-run one holding vacuously —
+    a reader must be able to see that it was not the thing that refused.
+    """
+    doctored = copy.deepcopy(boundary)
+    doctored["classification_rules"]["rules"].append(
+        {"rule_id": "R-99", "class": "NOT_A_CLASS", "precedence": 99, "subject": "nothing"}
+    )
+    root = _register(tmp_path, doctored)
+    report = mg.measure(str(root))
+    laws = {law["law_id"]: law for law in report["laws"]}
+    assert not laws["MGB-L-01"]["holds"], "the coverage law was supposed to refuse"
+    assert laws["MGB-L-03"]["violations"] == []
+    assert report["verdict"] != "OPEN"
+
+
+def test_the_rendered_report_lists_each_violation_under_the_law_that_found_it(
+    tmp_path: Path, boundary: dict
+) -> None:
+    """A refusal a reader cannot attribute is a refusal they cannot act on. The renderer's
+    violation lines had never run, because every rendered report so far came from a register
+    on which every law held."""
+    doctored = copy.deepcopy(boundary)
+    doctored["classification_rules"]["rules"].append(
+        {"rule_id": "R-99", "class": "NOT_A_CLASS", "precedence": 99, "subject": "nothing"}
+    )
+    report = mg.measure(str(_register(tmp_path, doctored)))
+    rendered = mg.render(report)
+    assert "REFUSED" in rendered
+    assert "MGB-L-01" in rendered
+    for violation in report["laws"][0]["violations"]:
+        assert violation in rendered
+
+
+def test_quiet_suppresses_the_report_only_while_the_gate_is_open(
+    tmp_path: Path, boundary: dict, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """``--quiet`` is for the passing case. A CLOSED gate prints regardless, because the whole
+    point of the exit code is to send somebody to the reason for it."""
+    assert mg.main(["--quiet", "--repository", str(REPO)]) == mg.EXIT_OPEN
+    assert capsys.readouterr().out == ""
+
+    doctored = copy.deepcopy(boundary)
+    doctored["classification_rules"]["rules"].append(
+        {"rule_id": "R-99", "class": "NOT_A_CLASS", "precedence": 99, "subject": "nothing"}
+    )
+    root = _register(tmp_path, doctored)
+    assert mg.main(["--quiet", "--gate", "--repository", str(root)]) == mg.EXIT_CLOSED
+    assert "REFUSED" in capsys.readouterr().out
+
+
+# --- the register is where the markers live, and the code must not restate them -----------
+
+
+def test_the_analysis_markers_are_read_from_the_rule_that_declares_them(boundary: dict) -> None:
+    """Class 8's filename markers come out of R-09's own predicate, never out of this module.
+
+    That is what makes the criterion unable to drift from the rule it implements: the markers
+    can change only by changing the declaration, so a reader who edits the register gets the
+    behaviour the register now describes without touching any code.
+    """
+    markers = mc._analysis_markers(boundary)
+    assert markers, "the live register declares no analysis markers"
+    predicate = next(
+        str(rule.get("predicate", ""))
+        for rule in boundary["classification_rules"]["rules"]
+        if str(rule.get("id")) == "R-09"
+    )
+    for marker in markers:
+        assert marker in predicate
+
+
+def test_a_rule_r09_that_states_no_alternation_is_a_fault_not_an_empty_vocabulary(
+    boundary: dict,
+) -> None:
+    """AN EMPTY MARKER SET IS THE VACUITY THIS CLASSIFIER EXISTS TO REFUSE.
+
+    Returning ``()`` would make ``analysis-artifact`` unsatisfiable, Class 8 would claim
+    nothing, and every report would stay green while a whole mutation class quietly went
+    empty — which is the exact shape of the defect that left two classes missing.
+    """
+    doctored = copy.deepcopy(boundary)
+    for rule in doctored["classification_rules"]["rules"]:
+        if str(rule.get("id")) == "R-09":
+            rule["predicate"] = "a predicate naming no filename alternation at all"
+    with pytest.raises(mc.ClassificationError, match="no filename-marker alternation"):
+        mc._analysis_markers(doctored)
+
+
+def test_a_register_with_no_rule_r09_cannot_answer_for_class_8(boundary: dict) -> None:
+    """Falling off the end of the loop is a different fault from finding R-09 malformed, and
+    both raise: "the register declares no rule R-09" tells the reader to add it, and the
+    alternation message tells them to fix the one they have."""
+    doctored = copy.deepcopy(boundary)
+    doctored["classification_rules"]["rules"] = [
+        rule for rule in doctored["classification_rules"]["rules"] if str(rule.get("id")) != "R-09"
+    ]
+    with pytest.raises(mc.ClassificationError, match="declares no rule R-09"):
+        mc._analysis_markers(doctored)
+
+
+def test_a_stated_view_can_supply_a_documents_text_without_a_filesystem(boundary: dict) -> None:
+    """``markdown_texts`` is the override that makes a document's own declarations statable.
+
+    Without it a test about what a document DECLARES has to write the document to disk, which
+    makes it a test about the filesystem. With it the lifecycle, the authority and the
+    deciders can be varied directly, and the classification depends on nothing else.
+    """
+    path = "00-MASTER/X-000001/ANALYSIS.md"
+    view = _view(markdown_texts={path: "# Analysis\n\n**Status:** RATIFIED\n"})
+    assert view.text_of(path) == "# Analysis\n\n**Status:** RATIFIED\n"
+    # The label the classifier reads is `status`, matched case-insensitively, and the
+    # vocabulary is OPEN: whatever the document states is the answer, never coerced into a
+    # closed set the class does not declare.
+    assert mc.authored_document_lifecycle(path, view) == "RATIFIED"
+    assert mc.authored_document_lifecycle(path, _view(markdown_texts={path: "# no fields\n"})) == ""
+
+
+def test_a_document_whose_text_cannot_be_read_declares_no_lifecycle() -> None:
+    """ "Unreadable" and "declares nothing" have to give the same answer HERE and a different
+    one elsewhere: the lifecycle is an open vocabulary, so ``""`` is a real value meaning the
+    document states no stage. Raising would make an unreadable file un-classifiable rather
+    than un-declared, and the classifier would fail on a repository it should simply report."""
+    absent = "no-such-declared-home/nothing-is-here.md"
+    view = _view()
+    assert view.text_of(absent) is None
+    assert mc.authored_document_lifecycle(absent, view) == ""

@@ -379,3 +379,104 @@ __all__ = [
     "test_violation_4_governed_analysis_vs_authored_document_distinction",
     "test_violation_4_certification_checklist",
 ]
+
+
+# -----------------------------------------------------------------------------
+# Violation 4 Test 2c-2e: the refusals and the one writing mode
+#
+# The extension is measured only through `dry_run=True`, so the two states that make it
+# safe to run twice were never exercised, and neither was the write. A dry run that is the
+# only thing ever tested makes the WRITE the untested half of a function whose whole job is
+# to edit the register that governs mutation authority.
+# -----------------------------------------------------------------------------
+
+
+def _boundary_document() -> dict:
+    return {
+        "artifact_id": "TEST-BOUNDARY",
+        "version": "2.3.4",
+        "mutation_classes": [{"class": "CLASS_1"}],
+        "classification_rules": {"rules": [{"id": "R-01", "class": "CLASS_1", "precedence": 1}]},
+    }
+
+
+def test_violation_4_extension_refuses_a_boundary_that_is_not_there(tmp_path: Path) -> None:
+    """A missing register is not an empty one.
+
+    `setdefault` would happily build both structures from nothing and write a brand new
+    boundary document, which is the one outcome that must not happen: the register would be
+    created rather than extended, and every class the real one declares would be gone.
+    """
+    absent = tmp_path / "00-BOOK" / "DATA" / "mutation-governance-boundary.json"
+    with pytest.raises(FileNotFoundError, match="Mutation governance boundary not found"):
+        extend_mutation_governance_boundary(absent, dry_run=True)
+    assert not absent.exists()
+
+
+def test_violation_4_extension_refuses_a_duplicate_rule_id(tmp_path: Path) -> None:
+    """R-09 present with the class absent is the half-applied state, and it is the dangerous
+    one. Appending a second R-09 would give the register two rules under one id, and
+    `ordered_rules` resolves by precedence — so which rule claimed a subject would depend on
+    array order. The class check alone does not catch it, which is why there are two checks.
+    """
+    document = _boundary_document()
+    document["classification_rules"]["rules"].append(
+        {"id": "R-09", "class": "SOMETHING_ELSE", "precedence": 9}
+    )
+    path = tmp_path / "boundary.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="R-09 already exists"):
+        extend_mutation_governance_boundary(path, dry_run=True)
+
+
+def test_violation_4_a_dry_run_leaves_the_register_byte_identical(tmp_path: Path) -> None:
+    """The default is READ-ONLY, and that is asserted on the bytes rather than on the flag."""
+    path = tmp_path / "boundary.json"
+    original = json.dumps(_boundary_document())
+    path.write_text(original, encoding="utf-8")
+
+    extended = extend_mutation_governance_boundary(path, dry_run=True)
+    # A MINOR BUMP THAT DOES NOT RESET THE PATCH: 2.3.4 becomes 2.4.4, not 2.4.0. Pinned
+    # rather than corrected, because the register's version is consumed elsewhere and
+    # changing what it computes is a decision about the artifact, not about this test.
+    assert extended["version"] == "2.4.4"
+    assert path.read_text(encoding="utf-8") == original
+
+
+def test_violation_4_a_write_emits_the_extension_and_can_be_read_back(tmp_path: Path) -> None:
+    """The one writing mode. What it wrote must be what the next reader loads — including the
+    trailing newline, because a register that ends without one produces a one-line diff on
+    every subsequent edit and buries the change that mattered.
+    """
+    path = tmp_path / "boundary.json"
+    path.write_text(json.dumps(_boundary_document()), encoding="utf-8")
+
+    returned = extend_mutation_governance_boundary(path, dry_run=False)
+
+    written = path.read_text(encoding="utf-8")
+    assert written.endswith("\n")
+    reloaded = json.loads(written)
+    assert reloaded == returned
+    assert reloaded["version"] == "2.4.4"
+    assert [cls["class"] for cls in reloaded["mutation_classes"]] == [
+        "CLASS_1",
+        "GOVERNED_ANALYSIS",
+    ]
+    assert reloaded["classification_rules"]["rules"][-1] == GOVERNED_ANALYSIS_RULE
+
+
+def test_violation_4_extending_an_already_extended_register_is_refused(tmp_path: Path) -> None:
+    """Running it twice must not double the class. The write and the refusal compose: the
+    second call reads what the first wrote and declines, which is what makes the operation
+    safe to re-run rather than merely safe to run once."""
+    path = tmp_path / "boundary.json"
+    path.write_text(json.dumps(_boundary_document()), encoding="utf-8")
+
+    extend_mutation_governance_boundary(path, dry_run=False)
+    with pytest.raises(ValueError, match="GOVERNED_ANALYSIS already exists"):
+        extend_mutation_governance_boundary(path, dry_run=False)
+
+    reloaded = json.loads(path.read_text(encoding="utf-8"))
+    assert [cls["class"] for cls in reloaded["mutation_classes"]].count("GOVERNED_ANALYSIS") == 1
+    assert reloaded["version"] == "2.4.4", "a refused extension must not bump the version"

@@ -43,6 +43,8 @@ from platform.repository_intelligence.validation_records import (
 
 import pytest
 
+from engine.verification_intelligence.constitution import load_constitution
+
 REPO = Path(__file__).resolve().parents[2]
 HOME = REPO / "00-MASTER" / "UAKOS-CLOSURE-008"
 RECORD_PATH = HOME / "validation-record.json"
@@ -107,7 +109,6 @@ def test_the_live_record_states_a_result_and_references_evidence_it_does_not_con
     # certification-eligible. Pinning the literal would have made this test pass while the
     # record pointed at a mode that evaluates no coverage floor, which is the failure it
     # exists to catch.
-    from engine.verification_intelligence.constitution import load_constitution
 
     command, _, flag = record.command.partition(" ")
     assert command == "./verify.sh"
@@ -202,6 +203,56 @@ def test_schema_and_required_fields_are_enforced() -> None:
     assert any("validation_id" in f for f in validate(_minimal_record(validation_id="")))
     assert any("contract_id" in f for f in validate(_minimal_record(contract={})))
     assert any("result" in f for f in validate(_minimal_record(result="MAYBE")))
+
+
+def test_a_stage_is_refused_for_its_name_and_its_result_independently() -> None:
+    """THE TWO CHECKS ARE NOT ONE CHECK, and the record's whole purpose is why.
+
+    The record replaces a transcript with a claim, so a reader has to be able to tell WHICH
+    gate produced WHICH verdict. A stage with a result and no name is a verdict attributable
+    to nothing; a stage with a name and an unrecognised result is a gate whose outcome is not
+    one of the values the schema admits. Either alone empties the record of the thing it
+    exists to carry, and both are reported, so one malformed stage does not hide the other.
+    """
+    anonymous = validate(_minimal_record(stages=[{"result": "PASS"}]))
+    assert any("a stage carries no name" in f for f in anonymous)
+
+    unrecognised = validate(_minimal_record(stages=[{"stage": "a gate", "result": "PROBABLY"}]))
+    assert any("'PROBABLY' is not one of" in f for f in unrecognised)
+    assert any("a gate" in f for f in unrecognised)
+
+    both = validate(_minimal_record(stages=[{"result": "PROBABLY"}]))
+    assert any("carries no name" in f for f in both)
+    assert any("is not one of" in f for f in both)
+
+
+def test_an_evidence_reference_that_is_not_an_object_is_refused() -> None:
+    """``evidence_reference`` is OPTIONAL and its absence is legitimate — the canonical layer
+    stands without the archive. What is not legitimate is a reference that is present and is
+    not a reference: a string or a list there would make every field lookup below return
+    nothing, and the record would pass with a pointer to nowhere."""
+    assert validate(_minimal_record(evidence_reference=None)) == []
+    for wrong in ("00-MASTER/.../evidence.tar.gz", ["evidence"], 7):
+        findings = validate(_minimal_record(evidence_reference=wrong))
+        assert findings == ["evidence_reference: not an object"], wrong
+
+
+def test_an_evidence_reference_names_all_three_of_the_things_that_locate_it() -> None:
+    """An id, a path and a classification. A reference missing any one of them cannot be
+    resolved back to the archive it claims to point at, and the point of separating the
+    layers is that the pointer still works."""
+    findings = validate(_minimal_record(evidence_reference={}))
+    for field in ("evidence_id", "archive_path", "classification"):
+        assert f"evidence_reference: no {field}" in findings
+
+    complete = _minimal_record(
+        evidence_reference={
+            "evidence_id": "E-1",
+            "archive_path": "evidence/run.tar.gz",
+            "classification": sorted(EXECUTION_OBSERVATION_CLASSIFICATIONS)[0],
+        }
+    )
+    assert validate(complete) == []
 
 
 # --- RED / GREEN: the canonical layer is independent of the evidence layer -----------------

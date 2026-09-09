@@ -24,7 +24,9 @@ from __future__ import annotations
 
 import json
 import subprocess
+import subprocess as sp
 from pathlib import Path
+from platform.repository_intelligence import contamination
 from platform.repository_intelligence.contamination import (
     DECLARED_CLASSES,
     ContaminationReport,
@@ -299,3 +301,193 @@ def test_live_rib_json_carries_no_environmental_count() -> None:
         f"Present value: {contamination.get('excluded_entries')!r}. A pristine clone "
         "computes a different one, which is exactly Phase-9 registry_variance."
     )
+
+
+# --- the register's own structural refusals ----------------------------------------------
+#
+# WHY EACH OF THESE IS A SEPARATE ENTRY IN `register_errors` RATHER THAN AN EXCEPTION. The
+# register is read before anything is measured, so a reader has to learn everything wrong
+# with it in one pass. Raising on the first defect would report one line of a file that has
+# three, and the operator would fix them one commit at a time.
+
+
+def test_a_register_that_is_not_json_is_a_named_error_and_not_a_crash(sandbox: Path) -> None:
+    """An unparseable register declares NOTHING, which is the state that must fail closed.
+
+    Returning an empty mapping and no error would be the dangerous shape: every ignored path
+    would resolve to no class, `ignored_unclassified` would rise, and the repository would
+    look contaminated for a reason nobody could locate. The error names the parse failure so
+    the reader is sent to the register rather than to the ignore rules.
+    """
+    register = sandbox / "00-BOOK" / "DATA" / "exclusion-register.json"
+    register.write_text('{"entries": [ truncated', encoding="utf-8")
+
+    mapping, errors = load_register(sandbox)
+    assert mapping == {}
+    assert len(errors) == 1
+    assert "not valid JSON" in errors[0]
+    assert not measure(sandbox).clean
+
+
+def test_a_register_entry_with_no_rule_declares_nothing(sandbox: Path) -> None:
+    """A class with no pattern excuses no path. It is an entry that looks like governance."""
+    register = sandbox / "00-BOOK" / "DATA" / "exclusion-register.json"
+    doc = json.loads(register.read_text(encoding="utf-8"))
+    doc["entries"].append({"class": "CACHE", "rationale": "which paths?"})
+    register.write_text(json.dumps(doc), encoding="utf-8")
+
+    mapping, errors = load_register(sandbox)
+    assert mapping == {"__pycache__/": "CACHE"}
+    assert errors == ("register entry with no rule",)
+
+
+def test_a_rule_declared_twice_is_refused_rather_than_resolved(sandbox: Path) -> None:
+    """TWO CLASSES FOR ONE PATTERN IS NOT A CHOICE THE READER GETS TO MAKE.
+
+    Last-wins or first-wins would both be a silent answer to a question the register asks
+    twice, and the two classes carry different obligations — a path that is CACHE is
+    reconstructible and one that is TOOL_OPERATIONAL is not. The first declaration stands
+    and the collision is reported, so the duplicate has to be resolved in the register.
+    """
+    register = sandbox / "00-BOOK" / "DATA" / "exclusion-register.json"
+    doc = json.loads(register.read_text(encoding="utf-8"))
+    doc["entries"].append({"rule": "__pycache__/", "class": "TOOL_OPERATIONAL", "rationale": "no"})
+    register.write_text(json.dumps(doc), encoding="utf-8")
+
+    mapping, errors = load_register(sandbox)
+    assert mapping == {"__pycache__/": "CACHE"}, "the first declaration must stand"
+    assert errors == ("rule '__pycache__/' declared twice",)
+
+
+def test_every_defect_in_one_register_is_reported_in_one_pass(sandbox: Path) -> None:
+    """Three defects, three errors. The operator fixes the register once, not three times."""
+    register = sandbox / "00-BOOK" / "DATA" / "exclusion-register.json"
+    doc = json.loads(register.read_text(encoding="utf-8"))
+    doc["entries"] += [
+        {"class": "CACHE"},
+        {"rule": "*.tmp", "class": "PROBABLY_FINE"},
+        {"rule": "__pycache__/", "class": "CACHE"},
+    ]
+    register.write_text(json.dumps(doc), encoding="utf-8")
+
+    mapping, errors = load_register(sandbox)
+    assert mapping == {"__pycache__/": "CACHE"}
+    assert len(errors) == 3
+
+
+# --- git is the boundary, and a git that fails is not a git that answered nothing ---------
+
+
+def test_a_failing_git_command_raises_rather_than_reading_as_an_empty_repository(
+    tmp_path: Path,
+) -> None:
+    """UCOS-CL-004 IN ONE SENTENCE: a corrupt ref made ``git log --all`` look like an empty
+    history. "The command failed" and "the command found nothing" are different states, and
+    conflating them turns every contamination measure into a pass — an empty answer satisfies
+    every check here. Measuring a directory that is not a work tree is the cheapest way to
+    reach the failure, and it is also the realistic one: a caller pointed at the wrong path.
+    """
+    outside = tmp_path / "not-a-repo"
+    (outside / "00-BOOK" / "DATA").mkdir(parents=True)
+    (outside / "00-BOOK" / "DATA" / "exclusion-register.json").write_text(
+        json.dumps({"entries": []}), encoding="utf-8"
+    )
+    with pytest.raises(RuntimeError, match=r"git status .* failed"):
+        measure(outside)
+
+
+def test_check_ignore_finding_nothing_is_a_result_and_not_a_failure(sandbox: Path) -> None:
+    """``git check-ignore`` exits 1 when no path matched, which is the ordinary case for a
+    clean repository. Treating a non-zero exit as an error would make every clean measurement
+    raise, so the accepted set is ``(0, 1)`` and everything else is a fault."""
+    assert measure(sandbox).clean
+
+
+def test_a_path_a_producer_rewrites_is_not_contamination(sandbox: Path) -> None:
+    """``generated`` subtracts a producer's own output from the dirty set.
+
+    UCOS-RIB-001 already does this and for the same reason: an artifact that dirties itself
+    by being produced would make its own gate un-satisfiable, so the programme could never
+    pass a run in which it did its job.
+    """
+    (sandbox / "source.py").write_text("x = 2\n", encoding="utf-8")
+    assert not measure(sandbox).clean
+    exempted = measure(sandbox, generated=["source.py"])
+    assert exempted.clean
+    assert exempted.dirty_entries == ()
+
+
+def test_the_environmental_count_is_available_to_a_reader_and_to_no_artifact(
+    sandbox: Path,
+) -> None:
+    """``excluded_entries`` counts what THIS filesystem happens to hold.
+
+    It was serialized once, and the Phase-9 forensic at HEAD 382b65e8 found it to be the
+    single differing field in rib.json between the source repository (232) and a pristine
+    clone (69) — the entire cause of registry_variance. So it stays a property a report can
+    read and stays out of ``as_dict``, and both halves of that are asserted here: a caller
+    that wants the number gets it, and nothing canonical can pick it up by accident.
+    """
+    cache = sandbox / "__pycache__"
+    cache.mkdir()
+    (cache / "source.cpython-312.pyc").write_bytes(b"\x00")
+
+    report = measure(sandbox)
+    assert report.excluded_entries == len(report.excluded)
+    assert report.excluded_entries > 0
+    assert report.clean, "a declared exclusion class is what makes this clean"
+    assert "excluded_entries" not in report.as_dict()
+
+
+def test_a_check_ignore_that_fails_outright_raises_rather_than_matching_nothing(
+    sandbox: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Exit 1 means "no path matched". Anything else means the question was not answered.
+
+    Collapsing the two would be the same defect as the one above in a subtler place: every
+    ignored path would resolve to ``<unmatched>``, ``ignored_unclassified`` would equal the
+    whole ignored set, and a repository that is fully declared would report as contaminated.
+    The failure is reached by making the subprocess itself report a real git failure, so the
+    arm runs on the shape it was written for.
+    """
+
+    real = sp.run
+
+    def failing(argv, **kwargs):
+        if "check-ignore" in argv:
+            return sp.CompletedProcess(argv, 128, stdout="", stderr="fatal: not a git repository")
+        return real(argv, **kwargs)
+
+    monkeypatch.setattr(contamination.subprocess, "run", failing)
+    (sandbox / "__pycache__").mkdir()
+    (sandbox / "__pycache__" / "x.pyc").write_bytes(b"\x00")
+    with pytest.raises(RuntimeError, match=r"git check-ignore failed \(128\)"):
+        measure(sandbox)
+
+
+def test_a_check_ignore_line_that_carries_no_path_is_skipped(
+    sandbox: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """``check-ignore -v`` emits ``<source>\\t<path>``, and a line without the tab is not a
+    verdict about any path. Indexing it positionally would attribute one path's rule to
+    another, so it is dropped — a lost rule makes a path UNCLASSIFIED, which fails closed,
+    whereas a misattributed rule silently declares the wrong class."""
+
+    real = sp.run
+
+    def truncated(argv, **kwargs):
+        if "check-ignore" in argv:
+            completed = real(argv, **kwargs)
+            noise = "warning: a line with no tab at all\n"
+            return sp.CompletedProcess(argv, completed.returncode, noise + completed.stdout, "")
+        return real(argv, **kwargs)
+
+    monkeypatch.setattr(contamination.subprocess, "run", truncated)
+    cache = sandbox / "__pycache__"
+    cache.mkdir()
+    (cache / "x.pyc").write_bytes(b"\x00")
+
+    report = measure(sandbox)
+    assert report.clean, "the real verdicts must survive the unusable line"
+    assert report.excluded_entries > 0
+    assert all(e.classification == "CACHE" for e in report.excluded)

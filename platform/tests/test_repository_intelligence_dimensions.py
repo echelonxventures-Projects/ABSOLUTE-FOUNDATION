@@ -17,17 +17,23 @@ repository happens to be in on the day they run.
 from __future__ import annotations
 
 from pathlib import Path
-from platform.repository_intelligence import discovery
+from platform.repository_intelligence import discovery, recommendation
 from platform.repository_intelligence.config import RepositoryIntelligenceConfig
 from platform.repository_intelligence.contracts import (
+    DependencyEdge,
+    DimensionResult,
     DiscoveryDimension,
+    EdgeKind,
+    Finding,
     FindingStatus,
     RecommendationAction,
+    RepositoryIntelligenceReport,
     Severity,
     UnitKind,
+    Verdict,
 )
-from platform.repository_intelligence.errors import RecommendationError
-from platform.repository_intelligence.graph import build_graph
+from platform.repository_intelligence.errors import DiscoveryError, GraphError, RecommendationError
+from platform.repository_intelligence.graph import GraphNode, RepositoryGraph, build_graph
 from platform.repository_intelligence.recommendation import (
     PRIORITY_NONE,
     RepositoryRecommendationEngine,
@@ -38,6 +44,7 @@ from platform.repository_intelligence.substrate import (
     ModuleFact,
     RepositorySubstrate,
 )
+from platform.repository_intelligence.validation import RepositoryValidator
 
 import pytest
 
@@ -879,7 +886,6 @@ def _advisor(tmp_path: Path, modules: tuple[ModuleFact, ...], **kwargs):
 def test_a_repository_with_nothing_to_report_is_advised_to_do_nothing(tmp_path):
     """The NO_ACTION arm. An engine that could only ever produce work would have no way to
     say that the repository is consistent, and 'no findings' would read as 'not run'."""
-    from platform.repository_intelligence.contracts import RecommendationAction
 
     substrate = _substrate(tmp_path, (_module("engine.alpha"),))
     empty = discovery.DiscoveryOutcome(
@@ -894,8 +900,6 @@ def test_a_repository_with_nothing_to_report_is_advised_to_do_nothing(tmp_path):
 
 
 def test_the_engine_refuses_anything_that_is_not_a_discovery_outcome(tmp_path):
-    from platform.repository_intelligence.errors import RecommendationError
-
     substrate = _substrate(tmp_path, (_module("engine.alpha"),))
     outcome = discovery.discover_all(substrate)
     graph = build_graph(outcome.units, outcome.edges)
@@ -1029,3 +1033,324 @@ def test_a_capability_with_no_derivable_vocabulary_is_not_a_candidate(tmp_path):
         tmp_path, (_module("engine.a", capability="engine.a", docline="", symbols=()),)
     )
     assert engine.reuse_candidates("engine.other", "a description with words") == ()
+
+
+# --------------------------------------------------------------------------------------
+# The graph's own refusals, its degree projections, and the vocabulary's parse
+#
+# `build_graph` is only ever called on a graph the discovery pass just derived, so it is
+# always well formed and the two GraphError arms never ran. They are not decoration: the
+# graph is what every reachability, cycle and weight answer is computed over, so a graph
+# that silently dropped a fact would make every one of those answers quietly wrong instead
+# of loudly absent.
+# --------------------------------------------------------------------------------------
+
+
+def test_a_duplicate_node_identity_is_refused_rather_than_deduplicated(tmp_path):
+    """Two nodes under one id are two different capabilities claiming one name. Keeping
+    either one is a choice about which set of edges survives, and nothing here is entitled
+    to make it."""
+
+    node = GraphNode(node_id="engine.alpha", kind=UnitKind.CODE_CAPABILITY, label="alpha")
+    twin = GraphNode(node_id="engine.alpha", kind=UnitKind.CODE_CAPABILITY, label="also alpha")
+    with pytest.raises(GraphError) as excinfo:
+        RepositoryGraph.create((node, twin), ())
+    assert excinfo.value.context["node"] == "engine.alpha"
+
+
+def test_an_edge_whose_endpoint_is_not_a_node_is_refused(tmp_path):
+    """A dangling endpoint is a dropped fact, and dropping it silently is what makes a
+    dependency answer wrong rather than missing: the edge exists in the repository and would
+    exist in no projection of the graph. Both endpoints are checked, not just the target."""
+
+    alpha = GraphNode(node_id="engine.alpha", kind=UnitKind.CODE_CAPABILITY, label="alpha")
+    with pytest.raises(GraphError) as excinfo:
+        RepositoryGraph.create(
+            (alpha,),
+            (DependencyEdge(source="engine.alpha", target="engine.ghost", weight=1),),
+        )
+    assert excinfo.value.context["unknown"] == "engine.ghost"
+
+    with pytest.raises(GraphError) as excinfo:
+        RepositoryGraph.create(
+            (alpha,),
+            (DependencyEdge(source="engine.ghost", target="engine.alpha", weight=1),),
+        )
+    assert excinfo.value.context["unknown"] == "engine.ghost"
+
+
+def test_the_degree_projections_count_both_directions_over_every_node(tmp_path):
+    """Out-degree and in-degree are the two halves of the same relation, and an ISOLATED node
+    must appear in both at zero. A projection that only listed nodes with edges would make a
+    capability nothing imports and that imports nothing invisible — which is exactly the
+    shape of finished-but-unwired code the reuse dimension is trying to surface."""
+    modules = (
+        _module("engine.alpha", imports=("engine.beta",)),
+        _module("engine.beta"),
+        _module("engine.lonely"),
+    )
+    substrate = _substrate(tmp_path, modules)
+    outcome = discovery.discover_all(substrate)
+    graph = build_graph(outcome.units, outcome.edges)
+
+    out, into = graph.out_degree(), graph.in_degree()
+    assert set(out) == set(into) == set(graph.node_ids())
+    assert out["engine.alpha"] == 1
+    assert into["engine.beta"] == 1
+    assert out["engine.lonely"] == into["engine.lonely"] == 0
+    assert sum(out.values()) == sum(into.values())
+
+
+def test_a_dimension_name_the_vocabulary_does_not_declare_is_refused() -> None:
+    """The parse names what IS supported in the refusal, so a caller with a typo is told the
+    eight values rather than left to find them."""
+
+    assert DiscoveryDimension.parse("gap") is DiscoveryDimension.GAP
+    assert DiscoveryDimension.parse(DiscoveryDimension.REUSE) is DiscoveryDimension.REUSE
+    with pytest.raises(DiscoveryError) as excinfo:
+        DiscoveryDimension.parse("reusability")
+    assert excinfo.value.context["dimension"] == "reusability"
+    assert set(excinfo.value.context["supported"]) == {d.value for d in DiscoveryDimension}
+
+
+def test_a_dimension_the_report_never_ran_reads_as_an_empty_pass(tmp_path):
+    """ "Ran and found nothing" and "did not run" both mean there is nothing to act on, so
+    ``result_for`` answers for a dimension the report does not carry rather than raising —
+    every consumer would otherwise need the same guard, and one of them would forget it.
+
+    The two accessors built on it are asserted too, because they are what callers actually
+    use: ``findings_of`` and ``failures_of`` inherit the totality or lose it together.
+    """
+
+    report = RepositoryIntelligenceReport(
+        repository_id="synthetic",
+        substrate_digest="substrate",
+        units=(),
+        capabilities=(),
+        reuse=(),
+        ownership=(),
+        graph=build_graph((), ()),
+        dimension_results=(DimensionResult.create(DiscoveryDimension.CAPABILITY, ()),),
+        recommendations=(),
+        verdict=Verdict.PASS,
+        authority="ENGINEERING-EXECUTION-ONLY",
+        derived_from="test",
+        disclosure={},
+        report_sha256="report",
+    )
+
+    carried = report.result_for(DiscoveryDimension.CAPABILITY)
+    assert carried.dimension is DiscoveryDimension.CAPABILITY
+
+    absent = report.result_for(DiscoveryDimension.GAP)
+    assert absent.dimension is DiscoveryDimension.GAP
+    assert absent.findings == ()
+    assert report.findings_of(DiscoveryDimension.GAP) == ()
+    assert report.failures_of(DiscoveryDimension.GAP) == ()
+    assert report.all_findings == ()
+
+
+def test_a_capability_with_no_package_module_describes_itself_with_nothing(tmp_path):
+    """The docline is read from the capability's OWN package module. A capability made of
+    sub-modules with no ``engine/alpha/__init__.py`` has no self-description, and "" is the
+    honest answer — borrowing a sub-module's docline would attribute one module's sentence
+    to the whole capability."""
+    described = _substrate(tmp_path, (_module("engine.alpha", docline="Alpha describes itself."),))
+    assert discovery._capability_docline(described, "engine.alpha") == "Alpha describes itself."
+
+    undescribed = _substrate(tmp_path, (_module("engine.alpha.core"),))
+    assert discovery._capability_docline(undescribed, "engine.alpha") == ""
+    assert discovery._capability_docline(undescribed, "engine.absent") == ""
+
+
+# --------------------------------------------------------------------------------------
+# The arms a well-formed repository never reaches
+# --------------------------------------------------------------------------------------
+
+
+def test_a_dependency_spec_that_names_nothing_declares_no_distribution(tmp_path):
+    """``>=1.0`` and ``""`` are entries a hand-edited pyproject really carries, and each parses
+    to an empty name. Adding "" to the declared set would make EVERY unresolved import look
+    declared, because an import whose top-level name is compared against a set containing the
+    empty string still fails — but a later membership test on a normalised empty name would
+    not, and the gap dimension would stop reporting undeclared third-party imports."""
+    declarations = Declarations(
+        available=True,
+        runtime_dependencies=("jsonschema==4.26.0", ">=1.0", "   "),
+        dev_dependencies=("", "pytest-cov>=5"),
+    )
+    substrate = _substrate(tmp_path, (_module("engine.alpha"),), declarations=declarations)
+    assert discovery._declared_distributions(substrate) == {"jsonschema", "pytest_cov"}
+
+
+def test_reuse_counts_only_import_edges_as_evidence_of_use(tmp_path):
+    """A CONTAINS edge says a capability holds a module; it says nothing about anyone using it.
+
+    Counting it as an importer would make every capability its own evidence of reuse, and the
+    reuse dimension — whose entire job is to separate "exists" from "is used" — would report
+    that everything is reused.
+    """
+
+    modules = (_module("engine.alpha"), _module("engine.beta"))
+    substrate = _substrate(tmp_path, modules)
+    outcome = discovery.discover_all(substrate)
+
+    edges = (
+        DependencyEdge(source="engine.beta", target="engine.alpha", kind=EdgeKind.CONTAINS),
+        DependencyEdge(source="engine.beta", target="engine.alpha", kind=EdgeKind.PUBLISHES),
+    )
+    assessments, _result = discovery.discover_reuse(substrate, outcome.capabilities, edges)
+    by_name = {a.capability: a for a in assessments}
+    assert by_name["engine.alpha"].importers == ()
+
+    importing = (DependencyEdge(source="engine.beta", target="engine.alpha"),)
+    assessments, _result = discovery.discover_reuse(substrate, outcome.capabilities, importing)
+    by_name = {a.capability: a for a in assessments}
+    assert by_name["engine.alpha"].importers == ("engine.beta",)
+
+
+def test_a_capability_that_is_not_on_disk_is_not_asked_about_its_registration(tmp_path):
+    """A phantom catalog entry has no path, so "registered in one gate but not the other" is
+    a question about nothing. Asking it anyway would manufacture a registration conflict for
+    every catalog entry the substrate does not carry — which is the false-phantom shape the
+    catalog suite already had to unpick once."""
+    declarations = Declarations(
+        available=True,
+        coverage_sources=("engine/alpha",),
+        pytest_cov_packages=("engine.alpha",),
+    )
+    substrate = _substrate(
+        tmp_path,
+        (_module("engine.alpha"),),
+        declarations=declarations,
+        catalog=(
+            {
+                "canonical_name": "engine.alpha",
+                "canonical_location": "engine/alpha",
+                "category": "engine",
+            },
+            {
+                "canonical_name": "engine.phantom",
+                "canonical_location": "engine/phantom",
+                "category": "engine",
+            },
+        ),
+    )
+    outcome = discovery.discover_all(substrate)
+    absent = [r for r in outcome.capabilities if not r.present_on_disk]
+    assert [r.name for r in absent] == ["engine.phantom"]
+
+    # The phantom IS reported — as a phantom. What must not happen is a REGISTRATION
+    # verdict about it, because it has no path for either gate to have registered.
+    conflicts = outcome.result_for(DiscoveryDimension.CONFLICT)
+    registration = [
+        f for f in conflicts.findings if f.code == discovery.CONFLICT_REGISTRATION_INCONSISTENT
+    ]
+    assert not any("engine.phantom" in f.subject for f in registration)
+
+
+def test_a_cycle_whose_edges_the_graph_does_not_carry_names_no_edge_to_invert(tmp_path):
+    """Advice that names no edge is advice nobody can act on — but INVENTING one would be
+    worse. When the cycle's members share no edge in the graph the engine is holding, the
+    repair target falls through to the component summary rather than pointing at an edge that
+    is not there."""
+
+    substrate, _outcome, engine = _advisor(tmp_path, (_module("engine.alpha"),))
+    assert engine._heaviest_back_edge(("engine.ghost", "engine.phantom")) == ""
+
+    finding = Finding(
+        code="conflict.import_cycle",
+        dimension=DiscoveryDimension.CONFLICT,
+        severity=Severity.BLOCKING,
+        status=FindingStatus.FAIL,
+        subject="engine.ghost -> engine.phantom",
+        message="mutually dependent",
+        details={
+            "cycle": ["engine.ghost", "engine.phantom"],
+            "components": [["engine.ghost", "engine.phantom"]],
+        },
+    )
+    assert (
+        engine._repair_target(finding) == "1 cyclic component(s); see the conflict dimension detail"
+    )
+
+
+def test_a_word_that_becomes_a_stopword_when_depluralised_is_still_a_stopword(tmp_path):
+    """``engines`` is not in the stopword set and ``engine`` is. Stripping the plural without
+    re-testing would let every proposal about "engines" match on the repository's own layer
+    name, which is exactly the collision the stopword list exists to prevent."""
+
+    assert "engine" in recommendation._STOPWORDS
+    assert "engines" not in recommendation._STOPWORDS
+    assert "engines" not in recommendation._tokens("engines and platforms")
+    assert "engine" not in recommendation._tokens("engines and platforms")
+    assert "ledger" in recommendation._tokens("ledgers for the engines")
+
+
+def test_a_report_carrying_no_findings_proves_no_rule_and_fails_closed(tmp_path):
+    """ "Could not be determined" is not "holds".
+
+    Every intelligence rule is evidenced by a specific discovery finding, so a report that
+    produced none cannot prove any of them. Passing here would be the worst possible failure
+    mode of the whole subsystem: a repository nothing was measured over would certify.
+    """
+
+    empty = RepositoryIntelligenceReport(
+        repository_id="synthetic",
+        substrate_digest="substrate",
+        units=(),
+        capabilities=(),
+        reuse=(),
+        ownership=(),
+        graph=build_graph((), ()),
+        dimension_results=(DimensionResult.create(DiscoveryDimension.REPOSITORY, ()),),
+        recommendations=(),
+        verdict=Verdict.PASS,
+        authority="ENGINEERING-EXECUTION-ONLY",
+        derived_from="test",
+        disclosure={},
+        report_sha256="a" * 64,
+    )
+    validation = RepositoryValidator(empty).validate()
+    undetermined = [rule for rule in validation.rules if "could not be determined" in rule.message]
+    assert undetermined, "a report with no findings proved a rule anyway"
+    assert all(rule.status is not FindingStatus.PASS for rule in undetermined)
+    assert validation.verdict is not Verdict.PASS
+
+
+def test_the_transitive_closure_visits_a_diamond_once_and_never_returns_to_its_origin(tmp_path):
+    """TWO GUARDS, TWO DIFFERENT INFINITE LOOPS, and a well-formed acyclic repository trips
+    neither — which is why they were unexecuted.
+
+    ``neighbour not in seen`` is what stops a DIAMOND from being walked twice: alpha reaches
+    delta through both beta and gamma, and without it delta re-enters the frontier and the
+    work doubles at every subsequent level. ``neighbour != node_id`` is what stops a CYCLE
+    from putting the origin into its own closure — "alpha depends on alpha" is not a fact
+    about the repository, it is an artifact of the walk, and it would appear in the blast
+    radius of every capability in a cycle.
+    """
+    diamond = (
+        _module("engine.alpha", imports=("engine.beta", "engine.gamma")),
+        _module("engine.beta", imports=("engine.delta",)),
+        _module("engine.gamma", imports=("engine.delta",)),
+        _module("engine.delta"),
+    )
+    substrate = _substrate(tmp_path, diamond)
+    outcome = discovery.discover_all(substrate)
+    graph = build_graph(outcome.units, outcome.edges)
+
+    reached = graph.dependencies_of("engine.alpha")
+    assert reached == ("engine.beta", "engine.delta", "engine.gamma")
+    assert len(reached) == len(set(reached))
+    assert graph.dependencies_of("engine.alpha", depth=1) == ("engine.beta", "engine.gamma")
+    assert graph.dependents_of("engine.delta") == ("engine.alpha", "engine.beta", "engine.gamma")
+
+    cyclic = (
+        _module("engine.alpha", imports=("engine.beta",)),
+        _module("engine.beta", imports=("engine.alpha",)),
+    )
+    substrate = _substrate(tmp_path / "cyclic", cyclic)
+    outcome = discovery.discover_all(substrate)
+    graph = build_graph(outcome.units, outcome.edges)
+    assert graph.dependencies_of("engine.alpha") == ("engine.beta",)
+    assert graph.dependents_of("engine.alpha") == ("engine.beta",)

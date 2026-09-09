@@ -14,8 +14,12 @@ most: it asserts the property whose absence made the earlier drift possible.
 
 from __future__ import annotations
 
+import importlib.util
+import itertools
 import json
+import subprocess
 from pathlib import Path
+from platform.repository_intelligence import evidence_universe
 from platform.repository_intelligence.generated_artifacts import (
     CANONICAL_SAFE_INPUTS,
     EXECUTION_OBSERVATION_CLASSIFICATIONS,
@@ -149,7 +153,6 @@ def test_8_a_canonical_artifact_may_not_declare_an_environmental_input(tmp_path:
 
 def test_9_rib_generated_view_equals_the_registry_view() -> None:
     """The engine's own idea of its outputs and the register's must be one fact."""
-    import importlib.util
 
     spec = importlib.util.spec_from_file_location(
         "rib_under_test", REPO / "00-MASTER" / "UCOS-RIB-001" / "rib_engine.py"
@@ -172,7 +175,6 @@ def test_10_live_registry_satisfies_every_invariant() -> None:
 
 def test_11_every_canonical_artifact_is_tracked(artifacts) -> None:
     """A canonical generated artifact that is not in the tree is a declaration of nothing."""
-    import subprocess
 
     tracked = {
         p
@@ -348,3 +350,50 @@ def test_16_the_registers_declared_vocabulary_matches_the_module() -> None:
     doc = json.loads((REPO / REGISTRY_PATH).read_text(encoding="utf-8"))
     assert set(doc["input_classifications"]) == set(INPUT_CLASSIFICATIONS)
     assert any("CANONICAL_ARTIFACT_INPUT_CLASSIFICATION" in i for i in doc["invariants"])
+
+
+def test_17_a_certification_artifact_may_not_consume_a_diagnosis(tmp_path: Path) -> None:
+    """R-EV-4: DEBUG and IMPROVEMENT surfaces may support truth; they may not certify it.
+
+    A diagnosis is a measurement of what went wrong and an improvement is a measurement of
+    what could be better. Neither is a determination, so an artifact carrying a certification
+    role must not take one as an input — the certificate would then rest on evidence produced
+    to explain a failure rather than to decide one.
+
+    The rule has THREE conditions and all three are load-bearing, so each is falsified here
+    against the same register: an artifact with no certification role is unaffected, one whose
+    role is explicitly NONE or QUALITY_GATE_ONLY is exempt by declaration, and one consuming a
+    surface outside the forbidden classes is fine whatever its role.
+    """
+    forbidden = sorted(evidence_universe.CERTIFICATION_FORBIDDEN_CLASSES)
+    assert forbidden, "the register forbids no evidence class, so this test would be vacuous"
+
+    # A COUNTER, NOT THE PARAMETERS, names each repository. "" and "NONE" both rendered as
+    # "none" and collided on a case-insensitive filesystem, which made two of these cases
+    # silently reuse one tree.
+    built = itertools.count()
+
+    def _repo_with(*, evidence_class: str, certification_role: str) -> Path:
+        repo = tmp_path / f"r{next(built)}"
+        repo.mkdir(parents=True)
+        _one_entry_registry(
+            repo,
+            _entry(canonical_identity_role="NON_CANONICAL", certification_role=certification_role),
+        )
+        registry = repo / "00-BOOK" / "DATA" / "evidence-universe.json"
+        doc = json.loads(registry.read_text(encoding="utf-8"))
+        doc["surfaces"][0]["evidence_class"] = evidence_class
+        registry.write_text(json.dumps(doc), encoding="utf-8")
+        return repo
+
+    refused = validate(_repo_with(evidence_class=forbidden[0], certification_role="CERTIFYING"))
+    assert any("R-EV-4" in f for f in refused), refused
+    assert any(forbidden[0] in f for f in refused)
+
+    # 1. No certification role at all: the artifact certifies nothing, so nothing is at stake.
+    assert validate(_repo_with(evidence_class=forbidden[0], certification_role="")) == []
+    # 2. A role the register declares exempt.
+    for exempt in ("NONE", "QUALITY_GATE_ONLY"):
+        assert validate(_repo_with(evidence_class=forbidden[0], certification_role=exempt)) == []
+    # 3. A certifying artifact over a surface outside the forbidden classes.
+    assert validate(_repo_with(evidence_class="EXECUTION", certification_role="CERTIFYING")) == []
