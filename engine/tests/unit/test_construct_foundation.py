@@ -3314,3 +3314,147 @@ class _NarrowedDispositions:
 
     def __getattr__(self, name):
         return getattr(object.__getattribute__(self, "_real"), name)
+
+
+# --- the declaration's accessors and the rest of validate() -----------------------------------
+
+
+def test_every_declared_law_is_reachable_by_its_identifier(declaration: Declaration) -> None:
+    # The accessors refuse an undeclared name, which is tested above. The other half — that a
+    # declared name resolves — is what makes the refusal a boundary rather than a wall.
+    for law in declaration.laws:
+        assert declaration.law(law.law_id) is law
+
+
+def test_a_disposition_naming_an_undeclared_successor_is_refused(declaration: Declaration) -> None:
+    # A successor nobody declared makes the lifecycle a graph with an edge leaving the world.
+    spec = declaration.disposition("ADMIT")
+    forged = replace(
+        declaration,
+        dispositions=(
+            replace(spec, successors=(*spec.successors, "A-DISPOSITION-NOBODY-DECLARED")),
+            *declaration.dispositions[1:],
+        ),
+    )
+    problems = forged.validate(available_checks(), available_operators())
+    assert any("undeclared successor" in problem for problem in problems), problems
+
+
+def test_a_reality_state_permitting_an_undeclared_act_is_refused(declaration: Declaration) -> None:
+    # The same defect as the disposition case and a separate branch, because the two vocabularies
+    # are independent: an act declared for one is not thereby declared for the other.
+    spec = declaration.reality("VERIFIED")
+    forged = replace(
+        declaration,
+        reality_states=(
+            replace(spec, permits=spec.permits | {"transmute"}),
+            *declaration.reality_states[1:],
+        ),
+    )
+    problems = forged.validate(available_checks(), available_operators())
+    assert any("reality state" in p and "undeclared act" in p for p in problems), problems
+
+
+def test_registration_naming_an_undeclared_disposition_is_refused(declaration: Declaration) -> None:
+    forged = replace(
+        declaration,
+        registration_dispositions=declaration.registration_dispositions | {"NOT-A-DISPOSITION"},
+    )
+    problems = forged.validate(available_checks(), available_operators())
+    assert any("registration_dispositions names undeclared" in p for p in problems), problems
+
+
+def test_registration_naming_no_disposition_at_all_is_refused(declaration: Declaration) -> None:
+    # An empty set is the failure that looks like success: every check over it passes vacuously
+    # and no registration could ever take effect.
+    forged = replace(declaration, registration_dispositions=frozenset())
+    problems = forged.validate(available_checks(), available_operators())
+    assert any("no registration could ever take effect" in p for p in problems), problems
+
+
+def test_an_admission_the_declaration_claims_and_nothing_implements_is_refused(
+    declaration: Declaration,
+) -> None:
+    forged = replace(
+        declaration, claimed_admissions=declaration.claimed_admissions | {"not_an_admission"}
+    )
+    problems = forged.validate(
+        available_checks(),
+        available_operators(),
+        available_admissions=extension.available_admissions(),
+    )
+    assert any("claimed by the declaration but not implemented" in p for p in problems), problems
+
+
+def test_a_discovery_source_naming_an_unimplemented_selector_is_refused(
+    declaration: Declaration,
+) -> None:
+    source = declaration.discovery_sources[0]
+    forged = replace(
+        declaration,
+        discovery_sources=(
+            replace(source, selector="not_a_selector"),
+            *declaration.discovery_sources[1:],
+        ),
+    )
+    problems = forged.validate(
+        available_checks(),
+        available_operators(),
+        available_selectors=views.available_selectors(),
+    )
+    assert any("which is not implemented" in p for p in problems), problems
+
+
+def test_a_selector_the_declaration_claims_and_nothing_implements_is_refused(
+    declaration: Declaration,
+) -> None:
+    forged = replace(
+        declaration, claimed_selectors=declaration.claimed_selectors | {"not_a_selector"}
+    )
+    problems = forged.validate(
+        available_checks(),
+        available_operators(),
+        available_selectors=views.available_selectors(),
+    )
+    assert any("selector" in p and "not implemented" in p for p in problems), problems
+
+
+def test_a_closure_form_no_detector_implements_is_refused(declaration: Declaration) -> None:
+    spec = declaration.audit
+    forged = replace(
+        declaration,
+        audit=replace(spec, forms=(*spec.forms, replace(spec.forms[0], form="not-a-form"))),
+    )
+    problems = forged.validate(
+        available_checks(),
+        available_operators(),
+        available_forms=frozenset(audit.available_forms()),
+    )
+    assert any("no detector implements it" in p for p in problems), problems
+
+
+def test_a_facets_section_that_is_not_an_object_is_refused() -> None:
+    document = json.loads(
+        open(
+            os.path.join(REPO, "00-MASTER", "UCON-000001", "ucon-declaration.json"),
+            encoding="utf-8",
+        ).read()
+    )
+    document["facets"] = ["a list where an object belongs"]
+    with pytest.raises(DeclarationError, match="must be an object"):
+        parse(document)
+
+
+def test_a_row_missing_a_required_key_is_a_fault_and_names_the_key() -> None:
+    # Not a DeclarationError raised by a guard — a KeyError from the rehydration itself, caught
+    # and re-raised as a fault. Without the catch the declaration reader would surface a raw
+    # KeyError to a caller that has no way to tell a malformed document from a bug.
+    document = json.loads(
+        open(
+            os.path.join(REPO, "00-MASTER", "UCON-000001", "ucon-declaration.json"),
+            encoding="utf-8",
+        ).read()
+    )
+    document["laws"][0].pop("statement")
+    with pytest.raises(DeclarationError, match="malformed"):
+        parse(document)
