@@ -56,6 +56,7 @@ from intelligence.realization.errors import (
     GovernanceRejectedError,
     ImplementationError,
     KnowledgeIntakeError,
+    PlanningError,
 )
 
 REPO = RealizationConfig.create().repo_root
@@ -907,3 +908,963 @@ def test_the_convenience_entry_point_materializes_the_same_manifest(tmp_path, pi
     record = materialize_artifacts(_manifest_with("direct.json", pipeline), config)
     assert record.verified is True
     assert (config.artifact_root / "direct.json").is_file()
+
+
+# --------------------------------------------------------------------------- #
+# the accessors, the slugs and the refusals a governed run never reaches       #
+# --------------------------------------------------------------------------- #
+
+
+def test_a_slug_collapses_a_run_of_separators_into_one_and_never_renders_empty() -> None:
+    """Every artifact path and every target identity is built from this. A slug that emitted one
+    dash per separator would make two universes differing only in punctuation produce different
+    paths for the same thing, and one that could render empty would produce a path with no name."""
+    from intelligence.realization.contracts import identifier, slug
+
+    assert slug("Universe  of --- Things") == "universe-of-things"
+    assert slug("///") == "unnamed"
+    assert slug("  Leading and trailing  ") == "leading-and-trailing"
+    assert identifier("Universe of Things")
+
+
+def test_a_target_names_its_module_and_its_path_from_one_universe(pipeline) -> None:
+    """The module name and the path fragment are two projections of one universe, and they are
+    derived rather than stored so a target cannot carry a path that disagrees with its own id."""
+    _intake, plan, _composition, _findings, _manifest = pipeline
+    target = plan.targets[0]
+    assert target.target_id.endswith(target.path_slug.upper())
+    assert target.module_name.isidentifier()
+
+
+def test_every_plan_and_composition_accessor_resolves_or_refuses(pipeline) -> None:
+    """The refusals are what stop a caller from reading a step, target or unit that is not in
+    the plan it holds; the resolutions are what every generator depends on. A resolver that
+    could only refuse would make the whole plan unreadable."""
+    _intake, plan, composition, _findings, _manifest = pipeline
+    assert plan.step(plan.steps[0].step_id) is plan.steps[0]
+    assert plan.target(plan.targets[0].target_id) is plan.targets[0]
+    assert composition.unit(composition.units[0].unit_id) is composition.units[0]
+    for resolver, argument in (
+        (plan.step, "URI-STEP-NOBODY-PLANNED"),
+        (plan.target, "URI-TGT-NOBODY-DECLARED"),
+        (composition.unit, "URI-UNIT-NOBODY-COMPOSED"),
+    ):
+        with pytest.raises(PlanningError):
+            resolver(argument)
+
+
+def test_an_intake_resolves_a_target_and_refuses_one_it_did_not_derive(pipeline) -> None:
+    """Every target the intake answers for was derived from a knowledge universe. One it did not
+    derive has no canonical objects behind it, so answering for it would produce an artifact
+    anchored to nothing."""
+    intake, _plan, _composition, _findings, _manifest = pipeline
+    first = intake.targets[0]
+    assert intake.target(first.target_id) is first
+    assert intake.decision_ids() == intake.base.decision_ids()
+    assert isinstance(intake.decisions_for(first), tuple)
+    with pytest.raises(KnowledgeIntakeError):
+        intake.target("URI-TGT-NOBODY-DERIVED")
+
+
+def test_an_intake_over_a_store_that_does_not_exist_falls_back_to_the_seed(
+    tmp_path, monkeypatch
+) -> None:
+    """A repository with no canonical store still has knowledge — the engine's own seed — and
+    realizing from it is different from realizing from nothing. Reading an absent store as an
+    empty one would generate an empty, governed, meaningless bundle."""
+    from intelligence.realization import knowledge as knowledge_module
+
+    class _Absent:
+        def exists(self) -> bool:
+            return False
+
+    monkeypatch.setattr(knowledge_module, "KnowledgeStore", lambda *a, **k: _Absent())
+    intake = KnowledgeIntake.load()
+    assert intake.source == "engine.knowledge.seed"
+    assert intake.targets
+
+
+def test_an_intake_whose_knowledge_cannot_be_read_is_a_fault(monkeypatch) -> None:
+    """A store that refuses is not an empty store, and reading it as one would seal a bundle
+    over knowledge nobody could load."""
+    from engine.knowledge import KnowledgeError
+    from intelligence.realization import knowledge as knowledge_module
+
+    class _Refusing:
+        def exists(self) -> bool:
+            return True
+
+        def load(self, *args, **kwargs):  # noqa: ANN002, ANN003, ANN202
+            raise KnowledgeError("the canonical store cannot be read")
+
+    monkeypatch.setattr(knowledge_module, "KnowledgeStore", lambda *a, **k: _Refusing())
+    with pytest.raises(KnowledgeIntakeError):
+        KnowledgeIntake.load()
+
+
+def test_an_evidence_bundle_reports_completeness_and_refuses_a_partial_emit(tmp_path) -> None:
+    """A partial bundle is worse than none: a reader finding four of five documents cannot tell
+    a bundle that was never finished from one whose fifth document was removed."""
+    from intelligence.realization.errors import EvidenceError
+    from intelligence.realization.evidence import RealizationEvidence, emit_evidence
+
+    partial = RealizationEvidence(knowledge_seal="a" * 64, documents={})
+    assert not partial.complete()
+    assert partial.missing()
+    with pytest.raises(EvidenceError, match="incomplete"):
+        emit_evidence(partial, _config(tmp_path))
+
+
+def test_evidence_may_not_be_written_into_the_frozen_corpus(tmp_path) -> None:
+    """DP-03 owns the frozen corpus. An evidence bundle written into it would make the certified
+    corpus a place this engine writes, which is the one thing it may never be."""
+    from intelligence.realization.errors import EvidenceError
+    from intelligence.realization.evidence import _guard_writable
+
+    config = RealizationConfig.create(REPO, artifact_root=tmp_path, evidence_dir=tmp_path)
+    with pytest.raises(EvidenceError, match="frozen corpus"):
+        _guard_writable(config, REPO / "99-FREEZE")
+
+
+def test_an_unreadable_evidence_document_is_reported_as_unsealed(tmp_path) -> None:
+    """Present and unreadable is a third state beside absent and sealed. Reporting it as sealed
+    would certify a document nobody could parse; reporting it as absent would hide that
+    something is there."""
+    from intelligence.realization.evidence import REQUIRED_FILES
+
+    config = _config(tmp_path)
+    config.evidence_dir.mkdir(parents=True, exist_ok=True)
+    (config.evidence_dir / REQUIRED_FILES[0]).write_text("{ not json", encoding="utf-8")
+    report = verify_bundle(config)
+    entry = next(item for item in report["files"] if item["file"] == REQUIRED_FILES[0])
+    assert entry["present"] is True
+    assert entry["sealed"] is False
+    assert not report["complete"]
+
+
+def test_the_convenience_traceability_entry_point_builds_the_same_ledger(tmp_path, pipeline):
+    """The module-level function is what a caller outside this package uses. One that drifted
+    from the engine would give two answers to "is the closure complete"."""
+    from intelligence.realization.traceability import build_trace
+
+    intake, plan, composition, _findings, manifest = pipeline
+    implementer = ImplementationEngine(_config(tmp_path))
+    record = implementer.materialize(manifest)
+    direct = build_trace(intake, plan, composition, manifest, record)
+    assert (
+        direct.to_dict()
+        == TraceabilityEngine().build(intake, plan, composition, manifest, record).to_dict()
+    )
+
+
+def test_the_config_resolves_an_artifact_path_and_a_repo_root_of_last_resort(tmp_path) -> None:
+    """`artifact_path` is how every generator turns a relative artifact path into a real one.
+    The
+    fallback root is what keeps the engine usable outside a repository whose marker it can find,
+    rather than failing to construct at all."""
+    from intelligence.realization.config import resolve_repo_root
+
+    config = _config(tmp_path)
+    assert config.artifact_path("a/b.json") == config.artifact_root / "a/b.json"
+    assert resolve_repo_root(tmp_path).is_dir()
+
+
+def test_the_module_entry_point_dispatches_to_the_cli(monkeypatch) -> None:
+    """``python -m intelligence.realization`` is a second entry point and a dispatcher rather
+    than a copy: two copies of an entry point are two things to keep in step."""
+    import runpy
+
+    from intelligence.realization import cli as cli_module
+
+    calls: list[int] = []
+    monkeypatch.setattr(cli_module, "main", lambda: calls.append(1) or 0)
+    with pytest.raises(SystemExit) as exit_info:
+        runpy.run_module("intelligence.realization", run_name="__main__")
+    assert exit_info.value.code == 0
+    assert calls == [1]
+
+
+def _cli(tmp_path, *argv: str) -> int:
+    return cli_main(
+        [
+            "--repo",
+            str(REPO),
+            "--artifact-root",
+            str(tmp_path / "realization"),
+            "--evidence-dir",
+            str(tmp_path / "evidence"),
+            *argv,
+        ]
+    )
+
+
+def test_the_generate_command_can_emit_the_content_it_generated(tmp_path, capsys) -> None:
+    """`--show-content` is what makes the command inspectable without materializing: a reader
+    can see the bytes that WOULD be written rather than the manifest that describes them."""
+    assert _cli(tmp_path, "generate", "--show-content") == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["contents"]
+    assert set(payload["contents"]) == {
+        artifact["relative_path"] for artifact in payload["generation"]["artifacts"]
+    }
+
+
+def test_the_trace_command_carries_its_edges_only_when_asked(tmp_path, capsys) -> None:
+    """The edge set is the whole closure and is large. Emitting it unconditionally would make
+    the ordinary command unreadable; omitting it always would make the closure uninspectable."""
+    assert _cli(tmp_path, "trace", "--edges") == 0
+    with_edges = json.loads(capsys.readouterr().out)
+    assert with_edges["edges"]
+    assert _cli(tmp_path, "trace") == 0
+    without = json.loads(capsys.readouterr().out)
+    assert "edges" not in without
+    assert without["coverage"] == with_edges["coverage"]
+
+
+def test_the_evidence_command_checks_a_bundle_and_emits_one(tmp_path, capsys) -> None:
+    """Two questions on one command: what is on disk, and what this run would write. A check
+    that emitted would answer the second while claiming to answer the first."""
+    assert _cli(tmp_path, "evidence", "--check-only") == 1
+    checked = json.loads(capsys.readouterr().out)
+    assert checked["complete"] is False
+
+    assert _cli(tmp_path, "evidence") == 0
+    emitted = json.loads(capsys.readouterr().out)
+    assert emitted["verdict"] == VERDICT_GOVERNED
+    assert emitted["emitted"]
+
+    assert _cli(tmp_path, "evidence", "--check-only") == 0
+
+
+def test_a_foundation_fault_exits_two_rather_than_reporting_a_verdict(tmp_path, capsys) -> None:
+    """Exit 2 is "I could not tell", and it must not be spelled the same way as exit 1, which is
+    "I told you and the answer is no"."""
+    import intelligence.realization.engine as engine_module
+    from intelligence.realization import cli as cli_module
+    from intelligence.realization.errors import KnowledgeIntakeError as _Fault
+
+    def _faulting(self, *args, **kwargs):  # noqa: ANN001, ANN002, ANN003, ANN202
+        raise _Fault("the canonical store cannot be read")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr(engine_module.RealizationIntelligenceEngine, "intake", _faulting)
+    try:
+        assert _cli(tmp_path, "intake") == 2
+    finally:
+        monkeypatch.undo()
+    assert json.loads(capsys.readouterr().out)
+    assert cli_module.build_parser() is not None
+
+
+def test_a_rejected_governance_decision_is_reported_by_the_realize_command(
+    tmp_path, capsys, monkeypatch
+) -> None:
+    """The command reports the rejection rather than raising it: a caller reading stdout must
+    see WHICH gate refused, not a traceback that names the raising line."""
+    import intelligence.realization.engine as engine_module
+
+    def _rejecting(self, **kwargs):  # noqa: ANN001, ANN003, ANN202
+        raise GovernanceRejectedError("a gate refused", gate="URI-GATE-TEST")
+
+    monkeypatch.setattr(engine_module.RealizationIntelligenceEngine, "realize", _rejecting)
+    assert _cli(tmp_path, "realize") == 1
+    assert json.loads(capsys.readouterr().out)
+
+
+# --------------------------------------------------------------------------- #
+# the stage guards: every refusal that keeps one pipeline's stages from mixing #
+# --------------------------------------------------------------------------- #
+
+
+def test_generation_refuses_stages_derived_from_different_states(pipeline) -> None:
+    """A plan, a composition and an intake are three derivations of one knowledge state. Mixing
+    two states would generate artifacts anchored to objects the manifest does not cite, and the
+    seals would still all verify — each against its own half."""
+    from dataclasses import replace as _replace
+
+    from intelligence.realization.errors import GenerationError
+    from intelligence.realization.generation import GenerationEngine
+
+    intake, plan, composition, _findings, _manifest = pipeline
+    with pytest.raises(GenerationError, match="does not belong to the supplied plan"):
+        GenerationEngine._assert_coherent(
+            intake, plan, _replace(composition, plan_id="URI-PLAN-SOMETHING-ELSE")
+        )
+    with pytest.raises(GenerationError, match="different canonical knowledge state"):
+        GenerationEngine._assert_coherent(
+            intake, plan, _replace(composition, knowledge_seal="a" * 64)
+        )
+    with pytest.raises(GenerationError, match="nothing to generate"):
+        GenerationEngine._assert_coherent(intake, plan, _replace(composition, units=()))
+
+
+def test_a_generator_that_emits_nothing_or_the_wrong_family_is_refused(pipeline) -> None:
+    """Three ways a generator can be wrong while looking right: producing nothing for a planned
+    step, producing something outside its own family, and producing something anchored to no
+    canonical object. Each would leave the manifest describing a realization that did not
+    happen."""
+    from dataclasses import replace as _replace
+
+    from intelligence.realization.contracts import ArtifactFamily
+    from intelligence.realization.errors import GenerationError
+    from intelligence.realization.generation import GenerationEngine
+
+    _intake, _plan, composition, _findings, manifest = pipeline
+    artifact = manifest.artifacts[0]
+    unit = composition.units[0]
+
+    class _Context:
+        def __init__(self, unit: object) -> None:
+            self.unit = unit
+
+    context = _Context(unit)
+
+    class _Silent:
+        name = "silent"
+
+        def generate(self, _context: object) -> tuple:
+            return ()
+
+    class _Foreign:
+        name = "foreign"
+
+        def generate(self, _context: object) -> tuple:
+            other = next(family for family in ArtifactFamily if family is not artifact.family)
+            return (_replace(artifact, family=other),)
+
+    class _Unanchored:
+        name = "unanchored"
+
+        def generate(self, _context: object) -> tuple:
+            provenance = _replace(artifact.provenance, source_ckos=())
+            return (_replace(artifact, provenance=provenance),)
+
+    for generator, message in (
+        (_Silent(), "produced no artifact"),
+        (_Foreign(), "outside its own family"),
+        (_Unanchored(), "not anchored to any canonical object"),
+    ):
+        with pytest.raises(GenerationError, match=message):
+            with pytest.MonkeyPatch.context() as patch:
+                patch.setattr(
+                    "intelligence.realization.generation.generator_for",
+                    lambda _family, _g=generator: _g,
+                )
+                GenerationEngine._invoke(artifact.family, context)
+
+
+def test_two_units_claiming_one_output_path_are_refused(pipeline) -> None:
+    """Two units writing one path is a silent overwrite: the manifest would carry one entry and
+    the tree would carry whichever unit ran last."""
+    from intelligence.realization.errors import GenerationError
+    from intelligence.realization.generation import GenerationEngine
+
+    _intake, _plan, _composition, _findings, manifest = pipeline
+    artifact = manifest.artifacts[0]
+    claimed: dict[str, str] = {}
+    GenerationEngine._claim_paths((artifact,), claimed, "URI-UNIT-FIRST")
+    with pytest.raises(GenerationError, match="two composition units claim the same output path"):
+        GenerationEngine._claim_paths((artifact,), claimed, "URI-UNIT-SECOND")
+
+
+def test_the_convenience_entry_points_produce_what_their_engines_produce() -> None:
+    """Each is what a caller outside this package uses. One that drifted from its engine would
+    give two answers to the same question — and both would seal."""
+    from intelligence.realization.composition import compose_plan
+    from intelligence.realization.generation import artifact_index, generate_artifacts
+    from intelligence.realization.planning import build_plan
+
+    intake = KnowledgeIntake.load()
+    plan = build_plan(intake)
+    composition, _findings = compose_plan(intake, plan)
+    manifest = generate_artifacts(intake, plan, composition)
+    assert plan.plan_id == PlanningEngine().plan(intake).plan_id
+    assert manifest.seal == GenerationEngine().generate(intake, plan, composition).seal
+    by_path = artifact_index(manifest)
+    assert set(by_path) == {a.relative_path for a in manifest.artifacts}
+
+
+def test_planning_refuses_an_intake_with_no_target(pipeline) -> None:
+    """No target means no realizable knowledge, and a plan over nothing would generate nothing,
+    seal cleanly and be governed — the vacuous pass every gate in this subsystem refuses.
+
+    The intake refuses an empty store outright, so the targetless intake has to be built from a
+    populated one — which is the guard that survives a future intake admitting one."""
+    from dataclasses import replace as _replace
+
+    intake, _plan, _composition, _findings, _manifest = pipeline
+    with pytest.raises(PlanningError, match="no realization targets"):
+        PlanningEngine().plan(_replace(intake, targets=()))
+
+
+def test_a_dependency_graph_with_an_unknown_step_or_a_cycle_is_refused() -> None:
+    """Both make the wave order undefined. An unknown dependency would silently never be
+    satisfied; a cycle would spin. Refusing names which node is at fault."""
+    from intelligence.realization.planning import _topological_waves
+
+    with pytest.raises(PlanningError, match="depends on an unknown step"):
+        _topological_waves(["a"], {"a": ("nobody-planned",)})
+    with pytest.raises(PlanningError, match="dependency cycle"):
+        _topological_waves(["a", "b"], {"a": ("b",), "b": ("a",)})
+    assert _topological_waves(["a", "b"], {"b": ("a",)}) == (("a",), ("b",))
+
+
+def test_composition_refuses_a_plan_from_another_knowledge_state(pipeline) -> None:
+    from dataclasses import replace as _replace
+
+    from intelligence.realization.errors import CompositionError
+
+    intake, plan, _composition, _findings, _manifest = pipeline
+    with pytest.raises(CompositionError, match="different canonical knowledge state"):
+        CompositionEngine().compose(intake, _replace(plan, knowledge_seal="a" * 64))
+
+
+def test_a_composition_graph_with_an_unknown_upstream_or_a_cycle_is_refused(pipeline) -> None:
+    """The same two failures one stage down. A unit depending on nothing that exists would never
+    be ordered; a cycle would never settle."""
+    from dataclasses import replace as _replace
+
+    from intelligence.realization.errors import CompositionError
+
+    _intake, _plan, composition, _findings, _manifest = pipeline
+    first, second = composition.units[0], composition.units[1]
+    engine = CompositionEngine()
+    with pytest.raises(CompositionError, match="depends on an unknown unit"):
+        engine._order((_replace(first, upstream_units=("URI-UNIT-NOBODY-COMPOSED",)),))
+    with pytest.raises(CompositionError, match="cycle"):
+        engine._order(
+            (
+                _replace(first, upstream_units=(second.unit_id,)),
+                _replace(second, upstream_units=(first.unit_id,)),
+            )
+        )
+
+
+def test_a_gate_set_that_is_incomplete_or_duplicated_is_refused(pipeline) -> None:
+    """The gate set is closed. A missing gate is an unasked question reported as governed; a
+    duplicated one is one question counted twice."""
+    from intelligence.realization.governance import RealizationGovernor as _Governor
+
+    decision = RealizationIntelligenceEngine().govern()
+    outcomes = decision.gates
+    with pytest.raises(GovernanceRejectedError, match="incomplete or duplicated"):
+        _Governor._assert_complete(outcomes[:-1])
+    with pytest.raises(GovernanceRejectedError, match="incomplete or duplicated"):
+        _Governor._assert_complete((*outcomes, outcomes[0]))
+
+
+def test_a_determinism_proof_that_says_nothing_still_fails_the_gate() -> None:
+    """A proof reporting `deterministic: false` with no mismatch names nothing an operator can
+    chase, so the gate supplies the one fact it does know: the seals disagreed."""
+    from intelligence.realization.governance import RealizationGovernor as _Governor
+
+    outcome = _Governor._generation_determinism(
+        {"deterministic": False, "mismatches": [], "artifact_count": 3}
+    )
+    assert not outcome.passed
+    assert outcome.failures == ("seal-mismatch",)
+
+
+# --------------------------------------------------------------------------- #
+# the generators' own helpers, and the registry that binds them               #
+# --------------------------------------------------------------------------- #
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [
+        (True, "true"),
+        (False, "false"),
+        (None, "null"),
+        (7, "7"),
+        ("plain", "plain"),
+        ("", '""'),
+        ("has: colon", '"has: colon"'),
+        ("yes", '"yes"'),
+        (": leading colon", '": leading colon"'),
+    ],
+)
+def test_a_yaml_scalar_quotes_only_when_it_must(value, expected) -> None:
+    """The deployment manifests are YAML this repository writes rather than a library's. A
+    scalar quoted too little parses as something else; one quoted too much changes the bytes on
+    every run for no reason, and the artifacts are compared by byte."""
+    from intelligence.realization.generators.deployment import _yaml_scalar
+
+    assert _yaml_scalar(value) == expected
+
+
+def test_yaml_renders_empty_collections_and_bare_scalars() -> None:
+    """An empty list is a declared-and-empty field, which is a different fact from an absent
+    one. Emitting nothing for it would make the two indistinguishable in the rendered manifest."""
+    from intelligence.realization.generators.deployment import _yaml_lines
+
+    assert _yaml_lines({"empty_list": [], "empty_map": {}}) == [
+        "empty_list: []",
+        "empty_map: {}",
+    ]
+    assert _yaml_lines("bare") == ["bare"]
+    assert _yaml_lines([{"a": 1}, "b"]) == ["- a: 1", "- b"]
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [(True, "boolean"), (3, "integer"), ("s", "string"), ([1], "array")],
+)
+def test_a_schema_type_reads_a_bool_before_an_int(value, expected) -> None:
+    """`True` is an int in Python, so a type reader that asked `isinstance(int)` first would
+    declare every boolean field an integer — and every consumer would then validate against a
+    type the value does not have."""
+    from intelligence.realization.generators.schema import _json_type
+
+    assert _json_type(value) == expected
+
+
+def test_the_generator_registry_refuses_a_duplicated_or_missing_family() -> None:
+    """Family → generator is complete and unambiguous BY CONSTRUCTION, which means both
+    failures are refused at import rather than reported later: a duplicated family would make
+    the emitting generator depend on iteration order, and a missing one would silently produce
+    no artifact for a planned step."""
+    from intelligence.realization.errors import GenerationError
+    from intelligence.realization.generators import GENERATORS, _build_registry
+
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(
+            "intelligence.realization.generators.GENERATORS",
+            (*GENERATORS, GENERATORS[0]),
+        )
+        with pytest.raises(GenerationError, match="more than one generator"):
+            _build_registry()
+        patch.setattr("intelligence.realization.generators.GENERATORS", GENERATORS[:1])
+        with pytest.raises(GenerationError, match="has no generator"):
+            _build_registry()
+
+
+def test_content_that_is_not_newline_terminated_is_refused(pipeline) -> None:
+    """Every artifact is compared by byte and most are read by line-oriented tools. A file
+    without a trailing newline differs from the same file with one, and the difference would
+    show up as drift rather than as the authoring slip it is."""
+    from intelligence.realization.errors import GenerationError
+    from intelligence.realization.generators import generator_for
+
+    _intake, _plan, _composition, _findings, manifest = pipeline
+    artifact = manifest.artifacts[0]
+    generator = generator_for(artifact.family)
+    with pytest.raises(GenerationError, match="newline-terminated"):
+        generator.artifact(
+            None,
+            relative_path=artifact.relative_path,
+            media=artifact.media,
+            content="no trailing newline",
+        )
+
+
+def test_a_generation_context_projects_its_target_and_finds_no_absent_upstream(pipeline) -> None:
+    """`upstream_artifact` answers None for a family this target produced nothing in, which is
+    an ordinary state during the first waves. Raising instead would make every generator that
+    cross-references an upstream family unusable before that family had run."""
+    from intelligence.realization.contracts import ArtifactFamily
+    from intelligence.realization.generators.base import GenerationContext
+
+    intake, plan, composition, _findings, _manifest = pipeline
+    unit = composition.units[0]
+    context = GenerationContext(
+        intake=intake,
+        plan=plan,
+        composition=composition,
+        unit=unit,
+        target=plan.target(unit.target_id),
+    )
+    assert context.invariants == context.target.invariants
+    assert context.universe == context.target.universe
+    kinds = {obj.kind.value for obj in context.objects}
+    for kind in kinds:
+        assert all(o.kind.value == kind for o in context.objects_of_kind(kind))
+    assert context.objects_of_kind("a-kind-nothing-declares") == ()
+    assert context.upstream_artifact(ArtifactFamily.SCHEMA, ".json") is None
+
+
+# --------------------------------------------------------------------------- #
+# a synthetic two-universe knowledge state, which reaches what the repository's #
+# own knowledge happens not to exercise                                        #
+# --------------------------------------------------------------------------- #
+
+
+def _decision(decision_id: str, **overrides) -> DecisionRecord:  # noqa: F821
+    from engine.knowledge.cko import DecisionRecord, RejectedOption
+
+    fields = {
+        "decision_id": decision_id,
+        "title": f"Decision {decision_id}",
+        "problem_statement": "A problem.",
+        "context": "A context.",
+        "objective": "An objective.",
+        "chosen_architecture": "The chosen architecture.",
+        "rationale": "The rationale.",
+        "authority": KnowledgeAuthority.ENGINEERING,
+        "owner": "UCOS-TEST",
+        "lifecycle": Lifecycle.OPERATIONAL,
+        "version": "1.0.0",
+        "review_authority": "UCOS-TEST",
+        "supersession_rules": "Superseded only by a later decision of the same authority.",
+        "alternatives": ("an alternative nobody chose",),
+        "evaluation_criteria": ("a criterion",),
+        "tradeoffs": ("a tradeoff",),
+        "rejected_options": (RejectedOption(option="an option", reason="a reason"),),
+        "consequences": ("a consequence",),
+        "risks": ("a risk",),
+        "mitigations": ("a mitigation",),
+        "certification_requirements": ("a certification requirement",),
+    }
+    fields.update(overrides)
+    return DecisionRecord.create(**fields)
+
+
+def _two_universe_intake() -> KnowledgeIntake:
+    """Two universes, a cross-universe dependency, a conflict pair, an inactive object, and one
+    fully-populated decision beside one carrying only its required fields.
+
+    The repository's own canonical knowledge exercises one shape of each of those; this
+    exercises the other, which is what the branches below are.
+    """
+    from engine.knowledge.store import KnowledgeBase
+
+    upstream = _object(
+        "UCOS-TEST-UP-0001",
+        universe="UPSTREAM",
+        kind=KnowledgeKind.RULE,
+        decision_links=("UCOS-TEST-DEC-0001",),
+    )
+    downstream = _object(
+        "UCOS-TEST-DOWN-0001",
+        universe="DOWNSTREAM",
+        kind=KnowledgeKind.RULE,
+        dependencies=("UCOS-TEST-UP-0001",),
+        conflicts_with=("UCOS-TEST-DOWN-0002",),
+        decision_links=("UCOS-TEST-DEC-0002",),
+    )
+    peer = _object(
+        "UCOS-TEST-DOWN-0002",
+        universe="DOWNSTREAM",
+        kind=KnowledgeKind.RULE,
+        decision_links=("UCOS-TEST-DEC-0002",),
+    )
+    return KnowledgeIntake.from_base(
+        KnowledgeBase(
+            (upstream, downstream, peer),
+            (
+                _decision("UCOS-TEST-DEC-0001"),
+                _decision(
+                    "UCOS-TEST-DEC-0002",
+                    alternatives=(),
+                    evaluation_criteria=(),
+                    tradeoffs=(),
+                    rejected_options=(),
+                    consequences=(),
+                    risks=(),
+                    mitigations=(),
+                    certification_requirements=(),
+                    supersession_rules="",
+                ),
+            ),
+        ),
+        source="test",
+    )
+
+
+def test_a_cross_universe_dependency_orders_the_upstream_universe_first() -> None:
+    """Realization order across universes is DERIVED from the knowledge, not configured. A
+    dependent universe that realized first would cite artifacts that did not exist yet."""
+    intake = _two_universe_intake()
+    plan = PlanningEngine().plan(intake)
+    upstream = plan.target("URI-TGT-UPSTREAM")
+    downstream = plan.target("URI-TGT-DOWNSTREAM")
+    for step in plan.steps_for(downstream.target_id):
+        peers = [
+            dep
+            for dep in step.depends_on
+            if dep in {s.step_id for s in plan.steps_for(upstream.target_id)}
+        ]
+        assert peers, f"{step.step_id} does not wait for its upstream universe"
+
+
+def test_a_declared_conflict_between_two_co_bound_objects_is_found(monkeypatch) -> None:
+    """A conflict is only a finding where both sides are bound into ONE unit: two objects that
+    conflict and never meet are a declaration, not a collision."""
+    intake = _two_universe_intake()
+    plan = PlanningEngine().plan(intake)
+    _composition, findings = CompositionEngine().compose(intake, plan)
+    assert findings.conflicts == (("UCOS-TEST-DOWN-0001", "UCOS-TEST-DOWN-0002"),)
+    assert not findings.clean
+
+
+def test_the_whole_pipeline_runs_over_a_synthetic_state_and_governs_itself(tmp_path) -> None:
+    """The end-to-end proof on knowledge this repository did not author: every generator emits,
+    every gate measures, and the decisions rendered include one carrying every optional section
+    and one carrying none — which is what makes the documentation generator's conditionals
+    measured rather than assumed."""
+    intake = _two_universe_intake()
+    plan = PlanningEngine().plan(intake)
+    composition, findings = CompositionEngine().compose(intake, plan)
+    manifest = GenerationEngine().generate(intake, plan, composition)
+    assert manifest.artifacts
+
+    rendered = {a.relative_path: a.content for a in manifest.artifacts}
+    decisions = [c for p, c in rendered.items() if p.endswith(".md") and "Alternatives" in c]
+    assert decisions, "no decision record rendered its alternatives"
+
+    governor = RealizationGovernor(_config(tmp_path))
+    decision = governor.adjudicate(
+        intake=intake,
+        plan=plan,
+        composition=composition,
+        findings=findings,
+        manifest=manifest,
+        determinism=GenerationEngine().verify_determinism(intake, plan, composition),
+    )
+    assert sorted(gate.gate for gate in decision.gates) == sorted(GATES)
+    assert not decision.governed, "the synthetic state declares a conflict; it must not govern"
+
+
+def test_a_target_citing_only_inactive_knowledge_fails_the_authority_gate() -> None:
+    """A target whose every object is retired cites knowledge nobody stands behind, and
+    realizing it would generate artifacts anchored to superseded truth."""
+    from engine.knowledge.store import KnowledgeBase
+    from intelligence.realization.governance import RealizationGovernor as _Governor
+
+    retired = _object("UCOS-TEST-RETIRED-0001", universe="RETIRED", lifecycle=Lifecycle.SUPERSEDED)
+    intake = KnowledgeIntake.from_base(KnowledgeBase((retired,)), source="test")
+    plan = PlanningEngine().plan(intake)
+    outcome = _Governor._knowledge_authority(intake, plan)
+    assert not outcome.passed
+    assert outcome.failures == ("URI-TGT-RETIRED",)
+
+
+def test_a_plan_missing_a_family_for_a_target_fails_the_completeness_gate(pipeline) -> None:
+    """Realization is total, not selective: every target is realized into every family. A plan
+    short one family would leave that target partly realized and fully governed."""
+    from dataclasses import replace as _replace
+
+    from intelligence.realization.governance import RealizationGovernor as _Governor
+
+    _intake, plan, _composition, _findings, _manifest = pipeline
+    target = plan.targets[0]
+    dropped = next(s for s in plan.steps_for(target.target_id))
+    outcome = _Governor._plan_family_complete(
+        _replace(plan, steps=tuple(s for s in plan.steps if s is not dropped))
+    )
+    assert not outcome.passed
+    assert any(entry.startswith(target.target_id) for entry in outcome.failures)
+
+
+def test_an_artifact_path_that_would_escape_the_artifact_root_fails_the_frozen_gate(
+    tmp_path, pipeline
+) -> None:
+    """`..` in a relative path is a traversal out of the artifact root, and a path inside the
+    frozen corpus is a write DP-03 forbids. Both are refused by the same gate, because both
+    make the artifact root a claim rather than a boundary."""
+    from dataclasses import replace as _replace
+
+    _intake, _plan, _composition, _findings, manifest = pipeline
+    artifact = manifest.artifacts[0]
+    escaping = _replace(artifact, relative_path="../escaped.json")
+    governor = RealizationGovernor(_config(tmp_path))
+    outcome = governor._implementation_frozen_safe(_replace(manifest, artifacts=(escaping,)))
+    assert not outcome.passed
+    assert outcome.failures == ("../escaped.json",)
+
+
+def test_materializing_into_the_frozen_corpus_is_refused(tmp_path, pipeline) -> None:
+    """The gate refuses it and the implementer refuses it again. Two readers, and neither may
+    rely on the other having looked — the frozen corpus is the one surface this engine may
+    never write."""
+    _intake, _plan, _composition, _findings, manifest = pipeline
+    implementer = ImplementationEngine(RealizationConfig.create(REPO, artifact_root=REPO))
+    with pytest.raises(FrozenSurfaceError):
+        implementer._assert_not_frozen(REPO / "99-FREEZE" / "x.json", "99-FREEZE/x.json")
+
+
+def test_an_artifact_family_coerces_from_its_own_value(pipeline) -> None:
+    """`coerce` is how a family arrives from a serialized manifest. One that defaulted silently
+    would read an unknown family as a known one and generate into the wrong place."""
+    from intelligence.realization.contracts import ArtifactFamily
+
+    for family in ArtifactFamily:
+        assert ArtifactFamily.coerce(family.value) is family
+
+
+def test_an_authority_inversion_between_two_objects_is_a_boundary_finding(tmp_path) -> None:
+    """Dependency direction must follow authority precedence: a higher authority depending on a
+    lower one inverts the hierarchy, and the descriptor names it rather than ordering it away.
+    An edge whose far end is outside this unit is skipped, because this universe's descriptor
+    can say nothing about a rank it does not hold."""
+    from engine.knowledge.store import KnowledgeBase
+
+    low = _object(
+        "UCOS-TEST-LOW-0001", universe="INVERTED", authority=KnowledgeAuthority.ENGINEERING
+    )
+    high = _object(
+        "UCOS-TEST-HIGH-0001",
+        universe="INVERTED",
+        authority=KnowledgeAuthority.CONSTITUTIONAL,
+        dependencies=("UCOS-TEST-LOW-0001", "UCOS-TEST-ELSEWHERE-0001"),
+    )
+    intake = KnowledgeIntake.from_base(KnowledgeBase((low, high)), source="test")
+    plan = PlanningEngine().plan(intake)
+    composition, _findings = CompositionEngine().compose(intake, plan)
+    manifest = GenerationEngine().generate(intake, plan, composition)
+    rendered = "\n".join(
+        artifact.content
+        for artifact in manifest.artifacts
+        if artifact.relative_path.endswith(".md")
+    )
+    assert "authority-inversion" in rendered
+
+
+def test_a_plan_step_binding_an_object_the_store_does_not_hold_is_refused(pipeline) -> None:
+    """Composition binds a step to canonical objects. A step citing one the store never held
+    would produce a unit anchored to an id nothing can resolve, and the artifact's provenance
+    would name it anyway."""
+    from dataclasses import replace as _replace
+
+    from intelligence.realization.errors import CompositionError
+
+    intake, plan, _composition, _findings, _manifest = pipeline
+    step = plan.steps[0]
+    forged = _replace(
+        plan,
+        steps=(
+            _replace(step, source_ckos=(*step.source_ckos, "UCOS-NOBODY-AUTHORED-0001")),
+            *plan.steps[1:],
+        ),
+    )
+    with pytest.raises(CompositionError, match="absent from the store"):
+        CompositionEngine()._units(intake, forged)
+
+
+def test_a_path_inside_the_repository_and_outside_the_frozen_corpus_is_permitted(
+    tmp_path,
+) -> None:
+    """The refusals are measured elsewhere. This is the other half: a path under the repository
+    that is NOT frozen must pass, or the guard would refuse every in-repository artifact root
+    and the engine could only ever write outside the tree it belongs to."""
+    from intelligence.realization.evidence import _guard_writable
+
+    implementer = ImplementationEngine(RealizationConfig.create(REPO, artifact_root=REPO))
+    implementer._assert_not_frozen(REPO / "engine" / "probe.json", "engine/probe.json")
+    _guard_writable(RealizationConfig.create(REPO, evidence_dir=REPO / "engine"), REPO / "engine")
+
+
+def test_the_engine_composes_from_a_state_it_derives_for_itself() -> None:
+    """`compose()` is the public step a caller uses without holding an intake or a plan. One
+    that required them would make the stage unusable except from inside the pipeline."""
+    engine = RealizationIntelligenceEngine()
+    composition, findings = engine.compose()
+    assert composition.units
+    assert findings.to_dict()
+
+
+def test_the_convenience_realize_entry_point_runs_the_whole_pipeline(tmp_path) -> None:
+    """The module-level function is what a caller outside this package uses; one that drifted
+    from the engine would give two answers to "was this realization governed"."""
+    from intelligence.realization.engine import realize as realize_repository
+
+    result = realize_repository(_config(tmp_path), dry_run=True, emit=False)
+    assert result.governed
+    assert result.summary()["verdict"] == VERDICT_GOVERNED
+
+
+def test_a_refused_decision_materializes_nothing(tmp_path, monkeypatch) -> None:
+    """Governance is a precondition of materialization, not a report about it. A run that wrote
+    first and adjudicated afterwards would leave a refused realization on disk."""
+    import intelligence.realization.governance as governance_module
+
+    real = governance_module.RealizationGovernor.adjudicate
+
+    def _refusing(self, **kwargs):  # noqa: ANN001, ANN003, ANN202
+        from dataclasses import replace as _replace
+
+        decision = real(self, **kwargs)
+        # `governed` is DERIVED from the gates, so refusing means failing one — there is no
+        # verdict field to set, which is the point of deriving it.
+        first = decision.gates[0]
+        return _replace(
+            decision,
+            gates=(
+                _replace(first, failures=("a gate refused",)),
+                *decision.gates[1:],
+            ),
+        )
+
+    monkeypatch.setattr(governance_module.RealizationGovernor, "adjudicate", _refusing)
+    config = _config(tmp_path)
+    result = RealizationIntelligenceEngine(config).realize(dry_run=False, strict=False, emit=False)
+    assert not result.governed
+    assert not (config.artifact_root / "UCOS-URI-MANIFEST.json").exists()
+
+
+def test_pruning_runs_only_on_a_materializing_run(tmp_path) -> None:
+    """A dry run writes nothing, so pruning inside one would delete artifacts a real run put
+    there while claiming to have changed nothing."""
+    engine = RealizationIntelligenceEngine(_config(tmp_path))
+    result = engine.realize(dry_run=False, strict=False, emit=False, prune=True)
+    assert result.governed
+    assert (engine.config.artifact_root / "UCOS-URI-MANIFEST.json").is_file()
+
+
+def test_a_boundary_rule_skips_an_edge_whose_far_end_this_unit_does_not_hold(pipeline) -> None:
+    """The descriptor speaks for one unit. An edge reaching an object the unit does not bind has
+    no rank here, and ranking it anyway would compare an authority this descriptor never read."""
+    from dataclasses import replace as _replace
+
+    from intelligence.realization.generators.architecture import ArchitectureGenerator
+    from intelligence.realization.generators.base import GenerationContext
+
+    intake, plan, composition, _findings, _manifest = pipeline
+    unit = next(
+        u
+        for u in composition.units
+        if len(plan.target(u.target_id).edges) > 0 and len(u.bound_ckos) > 1
+    )
+    target = plan.target(unit.target_id)
+    narrowed = _replace(unit, bound_ckos=unit.bound_ckos[:1])
+    context = GenerationContext(
+        intake=intake, plan=plan, composition=composition, unit=narrowed, target=target
+    )
+    assert ArchitectureGenerator()._boundary_rules(context) == []
+
+
+def test_a_plan_whose_upstream_universe_has_no_target_orders_what_it_can(pipeline) -> None:
+    """A dependency into a universe the intake did not derive a target for cannot be ordered
+    against, and inventing a step for it would put a phantom into the wave graph."""
+    from dataclasses import replace as _replace
+
+    intake = _two_universe_intake()
+    downstream_only = _replace(
+        intake, targets=tuple(t for t in intake.targets if t.universe == "DOWNSTREAM")
+    )
+    plan = PlanningEngine().plan(downstream_only)
+    assert {step.universe for step in plan.steps} == {"DOWNSTREAM"}
+
+
+def test_the_sql_projection_indexes_only_the_columns_the_record_carries(pipeline) -> None:
+    """Three columns are indexed because every canonical record carries them. A projection over
+    a record that does not would emit an index on a column that is not in the table, and the
+    DDL would not execute."""
+    from intelligence.realization.generators.base import GenerationContext
+    from intelligence.realization.generators.schema import SchemaGenerator
+
+    intake, plan, composition, _findings, _manifest = pipeline
+    unit = composition.units[0]
+    context = GenerationContext(
+        intake=intake,
+        plan=plan,
+        composition=composition,
+        unit=unit,
+        target=plan.target(unit.target_id),
+    )
+    ddl = "\n".join(
+        SchemaGenerator()._ddl(context, [{"name": "cko_id", "type": "string", "nullable": False}])
+    )
+    assert "CREATE INDEX" not in ddl
+    full = "\n".join(SchemaGenerator()._ddl(context, SchemaGenerator()._infer_fields(context)))
+    assert "CREATE INDEX" in full
