@@ -110,4 +110,4 @@
 
 No family receives privileged treatment; an unrecognized family would appear here automatically with the same axes.
 
-*Seal `b22cdda79f7e66cc` · END 03 · AUTHORITY = NONE (DERIVED TRUTH).*
+*Seal `5d5ab43d677f17f3` · END 03 · AUTHORITY = NONE (DERIVED TRUTH).*
