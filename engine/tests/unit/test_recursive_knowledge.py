@@ -1967,3 +1967,94 @@ def test_two_conditions_with_the_same_signature_are_refused(declaration, monkeyp
     monkeypatch.setattr(composition_module, "signature", lambda expression: "one-signature")
     problems = contract.expressiveness_is_preserved_within_bounds(_forge(declaration))
     assert any("catalogue collision" in p for p in problems), problems
+
+
+# --- URKE-L-26: the research-generation refusals ------------------------------------------------
+
+
+def test_a_gap_that_generates_no_research_subject_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(research, "research_for", lambda store, identity: ())
+    problems = contract.unresolved_generates_research(_forge(declaration))
+    assert any("did not generate a research subject" in p for p in problems), problems
+
+
+def test_a_research_subject_missing_a_declared_facet_is_refused(declaration, monkeypatch):
+    real = research.open_research
+
+    def stripped(*args, **kwargs):
+        opened = real(*args, **kwargs)
+        facet = declaration.research_facets[0]
+        return dataclasses.replace(
+            opened, payload={k: v for k, v in opened.payload.items() if k != facet}
+        )
+
+    monkeypatch.setattr(research, "open_research", stripped)
+    problems = contract.unresolved_generates_research(_forge(declaration))
+    assert any("carries no" in p for p in problems), problems
+
+
+def test_a_contradiction_generating_the_wrong_consequence_count_is_refused(
+    declaration, monkeypatch
+):
+    monkeypatch.setattr(subjects, "generate_consequences", lambda store, identity, owner: ())
+    problems = contract.unresolved_generates_research(_forge(declaration))
+    assert any("consequences and" in p for p in problems), problems
+
+
+def test_a_reflexive_form_that_cannot_be_admitted_is_reported(declaration, monkeypatch):
+    def refuse(*args, **kwargs):
+        raise RecursiveKnowledgeError("relate refused for the test")
+
+    monkeypatch.setattr(ledger_module, "relate", refuse)
+    problems = contract.unresolved_generates_research(_forge(declaration))
+    assert any("could not be admitted" in p for p in problems), problems
+
+
+def test_admitting_reflexive_knowledge_that_changes_the_package_is_refused(
+    declaration, monkeypatch
+):
+    calls = {"n": 0}
+
+    def drifting(self):
+        calls["n"] += 1
+        return f"fingerprint-{calls['n']}"
+
+    monkeypatch.setattr(contract.Probe, "fingerprint", drifting)
+    problems = contract.unresolved_generates_research(_forge(declaration))
+    assert any("changed this package" in p for p in problems), problems
+
+
+# --- URKE-L-30: representation without understanding --------------------------------------------
+
+
+def test_an_unintelligible_construct_refused_admission_is_reported(declaration, monkeypatch):
+    # The law's claim is that the LEAST understood thing imaginable is still admissible.
+    # Refusing it is the violation, and the law returns early because nothing follows from a
+    # construct that never entered.
+    real = subjects.record_gap
+
+    def refuse_only_this_one(store, **kwargs):
+        # Narrow on purpose: the ledger seeds itself through record_gap, so refusing every
+        # call would break construction and never reach the law.
+        if kwargs.get("natural_key") == "law30/not-understood":
+            raise RecursiveKnowledgeError("admission refused for the test")
+        return real(store, **kwargs)
+
+    monkeypatch.setattr(subjects, "record_gap", refuse_only_this_one)
+    problems = contract.representation_requires_no_understanding(_forge(declaration))
+    assert any("refused admission" in p for p in problems), problems
+    # The law returns early: nothing follows from a construct that never entered.
+    assert len(problems) == 1, problems
+
+
+def test_an_unintelligible_construct_reaching_no_disposition_is_refused(declaration, monkeypatch):
+    real = bridge.govern
+
+    def ungoverned(store):
+        outcome = real(store)
+        every = tuple(subject.identity for subject in store.all())
+        return {**outcome, "ungoverned": every}
+
+    monkeypatch.setattr(bridge, "govern", ungoverned)
+    problems = contract.representation_requires_no_understanding(_forge(declaration))
+    assert any("reached no disposition" in p for p in problems), problems
