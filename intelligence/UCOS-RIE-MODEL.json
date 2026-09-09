@@ -2112,8 +2112,11 @@
         "DependencyError",
         "DependencyResolver",
         "Entity",
+        "Federation",
+        "Frame",
         "GapReport",
         "Index",
+        "IsolationError",
         "OptimizationError",
         "OptimizedBlueprint",
         "Optimizer",
@@ -2121,6 +2124,7 @@
         "Packager",
         "PackagingError",
         "ParseError",
+        "Partition",
         "PipelineError",
         "Provenance",
         "PublishedArtifact",
@@ -2134,9 +2138,11 @@
         "SigningError",
         "Stage",
         "TypeBinding",
+        "UnboundedMemberError",
         "ValidationError",
         "ValidationReport",
         "assert_acyclic",
+        "authorised_crossings",
         "cycles",
         "data_compiler",
         "deserialize",
@@ -2154,10 +2160,13 @@
         "parse_document",
         "parse_text",
         "parser",
+        "partition",
         "pipeline",
         "provenance_chain",
         "publishing",
         "python_type",
+        "resolve_frames",
+        "resolve_partitions",
         "resolver",
         "serialization",
         "serialize",
@@ -2659,6 +2668,38 @@
     },
     {
       "authority": "EC-1 CERTIFIED",
+      "canonical_location": "engine/coordinate_framework",
+      "canonical_name": "engine.coordinate_framework",
+      "category": "engine",
+      "description": "UCCFA-000001 — the Universal Coordinate Framework Alignment programme.",
+      "evidence_present": true,
+      "implementation_status": "CERTIFIED",
+      "replacement_prohibited": true,
+      "reuse": "REUSE_AS_IS/COMPOSE",
+      "summary": "UCCFA-000001 — the Universal Coordinate Framework Alignment programme. The root ontology has a gate; the coordinate framework beside it had none. ONT-05 through ONT-10 appear in no ``.py`` file in this repository, so every field of ``uccfa-declaration.json`` was unenforced text — which is the condition UEC-L-07 counts and the condition the declaration itself exists to complain about. This package is the consumer that makes those five coordinates measurable. It owns no ontology. ``01-WORKING/ONTOLOGY-REGISTER.md`` PART B owns the coordinates and SUP-02 fixes their standing; every law here reads those surfaces and can introduce nothing. THE PACKAGE IS THE IMPORT SURFACE, and that is a measured requirement rather than a style. When this module re-exported nothing, every consumer named a SUBMODULE — ``.contract``, ``.gate`` — and nothing named the package, so Ω-4 counted it among the artifacts \"no import, plane or entry point reaches\": 52 against a best-ever 51, on a ratchet that may fall and never rise. A package whose root nothing imports is unreachable by the language's own reckoning, whatever runs underneath it.",
+      "symbols": [
+        "CoordinateAlignmentError",
+        "CoordinateContract",
+        "assess",
+        "check_every_coordinate_is_declared_by_the_register",
+        "check_no_element_is_both_primitive_and_coordinate",
+        "check_standing_matches_the_ratification_record",
+        "check_the_coordinate_set_is_total_over_the_equation",
+        "check_the_superseded_element_is_dispositioned",
+        "check_the_two_bindings_are_the_omega_law_dimensions",
+        "contract",
+        "declaration_path",
+        "gate",
+        "load_contract",
+        "load_declaration",
+        "main",
+        "measure",
+        "repo_root"
+      ],
+      "unique_id": "RC-16"
+    },
+    {
+      "authority": "EC-1 CERTIFIED",
       "canonical_location": "engine/determinism",
       "canonical_name": "engine.determinism",
       "category": "engine",
@@ -2690,7 +2731,7 @@
         "main",
         "reproduce"
       ],
-      "unique_id": "RC-16"
+      "unique_id": "RC-17"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2736,7 +2777,7 @@
         "evidence",
         "main"
       ],
-      "unique_id": "RC-17"
+      "unique_id": "RC-18"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2773,13 +2814,16 @@
         "discovered_enforcement_is_governed",
         "discovery",
         "discovery_rules_are_non_vacuous",
+        "engines_outside_the_canonical_lane",
         "engines_with_no_invoker",
         "engines_without_a_refusal_witness",
         "engines_without_a_test",
+        "every_ci_gate_is_reachable_from_the_canonical_lane",
         "every_declaration_is_consumed",
         "every_engine_has_a_test",
         "every_engine_has_an_invoker",
         "every_engine_is_witnessed_refusing",
+        "every_workflow_can_run",
         "gate",
         "inventory",
         "invocation_corpus",
@@ -2806,9 +2850,10 @@
         "test_bindings",
         "test_corpus",
         "tracked_paths",
-        "withdrawals_are_reasoned_and_capped"
+        "withdrawals_are_reasoned_and_capped",
+        "workflows_that_cannot_run"
       ],
-      "unique_id": "RC-18"
+      "unique_id": "RC-19"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2871,7 +2916,7 @@
         "unexpected_executables",
         "write"
       ],
-      "unique_id": "RC-19"
+      "unique_id": "RC-20"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2925,7 +2970,7 @@
         "seam_phase",
         "unregister_generation_phase"
       ],
-      "unique_id": "RC-20"
+      "unique_id": "RC-21"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2958,7 +3003,7 @@
         "service",
         "workflow"
       ],
-      "unique_id": "RC-21"
+      "unique_id": "RC-22"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2972,7 +3017,7 @@
       "reuse": "REUSE_AS_IS/COMPOSE",
       "summary": "EC-1 Foundation layer (IMP-001). Public API surface for configuration, observability (errors, logging, telemetry), versioned contracts, and the frozen-path guard.",
       "symbols": [],
-      "unique_id": "RC-22"
+      "unique_id": "RC-23"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -2996,7 +3041,7 @@
         "strategy_names",
         "unresolved_keys"
       ],
-      "unique_id": "RC-23"
+      "unique_id": "RC-24"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3016,7 +3061,7 @@
         "config",
         "load_config"
       ],
-      "unique_id": "RC-24"
+      "unique_id": "RC-25"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3038,7 +3083,7 @@
         "disclosure",
         "disclosure_present"
       ],
-      "unique_id": "RC-25"
+      "unique_id": "RC-26"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3057,7 +3102,7 @@
         "frozen_paths",
         "main"
       ],
-      "unique_id": "RC-26"
+      "unique_id": "RC-27"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3095,7 +3140,7 @@
         "telemetry",
         "trace"
       ],
-      "unique_id": "RC-27"
+      "unique_id": "RC-28"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3134,7 +3179,7 @@
         "pipeline",
         "report"
       ],
-      "unique_id": "RC-28"
+      "unique_id": "RC-29"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3210,7 +3255,7 @@
         "visualization",
         "write_evidence"
       ],
-      "unique_id": "RC-29"
+      "unique_id": "RC-30"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3274,7 +3319,7 @@
         "visualization",
         "write_evidence"
       ],
-      "unique_id": "RC-30"
+      "unique_id": "RC-31"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3333,7 +3378,7 @@
         "scan_occurrences",
         "undisclosed"
       ],
-      "unique_id": "RC-31"
+      "unique_id": "RC-32"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3395,7 +3440,7 @@
         "registry",
         "seed"
       ],
-      "unique_id": "RC-32"
+      "unique_id": "RC-33"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3494,7 +3539,7 @@
         "validate_base",
         "validation"
       ],
-      "unique_id": "RC-33"
+      "unique_id": "RC-34"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3600,7 +3645,7 @@
         "reuse",
         "traceability"
       ],
-      "unique_id": "RC-34"
+      "unique_id": "RC-35"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3763,7 +3808,7 @@
         "verify_evidence",
         "write_evidence"
       ],
-      "unique_id": "RC-35"
+      "unique_id": "RC-36"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3793,7 +3838,7 @@
         "preimage_digest",
         "read_preimage_bytes"
       ],
-      "unique_id": "RC-36"
+      "unique_id": "RC-37"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3846,7 +3891,7 @@
         "validate",
         "verify"
       ],
-      "unique_id": "RC-37"
+      "unique_id": "RC-38"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -3963,7 +4008,7 @@
         "validate",
         "verify_manifest_alignment"
       ],
-      "unique_id": "RC-38"
+      "unique_id": "RC-39"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4038,7 +4083,7 @@
         "summarize",
         "supersede"
       ],
-      "unique_id": "RC-39"
+      "unique_id": "RC-40"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4086,7 +4131,7 @@
         "unattributed",
         "vocabulary_report"
       ],
-      "unique_id": "RC-40"
+      "unique_id": "RC-41"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4138,7 +4183,7 @@
         "encoding",
         "transformation"
       ],
-      "unique_id": "RC-41"
+      "unique_id": "RC-42"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4205,7 +4250,7 @@
         "positions_of",
         "render"
       ],
-      "unique_id": "RC-42"
+      "unique_id": "RC-43"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4308,7 +4353,7 @@
         "unknown_population",
         "vocabulary_report"
       ],
-      "unique_id": "RC-43"
+      "unique_id": "RC-44"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4352,7 +4397,7 @@
         "selection",
         "strategy_names"
       ],
-      "unique_id": "RC-44"
+      "unique_id": "RC-45"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4393,7 +4438,7 @@
         "source",
         "volumes"
       ],
-      "unique_id": "RC-45"
+      "unique_id": "RC-46"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4465,7 +4510,7 @@
         "utc_clock",
         "version_ref"
       ],
-      "unique_id": "RC-46"
+      "unique_id": "RC-47"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4493,7 +4538,7 @@
         "validate",
         "verify"
       ],
-      "unique_id": "RC-47"
+      "unique_id": "RC-48"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4538,7 +4583,7 @@
         "parse",
         "repo_root"
       ],
-      "unique_id": "RC-48"
+      "unique_id": "RC-49"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4560,19 +4605,16 @@
         "DisclosureError",
         "ExecutionPlan",
         "ExecutionPlanError",
-        "Federation",
         "OrchestrationError",
         "PlanStep",
         "ProvenanceValidationError",
         "PublishedPackage",
-        "ReferenceFrame",
         "ReferenceFrameError",
         "RollbackDescriptor",
         "RuntimeAssemblyError",
         "RuntimeComposer",
         "RuntimeComposition",
         "RuntimeCompositionError",
-        "RuntimeContext",
         "RuntimeGraph",
         "RuntimeGraphError",
         "RuntimeOrchestration",
@@ -4605,7 +4647,7 @@
         "resolve_reference_frames",
         "rollback"
       ],
-      "unique_id": "RC-49"
+      "unique_id": "RC-50"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4635,7 +4677,7 @@
         "record_execution_evidence",
         "validate_execution"
       ],
-      "unique_id": "RC-50"
+      "unique_id": "RC-51"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4742,7 +4784,7 @@
         "validate_replay",
         "verify_continuation"
       ],
-      "unique_id": "RC-51"
+      "unique_id": "RC-52"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4765,7 +4807,7 @@
         "main",
         "ungoverned_directories"
       ],
-      "unique_id": "RC-52"
+      "unique_id": "RC-53"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4802,7 +4844,7 @@
         "preserve_context",
         "validate_ordering"
       ],
-      "unique_id": "RC-53"
+      "unique_id": "RC-54"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4853,7 +4895,7 @@
         "sample_volumes",
         "source"
       ],
-      "unique_id": "RC-54"
+      "unique_id": "RC-55"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -4941,7 +4983,7 @@
         "test_zero_overlap_fails",
         "valid_subject"
       ],
-      "unique_id": "RC-55"
+      "unique_id": "RC-56"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5049,7 +5091,7 @@
         "valid_report",
         "valid_subject"
       ],
-      "unique_id": "RC-56"
+      "unique_id": "RC-57"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5233,7 +5275,7 @@
         "test_unknown_is_a_valid_state_in_every_population_that_declares_one",
         "view"
       ],
-      "unique_id": "RC-57"
+      "unique_id": "RC-58"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5352,7 +5394,7 @@
         "test_validate_rejects_a_record_deriving_from_nothing_registered",
         "test_validate_rejects_an_unresolvable_requirement"
       ],
-      "unique_id": "RC-58"
+      "unique_id": "RC-59"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5482,7 +5524,7 @@
         "test_two_owners_is_as_incomplete_as_none",
         "test_unknown_clause_and_invariant_fail_closed"
       ],
-      "unique_id": "RC-59"
+      "unique_id": "RC-60"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5786,7 +5828,7 @@
         "test_write_evidence_writes_canonically",
         "universal_registry"
       ],
-      "unique_id": "RC-60"
+      "unique_id": "RC-61"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5848,7 +5890,7 @@
         "test_version_parse_and_str",
         "test_version_parse_invalid"
       ],
-      "unique_id": "RC-61"
+      "unique_id": "RC-62"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -5936,7 +5978,7 @@
         "test_registry_property",
         "volume"
       ],
-      "unique_id": "RC-62"
+      "unique_id": "RC-63"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6046,7 +6088,7 @@
         "test_withdrawing_an_undeclared_phase_is_refused",
         "workflow_blueprint"
       ],
-      "unique_id": "RC-63"
+      "unique_id": "RC-64"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6117,7 +6159,7 @@
         "valid_input",
         "valid_subject"
       ],
-      "unique_id": "RC-64"
+      "unique_id": "RC-65"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6238,7 +6280,7 @@
         "test_write_evidence_refuses_frozen_corpus",
         "test_write_evidence_to_tmp"
       ],
-      "unique_id": "RC-65"
+      "unique_id": "RC-66"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6481,7 +6523,7 @@
         "test_write_evidence_refuses_frozen_corpus",
         "test_write_evidence_returns_path"
       ],
-      "unique_id": "RC-66"
+      "unique_id": "RC-67"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6527,7 +6569,7 @@
         "test_sbom_verified",
         "test_signature_verified"
       ],
-      "unique_id": "RC-67"
+      "unique_id": "RC-68"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6625,7 +6667,7 @@
         "test_would_cycle_walk_detects_cycle_and_backedge",
         "test_would_cycle_walks_into_unregistered_target"
       ],
-      "unique_id": "RC-68"
+      "unique_id": "RC-69"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6794,7 +6836,7 @@
         "test_verification_packages_are_tagged_and_excluded_from_reuse",
         "test_write_all_is_deterministic"
       ],
-      "unique_id": "RC-69"
+      "unique_id": "RC-70"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -6932,7 +6974,7 @@
         "test_vocabularies_stable_and_complete",
         "test_workstreams"
       ],
-      "unique_id": "RC-70"
+      "unique_id": "RC-71"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7347,7 +7389,7 @@
         "test_the_chain_reports_the_stages_it_carries",
         "test_the_cited_source_is_part_of_what_is_sealed"
       ],
-      "unique_id": "RC-71"
+      "unique_id": "RC-72"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7619,7 +7661,7 @@
         "test_without_the_flag_the_producer_writes_nothing",
         "test_write_refuses_the_context_projection"
       ],
-      "unique_id": "RC-72"
+      "unique_id": "RC-73"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -7940,7 +7982,7 @@
         "test_unmeasured_and_unmeasurable_are_different_states",
         "test_with_label_does_not_mutate_the_coordinate_it_was_asked_about"
       ],
-      "unique_id": "RC-73"
+      "unique_id": "RC-74"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -8177,7 +8219,7 @@
         "tracked_tree",
         "untracked_tree"
       ],
-      "unique_id": "RC-74"
+      "unique_id": "RC-75"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -8253,7 +8295,7 @@
         "test_validate_fails_when_provider_contract_malformed",
         "test_validate_fails_when_provider_has_no_capability"
       ],
-      "unique_id": "RC-75"
+      "unique_id": "RC-76"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -8668,7 +8710,7 @@
         "test_no_resolution_leaves_every_populated_category_unknown",
         "test_no_two_objects_state_the_identical_definition"
       ],
-      "unique_id": "RC-76"
+      "unique_id": "RC-77"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -8801,6 +8843,8 @@
         "test_a_change_to_the_selector_itself_escalates",
         "test_a_changed_count_on_a_commentary_site_is_not_enforced",
         "test_a_changed_count_on_a_historical_site_is_refused",
+        "test_a_changed_declaration_changes_the_reported_identity",
+        "test_a_check_no_declared_law_names_is_a_fault",
         "test_a_check_no_law_claims_is_refused",
         "test_a_claim_above_its_evidence_floor_is_recorded_not_downgraded",
         "test_a_class_declared_by_two_planes_is_refused",
@@ -8834,11 +8878,15 @@
         "test_a_cycle_in_an_acyclic_family_is_refused",
         "test_a_cycle_in_the_faculty_relation_closes_the_gate",
         "test_a_declaration_missing_a_required_key_aborts_fail_closed",
+        "test_a_declaration_missing_a_required_section_is_a_fault",
         "test_a_declaration_missing_a_section_is_refused",
+        "test_a_declaration_missing_a_stated_field_is_a_fault",
+        "test_a_declaration_missing_a_stated_object_is_a_fault",
         "test_a_declaration_missing_any_section_faults",
         "test_a_declaration_that_is_not_a_json_object_is_refused",
         "test_a_declaration_that_is_not_an_object_is_a_fault",
         "test_a_declaration_that_is_not_an_object_is_refused",
+        "test_a_declaration_that_is_not_json_is_a_fault",
         "test_a_declaration_that_is_not_valid_json_is_refused",
         "test_a_declaration_with_no_laws_is_refused",
         "test_a_declared_binding_no_module_implements_is_reported",
@@ -8846,6 +8894,8 @@
         "test_a_declared_evidence_record_nothing_produces_is_a_fault",
         "test_a_declared_exclusion_carries_its_reason_through",
         "test_a_declared_isolated_object_runs_alone_and_first",
+        "test_a_declared_law_naming_a_check_that_does_not_exist_is_a_fault",
+        "test_a_declared_law_that_names_no_check_is_a_fault",
         "test_a_dependency_cycle_terminates",
         "test_a_dependency_on_an_undeclared_faculty_closes_the_gate",
         "test_a_derived_register_is_forbidden_from_being_born",
@@ -8906,6 +8956,7 @@
         "test_a_generated_marker_is_detected_by_content_not_path",
         "test_a_generated_marker_outranks_every_line_rule",
         "test_a_generated_projection_without_a_birth_record_passes",
+        "test_a_genuine_regeneration_still_advances_the_inherited_facts",
         "test_a_git_failure_is_reported_as_an_integrity_error_not_a_traceback",
         "test_a_governed_entry_naming_an_undeclared_rule_faults",
         "test_a_growing_vocabulary_is_not_a_violation",
@@ -9072,18 +9123,9 @@
         "test_a_relationship_type_without_a_pattern_is_refused",
         "test_a_release_state_no_register_admits_closes_the_gate",
         "test_a_removed_classification_is_refused",
-        "test_a_removed_register_is_refused",
-        "test_a_render_into_an_unwritable_destination_is_a_fault",
-        "test_a_rendered_surface_replays_and_a_hand_edit_does_not",
-        "test_a_renumbered_register_is_refused",
-        "test_a_reopened_self_evolution_gap_is_measured",
-        "test_a_reordered_history_is_refused_on_read",
-        "test_a_reordered_phase_ordinal_is_refused",
-        "test_a_reordered_register_list_is_refused",
-        "test_a_repaid_spawn_site_tightens_the_ceiling",
-        "test_a_report_that_names_no_coverage_document_still_renders"
+        "test_a_removed_register_is_refused"
       ],
-      "unique_id": "RC-77"
+      "unique_id": "RC-78"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -9204,7 +9246,7 @@
         "valid_report",
         "validation_input"
       ],
-      "unique_id": "RC-78"
+      "unique_id": "RC-79"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -9405,7 +9447,7 @@
         "test_transient_beats_every_other_rule",
         "test_transient_is_the_only_disposition_that_may_lack_an_authority"
       ],
-      "unique_id": "RC-79"
+      "unique_id": "RC-80"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -9467,7 +9509,7 @@
         "test_validate_runtime_unit_convenience",
         "valid_subject"
       ],
-      "unique_id": "RC-80"
+      "unique_id": "RC-81"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -9598,7 +9640,7 @@
         "verification_object",
         "verify_evolution"
       ],
-      "unique_id": "RC-81"
+      "unique_id": "RC-82"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -9839,7 +9881,7 @@
         "vocabulary_object",
         "write_projections"
       ],
-      "unique_id": "RC-82"
+      "unique_id": "RC-83"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -9935,7 +9977,7 @@
         "validate",
         "validation"
       ],
-      "unique_id": "RC-83"
+      "unique_id": "RC-84"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -10016,7 +10058,7 @@
         "pipeline",
         "rules"
       ],
-      "unique_id": "RC-84"
+      "unique_id": "RC-85"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -10092,7 +10134,7 @@
         "tracked_python",
         "write"
       ],
-      "unique_id": "RC-85"
+      "unique_id": "RC-86"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -10138,7 +10180,7 @@
         "gates",
         "validate_runtime_unit"
       ],
-      "unique_id": "RC-86"
+      "unique_id": "RC-87"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -10172,7 +10214,7 @@
         "repo_root",
         "working_tree_changes"
       ],
-      "unique_id": "RC-87"
+      "unique_id": "RC-88"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -10210,6 +10252,7 @@
         "build_test_registry",
         "cli",
         "collection_roots",
+        "combine_shards",
         "constitution",
         "cost_model",
         "decide",
@@ -10256,6 +10299,7 @@
         "select",
         "selection",
         "selection_is_derived",
+        "shard_indices_present",
         "split_currency",
         "stage_registry_reconciliation",
         "stages_reading",
@@ -10265,7 +10309,7 @@
         "unit_file",
         "verify_source"
       ],
-      "unique_id": "RC-88"
+      "unique_id": "RC-89"
     },
     {
       "authority": "EC-1 CERTIFIED",
@@ -10291,7 +10335,7 @@
         "type_decisions_in",
         "unenforced"
       ],
-      "unique_id": "RC-89"
+      "unique_id": "RC-90"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -10613,7 +10657,7 @@
         "validate_network",
         "validate_storage"
       ],
-      "unique_id": "RC-90"
+      "unique_id": "RC-91"
     },
     {
       "authority": "EC-3 BAND 13 (INFRASTRUCTURE) REALIZATION",
@@ -11028,7 +11072,7 @@
         "test_traceability_record_fingerprint_and_flags",
         "test_traceability_rooted_check"
       ],
-      "unique_id": "RC-91"
+      "unique_id": "RC-92"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -11047,7 +11091,7 @@
         "main",
         "portal"
       ],
-      "unique_id": "RC-92"
+      "unique_id": "RC-93"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -11101,7 +11145,7 @@
         "subsystem_config",
         "validation"
       ],
-      "unique_id": "RC-93"
+      "unique_id": "RC-94"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -11153,7 +11197,7 @@
         "renderers",
         "validation"
       ],
-      "unique_id": "RC-94"
+      "unique_id": "RC-95"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -11250,7 +11294,7 @@
         "verify_bundle",
         "verify_seal"
       ],
-      "unique_id": "RC-95"
+      "unique_id": "RC-96"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -11284,7 +11328,7 @@
         "schema",
         "tests"
       ],
-      "unique_id": "RC-96"
+      "unique_id": "RC-97"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -11327,7 +11371,7 @@
         "standards",
         "validation"
       ],
-      "unique_id": "RC-97"
+      "unique_id": "RC-98"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -11381,7 +11425,7 @@
         "sha256_file",
         "sha256_text"
       ],
-      "unique_id": "RC-98"
+      "unique_id": "RC-99"
     },
     {
       "authority": "ADDITIVE (AUTHORITY=NONE)",
@@ -11621,7 +11665,7 @@
         "test_verify_reports_an_artifact_that_is_absent_entirely",
         "test_write_all_is_deterministic"
       ],
-      "unique_id": "RC-99"
+      "unique_id": "RC-100"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11635,7 +11679,7 @@
       "reuse": "REUSE/COMPOSE",
       "summary": "UCOS EC-2 ``platform`` package root — stdlib-safe shim. The EC-2 Platform Realization Program's authoritative deliverable path is ``platform/foundation/`` (per ``06-IMPLEMENTATION/UCOS-EC-2-PLATFORM-REALIZATION-PROGRAM.md``). Because ``platform`` is also the name of a Python standard-library module, a naive package here would *shadow* the stdlib module for the whole interpreter and break tooling (pytest, coverage, setuptools all ``import platform``). To honor the mandated deliverable path **without** breaking the toolchain, this package is a **transparent shim**: it loads the genuine standard-library ``platform`` module by file location and re-exports its public API into this package namespace. Therefore: * ``import platform`` → exposes the real stdlib API (``system()``, ``python_version()``, ``machine()``, …) — tooling is unaffected; * ``import platform.foundation`` → resolves the EC-2 Platform Foundation, because this remains a real package with a ``__path__``. This shim is additive and reads nothing from the certified corpus. It is *not* an EC-2 foundation module; it exists solely to reconcile the reserved package name.",
       "symbols": [],
-      "unique_id": "RC-100"
+      "unique_id": "RC-101"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11705,7 +11749,7 @@
         "search",
         "service"
       ],
-      "unique_id": "RC-101"
+      "unique_id": "RC-102"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11761,7 +11805,7 @@
         "search",
         "service"
       ],
-      "unique_id": "RC-102"
+      "unique_id": "RC-103"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11858,7 +11902,7 @@
         "validation",
         "versioning"
       ],
-      "unique_id": "RC-103"
+      "unique_id": "RC-104"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -11933,7 +11977,7 @@
         "status",
         "validate_governance"
       ],
-      "unique_id": "RC-104"
+      "unique_id": "RC-105"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12076,7 +12120,7 @@
         "sum_money",
         "validation"
       ],
-      "unique_id": "RC-105"
+      "unique_id": "RC-106"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12138,7 +12182,7 @@
         "service",
         "top_level_symbols"
       ],
-      "unique_id": "RC-106"
+      "unique_id": "RC-107"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12188,7 +12232,7 @@
         "service",
         "views"
       ],
-      "unique_id": "RC-107"
+      "unique_id": "RC-108"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12309,7 +12353,7 @@
         "services",
         "trust"
       ],
-      "unique_id": "RC-108"
+      "unique_id": "RC-109"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12384,7 +12428,7 @@
         "status",
         "validate_transition"
       ],
-      "unique_id": "RC-109"
+      "unique_id": "RC-110"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12441,7 +12485,7 @@
         "service",
         "sessions"
       ],
-      "unique_id": "RC-110"
+      "unique_id": "RC-111"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12505,7 +12549,7 @@
         "service",
         "source"
       ],
-      "unique_id": "RC-111"
+      "unique_id": "RC-112"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12564,7 +12608,7 @@
         "service",
         "traces"
       ],
-      "unique_id": "RC-112"
+      "unique_id": "RC-113"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12632,7 +12676,7 @@
         "service",
         "workspace"
       ],
-      "unique_id": "RC-113"
+      "unique_id": "RC-114"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12702,7 +12746,7 @@
         "status",
         "validate_transition"
       ],
-      "unique_id": "RC-114"
+      "unique_id": "RC-115"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12716,7 +12760,7 @@
       "reuse": "REUSE/COMPOSE",
       "summary": "UCOS Ω∞ — Provider implementations and the provider catalog (Terminal-04). This package sits **outside** the Universal Provider Architecture (:mod:`platform.universal_provider`) by design. The framework must not know that any particular provider exists, so provider implementations live here and reach the framework only as **data**: * ``catalog/`` — JSON provider manifests. Discovery reads this directory; the framework has no compiled knowledge of its contents. * ``repository/`` — the Repository provider, the reference implementation. It is built on :class:`~platform.universal_provider.sdk.BaseProvider` and is reached exclusively through the ``entry_point`` string declared in its manifest. * ``TEMPLATE.provider.json`` — the copy-me manifest for a new provider. It is deliberately *not* inside ``catalog/`` so it is never discovered. Onboarding a provider is therefore two acts, neither of which touches the framework: 1. add a manifest to ``catalog/`` declaring identity, capabilities, and entry point; 2. add a module exposing that entry point. The framework's own gate ``PV-02-KIND-OPEN`` scans :mod:`platform.universal_provider` for the provider under validation and fails if it finds it — so this separation is enforced, not merely intended.",
       "symbols": [],
-      "unique_id": "RC-115"
+      "unique_id": "RC-116"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12737,7 +12781,7 @@
         "repository_descriptor",
         "repository_root"
       ],
-      "unique_id": "RC-116"
+      "unique_id": "RC-117"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12888,7 +12932,7 @@
         "validation",
         "validation_records"
       ],
-      "unique_id": "RC-117"
+      "unique_id": "RC-118"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -12944,7 +12988,7 @@
         "subjects",
         "subprocess_command_runner"
       ],
-      "unique_id": "RC-118"
+      "unique_id": "RC-119"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -13030,7 +13074,7 @@
         "status",
         "validate_governance"
       ],
-      "unique_id": "RC-119"
+      "unique_id": "RC-120"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -13118,7 +13162,7 @@
         "validate_trajectory",
         "workflow"
       ],
-      "unique_id": "RC-120"
+      "unique_id": "RC-121"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -13246,7 +13290,7 @@
         "zone_may_mutate",
         "zones"
       ],
-      "unique_id": "RC-121"
+      "unique_id": "RC-122"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -13661,7 +13705,7 @@
         "test_a_contribution_the_policy_never_declared_is_collected_and_flagged",
         "test_a_convention_a_layer_has_established_is_expected_of_its_peers"
       ],
-      "unique_id": "RC-122"
+      "unique_id": "RC-123"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -13719,7 +13763,7 @@
         "pipeline",
         "register_assimilation"
       ],
-      "unique_id": "RC-123"
+      "unique_id": "RC-124"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -13847,7 +13891,7 @@
         "write_bundle",
         "write_json"
       ],
-      "unique_id": "RC-124"
+      "unique_id": "RC-125"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -13993,7 +14037,7 @@
         "truth",
         "version"
       ],
-      "unique_id": "RC-125"
+      "unique_id": "RC-126"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14127,7 +14171,7 @@
         "service",
         "specialization"
       ],
-      "unique_id": "RC-126"
+      "unique_id": "RC-127"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14186,7 +14230,7 @@
         "template_fingerprint",
         "templates"
       ],
-      "unique_id": "RC-127"
+      "unique_id": "RC-128"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14226,7 +14270,7 @@
         "record_plan",
         "replays"
       ],
-      "unique_id": "RC-128"
+      "unique_id": "RC-129"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14280,7 +14324,7 @@
         "policy_service_descriptor",
         "register_measurement_policies"
       ],
-      "unique_id": "RC-129"
+      "unique_id": "RC-130"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14352,7 +14396,7 @@
         "recommendation",
         "register_ownership"
       ],
-      "unique_id": "RC-130"
+      "unique_id": "RC-131"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14496,7 +14540,7 @@
         "state_machine",
         "vocabulary"
       ],
-      "unique_id": "RC-131"
+      "unique_id": "RC-132"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14552,7 +14596,7 @@
         "universal_portal_contract",
         "universal_portal_health_report"
       ],
-      "unique_id": "RC-132"
+      "unique_id": "RC-133"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14598,7 +14642,7 @@
         "state_runtime",
         "version_index"
       ],
-      "unique_id": "RC-133"
+      "unique_id": "RC-134"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14720,7 +14764,7 @@
         "version_tuple",
         "write_evidence"
       ],
-      "unique_id": "RC-134"
+      "unique_id": "RC-135"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14773,7 +14817,7 @@
         "truth_contract_names",
         "truth_service_descriptor"
       ],
-      "unique_id": "RC-135"
+      "unique_id": "RC-136"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14842,7 +14886,7 @@
         "rules",
         "service"
       ],
-      "unique_id": "RC-136"
+      "unique_id": "RC-137"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14909,7 +14953,7 @@
         "validation_console_contract",
         "validation_console_health_checks"
       ],
-      "unique_id": "RC-137"
+      "unique_id": "RC-138"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -14975,7 +15019,7 @@
         "parse_config",
         "service"
       ],
-      "unique_id": "RC-138"
+      "unique_id": "RC-139"
     },
     {
       "authority": "EC-2 CLOSED/FROZEN",
@@ -15042,7 +15086,7 @@
         "workspace_contract",
         "workspace_health_checks"
       ],
-      "unique_id": "RC-139"
+      "unique_id": "RC-140"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -15457,7 +15501,7 @@
         "validate_execution",
         "validate_interface"
       ],
-      "unique_id": "RC-140"
+      "unique_id": "RC-141"
     },
     {
       "authority": "EC-3 BAND 11 (SERVICE) REALIZATION",
@@ -15872,7 +15916,7 @@
         "test_non_constitutive_check_fails_on_authority",
         "test_non_constitutive_check_fails_on_secret"
       ],
-      "unique_id": "RC-141"
+      "unique_id": "RC-142"
     },
     {
       "authority": "ACTIVE",
@@ -15886,7 +15930,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-142"
+      "unique_id": "RC-143"
     },
     {
       "authority": "ACTIVE",
@@ -15900,7 +15944,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-143"
+      "unique_id": "RC-144"
     },
     {
       "authority": "ACTIVE",
@@ -15914,7 +15958,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-144"
+      "unique_id": "RC-145"
     },
     {
       "authority": "ACTIVE (AUTHORITY=NONE)",
@@ -15928,7 +15972,7 @@
       "reuse": "REUSE/EXTEND",
       "summary": "",
       "symbols": [],
-      "unique_id": "RC-145"
+      "unique_id": "RC-146"
     },
     {
       "authority": "SPEC (AUTHORITY=NONE)",
@@ -15959,9 +16003,9 @@
       "unique_id": "SPEC-CCE"
     }
   ],
-  "capability_count": 147,
+  "capability_count": 148,
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "3e4cd4c3e52431981d78308a2f9f7acd337f6953ff7adbb1f337cfbe086013e3",
+  "content_hash": "4712aab6037688e33b70becf265a8b1203334d2dd459353184aa7ae92c1e0722",
   "dependency_graph": {
     "depends_on_acyclic": true,
     "layered_architecture_bottom_up": [
@@ -16060,7 +16104,7 @@
         "to": "SERVICE"
       }
     ],
-    "total_corpus_edges": 13801
+    "total_corpus_edges": 13807
   },
   "digital_twin": {
     "automation_readiness": "READY",
@@ -16075,14 +16119,14 @@
   },
   "evidence_state": {
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "627a678d1382144799bc2a0f39e5876748d60294782b3cf856718c51d9661876",
-      "00-BOOK/DATA/certification.json": "acea9004a7430f21bd2fbededaec0f3950438f6aa28e6c654c046a3a8133c48d",
-      "00-BOOK/DATA/control-tower.json": "d2c0d720b545d475a723d490ae1158fa3d09850a868625d6dd89e2edbe15410a",
+      "00-BOOK/DATA/artifacts.json": "ae9c1f6ad146b351d181226eee163b54e23d049c17cb5cf02932e51aa00cf15f",
+      "00-BOOK/DATA/certification.json": "c51a5ecbc75dbca8561d03fef31971205ef3176a18da41cfcabe1194c672c28d",
+      "00-BOOK/DATA/control-tower.json": "42f039e7f78b728a212b4e1d95dd2db8d12b1486a1658973d0872b6b28c036d6",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "337384d910c3654dbe586df938337558715647e49e7359ef1171ce32d1c1dd7a"
+      "00-BOOK/DATA/volumes.json": "d4a76730a46e653bca5dca001bc43cbb99068bcf9ff276c262b20397e4796e21"
     }
   },
-  "evidence_timestamp": "2026-09-05T06:38:24+00:00",
+  "evidence_timestamp": "2026-09-08T11:50:06+00:00",
   "execution_frontier": {
     "blocked": [
       {
@@ -16117,7 +16161,7 @@
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "d207c4a35676350267102360f0be73082f02c3a276a205e8892ae0c5d5ba112f",
+    "input_hash": "59501392a494054b02979448e36b99db7e17c5cf448f3b547ef6f6ab5629e6f8",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence file hash, which together pin the tracked state these outputs derive from. Coverage measurement (TEST_EXECUTION_STATE) is excluded per UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input.",
     "output_hash_field": "content_hash"
   },
@@ -16144,11 +16188,11 @@
           "test_functions": 916
         },
         "engine": {
-          "loc": 153340,
+          "loc": 154412,
           "root": "engine",
-          "source_files": 521,
-          "test_files": 348,
-          "test_functions": 6415
+          "source_files": 525,
+          "test_files": 349,
+          "test_functions": 6476
         },
         "infrastructure": {
           "loc": 22603,
@@ -16179,15 +16223,15 @@
           "test_functions": 1038
         }
       },
-      "total_loc": 386303,
-      "total_tests": 16465
+      "total_loc": 387375,
+      "total_tests": 16526
     },
     "corpus": {
-      "artifacts": 1684,
-      "edges": 13801,
-      "pages": 13173,
+      "artifacts": 1687,
+      "edges": 13807,
+      "pages": 13179,
       "status_histogram": {
-        "ACTIVE": 1563,
+        "ACTIVE": 1566,
         "CERTIFIED": 7,
         "COMPLETE": 63,
         "FINAL": 9,
@@ -16210,7 +16254,7 @@
     "dimensions_counted": 15,
     "per_dimension": {
       "architecture": {
-        "as_of": "2026-09-05T06:38:24+00:00",
+        "as_of": "2026-09-08T11:50:06+00:00",
         "literal_score": 1.0,
         "reconciled_score": 1.0,
         "source": "MANUAL",
@@ -16226,7 +16270,7 @@
         "status": "BLOCKED"
       },
       "certification": {
-        "as_of": "2026-09-05T06:38:24+00:00",
+        "as_of": "2026-09-08T11:50:06+00:00",
         "literal_score": 1.0,
         "reconciled_score": 1.0,
         "source": "MANUAL",
@@ -16242,7 +16286,7 @@
         "status": "IN_PROGRESS"
       },
       "execution": {
-        "as_of": "2026-09-05T06:38:24+00:00",
+        "as_of": "2026-09-08T11:50:06+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -16250,7 +16294,7 @@
         "status": "NOT_STARTED"
       },
       "functional_testing": {
-        "as_of": "2026-09-05T06:38:24+00:00",
+        "as_of": "2026-09-08T11:50:06+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -16266,7 +16310,7 @@
         "status": "IMPLEMENTED"
       },
       "integration_testing": {
-        "as_of": "2026-09-05T06:38:24+00:00",
+        "as_of": "2026-09-08T11:50:06+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -16282,7 +16326,7 @@
         "status": "BLOCKED"
       },
       "performance_testing": {
-        "as_of": "2026-09-05T06:38:24+00:00",
+        "as_of": "2026-09-08T11:50:06+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",
@@ -16290,7 +16334,7 @@
         "status": "NOT_STARTED"
       },
       "portfolio": {
-        "as_of": "2026-09-05T06:38:24+00:00",
+        "as_of": "2026-09-08T11:50:06+00:00",
         "literal_score": 0.5,
         "reconciled_score": 0.5,
         "source": "MANUAL",
@@ -16306,7 +16350,7 @@
         "status": "BLOCKED"
       },
       "release": {
-        "as_of": "2026-09-05T06:38:24+00:00",
+        "as_of": "2026-09-08T11:50:06+00:00",
         "literal_score": 0.0,
         "reconciled_score": 0.0,
         "source": "MANUAL",

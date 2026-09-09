@@ -12,7 +12,7 @@
     }
   ],
   "classification": "ADDITIVE INTELLIGENCE (machine-readable) — derived, non-authoritative",
-  "content_hash": "07ae60e22cdfdf85be50918127922f6646f5abb483d60ffbb6ff4cefc2911a99",
+  "content_hash": "98e4cf768e304d23c963f98eebd7e07189b24648295ca4324dbe17b3f2b003f5",
   "critical_path": [
     "Band 10 Data",
     "Band 11 Service",
@@ -27,19 +27,19 @@
   ],
   "evidence_state": {
     "evidence_files": {
-      "00-BOOK/DATA/artifacts.json": "627a678d1382144799bc2a0f39e5876748d60294782b3cf856718c51d9661876",
-      "00-BOOK/DATA/certification.json": "acea9004a7430f21bd2fbededaec0f3950438f6aa28e6c654c046a3a8133c48d",
-      "00-BOOK/DATA/control-tower.json": "d2c0d720b545d475a723d490ae1158fa3d09850a868625d6dd89e2edbe15410a",
+      "00-BOOK/DATA/artifacts.json": "ae9c1f6ad146b351d181226eee163b54e23d049c17cb5cf02932e51aa00cf15f",
+      "00-BOOK/DATA/certification.json": "c51a5ecbc75dbca8561d03fef31971205ef3176a18da41cfcabe1194c672c28d",
+      "00-BOOK/DATA/control-tower.json": "42f039e7f78b728a212b4e1d95dd2db8d12b1486a1658973d0872b6b28c036d6",
       "00-BOOK/DATA/twin.json": "c50247cea005c7c40ce60e45bbcceca231cc9836efa24f263da03c2312da4128",
-      "00-BOOK/DATA/volumes.json": "337384d910c3654dbe586df938337558715647e49e7359ef1171ce32d1c1dd7a"
+      "00-BOOK/DATA/volumes.json": "d4a76730a46e653bca5dca001bc43cbb99068bcf9ff276c262b20397e4796e21"
     }
   },
-  "evidence_timestamp": "2026-09-05T06:38:24+00:00",
+  "evidence_timestamp": "2026-09-08T11:50:06+00:00",
   "generation": {
     "anchor": "the containing commit — owned by version control, never restated here (UCOS-RFP-001 RFP-2)",
     "generator": "UCOS-RIE-001 Repository Intelligence Engine",
     "generator_version": "1.0.0",
-    "input_hash": "d207c4a35676350267102360f0be73082f02c3a276a205e8892ae0c5d5ba112f",
+    "input_hash": "59501392a494054b02979448e36b99db7e17c5cf448f3b547ef6f6ab5629e6f8",
     "input_hash_basis": "sha256 over the canonical evidence fingerprint — every 00-BOOK/DATA evidence file hash, which together pin the tracked state these outputs derive from. Coverage measurement (TEST_EXECUTION_STATE) is excluded per UCOS-P0-FCL-002-FIX-001 — it is not canonical identity input.",
     "output_hash_field": "content_hash"
   },
