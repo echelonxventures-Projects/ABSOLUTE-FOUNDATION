@@ -13,6 +13,8 @@ cannot be justified never reaches the arithmetic that would produce a confident 
 
 from __future__ import annotations
 
+import dataclasses
+
 import pytest
 
 from engine.omega_governance.reference.encoding import (
@@ -378,3 +380,111 @@ def test_the_default_clock_registry_ships_a_logical_clock() -> None:
     registry = default_clocks()
     assert "logical" in registry
     assert registry.report()["logical"]["scale"] == "LOGICAL_TICK"
+
+
+# ------------------------------------------------ rehydration, and the clock contract's refusals
+
+
+def test_a_label_that_names_no_calendar_is_refused() -> None:
+    """A rendering nobody can attribute to a calendar is a string, and reading it as a temporal
+    fact would credit this package with a civil claim it never made."""
+    coordinate = TemporalCoordinate(LOGICAL_FRAME, LOGICAL_TICK, TOTAL, (0,), "logical")
+    with pytest.raises(CoordinateError, match="must name the calendar"):
+        coordinate.with_label("   ", "some rendering")
+
+
+@pytest.mark.parametrize(
+    ("mutate", "message"),
+    [
+        (lambda record: record.pop("frame"), "missing the required field 'frame'"),
+        (lambda record: record.__setitem__("position", "not a sequence"), "not a sequence"),
+        (lambda record: record.__setitem__("labels", "not a mapping"), "labels that are not"),
+    ],
+    ids=["missing-field", "position-not-a-sequence", "labels-not-a-mapping"],
+)
+def test_a_stored_coordinate_this_reader_cannot_rehydrate_is_refused(mutate, message) -> None:
+    """A partial coordinate would be rehydrated with an assumed frame, scale or ordering, which
+    is the assumption this type exists to make impossible."""
+    record = dict(
+        TemporalCoordinate(LOGICAL_FRAME, LOGICAL_TICK, TOTAL, (0,), "logical").as_record()
+    )
+    mutate(record)
+    with pytest.raises(CoordinateError, match=message):
+        from_record(
+            record,
+            frames=default_frames(),
+            scales=default_scales(),
+            orderings=default_orderings(),
+        )
+
+
+def test_a_coordinate_that_does_not_survive_a_round_trip_is_refused(monkeypatch) -> None:
+    """A register whose records change on read cannot be audited, so the round trip is performed
+    rather than argued — and the guard has to be shown to fire, or performing it proves nothing."""
+    coordinate = TemporalCoordinate(LOGICAL_FRAME, LOGICAL_TICK, TOTAL, (0,), "logical")
+    from engine.omega_governance.temporal import coordinate as coordinate_module
+
+    monkeypatch.setattr(
+        coordinate_module,
+        "from_record",
+        lambda record, **kwargs: TemporalCoordinate(
+            LOGICAL_FRAME, LOGICAL_TICK, TOTAL, (99,), "logical"
+        ),
+    )
+    with pytest.raises(CoordinateError, match="did not survive a storage round trip"):
+        assert_deterministic(
+            coordinate,
+            encoding=default_encoding(),
+            frames=default_frames(),
+            scales=default_scales(),
+            orderings=default_orderings(),
+        )
+
+
+def test_a_clock_that_identifies_as_nothing_cannot_be_registered() -> None:
+    """Replacing a registered clock silently would change the frame every subsequent record is
+    stamped in, so the registry is keyed by identifier — and "" is not one."""
+
+    class _Anonymous(LogicalClock):
+        def identifier(self) -> str:
+            return "   "
+
+    with pytest.raises(ClockError, match="must identify itself"):
+        ClockRegistry().register(_Anonymous())
+
+
+@pytest.mark.parametrize(
+    ("attribute", "message"),
+    [
+        ("frame", "declares frame"),
+        ("scale", "declares scale"),
+        ("ordering", "declares ordering"),
+    ],
+)
+def test_a_clock_whose_readings_contradict_its_own_declaration_is_refused(
+    attribute, message
+) -> None:
+    """A mislabelled unit makes every comparison it joins arithmetically wrong while appearing
+    well formed, which is why the contract is checked against readings rather than trusted."""
+    truthful = LogicalClock("probe")
+    reading = truthful.read()
+    replacements = {
+        "frame": {"frame": EARTH_FRAME},
+        "scale": {"scale": SI_SECOND},
+        "ordering": {"ordering": CAUSAL},
+    }
+
+    class _Contradicting(LogicalClock):
+        def read(self) -> TemporalCoordinate:
+            return dataclasses.replace(reading, **replacements[attribute])  # noqa: ANN201
+
+    with pytest.raises(ClockError, match=message):
+        assert_provider(_Contradicting("probe"), readings=1)
+
+
+def test_the_clock_factory_admits_a_clock_this_package_did_not_ship() -> None:
+    """Fresh rather than shared: constructing the logical clock in the factory is what keeps one
+    measurement's positions independent of another's."""
+    extra = LamportClock("federated")
+    registry = default_clocks((extra,))
+    assert registry.resolve("federated") is extra

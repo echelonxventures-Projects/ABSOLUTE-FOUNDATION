@@ -345,3 +345,157 @@ def test_a_relation_naming_an_inverse_nobody_declared_is_refused() -> None:
     registry.declare(Relation("ODD", "An outcome.", inverse="NEVER_DECLARED"))
     with pytest.raises(OrderingError):
         registry.inverse_of("ODD")
+
+
+# ------------------------------------------- the relations, the strategies and their refusals
+
+
+def test_a_relation_claiming_both_precedence_and_coincidence_is_refused() -> None:
+    """A position cannot both come before another and be the same position, and a relation
+    asserting it would make every comparison citing it uninterpretable."""
+    with pytest.raises(OrderingError, match="both precedence and coincidence"):
+        Relation(name="BOTH", ordered=True, coincident=True, inverse="BOTH")
+
+
+def test_a_precedence_relation_with_no_inverse_is_refused() -> None:
+    """Without an inverse, swapping the arguments has no defined answer and antisymmetry is
+    uncheckable — so the strategy could report a and b as both before each other."""
+    with pytest.raises(OrderingError, match="declares no inverse"):
+        Relation(name="EARLIER", ordered=True, inverse="   ")
+
+
+@pytest.mark.parametrize(
+    "strategy",
+    [LexicographicStrategy(), CausalStrategy(), BranchingStrategy(), ConsensusStrategy()],
+    ids=["lexicographic", "causal", "branching", "consensus"],
+)
+def test_positions_of_different_length_are_incomparable_under_every_strategy(strategy) -> None:
+    """Two positions of different arity are not two points in one space. Padding the shorter one
+    would invent components nobody measured, and comparing the common prefix would silently
+    compare a coordinate against a fragment of a different one."""
+    assert strategy.compare((1,), (1, 2)) == INCOMPARABLE.name
+
+
+@pytest.mark.parametrize(
+    "strategy",
+    [LexicographicStrategy(), CausalStrategy(), BranchingStrategy()],
+    ids=["lexicographic", "causal", "branching"],
+)
+def test_components_that_cannot_be_ordered_are_incomparable_rather_than_a_crash(strategy) -> None:
+    """`components` is opaque by design, so a position may hold anything. A strategy that raised
+    on an unorderable pair would make the opacity a lie; INCOMPARABLE is the honest answer."""
+    assert strategy.compare((object(),), (object(),)) == INCOMPARABLE.name
+
+
+def test_a_consensus_comparison_of_unorderable_components_is_incomparable() -> None:
+    """The observer prefix agrees and the remainder cannot be ordered, which is a different
+    reason for INCOMPARABLE from a disagreeing observer and must not be spelled differently."""
+    strategy = ConsensusStrategy(agreeing=("obs",))
+    assert strategy.compare(("obs", object()), ("obs", object())) == INCOMPARABLE.name
+
+
+def test_a_branching_comparison_whose_branches_diverge_is_incomparable() -> None:
+    """Two positions on different branches are not ordered by anything this package can see, and
+    ordering them by their remainders would order events across a fork."""
+    strategy = BranchingStrategy()
+    assert strategy.compare(("a", 1), ("b", 1)) == INCOMPARABLE.name
+
+
+def test_registering_two_strategies_under_one_ordering_name_is_refused() -> None:
+    """One ordering name with two comparison behaviours makes every claim about event order
+    unenforceable, so a second implementation must declare a new ordering instead."""
+
+    class _Impostor(LexicographicStrategy):
+        pass
+
+    with pytest.raises(OrderingError, match="already implemented by"):
+        default_registry((_Impostor(),))
+
+
+def test_declaring_one_ordering_name_with_two_meanings_is_refused() -> None:
+    """One name with two meanings is worse than two names: a record citing the ordering would be
+    read under whichever meaning the reader's registry happened to hold."""
+    registry = default_registry()
+    with pytest.raises(OrderingError, match="already declared with a different meaning"):
+        registry.declare(Ordering(name=TOTAL.name, description="something else entirely"))
+
+
+def test_citing_an_ordering_nobody_declared_is_refused() -> None:
+    """Declaring it is how a sixth discipline joins this system, and it must happen before a
+    record cites it — otherwise the record's order claim is interpreted by nothing."""
+    with pytest.raises(OrderingError, match="not a declared ordering"):
+        default_registry().ordering("AN-ORDERING-NOBODY-DECLARED")
+
+
+def test_the_factory_admits_a_strategy_this_package_did_not_ship() -> None:
+    """No process-wide singleton: ConsensusStrategy carries its agreeing-observer set, so a
+    shared registry would let one federation's configuration govern another's comparisons."""
+
+    class _Custom(LexicographicStrategy):
+        def ordering(self) -> Ordering:
+            return Ordering(name="FEDERATED", description="a sixth discipline")
+
+    registry = default_registry((_Custom(),))
+    assert registry.ordering("FEDERATED").name == "FEDERATED"
+
+
+def test_a_strategy_whose_comparison_does_not_mirror_its_inverse_is_refused() -> None:
+    """`compare(a, b)` must mirror to `compare(b, a)` through the declared inverse, or "the
+    earlier event" is undefined while appearing to have an answer."""
+
+    class _Asymmetric(LexicographicStrategy):
+        def compare(self, left, right):  # noqa: ANN001, ANN201
+            return BEFORE.name
+
+    with pytest.raises(OrderingError, match="where .* was required by the declared"):
+        assert_consistent(_Asymmetric(), ((1,), (2,)), RelationRegistry())
+
+
+def test_a_branching_comparison_of_unorderable_remainders_is_incomparable() -> None:
+    """The branch prefix agrees and the remainder cannot be ordered. Reporting a relation anyway
+    would order two events on one branch by something nobody measured."""
+    strategy = BranchingStrategy()
+    assert strategy.compare(("a", object()), ("a", object())) == INCOMPARABLE.name
+
+
+def test_registering_a_strategy_under_a_declared_name_with_a_different_meaning_is_refused():
+    """The two guards are separate: one refuses a second IMPLEMENTATION of a declared ordering,
+    this one refuses a second MEANING arriving with its own implementation."""
+
+    class _Redefining(LexicographicStrategy):
+        def ordering(self) -> Ordering:
+            return Ordering(name=TOTAL.name, description="a different meaning entirely")
+
+    registry = OrderingRegistry()
+    registry.declare(TOTAL)
+    with pytest.raises(OrderingError, match="already declared with a different meaning"):
+        registry.register(_Redefining())
+
+
+@pytest.mark.parametrize("absent", ["source", "target"])
+def test_a_frame_relation_that_relates_nothing_is_refused(absent) -> None:
+    """A relation with no source or no target grants comparability between a frame and nothing,
+    which reads exactly like comparability granted."""
+    fields = {"source": "A", "target": "B", "rule": "R-01"}
+    fields[absent] = "   "
+    with pytest.raises(ReferenceError, match=f"no {absent} relates nothing"):
+        FrameRelation(**fields)
+
+
+def test_a_registry_can_be_seeded_with_its_relations_and_refuses_a_second_one() -> None:
+    """Seeding is one call, and a second relation between the same pair would make comparability
+    depend on declaration order rather than on what was declared."""
+    first = FrameRelation(source="EARTH", target="MARS", rule="R-01")
+    registry = FrameRegistry(relations=(first,))
+    assert first in registry.relations()
+    assert registry.relate(first) == first
+    with pytest.raises(ReferenceError, match="would make comparability depend"):
+        registry.relate(FrameRelation(source="EARTH", target="MARS", rule="R-02"))
+
+
+def test_redeclaring_the_identical_frame_is_idempotent() -> None:
+    """A registry has to be seedable twice from one vocabulary, so re-declaring the same frame
+    returns it — while a second MEANING under one name is refused."""
+    registry = FrameRegistry()
+    existing = registry.resolve("EARTH")
+    assert registry.declare(existing) is existing

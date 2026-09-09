@@ -247,3 +247,63 @@ def test_the_report_names_the_declared_and_the_uncomputable_populations() -> Non
         "Ω∞-X-TEMP-01",
         "Ω∞-X-TIME-01",
     }
+
+
+# ------------------------------------------------ the refusals, and the paths nothing had walked
+
+
+def test_a_transformation_that_maps_a_domain_to_itself_is_refused() -> None:
+    """Identity needs no declaration, and declaring it would put a no-op on every search path —
+    where it would lengthen every route it appears in without converting anything."""
+    with pytest.raises(TransformationError, match="maps .* to itself"):
+        Transformation(
+            identifier="T-SELF", source="KELVIN", target="KELVIN", authority="TEST-AUTHORITY"
+        )
+
+
+def test_a_registry_can_be_seeded_with_its_transformations() -> None:
+    """Seeding and registering are one door. A seed that bypassed `register` would admit a pair
+    the registration guards refuse, which is the shape those guards exist to close."""
+    transformation = Transformation(
+        identifier="T-SEED", source="A", target="B", authority="TEST-AUTHORITY"
+    )
+    registry = TransformationRegistry(seed=((transformation, None),))
+    assert registry.path("A", "B") == (transformation,)
+
+
+def test_a_second_transformation_over_one_edge_is_refused() -> None:
+    """A second declaration would make the applicable authority and loss statement depend on
+    registration order — two runs converting one value could cite different authorities."""
+    registry = TransformationRegistry()
+    registry.declare("T-FIRST", "A", "B", "TEST-AUTHORITY")
+    with pytest.raises(TransformationError, match="would make .* depend on registration order"):
+        registry.declare("T-SECOND", "A", "B", "ANOTHER-AUTHORITY")
+
+
+def test_a_route_from_a_domain_to_itself_is_empty_rather_than_a_no_op_step() -> None:
+    """An empty route is what "already there" looks like. A one-step identity route would put a
+    conversion in the provenance of a value nothing converted."""
+    assert default_transformations().path("KELVIN", "KELVIN") == ()
+
+
+def test_the_search_does_not_revisit_a_domain_it_has_already_reached() -> None:
+    """Breadth-first over declared edges, expanded in sorted order so two runs return the same
+    route. Without the seen-set a cycle would make the search run forever."""
+    registry = TransformationRegistry()
+    registry.declare("T-AB", "A", "B", "TEST-AUTHORITY")
+    registry.declare("T-BA", "B", "A", "TEST-AUTHORITY")
+    registry.declare("T-BC", "B", "C", "TEST-AUTHORITY")
+    route = registry.path("A", "C")
+    assert [step.identifier for step in route] == ["T-AB", "T-BC"]
+
+
+def test_an_outcome_carries_its_value_only_when_one_was_produced() -> None:
+    """A record that always carried the key would make a refused conversion and a successful one
+    holding nothing the same document."""
+    registry = default_transformations()
+    refused = registry.apply(Value(domain="CELSIUS"), "NOWHERE")
+    assert not refused.applied
+    assert "value" not in refused.as_record()
+    identity = registry.apply(Value(domain="KELVIN", components=(1,)), "KELVIN")
+    assert identity.applied
+    assert identity.as_record()["value"]["domain"] == "KELVIN"

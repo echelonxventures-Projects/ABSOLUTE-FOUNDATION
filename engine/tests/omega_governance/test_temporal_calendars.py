@@ -346,3 +346,41 @@ def test_the_registry_report_names_every_calendar_and_what_it_reads() -> None:
     report = default_registry().report()
     assert set(report) == {"earth-civil", "mars-darian", "tick"}
     assert report["mars-darian"]["scale"] == "MARS_SOL"
+
+
+# ------------------------------------------------ the renderings nothing had asked these to make
+
+
+def test_a_civil_position_carrying_a_subsecond_component_renders_it() -> None:
+    """The second component is optional, and a decomposition that dropped it would render two
+    distinct coordinates identically — which is a rendering that loses the thing it was given."""
+    calendar = ProlepticCivilCalendar()
+    fields = calendar.fields((0, 250))
+    assert fields["subsecond"] == 250
+    assert "subsecond" not in calendar.fields((0,))
+
+
+def test_the_darian_calendar_walks_years_in_both_directions() -> None:
+    """The Darian leap rule is not expressible as a single division, so the walk is deliberate.
+    A position before the epoch walks backwards, and one well after it walks forwards through
+    years and then through months — and a closed form that was subtly wrong here would be far
+    harder to notice than a loop that is obviously right."""
+    calendar = MarsSolCalendar()
+    forward = calendar.fields((calendar.epoch_sol + 5000,))
+    assert forward["year"] > 1
+    assert 1 <= forward["month"] <= 24
+    backward = calendar.fields((-calendar.epoch_sol - 1,))
+    assert backward["year"] < 1
+    assert 1 <= backward["month"] <= 24
+
+
+def test_a_calendar_that_identifies_as_nothing_cannot_be_registered() -> None:
+    """The registry is keyed by identifier, and a rendering citing "" names no calendar a later
+    reader could resolve."""
+
+    class _Anonymous(TickCalendar):
+        def identifier(self) -> str:
+            return "   "
+
+    with pytest.raises(CalendarError, match="must identify itself"):
+        CalendarRegistry().register(_Anonymous())

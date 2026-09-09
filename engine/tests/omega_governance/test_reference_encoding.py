@@ -12,7 +12,12 @@ from __future__ import annotations
 
 import pytest
 
-from engine.omega_governance.reference.capability import ENCODABLE, IDENTIFIABLE, REPRODUCIBLE
+from engine.omega_governance.reference.capability import (
+    ENCODABLE,
+    IDENTIFIABLE,
+    REPRODUCIBLE,
+    CapabilitySet,
+)
 from engine.omega_governance.reference.encoding import (
     CanonicalJsonCodec,
     Encoding,
@@ -160,3 +165,83 @@ def test_a_codec_registry_refuses_a_duplicate_identifier() -> None:
     codecs, _ = default_registries()
     with pytest.raises(EncodingError):
         codecs.register(CanonicalJsonCodec())
+
+
+# ------------------------------------------------ the codec's remaining shapes and its refusals
+
+
+def test_bytes_are_framed_by_their_own_tag() -> None:
+    """A bytes value framed as a string would collide with the string of the same characters, and
+    two different values encoding identically is the one thing a canonical codec must not do."""
+    codec = TagLengthValueCodec()
+    assert codec.encode(b"payload") != codec.encode("payload")
+
+
+def test_a_mapping_with_a_non_string_key_is_refused() -> None:
+    """A non-string key has no canonical order, so two encodings of one mapping would differ and
+    every digest taken over it would be unreproducible."""
+    with pytest.raises(EncodingError, match="requires string keys"):
+        TagLengthValueCodec().encode({1: "one"})
+
+
+def test_a_value_the_codec_cannot_represent_is_refused_rather_than_coerced() -> None:
+    """Coercing it would encode a stand-in and digest something the caller never held. Register a
+    codec for that value domain instead."""
+    with pytest.raises(EncodingError, match="cannot represent a value of type"):
+        TagLengthValueCodec().encode(object())
+
+
+def test_the_polynomial_identity_declares_what_it_can_be_relied_on_for() -> None:
+    """It is IDENTIFIABLE and REPRODUCIBLE and claims nothing about collision resistance — which
+    is the point of declaring capabilities rather than assuming them from the name."""
+    provider = PolynomialIdentity()
+    names = provider.capabilities().names()
+    assert "IDENTIFIABLE" in names
+    assert "REPRODUCIBLE" in names
+    assert provider.width() == 16
+
+
+@pytest.mark.parametrize(
+    ("registry", "make", "message"),
+    [
+        ("codec", lambda: TagLengthValueCodec(codec_identifier="  "), "a codec must identify"),
+        (
+            "identity",
+            lambda: PolynomialIdentity(provider_identifier="  "),
+            "an identity provider must identify",
+        ),
+    ],
+    ids=["codec", "identity-provider"],
+)
+def test_an_unidentifiable_implementation_cannot_be_registered(registry, make, message) -> None:
+    """A registry keyed by identifier cannot hold something that identifies as nothing, and a
+    record citing "" names no implementation a later reader could resolve."""
+    codecs, identities = default_registries()
+    target = codecs if registry == "codec" else identities
+    with pytest.raises(EncodingError, match=message):
+        target.register(make())
+
+
+def test_both_registries_report_membership_and_size() -> None:
+    """A caller choosing an implementation asks "is this one here" before asking for it, and a
+    registry that could only answer by raising would make the question cost an exception."""
+    codecs, identities = default_registries()
+    assert len(codecs) >= 1
+    assert len(identities) >= 1
+    assert codecs.known()[0] in codecs
+    assert identities.known()[0] in identities
+    assert "a-codec-nobody-registered" not in codecs
+    assert 42 not in identities
+
+
+def test_a_codec_that_does_not_declare_reproducible_may_not_back_a_compared_record() -> None:
+    """Declaring REPRODUCIBLE is how a codec ACCEPTS the obligation. A codec that happens to be
+    deterministic today and never said so is one nobody may rely on across runs."""
+
+    class _Undeclared(TagLengthValueCodec):
+        def capabilities(self):  # noqa: ANN201
+            return CapabilitySet()
+
+    encoding = Encoding(codec=_Undeclared(), identity=Sha256Identity())
+    with pytest.raises(EncodingError, match="does not declare REPRODUCIBLE"):
+        assert_reproducible(encoding, SAMPLES)
