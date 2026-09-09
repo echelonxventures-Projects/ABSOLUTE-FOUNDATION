@@ -2483,3 +2483,110 @@ def test_self_analysis_producing_no_evidence_is_refused(declaration):
     probe = _ledger_probe(declaration, of_profile=lambda profile: ())
     problems = contract.declared_mechanisms_are_live_and_exercised(probe)
     assert any("produced no evidence in the ledger" in p for p in problems), problems
+
+
+# --- URKE-L-24: the lifecycle-axis refusals ------------------------------------------------
+
+
+def test_an_unreachable_axis_combination_is_refused(declaration, monkeypatch):
+    # The whole cross-product must be reachable: a lattice that offers fewer combinations than
+    # its axes multiply out has coupled two axes without saying so.
+    monkeypatch.setattr(states, "axis_combinations", lambda decl: ())
+    problems = contract.lifecycle_axes_are_independent(_forge(declaration))
+    assert any("axis combinations are reachable" in p for p in problems), problems
+
+
+def test_setting_an_axis_that_does_not_take_is_refused(declaration, monkeypatch):
+    real = states.with_axis
+    monkeypatch.setattr(
+        states,
+        "with_axis",
+        lambda decl, entity, axis, value: real(decl, entity, axis, value) and entity,
+    )
+    problems = contract.lifecycle_axes_are_independent(_forge(declaration))
+    assert any("did not take" in p for p in problems), problems
+
+
+def test_an_undeclared_axis_value_must_be_refused(declaration, monkeypatch):
+    # The law asserts a refusal, so the violation is a with_axis that accepts a value the
+    # declaration never named.
+    real = states.with_axis
+
+    def permissive(decl, entity, axis, value):
+        if value == "not-a-declared-axis-value":
+            return entity
+        return real(decl, entity, axis, value)
+
+    monkeypatch.setattr(states, "with_axis", permissive)
+    problems = contract.lifecycle_axes_are_independent(_forge(declaration))
+    assert any("an undeclared axis value" in p for p in problems), problems
+
+
+def test_a_relationship_with_no_basis_must_be_refused(declaration, monkeypatch):
+    real = ledger_module.relate
+
+    def permissive(store, **kwargs):
+        if not str(kwargs.get("basis") or "").strip():
+            kwargs["basis"] = "filled in by a permissive ledger"
+        return real(store, **kwargs)
+
+    monkeypatch.setattr(ledger_module, "relate", permissive)
+    problems = contract.relationships_carry_governance(_forge(declaration))
+    assert any("a relationship with no basis" in p for p in problems), problems
+
+
+def test_an_instability_not_eligible_for_investigation_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(states, "eligible_for_discovery", lambda decl, entity: False)
+    problems = contract.stability_is_measured_and_instability_is_governed(_forge(declaration))
+    assert any("not eligible for further investigation" in p for p in problems), problems
+
+
+def test_a_module_branching_on_a_vocabulary_member_is_refused(declaration, monkeypatch):
+    # URKE-L-07's companion: a comparison against a declared member is a decision made in code
+    # about something the declaration owns. The literal has to appear in a DECIDING position —
+    # a bare mention in a docstring is not a decision, which is the distinction the law draws.
+    member = declaration.state_ids[0]
+    source = f"def f(x):\n    return x == {member!r}\n"
+    monkeypatch.setattr(contract.Probe, "sources", lambda self: {"invented.py": source})
+    problems = contract.vocabulary_is_not_hardcoded(_forge(declaration))
+    assert any("it belongs in the" in p for p in problems), problems
+
+
+def test_a_gap_at_the_minimum_cadence_that_is_not_due_is_refused(declaration, monkeypatch):
+    # A review that never comes due is a review that never happens, and the schedule would
+    # still look populated.
+    monkeypatch.setattr(ReviewPoint, "due", lambda self, clock: False)
+    problems = contract.gap_closure_and_review_are_governed(_forge(declaration))
+    assert any("not surfaced as due" in p for p in problems), problems
+
+
+def test_a_contract_error_from_a_check_is_re_raised_unchanged(declaration, monkeypatch):
+    # `measure` converts a RecursiveKnowledgeError into a ContractError, but a ContractError is
+    # already the right answer: re-wrapping it would bury the message the check chose.
+    first = declaration.laws[0]
+
+    def explode(probe):
+        raise contract.ContractError("the check already said exactly what was wrong")
+
+    monkeypatch.setitem(contract.LAW_CHECKS, first.check, explode)
+    with pytest.raises(contract.ContractError, match="already said exactly what was wrong"):
+        contract.measure(laws=[first.law_id])
+
+
+def test_a_preserved_site_that_still_occurs_is_accepted(declaration, monkeypatch):
+    """The other arc of the preserved-site loop: a site that is still doing its job.
+
+    The declaration carries no preserved sites at all today, so this loop never ran over real
+    data, and the earlier stale-site test supplies exactly one — which refuses and exits. Two
+    are needed to reach the continue: one that still occurs, sorting FIRST so the loop carries
+    on past it, and one that does not.
+    """
+    monkeypatch.setattr(
+        contract.Probe, "sources", lambda self: {"invented.py": "this module contains aaa"}
+    )
+    sites = ("invented.py:aaa", "invented.py:zzz")
+    problems = contract.no_completeness_claim_is_declared(
+        _forge(declaration, preserved_sites=sites)
+    )
+    assert any("invented.py:zzz" in p for p in problems), problems
+    assert not any("invented.py:aaa" in p for p in problems), problems
