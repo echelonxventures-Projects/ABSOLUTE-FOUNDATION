@@ -2854,3 +2854,117 @@ def test_reassessing_evidence_that_changes_the_disposition_is_refused(declaratio
         Probe(declaration=declaration, repo=REPO)
     )
     assert any("reality drives admission" in p for p in problems), problems
+
+
+# --- UCON-L-03: the catch-all must not be destructive -----------------------------------------
+
+
+def test_a_terminal_catch_all_disposition_is_refused(declaration):
+    catch_all = [rule for rule in declaration.rules if rule.catch_all][0]
+    dispositions = tuple(
+        dataclasses.replace(spec, terminal=True)
+        if spec.identifier == catch_all.disposition
+        else spec
+        for spec in declaration.dispositions
+    )
+    problems = contract.catch_all_is_non_destructive(
+        Probe(declaration=dataclasses.replace(declaration, dispositions=dispositions), repo=REPO)
+    )
+    assert any("is terminal" in p for p in problems), problems
+
+
+def test_a_catch_all_that_forecloses_other_dispositions_is_refused(declaration):
+    catch_all = [rule for rule in declaration.rules if rule.catch_all][0]
+    dispositions = tuple(
+        dataclasses.replace(spec, successors=())
+        if spec.identifier == catch_all.disposition
+        else spec
+        for spec in declaration.dispositions
+    )
+    problems = contract.catch_all_is_non_destructive(
+        Probe(declaration=dataclasses.replace(declaration, dispositions=dispositions), repo=REPO)
+    )
+    assert any("forecloses them" in p for p in problems), problems
+
+
+# --- UCON-L-04: operators are two-way bound ---------------------------------------------------
+
+
+def test_an_operator_claimed_but_not_implemented_is_refused(declaration):
+    claimed = frozenset({*declaration.claimed_operators, "an_operator_nobody_wrote"})
+    problems = contract.operators_are_two_way_bound(
+        Probe(declaration=dataclasses.replace(declaration, claimed_operators=claimed), repo=REPO)
+    )
+    assert any("differs between the declaration" in p for p in problems), problems
+
+
+def test_validate_accepting_an_unimplemented_operator_is_refused(declaration, monkeypatch):
+    # The law asserts a REFUSAL by validate(), so the violation is a validate() that tolerates
+    # a rule naming an operator nobody implemented. validate() returns the problems it found,
+    # so "tolerated" is an EMPTY result — the first version of this test returned True and the
+    # law read that as validation having objected.
+    monkeypatch.setattr(
+        type(declaration), "validate", lambda self, checks, implemented, selectors: ()
+    )
+    problems = contract.operators_are_two_way_bound(Probe(declaration=declaration, repo=REPO))
+    assert any("was accepted by validate()" in p for p in problems), problems
+
+
+# --- UCON-L-10: no state is terminal ----------------------------------------------------------
+
+
+def test_a_disposition_naming_no_successor_is_refused(declaration):
+    closed = (
+        dataclasses.replace(declaration.dispositions[0], successors=()),
+        *declaration.dispositions[1:],
+    )
+    problems = contract.no_state_is_terminal(
+        Probe(declaration=dataclasses.replace(declaration, dispositions=closed), repo=REPO)
+    )
+    assert any("names no successor" in p for p in problems), problems
+
+
+def test_a_reality_state_naming_no_successor_is_refused(declaration):
+    closed = (
+        dataclasses.replace(declaration.reality_states[0], successors=()),
+        *declaration.reality_states[1:],
+    )
+    problems = contract.no_state_is_terminal(
+        Probe(declaration=dataclasses.replace(declaration, reality_states=closed), repo=REPO)
+    )
+    assert any("could ever be revised" in p for p in problems), problems
+
+
+# --- UCON-L-16: measurement is deterministic --------------------------------------------------
+
+
+def test_two_registries_rendering_differently_are_refused(declaration, monkeypatch):
+    calls = {"n": 0}
+
+    def drifting(self):
+        calls["n"] += 1
+        return f"rendered-{calls['n']}"
+
+    monkeypatch.setattr(ConstructRegistry, "rendered", drifting)
+    problems = contract.measurement_is_deterministic(Probe(declaration=declaration, repo=REPO))
+    assert any("render differently" in p for p in problems), problems
+
+
+def test_two_registries_with_different_digests_are_refused(declaration, monkeypatch):
+    calls = {"n": 0}
+
+    def drifting(self):
+        calls["n"] += 1
+        return f"digest-{calls['n']}"
+
+    monkeypatch.setattr(ConstructRegistry, "digest", drifting)
+    problems = contract.measurement_is_deterministic(Probe(declaration=declaration, repo=REPO))
+    assert any("different digests" in p for p in problems), problems
+
+
+def test_an_inventory_embedding_a_clock_or_a_path_is_refused(declaration, monkeypatch):
+    # A measurement carrying a timestamp or a machine path is unrepeatable elsewhere: two
+    # identical repositories would disagree because they were measured on different machines.
+    monkeypatch.setattr(audit, "rendered", lambda inventory: "measured at T00:00:00")
+    problems = contract.measurement_is_deterministic(Probe(declaration=declaration, repo=REPO))
+    assert any("makes the measurement unrepeatable elsewhere" in p for p in problems), problems
