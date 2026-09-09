@@ -2188,3 +2188,88 @@ def test_an_unrecorded_root_context_is_refused(declaration):
     probe._ledger = _Rootless()
     problems = contract.no_subject_exists_outside_context(probe)
     assert any("root context is not recorded" in p for p in problems), problems
+
+
+# --- URKE-L-25: the relationship refusals ---------------------------------------------------
+
+
+@pytest.mark.parametrize("label", ["source", "target", "relation", "basis"])
+def test_a_relationship_carrying_no_field_is_refused(declaration, monkeypatch, label):
+    real = ledger_module.relate
+
+    def hollow(*args, **kwargs):
+        return dataclasses.replace(real(*args, **kwargs), **{label: "  "})
+
+    monkeypatch.setattr(ledger_module, "relate", hollow)
+    problems = contract.relationships_carry_governance(_forge(declaration))
+    assert any(f"carries no {label}" in p for p in problems), problems
+
+
+def test_a_relationship_carrying_no_evidence_is_refused(declaration, monkeypatch):
+    real = ledger_module.relate
+    monkeypatch.setattr(
+        ledger_module, "relate", lambda *a, **k: dataclasses.replace(real(*a, **k), evidence=())
+    )
+    problems = contract.relationships_carry_governance(_forge(declaration))
+    assert any("carries no evidence" in p for p in problems), problems
+
+
+@pytest.mark.parametrize("label", ["an absent source", "an absent target"])
+def test_a_relationship_naming_an_absent_endpoint_must_be_refused(declaration, monkeypatch, label):
+    # The law asserts a REFUSAL, so the violation is a relate() that accepts an endpoint the
+    # ledger never recorded.
+    real = ledger_module.relate
+
+    def permissive(store, **kwargs):
+        kwargs = {
+            k: (store.all()[0].identity if v == "not-recorded" else v) for k, v in kwargs.items()
+        }
+        return real(store, **kwargs)
+
+    monkeypatch.setattr(ledger_module, "relate", permissive)
+    problems = contract.relationships_carry_governance(_forge(declaration))
+    assert any(f"a relationship naming {label}" in p for p in problems), problems
+
+
+# --- URKE-L-27: the learning-pipeline refusals -----------------------------------------------
+
+
+def test_a_pipeline_refusing_a_legitimate_move_is_reported(declaration, monkeypatch):
+    # The law measures both directions: skips must be refused AND legitimate moves accepted.
+    # Refusing everything would satisfy the first half while breaking the second.
+
+    def refuse_everything(store, identity, *, to_stage, basis):
+        raise RecursiveKnowledgeError("advance refused for the test")
+
+    monkeypatch.setattr(subjects, "advance", refuse_everything)
+    problems = contract.learning_pipeline_cannot_be_bypassed(_forge(declaration))
+    assert any("refused a legitimate move" in p for p in problems), problems
+
+
+def test_a_lesson_that_does_not_reach_the_last_stage_is_refused(declaration, monkeypatch):
+    real = subjects.advance
+    stages = [spec.identifier for spec in declaration.learning_stages]
+
+    def stall_before_the_end(store, identity, *, to_stage, basis):
+        if to_stage == stages[-1]:
+            return store.get(identity)
+        return real(store, identity, to_stage=to_stage, basis=basis)
+
+    monkeypatch.setattr(subjects, "advance", stall_before_the_end)
+    problems = contract.learning_pipeline_cannot_be_bypassed(_forge(declaration))
+    assert any("did not reach the last one" in p for p in problems), problems
+
+
+def test_a_reversal_that_removes_the_lesson_is_refused(declaration, monkeypatch):
+    # Reversal must supersede, never delete: the record of what was learned and unlearned has
+    # to survive both.
+    real = subjects.reverse_lesson
+    monkeypatch.setattr(
+        subjects,
+        "reverse_lesson",
+        lambda store, identity, *, by, basis: dataclasses.replace(
+            real(store, identity, by=by, basis=basis), superseded_by=""
+        ),
+    )
+    problems = contract.learning_pipeline_cannot_be_bypassed(_forge(declaration))
+    assert any("removed the lesson instead of superseding it" in p for p in problems), problems
