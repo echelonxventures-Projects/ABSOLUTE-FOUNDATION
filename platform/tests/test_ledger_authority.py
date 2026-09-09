@@ -1553,3 +1553,239 @@ def test_the_registration_transaction_forwards_an_operator_permit() -> None:
     script = REGISTER_SH.read_text(encoding="utf-8")
     assert "--permit=*)" in script, "register.sh must accept an operator-supplied permit"
     assert "build --mint $PERMIT_FLAG" in script, "Phase 1 must forward it to the mint"
+
+
+# ---------------------------------------------------------------------------------------
+# the readers' own refusals, and the branches a well-formed ledger never reaches
+
+
+def test_the_preimage_reader_refuses_a_ledger_it_cannot_parse(tmp_path: Path) -> None:
+    """`commit` reads bytes and parses them itself; `load_preimage` is the other reader.
+
+    Both refuse for the same reason and neither may stand in for the other's coverage: a
+    caller that used this one and got `{}` back from a corrupt file would report every
+    existing identity as freshly minted.
+    """
+    path = tmp_path / "id-ledger.json"
+    path.write_text("{ this is not json", encoding="utf-8")
+    with pytest.raises(LA.LedgerWriteRefused, match="cannot be read"):
+        LA.load_preimage(str(path))
+
+
+def test_the_byte_reader_refuses_a_ledger_it_cannot_open(tmp_path: Path) -> None:
+    """Unparseable and unopenable are different failures on different readers."""
+    path = tmp_path / "id-ledger.json"
+    path.write_text("{}", encoding="utf-8")
+    path.chmod(0o000)
+    with pytest.raises(LA.LedgerWriteRefused, match="cannot be read"):
+        LA._read_bytes_or_none(str(path))
+
+
+def test_a_lock_that_cannot_be_taken_refuses_rather_than_writing_unserialized(
+    tmp_path: Path,
+) -> None:
+    """The lock is on the ledger's DIRECTORY, and a directory that cannot exist is a refusal.
+
+    Not a hypothetical: a first-ever mint may target a tree nobody has created, so the lock
+    creates it. Creating it under a path component that is a regular file cannot succeed, and
+    proceeding without the lock would be a write two writers cannot be shown not to interleave.
+    """
+    (tmp_path / "not-a-directory").write_text("", encoding="utf-8")
+    path = str(tmp_path / "not-a-directory" / "id-ledger.json")
+    with pytest.raises(LA.LedgerWriteRefused, match="to take the ledger lock"):
+        LA.commit(path, {}, actor="test", writer=_writer, permit=LA.NO_ALLOCATION)
+
+
+def test_a_record_that_is_not_an_object_is_still_append_only(tmp_path: Path) -> None:
+    """The record body check names the fields that changed, and needs a body to name them.
+
+    A ledger whose record is a bare identifier string carries no fields, so the refusal says
+    `<record>` rather than inventing a field list. The identifier held still in both shapes,
+    which is exactly why the identifier projection cannot see this rewrite.
+    """
+    path = _write(tmp_path, {"by_object": {"a": "U-1"}})
+    proposed = {"by_object": {"a": {"universal_id": "U-1"}}}
+    with pytest.raises(LA.LedgerWriteRefused, match=r"\['<record>'\]"):
+        LA.commit(path, proposed, actor="test", writer=_writer, permit=LA.NO_ALLOCATION)
+
+
+def test_a_record_carrying_no_identifier_binds_nothing(tmp_path: Path) -> None:
+    """One identifier names at most one thing; a record naming NO identifier names nothing.
+
+    Without the skip, two records that both omit their identifier field would collide on
+    `None` and be reported as the same permanent identifier bound twice.
+    """
+    path = _write(tmp_path, {})
+    proposed = {
+        "by_object": {"a": {"first_seen": "x"}, "b": {"first_seen": "y"}},
+    }
+    LA.commit(path, proposed, actor="test", writer=_writer, permit=_issue(path, proposed))
+    assert set(json.loads(Path(path).read_text(encoding="utf-8"))["by_object"]) == {"a", "b"}
+
+
+def test_removing_a_category_from_the_counter_is_refused(tmp_path: Path) -> None:
+    """Its allocated identifiers would become reissuable, which is the one thing identity is not."""
+    path = _write(tmp_path, {"category_seq": {"OBS": 7}})
+    with pytest.raises(LA.LedgerWriteRefused, match="would be REMOVED"):
+        LA.commit(path, {"category_seq": {}}, actor="test", writer=_writer, permit=LA.NO_ALLOCATION)
+
+
+def test_a_history_entry_that_is_not_a_list_is_refused_when_it_changes(tmp_path: Path) -> None:
+    """Append-only over a list is a prefix check; over anything else it is an equality check.
+
+    A history that arrives in some other shape cannot be shown to have kept its prefix, so the
+    only safe reading is that any change to it is a replacement.
+    """
+    path = _write(tmp_path, {"history": {"UID-1": "a string where a list belongs"}})
+    proposed = {"history": {"UID-1": "a different string"}}
+    with pytest.raises(LA.LedgerWriteRefused, match="different shape"):
+        LA.commit(path, proposed, actor="test", writer=_writer, permit=LA.NO_ALLOCATION)
+
+
+def test_the_report_line_names_a_cursor_that_advanced(tmp_path: Path) -> None:
+    """`page_cursor` and `volume_seq` move without any identifier being allocated.
+
+    A line that omitted them would describe a mutating write as though nothing had moved,
+    which is the D0.1 shape one level down.
+    """
+    path = _write(tmp_path, {"page_cursor": 1})
+    proposed = {"page_cursor": 2}
+    report = LA.plan(path, proposed, actor="test")
+    assert "page_cursor:1->2" in LA.format_report(report)
+
+
+def test_a_head_that_cannot_be_determined_is_none_rather_than_a_failure(
+    tmp_path: Path, monkeypatch
+) -> None:
+    """Every failure of the provider is "no head", and none of them is an exception.
+
+    `git_head` feeds `manifest["head"]`, which every permit is bound to. A provider that
+    raised here would turn an unreadable repository into a crash inside the chokepoint.
+    """
+    from engine.omega_infinite import git_provider
+
+    def refusing(*args, **kwargs):
+        raise RuntimeError("the provider cannot answer here")
+
+    monkeypatch.setattr(git_provider, "GitDiscoveryProvider", refusing)
+    assert LA.git_head(str(tmp_path / "id-ledger.json")) is None
+
+
+def test_a_permit_register_that_is_not_a_list_is_refused_rather_than_guessed(
+    tmp_path: Path,
+) -> None:
+    path = _write(tmp_path, {})
+    Path(LA.permit_register_path(path)).write_text(
+        json.dumps({"permits": {"P-TEST": {}}}), encoding="utf-8"
+    )
+    with pytest.raises(LA.PermitRefused, match="refusing to guess its shape"):
+        LA.load_permit_register(path)
+
+
+def test_a_permit_binding_a_head_is_refused_where_the_head_disagrees(
+    tmp_path: Path, monkeypatch
+) -> None:
+    """The other side of the head binding: determinable, and not the one the permit names.
+
+    The `head cannot be determined` refusal is what a temporary directory produces. This is
+    the refusal a real repository produces when the permit was issued against a different
+    commit, and the two must not be spelled the same way.
+    """
+    monkeypatch.setattr(LA, "git_head", lambda near_path: "a" * 40)
+    path = _write(tmp_path, {})
+    proposed = {"by_object": {"a": {"universal_id": "U-1"}}}
+    permit_id = _issue(path, proposed)
+    monkeypatch.setattr(LA, "git_head", lambda near_path: "b" * 40)
+    with pytest.raises(LA.PermitRefused, match="permit binds"):
+        LA.commit(path, proposed, actor="test", writer=_writer, permit=permit_id)
+
+
+def test_a_scope_whose_maps_are_not_a_list_constrain_nothing(tmp_path: Path) -> None:
+    """`max_allocations` still binds. A malformed `maps` must not silently authorize
+    everything OR refuse everything: the digest is what binds exactly, and scope is the
+    reviewable half of it."""
+    path = _write(tmp_path, {})
+    proposed = {"by_object": {"a": {"universal_id": "U-1"}}}
+    permit_id = _issue(path, proposed, scope={"maps": "by_object", "max_allocations": 1})
+    report = LA.commit(path, proposed, actor="test", writer=_writer, permit=permit_id)
+    assert report["total_allocations"] == 1
+
+
+def test_a_naive_expiry_is_read_as_utc_rather_than_refused(tmp_path: Path) -> None:
+    """An instant with no offset is the commonest spelling an operator writes by hand.
+
+    Reading it as UTC is a decision; the alternative — comparing a naive datetime against an
+    aware one — raises TypeError inside the chokepoint, which is a crash rather than a verdict.
+    """
+    path = _write(tmp_path, {})
+    proposed = {"by_object": {"a": {"universal_id": "U-1"}}}
+    permit_id = _issue(path, proposed, expires_at="2000-01-01T00:00:00")
+    with pytest.raises(LA.PermitRefused, match="expired"):
+        LA.commit(path, proposed, actor="test", writer=_writer, permit=permit_id)
+
+
+def test_an_unparseable_expiry_is_refused_rather_than_ignored(tmp_path: Path) -> None:
+    """An expiry nobody can read is not an absent expiry: it is a permit nobody can bound."""
+    path = _write(tmp_path, {})
+    proposed = {"by_object": {"a": {"universal_id": "U-1"}}}
+    permit_id = _issue(path, proposed, expires_at="whenever")
+    with pytest.raises(LA.PermitRefused, match="not an ISO-8601 instant"):
+        LA.commit(path, proposed, actor="test", writer=_writer, permit=permit_id)
+
+
+def test_a_permit_inside_its_expiry_still_authorizes(tmp_path: Path) -> None:
+    """Expiry is measured in both directions, or `expired` is a branch that always fires."""
+    path = _write(tmp_path, {})
+    proposed = {"by_object": {"a": {"universal_id": "U-1"}}}
+    permit_id = _issue(path, proposed, expires_at="2999-01-01T00:00:00Z")
+    report = LA.commit(path, proposed, actor="test", writer=_writer, permit=permit_id)
+    assert report["total_allocations"] == 1
+
+
+def test_an_unmoved_allocation_found_after_the_write_restores_the_ledger(
+    tmp_path: Path, monkeypatch
+) -> None:
+    """Defence in depth, and the depth is what is measured here.
+
+    Once the persisted document is compared against the authorized one this state is
+    unreachable through `commit()` — which is why the guard's own refusal path had never run.
+    A guard whose failure path has never executed cannot be relied on to restore the file the
+    day the comparison above it is weakened.
+    """
+    path = _write(tmp_path, {})
+    proposed = {"by_object": {"a": {"universal_id": "U-1"}}}
+    permit_id = _issue(path, proposed, permit_id="P-TEST")
+
+    def refusing(report: dict) -> None:
+        raise LA.LedgerWriteRefused("the report claims an allocation but the file did not move")
+
+    monkeypatch.setattr(LA, "_refuse_unmoved_allocation", refusing)
+    with pytest.raises(LA.LedgerWriteRefused, match="did not move"):
+        LA.commit(path, proposed, actor="test", writer=_writer, permit=permit_id)
+    assert json.loads(Path(path).read_text(encoding="utf-8")) == {}
+
+
+def test_a_history_entry_of_another_shape_that_did_not_change_is_not_a_replacement(
+    tmp_path: Path,
+) -> None:
+    """The shape check refuses a CHANGE, not a shape. A ledger carrying a history entry this
+    module cannot read as a list still commits, as long as the entry is left alone — otherwise
+    one unreadable entry would freeze every later write to the whole ledger."""
+    before = {"history": {"UID-1": "a string where a list belongs"}, "page_cursor": 1}
+    path = _write(tmp_path, before)
+    proposed = {"history": {"UID-1": "a string where a list belongs"}, "page_cursor": 2}
+    report = LA.commit(path, proposed, actor="test", writer=_writer, permit=_issue(path, proposed))
+    assert report["cursor_advances"] == {"page_cursor": [1, 2]}
+
+
+def test_a_permit_bound_to_the_head_the_repository_is_at_authorizes(
+    tmp_path: Path, monkeypatch
+) -> None:
+    """The third of the three head outcomes. Undeterminable and disagreeing are both refusals;
+    agreeing has to be a pass, or binding a head would make every permit unusable."""
+    monkeypatch.setattr(LA, "git_head", lambda near_path: "a" * 40)
+    path = _write(tmp_path, {})
+    proposed = {"by_object": {"a": {"universal_id": "U-1"}}}
+    permit_id = _issue(path, proposed)
+    report = LA.commit(path, proposed, actor="test", writer=_writer, permit=permit_id)
+    assert report["total_allocations"] == 1
