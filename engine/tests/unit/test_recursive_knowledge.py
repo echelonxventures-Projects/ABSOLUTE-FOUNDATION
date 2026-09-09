@@ -45,6 +45,7 @@ from engine.recursive_knowledge.declaration import (
 from engine.recursive_knowledge.ledger import KnowledgeLedger
 from engine.recursive_knowledge.model import (
     ClosureCriterion,
+    Position,
     RecursiveKnowledgeError,
     ReviewPoint,
     StateTransition,
@@ -2590,3 +2591,854 @@ def test_a_preserved_site_that_still_occurs_is_accepted(declaration, monkeypatch
     )
     assert any("invented.py:zzz" in p for p in problems), problems
     assert not any("invented.py:aaa" in p for p in problems), problems
+
+
+# --- admission refuses a member the declaration already carries -----------------------------
+#
+# One refusal per door, and the reason is the same at every one: an admission that re-admitted
+# a declared member would grow the declaration by a duplicate, and every count taken over that
+# vocabulary — the state bound, the axis cross-product, the two-way binding of sources to
+# detectors — would then be measuring a population that says the same thing twice.
+
+
+@pytest.mark.parametrize(
+    ("door", "existing"),
+    [
+        ("admit_state", lambda d: d.state_ids[0]),
+        ("admit_domain", lambda d: d.domain_ids[0]),
+        ("admit_qualifier_value", lambda d: d.qualifiers[0].values[0]),
+        ("admit_relation", lambda d: d.relation_ids[0]),
+        ("admit_profile", lambda d: d.profile_ids[0]),
+        ("admit_axis", lambda d: d.axis_ids[0]),
+        ("admit_gap_class", lambda d: d.gap_class_ids[0]),
+        ("admit_discovery_source", lambda d: d.discovery_sources[0].source_id),
+        ("admit_evolution_subject", lambda d: d.evolution_subjects[0].identifier),
+        ("admit_learning_stage", lambda d: d.learning_stages[0].identifier),
+        ("admit_reality", lambda d: d.reality_ids[0]),
+        ("admit_temporal_system", lambda d: d.temporal_ids[0]),
+    ],
+)
+def test_every_door_refuses_a_member_already_declared(store, declaration, door, existing):
+    with pytest.raises(admission.AdmissionError, match="already"):
+        getattr(admission, door)(
+            store, natural_key=existing(declaration), definition="already declared"
+        )
+
+
+def test_a_source_naming_a_detector_nothing_implements_is_refused(store, declaration):
+    """The one admission with a precondition, and the precondition is the point: a source is a
+    binding between a declared intent and an implemented detector, so admitting one that named
+    nothing would grow the declaration while measuring nothing."""
+    template = declaration.discovery_sources[0]
+    forged = dataclasses.replace(
+        declaration,
+        discovery_sources=(
+            dataclasses.replace(template, detector="a-detector-nothing-implements"),
+            *declaration.discovery_sources[1:],
+        ),
+    )
+    with pytest.raises(admission.AdmissionError, match="which nothing implements"):
+        admission.admit_discovery_source(
+            KnowledgeLedger(forged),
+            natural_key="a-source-nobody-declared",
+            definition="bound to a detector that does not exist",
+        )
+
+
+def test_the_architecture_door_delegates_to_the_proposal_mechanism(store, declaration):
+    """A proposal carries seven requirements no other admission carries, so it is implemented
+    there and exposed here — the extension point has to be exercisable like every other, or the
+    one door that changes the foundation itself would be the one door nobody could open."""
+    _, entity = admission.admit_architecture_proposal(
+        store,
+        natural_key="a-construct-the-foundation-cannot-hold",
+        definition="unrepresentable under the declared primitives",
+    )
+    assert entity.identity
+    assert store.has(entity.identity)
+
+
+# --- the record types refuse what would make a history unaccountable ------------------------
+#
+# Every one of these fields is what makes the record answerable AFTER the fact. A history whose
+# entries do not say who acted, on what basis, or what was considered is a history that can be
+# read but not audited — which is the same as no history, arriving in the shape of one.
+
+
+def test_an_identity_needs_a_class_and_a_declared_namespace() -> None:
+    """The namespace and key domain are parameters rather than constants because they are
+    declared data: defaulting them here would be this capability quietly owning an identity
+    decision the declaration is supposed to own — so an absent one has to refuse."""
+    with pytest.raises(RecursiveKnowledgeError, match="entity class is required"):
+        knowledge_id("  ", "a key", namespace="UCOS", key_domain="urke")
+    with pytest.raises(RecursiveKnowledgeError, match="namespace and a key domain"):
+        knowledge_id("GAP", "a key", namespace="", key_domain="urke")
+
+
+def test_a_text_field_is_normalised_from_absence_and_from_a_bare_string() -> None:
+    """A bare string passed where a sequence belongs would be stored as its characters, so a
+    verification declaring one assumption would record one assumption per letter."""
+    event = VerificationEvent(
+        verifier="v",
+        verdict="measured",
+        assumptions="the single assumption",
+        limitations=("bounded",),
+        basis="test",
+        sequence=0,
+    )
+    assert event.assumptions == ("the single assumption",)
+    # And absence normalises to nothing rather than raising, so the guard below it — the one
+    # that refuses a verification examining nothing — is the branch that reports it.
+    with pytest.raises(RecursiveKnowledgeError, match="declares no assumptions"):
+        VerificationEvent(
+            verifier="v",
+            verdict="measured",
+            assumptions=None,
+            limitations=("bounded",),
+            basis="test",
+            sequence=0,
+        )
+
+
+def test_a_transition_with_no_actor_is_refused() -> None:
+    """The basis is measured elsewhere. The actor is the other half: a movement accounted for by
+    a reason nobody owns is a movement nobody has to answer for."""
+    with pytest.raises(RecursiveKnowledgeError, match="must name its actor"):
+        StateTransition(from_state="a", to_state="b", basis="measured", actor="  ", sequence=0)
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "message"),
+    [
+        ({"holder": " "}, "must name its holder"),
+        ({"claim": " "}, "must state its claim"),
+    ],
+)
+def test_a_position_that_names_nobody_or_claims_nothing_is_refused(kwargs, message) -> None:
+    fields = {"holder": "someone", "claim": "a claim", "basis": "a basis"}
+    fields.update(kwargs)
+    with pytest.raises(RecursiveKnowledgeError, match=message):
+        Position(**fields)
+
+
+@pytest.mark.parametrize("absent", ["action", "actor", "basis"])
+def test_a_resolution_step_missing_any_of_its_three_facts_is_refused(absent) -> None:
+    from engine.recursive_knowledge.model import ResolutionStep
+
+    fields = {
+        "action": "investigated",
+        "actor": "someone",
+        "outcome": "recorded",
+        "basis": "a basis",
+        "sequence": 0,
+    }
+    fields[absent] = "  "
+    with pytest.raises(RecursiveKnowledgeError, match=f"must name its {absent}"):
+        ResolutionStep(**fields)
+
+
+@pytest.mark.parametrize(
+    ("absent", "message"),
+    [
+        ("verifier", "must name its verifier"),
+        ("verdict", "must record its verdict"),
+        ("basis", "must name its basis"),
+    ],
+)
+def test_a_verification_event_missing_any_of_its_three_facts_is_refused(absent, message) -> None:
+    fields = {
+        "verifier": "v",
+        "verdict": "measured",
+        "assumptions": ("assumed",),
+        "limitations": ("bounded",),
+        "basis": "a basis",
+        "sequence": 0,
+    }
+    fields[absent] = "  "
+    with pytest.raises(RecursiveKnowledgeError, match=message):
+        VerificationEvent(**fields)
+
+
+def test_a_review_that_says_nothing_about_what_it_considers_is_refused() -> None:
+    """A review point with no criteria is a calendar entry: it comes due and nobody can say
+    whether it was answered."""
+    with pytest.raises(RecursiveKnowledgeError, match="what the review is to consider"):
+        ReviewPoint(cadence=1, due_at_sequence=1, criteria="   ")
+
+
+def test_a_closure_criterion_that_states_no_condition_is_refused() -> None:
+    """A gap whose criterion says nothing can be closed by asserting that it was."""
+    with pytest.raises(RecursiveKnowledgeError, match="must state a condition"):
+        ClosureCriterion(statement="  ")
+
+
+# --- the subject recorders' remaining refusals ----------------------------------------------
+
+
+def _contradiction_fields(declaration, **overrides):
+    fields = {
+        "natural_key": "test/contradiction",
+        "classification": declaration.contradiction_classes[0].identifier,
+        "resolution_status": declaration.resolution_states[0].identifier,
+        "positions": (
+            Position(holder="one", claim="the measurement is sound", basis="test"),
+            Position(holder="two", claim="the measurement is unsound", basis="test"),
+        ),
+        "affected": {declaration.affected_dimensions[0]: ("a-subject",)},
+        "candidate_resolutions": ("measure again with an independent instrument",),
+        "owner": declaration.artifact_id,
+        "origin": "test",
+        "detector": "test",
+    }
+    fields.update(overrides)
+    return fields
+
+
+def test_a_gap_naming_no_resolution_path_is_refused(store, declaration):
+    """A gap with criteria and no path says what would close it and nothing about how, which is
+    a disclosure that cannot be acted on."""
+    with pytest.raises(RecursiveKnowledgeError, match="names no resolution path"):
+        subjects.record_gap(
+            store,
+            natural_key="test/no-path",
+            classification=declaration.residual_gap_class,
+            severity=declaration.severity_ids[-1],
+            owner=declaration.artifact_id,
+            origin="test",
+            finding="a gap with nowhere to go",
+            resolution_path="   ",
+            criteria=("the gap is closed",),
+        )
+
+
+def test_a_review_cadence_below_the_declared_minimum_is_refused(store, declaration):
+    """The declared minimum is one ledger step, so the only way under it is a cadence that is
+    not a count at all — and absorbing that as the default would give the gap a review schedule
+    its caller never asked for."""
+    with pytest.raises(RecursiveKnowledgeError, match="below the declared minimum"):
+        subjects.record_gap(
+            store,
+            natural_key="test/too-often",
+            classification=declaration.residual_gap_class,
+            severity=declaration.severity_ids[-1],
+            owner=declaration.artifact_id,
+            origin="test",
+            finding="a gap reviewed continuously",
+            resolution_path="investigate",
+            criteria=("the gap is closed",),
+            cadence=-1,
+        )
+
+
+def test_satisfying_a_criterion_needs_a_basis_and_an_unsatisfied_criterion(store, declaration):
+    """Both halves: a criterion satisfied with no basis records that something was done and not
+    what, and a criterion nobody declared cannot be satisfied at all — that would be closing a
+    gap against a condition it never carried."""
+    gap = subjects.record_gap(
+        store,
+        natural_key="test/satisfy",
+        classification=declaration.residual_gap_class,
+        severity=declaration.severity_ids[-1],
+        owner=declaration.artifact_id,
+        origin="test",
+        finding="a gap under measurement",
+        resolution_path="investigate",
+        criteria=("the question is answered",),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="must name its basis"):
+        subjects.satisfy(store, gap.identity, criterion="the question is answered", basis="  ")
+    with pytest.raises(RecursiveKnowledgeError, match="not an unsatisfied closure criterion"):
+        subjects.satisfy(store, gap.identity, criterion="a criterion nobody declared", basis="b")
+
+
+@pytest.mark.parametrize(
+    ("overrides", "message"),
+    [
+        ({"positions": ()}, "competing positions"),
+        ({"candidate_resolutions": ()}, "offers no candidate resolution"),
+        ({"affected": {"a-dimension-nobody-declared": ("x",)}}, "is not one"),
+        ({"affected": {}}, "records nothing it affects"),
+    ],
+    ids=["one-sided", "no-candidate", "undeclared-dimension", "affects-nothing"],
+)
+def test_a_contradiction_missing_what_makes_it_resolvable_is_refused(
+    store, declaration, overrides, message
+):
+    with pytest.raises(RecursiveKnowledgeError, match=message):
+        subjects.record_contradiction(store, **_contradiction_fields(declaration, **overrides))
+
+
+def test_a_contradiction_affecting_named_dimensions_but_no_subject_is_refused(store, declaration):
+    """A dimension declared and empty is not the same as no dimension: it says the contradiction
+    touches something of that kind and names nothing, which nothing can act on."""
+    fields = _contradiction_fields(declaration, affected={declaration.affected_dimensions[0]: ()})
+    with pytest.raises(RecursiveKnowledgeError, match="names no affected subject"):
+        subjects.record_contradiction(store, **fields)
+
+
+def test_a_declaration_with_no_generated_relation_cannot_record_a_consequence(store, declaration):
+    """The relation is found by its declared inverse, never written here as a literal. A
+    declaration that carries no such relation must fault rather than invent the name."""
+    forged = dataclasses.replace(
+        declaration,
+        relations=tuple(
+            dataclasses.replace(spec, inverse="something-else") for spec in declaration.relations
+        ),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="generated inverse"):
+        subjects._generated_relation(forged)
+
+
+def test_advancing_to_an_undeclared_stage_or_from_one_is_refused(store, declaration):
+    """The pipeline is ordered and this is the only door through it. A stage nobody declared has
+    no position in that order, so neither end of the move can be checked."""
+    lesson = subjects.start_lesson(
+        store, natural_key="test/undeclared", owner=declaration.artifact_id, origin="test"
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="not a declared learning stage"):
+        subjects.advance(store, lesson.identity, to_stage="a-stage-nobody-declared", basis="b")
+    stages = [spec.identifier for spec in declaration.learning_stages]
+    displaced = dataclasses.replace(
+        store.get(lesson.identity),
+        payload={**subjects.payload_of(store.get(lesson.identity)), "stage": "nowhere"},
+    )
+    store.amend(displaced, event="displaced")
+    with pytest.raises(RecursiveKnowledgeError, match="which is not a declared stage"):
+        subjects.advance(store, lesson.identity, to_stage=stages[1], basis="b")
+
+
+def test_a_pipeline_advance_with_no_basis_is_refused(store, declaration):
+    """The move is legal and unaccountable, which is the combination the whole ledger exists to
+    refuse: a lesson that advanced because somebody advanced it."""
+    stages = [spec.identifier for spec in declaration.learning_stages]
+    lesson = subjects.start_lesson(
+        store, natural_key="test/no-basis", owner=declaration.artifact_id, origin="test"
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="must name its basis"):
+        subjects.advance(store, lesson.identity, to_stage=stages[1], basis="   ")
+
+
+# --- the ledger's readers, and its refusals ------------------------------------------------
+
+
+def test_a_ledger_can_be_built_without_seeding_itself(declaration):
+    """The bootstrap admits the declared context kinds and seeded populations. A ledger that
+    skips it is the only starting point from which "nothing was dropped" means anything, because
+    every later count is measured against a population that began empty."""
+    empty = KnowledgeLedger(declaration, bootstrap=False)
+    assert empty.all() == ()
+    assert empty.admitted == 0
+    assert empty.superseded == 0
+
+
+def test_every_projection_of_the_population_reads_the_same_ledger(store, declaration):
+    """Five projections over one population. A projection that filtered from its own copy would
+    let two readings of one ledger disagree, which is the defect the single home exists for."""
+    everything = store.all()
+    assert everything
+    sample = everything[0]
+    assert sample in store.of_class(sample.entity_class)
+    assert sample in store.with_state(sample.state)
+    assert sample in store.in_domain(str(sample.payload.get("domain")))
+    assert sample in store.active()
+    assert len(store.active()) <= len(everything)
+
+
+def test_a_subject_missing_a_payload_key_its_profile_requires_is_refused(store, declaration):
+    """The attribute half of this is measured elsewhere. The PAYLOAD half is a separate branch:
+    a key present and empty carries no less obligation than one that is absent."""
+    profile = next(spec.profile for spec in declaration.profiles if spec.required_payload)
+    entity = store.subject(
+        natural_key="test/hollow-payload",
+        profile=profile,
+        domain=declaration.residual_domain,
+        owner=declaration.artifact_id,
+        origin="test",
+    )
+    _, payload_keys = declaration.required_for(entity.entity_class, profile)
+    assert payload_keys, "the chosen profile requires no payload key, so nothing is measured"
+    hollow = dataclasses.replace(entity, payload={**dict(entity.payload), payload_keys[0]: "   "})
+    with pytest.raises(RecursiveKnowledgeError, match="requires payload key"):
+        store.admit(hollow)
+
+
+def test_a_supersession_with_no_basis_is_refused(store, declaration):
+    """Supersession is how this ledger deletes nothing. An act that replaces one subject with
+    another and records no reason is a deletion with a forwarding address."""
+    first = subjects.start_lesson(
+        store, natural_key="test/sup-a", owner=declaration.artifact_id, origin="test"
+    )
+    second = subjects.start_lesson(
+        store, natural_key="test/sup-b", owner=declaration.artifact_id, origin="test"
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="must name its basis"):
+        store.supersede(first.identity, by=second.identity, basis="  ")
+
+
+def test_amending_a_subject_nobody_admitted_is_refused(store, declaration):
+    """Amend appends a new version of something already recorded. Amending an unadmitted subject
+    would create it through the door that exists for changing it, and the admission checks that
+    door does not perform would never run."""
+    entity = store.subject(
+        natural_key="test/never-admitted",
+        profile=declaration.default_profile,
+        domain=declaration.residual_domain,
+        owner=declaration.artifact_id,
+        origin="test",
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="cannot be amended"):
+        store.amend(entity, event="amended")
+
+
+def test_an_edited_journal_body_breaks_the_chain(store):
+    """The link check alone would pass on a journal whose entries still point at each other while
+    one of them says something else than it did when its hash was taken."""
+    assert store.chain_is_intact()
+    object.__setattr__(store._journal[0], "identity", "somebody-else")
+    assert not store.chain_is_intact()
+
+
+def test_a_seeded_population_naming_no_reader_is_refused(declaration):
+    """A population declared and unreadable would seed nothing, and a ledger seeded with nothing
+    is indistinguishable from one whose populations are genuinely empty."""
+    forged = dataclasses.replace(
+        declaration,
+        seeded_populations=tuple(
+            dataclasses.replace(spec, reader="a-reader-nothing-implements")
+            for spec in declaration.seeded_populations
+        ),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="which nothing implements"):
+        KnowledgeLedger(forged)
+
+
+# --- the vocabularies and the lattice -------------------------------------------------------
+
+
+def test_a_binding_owner_naming_no_reader_is_refused(declaration):
+    """The live vocabulary is read from its owner rather than copied. An owner nobody can read
+    would make the binding a copy that never diverges, because nothing ever compares it."""
+    forged = dataclasses.replace(
+        declaration,
+        binding_owners=tuple(
+            dataclasses.replace(spec, reader="a-reader-nothing-implements")
+            for spec in declaration.binding_owners
+        ),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="which nothing implements"):
+        states.live_vocabulary(forged)
+
+
+def test_a_move_the_lattice_does_not_permit_is_refused(store, declaration):
+    """A transition that quietly did nothing would leave the caller believing a subject had
+    advanced, which is why both refusals here are faults rather than silent no-ops."""
+    entity = subjects.start_lesson(
+        store, natural_key="test/lattice", owner=declaration.artifact_id, origin="test"
+    )
+    # Every declared state is reachable from every other in the live lattice, so the unreachable
+    # move has to be built: a lattice with one successor edge removed is what a future narrowing
+    # of the declaration would look like, and the refusal must survive it.
+    narrowed = dataclasses.replace(
+        declaration,
+        states=tuple(
+            dataclasses.replace(spec, successors=()) if spec.identifier == entity.state else spec
+            for spec in declaration.states
+        ),
+    )
+    target = next(spec.identifier for spec in declaration.states if spec.identifier != entity.state)
+    with pytest.raises(RecursiveKnowledgeError, match="permits no move"):
+        states.transition(
+            narrowed,
+            entity,
+            target,
+            basis="test",
+            actor=declaration.artifact_id,
+            sequence=0,
+        )
+
+
+def test_every_axis_starts_where_it_is_declared_to_and_an_undeclared_one_refuses(declaration):
+    """The starting value is declared data. A default invented here would be this module owning
+    a lifecycle decision the declaration owns."""
+    initial = states.axis_initial(declaration)
+    assert set(initial) == {spec.axis for spec in declaration.lifecycle_axes}
+    for spec in declaration.lifecycle_axes:
+        assert states.axis_values(declaration, spec.axis) == spec.values
+    with pytest.raises(RecursiveKnowledgeError, match="not a declared lifecycle axis"):
+        states.axis_values(declaration, "an-axis-nobody-declared")
+
+
+@pytest.mark.parametrize("what", ["qualifier", "axis"])
+def test_a_value_the_vocabulary_does_not_carry_is_refused(declaration, what):
+    """Composition refuses an undeclared VALUE as well as an undeclared name. Accepting the value
+    would put a member into the vocabulary through a call site rather than through admission."""
+    if what == "qualifier":
+        name = declaration.qualifiers[0].qualifier
+        with pytest.raises(RecursiveKnowledgeError, match="is not a declared value"):
+            composition.qualify(declaration, {name: "a-value-nobody-declared"})
+    else:
+        name = declaration.lifecycle_axes[0].axis
+        with pytest.raises(RecursiveKnowledgeError, match="is not a declared value"):
+            composition.axes_for(declaration, {name: "a-value-nobody-declared"})
+
+
+def test_an_undeclared_context_kind_is_refused(declaration):
+    """Context is a subject with a profile, never a primitive — and the root is built here from
+    declared data so it cannot become a hardcoded planet somewhere in the call graph."""
+    with pytest.raises(RecursiveKnowledgeError, match="not a declared context kind"):
+        composition.situate(declaration, "a-context-kind-nobody-declared")
+
+
+# --- the bound mechanisms: bridge, discovery, research, evolution, proposal ------------------
+
+
+def test_an_entity_class_naming_no_bridge_handler_is_refused(store, declaration):
+    """The bridge is what makes a knowledge subject a governed construct. A class with no handler
+    would pass through it as though it had been governed."""
+    forged = dataclasses.replace(
+        declaration,
+        entity_classes=tuple(
+            dataclasses.replace(spec, bridge_handler="a-handler-nothing-implements")
+            for spec in declaration.entity_classes
+        ),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="which nothing implements"):
+        bridge.govern(KnowledgeLedger(forged))
+
+
+def test_a_source_naming_no_detector_and_a_probe_naming_no_implementation_are_refused(
+    store, declaration
+):
+    """Both bindings are two-way by design, so the half that refuses at RUN time is the half that
+    protects a declaration loaded some other way."""
+    forged_sources = dataclasses.replace(
+        declaration,
+        discovery_sources=tuple(
+            dataclasses.replace(spec, detector="a-detector-nothing-implements")
+            for spec in declaration.discovery_sources
+        ),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="which nothing implements"):
+        discovery.opportunities(KnowledgeLedger(forged_sources))
+    forged_probes = dataclasses.replace(
+        declaration,
+        reality_probes=tuple(
+            dataclasses.replace(spec, probe="a-probe-nothing-implements")
+            for spec in declaration.reality_probes
+        ),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="which nothing implements"):
+        discovery.probe_all(forged_probes, repository=".")
+
+
+def test_a_declaration_with_no_produced_relation_cannot_derive_research(declaration):
+    """The derivation relation is found by its declared inverse rather than written as a literal,
+    so a declaration that carries no such relation must fault rather than invent the name."""
+    forged = dataclasses.replace(
+        declaration,
+        relations=tuple(
+            dataclasses.replace(spec, inverse="something-else") for spec in declaration.relations
+        ),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="produced inverse"):
+        research._derivation_relation(forged)
+
+
+def test_an_evolution_step_with_no_basis_is_refused(store, declaration):
+    """The step is otherwise legal and unaccountable — the combination the ledger exists to
+    refuse."""
+    subject = declaration.evolution_subjects[0]
+    with pytest.raises(RecursiveKnowledgeError, match="must name its basis"):
+        evolution.evolve(
+            store,
+            subject=subject.identifier,
+            operator=subject.operators[0],
+            before="a",
+            after="b",
+            basis="   ",
+            owner=declaration.artifact_id,
+        )
+
+
+def test_the_proposal_register_reads_the_ledger_rather_than_a_list(store, declaration):
+    """Empty means the foundation has not been asked, and that is a reading of the ledger rather
+    than a second register somebody would have to keep in step."""
+    from engine.recursive_knowledge import proposal
+
+    assert proposal.proposals(store) == ()
+    admission.admit_architecture_proposal(
+        store,
+        natural_key="a-construct-the-primitives-cannot-hold",
+        definition="unrepresentable under the declared primitives",
+    )
+    assert len(proposal.proposals(store)) == 1
+
+
+# --- evidence: the only writer in this capability -------------------------------------------
+
+
+def test_the_evidence_records_are_bound_to_the_declaration_in_both_directions(declaration):
+    """A record the declaration names and nothing produces is a file no run will ever write; a
+    record produced and undeclared is a file appearing in the evidence home that nothing reads.
+    Both are refused, which is what makes the record list a binding rather than a note."""
+    from engine.recursive_knowledge import evidence
+
+    fewer = dataclasses.replace(declaration, evidence_records=declaration.evidence_records[:-1])
+    with pytest.raises(RecursiveKnowledgeError, match="the declaration does not name"):
+        evidence.assert_complete(fewer, {})
+    invented = dataclasses.replace(
+        declaration,
+        evidence_records=(
+            *declaration.evidence_records,
+            {"record_name": "a-record-nothing-produces"},
+        ),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match="nothing produces"):
+        evidence.assert_complete(invented, {})
+
+
+def test_a_declaration_naming_no_evidence_home_cannot_be_written(declaration, tmp_path):
+    """The home is declared data. Defaulting it here would put the evidence somewhere the
+    declaration never named, which is exactly where nobody would look for it."""
+    from engine.recursive_knowledge import evidence
+
+    homeless = dataclasses.replace(declaration, evidence_home="")
+    with pytest.raises(RecursiveKnowledgeError, match="names no evidence home"):
+        evidence.home(homeless, str(tmp_path))
+
+
+def test_both_declared_records_are_written_atomically_under_the_declared_home(
+    declaration, store, tmp_path
+):
+    """Atomically because a reader seeing a half-written file would read truncated JSON as
+    corrupt, and "the evidence is corrupt" must never be confusable with "the evidence says the
+    gate closed"."""
+    from engine.recursive_knowledge import evidence
+
+    report = {"schema": "test", "counts": {}}
+    written = evidence.write(declaration, report, store, repository=str(tmp_path), command="test")
+    assert len(written) == 2
+    for path in written:
+        assert path.exists()
+        assert json.loads(path.read_text(encoding="utf-8"))
+        assert not path.with_suffix(path.suffix + ".tmp").exists()
+    elsewhere = tmp_path / "somewhere" / "ledger.json"
+    assert evidence.write_ledger(declaration, store, path=str(elsewhere)) == elsewhere
+    assert json.loads(elsewhere.read_text(encoding="utf-8"))["subjects"]
+
+
+# --- the declaration reader's remaining faults ----------------------------------------------
+
+
+def test_a_value_the_reader_cannot_convert_is_a_fault_and_names_it(tmp_path):
+    """Not a DeclarationError raised by a guard — a ValueError from the rehydration itself, caught
+    and re-raised so a caller can tell a malformed document from a bug in the reader. A bound
+    that is not a number reaches `int()` before any guard sees it."""
+    document = json.loads(
+        (Path(repo_root()) / "00-MASTER" / "URKE-000001" / "urke-declaration.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    document["primitives"]["state_bound"] = "as many as needed"
+    target = tmp_path / "urke-declaration.json"
+    target.write_text(json.dumps(document), encoding="utf-8")
+    with pytest.raises(RecursiveKnowledgeError, match="malformed"):
+        load_declaration(str(target))
+
+
+@pytest.mark.parametrize(
+    ("mutate", "message"),
+    [
+        (lambda names: names[:-1], "vocabularies the declaration does not list"),
+        (lambda names: (*names, "a.vocabulary.nothing.reads"), "nothing reads"),
+    ],
+    ids=["undeclared-scan", "stale-declaration"],
+)
+def test_the_scanned_vocabularies_are_bound_in_both_directions(declaration, mutate, message):
+    """This module scans a fixed set of vocabularies and the declaration lists them. Either half
+    drifting silently would leave a domain vocabulary unscanned, or a listed one unread — and the
+    second is the worse of the two, because it looks exactly like coverage."""
+    discipline = declaration.source_discipline
+    forged = dataclasses.replace(
+        declaration,
+        source_discipline=dataclasses.replace(
+            discipline, scanned_vocabularies=mutate(tuple(discipline.scanned_vocabularies))
+        ),
+    )
+    with pytest.raises(RecursiveKnowledgeError, match=message):
+        scanned_vocabulary(forged)
+
+
+# --- worlds and states: bindings measured against their owners, in both directions ----------
+
+
+def test_a_frame_catalogue_that_cannot_be_read_or_carries_no_frames_is_a_fault(
+    declaration, tmp_path
+):
+    """The frame kinds are read from the context authority rather than copied. A catalogue that
+    cannot be read must fault: reading it as empty would report every binding as stale, and
+    reading it as complete would report every binding as sound."""
+    with pytest.raises(RecursiveKnowledgeError, match="cannot be read"):
+        worlds.frame_kinds(declaration, repository=str(tmp_path))
+    target = tmp_path / declaration.frame_kind_owner
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps({"frames": "not a list"}), encoding="utf-8")
+    with pytest.raises(RecursiveKnowledgeError, match="declares no frames"):
+        worlds.frame_kinds(declaration, repository=str(tmp_path))
+
+
+def test_a_temporal_system_resolves_to_its_declared_bindings(declaration):
+    """Every field answered or explicitly unresolved. A caller must be able to tell "this system
+    has no epoch" from "this reader declined to say"."""
+    identifier = declaration.temporal_ids[0]
+    resolved = worlds.resolve_temporal(declaration, identifier)
+    assert resolved["identifier"] == identifier
+    assert set(resolved) >= {"calendar_system", "chronology_model", "epoch", "epoch_resolved"}
+
+
+def test_a_reality_omitting_a_dimension_or_binding_to_a_frame_nobody_carries_is_reported(
+    declaration,
+):
+    """Omitting a dimension and naming it unresolved are different claims. The first is silence
+    about a dimension the model declares, and silence is what this law exists to refuse."""
+    first = declaration.realities[0]
+    stripped = dataclasses.replace(first, systems={}, frame_kind="a-frame-nobody-carries")
+    forged = dataclasses.replace(declaration, realities=(stripped, *declaration.realities[1:]))
+    problems = worlds.reality_problems(forged, repository=repo_root())
+    assert any("omits dimension" in p for p in problems)
+    assert any("the catalogue does not carry" in p for p in problems)
+
+
+def test_a_reality_binding_to_no_frame_and_disclosing_no_gap_is_reported(declaration):
+    """Binding to nothing is admissible; binding to nothing in silence is not. The gap has to
+    name itself, what it found, who it was referred to, and what would close it."""
+    first = declaration.realities[0]
+    silent = dataclasses.replace(first, frame_kind="", frame_kind_gap={})
+    forged = dataclasses.replace(declaration, realities=(silent, *declaration.realities[1:]))
+    problems = worlds.reality_problems(forged, repository=repo_root())
+    assert len([p for p in problems if "discloses no" in p]) == 4
+
+
+def test_a_temporal_system_bound_to_a_type_or_chronology_nobody_implements_is_reported(
+    declaration,
+):
+    """The two owners are independent — the temporal capability carries system types and the
+    existence universe carries chronology models — so each binding is checked against its own."""
+    first = declaration.temporal_systems[0]
+    unbound = dataclasses.replace(
+        first,
+        system_type="a-system-type-nobody-implements",
+        chronology_model="a-chronology-nobody-carries",
+    )
+    forged = dataclasses.replace(
+        declaration, temporal_systems=(unbound, *declaration.temporal_systems[1:])
+    )
+    problems = worlds.temporal_problems(forged)
+    assert any("does not implement" in p for p in problems)
+    assert any("does not carry" in p for p in problems)
+
+
+def test_a_declaration_where_no_temporal_system_discloses_an_epoch_gap_is_reported(declaration):
+    """A residual chronology with no disclosed gap is claiming an epoch it cannot have."""
+    forged = dataclasses.replace(
+        declaration,
+        temporal_systems=tuple(
+            dataclasses.replace(spec, epoch_gap=None) for spec in declaration.temporal_systems
+        ),
+    )
+    assert any("discloses an epoch gap" in p for p in worlds.temporal_problems(forged))
+
+
+def test_a_state_that_binds_to_nothing_and_discloses_nothing_is_reported(declaration):
+    """A vocabulary held in secret. Both halves are reported: the four fields the gap owes, and
+    the separate fact that this state's CLASS was declared to require a binding at all."""
+    bound = next(spec for spec in declaration.states if spec.binding is not None)
+    required = {spec.state_class for spec in declaration.state_classes if spec.binding_required}
+    assert bound.state_class in required, "the chosen state's class does not require a binding"
+    silent = dataclasses.replace(bound, binding=None, binding_gap={})
+    forged = dataclasses.replace(
+        declaration,
+        states=tuple(silent if spec is bound else spec for spec in declaration.states),
+    )
+    problems = states.binding_problems(forged)
+    assert len([p for p in problems if "discloses no" in p]) == 4
+    assert any("neither binds nor discloses" in p for p in problems)
+
+
+@pytest.mark.parametrize(
+    ("overrides", "message"),
+    [
+        ({"owner": "an-owner-nothing-reads"}, "which nothing reads"),
+        ({"member": "a-member-nobody-carries"}, "does not carry"),
+    ],
+    ids=["unread-owner", "absent-member"],
+)
+def test_a_state_bound_to_something_its_owner_does_not_hold_is_reported(
+    declaration, overrides, message
+):
+    bound = next(spec for spec in declaration.states if spec.binding is not None)
+    rebound = dataclasses.replace(bound, binding={**dict(bound.binding), **overrides})
+    forged = dataclasses.replace(
+        declaration,
+        states=tuple(rebound if spec is bound else spec for spec in declaration.states),
+    )
+    assert any(message in p for p in states.binding_problems(forged))
+
+
+def test_a_state_vocabulary_holding_a_whole_owner_population_is_a_copy(declaration, monkeypatch):
+    """Binding to somebody else's vocabulary and copying it whole are indistinguishable from the
+    outside until the owner changes one row."""
+    ours = frozenset(
+        identifier.lower().replace("_", "-") for identifier in declaration.state_ids[:2]
+    )
+    monkeypatch.setattr(
+        states, "live_vocabulary", lambda decl: {"an-owner": {"a-population": ours}}
+    )
+    assert any("is a copy rather than a binding" in p for p in states.binding_problems(declaration))
+
+
+def test_a_construct_the_bridge_leaves_undisposed_is_reported(store, monkeypatch):
+    """The bridge is what makes a knowledge subject a governed construct. A construct that came
+    back with no active disposition is one the bridge did not govern, and counting it under a
+    disposition it does not carry would be the drop this whole ledger refuses."""
+    from engine.construct.model import Construct
+    from engine.recursive_knowledge import bridge as bridge_module
+
+    class _Undisposed:
+        def __init__(self, construct):
+            self._construct = construct
+
+        disposition = None
+
+        def __getattr__(self, name):
+            return getattr(self._construct, name)
+
+    real = dict(bridge_module.HANDLERS)
+
+    def _wrap(name):
+        def handler(registry, entity, *, kind):
+            return _Undisposed(real[name](registry, entity, kind=kind))
+
+        return handler
+
+    monkeypatch.setattr(bridge_module, "HANDLERS", {name: _wrap(name) for name in real})
+    report = bridge_module.govern(store)
+    assert report["ungoverned"]
+    assert Construct is not None
+
+
+def test_a_declaration_refused_by_a_guard_is_re_raised_unchanged(tmp_path):
+    """The reader distinguishes its two failures. A guard's refusal already names what is wrong
+    and passes through; only an unanticipated conversion error is wrapped as "malformed". Folding
+    them together would bury every precise refusal under one generic sentence."""
+    document = json.loads(
+        (Path(repo_root()) / "00-MASTER" / "URKE-000001" / "urke-declaration.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    document.pop("states")
+    target = tmp_path / "urke-declaration.json"
+    target.write_text(json.dumps(document), encoding="utf-8")
+    with pytest.raises(RecursiveKnowledgeError) as refusal:
+        load_declaration(str(target))
+    assert "malformed" not in str(refusal.value)
