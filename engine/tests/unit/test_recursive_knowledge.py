@@ -1581,3 +1581,136 @@ def test_recording_no_disposition_at_all_is_refused(declaration, monkeypatch):
     monkeypatch.setattr(bridge, "govern", lambda store: {**real(store), "dispositions": ()})
     problems = contract.no_subject_exists_outside_governance(_forge(declaration))
     assert any("nothing was actually governed" in p for p in problems), problems
+
+
+# --- URKE-L-32 companion: the stability refusals ---------------------------------------------
+
+
+def test_a_broken_chain_is_reported_as_an_unstable_measurement(declaration):
+    probe = _ledger_probe(declaration, chain_is_intact=lambda: False)
+    problems = contract.stability_is_measured_and_instability_is_governed(probe)
+    assert any("'chain_integrity' does not hold" in p for p in problems), problems
+
+
+def test_a_population_that_does_not_reconcile_is_reported(declaration):
+    real = KnowledgeLedger(declaration)
+    bad = dict(real.verify())
+    bad["reconciles"] = False
+    probe = _ledger_probe(declaration, verify=lambda: bad)
+    problems = contract.stability_is_measured_and_instability_is_governed(probe)
+    assert any("'population_reconciles' does not hold" in p for p in problems), problems
+
+
+def test_detecting_no_instability_on_an_unstable_ledger_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(discovery, "discover", lambda store: [])
+    problems = contract.stability_is_measured_and_instability_is_governed(_forge(declaration))
+    assert any("no instability was detected" in p for p in problems), problems
+
+
+def test_an_instability_not_admitted_as_a_governed_subject_is_refused(declaration, monkeypatch):
+    real = discovery.discover
+
+    def misclassified(store):
+        found = real(store)
+        return [dataclasses.replace(found[0], classification="not-the-finding-role"), *found[1:]]
+
+    monkeypatch.setattr(discovery, "discover", misclassified)
+    problems = contract.stability_is_measured_and_instability_is_governed(_forge(declaration))
+    assert any("not admitted as a governed subject" in p for p in problems), problems
+
+
+def test_a_stability_property_naming_no_measurement_is_refused(declaration):
+    unmeasured = ({"property": "invented", "measured_by": ""},)
+    problems = contract.stability_is_measured_and_instability_is_governed(
+        _forge(declaration, stability_properties=unmeasured)
+    )
+    assert any("names no measurement" in p for p in problems), problems
+
+
+def test_a_stability_mechanism_declared_exempt_from_review_is_refused(declaration):
+    problems = contract.stability_is_measured_and_instability_is_governed(
+        _forge(declaration, stability_exemptions=("somebody",))
+    )
+    assert any("declared exempt from review" in p for p in problems), problems
+
+
+# --- URKE-L-20 companion: the binding refusals ------------------------------------------------
+
+
+def test_an_unreadable_construct_foundation_declaration_is_a_fault(declaration, tmp_path):
+    # A superior that cannot be read yields no verdict, so the law raises rather than
+    # returning "no problems" over a declaration it never saw.
+    forged = contract.Probe(declaration=declaration, repo=str(tmp_path))
+    with pytest.raises(
+        contract.ContractError, match="construct foundation declaration cannot be read"
+    ):
+        contract.bound_vocabulary_is_neither_copied_nor_narrowed(forged)
+
+
+def test_a_reachability_row_naming_an_undeclared_member_is_refused(declaration):
+    rows = (
+        {"ucon_class": "some-unknown-class", "reached_by": "not-a-declared-member"},
+        *declaration.ucon_unknown_bindings,
+    )
+    problems = contract.bound_vocabulary_is_neither_copied_nor_narrowed(
+        _forge(declaration, ucon_unknown_bindings=rows)
+    )
+    assert any("not a declared member" in p for p in problems), problems
+
+
+def test_an_unknown_class_no_binding_reaches_is_refused(declaration):
+    problems = contract.bound_vocabulary_is_neither_copied_nor_narrowed(
+        _forge(declaration, ucon_unknown_bindings=())
+    )
+    assert any("no declared binding" in p for p in problems), problems
+
+
+# --- URKE-L-28: the live-mechanism refusals ---------------------------------------------------
+
+
+def test_a_substrate_naming_an_unimportable_module_is_refused(declaration):
+    broken = (
+        dataclasses.replace(
+            declaration.substrate_elements[0], module="engine/recursive_knowledge/no_such_module.py"
+        ),
+        *declaration.substrate_elements[1:],
+    )
+    problems = contract.declared_mechanisms_are_live_and_exercised(
+        _forge(declaration, substrate_elements=broken)
+    )
+    assert any("cannot be imported" in p for p in problems), problems
+
+
+def test_a_substrate_naming_a_symbol_that_does_not_exist_is_refused(declaration):
+    broken = (
+        dataclasses.replace(declaration.substrate_elements[0], symbol="NoSuchSymbol"),
+        *declaration.substrate_elements[1:],
+    )
+    problems = contract.declared_mechanisms_are_live_and_exercised(
+        _forge(declaration, substrate_elements=broken)
+    )
+    assert any("which does not exist" in p for p in problems), problems
+
+
+def test_a_future_capability_requiring_undeclared_substrate_is_refused(declaration):
+    extra = (
+        *declaration.future_capabilities,
+        type(declaration.future_capabilities[0])(
+            identifier="invented-capability", requires=("URKE-S-NOT-DECLARED",)
+        ),
+    )
+    problems = contract.declared_mechanisms_are_live_and_exercised(
+        _forge(declaration, future_capabilities=extra)
+    )
+    assert any("requires undeclared substrate" in p for p in problems), problems
+
+
+def test_a_substrate_nothing_requires_is_refused(declaration):
+    extra = (
+        *declaration.substrate_elements,
+        dataclasses.replace(declaration.substrate_elements[0], substrate_id="URKE-S-UNREQUIRED"),
+    )
+    problems = contract.declared_mechanisms_are_live_and_exercised(
+        _forge(declaration, substrate_elements=extra)
+    )
+    assert any("nothing requires it" in p for p in problems), problems
