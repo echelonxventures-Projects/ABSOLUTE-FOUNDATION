@@ -1813,3 +1813,76 @@ def test_declaring_no_default_rule_is_refused(declaration):
         _forge(declaration, default_rule="")
     )
     assert any("no default rule is declared" in p for p in problems), problems
+
+
+# --- the law selector -------------------------------------------------------------------------
+#
+# These three were written, passed, and were then deleted by a careless string splice in this
+# same file; the loss surfaced only because `measure`'s selector lines reappeared as uncovered.
+# Restored, and worth restoring: adr/0041's shape is a selector that matches nothing, measures
+# nothing, and exits 0.
+
+
+def test_a_law_selector_matching_nothing_is_a_fault():
+    with pytest.raises(contract.ContractError, match="no declared law matches"):
+        contract.measure(laws=["NOT-A-REAL-LAW"])
+
+
+def test_a_law_selector_naming_a_check_rather_than_a_law_is_a_fault(declaration):
+    # The dangerous half: a check name looks like a law selector and silently matched none.
+    with pytest.raises(contract.ContractError, match="no declared law matches"):
+        contract.measure(laws=[declaration.laws[0].check])
+
+
+def test_selecting_one_law_measures_only_that_law(declaration):
+    only = declaration.laws[0].law_id
+    report = contract.measure(laws=[only])
+    assert [row["law_id"] for row in report["laws"]] == [only]
+
+
+def test_a_law_that_cannot_be_computed_is_a_fault_not_a_violation(declaration, monkeypatch):
+    # A law whose check raises has produced no verdict. Reporting it as a violation would
+    # convert "could not measure" into "measured and failed", which are different facts.
+    first = declaration.laws[0]
+
+    def explode(probe):
+        raise RecursiveKnowledgeError("check exploded for the test")
+
+    monkeypatch.setitem(contract.LAW_CHECKS, first.check, explode)
+    with pytest.raises(contract.ContractError, match="could not be computed"):
+        contract.measure(laws=[first.law_id])
+
+
+# --- URKE-L-14: the evolution-coverage refusals -------------------------------------------------
+
+
+def test_a_subject_that_cannot_evolve_is_reported(declaration, monkeypatch):
+    def refuse(*args, **kwargs):
+        raise RecursiveKnowledgeError("evolution refused for the test")
+
+    monkeypatch.setattr(evolution, "evolve", refuse)
+    problems = contract.evolution_covers_every_declared_subject(_forge(declaration))
+    assert any("could not evolve through" in p for p in problems), problems
+
+
+def test_an_operator_never_exercised_is_refused(declaration):
+    # An operator nobody's subjects use is declared and dead.
+    extra = (
+        *declaration.operators,
+        dataclasses.replace(declaration.operators[0], identifier="never-used-operator"),
+    )
+    problems = contract.evolution_covers_every_declared_subject(
+        _forge(declaration, operators=extra)
+    )
+    assert any("never-used-operator' was never exercised" in p for p in problems), problems
+
+
+def test_an_operator_naming_an_unimplemented_function_is_refused(declaration):
+    broken = (
+        dataclasses.replace(declaration.operators[0], implementation="no_such_operator"),
+        *declaration.operators[1:],
+    )
+    problems = contract.evolution_covers_every_declared_subject(
+        _forge(declaration, operators=broken)
+    )
+    assert any("names an unimplemented function" in p for p in problems), problems
