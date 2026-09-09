@@ -2383,3 +2383,103 @@ def test_a_gap_with_no_closure_criterion_must_be_refused(declaration, monkeypatc
     monkeypatch.setattr(subjects, "record_gap", permissive)
     problems = contract.profile_requirements_are_enforced(_forge(declaration))
     assert any("with no closure criterion" in p for p in problems), problems
+
+
+def test_a_discovery_run_that_changes_the_declaration_is_refused(declaration, monkeypatch):
+    # Discovery observes; it must not rewrite the truth it observes. The violation is a
+    # discover() that mutates the declaration underneath the law.
+    calls = {"n": 0}
+
+    def drifting_payload(self):
+        calls["n"] += 1
+        return {"reading": calls["n"]}
+
+    monkeypatch.setattr(type(declaration), "digest_payload", drifting_payload)
+    problems = contract.discovery_never_mutates_constitutional_truth(_forge(declaration))
+    assert any("changed the declaration" in p for p in problems), problems
+
+
+def test_a_declared_target_no_source_claims_is_refused(declaration):
+    orphan = (
+        *declaration.discovery_targets,
+        dataclasses.replace(declaration.discovery_targets[0], identifier="target-nobody-claims"),
+    )
+    problems = contract.discovery_covers_every_declared_target(
+        _forge(declaration, discovery_targets=orphan)
+    )
+    assert any("no source claims it" in p for p in problems), problems
+
+
+def test_a_reality_that_does_not_answer_every_dimension_is_refused(declaration, monkeypatch):
+    monkeypatch.setattr(
+        worlds, "resolve", lambda decl, identifier: {"systems": {}, "identifier": identifier}
+    )
+    problems = contract.worlds_are_data_driven(_forge(declaration))
+    assert any("does not answer every dimension" in p for p in problems), problems
+
+
+def test_a_preserved_site_that_no_longer_occurs_is_refused(declaration):
+    # A preserved site records that a forbidden phrase is allowed in one named place. When
+    # that place stops containing it the exemption is stale, and a stale exemption silently
+    # widens what is permitted.
+    stale = (*declaration.preserved_sites, "contract.py:a phrase that is not in the file")
+    problems = contract.no_completeness_claim_is_declared(
+        _forge(declaration, preserved_sites=stale)
+    )
+    assert any("no longer occurs" in p for p in problems), problems
+
+
+def test_a_contradiction_class_nothing_reaches_is_refused(declaration):
+    narrowed = tuple(
+        dataclasses.replace(spec, ucon_contradiction_class="reaches-nothing")
+        for spec in declaration.contradiction_classes
+    )
+    problems = contract.bound_vocabulary_is_neither_copied_nor_narrowed(
+        _forge(declaration, contradiction_classes=narrowed)
+    )
+    assert any("contradiction class" in p and "nothing reaches it" in p for p in problems), problems
+
+
+def test_a_resolution_state_nothing_reaches_is_refused(declaration):
+    narrowed = tuple(
+        dataclasses.replace(spec, ucon_resolution_state="reaches-nothing")
+        for spec in declaration.resolution_states
+    )
+    problems = contract.bound_vocabulary_is_neither_copied_nor_narrowed(
+        _forge(declaration, resolution_states=narrowed)
+    )
+    assert any("resolution state" in p and "nothing reaches it" in p for p in problems), problems
+
+
+def test_a_disclosed_gap_missing_a_field_is_refused(declaration, monkeypatch):
+    # The ledger seeds itself from these same gaps and refuses an empty remediation, so the
+    # declaration cannot simply be mutated: seeding would fail before the law read anything.
+    # The ledger is built from the real gaps first, then the reading the law does is hollowed.
+    probe = _forge(declaration)
+    probe.seeded()
+    real = type(declaration).all_disclosed_gaps
+    monkeypatch.setattr(
+        type(declaration),
+        "all_disclosed_gaps",
+        lambda self: tuple(
+            dataclasses.replace(gap, remediation="  ") if index == 0 else gap
+            for index, gap in enumerate(real(self))
+        ),
+    )
+    problems = contract.disclosed_gaps_are_themselves_governed(probe)
+    assert any("carries no remediation" in p for p in problems), problems
+
+
+def test_a_failing_self_improvement_exercise_is_reported(declaration, monkeypatch):
+    def refuse(store):
+        raise RecursiveKnowledgeError("exercise refused for the test")
+
+    monkeypatch.setattr(discovery, "discover", refuse)
+    problems = contract.declared_mechanisms_are_live_and_exercised(_forge(declaration))
+    assert any("self-improvement exercise" in p and "failed" in p for p in problems), problems
+
+
+def test_self_analysis_producing_no_evidence_is_refused(declaration):
+    probe = _ledger_probe(declaration, of_profile=lambda profile: ())
+    problems = contract.declared_mechanisms_are_live_and_exercised(probe)
+    assert any("produced no evidence in the ledger" in p for p in problems), problems
