@@ -56,6 +56,7 @@ from engine.verification_intelligence.execution import (
     plan_shards,
     resolve_workers,
     run_tests,
+    split_currency,
     unit_file,
 )
 from engine.verification_intelligence.gate import (
@@ -2567,3 +2568,944 @@ def test_a_sharded_run_records_no_stage_evidence() -> None:
     guard = text.index('if [ -n "${UVI_SHARD:-}" ]; then\n    return 0')
     record = text.index("-m engine.verification_intelligence record")
     assert guard < record, "the sharded-run guard must precede the evidence write"
+
+
+# --- the entry point, the accessors and the branches a healthy repository never takes ---
+
+
+def test_the_module_entry_point_dispatches_to_the_cli(monkeypatch) -> None:
+    """``python -m engine.verification_intelligence`` is a second entry point, and a dispatcher
+    rather than a copy. If it stopped reaching ``cli.main`` the two would drift silently — the
+    module runs, exits 0, and verifies nothing."""
+    import runpy
+
+    from engine.verification_intelligence import cli
+
+    calls: list[int] = []
+    monkeypatch.setattr(cli, "main", lambda: calls.append(1) or 0)
+    with pytest.raises(SystemExit) as exit_info:
+        runpy.run_module("engine.verification_intelligence", run_name="__main__")
+    assert exit_info.value.code == 0
+    assert calls == [1]
+
+
+def test_a_contract_mode_runs_the_whole_declared_contract(constitution) -> None:
+    """``is_contract`` is what separates a mode that runs the declared stage contract from one
+    that names a subset. A mode that answered wrongly would run a subset under a contract label."""
+    modes = {mode.mode_id: mode.is_contract for mode in constitution.modes}
+    assert any(modes.values()), "no declared mode runs the whole contract"
+    assert not all(modes.values()), "no declared mode runs a subset"
+
+
+def test_a_priced_test_object_is_distinguishable_from_a_defaulted_one(tests_registry) -> None:
+    """`is_priced` decides whether the packer is placing a measurement or a default. Reading it
+    the same way for both would make an unmeasured object look like a cheap one."""
+    priced = [obj for obj in tests_registry.objects.values() if obj.is_priced]
+    unpriced = [obj for obj in tests_registry.objects.values() if not obj.is_priced]
+    assert priced, "the registry prices nothing"
+    assert all(obj.cost_seconds > 0 for obj in priced)
+    assert all(obj.cost_seconds <= 0 for obj in unpriced)
+
+
+def test_the_declaration_names_every_mode_and_resolves_its_default(constitution) -> None:
+    """`mode_ids` and `default_mode` are how every caller reaches a mode by name. A default that
+    did not resolve would be a verification with no mode at all."""
+    assert constitution.default_mode_id in constitution.mode_ids
+    assert constitution.default_mode.mode_id == constitution.default_mode_id
+
+
+def test_a_declaration_field_that_is_not_a_list_refuses_to_construct(tmp_path) -> None:
+    """A scalar where a list belongs would be iterated character by character, producing a
+    vocabulary of single letters that every later check would compare against and pass."""
+    document = load_declaration()
+    document["stage_registry"]["stages"][0]["reuse_inputs"] = "00-BOOK/"
+    path = tmp_path / "declaration.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    with pytest.raises(VerificationIntelligenceError, match="expected a list"):
+        load_constitution(str(path), checks=frozenset(uvi_gate.CHECKS))
+
+
+def test_the_evidence_home_is_resolved_under_the_declared_store(constitution) -> None:
+    """The plan reports where a reusable result would be read from. A home nobody can name is a
+    cache nobody can inspect, clear or audit."""
+    from engine.verification_intelligence.plan import evidence_home
+
+    assert evidence_home(constitution, REPO).startswith(REPO)
+
+
+def test_a_plan_whose_split_table_says_nothing_carries_no_currency_note(
+    monkeypatch, substrates, tests_registry, constitution
+) -> None:
+    """A repository with no cost model has no split table, and a note saying `0/0 current` would
+    be a line about nothing on every plan such a repository ever renders."""
+    from engine.verification_intelligence import plan as plan_module
+
+    monkeypatch.setattr(plan_module, "split_currency", lambda registry: "")
+    built = build_plan(
+        constitution=constitution,
+        mode_id="fast",
+        substrates=substrates,
+        tests=tests_registry,
+        root=REPO,
+    )
+    assert not [note for note in built.notes if "split table" in note]
+
+
+# --- the substrates' remaining refusals ------------------------------------------------
+
+
+def test_a_universal_registry_holding_no_entries_is_refused(tmp_path) -> None:
+    """02 is the registry the identity layer reads. Empty, every identity resolves to nothing and
+    the identity layer of selection silently contributes no objects."""
+    from engine.verification_intelligence.registry import UNIVERSAL_REGISTRY
+
+    root = _substrate_fixture(tmp_path, **{UNIVERSAL_REGISTRY: {"entries": []}})
+    with pytest.raises(VerificationIntelligenceError, match="no entries"):
+        load_substrates(str(root))
+
+
+def test_a_universal_entry_with_no_path_is_skipped_rather_than_crashing(tmp_path) -> None:
+    """A published surface may carry a row this engine does not understand. It may not carry
+    none, and it may not take the selector down."""
+    from engine.verification_intelligence.registry import EXECUTABLE_REGISTRY, UNIVERSAL_REGISTRY
+
+    root = _substrate_fixture(tmp_path)
+    document = json.loads((root / UNIVERSAL_REGISTRY).read_text(encoding="utf-8"))
+    document["entries"] = ["not-a-dict", {"no-path": True}, *document["entries"]]
+    (root / UNIVERSAL_REGISTRY).write_text(json.dumps(document), encoding="utf-8")
+    substrates = load_substrates(str(root))
+    assert "a.py" in substrates.objects
+    assert (root / EXECUTABLE_REGISTRY).exists()
+
+
+def test_a_discovery_that_returns_no_test_root_is_refused(tmp_path, monkeypatch) -> None:
+    """Discovery raising and discovery returning nothing are different failures. The second is
+    the more dangerous one: it is a well-formed answer meaning "collect nothing"."""
+    from engine.universal_discovery import discovery as discovery_module
+
+    monkeypatch.setattr(discovery_module, "derived_scope", lambda base: ((), (), (), ()))
+    with pytest.raises(VerificationIntelligenceError, match="no test root"):
+        collection_roots(str(tmp_path))
+
+
+# --- the evidence store's non-hits -----------------------------------------------------
+
+
+def test_a_stage_whose_execution_contract_is_unresolvable_takes_no_key(constitution, substrates):
+    """The key is taken over the declared inputs AND the argv the stage is invoked with. Taking
+    it over the inputs alone would produce a hit across two different invocations of one stage."""
+    stage = next(s for s in constitution.stages if s.reusable and s.reads)
+    assert input_digest(stage, substrates, contract=None) is None
+
+
+def test_an_entry_written_by_another_schema_is_not_a_hit(tmp_path) -> None:
+    """A cache is only safe while the reader and the writer agree on what an entry means. An
+    unrecognised schema must read as a miss, never as a pass."""
+    home = str(tmp_path)
+    record(home, "stage-x", "c" * 64, "PASS")
+    target = tmp_path / "stage-x" / f"{'c' * 64}.json"
+    document = json.loads(target.read_text(encoding="utf-8"))
+    document["schema"] = "some-other-schema"
+    target.write_text(json.dumps(document), encoding="utf-8")
+    assert lookup(home, "stage-x", "c" * 64) is None
+
+
+def test_an_entry_filed_under_a_key_it_does_not_carry_is_not_a_hit(tmp_path) -> None:
+    """The key is in the path AND in the body. Trusting the path alone would make a moved or
+    copied entry answer for an input it was never measured against."""
+    home = str(tmp_path)
+    record(home, "stage-x", "d" * 64, "PASS")
+    target = tmp_path / "stage-x" / f"{'d' * 64}.json"
+    document = json.loads(target.read_text(encoding="utf-8"))
+    document["input_digest"] = "e" * 64
+    target.write_text(json.dumps(document), encoding="utf-8")
+    assert lookup(home, "stage-x", "d" * 64) is None
+
+
+def test_a_stage_that_produces_no_key_is_executed_rather_than_reused(
+    constitution, substrates, tmp_path, monkeypatch
+) -> None:
+    """No key means nothing to look the result up by. Reusing on that basis would be reusing on
+    the basis of the stage's name, which every input change leaves unchanged."""
+    from engine.verification_intelligence import evidence as evidence_module
+
+    mode = next(m for m in constitution.modes if m.evidence_reuse)
+    stage = next(s for s in constitution.stages if s.reusable and s.reads)
+    monkeypatch.setattr(evidence_module, "input_digest", lambda *a, **k: None)
+    reuse, reason, digest = decide(mode, stage, substrates, home=str(tmp_path), root=REPO)
+    assert reuse is False
+    assert digest is None
+    assert "no input digest" in reason
+
+
+# --- the selection layers that a healthy catalogue never reaches ------------------------
+
+
+def test_every_unbounded_prefix_is_reported_as_one_set(substrates, tests_registry) -> None:
+    """The two families — what no graph can bound, and the selector's own surfaces — are declared
+    separately and must be READABLE as one, or a caller checking "is this bounded" checks half."""
+    from engine.verification_intelligence.selection import (
+        SELF_PREFIXES,
+        UNBOUNDED_PREFIXES,
+        unbounded_prefixes,
+    )
+
+    combined = unbounded_prefixes()
+    assert set(combined) == set(UNBOUNDED_PREFIXES) | set(SELF_PREFIXES)
+    assert list(combined) == sorted(combined)
+
+
+def test_an_unreadable_impact_graph_is_a_fault_and_never_a_narrow_selection(
+    substrates, tests_registry, monkeypatch
+) -> None:
+    """Every caller resolves a fault to the whole suite. Letting the ImpactError through as its
+    own type would reach a caller that does not know to widen for it."""
+    from engine.verification_impact.graph import ImpactError
+    from engine.verification_intelligence import selection as selection_module
+
+    def refusing(root=None):
+        raise ImpactError("the relationship graph cannot be read")
+
+    monkeypatch.setattr(selection_module, "load_graph", refusing)
+    with pytest.raises(VerificationIntelligenceError, match="cannot be read"):
+        select(("engine/uaue/gate.py",), substrates=substrates, tests=tests_registry)
+
+
+def test_a_change_whose_owner_the_catalogue_does_not_know_widens(
+    substrates, tests_registry, monkeypatch
+) -> None:
+    """The capability layer is what bounds a blast radius beyond the import graph. An owner the
+    catalogue has never heard of has no radius this engine can compute, and the only honest
+    answer for a thing it cannot bound is the whole suite."""
+    from engine.verification_intelligence import selection as selection_module
+
+    monkeypatch.setattr(selection_module, "_capability_location", lambda substrates, owner: None)
+    result = select(("engine/uaue/gate.py",), substrates=substrates, tests=tests_registry)
+    assert result.selection is Selection.WHOLE_SUITE
+    assert any("capability catalogue" in reason for reason in result.escalations)
+
+
+def test_a_change_whose_capability_has_a_catalogued_test_mirror_reaches_it(
+    substrates, tests_registry
+) -> None:
+    """`engine/uckp` and `engine/tests/uckp` are both catalogued, and the mirror is derived from
+    that vocabulary rather than mapped by hand. A mirror that resolved and was not traversed
+    would leave a capability's own tests out of its blast radius."""
+    result = select(("engine/uckp/law.py",), substrates=substrates, tests=tests_registry)
+    assert result.selection is Selection.IMPACT
+    assert any(path.startswith("engine/tests/uckp/") for path in result.test_paths)
+
+
+def test_a_bounded_change_reaching_no_test_widens_rather_than_verifying_nothing(
+    substrates, tests_registry
+) -> None:
+    """Not "nothing to verify" — code that nothing exercises. That is a coverage question, and
+    reading it as a licence to skip is the one failure this whole engine exists to refuse."""
+    from engine.verification_intelligence.registry import TestObjectRegistry
+
+    empty = TestObjectRegistry(roots=tests_registry.roots)
+    result = select(("engine/uaue/gate.py",), substrates=substrates, tests=empty)
+    assert result.selection is Selection.WHOLE_SUITE
+    assert result.test_paths == ()
+
+
+def test_a_split_entry_carrying_no_nodes_is_placed_whole(substrates, monkeypatch) -> None:
+    """A current hash and an empty node list is a table that says "divisible" and names no
+    division. Registering the object as splittable on that basis would produce a shard plan
+    referring to nodes nobody measured."""
+    from engine.verification_intelligence import registry as registry_module
+
+    real = registry_module.load_cost_model
+
+    def _empty_nodes(root=None):
+        costs, split, threshold = real(root)
+        for entry in split.values():
+            entry["nodes"] = {}
+        return costs, split, threshold
+
+    monkeypatch.setattr(registry_module, "load_cost_model", _empty_nodes)
+    projected = registry_module.build_test_registry(substrates)
+    assert projected.splittable == {}
+
+
+def test_a_node_priced_with_something_that_is_not_a_number_is_not_priced(
+    substrates, monkeypatch
+) -> None:
+    """The object is still splittable — the node ids are current — but a node whose price is not
+    a number contributes no cost. Coercing it would put an invented number into the packer."""
+    from engine.verification_intelligence import registry as registry_module
+
+    real = registry_module.load_cost_model
+
+    def _unpriced_nodes(root=None):
+        costs, split, threshold = real(root)
+        for entry in split.values():
+            entry["nodes"] = dict.fromkeys(entry["nodes"], "not-a-number")
+        return costs, split, threshold
+
+    monkeypatch.setattr(registry_module, "load_cost_model", _unpriced_nodes)
+    projected = registry_module.build_test_registry(substrates)
+    assert projected.splittable, "the objects stopped being splittable, so nothing was measured"
+    assert projected.node_costs == {}
+
+
+# --- sharding arithmetic, and the guards behind the guards ------------------------------
+
+
+def test_a_registry_with_no_split_table_says_nothing_rather_than_zero_of_zero(
+    tests_registry,
+) -> None:
+    """`0/0 current` on every plan a repository without a cost model renders would be a line
+    about nothing, printed forever."""
+    from engine.verification_intelligence.registry import TestObjectRegistry
+
+    assert split_currency(TestObjectRegistry()) == ""
+
+
+def test_a_split_table_with_nothing_stale_reports_only_what_it_can_use(tests_registry) -> None:
+    """The stale clause is appended, not substituted. A currency line that named stale objects
+    unconditionally would say `— stale, placed whole:` with nothing after it."""
+    from engine.verification_intelligence.registry import TestObjectRegistry
+
+    current = TestObjectRegistry(splittable={"a/test_x.py": ("a/test_x.py::one",)})
+    line = split_currency(current)
+    assert line == "UVI: split table 1/1 current"
+
+
+def test_a_shard_plan_over_no_test_object_is_empty_rather_than_a_worker_of_nothing(
+    tests_registry,
+) -> None:
+    """A selection that reaches nothing must produce no shard. One empty shard per worker would
+    spawn processes to run nothing and report their success as the suite's."""
+    assert plan_shards((), tests_registry, 4) == ()
+
+
+def test_a_split_file_with_no_remainder_shard_anywhere_is_refused() -> None:
+    """The deselects match the placements and the file is still nowhere whole, so the tests the
+    cost model never saw — everything under 0.005s — would run in no shard at all."""
+    shards = (
+        Shard(
+            index=0,
+            test_paths=("a/test_y.py",),
+            cost_seconds=1.0,
+            deselect=("a/test_x.py::one",),
+        ),
+        Shard(index=1, test_paths=("a/test_x.py::one",), cost_seconds=1.0),
+    )
+    with pytest.raises(VerificationIntelligenceError, match="no remainder shard"):
+        assert_topology_neutral(shards, ("a/test_x.py", "a/test_y.py"))
+
+
+def test_the_whole_file_guard_still_fires_when_the_unit_guard_is_disabled(monkeypatch) -> None:
+    """Defence in depth, measured by removing the first line of it.
+
+    A file placed whole in two shards is ALSO a unit placed twice, so the duplicate-unit check
+    above catches it first and this guard has never run. That is what makes it worth holding:
+    the two checks say different things — one about units, one about test objects — and if the
+    first is ever narrowed the second must still refuse. Neutralising the first check's
+    set-comparison is the only way to ask the second whether it works.
+    """
+    from engine.verification_intelligence import execution as execution_module
+
+    monkeypatch.setattr(execution_module, "set", list, raising=False)
+    shards = (
+        Shard(index=0, test_paths=("a/test_x.py",), cost_seconds=1.0),
+        Shard(index=1, test_paths=("a/test_x.py",), cost_seconds=1.0),
+    )
+    with pytest.raises(VerificationIntelligenceError, match="whole in more than one shard"):
+        assert_topology_neutral(shards, ("a/test_x.py",))
+
+
+def test_a_shard_whose_process_reports_no_stdout_is_still_reaped(tmp_path, monkeypatch) -> None:
+    """`Popen` returns ``stdout=None`` whenever the caller redirects to a real file rather than
+    to a pipe, which is exactly what this runner does — the handle is re-attached by hand purely
+    so it can be closed. A shard whose process does not carry it must still be waited on and
+    still have its log read, or a removed line of bookkeeping would turn into a leaked handle."""
+    import io
+    import subprocess as subprocess_module
+
+    from engine.verification_intelligence import execution as execution_module
+
+    real_popen = subprocess_module.Popen
+
+    class _NoStdout(real_popen):  # type: ignore[misc,valid-type]
+        @property
+        def stdout(self):
+            return None
+
+        @stdout.setter
+        def stdout(self, value):
+            pass
+
+    monkeypatch.setattr(execution_module.subprocess, "Popen", _NoStdout)
+    shards = _throwaway_suite(tmp_path)
+    stream = io.StringIO()
+    code = run_tests(
+        shards,
+        Coverage.NOT_EVALUATED,
+        root=str(tmp_path),
+        python=sys.executable,
+        selection=("test_alpha.py", "test_beta.py"),
+        stream=stream,
+    )
+    assert code == 0
+    assert "shard 0" in stream.getvalue()
+
+
+def test_a_single_shard_under_the_floor_exports_its_data_instead_of_judging(tmp_path) -> None:
+    """A shard has measured one thirteenth of the suite. The floor is a property of the whole,
+    so the shard leaves its data where the combine job can collect it and computes no verdict."""
+    import io
+
+    shards = _throwaway_suite(tmp_path)
+    exported = tmp_path / "exported"
+    stream = io.StringIO()
+    code = run_tests(
+        shards,
+        Coverage.FLOOR_90,
+        root=str(tmp_path),
+        python=sys.executable,
+        selection=("test_alpha.py", "test_beta.py"),
+        stream=stream,
+        only=0,
+        coverage_out=str(exported),
+    )
+    body = stream.getvalue()
+    assert "the floor is not evaluated by a shard" in body or "no coverage data" in body
+    assert code in (0, 1)
+
+
+def _canned_coverage(monkeypatch, results):
+    """Drive ``_combine_and_evaluate``'s three subprocesses from a script.
+
+    The alternative is producing real coverage data whose combine, xml and report steps fail on
+    demand, which measures the coverage tool rather than this function's handling of it.
+    """
+    import subprocess as subprocess_module
+
+    from engine.verification_intelligence import execution as execution_module
+
+    calls: list[list[str]] = []
+    scripted = iter(results)
+
+    def fake(argv, **kwargs):
+        calls.append(list(argv))
+        returncode, stdout, stderr = next(scripted)
+        return subprocess_module.CompletedProcess(argv, returncode, stdout, stderr)
+
+    monkeypatch.setattr(execution_module.subprocess, "run", fake)
+    return calls
+
+
+def _with_shard_data(tmp_path):
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / ".coverage.shard-0.0").write_text("not real coverage data", encoding="utf-8")
+    return data
+
+
+def test_a_combine_that_fails_refuses_rather_than_reporting_a_floor(tmp_path, monkeypatch):
+    """Unusable shard data is not a low number; it is no number, and a floor computed over what
+    happened to combine would be a verdict over a suite fragment."""
+    import io
+
+    _canned_coverage(monkeypatch, [(1, "", "cannot combine")])
+    stream = io.StringIO()
+    data = _with_shard_data(tmp_path)
+    assert _combine_and_evaluate(sys.executable, str(tmp_path), str(data), stream) == 1
+    assert "coverage combine failed" in stream.getvalue()
+
+
+def test_an_xml_step_that_fails_refuses_rather_than_reporting_a_floor(tmp_path, monkeypatch):
+    """The artifact and the verdict are separate obligations, and an unwritten artifact must not
+    be reported as a met floor."""
+    import io
+
+    _canned_coverage(monkeypatch, [(0, "", ""), (1, "", "cannot write xml")])
+    stream = io.StringIO()
+    data = _with_shard_data(tmp_path)
+    assert _combine_and_evaluate(sys.executable, str(tmp_path), str(data), stream) == 1
+    assert "coverage xml failed" in stream.getvalue()
+
+
+def test_a_met_floor_returns_zero_and_relays_what_the_tool_said(tmp_path, monkeypatch):
+    """The success path, and the tool's stderr with it: a warning the coverage tool emits while
+    still succeeding is the only notice that the measurement was partial, and swallowing it
+    would make the one line worth reading the one line nobody sees."""
+    import io
+
+    calls = _canned_coverage(
+        monkeypatch,
+        [(0, "", ""), (0, "", ""), (0, "TOTAL   100%", "CoverageWarning: a module was skipped")],
+    )
+    stream = io.StringIO()
+    data = _with_shard_data(tmp_path)
+    assert _combine_and_evaluate(sys.executable, str(tmp_path), str(data), stream) == 0
+    body = stream.getvalue()
+    assert "TOTAL   100%" in body
+    assert "CoverageWarning" in body
+    assert (
+        calls[1][-1] == "--fail-under=0"
+    ), "the xml step must not evaluate the floor a second time"
+
+
+def test_a_file_that_is_not_shard_data_is_not_read_as_a_shard(tmp_path) -> None:
+    """The combine's fails-closed question is "which shards arrived", asked of file names. A name
+    that does not carry a shard index answers it with nothing rather than with a guess."""
+    from engine.verification_intelligence.execution import shard_indices_present
+
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / ".coverage.shard-3").write_text("x", encoding="utf-8")
+    (data / "README.txt").write_text("x", encoding="utf-8")
+    (data / ".coverage").write_text("x", encoding="utf-8")
+    assert shard_indices_present(str(data)) == (3,)
+
+
+def test_data_from_a_shard_the_plan_does_not_contain_is_refused(tmp_path) -> None:
+    """The data and the plan then disagree about what ran, and combining them would evaluate the
+    floor over a suite neither of them describes."""
+    import io
+
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / ".coverage.shard-0").write_text("x", encoding="utf-8")
+    (data / ".coverage.shard-9").write_text("x", encoding="utf-8")
+    stream = io.StringIO()
+    assert combine_shards((0,), str(data), root=str(tmp_path), stream=stream) == 1
+    assert "does not contain" in stream.getvalue()
+
+
+def test_every_expected_shard_present_combines_once_over_the_union(tmp_path, monkeypatch) -> None:
+    """The only path on which a floor verdict is computed at all, and the one no test reached:
+    every refusal above was measured and the acceptance was not."""
+    import io
+
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / ".coverage.shard-0").write_text("x", encoding="utf-8")
+    (data / ".coverage.shard-1").write_text("x", encoding="utf-8")
+    _canned_coverage(monkeypatch, [(0, "", ""), (0, "", ""), (0, "TOTAL 100%", "")])
+    stream = io.StringIO()
+    assert combine_shards((0, 1), str(data), root=str(tmp_path), stream=stream) == 0
+    assert "combining and evaluating the floor" in stream.getvalue()
+
+
+# --- the command line ------------------------------------------------------------------
+
+
+def test_the_plan_digest_is_emitted_alone_so_a_caller_can_bind_other_jobs_to_it(capsys):
+    """`--digest` comes before `--json` on purpose: a caller asking for the identity of a plan
+    wants that and nothing else on stdout, because it is about to pass it to another job."""
+    from engine.verification_intelligence import cli
+
+    assert cli.main(["plan", "--mode", "fast", "--digest"]) == 0
+    printed = capsys.readouterr().out.strip().splitlines()
+    assert len(printed) == 1
+    assert len(printed[0]) == 64
+
+
+def test_a_job_computing_a_different_plan_than_it_was_told_to_expect_faults(capsys) -> None:
+    """Two jobs of one run partitioning the suite differently is the failure the digest exists to
+    catch: each job proves its own plan whole, and their shards union to neither selection."""
+    from engine.verification_intelligence import cli
+
+    code = cli.main(
+        ["combine", "--mode", "full", "--data-dir", "nowhere", "--plan-digest", "0" * 64]
+    )
+    assert code == 2
+    assert "was told to expect" in capsys.readouterr().err
+
+
+def test_sharding_an_impact_selection_is_refused(capsys) -> None:
+    """An impact selection is derived from the diff, so two jobs with different fetch depths
+    partition different things while each proves its own plan whole."""
+    from engine.verification_intelligence import cli
+
+    code = cli.main(
+        ["run-tests", "--mode", "fast", "--path", "engine/uaue/gate.py", "--shard", "0"]
+    )
+    assert code == 2
+    assert "Shard a whole-suite mode" in capsys.readouterr().err
+
+
+def test_the_combine_command_binds_the_expected_shards_to_the_plan(monkeypatch, capsys) -> None:
+    """`expected` comes from the plan's own shard indices and never from a worker count — the two
+    differ whenever a wave is exclusive, and a matrix built from the second addresses one fewer
+    shard than the plan holds."""
+    from engine.verification_intelligence import cli
+
+    seen: dict[str, object] = {}
+
+    def fake(expected, data_dir, **kwargs):
+        seen["expected"] = expected
+        seen["data_dir"] = data_dir
+        return 0
+
+    monkeypatch.setattr(cli, "combine_shards", fake)
+    assert cli.main(["combine", "--mode", "full", "--data-dir", "somewhere"]) == 0
+    assert seen["data_dir"] == "somewhere"
+    assert seen["expected"] == tuple(range(len(seen["expected"])))
+
+
+def test_run_tests_receives_the_plan_it_printed(monkeypatch, capsys) -> None:
+    """The rendered plan goes to stderr and the run happens on stdout's terms: an operator must
+    be able to read what is about to run WHILE it runs, not after it finishes."""
+    from engine.verification_intelligence import cli
+
+    seen: dict[str, object] = {}
+
+    def fake(shards, coverage, **kwargs):
+        seen["shards"] = shards
+        seen["selection"] = kwargs["selection"]
+        return 0
+
+    monkeypatch.setattr(cli, "run_tests", fake)
+    assert cli.main(["run-tests", "--mode", "fast", "--path", "engine/uaue/gate.py"]) == 0
+    rendered = capsys.readouterr().err
+    assert "selection" in rendered
+    assert seen["shards"], "the plan carried no shard"
+
+
+def test_a_report_naming_more_escalations_than_it_prints_says_how_many_more(capsys) -> None:
+    """Eight are shown and the rest are counted. Printing all of them would bury the verdict;
+    printing eight in silence would report a smaller widening than the one that was measured."""
+    from engine.verification_intelligence import cli
+
+    argv = ["report", "--mode", "fast"]
+    for index in range(9):
+        argv += ["--path", f"docs/uvi-escalation-probe-{index}.md"]
+    assert cli.main(argv) == 0
+    body = capsys.readouterr().out
+    assert "... +1 more" in body
+
+
+def test_a_whole_suite_report_names_no_selection_layer(capsys) -> None:
+    """A mode that runs everything computes no layers, and a `selection layers:` heading with
+    nothing under it would suggest the layers ran and reached nothing."""
+    from engine.verification_intelligence import cli
+
+    assert cli.main(["report", "--mode", "full"]) == 0
+    body = capsys.readouterr().out
+    assert "selection layers:" not in body
+
+
+# --- every gate law's remaining refusal -------------------------------------------------
+
+
+def test_l02_faults_when_the_script_declares_no_initial_mode(tmp_path) -> None:
+    """The default is established by reading the script, not by trusting the declaration. A
+    script with no initial MODE has no default to compare against, and asserting a match on that
+    basis would be asserting a match against nothing."""
+    ctx = _ctx(tmp_path, lambda document: None)
+    ctx.verify = "#!/usr/bin/env bash\nrun_stage 'x'\n"
+    findings = uvi_gate.exactly_one_default(ctx)
+    assert any("declares no initial MODE" in f for f in findings)
+
+
+def test_l04_refuses_a_declaration_carrying_no_baseline_contract(tmp_path) -> None:
+    """An empty baseline makes the law vacuous: every gate could be dropped and the check would
+    still hold, because it holds over nothing."""
+
+    def mutate(document):
+        document["no_assurance_reduction"]["baseline_stages"] = []
+
+    findings = uvi_gate.no_assurance_reduction(_ctx(tmp_path, mutate))
+    assert any("no baseline contract is declared" in f for f in findings)
+
+
+def test_l06_refuses_a_selector_source_that_names_a_test_file(tmp_path) -> None:
+    """A hand-maintained list wearing an engine's costume. The engine's own sources are scanned
+    because that is where such a list would go, and it has never been shown to be found."""
+    engine_dir = tmp_path / "engine" / "verification_intelligence"
+    engine_dir.mkdir(parents=True)
+    (engine_dir / "authored.py").write_text(
+        'ALWAYS = ("engine/tests/unit/test_authored_by_hand.py",)\n', encoding="utf-8"
+    )
+    ctx = _ctx(tmp_path, lambda document: None)
+    ctx.root = str(tmp_path)
+    findings = uvi_gate.selection_is_derived(ctx)
+    assert any("names a specific test file" in f for f in findings)
+    # And a tree with no .gitignore at all cannot show the evidence home is excluded.
+    assert any("not excluded by" in f for f in findings)
+
+
+@pytest.mark.parametrize(
+    ("entry", "message"),
+    [
+        ("not-an-object", "is not an object"),
+        ({"$measured": "some measurement"}, "names no prefix"),
+    ],
+)
+def test_l06_refuses_a_malformed_isolation_entry(tmp_path, entry, message) -> None:
+    """Scheduling isolation is the one exception permitted to name a test object, so its own
+    shape is held to a stricter standard than the rule it excepts."""
+
+    def mutate(document):
+        document["execution"]["test_sharding"]["isolated"] = [entry]
+
+    findings = uvi_gate.selection_is_derived(_ctx(tmp_path, mutate))
+    assert any(message in f for f in findings)
+
+
+def test_l07_reports_a_selection_that_faults_rather_than_crashing(tmp_path, monkeypatch) -> None:
+    """A law that raised where it was supposed to report would leave the gate with no verdict on
+    fail-wide at all — which reads, from the outside, exactly like the law holding."""
+    from engine.verification_intelligence import gate as gate_module
+
+    def refusing(*args, **kwargs):
+        raise VerificationIntelligenceError("the substrate is unreadable")
+
+    monkeypatch.setattr(gate_module, "select", refusing)
+    findings = uvi_gate.fail_wide(_ctx(tmp_path, lambda document: None))
+    assert any("selection faulted on" in f for f in findings)
+
+
+def test_l07_refuses_an_unbounded_change_that_produced_a_narrow_plan(tmp_path, monkeypatch):
+    """THE asymmetry, falsified. A selector that narrowed on an unbounded change would skip the
+    affected test, and a skipped test is indistinguishable from a passing one."""
+    from engine.verification_intelligence.model import SelectionResult
+
+    narrow = SelectionResult(
+        selection=Selection.IMPACT,
+        test_paths=("a/test_x.py",),
+        changed=("a.py",),
+        affected_objects=(),
+        affected_owners=(),
+        affected_capabilities=(),
+        affected_evidence=(),
+        affected_certification=(),
+        escalations=(),
+        superseded=(),
+        layers=(),
+    )
+    from engine.verification_intelligence import gate as gate_module
+
+    monkeypatch.setattr(gate_module, "select", lambda *a, **k: narrow)
+    findings = uvi_gate.fail_wide(_ctx(tmp_path, lambda document: None))
+    assert any("produced a narrow plan" in f for f in findings)
+    assert any("widened without naming a reason" in f for f in findings)
+
+
+def test_l08_reports_a_partition_that_is_refused_rather_than_crashing(tmp_path, monkeypatch):
+    """The partitioner refusing is a finding about the plan. Letting it out as an exception would
+    take the whole gate down with no verdict on any law after this one."""
+    from engine.verification_intelligence import gate as gate_module
+
+    real = gate_module.plan_shards
+    calls = {"n": 0}
+
+    def refusing(*args, **kwargs):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise VerificationIntelligenceError("no partition is possible")
+        return real(*args, **kwargs)
+
+    monkeypatch.setattr(gate_module, "plan_shards", refusing)
+    findings = uvi_gate.topology_neutrality(_ctx(tmp_path, lambda document: None))
+    assert any("was refused" in f for f in findings)
+
+
+def test_l08_refuses_a_partition_that_loses_duplicates_or_misaddresses_a_test(
+    tmp_path, monkeypatch
+) -> None:
+    """Every failure this law exists for, produced at once: a partition that does not cover the
+    suite, one that places a unit twice, one whose indices are not a total addressing, and a
+    partitioner that answers differently the second time it is asked."""
+    from engine.verification_intelligence import gate as gate_module
+
+    calls = {"n": 0}
+
+    def drifting(units, registry, workers, **kwargs):
+        calls["n"] += 1
+        return (
+            Shard(
+                index=7,
+                test_paths=("a/test_x.py", "a/test_x.py", f"a/test_{calls['n']}.py"),
+                cost_seconds=1.0,
+            ),
+        )
+
+    monkeypatch.setattr(gate_module, "plan_shards", drifting)
+    monkeypatch.setattr(gate_module, "run_tests", lambda *a, **k: 1)
+    monkeypatch.setattr(gate_module, "combine_shards", lambda *a, **k: 1)
+    findings = uvi_gate.topology_neutrality(_ctx(tmp_path, lambda document: None))
+    assert any("does not cover exactly the suite" in f for f in findings)
+    assert any("places a unit twice" in f for f in findings)
+    assert any("not addressable by index" in f for f in findings)
+    assert any("produced different shards" in f for f in findings)
+
+
+def test_l08_refuses_a_partition_a_job_at_a_time_cannot_reproduce(tmp_path, monkeypatch) -> None:
+    """Three failures of the cross-job substrate, which is weaker than the in-process one.
+
+    A plan whose shards do not carry distinct indices cannot be executed one job per index: the
+    matrix addresses each index once and the shards sharing it all run, so the union of the jobs
+    is not the plan. And a shard index the plan does not contain must fault rather than run
+    something else, while a combine missing every shard's data must refuse rather than report a
+    floor over nothing — neither of which any test had shown these laws can detect.
+    """
+    from engine.verification_intelligence import gate as gate_module
+
+    def colliding(units, registry, workers, **kwargs):
+        return (
+            Shard(index=0, test_paths=("a/test_x.py",), cost_seconds=1.0),
+            Shard(index=0, test_paths=("a/test_y.py",), cost_seconds=1.0),
+        )
+
+    monkeypatch.setattr(gate_module, "plan_shards", colliding)
+    monkeypatch.setattr(gate_module, "run_tests", lambda *a, **k: 0)
+    monkeypatch.setattr(gate_module, "combine_shards", lambda *a, **k: 0)
+    findings = uvi_gate.topology_neutrality(_ctx(tmp_path, lambda document: None))
+    assert any("one shard per job does not cover" in f for f in findings)
+    assert any("was not refused" in f for f in findings)
+    assert any("reported a verdict" in f for f in findings)
+
+
+def test_l09_refuses_a_certification_mode_that_reached_a_reuse_decision(tmp_path, monkeypatch):
+    """A certification that reuses a result certifies a cache. Nothing in the declaration can
+    make this true today, which is exactly why the law has to be shown to fire."""
+    from engine.verification_intelligence import gate as gate_module
+
+    monkeypatch.setattr(gate_module, "decide", lambda *a, **k: (True, "a cached PASS", "d" * 64))
+    findings = uvi_gate.evidence_reuse_integrity(_ctx(tmp_path, lambda document: None))
+    assert any("reached a reuse decision" in f for f in findings)
+    assert any("is not reusable but was reused" in f for f in findings)
+
+
+def test_l10_refuses_a_plan_carrying_a_clock_or_a_machine_path(tmp_path, monkeypatch) -> None:
+    """Two plans of one repository must agree byte for byte. A wall clock makes them disagree on
+    every run, and an absolute path makes them disagree between machines."""
+    from engine.verification_intelligence import gate as gate_module
+
+    ctx = _ctx(tmp_path, lambda document: None)
+    monkeypatch.setattr(
+        gate_module,
+        "plan_json",
+        lambda plan: f'{{"at": "2026-09-09T10:00", "root": "{ctx.root}"}}',
+    )
+    findings = uvi_gate.deterministic_planning(ctx)
+    assert any("carries a wall clock" in f for f in findings)
+    assert any("carries an absolute machine path" in f for f in findings)
+
+
+def test_l13_refuses_a_registry_that_is_reusable_on_one_side_only(tmp_path) -> None:
+    """Independence cannot be demonstrated from one side. With every stage reusable, "the
+    read-set does not follow the reuse policy" holds over a policy that never varies."""
+
+    def mutate(document):
+        for stage in document["stage_registry"]["stages"]:
+            stage["reusable"] = True
+            stage.setdefault("reuse_inputs", ["00-BOOK/"])
+
+    findings = uvi_gate.read_set_is_independent_of_reuse_policy(_ctx(tmp_path, mutate))
+    assert any("one side is empty" in f for f in findings)
+
+
+def test_l13_refuses_a_non_reusable_stage_with_no_read_set(tmp_path) -> None:
+    """A stage impact analysis cannot relate to any change is a stage no selection can reach."""
+
+    def mutate(document):
+        for stage in document["stage_registry"]["stages"]:
+            if not stage.get("reusable"):
+                stage["read_set"] = []
+
+    findings = uvi_gate.read_set_is_independent_of_reuse_policy(_ctx(tmp_path, mutate))
+    assert any("declares no read-set" in f for f in findings)
+
+
+def test_l13_refuses_a_read_set_that_resolves_to_nothing(tmp_path) -> None:
+    """A prefix that reaches no object is a declaration with no consequence, and a stale one is
+    indistinguishable from a live one until something asks."""
+
+    def mutate(document):
+        for stage in document["stage_registry"]["stages"]:
+            if not stage.get("reusable"):
+                stage["read_set"] = ["a-prefix-no-object-in-this-repository-carries/"]
+
+    findings = uvi_gate.read_set_is_independent_of_reuse_policy(_ctx(tmp_path, mutate))
+    assert any("reaches no object" in f for f in findings)
+
+
+def test_l13_refuses_a_read_set_that_follows_the_reuse_policy(tmp_path, monkeypatch) -> None:
+    """The defect the separation was for: one field silently answering both questions, so that
+    toggling the policy changed the read-set and the two could never be measured apart."""
+    import dataclasses
+
+    ctx = _ctx(tmp_path, lambda document: None)
+    real = dataclasses.replace
+
+    def coupled(obj, **changes):
+        replaced = real(obj, **changes)
+        if "reusable" in changes:
+            replaced = real(replaced, read_set=("00-BOOK/tools/", *replaced.reads))
+        return replaced
+
+    # The law imports `dataclasses` inside its own body, so the name it resolves is the module
+    # itself. Patching the module is therefore the only way to make the toggle couple.
+    monkeypatch.setattr(dataclasses, "replace", coupled)
+    findings = uvi_gate.read_set_is_independent_of_reuse_policy(ctx)
+    assert any("changed the read-set" in f for f in findings)
+    assert any("changed the resolved population" in f for f in findings)
+
+
+def test_l14_refuses_a_key_that_does_not_move_with_the_read_set(tmp_path, monkeypatch) -> None:
+    """The read-set is what the key is taken over. A key indifferent to it would hit across two
+    stages reading different things, which is a cache answering for a run that never happened."""
+    from engine.verification_intelligence import gate as gate_module
+
+    monkeypatch.setattr(gate_module, "input_digest", lambda *a, **k: "a-key-that-never-moves")
+    findings = uvi_gate.evidence_identity_depends_on_the_read_set(
+        _ctx(tmp_path, lambda document: None)
+    )
+    assert any("widening the read-set did not change the key" in f for f in findings)
+    assert any("narrowing the read-set did not change the key" in f for f in findings)
+
+
+def test_l14_refuses_a_registry_in_which_no_stage_produces_a_key(tmp_path, monkeypatch) -> None:
+    """A law measuring nothing reports HOLDS, and HOLDS over an empty population is the shape
+    every check in this package is written to refuse."""
+    from engine.verification_intelligence import gate as gate_module
+
+    monkeypatch.setattr(gate_module, "input_digest", lambda *a, **k: None)
+    findings = uvi_gate.evidence_identity_depends_on_the_read_set(
+        _ctx(tmp_path, lambda document: None)
+    )
+    assert any("this law measured nothing" in f for f in findings)
+
+
+def test_the_rendered_report_counts_the_violations_it_does_not_print() -> None:
+    """Eight per law, and the rest counted: a report that printed them all would bury the
+    verdict, and one that stopped at eight in silence would understate the refusal."""
+    report = uvi_gate.measure()
+    report["laws"][0]["holds"] = False
+    report["laws"][0]["violations"] = [f"violation {index}" for index in range(11)]
+    assert "... +3 more" in uvi_gate.render(report)
+
+
+def test_a_refusal_is_rendered_once_to_stdout_when_the_gate_is_not_quiet(tmp_path, capsys):
+    """--quiet redirects the report to stderr so a refusal is still readable. Without it the
+    report has already gone to stdout and printing it twice would be the noise the flag exists
+    to remove."""
+    document = load_declaration()
+    document["mode_constitution"]["default_mode"] = "integration"
+    path = tmp_path / "declaration.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    assert uvi_gate.main(["--gate", "--declaration", str(path)]) == uvi_gate.EXIT_INCOHERENT
+    captured = capsys.readouterr()
+    assert "REFUSED" in captured.out
+    assert "REFUSED" not in captured.err
+
+
+def test_a_job_computing_the_plan_it_was_told_to_expect_proceeds(monkeypatch, capsys) -> None:
+    """The digest is a proof obligation, not a veto: a job that recomputed the same plan must
+    carry on, or binding jobs together would make every run refuse itself."""
+    from engine.verification_intelligence import cli
+
+    assert cli.main(["plan", "--mode", "full", "--digest"]) == 0
+    digest = capsys.readouterr().out.strip()
+    monkeypatch.setattr(cli, "combine_shards", lambda *a, **k: 0)
+    code = cli.main(
+        ["combine", "--mode", "full", "--data-dir", "somewhere", "--plan-digest", digest]
+    )
+    assert code == 0

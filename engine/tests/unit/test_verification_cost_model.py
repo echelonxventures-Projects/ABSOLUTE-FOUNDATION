@@ -218,3 +218,23 @@ def test_the_cli_faults_on_a_transcript_that_carries_no_durations(tmp_path, caps
     source.write_text("11628 passed in 1588.54s\n", encoding="utf-8")
     assert main(["--from", str(source), "--out", str(tmp_path / "o.json")]) == 2
     assert "UVI FAULT" in capsys.readouterr().err
+
+
+def test_an_object_with_no_published_content_hash_is_placed_whole(monkeypatch) -> None:
+    """The split entry records the hash it was measured at, so an object with no published hash
+    has nothing to record. Splitting it anyway would produce node ids the planner could never
+    check for currency, which is the stale-split failure with the detection removed."""
+    from engine.verification_intelligence import cost_model
+
+    root = "."
+    target = HASHED[0]
+    substrates = load_substrates(root)
+    substrates.objects[target] = {**substrates.objects[target], "content_hash": ""}
+    monkeypatch.setattr(cost_model, "load_substrates", lambda base: substrates)
+
+    transcript = (
+        f"40.00s call     {target}::test_a\n"
+        f"41.00s call     {target}::test_b\n"
+        "100 passed in 900.00s (0:15:00)\n"
+    )
+    assert derive(transcript, root=root, threshold=60.0)["split"] == {}
