@@ -36,7 +36,7 @@ from pathlib import Path
 
 import pytest
 
-from engine.construct import audit, evidence, extension, reality, views
+from engine.construct import audit, contract, evidence, extension, reality, views
 from engine.construct import cli as construct_cli
 from engine.construct import gate as construct_gate
 from engine.construct.contract import (
@@ -2283,3 +2283,124 @@ def test_every_law_check_is_named_by_this_suite() -> None:
     assert not unnamed, (
         "law checks this suite never names, so nothing shows they can fail: " f"{unnamed}"
     )
+
+
+# --- the refusal branches of the sixteen laws -------------------------------------------------
+#
+# Every law here holds on the live declaration, so only its HOLDS path had ever run and its
+# refusal path was measured by nothing. Each test below drives one violation and asserts the
+# message that violation produces — not that some problem was reported, which would pass on
+# the wrong one. The doctored registry delegates everything it does not override to a real
+# ConstructRegistry, so a law reaching any other behaviour reaches the genuine one.
+
+
+class _DoctoredRegistry:
+    def __init__(self, real, **overrides):
+        object.__setattr__(self, "_real", real)
+        object.__setattr__(self, "_overrides", overrides)
+
+    def __getattr__(self, name):
+        overrides = object.__getattribute__(self, "_overrides")
+        if name in overrides:
+            return overrides[name]
+        return getattr(object.__getattribute__(self, "_real"), name)
+
+
+class _ProbeWithRegistry(Probe):
+    def __init__(self, declaration, registry):
+        super().__init__(declaration=declaration, repo=REPO)
+        object.__setattr__(self, "_doctored", registry)
+
+    def fresh_registry(self):
+        return object.__getattribute__(self, "_doctored")
+
+
+def _registry_probe(declaration, **overrides):
+    return _ProbeWithRegistry(
+        declaration, _DoctoredRegistry(ConstructRegistry(declaration), **overrides)
+    )
+
+
+class _Stand_in:
+    """A construct-shaped object the model would refuse to build.
+
+    `Construct.__post_init__` rejects no-disposition and two-active-disposition forms, which is
+    exactly what the law's own non-vacuity check proves. Those refusals mean the model cannot
+    produce the states the law's OTHER branches guard against, so reaching them needs an object
+    that answers the same questions without passing through that validation. Everything the law
+    reads is supplied; nothing else is.
+    """
+
+    def __init__(self, identity, dispositions, disposition, presentation=None, assessments=()):
+        self.identity = identity
+        self.dispositions = dispositions
+        self.disposition = disposition
+        self.presentation = presentation
+        self.assessments = assessments
+
+
+@dataclasses.dataclass(frozen=True)
+class _Stand_in_disposition:
+    """A disposition-shaped value the model would refuse to build.
+
+    `DispositionRecord.__post_init__` requires a non-empty rule_id, so no real record can reach
+    the law's `if not construct.disposition.rule_id` guard. That guard is defence in depth
+    against a construct arriving from somewhere the model did not build, and the law itself
+    proves the model refuses the forged forms. Exercising the guard therefore needs a value the
+    model never made — which is precisely the situation the guard exists for.
+    """
+
+    disposition: str
+    rule_id: str
+    active: bool = True
+    sequence: int = 0
+
+
+def test_a_construct_with_the_wrong_number_of_active_dispositions_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    real.present_all(contract._hostile_presentations(declaration))
+    everything = real.all()
+    sample = everything[0]
+    stand_in = _Stand_in(
+        sample.identity,
+        (),
+        sample.disposition,
+        presentation=sample.presentation,
+        assessments=sample.assessments,
+    )
+    probe = _registry_probe(declaration, all=lambda: [stand_in])
+    problems = contract.every_construct_is_disposed(probe)
+    assert any("carries 0 active dispositions" in p for p in problems), problems
+
+
+def test_a_construct_carrying_an_undeclared_disposition_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    real.present_all(contract._hostile_presentations(declaration))
+    everything = real.all()
+    sample = everything[0]
+    forged = dataclasses.replace(
+        sample,
+        dispositions=(
+            dataclasses.replace(sample.disposition, disposition="not-a-declared-disposition"),
+        ),
+    )
+    probe = _registry_probe(declaration, all=lambda: [forged, *everything[1:]])
+    problems = contract.every_construct_is_disposed(probe)
+    assert any("undeclared disposition" in p for p in problems), problems
+
+
+def test_a_disposition_naming_no_rule_is_refused(declaration):
+    real = ConstructRegistry(declaration)
+    real.present_all(contract._hostile_presentations(declaration))
+    sample = real.all()[0]
+    ruleless = _Stand_in_disposition(sample.disposition.disposition, rule_id="")
+    stand_in = _Stand_in(
+        sample.identity,
+        (ruleless,),
+        ruleless,
+        presentation=sample.presentation,
+        assessments=sample.assessments,
+    )
+    probe = _registry_probe(declaration, all=lambda: [stand_in])
+    problems = contract.every_construct_is_disposed(probe)
+    assert any("naming no rule" in p for p in problems), problems
